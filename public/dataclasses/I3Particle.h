@@ -7,10 +7,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.1.2.4 2004/04/20 15:57:51 pretz Exp $
+ * $Id: I3Particle.h,v 1.1.2.5 2004/04/20 16:51:16 pretz Exp $
  *
- * @version $Revision: 1.1.2.4 $
- * @date $Date: 2004/04/20 15:57:51 $
+ * @version $Revision: 1.1.2.5 $
+ * @date $Date: 2004/04/20 16:51:16 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -58,12 +58,10 @@ class I3Particle : public TObject{
     Elph = 9999
   };
 
- /**
-  * indicates that the particle can be identified.
-  * So it is legal to ask for Type()
-  */
- virtual Bool_t IsIdentifiable() const =0;
+ private:
+ ParticleType fType;
 
+ public:
  /**
   * indicates that particle has a direction of origin
   */
@@ -72,12 +70,18 @@ class I3Particle : public TObject{
  /**
   * gives the type of the particle
   */
- virtual ParticleType Type() const=0;
+ virtual ParticleType Type() const
+   {
+     return fType;
+   }
 
  /**
   * 
   */
- virtual void Type(ParticleType type) =0;
+ virtual void Type(ParticleType type)
+   {
+     fType = type;
+   };
 
  /**
   * phi
@@ -93,7 +97,10 @@ class I3Particle : public TObject{
   * copies over data from this particle to the destination particle
   * Only copies that data which the two have in common
   */
- virtual void CopyTo(I3Particle& destination) const =0;
+ virtual void CopyTo(I3Particle& destination) const
+   {
+     destination.fType = fType;
+   }
 
   ClassDef(I3Particle,1);
 };

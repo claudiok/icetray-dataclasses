@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DoubleBang.h,v 1.1.2.1 2004/04/16 20:27:05 deyoung Exp $
+    $Id: I3DoubleBang.h,v 1.1.2.2 2004/04/20 16:51:16 pretz Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/16 20:27:05 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/20 16:51:16 $
     @author deyoung
 
     @todo
@@ -19,7 +19,6 @@
 */
 
 #include "I3TrackImpl.h"
-#include "I3Identifiable.h"
 #include "I3Contained.h"
 #include "I3Composite.h"
 #include "I3Energetic.h"
@@ -29,8 +28,7 @@
 
 #include "dataclasses/I3Track.h"
 
-class I3DoubleBang : public I3TrackImpl<I3Identifiable,
-                                        I3Contained,
+class I3DoubleBang : public I3TrackImpl<I3Contained,
                                         I3Energetic,
                                         I3Composite>
 {

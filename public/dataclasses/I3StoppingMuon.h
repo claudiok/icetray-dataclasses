@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3StoppingMuon.h,v 1.1.2.1 2004/04/16 20:27:05 deyoung Exp $
+    $Id: I3StoppingMuon.h,v 1.1.2.2 2004/04/20 16:51:16 pretz Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/16 20:27:05 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/20 16:51:16 $
     @author deyoung
 
     @todo
@@ -12,7 +12,6 @@
 */
 
 #include "I3TrackImpl.h"
-#include "I3Identifiable.h"
 #include "I3Stopping.h"
 #include "I3NonEnergetic.h"
 #include "I3NonComposite.h"
@@ -22,8 +21,7 @@
 
 #include "dataclasses/I3Track.h"
 
-class I3StoppingMuon : public I3TrackImpl<I3Identifiable,
-                                          I3Stopping,
+class I3StoppingMuon : public I3TrackImpl<I3Stopping,
                                           I3NonEnergetic,
                                           I3NonComposite>
 {

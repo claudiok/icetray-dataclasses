@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DecayingMuon.h,v 1.1.2.2 2004/04/20 13:38:59 pretz Exp $
+    $Id: I3DecayingMuon.h,v 1.1.2.3 2004/04/20 16:51:16 pretz Exp $
 
-    @version $Revision: 1.1.2.2 $
-    @date $Date: 2004/04/20 13:38:59 $
+    @version $Revision: 1.1.2.3 $
+    @date $Date: 2004/04/20 16:51:16 $
     @author deyoung
 
     @todo
@@ -15,7 +15,6 @@
 */
 
 #include "I3TrackImpl.h"
-#include "I3Identifiable.h"
 #include "I3Stopping.h"
 #include "I3Composite.h"
 #include "I3Energetic.h"

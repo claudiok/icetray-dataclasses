@@ -9,12 +9,10 @@
 #include <iostream>
 
 template <class DirectionalType,
-	  class IdentifiableType,
           class LocalizableType,
           class EnergeticType>
 class I3CascadeImpl : public I3Cascade,
                       public DirectionalType,
-                      public IdentifiableType,
                       public LocalizableType,
                       public EnergeticType
 {
@@ -23,18 +21,11 @@ class I3CascadeImpl : public I3Cascade,
 
   virtual ~I3CascadeImpl() {};
 
-  virtual Bool_t IsIdentifiable() const 
-    {
-      return IdentifiableType::IsIdentifiable();
-    }
-
   virtual Bool_t IsEnergetic() const {return EnergeticType::IsEnergetic();}
 
   virtual Bool_t IsDirectional() const {return DirectionalType::IsDirectional();}
 
   virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
-
-  virtual ParticleType Type() const {return IdentifiableType::Type();}
 
   virtual Double_t Theta() const {return DirectionalType::Theta();}
 

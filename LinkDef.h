@@ -12,15 +12,15 @@
 //
 #pragma link C++ namespace I3Units;
 
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3Energetic,I3NonComposite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3NonEnergetic,I3NonComposite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Contained,I3Energetic,I3Composite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Stopping,I3Energetic,I3Composite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3Energetic,I3NonComposite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3NonEnergetic,I3Composite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3NonEnergetic,I3Composite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Stopping,I3NonEnergetic,I3NonComposite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Starting,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Contained,I3Energetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Stopping,I3Energetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Infinite,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Stopping,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>+;
 
 #pragma link C++ class I3BasicTrack+;
 #pragma link C++ class I3F2KTrack+;
@@ -35,10 +35,10 @@
 #pragma link C++ class I3StartingMuon+;
 #pragma link C++ class I3StoppingMuon+;
 
-#pragma link C++ class I3CascadeImpl<I3Directional,I3Identifiable,I3Localized,I3Energetic>+;
-#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Identifiable,I3Localized,I3NonEnergetic>+;
-#pragma link C++ class I3CascadeImpl<I3Directional,I3Identifiable,I3Localized,I3NonEnergetic>+;
-#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Identifiable,I3Localized,I3Energetic>+;
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3Energetic>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3NonEnergetic>+;
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3NonEnergetic>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3Energetic>+;
 
 #pragma link C++ class I3BasicCascade+;
 #pragma link C++ class I3DirectionalCascade+;
@@ -216,7 +216,6 @@
 #pragma link C++ typedef I3GeometryHeaderPtr;
 #pragma link C++ class I3Hit+;
 #pragma link C++ typedef I3HitPtr;
-#pragma link C++ class I3Identifiable+;
 #pragma link C++ class I3Infinite+;
 #pragma link C++ class I3Localized+;
 #pragma link C++ class I3MCHit+;
@@ -230,7 +229,6 @@
 #pragma link C++ typedef I3MonitoringHeaderPtr;
 #pragma link C++ class I3MultiTrackRecoResult;
 #pragma link C++ typedef I3MultiTrackRecoResultPtr;
-#pragma link C++ class I3NonIdentifiable+;
 #pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonComposite+;
 #pragma link C++ class I3NonEnergetic+;

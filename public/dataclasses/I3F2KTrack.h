@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KTrack.h,v 1.1.2.2 2004/04/19 20:39:40 pretz Exp $
+    $Id: I3F2KTrack.h,v 1.1.2.3 2004/04/20 16:51:16 pretz Exp $
 
-    @version $Revision: 1.1.2.2 $
-    @date $Date: 2004/04/19 20:39:40 $
+    @version $Revision: 1.1.2.3 $
+    @date $Date: 2004/04/20 16:51:16 $
     @author deyoung
 
     @todo
@@ -15,7 +15,6 @@
 */
 
 #include "I3TrackImpl.h"
-#include "I3Identifiable.h"
 #include "I3Starting.h"
 #include "I3Energetic.h"
 #include "I3NonComposite.h"
@@ -25,8 +24,7 @@
 
 #include "dataclasses/I3Track.h"
 
-class I3F2KTrack : public I3TrackImpl<I3Identifiable,
-                                      I3Starting,
+class I3F2KTrack : public I3TrackImpl<I3Starting,
                                       I3Energetic,
                                       I3NonComposite>
 {

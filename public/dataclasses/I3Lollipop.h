@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3Lollipop.h,v 1.1.2.2 2004/04/20 16:01:09 pretz Exp $
+    $Id: I3Lollipop.h,v 1.1.2.3 2004/04/20 16:51:16 pretz Exp $
 
-    @version $Revision: 1.1.2.2 $
-    @date $Date: 2004/04/20 16:01:09 $
+    @version $Revision: 1.1.2.3 $
+    @date $Date: 2004/04/20 16:51:16 $
     @author deyoung
 
     @todo
@@ -16,7 +16,6 @@
 
 
 #include "I3TrackImpl.h"
-#include "I3Identifiable.h"
 #include "I3Stopping.h"
 #include "I3Composite.h"
 #include "I3Energetic.h"
@@ -26,10 +25,9 @@
 
 #include "dataclasses/I3Track.h"
 
-class I3Lollipop : public I3TrackImpl<I3Identifiable,
-                                          I3Stopping,
-                                          I3Energetic,
-                                          I3Composite>
+class I3Lollipop : public I3TrackImpl<I3Stopping,
+                                      I3Energetic,
+                                      I3Composite>
 {
  public:
   I3Lollipop(){};

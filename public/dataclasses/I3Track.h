@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.12 2004/04/20 15:57:51 pretz Exp $
+    $Id: I3Track.h,v 1.10.2.13 2004/04/20 16:51:16 pretz Exp $
 
-    @version $Revision: 1.10.2.12 $
-    @date $Date: 2004/04/20 15:57:51 $
+    @version $Revision: 1.10.2.13 $
+    @date $Date: 2004/04/20 16:51:16 $
     @author
 
     @todo
@@ -96,7 +96,10 @@ class I3Track : public I3Particle
   virtual int NumConstituents() const =0;
   virtual const I3Particle& Constituent(int i) const =0;
 
-  virtual void CopyTo(I3Particle& destination) const =0;
+  virtual void CopyTo(I3Particle& destination) const 
+    {
+      I3Particle::CopyTo(destination);
+    }
 
   //FIXME:  need fns like distancefromtrack, isontrack, etc.
 

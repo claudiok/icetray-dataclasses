@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackImpl.h,v 1.1.2.6 2004/04/20 15:57:51 pretz Exp $
+    $Id: I3TrackImpl.h,v 1.1.2.7 2004/04/20 16:51:16 pretz Exp $
 
-    @version $Revision: 1.1.2.6 $
-    @date $Date: 2004/04/20 15:57:51 $
+    @version $Revision: 1.1.2.7 $
+    @date $Date: 2004/04/20 16:51:16 $
     @author
 
     @todo
@@ -21,12 +21,10 @@
 
 #include <iostream>
 
-template <class IdentifiableType,
-          class GeometricalType,
+template <class GeometricalType,
           class EnergeticType,
           class CompositeType>
 class I3TrackImpl : public I3Track,
-                    public IdentifiableType,
                     public GeometricalType,
                     public EnergeticType,
                     public CompositeType
@@ -36,10 +34,6 @@ class I3TrackImpl : public I3Track,
 
   virtual ~I3TrackImpl() {};
 
-  virtual Bool_t IsIdentifiable() const 
-    {
-      return IdentifiableType::IsIdentifiable();
-    }
   virtual Bool_t IsStarting() const {return GeometricalType::IsStarting();}
   virtual Bool_t IsStopping() const {return GeometricalType::IsStopping();}
   virtual Bool_t IsInfinite() const 
@@ -57,9 +51,6 @@ class I3TrackImpl : public I3Track,
   virtual Bool_t IsEnergetic() const {return EnergeticType::IsEnergetic();}
   virtual Bool_t IsComposite() const {return CompositeType::IsComposite();}
   virtual Bool_t IsDirectional() const {return GeometricalType::IsDirectional();}
-
-  virtual ParticleType Type() const {return IdentifiableType::Type();}
-  virtual void Type(ParticleType particle) {IdentifiableType::Type(particle);}
 
   virtual Double_t Zenith() const {return GeometricalType::Zenith();}
   virtual void Zenith(Double_t theta) {GeometricalType::Zenith(theta);}
@@ -135,7 +126,7 @@ class I3TrackImpl : public I3Track,
 
   virtual void CopyTo(I3Particle& destination) const 
     {
-      IdentifiableType::CopyTo(destination);
+      I3Track::CopyTo(destination);
       GeometricalType::CopyTo(destination);
       EnergeticType::CopyTo(destination);
       CompositeType::CopyTo(destination);
