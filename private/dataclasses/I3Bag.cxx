@@ -4,6 +4,11 @@
 #include "TNamed.h"
 
 #include "dataclasses/I3DataExecution.h"
+#include <iostream>
+
+using namespace std;
+
+ClassImp(I3Bag);
 
 I3Bag::I3Bag() :
   fMap(0)
@@ -36,18 +41,28 @@ const TObject& I3Bag::GetObject(const Char_t* key, const Char_t* type)
     I3DataExecution::Instance().Fatal("I3Bag::GetObject() the named object isn't present");
     return *(TObject*)0;
   }
-  TObject* to_return = fMap->FindObject(key);
-  return *to_return;
+  TPair* pair = (TPair*)fMap->FindObject(key);
+  return *(pair->Value());
 }
 
 Bool_t I3Bag::HasObject(const Char_t* key,const Char_t* type)
 {
   if(!fMap)
-    return kFALSE;
+    {
+      cout<<"the map doesn't exist"<<endl;
+      return kFALSE;
+    }
   TObject* to_check = fMap->FindObject(key);
   if(!to_check)
-    return kFALSE;
-  if(!to_check->InheritsFrom(type))
-    return kFALSE;
+    {
+      cout<<"Didn't succeed in getting the object"<<endl;
+      return kFALSE; 
+    }
+  TPair *pair = (TPair*)to_check;
+  if(!pair->Value()->InheritsFrom(type))
+    {
+      cout<<"The inheritance isn't right"<<endl;
+      return kFALSE;
+    }
   return kTRUE;
 }

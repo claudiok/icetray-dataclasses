@@ -26,16 +26,16 @@ if(bag->AddObject(0,"key4")){
 cout<<"Something went wrong.  Adding 'key4' again should have failed"<<endl;
 }
 if(bag->HasObject("key1","TNamed")){
-cout<<bag->GetObject("key1").GetName()<<endl;
+cout<<bag->GetObject("key1","TNamed").GetName()<<endl;
 }
 if(bag->HasObject("key2","TNamed")){
-cout<<bag->GetObject("key2").GetName()<<endl;
+cout<<bag->GetObject("key2","TNamed").GetName()<<endl;
 }
 if(bag->HasObject("key3","TNamed")){
-cout<<bag->GetObject("key1").GetName()<<endl;
+cout<<bag->GetObject("key3","TNamed").GetName()<<endl;
 }
 if(bag->HasObject("key4","TNamed")){
-cout<<bag->GetObject("key2").GetName()<<endl;
+cout<<bag->GetObject("key4","TNamed").GetName()<<endl;
 }
 
 

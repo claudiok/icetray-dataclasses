@@ -4,7 +4,7 @@
 /**
  * Class: I3Bag
  *
- * Version: $Id: I3Bag.h,v 1.2 2004/01/30 17:09:16 pretz Exp $
+ * Version: $Id: I3Bag.h,v 1.3 2004/01/30 17:34:45 pretz Exp $
  *
  * Date: 30 Jan 2004
  *
@@ -13,8 +13,8 @@
  */
 
 #include "TObject.h"
+#include "TMap.h"
 
-class TMap;
 
 /**
  * I3Bag is a generic keyed TObject container, akin to the
@@ -47,7 +47,7 @@ class I3Bag : public TObject{
   Bool_t HasObject(const Char_t* key,const Char_t* type);
  private:
   TMap* fMap;
-
+  ClassDef(I3Bag,1);
 
 };
 

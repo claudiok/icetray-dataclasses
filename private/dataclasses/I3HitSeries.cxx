@@ -37,3 +37,8 @@ void I3HitSeries::AddHit(I3Hit* hit_)
 {
   if(hit==NULL) hit = new TObjArray(1); hit->Add(hit_);
 }
+
+I3Iterator<const I3Hit>* I3HitSeries::MakeHitIterator(){
+  I3DataExecution::Instance().Fatal("Iterators Not implemented yet");
+  return 0;
+}
