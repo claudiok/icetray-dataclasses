@@ -4,13 +4,13 @@
 #include <TObject.h>
 #include <TObjArray.h>
 
-class I3Datareadout : public TObject
+class I3DataReadout : public TObject
 {
   public:
-  I3Datareadout();
+  I3DataReadout();
   const char* GetReadoutType() const;
 
-  ClassDef(I3Datareadout,1);
+  ClassDef(I3DataReadout,1);
 };
 #endif
 

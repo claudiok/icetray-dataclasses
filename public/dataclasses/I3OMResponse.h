@@ -7,7 +7,7 @@
 
 #include "I3OMGeo.h"
 #include "I3MCHitSeries.h"
-#include "I3DatareadoutList.h"
+#include "I3DataReadoutList.h"
 #include "I3RecoHitSeriesData.h"
 #include "dataclasses/I3Iterator.h"
 
@@ -17,7 +17,7 @@ class I3OMResponse : public TObject
   TRef           geometry;
 
   I3MCHitSeries       *mchitseries;
-  I3DatareadoutList   *datareadoutlist;
+  I3DataReadoutList   *datareadoutlist;
   I3RecoHitSeriesData *recohitseriesdata;
 
   public:
@@ -32,13 +32,13 @@ class I3OMResponse : public TObject
   void SetGeometry(I3OMGeo& geometry_);
 
   bool HasMCHitSeries() const;
-  bool HasDatareadoutList() const;
+  bool HasDataReadoutList() const;
   bool HasRecoHitSeriesData() const;
   const I3MCHitSeries& GetMCHitSeries() const;
-  const I3DatareadoutList& GetDatareadoutList() const;
+  const I3DataReadoutList& GetDataReadoutList() const;
   const I3RecoHitSeriesData& GetRecoHitSeriesData() const;
   void  SetMCHitSeries(I3MCHitSeries* mchitseries_);
-  void  SetDatareadoutList(I3DatareadoutList* datareadoutlist_);
+  void  SetDataReadoutList(I3DataReadoutList* datareadoutlist_);
   void  SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_);
 
   ClassDef(I3OMResponse,1);

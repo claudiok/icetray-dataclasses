@@ -1,12 +1,12 @@
 #ifndef I3DIGITALSERIES_H
 #define I3DIGITALSERIES_H
 
-#include "I3Datareadout.h"
+#include "I3DataReadout.h"
 #include "I3Digital.h"
 
 #include "dataclasses/I3Iterator.h"
 
-class I3DigitalSeries : public I3Datareadout
+class I3DigitalSeries : public I3DataReadout
 {
  protected:
   double    starttime;

@@ -50,7 +50,7 @@ bool  I3OMResponse::HasMCHitSeries() const
   return((mchitseries==NULL) ? false : true);
 }
 
-bool  I3OMResponse::HasDatareadoutList() const   
+bool  I3OMResponse::HasDataReadoutList() const   
 {
   return((datareadoutlist==NULL) ? false : true);
 }
@@ -67,11 +67,11 @@ const I3MCHitSeries& I3OMResponse::GetMCHitSeries() const
   return *(I3MCHitSeries*)NULL;
 }
 
-const I3DatareadoutList& I3OMResponse::GetDatareadoutList() const   
+const I3DataReadoutList& I3OMResponse::GetDataReadoutList() const   
 {
   if(datareadoutlist) return *datareadoutlist;
   I3DataExecution::Instance().Fatal("I3OMResponse::GetDatareadoutlist() the data readoutd doesn't exist.  Check first.");
-  return *(I3DatareadoutList*)NULL;
+  return *(I3DataReadoutList*)NULL;
 }
 
 const I3RecoHitSeriesData& I3OMResponse::GetRecoHitSeriesData() const 
@@ -87,7 +87,7 @@ void  I3OMResponse::SetMCHitSeries(I3MCHitSeries* mchitseries_)
   else I3DataExecution::Instance().Fatal("I3OMResponse::SetMCHitSeries() MCHitSeries exists already");
 }
 
-void  I3OMResponse::SetDatareadoutList(I3DatareadoutList* datareadoutlist_)
+void  I3OMResponse::SetDataReadoutList(I3DataReadoutList* datareadoutlist_)
 {
   if(!datareadoutlist) datareadoutlist=datareadoutlist_;     
   else I3DataExecution::Instance().Fatal("I3OMResponse::SetDataREadoutList() Datareadoutlist exists already");
