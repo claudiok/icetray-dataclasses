@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.26 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3Track.h,v 1.27 2004/09/07 03:33:44 dule Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.26 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.27 $
+ * @date $Date: 2004/09/07 03:33:44 $
  * @author pretz
  */
 
@@ -75,14 +75,19 @@ class I3Track : public I3InIceParticle
   virtual Bool_t IsContained() const  =0;
 
   /**
+   * returns the direction of the track
+   */
+  virtual I3Direction GetDir() const =0;
+
+  /**
    * returns the zenith of the track
    */
-  virtual Double_t GetZenith() const =0;
+  //virtual Double_t GetZenith() const =0;
 
   /**
    * returns the azimuth of the track
    */
-  virtual Double_t GetAzimuth() const = 0;
+  //virtual Double_t GetAzimuth() const = 0;
 
   /**
    * indicates that the track has an energy

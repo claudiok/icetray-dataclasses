@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.10 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3Starting.h,v 1.11 2004/09/07 03:33:44 dule Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/09/07 03:33:44 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -28,9 +28,10 @@
 class I3Starting{
  private:
   I3Position fStartPos;
+  I3Direction fDir;
   Double_t fStartT;
-  Double_t fZenith;
-  Double_t fAzimuth;
+  //Double_t fZenith;
+  //Double_t fAzimuth;
  public:
   /**
    * indicates that the particle is starting
@@ -90,24 +91,45 @@ class I3Starting{
   void SetPos(I3Position &p) {fStartPos = p;}
 
   /**
+   * gets the direction of the track
+   */
+  I3Direction GetDir() const {return fDir;}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(I3DIrection& d) {fDir.SetDirection(d);}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(Double_t zen, Double_t azi) {fDir.SetDirection(zen,azi);}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(Double_t x, Double_t y, Double_t z) 
+    {fDir.SetDirection(x,y,z);}
+
+  /**
    * gives the zenith of the track
    */
-  Double_t GetZenith() const {return fZenith;}
+  //Double_t GetZenith() const {return fZenith;}
 
   /**
    * gives the azimuth of the track
    */
-  Double_t GetAzimuth() const {return fAzimuth;}
+  //Double_t GetAzimuth() const {return fAzimuth;}
 
   /** 
    * sets the zenith of the track
    */
-  void SetZenith(Double_t theta){fZenith = theta;}
+  //void SetZenith(Double_t theta){fZenith = theta;}
 
   /** 
    * sets the azimuth of the track
    */
-  void SetAzimuth(Double_t phi){fAzimuth = phi;}
+  //void SetAzimuth(Double_t phi){fAzimuth = phi;}
 
   /**
    * returns Infinity for the length of the track

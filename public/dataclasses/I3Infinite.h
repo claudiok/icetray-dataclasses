@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.11 2004/08/31 14:08:58 pretz Exp $
+ * $Id: I3Infinite.h,v 1.12 2004/09/07 03:33:44 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/08/31 14:08:58 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/09/07 03:33:44 $
  * @author 
  */
 
@@ -23,9 +23,10 @@
 class I3Infinite{
  private:
   I3Position fPos;
+  I3Direction fDir;
   Double_t fT;
-  Double_t fZenith;
-  Double_t fAzimuth;
+  //Double_t fZenith;
+  //Double_t fAzimuth;
  public:
   /**
    * indicates that this is not a starting track
@@ -70,24 +71,45 @@ class I3Infinite{
     {fPos.SetPosition(p1,p2,p3,frame);}
 
   /**
+   * gets the direction of the track
+   */
+  I3Direction GetDir() const {return fDir;}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(I3DIrection& d) {fDir.SetDirection(d);}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(Double_t zen, Double_t azi) {fDir.SetDirection(zen,azi);}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(Double_t x, Double_t y, Double_t z) 
+    {fDir.SetDirection(x,y,z);}
+
+  /**
    * gets the zenith of the track
    */
-  Double_t GetZenith() const {return fZenith;}
+  //Double_t GetZenith() const {return fZenith;}
 
   /**
    * gets the azimuth of the track
    */
-  Double_t GetAzimuth() const {return fAzimuth;}
+  //Double_t GetAzimuth() const {return fAzimuth;}
 
   /**
    * sets the zenith of the track
    */
-  void SetZenith(Double_t zenith) {fZenith = zenith;}
+  //void SetZenith(Double_t zenith) {fZenith = zenith;}
 
   /**
    * sets the azimuth of the track
    */
-  void SetAzimuth(Double_t azimuth) {fAzimuth = azimuth;}
+  //void SetAzimuth(Double_t azimuth) {fAzimuth = azimuth;}
 
   /**
    * returns the length of the track ... infinite
