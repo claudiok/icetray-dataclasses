@@ -1,26 +1,20 @@
 #ifndef I3MCHITSERIES_H
 #define I3MCHITSERIES_H
 
-#include "I3HitSeries.h"
 #include "I3MCHit.h"
+#include "TClonesPolicy.h"
+#include "GarnishedVector.h"
 
-class I3MCHitSeries : public I3HitSeries
-{
-  float  weight;
-
-  public:
-  I3MCHitSeries();
-  I3MCHitSeries(const I3MCHitSeries&);
-  I3MCHitSeries& operator=(const I3MCHitSeries&);
-
-  float GetWeight() const;
-  void  SetWeight(float weight_);
-
-  const I3MCHit& GetHit(unsigned short number) const;
-  void AddHit(I3MCHit* hit_);
-
-  I3Iterator<const I3MCHit>* MakeMCHitIterator() const;
-
-  ClassDef(I3MCHitSeries, 1);
+class I3MCHitSeriesHeader {
+  float weight_;
+ public:
+  float weight() { return weight_; }
+  void weight(float weight__) { weight_ = weight__; }
 };
+
+typedef TClonesPolicy<I3MCHit> I3MCHitSeriesStoragePolicy;
+typedef GarnishedVector<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy> I3MCHitSeries;
+
+
+
 #endif
