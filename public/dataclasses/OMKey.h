@@ -1,16 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.5 2004/08/12 21:08:42 pretz Exp $
+ * $Id: OMKey.h,v 1.6 2004/09/14 17:06:41 niessen Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/12 21:08:42 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/09/14 17:06:41 $
  * @author pretz
  */
 
-#ifndef OMKEY
-#define OMKEY
+#ifndef OMKEY_H
+#define OMKEY_H
 
 #include <utility>
 #include "TObject.h"
@@ -55,7 +55,7 @@ class OMKey : public TObject //, public pair<int,unsigned int>
   /**
    * gets the OM number on the string
    */
-  unsigned int GetOM() const { return fOMNumber;}
+  UInt_t GetOM() const { return fOMNumber;}
 
   /**
    * sets the OM number on the string
@@ -113,8 +113,12 @@ inline bool operator<(const OMKey& lhs,const OMKey& rhs)
  */
 inline ostream& operator<<(ostream& o,const OMKey& key)
 {
-  o<<"("<<key.GetString()<<","<<key.GetOM()<<")";
-  return o;
+/*   string a("("); */
+/*   string b(","); */
+/*   string c(")"); */
+/*   o<<a<<key.GetString()<<b<<key.GetOM<<c; */
+//   o<<"("<<key.GetString()<<","<<key.GetOM()<<")"; 
+   return o; 
 }
 
 /**
