@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.14 2004/08/05 13:00:21 troy Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.15 2004/08/31 14:08:58 pretz Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/08/05 13:00:21 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/08/31 14:08:58 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -86,7 +86,15 @@ class I3RecoResultSingleTrack : public I3RecoResult
     fTrack=fTrack_;
   }
 
-  
+  virtual void ToStream(ostream& o) const
+    {
+      I3RecoResult::ToStream(o);
+      o<<"The Track:\n";
+      if(fTrack)
+	o<<*fTrack<<"\n";
+      else
+	o<<"NULL Track\n";
+    }
   
   private:
   // copy and assignment are private

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.9 2004/08/05 01:42:02 ehrlich Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.10 2004/08/31 14:08:58 pretz Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/08/05 01:42:02 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/31 14:08:58 $
  * @author pretz
  */
 
@@ -77,6 +77,29 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
    * @return the tubes used by this fit as a non-const object
    */
   vector<Int_t>& GetUsedTubes() {return fUsedTubes;}
+
+  virtual void ToStream(ostream& o) const
+    {
+      I3RecoResultSingleTrack::ToStream(o);
+      o<<"Fit Parameters:\n";
+      map<string,Double_t>::const_iterator params;
+      for(params = fParameters.begin() ; 
+	  params != fParameters.end() ; 
+	  params++)
+	{
+	  o<<params->first<<": "<<params->second<<"\n";
+	}
+      o<<"Used Tubes:\n";
+      vector<Int_t>::const_iterator tubes;
+      for(tubes = fUsedTubes.begin();
+	  tubes != fUsedTubes.end();
+	  tubes++)
+	{
+	  o<<*tubes<<" ";
+	}
+      o<<"\n";
+	
+    }
 
  private:
   // copy and assignment are private
