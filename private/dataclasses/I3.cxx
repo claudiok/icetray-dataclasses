@@ -1,6 +1,6 @@
 #include "dataclasses/I3.h"
 
-I3::I3(char* filename)
+I3::I3(const char* filename)
 {
   order = new I3Order;
   filemode=0;

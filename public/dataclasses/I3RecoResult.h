@@ -18,12 +18,12 @@ class I3RecoResult : public TObject
   const char* GetRecomethod() const;
 
   int                    GetNumberRecoTrackLists() const;
-  const I3RecoTrackList* GetRecoTrackList(unsigned short index) const;
-  void                   AddRecoTrackList(I3RecoTrackList* recotracklist_);
+  const I3RecoTrackList& GetRecoTrackList(unsigned short index) const;
+  void                   AddRecoTrackList(I3RecoTrackList& recotracklist_);
 
   bool                   IsBestRecoTrackList() const;
-  const I3RecoTrackList* GetBestRecoTrackList() const;
-  void                   SetBestRecoTrackList(I3RecoTrackList* bestrecotracklist_);
+  const I3RecoTrackList& GetBestRecoTrackList() const;
+  void                   SetBestRecoTrackList(I3RecoTrackList& bestrecotracklist_);
 
   ClassDef(I3RecoResult, 1);
 };

@@ -21,7 +21,7 @@ class I3
   int      filemode;
 
   public:
-           I3(char* filename);
+           I3(const char* filename);
   virtual ~I3();
   
   const char* GetEventtype(int sequencenumber);

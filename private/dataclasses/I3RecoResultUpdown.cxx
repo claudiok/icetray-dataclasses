@@ -12,17 +12,17 @@ bool I3RecoResultUpdown::IsUpdownTrackList() const
   return( (GetNumberRecoTrackLists()==2) ? true : false);
 }
 
-const I3RecoTrackList* I3RecoResultUpdown::GetUpTrackList() const   
+const I3RecoTrackList& I3RecoResultUpdown::GetUpTrackList() const   
 {
-  return((IsUpdownTrackList()) ? (I3RecoTrackList*)recotracklist->At(0) : NULL);
+  return((IsUpdownTrackList()) ? *(I3RecoTrackList*)recotracklist->At(0) : *(I3RecoTrackList*)NULL);
 }
 
-const I3RecoTrackList* I3RecoResultUpdown::GetDownTrackList() const 
+const I3RecoTrackList& I3RecoResultUpdown::GetDownTrackList() const 
 {
-  return((IsUpdownTrackList()) ? (I3RecoTrackList*)recotracklist->At(1) : NULL);
+  return((IsUpdownTrackList()) ? *(I3RecoTrackList*)recotracklist->At(1) : *(I3RecoTrackList*)NULL);
 }
 
-bool I3RecoResultUpdown::SetUpdownTrackList(I3RecoTrackList* uptracklist, I3RecoTrackList* downtracklist) 
+bool I3RecoResultUpdown::SetUpdownTrackList(I3RecoTrackList& uptracklist, I3RecoTrackList& downtracklist) 
 {
   if(recotracklist)
   {
@@ -30,8 +30,8 @@ bool I3RecoResultUpdown::SetUpdownTrackList(I3RecoTrackList* uptracklist, I3Reco
     return(false);
   }
   recotracklist = new TObjArray(2);
-  recotracklist->Add(uptracklist);
-  recotracklist->Add(downtracklist);
+  recotracklist->Add(&uptracklist);
+  recotracklist->Add(&downtracklist);
   return(true);
 }
 

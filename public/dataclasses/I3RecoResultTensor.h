@@ -13,8 +13,8 @@ class I3RecoResultTensor : public I3RecoResultSingleTrack
   ~I3RecoResultTensor();
 
   Int_t          GetNumber() const;
-  const Float_t *GetMoment() const;
-  void           SetMoment(Float_t *moment_, Int_t number_);
+  const Float_t* GetMoment() const;
+  void           SetMoment(Float_t* moment_, Int_t number_);
 
   ClassDef(I3RecoResultTensor, 1);
 };

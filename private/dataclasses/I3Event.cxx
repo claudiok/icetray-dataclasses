@@ -33,20 +33,20 @@ void I3Event::SetEventID(unsigned long eventid_) {eventid=eventid_;}
 void I3Event::SetTime(double time_)              {time=time_;}
 void I3Event::SetDay(unsigned long day_)         {day=day_;}
 
-bool I3Event::IsTriggerData() const    {return((triggerdata==NULL) ? false :true);}
-bool I3Event::IsFilterData() const     {return((filterdata==NULL) ? false :true);}
-bool I3Event::IsMCTrackData() const    {return((mctrackdata==NULL) ? false :true);}
-bool I3Event::IsOMResponseData() const {return((omresponsedata==NULL) ? false :true);}
-bool I3Event::IsRecoResultData() const {return((recoresultdata==NULL) ? false :true);}
+bool I3Event::IsTriggerData() const    {return((triggerdata) ? true : false);}
+bool I3Event::IsFilterData() const     {return((filterdata) ? true : false);}
+bool I3Event::IsMCTrackData() const    {return((mctrackdata) ? true : false);}
+bool I3Event::IsOMResponseData() const {return((omresponsedata) ? true : false);}
+bool I3Event::IsRecoResultData() const {return((recoresultdata) ? true : false);}
   
-I3TriggerData*    I3Event::GetTriggerData() const    {return((triggerdata==NULL) ? NULL : triggerdata);}
-I3FilterData*     I3Event::GetFilterData() const     {return((filterdata==NULL) ? NULL : filterdata);}
-I3MCTrackData*    I3Event::GetMCTrackData() const    {return((mctrackdata==NULL) ? NULL : mctrackdata);}
-I3OMResponseData* I3Event::GetOMResponseData() const {return((omresponsedata==NULL) ? NULL : omresponsedata);}
-I3RecoResultData* I3Event::GetRecoResultData() const {return((recoresultdata==NULL) ? NULL : recoresultdata);}
+I3TriggerData&    I3Event::GetTriggerData() const    {return((triggerdata==NULL) ? *(I3TriggerData*)NULL : *triggerdata);}
+I3FilterData&     I3Event::GetFilterData() const     {return((filterdata==NULL) ? *(I3FilterData*)NULL : *filterdata);}
+I3MCTrackData&    I3Event::GetMCTrackData() const    {return((mctrackdata==NULL) ? *(I3MCTrackData*)NULL : *mctrackdata);}
+I3OMResponseData& I3Event::GetOMResponseData() const {return((omresponsedata==NULL) ? *(I3OMResponseData*)NULL : *omresponsedata);}
+I3RecoResultData& I3Event::GetRecoResultData() const {return((recoresultdata==NULL) ? *(I3RecoResultData*)NULL : *recoresultdata);}
   
-void I3Event::SetTriggerData(I3TriggerData* triggerdata_)          {if(!triggerdata)    triggerdata=triggerdata_;       else printf("TriggerData exists already\n");}
-void I3Event::SetFilterData(I3FilterData* filterdata_)             {if(!filterdata)     filterdata=filterdata_;         else printf("FilterData exists already\n");}
-void I3Event::SetMCTrackData(I3MCTrackData* mctrackdata_)          {if(!mctrackdata)    mctrackdata=mctrackdata_;       else printf("MCTrackData exists already\n");}
-void I3Event::SetOMResponseData(I3OMResponseData* omresponsedata_) {if(!omresponsedata) omresponsedata=omresponsedata_; else printf("OMResponseData exists already\n");}
-void I3Event::SetRecoResultData(I3RecoResultData* recoresultdata_) {if(!recoresultdata) recoresultdata=recoresultdata_; else printf("RecoResultData exists already\n");}
+void I3Event::SetTriggerData(I3TriggerData& triggerdata_)          {if(!triggerdata)    triggerdata=&triggerdata_;       else printf("TriggerData exists already\n");}
+void I3Event::SetFilterData(I3FilterData& filterdata_)             {if(!filterdata)     filterdata=&filterdata_;         else printf("FilterData exists already\n");}
+void I3Event::SetMCTrackData(I3MCTrackData& mctrackdata_)          {if(!mctrackdata)    mctrackdata=&mctrackdata_;       else printf("MCTrackData exists already\n");}
+void I3Event::SetOMResponseData(I3OMResponseData& omresponsedata_) {if(!omresponsedata) omresponsedata=&omresponsedata_; else printf("OMResponseData exists already\n");}
+void I3Event::SetRecoResultData(I3RecoResultData& recoresultdata_) {if(!recoresultdata) recoresultdata=&recoresultdata_; else printf("RecoResultData exists already\n");}

@@ -41,23 +41,23 @@ float          I3Track::GetEnergy() const       {return(energy);}
 
 void I3Track::SetTracknumber(unsigned short tracknumber_)   {tracknumber=tracknumber_;}
 void I3Track::SetParticletype(unsigned short particletype_) {particletype=particletype_;}
-void I3Track::SetStarttime(float time)                       {starttime=time;}
-void I3Track::SetStartx(float x)                             {startx=x;}
-void I3Track::SetStarty(float y)                             {starty=y;}
-void I3Track::SetStartz(float z)                             {startz=z;}
-void I3Track::SetStoptime(float time)                        {stoptime=time;}
-void I3Track::SetStopx(float x)                              {stopx=x;}
-void I3Track::SetStopy(float y)                              {stopy=y;}
-void I3Track::SetStopz(float z)                              {stopz=z;}
-void I3Track::SetLength(float length_)                       {length=length_;}
-void I3Track::SetZenith(float zenith_)                       {zenith=zenith_;}
-void I3Track::SetAzimuth(float azimuth_)                     {azimuth=azimuth_;}
-void I3Track::SetEnergy(float energy_)                       {energy=energy_;}
+void I3Track::SetStarttime(float time)                      {starttime=time;}
+void I3Track::SetStartx(float x)                            {startx=x;}
+void I3Track::SetStarty(float y)                            {starty=y;}
+void I3Track::SetStartz(float z)                            {startz=z;}
+void I3Track::SetStoptime(float time)                       {stoptime=time;}
+void I3Track::SetStopx(float x)                             {stopx=x;}
+void I3Track::SetStopy(float y)                             {stopy=y;}
+void I3Track::SetStopz(float z)                             {stopz=z;}
+void I3Track::SetLength(float length_)                      {length=length_;}
+void I3Track::SetZenith(float zenith_)                      {zenith=zenith_;}
+void I3Track::SetAzimuth(float azimuth_)                    {azimuth=azimuth_;}
+void I3Track::SetEnergy(float energy_)                      {energy=energy_;}
   
 bool           I3Track::IsParenttrack() const                 {return((parenttrack==NULL) ? false : true);}
-const I3Track* I3Track::GetParenttrack() const                {return((parenttrack==NULL) ? NULL : (I3Track*)parenttrack.GetObject());}
-void           I3Track::SetParenttrack(I3Track* parenttrack_) {parenttrack=parenttrack_;}
+const I3Track& I3Track::GetParenttrack() const                {return((parenttrack==NULL) ? *(I3Track*)NULL : *(I3Track*)parenttrack.GetObject());}
+void           I3Track::SetParenttrack(I3Track& parenttrack_) {parenttrack=&parenttrack_;}
 
 unsigned short I3Track::GetNumberChildrentracks() const               {return((childrentrack==NULL) ? 0 : childrentrack->GetLast()+1);}
-const I3Track* I3Track::GetChildrentrack(unsigned short number) const {return((GetNumberChildrentracks()<=number) ? NULL : (I3Track*)childrentrack->At(number));}
-void           I3Track::AddChildrentrack(I3Track* childrentrack_)     {if(childrentrack==NULL) childrentrack=new TRefArray; childrentrack->Add(childrentrack_);}
+const I3Track& I3Track::GetChildrentrack(unsigned short number) const {return((GetNumberChildrentracks()<=number) ? *(I3Track*)NULL : *(I3Track*)childrentrack->At(number));}
+void           I3Track::AddChildrentrack(I3Track& childrentrack_)     {if(childrentrack==NULL) childrentrack=new TRefArray; childrentrack->Add(&childrentrack_);}

@@ -14,8 +14,8 @@ class I3RecoTrackComposite : public I3RecoTrack
   virtual ~I3RecoTrackComposite();
 
   unsigned short     GetNumberConstituents() const;
-  const I3RecoTrack* GetConstituent(unsigned short number) const;
-  void               AddConstituent(I3RecoTrack* constituent_);
+  const I3RecoTrack& GetConstituent(unsigned short number) const;
+  void               AddConstituent(I3RecoTrack& constituent_);
 
   ClassDef(I3RecoTrackComposite, 1);
 };

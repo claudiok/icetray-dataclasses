@@ -60,12 +60,12 @@ class I3Track : public TObject
   void SetEnergy(float energy_);
   
   bool           IsParenttrack() const;
-  const I3Track* GetParenttrack() const;
-  void           SetParenttrack(I3Track* parenttrack_);
+  const I3Track& GetParenttrack() const;
+  void           SetParenttrack(I3Track& parenttrack_);
 
   unsigned short GetNumberChildrentracks() const;
-  const I3Track* GetChildrentrack(unsigned short number) const;
-  void           AddChildrentrack(I3Track* childrentrack_);
+  const I3Track& GetChildrentrack(unsigned short number) const;
+  void           AddChildrentrack(I3Track& childrentrack_);
 
   ClassDef(I3Track, 1);
 };

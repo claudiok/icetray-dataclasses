@@ -14,8 +14,8 @@ class I3RecoTrackList : public TObject
   virtual ~I3RecoTrackList();
 
   int                GetNumberRecoTracks() const;
-  const I3RecoTrack* GetRecoTrack(unsigned short index) const;
-  void               AddRecoTrack(I3RecoTrack* recotrack_);
+  const I3RecoTrack& GetRecoTrack(unsigned short index) const;
+  void               AddRecoTrack(I3RecoTrack& recotrack_);
 
   ClassDef(I3RecoTrackList, 1);
 };

@@ -10,25 +10,25 @@ void  I3RecoResultDoublemuon::SetQualityparameter(float qualityparameter_) {qual
 bool I3RecoResultDoublemuon::AreTwotracks() const 
 {
   if(!IsSingleTrackList()) return(false); 
-  return( (GetSingleTrackList()->GetNumberRecoTracks()==2) ? true : false);
+  return( (GetSingleTrackList().GetNumberRecoTracks()==2) ? true : false);
 }
 
-const I3RecoTrack* I3RecoResultDoublemuon::GetFirstTrack() const
+const I3RecoTrack& I3RecoResultDoublemuon::GetFirstTrack() const
 {
-  return((AreTwotracks()) ? GetSingleTrackList()->GetRecoTrack(0) : NULL);
+  return((AreTwotracks()) ? GetSingleTrackList().GetRecoTrack(0) : *(I3RecoTrack*)NULL);
 }
   
-const I3RecoTrack* I3RecoResultDoublemuon::GetSecondTrack() const
+const I3RecoTrack& I3RecoResultDoublemuon::GetSecondTrack() const
 {
-  return((AreTwotracks()) ? GetSingleTrackList()->GetRecoTrack(1) : NULL);
+  return((AreTwotracks()) ? GetSingleTrackList().GetRecoTrack(1) : *(I3RecoTrack*)NULL);
 }
 
-bool I3RecoResultDoublemuon::SetTracks(I3RecoTrack* firsttrack, I3RecoTrack* secondtrack) 
+bool I3RecoResultDoublemuon::SetTracks(I3RecoTrack& firsttrack, I3RecoTrack& secondtrack) 
 {
-  if(SetSingleTrackList(new I3RecoTrackList))
+  if(SetSingleTrackList(*(new I3RecoTrackList)))
   {
-    ((I3RecoTrackList*)GetSingleTrackList())->AddRecoTrack(firsttrack);    //const_cast
-    ((I3RecoTrackList*)GetSingleTrackList())->AddRecoTrack(secondtrack);   //const_cast
+    ((I3RecoTrackList&)GetSingleTrackList()).AddRecoTrack(firsttrack);    //const_cast
+    ((I3RecoTrackList&)GetSingleTrackList()).AddRecoTrack(secondtrack);   //const_cast
     return(true);
   }
   return(false);
