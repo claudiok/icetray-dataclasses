@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.18 2005/03/08 14:35:51 olivas Exp $
+    $Id: STLMapStoragePolicy.h,v 1.19 2005/03/08 14:49:13 olivas Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.18 $
-    @date $Date: 2005/03/08 14:35:51 $
+    @version $Revision: 1.19 $
+    @date $Date: 2005/03/08 14:49:13 $
     @author Troy Straszheim
 
 */
@@ -118,8 +118,10 @@ class STLMapStoragePolicy {
   bool Add(const ElementType& element, const KeyType& key)
     {
       iterator iter = find(key);
+      ostringstream debugStream;
       if(iter != end()){
-	cerr<<"WARNING: Key \'"<<key<<"\' already used."<<endl;
+	debugStream<<"WARNING: Key \'"<<key<<"\' already used."<<endl;
+	log_debug("%s",debugStream.str().c_str());
 	return false;
       }else{
 	this->operator[](key) = element;
