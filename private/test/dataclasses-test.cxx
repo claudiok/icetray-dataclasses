@@ -1,17 +1,18 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: dataclasses-test.cxx,v 1.1 2004/08/09 12:20:56 troy Exp $
+    $Id: dataclasses-test.cxx,v 1.2 2004/08/09 12:45:02 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/08/09 12:20:56 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/08/09 12:45:02 $
     @author Troy D. Straszheim
 
     @todo
 
-    The existence of this file tells the build system to build it.
+    This simply includes the test driver program from the TUT tool.
+    If you wish to customize this program you can replace this file's
+    contents with your modified version.
 
 */
-#include "TUT/tut.h"
-#include "TUT/tut_reporter.h"
+
 #include "TUT/runtests.cxx"
