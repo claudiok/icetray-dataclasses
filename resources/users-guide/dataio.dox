@@ -113,14 +113,24 @@ An IceCube structure (transient/persistent) can be stored in another file by the
 
 <h2> F2kReader</h2>
 This class also contains an F2k reader, which is called through <b>TranslateF2k(source)</b>,
-The result is put in the transient data structure (or appended to an existing structure).
+It reads the entire F2k file and the result is put in the transient data structure (or appended to an existing structure).
 If one wants to translate only a specific event, one can use the method <b>TranslateF2kEvent(source, eventnumber)</b>,
 where eventnumber=0 stands for a geometry event and eventnumber>0 stands for all physics events.
 This method returns false if the event does not exist. <br> 
-For an iteration over all events, one has to start with TranslateF2kHeader(source) which translates the 
-geometry and returns an RDMC header structure. This header structure has to be used for the 
-function TranslateF2kNextEvent(source, header), which goes to the "next" event (starting with the first)
-and translates it. This method returns false if the event does not exist. 
+For an iteration over all events, the method TranslateF2kEvent is too time consuming. One should start with 
+TranslateF2kHeader(source) which translates the geometry and returns an RDMC header structure. This header 
+structure has to be used for the function TranslateF2kNextEvent(source, header), which goes to the "next" event 
+(starting with the first) and translates it. This method returns false if the event does not exist. An example would be: <br>
+<code>
+mcfile *fF2k_file = rdmc_mcopen(F2kFileName, "r", RDMC_DEFAULT_ASCII_F); <br>
+array fHeader=fTree->TranslateF2kHeader(fF2k_file); <br>
+while(fTree->TranslateF2kNextEvent(fF2k_file,fHeader)) <br>
+{ <br>
+  //do something <br>
+} <br>
+rdmc_free_array(&fHeader); <br>
+rdmc_mcclose(fF2k_file); <br>
+</code>
 
 <h2> Some sample modules</h2>
 - <b>F2kReaderModule</b> Translates F2k (text) files and fills an Physics and Geometry stream
