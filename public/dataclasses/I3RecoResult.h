@@ -1,20 +1,18 @@
 #ifndef I3RECORESULT_H
 #define I3RECORESULT_H
 
-#include "I3RecoTrackList.h"
-#include "I3BasicTrack.h"
-
+#include <TObject.h>
 #include "StoragePolicy.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.22 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.23 2004/04/23 19:03:07 ehrlich Exp $
  *
  * The base class from which all RecoResult's derive.  Not much of an interface
  * since the various RecoResults are so diverse in what they can provide.
  *
- * @version $Revision: 1.22 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/04/23 19:03:07 $
  * @author ehrlich
  * @author troy
  * @author pretz

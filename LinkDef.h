@@ -87,18 +87,10 @@
 #pragma link C++ class MapPointainerPolicy<I3RecoResultPtr>::ThePolicy+;
 #pragma link C++ typedef I3RecoResultDataPtr;
 #pragma link C++ function I3RecoResultData::Get<I3RecoResultSingleTrackPtr>(const string&);
-#pragma link C++ function I3RecoResultData::Get<I3AltTracksRecoResultPtr>(const string&);
-#pragma link C++ function I3RecoResultData::Get<I3MultiTrackRecoResultPtr>(const string&);
+#pragma link C++ function I3RecoResultData::Get<I3RecoResultAltTracksPtr>(const string&);
+#pragma link C++ function I3RecoResultData::Get<I3RecoResultMultiTracksPtr>(const string&);
 #pragma link C++ function I3RecoResultData::Get<I3RecoResultRDMCFitPtr>(const string&);
 #pragma link C++ function I3RecoResultData::Get<I3RecoResultLikelihoodPtr>(const string&);
-
-#pragma link C++ class I3RecoTrackList+;
-#pragma link C++ class I3RecoTrackList::iterator+;
-#pragma link C++ typedef VecPointainerPolicy<I3RecoTrackPtr>::ThePolicy;
-#pragma link C++ class VecPointainerPolicy<I3RecoTrackPtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3RecoTrackList::iterator&, const I3RecoTrackList::iterator&);
-#pragma link C++ typedef I3RecoTrackListPtr;
-
 
 #pragma link C++ class I3DataReadoutList+;
 #pragma link C++ class I3DataReadoutList::iterator+;
@@ -179,8 +171,6 @@
 // simple types with full value semantics
 //
 
-#pragma link C++ class I3AltTracksRecoResult+;
-#pragma link C++ typedef I3AltTracksRecoResultPtr;
 #pragma link C++ class I3AMANDAAnalogReadout+;
 #pragma link C++ typedef I3AMANDAAnalogReadoutPtr;
 #pragma link C++ class I3AnalogReadout+;
@@ -234,8 +224,6 @@
 #pragma link C++ typedef I3MonitoringPtr;
 #pragma link C++ class I3MonitoringHeader+;
 #pragma link C++ typedef I3MonitoringHeaderPtr;
-#pragma link C++ class I3MultiTrackRecoResult;
-#pragma link C++ typedef I3MultiTrackRecoResultPtr;
 #pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonComposite+;
 #pragma link C++ class I3NonEnergetic+;
@@ -265,20 +253,23 @@
 #pragma link C++ typedef I3OMStatusIcecube::LCMode;
 #pragma link C++ typedef I3OMStatusIcecubePtr;
 #pragma link C++ class I3Particle+;
+#pragma link C++ typedef I3ParticlePtr;
 #pragma link C++ class I3Position+;
 #pragma link C++ class I3Primary+;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ typedef I3RecoHitPtr;
 #pragma link C++ class I3RecoResult+;
 #pragma link C++ typedef I3RecoResultPtr;
+#pragma link C++ class I3RecoResultAltTracks+;
+#pragma link C++ typedef I3RecoResultAltTracksPtr;
+#pragma link C++ class I3RecoResultMultiTracks;
+#pragma link C++ typedef I3RecoResultMultiTracksPtr;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ typedef I3RecoResultLikelihoodPtr;
 #pragma link C++ class I3RecoResultRDMCFit+;
 #pragma link C++ typedef I3RecoResultRDMCFitPtr;
 #pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
-#pragma link C++ class I3RecoTrack+;
-#pragma link C++ typedef I3RecoTrackPtr;
 #pragma link C++ class I3SLCReadout+;
 #pragma link C++ typedef I3SLCReadoutPtr;
 #pragma link C++ class I3Starting+;

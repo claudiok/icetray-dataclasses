@@ -2,15 +2,17 @@
 #define I3PARTICLE_H
 
 #include "TObject.h"
+#include "I3Position.h"
+#include "StoragePolicy.h"
 #include <cmath>
 
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Particle.h,v 1.3 2004/04/23 19:03:07 ehrlich Exp $
  *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 19:03:07 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -111,5 +113,6 @@ class I3Particle : public TObject{
   ClassDef(I3Particle,1);
 };
 
+typedef PtrPolicy<I3Particle>::ThePolicy I3ParticlePtr;
 
 #endif
