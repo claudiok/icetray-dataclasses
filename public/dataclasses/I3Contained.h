@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.13 2004/09/07 16:31:32 dule Exp $
+ * $Id: I3Contained.h,v 1.14 2004/09/07 19:30:21 dule Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/09/07 16:31:32 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/09/07 19:30:21 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -120,21 +120,27 @@ class I3Contained
    * gives the zenith of the track
    */
   //Double_t GetZenith() const {return fZenith;}
+  Double_t GetZenith() const {return GetDir().GetZenith();}
 
   /**
    * gives the azimuth of the track
    */
   //Double_t GetAzimuth() const {return fAzimuth;}
+  Double_t GetAzimuth() const {return GetDir().GetAzimuth();}
 
   /**
    * sets the zenith of the track
    */
   //void SetZenith(Double_t theta){fZenith = theta;}
+  void SetZenith(Double_t zen) {
+    GetDir().SetDirection(zen,GetDir().GetAzimuth());}
 
   /**
    * sets the azimuth of the track
    */
   //void SetAzimuth(Double_t phi){fAzimuth = phi;}
+  void SetAzimuth(Double_t azi) {
+    GetDir().SetDirection(GetDir().GetZenith(),azi);}
 
   /**
    * gives the length of the track
