@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.8 2004/08/31 12:35:50 pretz Exp $
+// $Id: I3Position.cxx,v 1.9 2004/09/14 13:42:44 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -97,7 +97,14 @@ void I3Position::ResetPosition()
 void I3Position::NullPosition()
 {
 // Set null position for non-existing position
-  SetPosition(NAN,NAN,NAN,car);
+  fX=NAN;
+  fY=NAN;
+  fZ=NAN;
+  fR=NAN;
+  fTheta=NAN;
+  fPhi=NAN;
+  fRho=NAN;
+  IsCalculated=kTRUE;
 }
 
 //-----------------------------------------------------------
@@ -160,9 +167,9 @@ Double_t I3Position::CalcDistance(const I3Position& p) const
 void I3Position::ToStream(ostream& o) const
 {
   o <<"---------------------POSITION-INFO-----------------------\n"
-    <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
-    <<"SPH coord (r,theta,phi): "<< GetR()<<" "<<GetTheta()<<" "<<GetPhi()<<"\n"
-    <<"CYL coord (rho,phi,z): "<< GetRho()<<" "<<GetPhi()<<" "<<GetZ()<<"\n"
+    <<"CAR coord(x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
+    <<"SPH coord(r,theta,phi): "<< GetR()<<" "<<GetTheta()<<" "<<GetPhi()<<"\n"
+    <<"CYL coord(rho,phi,z): "<< GetRho()<<" "<<GetPhi()<<" "<<GetZ()<<"\n"
     <<"---------------------------------------------------------\n";
 }
 
