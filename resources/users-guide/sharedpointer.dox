@@ -4,6 +4,24 @@
 
 @author troy d. straszheim <a href="http://www.resophonic.com">@<troy@resophonic.com@></a>
 
+@section ownership A shift of ownership
+
+The discussion at @ref memorymanagement addresses the basic issues of
+memory management.  When must one @c delete, when can one @c delete,
+and when mustn't one?  As discussed, the question can also be phrased
+"who owns this object?"  In the overwhelming majority of cases, one
+wants ownership of the object to be shared amongst all who have
+pointers to it.  When pointers to the object no longer exist, we want
+that object to be returned to free store, or @c delete -d).
+
+A fairly simple paradigm shift accomplishes this goal.  One gives
+ownership of the object to its set of "client" pointers, taking
+ownership away from the objects that contain the pointers.  As long as
+some mechanism exists whereby the pointers can know when the last one
+disappears, (this is the point at which the pointee is in danger of
+being "leaked"), then the pointer itself, actually now a lightweight
+class that imitates a pointer, can delete the object.
+
 @section using Creating a smart pointer
 
 A smart pointer is a template class that takes the type of the pointee
