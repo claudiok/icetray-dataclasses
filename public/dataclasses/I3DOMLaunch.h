@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.4 2004/10/28 00:09:21 spencer Exp $
+ * $Id: I3DOMLaunch.h,v 1.5 2004/11/11 21:31:47 tmccauley Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/10/28 00:09:21 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/11/11 21:31:47 $
  * @author klein
  * @author blaufuss
  *
@@ -80,6 +80,12 @@ class I3DOMLaunch : public I3DigitalLaunch
    */
   vector<Int_t> fFADC;
 
+  /**
+   * This holds the combined ATWD waveform (over the 3 channels).
+   * The combination utilizes the calibration information.
+   */
+  vector<Double_t> fCombinedATWD;
+    
   /** 
    * This holds the local coincidence bit
    */
@@ -136,6 +142,14 @@ class I3DOMLaunch : public I3DigitalLaunch
    */
   const vector<Int_t>& GetFADC() const {return fFADC;}
   
+  /** 
+   * return combined ATWD waveform
+   */
+  const vector<Double_t>& GetCombinedATWD() const
+	{
+	    return fCombinedATWD;
+	};
+    
   /**
    * sets the ATWD0 waveform
    */
@@ -157,6 +171,14 @@ class I3DOMLaunch : public I3DigitalLaunch
  void SetFADC(const vector<Int_t>& FADCdata) {fFADC=FADCdata;}
 
   /**
+   * sets the combined ATWD waveform
+   */
+  void SetCombinedATWD(const vector<Double_t>& CombinedATWD) 
+	{
+	    fCombinedATWD = CombinedATWD;
+	};
+
+  /**
    * return local coincidence bit as a read-only object
    */
  Bool_t GetLCBit() const {return fLocalCoincidence;}
@@ -165,6 +187,7 @@ class I3DOMLaunch : public I3DigitalLaunch
   * sets the local coincidence bit
   */
  void SetLCBit(const Bool_t & LCBit) {fLocalCoincidence=LCBit;}
+
 
 
  /**
