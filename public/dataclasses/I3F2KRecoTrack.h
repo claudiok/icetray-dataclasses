@@ -1,16 +1,16 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrack.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3F2KRecoTrack.h,v 1.4 2004/08/04 20:11:41 ehrlich Exp $
 
     @file I3F2KRecoTrack.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/07/19 16:46:01 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/08/04 20:11:41 $
     @author deyoung
 */
 
 #include "I3TrackImpl.h"
-#include "I3Contained.h"
+#include "I3Infinite.h"
 #include "I3NonEnergetic.h"
 #include "I3NonComposite.h"
 
@@ -25,7 +25,7 @@
  *
  * It is intended primarily for backward compatibility.
  */
-class I3F2KRecoTrack : public I3TrackImpl<I3Contained,
+class I3F2KRecoTrack : public I3TrackImpl<I3Infinite,
                                           I3NonEnergetic,
                                           I3NonComposite>
 {

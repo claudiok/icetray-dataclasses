@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.111 2004/08/04 19:19:47 ehrlich Exp $
-// $Revision: 1.111 $
-// $Date: 2004/08/04 19:19:47 $
+// $Id: LinkDef.h,v 1.112 2004/08/04 20:11:41 ehrlich Exp $
+// $Revision: 1.112 $
+// $Date: 2004/08/04 20:11:41 $
 //
 
 #ifdef __CINT__
@@ -278,6 +278,8 @@
 #pragma link C++ class I3Energetic+;
 #pragma link C++ class I3MCEvent+;
 #pragma link C++ typedef I3MCEventPtr;
+#pragma link C++ class I3MCEventHeader+;
+#pragma link C++ typedef I3MCEventHeaderPtr;
 #pragma link C++ class I3MCPhoton+;
 #pragma link C++ typedef I3MCPhotonPtr;
 #pragma link C++ class I3Event+;
