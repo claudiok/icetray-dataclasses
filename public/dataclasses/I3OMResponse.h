@@ -32,7 +32,7 @@ class I3OMResponse : public TObject
   void SetGeometry(I3OMGeo& geometry_);
 
   bool HasMCHitSeries() const;
-  bool HasDatareadoutlist() const;
+  bool HasDatareadoutList() const;
   bool HasRecoHitSeriesData() const;
   const I3MCHitSeries& GetMCHitSeries() const;
   const I3DatareadoutList& GetDatareadoutList() const;

@@ -29,13 +29,13 @@ void I3OMResponse::SetOMNumber(unsigned short omnumber_) {omnumber=omnumber_;}
 
 bool I3OMResponse::HasGeometry() const
 {
-  return((geometry==NULL) ? false : true);
+  return((geometry.GetObject()==NULL) ? false : true);
 }
 
 const I3OMGeo& I3OMResponse::GetGeometry() const
 {
   if(HasGeometry()) return(*(I3OMGeo*)geometry.GetObject());
-  I3DataExecution::Instance().Fatal("I3OMResponse::GetGeometry() the OMGeo doesn't exits");
+  I3DataExecution::Instance().Fatal("I3OMResponse::GetGeometry() the OMGeo doesn't exit");
   return *(I3OMGeo*)NULL;
 }
 
@@ -50,7 +50,7 @@ bool  I3OMResponse::HasMCHitSeries() const
   return((mchitseries==NULL) ? false : true);
 }
 
-bool  I3OMResponse::HasDatareadoutlist() const   
+bool  I3OMResponse::HasDatareadoutList() const   
 {
   return((datareadoutlist==NULL) ? false : true);
 }

@@ -95,7 +95,7 @@ void I3Track::SetEnergy(float energy_)                      {energy=energy_;}
   
 bool I3Track::HasParenttrack() const
 {
-  return((parenttrack==NULL) ? false : true);
+  return((parenttrack.GetObject()==NULL) ? false : true);
 }
 const I3Track& I3Track::GetParenttrack() const
 {
