@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.17 2004/08/31 01:29:42 pretz Exp $
+ * $Id: I3Particle.h,v 1.18 2004/09/01 00:54:26 ehrlich Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/08/31 01:29:42 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/09/01 00:54:26 $
  * @author pretz
  *
  */
@@ -23,7 +23,7 @@
 using namespace std;
 
 /**
- * @brief The base 'particle' class.  
+ * @brief The base 'particle' class.
  * @todo should there be a 'generic muon' and 'generic tau' types?
  */
 class I3Particle : public TObject{
@@ -34,14 +34,14 @@ class I3Particle : public TObject{
    */
  enum ParticleType {
     Unknown = -100,
-    Null = 0, 
+    Null = 0,
     Gamma = 1,
     EPlus = 2,
     EMinus = 3,
     Nu = 4,
     MuPlus = 5,
     MuMinus = 6,
-    Pi0 = 7, 
+    Pi0 = 7,
     PiPlus = 8,
     PiMinus = 9,
     PPlus = 14,
@@ -61,10 +61,10 @@ class I3Particle : public TObject{
     MuPair = 1005,
     Hadrons = 1006,
     FiberLaser = 2100,
-    N2Laser = 2101, 
+    N2Laser = 2101,
     YAGLaser = 2201,
     ZPrimary = 3000,
-    APrimary = 3500, 
+    APrimary = 3500,
     Elph = 9999
   };
 
@@ -75,7 +75,7 @@ class I3Particle : public TObject{
     Int_t        fParentID;
 
   public:
-    I3Particle() 
+    I3Particle()
     {
       fType=Null;
       fID=0;
@@ -87,11 +87,16 @@ class I3Particle : public TObject{
      * indicates that this track is observable.
      */
     virtual Bool_t IsObservable() const = 0;
-    
+
     /**
      * indicates that particle has a direction of origin
      */
     virtual Bool_t HasDirection() const =0;
+
+    /**
+     * indicates that particle has an energy
+     */
+    virtual Bool_t HasEnergy() const =0;
 
     /**
      * indicates that particle is InIce
@@ -102,7 +107,7 @@ class I3Particle : public TObject{
      * indicates that particle is in IceTop
      */
     virtual Bool_t IsIceTop() const =0;
-    
+
     /**
      * gives the type of the particle
      */
@@ -110,7 +115,7 @@ class I3Particle : public TObject{
     {
 	return fType;
     }
-    
+
     /**
      * sets the type of the particle
      */

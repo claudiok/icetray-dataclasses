@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.11 2004/08/31 13:30:55 pretz Exp $
+ * $Id: I3Cascade.h,v 1.12 2004/09/01 00:54:26 ehrlich Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/08/31 13:30:55 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/09/01 00:54:26 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -36,16 +36,10 @@ class I3Cascade : public I3InIceParticle{
   virtual Bool_t IsCascade() {return kTRUE;}
 
   /**
-   * indicates whether the cascade has a direction, and whether Zenith()and 
-   * Azimuth() are legimitate to call.
+   * indicates whether the particle is localized within the detector, and
+   * whether X(), Y(), Z() and T() are legitimate to call
    */
-  virtual Bool_t HasDirection() const =0;
-
-  /**
-   * indicates whether the cascade has an energy, and whether the Energy() 
-   * method  will work
-   */ 
-  virtual Bool_t HasEnergy() const =0;
+  virtual Bool_t IsLocalized() const =0;
 
   /**
    * the time of the cascade
