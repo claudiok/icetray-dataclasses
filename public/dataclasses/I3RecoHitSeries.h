@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.25 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.26 2004/08/16 22:46:24 dule Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.25 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.26 $
+ * @date $Date: 2004/08/16 22:46:24 $
  * @author ehrlich
  * @author pretz
  */
@@ -31,6 +31,21 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
    * destructor
    */
   virtual ~I3RecoHitSeries() {};
+
+  /**
+   * earliest hit time
+   */
+  Double_t GetFirstHitTime() {
+    if (this->size()) { 
+      Double_t min = (*this->begin())->GetTime();
+      I3RecoHitSeries::iterator iter;
+      for(iter=this->begin(); iter!=this->end(); iter++) {
+	if(min>(*iter)->GetTime()) min=(*iter)->GetTime();
+      }
+      return(min);
+    }
+    else return(NAN);       
+  };
 
   /**
    * dumps the object to the indicated ostream

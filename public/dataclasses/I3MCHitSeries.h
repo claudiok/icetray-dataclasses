@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.21 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.22 2004/08/16 22:46:24 dule Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/08/16 22:46:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -46,6 +46,21 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
    * @param weight the new weight for this series
    */
   void SetWeight(Double_t weight) { fWeight = weight; }
+
+  /**
+   * earliest hit time
+   */
+  Double_t GetFirstHitTime() {
+    if (this->size()) { 
+      Double_t min = (*this->begin()).GetTime();
+      I3MCHitSeries::iterator iter;
+      for(iter=this->begin(); iter!=this->end(); iter++) {
+	if(min>(*iter).GetTime()) min=(*iter).GetTime();
+      }
+      return(min);
+    }
+    else return(NAN);       
+  };
 
   /**
    * dumps the object to the indicated ostream
