@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.135 2004/11/10 22:18:43 tmccauley Exp $
-// $Revision: 1.135 $
-// $Date: 2004/11/10 22:18:43 $
+// $Id: LinkDef.h,v 1.136 2004/11/19 22:21:42 deyoung Exp $
+// $Revision: 1.136 $
+// $Date: 2004/11/19 22:21:42 $
 //
 
 #ifdef __CINT__
@@ -418,6 +418,26 @@
 #pragma link C++ class I3OMResponse+;
 #pragma link C++ typedef I3OMResponsePtr;`
 #pragma link C++ class roost::shared_ptr<I3OMResponse>+;
+
+#pragma link C++ class I3OMResponseSelection+;
+#pragma link C++ typedef I3OMResponseSelectionPtr;`
+#pragma link C++ class roost::shared_ptr<I3OMResponseSelection>+;
+
+#pragma link C++ class I3OddOMSelection+;
+#pragma link C++ typedef I3OddOMSelectionPtr;`
+#pragma link C++ class roost::shared_ptr<I3OddOMSelection>+;
+
+#pragma link C++ class I3EvenOMSelection+;
+#pragma link C++ typedef I3EvenOMSelectionPtr;`
+#pragma link C++ class roost::shared_ptr<I3EvenOMSelection>+;
+
+#pragma link C++ class I3BadOMSelection+;
+#pragma link C++ typedef I3BadOMSelectionPtr;`
+#pragma link C++ class roost::shared_ptr<I3BadOMSelection>+;
+
+#pragma link C++ class I3GoodOMSelection+;
+#pragma link C++ typedef I3GoodOMSelectionPtr;`
+#pragma link C++ class roost::shared_ptr<I3GoodOMSelection>+;
 
 #pragma link C++ class I3OMStatus+;
 #pragma link C++ typedef I3OMStatusPtr;
