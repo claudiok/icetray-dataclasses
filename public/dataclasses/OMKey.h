@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.6 2004/09/14 17:06:41 niessen Exp $
+ * $Id: OMKey.h,v 1.7 2004/09/15 18:39:35 pretz Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/09/14 17:06:41 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/09/15 18:39:35 $
  * @author pretz
  */
 
@@ -15,6 +15,7 @@
 #include <utility>
 #include "TObject.h"
 #include "StoragePolicy.h"
+#include <iostream>
 
 using namespace std;
 
@@ -113,11 +114,8 @@ inline bool operator<(const OMKey& lhs,const OMKey& rhs)
  */
 inline ostream& operator<<(ostream& o,const OMKey& key)
 {
-/*   string a("("); */
-/*   string b(","); */
-/*   string c(")"); */
 /*   o<<a<<key.GetString()<<b<<key.GetOM<<c; */
-//   o<<"("<<key.GetString()<<","<<key.GetOM()<<")"; 
+   o<<"("<<key.GetString()<<","<<key.GetOM()<<")"; 
    return o; 
 }
 
