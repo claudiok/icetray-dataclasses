@@ -1,16 +1,18 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.15 2004/08/05 13:00:21 troy Exp $
+    $Id: StoragePolicy.h,v 1.16 2004/08/22 11:49:24 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.15 $
-    @date $Date: 2004/08/05 13:00:21 $
+    @version $Revision: 1.16 $
+    @date $Date: 2004/08/22 11:49:24 $
     @author Troy D. Straszheim
 */
 
 #ifndef STORAGEPOLICY_H
 #define STORAGEPOLICY_H
+
+#include "dataclasses/copy_if.h"
 
 #include "STLVectorStoragePolicy.h"
 #include "STLMapStoragePolicy.h"
