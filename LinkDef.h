@@ -21,6 +21,12 @@
 // 'prototype for blahblah does not match any in class blahblah'
 //
 
+#pragma link C++ class I3RecoResultData+;
+#pragma link C++ class I3RecoResultData::iterator+;
+#pragma link C++ typedef I3RecoResultPtr;
+#pragma link C++ typedef MapPolicy<I3RecoResultPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<I3RecoResultPtr>::ThePolicy+;
+
 #pragma link C++ class I3RecoTrackList+;
 #pragma link C++ class I3RecoTrackList::iterator+;
 #pragma link C++ typedef VectorPolicy<I3RecoTrack>::ThePolicy;
@@ -69,7 +75,6 @@
 #pragma link C++ typedef VectorPolicy<I3RecoHit>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoHit>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoHitSeries::iterator&, const I3RecoHitSeries::iterator&);
-
 #pragma link C++ class I3MCTrackList+;
 #pragma link C++ class I3MCTrackList::iterator+;
 #pragma link C++ typedef VectorPolicy<I3MCTrack>::ThePolicy;
@@ -78,8 +83,8 @@
 
 #pragma link C++ class I3MCTrackData+;
 #pragma link C++ class I3MCTrackData::iterator+;
-#pragma link C++ typedef VectorPolicy<I3MCTrackList>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3MCTrackList>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<I3MCTrackList>::ThePolicy;
+#pragma link C++ class MapPolicy<I3MCTrackList>::ThePolicy+;
 #pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
 
 #pragma link C++ class I3OMResponseData+;
@@ -142,7 +147,6 @@
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
-#pragma link C++ class I3RecoResultData+;
 #endif
 
 //tds
