@@ -1,20 +1,24 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3TankGeo.h,v 1.5.2.1 2004/07/19 22:26:51 ehrlich Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.5.2.1 $
+ * @date $Date: 2004/07/19 22:26:51 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
 #define __I3TANKGEO_H_
 
+#include <iostream>
+
 #include <TObject.h>
 
 #include "dataclasses/I3TankMaterial.h"
 #include "dataclasses/I3InIceGeometry.h"
+
+using namespace std;
 
 /**
  * @brief Class which describes a single tank
@@ -68,6 +72,34 @@ class I3TankGeo : public TObject
   I3InIceGeometry fOM; // the oms inside the tank
   
   ClassDef(I3TankGeo,1);
+
 };
+
+#include "dataclasses/StoragePolicy.h"
+typedef PtrPolicy<I3TankGeo>::ThePolicy I3TankGeoPtr;
+
+class I3TankGeoMatchesTankID {
+  
+ public:
+
+  /**
+   * Constructor.
+   */
+  I3TankGeoMatchesTankID (UShort_t tank_id) : id (tank_id) {
+    cerr << "Got id " << tank_id << endl;
+  }
+
+  /**
+   * Comparison operator.
+   */
+  bool operator () (I3TankGeoPtr tg) const {
+    cerr << "trying to assess equality" << endl;
+    return id == tg->TankID ();
+  }
+ private:
+  UShort_t id;
+  
+};
+
 #endif
 

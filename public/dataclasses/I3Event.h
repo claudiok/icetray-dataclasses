@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.21 2004/05/05 19:42:59 pretz Exp $
+ * $Id: I3Event.h,v 1.21.2.1 2004/07/19 22:26:51 ehrlich Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/05/05 19:42:59 $
+ * @version $Revision: 1.21.2.1 $
+ * @date $Date: 2004/07/19 22:26:51 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -18,6 +18,7 @@
 #include "I3FilterData.h"
 #include "I3MCParticleData.h"
 #include "I3OMResponseData.h"
+#include "I3ArrayHitData.h"
 #include "I3RecoResultData.h"
 #include "I3Bag.h"
 /**
@@ -31,6 +32,7 @@ class I3Event : public TObject
   I3FilterData     fFilterData; //||
   I3MCParticleData    fMCParticleData; //||
   I3OMResponseData fOMResponseData; //||
+  I3ArrayHitData   fTopResponseData; //||
   I3RecoResultData fRecoResultData; //||
   I3Bag            fBag; //||
   
@@ -84,6 +86,16 @@ class I3Event : public TObject
    * @return the OMResponseData as constant object
    */
   I3OMResponseData& OMResponseData() { return fOMResponseData; }
+
+  /**
+   * @return the Array hit data as constant object
+   */
+  const I3ArrayHitData& TopResponseData () const { return fTopResponseData; }
+
+  /**
+   * @ return the Array hit data a non-const object
+   */
+  I3ArrayHitData& TopResponseData () { return fTopResponseData; }
 
   /**
    * @return the RecoResult Data as a constant object
