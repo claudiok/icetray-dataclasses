@@ -9,10 +9,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.6 2004/04/25 20:40:27 ehrlich Exp $
+ * $Id: I3Particle.h,v 1.7 2004/04/26 04:11:57 ehrlich Exp $
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/04/25 20:40:27 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/04/26 04:11:57 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -65,6 +65,11 @@ class I3Particle : public TObject{
     Int_t fID;
 
 public:
+    /**
+     * indicates that this track is observable.
+     */
+    virtual Bool_t IsObservable() const = 0;
+    
     /**
      * indicates that particle has a direction of origin
      */
