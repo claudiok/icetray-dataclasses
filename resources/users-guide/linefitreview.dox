@@ -1,0 +1,392 @@
+/**
+
+@page linefitreview LineFit review
+
+@author troy d. straszheim <a href="http://www.resophonic.com">@<troy@resophonic.com@></a>
+
+Here's the blow-by-blow of converting the smartpointerless LineFit to
+the smartpointered LineFit and associated thoughts along the way.
+This should be taken as discussion.
+
+@section Declaration In the declaration
+The module has two member variables, 
+@code
+private:
+string fLineFitName;
+int fMinHits;
+ClassDef(I3LineFit,0);
+@endcode
+
+I like @c fModuleName (this is obviously a linefit).  [nitpicking] 
+
+@c fMinHits should be an unsigned, since it can't reasonably have a
+negative value and making it unsigned won't compile, because the
+framework doesn't support unsigned values. If it @em were @c unsigned,
+the compile could then catch attempts to assign negative numbers,
+compare to values that can be negative (which probably would be a
+programming error), and generally keep a better eye on what we're
+doing.
+
+@todo framework should support unsigned values.  The @c AddParameter
+and @c GetParameter functions should probably be templated so the @c
+I3Module and associated @c Impl classes don't have one copy-and-pasted
+function per data type.
+
+The @c ClassDef macro has a version number that is negative.  Any
+attempt to write an instance of this class to a root file therefore
+fail (this is in the root docs).  Easy fix.
+
+After:
+@code
+private:
+string fModuleName;
+int fMinHits;
+ClassDef(I3LineFit,1);
+@endcode
+
+The header file contains a minimal number of @c #includes.  Good.  It
+contains blocking @c #ifdefs.   Good, but the blocking @c #ifdefs
+define @c I3LINEFIT_H and in the event of a name clash and subsequent
+compiler error this token would probably come out in the error
+messages, and it would be more descriptive to define something that
+tells you exactly what this preprocessor token is for, like @c
+I3LINEFIT_H_INCLUDED. [nitpicking]
+
+@section definition In the definition
+
+The constructor, destructor, @c Configure, and @c Reconfigure are all
+straightforward.
+
+Having made the changes above and changed fLineFitName to fModuleName
+in the definition (the .cxx file), we try to compile and get this
+nasty-looking thing back:
+
+@verbatim
+private/linefit/I3LineFit.cxx: In member function `virtual void 
+   I3LineFit::Physics(I3Frame&)':
+private/linefit/I3LineFit.cxx:136: error: cannot convert `
+   ((+((+(&iter)->std::_Rb_tree_iterator<_Val, _Ref, _Ptr>::operator* [with 
+   _Val = std::pair<const OMKey, I3OMResponsePtr>, _Ref = std::pair<const 
+   OMKey, I3OMResponsePtr>&, _Ptr = std::pair<const OMKey, 
+   I3OMResponsePtr>*]()) + 20)->roost::shared_ptr<T>::operator-> [with T = 
+   I3OMResponse]()->I3OMResponse::GetDataReadoutDict()) + 
+   12)->STLMapStoragePolicy<KeyType, ElementType>::operator[] [with KeyType = 
+   std::string, ElementType = I3DataReadoutPtr]((&string("AMANDAAnalogReadout", 
+   (&allocator<char>()))))' from type `roost::shared_ptr<I3DataReadout>' to 
+   type `I3AMANDAAnalogReadout*'
+private/linefit/I3LineFit.cxx:189: error: conversion from `
+   I3RecoResultSingleTrack*' to non-scalar type `
+   roost::shared_ptr<I3RecoResultSingleTrack>' requested
+private/linefit/I3LineFit.cxx:190: error: conversion from `I3LineFitTrack*' to 
+   non-scalar type `roost::shared_ptr<I3LineFitTrack>' requested
+@endverbatim
+
+Oh man.  OK here's how to deal with these things.  Always deal with
+the first error first.  Often later errors are just domino-effect
+from the first.
+
+This is a type-conversion error, of the form 
+@verbatim
+cannot convert `SOMETHING' from `SOMETYPE' to `SOMEOTHERTYPE'
+@endverbatim
+and in this case the SOMETHING is an utter mess.  
+
+Now look back at that error and find the words @em convert, @em from,
+and @em to. These conversion errors are the price you pay for
+type-safety.  If they weren't checked now, you'd have to wait for
+runtime, and then they can be much harder to figure out, as they can
+cause random crashes and stuff.  (The java guys are rolling their eyes
+about now.)
+
+The from type and the to type are easy to see, though.  From @c
+roost::shared_ptr<I3DataReadout> to @c I3AMANDAAnalogReadout.  
+
+We also know what line it is on.  Line 136:
+
+@code 
+I3AMANDAAnalogReadout& readout = *(I3AMANDAAnalogReadout*) 
+  (*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"];
+@endcode
+
+It's not so hard to understand that this is a conversion error, since
+we're assigning from one thing to another, and we're casting, and it
+is not so hard to see where the "from" and "to" types are.
+
+@code
+*(I3AMANDAAnalogReadout*)
+@endcode
+is a C-style cast and then a dereference.  C-style casts are
+deprecated, as they are a major source of bugs and are very hard to
+find in code. This particular statement does a dangerous c-style cast
+and then dereferences the pointer without even checking to see if it
+is null, which, if the later part of the statement,
+@code
+  (*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"];
+@endcode
+returns null, could just cause an immediate crash, goodbye. Anyway, if
+that statement returns nothing, we want to catch it in our code and
+act accordingly. 
+
+@todo  Explain how to dump whatever @em is in the contianer  on our way
+out, for debugging purposes.
+
+@par Guideline:
+Never do *(I3SomeType*).    
+Use a C++ style cast if you must cast, and check the return before you
+dereference it.
+
+Before we start breaking this statement up, let's get an overview of
+what is happening here.  We are inside a loop:
+@code 
+for (iter = event.GetOMResponseMap().begin();
+     iter != event.GetOMResponseMap().end(); 
+     iter++) 
+{
+
+  I3AMANDAAnalogReadout& readout = *(I3AMANDAAnalogReadout*) 
+    (*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"];
+
+  // do something with readout
+}
+@endcode
+
+and since we're trusting the STL to help us iterate through our map,
+we can be sure that we're going to get a valid iterator each time
+through the loop.  But if we break up that statement into its
+components lets see how many things we are trying to do at once here.
+
+@li Dereference our iterator.  The iterator is defined about 15 lines
+up from the top of the loop, so it is not immediately obvious what
+type of iterator it is, unless we happen to know exactly what @c
+event.GetOMResponseMap().begin() is.
+@code
+*iter
+@endcode
+
+@li Access the member "second"  (what type is second?)
+@code
+(*iter).second
+@endcode
+which could anyway be done with the terser but just as readable @c
+iter->second.
+
+@li Dereference second  (what type is that again?)
+@code
+(*iter).second->
+@endcode
+
+@li Call a member function @c GetDataReadoutDict() 
+@code
+(*iter).second->GetDataReadoutDict()
+@endcode
+
+@li Apply @c operator[] to this thing (whose exact type we cannot tell
+from this statement(5)
+@code
+(*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"]
+@endcode
+
+@li Cast that, c-style, to an @c I3AMANDAAnalogReadout* 
+@code
+(I3AMANDAAnalogReadout*)(*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"]
+@endcode
+
+@li Dereference the casted pointer without checking
+@code
+*(I3AMANDAAnalogReadout*)(*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"]
+@endcode
+
+@li Construct a reference to an I3AMANDAAnalogReadout with it.
+I3AMANDAAnalogReadout& readout = *(I3AMANDAAnalogReadout*)
+(*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"]
+
+Well that's a lot.  And in the middle of that somewhere we have this
+error.
+
+Let's take it in steps, check out pointers, and show what types we're
+dealing with as we go.
+
+Let's look again at the whole thing and put the iterator right at the
+top of the loop:
+
+@code
+for (I3OMResponseMap::iter = event.GetOMResponseMap().begin();
+     iter != event.GetOMResponseMap().end(); 
+     iter++) 
+@endcode
+OK, but that's real long and what if that function @c GetOMResponseMap tells me to go
+jump in a lake or something?
+
+@code
+I3OMResponseMap &om_map = event.GetOMResponseMap();
+for (I3OMResponseMap::iter = om_map.begin(); 
+     iter != om_map.end(); 
+     ++iter)
+{
+  I3AMANDAAnalogReadout& readout = *(I3AMANDAAnalogReadout*)
+    (*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"]
+}
+@endcode
+
+This way we could check to see if @c om_map is empty, for instance:
+
+@code
+I3OMResponseMap &om_map = event.GetOMResponseMap();
+
+if (om_map.empty())
+  log_fatal("omg omg omg");  //assume we have a logging package
+
+for (I3OMResponseMap::iter = om_map.begin(); 
+     iter != om_map.end(); 
+     ++iter)
+{
+  I3AMANDAAnalogReadout& readout = *(I3AMANDAAnalogReadout*)
+    (*iter).second->GetDataReadoutDict()["AMANDAAnalogReadout"]
+}
+@endcode
+
+OK, what is the type of @c (*iter).second?  We look at the doxygen
+docs or the header file for @c I3OMResponseMap, and see that it is @c
+I3OMResponsePtr.  Let's break that out.
+
+@code
+I3OMResponseMap &om_map = event.GetOMResponseMap();
+
+if (om_map.empty())
+  log_fatal("omg omg omg");
+
+for (I3OMResponseMap::iter = om_map.begin(); 
+     iter != om_map.end(); 
+     ++iter)
+{
+  I3OMResponsePtr omr_p = iter->second;
+
+  if (!omr_p) 
+    log_fatal("I have no om response!"); // assume logging package
+
+  I3AMANDAAnalogReadout& readout = *(I3AMANDAAnalogReadout*)
+    omr_p->GetDataReadoutDict()["AMANDAAnalogReadout"]
+}
+@endcode
+
+Now the I3OMResponse has a function @c GetDataReadoutDict that returns
+a reference to its internal @c I3DataReadoutDict.  This is not going
+to fail, since we already have a pointer which we have checked to an
+object that contains an I3DataReadoutDict as a member variable.  But
+if you break it up, you show what you're getting at each step and what
+their types are, so we go for it.
+
+@code
+I3OMResponseMap &om_map = event.GetOMResponseMap();
+
+if (om_map.empty())
+  log_fatal("omg omg omg");
+
+for (I3OMResponseMap::iter = om_map.begin(); 
+     iter != om_map.end(); 
+     ++iter)
+{
+  I3OMResponsePtr omr_p = iter->second;
+
+  if (!omr_p) log_fatal("I have no om response!");
+
+  I3DataReadoutDict &dict = omr_p->GetDataReadoutDict();
+
+  I3AMANDAAnalogReadout& readout = *(I3AMANDAAnalogReadout*)
+    dict["AMANDAAnalogReadout"]
+}
+@endcode
+
+Now if we look further down in the loop to see how we ill actually use
+the @c readout that we are creating a pointer to, we see only 
+@code
+	Double_t time = readout.GetFirstLE();
+@endcode
+and so there appears to be little reason to create a reference for one
+statement which could just as easily be done through a pointer.  We
+remove the cast and dereference of the return value of the lookup from
+"dict", using the standard @c -Ptr typedef, which makes our code look
+like this:
+
+@code
+I3OMResponseMap &om_map = event.GetOMResponseMap();
+
+if (om_map.empty())
+  log_fatal("omg omg omg");
+
+for (I3OMResponseMap::iter = om_map.begin(); 
+     iter != om_map.end(); 
+     ++iter)
+{
+  I3OMResponsePtr omr_p = iter->second;
+
+  if (!omr_p) 
+    log_fatal("I have no om response!");
+
+  I3DataReadoutDict &dict = omr_p->GetDataReadoutDict();
+
+  I3AMANDAAnalogReadoutPtr readout = dict["AMANDAAnalogReadout"]
+  if (!readout) 
+    log_fatal("omg i have no readout.");
+}
+@endcode
+
+Then we try to compile again.  Now I get the error
+
+@verbatim
+../tools/Linux-i386/roost/public/roost/shared_ptr.hpp: In constructor `
+   roost::shared_ptr<T>::shared_ptr(const roost::shared_ptr<Y>&) [with Y = 
+   I3DataReadout, T = I3AMANDAAnalogReadout]':
+private/linefit/I3LineFit.cxx:144:   instantiated from here
+../tools/Linux-i386/roost/public/roost/shared_ptr.hpp:113: error: invalid 
+   conversion from `I3DataReadout* const' to `I3AMANDAAnalogReadout*'
+@endverbatim
+and @c I3LineFit.cxx line 144 says:
+@code
+I3AMANDAAnalogReadoutPtr readout = dict["AMANDAAnalogReadout"];
+@endcode
+
+The compiler complains of conversion having something to do with @c
+shared_ptr from @c I3DataReadout* to @c I3AMANDAAnalogReadout*.
+
+This makes sense...  we're asking @c dict, an @c I3DataReadoutDict to
+give us something, and we try to assign it to @c readout, which is an
+@c I3AMANDAAnalogReadoutPtr.  And inside the smart pointer, as it
+tries to do this conversion comes the error.
+
+The nature of the error of course is that you cannot assign a pointer-to-base to
+a pointer-to-derived.  In this case, though, we know (or think we
+know) that what comes out will in fact be of the desination type.  So
+we use the @c dynamic_pointer_cast<destinationtype> cast to tell it
+to make this conversion for us, but also to check for use at runtime
+that what is there is really what we hope it will be.
+
+that looks like this.  
+@code
+I3AMANDAAnalogReadoutPtr readout = 
+  roost::dynamic_pointer_cast<I3AMANDAAnalogReadout>(dict["AMANDAAnalogReadout"]);
+@endcode
+
+You can reduce the typing if you tell the compiler that you want to
+use what is in the @c roost namespace:  At the top of the file goes
+@code
+using namespace roost;
+@endcode
+and your cast changes to
+@code
+I3AMANDAAnalogReadoutPtr readout = 
+  dynamic_pointer_cast<I3AMANDAAnalogReadout>(dict["AMANDAAnalogReadout"]);
+@endcode
+
+Yeah it's long.  Now, if the @c dict really gave us back an amanda
+pointer @c readout will have something in it, otherwise it will be
+null.  We check it and proceed.
+
+These downcasts are big and hard to type for a reason.  They cause
+bugs.  We have chosen to use them in a semi-controlled fashion, but
+the syntax is visible for a reason.
+
+More information on C++ casts are available at @ref sharedpointer and
+at a C++ reference near you.
+
+*/
