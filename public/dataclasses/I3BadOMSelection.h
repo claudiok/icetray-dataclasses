@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.3 2004/11/23 20:57:25 deyoung Exp $
+ *  $Id: I3BadOMSelection.h,v 1.4 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/11/23 20:57:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author deyoung
  */
 
@@ -33,7 +33,7 @@ public:
       log_warn("Overwriting list of bad OMs.");
       fBadOMs.Clear();
     }
-    for (Int_t i = 0; i < list.Size(); ++i) {
+    for (unsigned i = 0; i < list.Size(); ++i) {
       fBadOMs.Add(list[i]);
     }
   };
@@ -48,7 +48,7 @@ public:
    * true OMs, false otherwise.
    */
   virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) {
-    for (Int_t i = 0; i < fBadOMs.size(); i++) {      
+    for (unsigned i = 0; i < fBadOMs.size(); i++) {      
       if (element.first == fBadOMs[i]) {
 	return kFALSE;
       }

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.19 2004/10/20 14:57:41 dule Exp $
+ * $Id: I3Starting.h,v 1.20 2004/11/28 06:40:28 troy Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/10/20 14:57:41 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/11/28 06:40:28 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -23,7 +23,8 @@
  * But if you mess with StopX, StopY, StopZ or StopT, you get a fatal error
  *
  */
-class I3Starting{
+class I3Starting 
+{
  private:
   I3Position fStartPos;
   I3Direction fDir;
@@ -31,6 +32,8 @@ class I3Starting{
   //Double_t fZenith;
   //Double_t fAzimuth;
  public:
+
+  virtual ~I3Starting() {}
   /**
    * indicates that the particle is starting
    */
@@ -107,7 +110,9 @@ class I3Starting{
    * sets the direction of the track
    */
   void SetDir(Double_t x, Double_t y, Double_t z) 
-    {fDir.SetDirection(x,y,z);}
+    {
+      fDir.SetDirection(x,y,z);
+    }
 
   /**
    * gives the zenith of the track

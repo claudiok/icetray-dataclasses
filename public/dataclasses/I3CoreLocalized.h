@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.6 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3CoreLocalized.h,v 1.7 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author pretz
  */
 #ifndef I3CORELOCALIZED_H
@@ -20,9 +20,13 @@
  */
 class I3CoreLocalized 
 {
+
   Double_t fCoreT;
   I3Position fCorePos; //trying to make compatible with I3Position (dule)
+
  public:
+
+  virtual ~I3CoreLocalized() {}
   /**
    * indicates that the core position is known
    */

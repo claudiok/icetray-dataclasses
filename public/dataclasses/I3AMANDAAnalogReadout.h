@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.8 2004/11/18 21:55:49 ehrlich Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.9 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/11/18 21:55:49 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author pretz
  *
  */
@@ -101,11 +101,11 @@ public:
 	o << "Amplitude: " << fAmp << "\n"
 	  << "Number of Pulses: " << fLEs.size() << "\n"
 	  << "Leading Edges: ";
-	for (Int_t i = 0; i < fLEs.size(); i++) {
+	for (unsigned i = 0; i < fLEs.size(); i++) {
 	    o << fLEs[i] << " ";
 	}
 	o << "\nTOTs: ";
-	for (Int_t i = 0; i < fLEs.size(); i++) {
+	for (unsigned i = 0; i < fLEs.size(); i++) {
 	    o << fTOTs[i] << " ";
 	}
 	o << "\n";

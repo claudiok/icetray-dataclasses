@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.20 2004/10/26 04:00:58 dule Exp $
+ * $Id: I3Contained.h,v 1.21 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/10/26 04:00:58 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -29,7 +29,11 @@ class I3Contained
   //Double_t fZenith;
   //Double_t fAzimuth;
   Double_t fLength;
+
  public:
+
+  virtual ~I3Contained() {}
+
   /**
    * indicates that the track is starting
    */

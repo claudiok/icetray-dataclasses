@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.20 2004/10/20 14:45:53 dule Exp $
+ * $Id: I3Infinite.h,v 1.21 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/10/20 14:45:53 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author 
  */
 
@@ -20,7 +20,8 @@
  * @brief The geometrical part of an I3Track implementation, representing an 
  * infinite track.
  */
-class I3Infinite{
+class I3Infinite
+{
  private:
   I3Position fPos;
   I3Direction fDir;
@@ -28,6 +29,8 @@ class I3Infinite{
   //Double_t fZenith;
   //Double_t fAzimuth;
  public:
+
+  virtual ~I3Infinite() {}
   /**
    * indicates that this is not a starting track
    */ 

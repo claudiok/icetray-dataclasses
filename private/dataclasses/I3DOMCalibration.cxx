@@ -1,3 +1,7 @@
+//
+//  $Id: I3DOMCalibration.cxx,v 1.5 2004/11/28 06:40:27 troy Exp $
+//
+//
 #include "dataclasses/I3DOMCalibration.h"
 #include "dataclasses/I3DataExecution.h"
 
@@ -110,5 +114,6 @@ Double_t I3DOMCalibration::GetSamplingRate(Int_t id)
     default:	
 	I3DataExecution::Instance().Fatal("Sampling rate not found for ATWD ID in I3DOMCalibration");
     }
+    return 0;
 }
 

@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3TankHit.h,v 1.5 2004/11/28 06:40:28 troy Exp $
     @file I3TankHit.h
-    @version $Revision: 1.4 $
+    @version $Revision: 1.5 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -46,7 +46,7 @@ class I3TankHit : public TObject {
    * constructor
    */
   I3TankHit(UShort_t tank_number = 0) :
-    fTime(0), fSignal(0), fTankNumber(tank_number) {}
+    fTankNumber(tank_number), fTime(0), fSignal(0) {}
   
   /**
    * destructor

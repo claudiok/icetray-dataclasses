@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.7 2004/09/07 22:15:47 dule Exp $
+ * $Id: I3Directional.h,v 1.8 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/09/07 22:15:47 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
@@ -24,6 +24,8 @@ class I3Directional
   //Double_t fZenith;
   //Double_t fAzimuth;
  public:
+
+  virtual ~I3Directional() {}
   /**
    * indicates that this cascade has a direction
    */

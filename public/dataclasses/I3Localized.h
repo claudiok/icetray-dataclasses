@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.6 2004/08/31 13:30:55 pretz Exp $
+ * $Id: I3Localized.h,v 1.7 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 13:30:55 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author pretz
  *
  */
@@ -23,6 +23,8 @@ class I3Localized{
   Double_t fT;
   I3Position fPos;
  public:
+
+  virtual ~I3Localized() {}
   /**
    * indicates that this class has a localization
    */

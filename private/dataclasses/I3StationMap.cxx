@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.cxx,v 1.2 2004/09/17 21:12:19 niessen Exp $
+ * $Id: I3StationMap.cxx,v 1.3 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3StationMap
- * @version $Revision: 1.2 $
- * @date $Date: 2004/09/17 21:12:19 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author niessen Thu Sep  2 16:38:31 EDT 2004 
  */
 
@@ -25,10 +25,10 @@ void I3StationMap::GoFirstTank () {
 
 }
 
+#if 0
 // something to loop over tanks
 I3TankGeo &I3StationMap::GetNextTank () {
 
-#if 0
   static I3StationGeo::iterator fCurrentStation (this->begin ());
   static I3SurfModuleGeo::iterator fCurrentSurfModule (fCurrentStation->second->begin ());
 
@@ -49,6 +49,7 @@ I3TankGeo &I3StationMap::GetNextTank () {
       return *surf_module;
     }
   }
-#endif
-       
+
+
 }
+#endif

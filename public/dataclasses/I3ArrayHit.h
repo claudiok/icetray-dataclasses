@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHit.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3ArrayHit.h,v 1.6 2004/11/28 06:40:27 troy Exp $
     @file I3ArrayHit.h
-    @version $Revision: 1.5 $
+    @version $Revision: 1.6 $
     @date Fri Jul  9 10:50:16 EDT 2004 
     @author rulrich
 */
@@ -63,6 +63,7 @@ class I3ArrayHit : public TObject,
 inline ostream& operator<<(ostream& o, const I3ArrayHit& hit)
 {
   hit.ToStream(o);
+  return o;
 }
 
 /**

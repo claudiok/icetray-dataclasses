@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.18 2004/10/20 14:45:53 dule Exp $
+ * $Id: I3Stopping.h,v 1.19 2004/11/28 06:40:28 troy Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/10/20 14:45:53 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/11/28 06:40:28 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -22,7 +22,8 @@
  * But if you mess with StartX, StartY, StartZ or StartT, you get a fatal error
  *
  */
-class I3Stopping{
+class I3Stopping
+{
  private:
   I3Position fStopPos;
   I3Direction fDir;
@@ -30,6 +31,7 @@ class I3Stopping{
   //Double_t fZenith;
   //Double_t fAzimuth;
  public:
+  virtual ~I3Stopping() {}
   /**
    * indicates that the particle is stopping
    */

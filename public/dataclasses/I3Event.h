@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.40 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3Event.h,v 1.41 2004/11/28 06:40:27 troy Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.40 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.41 $
+ * @date $Date: 2004/11/28 06:40:27 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -33,6 +33,8 @@
  * data.  It also contains an I3Bag of user-defined information.
  */
 
+// class boost::serialization::access;
+
 class I3Event : public TObject
 {
   I3TriggerDict    fTriggerDict; //||
@@ -42,6 +44,15 @@ class I3Event : public TObject
   I3RecoResultDict fRecoResultDict; //||
   I3Bag            fBag; //||
   
+//  friend class boost::serialization::access;
+//
+//  template <class Archive>
+//  void serialize(Archive &ar, const unsigned int version)
+//  {
+//    ar & make_nvp("I3OMResponseMap", fOMResponseMap);
+
+//  }
+
  public:
   /**
    * default constructor

@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.cxx,v 1.1 2004/07/13 15:37:53 niessen Exp $
+    $Id: I3StationHit.cxx,v 1.2 2004/11/28 06:40:27 troy Exp $
     @file I3StationHit.C
-    @version $Revision: 1.1 $
+    @version $Revision: 1.2 $
     @date Fri Jul  9 21:55:18 EDT 2004
     @author rulrich
 */
@@ -20,6 +20,7 @@ I3StationHit::I3StationHit (const I3StationHit &) {}
 // assignment
 const I3StationHit& I3StationHit::operator= (const I3StationHit &)
 {
+  return *this;
 }
 
 /***************************************************************/
