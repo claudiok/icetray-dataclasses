@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.10 2004/07/13 15:37:54 niessen Exp $
+ * $Id: I3TopGeometry.h,v 1.11 2004/07/13 16:24:52 niessen Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/07/13 15:37:54 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/07/13 16:24:52 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -20,7 +20,7 @@
 /**
  * @brief This is an collection of tanks.
  */
-class I3TopGeometry : public TObject, public VecPointainerPolicy<I3TopStationGeoPtr>::ThePolicy
+class I3TopGeometry : public TObject, public VectorPolicy<I3TopStationGeoPtr>::ThePolicy
 {
  public:
 

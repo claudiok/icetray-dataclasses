@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.89 2004/07/13 15:37:53 niessen Exp $
-// $Revision: 1.89 $
-// $Date: 2004/07/13 15:37:53 $
+// $Id: LinkDef.h,v 1.90 2004/07/13 16:24:52 niessen Exp $
+// $Revision: 1.90 $
+// $Date: 2004/07/13 16:24:52 $
 //
 
 #ifdef __CINT__
@@ -172,44 +172,44 @@
 // new IceTop stuff, PN
 #pragma link C++ class I3TopStationGeo+;
 #pragma link C++ class I3TopStationGeo::iterator+;
-#pragma link C++ typedef VecPointainerPolicy<I3TankGeoPtr>::ThePolicy;
-#pragma link C++ class VecPointainerPolicy<I3TankGeoPtr>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3TankGeoPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3TankGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!= (const I3TopStationGeo::iterator &, const I3TopStationGeo::iterator &);
 #pragma link C++ typedef I3TopStationGeoPtr;
 
 #pragma link C++ class I3TopGeometry+;
 #pragma link C++ class I3TopGeometry::iterator+;
-#pragma link C++ typedef VecPointainerPolicy<I3TopStationGeoPtr>::ThePolicy;
-#pragma link C++ class VecPointainerPolicy<I3TopStationGeoPtr>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3TopStationGeoPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3TopStationGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3TopGeometry::iterator&, const I3TopGeometry::iterator&);
 
 #pragma link C++ class I3MCTankHit+;
 #pragma link C++ class I3MCTankHit::iterator+;
-#pragma link C++ typedef VecPointainerPolicy<I3MCParticleEventPtr>::ThePolicy;
-#pragma link C++ class VecPointainerPolicy<I3MCParticleEventPtr>::ThePolicy;
+#pragma link C++ typedef VectorPolicy<I3MCParticleEventPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3MCParticleEventPtr>::ThePolicy;
 #pragma link C++ function operator!= (const I3MCTankHit::iterator&, const I3MCTankHit::iterator&);
 #pragma link C++ typedef I3MCTankHitPtr;
 
 #pragma link C++ class I3StationHit+;
 #pragma link C++ class I3StationHit::iterator+;
-#pragma link C++ typedef VecPointainerPolicy<I3TankHitPtr>::ThePolicy;
-#pragma link C++ class VecPointainerPolicy<I3TankHitPtr>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3TankHitPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3TankHitPtr>::ThePolicy+;
 #pragma link C++ function operator!= (const I3StationHit::iterator &,
                                       const I3StationHit::iterator &);
 #pragma link C++ typedef I3StationHitPtr;
 
 #pragma link C++ class I3ArrayHit+;
 #pragma link C++ class I3ArrayHit::iterator+;
-#pragma link C++ typedef VecPointainerPolicy<I3StationHitPtr>::ThePolicy;
-#pragma link C++ class VecPointainerPolicy<I3StationHitPtr>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3StationHitPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3StationHitPtr>::ThePolicy+;
 #pragma link C++ function operator!= (const I3ArrayHit::iterator &,
                                       const I3ArrayHit::iterator &);
 #pragma link C++ typedef I3ArrayHitPtr;
 
 #pragma link C++ class I3ArrayHitData+;
 #pragma link C++ class I3ArrayHitData::iterator+;
-#pragma link C++ typedef MapPointainerPolicy<I3ArrayHitPtr>::ThePolicy;
-#pragma link C++ class MapPointainerPolicy<I3ArrayHitPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<string, I3ArrayHitPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string, I3ArrayHitPtr>::ThePolicy+;
 #pragma link C++ function operator!= (const I3ArrayHitData::iterator &,
                                       const I3ArrayHitData::iterator &);
 #pragma link C++ typedef I3ArrayHitDataPtr;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopCore.h,v 1.1 2004/07/13 15:37:53 niessen Exp $
+ * $Id: I3RecoResultTopCore.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
  *
  * @file I3RecoResultTopCore.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/13 15:37:53 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/13 16:24:52 $
  * @author Peter Niessen
  */
 
@@ -28,7 +28,7 @@ class I3RecoResultTopCore : public I3RecoResult
   /**
    * constructor
    */
-  I3RecoResultTopCore () {fShowerCore = NULL;}
+  I3RecoResultTopCore () { fShowerCore = NULL; }
 
   /**
    * destructor
@@ -76,8 +76,8 @@ class I3RecoResultTopCore : public I3RecoResult
   
   private:
   // copy and assignment are private
-  I3RecoResultTopCore (const I3RecoResultTopCore& rhs);
-  const I3RecoResultTopCore& operator= (const I3RecoResultTopCore&);
+  //I3RecoResultTopCore (const I3RecoResultTopCore& rhs);
+  //const I3RecoResultTopCore& operator= (const I3RecoResultTopCore&);
 
   // ROOT macro
   ClassDef(I3RecoResultTopCore, 1);

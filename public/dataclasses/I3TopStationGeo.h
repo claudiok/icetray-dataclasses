@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopStationGeo.h,v 1.1 2004/07/13 15:37:54 niessen Exp $
+ * $Id: I3TopStationGeo.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
  *
  * @file I3TopStationGeo.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/13 15:37:54 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/13 16:24:52 $
  * @author PN/RU Tue Jun 22 10:30:16 EDT 2004
  */
 #ifndef __I3TankStationGEO_H_
@@ -25,7 +25,7 @@ using namespace std;
  * @brief Class which describes a icetop station
  * @todo needs the i3tankgeo a z coordinate
  */
-class I3TopStationGeo : public TObject, public VecPointainerPolicy<I3TankGeoPtr>::ThePolicy
+class I3TopStationGeo : public TObject, public VectorPolicy<I3TankGeoPtr>::ThePolicy
 {
   UShort_t fStationID;
 

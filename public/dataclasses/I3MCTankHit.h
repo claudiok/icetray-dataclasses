@@ -1,7 +1,7 @@
 /**
-    $Id: I3MCTankHit.h,v 1.1 2004/07/13 15:37:53 niessen Exp $
+    $Id: I3MCTankHit.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
     @file I3MCTankHit.h
-    @version $Revision: 1.1 $
+    @version $Revision: 1.2 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -21,7 +21,7 @@
  * @brief The container for all the Array Hit-related data in the event
  *
  */
-class I3MCTankHit : public I3TankHit, public VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy
+class I3MCTankHit : public I3TankHit, public VectorPolicy<I3ObservableParticlePtr>::ThePolicy
 {
 
  public:

@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHit.h,v 1.1 2004/07/13 15:37:53 niessen Exp $
+    $Id: I3ArrayHit.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
     @file I3ArrayHit.h
-    @version $Revision: 1.1 $
+    @version $Revision: 1.2 $
     @date Fri Jul  9 10:50:16 EDT 2004 
     @author rulrich
 */
@@ -23,7 +23,8 @@
  * Charge, Waveforms ...)
  */
 class I3ArrayHit : public TObject, 
-	 public VecPointainerPolicy<I3StationHitPtr>::ThePolicy  {
+	 //public VecPointainerPolicy<I3StationHitPtr>::ThePolicy  {
+	 public VectorPolicy<I3StationHitPtr>::ThePolicy  {
 
  public:
   /**
