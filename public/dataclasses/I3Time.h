@@ -172,9 +172,41 @@ class I3Time : public TObject
    */
   static std::string ToString(Weekday w);
  private:
-  unsigned int julianDay_;
-  unsigned int sec_;
-  double ns_;
+  struct DaqTime
+  {
+    unsigned int year;
+    long long int time;
+  };
+
+  struct UTCTime
+  {
+    unsigned int year;
+    unsigned int sec;
+    double ns;
+  };
+
+  struct JulianTime
+  {
+    unsigned int day;
+    unsigned int sec;
+    double ns;
+  };
+  
+  typedef JulianTime ModJulianTime;
+
+  static UTCTime Daq2UTC(DaqTime t);
+
+  static JulianTime Daq2Julian(DaqTime t);
+
+  static ModJulianTime Daq2ModJulian(DaqTime t);
+
+  static DaqTime Julian2Daq(JulianTime t);
+  
+  static DaqTime ModJulian2Daq(ModJulianTime t);
+
+  unsigned int year_;
+  long long int daqTime_;
+
   ClassDef(I3Time,1);
 };
 

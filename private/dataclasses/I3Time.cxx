@@ -11,6 +11,16 @@ extern "C"
 using std::cout;
 using std::endl;
 
+UTinstant UTinstantiate(unsigned int julian,unsigned int sec)
+{
+  UTinstant to_return;
+  to_return.j_date = 
+    (double)julian + 
+    (double)sec / (3600. * 24.);
+  CalDate(&to_return);
+  return to_return;
+}
+
 UTinstant UTinstantiate(const I3Time& time)
 {
   UTinstant to_return;
@@ -23,9 +33,8 @@ UTinstant UTinstantiate(const I3Time& time)
 
 I3Time::I3Time()
 {
-  julianDay_ = 0;
-  sec_ = 0;
-  ns_ = 0;
+  year_ = 0;
+  daqTime_ = 0;
 }
 
 // I3Time::I3Time(int year,
@@ -48,130 +57,101 @@ I3Time::I3Time()
 void I3Time::SetDaqTime(int year, 
 			long long int daqTime)
 {
-  // This is from Dima.  Thanks.
-  long long h_day, h_sec, h_ns;
-  
-  h_day=daqTime/(24*3600*(long long)1.e10);
-  daqTime%=(24*3600*(long long)1.e10);
-  h_sec=daqTime/((long long)1.e10);
-  daqTime%=((long long)1.e10);
-  h_ns=daqTime/((long long)10);
-  daqTime%=((long long)10);
-  
-  UTinstant startOfYear;
-  startOfYear.year = year;
-  startOfYear.month=1;
-  startOfYear.day=1;
-  startOfYear.i_hour=0;
-  startOfYear.i_minute=0;
-  startOfYear.second=0;
-  
-  double julianStartOfYear = JulDate(&startOfYear);
-  
-  UTinstant thisInstant;
-  thisInstant.j_date = 
-    julianStartOfYear + (double)h_day + (double) h_sec/(60. *60. * 24.);
-  // printf("calculated julian date for this time: %0.8f\n",instant_.j_date);
-  //  CalDate(&instant_);
-  
-  julianDay_ = (unsigned int)thisInstant.j_date;
-  
-  assert(h_sec <= 60 * 60 * 24);
-  
-  // adjusting for the fact that Julian days start at noon
-  if(h_sec < 60 * 60 * 12)
-    h_sec += 60 * 60 * 12;
-  else
-    h_sec -= 60 * 60 * 12;
-  
-  sec_ = h_sec;
-  ns_ = h_ns;
+  year_ = year;
+  daqTime_ = daqTime;
 }
 
 void I3Time::SetJulianTime(unsigned int julianDay,
 			   unsigned int sec,
 			   double ns)
 {
-  julianDay_ = julianDay;
-  sec_ = sec;
-  ns_ = ns;
+  JulianTime jul;
+  jul.day = julianDay;
+  jul.sec = sec;
+  jul.ns = ns;
+  DaqTime daq = Julian2Daq(jul);
+  year_ = daq.year;
+  daqTime_ = daq.time;
 }
 
 void I3Time::SetModJulianTime(unsigned int modJulianDay,
-			   unsigned int sec,
-			   double ns)
+			      unsigned int sec,
+			      double ns)
 {
-  if(sec < 60 * 60 * 12)
-    {
-      julianDay_ = modJulianDay + 2400000;
-      sec_ = sec + 60 * 60 * 12;
-    }
-  else
-    {
-      julianDay_ = modJulianDay + 2400000;
-      sec_ = sec - 60 * 60 * 12;
-    }
-  ns_ = ns;
+#warning "Yet to be implemented"
+  //   if(sec < 60 * 60 * 12)
+  //     {
+  //       julianDay_ = modJulianDay + 2400000;
+  //       sec_ = sec + 60 * 60 * 12;
+  //     }
+  //   else
+  //     {
+  //       julianDay_ = modJulianDay + 2400000;
+  //       sec_ = sec - 60 * 60 * 12;
+  //     }
+  //   ns_ = ns;
   
 }
 
 int I3Time::GetUTCYear() const
 {
-  UTinstant thisInstant = UTinstantiate(*this);
-  return thisInstant.year;
+  return year_;
 }
 
 long long int I3Time::GetUTCDaqTime() const
 {
-  UTinstant thisInstant = UTinstantiate(*this);
-
-  long long int to_return =  (long long int)ns_ * 10;
-  
-  to_return += (long long int)1e10 * sec_;
-
-  to_return += 
-    (long long int) 3600 * 
-    (long long int)24 * 
-    (long long)1e10 * 
-    (long long)thisInstant.day_of_year;
-  
-  return to_return;
+  return daqTime_;
 }
 
 unsigned int I3Time::GetJulianDay() const
 {
-  return julianDay_;
+  DaqTime t;
+  t.time = daqTime_;
+  t.year = year_;
+  JulianTime jul = Daq2Julian(t);
+  return jul.day;
 }
 
 unsigned int I3Time::GetJulianSec() const
 {
-  return sec_;
+  DaqTime t;
+  t.time = daqTime_;
+  t.year = year_;
+  JulianTime jul = Daq2Julian(t);
+  return jul.sec;
 }
 
 double I3Time::GetJulianNanoSec() const
 {
-  return ns_;
+  DaqTime t;
+  t.time = daqTime_;
+  t.year = year_;
+  JulianTime jul = Daq2Julian(t);
+  return jul.ns;
 }
 
 unsigned int I3Time::GetModJulianDay() const
 {
-  if(sec_ > 60 * 60 * 12)
-    return julianDay_ - 2400000;
-  else
-    return julianDay_ - 2400001;
+#warning "Yet to be implemented"
+  //   if(sec_ > 60 * 60 * 12)
+  //     return julianDay_ - 2400000;
+  //   else
+  //     return julianDay_ - 2400001;
 }
 
 unsigned int I3Time::GetModJulianSec() const
 {
-  if(sec_ < 60 * 60 * 12)
-    return sec_ + 60 * 60 * 12;
-  else
-    return sec_ - 60 * 60 * 12;
+#warning "Yet to be implemented"
+  //   if(sec_ < 60 * 60 * 12)
+  //     return sec_ + 60 * 60 * 12;
+  //   else
+  //     return sec_ - 60 * 60 * 12;
 }
 
 double I3Time::GetModJulianNanoSec() const
 {
-  return ns_;
+#warning "Yet to be implemented"
+  //   return ns_;
 }
 
 I3Time::Month I3Time::GetUTCMonth() const
@@ -240,15 +220,17 @@ unsigned int I3Time::GetUTCDayOfMonth() const
 
 unsigned int I3Time::GetUTCSec() const
 {
-  if(sec_ < 60 * 60 * 12)
-    return sec_ + 60 * 60 * 12;
-  else
-    return sec_ - 60 * 60 * 12;
+  long long thetime = daqTime_;
+  thetime%=(24*3600*(long long)1.e10);
+  return thetime/((long long)1.e10);
 }
 
 double I3Time::GetUTCNanoSec() const
 {
-  return ns_;
+  long long thetime = daqTime_;
+  thetime%=(24*3600*(long long)1.e10);
+  thetime%=((long long)1.e10);
+  return thetime/((long long)10);
 }
 
 std::string I3Time::ToString(Month m)
@@ -305,4 +287,70 @@ std::string I3Time::ToString(Weekday w)
     default:
       return "BadWeekday";
     }
+}
+
+I3Time::JulianTime I3Time::Daq2Julian(DaqTime t)
+{
+  JulianTime to_return;
+
+  // This is from Dima.  Thanks.
+  long long h_day, h_sec, h_ns;
+  
+  h_day=t.time/(24*3600*(long long)1.e10);
+  t.time%=(24*3600*(long long)1.e10);
+  h_sec=t.time/((long long)1.e10);
+  t.time%=((long long)1.e10);
+  h_ns=t.time/((long long)10);
+  t.time%=((long long)10);
+  
+  UTinstant startOfYear;
+  startOfYear.year = t.year;
+  startOfYear.month=1;
+  startOfYear.day=1;
+  startOfYear.i_hour=0;
+  startOfYear.i_minute=0;
+  startOfYear.second=0;
+  
+  double julianStartOfYear = JulDate(&startOfYear);
+  
+  UTinstant thisInstant;
+  thisInstant.j_date = 
+    julianStartOfYear + (double)h_day + (double) h_sec/(60. *60. * 24.);
+  // printf("calculated julian date for this time: %0.8f\n",instant_.j_date);
+  //  CalDate(&instant_);
+  
+  to_return.day = (unsigned int)thisInstant.j_date;
+  
+  assert(h_sec <= 60 * 60 * 24);
+  
+  // adjusting for the fact that Julian days start at noon
+  if(h_sec < 60 * 60 * 12)
+    h_sec += 60 * 60 * 12;
+  else
+    h_sec -= 60 * 60 * 12;
+  
+  to_return.sec = h_sec;
+  to_return.ns = h_ns;  
+
+  return to_return;
+}
+
+I3Time::DaqTime I3Time::Julian2Daq(JulianTime t)
+{
+  UTinstant thisInstant = UTinstantiate(t.day,t.sec);
+
+  long long int daqTime =  (long long int)t.ns * 10;
+  daqTime += (long long int)1e10 * t.sec;
+  daqTime += 
+    (long long int) 3600 * 
+    (long long int)24 * 
+    (long long)1e10 * 
+    (long long)thisInstant.day_of_year;
+  unsigned int year = thisInstant.year;
+
+  DaqTime to_return;
+  to_return.year = year;
+  to_return.time = daqTime;
+  
+  return to_return;  
 }

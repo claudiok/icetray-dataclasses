@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.1 2005/03/30 03:42:27 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.2 2005/03/30 03:51:42 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2005/03/30 03:42:27 $
+    @version $Revision: 1.2 $
+    @date $Date: 2005/03/30 03:51:42 $
     @author pretz
 
     @todo
@@ -94,7 +94,8 @@ namespace tut
 
   void object::test<5>()
   {
-    I3Time tme(2453434,(unsigned int)(23.5 / 24. * 3600 * 24),0.);
+    I3Time tme;
+    tme.SetJulianTime(2453434,(unsigned int)(23.5 / 24. * 3600 * 24),0.);
     cout<<tme.GetUTCYear()<<endl;
     cout<<tme.GetUTCDaqTime()<<endl;
       
@@ -111,8 +112,9 @@ namespace tut
 
   void object::test<7>()
   {
-    long long int daqTime = 56081988443187970;
-    I3Time tme(2005,daqTime);
+    long long int daqTime = 560819884 * (long long)1e8 + 43187970;
+    I3Time tme;
+    tme.SetDaqTime(2005,daqTime);
 
     ensure(tme.GetUTCMonth() == I3Time::Mar);
 
