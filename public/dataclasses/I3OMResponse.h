@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.20 2004/03/10 20:21:45 pretz Exp $
+    $Id: I3OMResponse.h,v 1.21 2004/04/21 18:47:44 spencer Exp $
 
-    @version $Revision: 1.20 $
-    @date $Date: 2004/03/10 20:21:45 $
+    @version $Revision: 1.21 $
+    @date $Date: 2004/04/21 18:47:44 $
     @author
 
     @todo
@@ -18,24 +18,23 @@
 
 #include "I3DataExecution.h"
 #include "I3OMGeo.h"
-#include "I3MCHitSeries.h"
 #include "I3DataReadoutList.h"
 #include "I3RecoHitSeriesData.h"
 
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.20 2004/03/10 20:21:45 pretz Exp $
+ * $Id: I3OMResponse.h,v 1.21 2004/04/21 18:47:44 spencer Exp $
  *
  * The container for all the OMResponse-related data in the event
- * Has the monte-carlo truth, the hardware response, and the reconstructed
- * hit series'.    
- *
- * @version $Revision: 1.20 $
- * @date $Date: 2004/03/10 20:21:45 $
+ * Has the hardware response, and the reconstructed hit series'.    
+ * The Monte Carlo information is now in I3MCOMResponse.h
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/04/21 18:47:44 $
  * @author ehrlich
  * @author troy
  * @author pretz
+ * @author klein
  *
  * @todo 
  */
@@ -49,7 +48,6 @@ class I3OMResponse : public TObject
   // let us all hate root together for a moment
   I3MCHitSeries       fMCHitSeries; //||
   I3DataReadoutList   fDataReadoutList; //||
-  I3RecoHitSeriesData fRecoHitSeriesData; //||
 
  public:
   /**
@@ -72,16 +70,6 @@ class I3OMResponse : public TObject
    */
   void OMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
   
-  /**
-   * @return the MCTruth for this response as a const object
-   */
-  const I3MCHitSeries& MCHitSeries() const {return fMCHitSeries;}
-
-  /**
-   * @return the MC truth for this response as a non-const object
-   */
-  I3MCHitSeries& MCHitSeries() {return fMCHitSeries;}
-
   /**
    * @return the the hardware data for this response as a const object
    */
@@ -113,4 +101,3 @@ class I3OMResponse : public TObject
 
 typedef I3OMResponse* I3OMResponsePtr;
 #endif
-
