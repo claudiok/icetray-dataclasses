@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.11 2004/07/03 19:07:22 troy Exp $
+    $Id: StoragePolicy.h,v 1.12 2004/07/12 16:12:46 pretz Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.11 $
-    @date $Date: 2004/07/03 19:07:22 $
+    @version $Revision: 1.12 $
+    @date $Date: 2004/07/12 16:12:46 $
     @author Troy D. Straszheim
 */
 
@@ -43,12 +43,12 @@ struct VectorPolicy {
  * provided the new implementation supplies the same interface - just by
  * changing this Mapolicy class.  That's what it is here for.
  */
-template <class Stored>
+template <class Key,class Stored>
 struct MapPolicy {
   /**
    *  ThePolicy is just a typedeffed STLMapStoragePolicy
    */
-  typedef STLMapStoragePolicy<Stored> ThePolicy;
+  typedef STLMapStoragePolicy<Key,Stored> ThePolicy;
 
 };
 

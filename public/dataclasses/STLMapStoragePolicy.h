@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
+    $Id: STLMapStoragePolicy.h,v 1.9 2004/07/12 16:12:46 pretz Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.8 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/07/12 16:12:46 $
     @author Troy Straszheim
 
 */
@@ -21,12 +21,12 @@ using namespace std;
  * @brief A template which provides a restricted interface to the
  * STL map class.
  */
-template <class ElementType>
+template <class KeyType, class ElementType>
 class STLMapStoragePolicy {
 
  public:
 
-  typedef string KeyType;
+ //  typedef string KeyType;
   typedef map<KeyType,ElementType> map_type;
   typedef typename map_type::iterator iterator;
   typedef typename map_type::const_iterator const_iterator;

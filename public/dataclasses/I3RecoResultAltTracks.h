@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultAltTracks.h,v 1.4 2004/07/03 18:40:57 troy Exp $
+ * $Id: I3RecoResultAltTracks.h,v 1.5 2004/07/12 16:12:46 pretz Exp $
  *
  * @file I3RecoResultAltTracks.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/03 18:40:57 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/12 16:12:46 $
  * @author ehrlich
  */
 #ifndef I3RECORESULTALTTRACKS_H
@@ -17,7 +17,8 @@
 /**
  * @brief Reco result with several alternative solutions 
  */
-class I3RecoResultAltTracks : public I3RecoResult, public MapPolicy<I3ParticlePtr>::ThePolicy
+class I3RecoResultAltTracks : public I3RecoResult, 
+	public MapPolicy<string,I3ParticlePtr>::ThePolicy
 {
   public:
   /**

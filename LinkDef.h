@@ -83,13 +83,13 @@
 
 
 #pragma link C++ class I3RecoResultDict+;
-#pragma link C++ typedef MapPolicy<I3RecoResultPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<I3RecoResultPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<string,I3RecoResultPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3RecoResultPtr>::ThePolicy+;
 #pragma link C++ typedef I3RecoResultDictPtr;
 
 #pragma link C++ class I3DataReadoutDict+;
-#pragma link C++ typedef MapPolicy<I3DataReadoutPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<I3DataReadoutPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<string,I3DataReadoutPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3DataReadoutPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3DataReadoutDict::iterator&, const I3DataReadoutDict::iterator&);
 #pragma link C++ typedef I3DataReadoutDictPtr;
 
@@ -114,8 +114,8 @@
 //#pragma link C++ class I3RecoHitVectPtr+;
 
 #pragma link C++ class I3RecoResultAltTracks+;
-#pragma link C++ typedef MapPolicy<I3ParticlePtr>::ThePolicy;
-#pragma link C++ class MapPolicy<I3ParticlePtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<string,I3ParticlePtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3ParticlePtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoResultAltTracks::iterator&, const I3RecoResultAltTracks::iterator&);
 #pragma link C++ typedef I3RecoResultAltTracksPtr;
 
@@ -132,15 +132,15 @@
 #pragma link C++ typedef I3MCParticleVectPtr;
 
 #pragma link C++ class I3MCParticleDict+;
-#pragma link C++ typedef MapPolicy<I3MCParticleEventPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<I3MCParticleEventPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<string,I3MCParticleEventPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3MCParticleEventPtr>::ThePolicy+;
 //#pragma link C++ function operator!=(const I3MCParticleDict::iterator&, const I3MCParticleDict::iterator&);
 #pragma link C++ typedef I3MCParticleDictPtr;
 
 #pragma link C++ typedef TObjectPtr;
 #pragma link C++ class I3Bag+;
-#pragma link C++ typedef MapPolicy<TObjectPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<TObjectPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<string,TObjectPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,TObjectPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
 #pragma link C++ typedef I3BagPtr;
 
@@ -151,8 +151,8 @@
 #pragma link C++ typedef I3OMResponseVectPtr;
 
 #pragma link C++ class I3RecoHitVectDict+;
-#pragma link C++ typedef MapPolicy<I3RecoHitVectPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<I3RecoHitVectPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<string,I3RecoHitVectPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3RecoHitVectPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoHitVectDict::iterator&, const I3RecoHitVectDict::iterator&);
 #pragma link C++ typedef I3RecoHitVectDictPtr;
 
