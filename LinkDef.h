@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.102 2004/07/30 15:11:00 blaufuss Exp $
-// $Revision: 1.102 $
-// $Date: 2004/07/30 15:11:00 $
+// $Id: LinkDef.h,v 1.103 2004/07/30 19:15:59 dule Exp $
+// $Revision: 1.103 $
+// $Date: 2004/07/30 19:15:59 $
 //
 
 #ifdef __CINT__
@@ -369,8 +369,6 @@
 #pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
 #pragma link C++ class OMKey+;
-
-#pragma link C++ class I3StartingTrack+;
 
 #pragma link C++ class UniqueID;
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.7 2004/07/13 15:37:54 niessen Exp $
+ * $Id: I3TankGeo.h,v 1.8 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/07/13 15:37:54 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -17,6 +17,7 @@
 
 #include "dataclasses/I3TankMaterial.h"
 #include "dataclasses/I3InIceGeometry.h"
+#include "dataclasses/I3Constants.h"
 
 using namespace std;
 
@@ -29,25 +30,29 @@ class I3TankGeo : public TObject
 {
   public:
 
-  I3TankGeo () {}
+  I3TankGeo() {}
 
-  UShort_t TankID () const {return fTankID;}
-  void   TankID (UShort_t tank_id) { fTankID = tank_id; }
+  UShort_t GetTankID() const {return fTankID;}
+  void SetTankID(UShort_t tank_id) { fTankID = tank_id; }
 
-  Double_t X () const { return fX; }
-  void   X(Double_t x) { fX = x; }
+/*   Double_t X () const { return fX; } */
+/*   void   X(Double_t x) { fX = x; } */
 
-  Double_t Y () const { return fY; }
-  void   Y (Double_t y) { fY = y; }
+/*   Double_t Y () const { return fY; } */
+/*   void   Y (Double_t y) { fY = y; } */
 
-  Double_t R () const { return fR; }
-  void     R (Double_t r) { fR = r; }
+  I3Position GetTankPos() const { return fTankPos; }
+  void SetTankPos(I3Position pos) { fTankPos.SetPosition(pos); }
+  void SetTankPos(Double_t x, Double_t y) {fTankPos.SetPosition(x,y,I3Constants::zIceTop);}
 
-  Double_t  H () const { return fH; }
-  void    H (Double_t h) { fH = h; }
+  Double_t GetTankRadius() const { return fTankR; }
+  void SetTankRadius(Double_t r) { fTankR = r; }
 
-  UChar_t Version () const { return fVersion; }
-  void    Version (UChar_t version) { fVersion = version; }
+  Double_t  GetTankHeight() const { return fTankH; }
+  void SetTankHeight(Double_t h) { fTankH = h; }
+
+  UChar_t Version() const { return fVersion; }
+  void Version(UChar_t version) { fVersion = version; }
 
   const I3TankMaterial &Material () const { return fMaterial; }
   I3TankMaterial& Material() {return fMaterial;}
@@ -59,11 +64,11 @@ class I3TankGeo : public TObject
  private:
 
   UShort_t fTankID; // the tank id 
-
-  Double_t fX; // the position along grid north
-  Double_t fY; // the position along grid east
-  Double_t fR; // radius of the tank
-  Double_t fH; // height of the tank
+  I3Position fTankPos; //position of the tank
+  Double_t fTankR; // radius of the tank
+  Double_t fTankH; // height of the tank
+/*   Double_t fX; // the position along grid north */
+/*   Double_t fY; // the position along grid east */
 
   I3TankMaterial fMaterial;
   
@@ -94,7 +99,7 @@ class I3TankGeoMatchesTankID {
    */
   bool operator () (I3TankGeoPtr tg) const {
     cerr << "trying to assess equality" << endl;
-    return id == tg->TankID ();
+    return id == tg->GetTankID();
   }
  private:
   UShort_t id;

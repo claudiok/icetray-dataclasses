@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.9 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Contained.h,v 1.10 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -23,9 +23,6 @@
 class I3Contained
 {
  private:
-/*   Double_t fStartX; */
-/*   Double_t fStartY; */
-/*   Double_t fStartZ; */
   I3Position fStartPos;
   Double_t fStartT;
   Double_t fZenith;
@@ -46,36 +43,6 @@ class I3Contained
    * indicates that the track has a direction
    */
   Bool_t HasDirection() const {return true;}
-
-  /**
-   * gives the starting x postion
-   */
-  Double_t GetStartX() const {return fStartPos.GetX();}
-
-  /**
-   * gives the starting y postion
-   */
-  Double_t GetStartY() const {return fStartPos.GetY();}
-
-  /**
-   * gives the starting z postion
-   */
-  Double_t GetStartZ() const {return fStartPos.GetZ();}
-
-  /**
-   * sets the starting x positon
-   */
-  void SetStartX(Double_t startx){fStartPos.SetX(startx);}
-
-  /**
-   * sets the starting y positon
-   */
-  void SetStartY(Double_t starty){fStartPos.SetY(starty);}
-
-  /**
-   * sets the starting z positon
-   */
-  void SetStartZ(Double_t startz){fStartPos.SetZ(startz);}
 
   /**
    * gets the starting time
@@ -101,23 +68,8 @@ class I3Contained
    * sets the starting position in any reference frame
    */
   void SetStartPos(Double_t startp1, Double_t startp2, Double_t startp3, 
-		I3Position::RefFrame frame)
+		I3Position::RefFrame frame=I3Position::car)
     {fStartPos.SetPosition(startp1,startp2,startp3,frame);}
-
-  /**
-   * returns the starting x position as a position along the track
-   */
-  Double_t GetX() const {return fStartPos.GetX();}
-
-  /**
-   * returns the starting y position as a position along the track
-   */
-  Double_t GetY() const {return fStartPos.GetY();}
-
-  /**
-   * returns the starting z position as a position along the track
-   */
-  Double_t GetZ() const {return fStartPos.GetZ();}
 
   /**
    * returns the starting time as corresponding to X,Y,Z
@@ -139,7 +91,7 @@ class I3Contained
    * in any reference frame
    */
   void SetPos(Double_t startp1, Double_t startp2, Double_t startp3, 
-		I3Position::RefFrame frame)
+		I3Position::RefFrame frame=I3Position::car)
     {fStartPos.SetPosition(startp1,startp2,startp3,frame);}
 
   /**
@@ -173,29 +125,6 @@ class I3Contained
   void SetLength(Double_t length) {fLength = length;}
 
   /**
-   * computes the stoping x position of the track
-   */
-  Double_t GetStopX() const {
-    return fStartPos.GetX() + fLength * sin(fZenith) * cos (fAzimuth);
-  }
-
-  /**
-   * computes the stoping y position of the track
-   */
-  Double_t GetStopY() const 
-    {
-      return fStartPos.GetY() + fLength * sin(fZenith) * sin(fAzimuth);
-    }
-
-  /**
-   * computes the stoping z position of the track
-   */
-  Double_t GetStopZ() const 
-    {
-      return fStartPos.GetZ() + fLength * cos(fZenith);
-    }
-
-  /**
    * computes the stopping t of the track
    */
   Double_t GetStopT() const 
@@ -213,8 +142,8 @@ class I3Contained
       x = fStartPos.GetX() - fLength * sin(fZenith) * cos (fAzimuth);
       y = fStartPos.GetY() - fLength * sin(fZenith) * sin(fAzimuth);
       z = fStartPos.GetZ() - fLength * cos(fZenith);
-      // According to IceCube angle definitions, zenith is from -z,
-      // and azimuth is from -x toward -y.
+      // According to IceCube angle definitions, zenith and azimuth are
+      // defined for the minus track direction, i.e. where the track came from
       // This means that there is a minus sign in the calculations.
       p.SetPosition(x,y,z,I3Position::car);
       return p;

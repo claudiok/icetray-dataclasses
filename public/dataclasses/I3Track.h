@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.22 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3Track.h,v 1.23 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 
@@ -93,22 +93,6 @@ class I3Track : public I3ObservableParticle
    * indicates that the track is a composite track
    */
   virtual Bool_t IsComposite() const =0;
-
-  // Some 4 position on the track
-  /**
-   * some X position along the track, corresponding to Y(),Z(), and T()
-   */
-  virtual Double_t GetX() const =0;
-
-  /**
-   * some Y position along the track corresponding to X(), Z() and T()
-   */
-  virtual Double_t GetY() const =0;
-
-  /**
-   * some Z position along the track corresponding to X(), Y() and T()
-   */
-  virtual Double_t GetZ() const =0;
 
   /**
    * the time the track was at X(), Y() and Z()

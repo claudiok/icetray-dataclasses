@@ -2,12 +2,12 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.10 2004/07/26 13:53:55 pretz Exp $
+ $Id: I3Units.h,v 1.11 2004/07/30 19:15:59 dule Exp $
  
  @file I3Units.h  
  @version $Version:$
- @revision $Revision: 1.10 $
- @date $Date: 2004/07/26 13:53:55 $
+ @revision $Revision: 1.11 $
+ @date $Date: 2004/07/30 19:15:59 $
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -89,8 +89,8 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @revision $Revision: 1.10 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @revision $Revision: 1.11 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should we have a 'speed' here too?
@@ -181,12 +181,12 @@ namespace I3Units
   /**
    * fermi
    */
-  static const Double_t  fermi     = 1.e-15*meter;
+  static const Double_t fermi     = 1.e-15*meter;
   
   /**
    * barn
    */
-  static const Double_t      barn = 1.e-28*meter2;
+  static const Double_t barn = 1.e-28*meter2;
 
   /**
    * millibarn
@@ -201,12 +201,17 @@ namespace I3Units
   /**
    * nanobarn
    */
-  static const Double_t  nanobarn = 1.e-9 *barn;
+  static const Double_t nanobarn = 1.e-9 *barn;
 
   /**
    * picobarn
    */
-  static const Double_t  picobarn = 1.e-12*barn;
+  static const Double_t picobarn = 1.e-12*barn;
+  
+  /**
+   * feet
+   */
+  static const Double_t feet = 0.3048*meter;
   
   // symbols
   /**
@@ -273,6 +278,11 @@ namespace I3Units
    * parsec
    */
   static const Double_t pc = parsec;
+  
+  /**
+   * feet
+   */
+  static const Double_t ft = feet;
   
   //
   // Angle

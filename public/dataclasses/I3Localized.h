@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Localized.h,v 1.5 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  *
  */
@@ -20,10 +20,8 @@
  */
 class I3Localized{
  private:
-  Double_t fX;
-  Double_t fY;
-  Double_t fZ;
   Double_t fT;
+  I3Position fPos;
  public:
   /**
    * indicates that this class has a localization
@@ -31,34 +29,21 @@ class I3Localized{
   virtual Bool_t IsLocalized() const { return true;}
 
   /**
-   * gives the X position of the Cascade
+   * gets the position of the cascade
    */
-  Double_t GetX() const{ return fX;}
+  I3Position GetPos() const {return fPos;}
 
   /**
-   * sets the x position of the cascade
+   * sets the position of the cascade 
    */
-  void SetX(Double_t x) {fX = x;}
+  void SetPos(I3Position p) {fPos.SetPosition(p);}
 
   /**
-   * gives the y position of the cascade
+   * sets the position of the cascade 
    */
-  Double_t GetY() const{return fY;}
-
-  /**
-   * sets the y position of the cascade
-   */
-  void SetY(Double_t y) {fY = y;}
-
-  /**
-   * gets the z position of the cascade
-   */
-  Double_t GetZ() const{return fZ; }
-
-  /**
-   * sets the z position of the cascade 
-   */
-  void SetZ(Double_t z) {fZ = z;}
+  void SetPos(Double_t p1, Double_t p2, Double_t p3, 
+	      I3Position::RefFrame frame=I3Position::car)
+    {fPos.SetPosition(p1,p2,p3,frame);}
 
   /**
    * gets the time of the cascade
@@ -79,9 +64,7 @@ class I3Localized{
       I3Localized *localized = dynamic_cast<I3Localized*>(&destination);
       if(localized)
 	{
-	  localized->fX = fX;
-	  localized->fY = fY;
-	  localized->fZ = fZ;
+	  localized->fPos = fPos;
 	  localized->fT = fT;
 	}
     }

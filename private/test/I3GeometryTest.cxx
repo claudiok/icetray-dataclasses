@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3GeometryTest.cxx,v 1.4 2004/07/07 19:05:57 pretz Exp $
+    $Id: I3GeometryTest.cxx,v 1.5 2004/07/30 19:15:59 dule Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/07/07 19:05:57 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/07/30 19:15:59 $
     @author pretz
 
     @todo
@@ -47,7 +47,8 @@ namespace tut
   {
   I3Geometry *geometry = new I3Geometry(); 
   I3OMGeoIceCubePtr om_icecube( new I3OMGeoIceCube());
-  om_icecube->SetX(10.5);
+//   om_icecube->SetX(10.5); // changed to make consistent with I3Position
+  om_icecube->SetPos(10.5,om_icecube->GetPos().GetY(),om_icecube->GetPos().GetZ());
 
   geometry->GetInIceGeometry()[OMKey(1,15)] = om_icecube;     
   TTree *t = new TTree("mytree","tree");
@@ -72,8 +73,9 @@ namespace tut
   {
     I3Geometry geometry;
     I3OMGeoIceCubePtr om_icecube( new I3OMGeoIceCube());
-    om_icecube->SetX(10.5);
-    
+//     om_icecube->SetX(10.5); // changed to make consistent with I3Position
+    om_icecube->SetPos(10.5,om_icecube->GetPos().GetY(),om_icecube->GetPos().GetZ());
+
     geometry.GetInIceGeometry()[OMKey(1,15)] = om_icecube;      
     ensure("checking read in value",
 	   geometry.GetInIceGeometry()[OMKey(1,15)] 

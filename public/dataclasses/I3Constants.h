@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Constants.h,v 1.4 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3Constants.h,v 1.5 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Constants.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 
@@ -39,6 +39,11 @@ namespace I3Constants
    * Euler's constant
    */
   static const Double_t e = 2.71828182845904509;
+
+  /**
+   * Z-coordinate of IceTop (Origin Depth)
+   */
+  static const Double_t zIceTop = 29000*I3Units::feet;
 };
 
 #endif

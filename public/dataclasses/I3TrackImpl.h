@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.9 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3TrackImpl.h,v 1.10 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -46,12 +46,12 @@ class I3TrackImpl : public I3Track,
   virtual ~I3TrackImpl() {};
 
   /**
-   * indicates that the 'StartX() ... ' parameters are valid
+   * indicates that the 'StartPos() ... ' parameters are valid
    */
   virtual Bool_t IsStarting() const {return GeometricalType::IsStarting();}
 
   /**
-   * indicates that the 'StopX() ...' parameters are valid
+   * indicates that the 'StopPos() ...' parameters are valid
    */
   virtual Bool_t IsStopping() const {return GeometricalType::IsStopping();}
 
@@ -104,22 +104,7 @@ class I3TrackImpl : public I3Track,
   virtual Double_t GetAzimuth() const {return GeometricalType::GetAzimuth();}
 
   /**
-   * some X position along the track, corresponding to Y(),Z(), and T()
-   */
-  virtual Double_t GetX() const {return GeometricalType::GetX();}
-
-  /**
-   * some Y position along the track corresponding to X(), Z() and T()
-   */
-  virtual Double_t GetY() const {return GeometricalType::GetY();}
-
-  /**
-   * some Z position along the track corresponding to X(), Y() and T()
-   */
-  virtual Double_t GetZ() const {return GeometricalType::GetZ();}
-
-  /**
-   * the time the track was at X(), Y() and Z()
+   * the time the track was at X, Y and Z
    */
   virtual Double_t GetT() const {return GeometricalType::GetT();}
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.7 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3CascadeImpl.h,v 1.8 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -68,17 +68,17 @@ class I3CascadeImpl : public I3Cascade,
   /**
    * the X position of the cascade
    */
-  virtual Double_t GetX() const {return LocalizableType::GetX();}
+  //  virtual Double_t GetX() const {return LocalizableType::GetX();}
 
   /**
    * the Y position of the cascade
    */
-  virtual Double_t GetY() const {return LocalizableType::GetY();}
+  //  virtual Double_t GetY() const {return LocalizableType::GetY();}
 
   /**
    * the Z position of the cascade
    */
-  virtual Double_t GetZ() const {return LocalizableType::GetZ();}
+  //  virtual Double_t GetZ() const {return LocalizableType::GetZ();}
 
   /**
    * the time of the cascade
@@ -88,7 +88,7 @@ class I3CascadeImpl : public I3Cascade,
   /**
    * the position of the cascade as an I3Position object
    */
-  virtual I3Position GetPos() const {return I3Position(GetX(),GetY(),GetZ());}
+  virtual I3Position GetPos() const {return LocalizableType::GetPos();}
 
   virtual void CopyTo(I3Particle& destination) const
     {

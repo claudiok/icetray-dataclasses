@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3Cascade.h,v 1.9 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -46,21 +46,6 @@ class I3Cascade : public I3ObservableParticle{
    * method  will work
    */ 
   virtual Bool_t HasEnergy() const =0;
-
-  /**
-   * the X position of the cascade
-   */
-  virtual Double_t GetX() const =0;
-
-  /**
-   * the Y position of the cascade
-   */
-  virtual Double_t GetY() const =0;
-
-  /**
-   * the Z position of the cascade
-   */
-  virtual Double_t GetZ() const =0;
 
   /**
    * the time of the cascade

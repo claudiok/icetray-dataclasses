@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3Infinite.h,v 1.9 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author 
  */
 
@@ -22,9 +22,6 @@
  */
 class I3Infinite{
  private:
-/*   Double_t fX; */
-/*   Double_t fY; */
-/*   Double_t fZ; */
   I3Position fPos;
   Double_t fT;
   Double_t fZenith;
@@ -44,36 +41,6 @@ class I3Infinite{
    * indicates that this is a directional track
    */ 
   Bool_t HasDirection() const {return true;}
-
-  /**
-   * gives an x position of the track
-   */
-  Double_t GetX() const {return fPos.GetX();}
-
-  /**
-   * gives an y position of the track
-   */
-  Double_t GetY() const {return fPos.GetY();}
-
-  /**
-   * gives an z position of the track
-   */
-  Double_t GetZ() const {return fPos.GetZ();}
-
-  /**
-   * sets an x position for the track
-   */
-  void SetX(Double_t x) {fPos.SetX(x);}
-
-  /**
-   * sets an y position for the track
-   */
-  void SetY(Double_t y) {fPos.SetY(y);}
-
-  /**
-   * sets an z position for the track
-   */
-  void SetZ(Double_t z){fPos.SetZ(z);}
 
   /**
    * the time the track was at X(), Y(), and Z()
@@ -99,7 +66,7 @@ class I3Infinite{
    * sets a position along the track in any reference frame.
    */
   void SetPos(Double_t p1, Double_t p2, Double_t p3, 
-	      I3Position::RefFrame frame)
+	      I3Position::RefFrame frame=I3Position::car)
     {fPos.SetPosition(p1,p2,p3,frame);}
 
   /**

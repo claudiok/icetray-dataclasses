@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3Stopping.h,v 1.9 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -24,9 +24,6 @@
  */
 class I3Stopping{
  private:
-/*   Double_t fStopX; */
-/*   Double_t fStopY; */
-/*   Double_t fStopZ; */
   I3Position fStopPos;
   Double_t fStopT;
   Double_t fZenith;
@@ -46,21 +43,6 @@ class I3Stopping{
    * indicates that the particle is directional
    */
   Bool_t HasDirection() const {return true;}
-
-  /**
-   * A x position along the track. Gives the stopping x position. 
-   */
-  Double_t GetX() const {return fStopPos.GetX();}
-
-  /**
-   * A y position along the track. Gives the stopping y position. 
-   */
-  Double_t GetY() const {return fStopPos.GetY();}
-
-  /**
-   * A z position along the track. Gives the stopping z position. 
-   */
-  Double_t GetZ() const {return fStopPos.GetZ();}
 
   /**
    * A t along the track.  Gives the stopping t.
@@ -103,36 +85,6 @@ class I3Stopping{
   Double_t GetLength() const {return INFINITY;}
 
   /**
-   * gives the stopping x position of the track
-   */
-  Double_t GetStopX() const {return fStopPos.GetX();}
-
-  /**
-   * gives the stopping y position of the track
-   */
-  Double_t GetStopY() const {return fStopPos.GetY();}
-
-  /**
-   * gives the stopping z position of the track
-   */
-  Double_t GetStopZ() const {return fStopPos.GetZ();}
-
-  /**
-   * sets the stopping x position of the track
-   */
-  void SetStopX(Double_t stopx) {fStopPos.SetX(stopx);}
-
-  /**
-   * sets the stopping y position of the track
-   */
-  void SetStopY(Double_t stopy) {fStopPos.SetY(stopy);}
-
-  /**
-   * sets the stopping z position of the track
-   */
-  void SetStopZ(Double_t stopz) {fStopPos.SetZ(stopz);}
-
-  /**
    * gives the stopping t of the track
    */
   Double_t GetStopT() const {return fStopT;}
@@ -156,7 +108,7 @@ class I3Stopping{
    * sets the stopping position in any reference frame
    */
   void SetStopPos(Double_t stopp1, Double_t stopp2, Double_t stopp3, 
-		I3Position::RefFrame frame)
+		I3Position::RefFrame frame=I3Position::car)
     {fStopPos.SetPosition(stopp1,stopp2,stopp3,frame);}
 
   /**

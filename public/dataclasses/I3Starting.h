@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3Starting.h,v 1.9 2004/07/30 19:15:59 dule Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/30 19:15:59 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -27,9 +27,6 @@
  */
 class I3Starting{
  private:
-/*   Double_t fStartX; */
-/*   Double_t fStartY; */
-/*   Double_t fStartZ; */
   I3Position fStartPos;
   Double_t fStartT;
   Double_t fZenith;
@@ -49,36 +46,6 @@ class I3Starting{
    * indicates that the particle has a direction
    */
   Bool_t HasDirection() const {return true;}
-
-  /**
-   * gives the starting x position of the particle
-   */
-  Double_t GetStartX() const {return fStartPos.GetX();}
-
-  /**
-   * gives the starting y position of the particle
-   */
-  Double_t GetStartY() const {return fStartPos.GetY();}
-
-  /**
-   * gives the starting z position of the particle
-   */
-  Double_t GetStartZ() const {return fStartPos.GetZ();}
-
-  /**
-   * sets the starting x position of the particle
-   */
-  void GetStartX(Double_t startx){fStartPos.SetX(startx);}
-
-  /**
-   * sets the starting y position of the particle
-   */
-  void GetStartY(Double_t starty){fStartPos.SetY(starty);}
-
-  /**
-   * sets the starting z position of the particle
-   */
-  void SetStartZ(Double_t startz){fStartPos.SetZ(startz);}
 
   /**
    * gets the starting t
@@ -104,23 +71,8 @@ class I3Starting{
    * sets the starting position in any reference frame
    */
   void SetStartPos(Double_t startp1, Double_t startp2, Double_t startp3, 
-		I3Position::RefFrame frame)
+		I3Position::RefFrame frame=I3Position::car)
     {fStartPos.SetPosition(startp1,startp2,startp3,frame);}
-
-  /**
-   * gives the starting x position as a position on the track
-   */
-  Double_t GetX() const {return fStartPos.GetX();}
-
-  /**
-   * gives the starting y position as a position on the track
-   */
-  Double_t GetY() const {return fStartPos.GetY();}
-
-  /**
-   * gives the starting z position as a position on the track
-   */
-  Double_t GetZ() const {return fStartPos.GetZ();}
 
   /**
    * gives the starting t time as a time corresponding to X(), Y(), Z()
