@@ -84,16 +84,16 @@
 #pragma link C++ typedef I3IceTopStationStatusPtr;
 
 
-#pragma link C++ class I3RecoResultData+;
-#pragma link C++ class I3RecoResultData::iterator+;
+#pragma link C++ class I3RecoResultDict+;
+#pragma link C++ class I3RecoResultDict::iterator+;
 #pragma link C++ typedef MapPointainerPolicy<I3RecoResultPtr>::ThePolicy;
 #pragma link C++ class MapPointainerPolicy<I3RecoResultPtr>::ThePolicy+;
-#pragma link C++ typedef I3RecoResultDataPtr;
-#pragma link C++ function I3RecoResultData::Get<I3RecoResultSingleTrackPtr>(const string&);
-#pragma link C++ function I3RecoResultData::Get<I3RecoResultAltTracksPtr>(const string&);
-#pragma link C++ function I3RecoResultData::Get<I3RecoResultMultiTracksPtr>(const string&);
-#pragma link C++ function I3RecoResultData::Get<I3RecoResultRDMCFitPtr>(const string&);
-#pragma link C++ function I3RecoResultData::Get<I3RecoResultLikelihoodPtr>(const string&);
+#pragma link C++ typedef I3RecoResultDictPtr;
+#pragma link C++ function I3RecoResultDict::Get<I3RecoResultSingleTrackPtr>(const string&);
+#pragma link C++ function I3RecoResultDict::Get<I3RecoResultAltTracksPtr>(const string&);
+#pragma link C++ function I3RecoResultDict::Get<I3RecoResultMultiTracksPtr>(const string&);
+#pragma link C++ function I3RecoResultDict::Get<I3RecoResultRDMCFitPtr>(const string&);
+#pragma link C++ function I3RecoResultDict::Get<I3RecoResultLikelihoodPtr>(const string&);
 
 #pragma link C++ class I3DataReadoutDict+;
 #pragma link C++ class I3DataReadoutDict::iterator+;
