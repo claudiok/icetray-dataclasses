@@ -26,7 +26,9 @@
     readouts, IceCube soft local coincidence (SLC) readouts, and so
     forth.  @c MCOMResponses also contain an @c MCPMTResponse,
     which contains information about the raw PMT output voltage,
-    before processing by the DOM electronics. 
+    before processing by the DOM electronics.  The @c MCPMTResponse
+    class is presently an abstract class, because the details of the
+    implementation of this class have not been fleshed out.
 
     The other type of information is hit information.  "Hit" is used
     to mean a single photoelectron

@@ -1,0 +1,35 @@
+/**
+   @page tracks Particles, Tracks, Cascades, and Primaries
+
+   @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+
+   @section prereqs Prerequisites
+
+   This document assumes that you have set up the icetray environment and
+   are now ready to (or are already) start writing your own module of
+   some kind.  Full details at @ref index.
+   
+   @section particles Particles
+
+   The basic building blocks of events, in either Monte Carlo or
+   reconstruction, are referred to as "particles" and are derived from
+   the @c I3Particle parent class.  There are two basic types of
+   particles: primaries, whose presence is inferred but which are not
+   directly observed, and "observable particles," which enter the
+   active volume of the detector (InIce or IceTop).  Observable
+   particles are presently divided into two subtypes, tracks and
+   cascades; it is likely that at least one additional subtype will be
+   added to accommodate IceTop "tracks."
+
+   All of these classes are related by inheritance, as shown below.
+   This means that any operation that can be performed on a parent
+   class can be performed on an object of a class derived from that
+   parent.  For example, although the @c ParticleType() method is not
+   shown for all classes, it is a valid method that can be called for
+   any track, cascade, or primary object.
+
+   <img src="../../dataclasses/resources/users-guide/TrackTypes.png">
+   
+   
+
+*/
