@@ -6,9 +6,11 @@
 
 class I3NonIdentifiable{
  public:
-  virtual bool IsIdentifiable() const {return false;}
+  bool IsIdentifiable() const {return false;}
 
-  virtual I3Particle::ParticleType Type() {return I3Particle::Unknown;}
+  I3Particle::ParticleType Type() {return I3Particle::Unknown;}
+
+  void CopyTo(I3Particle& destination) const {}
 
   ClassDef(I3NonIdentifiable,1);
 };

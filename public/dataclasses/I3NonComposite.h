@@ -15,13 +15,15 @@ class I3NonComposite
   virtual ~I3NonComposite(){}
 
 
-  virtual bool IsComposite() const {return false;}
+  bool IsComposite() const {return false;}
 
-  virtual int NumConstituents() const {return 0;}
-  virtual const I3Particle& Constituent(int i) const 
+  int NumConstituents() const {return 0;}
+  const I3Particle& Constituent(int i) const 
     {
       return *(I3Particle*)0;
     }
+  void CopyTo(I3Particle& destination) const {}
+
   ClassDef(I3NonComposite,1);
 };
 

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.9 2004/04/16 18:35:02 pretz Exp $
+    $Id: I3Track.h,v 1.10.2.10 2004/04/19 18:09:53 pretz Exp $
 
-    @version $Revision: 1.10.2.9 $
-    @date $Date: 2004/04/16 18:35:02 $
+    @version $Revision: 1.10.2.10 $
+    @date $Date: 2004/04/19 18:09:53 $
     @author
 
     @todo
@@ -16,6 +16,7 @@
 
 #include <TObject.h>
 #include "dataclasses/I3Particle.h"
+#include "dataclasses/I3Position.h"
 #include <vector>
 #include <cmath>
 
@@ -64,11 +65,15 @@ class I3Track : public I3Particle
   virtual double StartZ() const =0;
   virtual double StartT() const =0;
 
+  virtual I3Position StartPos() const =0;
+  
   // stopping 4-position
   virtual double StopX() const =0;
   virtual double StopY() const =0;
   virtual double StopZ() const =0;
   virtual double StopT() const =0;
+
+  virtual I3Position StopPos() const =0;
 
   // Some X position
   virtual double X() const =0;
@@ -76,6 +81,8 @@ class I3Track : public I3Particle
   virtual double Z() const =0;
   virtual double T() const =0;
 
+  virtual I3Position Pos() const =0;
+  
   // energy
   virtual double Energy() const =0;
 
@@ -88,6 +95,8 @@ class I3Track : public I3Particle
   // composite particle stuff
   virtual int NumConstituents() const =0;
   virtual const I3Particle& Constituent(int i) const =0;
+
+  virtual void CopyTo(I3Particle& destination) const =0;
 
   //FIXME:  need fns like distancefromtrack, isontrack, etc.
 

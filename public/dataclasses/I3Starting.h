@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include "I3Units.h"
+#include "I3Particle.h"
 
 class I3Starting{
  private:
@@ -64,6 +65,17 @@ class I3Starting{
 
   double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
   void Speed(double) {return;}
+
+  void CopyTo(I3Particle& destination) const{
+    I3Starting* starting = dynamic_cast<I3Starting*>(&destination);
+    if(starting){
+      starting->fStartX = fStartX;
+      starting->fStartY = fStartY;
+      starting->fStartZ = fStartZ;
+      starting->fZenith = fZenith;
+      starting->fAzimuth = fAzimuth;
+    }
+  }
 
   ClassDef(I3Starting,1)
 };

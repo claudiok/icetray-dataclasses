@@ -77,6 +77,20 @@ class I3Contained{
 
   void Speed(double) {return;}
 
+  void CopyTo(I3Particle& destination) const
+    {
+      I3Contained* contained = dynamic_cast<I3Contained*>(&destination);
+      if(contained){
+	contained->fStartX = fStartX;
+	contained->fStartY = fStartY;
+	contained->fStartZ = fStartZ;
+	contained->fStartT = fStartT;
+	contained->fAzimuth = fAzimuth;
+	contained->fZenith = fZenith;
+	contained->fLength = fLength;
+      }
+    }
+
   ClassDef(I3Contained,1)
 };
 

@@ -65,6 +65,19 @@ class I3Stopping{
   double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
   void Speed(double) {return;}
 
+  void CopyTo(I3Particle& destination) const
+    {
+      I3Stopping* stopping = dynamic_cast<I3Stopping*>(&destination);
+      if(stopping){
+	stopping->fStopX = fStopX;
+	stopping->fStopY = fStopY;
+	stopping->fStopZ = fStopZ;
+	stopping->fStopT = fStopT;
+	stopping->fZenith = fZenith;
+	stopping->fAzimuth = fAzimuth;
+      }
+    }
+
   ClassDef(I3Stopping,1)
 };
 

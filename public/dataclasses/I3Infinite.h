@@ -65,6 +65,18 @@ class I3Infinite{
   double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
   void Speed(double) {return;}
 
+  void CopyTo(I3Particle& destination) const
+    {
+      I3Infinite* infinite = dynamic_cast<I3Infinite*>(&destination);
+      if(infinite){
+	infinite->fX = fX;
+	infinite->fY = fY;
+	infinite->fZ = fZ;
+	infinite->fZenith = fZenith;
+	infinite->fAzimuth = fAzimuth;
+      }
+    }
+
   ClassDef(I3Infinite,1)
 };
 

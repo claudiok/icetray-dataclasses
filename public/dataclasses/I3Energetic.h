@@ -8,10 +8,19 @@ class I3Energetic
  private:
   double fEnergy;
  public:
-  virtual bool IsEnergetic() const {return true;}
+  bool IsEnergetic() const {return true;}
 
-  virtual double Energy() const {return fEnergy;}
-  virtual void Energy(double energy){fEnergy = energy;}
+  double Energy() const {return fEnergy;}
+  void Energy(double energy){fEnergy = energy;}
+
+  void CopyTo(I3Particle& destination) const
+    {
+      I3Energetic* energetic = dynamic_cast<I3Energetic*>(&destination);
+      if(energetic)
+	{
+	  energetic->fEnergy = fEnergy;
+	}
+    }
 
   ClassDef(I3Energetic,1);
 };

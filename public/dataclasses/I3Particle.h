@@ -7,10 +7,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.1.2.1 2004/04/16 17:10:56 pretz Exp $
+ * $Id: I3Particle.h,v 1.1.2.2 2004/04/19 18:09:53 pretz Exp $
  *
- * @version $Revision: 1.1.2.1 $
- * @date $Date: 2004/04/16 17:10:56 $
+ * @version $Revision: 1.1.2.2 $
+ * @date $Date: 2004/04/19 18:09:53 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -83,6 +83,8 @@ class I3Particle : public TObject{
   * phi
   */
  virtual double Zenith() const =0;
+
+ virtual void CopyTo(I3Particle& destination) const =0;
 
   ClassDef(I3Particle,1);
 };

@@ -237,6 +237,7 @@
 #pragma link C++ typedef I3OMStatusIcecubePtr;
 #pragma link C++ class I3Particle+;
 #pragma link C++ class I3ParticleList+;
+#pragma link C++ class I3Position+;
 #pragma link C++ class I3Primary+;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ typedef I3RecoHitPtr;

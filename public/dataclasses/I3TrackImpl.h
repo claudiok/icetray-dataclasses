@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackImpl.h,v 1.1.2.2 2004/04/16 18:35:02 pretz Exp $
+    $Id: I3TrackImpl.h,v 1.1.2.3 2004/04/19 18:09:53 pretz Exp $
 
-    @version $Revision: 1.1.2.2 $
-    @date $Date: 2004/04/16 18:35:02 $
+    @version $Revision: 1.1.2.3 $
+    @date $Date: 2004/04/19 18:09:53 $
     @author
 
     @todo
@@ -78,6 +78,11 @@ class I3TrackImpl : public I3Track,
   virtual double StartT() const {return GeometricalType::StartT();}
   virtual void StartT(double startt){GeometricalType::StartT(startt);}
 
+  virtual I3Position StartPos() const 
+    {
+      return I3Position(StartX(),StartY(),StartZ(),StartT());
+    }
+
   virtual double StopX() const {return GeometricalType::StopX();}
   virtual void StopX(double stopx) {GeometricalType::StopX(stopx);}
 
@@ -90,6 +95,11 @@ class I3TrackImpl : public I3Track,
   virtual double StopT() const {return GeometricalType::StopT();}
   virtual void StopT(double stopt) {GeometricalType::StopT(stopt);}
 
+  virtual I3Position StopPos() const 
+    {
+      return I3Position(StopX(),StopY(),StopZ(),StopT());
+    }
+
   virtual double X() const {return GeometricalType::X();}
   virtual void X(double x) {GeometricalType::X(x);}
 
@@ -101,6 +111,11 @@ class I3TrackImpl : public I3Track,
 
   virtual double T() const {return GeometricalType::T();}
   virtual void T(double t){GeometricalType::T(t);}
+
+  virtual I3Position Pos() const 
+    {
+      return I3Position(X(),Y(),Z(),T());
+    }
 
   virtual double Energy() const {return EnergeticType::Energy();}
   virtual void Energy(double energy) {EnergeticType::Energy(energy);}
@@ -115,6 +130,14 @@ class I3TrackImpl : public I3Track,
   virtual const I3Particle& Constituent(int i) const 
     {
       return CompositeType::Constituent(i);
+    }
+
+  virtual void CopyTo(I3Particle& destination) const 
+    {
+      IdentifiableType::CopyTo(destination);
+      GeometricalType::CopyTo(destination);
+      EnergeticType::CopyTo(destination);
+      CompositeType::CopyTo(destination);
     }
 
   ClassDef(I3TrackImpl,1);
