@@ -1,5 +1,5 @@
 #
-# $Id: Doxyfile,v 1.4 2004/04/27 15:16:08 pretz Exp $
+# $Id: Doxyfile,v 1.5 2004/04/27 16:00:08 pretz Exp $
 #
 # Copyright (C) 1997-1999 by Dimitri van Heesch.
 #
@@ -32,7 +32,7 @@ GENERATE_XML      = NO
 ENABLED_SECTIONS  = logo_on
 ENABLE_PREPROCESSING = NO
 CASE_SENSE_NAMES  = NO
-IMAGE_PATH        = .
+IMAGE_PATH        = dataclasses/resources/users-guide/
 INPUT		   = dataclasses/resources/users-guide/ \
 dataclasses/public/dataclasses 
 #phys-services/public/phys-services \

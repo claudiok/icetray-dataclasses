@@ -24,7 +24,7 @@
    items in the dashed boxes are template parameters, as discussed
    in @ref template_blocks, below.
 
-   <img src="../../dataclasses/resources/users-guide/ParticleTypes.png">
+   @image html ParticleTypes.png
    
    @section template_blocks Templated functionality
 
@@ -80,7 +80,7 @@
    blocks will be built into the particular subclass.  The diagram
    below, for example, shows four types of cascade classes.
 
-   <img src="../../dataclasses/resources/users-guide/CascadeTypes.png">
+   @image html CascadeTypes.png
 
    The four specific cascade classes in the diagram are effectively
    aliases for particular instantiations of the template class.  We

@@ -16,7 +16,7 @@
 
    The layout of a frame will be something like this:
 
-   <img src="../../dataclasses/resources/users-guide/StreamsOverview.png">
+   @image html StreamsOverview.png
 
    Only four streams are shown here; in general there will be more
    streams, and some of the streams will have more contents (the
@@ -40,7 +40,7 @@
 
    The @c I3Event object contains several subobjects, as shown here:
 
-   <img src="../../dataclasses/resources/users-guide/EventOverview.png">
+   @image html EventOverview.png
 
    Trigger and filter data will be part of the @c Event, but those
    sectors have been left empty until the nature of trigger and filter

@@ -34,7 +34,7 @@
     @c MCHitSeries, which stores the true series of arrival times.
     The layout of the @c OMResponse is shown below.
 
-    <img src="../../dataclasses/resources/users-guide/OMResponseOverview.png">
+    @image html OMResponseOverview.png
 
     Offline software can add new @c DataReadouts or @c HitSeries to
     the @c OMResponse.  "Real" @c DataReadouts -- those recorded by
