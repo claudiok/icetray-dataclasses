@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.13 2004/04/20 16:51:16 pretz Exp $
+    $Id: I3Track.h,v 1.10.2.14 2004/04/20 17:06:44 pretz Exp $
 
-    @version $Revision: 1.10.2.13 $
-    @date $Date: 2004/04/20 16:51:16 $
+    @version $Revision: 1.10.2.14 $
+    @date $Date: 2004/04/20 17:06:44 $
     @author
 
     @todo
@@ -15,19 +15,23 @@
 #define I3TRACK_H
 
 #include <TObject.h>
-#include "dataclasses/I3Particle.h"
+#include "dataclasses/I3ObservableParticle.h"
 #include "dataclasses/I3Position.h"
 #include <vector>
 #include <cmath>
 
 #include <iostream>
 
-class I3Track : public I3Particle
+class I3Track : public I3ObservableParticle
 {
  public:
   I3Track() {};
 
   virtual ~I3Track() {};
+
+  virtual Bool_t IsCascade() {return kFALSE;}
+
+  virtual Bool_t IsTrack() {return kTRUE;}
 
   /**
    * indicates that the 'StartX() ... ' parameters are valid
