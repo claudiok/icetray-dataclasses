@@ -2,10 +2,48 @@
 
 ClassImp(I3Track);
 
+/**
+ * taken straight from rdmc.h
+ */
+const I3Track::Type I3Track::Null = 0; 
+const I3Track::Type I3Track::Unknown = -100;
+const I3Track::Type I3Track::Gamma = 1;
+const I3Track::Type I3Track::EPlus = 2;
+const I3Track::Type I3Track::EMinus = 3;
+const I3Track::Type I3Track::Nu = 4;
+const I3Track::Type I3Track::MuPlus = 5;
+const I3Track::Type I3Track::MuMinus = 6 ;
+const I3Track::Type I3Track::Pi0 = 7; 
+const I3Track::Type I3Track::PiPlus = 8;
+const I3Track::Type I3Track::PiMinus = 9;
+const I3Track::Type I3Track::PPlus = 14;
+const I3Track::Type I3Track::PMinus = 15;
+const I3Track::Type I3Track::TauPlus = 33;
+const I3Track::Type I3Track::TauMinus = 34;
+const I3Track::Type I3Track::NuE = 201;
+const I3Track::Type I3Track::NuMu = 202;
+const I3Track::Type I3Track::NuTau = 203;
+const I3Track::Type I3Track::NuEBar = 204;
+const I3Track::Type I3Track::NuMuBar = 205;
+const I3Track::Type I3Track::NuTauBar = 206;
+const I3Track::Type I3Track::Brems = 1001;
+const I3Track::Type I3Track::DeltaE = 1002;
+const I3Track::Type I3Track::PairProd = 1003;
+const I3Track::Type I3Track::NuclInt = 1004;
+const I3Track::Type I3Track::MuPair = 1005;
+const I3Track::Type I3Track::Hadrons = 1006;
+const I3Track::Type I3Track::FiberLaser = 2100;
+const I3Track::Type I3Track::N2Laser = 2101; 
+const I3Track::Type I3Track::YAGLaser = 2201;
+const I3Track::Type I3Track::ZPrimary = 3000;
+const I3Track::Type I3Track::APrimary = 3500; 
+const I3Track::Type I3Track::Elph = 9999;
+
+
 I3Track::I3Track()
 {
   tracknumber=0;
-  particletype=0;
+  particletype=Null;
   starttime=0;
   startx=0;
   starty=0;
@@ -25,7 +63,7 @@ I3Track::I3Track()
 I3Track::~I3Track() {if (childrentrack) {childrentrack->Delete(); delete childrentrack;}}
     
 unsigned short I3Track::GetTracknumber() const  {return(tracknumber);}
-unsigned short I3Track::GetParticletype() const {return(particletype);}
+I3Track::Type I3Track::GetParticletype() const {return(particletype);}
 float          I3Track::GetStarttime() const    {return(starttime);}
 float          I3Track::GetStartx() const       {return(startx);}
 float          I3Track::GetStarty() const       {return(starty);}
@@ -40,7 +78,7 @@ float          I3Track::GetAzimuth() const      {return(azimuth);}
 float          I3Track::GetEnergy() const       {return(energy);}
 
 void I3Track::SetTracknumber(unsigned short tracknumber_)   {tracknumber=tracknumber_;}
-void I3Track::SetParticletype(unsigned short particletype_) {particletype=particletype_;}
+void I3Track::SetParticletype(Type particletype_) {particletype=particletype_;}
 void I3Track::SetStarttime(float time)                      {starttime=time;}
 void I3Track::SetStartx(float x)                            {startx=x;}
 void I3Track::SetStarty(float y)                            {starty=y;}
