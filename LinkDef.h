@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.126 2004/09/14 03:21:37 ehrlich Exp $
-// $Revision: 1.126 $
-// $Date: 2004/09/14 03:21:37 $
+// $Id: LinkDef.h,v 1.127 2004/09/14 17:11:38 niessen Exp $
+// $Revision: 1.127 $
+// $Date: 2004/09/14 17:11:38 $
 //
 
 #ifdef __CINT__
@@ -196,33 +196,19 @@
 #pragma link C++ typedef I3RecoHitSeriesDictPtr;
 #pragma link C++ class roost::shared_ptr<I3RecoHitSeriesDict>+;
 
-#pragma link C++ classs I3StationGeo+;
-#pragma link C++ typedef VectorPolicy<I3TankGeo *>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3TankGeo *>::ThePolicy+;
-#pragma link C++ typedef I3StationGeoPtr;
-#pragma link C++ class I3StationGeoPtr+;
-#pragma link C++ class roost::shared_ptr<I3StationGeo>+;
-
 #pragma link C++ class I3SurfModuleGeo+;
-#pragma link C++ typedef VectorPolicy<I3OMGeo *>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3OMGeo *>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy+;
 #pragma link C++ typedef I3SurfModuleGeoPtr;
 #pragma link C++ class I3SurfModuleGeoPtr+;
 #pragma link C++ class roost::shared_ptr<I3SurfModuleGeo>+;  
 
-#pragma link C++ class I3OMTopMap+;
-#pragma link C++ typedef MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3OMTopMapPtr;
-#pragma link C++ class I3OMTopMapPtr+;
-#pragma link C++ class roost::shared_ptr<I3OMTopMap>+;
-
-#pragma link C++ class I3SurfModuleVector+;
+#pragma link C++ classs I3StationGeo+;
 #pragma link C++ typedef VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3SurfModuleVectorPtr;
-#pragma link C++ class I3SurfModuleVectorPtr+;
-#pragma link C++ class roost::shared_ptr<I3SurfModuleVector>+;
+#pragma link C++ typedef I3StationGeoPtr;
+#pragma link C++ class I3StationGeoPtr+;
+#pragma link C++ class roost::shared_ptr<I3StationGeo>+;
 
 #pragma link C++ class I3StationMap+;
 #pragma link C++ typedef MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy;
