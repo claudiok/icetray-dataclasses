@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.7 2004/06/14 22:28:14 dule Exp $
+ * $Id: I3Contained.h,v 1.8 2004/06/24 15:43:17 pretz Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/06/14 22:28:14 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/06/24 15:43:17 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
 #define I3CONTAINED_H
 
 #include "I3Units.h"
-#include "I3Distance.h"
+//#include "I3Distance.h"
 #include <cmath>
 /**
  * @brief This class services the 'geometrical' part of an I3Track interface.
