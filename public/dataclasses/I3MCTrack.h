@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCTrack.h,v 1.2 2004/02/17 22:41:07 troy Exp $
+    $Id: I3MCTrack.h,v 1.3 2004/02/18 16:10:33 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/17 22:41:07 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/18 16:10:33 $
     @author
 
     @todo
@@ -16,7 +16,7 @@
 #include <TObject.h>
 #include "dataclasses/I3Track.h"
 
-class I3MCTrack : I3Track
+class I3MCTrack : public I3Track
 {
   float     fWeight;
 
