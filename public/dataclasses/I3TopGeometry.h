@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.12 2004/08/02 19:31:11 pretz Exp $
+ * $Id: I3TopGeometry.h,v 1.13 2004/08/02 20:17:10 pretz Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/08/02 19:31:11 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/08/02 20:17:10 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -44,5 +44,11 @@ class I3TopGeometry : public TObject, public MapPolicy<StationKey,I3TopStationGe
  private:
   ClassDef(I3TopGeometry,1);
 };
+
+/**
+ * pointer type to insulate users from memory management
+ */
+typedef PtrPolicy<I3TopGeometry>::ThePolicy I3TopGeometryPtr;
+
 
 #endif
