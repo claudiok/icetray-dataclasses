@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Constants.h,v 1.1 2004/06/15 16:19:50 pretz Exp $
+ * $Id: I3Constants.h,v 1.2 2004/06/17 22:37:15 dule Exp $
  *
  * @file I3Constants.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/06/15 16:19:50 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/06/17 22:37:15 $
  * @author pretz
  */
 
@@ -28,10 +28,10 @@ namespace I3Constants
   /**
    * pi.
    */
-  static const Double_t pi = 3.141592653589793;
+  static const Double_t pi = 3.14159265358979312;
   
   /**
    * Euler's constant
    */
-  static const Double_t e = 2.718281828;
+  static const Double_t e = 2.71828182845904509;
 };

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Distance.h,v 1.2 2004/06/14 22:28:14 dule Exp $
+ * $Id: I3Distance.h,v 1.3 2004/06/17 22:37:15 dule Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/06/14 22:28:14 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/06/17 22:37:15 $
  * @author pretz
  */
 #ifndef I3DISTANCE_H
@@ -22,19 +22,14 @@
  * @brief A class for the service that calculates various distances 
  * between a track and a position.
  *
+ * This class is intended to be a service, separate from dataclasses.
  * 
- * 
+ * @todo Migrate this whole class out of dataclasses and into services.
  */
 class I3Distance
 {
 
  public:
-
-  /**
-   * Define pi.
-   */
-  static Double_t pi() { return 3.14159265358979323846; }
-
   /**
    * constructor
    */
@@ -68,13 +63,13 @@ class I3Distance
    * position of origin of Cherenkov photon: 'chpos'
    * time of photon from track Pos() until the Position (pos): 'chtime'
    */
-  void ClosestApproach(I3Track* track,     // input track
-		       I3Position& pos,    // input position
-		       I3Position& appos,  // output closest distance position
-		       Double_t& apdist,   // output closest distance
-		       I3Position& chpos,  // output Cherenkov position
-		       Double_t& chtime,   // output Cherenkov time
-		       Double_t ChAngle=41.5*I3Units::degree);
+  void CherenkovLight(I3Track* track,     // input track
+		      I3Position& pos,    // input position
+		      I3Position& appos,  // output closest distance position
+		      Double_t& apdist,   // output closest distance
+		      I3Position& chpos,  // output Cherenkov position
+		      Double_t& chtime,   // output Cherenkov time
+		      Double_t ChAngle=41*I3Units::degree);
 
   /**
    * Calculate a position on track, which is a distance 'dist'

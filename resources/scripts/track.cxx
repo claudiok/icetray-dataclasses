@@ -28,7 +28,9 @@ gSystem->Load("libroot-icetray.so");
   track.Azimuth(0.45);
 
   //  track2.Pos(-1,-1,-1,I3Position::car);
-  track2.Pos(p);
+  I3Position f(1,1,2);
+  track2.Pos(f);
+  //track2.Pos(p);
   track2.Zenith(pi); // going down (-z)
   track2.Azimuth(0); // going along x-axis (+x)
 
@@ -59,8 +61,7 @@ gSystem->Load("libroot-icetray.so");
 
   I3Position pos, cpos;
   Double_t dist, ctime;
-  cout << "before ClosestApproach"<<endl;
-  I3Distance::ClosestApproach(&track2,g,pos,dist,cpos,ctime,54.736*I3Units::degree);
+  I3Distance::CherenkovLight(&track2,g,pos,dist,cpos,ctime,41.5*I3Units::degree);
   cout <<"closest approach distance track2,g: "<< dist <<endl;
   cout <<"point of cl.ap. track2,g: "<<endl;
   pos.PrintPosition();
@@ -71,7 +72,7 @@ gSystem->Load("libroot-icetray.so");
   
 
 //---------------------------
-  p.SetPosition(-1,-1,-1,I3Position::car);
+  p.SetPosition(1,1,-10,I3Position::car);
   if (I3Distance::IsOnTrack(&track2,p)) cout <<"YES"<<endl;
   else cout <<"NO"<<endl;
 

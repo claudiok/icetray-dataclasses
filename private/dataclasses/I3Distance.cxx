@@ -1,19 +1,21 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Distance.cxx,v 1.2 2004/06/14 22:28:03 dule Exp $
+    $Id: I3Distance.cxx,v 1.3 2004/06/17 22:37:15 dule Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/06/14 22:28:03 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/06/17 22:37:15 $
     @author
 
     @todo
 
 */
 #include "dataclasses/I3Distance.h"
+#include "dataclasses/I3Constants.h"
 #include <iostream>
 
 using namespace std;
+using namespace I3Constants;
 
 //--------------------------------------------------------------
 // Calculate distance to position Pos() on track
@@ -44,13 +46,13 @@ Double_t I3Distance::StopDistance(I3Track* track, I3Position& pos)
 
 //--------------------------------------------------------------
 // Calculate distance to CLOSEST APPROACH to track
-void I3Distance::ClosestApproach(I3Track* track,     // input
-				 I3Position& pos,    // input
-				 I3Position& appos,  // output 
-				 Double_t& apdist,   // output
-				 I3Position& chpos,  // output
-				 Double_t& chtime,   // output
-				 Double_t ChAngle)   // input
+void I3Distance::CherenkovLight(I3Track* track,     // input
+				I3Position& pos,    // input
+				I3Position& appos,  // output 
+				Double_t& apdist,   // output
+				I3Position& chpos,  // output
+				Double_t& chtime,   // output
+				Double_t ChAngle)   // input
 {
   //--Only calculate if track has direction
   if (track->HasDirection()) {
@@ -58,9 +60,9 @@ void I3Distance::ClosestApproach(I3Track* track,     // input
 
     //--Calculate position and distance of closest approach
     Double_t PT = P.CalcDistance(track->Pos()); // T=track->Pos()
-    P.Translate(track->Pos());
+    P.ShiftCoordSystem(track->Pos());
     P.RotateZ(-(track->Azimuth()));
-    P.RotateY(pi()/2-(track->Zenith()));
+    P.RotateY(pi/2-(track->Zenith()));
     Double_t TA = P.X();
     Double_t PA = sqrt(PT*PT-TA*TA);
 
@@ -73,7 +75,7 @@ void I3Distance::ClosestApproach(I3Track* track,     // input
     Double_t CP = PA/sin(ChAngle);
     Double_t TC = TA-CA;
     chpos = ShiftAlongTrack(track,TC); // Cherenkov position C
-    chtime = (TC+CP)/track->Speed()/I3Units::ns;
+    chtime = (TC+CP)/c / I3Units::ns;
                // total photon time from T (on track) through C to P.
 
     //--Is point of closest approach (A) on track?
@@ -131,7 +133,7 @@ void I3Distance::ClosestApproach(I3Track* track,     // input
 
     //--Don't calculate if track does not have direction
   } else {
-    cout <<"I3Distance::ClosestApproach - Track has no direction. Not calculating.\n";
+    cout <<"I3Distance::CherenkovLight - Track has no direction. Not calculating.\n";
     appos.NullPosition();
     apdist=NAN;
     chpos.NullPosition();
@@ -161,7 +163,7 @@ Bool_t I3Distance::IsOnTrack(I3Track* track,
 {
   I3Position appos,chpos;
   Double_t apdist,chtime;
-  ClosestApproach(track,pos,appos,apdist,chpos,chtime);
+  CherenkovLight(track,pos,appos,apdist,chpos,chtime);
   if (apdist<=Precision) return kTRUE;
   else return kFALSE;
 }

@@ -1,38 +1,20 @@
-///////////////////////////////////////////////////////////////////////////
-// Class I3Position
-// Handling of positions in various reference frames.
-//
-// This class is meant to serve as a base class for ICECUBE objects
-// that have a unique position in 3-dimensional space.
-//
-// Note :
-// ------
-// Positions (r) and reference frames (f) are specified via
-//
-//    SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame f)
-//
-// under the following conventions :
-//
-// f=car ==> r in Cartesian coordinates   (x,y,z)
-// f=sph ==> r in Spherical coordinates   (r,theta,phi)
-// f=cyl ==> r in Cylindrical coordinates (rho,phi,z)
-//
-// All angles are in radians.
-//
-// Example :
-// ---------
-//
-// I3Position q;
-// q.SetPosition(-1,25,7,car);
-// q.GetPosition(r,theta,phi,sph);
-//
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Position.h,v 1.6 2004/06/17 22:37:15 dule Exp $
+ *
+ * @file I3Track.h
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/17 22:37:15 $
+ * @author dule
+ */
+
 //***********************************************************
 //-- Created: Dusan Turcan UMD 26-05-2004
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
-///////////////////////////////////////////////////////////////////////////
 
-// $Id: I3Position.h,v 1.5 2004/06/14 22:28:14 dule Exp $
+// $Id: I3Position.h,v 1.6 2004/06/17 22:37:15 dule Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -42,6 +24,14 @@ using namespace std;
 
 #include "TObject.h"
 
+/**
+ * @brief The basic position class for IceCube. 
+ *
+ * All positions in IceCube should be written with this class.
+ * Positions can be given in cartesian, spherical, or cylindrical coordinates.
+ * 
+ * @todo implement "print out" of all information in a uniform way...
+ */
 class I3Position
 {
  public:
@@ -50,11 +40,6 @@ class I3Position
    * Possible reference frames.
    */
   enum RefFrame { car, sph, cyl };
-
-  /**
-   * Internally define pi.
-   */
-  static Double_t pi() { return 3.14159265358979323846; }
 
   //--------------
 
@@ -66,7 +51,7 @@ class I3Position
   /**
    * Additional constructor
    */
-  I3Position(Double_t x, Double_t y, Double_t z);
+  I3Position(Double_t x, Double_t y, Double_t z, RefFrame f=car);
 
   /**
    * Copy constructor
@@ -83,22 +68,12 @@ class I3Position
   /**
    * Store position from position p
    */
-  void SetPosition(I3Position& p);
+  void SetPosition(const I3Position& p);
 
   /**
    * Store position r in ref frame f
    */
-  void SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame f);
-
-  /**
-   * Provide position
-   */
-  I3Position& GetPosition();
-
-  /**
-   * Provide position r in ref frame f
-   */
-  void GetPosition(Double_t& r1, Double_t& r2, Double_t& r3, RefFrame f);
+  void SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame f=car);
 
   /**
    * Reset position to 0
@@ -129,56 +104,63 @@ class I3Position
 
   /**
    * Provide R of position in spherical ref frame
+   * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t R() const {return fR;}
+  Double_t R() {
+    if (!IsCalculated) CalcSphCylFromCar();
+    return fR;
+  }
 
   /**
    * Provide Theta of position in spherical ref frame
+   * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t Theta() const {return fTheta;}
+  Double_t Theta() {
+    if (!IsCalculated) CalcSphCylFromCar();
+    return fTheta;
+  }
 
   /**
    * Provide Phi of position in spherical or cylindrical ref frame
+   * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t Phi() const {return fPhi;}
+  Double_t Phi() {
+    if (!IsCalculated) CalcSphCylFromCar();
+    return fPhi;
+  }
 
   /**
    * Provide Rho of position in cylindrical ref frame
+   * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t Rho() const {return fRho;}
+  Double_t Rho() {
+    if (!IsCalculated) CalcSphCylFromCar();
+    return fRho;
+  }
 
   //--------------
 
   /**
    * Set X position while keeping Y,Z constant.  Recalculate SPH and CYL.
    */
-  void X(Double_t x) {
-    fX=x;
-    CalcSphCylFromCar();
-  }
+  void X(Double_t x) {fX=x;}
 
   /**
    * Set Y position while keeping X,Z constant.  Recalculate SPH and CYL.
    */
-  void Y(Double_t y) { 
-    fY=y;
-    CalcSphCylFromCar();
-  }
+  void Y(Double_t y) {fY=y;}
 
   /**
    * Set Z position while keeping X,Y constant.  Recalculate SPH and CYL.
    */
-  void Z(Double_t z) {
-    fZ=z;
-    CalcSphCylFromCar();
-  }
+  void Z(Double_t z) {fZ=z;}
 
   //--------------
 
   /**
-   * Translate current position by position p (i.e. 'this'='this'-'p')
+   * Shift coordinate system by position p (i.e. 'this'='this'-'p')
    */
-  void Translate(const I3Position& p);
+  void ShiftCoordSystem(const I3Position& p);
 
   /**
    * Rotate position around X axis by angle
@@ -198,7 +180,7 @@ class I3Position
   /**
    * Provide distance to position p
    */
-  Double_t CalcDistance(const I3Position& p);
+  Double_t CalcDistance(const I3Position& p) const;
 
   /**
    * Print out all information about the I3Position

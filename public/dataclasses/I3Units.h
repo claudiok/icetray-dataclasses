@@ -2,12 +2,12 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.7 2004/06/09 16:20:29 pretz Exp $
+ $Id: I3Units.h,v 1.8 2004/06/17 22:37:15 dule Exp $
  
  @file I3Units.h  
  @version $Version:$
- @revision $Revision: 1.7 $
- @date $Date: 2004/06/09 16:20:29 $
+ @revision $Revision: 1.8 $
+ @date $Date: 2004/06/17 22:37:15 $
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -83,16 +83,16 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @revision $Revision: 1.7 $
- * @date $Date: 2004/06/09 16:20:29 $
+ * @revision $Revision: 1.8 $
+ * @date $Date: 2004/06/17 22:37:15 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should the 'natural' units be more like what IceCube'll use ns = 1 rather than sec=1 ?
  * @todo Should we have a 'speed' here too?
  * @todo add 'ergs'
  */
-namespace I3Units{
-
+namespace I3Units
+{
   /**
    * meter
    */

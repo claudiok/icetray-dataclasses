@@ -1,9 +1,12 @@
 
-// $Id: I3Position.cxx,v 1.2 2004/06/14 22:28:03 dule Exp $
+// $Id: I3Position.cxx,v 1.3 2004/06/17 22:37:15 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
- 
+#include "dataclasses/I3Constants.h"
+
+using namespace I3Constants;
+
 ClassImp(I3Position) // Class implementation to enable ROOT I/O
 
 //-----------------------------------------------------------
@@ -14,13 +17,10 @@ I3Position::I3Position()
 }
 
 //-----------------------------------------------------------
-I3Position::I3Position(Double_t x, Double_t y, Double_t z)
+I3Position::I3Position(Double_t x, Double_t y, Double_t z, RefFrame f)
 {
 // Creation of an I3Position object and initialization of parameters
-  fX=x;
-  fY=y;
-  fZ=z;
-  CalcSphCylFromCar();
+  SetPosition(x,y,z,car);
 }
 
 //-----------------------------------------------------------
@@ -39,7 +39,7 @@ I3Position::I3Position(const I3Position& p)
 //-----------------------------------------------------------
 
 //-----------------------------------------------------------
-void I3Position::SetPosition(I3Position& p)
+void I3Position::SetPosition(const I3Position& p)
 {
 // Set position
   SetPosition(p.X(), p.Y(), p.Z(), car);
@@ -49,37 +49,23 @@ void I3Position::SetPosition(I3Position& p)
 void I3Position::SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame frame)
 {
 // Store position according to reference frame f
-//  SetValues(r,f);
-// All errors will be reset to 0
-//   fDx=0;
-//   fDy=0;
-//   fDz=0;
-//   fDresult=0;
-
-//   Int_t frame=0;
-//   if (f == "car") frame=1;
-//   if (f == "sph") frame=2;
-//   if (f == "cyl") frame=3;
 
   switch (frame) {
-    //  case 1: // Input given in Cartesian coordinates
-  case car:
+  case car: // Input given in Cartesian coordinates
     fX=r1;
     fY=r2;
     fZ=r3;
-    CalcSphCylFromCar();
+    //CalcSphCylFromCar();
     break;
       
-    //  case 2: // Input given in Spherical coordinates
-  case sph:
+  case sph: // Input given in Spherical coordinates
     fR=r1;
     fTheta=r2;
     fPhi=r3;
     CalcCarCylFromSph();
     break;
 
-    //  case 3: // Input given in Cylindrical coordinates
-  case cyl:
+  case cyl: // Input given in Cylindrical coordinates
     fRho=r1;
     fPhi=r2;
     fZ=r3;
@@ -88,56 +74,6 @@ void I3Position::SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame fra
     
   default: // Unsupported reference frame
     ResetPosition();
-    break;
-  }
-}
-
-//-----------------------------------------------------------
-I3Position& I3Position::GetPosition()
-{
-// Provide position
-  return (*this);
-}
-
-//-----------------------------------------------------------
-void I3Position::GetPosition(Double_t& r1, Double_t& r2, Double_t& r3, RefFrame frame)
-{
-// Provide position according to reference frame f
-//  GetValues(r,f);
-
-//   Int_t frame=0;
-//   if (f == "car") frame=1;
-//   if (f == "sph") frame=2;
-//   if (f == "cyl") frame=3;
-
-  if (!IsCalculated) CalcSphCylFromCar();
-
-  switch (frame) {
-    //  case 1: // Output wanted in Cartesian coordinates
-  case car:
-    r1=fX;
-    r2=fY;
-    r3=fZ;
-    break;
-    
-    //  case 2: // Output wanted in Spherical coordinates
-  case sph: // Output wanted in Spherical coordinates
-    r1=fR;
-    r2=fTheta;
-    r3=fPhi;
-    break;
-
-    //  case 3: // Output wanted in Cylindrical coordinates
-  case cyl: // Output wanted in Cylindrical coordinates
-    r1=fRho;
-    r2=fPhi;
-    r3=fZ;
-    break;
-
-  default: // Unsupported reference frame
-    r1=0;
-    r2=0;
-    r3=0;
     break;
   }
 }
@@ -160,15 +96,15 @@ void I3Position::ResetPosition()
 void I3Position::NullPosition()
 {
 // Set null position for non-existing position
-  SetPosition(999,999,999,car);
+  SetPosition(NAN,NAN,NAN,car);
 }
 
 //-----------------------------------------------------------
 
 //-----------------------------------------------------------
-void I3Position::Translate(const I3Position& p)
+void I3Position::ShiftCoordSystem(const I3Position& p)
 {
-// Translate current I3Position by position p
+// Shift coordinate system by position p
 // i.e. perform: this=this-p
   SetPosition(fX-p.X(), fY-p.Y(), fZ-p.Z(), car);
 }
@@ -210,12 +146,12 @@ void I3Position::RotateZ(Double_t angle)
 }
 
 //-----------------------------------------------------------
-Double_t I3Position::CalcDistance(const I3Position& p)
+Double_t I3Position::CalcDistance(const I3Position& p) const
 {
 // Provide distance of the current I3Position to position p.
   I3Position d;
   d.SetPosition(*this);
-  d.Translate(p);
+  d.ShiftCoordSystem(p);
   return d.R();
 }
 
@@ -241,12 +177,12 @@ void I3Position::CalcSphCylFromCar()
   if (fR && fabs(fZ/fR)<=1.) {
     fTheta=acos(fZ/fR);
   } else {
-    if (fZ<0.) fTheta=pi();
+    if (fZ<0.) fTheta=pi;
   }
-  if (fTheta<0.) fTheta+=2.*pi();
+  if (fTheta<0.) fTheta+=2.*pi;
   fPhi=0;
   if (fX || fY) fPhi=atan2(fY,fX);
-  if (fPhi<0.) fPhi+=2.*pi();
+  if (fPhi<0.) fPhi+=2.*pi;
   fRho=fR*sin(fTheta);
   IsCalculated=kTRUE;
 }
@@ -267,14 +203,14 @@ void I3Position::CalcCarSphFromCyl()
 {
   // Calculate Cartesian and Spherical coordinates from Cylindrical
   fR=sqrt(fRho*fRho+fZ*fZ);
-  if (fPhi<0.) fPhi+=2.*pi();
+  if (fPhi<0.) fPhi+=2.*pi;
   fTheta=0;
   if (fR && fabs(fZ/fR)<=1.) {
     fTheta=acos(fZ/fR);
   } else {
-    if (fZ<0.) fTheta=pi();
+    if (fZ<0.) fTheta=pi;
   }
-  if (fTheta<0.) fTheta+=2.*pi();
+  if (fTheta<0.) fTheta+=2.*pi;
   fX=fRho*cos(fPhi);
   fY=fRho*sin(fPhi);
   IsCalculated=kTRUE;
