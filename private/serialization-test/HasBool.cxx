@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: HasBool.cxx,v 1.1 2005/04/02 17:44:32 troy Exp $
+    $Id: HasBool.cxx,v 1.2 2005/04/06 21:28:59 olivas Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2005/04/02 17:44:32 $
+    @version $Revision: 1.2 $
+    @date $Date: 2005/04/06 21:28:59 $
     @author Troy D. Straszheim
 
 */
@@ -17,7 +17,7 @@ struct HasBool {
   template <class Archive>
   void serialize(Archive &ar, unsigned version)
   {
-    ar & make_nvp("b", b);
+    ar & make_nvp("b", (int)b);
   }
 };
 
