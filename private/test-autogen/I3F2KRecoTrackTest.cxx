@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrackTest.cxx,v 1.1 2004/12/09 18:12:41 pretz Exp $
+    $Id: I3F2KRecoTrackTest.cxx,v 1.2 2005/02/21 11:46:52 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/12/09 18:12:41 $
+    @version $Revision: 1.2 $
+    @date $Date: 2005/02/21 11:46:52 $
     @author pretz
 
     @todo
@@ -34,7 +34,7 @@ namespace tut
 
 namespace
 {
-  tut::factory t("I3F2KRecoTrackTest");
+  static tut::factory t("I3F2KRecoTrackTest");
 }
 
 namespace tut

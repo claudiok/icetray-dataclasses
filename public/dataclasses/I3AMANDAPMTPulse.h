@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3AMANDAPMTPulse.h,v 1.1 2005/02/08 22:45:51 ehrlich Exp $
+ * $Id: I3AMANDAPMTPulse.h,v 1.2 2005/02/21 11:46:53 troy Exp $
  *
  * @file I3AMANDAPMTPulse.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/02/08 22:45:51 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/02/21 11:46:53 $
  * @author ehrlich
  *
  */
@@ -16,6 +16,13 @@
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
 
+// oddness on darwin
+#ifdef __ppc__
+#ifndef isnan 
+#define isnan __isnan
+#endif
+#endif
+
 using namespace I3Constants;
 using namespace I3Units;
 
@@ -25,6 +32,7 @@ using namespace I3Units;
  * This class records the true (simulated) voltage, as a function of
  * time, produced by a single photoelectron (hit). 
  */
+
 class I3AMANDAPMTPulse : public I3PMTPulse {
     
 public:
@@ -171,9 +179,11 @@ public:
    */ 
   virtual Double_t GetPeakVoltage() 
   {
-    if(isnan(GetPeakTime())) return(NAN);
-
-    return(GetVoltage(GetPeakTime()));
+    double peak = GetPeakTime();
+    if (isnan(peak)) 
+      return NAN;
+    else
+      return GetVoltage(peak);
   };
 
 private:
