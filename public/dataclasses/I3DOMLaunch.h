@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.1 2004/07/30 15:11:00 blaufuss Exp $
+ * $Id: I3DOMLaunch.h,v 1.2 2004/10/08 13:14:19 pretz Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/30 15:11:00 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/10/08 13:14:19 $
  * @author klein
  * @author blaufuss
  *
@@ -139,6 +139,15 @@ class I3DOMLaunch : public I3DigitalLaunch
   * sets the FADC waveform
   */
  void SetFADC(const vector<Int_t>& FADCdata) {fFADC=FADCdata;}
+
+ /**
+  * Dumps the file to the given ostream
+  */
+ virtual void ToStream(ostream& o) const
+   {
+     I3DigitalLaunch::ToStream(o);
+     o<<"StartTime: "<<fStartTime;
+   }
 
  private:
   // copy and assignment private

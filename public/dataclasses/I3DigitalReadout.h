@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.8 2004/09/15 18:57:43 ehrlich Exp $
+ * $Id: I3DigitalReadout.h,v 1.9 2004/10/08 13:14:19 pretz Exp $
  *
  * @file I3DigitalReadout.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/09/15 18:57:43 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/10/08 13:14:19 $
  * @author pretz
  * @author blaufuss
  *
@@ -43,6 +43,20 @@ class I3DigitalReadout : public I3DataReadout, public VectorPolicy<I3DigitalLaun
    * destructor
    */
   virtual ~I3DigitalReadout() {}
+
+  /**
+   * dumps the class to the given ostream
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      I3DataReadout::ToStream(o);
+      const_iterator iter;
+      for(iter = begin() ; iter!= end() ; iter++)
+	{
+	  o<<(*iter);
+	}
+      o<<"\n";
+    }
   
  private:
   // copy and assignment private
