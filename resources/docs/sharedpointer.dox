@@ -135,9 +135,8 @@ seen what happens when they get mixed.  One wants to be able to see
 clearly that the pointer handling is correct.  With this system, one
 need only grep for @c new and also see @c shared_pointer_cast on each
 line.  It is still possible to screw up, but it wouldn't happen by
-mistake.  (There are ways to get the bald pointer out of a smart
-pointer, and we will need them when dealing with ROOT, in section @ref
-rootandsharedpointers).
+mistake.  You can get the bald pointer out with @c get(), but don't do
+that.
 
 See also @ref casting.
 
