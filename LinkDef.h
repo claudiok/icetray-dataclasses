@@ -138,18 +138,10 @@
 #pragma link C++ function operator!=(const I3RecoResultMultiTracks::iterator&, const I3RecoResultMultiTracks::iterator&);
 #pragma link C++ typedef I3RecoResultMultiTracksPtr;
 
-#pragma link C++ class I3MCTrackList+;
-#pragma link C++ class I3MCTrackList::iterator+;
+#pragma link C++ class I3MCParticleList+;
+#pragma link C++ class I3MCParticleList::iterator+;
 #pragma link C++ typedef VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy;
 #pragma link C++ class VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3MCTrackList::iterator&, const I3MCTrackList::iterator&);
-#pragma link C++ typedef I3MCTrackListPtr;
-
-
-#pragma link C++ class I3MCParticleList+;
-//#pragma link C++ class I3MCParticleList::iterator+;
-//#pragma link C++ typedef VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy;
-//#pragma link C++ class VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3MCParticleList::iterator&, const I3MCParticleList::iterator&);
 #pragma link C++ typedef I3MCParticleListPtr;
 
