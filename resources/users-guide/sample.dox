@@ -22,8 +22,7 @@ see @ref basics.  You can specify the main page with @c index.  See
 
 So classnames should be specified like this: @c MyClass.  If you need
 <tt> multiple words in code format </tt> you use the html tags for
-"typewriter type" (tt).  Note that "anything in quotes" gets its own
-font too.
+"typewriter type" (tt).  
 
 Here's a code snippets:
 @code
