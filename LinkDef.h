@@ -116,6 +116,8 @@
 #pragma link C++ class I3RecoResultStoragePolicy+;
 #pragma link C++ function operator!=(const I3RecoResult::iterator&, const I3RecoResult::iterator&);
 
+// excuse this cruft, this is from testing type_iterators
+
 //#pragma link C++ typedef TestVecType;
 //#pragma link C++ class TestVecType+;
 //#pragma link C++ class TestVecType::iterator+;
@@ -127,11 +129,13 @@
 //#pragma link C++ function TestVecType::begin<Derived*>()+;
 //#pragma link C++ template function TestVecType::begin<Derived*>();
 //#pragma link C++ function operator!=(const policy::type_iterator<Derived*>&, const policy::type_iterator<Derived*>&);
-//
 //#pragma link C++ template class TestVecType::type_iterator<Base*>+;
 //#pragma link C++ template class TestVecType::type_iterator<Derived*>+;
 //#pragma link C++ class TestVecType::type_iterator<Derived*>+;
 //#pragma link C++ function operator!=(const TestVecType::iterator<Derived*>&, const TestVecType::iterator<Derived*>&);
+//#pragma link C++ class Base+;
+//#pragma link C++ class Derived+;
+
 
 #pragma link C++ typedef I3TestHash;
 #pragma link C++ class I3TestHash+;
@@ -141,8 +145,6 @@
 #pragma link C++ function hashtest;
 #pragma link C++ class pair<string,I3MCHit>+;
 
-#pragma link C++ class Base+;
-#pragma link C++ class Derived+;
 
 #pragma link C++ typedef I3TopGeometry;
 #pragma link C++ class I3TopGeometry+;
