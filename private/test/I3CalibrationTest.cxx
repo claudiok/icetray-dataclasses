@@ -186,22 +186,21 @@ namespace tut
 	{
 	    I3CalibrationHeader header;
 	    
-	    header.SetJulianDay(1);
-	    header.SetSec(1);
-	    header.SetNanoSec(1);
+	    I3Time time(1,1,1);
+	    header.SetTime(time);
 
-	    cout<< header.GetJulianDay() <<endl;
-	    cout<< header.GetSec() <<endl;
-	    cout<< header.GetNanoSec() <<endl;
+	    cout<< header.GetTime().GetJulianDay() <<endl;
+	    cout<< header.GetTime().GetJulianSec() <<endl;
+	    cout<< header.GetTime().GetJulianNanoSec() <<endl;
 
 	    ensure("Failed to get julian day from calibration header", 
-		   header.GetJulianDay() == 1);
+		   header.GetTime().GetJulianDay() == 1);
 
 	    ensure("Failed to get seconds from calibration header", 
-		   header.GetSec() == 1);
+		   header.GetTime().GetJulianSec() == 1);
 
 	    ensure("Failed to get nanoseconds from calibration header", 
-		   header.GetNanoSec() == 1);
+		   header.GetTime().GetJulianNanoSec() == 1);
 
 	    header.ToStream(cout);
 	    cout<< &header <<endl;	    

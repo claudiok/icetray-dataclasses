@@ -6,6 +6,7 @@ extern "C"
 #include "dataclasses/I3Time.h"
 
 #include <iostream>
+#include <cassert>
 
 using std::cout;
 using std::endl;
@@ -27,22 +28,22 @@ I3Time::I3Time()
   ns_ = 0;
 }
 
-I3Time::I3Time(int year,
-	       long long int daqTime)
-{
-  SetDaqTime(year,daqTime);
+// I3Time::I3Time(int year,
+// 	       long long int daqTime)
+// {
+//   SetDaqTime(year,daqTime);
 
 
-}
+// }
 
-I3Time::I3Time(unsigned int julianDay,
-	       unsigned int sec,
-	       double ns) : 
-  julianDay_(julianDay),
-  sec_(sec),
-  ns_(ns)
-{
-}
+// I3Time::I3Time(unsigned int julianDay,
+// 	       unsigned int sec,
+// 	       double ns) : 
+//   julianDay_(julianDay),
+//   sec_(sec),
+//   ns_(ns)
+// {
+// }
 
 void I3Time::SetDaqTime(int year, 
 			long long int daqTime)
@@ -96,6 +97,24 @@ void I3Time::SetJulianTime(unsigned int julianDay,
   ns_ = ns;
 }
 
+void I3Time::SetModJulianTime(unsigned int modJulianDay,
+			   unsigned int sec,
+			   double ns)
+{
+  if(sec < 60 * 60 * 12)
+    {
+      julianDay_ = modJulianDay + 2400000;
+      sec_ = sec + 60 * 60 * 12;
+    }
+  else
+    {
+      julianDay_ = modJulianDay + 2400000;
+      sec_ = sec - 60 * 60 * 12;
+    }
+  ns_ = ns;
+  
+}
+
 int I3Time::GetUTCYear() const
 {
   UTinstant thisInstant = UTinstantiate(*this);
@@ -130,6 +149,27 @@ unsigned int I3Time::GetJulianSec() const
 }
 
 double I3Time::GetJulianNanoSec() const
+{
+  return ns_;
+}
+
+unsigned int I3Time::GetModJulianDay() const
+{
+  if(sec_ > 60 * 60 * 12)
+    return julianDay_ - 2400000;
+  else
+    return julianDay_ - 2400001;
+}
+
+unsigned int I3Time::GetModJulianSec() const
+{
+  if(sec_ < 60 * 60 * 12)
+    return sec_ + 60 * 60 * 12;
+  else
+    return sec_ - 60 * 60 * 12;
+}
+
+double I3Time::GetModJulianNanoSec() const
 {
   return ns_;
 }

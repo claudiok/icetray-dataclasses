@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.14 2005/03/29 17:55:01 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.15 2005/03/29 20:27:53 pretz Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.14 $
- * @date $Date: 2005/03/29 17:55:01 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2005/03/29 20:27:53 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -32,7 +32,8 @@ using namespace std;
  */
 class I3DataHeader : public TObject
 {
-  I3Time time_;
+  I3Time startTime_;
+  I3Time endTime_;
  public: 
   /**
    * constructor
@@ -45,14 +46,24 @@ class I3DataHeader : public TObject
   virtual ~I3DataHeader();
 
   /**
-   * Gets the Time for this header
+   * Gets the start Time for this header
    */
-  const I3Time& GetTime() const { return time_;}
+  const I3Time& GetStartTime() const { return startTime_;}
 
   /**
-   * Sets the Time for this header
+   * Sets the start Time for this header
    */
-  void SetTime(const I3Time& t) { time_ = t;}
+  void SetStartTime(const I3Time& t) { startTime_ = t;}
+
+  /**
+   * Sets the ending time for this header
+   */
+  void SetEndTime(const I3Time& t){endTime_ = t;}
+
+  /**
+   * Gets the ending time for this header
+   */
+  const I3Time& GetEndTime() const { return endTime_;}
 
   virtual void ToStream(ostream& o) const
     {

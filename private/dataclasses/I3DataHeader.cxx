@@ -3,7 +3,7 @@
 ClassImp(I3DataHeader);
 
 I3DataHeader::I3DataHeader()
-  : time_()
+  : startTime_(), endTime_()
 {
 }
 
