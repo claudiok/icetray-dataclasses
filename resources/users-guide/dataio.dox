@@ -16,7 +16,6 @@
 You need to check out the following packages from glacier:
 - dataio
 - dataio-modules
-- eventviewer
 
 So you need <br>
 <code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev:</code>
@@ -25,7 +24,6 @@ Then you can check out the packages:<br>
 <code>
 % bfd co dataio<br>
 % bfd co dataio-modules<br>
-% bfd co eventviewer<br>
 </code>
 
 @section desc Description:
@@ -118,12 +116,11 @@ This class also contains an F2k reader, which is called through <b>TranslateF2k(
 The result is put in the transient data structure (or appended to an existing structure).
 If one wants to translate only a specific event, one can use the method <b>TranslateF2kEvent(source, eventnumber)</b>,
 where eventnumber=0 stands for a geometry event and eventnumber>0 stands for all physics events.
-This method returns false if the event does not exist.
-
-<h2> Additional method</h2>
-There is an additional method, which is actually not needed anymore, since the frame work does this job.
-It is still in the class (just in case ...): <b>GetI3Frame</b>. An description can be found in the header file
-I3Tree.h
+This method returns false if the event does not exist. <br> 
+For an iteration over all events, one has to start with TranslateF2kHeader(source) which translates the 
+geometry and returns an RDMC header structure. This header structure has to be used for the 
+function TranslateF2kNextEvent(source, header), which goes to the "next" event (starting with the first)
+and translates it. This method returns false if the event does not exist. 
 
 <h2> Some sample modules</h2>
 - <b>F2kReaderModule</b> Translates F2k (text) files and fills an Physics and Geometry stream

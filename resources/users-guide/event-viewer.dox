@@ -1,6 +1,4 @@
-// put back this doxygen starting tag later
-
-/*
+/**
 @page event-viewer Using the event viewer
 @author Ralf Ehrlich
 
@@ -19,6 +17,7 @@ You need to check out the following packages from glacier:
 - dataio
 - dataio-modules
 - eventviewer
+- eventviewer-modules
 
 So you need <br>
 <code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev:</code>
@@ -28,13 +27,14 @@ Then you can check out the packages:<br>
 % bfd co dataio<br>
 % bfd co dataio-modules<br>
 % bfd co eventviewer<br>
+% bfd co eventviewer-modules<br>
 </code>
 
 @section desc Description:
 
 In order to display IceCube events you need the I3EventViewer class. This class has two (more to come)
-public methods <b>AMANDAAnalog(I3InIceGeometry& geo, I3Event& event, const Char_t *listname, Bool_t drawmctrack, I3MCTrackList& mctracklist, Bool_t drawrecotrack, I3RecoTrackList& recotracklist)</b>
-and <b>MCHits(I3InIceGeometry& geo, I3Event& event, Bool_t drawmctrack, I3MCTrackList& mctracklist, Bool_t drawrecotrack, I3RecoTrackList& recotracklist)</b>.
+public methods <b>AMANDAAnalog(I3InIceGeometry& geo, I3Event& event, const Char_t *listname, Bool_t drawmctrack, I3MCParticleList& mcparticlelist, Bool_t drawrecotrack, I3RecoTrackList& recotracklist)</b>
+and <b>MCHits(I3InIceGeometry& geo, I3Event& event, Bool_t drawmctrack, I3MCParticleList& mcparticlelist, Bool_t drawrecotrack, I3RecoTrackList& recotracklist)</b>.
 Calling these methods starts an eventviewer, where <b>AMANDAAnalog</b> displays AMANDA analog pulses and 
 <b>MCHits</b> displays MC hits. The event viewer is also able to draw MC/reco tracks/showers.<br> 
 The sample module I3EventViewer shows how to use these methods.
