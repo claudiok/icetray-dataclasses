@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.7 2004/07/15 20:29:25 deyoung Exp $
+    $Id: I3MCOMResponse.h,v 1.8 2004/07/19 15:33:42 pretz Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.7 $
-    @date $Date: 2004/07/15 20:29:25 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/07/19 15:33:42 $
     @author ehrlich
     @author troy
     @author pretz
@@ -17,6 +17,7 @@
 #include "I3MCHitSeries.h"
 #include "I3MCPMTResponse.h"
 #include "I3OMResponse.h"
+#include "I3MCPhotonVect.h"
 
 /**
  * @brief The response of an OM in a single event, including Monte
@@ -36,7 +37,8 @@ class I3MCOMResponse : public I3OMResponse
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
   I3MCHitSeries       fMCHitSeries; //||
-  I3MCPMTResponse     fMCPMTResponse; //
+  I3MCPMTResponse     fMCPMTResponse; //||
+  I3MCPhotonVect      fMCPhotonVect; //||
 
  public:
   /**
@@ -60,14 +62,32 @@ class I3MCOMResponse : public I3OMResponse
     I3MCPMTResponse& GetMCPMTResponse() { return fMCPMTResponse;}
 
   /**
-   * @return the MC Truth for this response as a const object
+   * @return the pe hit series for this om response, as read-only.
+   * These are PE's, not  photon arrivals
    */
   const I3MCHitSeries& GetMCHitSeries() const {return fMCHitSeries;}
 
   /**
-   * @return the MC truth for this response as a non-const object
+   * Gives the MC truth for this response as a non-const object
+   * These are pes, not photon arrivals.
+   * @return the MCHitSeries for this class
    */
   I3MCHitSeries& GetMCHitSeries() {return fMCHitSeries;}
+
+  /**
+   * Gives the MC Photon series for this om response as a read-only
+   * object.  This is the  MC truth for photon arrivals, not pes.
+   * @return the MC Photon Vect for this om response
+   */
+  const I3MCPhotonVect& GetMCPhotonVect() const { return fMCPhotonVect;}
+
+
+  /**
+   * Gives the MC Photon series for this om response as a non-const object
+   * This is the MC truth for the photon arrivals, not pes.
+   * @return the MC Photon Vect for this om response
+   */
+  I3MCPhotonVect& GetMCPhotonVect() { return fMCPhotonVect;}
 
   private:
   // copy and assignment are private

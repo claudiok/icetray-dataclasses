@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.92 2004/07/16 19:51:59 pretz Exp $
-// $Revision: 1.92 $
-// $Date: 2004/07/16 19:51:59 $
+// $Id: LinkDef.h,v 1.93 2004/07/19 15:33:42 pretz Exp $
+// $Revision: 1.93 $
+// $Date: 2004/07/19 15:33:42 $
 //
 
 #ifdef __CINT__
@@ -117,6 +117,12 @@
 #pragma link C++ class VectorPolicy<I3MCHit>::ThePolicy+;
 #pragma link C++ function operator!=(const I3MCHitSeries::iterator&, const I3MCHitSeries::iterator&);
 #pragma link C++ typedef I3MCHitSeriesPtr;
+
+#pragma link C++ class I3MCPhotonVect+;
+#pragma link C++ typedef VectorPolicy<I3MCPhoton>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3MCPhoton>::ThePolicy+;
+#pragma link C++ function operator!=(const I3MCPhotonVect::iterator&, const I3MCPhotonVect::iterator&);
+#pragma link C++ typedef I3MCPhotonVectPtr;
 
 #pragma link C++ class I3RecoHitSeries+;
 #pragma link C++ typedef VectorPolicy<I3RecoHit>::ThePolicy;
@@ -250,6 +256,8 @@
 #pragma link C++ class I3Energetic+;
 #pragma link C++ class I3MCEvent+;
 #pragma link C++ typedef I3MCEventPtr;
+#pragma link C++ class I3MCPhoton+;
+#pragma link C++ typedef I3MCPhotonPtr;
 #pragma link C++ class I3Event+;
 #pragma link C++ typedef I3EventPtr;
 #pragma link C++ class I3EventHeader+;
