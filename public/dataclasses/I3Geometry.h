@@ -2,10 +2,10 @@
 
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Geometry.h,v 1.10 2004/02/20 21:42:08 troy Exp $
+    $Id: I3Geometry.h,v 1.11 2004/02/21 02:24:13 pretz Exp $
 
-    @version $Revision: 1.10 $
-    @date $Date: 2004/02/20 21:42:08 $
+    @version $Revision: 1.11 $
+    @date $Date: 2004/02/21 02:24:13 $
     @author Some lazy sucker who did not put the header here.
 
     @todo 
@@ -33,7 +33,9 @@ class I3GeometryHeader {
 };
 
 typedef StoragePolicy<I3OMGeoPtr> I3GeometryStoragePolicy;
-typedef AugVec<I3GeometryHeader, I3OMGeoPtr, I3GeometryStoragePolicy> I3Geometry;
+class I3Geometry : public AugVec<I3GeometryHeader, I3OMGeoPtr, I3GeometryStoragePolicy>{
+ClassDef(I3Geometry,1);
+};
 
 #endif
  

@@ -60,8 +60,7 @@
 #pragma link C++ typedef I3DigitalFADCSeries;
 #pragma link C++ typedef I3DigitalTWRSeries;
 
-
-#pragma link C++ typedef I3Geometry;
+#pragma link C++ class AugVec<I3GeometryHeader, I3OMGeo*, I3GeometryStoragePolicy>;
 #pragma link C++ class I3Geometry+;
 #pragma link C++ class I3Geometry::iterator+;
 #pragma link C++ typedef I3GeometryStoragePolicy;
@@ -75,14 +74,14 @@
 #pragma link C++ class I3MCHitSeriesStoragePolicy+;
 #pragma link C++ function operator!=(const I3MCHitSeries::iterator&, const I3MCHitSeries::iterator&)
 
-#pragma link C++ typedef I3MCTrackList;
+#pragma link C++ class AugVec<I3MCTrackListHeader, I3MCTrack, StoragePolicy<I3MCTrack> >;
 #pragma link C++ class I3MCTrackList+;
 #pragma link C++ class I3MCTrackList::iterator+;
 #pragma link C++ typedef I3MCTrackListStoragePolicy;
 #pragma link C++ class I3MCTrackListStoragePolicy+;
 #pragma link C++ function operator!=(const I3MCTrackList::iterator&, const I3MCTrackList::iterator&)
 
-#pragma link C++ typedef I3MCTrackData;
+#pragma link C++ class AugVec<I3MCTrackDataHeader, I3MCTrackList, I3MCTrackDataStoragePolicy >;
 #pragma link C++ class I3MCTrackData+;
 #pragma link C++ class I3MCTrackData::iterator+;
 #pragma link C++ typedef I3MCTrackDataStoragePolicy;

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCTrackList.h,v 1.9 2004/02/20 21:42:08 troy Exp $
+    $Id: I3MCTrackList.h,v 1.10 2004/02/21 02:24:13 pretz Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/02/20 21:42:08 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/02/21 02:24:13 $
     @author
 
     @todo
@@ -22,8 +22,10 @@ class I3MCTrackListHeader { };
 
 typedef StoragePolicy<I3MCTrack> I3MCTrackListStoragePolicy;
 
-typedef AugVec<I3MCTrackListHeader, 
-			I3MCTrack, 
-			I3MCTrackListStoragePolicy> I3MCTrackList;
+class I3MCTrackList : public AugVec<I3MCTrackListHeader, 
+  				I3MCTrack, 
+				I3MCTrackListStoragePolicy>{
+ClassDef(I3MCTrackList,1);
+};
 
 #endif
