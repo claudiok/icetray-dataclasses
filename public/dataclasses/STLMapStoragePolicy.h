@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.12 2004/08/02 22:12:28 pretz Exp $
+    $Id: STLMapStoragePolicy.h,v 1.13 2004/08/24 21:48:34 deyoung Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.12 $
-    @date $Date: 2004/08/02 22:12:28 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/08/24 21:48:34 $
     @author Troy Straszheim
 
 */
@@ -91,7 +91,7 @@ class STLMapStoragePolicy {
   bool Add(const ElementType& element, const KeyType& key)
     {
       iterator iter = find(key);
-      if(iter == end())
+      if(iter != end())
 	return false;
       else
 	this->operator[](key) = element;
