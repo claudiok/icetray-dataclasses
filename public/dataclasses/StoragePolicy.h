@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.6 2004/03/01 20:19:49 pretz Exp $
+    $Id: StoragePolicy.h,v 1.7 2004/03/14 15:07:12 pretz Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/03/01 20:19:49 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/03/14 15:07:12 $
     @author
 
     @todo
@@ -26,29 +26,80 @@
 
 // something like this would be nice but root wont allow it
 template <class Stored>
+/**
+ * The existence of this VectorPolicy class allows classes to inherit
+ * from VectorPolicy<>::ThePolicy.  That policy's implementation can change -
+ * provided the new implementation supplies the same interface - just by
+ * changing this VectorPolicy class.  That's what it is here for.
+ */
 struct VectorPolicy {
+  /**
+   * Right now, ThePolicy is an STLVectorStoragePolicy
+   */
   typedef STLVectorStoragePolicy<Stored> ThePolicy;
+
   // half-implemented
   // typedef TClonesArrayStoragePolicy<Stored> ThePolicy;
 };
 
+/**
+ * The existence of this VecPointainerPolicy class allows classes to inherit
+ * from VecPointainerPolicy<>::ThePolicy.  That policy's implementation can 
+ * change -
+ * provided the new implementation supplies the same interface - just by
+ * changing this VecPointainerPolicy class.  Classes that are Vectors of 
+ * Pointers
+ * should inherit from this class rather than VectorPolicy<>::ThePolicy so
+ * that the memory management can be out of the hands of the users.
+ */
 template <class Stored>
 struct VecPointainerPolicy{
+  /**
+   * Right now, ThePolicy is just a typedefed STLVecPointainerPolicy
+   */
   typedef STLVecPointainerPolicy<Stored> ThePolicy;
 };
 
+/**
+ * The existence of this MapPolicy class allows classes to inherit
+ * from MapPolicy<>::ThePolicy.  That policy's implementation can change -
+ * provided the new implementation supplies the same interface - just by
+ * changing this Mapolicy class.  That's what it is here for.
+ */
 template <class Stored>
 struct MapPolicy {
+  /**
+   * Right now, ThePolicy is just a typedeffed STLMapStoragePolicy
+   */
   typedef STLMapStoragePolicy<Stored> ThePolicy;
+
   // not yet implemented
   // typedef TMapStoragePolicy<Stored> ThePolicy;
 };
 
+/**
+ * The existence of this MapPointainerPolicy class allows classes to inherit
+ * from MapPointainerPolicy<>::ThePolicy.  That policy's implementation can 
+ * change -
+ * provided the new implementation supplies the same interface - just by
+ * changing this MapPointainerPolicy class.  Classes that are Maps of Pointers
+ * should inherit from this class rather than MapPolicy<>::ThePolicy so
+ * that the memory management can be out of the hands of the users.
+ */
 template <class Stored>
 struct MapPointainerPolicy{
+  /**
+   * Right now, ThePolicy is just a typedeffed STLMapPointainerPolicy
+   */
   typedef STLMapPointainerPolicy<Stored> ThePolicy;
 };
 
+/**
+ * The existence of this PtrPolicy allows for typdefs of 
+ * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
+ * Foo*.  What this does is allow the true implemntation of FooPtr to change
+ * in this one place, and the rest of the code is unaffected
+ */
 template <class Pointed>
 struct PtrPolicy {
   //  typedef SmartPtr<Pointed> ThePolicy;
@@ -57,6 +108,10 @@ struct PtrPolicy {
   // leak.  We will have smart pointers working shortly, they have
   // been tested and work, but not in this build at the moment
 
+  /**
+   * Right now the policy is just to use raw pointers, but that can be changed
+   * to smart pointers at some later date.
+   */
   typedef Pointed* ThePolicy;
 };
 

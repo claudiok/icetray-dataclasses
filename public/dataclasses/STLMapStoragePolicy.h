@@ -1,13 +1,3 @@
-/**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.6 2004/02/24 02:48:43 troy Exp $
-
-    @version $Revision: 1.6 $
-    @date $Date: 2004/02/24 02:48:43 $
-    @author Troy Straszheim
-
-*/
 #ifndef STLMAPPOLICY_H
 #define STLMAPPOLICY_H
 
@@ -15,7 +5,16 @@
 #include <map>
 
 using namespace std;
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: STLMapStoragePolicy.h,v 1.7 2004/03/14 15:07:12 pretz Exp $
 
+    @version $Revision: 1.7 $
+    @date $Date: 2004/03/14 15:07:12 $
+    @author Troy Straszheim
+
+*/
 template <class ElementType>
 class STLMapStoragePolicy {
 

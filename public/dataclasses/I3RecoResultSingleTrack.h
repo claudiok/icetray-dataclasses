@@ -1,12 +1,17 @@
+#ifndef I3RECORESULTSINGLETRACK_H
+#define I3RECORESULTSINGLETRACK_H
+
+#include "I3RecoResult.h"
+#include "I3RecoTrack.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.6 2004/03/08 21:22:51 pretz Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.7 2004/03/14 15:07:12 pretz Exp $
  *
  * This is a reco result which just contains a single track
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/03/08 21:22:51 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/03/14 15:07:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,12 +19,6 @@
  * @todo
  *
  */
-#ifndef I3RECORESULTSINGLETRACK_H
-#define I3RECORESULTSINGLETRACK_H
-
-#include "I3RecoResult.h"
-#include "I3RecoTrack.h"
-
 class I3RecoResultSingleTrack : public I3RecoResult
 {
   I3RecoTrack fTrack;

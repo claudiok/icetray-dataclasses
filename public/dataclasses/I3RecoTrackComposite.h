@@ -1,21 +1,20 @@
-/**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: I3RecoTrackComposite.h,v 1.6 2004/03/10 20:21:45 pretz Exp $
-
-    @version $Revision: 1.6 $
-    @date $Date: 2004/03/10 20:21:45 $
-    @author
-
-    @todo
-
-*/
 #ifndef TI3RECOTRACKCOMPOSITE_H
 #define TI3RECOTRACKCOMPOSITE_H
 
 #include <TObject.h>
 #include "I3RecoTrack.h"
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3RecoTrackComposite.h,v 1.7 2004/03/14 15:07:12 pretz Exp $
 
+    @version $Revision: 1.7 $
+    @date $Date: 2004/03/14 15:07:12 $
+    @author
+
+    @todo isn't this class rendered obsolete by the new Track stuff???
+
+*/
 class I3RecoTrackComposite : public I3RecoTrack
 {
   TObjArray *constituent;

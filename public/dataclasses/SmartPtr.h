@@ -1,20 +1,19 @@
+#ifndef SMARTPTR_H_INCLUDED
+#define SMARTPTR_H_INCLUDED
+
+#include "RCObject.h"
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: SmartPtr.h,v 1.2 2004/02/24 02:48:43 troy Exp $
+    $Id: SmartPtr.h,v 1.3 2004/03/14 15:07:12 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/24 02:48:43 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/03/14 15:07:12 $
     @author Troy D. Straszheim
 
     @todo
 
 */
-#ifndef SMARTPTR_H_INCLUDED
-#define SMARTPTR_H_INCLUDED
-
-#include "RCObject.h"
-
 template<class T>
 class SmartPtr {
 public:

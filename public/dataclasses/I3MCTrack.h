@@ -1,21 +1,20 @@
-/**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: I3MCTrack.h,v 1.4 2004/02/26 18:53:12 pretz Exp $
-
-    @version $Revision: 1.4 $
-    @date $Date: 2004/02/26 18:53:12 $
-    @author
-
-    @todo
-
-*/
 #ifndef I3MCTRACK_H
 #define I3MCTRACK_H
 
 #include <TObject.h>
 #include "dataclasses/I3Track.h"
-
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCTrack.h,v 1.5 2004/03/14 15:07:12 pretz Exp $
+ *
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/03/14 15:07:12 $
+ * @author
+ *
+ * @todo
+ *
+ */
 class I3MCTrack : public I3Track
 {
   Double_t     fWeight;

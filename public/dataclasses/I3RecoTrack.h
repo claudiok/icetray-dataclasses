@@ -5,7 +5,18 @@
 #include <TObjArray.h>
 #include "I3Track.h"
 #include "StoragePolicy.h"
-
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3RecoTrack.h,v 1.3 2004/03/14 15:07:12 pretz Exp $
+ *
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/03/14 15:07:12 $
+ * @author
+ *
+ * @todo
+ *
+ */
 class I3RecoTrack : public I3Track
 {
   Int_t number_used_oms;

@@ -1,18 +1,3 @@
-/**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: I3TankGeo.h,v 1.3 2004/03/10 19:17:52 pretz Exp $
-
-    @version $Revision: 1.3 $
-    @date $Date: 2004/03/10 19:17:52 $
-    @author PN Thu Feb 19 11:48:23 EST 2004
-
-    @brief Class which describes a single tank
-
-    @todo 
-
-*/
-
 #ifndef __I3TANKGEO_H_
 #define __I3TANKGEO_H_
 
@@ -20,7 +5,20 @@
 
 #include "dataclasses/I3TankMaterial.h"
 #include "dataclasses/I3InIceGeometry.h"
-
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3TankGeo.h,v 1.4 2004/03/14 15:07:12 pretz Exp $
+ *
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/03/14 15:07:12 $
+ * @author PN Thu Feb 19 11:48:23 EST 2004
+ *
+ * @brief Class which describes a single tank
+ *
+ * @todo 
+ *
+ */
 class I3TankGeo : public TObject
 {
   public:

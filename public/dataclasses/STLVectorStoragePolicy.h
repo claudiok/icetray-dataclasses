@@ -1,19 +1,18 @@
-/**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.3 2004/03/10 02:42:24 pretz Exp $
-
-    @version $Revision: 1.3 $
-    @date $Date: 2004/03/10 02:42:24 $
-    @author Troy Straszheim
-
-*/
 #ifndef STLVECTOR_POLICY_INCLUDED
 #define STLVECTOR_POLICY_INCLUDED
 
 #include <vector>
 using namespace std;
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: STLVectorStoragePolicy.h,v 1.4 2004/03/14 15:07:12 pretz Exp $
 
+    @version $Revision: 1.4 $
+    @date $Date: 2004/03/14 15:07:12 $
+    @author Troy Straszheim
+
+*/
 template <class ElementType>
 class STLVectorStoragePolicy  {
 

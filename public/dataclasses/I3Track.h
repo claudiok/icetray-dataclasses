@@ -1,15 +1,3 @@
-/**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: I3Track.h,v 1.9 2004/03/10 19:56:05 pretz Exp $
-
-    @version $Revision: 1.9 $
-    @date $Date: 2004/03/10 19:56:05 $
-    @author
-
-    @todo
-
-*/
 #ifndef I3TRACK_H
 #define I3TRACK_H
 
@@ -18,7 +6,18 @@
 #include <vector>
 
 using namespace std;
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3Track.h,v 1.10 2004/03/14 15:07:12 pretz Exp $
 
+    @version $Revision: 1.10 $
+    @date $Date: 2004/03/14 15:07:12 $
+    @author
+
+    @todo
+
+*/
 class I3Track : public TObject
 {
   public:
