@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoResultData.h,v 1.12 2004/02/23 17:14:19 pretz Exp $
+    $Id: I3RecoResultData.h,v 1.13 2004/02/23 22:36:49 troy Exp $
 
-    @version $Revision: 1.12 $
-    @date $Date: 2004/02/23 17:14:19 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/02/23 22:36:49 $
     @author
 
     @todo
@@ -20,6 +20,8 @@
 
 class I3RecoResultData : public TObject, public MapPolicy<I3RecoResultPtr>::ThePolicy
 {
+
+
 
  public:
 

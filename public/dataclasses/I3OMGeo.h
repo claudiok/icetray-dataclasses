@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMGeo.h,v 1.6 2004/02/22 14:26:36 pretz Exp $
+    $Id: I3OMGeo.h,v 1.7 2004/02/23 22:36:49 troy Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/02/22 14:26:36 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/02/23 22:36:49 $
     @author
 
     @todo
@@ -64,7 +64,8 @@ class I3OMGeo : public TObject
   ClassDef(I3OMGeo,1);
 };
 
-typedef I3OMGeo* I3OMGeoPtr;
+#include "dataclasses/StoragePolicy.h"
+typedef PtrPolicy<I3OMGeo>::ThePolicy I3OMGeoPtr;
 
 #endif
 

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMGeoAmanda.h,v 1.4 2004/02/22 14:26:36 pretz Exp $
+    $Id: I3OMGeoAmanda.h,v 1.5 2004/02/23 22:36:49 troy Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/02/22 14:26:36 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/02/23 22:36:49 $
     @author
 
     @todo
@@ -31,7 +31,8 @@ class I3OMGeoAmanda : public I3OMGeo
   ClassDef(I3OMGeoAmanda,1);
 };
 
-typedef I3OMGeoAmanda* I3OMGeoAmandaPtr;
+#include "dataclasses/StoragePolicy.h"
+typedef PtrPolicy<I3OMGeoAmanda>::ThePolicy I3OMGeoAmandaPtr;
 
 #endif
 

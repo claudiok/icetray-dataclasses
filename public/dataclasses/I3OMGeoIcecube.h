@@ -19,7 +19,7 @@ class I3OMGeoIcecube : public I3OMGeo
   ClassDef(I3OMGeoIcecube,1);
 };
 
-typedef I3OMGeoIcecube* I3OMGeoIcecubePtr;
+typedef PtrPolicy<I3OMGeoIcecube>::ThePolicy I3OMGeoIcecubePtr;
 
 #endif
 

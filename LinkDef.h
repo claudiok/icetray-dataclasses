@@ -72,6 +72,8 @@
 
 #pragma link C++ class I3RecoHitSeries+;
 #pragma link C++ class I3RecoHitSeries::iterator+;
+#pragma link C++ typedef I3RecoHitSeriesPtr;
+#pragma link C++ class I3RecoHitSeriesPtr+;
 #pragma link C++ typedef VectorPolicy<I3RecoHit>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoHit>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoHitSeries::iterator&, const I3RecoHitSeries::iterator&);
@@ -109,6 +111,8 @@
 
 #pragma link C++ class I3RecoResult+;
 #pragma link C++ class I3RecoResult::iterator+;
+#pragma link C++ typedef I3RecoResultPtr;
+#pragma link C++ class I3RecoResultPtr+;
 #pragma link C++ typedef VectorPolicy<I3RecoTrackList>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoTrackList>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoResult::iterator&, const I3RecoResult::iterator&);
@@ -139,11 +143,18 @@
 #pragma link C++ class I3MCHit+;
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3OMGeo+;
+
 #pragma link C++ typedef I3OMGeoPtr;
+#pragma link C++ class I3OMGeoPtr+;
 #pragma link C++ class I3OMGeoAmanda+;
+
 #pragma link C++ typedef I3OMGeoAmandaPtr;
+#pragma link C++ class I3OMGeoAmandaPtr+;
 #pragma link C++ class I3OMGeoIcecube+;
+
 #pragma link C++ typedef I3OMGeoIcecubePtr;
+#pragma link C++ class I3OMGeoIcecubePtr+;
+
 #pragma link C++ class I3OMResponse+;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ class I3RecoResultLikelihood+;
