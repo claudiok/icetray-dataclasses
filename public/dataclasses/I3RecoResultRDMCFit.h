@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.8 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.9 2004/08/05 01:42:02 ehrlich Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/08/05 01:42:02 $
  * @author pretz
  */
 
@@ -33,7 +33,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 {
   map<string,Double_t> fParameters;
   vector<Int_t> fUsedTubes;
-  string fFitType;
+  string fFitName;
 
   public:
   /**
@@ -49,12 +49,12 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
   /**
    * @return the type of this fit as a const object
    */
-  const string& GetFitType() const {return fFitType;}
+  const string& GetFitName() const {return fFitName;}
 
   /**
    * @return the type of this fit as non-const object
    */
-  string& GetFitName() {return fFitType;}
+  string& GetFitName() {return fFitName;}
 
   /**
    * The parameters of the RDMC fit in the order they appear in the f2k file

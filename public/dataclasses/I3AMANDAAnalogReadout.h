@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.5 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.6 2004/08/05 01:42:02 ehrlich Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/05 01:42:02 $
  * @author pretz
  *
  */
@@ -48,8 +48,8 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
    * @return the time of the first LE in the readout
    */
   virtual Double_t GetFirstLE() const {
-    if(fLEs.size() >0) 
-      return fLEs[0]; 
+    if(fLEs.size() >0)
+      return fLEs[0];
     return 0;
   }
 
@@ -77,11 +77,11 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
    * @return the amplitude
    */
   Double_t GetAmplitude() const {return fAmp;}
-  
+
   /**
    * @param amplitude the new amplitude of the readout
    */
-  void GetAmplitude(Double_t amplitude) {fAmp=amplitude;}
+  void SetAmplitude(Double_t amplitude) {fAmp=amplitude;}
 
  private:
   // copy and assignment private
