@@ -4,10 +4,10 @@
 ClassImp(I3DOMCalibration);
 
 I3DOMCalibration::I3DOMCalibration()
-    : fDate(0.0), fDOMId(0), fTemperature(0.0),
-      fFADCGain(0.0), fFADCPedestal(0.0),
-      fPMTHighVoltage(0.0), fPedestalVoltage(0.0),
-      fSamplingRate0(0.0), fSamplingRate1(0.0)
+    : fDate(NAN), fDOMId(0), fTemperature(NAN),
+      fFADCGain(NAN), fFADCPedestal(NAN),
+      fPMTHighVoltage(NAN), fPedestalVoltage(NAN),
+      fSamplingRate0(NAN), fSamplingRate1(NAN)
 {};
 
 void I3DOMCalibration::SetCalibrationConstants()
@@ -25,7 +25,7 @@ void I3DOMCalibration::SetATWDParameters(Int_t id, Int_t channel, Int_t bin,
     GetATWDById(id)[channel][bin] = fit;
 }
 
-Double_t I3DOMCalibration::GetATWDVoltage(Int_t id, Int_t channel, 
+Double_t I3DOMCalibration::GetATWDVoltage(Int_t id,  Int_t channel, 
 					  Int_t bin, Int_t count)
 {
     if ( ! GetATWDById(id).count(channel) )
@@ -39,8 +39,8 @@ Double_t I3DOMCalibration::GetATWDVoltage(Int_t id, Int_t channel,
     }
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
-    
-    return fit.fSlope*count + fit.fIntercept;
+       
+    return ((fit.fSlope*count + fit.fIntercept) - fPedestalVoltage) / GetATWDGain(channel);
 }
 
 map<Int_t,map<Int_t,LinearFit> >& 

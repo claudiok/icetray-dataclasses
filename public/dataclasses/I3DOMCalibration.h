@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.3 2004/11/11 15:25:08 tmccauley Exp $
+ * $Id: I3DOMCalibration.h,v 1.4 2004/11/17 22:59:14 tmccauley Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/11/11 15:25:08 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/11/17 22:59:14 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -147,6 +147,8 @@ public:
     
 private:
     // Simple data types
+
+    // What is Date? UTC? GPS ns?
     Double_t  fDate;  
     UInt_t    fDOMId;
     Double_t  fTemperature;
