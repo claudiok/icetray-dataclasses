@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.16 2004/08/30 20:27:10 pretz Exp $
+ * $Id: I3Particle.h,v 1.17 2004/08/31 01:29:42 pretz Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/08/30 20:27:10 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/08/31 01:29:42 $
  * @author pretz
  *
  */
@@ -18,6 +18,7 @@
 #include "TClass.h"
 #include <iostream>
 #include <cmath>
+#include <sstream>
 
 using namespace std;
 
@@ -187,14 +188,20 @@ class I3Particle : public TObject{
  /**
   * @todo finish implementing this method
   */
- virtual const string ToStream() const
+ virtual const string ToString() const
    {
-     string to_return ("[ ");
-     to_return.append(IsA()->GetName());
-     to_return.append(" ]");
-     return to_return;
+     ostringstream out;
+     ToStream(out);
+     return out.str();
    }
 
+ /**
+  * 
+  */
+ virtual void ToStream(ostream& o) const
+   {
+     o<<"[ "<<IsA()->GetName()<<" ]\n";
+   }
  private:
  // ROOT macro
   ClassDef(I3Particle,1);
@@ -205,7 +212,7 @@ class I3Particle : public TObject{
  */
 inline ostream& operator<<(ostream& o,const I3Particle& part)
 {
-  o<<part.ToStream();
+  part.ToStream(o);
   return o;
 }
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.29 2004/08/30 20:27:10 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.30 2004/08/31 01:29:42 pretz Exp $
  *
  * @file I3RecoResult.h
- * @version $Revision: 1.29 $
- * @date $Date: 2004/08/30 20:27:10 $
+ * @version $Revision: 1.30 $
+ * @date $Date: 2004/08/31 01:29:42 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -17,6 +17,7 @@
 #include "StoragePolicy.h"
 #include <TClass.h>
 #include <iostream>
+#include <sstream>
 
 /**
  *
@@ -41,12 +42,19 @@ class I3RecoResult : public TObject
   /**
    * streams a RecoResult to an arbitrary ostream
    */
-  virtual const string ToStream() const
+  virtual void ToStream(ostream& o) const
     {
-      string to_return("[ ");
-      to_return.append(IsA()->GetName());
-      to_return.append(" ]\n");
-      return to_return;
+      o<<"[ "<<IsA()->GetName()<<" ]\n";
+    }
+
+  /**
+   * streams a RecoResult to a std::string
+   */
+  string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:
@@ -63,7 +71,7 @@ class I3RecoResult : public TObject
  */
 inline ostream& operator<<(ostream& o,I3RecoResult& result)
 {
-  o<<result.ToStream();
+  result.ToStream(o);
   return o;
 }
 

@@ -113,6 +113,6 @@ namespace tut
     rrat["foo"] = I3MCTrackPtr(new I3MCTrack());
     rrat["bar"] = I3MCCascadePtr(new I3MCCascade());
     cout<<rrat<<endl;
-    log_debug("here it is dumped to logging %s\n",rrat.ToStream().c_str());
+    log_debug("here it is dumped to logging %s\n",rrat.ToString().c_str());
   }
 }
