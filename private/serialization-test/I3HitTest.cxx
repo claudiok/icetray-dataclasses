@@ -1,29 +1,15 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.1.2.3 2005/02/06 12:26:19 troy Exp $
+    $Id: I3HitTest.cxx,v 1.1.2.4 2005/02/06 16:48:09 troy Exp $
 
-    @version $Revision: 1.1.2.3 $
-    @date $Date: 2005/02/06 12:26:19 $
+    @version $Revision: 1.1.2.4 $
+    @date $Date: 2005/02/06 16:48:09 $
     @author Troy D. Straszheim
 
 */
 
-#include "testing/tut.h"
-#include <boost/archive/text_oarchive.hpp>
-#include <boost/archive/text_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/serialization/serialization.hpp>
-#include <boost/serialization/nvp.hpp>
-#include <boost/serialization/vector.hpp>
-#include <boost/serialization/shared_ptr.hpp>
-
-#include <boost/test/test_tools.hpp>
-
-using boost::serialization::make_nvp;
+#include "serialization-test.h"
 
 #include "dataclasses/I3Hit.h"
 #include <string>
@@ -45,7 +31,6 @@ namespace
 
 namespace tut
 {
-
   template<> template<>
   void object::test<1>()
   {
