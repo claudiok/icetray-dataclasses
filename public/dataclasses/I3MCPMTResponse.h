@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.2 2004/04/22 15:51:25 pretz Exp $
+ * $Id: I3MCPMTResponse.h,v 1.3 2004/04/23 18:38:28 spencer Exp $
  *
- * This contains the Monte-Carlo generated PMT response
- * The PMT response is handled as a function, with output in volts
+ * This is now a base class for the Monte-Carlo generated PMT response
+ * The Chiba PMT response will inherit from this.  
  *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:51:25 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 18:38:28 $
  * @author klein
  *
  * @todo 
@@ -23,14 +23,11 @@ class I3MCPMTResponse : public TObject
   Float_t fStartTime;
   Float_t fEndTime;
 
-  /** @todo Missing here is any method for storing the function
-     This will have to be provided by the Chiba folks */
-
  public:
   /**
    * constructor
    */
-  I3MCPMTResponse(){} 
+  I3MCPMTResponse(){fStartTime=0.; fEndTime=0.;} 
   
   /**
    * destructor
@@ -38,16 +35,16 @@ class I3MCPMTResponse : public TObject
   virtual ~I3MCPMTResponse(){}
   
     /*   PMT output voltage as f(time) */
-
-    Float_t PMToutvoltage(Float_t time){return 0;}
+  
+   virtual Float_t PMToutvoltage(Float_t time)
 
     /*  First time that is meaningful (non-zero) */
 
-       Float_t StartTime() const {return fStartTime;}
+   Float_t StartTime() const {return fStartTime;}
 
   /*    Last time that is meaningful (non-zero) */
 
-  Float_t EndTime() const {return fEndTime;}
+   Float_t EndTime() const {return fEndTime;}
 
   private:
   // copy and assignment are private
@@ -57,6 +54,5 @@ class I3MCPMTResponse : public TObject
   // ROOT macro
   ClassDef(I3MCPMTResponse,1);
 };
-
 #endif
 
