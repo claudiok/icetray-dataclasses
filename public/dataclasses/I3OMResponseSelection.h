@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.6 2005/01/24 19:45:04 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.7 2005/02/03 22:35:29 deyoung Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/01/24 19:45:04 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/02/03 22:35:29 $
  * @author deyoung
  * @author troy
  */
@@ -44,6 +44,13 @@ public:
    */
   virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) {
     return kTRUE; 
+  };
+
+  /**
+   * Alternate version of operator()
+   */
+  virtual bool IsSelected(const pair<OMKey, I3OMResponsePtr>& element) {
+    return operator()(element);
   };
 
   /**
