@@ -61,9 +61,11 @@ unsigned int I3Time::GetJulianDay() const
 
 unsigned int I3Time::GetJulianSec() const
 {
-  double jul = julianday(year_,daqTime_);
-  double fract_of_day = jul - ((unsigned int)jul);
-  return (unsigned int)(fract_of_day * 3600. * 24.);
+  unsigned int modjuliansec = GetModJulianSec();
+  if(modjuliansec < 3600 * 12)
+    return modjuliansec + (3600 * 12);
+  else
+    return modjuliansec - (3600 * 12);
 }
 
 double I3Time::GetJulianNanoSec() const
