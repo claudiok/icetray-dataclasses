@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.28 2004/09/07 15:06:39 dule Exp $
+ * $Id: I3Track.h,v 1.29 2004/09/07 20:09:42 dule Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.28 $
- * @date $Date: 2004/09/07 15:06:39 $
+ * @version $Revision: 1.29 $
+ * @date $Date: 2004/09/07 20:09:42 $
  * @author pretz
  */
 
@@ -83,12 +83,12 @@ class I3Track : public I3InIceParticle
   /**
    * returns the zenith of the track
    */
-  //virtual Double_t GetZenith() const =0;
+  virtual Double_t GetZenith() const =0;
 
   /**
    * returns the azimuth of the track
    */
-  //virtual Double_t GetAzimuth() const = 0;
+  virtual Double_t GetAzimuth() const = 0;
 
   /**
    * indicates that the track has an energy

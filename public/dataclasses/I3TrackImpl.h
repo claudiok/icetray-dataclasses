@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.12 2004/09/07 03:33:44 dule Exp $
+ * $Id: I3TrackImpl.h,v 1.13 2004/09/07 20:09:42 dule Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/09/07 03:33:44 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/09/07 20:09:42 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -104,12 +104,12 @@ class I3TrackImpl : public I3Track,
   /**
    * gets the zenith
    */
-  //virtual Double_t GetZenith() const {return GeometricalType::GetZenith();}
+  virtual Double_t GetZenith() const {return GeometricalType::GetZenith();}
 
   /**
    * gets the azimuth
    */
-  //virtual Double_t GetAzimuth() const {return GeometricalType::GetAzimuth();}
+  virtual Double_t GetAzimuth() const {return GeometricalType::GetAzimuth();}
 
   /**
    * the time the track was at X, Y and Z
