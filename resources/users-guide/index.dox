@@ -7,8 +7,9 @@
    This guide is primarily intended for IceCube software developers who want
    to understand the layout and mechanics of these classes.  To this end there
    are several examples and tutorials each using different aspects of the 
-   classes.  The decision was made to go ahead and release the dataclasses code
-   and to fill in the examples later 
+   classes.  Unfortunately some of these examples have been broken by
+   the latest changes to the code -- the decision was made to go ahead
+   and release the code now and fix the examples later.
 
 <!-- Not needed, since we will generate it along with this page
    You may also find the automatically generated 
@@ -20,9 +21,10 @@
    @author Erik Blaufuss (blaufuss@umdgrb.umd.edu)
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
    @author Ralf Ehrlich (ehrlich@umdgrb.umd.edu)
+   @author Spencer Klein (srklein@lbl.gov)
+   @author Peter Niessen (niessen@ifh.de)
    @author John Pretz (pretz@umdgrb.umd.edu)
    @author Troy Straszheim (troy@ifh.de, troy@resophonic.com)
-   @author Peter Niessen (niessen@ifh.de)
 	   
    @section introduction Introduction
 
@@ -63,7 +65,7 @@
 
    There are several recent changes to the dataclasses that haven't been 
    ported to these modules.  The decision was to go ahead and release the
-   dataclasses, and then to focus on making code to show their use.
+   dataclasses, and then to focus on fixing the example code.
 
 <!--
    To have a walk through and play with things a bit, go through the
@@ -92,7 +94,9 @@
 
    @section examples Examples
 
-   There is code for several tutorial examples of the dataclasses code.  The code has yet to be updated to the current version of the dataclasses, but will be very soon.  
+   There is code for several tutorial examples of the dataclasses
+   code.  The code has yet to be updated to the current version of the
+   dataclasses, but will be very soon.  
 
 <!--   Here are a few tutorial examples.  The order is not really important here 
    since each example contains a list of the prerequisites which must be met
@@ -112,9 +116,10 @@
 -->
    @section overview Overview of the Data Classes
    A lot of thought has gone into the design and implementation of these 
-   classes.  These sections attempt to explain the decisions that were made and why they 
+   classes.  These sections attempt to explain the decisions that were
+   made and why they  
    were made, as well as giving in-depth explanations of specific
-   parts of the code.    
+   parts of the code.     
 
    @li @ref architecture
 
