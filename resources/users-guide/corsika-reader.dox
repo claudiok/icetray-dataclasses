@@ -1,7 +1,9 @@
 /**
 
 @page corsika-reader Using the corsika reader
-@author YOUR AD HERE (1-800-PHYSIC-7)
+@author Peter Niessen, niessen@ifh.de (1-302-831-8700)
+@date Thu Mar 18 12:12:46 EST 2004
+@version $Id: corsika-reader.dox,v 1.2 2004/03/18 17:18:51 niessen Exp $
 
 @section prerecs Prerequisites
 @li @ref devenv-setup
@@ -9,11 +11,121 @@
 @li @ref dataclasses-setup
 
 Here go the directions on how to use the corsika-reader checkout to
-read in a corsika event and fill some tracks in the data classes.
+read in a CORSIKA event and fill some tracks in the data classes.
+
+The corsika-reader was primarily meant for the author to get a hands
+on experience with the icecube framework. As a side-effect, I hope
+something useful will come out of it. However, as Microsoft
+comissioned studies done by the 
+M&uuml;nster Institute for Computational Economics
+(http://mice.uni-muenster.de/mers/mers4-OpenSource_de.pdf) suggest,
+these projects fall under the category of happy engineering, are not
+demand-driven and thus a waste of resources, harmful to economy as a
+whole.
+
+Be that as it may, the reader actually does read in CORSIKA files and
+fills I3MCTrack objects into the I3Event.
+
+The description of the CORSIKA files can be found in the documentation
+which is provided as part of the CORSIKA package. The CORSIKA file
+format is made out of block consisting of 273 four-byte words where
+the first word is (usually, but not always) interpreted as a four
+character word indicating the nature of the block, followed by the
+data. The file layout looks like this
+- RUN HEADER nrun
+	- EVENT HEADER 1
+		- DATA BLOCK
+		- DATA BLOCK
+		- ...
+		- (LONG 1:1)
+		- ...
+		- (LONG 1:n)
+	- EVENT END
+	- EVENT HEADER 2
+		- DATA BLOCK
+		- DATA BLOCK
+		- ...
+		- (LONG 2:1)
+		- ...
+		- (LONG 2:n)
+	- EVENT END
+	- ...
+	- ...
+	- EVENT HEADER nevt
+		- DATA BLOCK
+		- DATA BLOCK
+		- ...
+		- (LONG nevt:1)
+		- ...
+		- (LONG nevt:n)
+	- EVENT END
+- RUN END nrun
+
+As of now (Thu Mar 18 11:46:50 EST 2004), the run header is ignored,
+but in the future one might copy the information into the I3Event,
+too. The relevant particle information is stored in the DATA blocks of
+the event header, which can store up to 39 particles with 7 words each
+(39 × 7 = 273). The data block looks like this:
+
+-# particle description = 1000 × particle id + 10 × hadr. generation +
+no. of observation level.
+-# px, x component particle momentum in GeV
+-# py, y component particle momentum in GeV
+-# pz, -z component particle momentum in GeV
+-# x position of particle in cm
+-# y position of particle in cm
+-# time since first interaction in ns/z position in cm for additional
+muon information.
+-# particle description = 1000 × particle id + 10 × hadr. generation +
+no. of observation level.
+-# x component particle momentum in GeV
+-# y component particle momentum in GeV
+-# -z component particle momentum in GeV
+-# x position of particle in cm
+-# y position of particle in cm
+-# time since first interaction in ns/z position in cm for additional
+muon information.
+-# particle description = 1000 × particle id + 10 × hadr. generation +
+no. of observation level.
+-# ...
+
+If there are less than 39 particles, the block is padded with 0.
+
+A problem is that CORSIKA gives the momentum but not directly the
+particle mass, so one needs a table linking the particle ID to a mass
+in order to calculate the kinetic energy. Currently, the conversion
+between CORSIKA and I3 is done the following way:
+
+- I3MCTrack::StartX = x
+- I3MCTrack::StartY = y
+- I3MCTrack::StartZ = t (wrong)
+- I3MCTrack::Energy = sqrt (px² + py² + pz²) (+ m² still missing)
+- I3MCTrack::Zenith = acos (pz/Energy)
+- I3MCTrack::Azimuth = atan2 (py/Energy, px/Energy)
+- I3MCTrack::ParticleID = particle id
+
+Hadron generation and the number of the observation level are ignored,
+although the StartZ could be extracted from it.
+
 
 @section download Download
+Check it out as module corsika-reader from glacier cvs
+
 @section build Build
+ant should work once you check it out
+
 @section test Test
+In resources/scripts, you will find CORTest.C which reads in the
+supplied CORSIKA file DAT000001. To run it, change to your work
+directory and type
+root corsika-reader/resources/scripts/CORTest.C
+
+
 @section use Use
+Use as your input for generating atmospheric showers for your
+background. The tracks will go into the frame in the physics stream
+("Physics"). It will also create a geometry frame ("Geometry") which
+is empty but signals the advent of an event.
+
 
 */
