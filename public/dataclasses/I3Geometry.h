@@ -11,7 +11,7 @@ class I3GeometryHeader {
   Long_t       fDate;
  public:
   Double_t Time() { return fTime; }
-  void Dime(Double_t time_) { fTime = time_; }
+  void Time(Double_t time_) { fTime = time_; }
 
   Long_t Date() {  return fDate; }
   void Date(Long_t date_) { fDate = date_; }

@@ -3,7 +3,7 @@
 /**
  * Class: I3DataHeader
  * 
- * Version: $Id: I3DataHeader.h,v 1.2 2004/02/17 15:48:13 troy Exp $
+ * Version: $Id: I3DataHeader.h,v 1.3 2004/02/18 18:28:38 pretz Exp $
  *
  * Date: 11 Dec 2003
  *
@@ -17,7 +17,7 @@
  * This class represents a generic header for a data issued on some stream
  * Just a 'time' right now, but there may be stuff to add later.
  *
- * @version $Id: I3DataHeader.h,v 1.2 2004/02/17 15:48:13 troy Exp $
+ * @version $Id: I3DataHeader.h,v 1.3 2004/02/18 18:28:38 pretz Exp $
  * @author pretz
  */
 
@@ -67,7 +67,7 @@ class I3DataHeader : public TObject
   /**
    * The name of the stream on which the data occurs
    */
-  virtual const Char_t* GetDataStream()=0;
+  virtual const std::string DataStream()=0;
   ClassDef(I3DataHeader,1);
 };
 

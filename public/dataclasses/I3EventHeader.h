@@ -3,7 +3,7 @@
 /**
  * Class: I3EventHeader
  *
- * Version: $Id: I3EventHeader.h,v 1.2 2004/02/16 16:13:28 troy Exp $
+ * Version: $Id: I3EventHeader.h,v 1.3 2004/02/18 18:28:38 pretz Exp $
  *
  * Date: 13 Jan 2004
  *
@@ -13,12 +13,16 @@
 // includes
 #include "I3DataHeader.h"
 
+#include <string>
+
+using namespace std;
+
 /**
  * I3Event Header is supposed to be a header for the event that
  * you can store in a file if you don't want to store the event.
  * It's supposed to have enough data to reconstruct the full event
  * from the database
- * @version $Id: I3EventHeader.h,v 1.2 2004/02/16 16:13:28 troy Exp $
+ * @version $Id: I3EventHeader.h,v 1.3 2004/02/18 18:28:38 pretz Exp $
  * @author pretz
  */
 class I3EventHeader : public I3DataHeader{
@@ -37,7 +41,7 @@ class I3EventHeader : public I3DataHeader{
    * retrieves the name of the stream this header is for.
    * ... "Event"
    */
-  const Char_t* GetDataStream();
+  const string DataStream(){ return "Physics";}
 
  private:
   // copy and assignment are private
