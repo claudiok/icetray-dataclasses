@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: AugVec.h,v 1.1 2004/02/20 21:42:08 troy Exp $
+    $Id: AugVec.h,v 1.2 2004/02/21 13:35:10 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/20 21:42:08 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/21 13:35:10 $
     @author Troy Straszheim
 
     @todo
@@ -26,7 +26,7 @@ class AugVec : public TObject, public HeaderType, public StoragePolicy
 {
  public:
 
-  void dump();
+  void dump(){};
 
   AugVec() {};
   ~AugVec() {};

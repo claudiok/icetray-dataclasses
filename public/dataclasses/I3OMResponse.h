@@ -26,9 +26,9 @@ class I3OMResponse : public TObject
   unsigned short OMNumber() const { return omnumber; }
   void           OMNumber(unsigned short omnumber_) { omnumber = omnumber_; }
 
-  bool HasGeometry() const;
-  const I3OMGeo& GetGeometry() const;
-  void SetGeometry(I3OMGeo& geometry_);
+//  bool HasGeometry(){} const;
+//  const I3OMGeo& GetGeometry() const;
+//  void SetGeometry(I3OMGeo& geometry_);
 
   const I3MCHitSeries& GetMCHitSeries() const { return mchitseries; }
   I3MCHitSeries& GetMCHitSeries() { return mchitseries; }

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: AugHashMap.h,v 1.1 2004/02/20 04:08:35 troy Exp $
+    $Id: AugHashMap.h,v 1.2 2004/02/21 13:35:10 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/20 04:08:35 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/21 13:35:10 $
     @author Troy Straszheim
 
     @todo
@@ -26,7 +26,7 @@ class AugHashMap : public TObject, public HeaderType, public StoragePolicy
 {
  public:
 
-  void dump();
+  void dump(){};
 
   AugHashMap() {};
   ~AugHashMap() {};

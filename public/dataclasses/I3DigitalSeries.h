@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DigitalSeries.h,v 1.8 2004/02/20 21:42:08 troy Exp $
+    $Id: I3DigitalSeries.h,v 1.9 2004/02/21 13:35:10 pretz Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/02/20 21:42:08 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/02/21 13:35:10 $
     @author
 
     @todo
@@ -23,7 +23,7 @@ class I3DigitalSeriesHeader
   
  public:
   I3DigitalSeriesHeader() {fStarttime = 0; }
-  ~I3DigitalSeriesHeader();
+  ~I3DigitalSeriesHeader(){};
   
   double StartTime() const { return fStarttime; }
   void   StartTime(double starttime_) { fStarttime = starttime_; }
