@@ -1,18 +1,24 @@
 #ifndef I3GEOMETRYHEADER_H
 #define I3GEOMETRYHEADER_H
 
+// includes
+#include "I3DataHeader.h"
+#include "StoragePolicy.h"
+#include <string>
+using namespace std;
+
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3GeometryDataHeader.h,v 1.3 2004/02/25 22:01:06 pretz Exp $
+ * $Id: I3GeometryDataHeader.h,v 1.4 2004/02/26 03:51:13 pretz Exp $
  *
  * I3Geometry Header is supposed to be a header for the geometry that
  * you can store in a file if you don't want to store the geometry.
  * It's supposed to have enough data to reconstruct the full geometry
  * from the database
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/02/25 22:01:06 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/02/26 03:51:13 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,13 +27,6 @@
  * @todo modifiy to mirror changes in I3Geometry when they're done.
  * @todo move I3Geometry's header data here.
  */
-
-// includes
-#include "I3DataHeader.h"
-#include "StoragePolicy.h"
-#include <string>
-using namespace std;
-
 class I3GeometryDataHeader : public I3DataHeader
 {
   // instance data

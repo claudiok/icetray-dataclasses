@@ -92,6 +92,7 @@
 #pragma link C++ typedef VectorPolicy<I3MCTrack>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3MCTrack>::ThePolicy+;
 #pragma link C++ function operator!=(const I3MCTrackList::iterator&, const I3MCTrackList::iterator&);
+#pragma link C++ typedef I3MCTrackListPtr;
 
 #pragma link C++ class I3MCTrackData+;
 #pragma link C++ class I3MCTrackData::iterator+;
@@ -179,6 +180,7 @@
 #pragma link C++ class I3OMResponse+;
 #pragma link C++ typdef I3OMResponsePtr;`
 #pragma link C++ class I3RecoHit+;
+#pragma link C++ typedef I3RecoHitPtr;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ typedef I3RecoResultLikelihoodPtr;
 #pragma link C++ class I3RecoResultSingleTrack+;

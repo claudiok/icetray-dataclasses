@@ -10,39 +10,102 @@
 #include "I3DataReadoutList.h"
 #include "I3RecoHitSeriesData.h"
 
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3OMResponse.h,v 1.14 2004/02/26 03:51:13 pretz Exp $
+ *
+ * The container for all the OMResponse-related data in the event
+ * Has the monte-carlo truth, the hardware response, and the reconstructed
+ * hit series'.    
+ *
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/02/26 03:51:13 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ * @todo reference to the related GeoOM in the Geometry, or just its index.
+ * @todo does this class have 'full value symantics'?
+ */
 class I3OMResponse : public TObject
 {
-  unsigned short omnumber;
-  TRef           geometry;
+  unsigned short fOMNumber;
+  //  TRef          fGeometry;
 
   // with the following, you either put in the two pipes or get
   // "cant instantiate precompiled template
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
-  I3MCHitSeries       mchitseries; //||
-  I3DataReadoutList   datareadoutlist; //||
-  I3RecoHitSeriesData recohitseriesdata; //||
+  I3MCHitSeries       fMCHitSeries; //||
+  I3DataReadoutList   fDataReadoutList; //||
+  I3RecoHitSeriesData fRecoHitSeriesData; //||
 
-  public:
-  I3OMResponse() { omnumber = 0; geometry = 0;}
+ public:
+  /**
+   * constructor
+   */
+  I3OMResponse() { fOMNumber = 0;}// fGeometry = 0;}
+  
+  /**
+   * destructor
+   */
   virtual ~I3OMResponse() {;}
+  
+  /**
+   * @return the number of the OM for this response
+   */
+  unsigned short OMNumber() const { return fOMNumber; }
 
-  unsigned short OMNumber() const { return omnumber; }
-  void           OMNumber(unsigned short omnumber_) { omnumber = omnumber_; }
+  /**
+   * @param omnumber the new omnumber associated with this response
+   */
+  void           OMNumber(unsigned short omnumber) { fOMNumber = omnumber; }
+  
+  // bool HasGeometry(){} const;
+  // const I3OMGeo& GetGeometry() const;
+  // void SetGeometry(I3OMGeo& geometry_);
+  
+  /**
+   * @return the MCTruth for this response as a const object
+   */
+  const I3MCHitSeries& MCHitSeries() const { return fMCHitSeries; }
 
-// bool HasGeometry(){} const;
-// const I3OMGeo& GetGeometry() const;
-// void SetGeometry(I3OMGeo& geometry_);
+  /**
+   * @return the MC truth for this response as a non-const object
+   */
+  I3MCHitSeries& MCHitSeries() { return fMCHitSeries; }
 
-  const I3MCHitSeries& MCHitSeries() const { return mchitseries; }
-  I3MCHitSeries& MCHitSeries() { return mchitseries; }
+  /**
+   * @return the the hardware data for this response as a const object
+   */
+  const I3DataReadoutList& DataReadoutList() const { 
+    return fDataReadoutList; 
+  }
+  
+  /**
+   * @return the hardware data for this response as a non-const object
+   */
+  I3DataReadoutList& DataReadoutList() { return fDataReadoutList; }
 
-  const I3DataReadoutList& tDataReadoutList() const { return datareadoutlist; }
-  I3DataReadoutList& DataReadoutList() { return datareadoutlist; }
+  /**
+   * @return the reco hit series data as a const object
+   */
+  const I3RecoHitSeriesData& RecoHitSeriesData() const { 
+    return fRecoHitSeriesData;
+  }
+  
+  /**
+   * @return the reco hit series data as a non-const object
+   */
+  I3RecoHitSeriesData& RecoHitSeriesData() { return fRecoHitSeriesData;}
 
-  const I3RecoHitSeriesData& RecoHitSeriesData() const { return recohitseriesdata; }
-  I3RecoHitSeriesData& RecoHitSeriesData() { return recohitseriesdata; }
+ private:
+  // copy and assignment are private
+/*   I3OMResponse(const I3OMResponse&); */
+/*   const I3OMResponse& operator=(const I3OMResponse&); */
 
+  // ROOT macro
   ClassDef(I3OMResponse,1);
 };
 

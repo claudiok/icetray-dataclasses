@@ -1,13 +1,17 @@
 /**
-   copyright  (C) 2004
-   the icecube collaboration
-   $Id: I3MCHit.h,v 1.8 2004/02/25 20:10:24 pretz Exp $
-
-   @version $Revision: 1.8 $
-   @date $Date: 2004/02/25 20:10:24 $
-   @author
-
-*/
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCHit.h,v 1.9 2004/02/26 03:51:13 pretz Exp $
+ *
+ *
+ *
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/02/26 03:51:13 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ */
 #ifndef I3MCHIT_H
 #define I3MCHIT_H
 
@@ -17,15 +21,23 @@
 
 class I3MCHit : public I3Hit
 {
-  Float_t          fWeight;
+  Float_t fWeight;
   UShort_t fTrackNum;
 
  public:
+  /**
+   * constructor
+   */
   I3MCHit() { fWeight = 0; fTrackNum=0;}
 
-  // copy constructor just uses assignment operator
+  /**
+   * copy constructor just uses assignment operator
+   */
   I3MCHit(const I3MCHit &rhs) { *this = rhs; } 
 
+  /**
+   * assignment operator is a member-wise assignment
+   */
   const I3MCHit& operator=(const I3MCHit &rhs) { 
     if (this == &rhs) return *this; // check for assignment to self
     I3Hit::operator=(rhs); // call base class assignment operator
@@ -34,13 +46,29 @@ class I3MCHit : public I3Hit
     return *this;
   }
 
+  /**
+   * @return the weight contributed by this MCHit
+   */
   Float_t Weight() const { return fWeight; }
-  void Weight(Float_t weight_) { fWeight = weight_; }
 
+  /**
+   * @param weight the new weight for the hit
+   */
+  void Weight(Float_t weight) { fWeight = weight; }
+
+  /**
+   * @return the track number which caused this hit
+   */
   short TrackNumber() const { return fTrackNum; }
-  void TrackNumber(UShort_t tracknum_) { fTrackNum = tracknum_; }
 
+  /**
+   * @param tracknum set the track which caused this hit
+   */
+  void TrackNumber(UShort_t tracknum) { fTrackNum = tracknum; }
 
+ private:
+
+  //ROOT macro
   ClassDef(I3MCHit, 1);
 };
 

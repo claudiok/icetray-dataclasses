@@ -1,15 +1,20 @@
 /**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: I3OMGeo.h,v 1.7 2004/02/23 22:36:49 troy Exp $
-
-    @version $Revision: 1.7 $
-    @date $Date: 2004/02/23 22:36:49 $
-    @author
-
-    @todo
-
-*/
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3OMGeo.h,v 1.8 2004/02/26 03:51:13 pretz Exp $
+ *
+ * The basic Optical Module Geometry class.  This is the static 
+ * frozen-in-the-ice properties of an optical module
+ *
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/02/26 03:51:13 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ * @todo
+ *
+ */
 #ifndef I3OMGEO_H
 #define I3OMGEO_H
 
@@ -18,49 +23,112 @@
 
 class I3OMGeo : public TObject
 {
-  protected:
-  UShort_t omnumber;
-  Double_t x;
-  Double_t y;
-  Double_t z;
-  Bool_t orientation;
-  UChar_t version;
+ protected:
+  UShort_t fOMNumber;
+  Double_t fX;
+  Double_t fY;
+  Double_t fZ;
+  Bool_t fOrientation;
+  UChar_t fVersion;
 
   public:
-  void Init();
-
+  /**
+   * constructor
+   */
   I3OMGeo() { Init(); }
+
+  /**
+   * copy constructor just uses assignment
+   */
   I3OMGeo(const I3OMGeo& rhs){*this = rhs;}
+
+  /**
+   * destructor
+   */
+  virtual ~I3OMGeo(){}
+
+  /**
+   * assignment is member-wise assignment
+   */
   const I3OMGeo& operator=(const I3OMGeo& rhs){
     if (this == &rhs) return *this; // check for assignment to self
     TObject::operator=(rhs); // call base class assignment operator
-    omnumber = rhs.omnumber;
-    x = rhs.x;
-    y = rhs.y;
-    z = rhs.z;
-    orientation = rhs.orientation;
-    version = rhs.version;
+    fOMNumber = rhs.fOMNumber;
+    fX = rhs.fX;
+    fY = rhs.fY;
+    fZ = rhs.fZ;
+    fOrientation = rhs.fOrientation;
+    fVersion = rhs.fVersion;
     return *this;
   }
 
-  UShort_t OMNumber() const {return omnumber;}
-  void   OMNumber(UShort_t omnumber_) { omnumber = omnumber_; }
+  /**
+   * resets the data to 0's.
+   */
+  void Init();
 
-  Double_t X() const { return x; }
-  void   X(Double_t x_) { x = x_; }
+  /**
+   * @return the number of this optical module
+   */
+  UShort_t OMNumber() const {return fOMNumber;}
 
-  Double_t Y() const { return y; }
-  void   Y(Double_t y_) { y = y_; }
+  /**
+   * @param omnumber the new number for this optical module
+   */
+  void   OMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
 
-  Double_t Z() const { return z; }
-  void     Z(Double_t z_) { z = z_; }
+  /**
+   * @return the x position of the OM
+   */
+  Double_t X() const { return fX; }
 
-  Bool_t  Orientation() const { return orientation; }
-  void    Orientation(Bool_t orientation_) { orientation = orientation_; }
+  /**
+   * @param x the new x position of the OM
+   */
+  void   X(Double_t x) { fX = x; }
 
-  UChar_t Version() const { return version; }
-  void    Version(UChar_t version_) { version = version_; }
+  /**
+   * @return the y position of the OM
+   */
+  Double_t Y() const { return fY; }
 
+  /**
+   * @param y the new y position of the OM
+   */
+  void   Y(Double_t y) { fY = y; }
+
+  /**
+   * @return the z position of the OM
+   */
+  Double_t Z() const { return fZ; }
+
+  /**
+   * @param z the new z position of the OM
+   */
+  void     Z(Double_t z) { fZ = z; }
+
+  /**
+   * @return kTRUE if the om is pointed down
+   */
+  Bool_t  Orientation() const { return fOrientation; }
+
+  /**
+   * @param orientation the new orientation for the tube
+   */
+  void    Orientation(Bool_t orientation) { fOrientation = orientation; }
+
+  /**
+   * @return the version of the OM
+   */
+  UChar_t Version() const { return fVersion; }
+
+  /**
+   * @param version the new version of the OM
+   */
+  void    Version(UChar_t version) { fVersion = version; }
+
+ private:
+  //ROOT macro
   ClassDef(I3OMGeo,1);
 };
 
