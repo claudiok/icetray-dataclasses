@@ -15,7 +15,7 @@
 
 @section description Description
 
-This walkthrough will step you through the steps to start an interactive 
+This walkthrough will take you through some steps to start an interactive 
 analysis.  What we are going to do is start with one of the f2k files 
 distributed with the <code>dataio-modules</code>, and extract two fits from
 that file into a ROOT TTree and start poking around in the tree.

@@ -9,11 +9,14 @@
    are several examples and tutorials each using different aspects of the 
    classes.  
 
+   Thanks for looking!
+
    @author Erik Blaufuss (blaufuss@umdgrb.umd.edu)
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
    @author Ralf Ehrlich (ehrlich@umdgrb.umd.edu)
    @author John Pretz (pretz@umdgrb.umd.edu)
    @author Troy Straszheim (troy@ifh.de, troy@resophonic.com)
+   @author Peter Niessen (niessen@ifh.de)
 	   
    @section overview Overview
 
@@ -93,11 +96,12 @@
    A lot of thought has gone into the design and implementation of these 
    classes.  If you are interested in the decisions that were made and why they 
    were made, or if you just want to get a feel for the dataclasses as a whole, 
-   these sections are for you:
+   this section's are for you:
 
    @li @ref architecture
 
-   @li @ref best-practices
+
+<!--   @li @ref best-practices -->
    
 
 */

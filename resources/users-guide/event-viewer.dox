@@ -4,8 +4,11 @@
 
 @section prerecs Prerequisites
 @li @ref devenv-setup 
+
 @li @ref icetray-setup 
+
 @li @ref dataclasses-setup 
+
 @li @ref rdmc-tool-install
 
 @section download Download
