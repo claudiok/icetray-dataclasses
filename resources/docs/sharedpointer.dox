@@ -88,13 +88,9 @@ bald and a smart pointer.
 
 The @c shared_ptr<> class, by design, disallows initialization in the
 regular C-style (as in the previous example) and thereby creates a
-very effective border between shared and bald pointers.  One must do
-one of two things; one is more C-like than the other, and is a new
-addition not yet in the offical boost::shared_ptr<>.  You either
-initialize the smart pointer with a bald pointer in its constructor,
-or you assign the bald pointer to the shared pointer with a @c
-shared_pointer_cast.  Here is the above example, rewritten properly,
-with the old code shown commented out, using the @c shared_pointer_cast<>:
+very effective border between shared and bald pointers.  You
+initialize the smart pointer with a bald pointer in its constructor.
+Here is the above example, rewritten properly:
 
 @code
 // void normalize_hit(Hit *incoming_hit)  
@@ -105,7 +101,7 @@ void normalize_hit(shared_ptr<Hit> incoming_hit)
 }
 
 // Hit *h = new Hit;
-shared_ptr<Hit> outer_hitptr = shared_pointer_cast<Hit>(new Hit);  // good version
+shared_ptr<Hit> outer_hitptr(new Hit);  // good version
 
 normalize_hit(outer_hitptr);
 do_something_else_to_hit(outer_hitptr);
@@ -114,12 +110,12 @@ do_something_else_to_hit(outer_hitptr);
 In this version, the number of pointers to the @c new @c Hit starts
 with 1 when @c outer_hitptr is initialized.  When @c inner_hitptr is
 initialized, the count goes to 2, and this time when @c inner_hitptr's
-destructor is called, it knows that others still have pointers to that
-@c Hit.  Therefore it does not @c delete it and the call to @c
-do_something_else_to_hit() proceeds as desired.  
-In this approach (passing the return of @c new to the constructor),
-there are never any extra bald pointers floating around, and such
-situations don't come up.
+destructor is called (when @c normalize_hit exits), it knows that
+others still have pointers to that @c Hit.  Therefore it does not @c
+delete it and the call to @c do_something_else_to_hit() proceeds as
+desired.  In this approach (passing the return of @c new to the
+constructor), there are never any extra bald pointers floating around,
+and such situations don't come up.
 
 The statement 
 @code
@@ -128,29 +124,6 @@ The statement
 will now compile because @c incoming_hit and @c inner_hitptr are of
 the same type... it is no longer an assignment from bald pointer to
 shared pointer.
-
-The @c shared_pointer_cast might look a little wordy.  It is purposely
-so, and has the same reasoning behind it as the fact that there is no
-automatic conversion from bald pointer to shared pointer... we have
-seen what happens when they get mixed.  One wants to be able to see
-clearly that the pointer handling is correct.  With this system, one
-need only grep for @c new and also see @c shared_pointer_cast on each
-line.  It is still possible to screw up, but it wouldn't happen by
-mistake.  You can get the bald pointer out with @c get(), but don't do
-that.
-
-See also @ref casting.
-
-You can also initialize @c outer_hitptr like this:
-@code
-shared_ptr<Hit> outer_hitptr(new Hit);  // also good
-@endcode
-
-...which appears to now be considered an older way to do it, and the
-syntax will be less familiar to those accustomed to working purely
-with bald pointers.  This feature is in roost but not yet in the boost
-release.  The current consensus appears to be include 
-@c shared_pointer_cast<> in a future boost release.
 
 @section typedefs The convenience typedefs
 
@@ -178,26 +151,18 @@ do_something_else_to_hit(outer_hitptr);
 
 @section nulls Shared pointers and NULL
 
-The same as regular pointers:
-@code
-HitPtr p = shared_pointer_cast<Hit>(new Hit); // p now has a Hit
+You do not need to initialize shared pointers to NULL or zero.  They
+do it themselves, in the constructor.  This is one of the advantages
+of using a class (<tt>shared_ptr<int></t>) over using a raw data type
+(<tt>int*</tt>).  Raw data types are not initialized to any particular
+value.
 
-HitPtr p = NULL; // that Hit above gets deleted, and p is NULL
-@endcode
-@em Assigning @c NULL to @c p in order to clear it out is just like
-bald pointers, except you don't check to see if there is something
-there first and @c delete it if there is.  The pointer takes care of
-that.  Just forget about @c delete 'ing.
+You also don't need to compare to NULL in boolean contexts.  Just
+evaluate the pointer itself:
 
-Comparisons to @c NULL are still legal, but there's a better way
-which is recommended:
 @code
 HitPtr p;
-if (p == NULL) // that's OK
-{ 
-  printf("uh oh");
-}
-if (!p) // this is cleaner
+if (!p)
 {
   printf("it's NULL");
 }
