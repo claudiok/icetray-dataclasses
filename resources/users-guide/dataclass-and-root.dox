@@ -1,21 +1,54 @@
 /**
 
 @page dataclass-and-root Using the Dataclasses Interactively In Root
-@author YOUR AD HERE (1-800-PHYSIC-7)
+@author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
 
 @section prerecs Prerequisites
+
 @li @ref devenv-setup
+
 @li @ref icetray-setup
+
 @li @ref dataclasses-setup
+
 @li @ref reconstruction
 
-Here go the directions on how to use the reco checkout to
-read in a root file and make a zenith angle distribution of the reco tracks in 
-the file from a root session.
+@li @ref dataio
+
+@section description Description
+
+This walkthrough will step you through the steps to start an interactive 
+analysis.  What we are going to do is start with one of the f2k files 
+distributed with the <code>dataio-modules</code>, and extract two fits from
+that file into a ROOT TTree and start poking around in the tree.
+
+The F2kReaderModule distributed with the <code>dataio-modules</code> project
+is what is used to read the f2k file.  That module's output is piped to a 
+simple module called I3TreePrep which will pull two reconstructions out - if 
+it can find them - and dump them to a TTree in a root file.  
 
 @section download Download
+The code for this example is included with the <code>datio-modules</code> 
+project so there's nothing to download if you've met the prerequisites.
+
 @section build Build
-@section test Test
+If you've met the prerequisites, you should already have compiled everything 
+in <code>dataio-modules</code> and so there's nothing to build.
+
+<!--@section test Test -->
+
 @section use Use
 
+Since everything's already compiled, all you should need to do is - from your 
+workspace - run this root script:<br>
+<code>% root dataio-modules/resources/scripts/MakeAnalysisTree.cxx</code><br>
+                                                                                
+And that will start up icetray, read in the file, and dump out a file
+analysis.root which contains the TTree we're gonna look at.
+
+If you want to get some pretty plots, you can do a:<br>
+<code>% root dataio-modules/resources/scripts/analyze.cxx
+
+which will open up the file you just made, and use TTree::Draw() to make 
+some plots.
 */
