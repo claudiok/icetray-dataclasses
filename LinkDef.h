@@ -32,6 +32,7 @@
 #pragma link C++ typedef VectorPolicy<I3RecoTrack>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoTrack>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoTrackList::iterator&, const I3RecoTrackList::iterator&);
+#pragma link C++ typedef I3RecoTrackListPtr;
 
 #pragma link C++ class I3AnalogSeries+;
 #pragma link C++ class I3AnalogSeries::iterator+;
@@ -178,8 +179,11 @@
 #pragma link C++ typdef I3OMResponsePtr;`
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ class I3RecoResultLikelihood+;
+#pragma link C++ typedef I3RecoResultLikelihoodPtr;
 #pragma link C++ class I3RecoResultSingleTrack+;
+#pragma link C++ typedef I3RecoResultSingleTrackPtr;
 #pragma link C++ class I3RecoResultAlternativeSingleTracks+;
+#pragma link C++ typedef I3RecoResultAlternativeSingleTracksPtr;
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ class I3RecoTrackComposite+;
 #pragma link C++ class I3TankGeo+;
