@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Distance.h,v 1.3 2004/06/17 22:37:15 dule Exp $
+ * $Id: I3Distance.h,v 1.4 2004/06/23 18:19:28 dule Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/17 22:37:15 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/06/23 18:19:28 $
  * @author pretz
  */
 #ifndef I3DISTANCE_H
@@ -62,6 +62,12 @@ class I3Distance
    * distance of closest approach: 'apdist'
    * position of origin of Cherenkov photon: 'chpos'
    * time of photon from track Pos() until the Position (pos): 'chtime'
+   *
+   * @todo Right now, CherenkovLight calculates "closest approach" AND 
+   * "cherenkov distances".  This is good for simplicity and non-repetitiveness
+   * of the code, but it is not the most efficient.  If processing time becomes
+   * an issue, we can make these things more efficient at the expence of
+   * complicating and repeating the code.
    */
   void CherenkovLight(I3Track* track,     // input track
 		      I3Position& pos,    // input position
@@ -81,6 +87,11 @@ class I3Distance
   /**
    * Check is Position is on Track within the given Precision.
    * Default Precision is 10cm, but can be given by user.
+   * 
+   * @todo IsOnTrack uses CherenkovLight for calculating "distance of closest
+   * approach".  This method is not the most efficient, but makes the code much
+   * simpler.  If processing time becomes an issue, we can make these routines 
+   * more efficient.
    */
   Bool_t IsOnTrack(I3Track* track, 
 		   I3Position& pos,
