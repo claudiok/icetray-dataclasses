@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3GeometryTest.cxx,v 1.2 2004/07/06 14:15:27 pretz Exp $
+    $Id: I3GeometryTest.cxx,v 1.3 2004/07/06 16:31:59 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/07/06 14:15:27 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/07/06 16:31:59 $
     @author pretz
 
     @todo
@@ -66,29 +66,31 @@ namespace tut
   t->GetEvent(0);
   }
 
-  // branch empty 
-  //   template<> template<>
-  //   void object::test<2>() 
-  //   {
-  //     I3Geometry geometry;
-  //     I3Geometry* geometry_ptr;
-  
-  //     TTree *t = new TTree("mytree","tree");
-  
-  //     t->Branch("branch","I3Geometry",&geometry_ptr);
-  
-  //     t->Fill();
-  
-  //     I3Geometry *geo_out = new I3Geometry;
-  
-  //     t->SetBranchAddress("branch",&geo_out);
-  
-  //     t->GetEvent(0);
-  
-  //     I3GeometryPtr geo_out_ptr(geo_out);
-  //    delete geometry;
-  //delete geo_out;
-  //  }
+  //write straight to disk
+  template<> template<>
+  void object::test<2>() 
+  {
+    I3Geometry geometry;
+    I3OMGeoIceCubePtr om_icecube( new I3OMGeoIceCube());
+    om_icecube->SetX(10.5);
+    
+    geometry.GetInIceGeometry().push_back(om_icecube);      
+    ensure("checking read in value",
+	   geometry.GetInIceGeometry()[0] != I3OMGeoPtr((I3OMGeo*)0) );
+
+    TFile f("test.out.root","RECREATE");
+    geometry.Write();
+   
+    f.Close();
+
+
+  TFile f_in("test.out.root");
+  I3Geometry* geo_in = (I3Geometry*)f_in.FindObjectAny("I3Geometry");
+  ensure("checking array sizes",
+	 geo_in->GetInIceGeometry().size() == 1);
+  ensure("checking read in value",
+	 geo_in->GetInIceGeometry()[0] != I3OMGeoPtr((I3OMGeo*)0) );
+  }
   
   //testing filling an event with tracks into a tree
   //   template<> template<>
