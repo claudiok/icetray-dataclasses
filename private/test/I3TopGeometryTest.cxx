@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TopGeometryTest.cxx,v 1.5 2004/09/14 17:10:05 niessen Exp $
+    $Id: I3TopGeometryTest.cxx,v 1.6 2004/09/14 21:24:23 niessen Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/09/14 17:10:05 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/09/14 21:24:23 $
     @author pretz
 
     @todo
@@ -47,51 +47,29 @@ namespace tut
   {
     I3TopGeometry geo;
 
+    // get the station map:
+    I3StationMap &array = geo.GetStationMap ();
+
     // create the setup, from inside to outside
-    I3OMGeoIceTopPtr om00 (new I3OMGeoIceTop);
-    I3OMGeoIceTopPtr om01 (new I3OMGeoIceTop);
-    I3OMGeoIceTopPtr om10 (new I3OMGeoIceTop);
-    I3OMGeoIceTopPtr om11 (new I3OMGeoIceTop);
-
-    I3Position p_om00 (I3Position (-.5, 0., 0.));
-    I3Position p_om01 (I3Position (+.5, 0., 0.));
-    I3Position p_om10 (I3Position (-.5, 0., 0.));
-    I3Position p_om11 (I3Position (+.5, 0., 0.));
-
-    om00->SetPos (p_om00);
-    om01->SetPos (p_om01);
-    om10->SetPos (p_om10);
-    om11->SetPos (p_om11);
-
-    I3TankGeoPtr tank0 (new I3TankGeo);
-    tank0->SetHeight (45.0);
-    //tank0->push_back (om00_p);
-    //tank0->push_back (om01_p);
-    I3TankGeoPtr tank1 (new I3TankGeo);
-    tank1->SetHeight (90.0);
-    //tank1->push_back (om10_p);
-    //tank1->push_back (om11_p);
-
+    I3OMGeoIceTopPtr om (new I3OMGeoIceTop);
+    I3TankGeoPtr tank (new I3TankGeo);
     I3StationGeoPtr station (new I3StationGeo);
-    //station->push_back (tank0_p); // point to the 
-    //station->push_back (tank1_p);
 
-    // create the lists/maps in the geometry
+    // positions
+    I3Position p_om (I3Position (-.5, 0., 0.));
+    I3Position p_tank (I3Position (1., 2., 3.));
+    
+    om->SetPos (p_om);
+    tank->SetPos (p_tank);
+    
+    // insert the om into the tank
+    (*tank)[OMKey (1, 61)] = om;
 
-    // the station
-    geo.GetStationMap ()[StationKey (0)] = station;
+    // insert the tank into the station
+    station->push_back (tank);
 
-#if 0
-    // the tanks
-    geo.GetSurfModuleVector ().push_back (tank0);
-    geo.GetSurfModuleVector ().push_back (tank1);
-
-    // the oms
-    geo.GetOMTopMap ()[OMKey (1, 61)] = om00;
-    geo.GetOMTopMap ()[OMKey (1, 62)] = om01;
-    geo.GetOMTopMap ()[OMKey (1, 63)] = om10;
-    geo.GetOMTopMap ()[OMKey (1, 64)] = om11;
-#endif
+    // insert the station into the array
+    array[StationKey (1)] = station;
 
     TFile file_out("test.out.root","RECREATE");
 
@@ -106,18 +84,18 @@ namespace tut
     I3TopGeometryPtr geo_in((I3TopGeometry*)file_in.FindObjectAny("I3TopGeometry"));
 
     ensure("pointer is non-zero",geo_in!=0);
+
+    I3StationMap &array = geo_in->GetStationMap ();
     
-#if 0
-    I3TankGeo &tank_0
-      = dynamic_cast<I3TankGeo &>(geo_in->GetSurfModuleVector ()[0]);
-    I3TankGeo &tank_1
-      = dynamic_cast<I3TankGeo &>(geo_in->GetSurfModuleVector ()[1]);
-    ensure("tank 0 height is right", tank_0.GetHeight () == 45.0);
-    ensure("tank 1 height is right", tank_1.GetHeight () == 90.0);
-    ensure("size of surfdet list is right",geo_in
-	   ->GetSurfModuleVector ().size () == 2);
-#endif
-	   
+    I3StationGeo &station
+      = *(array[StationKey (1)]);
+
+    I3TankGeoPtr tank (roost::dynamic_pointer_cast<I3TankGeo>(station[0]));
+
+    I3OMGeoIceTopPtr om (roost::dynamic_pointer_cast<I3OMGeoIceTop>((*tank)[OMKey (1, 61)]));
+
+    ensure ("om is displaced", om->GetPos ().GetX () == -.5);
+
   }
 
 }
