@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.11 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3Particle.h,v 1.12 2004/07/27 04:34:32 ehrlich Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/07/27 04:34:32 $
  * @author pretz
  *
  */
@@ -67,11 +67,21 @@ class I3Particle : public TObject{
     Elph = 9999
   };
 
- private:
+  private:
     ParticleType fType;
-    Int_t fID;
+    Int_t        fID;
+    Int_t        fPrimaryID;
+    Int_t        fParentID;
 
-public:
+  public:
+    I3Particle() 
+    {
+      fType=Null;
+      fID=0;
+      fPrimaryID=0;
+      fParentID=0;
+    }
+
     /**
      * indicates that this track is observable.
      */
@@ -101,7 +111,7 @@ public:
     /** 
      * gets the unique ID number of the particle
      */ 
-    virtual Int_t GetParticleNumber() const
+    virtual Int_t GetParticleID() const
     {
 	return fID;
     };
@@ -109,11 +119,43 @@ public:
     /** 
      * sets the unique ID number of the particle
      */ 
-    virtual void SetParticleNumber(Int_t ID)
+    virtual void SetParticleID(Int_t ID)
     {
 	fID = ID;
     };
+    
+    /** 
+     * gets the ID number of the primary of the particle
+     */ 
+    virtual Int_t GetPrimaryID() const
+    {
+	return fPrimaryID;
+    };
+
+    /** 
+     * sets the ID number of the primary of the particle
+     */ 
+    virtual void SetPrimaryID(Int_t PrimaryID)
+    {
+	fPrimaryID = PrimaryID;
+    };
   
+    /** 
+     * gets the ID number of the parent of the particle
+     */ 
+    virtual Int_t GetParentID() const
+    {
+	return fParentID;
+    };
+
+    /** 
+     * sets the ID number of the parent of the particle
+     */ 
+    virtual void SetParentID(Int_t ParentID)
+    {
+	fParentID = ParentID;
+    };
+
  /**
   * copies over data from this particle to the destination particle
   * Only copies that data which the two have in common
@@ -121,7 +163,9 @@ public:
  virtual void CopyTo(I3Particle& destination) const
    {
      destination.fType = fType;
-     destination.fID = fID;
+     destination.fID   = fID;
+     destination.fID   = fPrimaryID;
+     destination.fID   = fParentID;
    }
 
  /**

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHitTest.cxx,v 1.4 2004/07/04 06:03:32 troy Exp $
+    $Id: I3MCHitTest.cxx,v 1.5 2004/07/27 04:34:32 ehrlich Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/07/04 06:03:32 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/07/27 04:34:32 $
     @author Troy D. Straszheim
 
     @todo
@@ -41,12 +41,12 @@ namespace tut
   {
     I3MCHit h, j;
     ensure(h.GetWeight() == 0);
-    ensure(h.GetTrackNumber() == 0);
+    ensure(h.GetParticleID() == 0);
     j.SetWeight(rand()/0.3234);
-    j.SetTrackNumber(rand()%256);
+    j.SetParticleID(rand()%256);
     h = j;
     ensure_distance("simple assignment", j.GetWeight(), h.GetWeight(), (float)0.0001);
-    ensure(j.GetTrackNumber() == j.GetTrackNumber());
+    ensure(j.GetParticleID() == j.GetParticleID());
   }
 
   /**

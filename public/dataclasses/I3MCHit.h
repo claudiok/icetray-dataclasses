@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.14 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3MCHit.h,v 1.15 2004/07/27 04:34:32 ehrlich Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/07/27 04:34:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,14 +29,14 @@
  */
 class I3MCHit : public I3Hit
 {
-  Float_t fWeight;
-  UShort_t fTrackNum;
+  Float_t  fWeight;
+  Int_t    fParticleID;
 
  public:
   /**
    * constructor
    */
-  I3MCHit() { fWeight = 0; fTrackNum=0;}
+  I3MCHit() {fWeight = 0; fParticleID=0;}
 
   /**
    * copy constructor just uses assignment operator
@@ -50,7 +50,7 @@ class I3MCHit : public I3Hit
     if (this == &rhs) return *this; // check for assignment to self
     I3Hit::operator=(rhs); // call base class assignment operator
     fWeight = rhs.fWeight;
-    fTrackNum = rhs.fTrackNum; 
+    fParticleID = rhs.fParticleID; 
     return *this;
   }
 
@@ -67,12 +67,12 @@ class I3MCHit : public I3Hit
   /**
    * @return the track number which caused this hit
    */
-  UShort_t GetTrackNumber() const { return fTrackNum; }
+  Int_t GetParticleID() const { return fParticleID; }
 
   /**
    * @param tracknum set the track which caused this hit
    */
-  void SetTrackNumber(UShort_t tracknum) { fTrackNum = tracknum; }
+  void SetParticleID(Int_t ParticleID) { fParticleID = ParticleID; }
 
  private:
 
