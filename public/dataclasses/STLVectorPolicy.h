@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorPolicy.h,v 1.3 2004/02/17 16:54:39 troy Exp $
+    $Id: STLVectorPolicy.h,v 1.4 2004/02/17 19:49:53 troy Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/02/17 16:54:39 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/02/17 19:49:53 $
     @author Troy Straszheim
 
 */
@@ -31,19 +31,30 @@ class StoragePolicy {
 
  public:
 
-  void push_back(const ElementType &e) {
-    vector_.push_back(e);
-  }
+  void push_back(const ElementType &e) { vector_.push_back(e); }
+  void pop_back() { vector_.pop_back(); }
+  void clear() { vector_.clear(); }
 
   reference operator[](size_t n) { return vector_[n]; }
-
   const_reference operator[](size_t n) const { return vector_[n]; }
 
   size_t size() const { return vector_.size(); }
   void resize(size_t newsize_) { vector_.resize(newsize_); }
+  void reserve (size_t n) { vector_.reserve(n); }
+
+
   iterator begin() { return vector_.begin(); }
   iterator end() { return vector_.end(); }
   
+  reference front() { return vector_.front(); }
+  const_reference front() const { return vector_.front(); }
+
+  reference back() { return vector_.back(); }
+  const_reference back() const { return vector_.back(); }
+
+  //rootcint meckert about friend function somethingorother
+  //bool empty() const { return vector_.empty() }
+
 };
 
 #endif
