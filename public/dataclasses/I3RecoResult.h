@@ -1,60 +1,40 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3RecoResult.h,v 1.9 2004/02/16 00:55:12 troy Exp $
+
+    @version $Revision: 1.9 $
+    @date $Date: 2004/02/16 00:55:12 $
+    @author
+
+    @todo get/set best stuff
+
+*/
 #ifndef I3RECORESULT_H
 #define I3RECORESULT_H
 
-/**
- * Class: I3RecoResult
- *
- * Version: $Id: I3RecoResult.h,v 1.8 2004/02/10 15:24:14 pretz Exp $
- *
- * Date: 30 Jan 2004
- *
- * (c) 2004 IceCube Collaboration
- */
-
-#include <TObject.h>
-#include <TObjArray.h>
 #include "I3RecoTrackList.h"
-#include "dataclasses/I3Iterator.h"
+#include "TClonesPolicy.h"
+#include "GarnishedVector.h"
 
-/**
- * I3RecoResult 
- * Each reconstruction method may have more than one solution. 
- * These solutions are stored into different track lists 
- * (every solution may have more than one reconstructed track 
- * which are grouped into track lists). These track lists can be
- * accessed here.
- * Since there are reconstruction methods which give simpler results,
- * (e.g. single likelihood gives only single tracks or double muon 
- * reconstruction gives only one solution with two tracks) there are
- * "convenience" classes which are inherited from this class.
- * These "convenience" classes are there to provide an interface 
- * for simpler access to the reconstructed tracks. The data itself is
- * still stored as provided in this class, so that the tracks can also
- * be accessed by this class without the need of recasting.
- * @version $Id: I3RecoResult.h,v 1.8 2004/02/10 15:24:14 pretz Exp $
- * @author Ralf Ehrlich
- */
-class I3RecoResult : public TObject
+class I3RecoResultHeader 
 {
-  protected:
-  TObjArray     *recotracklist;
-  TRef          bestrecotracklist;
+  TRef          best;
 
   public:
-           I3RecoResult();
-  virtual ~I3RecoResult();
+  I3RecoResultHeader();
+  virtual ~I3RecoResultHeader();
 
   const char* GetRecomethod() const;
 
-  int GetNumberRecoTrackLists() const;
-  const I3RecoTrackList& GetRecoTrackList(unsigned short index) const;
-  void AddRecoTrackList(I3RecoTrackList* recotracklist_);
-  I3Iterator<const I3RecoTrackList>* MakeRecoTrackListIterator() const;
+  bool HasBest() const;
+  const I3RecoTrackList& BestRecoTrackList() const;
+  void BestRecoTrackList(I3RecoTrackList& bestrecotracklist_);
 
-  bool HasBestRecoTrackList() const;
-  const I3RecoTrackList& GetBestRecoTrackList() const;
-  void SetBestRecoTrackList(I3RecoTrackList& bestrecotracklist_);
-
-  ClassDef(I3RecoResult, 1);
 };
+
+typedef TClonesPolicy<I3RecoTrackList> I3RecoResultStoragePolicy;
+typedef GarnishedVector<I3RecoResultHeader, I3RecoTrackList, I3RecoResultStoragePolicy> I3RecoResult;
+
+
 #endif

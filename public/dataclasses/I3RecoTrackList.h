@@ -1,24 +1,27 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3RecoTrackList.h,v 1.6 2004/02/16 00:55:12 troy Exp $
+
+    @version $Revision: 1.6 $
+    @date $Date: 2004/02/16 00:55:12 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3RECOTRACKLIST_H
 #define I3RECOTRACKLIST_H
 
-#include <TObject.h>
-#include <TObjArray.h>
 #include "I3RecoTrack.h"
-#include "dataclasses/I3Iterator.h"
+#include "TClonesPolicy.h"
+#include "GarnishedVector.h"
 
-class I3RecoTrackList : public TObject
-{
-  TObjArray  *recotrack;
+class I3RecoTrackListHeader { };
 
-  public:
-           I3RecoTrackList();
-  virtual ~I3RecoTrackList();
+typedef TClonesPolicy<I3RecoTrack> I3RecoTrackListStoragePolicy;
+typedef GarnishedVector<I3RecoTrackListHeader, I3RecoTrack, I3RecoTrackListStoragePolicy> I3RecoTrackList;
 
-  int GetNumberRecoTracks() const;
-  const I3RecoTrack& GetRecoTrack(unsigned short index) const;
-  void AddRecoTrack(I3RecoTrack* recotrack_);
-  I3Iterator<const I3RecoTrack>* MakeRecoTrackIterator() const;
 
-  ClassDef(I3RecoTrackList, 1);
-};
+
 #endif
