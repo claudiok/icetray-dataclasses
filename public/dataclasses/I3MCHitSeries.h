@@ -3,7 +3,7 @@
 
 #include "I3MCHit.h"
 #include "StoragePolicy.h"
-#include "GarnishedVector.h"
+#include "AugVec.h"
 
 class I3MCHitSeriesHeader {
   float weight_;
@@ -13,6 +13,6 @@ class I3MCHitSeriesHeader {
 };
 
 typedef StoragePolicy<I3MCHit> I3MCHitSeriesStoragePolicy;
-typedef GarnishedVector<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy> I3MCHitSeries;
+typedef AugVec<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy> I3MCHitSeries;
 
 #endif

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoHitSeries.h,v 1.7 2004/02/17 16:54:39 troy Exp $
+    $Id: I3RecoHitSeries.h,v 1.8 2004/02/20 21:42:08 troy Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/02/17 16:54:39 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/02/20 21:42:08 $
     @author
 
     @todo
@@ -15,7 +15,7 @@
 
 #include "I3RecoHit.h"
 #include "StoragePolicy.h"
-#include "GarnishedVector.h"
+#include "AugVec.h"
 
 class I3RecoHitSeriesHeader {
   float confidence_;
@@ -25,7 +25,7 @@ class I3RecoHitSeriesHeader {
 };
 
 typedef StoragePolicy<I3RecoHit> I3RecoHitSeriesStoragePolicy;
-typedef GarnishedVector<I3RecoHitSeriesHeader, I3RecoHit, I3RecoHitSeriesStoragePolicy> I3RecoHitSeries;
+typedef AugVec<I3RecoHitSeriesHeader, I3RecoHit, I3RecoHitSeriesStoragePolicy> I3RecoHitSeries;
 
 #endif
 

@@ -2,10 +2,10 @@
 
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TopGeometry.h,v 1.2 2004/02/19 23:03:08 niessen Exp $
+    $Id: I3TopGeometry.h,v 1.3 2004/02/20 21:42:08 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/19 23:03:08 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/20 21:42:08 $
     @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
 
     @brief This is an collection of tanks.
@@ -18,7 +18,7 @@
 #define __I3TOPGEOMETRY_H_
 
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/GarnishedVector.h"
+#include "dataclasses/AugVec.h"
 
 #include "dataclasses/I3TankGeo.h"
 
@@ -44,6 +44,6 @@ class I3TopGeometryHeader {
 };
 
 typedef StoragePolicy<I3TankGeo> I3TopGeometryStoragePolicy;
-typedef GarnishedVector<I3TopGeometryHeader, I3TankGeo, I3TopGeometryStoragePolicy> I3TopGeometry;
+typedef AugVec<I3TopGeometryHeader, I3TankGeo, I3TopGeometryStoragePolicy> I3TopGeometry;
 
 #endif

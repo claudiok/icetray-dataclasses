@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCTrackList.h,v 1.8 2004/02/17 16:54:39 troy Exp $
+    $Id: I3MCTrackList.h,v 1.9 2004/02/20 21:42:08 troy Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/02/17 16:54:39 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/02/20 21:42:08 $
     @author
 
     @todo
@@ -15,14 +15,14 @@
 
 #include "I3MCTrack.h"
 #include "StoragePolicy.h"
-#include "GarnishedVector.h"
+#include "AugVec.h"
 
 
 class I3MCTrackListHeader { };
 
 typedef StoragePolicy<I3MCTrack> I3MCTrackListStoragePolicy;
 
-typedef GarnishedVector<I3MCTrackListHeader, 
+typedef AugVec<I3MCTrackListHeader, 
 			I3MCTrack, 
 			I3MCTrackListStoragePolicy> I3MCTrackList;
 

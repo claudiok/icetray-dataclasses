@@ -7,7 +7,7 @@ class I3RecoHitSeriesDataHeader { };
 
 typedef StoragePolicy<I3RecoHitSeries> I3RecoHitSeriesDataStoragePolicy;
 
-typedef GarnishedVector<I3RecoHitSeriesDataHeader, 
+typedef AugVec<I3RecoHitSeriesDataHeader, 
 			I3RecoHitSeries, 
 			I3RecoHitSeriesDataStoragePolicy> I3RecoHitSeriesData;
 

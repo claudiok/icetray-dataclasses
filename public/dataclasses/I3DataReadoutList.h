@@ -3,13 +3,13 @@
 
 #include "I3DataReadout.h"
 #include "StoragePolicy.h"
-#include "GarnishedVector.h"
+#include "AugVec.h"
 
 class I3DataReadoutListHeader { };
 
 typedef StoragePolicy<I3DataReadout> I3DataReadoutListStoragePolicy;
 
-typedef GarnishedVector<I3DataReadoutListHeader, 
+typedef AugVec<I3DataReadoutListHeader, 
 			I3DataReadout, 
 			I3DataReadoutListStoragePolicy> I3DataReadoutList;
 

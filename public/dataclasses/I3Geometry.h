@@ -2,10 +2,10 @@
 
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Geometry.h,v 1.9 2004/02/20 18:42:16 pretz Exp $
+    $Id: I3Geometry.h,v 1.10 2004/02/20 21:42:08 troy Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/02/20 18:42:16 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/02/20 21:42:08 $
     @author Some lazy sucker who did not put the header here.
 
     @todo 
@@ -19,7 +19,7 @@
 #include <TObject.h>
 #include "I3OMGeo.h"
 #include "StoragePolicy.h"
-#include "GarnishedVector.h"
+#include "AugVec.h"
 
 class I3GeometryHeader {
   Double_t     fTime;
@@ -33,7 +33,7 @@ class I3GeometryHeader {
 };
 
 typedef StoragePolicy<I3OMGeoPtr> I3GeometryStoragePolicy;
-typedef GarnishedVector<I3GeometryHeader, I3OMGeoPtr, I3GeometryStoragePolicy> I3Geometry;
+typedef AugVec<I3GeometryHeader, I3OMGeoPtr, I3GeometryStoragePolicy> I3Geometry;
 
 #endif
  
