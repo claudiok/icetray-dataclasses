@@ -124,6 +124,19 @@
 #pragma link C++ typedef I3RecoHitSeriesPtr;
 //#pragma link C++ class I3RecoHitSeriesPtr+;
 
+#pragma link C++ class I3RecoResultAltTracks+;
+#pragma link C++ class I3RecoResultAltTracks::iterator+;
+#pragma link C++ typedef MapPointainerPolicy<I3ParticlePtr>::ThePolicy;
+#pragma link C++ class MapPointainerPolicy<I3ParticlePtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3RecoResultAltTracks::iterator&, const I3RecoResultAltTracks::iterator&);
+#pragma link C++ typedef I3RecoResultAltTracksPtr;
+
+#pragma link C++ class I3RecoResultMultiTracks;
+#pragma link C++ class I3RecoResultMultiTracks::iterator+;
+#pragma link C++ typedef VecPointainerPolicy<I3ParticlePtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3ParticlePtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3RecoResultMultiTracks::iterator&, const I3RecoResultMultiTracks::iterator&);
+#pragma link C++ typedef I3RecoResultMultiTracksPtr;
 
 #pragma link C++ class I3MCTrackList+;
 #pragma link C++ class I3MCTrackList::iterator+;
@@ -139,12 +152,13 @@
 #pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
 #pragma link C++ typedef I3MCTrackDataPtr;
 
-//#pragma link C++ class I3Bag+;
-//#pragma link C++ class I3Bag::iterator+;
-//#pragma link C++ typedef MapPointainerPolicy<TObjectPtr>::ThePolicy;
-//#pragma link C++ class MapPointainerPolicy<TObjectPtr>::ThePolicy+;
-//#pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
-//#pragma link C++ typedef I3BagPtr;
+#pragma link C++ typedef TObjectPtr;
+#pragma link C++ class I3Bag+;
+#pragma link C++ class I3Bag::iterator+;
+#pragma link C++ typedef MapPointainerPolicy<TObjectPtr>::ThePolicy;
+#pragma link C++ class MapPointainerPolicy<TObjectPtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
+#pragma link C++ typedef I3BagPtr;
 
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
@@ -179,7 +193,6 @@
 #pragma link C++ typedef I3AnalogReadoutPtr;
 #pragma link C++ class I3Atmosphere+;
 #pragma link C++ typedef I3AtmospherePtr;
-#pragma link C++ class I3Bag+;
 #pragma link C++ class I3Cascade+;
 #pragma link C++ class I3Contained+;
 #pragma link C++ class I3Composite+;
@@ -262,10 +275,6 @@
 #pragma link C++ typedef I3RecoHitPtr;
 #pragma link C++ class I3RecoResult+;
 #pragma link C++ typedef I3RecoResultPtr;
-#pragma link C++ class I3RecoResultAltTracks+;
-#pragma link C++ typedef I3RecoResultAltTracksPtr;
-#pragma link C++ class I3RecoResultMultiTracks;
-#pragma link C++ typedef I3RecoResultMultiTracksPtr;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ typedef I3RecoResultLikelihoodPtr;
 #pragma link C++ class I3RecoResultRDMCFit+;
