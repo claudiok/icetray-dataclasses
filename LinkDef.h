@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.103 2004/07/30 19:15:59 dule Exp $
-// $Revision: 1.103 $
-// $Date: 2004/07/30 19:15:59 $
+// $Id: LinkDef.h,v 1.104 2004/07/30 20:40:59 blaufuss Exp $
+// $Revision: 1.104 $
+// $Date: 2004/07/30 20:40:59 $
 //
 
 #ifdef __CINT__
@@ -226,13 +226,13 @@
                                       const I3ArrayHit::iterator &);
 #pragma link C++ typedef I3ArrayHitPtr;
 
-#pragma link C++ class I3ArrayHitData+;
-//#pragma link C++ class I3ArrayHitData::iterator+;
+#pragma link C++ class I3ArrayHitDict+;
+//#pragma link C++ class I3ArrayHitDict::iterator+;
 #pragma link C++ typedef MapPolicy<string, I3ArrayHitPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<string, I3ArrayHitPtr>::ThePolicy+;
-#pragma link C++ function operator!= (const I3ArrayHitData::iterator &,
-                                      const I3ArrayHitData::iterator &);
-#pragma link C++ typedef I3ArrayHitDataPtr;
+#pragma link C++ function operator!= (const I3ArrayHitDict::iterator &,
+                                      const I3ArrayHitDict::iterator &);
+#pragma link C++ typedef I3ArrayHitDictPtr;
 
 
 //

@@ -1,13 +1,14 @@
 /**
-    $Id: I3ArrayHitData.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
-    @file I3ArrayHitData.h
-    @version $Revision: 1.3 $
+    $Id: I3ArrayHitDict.h,v 1.1 2004/07/30 20:41:00 blaufuss Exp $
+    @file I3ArrayHitDicy.h
+    @version $Revision: 1.1 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
+    @author blaufuss
 */
 
-#ifndef I3ArrayHitData_H
-#define I3ArrayHitData_H
+#ifndef I3ArrayHitDict_H
+#define I3ArrayHitDict_H
 
 #include <TObject.h>
 #include <TObjArray.h>
@@ -19,32 +20,32 @@
  * @brief The container for all the Array Hit-related data in the event
  *
  */
-class I3ArrayHitData : public TObject,
+class I3ArrayHitDict : public TObject,
 	 public MapPolicy<string, I3ArrayHitPtr>::ThePolicy {
 
  public:
   /**
    * constructor
    */
-  I3ArrayHitData() {}
+  I3ArrayHitDict() {}
   
   /**
    * destructor
    */
-  virtual ~I3ArrayHitData() {}
+  virtual ~I3ArrayHitDict() {}
   
  private:
   // copy and assignment are private
-  I3ArrayHitData(const I3ArrayHitData&); 
-  const I3ArrayHitData& operator=(const I3ArrayHitData&); 
+  I3ArrayHitDict(const I3ArrayHitDict&); 
+  const I3ArrayHitDict& operator=(const I3ArrayHitDict&); 
 
   // ROOT macro
-  ClassDef(I3ArrayHitData,1);
+  ClassDef(I3ArrayHitDict,1);
 };
 
 /**
  * pointer typedeffed away to insulate users from memory managment
  */
-typedef PtrPolicy<I3ArrayHitData>::ThePolicy I3ArrayHitDataPtr;
+typedef PtrPolicy<I3ArrayHitDict>::ThePolicy I3ArrayHitDictPtr;
 
 #endif

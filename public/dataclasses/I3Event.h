@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.38 2004/07/29 15:35:46 blaufuss Exp $
+ * $Id: I3Event.h,v 1.39 2004/07/30 20:41:00 blaufuss Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.38 $
- * @date $Date: 2004/07/29 15:35:46 $
+ * @version $Revision: 1.39 $
+ * @date $Date: 2004/07/30 20:41:00 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -16,7 +16,7 @@
 #include "I3TriggerDict.h"
 #include "I3FilterDict.h"
 #include "I3OMResponseMap.h"
-#include "I3ArrayHitData.h"
+#include "I3ArrayHitDict.h"
 #include "I3RecoResultDict.h"
 #include "I3Bag.h"
 /**
@@ -36,7 +36,7 @@ class I3Event : public TObject
   I3TriggerDict    fTriggerDict; //||
   I3FilterDict     fFilterDict; //||
   I3OMResponseMap  fOMResponseMap; //||
-  I3ArrayHitData   fTopResponseData; //||
+  I3ArrayHitDict   fTopResponseDict; //||
   I3RecoResultDict fRecoResultDict; //||
   I3Bag            fBag; //||
   
@@ -84,12 +84,12 @@ class I3Event : public TObject
    /**
    * @return the Array hit data as constant object
    */
-  const I3ArrayHitData& TopResponseData () const { return fTopResponseData; }
+  const I3ArrayHitDict& GeTopResponseDict () const { return fTopResponseDict; }
 
   /**
    * @ return the Array hit data a non-const object
    */
-  I3ArrayHitData& TopResponseData () { return fTopResponseData; }
+  I3ArrayHitDict& GetTopResponseDict () { return fTopResponseDict; }
 
   /**
    * @return the RecoResult Data as a constant object
