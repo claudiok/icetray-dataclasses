@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.18 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Event.h,v 1.19 2004/05/04 23:37:03 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/05/04 23:37:03 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -16,7 +16,7 @@
 
 #include "I3TriggerData.h"
 #include "I3FilterData.h"
-#include "I3MCTrackData.h"
+#include "I3MCParticleData.h"
 #include "I3OMResponseData.h"
 #include "I3RecoResultData.h"
 #include "I3Bag.h"
@@ -29,7 +29,7 @@ class I3Event : public TObject
 {
   I3TriggerData    fTriggerData; //||
   I3FilterData     fFilterData; //||
-  I3MCTrackData    fMCTrackData; //||
+  I3MCParticleData    fMCParticleData; //||
   I3OMResponseData fOMResponseData; //||
   I3RecoResultData fRecoResultData; //||
   I3Bag            fBag; //||
@@ -66,14 +66,14 @@ class I3Event : public TObject
   I3FilterData& FilterData() { return fFilterData;}
 
   /**
-   * @return the MCTrackData as a constant object.
+   * @return the MCParticleData as a constant object.
    */
-  const I3MCTrackData& MCTrackData() const { return fMCTrackData;}
+  const I3MCParticleData& MCParticleData() const { return fMCParticleData;}
 
   /**
-   * @return the MCTrackData as a non-const object.
+   * @return the MCParticleData as a non-const object.
    */
-  I3MCTrackData& MCTrackData(){ return fMCTrackData;}
+  I3MCParticleData& MCParticleData(){ return fMCParticleData;}
 
   /**
    * @return the OMResponseData of the event as a non-constant object
