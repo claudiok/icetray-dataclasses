@@ -62,12 +62,41 @@ cout <<endl;
 
 cout <<"Creating position d and setting coordinates in car..."<<endl;
 I3Position d(1,1,1);
-cout <<d.GetR()<<" "<<d.GetTheta()<<endl;
+cout <<"Position d.R (1.73205): "<<d.GetR()<<endl;
+cout <<"Position d.Theta (0.955317): "<<d.GetTheta()<<endl;
+cout <<"Position d.Phi (0.785398): "<<d.GetPhi()<<endl;
+cout <<endl;
+
+cout <<"Using the = operator on I3Position e=d..."<<endl;
+I3Position e = d;
+cout <<"Position e.R (1.73205): "<<e.GetR()<<endl;
+cout <<"Position e.Theta (0.955317): "<<e.GetTheta()<<endl;
+cout <<"Position e.Phi (0.785398): "<<e.GetPhi()<<endl;
 cout <<endl;
 
 cout <<"Creating position f from position d..."<<endl;
 I3Position f(d);
-cout <<f.GetR()<<" "<<f.GetTheta()<<endl;
+cout <<"Position f.R (1.73205): "<<f.GetR()<<endl;
+cout <<"Position f.Theta (0.955317): "<<f.GetTheta()<<endl;
+cout <<"Position f.Phi (0.785398): "<<f.GetPhi()<<endl;
+cout <<endl;
+
+cout <<"Shifting coordinate system of f by s..."<<endl;
+f.ShiftCoordSystem(s);
+cout <<"Position f.X (0): "<<f.GetX()<<endl;
+cout <<"Position f.Y (0): "<<f.GetY()<<endl;
+cout <<"Position f.Z (0): "<<f.GetZ()<<endl;
+cout <<endl;
+
+cout <<"Shifting coordinate system of f by p..."<<endl;
+f.ShiftCoordSystem(p);
+cout <<"Position f.X (0): "<<f.GetX()<<endl;
+cout <<"Position f.Y (-0.707108): "<<f.GetY()<<endl;
+cout <<"Position f.Z (-4.94975): "<<f.GetZ()<<endl;
+cout <<"Position f.R (5): "<<f.GetR()<<endl;
+cout <<"Position f.Theta (2.9997): "<<f.GetTheta()<<endl;
+cout <<"Position f.Phi (4.71239): "<<f.GetPhi()<<endl;
+cout <<"Position f.Rho (0.707108): "<<f.GetRho()<<endl;
 cout <<endl;
 
 }
