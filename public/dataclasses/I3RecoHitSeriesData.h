@@ -2,15 +2,14 @@
 #define I3RECOHITSERIESDATA_H
 
 #include "I3RecoHitSeries.h"
+#include "StoragePolicy.h"
 
-class I3RecoHitSeriesDataHeader { };
-
-typedef StoragePolicy<I3RecoHitSeries> I3RecoHitSeriesDataStoragePolicy;
-
-typedef AugVec<I3RecoHitSeriesDataHeader, 
-			I3RecoHitSeries, 
-			I3RecoHitSeriesDataStoragePolicy> I3RecoHitSeriesData;
-
+class I3RecoHitSeriesData : public VectorPolicy<I3RecoHitSeries>::ThePolicy
+{
+ public:
+  virtual ~I3RecoHitSeriesData(){};
+  ClassDef(I3RecoHitSeriesData,1);
+};
 
 
 #endif

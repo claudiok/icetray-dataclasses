@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3AnalogSeries.h,v 1.9 2004/02/21 17:38:10 pretz Exp $
+    $Id: I3AnalogSeries.h,v 1.10 2004/02/21 18:52:38 troy Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/02/21 17:38:10 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/02/21 18:52:38 $
     @author
 
     @todo
@@ -15,14 +15,14 @@
 
 #include "I3Analog.h"
 #include "StoragePolicy.h"
-#include "AugVec.h"
 
-class I3AnalogSeriesHeader { };
+class I3AnalogSeries : public VectorPolicy<I3Analog>::ThePolicy
+{ 
+  I3AnalogSeries(const I3AnalogSeries &);
+  const I3AnalogSeries& operator=(const I3AnalogSeries&);
 
-typedef StoragePolicy<I3Analog> I3AnalogSeriesStoragePolicy;
-
-class I3AnalogSeries : public AugVec<I3AnalogSeriesHeader, I3Analog, I3AnalogSeriesStoragePolicy>
-{
+ public:
+  virtual ~I3AnalogSeries() {;}
   ClassDef(I3AnalogSeries,1);
 };
 

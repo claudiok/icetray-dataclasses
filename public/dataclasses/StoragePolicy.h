@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.1 2004/02/17 16:54:39 troy Exp $
+    $Id: StoragePolicy.h,v 1.2 2004/02/21 18:52:38 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/17 16:54:39 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/21 18:52:38 $
     @author
 
     @todo
@@ -16,15 +16,15 @@
 #ifndef STORAGEPOLICY_H
 #define STORAGEPOLICY_H
 
-// TDS:  something like this would be nice but rootcint wont take it
-//template <class Stored>
-//struct GlobalPolicy {
-//  typedef TClonesPolicy<Stored> ThePolicy;
-//}
-//typedef GlobalPolicy<I3RecoHit>::ThePolicy I3RecoHitSeriesStoragePolicy;
+#include "STLVectorStoragePolicy.h"
 
+// something like this would be nice but root wont allow it
+template <class Stored>
+struct VectorPolicy {
+  typedef STLVectorStoragePolicy<Stored> ThePolicy;
+  //  typedef TClonesArrayStoragePolicy<Stored> ThePolicy;
+};
 
-#include "STLVectorPolicy.h"
 //#include "TClonesPolicy.h"
 
 #endif

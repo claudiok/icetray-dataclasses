@@ -2,10 +2,10 @@
 
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Geometry.h,v 1.11 2004/02/21 02:24:13 pretz Exp $
+    $Id: I3Geometry.h,v 1.12 2004/02/21 18:52:38 troy Exp $
 
-    @version $Revision: 1.11 $
-    @date $Date: 2004/02/21 02:24:13 $
+    @version $Revision: 1.12 $
+    @date $Date: 2004/02/21 18:52:38 $
     @author Some lazy sucker who did not put the header here.
 
     @todo 
@@ -19,9 +19,9 @@
 #include <TObject.h>
 #include "I3OMGeo.h"
 #include "StoragePolicy.h"
-#include "AugVec.h"
 
-class I3GeometryHeader {
+class I3Geometry : public VectorPolicy<I3OMGeoPtr>::ThePolicy
+{
   Double_t     fTime;
   Long_t       fDate;
  public:
@@ -30,12 +30,13 @@ class I3GeometryHeader {
 
   Long_t Date() const {  return fDate; }
   void Date(Long_t date_) { fDate = date_; }
+
+  virtual ~I3Geometry(){};
+  ClassDef(I3Geometry,1);
 };
 
-typedef StoragePolicy<I3OMGeoPtr> I3GeometryStoragePolicy;
-class I3Geometry : public AugVec<I3GeometryHeader, I3OMGeoPtr, I3GeometryStoragePolicy>{
-ClassDef(I3Geometry,1);
-};
+
+
 
 #endif
  

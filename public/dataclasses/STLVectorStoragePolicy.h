@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorPolicy.h,v 1.6 2004/02/20 04:05:09 troy Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.1 2004/02/21 18:52:38 troy Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/02/20 04:05:09 $
+    @version $Revision: 1.1 $
+    @date $Date: 2004/02/21 18:52:38 $
     @author Troy Straszheim
 
 */
@@ -15,7 +15,7 @@
 using namespace std;
 
 template <class ElementType>
-class StoragePolicy {
+class STLVectorStoragePolicy {
 
  public:
 

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoHitSeries.h,v 1.9 2004/02/21 17:38:10 pretz Exp $
+    $Id: I3RecoHitSeries.h,v 1.10 2004/02/21 18:52:38 troy Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/02/21 17:38:10 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/02/21 18:52:38 $
     @author
 
     @todo
@@ -15,22 +15,17 @@
 
 #include "I3RecoHit.h"
 #include "StoragePolicy.h"
-#include "AugVec.h"
 
-class I3RecoHitSeriesHeader {
+class I3RecoHitSeries : public VectorPolicy<I3RecoHit>::ThePolicy
+{
   float confidence_;
  public:
-  float confidence() { return confidence_; }
-  void confidence(float confidence__) { confidence_ = confidence__; }
-};
+  float Confidence() { return confidence_; }
+  void Confidence(float confidence__) { confidence_ = confidence__; }
 
-typedef StoragePolicy<I3RecoHit> I3RecoHitSeriesStoragePolicy;
-
-class I3RecoHitSeries : public AugVec<I3RecoHitSeriesHeader, I3RecoHit, I3RecoHitSeriesStoragePolicy> 
-{
+  virtual ~I3RecoHitSeries(){};
   ClassDef(I3RecoHitSeries,1);
 };
-
 
 #endif
 

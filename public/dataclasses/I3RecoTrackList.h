@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoTrackList.h,v 1.9 2004/02/21 17:38:10 pretz Exp $
+    $Id: I3RecoTrackList.h,v 1.10 2004/02/21 18:52:38 troy Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/02/21 17:38:10 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/02/21 18:52:38 $
     @author
 
     @todo
@@ -15,18 +15,12 @@
 
 #include "I3RecoTrack.h"
 #include "StoragePolicy.h"
-#include "AugVec.h"
 
-class I3RecoTrackListHeader { };
-
-typedef StoragePolicy<I3RecoTrack> I3RecoTrackListStoragePolicy;
-class I3RecoTrackList : public AugVec<I3RecoTrackListHeader, 
-			I3RecoTrack, 
-			I3RecoTrackListStoragePolicy> 
+class I3RecoTrackList : public VectorPolicy<I3RecoTrack>::ThePolicy
 {
-  ClassDef(I3RecoTrackList,1);
+ public:
+  virtual ~I3RecoTrackList(){};
+  ClassDef(I3RecoTrackList, 1);
 };
-
-
 
 #endif
