@@ -21,6 +21,30 @@
 // 'prototype for blahblah does not match any in class blahblah'
 //
 
+#pragma link C++ class I3IceTopStatus+;
+#pragma link C++ class I3IceTopStatus::iterator+;
+#pragma link C++ typedef VectorPolicy<I3IceTopStationStatus>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3IceTopStationStatus>::ThePolicy+;
+#pragma link C++ function operator!=(const I3IceTopStatus::iterator&, const I3IceTopStatus::iterator&);
+#pragma link C++ typedef I3IceTopStatusPtr;
+
+#pragma link C++ class I3InIceStatus+;
+#pragma link C++ class I3InIceStatus::iterator+;
+#pragma link C++ typedef VectorPolicy<I3OMStatusIcecube>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3OMStatusIcecube>::ThePolicy+;
+#pragma link C++ function operator!=(const I3InIceStatus::iterator&, const I3InIceStatus::iterator&);
+#pragma link C++ typedef I3InIceStatusPtr;
+
+// below these are commented out because they are redundant in view of the
+// InIceStatusData
+#pragma link C++ class I3IceTopStationStatus+;
+//#pragma link C++ class I3IceTopStationStatus::iterator+;
+//#pragma link C++ typedef VectorPolicy<I3OMStatusIcecube>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3OMStatusIcecube>::ThePolicy+;
+//#pragma link C++ function operator!=(const I3IceTopStationStatus::iterator&, const I3IceTopStationStatus::iterator&);
+#pragma link C++ typedef I3IceTopStationStatusPtr;
+
+
 #pragma link C++ class I3RecoResultData+;
 #pragma link C++ class I3RecoResultData::iterator+;
 #pragma link C++ typedef MapPolicy<I3RecoResultPtr>::ThePolicy;
@@ -153,11 +177,17 @@
 
 #pragma link C++ class I3Analog+;
 #pragma link C++ typedef I3AnalogPtr;
+#pragma link C++ class I3Atmosphere+;
+#pragma link C++ typedef I3AtmospherePtr;
 #pragma link C++ class I3DataExecution+;
 #pragma link C++ class I3DataHeader+;
 #pragma link C++ typedef I3DataHeaderPtr;
 #pragma link C++ class I3DataReadout+;
 #pragma link C++ typedef I3DataReadoutPtr;
+#pragma link C++ class I3DetectorStatus;
+#pragma link C++ typedef I3DetectorStatusPtr;
+#pragma link C++ class I3DetectorStatusHeader;
+#pragma link C++ typedef I3DetectorStatusHeaderPtr;
 #pragma link C++ class I3Digital+;
 #pragma link C++ typedef I3DigitalPtr;
 #pragma link C++ class I3Event+;
@@ -173,6 +203,10 @@
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitPtr;
 #pragma link C++ class I3MCTrack+;
+#pragma link C++ class I3Monitoring+;
+#pragma link C++ typedef I3MonitoringPtr;
+#pragma link C++ class I3MonitoringHeader+;
+#pragma link C++ typedef I3MonitoringHeaderPtr;
 #pragma link C++ class I3OMGeo+;
 
 #pragma link C++ class I3OMGeoAmanda+;
@@ -191,6 +225,13 @@
 #pragma link C++ typedef I3GeometryPtr;
 #pragma link C++ class I3OMResponse+;
 #pragma link C++ typedef I3OMResponsePtr;`
+#pragma link C++ class I3OMStatus+;
+#pragma link C++ typedef I3OMStatusPtr;
+#pragma link C++ class I3OMStatusIcecube+;
+#pragma link C++ typedef I3OMStatusIcecube::OMTrigSource;
+#pragma link C++ typedef I3OMStatusIcecube::OnOff;
+#pragma link C++ typedef I3OMStatusIcecube::LCMode;
+#pragma link C++ typedef I3OMStatusIcecubePtr;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ typedef I3RecoHitPtr;
 #pragma link C++ class I3RecoResultLikelihood+;

@@ -15,6 +15,9 @@
 /**
  * @todo Change this file so that it'll document the units in doxygen
  * @todo Should the 'natural' units be more like what IceCube'll use ns = 1 rather than sec=1 ?
+ * @todo Should we have a 'speed' here too?
+ * @author Geant4 team
+ * @author pretz (icecube modifications)
  */
 
 //
@@ -41,7 +44,7 @@
 // ********************************************************************
 //
 //
-// $Id: I3Units.h,v 1.3 2004/02/26 21:04:09 pretz Exp $
+// $Id: I3Units.h,v 1.4 2004/03/02 20:58:51 pretz Exp $
 // GEANT4 tag $Name:  $
 // 
 // ----------------------------------------------------------------------
