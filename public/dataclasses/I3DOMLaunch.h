@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.5 2004/11/11 21:31:47 tmccauley Exp $
+ * $Id: I3DOMLaunch.h,v 1.6 2004/12/07 23:04:09 dima Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/11/11 21:31:47 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/12/07 23:04:09 $
  * @author klein
  * @author blaufuss
  *
@@ -201,7 +201,7 @@ class I3DOMLaunch : public I3DigitalLaunch
 
  private:
   // copy and assignment private
-  I3DOMLaunch(const I3DOMLaunch&);
+  // I3DOMLaunch(const I3DOMLaunch&); // allowed by Troy - needed by FeatureExtractor's I3DOMFELaunch
   const I3DOMLaunch& operator=(const I3DOMLaunch&);
 
   // ROOT macro
