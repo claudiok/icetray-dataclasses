@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.9 2004/09/14 13:42:44 dule Exp $
+// $Id: I3Position.cxx,v 1.10 2004/09/16 14:54:47 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -83,20 +83,6 @@ void I3Position::SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame fra
 void I3Position::ResetPosition()
 {
 // Set or Reset the position to 0.
-  fX=0;
-  fY=0;
-  fZ=0;
-  fR=0;
-  fTheta=0;
-  fPhi=0;
-  fRho=0;
-  IsCalculated=kFALSE;
-}
-
-//-----------------------------------------------------------
-void I3Position::NullPosition()
-{
-// Set null position for non-existing position
   fX=NAN;
   fY=NAN;
   fZ=NAN;
@@ -104,7 +90,14 @@ void I3Position::NullPosition()
   fTheta=NAN;
   fPhi=NAN;
   fRho=NAN;
-  IsCalculated=kTRUE;
+  IsCalculated=kFALSE;
+}
+
+//-----------------------------------------------------------
+void I3Position::NullPosition()
+{
+// Set null position for non-existing position
+  ResetPosition();
 }
 
 //-----------------------------------------------------------
