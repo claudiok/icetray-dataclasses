@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMReadout.h,v 1.4 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3DOMReadout.h,v 1.4.2.1 2004/07/19 22:28:46 ehrlich Exp $
  *
  * @file I3DOMReadout.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.4.2.1 $
+ * @date $Date: 2004/07/19 22:28:46 $
  * @author klein
  *
  */
@@ -29,43 +29,29 @@ using namespace std;
 class I3DOMReadout : public I3DataReadout
 {
 
-  /**  
-   * This is the time (in nsec) in 25 nsec units, of the DOM clock 
-   * which launches the ATWD (launch is synchronized to the first clock 
-   * transition AFTER the discriinator fires 
-   */
+/*  This is the time (in nsec) in 25 nsec units, of the DOM clock which
+launches the ATWD (launch is synchronized to the first clock transition
+AFTER the discriinator fires */
+
   Double_t fStartTime;  
 
-  /** 
-   * This is the ATWD time bin size, in nsec 
-   */
+/*  This is the ATWD time bin size, in nsec */
+
   Double_t fATWDBinSize;
 
-  /**  
-   * This holds the trigger information -somewhat of a placeholder for now 
-   */
+  /*  This holds the trigger information -somewhat of a placeholder for now */
+
   Int_t fTrigger;
 
-  /** 
-   * These contain the 3 ATWD waveforms - same time bins, but different 
-   * gains.  All are 128 samples 
-   */
+/* These contain the 3 ATWD waveforms - same time bins, but different gains*
+   All are 128 samples */
+
   vector<Int_t> fATWD0;
-
-  /** These contain the 3 ATWD waveforms - same time bins, but different 
-   * gains.  All are 128 samples 
-   */
   vector<Int_t> fATWD1;
-
-  /** 
-   * These contain the 3 ATWD waveforms - same time bins, but different 
-   * gains.  All are 128 samples 
-   */
   vector<Int_t> fATWD2;
 
-  /** 
-   * This holds the 40 MHz FADC data 
-   */
+  /* This holds the 40 MHz FADC data */
+
   vector<Int_t> fFADC;
 
  public:
@@ -79,65 +65,35 @@ class I3DOMReadout : public I3DataReadout
    */
   virtual ~I3DOMReadout(){;}
   
-  /**
-   * return ATWD/FADC launch time
-   */
-  Double_t GetStartTime() const { return fStartTime; }
+  // set ATWD/FADC launch time
 
-  /**
-   * set ATWD/FADC launch time
-   */
-  void SetStartTime(Double_t starttime) { fStartTime = starttime; }
+  Double_t StartTime() const { return fStartTime; }
 
-  /**
-   * return ATWD time bin size
-   */
-  Double_t GetATWDBinSize() const {return fATWDBinSize;}
+  // return ATWD/FADC launch time
 
-  /**
-   * set ATWD time bin size 
-   */
-  void SetATWDBinSize(Double_t ATWDbinsize) {fATWDBinSize = ATWDbinsize;}
-  
-  /**
-   * return ATWD 0 waveform as a read-only object
-   */
-  const vector<Int_t>& GetATWD0() const {return fATWD0;}
-  
-  /**
-   * return ATWD 1 waveform as a read-only object
-   */
-  const vector<Int_t>& GetATWD1() const {return fATWD1;}
+  void StartTime(Double_t starttime) { fStartTime = starttime; }
 
-  /**
-   * return ATWD 2 waveform as a read-only object
-   */
-  const vector<Int_t>& GetATWD2() const {return fATWD2;}
+  // return ATWD time bin size
 
-  /**
-   * return FADC waveform as a read-only object
-   */
-  const vector<Int_t>& GetFADC() const {return fFADC;}
-  
-  /**
-   * sets the ATWD0 waveform
-   */
- void SetATWD0(const vector<Int_t>& ATWD0data) {fATWD0=ATWD0data;}
+  Double_t ATWDBinSize() const {return fATWDBinSize;}
 
- /**
-  * sets the ATWD1 waveform
-  */
- void SetATWD1(const vector<Int_t>& ATWD1data) {fATWD1=ATWD1data;}
+  // set ATWD time bin size 
 
- /**
-  * sets the ATWD2 waveform
-  */
- void SetATWD2(const vector<Int_t>& ATWD2data) {fATWD2=ATWD2data;}
+  void ATWDBinSize(Double_t ATWDbinsize) {fATWDBinSize = ATWDbinsize;}
 
- /**
-  * sets the FADC waveform
-  */
- void SetFADC(const vector<Int_t>& FADCdata) {fFADC=FADCdata;}
+// return ATWD and FADC waveforms
+
+const vector<Int_t>& ATWD0() const {return fATWD0;}
+const vector<Int_t>& ATWD1() const {return fATWD1;}
+const vector<Int_t>& ATWD2() const {return fATWD2;}
+const vector<Int_t>& FADC()  const {return fFADC;}
+
+// set ATWD and FADC waveforms
+
+ void ATWD0(vector<Int_t> ATWD0data) {fATWD0=ATWD0data;}
+ void ATWD1(vector<Int_t> ATWD1data) {fATWD1=ATWD1data;}
+ void ATWD2(vector<Int_t> ATWD2data) {fATWD2=ATWD2data;}
+ void FADC(vector<Int_t> FADCdata) {fFADC=FADCdata;}
 
  private:
   // copy and assignment private
