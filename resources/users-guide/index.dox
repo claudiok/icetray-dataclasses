@@ -118,6 +118,8 @@
 
    @li @ref architecture
 
+   @li @ref stlsyntax
+
    @li @ref layout
 
    @li @ref om-response
