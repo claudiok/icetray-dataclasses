@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3DOMLaunch.h,v 1.9 2005/02/07 17:55:13 pretz Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/02/07 17:55:13 $
  * @author klein
  * @author blaufuss
  *
@@ -59,21 +59,27 @@ class I3DOMLaunch : public I3DigitalLaunch
   ATWDselect fWhichATWD;
 
   /** 
-   * These contain the 3 ATWD waveforms - same time bins, but different 
+   * These contain the 4 ATWD waveforms - same time bins, but different 
    * gains.  All are 128 samples 
    */
   vector<Int_t> fATWD0;
 
-  /** These contain the 3 ATWD waveforms - same time bins, but different 
+  /** These contain the 4 ATWD waveforms - same time bins, but different 
    * gains.  All are 128 samples 
    */
   vector<Int_t> fATWD1;
 
   /** 
-   * These contain the 3 ATWD waveforms - same time bins, but different 
+   * These contain the 4 ATWD waveforms - same time bins, but different 
    * gains.  All are 128 samples 
    */
   vector<Int_t> fATWD2;
+
+  /** 
+   * These contain the 4 ATWD waveforms - same time bins, but different 
+   * gains.  All are 128 samples 
+   */
+  vector<Int_t> fATWD3;
 
   /** 
    * This holds the 40 MHz FADC data 
@@ -138,6 +144,11 @@ class I3DOMLaunch : public I3DigitalLaunch
   const vector<Int_t>& GetATWD2() const {return fATWD2;}
 
   /**
+   * return ATWD 3 waveform as a read-only object
+   */
+  const vector<Int_t>& GetATWD3() const {return fATWD3;}
+
+  /**
    * return FADC waveform as a read-only object
    */
   const vector<Int_t>& GetFADC() const {return fFADC;}
@@ -164,6 +175,11 @@ class I3DOMLaunch : public I3DigitalLaunch
   * sets the ATWD2 waveform
   */
  void SetATWD2(const vector<Int_t>& ATWD2data) {fATWD2=ATWD2data;}
+
+ /**
+  * sets the ATWD2 waveform
+  */
+ void SetATWD3(const vector<Int_t>& ATWD3data) {fATWD3=ATWD3data;}
 
  /**
   * sets the FADC waveform
