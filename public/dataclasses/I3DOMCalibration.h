@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.2 2004/11/10 22:18:43 tmccauley Exp $
+ * $Id: I3DOMCalibration.h,v 1.3 2004/11/11 15:25:08 tmccauley Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/10 22:18:43 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/11/11 15:25:08 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -73,7 +73,7 @@ public:
  
     // Return the voltage value corresponding to the count 
     // for a specific ATWD id, channel, and bin.
-    Double_t GetATWDVoltage(Int_t id, Int_t channel, Int_t bin, Double_t count);
+    Double_t GetATWDVoltage(Int_t id, Int_t channel, Int_t bin, Int_t count);
     
     //map<Int_t, Double_t>& GetATWDVoltage(Int_t id, Int_t channel);
     
@@ -104,17 +104,6 @@ public:
 
     // Set parameters for conversion of count to voltage 
     // for each ATWD, each ATWD channel, and each ATWD bin.
-    /*
-    void SetATWDParameters(Int_t id,
-			   Int_t channel,
-			   Int_t bin,
-			   Double_t val);
-
-    void SetATWDParameters(Int_t id,
-			   Int_t channel,
-			   map<Int_t,Double_t>&);
-    */
-
     void SetATWDParameters(Int_t id,
 			   Int_t channel,
 			   Int_t bin,
@@ -152,16 +141,10 @@ public:
 	    return fPedestalVoltage;
 	};
     
-    void SetSamplingRate(Double_t rate)
-	{
-	    fSamplingRate = rate;
-	};
+    void SetSamplingRate(Int_t id, Double_t rate);
     
-    Double_t GetSamplingRate()
-	{
-	    return fSamplingRate;
-	};
-
+    Double_t GetSamplingRate(Int_t id);
+    
 private:
     // Simple data types
     Double_t  fDate;  
@@ -174,7 +157,9 @@ private:
 
     Double_t fPMTHighVoltage;
     Double_t fPedestalVoltage;
-    Double_t fSamplingRate;
+    
+    Double_t fSamplingRate0;
+    Double_t fSamplingRate1;
 
     // Gain and error on gain for ATWD channels.
     // The key corresponds to the channel.
@@ -183,10 +168,6 @@ private:
     
     // First key corresponds to channel.
     // Key in internal map corresponds to bin.
-    //map< Int_t, map<Int_t,Double_t> > fATWD0;
-    //map< Int_t, map<Int_t,Double_t> > fATWD1;
-    //map< Int_t, map<Int_t,Double_t> >& GetATWDById(Int_t id);
-
     map< Int_t, map<Int_t,LinearFit> > fATWD0;
     map< Int_t, map<Int_t,LinearFit> > fATWD1;
     map< Int_t, map<Int_t,LinearFit> >& GetATWDById(Int_t id);

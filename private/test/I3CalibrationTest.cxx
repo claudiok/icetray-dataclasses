@@ -105,7 +105,7 @@ namespace tut
 			gain, domptr->GetATWDGain(0), 0.0001);
 	
 	ensure_distance("Failed to get voltage from I3DOMCalibration read from disk",
-			intercept, domptr->GetATWDVoltage(0, 0, 0, 0.0), 0.0001);
+			intercept, domptr->GetATWDVoltage(0, 0, 0, 0), 0.0001);
 
 	//cout<<"Gain: "<< domptr->GetATWDGain(0) <<endl;
     }
