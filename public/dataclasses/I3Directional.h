@@ -1,17 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.6 2004/08/31 13:30:55 pretz Exp $
+ * $Id: I3Directional.h,v 1.7 2004/09/07 22:15:47 dule Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 13:30:55 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/09/07 22:15:47 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
 #define I3DIRECTIONAL_H
 
 #include "Rtypes.h"
+#include "dataclasses/I3Direction.h"
 
 /**
  * @brief A class which implements the 'directional' aspect of an I3Cascade.
@@ -19,8 +20,9 @@
 class I3Directional 
 {
  private:
-  Double_t fZenith;
-  Double_t fAzimuth;
+  I3Direction fDir;
+  //Double_t fZenith;
+  //Double_t fAzimuth;
  public:
   /**
    * indicates that this cascade has a direction
@@ -28,24 +30,51 @@ class I3Directional
   virtual Bool_t HasDirection() const {return true;}
 
   /**
+   * gets the direction of the track
+   */
+  I3Direction GetDir() const {return fDir;}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(I3Direction& d) {fDir.SetDirection(d);}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(Double_t zen, Double_t azi) {fDir.SetDirection(zen,azi);}
+
+  /**
+   * sets the direction of the track
+   */
+  void SetDir(Double_t x, Double_t y, Double_t z) 
+    {fDir.SetDirection(x,y,z);}
+
+  /**
    * gets the zenith of the cascade
    */
-  virtual Double_t GetZenith() const {return fZenith;}
+  //virtual Double_t GetZenith() const {return fZenith;}
+  Double_t GetZenith() const {return GetDir().GetZenith();}
 
   /**
    * sets the zenith of the cascade
    */
-  virtual void SetZenith(Double_t zenith) {fZenith = zenith;}
+  //virtual void SetZenith(Double_t zenith) {fZenith = zenith;}
+  void SetZenith(Double_t zen) {
+    GetDir().SetDirection(zen,GetDir().GetAzimuth());}
 
   /**
    * gets the azimuth of the cascade
    */
-  virtual Double_t GetAzimuth() const {return fAzimuth;}
+  //virtual Double_t GetAzimuth() const {return fAzimuth;}
+  Double_t GetAzimuth() const {return GetDir().GetAzimuth();}
 
   /**
    * sets the Azimuth of the cascade
    */
-  virtual void SetAzimuth(Double_t azimuth) {fAzimuth = azimuth;}
+  //virtual void SetAzimuth(Double_t azimuth) {fAzimuth = azimuth;}
+  void SetAzimuth(Double_t azi) {
+    GetDir().SetDirection(GetDir().GetZenith(),azi);}
 
   /**
    * copies over all the interal data to the destination particle
@@ -56,14 +85,13 @@ class I3Directional
       I3Directional* directional = dynamic_cast<I3Directional*>(&destination);
       if(directional)
 	{
-	  directional->fZenith = fZenith;
-	  directional->fAzimuth = fAzimuth;
+	  directional->fDir = fDir;
 	}
     }
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Zenith:"<<fZenith<<" Azimuth"<<fAzimuth<<"\n";
+      o<<"Direction:"<<fDir<<"\n";
     }
  private:
   //ROOT macro
