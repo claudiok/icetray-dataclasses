@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.1.2.5 2004/04/15 10:47:04 troy Exp $
+    $Id: I3BasicTrack.h,v 1.1.2.6 2004/04/16 17:10:56 pretz Exp $
 
-    @version $Revision: 1.1.2.5 $
-    @date $Date: 2004/04/15 10:47:04 $
+    @version $Revision: 1.1.2.6 $
+    @date $Date: 2004/04/16 17:10:56 $
     @author
 
     @todo
@@ -15,50 +15,28 @@
 
 */
 
+#include "I3TrackImpl.h"
+#include "I3Identifiable.h"
+#include "I3Starting.h"
+#include "I3Energetic.h"
+#include "I3Relativistic.h"
+#include "I3NonComposite.h"
+
 #ifndef I3BASICTRACK_H
 #define I3BASICTRACK_H
 
 #include "dataclasses/I3Track.h"
 
-class I3BasicTrack : public I3Track
+class I3BasicTrack : public I3TrackImpl<I3Identifiable,
+                                      I3Starting,
+                                      I3Energetic,
+                                      I3Relativistic,
+                                      I3NonComposite>
 {
-
-  Double_t fTime, fLength, fZenith, fAzimuth, fEnergy;
-
  public:
-  I3BasicTrack() {
-    fTime=NAN;
-    fZenith=NAN;
-    fAzimuth=NAN;
-    fLength=NAN;
-    fEnergy=NAN;
-  };
-
-  virtual ~I3BasicTrack() {};
-    
-  virtual Double_t Time() const { return fTime; }
-  virtual void Time(Double_t arg) { fTime = arg; }
-
-  virtual Double_t Zenith() const { return fZenith; }
-  virtual void Zenith(Double_t arg) { fZenith = arg; }
-
-  virtual Double_t Azimuth() const { return fAzimuth; }
-  virtual void Azimuth(Double_t arg) { fAzimuth = arg; }
-
-  virtual Double_t Length() const { return fLength; }
-  virtual void Length(Double_t arg) { fLength = arg; }
-
-  virtual Double_t Energy() const { return fEnergy; }
-  virtual void Energy(Double_t arg) { fEnergy = arg; }
-
-  virtual bool IsStarting() { return isinf(Length()) && Length() > 0; }
-  virtual bool IsStopping() { return isinf(Length()) && Length() < 0; }
-  virtual bool IsBounded()  { return !isinf(Length()) && !isnan(Length()) && Length() != 0; }
-  virtual bool IsUnbounded() { return Length() == 0; }
-
-  virtual void ToStream (std::ostream &s) const;
-
-  ClassDef(I3BasicTrack, 1);
+  I3BasicTrack(){};
+  virtual ~I3BasicTrack(){}
+  ClassDef(I3BasicTrack,1);
 };
 
 #endif

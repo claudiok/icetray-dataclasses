@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackEvent.h,v 1.2.2.1 2004/04/07 16:59:31 troy Exp $
+ * $Id: I3MCTrackEvent.h,v 1.2.2.2 2004/04/16 17:10:56 pretz Exp $
  *
- * @version $Revision: 1.2.2.1 $
- * @date $Date: 2004/04/07 16:59:31 $
+ * @version $Revision: 1.2.2.2 $
+ * @date $Date: 2004/04/16 17:10:56 $
  * @author pretz
  *
  * @todo work out how the copy and assignment can be private.
@@ -21,7 +21,7 @@
 class I3MCTrackEvent : public TObject 
 {
 
-  I3MCPrimary fPrimary;
+//  I3MCPrimary fPrimary;
   I3MCTrackList fInIceTracks;
   I3MCTrackList fIceTopTracks;
 
@@ -39,12 +39,12 @@ class I3MCTrackEvent : public TObject
   /**
    * @return the primary track as constant
    */
-  const I3MCPrimary& Primary() const {return fPrimary;}
+//  const I3MCPrimary& Primary() const {return fPrimary;}
 
   /**
    * @return the primary track as non-const
    */
-  I3MCPrimary& Primary() {return fPrimary;}
+//  I3MCPrimary& Primary() {return fPrimary;}
 
   /**
    * @return the In-Ice tracks as constant

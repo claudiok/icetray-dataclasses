@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.7 2004/04/15 11:26:56 troy Exp $
+    $Id: I3Track.h,v 1.10.2.8 2004/04/16 17:10:56 pretz Exp $
 
-    @version $Revision: 1.10.2.7 $
-    @date $Date: 2004/04/15 11:26:56 $
+    @version $Revision: 1.10.2.8 $
+    @date $Date: 2004/04/16 17:10:56 $
     @author
 
     @todo
@@ -15,124 +15,96 @@
 #define I3TRACK_H
 
 #include <TObject.h>
+#include "dataclasses/I3Particle.h"
 #include <vector>
 #include <cmath>
-#include <cassert>
 
 #include <iostream>
 
-#include "dataclasses/I3DataExecution.h"
-class I3Track : public TObject
+class I3Track : public I3Particle
 {
  public:
-
-  enum TrackType {
-    Unknown = -100,
-    Null = 0, 
-    Gamma = 1,
-    EPlus = 2,
-    EMinus = 3,
-    Nu = 4,
-    MuPlus = 5,
-    MuMinus = 6,
-    Pi0 = 7, 
-    PiPlus = 8,
-    PiMinus = 9,
-    PPlus = 14,
-    PMinus = 15,
-    TauPlus = 33,
-    TauMinus = 34,
-    NuE = 201,
-    NuMu = 202,
-    NuTau = 203,
-    NuEBar = 204,
-    NuMuBar = 205,
-    NuTauBar = 206,
-    Brems = 1001,
-    DeltaE = 1002,
-    PairProd = 1003,
-    NuclInt = 1004,
-    MuPair = 1005,
-    Hadrons = 1006,
-    FiberLaser = 2100,
-    N2Laser = 2101, 
-    YAGLaser = 2201,
-    ZPrimary = 3000,
-    APrimary = 3500, 
-    Elph = 9999
-  };
-
- private:
-
-  TrackType      fType;
-  Double_t       fX;
-  Double_t       fY;
-  Double_t       fZ;
-
-  Double_t checknan(Double_t it) const { 
-    if (isnan(it)) {
-      // The following does not work.  I will look at this logging stuff at some point..
-      // I3DataExecution::Instance().Fatal("Illegal access of initialized or invalid track parameter.") 
-      cerr << "Illegal access of initialized or invalid track parameter." << endl;
-      assert(0);
-      return NAN;
-    } else {
-      return it;
-    }
-  }
-  
- public:
-  I3Track() {
-    fType=Null;
-    fX=NAN;
-    fY=NAN;
-    fZ=NAN;
-  };
+  I3Track() {};
 
   virtual ~I3Track() {};
-    
-  TrackType Type() const { return fType; }
-  void Type(TrackType arg) { fType = arg; }
-  
-  Double_t X() const { return checknan(fX); }
-  void X(Double_t arg) { fX = arg; }
 
-  Double_t Y() const { return checknan(fY); }
-  void Y(Double_t arg) { fY = arg; }
+  /**
+   * indicates that the Length() parameter is valid
+   */
+  virtual bool IsLengthy() const =0;
 
-  Double_t Z() const { return checknan(fZ); }
-  void Z(Double_t arg) { fZ = arg; }
-  
-  virtual Double_t Speed() const { return 1; }
-  virtual void Speed(Double_t arg) { return; }
+  /**
+   * indicates that the 'StartX() ... ' parameters are valid
+   */
+  virtual bool IsStarting() const =0;
 
-  virtual Double_t Time() const { return checknan(NAN); }
-  virtual void Time(Double_t arg) { return; }
+  /**
+   * indicates that the 'StopX() ...' parameters are valid
+   */
+  virtual bool IsStopping() const  =0;
 
-  virtual Double_t Zenith() const { return checknan(NAN); }
-  virtual void Zenith(Double_t arg) { return; }
+  /**
+   * indicates that the particle is infinite
+   */
+  virtual bool IsInfinite() const =0;
 
-  virtual Double_t Azimuth() const { return checknan(NAN); }
-  virtual void Azimuth(Double_t arg) { return; }
+  /**
+   * indicates that the particle is starting and stopping
+   */
+  virtual bool IsContained() const  =0;
 
-  virtual Double_t Length() const { return checknan(NAN); }
-  virtual void Length(Double_t arg) { return; }
+  /**
+   * indicates that the track has an energy
+   */
+  virtual bool IsEnergetic() const =0;
 
-  virtual Double_t Energy() const { return checknan(NAN); }
-  virtual void Energy(Double_t arg) { return; }
+  /**
+   * indicates that the track has a speed
+   */
+  virtual bool IsSpeedy() const =0;
 
-  virtual Double_t Weight() const { return checknan(NAN); }
-  virtual void Weight(Double_t arg) { return; }
+  /**
+   * indicates that the track is a composite track
+   */
+  virtual bool IsComposite() const =0;
 
-  virtual bool IsStarting() = 0;
-  virtual bool IsStopping() = 0;
-  virtual bool IsBounded() = 0;
-  virtual bool IsUnbounded() = 0;
-  
+  // starting 4-position
+  virtual double StartX() const =0;
+  virtual double StartY() const =0;
+  virtual double StartZ() const =0;
+  virtual double StartT() const =0;
+
+  // stopping 4-position
+  virtual double StopX() const =0;
+  virtual double StopY() const =0;
+  virtual double StopZ() const =0;
+  virtual double StopT() const =0;
+
+  // Some X position
+  virtual double X() const =0;
+  virtual double Y() const =0;
+  virtual double Z() const =0;
+  virtual double T() const =0;
+
+  // energy
+  virtual double Energy() const =0;
+
+  // speed 
+  virtual double Speed() const =0;
+
+  // length
+  virtual double Length() const =0;
+
+  // composite particle stuff
+  virtual int NumConstituents() const =0;
+  virtual const I3Particle& Constituent(int i) const =0;
+
   //FIXME:  need fns like distancefromtrack, isontrack, etc.
 
-  I3Track& operator=(const I3Track&);
-  virtual void ToStream (std::ostream &s) const;
+  //I3Track& operator=(const I3Track&);
+  virtual void ToStream (std::ostream &s) const {s<<"A Track\n";}
+ protected:
+
 
   ClassDef(I3Track, 1);
 };

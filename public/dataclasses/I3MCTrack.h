@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrack.h,v 1.5.2.1 2004/04/07 16:59:31 troy Exp $
+ * $Id: I3MCTrack.h,v 1.5.2.2 2004/04/16 17:10:56 pretz Exp $
  *
- * @version $Revision: 1.5.2.1 $
- * @date $Date: 2004/04/07 16:59:31 $
+ * @version $Revision: 1.5.2.2 $
+ * @date $Date: 2004/04/16 17:10:56 $
  * @author
  *
  * @todo
@@ -22,7 +22,7 @@ class I3MCTrack : public I3BasicTrack
   Double_t     fWeight;
 
  public:
-
+  
   I3MCTrack() { fWeight=1; }
 
   Double_t Weight() const { return fWeight; }
