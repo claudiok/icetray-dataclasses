@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Constants.h,v 1.6 2004/08/02 17:24:22 dule Exp $
+ * $Id: I3Constants.h,v 1.7 2004/08/26 15:48:12 dule Exp $
  *
  * @file I3Constants.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/02 17:24:22 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/08/26 15:48:12 $
  * @author pretz
  */
 
@@ -41,10 +41,25 @@ namespace I3Constants
   static const Double_t e = 2.71828182845904509;
 
   /**
-   * Z-coordinate of IceTop (Origin Depth)
-   * @todo This number needs to be checked and decided upon... It's wrong.
+   * Elevation of ice surface (of AMANDA hole 4)
+   * From email from Kurt Woschnagg on 08/25/2004
    */
-  static const Double_t zIceTop = 2900*I3Units::feet;
+  static const Double_t SurfaceElev = 9284.46*I3Units::feet;
+
+  /**
+   * Elevation of IceCube origin (z=0) -- BY DEFINITION
+   * From email from Kurt Woschnagg on 08/25/2004
+   */
+  static const Double_t OriginElev = 2900*I3Units::feet;
+
+  /**
+   * Z-coordinate of IceTop (Origin Depth)
+   * Obtained from DEFINED elevation of origin and MEASURED surface elevation
+   *
+   * @todo Make sure that the elevation of IceTop is the same as the elevation
+   * of AMANDA hole 4.  If not, then correct for the difference.
+   */
+  static const Double_t zIceTop = SurfaceElev-OriginElev;
 };
 
 #endif
