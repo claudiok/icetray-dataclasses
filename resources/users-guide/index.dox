@@ -19,33 +19,62 @@
 
    The dataclasses were designed to represent the data that
    comes out of or is used to simulate the IceCube detector.  The dataclasses
-   are intentionally extendtable and therefore can also be used to store data 
-   from post-acquisition processing and analysis.
+   can also be used to store data from post-acquisition processing and analysis.
 
-   As a physicist working with data from IceCube, you will probably
+   As a physicist working with data from IceCube, you will potentially
    interact more with these containers than any other part of the
-   system.
+   system, so have a good hard look and tell us what you think.
+
+   In addition the dataclass code, we have prepared a collection of projects
+   that use the dataclasses in some expected roles they will have to fill.
+   These projects include:
+   @li <code>dataio</code>: A project which contains classes which do the 
+   work of interacting with root files and f2k files to read and write the data.
+
+   @li <code>dataio-modules</code>: A collection of simple IceTray modules 
+   which interface between the dataio classes, and the framework.
+
+   @li <code>corsika-reader</code>: A project which contains IceTray mdules
+   which work together to fill an event with the MC tracks from a Corsika file.
+
+   @li <code>eventviewer</code>: A preliminary try at an event viewer. 
+
+   @li <code>phys-services</code>: A first-start at a collection of standard
+   services for IceTray modules.  
+
+   @li <code>sim-modules</code>: A chain of mock simulation modules.  
+   The chain is real, but the modules just fill random data right now.
+
+   @li <code>reco</code>: A simple implementation of the Dipole fit in 
+   this system.
 
    To have a walk through and play with things a bit, go through the
-   contents (below) in order.  First you will have to set up your
+   contents below.  First you will have to set up the
    IceTray framework, by downloading and building the various components.
    Then there are some walkthroughs - in the form of some example 
    applications - of common tasks and how they are done with the dataclasses.
    The last documents explain the thinking behind the design and mechanics
    of the code.
 
-   @section contents Contents
+<!--   @section contents Contents
 
-   @li @ref sample 
+   @li @ref sample -->
 
-   @subsection preparation Preparation
+   @section preparation Preparation
+
+   These are the minimal prerequisites to be able to start playing with the 
+   dataclasses.  When you've done the following, you will be ready to continue.
+
    @li @ref devenv-setup
    
    @li @ref icetray-setup
 
    @li @ref dataclasses-setup
 
-   @subsection examples Examples
+   @section examples Examples
+   Here are a few tutorial examples.  The order is not really important here 
+   since each example contains a list of the prerequisites which must be met
+   before it can be used.
 
    @li @ref corsika-reader
 
@@ -59,7 +88,12 @@
 
    @li @ref dataclass-and-root
 
-   @subsection reflection Reflection
+   @section reflection Reflection
+   A lot of thought has gone into the design and implementation of these 
+   classes.  If you are interested in the decisions that were made and why they 
+   were made, or if you just want to get a feel for the dataclasses as a whole, 
+   these sections are for you:
+
    @li @ref architecture
 
    @li @ref best-practices

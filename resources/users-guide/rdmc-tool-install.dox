@@ -61,20 +61,12 @@ rdmc-0.0.0/Linux-i386/rdmc/lib and then you're good to go.
 
 @section use Use
 
-To make sure that all has gone smoothly, try the following sequence:<br>
+To use the rdmc tool, you'll have to re-init your workspace and 
+verify that the rdmc shared library was installed:<br>
 <code>
-% mkdir work<br>
-% cd work/<br>
 % bfd init /your/tools/path<br>
-<br>
-</code>
-And look for the following lines:<br>
-<br>
-<code>
-  [...]<br>
   librdmc.so dynamic library has been installed<br>
   public public file(s) has been installed<br>
-  [...]<br>
 </code> 
 <br>
 to indicate that the tool has been installed successfully

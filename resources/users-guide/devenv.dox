@@ -21,4 +21,9 @@ You will be ready to continue with the dataclass tutorials when you:
 @li Have a current checkout of 'bfd' on your system with bfd in your path
 @li Have a recent copy of the icecube tools from glacier
 
+Note: The icecube tools are distributed with ROOT version 3.5.7.  As most 
+people are already running a newer version of ROOT, you may want to replace
+root tool that comes with the tools tarball with a more recent version.  The 
+dataclasses have been developed using ROOT version 3.10.01 and 3.10.02, so 
+I'd recommend them.
 */
