@@ -9,10 +9,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.3 2004/04/23 19:03:07 ehrlich Exp $
+ * $Id: I3Particle.h,v 1.4 2004/04/23 20:36:03 deyoung Exp $
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 19:03:07 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/23 20:36:03 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -61,29 +61,47 @@ class I3Particle : public TObject{
   };
 
  private:
- ParticleType fType;
+    ParticleType fType;
+    Ushort_t fID;
 
- public:
- /**
-  * indicates that particle has a direction of origin
-  */
- virtual Bool_t IsDirectional() const =0;
+public:
+    /**
+     * indicates that particle has a direction of origin
+     */
+    virtual Bool_t HasDirection() const =0;
+    
+    /**
+     * gives the type of the particle
+     */
+    virtual ParticleType Type() const
+    {
+	return fType;
+    }
+    
+    /**
+     * sets the type of the particle
+     */
+    virtual void Type(ParticleType type)
+    {
+	fType = type;
+    };
 
- /**
-  * gives the type of the particle
-  */
- virtual ParticleType Type() const
-   {
-     return fType;
-   }
+    /** 
+     * gets the unique ID number of the particle
+     */ 
+    virtual Ushort_t ParticleNumber() const
+    {
+	return fID;
+    };
 
- /**
-  * sets the type of the particle
-  */
- virtual void Type(ParticleType type)
-   {
-     fType = type;
-   };
+      /** 
+     * sets the unique ID number of the particle
+     */ 
+    virtual void ParticleNumber(Ushort_t ID)
+    {
+	fID = ID;
+    };
+  
 
  /**
   * phi
@@ -102,6 +120,7 @@ class I3Particle : public TObject{
  virtual void CopyTo(I3Particle& destination) const
    {
      destination.fType = fType;
+     destination.fID = fID;
    }
 
  /**
