@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.10 2004/07/14 16:01:01 pretz Exp $
+    $Id: STLMapStoragePolicy.h,v 1.11 2004/07/16 13:44:37 pretz Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.10 $
-    @date $Date: 2004/07/14 16:01:01 $
+    @version $Revision: 1.11 $
+    @date $Date: 2004/07/16 13:44:37 $
     @author Troy Straszheim
 
 */
@@ -71,7 +71,7 @@ class STLMapStoragePolicy {
    * @return true if the key isn't already used and the put succeeds,
    * false otherwise.
    */
-  bool Put(const ElementType& element, const KeyType& key)
+  bool Add(const ElementType& element, const KeyType& key)
     {
       iterator iter = find(key);
       if(iter == end())
