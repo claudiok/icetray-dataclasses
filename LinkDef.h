@@ -24,6 +24,7 @@
 
 #pragma link C++ class I3BasicTrack+;
 #pragma link C++ class I3F2KTrack+;
+#pragma link C++ typedef I3F2KTrackPtr;
 #pragma link C++ class I3BasicMuon+;
 //#pragma link C++ class I3DecayingMuon+;
 #pragma link C++ class I3DoubleBang+;

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KTrack.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3F2KTrack.h,v 1.4 2004/04/23 19:10:39 ehrlich Exp $
 
     @file I3F2KTrack.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/23 19:10:39 $
     @author deyoung
 
     @todo
@@ -34,5 +34,7 @@ class I3F2KTrack : public I3TrackImpl<I3Starting,
   virtual ~I3F2KTrack(){}
   ClassDef(I3F2KTrack,1);
 };
+
+typedef PtrPolicy<I3F2KTrack>::ThePolicy I3F2KTrackPtr;
 
 #endif
