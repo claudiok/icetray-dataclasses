@@ -172,8 +172,11 @@
 #pragma link C++ class I3MCHit+;
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3OMGeo+;
+#pragma link C++ typedef I3OMGeoPtr;
 #pragma link C++ class I3OMGeoAmanda+;
+#pragma link C++ typedef I3OMGeoAmandaPtr;
 #pragma link C++ class I3OMGeoIcecube+;
+#pragma link C++ typedef I3OMGeoIcecubePtr;
 #pragma link C++ class I3OMResponse+;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ class I3RecoResultLikelihood+;
