@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.2 2004/09/14 17:10:05 niessen Exp $
+ * $Id: I3SurfModuleGeo.h,v 1.3 2004/09/15 13:44:50 niessen Exp $
  *
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/09/14 17:10:05 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/09/15 13:44:50 $
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
@@ -44,25 +44,24 @@ class I3SurfModuleGeo : public TObject, public MapPolicy<OMKey, I3OMGeoPtr>::The
    */
   virtual ~I3SurfModuleGeo () {}
 
-#if 0
   /**
    * Get the position of the tank
    */
-  I3Position GetSurfModulePos() const {
+  I3Position GetPos() const {
     return fSurfModulePos;
   }
 
   /**
    * Set the position of the tank, in x, y and z
    */
-  void SetSurfModulePos(I3Position pos) {
+  void SetPos (I3Position pos) {
     fSurfModulePos.SetPosition(pos);
   }
 
   /**
    * Set the position of the tank, z is set to I3Constants::zIceTop
    */
-  void SetSurfModulePos(Double_t x, Double_t y) {
+  void SetPos (Double_t x, Double_t y) {
     fSurfModulePos.SetPosition(x,y,I3Constants::zIceTop);
   }
 
@@ -80,28 +79,11 @@ class I3SurfModuleGeo : public TObject, public MapPolicy<OMKey, I3OMGeoPtr>::The
     fOrientation = orientation;
   }
 
-  /**
-   * Get the version (whatever this is.)
-   */
-  UChar_t GetVersion() const {
-    return fVersion;
-  }
-
-  /**
-   * Set the version (whatever it is.)
-   */
-  void SetVersion(UChar_t version) {
-    fVersion = version;
-  }
-
  private:
 
   I3Position fSurfModulePos; // position of the surface detector
 
   Float_t fOrientation; // rotation angle around the z-axis. (radians)
-
-  UChar_t fVersion; // some version number
-#endif
 
   ClassDef (I3SurfModuleGeo, 1);
 
