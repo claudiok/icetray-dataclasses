@@ -7,7 +7,7 @@
 class I3DataReadout : public TObject
 {
   public:
-  I3DataReadout();
+  I3DataReadout(){};
   const char* GetReadoutType() const;
 
   ClassDef(I3DataReadout,1);
