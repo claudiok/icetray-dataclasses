@@ -1,5 +1,5 @@
 #
-#  $Id: localDefns.mk,v 1.8 2004/08/09 12:14:40 troy Exp $
+#  $Id: localDefns.mk,v 1.9 2004/08/13 09:17:05 troy Exp $
 #
 #  See common.mk in the tools directory, look for -include localDefns.mk
 #  to see what comes before (and after) this file.
@@ -16,3 +16,5 @@ CXX_BIN_SUFFIX := exe
 USES_TOOLS += roost TUT
 DUMMY_TOOLS += roost TUT
 
+DOXYFILE_EXAMPLE_PATH = resources/docs
+DOXYFILE_IMAGE_PATH = resources/docs
