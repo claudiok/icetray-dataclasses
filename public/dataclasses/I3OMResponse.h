@@ -26,16 +26,16 @@ class I3OMResponse : public TObject
   unsigned short GetOMNumber() const;
   void           SetOMNumber(unsigned short omnumber_);
 
-  bool           IsGeometry() const;
-  const I3OMGeo* GetGeometry() const;
-  void           SetGeometry(I3OMGeo* geometry_);
+  bool HasGeometry() const;
+  const I3OMGeo& GetGeometry() const;
+  void SetGeometry(I3OMGeo& geometry_);
 
-  bool  IsMCHitSeries() const;
-  bool  IsDatareadoutlist() const;
-  bool  IsRecoHitSeriesData() const;
-  const I3MCHitSeries*       GetMCHitSeries() const;
-  const I3DatareadoutList*   GetDatareadoutList() const;
-  const I3RecoHitSeriesData* GetRecoHitSeriesData() const;
+  bool HasMCHitSeries() const;
+  bool HasDatareadoutlist() const;
+  bool HasRecoHitSeriesData() const;
+  const I3MCHitSeries& GetMCHitSeries() const;
+  const I3DatareadoutList& GetDatareadoutList() const;
+  const I3RecoHitSeriesData& GetRecoHitSeriesData() const;
   void  SetMCHitSeries(I3MCHitSeries* mchitseries_);
   void  SetDatareadoutList(I3DatareadoutList* datareadoutlist_);
   void  SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_);

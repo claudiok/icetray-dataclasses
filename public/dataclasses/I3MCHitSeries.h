@@ -12,10 +12,12 @@ class I3MCHitSeries : public I3HitSeries
   I3MCHitSeries();
 
   float GetWeight() const;
+
   void  SetWeight(float weight_);
 
-  const I3MCHit* GetHit(unsigned short number) const;
-  void           AddHit(I3MCHit* hit_);
+  const I3MCHit& GetHit(unsigned short number) const;
+
+  void AddHit(I3MCHit* hit_);
 
   ClassDef(I3MCHitSeries, 1);
 };

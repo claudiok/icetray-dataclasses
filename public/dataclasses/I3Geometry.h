@@ -20,9 +20,13 @@ class I3Geometry : public TObject
   void SetDate(long date_);
 
   int            GetNumberOMGeos() const;
-  const I3OMGeo* GetOMGeo(unsigned short index) const;
-  const I3OMGeo* FindOMGeo(unsigned short omnumber) const;
+  const I3OMGeo& GetOMGeo(unsigned short index) const;
+  bool HasOMGeoNumber(unsigned short omnumber) const;
+  const I3OMGeo& FindOMGeo(unsigned short omnumber) const;
   void           AddOMGeo(I3OMGeo* omgeo_);
+
+ private:
+  const I3OMGeo* FindOMGeoPtr(unsigned short omnumber) const;
 
   ClassDef(I3Geometry, 1);
 };

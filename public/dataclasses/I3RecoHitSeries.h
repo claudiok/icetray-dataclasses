@@ -14,8 +14,8 @@ class I3RecoHitSeries : public I3HitSeries
   float GetConfidence() const;
   void  SetConfidence(float confidence_);
 
-  const I3RecoHit* GetHit(unsigned short number) const;
-  void             AddHit(I3RecoHit* hit_);
+  const I3RecoHit& GetHit(unsigned short number) const;
+  void AddHit(I3RecoHit* hit_);
 
   ClassDef(I3RecoHitSeries, 1);
 };

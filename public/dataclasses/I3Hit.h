@@ -11,7 +11,7 @@ class I3Hit : public TObject
   I3Hit();
 
   unsigned long GetTruetime() const;
-  void          SetTruetime(unsigned long true_time_);
+  void SetTruetime(unsigned long true_time_);
 
   ClassDef(I3Hit, 1);
 };

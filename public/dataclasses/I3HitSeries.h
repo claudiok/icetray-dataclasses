@@ -7,17 +7,17 @@
 
 class I3HitSeries : public TObject
 {
-  protected:
+ protected:
   TObjArray  *hit;
-
-  public:
-           I3HitSeries();
+  
+ public:
+  I3HitSeries();
   virtual ~I3HitSeries();
-
-  int                  GetNumberHits() const;
-  virtual const I3Hit* GetHit(unsigned short number) const;
-  virtual void         AddHit(I3Hit* hit_);
-
+  
+  int GetNumberHits() const;
+  virtual const I3Hit& GetHit(unsigned short number) const;
+  virtual void AddHit(I3Hit* hit_);
+  
   ClassDef(I3HitSeries, 1);
 };
 #endif

@@ -29,8 +29,8 @@ class I3OMGeo : public TObject
   void SetX(double x_);
   void SetY(double y_);
   void SetZ(double z_);
-  void SetOrientation(bool orientation_);
-  void SetVersion(unsigned char version_);
+  void SetOrientation(bool orientation);
+  void SetVersion(unsigned char version);
 
   ClassDef(I3OMGeo,1);
 };
