@@ -4,7 +4,7 @@
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
    
    @section framework IceTray and the data classes
-
+    
    The IceCube software execution framework is called IceTray.
    IceTray is responsible for seeing that data is passed around to
    various self-contained pieces of software, called modules.  IceTray
