@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleEvent.h,v 1.6 2004/07/26 19:00:54 ehrlich Exp $
+ * $Id: I3MCParticleEvent.h,v 1.7 2004/07/26 23:39:10 ehrlich Exp $
  *
  * @file I3MCParticleEvent.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/07/26 19:00:54 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/07/26 23:39:10 $
  * @author pretz
  *
  */
@@ -14,7 +14,7 @@
 #define I3MCPARTICLEEVENT_H
 
 #include "dataclasses/I3MCPrimary.h"
-#include "dataclasses/I3MCParticleVect.h"
+#include "dataclasses/I3MCParticleMultiMap.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -26,9 +26,9 @@
 class I3MCParticleEvent : public TObject 
 {
 
-  I3MCParticleVect fPrimary;
-  I3MCParticleVect fInIceParticles;
-  I3MCParticleVect fIceTopParticles;
+  I3MCParticleMultiMap fPrimary;
+  I3MCParticleMultiMap fInIceParticles;
+  I3MCParticleMultiMap fIceTopParticles;
 
  public:
   /**
@@ -44,32 +44,32 @@ class I3MCParticleEvent : public TObject
   /**
    * @return the primary track as constant
    */
-  const I3MCParticleVect& GetPrimary() const {return fPrimary;}
+  const I3MCParticleMultiMap& GetPrimary() const {return fPrimary;}
 
   /**
    * @return the primary track as non-const
    */
-  I3MCParticleVect& GetPrimary() {return fPrimary;}
+  I3MCParticleMultiMap& GetPrimary() {return fPrimary;}
 
   /**
    * @return the In-Ice tracks as constant
    */
-  const I3MCParticleVect& GetInIceParticles() const {return fInIceParticles;}
+  const I3MCParticleMultiMap& GetInIceParticles() const {return fInIceParticles;}
 
   /**
    * @return the In-Ice tracks as non-constant
    */
-  I3MCParticleVect& GetInIceParticles() {return fInIceParticles;}
+  I3MCParticleMultiMap& GetInIceParticles() {return fInIceParticles;}
 
   /**
    * @return the IceTop tracks as constant
    */
-  const I3MCParticleVect& GetIceTopParticles() const {return fIceTopParticles;}
+  const I3MCParticleMultiMap& GetIceTopParticles() const {return fIceTopParticles;}
 
   /**
    * @return the IceTop tracks as non-constant
    */
-  I3MCParticleVect& GetIceTopParticles() {return fIceTopParticles;};
+  I3MCParticleMultiMap& GetIceTopParticles() {return fIceTopParticles;};
 
  private:
   // copy and assignment are private

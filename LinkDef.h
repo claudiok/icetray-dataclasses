@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.94 2004/07/26 19:00:54 ehrlich Exp $
-// $Revision: 1.94 $
-// $Date: 2004/07/26 19:00:54 $
+// $Id: LinkDef.h,v 1.95 2004/07/26 23:39:10 ehrlich Exp $
+// $Revision: 1.95 $
+// $Date: 2004/07/26 23:39:10 $
 //
 
 #ifdef __CINT__
@@ -143,11 +143,11 @@
 #pragma link C++ function operator!=(const I3RecoResultMultiTracks::iterator&, const I3RecoResultMultiTracks::iterator&);
 #pragma link C++ typedef I3RecoResultMultiTracksPtr;
 
-#pragma link C++ class I3MCParticleVect+;
-#pragma link C++ typedef VectorPolicy<I3ObservableParticlePtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3ObservableParticlePtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3MCParticleVect::iterator&, const I3MCParticleVect::iterator&);
-#pragma link C++ typedef I3MCParticleVectPtr;
+#pragma link C++ class I3MCParticleMultiMap+;
+#pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
+#pragma link C++ class MultiMapPolicy<string,I3ParticlePtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3MCParticleMultiMap::iterator&, const I3MCParticleMultiMap::iterator&);
+#pragma link C++ typedef I3MCParticleMultiMapPtr;
 
 #pragma link C++ typedef TObjectPtr;
 #pragma link C++ class I3Bag+;

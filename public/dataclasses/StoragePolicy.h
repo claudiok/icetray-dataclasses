@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.13 2004/07/26 12:10:17 troy Exp $
+    $Id: StoragePolicy.h,v 1.14 2004/07/26 23:39:10 ehrlich Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.13 $
-    @date $Date: 2004/07/26 12:10:17 $
+    @version $Revision: 1.14 $
+    @date $Date: 2004/07/26 23:39:10 $
     @author Troy D. Straszheim
 */
 
@@ -14,6 +14,7 @@
 
 #include "STLVectorStoragePolicy.h"
 #include "STLMapStoragePolicy.h"
+#include "STLMultiMapStoragePolicy.h"
 
 //#include "boost/shared_ptr.hpp"
 
@@ -53,16 +54,33 @@ struct MapPolicy {
 };
 
 /**
- * @brief The pointer policy.  Should use typedefs of this rather than 
+ * @brief The storage policy for multimaps of objects
+ *
+ * The existence of this MultiMapPolicy class allows classes to inherit
+ * from MultiMapPolicy<>::ThePolicy.  That policy's implementation can change -
+ * provided the new implementation supplies the same interface - just by
+ * changing this MultiMapPolicy class.  That's what it is here for.
+ */
+template <class Key,class Stored>
+struct MultiMapPolicy {
+  /**
+   *  ThePolicy is just a typedeffed STLMapStoragePolicy
+   */
+  typedef STLMultiMapStoragePolicy<Key,Stored> ThePolicy;
+
+};
+
+/**
+ * @brief The pointer policy.  Should use typedefs of this rather than
  * raw pointers.
  *
- * The existence of this PtrPolicy allows for typdefs of 
+ * The existence of this PtrPolicy allows for typdefs of
  * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
  * Foo*.  What this does is allow the true implemntation of FooPtr to change
  * in this one place, and the rest of the code is unaffected
  */
 template <class Pointed>
-struct PtrPolicy 
+struct PtrPolicy
 {
   /**
    * boost smart pointers.  FIXME: need docs
@@ -74,7 +92,7 @@ struct PtrPolicy
 //TDS: workaround while we get these goddamned smart pointers working
 namespace boost {
   template <class T, class U>
-  T* 
+  T*
   dynamic_pointer_cast(U* src)
   {
     return dynamic_cast<T*>(src);
