@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3PositionTest.cxx,v 1.2 2004/08/13 18:03:48 dule Exp $
+    $Id: I3PositionTest.cxx,v 1.3 2004/08/16 15:48:29 dule Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/08/13 18:03:48 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/08/16 15:48:29 $
     @author pretz
 
     @todo
@@ -27,7 +27,6 @@ namespace tut
   };
 
   typedef test_group<I3PositionTest> factory;
-
   typedef factory::object object;
 }
 
@@ -187,11 +186,33 @@ namespace tut
     ensure_distance("d.GetY failed",d.GetTheta(),0.955317,0.0001);
     ensure_distance("d.GetZ failed",d.GetPhi(),0.785398,0.0001);
 
+    cout <<"Using the = operator on I3Position e=d..."<<endl;
+    I3Position e = d;
+    ensure_distance("e.GetX failed",e.GetR(),1.73205,0.0001);
+    ensure_distance("e.GetY failed",e.GetTheta(),0.955317,0.0001);
+    ensure_distance("e.GetZ failed",e.GetPhi(),0.785398,0.0001);
+
     cout <<"Creating position f from position d..."<<endl;
     I3Position f(d);
-    ensure_distance("f.GetX failed",f.GetR(),1.73205,0.0001);
-    ensure_distance("f.GetY failed",f.GetTheta(),0.955317,0.0001);
-    ensure_distance("f.GetZ failed",f.GetPhi(),0.785398,0.0001);
+    ensure_distance("f.GetX failed",f.GetX(),1.0,0.0001);
+    ensure_distance("f.GetY failed",f.GetY(),1.0,0.0001);
+    ensure_distance("f.GetZ failed",f.GetZ(),1.0,0.0001);
+
+    cout <<"Shifting coordinate system of f by s..."<<endl;
+    f.ShiftCoordSystem(s);
+    ensure_distance("shifted f.GetX failed",f.GetX(),0.0,0.0001);
+    ensure_distance("shifted f.GetY failed",f.GetY(),0.0,0.0001);
+    ensure_distance("shifted f.GetZ failed",f.GetZ(),0.0,0.0001);
+
+    cout <<"Shifting coordinate system of f by p..."<<endl;
+    f.ShiftCoordSystem(p);
+    ensure_distance("shifted f.GetX failed",f.GetX(),0.0,0.0001);
+    ensure_distance("shifted f.GetY failed",f.GetY(),-0.707108,0.0001);
+    ensure_distance("shifted f.GetZ failed",f.GetZ(),-4.94975,0.0001);
+    ensure_distance("shifted f.GetR failed",f.GetR(),5.0,0.0001);
+    ensure_distance("shifted f.GetTheta failed",f.GetTheta(),2.9997,0.0001);
+    ensure_distance("shifted f.GetPhi failed",f.GetPhi(),4.71239,0.0001);
+    ensure_distance("shifted f.GetRho failed",f.GetRho(),0.707108,0.0001);
 
   }
 }
