@@ -24,31 +24,26 @@
 
     Here's how you'd have to do a quicksort in C with your own sorting criteria.  
 
-    <a class="el" href="c-style.c">Cet code: c-style.c</a>
     @include c-style.c
 
     <br><br>
     This one demonstrates the default use of @c operator<() by the stl algorithm @c sort.
-    <a class="el" href="sort.cxx"> Get code: sort.cxx</a>
     @include sort.cxx
 
     <br><br>
     Check it out: you can define @c operator<<(), and your objects
     learn how to print themselves!
     
-    <a class="el" href="sort2.cxx"> Get code: sort2.cxx</a>
     @include sort2.cxx
 
     <br><br>
     You can use all different kinds of comparison functions.
 
-    <a class="el" href="sort3.cxx"> Get code: sort3.cxx</a>
     @include sort3.cxx
 
     <br><br>
     Or use a filter criteria...
 
-    <a class="el" href="sort4.cxx"> Get code: sort4.cxx</a>
     @include sort4.cxx
 
     <br><br>
@@ -56,7 +51,6 @@
     a class that defines @c operator().  The syntax is weird at first
     but it quickly becomes easy to understand.
 
-    <a class="el" href="sort5.cxx"> Get code: sort5.cxx</a>
     @include sort5.cxx
 
     <br><br>
@@ -64,18 +58,17 @@
     filter/sort criteria inside the object.  The client doesn't have
     to know what the criteria are.
 
-    <a class="el" href="sort6.cxx"> Get code: sort6.cxx</a>
     @include sort6.cxx
 
     <br><br>
     In this case, the criterion is, "is the OM's number not found in a
     vector of noisy OM that I have been given?".
 
-    <a class="el" href="sort7.cxx"> Get code: sort7.cxx</a>
     @include sort7.cxx
 
     <br><br>
+    @todo Add DipoleFit
     Last but not least there is the DipoleFit, an entire fit written
     as a Functor.  Not here yet.
-        
+
 */

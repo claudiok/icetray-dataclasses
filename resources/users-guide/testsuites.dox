@@ -1,14 +1,16 @@
 /**
 @page testsuites Test suites:  how to write and run them
 
-@author Troy Straszheim
+@author troy d. straszheim <troy@resophonic.com>
 
 The best way to verify the correctness of an implementation is to
 fully exercise all functionality with an independent implementation.
 "Thorough" means: a run of the test suite to completion without error
 should be enough to convince an aggressive skeptic that the
 implementation is correct.  The independent implementation itself
-should be so simple that it is plausibly correct.
+should be so simple that it is plausibly correct.  (This specification
+from the Library of Practical Abstractions manual, see References at
+the bottom of this document.)
 
 One should provide test suites for all code.  We have included a
 testing mechanism in the dataclasses that will easily allow you to
@@ -32,7 +34,7 @@ modify in order to create one's own test suites.
 
 Here is the definition of @c I3HIt:
 
-@dontinclude I3Hit.h
+@dontinclude I3Hit.h.example
 @skip class I3Hit
 @until ClassDef
 @until };
@@ -43,7 +45,7 @@ make it easy to follow along and create your own along the way.  Let's
 take @c MyClass to denote the class for which you are constructing a test
 suite.
 
-@dontinclude I3HitTest.cxx.dox
+@dontinclude I3HitTest.cxx.example
 @until using
 
 First we include the various header files, including that of our
@@ -73,6 +75,15 @@ that you will use to tell the testing framework to run your unit
 tests, if you wish to specify them.  Avoid using spaces or things that
 would confuse the shell: you will have to escape them with backslashes,
 singlequotes, or what-have-you.
+
+@bug Compiler bug: gcc 3.3 on MacOSX has a severe bug.  To run on this
+platform you must also change @c tut::factory @c t to some name that
+is unique among all the testsuites, like 
+@code 
+tut::factory myparticulartest("myparticulartest");
+@endcode
+Otherwise your linker will complain of multiply defined symbols in
+anonymous namespaces.
 
 @skip namespace
 @until }
