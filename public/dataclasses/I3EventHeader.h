@@ -3,20 +3,20 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.5 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3EventHeader.h,v 1.6 2004/02/26 19:58:26 pretz Exp $
  *
  * I3Event Header is supposed to be a header for the event that
  * you can store in a file if you don't want to store the event.
  * It's supposed to have enough data to reconstruct the full event
  * from the database
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/02/26 19:58:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo needs the data that is currently in I3Event.  Times and such.
+ * @todo 
  */
 
 // includes
@@ -31,10 +31,15 @@ using namespace std;
  * you can store in a file if you don't want to store the event.
  * It's supposed to have enough data to reconstruct the full event
  * from the database
- * @version $Id: I3EventHeader.h,v 1.5 2004/02/25 20:10:24 pretz Exp $
+ * @version $Id: I3EventHeader.h,v 1.6 2004/02/26 19:58:26 pretz Exp $
  * @author pretz
  */
 class I3EventHeader : public I3DataHeader{
+  ULong_t  fRunId;
+  ULong_t  fEventId;
+  Double_t fTime;
+  ULong_t  fDay;
+  
  public:
   /**
    * constructor
@@ -61,8 +66,27 @@ class I3EventHeader : public I3DataHeader{
   virtual ~I3EventHeader();
 
   /**
-   * @return the name of the stream this header is for.
-   * ... "Physics"
+   * @return the run id for the event
+   */
+  ULong_t RunID() const { return fRunId; }
+
+  /**
+   * @param runid the new run id for the event
+   */
+  void RunID(ULong_t runid) { fRunId = runid; }
+
+  /**
+   * @return the event id for this event
+   */
+  ULong_t EventID() const { return fEventId; }
+
+  /**
+   * @param eventid the new event id for the event
+   */
+  void EventID(ULong_t eventid) { fEventId = eventid; }
+  
+  /**
+   * @return the name of the stream this header is for.... "Physics"
    */
   const string DataStream(){ return "Physics";}
 

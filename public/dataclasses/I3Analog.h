@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Analog.h,v 1.7 2004/02/26 18:53:12 pretz Exp $
+ * $Id: I3Analog.h,v 1.8 2004/02/26 19:58:26 pretz Exp $
  * One analog pulse from an OM.  
  *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/02/26 18:53:12 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/02/26 19:58:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -23,9 +23,9 @@
 class I3Analog : public TObject
 {
   Double_t  fTime;
-  ULong_t  fLet;
+  Double_t  fLet;
   Float_t          fIntegratedcharge;
-  UShort_t fTot;
+  Double_t fTot;
   Float_t          fPeak;
 
   public:
@@ -73,13 +73,13 @@ class I3Analog : public TObject
   /**
    * @return the leading edge time of the pulse
    */
-  ULong_t  LET() const { return fLet; }
+  Double_t  LET() const { return fLet; }
 
   /**
    * sets the leading edge time of the pulse
    * @param l the new leading edge time
    */
-  void  LET(ULong_t l)  { fLet = l; }
+  void  LET(Double_t l)  { fLet = l; }
 
   /**
    * @return the integrated charge
@@ -95,12 +95,12 @@ class I3Analog : public TObject
    * retrieves the time over threshold
    * @return the time over threshold
    */
-  UShort_t TOT() const { return fTot; }
+  Double_t TOT() const { return fTot; }
 
   /**
    * @param t the new tot
    */
-  void TOT(UShort_t t) { fTot = t; }
+  void TOT(Double_t t) { fTot = t; }
   
   /**
    * @return the peak value

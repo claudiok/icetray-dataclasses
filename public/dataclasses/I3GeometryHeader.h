@@ -10,24 +10,22 @@ using namespace std;
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3GeometryDataHeader.h,v 1.4 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3GeometryHeader.h,v 1.3 2004/02/26 19:58:26 pretz Exp $
  *
- * I3Geometry Header is supposed to be a header for the geometry that
- * you can store in a file if you don't want to store the geometry.
- * It's supposed to have enough data to reconstruct the full geometry
+ * I3Geometry Header is summary information for the geometry that
+ * which you can store in a file if you don't want to store the geometry.
+ * It's will have enough data to reconstruct the full geometry
  * from the database
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/02/26 19:58:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo change the name back to I3GeometryHeader
- * @todo modifiy to mirror changes in I3Geometry when they're done.
- * @todo move I3Geometry's header data here.
+ * @todo 
  */
-class I3GeometryDataHeader : public I3DataHeader
+class I3GeometryHeader : public I3DataHeader
 {
   // instance data
   Int_t fNumOms;
@@ -38,22 +36,22 @@ class I3GeometryDataHeader : public I3DataHeader
   /**
    * constructor
    */
-  I3GeometryDataHeader()  : fNumOms(-1), fNumStrings(-1){;}
+  I3GeometryHeader()  : fNumOms(-1), fNumStrings(-1){;}
 
   /**
    * destructor
    */
-  virtual ~I3GeometryDataHeader() {;}
+  virtual ~I3GeometryHeader() {;}
 
   /**
    * copy constructor just uses assignment
    */
-  I3GeometryDataHeader(const I3GeometryDataHeader& rhs){*this = rhs;}
+  I3GeometryHeader(const I3GeometryHeader& rhs){*this = rhs;}
 
   /**
    * assignment is just a member-wise assignment
    */
-  const I3GeometryDataHeader& operator=(const I3GeometryDataHeader& rhs){
+  const I3GeometryHeader& operator=(const I3GeometryHeader& rhs){
     if(this == &rhs) return *this;
     I3DataHeader::operator=(rhs);
     fNumOms = rhs.fNumOms;
@@ -101,13 +99,13 @@ class I3GeometryDataHeader : public I3DataHeader
  private:
   
   // ROOT macro
-  ClassDef(I3GeometryDataHeader,1);
+  ClassDef(I3GeometryHeader,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3GeometryDataHeader>::ThePolicy I3GeometryDataHeaderPtr;
+typedef PtrPolicy<I3GeometryHeader>::ThePolicy I3GeometryHeaderPtr;
 
 #endif //I3GEOMETRYHEADER_H

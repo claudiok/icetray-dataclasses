@@ -8,21 +8,20 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.15 2004/02/26 18:17:01 pretz Exp $
+ * $Id: I3Geometry.h,v 1.16 2004/02/26 19:58:26 pretz Exp $
  *
  * The Geometry information for the IceCube detector.  There's the InIce
  * portion and the IceTop portion.  It is expected that AMANDA tubes
  * will be incorporated as additional kinds of InIce tubes.
  *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/02/26 18:17:01 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/02/26 19:58:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
  * @todo should the copy and assignment be private?
- * @todo Move the header-like data into the GeometryHeader
-*/
+ */
 class I3Geometry : public TObject{
   I3InIceGeometry fInIce; //||;
   I3TopGeometry fTop; //||
