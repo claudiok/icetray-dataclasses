@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.9 2004/07/28 21:24:45 pretz Exp $
+    $Id: InIceExtractorExample.cxx,v 1.10 2004/07/29 16:02:51 pretz Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/07/28 21:24:45 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/07/29 16:02:51 $
     @author Troy D. Straszheim
 
     @todo
@@ -48,8 +48,10 @@ namespace tut
 
   // here's simple function that takes a pointet an I3OMGeo and sets
   // its fields to random values
-  void SetOMRandomValues (I3OMGeoPtr p) 
+  void SetOMRandomValues (pair<OMKey,I3OMGeoPtr> the_pair) 
   {
+    I3OMGeoPtr p = the_pair.second;
+    ensure(p!=0);
     p->SetOMNumber(rand()%1024);
     p->SetX(rand()/0.002);
     p->SetY(rand()/0.002);
@@ -57,9 +59,8 @@ namespace tut
   }
 
   // this prints an OM
-  void PrintOM (I3OMGeoPtr p) 
+  void PrintOMPtr(I3OMGeoPtr p)
   {
-    //    I3OMGeoPtr p = iter->second;
     ensure(p!=0);
     I3OMGeo::EOMType type = p->GetOMType();
     string the_type;
@@ -75,6 +76,13 @@ namespace tut
 	 << "]" << endl; 
   }
 
+  void PrintOM (pair<OMKey,I3OMGeoPtr> the_pair) 
+  {
+    cout<<the_pair.first<<" ";
+    I3OMGeoPtr p = the_pair.second;
+    PrintOMPtr(p);
+  }
+
   struct AMANDAExtractor
   {
     // I could just make this another I3InIceGeometry, but 
@@ -86,7 +94,8 @@ namespace tut
     AMANDAExtractor(vector<I3OMGeoAMANDAPtr> &geometry_to_fill) 
       : mygeometry_(geometry_to_fill) { };
 
-    void operator()(I3OMGeoPtr p) {
+    void operator()(pair<OMKey,I3OMGeoPtr> the_pair) {
+      I3OMGeoPtr p = the_pair.second;
       I3OMGeoAMANDAPtr amandap = boost::dynamic_pointer_cast<I3OMGeoAMANDA>(p);
       if (amandap) mygeometry_.push_back(amandap);
     }
@@ -124,57 +133,51 @@ namespace tut
     // each element print the geometry.  see function PrintOM() above
     cout << "INITIAL PRINTOUT OF I3Geometry" << endl;
 
-    I3InIceGeometry::iterator iter;
-    for(iter = geometry.begin();iter != geometry.end();iter++)
-      {
- 	PrintOM(iter->second);
-      }
-    
+    for_each(geometry.begin(),geometry.end(),PrintOM);
   
     // Let's loop through the geometry and call SetOMRandomValues on
     // each member. this "for_each" technique is quicker and safer
     // than using loops, and it works on maps, lists, deques, sets,
     // all of that.  Some of our OM's may have duplicate OMNumber
     // values, that is OK for the purposes of this Example.
-    //    for_each(geometry.begin(), geometry.end(), SetOMRandomValues);
-    for(iter = geometry.begin() ; iter!= geometry.end() ; iter++)
-      {
-	SetOMRandomValues(iter->second);
-      }
+    for_each(geometry.begin(), geometry.end(), SetOMRandomValues);
     
     // not used anymore.  The map preserves the order.  -pretz
     //     // "random_shuffle" is an STL algorithm.  It does what you think.
     //     random_shuffle(geometry.begin(), geometry.end());  
     //     // Now let's see it again
-    //   cout << "SHUFFLED, RANDOMIZED I3Geometry" << endl;
-    //     for_each(geometry.begin(), geometry.end(), PrintOM);
+    cout << "RANDOMIZED I3Geometry" << endl;
+    for_each(geometry.begin(), geometry.end(), PrintOM);
 
 //     // Let's get the GeoAMANDAs out, we want our own vector of
 //     // pointers to them to play with.  We use the "AMANDAExtractor"
 //     // function object, above.
-//     vector<I3OMGeoAMANDAPtr> amanda_geometry;
+    vector<I3OMGeoAMANDAPtr> amanda_geometry;
+
 //     // we could just use another I3InIceGeometry, but the pointainer
 //     // thing makes this difficult as we get double deletes at the end.
 
 //     // create an extractor object, pass the amanda_geometry to the
 //     // constructor
-//     AMANDAExtractor the_extractor(amanda_geometry);
+    AMANDAExtractor the_extractor(amanda_geometry);
 
 //     // now for_each will call the "parenthesis operator", or
 //     // "operator()" of the_extractor, which puts the ones it likes
 //     // into amanda_geometry
-//     for_each(geometry.begin(), geometry.end(), the_extractor);
+    for_each(geometry.begin(), geometry.end(), the_extractor);
 
 //     // let's see what's in our new array, should be just omgeoamandas
-//     cout << "AMANDAS ONLY, UNSORTED" << endl;
-//     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOM);
+    cout << "AMANDAS ONLY" << endl;
+    for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOMPtr);
 
+//     Not needed since now it's already sorted, being a map
 //     // now let's sort 'em by OM Number and see 'em again
 //     cout << "AMANDAS ONLY SORTED BY OMNUMBER" << endl;
 //     sort(amanda_geometry.begin(), amanda_geometry.end(), OMNumber_lessthan);
 //     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOM);
   
-    }
+      }
+
   // An example using the new OMKey access to the InIceGeometry
   template<> template<>
   void object::test<2>()
