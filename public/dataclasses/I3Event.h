@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.43 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3Event.h,v 1.44 2005/01/25 22:22:34 deyoung Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.43 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.44 $
+ * @date $Date: 2005/01/25 22:22:34 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -16,6 +16,7 @@
 #include "I3TriggerDict.h"
 #include "I3FilterDict.h"
 #include "I3OMResponseMap.h"
+#include "I3OMSelectionDict.h"
 #include "I3ArrayHitDict.h"
 #include "I3RecoResultDict.h"
 #include "I3Bag.h"
@@ -37,12 +38,13 @@
 
 class I3Event : public TObject
 {
-  I3TriggerDict    fTriggerDict; //||
-  I3FilterDict     fFilterDict; //||
-  I3OMResponseMap  fOMResponseMap; //||
-  I3ArrayHitDict   fTopResponseDict; //||
-  I3RecoResultDict fRecoResultDict; //||
-  I3Bag            fBag; //||
+  I3TriggerDict     fTriggerDict; //||
+  I3FilterDict      fFilterDict; //||
+  I3OMResponseMap   fOMResponseMap; //||
+  I3OMSelectionDict fOMSelectionDict; //||
+  I3ArrayHitDict    fTopResponseDict; //||
+  I3RecoResultDict  fRecoResultDict; //||
+  I3Bag             fBag; //||
   
 //  friend class boost::serialization::access;
 //
@@ -85,14 +87,26 @@ class I3Event : public TObject
   I3FilterDict& GetFilterDict() { return fFilterDict;}
 
   /**
-   * @return the OMResponseMap of the event as a non-constant object
+   * @return the OMResponseMap of the event as a constant object
    */
   const I3OMResponseMap& GetOMResponseMap() const { return fOMResponseMap; }
 
   /**
-   * @return the OMResponseMap as constant object
+   * @return the OMResponseMap as non-constant object
    */
   I3OMResponseMap& GetOMResponseMap() { return fOMResponseMap; }
+
+  /**
+   * @return the OMSelectionDict of the event as a constant object
+   */
+  const I3OMSelectionDict& GetOMSelectionDict() const { 
+    return fOMSelectionDict; 
+  }
+
+  /**
+   * @return the OMSelectionDict as a non-constant object
+   */
+  I3OMSelectionDict& GetOMSelectionDict() { return fOMSelectionDict; }
 
    /**
    * @return the Array hit data as constant object
@@ -133,6 +147,7 @@ class I3Event : public TObject
        <<fTriggerDict
        <<fFilterDict
        <<fOMResponseMap
+       <<fOMSelectionDict
        <<fRecoResultDict
        <<fBag
        <<"]\n";
@@ -144,6 +159,9 @@ class I3Event : public TObject
       ToStream(out);
       return out.str();
     }
+
+  // Allowing default copy and assignment operators
+
  private:
 
   //ROOT macro
