@@ -64,7 +64,7 @@ I3Track::I3Track()
 I3Track::~I3Track() {if (childrentrack) {childrentrack->Delete(); delete childrentrack;}}
     
 unsigned short I3Track::GetTracknumber() const  {return(tracknumber);}
-I3Track::Type I3Track::GetParticletype() const {return(particletype);}
+I3Track::Type  I3Track::GetParticletype() const {return(particletype);}
 float          I3Track::GetStarttime() const    {return(starttime);}
 float          I3Track::GetStartx() const       {return(startx);}
 float          I3Track::GetStarty() const       {return(starty);}
@@ -79,7 +79,7 @@ float          I3Track::GetAzimuth() const      {return(azimuth);}
 float          I3Track::GetEnergy() const       {return(energy);}
 
 void I3Track::SetTracknumber(unsigned short tracknumber_)   {tracknumber=tracknumber_;}
-void I3Track::SetParticletype(Type particletype_) {particletype=particletype_;}
+void I3Track::SetParticletype(Type particletype_)           {particletype=particletype_;}
 void I3Track::SetStarttime(float time)                      {starttime=time;}
 void I3Track::SetStartx(float x)                            {startx=x;}
 void I3Track::SetStarty(float y)                            {starty=y;}
@@ -115,7 +115,7 @@ unsigned short I3Track::GetNumberChildrentracks() const
 const I3Track& I3Track::GetChildrentrack(unsigned short number) const
 {
   if(GetNumberChildrentracks()>number) return (*(I3Track*)childrentrack->At(number));
-  I3DataExecution::Instance().Fatal("I3Track::GetChildrentrack() asked for an index out of bounds");
+  I3DataExecution::Instance().Fatal("I3Track::GetChildrentracks() asked for an index out of bounds");
   return(*(I3Track*)NULL);
 }
 void I3Track::AddChildrentrack(I3Track& childrentrack_)

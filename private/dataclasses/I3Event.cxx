@@ -15,6 +15,7 @@ I3Event::I3Event()
   mctrackdata=NULL;
   omresponsedata=NULL;
   recoresultdata=NULL;
+  bag=NULL;
 }
 I3Event::~I3Event()
 {
@@ -23,6 +24,7 @@ I3Event::~I3Event()
   if (mctrackdata)    {mctrackdata->Delete();    delete mctrackdata;}
   if (omresponsedata) {omresponsedata->Delete(); delete omresponsedata;}
   if (recoresultdata) {recoresultdata->Delete(); delete recoresultdata;}
+  if (bag)            {bag->Delete();            delete bag;}
 }
 
 unsigned long I3Event::GetRunID() const   {return(runid);}
@@ -39,6 +41,7 @@ bool I3Event::HasFilterData() const     {return((filterdata) ? true : false);}
 bool I3Event::HasMCTrackData() const    {return((mctrackdata) ? true : false);}
 bool I3Event::HasOMResponseData() const {return((omresponsedata) ? true : false);}
 bool I3Event::HasRecoResultData() const {return((recoresultdata) ? true : false);}
+bool I3Event::HasBag() const            {return((bag) ? true : false);}
   
 I3TriggerData& I3Event::GetTriggerData() const    
 {
@@ -75,6 +78,13 @@ I3RecoResultData& I3Event::GetRecoResultData() const
   return(*(I3RecoResultData*)NULL);
 }
 
+I3Bag& I3Event::GetBag() const 
+{
+  if(recoresultdata) return(*recoresultdata);
+  I3DataExecution::Instance().Fatal("I3Event::GetRecoResultData() recoresultdata does not exist");
+  return(*(I3RecoResultData*)NULL);
+}
+
   
 void I3Event::SetTriggerData(I3TriggerData* triggerdata_)          
 {
@@ -102,4 +112,9 @@ void I3Event::SetRecoResultData(I3RecoResultData* recoresultdata_)
 {
   if(!recoresultdata) recoresultdata=recoresultdata_; 
   else I3DataExecution::Instance().Fatal("I3Event::SetRecoResultData() recoresultdata has already been set");
+}
+void I3Event::SetBag(I3Bag* bag_) 
+{
+  if(!bag) bag=bag_; 
+  else I3DataExecution::Instance().Fatal("I3Event::SetBag() bag has already been set");
 }
