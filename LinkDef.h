@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.138 2004/12/01 18:33:25 ehrlich Exp $
-// $Revision: 1.138 $
-// $Date: 2004/12/01 18:33:25 $
+// $Id: LinkDef.h,v 1.139 2004/12/06 19:20:08 ehrlich Exp $
+// $Revision: 1.139 $
+// $Date: 2004/12/06 19:20:08 $
 //
 
 #ifdef __CINT__
@@ -377,6 +377,10 @@
 #pragma link C++ class I3MCPMTResponseToy+;
 #pragma link C++ typedef I3MCPMTResponseToyPtr;
 #pragma link C++ class roost::shared_ptr<I3MCPMTResponseToy>+;
+
+#pragma link C++ class I3MCPMTResponseRomeo+;
+#pragma link C++ typedef I3MCPMTResponseRomeoPtr;
+#pragma link C++ class roost::shared_ptr<I3MCPMTResponseRomeo>+;
 
 #pragma link C++ class I3PMTPulse+;
 #pragma link C++ typedef I3PMTPulsePtr;
