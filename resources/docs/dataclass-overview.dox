@@ -41,8 +41,6 @@
 
    @li @ref insertionoperators teaching classes to print themselves.
                                                 
-   @li @ref testsuites this means @em you.
-                                                                                
    @li @ref linefitreview explaining how to check the returns of
       dereferences and function calls, and downcast pointers that come
       out of containers.
