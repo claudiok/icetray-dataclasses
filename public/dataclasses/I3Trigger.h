@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Trigger.h,v 1.3 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3Trigger.h,v 1.4 2004/08/02 16:18:32 blaufuss Exp $
  *
  * @file I3Trigger.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/02 16:18:32 $
  * @author blaufuss
  * @author deyoung
  */
@@ -92,6 +92,11 @@ public:
      * @return whether this trigger condition was met
      */
     Bool_t GetDidTrigger() const {return fDidTrigger;}
+
+    /**
+     * @return whether this trigger condition was met
+     */
+    Bool_t HasTrigger() const {return fDidTrigger;}
     
     /**
      * @param passed whether or not this trigger condition was met
