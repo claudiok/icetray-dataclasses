@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.147 2005/02/08 20:04:27 deyoung Exp $
-// $Revision: 1.147 $
-// $Date: 2005/02/08 20:04:27 $
+// $Id: LinkDef.h,v 1.148 2005/02/08 22:45:51 ehrlich Exp $
+// $Revision: 1.148 $
+// $Date: 2005/02/08 22:45:51 $
 //
 
 #ifdef __CINT__
@@ -409,6 +409,10 @@
 #pragma link C++ class I3GaussianPMTPulse+;
 #pragma link C++ typedef I3GaussianPMTPulsePtr;
 #pragma link C++ class roost::shared_ptr<I3GaussianPMTPulse>+;
+
+#pragma link C++ class I3AMANDAPMTPulse+;
+#pragma link C++ typedef I3AMANDAPMTPulsePtr;
+#pragma link C++ class roost::shared_ptr<I3AMANDAPMTPulse>+;
 
 #pragma link C++ class I3MCParticleData+;
 #pragma link C++ typedef I3MCParticleDataPtr;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulse.h,v 1.1 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3PMTPulse.h,v 1.2 2005/02/08 22:45:51 ehrlich Exp $
  *
  * @file I3PMTPulse.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/02/08 22:45:51 $
  * @author deyoung
  *
  */
@@ -44,27 +44,11 @@ public:
   /**
    * pure virtual function must be implemented in derived class
    */
-  virtual Float_t GetVoltage(const Float_t time) = 0;
+  virtual Double_t GetVoltage(const Double_t time) = 0;
 
-  virtual Float_t GetPeakVoltage() = 0;
+  virtual Double_t GetPeakVoltage() = 0;
 
-  virtual Float_t GetPeakTime() = 0;
-
-  virtual Float_t GetStartTime(const Float_t threshold) = 0;
-
-  /**
-   * assignment operator is a member-wise assignment
-   */
-  const I3PMTPulse& operator=(const I3PMTPulse &rhs) { 
-    if (this == &rhs) return *this; // check for assignment to self
-    fHitNum = rhs.fHitNum; 
-    return *this;
-  }
-
-  /**
-   * copy constructor just uses assignment operator
-   */
-  I3PMTPulse(const I3PMTPulse &rhs) { *this = rhs; } 
+  virtual Double_t GetPeakTime() = 0;
 
 private:
   

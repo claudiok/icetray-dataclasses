@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.3 2004/12/06 19:20:08 ehrlich Exp $
+ * $Id: I3MCPMTResponseRomeo.h,v 1.4 2005/02/08 22:45:51 ehrlich Exp $
  *
  * @file I3MCPMTResponseRomeo.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/12/06 19:20:08 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/02/08 22:45:51 $
  * @author klein
  * @author deyoung
  * @author ehrlich
@@ -46,11 +46,10 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
    */
   virtual Float_t GetPMTVoltage(Float_t time)
   {
-    if (time < fStartTime || time > fEndTime) { return 0.; };
-
-    Long_t t = (Long_t)((time-fStartTime)/fBinSize);
-
-    return fWaveform[t];
+    if(time < fStartTime || time > fEndTime) return(0);
+    ULong_t t = (ULong_t)((time-fStartTime)/fBinSize);
+    if(t>=fWaveform.size()) return(0);
+    return(fWaveform[t]);
   }
 
   /**

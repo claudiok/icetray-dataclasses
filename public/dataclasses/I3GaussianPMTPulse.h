@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3GaussianPMTPulse.h,v 1.1 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3GaussianPMTPulse.h,v 1.2 2005/02/08 22:45:51 ehrlich Exp $
  *
  * @file I3GaussianPMTPulse.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/02/08 22:45:51 $
  * @author deyoung
  *
  */
@@ -38,7 +38,7 @@ public:
   /** 
    * Returns the voltage at the given time.  Voltage is negative.
    */  
-  virtual Float_t GetVoltage(const Float_t time) {
+  virtual Double_t GetVoltage(const Double_t time) {
     return (- fNormalization / (sqrt(2 * pi) * fSigma)
 	    * exp( - (time - fTimeZero) * (time - fTimeZero) 
 		   / (2 * fSigma * fSigma)) + fPedestal);
@@ -48,14 +48,14 @@ public:
    * Returns the peak voltage for this pulse.  The pulse is negative,
    * so the peak value is a negative number.
    */ 
-  virtual Float_t GetPeakVoltage() {
+  virtual Double_t GetPeakVoltage() {
     return ( -fNormalization / (sqrt(2 * pi) * fSigma) + fPedestal);
   };
 
   /** 
    * Returns the time at which the pulse reaches its peak voltage.
    */ 
-  virtual Float_t GetPeakTime() {
+  virtual Double_t GetPeakTime() {
     return fTimeZero;
   };
 
@@ -63,7 +63,7 @@ public:
    * Set the zero time for the Gaussian describing the pulse.  This is
    * the time at which the pulse reaches its peak voltage.
    */  
-  virtual void SetPeakTime(const Float_t time) {
+  virtual void SetPeakTime(const Double_t time) {
     fTimeZero = time;
   };
 
@@ -71,7 +71,7 @@ public:
    * Get the time at which the pulse first crosses the given voltage
    * threshold.  Remember that the pulse is negative.
    */
-  virtual Float_t GetStartTime(const Float_t threshold) {
+  virtual Double_t GetStartTime(const Double_t threshold) {
     Float_t thres = (threshold >= GetPedestal() ? 
 		     GetPedestal() - 1. * microvolt : 
 		     threshold);
@@ -83,28 +83,28 @@ public:
    * Return the pedestal on which the Gaussian peak lies.  This is a
    * linear offset to the pulse voltage curve.
    */
-  virtual Float_t GetPedestal() {
+  virtual Double_t GetPedestal() {
     return fPedestal;
   };
 
   /**
    * Set the pedestal for this channel.
    */
-  virtual void SetPedestal(const Float_t ped) {
+  virtual void SetPedestal(const Double_t ped) {
     fPedestal = ped;
   };
 
   /**
    * Return the Gaussian width of the pulse.
    */
-  virtual Float_t GetSigma() {
+  virtual Double_t GetSigma() {
     return fSigma;
   };
 
   /**
    * Set the Gaussian width of the pulse.
    */
-  virtual void SetSigma(const Float_t sigma) {
+  virtual void SetSigma(const Double_t sigma) {
     fSigma = sigma;
   };
 
@@ -112,7 +112,7 @@ public:
    * Get the normalization parameter of the Gaussian describing this
    * pulse.  This is *not* the peak voltage.
    */
-  virtual Float_t GetNormalization() {
+  virtual Double_t GetNormalization() {
     return fNormalization;
   };
 
@@ -120,27 +120,9 @@ public:
    * Set the normalization parameter for this pulse.  This is *not*
    * the peak voltage.
    */
-  virtual void SetNormalization(const Float_t norm) {
+  virtual void SetNormalization(const Double_t norm) {
     fNormalization = norm;
   };
-
-  /**
-   * assignment operator is a member-wise assignment
-   */
-  const I3GaussianPMTPulse& operator=(const I3GaussianPMTPulse &rhs) { 
-    if (this == &rhs) return *this; // check for assignment to self
-    I3PMTPulse::operator=(rhs);
-    fSigma = rhs.fSigma;
-    fNormalization = rhs.fNormalization;
-    fTimeZero = rhs.fTimeZero;
-    fPedestal = rhs.fPedestal;
-    return *this;
-  }
-
-  /**
-   * copy constructor just uses assignment operator
-   */
-  I3GaussianPMTPulse(const I3GaussianPMTPulse &rhs) { *this = rhs; } 
 
 private:
 
