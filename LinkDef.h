@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.125 2004/09/04 01:05:45 niessen Exp $
-// $Revision: 1.125 $
-// $Date: 2004/09/04 01:05:45 $
+// $Id: LinkDef.h,v 1.126 2004/09/14 03:21:37 ehrlich Exp $
+// $Revision: 1.126 $
+// $Date: 2004/09/14 03:21:37 $
 //
 
 #ifdef __CINT__
@@ -265,6 +265,16 @@
 #pragma link C++ class I3AnalogReadout+;
 #pragma link C++ typedef I3AnalogReadoutPtr;
 #pragma link C++ class roost::shared_ptr<I3AnalogReadout>+;
+
+#pragma link C++ class I3RDMCWaveform+;
+#pragma link C++ typedef I3RDMCWaveformPtr;
+#pragma link C++ class roost::shared_ptr<I3RDMCWaveform>+;
+
+#pragma link C++ class I3RDMCWaveformReadout+;
+#pragma link C++ typedef VectorPolicy<I3RDMCWaveform>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3RDMCWaveform>::ThePolicy+;
+#pragma link C++ typedef I3RDMCWaveformReadoutPtr;
+#pragma link C++ class roost::shared_ptr<I3RDMCWaveformReadout>+;
 
 #pragma link C++ class I3Atmosphere+;
 #pragma link C++ typedef I3AtmospherePtr;
