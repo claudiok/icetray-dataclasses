@@ -1,3 +1,16 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3PrimaryImpl.h,v 1.1.2.2 2004/04/22 02:39:48 pretz Exp $
+ *
+ * @file I3PrimaryImpl.h
+ * @version $Revision: 1.1.2.2 $
+ * @date $Date: 2004/04/22 02:39:48 $
+ * @author pretz
+ *
+ * @todo
+ *
+ */
 #ifndef I3PRIMARYIMPL_H
 #define I3PRIMARYIMPL_H
 
@@ -8,6 +21,12 @@
 
 #include <iostream>
 
+/**
+ * A class for modularizing how the I3Primary interface is implemented.
+ * All you need to do is specify the a DirectionalType, a CoreType, and an
+ * EnergeticType which satisfy the interface, and you've got a new I3Primary
+ * implementation
+ */
 template <class DirectionalType,
           class CoreType,
           class EnergeticType>
@@ -17,28 +36,63 @@ class I3PrimaryImpl : public I3Primary,
                       public EnergeticType
 {
  public:
+  /**
+   * constructor
+   */
   I3PrimaryImpl() {};
 
+  /**
+   * destructor
+   */
   virtual ~I3PrimaryImpl() {};
 
+  /**
+   * indicates whether or not the particle has a valid energy
+   */
   virtual Bool_t IsEnergetic() const {return EnergeticType::IsEnergetic();}
 
+  /**
+   * indicates whether or not the particle has a valid direction
+   */
   virtual Bool_t IsDirectional() const {return DirectionalType::IsDirectional();}
 
+  /**
+   * indicates whether or not the primary has a valid core position
+   */
   virtual Bool_t HasCorePosition() const {return CoreType::HasCorePosition();}
 
+  /**
+   * gives the zenith of the primary
+   */
   virtual Double_t Zenith() const {return DirectionalType::Zenith();}
 
+  /**
+   * gives the azimuth of the primary
+   */
   virtual Double_t Azimuth() const {return DirectionalType::Azimuth();}
 
+  /**
+   * gives the X coordinate of the core
+   */
   virtual Double_t CoreX() const {return CoreType::CoreX();}
 
+  /**
+   * gives the y position of the core
+   */
   virtual Double_t CoreY() const {return CoreType::CoreY();}
 
+  /**
+   * gives the T position of the core
+   */
   virtual Double_t CoreT() const {return CoreType::CoreT();}
 
+  /**
+   * gives the energy of the particle
+   */
   virtual Double_t Energy() const {return EnergeticType::Energy();}
 
+ private:
+  //ROOT macro
   ClassDef(I3PrimaryImpl,1);
 };
 

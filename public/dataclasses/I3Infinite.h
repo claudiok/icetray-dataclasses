@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.1.2.5 2004/04/21 20:17:43 pretz Exp $
+ * $Id: I3Infinite.h,v 1.1.2.6 2004/04/22 02:39:48 pretz Exp $
  *
- * @file 
- * @version $Revision: 1.1.2.5 $
- * @date $Date: 2004/04/21 20:17:43 $
+ * @file I3Infinite.h
+ * @version $Revision: 1.1.2.6 $
+ * @date $Date: 2004/04/22 02:39:48 $
  * @author 
  *
  * @todo
@@ -19,6 +19,10 @@
 #include "I3Units.h"
 #include "NanPolicy.h"
 
+/**
+ * The geometrical part of an I3Track implementation, representing an infinite
+ * track.
+ */
 class I3Infinite{
  private:
   Double_t fX;
@@ -119,12 +123,29 @@ class I3Infinite{
    */
   void T(Double_t t){fT = t;}
 
+  /**
+   * gets the zenith of the track
+   */
   Double_t Zenith() const {return fZenith;}
+
+  /**
+   * sets the zenith of the track
+   */
   void Zenith(Double_t zenith) {fZenith = zenith;}
 
+  /**
+   * gets the azimuth of the track
+   */
   Double_t Azimuth() const {return fAzimuth;}
+
+  /**
+   * sets the azimuth of the track
+   */
   void Azimuth(Double_t azimuth) {fAzimuth = azimuth;}
 
+  /**
+   * returns the length of the track ... infinite
+   */
   Double_t Length() const {return INFINITY;}
 
   /**
@@ -163,8 +184,15 @@ class I3Infinite{
       return NAN;
     }
 
+  /**
+   * returns the speed of light
+   */
   Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
 
+  /**
+   * copys this particle's data to the destination particle if the destination
+   * particle can be dynamic_cast to I3Infinite
+   */
   void CopyTo(I3Particle& destination) const
     {
       I3Infinite* infinite = dynamic_cast<I3Infinite*>(&destination);
@@ -177,6 +205,8 @@ class I3Infinite{
       }
     }
 
+  private:
+  //ROOT Macro
   ClassDef(I3Infinite,1)
 };
 
