@@ -156,6 +156,7 @@
 #pragma link C++ class I3FilterData+;
 #pragma link C++ typedef I3FilterDataPtr;
 #pragma link C++ class I3GeometryDataHeader+;
+#pragma link C++ typedef I3GeometryDataHeaderPtr;
 #pragma link C++ class I3Hit+;
 #pragma link C++ typedef I3HitPtr;
 #pragma link C++ class I3MCHit+;
