@@ -1,3 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: runtests.cxx,v 1.2 2004/03/03 20:58:39 troy Exp $
+
+    @version $Revision: 1.2 $
+    @date $Date: 2004/03/03 20:58:39 $
+    @author Troy D. Straszheim
+
+    @todo
+
+*/
 #include "test/tut.h"
 #include "test/tut_reporter.h"
 #include <iostream>

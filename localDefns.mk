@@ -1,1 +1,2 @@
 CXX_SRC_SUFFIX := cxx
+CXX_BIN_SUFFIX := exe
