@@ -1,11 +1,13 @@
+#ifndef I3TRACK_EXTRACTOR_H
+#define I3TRACK_EXTRACTOR_H
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackExtractor.h,v 1.6 2004/08/02 22:12:28 pretz Exp $
+ * $Id: I3TrackExtractor.h,v 1.7 2004/11/17 23:36:42 ehrlich Exp $
  *
  * @file I3TrackExtractor.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/02 22:12:28 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/11/17 23:36:42 $
  * @author pretz
  */
 //#include "dataclasses/I3MCParticleVect.h"
@@ -36,4 +38,4 @@ class I3TrackExtractor
   void operator()(I3InIceParticlePtr p);
 
 };
-
+#endif

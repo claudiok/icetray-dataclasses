@@ -1,16 +1,16 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SPASEModuleGeo.h,v 1.1 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3SPASEModuleGeo.h,v 1.2 2004/11/17 23:36:42 ehrlich Exp $
  *
  * @file I3SPASEModuleGeo.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/11/17 23:36:42 $
  * @author niessen Thu Sep  2 15:44:31 EDT 2004
  */
 
 #ifndef I3SPASEMODULEGEO_H
-#define I3SPASEMODUELGEO_H
+#define I3SPASEMODULEGEO_H
 
 #include <iostream>
 

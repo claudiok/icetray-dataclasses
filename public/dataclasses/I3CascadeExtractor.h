@@ -1,11 +1,14 @@
+#ifndef I3CASCADE_EXTRACTOR_H
+#define I3CASCADE_EXTRACTOR_H
+
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeExtractor.h,v 1.6 2004/08/02 19:59:58 blaufuss Exp $
+ * $Id: I3CascadeExtractor.h,v 1.7 2004/11/17 23:36:42 ehrlich Exp $
  *
  * @file I3CascadeExtractor.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/02 19:59:58 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/11/17 23:36:42 $
  * @author pretz
  */
 //#include "dataclasses/I3MCParticleVect.h"
@@ -37,3 +40,4 @@ class I3CascadeExtractor
 
 };
 
+#endif
