@@ -1,9 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3Hit.cxx,v 1.3 2004/02/15 02:21:27 troy Exp $
+
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/15 02:21:27 $
+    @author
+
+*/
 #include "dataclasses/I3Hit.h"
 
 ClassImp(I3Hit);
   
-I3Hit::I3Hit() {time=0;}
-
-unsigned long I3Hit::GetTime() const              {return(time);}
-void          I3Hit::SetTime(unsigned long time_) {time=time_;}
 

@@ -1,12 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3MCHit.cxx,v 1.2 2004/02/15 02:21:48 troy Exp $
+
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/15 02:21:48 $
+    @author
+
+*/
 #include "dataclasses/I3MCHit.h"
 
 ClassImp(I3MCHit);
   
-I3MCHit::I3MCHit() {weight=0; track_number=0;}
-
-float          I3MCHit::GetWeight() const      {return(weight);}
-unsigned short I3MCHit::GetTracknumber() const {return(track_number);}
-
-void I3MCHit::SetWeight(float weight_)                     {weight=weight_;}
-void I3MCHit::SetTracknumber(unsigned short track_number_) {track_number=track_number_;}
 

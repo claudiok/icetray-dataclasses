@@ -1,3 +1,13 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3MCHit.h,v 1.2 2004/02/15 02:21:35 troy Exp $
+
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/15 02:21:35 $
+    @author
+
+*/
 #ifndef I3MCHIT_H
 #define I3MCHIT_H
 
@@ -6,17 +16,18 @@
 
 class I3MCHit : public I3Hit
 {
-  float          weight;
-  unsigned short track_number;
+  Float_t          fWeight;
+  UShort_t fTrackNum;
 
   public:
-  I3MCHit();
+  I3MCHit() { fWeight = 0; fTrackNum=0;}
 
-  float          GetWeight() const;
-  unsigned short GetTracknumber() const;
+  Float_t Weight() const { return fWeight; }
+  void Weight(Float_t weight_) { fWeight = weight_; }
 
-  void SetWeight(float weight_);
-  void SetTracknumber(unsigned short track_number_);
+  short TrackNumber() const { return fTrackNum; }
+  void TrackNumber(UShort_t tracknum_) { fTrackNum = tracknum_; }
+
 
   ClassDef(I3MCHit, 1);
 };
