@@ -9,9 +9,9 @@
 
 @section download Download
 
-The <code>dataclasses</code> project is located on the development cvs archive
+The <code>dataclasses</code> project is located on the production cvs archive
 on glacier.lbl.gov.  In your workspace you will need to do<br>
-<code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev</code><br>
+<code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot</code><br>
 <code>% bfd co dataclasses </code><br>
 
 @section build Build
@@ -23,7 +23,7 @@ easy<br>
 <code>% ant</code><br>
 There is an ant target for 'doxygen' but it hasn't been implemented yet, so
 if you want the documentation, you'll have to build it yourself.<br>
-<code>% doxygen dataclasses/resources/users-guide/Doxyfile.full</code><br>
+<code>% doxygen dataclasses/resources/users-guide/Doxyfile</code><br>
 And it will create a directory dataclass-users-guide/ in your workspace with
 doxygen's html output.
 
