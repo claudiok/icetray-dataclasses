@@ -99,7 +99,7 @@
 #pragma link C++ typedef VectorPolicy<I3RecoTrackList>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoTrackList>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoResult::iterator&, const I3RecoResult::iterator&);
-
+#pragma link C++ typedef I3RecoResultPtr;
 
 #pragma link C++ class I3TopGeometry+;
 #pragma link C++ class I3TopGeometry::iterator+;
@@ -142,7 +142,7 @@
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
-
+#pragma link C++ class I3RecoResultData+;
 #endif
 
 //tds
