@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.99 2004/07/29 15:35:46 blaufuss Exp $
-// $Revision: 1.99 $
-// $Date: 2004/07/29 15:35:46 $
+// $Id: LinkDef.h,v 1.100 2004/07/30 02:47:56 pretz Exp $
+// $Revision: 1.100 $
+// $Date: 2004/07/30 02:47:56 $
 //
 
 #ifdef __CINT__
@@ -350,7 +350,8 @@
 #pragma link C++ class I3Filter+;
 #pragma link C++ typedef I3FilterPtr;
 
-#pragma link C++ class AMANDAExtractor+;
+#pragma link C++ class I3AMANDAExtractor+;
+#pragma link C++ class I3IceCubeExtractor+;
 #pragma link C++ class I3TrackExtractor+;
 #pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
