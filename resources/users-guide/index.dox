@@ -1,0 +1,57 @@
+/**
+   @mainpage Icecube Dataclasses Users Guide and Tutorials
+
+   This guide explains how to download, compile, use, understand,
+   extend, conspire with, love, and cherish the dataclasses.
+   
+   @author Eric Blaufuss (blaufuss@umdgrb.umd.edu)
+   @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+   @author Ralf Ehrlich (ehrlich@umdgrb.umd.edu)
+   @author John Pretz (pretz@umdgrb.umd.edu)
+   @author Troy Straszheim (troy@ifh.de, troy@resophonic.com)
+	   
+   @section Overview
+
+   The dataclasses were designed to do such and such.
+
+   As a physicist working with data from icecube, you will probably
+   interact more with these containers than any other part of the
+   system.
+
+   To have a walk through and play with things a bit, go through the
+   contents (below) in order.  First you will have to set up your
+   IceTray environment, download and build the various components, and
+   then there are some walk-throughs of common tasks and how to do
+   them with the dataclasses.  The last documents explain some of the
+   thinking behind the design.
+
+   @section Contents
+
+   @li @ref sample 
+
+   @subsection Preparation
+   @li @ref devenv-setup
+   
+   @li @ref icetray-setup
+
+   @li @ref dataclasses-setup
+
+   @subsection Action
+
+   @li @ref corsika-reader
+
+   @li @ref dataio
+
+   @li @ref event-viewer
+   
+   @li @ref mock-sim 
+
+   @li @ref reconstruction
+
+   @subsection Reflection
+   @li @ref architecture
+
+   @li @ref best-practices
+   
+
+*/

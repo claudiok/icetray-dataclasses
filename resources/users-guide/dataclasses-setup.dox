@@ -1,0 +1,13 @@
+/**
+@page dataclasses-setup Download, build and test the dataclasses
+@author YOUR AD HERE (1-800-PHYSIC-7)
+
+@section prerecs Prerequisites
+@ref devenv-setup
+@ref icetray-setup
+
+@section download Download
+@section build Build
+@section test Test
+
+*/

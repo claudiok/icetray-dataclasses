@@ -1,0 +1,15 @@
+/**
+@page event-viewer Using the event viewer
+@author YOUR AD HERE (1-800-PHYSIC-7)
+
+@section prerecs Prerequisites
+@li @ref devenv-setup
+@li @ref icetray-setup
+@li @ref dataclasses-setup
+
+@section download Download
+@section build Build
+@section test Test
+@section use Use
+
+*/

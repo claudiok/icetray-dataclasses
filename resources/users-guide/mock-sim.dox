@@ -1,0 +1,28 @@
+/**
+@page mock-sim Running a mock simulation
+@author YOUR AD HERE (1-800-PHYSIC-7)
+
+@section prerecs Prerequisites:
+
+@li @ref devenv-setup
+
+@li @ref icetray-setup
+
+@li @ref dataclasses-setup
+
+Directions on how to run the mock-simulation in the sim-modules project
+go here.
+
+@section Download
+
+@section Build
+
+Pretty short except we need to describe how to link to the external
+"PSInterface" library
+
+@section Test
+@section Use
+
+
+
+*/

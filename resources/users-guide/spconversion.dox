@@ -1,0 +1,141 @@
+/**
+
+@page pointerquestion Pointer question
+@author Troy Straszheim (troy@resophonic.com)
+
+This starts with a question: what is the semantic difference between a
+pointer to a member that is NULL, and a pointer to a member that is
+not NULL, but empty?
+
+For instance, @c I3Event has a member
+
+@code 
+I3RecoResultData *recoresultdata;
+@endcode
+
+that in the constructor is initialized to NULL.  In the destructor the
+pointer is checked and deleted it if is non-null.
+
+There are the access functions @c HasWhatever(), e.g.
+@code
+bool I3Event::HasRecoResultData() const {return((recoresultdata) ? true : false);}
+@endcode
+
+and then there are the @c Get functions
+
+@code
+I3RecoResultData& I3Event::GetRecoResultData() const 
+{
+  if(recoresultdata) return(*recoresultdata);
+  I3DataExecution::Instance().Fatal("I3Event::GetRecoResultData() recoresultdata does not exist");
+  return(*(I3RecoResultData*)NULL);
+}
+@endcode
+
+and the @c Set functions
+@code 
+void I3Event::SetRecoResultData(I3RecoResultData* recoresultdata_) 
+{
+  if(!recoresultdata) recoresultdata=recoresultdata_; 
+  else I3DataExecution::Instance().Fatal("I3Event::SetRecoResultData() recoresultdata has already been set");
+}
+
+@endcode
+
+That is a lot of pointer checking.  Would be nice to make that go
+away, because surely somebody will forget to do it at some point, or a
+pointer will get munged (for instance, in the destructor, if we delete
+a pointer because it is non-NULL, but it points to outer space, we get
+dreaded <i>undefined behavior</i>). Also there are issues
+of ownership.  Somebody else @c new -ed the pointer given us in @c
+SetRecoResultData, and now @em we are responsible for deleting it.
+For clarity, generally each object should be responsible for @c
+deleting what it has @c newed.
+
+Maybe we need this if there @em is some semantic difference between
+the event not having a RecoResultData and the event having one that is
+empty... at the moment my hunch is that there isn't, e.g. that a call
+to @c MyEvent.HasRecoResultData() is semantically equivalent to
+something along the lines of <tt> MyEvent.GetRecoResultData().IsEmpty()</tt>,
+and if so then we can save a whole lot of pointer checking, thereby
+avoiding a lot of memory leaks, undefined behavior, and work.
+Laziness is key.
+
+The handling of @c I3Event's @c RecoResultData would then differ as
+follows: nothing to be done in the constructor or the destructor.  
+@c HasRecoResultData would disappear.  
+in @c GetRecoResultData the pointer check and subsequent fatal error 
+disappears.  
+
+Our @c new and @c delete will be automatically taken care of by the
+compiler whent he @c I3Event is constructed and destroyed.  Notice
+that I am assuming minimal overhead in carrying around an empty 
+@c RecoResultData.  If it were great cost the pointer implementation 
+would look better.
+
+Here is a before-and-after comparison of the relevant bits if the alternate
+@c I3Event implementation (only @c RecoResultData parts are included):
+
+Declaration, before:
+@code
+private:
+  I3RecoResultData *recoresultdata;
+@endcode
+after:
+@code
+private:
+  I3RecoResultData recoresultdata;
+@endcode
+ 
+Constructor:
+@code
+I3Event::I3Event()
+{
+  recoresultdata=NULL;
+}
+@endcode
+after,
+@code
+I3Event::I3Event() { }
+@endcode
+
+(This assumes that we can call a default constructor on @c I3RecoResultData)
+
+Destructor:
+@code
+I3Event::~I3Event()
+{
+  if (recoresultdata)     {delete recoresultdata;}
+}
+@endcode
+after,
+@code
+I3Event::~I3Event(){ }
+@endcode
+
+This disappears, replaced by some kind of @c IsEmpty call,
+@code
+bool I3Event::HasRecoResultData() const {return((recoresultdata) ? true : false);}
+@endcode
+
+This, 
+@code
+I3RecoResultData& I3Event::GetRecoResultData() const 
+{
+  if(recoresultdata) return(*recoresultdata);
+  I3DataExecution::Instance().Fatal("I3Event::GetRecoResultData() recoresultdata does not exist");
+  return(*(I3RecoResultData*)NULL);
+}
+@endcode
+becomes this,
+@code
+I3RecoResultData& I3Event::GetRecoResultData() const 
+{
+  return recoresultdata;
+}
+@endcode
+
+Proceed similarly with the triggerdata, filterdata, mctrackdata,
+omresponsedata, etc.
+
+*/

@@ -1,0 +1,21 @@
+/**
+@page dataio Doing I/O on f2k data
+@author YOUR AD HERE (1-800-PHYSIC-7)
+
+@section prerecs Prerequisites
+@ref devenv-setup @n
+@ref icetray-setup @n
+@ref dataclasses-setup @n
+
+@section download Download
+
+Pretty simple, except we need instructions on how to incorporate the
+external rdmc libraries.
+
+@section build Build
+
+@section test Test
+
+@section use Use
+
+*/

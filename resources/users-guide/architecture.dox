@@ -1,0 +1,22 @@
+/**
+@page architecture The theory behind the architecture of the dataclasses.
+
+@author YOUR AD HERE (1-800-PHYSIC-7)
+
+@section prerecs Prerequisites
+
+This document assumes that you have set up the icetray environment and
+are now ready to (or are already) start writing your own module of
+some kind.  Full details at @ref index.
+
+@section howto Details here
+
+Here goes a extensive description of both the layout of the data
+classes, and the mechanics of the code.  
+
+Explanations of what
+decisions were made and why. 
+
+Links to the doxygen generated from the code.
+
+*/
