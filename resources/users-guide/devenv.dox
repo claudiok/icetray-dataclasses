@@ -8,10 +8,12 @@ BFD is the IceCube development environment.  Visit the new
 <a href="http://bfd.lbl.gov">BFD Homepage</a> to find instructions on how
 to set up BFD.<br>
 
-There is also a webpage about <a href="http://glacier.lbl.gov/icetray">
-IceTray</a> that has a 
+The standard BFD setup comes without some tool unique to IceCube.  To get some 
+instruction in how to get these tools, the 
+<a href="http://glacier.lbl.gov/icetray">
+IceTray Homepage</a> has a 
 <a href="http://glacier.lbl.gov/icetray/bfd.html">
-walk-though</a> of how to set up the bfd program.<br>
+walk-though</a> of how to set up the aspects of BFD that you'll need here<br>
 
 Note that if you are working on a cluster, you may not need to install 
 everything from scratch.  Odds are there is a public installation that
@@ -20,11 +22,13 @@ everyone can use.<br>
 You will be ready to continue with the dataclass tutorials when you:
 @li Have an account on glacier.lbl.gov
 @li Have a current checkout of 'bfd' on your system with bfd in your path
-@li Have a recent copy of the icecube tools from glacier
+@li Have a recent copy of the icecube tools from glacier, which includes
+the ROOT tool.
 
-Note: The icecube tools are distributed with ROOT version 3.5.7.  As most 
-people are already running a newer version of ROOT, you may want to replace
-root tool that comes with the tools tarball with a more recent version.  The 
-dataclasses have been developed using ROOT version 3.10.01 and 3.10.02, so 
-I'd recommend them.
+
+<br>
+<br>
+<br><b> NB: BFD does not come with ROOT already installed.  You will need to do 
+that yourself.  <a href="http://glacier.lbl.gov/icetray/bfd.html"> IceTray's
+BFD page </a>has instructions</b>
 */

@@ -46,41 +46,48 @@
    In addition the dataclass code, we have prepared a collection of projects
    that use the dataclasses in some expected roles they will have to fill.
    These projects include:
-   @li <code>dataio</code>: A project which contains classes which do the 
+   @li @c dataio: A project which contains classes which do the 
    work of interacting with Root files and F2K files to read and write the 
-   data.
+   data.  It is expected that this project will grow into the full 
+   'event reading' code for the production software.
 
-   @li <code>dataio-modules</code>: A collection of simple IceTray modules 
+   @li @c dataio-modules: A collection of simple IceTray modules 
    which interface between the @c dataio classes and the framework.
 
-   @li <code>corsika-reader</code>: A project which contains IceTray modules
+<!-- @li <code>corsika-reader</code>: A project which contains IceTray modules
    which work together to fill an event with the MC tracks from a Corsika file.
+-->
 
-   @li <code>eventviewer</code>: A preliminary try at an event viewer. 
+<!--   @li <code>eventviewer</code>: A preliminary try at an event viewer. -->
 
    @li <code>phys-services</code>: A first start at a collection of standard
-   services for IceTray modules.  
+   services for IceTray modules.  It is expected that this project will grow
+   into a full set of standard IceTray services, so it is included as a 
+   separate project
 
-   @li <code>sim-modules</code>: A chain of mock simulation modules.  
+   @li <code>eg-dataclasses</code>: These are several IceTray modules which
+   are written using the dataclasses.  There are some simple simulation
+   modules which pass around the structures of the dataclasses, but don't 
+   perform any physics.  There is also an implementation of a simple
+   AMANDA reconstruction.  
+
+<!--   @li <code>sim-modules</code>: A chain of mock simulation modules.  
    The chain is mimics the design of the real simulation, but the
-   modules just fill random data right now.
+   modules just fill random data right now. -->
 
-   @li <code>reco</code>: A simple implementation of the Dipole fit in 
-   this system.
-
-   There are several recent changes to the dataclasses that haven't been 
-   ported to these modules.  The decision was to go ahead and release the
-   dataclasses, and then to focus on fixing the example code.
-
-<!--
+<!--   @li <code>reco</code>: A simple implementation of the Dipole fit in 
+   this system. -->
    To have a walk through and play with things a bit, go through the
-   contents below.  First you will have to set up the
-   IceTray framework, by downloading and building the various components.
-   Then there are some walkthroughs - in the form of some example 
-   applications - of common tasks and how they are done with the dataclasses.
-   The last documents explain the thinking behind the design and mechanics
-   of the code.
--->
+   contents below.  The code you will need has been assembled into
+   one bfd metaproject named @c DATACLASS-APP , and the 
+   @ref preparation section will walk you through downloading and compiling
+   this metaproject.
+
+   In the @ref examples section there are details about the examples which
+   are included in this metaproject.
+
+   The @ref overview section explains the thinking behind the design and 
+   mechanics of the code.
 
 <!--   @section contents Contents
 
@@ -93,34 +100,34 @@
 
    @li @ref devenv-setup
    
-   @li @ref icetray-setup
+<!--   @li @ref icetray-setup -->
 
    @li @ref dataclasses-setup
 
-   When you've done these three you will be ready to continue.
+   When you've done these two you will be ready to continue.
 
    @section examples Examples
 
-   There is code for several tutorial examples of the dataclasses
-   code.  The code has yet to be updated to the current version of the
-   dataclasses, but will be very soon.  
-
-<!--   Here are a few tutorial examples.  The order is not really important here 
+   Here are a few tutorial examples.  The order is not really important here 
    since each example contains a list of the prerequisites which must be met
    before it can be used.
 
-   @li @ref corsika-reader
+<!--   @li @ref corsika-reader -->
 
    @li @ref dataio
 
-   @li @ref event-viewer
+<!--   @li @ref event-viewer -->
    
-   @li @ref mock-sim 
+<!--   @li @ref mock-sim  -->
 
-   @li @ref reconstruction
+   @li @ref phys-services
 
-   @li @ref dataclass-and-root
--->
+<!--   @li @ref reconstruction -->
+
+<!--   @li @ref dataclass-and-root -->
+ 
+   @li @ref eg-dataclasses
+
    @section overview Overview of the Data Classes
    A lot of thought has gone into the design and implementation of these 
    classes.  These sections attempt to explain the decisions that were
@@ -139,6 +146,8 @@
    @li @ref reco-results
    
    @li @ref tracks
+
+   @li @ref memorymanagement
 
    <!--    
    @li @ref best-practices

@@ -1,6 +1,4 @@
-// put back this doxygen starting tag later
-
-/*
+/**
 @page mock-sim Running a Mock Simulation
 @author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
 

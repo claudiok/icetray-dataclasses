@@ -5,9 +5,7 @@
 @author <a href="http://www.resophonic.com">Troy Straszheim</a>
 @author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
 
-@section summary Summary 
- 
-@section memorymanagement A Word on Memory Management
+@section wordonmemorymanagement A Word on Memory Management
 
 Memory management is an issue that warants some attention.  
 
