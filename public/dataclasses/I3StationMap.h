@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.2 2004/09/17 21:12:19 niessen Exp $
+ * $Id: I3StationMap.h,v 1.3 2005/01/31 19:16:50 dule Exp $
  *
  * @file I3StationMap.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/09/17 21:12:19 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/01/31 19:16:50 $
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
@@ -56,7 +56,8 @@ class I3StationMap : public TObject, public MapPolicy<StationKey, I3StationGeoPt
   /**
    * Get the next tank
    */
-  I3TankGeo &GetNextTank ();
+  //I3TankGeo &GetNextTank ();
+  // commented out to remove compile-time warning
 
  private:
 
