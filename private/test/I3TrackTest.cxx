@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackTest.cxx,v 1.5 2004/08/31 12:35:51 pretz Exp $
+    $Id: I3TrackTest.cxx,v 1.6 2004/09/07 16:31:32 dule Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/08/31 12:35:51 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/09/07 16:31:32 $
     @author Troy D. Straszheim
 
     @todo
@@ -54,13 +54,16 @@ namespace tut
     I3DoubleBang track;
 
     cout <<"Creating I3Position p..."<<endl;
-    I3Position p(1,1,2);
+    I3Position p(1.,1.,2.);
 
     cout <<"Setting values for track..."<<endl;
     track.SetStartPos(p);
-    track.SetStartT(10);
-    track.SetZenith(0);    // zenith=0 ==> theta=180 ==> going down
-    track.SetAzimuth(0);   // arbitrary for downward going...
+    track.SetStartT(10.);
+    //track.SetZenith(0);    // zenith=0 ==> theta=180 ==> going down
+    //track.SetAzimuth(0);   // arbitrary for downward going...
+    track.GetDir().SetDirection(0.,0.); // setting zenith,azimuth
+    // zenith=0 ==> theta=180 ==> going down
+    // arbitrary for downward going...
     track.SetLength(2);    // track goes only down to the x-y plane
 
     cout <<"p:"<<p<<endl;

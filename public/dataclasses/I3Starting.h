@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.12 2004/09/07 15:14:05 dule Exp $
+ * $Id: I3Starting.h,v 1.13 2004/09/07 16:31:32 dule Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/09/07 15:14:05 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/09/07 16:31:32 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -146,18 +146,16 @@ class I3Starting{
     I3Starting* starting = dynamic_cast<I3Starting*>(&destination);
     if(starting){
       starting->fStartPos = fStartPos;
+      starting->fDir = fDir;
       starting->fStartT = fStartT;
-      starting->fZenith = fZenith;
-      starting->fAzimuth = fAzimuth;
     }
   }
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"StartingPosition:\n"
-       <<fStartPos<<"\n"
-       <<"Starting Time:"<<fStartT<<"\n"
-       <<"Zenith:"<<fZenith<<" Azimuth:"<<fAzimuth<<"\n";
+      o<<"StartingPosition:"<<fStartPos<<"\n"
+       <<"Direction:"<<fDir<<"\n"
+       <<"Starting Time:"<<fStartT<<"\n";
     }
 
  protected:

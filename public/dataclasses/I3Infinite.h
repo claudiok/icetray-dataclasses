@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.13 2004/09/07 15:14:05 dule Exp $
+ * $Id: I3Infinite.h,v 1.14 2004/09/07 16:31:32 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/09/07 15:14:05 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/09/07 16:31:32 $
  * @author 
  */
 
@@ -130,15 +130,16 @@ class I3Infinite{
       I3Infinite* infinite = dynamic_cast<I3Infinite*>(&destination);
       if(infinite){
 	infinite->fPos = fPos;
-	infinite->fZenith = fZenith;
-	infinite->fAzimuth = fAzimuth;
+	infinite->fDir = fDir;
+	infinite->fT = fT;
       }
     }
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Position: "<<fPos
-       <<"Zenith: "<<fZenith<<" Azimuth:"<<fAzimuth<<"\n";
+      o<<"Position: "<<fPos<<"\n"
+       <<"Direction: "<<fDir<<"\n"
+       <<"Time: "<<fT<<"\n";
     }
 
   private:

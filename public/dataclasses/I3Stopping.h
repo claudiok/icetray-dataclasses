@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.12 2004/09/07 15:14:05 dule Exp $
+ * $Id: I3Stopping.h,v 1.13 2004/09/07 16:31:32 dule Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/09/07 15:14:05 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/09/07 16:31:32 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -147,18 +147,16 @@ class I3Stopping{
       I3Stopping* stopping = dynamic_cast<I3Stopping*>(&destination);
       if(stopping){
 	stopping->fStopPos = fStopPos;
+	stopping->fDir = fDir;
 	stopping->fStopT = fStopT;
-	stopping->fZenith = fZenith;
-	stopping->fAzimuth = fAzimuth;
       }
     }
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Stopping Position: "<<fStopPos
-       <<"Stopping Time: "<<fStopT<<"\n"
-       <<"Zenith:"<<fZenith
-       <<" Azimuth:"<<fAzimuth<<"\n";
+      o<<"Stopping Position: "<<fStopPos<<"\n"
+       <<"Direction:"<<fDir<<"\n"
+       <<"Stopping Time: "<<fStopT<<"\n";
     }
  private:
   // ROOT macro

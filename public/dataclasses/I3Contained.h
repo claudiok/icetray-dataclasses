@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.12 2004/09/07 15:14:05 dule Exp $
+ * $Id: I3Contained.h,v 1.13 2004/09/07 16:31:32 dule Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/09/07 15:14:05 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/09/07 16:31:32 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -161,9 +161,9 @@ class I3Contained
     {
       I3Position p;
       Double_t x,y,z;
-      x = fStartPos.GetX() - fLength * sin(fZenith) * cos (fAzimuth);
-      y = fStartPos.GetY() - fLength * sin(fZenith) * sin(fAzimuth);
-      z = fStartPos.GetZ() - fLength * cos(fZenith);
+      x=fStartPos.GetX()-fLength*sin(fDir.GetZenith())*cos(fDir.GetAzimuth());
+      y=fStartPos.GetY()-fLength*sin(fDir.GetZenith())*sin(fDir.GetAzimuth());
+      z=fStartPos.GetZ()-fLength*cos(fDir.GetZenith());
       // According to IceCube angle definitions, zenith and azimuth are
       // defined for the minus track direction, i.e. where the track came from
       // This means that there is a minus sign in the calculations.
@@ -186,18 +186,17 @@ class I3Contained
       I3Contained* contained = dynamic_cast<I3Contained*>(&destination);
       if(contained){
 	contained->fStartPos = fStartPos;
+	contained->fDir = fDir;
 	contained->fStartT = fStartT;
-	contained->fAzimuth = fAzimuth;
-	contained->fZenith = fZenith;
 	contained->fLength = fLength;
       }
     }
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Starting Position:\n"<<fStartPos
-       <<"Starting Time:"<<fStartT<<"\n"
-       <<"Azimuth:"<<fAzimuth<<" Zenith:"<<fZenith<<" Length:"<<fLength<<"\n";
+      o<<"Starting Position:"<<fStartPos<<"\n"
+       <<"Direction:"<<fDir<<"\n"
+       <<"Starting Time:"<<fStartT<<"\n";
     }
 
   private:
