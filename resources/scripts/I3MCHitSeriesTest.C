@@ -5,7 +5,7 @@ void I3MCHitSeriesTest()
 
   cout << "Running test" << endl;
 
-  const float x = 1.234;
+  const Float_t x = 6666.6;
 
   I3MCHit h1, h2;
   h1.Weight(x);
@@ -19,7 +19,7 @@ void I3MCHitSeriesTest()
   assert(h3.Weight() == x);
 
   I3MCHitSeries hs;
-  
+
   for (int i=0; i<400; i++) {
     h1.Weight((rand()%2048)*1.112);
     h1.TrackNumber(rand()%2048);
