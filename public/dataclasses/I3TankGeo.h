@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.8 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3TankGeo.h,v 1.9 2004/07/30 20:26:26 dule Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/30 20:26:26 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -34,12 +34,6 @@ class I3TankGeo : public TObject
 
   UShort_t GetTankID() const {return fTankID;}
   void SetTankID(UShort_t tank_id) { fTankID = tank_id; }
-
-/*   Double_t X () const { return fX; } */
-/*   void   X(Double_t x) { fX = x; } */
-
-/*   Double_t Y () const { return fY; } */
-/*   void   Y (Double_t y) { fY = y; } */
 
   I3Position GetTankPos() const { return fTankPos; }
   void SetTankPos(I3Position pos) { fTankPos.SetPosition(pos); }
