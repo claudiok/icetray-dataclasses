@@ -50,11 +50,11 @@ class I3Event : public TObject
   I3OMResponseData& GetOMResponseData() const;
   I3RecoResultData& GetRecoResultData() const;
   
-  void SetTriggerData(I3TriggerData& triggerdata_);
-  void SetFilterData(I3FilterData& filterdata_);
-  void SetMCTrackData(I3MCTrackData& mctrackdata_);
-  void SetOMResponseData(I3OMResponseData& omresponsedata_);
-  void SetRecoResultData(I3RecoResultData& recoresultdata_);
+  void SetTriggerData(I3TriggerData* triggerdata_);
+  void SetFilterData(I3FilterData* filterdata_);
+  void SetMCTrackData(I3MCTrackData* mctrackdata_);
+  void SetOMResponseData(I3OMResponseData* omresponsedata_);
+  void SetRecoResultData(I3RecoResultData* recoresultdata_);
 
   ClassDef(I3Event, 1);
 };

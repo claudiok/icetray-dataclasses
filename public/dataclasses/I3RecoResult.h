@@ -19,11 +19,11 @@ class I3RecoResult : public TObject
 
   int                    GetNumberRecoTrackLists() const;
   const I3RecoTrackList& GetRecoTrackList(unsigned short index) const;
-  void                   AddRecoTrackList(I3RecoTrackList& recotracklist_);
+  void                   AddRecoTrackList(I3RecoTrackList* recotracklist_);
 
   bool                   IsBestRecoTrackList() const;
   const I3RecoTrackList& GetBestRecoTrackList() const;
-  void                   SetBestRecoTrackList(I3RecoTrackList& bestrecotracklist_);
+  void                   SetBestRecoTrackList(I3RecoTrackList* bestrecotracklist_);
 
   ClassDef(I3RecoResult, 1);
 };

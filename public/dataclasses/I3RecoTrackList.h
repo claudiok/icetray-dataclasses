@@ -15,7 +15,7 @@ class I3RecoTrackList : public TObject
 
   int                GetNumberRecoTracks() const;
   const I3RecoTrack& GetRecoTrack(unsigned short index) const;
-  void               AddRecoTrack(I3RecoTrack& recotrack_);
+  void               AddRecoTrack(I3RecoTrack* recotrack_);
 
   ClassDef(I3RecoTrackList, 1);
 };

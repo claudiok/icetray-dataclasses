@@ -1,4 +1,5 @@
 #include "dataclasses/I3Event.h"
+#include "dataclasses/I3DataExecution.h"
 
 ClassImp(I3Event);
 
@@ -45,8 +46,30 @@ I3MCTrackData&    I3Event::GetMCTrackData() const    {return((mctrackdata==NULL)
 I3OMResponseData& I3Event::GetOMResponseData() const {return((omresponsedata==NULL) ? *(I3OMResponseData*)NULL : *omresponsedata);}
 I3RecoResultData& I3Event::GetRecoResultData() const {return((recoresultdata==NULL) ? *(I3RecoResultData*)NULL : *recoresultdata);}
   
-void I3Event::SetTriggerData(I3TriggerData& triggerdata_)          {if(!triggerdata)    triggerdata=&triggerdata_;       else printf("TriggerData exists already\n");}
-void I3Event::SetFilterData(I3FilterData& filterdata_)             {if(!filterdata)     filterdata=&filterdata_;         else printf("FilterData exists already\n");}
-void I3Event::SetMCTrackData(I3MCTrackData& mctrackdata_)          {if(!mctrackdata)    mctrackdata=&mctrackdata_;       else printf("MCTrackData exists already\n");}
-void I3Event::SetOMResponseData(I3OMResponseData& omresponsedata_) {if(!omresponsedata) omresponsedata=&omresponsedata_; else printf("OMResponseData exists already\n");}
-void I3Event::SetRecoResultData(I3RecoResultData& recoresultdata_) {if(!recoresultdata) recoresultdata=&recoresultdata_; else printf("RecoResultData exists already\n");}
+void I3Event::SetTriggerData(I3TriggerData* triggerdata_)          
+{
+  if(!triggerdata)  triggerdata=triggerdata_;
+  else I3DataExecution::Instance().Fatal("I3Event::SetTriggerData() triggerdata has already been set");
+}
+
+void I3Event::SetFilterData(I3FilterData* filterdata_)             
+{
+  if(!filterdata) filterdata=filterdata_;
+  else I3DataExecution::Instance().Fatal("I3Event::SetFilterData() filterdata has already been set");
+}
+
+void I3Event::SetMCTrackData(I3MCTrackData* mctrackdata_)          
+{
+  if(!mctrackdata)  mctrackdata=mctrackdata_;   
+  else I3DataExecution::Instance().Fatal("I3Event::SetMCTrackData() mctrackdata has already been set");
+}
+void I3Event::SetOMResponseData(I3OMResponseData* omresponsedata_) 
+{
+  if(!omresponsedata) omresponsedata=omresponsedata_; 
+  else I3DataExecution::Instance().Fatal("I3Event::SetOMResponseData() omresponsedata has already been set");
+}
+void I3Event::SetRecoResultData(I3RecoResultData* recoresultdata_) 
+{
+  if(!recoresultdata) recoresultdata=recoresultdata_; 
+  else I3DataExecution::Instance().Fatal("I3Event::SetRecoResultData() recoresultdata has already been set");
+}

@@ -10,7 +10,7 @@ class I3RecoResultSingleTrackList : public I3RecoResult
 
   bool                   IsSingleTrackList() const;
   const I3RecoTrackList& GetSingleTrackList() const;
-  bool                   SetSingleTrackList(I3RecoTrackList& recotracklist_);
+  bool                   SetSingleTrackList(I3RecoTrackList* recotracklist_);
 
   ClassDef(I3RecoResultSingleTrackList, 1);
 };

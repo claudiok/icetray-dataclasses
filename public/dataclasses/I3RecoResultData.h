@@ -17,7 +17,7 @@ class I3RecoResultData : public TObject
 
   int                 GetNumberRecoResults() const;
   const I3RecoResult& GetRecoResult(unsigned short number) const;
-  void                AddRecoResult(I3RecoResult& recoresult_);
+  void                AddRecoResult(I3RecoResult* recoresult_);
 
   ClassDef(I3RecoResultData, 1);
 };

@@ -16,7 +16,7 @@ class I3MCTrackList : public TObject
 
   int              GetNumberMCTracks() const;
   const I3MCTrack& GetMCTrack(unsigned short number) const;
-  void             AddMCTrack(I3MCTrack& mctrack_);
+  void             AddMCTrack(I3MCTrack* mctrack_);
 
   ClassDef(I3MCTrackList, 1);
 };

@@ -14,7 +14,7 @@ const I3RecoTrackList& I3RecoResultSingleTrackList::GetSingleTrackList() const
   return((IsSingleTrackList()) ? *(I3RecoTrackList*)recotracklist->At(0) : *(I3RecoTrackList*)NULL);
 }
 
-bool I3RecoResultSingleTrackList::SetSingleTrackList(I3RecoTrackList& recotracklist_) 
+bool I3RecoResultSingleTrackList::SetSingleTrackList(I3RecoTrackList* recotracklist_) 
 {
   if(recotracklist)
   {
@@ -22,7 +22,7 @@ bool I3RecoResultSingleTrackList::SetSingleTrackList(I3RecoTrackList& recotrackl
     return(false);
   }
   recotracklist = new TObjArray(1); 
-  recotracklist->Add(&recotracklist_);
+  recotracklist->Add(recotracklist_);
   return(true);
 }
 
