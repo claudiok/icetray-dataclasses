@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3AnalogSeries.h,v 1.10 2004/02/21 18:52:38 troy Exp $
+    $Id: I3AnalogSeries.h,v 1.11 2004/02/22 14:26:36 pretz Exp $
 
-    @version $Revision: 1.10 $
-    @date $Date: 2004/02/21 18:52:38 $
+    @version $Revision: 1.11 $
+    @date $Date: 2004/02/22 14:26:36 $
     @author
 
     @todo
@@ -22,6 +22,7 @@ class I3AnalogSeries : public VectorPolicy<I3Analog>::ThePolicy
   const I3AnalogSeries& operator=(const I3AnalogSeries&);
 
  public:
+  I3AnalogSeries(){}
   virtual ~I3AnalogSeries() {;}
   ClassDef(I3AnalogSeries,1);
 };

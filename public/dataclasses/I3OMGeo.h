@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMGeo.h,v 1.5 2004/02/20 18:42:16 pretz Exp $
+    $Id: I3OMGeo.h,v 1.6 2004/02/22 14:26:36 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/02/20 18:42:16 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/02/22 14:26:36 $
     @author
 
     @todo
@@ -30,6 +30,18 @@ class I3OMGeo : public TObject
   void Init();
 
   I3OMGeo() { Init(); }
+  I3OMGeo(const I3OMGeo& rhs){*this = rhs;}
+  const I3OMGeo& operator=(const I3OMGeo& rhs){
+    if (this == &rhs) return *this; // check for assignment to self
+    TObject::operator=(rhs); // call base class assignment operator
+    omnumber = rhs.omnumber;
+    x = rhs.x;
+    y = rhs.y;
+    z = rhs.z;
+    orientation = rhs.orientation;
+    version = rhs.version;
+    return *this;
+  }
 
   UShort_t OMNumber() const {return omnumber;}
   void   OMNumber(UShort_t omnumber_) { omnumber = omnumber_; }

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMGeoAmanda.h,v 1.3 2004/02/20 18:42:16 pretz Exp $
+    $Id: I3OMGeoAmanda.h,v 1.4 2004/02/22 14:26:36 pretz Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/02/20 18:42:16 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/02/22 14:26:36 $
     @author
 
     @todo
@@ -20,6 +20,13 @@ class I3OMGeoAmanda : public I3OMGeo
 
   public:
   I3OMGeoAmanda() {;}
+  I3OMGeoAmanda(const I3OMGeoAmanda& rhs){*this = rhs;}
+  virtual ~I3OMGeoAmanda(){}
+  const I3OMGeoAmanda& operator=(const I3OMGeoAmanda& rhs){
+    if(this == &rhs) return *this;
+    I3OMGeo::operator=(rhs);
+    return *this;
+  }
 
   ClassDef(I3OMGeoAmanda,1);
 };
