@@ -1,16 +1,17 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.18 2005/03/30 14:48:27 pretz Exp $
+    $Id: StoragePolicy.h,v 1.19 2005/03/31 17:39:49 troy Exp $
+    @version $Revision: 1.19 $
+    @date $Date: 2005/03/31 17:39:49 $
 
-    @file StoragePolicy.h
-    @version $Revision: 1.18 $
-    @date $Date: 2005/03/30 14:48:27 $
-    @author Troy D. Straszheim
+    @author troy d. straszheim
 */
 
 #ifndef STORAGEPOLICY_H
 #define STORAGEPOLICY_H
+
+#include "TObject.h"
 
 #include "dataclasses/copy_if.h"
 
@@ -18,8 +19,62 @@
 #include "STLMapStoragePolicy.h"
 #include "STLMultiMapStoragePolicy.h"
 
-#include "boost/shared_ptr.hpp"
+#include "services/I3Logging.h"
 
+// temporary typedefs to compensate for removal of root shit
+
+/**
+ * @brief The pointer policy.  Should use typedefs of this rather than
+ * raw pointers.
+ *
+ * The existence of this PtrPolicy allows for typdefs of
+ * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
+ * Foo*.  What this does is allow the true implemntation of FooPtr to change
+ * in this one place, and the rest of the code is unaffected
+ */
+
+//#ifndef __CINT__
+//
+//#include <boost/serialization/serialization.hpp>
+//#include <boost/serialization/base_object.hpp>
+//#include <boost/serialization/nvp.hpp>
+//#include <boost/serialization/export.hpp>
+//#include <boost/serialization/map.hpp>
+//#include <boost/serialization/vector.hpp>
+//
+//
+//#else
+
+// forward declarations.  The full headers should only be included
+// from modules that actually do the serialization.
+
+namespace boost 
+{
+  namespace serialization 
+  {
+    class access;
+  }
+  template <class T> struct nvp;
+  template <class T> nvp<T> make_nvp(const char* name, T& t);
+#ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
+  template <class Base, class Derived, class Retval>
+  Retval base_object(Derived &d);
+#endif
+}
+using boost::serialization::make_nvp;
+using boost::serialization::base_object;
+
+//#endif
+
+template <class Pointed>
+struct PtrPolicy
+{
+  /**
+   * roost smart pointers.  FIXME: need docs
+   */
+  typedef boost::shared_ptr<Pointed> ThePolicy;
+  //  typedef Pointed* ThePolicy;
+};
 
 template <class Stored>
 /**
@@ -46,7 +101,7 @@ struct VectorPolicy {
  * provided the new implementation supplies the same interface - just by
  * changing this Mapolicy class.  That's what it is here for.
  */
-template <class Key,class Stored>
+template <class Key, class Stored>
 struct MapPolicy {
   /**
    *  ThePolicy is just a typedeffed STLMapStoragePolicy
@@ -63,7 +118,7 @@ struct MapPolicy {
  * provided the new implementation supplies the same interface - just by
  * changing this MultiMapPolicy class.  That's what it is here for.
  */
-template <class Key,class Stored>
+template <class Key, class Stored>
 struct MultiMapPolicy {
   /**
    *  ThePolicy is just a typedeffed STLMapStoragePolicy
@@ -72,32 +127,5 @@ struct MultiMapPolicy {
 
 };
 
-/**
- * @brief The pointer policy.  Should use typedefs of this rather than
- * raw pointers.
- *
- * The existence of this PtrPolicy allows for typdefs of
- * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
- * Foo*.  What this does is allow the true implemntation of FooPtr to change
- * in this one place, and the rest of the code is unaffected
- */
-template <class Pointed>
-struct PtrPolicy
-{
-  /**
-   * boost smart pointers.  FIXME: need docs
-   */
-  typedef boost::shared_ptr<Pointed> ThePolicy;
-    // typedef Pointed* ThePolicy;
-};
-
-//TDS: workaround while we get these goddamned smart pointers working
-//namespace boost {
-//  template <class T, class U>
-//  T*
-//  dynamic_pointer_cast(U* src)
-//  {
-//    return dynamic_cast<T*>(src);
-//  }
-//}
 #endif
+
