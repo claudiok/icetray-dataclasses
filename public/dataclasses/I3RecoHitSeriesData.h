@@ -4,7 +4,7 @@
 #include "I3RecoHitSeries.h"
 #include "StoragePolicy.h"
 
-class I3RecoHitSeriesData : public VectorPolicy<I3RecoHitSeries>::ThePolicy
+class I3RecoHitSeriesData : public MapPolicy<I3RecoHitSeriesPtr>::ThePolicy
 {
  public:
   virtual ~I3RecoHitSeriesData(){};
