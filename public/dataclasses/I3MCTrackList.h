@@ -4,12 +4,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackList.h,v 1.13 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3MCTrackList.h,v 1.14 2004/03/10 17:54:43 pretz Exp $
  *
  * A list of MCTracks.
  *
- * @version $Revision: 1.13 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/03/10 17:54:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,7 +21,7 @@
 #include "I3MCTrack.h"
 #include "StoragePolicy.h"
 
-class I3MCTrackList : public VectorPolicy<I3MCTrack>::ThePolicy
+class I3MCTrackList : public TObject, public VectorPolicy<I3MCTrack>::ThePolicy
 {
  public:
   /**

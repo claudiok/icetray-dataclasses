@@ -6,19 +6,19 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.14 2004/02/26 18:53:12 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.15 2004/03/10 17:54:43 pretz Exp $
  *
  *
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/02/26 18:53:12 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/03/10 17:54:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
  * @todo decide whether or not copy and assignment should be private
  */
-class I3MCHitSeries : public VectorPolicy<I3MCHit>::ThePolicy 
+class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy 
 {
   Double_t fWeight;
  public:

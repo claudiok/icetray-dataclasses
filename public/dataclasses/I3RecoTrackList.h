@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoTrackList.h,v 1.12 2004/03/09 21:57:29 pretz Exp $
+ * $Id: I3RecoTrackList.h,v 1.13 2004/03/10 17:54:43 pretz Exp $
  *
- * @version $Revision: 1.12 $
- * @date $Date: 2004/03/09 21:57:29 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/03/10 17:54:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,7 +18,7 @@
 #include "I3RecoTrack.h"
 #include "StoragePolicy.h"
 
-class I3RecoTrackList : public VectorPolicy<I3RecoTrackPtr>::ThePolicy
+class I3RecoTrackList : public TObject, public VectorPolicy<I3RecoTrackPtr>::ThePolicy
 {
  public:
   /**
