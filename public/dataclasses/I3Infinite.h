@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.18 2004/09/29 18:31:35 dule Exp $
+ * $Id: I3Infinite.h,v 1.19 2004/09/29 21:19:35 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/09/29 18:31:35 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/09/29 21:19:35 $
  * @author 
  */
 
@@ -105,9 +105,7 @@ class I3Infinite{
    * sets the zenith of the track
    */
   void SetZenith(Double_t zen) {
-    cout<<zen<<" "<<fDir.GetAzimuth()<<endl;
-    fDir.SetDirection(zen,fDir.GetAzimuth());
-  }
+    fDir.SetDirection(zen,fDir.GetAzimuth());}
 
   /**
    * sets the azimuth of the track
