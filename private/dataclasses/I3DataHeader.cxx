@@ -3,9 +3,7 @@
 ClassImp(I3DataHeader);
 
 I3DataHeader::I3DataHeader()
-  : fMjd(0),
-    fSec(0),
-    fNanoSec(0)
+  : time_()
 {
 }
 

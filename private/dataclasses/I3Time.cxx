@@ -10,7 +10,7 @@ extern "C"
 using std::cout;
 using std::endl;
 
-UTinstant UTinstantiate(I3Time& time)
+UTinstant UTinstantiate(const I3Time& time)
 {
   UTinstant to_return;
   to_return.j_date = 
@@ -30,45 +30,8 @@ I3Time::I3Time()
 I3Time::I3Time(int year,
 	       long long int daqTime)
 {
- // This is from Dima.  Thanks.
- long long h_day, h_sec, h_ns;
+  SetDaqTime(year,daqTime);
 
- h_day=daqTime/(24*3600*(long long)1.e10);
- daqTime%=(24*3600*(long long)1.e10);
- h_sec=daqTime/((long long)1.e10);
- daqTime%=((long long)1.e10);
- h_ns=daqTime/((long long)10);
- daqTime%=((long long)10);
-
- UTinstant startOfYear;
- startOfYear.year = year;
- startOfYear.month=1;
- startOfYear.day=1;
- startOfYear.i_hour=0;
- startOfYear.i_minute=0;
- startOfYear.second=0;
- 
- double julianStartOfYear = JulDate(&startOfYear);
-
- UTinstant thisInstant;
- thisInstant.j_date = 
-   julianStartOfYear + (double)h_day + (double) h_sec/(60. *60. * 24.);
- // printf("calculated julian date for this time: %0.8f\n",instant_.j_date);
- //  CalDate(&instant_);
-
- julianDay_ = (unsigned int)thisInstant.j_date;
-
- assert(h_sec <= 60 * 60 * 24);
-
- // adjusting for the fact that Julian days start at noon
- if(h_sec < 60 * 60 * 12)
-   h_sec += 60 * 60 * 12;
- else
-   h_sec -= 60 * 60 * 12;
-
- /** wrong */
- sec_ = h_sec;
- ns_ = h_ns;
 
 }
 
@@ -81,13 +44,65 @@ I3Time::I3Time(unsigned int julianDay,
 {
 }
 
-int I3Time::GetUTCYear()
+void I3Time::SetDaqTime(int year, 
+			long long int daqTime)
+{
+  // This is from Dima.  Thanks.
+  long long h_day, h_sec, h_ns;
+  
+  h_day=daqTime/(24*3600*(long long)1.e10);
+  daqTime%=(24*3600*(long long)1.e10);
+  h_sec=daqTime/((long long)1.e10);
+  daqTime%=((long long)1.e10);
+  h_ns=daqTime/((long long)10);
+  daqTime%=((long long)10);
+  
+  UTinstant startOfYear;
+  startOfYear.year = year;
+  startOfYear.month=1;
+  startOfYear.day=1;
+  startOfYear.i_hour=0;
+  startOfYear.i_minute=0;
+  startOfYear.second=0;
+  
+  double julianStartOfYear = JulDate(&startOfYear);
+  
+  UTinstant thisInstant;
+  thisInstant.j_date = 
+    julianStartOfYear + (double)h_day + (double) h_sec/(60. *60. * 24.);
+  // printf("calculated julian date for this time: %0.8f\n",instant_.j_date);
+  //  CalDate(&instant_);
+  
+  julianDay_ = (unsigned int)thisInstant.j_date;
+  
+  assert(h_sec <= 60 * 60 * 24);
+  
+  // adjusting for the fact that Julian days start at noon
+  if(h_sec < 60 * 60 * 12)
+    h_sec += 60 * 60 * 12;
+  else
+    h_sec -= 60 * 60 * 12;
+  
+  sec_ = h_sec;
+  ns_ = h_ns;
+}
+
+void I3Time::SetJulianTime(unsigned int julianDay,
+			   unsigned int sec,
+			   double ns)
+{
+  julianDay_ = julianDay;
+  sec_ = sec;
+  ns_ = ns;
+}
+
+int I3Time::GetUTCYear() const
 {
   UTinstant thisInstant = UTinstantiate(*this);
   return thisInstant.year;
 }
 
-long long int I3Time::GetUTCDaqTime()
+long long int I3Time::GetUTCDaqTime() const
 {
   UTinstant thisInstant = UTinstantiate(*this);
 
@@ -104,22 +119,22 @@ long long int I3Time::GetUTCDaqTime()
   return to_return;
 }
 
-unsigned int I3Time::GetJulianDay()
+unsigned int I3Time::GetJulianDay() const
 {
   return julianDay_;
 }
 
-unsigned int I3Time::GetJulianSec()
+unsigned int I3Time::GetJulianSec() const
 {
   return sec_;
 }
 
-double I3Time::GetJulianNanoSec()
+double I3Time::GetJulianNanoSec() const
 {
   return ns_;
 }
 
-I3Time::Month I3Time::GetUTCMonth()
+I3Time::Month I3Time::GetUTCMonth() const
 {
   UTinstant thisInstant = UTinstantiate(*this);
   switch(thisInstant.month)
@@ -153,7 +168,7 @@ I3Time::Month I3Time::GetUTCMonth()
     }
 }
 
-I3Time::Weekday I3Time::GetUTCWeekday()
+I3Time::Weekday I3Time::GetUTCWeekday() const
 {
   UTinstant thisInstant = UTinstantiate(*this);
   switch(thisInstant.weekday)
@@ -177,13 +192,13 @@ I3Time::Weekday I3Time::GetUTCWeekday()
     }
 }
 
-unsigned int I3Time::GetUTCDayOfMonth()
+unsigned int I3Time::GetUTCDayOfMonth() const
 {
   UTinstant thisInstant = UTinstantiate(*this);
   return thisInstant.day;
 }
 
-unsigned int I3Time::GetUTCSec()
+unsigned int I3Time::GetUTCSec() const
 {
   if(sec_ < 60 * 60 * 12)
     return sec_ + 60 * 60 * 12;
@@ -191,7 +206,7 @@ unsigned int I3Time::GetUTCSec()
     return sec_ - 60 * 60 * 12;
 }
 
-double I3Time::GetUTCNanoSec()
+double I3Time::GetUTCNanoSec() const
 {
   return ns_;
 }

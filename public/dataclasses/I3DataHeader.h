@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.13 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.14 2005/03/29 17:55:01 pretz Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/03/29 17:55:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -16,6 +16,7 @@
 #include "TObject.h"
 #include "TClass.h"
 #include "StoragePolicy.h"
+#include "I3Time.h"
 
 #include <string>
 #include <iostream>
@@ -31,24 +32,7 @@ using namespace std;
  */
 class I3DataHeader : public TObject
 {
- private:
-
-  /**
-   * the modified Julian day of the data
-   */
-  ULong_t fMjd;
-
-  /**
-   * the number of seconds after the fMjd
-   */
-  ULong_t fSec;
-
-  /**
-   * the nanosecond part of the time
-   */
-  ULong_t fNanoSec;
-
-
+  I3Time time_;
  public: 
   /**
    * constructor
@@ -61,72 +45,29 @@ class I3DataHeader : public TObject
   virtual ~I3DataHeader();
 
   /**
-   * copy constructor.  uses assignment operator
+   * Gets the Time for this header
    */
-  I3DataHeader(const I3DataHeader& rhs){*this = rhs;}
+  const I3Time& GetTime() const { return time_;}
 
   /**
-   * assignment operator.  A simple memeber-wise copy
+   * Sets the Time for this header
    */
-  const I3DataHeader& operator=(const I3DataHeader& rhs){
-    if(this == &rhs) return *this;
-    TObject::operator=(rhs);
-    fMjd = rhs.fMjd;
-    fNanoSec = rhs.fNanoSec;
-    fSec = rhs.fSec;
-    return *this;
-  }
-
-  /**
-   * @return the modified Julian day of the data event
-   */
-  ULong_t GetJulianDay() const { return fMjd; } 
-
-  /**
-   * @param day the new modified Julian day of the event
-   */
-  void SetJulianDay(ULong_t day) { fMjd = day; }
-
-  /**
-   * @return the number of seconds after the julian day of the data event
-   */
-  ULong_t GetSec() const { return fSec; }
-
-  /**
-   * @param sec the new number of seconds after the julian day of the 
-   * data event
-   */
-  void SetSec(ULong_t sec) { fSec = sec; }
-
-  /**
-   * @return the nanosecond part of the data event
-   */
-  ULong_t GetNanoSec() { return fNanoSec; }
-
-  /**
-   * @param nsec the new nanosecond part of the data event
-   */
-  void SetNanoSec(ULong_t nsec) { fNanoSec = nsec; }
-
-  /**
-   * The name of the stream on which the data occurs
-   */
-  virtual const std::string GetDataStream()=0;
+  void SetTime(const I3Time& t) { time_ = t;}
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ "
-       <<IsA()->GetName()
-       <<" ]\n"
-       <<"Modified Julain Day: "
-       <<fMjd
-       <<"\n"
-       <<"Seconds: "
-       <<fSec
-       <<"\n"
-       <<"Nano Seconds: "
-       <<fNanoSec
-       <<"\n";
+/*       o<<"[ " */
+/*        <<IsA()->GetName() */
+/*        <<" ]\n" */
+/*        <<"Modified Julain Day: " */
+/*        <<fMjd */
+/*        <<"\n" */
+/*        <<"Seconds: " */
+/*        <<fSec */
+/*        <<"\n" */
+/*        <<"Nano Seconds: " */
+/*        <<fNanoSec */
+/*        <<"\n"; */
     }
 
   virtual string ToString() const

@@ -47,25 +47,25 @@ class I3Time : public TObject
 		     unsigned int sec,
 		     double ns);
 
-  unsigned int GetJulianDay();
+  unsigned int GetJulianDay() const;
   
-  unsigned int GetJulianSec();
+  unsigned int GetJulianSec() const;
   
-  double GetJulianNanoSec();
+  double GetJulianNanoSec() const;
 
-  int GetUTCYear();
+  int GetUTCYear() const;
   
-  long long int GetUTCDaqTime();
+  long long int GetUTCDaqTime() const;
 
-  Month GetUTCMonth();
+  Month GetUTCMonth() const ;
 
-  Weekday GetUTCWeekday();
+  Weekday GetUTCWeekday() const;
 
-  unsigned int GetUTCDayOfMonth();
+  unsigned int GetUTCDayOfMonth() const;
 
-  unsigned int GetUTCSec();
+  unsigned int GetUTCSec() const;
   
-  double GetUTCNanoSec();  
+  double GetUTCNanoSec() const;  
 
   static std::string ToString(Month m);
 
