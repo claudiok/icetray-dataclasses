@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.12 2004/10/27 14:39:42 dule Exp $
+// $Id: I3Position.cxx,v 1.13 2004/11/19 15:38:54 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -94,14 +94,6 @@ void I3Position::ResetPosition()
   fRho=NAN;
   IsCalculated=kTRUE;
 }
-
-//-----------------------------------------------------------
-void I3Position::NullPosition()
-{
-// Set null position for non-existing position
-  ResetPosition();
-}
-
 //-----------------------------------------------------------
 
 //-----------------------------------------------------------
