@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHitTest.cxx,v 1.3 2004/06/30 17:20:26 pretz Exp $
+    $Id: I3MCHitTest.cxx,v 1.4 2004/07/04 06:03:32 troy Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/06/30 17:20:26 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/07/04 06:03:32 $
     @author Troy D. Straszheim
 
     @todo
@@ -47,13 +47,6 @@ namespace tut
     h = j;
     ensure_distance("simple assignment", j.GetWeight(), h.GetWeight(), (float)0.0001);
     ensure(j.GetTrackNumber() == j.GetTrackNumber());
-  }
-
-  // to run just this test, use "runtests I3MCHit 4"
-  template<> template<>
-  void object::test<4>() 
-  {
-    fail("this test is supposed to fail, this is on purpose.");
   }
 
   /**

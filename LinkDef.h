@@ -86,11 +86,6 @@
 #pragma link C++ typedef MapPolicy<I3RecoResultPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<I3RecoResultPtr>::ThePolicy+;
 #pragma link C++ typedef I3RecoResultDictPtr;
-#pragma link C++ function I3RecoResultDict::Get<I3RecoResultSingleTrackPtr>(const string&);
-#pragma link C++ function I3RecoResultDict::Get<I3RecoResultAltTracksPtr>(const string&);
-#pragma link C++ function I3RecoResultDict::Get<I3RecoResultMultiTracksPtr>(const string&);
-#pragma link C++ function I3RecoResultDict::Get<I3RecoResultRDMCFitPtr>(const string&);
-#pragma link C++ function I3RecoResultDict::Get<I3RecoResultLikelihoodPtr>(const string&);
 
 #pragma link C++ class I3DataReadoutDict+;
 #pragma link C++ typedef MapPolicy<I3DataReadoutPtr>::ThePolicy;
@@ -139,7 +134,7 @@
 #pragma link C++ class I3MCParticleDict+;
 #pragma link C++ typedef MapPolicy<I3MCParticleEventPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<I3MCParticleEventPtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3MCParticleDict::iterator&, const I3MCParticleDict::iterator&);
+//#pragma link C++ function operator!=(const I3MCParticleDict::iterator&, const I3MCParticleDict::iterator&);
 #pragma link C++ typedef I3MCParticleDictPtr;
 
 #pragma link C++ typedef TObjectPtr;

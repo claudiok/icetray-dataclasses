@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCParticleVectTest.cxx,v 1.2 2004/07/03 18:40:58 troy Exp $
+    $Id: I3MCParticleVectTest.cxx,v 1.3 2004/07/04 06:03:32 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/07/03 18:40:58 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/07/04 06:03:32 $
     @author pretz
 
     @todo
@@ -30,7 +30,6 @@ namespace tut
 {
   struct I3MCParticleVectTest
   {
-    I3MCParticleVect fParticles;
   };
 
   typedef test_group<I3MCParticleVectTest> factory;
@@ -44,15 +43,16 @@ namespace
 
 namespace tut
 {
-#if 0
   // testing the 'Track' extractor
   template<> template<>
   void object::test<1>()
   {
-    fParticles.push_back(new I3MCTrack());
-    fParticles.push_back(new I3MCCascade());
-    fParticles.push_back(new I3MCTrack());
-    fParticles.push_back(new I3F2KRecoTrack());
+    I3MCParticleVect fParticles;
+
+    fParticles.push_back(I3MCTrackPtr(new I3MCTrack));
+    fParticles.push_back(I3MCCascadePtr(new I3MCCascade()));
+    fParticles.push_back(I3MCTrackPtr(new I3MCTrack));
+    fParticles.push_back(I3F2KRecoTrackPtr(new I3F2KRecoTrack));
 
 
     vector<I3TrackPtr> the_tracks;
@@ -64,18 +64,17 @@ namespace tut
 
   void object::test<2>()
   {
-    fParticles.push_back(new I3MCTrack());
-    fParticles.push_back(new I3MCCascade());
-    fParticles.push_back(new I3MCCascade());
+    I3MCParticleVect fParticles;
+
+    fParticles.push_back(I3MCTrackPtr(new I3MCTrack));
+    fParticles.push_back(I3MCCascadePtr(new I3MCCascade));
+    fParticles.push_back(I3MCCascadePtr(new I3MCCascade));
 
     vector<I3CascadePtr> the_cascades;
     I3CascadeExtractor extractor(the_cascades);
 
     for_each(fParticles.begin(),fParticles.end(),extractor);
     ensure("right size for extracted list",the_cascades.size() == 2);
-
-
   }
-#endif
 }
 

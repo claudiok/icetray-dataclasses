@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIcecube.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3OMStatusIcecube.h,v 1.5 2004/07/04 06:03:32 troy Exp $
  *
  * @file I3OMStatusIcecube.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/04 06:03:32 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -15,7 +15,6 @@
 #define I3OMSTATUSICECUBE_H
 
 #include <TObject.h>
-#include <TObjArray.h>
 #include "I3OMStatus.h"
 
 /**

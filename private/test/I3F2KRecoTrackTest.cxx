@@ -1,14 +1,13 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrackTest.cxx,v 1.5 2004/07/03 19:28:23 troy Exp $
+    $Id: I3F2KRecoTrackTest.cxx,v 1.6 2004/07/04 06:03:32 troy Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/07/03 19:28:23 $
-    @author pretz
+    @version $Revision: 1.6 $
+    @date $Date: 2004/07/04 06:03:32 $
+    @author John Pretz, Troy D. Straszheim
 
     @todo
-
 */
 
 #include "test/tut.h"
@@ -102,6 +101,5 @@ namespace tut
   {
     return;
   }
-
 
 }

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.4 2004/07/03 19:39:20 pretz Exp $
+    $Id: InIceExtractorExample.cxx,v 1.5 2004/07/04 06:03:32 troy Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/07/03 19:39:20 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/07/04 06:03:32 $
     @author Troy D. Straszheim
 
     @todo
@@ -45,7 +45,6 @@ namespace tut
 {
   //TDS: FIXME
 
-#if 0
   // here's simple function that takes a pointet an I3OMGeo and sets
   // its fields to random values
   void SetOMRandomValues (I3OMGeoPtr p) 
@@ -79,7 +78,7 @@ namespace tut
       : mygeometry_(geometry_to_fill) { };
 
     void operator()(I3OMGeoPtr p) {
-      I3OMGeoAmandaPtr amandap = dynamic_cast<I3OMGeoAmandaPtr>(p);
+      I3OMGeoAmandaPtr amandap = boost::dynamic_pointer_cast<I3OMGeoAmanda>(p);
       if (amandap) mygeometry_.push_back(amandap);
     }
   };
@@ -108,8 +107,8 @@ namespace tut
     // Make a 30 entry-long I3Geometry with 10 each of
     // OMGeo/OMGeoAmanda/OMGeoIcecube
     for (int i=0; i<6; i++) {
-      geometry.push_back(new I3OMGeoAmanda);
-      geometry.push_back(new I3OMGeoIcecube);
+      geometry.push_back(I3OMGeoAmandaPtr(new I3OMGeoAmanda));
+      geometry.push_back(I3OMGeoIcecubePtr(new I3OMGeoIcecube));
     }
 
     // loop through this geometry (from begin() to end()) and print
@@ -156,6 +155,6 @@ namespace tut
     sort(amanda_geometry.begin(), amanda_geometry.end(), OMNumber_lessthan);
     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOM);
   }
-#endif
+
 }
 

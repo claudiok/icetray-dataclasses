@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.18 2004/07/03 19:39:20 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.19 2004/07/04 06:03:32 troy Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/07/03 19:39:20 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/07/04 06:03:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,7 +14,6 @@
 #define I3OMGEO_H
 
 #include <TObject.h>
-#include <TObjArray.h>
 #include <string>
 
 /**

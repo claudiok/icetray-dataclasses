@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.3 2004/07/02 16:21:16 pretz Exp $
+ * $Id: I3MCEvent.h,v 1.4 2004/07/04 06:03:32 troy Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/02 16:21:16 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/07/04 06:03:32 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -22,7 +22,7 @@ class I3MCEvent : public I3Event
 {
   Float_t fMCFrameStart;
   Float_t fMCFrameStop;
-  I3MCParticleDict    fMCParticleDict; //||
+  I3MCParticleDict    fMCParticleDict; //pipe-pipe
 
  public:
   /**

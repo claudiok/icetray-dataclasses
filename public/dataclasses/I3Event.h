@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.26 2004/07/01 21:37:43 pretz Exp $
+ * $Id: I3Event.h,v 1.27 2004/07/04 06:03:32 troy Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.26 $
- * @date $Date: 2004/07/01 21:37:43 $
+ * @version $Revision: 1.27 $
+ * @date $Date: 2004/07/04 06:03:32 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
 #define I3EVENT_H
 
 #include <TObject.h>
-#include <TObjArray.h>
 
 #include "I3TriggerData.h"
 #include "I3FilterData.h"

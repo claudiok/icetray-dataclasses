@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.10 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.11 2004/07/04 06:03:32 troy Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/07/04 06:03:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,7 +14,6 @@
 #define I3DATAREADOUT_H
 
 #include <TObject.h>
-#include <TObjArray.h>
 #include "StoragePolicy.h"
 /**
  * @brief A base class for all the data readout types. 
