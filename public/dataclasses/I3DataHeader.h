@@ -4,14 +4,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.4 2004/02/25 16:27:46 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.5 2004/02/25 19:14:26 pretz Exp $
  *
  * I3DataHeader
  * This class represents a generic header for a data issued on some stream
  * Just a 'time' right now, but there may be stuff to add later.
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/02/25 16:27:46 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/02/25 19:14:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -66,6 +66,7 @@ class I3DataHeader : public TObject
     fMjd = rhs.fMjd;
     fNanoSec = rhs.fNanoSec;
     fSec = rhs.fSec;
+    return *this;
   }
 
   /**

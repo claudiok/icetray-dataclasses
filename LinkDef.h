@@ -52,12 +52,14 @@
 #pragma link C++ typedef VectorPolicy<I3Digital>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3Digital>::ThePolicy+;
 #pragma link C++ function operator!=(const I3DigitalSeries::iterator&, const I3DigitalSeries::iterator&);
+#pragma link C++ typedef I3DigitalSeriesPtr;
 
 // typedefs of I3DigitalSeries
 #pragma link C++ class I3DigitalATWDSeries;
 #pragma link C++ typedef I3DigitalATWDSeriesPtr;
 #pragma link C++ typedef I3DigitalFADCSeries;
 #pragma link C++ typedef I3DigitalTWRSeries;
+#pragma link C++ typedef I3DigitalTWRSeriesPtr;
 
 #pragma link C++ class I3Geometry+;
 #pragma link C++ class I3Geometry::iterator+;
@@ -141,8 +143,11 @@
 #pragma link C++ class I3DataReadout+;
 #pragma link C++ typedef I3DataReadoutPtr;
 #pragma link C++ class I3Digital+;
+#pragma link C++ typedef I3DigitalPtr;
 #pragma link C++ class I3Event+;
+#pragma link C++ typedef I3EventPtr;
 #pragma link C++ class I3EventHeader+;
+#pragma link C++ typedef I3EventHeaderPtr;
 #pragma link C++ class I3FilterData+;
 #pragma link C++ class I3GeometryDataHeader+;
 #pragma link C++ class I3Hit+;
