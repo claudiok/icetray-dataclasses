@@ -1,3 +1,8 @@
+extern "C"
+{
+#include "dataclasses/jday.h"
+}
+
 #include "dataclasses/I3Time.h"
 
 #include <iostream>
@@ -5,12 +10,29 @@
 using std::cout;
 using std::endl;
 
+UTinstant UTinstantiate(I3Time& time)
+{
+  UTinstant to_return;
+  to_return.j_date = 
+    (double)time.GetJulianDay() + 
+    (double)time.GetJulianSec() / (3600. * 24.);
+  CalDate(&to_return);
+  return to_return;
+}
+
+I3Time::I3Time()
+{
+  julianDay_ = 0;
+  sec_ = 0;
+  ns_ = 0;
+}
+
 I3Time::I3Time(int year,
 	       long long int daqTime)
 {
+ // This is from Dima.  Thanks.
  long long h_day, h_sec, h_ns;
 
- // This is from Dima.  Thanks.
  h_day=daqTime/(24*3600*(long long)1.e10);
  daqTime%=(24*3600*(long long)1.e10);
  h_sec=daqTime/((long long)1.e10);
@@ -27,16 +49,14 @@ I3Time::I3Time(int year,
  startOfYear.second=0;
  
  double julianStartOfYear = JulDate(&startOfYear);
- // printf("Julian day for the start of year %d %0.8f\n",year,julianStartOfYear);
- // printf("num days since start of year: %d\n",(int)h_day);
- // printf("Fractional part of the day: %f\n",(double) h_sec/(60. * 60. * 24.));
 
- instant_.j_date = 
+ UTinstant thisInstant;
+ thisInstant.j_date = 
    julianStartOfYear + (double)h_day + (double) h_sec/(60. *60. * 24.);
  // printf("calculated julian date for this time: %0.8f\n",instant_.j_date);
- CalDate(&instant_);
+ //  CalDate(&instant_);
 
- julianDay_ = (unsigned int)instant_.j_date;
+ julianDay_ = (unsigned int)thisInstant.j_date;
 
  assert(h_sec <= 60 * 60 * 24);
 
@@ -59,18 +79,18 @@ I3Time::I3Time(unsigned int julianDay,
   sec_(sec),
   ns_(ns)
 {
-  double d_julianday = (double)julianDay_ + (double)sec_/(60. * 60. * 24);
-  instant_.j_date = d_julianday;
-  CalDate(&instant_);
 }
 
 int I3Time::GetUTCYear()
 {
-  return instant_.year;
+  UTinstant thisInstant = UTinstantiate(*this);
+  return thisInstant.year;
 }
 
 long long int I3Time::GetUTCDaqTime()
 {
+  UTinstant thisInstant = UTinstantiate(*this);
+
   long long int to_return =  (long long int)ns_ * 10;
   
   to_return += (long long int)1e10 * sec_;
@@ -79,7 +99,7 @@ long long int I3Time::GetUTCDaqTime()
     (long long int) 3600 * 
     (long long int)24 * 
     (long long)1e10 * 
-    (long long)instant_.day_of_year;
+    (long long)thisInstant.day_of_year;
   
   return to_return;
 }
@@ -101,7 +121,8 @@ double I3Time::GetJulianNanoSec()
 
 I3Time::Month I3Time::GetUTCMonth()
 {
-  switch(instant_.month)
+  UTinstant thisInstant = UTinstantiate(*this);
+  switch(thisInstant.month)
     {
     case 1:
       return Jan;
@@ -134,7 +155,8 @@ I3Time::Month I3Time::GetUTCMonth()
 
 I3Time::Weekday I3Time::GetUTCWeekday()
 {
-  switch(instant_.weekday)
+  UTinstant thisInstant = UTinstantiate(*this);
+  switch(thisInstant.weekday)
     {
     case 0:
       return Sunday;
@@ -157,7 +179,8 @@ I3Time::Weekday I3Time::GetUTCWeekday()
 
 unsigned int I3Time::GetUTCDayOfMonth()
 {
-  return instant_.day;
+  UTinstant thisInstant = UTinstantiate(*this);
+  return thisInstant.day;
 }
 
 unsigned int I3Time::GetUTCSec()

@@ -83,4 +83,5 @@ dataclasses/I3MCParticleData.h	      dataclasses/STLMultiMapStoragePolicy.h \
 dataclasses/I3MCPhoton.h	      dataclasses/STLVectorStoragePolicy.h \
 dataclasses/I3MCPhotonVect.h	      dataclasses/StationKey.h \
 dataclasses/I3MCPrimary.h	      dataclasses/StoragePolicy.h \
-dataclasses/I3MCTankHit.h	      
+dataclasses/I3MCTankHit.h \
+dataclasses/I3Time.h 

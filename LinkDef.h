@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.152 2005/02/23 21:47:31 dule Exp $
-// $Revision: 1.152 $
-// $Date: 2005/02/23 21:47:31 $
+// $Id: LinkDef.h,v 1.153 2005/03/29 17:15:05 pretz Exp $
+// $Revision: 1.153 $
+// $Date: 2005/03/29 17:15:05 $
 //
 
 #ifdef __CINT__
@@ -637,6 +637,8 @@
 #pragma link C++ class OMKey+;
 #pragma link C++ typedef OMKeyPtr;
 #pragma link C++ class roost::shared_ptr<OMKey>+;
+
+#pragma link C++ class I3Time+;
 
 #pragma link C++ typedef StationKey;
 

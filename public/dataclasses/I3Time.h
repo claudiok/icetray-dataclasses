@@ -2,13 +2,9 @@
 #define I3TIME_H
 
 #include <string>
+#include "TObject.h"
 
-extern "C"
-{
-#include "dataclasses/jday.h"
-}
-
-class I3Time
+class I3Time : public TObject
 {
  public:
   enum Month{Jan = 1, 
@@ -37,6 +33,7 @@ class I3Time
       BadWeekday = 999
     };
 
+  I3Time();
 	     
   I3Time(int year, 
 	 long long int daqTime);
@@ -44,6 +41,12 @@ class I3Time
 	 unsigned int sec, 
 	 double ns);
   
+  void SetDaqTime(int year, long long int daqTime);
+
+  void SetJulianTime(unsigned int julianDay,
+		     unsigned int sec,
+		     double ns);
+
   unsigned int GetJulianDay();
   
   unsigned int GetJulianSec();
@@ -71,7 +74,7 @@ class I3Time
   unsigned int julianDay_;
   unsigned int sec_;
   double ns_;
-  UTinstant instant_;
+  ClassDef(I3Time,1);
 };
 
 #endif
