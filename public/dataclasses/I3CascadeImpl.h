@@ -27,9 +27,9 @@ class I3CascadeImpl : public I3Cascade,
 
   virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
 
-  virtual Double_t Theta() const {return DirectionalType::Theta();}
+  virtual Double_t Zenith() const {return DirectionalType::Zenith();}
 
-  virtual Double_t Phi() const {return DirectionalType::Phi();}
+  virtual Double_t Azimuth() const {return DirectionalType::Azimuth();}
 
   virtual Double_t X() const {return LocalizableType::X();}
 
@@ -39,7 +39,7 @@ class I3CascadeImpl : public I3Cascade,
 
   virtual Double_t T() const {return LocalizableType::T();}
 
-  virtual I3Position Pos() const {return I3Position(X(),Y(),Z(),T());}
+  virtual I3Position Pos() const {return I3Position(X(),Y(),Z());}
 
   virtual Double_t Energy() const {return EnergeticType::Energy();}
 

@@ -8,11 +8,11 @@ class I3NonDirectional
  public:
   virtual Bool_t IsDirectional() const {return true;}
 
-  virtual Double_t Theta() const {return NAN;}
-  virtual void Theta(Double_t theta) {return;}
+  virtual Double_t Zenith() const {return NAN;}
+  virtual void Zenith(Double_t zenith) {return;}
 
-  virtual Double_t Phi() const {return NAN;}
-  virtual void Phi(Double_t phi) {return;}
+  virtual Double_t Azimuth() const {return NAN;}
+  virtual void Azimuth(Double_t azimuth) {return;}
 
   void CopyTo(I3Particle&) const {}
 

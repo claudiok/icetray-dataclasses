@@ -7,10 +7,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.1.2.5 2004/04/20 17:06:44 pretz Exp $
+ * $Id: I3Cascade.h,v 1.1.2.6 2004/04/20 18:59:23 pretz Exp $
  *
- * @version $Revision: 1.1.2.5 $
- * @date $Date: 2004/04/20 17:06:44 $
+ * @version $Revision: 1.1.2.6 $
+ * @date $Date: 2004/04/20 18:59:23 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -32,7 +32,7 @@ class I3Cascade : public I3ObservableParticle{
 
   virtual Double_t T() const =0;
 
-  virtual I3Position Pos() { return I3Position(X(),Y(),Z(),T());}
+  virtual I3Position Pos() const =0;
 
   virtual void CopyTo(I3Particle& destination) const
     {

@@ -6,24 +6,24 @@
 class I3Directional 
 {
  private:
-  Double_t fTheta;
-  Double_t fPhi;
+  Double_t fZenith;
+  Double_t fAzimuth;
  public:
   virtual Bool_t IsDirectional() const {return true;}
 
-  virtual Double_t Theta() const {return fTheta;}
-  virtual void Theta(Double_t theta) {fTheta = theta;}
+  virtual Double_t Zenith() const {return fZenith;}
+  virtual void Zenith(Double_t zenith) {fZenith = zenith;}
 
-  virtual Double_t Phi() const {return fPhi;}
-  virtual void Phi(Double_t phi) {fPhi = phi;}
+  virtual Double_t Azimuth() const {return fAzimuth;}
+  virtual void Azimuth(Double_t azimuth) {fAzimuth = azimuth;}
 
   virtual void CopyTo(I3Position& destination)
     {
       I3Directional* directional = dynamic_cast<I3Directional*>(&destination);
       if(directional)
 	{
-	  directional->fTheta = fTheta;
-	  directional->fPhi = fPhi;
+	  directional->fZenith = fZenith;
+	  directional->fAzimuth = fAzimuth;
 	}
     }
 

@@ -45,6 +45,10 @@
 #pragma link C++ class I3EnergyCascade+;
 #pragma link C++ class I3MCCascade+;
 
+#pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
+
+#pragma link C++ class I3MCPrimary+;
+
 //
 // vector (series, list) types
 // these must go from outermost to innermost
@@ -187,6 +191,7 @@
 #pragma link C++ class I3Cascade+;
 #pragma link C++ class I3Contained+;
 #pragma link C++ class I3Composite+;
+#pragma link C++ class I3CoreLocalized+;
 #pragma link C++ class I3DataExecution+;
 #pragma link C++ class I3DataHeader+;
 #pragma link C++ typedef I3DataHeaderPtr;
@@ -284,8 +289,6 @@
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
 #pragma link C++ typedef I3TriggerDataPtr;
-#pragma link C++ class I3MCPrimary+;
-#pragma link C++ typedef I3MCPrimaryPtr;
 
 #pragma link C++ class AmandaExtractor+;
 #pragma link C++ class vector<I3OMGeoAmandaPtr>+;
