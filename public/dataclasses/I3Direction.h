@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.1 2004/09/03 19:45:53 dule Exp $
+ * $Id: I3Direction.h,v 1.2 2004/09/07 22:30:30 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/09/03 19:45:53 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/09/07 22:30:30 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.1 2004/09/03 19:45:53 dule Exp $
+// $Id: I3Direction.h,v 1.2 2004/09/07 22:30:30 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -183,8 +183,20 @@ class I3Direction : public TObject
   mutable Bool_t IsCalculated; 
 
  private:
+  /**
+   * Change zenith,azimuth coordinates into x,y,z directional coordinates.
+   * The three numbers x,y,z are calculated to add up (in quadrature) to 1.
+   */
   void CalcCarFromSph() const;
+
+  /**
+   * Change x,y,z directional coordinates to zenith,azimuth coordinates.
+   * The three numbers DO NOT have to add up (in quadrature) to 1.
+   * Even if they don't, the direction that they define is stored.
+   * SO BE CAREFUL IF YOU SPECIFY THE DIRECTION IN THIS WAY!
+   */
   void CalcSphFromCar();
+
   //void CalcSphCylFromCar() const;
   //void CalcCarCylFromSph();
   //void CalcCarSphFromCyl();

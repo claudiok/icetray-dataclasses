@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.1 2004/09/03 19:45:53 dule Exp $
+// $Id: I3Direction.cxx,v 1.2 2004/09/07 22:30:30 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
@@ -135,8 +135,8 @@ void I3Direction::RotateZ(Double_t angle)
 void I3Direction::ToStream(ostream& o) const
 {
   o <<"---------------------DIRECTION-INFO-----------------------\n"
-    <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
     <<"SPH coord (zen,azi): "<< GetZenith()<<" "<<GetAzimuth()<<"\n"
+    <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
     <<"---------------------------------------------------------\n";
 }
 
@@ -160,7 +160,7 @@ void I3Direction::CalcSphFromCar()
   // Calculate Spherical coordinates from Cartesian
   // Direction is stored on disk in Spherical coordinates only
   Double_t fR = sqrt(fX*fX+fY*fY+fZ*fZ);
-  Double_t theta=0;
+  Double_t theta = 0;
   if (fR && fabs(fZ/fR)<=1.) {
     theta=acos(fZ/fR);
   } else {
@@ -173,7 +173,6 @@ void I3Direction::CalcSphFromCar()
   fZenith = -theta;
   fAzimuth = -phi;
   IsCalculated=kTRUE;
-  cout<<"R="<<fR<<endl; //#############
 }
 
 //-----------------------------------------------------------
