@@ -1,3 +1,4 @@
 CXX_SRC_SUFFIX := cxx
 CXX_BIN_SUFFIX := exe
 ROOTCINT_USE_CPP_FLAG := -p
+DUMMY_TOOLS += boost
