@@ -25,7 +25,7 @@ void I3MCTrackList::AddMCTrack(I3MCTrack* mctrack_)
   if(mctrack==NULL) mctrack = new TObjArray(1); mctrack->Add(mctrack_);
 }
 
-I3Iterator<const I3MCTrack>* I3MCTrackList::MakeMCTrackIterator()
+I3Iterator<const I3MCTrack>* I3MCTrackList::MakeMCTrackIterator() const
 {
   if(!mctrack)
     return new I3ZeroItemIterator<const I3MCTrack>();
