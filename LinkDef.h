@@ -22,8 +22,6 @@
 #pragma link C++ class I3TrackImpl<I3Identifiable,I3Stopping,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3NonEnergetic,I3NonComposite>+;
 
-#pragma link C++ class I3CascadeImpl<I3Directional,I3Identifiable,I3Localized,I3Energetic>+;
-
 #pragma link C++ class I3BasicTrack+;
 #pragma link C++ class I3F2KTrack+;
 #pragma link C++ class I3BasicMuon+;
@@ -36,6 +34,16 @@
 #pragma link C++ class I3ShoweringMuon+;
 #pragma link C++ class I3StartingMuon+;
 #pragma link C++ class I3StoppingMuon+;
+
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Identifiable,I3Localized,I3Energetic>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Identifiable,I3Localized,I3NonEnergetic>+;
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Identifiable,I3Localized,I3NonEnergetic>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Identifiable,I3Localized,I3Energetic>+;
+
+#pragma link C++ class I3BasicCascade+;
+#pragma link C++ class I3DirectionalCascade+;
+#pragma link C++ class I3EnergyCascade+;
+#pragma link C++ class I3MCCascade+;
 
 //
 // vector (series, list) types

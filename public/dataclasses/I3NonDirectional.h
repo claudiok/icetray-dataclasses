@@ -6,7 +6,7 @@
 class I3NonDirectional 
 {
  public:
-  virtual Bool_t IsNonDirectional() const {return true;}
+  virtual Bool_t IsDirectional() const {return true;}
 
   virtual Double_t Theta() const {return NAN;}
   virtual void Theta(Double_t theta) {return;}
