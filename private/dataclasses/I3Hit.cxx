@@ -2,8 +2,8 @@
 
 ClassImp(I3Hit);
   
-I3Hit::I3Hit() {true_time=0;}
+I3Hit::I3Hit() {time=0;}
 
-unsigned long I3Hit::GetTruetime() const                   {return(true_time);}
-void          I3Hit::SetTruetime(unsigned long true_time_) {true_time=true_time_;}
+unsigned long I3Hit::GetTime() const              {return(time);}
+void          I3Hit::SetTime(unsigned long time_) {time=time_;}
 
