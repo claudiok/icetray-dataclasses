@@ -194,6 +194,12 @@ public:
    pointed to by only one object, so that ownership is clear and it is
    easy to ensure that pointers are properly initialized.
 
+   Pointers to each class are typedef'd, for example @c TObjectPtr.
+   Developers are strongly encouraged to use these typedefs.  These
+   will allow us to globally introduce smart pointers or other special
+   implementations to perform automatic garbage collection and so
+   forth and will contribute to world peace.
+
    @section root A note regarding Root
    
    It is expected that most users will use Root for physics analysis, and

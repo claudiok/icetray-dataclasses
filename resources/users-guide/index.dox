@@ -9,9 +9,9 @@
    are several examples and tutorials each using different aspects of the 
    classes.  
 
-   <!--  You may also find the automatically generated 
+   You may also find the automatically generated 
    <a href="../../doxygen-dataclasses/html/hierarchy.html>Doxygen
-   documentation</a> useful.  -->
+   documentation</a> useful. 
    
    Thanks for looking!
 
@@ -109,11 +109,11 @@
 
    @li @ref layout
 
-   <!--   @li @ref om-response
+   @li @ref om-response
    
    @li @ref tracks
    
-   @li @ref best-practices -->
+   @li @ref best-practices
    
 
 */
