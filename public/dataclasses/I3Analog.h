@@ -1,26 +1,11 @@
 /**
- * Class: I3Analog
- *
- * Version: $Id: I3Analog.h,v 1.4 2004/02/25 00:20:59 pretz Exp $
- *
- * Date: 24 Feb 2004
- *
- * (c) 2004 IceCube Collaboration
- */
-
-#ifndef I3ANALOG_H
-#define I3ANALOG_H
-
-#include <TObject.h>
-
-/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Analog.h,v 1.4 2004/02/25 00:20:59 pretz Exp $
+ * $Id: I3Analog.h,v 1.5 2004/02/25 16:27:46 pretz Exp $
  * One analog pulse from an OM.  
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/02/25 00:20:59 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/02/25 16:27:46 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -28,6 +13,12 @@
  * @todo What are the units here???
  * @todo What's the difference between Time() and LET()
  */
+
+#ifndef I3ANALOG_H
+#define I3ANALOG_H
+
+#include <TObject.h>
+
 class I3Analog : public TObject
 {
   ULong_t  fTime;
@@ -124,5 +115,8 @@ class I3Analog : public TObject
   // ROOT macro
   ClassDef(I3Analog, 1);
 };
+
+typedef I3Analog* I3AnalogPtr;
+
 #endif
 

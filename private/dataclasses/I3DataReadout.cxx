@@ -3,8 +3,8 @@
 
 ClassImp(I3DataReadout);
 
-const char* I3DataReadout::GetReadoutType() const 
-{
-  return this->IsA()->GetName();
-}
+// const char* I3DataReadout::GetReadoutType() const 
+// {
+//   return this->IsA()->GetName();
+// }
 

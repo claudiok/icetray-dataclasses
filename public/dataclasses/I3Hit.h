@@ -1,13 +1,19 @@
 /**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: I3Hit.h,v 1.5 2004/02/21 19:30:19 troy Exp $
-
-    @version $Revision: 1.5 $
-    @date $Date: 2004/02/21 19:30:19 $
-    @author
-
-*/
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Hit.h,v 1.6 2004/02/25 16:27:46 pretz Exp $
+ *
+ * I3Hit is the basic hit class.  Just a time for a PE arrival
+ * at a tube.  
+ *
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/02/25 16:27:46 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ * @todo specify what 'time' is here
+ */
 
 #ifndef I3HIT_H
 #define I3HIT_H
@@ -19,19 +25,41 @@ class I3Hit : public TObject
   ULong_t fTime;
 
   public:
-
+  /**
+   * constructor
+   */
   I3Hit() { fTime = 0; }
+
+  /**
+   * copy constructor.
+   */
   I3Hit(const I3Hit& rhs) { *this = rhs; }
+
+  /**
+   * assignment operator
+   */
   const I3Hit& operator=(const I3Hit& rhs) {
     if (this == &rhs) return *this;
     fTime = rhs.fTime;
     return *this;
   }
       
+  /**
+   * @returns the time of the hit
+   */
   ULong_t Time() const { return fTime; }
-  void Time(ULong_t time_) { fTime = time_; }
 
+  /**
+   * @param time_ the new time of the hit
+   */
+  void Time(ULong_t time) { fTime = time; }
+
+
+  // ROOT Macro
   ClassDef(I3Hit, 1);
 };
+
+typedef I3Hit* I3HitPtr;
+
 #endif
 

@@ -55,6 +55,7 @@
 
 // typedefs of I3DigitalSeries
 #pragma link C++ class I3DigitalATWDSeries;
+#pragma link C++ typedef I3DigitalATWDSeriesPtr;
 #pragma link C++ typedef I3DigitalFADCSeries;
 #pragma link C++ typedef I3DigitalTWRSeries;
 
@@ -98,6 +99,7 @@
 #pragma link C++ typedef MapPolicy<TObjectPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<TObjectPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
+#pragma link C++ typedef I3BagPtr;
 
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
@@ -132,16 +134,21 @@
 #pragma link C++ typedef TObjectPtr;
 
 #pragma link C++ class I3Analog+;
+#pragma link C++ typedef I3AnalogPtr;
 #pragma link C++ class I3DataExecution+;
 #pragma link C++ class I3DataHeader+;
+#pragma link C++ typedef I3DataHeaderPtr;
 #pragma link C++ class I3DataReadout+;
+#pragma link C++ typedef I3DataReadoutPtr;
 #pragma link C++ class I3Digital+;
 #pragma link C++ class I3Event+;
 #pragma link C++ class I3EventHeader+;
 #pragma link C++ class I3FilterData+;
 #pragma link C++ class I3GeometryDataHeader+;
 #pragma link C++ class I3Hit+;
+#pragma link C++ typedef I3HitPtr;
 #pragma link C++ class I3MCHit+;
+#pragma link C++ typedef I3MCHitPtr;
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3OMGeo+;
 
