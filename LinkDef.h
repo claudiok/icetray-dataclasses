@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.142.2.1 2005/01/26 03:59:37 troy Exp $
-// $Revision: 1.142.2.1 $
-// $Date: 2005/01/26 03:59:37 $
+// $Id: LinkDef.h,v 1.142.2.2 2005/02/04 06:11:42 troy Exp $
+// $Revision: 1.142.2.2 $
+// $Date: 2005/02/04 06:11:42 $
 //
 
 #ifdef __CINT__
@@ -76,12 +76,22 @@
 #pragma link C++ class roost::shared_ptr<I3F2KRecoCascade>+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
+#pragma link C++ class I3PrimaryImpl<I3Directional,I3Localized,I3Energetic>+;
 #pragma link C++ class I3TopShowerImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>+;
 #pragma link C++ class I3TopShowerImpl<I3Directional, I3CoreLocalized, I3Energetic>+;
-#pragma link C++ class I3TopShowerImpl<I3Directional, I3NonCoreLocalized, I3NonEnergetic>+;
+#pragma link C++ class I3TopShowerImpl<I3Directional, I3NonLocalized, I3NonEnergetic>+;
+
+#pragma link C++ class I3MCCorePrimary+;
+#pragma link C++ typedef I3MCCorePrimaryPtr;
+#pragma link C++ class roost::shared_ptr<I3MCCorePrimary>+;
 
 #pragma link C++ class I3MCPrimary+;
+#pragma link C++ typedef I3MCPrimaryPtr;
+#pragma link C++ class roost::shared_ptr<I3MCPrimary>+;
+
 #pragma link C++ class I3MCCascade+;
+#pragma link C++ typedef I3MCCascadePtr;
+#pragma link C++ class roost::shared_ptr<I3MCCascade>+;
 
 #pragma link C++ class I3ShowerCore+;
 #pragma link C++ typedef I3ShowerCorePtr;
@@ -139,8 +149,9 @@
 #pragma link C++ class I3InIceGeometry+;
 #pragma link C++ typedef MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3OMGeoPtr;
-#pragma link C++ class I3OMGeoPtr+;
+#pragma link C++ typedef I3InIceGeometryPtr;
+#pragma link C++ class roost::shared_ptr<I3InIceGeometry>+;
+#pragma link C++ class pair<OMKey,roost::shared_ptr<I3OMGeo> >+;
 
 // tpm: my addition
 #pragma link C++ class I3InIceCalibration+;
@@ -200,8 +211,10 @@
 #pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
 #pragma link C++ class MultiMapPolicy<string,I3ParticlePtr>::ThePolicy+;
 #pragma link C++ typedef I3ParticleMultiMapPtr;
+#pragma link C++ class roost::shared_ptr<I3ParticleMultiMap>+;
 
 #pragma link C++ typedef TObjectPtr;
+#pragma link C++ class TObjectPtr+;
 #pragma link C++ class I3Bag+;
 #pragma link C++ typedef MapPolicy<string,TObjectPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<string,TObjectPtr>::ThePolicy+;
@@ -213,6 +226,7 @@
 #pragma link C++ class MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy+;
 #pragma link C++ typedef I3OMResponseMapPtr;
 #pragma link C++ class roost::shared_ptr<I3OMResponseMap>+;
+#pragma link C++ class pair<OMKey,roost::shared_ptr<I3OMResponse> >+;
 
 #pragma link C++ class I3RecoHitSeriesDict+;
 #pragma link C++ typedef MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy;
@@ -257,6 +271,7 @@
 #pragma link C++ typedef VectorPolicy<I3StationHitPtr>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3StationHitPtr>::ThePolicy+;
 #pragma link C++ typedef I3ArrayHitPtr;
+#pragma link C++ class I3ArrayHitPtr+;
 
 #pragma link C++ class I3ArrayHitDict+;
 #pragma link C++ typedef MapPolicy<string, I3ArrayHitPtr>::ThePolicy;
@@ -405,7 +420,7 @@
 #pragma link C++ class roost::shared_ptr<I3MonitoringHeader>+;
 
 #pragma link C++ class I3NonComposite+;
-#pragma link C++ class I3NonCoreLocalized+;
+#pragma link C++ class I3NonLocalized+;
 #pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonEnergetic+;
 
@@ -417,9 +432,6 @@
 #pragma link C++ typedef I3IceTopParticlePtr;
 #pragma link C++ class roost::shared_ptr<I3IceTopParticle>+;
 
-#pragma link C++ class I3OMGeo+;
-#pragma link C++ typedef I3OMGeoPtr;
-#pragma link C++ class roost::shared_ptr<I3OMGeo>+;
 
 #pragma link C++ class I3MCTopShower+;
 #pragma link C++ typedef I3MCTopShowerPtr;
@@ -449,6 +461,12 @@
 #pragma link C++ typedef I3OMResponseSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3OMResponseSelection>+;
 
+#pragma link C++ class I3OMSelectionDict+;
+#pragma link C++ typedef MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy+;
+#pragma link C++ typedef I3OMSelectionDictPtr;
+#pragma link C++ class roost::shared_ptr<I3OMSelectionDict>+;
+
 #pragma link C++ class I3OddOMSelection+;
 #pragma link C++ typedef I3OddOMSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3OddOMSelection>+;
@@ -456,10 +474,6 @@
 #pragma link C++ class I3EvenOMSelection+;
 #pragma link C++ typedef I3EvenOMSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3EvenOMSelection>+;
-
-#pragma link C++ class I3BadOMSelection+;
-#pragma link C++ typedef I3BadOMSelectionPtr;
-#pragma link C++ class roost::shared_ptr<I3BadOMSelection>+;
 
 #pragma link C++ class I3GoodOMSelection+;
 #pragma link C++ typedef I3GoodOMSelectionPtr;
@@ -576,6 +590,7 @@
 
 #pragma link C++ class I3Filter+;
 #pragma link C++ typedef I3FilterPtr;
+#pragma link C++ class roost::shared_ptr<I3Filter>+;
 
 #pragma link C++ class I3AMANDAExtractor+;
 #pragma link C++ class I3IceCubeExtractor+;
@@ -587,13 +602,21 @@
 
 #pragma link C++ class station_iterator+;
 
+#pragma link C++ class std::pair<OMKey,roost::shared_ptr<I3OMGeo> >;
+#pragma link C++ class roost::shared_ptr<I3Filter>;
+#pragma link C++ class pair<OMKey,roost::shared_ptr<I3OMResponse> >;
+#pragma link C++ class roost::shared_ptr<I3ArrayHit>;
+#pragma link C++ class roost::shared_ptr<TObject>;
+
 #pragma link C++ class OMKey+;
 #pragma link C++ typedef OMKeyPtr;
 #pragma link C++ class roost::shared_ptr<OMKey>+;
 
 #pragma link C++ typedef StationKey;
 
-#pragma link C++ class UniqueID+;
+#pragma link C++ class I3OMGeo+;
+#pragma link C++ typedef I3OMGeoPtr;
+#pragma link C++ class roost::shared_ptr<I3OMGeo>+;
 
 #endif
 

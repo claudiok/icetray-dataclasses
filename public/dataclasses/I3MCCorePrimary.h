@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCCorePrimary.h,v 1.1 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3MCCorePrimary.h,v 1.1.2.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3MCCorePrimary.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author ehrlich
  * @author pretz
  */

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShowerImpl.h,v 1.1.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3TopShowerImpl.h,v 1.1.4.2 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3TopShowerImpl.h
- * @version $Revision: 1.1.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.1.4.2 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author blaufuss
  *
  */
@@ -57,7 +57,7 @@ class I3TopShowerImpl : public I3TopShower,
   /**
    * indicates whether or not the primary has a valid core position
    */
-  virtual Bool_t HasCorePosition() const {return CoreType::HasCorePosition();}
+  virtual Bool_t IsCoreLocalized() const {return CoreType::IsCoreLocalized();}
 
   /**
    * 

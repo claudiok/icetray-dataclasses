@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerDict.h,v 1.3.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3TriggerDict.h,v 1.3.4.2 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3TriggerDict.h
- * @version $Revision: 1.3.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.3.4.2 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -63,9 +63,6 @@ class I3TriggerDict : public TObject,
 
  private:
 
-  // copy and assignment are private
-  I3TriggerDict(const I3TriggerDict&);
-  const I3TriggerDict& operator=(const I3TriggerDict&);
 
   // ROOT Macro
   ClassDef(I3TriggerDict, 1);

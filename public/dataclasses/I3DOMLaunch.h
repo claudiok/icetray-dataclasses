@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.7 2004/12/15 23:38:06 dima Exp $
+ * $Id: I3DOMLaunch.h,v 1.7.2.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/12/15 23:38:06 $
+ * @version $Revision: 1.7.2.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author klein
  * @author blaufuss
  *
@@ -200,9 +200,6 @@ class I3DOMLaunch : public I3DigitalLaunch
    }
 
  private:
-  // copy and assignment private
-  I3DOMLaunch(const I3DOMLaunch&);
-  const I3DOMLaunch& operator=(const I3DOMLaunch&);
 
   // ROOT macro
   ClassDef(I3DOMLaunch,1);

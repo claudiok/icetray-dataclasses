@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RDMCLaunch.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3RDMCLaunch.h,v 1.2.2.2 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3RDMCLaunch.h
- * @version $Revision: 1.2.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.2.2.2 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author ehrlich
  */
 #ifndef I3RDMCLAUNCH_H
@@ -47,9 +47,6 @@ class I3RDMCLaunch : public I3DigitalLaunch
   vector<Float_t>& GetDigi() {return digi;}
 
   private:
-  // copy and assignment private
-  I3RDMCLaunch(const I3RDMCLaunch&);
-  const I3RDMCLaunch& operator=(const I3RDMCLaunch&);
 
   // ROOT macro
   ClassDef(I3RDMCLaunch,1);

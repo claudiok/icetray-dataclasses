@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OddOMSelection.h,v 1.4 2004/12/20 20:05:58 deyoung Exp $
+ *  $Id: I3OddOMSelection.h,v 1.4.2.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3OddOMSelection.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/12/20 20:05:58 $
+ * @version $Revision: 1.4.2.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author deyoung
  */
 
@@ -13,6 +13,12 @@
 #define I3ODDOMSELECTION_H_INCLUDED
 
 #include "I3OMResponseSelection.h"
+
+class I3OddOMSelection;
+/**
+ * Pointer definition for use with smart pointers.
+ */
+typedef PtrPolicy<I3OddOMSelection>::ThePolicy I3OddOMSelectionPtr;
 
 class I3OddOMSelection : public I3OMResponseSelection {
 
@@ -34,9 +40,14 @@ public:
     return kFALSE;
   };
 
-  virtual const I3OMResponseSelectionPtr GetCopy() {
-    I3OMResponseSelectionPtr theCopy(new I3OddOMSelection(*this));
-    return theCopy;
+  // Use the copy constructor to make the copy.
+  virtual I3OMResponseSelectionPtr GetCopy() 
+    {
+      return I3OMResponseSelectionPtr(new I3OddOMSelection(*this));
+    };
+
+  virtual void ToStream(ostream& o) const {
+    o << "[ I3OddOMSelection ]\n";
   };
 
 private:
@@ -55,10 +66,5 @@ private:
   
   ClassDef(I3OddOMSelection,1);
 };
-
-/**
- * Pointer definition for use with smart pointers.
- */
-typedef PtrPolicy<I3OddOMSelection>::ThePolicy I3OddOMSelectionPtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3StationMap.h,v 1.2.2.2 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3StationMap.h
- * @version $Revision: 1.2.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.2.2.2 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
@@ -38,6 +38,24 @@ class I3StationMap : public TObject, public MapPolicy<StationKey, I3StationGeoPt
    * virtual destructor
    */
   virtual ~I3StationMap () {}
+
+  /**
+   * Just for debugging
+   */
+  void Hello () {
+    log_info ("Hi, this is the station map.");
+  }
+
+  /**
+   * Go to the first tank
+   */
+  void GoFirstTank ();
+
+  /**
+   * Get the next tank
+   */
+  //I3TankGeo &GetNextTank ();
+  // commented out to remove compile-time warning
 
  private:
 

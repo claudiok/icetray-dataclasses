@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopDirection.h,v 1.5 2004/08/05 13:00:21 troy Exp $
+ * $Id: I3RecoResultTopDirection.h,v 1.5.4.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3RecoResultTopDirection.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/05 13:00:21 $
+ * @version $Revision: 1.5.4.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author Peter Niessen
  */
 
@@ -43,7 +43,7 @@ class I3RecoResultTopDirection : public I3RecoResult
     if(fShowerDirection)
       return (*fShowerDirection);
     I3DataExecution::Instance().Fatal("I3RecoResultTopDirection::ShowerDirection () const asked for a shower direction which doesn't exist");
-    //return(*(I3ShowerDirectionPtr)NULL);
+    return(*(I3ShowerDirectionPtr)NULL);
   }
 
   /**
@@ -54,7 +54,7 @@ class I3RecoResultTopDirection : public I3RecoResult
     if(fShowerDirection)
       return (*fShowerDirection);
     I3DataExecution::Instance().Fatal("I3RecoResultSingleTopDirection::ShowerDirection() asked for a track which doesn't exist");
-    //return(*(I3ShowerDirectionPtr)NULL);
+    return(*(I3ShowerDirectionPtr)NULL);
   }
 
   bool HasShowerDirection () const { return fShowerDirection; }

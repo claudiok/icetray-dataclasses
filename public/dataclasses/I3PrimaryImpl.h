@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.10.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3PrimaryImpl.h,v 1.10.4.2 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.10.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.10.4.2 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author pretz
  *
  */
@@ -21,16 +21,16 @@
 /**
  * @brief A class for modularizing how the I3Primary interface is implemented.
  *
- * All you need to do is specify the a DirectionalType, a CoreType, and an
+ * All you need to do is specify the a DirectionalType, a LocalizableType, and an
  * EnergeticType which satisfy the interface, and you've got a new I3Primary
  * implementation
  */
 template <class DirectionalType,
-          class CoreType,
+          class LocalizableType,
           class EnergeticType>
 class I3PrimaryImpl : public I3Primary,
                       public DirectionalType,
-                      public CoreType,
+                      public LocalizableType,
                       public EnergeticType
 {
  public:
@@ -57,7 +57,12 @@ class I3PrimaryImpl : public I3Primary,
   /**
    * indicates whether or not the primary has a valid core position
    */
-  virtual Bool_t HasCorePosition() const {return CoreType::HasCorePosition();}
+  virtual Bool_t IsCoreLocalized() const {return LocalizableType::IsCoreLocalized();}
+
+  /**
+   * indicates whether or not the primary has a valid inice position
+   */
+  virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
 
   /**
    * indicates that this is not an in ice partcile
@@ -77,7 +82,7 @@ class I3PrimaryImpl : public I3Primary,
       I3Particle::CopyTo(destination);
       DirectionalType::CopyTo(destination);
       EnergeticType::CopyTo(destination);
-      CoreType::CopyTo(destination);
+      LocalizableType::CopyTo(destination);
     }
 
  private:

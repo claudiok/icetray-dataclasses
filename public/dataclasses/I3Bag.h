@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.20.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Bag.h,v 1.20.4.2 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.20.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.20.4.2 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -59,9 +59,6 @@ class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
     }
 
  private:
-  // copy and assignment are private
-  I3Bag(const I3Bag& rhs);
-  const I3Bag& operator=(const I3Bag& rhs);
 
   // ROOT macro
   ClassDef(I3Bag,1);

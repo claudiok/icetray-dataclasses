@@ -1,11 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.16.4.3 2005/01/26 16:49:31 troy Exp $
-
-    @file StoragePolicy.h
-    @version $Revision: 1.16.4.3 $
-    @date $Date: 2005/01/26 16:49:31 $
+    $Id: StoragePolicy.h,v 1.16.4.4 2005/02/04 06:11:43 troy Exp $
+    @version $Revision: 1.16.4.4 $
+    @date $Date: 2005/02/04 06:11:43 $
     @author Troy D. Straszheim
 */
 
@@ -34,7 +32,6 @@
  * in this one place, and the rest of the code is unaffected
  */
 
-#ifndef __CINT__
 #include <boost/serialization/serialization.hpp>
 #include <boost/shared_ptr.hpp>
 
@@ -49,28 +46,6 @@ struct PtrPolicy
 };
 
 using boost::dynamic_pointer_cast;
-
-#else // __CINT__
-#include <roost/shared_ptr.hpp>
-
-template <class Pointed>
-struct PtrPolicy
-{
-  /**
-   * roost smart pointers.  FIXME: need docs
-   */
-  typedef roost::shared_ptr<Pointed> ThePolicy;
-  //  typedef Pointed* ThePolicy;
-};
-
-using roost::dynamic_pointer_cast;
-
-namespace boost {
-  namespace serialization {
-    class access;
-  }
-}
-#endif
 
 template <class Stored>
 /**
@@ -123,4 +98,15 @@ struct MultiMapPolicy {
 
 };
 
-#endif //STORAGEPOLICY_H_INCLUDED
+/**clean
+ * @brief The pointer policy.  Should use typedefs of this rather than
+ * raw pointers.
+ *
+ * The existence of this PtrPolicy allows for typdefs of
+ * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
+ * Foo*.  What this does is allow the true implemntation of FooPtr to change
+ * in this one place, and the rest of the code is unaffected
+ */
+
+#endif
+

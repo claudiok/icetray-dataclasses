@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3FilterDict.h,v 1.3.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3FilterDict.h,v 1.3.4.2 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3FilterDict.h
- * @version $Revision: 1.3.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.3.4.2 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author blaufuss
  *
  */
@@ -60,9 +60,6 @@ class I3FilterDict : public TObject,
 
  private:
 
-  // copy and assignment are private
-  I3FilterDict(const I3FilterDict&);
-  const I3FilterDict& operator=(const I3FilterDict&);
   // ROOT Macro
   ClassDef(I3FilterDict, 1);
 };

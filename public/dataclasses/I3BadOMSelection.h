@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.5 2004/12/20 20:05:58 deyoung Exp $
+ *  $Id: I3BadOMSelection.h,v 1.5.2.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/12/20 20:05:58 $
+ * @version $Revision: 1.5.2.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author deyoung
  */
 
@@ -20,7 +20,8 @@ public:
   
   I3BadOMSelection() {};
 
-  I3BadOMSelection(VectorPolicy<OMKey>::ThePolicy list) : fBadOMs(list) {};
+  I3BadOMSelection(const VectorPolicy<OMKey>::ThePolicy list) 
+    : fBadOMs(list) {};
   
   virtual ~I3BadOMSelection() {};
  
@@ -56,10 +57,19 @@ public:
     return kTRUE;
   };
 
-  virtual const I3OMResponseSelectionPtr GetCopy() {
-    I3OMResponseSelectionPtr theCopy(new I3BadOMSelection(*this));
-    return theCopy;
+  virtual I3OMResponseSelectionPtr GetCopy() {
+    return I3OMResponseSelectionPtr(new I3BadOMSelection(*this));
   };
+
+  virtual void ToStream(ostream& o) const {
+    o << "[ I3BadOMSelection: \n";
+    o << "  Bad OMs: \n";
+    VectorPolicy<OMKey>::ThePolicy::const_iterator iter;
+    for(iter = fBadOMs.begin(); iter != fBadOMs.end(); iter++) {
+      o << *iter << "\n";
+    }
+    o << "]\n";
+  }
 
 private:
 

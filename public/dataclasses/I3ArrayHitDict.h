@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHitDict.h,v 1.4.4.1 2005/01/26 03:59:37 troy Exp $
+    $Id: I3ArrayHitDict.h,v 1.4.4.2 2005/02/04 06:11:43 troy Exp $
     @file I3ArrayHitDict.h
-    @version $Revision: 1.4.4.1 $
+    @version $Revision: 1.4.4.2 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
     @author blaufuss
@@ -54,9 +54,6 @@ class I3ArrayHitDict : public TObject,
       return out.str();
     }
  private:
-  // copy and assignment are private
-  I3ArrayHitDict(const I3ArrayHitDict&); 
-  const I3ArrayHitDict& operator=(const I3ArrayHitDict&); 
 
   // ROOT macro
   ClassDef(I3ArrayHitDict,1);

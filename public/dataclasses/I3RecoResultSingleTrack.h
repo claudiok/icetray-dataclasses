@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.15 2004/08/31 14:08:58 pretz Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.15.4.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/08/31 14:08:58 $
+ * @version $Revision: 1.15.4.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -97,9 +97,6 @@ class I3RecoResultSingleTrack : public I3RecoResult
     }
   
   private:
-  // copy and assignment are private
-  I3RecoResultSingleTrack(const I3RecoResultSingleTrack& rhs);
-  const I3RecoResultSingleTrack& operator=(const I3RecoResultSingleTrack&);
 
   // ROOT macro
   ClassDef(I3RecoResultSingleTrack, 1);

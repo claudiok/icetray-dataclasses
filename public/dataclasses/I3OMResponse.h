@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.38.4.1 2005/01/26 03:59:37 troy Exp $
+    $Id: I3OMResponse.h,v 1.38.4.2 2005/02/04 06:11:43 troy Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.38.4.1 $
-    @date $Date: 2005/01/26 03:59:37 $
+    @version $Revision: 1.38.4.2 $
+    @date $Date: 2005/02/04 06:11:43 $
     @author ehrlich
     @author troy
     @author pretz
@@ -88,10 +88,7 @@ class I3OMResponse : public TObject
     }
 
   private:
-  // copy and assignment are private
-   I3OMResponse(const I3OMResponse&); 
-   const I3OMResponse& operator=(const I3OMResponse&); 
-
+ 
   // ROOT macro
   ClassDef(I3OMResponse,1);
 };

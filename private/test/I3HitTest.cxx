@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.8.2.1 2005/01/25 23:33:44 troy Exp $
+    $Id: I3HitTest.cxx,v 1.8.2.2 2005/02/04 06:11:43 troy Exp $
 
-    @version $Revision: 1.8.2.1 $
-    @date $Date: 2005/01/25 23:33:44 $
+    @version $Revision: 1.8.2.2 $
+    @date $Date: 2005/02/04 06:11:43 $
     @author Troy D. Straszheim
 
     @todo
@@ -187,9 +187,6 @@ namespace tut
     ensure (k==j);
   }
 
-  /**
-   * checks chains of operations
-   */
   template<> template<>
   void object::test<8>()
   {

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.7 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3CoreLocalized.h,v 1.7.2.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.7.2.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author pretz
  */
 #ifndef I3CORELOCALIZED_H
@@ -30,7 +30,12 @@ class I3CoreLocalized
   /**
    * indicates that the core position is known
    */
-  Bool_t HasCorePosition() const { return kTRUE;}
+  Bool_t IsCoreLocalized() const { return true;}
+
+  /**
+   * indicates that the inice position isn't known
+   */
+  Bool_t IsLocalized() const { return false;}
 
   /**
    * gives the position of the core

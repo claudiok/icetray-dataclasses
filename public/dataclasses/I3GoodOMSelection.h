@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.5 2004/12/20 20:05:58 deyoung Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.5.2.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/12/20 20:05:58 $
+ * @version $Revision: 1.5.2.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author deyoung
  */
 
@@ -14,78 +14,72 @@
 
 #include "I3OMResponseSelection.h"
 
+class I3GoodOMSelection;
+typedef PtrPolicy<I3GoodOMSelection>::ThePolicy I3GoodOMSelectionPtr;
+
 class I3GoodOMSelection : public I3OMResponseSelection {
 
 public:
   
   I3GoodOMSelection() {};
-
-  I3GoodOMSelection(VectorPolicy<OMKey>::ThePolicy list) : fGoodOMs(list) {};
+  
+  I3GoodOMSelection(const VectorPolicy<OMKey>::ThePolicy &list) 
+    : goodOMs(list) {};
   
   virtual ~I3GoodOMSelection() {};
  
-  VectorPolicy<OMKey>::ThePolicy GetGoodOMs() const {
-    return fGoodOMs;
-  };
-
-  virtual void SetGoodOMs(const VectorPolicy<OMKey>::ThePolicy& list) {
-    if (fGoodOMs.Size() > 0) {
-      log_warn("Overwriting list of good OMs.");
-      fGoodOMs.Clear();
-    }
-    for (unsigned i = 0; i < list.Size(); ++i) {
-      fGoodOMs.Add(list[i]);
-    }
-  };
-
-  virtual void AddGoodOM(const OMKey& key) {
-    fGoodOMs.Add(key);
-  };
-
   /**
    * Virtual function for deciding whether a given <OMKey, OMResponse>
    * pair is selected.  Returns true if the OM key is in the list of
    * good OMs, false otherwise.
    */
-  virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) {
-    for (unsigned i = 0; i < fGoodOMs.size(); i++) {      
-      if (element.first == fGoodOMs[i]) {
-	return kTRUE;
-      }
+  virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) 
+    {
+      if (find(goodOMs.begin(), goodOMs.end(), element.first) != goodOMs.end())
+	return true;
+      else
+	return false;
+    };
+  
+  VectorPolicy<OMKey>::ThePolicy GetGoodOMs() const {
+    return goodOMs;
+  };
+  
+  virtual void SetGoodOMs(const VectorPolicy<OMKey>::ThePolicy& good_list) {
+    if (goodOMs.Size() > 0) {
+      log_warn("Overwriting list of good OMs.");
+      goodOMs.Clear();
     }
-    return kFALSE;
-  };
+    goodOMs = good_list;
+  }
+  
+  virtual void AddGoodOM(OMKey key) {
+    goodOMs.Add(key);
+  }
 
-  // Relies on the copy constructor to make an independent copy of the
-  // current (derived class) selection, and return it via a pointer to base.
-  virtual const I3OMResponseSelectionPtr GetCopy() {
-    I3OMResponseSelectionPtr theCopy(new I3GoodOMSelection(*this));
-    return theCopy;
-  };
+  virtual I3OMResponseSelectionPtr GetCopy() 
+    {
+      return I3OMResponseSelectionPtr(new I3GoodOMSelection(*this));
+    }
+
+  virtual void ToStream(ostream& o) const {
+    o << "[ I3GoodOMSelection: \n";
+    o << "  Good OMs: \n";
+    VectorPolicy<OMKey>::ThePolicy::const_iterator iter;
+    for(iter = goodOMs.begin(); iter != goodOMs.end(); iter++) {
+      o << *iter << "\n";
+    }
+    o << "]\n";
+  }
+
+  // default-generated assignment and copy-constructor explicitly allowed
 
 private:
 
-  /**
-   * assignment operator is a member-wise assignment
-   */
-  const I3GoodOMSelection& operator=(const I3GoodOMSelection& rhs) { 
-    fGoodOMs = rhs.GetGoodOMs();
-    return *this;
-  }
-
-  /**
-   * copy constructor just uses assignment operator
-   */
-  I3GoodOMSelection(const I3GoodOMSelection& rhs) { *this = rhs; } 
+  VectorPolicy<OMKey>::ThePolicy goodOMs;
   
-  VectorPolicy<OMKey>::ThePolicy fGoodOMs;
-
   ClassDef(I3GoodOMSelection,1);
 };
 
-/**
- * Pointer definition for use with smart pointers.
- */
-typedef PtrPolicy<I3GoodOMSelection>::ThePolicy I3GoodOMSelectionPtr;
 
 #endif

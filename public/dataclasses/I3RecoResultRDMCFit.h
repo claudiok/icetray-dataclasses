@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.11 2004/11/18 21:55:49 ehrlich Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.11.2.1 2005/02/04 06:11:43 troy Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/11/18 21:55:49 $
+ * @version $Revision: 1.11.2.1 $
+ * @date $Date: 2005/02/04 06:11:43 $
  * @author pretz
  */
 
@@ -102,9 +102,6 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
     }
 
  private:
-  // copy and assignment are private
-  I3RecoResultRDMCFit(const I3RecoResultRDMCFit& rhs);
-  const I3RecoResultRDMCFit& operator=(const I3RecoResultRDMCFit&);
 
   // ROOT macro
   ClassDef(I3RecoResultRDMCFit,1);
