@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.10 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.11 2004/08/02 15:29:52 blaufuss Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/08/02 15:29:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -72,38 +72,38 @@ class I3DataHeader : public TObject
   /**
    * @return the modified Julian day of the data event
    */
-  ULong_t JulianDay() const { return fMjd; } 
+  ULong_t GetJulianDay() const { return fMjd; } 
 
   /**
    * @param day the new modified Julian day of the event
    */
-  void JulianDay(ULong_t day) { fMjd = day; }
+  void SetJulianDay(ULong_t day) { fMjd = day; }
 
   /**
    * @return the number of seconds after the julian day of the data event
    */
-  ULong_t Sec() const { return fSec; }
+  ULong_t GetSec() const { return fSec; }
 
   /**
    * @param sec the new number of seconds after the julian day of the 
    * data event
    */
-  void Sec(ULong_t sec) { fSec = sec; }
+  void SetSec(ULong_t sec) { fSec = sec; }
 
   /**
    * @return the nanosecond part of the data event
    */
-  ULong_t NanoSec() { return fNanoSec; }
+  ULong_t GetNanoSec() { return fNanoSec; }
 
   /**
    * @param nsec the new nanosecond part of the data event
    */
-  void NanoSec(ULong_t nsec) { fNanoSec = nsec; }
+  void SetNanoSec(ULong_t nsec) { fNanoSec = nsec; }
 
   /**
    * The name of the stream on which the data occurs
    */
-  virtual const std::string DataStream()=0;
+  virtual const std::string GetDataStream()=0;
 
  private:
   // ROOT Macro

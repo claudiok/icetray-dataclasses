@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultLikelihood.h,v 1.6 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3RecoResultLikelihood.h,v 1.7 2004/08/02 15:29:52 blaufuss Exp $
  *
  * @file I3RecoResultLikelihood.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/08/02 15:29:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -41,13 +41,13 @@ class I3RecoResultLikelihood : public I3RecoResultSingleTrack
    * @return the log likelihood of this solution 
    * @note this should be a negative number.
    */
-  Double_t LogLikelihood() const { return fLogLikelihood; }
+  Double_t GetLogLikelihood() const { return fLogLikelihood; }
 
   /**
    * @param likelihood the new log likelihood for the solution
    * @note this should be a negative number
    */
-  void LogLikelihood(Double_t likelihood) { 
+  void SetLogLikelihood(Double_t likelihood) { 
     if(likelihood > 0)
       I3DataExecution::Instance().GetLogger().Warn("I3RecoResultLikelihood::LogLikelihood setting log likelihood to non-physical ('positive') number");
     fLogLikelihood = likelihood; 

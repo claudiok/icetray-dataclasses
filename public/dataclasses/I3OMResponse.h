@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.35 2004/08/01 00:41:01 pretz Exp $
+    $Id: I3OMResponse.h,v 1.36 2004/08/02 15:29:52 blaufuss Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.35 $
-    @date $Date: 2004/08/01 00:41:01 $
+    @version $Revision: 1.36 $
+    @date $Date: 2004/08/02 15:29:52 $
     @author ehrlich
     @author troy
     @author pretz
@@ -61,7 +61,7 @@ class I3OMResponse : public TObject
   /**
    * @return the reco hit series data as a const object
    */
-  const I3RecoHitSeriesDict& GetRecoHitVectDict() const 
+  const I3RecoHitSeriesDict& GetRecoHitSeriesDict() const 
     {
       return fRecoHitVectDict;
     }
@@ -69,7 +69,7 @@ class I3OMResponse : public TObject
   /**
    * @return the reco hit series data as a non-const object
    */
-  I3RecoHitSeriesDict& GetRecoHitVectDict() {return fRecoHitVectDict;}
+  I3RecoHitSeriesDict& GetRecoHitSeriesDict() {return fRecoHitVectDict;}
 
   /**
    * @todo finish implementing this method

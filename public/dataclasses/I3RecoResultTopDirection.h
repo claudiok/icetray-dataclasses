@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopDirection.h,v 1.3 2004/07/13 18:48:04 niessen Exp $
+ * $Id: I3RecoResultTopDirection.h,v 1.4 2004/08/02 15:29:52 blaufuss Exp $
  *
  * @file I3RecoResultTopDirection.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/13 18:48:04 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/02 15:29:52 $
  * @author Peter Niessen
  */
 
@@ -41,7 +41,7 @@ class I3RecoResultTopDirection : public I3RecoResult
   /**
    * Retrieves the track in this reco result as a constant object
    */
-  const I3ShowerDirection& ShowerDirection () const 
+  const I3ShowerDirection& GetShowerDirection () const 
   {
     if(fShowerDirection)
       return (*fShowerDirection);
@@ -52,7 +52,7 @@ class I3RecoResultTopDirection : public I3RecoResult
   /**
    * Retrieves the track of this solution as a non-const object
    */
-  I3ShowerDirection& ShowerDirection ()
+  I3ShowerDirection& GetShowerDirection ()
   {
     if(fShowerDirection)
       return (*fShowerDirection);

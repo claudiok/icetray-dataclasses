@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.25 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.26 2004/08/02 15:29:52 blaufuss Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.25 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.26 $
+ * @date $Date: 2004/08/02 15:29:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -154,7 +154,7 @@ class I3OMGeo : public TObject
    * sets the photocathode area for this tube
    * @param area the new area for the photocathode
    */
-  void Area(Double_t area){fArea = area;}
+  void SetArea(Double_t area){fArea = area;}
 
   /**
    * @todo finish with all the data

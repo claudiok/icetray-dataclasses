@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTrack.h,v 1.10 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3MCTrack.h,v 1.11 2004/08/02 15:29:52 blaufuss Exp $
 
     @file I3MCTrack.h
-    @version $Revision: 1.10 $
-    @date $Date: 2004/07/19 16:46:01 $
+    @version $Revision: 1.11 $
+    @date $Date: 2004/08/02 15:29:52 $
     @author deyoung
 */
 
@@ -43,12 +43,12 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   /**
    * gives the weight of the track
    */
-  Double_t Weight() const { return fWeight; }
+  Double_t GetWeight() const { return fWeight; }
 
   /**
    * sets the weight of the track
    */
-  void  Weight(Double_t weight_) { fWeight = weight_; }
+  void  SetWeight(Double_t weight_) { fWeight = weight_; }
 
  private:
   //ROOT macro

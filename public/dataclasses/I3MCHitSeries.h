@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.19 2004/07/31 22:31:10 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.20 2004/08/02 15:29:52 blaufuss Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/07/31 22:31:10 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/08/02 15:29:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -40,12 +40,12 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
   /**
    * @return the weight associated with this series
    */
-  Double_t Weight() { return fWeight; }
+  Double_t GetWeight() { return fWeight; }
 
   /**
    * @param weight the new weight for this series
    */
-  void Weight(Double_t weight) { fWeight = weight; }
+  void SetWeight(Double_t weight) { fWeight = weight; }
 
   private:
 /*   // copy and assignment are private */
