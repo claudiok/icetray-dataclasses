@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Filter.h,v 1.2 2004/07/30 21:01:29 blaufuss Exp $
+ * $Id: I3Filter.h,v 1.3 2004/07/30 21:44:19 blaufuss Exp $
  *
  * @file I3Filter.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/30 21:01:29 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/30 21:44:19 $
  * @author blaufuss
  */
 
@@ -60,7 +60,7 @@ public:
     /**
      * @return whether this filter condition was met
      */
-    Bool_t IsPassFilter() const {return fPassFilter;}
+    Bool_t HasPassFilter() const {return fPassFilter;}
     
     /**
      * @param passed whether or not this filter condition was met
