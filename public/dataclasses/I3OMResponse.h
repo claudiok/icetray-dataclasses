@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.17 2004/03/03 15:37:01 troy Exp $
+    $Id: I3OMResponse.h,v 1.18 2004/03/09 21:57:29 pretz Exp $
 
-    @version $Revision: 1.17 $
-    @date $Date: 2004/03/03 15:37:01 $
+    @version $Revision: 1.18 $
+    @date $Date: 2004/03/09 21:57:29 $
     @author
 
     @todo
@@ -26,14 +26,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.17 2004/03/03 15:37:01 troy Exp $
+ * $Id: I3OMResponse.h,v 1.18 2004/03/09 21:57:29 pretz Exp $
  *
  * The container for all the OMResponse-related data in the event
  * Has the monte-carlo truth, the hardware response, and the reconstructed
  * hit series'.    
  *
- * @version $Revision: 1.17 $
- * @date $Date: 2004/03/03 15:37:01 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/03/09 21:57:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -122,8 +122,8 @@ class I3OMResponse : public TObject
 
   private:
   // copy and assignment are private
-/*   I3OMResponse(const I3OMResponse&); */
-/*   const I3OMResponse& operator=(const I3OMResponse&); */
+   I3OMResponse(const I3OMResponse&); 
+   const I3OMResponse& operator=(const I3OMResponse&); 
 
   // ROOT macro
   ClassDef(I3OMResponse,1);

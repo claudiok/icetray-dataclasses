@@ -4,6 +4,7 @@
 #include <TObject.h>
 #include <TObjArray.h>
 #include "I3Track.h"
+#include "StoragePolicy.h"
 
 class I3RecoTrack : public I3Track
 {
@@ -20,4 +21,6 @@ class I3RecoTrack : public I3Track
 
   ClassDef(I3RecoTrack, 1);
 };
+
+typedef PtrPolicy<I3RecoTrack>::ThePolicy I3RecoTrackPtr;
 #endif

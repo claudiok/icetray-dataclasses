@@ -238,6 +238,7 @@
 #pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
 #pragma link C++ class I3RecoTrack+;
+#pragma link C++ typedef I3RecoTrackPtr;
 #pragma link C++ class I3RecoTrackComposite+;
 #pragma link C++ class I3TankGeo+;
 #pragma link C++ class I3TankMaterial+;

@@ -4,10 +4,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.14 2004/02/25 20:57:14 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.15 2004/03/09 21:57:29 pretz Exp $
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/02/25 20:57:14 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/03/09 21:57:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,7 +19,7 @@
 #include "I3RecoHit.h"
 #include "StoragePolicy.h"
 
-class I3RecoHitSeries : public VectorPolicy<I3RecoHit>::ThePolicy
+class I3RecoHitSeries : public VectorPolicy<I3RecoHitPtr>::ThePolicy
 {
   float fConfidence;
  public:
