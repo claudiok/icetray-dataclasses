@@ -7,11 +7,13 @@
    This guide is primarily intended for IceCube software developers who want
    to understand the layout and mechanics of these classes.  To this end there
    are several examples and tutorials each using different aspects of the 
-   classes.  
+   classes.  The decision was made to go ahead and release the dataclasses code
+   and to fill in the examples later 
 
+<!-- Not needed, since we will generate it along with this page
    You may also find the automatically generated 
    <a href="../../doxygen-dataclasses/html/hierarchy.html>Doxygen
-   documentation</a> useful. 
+   documentation</a> useful. -->
    
    Thanks for looking!
 
@@ -59,6 +61,11 @@
    @li <code>reco</code>: A simple implementation of the Dipole fit in 
    this system.
 
+   There are several recent changes to the dataclasses that haven't been 
+   ported to these modules.  The decision was to go ahead and release the
+   dataclasses, and then to focus on making code to show their use.
+
+<!--
    To have a walk through and play with things a bit, go through the
    contents below.  First you will have to set up the
    IceTray framework, by downloading and building the various components.
@@ -66,6 +73,7 @@
    applications - of common tasks and how they are done with the dataclasses.
    The last documents explain the thinking behind the design and mechanics
    of the code.
+-->
 
 <!--   @section contents Contents
 
@@ -83,7 +91,10 @@
    @li @ref dataclasses-setup
 
    @section examples Examples
-   Here are a few tutorial examples.  The order is not really important here 
+
+   There is code for several tutorial examples of the dataclasses code.  The code has yet to be updated to the current version of the dataclasses, but will be very soon.  
+
+<!--   Here are a few tutorial examples.  The order is not really important here 
    since each example contains a list of the prerequisites which must be met
    before it can be used.
 
@@ -98,7 +109,7 @@
    @li @ref reconstruction
 
    @li @ref dataclass-and-root
-
+-->
    @section overview Overview of the Data Classes
    A lot of thought has gone into the design and implementation of these 
    classes.  These sections attempt to explain the decisions that were made and why they 
