@@ -7,5 +7,5 @@ ROOT_EXCLUDE_NAMES :=
 ROOT_NON_CLASSES := 
 ROOT_TEMPLATES := 
 USES_PROJECTS := icetray 
-USES_TOOLS := root log4cpp
+USES_TOOLS := root log4cxx
 #HEADERONLY_TOOLS = roost

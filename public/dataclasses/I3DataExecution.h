@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataExecution.h,v 1.7 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3DataExecution.h,v 1.8 2004/08/19 16:10:39 pretz Exp $
  *
  * @file I3DataExecution.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/08/19 16:10:39 $
  * @author pretz
  */
 #ifndef I3DATAEXECUTION_H
 #define I3DATAEXECUTION_H
 
 #include "Rtypes.h"
-#include "services/I3Logger.h"
+#include "icetray/I3TrayHeaders.h"
 
 class I3Logger;
 /**
@@ -44,11 +44,6 @@ class I3DataExecution{
    * @param message a message which indicates why the job is being aborted.
    */
   void Fatal(const Char_t* message);
-
-  /**
-   * gets the logger for the data structure
-   */
-   I3Logger& GetLogger();
 
   /**
    * destructor  I'd like to make it private, but gcc complains.

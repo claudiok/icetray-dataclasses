@@ -1,7 +1,6 @@
 #include "dataclasses/I3DataExecution.h"
 
-#include "services/I3Logger.h"
-#include "impl-icetray/I3TrayLogging.h"
+#include "services/I3Logging.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -19,22 +18,14 @@ I3DataExecution& I3DataExecution::Instance(){
 }
 
 void I3DataExecution::Fatal(const Char_t* message){
-  cout<<"This message came from the data and caused a fatal error:\n '"
-      <<message
-      <<"'"
-      <<endl;
+  log_info("This message came from the data and caused a fatal error:\"%s\"\n",
+	message);
   // to be fancied up later and linked into icetray's 'Fatal' call
   exit(1);
 }
 
 I3DataExecution::I3DataExecution(){
 
-}
-
-I3Logger& I3DataExecution::GetLogger(){
-// to be re-implemented later with the data having its own logger
-// rather than just stealing icetray's
-  return I3TrayLogging::GetLogger();
 }
 
 I3DataExecution::~I3DataExecution(){
