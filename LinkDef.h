@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.91 2004/07/16 19:23:04 pretz Exp $
-// $Revision: 1.91 $
-// $Date: 2004/07/16 19:23:04 $
+// $Id: LinkDef.h,v 1.92 2004/07/16 19:51:59 pretz Exp $
+// $Revision: 1.92 $
+// $Date: 2004/07/16 19:51:59 $
 //
 
 #ifdef __CINT__
@@ -118,12 +118,12 @@
 #pragma link C++ function operator!=(const I3MCHitSeries::iterator&, const I3MCHitSeries::iterator&);
 #pragma link C++ typedef I3MCHitSeriesPtr;
 
-#pragma link C++ class I3RecoHitVect+;
+#pragma link C++ class I3RecoHitSeries+;
 #pragma link C++ typedef VectorPolicy<I3RecoHit>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoHit>::ThePolicy+;
-#pragma link C++ function operator!=(const I3RecoHitVect::iterator&, const I3RecoHitVect::iterator&);
-#pragma link C++ typedef I3RecoHitVectPtr;
-//#pragma link C++ class I3RecoHitVectPtr+;
+#pragma link C++ function operator!=(const I3RecoHitSeries::iterator&, const I3RecoHitSeries::iterator&);
+#pragma link C++ typedef I3RecoHitSeriesPtr;
+//#pragma link C++ class I3RecoHitSeriesPtr+;
 
 #pragma link C++ class I3RecoResultAltTracks+;
 #pragma link C++ typedef MapPolicy<string,I3ParticlePtr>::ThePolicy;
@@ -162,11 +162,11 @@
 #pragma link C++ function operator!=(const I3OMResponseMap::iterator&, const I3OMResponseMap::iterator&);
 #pragma link C++ typedef I3OMResponseMapPtr;
 
-#pragma link C++ class I3RecoHitVectDict+;
-#pragma link C++ typedef MapPolicy<string,I3RecoHitVectPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<string,I3RecoHitVectPtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3RecoHitVectDict::iterator&, const I3RecoHitVectDict::iterator&);
-#pragma link C++ typedef I3RecoHitVectDictPtr;
+#pragma link C++ class I3RecoHitSeriesDict+;
+#pragma link C++ typedef MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3RecoHitSeriesDict::iterator&, const I3RecoHitSeriesDict::iterator&);
+#pragma link C++ typedef I3RecoHitSeriesDictPtr;
 
 
 // new IceTop stuff, PN

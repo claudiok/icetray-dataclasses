@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.13 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3DataReadout.h,v 1.14 2004/07/16 19:51:59 pretz Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/07/16 19:51:59 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -42,7 +42,7 @@ using namespace std;
  * that added the readout to the event.
  *
  * Reconstructed hit information -- a series of photoelectron
- * production times -- is stored as a I3RecoHitVect, not a 
+ * production times -- is stored as a I3RecoHitSeries, not a 
  * @c DataReadout.
  */
 class I3DataReadout : public TObject

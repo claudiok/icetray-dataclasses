@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.32 2004/07/12 15:30:49 pretz Exp $
+    $Id: I3OMResponse.h,v 1.33 2004/07/16 19:51:59 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.32 $
-    @date $Date: 2004/07/12 15:30:49 $
+    @version $Revision: 1.33 $
+    @date $Date: 2004/07/16 19:51:59 $
     @author ehrlich
     @author troy
     @author pretz
@@ -19,7 +19,7 @@
 #include "I3DataExecution.h"
 #include "I3OMGeo.h"
 #include "I3DataReadoutDict.h"
-#include "I3RecoHitVectDict.h"
+#include "I3RecoHitSeriesDict.h"
 
 /**
  * @brief The container for all the OMResponse-related data in the event
@@ -37,7 +37,7 @@ class I3OMResponse : public TObject
   // let us all hate root together for a moment
 
   I3DataReadoutDict   fDataReadoutDict; //||
-  I3RecoHitVectDict fRecoHitVectDict; //||
+  I3RecoHitSeriesDict fRecoHitVectDict; //||
 
  public:
   /**
@@ -73,7 +73,7 @@ class I3OMResponse : public TObject
   /**
    * @return the reco hit series data as a const object
    */
-  const I3RecoHitVectDict& GetRecoHitVectDict() const 
+  const I3RecoHitSeriesDict& GetRecoHitVectDict() const 
     {
       return fRecoHitVectDict;
     }
@@ -81,7 +81,7 @@ class I3OMResponse : public TObject
   /**
    * @return the reco hit series data as a non-const object
    */
-  I3RecoHitVectDict& GetRecoHitVectDict() {return fRecoHitVectDict;}
+  I3RecoHitSeriesDict& GetRecoHitVectDict() {return fRecoHitVectDict;}
 
   /**
    * @todo finish implementing this method
