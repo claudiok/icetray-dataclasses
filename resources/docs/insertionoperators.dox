@@ -15,24 +15,24 @@
     @endcode
 
     and I see @code i is 4 @endcode what's happening there?  And why
-    is that better than just @code printf("i is %d", i); @endcode, anyway?
+    is that better than just @code printf("i is %d", i); @endcode anyway?
 
     Well, I think the @c printf syntax has its advantages, and in
     fact there is a library called @c boost::format which allows you
-    to do this in C++.  "Hang on", you say, "but you @em can use @c
-    printf in C++!".
+    to do this in C++.  "Hang on," you say, "but you @em can use @c
+    printf in C++!"
 
     Well, you're right, but @c printf can't handle user-defined types.
     It is also easy to crash: as we all know, if you mismatch your
-    arguments and your format string, that is you specify @c %s and
-    you accidentally put an @c int in its' position, like this: @code
+    arguments and your format string -- for example, you specify @c @%s and
+    you accidentally put an @c int in its position, like this: @code
     int i; char *s; //assume this points to something reasonable
     printf("i is %s, and s is %s", i, s); @endcode
 
-    (notice that @c i is paired with @c @%s), you're going to get a
+    (notice that @c i is paired with @c @%s) -- you're going to get a
     bunch of garbage on the screen at least, and probably a core dump.
 
-    As for those user-defined types.  @c printf can't do this:
+    As for those user-defined types, @c printf can't do this:
     
     @code
     class Particle {
@@ -47,7 +47,7 @@
     @endcode
 
     Obviously @c @%??? isn't a valid @c printf format string.  The point
-    is that none exists for @c Particle, and straight C does not
+    is that no valid format string exists for @c Particle, and straight C does not
     provide a way for you to supply one.
 
     But C++ does.  Well, it doesn't for @c printf, but you do have a
@@ -57,14 +57,14 @@
     your audio device, if you like to be startled.
 
     So with the @c Particle class above, how can I make it possible
-    to do something like 
+    to do something like:
     @code
     Particle my_particle;
     cout << "the particle is: " << my_particle << endl;
-    @endcode.
+    @endcode
     
-    The trick is the @c <<.  That's @c operator<<(), called the @e
-    insertion operator, because it "inserts" the object into the
+    The trick is the @c << .  That's @c operator<<(), called the 
+    @e insertion @e operator, because it "inserts" the object into the
     output stream, which in this case is @c cout.  The statement above
     will call a function with the following prototype:
 
@@ -78,7 +78,8 @@
     statement wouldn't compile.  More details on that later.  The form
     you want is the one above.
 
-    Here's a full implementation:
+    Here's a full implementation of the insertion operator for the
+    Particle class:
 
     @code
     ostream& operator<<(ostream& o, const Particle& p) 
@@ -141,14 +142,14 @@ My event looks like this:
 
     This insertion operator arguably should be a convenience function
     that you should always provide your clients.  If you wrote a
-    RationalNumber class and didn't provide an operator*(), you'd be
-    rather negligent.
+    RationalNumber class and didn't provide an operator*() to multiply 
+    two, RationalNumber's together, you'd be rather negligent.
     
     This technique is also quite handy when it comes to printing
     containers.  You could roll your own @c operator<<() for a @c
-    vector of @c Event s, for instance.  When writing and debugging
+    vector of @c Event 's, for instance.  When writing and debugging
     functors (see @ref functors) and otherwise traversing data
-    structures that work with STL algorithms (see @ref mapiteration)
+    structures that work with STL algorithms (see @ref mapiteration),
     being able to easily dump what's going on to @c cout or a file can
     really come in handy.
 

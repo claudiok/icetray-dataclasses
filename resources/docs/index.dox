@@ -1,22 +1,26 @@
 /**
- @mainpage Dataclasses Documentation
+   @mainpage Dataclasses Documentation
 
- @author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
+   @author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
 
- @section Description
- This is the automatic documentation of the @c dataclasses project.  This 
- project provides classes which serve to store data for passing between
- IceTray modules.  
-
-  @section an-overview Overview of the Data Classes
-
-  For an overview of the thinking that has gone into the design of the 
-@c dataclass library, see @ref dataclass-overview
-
-@section dataclassappmetaproject The DATACLASS-APP Metaproject
+   @section Description
+   This is the automatic documentation of the @c dataclasses project.  This 
+   project provides C++ classes which are used to represent IceCube data
+   for passing between IceTray modules and for writing to disk.
+   
+   @section an-overview Overview of the Data Classes
+   
+   For an overview of the design of the @c dataclasses library, see
+   @ref dataclass-overview.  For information on specific classes,
+   click the tabs at the top of the page.
+   
+   @section dataclassappmetaproject The DATACLASS-APP Metaproject
    
    The @c dataclasses project is an important part of the DATACLASS-APP 
-metaproject.  If you want more complete information on the @c dataclasses,
-and for examples of their use, you probably want the DATACLASS-APP metaproject
+   metaproject, which contains the core software projects needed to
+   get started using the IceCube offline software.  If you want to
+   actually use the @c dataclasses in IceCube, you almost certainly
+   need the entire DATACLASS-APP metaproject.  See 
+   @ref dataclasses-setup for more information.
 
 */

@@ -12,7 +12,7 @@ and when mustn't one?  As discussed, the question can also be phrased
 "who owns this object?"  In the overwhelming majority of cases, one
 wants ownership of the object to be shared amongst all who have
 pointers to it.  When pointers to the object no longer exist, we want
-that object to be returned to free store, or @c delete -d).
+that object to be returned to free store, or @c delete 'd).
 
 A fairly simple paradigm shift accomplishes this goal.  One gives
 ownership of the object to its set of "client" pointers, taking
@@ -27,7 +27,7 @@ class that imitates a pointer, can delete the object.
 A smart pointer is a template class that takes the type of the pointee
 as an argument.  The name of our shared pointer class is @c
 shared_ptr<>, and it lives in namespace @c roost.  Therefore the
-preferred way to create a pointer to a @c Hit is
+way to create a pointer to a @c Hit is
 @code
 #include <roost/shared_ptr.hpp>
 using namespace roost;
@@ -35,17 +35,18 @@ using namespace roost;
 shared_ptr<Hit> hitptr;
 @endcode
 
-For the rest of this document we will assume you have @c #include d
+For the rest of this document we will assume you have @c #include 'd
 the header file and are @c using @c namespace @c roost;
 
 @section mixing The danger of mixing bald and shared pointers
 
-There is one situation where you must treat @c shared_ptr s
+There is one situation where you must treat @c shared_ptr 's
 differently than bald pointers, and this one comes up fairly often.
 It is at initialization time.  Otherwise there are no major
 differences.
 
-Consider the following code fragment.  It won't compile, this is just
+Consider the following code fragment.  It won't compile (because the shared
+pointer is designed not to let you make this mistake), this is just
 for illustration:
 @code
 void normalize_hit(Hit *incoming_hit) 
@@ -67,15 +68,15 @@ the functon @c normalize_hit, which creates a smart pointer to the
 Hit, and then presumably does something physics-y to it.  When @c
 local_hitptr is initialized with the parameter @c incoming_hit, it
 starts to keep track of how many people are pointing to @c
-incoming_hit.  It of course starts with 1.  When the function @c
+incoming_hit.  It of course starts with 1 (itself).  When the function @c
 normalize_hit returns, @c local_hitptr goes out of scope.  It checks to
 see how many people know about what it points to, and since that
-number is one, it knows that only itself knows about that @c Hit, and
+number is one, it knows that only it knows about that @c Hit, and
 instead of leaking the memory, it @c deletes the @c Hit.
 
-Now proceed to the next function call @c do_something_else_to_hit().
+Now proceed to the next function call: @c do_something_else_to_hit().
 At this point the @c Hit pointed to by @c outer_hitptr has been @c
-delete -d.  This is obviously not what we want.  @c
+delete 'd.  This is obviously not what we want.  @c
 do_something_else_to_hit is called with an invalid pointer, and if we
 do not have access to the source code of @c normalize_hit(), we will
 not expect it to be.  The call might even succeed, if the operating
@@ -116,7 +117,7 @@ initialized, the count goes to 2, and this time when @c inner_hitptr's
 destructor is called, it knows that others still have pointers to that
 @c Hit.  Therefore it does not @c delete it and the call to @c
 do_something_else_to_hit() proceeds as desired.  
-In such practice, (pass the return of @c new to the constructor),
+In this approach (passing the return of @c new to the constructor),
 there are never any extra bald pointers floating around, and such
 situations don't come up.
 
@@ -145,7 +146,7 @@ You can also initialize @c outer_hitptr like this:
 shared_ptr<Hit> outer_hitptr(new Hit);  // also good
 @endcode
 
-Which appears to now be considered an older way to do it, and the
+...which appears to now be considered an older way to do it, and the
 syntax will be less familiar to those accustomed to working purely
 with bald pointers.  This feature is in roost but not yet in the boost
 release.  The current consensus appears to be include 
@@ -168,7 +169,8 @@ void normalize_hit(HitPtr incoming_hit)
   // do something to the hit
 }
 
-HitPtr outer_hitptr = shared_pointer_cast<Hit>(new Hit); 
+HitPtr outer_hitptr = shared_pointer_cast<Hit>(new Hit);
+// also fine:   HitPtr outer_hitptr(new Hit); 
 
 normalize_hit(outer_hitptr);
 do_something_else_to_hit(outer_hitptr);
@@ -185,7 +187,7 @@ HitPtr p = NULL; // that Hit above gets deleted, and p is NULL
 @em Assigning @c NULL to @c p in order to clear it out is just like
 bald pointers, except you don't check to see if there is something
 there first and @c delete it if there is.  The pointer takes care of
-that.  Just forget about @c delete ing.
+that.  Just forget about @c delete 'ing.
 
 Comparisons to @c NULL are still legal, but there's a better way
 which is recommended:
@@ -202,7 +204,7 @@ if (!p) // this is cleaner
 @endcode
 
 A smart pointer used in a boolean context, like inside the
-parenthesis of an @c if statement, will evaluate to @c false if it
+parenthesis of an @c if() statement, will evaluate to @c false if it
 points to @c NULL, and to @c true otherwise.
 
 Classes that have a @c bool @c HasSomething() type accessor function
@@ -272,7 +274,7 @@ public:
 
 First of all the @c NULL checking in the destructor should have never
 been there in the first place, because it is OK to @c delete @c NULL;
-That's in the C++ standard.  
+that's in the C++ standard.  
 
 @code 
 SomeClass 
@@ -397,8 +399,8 @@ determine if the source object is actually of the destination type.
 This requires that the object have @em some dynamic type, of course
 (e.g. a virtual function), but in this example, clearly the object
 should have virtual functions, since it is inherited from TObject.
-Given that all of our I3 classes have dynamic type, believe that all
-of our Icetray casts should be @c dynamic_cast<>.
+Given that all of our I3 classes have dynamic type, all
+of our IceTray casts should be @c dynamic_cast<>.
 
 The smart-pointer equivalent is the @c dynamic_pointer_cast<>(),
 essentially a convenience wrapper around dynamic_cast<>() that allows

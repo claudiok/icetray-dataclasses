@@ -26,9 +26,10 @@
 
  @subsection stlvector The Vector Template
 
- A vector is STL's version of a standard c array.  Just like an array
- you can fill things in integer throughout the array.  Just like an array
- you can get the things back out again.  Among other things, what makes a 
+ A vector is STL's version of a standard C array.  Just like an array,
+ you can fill things in places, indexed by an integer, throughout the
+ array.  Just like an array, you can get the things back out again.
+ Among other things, what makes a  
  vector special is that you can automatically get it to expand to hold more
  things.  Furthermore, the allocation and deallocation of space is handled by
  the vector.
@@ -43,8 +44,8 @@
 
  int main()
  {
-   // declaring a vector of doubles.  It's basically just an array of 
-   // doubles
+   // declaring a vector of doubles.  It's basically just like a C
+   // array of doubles: @c double @c myarray[MAX];
    vector<double> myvector;
 
    // right now the vector is empty.  Here we give it space for 3 doubles
@@ -59,18 +60,19 @@
    for(int i = 0;i<myvector.size();i++)
      cout<<myvector[i]<<" "<<endl;
 
-   // ....easy
+   // ....easy!
  };
  @endcode
 
- There is more you can do with a vector, but I just want to give the basics.
+ There is more you can do with a vector, but I just want to show you
+ the basics.
 
  The reason that you will need to know about STL's vector class for the 
  dataclasses is that many of the containers in the dataclasses use the same
  syntax as the vector.
 
- In the way of another example, consider the usage of the dataclasses' 
- I3MCHitSeries class.  Take a look at the documentation of I3MCHitSeries.  
+ As another example, take a look at the documentation of the
+ I3MCHitSeries class.  
  Notice that I3MCHitSeries inherits from STLVectorStoragePolicy<I3MCHit>.
  This inheritance gives I3MCHitSeries all the public methods of 
  STLVectorStoragePolicy<I3MCHit> which, in turn, gives it all the public 
@@ -87,47 +89,51 @@
    // filling them.
 
    // the data member's already been allocated, so we can just use it
-   series[0].Time(9.4);
-   series[0].Weight(1.0);
+   series[0].SetTime(9.4);
+   series[0].SetWeight(1.0);
 
    // or we can do it this way.
    I3MCHit hit;
-   hit.Time(2.3);
-   hit.Weight(1.0);
+   hit.SetTime(2.3);
+   hit.SetWeight(1.0);
    series[1]=hit;
 
    // getting them back out
-   for(int i = 0 ; i<series.size() ; i++)
-     cout<<"A MCHit: "<<series[i].Time()<<" "<<series[i].Weight()<<endl;
+   for(int i = 0; i < series.size(); i++)
+     cout << "An MCHit: " << series[i].GetTime() << " " << series[i].GetWeight() << endl;
 
    // getting them out a different way
    I3MCHitSeries::iterator iter;
-   for(iter = series.begin() ; iter!=series.end() ; iter++)
-     cout<<"A MCHit: "<<iter->Time()<<" "<<iter->Weight()<<endl;
-
+   for(iter = series.begin(); iter != series.end(); iter++)
+     cout << "An MCHit: " << iter->GetTime() << " " << iter->GetWeight() << endl;
 
  }
  @endcode
 
  The I3MCHitSeries class gets more of the vector interface than just these few
  methods.  Pretty much anything you can do with a vector, you can do with a
- I3MCHitSeries.  Once you know how work vector, you'll know how to work 
- I3MCHitSeries.
+ I3MCHitSeries: check the STLVectorStoragePolicy documentation for a
+ complete list of the available functions.  Once you know how to use a
+ vector, you'll know how to use I3MCHitSeries.
 
- The same is true in other areas of the dataclasses.  I3TopGeometry, for 
- instance is a vector
- of I3TankGeo's.  So knowing how to use an STL vector, shows you how
- the I3TopGeometry class works, etc.
+ The same is true in other areas of the dataclasses.  I3TopStationGeo, for 
+ instance, is a vector
+ of I3TankGeoPtr 's.  So knowing how to use an STL vector shows you how
+ the I3TopStationGeo class works, etc.
+
+ Classes in the dataclasses whose names end in 'Vect' are vectors, and
+ inherit their interface from STLVectorStoragePolicy.
  
  @subsection stlmap The Map Template
 
  In addition to the vector, STL comes with a useful map class.  The 'map' class
  takes two template arguments.  The first is the type of 'key' to be used, and
  the second is the type of 'data' to be stored.  The data is put into 
- the container and given a 'key' which is used later to get the data out 
- again.
+ the container and given a 'key' which is used later to get the data
+ out again.  The key is basically a name for the particular element,
+ although it can be any type of object, not just a string.
  
- Here's an example of the map usage:
+ Here's an example of how to use a map:
 
 @code
 #include <map>
@@ -146,14 +152,14 @@ main(){
   mymap["Golden"]=1.61803;
                                                                                 
   // printing some of the contents
-  cout<<"Pi: "<<mymap["Pi"];
+  cout << "Pi: " << mymap["Pi"];
                                                                                 
   // looping over the contents
   map<string,double>::iterator iter;
-  for(iter=mymap.begin();iter!=mymap.end();iter++)
+  for (iter = mymap.begin(); iter != mymap.end(); iter++)
   }
     // 'first' is the key, and 'second' is the contents
-    cout<<iter->first<<" "<<iter->second<<endl;
+    cout << iter->first << " " << iter->second << endl;
   }                                                                             
 }
 @endcode
@@ -161,13 +167,14 @@ main(){
 In the dataclasses we use maps to represent containers which will hold 
 heterogenous results, where the results are best distinguished by a name.
 
-For instance, the I3RecoHitSeriesData class is a map of I3RecoHitSeriesPtr's.  
-Since all of our results use a string for the key parameter, we neglect 
-specifying a generic key type, and the I3RecoHitSeriesData behaves just like
+For instance, the I3RecoHitSeriesDict class is a map of I3RecoHitSeriesPtr's.  
+Since all of our I3RecoHitSeries results are identified by name (i.e.,
+use a string for the key parameter), we neglect 
+specifying a generic key type, and the I3RecoHitSeriesDict behaves just like
 a map<string,I3RecoHitSeriesPtr>.  (I haven't mentioned the Ptr yet.  For right
 now, just read this as map<string,I3RecoHitSeries*> )
 
-So the following code snippet is legitimate
+So the following code snippet is legitimate:
 @code
 {
   // declaring the reco hit series data
@@ -182,6 +189,14 @@ So the following code snippet is legitimate
   // etc....
 }
 @endcode
+
+Note that while I3RecoHitSeriesDict is a map, each of the elements 
+(which are pointed to by I3RecoHitSeriesPtr 's) is a vector.  So the 
+last command in the snippet above is resizing the vector referred to by
+the key "PretzsResult".
+
+Classes whose names end in 'Dict' are maps and inherit the interface 
+given in STLMapStoragePolicy.
 
 
 @section Links

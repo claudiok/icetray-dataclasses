@@ -1,34 +1,44 @@
 /**
- @page dataclass-overview An Overview of the Dataclasses Project
+   @page dataclass-overview An Overview of the Dataclasses Project
 
    A lot of thought has gone into the design and implementation of these
-   classes.  These sections attempt to explain the decisions that were
-   made and why they
-   were made, as well as giving in-depth explanations of specific
-   parts of the code.
-                                                                                
+   classes.  These pages introduce the overall structure of the
+   dataclasses, attempt to explain the decisions that were
+   made and why they were made, and give in-depth explanations of
+   specific parts of the code.
+  
+   Introductory notes:
+
    @li @ref architecture
                                                                                 
    @li @ref stlsyntax
+
+   The structure of IceCube events:
                                                                                 
    @li @ref layout
                                                                                 
-   @li @ref om-response
+   @li @ref om-response: the information associated with a particular OM.
                                                                                 
    @li @ref reco-results
                                                                                 
-   @li @ref tracks
+   @li @ref tracks: objects used to store reconstructed and simulated track information.
+   
+   Pointers, casting, and memory management:
 
    @li @ref memorymanagement a discussion of the basic issues.
                                                                                 
    @li @ref sharedpointer
-                                                                                
-   @li @ref functors an STL technique.
-                                                                                
-   @li @ref insertionoperators teaching classes to print themselves.
-                                                                                
+                                            
+   Some usage notes involving STL:
+                                    
    @li @ref mapiteration
-                                                                                
+
+   @li @ref functors an STL technique.
+                         
+   Logging, testing and debugging:
+
+   @li @ref insertionoperators teaching classes to print themselves.
+                                                
    @li @ref testsuites this means @em you.
                                                                                 
    @li @ref linefitreview explaining how to check the returns of
