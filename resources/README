@@ -1,0 +1,35 @@
+README
+
+This is a preliminary implemntation of a possible transient data 
+structure for IceCube.  It has not been extensively tested and there 
+may be bugs!  We don't think so, but by law we are required to give 
+this warning. 
+
+BUILDING THE LIBRARY:
+This is a bfd project called 'dataclasses' and requires bfd to build it.  
+If you're new to bfd, surf on over to 
+http://glacier.lbl.gov/icetray for a quick introduction. 
+
+You will need the 'icetray' project to compile dataclasses, which you can get
+from CVS on glacier.  
+
+Just follow the standard build proceedure with this project in your workspace.
+
+BUILDING THE DOCUMENTATION
+There is a Doxyfile in dataclasses/resources/.  To get the documentation, type
+%doxygen dataclasses/resources/Doxyfile 
+from your workspace directory.  You'll get a directory doxygen/ with all the 
+automatically generated documentation in it.  Since we're still developing, there
+are not many comments, so the doxygen stuff is a bit sparse.  But you can still 
+use it to get a feel for the structure of the classes.
+
+COMMENTS
+We welcome comments to:
+dataclass@ssec.wisc.edu
+
+Thanks for looking
+
+Ralf Ehrlich
+John Pretz
+Erik Blaufuss
+Tyce DeYoung
