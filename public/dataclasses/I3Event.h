@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Event.h,v 1.8 2004/02/16 16:13:28 troy Exp $
+    $Id: I3Event.h,v 1.9 2004/02/23 01:46:34 troy Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/02/16 16:13:28 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/02/23 01:46:34 $
     @author
 
     @todo
@@ -21,7 +21,7 @@
 #include "I3FilterData.h"
 #include "I3MCTrackData.h"
 #include "I3OMResponseData.h"
-//#include "I3RecoResultData.h"
+#include "I3RecoResultData.h"
 #include "I3Bag.h"
 
 
@@ -31,7 +31,7 @@
  * related to each event. Additionally it stores event information
  * such as time, id, etc. (it is planned to store this kind of 
  * information in a separate header class).
- * @version $Id: I3Event.h,v 1.8 2004/02/16 16:13:28 troy Exp $
+ * @version $Id: I3Event.h,v 1.9 2004/02/23 01:46:34 troy Exp $
  * @author Ralf Ehrlich
  */
 class I3Event : public TObject
@@ -41,11 +41,11 @@ class I3Event : public TObject
   Double_t fTime;
   ULong_t  fDay;
 
-  I3TriggerData    triggerdata;
-  I3FilterData     filterdata;
-  I3MCTrackData    mctrackdata;
-  I3OMResponseData omresponsedata;
-  //  I3RecoResultData *recoresultdata;
+  I3TriggerData    triggerdata; //||
+  I3FilterData     filterdata; //||
+  I3MCTrackData    mctrackdata; //||
+  I3OMResponseData omresponsedata; //||
+  I3RecoResultData recoresultdata;
   I3Bag            bag;
 
   public:

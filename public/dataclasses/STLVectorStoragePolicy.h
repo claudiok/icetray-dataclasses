@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.1 2004/02/21 18:52:38 troy Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.2 2004/02/23 01:46:34 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/21 18:52:38 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/23 01:46:34 $
     @author Troy Straszheim
 
 */
@@ -15,7 +15,7 @@
 using namespace std;
 
 template <class ElementType>
-class STLVectorStoragePolicy {
+class STLVectorStoragePolicy  {
 
  public:
 
@@ -30,7 +30,8 @@ class STLVectorStoragePolicy {
     {
     public:
 
-      const vector_type* thevec;
+      // tds
+      const vector_type* thevec; //!
       typename vector_type::iterator iter;
 
 
@@ -117,8 +118,9 @@ class STLVectorStoragePolicy {
   //  bool empty() const { return vector_.empty() }
 
   // dont do this it is messy
-  // virtual ~StoragePolicy() {;}
-  // ClassDef(StoragePolicy,1);
+  //  virtual ~StoragePolicy() {;}
+
+  //  ClassDef(StoragePolicy,1);
 };
 
 #endif

@@ -23,25 +23,29 @@
 
 #pragma link C++ class I3RecoTrackList+;
 #pragma link C++ class I3RecoTrackList::iterator+;
+#pragma link C++ typedef VectorPolicy<I3RecoTrack>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoTrack>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoTrackList::iterator&, const I3RecoTrackList::iterator&);
+
 #pragma link C++ class I3AnalogSeries+;
 #pragma link C++ class I3AnalogSeries::iterator+;
-#pragma link C++ class VectorPolicy<I3Analog>::ThePolicy;
-#pragma link C++ function operator!=(const I3AnalogSeries::iterator&, const I3AnalogSeries::iterator&)
+#pragma link C++ typedef VectorPolicy<I3Analog>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3Analog>::ThePolicy+;
+#pragma link C++ function operator!=(const I3AnalogSeries::iterator&, const I3AnalogSeries::iterator&);
 // others which are just typedefs to this
 #pragma link C++ typedef I3AnalogAmandaSeries;
 
-
 #pragma link C++ class I3DataReadoutList+;
 #pragma link C++ class I3DataReadoutList::iterator+;
+#pragma link C++ typedef VectorPolicy<I3DataReadout>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3DataReadout>::ThePolicy+;
-#pragma link C++ function operator!=(const I3DataReadoutList::iterator&, const I3DataReadoutList::iterator&)
+#pragma link C++ function operator!=(const I3DataReadoutList::iterator&, const I3DataReadoutList::iterator&);
 
 #pragma link C++ class I3DigitalSeries+;
 #pragma link C++ class I3DigitalSeries::iterator+;
+#pragma link C++ typedef VectorPolicy<I3Digital>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3Digital>::ThePolicy+;
-#pragma link C++ function operator!=(const I3DigitalSeries::iterator&, const I3DigitalSeries::iterator&)
+#pragma link C++ function operator!=(const I3DigitalSeries::iterator&, const I3DigitalSeries::iterator&);
 
 // typedefs of I3DigitalSeries
 #pragma link C++ class I3DigitalATWDSeries;
@@ -50,47 +54,56 @@
 
 #pragma link C++ class I3Geometry+;
 #pragma link C++ class I3Geometry::iterator+;
+#pragma link C++ typedef VectorPolicy<I3OMGeoPtr>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3OMGeoPtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3Geometry::iterator&, const I3Geometry::iterator&)
+#pragma link C++ function operator!=(const I3Geometry::iterator&, const I3Geometry::iterator&);
 
 #pragma link C++ class I3MCHitSeries+;
 #pragma link C++ class I3MCHitSeries::iterator+;
-#pragma link C++ class VectorPolicy<I3MCHit>::ThePolicy;
-#pragma link C++ function operator!=(const I3MCHitSeries::iterator&, const I3MCHitSeries::iterator&)
+#pragma link C++ typedef VectorPolicy<I3MCHit>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3MCHit>::ThePolicy+;
+#pragma link C++ function operator!=(const I3MCHitSeries::iterator&, const I3MCHitSeries::iterator&);
+
+#pragma link C++ class I3RecoHitSeries+;
+#pragma link C++ class I3RecoHitSeries::iterator+;
+#pragma link C++ typedef VectorPolicy<I3RecoHit>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3RecoHit>::ThePolicy+;
+#pragma link C++ function operator!=(const I3RecoHitSeries::iterator&, const I3RecoHitSeries::iterator&);
 
 #pragma link C++ class I3MCTrackList+;
 #pragma link C++ class I3MCTrackList::iterator+;
+#pragma link C++ typedef VectorPolicy<I3MCTrack>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3MCTrack>::ThePolicy+;
-#pragma link C++ function operator!=(const I3MCTrackList::iterator&, const I3MCTrackList::iterator&)
+#pragma link C++ function operator!=(const I3MCTrackList::iterator&, const I3MCTrackList::iterator&);
 
 #pragma link C++ class I3MCTrackData+;
 #pragma link C++ class I3MCTrackData::iterator+;
-#pragma link C++ class VectorPolicy<I3MCTrackList>::ThePolicy;
-#pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&)
+#pragma link C++ typedef VectorPolicy<I3MCTrackList>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3MCTrackList>::ThePolicy+;
+#pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
 
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
+#pragma link C++ typedef VectorPolicy<I3OMResponse>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3OMResponse>::ThePolicy+;
 #pragma link C++ function operator!=(const I3OMResponseData::iterator&, const I3OMResponseData::iterator&);
-#pragma link C++ class I3RecoHitSeries+;
-#pragma link C++ class I3RecoHitSeries::iterator+;
-#pragma link C++ class VectorPolicy<I3RecoHit>::ThePolicy+;
-#pragma link C++ function operator!=(const I3RecoHitSeries::iterator&, const I3RecoHitSeries::iterator&)
 
 #pragma link C++ class I3RecoHitSeriesData+;
 #pragma link C++ class I3RecoHitSeriesData::iterator+;
+#pragma link C++ typedef VectorPolicy<I3RecoHitSeries>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoHitSeries>::ThePolicy+;
-#pragma link C++ function operator!=(const I3RecoHitSeriesData::iterator&, const I3RecoHitSeriesData::iterator&)
-
+#pragma link C++ function operator!=(const I3RecoHitSeriesData::iterator&, const I3RecoHitSeriesData::iterator&);
 
 #pragma link C++ class I3RecoResult+;
 #pragma link C++ class I3RecoResult::iterator+;
+#pragma link C++ typedef VectorPolicy<I3RecoTrackList>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoTrackList>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoResult::iterator&, const I3RecoResult::iterator&);
 
 
 #pragma link C++ class I3TopGeometry+;
 #pragma link C++ class I3TopGeometry::iterator+;
+#pragma link C++ typedef VectorPolicy<I3TankGeo>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3TankGeo>::ThePolicy+;
 #pragma link C++ function operator!=(const I3TopGeometry::iterator&, const I3TopGeometry::iterator&);
 
@@ -131,4 +144,10 @@
 #pragma link C++ class I3TriggerData+;
 
 #endif
+
+//tds
+// future: member function templates:
+// where f has template argument
+//#pragma link C++ function A<int>::f(B&);
+
 

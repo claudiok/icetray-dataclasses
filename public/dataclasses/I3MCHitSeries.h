@@ -10,6 +10,9 @@ class I3MCHitSeries : public VectorPolicy<I3MCHit>::ThePolicy
  public:
   float Weight() { return fWeight; }
   void Weight(float weight_) { fWeight = weight_; }
+
+  virtual ~I3MCHitSeries() {;}
+  ClassDef(I3MCHitSeries,1);
 };
 
 
