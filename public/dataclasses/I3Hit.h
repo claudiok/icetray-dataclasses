@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.22.2.3 2005/02/04 21:51:03 troy Exp $
+ * $Id: I3Hit.h,v 1.22.2.4 2005/02/05 01:33:42 troy Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.22.2.3 $
- * @date $Date: 2005/02/04 21:51:03 $
+ * @version $Revision: 1.22.2.4 $
+ * @date $Date: 2005/02/05 01:33:42 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,7 +14,7 @@
 #define I3HIT_H
 
 #include "StoragePolicy.h"
-#include "RootHeaders.h"
+
 #include <iostream>
 #include <sstream>
 
