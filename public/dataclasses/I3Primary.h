@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.5 2004/05/04 17:56:38 pretz Exp $
+ * $Id: I3Primary.h,v 1.6 2004/05/04 18:32:43 pretz Exp $
  *
  * @file I3Primary.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/05/04 17:56:38 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/05/04 18:32:43 $
  * @author pretz
   */
 #ifndef I3PRIMARY_H
@@ -17,9 +17,6 @@
 /**
  * @brief Represents a particle which induces an event in the detector.
  * @todo implement fatal calls
- * @todo make methods pure virtual
- * @todo comments
-
  */
 class I3Primary : public I3Particle{
  public:
