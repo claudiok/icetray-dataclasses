@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.13 2004/07/06 14:15:31 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.14 2004/07/07 19:05:57 pretz Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/07/06 14:15:31 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/07/07 19:05:57 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,8 +15,10 @@
 #define I3INICEGEOMETRY_H
 
 #include <TObject.h>
+#include <map>
 #include "I3DataExecution.h"
 #include "I3OMGeo.h"
+#include "OMKey.h"
 #include "StoragePolicy.h"
 /**
  * @brief Right now just a containter for IceCube and AMANDA OMGeos. 
@@ -24,14 +26,11 @@
  * This is the
  * the 'frozen-in-ice' information, as opposed to the stuff that changes.
  * @todo make copy and assignment private.  conflict with something in tests
- * @todo TDS: should contain two vectors, one by geonumber and one
- * with the current indexing scheme, whatever that is.  HasOMGeoNumber
- * and FindOmGeo both do the same thing (linear time search).  Lots of
- * wasted processing here.  Fatal error on "geo not found" makes no
- * sense.
+ * @todo should the 'mapness' be incorporated in the same kind of
+ * 'Storage Policy' we have for other classes?
  */
 
-class I3InIceGeometry : public TObject, public VectorPolicy<I3OMGeoPtr>::ThePolicy
+class I3InIceGeometry : public TObject, public map<OMKey,I3OMGeoPtr>
 {
   public:
   /** 

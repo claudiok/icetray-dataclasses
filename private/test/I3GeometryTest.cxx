@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3GeometryTest.cxx,v 1.3 2004/07/06 16:31:59 pretz Exp $
+    $Id: I3GeometryTest.cxx,v 1.4 2004/07/07 19:05:57 pretz Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/07/06 16:31:59 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/07/07 19:05:57 $
     @author pretz
 
     @todo
@@ -49,7 +49,7 @@ namespace tut
   I3OMGeoIceCubePtr om_icecube( new I3OMGeoIceCube());
   om_icecube->SetX(10.5);
 
-  geometry->GetInIceGeometry().push_back(om_icecube);      
+  geometry->GetInIceGeometry()[OMKey(1,15)] = om_icecube;     
   TTree *t = new TTree("mytree","tree");
   cout<<geometry->GetInIceGeometry().size()<<endl;
       
@@ -74,9 +74,10 @@ namespace tut
     I3OMGeoIceCubePtr om_icecube( new I3OMGeoIceCube());
     om_icecube->SetX(10.5);
     
-    geometry.GetInIceGeometry().push_back(om_icecube);      
+    geometry.GetInIceGeometry()[OMKey(1,15)] = om_icecube;      
     ensure("checking read in value",
-	   geometry.GetInIceGeometry()[0] != I3OMGeoPtr((I3OMGeo*)0) );
+	   geometry.GetInIceGeometry()[OMKey(1,15)] 
+	   != I3OMGeoPtr((I3OMGeo*)0) );
 
     TFile f("test.out.root","RECREATE");
     geometry.Write();
@@ -89,7 +90,7 @@ namespace tut
   ensure("checking array sizes",
 	 geo_in->GetInIceGeometry().size() == 1);
   ensure("checking read in value",
-	 geo_in->GetInIceGeometry()[0] != I3OMGeoPtr((I3OMGeo*)0) );
+	 geo_in->GetInIceGeometry()[OMKey(1,15)] != I3OMGeoPtr((I3OMGeo*)0) );
   }
   
   //testing filling an event with tracks into a tree

@@ -284,6 +284,7 @@
 #pragma link C++ class I3TrackExtractor+;
 #pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
+#pragma link C++ class OMKey+;
 
 #pragma link C++ class I3StartingTrack+;
 

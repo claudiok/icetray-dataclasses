@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.27 2004/07/04 06:03:32 troy Exp $
+ * $Id: I3Event.h,v 1.28 2004/07/07 19:05:57 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.27 $
- * @date $Date: 2004/07/04 06:03:32 $
+ * @version $Revision: 1.28 $
+ * @date $Date: 2004/07/07 19:05:57 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -92,6 +92,14 @@ class I3Event : public TObject
    * @return the Bag for this event as a non-constant object
    */
   I3Bag& GetBag() { return fBag; }
+
+  /**
+   * @param o the stream we're printing the object to
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3Event ]";
+    }
 
  private:
   // copy and assignment private
