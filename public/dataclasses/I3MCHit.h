@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHit.h,v 1.3 2004/02/17 22:55:38 troy Exp $
+    $Id: I3MCHit.h,v 1.4 2004/02/18 21:10:46 troy Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/02/17 22:55:38 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/02/18 21:10:46 $
     @author
 
 */
@@ -24,6 +24,8 @@ class I3MCHit : public I3Hit
   I3MCHit(const I3MCHit &rhs) { *this = rhs; }
 
   const I3MCHit& operator=(const I3MCHit &rhs) {
+    if (this = &rhs) return *this;
+    I3MCHit::operator=(rhs);
     fWeight = rhs.fWeight;
     fTrackNum = rhs.fTrackNum; 
     return *this;
@@ -38,5 +40,6 @@ class I3MCHit : public I3Hit
 
   ClassDef(I3MCHit, 1);
 };
+
 #endif
 
