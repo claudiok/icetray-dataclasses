@@ -1,0 +1,38 @@
+/**
+ @page dataclass-overview An Overview of the Dataclasses Project
+
+   A lot of thought has gone into the design and implementation of these
+   classes.  These sections attempt to explain the decisions that were
+   made and why they
+   were made, as well as giving in-depth explanations of specific
+   parts of the code.
+                                                                                
+   @li @ref architecture
+                                                                                
+   @li @ref stlsyntax
+                                                                                
+   @li @ref layout
+                                                                                
+   @li @ref om-response
+                                                                                
+   @li @ref reco-results
+                                                                                
+   @li @ref tracks
+
+   @li @ref memorymanagement a discussion of the basic issues.
+                                                                                
+   @li @ref sharedpointer
+                                                                                
+   @li @ref functors an STL technique.
+                                                                                
+   @li @ref insertionoperators teaching classes to print themselves.
+                                                                                
+   @li @ref mapiteration
+                                                                                
+   @li @ref testsuites this means @em you.
+                                                                                
+   @li @ref linefitreview explaining how to check the returns of
+      dereferences and function calls, and downcast pointers that come
+      out of containers.
+
+*/

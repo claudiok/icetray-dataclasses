@@ -1,0 +1,22 @@
+/**
+ @mainpage Dataclasses Documentation
+
+ @author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
+
+ @section Description
+ This is the automatic documentation of the @c dataclasses project.  This 
+ project provides classes which serve to store data for passing between
+ IceTray modules.  
+
+  @section an-overview Overview of the Data Classes
+
+  For an overview of the thinking that has gone into the design of the 
+@c dataclass library, see @ref dataclass-overview
+
+@section dataclassappmetaproject The DATACLASS-APP Metaproject
+   
+   The @c dataclasses project is an important part of the DATACLASS-APP 
+metaproject.  If you want more complete information on the @c dataclasses,
+and for examples of their use, you probably want the DATACLASS-APP metaproject
+
+*/

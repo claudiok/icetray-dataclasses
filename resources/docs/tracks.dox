@@ -168,5 +168,4 @@
    A reconstruction that dealt with both IceTop and the InIce detector
    would store the surface shower and the InIce particles as separate
    objects, however.
-
 */
