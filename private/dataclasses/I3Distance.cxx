@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Distance.cxx,v 1.3 2004/06/17 22:37:15 dule Exp $
+    $Id: I3Distance.cxx,v 1.4 2004/06/23 20:17:34 dule Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/06/17 22:37:15 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/06/23 20:17:34 $
     @author
 
     @todo
@@ -45,14 +45,28 @@ Double_t I3Distance::StopDistance(I3Track* track, I3Position& pos)
 }
 
 //--------------------------------------------------------------
+// Calculate a position on track, which is a distance 'dist' 
+// away from track.Pos().
+I3Position I3Distance::ShiftAlongTrack(I3Track* track, Double_t dist)
+{
+  I3Position p;
+  Double_t x,y,z;
+  x = track->Pos().X() + dist*sin(track->Zenith())*cos(track->Azimuth());
+  y = track->Pos().Y() + dist*sin(track->Zenith())*sin(track->Azimuth());
+  z = track->Pos().Z() + dist*cos(track->Zenith());
+  p.SetPosition(x,y,z,I3Position::car);
+  return p;
+}
+
+//--------------------------------------------------------------
 // Calculate distance to CLOSEST APPROACH to track
-void I3Distance::CherenkovLight(I3Track* track,     // input
-				I3Position& pos,    // input
-				I3Position& appos,  // output 
-				Double_t& apdist,   // output
-				I3Position& chpos,  // output
-				Double_t& chtime,   // output
-				Double_t ChAngle)   // input
+void I3Distance::CherenkovCalc(I3TrackPtr track,   // input
+			       I3Position& pos,    // input
+			       I3Position& appos,  // output 
+			       Double_t& apdist,   // output
+			       I3Position& chpos,  // output
+			       Double_t& chtime,   // output
+			       Double_t ChAngle)   // input
 {
   //--Only calculate if track has direction
   if (track->HasDirection()) {
@@ -142,20 +156,6 @@ void I3Distance::CherenkovLight(I3Track* track,     // input
 }
 
 //--------------------------------------------------------------
-// Calculate a position on track, which is a distance 'dist' 
-// away from track.Pos().
-I3Position I3Distance::ShiftAlongTrack(I3Track* track, Double_t dist)
-{
-  I3Position p;
-  Double_t x,y,z;
-  x = track->Pos().X() + dist*sin(track->Zenith())*cos(track->Azimuth());
-  y = track->Pos().Y() + dist*sin(track->Zenith())*sin(track->Azimuth());
-  z = track->Pos().Z() + dist*cos(track->Zenith());
-  p.SetPosition(x,y,z,I3Position::car);
-  return p;
-}
-
-//--------------------------------------------------------------
 // Is a given position on a track
 Bool_t I3Distance::IsOnTrack(I3Track* track, 
 			     I3Position& pos, 
@@ -163,9 +163,32 @@ Bool_t I3Distance::IsOnTrack(I3Track* track,
 {
   I3Position appos,chpos;
   Double_t apdist,chtime;
-  CherenkovLight(track,pos,appos,apdist,chpos,chtime);
+  CherenkovCalc(track,pos,appos,apdist,chpos,chtime);
   if (apdist<=Precision) return kTRUE;
   else return kFALSE;
+}
+
+//--------------------------------------------------------------
+// Return the time for Cherenkov photon from I3Track to I3Position
+  Double_t I3Distance::CherenkovTime(I3TrackPtr track,
+				     I3Position& pos,
+				     Double_t ChAngle)
+{
+  I3Position appos,chpos;
+  Double_t apdist,chtime;
+  CherenkovCalc(track,pos,appos,apdist,chpos,chtime,ChAngle);
+  return chtime;
+}
+
+//--------------------------------------------------------------
+// Return the distance of closets approach from I3Track to I3Position
+  Double_t I3Distance::ClosestApproachDistance(I3TrackPtr track,
+					       I3Position& pos)
+{
+  I3Position appos,chpos;
+  Double_t apdist,chtime;
+  CherenkovCalc(track,pos,appos,apdist,chpos,chtime);
+  return apdist;
 }
 
 //--------------------------------------------------------------

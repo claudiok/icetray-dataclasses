@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Distance.h,v 1.4 2004/06/23 18:19:28 dule Exp $
+ * $Id: I3Distance.h,v 1.5 2004/06/23 20:17:34 dule Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/06/23 18:19:28 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/23 20:17:34 $
  * @author pretz
  */
 #ifndef I3DISTANCE_H
@@ -43,17 +43,17 @@ class I3Distance
   /**
    * Distance between position P and position Pos() on track
    */
-  Double_t Distance(I3Track* track, I3Position& pos);
+  Double_t Distance(I3TrackPtr track, I3Position& pos);
 
   /**
    * Distance between position P and start position on track
    */
-  Double_t StartDistance(I3Track* track, I3Position& pos);
+  Double_t StartDistance(I3TrackPtr track, I3Position& pos);
 
   /**
    * Distance between position P and stop position on track
    */
-  Double_t StopDistance(I3Track* track, I3Position& pos);
+  Double_t StopDistance(I3TrackPtr track, I3Position& pos);
 
   /**
    * Distance between position P and closest approach position on track
@@ -63,39 +63,71 @@ class I3Distance
    * position of origin of Cherenkov photon: 'chpos'
    * time of photon from track Pos() until the Position (pos): 'chtime'
    *
-   * @todo Right now, CherenkovLight calculates "closest approach" AND 
+   * @param track input I3Track
+   * @param pos input I3Position
+   * @param appos output I3Position of closest approach
+   * @param apdist output closest approach distance
+   * @param chpos output I3Position of origin of Cherenkov light to the input
+   * I3Position
+   * @param chdist output time of Cherenkov light from position Pos() of the
+   * input I3Track to the input I3Position
+   * @param ChAngle input angle of Cherenkov cone (default = 41 deg)
+   *
+   * @todo Right now, CherenkovCalc calculates "closest approach" AND 
    * "cherenkov distances".  This is good for simplicity and non-repetitiveness
    * of the code, but it is not the most efficient.  If processing time becomes
    * an issue, we can make these things more efficient at the expence of
    * complicating and repeating the code.
    */
-  void CherenkovLight(I3Track* track,     // input track
-		      I3Position& pos,    // input position
-		      I3Position& appos,  // output closest distance position
-		      Double_t& apdist,   // output closest distance
-		      I3Position& chpos,  // output Cherenkov position
-		      Double_t& chtime,   // output Cherenkov time
+  void CherenkovCalc(I3TrackPtr track,
+		      I3Position& pos,
+		      I3Position& appos,
+		      Double_t& apdist,
+		      I3Position& chpos,
+		      Double_t& chtime,
 		      Double_t ChAngle=41*I3Units::degree);
 
   /**
    * Calculate a position on track, which is a distance 'dist'
    * away from track.Pos().
    */
-  I3Position ShiftAlongTrack(I3Track* track, 
+  I3Position ShiftAlongTrack(I3TrackPtr track, 
 			     Double_t dist);
 
   /**
    * Check is Position is on Track within the given Precision.
    * Default Precision is 10cm, but can be given by user.
    * 
-   * @todo IsOnTrack uses CherenkovLight for calculating "distance of closest
+   * @todo IsOnTrack uses CherenkovCalc for calculating "distance of closest
    * approach".  This method is not the most efficient, but makes the code much
    * simpler.  If processing time becomes an issue, we can make these routines 
    * more efficient.
    */
-  Bool_t IsOnTrack(I3Track* track, 
+  Bool_t IsOnTrack(I3TrackPtr track, 
 		   I3Position& pos,
 		   Double_t Precision=0.1*I3Units::meter);
+
+  /**
+   * Output time of arrival of Cherenkov light from I3Track to I3Position.
+   * This method simply uses CherenkovCalc for the calculation.
+   * 
+   * @param track input track
+   * @param pos input position
+   * @param ChAngle input Cherenkov angle with a default value of 41 deg.
+   */
+  Double_t CherenkovTime(I3TrackPtr track,
+			 I3Position& pos,
+			 Double_t ChAngle=41*I3Units::degree);
+
+  /**
+   * Output distance of closest approach from I3Track to I3Position.
+   * This method simply uses CherenkovCalc for the calculation.
+   * 
+   * @param track input track
+   * @param pos input position
+   */
+  Double_t ClosestApproachDistance(I3TrackPtr track,
+				   I3Position& pos);
 
 
  protected:
