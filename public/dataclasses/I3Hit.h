@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.22 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3Hit.h,v 1.22.2.1 2005/01/25 23:33:44 troy Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.22.2.1 $
+ * @date $Date: 2005/01/25 23:33:44 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -36,7 +36,7 @@ public:
   /**
    * constructor
    */
-  I3Hit() { fTime = 0; }
+  I3Hit() { time_ = 0; }
 
   /**
    * copy constructor.
@@ -48,7 +48,7 @@ public:
    */
   const I3Hit& operator=(const I3Hit& rhs) {
     if (this == &rhs) return *this;
-    fTime = rhs.fTime;
+    time_ = rhs.time_;
     return *this;
   }
 
@@ -58,36 +58,36 @@ public:
    * @return true if the times are equal
    */      
   bool operator==(const I3Hit& rhs) {
-    return (fTime == rhs.fTime); 
+    return (time_ == rhs.time_); 
   }
 
   /**
    * @return the time at which the hit occured
    */
-  Double_t GetTime() const { return fTime; }
+  double GetTime() const { return time_; }
 
   /**
    * @param time the new time of the hit
    */
-  void SetTime(Double_t time) { fTime = time; }
+  void SetTime(double time) { time_ = time; }
 
   /**
    * @return the unique ID of this hit
    */
-  Int_t GetID() const { return fHitID; }
+  int GetID() const { return hitID_; }
 
   /**
    * @param hitid the ID number to assign to this hit.  Should be
    * unique, but no checking is done.
    */
-  void SetID(const Int_t hitid) { fHitID = hitid; }
+  void SetID(const int hitid) { hitID_ = hitid; }
 
   /**
    * @todo finish implementing this method
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ "<<IsA()->GetName()<<": Time:"<<fTime<<" ]\n";
+      o<<"[ "<<IsA()->GetName()<<": Time:"<<time_<<" ]\n";
     }
 
   virtual string ToString() const
@@ -99,8 +99,19 @@ public:
 
 private:
 
-  Double_t fTime;
-  Int_t fHitID;
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    using boost::serialization::make_nvp;
+
+    ar & make_nvp("Time", time_);
+    ar & make_nvp("HitID", hitID_);
+  }
+  
+  double time_;
+  int hitID_;
 
   // ROOT Macro
   ClassDef(I3Hit, 1);

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.8 2004/10/14 15:17:08 troy Exp $
+    $Id: I3HitTest.cxx,v 1.8.2.1 2005/01/25 23:33:44 troy Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/10/14 15:17:08 $
+    @version $Revision: 1.8.2.1 $
+    @date $Date: 2005/01/25 23:33:44 $
     @author Troy D. Straszheim
 
     @todo
@@ -24,14 +24,26 @@
 */
 
 #include "TUT/tut.h"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/shared_ptr.hpp>
+
+using boost::serialization::make_nvp;
 
 // MODIFY: replace with include of the header file for the module you
 // are testing, or whatever headers are necessary for this test.
 #include "dataclasses/I3Hit.h"
 #include <string>
-using std::string;
-using std::cout;
-using std::endl;
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 namespace tut
 {
@@ -178,6 +190,66 @@ namespace tut
   /**
    * checks chains of operations
    */
+  template<> template<>
+  void object::test<8>()
+  {
+    I3Hit u;
+
+   // create and open a character archive for output
+    std::ofstream txtofs("/tmp/filename.txt");
+    std::ofstream binofs("/tmp/filename.bin");
+    std::ofstream xmlofs("/tmp/filename.xml");
+
+    boost::archive::text_oarchive txtoa(txtofs);
+    boost::archive::binary_oarchive binoa(binofs);
+    boost::archive::xml_oarchive xmloa(xmlofs);
+
+    vector<I3Hit> v(10);
+    I3Hit *up = &u;
+    u.SetTime(3.3333);
+
+    I3HitPtr hit_p(new I3Hit);
+    I3HitPtr hit_p2 = hit_p;
+    I3HitPtr hit_p3 = hit_p;
+
+    txtoa << u << hit_p << hit_p2 << hit_p3;
+    binoa << u;
+    xmloa << make_nvp("mygoodbuddyu", u);
+    xmloa << make_nvp("ptrtou", up);
+    xmloa << make_nvp("vectorof10u", v);
+    xmloa << make_nvp("sp1", hit_p);
+    xmloa << make_nvp("sp2", hit_p2);
+    xmloa << make_nvp("sp3", hit_p3);
+    txtofs.close();
+    binofs.close();
+    xmlofs.close();
+
+    std::ifstream txtifs("/tmp/filename.txt");
+    std::ifstream binifs("/tmp/filename.bin");
+    std::ifstream xmlifs("/tmp/filename.xml");
+
+    boost::archive::text_iarchive txtia(txtifs);
+    boost::archive::binary_iarchive binia(binifs);
+    boost::archive::xml_iarchive xmlia(xmlifs);
+
+    // read class state from archive
+
+    I3Hit newhit;
+    txtia >> newhit;
+    ensure_distance("read in hit", newhit.GetTime(), u.GetTime(), 0.0001);
+
+    binia >> newhit;
+    ensure_distance("read in hit", newhit.GetTime(), u.GetTime(), 0.0001);
+	
+    //    xmlia >> newhit;
+    //    ensure_distance("read in hit", newhit.GetTime(), u.GetTime(), 0.0001);
+
+    // close archive
+    txtifs.close();
+    binifs.close();
+    //    xmlifs.close();
+  }
+
   template<> template<>
   void object::test<42>()
   {

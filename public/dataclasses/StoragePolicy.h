@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.16 2004/08/22 11:49:24 troy Exp $
+    $Id: StoragePolicy.h,v 1.16.4.1 2005/01/25 23:33:44 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.16 $
-    @date $Date: 2004/08/22 11:49:24 $
+    @version $Revision: 1.16.4.1 $
+    @date $Date: 2005/01/25 23:33:44 $
     @author Troy D. Straszheim
 */
 
@@ -18,8 +18,54 @@
 #include "STLMapStoragePolicy.h"
 #include "STLMultiMapStoragePolicy.h"
 
-#include "roost/shared_ptr.hpp"
 
+
+/**
+ * @brief The pointer policy.  Should use typedefs of this rather than
+ * raw pointers.
+ *
+ * The existence of this PtrPolicy allows for typdefs of
+ * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
+ * Foo*.  What this does is allow the true implemntation of FooPtr to change
+ * in this one place, and the rest of the code is unaffected
+ */
+
+#ifndef __CINT__
+#include <boost/serialization/serialization.hpp>
+#include <boost/shared_ptr.hpp>
+
+template <class Pointed>
+struct PtrPolicy
+{
+  /**
+   * roost smart pointers.  FIXME: need docs
+   */
+  typedef boost::shared_ptr<Pointed> ThePolicy;
+  //  typedef Pointed* ThePolicy;
+};
+
+using boost::dynamic_pointer_cast;
+#else
+#include <roost/shared_ptr.hpp>
+
+template <class Pointed>
+struct PtrPolicy
+{
+  /**
+   * roost smart pointers.  FIXME: need docs
+   */
+  typedef roost::shared_ptr<Pointed> ThePolicy;
+  //  typedef Pointed* ThePolicy;
+};
+
+using roost::dynamic_pointer_cast;
+
+namespace boost {
+  namespace serialization {
+    class access;
+  }
+}
+#endif
 
 template <class Stored>
 /**
@@ -46,7 +92,7 @@ struct VectorPolicy {
  * provided the new implementation supplies the same interface - just by
  * changing this Mapolicy class.  That's what it is here for.
  */
-template <class Key,class Stored>
+template <class Key, class Stored>
 struct MapPolicy {
   /**
    *  ThePolicy is just a typedeffed STLMapStoragePolicy
@@ -63,7 +109,7 @@ struct MapPolicy {
  * provided the new implementation supplies the same interface - just by
  * changing this MultiMapPolicy class.  That's what it is here for.
  */
-template <class Key,class Stored>
+template <class Key, class Stored>
 struct MultiMapPolicy {
   /**
    *  ThePolicy is just a typedeffed STLMapStoragePolicy
@@ -72,32 +118,4 @@ struct MultiMapPolicy {
 
 };
 
-/**
- * @brief The pointer policy.  Should use typedefs of this rather than
- * raw pointers.
- *
- * The existence of this PtrPolicy allows for typdefs of
- * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
- * Foo*.  What this does is allow the true implemntation of FooPtr to change
- * in this one place, and the rest of the code is unaffected
- */
-template <class Pointed>
-struct PtrPolicy
-{
-  /**
-   * roost smart pointers.  FIXME: need docs
-   */
-  typedef roost::shared_ptr<Pointed> ThePolicy;
-  //  typedef Pointed* ThePolicy;
-};
-
-//TDS: workaround while we get these goddamned smart pointers working
-//namespace boost {
-//  template <class T, class U>
-//  T*
-//  dynamic_pointer_cast(U* src)
-//  {
-//    return dynamic_cast<T*>(src);
-//  }
-//}
-#endif
+#endif //STORAGEPOLICY_H_INCLUDED

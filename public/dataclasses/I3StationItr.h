@@ -1,9 +1,9 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationItr.h,v 1.1 2004/09/17 21:18:15 niessen Exp $
- * @version $Revision: 1.1 $
- * @date $Date: 2004/09/17 21:18:15 $
+ * $Id: I3StationItr.h,v 1.1.2.1 2005/01/25 23:33:44 troy Exp $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2005/01/25 23:33:44 $
  * @author niessen Thu Sep 16 17:24:51 EDT 2004
  */
 
@@ -15,7 +15,8 @@
 #include "dataclasses/I3StationMap.h"
 #include "dataclasses/StoragePolicy.h"
 
-using namespace roost;
+
+//using namespace roost;
 
 typedef I3StationMap::iterator I3StationItr;
 

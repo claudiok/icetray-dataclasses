@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.15 2004/10/11 07:06:10 troy Exp $
+    $Id: InIceExtractorExample.cxx,v 1.15.2.1 2005/01/25 23:33:44 troy Exp $
 
-    @version $Revision: 1.15 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @version $Revision: 1.15.2.1 $
+    @date $Date: 2005/01/25 23:33:44 $
     @author Troy D. Straszheim
 
     @todo
@@ -93,7 +93,7 @@ namespace tut
     void operator()(pair<OMKey,I3OMGeoPtr> the_pair) 
     {
       I3OMGeoPtr p = the_pair.second;
-      I3OMGeoAMANDAPtr amandap = roost::dynamic_pointer_cast<I3OMGeoAMANDA>(p);
+      I3OMGeoAMANDAPtr amandap = dynamic_pointer_cast<I3OMGeoAMANDA>(p);
       if (amandap) mygeometry_.push_back(amandap);
     }
   };

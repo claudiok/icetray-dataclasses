@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultMultiTracks.h,v 1.7 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3RecoResultMultiTracks.h,v 1.7.2.1 2005/01/25 23:33:44 troy Exp $
  *
  * @file I3RecoResultMultiTracks.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.7.2.1 $
+ * @date $Date: 2005/01/25 23:33:44 $
  * @author ehrlich
  */
 #ifndef I3RECORESULTMULTITRACKS_H
@@ -38,7 +38,7 @@ class I3RecoResultMultiTracks : public I3RecoResult, public VectorPolicy<I3Parti
       I3ParticlePtr particle;
       for (unsigned i=0; i<this->size(); i++) {
         o<<"printing MultiTracks["<<i<<"]...\n";
-	particle = roost::dynamic_pointer_cast<I3Particle>((*this)[i]);
+	particle = dynamic_pointer_cast<I3Particle>((*this)[i]);
 	particle->ToStream(o);
 	o<<endl;
       }

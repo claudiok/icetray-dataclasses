@@ -8,7 +8,7 @@ I3CascadeExtractor::I3CascadeExtractor(vector<I3CascadePtr> &tracklist_to_fill)
 
 void I3CascadeExtractor::operator() (I3InIceParticlePtr p) 
 {
-  I3CascadePtr track = roost::dynamic_pointer_cast<I3Cascade>(p);
+  I3CascadePtr track = dynamic_pointer_cast<I3Cascade>(p);
 
   if (track) 
     mytracks.push_back(track);

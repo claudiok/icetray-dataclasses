@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TopGeometryTest.cxx,v 1.7 2004/10/11 07:06:10 troy Exp $
+    $Id: I3TopGeometryTest.cxx,v 1.7.2.1 2005/01/25 23:33:44 troy Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @version $Revision: 1.7.2.1 $
+    @date $Date: 2005/01/25 23:33:44 $
     @author pretz
 
     @todo
@@ -70,32 +70,5 @@ namespace tut
 
     // insert the station into the array
     array[StationKey (1)] = station;
-
-    TFile file_out("test.out.root","RECREATE");
-
-    geo.Write();
-    file_out.Close();
   }
-  
-  template<> template<>
-  void object::test<2>()
-  {
-    TFile file_in("test.out.root");
-    I3TopGeometryPtr geo_in((I3TopGeometry*)file_in.FindObjectAny("I3TopGeometry"));
-
-    ensure("pointer is non-zero",geo_in!=0);
-
-    I3StationMap &array = geo_in->GetStationMap ();
-    
-    I3StationGeo &station
-      = *(array[StationKey (1)]);
-
-    I3TankGeoPtr tank (roost::dynamic_pointer_cast<I3TankGeo>(station[0]));
-
-    I3OMGeoIceTopPtr om (roost::dynamic_pointer_cast<I3OMGeoIceTop>((*tank)[OMKey (1, 61)]));
-
-    ensure ("om is displaced", om->GetPos ().GetX () == -.5);
-
-  }
-
 }

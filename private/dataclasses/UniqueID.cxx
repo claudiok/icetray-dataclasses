@@ -126,13 +126,14 @@ Int_t UniqueID::ID(I3RecoResultPtr obj, IDOption option)
 
   if(obj->InheritsFrom("I3RecoResultMultiTracks"))
   {
-    Int_t nparticle=roost::dynamic_pointer_cast<I3RecoResultMultiTracks>(obj)->size();
+    Int_t nparticle=dynamic_pointer_cast<I3RecoResultMultiTracks>(obj)->size();
     for(Int_t j=0; j<nparticle; j++)
-      ParticleID( (*roost::dynamic_pointer_cast<I3RecoResultMultiTracks>(obj))[j], option, highestID);
+      ParticleID( (*dynamic_pointer_cast<I3RecoResultMultiTracks>(obj))[j], option, highestID);
   }
   if(obj->InheritsFrom("I3RecoResultSingleTrack"))
   {
-    if(roost::dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->HasTrack()) ParticleID(roost::dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->GetTrack(), option, highestID);
+    if(dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->HasTrack()) 
+      ParticleID(dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->GetTrack(), option, highestID);
   }
 
   return(highestID+1);
