@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.30 2004/07/04 06:03:32 troy Exp $
+    $Id: I3OMResponse.h,v 1.31 2004/07/12 12:23:11 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.30 $
-    @date $Date: 2004/07/04 06:03:32 $
+    @version $Revision: 1.31 $
+    @date $Date: 2004/07/12 12:23:11 $
     @author ehrlich
     @author troy
     @author pretz
@@ -73,12 +73,23 @@ class I3OMResponse : public TObject
   /**
    * @return the reco hit series data as a const object
    */
-  const I3RecoHitVectDict& GetRecoHitVectDict() const {return fRecoHitVectDict;}
+  const I3RecoHitVectDict& GetRecoHitVectDict() const 
+    {
+      return fRecoHitVectDict;
+    }
   
   /**
    * @return the reco hit series data as a non-const object
    */
   I3RecoHitVectDict& GetRecoHitVectDict() {return fRecoHitVectDict;}
+
+  /**
+   * @todo finish implementing this method
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3OMResponse ]\n";
+    }
 
   private:
   // copy and assignment are private
@@ -88,6 +99,13 @@ class I3OMResponse : public TObject
   // ROOT macro
   ClassDef(I3OMResponse,1);
 };
+
+inline ostream& operator<<(ostream& o,I3OMResponse& resp)
+{
+  resp.ToStream(o);
+  return o;
+}
+
 typedef PtrPolicy<I3OMResponse>::ThePolicy I3OMResponsePtr;
 
 #endif

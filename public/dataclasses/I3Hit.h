@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.15 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Hit.h,v 1.16 2004/07/12 12:23:11 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/07/12 12:23:11 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,6 +15,10 @@
 
 #include <TObject.h>
 #include "StoragePolicy.h"
+#include <iostream>
+#include "TClass.h"
+
+using namespace std;
 
 /**
  * @brief I3Hit is the basic hit class.  Just a time for a PE arrival
@@ -59,10 +63,23 @@ class I3Hit : public TObject
    */
   void SetTime(Double_t time) { fTime = time; }
 
+  /**
+   * @todo finish implementing this method
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ "<<IsA()->GetName()<<": Time:"<<fTime<<" ]\n";
+    }
+
  private:
   // ROOT Macro
   ClassDef(I3Hit, 1);
 };
+
+inline ostream& operator<<(ostream& o,const I3Hit& hit)
+{
+  hit.ToStream(o);
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

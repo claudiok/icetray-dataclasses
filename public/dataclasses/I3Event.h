@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.28 2004/07/07 19:05:57 pretz Exp $
+ * $Id: I3Event.h,v 1.29 2004/07/12 12:23:11 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.28 $
- * @date $Date: 2004/07/07 19:05:57 $
+ * @version $Revision: 1.29 $
+ * @date $Date: 2004/07/12 12:23:11 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -98,7 +98,11 @@ class I3Event : public TObject
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ I3Event ]";
+      o<<"[ I3Event \n"
+       <<fTriggerData
+       <<fFilterData
+       <<fOMResponseVect
+       <<"]\n";
     }
 
  private:
@@ -109,6 +113,12 @@ class I3Event : public TObject
   //ROOT macro
   ClassDef(I3Event, 1);
 };
+
+inline ostream& operator<<(ostream& o,const I3Event& evt)
+{
+  evt.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

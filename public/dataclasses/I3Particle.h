@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.9 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Particle.h,v 1.10 2004/07/12 12:23:11 pretz Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/07/12 12:23:11 $
  * @author pretz
  *
  */
@@ -15,7 +15,11 @@
 #include "TObject.h"
 #include "I3Position.h"
 #include "StoragePolicy.h"
+#include "TClass.h"
+#include <iostream>
 #include <cmath>
+
+using namespace std;
 
 /**
  * @brief The base 'particle' class.  
@@ -138,8 +142,22 @@ public:
   */
  virtual void CopyFrom(const I3Particle& source) = 0 ; 
 
+ /**
+  * @todo finish implementing this method
+  */
+ virtual void ToStream(ostream& o) const
+   {
+     o<<"[ "<<IsA()->GetName()<<" ]\n";
+   }
+
   ClassDef(I3Particle,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3Particle& part)
+{
+  part.ToStream(o);
+  return o;
+}
 
 typedef PtrPolicy<I3Particle>::ThePolicy I3ParticlePtr;
 

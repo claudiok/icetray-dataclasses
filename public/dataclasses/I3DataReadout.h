@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.11 2004/07/04 06:03:32 troy Exp $
+ * $Id: I3DataReadout.h,v 1.12 2004/07/12 12:23:11 pretz Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/07/04 06:03:32 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/07/12 12:23:11 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,6 +15,11 @@
 
 #include <TObject.h>
 #include "StoragePolicy.h"
+#include "TClass.h"
+#include <iostream>
+
+using namespace std;
+
 /**
  * @brief A base class for all the data readout types. 
  */
@@ -47,6 +52,14 @@ class I3DataReadout : public TObject
    */
   void SetRaw(Bool_t raw) {fRaw = raw;}
 
+  /**
+   * @todo finish implementing this method
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ "<<IsA()->GetName()<<" ]\n";
+    }
+
  private:
   // copy and assignment are private
   I3DataReadout(const I3DataReadout& rhs); 
@@ -55,6 +68,12 @@ class I3DataReadout : public TObject
   // ROOT Macro
   ClassDef(I3DataReadout,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3DataReadout& readout)
+{
+  readout.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

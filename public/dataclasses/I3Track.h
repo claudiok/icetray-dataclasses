@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.20 2004/07/06 15:35:52 pretz Exp $
+ * $Id: I3Track.h,v 1.21 2004/07/12 12:23:11 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/07/06 15:35:52 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/07/12 12:23:11 $
  * @author pretz
  */
 
@@ -215,7 +215,7 @@ class I3Track : public I3ObservableParticle
    * to stdout.  
    * @todo take Troy's implementation of this from the archive
    */
-  virtual void ToStream (std::ostream &s) const {s<<"A Track\n";}
+  //  virtual void ToStream (std::ostream &s) const {s<<"A Track\n";}
  protected:
 
   ClassDef(I3Track, 1);

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.21 2004/07/05 18:25:56 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.22 2004/07/12 12:23:11 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/07/05 18:25:56 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/07/12 12:23:11 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,7 +15,11 @@
 
 #include <TObject.h>
 #include "dataclasses/I3Position.h"
+#include <TClass.h>
 #include <string>
+#include <iostream>
+
+using namespace std;
 
 /**
  * @brief The basic Optical Module Geometry class.  
@@ -180,6 +184,22 @@ class I3OMGeo : public TObject
    */
   void Area(Double_t area){fArea = area;}
 
+  /**
+   * @todo finish with all the data
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ "
+       <<IsA()->GetName()
+       <<" X:"
+       <<fPosition.GetX()
+       <<" Y:"
+       <<fPosition.GetY()
+	<<" Z:"
+       <<fPosition.GetZ()
+       <<" ]\n";
+    }
+
  private:
   /**
    * resets the data to 0's.
@@ -189,6 +209,12 @@ class I3OMGeo : public TObject
   //ROOT macro
   ClassDef(I3OMGeo,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3OMGeo& g)
+{
+  g.ToStream(o); 
+  return o;
+}
 
 #include "dataclasses/StoragePolicy.h"
 typedef PtrPolicy<I3OMGeo>::ThePolicy I3OMGeoPtr;
