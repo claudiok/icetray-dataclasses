@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.95 2004/07/26 23:39:10 ehrlich Exp $
-// $Revision: 1.95 $
-// $Date: 2004/07/26 23:39:10 $
+// $Id: LinkDef.h,v 1.96 2004/07/28 08:13:35 ehrlich Exp $
+// $Revision: 1.96 $
+// $Date: 2004/07/28 08:13:35 $
 //
 
 #ifdef __CINT__
@@ -188,8 +188,8 @@
 
 #pragma link C++ class I3MCTankHit+;
 //#pragma link C++ class I3MCTankHit::iterator+;
-#pragma link C++ typedef VectorPolicy<I3MCParticleEventPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3MCParticleEventPtr>::ThePolicy;
+#pragma link C++ typedef VectorPolicy<I3MCParticleDataPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3MCParticleDataPtr>::ThePolicy;
 #pragma link C++ function operator!= (const I3MCTankHit::iterator&, const I3MCTankHit::iterator&);
 #pragma link C++ typedef I3MCTankHitPtr;
 
@@ -270,8 +270,8 @@
 #pragma link C++ typedef I3MCOMResponsePtr;
 #pragma link C++ class I3MCPMTResponse+;
 #pragma link C++ typedef I3MCPMTResponsePtr;
-#pragma link C++ class I3MCParticleEvent+;
-#pragma link C++ typedef I3MCParticleEventPtr;
+#pragma link C++ class I3MCParticleData+;
+#pragma link C++ typedef I3MCParticleDataPtr;
 #pragma link C++ class I3Monitoring+;
 #pragma link C++ typedef I3MonitoringPtr;
 #pragma link C++ class I3MonitoringHeader+;
