@@ -4,9 +4,11 @@
 /**
  * Class: I3Event
  *
- * Version: $Id: I3Event.h,v 1.5 2004/01/30 17:22:00 ehrlich Exp $
+ * Version: $Id: I3Event.h,v 1.6 2004/01/30 18:03:32 ehrlich Exp $
  *
  * Date: 30 Jan 2004
+ *
+ * (c) 2004 IceCube Collaboration
  */
 
 #include <TObject.h>
@@ -29,7 +31,7 @@ class I3Event : public TObject
  * related to each event. Additionally it stores event information
  * such as time, id, etc. (it is planned to store this kind of 
  * information in a separate header class).
- * @version $Id: I3Event.h,v 1.5 2004/01/30 17:22:00 ehrlich Exp $
+ * @version $Id: I3Event.h,v 1.6 2004/01/30 18:03:32 ehrlich Exp $
  * @author Ralf Ehrlich
  */
   
@@ -43,7 +45,7 @@ class I3Event : public TObject
   I3MCTrackData    *mctrackdata;
   I3OMResponseData *omresponsedata;
   I3RecoResultData *recoresultdata;
-  I3Bag            *bag
+  I3Bag            *bag;
 
   public:
   

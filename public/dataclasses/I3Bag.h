@@ -1,10 +1,10 @@
 #ifndef I3BAG_H
-#define I3BAG_h
+#define I3BAG_H
 
 /**
  * Class: I3Bag
  *
- * Version: $Id: I3Bag.h,v 1.3 2004/01/30 17:34:45 pretz Exp $
+ * Version: $Id: I3Bag.h,v 1.4 2004/01/30 18:03:32 ehrlich Exp $
  *
  * Date: 30 Jan 2004
  *

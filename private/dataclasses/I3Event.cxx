@@ -80,9 +80,9 @@ I3RecoResultData& I3Event::GetRecoResultData() const
 
 I3Bag& I3Event::GetBag() const 
 {
-  if(recoresultdata) return(*recoresultdata);
+  if(bag) return(*bag);
   I3DataExecution::Instance().Fatal("I3Event::GetRecoResultData() recoresultdata does not exist");
-  return(*(I3RecoResultData*)NULL);
+  return(*(I3Bag*)NULL);
 }
 
   
