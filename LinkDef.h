@@ -39,6 +39,7 @@
 #pragma link C++ class I3MCHitSeriesStoragePolicy+;
 
 #pragma link C++ function operator!=(const I3MCHitSeries::iterator&, const I3MCHitSeries::iterator&)
+#pragma link C++ function operator!=(const I3MCRecoHitSeries::iterator&, const I3MCRecoHitSeries::iterator&)
 
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ typedef I3MCTrackData;
