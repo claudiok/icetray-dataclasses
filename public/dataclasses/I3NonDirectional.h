@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonDirectional.h,v 1.8.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3NonDirectional.h,v 1.8.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3NonDirectional.h
- * @version $Revision: 1.8.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.8.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -36,9 +36,6 @@ class I3NonDirectional
     {
       o<<"Direction: NonDirectional\n";
     }
- private:
-  //ROOT macro
-  ClassDef(I3NonDirectional,1);
 };
 
 #endif // I3NONDIRECTIONAL

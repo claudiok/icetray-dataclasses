@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankMaterial.h,v 1.7.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3TankMaterial.h,v 1.7.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3TankMaterial.h
- * @version $Revision: 1.7.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.7.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author Peter Niessen Thu Feb 19 11:42:22 EST 2004
  */
 #ifndef __I3TANKMATERIAL_H_
@@ -48,7 +48,7 @@ class I3TankMaterial : public TObject
 
  private:
   // ROOT macro
-  ClassDef (I3TankMaterial, 1);
+
 
 };
 

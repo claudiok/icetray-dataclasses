@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.3 2004/12/06 19:20:08 ehrlich Exp $
+ * $Id: I3MCPMTResponseRomeo.h,v 1.3.2.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3MCPMTResponseRomeo.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/12/06 19:20:08 $
+ * @version $Revision: 1.3.2.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author klein
  * @author deyoung
  * @author ehrlich
@@ -78,8 +78,6 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
   I3MCPMTResponseRomeo(const I3MCPMTResponseRomeo&);
   I3MCPMTResponseRomeo& operator=(const I3MCPMTResponseRomeo&);
 
-  // ROOT macro
-  ClassDef(I3MCPMTResponseRomeo,1);
 };
 
 /** 

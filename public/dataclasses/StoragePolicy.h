@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.16.4.4 2005/02/04 06:11:43 troy Exp $
-    @version $Revision: 1.16.4.4 $
-    @date $Date: 2005/02/04 06:11:43 $
+    $Id: StoragePolicy.h,v 1.16.4.5 2005/02/04 21:49:05 troy Exp $
+    @version $Revision: 1.16.4.5 $
+    @date $Date: 2005/02/04 21:49:05 $
     @author Troy D. Straszheim
 */
 
@@ -33,7 +33,14 @@
  */
 
 #include <boost/serialization/serialization.hpp>
+#include <boost/serialization/nvp.hpp>
+#include <boost/serialization/export.hpp>
+using boost::serialization::make_nvp;
+
+
 #include <boost/shared_ptr.hpp>
+using boost::shared_ptr;
+using boost::dynamic_pointer_cast;
 
 template <class Pointed>
 struct PtrPolicy
@@ -45,7 +52,7 @@ struct PtrPolicy
   //  typedef Pointed* ThePolicy;
 };
 
-using boost::dynamic_pointer_cast;
+
 
 template <class Stored>
 /**

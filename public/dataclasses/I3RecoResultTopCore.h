@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopCore.h,v 1.6 2004/12/08 17:46:50 pretz Exp $
+ * $Id: I3RecoResultTopCore.h,v 1.6.2.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3RecoResultTopCore.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/12/08 17:46:50 $
+ * @version $Revision: 1.6.2.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author Peter Niessen
  */
 
@@ -77,7 +77,7 @@ class I3RecoResultTopCore : public I3RecoResult
   //const I3RecoResultTopCore& operator= (const I3RecoResultTopCore&);
 
   // ROOT macro
-  ClassDef(I3RecoResultTopCore, 1);
+
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3EvenOMSelection.h,v 1.4.2.1 2005/02/04 06:11:43 troy Exp $
+ *  $Id: I3EvenOMSelection.h,v 1.4.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3EvenOMSelection.h
- * @version $Revision: 1.4.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.4.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author deyoung
  */
 
@@ -48,7 +48,6 @@ class I3EvenOMSelection : public I3OMResponseSelection
     o << "[ I3EvenOMSelection ]\n";
   };
 
-  ClassDef(I3EvenOMSelection,1);
 };
 
 #endif

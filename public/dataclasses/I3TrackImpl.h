@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.13.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3TrackImpl.h,v 1.13.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.13.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.13.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -156,7 +156,7 @@ class I3TrackImpl : public I3Track,
  protected:
 
   // ROOT macro
-  ClassDef(I3TrackImpl,1);
+
 };
 
 

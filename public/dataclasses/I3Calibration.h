@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3Calibration.h,v 1.1.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Calibration.h,v 1.1.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3Calibration.h
- * @version $Revision: 1.1.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.1.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author tmccauley
 
  * @todo Something is screwy when FrameAccess<I3Calibration> is used. This
@@ -54,7 +54,6 @@ private:
     I3Calibration(const I3Calibration& calibration);
     const I3Calibration& operator=(const I3Calibration& calibration);
     
-    ClassDef(I3Calibration,1);
 };
 
 typedef PtrPolicy<I3Calibration>::ThePolicy I3CalibPtr;

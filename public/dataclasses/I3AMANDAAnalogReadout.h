@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.9.2.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.9.2.2 2005/02/04 21:49:04 troy Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.9.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.9.2.2 $
+ * @date $Date: 2005/02/04 21:49:04 $
  * @author pretz
  *
  */
@@ -115,7 +115,6 @@ public:
 private:
 
     // ROOT macro
-    ClassDef(I3AMANDAAnalogReadout,1);
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MonoTrack.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
+    $Id: I3MonoTrack.h,v 1.5.4.1 2005/02/04 21:51:03 troy Exp $
 
     @file I3MonoTrack.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/08/12 17:33:33 $
+    @version $Revision: 1.5.4.1 $
+    @date $Date: 2005/02/04 21:51:03 $
     @author
 */
 
@@ -45,9 +45,6 @@ class I3MonoTrack : public I3BasicTrack
    */
   virtual void SetSpeed(Double_t arg) { fSpeed = arg; }
 
- private:
-  // ROOT macro
-  ClassDef(I3MonoTrack, 1);
 };
 
 /**

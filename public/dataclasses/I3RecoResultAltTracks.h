@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultAltTracks.h,v 1.7 2004/08/31 01:29:42 pretz Exp $
+ * $Id: I3RecoResultAltTracks.h,v 1.7.4.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3RecoResultAltTracks.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/08/31 01:29:42 $
+ * @version $Revision: 1.7.4.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  */
 #ifndef I3RECORESULTALTTRACKS_H
@@ -37,7 +37,7 @@ class I3RecoResultAltTracks : public I3RecoResult,
   const I3RecoResultAltTracks operator=(const I3RecoResultAltTracks);
 
   //ROOT macro
-  ClassDef(I3RecoResultAltTracks,1);
+
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3SLCReadout.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3SLCReadout.h,v 1.3.4.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3SLCReadout.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.3.4.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3SLCREADOUT_H
@@ -55,7 +55,7 @@ class I3SLCReadout : public I3AnalogReadout
   const I3SLCReadout& operator=(const I3SLCReadout&);
 
   // ROOT macro
-  ClassDef(I3SLCReadout,1);
+
 };
 
 /**

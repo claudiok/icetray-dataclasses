@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonEnergetic.h,v 1.7.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3NonEnergetic.h,v 1.7.4.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3NonEnergetic.h
- * @version $Revision: 1.7.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.7.4.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author pretz
  */
 #ifndef I3NONENERGETIC_H
@@ -35,10 +35,6 @@ class I3NonEnergetic
     {
       o<<"Energy: Non-energetic\n";
     }
-
- private:
-  //ROOT macro
-  ClassDef(I3NonEnergetic,1);
 
 };
 

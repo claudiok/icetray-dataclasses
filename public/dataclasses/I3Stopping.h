@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.19 2004/11/28 06:40:28 troy Exp $
+ * $Id: I3Stopping.h,v 1.19.2.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/11/28 06:40:28 $
+ * @version $Revision: 1.19.2.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -169,7 +169,7 @@ class I3Stopping
     }
  private:
   // ROOT macro
-  ClassDef(I3Stopping,1)
+
 };
 
 #endif //I3STOPPING_H

@@ -1,9 +1,9 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationItr.h,v 1.1.2.1 2005/01/25 23:33:44 troy Exp $
- * @version $Revision: 1.1.2.1 $
- * @date $Date: 2005/01/25 23:33:44 $
+ * $Id: I3StationItr.h,v 1.1.2.2 2005/02/04 21:51:03 troy Exp $
+ * @version $Revision: 1.1.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author niessen Thu Sep 16 17:24:51 EDT 2004
  */
 
@@ -51,7 +51,7 @@ class station_iterator : public TObject, public I3StationItr {
 
   I3StationItr fItr; // memorise where we are?
 
-  ClassDef (station_iterator, 0);
+
 };
 
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStationStatus.h,v 1.7.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3IceTopStationStatus.h,v 1.7.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3IceTopStationStatus.h
- * @version $Revision: 1.7.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.7.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATIONSTATUS_H
@@ -63,8 +63,6 @@ class I3IceTopStationStatus
 /*   I3IceTopStationStatus(const I3IceTopStationStatus& rhs); */
 /*   const I3IceTopStationStatus& operator=(const I3IceTopStationStatus& rhs); */
 
-  // ROOT macro
-  ClassDef(I3IceTopStationStatus,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3IceTopStationStatus& status)

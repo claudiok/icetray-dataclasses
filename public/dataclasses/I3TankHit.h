@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.5.2.1 2005/01/26 03:59:37 troy Exp $
+    $Id: I3TankHit.h,v 1.5.2.2 2005/02/04 21:51:03 troy Exp $
     @file I3TankHit.h
-    @version $Revision: 1.5.2.1 $
+    @version $Revision: 1.5.2.2 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -107,7 +107,7 @@ class I3TankHit : public TObject {
   const I3TankHit& operator=(const I3TankHit&); 
 
   // ROOT macro
-  ClassDef(I3TankHit,1);
+
 };
 
 inline ostream& operator<<(ostream& o,const I3TankHit& tankhit)

@@ -1,6 +1,6 @@
 #include "dataclasses/I3DataHeader.h"
 
-ClassImp(I3DataHeader);
+//ClassImp(I3DataHeader);
 
 I3DataHeader::I3DataHeader()
   : fMjd(0),

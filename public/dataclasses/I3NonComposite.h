@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonComposite.h,v 1.9 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3NonComposite.h,v 1.9.4.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3NonComposite.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.9.4.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3NONCOMPOSITE_H
@@ -48,9 +48,6 @@ class I3NonComposite
       o<<"Constituent particles: NonComposite\n";
     }
 
- private:
-  //ROOT macro
-  ClassDef(I3NonComposite,1);
 };
 
 #endif

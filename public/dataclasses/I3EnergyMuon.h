@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3EnergyMuon.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
+    $Id: I3EnergyMuon.h,v 1.5.4.1 2005/02/04 21:49:05 troy Exp $
 
     @file I3EnergyMuon.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/08/12 17:33:33 $
+    @version $Revision: 1.5.4.1 $
+    @date $Date: 2005/02/04 21:49:05 $
     @author deyoung
 */
 
@@ -35,9 +35,6 @@ class I3EnergyMuon : public I3TrackImpl<I3Infinite,
    * destructor
    */
   virtual ~I3EnergyMuon(){}
- private:
-  // ROOT macro
-  ClassDef(I3EnergyMuon,1);
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * Copyright (C) 2004
  * The IceCube collaboration
- * $Id: I3ShowerCore.h,v 1.2 2004/08/03 18:06:17 blaufuss Exp $
+ * $Id: I3ShowerCore.h,v 1.2.4.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3ShowerCore.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/03 18:06:17 $
+ * @version $Revision: 1.2.4.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author Peter Niessen
  */
 
@@ -26,7 +26,7 @@
 class I3ShowerCore
 : public I3TopShowerImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>
 {
-  ClassDef (I3ShowerCore, 1);
+
 };
        
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DetectorStatusHeader.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3DetectorStatusHeader.h,v 1.3.4.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3DetectorStatusHeader.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.3.4.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3DETECTORSTATUSHEADER_H
@@ -61,8 +61,6 @@ class I3DetectorStatusHeader : public I3DataHeader
 
  private:
   
-  // ROOT macro
-  ClassDef(I3DetectorStatusHeader,1);
 };
 
 /**

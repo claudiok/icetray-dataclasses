@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceParticle.h,v 1.1 2004/08/02 19:59:58 blaufuss Exp $
+ * $Id: I3InIceParticle.h,v 1.1.4.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3InIceParticle.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/08/02 19:59:58 $
+ * @version $Revision: 1.1.4.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author blaufuss
  */
 #ifndef I3INICEPARTICLE_H
@@ -57,9 +57,7 @@ class I3InIceParticle : public I3Particle
    * Gives a T along the track, corresponding to X,Y and Z
    */
   virtual Double_t GetT() const = 0;
- private:
-  //ROOT macro
-  ClassDef(I3InIceParticle,1);
+
 };
 
 /**

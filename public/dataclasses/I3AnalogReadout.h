@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.6.4.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3AnalogReadout.h,v 1.6.4.2 2005/02/04 21:49:04 troy Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.6.4.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.6.4.2 $
+ * @date $Date: 2005/02/04 21:49:04 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -50,7 +50,6 @@ public:
 private:
     
     // ROOT macro
-    ClassDef(I3AnalogReadout,1);
 };
 
 /**

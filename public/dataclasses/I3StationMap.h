@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.2.2.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3StationMap.h,v 1.2.2.3 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3StationMap.h
- * @version $Revision: 1.2.2.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.2.2.3 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
@@ -59,7 +59,7 @@ class I3StationMap : public TObject, public MapPolicy<StationKey, I3StationGeoPt
 
  private:
 
-  ClassDef (I3StationMap, 1);
+
 
 };
 

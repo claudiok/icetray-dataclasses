@@ -1,10 +1,10 @@
 /**
  * copyright (C) 2004
- * $Id: I3StationGeo.h,v 1.3.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3StationGeo.h,v 1.3.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3StationGeo.h
- * @version $Revision: 1.3.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.3.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author niessen Wed Sep  1 20:55:17 EDT 2004
  */
 
@@ -40,7 +40,7 @@ class I3StationGeo : public TObject, public VectorPolicy<I3SurfModuleGeoPtr>::Th
 
  private:
 
-  ClassDef (I3StationGeo, 1);
+
 
 };
 

@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.7.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3DOMCalibration.h,v 1.7.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.7.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.7.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -255,7 +255,6 @@ private:
     const I3DOMCalibration& operator=(const I3DOMCalibration& calibration);
 
     // ROOT macro
-    ClassDef(I3DOMCalibration,1);
 };
 
 typedef PtrPolicy<I3DOMCalibration>::ThePolicy I3DOMCalibPtr;

@@ -1,12 +1,12 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.8.2.1 2005/01/26 03:59:37 troy Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.8.2.2 2005/02/04 21:51:03 troy Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
 #include "dataclasses/I3DataExecution.h"
 
 #include <cmath> // for NAN
-ClassImp(I3DOMCalibration);
+//ClassImp(I3DOMCalibration);
 
 I3DOMCalibration::I3DOMCalibration()
     : fDate(NAN), fDOMId(0), fTemperature(NAN),

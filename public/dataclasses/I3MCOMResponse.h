@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.11.2.1 2005/02/04 06:11:43 troy Exp $
+    $Id: I3MCOMResponse.h,v 1.11.2.2 2005/02/04 21:49:05 troy Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.11.2.1 $
-    @date $Date: 2005/02/04 06:11:43 $
+    @version $Revision: 1.11.2.2 $
+    @date $Date: 2005/02/04 21:49:05 $
     @author ehrlich
     @author troy
     @author pretz
@@ -120,8 +120,6 @@ class I3MCOMResponse : public I3OMResponse
 
   private:
 
-  // ROOT macro
-  ClassDef(I3MCOMResponse,1);
 };
 
 /** 

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTopShower.h,v 1.1 2004/08/04 20:38:12 blaufuss Exp $
+    $Id: I3MCTopShower.h,v 1.1.4.1 2005/02/04 21:51:03 troy Exp $
 
     @file I3MCTopShower.h
-    @version $Revision: 1.1 $
-    @date $Date: 2004/08/04 20:38:12 $
+    @version $Revision: 1.1.4.1 $
+    @date $Date: 2005/02/04 21:51:03 $
     @author blaufuss
 */
 
@@ -50,9 +50,6 @@ class I3MCTopShower : public I3TopShowerImpl<I3Directional,
    */
   void  SetWeight(Double_t weight_) { fWeight = weight_; }
 
- private:
-  //ROOT macro
-  ClassDef(I3MCTopShower,1);
 };
 
 /** 

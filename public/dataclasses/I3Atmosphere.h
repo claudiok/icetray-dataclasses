@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Atmosphere.h,v 1.6.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Atmosphere.h,v 1.6.4.2 2005/02/04 21:49:04 troy Exp $
  *
  * @file I3Atmosphere.h
- * @version $Revision: 1.6.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.6.4.2 $
+ * @date $Date: 2005/02/04 21:49:04 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -107,7 +107,7 @@ class I3Atmosphere : public TObject
 
  private:
   //ROOT macro
-  ClassDef(I3Atmosphere,1);
+
 };
 
 inline ostream& operator<<(ostream& o,const I3Atmosphere& atm)

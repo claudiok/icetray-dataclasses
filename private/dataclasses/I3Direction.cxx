@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.8 2004/11/19 15:38:54 dule Exp $
+// $Id: I3Direction.cxx,v 1.8.2.1 2005/02/04 21:51:03 troy Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
@@ -9,7 +9,7 @@
 using namespace I3Constants;
 using namespace I3Units;
 
-ClassImp(I3Direction) // Class implementation to enable ROOT I/O
+//ClassImp(I3Direction) // Class implementation to enable ROOT I/O
 
 //-----------------------------------------------------------
 I3Direction::I3Direction()

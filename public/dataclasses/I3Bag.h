@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.20.4.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3Bag.h,v 1.20.4.3 2005/02/04 21:49:04 troy Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.20.4.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.20.4.3 $
+ * @date $Date: 2005/02/04 21:49:04 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -61,7 +61,6 @@ class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
  private:
 
   // ROOT macro
-  ClassDef(I3Bag,1);
 };
 /**
  * streaming operator

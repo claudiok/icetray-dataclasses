@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.8.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Directional.h,v 1.8.2.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.8.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.8.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
@@ -95,8 +95,6 @@ class I3Directional
       o<<"Direction:"<<fDir<<"\n";
     }
  private:
-  //ROOT macro
-  ClassDef(I3Directional,1);
 };
 
 #endif // I3DIRECTIONAL

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopParticle.h,v 1.2 2004/08/02 20:07:00 blaufuss Exp $
+ * $Id: I3IceTopParticle.h,v 1.2.4.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3IceTopParticle.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/02 20:07:00 $
+ * @version $Revision: 1.2.4.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author blaufuss
  */
 #ifndef I3ICETOPPARTICLE_H
@@ -35,10 +35,6 @@ class I3IceTopParticle : public I3Particle
    */
   virtual Bool_t IsIceTop() const {return kTRUE;}
 
-  
- private:
-  //ROOT macro
-  ClassDef(I3IceTopParticle,1);
 };
 
 /**

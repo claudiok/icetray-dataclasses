@@ -1,3 +1,3 @@
 #include "dataclasses/I3OMResponse.h"
 
-ClassImp(I3OMResponse);
+//ClassImp(I3OMResponse);

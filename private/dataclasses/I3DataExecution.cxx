@@ -8,7 +8,7 @@
 
 using namespace std;
 
-ClassImp(I3DataExecution);
+//ClassImp(I3DataExecution);
 
 I3DataExecution* I3DataExecution::fInstance = 0;
 

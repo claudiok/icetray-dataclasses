@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.22.2.2 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Hit.h,v 1.22.2.3 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.22.2.2 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.22.2.3 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,7 +29,8 @@ using namespace std;
  * DAQ-level records are stored as I3DataReadouts or
  * I3MCPMTResponses.
  */
-class I3Hit : public TObject {
+class I3Hit // : public TObject
+{
   
 public:
   /**
@@ -56,9 +57,9 @@ public:
    * @param rhs the right hand side of the equality
    * @return true if the times are equal
    */      
-  bool operator==(const I3Hit& rhs) {
-    return (time_ == rhs.time_); 
-  }
+  bool operator==(const I3Hit& rhs) const { return time_ == rhs.time_ 
+					      && hitID_ == rhs.hitID_; }
+  bool operator!=(const I3Hit& rhs) const { return !(*this==rhs); }
 
   /**
    * @return the time at which the hit occured
@@ -81,21 +82,6 @@ public:
    */
   void SetID(const int hitid) { hitID_ = hitid; }
 
-  /**
-   * @todo finish implementing this method
-   */
-  virtual void ToStream(ostream& o) const
-    {
-      o<<"[ "<<IsA()->GetName()<<": Time:"<<time_<<" ]\n";
-    }
-
-  virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
-
 private:
 
   friend class boost::serialization::access;
@@ -112,8 +98,6 @@ private:
   double time_;
   int hitID_;
 
-  // ROOT Macro
-  ClassDef(I3Hit, 1);
 };
 
 /** 
@@ -121,7 +105,7 @@ private:
  */ 
 inline ostream& operator<<(ostream& o,const I3Hit& hit)
 {
-  hit.ToStream(o);
+  o << "[I3Hit]" << endl;
   return o;
 }
 

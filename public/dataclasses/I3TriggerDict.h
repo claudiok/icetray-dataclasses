@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerDict.h,v 1.3.4.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3TriggerDict.h,v 1.3.4.3 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3TriggerDict.h
- * @version $Revision: 1.3.4.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.3.4.3 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -65,7 +65,7 @@ class I3TriggerDict : public TObject,
 
 
   // ROOT Macro
-  ClassDef(I3TriggerDict, 1);
+
 };
 
 /**

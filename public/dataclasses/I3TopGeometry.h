@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.16.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3TopGeometry.h,v 1.16.2.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.16.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.16.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -55,7 +55,7 @@ class I3TopGeometry : public TObject {
 
   I3StationMap fStationMap; //|| the stations
  
-  ClassDef (I3TopGeometry,2);  // changed Thu Sep  2 17:08:19 EDT 2004
+
 
 };
 

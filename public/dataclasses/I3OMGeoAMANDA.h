@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAMANDA.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3OMGeoAMANDA.h,v 1.2.4.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3OMGeoAMANDA.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.2.4.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -67,9 +67,6 @@ class I3OMGeoAMANDA : public I3OMGeo
     return *this;
   }
 
- private:
-
-  ClassDef(I3OMGeoAMANDA,1);
 };
 
 #include "dataclasses/StoragePolicy.h"

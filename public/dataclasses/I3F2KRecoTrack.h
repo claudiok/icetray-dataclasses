@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrack.h,v 1.4 2004/08/04 20:11:41 ehrlich Exp $
+    $Id: I3F2KRecoTrack.h,v 1.4.4.1 2005/02/04 21:49:05 troy Exp $
 
     @file I3F2KRecoTrack.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/08/04 20:11:41 $
+    @version $Revision: 1.4.4.1 $
+    @date $Date: 2005/02/04 21:49:05 $
     @author deyoung
 */
 
@@ -40,9 +40,6 @@ class I3F2KRecoTrack : public I3TrackImpl<I3Infinite,
    */
   virtual ~I3F2KRecoTrack(){}
 
- private:
-  //ROOT macro
-  ClassDef(I3F2KRecoTrack,1);
 };
 
 /**

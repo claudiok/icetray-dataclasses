@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.10.4.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3PrimaryImpl.h,v 1.10.4.3 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.10.4.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.10.4.3 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author pretz
  *
  */
@@ -87,7 +87,7 @@ class I3PrimaryImpl : public I3Primary,
 
  private:
   //ROOT macro
-  ClassDef(I3PrimaryImpl,1);
+
 };
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.10.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3CascadeImpl.h,v 1.10.4.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.10.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.10.4.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -97,7 +97,6 @@ class I3CascadeImpl : public I3Cascade,
 
  private:
   // ROOT macro
-  ClassDef(I3CascadeImpl,1);
 };
 
 #endif

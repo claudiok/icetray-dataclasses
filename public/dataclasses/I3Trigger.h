@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Trigger.h,v 1.5.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Trigger.h,v 1.5.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Trigger.h
- * @version $Revision: 1.5.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.5.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author blaufuss
  * @author deyoung
  */
@@ -139,7 +139,7 @@ private:
      */
     
     //ROOT macro
-    ClassDef(I3Trigger,1);
+
 };
 
 /**

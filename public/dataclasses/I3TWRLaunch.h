@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TWRLaunch.h,v 1.1 2004/07/30 15:11:00 blaufuss Exp $
+ * $Id: I3TWRLaunch.h,v 1.1.4.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3TWRLaunch.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/30 15:11:00 $
+ * @version $Revision: 1.1.4.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  * @author blaufuss
  *
@@ -37,7 +37,7 @@ class I3TWRLaunch : public I3DigitalLaunch
   const I3TWRLaunch& operator=(const I3TWRLaunch&);
 
   //ROOT macro
-  ClassDef(I3TWRLaunch,1);
+
 };
 
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.4.2.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3OMSelectionDict.h,v 1.4.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.4.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.4.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author deyoung
  * @author troy
  */
@@ -93,10 +93,6 @@ class I3OMSelectionDict : public TObject,
     return out.str();
   }  
 
- private:
-
-  // ROOT macro
-  ClassDef(I3OMSelectionDict,1);
 };
 
 /**

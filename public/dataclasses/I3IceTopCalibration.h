@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3IceTopCalibration.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3IceTopCalibration.h,v 1.2.2.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3IceTopCalibration.h
- * @version $Revision: 1.2.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.2.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author tmccauley
  */
 
@@ -39,10 +39,6 @@ public:
     virtual string ToString() const
     { return "FIXME"; }
     
-    //I3IceTopCalibration(const I3IceTopCalibration& calibration);
-    //const I3IceTopCalibration& operator=(const I3IceTopCalibration& calibration);
-    
-    ClassDef(I3IceTopCalibration,1);    
 };
 
 typedef PtrPolicy<I3IceTopCalibration>::ThePolicy I3IceTopCalibPtr;

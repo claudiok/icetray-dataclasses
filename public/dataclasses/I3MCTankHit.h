@@ -1,7 +1,7 @@
 /**
-    $Id: I3MCTankHit.h,v 1.6.4.1 2005/01/26 03:59:37 troy Exp $
+    $Id: I3MCTankHit.h,v 1.6.4.2 2005/02/04 21:51:03 troy Exp $
     @file I3MCTankHit.h
-    @version $Revision: 1.6.4.1 $
+    @version $Revision: 1.6.4.2 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -67,8 +67,6 @@ class I3MCTankHit : public I3TankHit, public VectorPolicy<I3IceTopParticlePtr>::
   I3MCTankHit(const I3MCTankHit&); 
   const I3MCTankHit& operator=(const I3MCTankHit&); 
 
-  // ROOT macro
-  ClassDef(I3MCTankHit,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3MCTankHit& tankhit)

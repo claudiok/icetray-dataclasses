@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SPASEModuleGeo.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3SPASEModuleGeo.h,v 1.2.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3SPASEModuleGeo.h
- * @version $Revision: 1.2.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.2.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author niessen Thu Sep  2 15:44:31 EDT 2004
  */
 
@@ -68,7 +68,7 @@ class I3SPASEModuleGeo : public I3SurfModuleGeo {
 		  // measured in area, not in inner/outer radius of
 		  // the hexagonal tiles.
 
-  ClassDef (I3SPASEModuleGeo, 1);
+
 };
 
 /**

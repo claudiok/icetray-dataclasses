@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.h,v 1.5.4.1 2005/01/26 03:59:37 troy Exp $
+    $Id: I3StationHit.h,v 1.5.4.2 2005/02/04 21:49:05 troy Exp $
     @file I3StationHit.h
-    @version $Revision: 1.5.4.1 $
+    @version $Revision: 1.5.4.2 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
@@ -97,7 +97,7 @@ class I3StationHit : public TObject,
   const I3StationHit& operator=(const I3StationHit&); 
 
   // ROOT macro
-  ClassDef(I3StationHit,1);
+
 };
 
 inline ostream& operator<<(ostream& o,const I3StationHit& hit)

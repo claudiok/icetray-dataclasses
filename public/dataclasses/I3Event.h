@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.41.2.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3Event.h,v 1.41.2.3 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.41.2.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.41.2.3 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -160,10 +160,6 @@ class I3Event : public TObject
 
   // Allowing default copy and assignment operators
 
- private:
-
-  //ROOT macro
-  ClassDef(I3Event, 1);
 };
 
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.10.2.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3DigitalReadout.h,v 1.10.2.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3DigitalReadout.h
- * @version $Revision: 1.10.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.10.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  * @author blaufuss
  *
@@ -60,8 +60,6 @@ class I3DigitalReadout : public I3DataReadout, public VectorPolicy<I3DigitalLaun
   
  private:
 
-  // ROOT macro
-  ClassDef(I3DigitalReadout,1);
 };
 
 /*

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEventHeader.h,v 1.2 2004/08/04 20:46:32 ehrlich Exp $
+ * $Id: I3MCEventHeader.h,v 1.2.4.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3MCEventHeader.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/04 20:46:32 $
+ * @version $Revision: 1.2.4.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -44,8 +44,6 @@ class I3MCEventHeader : public I3EventHeader
  private:
   // instance data
   
-  // ROOT Macro
-  ClassDef(I3MCEventHeader,1);
 };
 
 /**

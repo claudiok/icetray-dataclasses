@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHit.h,v 1.11.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3RecoHit.h,v 1.11.4.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3RecoHit.h
- * @version $Revision: 1.11.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.11.4.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -52,7 +52,7 @@ class I3RecoHit : public I3Hit
 
  private:
   //ROOT macro
-  ClassDef(I3RecoHit, 1);
+
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.21 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Infinite.h,v 1.21.2.1 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.21.2.1 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author 
  */
 
@@ -148,9 +148,6 @@ class I3Infinite
        <<"Time: "<<fT<<"\n";
     }
 
-  private:
-  //ROOT Macro
-  ClassDef(I3Infinite,1)
 };
 
 #endif //I3INFINITE_H

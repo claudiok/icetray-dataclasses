@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3StoppingMuon.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
+    $Id: I3StoppingMuon.h,v 1.5.4.1 2005/02/04 21:51:03 troy Exp $
 
     @file I3StoppingMuon.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/08/12 17:33:33 $
+    @version $Revision: 1.5.4.1 $
+    @date $Date: 2005/02/04 21:51:03 $
     @author deyoung
 */
 
@@ -39,7 +39,7 @@ class I3StoppingMuon : public I3TrackImpl<I3Stopping,
 
  private:
   //ROOT macro
-  ClassDef(I3StoppingMuon,1);
+
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.4.4.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3OMResponseMap.h,v 1.4.4.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3OMResponseMap.h
- * @version $Revision: 1.4.4.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.4.4.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -64,10 +64,6 @@ class I3OMResponseMap : public TObject,
       return out.str();
     }  
 
-  private:
-
-  // ROOT macro
-  ClassDef(I3OMResponseMap,1);
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.7.2.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3CoreLocalized.h,v 1.7.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.7.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.7.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author pretz
  */
 #ifndef I3CORELOCALIZED_H
@@ -82,7 +82,6 @@ class I3CoreLocalized
 
  private:
   //ROOT macro
-  ClassDef(I3CoreLocalized,1);
 };
 
 #endif

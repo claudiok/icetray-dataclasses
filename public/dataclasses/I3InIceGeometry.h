@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.19.4.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3InIceGeometry.h,v 1.19.4.3 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.19.4.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.19.4.3 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -69,8 +69,7 @@ class I3InIceGeometry : public TObject,
 
   private:
 
-  // ROOT macro
-  ClassDef(I3InIceGeometry,1);
+
 };
 
 /**

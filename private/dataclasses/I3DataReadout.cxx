@@ -1,5 +1,5 @@
 #include "dataclasses/I3DataReadout.h"
 
-ClassImp(I3DataReadout);
+//ClassImp(I3DataReadout);
 
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleData.h,v 1.6.4.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3MCParticleData.h,v 1.6.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3MCParticleData.h
- * @version $Revision: 1.6.4.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.6.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  *
  */
@@ -89,7 +89,6 @@ class I3MCParticleData : public TObject
 
  private:
 
-  ClassDef(I3MCParticleData,1);
 };
 
 inline ostream& operator<<(ostream& o, const I3MCParticleData& data)

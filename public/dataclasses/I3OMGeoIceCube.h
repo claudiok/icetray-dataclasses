@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIceCube.h,v 1.1 2004/07/06 14:15:31 pretz Exp $
+ * $Id: I3OMGeoIceCube.h,v 1.1.4.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3OMGeoIceCube.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/06 14:15:31 $
+ * @version $Revision: 1.1.4.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -55,9 +55,6 @@ class I3OMGeoIceCube : public I3OMGeo
    */
   virtual EOMType GetOMType() const { return IceCube;}
 
- private:
-
-  ClassDef(I3OMGeoIceCube,1);
 };
 
 /**

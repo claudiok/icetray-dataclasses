@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStatus.h,v 1.7.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3IceTopStatus.h,v 1.7.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3IceTopStatus.h
- * @version $Revision: 1.7.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.7.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATUS_H
@@ -67,8 +67,6 @@ class I3IceTopStatus : public TObject,
   I3IceTopStatus(const I3IceTopStatus& rhs);
   const I3IceTopStatus& operator=(const I3IceTopStatus& rhs);
 
-  // ROOT macro
-  ClassDef(I3IceTopStatus,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3IceTopStatus& status)

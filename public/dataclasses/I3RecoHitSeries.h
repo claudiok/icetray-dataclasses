@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.27 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.27.4.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.27 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.27.4.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author ehrlich
  * @author pretz
  */
@@ -79,7 +79,7 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
   const I3RecoHitSeries& operator= (const I3RecoHitSeries&);
 
   // ROOT macro
-  ClassDef(I3RecoHitSeries,1);
+
 };
 
 inline ostream& operator<<(ostream& o, const I3RecoHitSeries& series)

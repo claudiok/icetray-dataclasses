@@ -1,7 +1,7 @@
 /**
  * Class: I3Bag
  *
- * Version $Id: I3Bag.cxx,v 1.6 2004/04/22 15:55:44 pretz Exp $
+ * Version $Id: I3Bag.cxx,v 1.6.6.1 2005/02/04 21:51:03 troy Exp $
  *
  * Date: 24 Feb 2004
  *
@@ -10,5 +10,5 @@
 
 #include "dataclasses/I3Bag.h"
 
-ClassImp(I3Bag);
+
 

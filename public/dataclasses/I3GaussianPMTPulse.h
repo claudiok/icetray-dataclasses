@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3GaussianPMTPulse.h,v 1.1 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3GaussianPMTPulse.h,v 1.1.2.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3GaussianPMTPulse.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author deyoung
  *
  */
@@ -149,8 +149,6 @@ private:
   Double_t fTimeZero;
   Double_t fPedestal;
 
-  //ROOT macro
-  ClassDef(I3GaussianPMTPulse, 1);
 };
 
 /**

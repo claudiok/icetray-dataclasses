@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.10 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3Composite.h,v 1.10.4.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.10.4.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -75,7 +75,6 @@ class I3Composite
     }
  private:
   // ROOT macro
-  ClassDef(I3Composite,1);
 };
 
 #endif

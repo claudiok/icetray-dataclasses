@@ -1,14 +1,14 @@
 /**
-    $Id: I3StationHit.cxx,v 1.2 2004/11/28 06:40:27 troy Exp $
+    $Id: I3StationHit.cxx,v 1.2.2.1 2005/02/04 21:49:04 troy Exp $
     @file I3StationHit.C
-    @version $Revision: 1.2 $
+    @version $Revision: 1.2.2.1 $
     @date Fri Jul  9 21:55:18 EDT 2004
     @author rulrich
 */
 
 #include "dataclasses/I3StationHit.h"
 
-ClassImp(I3StationHit);
+//ClassImp(I3StationHit);
 
 /***************************************************************/
 

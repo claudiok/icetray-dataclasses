@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHit.h,v 1.6.2.1 2005/01/26 03:59:37 troy Exp $
+    $Id: I3ArrayHit.h,v 1.6.2.2 2005/02/04 21:49:04 troy Exp $
     @file I3ArrayHit.h
-    @version $Revision: 1.6.2.1 $
+    @version $Revision: 1.6.2.2 $
     @date Fri Jul  9 10:50:16 EDT 2004 
     @author rulrich
 */
@@ -54,7 +54,6 @@ class I3ArrayHit : public TObject,
   const I3ArrayHit& operator=(const I3ArrayHit&); 
 
   // ROOT macro
-  ClassDef(I3ArrayHit,1);
 };
 
 inline ostream& operator<<(ostream& o, const I3ArrayHit& hit)

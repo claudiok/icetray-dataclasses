@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPhoton.h,v 1.4.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3MCPhoton.h,v 1.4.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3MCPhoton.h
- * @version $Revision: 1.4.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.4.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3MCPHOTON_H
@@ -60,8 +60,6 @@ class I3MCPhoton : public TObject
     }
 
  private:
-  //ROOT macro
-  ClassDef(I3MCPhoton,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3MCPhoton& photon)

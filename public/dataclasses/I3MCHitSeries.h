@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.23 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.23.4.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.23.4.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -90,8 +90,6 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
   I3MCHitSeries(const I3MCHitSeries&); 
   const I3MCHitSeries& operator=(const I3MCHitSeries&); 
 
-  //ROOT Macro
-  ClassDef(I3MCHitSeries,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3MCHitSeries& series)

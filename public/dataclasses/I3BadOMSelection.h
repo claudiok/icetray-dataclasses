@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.5.2.1 2005/02/04 06:11:43 troy Exp $
+ *  $Id: I3BadOMSelection.h,v 1.5.2.2 2005/02/04 21:49:04 troy Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.5.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.5.2.2 $
+ * @date $Date: 2005/02/04 21:49:04 $
  * @author deyoung
  */
 
@@ -88,7 +88,6 @@ private:
 
   VectorPolicy<OMKey>::ThePolicy fBadOMs;
   
-  ClassDef(I3BadOMSelection,1);
 };
 
 /**

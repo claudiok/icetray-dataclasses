@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.6.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3OMStatus.h,v 1.6.4.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3OMStatus.h
- * @version $Revision: 1.6.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.6.4.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -75,10 +75,6 @@ class I3OMStatus : public TObject
       return out.str();
     }
 
- private:
-
-  //ROOT macro
-  ClassDef(I3OMStatus,1);
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.20 2004/11/28 06:40:28 troy Exp $
+ * $Id: I3Starting.h,v 1.20.2.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/11/28 06:40:28 $
+ * @version $Revision: 1.20.2.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -172,7 +172,7 @@ class I3Starting
 
  protected:
   // ROOT macro
-  ClassDef(I3Starting,1)
+
 };
 
 #endif //I3STARTING_H

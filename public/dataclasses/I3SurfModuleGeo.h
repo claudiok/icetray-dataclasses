@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.3.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3SurfModuleGeo.h,v 1.3.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.3.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.3.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
@@ -83,7 +83,7 @@ class I3SurfModuleGeo : public TObject, public MapPolicy<OMKey, I3OMGeoPtr>::The
 
   Float_t fOrientation; // rotation angle around the z-axis. (radians)
 
-  ClassDef (I3SurfModuleGeo, 1);
+
 
 };
 

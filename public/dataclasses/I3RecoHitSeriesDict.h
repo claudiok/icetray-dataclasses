@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.4.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3RecoHitSeriesDict.h,v 1.4.2.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.4.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.4.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -70,7 +70,7 @@ class I3RecoHitSeriesDict : public TObject,
   const I3RecoHitSeriesDict& operator=(const I3RecoHitSeriesDict&);
 
   // ROOT macro
-  ClassDef(I3RecoHitSeriesDict,1);
+
 };
 
 inline ostream& operator<<(ostream& o, const I3RecoHitSeriesDict& dict)

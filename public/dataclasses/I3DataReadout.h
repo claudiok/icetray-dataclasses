@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.17.4.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3DataReadout.h,v 1.17.4.3 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.17.4.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.17.4.3 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -90,8 +90,6 @@ public:
 
  private:
 
-  // ROOT Macro
-  ClassDef(I3DataReadout,1);
 };
 
 /**

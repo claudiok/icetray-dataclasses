@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Energetic.h,v 1.6.4.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Energetic.h,v 1.6.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Energetic.h
- * @version $Revision: 1.6.4.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.6.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  */
 #ifndef I3ENERGETIC_H
@@ -55,9 +55,7 @@ class I3Energetic
       o<<"Energy:"<<fEnergy<<"\n";
     }
 
- private:
-  // ROOT macro
-  ClassDef(I3Energetic,1);
+
 };
 
 #endif // I3ENERGETIC_H

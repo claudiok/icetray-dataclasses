@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.15.4.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.15.4.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.15.4.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.15.4.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -99,7 +99,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
   private:
 
   // ROOT macro
-  ClassDef(I3RecoResultSingleTrack, 1);
+
 };
 
 /**

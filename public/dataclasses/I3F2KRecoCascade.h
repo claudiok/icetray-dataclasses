@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoCascade.h,v 1.2 2004/08/04 19:20:30 ehrlich Exp $
+    $Id: I3F2KRecoCascade.h,v 1.2.4.1 2005/02/04 21:49:05 troy Exp $
 
     @file I3F2KRecoCascade.h
-    @version $Revision: 1.2 $
-    @date $Date: 2004/08/04 19:20:30 $
+    @version $Revision: 1.2.4.1 $
+    @date $Date: 2005/02/04 21:49:05 $
     @author ehrlich
 */
 
@@ -40,9 +40,6 @@ class I3F2KRecoCascade : public I3CascadeImpl<I3Directional,
    */
   virtual ~I3F2KRecoCascade(){}
 
- private:
-  //ROOT macro
-  ClassDef(I3F2KRecoCascade,1);
 };
 
 typedef PtrPolicy<I3F2KRecoCascade>::ThePolicy I3F2KRecoCascadePtr;

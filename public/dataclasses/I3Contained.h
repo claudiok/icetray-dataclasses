@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.21 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Contained.h,v 1.21.2.1 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.21.2.1 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -214,7 +214,6 @@ class I3Contained
 
   private:
     //ROOT macro
-  ClassDef(I3Contained,1)
 };
 
 #endif //I3CONTAINED_H

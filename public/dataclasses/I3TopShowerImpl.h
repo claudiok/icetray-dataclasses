@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShowerImpl.h,v 1.1.4.2 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3TopShowerImpl.h,v 1.1.4.3 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3TopShowerImpl.h
- * @version $Revision: 1.1.4.2 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.1.4.3 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author blaufuss
  *
  */
@@ -72,7 +72,7 @@ class I3TopShowerImpl : public I3TopShower,
 
  private:
   //ROOT macro
-  ClassDef(I3TopShowerImpl,1);
+
 };
 
 #endif

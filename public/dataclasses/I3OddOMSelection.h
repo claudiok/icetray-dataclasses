@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OddOMSelection.h,v 1.4.2.1 2005/02/04 06:11:43 troy Exp $
+ *  $Id: I3OddOMSelection.h,v 1.4.2.2 2005/02/04 21:49:05 troy Exp $
  *
  * @file I3OddOMSelection.h
- * @version $Revision: 1.4.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.4.2.2 $
+ * @date $Date: 2005/02/04 21:49:05 $
  * @author deyoung
  */
 
@@ -64,7 +64,6 @@ private:
    */
   I3OddOMSelection(const I3OddOMSelection& rhs) { *this = rhs; } 
   
-  ClassDef(I3OddOMSelection,1);
 };
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPrimary.h,v 1.4.6.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3MCPrimary.h,v 1.4.6.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3MCPrimary.h
- * @version $Revision: 1.4.6.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.4.6.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author ehrlich
  * @author pretz
  */
@@ -29,7 +29,7 @@ class I3MCPrimary : public I3PrimaryImpl<I3Directional,
 	                                 I3Localized,
 	                                 I3Energetic> 
 {
-  ClassDef(I3MCPrimary,1);
+
 };
 
 /**

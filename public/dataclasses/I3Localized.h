@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.7.2.1 2005/02/04 06:11:43 troy Exp $
+ * $Id: I3Localized.h,v 1.7.2.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.7.2.1 $
- * @date $Date: 2005/02/04 06:11:43 $
+ * @version $Revision: 1.7.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author pretz
  *
  */
@@ -81,9 +81,6 @@ class I3Localized{
       o<<"Position:\n"<<fPos
        <<"Time:"<<fT<<"\n";
     }
- private:
-  //ROOT macro
-  ClassDef(I3Localized,1);
 };
 
 #endif //I3LOCALIZED_H

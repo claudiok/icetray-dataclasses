@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHitDict.h,v 1.4.4.2 2005/02/04 06:11:43 troy Exp $
+    $Id: I3ArrayHitDict.h,v 1.4.4.3 2005/02/04 21:49:04 troy Exp $
     @file I3ArrayHitDict.h
-    @version $Revision: 1.4.4.2 $
+    @version $Revision: 1.4.4.3 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
     @author blaufuss
@@ -56,7 +56,7 @@ class I3ArrayHitDict : public TObject,
  private:
 
   // ROOT macro
-  ClassDef(I3ArrayHitDict,1);
+
 };
 
 inline ostream& operator<<(ostream& o,const I3ArrayHitDict& dict)

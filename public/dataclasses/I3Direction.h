@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.10.2.1 2005/01/26 03:59:37 troy Exp $
+ * $Id: I3Direction.h,v 1.10.2.2 2005/02/04 21:51:03 troy Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.10.2.1 $
- * @date $Date: 2005/01/26 03:59:37 $
+ * @version $Revision: 1.10.2.2 $
+ * @date $Date: 2005/02/04 21:51:03 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.10.2.1 2005/01/26 03:59:37 troy Exp $
+// $Id: I3Direction.h,v 1.10.2.2 2005/02/04 21:51:03 troy Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -223,8 +223,6 @@ class I3Direction : public TObject
   //void CalcCarCylFromSph();
   //void CalcCarSphFromCyl();
 
-  // ROOT macro
-  ClassDef(I3Direction,1)
 };
 
 /**

@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.13 2004/11/19 15:38:54 dule Exp $
+// $Id: I3Position.cxx,v 1.13.2.1 2005/02/04 21:49:04 troy Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -9,7 +9,7 @@
 using namespace I3Constants;
 using namespace I3Units;
 
-ClassImp(I3Position) // Class implementation to enable ROOT I/O
+//ClassImp(I3Position) // Class implementation to enable ROOT I/O
 
 //-----------------------------------------------------------
 I3Position::I3Position()
