@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.6 2004/10/27 14:39:42 dule Exp $
+// $Id: I3Direction.cxx,v 1.7 2004/10/27 14:45:19 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
@@ -19,7 +19,7 @@ I3Direction::I3Direction()
 }
 
 //-----------------------------------------------------------
-I3Direction::I3Direction(Double_t azi, Double_t zen)
+I3Direction::I3Direction(Double_t zen, Double_t azi)
 {
 // Creation of an I3Direction object and initialization of parameters
   SetDirection(zen,azi);
