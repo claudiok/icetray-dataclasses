@@ -19,12 +19,12 @@ Int_t UniqueID::ID(I3MCEventPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
-  I3MCParticleMultiMap::iterator iter1;
-  I3MCParticleMultiMap &map1 = obj->GetMCParticleData().GetPrimary();
+  I3ParticleMultiMap::iterator iter1;
+  I3ParticleMultiMap &map1 = obj->GetMCParticleData().GetPrimary();
   for(iter1 = map1.begin(); iter1!= map1.end(); iter1++) ParticleID(iter1->second, option, highestID);
-  I3MCParticleMultiMap &map2 = obj->GetMCParticleData().GetIceTopParticles();
+  I3ParticleMultiMap &map2 = obj->GetMCParticleData().GetIceTopParticles();
   for(iter1 = map2.begin(); iter1!= map2.end(); iter1++) ParticleID(iter1->second, option, highestID);
-  I3MCParticleMultiMap &map3 = obj->GetMCParticleData().GetInIceParticles();
+  I3ParticleMultiMap &map3 = obj->GetMCParticleData().GetInIceParticles();
   for(iter1 = map3.begin(); iter1!= map3.end(); iter1++) ParticleID(iter1->second, option, highestID);
       
     
@@ -50,22 +50,22 @@ Int_t UniqueID::ID(I3MCParticleDataPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
-  I3MCParticleMultiMap::iterator iter;
-  I3MCParticleMultiMap &map1 = obj->GetPrimary();
+  I3ParticleMultiMap::iterator iter;
+  I3ParticleMultiMap &map1 = obj->GetPrimary();
   for(iter = map1.begin(); iter!= map1.end(); iter++) ParticleID(iter->second, option, highestID);
-  I3MCParticleMultiMap &map2 = obj->GetIceTopParticles();
+  I3ParticleMultiMap &map2 = obj->GetIceTopParticles();
   for(iter = map2.begin(); iter!= map2.end(); iter++) ParticleID(iter->second, option, highestID);
-  I3MCParticleMultiMap &map3 = obj->GetInIceParticles();
+  I3ParticleMultiMap &map3 = obj->GetInIceParticles();
   for(iter = map3.begin(); iter!= map3.end(); iter++) ParticleID(iter->second, option, highestID);
   
   return(highestID+1);
 }
 
-Int_t UniqueID::ID(I3MCParticleMultiMapPtr obj, IDOption option)
+Int_t UniqueID::ID(I3ParticleMultiMapPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
-  I3MCParticleMultiMap::iterator iter;
+  I3ParticleMultiMap::iterator iter;
   for(iter = obj->begin(); iter!= obj->end(); iter++) ParticleID(iter->second, option, highestID);
   
   return(highestID+1);

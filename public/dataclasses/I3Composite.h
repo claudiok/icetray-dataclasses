@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.8 2004/08/12 21:08:42 pretz Exp $
+ * $Id: I3Composite.h,v 1.9 2004/08/14 16:41:16 pretz Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/08/12 21:08:42 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/08/14 16:41:16 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
 #define I3COMPOSITE_H
 
-#include <vector>
 #include "I3Particle.h"
+#include "I3ParticleMultiMap.h"
 
 /**
  * @brief This class satisfies the "Composite" part of an I3Track 
@@ -23,7 +23,7 @@
 class I3Composite
 {
  private:
-  vector<I3ParticlePtr> fConstituents; //||
+   I3ParticleMultiMap fConstituents;
  public:
   /**
    * constructor
@@ -43,12 +43,12 @@ class I3Composite
   /**
    * retrieves the constituents that make up this track as const
    */
-  const vector<I3ParticlePtr>& GetConstituents() const {return fConstituents;}
+  const I3ParticleMultiMap& GetConstituents() const {return fConstituents;}
 
   /**
    * retrieves the constituents that make up this track as non-const
    */
-  vector<I3ParticlePtr>& GetConstituents() {return fConstituents;}
+  I3ParticleMultiMap& GetConstituents() {return fConstituents;}
 
   /**
    * copies this particle's data into destination if a dynamic_cast

@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.121 2004/08/13 17:42:19 pretz Exp $
-// $Revision: 1.121 $
-// $Date: 2004/08/13 17:42:19 $
+// $Id: LinkDef.h,v 1.122 2004/08/14 16:41:16 pretz Exp $
+// $Revision: 1.122 $
+// $Date: 2004/08/14 16:41:16 $
 //
 
 #ifdef __CINT__
@@ -172,10 +172,10 @@
 #pragma link C++ class VectorPolicy<I3ParticlePtr>::ThePolicy+;
 #pragma link C++ typedef I3RecoResultMultiTracksPtr;
 
-#pragma link C++ class I3MCParticleMultiMap+;
+#pragma link C++ class I3ParticleMultiMap+;
 #pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
 #pragma link C++ class MultiMapPolicy<string,I3ParticlePtr>::ThePolicy+;
-#pragma link C++ typedef I3MCParticleMultiMapPtr;
+#pragma link C++ typedef I3ParticleMultiMapPtr;
 
 #pragma link C++ typedef TObjectPtr;
 #pragma link C++ class I3Bag+;

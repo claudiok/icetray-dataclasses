@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleData.h,v 1.3 2004/07/28 19:10:34 ehrlich Exp $
+ * $Id: I3MCParticleData.h,v 1.4 2004/08/14 16:41:16 pretz Exp $
  *
  * @file I3MCParticleData.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/28 19:10:34 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/14 16:41:16 $
  * @author pretz
  *
  */
@@ -14,7 +14,7 @@
 #define I3MCPARTICLEDATA_H
 
 #include "dataclasses/I3MCPrimary.h"
-#include "dataclasses/I3MCParticleMultiMap.h"
+#include "dataclasses/I3ParticleMultiMap.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -26,9 +26,9 @@
 class I3MCParticleData : public TObject 
 {
 
-  I3MCParticleMultiMap fPrimary;
-  I3MCParticleMultiMap fInIceParticles;
-  I3MCParticleMultiMap fIceTopParticles;
+  I3ParticleMultiMap fPrimary;
+  I3ParticleMultiMap fInIceParticles;
+  I3ParticleMultiMap fIceTopParticles;
 
  public:
   /**
@@ -44,32 +44,32 @@ class I3MCParticleData : public TObject
   /**
    * @return the primary track as constant
    */
-  const I3MCParticleMultiMap& GetPrimary() const {return fPrimary;}
+  const I3ParticleMultiMap& GetPrimary() const {return fPrimary;}
 
   /**
    * @return the primary track as non-const
    */
-  I3MCParticleMultiMap& GetPrimary() {return fPrimary;}
+  I3ParticleMultiMap& GetPrimary() {return fPrimary;}
 
   /**
    * @return the In-Ice tracks as constant
    */
-  const I3MCParticleMultiMap& GetInIceParticles() const {return fInIceParticles;}
+  const I3ParticleMultiMap& GetInIceParticles() const {return fInIceParticles;}
 
   /**
    * @return the In-Ice tracks as non-constant
    */
-  I3MCParticleMultiMap& GetInIceParticles() {return fInIceParticles;}
+  I3ParticleMultiMap& GetInIceParticles() {return fInIceParticles;}
 
   /**
    * @return the IceTop tracks as constant
    */
-  const I3MCParticleMultiMap& GetIceTopParticles() const {return fIceTopParticles;}
+  const I3ParticleMultiMap& GetIceTopParticles() const {return fIceTopParticles;}
 
   /**
    * @return the IceTop tracks as non-constant
    */
-  I3MCParticleMultiMap& GetIceTopParticles() {return fIceTopParticles;};
+  I3ParticleMultiMap& GetIceTopParticles() {return fIceTopParticles;};
 
  private:
   // copy and assignment are private
