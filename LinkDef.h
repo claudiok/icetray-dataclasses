@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.105 2004/07/31 22:31:10 pretz Exp $
-// $Revision: 1.105 $
-// $Date: 2004/07/31 22:31:10 $
+// $Id: LinkDef.h,v 1.106 2004/08/02 19:31:10 pretz Exp $
+// $Revision: 1.106 $
+// $Date: 2004/08/02 19:31:10 $
 //
 
 #ifdef __CINT__
@@ -199,8 +199,8 @@
 
 #pragma link C++ class I3TopGeometry+;
 //#pragma link C++ class I3TopGeometry::iterator+;
-#pragma link C++ typedef VectorPolicy<I3TopStationGeoPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3TopStationGeoPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<StationKey,I3TopStationGeoPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<StationKey,I3TopStationGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3TopGeometry::iterator&, const I3TopGeometry::iterator&);
 
 #pragma link C++ class I3MCTankHit+;
@@ -369,6 +369,7 @@
 #pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
 #pragma link C++ class OMKey+;
+#pragma link C++ typedef StationKey;
 
 #pragma link C++ class UniqueID;
 
