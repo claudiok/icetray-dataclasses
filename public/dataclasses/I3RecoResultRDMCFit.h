@@ -1,17 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.4.2.1 2004/04/10 16:38:59 troy Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.4.2.2 2004/04/20 15:57:51 pretz Exp $
  *
- * A container for RDMC fits.  Contains a vector of doubles which are
+ * A container for RDMC fits.  Contains a vector of Double_ts which are
  * the fit parameters and a vector of ints which are the tubes used by
  * the fit.
  *
- * @version $Revision: 1.4.2.1 $
- * @date $Date: 2004/04/10 16:38:59 $
+ * @version $Revision: 1.4.2.2 $
+ * @date $Date: 2004/04/20 15:57:51 $
  * @author pretz
  *
- * @todo make sure the map<string,double> works in interpreted code
+ * @todo make sure the map<string,Double_t> works in interpreted code
  *
  */
 
@@ -28,7 +28,7 @@ using namespace std;
 
 class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 {
-  map<string,double> fParameters;
+  map<string,Double_t> fParameters;
   vector<Int_t> fUsedTubes;
   string fFitType;
 
@@ -57,13 +57,13 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
    * The parameters of the RDMC fit in the order they appear in the f2k file
    * @return the parameters of this fit as a const object
    */
-  const map<string,double>& Parameters() const {return fParameters;}
+  const map<string,Double_t>& Parameters() const {return fParameters;}
 
   /**
    * The parameters of the RDMC fit in the order they appear in the f2k file
    * @return the parameters of this fit as a non-const object
    */
-  map<string,double>& Parameters() {return fParameters;}
+  map<string,Double_t>& Parameters() {return fParameters;}
 
   /**
    * @return tubes used by this fit as a const object

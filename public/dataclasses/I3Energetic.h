@@ -6,12 +6,12 @@
 class I3Energetic
 {
  private:
-  double fEnergy;
+  Double_t fEnergy;
  public:
-  bool IsEnergetic() const {return true;}
+  Bool_t IsEnergetic() const {return true;}
 
-  double Energy() const {return fEnergy;}
-  void Energy(double energy){fEnergy = energy;}
+  Double_t Energy() const {return fEnergy;}
+  void Energy(Double_t energy){fEnergy = energy;}
 
   void CopyTo(I3Particle& destination) const
     {

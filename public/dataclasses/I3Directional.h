@@ -6,16 +6,16 @@
 class I3Directional 
 {
  private:
-  double fTheta;
-  double fPhi;
+  Double_t fTheta;
+  Double_t fPhi;
  public:
-  virtual bool IsDirectional() const {return true;}
+  virtual Bool_t IsDirectional() const {return true;}
 
-  virtual double Theta() const {return fTheta;}
-  virtual void Theta(double theta) {fTheta = theta;}
+  virtual Double_t Theta() const {return fTheta;}
+  virtual void Theta(Double_t theta) {fTheta = theta;}
 
-  virtual double Phi() const {return fPhi;}
-  virtual void Phi(double phi) {fPhi = phi;}
+  virtual Double_t Phi() const {return fPhi;}
+  virtual void Phi(Double_t phi) {fPhi = phi;}
 
   virtual void CopyTo(I3Position& destination)
     {

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.11 2004/04/19 20:39:40 pretz Exp $
+    $Id: I3Track.h,v 1.10.2.12 2004/04/20 15:57:51 pretz Exp $
 
-    @version $Revision: 1.10.2.11 $
-    @date $Date: 2004/04/19 20:39:40 $
+    @version $Revision: 1.10.2.12 $
+    @date $Date: 2004/04/20 15:57:51 $
     @author
 
     @todo
@@ -32,65 +32,65 @@ class I3Track : public I3Particle
   /**
    * indicates that the 'StartX() ... ' parameters are valid
    */
-  virtual bool IsStarting() const =0;
+  virtual Bool_t IsStarting() const =0;
 
   /**
    * indicates that the 'StopX() ...' parameters are valid
    */
-  virtual bool IsStopping() const  =0;
+  virtual Bool_t IsStopping() const  =0;
 
   /**
    * indicates that the particle is infinite
    */
-  virtual bool IsInfinite() const =0;
+  virtual Bool_t IsInfinite() const =0;
 
   /**
    * indicates that the particle is starting and stopping
    */
-  virtual bool IsContained() const  =0;
+  virtual Bool_t IsContained() const  =0;
 
   /**
    * indicates that the track has an energy
    */
-  virtual bool IsEnergetic() const =0;
+  virtual Bool_t IsEnergetic() const =0;
 
   /**
    * indicates that the track is a composite track
    */
-  virtual bool IsComposite() const =0;
+  virtual Bool_t IsComposite() const =0;
 
   // starting 4-position
-  virtual double StartX() const =0;
-  virtual double StartY() const =0;
-  virtual double StartZ() const =0;
-  virtual double StartT() const =0;
+  virtual Double_t StartX() const =0;
+  virtual Double_t StartY() const =0;
+  virtual Double_t StartZ() const =0;
+  virtual Double_t StartT() const =0;
 
   virtual I3Position StartPos() const =0;
   
   // stopping 4-position
-  virtual double StopX() const =0;
-  virtual double StopY() const =0;
-  virtual double StopZ() const =0;
-  virtual double StopT() const =0;
+  virtual Double_t StopX() const =0;
+  virtual Double_t StopY() const =0;
+  virtual Double_t StopZ() const =0;
+  virtual Double_t StopT() const =0;
 
   virtual I3Position StopPos() const =0;
 
   // Some X position
-  virtual double X() const =0;
-  virtual double Y() const =0;
-  virtual double Z() const =0;
-  virtual double T() const =0;
+  virtual Double_t X() const =0;
+  virtual Double_t Y() const =0;
+  virtual Double_t Z() const =0;
+  virtual Double_t T() const =0;
 
   virtual I3Position Pos() const =0;
   
   // energy
-  virtual double Energy() const =0;
+  virtual Double_t Energy() const =0;
 
   // speed 
-  virtual double Speed() const =0;
+  virtual Double_t Speed() const =0;
 
   // length
-  virtual double Length() const =0;
+  virtual Double_t Length() const =0;
 
   // composite particle stuff
   virtual int NumConstituents() const =0;

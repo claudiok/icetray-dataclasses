@@ -16,7 +16,7 @@ class I3NonComposite
   virtual ~I3NonComposite(){}
 
 
-  bool IsComposite() const {return false;}
+  Bool_t IsComposite() const {return false;}
 
   int NumConstituents() const 
     {

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackImpl.h,v 1.1.2.5 2004/04/20 13:38:59 pretz Exp $
+    $Id: I3TrackImpl.h,v 1.1.2.6 2004/04/20 15:57:51 pretz Exp $
 
-    @version $Revision: 1.1.2.5 $
-    @date $Date: 2004/04/20 13:38:59 $
+    @version $Revision: 1.1.2.6 $
+    @date $Date: 2004/04/20 15:57:51 $
     @author
 
     @todo
@@ -36,96 +36,96 @@ class I3TrackImpl : public I3Track,
 
   virtual ~I3TrackImpl() {};
 
-  virtual bool IsIdentifiable() const 
+  virtual Bool_t IsIdentifiable() const 
     {
       return IdentifiableType::IsIdentifiable();
     }
-  virtual bool IsStarting() const {return GeometricalType::IsStarting();}
-  virtual bool IsStopping() const {return GeometricalType::IsStopping();}
-  virtual bool IsInfinite() const 
+  virtual Bool_t IsStarting() const {return GeometricalType::IsStarting();}
+  virtual Bool_t IsStopping() const {return GeometricalType::IsStopping();}
+  virtual Bool_t IsInfinite() const 
     {
       if (GeometricalType::IsStarting() || GeometricalType::IsStopping())
 	return false;
       return true;
     }
-  virtual bool IsContained() const 
+  virtual Bool_t IsContained() const 
     {
       if(GeometricalType::IsStarting() && GeometricalType::IsStopping())
 	return true;
       return false;
     }
-  virtual bool IsEnergetic() const {return EnergeticType::IsEnergetic();}
-  virtual bool IsComposite() const {return CompositeType::IsComposite();}
-  virtual bool IsDirectional() const {return GeometricalType::IsDirectional();}
+  virtual Bool_t IsEnergetic() const {return EnergeticType::IsEnergetic();}
+  virtual Bool_t IsComposite() const {return CompositeType::IsComposite();}
+  virtual Bool_t IsDirectional() const {return GeometricalType::IsDirectional();}
 
   virtual ParticleType Type() const {return IdentifiableType::Type();}
   virtual void Type(ParticleType particle) {IdentifiableType::Type(particle);}
 
-  virtual double Zenith() const {return GeometricalType::Zenith();}
-  virtual void Zenith(double theta) {GeometricalType::Zenith(theta);}
+  virtual Double_t Zenith() const {return GeometricalType::Zenith();}
+  virtual void Zenith(Double_t theta) {GeometricalType::Zenith(theta);}
 
-  virtual double Azimuth() const {return GeometricalType::Azimuth();}
-  virtual void Azimuth(double phi) {GeometricalType::Azimuth(phi);}
+  virtual Double_t Azimuth() const {return GeometricalType::Azimuth();}
+  virtual void Azimuth(Double_t phi) {GeometricalType::Azimuth(phi);}
 
-  virtual double StartX() const {return GeometricalType::StartX();}
-  virtual void StartX(double startx) {GeometricalType::StartX(startx);}
+  virtual Double_t StartX() const {return GeometricalType::StartX();}
+  virtual void StartX(Double_t startx) {GeometricalType::StartX(startx);}
 
-  virtual double StartY() const {return GeometricalType::StartY();}
-  virtual void StartY(double starty){GeometricalType::StartY(starty);}
+  virtual Double_t StartY() const {return GeometricalType::StartY();}
+  virtual void StartY(Double_t starty){GeometricalType::StartY(starty);}
 
-  virtual double StartZ() const {return GeometricalType::StartZ();}
-  virtual void StartZ(double startz){GeometricalType::StartZ(startz);}
+  virtual Double_t StartZ() const {return GeometricalType::StartZ();}
+  virtual void StartZ(Double_t startz){GeometricalType::StartZ(startz);}
 
-  virtual double StartT() const {return GeometricalType::StartT();}
-  virtual void StartT(double startt){GeometricalType::StartT(startt);}
+  virtual Double_t StartT() const {return GeometricalType::StartT();}
+  virtual void StartT(Double_t startt){GeometricalType::StartT(startt);}
 
   virtual I3Position StartPos() const 
     {
       return I3Position(StartX(),StartY(),StartZ(),StartT());
     }
 
-  virtual double StopX() const {return GeometricalType::StopX();}
-  virtual void StopX(double stopx) {GeometricalType::StopX(stopx);}
+  virtual Double_t StopX() const {return GeometricalType::StopX();}
+  virtual void StopX(Double_t stopx) {GeometricalType::StopX(stopx);}
 
-  virtual double StopY() const {return GeometricalType::StopY();}
-  virtual void StopY(double stopy) {GeometricalType::StopY(stopy);}
+  virtual Double_t StopY() const {return GeometricalType::StopY();}
+  virtual void StopY(Double_t stopy) {GeometricalType::StopY(stopy);}
 
-  virtual double StopZ() const {return GeometricalType::StopZ();}
-  virtual void StopZ(double stopz) {GeometricalType::StopZ(stopz);}
+  virtual Double_t StopZ() const {return GeometricalType::StopZ();}
+  virtual void StopZ(Double_t stopz) {GeometricalType::StopZ(stopz);}
 
-  virtual double StopT() const {return GeometricalType::StopT();}
-  virtual void StopT(double stopt) {GeometricalType::StopT(stopt);}
+  virtual Double_t StopT() const {return GeometricalType::StopT();}
+  virtual void StopT(Double_t stopt) {GeometricalType::StopT(stopt);}
 
   virtual I3Position StopPos() const 
     {
       return I3Position(StopX(),StopY(),StopZ(),StopT());
     }
 
-  virtual double X() const {return GeometricalType::X();}
-  virtual void X(double x) {GeometricalType::X(x);}
+  virtual Double_t X() const {return GeometricalType::X();}
+  virtual void X(Double_t x) {GeometricalType::X(x);}
 
-  virtual double Y() const {return GeometricalType::Y();}
-  virtual void Y(double y){GeometricalType::Y(y);}
+  virtual Double_t Y() const {return GeometricalType::Y();}
+  virtual void Y(Double_t y){GeometricalType::Y(y);}
 
-  virtual double Z() const {return GeometricalType::Z();}
-  virtual void Z(double z){GeometricalType::Z(z);}
+  virtual Double_t Z() const {return GeometricalType::Z();}
+  virtual void Z(Double_t z){GeometricalType::Z(z);}
 
-  virtual double T() const {return GeometricalType::T();}
-  virtual void T(double t){GeometricalType::T(t);}
+  virtual Double_t T() const {return GeometricalType::T();}
+  virtual void T(Double_t t){GeometricalType::T(t);}
 
   virtual I3Position Pos() const 
     {
       return I3Position(X(),Y(),Z(),T());
     }
 
-  virtual double Energy() const {return EnergeticType::Energy();}
-  virtual void Energy(double energy) {EnergeticType::Energy(energy);}
+  virtual Double_t Energy() const {return EnergeticType::Energy();}
+  virtual void Energy(Double_t energy) {EnergeticType::Energy(energy);}
 
-  virtual double Speed() const {return GeometricalType::Speed();}
-  virtual void Speed(double speed) {GeometricalType::Speed(speed);}
+  virtual Double_t Speed() const {return GeometricalType::Speed();}
+  virtual void Speed(Double_t speed) {GeometricalType::Speed(speed);}
 
-  virtual double Length() const {return GeometricalType::Length();}
-  virtual void Length(double length) {GeometricalType::Length(length);}
+  virtual Double_t Length() const {return GeometricalType::Length();}
+  virtual void Length(Double_t length) {GeometricalType::Length(length);}
 
   virtual int NumConstituents() const {return CompositeType::NumConstituents();}
   virtual const I3Particle& Constituent(int i) const 

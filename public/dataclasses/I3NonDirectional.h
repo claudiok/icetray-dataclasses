@@ -6,13 +6,13 @@
 class I3NonDirectional 
 {
  public:
-  virtual bool IsNonDirectional() const {return true;}
+  virtual Bool_t IsNonDirectional() const {return true;}
 
-  virtual double Theta() const {return NAN;}
-  virtual void Theta(double theta) {return;}
+  virtual Double_t Theta() const {return NAN;}
+  virtual void Theta(Double_t theta) {return;}
 
-  virtual double Phi() const {return NAN;}
-  virtual void Phi(double phi) {return;}
+  virtual Double_t Phi() const {return NAN;}
+  virtual void Phi(Double_t phi) {return;}
 
   void CopyTo(I3Particle&) const {}
 

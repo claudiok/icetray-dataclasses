@@ -23,34 +23,34 @@ class I3CascadeImpl : public I3Cascade,
 
   virtual ~I3CascadeImpl() {};
 
-  virtual bool IsIdentifiable() const 
+  virtual Bool_t IsIdentifiable() const 
     {
       return IdentifiableType::IsIdentifiable();
     }
 
-  virtual bool IsEnergetic() const {return EnergeticType::IsEnergetic();}
+  virtual Bool_t IsEnergetic() const {return EnergeticType::IsEnergetic();}
 
-  virtual bool IsDirectional() const {return DirectionalType::IsDirectional();}
+  virtual Bool_t IsDirectional() const {return DirectionalType::IsDirectional();}
 
-  virtual bool IsLocalized() const {return LocalizableType::IsLocalized();}
+  virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
 
   virtual ParticleType Type() const {return IdentifiableType::Type();}
 
-  virtual double Theta() const {return DirectionalType::Theta();}
+  virtual Double_t Theta() const {return DirectionalType::Theta();}
 
-  virtual double Phi() const {return DirectionalType::Phi();}
+  virtual Double_t Phi() const {return DirectionalType::Phi();}
 
-  virtual double X() const {return LocalizableType::X();}
+  virtual Double_t X() const {return LocalizableType::X();}
 
-  virtual double Y() const {return LocalizableType::Y();}
+  virtual Double_t Y() const {return LocalizableType::Y();}
 
-  virtual double Z() const {return LocalizableType::Z();}
+  virtual Double_t Z() const {return LocalizableType::Z();}
 
-  virtual double T() const {return LocalizableType::T();}
+  virtual Double_t T() const {return LocalizableType::T();}
 
   virtual I3Position Pos() const {return I3Position(X(),Y(),Z(),T());}
 
-  virtual double Energy() const {return EnergeticType::Energy();}
+  virtual Double_t Energy() const {return EnergeticType::Energy();}
 
   ClassDef(I3CascadeImpl,1);
 };

@@ -18,7 +18,7 @@ class I3Composite
   virtual ~I3Composite(){}
 
 
-  bool IsComposite() const {return true;}
+  Bool_t IsComposite() const {return true;}
 
   int NumConstituents() const {return fConstituents.size();}
   const I3Particle& Constituent(int i) const 

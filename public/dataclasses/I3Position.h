@@ -6,25 +6,25 @@
 class I3Position : public TObject
 {
  private:
-  double fX;
-  double fY;
-  double fZ;
-  double fT;
+  Double_t fX;
+  Double_t fY;
+  Double_t fZ;
+  Double_t fT;
  public:
   I3Position() : fX(0),fY(0),fZ(0),fT(0){}
-  I3Position(double x,double y,double z,double t) :fX(x),fY(y),fZ(z),fT(0) {}
+  I3Position(Double_t x,Double_t y,Double_t z,Double_t t) :fX(x),fY(y),fZ(z),fT(0) {}
 
-  double X() {return fX;}
-  void X(double x) {fX = x;}
+  Double_t X() {return fX;}
+  void X(Double_t x) {fX = x;}
 
-  double Y() {return fY;}
-  void Y(double y) {fY = y;}
+  Double_t Y() {return fY;}
+  void Y(Double_t y) {fY = y;}
 
-  double Z() {return fZ;}
-  void Z(double z) {fZ = z;}
+  Double_t Z() {return fZ;}
+  void Z(Double_t z) {fZ = z;}
 
-  double T() {return fT;}
-  void T(double t) {fT = t;}
+  Double_t T() {return fT;}
+  void T(Double_t t) {fT = t;}
  private:
   ClassDef(I3Position,1);
 };

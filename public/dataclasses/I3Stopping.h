@@ -7,95 +7,95 @@
 
 class I3Stopping{
  private:
-  double fStopX;
-  double fStopY;
-  double fStopZ;
-  double fStopT;
-  double fZenith;
-  double fAzimuth;
+  Double_t fStopX;
+  Double_t fStopY;
+  Double_t fStopZ;
+  Double_t fStopT;
+  Double_t fZenith;
+  Double_t fAzimuth;
  public:
-  bool IsStopping() const {return true;}
-  bool IsStarting() const {return false;}
-  bool IsDirectional() const {return true;}
+  Bool_t IsStopping() const {return true;}
+  Bool_t IsStarting() const {return false;}
+  Bool_t IsDirectional() const {return true;}
 
-  double StartX() const 
+  Double_t StartX() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StartX(double)
+  void StartX(Double_t)
     {
       NanPolicy::Fatal();
     }
 
-  double StartY() const     
+  Double_t StartY() const     
     {
       NanPolicy::Fatal();
       return NAN;
     }
 
-  void StartY(double)
+  void StartY(Double_t)
     {
       NanPolicy::Fatal();
     }
   
-  double StartZ() const 
+  Double_t StartZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
   
-  void StartZ(double) 
+  void StartZ(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
-  double StartT() const
+  Double_t StartT() const
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StartT(double) 
+  void StartT(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
 
-  double X() const {return fStopX;}
-  void X(double) {return;}
+  Double_t X() const {return fStopX;}
+  void X(Double_t) {return;}
 
-  double Y() const {return fStopY;}
-  void Y(double) {return;}
+  Double_t Y() const {return fStopY;}
+  void Y(Double_t) {return;}
 
-  double Z() const {return fStopZ;}
-  void Z(double){return;}
+  Double_t Z() const {return fStopZ;}
+  void Z(Double_t){return;}
 
-  double T() const {return fStopT;}
-  void T(double){return;}
+  Double_t T() const {return fStopT;}
+  void T(Double_t){return;}
 
-  double Zenith() const {return fZenith;}
-  void Zenith(double theta){fZenith = theta;}
+  Double_t Zenith() const {return fZenith;}
+  void Zenith(Double_t theta){fZenith = theta;}
 
-  double Azimuth() const {return fAzimuth;}
-  void Azimuth(double phi){fAzimuth = phi;}
+  Double_t Azimuth() const {return fAzimuth;}
+  void Azimuth(Double_t phi){fAzimuth = phi;}
 
-  double Length() const {return INFINITY;}
-  void Length(double) {return;}
+  Double_t Length() const {return INFINITY;}
+  void Length(Double_t) {return;}
 
-  double StopX() const {return fStopX;}
-  void StopX(double stopx) {fStopX = stopx;}
+  Double_t StopX() const {return fStopX;}
+  void StopX(Double_t stopx) {fStopX = stopx;}
 
-  double StopY() const {return fStopX;}
-  void StopY(double stopy) {fStopY = stopy;}
+  Double_t StopY() const {return fStopX;}
+  void StopY(Double_t stopy) {fStopY = stopy;}
 
-  double StopZ() const {return fStopX;}
-  void StopZ(double stopz) {fStopZ = stopz;}
+  Double_t StopZ() const {return fStopX;}
+  void StopZ(Double_t stopz) {fStopZ = stopz;}
 
-  double StopT() const {return fStopT;}
-  void StopT(double stopt) {fStopT = stopt;}
+  Double_t StopT() const {return fStopT;}
+  void StopT(Double_t stopt) {fStopT = stopt;}
 
-  double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
-  void Speed(double) {return;}
+  Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
+  void Speed(Double_t) {return;}
 
   void CopyTo(I3Particle& destination) const
     {

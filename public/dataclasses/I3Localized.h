@@ -5,24 +5,24 @@
 
 class I3Localized{
  private:
-  double fX;
-  double fY;
-  double fZ;
-  double fT;
+  Double_t fX;
+  Double_t fY;
+  Double_t fZ;
+  Double_t fT;
  public:
-  virtual bool IsLocalized() const { return true;}
+  virtual Bool_t IsLocalized() const { return true;}
 
-  double X() const{ return fX;}
-  void X(double x) {fX = x;}
+  Double_t X() const{ return fX;}
+  void X(Double_t x) {fX = x;}
 
-  double Y() const{return fY;}
-  void Y(double y) {fY = y;}
+  Double_t Y() const{return fY;}
+  void Y(Double_t y) {fY = y;}
 
-  double Z() const{return fZ; }
-  void Z(double z) {fZ = z;}
+  Double_t Z() const{return fZ; }
+  void Z(Double_t z) {fZ = z;}
 
-  double T() const{return fT;}
-  void T(double t){fT = t;}
+  Double_t T() const{return fT;}
+  void T(Double_t t){fT = t;}
 
   void CopyTo(I3Particle& destination)
     {

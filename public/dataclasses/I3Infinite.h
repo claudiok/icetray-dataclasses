@@ -7,120 +7,120 @@
 
 class I3Infinite{
  private:
-  double fX;
-  double fY;
-  double fZ;
-  double fT;
-  double fZenith;
-  double fAzimuth;
+  Double_t fX;
+  Double_t fY;
+  Double_t fZ;
+  Double_t fT;
+  Double_t fZenith;
+  Double_t fAzimuth;
  public:
-  bool IsStarting() const {return false;}
-  bool IsStopping() const {return false;}
-  bool IsDirectional() const {return true;}
+  Bool_t IsStarting() const {return false;}
+  Bool_t IsStopping() const {return false;}
+  Bool_t IsDirectional() const {return true;}
 
-  double StartX() const 
+  Double_t StartX() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StartX(double startx)
+  void StartX(Double_t startx)
     {
       NanPolicy::Fatal();
     }
 
-  double StartY() const 
+  Double_t StartY() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StartY(double starty)
+  void StartY(Double_t starty)
     {
       NanPolicy::Fatal();
     }
   
-  double StartZ() const 
+  Double_t StartZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StartZ(double startz) 
+  void StartZ(Double_t startz) 
     {
       NanPolicy::Fatal();
     }
 
-  double StartT() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-  void StartT(double startt) 
-    {
-      NanPolicy::Fatal();
-    }
-
-  double X() const {return fX;}
-  void X(double x) {fX = x;}
-
-  double Y() const {return fY;}
-  void Y(double y) {fY = y;}
-
-  double Z() const {return fZ;}
-  void Z(double z){fZ = z;}
-
-  double T() const {return fT;}
-  void T(double t){fT = t;}
-
-  double Zenith() const {return fZenith;}
-  void Zenith(double theta){fZenith = theta;}
-
-  double Azimuth() const {return fAzimuth;}
-  void Azimuth(double phi){fAzimuth = phi;}
-
-  double Length() const {return INFINITY;}
-  void Length(double) {return;}
-
-  double StopX() const 
+  Double_t StartT() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StopX(double) 
+  void StartT(Double_t startt) 
     {
       NanPolicy::Fatal();
     }
 
-  double StopY() const 
+  Double_t X() const {return fX;}
+  void X(Double_t x) {fX = x;}
+
+  Double_t Y() const {return fY;}
+  void Y(Double_t y) {fY = y;}
+
+  Double_t Z() const {return fZ;}
+  void Z(Double_t z){fZ = z;}
+
+  Double_t T() const {return fT;}
+  void T(Double_t t){fT = t;}
+
+  Double_t Zenith() const {return fZenith;}
+  void Zenith(Double_t theta){fZenith = theta;}
+
+  Double_t Azimuth() const {return fAzimuth;}
+  void Azimuth(Double_t phi){fAzimuth = phi;}
+
+  Double_t Length() const {return INFINITY;}
+  void Length(Double_t) {return;}
+
+  Double_t StopX() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StopY(double) 
+  void StopX(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
-  double StopZ() const 
+  Double_t StopY() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StopZ(double) 
+  void StopY(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
-  double StopT() const 
+  Double_t StopZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void StopT(double)
+  void StopZ(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
-  double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
-  void Speed(double) {return;}
+  Double_t StopT() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopT(Double_t)
+    {
+      NanPolicy::Fatal();
+    }
+
+  Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
+  void Speed(Double_t) {return;}
 
   void CopyTo(I3Particle& destination) const
     {

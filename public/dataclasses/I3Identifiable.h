@@ -6,7 +6,7 @@
 class I3Identifiable{
   I3Particle::ParticleType fType;
  public:
-  virtual bool IsIdentifiable() const {return true;}
+  virtual Bool_t IsIdentifiable() const {return true;}
 
   I3Particle::ParticleType Type() const {return fType;}
   void Type(I3Particle::ParticleType type){fType = type;}

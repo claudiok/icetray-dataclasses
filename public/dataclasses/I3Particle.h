@@ -7,10 +7,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.1.2.3 2004/04/20 13:38:59 pretz Exp $
+ * $Id: I3Particle.h,v 1.1.2.4 2004/04/20 15:57:51 pretz Exp $
  *
- * @version $Revision: 1.1.2.3 $
- * @date $Date: 2004/04/20 13:38:59 $
+ * @version $Revision: 1.1.2.4 $
+ * @date $Date: 2004/04/20 15:57:51 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -62,12 +62,12 @@ class I3Particle : public TObject{
   * indicates that the particle can be identified.
   * So it is legal to ask for Type()
   */
- virtual bool IsIdentifiable() const =0;
+ virtual Bool_t IsIdentifiable() const =0;
 
  /**
   * indicates that particle has a direction of origin
   */
- virtual bool IsDirectional() const =0;
+ virtual Bool_t IsDirectional() const =0;
 
  /**
   * gives the type of the particle
@@ -82,12 +82,12 @@ class I3Particle : public TObject{
  /**
   * phi
   */
- virtual double Azimuth() const =0;
+ virtual Double_t Azimuth() const =0;
 
  /**
   * theta
   */
- virtual double Zenith() const =0;
+ virtual Double_t Zenith() const =0;
 
  /**
   * copies over data from this particle to the destination particle

@@ -8,14 +8,14 @@
 class I3NonEnergetic
 {
  public:
-  bool IsEnergetic() const {return false;}
+  Bool_t IsEnergetic() const {return false;}
 
-  double Energy() const 
+  Double_t Energy() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
-  void Energy(double energy) 
+  void Energy(Double_t energy) 
     {
       NanPolicy::Fatal();
     }

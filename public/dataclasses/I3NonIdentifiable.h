@@ -6,7 +6,7 @@
 
 class I3NonIdentifiable{
  public:
-  bool IsIdentifiable() const {return false;}
+  Bool_t IsIdentifiable() const {return false;}
 
   I3Particle::ParticleType Type() {return I3Particle::Unknown;}
 

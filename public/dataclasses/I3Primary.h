@@ -7,10 +7,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.1.2.1 2004/04/16 17:10:56 pretz Exp $
+ * $Id: I3Primary.h,v 1.1.2.2 2004/04/20 15:57:51 pretz Exp $
  *
- * @version $Revision: 1.1.2.1 $
- * @date $Date: 2004/04/16 17:10:56 $
+ * @version $Revision: 1.1.2.2 $
+ * @date $Date: 2004/04/20 15:57:51 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -18,13 +18,13 @@
  */
 class I3Primary : public I3Particle{
  public:
-  virtual bool HasCorePosition() {return false;}
+  virtual Bool_t HasCorePosition() {return false;}
 
-  virtual double CoreX() {return NAN;}
+  virtual Double_t CoreX() {return NAN;}
 
-  virtual double CoreY() {return NAN;}
+  virtual Double_t CoreY() {return NAN;}
 
-  virtual double CoreT() {return NAN;}
+  virtual Double_t CoreT() {return NAN;}
 
   ClassDef(I3Primary,1);
 };
