@@ -58,37 +58,37 @@
    @section recoresults RecoResult classes
 
    Events in IceCube store the results of reconstructions in the 
-   @c RecoResultData object.  This is a map (list of named objects;
-   see @ref containers) of objects derived from the @c RecoResult
-   class.  These @c RecoResult objects contain the various tracks,
+   @c I3RecoResultData object.  This is a map (list of named objects;
+   see @ref containers) of objects derived from the @c I3RecoResult
+   class.  These @c I3RecoResult objects contain the various tracks,
    cascades, etc. that make up the result of the reconstruction.  They
    can also hold any quality parameters that refer to the
    reconstruction result as a whole -- likelihoods, lists of used OMs,
    etc.  As described in @ref extension, we do not attempt to
    implement all of the various algorithm-specific parameters that may
    be used; reconstruction developers should derive specific 
-   @c RecoResult classes from those provided.  The classes described
+   @c I3RecoResult classes from those provided.  The classes described
    here represent only the minimum interface that should be respected
    by various algorithms.
 
    Three basic types of @c RecoResults are provided: 
-   @c RecoResultSingleTrack, @c RecoResultMultiTracks, and 
-   @c RecoResultAltTracks.  It is not sufficient to simply make 
-   @c RecoResult a container for a list of tracks, because there are
+   @c I3RecoResultSingleTrack, @c I3RecoResultMultiTracks, and 
+   @c I3RecoResultAltTracks.  It is not sufficient to simply make 
+   @c I3RecoResult a container for a list of tracks, because there are
    different logical relationships possible between the tracks in the
    list.  This is the information that is represented by the different
-   basic @c RecoResult classes.
+   basic @c I3RecoResult classes.
 
    The first type, of course, is intended for
    algorithms that produce a single track.  It is possible that at some
    point in the future this class will be modified to permit direct
    access to track parameters, without needing to go through the
-   intermediate layer of the @c RecoResult.  For now, however, 
-   @c RecoResultSingleTrack simply contains a pointer to an arbitrary
+   intermediate layer of the @c I3RecoResult.  For now, however, 
+   @c I3RecoResultSingleTrack simply contains a pointer to an arbitrary
    @c I3Particle object (i.e., a generic track or cascade; see 
    @ref particles). 
 
-   @c RecoResultMultiTracks is a vector of particle pointers, rather
+   @c I3RecoResultMultiTracks is a vector of particle pointers, rather
    than a single pointer.  It is intended to hold reconstructions
    which interpret the event as the result of several independent
    tracks or groups of tracks (see @ref composite_tracks for a
@@ -96,7 +96,7 @@
    used this class is one which finds simultaneous muons
    from independent air showers.
 
-   Finally, @c RecoResultAltTracks is a map of particles.  It should
+   Finally, @c I3RecoResultAltTracks is a map of particles.  It should
    be used for reconstructions that produce alternative explanations
    of an event, and provides for a name to be given to each
    alternative.  Examples of fits that should use this type of class
