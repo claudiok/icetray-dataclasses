@@ -1,4 +1,4 @@
-// $Id: LinkDef.h,v 1.72.2.2 2004/07/29 18:56:57 ehrlich Exp $
+// $Id: LinkDef.h,v 1.72.2.3 2004/08/26 19:33:01 ehrlich Exp $
 #ifdef __CINT__
 
 #pragma link off all globals;
@@ -261,6 +261,8 @@
 #pragma link C++ typedef I3DigitalFADCReadoutPtr;
 #pragma link C++ class I3DigitalTWRReadout+;
 #pragma link C++ typedef I3DigitalTWRReadoutPtr;
+#pragma link C++ class I3DOMReadout+;
+#pragma link C++ typedef I3DOMReadoutPtr;
 #pragma link C++ class I3Directional+;
 #pragma link C++ class I3Energetic+;
 #pragma link C++ class I3Event+;
@@ -346,6 +348,8 @@
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
 #pragma link C++ typedef I3TrackPtr;
+#pragma link C++ class I3Trigger+;
+#pragma link C++ typedef I3TriggerPtr;
 #pragma link C++ class I3TriggerData+;
 #pragma link C++ typedef I3TriggerDataPtr;
 
