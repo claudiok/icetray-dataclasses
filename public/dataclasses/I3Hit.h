@@ -5,13 +5,13 @@
 
 class I3Hit : public TObject
 {
-  unsigned long  true_time;
+  unsigned long  time;
 
   public:
   I3Hit();
 
-  unsigned long GetTruetime() const;
-  void SetTruetime(unsigned long true_time_);
+  unsigned long GetTime() const;
+  void SetTime(unsigned long time_);
 
   ClassDef(I3Hit, 1);
 };
