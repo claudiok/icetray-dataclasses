@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DecayingMuon.h,v 1.4 2004/04/27 18:12:20 deyoung Exp $
+    $Id: I3DecayingMuon.h,v 1.5 2004/04/28 12:20:27 pretz Exp $
 
     @file I3DecayingMuon.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/27 18:12:20 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/04/28 12:20:27 $
     @author deyoung
 */
 
@@ -15,8 +15,8 @@
 #include "I3Composite.h"
 #include "I3Energetic.h"
 
-#ifndef I3LOLLIPOP_H
-#define I3LOLLIPOP_H
+#ifndef I3DECAYINGMUON_H
+#define I3DECAYINGMUON_H
 
 #include "dataclasses/I3Track.h"
 

@@ -27,7 +27,7 @@
 #pragma link C++ class I3F2KRecoTrack+;
 #pragma link C++ typedef I3F2KRecoTrackPtr;
 #pragma link C++ class I3BasicMuon+;
-//#pragma link C++ class I3DecayingMuon+;
+#pragma link C++ class I3DecayingMuon+;
 #pragma link C++ class I3DoubleBang+;
 #pragma link C++ class I3MCMuon+;
 #pragma link C++ class I3Lollipop+;
