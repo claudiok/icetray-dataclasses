@@ -1,0 +1,37 @@
+/**
+   @page layout Layout of the event data
+
+   @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+
+   @section prereqs Prerequisites
+
+   This document assumes that you have set up the icetray environment and
+   are now ready to (or are already) start writing your own module of
+   some kind.  Full details at @ref index.
+   
+   @section frame The Frame
+
+   All data in an event record is contained within an @c I3Frame
+   object.  The frame is the container that IceTray passes along from
+   module to module.  The top-level objects within the frame come in
+   pairs of a header object and a contents object.  The contents
+   objects are technically optional, but will have been added to the
+   frame before it is delivered to most software modules, so we will
+   assume that they are present.  See @ref streams for more
+   information.  
+
+   The layout of a frame will be something like this:
+   <img src="../../dataclasses/resources/users-guide/StreamsOverview.png">
+   Only four streams are shown here; in general there will be more
+   streams, and some of the streams will have more contents (the
+   Monitoring stream will contain information about more than just the
+   atmospheric conditions, for example)..
+   
+   The information relating to a single event in the detector is found
+   in the @c I3Event class.  More information can be found at 
+   @ref event.  Geometry information is found in its own stream, however,
+   because it is basically static and need not be copied separately to
+   every frame.  
+
+   More to come....
+*/
