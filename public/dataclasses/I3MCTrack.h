@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTrack.h,v 1.8 2004/05/05 15:20:48 pretz Exp $
+    $Id: I3MCTrack.h,v 1.9 2004/05/05 19:26:25 pretz Exp $
 
     @file I3MCTrack.h
-    @version $Revision: 1.8 $
-    @date $Date: 2004/05/05 15:20:48 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/05/05 19:26:25 $
     @author deyoung
 */
 
@@ -54,5 +54,7 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   //ROOT macro
   ClassDef(I3MCTrack,1);
 };
+
+typedef PtrPolicy<I3MCTrack>::ThePolicy I3MCTrackPtr;
 
 #endif

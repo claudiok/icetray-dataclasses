@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.6 2004/05/04 17:56:38 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.7 2004/05/05 19:26:25 pretz Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/05/04 17:56:38 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/05/05 19:26:25 $
  * @author pretz
  *
  */
@@ -64,31 +64,37 @@ class I3PrimaryImpl : public I3Primary,
    * gives the zenith of the primary
    */
   virtual Double_t Zenith() const {return DirectionalType::Zenith();}
+  using DirectionalType::Zenith;
 
   /**
    * gives the azimuth of the primary
    */
   virtual Double_t Azimuth() const {return DirectionalType::Azimuth();}
+  using DirectionalType::Azimuth;
 
   /**
    * gives the X coordinate of the core
    */
   virtual Double_t CoreX() const {return CoreType::CoreX();}
+  using CoreType::CoreX;
 
   /**
    * gives the y position of the core
    */
   virtual Double_t CoreY() const {return CoreType::CoreY();}
+  using CoreType::CoreY;
 
   /**
    * gives the T position of the core
    */
   virtual Double_t CoreT() const {return CoreType::CoreT();}
+  using CoreType::CoreT;
 
   /**
    * gives the energy of the particle
    */
   virtual Double_t Energy() const {return EnergeticType::Energy();}
+  using EnergeticType::Energy;
 
   /**
    * 
