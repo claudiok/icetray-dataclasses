@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonComposite.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+ * $Id: I3NonComposite.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3NonComposite.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/22 16:55:52 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
- *
- * @todo
- *
  */
 #ifndef I3NONCOMPOSITE_H
 #define I3NONCOMPOSITE_H
@@ -19,8 +16,8 @@
 #include "NanPolicy.h"
 
 /**
- * This class satisfies the 'Composite' part of an I3Track implementation.
- * It is a 'non-compsite track' indicating that it has no constiuents
+ * @brief This class satisfies the 'Composite' part of an I3Track 
+ * implementation ; it has no constiuents.
  * @todo implement fatal call if out of bounds
  * @todo implement I3ParticlePtr stuff
  */

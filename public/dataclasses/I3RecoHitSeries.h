@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.20 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.21 2004/04/27 13:35:23 pretz Exp $
  *
- * @version $Revision: 1.20 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @file I3RecoHitSeries.h
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author ehrlich
  * @author pretz
- *
- * @todo 
- *
  */
 
 #ifndef I3RECOHITSERIES_H
@@ -18,6 +16,9 @@
 #include "I3RecoHit.h"
 #include "StoragePolicy.h"
 
+/**
+ * @brief A list of reco hits.
+ */
 class I3RecoHitSeries : public TObject, public VecPointainerPolicy<I3RecoHitPtr>::ThePolicy
 {
  public:

@@ -1,25 +1,29 @@
-#ifndef I3TRIGGERDATA_H
-#define I3TRIGGERDATA_H
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerData.h,v 1.2 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3TriggerData.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
  *
- * A place holder for the Trigger data within the event
- * Needs to be designed an implemented yet.
- *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @file I3TriggerData.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo design and implement this class
+
  */
+#ifndef I3TRIGGERDATA_H
+#define I3TRIGGERDATA_H
 
 #include <TObject.h>
 #include "StoragePolicy.h"
 
+/**
+ * @brief A place holder for the Trigger data within the event
+ * Needs to be designed an implemented yet.
+ * 
+ * @todo design and implement this class
+ */
 class I3TriggerData : public TObject
 {
  public:

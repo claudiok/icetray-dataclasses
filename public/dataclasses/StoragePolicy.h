@@ -1,14 +1,12 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.7 2004/03/14 15:07:12 pretz Exp $
+    $Id: StoragePolicy.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/03/14 15:07:12 $
-    @author
-
-    @todo
-
+    @file StoragePolicy.h
+    @version $Revision: 1.8 $
+    @date $Date: 2004/04/27 13:35:23 $
+    @author troy
 */
 
 // inlcude one and only one
@@ -27,6 +25,8 @@
 // something like this would be nice but root wont allow it
 template <class Stored>
 /**
+ * @brief The storage policy for vectors of objects.
+ *
  * The existence of this VectorPolicy class allows classes to inherit
  * from VectorPolicy<>::ThePolicy.  That policy's implementation can change -
  * provided the new implementation supplies the same interface - just by
@@ -43,6 +43,8 @@ struct VectorPolicy {
 };
 
 /**
+ * @brief The storage policy for vectors of pointers to objects 
+ *
  * The existence of this VecPointainerPolicy class allows classes to inherit
  * from VecPointainerPolicy<>::ThePolicy.  That policy's implementation can 
  * change -
@@ -61,6 +63,8 @@ struct VecPointainerPolicy{
 };
 
 /**
+ * @brief The storage policy for maps of objects
+ *
  * The existence of this MapPolicy class allows classes to inherit
  * from MapPolicy<>::ThePolicy.  That policy's implementation can change -
  * provided the new implementation supplies the same interface - just by
@@ -78,6 +82,8 @@ struct MapPolicy {
 };
 
 /**
+ * @brief The storage policy for maps of pointers to objects
+ *
  * The existence of this MapPointainerPolicy class allows classes to inherit
  * from MapPointainerPolicy<>::ThePolicy.  That policy's implementation can 
  * change -
@@ -95,6 +101,9 @@ struct MapPointainerPolicy{
 };
 
 /**
+ * @brief The pointer policy.  Should use typedefs of this rather than 
+ * raw pointers.
+ *
  * The existence of this PtrPolicy allows for typdefs of 
  * PtrPolicy<Foo>::ThePolicy FooPtr.  Then users use FooPtr rather than
  * Foo*.  What this does is allow the true implemntation of FooPtr to change

@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonEnergetic.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
+ * $Id: I3NonEnergetic.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3NonEnergetic.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:10:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
- *
- * @todo
- *
  */
 #ifndef I3NONENERGETIC_H
 #define I3NONENERGETIC_H
@@ -19,8 +16,8 @@
 #include "NanPolicy.h"
 
 /**
- * This is the 'Energy' part of an I3Track or I3Cascade implementation.  This 
- * class represents a particle that doesn't have any energy information.
+ * @brief This is the 'Energy' part of an I3Track or I3Cascade implementation. 
+ *  This class represents a particle that doesn't have any energy information.
  */
 class I3NonEnergetic
 {

@@ -1,18 +1,23 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: STLVectorStoragePolicy.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+
+    @file STLVectorStoragePolicy.h
+    @version $Revision: 1.5 $
+    @date $Date: 2004/04/27 13:35:23 $
+    @author Troy Straszheim
+*/
 #ifndef STLVECTOR_POLICY_INCLUDED
 #define STLVECTOR_POLICY_INCLUDED
 
 #include <vector>
 using namespace std;
+
 /**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.4 2004/03/14 15:07:12 pretz Exp $
-
-    @version $Revision: 1.4 $
-    @date $Date: 2004/03/14 15:07:12 $
-    @author Troy Straszheim
-
-*/
+ * @brief A template container akin to a STL vector but with a slightly 
+ * restricted interface
+ */
 template <class ElementType>
 class STLVectorStoragePolicy  {
 

@@ -1,3 +1,15 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3RecoResultLikelihood.h,v 1.6 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3RecoResultLikelihood.h
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3RECORESULTLIKELIHOOD_H
 #define I3RECORESULTLIKELIHOOD_H
 
@@ -5,20 +17,9 @@
 #include "dataclasses/I3DataExecution.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3RecoResultLikelihood.h,v 1.5 2004/03/14 15:07:12 pretz Exp $
+ * @brief The results of a likelihood fit.  
  *
- * The results of a likelihood fit.  Just spits out a likelihood in addition
- * to the tracks.
- *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/03/14 15:07:12 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
+ * Just spits out a likelihood in addition to the tracks.
  *
  */
 class I3RecoResultLikelihood : public I3RecoResultSingleTrack

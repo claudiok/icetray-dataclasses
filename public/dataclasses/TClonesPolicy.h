@@ -1,4 +1,13 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: TClonesPolicy.h,v 1.7 2004/04/27 13:35:23 pretz Exp $
 
+    @file TClonesPolicy.h
+    @version $Revision: 1.7 $
+    @date $Date: 2004/04/27 13:35:23 $
+    @author troy
+*/
 
 // ONLY ONE POLICY MUST BE INCLUDED
 #ifndef TCLONES_POLICY_INCLUDED
@@ -6,17 +15,11 @@
 
 #include <TClonesArray.h>
 #include <TClass.h>
+
 /**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: TClonesPolicy.h,v 1.6 2004/03/14 15:07:12 pretz Exp $
-
-    @version $Revision: 1.6 $
-    @date $Date: 2004/03/14 15:07:12 $
-    @author
-
-    @todo   need to get name of element class, see "new TClonesArray"
-*/
+ * @brief An prospective replacement for the STL Storage Policies.
+ * @todo   need to get name of element class, see "new TClonesArray"
+ */
 template <class ElementType>
 class TClonesPolicy {
 

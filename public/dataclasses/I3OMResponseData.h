@@ -1,3 +1,16 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3OMResponseData.h,v 1.18 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3OMResponseData.h
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ */
 #ifndef I3OMRESPONSEDATA_H
 #define I3OMRESPONSEDATA_H
 
@@ -6,17 +19,7 @@
 #include "StoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3OMResponseData.h,v 1.17 2004/03/10 18:39:56 pretz Exp $
- *
- * An event-level container for the OMResponse's of the Event.  
- *
- * @version $Revision: 1.17 $
- * @date $Date: 2004/03/10 18:39:56 $
- * @author ehrlich
- * @author troy
- * @author pretz
+ * @brief An event-level container for the OMResponse's of the Event.  
  *
  * @todo implement the 'FindOMResponse' as a smarter search, STL???
  *

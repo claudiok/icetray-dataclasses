@@ -1,13 +1,12 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3ShoweringMuon.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3ShoweringMuon.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @file I3ShoweringMuon.h
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 13:35:23 $
     @author deyoung
-
-    @todo
 */
 
 #include "I3TrackImpl.h"
@@ -21,7 +20,7 @@
 #include "dataclasses/I3Track.h"
 
 /**
- * For infinite muons with showers along their track.
+ * @brief For infinite muons with showers along their track.
  */
 class I3ShoweringMuon : public I3TrackImpl<I3Infinite,
                                            I3NonEnergetic,

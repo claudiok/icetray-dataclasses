@@ -1,24 +1,26 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3OMGeo.h,v 1.16 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3OMGeo.h
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3OMGEO_H
 #define I3OMGEO_H
 
 #include <TObject.h>
 #include <TObjArray.h>
 #include <string>
+
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.15 2004/04/01 17:08:24 pretz Exp $
- *
- * The basic Optical Module Geometry class.  This is the static 
- * frozen-in-the-ice properties of an optical module
- *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/04/01 17:08:24 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo
+ * @brief The basic Optical Module Geometry class.  
+ * 
+ * This is the static frozen-in-the-ice properties of an optical module
  *
  */
 class I3OMGeo : public TObject

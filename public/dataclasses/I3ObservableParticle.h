@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ObservableParticle.h,v 1.5 2004/04/26 04:11:57 ehrlich Exp $
+ * $Id: I3ObservableParticle.h,v 1.6 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3ObservableParticle.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/26 04:11:57 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
- *
- * @todo
- *
  */
 #ifndef I3OBSERVABLEPARTICLE_H
 #define I3OBSERVABLEPARTICLE_H
@@ -17,8 +14,8 @@
 #include "dataclasses/I3Particle.h"
 
 /**
- * This class is a base class for the different particles that can appear in 
- * the physical detector (as opposed to Primaries).
+ * @brief This class is a base class for the different particles that can 
+ * appear in the physical detector (as opposed to Primaries).
  */
 class I3ObservableParticle : public I3Particle
 {

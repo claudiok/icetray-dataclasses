@@ -1,19 +1,22 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: SmartPtr.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+
+    @file SmartPtr.h
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 13:35:23 $
+    @author Troy D. Straszheim
+*/
 #ifndef SMARTPTR_H_INCLUDED
 #define SMARTPTR_H_INCLUDED
 
 #include "RCObject.h"
+
 /**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: SmartPtr.h,v 1.3 2004/03/14 15:07:12 pretz Exp $
-
-    @version $Revision: 1.3 $
-    @date $Date: 2004/03/14 15:07:12 $
-    @author Troy D. Straszheim
-
-    @todo
-
-*/
+ * @brief A smart pointer class.  Deletes the pointee when all references
+ * to it go out of scope.
+ */
 template<class T>
 class SmartPtr {
 public:

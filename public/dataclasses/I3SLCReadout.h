@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3SLCReadout.h,v 1.2 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3SLCReadout.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author pretz
+ */
 #ifndef I3SLCREADOUT_H
 #define I3SLCREADOUT_H
 
@@ -5,18 +15,9 @@
 #include "StoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3SLCReadout.h,v 1.1 2004/03/10 02:42:24 pretz Exp $
+ * @brief An IceCube Single Local Coincidence hit. 
  *
- * An IceCube Single Local Coincidence hit.  Just a time stamp.
- *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/10 02:42:24 $
- * @author pretz
- *
- *  @todo
- *
+ * Just a time stamp.
  */
 class I3SLCReadout : public I3AnalogReadout
 { 

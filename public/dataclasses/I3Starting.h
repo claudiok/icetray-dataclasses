@@ -1,14 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.3 2004/04/23 21:31:29 deyoung Exp $
+ * $Id: I3Starting.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:31:29 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
- *
- * @todo
  */
 #ifndef I3STARTING_H
 #define I3STARTING_H
@@ -20,7 +18,8 @@
 #include "NanPolicy.h"
 
 /**
- * This class services the 'geometrical' part of the I3Track interface.
+ * @brief This class services the 'geometrical' part of the I3Track interface.
+ *
  * Defines a starting position, and starting time.  Also, a Zenith and Azimuth
  * But if you mess with StopX, StopY, StopZ or StopT, you get a fatal error
  *

@@ -1,20 +1,22 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: STLVecPointainerPolicy.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file STLVecPointainerPolicy.h
+ * @version $Version:$
+ * @date $Id: STLVecPointainerPolicy.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+ * @author pretz
+ */
+
 #ifndef STLVECPOINTAINERPOLICY_H
 #define STLVECPOINTAINERPOLICY_H
 
 #include "STLVectorStoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: STLVecPointainerPolicy.h,v 1.3 2004/03/10 19:31:12 pretz Exp $
- *
- * Just like an STLVecPointainerPolicy  which contains the added functionality 
- * that  it deletes all the members when it goes out of scope.
- *
- * @version $$
- * @date $Id: STLVecPointainerPolicy.h,v 1.3 2004/03/10 19:31:12 pretz Exp $
- * @author pretz
- *
+ * @brief Just like an STLVecPointainerPolicy  which contains the added 
+ * functionality that  it deletes all the members when it goes out of scope.
  * @todo can this be implemented as just inheriting from STLVectorStoragePolicy
  */
 

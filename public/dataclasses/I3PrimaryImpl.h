@@ -1,14 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.4 2004/04/23 21:31:29 deyoung Exp $
+ * $Id: I3PrimaryImpl.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/23 21:31:29 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
- *
- * @todo
  *
  */
 #ifndef I3PRIMARYIMPL_H
@@ -22,7 +20,8 @@
 #include <iostream>
 
 /**
- * A class for modularizing how the I3Primary interface is implemented.
+ * @brief A class for modularizing how the I3Primary interface is implemented.
+ *
  * All you need to do is specify the a DirectionalType, a CoreType, and an
  * EnergeticType which satisfy the interface, and you've got a new I3Primary
  * implementation

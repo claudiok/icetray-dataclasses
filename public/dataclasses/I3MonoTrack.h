@@ -1,14 +1,12 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MonoTrack.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+    $Id: I3MonoTrack.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/04/22 15:55:44 $
+    @file I3MonoTrack.h
+    @version $Revision: 1.3 $
+    @date $Date: 2004/04/27 13:35:23 $
     @author
-
-    @todo
-
 */
 
 #ifndef I3TRACK_H
@@ -16,6 +14,9 @@
 
 #include "dataclasses/I3BasicTrack.h"
 
+/**
+ * @brief A basic monopole track
+ */
 class I3MonoTrack : public I3BasicTrack
 {
 

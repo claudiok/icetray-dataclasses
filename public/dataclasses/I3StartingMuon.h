@@ -1,15 +1,12 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3StartingMuon.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3StartingMuon.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
 
     @file I3StartingMuon.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 13:35:23 $
     @author deyoung
-
-    @todo
-
 */
 
 #include "I3TrackImpl.h"
@@ -23,7 +20,8 @@
 #include "dataclasses/I3Track.h"
 
 /**
- * StartingMuon is to hold tracks which start inside the detector.
+ * @brief StartingMuon is to hold tracks which start inside the detector.
+ *
  * It is composite so that the hadronic vertex can be added.
  */
 class I3StartingMuon : public I3TrackImpl<I3Starting,

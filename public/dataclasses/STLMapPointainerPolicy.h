@@ -1,26 +1,28 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: STLMapPointainerPolicy.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file STLMapPointainerPolicy.h
+ * @version $$
+ * @date $Id: STLMapPointainerPolicy.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+ * @author pretz
+ */
+
 #ifndef STLMAPPOINTAINERPOLICY_H
 #define STLMAPPOINTAINERPOLICY_H
 
 #include "STLMapStoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: STLMapPointainerPolicy.h,v 1.4 2004/03/16 18:20:08 pretz Exp $
- *
- * just like an STLMapPolicy but contains the added functionality that
+ * @brief just like an STLMapPolicy but contains the added functionality that
  * it deletes all the members when it goes out of scope.
- *
- * @version $$
- * @date $Id: STLMapPointainerPolicy.h,v 1.4 2004/03/16 18:20:08 pretz Exp $
- * @author pretz
  *
  * @todo work out whether or not can implement this by just inheriting from
  * STLMapStoragePolicy
  * @todo I have examples of templated member functions working in ROOT, but
  * this isn't working in the interpreter.  Fix that.
  */
-
 template <class ElementType>
 class STLMapPointainerPolicy {
  public:

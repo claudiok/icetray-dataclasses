@@ -1,3 +1,15 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3OMGeoIcecube.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3OMGeoIcecube.h
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3OMGEOICECUBE_H
 #define I3OMGEOICECUBE_H
 
@@ -6,20 +18,9 @@
 #include <string>
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3OMGeoIcecube.h,v 1.7 2004/03/04 16:45:56 troy Exp $
- *
- * This is the IceCube specialization of the OMGeometry.  The stuff that 
- * an IceCube DOM has that an AMANDA OM doesn't
- *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/03/04 16:45:56 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
+ * @brief This is the IceCube specialization of the OMGeometry.  
+ * 
+ * The stuff that an IceCube DOM has that an AMANDA OM doesn't
  */
 
 class I3OMGeoIcecube : public I3OMGeo

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.6 2004/04/26 16:34:34 pretz Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.7 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/04/26 16:34:34 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
  */
 
@@ -21,7 +21,9 @@
 using namespace std;
 
 /**
- * A container for RDMC fits.  Contains a vector of Double_ts which are
+ * @brief A container for RDMC fits.  
+ * 
+ * Contains a vector of Double_ts which are
  * the fit parameters and a vector of ints which are the tubes used by
  * the fit.
  *

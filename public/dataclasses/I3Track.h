@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.12 2004/04/23 21:10:25 deyoung Exp $
+ * $Id: I3Track.h,v 1.13 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/04/23 21:10:25 $
- * @author 
- *
- * @todo
- *
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author pretz
  */
 
 #ifndef I3TRACK_H
@@ -24,7 +21,9 @@
 #include <iostream>
 
 /**
- * The basic track class for IceCube. Not all of the methods will work 
+ * @brief The basic track class for IceCube. 
+ *
+ * Not all of the methods will work 
  * for any particular track, and so methods are provided to tell which
  * will work and which won't.
  * @todo implement the geometrical convenience functions
@@ -32,8 +31,14 @@
 class I3Track : public I3ObservableParticle
 {
  public:
+  /**
+   * constructor
+   */
   I3Track() {};
 
+  /**
+   * destructor
+   */
   virtual ~I3Track() {};
 
   /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Position.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
  *
  */
@@ -14,7 +14,7 @@
 
 #include "TObject.h"
 /**
- * A basic position class.  Just getters and setters for x,y,z.   
+ * @brief A basic position class.  Just getters and setters for x,y,z.   
  * @todo implement other coordinate system getters.
  * @todo implement stuff like dot product etc
  * @todo can probably get some lessons from AliPosition

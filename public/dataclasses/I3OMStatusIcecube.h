@@ -1,11 +1,25 @@
-#ifndef I3OMSTATUSICECUBE_H
-#define I3OMSTATUSICECUBE_H
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIcecube.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3OMStatusIcecube.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
  *
- * I3OMStatusIcecube has status information on the IceCube
+ * @file I3OMStatusIcecube.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author Spencer Klein (design)
+ * @author pretz (implementation)
+ *
+ * @todo  this header needs commented yet.
+ */
+#ifndef I3OMSTATUSICECUBE_H
+#define I3OMSTATUSICECUBE_H
+
+#include <TObject.h>
+#include <TObjArray.h>
+#include "I3OMStatus.h"
+
+/**
+ * @brief I3OMStatusIcecube has status information on the IceCube
  * OM parameters that can be controlled or adjusted, such as
  * the trigger, local coincidence and ATWD settings.
  *
@@ -14,19 +28,7 @@
  *
  * This is based on "IceCube DOMAPP CPU FPGA Interface, Version 0.6
  * bu Thorsten Stetzelberger, Jan. 24, 2004 
- *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
- * @author Spencer Klein (design)
- * @author pretz (implementation)
- *
- * @todo  this header needs commented yet.
  */
-
-#include <TObject.h>
-#include <TObjArray.h>
-#include "I3OMStatus.h"
-
 class I3OMStatusIcecube : public I3OMStatus
 {
  public:

@@ -4,24 +4,25 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesData.h,v 1.14 2004/03/10 19:31:12 pretz Exp $
+ * $Id: I3RecoHitSeriesData.h,v 1.15 2004/04/27 13:35:23 pretz Exp $
  *
- * This is the container for all the hit series reconstructions
- *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/03/10 19:31:12 $
+ * @file I3RecoHitSeriesData.h
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author ehrlich
  * @author troy
  * @author pretz
- *
- * @todo 
  */
 
 #include "I3RecoHitSeries.h"
 #include "StoragePolicy.h"
 #include "TObject.h"
 
-class I3RecoHitSeriesData : public TObject, public MapPointainerPolicy<I3RecoHitSeriesPtr>::ThePolicy
+/**
+ * @brief This is the container for all the hit series reconstructions
+ */
+class I3RecoHitSeriesData : public TObject, 
+      	public MapPointainerPolicy<I3RecoHitSeriesPtr>::ThePolicy
 {
  public:
   /**

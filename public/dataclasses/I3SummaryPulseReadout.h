@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3SummaryPulseReadout.h,v 1.2 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3SummaryPulseReadout.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author pretz
+ */
 #ifndef I3SUMMARYPULSEREADOUT_H
 #define I3SUMMARYPULSEREADOUT_H
 
@@ -5,17 +15,7 @@
 #include "StoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3SummaryPulseReadout.h,v 1.1 2004/03/10 02:42:24 pretz Exp $
- *
- * An IceCube Single Local Coincidence hit.  Just a time stamp.
- *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/10 02:42:24 $
- * @author pretz
- *
- *  @todo
+ * @brief An IceCube Single Local Coincidence hit.  Just a time stamp.
  *
  */
 class I3SummaryPulseReadout : public I3AnalogReadout

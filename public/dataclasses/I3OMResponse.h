@@ -1,14 +1,15 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.24 2004/04/22 21:24:26 spencer Exp $
+    $Id: I3OMResponse.h,v 1.25 2004/04/27 13:35:23 pretz Exp $
 
-    @version $Revision: 1.24 $
-    @date $Date: 2004/04/22 21:24:26 $
-    @author
-
-    @todo
-
+    @file I3OMResponse.h
+    @version $Revision: 1.25 $
+    @date $Date: 2004/04/27 13:35:23 $
+    @author ehrlich
+    @author troy
+    @author pretz
+    @author klein
 */
 #ifndef I3OMRESPONSE_H
 #define I3OMRESPONSE_H
@@ -22,21 +23,10 @@
 #include "I3RecoHitSeriesData.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.24 2004/04/22 21:24:26 spencer Exp $
+ * @brief The container for all the OMResponse-related data in the event
  *
- * The container for all the OMResponse-related data in the event
  * Has the hardware response, and the reconstructed hit series'.    
  * The Monte Carlo information is now in I3MCOMResponse.h
- * @version $Revision: 1.24 $
- * @date $Date: 2004/04/22 21:24:26 $
- * @author ehrlich
- * @author troy
- * @author pretz
- * @author klein
- *
- * @todo 
  */
 class I3OMResponse : public TObject
 {

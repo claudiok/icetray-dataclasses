@@ -1,18 +1,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.9 2004/04/23 19:03:07 ehrlich Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.10 2004/04/27 13:35:23 pretz Exp $
  *
- * This is a reco result which just contains a single track
- *
- * @version $Revision: 1.9 $
- * @date $Date: 2004/04/23 19:03:07 $
+ * @file I3RecoResultSingleTrack.h
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author ehrlich
  * @author troy
  * @author pretz
- *
- * @todo
- *
  */
 
 #ifndef I3RECORESULTSINGLETRACK_H
@@ -22,6 +18,9 @@
 #include "I3RecoResult.h"
 #include "I3Particle.h"
 
+/**
+ * @brief This is a reco result which just contains a single track
+ */
 class I3RecoResultSingleTrack : public I3RecoResult
 {
   I3ParticlePtr fTrack;

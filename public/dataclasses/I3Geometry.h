@@ -2,16 +2,14 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.20 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Geometry.h,v 1.21 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author ehrlich
  * @author troy
  * @author pretz
- *
- * @todo 
  */
 #ifndef I3GEOMETRY_H
 #define I3GEOMETRY_H

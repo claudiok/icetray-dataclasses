@@ -1,18 +1,15 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+    $Id: I3MCOMResponse.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/27 02:32:05 $
- * @author ehrlich
- * @author troy
- * @author pretz
- * @author klein
-     
- * @todo
-
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 13:35:23 $
+    @author ehrlich
+    @author troy
+    @author pretz
+    @author klein
 */
 #ifndef I3MCOMRESPONSE_H
 #define I3MCOMRESPONSE_H

@@ -1,14 +1,12 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DoubleBang.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+    $Id: I3DoubleBang.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
 
     @file I3DoubleBang.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/27 02:32:05 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/04/27 13:35:23 $
     @author deyoung
-
-    @todo
 */
 
 #include "I3TrackImpl.h"

@@ -1,22 +1,21 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3RecoResultMultiTracks.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3RecoResultMultiTracks.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author ehrlich
+ */
 #ifndef I3RECORESULTMULTITRACKS_H
 #define I3RECORESULTMULTITRACKS_H
 
 #include "I3RecoResult.h"
-/**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3RecoResultMultiTracks.h,v 1.2 2004/04/25 20:40:27 ehrlich Exp $
- *
- * Reco results with more than one track
- *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/25 20:40:27 $
- * @author ehrlich
- *
- * @todo 
- *
- */
 
+/**
+ * @brief Reco results with more than one track
+ */
 class I3RecoResultMultiTracks : public I3RecoResult, public VecPointainerPolicy<I3ParticlePtr>::ThePolicy
 {
   public:

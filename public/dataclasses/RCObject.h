@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: RCObject.h,v 1.2 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file RCObject.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author troy
+ */
 #ifndef RCOBJECT_H_INCLUDED
 #define RCOBJECT_H_INCLUDED
 
@@ -9,6 +19,9 @@
                          // strlen, strcpy, etc.  They are used in the
                          // implementation of class String::StringValue.
 
+/**
+ * @brief This class is used by the SmartPtr class.
+ */
 class RCObject {                       // base class for reference-
 public:                                // counted objects
   void addReference();

@@ -1,16 +1,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.8 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.9 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author ehrlich
  * @author troy
  * @author pretz
- *
- * @todo 
  */
 #ifndef I3DATAREADOUT_H
 #define I3DATAREADOUT_H

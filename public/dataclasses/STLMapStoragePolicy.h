@@ -1,3 +1,14 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: STLMapStoragePolicy.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
+
+    @file STLMapStoragePolicy.h
+    @version $Revision: 1.8 $
+    @date $Date: 2004/04/27 13:35:23 $
+    @author Troy Straszheim
+
+*/
 #ifndef STLMAPPOLICY_H
 #define STLMAPPOLICY_H
 
@@ -5,16 +16,11 @@
 #include <map>
 
 using namespace std;
+
 /**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.7 2004/03/14 15:07:12 pretz Exp $
-
-    @version $Revision: 1.7 $
-    @date $Date: 2004/03/14 15:07:12 $
-    @author Troy Straszheim
-
-*/
+ * @brief A template which provides a restricted interface to the
+ * STL map class.
+ */
 template <class ElementType>
 class STLMapStoragePolicy {
 

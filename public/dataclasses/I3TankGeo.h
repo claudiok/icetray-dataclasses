@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3TankGeo.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3TankGeo.h
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author PN Thu Feb 19 11:48:23 EST 2004
+ */
 #ifndef __I3TANKGEO_H_
 #define __I3TANKGEO_H_
 
@@ -5,19 +15,11 @@
 
 #include "dataclasses/I3TankMaterial.h"
 #include "dataclasses/I3InIceGeometry.h"
+
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.4 2004/03/14 15:07:12 pretz Exp $
- *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/03/14 15:07:12 $
- * @author PN Thu Feb 19 11:48:23 EST 2004
- *
  * @brief Class which describes a single tank
- *
- * @todo 
- *
+ * @todo comment methods
+ * @todo Should this class use something other than I3InIceGeometry?
  */
 class I3TankGeo : public TObject
 {

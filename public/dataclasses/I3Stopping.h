@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.3 2004/04/23 21:31:29 deyoung Exp $
+ * $Id: I3Stopping.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
  *
- * @file 
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:31:29 $
- * @author 
- *
- * @todo
- *
+ * @file I3Stopping.h
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author pretz
  */
 #ifndef I3STOPPING_H
 #define I3STOPPING_H
@@ -19,7 +16,8 @@
 #include "NanPolicy.h"
 
 /**
- * This class services the 'geometrical' part of the I3Track interface.
+ * @brief This class services the 'geometrical' part of the I3Track interface.
+ *
  * Defines a stopping position, and stopping time.  Also, a Zenith and Azimuth
  * But if you mess with StartX, StartY, StartZ or StartT, you get a fatal error
  *
@@ -84,12 +82,24 @@ class I3Stopping{
       return NAN;
     }
 
+  /**
+   * An x along the track. Gives the stopping x. 
+   */
   Double_t X() const {return fStopX;}
 
+  /**
+   * A y along the track. Gives the stopping y.
+   */
   Double_t Y() const {return fStopY;}
 
+  /**
+   * A z along the track.  Gives the stopping z.
+   */
   Double_t Z() const {return fStopZ;}
 
+  /**
+   * A t along the track.  Gives the stopping t.
+   */
   Double_t T() const {return fStopT;}
 
   /**

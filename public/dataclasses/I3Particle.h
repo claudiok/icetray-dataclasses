@@ -1,3 +1,14 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Particle.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3Particle.h
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author pretz
+ *
+ */
 #ifndef I3PARTICLE_H
 #define I3PARTICLE_H
 
@@ -7,14 +18,7 @@
 #include <cmath>
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3Particle.h,v 1.7 2004/04/26 04:11:57 ehrlich Exp $
- *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/04/26 04:11:57 $
- * @author pretz
- *
+ * @brief The base 'particle' class.  
  * @todo implement fatal calls
  * @todo should there be a 'generic muon' and 'generic tau' types?
  */

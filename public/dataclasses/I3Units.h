@@ -1,44 +1,56 @@
-// Modified 2-17-04 by John Pretz
-// Changes (c) 2004 IceCube Collaboration
-//
-// I just wrapped it all in a namespace I3Units
-//
-// Also removed  #include <CLHEP/config/CLHEP.h>
-// since it wasn't needed.
-//
-// Also had to monkey around with the #define pascal hep_pascal because
-// rootcint didn't like it.  That's all my changes.  Otherwise, it comes
-// direct from Geant4
-//
-// Also changed it to use ROOT types, Double_t rather than Double_t, for
-// example
-//
-// Also monkied around with the comments, so it'd document in doxygen
+/**
+ @brief A ripped Geant4 header declaring unit conventions
 
-
-
-// ********************************************************************
-// * DISCLAIMER                                                       *
-// *                                                                  *
-// * The following disclaimer summarizes all the specific disclaimers *
-// * of contributors to this software. The specific disclaimers,which *
-// * govern, are listed with their locations in:                      *
-// *   http://cern.ch/geant4/license                                  *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.                                                             *
-// *                                                                  *
-// * This  code  implementation is the  intellectual property  of the *
-// * GEANT4 collaboration.                                            *
-// * By copying,  distributing  or modifying the Program (or any work *
-// * based  on  the Program)  you indicate  your  acceptance of  this *
-// * statement, and all its terms.                                    *
-// ********************************************************************
-//
-//
+ Modified 2-17-04 by John Pretz from a Geant4 header
+ $Id: I3Units.h,v 1.6 2004/04/27 13:35:23 pretz Exp $
+ 
+ @file I3Units.h  
+ @version $Version:$
+ @revision $Revision: 1.6 $
+ @date $Date: 2004/04/27 13:35:23 $
+ @author Geant4 Team (original) M.Maire, S.Giani
+ @author pretz (IceCube modifications)
+ 
+ Changes (c) 2004 IceCube Collaboration
+ 
+ I just wrapped it all in a namespace I3Units
+ 
+ Also removed  #include <CLHEP/config/CLHEP.h>
+ since it wasn't needed.
+ 
+ Also had to monkey around with the #define pascal hep_pascal because
+ rootcint didn't like it.  That's all my changes.  Otherwise, it comes
+ direct from Geant4
+ 
+ Also changed it to use ROOT types, Double_t rather than Double_t, for
+ example
+ 
+ Also monkied around with the comments, so it'd document in doxygen
+ 
+ 
+ Here's the original Geant4 header:
+ 
+<b>
+ DISCLAIMER                                                       
+ 
+ The following disclaimer summarizes all the specific disclaimers 
+ of contributors to this software. The specific disclaimers,which 
+ govern, are listed with their locations in:                      
+ http://cern.ch/geant4/license                                  
+ 
+ Neither the authors of this software system, nor their employing 
+ institutes,nor the agencies providing financial support for this 
+ work  make  any representation or  warranty, express or implied, 
+ regarding  this  software system or assume any liability for its 
+ use.                                                             
+ 
+ This  code  implementation is the  intellectual property  of the 
+ GEANT4 collaboration.                                            
+ By copying,  distributing  or modifying the Program (or any work 
+ based  on  the Program)  you indicate  your  acceptance of  this 
+ statement, and all its terms.                                    
+</b>
+*/
 
 #ifndef G4UNITSTEST_HH
 #define G4UNITSTEST_HH
@@ -46,14 +58,14 @@
 //#include <CLHEP/config/CLHEP.h>
 
 /**
+ * @namespace I3Units
+ * @brief Unit definitions for the dataclasses
+ *
  * The I3Units namespace contains a bunch of "static const Double_t's" which
  * define the units that are used in the dataclasses.  The header originally
  * comes from Geant4, and wrapping it in and I3Units namespace is an IceCube
  * modification.
  * 
- * Class description:
- *
- * ------- <br>
  * The basic units are those of the International System:<br>
  *                                                       <br>
  *  		meter                                    <br>            
@@ -71,8 +83,8 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @revision $Revision: 1.5 $
- * @date $Date: 2004/03/15 14:51:54 $
+ * @revision $Revision: 1.6 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should the 'natural' units be more like what IceCube'll use ns = 1 rather than sec=1 ?

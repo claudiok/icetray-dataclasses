@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.4 2004/04/23 21:31:29 deyoung Exp $
+ * $Id: I3TrackImpl.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/23 21:31:29 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/04/27 13:35:23 $
  * @author pretz
- *
- * @todo
- *
  */
 #ifndef I3TRACKIMPL_H
 #define I3TRACKIMPL_H
@@ -22,7 +19,8 @@
 #include <iostream>
 
 /**
- * A class which modularizes how the I3Track interface is implemented.
+ * @brief A class which modularizes how the I3Track interface is implemented.
+ *
  * To pick a particular I3Track implementation, you need to first select
  * a Geometrical Type, an EnergeticType, and a Composite Type, which implements
  * the appropriate pieces of the interface.

@@ -1,3 +1,14 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3OMStatus.h,v 1.2 2004/04/27 13:35:23 pretz Exp $
+ *
+ * @file I3OMStatus.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 13:35:23 $
+ * @author Spencer Klein (design)
+ * @author pretz (implementation)
+ */
 #ifndef I3OMSTATUS_H
 #define I3OMSTATUS_H
 
@@ -6,21 +17,12 @@
 #include "StoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
- *
- * I3OMStatus is a base class for IceCube control parameters
- * for a single OM. The only local data members are the OM Number
+ * @brief I3OMStatus is a base class for IceCube control parameters
+ * for a single OM. 
+ * 
+ * The only local data members are the OM Number
  * and the PMT High Voltage.   Other functionality is in derived 
  * classes.
- *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
- * @author Spencer Klein (design)
- * @author pretz (implementation)
- *
- * @todo 
  */
 class I3OMStatus : public TObject
 {
