@@ -117,4 +117,42 @@ namespace tut
 	  ensure("No exceptions thrown",0);
 	}
     }
+
+  template<> template<>
+  void object::test<2>()
+  {
+    try{
+      I3DOMCalibration dom;
+      
+      int id = 0;
+      int channel = 0;
+      int bin = 128;
+      
+      double slope = -0.002;
+      double intercept = 2.9; 
+      double regress_coeff = 0.99;
+      double gain = -17.0;
+      
+      double val;
+      double gainErr = 0.0;
+      
+      val = slope;
+      
+      dom.SetATWDGain(channel,gain,gainErr);
+      dom.SetATWDParameters(id,channel,bin,slope,intercept,regress_coeff);
+      
+      ensure_distance("Failed to get gain from I3DOMCalibration", 
+		      gain, 
+		      dom.GetATWDGain(0), 
+		      0.0001);
+      
+      ensure_distance("Failed to get voltage from I3DOMCalibration ",
+ 		      intercept, 
+ 		      dom.GetATWDVoltage(0, 0, 0, 0), 0.0001);
+    }
+    catch(I3TrayException& e)
+      {
+	ensure("No Exceptions Thrown",0);
+      }
+  }
 }
