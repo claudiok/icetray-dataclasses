@@ -1,77 +1,76 @@
+#ifndef I3GEOMETRY_H
+#define I3GEOMETRY_H
+
+#include "StoragePolicy.h"
+#include "I3InIceGeometry.h"
+#include "I3TopGeometry.h"
 /**
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.14 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3Geometry.h,v 1.15 2004/02/26 18:17:01 pretz Exp $
  *
- * Right now just a containter for IceCube and Amanda OMGeos.  Should be
- * replaced with a container for the InIce Geometry and the IceTop Geometry
- * The reason for the change would be that IceTop regards their Geometry
- * to really be an array of 'Stations' rather than an array of "OMs"
+ * The Geometry information for the IceCube detector.  There's the InIce
+ * portion and the IceTop portion.  It is expected that AMANDA tubes
+ * will be incorporated as additional kinds of InIce tubes.
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/02/26 18:17:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo This class should go to a holder for the InIce and the IceTop geometries
+ * @todo should the copy and assignment be private?
  * @todo Move the header-like data into the GeometryHeader
 */
-
-
-#ifndef I3GEOMETRY_H
-#define I3GEOMETRY_H
-
-#include <TObject.h>
-#include "I3OMGeo.h"
-#include "StoragePolicy.h"
-
-class I3Geometry : public TObject, public VectorPolicy<I3OMGeoPtr>::ThePolicy
-{
-  Double_t     fTime;
-  Long_t       fDate;
+class I3Geometry : public TObject{
+  I3InIceGeometry fInIce; //||;
+  I3TopGeometry fTop; //||
  public:
-  /** 
+  /**
    * constructor
    */
   I3Geometry(){};
 
   /**
-   * default destructor
+   * destructor
    */
   virtual ~I3Geometry(){};
 
   /**
-   * @return the time that this 'Geometry' is good for.
+   * @return the In-Ice geometry as a constant object
    */
-  Double_t Time() const { return fTime; }
+  const I3InIceGeometry& InIceGeometry() const { return fInIce;}
 
   /**
-   * @param time the new time stamp on this geometry
+   * @return the In-Ice geometry as a non-const object
    */
-  void Time(Double_t time) { fTime = time; }
+  I3InIceGeometry& InIceGeometry() { return fInIce;}
 
   /**
-   * @return the date this geometry is good for
+   * @return the IceTop geometry as a const object
    */
-  Long_t Date() const {  return fDate; }
+  const I3TopGeometry& IceTopGeometry() const{ return fTop; }
 
   /**
-   * @param date the new date this geometry is good for.
+   * @return the IceTop geometry as a non-const object
    */
-  void Date(Long_t date) { fDate = date; }
+  I3TopGeometry& IceTopGeometry() { return fTop; }
 
  private:
-  // copy and assignment are private
+  // copy and assignment private
   I3Geometry(const I3Geometry& rhs);
   const I3Geometry& operator=(const I3Geometry& rhs);
 
-  // ROOT macro
+  //ROOT macro
   ClassDef(I3Geometry,1);
 };
 
+/**
+ * Pointer typedeffed away to insulate users from the
+ * memory-mananagement implementation
+ */
 typedef PtrPolicy<I3Geometry>::ThePolicy I3GeometryPtr;
 
-#endif
- 
+
+#endif // I3GEOMETRY_H

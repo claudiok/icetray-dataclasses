@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TankGeo.h,v 1.1 2004/02/19 18:23:43 niessen Exp $
+    $Id: I3TankGeo.h,v 1.2 2004/02/26 18:17:01 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/19 18:23:43 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/26 18:17:01 $
     @author PN Thu Feb 19 11:48:23 EST 2004
 
     @brief Class which describes a single tank
@@ -19,7 +19,7 @@
 #include <TObject.h>
 
 #include "dataclasses/I3TankMaterial.h"
-#include "dataclasses/I3Geometry.h"
+#include "dataclasses/I3InIceGeometry.h"
 
 class I3TankGeo : public TObject
 {
@@ -48,8 +48,8 @@ class I3TankGeo : public TObject
   const I3TankMaterial &Material () const { return fMaterial; }
   void Material (I3TankMaterial material) { fMaterial = material; }
 
-  const I3Geometry &OM () const { return fOM; }
-  void OM (I3Geometry om) { fOM = om; }
+  const I3InIceGeometry &OM () const { return fOM; }
+  void OM (I3InIceGeometry om) { fOM = om; }
 
  private:
 
@@ -64,7 +64,7 @@ class I3TankGeo : public TObject
   
   UChar_t fVersion; // some version number.
 
-  I3Geometry fOM; // the oms inside the tank
+  I3InIceGeometry fOM; // the oms inside the tank
   
   ClassDef(I3TankGeo,1);
 };
