@@ -4,6 +4,8 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
+#pragma link C++ namespace I3Units;
+
 #pragma link C++ class I3Analog+;
 #pragma link C++ class I3AnalogAmandaSeries+;
 #pragma link C++ typedef I3AnalogSeries;

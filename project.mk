@@ -1,6 +1,6 @@
 ROOT_BIN_NAMES := 
 ROOT_EXCLUDE_NAMES := 
-ROOT_NON_CLASSES :=
+ROOT_NON_CLASSES := 
 ROOT_TEMPLATES := STLVectorPolicy \
 	TClonesPolicy \
 	GarnishedVector
