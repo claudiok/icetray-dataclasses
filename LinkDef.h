@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.142 2005/01/10 20:53:18 dule Exp $
-// $Revision: 1.142 $
-// $Date: 2005/01/10 20:53:18 $
+// $Id: LinkDef.h,v 1.143 2005/01/24 19:40:15 deyoung Exp $
+// $Revision: 1.143 $
+// $Date: 2005/01/24 19:40:15 $
 //
 
 #ifdef __CINT__
@@ -448,6 +448,12 @@
 #pragma link C++ typedef I3OMResponseSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3OMResponseSelection>+;
 
+#pragma link C++ class I3OMSelectionDict+;
+#pragma link C++ typedef MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy+;
+#pragma link C++ typedef I3OMSelectionDictPtr;
+#pragma link C++ class roost::shared_ptr<I3OMSelectionDict>+;
+
 #pragma link C++ class I3OddOMSelection+;
 #pragma link C++ typedef I3OddOMSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3OddOMSelection>+;
@@ -455,10 +461,6 @@
 #pragma link C++ class I3EvenOMSelection+;
 #pragma link C++ typedef I3EvenOMSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3EvenOMSelection>+;
-
-#pragma link C++ class I3BadOMSelection+;
-#pragma link C++ typedef I3BadOMSelectionPtr;
-#pragma link C++ class roost::shared_ptr<I3BadOMSelection>+;
 
 #pragma link C++ class I3GoodOMSelection+;
 #pragma link C++ typedef I3GoodOMSelectionPtr;
@@ -585,6 +587,12 @@
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
 
 #pragma link C++ class station_iterator+;
+
+#pragma link C++ class std::pair<OMKey,roost::shared_ptr<I3OMGeo> >;
+#pragma link C++ class roost::shared_ptr<I3Filter>;
+#pragma link C++ class pair<OMKey,roost::shared_ptr<I3OMResponse> >;
+#pragma link C++ class roost::shared_ptr<I3ArrayHit>;
+#pragma link C++ class roost::shared_ptr<TObject>;
 
 #pragma link C++ class OMKey+;
 #pragma link C++ typedef OMKeyPtr;
