@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.4 2004/08/01 00:41:01 pretz Exp $
+ * $Id: OMKey.h,v 1.5 2004/08/12 21:08:42 pretz Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/12 21:08:42 $
  * @author pretz
  */
 
@@ -14,6 +14,7 @@
 
 #include <utility>
 #include "TObject.h"
+#include "StoragePolicy.h"
 
 using namespace std;
 
@@ -115,5 +116,10 @@ inline ostream& operator<<(ostream& o,const OMKey& key)
   o<<"("<<key.GetString()<<","<<key.GetOM()<<")";
   return o;
 }
+
+/**
+ * pointer type to insulate users from memory management
+ */
+typedef PtrPolicy<OMKey>::ThePolicy OMKeyPtr;
 
 #endif

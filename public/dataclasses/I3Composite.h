@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.7 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3Composite.h,v 1.8 2004/08/12 21:08:42 pretz Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/08/12 21:08:42 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -23,7 +23,7 @@
 class I3Composite
 {
  private:
-  vector<I3ParticlePtr> fConstituents;
+  vector<I3ParticlePtr> fConstituents; //||
  public:
   /**
    * constructor
