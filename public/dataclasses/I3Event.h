@@ -1,15 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.14 2004/02/26 19:58:26 pretz Exp $
+ * $Id: I3Event.h,v 1.15 2004/02/27 21:25:56 ehrlich Exp $
  *
  * This class provides access to the all data containers which are 
  * related to each event. Additionally it stores event information
  * such as time, id, etc. (it is planned to store this kind of 
  * information in a separate header class).
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/02/26 19:58:26 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/02/27 21:25:56 $
  * @author Ralf Ehrlich
  *
  * @todo 
@@ -53,9 +53,15 @@ class I3Event : public TObject
    */
   virtual ~I3Event();
 
-  /**
-   * @return the run id for the event
-   */
+  ULong_t  RunID() const   {return fRunId;}
+  ULong_t  EventID() const {return fEventId;}
+  Double_t Time() const    {return fTime;}
+  ULong_t  Day() const     {return fDay;}
+  
+  void RunID(ULong_t arg)   {fRunId=arg;}
+  void EventID(ULong_t arg) {fEventId=arg;}
+  void Time(Double_t arg)   {fTime=arg;}
+  void Day(ULong_t arg)     {fDay=arg;}
   
   /**
    * @return the TriggerData as constant
