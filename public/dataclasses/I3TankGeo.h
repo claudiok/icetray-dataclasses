@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.9 2004/07/30 20:26:26 dule Exp $
+ * $Id: I3TankGeo.h,v 1.10 2004/08/02 22:09:05 blaufuss Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/07/30 20:26:26 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/02 22:09:05 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -26,14 +26,13 @@ using namespace std;
  * @todo comment methods
  * @todo Should this class use something other than I3InIceGeometry?
  */
-class I3TankGeo : public TObject
+class I3TankGeo : public TObject,
+		  public VectorPolicy<I3OMGeoPtr>::ThePolicy
 {
   public:
 
   I3TankGeo() {}
-
-  UShort_t GetTankID() const {return fTankID;}
-  void SetTankID(UShort_t tank_id) { fTankID = tank_id; }
+  virtual ~I3TankGeo() {}
 
   I3Position GetTankPos() const { return fTankPos; }
   void SetTankPos(I3Position pos) { fTankPos.SetPosition(pos); }
@@ -45,60 +44,29 @@ class I3TankGeo : public TObject
   Double_t  GetTankHeight() const { return fTankH; }
   void SetTankHeight(Double_t h) { fTankH = h; }
 
-  UChar_t Version() const { return fVersion; }
-  void Version(UChar_t version) { fVersion = version; }
+  UChar_t GetVersion() const { return fVersion; }
+  void SetVersion(UChar_t version) { fVersion = version; }
 
   const I3TankMaterial &Material () const { return fMaterial; }
   I3TankMaterial& Material() {return fMaterial;}
 
-  const I3InIceGeometry &OM () const { return fOM; }
-  I3InIceGeometry& OM() {return fOM;}
-
 
  private:
 
-  UShort_t fTankID; // the tank id 
   I3Position fTankPos; //position of the tank
   Double_t fTankR; // radius of the tank
   Double_t fTankH; // height of the tank
-/*   Double_t fX; // the position along grid north */
-/*   Double_t fY; // the position along grid east */
 
   I3TankMaterial fMaterial;
   
   UChar_t fVersion; // some version number.
 
-  I3InIceGeometry fOM; // the oms inside the tank
-  
   ClassDef(I3TankGeo,1);
 
 };
 
 #include "dataclasses/StoragePolicy.h"
 typedef PtrPolicy<I3TankGeo>::ThePolicy I3TankGeoPtr;
-
-class I3TankGeoMatchesTankID {
-  
- public:
-
-  /**
-   * Constructor.
-   */
-  I3TankGeoMatchesTankID (UShort_t tank_id) : id (tank_id) {
-    cerr << "Got id " << tank_id << endl;
-  }
-
-  /**
-   * Comparison operator.
-   */
-  bool operator () (I3TankGeoPtr tg) const {
-    cerr << "trying to assess equality" << endl;
-    return id == tg->GetTankID();
-  }
- private:
-  UShort_t id;
-  
-};
 
 #endif
 
