@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3MCOMResponse.h,v 1.5 2004/05/06 14:41:47 pretz Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/05/06 14:41:47 $
     @author ehrlich
     @author troy
     @author pretz
@@ -68,6 +68,7 @@ class I3MCOMResponse : public I3OMResponse
   ClassDef(I3MCOMResponse,1);
 };
 
-typedef I3MCOMResponse* I3MCOMResponsePtr;
+typedef PtrPolicy<I3MCOMResponse>::ThePolicy I3MCOMResponsePtr;
+
 #endif
 

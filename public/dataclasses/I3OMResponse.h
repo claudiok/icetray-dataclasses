@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.25 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3OMResponse.h,v 1.26 2004/05/06 14:41:47 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.25 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.26 $
+    @date $Date: 2004/05/06 14:41:47 $
     @author ehrlich
     @author troy
     @author pretz
@@ -89,6 +89,6 @@ class I3OMResponse : public TObject
   // ROOT macro
   ClassDef(I3OMResponse,1);
 };
+typedef PtrPolicy<I3OMResponse>::ThePolicy I3OMResponsePtr;
 
-typedef I3OMResponse* I3OMResponsePtr;
 #endif
