@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.10 2004/08/02 22:12:28 pretz Exp $
+ * $Id: I3Position.h,v 1.11 2004/08/06 18:29:03 dule Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/02 22:12:28 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/08/06 18:29:03 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.10 2004/08/02 22:12:28 pretz Exp $
+// $Id: I3Position.h,v 1.11 2004/08/06 18:29:03 dule Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -144,17 +144,26 @@ class I3Position
   /**
    * Set X position while keeping Y,Z constant.  Recalculate SPH and CYL.
    */
-  void SetX(Double_t x) {fX=x;}
+  void SetX(Double_t x) {
+    fX=x;
+    IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
+  }
 
   /**
    * Set Y position while keeping X,Z constant.  Recalculate SPH and CYL.
    */
-  void SetY(Double_t y) {fY=y;}
+  void SetY(Double_t y) {
+    fY=y;
+    IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
+  }
 
   /**
    * Set Z position while keeping X,Y constant.  Recalculate SPH and CYL.
    */
-  void SetZ(Double_t z) {fZ=z;}
+  void SetZ(Double_t z) {
+    fZ=z;
+    IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
+  }
 
   //--------------
 
