@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.14 2004/11/10 20:24:15 dule Exp $
+    $Id: STLMapStoragePolicy.h,v 1.15 2004/11/28 07:33:56 troy Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.14 $
-    @date $Date: 2004/11/10 20:24:15 $
+    @version $Revision: 1.15 $
+    @date $Date: 2004/11/28 07:33:56 $
     @author Troy Straszheim
 
 */
@@ -102,6 +102,7 @@ class STLMapStoragePolicy {
 	return false;
       else
 	this->operator[](key) = element;
+      return true;
     }
 
   //  const ElementType& operator[](const KeyType& key) const { return map_[key]; }
