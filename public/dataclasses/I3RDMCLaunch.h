@@ -1,23 +1,23 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RDMCWaveform.h,v 1.1 2004/09/14 03:21:38 ehrlich Exp $
+ * $Id: I3RDMCLaunch.h,v 1.1 2004/09/15 18:57:43 ehrlich Exp $
  *
- * @file I3RDMCWaveform.h
+ * @file I3RDMCLaunch.h
  * @version $Revision: 1.1 $
- * @date $Date: 2004/09/14 03:21:38 $
+ * @date $Date: 2004/09/15 18:57:43 $
  * @author ehrlich
  */
-#ifndef I3RDMCWAVEFORM_H
-#define I3RDMCWAVEFORM_H
+#ifndef I3RDMCLAUNCH_H
+#define I3RDMCLAUNCH_H
 
 #include <TObject.h>
 #include <vector>
-#include "StoragePolicy.h"
+#include "dataclasses/I3DigitalLaunch.h"
 
 using namespace std;
 
-class I3RDMCWaveform : public TObject
+class I3RDMCLaunch : public I3DigitalLaunch
 {
   Int_t           id;
   Float_t         start_time;
@@ -30,12 +30,12 @@ class I3RDMCWaveform : public TObject
   /**
    * constructor
    */
-  I3RDMCWaveform() {id=0; start_time=0; time_bins=0; baseline=0;}
+  I3RDMCLaunch() {id=0; start_time=0; time_bins=0; baseline=0;}
 
   /**
    * destructor
    */
-  virtual ~I3RDMCWaveform() {;}
+  virtual ~I3RDMCLaunch() {;}
 
   Int_t            GetId() {return id;}
   void             SetId(Int_t id_) {id=id_;}
@@ -49,17 +49,17 @@ class I3RDMCWaveform : public TObject
 
   private:
   // copy and assignment private
-//  I3RDMCWaveform(const I3RDMCWaveform &);
-//  const I3RDMCWaveform& operator=(const I3RDMCWaveform&);
+  I3RDMCLaunch(const I3RDMCLaunch&);
+  const I3RDMCLaunch& operator=(const I3RDMCLaunch&);
 
   // ROOT macro
-  ClassDef(I3RDMCWaveform,1);
+  ClassDef(I3RDMCLaunch,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RDMCWaveform>::ThePolicy I3RDMCWaveformPtr;
+typedef PtrPolicy<I3RDMCLaunch>::ThePolicy I3RDMCLaunchPtr;
 #endif
 

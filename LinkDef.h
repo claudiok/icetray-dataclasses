@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.127 2004/09/14 17:11:38 niessen Exp $
-// $Revision: 1.127 $
-// $Date: 2004/09/14 17:11:38 $
+// $Id: LinkDef.h,v 1.128 2004/09/15 18:57:43 ehrlich Exp $
+// $Revision: 1.128 $
+// $Date: 2004/09/15 18:57:43 $
 //
 
 #ifdef __CINT__
@@ -252,16 +252,6 @@
 #pragma link C++ typedef I3AnalogReadoutPtr;
 #pragma link C++ class roost::shared_ptr<I3AnalogReadout>+;
 
-#pragma link C++ class I3RDMCWaveform+;
-#pragma link C++ typedef I3RDMCWaveformPtr;
-#pragma link C++ class roost::shared_ptr<I3RDMCWaveform>+;
-
-#pragma link C++ class I3RDMCWaveformReadout+;
-#pragma link C++ typedef VectorPolicy<I3RDMCWaveform>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3RDMCWaveform>::ThePolicy+;
-#pragma link C++ typedef I3RDMCWaveformReadoutPtr;
-#pragma link C++ class roost::shared_ptr<I3RDMCWaveformReadout>+;
-
 #pragma link C++ class I3Atmosphere+;
 #pragma link C++ typedef I3AtmospherePtr;
 #pragma link C++ class roost::shared_ptr<I3Atmosphere>+;
@@ -292,8 +282,9 @@
 #pragma link C++ typedef I3DetectorStatusHeaderPtr;
 #pragma link C++ class roost::shared_ptr<I3DetectorStatusHeader>+;
 
-//#pragma link C++ class I3DigitalReadout+;
-//#pragma link C++ typedef I3DigitalReadoutPtr;
+#pragma link C++ class I3DigitalReadout+;
+#pragma link C++ typedef I3DigitalReadoutPtr;
+#pragma link C++ class roost::shared_ptr<I3DigitalReadout>+;
 
 #pragma link C++ class I3DigitalLaunch+;
 #pragma link C++ typedef I3DigitalLaunchPtr;
@@ -306,6 +297,10 @@
 #pragma link C++ class I3TWRLaunch+;
 #pragma link C++ typedef I3TWRLaunchPtr;
 #pragma link C++ class roost::shared_ptr<I3TWRLaunch>+;
+
+#pragma link C++ class I3RDMCLaunch+;
+#pragma link C++ typedef I3RDMCLaunchPtr;
+#pragma link C++ class roost::shared_ptr<I3RDMCLaunch>+;
 
 #pragma link C++ class I3Direction+;
 #pragma link C++ typedef I3DirectionPtr;
