@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoResultData.h,v 1.11 2004/02/23 16:31:25 pretz Exp $
+    $Id: I3RecoResultData.h,v 1.12 2004/02/23 17:14:19 pretz Exp $
 
-    @version $Revision: 1.11 $
-    @date $Date: 2004/02/23 16:31:25 $
+    @version $Revision: 1.12 $
+    @date $Date: 2004/02/23 17:14:19 $
     @author
 
     @todo
@@ -18,7 +18,7 @@
 #include "StoragePolicy.h"
 
 
-class I3RecoResultData : public MapPolicy<I3RecoResultPtr>::ThePolicy
+class I3RecoResultData : public TObject, public MapPolicy<I3RecoResultPtr>::ThePolicy
 {
 
  public:

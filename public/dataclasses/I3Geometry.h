@@ -2,10 +2,10 @@
 
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Geometry.h,v 1.12 2004/02/21 18:52:38 troy Exp $
+    $Id: I3Geometry.h,v 1.13 2004/02/23 17:14:19 pretz Exp $
 
-    @version $Revision: 1.12 $
-    @date $Date: 2004/02/21 18:52:38 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/02/23 17:14:19 $
     @author Some lazy sucker who did not put the header here.
 
     @todo 
@@ -20,7 +20,7 @@
 #include "I3OMGeo.h"
 #include "StoragePolicy.h"
 
-class I3Geometry : public VectorPolicy<I3OMGeoPtr>::ThePolicy
+class I3Geometry : public TObject, public VectorPolicy<I3OMGeoPtr>::ThePolicy
 {
   Double_t     fTime;
   Long_t       fDate;

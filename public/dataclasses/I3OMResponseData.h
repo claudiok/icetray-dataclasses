@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponseData.h,v 1.12 2004/02/21 18:52:38 troy Exp $
+    $Id: I3OMResponseData.h,v 1.13 2004/02/23 17:14:19 pretz Exp $
 
-    @version $Revision: 1.12 $
-    @date $Date: 2004/02/21 18:52:38 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/02/23 17:14:19 $
     @author
 
     @todo
@@ -16,7 +16,7 @@
 #include "I3OMResponse.h"
 #include "StoragePolicy.h"
 
-class I3OMResponseData : public VectorPolicy<I3OMResponse>::ThePolicy
+class I3OMResponseData : public TObject, public VectorPolicy<I3OMResponse>::ThePolicy
 {
  public:
   virtual ~I3OMResponseData(){};
