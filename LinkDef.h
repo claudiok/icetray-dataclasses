@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.122 2004/08/14 16:41:16 pretz Exp $
-// $Revision: 1.122 $
-// $Date: 2004/08/14 16:41:16 $
+// $Id: LinkDef.h,v 1.123 2004/08/18 18:46:52 pretz Exp $
+// $Revision: 1.123 $
+// $Date: 2004/08/18 18:46:52 $
 //
 
 #ifdef __CINT__
@@ -185,8 +185,8 @@
 #pragma link C++ class roost::shared_ptr<I3Bag>+;
 
 #pragma link C++ class I3OMResponseMap+;
-#pragma link C++ typedef VectorPolicy<I3OMResponsePtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3OMResponsePtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy;
+#pragma link C++ class MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy+;
 #pragma link C++ typedef I3OMResponseMapPtr;
 #pragma link C++ class roost::shared_ptr<I3OMResponseMap>+;
 

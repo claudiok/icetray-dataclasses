@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3OMResponseMap.h,v 1.3 2004/08/18 18:46:52 pretz Exp $
  *
  * @file I3OMResponseMap.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/18 18:46:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -28,7 +28,8 @@ using namespace std;
  * @todo implement the 'FindOMResponse' as a smarter search, STL???
  *
  */
-class I3OMResponseMap : public TObject, public map<OMKey,I3OMResponsePtr>
+class I3OMResponseMap : public TObject, 
+                        public MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy
 {
   public:
   /**

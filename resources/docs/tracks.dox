@@ -7,13 +7,14 @@
 
    The basic building blocks of events, in either Monte Carlo or
    reconstruction, are referred to as "particles" and are derived from
-   the @c I3Particle parent class.  There are two basic types of
-   particles: primaries, whose presence is inferred but which are not
-   directly observed, and "observable particles," which enter the
-   active volume of the detector (InIce or IceTop).  Observable
-   particles are presently divided into two subtypes, tracks and
-   cascades; it is likely that at least one additional subtype will be
-   added to accommodate IceTop "tracks."
+   the @c I3Particle parent class.  There are three basic types of
+   particles: I3Primary, whose presence is inferred but which are not
+   directly observed; I3InIceParticle, which are particles
+   which enter the
+   active volume of the InIce detector; and I3IceTopParticle which are 
+   particles observed at the IceTop surface array.  I3InIceParticle
+   is presently divided into two subtypes, I3Track and
+   I3Cascade.
 
    All of these classes are related by inheritance, as shown below.
    This means that any operation that can be performed on a parent
@@ -93,26 +94,6 @@
    particle classes or developing a
    new type of particle class based on one of the implemented track or
    cascade classes, one should not need to deal with templates at all.
-
-   Although not all types of generic data are available from all
-   particle subclasses, the <i>interface</i> to the generic data is
-   present in all classes.  That is, even though the @c I3BasicCascade
-   class does not have an energy data member, it does have the access
-   method  
-   @c Energy(), as well as @c HasEnergy().  This is included so that
-   run-time type casting is not required in order to access optional
-   parameters.  <b>The data classes rely on the user not to ask for
-   parameters that do not exist.</b>  It is assumed that the user
-   knows what information is produced by a particular reconstruction,
-   and will not request information that is not present.  Requesting
-   @c Energy() from a @c BasicCascade will produce a Fatal error.  If
-   the user does not know whether information is present, the various
-   booleans (@c HasEnergy(), etc.) or Root's RTTI facility (@c IsA())
-   should be checked first.  The Root browser relies on the data
-   members themselves, rather than the class interface, so no such
-   checking is required in that case -- optional data which are not
-   used in the class are not merely uninitialized but actually
-   nonexistent.
 
    @section composite_tracks Composite Tracks
 

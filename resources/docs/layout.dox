@@ -47,48 +47,55 @@
 
    @image html EventOverview.png
 
-   Trigger and filter data will be part of the @c Event, but those
-   sectors have been left empty until the nature of trigger and filter
-   data is better understood.  The @c I3OMResponseData object is a
-   vector containing
+   I3TriggerDict contains information about which triggers led to the 
+   I3Event and which triggers were passed.  The I3FilterDict contains 
+   information about filters applied to the event after the event
+   is triggered..  
+   The @c I3OMResponseMap object is a
+   container containing
    the information related to all the hits in the event, although
    geometry and calibration information are found elsewhere.  There
    are several subsets of information within each @c I3OMResponse; more
-   details are found at @ref om-response.  The @c OMResponseData only
-   contains information about OMs that were actually hit in the event,
-   and the index of the vector is the <i><b>hit</b></i> number, not the
-   <i><b>OM</b></i> number (there is a function to look up a particular 
-   @c OMResponse by OM number).  A loop over all tubes, rather than
+   details are found at @ref om-response.  The @c I3OMResponseMap only
+   contains information about OMs that were actually hit in the event.  
+   The I3OMResponseMap container is a map<OMKey,I3OMResponsePtr> and as 
+   such it is accessed by specifying an OMKey for the I3OMResponse that
+   you want.  The OMKey is a lightweight class which represents the
+   string and tube number for a particular tube.
+   A loop over all tubes, rather than
    just hit tubes, should iterate over the geometry or status
-   vectors, rather than the @c OMResponseData vector.
+   maps, rather than the @c I3OMResponseMap.
 
-   The @c I3RecoResultData is a map (a list of named objects) of the
+   The @c I3RecoResultDict is a map (a list of named objects) of the
    results of various reconstruction algorithms.  Each algorithm will
    have one entry in the map, identified by name.  Different
    algorithms will produce different types of results: some return a
    single track, some return several alternative tracks, and some may
    return a collection of tracks that jointly describe the event.
    Each of these types of results will be stored as a different type
-   of @c RecoResult object; see @ref reco-results for more
+   of @c I3RecoResult object; see @ref reco-results for more
    information.
 
-   Information about the Monte Carlo truth is stored in two places in
-   the event: information about particular OMs is stored with that 
-   @c OMResponse, while track and primary information is stored in the 
-   @c I3MCTrackData object.  The @c MCTrackData is a map, so that the
+   Information about the Monte Carlo truth is stored in two places in the 
+   event: information about particular OMs is stored with that 
+   @c I3OMResponse, while track and primary information is stored in the 
+   @c I3MCParticleData object.  (NB.  The I3MCParticleData field is not a 
+   part of the I3Event class, but rather the I3MCEvent subclass.
+   The @c I3MCTrackData contains three multimaps, so that the
    event-level Monte Carlo information can be organized by 'event.'
    In general, an 'event' as seen by the detector and DAQ may consist
    of several physical 'events': separate collections of tracks
    produced by independent primary particles.  Each primary, along
    with its tracks in the InIce and IceTop detectors, has an entry in
-   the @c MCTrackData map.
+   the @c I3MCTrackData object.
 
-   Finally, the @c Event contains an @c I3Bag object.  The Bag is a
+   Finally, the @c Event contains an @c I3Bag object.  The I3Bag is a
    generic container for @c TObjects.  It is a place to store
    user-defined 
    information that cannot be accommodated in the event structure.
    The hope is that the bag will need to be used rarely, as a
    temporary expedient until the data classes can be fixed to handle
    whatever type of information is being put in the bag.
+
 
 */
