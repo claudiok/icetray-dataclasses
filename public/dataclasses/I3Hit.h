@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.21 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3Hit.h,v 1.22 2004/12/01 02:27:07 ehrlich Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/12/01 02:27:07 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -30,11 +30,9 @@ using namespace std;
  * DAQ-level records are stored as I3DataReadouts or
  * I3MCPMTResponses.
  */
-class I3Hit : public TObject
-{
-  Double_t fTime;
-
-  public:
+class I3Hit : public TObject {
+  
+public:
   /**
    * constructor
    */
@@ -64,7 +62,7 @@ class I3Hit : public TObject
   }
 
   /**
-   * @returns the time of the hit
+   * @return the time at which the hit occured
    */
   Double_t GetTime() const { return fTime; }
 
@@ -72,6 +70,17 @@ class I3Hit : public TObject
    * @param time the new time of the hit
    */
   void SetTime(Double_t time) { fTime = time; }
+
+  /**
+   * @return the unique ID of this hit
+   */
+  Int_t GetID() const { return fHitID; }
+
+  /**
+   * @param hitid the ID number to assign to this hit.  Should be
+   * unique, but no checking is done.
+   */
+  void SetID(const Int_t hitid) { fHitID = hitid; }
 
   /**
    * @todo finish implementing this method
@@ -88,7 +97,11 @@ class I3Hit : public TObject
       return out.str();
     }
 
- private:
+private:
+
+  Double_t fTime;
+  Int_t fHitID;
+
   // ROOT Macro
   ClassDef(I3Hit, 1);
 };

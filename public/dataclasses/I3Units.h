@@ -2,11 +2,11 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.16 2004/11/30 22:01:25 tmccauley Exp $
+ $Id: I3Units.h,v 1.17 2004/12/01 02:27:07 ehrlich Exp $
  
  @file I3Units.h  
  @version $Version:$
- @date $Date: 2004/11/30 22:01:25 $
+ @date $Date: 2004/12/01 02:27:07 $
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -88,7 +88,7 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @date $Date: 2004/11/30 22:01:25 $
+ * @date $Date: 2004/12/01 02:27:07 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should we have a 'speed' here too?
@@ -453,45 +453,33 @@ namespace I3Units
    * PeV
    */
   static const Double_t PeV = petaelectronvolt;
-  
+
+  //
+  // Voltage
+  //
   /**
-   * Electric charge [Q]
+   * Millivolt
    */
-  static const double eplus = 1. ;		// positron charge
-  static const double eSI   = 1.602176462e-19;	// positron charge in coulomb  
-  static const double coulomb = eplus/eSI;	// coulomb = 6.24150 e+18*eplus
-  static const double picocoulomb = 1.e-12*coulomb;
-    
+  static const Double_t millivolt = 1.;
+  static const Double_t mV = millivolt;
 
-  /*
-   * Electric current [Q][T^-1]
+  /**
+   * Volt
    */
-  static const double      ampere = coulomb/second; // ampere = 6.24150 e+9 * eplus/ns
-  static const double milliampere = 1.e-3*ampere;
-  static const double microampere = 1.e-6*ampere;
-  static const double  nanoampere = 1.e-9*ampere;
-  
-  /*
-   * Electric potential [E][Q^-1]
-   */
-  static const double megavolt = megaelectronvolt/eplus;
-  static const double kilovolt = 1.e-3*megavolt;
-  static const double     volt = 1.e-6*megavolt;
-  
-  /*
-   * Electric resistance [E][T][Q^-2]
-   */
-  static const double ohm = volt/ampere;	// ohm = 1.60217e-16*(MeV/eplus)/(eplus/ns)
-  
-  /*
-   * Electric capacitance [Q^2][E^-1]
-   */
-  static const double farad = coulomb/volt;	// farad = 6.24150e+24 * eplus/Megavolt
-  static const double millifarad = 1.e-3*farad;
-  static const double microfarad = 1.e-6*farad;
-  static const double  nanofarad = 1.e-9*farad;
-  static const double  picofarad = 1.e-12*farad;
+  static const Double_t volt = 1.e3 * millivolt;
+  static const Double_t V = volt;
 
+  /**
+   * Kilovolt
+   */
+  static const Double_t kilovolt = 1.e3 * volt;
+  static const Double_t kV = kilovolt;
+
+  /**
+   * Microvolt
+   */
+  static const Double_t microvolt = 1.e-6 * volt;
+  
   //
   // Miscellaneous
   //

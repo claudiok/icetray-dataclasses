@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.136 2004/11/19 22:21:42 deyoung Exp $
-// $Revision: 1.136 $
-// $Date: 2004/11/19 22:21:42 $
+// $Id: LinkDef.h,v 1.137 2004/12/01 02:27:07 ehrlich Exp $
+// $Revision: 1.137 $
+// $Date: 2004/12/01 02:27:07 $
 //
 
 #ifdef __CINT__
@@ -71,7 +71,7 @@
 
 #pragma link C++ class I3F2KRecoCascade+;
 #pragma link C++ typedef I3F2KRecoCascadePtr;
-#pragma link C++ class I3MCCascade+;
+#pragma link C++ class roost::shared_ptr<I3F2KRecoCascade>+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
 #pragma link C++ class I3TopShowerImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>+;
@@ -79,6 +79,7 @@
 #pragma link C++ class I3TopShowerImpl<I3Directional, I3NonCoreLocalized, I3NonEnergetic>+;
 
 #pragma link C++ class I3MCPrimary+;
+#pragma link C++ class I3MCCascade+;
 
 #pragma link C++ class I3ShowerCore+;
 #pragma link C++ typedef I3ShowerCorePtr;
@@ -157,6 +158,13 @@
 #pragma link C++ typedef VectorPolicy<I3MCHit>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3MCHit>::ThePolicy+;
 #pragma link C++ typedef I3MCHitSeriesPtr;
+#pragma link C++ class roost::shared_ptr<I3MCHitSeries>+;
+
+#pragma link C++ class I3PMTPulseVect+;
+#pragma link C++ typedef VectorPolicy<I3PMTPulsePtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3PMTPulsePtr>::ThePolicy+;
+#pragma link C++ typedef I3PMTPulseVectPtr;
+#pragma link C++ class roost::shared_ptr<I3PMTPulseVect>+;
 
 #pragma link C++ class I3MCPhotonVect+;
 #pragma link C++ typedef VectorPolicy<I3MCPhoton>::ThePolicy;
@@ -356,7 +364,7 @@
 
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitPtr;
-#pragma link C++ class roost::shared_ptr<I3MCPMTResponse>+;
+#pragma link C++ class roost::shared_ptr<I3MCHit>+;
 
 #pragma link C++ class I3MCOMResponse+;
 #pragma link C++ typedef I3MCOMResponsePtr;
@@ -365,6 +373,22 @@
 #pragma link C++ class I3MCPMTResponse+;
 #pragma link C++ typedef I3MCPMTResponsePtr;
 #pragma link C++ class roost::shared_ptr<I3MCPMTResponse>+;
+
+#pragma link C++ class I3MCPMTResponseToy+;
+#pragma link C++ typedef I3MCPMTResponseToyPtr;
+#pragma link C++ class roost::shared_ptr<I3MCPMTResponseToy>+;
+
+#pragma link C++ class I3MCPMTResponseRomeo+;
+#pragma link C++ typedef I3MCPMTResponseRomeoPtr;
+#pragma link C++ class roost::shared_ptr<I3MCPMTResponseRomeo>+;
+
+#pragma link C++ class I3PMTPulse+;
+#pragma link C++ typedef I3PMTPulsePtr;
+#pragma link C++ class roost::shared_ptr<I3PMTPulse>+;
+
+#pragma link C++ class I3GaussianPMTPulse+;
+#pragma link C++ typedef I3GaussianPMTPulsePtr;
+#pragma link C++ class roost::shared_ptr<I3GaussianPMTPulse>+;
 
 #pragma link C++ class I3MCParticleData+;
 #pragma link C++ typedef I3MCParticleDataPtr;
