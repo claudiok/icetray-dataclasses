@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.19 2004/07/05 18:25:56 pretz Exp $
+ * $Id: I3Track.h,v 1.20 2004/07/06 15:35:52 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/07/05 18:25:56 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/07/06 15:35:52 $
  * @author pretz
  */
 
@@ -183,19 +183,14 @@ class I3Track : public I3ObservableParticle
 
   // composite particle stuff
   /**
-   * the number of particles that go into making up this composite track
+   * retrieves the constituent particles
    */
-  virtual int GetNumConstituents() const =0;
+  virtual const vector<I3ParticlePtr>& GetConstituents() const = 0;
 
   /**
    * Print all information about the I3track
    */
   void PrintTrack();
-
-  /**
-   * the ith particle making up this composite track
-   */
-  virtual const I3Particle& GetConstituent(int i) const =0;
 
  /**
   * copies over data from this particle to the destination particle

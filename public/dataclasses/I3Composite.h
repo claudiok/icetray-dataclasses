@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Composite.h,v 1.6 2004/07/06 15:35:52 pretz Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/07/06 15:35:52 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -18,14 +18,12 @@
  * @brief This class satisfies the "Composite" part of an I3Track 
  * Implementation, 
  * representing a track that is made up of several constituents.
- * @todo implement fatal call if out of bounds
- * @todo implement I3ParticlePtr stuff
- * @todo WARNING!!!!!! What to do about potential memory leak in 'CopyTo'
+ * @todo What do do in copy.  Deep copy?  Needs to be implemented.
  */
 class I3Composite
 {
  private:
-  vector<I3Particle*> fConstituents;
+  vector<I3ParticlePtr> fConstituents;
  public:
   /**
    * constructor
@@ -42,14 +40,15 @@ class I3Composite
    */
   Bool_t IsComposite() const {return true;}
 
-  int GetNumConstituents() const {return fConstituents.size();}
+  /**
+   * retrieves the constituents that make up this track as const
+   */
+  const vector<I3ParticlePtr>& GetConstituents() const {return fConstituents;}
 
-  const I3Particle& GetConstituent(int i) const 
-    {
-      return *(fConstituents[i]);
-    }
-
-  vector<I3Particle*>& GetConstituents(){return fConstituents;}
+  /**
+   * retrieves the constituents that make up this track as non-const
+   */
+  vector<I3ParticlePtr>& GetConstituents() {return fConstituents;}
 
   void CopyTo(I3Particle& destination) const
     {

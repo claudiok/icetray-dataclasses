@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3TrackImpl.h,v 1.8 2004/07/06 15:35:52 pretz Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/06 15:35:52 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -203,19 +203,11 @@ class I3TrackImpl : public I3Track,
   virtual Double_t GetLength() const {return GeometricalType::GetLength();}
 
   /**
-   * the number of particles that go into making up this composite track
+   * retrieves the constituents of this track
    */
-  virtual int GetNumConstituents() const 
+  virtual const vector<I3ParticlePtr>& GetConstituents() const 
     {
-      return CompositeType::GetNumConstituents();
-    }
-  
-  /**
-   * the ith particle making up this composite track
-   */
-  virtual const I3Particle& GetConstituent(int i) const 
-    {
-      return CompositeType::GetConstituent(i);
+      return CompositeType::GetConstituents();
     }
 
   /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonComposite.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3NonComposite.h,v 1.6 2004/07/06 15:35:52 pretz Exp $
  *
  * @file I3NonComposite.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/07/06 15:35:52 $
  * @author pretz
  */
 #ifndef I3NONCOMPOSITE_H
@@ -40,21 +40,12 @@ class I3NonComposite
   Bool_t IsComposite() const {return false;}
 
   /**
-   * Shouldn't be used. Calls Fatal.
-   */ 
-  int GetNumConstituents() const 
-    {
-      NanPolicy::Fatal();
-      return 0;
-    }
-
-  /**
-   * Shouldn't be used.  Calls Fatal().
+   * Shouldn't be used.  Calls Fatal();
    */
-  const I3Particle& GetConstituent(int i) const 
+  const vector<I3ParticlePtr>& GetConstituents() const
     {
       NanPolicy::Fatal();
-      return *(I3Particle*)0;
+      return *(vector<I3ParticlePtr>*)0;
     }
 
   /**
