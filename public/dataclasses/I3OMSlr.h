@@ -1,16 +1,16 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMSlr.h,v 1.2 2004/10/24 21:05:01 troy Exp $
+ *  $Id: I3OMSlr.h,v 1.3 2004/10/25 23:30:07 pretz Exp $
  *
  * @file I3OMSlr.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/10/24 21:05:01 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/10/25 23:30:07 $
  * @author deyoung
  */
 
 #warning I3OMSlr problems, fixme
-#if 0
+#if 1
 #ifndef I3OMSLR_H_INCLUDED
 #define I3OMSLR_H_INCLUDED
 
