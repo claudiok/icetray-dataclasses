@@ -27,6 +27,9 @@
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitSeries;
 #pragma link C++ class I3MCHitSeries+;
+#pragma link C++ typedef I3MCHitSeriesStoragePolicy;
+#pragma link C++ class I3MCHitSeriesStoragePolicy+;
+
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ typedef I3MCTrackData;
 #pragma link C++ class I3MCTrackData+;
