@@ -1,9 +1,13 @@
 #ifndef I3DATAEXECUTION_H
 #define I3DATAEXECUTION_H
+
+#include "Rtypes.h"
+
+class I3Logger;
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataExecution.h,v 1.4 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3DataExecution.h,v 1.5 2004/02/25 20:57:14 pretz Exp $
  *
  * The data structure's access to the framework.  If the 
  * data wants to get a message into the logging system or abort the job 
@@ -12,8 +16,8 @@
  * implements logging.  Right now it calls icetray's private logger, but
  * there should be a logger for just the data.
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/02/25 20:57:14 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -23,11 +27,6 @@
  * @todo decide if this is really necessary
  * @todo if its not necessary, we can decouple dataclasses from icetray
  */
-
-#include "Rtypes.h"
-
-class I3Logger;
-
 class I3DataExecution{
  public:
   /**

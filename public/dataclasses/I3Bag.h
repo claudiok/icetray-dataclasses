@@ -1,30 +1,29 @@
 #ifndef I3BAG_H
 #define I3BAG_H
 
+#include "TObject.h"
+#include "StoragePolicy.h"
+
+typedef TObject* TObjectPtr;
+
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.10 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3Bag.h,v 1.11 2004/02/25 20:57:14 pretz Exp $
  *
  * I3Bag is a generic keyed TObject container, akin to the
  * Sieglinde bag. Each Event (and geometry etc) gets one so that it can hold 
  * stuff that  doesn't really fit into the Data structure.  Just for 
  * 'temporary' or 'personal' use.
  *
- * @version $Revision: 1.10 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/02/25 20:57:14 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
  * @todo 
  */
-
-#include "TObject.h"
-#include "StoragePolicy.h"
-
-typedef TObject* TObjectPtr;
-
 class I3Bag : public MapPolicy<TObjectPtr>::ThePolicy
 {
  public:

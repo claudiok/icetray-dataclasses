@@ -3,17 +3,58 @@
 
 #include "I3MCHit.h"
 #include "StoragePolicy.h"
-
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCHitSeries.h,v 1.13 2004/02/25 20:57:14 pretz Exp $
+ *
+ *
+ *
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/02/25 20:57:14 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ * @todo decide whether or not copy and assignment should be private
+ */
 class I3MCHitSeries : public VectorPolicy<I3MCHit>::ThePolicy 
 {
   float fWeight;
  public:
-  float Weight() { return fWeight; }
-  void Weight(float weight_) { fWeight = weight_; }
+  /**
+   * constructor
+   */
+  I3MCHitSeries(){}
 
-  virtual ~I3MCHitSeries() {;}
+  /**
+   * destructor
+   */
+  virtual ~I3MCHitSeries(){}
+
+  /**
+   * @return the weight associated with this series
+   */
+  float Weight() { return fWeight; }
+
+  /**
+   * @param weight the new weight for this series
+   */
+  void Weight(float weight) { fWeight = weight; }
+
+  private:
+/*   // copy and assignment are private */
+/*   I3MCHitSeries(const I3MCHitSeries&); */
+/*   const I3MCHitSeries& operator=(const I3MCHitSeries&); */
+
+  //ROOT Macro
   ClassDef(I3MCHitSeries,1);
 };
 
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3MCHitSeries>::ThePolicy I3MCHitSeriesPtr;
 
 #endif
