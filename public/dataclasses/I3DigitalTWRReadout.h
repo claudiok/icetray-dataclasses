@@ -3,15 +3,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalTWRReadout.h,v 1.1 2004/03/10 15:53:56 pretz Exp $
+ * $Id: I3DigitalTWRReadout.h,v 1.2 2004/03/10 19:17:52 pretz Exp $
  *
  * Just a placeholder class for a different kind of response
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/10 15:53:56 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/03/10 19:17:52 $
  * @author pretz
  *
- * @todo implement this class
+ * @todo 
  */
 #include "dataclasses/I3DigitalReadout.h"
 
@@ -22,7 +22,7 @@ class I3DigitalTWRReadout : public I3DigitalReadout{
  private:
   I3DigitalTWRReadout(const I3DigitalTWRReadout&);
   const I3DigitalTWRReadout& operator=(const I3DigitalTWRReadout&);
-
+  ClassDef(I3DigitalTWRReadout,1);
 };
 
 

@@ -1,5 +1,5 @@
-#ifndef I3DIGITALFADCSERIES_H
-#define I3DIGITLAFADCSERIES_H
+#ifndef I3DIGITALFADCREADOUT_H
+#define I3DIGITLAFADCREADOUT_H
 
 #include "I3DigitalReadout.h"
 
@@ -10,7 +10,7 @@ class I3DigitalFADCReadout : public I3DigitalReadout{
  private:
   I3DigitalFADCReadout(const I3DigitalFADCReadout&);
   const I3DigitalFADCReadout& operator=(const I3DigitalFADCReadout&);
-
+  ClassDef(I3DigitalFADCReadout,1);
 };
 
 /**

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.18 2004/03/09 21:57:29 pretz Exp $
+    $Id: I3OMResponse.h,v 1.19 2004/03/10 19:17:52 pretz Exp $
 
-    @version $Revision: 1.18 $
-    @date $Date: 2004/03/09 21:57:29 $
+    @version $Revision: 1.19 $
+    @date $Date: 2004/03/10 19:17:52 $
     @author
 
     @todo
@@ -26,25 +26,23 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.18 2004/03/09 21:57:29 pretz Exp $
+ * $Id: I3OMResponse.h,v 1.19 2004/03/10 19:17:52 pretz Exp $
  *
  * The container for all the OMResponse-related data in the event
  * Has the monte-carlo truth, the hardware response, and the reconstructed
  * hit series'.    
  *
- * @version $Revision: 1.18 $
- * @date $Date: 2004/03/09 21:57:29 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/03/10 19:17:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo reference to the related GeoOM in the Geometry, or just its index.
- * @todo does this class have 'full value symantics'?
+ * @todo 
  */
 class I3OMResponse : public TObject
 {
   UShort_t fOMNumber;
-  TRef     fGeometry;
 
   // with the following, you either put in the two pipes or get
   // "cant instantiate precompiled template
@@ -58,7 +56,7 @@ class I3OMResponse : public TObject
   /**
    * constructor
    */
-  I3OMResponse() {fOMNumber = 0; fGeometry = NULL;}
+  I3OMResponse() {fOMNumber = 0;}
   
   /**
    * destructor
@@ -74,21 +72,6 @@ class I3OMResponse : public TObject
    * @param omnumber the new omnumber associated with this response
    */
   void OMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
-  
-  bool HasGeometry() const {return((fGeometry.GetObject()==NULL) ? false : true);}
-  
-  const I3OMGeo& Geometry() const    
-  {
-    if(HasGeometry()) return(*(I3OMGeo*)fGeometry.GetObject());
-    I3DataExecution::Instance().Fatal("I3OMResponse::Geometry() the OMGeo doesn't exist");
-    return (*(I3OMGeo*)NULL);
-  }
-
-  void Geometry(I3OMGeo& geometry_)
-  {
-    if(!HasGeometry()) fGeometry=&geometry_;
-    else I3DataExecution::Instance().Fatal("I3OMResponse::Geometry() the OMResponse has already been set.");
-  }
   
   /**
    * @return the MCTruth for this response as a const object

@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.10 2004/03/03 15:37:01 troy Exp $
+ * $Id: I3Hit.h,v 1.11 2004/03/10 19:17:52 pretz Exp $
  *
  * I3Hit is the basic hit class.  Just a time for a PE arrival
  * at a tube.  
  *
- * @version $Revision: 1.10 $
- * @date $Date: 2004/03/03 15:37:01 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/03/10 19:17:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo specify what 'time' is here
+ * @todo 
  */
 
 #ifndef I3HIT_H

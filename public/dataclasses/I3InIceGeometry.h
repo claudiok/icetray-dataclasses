@@ -2,19 +2,18 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.7 2004/03/10 15:53:56 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.8 2004/03/10 19:17:52 pretz Exp $
  *
  * Right now just a containter for IceCube and Amanda OMGeos. This is the
  * the 'frozen-in-ice' information, as opposed to the stuff that changes.
  *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/03/10 15:53:56 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/03/10 19:17:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo should the copy and assignment be private?  
- *
+ * @todo 
  * @todo TDS: should contain two vectors, one by geonumber and one
  * with the current indexing scheme, whatever that is.  HasOMGeoNumber
  * and FindOmGeo both do the same thing (linear time search).  Lots of
@@ -47,8 +46,8 @@ class I3InIceGeometry : public TObject, public VecPointainerPolicy<I3OMGeoPtr>::
   
   private:
 /*   // copy and assignment are private */
-/*   I3InIceGeometry(const I3InIceGeometry& rhs); */
-/*   const I3InIceGeometry& operator=(const I3InIceGeometry& rhs); */
+   I3InIceGeometry(const I3InIceGeometry& rhs); 
+   const I3InIceGeometry& operator=(const I3InIceGeometry& rhs); 
 
   // ROOT macro
   ClassDef(I3InIceGeometry,1);

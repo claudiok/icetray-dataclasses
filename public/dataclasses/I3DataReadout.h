@@ -4,17 +4,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.6 2004/03/10 02:42:24 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.7 2004/03/10 19:17:52 pretz Exp $
  *
  * A base class for all the data readout types.  
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/03/10 02:42:24 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/03/10 19:17:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo decide whether or not the copy should be private
+ * @todo 
  */
 
 #include <TObject.h>

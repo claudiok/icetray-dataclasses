@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TankGeo.h,v 1.2 2004/02/26 18:17:01 pretz Exp $
+    $Id: I3TankGeo.h,v 1.3 2004/03/10 19:17:52 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/26 18:17:01 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/03/10 19:17:52 $
     @author PN Thu Feb 19 11:48:23 EST 2004
 
     @brief Class which describes a single tank
@@ -46,10 +46,11 @@ class I3TankGeo : public TObject
   void    Version (UChar_t version) { fVersion = version; }
 
   const I3TankMaterial &Material () const { return fMaterial; }
-  void Material (I3TankMaterial material) { fMaterial = material; }
+  I3TankMaterial& Material() {return fMaterial;}
 
   const I3InIceGeometry &OM () const { return fOM; }
-  void OM (I3InIceGeometry om) { fOM = om; }
+  I3InIceGeometry& OM() {return fOM;}
+
 
  private:
 

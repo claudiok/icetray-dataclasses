@@ -6,17 +6,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.15 2004/03/10 17:54:43 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.16 2004/03/10 19:17:52 pretz Exp $
  *
  *
  *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/03/10 17:54:43 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/03/10 19:17:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo decide whether or not copy and assignment should be private
+ * @todo 
  */
 class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy 
 {
@@ -44,8 +44,8 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
 
   private:
 /*   // copy and assignment are private */
-/*   I3MCHitSeries(const I3MCHitSeries&); */
-/*   const I3MCHitSeries& operator=(const I3MCHitSeries&); */
+  I3MCHitSeries(const I3MCHitSeries&); 
+  const I3MCHitSeries& operator=(const I3MCHitSeries&); 
 
   //ROOT Macro
   ClassDef(I3MCHitSeries,1);

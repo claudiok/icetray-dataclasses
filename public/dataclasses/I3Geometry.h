@@ -2,19 +2,19 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.17 2004/03/04 16:45:56 troy Exp $
+ * $Id: I3Geometry.h,v 1.18 2004/03/10 19:17:52 pretz Exp $
  *
  * The Geometry information for the IceCube detector.  There's the InIce
  * portion and the IceTop portion.  It is expected that AMANDA tubes
  * will be incorporated as additional kinds of InIce tubes.
  *
- * @version $Revision: 1.17 $
- * @date $Date: 2004/03/04 16:45:56 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/03/10 19:17:52 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo should the copy and assignment be private?
+ * @todo 
  */
 
 #ifndef I3GEOMETRY_H

@@ -6,25 +6,25 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: STLMapPointainerPolicy.h,v 1.2 2004/03/10 18:39:56 pretz Exp $
+ * $Id: STLMapPointainerPolicy.h,v 1.3 2004/03/10 19:17:52 pretz Exp $
  *
- * A STLMapPolicy which contains the added functionality that
+ * just like an STLMapPolicy but contains the added functionality that
  * it deletes all the members when it goes out of scope.
  *
  * @version $$
- * @date $Id: STLMapPointainerPolicy.h,v 1.2 2004/03/10 18:39:56 pretz Exp $
+ * @date $Id: STLMapPointainerPolicy.h,v 1.3 2004/03/10 19:17:52 pretz Exp $
  * @author pretz
  *
- * @todo 
+ * @todo work out whether or not can implement this by just inheriting from
+ * STLMapStoragePolicy
  */
 
 template <class ElementType>
-class STLMapPointainerPolicy : public STLMapStoragePolicy<ElementType>{
+class STLMapPointainerPolicy {
+ public:
   /**
    * destructor.  Deletes all the pointed to objects.
    */
- public:
-  typedef typename STLMapStoragePolicy<ElementType>::iterator iterator;
   virtual ~STLMapPointainerPolicy(){
     iterator iter;
     for(iter = begin() ; iter!=end() ; iter++){
@@ -33,6 +33,40 @@ class STLMapPointainerPolicy : public STLMapStoragePolicy<ElementType>{
     }
   }
 
+  typedef string KeyType;
+  typedef map<KeyType,ElementType> map_type;
+  typedef typename map_type::iterator iterator;
+  typedef typename map_type::const_iterator const_iterator;
+  typedef typename map_type::size_type size_type;
+
+ private:
+
+  map_type map_;
+
+ public:
+
+  STLMapPointainerPolicy& operator=(const STLMapPointainerPolicy &rhs) {
+    if (this == &rhs) return *this;
+    map_ = rhs.map_;
+    return *this;
+  }
+
+  // these operations all mirror standard STL map operations
+  
+  ElementType& operator[](const KeyType& key) { return map_[key]; }
+  //  const ElementType& operator[](const KeyType& key) const { return map_[key]; }
+  iterator begin() { return map_.begin(); }
+  const_iterator begin() const { return map_.begin(); }
+  iterator end() { return map_.end(); }
+  const_iterator end() const { return map_.end(); }
+  
+  bool empty() const { return map_.empty(); }
+  void clear() { map_.clear(); }
+  size_type size() const { return map_.size(); }
+  size_type max_size() const { return map_.max_size(); }
+  
+  size_type erase(const KeyType &key) { return map_.erase(key); }
+  iterator find (const KeyType& key) { return map_.find(key); }
 };
 
 #endif
