@@ -1,10 +1,18 @@
+#ifndef I3RECOHIT_H
+#define I3RECOHIT_H
+
+#include <TObject.h>
+#include "I3Hit.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHit.h,v 1.8 2004/03/10 15:53:56 pretz Exp $
+ * $Id: I3RecoHit.h,v 1.9 2004/03/13 19:51:20 pretz Exp $
  *
- * @version $Revision: 1.8 $
- * @date $Date: 2004/03/10 15:53:56 $
+ * A base class for reconstruted hits.  Carries no information beyond 'hit'
+ * but can be sub-classed as part of a hit series reconstruction.
+ *
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/03/13 19:51:20 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -12,12 +20,6 @@
  * @todo
  *
  */
-#ifndef I3RECOHIT_H
-#define I3RECOHIT_H
-
-#include <TObject.h>
-#include "I3Hit.h"
-
 class I3RecoHit : public I3Hit
 {
   Double_t fConfidence;

@@ -1,24 +1,23 @@
-/**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3MCHit.h,v 1.10 2004/02/26 18:53:12 pretz Exp $
- *
- *
- *
- * @version $Revision: 1.10 $
- * @date $Date: 2004/02/26 18:53:12 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- */
 #ifndef I3MCHIT_H
 #define I3MCHIT_H
 
 #include <TObject.h>
 #include "I3Hit.h"
 #include "StoragePolicy.h"
-
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCHit.h,v 1.11 2004/03/13 19:51:20 pretz Exp $
+ *
+ * Adds a 'Weight' and 'Parent track' to the standard 'Hit' class
+ *
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/03/13 19:51:20 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ */
 class I3MCHit : public I3Hit
 {
   Float_t fWeight;

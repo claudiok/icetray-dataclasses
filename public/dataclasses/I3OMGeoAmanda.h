@@ -1,13 +1,19 @@
+#ifndef I3OMGEOAMANDA_H
+#define I3OMGEOAMANDA_H
+
+#include "I3OMGeo.h"
+#include <string>
+
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAmanda.h,v 1.8 2004/03/04 16:45:56 troy Exp $
+ * $Id: I3OMGeoAmanda.h,v 1.9 2004/03/13 19:51:20 pretz Exp $
  *
  * This is the AMANDA specialization of the standard optical module 
  * geometry.  Stuff that an AMANDA OM had that an IceCube DOM doesn't
  *
- * @version $Revision: 1.8 $
- * @date $Date: 2004/03/04 16:45:56 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/03/13 19:51:20 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,12 +21,6 @@
  * @todo expand this to accomodate a full AMANDA geometry record
  *
  */
-#ifndef I3OMGEOAMANDA_H
-#define I3OMGEOAMANDA_H
-
-#include "I3OMGeo.h"
-#include <string>
-
 class I3OMGeoAmanda : public I3OMGeo
 {
   public:

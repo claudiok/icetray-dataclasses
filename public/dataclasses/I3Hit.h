@@ -1,26 +1,25 @@
-/**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3Hit.h,v 1.11 2004/03/10 19:17:52 pretz Exp $
- *
- * I3Hit is the basic hit class.  Just a time for a PE arrival
- * at a tube.  
- *
- * @version $Revision: 1.11 $
- * @date $Date: 2004/03/10 19:17:52 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
- */
-
 #ifndef I3HIT_H
 #define I3HIT_H
 
 #include <TObject.h>
 #include "StoragePolicy.h"
 
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Hit.h,v 1.12 2004/03/13 19:51:20 pretz Exp $
+ *
+ * I3Hit is the basic hit class.  Just a time for a PE arrival
+ * at a tube.  
+ *
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/03/13 19:51:20 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ * @todo 
+ */
 class I3Hit : public TObject
 {
   Double_t fTime;
