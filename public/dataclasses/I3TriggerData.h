@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerData.h,v 1.4 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3TriggerData.h,v 1.5 2004/07/12 12:45:17 pretz Exp $
  *
  * @file I3TriggerData.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/12 12:45:17 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -56,6 +56,7 @@ class I3TriggerData : public TObject
 inline ostream& operator<<(ostream& o,const I3TriggerData& trigger)
 {
   trigger.ToStream(o);
+  return o;
 }
 
 /**

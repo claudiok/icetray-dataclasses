@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseVect.h,v 1.3 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3OMResponseVect.h,v 1.4 2004/07/12 12:45:17 pretz Exp $
  *
  * @file I3OMResponseVect.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/07/12 12:45:17 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -72,6 +72,7 @@ inline ostream& operator<<(ostream& o,const I3OMResponseVect& v)
       else
 	o<<**iter;
     }
+  return o;
    
 }
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.16 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3Hit.h,v 1.17 2004/07/12 12:45:17 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/07/12 12:45:17 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -79,6 +79,7 @@ class I3Hit : public TObject
 inline ostream& operator<<(ostream& o,const I3Hit& hit)
 {
   hit.ToStream(o);
+  return o;
 }
 
 /**
