@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3EvenOMSelection.h,v 1.2 2004/11/23 18:57:04 deyoung Exp $
+ *  $Id: I3EvenOMSelection.h,v 1.3 2004/11/23 20:57:25 deyoung Exp $
  *
  * @file I3EvenOMSelection.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/23 18:57:04 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/11/23 20:57:25 $
  * @author deyoung
  */
 
@@ -35,7 +35,7 @@ public:
   };
 
   /**
-   * assignment operator is a member-wise assignment
+   * Nothing to do for assignment operator 
    */
   const I3EvenOMSelection& operator=(const I3EvenOMSelection& rhs) { 
     return *this;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.2 2004/11/23 18:57:04 deyoung Exp $
+ *  $Id: I3BadOMSelection.h,v 1.3 2004/11/23 20:57:25 deyoung Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/23 18:57:04 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/11/23 20:57:25 $
  * @author deyoung
  */
 
@@ -24,6 +24,10 @@ public:
   
   virtual ~I3BadOMSelection() {};
  
+  VectorPolicy<OMKey>::ThePolicy GetBadOMs() const {
+    return fBadOMs;
+  }; 
+
   virtual void SetBadOMs(const VectorPolicy<OMKey>::ThePolicy& list) {
     if (fBadOMs.Size() > 0) {
       log_warn("Overwriting list of bad OMs.");
@@ -52,14 +56,11 @@ public:
     return kTRUE;
   };
 
-protected:
-  VectorPolicy<OMKey>::ThePolicy fBadOMs;
-
-private:
   /**
    * assignment operator is a member-wise assignment
    */
   const I3BadOMSelection& operator=(const I3BadOMSelection& rhs) { 
+    fBadOMs = rhs.GetBadOMs();
     return *this;
   }
 
@@ -67,6 +68,10 @@ private:
    * copy constructor just uses assignment operator
    */
   I3BadOMSelection(const I3BadOMSelection& rhs) { *this = rhs; } 
+
+private:
+
+  VectorPolicy<OMKey>::ThePolicy fBadOMs;
   
   ClassDef(I3BadOMSelection,1);
 };

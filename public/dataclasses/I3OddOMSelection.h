@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OddOMSelection.h,v 1.2 2004/11/23 18:57:04 deyoung Exp $
+ *  $Id: I3OddOMSelection.h,v 1.3 2004/11/23 20:57:25 deyoung Exp $
  *
  * @file I3OddOMSelection.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/23 18:57:04 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/11/23 20:57:25 $
  * @author deyoung
  */
 
@@ -34,9 +34,8 @@ public:
     return kFALSE;
   };
 
-private:
   /**
-   * assignment operator is a member-wise assignment
+   * Nothing to do for assignment operator since the selection has no state
    */
   const I3OddOMSelection& operator=(const I3OddOMSelection& rhs) { 
     return *this;
@@ -47,6 +46,8 @@ private:
    */
   I3OddOMSelection(const I3OddOMSelection& rhs) { *this = rhs; } 
   
+private:
+
   ClassDef(I3OddOMSelection,1);
 };
 

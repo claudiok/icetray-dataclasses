@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.2 2004/11/23 18:57:04 deyoung Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.3 2004/11/23 20:57:25 deyoung Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/23 18:57:04 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/11/23 20:57:25 $
  * @author deyoung
  */
 
@@ -24,6 +24,10 @@ public:
   
   virtual ~I3GoodOMSelection() {};
  
+  VectorPolicy<OMKey>::ThePolicy GetGoodOMs() const {
+    return fGoodOMs;
+  };
+
   virtual void SetGoodOMs(const VectorPolicy<OMKey>::ThePolicy& list) {
     if (fGoodOMs.Size() > 0) {
       log_warn("Overwriting list of good OMs.");
@@ -52,14 +56,11 @@ public:
     return kFALSE;
   };
 
-protected:
-  VectorPolicy<OMKey>::ThePolicy fGoodOMs;
-
-private:
   /**
    * assignment operator is a member-wise assignment
    */
   const I3GoodOMSelection& operator=(const I3GoodOMSelection& rhs) { 
+    fGoodOMs = rhs.GetGoodOMs();
     return *this;
   }
 
@@ -68,6 +69,10 @@ private:
    */
   I3GoodOMSelection(const I3GoodOMSelection& rhs) { *this = rhs; } 
   
+private:
+
+  VectorPolicy<OMKey>::ThePolicy fGoodOMs;
+
   ClassDef(I3GoodOMSelection,1);
 };
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.2 2004/11/23 18:57:04 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.3 2004/11/23 20:57:25 deyoung Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/23 18:57:04 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/11/23 20:57:25 $
  * @author deyoung
  */
 
@@ -38,9 +38,8 @@ public:
     return kTRUE;
   };
 
-private:
   /**
-   * assignment operator is a member-wise assignment
+   * Nothing to do for assignment, since the selection has no state
    */
   const I3OMResponseSelection& operator=(const I3OMResponseSelection& rhs) { 
     return *this;
@@ -51,6 +50,8 @@ private:
    */
   I3OMResponseSelection(const I3OMResponseSelection& rhs) { *this = rhs; } 
   
+private:
+
   ClassDef(I3OMResponseSelection,1);
 };
 
