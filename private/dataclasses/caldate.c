@@ -54,21 +54,22 @@
 
 #include "jday.h"	/*	time structures	*/
 
-long CalDate( date )
+int
+CalDate( date )
 struct ut_instant * date;
 {
 	double frac;
-	long jd;
-	long ka;
-	long kb;
-	long kc;
-	long kd;
-	long ke;
-	long ialp;
+	int jd;
+	int ka;
+	int kb;
+	int kc;
+	int kd;
+	int ke;
+	int ialp;
 
-	jd = (long) (date->j_date + 0.5);	/* integer julian date */
+	jd = (int) (date->j_date + 0.5);	/* integer julian date */
 	frac = date->j_date + 0.5 - (double) jd + 1.0e-10; /* day fraction */
-	ka = (long) jd;
+	ka = (int) jd;
 	if ( jd >= 2299161L )
 	{
 		ialp = ( (double) jd - 1867216.25 ) / ( 36524.25 );
@@ -78,7 +79,7 @@ struct ut_instant * date;
 	kc =  ( (double) kb - 122.1 ) / 365.25;
 	kd = (double) kc * 365.25;
 	ke = (double) ( kb - kd ) / 30.6001;
-	date->day = kb - kd - ((long) ( (double) ke * 30.6001 ));
+	date->day = kb - kd - ((int) ( (double) ke * 30.6001 ));
 	if ( ke > 13L )
 		date->month = ke - 13L;
 	else
@@ -108,7 +109,7 @@ struct ut_instant * date;
 			- (((date->month + 9) / 12) << 1)
 			+ date->day - 30;
 	return( date->year );
-}	/*	end of	 long CalDate( date )	*/
+}	/*	end of	 int CalDate( date )	*/
 
 /*
  *	JulDate computes the julian decimal date (j_date) from
@@ -131,9 +132,9 @@ double JulDate( date )
 struct ut_instant * date;
 {
 	double frac, gyr;
-	long iy0, im0;
-	long ia, ib;
-	long jd;
+	int iy0, im0;
+	int ia, ib;
+	int jd;
 
 	/* decimal day fraction	*/
 	frac = (( double)date->i_hour/ 24.0)
@@ -159,17 +160,17 @@ struct ut_instant * date;
 	ib = 2L - ia + (ia >> 2);
 	/* calculate julian date	*/
 	if ( date->year <= 0L )
-		jd = (long) ((365.25 * (double) iy0) - 0.75)
-			+ (long) (30.6001 * (im0 + 1L) )
-			+ (long) date->day + 1720994L;
+		jd = (int) ((365.25 * (double) iy0) - 0.75)
+			+ (int) (30.6001 * (im0 + 1L) )
+			+ (int) date->day + 1720994L;
 	else
-		jd = (long) (365.25 * (double) iy0)
-			+ (long) (30.6001 * (double) (im0 + 1L))
-			+ (long) date->day + 1720994L;
+		jd = (int) (365.25 * (double) iy0)
+			+ (int) (30.6001 * (double) (im0 + 1L))
+			+ (int) date->day + 1720994L;
 	if ( gyr >= 1582.1015 )	/* on or after 15 October 1582	*/
 		jd += ib;
 	date->j_date = (double) jd + frac + 0.5;
-	jd = (long) (date->j_date + 0.5);
+	jd = (int) (date->j_date + 0.5);
 	date->weekday = (jd + 1L) % 7L;
 	return( date->j_date );
 }	/*	end of	double JulDate( date )	*/

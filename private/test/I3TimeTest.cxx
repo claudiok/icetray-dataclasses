@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.2 2005/03/30 03:51:42 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.3 2005/03/30 16:22:59 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2005/03/30 03:51:42 $
+    @version $Revision: 1.3 $
+    @date $Date: 2005/03/30 16:22:59 $
     @author pretz
 
     @todo
@@ -118,9 +118,9 @@ namespace tut
 
     ensure(tme.GetUTCMonth() == I3Time::Mar);
 
-    ensure_equals(tme.GetUTCDayOfMonth(),6);
+    ensure(tme.GetUTCDayOfMonth()==6);
     ensure(tme.GetUTCWeekday() == I3Time::Sunday);  
-    ensure_equals(tme.GetUTCSec(),78598);
+    ensure(tme.GetUTCSec()==78598);
     ensure_distance(tme.GetUTCNanoSec(),(double)844318797,0.1);
   }
 }

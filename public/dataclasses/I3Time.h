@@ -15,12 +15,9 @@
  * @todo The library I have is using Barycentric Dynamical Time (TDB),
  * which differs from UTC by a number that is a function of year.  UTC has 
  * a leap second every now and then and TDB doesn't Right
- * now they're ~68 seconds different.  Need to account for this.
+ * now they're ~68 seconds different.  May need to account for this.
  * http://jday.sourceforge.net/index.php for reference
  *
- * @todo This jday library has a known bug on 64 bit machines.  It's fixed
- * in cvs.  On whatever day we start using 64 bit machines, we need 
- * to get a better version of jday or switch libraries.
  */
 class I3Time : public TObject
 {
