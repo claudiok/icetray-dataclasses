@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.3 2005/01/25 23:22:04 ehrlich Exp $
+ * $Id: I3OMSelectionDict.h,v 1.4 2005/01/26 16:40:14 deyoung Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/01/25 23:22:04 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/01/26 16:40:14 $
  * @author deyoung
  * @author troy
  */
@@ -49,23 +49,26 @@ class I3OMSelectionDict : public TObject,
   virtual ~I3OMSelectionDict(){};
 
 #ifndef __CINT__
-  I3OMSelectorPtr GetSelector(const string &name, I3OMResponseMap& map) {
 
-    // Use GetClone so that successive requests for the selector will
-    // receive independent copies -- necessary if the Selection has
-    // state.
-    // Using GetClone causes a segfault, but not in this function. ???
-    // I3OMResponseSelectionPtr selection = (*this)[name]->GetClone();
+  I3OMSelector GetSelector(const string &name, I3OMResponseMap& map) {
+
+    // I should be using GetClone() to make an independent copy of the
+    // selection object before packaging it into the selector.  But
+    // the selector maintains a reference to its selection, not a
+    // smart pointer.  So if I make a copy, the only smart pointer to
+    // the copy will go out of scope when this function exits, and the
+    // selection logic will be deleted when the selector is returned
+    // to the calling module, leading to a seg fault.  For now I'll
+    // use the original selection, which is fine as long as nobody
+    // changes its state dynamically.
     I3OMResponseSelectionPtr selection = (*this)[name];
 
-    I3OMSelectorPtr 
-      selector(new I3OMSelector
-	       (boost::make_filter_iterator<I3OMResponseSelection>
-		(*selection, map.begin(),map.end())));
-
-    return selector;
+    return I3OMSelector(boost::make_filter_iterator<I3OMResponseSelection>
+			(*selection, map.begin(),map.end()));
   }
+
 #endif
+
   
   virtual void ToStream(ostream& o) const 
     {
