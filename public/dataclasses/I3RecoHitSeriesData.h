@@ -5,7 +5,7 @@
 
 class I3RecoHitSeriesDataHeader { };
 
-typedef TClonesPolicy<I3RecoHitSeries> I3RecoHitSeriesDataStoragePolicy;
+typedef StoragePolicy<I3RecoHitSeries> I3RecoHitSeriesDataStoragePolicy;
 
 typedef GarnishedVector<I3RecoHitSeriesDataHeader, 
 			I3RecoHitSeries, 

@@ -1,8 +1,20 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3RecoHitSeries.h,v 1.7 2004/02/17 16:54:39 troy Exp $
+
+    @version $Revision: 1.7 $
+    @date $Date: 2004/02/17 16:54:39 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3RECOHITSERIES_H
 #define I3RECOHITSERIES_H
 
 #include "I3RecoHit.h"
-#include "TClonesPolicy.h"
+#include "StoragePolicy.h"
 #include "GarnishedVector.h"
 
 class I3RecoHitSeriesHeader {
@@ -12,8 +24,7 @@ class I3RecoHitSeriesHeader {
   void confidence(float confidence__) { confidence_ = confidence__; }
 };
 
-//typedef STLVectorPolicy<I3RecoHit> I3RecoHitSeriesStoragePolicy;
-typedef TClonesPolicy<I3RecoHit> I3RecoHitSeriesStoragePolicy;
+typedef StoragePolicy<I3RecoHit> I3RecoHitSeriesStoragePolicy;
 typedef GarnishedVector<I3RecoHitSeriesHeader, I3RecoHit, I3RecoHitSeriesStoragePolicy> I3RecoHitSeries;
 
 #endif

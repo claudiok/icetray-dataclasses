@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DigitalATWDSeries.h,v 1.2 2004/02/16 00:05:21 troy Exp $
+    $Id: I3DigitalATWDSeries.h,v 1.3 2004/02/17 16:54:39 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/16 00:05:21 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/17 16:54:39 $
     @author
 
     @todo
@@ -28,7 +28,7 @@ class I3DigitalATWDSeriesHeader : public I3DigitalSeriesHeader
 
 };
 
-typedef TClonesPolicy<I3Digital> I3DigitalSeriesStoragePolicy;
+typedef StoragePolicy<I3Digital> I3DigitalSeriesStoragePolicy;
 
 typedef GarnishedVector<I3DigitalATWDSeriesHeader, 
 			I3Digital, 

@@ -2,12 +2,12 @@
 #define I3DATAREADOUTLIST_H
 
 #include "I3DataReadout.h"
-#include "TClonesPolicy.h"
+#include "StoragePolicy.h"
 #include "GarnishedVector.h"
 
 class I3DataReadoutListHeader { };
 
-typedef TClonesPolicy<I3DataReadout> I3DataReadoutListStoragePolicy;
+typedef StoragePolicy<I3DataReadout> I3DataReadoutListStoragePolicy;
 
 typedef GarnishedVector<I3DataReadoutListHeader, 
 			I3DataReadout, 

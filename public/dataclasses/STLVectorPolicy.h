@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorPolicy.h,v 1.2 2004/02/17 15:48:13 troy Exp $
+    $Id: STLVectorPolicy.h,v 1.3 2004/02/17 16:54:39 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/17 15:48:13 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/17 16:54:39 $
     @author Troy Straszheim
 
 */
@@ -15,7 +15,7 @@
 using namespace std;
 
 template <class ElementType>
-class STLVectorPolicy {
+class StoragePolicy {
 
  public:
 
@@ -25,6 +25,11 @@ class STLVectorPolicy {
   typedef typename vector_type::reverse_iterator        reverse_iterator;
   typedef ElementType& 					reference;
   typedef const ElementType& 				const_reference;
+
+ private:
+  vector_type vector_;
+
+ public:
 
   void push_back(const ElementType &e) {
     vector_.push_back(e);
@@ -39,11 +44,6 @@ class STLVectorPolicy {
   iterator begin() { return vector_.begin(); }
   iterator end() { return vector_.end(); }
   
-  //
- protected:
-
-  vector_type vector_;
-
 };
 
 #endif

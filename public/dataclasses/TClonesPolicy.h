@@ -1,23 +1,25 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: TClonesPolicy.h,v 1.3 2004/02/17 15:48:13 troy Exp $
+    $Id: TClonesPolicy.h,v 1.4 2004/02/17 16:54:39 troy Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/02/17 15:48:13 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/02/17 16:54:39 $
     @author
 
     @todo   need to get name of element class, see "new TClonesArray"
 */
 
+// ONLY ONE POLICY MUST BE INCLUDED
 #ifndef TCLONES_POLICY_INCLUDED
 #define TCLONES_POLICY_INCLUDED
 
+#error FOO
 #include <TClonesArray.h>
 #include <TClass.h>
 
 template <class ElementType>
-class TClonesPolicy {
+class StoragePolicy {
 
  protected:
 

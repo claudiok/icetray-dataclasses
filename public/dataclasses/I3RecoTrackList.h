@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoTrackList.h,v 1.6 2004/02/16 00:55:12 troy Exp $
+    $Id: I3RecoTrackList.h,v 1.7 2004/02/17 16:54:39 troy Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/02/16 00:55:12 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/02/17 16:54:39 $
     @author
 
     @todo
@@ -14,12 +14,12 @@
 #define I3RECOTRACKLIST_H
 
 #include "I3RecoTrack.h"
-#include "TClonesPolicy.h"
+#include "StoragePolicy.h"
 #include "GarnishedVector.h"
 
 class I3RecoTrackListHeader { };
 
-typedef TClonesPolicy<I3RecoTrack> I3RecoTrackListStoragePolicy;
+typedef StoragePolicy<I3RecoTrack> I3RecoTrackListStoragePolicy;
 typedef GarnishedVector<I3RecoTrackListHeader, I3RecoTrack, I3RecoTrackListStoragePolicy> I3RecoTrackList;
 
 

@@ -2,7 +2,7 @@
 #define I3MCHITSERIES_H
 
 #include "I3MCHit.h"
-#include "TClonesPolicy.h"
+#include "StoragePolicy.h"
 #include "GarnishedVector.h"
 
 class I3MCHitSeriesHeader {
@@ -12,7 +12,7 @@ class I3MCHitSeriesHeader {
   void weight(float weight__) { weight_ = weight__; }
 };
 
-typedef TClonesPolicy<I3MCHit> I3MCHitSeriesStoragePolicy;
+typedef StoragePolicy<I3MCHit> I3MCHitSeriesStoragePolicy;
 typedef GarnishedVector<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy> I3MCHitSeries;
 
 

@@ -3,7 +3,7 @@
 
 #include <TObject.h>
 #include "I3OMGeo.h"
-#include "TClonesPolicy.h"
+#include "StoragePolicy.h"
 #include "GarnishedVector.h"
 
 class I3GeometryHeader {
@@ -17,7 +17,7 @@ class I3GeometryHeader {
   void Date(Long_t date_) { fDate = date_; }
 };
 
-typedef TClonesPolicy<I3OMGeo> I3GeometryStoragePolicy;
+typedef StoragePolicy<I3OMGeo> I3GeometryStoragePolicy;
 typedef GarnishedVector<I3GeometryHeader, I3OMGeo, I3GeometryStoragePolicy> I3Geometry;
 
 #endif
