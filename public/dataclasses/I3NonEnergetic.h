@@ -7,9 +7,12 @@
 class I3NonEnergetic
 {
  public:
-  virtual bool IsEnergetic() const {return false;}
+  bool IsEnergetic() const {return false;}
 
-  virtual double Energy() const {return NAN;}
+  double Energy() const {return NAN;}
+  void Energy(double energy) {return;}
+
+  void CopyTo(I3Particle&) {}
 
   ClassDef(I3NonEnergetic,1);
 

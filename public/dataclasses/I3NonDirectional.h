@@ -14,6 +14,8 @@ class I3NonDirectional
   virtual double Phi() const {return NAN;}
   virtual void Phi(double phi) {return;}
 
+  void CopyTo(I3Particle&) const {}
+
   ClassDef(I3NonDirectional,1);
 };
 

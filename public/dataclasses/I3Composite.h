@@ -7,6 +7,7 @@
 /**
  * @todo implement fatal call if out of bounds
  * @todo implement I3ParticlePtr stuff
+ * @todo WARNING!!!!!! What to do about potential memory leak in 'CopyTo'
  */
 class I3Composite
 {
@@ -17,14 +18,23 @@ class I3Composite
   virtual ~I3Composite(){}
 
 
-  virtual bool IsComposite() const {return true;}
+  bool IsComposite() const {return true;}
 
-  virtual int NumConstituents() const {return fConstituents.size();}
-  virtual const I3Particle& Constituent(int i) const 
+  int NumConstituents() const {return fConstituents.size();}
+  const I3Particle& Constituent(int i) const 
     {
       return *(fConstituents[i]);
     }
-  virtual vector<I3Particle*>& Constituents(){return fConstituents;}
+  vector<I3Particle*>& Constituents(){return fConstituents;}
+
+  void CopyTo(I3Particle& destination)
+    {
+      I3Composite* composite = dynamic_cast<I3Composite*>(&destination);
+      if(composite)
+	{
+	  composite->fConstituents = fConstituents;
+	}
+    }
   ClassDef(I3Composite,1);
 };
 

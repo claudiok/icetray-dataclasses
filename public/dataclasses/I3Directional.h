@@ -17,6 +17,16 @@ class I3Directional
   virtual double Phi() const {return fPhi;}
   virtual void Phi(double phi) {fPhi = phi;}
 
+  virtual void CopyTo(I3Position& destination)
+    {
+      I3Directional* directional = dynamic_cast<I3Directional*>(&destination);
+      if(directional)
+	{
+	  directional->fTheta = fTheta;
+	  directional->fPhi = fPhi;
+	}
+    }
+
   ClassDef(I3Directional,1);
 };
 
