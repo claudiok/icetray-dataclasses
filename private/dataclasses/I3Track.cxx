@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.12.2.5 2004/04/16 17:10:56 pretz Exp $
+    $Id: I3Track.cxx,v 1.12.2.6 2004/04/20 18:57:31 pretz Exp $
 
-    @version $Revision: 1.12.2.5 $
-    @date $Date: 2004/04/16 17:10:56 $
+    @version $Revision: 1.12.2.6 $
+    @date $Date: 2004/04/20 18:57:31 $
     @author
 
     @todo
@@ -15,6 +15,24 @@
 #include <iostream>
 
 using namespace std;
+
+I3Position I3Track::ClosestApproach(I3Position pos)
+{
+  return I3Position(NAN,NAN,NAN);
+}
+
+Double_t DistanceFromTrack(I3Position){return NAN;}
+
+I3Position ShiftAlongTrack(I3Position,Double_t)
+{
+  return I3Position(NAN,NAN,NAN);
+}
+
+Bool_t IsOnTrack(I3Position)
+{
+  return kFALSE;
+}
+
 /*
 void 
 I3Track::ToStream (ostream& s) const
