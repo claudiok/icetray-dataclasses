@@ -1,11 +1,11 @@
 /**
  * Copyright (C) 2004
  * The IceCube collaboration
- * $Id: I3ShowerCore.h,v 1.1 2004/07/13 15:37:53 niessen Exp $
+ * $Id: I3ShowerCore.h,v 1.2 2004/08/03 18:06:17 blaufuss Exp $
  *
  * @file I3ShowerCore.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/13 15:37:53 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/03 18:06:17 $
  * @author Peter Niessen
  */
 
@@ -13,7 +13,7 @@
 #define __I3SHOWERCORE_H_
 
 #include "dataclasses/StoragePolicy.h"
-#include "I3PrimaryImpl.h"
+#include "I3TopShowerImpl.h"
 
 #include "I3NonDirectional.h"
 #include "I3CoreLocalized.h"
@@ -24,7 +24,7 @@
  * stations.
  */
 class I3ShowerCore
-: public I3PrimaryImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>
+: public I3TopShowerImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>
 {
   ClassDef (I3ShowerCore, 1);
 };

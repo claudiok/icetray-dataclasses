@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.109 2004/08/03 16:25:13 blaufuss Exp $
-// $Revision: 1.109 $
-// $Date: 2004/08/03 16:25:13 $
+// $Id: LinkDef.h,v 1.110 2004/08/03 18:06:17 blaufuss Exp $
+// $Revision: 1.110 $
+// $Date: 2004/08/03 18:06:17 $
 //
 
 #ifdef __CINT__
@@ -56,8 +56,8 @@
 #pragma link C++ class I3MCCascade+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
-#pragma link C++ class I3PrimaryImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>+;
-#pragma link C++ class I3PrimaryImpl<I3Directional, I3NonCoreLocalized, I3NonEnergetic>+;
+#pragma link C++ class I3TopShowerImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>+;
+#pragma link C++ class I3TopShowerImpl<I3Directional, I3NonCoreLocalized, I3NonEnergetic>+;
 
 #pragma link C++ class I3MCPrimary+;
 #pragma link C++ classs I3ShowerCore+;
@@ -336,6 +336,7 @@
 #pragma link C++ typedef I3ParticlePtr;
 #pragma link C++ class I3Position+;
 #pragma link C++ class I3Primary+;
+#pragma link C++ class I3TopShower+;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ typedef I3RecoHitPtr;
 #pragma link C++ class I3RecoResult+;
