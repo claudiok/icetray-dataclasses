@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.128 2004/09/15 18:57:43 ehrlich Exp $
-// $Revision: 1.128 $
-// $Date: 2004/09/15 18:57:43 $
+// $Id: LinkDef.h,v 1.129 2004/09/17 21:12:19 niessen Exp $
+// $Revision: 1.129 $
+// $Date: 2004/09/17 21:12:19 $
 //
 
 #ifdef __CINT__
@@ -502,6 +502,8 @@
 #pragma link C++ class I3TrackExtractor+;
 #pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
+
+#pragma link C++ class station_iterator+;
 
 #pragma link C++ class OMKey+;
 #pragma link C++ typedef OMKeyPtr;

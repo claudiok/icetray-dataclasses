@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.15 2004/09/14 17:10:05 niessen Exp $
+ * $Id: I3TopGeometry.h,v 1.16 2004/09/17 21:12:19 niessen Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/09/14 17:10:05 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/09/17 21:12:19 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -51,6 +51,13 @@ class I3TopGeometry : public TObject {
    */
   I3StationMap &GetStationMap () {
     return fStationMap;
+  }
+
+  /**
+   * Just for test
+   */
+  void Hello () {
+    log_info ("Hi, this is the top geometry");
   }
 
  private:
