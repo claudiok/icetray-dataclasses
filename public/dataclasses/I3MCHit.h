@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.17 2005/03/31 18:36:40 troy Exp $
+ * $Id: I3MCHit.h,v 1.18 2005/03/31 18:39:37 troy Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.17 $
- * @date $Date: 2005/03/31 18:36:40 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2005/03/31 18:39:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -72,7 +72,7 @@ class I3MCHit : public I3Hit
     ar & make_nvp("ParticleID", particleID_);
   }     
 
-
+  ClassDef(I3MCHit,1);
 };
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.24 2005/03/31 18:36:40 troy Exp $
+ * $Id: I3Hit.h,v 1.25 2005/03/31 18:39:37 troy Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.24 $
- * @date $Date: 2005/03/31 18:36:40 $
+ * @version $Revision: 1.25 $
+ * @date $Date: 2005/03/31 18:39:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -92,6 +92,7 @@ private:
   double time_;
   int hitID_;
 
+  ClassDef(I3Hit,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3Hit& hit)
