@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.4 2004/05/04 17:56:38 pretz Exp $
+ * $Id: I3CoreLocalized.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/05/04 17:56:38 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3CORELOCALIZED_H
@@ -30,32 +30,32 @@ class I3CoreLocalized
   /**
    * gives the x position of the core
    */
-  Double_t CoreX() const {return fCoreX;}
+  Double_t GetCoreX() const {return fCoreX;}
 
   /**
    * sets the x position of the core
    */ 
-  void CoreX(Double_t corex) {fCoreX = corex;}
+  void SetCoreX(Double_t corex) {fCoreX = corex;}
 
   /**
    * gives the y position of the core
    */
-  Double_t CoreY() const {return fCoreY;}
+  Double_t GetCoreY() const {return fCoreY;}
 
   /**
    * sets the y position of the core
    */
-  void CoreY(Double_t corey) {fCoreY = corey;}
+  void SetCoreY(Double_t corey) {fCoreY = corey;}
 
   /**
    * gives the time of the core arrival
    */
-  Double_t CoreT() const {return fCoreT;}
+  Double_t GetCoreT() const {return fCoreT;}
 
   /**
    * sets the time of the core arrival
    */
-  void CoreT(Double_t coret) {fCoreT = coret;}
+  void SetCoreT(Double_t coret) {fCoreT = coret;}
 
   /**
    * copys the data over to the destination particle if a dynamic_cast succeeds

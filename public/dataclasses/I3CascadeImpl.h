@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3CascadeImpl.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -68,49 +68,42 @@ class I3CascadeImpl : public I3Cascade,
   /**
    * the zenith of the cascade
    */
-  virtual Double_t Zenith() const {return DirectionalType::Zenith();}
-  using DirectionalType::Zenith;
+  virtual Double_t GetZenith() const {return DirectionalType::GetZenith();}
 
   /**
    * the azimuth of the cascade
    */
-  virtual Double_t Azimuth() const {return DirectionalType::Azimuth();}
-  using DirectionalType::Azimuth;
+  virtual Double_t GetAzimuth() const {return DirectionalType::GetAzimuth();}
 
   /**
    * the X position of the cascade
    */
-  virtual Double_t X() const {return LocalizableType::X();}
-  using LocalizableType::X;
+  virtual Double_t GetX() const {return LocalizableType::GetX();}
 
   /**
    * the Y position of the cascade
    */
-  virtual Double_t Y() const {return LocalizableType::Y();}
-  using LocalizableType::Y;
+  virtual Double_t GetY() const {return LocalizableType::GetY();}
 
   /**
    * the Z position of the cascade
    */
-  virtual Double_t Z() const {return LocalizableType::Z();}
-  using LocalizableType::Z;
+  virtual Double_t GetZ() const {return LocalizableType::GetZ();}
 
   /**
    * the time of the cascade
    */
-  virtual Double_t T() const {return LocalizableType::T();}
-  using LocalizableType::T;
+  virtual Double_t GetT() const {return LocalizableType::GetT();}
 
   /**
    * the position of the cascade as an I3Position object
    */
-  virtual I3Position Pos() const {return I3Position(X(),Y(),Z());}
+  virtual I3Position GetPos() const {return I3Position(GetX(),GetY(),GetZ());}
 
   /**
    * the energy of the cascade
    */
-  virtual Double_t Energy() const {return EnergeticType::Energy();}
-  using EnergeticType::Energy;
+  virtual Double_t GetEnergy() const {return EnergeticType::GetEnergy();}
 
   virtual void CopyTo(I3Particle& destination) const
     {

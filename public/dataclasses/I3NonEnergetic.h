@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonEnergetic.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3NonEnergetic.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3NonEnergetic.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3NONENERGETIC_H
@@ -30,7 +30,7 @@ class I3NonEnergetic
   /**
    * Shouldn't be used.  Calls fatal.
    */
-  Double_t Energy() const 
+  Double_t GetEnergy() const 
     {
       NanPolicy::Fatal();
       return NAN;

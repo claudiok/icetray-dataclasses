@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.21 2004/05/05 19:42:59 pretz Exp $
+ * $Id: I3Event.h,v 1.22 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/05/05 19:42:59 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -48,62 +48,62 @@ class I3Event : public TObject
   /**
    * @return the TriggerData as constant
    */
-  const I3TriggerData& TriggerData() const { return fTriggerData; }
+  const I3TriggerData& GetTriggerData() const { return fTriggerData; }
 
   /**
    * @return the TriggerData as non-const
    */
-  I3TriggerData& TriggerData() { return fTriggerData; }
+  I3TriggerData& GetTriggerData() { return fTriggerData; }
 
   /**
    * @return the FilterData as a constant object
    */
-  const I3FilterData& FilterData() const { return fFilterData;}
+  const I3FilterData& GetFilterData() const { return fFilterData;}
 
   /**
    * @return the FilterData as a non-constant object
    */
-  I3FilterData& FilterData() { return fFilterData;}
+  I3FilterData& GetFilterData() { return fFilterData;}
 
   /**
    * @return the MCParticleData as a constant object.
    */
-  const I3MCParticleData& MCParticleData() const { return fMCParticleData;}
+  const I3MCParticleData& GetMCParticleData() const { return fMCParticleData;}
 
   /**
    * @return the MCParticleData as a non-const object.
    */
-  I3MCParticleData& MCParticleData(){ return fMCParticleData;}
+  I3MCParticleData& GetMCParticleData(){ return fMCParticleData;}
 
   /**
    * @return the OMResponseData of the event as a non-constant object
    */
-  const I3OMResponseData& OMResponseData() const { return fOMResponseData; }
+  const I3OMResponseData& GetOMResponseData() const { return fOMResponseData; }
 
   /**
    * @return the OMResponseData as constant object
    */
-  I3OMResponseData& OMResponseData() { return fOMResponseData; }
+  I3OMResponseData& GetOMResponseData() { return fOMResponseData; }
 
   /**
    * @return the RecoResult Data as a constant object
    */
-  const I3RecoResultData& RecoResultData() const { return fRecoResultData; }
+  const I3RecoResultData& GetRecoResultData() const { return fRecoResultData; }
 
   /**
    * @return the RecoResultData as a non-constant object
    */
-  I3RecoResultData& RecoResultData() { return fRecoResultData; }
+  I3RecoResultData& GetRecoResultData() { return fRecoResultData; }
 
   /**
    * @return the Bag for this event as a constant object
    */
-  const I3Bag& Bag() const { return fBag; }
+  const I3Bag& GetBag() const { return fBag; }
 
   /**
    * @return the Bag for this event as a non-constant object
    */
-  I3Bag& Bag() { return fBag; }
+  I3Bag& GetBag() { return fBag; }
 
  private:
   // copy and assignment private

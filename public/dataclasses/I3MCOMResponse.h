@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.5 2004/05/06 14:41:47 pretz Exp $
+    $Id: I3MCOMResponse.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/05/06 14:41:47 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/06/30 17:20:26 $
     @author ehrlich
     @author troy
     @author pretz
@@ -23,6 +23,9 @@
  *
  * the 'true' Monte Carlo hits and the simulated PMT response.
  * all of the data and OM output is inherited from I3OMResponse
+ *
+ * @todo This class needs to contain a _pointer_ to the MCPMTResponse since
+ * it is supposed to be subclassed -J.Pretz
  */
 class I3MCOMResponse : public I3OMResponse
 {
@@ -47,17 +50,22 @@ class I3MCOMResponse : public I3OMResponse
   /**
    * @return the PMTResponse as a const object
    */
-    const I3MCPMTResponse& MCMPTResponse() const {return fMCPMTResponse;}
+    const I3MCPMTResponse& GetMCPMTResponse() const {return fMCPMTResponse;}
   
   /**
-   * @return the MCTruth for this response as a const object
+   * @return the PMTResponse as a non-const object
    */
-  const I3MCHitSeries& MCHitSeries() const {return fMCHitSeries;}
+    I3MCPMTResponse& GetMCPMTResponse() { return fMCPMTResponse;}
+
+  /**
+   * @return the MC Truth for this response as a const object
+   */
+  const I3MCHitSeries& GetMCHitSeries() const {return fMCHitSeries;}
 
   /**
    * @return the MC truth for this response as a non-const object
    */
-  I3MCHitSeries& MCHitSeries() {return fMCHitSeries;}
+  I3MCHitSeries& GetMCHitSeries() {return fMCHitSeries;}
 
   private:
   // copy and assignment are private

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.17 2004/06/14 22:28:14 dule Exp $
+ * $Id: I3Track.h,v 1.18 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/06/14 22:28:14 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 
@@ -88,104 +88,104 @@ class I3Track : public I3ObservableParticle
   /**
    * starting x position
    */
-  virtual Double_t StartX() const =0;
+  virtual Double_t GetStartX() const =0;
 
   /**
    * starting y position
    */
-  virtual Double_t StartY() const =0;
+  virtual Double_t GetStartY() const =0;
 
   /**
    * starting z position
    */
-  virtual Double_t StartZ() const =0;
+  virtual Double_t GetStartZ() const =0;
 
   /**
    * starting time
    */
-  virtual Double_t StartT() const =0;
+  virtual Double_t GetStartT() const =0;
 
   /**
    * the starting position as an I3Position
    */
-  virtual I3Position StartPos() const =0;
+  virtual I3Position GetStartPos() const =0;
   
   // stopping 4-position
   /**
    * the stopping x position
    */
-  virtual Double_t StopX() const =0;
+  virtual Double_t GetStopX() const =0;
 
   /**
    * the stopping y position
    */
-  virtual Double_t StopY() const =0;
+  virtual Double_t GetStopY() const =0;
 
   /**
    * the stopping z position
    */
-  virtual Double_t StopZ() const =0;
+  virtual Double_t GetStopZ() const =0;
 
   /**
    * the stopping time
    */
-  virtual Double_t StopT() const =0;
+  virtual Double_t GetStopT() const =0;
 
 
   /**
    * the stopping position as an I3Position
    */
-  virtual I3Position StopPos() const =0;
+  virtual I3Position GetStopPos() const =0;
 
   // Some 4 position on the track
   /**
    * some X position along the track, corresponding to Y(),Z(), and T()
    */
-  virtual Double_t X() const =0;
+  virtual Double_t GetX() const =0;
 
   /**
    * some Y position along the track corresponding to X(), Z() and T()
    */
-  virtual Double_t Y() const =0;
+  virtual Double_t GetY() const =0;
 
   /**
    * some Z position along the track corresponding to X(), Y() and T()
    */
-  virtual Double_t Z() const =0;
+  virtual Double_t GetZ() const =0;
 
   /**
    * the time the track was at X(), Y() and Z()
    */
-  virtual Double_t T() const =0;
+  virtual Double_t GetT() const =0;
 
   /**
    * the Position of the track at time T()
    */
-  virtual I3Position Pos() const =0;
+  virtual I3Position GetPos() const =0;
   
   // energy
   /**
    * The energy of the particle
    */
-  virtual Double_t Energy() const =0;
+  virtual Double_t GetEnergy() const =0;
 
   // speed 
   /**
    * the speed of the particle
    */
-  virtual Double_t Speed() const =0;
+  virtual Double_t GetSpeed() const =0;
 
   // length
   /**
    * the length of the particle
    */
-  virtual Double_t Length() const =0;
+  virtual Double_t GetLength() const =0;
 
   // composite particle stuff
   /**
    * the number of particles that go into making up this composite track
    */
-  virtual int NumConstituents() const =0;
+  virtual int GetNumConstituents() const =0;
 
   /**
    * Print all information about the I3track
@@ -195,7 +195,7 @@ class I3Track : public I3ObservableParticle
   /**
    * the ith particle making up this composite track
    */
-  virtual const I3Particle& Constituent(int i) const =0;
+  virtual const I3Particle& GetConstituent(int i) const =0;
 
  /**
   * copies over data from this particle to the destination particle

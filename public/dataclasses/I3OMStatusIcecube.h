@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIcecube.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3OMStatusIcecube.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3OMStatusIcecube.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -28,6 +28,8 @@
  *
  * This is based on "IceCube DOMAPP CPU FPGA Interface, Version 0.6
  * bu Thorsten Stetzelberger, Jan. 24, 2004 
+ *
+ * @todo the file needs the full 'doxygen' comments
  */
 class I3OMStatusIcecube : public I3OMStatus
 {
@@ -43,8 +45,8 @@ class I3OMStatusIcecube : public I3OMStatus
   static const OMTrigSource kMPE;
   static const OMTrigSource kTrigSourceOff;
 
-  void TrigSource(OMTrigSource source){fTrigSource = source;}
-  Int_t TrigSource(){ return fTrigSource;}
+  void SetTrigSource(OMTrigSource source){fTrigSource = source;}
+  OMTrigSource GetTrigSource(){ return fTrigSource;}
 
 /*  Control the Local Coincidences */
 /*  The separate variables for Up/Down, and distance follow the
@@ -57,8 +59,8 @@ class I3OMStatusIcecube : public I3OMStatus
   static const LCMode kNearestNeighbor;
   static const LCMode kSecondNeighbor;  /* Includes nearest neighbor*/
 
-  void LocalCoincidence(LCMode mode){fLCMode = mode;}
-  LCMode LocalCoincidence(){ return fLCMode;}
+  void SetLocalCoincidence(LCMode mode){fLCMode = mode;}
+  LCMode GetLocalCoincidence(){ return fLCMode;}
 
 /*  There is also provision to turn on or off the local coincidence sending and
     receiving */
@@ -70,50 +72,50 @@ class I3OMStatusIcecube : public I3OMStatus
 /*  These control whether the local coincidences recievers are enabled
     They should normally both be on.  */
 
-  void LCReceiveUp(OnOff onoff){fLCRecieveUp = onoff;}
-  void LCReceiveDown(OnOff onoff){fLCRecieveDown = onoff;}
-  Bool_t LCReceiveUp(){return fLCRecieveUp;}
-  Bool_t LCReceiveDown(){return fLCRecieveDown;}
+  void SetLCReceiveUp(OnOff onoff){fLCRecieveUp = onoff;}
+  void SetLCReceiveDown(OnOff onoff){fLCRecieveDown = onoff;}
+  Bool_t GetLCReceiveUp(){return fLCRecieveUp;}
+  Bool_t GetLCReceiveDown(){return fLCRecieveDown;}
 
 /*  These control whether the local coincidences sending is enabled
     They should normally both be on.  */
 
-  void LCSendUp(OnOff onoff){fLCSendUp = onoff;}
-  void LCSendDown(OnOff onoff){fLCSendDown = onoff;}
-  Bool_t LCSendUp() {return fLCSendUp;}
-  Bool_t LCSendDown() {return fLCSendDown;}
+  void SetLCSendUp(OnOff onoff){fLCSendUp = onoff;}
+  void SetLCSendDown(OnOff onoff){fLCSendDown = onoff;}
+  Bool_t GetLCSendUp() {return fLCSendUp;}
+  Bool_t GetLCSendDown() {return fLCSendDown;}
 
 /*  This control the length of the local coincidence window before
     and after the discriminator.  Setting is in 100 nsec ticks */
 
-  void LCPreWindow(Int_t window){ fLCPreWindow = window;}
-  void LCPostWindow(Int_t window) { fLCPostWindow = window;}
-  Int_t LCPreWindow() { return fLCPreWindow;}
-  Int_t LCPostWindow() {return fLCPostWindow;}
+  void SetLCPreWindow(Int_t window){ fLCPreWindow = window;}
+  void SetLCPostWindow(Int_t window) { fLCPostWindow = window;}
+  Int_t GetLCPreWindow() { return fLCPreWindow;}
+  Int_t GetLCPostWindow() {return fLCPostWindow;}
 
 /*  This controls the 'cable length correction' (widening the discriminator
     to account for the 54 meter cable length instead of 18 m.  */
 
-  void LCLongCableUp(OnOff onoff) {fLCLongCableUp = onoff;}
-  void LCLongCableDown(OnOff onoff) {fLCLongCableDown = onoff;}
-  Bool_t LCLongCableUp() {return fLCLongCableUp;}
-  Bool_t LCLongCableDown() { return fLCLongCableDown;}
+  void SetLCLongCableUp(OnOff onoff) {fLCLongCableUp = onoff;}
+  void SetLCLongCableDown(OnOff onoff) {fLCLongCableDown = onoff;}
+  Bool_t GetLCLongCableUp() {return fLCLongCableUp;}
+  Bool_t GetLCLongCableDown() { return fLCLongCableDown;}
 
 
 /*  Control and Monitor different parts of the OM */
 
-  void StausATWD_A(OnOff onoff) {fStatusATWD_A = onoff;}
-  void StatusATWD_B(OnOff onoff) {fStatusATWD_B = onoff;}
-  void StatusFADC(OnOff onoff) {fStatusFADC = onoff;}
-  Bool_t StatusATWD_A(){return fStatusATWD_A;}
-  Bool_t StatusATWD_B(){return fStatusATWD_B;}
-  Bool_t StatusFADC(){return fStatusFADC;}
+  void SetStausATWD_A(OnOff onoff) {fStatusATWD_A = onoff;}
+  void SetStatusATWD_B(OnOff onoff) {fStatusATWD_B = onoff;}
+  void SetStatusFADC(OnOff onoff) {fStatusFADC = onoff;}
+  Bool_t GetStatusATWD_A(){return fStatusATWD_A;}
+  Bool_t GetStatusATWD_B(){return fStatusATWD_B;}
+  Bool_t GetStatusFADC(){return fStatusFADC;}
 
 
 /* This controls the ATWD frequency.  Implementation, units remain TBD */
 
-  void ATWDFrequency(float freq) {fATWDFrequency = freq;}
-  float ATWDFrequency() {return fATWDFrequency;}
+  void SetATWDFrequency(float freq) {fATWDFrequency = freq;}
+  float GetATWDFrequency() {return fATWDFrequency;}
 
  private:
   OMTrigSource fTrigSource;

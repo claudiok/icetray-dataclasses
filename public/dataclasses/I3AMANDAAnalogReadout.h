@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  *
  */
@@ -44,7 +44,7 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
   /**
    * @return the time of the first LE in the readout
    */
-  virtual Double_t FirstLE() const {
+  virtual Double_t GetFirstLE() const {
     if(fLEs.size() >0) 
       return fLEs[0]; 
     return 0;
@@ -53,32 +53,32 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
   /**
    * @return the list of LEs as a const object
    */
-  const vector<Double_t>& LEs() const {return fLEs;}
+  const vector<Double_t>& GetLEs() const {return fLEs;}
 
   /**
    * @return the list of LEs as a non-const object
    */
-  vector<Double_t>& LEs(){return fLEs;}
+  vector<Double_t>& GetLEs(){return fLEs;}
 
   /**
    * @return the list of TOTs as const object
    */
-  const vector<Double_t>& TOTs() const {return fTOTs;}
+  const vector<Double_t>& GetTOTs() const {return fTOTs;}
 
   /**
    * @return the list of TOTs as a non-const object
    */
-  vector<Double_t>& TOTs() {return fTOTs;}
+  vector<Double_t>& GetTOTs() {return fTOTs;}
 
   /**
    * @return the amplitude
    */
-  Double_t Amplitude() const {return fAmp;}
+  Double_t GetAmplitude() const {return fAmp;}
   
   /**
    * @param amplitude the new amplitude of the readout
    */
-  void Amplitude(Double_t amplitude) {fAmp=amplitude;}
+  void GetAmplitude(Double_t amplitude) {fAmp=amplitude;}
 
  private:
   // copy and assignment private

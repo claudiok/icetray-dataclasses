@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.16 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.17 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -22,6 +22,7 @@
  * 
  * This is the static frozen-in-the-ice properties of an optical module
  *
+ * @todo we need to implement the I3Position stuff here -J.Pretz
  */
 class I3OMGeo : public TObject
 {
@@ -73,62 +74,62 @@ class I3OMGeo : public TObject
   /**
    * @return the number of this optical module
    */
-  UShort_t OMNumber() const {return fOMNumber;}
+  UShort_t GetOMNumber() const {return fOMNumber;}
 
   /**
    * @param omnumber the new number for this optical module
    */
-  void   OMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
+  void   SetOMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
 
   /**
    * @return the x position of the OM
    */
-  Double_t X() const { return fX; }
+  Double_t GetX() const { return fX; }
 
   /**
    * @param x the new x position of the OM
    */
-  void   X(Double_t x) { fX = x; }
+  void   SetX(Double_t x) { fX = x; }
 
   /**
    * @return the y position of the OM
    */
-  Double_t Y() const { return fY; }
+  Double_t GetY() const { return fY; }
 
   /**
    * @param y the new y position of the OM
    */
-  void   Y(Double_t y) { fY = y; }
+  void   SetY(Double_t y) { fY = y; }
 
   /**
    * @return the z position of the OM
    */
-  Double_t Z() const { return fZ; }
+  Double_t GetZ() const { return fZ; }
 
   /**
    * @param z the new z position of the OM
    */
-  void     Z(Double_t z) { fZ = z; }
+  void     SetZ(Double_t z) { fZ = z; }
 
   /**
    * @return kTRUE if the om is pointed down
    */
-  EOrientation  Orientation() const { return fOrientation; }
+  EOrientation  GetOrientation() const { return fOrientation; }
 
   /**
    * @param orientation the new orientation for the tube
    */
-  void Orientation(EOrientation orientation) { fOrientation = orientation; }
+  void SetOrientation(EOrientation orientation) { fOrientation = orientation; }
 
   /**
    * @return the string that this is an OM for
    */
-  Int_t String() const {return fString;}
+  Int_t GetString() const {return fString;}
 
   /**
    * @param string the new string number for this OM
    */
-  void String(Int_t string) {fString = string;}
+  void SetString(Int_t string) {fString = string;}
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
@@ -136,7 +137,7 @@ class I3OMGeo : public TObject
    * AMANDA experiment
    * @return the relative quantum efficiency of this OM
    */
-  Double_t RelativeQE() const {return fRelativeQE;}
+  Double_t GetRelativeQE() const {return fRelativeQE;}
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
@@ -144,13 +145,13 @@ class I3OMGeo : public TObject
    * AMANDA experiment
    * @param qe the new Relative Quantum Efficiency for this OM
    */
-  void RelativeQE(Double_t qe) { fRelativeQE = qe;}
+  void SetRelativeQE(Double_t qe) { fRelativeQE = qe;}
 
   /**
    * retrieves the area of the photo cathode for this tube
    * @return the area of the photocathode
    */
-  Double_t Area() const { return fArea;}
+  Double_t GetArea() const { return fArea;}
 
 
   /**

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrackTest.cxx,v 1.2 2004/05/04 17:15:35 pretz Exp $
+    $Id: I3F2KRecoTrackTest.cxx,v 1.3 2004/06/30 17:20:25 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/05/04 17:15:35 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/06/30 17:20:25 $
     @author pretz
 
     @todo
@@ -50,13 +50,13 @@ namespace tut
     I3F2KRecoTrackPtr track = &fTrack;
     TTree tree;
     tree.Branch("branch","I3F2KRecoTrack",&track);
-    fTrack.StartX(9.5);
+    fTrack.SetStartX(9.5);
     tree.Fill();
     I3F2KRecoTrack track_out_obj;
     I3F2KRecoTrackPtr track_out = &track_out_obj;
     tree.SetBranchAddress("branch",&track_out);
     tree.GetEvent(0);
-    ensure(track_out_obj.StartX() == 9.5);
+    ensure(track_out_obj.GetStartX() == 9.5);
   }
 
   // testing writing to a file
@@ -64,7 +64,7 @@ namespace tut
   void object::test<2>()
   {
     I3F2KRecoTrackPtr track = &fTrack;
-    track->StartX(9.5);
+    track->SetStartX(9.5);
 
     TFile file("test.out.root","RECREATE");
     fTrack.Write();
@@ -80,7 +80,7 @@ namespace tut
 
     ensure("dynamic cast fails",track_in != 0);
     
-    ensure("the read-in data isn't right",track_in->StartX() == 9.5);
+    ensure("the read-in data isn't right",track_in->GetStartX() == 9.5);
 
     delete track_in;
     track_in = 0;
@@ -90,9 +90,9 @@ namespace tut
   template<> template<>
   void object::test<3>() 
   {
-    fTrack.StartX(1.3);
-    ensure(fTrack.X() == 1.3);
-    ensure(fTrack.StartX() == 1.3);
+    fTrack.SetStartX(1.3);
+    ensure(fTrack.GetX() == 1.3);
+    ensure(fTrack.GetStartX() == 1.3);
   }
 
   // testing return;  ... I"m pretty sure it works.

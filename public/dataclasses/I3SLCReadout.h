@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3SLCReadout.h,v 1.2 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3SLCReadout.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3SLCReadout.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3SLCREADOUT_H
@@ -37,17 +37,17 @@ class I3SLCReadout : public I3AnalogReadout
   /**
    * @return the time of the first LE in the readout
    */
-  Double_t FirstLE() const {return fTime;}
+  Double_t GetFirstLE() const {return fTime;}
 
   /**
    * @return the time of the SLC hit
    */
-  Double_t Time() const{ return fTime;}
+  Double_t GetTime() const{ return fTime;}
 
   /**
    * @param time the new time for the SLC hit
    */
-  void Time(Double_t time) {fTime = time;}
+  void SetTime(Double_t time) {fTime = time;}
 
  private:
   // copy and assignment private

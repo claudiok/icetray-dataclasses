@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.6 2004/06/17 22:37:15 dule Exp $
+ * $Id: I3Position.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/17 22:37:15 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.6 2004/06/17 22:37:15 dule Exp $
+// $Id: I3Position.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -90,23 +90,23 @@ class I3Position
   /**
    * Provide X of position in cartesian ref frame
    */
-  Double_t X() const {return fX;}
+  Double_t GetX() const {return fX;}
 
   /**
    * Provide Y of position in cartesian ref frame
    */
-  Double_t Y() const {return fY;}
+  Double_t GetY() const {return fY;}
 
   /**
    * Provide Z of position in cartesian ref frame
    */
-  Double_t Z() const {return fZ;}
+  Double_t GetZ() const {return fZ;}
 
   /**
    * Provide R of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t R() {
+  Double_t GetR() {
     if (!IsCalculated) CalcSphCylFromCar();
     return fR;
   }
@@ -115,7 +115,7 @@ class I3Position
    * Provide Theta of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t Theta() {
+  Double_t GetTheta() {
     if (!IsCalculated) CalcSphCylFromCar();
     return fTheta;
   }
@@ -124,7 +124,7 @@ class I3Position
    * Provide Phi of position in spherical or cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t Phi() {
+  Double_t GetPhi() {
     if (!IsCalculated) CalcSphCylFromCar();
     return fPhi;
   }
@@ -133,7 +133,7 @@ class I3Position
    * Provide Rho of position in cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t Rho() {
+  Double_t GetRho() {
     if (!IsCalculated) CalcSphCylFromCar();
     return fRho;
   }
@@ -143,17 +143,17 @@ class I3Position
   /**
    * Set X position while keeping Y,Z constant.  Recalculate SPH and CYL.
    */
-  void X(Double_t x) {fX=x;}
+  void SetX(Double_t x) {fX=x;}
 
   /**
    * Set Y position while keeping X,Z constant.  Recalculate SPH and CYL.
    */
-  void Y(Double_t y) {fY=y;}
+  void SetY(Double_t y) {fY=y;}
 
   /**
    * Set Z position while keeping X,Y constant.  Recalculate SPH and CYL.
    */
-  void Z(Double_t z) {fZ=z;}
+  void SetZ(Double_t z) {fZ=z;}
 
   //--------------
 

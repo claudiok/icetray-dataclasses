@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.4 2004/04/22 15:55:44 pretz Exp $
+    $Id: I3HitTest.cxx,v 1.5 2004/06/30 17:20:25 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/22 15:55:44 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/06/30 17:20:25 $
     @author Troy D. Straszheim
 
     @todo
@@ -107,7 +107,7 @@ namespace tut
     // appear as local variables in the test functions.  This saves
     // typing.
     my_string = "initialized";
-    my_hit.Time(0.42);
+    my_hit.SetTime(0.42);
     my_integer = 42;
   }
   
@@ -142,14 +142,14 @@ namespace tut
   template<> template<>
   void object::test<5>() {
 
-    my_hit.Time(0.42);
-    ensure_distance(my_hit.Time(), // left side of equality
+    my_hit.SetTime(0.42);
+    ensure_distance(my_hit.GetTime(), // left side of equality
 		    0.42, // right side of equality
 		    0.00001); // tolerance
 
     // or the same with a failure message
     ensure_distance("Oh dear something is not right.  We'll never make it home now, Toto!",
-		    my_hit.Time(), // left side of equality
+		    my_hit.GetTime(), // left side of equality
 		    0.42, // right side of equality
 		    0.00001); // tolerance
     
@@ -165,10 +165,10 @@ namespace tut
   void object::test<7>()
   {
     I3Hit h, j;
-    ensure(h.Time() == 0);
-    j.Time(rand()/0.3234);
+    ensure(h.GetTime() == 0);
+    j.SetTime(rand()/0.3234);
     h = j;
-    ensure_distance("simple assignment", j.Time(), h.Time(), 0.0001);
+    ensure_distance("simple assignment", j.GetTime(), h.GetTime(), 0.0001);
     ensure (h==j);
     I3Hit k(h);
     ensure (k==j);
@@ -181,9 +181,9 @@ namespace tut
   void object::test<42>()
   {
     I3Hit u, v, w, x;
-    x.Time(rand()/0.235234);
+    x.SetTime(rand()/0.235234);
     u = u = v = v = w = x;
-    ensure_distance("chain of assignment operators", u.Time(), x.Time(), 0.0001);
+    ensure_distance("chain of assignment operators", u.GetTime(), x.GetTime(), 0.0001);
   }
 }
 

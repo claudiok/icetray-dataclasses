@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Monitoring.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Monitoring.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
  * 
  * @file I3Monitoring.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3MONITORING_H
@@ -36,12 +36,12 @@ class I3Monitoring : public TObject{
   /**
    * @return the Atmosphere as a constant object
    */
-  const I3Atmosphere& Atmosphere() const { return fAtmosphere;}
+  const I3Atmosphere& GetAtmosphere() const { return fAtmosphere;}
 
   /**
    * @return the Atmosphere as a non-const object
    */
-  I3Atmosphere& Atmosphere() { return fAtmosphere;}
+  I3Atmosphere& GetAtmosphere() { return fAtmosphere;}
 
  private:
   // copy and assignment private

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.7 2004/05/05 19:26:25 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.8 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/05/05 19:26:25 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  *
  */
@@ -63,38 +63,33 @@ class I3PrimaryImpl : public I3Primary,
   /**
    * gives the zenith of the primary
    */
-  virtual Double_t Zenith() const {return DirectionalType::Zenith();}
-  using DirectionalType::Zenith;
+  virtual Double_t GetZenith() const {return DirectionalType::GetZenith();}
+
 
   /**
    * gives the azimuth of the primary
    */
-  virtual Double_t Azimuth() const {return DirectionalType::Azimuth();}
-  using DirectionalType::Azimuth;
+  virtual Double_t GetAzimuth() const {return DirectionalType::GetAzimuth();}
 
   /**
    * gives the X coordinate of the core
    */
-  virtual Double_t CoreX() const {return CoreType::CoreX();}
-  using CoreType::CoreX;
+  virtual Double_t GetCoreX() const {return CoreType::GetCoreX();}
 
   /**
    * gives the y position of the core
    */
-  virtual Double_t CoreY() const {return CoreType::CoreY();}
-  using CoreType::CoreY;
+  virtual Double_t GetCoreY() const {return CoreType::GetCoreY();}
 
   /**
    * gives the T position of the core
    */
-  virtual Double_t CoreT() const {return CoreType::CoreT();}
-  using CoreType::CoreT;
+  virtual Double_t GetCoreT() const {return CoreType::GetCoreT();}
 
   /**
    * gives the energy of the particle
    */
-  virtual Double_t Energy() const {return EnergeticType::Energy();}
-  using EnergeticType::Energy;
+  virtual Double_t GetEnergy() const {return EnergeticType::GetEnergy();}
 
   /**
    * 

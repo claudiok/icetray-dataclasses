@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MonitoringHeader.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3MonitoringHeader.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3MonitoringHeader.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3MONITORINGHEADER_H
@@ -57,7 +57,7 @@ class I3MonitoringHeader : public I3DataHeader
   /**
    * @return the name of the stream on which this header belongs"
    */
-  const string DataStream() { return "Monitoring"; }
+  const string GetDataStream() { return "Monitoring"; }
 
  private:
   

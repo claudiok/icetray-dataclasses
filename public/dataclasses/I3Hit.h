@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.14 2004/05/04 15:13:49 pretz Exp $
+ * $Id: I3Hit.h,v 1.15 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/05/04 15:13:49 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -52,12 +52,12 @@ class I3Hit : public TObject
   /**
    * @returns the time of the hit
    */
-  Double_t Time() const { return fTime; }
+  Double_t GetTime() const { return fTime; }
 
   /**
    * @param time_ the new time of the hit
    */
-  void Time(Double_t time) { fTime = time; }
+  void SetTime(Double_t time) { fTime = time; }
 
  private:
   // ROOT Macro

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.8 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3EventHeader.h,v 1.9 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3EventHeader.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -60,27 +60,27 @@ class I3EventHeader : public I3DataHeader{
   /**
    * @return the run id for the event
    */
-  ULong_t RunID() const { return fRunId; }
+  ULong_t GetRunID() const { return fRunId; }
 
   /**
    * @param runid the new run id for the event
    */
-  void RunID(ULong_t runid) { fRunId = runid; }
+  void SetRunID(ULong_t runid) { fRunId = runid; }
 
   /**
    * @return the event id for this event
    */
-  ULong_t EventID() const { return fEventId; }
+  ULong_t GetEventID() const { return fEventId; }
 
   /**
    * @param eventid the new event id for the event
    */
-  void EventID(ULong_t eventid) { fEventId = eventid; }
+  void SetEventID(ULong_t eventid) { fEventId = eventid; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"
    */
-  const string DataStream(){ return "Physics";}
+  const string GetDataStream(){ return "Physics";}
 
  private:
   // instance data

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.5 2004/05/05 15:20:48 pretz Exp $
+ * $Id: I3Cascade.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/05/05 15:20:48 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -51,32 +51,32 @@ class I3Cascade : public I3ObservableParticle{
   /**
    * the X position of the cascade
    */
-  virtual Double_t X() const =0;
+  virtual Double_t GetX() const =0;
 
   /**
    * the Y position of the cascade
    */
-  virtual Double_t Y() const =0;
+  virtual Double_t GetY() const =0;
 
   /**
    * the Z position of the cascade
    */
-  virtual Double_t Z() const =0;
+  virtual Double_t GetZ() const =0;
 
   /**
    * the time of the cascade
    */
-  virtual Double_t T() const =0;
+  virtual Double_t GetT() const =0;
 
   /**
    * the position of the cascade as an I3Position object
    */
-  virtual I3Position Pos() const =0;
+  virtual I3Position GetPos() const =0;
 
   /**
    * the energy of the cascade
    */
-  virtual Double_t Energy() const = 0;
+  virtual Double_t GetEnergy() const = 0;
 
  /**
   * Copies the data from the source particle into this particle

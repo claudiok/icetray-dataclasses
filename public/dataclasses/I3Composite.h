@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Composite.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -42,12 +42,14 @@ class I3Composite
    */
   Bool_t IsComposite() const {return true;}
 
-  int NumConstituents() const {return fConstituents.size();}
-  const I3Particle& Constituent(int i) const 
+  int GetNumConstituents() const {return fConstituents.size();}
+
+  const I3Particle& GetConstituent(int i) const 
     {
       return *(fConstituents[i]);
     }
-  vector<I3Particle*>& Constituents(){return fConstituents;}
+
+  vector<I3Particle*>& GetConstituents(){return fConstituents;}
 
   void CopyTo(I3Particle& destination) const
     {

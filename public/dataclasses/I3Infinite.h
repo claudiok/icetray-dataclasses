@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.6 2004/06/14 22:28:14 dule Exp $
+ * $Id: I3Infinite.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/14 22:28:14 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author 
  */
 
@@ -15,6 +15,7 @@
 #include <cmath>
 #include "I3Units.h"
 #include "NanPolicy.h"
+#include "I3Constants.h"
 
 /**
  * @brief The geometrical part of an I3Track implementation, representing an 
@@ -48,7 +49,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StartX() const 
+  Double_t GetStartX() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -57,7 +58,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StartY() const 
+  Double_t GetStartY() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -66,7 +67,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StartZ() const 
+  Double_t GetStartZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -75,7 +76,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StartT() const 
+  Double_t GetStartT() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -84,7 +85,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  I3Position StartPos() const 
+  I3Position GetStartPos() const 
     {
       NanPolicy::Fatal();
       I3Position p;
@@ -95,89 +96,89 @@ class I3Infinite{
   /**
    * gives an x position of the track
    */
-  Double_t X() const {return fPos.X();}
+  Double_t GetX() const {return fPos.GetX();}
 
   /**
    * gives an y position of the track
    */
-  Double_t Y() const {return fPos.Y();}
+  Double_t GetY() const {return fPos.GetY();}
 
   /**
    * gives an z position of the track
    */
-  Double_t Z() const {return fPos.Z();}
+  Double_t GetZ() const {return fPos.GetZ();}
 
   /**
    * sets an x position for the track
    */
-  void X(Double_t x) {fPos.X(x);}
+  void SetX(Double_t x) {fPos.SetX(x);}
 
   /**
    * sets an y position for the track
    */
-  void Y(Double_t y) {fPos.Y(y);}
+  void SetY(Double_t y) {fPos.SetY(y);}
 
   /**
    * sets an z position for the track
    */
-  void Z(Double_t z){fPos.Z(z);}
+  void SetZ(Double_t z){fPos.SetZ(z);}
 
   /**
    * the time the track was at X(), Y(), and Z()
    */ 
-  Double_t T() const {return fT;}
+  Double_t GetT() const {return fT;}
 
   /**
    * sets the time the track was at X(), Y(), Z()
    */
-  void T(Double_t t){fT = t;}
+  void SetT(Double_t t){fT = t;}
 
   /**
    * gets a position along the track.
    */
-  I3Position Pos() const {return fPos;}
+  I3Position GetPos() const {return fPos;}
 
   /**
    * sets a position along the track.
    */
-  void Pos(I3Position& p) {fPos.SetPosition(p);}
+  void SetPos(I3Position& p) {fPos.SetPosition(p);}
 
   /**
    * sets a position along the track in any reference frame.
    */
-  void Pos(Double_t p1, Double_t p2, Double_t p3, 
-		I3Position::RefFrame frame)
+  void SetPos(Double_t p1, Double_t p2, Double_t p3, 
+	      I3Position::RefFrame frame)
     {fPos.SetPosition(p1,p2,p3,frame);}
 
   /**
    * gets the zenith of the track
    */
-  Double_t Zenith() const {return fZenith;}
+  Double_t GetZenith() const {return fZenith;}
 
   /**
    * gets the azimuth of the track
    */
-  Double_t Azimuth() const {return fAzimuth;}
+  Double_t GetAzimuth() const {return fAzimuth;}
 
   /**
    * sets the zenith of the track
    */
-  void Zenith(Double_t zenith) {fZenith = zenith;}
+  void SetZenith(Double_t zenith) {fZenith = zenith;}
 
   /**
    * sets the azimuth of the track
    */
-  void Azimuth(Double_t azimuth) {fAzimuth = azimuth;}
+  void SetAzimuth(Double_t azimuth) {fAzimuth = azimuth;}
 
   /**
    * returns the length of the track ... infinite
    */
-  Double_t Length() const {return INFINITY;}
+  Double_t GetLength() const {return INFINITY;}
 
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StopX() const 
+  Double_t GetStopX() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -186,7 +187,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StopY() const 
+  Double_t GetStopY() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -195,7 +196,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StopZ() const 
+  Double_t GetStopZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -204,7 +205,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  Double_t StopT() const 
+  Double_t GetStopT() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -213,7 +214,7 @@ class I3Infinite{
   /**
    * should not be used.  Calls Fatal().
    */
-  I3Position StopPos() const 
+  I3Position GetStopPos() const 
     {
       NanPolicy::Fatal();
       I3Position p;
@@ -224,7 +225,7 @@ class I3Infinite{
   /**
    * returns the speed of light
    */
-  Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
+  Double_t GetSpeed() const {return I3Constants::c;}
 
   /**
    * copys this particle's data to the destination particle if the destination

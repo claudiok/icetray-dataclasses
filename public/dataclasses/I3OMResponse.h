@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.26 2004/05/06 14:41:47 pretz Exp $
+    $Id: I3OMResponse.h,v 1.27 2004/06/30 17:20:26 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.26 $
-    @date $Date: 2004/05/06 14:41:47 $
+    @version $Revision: 1.27 $
+    @date $Date: 2004/06/30 17:20:26 $
     @author ehrlich
     @author troy
     @author pretz
@@ -54,32 +54,32 @@ class I3OMResponse : public TObject
   /**
    * @return the number of the OM for this response
    */
-  UShort_t OMNumber() const { return fOMNumber; }
+  UShort_t GetOMNumber() const { return fOMNumber; }
 
   /**
    * @param omnumber the new omnumber associated with this response
    */
-  void OMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
+  void SetOMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
   
   /**
    * @return the the hardware data for this response as a const object
    */
-  const I3DataReadoutList& DataReadoutList() const {return fDataReadoutList;}
+  const I3DataReadoutList& GetDataReadoutList() const {return fDataReadoutList;}
   
   /**
    * @return the hardware data for this response as a non-const object
    */
-  I3DataReadoutList& DataReadoutList() {return fDataReadoutList;}
+  I3DataReadoutList& GetDataReadoutList() {return fDataReadoutList;}
 
   /**
    * @return the reco hit series data as a const object
    */
-  const I3RecoHitSeriesData& RecoHitSeriesData() const {return fRecoHitSeriesData;}
+  const I3RecoHitSeriesData& GetRecoHitSeriesData() const {return fRecoHitSeriesData;}
   
   /**
    * @return the reco hit series data as a non-const object
    */
-  I3RecoHitSeriesData& RecoHitSeriesData() {return fRecoHitSeriesData;}
+  I3RecoHitSeriesData& GetRecoHitSeriesData() {return fRecoHitSeriesData;}
 
   private:
   // copy and assignment are private

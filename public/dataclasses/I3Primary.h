@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.7 2004/05/21 19:21:43 pretz Exp $
+ * $Id: I3Primary.h,v 1.8 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Primary.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/05/21 19:21:43 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
   */
 
@@ -35,17 +35,17 @@ class I3Primary : public I3Particle{
   /**
    * the core X position of the particle
    */
-  virtual Double_t CoreX() const =0;
+  virtual Double_t GetCoreX() const =0;
 
   /**
    * the position of the core y position of the particle
    */
-  virtual Double_t CoreY() const =0;
+  virtual Double_t GetCoreY() const =0;
 
   /**
    * the time the particle was at CoreX and CoreY
    */
-  virtual Double_t CoreT() const =0;
+  virtual Double_t GetCoreT() const =0;
 
   /**
    * Copies over data from the source particle to this particle.

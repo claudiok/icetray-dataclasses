@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Energetic.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Energetic.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Energetic.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3ENERGETIC_H
@@ -30,12 +30,12 @@ class I3Energetic
   /**
    * gives the energy of the particle.
    */
-  Double_t Energy() const {return fEnergy;}
+  Double_t GetEnergy() const {return fEnergy;}
 
   /**
    * sets the energy of the track
    */
-  void Energy(Double_t energy){fEnergy = energy;}
+  void SetEnergy(Double_t energy){fEnergy = energy;}
 
   /**
    * copies all this particles data to destination if a dynamic cast to

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Directional.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
@@ -30,22 +30,22 @@ class I3Directional
   /**
    * gets the zenith of the cascade
    */
-  virtual Double_t Zenith() const {return fZenith;}
+  virtual Double_t GetZenith() const {return fZenith;}
 
   /**
    * sets the zenith of the cascade
    */
-  virtual void Zenith(Double_t zenith) {fZenith = zenith;}
+  virtual void SetZenith(Double_t zenith) {fZenith = zenith;}
 
   /**
    * gets the azimuth of the cascade
    */
-  virtual Double_t Azimuth() const {return fAzimuth;}
+  virtual Double_t GetAzimuth() const {return fAzimuth;}
 
   /**
    * sets the Azimuth of the cascade
    */
-  virtual void Azimuth(Double_t azimuth) {fAzimuth = azimuth;}
+  virtual void SetAzimuth(Double_t azimuth) {fAzimuth = azimuth;}
 
   /**
    * copies over all the interal data to the destination particle

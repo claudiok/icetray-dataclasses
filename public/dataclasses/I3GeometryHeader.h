@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3GeometryHeader.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3GeometryHeader.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3GeometryHeader.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -66,32 +66,32 @@ class I3GeometryHeader : public I3DataHeader
   /**
    * @return the total number of oms for the geometry
    */
-  Int_t NumOms() { return fNumOms; }
+  Int_t GetNumOms() const{ return fNumOms; }
 
   /**
    * @param arg the new number of oms for the geometry
    */
-  void NumOms(Int_t arg) { fNumOms = arg; }
+  void SetNumOms(Int_t arg) { fNumOms = arg; }
 
   /**
    * @return the number of strings for the geometry
    */
-  Int_t NumStrings() { return fNumStrings; }
+  Int_t GetNumStrings() const { return fNumStrings; }
 
   /**
    * @param strings the new number of strings for the geometry
    */
-  void NumStrings(Int_t strings) { fNumStrings = strings; }
+  void SetNumStrings(Int_t strings) { fNumStrings = strings; }
 
   /**
    * @return the name of the array.  E.g. 'AmandaB10'
    */
-  string ArrayName() { return fArrayName; }
+  string GetArrayName() const{ return fArrayName; }
 
   /**
    * @param arg the new name for the array
    */
-  void  ArrayName( const string &arg) { fArrayName = arg; }
+  void  SetArrayName( const string &arg) { fArrayName = arg; }
 
   // note that it is not a reference returned, we need that copy constructor
   /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonDirectional.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3NonDirectional.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3NonDirectional.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -30,12 +30,12 @@ class I3NonDirectional
   /**
    * Shouldn't be used.  Calls Fatal().
    */
-  virtual Double_t Zenith() const {return NAN;}
+  virtual Double_t GetZenith() const {return NAN;}
 
   /**
    * Shouldn't be used.  Calls Fatal().
    */
-  virtual Double_t Azimuth() const {return NAN;}
+  virtual Double_t GetAzimuth() const {return NAN;}
 
   /**
    * Doesn't do anything.  There's nothing to copy.

@@ -1,13 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Constants.h,v 1.2 2004/06/17 22:37:15 dule Exp $
+ * $Id: I3Constants.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Constants.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/06/17 22:37:15 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
+
+#ifndef I3CONSTANTS_H
+#define I3CONSTANTS_H
 
 #include "dataclasses/I3Units.h"
 
@@ -35,3 +38,5 @@ namespace I3Constants
    */
   static const Double_t e = 2.71828182845904509;
 };
+
+#endif

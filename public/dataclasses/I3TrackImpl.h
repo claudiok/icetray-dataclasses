@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.6 2004/06/09 21:56:34 dule Exp $
+ * $Id: I3TrackImpl.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/09 21:56:34 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -96,145 +96,126 @@ class I3TrackImpl : public I3Track,
   /**
    * gets the zenith
    */
-  virtual Double_t Zenith() const {return GeometricalType::Zenith();}
-  using GeometricalType::Zenith;
+  virtual Double_t GetZenith() const {return GeometricalType::GetZenith();}
 
   /**
    * gets the azimuth
    */
-  virtual Double_t Azimuth() const {return GeometricalType::Azimuth();}
-  using GeometricalType::Azimuth;
+  virtual Double_t GetAzimuth() const {return GeometricalType::GetAzimuth();}
 
   /**
    * starting x position
    */
-  virtual Double_t StartX() const {return GeometricalType::StartX();}
-  using GeometricalType::StartX;
+  virtual Double_t GetStartX() const {return GeometricalType::GetStartX();}
 
   /**
    * starting y position
    */
-  virtual Double_t StartY() const {return GeometricalType::StartY();}
-  using GeometricalType::StartY;
+  virtual Double_t GetStartY() const {return GeometricalType::GetStartY();}
 
   /**
    * starting z position
    */
-  virtual Double_t StartZ() const {return GeometricalType::StartZ();}
-  using GeometricalType::StartZ;
+  virtual Double_t GetStartZ() const {return GeometricalType::GetStartZ();}
 
   /**
    * starting time
    */
-  virtual Double_t StartT() const {return GeometricalType::StartT();}
-  using GeometricalType::StartT;
+  virtual Double_t GetStartT() const {return GeometricalType::GetStartT();}
 
   /**
    * the starting position as an I3Position
    */
-  virtual I3Position StartPos() const 
+  virtual I3Position GetStartPos() const 
     {
-      return GeometricalType::StartPos();
+      return GeometricalType::GetStartPos();
     }
 
   /**
    * the stopping x position
    */
-  virtual Double_t StopX() const {return GeometricalType::StopX();}
-  using GeometricalType::StopX;
+  virtual Double_t GetStopX() const {return GeometricalType::GetStopX();}
 
   /**
    * the stopping y position
    */
-  virtual Double_t StopY() const {return GeometricalType::StopY();}
-  using GeometricalType::StopY;
+  virtual Double_t GetStopY() const {return GeometricalType::GetStopY();}
 
   /**
    * the stopping z position
    */
-  virtual Double_t StopZ() const {return GeometricalType::StopZ();}
-  using GeometricalType::StopZ;
+  virtual Double_t GetStopZ() const {return GeometricalType::GetStopZ();}
 
   /**
    * the stopping time
    */
-  virtual Double_t StopT() const {return GeometricalType::StopT();}
-  using GeometricalType::StopT;
+  virtual Double_t GetStopT() const {return GeometricalType::GetStopT();}
 
   /**
    * the stopping position as an I3Position
    */
-  virtual I3Position StopPos() const 
+  virtual I3Position GetStopPos() const 
     {
-      return GeometricalType::StopPos();;
+      return GeometricalType::GetStopPos();;
     }
 
   /**
    * some X position along the track, corresponding to Y(),Z(), and T()
    */
-  virtual Double_t X() const {return GeometricalType::X();}
-  using GeometricalType::X;
+  virtual Double_t GetX() const {return GeometricalType::GetX();}
 
   /**
    * some Y position along the track corresponding to X(), Z() and T()
    */
-  virtual Double_t Y() const {return GeometricalType::Y();}
-  using GeometricalType::Y;
+  virtual Double_t GetY() const {return GeometricalType::GetY();}
 
   /**
    * some Z position along the track corresponding to X(), Y() and T()
    */
-  virtual Double_t Z() const {return GeometricalType::Z();}
-  using GeometricalType::Z;
+  virtual Double_t GetZ() const {return GeometricalType::GetZ();}
 
   /**
    * the time the track was at X(), Y() and Z()
    */
-  virtual Double_t T() const {return GeometricalType::T();}
-  using GeometricalType::T;
+  virtual Double_t GetT() const {return GeometricalType::GetT();}
 
   /**
    * the Position of the track at time T()
    */
-  virtual I3Position Pos() const 
+  virtual I3Position GetPos() const 
     {
-      return GeometricalType::Pos();
+      return GeometricalType::GetPos();
     }
-  using GeometricalType::Pos;
-
 
   /**
    * The energy of the particle
    */
-  virtual Double_t Energy() const {return EnergeticType::Energy();}
-  using EnergeticType::Energy;
+  virtual Double_t GetEnergy() const {return EnergeticType::GetEnergy();}
 
   /**
    * the speed of the particle
    */
-  virtual Double_t Speed() const {return GeometricalType::Speed();}
-  using GeometricalType::Speed;
+  virtual Double_t GetSpeed() const {return GeometricalType::GetSpeed();}
 
   /**
    * the length of the particle
    */
-  virtual Double_t Length() const {return GeometricalType::Length();}
-  using GeometricalType::Length;
+  virtual Double_t GetLength() const {return GeometricalType::GetLength();}
 
   /**
    * the number of particles that go into making up this composite track
    */
-  virtual int NumConstituents() const 
+  virtual int GetNumConstituents() const 
     {
-      return CompositeType::NumConstituents();
+      return CompositeType::GetNumConstituents();
     }
   
   /**
    * the ith particle making up this composite track
    */
-  virtual const I3Particle& Constituent(int i) const 
+  virtual const I3Particle& GetConstituent(int i) const 
     {
-      return CompositeType::Constituent(i);
+      return CompositeType::GetConstituent(i);
     }
 
   /**

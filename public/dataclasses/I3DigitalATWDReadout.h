@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalATWDReadout.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3DigitalATWDReadout.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3DigitalATWDReadout.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -35,12 +35,12 @@ class I3DigitalATWDReadout : public I3DigitalReadout
   /**
    * @return the gain of this ATWD for this series
    */
-  GainSetting Gain() const { return fGain; }
+  GainSetting GetGain() const { return fGain; }
 
   /**
    * @param gain the new gain setting
    */
-  void Gain(GainSetting  gain) { fGain=gain; }
+  void SetGain(GainSetting  gain) { fGain=gain; }
 
  private:
   // copy and assignment private

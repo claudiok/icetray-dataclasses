@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.3 2004/06/17 22:37:15 dule Exp $
+// $Id: I3Position.cxx,v 1.4 2004/06/30 17:20:25 pretz Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -33,7 +33,7 @@ I3Position::~I3Position()
 I3Position::I3Position(const I3Position& p)
 {
 // Copy constructor
-  SetPosition(p.X(), p.Y(), p.Z(), car);
+  SetPosition(p.GetX(), p.GetY(), p.GetZ(), car);
 }
 
 //-----------------------------------------------------------
@@ -42,7 +42,7 @@ I3Position::I3Position(const I3Position& p)
 void I3Position::SetPosition(const I3Position& p)
 {
 // Set position
-  SetPosition(p.X(), p.Y(), p.Z(), car);
+  SetPosition(p.GetX(), p.GetY(), p.GetZ(), car);
 }
 
 //-----------------------------------------------------------
@@ -106,7 +106,7 @@ void I3Position::ShiftCoordSystem(const I3Position& p)
 {
 // Shift coordinate system by position p
 // i.e. perform: this=this-p
-  SetPosition(fX-p.X(), fY-p.Y(), fZ-p.Z(), car);
+  SetPosition(fX-p.GetX(), fY-p.GetY(), fZ-p.GetZ(), car);
 }
 
 //-----------------------------------------------------------
@@ -152,16 +152,16 @@ Double_t I3Position::CalcDistance(const I3Position& p) const
   I3Position d;
   d.SetPosition(*this);
   d.ShiftCoordSystem(p);
-  return d.R();
+  return d.GetR();
 }
 
 //-----------------------------------------------------------
 void I3Position::PrintPosition()
 {
   cout <<"---------------------POSITION-INFO-----------------------"<<endl;
-  cout <<"CAR coord (x,y,z): "<< X()<<" "<<Y()<<" "<<Z()<<endl;
-  cout <<"SPH coord (r,theta,phi): "<< R()<<" "<<Theta()<<" "<<Phi()<<endl;
-  cout <<"CYL coord (rho,phi,z): "<< Rho()<<" "<<Phi()<<" "<<Z()<<endl;
+  cout <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<endl;
+  cout <<"SPH coord (r,theta,phi): "<< GetR()<<" "<<GetTheta()<<" "<<GetPhi()<<endl;
+  cout <<"CYL coord (rho,phi,z): "<< GetRho()<<" "<<GetPhi()<<" "<<GetZ()<<endl;
   cout <<"---------------------------------------------------------"<<endl;
 }
 

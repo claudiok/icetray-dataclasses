@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Localized.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  *
  */
@@ -33,42 +33,42 @@ class I3Localized{
   /**
    * gives the X position of the Cascade
    */
-  Double_t X() const{ return fX;}
+  Double_t GetX() const{ return fX;}
 
   /**
    * sets the x position of the cascade
    */
-  void X(Double_t x) {fX = x;}
+  void SetX(Double_t x) {fX = x;}
 
   /**
    * gives the y position of the cascade
    */
-  Double_t Y() const{return fY;}
+  Double_t GetY() const{return fY;}
 
   /**
    * sets the y position of the cascade
    */
-  void Y(Double_t y) {fY = y;}
+  void SetY(Double_t y) {fY = y;}
 
   /**
    * gets the z position of the cascade
    */
-  Double_t Z() const{return fZ; }
+  Double_t GetZ() const{return fZ; }
 
   /**
    * sets the z position of the cascade 
    */
-  void Z(Double_t z) {fZ = z;}
+  void SetZ(Double_t z) {fZ = z;}
 
   /**
    * gets the time of the cascade
    */
-  Double_t T() const{return fT;}
+  Double_t GetT() const{return fT;}
 
   /**
    * sets the time of the cascade
    */
-  void T(Double_t t){fT = t;}
+  void SetT(Double_t t){fT = t;}
 
   /**
    * copies all of this cascade's data into 'destination' if a dynamic_cast

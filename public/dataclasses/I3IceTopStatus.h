@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStatus.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3IceTopStatus.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3IceTopStatus.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATUS_H
@@ -17,7 +17,8 @@
 #include "StoragePolicy.h"
 
 /**
- * @brief a container for I3IcetTopStationStatus objects
+ * @brief a container for I3IcetTopStationStatus objects.  Just holding a place
+ * for now
  */
 class I3IceTopStatus 
 : public TObject, 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.7 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.8 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 
@@ -49,34 +49,34 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
   /**
    * @return the type of this fit as a const object
    */
-  const string& FitType() const {return fFitType;}
+  const string& GetFitType() const {return fFitType;}
 
   /**
    * @return the type of this fit as non-const object
    */
-  string& FitName() {return fFitType;}
+  string& GetFitName() {return fFitType;}
 
   /**
    * The parameters of the RDMC fit in the order they appear in the f2k file
    * @return the parameters of this fit as a const object
    */
-  const map<string,Double_t>& Parameters() const {return fParameters;}
+  const map<string,Double_t>& GetParameters() const {return fParameters;}
 
   /**
    * The parameters of the RDMC fit in the order they appear in the f2k file
    * @return the parameters of this fit as a non-const object
    */
-  map<string,Double_t>& Parameters() {return fParameters;}
+  map<string,Double_t>& GetParameters() {return fParameters;}
 
   /**
    * @return tubes used by this fit as a const object
    */
-  const vector<Int_t>& UsedTubes() const {return fUsedTubes;}
+  const vector<Int_t>& GetUsedTubes() const {return fUsedTubes;}
 
   /**
    * @return the tubes used by this fit as a non-const object
    */
-  vector<Int_t>& UsedTubes() {return fUsedTubes;}
+  vector<Int_t>& GetUsedTubes() {return fUsedTubes;}
 
  private:
   // copy and assignment are private

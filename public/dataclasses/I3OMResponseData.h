@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseData.h,v 1.18 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3OMResponseData.h,v 1.19 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3OMResponseData.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -46,7 +46,7 @@ class I3OMResponseData : public TObject, public VecPointainerPolicy<I3OMResponse
     const_iterator iter;
     for(iter = begin() ; iter!= end() ; iter++){
       if(*iter != 0)
-	if((*iter)->OMNumber()==omnumber)
+	if((*iter)->GetOMNumber()==omnumber)
 	  return *iter;
     }
     return 0;

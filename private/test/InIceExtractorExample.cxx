@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.1 2004/03/04 16:45:56 troy Exp $
+    $Id: InIceExtractorExample.cxx,v 1.2 2004/06/30 17:20:26 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/03/04 16:45:56 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/06/30 17:20:26 $
     @author Troy D. Straszheim
 
     @todo
@@ -47,20 +47,20 @@ namespace tut
   // its fields to random values
   void SetOMRandomValues (I3OMGeoPtr p) 
   {
-    p->OMNumber(rand()%1024);
-    p->X(rand()/0.002);
-    p->Y(rand()/0.002);
-    p->Z(rand()/0.002);
+    p->SetOMNumber(rand()%1024);
+    p->SetX(rand()/0.002);
+    p->SetY(rand()/0.002);
+    p->SetZ(rand()/0.002);
   }
 
   // this prints an OM
   void PrintOM (I3OMGeoPtr p) 
   {
     cout << "[" << p->iam() 
-	 << " #" << p->OMNumber() 
-	 << " X:" << p->X() 
-	 << " Y:" << p->Y() 
-	 << " Z:" << p->Z() 
+	 << " #" << p->GetOMNumber() 
+	 << " X:" << p->GetX() 
+	 << " Y:" << p->GetY() 
+	 << " Z:" << p->GetZ() 
 	 << "]" << endl; 
   }
 
@@ -83,7 +83,7 @@ namespace tut
 
   // for sorting by OMNumber
   bool OMNumber_lessthan(I3OMGeoPtr l, I3OMGeoPtr r) {
-    return (l->OMNumber() < r->OMNumber());
+    return (l->GetOMNumber() < r->GetOMNumber());
   }
 
   //

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3MCPMTResponse.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author klein
  */
 
@@ -36,17 +36,20 @@ class I3MCPMTResponse : public TObject
    */
   virtual ~I3MCPMTResponse(){}
   
-    /*   PMT output voltage as f(time) */
-  
-//   virtual Float_t PMToutvoltage(Float_t time)
+  /**   
+   * PMT output voltage as f(time) 
+   */
+  //virtual Float_t PMToutvoltage(Float_t time)=0;
 
-    /*  First time that is meaningful (non-zero) */
+  /**  
+   * First time that is meaningful (non-zero) 
+   */
+   Float_t GetStartTime() const {return fStartTime;}
 
-   Float_t StartTime() const {return fStartTime;}
-
-  /*    Last time that is meaningful (non-zero) */
-
-   Float_t EndTime() const {return fEndTime;}
+  /** 
+   * Last time that is meaningful (non-zero) 
+   */
+   Float_t GetEndTime() const {return fEndTime;}
 
   private:
   // copy and assignment are private

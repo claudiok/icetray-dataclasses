@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Atmosphere.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Atmosphere.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Atmosphere.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -58,32 +58,32 @@ class I3Atmosphere : public TObject
    /**
     * @return the atmospheric pressure
     */
-   Float_t Pressure() const {return fPressure;}
+   Float_t GetPressure() const {return fPressure;}
 
    /**
     * @param pressure the new pressure for the Atmosphere
     */
-   void Pressure(Float_t pressure){fPressure = pressure;}
+   void SetPressure(Float_t pressure){fPressure = pressure;}
 
    /**
     * @return the temperature
     */
-   float Temperature() const {return fTemperature;}
+   float GetTemperature() const {return fTemperature;}
 
   /**
    * @param temp the new Temperatrure for the atmosphere
    */
-   void Temperature(float temp){fTemperature = temp;}
+   void SetTemperature(float temp){fTemperature = temp;}
 
   /**
    * @return the windspeed 
    */
-  Float_t WindSpeed() const {return fWindSpeed;}
+  Float_t GetWindSpeed() const {return fWindSpeed;}
 
   /**
    * @param windspeed the new windspeed
    */
-  void WindSpeed(Float_t windspeed) {fWindSpeed = windspeed;}
+  void SetWindSpeed(Float_t windspeed) {fWindSpeed = windspeed;}
 
  private:
   //ROOT macro

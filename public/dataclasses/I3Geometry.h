@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.21 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3Geometry.h,v 1.22 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -42,22 +42,22 @@ class I3Geometry : public TObject
   /**
    * @return the In-Ice geometry as a constant object
    */
-  const I3InIceGeometry& InIceGeometry() const { return fInIce;}
+  const I3InIceGeometry& GetInIceGeometry() const { return fInIce;}
 
   /**
    * @return the In-Ice geometry as a non-const object
    */
-  I3InIceGeometry& InIceGeometry() { return fInIce;}
+  I3InIceGeometry& GetInIceGeometry() { return fInIce;}
 
   /**
    * @return the IceTop geometry as a const object
    */
-  const I3TopGeometry& IceTopGeometry() const{ return fTop; }
+  const I3TopGeometry& GetIceTopGeometry() const{ return fTop; }
 
   /**
    * @return the IceTop geometry as a non-const object
    */
-  I3TopGeometry& IceTopGeometry() { return fTop; }
+  I3TopGeometry& GetIceTopGeometry() { return fTop; }
 
  private:
   // copy and assignment private

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3Particle.h,v 1.9 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  *
  */
@@ -82,7 +82,7 @@ public:
     /**
      * gives the type of the particle
      */
-    virtual ParticleType Type() const
+    virtual ParticleType GetType() const
     {
 	return fType;
     }
@@ -90,7 +90,7 @@ public:
     /**
      * sets the type of the particle
      */
-    virtual void Type(ParticleType type)
+    virtual void SetType(ParticleType type)
     {
 	fType = type;
     };
@@ -98,15 +98,15 @@ public:
     /** 
      * gets the unique ID number of the particle
      */ 
-    virtual Int_t ParticleNumber() const
+    virtual Int_t GetParticleNumber() const
     {
 	return fID;
     };
 
-      /** 
+    /** 
      * sets the unique ID number of the particle
      */ 
-    virtual void ParticleNumber(Int_t ID)
+    virtual void SetParticleNumber(Int_t ID)
     {
 	fID = ID;
     };
@@ -115,12 +115,12 @@ public:
  /**
   * phi
   */
- virtual Double_t Azimuth() const =0;
+ virtual Double_t GetAzimuth() const =0;
 
  /**
   * theta
   */
- virtual Double_t Zenith() const =0;
+ virtual Double_t GetZenith() const =0;
 
  /**
   * copies over data from this particle to the destination particle

@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DetectorStatus.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3DetectorStatus.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3DetectorStatus.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3DETECTORSTATUS_H
@@ -42,22 +42,22 @@ class I3DetectorStatus : public TObject{
   /**
    * @return the Atmosphere as a constant object
    */
-  const I3InIceStatus& InIceStatus() const { return fInIceStatus;}
+  const I3InIceStatus& GetInIceStatus() const { return fInIceStatus;}
 
   /**
    * @return the InIceStatus as a non-const object
    */
-  I3InIceStatus& InIceStatus() { return fInIceStatus;}
+  I3InIceStatus& GetInIceStatus() { return fInIceStatus;}
 
   /**
    * @return the Atmosphere as a constant object
    */
-  const I3IceTopStatus& IceTopStatus() const { return fIceTopStatus;}
+  const I3IceTopStatus& GetIceTopStatus() const { return fIceTopStatus;}
 
   /**
    * @return the IceTopStatus as a non-const object
    */
-  I3IceTopStatus& IceTopStatus() { return fIceTopStatus;}
+  I3IceTopStatus& GetIceTopStatus() { return fIceTopStatus;}
 
  private:
   // copy and assignment private

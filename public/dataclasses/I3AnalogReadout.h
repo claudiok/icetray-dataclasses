@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3AnalogReadout.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -36,7 +36,7 @@ class I3AnalogReadout : public I3DataReadout
   /**
    * @return the time of the first LE in the readout
    */
-  virtual Double_t FirstLE() const = 0;
+  virtual Double_t GetFirstLE() const = 0;
 
  private:
   // copy and assignment private

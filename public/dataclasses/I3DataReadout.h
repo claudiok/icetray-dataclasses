@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.9 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.10 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -39,14 +39,14 @@ class I3DataReadout : public TObject
    * or was put in later to emulate a particular kind of data.
    * @return kTRUE if this readout came directly from the detector
    */
-  Bool_t Raw() const {return fRaw;}
+  Bool_t IsRaw() const {return fRaw;}
 
   /**
    * establishes this I3DataReadout as either coming from the detector
    * or from some later processing.
    * @param raw kTRUE if it came straight from the detector
    */
-  void Raw(Bool_t raw) {fRaw = raw;}
+  void SetRaw(Bool_t raw) {fRaw = raw;}
 
  private:
   // copy and assignment are private

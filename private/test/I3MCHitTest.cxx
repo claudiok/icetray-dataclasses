@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHitTest.cxx,v 1.2 2004/03/03 15:50:08 troy Exp $
+    $Id: I3MCHitTest.cxx,v 1.3 2004/06/30 17:20:26 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/03/03 15:50:08 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/06/30 17:20:26 $
     @author Troy D. Straszheim
 
     @todo
@@ -40,13 +40,13 @@ namespace tut
   void object::test<1>()
   {
     I3MCHit h, j;
-    ensure(h.Weight() == 0);
-    ensure(h.TrackNumber() == 0);
-    j.Weight(rand()/0.3234);
-    j.TrackNumber(rand()%256);
+    ensure(h.GetWeight() == 0);
+    ensure(h.GetTrackNumber() == 0);
+    j.SetWeight(rand()/0.3234);
+    j.SetTrackNumber(rand()%256);
     h = j;
-    ensure_distance("simple assignment", j.Weight(), h.Weight(), (float)0.0001);
-    ensure(j.TrackNumber() == j.TrackNumber());
+    ensure_distance("simple assignment", j.GetWeight(), h.GetWeight(), (float)0.0001);
+    ensure(j.GetTrackNumber() == j.GetTrackNumber());
   }
 
   // to run just this test, use "runtests I3MCHit 4"
@@ -63,9 +63,12 @@ namespace tut
   void object::test<2>()
   {
     I3MCHit u, v, w, x;
-    x.Time(rand()/0.235234);
+    x.SetTime(rand()/0.235234);
     u = u = v = v = w = x;
-    ensure_distance("chain of assignment operators", u.Time(), x.Time(), 0.0001);
+    ensure_distance("chain of assignment operators", 
+		    u.GetTime(), 
+		    x.GetTime(), 
+		    0.0001);
   }
 }
 

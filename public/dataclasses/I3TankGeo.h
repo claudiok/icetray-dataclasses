@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3TankGeo.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -27,29 +27,29 @@ class I3TankGeo : public TObject
 
   I3TankGeo () {}
 
-  UShort_t TankID () const {return fTankID;}
-  void   TankID (UShort_t tank_id) { fTankID = tank_id; }
+  UShort_t GetTankID () const {return fTankID;}
+  void   SetTankID (UShort_t tank_id) { fTankID = tank_id; }
 
-  Double_t X () const { return fX; }
-  void   X(Double_t x) { fX = x; }
+  Double_t GetX () const { return fX; }
+  void   SetX(Double_t x) { fX = x; }
 
-  Double_t Y () const { return fY; }
-  void   Y (Double_t y) { fY = y; }
+  Double_t GetY () const { return fY; }
+  void   SetY (Double_t y) { fY = y; }
 
-  Double_t R () const { return fR; }
-  void     R (Double_t r) { fR = r; }
+  Double_t GetR () const { return fR; }
+  void     SetR (Double_t r) { fR = r; }
 
-  Double_t  H () const { return fH; }
-  void    H (Double_t h) { fH = h; }
+  Double_t  GetH () const { return fH; }
+  void    SetH (Double_t h) { fH = h; }
 
-  UChar_t Version () const { return fVersion; }
-  void    Version (UChar_t version) { fVersion = version; }
+  UChar_t GetVersion () const { return fVersion; }
+  void    SetVersion (UChar_t version) { fVersion = version; }
 
-  const I3TankMaterial &Material () const { return fMaterial; }
-  I3TankMaterial& Material() {return fMaterial;}
+  const I3TankMaterial &GetMaterial () const { return fMaterial; }
+  I3TankMaterial& GetMaterial() {return fMaterial;}
 
-  const I3InIceGeometry &OM () const { return fOM; }
-  I3InIceGeometry& OM() {return fOM;}
+  const I3InIceGeometry &GetOM () const { return fOM; }
+  I3InIceGeometry& GetOM() {return fOM;}
 
 
  private:

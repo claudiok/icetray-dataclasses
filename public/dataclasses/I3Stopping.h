@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.6 2004/06/14 22:28:14 dule Exp $
+ * $Id: I3Stopping.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/14 22:28:14 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -14,6 +14,7 @@
 #include <cmath>
 #include "I3Units.h"
 #include "NanPolicy.h"
+#include "I3Constants.h"
 
 /**
  * @brief This class services the 'geometrical' part of the I3Track interface.
@@ -50,7 +51,7 @@ class I3Stopping{
   /**
    * shouldn't be used.  Calls Fatal.
    */
-  Double_t StartX() const 
+  Double_t GetStartX() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -59,7 +60,7 @@ class I3Stopping{
   /**
    * shouldn't be used.  Calls Fatal.
    */
-  Double_t StartY() const     
+  Double_t GetStartY() const     
     {
       NanPolicy::Fatal();
       return NAN;
@@ -68,7 +69,7 @@ class I3Stopping{
   /**
    * shouldn't be used.  Calls Fatal.
    */
-  Double_t StartZ() const 
+  Double_t GetStartZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
@@ -77,7 +78,7 @@ class I3Stopping{
   /**
    * shouldn't be used.  Calls Fatal.
    */
-  Double_t StartT() const
+  Double_t GetStartT() const
     {
       NanPolicy::Fatal();
       return NAN;
@@ -86,7 +87,7 @@ class I3Stopping{
   /**
    * shouldn't be used.  Calls Fatal.
    */
-  I3Position StartPos() const
+  I3Position GetStartPos() const
     {
       NanPolicy::Fatal();
       I3Position p;
@@ -97,124 +98,124 @@ class I3Stopping{
   /**
    * A x position along the track. Gives the stopping x position. 
    */
-  Double_t X() const {return fStopPos.X();}
+  Double_t GetX() const {return fStopPos.GetX();}
 
   /**
    * A y position along the track. Gives the stopping y position. 
    */
-  Double_t Y() const {return fStopPos.Y();}
+  Double_t GetY() const {return fStopPos.GetY();}
 
   /**
    * A z position along the track. Gives the stopping z position. 
    */
-  Double_t Z() const {return fStopPos.Z();}
+  Double_t GetZ() const {return fStopPos.GetZ();}
 
   /**
    * A t along the track.  Gives the stopping t.
    */
-  Double_t T() const {return fStopT;}
+  Double_t GetT() const {return fStopT;}
 
   /**
    * gives the stopping positition as a position on the track
    */
-  I3Position Pos() const {return fStopPos;}
+  I3Position GetPos() const {return fStopPos;}
 
   /**
    * sets the stopping positition as a position on the track
    */
-  void Pos(I3Position& p) {fStopPos = p;}
+  void SetPos(I3Position& p) {fStopPos = p;}
 
   /**
    * gives the zenith of the track
    */
-  Double_t Zenith() const {return fZenith;}
+  Double_t GetZenith() const {return fZenith;}
 
   /**
    * gives the azimuth of the track
    */
-  Double_t Azimuth() const {return fAzimuth;}
+  Double_t GetAzimuth() const {return fAzimuth;}
 
   /**
    * sets the zenith of the track
    */
-  void Zenith(Double_t theta){fZenith = theta;}
+  void SetZenith(Double_t theta){fZenith = theta;}
 
   /**
    * sets the azimuth of the track
    */
-  void Azimuth(Double_t phi){fAzimuth = phi;}
+  void SetAzimuth(Double_t phi){fAzimuth = phi;}
 
   /**
    * returns the length of the track as infinite
    */
-  Double_t Length() const {return INFINITY;}
+  Double_t GetLength() const {return INFINITY;}
 
   /**
    * gives the stopping x position of the track
    */
-  Double_t StopX() const {return fStopPos.X();}
+  Double_t GetStopX() const {return fStopPos.GetX();}
 
   /**
    * gives the stopping y position of the track
    */
-  Double_t StopY() const {return fStopPos.Y();}
+  Double_t GetStopY() const {return fStopPos.GetY();}
 
   /**
    * gives the stopping z position of the track
    */
-  Double_t StopZ() const {return fStopPos.Z();}
+  Double_t GetStopZ() const {return fStopPos.GetZ();}
 
   /**
    * sets the stopping x position of the track
    */
-  void StopX(Double_t stopx) {fStopPos.X(stopx);}
+  void SetStopX(Double_t stopx) {fStopPos.SetX(stopx);}
 
   /**
    * sets the stopping y position of the track
    */
-  void StopY(Double_t stopy) {fStopPos.Y(stopy);}
+  void SetStopY(Double_t stopy) {fStopPos.SetY(stopy);}
 
   /**
    * sets the stopping z position of the track
    */
-  void StopZ(Double_t stopz) {fStopPos.Z(stopz);}
+  void SetStopZ(Double_t stopz) {fStopPos.SetZ(stopz);}
 
   /**
    * gives the stopping t of the track
    */
-  Double_t StopT() const {return fStopT;}
+  Double_t GetStopT() const {return fStopT;}
 
   /**
    * sets the stoppign t of the track
    */
-  void StopT(Double_t stopt) {fStopT = stopt;}
+  void SetStopT(Double_t stopt) {fStopT = stopt;}
 
   /**
    * gets the stopping position
    */
-  I3Position StopPos() const {return fStopPos;}
+  I3Position GetStopPos() const {return fStopPos;}
 
   /**
    * sets the stopping position
    */
-  void StopPos(I3Position& p) {fStopPos = p;}
+  void SetStopPos(I3Position& p) {fStopPos = p;}
 
   /**
    * sets the stopping position in any reference frame
    */
-  void StopPos(Double_t stopp1, Double_t stopp2, Double_t stopp3, 
+  void SetStopPos(Double_t stopp1, Double_t stopp2, Double_t stopp3, 
 		I3Position::RefFrame frame)
     {fStopPos.SetPosition(stopp1,stopp2,stopp3,frame);}
 
   /**
    * gives the speed of light for the speed.
    */
-  Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
+  Double_t GetSpeed() const {return I3Constants::c;}
 
   /**
    * shouldn't be used.  Calls fatal
    */
-  void Speed(Double_t) 
+  void SetSpeed(Double_t) 
     {
       NanPolicy::Fatal();
     }

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.15 2004/06/14 22:28:03 dule Exp $
+    $Id: I3Track.cxx,v 1.16 2004/06/30 17:20:25 pretz Exp $
 
-    @version $Revision: 1.15 $
-    @date $Date: 2004/06/14 22:28:03 $
+    @version $Revision: 1.16 $
+    @date $Date: 2004/06/30 17:20:25 $
     @author
 
     @todo
@@ -30,20 +30,20 @@ void I3Track::PrintTrack()
 
   if (IsStarting()) {
     cout <<"Starting Position (StartPos): "<<endl;
-    StartPos().PrintPosition();
-    cout <<"Start Time (StartT): "<<StartT()<<endl;
+    GetStartPos().PrintPosition();
+    cout <<"Start Time (StartT): "<<GetStartT()<<endl;
   }
   cout <<"Position (Pos): "<<endl;
-  Pos().PrintPosition();
-  cout <<"Time (T): "<<T()<<endl;
+  GetPos().PrintPosition();
+  cout <<"Time (T): "<<GetT()<<endl;
   if (IsStopping()) {
     cout <<"Stoppping Position (StopPos): "<<endl;
-    StopPos().PrintPosition();
-    cout <<"Stop Time (StopT): "<<StopT()<<endl;
+    GetStopPos().PrintPosition();
+    cout <<"Stop Time (StopT): "<<GetStopT()<<endl;
   }
-  cout <<"Zenith: "<<Zenith()/I3Units::degree<<" deg"<<endl;
-  cout <<"Azimuth: "<<Azimuth()/I3Units::degree<<" deg"<<endl;
-  cout <<"Length: "<<Length()<<endl;
+  cout <<"Zenith: "<<GetZenith()/I3Units::degree<<" deg"<<endl;
+  cout <<"Azimuth: "<<GetAzimuth()/I3Units::degree<<" deg"<<endl;
+  cout <<"Length: "<<GetLength()<<endl;
   cout <<"========================================================="<<endl;
 }
 //-----------------------------------------------------------

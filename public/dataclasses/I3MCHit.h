@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.12 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3MCHit.h,v 1.13 2004/06/30 17:20:26 pretz Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/06/30 17:20:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -52,22 +52,22 @@ class I3MCHit : public I3Hit
   /**
    * @return the weight contributed by this MCHit
    */
-  Float_t Weight() const { return fWeight; }
+  Float_t GetWeight() const { return fWeight; }
 
   /**
    * @param weight the new weight for the hit
    */
-  void Weight(Float_t weight) { fWeight = weight; }
+  void SetWeight(Float_t weight) { fWeight = weight; }
 
   /**
    * @return the track number which caused this hit
    */
-  UShort_t TrackNumber() const { return fTrackNum; }
+  UShort_t GetTrackNumber() const { return fTrackNum; }
 
   /**
    * @param tracknum set the track which caused this hit
    */
-  void TrackNumber(UShort_t tracknum) { fTrackNum = tracknum; }
+  void SetTrackNumber(UShort_t tracknum) { fTrackNum = tracknum; }
 
  private:
 
