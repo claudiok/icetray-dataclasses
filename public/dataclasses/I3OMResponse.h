@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.23 2004/04/22 21:17:46 spencer Exp $
+    $Id: I3OMResponse.h,v 1.24 2004/04/22 21:24:26 spencer Exp $
 
-    @version $Revision: 1.23 $
-    @date $Date: 2004/04/22 21:17:46 $
+    @version $Revision: 1.24 $
+    @date $Date: 2004/04/22 21:24:26 $
     @author
 
     @todo
@@ -24,22 +24,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
-<<<<<<< I3OMResponse.h
- * $Id: I3OMResponse.h,v 1.23 2004/04/22 21:17:46 spencer Exp $
-=======
- * $Id: I3OMResponse.h,v 1.23 2004/04/22 21:17:46 spencer Exp $
->>>>>>> 1.22
+ * $Id: I3OMResponse.h,v 1.24 2004/04/22 21:24:26 spencer Exp $
  *
  * The container for all the OMResponse-related data in the event
  * Has the hardware response, and the reconstructed hit series'.    
  * The Monte Carlo information is now in I3MCOMResponse.h
-<<<<<<< I3OMResponse.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/04/22 21:17:46 $
-=======
- * @version $Revision: 1.23 $
- * @date $Date: 2004/04/22 21:17:46 $
->>>>>>> 1.22
+ * @version $Revision: 1.24 $
+ * @date $Date: 2004/04/22 21:24:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
