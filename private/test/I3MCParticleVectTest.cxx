@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCParticleVectTest.cxx,v 1.1 2004/07/01 01:31:06 pretz Exp $
+    $Id: I3MCParticleVectTest.cxx,v 1.2 2004/07/03 18:40:58 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/07/01 01:31:06 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/07/03 18:40:58 $
     @author pretz
 
     @todo
@@ -44,6 +44,7 @@ namespace
 
 namespace tut
 {
+#if 0
   // testing the 'Track' extractor
   template<> template<>
   void object::test<1>()
@@ -75,5 +76,6 @@ namespace tut
 
 
   }
+#endif
 }
 

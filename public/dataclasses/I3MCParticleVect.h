@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleVect.h,v 1.1 2004/07/01 01:31:06 pretz Exp $
+ * $Id: I3MCParticleVect.h,v 1.2 2004/07/03 18:40:57 troy Exp $
  *
  * @file I3MCParticleVect.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/01 01:31:06 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/03 18:40:57 $
  * @author pretz
  */
 
@@ -20,7 +20,7 @@
  *
  * @todo figure out how to make copy and assignment private
  */
-class I3MCParticleVect : public TObject, public VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy
+class I3MCParticleVect : public TObject, public VectorPolicy<I3ObservableParticlePtr>::ThePolicy
 {
  public:
   /**

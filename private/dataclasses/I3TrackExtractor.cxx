@@ -8,7 +8,7 @@ I3TrackExtractor::I3TrackExtractor(vector<I3TrackPtr> &tracklist_to_fill)
 
 void I3TrackExtractor::operator() (I3ObservableParticlePtr p) 
 {
-  I3TrackPtr track = dynamic_cast<I3TrackPtr>(p);
+  I3TrackPtr track = boost::dynamic_pointer_cast<I3Track>(p);
 
   if (track) 
     mytracks.push_back(track);

@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitVectDict.h,v 1.2 2004/07/01 01:31:06 pretz Exp $
+ * $Id: I3RecoHitVectDict.h,v 1.3 2004/07/03 18:40:57 troy Exp $
  *
  * @file I3RecoHitVectDict.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/01 01:31:06 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/03 18:40:57 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -22,7 +22,7 @@
  * @brief This is the container for all the hit series reconstructions
  */
 class I3RecoHitVectDict : public TObject, 
-      	public MapPointainerPolicy<I3RecoHitVectPtr>::ThePolicy
+      	public MapPolicy<I3RecoHitVectPtr>::ThePolicy
 {
  public:
   /**

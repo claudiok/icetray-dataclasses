@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.11 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.12 2004/07/03 18:40:20 troy Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/07/03 18:40:20 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -31,7 +31,7 @@
  * sense.
  */
 
-class I3InIceGeometry : public TObject, public VecPointainerPolicy<I3OMGeoPtr>::ThePolicy
+class I3InIceGeometry : public TObject, public VectorPolicy<I3OMGeoPtr>::ThePolicy
 {
   public:
   /** 

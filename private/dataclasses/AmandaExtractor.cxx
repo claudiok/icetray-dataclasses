@@ -12,7 +12,8 @@ AmandaExtractor::AmandaExtractor(vector<I3OMGeoAmandaPtr> &geometry_to_fill)
 
 void AmandaExtractor::operator() (I3OMGeoPtr p) 
 {
-  I3OMGeoAmandaPtr amandap = dynamic_cast<I3OMGeoAmandaPtr>(p);
+
+  I3OMGeoAmandaPtr amandap = boost::dynamic_pointer_cast<I3OMGeoAmanda>(p);
   // you could do whatever other filtering you want here
 
   if (amandap) 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultDict.h,v 1.1 2004/06/30 21:24:36 pretz Exp $
+ * $Id: I3RecoResultDict.h,v 1.2 2004/07/03 18:40:57 troy Exp $
  *
  * @file I3RecoResultDict.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/06/30 21:24:36 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/03 18:40:57 $
  * @author ehrlich
  * @author pretz
  */
@@ -21,7 +21,7 @@
  * the event
  *
  */
-class I3RecoResultDict : public TObject, public MapPointainerPolicy<I3RecoResultPtr>::ThePolicy
+class I3RecoResultDict : public TObject, public MapPolicy<I3RecoResultPtr>::ThePolicy
 {
  public:
   /**

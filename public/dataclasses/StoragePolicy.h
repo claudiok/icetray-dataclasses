@@ -1,12 +1,12 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.9 2004/07/03 07:42:10 troy Exp $
+    $Id: StoragePolicy.h,v 1.10 2004/07/03 18:40:57 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.9 $
-    @date $Date: 2004/07/03 07:42:10 $
-    @author troy
+    @version $Revision: 1.10 $
+    @date $Date: 2004/07/03 18:40:57 $
+    @author Troy Straszheim
 */
 
 // inlcude one and only one
@@ -16,8 +16,8 @@
 
 #include "STLVectorStoragePolicy.h"
 #include "STLMapStoragePolicy.h"
-#include "STLVecPointainerPolicy.h"
-#include "STLMapPointainerPolicy.h"
+
+#include "boost/shared_ptr.hpp"
 
 //#include "TClonesPolicy.h"
 
@@ -42,26 +42,6 @@ struct VectorPolicy {
 };
 
 /**
- * @brief The storage policy for vectors of pointers to objects 
- *
- * The existence of this VecPointainerPolicy class allows classes to inherit
- * from VecPointainerPolicy<>::ThePolicy.  That policy's implementation can 
- * change -
- * provided the new implementation supplies the same interface - just by
- * changing this VecPointainerPolicy class.  Classes that are Vectors of 
- * Pointers
- * should inherit from this class rather than VectorPolicy<>::ThePolicy so
- * that the memory management can be out of the hands of the users.
- */
-template <class Stored>
-struct VecPointainerPolicy{
-  /**
-   * Right now, ThePolicy is just a typedefed STLVecPointainerPolicy
-   */
-  typedef STLVecPointainerPolicy<Stored> ThePolicy;
-};
-
-/**
  * @brief The storage policy for maps of objects
  *
  * The existence of this MapPolicy class allows classes to inherit
@@ -81,25 +61,6 @@ struct MapPolicy {
 };
 
 /**
- * @brief The storage policy for maps of pointers to objects
- *
- * The existence of this MapPointainerPolicy class allows classes to inherit
- * from MapPointainerPolicy<>::ThePolicy.  That policy's implementation can 
- * change -
- * provided the new implementation supplies the same interface - just by
- * changing this MapPointainerPolicy class.  Classes that are Maps of Pointers
- * should inherit from this class rather than MapPolicy<>::ThePolicy so
- * that the memory management can be out of the hands of the users.
- */
-template <class Stored>
-struct MapPointainerPolicy{
-  /**
-   * Right now, ThePolicy is just a typedeffed STLMapPointainerPolicy
-   */
-  typedef STLMapPointainerPolicy<Stored> ThePolicy;
-};
-
-/**
  * @brief The pointer policy.  Should use typedefs of this rather than 
  * raw pointers.
  *
@@ -110,17 +71,12 @@ struct MapPointainerPolicy{
  */
 template <class Pointed>
 struct PtrPolicy {
-  //  typedef SmartPtr<Pointed> ThePolicy;
-
-  // to not use smart pointers: currently this results in a bad memory
-  // leak.  We will have smart pointers working shortly, they have
-  // been tested and work, but not in this build at the moment
 
   /**
-   * Right now the policy is just to use raw pointers, but that can be changed
-   * to smart pointers at some later date.
+   * boost smart pointers.  FIXME: need docs
+   * 
    */
-  typedef Pointed* ThePolicy;
+  typedef boost::shared_ptr<Pointed> ThePolicy;
 };
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleDict.h,v 1.1 2004/06/30 21:24:36 pretz Exp $
+ * $Id: I3MCParticleDict.h,v 1.2 2004/07/03 18:40:57 troy Exp $
  *
  * @file I3MCParticleDict.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/06/30 21:24:36 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/03 18:40:57 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -23,7 +23,7 @@
  * MC information for the tracks in the Event.  
  *
  */
-class I3MCParticleDict : public TObject, public MapPointainerPolicy<I3MCParticleEventPtr>::ThePolicy
+class I3MCParticleDict : public TObject, public MapPolicy<I3MCParticleEventPtr>::ThePolicy
 {
  public:
   /**

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.2 2004/06/30 17:20:26 pretz Exp $
+    $Id: InIceExtractorExample.cxx,v 1.3 2004/07/03 18:40:58 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/06/30 17:20:26 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/07/03 18:40:58 $
     @author Troy D. Straszheim
 
     @todo
@@ -43,6 +43,9 @@ namespace
 
 namespace tut
 {
+  //TDS: FIXME
+
+#if 0
   // here's simple function that takes a pointet an I3OMGeo and sets
   // its fields to random values
   void SetOMRandomValues (I3OMGeoPtr p) 
@@ -154,5 +157,6 @@ namespace tut
     sort(amanda_geometry.begin(), amanda_geometry.end(), OMNumber_lessthan);
     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOM);
   }
+#endif
 }
 

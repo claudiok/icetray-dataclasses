@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: AmandaExtractor.h,v 1.2 2004/04/27 13:35:23 pretz Exp $
+ * $Id: AmandaExtractor.h,v 1.3 2004/07/03 18:40:57 troy Exp $
  *
  * @file AmandaExtractor.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/03 18:40:57 $
  * @author Troy
  */
 #include "dataclasses/I3InIceGeometry.h"
@@ -19,6 +19,7 @@
  */
 class AmandaExtractor
 {
+  //FIXME
   // I could just make this another I3InIceGeometry, but 
   // not until we get our pointainers/smartpointers figured completely out.
   vector<I3OMGeoAmandaPtr> &mygeometry_;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitVect.h,v 1.1 2004/07/01 01:31:06 pretz Exp $
+ * $Id: I3RecoHitVect.h,v 1.2 2004/07/03 18:40:57 troy Exp $
  *
  * @file I3RecoHitVect.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/01 01:31:06 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/03 18:40:57 $
  * @author ehrlich
  * @author pretz
  */
@@ -19,7 +19,7 @@
 /**
  * @brief A list of reco hits.
  */
-class I3RecoHitVect : public TObject, public VecPointainerPolicy<I3RecoHitPtr>::ThePolicy
+class I3RecoHitVect : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePolicy
 {
  public:
   /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.10 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.11 2004/07/03 18:40:57 troy Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/07/03 18:40:57 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -25,38 +25,49 @@ class I3RecoResultSingleTrack : public I3RecoResult
 {
   I3ParticlePtr fTrack;
   
+  // TDS FIXME most of this has/get/set stuff can go away.  You just
+  // get the pointer out, it either points to something valid or it
+  // points to nothing.
+
   public:
   /**
    * constructor
    */
-  I3RecoResultSingleTrack() {fTrack=NULL;}
+  I3RecoResultSingleTrack() {}
 
   /**
    * destructor
    */
-  virtual ~I3RecoResultSingleTrack() {if(fTrack) {delete fTrack;}}
+  virtual ~I3RecoResultSingleTrack() {}
 
   /**
    * Retrieves the track in this reco result as a constant object
    */
-  const I3Particle& Track() const 
+  const I3ParticlePtr Track() const 
   {
-    if(fTrack) return (*fTrack);
+    if (fTrack) 
+      return (fTrack);
+
     I3DataExecution::Instance().Fatal("I3RecoResultSingleTrack::Track() asked for a track which doesn't exist");
-    return(*(I3ParticlePtr)NULL);
+    return I3ParticlePtr();
   }
 
   /**
    * Retrieves the track of this solution as a non-const object
    */
-  I3Particle& Track()
+  I3ParticlePtr Track()
   {
-    if(fTrack) return (*fTrack);
+    if (fTrack) 
+      return fTrack;
+
     I3DataExecution::Instance().Fatal("I3RecoResultSingleTrack::Track() asked for a track which doesn't exist");
-    return(*(I3ParticlePtr)NULL);
+    return I3ParticlePtr();
   }
 
-  bool HasTrack() const {return((fTrack==NULL) ? false : true);}
+  bool HasTrack() const {
+    //TDS: the smart pointer automagically converts to bool
+    return fTrack;
+  }
   
   void SetTrack(I3ParticlePtr fTrack_)
   {
