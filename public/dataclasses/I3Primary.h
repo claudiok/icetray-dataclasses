@@ -1,13 +1,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.6 2004/05/04 18:32:43 pretz Exp $
+ * $Id: I3Primary.h,v 1.7 2004/05/21 19:21:43 pretz Exp $
  *
  * @file I3Primary.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/05/04 18:32:43 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/05/21 19:21:43 $
  * @author pretz
   */
+
 #ifndef I3PRIMARY_H
 #define I3PRIMARY_H
 
