@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.10.2.15 2004/04/20 18:57:31 pretz Exp $
+ * $Id: I3Track.h,v 1.10.2.16 2004/04/21 16:03:10 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.10.2.15 $
- * @date $Date: 2004/04/20 18:57:31 $
+ * @version $Revision: 1.10.2.16 $
+ * @date $Date: 2004/04/21 16:03:10 $
  * @author 
  *
  * @todo
@@ -188,6 +188,11 @@ class I3Track : public I3ObservableParticle
   virtual void CopyTo(I3Particle& destination) const 
     {
       I3Particle::CopyTo(destination);
+    }
+
+  virtual void CopyFrom(const I3Particle& source)
+    {
+      source.CopyTo(*this);
     }
 
   // geometrical convenience functions

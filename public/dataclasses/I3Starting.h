@@ -1,3 +1,15 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Starting.h,v 1.1.2.6 2004/04/21 16:03:10 pretz Exp $
+ *
+ * @file I3Starting.h
+ * @version $Revision: 1.1.2.6 $
+ * @date $Date: 2004/04/21 16:03:10 $
+ * @author pretz
+ *
+ * @todo
+ */
 #ifndef I3STARTING_H
 #define I3STARTING_H
 
@@ -7,6 +19,12 @@
 
 #include "NanPolicy.h"
 
+/**
+ * This class services the 'geometrical' part of the I3Track interface.
+ * Defines a starting position, and starting time.  Also, a Zenith and Azimuth
+ * But if you mess with StopX, StopY, StopZ or StopT, you get a fatal error
+ *
+ */
 class I3Starting{
  private:
   Double_t fStartX;
@@ -16,83 +34,227 @@ class I3Starting{
   Double_t fZenith;
   Double_t fAzimuth;
  public:
+  /**
+   * indicates that the particle is starting
+   */
   Bool_t IsStarting() const {return true;}
+
+  /**
+   * indicates that the particle is not stopping
+   */
   Bool_t IsStopping() const {return false;}
+
+  /**
+   * indicates that the particle has a direction
+   */
   Bool_t IsDirectional() const {return true;}
 
+  /**
+   * gives the starting x of the particle
+   */
   Double_t StartX() const {return fStartX;}
+
+  /**
+   * sets the starting x of the particle
+   */
   void StartX(Double_t startx){fStartX = startx;}
 
+  /**
+   * gets the starting y of the particle
+   */
   Double_t StartY() const {return fStartY;}
+
+  /**
+   * sets the starting y of the particle
+   */
   void StartY(Double_t starty){fStartY = starty;}
   
+  /**
+   * gets the starting z position
+   */
   Double_t StartZ() const {return fStartZ;}
+
+  /**
+   * sets the starting z position
+   */
   void StartZ(Double_t startz) {fStartZ = startz;}
 
+  /**
+   * gets the starting t
+   */
   Double_t StartT() const {return fStartT;}
+
+  /**
+   * sets the starting t
+   */
   void StartT(Double_t startt) {fStartT = startt;}
 
+  /**
+   * gives the starting x position as a position on the track
+   */
   Double_t X() const {return fStartX;}
-  void X(Double_t) {return;}
 
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
+  void X(Double_t) 
+    {
+      NanPolicy::Fatal();
+    }
+
+  /**
+   * gives the starting y position a  a position on the track
+   */
   Double_t Y() const {return fStartY;}
-  void Y(Double_t) {return;}
 
+  /**
+   * shouldn't be used.  Calls Fatal.
+   */
+  void Y(Double_t) 
+    {
+      NanPolicy::Fatal();
+    }
+
+  /**
+   * gives the starting z positition as a position on the track
+   */
   Double_t Z() const {return fStartZ;}
-  void Z(Double_t){return;}
 
+  /**
+   * shouldn't be used.  Calls fatal
+   */
+  void Z(Double_t)
+    {
+      NanPolicy::Fatal();
+    }
+
+  /**
+   * gives the starting t time as a time corresponding to X(), Y() and Z()
+   */
   Double_t T() const {return fStartT;}
-  void T(Double_t){return;}
 
+  /**
+   * shouldn't be used.  Calls Fatal();
+   */
+  void T(Double_t)
+    {
+      NanPolicy::Fatal();
+    }
+
+  /**
+   * gives the zenith of the track
+   */
   Double_t Zenith() const {return fZenith;}
+
+  /** 
+   * sets the zenith of the track
+   */
   void Zenith(Double_t theta){fZenith = theta;}
 
+  /**
+   * gives the Azimuth of the track
+   */
   Double_t Azimuth() const {return fAzimuth;}
+
+  /**
+   * sets the Azimuth of the track
+   */
   void Azimuth(Double_t phi){fAzimuth = phi;}
 
+  /**
+   * returns Infinity for the length of the track
+   */
   Double_t Length() const {return INFINITY;}
-  void Length(Double_t) {return;}
 
+  /**
+   * shouldn't be used.  Calls Fatal()
+   */
+  void Length(Double_t) 
+    {
+      NanPolicy::Fatal();
+    }
+
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
   Double_t StopX() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
+
+  /**
+   * shouldn't be used.  Calls fatal
+   */
   void StopX(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
   Double_t StopY() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
+
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
   void StopY(Double_t) {return;}
 
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
   Double_t StopZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
+
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
   void StopZ(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
   Double_t StopT() const 
     {
       NanPolicy::Fatal();
       return NAN;
     }
+
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
   void StopT(Double_t) 
     {
       NanPolicy::Fatal();
     }
 
+  /**
+   * returns the speed of light
+   */ 
   Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
-  void Speed(Double_t) {return;}
 
+  /**
+   * shouldn't be used.  Calls fatal.
+   */
+  void Speed(Double_t) 
+    {
+      NanPolicy::Fatal();
+    }
+
+  /**
+   * copies the data to the destination particle, if a dynamic cast succeeds
+   */
   void CopyTo(I3Particle& destination) const{
     I3Starting* starting = dynamic_cast<I3Starting*>(&destination);
     if(starting){
@@ -105,7 +267,7 @@ class I3Starting{
   }
 
  protected:
-
+  // ROOT macro
   ClassDef(I3Starting,1)
 };
 

@@ -7,14 +7,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.1.2.5 2004/04/20 16:51:16 pretz Exp $
+ * $Id: I3Particle.h,v 1.1.2.6 2004/04/21 16:03:10 pretz Exp $
  *
- * @version $Revision: 1.1.2.5 $
- * @date $Date: 2004/04/20 16:51:16 $
+ * @version $Revision: 1.1.2.6 $
+ * @date $Date: 2004/04/21 16:03:10 $
  * @author pretz
  *
  * @todo implement fatal calls
- *
+ * @todo should there be a 'generic muon' and 'generic tau' types?
  */
 class I3Particle : public TObject{
  public:
@@ -76,7 +76,7 @@ class I3Particle : public TObject{
    }
 
  /**
-  * 
+  * sets the type of the particle
   */
  virtual void Type(ParticleType type)
    {
@@ -101,6 +101,12 @@ class I3Particle : public TObject{
    {
      destination.fType = fType;
    }
+
+ /**
+  * Copies the data from the source particle into this particle
+  * Only copies the data which the two have in commmon
+  */
+ virtual void CopyFrom(const I3Particle& source) = 0 ; 
 
   ClassDef(I3Particle,1);
 };
