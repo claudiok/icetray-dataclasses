@@ -208,6 +208,7 @@
 #pragma link C++ typedef I3MultiTrackRecoResultPtr;
 #pragma link C++ class I3NonIdentifiable+;
 #pragma link C++ class I3NonRelativistic+;
+#pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonComposite+;
 #pragma link C++ class I3NonEnergetic+;
 #pragma link C++ class I3OMGeo+;
