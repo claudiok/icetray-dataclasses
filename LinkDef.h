@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.151 2005/02/09 19:30:46 ehrlich Exp $
-// $Revision: 1.151 $
-// $Date: 2005/02/09 19:30:46 $
+// $Id: LinkDef.h,v 1.151.4.1 2005/02/18 20:54:55 deyoung Exp $
+// $Revision: 1.151.4.1 $
+// $Date: 2005/02/18 20:54:55 $
 //
 
 #ifdef __CINT__
@@ -378,6 +378,16 @@
 #pragma link C++ class I3Hit+;
 #pragma link C++ typedef I3HitPtr;
 #pragma link C++ class roost::shared_ptr<I3Hit>+;
+
+#pragma link C++ class I3HitSelection+;
+#pragma link C++ typedef I3HitSelectionPtr;
+#pragma link C++ class roost::shared_ptr<I3HitSelection>+;
+
+#pragma link C++ class I3HitSelectionDict+;
+#pragma link C++ typedef MapPolicy<string,I3HitSelectionPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3HitSelectionPtr>::ThePolicy+;
+#pragma link C++ typedef I3HitSelectionDictPtr;
+#pragma link C++ class roost::shared_ptr<I3HitSelectionDict>+;
 
 #pragma link C++ class I3Infinite+;
 #pragma link C++ class I3Localized+;

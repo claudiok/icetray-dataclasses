@@ -1,24 +1,26 @@
-#ifndef I3RECOHITSERIESDICT_H
-#define I3RECOHITSERIESDICT_H
+#ifndef DATACLASSES_I3RECOHITSERIESDICT_H
+#define DATACLASSES_I3RECOHITSERIESDICT_H
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.4 2004/10/27 23:09:40 spencer Exp $
+ * copyright  (C) 2005
+ * the IceCube Collaboration
+ * $Id: I3RecoHitSeriesDict.h,v 1.4.12.1 2005/02/18 20:54:55 deyoung Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/10/27 23:09:40 $
+ * @version $Revision: 1.4.12.1 $
+ * @date $Date: 2005/02/18 20:54:55 $
  * @author ehrlich
  * @author troy
  * @author pretz
+ * @author deyoung
  */
 
 #include "I3RecoHitSeries.h"
+#include "I3HitSelectionDict.h"
 #include "StoragePolicy.h"
 #include "TObject.h"
 
-/// This is the container for all the hit series reconstructions
+/// Container for all the hit series reconstructions and hit selections
 /**
  * Feature extraction routines which attempt to reconstruct the times
  * at which photoelectrons ("hits") were produced store their results
@@ -43,11 +45,24 @@ class I3RecoHitSeriesDict : public TObject,
    */
   virtual ~I3RecoHitSeriesDict(){};
 
+  /**
+   * @return the HitSelectionDict for this OM as a constant object
+   */
+  const I3HitSelectionDict& GetHitSelectionDict() const { 
+    return hitSelectionDict_; 
+  }
+
+  /**
+   * @return the HitSelectionDict as a non-constant object
+   */
+  I3HitSelectionDict& GetHitSelectionDict() { return hitSelectionDict_; }
+
+
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3RecoHitSeriesDict: \n";
       I3RecoHitSeriesDict::const_iterator iter;
-      for(iter=begin();iter!=end();iter++)
+      for(iter=begin(); iter!=end(); iter++)
 	{
 	  o<<iter->first;
 	  if(iter->second==I3RecoHitSeriesPtr((I3RecoHitSeries*)0))
@@ -55,7 +70,8 @@ class I3RecoHitSeriesDict : public TObject,
 	  else
 	    o<<*(iter->second);
 	}
-      o<<"]\n";
+      o << hitSelectionDict_
+	<< "]\n";
     }
 
   virtual string ToString() const
@@ -70,8 +86,10 @@ class I3RecoHitSeriesDict : public TObject,
   I3RecoHitSeriesDict(const I3RecoHitSeriesDict& rhs);
   const I3RecoHitSeriesDict& operator=(const I3RecoHitSeriesDict&);
 
+  I3HitSelectionDict hitSelectionDict_; //||
+
   // ROOT macro
-  ClassDef(I3RecoHitSeriesDict,1);
+  ClassDef(I3RecoHitSeriesDict,2);
 };
 
 inline ostream& operator<<(ostream& o, const I3RecoHitSeriesDict& dict)
