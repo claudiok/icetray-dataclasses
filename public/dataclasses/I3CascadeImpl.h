@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.11 2005/02/09 19:30:46 ehrlich Exp $
+ * $Id: I3CascadeImpl.h,v 1.12 2005/02/09 20:05:12 ehrlich Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/02/09 19:30:46 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/02/09 20:05:12 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -88,6 +88,7 @@ class I3CascadeImpl : public I3Cascade,
       DirectionalType::CopyTo(destination);
       LocalizableType::CopyTo(destination);
       EnergeticType::CopyTo(destination);
+      CompositeType::CopyTo(destination);
     }
 
   virtual void CopyFrom(const I3Particle& source)
@@ -101,6 +102,7 @@ class I3CascadeImpl : public I3Cascade,
       DirectionalType::ToStream(o);
       LocalizableType::ToStream(o);
       EnergeticType::ToStream(o);
+      CompositeType::ToStream(o);
     }
 
  private:
