@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: JAMSFitTrack.h,v 1.1 2004/12/28 19:08:46 dule Exp $
+    $Id: JAMSFitTrack.h,v 1.2 2005/01/04 16:03:56 dule Exp $
 
     @file I3JAMSTrack.h
-    @version $Revision: 1.1 $
-    @date $Date: 2004/12/28 19:08:46 $
+    @version $Revision: 1.2 $
+    @date $Date: 2005/01/04 16:03:56 $
     @author dule
 */
 
@@ -85,8 +85,8 @@ class JAMSFitTrack : public I3BasicTrack
   /**
    * NhitLH
    */
-  void SetNhitLH(Double_t val) { fNhitLH = val; }
-  Double_t GetNhitLH() { return fNhitLH; }
+  void SetNHitLH(Double_t val) { fNhitLH = val; }
+  Double_t GetNHitLH() { return fNhitLH; }
 
   /**
    * LLHt
