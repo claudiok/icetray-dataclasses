@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrackTest.cxx,v 1.1.2.1 2004/04/15 10:33:19 troy Exp $
+    $Id: I3BasicTrackTest.cxx,v 1.1.2.2 2004/04/15 11:26:56 troy Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/15 10:33:19 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/15 11:26:56 $
     @author Troy D. Straszheim
 
     @todo
@@ -57,11 +57,13 @@ randomize(I3BasicTrack& t) {
   t.X(rand() * M_PI);
   t.Y(rand() * M_PI);
   t.Z(rand() * M_PI);
+  t.Speed(rand() * M_PI);
   t.Time(rand() * M_PI);
-  t.Length(rand() * M_PI);
   t.Zenith(rand() * M_PI);
   t.Azimuth(rand() * M_PI);
-  t.Speed(rand() * M_PI);
+  t.Length(rand() * M_PI);
+  t.Energy(rand() * M_PI);
+  t.Weight(rand() * M_PI);
 }
 
 namespace tut
@@ -77,9 +79,9 @@ namespace tut
   void object::test<2>() 
   {
     // basic output test
-
     I3BasicTrack t;
 
+    randomize(t);
     // ostringstreams are basically streams that write to internal strings.
     // you can get the string out with the member function str()
     ostringstream directout, virtualout;
@@ -113,10 +115,13 @@ namespace tut
     ostringstream tout, uout;
 
     // not all fields are filled in
+    randomize(t);
     t.X(1); t.Y(2); t.Z(3); t.Time(4); t.Azimuth(5); t.Speed(6);
 
     tout << t;
+
     u = t;
+
     uout << u;
 
     ensure(tout.str() == uout.str());
@@ -135,11 +140,12 @@ namespace tut
   template<> template<>
   void object::test<5>()
   {
+
     I3BasicTrack t, u;
+    randomize(t);
     I3Track &tref = t, &uref = u;
 
     // assignment and output through reference-to-base
-    randomize(t);
 
     uref = tref;
 
@@ -160,7 +166,7 @@ namespace tut
     uout.str("");
     tout << tref; 
     uout << uref; 
-    cout << t;
+
     // be careful here: if the change in X() isn't large enough to
     // cause a change in the way X() is *printed*, this will fail.
     // same below.  Seems like a factor of 10 is enough to change the
@@ -181,7 +187,6 @@ namespace tut
     ensure(tout.str() != uout.str());
 
   }
-
 
 
   template<> template<>

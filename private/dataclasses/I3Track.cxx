@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.12.2.3 2004/04/15 10:47:04 troy Exp $
+    $Id: I3Track.cxx,v 1.12.2.4 2004/04/15 11:26:56 troy Exp $
 
-    @version $Revision: 1.12.2.3 $
-    @date $Date: 2004/04/15 10:47:04 $
+    @version $Revision: 1.12.2.4 $
+    @date $Date: 2004/04/15 11:26:56 $
     @author
 
     @todo
@@ -33,17 +33,16 @@ I3Track::operator=(const I3Track& rhs)
   // This assignment operator is not virtual, but these assignments
   // all done through virtual function calls to avoid necessary
   // redefinition in subclasses...
+  Type(rhs.Type());
   X(rhs.X()); 
   Y(rhs.Y()); 
   Z(rhs.Z());
+  Speed(rhs.Speed());
   Time(rhs.Time());
-  Type(rhs.Type());
   Zenith(rhs.Zenith());
   Azimuth(rhs.Azimuth());
   Length(rhs.Length());
-  Speed(rhs.Speed());
   Energy(rhs.Energy());
-  Weight(rhs.Weight());
   
   return *this;
 }
@@ -60,27 +59,15 @@ operator==(const I3Track& lhs, const I3Track& rhs)
   // this allows for (NAN==NAN) to evaluate to true
   // ugly, I know.
 
-  return 
-    ((isnan(lhs.X()) && isnan(rhs.X())) 
-     || (lhs.X() == rhs.X())) &&
-    ((isnan(lhs.Y()) && isnan(rhs.Y())) 
-     || (lhs.Y() == rhs.Y())) &&
-    ((isnan(lhs.Z()) && isnan(rhs.Z())) 
-     || (lhs.Z() == rhs.Z())) &&
-    ((isnan(lhs.Type()) && isnan(rhs.Type())) 
-     || (lhs.Type() == rhs.Type())) &&
-    ((isnan(lhs.Time()) && isnan(rhs.Time())) 
-     || (lhs.Time() == rhs.Time())) &&
-    ((isnan(lhs.Zenith()) && isnan(rhs.Zenith())) 
-     || (lhs.Zenith() == rhs.Zenith())) &&
-    ((isnan(lhs.Azimuth()) && isnan(rhs.Azimuth())) 
-     || (lhs.Azimuth() == rhs.Azimuth())) &&
-    ((isnan(lhs.Speed()) && isnan(rhs.Speed())) 
-     || (lhs.Speed() == rhs.Speed())) &&
-    ((isnan(lhs.Energy()) && isnan(rhs.Energy())) 
-     || (lhs.Energy() == rhs.Energy())) &&
-    ((isnan(lhs.Weight()) && isnan(rhs.Weight())) 
-     || (lhs.Weight() == rhs.Weight()));
+  return (lhs.X() == rhs.X()) 
+    && (lhs.Y() == rhs.Y()) 
+    && (lhs.Z() == rhs.Z()) 
+    && (lhs.Type() == rhs.Type()) 
+    && (lhs.Time() == rhs.Time()) 
+    && (lhs.Zenith() == rhs.Zenith()) 
+    && (lhs.Azimuth() == rhs.Azimuth()) 
+    && (lhs.Speed() == rhs.Speed()) 
+    && (lhs.Energy() == rhs.Energy()); 
 
 }
 

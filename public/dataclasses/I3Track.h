@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.6 2004/04/15 10:47:04 troy Exp $
+    $Id: I3Track.h,v 1.10.2.7 2004/04/15 11:26:56 troy Exp $
 
-    @version $Revision: 1.10.2.6 $
-    @date $Date: 2004/04/15 10:47:04 $
+    @version $Revision: 1.10.2.7 $
+    @date $Date: 2004/04/15 11:26:56 $
     @author
 
     @todo
@@ -17,9 +17,11 @@
 #include <TObject.h>
 #include <vector>
 #include <cmath>
+#include <cassert>
 
 #include <iostream>
 
+#include "dataclasses/I3DataExecution.h"
 class I3Track : public TObject
 {
  public:
@@ -67,6 +69,18 @@ class I3Track : public TObject
   Double_t       fY;
   Double_t       fZ;
 
+  Double_t checknan(Double_t it) const { 
+    if (isnan(it)) {
+      // The following does not work.  I will look at this logging stuff at some point..
+      // I3DataExecution::Instance().Fatal("Illegal access of initialized or invalid track parameter.") 
+      cerr << "Illegal access of initialized or invalid track parameter." << endl;
+      assert(0);
+      return NAN;
+    } else {
+      return it;
+    }
+  }
+  
  public:
   I3Track() {
     fType=Null;
@@ -77,37 +91,37 @@ class I3Track : public TObject
 
   virtual ~I3Track() {};
     
-  Double_t X() const { return fX; }
-  void X(Double_t arg) { fX = arg; }
-
-  Double_t Y() const { return fY; }
-  void Y(Double_t arg) { fY = arg; }
-
-  Double_t Z() const { return fZ; }
-  void Z(Double_t arg) { fZ = arg; }
-  
   TrackType Type() const { return fType; }
   void Type(TrackType arg) { fType = arg; }
   
-  virtual Double_t Time() const { return NAN; }
-  virtual void Time(Double_t arg) { return; }
+  Double_t X() const { return checknan(fX); }
+  void X(Double_t arg) { fX = arg; }
 
-  virtual Double_t Zenith() const { return NAN; }
-  virtual void Zenith(Double_t arg) { return; }
+  Double_t Y() const { return checknan(fY); }
+  void Y(Double_t arg) { fY = arg; }
 
-  virtual Double_t Azimuth() const { return NAN; }
-  virtual void Azimuth(Double_t arg) { return; }
-
-  virtual Double_t Length() const { return NAN; }
-  virtual void Length(Double_t arg) { return; }
-
+  Double_t Z() const { return checknan(fZ); }
+  void Z(Double_t arg) { fZ = arg; }
+  
   virtual Double_t Speed() const { return 1; }
   virtual void Speed(Double_t arg) { return; }
 
-  virtual Double_t Energy() const { return NAN; }
+  virtual Double_t Time() const { return checknan(NAN); }
+  virtual void Time(Double_t arg) { return; }
+
+  virtual Double_t Zenith() const { return checknan(NAN); }
+  virtual void Zenith(Double_t arg) { return; }
+
+  virtual Double_t Azimuth() const { return checknan(NAN); }
+  virtual void Azimuth(Double_t arg) { return; }
+
+  virtual Double_t Length() const { return checknan(NAN); }
+  virtual void Length(Double_t arg) { return; }
+
+  virtual Double_t Energy() const { return checknan(NAN); }
   virtual void Energy(Double_t arg) { return; }
 
-  virtual Double_t Weight() const { return NAN; }
+  virtual Double_t Weight() const { return checknan(NAN); }
   virtual void Weight(Double_t arg) { return; }
 
   virtual bool IsStarting() = 0;
