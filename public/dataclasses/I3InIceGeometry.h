@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.16 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3InIceGeometry.h,v 1.17 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -54,6 +54,9 @@ class I3InIceGeometry : public TObject, public map<OMKey,I3OMGeoPtr>
   ClassDef(I3InIceGeometry,1);
 };
 
+/**
+ * streaming operator
+ */
 inline ostream& operator<<(ostream& o,const I3InIceGeometry& v)
 {
   o<<"[ I3InIceGeometry: \n";

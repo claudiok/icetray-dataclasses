@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.18 2004/07/13 11:58:04 pretz Exp $
+ * $Id: I3Bag.h,v 1.19 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/07/13 11:58:04 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,6 +20,9 @@
 
 #include <iostream>
 
+/**
+ * pointer typedeffed away to insulate users from memory management
+ */ 
 typedef PtrPolicy<TObject>::ThePolicy TObjectPtr;
 
 
@@ -52,7 +55,9 @@ class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
   // ROOT macro
   ClassDef(I3Bag,1);
 };
-
+/**
+ * streaming operator
+ */
 inline ostream& operator<<(ostream& o,const I3Bag& bag)
 {
   o<<"[ I3Bag\n";

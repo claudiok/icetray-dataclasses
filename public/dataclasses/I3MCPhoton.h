@@ -1,17 +1,18 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPhoton.h,v 1.1 2004/07/19 15:33:42 pretz Exp $
+ * $Id: I3MCPhoton.h,v 1.2 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3MCPhoton.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/19 15:33:42 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author pretz
  */
 #ifndef I3MCPHOTON_H
 #define I3MCPHOTON_H
 
 #include "TObject.h"
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief A class that indicates the arrival of a photon at a particular OM.
@@ -49,7 +50,9 @@ class I3MCPhoton : public TObject
   ClassDef(I3MCPhoton,1);
 };
 
-#include "dataclasses/StoragePolicy.h"
+/**
+ * pointer type to insulate users from memory management schemes
+ */
 typedef PtrPolicy<I3MCPhoton>::ThePolicy I3MCPhotonPtr;
 
 #endif //I3MCPHOTON_H

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCCascade.h,v 1.7 2004/05/05 20:48:24 pretz Exp $
+    $Id: I3MCCascade.h,v 1.8 2004/07/19 16:46:01 pretz Exp $
 
     @file I3MCCascade.h
-    @version $Revision: 1.7 $
-    @date $Date: 2004/05/05 20:48:24 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/07/19 16:46:01 $
     @author deyoung
 */
 
@@ -35,9 +35,14 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
   Double_t Weight() const { return fWeight; }
   void  Weight(Double_t weight_) { fWeight = weight_; }
 
+ private:
+  // ROOT macro
   ClassDef(I3MCCascade,1);
 };
 
+/**
+ * pointer typedeffed away to insulate users from memory management
+ */
 typedef PtrPolicy<I3MCCascade>::ThePolicy I3MCCascadePtr;
 
 #endif

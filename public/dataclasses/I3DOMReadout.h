@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMReadout.h,v 1.3 2004/07/19 15:44:09 pretz Exp $
+ * $Id: I3DOMReadout.h,v 1.4 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3DOMReadout.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/19 15:44:09 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author klein
  *
  */
@@ -122,22 +122,22 @@ class I3DOMReadout : public I3DataReadout
   /**
    * sets the ATWD0 waveform
    */
- void ATWD0(const vector<Int_t>& SetATWD0data) {fATWD0=ATWD0data;}
+ void SetATWD0(const vector<Int_t>& ATWD0data) {fATWD0=ATWD0data;}
 
  /**
   * sets the ATWD1 waveform
   */
- void ATWD1(const vector<Int_t>& SetATWD1data) {fATWD1=ATWD1data;}
+ void SetATWD1(const vector<Int_t>& ATWD1data) {fATWD1=ATWD1data;}
 
  /**
   * sets the ATWD2 waveform
   */
- void ATWD2(const vector<Int_t>& SetATWD2data) {fATWD2=ATWD2data;}
+ void SetATWD2(const vector<Int_t>& ATWD2data) {fATWD2=ATWD2data;}
 
  /**
   * sets the FADC waveform
   */
- void FADC(const vector<Int_t>& SetFADCdata) {fFADC=FADCdata;}
+ void SetFADC(const vector<Int_t>& FADCdata) {fFADC=FADCdata;}
 
  private:
   // copy and assignment private

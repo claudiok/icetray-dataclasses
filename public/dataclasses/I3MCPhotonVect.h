@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPhotonVect.h,v 1.1 2004/07/19 15:33:42 pretz Exp $
+ * $Id: I3MCPhotonVect.h,v 1.2 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3MCPhotonVect.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/19 15:33:42 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author pretz
  */
 #ifndef I3MCPHOTONVECT_H
@@ -38,6 +38,9 @@ class I3MCPhotonVect : public TObject, VectorPolicy<I3MCPhoton>::ThePolicy
   ClassDef(I3MCPhotonVect,1);
 };
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3MCPhotonVect>::ThePolicy I3MCPhotonVectPtr;
 
 #endif //I3MCPHOTONVECT_H

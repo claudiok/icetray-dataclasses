@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3FilterData.h,v 1.4 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3FilterData.h,v 1.5 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3FilterData.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -54,6 +54,9 @@ class I3FilterData : public TObject
   ClassDef(I3FilterData, 1);
 };
 
+/**
+ * streaming operator
+ */
 inline ostream& operator<<(ostream& o,const I3FilterData& filter)
 {
   filter.ToStream(o);

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIceCube.h,v 1.1 2004/07/06 14:15:31 pretz Exp $
+ * $Id: I3OMStatusIceCube.h,v 1.2 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3OMStatusIceCube.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/06 14:15:31 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -51,8 +51,9 @@ class I3OMStatusIceCube : public I3OMStatus
 /*  The separate variables for Up/Down, and distance follow the
     documentation */
 
-/*  This controls how far the local coincidence signal is sent */
-
+/**  
+ * This controls how far the local coincidence signal is sent 
+ */
   typedef Int_t LCMode;
   static const LCMode kLCOff;
   static const LCMode kNearestNeighbor;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.34 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3Event.h,v 1.35 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.34 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.35 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -135,6 +135,10 @@ class I3Event : public TObject
   ClassDef(I3Event, 1);
 };
 
+
+/** 
+ * streaming operator
+ */
 inline ostream& operator<<(ostream& o,const I3Event& evt)
 {
   evt.ToStream(o);

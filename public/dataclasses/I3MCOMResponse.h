@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.8 2004/07/19 15:33:42 pretz Exp $
+    $Id: I3MCOMResponse.h,v 1.9 2004/07/19 16:46:01 pretz Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.8 $
-    @date $Date: 2004/07/19 15:33:42 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/07/19 16:46:01 $
     @author ehrlich
     @author troy
     @author pretz
@@ -98,6 +98,9 @@ class I3MCOMResponse : public I3OMResponse
   ClassDef(I3MCOMResponse,1);
 };
 
+/** 
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3MCOMResponse>::ThePolicy I3MCOMResponsePtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Cascade.h,v 1.7 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -87,9 +87,14 @@ class I3Cascade : public I3ObservableParticle{
       I3Particle::CopyTo(destination);
     }
 
+ private:
+  //ROOT macro
   ClassDef(I3Cascade,1);
 };
 
+/** 
+ * pointer type to insulate users from memory management issues
+ */
 typedef PtrPolicy<I3Cascade>::ThePolicy I3CascadePtr;
 
 #endif

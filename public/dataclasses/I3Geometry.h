@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.24 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3Geometry.h,v 1.25 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.24 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.25 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -76,6 +76,9 @@ class I3Geometry : public TObject
   ClassDef(I3Geometry,1);
 };
 
+/** 
+ * streaming operator
+ */
 inline ostream& operator<<(ostream& o,const I3Geometry& geo)
 {
   geo.ToStream(o);

@@ -1,17 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.8 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3MCPMTResponse.h,v 1.9 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author klein
  */
 
 #ifndef I3MCPMTRESPONSE_H
 #define I3MCPMTRESPONSE_H
 #include <TObject.h>
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief Base class for the Monte Carlo generated PMT response
@@ -62,7 +63,9 @@ class I3MCPMTResponse : public TObject
   ClassDef(I3MCPMTResponse,1);
 };
 
-#include "dataclasses/StoragePolicy.h"
+/** 
+ * pointer type to insulate users from memory managemnt issues
+ */
 typedef PtrPolicy<I3MCPMTResponse>::ThePolicy I3MCPMTResponsePtr;
 
 #endif

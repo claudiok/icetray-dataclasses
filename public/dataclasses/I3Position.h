@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Position.h,v 1.8 2004/07/19 16:46:01 pretz Exp $
  *
- * @file I3Track.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @file I3Position.h
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
+// $Id: I3Position.h,v 1.8 2004/07/19 16:46:01 pretz Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H

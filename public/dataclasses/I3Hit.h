@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.18 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3Hit.h,v 1.19 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -80,6 +80,9 @@ class I3Hit : public TObject
   ClassDef(I3Hit, 1);
 };
 
+/** 
+ * streaming operator
+ */ 
 inline ostream& operator<<(ostream& o,const I3Hit& hit)
 {
   hit.ToStream(o);

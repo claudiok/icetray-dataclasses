@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTrack.h,v 1.9 2004/05/05 19:26:25 pretz Exp $
+    $Id: I3MCTrack.h,v 1.10 2004/07/19 16:46:01 pretz Exp $
 
     @file I3MCTrack.h
-    @version $Revision: 1.9 $
-    @date $Date: 2004/05/05 19:26:25 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/07/19 16:46:01 $
     @author deyoung
 */
 
@@ -55,6 +55,9 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   ClassDef(I3MCTrack,1);
 };
 
+/** 
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3MCTrack>::ThePolicy I3MCTrackPtr;
 
 #endif

@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHitData.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
+    $Id: I3ArrayHitData.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
     @file I3ArrayHitData.h
-    @version $Revision: 1.2 $
+    @version $Revision: 1.3 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -42,7 +42,9 @@ class I3ArrayHitData : public TObject,
   ClassDef(I3ArrayHitData,1);
 };
 
-
+/**
+ * pointer typedeffed away to insulate users from memory managment
+ */
 typedef PtrPolicy<I3ArrayHitData>::ThePolicy I3ArrayHitDataPtr;
 
 #endif

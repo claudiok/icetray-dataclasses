@@ -1,7 +1,7 @@
 /**
-    $Id: I3MCTankHit.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
+    $Id: I3MCTankHit.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
     @file I3MCTankHit.h
-    @version $Revision: 1.2 $
+    @version $Revision: 1.3 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -47,6 +47,9 @@ class I3MCTankHit : public I3TankHit, public VectorPolicy<I3ObservableParticlePt
   ClassDef(I3MCTankHit,1);
 };
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3MCTankHit>::ThePolicy I3MCTankHitPtr;
 
 

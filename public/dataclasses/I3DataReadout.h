@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.14 2004/07/16 19:51:59 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.15 2004/07/19 16:46:01 pretz Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/07/16 19:51:59 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/07/19 16:46:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -91,6 +91,9 @@ class I3DataReadout : public TObject
   ClassDef(I3DataReadout,1);
 };
 
+/**
+ * streaming operator
+ */
 inline ostream& operator<<(ostream& o,const I3DataReadout& readout)
 {
   readout.ToStream(o);
