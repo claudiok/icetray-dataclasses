@@ -6,7 +6,7 @@
 
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;
-#pragma link C++ function test1;
+//#pragma link C++ function test1;
 
 //
 // namespace
