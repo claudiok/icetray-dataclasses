@@ -1,18 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.5 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.6 2004/04/26 16:34:34 pretz Exp $
  *
- * A container for RDMC fits.  Contains a vector of Double_ts which are
- * the fit parameters and a vector of ints which are the tubes used by
- * the fit.
- *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @file I3RecoResultRDMCFit.h
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/04/26 16:34:34 $
  * @author pretz
- *
- * @todo make sure the map<string,Double_t> works in interpreted code
- *
  */
 
 #ifndef I3RECORESULTRDMCFIT_H
@@ -26,6 +20,13 @@
 
 using namespace std;
 
+/**
+ * A container for RDMC fits.  Contains a vector of Double_ts which are
+ * the fit parameters and a vector of ints which are the tubes used by
+ * the fit.
+ *
+ * @todo make sure the map<string,Double_t> works in interpreted code
+ */
 class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 {
   map<string,Double_t> fParameters;
