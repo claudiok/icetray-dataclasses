@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DirectionTest.cxx,v 1.2 2004/10/11 07:06:10 troy Exp $
+    $Id: I3DirectionTest.cxx,v 1.3 2004/10/14 15:17:08 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/10/14 15:17:08 $
     @author dule
 
     @todo
@@ -44,7 +44,7 @@ namespace tut
    */
   void object::test<1>() 
   {
-     I3DirectionPtr ptr(new I3Direction());
+    I3DirectionPtr ptr(new I3Direction());
   }
   
   /**

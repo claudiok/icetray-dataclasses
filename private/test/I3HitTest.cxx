@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.7 2004/10/11 07:06:10 troy Exp $
+    $Id: I3HitTest.cxx,v 1.8 2004/10/14 15:17:08 troy Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/10/14 15:17:08 $
     @author Troy D. Straszheim
 
     @todo
@@ -132,6 +132,7 @@ namespace tut
   void object::test<4>() {
     // this is how to ensure that two things are equal.  What the
     // difference is with just using ensure(a==b), I dunno.
+    my_integer = 0;
     ensure_equals(my_integer, 0);
 
     // same as above, but with a message displayed on failure
