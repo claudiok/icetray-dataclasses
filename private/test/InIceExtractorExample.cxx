@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.11 2004/07/30 14:55:43 pretz Exp $
+    $Id: InIceExtractorExample.cxx,v 1.12 2004/07/30 19:09:40 dule Exp $
 
-    @version $Revision: 1.11 $
-    @date $Date: 2004/07/30 14:55:43 $
+    @version $Revision: 1.12 $
+    @date $Date: 2004/07/30 19:09:40 $
     @author Troy D. Straszheim
 
     @todo
@@ -52,9 +52,7 @@ namespace tut
   {
     I3OMGeoPtr p = the_pair.second;
     ensure(p!=0);
-    p->SetX(rand()/0.002);
-    p->SetY(rand()/0.002);
-    p->SetZ(rand()/0.002);
+    p->SetPos(rand()/0.002,rand()/0.002,rand()/0.002);
   }
 
   // this prints an OM
@@ -68,9 +66,9 @@ namespace tut
     else if(type == I3OMGeo::IceCube)
       the_type == "IceCube";
     cout << "[" << the_type
-	 << " X:" << p->GetX() 
-	 << " Y:" << p->GetY() 
-	 << " Z:" << p->GetZ() 
+	 << " X:" << p->GetPos().GetX() 
+	 << " Y:" << p->GetPos().GetY() 
+	 << " Z:" << p->GetPos().GetZ() 
 	 << "]" << endl; 
   }
 
@@ -177,17 +175,13 @@ namespace tut
 	  if(str<0)
 	    {
 	      I3OMGeoAMANDAPtr omamanda(new I3OMGeoAMANDA());
-	      omamanda->SetX(rand() %1000);
-	      omamanda->SetY(rand() %1000);
-	      omamanda->SetZ(rand() %1000);
+	      omamanda->SetPos(rand() %1000,rand() %1000,rand() %1000);
 	      geometry.GetInIceGeometry()[OMKey(str,om)] = omamanda;
 	    }
 	  if(str>0)
 	    {
 	      I3OMGeoIceCubePtr omicecube(new I3OMGeoIceCube());
-	      omicecube->SetX(rand() %1000);
-	      omicecube->SetY(rand() %1000);
-	      omicecube->SetZ(rand() %1000);
+	      omicecube->SetPos(rand() %1000,rand() %1000,rand() %1000);
 	      geometry.GetInIceGeometry()[OMKey(str,om)] = omicecube;
 	    }
 	  
