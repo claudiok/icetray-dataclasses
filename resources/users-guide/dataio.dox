@@ -1,6 +1,6 @@
 /**
-@page dataio Doing I/O on f2k data
-@author YOUR AD HERE (1-800-PHYSIC-7)
+@page dataio Data I/O and F2k
+@author Ralf Ehrlich
 
 @section prerecs Prerequisites
 @li @ref devenv-setup 
@@ -10,13 +10,144 @@
 
 @section download Download
 
-Pretty simple, except we need instructions on how to incorporate the
-external rdmc libraries.
+You need to check out the following packages from glacier:
+- dataio
+- dataio-modules
+- eventviewer
+
+So you need <br>
+<code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev:</code>
+<br>
+Then you can check out the packages:<br>
+<code>
+% bfd co dataio<br>
+% bfd co dataio-modules<br>
+% bfd co eventviewer<br>
+</code>
+
+@section desc Description:
+
+The entire Data I/O is handled by the I3Tree class. This class provides methods to store 
+IceCube objects in a transient tree structure and has basic I/O methods for making this 
+structure persistent.
+
+The IceCube tree structure can hold all objects which are inherited from TObject. Therefore
+it does not depend on a particular dataclass structur. Every class is stored in a separate branch.
+
+<h2> Object Sequence </h2>
+The IceCube tree structure keeps the sequence in which objects were stored.
+As an example it could store the order in which physics events (P), geometry events (G),
+calibration events (C), etc. occure, so that you get a chain like
+
+G C P P P P C P C P P P P G P P P P.
+
+The objects itself are put into branches
+- G G
+- C C C
+- P P P P P P P P P P P P P
+
+The event chain can be retrieved by calling the method <b>GetEventtype(sequencenumber)</b>.
+It returns the class name of the object which was stored at a certain position in
+the event chain. The method <b>GetIndex(sequencenumber)</b> returns the index of the object
+in the appropriate branch. As an example take the 4th event: <b>GetEventtype(4)</b>
+would return I3Event, so that we know that the fourth event was a physics event.
+<b>GetIndex(4)</b> returns 2, which means that it was the 2nd physics event.
+This event can now be read by calling <b>I3Read(event, 2)</b>, where "event" has to be
+type I3Event, so that the method knows which branch to use.
+
+In order to get the position in the event chain of particular object, one has to
+use <b>GetSequencenumber(eventtype, index)</b>, where index stands for the index the
+object has in its branch.
+
+The total number of events can be gotten by <b>GetSequencemax()</b>, for the used example 18.
+The number of events of a particular class is returned by <b>GetIndexmax(eventtype)</b>,
+for the physics events of the exaple above one would get 13.
+
+<h2> Read Objects</h2>
+In order to read an event one can use the function <b>I3Read(data, index)</b>. "Data" has to be 
+of the type of the object one wants to get, "Index" stands for the index of the object 
+in the branch. By default all branches are branched to deepest possible level (since most 
+parts of the IceCube data structure have lists, maps, ... in 2nd or 3rd level the branching does 
+not go very deep - branching beyond the arrays wouldn't make much sense). 
+
+If one wants to read only certain subbranches of the event, e.g. only I3MCTrackData 
+and I3RecoResultData, one has two options: 
+One can call <b>I3Read(data, index, 2, "I3MCTrackData", "I3RecoResultData")</b> to fill the 
+object "data" only with this two subobject, where "data" has to be the top-level object,
+i.e an I3Event object. 
+In order to access both subobjects directly one can use <b>I3ReadSubBranch(data, index, branchname)</b>,
+where data has to be an object of class I3MCTrackData or I3RecoResultData. The branchnames
+are the names of the data elements of the I3Event class, i.e. mctrackdata or recoresultdata.
+
+<h2> Write Objects</h2>
+The write method <b>I3Write(data)</b>, puts the object in the appropriate branch. If the
+branch doesn't exist yet, it will be created. The sequence in which the objects are written
+is stored automaticly. One has the option to write only certain subbranches of the event 
+by calling, e.g. <b>I3Write(data, 1, "I3RecoResultData")</b>.
+
+<h2> Creating a transient IceCube structure</h2>
+An empty transient IceCube structure is created by calling the constructor <b>I3Tree</b> without arguments.
+
+<h2> Creating a persistent IceCube structure</h2>
+Furthermore one can call the constructor <b>I3Tree(filename, mode)</b> with the following arguments for mode
+- NEW      creates a new file which is written to disk when the destructor is called.
+           fails if file already exists.
+- RECREATE creates a new file which is written to disk when the destructor is called.
+           overwrites an existing file and creates a new file if the file doesn't exist.
+
+<h2> Opening a persistent IceCube structure</h2>
+If one wants instead get an existing IceCube structure from a file, one has to use the
+constructor <b>I3Tree(filename, mode)</b>, where mode can be
+- READ    opens the file in read-only mode (this is the default mode).
+- APPEND  opens the file and allows appending events to the data structure. The modified 
+          structure is written to disk when the destructor is called.
+
+<h2> Storing an IceCube structure</h2>
+If the IceCube structure was created with one of the persistent modes, then it will be stored when 
+the destructor is called.
+An IceCube structure (transient/persistent) can be stored in another file by the method 
+<b>I3Save(filename, mode)</b>, where mode can be
+- NEW       creates a new file, fails if file already exists
+- RECREATE  overwrites an existing file and creates a new file if the file doesn't exist
+
+<h2> F2kReader</h2>
+This class also contains an F2k reader, which is called through <b>TranslateF2k(source)</b>,
+The result is put in the transient data structure (or appended to an existing structure).
+If one wants to translate only a specific event, one can use the method <b>TranslateF2kEvent(source, eventnumber)</b>,
+where eventnumber=0 stands for a geometry event and eventnumber>0 stands for all physics events.
+This method returns false if the event does not exist.
+
+<h2> Additional method</h2>
+There is an additional method, which is actually not needed anymore, since the frame work does this job.
+It is still in the class (just in case ...): <b>GetI3Frame</b>. An description can be found in the header file
+I3Tree.h
+
+<h2> Some sample modules</h2>
+- <b>F2kReaderModule</b> Translates F2k (text) files and fills an Physics and Geometry stream
+- <b>I3ReaderModule</b> Reads IceCube (root) files and fills an Physics and Geometry stream
+- <b>I3WritingModule</b> Writes IceCube (root) files with objects from the Physics and Geometry stream
+- <b>I3PrintingModuleTest</b> Prints out some (useless) information about each event from the Physics and Geometry stream for test purpose
 
 @section build Build
 
+The checked-out projects can be build by calling <br>
+<code>
+% source setup.(c)sh<br>
+% ant<br>
+</code>
+
 @section test Test
 
-@section use Use
-
+To run a few sample scripts you first have to change into your workspace directory. 
+From there you can start:<br>
+<code>
+% root dataio-modules/resources/scripts/F2kReaderTest1.C<br>
+% root dataio-modules/resources/scripts/F2kReaderTest2.C<br>
+</code>
+These two scripts read events from the F2k files test1.f2k and test2.f2k and write them into IceCube files test1.root and test2.root.
+Now you can run the next two scripts which use the files test1.root and test2.root to print out some (useless) information.<br>
+<code>
+% root dataio-modules/resources/scripts/I3ReaderTest1.C<br>
+% root dataio-modules/resources/scripts/I3ReaderTest2.C<br>
+</code>
 */
