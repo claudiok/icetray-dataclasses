@@ -78,18 +78,20 @@ void I3Time::SetModJulianTime(unsigned int modJulianDay,
 			      unsigned int sec,
 			      double ns)
 {
-#warning "Yet to be implemented"
-  //   if(sec < 60 * 60 * 12)
-  //     {
-  //       julianDay_ = modJulianDay + 2400000;
-  //       sec_ = sec + 60 * 60 * 12;
-  //     }
-  //   else
-  //     {
-  //       julianDay_ = modJulianDay + 2400000;
-  //       sec_ = sec - 60 * 60 * 12;
-  //     }
-  //   ns_ = ns;
+  unsigned int julianDay_toset;
+  unsigned int sec_toset;
+  
+  if(sec < 60 * 60 * 12)
+    {
+      julianDay_toset = modJulianDay + 2400000;
+      sec_toset = sec + 60 * 60 * 12;
+    }
+  else
+    {
+      julianDay_toset = modJulianDay + 2400000;
+      sec_toset = sec - 60 * 60 * 12;
+    }
+  SetJulianTime(julianDay_toset,sec_toset,ns);
   
 }
 
@@ -132,26 +134,26 @@ double I3Time::GetJulianNanoSec() const
 
 unsigned int I3Time::GetModJulianDay() const
 {
-#warning "Yet to be implemented"
-  //   if(sec_ > 60 * 60 * 12)
-  //     return julianDay_ - 2400000;
-  //   else
-  //     return julianDay_ - 2400001;
+  unsigned int sec = GetJulianSec();
+  unsigned int julianDay = GetJulianDay();
+  if(sec > 60 * 60 * 12)
+    return julianDay - 2400000;
+  else
+    return julianDay - 2400001;
 }
 
 unsigned int I3Time::GetModJulianSec() const
 {
-#warning "Yet to be implemented"
-  //   if(sec_ < 60 * 60 * 12)
-  //     return sec_ + 60 * 60 * 12;
-  //   else
-  //     return sec_ - 60 * 60 * 12;
+  unsigned int sec = GetJulianSec();
+  if(sec < 60 * 60 * 12)
+    return sec + 60 * 60 * 12;
+  else
+    return sec - 60 * 60 * 12;
 }
 
 double I3Time::GetModJulianNanoSec() const
 {
-#warning "Yet to be implemented"
-  //   return ns_;
+  return GetJulianNanoSec();
 }
 
 I3Time::Month I3Time::GetUTCMonth() const
