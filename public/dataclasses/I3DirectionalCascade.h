@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DirectionalCascade.h,v 1.6 2004/08/01 00:41:01 pretz Exp $
+    $Id: I3DirectionalCascade.h,v 1.7 2004/08/12 17:33:33 pretz Exp $
 
     @file I3DirectionalCascade.h
-    @version $Revision: 1.6 $
-    @date $Date: 2004/08/01 00:41:01 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/08/12 17:33:33 $
     @author deyoung
 */
 
@@ -41,5 +41,10 @@ public:
   // ROOT macro
   ClassDef(I3DirectionalCascade,1);
 };
+
+/** 
+ * pointer type to insulate users from memory management
+ */
+typedef PtrPolicy<I3DirectionalCascade>::ThePolicy I3DirectionalCascadePtr;
 
 #endif

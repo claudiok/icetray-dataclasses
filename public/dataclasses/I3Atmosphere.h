@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Atmosphere.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Atmosphere.h,v 1.4 2004/08/12 17:33:33 pretz Exp $
  *
  * @file I3Atmosphere.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/12 17:33:33 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -13,6 +13,7 @@
 #define I3ATMOSPHERE_H
 
 #include <TObject.h>
+#include "StoragePolicy.h"
 
 /**
  *

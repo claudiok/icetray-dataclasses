@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShower.h,v 1.2 2004/08/04 20:38:12 blaufuss Exp $
+ * $Id: I3TopShower.h,v 1.3 2004/08/12 17:33:33 pretz Exp $
  *
  * @file I3TopShower.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/04 20:38:12 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/12 17:33:33 $
  * @author blaufuss
   */
 
@@ -41,5 +41,9 @@ class I3TopShower : public I3IceTopParticle{
   ClassDef(I3TopShower,1);
 };
 
+/**
+ * pointer type to insulate users from memory management
+ */
+typedef PtrPolicy<I3TopShower>::ThePolicy I3TopShowerPtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.11 2004/08/06 18:29:03 dule Exp $
+ * $Id: I3Position.h,v 1.12 2004/08/12 17:33:33 pretz Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/08/06 18:29:03 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/08/12 17:33:33 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.11 2004/08/06 18:29:03 dule Exp $
+// $Id: I3Position.h,v 1.12 2004/08/12 17:33:33 pretz Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -23,6 +23,7 @@
 using namespace std;
 
 #include "TObject.h"
+#include "StoragePolicy.h"
 
 /**
  * @brief The basic position class for IceCube. 
@@ -33,7 +34,7 @@ using namespace std;
  * @todo implement "print out" of all information in a uniform way...
  * @todo insure that the temporary data isn't written to disk.
  */
-class I3Position
+class I3Position : public TObject
 {
  public:
 
@@ -226,4 +227,10 @@ class I3Position
   // ROOT macro
   ClassDef(I3Position,1)
 };
+
+/**
+ * pointer type to insulate users from memory management
+ */
+typedef PtrPolicy<I3Position>::ThePolicy I3PositionPtr;
+
 #endif

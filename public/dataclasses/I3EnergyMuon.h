@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3EnergyMuon.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+    $Id: I3EnergyMuon.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
 
     @file I3EnergyMuon.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/27 02:32:05 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/08/12 17:33:33 $
     @author deyoung
 */
 
@@ -39,5 +39,10 @@ class I3EnergyMuon : public I3TrackImpl<I3Infinite,
   // ROOT macro
   ClassDef(I3EnergyMuon,1);
 };
+
+/**
+ * pointer type to insulate users from memory management
+ */
+typedef PtrPolicy<I3EnergyMuon>::ThePolicy I3EnergyMuonPtr;
 
 #endif

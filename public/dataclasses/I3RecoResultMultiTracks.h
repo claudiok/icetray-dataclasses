@@ -1,17 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultMultiTracks.h,v 1.4 2004/07/03 18:40:57 troy Exp $
+ * $Id: I3RecoResultMultiTracks.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
  *
  * @file I3RecoResultMultiTracks.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/03 18:40:57 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/12 17:33:33 $
  * @author ehrlich
  */
 #ifndef I3RECORESULTMULTITRACKS_H
 #define I3RECORESULTMULTITRACKS_H
 
 #include "I3RecoResult.h"
+#include "I3Particle.h"
 
 /**
  * @brief Reco results with more than one track

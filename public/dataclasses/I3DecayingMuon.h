@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DecayingMuon.h,v 1.5 2004/04/28 12:20:27 pretz Exp $
+    $Id: I3DecayingMuon.h,v 1.6 2004/08/12 17:33:33 pretz Exp $
 
     @file I3DecayingMuon.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/04/28 12:20:27 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/08/12 17:33:33 $
     @author deyoung
 */
 
@@ -43,5 +43,7 @@ class I3DecayingMuon : public I3TrackImpl<I3Stopping,
   //ROOT macro
   ClassDef(I3DecayingMuon,1);
 };
+
+typedef PtrPolicy<I3DecayingMuon>::ThePolicy I3DecayingMuonPtr;
 
 #endif

@@ -1,16 +1,16 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MonoTrack.h,v 1.4 2004/08/01 00:41:01 pretz Exp $
+    $Id: I3MonoTrack.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
 
     @file I3MonoTrack.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/08/01 00:41:01 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/08/12 17:33:33 $
     @author
 */
 
-#ifndef I3TRACK_H
-#define I3TRACK_H
+#ifndef I3MONOTRACK_H
+#define I3MONOTRACK_H
 
 #include "dataclasses/I3BasicTrack.h"
 
@@ -49,5 +49,10 @@ class I3MonoTrack : public I3BasicTrack
   // ROOT macro
   ClassDef(I3MonoTrack, 1);
 };
+
+/**
+ * pointer type to insulate users from memory management
+ */
+typedef PtrPolicy<I3MonoTrack>::ThePolicy I3MonoTrackPtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3BasicCascade.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3BasicCascade.h,v 1.6 2004/08/12 17:33:33 pretz Exp $
 
     @file I3BasicCascade.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/08/12 17:33:33 $
     @author deyoung
 */
 
@@ -42,5 +42,10 @@ public:
   // ROOT macro
   ClassDef(I3BasicCascade,1);
 };
+
+/**
+ * pointer type to insulate users from memory management issues
+ */
+typedef PtrPolicy<I3BasicCascade>::ThePolicy I3BasicCascadePtr;
 
 #endif
