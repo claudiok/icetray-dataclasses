@@ -3,7 +3,7 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataExecution.h,v 1.3 2004/02/25 18:01:32 pretz Exp $
+ * $Id: I3DataExecution.h,v 1.4 2004/02/25 20:10:24 pretz Exp $
  *
  * The data structure's access to the framework.  If the 
  * data wants to get a message into the logging system or abort the job 
@@ -12,8 +12,8 @@
  * implements logging.  Right now it calls icetray's private logger, but
  * there should be a logger for just the data.
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/02/25 18:01:32 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -69,6 +69,6 @@ class I3DataExecution{
 };
 
 // don't need this since its a singleton
-// typedef I3DataExecution* I3DataExecutionPtr
+// typedef PtrPolicy<I3DataExecution>::ThePolciy I3DataExecutionPtr;
 
 #endif

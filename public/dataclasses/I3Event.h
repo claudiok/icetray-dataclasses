@@ -1,15 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.12 2004/02/25 19:14:26 pretz Exp $
+ * $Id: I3Event.h,v 1.13 2004/02/25 20:10:24 pretz Exp $
  *
  * This class provides access to the all data containers which are 
  * related to each event. Additionally it stores event information
  * such as time, id, etc. (it is planned to store this kind of 
  * information in a separate header class).
  *
- * @version $Revision: 1.12 $
- * @date $Date: 2004/02/25 19:14:26 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author Ralf Ehrlich
  *
  * @todo move the 'header data' into the seperate I3EventHeader class
@@ -162,6 +162,10 @@ class I3Event : public TObject
   ClassDef(I3Event, 1);
 };
 
-typedef I3Event* I3EventPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3Event>::ThePolicy I3EventPtr;
 
 #endif

@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalSeries.h,v 1.13 2004/02/25 19:14:26 pretz Exp $
+ * $Id: I3DigitalSeries.h,v 1.14 2004/02/25 20:10:24 pretz Exp $
  *
  * A collection of digital signals.  
  *
- * @version $Revision: 1.13 $
- * @date $Date: 2004/02/25 19:14:26 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -54,7 +54,7 @@ class I3DigitalSeries : public VectorPolicy<I3Digital>::ThePolicy
   ClassDef(I3DigitalSeries,1);
 };
 
-typedef I3DigitalSeries* I3DigitalSeriesPtr;
+typedef PtrPolicy<I3DigitalSeries>::ThePolicy I3DigitalSeriesPtr;
 
 #endif
 

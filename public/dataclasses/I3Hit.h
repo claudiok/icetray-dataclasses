@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.6 2004/02/25 16:27:46 pretz Exp $
+ * $Id: I3Hit.h,v 1.7 2004/02/25 20:10:24 pretz Exp $
  *
  * I3Hit is the basic hit class.  Just a time for a PE arrival
  * at a tube.  
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/02/25 16:27:46 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,6 +19,7 @@
 #define I3HIT_H
 
 #include <TObject.h>
+#include "StoragePolicy.h"
 
 class I3Hit : public TObject
 {
@@ -59,7 +60,11 @@ class I3Hit : public TObject
   ClassDef(I3Hit, 1);
 };
 
-typedef I3Hit* I3HitPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3Hit>::ThePolicy I3HitPtr;
 
 #endif
 

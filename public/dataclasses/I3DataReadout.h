@@ -4,12 +4,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.4 2004/02/25 19:14:26 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.5 2004/02/25 20:10:24 pretz Exp $
  *
  * A base class for all the data readout types.  
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/02/25 19:14:26 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,6 +19,7 @@
 
 #include <TObject.h>
 #include <TObjArray.h>
+#include "StoragePolicy.h"
 
 class I3DataReadout : public TObject
 {
@@ -45,7 +46,11 @@ class I3DataReadout : public TObject
   ClassDef(I3DataReadout,1);
 };
 
-typedef I3DataReadout* I3DataReadoutPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3DataReadout>::ThePolicy I3DataReadoutPtr;
 
 #endif
 

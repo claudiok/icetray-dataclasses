@@ -4,14 +4,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.5 2004/02/25 19:14:26 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.6 2004/02/25 20:10:24 pretz Exp $
  *
  * I3DataHeader
  * This class represents a generic header for a data issued on some stream
  * Just a 'time' right now, but there may be stuff to add later.
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/02/25 19:14:26 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,6 +20,7 @@
  */
 
 #include "TObject.h"
+#include "StoragePolicy.h"
 
 class I3DataHeader : public TObject
 {
@@ -108,6 +109,10 @@ class I3DataHeader : public TObject
   ClassDef(I3DataHeader,1);
 };
 
-typedef I3DataHeader* I3DataHeaderPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3DataHeader>::ThePolicy I3DataHeaderPtr;
 
 #endif //I3DATAHEADER_H

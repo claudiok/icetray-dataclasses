@@ -1,10 +1,10 @@
 /**
    copyright  (C) 2004
    the icecube collaboration
-   $Id: I3MCHit.h,v 1.7 2004/02/25 16:27:46 pretz Exp $
+   $Id: I3MCHit.h,v 1.8 2004/02/25 20:10:24 pretz Exp $
 
-   @version $Revision: 1.7 $
-   @date $Date: 2004/02/25 16:27:46 $
+   @version $Revision: 1.8 $
+   @date $Date: 2004/02/25 20:10:24 $
    @author
 
 */
@@ -13,6 +13,7 @@
 
 #include <TObject.h>
 #include "I3Hit.h"
+#include "StoragePolicy.h"
 
 class I3MCHit : public I3Hit
 {
@@ -43,7 +44,11 @@ class I3MCHit : public I3Hit
   ClassDef(I3MCHit, 1);
 };
 
-typedef I3MCHit* I3MCHitPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3MCHit>::ThePolicy I3MCHitPtr;
 
 #endif
 

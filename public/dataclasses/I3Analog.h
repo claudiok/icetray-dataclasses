@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Analog.h,v 1.5 2004/02/25 16:27:46 pretz Exp $
+ * $Id: I3Analog.h,v 1.6 2004/02/25 20:10:24 pretz Exp $
  * One analog pulse from an OM.  
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/02/25 16:27:46 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,6 +18,7 @@
 #define I3ANALOG_H
 
 #include <TObject.h>
+#include "StoragePolicy.h"
 
 class I3Analog : public TObject
 {
@@ -116,7 +117,7 @@ class I3Analog : public TObject
   ClassDef(I3Analog, 1);
 };
 
-typedef I3Analog* I3AnalogPtr;
+typedef PtrPolicy<I3Analog>::ThePolicy I3AnalogPtr;
 
 #endif
 

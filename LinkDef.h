@@ -108,7 +108,7 @@
 #pragma link C++ typedef VectorPolicy<I3OMResponse>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3OMResponse>::ThePolicy+;
 #pragma link C++ function operator!=(const I3OMResponseData::iterator&, const I3OMResponseData::iterator&);
-#pragma link C++ typedef I3OMResponsePtr;
+#pragma link C++ typedef I3OMResponseDataPtr;
 
 #pragma link C++ class I3RecoHitSeriesData+;
 #pragma link C++ class I3RecoHitSeriesData::iterator+;
@@ -149,6 +149,7 @@
 #pragma link C++ class I3EventHeader+;
 #pragma link C++ typedef I3EventHeaderPtr;
 #pragma link C++ class I3FilterData+;
+#pragma link C++ typedef I3FilterDataPtr;
 #pragma link C++ class I3GeometryDataHeader+;
 #pragma link C++ class I3Hit+;
 #pragma link C++ typedef I3HitPtr;
@@ -170,6 +171,7 @@
 //#pragma link C++ class I3RecoResultPtr+;
 
 #pragma link C++ class I3OMResponse+;
+#pragma link C++ typdef I3OMResponsePtr;`
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ class I3RecoResultSingleTrack+;
@@ -180,6 +182,7 @@
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
+#pragma link C++ typedef I3TriggerDataPtr;
 #endif
 
 //tds

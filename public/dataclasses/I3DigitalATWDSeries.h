@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalATWDSeries.h,v 1.6 2004/02/25 16:27:46 pretz Exp $
+ * $Id: I3DigitalATWDSeries.h,v 1.7 2004/02/25 20:10:24 pretz Exp $
  *
  * Adds the ATWD gain to the standard I3DigitalSeries
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/02/25 16:27:46 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -48,7 +48,11 @@ class I3DigitalATWDSeries : public I3DigitalSeries
   ClassDef(I3DigitalATWDSeries,1);
 };
 
-typedef I3DigitalATWDSeries* I3DigitalATWDSeriesPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3DigitalATWDSeries>::ThePolicy I3DigitalATWDSeriesPtr;
 
 #endif
 

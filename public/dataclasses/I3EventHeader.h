@@ -3,15 +3,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.4 2004/02/25 19:14:26 pretz Exp $
+ * $Id: I3EventHeader.h,v 1.5 2004/02/25 20:10:24 pretz Exp $
  *
  * I3Event Header is supposed to be a header for the event that
  * you can store in a file if you don't want to store the event.
  * It's supposed to have enough data to reconstruct the full event
  * from the database
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/02/25 19:14:26 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -31,7 +31,7 @@ using namespace std;
  * you can store in a file if you don't want to store the event.
  * It's supposed to have enough data to reconstruct the full event
  * from the database
- * @version $Id: I3EventHeader.h,v 1.4 2004/02/25 19:14:26 pretz Exp $
+ * @version $Id: I3EventHeader.h,v 1.5 2004/02/25 20:10:24 pretz Exp $
  * @author pretz
  */
 class I3EventHeader : public I3DataHeader{
@@ -73,6 +73,10 @@ class I3EventHeader : public I3DataHeader{
   ClassDef(I3EventHeader,1);
 };
 
-typedef I3EventHeader* I3EventHeaderPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3EventHeader>::ThePolicy I3EventHeaderPtr;
 
 #endif //I3EVENTHEADER_H

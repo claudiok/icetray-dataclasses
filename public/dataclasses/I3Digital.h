@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Digital.h,v 1.3 2004/02/25 19:14:26 pretz Exp $
+ * $Id: I3Digital.h,v 1.4 2004/02/25 20:10:24 pretz Exp $
  *
  * A single digital value of fraom a sequence of digital values.
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/02/25 19:14:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/02/25 20:10:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,6 +18,7 @@
 #define I3DIGITAL_H
 
 #include <TObject.h>
+#include "StoragePolicy.h"
 
 class I3Digital : public TObject
 {
@@ -64,7 +65,11 @@ class I3Digital : public TObject
   ClassDef(I3Digital, 1);
 };
 
-typedef I3Digital* I3DigitalPtr;
+/**
+ * Pointer typedeffed away to insulate users from the 
+ * memory-mananagement implementation
+ */
+typedef PtrPolicy<I3Digital>::ThePolicy I3DigitalPtr;
 
 #endif
 

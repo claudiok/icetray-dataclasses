@@ -2,5 +2,4 @@
 
 ClassImp(I3FilterData);
   
-I3FilterData::I3FilterData() {};
 
