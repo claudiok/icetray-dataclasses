@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataExecution.h,v 1.8 2004/08/19 16:10:39 pretz Exp $
+ * $Id: I3DataExecution.h,v 1.9 2005/04/04 18:40:36 pretz Exp $
  *
  * @file I3DataExecution.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/08/19 16:10:39 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/04 18:40:36 $
  * @author pretz
  */
 #ifndef I3DATAEXECUTION_H
@@ -43,7 +43,7 @@ class I3DataExecution{
    * aborts the job with the indicated message
    * @param message a message which indicates why the job is being aborted.
    */
-  void Fatal(const Char_t* message);
+  void Fatal(const char* message);
 
   /**
    * destructor  I'd like to make it private, but gcc complains.

@@ -18,7 +18,7 @@ I3DataExecution& I3DataExecution::Instance(){
   return *fInstance;
 }
 
-void I3DataExecution::Fatal(const Char_t* message){
+void I3DataExecution::Fatal(const char* message){
   log_fatal("This message came from the data and caused a fatal error:\"%s\"\n",
 	message);
   // to be fancied up later and linked into icetray's 'Fatal' call

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.11 2005/03/29 17:55:01 pretz Exp $
+ * $Id: I3EventHeader.h,v 1.12 2005/04/04 18:40:36 pretz Exp $
  *
  * @file I3EventHeader.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/03/29 17:55:01 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/04 18:40:36 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,8 +29,8 @@ using namespace std;
  * from the database
  */
 class I3EventHeader : public I3DataHeader{
-  ULong_t  fRunId;
-  ULong_t  fEventId;
+  unsigned long  fRunId;
+  unsigned long  fEventId;
   
  public:
   /**
@@ -60,22 +60,22 @@ class I3EventHeader : public I3DataHeader{
   /**
    * @return the run id for the event
    */
-  ULong_t GetRunID() const { return fRunId; }
+  unsigned long GetRunID() const { return fRunId; }
 
   /**
    * @param runid the new run id for the event
    */
-  void SetRunID(ULong_t runid) { fRunId = runid; }
+  void SetRunID(unsigned long runid) { fRunId = runid; }
 
   /**
    * @return the event id for this event
    */
-  ULong_t GetEventID() const { return fEventId; }
+  unsigned long GetEventID() const { return fEventId; }
 
   /**
    * @param eventid the new event id for the event
    */
-  void SetEventID(ULong_t eventid) { fEventId = eventid; }
+  void SetEventID(unsigned long eventid) { fEventId = eventid; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.5 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3MCPMTResponseRomeo.h,v 1.6 2005/04/04 18:40:36 pretz Exp $
  *
  * @file I3MCPMTResponseRomeo.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/04 18:40:36 $
  * @author klein
  * @author deyoung
  * @author ehrlich
@@ -47,7 +47,7 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
   virtual float GetPMTVoltage(float time)
   {
     if(time < fStartTime || time > fEndTime) return(0);
-    ULong_t t = (ULong_t)((time-fStartTime)/fBinSize);
+    unsigned long t = (unsigned long)((time-fStartTime)/fBinSize);
     if(t>=fWaveform.size()) return(0);
     return(fWaveform[t]);
   }
