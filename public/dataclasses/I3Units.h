@@ -2,11 +2,11 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.17 2004/12/01 02:27:07 ehrlich Exp $
+ $Id: I3Units.h,v 1.18 2004/12/01 22:39:44 tmccauley Exp $
  
  @file I3Units.h  
  @version $Version:$
- @date $Date: 2004/12/01 02:27:07 $
+ @date $Date: 2004/12/01 22:39:44 $
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -88,7 +88,7 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @date $Date: 2004/12/01 02:27:07 $
+ * @date $Date: 2004/12/01 22:39:44 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should we have a 'speed' here too?
@@ -453,14 +453,57 @@ namespace I3Units
    * PeV
    */
   static const Double_t PeV = petaelectronvolt;
-
+   
+  //
+  // Charge
+  //
+  /**
+   * Charge
+   */
+   static const Double_t eplus = 1.;		   // positron charge
+   static const Double_t eSI   = 1.602176462e-19;  // positron charge in coulomb  
+   
+  /**
+   * Coulomb
+   */ 
+   static const Double_t coulomb = eplus/eSI;      // coulomb = 6.24150e18*eplus 
+   static const Double_t C = coulomb;
+    
+  /**
+   * Picocoulomb
+   */
+   static const Double_t picocoulomb = 1.e-12*coulomb;
+   static const Double_t pC = picocoulomb;
+  
+  //
+  // Current
+  //
+  /* 
+   * Ampere
+   */
+   static const Double_t ampere = coulomb/second;  // ampere = 6.24150 e+9 * eplus/ns
+   static const Double_t A = ampere;
+    
+  /* 
+   * Milliampere
+   */
+   static const Double_t milliampere = 1.e-3*ampere;
+   static const Double_t mA = milliampere;
+    
+  /* 
+   * Nanoampere
+   */
+   static const Double_t nanoampere = 1.e-9*ampere;
+   static const Double_t nA = nanoampere;
+    
   //
   // Voltage
   //
   /**
    * Millivolt
    */
-  static const Double_t millivolt = 1.;
+  //static const Double_t millivolt = 1.;
+  static const Double_t millivolt = (electronvolt*1.e-3)/eplus;
   static const Double_t mV = millivolt;
 
   /**
@@ -479,7 +522,15 @@ namespace I3Units
    * Microvolt
    */
   static const Double_t microvolt = 1.e-6 * volt;
-  
+ 
+  //
+  // Resistance
+  //
+  /**
+   * Ohm
+   */
+   static const Double_t ohm = volt/ampere; 
+
   //
   // Miscellaneous
   //

@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.5 2004/11/19 23:31:14 dima Exp $
+ * $Id: I3DOMCalibration.h,v 1.6 2004/12/01 22:39:44 tmccauley Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/11/19 23:31:14 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/12/01 22:39:44 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -151,26 +151,54 @@ public:
 	    return fPeakToValley;
 	};
 
+    void SetSPEMean(Double_t mean)
+	{
+	    fSPEMean = mean;
+	};
+    
+    /*
     void SetOnePEinPC(Double_t OnePE)
 	{
 	    fOnePEinPC = OnePE;
 	};
+    */
+
+    Double_t GetSPEMean()
+	{
+	    return fSPEMean;
+	};
     
+    /*
     Double_t GetOnePEinPC()
 	{
 	    return fOnePEinPC;
 	};
+    */
 
+    void SetSPEWidth(Double_t width)
+	{
+	    fSPEWidth = width;
+	};
+    
+    /*
     void SetWidth1PEinPC(Double_t width1pe)
 	{
 	    fWidth1PEinPC = width1pe;
 	};
+    */
+
+    Double_t GetSPEWidth()
+	{
+	    return fSPEWidth;
+	};
     
+    /*
     Double_t GetWidth1PEinPC()
 	{
 	    return fWidth1PEinPC;
 	};
-    
+    */
+
     void SetSamplingRate(Int_t id, Double_t rate);
     
     Double_t GetSamplingRate(Int_t id);
@@ -190,9 +218,13 @@ private:
     Double_t fPMTHighVoltage;
     Double_t fPedestalVoltage;
     
+    // Parameters describing the SPE charge distribution
     Double_t fPeakToValley;
-    Double_t fOnePEinPC;
-    Double_t fWidth1PEinPC;
+    Double_t fSPEMean;
+    Double_t fSPEWidth; 
+
+    //Double_t fOnePEinPC;
+    //Double_t fWidth1PEinPC;
 
     Double_t fSamplingRate0;
     Double_t fSamplingRate1;
