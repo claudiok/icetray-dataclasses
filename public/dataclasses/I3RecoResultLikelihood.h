@@ -1,3 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3RecoResultLikelihood.h,v 1.2 2004/02/16 01:31:21 troy Exp $
+
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/16 01:31:21 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3RECORESULTLIKELIHOOD_H
 #define I3RECORESULTLIKELIHOOD_H
 
@@ -5,13 +17,13 @@
 
 class I3RecoResultLikelihood : public I3RecoResultSingleTrack
 {
-  float likelihood;
+  Float_t fLikelihood;
 
   public:
-  I3RecoResultLikelihood();
+  I3RecoResultLikelihood() { fLikelihood = 0; }
 
-  float GetLikelihood() const;
-  void  SetLikelihood(float likelihood_);
+  Float_t Likelihood() const { return fLikelihood; }
+  void  Likelihood(Float_t likelihood_) { fLikelihood = likelihood_; }
 
   ClassDef(I3RecoResultLikelihood, 1);
 };
