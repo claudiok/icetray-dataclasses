@@ -4,7 +4,7 @@
 /**
  * Class: I3Bag
  *
- * Version: $Id: I3Bag.h,v 1.7 2004/02/24 18:02:08 troy Exp $
+ * Version: $Id: I3Bag.h,v 1.8 2004/02/25 00:20:59 pretz Exp $
  *
  * Date: 30 Jan 2004
  *
@@ -22,13 +22,24 @@ typedef TObject* TObjectPtr;
  * Sieglinde bag. Each Event (and geometry etc) gets one so that it can hold 
  * stuff that  doesn't really fit into the Data structure.  Just for 
  * 'temporary' or 'personal' use.
+ * @author ehrlich
+ * @author troy
+ * @author pretz
  */
 class I3Bag : public MapPolicy<TObjectPtr>::ThePolicy
 {
  public:
+  /**
+   * Constructor
+   */
   I3Bag();
+
+  /**
+   * destructor
+   */
   virtual ~I3Bag();
 
+  // ROOT macro
   ClassDef(I3Bag,1);
 };
 
