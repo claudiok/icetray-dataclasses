@@ -1,16 +1,16 @@
 /**
 @page devenv-setup Set up the IceCube development environment
-@author YOUR AD HERE (1-800-PHYSIC-7)
+@author <a href ="http://umdgrb.umd.edu/pretz">John Pretz</a>
 
-@section prerecs Prerequisites
+@section howtodoit How to:
 
-@section howto How to:
-
-Here goes a description / links of how
-to set up the development environment and get it working.
-
-Probably just pointers to the appropriate places in docushare or to
-Martin's bfd page.
-
+There is lots of information on the web of how to get the IceCube development
+environment set up and ready to use.  Visit the new 
+<a href="http://bfd.lbl.gov">BFD Homepage</a> to find a comprehensive list.<br>
+<br>
+You will be ready to continue with the dataclass tutorials when you:
+@li Have an account on glacier.lbl.gov
+@li Have a current checkout of 'bfd' on your system with bfd in your path
+@li Have a recent copy of the icecube tools from glacier
 
 */

@@ -10,6 +10,8 @@
 
 @li @ref dataclasses-setup
 
+@li @ref phys-services
+
 @section desc Description:
 
 The 'sim-modules' project is a set of modules that emulate the simulation

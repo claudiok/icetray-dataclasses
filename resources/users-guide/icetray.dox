@@ -1,19 +1,18 @@
 /**
 @page icetray-setup Build IceTray 
-@author YOUR AD HERE (1-800-PHYSIC-7)
+@author <a href="http://umdgrb.umd.edu/pretz>John Pretz</a>
 
 @section prerecs Prerequisites
 
 @ref devenv-setup
 
-@section howto How to:
+@section howtodoit How to:
 
-Probably just pointers to the appropriate places in docushare or to
-Martin's bfd page.
-
-@section Links
-
-http://bfd.lbl.gov @n
-http://glacier.lbl.gov.icetray @n
+If you haven't already downloaded and built IceTray, swing on over to 
+http://glacier.lbl.gov/icetray to get the instructions to check out and
+build the required <code>icetray</code> and <code>root-icetray</code> projects. 
+There is also a tutorial and example application described there.  
+In order to continue with the various dataclass tutorials, though, you will 
+only need to build <code>icetray</code> and <code>root-icetray</code>.  
 
 */
