@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.12 2004/09/01 00:54:26 ehrlich Exp $
+ * $Id: I3Cascade.h,v 1.13 2005/02/09 19:30:46 ehrlich Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/09/01 00:54:26 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/02/09 19:30:46 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -40,6 +40,11 @@ class I3Cascade : public I3InIceParticle{
    * whether X(), Y(), Z() and T() are legitimate to call
    */
   virtual Bool_t IsLocalized() const =0;
+
+  /**
+   * indicates that the track is a composite track
+   */
+  virtual Bool_t IsComposite() const =0;
 
   /**
    * the time of the cascade

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCCascade.h,v 1.10 2004/08/05 01:42:02 ehrlich Exp $
+    $Id: I3MCCascade.h,v 1.11 2005/02/09 19:30:46 ehrlich Exp $
 
     @file I3MCCascade.h
-    @version $Revision: 1.10 $
-    @date $Date: 2004/08/05 01:42:02 $
+    @version $Revision: 1.11 $
+    @date $Date: 2005/02/09 19:30:46 $
     @author deyoung
 */
 
@@ -13,6 +13,7 @@
 #include "I3Directional.h"
 #include "I3Localized.h"
 #include "I3Energetic.h"
+#include "I3Composite.h"
 
 #ifndef I3MCCASCADE_H
 #define I3MCCASCADE_H
@@ -24,7 +25,8 @@
  */
 class I3MCCascade : public I3CascadeImpl<I3Directional,
                                          I3Localized,
-                                         I3Energetic>
+                                         I3Energetic,
+                                         I3Composite>
 {
   Double_t     fWeight;
   

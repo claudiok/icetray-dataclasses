@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.150 2005/02/09 16:44:53 pretz Exp $
-// $Revision: 1.150 $
-// $Date: 2005/02/09 16:44:53 $
+// $Id: LinkDef.h,v 1.151 2005/02/09 19:30:46 ehrlich Exp $
+// $Revision: 1.151 $
+// $Date: 2005/02/09 19:30:46 $
 //
 
 #ifdef __CINT__
@@ -50,10 +50,10 @@
 #pragma link C++ class I3StoppingMuon+;
 //#pragma link C++ class JAMSFitTrack+;
 
-#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3Energetic>+;
-#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3NonEnergetic>+;
-#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3NonEnergetic>+;
-#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3Energetic>+;
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3Energetic,I3Composite>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3Energetic,I3NonComposite>+;
 
 //#pragma link C++ class I3MCPrimary+;
 //#pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.10 2004/08/31 13:30:55 pretz Exp $
+ * $Id: I3CascadeImpl.h,v 1.11 2005/02/09 19:30:46 ehrlich Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/31 13:30:55 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/02/09 19:30:46 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -27,11 +27,13 @@
  */
 template <class DirectionalType,
           class LocalizableType,
-          class EnergeticType>
+          class EnergeticType,
+          class CompositeType>
 class I3CascadeImpl : public I3Cascade,
                       public DirectionalType,
                       public LocalizableType,
-                      public EnergeticType
+                      public EnergeticType,
+                      public CompositeType
 {
  public:
   /**
@@ -64,6 +66,11 @@ class I3CascadeImpl : public I3Cascade,
    * whether X(), Y(), Z() and T() are legitimate to call
    */
   virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
+
+  /**
+   * indicates whether the cascade is a composite cascade
+   */
+  virtual Bool_t IsComposite() const {return CompositeType::IsComposite();}
 
   /**
    * the time of the cascade

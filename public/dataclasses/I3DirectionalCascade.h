@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DirectionalCascade.h,v 1.7 2004/08/12 17:33:33 pretz Exp $
+    $Id: I3DirectionalCascade.h,v 1.8 2005/02/09 19:30:46 ehrlich Exp $
 
     @file I3DirectionalCascade.h
-    @version $Revision: 1.7 $
-    @date $Date: 2004/08/12 17:33:33 $
+    @version $Revision: 1.8 $
+    @date $Date: 2005/02/09 19:30:46 $
     @author deyoung
 */
 
@@ -13,6 +13,7 @@
 #include "I3Directional.h"
 #include "I3Localized.h"
 #include "I3NonEnergetic.h"
+#include "I3NonComposite.h"
 
 #ifndef I3DIRECTIONALCASCADE_H
 #define I3DIRECTIONALCASCADE_H
@@ -24,7 +25,8 @@
  */
 class I3DirectionalCascade : public I3CascadeImpl<I3Directional,
 	                                          I3Localized,
-                                                  I3NonEnergetic>
+                                                  I3NonEnergetic,
+                                                  I3NonComposite>
 {
 public:
   /**
