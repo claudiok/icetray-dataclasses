@@ -7,10 +7,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.1.2.2 2004/04/19 18:09:53 pretz Exp $
+ * $Id: I3Particle.h,v 1.1.2.3 2004/04/20 13:38:59 pretz Exp $
  *
- * @version $Revision: 1.1.2.2 $
- * @date $Date: 2004/04/19 18:09:53 $
+ * @version $Revision: 1.1.2.3 $
+ * @date $Date: 2004/04/20 13:38:59 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -75,15 +75,24 @@ class I3Particle : public TObject{
  virtual ParticleType Type() const=0;
 
  /**
-  * theta
+  * 
   */
- virtual double Azimuth() const =0;
+ virtual void Type(ParticleType type) =0;
 
  /**
   * phi
   */
+ virtual double Azimuth() const =0;
+
+ /**
+  * theta
+  */
  virtual double Zenith() const =0;
 
+ /**
+  * copies over data from this particle to the destination particle
+  * Only copies that data which the two have in common
+  */
  virtual void CopyTo(I3Particle& destination) const =0;
 
   ClassDef(I3Particle,1);

@@ -20,7 +20,7 @@ class I3NonEnergetic
       NanPolicy::Fatal();
     }
 
-  void CopyTo(I3Particle&) {}
+  void CopyTo(I3Particle&) const {}
 
   ClassDef(I3NonEnergetic,1);
 

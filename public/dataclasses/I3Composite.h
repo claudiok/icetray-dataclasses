@@ -27,7 +27,7 @@ class I3Composite
     }
   vector<I3Particle*>& Constituents(){return fConstituents;}
 
-  void CopyTo(I3Particle& destination)
+  void CopyTo(I3Particle& destination) const
     {
       I3Composite* composite = dynamic_cast<I3Composite*>(&destination);
       if(composite)

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackImpl.h,v 1.1.2.4 2004/04/19 20:39:40 pretz Exp $
+    $Id: I3TrackImpl.h,v 1.1.2.5 2004/04/20 13:38:59 pretz Exp $
 
-    @version $Revision: 1.1.2.4 $
-    @date $Date: 2004/04/19 20:39:40 $
+    @version $Revision: 1.1.2.5 $
+    @date $Date: 2004/04/20 13:38:59 $
     @author
 
     @todo
@@ -59,6 +59,7 @@ class I3TrackImpl : public I3Track,
   virtual bool IsDirectional() const {return GeometricalType::IsDirectional();}
 
   virtual ParticleType Type() const {return IdentifiableType::Type();}
+  virtual void Type(ParticleType particle) {IdentifiableType::Type(particle);}
 
   virtual double Zenith() const {return GeometricalType::Zenith();}
   virtual void Zenith(double theta) {GeometricalType::Zenith(theta);}

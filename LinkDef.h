@@ -10,17 +10,33 @@
 //
 // namespace
 //
-
 #pragma link C++ namespace I3Units;
 
 #pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3Energetic,I3NonComposite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Stopping,I3Energetic,I3NonComposite>+;
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Contained,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Contained,I3Energetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Stopping,I3Energetic,I3Composite>+;
 #pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3Energetic,I3NonComposite>+;
-
-#pragma link C++ class I3BasicTrack+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3NonEnergetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3NonEnergetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Stopping,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3NonEnergetic,I3NonComposite>+;
 
 #pragma link C++ class I3CascadeImpl<I3Directional,I3Identifiable,I3Localized,I3Energetic>+;
+
+#pragma link C++ class I3BasicTrack+;
+#pragma link C++ class I3F2KTrack+;
+#pragma link C++ class I3BasicMuon+;
+//#pragma link C++ class I3DecayingMuon+;
+#pragma link C++ class I3DoubleBang+;
+#pragma link C++ class I3MCMuon+;
+#pragma link C++ class I3Lollipop+;
+#pragma link C++ class I3MuonBundle+;
+#pragma link C++ class I3EnergyMuon+;
+#pragma link C++ class I3ShoweringMuon+;
+#pragma link C++ class I3StartingMuon+;
+#pragma link C++ class I3StoppingMuon+;
+
 //
 // vector (series, list) types
 // these must go from outermost to innermost
