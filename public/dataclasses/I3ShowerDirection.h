@@ -1,11 +1,11 @@
 /**
  * Copyright (C) 2004
  * The IceCube collaboration
- * $Id: I3ShowerDirection.h,v 1.1 2004/07/13 15:37:53 niessen Exp $
+ * $Id: I3ShowerDirection.h,v 1.1.2.1 2004/07/19 22:24:20 ehrlich Exp $
  *
  * @file I3ShowerDirection.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/13 15:37:53 $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2004/07/19 22:24:20 $
  * @author Peter Niessen
  */
 

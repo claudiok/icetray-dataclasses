@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHit.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3ArrayHit.h,v 1.3.2.1 2004/07/19 22:24:20 ehrlich Exp $
     @file I3ArrayHit.h
-    @version $Revision: 1.3 $
+    @version $Revision: 1.3.2.1 $
     @date Fri Jul  9 10:50:16 EDT 2004 
     @author rulrich
 */
@@ -23,8 +23,7 @@
  * Charge, Waveforms ...)
  */
 class I3ArrayHit : public TObject, 
-	 //public VecPointainerPolicy<I3StationHitPtr>::ThePolicy  {
-	 public VectorPolicy<I3StationHitPtr>::ThePolicy  {
+	 public VecPointainerPolicy<I3StationHitPtr>::ThePolicy  {
 
  public:
   /**
@@ -47,9 +46,7 @@ class I3ArrayHit : public TObject,
   ClassDef(I3ArrayHit,1);
 };
 
-/**
- * pointer type to insulate users from memory management
- */
+
 typedef PtrPolicy<I3ArrayHit>::ThePolicy I3ArrayHitPtr;
 
 #endif

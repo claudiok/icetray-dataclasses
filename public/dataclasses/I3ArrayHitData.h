@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHitData.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3ArrayHitData.h,v 1.3.2.1 2004/07/19 22:24:20 ehrlich Exp $
     @file I3ArrayHitData.h
-    @version $Revision: 1.3 $
+    @version $Revision: 1.3.2.1 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -19,8 +19,7 @@
  * @brief The container for all the Array Hit-related data in the event
  *
  */
-class I3ArrayHitData : public TObject,
-	 public MapPolicy<string, I3ArrayHitPtr>::ThePolicy {
+class I3ArrayHitData : public TObject, public MapPointainerPolicy<I3ArrayHitPtr>::ThePolicy {
 
  public:
   /**
@@ -42,9 +41,7 @@ class I3ArrayHitData : public TObject,
   ClassDef(I3ArrayHitData,1);
 };
 
-/**
- * pointer typedeffed away to insulate users from memory managment
- */
+
 typedef PtrPolicy<I3ArrayHitData>::ThePolicy I3ArrayHitDataPtr;
 
 #endif

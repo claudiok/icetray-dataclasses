@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
+    $Id: I3StationHit.h,v 1.2.2.1 2004/07/19 22:24:20 ehrlich Exp $
     @file I3StationHit.h
-    @version $Revision: 1.2 $
+    @version $Revision: 1.2.2.1 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
@@ -19,8 +19,7 @@
  *
  */
 class I3StationHit : public TObject, 
-	 //	 public VecPointainerPolicy<I3TankHitPtr>::ThePolicy {
-	 public VectorPolicy<I3TankHitPtr>::ThePolicy {
+	 public VecPointainerPolicy<I3TankHitPtr>::ThePolicy {
 
  private:
 

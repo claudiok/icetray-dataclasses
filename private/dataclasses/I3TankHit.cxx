@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.cxx,v 1.1 2004/07/13 15:37:53 niessen Exp $
+    $Id: I3TankHit.cxx,v 1.1.2.1 2004/07/19 22:24:20 ehrlich Exp $
     @file I3TankHit.h
-    @version $Revision: 1.1 $
+    @version $Revision: 1.1.2.1 $
     @date Fri Jul  9 21:55:18 EDT 2004
     @author rulrich
 */

@@ -1,7 +1,7 @@
 /**
-    $Id: I3MCTankHit.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3MCTankHit.h,v 1.3.2.1 2004/07/19 22:24:20 ehrlich Exp $
     @file I3MCTankHit.h
-    @version $Revision: 1.3 $
+    @version $Revision: 1.3.2.1 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -21,7 +21,7 @@
  * @brief The container for all the Array Hit-related data in the event
  *
  */
-class I3MCTankHit : public I3TankHit, public VectorPolicy<I3ObservableParticlePtr>::ThePolicy
+class I3MCTankHit : public I3TankHit, public VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy
 {
 
  public:
@@ -47,9 +47,6 @@ class I3MCTankHit : public I3TankHit, public VectorPolicy<I3ObservableParticlePt
   ClassDef(I3MCTankHit,1);
 };
 
-/**
- * pointer type to insulate users from memory management
- */
 typedef PtrPolicy<I3MCTankHit>::ThePolicy I3MCTankHitPtr;
 
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopDirection.h,v 1.3 2004/07/13 18:48:04 niessen Exp $
+ * $Id: I3RecoResultTopDirection.h,v 1.3.2.1 2004/07/19 22:24:20 ehrlich Exp $
  *
  * @file I3RecoResultTopDirection.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/13 18:48:04 $
+ * @version $Revision: 1.3.2.1 $
+ * @date $Date: 2004/07/19 22:24:20 $
  * @author Peter Niessen
  */
 
@@ -28,7 +28,7 @@ class I3RecoResultTopDirection : public I3RecoResult
   /**
    * constructor
    */
-  I3RecoResultTopDirection ()  { /* fShowerDirection = NULL; */ }
+  I3RecoResultTopDirection () {fShowerDirection = NULL;}
 
   /**
    * destructor
@@ -46,7 +46,7 @@ class I3RecoResultTopDirection : public I3RecoResult
     if(fShowerDirection)
       return (*fShowerDirection);
     I3DataExecution::Instance().Fatal("I3RecoResultTopDirection::ShowerDirection () const asked for a shower direction which doesn't exist");
-    //return(*(I3ShowerDirectionPtr)NULL);
+    return(*(I3ShowerDirectionPtr)NULL);
   }
 
   /**
@@ -57,7 +57,7 @@ class I3RecoResultTopDirection : public I3RecoResult
     if(fShowerDirection)
       return (*fShowerDirection);
     I3DataExecution::Instance().Fatal("I3RecoResultSingleTopDirection::ShowerDirection() asked for a track which doesn't exist");
-    //return(*(I3ShowerDirectionPtr)NULL);
+    return(*(I3ShowerDirectionPtr)NULL);
   }
 
   bool HasShowerDirection () const {return((fShowerDirection==NULL) ? false : true);}
@@ -76,8 +76,8 @@ class I3RecoResultTopDirection : public I3RecoResult
   
   private:
   // copy and assignment are private
-  //I3RecoResultTopDirection (const I3RecoResultTopDirection& rhs);
-  //const I3RecoResultTopDirection& operator= (const I3RecoResultTopDirection&);
+  I3RecoResultTopDirection (const I3RecoResultTopDirection& rhs);
+  const I3RecoResultTopDirection& operator= (const I3RecoResultTopDirection&);
 
   // ROOT macro
   ClassDef(I3RecoResultTopDirection, 1);
