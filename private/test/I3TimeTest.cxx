@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.8 2005/04/01 20:14:45 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.9 2005/04/01 20:23:24 pretz Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2005/04/01 20:14:45 $
+    @version $Revision: 1.9 $
+    @date $Date: 2005/04/01 20:23:24 $
     @author pretz
 
     @todo
@@ -224,8 +224,14 @@ namespace tut
     ensure("10",!(higher<lower));
     ensure("11",!(highest<lower));
     ensure("12",!(highest<higher));
-    
 
-    
+    ensure("13",highest!=higher);
+    ensure("14",lower!=higher);
+    ensure("15",lowest!=lower);
+
+    I3Time same;
+    same.SetDaqTime(2004,235918301);
+
+    ensure("16",lowest == same);
   }
 }
