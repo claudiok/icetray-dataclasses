@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3EventTest.cxx,v 1.3 2004/05/05 15:20:48 pretz Exp $
+    $Id: I3EventTest.cxx,v 1.4 2004/05/14 18:35:53 deyoung Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/05/05 15:20:48 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/05/14 18:35:53 $
     @author pretz
 
     @todo
@@ -51,8 +51,8 @@ namespace tut
     I3Event *event = new I3Event(); 
     
     I3BasicTrack *bt = new I3BasicTrack(); 
-    bt->Energy(4.5);
-    bt->StartX(3.4);
+    bt->Azimuth(4.5);
+    bt->X(3.4);
     
     event->MCParticleData()["F2k"] = new I3MCParticleEvent();
     event->MCParticleData()["F2k"]->InIceParticles().push_back(bt);
@@ -70,7 +70,7 @@ namespace tut
     t->GetEvent(0);
 
     ensure("checking the output data",
-	   event_out->MCParticleData()["F2k"]->InIceParticles()[0]->X()==3.4)    ;
+	   event_out->MCParticleData()["F2k"]->InIceParticles()[0]->X()==3.4);
   }
   
 }
