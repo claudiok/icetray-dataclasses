@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.12 2004/07/12 16:12:46 pretz Exp $
+    $Id: StoragePolicy.h,v 1.13 2004/07/26 12:10:17 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.12 $
-    @date $Date: 2004/07/12 16:12:46 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/07/26 12:10:17 $
     @author Troy D. Straszheim
 */
 
@@ -15,7 +15,7 @@
 #include "STLVectorStoragePolicy.h"
 #include "STLMapStoragePolicy.h"
 
-#include "boost/shared_ptr.hpp"
+//#include "boost/shared_ptr.hpp"
 
 
 template <class Stored>
@@ -67,7 +67,17 @@ struct PtrPolicy
   /**
    * boost smart pointers.  FIXME: need docs
    */
-  typedef boost::shared_ptr<Pointed> ThePolicy;
+  //  typedef boost::shared_ptr<Pointed> ThePolicy;
+  typedef Pointed* ThePolicy;
 };
 
+//TDS: workaround while we get these goddamned smart pointers working
+namespace boost {
+  template <class T, class U>
+  T* 
+  dynamic_pointer_cast(U* src)
+  {
+    return dynamic_cast<T*>(src);
+  }
+}
 #endif
