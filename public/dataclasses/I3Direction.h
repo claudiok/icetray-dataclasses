@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.3 2004/09/10 02:38:10 dule Exp $
+ * $Id: I3Direction.h,v 1.4 2004/09/10 04:19:18 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/09/10 02:38:10 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/09/10 04:19:18 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.3 2004/09/10 02:38:10 dule Exp $
+// $Id: I3Direction.h,v 1.4 2004/09/10 04:19:18 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -186,6 +186,7 @@ class I3Direction : public TObject
   /**
    * Change zenith,azimuth coordinates into x,y,z directional coordinates.
    * The three numbers x,y,z are calculated to add up (in quadrature) to 1.
+   * zenith,azimuth are -theta,-phi in these IceCube coordinates.
    */
   void CalcCarFromSph() const;
 
