@@ -1,23 +1,23 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLHashStoragePolicy.h,v 1.1 2004/02/20 16:54:14 troy Exp $
+    $Id: STLMapStoragePolicy.h,v 1.1 2004/02/23 02:13:50 troy Exp $
 
     @version $Revision: 1.1 $
-    @date $Date: 2004/02/20 16:54:14 $
+    @date $Date: 2004/02/23 02:13:50 $
     @author Troy Straszheim
 
 */
-#ifndef STLHASHPOLICY_H
-#define STLHASHPOLICY_H
+#ifndef STLMAPPOLICY_H
+#define STLMAPPOLICY_H
 
 #include <string>
-#include <map> //this needs to be changed to hash_map
+#include <map>
 
 using namespace std;
 
 template <class ElementType>
-class STLHashStoragePolicy {
+class STLMapStoragePolicy {
 
  public:
 
