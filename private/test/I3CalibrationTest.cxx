@@ -60,7 +60,7 @@ namespace tut
 	val = slope;
        
 	dom_calib->SetATWDGain(channel,gain,gainErr);
-	dom_calib->SetATWDParameters(id,channel,bin,val);
+	dom_calib->SetATWDParameters(id,channel,bin,slope,intercept,regress_coeff);
 
 	inice_calib[OMKey(20,20)] = dom_calib;
 
@@ -101,9 +101,12 @@ namespace tut
 
 	domptr->ls();
 
-	ensure_distance("Failed to get data from I3DOMCalibration read from disk", 
+	ensure_distance("Failed to get gain from I3DOMCalibration read from disk", 
 			gain, domptr->GetATWDGain(0), 0.0001);
 	
+	ensure_distance("Failed to get voltage from I3DOMCalibration read from disk",
+			intercept, domptr->GetATWDVoltage(0, 0, 0, 0.0), 0.0001);
+
 	//cout<<"Gain: "<< domptr->GetATWDGain(0) <<endl;
     }
 }

@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.1 2004/11/09 01:38:42 tmccauley Exp $
+ * $Id: I3DOMCalibration.h,v 1.2 2004/11/10 22:18:43 tmccauley Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/11/09 01:38:42 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/11/10 22:18:43 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -28,10 +28,16 @@ using namespace std;
  *
  @author Tom McCauley
 
- @todo Not all of the calib. info. is dealt with here. A struct needs
-       to be addded to handle the linear fit parameters. Documentation
+ @todo Not all of the calib. info. is dealt with here. Documentation
        needs to be added as well as units (or is that handled by the user?) 
 */
+
+struct LinearFit
+{
+    Double_t fSlope;
+    Double_t fIntercept;
+    Double_t fRegressCoeff;
+};
 
 class I3DOMCalibration : public TObject
 {
@@ -69,7 +75,7 @@ public:
     // for a specific ATWD id, channel, and bin.
     Double_t GetATWDVoltage(Int_t id, Int_t channel, Int_t bin, Double_t count);
     
-    map<Int_t, Double_t>& GetATWDVoltage(Int_t id, Int_t channel);
+    //map<Int_t, Double_t>& GetATWDVoltage(Int_t id, Int_t channel);
     
 
 public:
@@ -98,10 +104,7 @@ public:
 
     // Set parameters for conversion of count to voltage 
     // for each ATWD, each ATWD channel, and each ATWD bin.
-  
-    // Last argument is the conversion from count -> voltage
-    // Actually, it's not quite that; it's a placeholder until I
-    // add a struct that contains the results from the linear fit.
+    /*
     void SetATWDParameters(Int_t id,
 			   Int_t channel,
 			   Int_t bin,
@@ -110,6 +113,14 @@ public:
     void SetATWDParameters(Int_t id,
 			   Int_t channel,
 			   map<Int_t,Double_t>&);
+    */
+
+    void SetATWDParameters(Int_t id,
+			   Int_t channel,
+			   Int_t bin,
+			   Double_t slope,
+			   Double_t intercept,
+			   Double_t regress_coeff);
     
     void SetFADCParameters(Double_t pedestal,
 			   Double_t gain)
@@ -117,11 +128,40 @@ public:
 	    fFADCPedestal = pedestal;
 	    fFADCGain     = gain;
 	};
-  
       
     // Set gain and error on gain for ATWD (specified by channel).
     void SetATWDGain(Int_t channel, Double_t gain, Double_t gainErr);
   
+    void SetHighVoltage(Double_t voltage)
+	{
+	    fPMTHighVoltage = voltage;
+	};
+    
+    Double_t GetHighVoltage()
+	{
+	    return fPMTHighVoltage;
+	};
+    
+    void SetPedestalVoltage(Double_t voltage)
+	{
+	    fPedestalVoltage = voltage;
+	};
+    
+    Double_t GetPedestalVoltage()
+	{
+	    return fPedestalVoltage;
+	};
+    
+    void SetSamplingRate(Double_t rate)
+	{
+	    fSamplingRate = rate;
+	};
+    
+    Double_t GetSamplingRate()
+	{
+	    return fSamplingRate;
+	};
+
 private:
     // Simple data types
     Double_t  fDate;  
@@ -132,6 +172,10 @@ private:
     Double_t fFADCGain;
     Double_t fFADCPedestal;
 
+    Double_t fPMTHighVoltage;
+    Double_t fPedestalVoltage;
+    Double_t fSamplingRate;
+
     // Gain and error on gain for ATWD channels.
     // The key corresponds to the channel.
     map<Int_t, Double_t> fAmpGains;
@@ -139,13 +183,13 @@ private:
     
     // First key corresponds to channel.
     // Key in internal map corresponds to bin.
-    // The Double_t in the map is the conversion factor 
-    // for count -> voltage. See above for the 
-    // provisional status of this setup.
+    //map< Int_t, map<Int_t,Double_t> > fATWD0;
+    //map< Int_t, map<Int_t,Double_t> > fATWD1;
+    //map< Int_t, map<Int_t,Double_t> >& GetATWDById(Int_t id);
 
-    map< Int_t, map<Int_t,Double_t> > fATWD0;
-    map< Int_t, map<Int_t,Double_t> > fATWD1;
-    map< Int_t, map<Int_t,Double_t> >& GetATWDById(Int_t id);
+    map< Int_t, map<Int_t,LinearFit> > fATWD0;
+    map< Int_t, map<Int_t,LinearFit> > fATWD1;
+    map< Int_t, map<Int_t,LinearFit> >& GetATWDById(Int_t id);
 
     // Copy constructor and assignment operator
     I3DOMCalibration(const I3DOMCalibration& calibration);

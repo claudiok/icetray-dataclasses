@@ -3,6 +3,7 @@
 # add CXX_BIN_NAMES := myfile
 
 CXX_BIN_SRCDIR_NAMES := 
+CXX_BIN_NAMES = I3GeometryTest
 TEST_SRCDIR_NAMES := test test-autogen
 ROOT_BIN_NAMES := 
 

@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.134 2004/11/09 01:42:42 tmccauley Exp $
-// $Revision: 1.134 $
-// $Date: 2004/11/09 01:42:42 $
+// $Id: LinkDef.h,v 1.135 2004/11/10 22:18:43 tmccauley Exp $
+// $Revision: 1.135 $
+// $Date: 2004/11/10 22:18:43 $
 //
 
 #ifdef __CINT__
@@ -428,6 +428,8 @@
 #pragma link C++ class roost::shared_ptr<I3OMStatusIceCube>+;
 
 // tpm: my additions
+#pragma link C++ struct LinearFit+;
+
 #pragma link C++ class I3DOMCalibration+;
 #pragma link C++ typedef I3DOMCalibPtr;
 #pragma link C++ class roost::shared_ptr<I3DOMCalibration>+;
