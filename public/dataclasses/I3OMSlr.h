@@ -1,14 +1,16 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMSlr.h,v 1.1 2004/10/22 21:08:44 deyoung Exp $
+ *  $Id: I3OMSlr.h,v 1.2 2004/10/24 21:05:01 troy Exp $
  *
  * @file I3OMSlr.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/10/22 21:08:44 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/10/24 21:05:01 $
  * @author deyoung
  */
 
+#warning I3OMSlr problems, fixme
+#if 0
 #ifndef I3OMSLR_H_INCLUDED
 #define I3OMSLR_H_INCLUDED
 
@@ -68,3 +70,4 @@ private:
 typedef PtrPolicy<I3OMSlr>::ThePolicy I3OMSlrPtr;
 
 #endif //I3OMSLR_H_INCLUDED
+#endif

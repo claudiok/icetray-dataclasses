@@ -1,13 +1,16 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMSlr.cxx,v 1.1 2004/10/22 21:08:44 deyoung Exp $
+ *  $Id: I3OMSlr.cxx,v 1.2 2004/10/24 21:05:01 troy Exp $
  *
  * @file I3OMSlr.cxx
- * @version $Revision: 1.1 $
- * @date $Date: 2004/10/22 21:08:44 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/10/24 21:05:01 $
  * @author deyoung
  */
+
+#warning I3OMSlr problems, fixme
+#if 0
 
 #ifndef I3OMSLR_CXX_INCLUDED
 #define I3OMSLR_CXX_INCLUDED
@@ -66,3 +69,4 @@ const I3OMSlrPtr I3OMSlr::GetCopy() {
 };
 
 #endif //I3OMSLR_CXX_INCLUDED
+#endif

@@ -1,14 +1,16 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMSlrList.cxx,v 1.1 2004/10/22 21:08:44 deyoung Exp $
+ *  $Id: I3OMSlrList.cxx,v 1.2 2004/10/24 21:05:01 troy Exp $
  *
  * @file I3OMSlrList.cxx
- * @version $Revision: 1.1 $
- * @date $Date: 2004/10/22 21:08:44 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/10/24 21:05:01 $
  * @author deyoung
  */
 
+#warning I3OMSlr Problems, fixme
+#if 0
 #ifndef I3OMSLRLIST_CXX_INCLUDED
 #define I3OMSLRLIST_CXX_INCLUDED
 
@@ -52,3 +54,4 @@ void I3OMSlrList::PrintGoodOMs() {
 };
 
 #endif //I3OMSLRLIST_CXX_INCLUDED
+#endif
