@@ -3,29 +3,22 @@
 
 #include <TObject.h>
 #include "I3OMGeo.h"
+#include "TClonesPolicy.h"
+#include "GarnishedVector.h"
 
-class I3Geometry : public TObject
-{
-  double     time;
-  long       date;
-  TObjArray  *omgeo;
+class I3GeometryHeader {
+  Double_t     fTime;
+  Long_t       fDate;
+ public:
+  Double_t Time() { return fTime; }
+  void Dime(Double_t time_) { fTime = time_; }
 
-  public:
-   I3Geometry();
-  ~I3Geometry();
-
-  double GetTime() const;
-  long   GetDate() const;
-  void SetTime(double time_);
-  void SetDate(long date_);
-
-  int            GetNumberOMGeos() const;
-  const I3OMGeo& GetOMGeo(unsigned short index) const;
-  bool           HasOMGeoNumber(unsigned short omnumber) const;
-  const I3OMGeo& FindOMGeo(unsigned short omnumber) const;
-  void           AddOMGeo(I3OMGeo* omgeo_);
-
-  ClassDef(I3Geometry, 1);
+  Long_t Date() {  return fDate; }
+  void Date(Long_t date_) { fDate = date_; }
 };
+
+typedef TClonesPolicy<I3OMGeo> I3GeometryStoragePolicy;
+typedef GarnishedVector<I3GeometryHeader, I3OMGeo, I3GeometryStoragePolicy> I3Geometry;
+
 #endif
  

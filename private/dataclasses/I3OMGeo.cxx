@@ -1,9 +1,20 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3OMGeo.cxx,v 1.3 2004/02/15 15:27:25 troy Exp $
+
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/15 15:27:25 $
+    @author
+
+    @todo
+
+*/
 #include "dataclasses/I3OMGeo.h"
-#include <TRef.h>
 
 ClassImp(I3OMGeo);
 
-I3OMGeo::I3OMGeo()
+void I3OMGeo::Init()
 {
   omnumber=0;
   x=0;
@@ -11,21 +22,5 @@ I3OMGeo::I3OMGeo()
   z=0;
   orientation=0;
   version=0;
-  TRef r=this;
 }
-
-unsigned short I3OMGeo::GetOMNumber() const                   {return(omnumber);}
-void           I3OMGeo::SetOMNumber(unsigned short omnumber_) {omnumber=omnumber_;}
-
-double        I3OMGeo::GetX() const           {return(x);}
-double        I3OMGeo::GetY() const           {return(y);}
-double        I3OMGeo::GetZ() const           {return(z);}
-bool          I3OMGeo::GetOrientation() const {return(orientation);}
-unsigned char I3OMGeo::GetVersion() const     {return(version);}
-
-void I3OMGeo::SetX(double x_)                    {x=x_;}
-void I3OMGeo::SetY(double y_)                    {y=y_;}
-void I3OMGeo::SetZ(double z_)                    {z=z_;}
-void I3OMGeo::SetOrientation(bool orientation_)  {orientation=orientation_;}
-void I3OMGeo::SetVersion(unsigned char version_) {version=version_;}
 

@@ -1,3 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3OMGeo.h,v 1.3 2004/02/15 15:25:32 troy Exp $
+
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/15 15:25:32 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3OMGEO_H
 #define I3OMGEO_H
 
@@ -7,30 +19,35 @@
 class I3OMGeo : public TObject
 {
   protected:
-  unsigned short omnumber;
-  double         x;
-  double         y;
-  double         z;
-  bool           orientation;
-  unsigned char  version;
+  UShort_t omnumber;
+  Double_t x;
+  Double_t y;
+  Double_t z;
+  Bool_t orientation;
+  UChar_t version;
 
   public:
-  I3OMGeo();
+  void Init();
 
-  unsigned short GetOMNumber() const;
-  void           SetOMNumber(unsigned short omnumber_);
+  I3OMGeo() { Init(); }
 
-  double        GetX() const;
-  double        GetY() const;
-  double        GetZ() const;
-  bool          GetOrientation() const;
-  unsigned char GetVersion() const;
+  UShort_t OMNumber() const;
+  void   OMNumber(UShort_t omnumber_) { omnumber = omnumber_; }
 
-  void SetX(double x_);
-  void SetY(double y_);
-  void SetZ(double z_);
-  void SetOrientation(bool orientation);
-  void SetVersion(unsigned char version);
+  Double_t X() const { return x; }
+  void   X(Double_t x_) { x = x_; }
+
+  Double_t Y() const { return y; }
+  void   Y(Double_t y_) { y = y_; }
+
+  Double_t Z() const { return z; }
+  void     Z(Double_t z_) { z = z_; }
+
+  Bool_t  Orientation() const { return orientation; }
+  void    Orientation(Bool_t orientation_) { orientation = orientation_; }
+
+  UChar_t Version() const { return version; }
+  void    Version(UChar_t version_) { version = version_; }
 
   ClassDef(I3OMGeo,1);
 };

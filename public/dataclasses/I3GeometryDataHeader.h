@@ -1,9 +1,9 @@
 #ifndef I3GEOMETRYHEADER_H
 #define I3GEOMETRYHEADER_H
 /**
- * Class: I3GeometryHeader
+ * Class: I3GeometryDataHeader
  *
- * Version: $Id: I3GeometryHeader.h,v 1.1 2004/01/30 21:00:25 pretz Exp $
+ * Version: $Id: I3GeometryDataHeader.h,v 1.1 2004/02/15 15:25:32 troy Exp $
  *
  * Date: 13 Jan 2004
  *
@@ -19,20 +19,20 @@
  * you can store in a file if you don't want to store the geometry.
  * It's supposed to have enough data to reconstruct the full geometry
  * from the database
- * @version $Id: I3GeometryHeader.h,v 1.1 2004/01/30 21:00:25 pretz Exp $
+ * @version $Id: I3GeometryDataHeader.h,v 1.1 2004/02/15 15:25:32 troy Exp $
  * @author pretz
  */
-class I3GeometryHeader : public I3DataHeader{
+class I3GeometryDataHeader : public I3DataHeader{
  public:
   /**
    * constructor
    */
-  I3GeometryHeader();
+  I3GeometryDataHeader();
 
   /**
    * destructor
    */
-  virtual ~I3GeometryHeader();
+  virtual ~I3GeometryDataHeader();
 
   /**
    * retrieve the number of OMs
@@ -78,8 +78,8 @@ class I3GeometryHeader : public I3DataHeader{
   void SetArrayName(const Char_t* name);
  private:
   // copy and assignment are private
-  I3GeometryHeader(const I3GeometryHeader&);
-  I3GeometryHeader& operator=(const I3GeometryHeader&);
+  I3GeometryDataHeader(const I3GeometryDataHeader&);
+  I3GeometryDataHeader& operator=(const I3GeometryDataHeader&);
 
   // instance data
   Int_t fNumOms;
@@ -87,7 +87,7 @@ class I3GeometryHeader : public I3DataHeader{
   TString fArrayName;
   
   // ROOT Macro
-  ClassDef(I3GeometryHeader,1);
+  ClassDef(I3GeometryDataHeader,1);
 };
 
 #endif //I3GEOMETRYHEADER_H
