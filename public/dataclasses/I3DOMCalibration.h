@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.6 2004/12/01 22:39:44 tmccauley Exp $
+ * $Id: I3DOMCalibration.h,v 1.7 2004/12/02 23:24:38 dima Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/12/01 22:39:44 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/12/02 23:24:38 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -131,6 +131,16 @@ public:
 	    return fPMTHighVoltage;
 	};
     
+    void SetSingleSPEThresholdVoltage(Double_t voltage)
+	{
+	    fSingleSPEThresholdVoltage = voltage;
+	};
+    
+    Double_t GetSingleSPEThresholdVoltage()
+	{
+	    return fSingleSPEThresholdVoltage;
+	};
+    
     void SetPedestalVoltage(Double_t voltage)
 	{
 	    fPedestalVoltage = voltage;
@@ -217,7 +227,8 @@ private:
 
     Double_t fPMTHighVoltage;
     Double_t fPedestalVoltage;
-    
+    Double_t fSingleSPEThresholdVoltage;
+   
     // Parameters describing the SPE charge distribution
     Double_t fPeakToValley;
     Double_t fSPEMean;
