@@ -1,16 +1,16 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: GarnishedVector.h,v 1.1 2004/02/15 02:42:03 troy Exp $
+    $Id: GarnishedVector.h,v 1.2 2004/02/20 04:04:18 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/15 02:42:03 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/20 04:04:18 $
     @author Troy Straszheim
 
     @todo
 */
-#ifndef I3HITSERIES_H
-#define I3HITSERIES_H
+#ifndef I3GARNISHEDVECTOR_H
+#define I3GARNISHEDVECTOR_H
 
 #include <TObject.h>
 
