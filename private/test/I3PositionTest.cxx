@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3PositionTest.cxx,v 1.1 2004/08/12 17:33:32 pretz Exp $
+    $Id: I3PositionTest.cxx,v 1.2 2004/08/13 18:03:48 dule Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/08/12 17:33:32 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/08/13 18:03:48 $
     @author pretz
 
     @todo
@@ -104,11 +104,10 @@ namespace tut
    void object::test<4>(){
    I3PositionPtr ptr(new I3Position());
    /** @todo add some setting of data here */
-                                                                                
+
    I3Position* raw_ptr = &(*ptr);
    TTree tree("TestTree","Icecube");
    tree.Branch("branch","I3Position",&raw_ptr);
-                                                                                
    tree.Fill();
 
    TFile file_out("test.out.root","RECREATE");
@@ -122,7 +121,7 @@ namespace tut
                                                             
    I3Position* raw_ptr_in = new I3Position();
    I3PositionPtr ptr_in (raw_ptr_in);
-                                                                                
+
    tree_in->SetBranchAddress("branch",&raw_ptr_in);
    tree_in->GetEvent(0);
 
@@ -130,4 +129,69 @@ namespace tut
 
    delete tree_in;
    }
+
+  /**
+   * Make sure that the changing of coordinate systems works well
+   */
+  void object::test<5>(){
+    cout <<"Creating positions p(4,3,0) and q(0,0,0)..."<<endl;
+    I3Position p(4,3,0);
+    //I3PositionPtr q_ptr(new I3Position(1,2,3));
+    I3Position q(1,2,3);
+    cout <<"Setting position q to: 2,2,2 in car..."<<endl;
+    q.SetPosition(2,2,2,I3Position::car);
+
+    ensure_distance("p.GetX failed",p.GetX(),4.0,0.0001);
+    ensure_distance("p.GetY failed",p.GetY(),3.0,0.0001);
+    ensure_distance("p.GetZ failed",p.GetZ(),0.0,0.0001);
+    ensure_distance("p.GetR failed",p.GetR(),5.0,0.0001);
+    ensure_distance("p.GetTheta failed",p.GetTheta(),1.5708,0.0001);
+    ensure_distance("p.GetPhi failed",p.GetPhi(),0.6435,0.0001);
+    ensure_distance("p.GetRho failed",p.GetRho(),5.0,0.0001);
+
+    ensure_distance("q.GetX failed",q.GetX(),2.0,0.0001);
+    ensure_distance("q.GetY failed",q.GetY(),2.0,0.0001);
+    ensure_distance("q.GetZ failed",q.GetZ(),2.0,0.0001);
+
+    ensure_distance("p.CalcDistance(q) failed",p.CalcDistance(q),3.0,0.0001);
+    ensure_distance("q.CalcDistance(p) failed",q.CalcDistance(p),3.0,0.0001);
+
+    cout <<"Rotating p by Pi/4 around z-axis..."<<endl;
+    p.RotateZ(3.141592/4);
+    ensure_distance("p.GetX failed",p.GetX(),0.707108,0.0001);
+    ensure_distance("p.GetY failed",p.GetY(),4.94975,0.0001);
+    ensure_distance("p.GetZ failed",p.GetZ(),0.0,0.0001);
+
+    cout <<"Rotating p by Pi/2 around y-axis..."<<endl;
+    p.RotateY(3.141592/2);
+    ensure_distance("p.GetX failed",p.GetX(),0.0,0.0001);
+    ensure_distance("p.GetY failed",p.GetY(),4.94975,0.0001);
+    ensure_distance("p.GetZ failed",p.GetZ(),-0.707108,0.0001);
+
+    cout <<"Rotating p by Pi/2 around x-axis..."<<endl;
+    p.RotateX(3.141592/2);
+    ensure_distance("p.GetX failed",p.GetX(),0.0,0.0001);
+    ensure_distance("p.GetY failed",p.GetY(),0.707108,0.0001);
+    ensure_distance("p.GetZ failed",p.GetZ(),4.94975,0.0001);
+
+    cout <<"Creating position s and setting coordinates in sph..."<<endl;
+    I3Position s;
+    s.SetPosition(1.732050808,0.955316618,3.141592/4,I3Position::sph);
+    ensure_distance("s.GetX failed",s.GetX(),1.0,0.0001);
+    ensure_distance("s.GetY failed",s.GetY(),1.0,0.0001);
+    ensure_distance("s.GetZ failed",s.GetZ(),1.0,0.0001);
+
+    cout <<"Creating position d and setting coordinates in car..."<<endl;
+    I3Position d(1,1,1);
+    ensure_distance("d.GetX failed",d.GetR(),1.73205,0.0001);
+    ensure_distance("d.GetY failed",d.GetTheta(),0.955317,0.0001);
+    ensure_distance("d.GetZ failed",d.GetPhi(),0.785398,0.0001);
+
+    cout <<"Creating position f from position d..."<<endl;
+    I3Position f(d);
+    ensure_distance("f.GetX failed",f.GetR(),1.73205,0.0001);
+    ensure_distance("f.GetY failed",f.GetTheta(),0.955317,0.0001);
+    ensure_distance("f.GetZ failed",f.GetPhi(),0.785398,0.0001);
+
+  }
 }
