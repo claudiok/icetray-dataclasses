@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShower.h,v 1.1 2004/08/03 18:06:17 blaufuss Exp $
+ * $Id: I3TopShower.h,v 1.2 2004/08/04 20:38:12 blaufuss Exp $
  *
  * @file I3TopShower.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/08/03 18:06:17 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/04 20:38:12 $
  * @author blaufuss
   */
 
@@ -13,17 +13,13 @@
 #define I3TOPSHOWER_H
 
 #include "Rtypes.h"
-#include "I3Particle.h"
+#include "I3IceTopParticle.h"
 
 /**
  * @brief Represents a particle which can appear in the IceTop array
  */
-class I3TopShower : public I3Particle{
+class I3TopShower : public I3IceTopParticle{
  public:
-  /**
-   * indicates that the particle is not an observable particle
-   */
-  virtual Bool_t IsObservable() const {return true;}
    
   /**
    * indicatess that the particle has a core position, and so

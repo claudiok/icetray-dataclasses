@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.112 2004/08/04 20:11:41 ehrlich Exp $
-// $Revision: 1.112 $
-// $Date: 2004/08/04 20:11:41 $
+// $Id: LinkDef.h,v 1.113 2004/08/04 20:38:12 blaufuss Exp $
+// $Revision: 1.113 $
+// $Date: 2004/08/04 20:38:12 $
 //
 
 #ifdef __CINT__
@@ -59,6 +59,7 @@
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
 #pragma link C++ class I3TopShowerImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>+;
+#pragma link C++ class I3TopShowerImpl<I3Directional, I3CoreLocalized, I3Energetic>+;
 #pragma link C++ class I3TopShowerImpl<I3Directional, I3NonCoreLocalized, I3NonEnergetic>+;
 
 #pragma link C++ class I3MCPrimary+;
@@ -313,6 +314,7 @@
 #pragma link C++ class I3IceTopParticle+;
 #pragma link C++ typedef I3IceTopParticlePtr;
 #pragma link C++ class I3OMGeo+;
+#pragma link C++ class I3MCTopShower+;
 
 #pragma link C++ class I3OMGeoAMANDA+;
 
