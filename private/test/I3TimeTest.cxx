@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.6 2005/03/31 17:39:13 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.7 2005/03/31 18:43:35 pretz Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2005/03/31 17:39:13 $
+    @version $Revision: 1.7 $
+    @date $Date: 2005/03/31 18:43:35 $
     @author pretz
 
     @todo
@@ -123,7 +123,7 @@ namespace tut
     cout<<"Output day of the month"<<tme.GetUTCDayOfMonth()<<endl;
     ensure("day of month is right",tme.GetUTCDayOfMonth()==6);
     ensure("weekday is right",tme.GetUTCWeekday() == I3Time::Sunday);  
-    ensure_equals("secs is right",tme.GetUTCSec(),5608198);
+    ensure("secs is right",tme.GetUTCSec()==5608198);
     ensure_distance(tme.GetUTCNanoSec(),(double)844318797,0.1);
   }
 
@@ -132,7 +132,7 @@ namespace tut
     I3Time time;
     time.SetModJulianTime(53460,0,0);
 
-    ensure_equals("checking modjulian sec",time.GetModJulianSec(),0);
+    ensure("checking modjulian sec",time.GetModJulianSec()==0);
   }
 
   void object::test<9>()
@@ -140,7 +140,7 @@ namespace tut
     I3Time time;
     time.SetModJulianTime(53460,0,0);
 
-    ensure_equals("checking modjulian day",time.GetModJulianDay(),53460);
+    ensure("checking modjulian day",time.GetModJulianDay()==53460);
   }
 
   void object::test<10>()
@@ -148,7 +148,7 @@ namespace tut
     I3Time time;
     time.SetModJulianTime(53460,60*60*12,0);
 
-    ensure_equals("checking modjulian day",time.GetModJulianDay(),53460);
+    ensure("checking modjulian day",time.GetModJulianDay()==53460);
   }
 
   void object::test<11>()

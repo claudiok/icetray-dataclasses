@@ -37,7 +37,7 @@ void I3Time::SetModJulianTime(unsigned int modJulianDay,
 {
   double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24.));
   year_ = yearOf(modjulian);
-  unsigned int daysafteryear = modjulian - modjulianday(year_);
+  unsigned int daysafteryear = (unsigned int)(modjulian - modjulianday(year_));
   unsigned int secsafteryear = daysafteryear * 3600 * 24 + sec;
   daqTime_ = 
     ((long long int)secsafteryear * ((long long int)(1e10))) 
