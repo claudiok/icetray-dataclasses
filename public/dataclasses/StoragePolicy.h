@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.16.4.2 2005/01/26 03:59:37 troy Exp $
+    $Id: StoragePolicy.h,v 1.16.4.3 2005/01/26 16:49:31 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.16.4.2 $
-    @date $Date: 2005/01/26 03:59:37 $
+    @version $Revision: 1.16.4.3 $
+    @date $Date: 2005/01/26 16:49:31 $
     @author Troy D. Straszheim
 */
 
@@ -20,10 +20,9 @@
 #include "STLMapStoragePolicy.h"
 #include "STLMultiMapStoragePolicy.h"
 
-// temporary typedefs to compensate for removal of root shit
+#include "services/I3Logging.h"
 
-typedef int Int_t;
-typedef double Double_t;
+// temporary typedefs to compensate for removal of root shit
 
 /**
  * @brief The pointer policy.  Should use typedefs of this rather than
@@ -50,7 +49,8 @@ struct PtrPolicy
 };
 
 using boost::dynamic_pointer_cast;
-#else
+
+#else // __CINT__
 #include <roost/shared_ptr.hpp>
 
 template <class Pointed>

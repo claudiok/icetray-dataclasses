@@ -1,16 +1,16 @@
 #ifndef RootHeaders_H_Included
 #define RootHeaders_H_Included
 
-#ifdef __CINT__
-#warning YES __CINT__
+#define DONT_FOOL_ROOT
+
+#if defined(__CINT__) || defined(DONT_FOOL_ROOT)
+
 #include <TObject.h>
 #include <TClass.h>
-#include <RTypes.h>
-
+#include <Rtypes.h>
 
 #else // __CINT__
 
-#warning NOT __CINT__
 typedef int Int_t;
 typedef unsigned int UInt_t;
 typedef long Long_t;
@@ -43,6 +43,6 @@ IsA_Proxy* IsA() {
 #define ClassDef(X,Y)
 #define ClassImp(X)
 
-#endif __CINT__
+#endif // __CINT__
 
 #endif
