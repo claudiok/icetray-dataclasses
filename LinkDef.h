@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.151 2005/02/09 19:30:46 ehrlich Exp $
-// $Revision: 1.151 $
-// $Date: 2005/02/09 19:30:46 $
+// $Id: LinkDef.h,v 1.152 2005/02/23 21:47:31 dule Exp $
+// $Revision: 1.152 $
+// $Date: 2005/02/23 21:47:31 $
 //
 
 #ifdef __CINT__
@@ -556,9 +556,17 @@
 #pragma link C++ typedef I3RecoResultRDMCFitPtr;
 #pragma link C++ class roost::shared_ptr<I3RecoResultRDMCFit>+;
 
+#pragma link C++ class I3RecoResultSingleParticle+;
+#pragma link C++ typedef I3RecoResultSingleParticlePtr;
+#pragma link C++ class roost::shared_ptr<I3RecoResultSingleParticle>+;
+
 #pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
-#pragma link C++ class roost::shared_ptr<I3RecoResultTopDirection>+;
+#pragma link C++ class roost::shared_ptr<I3RecoResultSingleTrack>+;
+
+#pragma link C++ class I3RecoResultSingleTopShower+;
+#pragma link C++ typedef I3RecoResultSingleTopShowerPtr;
+#pragma link C++ class roost::shared_ptr<I3RecoResultSingleTopShower>+;
 
 #pragma link C++ class I3RecoResultTopCore+;
 #pragma link C++ typedef I3RecoResultTopCorePtr;
