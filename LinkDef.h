@@ -20,11 +20,12 @@
 #pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3Composite>+;
 #pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3Composite>+;
 #pragma link C++ class I3TrackImpl<I3Stopping,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Contained,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>+;
 
 #pragma link C++ class I3BasicTrack+;
-#pragma link C++ class I3F2KTrack+;
-#pragma link C++ typedef I3F2KTrackPtr;
+#pragma link C++ class I3F2KRecoTrack+;
+#pragma link C++ typedef I3F2KRecoTrackPtr;
 #pragma link C++ class I3BasicMuon+;
 //#pragma link C++ class I3DecayingMuon+;
 #pragma link C++ class I3DoubleBang+;

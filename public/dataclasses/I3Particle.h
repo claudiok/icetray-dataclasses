@@ -9,10 +9,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.5 2004/04/23 21:10:25 deyoung Exp $
+ * $Id: I3Particle.h,v 1.6 2004/04/25 20:40:27 ehrlich Exp $
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/23 21:10:25 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/04/25 20:40:27 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -89,7 +89,7 @@ public:
     /** 
      * gets the unique ID number of the particle
      */ 
-    virtual Ushort_t ParticleNumber() const
+    virtual Int_t ParticleNumber() const
     {
 	return fID;
     };

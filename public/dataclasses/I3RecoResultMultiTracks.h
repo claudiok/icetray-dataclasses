@@ -5,13 +5,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultMultiTracks.h,v 1.1 2004/04/23 19:16:10 ehrlich Exp $
+ * $Id: I3RecoResultMultiTracks.h,v 1.2 2004/04/25 20:40:27 ehrlich Exp $
  *
- * A reco result which spits out several tracks expected to be in the event
+ * Reco results with more than one track
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/04/23 19:16:10 $
- * @author pretz
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/25 20:40:27 $
+ * @author ehrlich
  *
  * @todo 
  *
