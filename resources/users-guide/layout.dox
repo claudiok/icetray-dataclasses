@@ -31,10 +31,15 @@
    truth --  is found in the @c I3Event class.  More information can
    be found at @ref event.  Geometry information is found in its own
    stream, however, because it is basically static and need not be
-   copied separately to every frame; more information is at 
-   @ref geometry.   Similarly, monitor information,
+   copied separately to every frame; more information 
+<!-- is at @ref geometry.   -->
+   about geometry information will be added soon.
+   Similarly, monitor information,
    including OM calibration information, will be stored in a separate
-   branch or branches, as described at @ref monitor.
+   branch or branches, 
+<!-- as described at @ref monitor. -->
+   which will be added as information about the monitoring systems
+   becomes available.
 
    @section event The Event
 

@@ -91,7 +91,7 @@
    @c RecoResultMultiTracks is a vector of particle pointers, rather
    than a single pointer.  It is intended to hold reconstructions
    which interpret the event as the result of several independent
-   tracks or groups of tracks (see @ref composite-tracks for a
+   tracks or groups of tracks (see @ref composite_tracks for a
    discussion of groups of tracks).  An example of a fit that should
    used this class is one which finds simultaneous muons
    from independent air showers.
