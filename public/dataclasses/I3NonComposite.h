@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonComposite.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3NonComposite.h,v 1.9 2004/08/31 12:35:51 pretz Exp $
  *
  * @file I3NonComposite.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/08/31 12:35:51 $
  * @author pretz
  */
 #ifndef I3NONCOMPOSITE_H
@@ -42,6 +42,11 @@ class I3NonComposite
    * Doesn't do anything since there's no data to copy.
    */
   void CopyTo(I3Particle& destination) const {}
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Constituent particles: NonComposite\n";
+    }
 
  private:
   //ROOT macro

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.10 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3TrackImpl.h,v 1.11 2004/08/31 12:35:51 pretz Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/08/31 12:35:51 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -136,6 +136,14 @@ class I3TrackImpl : public I3Track,
       GeometricalType::CopyTo(destination);
       EnergeticType::CopyTo(destination);
       CompositeType::CopyTo(destination);
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      I3Track::ToStream(o);
+      GeometricalType::ToStream(o);
+      EnergeticType::ToStream(o);
+      CompositeType::ToStream(o);
     }
 
  protected:

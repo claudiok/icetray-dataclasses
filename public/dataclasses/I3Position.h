@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.12 2004/08/12 17:33:33 pretz Exp $
+ * $Id: I3Position.h,v 1.13 2004/08/31 12:35:51 pretz Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/08/12 17:33:33 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/08/31 12:35:51 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.12 2004/08/12 17:33:33 pretz Exp $
+// $Id: I3Position.h,v 1.13 2004/08/31 12:35:51 pretz Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -24,6 +24,7 @@ using namespace std;
 
 #include "TObject.h"
 #include "StoragePolicy.h"
+#include <sstream>
 
 /**
  * @brief The basic position class for IceCube. 
@@ -108,7 +109,7 @@ class I3Position : public TObject
    * Provide R of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetR() {
+  Double_t GetR() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fR;
   }
@@ -117,7 +118,7 @@ class I3Position : public TObject
    * Provide Theta of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetTheta() {
+  Double_t GetTheta() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fTheta;
   }
@@ -126,7 +127,7 @@ class I3Position : public TObject
    * Provide Phi of position in spherical or cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetPhi() {
+  Double_t GetPhi() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fPhi;
   }
@@ -135,7 +136,7 @@ class I3Position : public TObject
    * Provide Rho of position in cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetRho() {
+  Double_t GetRho() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fRho;
   }
@@ -194,9 +195,19 @@ class I3Position : public TObject
   Double_t CalcDistance(const I3Position& p) const;
 
   /**
-   * Print out all information about the I3Position
+   * Print out all information about the I3Position to the given ostream
    */
-  void PrintPosition();
+  virtual void ToStream(ostream& o) const;
+
+  /**
+   * dump the I3Position to a std::string
+   */
+  string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
   
  protected:
   /**
@@ -207,26 +218,35 @@ class I3Position : public TObject
   /**
    * spherical (sph)
    */
-  Double_t fR, fTheta, fPhi;  
+  mutable Double_t fR, fTheta, fPhi;  
 
   /**
    * cylindrical (cyl) - Z and Phi are same.
    */
-  Double_t fRho;
+  mutable Double_t fRho;
 
   /**
    * Did we calculate the positions before?
    */
-  Bool_t IsCalculated; 
+  mutable Bool_t IsCalculated; 
 
  private:
-  void CalcSphCylFromCar();
+  void CalcSphCylFromCar() const;
   void CalcCarCylFromSph();
   void CalcCarSphFromCyl();
 
   // ROOT macro
   ClassDef(I3Position,1)
 };
+
+/**
+ * for streaming to an ostream
+ */
+inline ostream& operator<<(ostream& o,const I3Position& pos)
+{
+  pos.ToStream(o);
+  return o;
+}
 
 /**
  * pointer type to insulate users from memory management

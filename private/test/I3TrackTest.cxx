@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackTest.cxx,v 1.4 2004/08/16 15:48:50 dule Exp $
+    $Id: I3TrackTest.cxx,v 1.5 2004/08/31 12:35:51 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/08/16 15:48:50 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/08/31 12:35:51 $
     @author Troy D. Straszheim
 
     @todo
@@ -63,7 +63,7 @@ namespace tut
     track.SetAzimuth(0);   // arbitrary for downward going...
     track.SetLength(2);    // track goes only down to the x-y plane
 
-    cout <<"p:"<<endl; p.PrintPosition();
+    cout <<"p:"<<p<<endl;
     //cout <<"track:"<<endl; track.PrintTrack();
 
     cout <<"Calculating track's stop position..."<<endl;

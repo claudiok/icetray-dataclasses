@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Energetic.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Energetic.h,v 1.6 2004/08/31 12:35:51 pretz Exp $
  *
  * @file I3Energetic.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/31 12:35:51 $
  * @author pretz
  */
 #ifndef I3ENERGETIC_H
@@ -48,6 +48,11 @@ class I3Energetic
 	{
 	  energetic->fEnergy = fEnergy;
 	}
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Energy:"<<fEnergy<<"\n";
     }
 
  private:

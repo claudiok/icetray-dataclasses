@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.9 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3Infinite.h,v 1.10 2004/08/31 12:35:51 pretz Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/31 12:35:51 $
  * @author 
  */
 
@@ -111,6 +111,12 @@ class I3Infinite{
 	infinite->fZenith = fZenith;
 	infinite->fAzimuth = fAzimuth;
       }
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Position: "<<fPos<<"\n"
+       <<"Zenith: "<<fZenith<<" Azimuth:"<<fAzimuth<<"\n";
     }
 
   private:

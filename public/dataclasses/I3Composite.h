@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.9 2004/08/14 16:41:16 pretz Exp $
+ * $Id: I3Composite.h,v 1.10 2004/08/31 12:35:51 pretz Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/08/14 16:41:16 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/31 12:35:51 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -61,6 +61,16 @@ class I3Composite
       if(composite)
 	{
 	  composite->fConstituents = fConstituents;
+	}
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Consituents: \n";
+      I3ParticleMultiMap::const_iterator iter;
+      for(iter= fConstituents.begin() ; iter!= fConstituents.end() ; iter++)
+	{
+	  o<<iter->first<<" "<<iter->second<<"\n";
 	}
     }
  private:

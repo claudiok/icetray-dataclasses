@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.7 2004/08/13 20:28:01 dule Exp $
+// $Id: I3Position.cxx,v 1.8 2004/08/31 12:35:50 pretz Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -157,19 +157,19 @@ Double_t I3Position::CalcDistance(const I3Position& p) const
 }
 
 //-----------------------------------------------------------
-void I3Position::PrintPosition()
+void I3Position::ToStream(ostream& o) const
 {
-  cout <<"---------------------POSITION-INFO-----------------------"<<endl;
-  cout <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<endl;
-  cout <<"SPH coord (r,theta,phi): "<< GetR()<<" "<<GetTheta()<<" "<<GetPhi()<<endl;
-  cout <<"CYL coord (rho,phi,z): "<< GetRho()<<" "<<GetPhi()<<" "<<GetZ()<<endl;
-  cout <<"---------------------------------------------------------"<<endl;
+  o <<"---------------------POSITION-INFO-----------------------\n"
+    <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
+    <<"SPH coord (r,theta,phi): "<< GetR()<<" "<<GetTheta()<<" "<<GetPhi()<<"\n"
+    <<"CYL coord (rho,phi,z): "<< GetRho()<<" "<<GetPhi()<<" "<<GetZ()<<"\n"
+    <<"---------------------------------------------------------\n";
 }
 
 //-----------------------------------------------------------
 
 //-----------------------------------------------------------
-void I3Position::CalcSphCylFromCar()
+void I3Position::CalcSphCylFromCar() const
 {
   // Calculate Spherical and Cylindrical coordinates from Cartesian
   // Position is stored on disk in Cartesian coordinates only

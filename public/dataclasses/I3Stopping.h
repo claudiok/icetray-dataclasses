@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.9 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3Stopping.h,v 1.10 2004/08/31 12:35:51 pretz Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/31 12:35:51 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -129,6 +129,14 @@ class I3Stopping{
 	stopping->fZenith = fZenith;
 	stopping->fAzimuth = fAzimuth;
       }
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Stopping Position: "<<fStopPos
+       <<"Stopping Time: "<<fStopT<<"\n"
+       <<"Zenith:"<<fZenith
+       <<" Azimuth:"<<fAzimuth<<"\n";
     }
  private:
   // ROOT macro
