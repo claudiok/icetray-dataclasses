@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.10 2004/08/31 14:08:58 pretz Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.11 2004/11/18 21:55:49 ehrlich Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/31 14:08:58 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/11/18 21:55:49 $
  * @author pretz
  */
 
@@ -32,7 +32,7 @@ using namespace std;
 class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 {
   map<string,Double_t> fParameters;
-  vector<Int_t> fUsedTubes;
+  vector<UShort_t> fUsedHits;
   string fFitName;
 
   public:
@@ -71,12 +71,12 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
   /**
    * @return tubes used by this fit as a const object
    */
-  const vector<Int_t>& GetUsedTubes() const {return fUsedTubes;}
+  const vector<UShort_t>& GetUsedHits() const {return fUsedHits;}
 
   /**
    * @return the tubes used by this fit as a non-const object
    */
-  vector<Int_t>& GetUsedTubes() {return fUsedTubes;}
+  vector<UShort_t>& GetUsedHits() {return fUsedHits;}
 
   virtual void ToStream(ostream& o) const
     {
@@ -89,13 +89,13 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 	{
 	  o<<params->first<<": "<<params->second<<"\n";
 	}
-      o<<"Used Tubes:\n";
-      vector<Int_t>::const_iterator tubes;
-      for(tubes = fUsedTubes.begin();
-	  tubes != fUsedTubes.end();
-	  tubes++)
+      o<<"Used Hits:\n";
+      vector<UShort_t>::const_iterator hits;
+      for(hits = fUsedHits.begin();
+	  hits != fUsedHits.end();
+	  hits++)
 	{
-	  o<<*tubes<<" ";
+	  o<<*hits<<" ";
 	}
       o<<"\n";
 	

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.7 2004/09/14 14:14:26 deyoung Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.8 2004/11/18 21:55:49 ehrlich Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/09/14 14:14:26 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/11/18 21:55:49 $
  * @author pretz
  *
  */
@@ -32,6 +32,7 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout {
  
     vector<Double_t> fLEs;
     vector<Double_t> fTOTs;
+    vector<UShort_t> fHitNumbers;
     Double_t fAmp;
  
 public:
@@ -73,6 +74,16 @@ public:
      * @return the list of TOTs as a non-const object
      */
     vector<Double_t>& GetTOTs() {return fTOTs;}
+    
+    /**
+     * @return the list of TOTs as const object
+     */
+    const vector<UShort_t>& GetHitNumbers() const {return fHitNumbers;}
+    
+    /**
+     * @return the list of TOTs as a non-const object
+     */
+    vector<UShort_t>& GetHitNumbers() {return fHitNumbers;}
     
     /**
      * @return the amplitude
