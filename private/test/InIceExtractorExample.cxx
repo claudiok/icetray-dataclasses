@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.3 2004/07/03 18:40:58 troy Exp $
+    $Id: InIceExtractorExample.cxx,v 1.4 2004/07/03 19:39:20 pretz Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/07/03 18:40:58 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/07/03 19:39:20 $
     @author Troy D. Straszheim
 
     @todo
@@ -110,7 +110,6 @@ namespace tut
     for (int i=0; i<6; i++) {
       geometry.push_back(new I3OMGeoAmanda);
       geometry.push_back(new I3OMGeoIcecube);
-      geometry.push_back(new I3OMGeo);
     }
 
     // loop through this geometry (from begin() to end()) and print

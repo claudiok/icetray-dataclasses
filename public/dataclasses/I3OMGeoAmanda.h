@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAmanda.h,v 1.10 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3OMGeoAmanda.h,v 1.11 2004/07/03 19:39:20 pretz Exp $
  *
  * @file I3OMGeoAmanda.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/07/03 19:39:20 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -40,6 +40,11 @@ class I3OMGeoAmanda : public I3OMGeo
    * destructor
    */
   virtual ~I3OMGeoAmanda(){}
+
+  /**
+   * Identifies this OM as an AMANDA OM
+   */
+  virtual EOMType GetOMType() { return AMANDA;}
 
   /**
    * assignment is just member-wise assignment

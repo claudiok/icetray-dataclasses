@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIcecube.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3OMGeoIcecube.h,v 1.9 2004/07/03 19:39:20 pretz Exp $
  *
  * @file I3OMGeoIcecube.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/03 19:39:20 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,6 +21,7 @@
  * @brief This is the IceCube specialization of the OMGeometry.  
  * 
  * The stuff that an IceCube DOM has that an AMANDA OM doesn't
+ * @todo can the iam() method go away? -J.Pretz
  */
 
 class I3OMGeoIcecube : public I3OMGeo
@@ -49,6 +50,11 @@ class I3OMGeoIcecube : public I3OMGeo
     I3OMGeo::operator=(rhs);
     return *this;
   }
+
+  /**
+   * identifies this OM as an IceCube om
+   */
+  virtual EOMType GetOMType() { return IceCube;}
 
   // for testing
   virtual std::string iam() { return "I3OMGeoIcecube"; }

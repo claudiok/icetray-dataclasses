@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.17 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.18 2004/07/03 19:39:20 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/07/03 19:39:20 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -28,6 +28,7 @@ class I3OMGeo : public TObject
 {
  public:
   enum EOrientation {Unspecified,Up,Down};
+  enum EOMType {AMANDA,IceCube};
 
  protected:
   UShort_t fOMNumber;
@@ -70,6 +71,11 @@ class I3OMGeo : public TObject
     fArea = rhs.fArea;    
     return *this;
   }
+
+  /**
+   * @return the identity of this OM, either AMANDA or IceCube 
+   */
+  virtual EOMType GetOMType() =0;
 
   /**
    * @return the number of this optical module
