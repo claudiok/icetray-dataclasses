@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3InIceCalibration.h,v 1.2 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3InIceCalibration.h,v 1.3 2005/02/07 17:21:00 tmccauley Exp $
  *
  * @file I3InIceCalibration.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/02/07 17:21:00 $
  * @author tmccauley
  */
 
@@ -19,7 +19,6 @@
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/I3DataExecution.h"
-
 #include "dataclasses/I3DOMCalibration.h"
 
 #include <map>
@@ -36,10 +35,37 @@ public:
 	{};
     
     virtual void ToStream(ostream& o) const
-	{};
+	{
+	    o<<"[ I3InIceCalibration: \n";
+
+	    I3InIceCalibration::const_iterator iter;
+	    
+	    for( iter = begin();
+		 iter != end();
+		 iter++ )
+	    {
+		o<<iter->first;
+		
+		if( iter->second == I3DOMCalibPtr((I3DOMCalibration*)0) )
+		{
+		    o<<"Null I3DOMCalibration";
+		}
+		
+		else
+		{
+		    o<<*(iter->second);
+		}
+	    
+		o<<"]\n";
+	    }
+	};
     
     virtual string ToString() const
-	{ return "FIXME"; }
+	{  
+	    ostringstream out;
+	    ToStream(out);
+	    return out.str(); 
+	};
     
     // NOTE: fix this later
     //I3InIceCalibration(const I3InIceCalibration& calibration);
@@ -47,6 +73,15 @@ public:
     
     ClassDef(I3InIceCalibration,1);    
 };
+
+/**
+ * streaming operator
+ */
+inline ostream& operator<<(ostream& o,const I3InIceCalibration& v)
+{
+    v.ToStream(o);
+    return o;
+}
 
 typedef PtrPolicy<I3InIceCalibration>::ThePolicy I3InIceCalibPtr;
 

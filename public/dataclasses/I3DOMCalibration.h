@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.7 2004/12/02 23:24:38 dima Exp $
+ * $Id: I3DOMCalibration.h,v 1.8 2005/02/07 17:21:00 tmccauley Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/12/02 23:24:38 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/02/07 17:21:00 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -17,6 +17,7 @@
 #include "dataclasses/StoragePolicy.h"
 
 #include <map>
+#include <sstream>
 #include <TObject.h>
 
 using namespace std;
@@ -212,6 +213,20 @@ public:
     void SetSamplingRate(Int_t id, Double_t rate);
     
     Double_t GetSamplingRate(Int_t id);
+
+    virtual void ToStream(ostream& o) const
+    {
+	o<<"[ "
+	 <<"Fill me with information"
+	 <<" ]\n";
+    };
+
+    virtual string ToString() const
+    {
+	ostringstream out;
+	ToStream(out);
+	return out.str();
+    };
     
 private:
     // Simple data types
@@ -258,6 +273,15 @@ private:
     // ROOT macro
     ClassDef(I3DOMCalibration,1);
 };
+
+/**
+ * streams an I3DOMCalibration to an arbitrary ostream
+ */
+inline ostream& operator<<(ostream& o, const I3DOMCalibration& c)
+{
+    c.ToStream(o); 
+    return o;
+}
 
 typedef PtrPolicy<I3DOMCalibration>::ThePolicy I3DOMCalibPtr;
 

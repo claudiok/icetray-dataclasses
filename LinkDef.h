@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.145 2005/01/31 19:10:24 pretz Exp $
-// $Revision: 1.145 $
-// $Date: 2005/01/31 19:10:24 $
+// $Id: LinkDef.h,v 1.146 2005/02/07 17:21:00 tmccauley Exp $
+// $Revision: 1.146 $
+// $Date: 2005/02/07 17:21:00 $
 //
 
 #ifdef __CINT__
@@ -370,6 +370,10 @@
 #pragma link C++ class I3GeometryHeader+;
 #pragma link C++ typedef I3GeometryHeaderPtr;
 #pragma link C++ class roost::shared_ptr<I3GeometryHeader>+;
+
+#pragma link C++ class I3CalibrationHeader+;
+#pragma link C++ typedef I3CalibrationHeaderPtr;
+#pragma link C++ class roost::shared_ptr<I3CalibrationHeader>+;
 
 #pragma link C++ class I3Hit+;
 #pragma link C++ typedef I3HitPtr;
