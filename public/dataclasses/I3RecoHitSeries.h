@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.27 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.28 2005/04/02 20:32:04 troy Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.27 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.28 $
+ * @date $Date: 2005/04/02 20:32:04 $
  * @author ehrlich
  * @author pretz
  */
@@ -77,6 +77,17 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
   // copy and assignment are private:
   I3RecoHitSeries (const I3RecoHitSeries& rhs);
   const I3RecoHitSeries& operator= (const I3RecoHitSeries&);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3RecoHitSeries", 
+		  base_object< VectorPolicy<I3RecoHitPtr>::ThePolicy >(*this));
+  }
+
+
 
   // ROOT macro
   ClassDef(I3RecoHitSeries,1);

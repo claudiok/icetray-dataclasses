@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.4 2004/10/27 23:09:40 spencer Exp $
+ * $Id: I3RecoHitSeriesDict.h,v 1.5 2005/04/02 20:32:04 troy Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/10/27 23:09:40 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/02 20:32:04 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -69,6 +69,17 @@ class I3RecoHitSeriesDict : public TObject,
 /*   // copy and assignment are private */
   I3RecoHitSeriesDict(const I3RecoHitSeriesDict& rhs);
   const I3RecoHitSeriesDict& operator=(const I3RecoHitSeriesDict&);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3RecoHitSeriesDict", 
+		  base_object< MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy >(*this));
+  }
+
+
 
   // ROOT macro
   ClassDef(I3RecoHitSeriesDict,1);

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.10 2004/11/10 20:24:15 dule Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.11 2005/04/02 20:32:04 troy Exp $
 
     @file STLVectorStoragePolicy.h
-    @version $Revision: 1.10 $
-    @date $Date: 2004/11/10 20:24:15 $
+    @version $Revision: 1.11 $
+    @date $Date: 2005/04/02 20:32:04 $
     @author Troy Straszheim
 */
 #ifndef STLVECTOR_POLICY_INCLUDED
@@ -66,6 +66,15 @@ class STLVectorStoragePolicy  {
 
  private:
   vector_type vector_; //||
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("vector", vector_);
+  }
+
 
  public:
 

@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.20 2005/03/31 17:49:33 troy Exp $
-    @version $Revision: 1.20 $
-    @date $Date: 2005/03/31 17:49:33 $
+    $Id: StoragePolicy.h,v 1.21 2005/04/02 20:32:04 troy Exp $
+    @version $Revision: 1.21 $
+    @date $Date: 2005/04/02 20:32:04 $
 
     @author troy d. straszheim
 */
@@ -14,6 +14,20 @@
 #include "TObject.h"
 
 #include "dataclasses/copy_if.h"
+
+namespace boost 
+{
+  namespace serialization 
+  {
+    class access;
+    template <class T> struct nvp;
+    template <class T> nvp<T> make_nvp(const char* name, T& t);
+#ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
+    template <class Base, class Derived, class Retval>
+      Retval base_object(Derived &d);
+#endif
+  }
+}
 
 #include "STLVectorStoragePolicy.h"
 #include "STLMapStoragePolicy.h"
@@ -79,14 +93,6 @@ struct PtrPolicy
 };
 
 template <class Stored>
-/**
- * @brief The storage policy for vectors of objects.
- *
- * The existence of this VectorPolicy class allows classes to inherit
- * from VectorPolicy<>::ThePolicy.  That policy's implementation can change -
- * provided the new implementation supplies the same interface - just by
- * changing this VectorPolicy class.  That's what it is here for.
- */
 struct VectorPolicy {
   /**
    *  ThePolicy is an STLVectorStoragePolicy

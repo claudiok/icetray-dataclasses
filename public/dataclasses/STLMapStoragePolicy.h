@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.20 2005/04/02 17:50:11 olivas Exp $
+    $Id: STLMapStoragePolicy.h,v 1.21 2005/04/02 20:32:04 troy Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.20 $
-    @date $Date: 2005/04/02 17:50:11 $
+    @version $Revision: 1.21 $
+    @date $Date: 2005/04/02 20:32:04 $
     @author Troy Straszheim
 
 */
@@ -19,19 +19,6 @@
 
 using namespace std;
 
-namespace boost 
-{
-  namespace serialization 
-  {
-    class access;
-    template <class T> struct nvp;
-    template <class T> nvp<T> make_nvp(const char* name, T& t);
-#ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
-    template <class Base, class Derived, class Retval>
-      Retval base_object(Derived &d);
-#endif
-  }
-}
 
 /**
  * @brief A template which provides a restricted interface to the
@@ -44,7 +31,8 @@ namespace boost
  * @todo fuller documentation needed
  */
 template <class KeyType, class ElementType>
-class STLMapStoragePolicy {
+class STLMapStoragePolicy 
+{
 
  public:
 
@@ -269,7 +257,7 @@ class STLMapStoragePolicy {
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & map_;
+    ar & make_nvp("map", map_);
   }
 
 };
