@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.8 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3CascadeImpl.h,v 1.9 2004/08/02 17:24:22 dule Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/08/02 17:24:22 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -64,21 +64,6 @@ class I3CascadeImpl : public I3Cascade,
    * whether X(), Y(), Z() and T() are legitimate to call
    */
   virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
-
-  /**
-   * the X position of the cascade
-   */
-  //  virtual Double_t GetX() const {return LocalizableType::GetX();}
-
-  /**
-   * the Y position of the cascade
-   */
-  //  virtual Double_t GetY() const {return LocalizableType::GetY();}
-
-  /**
-   * the Z position of the cascade
-   */
-  //  virtual Double_t GetZ() const {return LocalizableType::GetZ();}
 
   /**
    * the time of the cascade

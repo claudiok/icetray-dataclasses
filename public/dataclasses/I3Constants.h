@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Constants.h,v 1.5 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3Constants.h,v 1.6 2004/08/02 17:24:22 dule Exp $
  *
  * @file I3Constants.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/02 17:24:22 $
  * @author pretz
  */
 
@@ -42,8 +42,9 @@ namespace I3Constants
 
   /**
    * Z-coordinate of IceTop (Origin Depth)
+   * @todo This number needs to be checked and decided upon... It's wrong.
    */
-  static const Double_t zIceTop = 29000*I3Units::feet;
+  static const Double_t zIceTop = 2900*I3Units::feet;
 };
 
 #endif
