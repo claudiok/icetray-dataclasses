@@ -21,7 +21,7 @@ class I3OMResponse : public TObject
 
   public:
   I3OMResponse() { omnumber = 0; geometry = 0;}
-  ~I3OMResponse();
+  virtual ~I3OMResponse() {;}
 
   unsigned short OMNumber() const { return omnumber; }
   void           OMNumber(unsigned short omnumber_) { omnumber = omnumber_; }

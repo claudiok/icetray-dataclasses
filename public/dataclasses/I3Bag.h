@@ -4,7 +4,7 @@
 /**
  * Class: I3Bag
  *
- * Version: $Id: I3Bag.h,v 1.4 2004/01/30 18:03:32 ehrlich Exp $
+ * Version: $Id: I3Bag.h,v 1.5 2004/02/16 19:20:22 troy Exp $
  *
  * Date: 30 Jan 2004
  *
@@ -22,7 +22,7 @@
  * stuff that  doesn't really fit into the Data structure.  Just for 
  * 'temporary' or 'personal' use.
  */
-class I3Bag : public TObject{
+class I3Bag : public TObject {
  public:
   I3Bag();
   virtual ~I3Bag();
@@ -48,7 +48,6 @@ class I3Bag : public TObject{
  private:
   TMap* fMap;
   ClassDef(I3Bag,1);
-
 };
 
 #endif //I3BAG_H
