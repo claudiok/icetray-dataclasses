@@ -1,15 +1,20 @@
 /**
-   @mainpage IceCube Dataclasses User's Guide and Tutorials
+   @mainpage IceCube Dataclasses User's Guide and Documentation
 
-   This document is a user's guide to the classes used
-   to represent and store the event data of IceCube.
+   This is documentation of and a user's guide for the C++ classes used
+   to represent and store the event data of the IceCube neutrino detector.
 
    This guide is primarily intended for IceCube software developers who want
-   to understand the layout and mechanics of these classes.  To this end there
-   are several examples and tutorials each using different aspects of the 
+   to interact the C++ representation of the IceCube event data.  To this end 
+   there
+   are several examples each using different aspects of the 
    classes.  Unfortunately some of these examples have been broken by
    the latest changes to the code -- the decision was made to go ahead
-   and release the code now and fix the examples later.
+   and release the code now and fix the examples soon.
+
+   By looking at these webpages, you will gain an understanding of how
+   to use these C++ classes in your software.
+
 
 <!-- Not needed, since we will generate it along with this page
    You may also find the automatically generated 
