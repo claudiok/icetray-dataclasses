@@ -4,7 +4,7 @@
 /**
  * Class: I3Bag
  *
- * Version: $Id: I3Bag.h,v 1.6 2004/02/23 17:14:19 pretz Exp $
+ * Version: $Id: I3Bag.h,v 1.7 2004/02/24 18:02:08 troy Exp $
  *
  * Date: 30 Jan 2004
  *
@@ -29,7 +29,6 @@ class I3Bag : public MapPolicy<TObjectPtr>::ThePolicy
   I3Bag();
   virtual ~I3Bag();
 
- private:
   ClassDef(I3Bag,1);
 };
 
