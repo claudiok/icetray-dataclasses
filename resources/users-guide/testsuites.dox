@@ -3,6 +3,8 @@
 
 @author troy d. straszheim <troy@resophonic.com>
 
+@section general Test suites in general
+
 The best way to verify the correctness of an implementation is to
 fully exercise all functionality with an independent implementation.
 "Thorough" means: a run of the test suite to completion without error
@@ -20,17 +22,42 @@ A test suite should run to completion in a reasonable amount of
 time. An unsuccessful test should dump core by calling ensure() or
 fail().
 
-The home page for "TUT", the framework we are using, is
-http://tut-framework.sourceforge.net.
+Test suites should exercise the interface of a class in all normal
+and all borderline cases.  They should demonstrate everything that
+it is possible to do with a class and demonstrate that a class
+behaves reasonably when misused.
 
-The source for the unit tests are located in @c
+@subsection asdocs Test suites as documentation and insurance
+
+Test suites serve several additonal purposes.  They allow people other
+than the original authors to fix bugs in modules with confidence that
+they have not introduced additional bugs.  They serve as excellent
+documentation for how to use modules as well:  if a testsuite is
+thorough it gives the interface of a module a thorough workout, and
+therefore should demonstrate all possible uses and borderline use
+cases, which can be an excellent reference if you are trying to
+figure out how to use the class yourself.
+
+Time invested in writing test suites is time well invested.
+
+@section indataclasses  Test suites in the dataclasses
+
+This document shows first how to add your own test module to the
+dataclasses and how to run them, and then how to add testsuites to
+your own project.
+
+The source for the dataclasses unit tests are located in @c
 dataclasses/private/test.  As of this writing, the test suites are not
-yet finished.  [TODO!]  We will look at @c I3HitTest.cxx, a test suite
+yet finished.  
+@todo Add more tests, better ones.
+
+We will look at @c I3HitTest.cxx, a test suite
 for the fairly trivial class @c I3Hit.  As a consequence, the tests
 themselves are also quite trivial and therefore not a good example of
 the desired rigor, but this example makes it easy to see what one must
-modify in order to create one's own test suites.
+do in order to create one's own test suites.
 
+@todo add examples of tests with the desired rigor.
 
 Here is the definition of @c I3HIt:
 
@@ -39,18 +66,21 @@ Here is the definition of @c I3HIt:
 @until ClassDef
 @until };
 
-Now we will walk through <tt> dataclasses/private/test/I3HitTest.cxx </tt> and
-see how a test suite is constructed.  The discussion is intended to
-make it easy to follow along and create your own along the way.  Let's
-take @c MyClass to denote the class for which you are constructing a test
-suite.
+Now we will walk through <tt> dataclasses/private/test/I3HitTest.cxx
+</tt> and see how a test suite is constructed.  The discussion is
+intended to make it easy to follow along and create your own along the
+way, and the file itself @c I3HitTest.cxx is very heavily commented so
+that you can later copy it to your project and easily accomplish the
+customization.  Let's take @c MyClass to denote the class for which
+you are constructing a test suite.
 
 @dontinclude I3HitTest.cxx.example
 @until using
 
 First we include the various header files, including that of our
 class.  Change <tt> dataclasses/I3Hit.h </tt> to 
-<tt> dataclasses/I3MyClass.h.</tt>
+<tt> dataclasses/I3MyClass.h.</tt>  (When you later add testsuites to
+your own project, this will of course be @c yproject/MyModule.h)
 
 @until };
 
@@ -125,23 +155,20 @@ necessary.  TODO: explain why in more detail.
 
 A call to @c fail fails unconditionally with a message.
 
-
-
 @section running Running the test suites
 
-Building the dataclasses also builds a program called
-<tt>runtests</tt> in @c the directory @c <architecture>/bin directory
-of your workspace.  For most linux users this will be @c
-Linux-i386/bin/runtests.  This program contains all the @c object::test<n>()
-routines from all of the test moduless in the @c private/test
-directory.
+Building the dataclasses also builds a test driver program called @c
+dataclasses-test in the @c Linux-i386/bin directory of your workspace.
+(change Linux-i386 to fit your architecture).
+This program contains all the @c object::test<n>() routines from all
+of the test moduless in the @c private/test directory.
 
 Running this program without arguments displays some friendly help:
 
 @verbatim
-host% Linux-i386/bin/runtests 
+host% Linux-i386/bin/dataclasses-test
 dataclasses test application.
-Usage: Linux-i386/bin/runtests list|all|testgroup [testnumber]
+Usage: Linux-i386/bin/dataclasses-test list|all|testgroup [testnumber]
        list: List all groups
        all: Run all tests
        testgroup [testnumber]: Run entire test group,
@@ -151,7 +178,7 @@ Usage: Linux-i386/bin/runtests list|all|testgroup [testnumber]
 Listing the test groups looks like this:
 
 @verbatim
-30% Linux-i386/bin/runtests list
+30% Linux-i386/bin/dataclasses-test list
 registered test groups:
   I3Hit
   I3MCHit
@@ -162,22 +189,64 @@ registered test groups:
 You can run one particular test group by specifying it on the command line:
 
 @verbatim
-31% Linux-i386/bin/runtests I3Hit
+31% Linux-i386/bin/dataclasses-test I3Hit
 
 I3Hit: ......
 
 tests summary: ok:6
 @endverbatim
 
-You can run all tests with <tt> runtests all </tt>, or specify one particular routine (if, say, you are chasing some bug), by specifying its number:
+You can run all tests with <tt> dataclasses-test all </tt>, or specify one particular routine (if, say, you are chasing some bug), by specifying its number:
 
 @verbatim
-34% Linux-i386/bin/runtests I3Hit 4
+34% Linux-i386/bin/dataclasses-test I3Hit 4
 
 I3Hit: .
 
 tests summary: ok:1
 @endverbatim
+
+@section yourown Building testsuites for your own project
+
+You will want to build your own testsuites for your own projects.
+You can see the files in @c dataclasses for an example.  You can
+follow along here if you are anxious to start now or skip ahead and
+read "Test suites in the dataclasses" to see what is coming.  You may
+want to create a testsuite in the dataclasses itself before you add
+the datacalssd
+
+Your @c localDefns.mk should contain
+@verbatim
+USES_TOOLS += roost TUT
+DUMMY_TOOLS += roost TUT
+@endverbatim
+
+The important bit is the @c TUT.  If your project uses the @c
+dataclasses then it also uses @c roost, and so that should be there
+as well.
+
+Your @c project.mk should contain
+@verbatim
+CXX_BIN_NAMES := myproject-test
+@endverbatim
+where @em myproject is of course just the name of your project.  
+
+You will create a directory to hold the testsuites, @c
+myproject/private/test,  and in it you will put the driver program, 
+@c myproject-test.cxx, which should contain simply:
+@code
+#include "TUT/runtests.cxx"
+@endcode
+
+If you wish for some reason to customize the driver program, you can
+copy @c runtests.cxx from the TUT tool and customize it.  This isn't
+recommended, as soon we will need to run the test across all projects
+on a regular basis, and we need a consistent interface.
+
+Then copy the @c I3HitTest.cxx from the @c dataclasses/private/test
+directory into your @c private/test directory and customize as above.
+
+Then run @c ant and off you go.
 
 @section References
 
