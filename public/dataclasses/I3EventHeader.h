@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.9 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3EventHeader.h,v 1.10 2005/02/01 09:29:46 blaufuss Exp $
  *
  * @file I3EventHeader.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/02/01 09:29:46 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -31,6 +31,8 @@ using namespace std;
 class I3EventHeader : public I3DataHeader{
   ULong_t  fRunId;
   ULong_t  fEventId;
+  ULong_t  fRawStartTime;
+  ULong_t  fRawEndTime;
   
  public:
   /**
@@ -76,6 +78,30 @@ class I3EventHeader : public I3DataHeader{
    * @param eventid the new event id for the event
    */
   void SetEventID(ULong_t eventid) { fEventId = eventid; }
+
+  /**
+   * @param return the "Raw" daq event start time, in 0.1 ns counts.
+   *     will likely need to be converted to a usuable date/time
+   */
+
+  ULong_t GetRawStartTime() const { return fRawStartTime; }
+
+  /**
+   * @param set "Raw" daq event start time
+   */
+  void SetRawStartTime(ULong_t starttime) { fRawStartTime = starttime; }
+
+  /**
+   * @param return the "Raw" daq event end time, in 0.1 ns counts.
+   *     will likely need to be converted to a usuable date/time
+   */
+
+  ULong_t GetRawEndTime() const { return fRawEndTime; }
+
+  /**
+   * @param set "Raw" daq event end time
+   */
+  void SetRawEndTime(ULong_t endtime) { fRawEndTime = endtime; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"
