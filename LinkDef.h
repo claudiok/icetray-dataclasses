@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.129 2004/09/17 21:12:19 niessen Exp $
-// $Revision: 1.129 $
-// $Date: 2004/09/17 21:12:19 $
+// $Id: LinkDef.h,v 1.130 2004/10/24 13:58:50 pretz Exp $
+// $Revision: 1.130 $
+// $Date: 2004/10/24 13:58:50 $
 //
 
 #ifdef __CINT__
@@ -412,6 +412,14 @@
 #pragma link C++ class I3OMStatusIceCube+;
 #pragma link C++ typedef I3OMStatusIceCubePtr;
 #pragma link C++ class roost::shared_ptr<I3OMStatusIceCube>+;
+
+#pragma link C++ class I3OMSlr+;
+#pragma link C++ typedef I3OMSlrPtr;
+#pragma link C++ class roost::shared_ptr<I3OMSlr>+;
+
+#pragma link C++ class I3OMSlrList+;
+#pragma link C++ typedef I3OMSlrListPtr;
+#pragma link C++ class roost::shared_ptr<I3OMSlrList>+;
 
 #pragma link C++ class I3Particle+;
 #pragma link C++ typedef I3ParticlePtr;
