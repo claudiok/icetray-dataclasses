@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.12.2.6 2004/04/20 18:57:31 pretz Exp $
+    $Id: I3Track.cxx,v 1.12.2.7 2004/04/20 19:09:45 pretz Exp $
 
-    @version $Revision: 1.12.2.6 $
-    @date $Date: 2004/04/20 18:57:31 $
+    @version $Revision: 1.12.2.7 $
+    @date $Date: 2004/04/20 19:09:45 $
     @author
 
     @todo
@@ -21,14 +21,14 @@ I3Position I3Track::ClosestApproach(I3Position pos)
   return I3Position(NAN,NAN,NAN);
 }
 
-Double_t DistanceFromTrack(I3Position){return NAN;}
+Double_t I3Track::DistanceFromTrack(I3Position){return NAN;}
 
-I3Position ShiftAlongTrack(I3Position,Double_t)
+I3Position I3Track::ShiftAlongTrack(I3Position,Double_t)
 {
   return I3Position(NAN,NAN,NAN);
 }
 
-Bool_t IsOnTrack(I3Position)
+Bool_t I3Track::IsOnTrack(I3Position)
 {
   return kFALSE;
 }
