@@ -34,11 +34,11 @@ void I3Event::SetEventID(unsigned long eventid_) {eventid=eventid_;}
 void I3Event::SetTime(double time_)              {time=time_;}
 void I3Event::SetDay(unsigned long day_)         {day=day_;}
 
-bool I3Event::IsTriggerData() const    {return((triggerdata) ? true : false);}
-bool I3Event::IsFilterData() const     {return((filterdata) ? true : false);}
-bool I3Event::IsMCTrackData() const    {return((mctrackdata) ? true : false);}
-bool I3Event::IsOMResponseData() const {return((omresponsedata) ? true : false);}
-bool I3Event::IsRecoResultData() const {return((recoresultdata) ? true : false);}
+bool I3Event::HasTriggerData() const    {return((triggerdata) ? true : false);}
+bool I3Event::HasFilterData() const     {return((filterdata) ? true : false);}
+bool I3Event::HasMCTrackData() const    {return((mctrackdata) ? true : false);}
+bool I3Event::HasOMResponseData() const {return((omresponsedata) ? true : false);}
+bool I3Event::HasRecoResultData() const {return((recoresultdata) ? true : false);}
   
 I3TriggerData& I3Event::GetTriggerData() const    
 {

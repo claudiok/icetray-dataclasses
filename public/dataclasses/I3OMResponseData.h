@@ -16,12 +16,10 @@ class I3OMResponseData: public TObject
   virtual ~I3OMResponseData();
   
   int GetNumberOMResponses() const;
-  bool HasOMResponseNumber(unsigned short index) const;
+  bool HasOMResponseNumber(unsigned short omnumber) const;
   const I3OMResponse& GetOMResponse(unsigned short index) const;
-  const I3OMResponse& FindOMResponse(unsigned short om_number) const;
+  const I3OMResponse& FindOMResponse(unsigned short omnumber) const;
   void AddOMResponse(I3OMResponse* omresponse_);
- private:
-  const I3OMResponse* FindOMResponsePtr(unsigned short index) const;
   
   ClassDef(I3OMResponseData, 1);
 };

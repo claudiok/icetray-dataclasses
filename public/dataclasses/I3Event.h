@@ -38,11 +38,11 @@ class I3Event : public TObject
   void SetTime(double time_);
   void SetDay(unsigned long day_);
 
-  bool IsTriggerData() const;
-  bool IsFilterData() const;
-  bool IsMCTrackData() const;
-  bool IsOMResponseData() const;
-  bool IsRecoResultData() const;
+  bool HasTriggerData() const;
+  bool HasFilterData() const;
+  bool HasMCTrackData() const;
+  bool HasOMResponseData() const;
+  bool HasRecoResultData() const;
   
   I3TriggerData&    GetTriggerData() const;
   I3FilterData&     GetFilterData() const;

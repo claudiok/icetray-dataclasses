@@ -19,11 +19,16 @@ int I3OMResponseData::GetNumberOMResponses() const
   return((omresponse==NULL) ? 0 : omresponse->GetEntriesFast());
 }
 
-bool I3OMResponseData::HasOMResponseNumber(unsigned short index) const
+bool I3OMResponseData::HasOMResponseNumber(unsigned short omnumber) const
 {
-  if(FindOMResponsePtr(index))
-    return true;
-  return false;
+  short i_max=GetNumberOMResponses();
+  for(short i=0; i<i_max; i++)
+  {
+    I3OMResponse &h = *(I3OMResponse*)omresponse->At(i);
+    if (h.GetOMNumber()==omnumber) 
+      return(true);
+  }
+  return(false);
 }
   
 const I3OMResponse& I3OMResponseData::GetOMResponse(unsigned short index) const 
@@ -35,25 +40,17 @@ const I3OMResponse& I3OMResponseData::GetOMResponse(unsigned short index) const
   return *(I3OMResponse*)NULL;
 }
 
-const I3OMResponse& I3OMResponseData::FindOMResponse(unsigned short om_number) const
-{
-  const I3OMResponse* to_return = FindOMResponsePtr(om_number);
-  if(to_return)
-    return *to_return;
-  I3DataExecution::Instance().Fatal("I3OMResponseData::FindOMResponse() was asked for a OMResponse which doesn't exist");
-  return *(I3OMResponse*)0;
-}
-
-const I3OMResponse* I3OMResponseData::FindOMResponsePtr(unsigned short om_number) const 
+const I3OMResponse& I3OMResponseData::FindOMResponse(unsigned short omnumber) const 
 {
   short i_max=GetNumberOMResponses();
   for(short i=0; i<i_max; i++)
   {
-    I3OMResponse *h = (I3OMResponse*)omresponse->At(i);
-    if (h->GetOMNumber()==om_number) 
+    I3OMResponse &h = *(I3OMResponse*)omresponse->At(i);
+    if (h.GetOMNumber()==omnumber) 
       return(h);
   }
-  return 0;
+  I3DataExecution::Instance().Fatal("I3OMResponseData::FindOMResponse() was asked for a OMResponse which doesn't exist");
+  return *(I3OMResponse*)0;
 }
   
 void I3OMResponseData::AddOMResponse(I3OMResponse* omresponse_) 
