@@ -29,7 +29,7 @@ in an f2k file, perform this fit, and display the result in the event viewer.
 
 In glacier.lbl.gov development archive <i>(Not the production archive.)</i>
 the project is called <code>reco</code>.  So do:<br>
-<code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-def<br>
+<code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev<br>
 % cvs co reco<br></code>
 
 @section build Build
