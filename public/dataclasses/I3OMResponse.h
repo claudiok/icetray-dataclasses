@@ -9,6 +9,7 @@
 #include "I3MCHitSeries.h"
 #include "I3DatareadoutList.h"
 #include "I3RecoHitSeriesData.h"
+#include "dataclasses/I3Iterator.h"
 
 class I3OMResponse : public TObject
 {
@@ -39,6 +40,9 @@ class I3OMResponse : public TObject
   void  SetMCHitSeries(I3MCHitSeries* mchitseries_);
   void  SetDatareadoutList(I3DatareadoutList* datareadoutlist_);
   void  SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_);
+  I3Iterator<const I3MCHitSeries>* MakeMCHitSeriesIterator();
+  I3Iterator<const I3DatareadoutList>* MakeDatareadoutListIterator();
+  I3Iterator<const I3RecoHitSeriesData>* MakeRecoHitSeriesDataIterator();
 
   ClassDef(I3OMResponse,1);
 };

@@ -4,6 +4,7 @@
 #include <TObject.h>
 #include <TObjArray.h>
 #include "I3RecoTrackList.h"
+#include "dataclasses/I3Iterator.h"
 
 class I3RecoResult : public TObject
 {
@@ -17,13 +18,14 @@ class I3RecoResult : public TObject
 
   const char* GetRecomethod() const;
 
-  int                    GetNumberRecoTrackLists() const;
+  int GetNumberRecoTrackLists() const;
   const I3RecoTrackList& GetRecoTrackList(unsigned short index) const;
-  void                   AddRecoTrackList(I3RecoTrackList* recotracklist_);
+  void AddRecoTrackList(I3RecoTrackList* recotracklist_);
+  I3Iterator<const I3RecoTrackList>* MakeRecoTrackListIterator();
 
-  bool                   HasBestRecoTrackList() const;
+  bool HasBestRecoTrackList() const;
   const I3RecoTrackList& GetBestRecoTrackList() const;
-  void                   SetBestRecoTrackList(I3RecoTrackList* bestrecotracklist_);
+  void SetBestRecoTrackList(I3RecoTrackList* bestrecotracklist_);
 
   ClassDef(I3RecoResult, 1);
 };

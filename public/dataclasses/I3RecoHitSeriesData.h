@@ -5,6 +5,7 @@
 #include <TObjArray.h>
 
 #include "I3RecoHitSeries.h"
+#include "dataclasses/I3Iterator.h"
 
 class I3RecoHitSeriesData : public TObject
 {
@@ -14,9 +15,10 @@ class I3RecoHitSeriesData : public TObject
    I3RecoHitSeriesData();
   ~I3RecoHitSeriesData();
 
-  int                    GetNumberRecoHitSeries() const;
+  int GetNumberRecoHitSeries() const;
   const I3RecoHitSeries* GetRecoHitSeriesData(unsigned short number) const;
-  void                   AddRecoHitSeries(I3RecoHitSeries* recohitseries_);
+  void AddRecoHitSeries(I3RecoHitSeries* recohitseries_);
+  I3Iterator<const I3RecoHitSeries>* MakeRecoHitSeriesIterator();
 
   ClassDef(I3RecoHitSeriesData,1);
 };

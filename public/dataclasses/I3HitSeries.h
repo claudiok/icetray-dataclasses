@@ -4,6 +4,7 @@
 #include <TObject.h>
 #include <TObjArray.h>
 #include "I3Hit.h"
+#include "dataclasses/I3Iterator.h"
 
 class I3HitSeries : public TObject
 {
@@ -17,6 +18,7 @@ class I3HitSeries : public TObject
   int GetNumberHits() const;
   virtual const I3Hit& GetHit(unsigned short number) const;
   virtual void AddHit(I3Hit* hit_);
+  virtual I3Iterator<const I3Hit>* MakeHitIterator();
   
   ClassDef(I3HitSeries, 1);
 };

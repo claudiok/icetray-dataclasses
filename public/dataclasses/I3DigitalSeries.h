@@ -4,6 +4,8 @@
 #include "I3Datareadout.h"
 #include "I3Digital.h"
 
+#include "dataclasses/I3Iterator.h"
+
 class I3DigitalSeries : public I3Datareadout
 {
  protected:
@@ -23,6 +25,7 @@ class I3DigitalSeries : public I3Datareadout
   int GetNumberDigits() const;
   const I3Digital& GetDigit(unsigned short number) const;
   void AddDigit(I3Digital* digit_);
+  I3Iterator<const I3Digital&>* MakeDigitalIterator();
   
   ClassDef(I3DigitalSeries,1);
 };
