@@ -148,14 +148,6 @@ namespace tut
     {	
 	try
 	{
-	    // Have to add test here
-
-	    I3Calibration* calib = new I3Calibration();
-       
-	    //I3InIceCalibration& inice_calib = 
-	    //  calib->GetInIceCalibration();
-            // just to stop a warning -jpretz
-
 	    I3DOMCalibPtr dom_calib(new I3DOMCalibration);
 	
 	    int id = 0;
@@ -175,6 +167,8 @@ namespace tut
 	    dom_calib->SetATWDGain(channel,gain,gainErr);
 	    dom_calib->SetATWDParameters(id,channel,bin,slope,intercept,regress_coeff);
 
+	    dom_calib->ToStream(cout);
+	    cout<< dom_calib;
 	}
 
 	catch(I3TrayException& e)
