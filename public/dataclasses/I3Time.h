@@ -149,7 +149,7 @@ class I3Time : public TObject
   unsigned int GetUTCDayOfMonth() const;
 
   /**
-   * @brief Gets the number of seconds since this UTC day started
+   * @brief Gets the number of seconds since this UTC year started
    */
   unsigned int GetUTCSec() const;
   
@@ -180,7 +180,9 @@ class I3Time : public TObject
    * @brief dumps a Weekday to a string for printing.
    */
   static std::string WeekdayToString(Weekday w);
- private:
+
+ public:
+
   static double modjulianday(int year);
   
   static double modjulianday(int year, long long int daqTime);

@@ -28,7 +28,7 @@ void I3Time::SetJulianTime(unsigned int julianDay,
 			   unsigned int sec,
 			   double ns)
 {
-  SetModJulianTime(julianDay  - 240000, sec - 12*3600,ns);
+  SetModJulianTime(julianDay  - 2400000, sec - 12*3600,ns);
 }
 
 void I3Time::SetModJulianTime(unsigned int modJulianDay,
@@ -92,22 +92,83 @@ double I3Time::GetModJulianNanoSec() const
 
 I3Time::Month I3Time::GetUTCMonth() const
 {
-  return BadMonth;
+  double julday = julianday(year_,daqTime_);
+  UTinstant i;
+  i.j_date = julday;
+  CalDate(&i);
+  switch(i.month)
+    {
+    case 1:
+      return Jan;
+    case 2:
+      return Feb;
+    case 3:
+      return Mar;
+    case 4:
+      return Apr;
+    case 5:
+      return May;
+    case 6:
+      return Jun;
+    case 7:
+      return Jul;
+    case 8:
+      return Aug;
+    case 9:
+      return Sep;
+    case 10:
+      return Oct;
+    case 11:
+      return Nov;
+    case 12:
+      return Dec;
+    default:
+      return BadMonth;
+    }
 }
 
 I3Time::Weekday I3Time::GetUTCWeekday() const
 {
-  return BadWeekday;
+  double julday = julianday(year_,daqTime_);
+  UTinstant i;
+  i.j_date = julday;
+  CalDate(&i);
+  switch(i.weekday)
+    {
+    case 0:
+      return Sunday;
+    case 1:
+      return Monday;
+    case 2:
+      return Tuesday;
+    case 3:
+      return Wednesday;
+    case 4:
+      return Thursday;
+    case 5:
+      return Friday;
+    case 6:
+      return Saturday;
+    default:
+      return BadWeekday;
+    }
+
 }
 
 unsigned int I3Time::GetUTCDayOfMonth() const
 {
-  return 0;
+  double julday = julianday(year_,daqTime_);
+  UTinstant i;
+  i.j_date = julday;
+  CalDate(&i);
+  return i.day;
 }
 
 unsigned int I3Time::GetUTCSec() const
 {
-  return 0;
+  long long int tenthsOfNs = daqTime_ %((long long)1e10);
+  unsigned int daqSecs = (daqTime_ - tenthsOfNs)/((long long)1e10);
+  return daqSecs;
 }
 
 double I3Time::GetUTCNanoSec() const
@@ -118,12 +179,59 @@ double I3Time::GetUTCNanoSec() const
 
 std::string I3Time::MonthToString(Month m)
 {
-  return "";
+  switch(m)
+    {
+    case Jan:
+      return "Jan";
+    case Feb:
+      return "Feb";
+    case Mar:
+      return "Mar";
+    case Apr:
+      return "Apr";
+    case May:
+      return "May";
+    case Jun:
+      return "Jun";
+    case Jul:
+      return "Jul";
+    case Aug:
+      return "Aug";
+    case Sep:
+      return "Sep";
+    case Oct:
+      return "Oct";
+    case Nov:
+      return "Nov";
+    case Dec:
+      return "Dec";
+    default:
+      return "BadMonth";
+    }
 }
 
 std::string I3Time::WeekdayToString(Weekday w)
 {
-  return "";
+  switch(w)
+    {
+    case Sunday:
+      return "Sunday";
+    case Monday:
+      return "Monday";
+    case Tuesday:
+      return "Tuesday";
+    case Wednesday:
+      return "Wednesday";
+    case Thursday:
+      return "Thursday";
+    case Friday:
+      return "Friday";
+    case Saturday:
+      return "Saturday";
+    default:
+      return "BadWeekday";
+    }
+
 }
 
 double I3Time::modjulianday(int year)
@@ -135,7 +243,7 @@ double I3Time::modjulianday(int year)
   i.i_hour = 0;
   i.i_minute = 0;
   i.second = 0;
-  return JulDate(&i) - 240000.5;
+  return JulDate(&i) - 2400000.5;
 }
 
 double I3Time::modjulianday(int year, long long int daqTime)
@@ -172,7 +280,7 @@ double I3Time::julianday(int year, long long int daqTime)
 
 unsigned int I3Time::yearOf(double modjulianday)
 {
-  double julianDay = modjulianday + 240000.5;
+  double julianDay = modjulianday + 2400000.5;
   UTinstant i;
   i.j_date = julianDay;
   CalDate(&i);

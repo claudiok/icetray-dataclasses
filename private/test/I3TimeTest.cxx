@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.4 2005/03/31 14:15:15 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.5 2005/03/31 14:50:49 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2005/03/31 14:15:15 $
+    @version $Revision: 1.5 $
+    @date $Date: 2005/03/31 14:50:49 $
     @author pretz
 
     @todo
@@ -123,41 +123,46 @@ namespace tut
     cout<<"Output day of the month"<<tme.GetUTCDayOfMonth()<<endl;
     ensure("day of month is right",tme.GetUTCDayOfMonth()==6);
     ensure("weekday is right",tme.GetUTCWeekday() == I3Time::Sunday);  
-    ensure("secs is right",tme.GetUTCSec()==78598);
+    ensure_equals("secs is right",tme.GetUTCSec(),5608198);
     ensure_distance(tme.GetUTCNanoSec(),(double)844318797,0.1);
   }
 
   void object::test<8>()
   {
     I3Time time;
-    time.SetJulianTime(2453460,0,0);
+    time.SetModJulianTime(53460,0,0);
 
-    ensure_equals("checking julian sec",time.GetJulianSec(),0);
+    ensure_equals("checking modjulian sec",time.GetModJulianSec(),0);
   }
 
   void object::test<9>()
   {
     I3Time time;
-    time.SetJulianTime(2453460,0,0);
+    time.SetModJulianTime(53460,0,0);
 
-    ensure_equals("checking julian day",time.GetJulianDay(),2453460);
+    ensure_equals("checking modjulian day",time.GetModJulianDay(),53460);
   }
 
   void object::test<10>()
   {
     I3Time time;
-    time.SetJulianTime(2453460,60*60*12,0);
+    time.SetModJulianTime(53460,60*60*12,0);
 
-    ensure_equals("checking julian day",time.GetJulianDay(),2453460);
+    ensure_equals("checking modjulian day",time.GetModJulianDay(),53460);
   }
 
   void object::test<11>()
   {
     for(int i = 0 ; i < 100 ; i++)
       {
-	long long int daqTime = rand() * rand() * rand();
+	long long int daqTime = ((long long)rand()) 
+	  * ((long long)rand()) 
+	  * ((long long)rand()) %
+ 	  ((long long)24 * 365 * 3600 * ((long long)1e10) ) ;
+	if(daqTime < 0)
+	  daqTime = -daqTime;
 	int year = 1980 + (rand() % 50);
-	cout<<" starting daq time and year: "<<daqTime<<" "<<year<<endl;
+	cout<<" checking daq time and year: "<<daqTime<<" "<<year<<endl;
 	I3Time initial_time;
 	initial_time.SetDaqTime(year,daqTime);
 
@@ -169,9 +174,9 @@ namespace tut
 	ensure_equals("checking that the year is the same",
 		      initial_time.GetUTCYear(),
 		      compare_time.GetUTCYear());
-	ensure_equals("checking that the UTC time is the same",
-		      initial_time.GetUTCDaqTime(),
-		      compare_time.GetUTCDaqTime());
+	ensure("checking that the UTC time is the same to ns",
+	       abs(initial_time.GetUTCDaqTime() 
+		   - compare_time.GetUTCDaqTime()) < 10);
 	
 	
       }
@@ -184,5 +189,11 @@ namespace tut
     ensure_distance(time.GetUTCNanoSec(),844318797.0,0.1);
     ensure_distance(time.GetJulianNanoSec(),844318797.0,0.1);
     ensure_distance(time.GetModJulianNanoSec(),844318797.0,0.1);
+  }
+
+  void object::test<13>()
+  {
+    ensure_distance(I3Time::julianday(2005),2453371.500000,0.00001);
+    ensure_distance(I3Time::modjulianday(2005),53371.00000,0.000001);
   }
 }
