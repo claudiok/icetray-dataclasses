@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube collaboration
- *  $Id: I3HitSelection.h,v 1.1.2.1 2005/02/18 20:54:55 deyoung Exp $
+ *  $Id: I3HitSelection.h,v 1.1.2.2 2005/02/18 21:25:37 deyoung Exp $
  *
  * @file I3HitSelection.h
- * @version $Revision: 1.1.2.1 $
- * @date $Date: 2005/02/18 20:54:55 $
+ * @version $Revision: 1.1.2.2 $
+ * @date $Date: 2005/02/18 21:25:37 $
  * @author deyoung
  */
 
@@ -13,9 +13,9 @@
 #define DATACLASSES_I3HITSELECTION_H_INCLUDED
 
 #include <TObject.h>
-//#include "I3RecoHit.h"
+#include "I3RecoHit.h"
 //#include "OMKey.h"
-#include "I3RecoHitSeries.h"
+//#include "I3RecoHitSeries.h"
 
 //using namespace std;
 
