@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3PositionTest.cxx,v 1.3 2004/08/16 15:48:29 dule Exp $
+    $Id: I3PositionTest.cxx,v 1.4 2004/09/13 14:45:34 dule Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/08/16 15:48:29 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/09/13 14:45:34 $
     @author pretz
 
     @todo
@@ -182,15 +182,15 @@ namespace tut
 
     cout <<"Creating position d and setting coordinates in car..."<<endl;
     I3Position d(1,1,1);
-    ensure_distance("d.GetX failed",d.GetR(),1.73205,0.0001);
-    ensure_distance("d.GetY failed",d.GetTheta(),0.955317,0.0001);
-    ensure_distance("d.GetZ failed",d.GetPhi(),0.785398,0.0001);
+    ensure_distance("d.GetR failed",d.GetR(),1.73205,0.0001);
+    ensure_distance("d.GetTheta failed",d.GetTheta(),0.955317,0.0001);
+    ensure_distance("d.GetPhi failed",d.GetPhi(),0.785398,0.0001);
 
     cout <<"Using the = operator on I3Position e=d..."<<endl;
     I3Position e = d;
-    ensure_distance("e.GetX failed",e.GetR(),1.73205,0.0001);
-    ensure_distance("e.GetY failed",e.GetTheta(),0.955317,0.0001);
-    ensure_distance("e.GetZ failed",e.GetPhi(),0.785398,0.0001);
+    ensure_distance("e.GetR failed",e.GetR(),1.73205,0.0001);
+    ensure_distance("e.GetTheta failed",e.GetTheta(),0.955317,0.0001);
+    ensure_distance("e.GetPhi failed",e.GetPhi(),0.785398,0.0001);
 
     cout <<"Creating position f from position d..."<<endl;
     I3Position f(d);
