@@ -4,15 +4,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.18 2004/03/10 18:39:56 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.19 2004/03/10 19:31:12 pretz Exp $
  *
- * @version $Revision: 1.18 $
- * @date $Date: 2004/03/10 18:39:56 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/03/10 19:31:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo this class shouldn't have a 'confidence' but rather be a base for classes which themselves might have a confidence
+ * @todo 
  *
  */
 

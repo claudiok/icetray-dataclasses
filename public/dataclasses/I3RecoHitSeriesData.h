@@ -4,17 +4,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesData.h,v 1.13 2004/03/10 18:39:56 pretz Exp $
+ * $Id: I3RecoHitSeriesData.h,v 1.14 2004/03/10 19:31:12 pretz Exp $
  *
  * This is the container for all the hit series reconstructions
  *
- * @version $Revision: 1.13 $
- * @date $Date: 2004/03/10 18:39:56 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/03/10 19:31:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo decide if copy and assignment are to be private
+ * @todo 
  */
 
 #include "I3RecoHitSeries.h"
@@ -36,8 +36,8 @@ class I3RecoHitSeriesData : public TObject, public MapPointainerPolicy<I3RecoHit
 
  private:
 /*   // copy and assignment are private */
-/*   I3RecoHitSeriesData(const I3RecoHitSeriesData& rhs); */
-/*   const I3RecoHitSeriesData& operator=(const I3RecoHitSeriesData&); */
+  I3RecoHitSeriesData(const I3RecoHitSeriesData& rhs);
+  const I3RecoHitSeriesData& operator=(const I3RecoHitSeriesData&);
 
   // ROOT macro
   ClassDef(I3RecoHitSeriesData,1);

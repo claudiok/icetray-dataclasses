@@ -1,15 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoTrackList.h,v 1.14 2004/03/10 18:39:56 pretz Exp $
+ * $Id: I3RecoTrackList.h,v 1.15 2004/03/10 19:31:12 pretz Exp $
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/03/10 18:39:56 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/03/10 19:31:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo decide whether or not copy should be private
+ * @todo 
  *
  */
 #ifndef I3RECOTRACKLIST_H
@@ -31,9 +31,9 @@ class I3RecoTrackList : public TObject, public VecPointainerPolicy<I3RecoTrackPt
    */
   virtual ~I3RecoTrackList(){};
  private:
-/*   // copy and assignment private */
-/*   I3RecoTrackList(const I3RecoTrackList& rhs); */
-/*   const I3RecoTrackList& operator=(const I3RecoTrackList& rhs); */
+  // copy and assignment private
+  I3RecoTrackList(const I3RecoTrackList& rhs);
+  const I3RecoTrackList& operator=(const I3RecoTrackList& rhs);
 
   // ROOT macro
   ClassDef(I3RecoTrackList, 1);

@@ -6,16 +6,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: STLVecPointainerPolicy.h,v 1.2 2004/03/10 19:17:52 pretz Exp $
+ * $Id: STLVecPointainerPolicy.h,v 1.3 2004/03/10 19:31:12 pretz Exp $
  *
  * Just like an STLVecPointainerPolicy  which contains the added functionality 
  * that  it deletes all the members when it goes out of scope.
  *
  * @version $$
- * @date $Id: STLVecPointainerPolicy.h,v 1.2 2004/03/10 19:17:52 pretz Exp $
+ * @date $Id: STLVecPointainerPolicy.h,v 1.3 2004/03/10 19:31:12 pretz Exp $
  * @author pretz
  *
- * @todo 
+ * @todo can this be implemented as just inheriting from STLVectorStoragePolicy
  */
 
 template <class ElementType>

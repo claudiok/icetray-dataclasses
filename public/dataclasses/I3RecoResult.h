@@ -1,16 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.19 2004/03/08 21:22:51 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.20 2004/03/10 19:31:12 pretz Exp $
  *
- * @version $Revision: 1.19 $
- * @date $Date: 2004/03/08 21:22:51 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/03/10 19:31:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo get/set best stuff
- * @todo Should this base class contain the mechanics for storing reco results or should that be left for derived classes???
+ * @todo 
  *
  */
 #ifndef I3RECORESULT_H

@@ -1,15 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackData.h,v 1.18 2004/03/09 18:46:15 pretz Exp $
+ * $Id: I3MCTrackData.h,v 1.19 2004/03/10 19:31:12 pretz Exp $
  *
- * @version $Revision: 1.18 $
- * @date $Date: 2004/03/09 18:46:15 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/03/10 19:31:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo include the primary track as a separate object
+ * @todo 
  *
  */
 #ifndef I3MCTRACKDATA_H
