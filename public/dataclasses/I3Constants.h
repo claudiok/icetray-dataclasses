@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Constants.h,v 1.7 2004/08/26 15:48:12 dule Exp $
+ * $Id: I3Constants.h,v 1.8 2004/11/09 16:05:07 pretz Exp $
  *
  * @file I3Constants.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/08/26 15:48:12 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/11/09 16:05:07 $
  * @author pretz
  */
 
@@ -13,6 +13,7 @@
 #define I3CONSTANTS_H
 
 #include "dataclasses/I3Units.h"
+#include <cmath>
 
 /**
  * @brief A list of static variables commonly used by physics analysis
@@ -29,6 +30,16 @@ namespace I3Constants
    * The speed of light
    */
   static const Double_t c = 2.99792458e8 * I3Units::m / (I3Units::second);
+
+  /**
+   * The index of refraction of ice
+   */
+  static const double n_ice = 1.31;
+
+  /**
+   * The Cherenkov angle in ice
+   */
+  static const double theta_cherenkov = std::acos(1/n_ice) * I3Units::rad;
   
   /**
    * pi.
