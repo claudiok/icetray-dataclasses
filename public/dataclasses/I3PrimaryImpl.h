@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.9 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.10 2004/08/04 14:41:56 pretz Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/04 14:41:56 $
  * @author pretz
  *
  */
@@ -59,6 +59,16 @@ class I3PrimaryImpl : public I3Primary,
    * indicates whether or not the primary has a valid core position
    */
   virtual Bool_t HasCorePosition() const {return CoreType::HasCorePosition();}
+
+  /**
+   * indicates that this is not an in ice partcile
+   */
+  virtual Bool_t IsInIce() const { return kFALSE;}
+
+  /** 
+   * indicates taht this is not an ice top particle
+   */ 
+  virtual Bool_t IsIceTop() const { return kFALSE;}
 
   /**
    * 
