@@ -10,11 +10,7 @@ I3AnalogSeries::I3AnalogSeries()
 
 I3AnalogSeries::~I3AnalogSeries() 
 {
-  if(pulse) 
-    {
-      pulse->Delete(); 
-      delete pulse;
-    } 
+  if(pulse) {pulse->Delete();  delete pulse;} 
 }
 
 int I3AnalogSeries::GetNumberPulses() const
@@ -24,19 +20,14 @@ int I3AnalogSeries::GetNumberPulses() const
 
 const I3Analog& I3AnalogSeries::GetPulse(unsigned short number) const 
 {
-  if(pulse){
-    I3Analog* to_return= (I3Analog*)pulse->At(number);
-    if(to_return)
-      return *to_return;
-  }
-  I3DataExecution::Instance().Fatal("I3AnalogSeries::GetPulse() asked for a pulse out of bounds.  Check first");
-  return *(I3Analog*)0;
+  if(GetNumberPulses()>number) return (*(I3Analog*)pulse->At(number));
+  I3DataExecution::Instance().Fatal("I3AnalogSeries::GetPulse() asked for a pulse out of bounds");
+  return(*(I3Analog*)NULL);
 }
 
 void I3AnalogSeries::AddPulse(I3Analog* pulse_)
 {
-  if(pulse==NULL) 
-    pulse = new TObjArray(1); 
+  if(pulse==NULL) pulse = new TObjArray(1); 
   pulse->Add(pulse_);
 }
 

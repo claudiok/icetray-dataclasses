@@ -4,14 +4,8 @@ ClassImp(I3MCHitSeries);
   
 I3MCHitSeries::I3MCHitSeries() {weight=0;}
 
-float I3MCHitSeries::GetWeight() const        
-{
-  return(weight);
-}
-
-void  I3MCHitSeries::SetWeight(float weight_) {
-  weight=weight_;
-}
+float I3MCHitSeries::GetWeight() const        {return(weight);}
+void  I3MCHitSeries::SetWeight(float weight_) {weight=weight_;}
 
 const I3MCHit& I3MCHitSeries::GetHit(unsigned short number) const 
 {

@@ -33,11 +33,9 @@ bool I3OMResponseData::HasOMResponseNumber(unsigned short omnumber) const
   
 const I3OMResponse& I3OMResponseData::GetOMResponse(unsigned short index) const 
 {
-  I3OMResponse* to_return = (I3OMResponse*)omresponse->At(index);
-  if(to_return)
-    return *to_return;
+  if(GetNumberOMResponses()>index) return (*(I3OMResponse*)omresponse->At(index));
   I3DataExecution::Instance().Fatal("I3OMResponseData::GetOMResponse() asked for an index out of bounds");
-  return *(I3OMResponse*)NULL;
+  return(*(I3OMResponse*)NULL);
 }
 
 const I3OMResponse& I3OMResponseData::FindOMResponse(unsigned short omnumber) const 

@@ -10,34 +10,16 @@ I3DigitalSeries::I3DigitalSeries()
   digit=NULL;
 }
 
-I3DigitalSeries::~I3DigitalSeries() 
+I3DigitalSeries::~I3DigitalSeries()  
 {
-  if(digit) 
-    {
-      digit->Delete(); 
-      delete digit;
-    } 
+  if(digit) {digit->Delete(); delete digit;} 
 }
 
-double I3DigitalSeries::GetStartTime() const 
-{
-  return(starttime);
-}
+double I3DigitalSeries::GetStartTime() const {return(starttime);}
+float  I3DigitalSeries::GetBinWidth() const  {return(binwidth);}
 
-float  I3DigitalSeries::GetBinWidth() const  
-{
-  return(binwidth);
-}
-
-void I3DigitalSeries::SetStartTime(double starttime_) 
-{
-  starttime=starttime_;
-}
-
-void I3DigitalSeries::SetBinWidth(float binwidth_)    
-{
-  binwidth=binwidth_;
-}
+void I3DigitalSeries::SetStartTime(double starttime_) {starttime=starttime_;}
+void I3DigitalSeries::SetBinWidth(float binwidth_)    {binwidth=binwidth_;}
 
 int I3DigitalSeries::GetNumberDigits() const
 {
@@ -46,19 +28,14 @@ int I3DigitalSeries::GetNumberDigits() const
 
 const I3Digital& I3DigitalSeries::GetDigit(unsigned short number) const 
 {
-  if(digit){
-    I3Digital* to_return = (I3Digital*)digit->At(number);
-    if(to_return)
-       return *to_return;
-  }
-  I3DataExecution::Instance().Fatal("I3DigitalSeries::GetDigit() Asked for a digital response that is out of bounds");
-  return *(I3Digital*)0;
+  if(GetNumberDigits()>number) return (*(I3Digital*)digit->At(number));
+  I3DataExecution::Instance().Fatal("I3DigitalSeries::GetDigit() asked for a digital response that is out of bounds");
+  return(*(I3Digital*)NULL);
 }
 
 void I3DigitalSeries::AddDigit(I3Digital* digit_)
 {
-  if(digit==NULL) 
-    digit = new TObjArray(1); 
+  if(digit==NULL) digit = new TObjArray(1); 
   digit->Add(digit_);
 }
 

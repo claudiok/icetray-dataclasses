@@ -15,20 +15,13 @@ I3OMResponse::I3OMResponse()
 
 I3OMResponse::~I3OMResponse()
 {
-  if (mchitseries)       {mchitseries->Delete();       delete mchitseries;}
-  if (datareadoutlist)   {datareadoutlist->Delete();   delete datareadoutlist;}
-  if (recohitseriesdata) {recohitseriesdata->Delete(); delete recohitseriesdata;}
+  if (mchitseries)       {delete mchitseries;}
+  if (datareadoutlist)   {delete datareadoutlist;}
+  if (recohitseriesdata) {delete recohitseriesdata;}
 }
 
-unsigned short I3OMResponse::GetOMNumber() const         
-{
-  return(omnumber);
-}
-
-void I3OMResponse::SetOMNumber(unsigned short omnumber_) 
-{
-  omnumber=omnumber_;
-}
+unsigned short I3OMResponse::GetOMNumber() const         {return(omnumber);}
+void I3OMResponse::SetOMNumber(unsigned short omnumber_) {omnumber=omnumber_;}
 
 bool I3OMResponse::HasGeometry() const
 {
@@ -37,20 +30,15 @@ bool I3OMResponse::HasGeometry() const
 
 const I3OMGeo& I3OMResponse::GetGeometry() const
 {
-  I3OMGeo* to_return = (I3OMGeo*)geometry.GetObject();
-  if(to_return)
-    return *to_return;
+  if(HasGeometry()) return(*(I3OMGeo*)geometry.GetObject());
   I3DataExecution::Instance().Fatal("I3OMResponse::GetGeometry() the OMGeo doesn't exits");
-  return *(I3OMGeo*)0;
+  return *(I3OMGeo*)NULL;
 }
 
 void I3OMResponse::SetGeometry(I3OMGeo& geometry_) 
 {
-
-  if(!geometry.GetObject())
-    geometry=&geometry_;
-  else
-    I3DataExecution::Instance().Fatal("I3OMResponse::SetGeometry() the OMResponse has already been set.  You're trying to make me leak my memory");
+  if(!HasGeometry()) geometry=&geometry_;
+  else I3DataExecution::Instance().Fatal("I3OMResponse::SetGeometry() the OMResponse has already been set.  You're trying to make me leak my memory");
 }
 
 bool  I3OMResponse::HasMCHitSeries() const
@@ -70,48 +58,40 @@ bool  I3OMResponse::HasRecoHitSeriesData() const
 
 const I3MCHitSeries& I3OMResponse::GetMCHitSeries() const       
 {
-  if(mchitseries)
-    return *mchitseries;
+  if(mchitseries) return *mchitseries;
   I3DataExecution::Instance().Fatal("I3OMResponse::GetMCHitSeries() I3MCHitSeries doesn't exist.  Check first.");
-  return *(I3MCHitSeries*)0;
+  return *(I3MCHitSeries*)NULL;
 }
 
 const I3DatareadoutList& I3OMResponse::GetDatareadoutList() const   
 {
-  if(datareadoutlist)
-    return *datareadoutlist;
+  if(datareadoutlist) return *datareadoutlist;
   I3DataExecution::Instance().Fatal("I3OMResponse::GetDatareadoutlist() the data readoutd doesn't exist.  Check first.");
-  return *(I3DatareadoutList*)0;
+  return *(I3DatareadoutList*)NULL;
 }
 
-const I3RecoHitSeriesData& I3OMResponse::GetRecoHitSeriesData() const {
-  if(recohitseriesdata)
-    return *recohitseriesdata;
+const I3RecoHitSeriesData& I3OMResponse::GetRecoHitSeriesData() const 
+{
+  if(recohitseriesdata) return *recohitseriesdata;
   I3DataExecution::Instance().Fatal("I3OMResponse::GetRecoHitSeriesData() there is no reco hit series data");
-  return *(I3RecoHitSeriesData*)0;
+  return *(I3RecoHitSeriesData*)NULL;
 }
 
 void  I3OMResponse::SetMCHitSeries(I3MCHitSeries* mchitseries_)
 {
-  if(!mchitseries)       
-    mchitseries=mchitseries_;             
-  else 
-I3DataExecution::Instance().Fatal("I3OMResponse::SetMCHitSeries() MCHitSeries exists already");
+  if(!mchitseries) mchitseries=mchitseries_;             
+  else I3DataExecution::Instance().Fatal("I3OMResponse::SetMCHitSeries() MCHitSeries exists already");
 }
 
 void  I3OMResponse::SetDatareadoutList(I3DatareadoutList* datareadoutlist_)
 {
-  if(!datareadoutlist)
-    datareadoutlist=datareadoutlist_;     
-  else 
-I3DataExecution::Instance().Fatal("I3OMResponse::SetDataREadoutList() Datareadoutlist exists already");
+  if(!datareadoutlist) datareadoutlist=datareadoutlist_;     
+  else I3DataExecution::Instance().Fatal("I3OMResponse::SetDataREadoutList() Datareadoutlist exists already");
 }
 
 void  I3OMResponse::SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_) {
-  if(!recohitseriesdata) 
-    recohitseriesdata=recohitseriesdata_; 
-  else 
-    I3DataExecution::Instance().Fatal("I3OMResponse::SetRecoHitSeriesData() RecoHitSeriesData exists already");
+  if(!recohitseriesdata) recohitseriesdata=recohitseriesdata_; 
+  else I3DataExecution::Instance().Fatal("I3OMResponse::SetRecoHitSeriesData() RecoHitSeriesData exists already");
 }
 
 

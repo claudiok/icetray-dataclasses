@@ -105,7 +105,8 @@ const I3Track& I3Track::GetParenttrack() const
 }
 void I3Track::SetParenttrack(I3Track& parenttrack_)
 {
-  parenttrack=&parenttrack_;
+  if(!HasParenttrack()) parenttrack=&parenttrack_;
+  else I3DataExecution::Instance().Fatal("I3Track::SetParenttrack() the parent track has already been set");
 }
 
 unsigned short I3Track::GetNumberChildrentracks() const

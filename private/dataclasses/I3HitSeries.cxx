@@ -10,11 +10,7 @@ I3HitSeries::I3HitSeries()
 
 I3HitSeries::~I3HitSeries() 
 {
-  if(hit) 
-    {
-      hit->Delete(); 
-      delete hit;
-    } 
+  if(hit) {hit->Delete();  delete hit;} 
 }
 
 int I3HitSeries::GetNumberHits() const
@@ -24,18 +20,15 @@ int I3HitSeries::GetNumberHits() const
 
 const I3Hit& I3HitSeries::GetHit(unsigned short number) const 
 {
-  if(hit){
-    I3Hit* to_return = (I3Hit*)hit->At(number);
-    if(to_return)
-      return *to_return;
-  }
-  I3DataExecution::Instance().Fatal("I3HitSeries::GetHit() the requested hit doesn't exist");
-  return *(I3Hit*)0;
+  if(GetNumberHits()>number) return (*(I3Hit*)hit->At(number));
+  I3DataExecution::Instance().Fatal("I3HitSeries::GetHit() requested a hit which doesn't exist");
+  return(*(I3Hit*)NULL);
 }
 
 void I3HitSeries::AddHit(I3Hit* hit_)
 {
-  if(hit==NULL) hit = new TObjArray(1); hit->Add(hit_);
+  if(hit==NULL) hit = new TObjArray(1); 
+  hit->Add(hit_);
 }
 
 I3Iterator<const I3Hit>* I3HitSeries::MakeHitIterator(){

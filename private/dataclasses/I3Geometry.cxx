@@ -18,13 +18,9 @@ int I3Geometry::GetNumberOMGeos() const
 
 const I3OMGeo& I3Geometry::GetOMGeo(unsigned short index) const
 {
-  if(!omgeo)
-    I3DataExecution::Instance().Fatal("I3Geometry::GetOMGeo() Nobody's added any OMGeos to this object");
-  I3OMGeo* to_return = (I3OMGeo*)omgeo->At(index);
-  if(to_return)
-    return *to_return;
-  I3DataExecution::Instance().Fatal("I3Geometry::GetOMGeo asked for an OMGeo out of range.  Check first");
-  return *(I3OMGeo*)0;
+  if(GetNumberOMGeos()>index) return (*(I3OMGeo*)omgeo->At(index));
+  I3DataExecution::Instance().Fatal("I3Geometry::GetOMGeo() asked for an OMGeo out of range");
+  return(*(I3OMGeo*)NULL);
 }
 
 bool I3Geometry::HasOMGeoNumber(unsigned short omnumber) const
@@ -46,7 +42,7 @@ const I3OMGeo& I3Geometry::FindOMGeo(unsigned short omnumber) const
     I3OMGeo &h = *(I3OMGeo*)omgeo->At(i);
     if (h.GetOMNumber()==omnumber) return(h);
   }
-  I3DataExecution::Instance().Fatal("I3Geometry::FindOMGeo asked for a non-existent OM");
+  I3DataExecution::Instance().Fatal("I3Geometry::FindOMGeo() asked for a non-existent OM");
   return(*(I3OMGeo*)NULL);
 }
 
