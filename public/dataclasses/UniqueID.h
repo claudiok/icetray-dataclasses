@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: UniqueID.h,v 1.3 2004/08/04 18:52:55 pretz Exp $
+ * $Id: UniqueID.h,v 1.4 2004/08/04 19:19:47 ehrlich Exp $
  *
  * @file UniqueID.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/04 18:52:55 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/04 19:19:47 $
  * @author ehrlich
  */
 #ifndef UNIQUEID_H
@@ -20,7 +20,24 @@
 
 
 /**
- * @todo document this class
+ *class UniqueID
+ *This  class should be used to assign a unique ID to each particle
+ *relative to a given dataclass object, e.g.
+ *my_particle->SetParticleID(UniqueID::ID(my_event))
+ *gives my_particle an ID which doesn't exist yet in my_event or
+ *my_particle->SetParticleID(UniqueID::ID(my_recoresult_dict)
+ *gives my_particle an ID which doesn't exist yet in my_recoresult_dict.
+
+ *This class gives also the option to assign a unique ID to all particles
+ *of a dataclass object, e.g.
+ *UniqueID::ID(my_mcevent, UniqueID::SET_ALL_UNIQUE_ID)
+ *gives a unique ID to every particle in my_mcevent.
+
+ *These unique IDs are used to identify particles, e.g. for
+ *parent-child-relations, or to relate MC hits to a particular MC particle.
+
+ *The IDs can be set and returned in I3MCHit and I3Particle by
+ *Set/GetParticleID().
  */
 class UniqueID
 {

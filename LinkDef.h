@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.110 2004/08/03 18:06:17 blaufuss Exp $
-// $Revision: 1.110 $
-// $Date: 2004/08/03 18:06:17 $
+// $Id: LinkDef.h,v 1.111 2004/08/04 19:19:47 ehrlich Exp $
+// $Revision: 1.111 $
+// $Date: 2004/08/04 19:19:47 $
 //
 
 #ifdef __CINT__
@@ -53,6 +53,8 @@
 #pragma link C++ class I3BasicCascade+;
 #pragma link C++ class I3DirectionalCascade+;
 #pragma link C++ class I3EnergyCascade+;
+#pragma link C++ class I3F2KRecoCascade+;
+#pragma link C++ typedef I3F2KRecoCascadePtr;
 #pragma link C++ class I3MCCascade+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
