@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.118 2004/08/05 16:46:16 blaufuss Exp $
-// $Revision: 1.118 $
-// $Date: 2004/08/05 16:46:16 $
+// $Id: LinkDef.h,v 1.119 2004/08/06 22:49:48 ehrlich Exp $
+// $Revision: 1.119 $
+// $Date: 2004/08/06 22:49:48 $
 //
 
 #ifdef __CINT__
@@ -391,6 +391,10 @@
 
 #pragma link C++ class UniqueID+;
 
+#pragma link C++ class roost::shared_ptr<I3Particle>+;
+#pragma link C++ class roost::shared_ptr<I3OMResponse>+;
+#pragma link C++ class roost::shared_ptr<I3DataReadout>+;
+#pragma link C++ class roost::shared_ptr<I3RecoResult>+;
 
 #endif
 
