@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.16 2004/06/30 17:20:25 pretz Exp $
+    $Id: I3Track.cxx,v 1.17 2004/07/26 13:54:10 pretz Exp $
 
-    @version $Revision: 1.16 $
-    @date $Date: 2004/06/30 17:20:25 $
+    @version $Revision: 1.17 $
+    @date $Date: 2004/07/26 13:54:10 $
     @author
 
     @todo
@@ -18,34 +18,34 @@ using namespace std;
 
 
 //-----------------------------------------------------------
-void I3Track::PrintTrack()
-{
-  cout <<"====================TRACK=INFO==========================="<<endl;
-  if (IsStarting()) 
-    if (IsStopping()) cout <<" Contained track."<<endl;
-    else cout <<" Starting track."<<endl;
-  else
-    if (IsStopping()) cout <<" Stopping track."<<endl;
-    else cout <<" Infinite track."<<endl;
+// void I3Track::PrintTrack()
+// {
+//   cout <<"====================TRACK=INFO==========================="<<endl;
+//   if (IsStarting()) 
+//     if (IsStopping()) cout <<" Contained track."<<endl;
+//     else cout <<" Starting track."<<endl;
+//   else
+//     if (IsStopping()) cout <<" Stopping track."<<endl;
+//     else cout <<" Infinite track."<<endl;
 
-  if (IsStarting()) {
-    cout <<"Starting Position (StartPos): "<<endl;
-    GetStartPos().PrintPosition();
-    cout <<"Start Time (StartT): "<<GetStartT()<<endl;
-  }
-  cout <<"Position (Pos): "<<endl;
-  GetPos().PrintPosition();
-  cout <<"Time (T): "<<GetT()<<endl;
-  if (IsStopping()) {
-    cout <<"Stoppping Position (StopPos): "<<endl;
-    GetStopPos().PrintPosition();
-    cout <<"Stop Time (StopT): "<<GetStopT()<<endl;
-  }
-  cout <<"Zenith: "<<GetZenith()/I3Units::degree<<" deg"<<endl;
-  cout <<"Azimuth: "<<GetAzimuth()/I3Units::degree<<" deg"<<endl;
-  cout <<"Length: "<<GetLength()<<endl;
-  cout <<"========================================================="<<endl;
-}
+//   if (IsStarting()) {
+//     cout <<"Starting Position (StartPos): "<<endl;
+//     GetStartPos().PrintPosition();
+//     cout <<"Start Time (StartT): "<<GetStartT()<<endl;
+//   }
+//   cout <<"Position (Pos): "<<endl;
+//   GetPos().PrintPosition();
+//   cout <<"Time (T): "<<GetT()<<endl;
+//   if (IsStopping()) {
+//     cout <<"Stoppping Position (StopPos): "<<endl;
+//     GetStopPos().PrintPosition();
+//     cout <<"Stop Time (StopT): "<<GetStopT()<<endl;
+//   }
+//   cout <<"Zenith: "<<GetZenith()/I3Units::degree<<" deg"<<endl;
+//   cout <<"Azimuth: "<<GetAzimuth()/I3Units::degree<<" deg"<<endl;
+//   cout <<"Length: "<<GetLength()<<endl;
+//   cout <<"========================================================="<<endl;
+// }
 //-----------------------------------------------------------
 
 // I3Position I3Track::ClosestApproach(I3Position pos)

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.8 2004/07/06 15:35:52 pretz Exp $
+ * $Id: I3TrackImpl.h,v 1.9 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/06 15:35:52 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -104,62 +104,6 @@ class I3TrackImpl : public I3Track,
   virtual Double_t GetAzimuth() const {return GeometricalType::GetAzimuth();}
 
   /**
-   * starting x position
-   */
-  virtual Double_t GetStartX() const {return GeometricalType::GetStartX();}
-
-  /**
-   * starting y position
-   */
-  virtual Double_t GetStartY() const {return GeometricalType::GetStartY();}
-
-  /**
-   * starting z position
-   */
-  virtual Double_t GetStartZ() const {return GeometricalType::GetStartZ();}
-
-  /**
-   * starting time
-   */
-  virtual Double_t GetStartT() const {return GeometricalType::GetStartT();}
-
-  /**
-   * the starting position as an I3Position
-   */
-  virtual I3Position GetStartPos() const 
-    {
-      return GeometricalType::GetStartPos();
-    }
-
-  /**
-   * the stopping x position
-   */
-  virtual Double_t GetStopX() const {return GeometricalType::GetStopX();}
-
-  /**
-   * the stopping y position
-   */
-  virtual Double_t GetStopY() const {return GeometricalType::GetStopY();}
-
-  /**
-   * the stopping z position
-   */
-  virtual Double_t GetStopZ() const {return GeometricalType::GetStopZ();}
-
-  /**
-   * the stopping time
-   */
-  virtual Double_t GetStopT() const {return GeometricalType::GetStopT();}
-
-  /**
-   * the stopping position as an I3Position
-   */
-  virtual I3Position GetStopPos() const 
-    {
-      return GeometricalType::GetStopPos();;
-    }
-
-  /**
    * some X position along the track, corresponding to Y(),Z(), and T()
    */
   virtual Double_t GetX() const {return GeometricalType::GetX();}
@@ -188,11 +132,6 @@ class I3TrackImpl : public I3Track,
     }
 
   /**
-   * The energy of the particle
-   */
-  virtual Double_t GetEnergy() const {return EnergeticType::GetEnergy();}
-
-  /**
    * the speed of the particle
    */
   virtual Double_t GetSpeed() const {return GeometricalType::GetSpeed();}
@@ -201,14 +140,6 @@ class I3TrackImpl : public I3Track,
    * the length of the particle
    */
   virtual Double_t GetLength() const {return GeometricalType::GetLength();}
-
-  /**
-   * retrieves the constituents of this track
-   */
-  virtual const vector<I3ParticlePtr>& GetConstituents() const 
-    {
-      return CompositeType::GetConstituents();
-    }
 
   /**
    * copies over data from this particle to the destination particle

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Starting.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -17,7 +17,6 @@
 #include "I3Position.h"
 #include "I3Constants.h"
 
-#include "NanPolicy.h"
 
 /**
  * @brief This class services the 'geometrical' part of the I3Track interface.
@@ -162,54 +161,6 @@ class I3Starting{
    * returns Infinity for the length of the track
    */
   Double_t GetLength() const {return INFINITY;}
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  Double_t GetStopX() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  Double_t GetStopY() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  Double_t GetStopZ() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  Double_t GetStopT() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  I3Position GetStopPos() const 
-    {
-      NanPolicy::Fatal();
-      I3Position p;
-      p.NullPosition();
-      return p;
-    }
 
   /**
    * returns the speed of light

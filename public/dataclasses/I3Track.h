@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.21 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3Track.h,v 1.22 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  */
 
@@ -75,6 +75,16 @@ class I3Track : public I3ObservableParticle
   virtual Bool_t IsContained() const  =0;
 
   /**
+   * returns the zenith of the track
+   */
+  virtual Double_t GetZenith() const =0;
+
+  /**
+   * returns the azimuth of the track
+   */
+  virtual Double_t GetAzimuth() const = 0;
+
+  /**
    * indicates that the track has an energy
    */
   virtual Bool_t HasEnergy() const =0;
@@ -83,59 +93,6 @@ class I3Track : public I3ObservableParticle
    * indicates that the track is a composite track
    */
   virtual Bool_t IsComposite() const =0;
-
-  // starting 4-position
-  /**
-   * starting x position
-   */
-  virtual Double_t GetStartX() const =0;
-
-  /**
-   * starting y position
-   */
-  virtual Double_t GetStartY() const =0;
-
-  /**
-   * starting z position
-   */
-  virtual Double_t GetStartZ() const =0;
-
-  /**
-   * starting time
-   */
-  virtual Double_t GetStartT() const =0;
-
-  /**
-   * the starting position as an I3Position
-   */
-  virtual I3Position GetStartPos() const =0;
-  
-  // stopping 4-position
-  /**
-   * the stopping x position
-   */
-  virtual Double_t GetStopX() const =0;
-
-  /**
-   * the stopping y position
-   */
-  virtual Double_t GetStopY() const =0;
-
-  /**
-   * the stopping z position
-   */
-  virtual Double_t GetStopZ() const =0;
-
-  /**
-   * the stopping time
-   */
-  virtual Double_t GetStopT() const =0;
-
-
-  /**
-   * the stopping position as an I3Position
-   */
-  virtual I3Position GetStopPos() const =0;
 
   // Some 4 position on the track
   /**
@@ -163,12 +120,6 @@ class I3Track : public I3ObservableParticle
    */
   virtual I3Position GetPos() const =0;
   
-  // energy
-  /**
-   * The energy of the particle
-   */
-  virtual Double_t GetEnergy() const =0;
-
   // speed 
   /**
    * the speed of the particle
@@ -181,16 +132,11 @@ class I3Track : public I3ObservableParticle
    */
   virtual Double_t GetLength() const =0;
 
-  // composite particle stuff
   /**
-   * retrieves the constituent particles
-   */
-  virtual const vector<I3ParticlePtr>& GetConstituents() const = 0;
-
-  /**
+   * @todo implement 'PrintTrack()' as operator<<
    * Print all information about the I3track
    */
-  void PrintTrack();
+  //  void PrintTrack();
 
  /**
   * copies over data from this particle to the destination particle

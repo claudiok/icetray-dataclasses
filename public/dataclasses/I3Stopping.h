@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Stopping.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -13,7 +13,6 @@
 
 #include <cmath>
 #include "I3Units.h"
-#include "NanPolicy.h"
 #include "I3Constants.h"
 
 /**
@@ -47,53 +46,6 @@ class I3Stopping{
    * indicates that the particle is directional
    */
   Bool_t HasDirection() const {return true;}
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  Double_t GetStartX() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  Double_t GetStartY() const     
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  Double_t GetStartZ() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-  
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  Double_t GetStartT() const
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-  
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  I3Position GetStartPos() const
-    {
-      NanPolicy::Fatal();
-      I3Position p;
-      p.NullPosition();
-      return p;
-    }
 
   /**
    * A x position along the track. Gives the stopping x position. 
@@ -211,14 +163,6 @@ class I3Stopping{
    * gives the speed of light for the speed.
    */
   Double_t GetSpeed() const {return I3Constants::c;}
-
-  /**
-   * shouldn't be used.  Calls fatal
-   */
-  void SetSpeed(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
 
   /**
    * copies the 'stopping' data into  the destination particle if a 

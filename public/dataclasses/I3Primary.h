@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.8 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Primary.h,v 1.9 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3Primary.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
   */
 
@@ -17,7 +17,6 @@
 
 /**
  * @brief Represents a particle which induces an event in the detector.
- * @todo implement fatal calls
  */
 class I3Primary : public I3Particle{
  public:
@@ -31,21 +30,6 @@ class I3Primary : public I3Particle{
    * asking CoreX, and CoreY and CoreT is legit.
    */
   virtual Bool_t HasCorePosition() const = 0;
-
-  /**
-   * the core X position of the particle
-   */
-  virtual Double_t GetCoreX() const =0;
-
-  /**
-   * the position of the core y position of the particle
-   */
-  virtual Double_t GetCoreY() const =0;
-
-  /**
-   * the time the particle was at CoreX and CoreY
-   */
-  virtual Double_t GetCoreT() const =0;
 
   /**
    * Copies over data from the source particle to this particle.

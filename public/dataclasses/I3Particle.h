@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.10 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3Particle.h,v 1.11 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  *
  */
@@ -23,7 +23,6 @@ using namespace std;
 
 /**
  * @brief The base 'particle' class.  
- * @todo implement fatal calls
  * @todo should there be a 'generic muon' and 'generic tau' types?
  */
 class I3Particle : public TObject{
@@ -115,17 +114,6 @@ public:
 	fID = ID;
     };
   
-
- /**
-  * phi
-  */
- virtual Double_t GetAzimuth() const =0;
-
- /**
-  * theta
-  */
- virtual Double_t GetZenith() const =0;
-
  /**
   * copies over data from this particle to the destination particle
   * Only copies that data which the two have in common

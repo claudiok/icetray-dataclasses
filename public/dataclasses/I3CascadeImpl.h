@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3CascadeImpl.h,v 1.7 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -66,16 +66,6 @@ class I3CascadeImpl : public I3Cascade,
   virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
 
   /**
-   * the zenith of the cascade
-   */
-  virtual Double_t GetZenith() const {return DirectionalType::GetZenith();}
-
-  /**
-   * the azimuth of the cascade
-   */
-  virtual Double_t GetAzimuth() const {return DirectionalType::GetAzimuth();}
-
-  /**
    * the X position of the cascade
    */
   virtual Double_t GetX() const {return LocalizableType::GetX();}
@@ -99,11 +89,6 @@ class I3CascadeImpl : public I3Cascade,
    * the position of the cascade as an I3Position object
    */
   virtual I3Position GetPos() const {return I3Position(GetX(),GetY(),GetZ());}
-
-  /**
-   * the energy of the cascade
-   */
-  virtual Double_t GetEnergy() const {return EnergeticType::GetEnergy();}
 
   virtual void CopyTo(I3Particle& destination) const
     {

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.8 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.9 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  *
  */
@@ -59,37 +59,6 @@ class I3PrimaryImpl : public I3Primary,
    * indicates whether or not the primary has a valid core position
    */
   virtual Bool_t HasCorePosition() const {return CoreType::HasCorePosition();}
-
-  /**
-   * gives the zenith of the primary
-   */
-  virtual Double_t GetZenith() const {return DirectionalType::GetZenith();}
-
-
-  /**
-   * gives the azimuth of the primary
-   */
-  virtual Double_t GetAzimuth() const {return DirectionalType::GetAzimuth();}
-
-  /**
-   * gives the X coordinate of the core
-   */
-  virtual Double_t GetCoreX() const {return CoreType::GetCoreX();}
-
-  /**
-   * gives the y position of the core
-   */
-  virtual Double_t GetCoreY() const {return CoreType::GetCoreY();}
-
-  /**
-   * gives the T position of the core
-   */
-  virtual Double_t GetCoreT() const {return CoreType::GetCoreT();}
-
-  /**
-   * gives the energy of the particle
-   */
-  virtual Double_t GetEnergy() const {return EnergeticType::GetEnergy();}
 
   /**
    * 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.7 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Infinite.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author 
  */
 
@@ -14,7 +14,6 @@
 
 #include <cmath>
 #include "I3Units.h"
-#include "NanPolicy.h"
 #include "I3Constants.h"
 
 /**
@@ -45,53 +44,6 @@ class I3Infinite{
    * indicates that this is a directional track
    */ 
   Bool_t HasDirection() const {return true;}
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStartX() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStartY() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStartZ() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStartT() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  I3Position GetStartPos() const 
-    {
-      NanPolicy::Fatal();
-      I3Position p;
-      p.NullPosition();
-      return p;
-    }
 
   /**
    * gives an x position of the track
@@ -174,53 +126,6 @@ class I3Infinite{
    * returns the length of the track ... infinite
    */
   Double_t GetLength() const {return INFINITY;}
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStopX() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStopY() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStopZ() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  Double_t GetStopT() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
-
-  /**
-   * should not be used.  Calls Fatal().
-   */
-  I3Position GetStopPos() const 
-    {
-      NanPolicy::Fatal();
-      I3Position p;
-      p.NullPosition();
-      return p;
-    }
 
   /**
    * returns the speed of light

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.7 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3Cascade.h,v 1.8 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -21,7 +21,6 @@
  * be able to get X,Y,Z and T out.  If HasEnergy is true, then you should
  * expect to be able to get an Energy out. 
  *
- * @todo implement fatal calls
  *
  */
 class I3Cascade : public I3ObservableParticle{
@@ -72,11 +71,6 @@ class I3Cascade : public I3ObservableParticle{
    * the position of the cascade as an I3Position object
    */
   virtual I3Position GetPos() const =0;
-
-  /**
-   * the energy of the cascade
-   */
-  virtual Double_t GetEnergy() const = 0;
 
  /**
   * Copies the data from the source particle into this particle

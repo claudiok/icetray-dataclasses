@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonEnergetic.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3NonEnergetic.h,v 1.6 2004/07/26 13:53:55 pretz Exp $
  *
  * @file I3NonEnergetic.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/07/26 13:53:55 $
  * @author pretz
  */
 #ifndef I3NONENERGETIC_H
@@ -13,7 +13,6 @@
 
 #include "Rtypes.h"
 #include <cmath>
-#include "NanPolicy.h"
 
 /**
  * @brief This is the 'Energy' part of an I3Track or I3Cascade implementation. 
@@ -26,15 +25,6 @@ class I3NonEnergetic
    * Indicates that the particle has no energy information.
    */
   Bool_t HasEnergy() const {return false;}
-
-  /**
-   * Shouldn't be used.  Calls fatal.
-   */
-  Double_t GetEnergy() const 
-    {
-      NanPolicy::Fatal();
-      return NAN;
-    }
 
   /**
    * doesn't do anything.  There's nothing to copy.
