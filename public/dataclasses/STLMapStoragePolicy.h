@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.16 2004/12/16 15:41:58 troy Exp $
+    $Id: STLMapStoragePolicy.h,v 1.17 2005/03/07 23:02:37 olivas Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.16 $
-    @date $Date: 2004/12/16 15:41:58 $
+    @version $Revision: 1.17 $
+    @date $Date: 2005/03/07 23:02:37 $
     @author Troy Straszheim
 
 */
@@ -84,9 +84,25 @@ class STLMapStoragePolicy {
   ElementType& operator[](const KeyType& key) { return map_[key]; }
 
   /**
-   * The same as operator[]
+   * Similar to operator[] except that it checks to see
+   * whether the key exists before retrieving it.
+   * If it does not find the key you're looking for
+   * it prints an error message and a list of possible keys.
    */
-  ElementType& Get(const KeyType& key) {return map_[key];}
+  ElementType& Get(const KeyType& key) {
+    if(!count(key)){
+      if(!IsEmpty()){
+	cerr<<"WARNING: Key \'"<<key<<"\' Not found.  Here's a list of possible keys:"<<endl;
+	for(typename map_type::iterator iter = begin(); iter != end(); iter++){
+	  cerr<<iter->first<<" ";
+	}
+	cerr<<endl;
+      }else{
+	cerr<<"WARNING: You're trying to look for keys in an empty map."<<endl;
+      }
+    }
+    return map_[key];
+  }
 
   /**
    * puts some data in the map with a particular key.  
@@ -98,10 +114,12 @@ class STLMapStoragePolicy {
   bool Add(const ElementType& element, const KeyType& key)
     {
       iterator iter = find(key);
-      if(iter != end())
+      if(iter != end()){
+	cerr<<"WARNING: Key \'"<<key<<"\' already used."<<endl;
 	return false;
-      else
+      }else{
 	this->operator[](key) = element;
+      }
       return true;
     }
 
@@ -221,6 +239,9 @@ class STLMapStoragePolicy {
    */
   iterator find (const KeyType& key) { return map_.find(key); }
   const_iterator find (const KeyType& key) const { return map_.find(key); }
+
+  size_type count(const KeyType& key){ return map_.count(key); }
 };
+
 
 #endif
