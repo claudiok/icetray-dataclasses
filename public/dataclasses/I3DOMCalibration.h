@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.4 2004/11/17 22:59:14 tmccauley Exp $
+ * $Id: I3DOMCalibration.h,v 1.5 2004/11/19 23:31:14 dima Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/11/17 22:59:14 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/11/19 23:31:14 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -140,6 +140,36 @@ public:
 	{
 	    return fPedestalVoltage;
 	};
+
+    void SetPeakToValley(Double_t p2v)
+	{
+	    fPeakToValley = p2v;
+	};
+    
+    Double_t GetPeakToValley()
+	{
+	    return fPeakToValley;
+	};
+
+    void SetOnePEinPC(Double_t OnePE)
+	{
+	    fOnePEinPC = OnePE;
+	};
+    
+    Double_t GetOnePEinPC()
+	{
+	    return fOnePEinPC;
+	};
+
+    void SetWidth1PEinPC(Double_t width1pe)
+	{
+	    fWidth1PEinPC = width1pe;
+	};
+    
+    Double_t GetWidth1PEinPC()
+	{
+	    return fWidth1PEinPC;
+	};
     
     void SetSamplingRate(Int_t id, Double_t rate);
     
@@ -160,6 +190,10 @@ private:
     Double_t fPMTHighVoltage;
     Double_t fPedestalVoltage;
     
+    Double_t fPeakToValley;
+    Double_t fOnePEinPC;
+    Double_t fWidth1PEinPC;
+
     Double_t fSamplingRate0;
     Double_t fSamplingRate1;
 
