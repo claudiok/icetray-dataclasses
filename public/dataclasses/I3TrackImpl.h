@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackImpl.h,v 1.1.2.7 2004/04/20 16:51:16 pretz Exp $
+    $Id: I3TrackImpl.h,v 1.1.2.8 2004/04/20 18:58:34 pretz Exp $
 
-    @version $Revision: 1.1.2.7 $
-    @date $Date: 2004/04/20 16:51:16 $
+    @version $Revision: 1.1.2.8 $
+    @date $Date: 2004/04/20 18:58:34 $
     @author
 
     @todo
@@ -72,7 +72,7 @@ class I3TrackImpl : public I3Track,
 
   virtual I3Position StartPos() const 
     {
-      return I3Position(StartX(),StartY(),StartZ(),StartT());
+      return I3Position(StartX(),StartY(),StartZ());
     }
 
   virtual Double_t StopX() const {return GeometricalType::StopX();}
@@ -89,7 +89,7 @@ class I3TrackImpl : public I3Track,
 
   virtual I3Position StopPos() const 
     {
-      return I3Position(StopX(),StopY(),StopZ(),StopT());
+      return I3Position(StopX(),StopY(),StopZ());
     }
 
   virtual Double_t X() const {return GeometricalType::X();}
@@ -106,7 +106,7 @@ class I3TrackImpl : public I3Track,
 
   virtual I3Position Pos() const 
     {
-      return I3Position(X(),Y(),Z(),T());
+      return I3Position(X(),Y(),Z());
     }
 
   virtual Double_t Energy() const {return EnergeticType::Energy();}
