@@ -4,7 +4,7 @@
 /**
  * Class: I3RecoResult
  *
- * Version: $Id: I3RecoResult.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
+ * Version: $Id: I3RecoResult.h,v 1.8 2004/02/10 15:24:14 pretz Exp $
  *
  * Date: 30 Jan 2004
  *
@@ -31,7 +31,7 @@
  * for simpler access to the reconstructed tracks. The data itself is
  * still stored as provided in this class, so that the tracks can also
  * be accessed by this class without the need of recasting.
- * @version $Id: I3RecoResult.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
+ * @version $Id: I3RecoResult.h,v 1.8 2004/02/10 15:24:14 pretz Exp $
  * @author Ralf Ehrlich
  */
 class I3RecoResult : public TObject
@@ -49,7 +49,7 @@ class I3RecoResult : public TObject
   int GetNumberRecoTrackLists() const;
   const I3RecoTrackList& GetRecoTrackList(unsigned short index) const;
   void AddRecoTrackList(I3RecoTrackList* recotracklist_);
-  I3Iterator<const I3RecoTrackList>* MakeRecoTrackListIterator();
+  I3Iterator<const I3RecoTrackList>* MakeRecoTrackListIterator() const;
 
   bool HasBestRecoTrackList() const;
   const I3RecoTrackList& GetBestRecoTrackList() const;

@@ -26,7 +26,7 @@ void I3RecoResultData::AddRecoResult(I3RecoResult* recoresult_)
   if(recoresult==NULL) recoresult = new TObjArray(1); recoresult->Add(recoresult_);
 }
 
-I3Iterator<const I3RecoResult>* I3RecoResultData::MakeRecoResultIterator()
+I3Iterator<const I3RecoResult>* I3RecoResultData::MakeRecoResultIterator() const
 {
   if(!recoresult)
     return new I3ZeroItemIterator<const I3RecoResult>();

@@ -24,7 +24,7 @@ void I3RecoTrackList::AddRecoTrack(I3RecoTrack* recotrack_)
   if(recotrack==NULL) recotrack = new TObjArray(1); recotrack->Add(recotrack_);
 }
 
-I3Iterator<const I3RecoTrack>* I3RecoTrackList::MakeRecoTrackIterator()
+I3Iterator<const I3RecoTrack>* I3RecoTrackList::MakeRecoTrackIterator() const
 {
   if(!recotrack)
     return new I3ZeroItemIterator<const I3RecoTrack>();
