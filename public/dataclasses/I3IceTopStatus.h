@@ -2,27 +2,22 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStatus.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3IceTopStatus.h,v 1.7 2004/09/03 23:32:08 niessen Exp $
  *
  * @file I3IceTopStatus.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/09/03 23:32:08 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATUS_H
 #define I3ICETOPSTATUS_H
 
+#include <sstream>
+
 #include "TObject.h"
 #include "I3IceTopStationStatus.h"
 #include "StoragePolicy.h"
-#include <sstream>
-
-/**
- * @brief A station key used to access the IceTop stations.
- *
- * It's just an integer.
- */
-typedef int StationKey;
+#include "StationKey.h"
 
 /**
  * @brief a container for I3IcetTopStationStatus objects.  Just holding a place

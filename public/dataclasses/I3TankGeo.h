@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.13 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3TankGeo.h,v 1.14 2004/09/03 23:32:08 niessen Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/09/03 23:32:08 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -16,40 +16,42 @@
 #include <TObject.h>
 
 #include "dataclasses/I3TankMaterial.h"
-#include "dataclasses/I3InIceGeometry.h"
-#include "dataclasses/I3Constants.h"
-
+#include "dataclasses/I3SurfModuleGeo.h"
+#include "dataclasses/StoragePolicy.h"
 using namespace std;
 
 /**
- * @brief Class which describes a single tank
+ * @brief Class which describes the single tank geometry
+ * Actually, the tank filling is not needed because it is represented
+ * in the selected photon propagation table.
  * @todo comment methods
  * @todo Should this class use something other than I3InIceGeometry?
  */
-class I3TankGeo : public TObject,
-		  public VectorPolicy<I3OMGeoPtr>::ThePolicy
-{
+class I3TankGeo : public I3SurfModuleGeo {
+
   public:
 
+  /**
+   * constructor
+   */
   I3TankGeo() {}
+
+  /**
+   * virtual destructor
+   */
   virtual ~I3TankGeo() {}
 
-  I3Position GetTankPos() const { return fTankPos; }
-  void SetTankPos(I3Position pos) { fTankPos.SetPosition(pos); }
-  void SetTankPos(Double_t x, Double_t y) {fTankPos.SetPosition(x,y,I3Constants::zIceTop);}
+  /**
+   * The tank radius (outer radius)
+   */
+  Double_t GetRadius() const { return fRadius; }
+  void SetRadius(Double_t r) { fRadius = r; }
 
-  Double_t GetTankRadius() const { return fTankR; }
-  void SetTankRadius(Double_t r) { fTankR = r; }
-
-  Double_t  GetTankHeight() const { return fTankH; }
-  void SetTankHeight(Double_t h) { fTankH = h; }
-
-  UChar_t GetVersion() const { return fVersion; }
-  void SetVersion(UChar_t version) { fVersion = version; }
-
-  const I3TankMaterial &Material () const { return fMaterial; }
-  I3TankMaterial& Material() {return fMaterial;}
-
+  /**
+   * The tank height (overall height), as simulated in tanktop.
+   */
+  Double_t  GetHeight() const { return fHeight; }
+  void SetHeight(Double_t h) { fHeight = h; }
 
   /**
    * @todo need more implementation here
@@ -68,16 +70,13 @@ class I3TankGeo : public TObject,
 
  private:
 
-  I3Position fTankPos; //position of the tank
-  Double_t fTankR; // radius of the tank
-  Double_t fTankH; // height of the tank
-
-  I3TankMaterial fMaterial;
+  Double_t fRadius; // radius of the tank
+  Double_t fHeight; // height of the tank
   
   UChar_t fVersion; // some version number.
 
-  ClassDef(I3TankGeo,1);
-
+  ClassDef(I3TankGeo,2); // increased to 2 Thu Sep  2 16:13:52 EDT 2004
+  // because some stuff moved up to I3SurfModuleGeo.
 };
 
 inline ostream& operator<<(ostream& o, const I3TankGeo tank)
@@ -86,7 +85,6 @@ inline ostream& operator<<(ostream& o, const I3TankGeo tank)
   return o;
 }
 
-#include "dataclasses/StoragePolicy.h"
 /**
  * a pointer type to insulate users from memory management
  */

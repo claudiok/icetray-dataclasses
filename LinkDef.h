@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.123 2004/08/18 18:46:52 pretz Exp $
-// $Revision: 1.123 $
-// $Date: 2004/08/18 18:46:52 $
+// $Id: LinkDef.h,v 1.124 2004/09/03 23:32:08 niessen Exp $
+// $Revision: 1.124 $
+// $Date: 2004/09/03 23:32:08 $
 //
 
 #ifdef __CINT__
@@ -196,25 +196,40 @@
 #pragma link C++ typedef I3RecoHitSeriesDictPtr;
 #pragma link C++ class roost::shared_ptr<I3RecoHitSeriesDict>+;
 
-#pragma link C++ class I3TopStationGeo+;
-#pragma link C++ typedef VectorPolicy<I3TankGeoPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3TankGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3TopStationGeoPtr;
-#pragma link C++ class I3TopStationGeoPtr+;
-#pragma link C++ class roost::shared_ptr<I3TopStationGeo>+;
+#pragma link C++ classs I3StationGeo+;
+#pragma link C++ typedef VectorPolicy<I3TankGeo *>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3TankGeo *>::ThePolicy+;
+#pragma link C++ typedef I3StationGeoPtr;
+#pragma link C++ class I3StationGeoPtr+;
+#pragma link C++ class roost::shared_ptr<I3StationGeo>+;
 
-#pragma link C++ class I3TankGeo+;
-#pragma link C++ typedef VectorPolicy<I3OMGeoPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3OMGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3TankGeoPtr;
-#pragma link C++ class I3TankGeoPtr+;
-#pragma link C++ class roost::shared_ptr<I3TankGeo>+;
+#pragma link C++ class I3SurfModuleGeo+;
+#pragma link C++ typedef VectorPolicy<I3OMGeo *>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3OMGeo *>::ThePolicy+;
+#pragma link C++ typedef I3SurfModuleGeoPtr;
+#pragma link C++ class I3SurfModuleGeoPtr+;
+#pragma link C++ class roost::shared_ptr<I3SurfModuleGeo>+;  
 
-#pragma link C++ class I3TopGeometry+;
-#pragma link C++ typedef MapPolicy<StationKey,I3TopStationGeoPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<StationKey,I3TopStationGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3TopGeometryPtr;
-#pragma link C++ class roost::shared_ptr<I3TopGeometry>+;
+#pragma link C++ class I3OMTopMap+;
+#pragma link C++ typedef MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy+;
+#pragma link C++ typedef I3OMTopMapPtr;
+#pragma link C++ class I3OMTopMapPtr+;
+#pragma link C++ class roost::shared_ptr<I3OMTopMap>+;
+
+#pragma link C++ class I3SurfModuleVector+;
+#pragma link C++ typedef VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy+;
+#pragma link C++ typedef I3SurfModuleVectorPtr;
+#pragma link C++ class I3SurfModuleVectorPtr+;
+#pragma link C++ class roost::shared_ptr<I3SurfModuleVector>+;
+
+#pragma link C++ class I3StationMap+;
+#pragma link C++ typedef MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy+;
+#pragma link C++ typedef I3StationMapPtr;
+#pragma link C++ class I3StationMapPtr+;
+#pragma link C++ class roost::shared_ptr<I3StationMap>+;
 
 #pragma link C++ class I3MCTankHit+;
 #pragma link C++ typedef VectorPolicy<I3IceTopParticlePtr>::ThePolicy;
@@ -369,7 +384,7 @@
 
 #pragma link C++ class I3OMGeo+;
 #pragma link C++ typedef I3OMGeoPtr;
-#pragma link C++ class roost::shared_ptr<I3MCTopShower>+;
+#pragma link C++ class roost::shared_ptr<I3OMGeo>+;
 
 #pragma link C++ class I3MCTopShower+;
 #pragma link C++ typedef I3MCTopShowerPtr;
@@ -377,7 +392,11 @@
 
 #pragma link C++ class I3OMGeoAMANDA+;
 #pragma link C++ typedef I3OMGeoAMANDAPtr;
-#pragma link C++ class roost::shared_ptr<I3OMGeoIceCube>+;
+#pragma link C++ class roost::shared_ptr<I3OMGeoAMANDA>+;
+
+#pragma link C++ class I3OMGeoIceTop+;
+#pragma link C++ typedef I3OMGeoIceTopPtr;
+#pragma link C++ class roost::shared_ptr<I3OMGeoIceTop>+;
 
 #pragma link C++ class I3OMGeoIceCube+;
 #pragma link C++ typedef I3OMGeoIceCubePtr;
@@ -443,12 +462,20 @@
 #pragma link C++ typedef I3SLCReadoutPtr;
 #pragma link C++ class roost::shared_ptr<I3SLCReadout>+;
 
+#pragma link C++ class I3SPASEModuleGeo+;
+#pragma link C++ typedef I3SPASEModuleGeoPtr;
+#pragma link C++ class roost::shared_ptr<I3SPASEModuleGeo>+;
+
 #pragma link C++ class I3Starting+;
 #pragma link C++ class I3Stopping+;
 
 #pragma link C++ class I3SummaryPulseReadout+;
 #pragma link C++ typedef I3SummaryPulseReadoutPtr;
 #pragma link C++ class roost::shared_ptr<I3SummaryPulseReadout>+;
+
+#pragma link C++ class I3TankGeo+;
+#pragma link C++ typedef I3TankGeoPtr;
+#pragma link C++ class roost::shared_ptr<I3TankGeo>+;
 
 #pragma link C++ class I3TankHit+;
 #pragma link C++ typedef I3TankHitPtr;
@@ -457,6 +484,10 @@
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ typedef I3TankMaterialPtr;
 #pragma link C++ class roost::shared_ptr<I3TankMaterial>+;
+
+#pragma link C++ class I3TopGeometry+;
+#pragma link C++ typedef I3TopGeometryPtr;
+#pragma link C++ class roost::shared_ptr<I3TopGeometry>+;
 
 #pragma link C++ class I3Track+;
 #pragma link C++ typedef I3TrackPtr;

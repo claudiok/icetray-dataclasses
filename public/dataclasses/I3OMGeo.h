@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.28 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.29 2004/09/03 23:32:08 niessen Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.28 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.29 $
+ * @date $Date: 2004/09/03 23:32:08 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -39,7 +39,7 @@ class I3OMGeo : public TObject
   /**
    * An enumerated type for the possible kinds of OMs
    */
-  enum EOMType {AMANDA,IceCube};
+  enum EOMType {AMANDA,IceCube,IceTop};
 
  protected:
   /**

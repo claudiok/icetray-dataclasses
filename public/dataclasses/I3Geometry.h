@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.26 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3Geometry.h,v 1.27 2004/09/03 23:32:08 niessen Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.26 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.27 $
+ * @date $Date: 2004/09/03 23:32:08 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -16,7 +16,7 @@
 
 #include "StoragePolicy.h"
 #include "I3InIceGeometry.h"
-#include "I3TopGeometry.h"
+//#include "I3TopGeometry.h"
 /**
  * @brief Top-level container of Geometry information
  * 
@@ -27,7 +27,7 @@
 class I3Geometry : public TObject 
 {
   I3InIceGeometry fInIce; //||;
-  I3TopGeometry fTop; //||
+ // I3TopGeometry fTop; //||
  public:
   /**
    * constructor
@@ -49,6 +49,7 @@ class I3Geometry : public TObject
    */
   I3InIceGeometry& GetInIceGeometry() { return fInIce;}
 
+#if 0
   /**
    * @return the IceTop geometry as a const object
    */
@@ -58,6 +59,7 @@ class I3Geometry : public TObject
    * @return the IceTop geometry as a non-const object
    */
   I3TopGeometry& GetIceTopGeometry() { return fTop; }
+#endif
 
   /**
    * streams the geometry to the given ostream

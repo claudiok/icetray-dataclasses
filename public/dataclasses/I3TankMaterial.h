@@ -1,17 +1,20 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankMaterial.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3TankMaterial.h,v 1.7 2004/09/03 23:32:08 niessen Exp $
  *
  * @file I3TankMaterial.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/09/03 23:32:08 $
  * @author Peter Niessen Thu Feb 19 11:42:22 EST 2004
  */
 #ifndef __I3TANKMATERIAL_H_
 #define __I3TANKMATERIAL_H_
 
+#include <sstream>
+
 #include <TObject.h>
+
 #include "StoragePolicy.h"
 
 /**
