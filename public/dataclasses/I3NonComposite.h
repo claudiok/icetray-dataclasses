@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonComposite.h,v 1.6 2004/07/06 15:35:52 pretz Exp $
+ * $Id: I3NonComposite.h,v 1.7 2004/07/06 16:41:45 pretz Exp $
  *
  * @file I3NonComposite.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/07/06 15:35:52 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/07/06 16:41:45 $
  * @author pretz
  */
 #ifndef I3NONCOMPOSITE_H
@@ -37,7 +37,7 @@ class I3NonComposite
   /**
    * indicates that this track is not a composite track
    */
-  Bool_t IsComposite() const {return false;}
+  Bool_t IsComposite() const {return kFALSE;}
 
   /**
    * Shouldn't be used.  Calls Fatal();
