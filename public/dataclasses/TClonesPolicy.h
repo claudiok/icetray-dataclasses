@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: TClonesPolicy.h,v 1.1 2004/02/15 02:38:55 troy Exp $
+    $Id: TClonesPolicy.h,v 1.2 2004/02/16 20:04:26 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/15 02:38:55 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/16 20:04:26 $
     @author
 
     @todo   need to get name of element class, see "new TClonesArray"
@@ -14,6 +14,7 @@
 #define TCLONES_POLICY_INCLUDED
 
 #include <TClonesArray.h>
+#include <TClass.h>
 
 template <class ElementType>
 class TClonesPolicy {
@@ -31,22 +32,22 @@ class TClonesPolicy {
   //    vector_.push_back(e);
   //  }
 
-  reference operator[](size_t n) { return *(ElementType*)(*theclones)[n]; }
+  reference operator[](size_t n) { return *(ElementType*)(theclones)[n]; }
 
-  const_reference operator[](size_t n) const { return *(ElementType*)(*theclones)[n]; }
+  const_reference operator[](size_t n) const { return *(ElementType*)(theclones)[n]; }
 
-  size_t size() const { return theclones->GetEntriesFast(); }
-  void resize(size_t newsize_) { theclones->Expand(newsize_); }
+  size_t size() const { return theclones.GetEntriesFast(); }
+  void resize(size_t newsize_) { theclones.Expand(newsize_); }
   //  iterator begin() { return vector_.begin(); }
   //  iterator end() { return vector_.end(); }
  
   // danger danger, need to get class name better
-  TClonesPolicy() { theclones = new TClonesArray("I3RecoHit", 0); }
-  ~TClonesPolicy() { delete theclones; }
+  TClonesPolicy() : theclones(ElementType::Class()->GetName(),0){ }
+  ~TClonesPolicy() { }
 
  protected:
 
-  TClonesArray *theclones;
+  TClonesArray theclones;
 
 };
 
