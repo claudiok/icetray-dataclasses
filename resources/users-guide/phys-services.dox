@@ -1,18 +1,17 @@
 /**
-@page phys-services Installing the Phys-Services
+@page phys-services Using the Physics Services
 @author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
 
 @section prerecs Prerequisites:
 
 @li @ref devenv-setup
 
-@li @ref icetray-setup
-
 @li @ref dataclasses-setup
 
 @section desc Description:
 
-The <code>phys-services</code> project is a collection of IceTray services
+The <code>phys-services</code> project is a collection of common IceTray 
+services
 for use in icetray modules.  Currently there are two types of services
 provided:
 
@@ -20,42 +19,58 @@ provided:
 I3RandomService is an abstract interface, which can be serviced by any of
 several implementations.  Currently the only implementation is the 
 I3TRandomService which uses a private instance of TRandom to create its random
-numbers.
+numbers.  The advantage of having an I3RandomService interface between us and
+TRandom is that we can swap out implementations of TRandom dynamically later on.
+
 
 @li <b>I3ParticleDataService</b> is a service dealing with the 
-IceCube particle types.  The I3ParticleDataService provides physical constants such as mass, charge, and lifetime for any I3Track::Type that is given it.  There
-are also facilites for converting between RDMC particle ids, Geant particle ids,
-and PDG particle ids, and a facility to convert an I3Track::Type into a 
-std::string.  The conversion of Geant and PDG particle types has yet to be
-implemented.
+IceCube particle types.  The I3ParticleDataService provides physical constants 
+such as mass, charge, and lifetime for any I3Particle::ParticleType that is 
+given it.  
+There are also facilites for converting between RDMC particle ids, Geant 
+particle ids, and PDG particle ids, and a facility to convert an 
+I3Particle::ParticleType into a std::string.  The conversion of Geant and PDG 
+particle types has yet to be implemented.  There are probably several important
+features that should be in this class that are not yet implemented.
+
+These are the only two services implemented at this point, but a few more are 
+anticipated:
+
+@li I expect we will have a <b>'Standard Calculations'</b> service of some kind.
+This idea is not fully flushed out, but I picture some kind of service which 
+will
+calculate the 'delay times' or 'direct hits' of a track given an set of OM 
+responses.  I imagine that all these 'standard calculations' would be included
+here so that they can be accessible to all the modules, but can be swapped
+out dynamically.
+
+@li I picture the possibility for a <b>'Minimization Service'</b> so that we 
+can modularize the minimization process as distinct from the physics.  
+This will probably just be a generic
+interface which will be implemented by ROOT's TMinuit like is done with the 
+Random number service.
+
+@li It would probably be beneficial to have <b>'Database Lookups'</b> 
+referenced as
+a service so as to insulate users from database lookups, and whether or not
+the information retrieved is loacated in a database or in a local file, and
+to insulate users from changes in the lookup mechanics.
+
+@li There has been some talk of having the <b>'Photon Tables'</b> accessed
+as a service, to insulate users of changes in the coordinate systems used 
+and how the tables are accessed. 
 
 @section download Download
 
-The <code>phys-services</code> project is currently located in the development
-cvs archive on glacier.lbl.gov.  <br>
-<b> Take note: This is not the 
-production archive.  You may need to reset your CVSROOT.<br></b>
-
-From your workspace do:<br>
-<code>%setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev</code><br>
-<code>% cvs co phys-services</code><br>
+The @c phys-services project is located in the production cvs archive on 
+glacier.lbl.gov.  CVSROOT should point to :ext:glacier.lbl.gov:/home/icecube/cvsroot and the module name is phys-services.
+It is included in the @c DATACLASS-APP metaproject, so there is no need to
+download it separate from the @c DATACLASS-APP metaproject
 
 @section build Build
 
-The 'phys-services' project should be pretty easy to build, once you've met the 
-prerequistes.  
+The @c phys-services project should have been built when you built the @c DATACLASS-APP metaproject. 
 
-Then you can build it with the standard bfd commands:<br>
-<code>
-% source setup.[c]sh<br>
-% ant<br>
-</code>
-
-And you should get a successful build<br>
-If you are interested in using the services included here with your own modules
-you may want to build the documentation for the phys-services.  At this point
-all I've got is the doxygen, but you'll need to do it manually until the 
-ant 'doxygen' target is implemented.<br>
 <code>
 
 % doxygen phys-services/resources/Doxyfile
@@ -65,7 +80,7 @@ and you should get the documentation in your workspace in a directory doxygen-ph
 <!--@section Test-->
 @section use Use
 This collection of services are not really intended to be used stand-alone, so 
-there are no examples of their use outside of the <code>sim-modules</code> 
+there are no examples of their use outside of the <code>examples-offline</code> 
 project in which they are used.
 
 

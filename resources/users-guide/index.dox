@@ -65,7 +65,7 @@
    into a full set of standard IceTray services, so it is included as a 
    separate project
 
-   @li <code>eg-dataclasses</code>: These are several IceTray modules which
+   @li <code>examples-offline</code>: These are several IceTray modules which
    are written using the dataclasses.  There are some simple simulation
    modules which pass around the structures of the dataclasses, but don't 
    perform any physics.  There is also an implementation of a simple
@@ -126,7 +126,7 @@
 
 <!--   @li @ref dataclass-and-root -->
  
-   @li @ref eg-dataclasses
+   @li @ref examples-offline
 
    @section overview Overview of the Data Classes
    A lot of thought has gone into the design and implementation of these 
