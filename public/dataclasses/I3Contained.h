@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Contained.h,v 1.3 2004/04/23 21:31:29 deyoung Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 21:31:29 $
  * @author pretz
  *
  * @todo
@@ -42,7 +42,7 @@ class I3Contained{
   /**
    * indicates that the track has a direction
    */
-  Bool_t IsDirectional() const {return true;}
+  Bool_t HasDirection() const {return true;}
 
   /**
    * gives the starting x postion

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
+ * $Id: I3PrimaryImpl.h,v 1.4 2004/04/23 21:31:29 deyoung Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:10:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/23 21:31:29 $
  * @author pretz
  *
  * @todo
@@ -54,7 +54,7 @@ class I3PrimaryImpl : public I3Primary,
   /**
    * indicates whether or not the particle has a valid direction
    */
-  virtual Bool_t IsDirectional() const {return DirectionalType::IsDirectional();}
+  virtual Bool_t HasDirection() const {return DirectionalType::HasDirection();}
 
   /**
    * indicates whether or not the primary has a valid core position

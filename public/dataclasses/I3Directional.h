@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Directional.h,v 1.3 2004/04/23 21:31:29 deyoung Exp $
  *
  * @file 
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 21:31:29 $
  * @author 
  *
  * @todo
@@ -28,7 +28,7 @@ class I3Directional
   /**
    * indicates that this cascade has a direction
    */
-  virtual Bool_t IsDirectional() const {return true;}
+  virtual Bool_t HasDirection() const {return true;}
 
   /**
    * gets the zenith of the cascade

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
+ * $Id: I3TrackImpl.h,v 1.4 2004/04/23 21:31:29 deyoung Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:10:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/23 21:31:29 $
  * @author pretz
  *
  * @todo
@@ -90,9 +90,9 @@ class I3TrackImpl : public I3Track,
   /**
    * indicates that Zenith() and Azimuth() are valid
    */
-  virtual Bool_t IsDirectional() const 
+  virtual Bool_t HasDirection() const 
     {
-      return GeometricalType::IsDirectional();
+      return GeometricalType::HasDirection();
     }
 
   /**
