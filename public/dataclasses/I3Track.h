@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.8 2004/02/26 18:53:12 pretz Exp $
+    $Id: I3Track.h,v 1.9 2004/03/10 19:56:05 pretz Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/02/26 18:53:12 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/03/10 19:56:05 $
     @author
 
     @todo
@@ -15,8 +15,9 @@
 
 #include <TObject.h>
 #include <TObjArray.h>
-#include <TRef.h>
-#include <TRefArray.h>
+#include <vector>
+
+using namespace std;
 
 class I3Track : public TObject
 {
@@ -71,8 +72,8 @@ class I3Track : public TObject
   Double_t       fZenith;
   Double_t       fAzimuth;
   Double_t       fEnergy;
-  TRef           parenttrack;
-  TRefArray      *childrentrack;
+  Int_t          fParent;
+  vector<Int_t> fChildren;
 
  public:
   I3Track();
@@ -108,13 +109,11 @@ class I3Track : public TObject
   void Azimuth(Double_t arg) { fAzimuth = arg; }
   void Energy(Double_t arg) { fEnergy = arg; }
 
-  Bool_t           HasParentTrack() const;
-  const I3Track& GetParentTrack() const;
-  void           SetParentTrack(I3Track& parenttrack_);
+  Int_t Parent() const {return fParent;}
+  void  Parent(Int_t parent) { fParent = parent;}
 
-  UShort_t GetNumberChildrenTracks() const;
-  const I3Track& GetChildrenTrack(UShort_t number) const;
-  void           AddChildrenTrack(I3Track& childrentrack_);
+  const vector<Int_t>& Children() const {return fChildren;}
+  vector<Int_t>& Children() {return fChildren;}
 
   ClassDef(I3Track, 1);
 };

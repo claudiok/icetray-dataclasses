@@ -19,50 +19,8 @@ I3Track::I3Track()
   fZenith=0;
   fAzimuth=0;
   fEnergy=0;
-  parenttrack=NULL;
-  childrentrack=NULL;
-  TRef r=this;
+  fParent = 0;
 }
   
-I3Track::~I3Track() {if (childrentrack) {childrentrack->Delete(); delete childrentrack;}}
+I3Track::~I3Track() {}
     
-Bool_t 
-I3Track::HasParentTrack() const
-{
-  return((parenttrack.GetObject()==NULL) ? kFALSE : kTRUE);
-}
-
-const 
-I3Track& I3Track::GetParentTrack() const
-{
-  if(HasParentTrack()) return (*(I3Track*)parenttrack.GetObject());
-  I3DataExecution::Instance().Fatal("I3Track::GetParentTrack() asked for a parenttrack which doesn't exist");
-  return(*(I3Track*)NULL);
-}
-
-void 
-I3Track::SetParentTrack(I3Track& parenttrack_)
-{
-  if(!HasParentTrack()) parenttrack=&parenttrack_;
-  else I3DataExecution::Instance().Fatal("I3Track::SetParentTrack() the parent track has already been set");
-}
-
-UShort_t 
-I3Track::GetNumberChildrenTracks() const
-{
-  return((childrentrack==NULL) ? 0 : childrentrack->GetLast()+1);
-}
-
-const 
-I3Track& I3Track::GetChildrenTrack(UShort_t number) const
-{
-  if(GetNumberChildrenTracks()>number) return (*(I3Track*)childrentrack->At(number));
-  I3DataExecution::Instance().Fatal("I3Track::GetChildrenTracks() asked for an index out of bounds");
-  return(*(I3Track*)NULL);
-}
-
-void 
-I3Track::AddChildrenTrack(I3Track& childrentrack_)
-{
-  if(childrentrack==NULL) childrentrack=new TRefArray; childrentrack->Add(&childrentrack_);
-}

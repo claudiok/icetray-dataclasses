@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.12 2004/03/10 15:53:56 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.13 2004/03/10 19:56:05 pretz Exp $
  *
  * The basic Optical Module Geometry class.  This is the static 
  * frozen-in-the-ice properties of an optical module
  *
- * @version $Revision: 1.12 $
- * @date $Date: 2004/03/10 15:53:56 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/03/10 19:56:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,17 +20,19 @@
 
 #include <TObject.h>
 #include <TObjArray.h>
-#include <TRef.h>
 #include <string>
 
 class I3OMGeo : public TObject
 {
+ public:
+  enum EOrientation {Unspecified,Up,Down};
+
  protected:
   UShort_t fOMNumber;
   Double_t fX;
   Double_t fY;
   Double_t fZ;
-  Bool_t fOrientation;
+  EOrientation fOrientation;
   Int_t fString;
   Double_t fRelativeQE;
 
@@ -38,7 +40,7 @@ class I3OMGeo : public TObject
   /**
    * constructor
    */
-  I3OMGeo() { Init(); TRef r=this;}
+  I3OMGeo() { Init();}
 
   /**
    * copy constructor just uses assignment
@@ -107,12 +109,12 @@ class I3OMGeo : public TObject
   /**
    * @return kTRUE if the om is pointed down
    */
-  Bool_t  Orientation() const { return fOrientation; }
+  EOrientation  Orientation() const { return fOrientation; }
 
   /**
    * @param orientation the new orientation for the tube
    */
-  void    Orientation(Bool_t orientation) { fOrientation = orientation; }
+  void    Orientation(EOrientation orientation) { fOrientation = orientation; }
 
   /**
    * @return the string that this is an OM for
