@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.141 2004/12/28 18:57:52 dule Exp $
-// $Revision: 1.141 $
-// $Date: 2004/12/28 18:57:52 $
+// $Id: LinkDef.h,v 1.142 2005/01/10 20:53:18 dule Exp $
+// $Revision: 1.142 $
+// $Date: 2005/01/10 20:53:18 $
 //
 
 #ifdef __CINT__
@@ -48,7 +48,7 @@
 #pragma link C++ class I3ShoweringMuon+;
 #pragma link C++ class I3StartingMuon+;
 #pragma link C++ class I3StoppingMuon+;
-#pragma link C++ class JAMSFitTrack+;
+//#pragma link C++ class JAMSFitTrack+;
 
 #pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3Energetic>+;
 #pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3NonEnergetic>+;
