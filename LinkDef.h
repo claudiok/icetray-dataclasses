@@ -61,8 +61,8 @@
 
 #pragma link C++ class I3AnalogSeries+;
 #pragma link C++ class I3AnalogSeries::iterator+;
-#pragma link C++ typedef VectorPolicy<I3Analog>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3Analog>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3AnalogPulse>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3AnalogPulse>::ThePolicy+;
 #pragma link C++ function operator!=(const I3AnalogSeries::iterator&, const I3AnalogSeries::iterator&);
 // others which are just typedefs to this
 #pragma link C++ typedef I3AnalogSeriesPtr;
@@ -138,8 +138,8 @@
 
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
-#pragma link C++ typedef VectorPolicy<I3OMResponse>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3OMResponse>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3OMResponsePtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3OMResponsePtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3OMResponseData::iterator&, const I3OMResponseData::iterator&);
 #pragma link C++ typedef I3OMResponseDataPtr;
 
@@ -166,8 +166,12 @@
 
 #pragma link C++ class I3AltTracksRecoResult+;
 #pragma link C++ typedef I3AltTracksRecoResultPtr;
-#pragma link C++ class I3Analog+;
-#pragma link C++ typedef I3AnalogPtr;
+#pragma link C++ class I3AMANDAAnalogReadout+;
+#pragma link C++ typedef I3AMANDAAnalogReadoutPtr;
+#pragma link C++ class I3AnalogPulse+;
+#pragma link C++ typedef I3AnalogPulsePtr;
+#pragma link C++ class I3AnalogReadout+;
+#pragma link C++ typedef I3AnalogReadoutPtr;
 #pragma link C++ class I3Atmosphere+;
 #pragma link C++ typedef I3AtmospherePtr;
 #pragma link C++ class I3DataExecution+;
@@ -240,6 +244,10 @@
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ typedef I3RecoTrackPtr;
 #pragma link C++ class I3RecoTrackComposite+;
+#pragma link C++ class I3SLCReadout+;
+#pragma link C++ typedef I3SLCReadoutPtr;
+#pragma link C++ class I3SummaryPulseReadout+;
+#pragma link C++ typedef I3SummaryPulseReadoutPtr;
 #pragma link C++ class I3TankGeo+;
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;

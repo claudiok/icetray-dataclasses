@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogSeries.h,v 1.14 2004/03/01 16:56:31 pretz Exp $
+ * $Id: I3AnalogSeries.h,v 1.15 2004/03/10 02:42:24 pretz Exp $
  *
  * A series of analog pulses in the detector.  Just a container
  * for I3Analog's
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/03/01 16:56:31 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/03/10 02:42:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,11 +18,11 @@
 #ifndef I3ANALOGSERIES_H
 #define I3ANALOGSERIES_H
 
-#include "I3Analog.h"
+#include "I3AnalogPulse.h"
 #include "I3DataReadout.h"
 #include "StoragePolicy.h"
 
-class I3AnalogSeries : public I3DataReadout, public VectorPolicy<I3Analog>::ThePolicy
+class I3AnalogSeries : public I3DataReadout, public VectorPolicy<I3AnalogPulse>::ThePolicy
 { 
  public:
   /**

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.2 2004/02/23 01:46:34 troy Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.3 2004/03/10 02:42:24 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/23 01:46:34 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/03/10 02:42:24 $
     @author Troy Straszheim
 
 */
@@ -88,7 +88,9 @@ class STLVectorStoragePolicy  {
   // these need to be template member functions with defaults to
   // ElementType (for a "regular" element)
   iterator begin() { return vector_.begin(); }
+  const_iterator begin() const {return vector_.begin();}
   iterator end() { return vector_.end(); }
+  const_iterator end() const {return vector_.end();}
   
   template <class Type> type_iterator<Type> begin() 
     { 

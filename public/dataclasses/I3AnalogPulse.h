@@ -1,17 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Analog.h,v 1.8 2004/02/26 19:58:26 pretz Exp $
+ * $Id: I3AnalogPulse.h,v 1.1 2004/03/10 02:42:24 pretz Exp $
  * One analog pulse from an OM.  
  *
- * @version $Revision: 1.8 $
- * @date $Date: 2004/02/26 19:58:26 $
+ * @version $Revision: 1.1 $
+ * @date $Date: 2004/03/10 02:42:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo What are the units here???
- * @todo What's the difference between Time() and LET()
+ * @todo 
  */
 
 #ifndef I3ANALOG_H
@@ -20,10 +19,9 @@
 #include <TObject.h>
 #include "StoragePolicy.h"
 
-class I3Analog : public TObject
+class I3AnalogPulse : public TObject
 {
-  Double_t  fTime;
-  Double_t  fLet;
+  Double_t  fLe;
   Float_t          fIntegratedcharge;
   Double_t fTot;
   Float_t          fPeak;
@@ -37,23 +35,22 @@ class I3Analog : public TObject
   /**
    * default constructor
    */
-  I3Analog() { Init(); }
+  I3AnalogPulse() { Init(); }
 
   /**
    * copy constructor
    * @param rhs
    */
-  I3Analog(const I3Analog& rhs){*this = rhs;}
+  I3AnalogPulse(const I3AnalogPulse& rhs){*this = rhs;}
 
   /**
    * assignment operator
    * @param rhs
    */
-  const I3Analog& operator=(const I3Analog& rhs){
+  const I3AnalogPulse& operator=(const I3AnalogPulse& rhs){
     if (this == &rhs) return *this; // check for assignment to self
     TObject::operator=(rhs); // call base class assignment operator
-    fTime = rhs.fTime;
-    fLet = rhs.fLet;
+    fLe = rhs.fLe;
     fIntegratedcharge = rhs.fIntegratedcharge;
     fTot = rhs.fTot;
     fPeak = rhs.fPeak;
@@ -61,35 +58,15 @@ class I3Analog : public TObject
   }
 
   /**
-   * @return the time of the pulse
-   */
-  Double_t  Time() const { return fTime; }
-
-  /**
-   * @param t the time of the pulse
-   */
-  void  Time(Double_t t) { fTime = t; }
-
-  /**
    * @return the leading edge time of the pulse
    */
-  Double_t  LET() const { return fLet; }
+  Double_t  LE() const { return fLe; }
 
   /**
    * sets the leading edge time of the pulse
    * @param l the new leading edge time
    */
-  void  LET(Double_t l)  { fLet = l; }
-
-  /**
-   * @return the integrated charge
-   */
-  Float_t IntegratedCharge() const { return fIntegratedcharge; }
-
-  /**
-   * @param i the new integrated charge
-   */
-  void IntegratedCharge(Float_t i) { fIntegratedcharge = i; }
+  void  LE(Double_t l)  { fLe = l; }
 
   /**
    * retrieves the time over threshold
@@ -114,10 +91,10 @@ class I3Analog : public TObject
 
  private:
   // ROOT macro
-  ClassDef(I3Analog, 1);
+  ClassDef(I3AnalogPulse, 1);
 };
 
-typedef PtrPolicy<I3Analog>::ThePolicy I3AnalogPtr;
+typedef PtrPolicy<I3AnalogPulse>::ThePolicy I3AnalogPulsePtr;
 
 #endif
 

@@ -1,19 +1,3 @@
-/**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3OMResponseData.h,v 1.15 2004/02/27 22:48:21 ehrlich Exp $
- *
- * An event-level container for the OMResponse's of the Event.  
- *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/02/27 22:48:21 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
- *
- */
 #ifndef I3OMRESPONSEDATA_H
 #define I3OMRESPONSEDATA_H
 
@@ -21,7 +5,23 @@
 #include "I3OMResponse.h"
 #include "StoragePolicy.h"
 
-class I3OMResponseData : public TObject, public VectorPolicy<I3OMResponse>::ThePolicy
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3OMResponseData.h,v 1.16 2004/03/10 02:42:24 pretz Exp $
+ *
+ * An event-level container for the OMResponse's of the Event.  
+ *
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/03/10 02:42:24 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ * @todo implement the 'FindOMResponse' as a smarter search, STL???
+ *
+ */
+class I3OMResponseData : public TObject, public VectorPolicy<I3OMResponsePtr>::ThePolicy
 {
   public:
   /**
@@ -34,21 +34,19 @@ class I3OMResponseData : public TObject, public VectorPolicy<I3OMResponse>::TheP
    */
   virtual ~I3OMResponseData(){};
   
-  bool HasOMResponseNumber(unsigned int omnumber) const
-  {
-    for(unsigned int i=0; i<this->size(); i++)
-    {if( (*this)[i].OMNumber()==omnumber ) return(true);}
-    return(false);
-  }
-  
-  const I3OMResponse& FindOMResponse(unsigned int omnumber) const 
+  /**
+   * loops through the omresponses looking for one with a number 'omnumber'
+   * and returns it.  Returns 0 if none are found
+   */
+  const I3OMResponsePtr FindOMResponse(unsigned int omnumber) const 
   { 
-    for(unsigned int i=0; i<this->size(); i++)
-    {
-      if( (*this)[i].OMNumber()==omnumber) return((*this)[i]);
+    const_iterator iter;
+    for(iter = begin() ; iter!= end() ; iter++){
+      if(*iter != 0)
+	if((*iter)->OMNumber()==omnumber)
+	  return *iter;
     }
-    I3DataExecution::Instance().Fatal("I3OMResponseData::FindOMResponse() asked for a non-existent OM response");
-    return(*(I3OMResponse*)NULL);
+    return 0;
   }
 
   private:

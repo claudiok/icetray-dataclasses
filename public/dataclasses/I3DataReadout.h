@@ -4,12 +4,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.5 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.6 2004/03/10 02:42:24 pretz Exp $
  *
  * A base class for all the data readout types.  
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/03/10 02:42:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -23,6 +23,8 @@
 
 class I3DataReadout : public TObject
 {
+  Bool_t fRaw;
+
   public:
   /**
    * default constructor
@@ -34,13 +36,24 @@ class I3DataReadout : public TObject
    */
   virtual ~I3DataReadout(){}
 
-  // not needed, I think because of the type-wise iteration
-  // const char* GetReadoutType() const;
+  /**
+   * Indicates whether or not this readout came directly from the detector
+   * or was put in later to emulate a particular kind of data.
+   * @return kTRUE if this readout came directly from the detector
+   */
+  Bool_t Raw() const {return fRaw;}
+
+  /**
+   * establishes this I3DataReadout as either coming from the detector
+   * or from some later processing.
+   * @param raw kTRUE if it came straight from the detector
+   */
+  void Raw(Bool_t raw) {fRaw = raw;}
 
  private:
   // copy and assignment are private
-/*   I3DataReadout(const I3DataReadout& rhs); */
-/*   const I3DataReadout& operator=(const I3DataReadout& rhs); */
+  I3DataReadout(const I3DataReadout& rhs); 
+  const I3DataReadout& operator=(const I3DataReadout& rhs); 
 
   // ROOT Macro
   ClassDef(I3DataReadout,1);
