@@ -4,10 +4,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.15 2004/03/09 21:57:29 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.16 2004/03/10 15:53:56 pretz Exp $
  *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/03/09 21:57:29 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/03/10 15:53:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,7 +21,6 @@
 
 class I3RecoHitSeries : public VectorPolicy<I3RecoHitPtr>::ThePolicy
 {
-  float fConfidence;
  public:
   /**
    *constructor
@@ -32,16 +31,6 @@ class I3RecoHitSeries : public VectorPolicy<I3RecoHitPtr>::ThePolicy
    * destructor
    */
   virtual ~I3RecoHitSeries(){};
-
-  /**
-   * @return the confidence of this hit
-   */
-  float Confidence() { return fConfidence; }
-
-  /**
-   * @param confidence the new confidence in this hit
-   */
-  void Confidence(float confidence) { fConfidence = confidence; }
 
  private:
   // copy and assignment are private:

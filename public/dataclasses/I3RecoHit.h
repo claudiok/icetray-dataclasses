@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHit.h,v 1.7 2004/02/26 18:53:12 pretz Exp $
+ * $Id: I3RecoHit.h,v 1.8 2004/03/10 15:53:56 pretz Exp $
  *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/02/26 18:53:12 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/03/10 15:53:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -47,17 +47,6 @@ class I3RecoHit : public I3Hit
     fConfidence = rhs.fConfidence;
     return *this;
   }
-
-  /**
-   * @return the confidence in this hit
-   */
-  Double_t Confidence() const { return fConfidence; }
-
-  /**
-   * @param confidence the new confidence for this hit
-   */
-  void Confidence(Double_t confidence) { fConfidence = confidence; }
-
 
  private:
   //ROOT macro

@@ -59,35 +59,12 @@
 #pragma link C++ typedef I3RecoTrackListPtr;
 
 
-#pragma link C++ class I3AnalogSeries+;
-#pragma link C++ class I3AnalogSeries::iterator+;
-#pragma link C++ typedef VectorPolicy<I3AnalogPulse>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3AnalogPulse>::ThePolicy+;
-#pragma link C++ function operator!=(const I3AnalogSeries::iterator&, const I3AnalogSeries::iterator&);
-// others which are just typedefs to this
-#pragma link C++ typedef I3AnalogSeriesPtr;
-#pragma link C++ typedef I3AnalogAmandaSeries;
-
 #pragma link C++ class I3DataReadoutList+;
 #pragma link C++ class I3DataReadoutList::iterator+;
 #pragma link C++ typedef VectorPolicy<I3DataReadoutPtr>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3DataReadoutPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3DataReadoutList::iterator&, const I3DataReadoutList::iterator&);
 #pragma link C++ typedef I3DataReadoutListPtr;
-
-#pragma link C++ class I3DigitalSeries+;
-#pragma link C++ class I3DigitalSeries::iterator+;
-#pragma link C++ typedef VectorPolicy<I3Digital>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3Digital>::ThePolicy+;
-#pragma link C++ function operator!=(const I3DigitalSeries::iterator&, const I3DigitalSeries::iterator&);
-#pragma link C++ typedef I3DigitalSeriesPtr;
-
-// typedefs of I3DigitalSeries
-#pragma link C++ class I3DigitalATWDSeries;
-#pragma link C++ typedef I3DigitalATWDSeriesPtr;
-#pragma link C++ typedef I3DigitalFADCSeries;
-#pragma link C++ typedef I3DigitalTWRSeries;
-#pragma link C++ typedef I3DigitalTWRSeriesPtr;
 
 #pragma link C++ class I3InIceGeometry+;
 #pragma link C++ class I3InIceGeometry::iterator+;
@@ -168,8 +145,6 @@
 #pragma link C++ typedef I3AltTracksRecoResultPtr;
 #pragma link C++ class I3AMANDAAnalogReadout+;
 #pragma link C++ typedef I3AMANDAAnalogReadoutPtr;
-#pragma link C++ class I3AnalogPulse+;
-#pragma link C++ typedef I3AnalogPulsePtr;
 #pragma link C++ class I3AnalogReadout+;
 #pragma link C++ typedef I3AnalogReadoutPtr;
 #pragma link C++ class I3Atmosphere+;
@@ -183,8 +158,14 @@
 #pragma link C++ typedef I3DetectorStatusPtr;
 #pragma link C++ class I3DetectorStatusHeader;
 #pragma link C++ typedef I3DetectorStatusHeaderPtr;
-#pragma link C++ class I3Digital+;
-#pragma link C++ typedef I3DigitalPtr;
+#pragma link C++ class I3DigitalReadout+;
+#pragma link C++ typedef I3DigitalReadoutPtr;
+#pragma link C++ class I3DigitalATWDReadout+;
+#pragma link C++ typedef I3DigitalATWDReadoutPtr;
+#pragma link C++ class I3DigitalFADCReadout+;
+#pragma link C++ typedef I3DigitalFADCReadoutPtr;
+#pragma link C++ class I3DigitalTWRReadout+;
+#pragma link C++ typedef I3DigitalTWRReadoutPtr;
 #pragma link C++ class I3Event+;
 #pragma link C++ typedef I3EventPtr;
 #pragma link C++ class I3EventHeader+;
@@ -255,6 +236,7 @@
 #pragma link C++ typedef I3TriggerDataPtr;
 #pragma link C++ class I3MCPrimary+;
 #pragma link C++ typedef I3MCPrimaryPtr;
+#pragma link C++ class I3Waveform+;
 
 #pragma link C++ class AmandaExtractor+;
 #pragma link C++ class vector<I3OMGeoAmandaPtr>+;

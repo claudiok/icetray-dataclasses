@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.11 2004/03/04 16:45:56 troy Exp $
+ * $Id: I3OMGeo.h,v 1.12 2004/03/10 15:53:56 pretz Exp $
  *
  * The basic Optical Module Geometry class.  This is the static 
  * frozen-in-the-ice properties of an optical module
  *
- * @version $Revision: 1.11 $
- * @date $Date: 2004/03/04 16:45:56 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/03/10 15:53:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -31,7 +31,8 @@ class I3OMGeo : public TObject
   Double_t fY;
   Double_t fZ;
   Bool_t fOrientation;
-  UChar_t fVersion;
+  Int_t fString;
+  Double_t fRelativeQE;
 
   public:
   /**
@@ -60,14 +61,8 @@ class I3OMGeo : public TObject
     fY = rhs.fY;
     fZ = rhs.fZ;
     fOrientation = rhs.fOrientation;
-    fVersion = rhs.fVersion;
     return *this;
   }
-
-  /**
-   * resets the data to 0's.
-   */
-  void Init();
 
   /**
    * @return the number of this optical module
@@ -120,19 +115,40 @@ class I3OMGeo : public TObject
   void    Orientation(Bool_t orientation) { fOrientation = orientation; }
 
   /**
-   * @return the version of the OM
+   * @return the string that this is an OM for
    */
-  UChar_t Version() const { return fVersion; }
+  Int_t String() const {return fString;}
 
   /**
-   * @param version the new version of the OM
+   * @param string the new string number for this OM
    */
-  void    Version(UChar_t version) { fVersion = version; }
+  void String(Int_t string) {fString = string;}
+
+  /**
+   * This is the relative quantum efficiency of this OM.  Relative
+   * to some standard.  This is the 'relative sensitivity' of the 
+   * AMANDA experiment
+   * @return the relative quantum efficiency of this OM
+   */
+  Double_t RelativeQE(){return fRelativeQE;}
+
+  /**
+   * This is the relative quantum efficiency of this OM.  Relative
+   * to some standard.  This is the 'relative sensitivity' of the 
+   * AMANDA experiment
+   * @param qe the new Relative Quantum Efficiency for this OM
+   */
+  void RelativeQE(Double_t qe) { fRelativeQE = qe;}
 
   // for testing
   virtual std::string iam() { return "I3OMGeo"; }
 
  private:
+  /**
+   * resets the data to 0's.
+   */
+  void Init();
+
   //ROOT macro
   ClassDef(I3OMGeo,1);
 };

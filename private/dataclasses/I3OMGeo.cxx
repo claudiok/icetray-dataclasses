@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMGeo.cxx,v 1.5 2004/02/26 03:51:13 pretz Exp $
+    $Id: I3OMGeo.cxx,v 1.6 2004/03/10 15:53:55 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/02/26 03:51:13 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/03/10 15:53:55 $
     @author
 
     @todo
@@ -21,7 +21,8 @@ void I3OMGeo::Init()
   fY = 0;
   fZ = 0;
   fOrientation = 0;
-  fVersion = 0;
+  fString = 0;
+  fRelativeQE = 0;
 }
 
 

@@ -2,13 +2,13 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.6 2004/03/04 16:45:56 troy Exp $
+ * $Id: I3InIceGeometry.h,v 1.7 2004/03/10 15:53:56 pretz Exp $
  *
  * Right now just a containter for IceCube and Amanda OMGeos. This is the
  * the 'frozen-in-ice' information, as opposed to the stuff that changes.
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/03/04 16:45:56 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/03/10 15:53:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -45,23 +45,6 @@ class I3InIceGeometry : public TObject, public VecPointainerPolicy<I3OMGeoPtr>::
    */
   virtual ~I3InIceGeometry(){};
   
-  bool HasOMGeoNumber(unsigned int omnumber) const
-  {
-    for(unsigned int i=0; i<this->size(); i++)
-    {if( (*this)[i]->OMNumber()==omnumber ) return(true);}
-    return(false);
-  }
-  
-  const I3OMGeo& FindOMGeo(unsigned int omnumber) const 
-  { 
-    for(unsigned int i=0; i<this->size(); i++)
-    {
-      if( (*this)[i]->OMNumber()==omnumber) return(*(*this)[i]);
-    }
-    I3DataExecution::Instance().Fatal("I3Geometry::FindOMGeo() asked for a non-existent OM");
-    return(*(I3OMGeo*)NULL);
-  }
-
   private:
 /*   // copy and assignment are private */
 /*   I3InIceGeometry(const I3InIceGeometry& rhs); */
