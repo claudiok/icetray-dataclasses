@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.13 2004/08/24 21:48:34 deyoung Exp $
+    $Id: STLMapStoragePolicy.h,v 1.14 2004/11/10 20:24:15 dule Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.13 $
-    @date $Date: 2004/08/24 21:48:34 $
+    @version $Revision: 1.14 $
+    @date $Date: 2004/11/10 20:24:15 $
     @author Troy Straszheim
 
 */
@@ -52,6 +52,13 @@ class STLMapStoragePolicy {
    * A type for the size of the map.
    */
   typedef typename map_type::size_type size_type;
+
+  /**
+   * A pointer for the map.
+   */
+#ifndef __CINT__ 
+  typedef typename map_type::pointer pointer;
+#endif
 
  private:
 

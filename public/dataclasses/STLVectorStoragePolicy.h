@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.9 2004/08/16 13:02:53 pretz Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.10 2004/11/10 20:24:15 dule Exp $
 
     @file STLVectorStoragePolicy.h
-    @version $Revision: 1.9 $
-    @date $Date: 2004/08/16 13:02:53 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/11/10 20:24:15 $
     @author Troy Straszheim
 */
 #ifndef STLVECTOR_POLICY_INCLUDED
@@ -56,6 +56,13 @@ class STLVectorStoragePolicy  {
    * a constant reference type
    */
   typedef const ElementType& 				const_reference;
+
+  /**
+   * A pointer for the vector
+   */
+#ifndef __CINT__
+  typedef typename vector_type::pointer                 pointer;
+#endif
 
  private:
   vector_type vector_; //||

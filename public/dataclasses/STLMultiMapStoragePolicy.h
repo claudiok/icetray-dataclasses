@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMultiMapStoragePolicy.h,v 1.2 2004/08/02 22:12:28 pretz Exp $
+    $Id: STLMultiMapStoragePolicy.h,v 1.3 2004/11/10 20:24:15 dule Exp $
 
     @file STLMultiMapStoragePolicy.h
-    @version $Revision: 1.2 $
-    @date $Date: 2004/08/02 22:12:28 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/11/10 20:24:15 $
     @author Ralf Ehrlich
 
 */
@@ -52,6 +52,13 @@ class STLMultiMapStoragePolicy {
    * a size type for the map
    */
   typedef typename map_type::size_type size_type;
+
+  /**
+   * A pointer for the map.
+   */
+#ifndef __CINT__
+  typedef typename map_type::pointer pointer;
+#endif
 
  private:
 
