@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.5 2004/02/24 02:48:43 troy Exp $
+    $Id: StoragePolicy.h,v 1.6 2004/03/01 20:19:49 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/02/24 02:48:43 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/03/01 20:19:49 $
     @author
 
     @todo
@@ -18,6 +18,8 @@
 
 #include "STLVectorStoragePolicy.h"
 #include "STLMapStoragePolicy.h"
+#include "STLVecPointainerPolicy.h"
+#include "STLMapPointainerPolicy.h"
 
 //#include "TClonesPolicy.h"
 #include "SmartPtr.h"
@@ -31,10 +33,20 @@ struct VectorPolicy {
 };
 
 template <class Stored>
+struct VecPointainerPolicy{
+  typedef STLVecPointainerPolicy<Stored> ThePolicy;
+};
+
+template <class Stored>
 struct MapPolicy {
   typedef STLMapStoragePolicy<Stored> ThePolicy;
   // not yet implemented
   // typedef TMapStoragePolicy<Stored> ThePolicy;
+};
+
+template <class Stored>
+struct MapPointainerPolicy{
+  typedef STLMapPointainerPolicy<Stored> ThePolicy;
 };
 
 template <class Pointed>

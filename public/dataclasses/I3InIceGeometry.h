@@ -2,13 +2,13 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.4 2004/02/27 21:25:56 ehrlich Exp $
+ * $Id: I3InIceGeometry.h,v 1.5 2004/03/01 20:19:49 pretz Exp $
  *
  * Right now just a containter for IceCube and Amanda OMGeos. This is the
  * the 'frozen-in-ice' information, as opposed to the stuff that changes.
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/02/27 21:25:56 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/03/01 20:19:49 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -25,7 +25,7 @@
 #include "I3OMGeo.h"
 #include "StoragePolicy.h"
 
-class I3InIceGeometry : public TObject, public VectorPolicy<I3OMGeoPtr>::ThePolicy
+class I3InIceGeometry : public TObject, public VecPointainerPolicy<I3OMGeoPtr>::ThePolicy
 {
   public:
   /** 

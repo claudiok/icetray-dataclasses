@@ -66,6 +66,8 @@
 
 #pragma link C++ class I3InIceGeometry+;
 #pragma link C++ class I3InIceGeometry::iterator+;
+#pragma link C++ typedef VecPointainerPolicy<I3OMGeoPtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3OMGeoPtr>::ThePolicy+;
 #pragma link C++ typedef VectorPolicy<I3OMGeoPtr>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3OMGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3InIceGeometry::iterator&, const I3InIceGeometry::iterator&);
