@@ -12,16 +12,11 @@
 //
 // Also changed it to use ROOT types, Double_t rather than Double_t, for
 // example
-/**
- * @todo Change this file so that it'll document the units in doxygen
- * @todo Should the 'natural' units be more like what IceCube'll use ns = 1 rather than sec=1 ?
- * @todo Should we have a 'speed' here too?
- * @author Geant4 team
- * @author pretz (icecube modifications)
- */
+//
+// Also monkied around with the comments, so it'd document in doxygen
 
-//
-//
+
+
 // ********************************************************************
 // * DISCLAIMER                                                       *
 // *                                                                  *
@@ -44,284 +39,675 @@
 // ********************************************************************
 //
 //
-// $Id: I3Units.h,v 1.4 2004/03/02 20:58:51 pretz Exp $
-// GEANT4 tag $Name:  $
-// 
-// ----------------------------------------------------------------------
-//
-// Class description:
-//
-// This file is a modified version of SystemOfUnits.h
-// It is provided for checking the overall 'units coherence' of the
-// Geant4 kernel.
-// -------
-// Warning: if you use it, do not forget to recompile the whole Geant4 kernel
-// ------- 
-// The basic units are those of the International System:
-//
-//  		meter             
-// 		second             
-// 		kilogram      
-// 		ampere         
-// 		degree kelvin          
-//              the amount of substance (mole)
-//              luminous intensity      (candela)
-// 		radian                  
-//              steradian              
-//
-//
-// The SI numerical value of the positron charge is defined here,
-// as it is needed for conversion factor : positron charge = e_SI (coulomb)
-//
-// The others physical constants are defined in the header file :
-//			PhysicalConstants.h
-//
-
-// Authors: M.Maire, S.Giani
-//
-// History:
-//
-// 10.03.99   created
-// 01.03.01   parsec      
 
 #ifndef G4UNITSTEST_HH
 #define G4UNITSTEST_HH
 
 //#include <CLHEP/config/CLHEP.h>
 
-// 
-// Length [L]
-//
-
+/**
+ * The I3Units namespace contains a bunch of "static const Double_t's" which
+ * define the units that are used in the dataclasses.  The header originally
+ * comes from Geant4, and wrapping it in and I3Units namespace is an IceCube
+ * modification.
+ * 
+ * Class description:
+ *
+ * ------- <br>
+ * The basic units are those of the International System:<br>
+ *                                                       <br>
+ *  		meter                                    <br>            
+ * 		second                                   <br>
+ * 		kilogram                                 <br>   
+ * 		ampere                                   <br>
+ * 		degree kelvin                            <br>
+ *              the amount of substance (mole)           <br>
+ *              luminous intensity      (candela)        <br>
+ * 		radian                                   <br>
+ *              steradian                                <br>
+ *<br>
+ *
+ * The SI numerical value of the positron charge is defined here,
+ * as it is needed for conversion factor : positron charge = e_SI (coulomb)
+ * 
+ * @version $Version:$
+ * @revision $Revision: 1.5 $
+ * @date $Date: 2004/03/15 14:51:54 $
+ * @author Geant4 Team (original) M.Maire, S.Giani
+ * @author pretz (IceCube modifications)
+ * @todo Should the 'natural' units be more like what IceCube'll use ns = 1 rather than sec=1 ?
+ * @todo Should we have a 'speed' here too?
+ */
 namespace I3Units{
 
-static const Double_t meter  = 1.;                  
-static const Double_t meter2 = meter*meter;
-static const Double_t meter3 = meter*meter*meter;
+  /**
+   * meter
+   */
+  static const Double_t meter  = 1.;
+  
+  /**
+   * square meter
+   */
+  static const Double_t meter2 = meter*meter;
 
-static const Double_t millimeter  = 0.001*meter;                        
-static const Double_t millimeter2 = millimeter*millimeter;
-static const Double_t millimeter3 = millimeter*millimeter*millimeter;
+  /**
+   * cubic meter
+   */
+  static const Double_t meter3 = meter*meter*meter;
+  
+  /**
+   * millimeter
+   */ 
+  static const Double_t millimeter  = 0.001*meter;
 
-static const Double_t centimeter  = 10.*millimeter;   
-static const Double_t centimeter2 = centimeter*centimeter;
-static const Double_t centimeter3 = centimeter*centimeter*centimeter;
+  /**
+   * square millimeter
+   */
+  static const Double_t millimeter2 = millimeter*millimeter;
 
-static const Double_t kilometer = 1000.*meter;                   
-static const Double_t kilometer2 = kilometer*kilometer;
-static const Double_t kilometer3 = kilometer*kilometer*kilometer;
+  /**
+   * cubic millimeter
+   */
+  static const Double_t millimeter3 = millimeter*millimeter*millimeter;
+  
+  /**
+   * centimeter
+   */
+  static const Double_t centimeter  = 10.*millimeter;   
 
-static const Double_t parsec = 3.0856775807e+16*meter;
+  /**
+   * square centimeter
+   */
+  static const Double_t centimeter2 = centimeter*centimeter;
 
-static const Double_t micrometer = 1.e-6 *meter;             
-static const Double_t  nanometer = 1.e-9 *meter;
-static const Double_t  angstrom  = 1.e-10*meter;
-static const Double_t  fermi     = 1.e-15*meter;
+  /**
+   * cubic centimeter
+   */
+  static const Double_t centimeter3 = centimeter*centimeter*centimeter;
+  
+  /**
+   * kilometer
+   */
+  static const Double_t kilometer = 1000.*meter;                   
 
-static const Double_t      barn = 1.e-28*meter2;
-static const Double_t millibarn = 1.e-3 *barn;
-static const Double_t microbarn = 1.e-6 *barn;
-static const Double_t  nanobarn = 1.e-9 *barn;
-static const Double_t  picobarn = 1.e-12*barn;
+  /**
+   * square kilometer
+   */
+  static const Double_t kilometer2 = kilometer*kilometer;
 
-// symbols
-static const Double_t mm  = millimeter;                        
-static const Double_t mm2 = millimeter2;
-static const Double_t mm3 = millimeter3;
+  /**
+   * cubic kilometer
+   */
+  static const Double_t kilometer3 = kilometer*kilometer*kilometer;
+  
+  /**
+   * parsec
+   */
+  static const Double_t parsec = 3.0856775807e+16*meter;
+  
+  /**
+   * micrometer
+   */
+  static const Double_t micrometer = 1.e-6 *meter;             
 
-static const Double_t cm  = centimeter;   
-static const Double_t cm2 = centimeter2;
-static const Double_t cm3 = centimeter3;
+  /**
+   * nanometer
+   */
+  static const Double_t  nanometer = 1.e-9 *meter;
 
-static const Double_t m  = meter;                  
-static const Double_t m2 = meter2;
-static const Double_t m3 = meter3;
+  /**
+   * angstrom
+   */
+  static const Double_t  angstrom  = 1.e-10*meter;
 
-static const Double_t km  = kilometer;                   
-static const Double_t km2 = kilometer2;
-static const Double_t km3 = kilometer3;
+  /**
+   * fermi
+   */
+  static const Double_t  fermi     = 1.e-15*meter;
+  
+  /**
+   * barn
+   */
+  static const Double_t      barn = 1.e-28*meter2;
 
-static const Double_t pc = parsec;
+  /**
+   * millibarn
+   */
+  static const Double_t millibarn = 1.e-3 *barn;
 
-//
-// Angle
-//
-static const Double_t radian      = 1.;                  
-static const Double_t milliradian = 1.e-3*radian;
-static const Double_t degree = (3.14159265358979323846/180.0)*radian;
+  /**
+   * microbarn
+   */
+  static const Double_t microbarn = 1.e-6 *barn;
 
-static const Double_t   steradian = 1.;
-	
-// symbols
-static const Double_t rad  = radian;	
-static const Double_t mrad = milliradian;
-static const Double_t sr   = steradian;
-static const Double_t deg  = degree;
+  /**
+   * nanobarn
+   */
+  static const Double_t  nanobarn = 1.e-9 *barn;
 
-//
-// Time [T]
-//
-static const Double_t second      = 1.;
-static const Double_t nanosecond  = 1.e-9 *second;
-static const Double_t millisecond = 1.e-3 *second;
-static const Double_t microsecond = 1.e-6 *second;
-static const Double_t  picosecond = 1.e-12*second;
+  /**
+   * picobarn
+   */
+  static const Double_t  picobarn = 1.e-12*barn;
+  
+  // symbols
+  /**
+   * millimeter
+   */
+  static const Double_t mm  = millimeter;                        
 
-static const Double_t hertz = 1./second;
-static const Double_t kilohertz = 1.e+3*hertz;
-static const Double_t megahertz = 1.e+6*hertz;
+  /**
+   * square millimeter
+   */
+  static const Double_t mm2 = millimeter2;
 
-// symbols
-static const Double_t ns = nanosecond;			
-static const Double_t  s = second;
-static const Double_t ms = millisecond;
+  /**
+   * cubic millimeter
+   */
+  static const Double_t mm3 = millimeter3;
+  
+  /**
+   * centimeter
+   */
+  static const Double_t cm  = centimeter;   
 
-//
-// Mass [E][T^2][L^-2]
-//
-static const Double_t  kilogram = 1.;   
-static const Double_t      gram = 1.e-3*kilogram;
-static const Double_t milligram = 1.e-3*gram;
+  /**
+   * square centimeter
+   */
+  static const Double_t cm2 = centimeter2;
 
-// symbols
-static const Double_t  kg = kilogram;
-static const Double_t   g = gram;
-static const Double_t  mg = milligram;
+  /**
+   * cubic centimeter
+   */
+  static const Double_t cm3 = centimeter3;
+  
+  /**
+   * meter
+   */
+  static const Double_t m  = meter;                  
 
-//
-// Electric current [Q][T^-1]
-//
-static const Double_t      ampere = 1.;
-static const Double_t milliampere = 1.e-3*ampere;
-static const Double_t microampere = 1.e-6*ampere;
-static const Double_t  nanoampere = 1.e-9*ampere;
+  /**
+   * square meter
+   */
+  static const Double_t m2 = meter2;
 
-//
-// Electric charge [Q]
-//
-static const Double_t coulomb = ampere*second;
-static const Double_t e_SI  = 1.60217733e-19;	// positron charge in coulomb
-static const Double_t eplus = e_SI*coulomb ;		// positron charge
+  /**
+   * cubic meter
+   */
+  static const Double_t m3 = meter3;
+  
+  /**
+   * kilometer
+   */
+  static const Double_t km  = kilometer;                   
 
-//
-// Energy [E]
-//
-static const Double_t joule = kg*m*m/(s*s);
+  /**
+   * square kilometer
+   */
+  static const Double_t km2 = kilometer2;
 
-static const Double_t     electronvolt = e_SI*joule;
-static const Double_t kiloelectronvolt = 1.e+3*electronvolt;
-static const Double_t megaelectronvolt = 1.e+6*electronvolt; 
-static const Double_t gigaelectronvolt = 1.e+9*electronvolt;
-static const Double_t teraelectronvolt = 1.e+12*electronvolt;
-static const Double_t petaelectronvolt = 1.e+15*electronvolt;
+  /**
+   * cubic kilometer
+   */
+  static const Double_t km3 = kilometer3;
+  
+  /**
+   * parsec
+   */
+  static const Double_t pc = parsec;
+  
+  //
+  // Angle
+  //
+  /**
+   * radian
+   */
+  static const Double_t radian      = 1.;                  
+  
+  /**
+   * milliradian
+   */
+  static const Double_t milliradian = 1.e-3*radian;
 
-// symbols
-static const Double_t MeV = megaelectronvolt;
-static const Double_t  eV = electronvolt;
-static const Double_t keV = kiloelectronvolt;
-static const Double_t GeV = gigaelectronvolt;
-static const Double_t TeV = teraelectronvolt;
-static const Double_t PeV = petaelectronvolt;
+  /**
+   * degree
+   */
+  static const Double_t degree = (3.14159265358979323846/180.0)*radian;
+  
+  /**
+   * steradian
+   */
+  static const Double_t   steradian = 1.;
+  
+  // symbols
+  /**
+   * radian
+   */
+  static const Double_t rad  = radian;	
 
-//
-// Power [E][T^-1]
-//
-static const Double_t watt = joule/second;	// watt = 6.24150 e+3 * MeV/ns
+  /**
+   * milliradian
+   */
+  static const Double_t mrad = milliradian;
 
-//
-// Force [E][L^-1]
-//
-static const Double_t newton = joule/meter;	// newton = 6.24150 e+9 * MeV/mm
+  /**
+   * steradian
+   */
+  static const Double_t sr   = steradian;
 
-//
-// Pressure [E][L^-3]
-//
-static const Double_t hep_pascal = newton/m2;	   // pascal = 6.24150 e+3 * MeV/mm3
-static const Double_t pascal = hep_pascal;
-static const Double_t bar        = 100000*pascal; // bar    = 6.24150 e+8 * MeV/mm3
-static const Double_t atmosphere = 101325*pascal; // atm    = 6.32420 e+8 * MeV/mm3
+  /**
+   * degree
+   */
+  static const Double_t deg  = degree;
+  
+  //
+  // Time [T]
+  //
+  /**
+   * second
+   */
+  static const Double_t second      = 1.;
 
-//
-// Electric potential [E][Q^-1]
-//
-static const Double_t megavolt = megaelectronvolt/eplus;
-static const Double_t kilovolt = 1.e-3*megavolt;
-static const Double_t     volt = 1.e-6*megavolt;
+  /**
+   * nanosecond
+   */
+  static const Double_t nanosecond  = 1.e-9 *second;
 
-//
-// Electric resistance [E][T][Q^-2]
-//
-static const Double_t ohm = volt/ampere;	// ohm = 1.60217e-16*(MeV/eplus)/(eplus/ns)
+  /**
+   * millisecond
+   */ 
+  static const Double_t millisecond = 1.e-3 *second;
 
-//
-// Electric capacitance [Q^2][E^-1]
-//
-static const Double_t farad = coulomb/volt;	// farad = 6.24150e+24 * eplus/Megavolt
-static const Double_t millifarad = 1.e-3*farad;
-static const Double_t microfarad = 1.e-6*farad;
-static const Double_t  nanofarad = 1.e-9*farad;
-static const Double_t  picofarad = 1.e-12*farad;
+  /**
+   * microsecond
+   */
+  static const Double_t microsecond = 1.e-6 *second;
 
-//
-// Magnetic Flux [T][E][Q^-1]
-//
-static const Double_t weber = volt*second;	// weber = 1000*megavolt*ns
+  /**
+   * picosecond
+   */
+  static const Double_t  picosecond = 1.e-12*second;
+  
+  /**
+   * hertz
+   */
+  static const Double_t hertz = 1./second;
 
-//
-// Magnetic Field [T][E][Q^-1][L^-2]
-//
-static const Double_t tesla     = volt*second/meter2;	// tesla =0.001*megavolt*ns/mm2
+  /**
+   * kilohertz
+   */
+  static const Double_t kilohertz = 1.e+3*hertz;
 
-static const Double_t gauss     = 1.e-4*tesla;
-static const Double_t kilogauss = 1.e-1*tesla;
+  /**
+   * megahertz
+   */
+  static const Double_t megahertz = 1.e+6*hertz;
+  
+  // symbols
+  /**
+   * nanosecond
+   */
+  static const Double_t ns = nanosecond;			
 
-//
-// Inductance [T^2][E][Q^-2]
-//
-static const Double_t henry = weber/ampere;	// henry = 1.60217e-7*MeV*(ns/eplus)**2
+  /**
+   * second
+   */
+  static const Double_t  s = second;
 
-//
-// Temperature
-//
-static const Double_t kelvin = 1.;
+  /**
+   * millisecond
+   */
+  static const Double_t ms = millisecond;
+  
+  //
+  // Mass [E][T^2][L^-2]
+  //
+  /**
+   * kilogram
+   */
+  static const Double_t  kilogram = 1.;   
 
-//
-// Amount of substance
-//
-static const Double_t mole = 1.;
+  /**
+   * gram
+   */
+  static const Double_t      gram = 1.e-3*kilogram;
 
-//
-// Activity [T^-1]
-//
-static const Double_t becquerel = 1./second ;
-static const Double_t curie = 3.7e+10 * becquerel;
+  /**
+   * milligram
+   */
+  static const Double_t milligram = 1.e-3*gram;
+  
+  // symbols
+  /**
+   * kilogram
+   */
+  static const Double_t  kg = kilogram;
 
-//
-// Absorbed dose [L^2][T^-2]
-//
-static const Double_t gray = joule/kilogram ;
+  /**
+   * gram
+   */
+  static const Double_t   g = gram;
 
-//
-// Luminous intensity [I]
-//
-static const Double_t candela = 1.;
+  /**
+   * milligram
+   */
+  static const Double_t  mg = milligram;
+  
+  //
+  // Electric current [Q][T^-1]
+  //
+  /**
+   * ampere
+   */
+  static const Double_t      ampere = 1.;
 
-//
-// Luminous flux [I]
-//
-static const Double_t lumen = candela*steradian;
+  /**
+   * milliampere
+   */
+  static const Double_t milliampere = 1.e-3*ampere;
 
-//
-// Illuminance [I][L^-2]
-//
-static const Double_t lux = lumen/meter2;
+  /**
+   * microampere
+   */
+  static const Double_t microampere = 1.e-6*ampere;
 
-//
-// Miscellaneous
-//
-static const Double_t perCent     = 0.01 ;
-static const Double_t perThousand = 0.001;
-static const Double_t perMillion  = 0.000001;
+  /**
+   * nanoampere
+   */
+  static const Double_t  nanoampere = 1.e-9*ampere;
+  
+  //
+  // Electric charge [Q]
+  //
+  /**
+   * coulomb
+   */
+  static const Double_t coulomb = ampere*second;
 
+  /**
+   * charge on a positron in coulomb
+   */
+  static const Double_t e_SI  = 1.60217733e-19;	// positron charge in coulomb
+
+  /**
+   * positron charge
+   */
+  static const Double_t eplus = e_SI*coulomb ;		// positron charge
+  
+  //
+  // Energy [E]
+  //
+  /**
+   * joule
+   */
+  static const Double_t joule = kg*m*m/(s*s);
+  
+  /**
+   * eV
+   */
+  static const Double_t     electronvolt = e_SI*joule;
+
+  /**
+   * keV
+   */
+  static const Double_t kiloelectronvolt = 1.e+3*electronvolt;
+
+  /**
+   * MeV
+   */
+  static const Double_t megaelectronvolt = 1.e+6*electronvolt; 
+
+  /**
+   * GeV
+   */
+  static const Double_t gigaelectronvolt = 1.e+9*electronvolt;
+
+  /**
+   * TeV
+   */
+  static const Double_t teraelectronvolt = 1.e+12*electronvolt;
+
+  /**
+   * PeV
+   */
+  static const Double_t petaelectronvolt = 1.e+15*electronvolt;
+  
+  // symbols
+  /**
+   * MeV
+   */
+  static const Double_t MeV = megaelectronvolt;
+
+  /**
+   * eV
+   */
+  static const Double_t  eV = electronvolt;
+
+  /**
+   * keV
+   */
+  static const Double_t keV = kiloelectronvolt;
+
+  /**
+   * GeV
+   */
+  static const Double_t GeV = gigaelectronvolt;
+
+  /**
+   * TeV
+   */
+  static const Double_t TeV = teraelectronvolt;
+
+  /**
+   * PeV
+   */
+  static const Double_t PeV = petaelectronvolt;
+  
+  //
+  // Power [E][T^-1]
+  //
+  /**
+   * What?! ... No, watt.
+   */ 
+  static const Double_t watt = joule/second;	// watt = 6.24150 e+3 * MeV/ns
+  
+  //
+  // Force [E][L^-1]
+  //
+  /**
+   * newton
+   */
+  static const Double_t newton = joule/meter;	// newton = 6.24150 e+9 * MeV/mm
+  
+  //
+  // Pressure [E][L^-3]
+  //
+  /**
+   * ??
+   */
+  static const Double_t hep_pascal = newton/m2;	   // pascal = 6.24150 e+3 * MeV/mm3
+
+  /**
+   * pascal
+   */
+  static const Double_t pascal = hep_pascal;
+
+  /**
+   * bar
+   */
+  static const Double_t bar        = 100000*pascal; // bar    = 6.24150 e+8 * MeV/mm3
+
+  /**
+   * atmosphere
+   */
+  static const Double_t atmosphere = 101325*pascal; // atm    = 6.32420 e+8 * MeV/mm3
+  
+  //
+  // Electric potential [E][Q^-1]
+  //
+  /**
+   * Mega Volt
+   */
+  static const Double_t megavolt = megaelectronvolt/eplus;
+
+  /** 
+   * kilovolt
+   */
+  static const Double_t kilovolt = 1.e-3*megavolt;
+
+  /**
+   * volt
+   */
+  static const Double_t     volt = 1.e-6*megavolt;
+  
+  //
+  // Electric resistance [E][T][Q^-2]
+  //
+  /**
+   * ohm
+   */
+  static const Double_t ohm = volt/ampere;	// ohm = 1.60217e-16*(MeV/eplus)/(eplus/ns)
+  
+  //
+  // Electric capacitance [Q^2][E^-1]
+  //
+  /**
+   * farad
+   */
+  static const Double_t farad = coulomb/volt;	// farad = 6.24150e+24 * eplus/Megavolt
+
+  /**
+   * millifarad
+   */
+  static const Double_t millifarad = 1.e-3*farad;
+
+  /**
+   * microfarad
+   */
+  static const Double_t microfarad = 1.e-6*farad;
+
+  /**
+   * nanofarad
+   */
+  static const Double_t  nanofarad = 1.e-9*farad;
+
+  /**
+   * picofarad
+   */
+  static const Double_t  picofarad = 1.e-12*farad;
+  
+  //
+  // Magnetic Flux [T][E][Q^-1]
+  //
+  /**
+   * weber
+   */
+  static const Double_t weber = volt*second;	// weber = 1000*megavolt*ns
+  
+  //
+  // Magnetic Field [T][E][Q^-1][L^-2]
+  //
+  /**
+   * tesla
+   */
+  static const Double_t tesla     = volt*second/meter2;	// tesla =0.001*megavolt*ns/mm2
+  
+  /**
+   * gauss
+   */
+  static const Double_t gauss     = 1.e-4*tesla;
+
+  /**
+   * kilogauss
+   */
+  static const Double_t kilogauss = 1.e-1*tesla;
+  
+  //
+  // Inductance [T^2][E][Q^-2]
+  //
+  /**
+   * henry
+   */
+  static const Double_t henry = weber/ampere;	// henry = 1.60217e-7*MeV*(ns/eplus)**2
+  
+  //
+  // Temperature
+  //
+  /**
+   * kelvin
+   */
+  static const Double_t kelvin = 1.;
+  
+  //
+  // Amount of substance
+  //
+  /**
+   * mole
+   */
+  static const Double_t mole = 1.;
+  
+  //
+  // Activity [T^-1]
+  //
+  /**
+   * becquerel
+   */
+  static const Double_t becquerel = 1./second ;
+
+  /**
+   * curie
+   */
+  static const Double_t curie = 3.7e+10 * becquerel;
+  
+  //
+  // Absorbed dose [L^2][T^-2]
+  //
+  /**
+   * gray
+   */
+  static const Double_t gray = joule/kilogram ;
+  
+  //
+  // Luminous intensity [I]
+  //
+  /**
+   * candela
+   */
+  static const Double_t candela = 1.;
+  
+  //
+  // Luminous flux [I]
+  //
+  /**
+   * lumen
+   */
+  static const Double_t lumen = candela*steradian;
+  
+  //
+  // Illuminance [I][L^-2]
+  //
+  /**
+   * lux
+   */
+  static const Double_t lux = lumen/meter2;
+
+  //
+  // Miscellaneous
+  //
+  /**
+   * percent
+   */
+  static const Double_t perCent     = 0.01 ;
+
+  /**
+   * perThousand
+   */
+  static const Double_t perThousand = 0.001;
+
+  /**
+   * perMillion
+   */
+  static const Double_t perMillion  = 0.000001;
+  
 };
 #endif /* G4UNITSTEST_HH */
