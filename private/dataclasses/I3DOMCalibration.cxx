@@ -1,5 +1,5 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.7 2004/12/01 22:40:57 tmccauley Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.8 2004/12/08 17:46:50 pretz Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
@@ -11,8 +11,8 @@ I3DOMCalibration::I3DOMCalibration()
     : fDate(NAN), fDOMId(0), fTemperature(NAN),
       fFADCGain(NAN), fFADCPedestal(NAN),
       fPMTHighVoltage(NAN), fPedestalVoltage(NAN),
-      fSamplingRate0(NAN), fSamplingRate1(NAN),
-      fPeakToValley(NAN), fSPEMean(NAN), fSPEWidth(NAN)
+      fPeakToValley(NAN), fSPEMean(NAN), fSPEWidth(NAN),
+      fSamplingRate0(NAN), fSamplingRate1(NAN)
 {};
 
 void I3DOMCalibration::SetCalibrationConstants()

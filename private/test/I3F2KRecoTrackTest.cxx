@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrackTest.cxx,v 1.9 2004/10/11 07:06:10 troy Exp $
+    $Id: I3F2KRecoTrackTest.cxx,v 1.10 2004/12/08 17:46:50 pretz Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/12/08 17:46:50 $
     @author John Pretz, Troy D. Straszheim
 
     @todo
@@ -40,17 +40,12 @@ namespace
 namespace tut
 {
 
-#warning This needs fixing, pending smart pointers.
-#warning for now, just go about your business... 
-
-#if 0
   // testing writing to a tree
   template<> template<>
   void object::test<1>()
   {
     //TDS FIXME: have to use T* boost::shared_ptr<T>::get() to get the 
     //raw pointers out (because you need the raw pointer to Branch() and Fill()
-
     I3F2KRecoTrackPtr track(new I3F2KRecoTrack);
     TTree tree;
     I3F2KRecoTrack* baldptr = track.get();
@@ -99,14 +94,6 @@ namespace tut
     fTrack.SetStartX(1.3);
     ensure(fTrack.GetX() == 1.3);
     ensure(fTrack.GetStartX() == 1.3);
-  }
-
-#endif
-  // testing return;  ... I"m pretty sure it works.
-  template<> template<>
-  void object::test<4>()
-  {
-    return;
   }
 
 }

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackTest.cxx,v 1.7 2004/10/11 07:06:10 troy Exp $
+    $Id: I3TrackTest.cxx,v 1.8 2004/12/08 17:46:50 pretz Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/12/08 17:46:50 $
     @author Troy D. Straszheim
 
     @todo
@@ -48,8 +48,6 @@ namespace tut
 
   void object::test<2>() 
   {
-    Double_t pi = 3.14159265358979323846;
-    
     cout <<"Creating I3ContainedTrack..."<<endl;
     I3DoubleBang track;
 
