@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoTrackComposite.h,v 1.4 2004/02/16 16:13:28 troy Exp $
+    $Id: I3RecoTrackComposite.h,v 1.5 2004/02/26 18:53:12 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/02/16 16:13:28 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/02/26 18:53:12 $
     @author
 
     @todo
@@ -25,8 +25,8 @@ class I3RecoTrackComposite : public I3RecoTrack
            I3RecoTrackComposite();
   virtual ~I3RecoTrackComposite();
 
-  unsigned short     GetNumberConstituents() const;
-  const I3RecoTrack& GetConstituent(unsigned short number) const;
+  UShort_t     GetNumberConstituents() const;
+  const I3RecoTrack& GetConstituent(UShort_t number) const;
   void               AddConstituent(I3RecoTrack* constituent_);
 
   ClassDef(I3RecoTrackComposite, 1);

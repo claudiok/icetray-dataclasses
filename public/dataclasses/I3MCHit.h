@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.9 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3MCHit.h,v 1.10 2004/02/26 18:53:12 pretz Exp $
  *
  *
  *
- * @version $Revision: 1.9 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/02/26 18:53:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -59,7 +59,7 @@ class I3MCHit : public I3Hit
   /**
    * @return the track number which caused this hit
    */
-  short TrackNumber() const { return fTrackNum; }
+  UShort_t TrackNumber() const { return fTrackNum; }
 
   /**
    * @param tracknum set the track which caused this hit

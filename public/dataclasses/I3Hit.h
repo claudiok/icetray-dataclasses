@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.8 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3Hit.h,v 1.9 2004/02/26 18:53:12 pretz Exp $
  *
  * I3Hit is the basic hit class.  Just a time for a PE arrival
  * at a tube.  
  *
- * @version $Revision: 1.8 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/02/26 18:53:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -23,7 +23,7 @@
 
 class I3Hit : public TObject
 {
-  ULong_t fTime;
+  Double_t fTime;
 
   public:
   /**
@@ -48,12 +48,12 @@ class I3Hit : public TObject
   /**
    * @returns the time of the hit
    */
-  ULong_t Time() const { return fTime; }
+  Double_t Time() const { return fTime; }
 
   /**
    * @param time_ the new time of the hit
    */
-  void Time(ULong_t time) { fTime = time; }
+  void Time(Double_t time) { fTime = time; }
 
  private:
   // ROOT Macro

@@ -13,14 +13,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.14 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3OMResponse.h,v 1.15 2004/02/26 18:53:12 pretz Exp $
  *
  * The container for all the OMResponse-related data in the event
  * Has the monte-carlo truth, the hardware response, and the reconstructed
  * hit series'.    
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/02/26 18:53:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -30,7 +30,7 @@
  */
 class I3OMResponse : public TObject
 {
-  unsigned short fOMNumber;
+  UShort_t fOMNumber;
   //  TRef          fGeometry;
 
   // with the following, you either put in the two pipes or get
@@ -55,12 +55,12 @@ class I3OMResponse : public TObject
   /**
    * @return the number of the OM for this response
    */
-  unsigned short OMNumber() const { return fOMNumber; }
+  UShort_t OMNumber() const { return fOMNumber; }
 
   /**
    * @param omnumber the new omnumber associated with this response
    */
-  void           OMNumber(unsigned short omnumber) { fOMNumber = omnumber; }
+  void           OMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
   
   // bool HasGeometry(){} const;
   // const I3OMGeo& GetGeometry() const;

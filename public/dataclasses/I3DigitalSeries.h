@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalSeries.h,v 1.14 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3DigitalSeries.h,v 1.15 2004/02/26 18:53:12 pretz Exp $
  *
  * A collection of digital signals.  
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/02/26 18:53:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -38,12 +38,12 @@ class I3DigitalSeries : public VectorPolicy<I3Digital>::ThePolicy
   /** 
    * @return the start time of the series
    */
-  double StartTime() const { return fStarttime; }
+  Double_t StartTime() const { return fStarttime; }
 
   /**
    * @param starttime the new start time for the series
    */
-  void   StartTime(double starttime) { fStarttime = starttime; }
+  void   StartTime(Double_t starttime) { fStarttime = starttime; }
 
  private:
   // copy and assignment private

@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHit.h,v 1.6 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3RecoHit.h,v 1.7 2004/02/26 18:53:12 pretz Exp $
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/02/26 18:53:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,7 +20,7 @@
 
 class I3RecoHit : public I3Hit
 {
-  float fConfidence;
+  Double_t fConfidence;
 
   public:
   /**
@@ -51,12 +51,12 @@ class I3RecoHit : public I3Hit
   /**
    * @return the confidence in this hit
    */
-  float Confidence() const { return fConfidence; }
+  Double_t Confidence() const { return fConfidence; }
 
   /**
    * @param confidence the new confidence for this hit
    */
-  void Confidence(float confidence) { fConfidence = confidence; }
+  void Confidence(Double_t confidence) { fConfidence = confidence; }
 
 
  private:

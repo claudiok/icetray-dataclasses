@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoResultSingleTrack.cxx,v 1.5 2004/02/16 01:25:57 troy Exp $
+    $Id: I3RecoResultSingleTrack.cxx,v 1.6 2004/02/26 18:53:11 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/02/16 01:25:57 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/02/26 18:53:11 $
     @author
 
     @todo
@@ -16,7 +16,7 @@
 ClassImp(I3RecoResultSingleTrack);
 
 const I3RecoTrack& 
-I3RecoResultSingleTrack::operator[](unsigned short tracklistindex) const 
+I3RecoResultSingleTrack::operator[](UShort_t tracklistindex) const 
 {
   if(size()>tracklistindex) 
     return I3RecoResult::operator[](tracklistindex)[0];

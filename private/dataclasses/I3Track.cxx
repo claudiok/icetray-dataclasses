@@ -25,10 +25,10 @@ I3Track::I3Track()
   
 I3Track::~I3Track() {if (childrentrack) {childrentrack->Delete(); delete childrentrack;}}
     
-bool 
+Bool_t 
 I3Track::HasParentTrack() const
 {
-  return((parenttrack.GetObject()==NULL) ? false : true);
+  return((parenttrack.GetObject()==NULL) ? kFALSE : kTRUE);
 }
 
 const 
@@ -46,14 +46,14 @@ I3Track::SetParentTrack(I3Track& parenttrack_)
   else I3DataExecution::Instance().Fatal("I3Track::SetParentTrack() the parent track has already been set");
 }
 
-unsigned short 
+UShort_t 
 I3Track::GetNumberChildrenTracks() const
 {
   return((childrentrack==NULL) ? 0 : childrentrack->GetLast()+1);
 }
 
 const 
-I3Track& I3Track::GetChildrenTrack(unsigned short number) const
+I3Track& I3Track::GetChildrenTrack(UShort_t number) const
 {
   if(GetNumberChildrenTracks()>number) return (*(I3Track*)childrentrack->At(number));
   I3DataExecution::Instance().Fatal("I3Track::GetChildrenTracks() asked for an index out of bounds");

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.7 2004/02/17 15:48:13 troy Exp $
+    $Id: I3Track.h,v 1.8 2004/02/26 18:53:12 pretz Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/02/17 15:48:13 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/02/26 18:53:12 $
     @author
 
     @todo
@@ -57,20 +57,20 @@ class I3Track : public TObject
     Elph = 9999};
 
  private:
-  unsigned short fTrackNumber;
+  UShort_t fTrackNumber;
   Type           fParticleId;
-  float          fStartTime;
-  float          fStartX;
-  float          fStartY;
-  float          fStartZ;
-  float          fStopTime;
-  float          fStopX;
-  float          fStopY;
-  float          fStopZ;
-  float          fLength;
-  float          fZenith;
-  float          fAzimuth;
-  float          fEnergy;
+  Double_t       fStartTime;
+  Double_t       fStartX;
+  Double_t       fStartY;
+  Double_t       fStartZ;
+  Double_t       fStopTime;
+  Double_t       fStopX;
+  Double_t       fStopY;
+  Double_t       fStopZ;
+  Double_t       fLength;
+  Double_t       fZenith;
+  Double_t       fAzimuth;
+  Double_t       fEnergy;
   TRef           parenttrack;
   TRefArray      *childrentrack;
 
@@ -78,42 +78,42 @@ class I3Track : public TObject
   I3Track();
   virtual ~I3Track();
     
-  unsigned short TrackNumber() const { return fTrackNumber; }
+  UShort_t TrackNumber() const { return fTrackNumber; }
   Type ParticleID() const { return fParticleId; }
-  float StartTime() const { return fStartTime; }
-  float StartX() const { return fStartX; }
-  float StartY() const { return fStartY; }
-  float StartZ() const { return fStartZ; }
-  float StopTime() const { return fStopTime; }
-  float StopX() const { return fStopX; }
-  float StopY() const { return fStopY; }
-  float StopZ() const { return fStopZ; }
-  float Length() const { return fLength; }
-  float Zenith() const { return fZenith; }
-  float Azimuth() const { return fAzimuth; }
-  float Energy() const { return fEnergy; }
+  Double_t StartTime() const { return fStartTime; }
+  Double_t StartX() const { return fStartX; }
+  Double_t StartY() const { return fStartY; }
+  Double_t StartZ() const { return fStartZ; }
+  Double_t StopTime() const { return fStopTime; }
+  Double_t StopX() const { return fStopX; }
+  Double_t StopY() const { return fStopY; }
+  Double_t StopZ() const { return fStopZ; }
+  Double_t Length() const { return fLength; }
+  Double_t Zenith() const { return fZenith; }
+  Double_t Azimuth() const { return fAzimuth; }
+  Double_t Energy() const { return fEnergy; }
 
-  void TrackNumber(unsigned short arg) { fTrackNumber = arg; }
+  void TrackNumber(UShort_t arg) { fTrackNumber = arg; }
   void ParticleID(Type arg) { fParticleId = arg; }
-  void StartTime(float arg) { fStartTime = arg; }
-  void StartX(float arg) { fStartX = arg; }
-  void StartY(float arg) { fStartY = arg; }
-  void StartZ(float arg) { fStartZ = arg; }
-  void StopTime(float arg) { fStopTime = arg; }
-  void StopX(float arg) { fStopX = arg; }
-  void StopY(float arg) { fStopY = arg; }
-  void StopZ(float arg) { fStopZ = arg; }
-  void Length(float arg) { fLength = arg; }
-  void Zenith(float arg) { fZenith = arg; }
-  void Azimuth(float arg) { fAzimuth = arg; }
-  void Energy(float arg) { fEnergy = arg; }
+  void StartTime(Double_t arg) { fStartTime = arg; }
+  void StartX(Double_t arg) { fStartX = arg; }
+  void StartY(Double_t arg) { fStartY = arg; }
+  void StartZ(Double_t arg) { fStartZ = arg; }
+  void StopTime(Double_t arg) { fStopTime = arg; }
+  void StopX(Double_t arg) { fStopX = arg; }
+  void StopY(Double_t arg) { fStopY = arg; }
+  void StopZ(Double_t arg) { fStopZ = arg; }
+  void Length(Double_t arg) { fLength = arg; }
+  void Zenith(Double_t arg) { fZenith = arg; }
+  void Azimuth(Double_t arg) { fAzimuth = arg; }
+  void Energy(Double_t arg) { fEnergy = arg; }
 
-  bool           HasParentTrack() const;
+  Bool_t           HasParentTrack() const;
   const I3Track& GetParentTrack() const;
   void           SetParentTrack(I3Track& parenttrack_);
 
-  unsigned short GetNumberChildrenTracks() const;
-  const I3Track& GetChildrenTrack(unsigned short number) const;
+  UShort_t GetNumberChildrenTracks() const;
+  const I3Track& GetChildrenTrack(UShort_t number) const;
   void           AddChildrenTrack(I3Track& childrentrack_);
 
   ClassDef(I3Track, 1);

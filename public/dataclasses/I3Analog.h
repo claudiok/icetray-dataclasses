@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Analog.h,v 1.6 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3Analog.h,v 1.7 2004/02/26 18:53:12 pretz Exp $
  * One analog pulse from an OM.  
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/02/26 18:53:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -22,7 +22,7 @@
 
 class I3Analog : public TObject
 {
-  ULong_t  fTime;
+  Double_t  fTime;
   ULong_t  fLet;
   Float_t          fIntegratedcharge;
   UShort_t fTot;
@@ -63,12 +63,12 @@ class I3Analog : public TObject
   /**
    * @return the time of the pulse
    */
-  ULong_t  Time() const { return fTime; }
+  Double_t  Time() const { return fTime; }
 
   /**
    * @param t the time of the pulse
    */
-  void  Time(ULong_t t) { fTime = t; }
+  void  Time(Double_t t) { fTime = t; }
 
   /**
    * @return the leading edge time of the pulse

@@ -6,12 +6,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.13 2004/02/25 20:57:14 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.14 2004/02/26 18:53:12 pretz Exp $
  *
  *
  *
- * @version $Revision: 1.13 $
- * @date $Date: 2004/02/25 20:57:14 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/02/26 18:53:12 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,7 +20,7 @@
  */
 class I3MCHitSeries : public VectorPolicy<I3MCHit>::ThePolicy 
 {
-  float fWeight;
+  Double_t fWeight;
  public:
   /**
    * constructor
@@ -35,12 +35,12 @@ class I3MCHitSeries : public VectorPolicy<I3MCHit>::ThePolicy
   /**
    * @return the weight associated with this series
    */
-  float Weight() { return fWeight; }
+  Double_t Weight() { return fWeight; }
 
   /**
    * @param weight the new weight for this series
    */
-  void Weight(float weight) { fWeight = weight; }
+  void Weight(Double_t weight) { fWeight = weight; }
 
   private:
 /*   // copy and assignment are private */
