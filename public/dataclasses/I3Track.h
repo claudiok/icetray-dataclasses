@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.10.2.16 2004/04/21 16:03:10 pretz Exp $
+ * $Id: I3Track.h,v 1.10.2.17 2004/04/21 20:17:43 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.10.2.16 $
- * @date $Date: 2004/04/21 16:03:10 $
+ * @version $Revision: 1.10.2.17 $
+ * @date $Date: 2004/04/21 20:17:43 $
  * @author 
  *
  * @todo
@@ -156,6 +156,9 @@ class I3Track : public I3ObservableParticle
   virtual I3Position Pos() const =0;
   
   // energy
+  /**
+   * The energy of the particle
+   */
   virtual Double_t Energy() const =0;
 
   // speed 
@@ -190,6 +193,10 @@ class I3Track : public I3ObservableParticle
       I3Particle::CopyTo(destination);
     }
 
+  /**
+   * Copies over data from the source particle to this particle.
+   * Only copies that data which the two have in common.
+   */
   virtual void CopyFrom(const I3Particle& source)
     {
       source.CopyTo(*this);

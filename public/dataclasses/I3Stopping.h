@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.1.2.5 2004/04/21 16:03:10 pretz Exp $
+ * $Id: I3Stopping.h,v 1.1.2.6 2004/04/21 20:17:43 pretz Exp $
  *
  * @file 
- * @version $Revision: 1.1.2.5 $
- * @date $Date: 2004/04/21 16:03:10 $
+ * @version $Revision: 1.1.2.6 $
+ * @date $Date: 2004/04/21 20:17:43 $
  * @author 
  *
  * @todo
@@ -60,28 +60,12 @@ class I3Stopping{
   /**
    * shouldn't be used.  Calls Fatal.
    */
-  void StartX(Double_t)
-    {
-      NanPolicy::Fatal();
-    }
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
   Double_t StartY() const     
     {
       NanPolicy::Fatal();
       return NAN;
     }
 
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  void StartY(Double_t)
-    {
-      NanPolicy::Fatal();
-    }
-  
   /**
    * shouldn't be used.  Calls Fatal.
    */
@@ -94,65 +78,19 @@ class I3Stopping{
   /**
    * shouldn't be used.  Calls Fatal.
    */
-  void StartZ(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
   Double_t StartT() const
     {
       NanPolicy::Fatal();
       return NAN;
     }
 
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  void StartT(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
-
-
   Double_t X() const {return fStopX;}
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  void X(Double_t) {return;}
 
   Double_t Y() const {return fStopY;}
 
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  void Y(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
-
   Double_t Z() const {return fStopZ;}
 
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  void Z(Double_t)
-    {
-      NanPolicy::Fatal();
-    }
-
   Double_t T() const {return fStopT;}
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  void T(Double_t)
-    {
-      NanPolicy::Fatal();
-    }
 
   /**
    * gives the zenith of the track
@@ -178,14 +116,6 @@ class I3Stopping{
    * returns the length of the track as infinite
    */
   Double_t Length() const {return INFINITY;}
-
-  /**
-   * not to be used.  Calls fatal.
-   */
-  void Length(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
 
   /**
    * gives the stopping x position of the track

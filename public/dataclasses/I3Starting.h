@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.1.2.6 2004/04/21 16:03:10 pretz Exp $
+ * $Id: I3Starting.h,v 1.1.2.7 2004/04/21 20:17:43 pretz Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.1.2.6 $
- * @date $Date: 2004/04/21 16:03:10 $
+ * @version $Revision: 1.1.2.7 $
+ * @date $Date: 2004/04/21 20:17:43 $
  * @author pretz
  *
  * @todo
@@ -95,25 +95,9 @@ class I3Starting{
   Double_t X() const {return fStartX;}
 
   /**
-   * shouldn't be used.  Calls fatal.
-   */
-  void X(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
-
-  /**
    * gives the starting y position a  a position on the track
    */
   Double_t Y() const {return fStartY;}
-
-  /**
-   * shouldn't be used.  Calls Fatal.
-   */
-  void Y(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
 
   /**
    * gives the starting z positition as a position on the track
@@ -121,25 +105,9 @@ class I3Starting{
   Double_t Z() const {return fStartZ;}
 
   /**
-   * shouldn't be used.  Calls fatal
-   */
-  void Z(Double_t)
-    {
-      NanPolicy::Fatal();
-    }
-
-  /**
    * gives the starting t time as a time corresponding to X(), Y() and Z()
    */
   Double_t T() const {return fStartT;}
-
-  /**
-   * shouldn't be used.  Calls Fatal();
-   */
-  void T(Double_t)
-    {
-      NanPolicy::Fatal();
-    }
 
   /**
    * gives the zenith of the track
@@ -167,28 +135,12 @@ class I3Starting{
   Double_t Length() const {return INFINITY;}
 
   /**
-   * shouldn't be used.  Calls Fatal()
-   */
-  void Length(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
-
-  /**
    * shouldn't be used.  Calls fatal.
    */
   Double_t StopX() const 
     {
       NanPolicy::Fatal();
       return NAN;
-    }
-
-  /**
-   * shouldn't be used.  Calls fatal
-   */
-  void StopX(Double_t) 
-    {
-      NanPolicy::Fatal();
     }
 
   /**
@@ -200,26 +152,10 @@ class I3Starting{
       return NAN;
     }
 
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  void StopY(Double_t) {return;}
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
   Double_t StopZ() const 
     {
       NanPolicy::Fatal();
       return NAN;
-    }
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  void StopZ(Double_t) 
-    {
-      NanPolicy::Fatal();
     }
 
   /**
@@ -232,25 +168,9 @@ class I3Starting{
     }
 
   /**
-   * shouldn't be used.  Calls fatal.
-   */
-  void StopT(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
-
-  /**
    * returns the speed of light
    */ 
   Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
-
-  /**
-   * shouldn't be used.  Calls fatal.
-   */
-  void Speed(Double_t) 
-    {
-      NanPolicy::Fatal();
-    }
 
   /**
    * copies the data to the destination particle, if a dynamic cast succeeds

@@ -1,15 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.13.2.1 2004/04/13 10:29:28 troy Exp $
+ * $Id: I3Bag.h,v 1.13.2.2 2004/04/21 20:17:43 pretz Exp $
  *
- * I3Bag is a generic keyed TObject container, akin to the
- * Sieglinde bag. Each Event (and geometry etc) gets one so that it can hold 
- * stuff that  doesn't really fit into the Data structure.  Just for 
- * 'temporary' or 'personal' use.
- *
- * @version $Revision: 1.13.2.1 $
- * @date $Date: 2004/04/13 10:29:28 $
+ * @file I3Bag.h
+ * @version $Revision: 1.13.2.2 $
+ * @date $Date: 2004/04/21 20:17:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -25,6 +21,12 @@
 
 typedef TObject* TObjectPtr;
 
+/**
+ * I3Bag is a generic keyed TObject container, akin to the
+ * Sieglinde bag. Each Event (and geometry etc) gets one so that it can hold 
+ * stuff that  doesn't really fit into the Data structure.  Just for 
+ * 'temporary' or 'personal' use.
+ */
 class I3Bag : public TObject, public MapPointainerPolicy<TObjectPtr>::ThePolicy
 {
  public:

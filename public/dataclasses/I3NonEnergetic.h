@@ -15,10 +15,6 @@ class I3NonEnergetic
       NanPolicy::Fatal();
       return NAN;
     }
-  void Energy(Double_t energy) 
-    {
-      NanPolicy::Fatal();
-    }
 
   void CopyTo(I3Particle&) const {}
 
