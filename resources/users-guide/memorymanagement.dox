@@ -1,0 +1,57 @@
+/**
+
+@page memorymanagement Memory management schemes
+
+@author <a href="http://www.resophonic.com">Troy Straszheim</a>
+@author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
+
+@section summary Summary 
+ 
+@section memorymanagement A Word on Memory Management
+
+Memory management is an issue that warants some attention.  
+
+The idea of the framework is that icetray modules get handed some
+data, add to it, and then pass it on.  When the framework is done with
+a particular frame, it deletes everything in that frame.  In the
+dataclasses picture that means that, for instance, that deleting the
+I3Event in the frame is the responsibiltiy of the framework.  Beyond
+that, the I3Event is responsible for taking everything 'inside' of it
+with it when it goes.
+
+Two ways of dealing with this problem have been suggested.
+  
+The first is to use Pointainers.  Pointainer is a keyword for a container
+of pointers that deletes its contents when the Pointainer goes out of scope
+
+The second suggestion has been to use some style of Smart pointer, that 
+deletes the object it points to when all the smart pointers to an object
+go out of scope.
+
+Both suggestions have their pros and cons, and it is not - at this point - 
+clear which will be most useful in the end.  Currently the containers are
+implemented as pointainers which delete their contents when they go out 
+of scope, but the smart pointer policy may win out.
+
+Nevertheless, the code has been designed so that you, a user of the 
+dataclasses, are insulated from this decision.  The way to keep yourself
+from bumping up against this issue is to - in your code - make no reference
+directly to pointers of dataclass types.  Instead a typedef of a pointer 
+type has been
+provided.
+
+For instance:
+
+@code
+  I3RecoResult* rr_1 = new I3RecoResult();  // <--- don't do this
+
+  I3RecoResultPtr rr_2 = new I3RecoResult(); // <--- do this instead
+@endcode
+
+The point is that should it ever become necessary to use the smart pointer 
+approach, the single location of that typedef can be changed and we'll be 
+working with smart pointers.  If everyone is using the Ptr notation, that
+transition can be seamless.
+
+
+*/

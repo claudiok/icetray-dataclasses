@@ -2,7 +2,7 @@
  @page stlsyntax STL In The DataClasses
 
  @author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
-
+ @author <a href="http://www.resophonic.com">Troy Straszheim</a>
  @section summary Summary 
  
  STL is 'Standard Template Library' of C++.  This section summarizes the use 
@@ -12,14 +12,11 @@
 
  @section templates Templates and STL
 
- Templates are a powerful feature of the C++ language.  If you haven't messed
- with templates before, what are you waiting for?  
- <a href="http://www.cplusplus.com/doc/tutorial/tut5-1.html">Here's a tutorial
- </a> to get you started.
-
- The existence of templates enables the creation of libraries of templates, and
- that is what STL is.  It is a library of common templates that is a part of 
- the C++ standard.
+ Templates are a powerful feature of the C++ language.  If you haven't
+ messed with templates before, what are you waiting for?  The
+ existence of templates enables the creation of libraries of
+ templates, and that is what STL is.  It is a library of common
+ templates that is a part of the C++ standard.
 
  There is not enough <a href="http://en.wikipedia.org/wiki/Time">time</a> to
  give a complete description of STL.  The two class templates that are needed
@@ -185,52 +182,29 @@ So the following code snippet is legitimate
 }
 @endcode
 
-@section memorymanagement A Word on Memory Management
 
-  Memory management is an issue that warants some attention.  
+@section Links
 
-  The idea of the framework is that icetray modules get handed some data, add 
-  to it, and then pass it on.  When the framework is done with a particular
-  frame, it deletes everything in that frame.  In the dataclasses picture
-  that means that, for instance, that deleting the I3Event in the frame is the 
-  responsibiltiy of the framework.  Beyond that, the I3Event is responsible
-  for taking everything 'inside' of it with it when it goes.  
+Here are some other tutorials and resources on the net:
 
-  Two ways of dealing with this problem have been suggested.
-  
-  The first is to use Pointainers.  Pointainer is a keyword for a container
-  of pointers that deletes its contents when the Pointainer goes out of scope
+<a href=http://www.cs.brown.edu/people/jak/proglang/cpp/stltut/tut.html>
+A modest STL tutorial</a>
 
-  The second suggestion has been to use some style of Smart pointer, that 
-  deletes the object it points to when all the smart pointers to an object
-  go out of scope.
+<a href=http://www.sgi.com/tech/stl/table_of_contents.html>
+The SGI documentation for the STL</a>
 
-  Both suggestions have their pros and cons, and it is not - at this point - 
-  clear which will be most useful in the end.  Currently the containers are
-  implemented as pointainers which delete their contents when they go out 
-  of scope, but the smart pointer policy may win out.
+<a href=http://www.cs.rpi.edu/projects/STL/htdocs/stl.html>
+An online STL reference at Rensselaer Polytechnic Institute</a>
 
-  Nevertheless, the code has been designed so that you, a user of the 
-  dataclasses, are insulated from this decision.  The way to keep yourself
-  from bumping up against this issue is to - in your code - make no reference
-  directly to pointers of dataclass types.  Instead a typedef of a pointer 
-  type has been
-  provided.
+<a href=http://www.josuttis.com/libbook/idx.html>
+Code examples from the book "The C++ Standard Library - A Tutorial and Reference"</a>
 
-  For instance:
+<a href=http://www.halpernwightsoftware.com/stdlib-scratch/quickref.html>
+Another STL quick reference, from the book "The C++ Standard Library from Scratch"
+</a>
 
-@code
-{
-  I3RecoResult* rr_1 = new I3RecoResult();  // <--- don't do this
-
-  I3RecoResultPtr rr_2 = new I3RecoResult(); // <--- do this instead
-}
-@endcode
-
-The point is that should it ever become necessary to use the smart pointer 
-approach, the single location of that typedef can be changed and we'll be 
-working with smart pointers.  If everyone is using the Ptr notation, that
-transition can be seamless.
+<a href="http://www.cplusplus.com/doc/tutorial/tut5-1.html">A templates tutorial</a> 
 
 
- */
+
+*/

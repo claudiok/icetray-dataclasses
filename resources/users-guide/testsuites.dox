@@ -1,0 +1,182 @@
+/**
+@page testsuites Test suites:  how to write and run them
+
+@author Troy Straszheim
+
+The best way to verify the correctness of an implementation is to
+fully exercise all functionality with an independent implementation.
+"Thorough" means: a run of the test suite to completion without error
+should be enough to convince an aggressive skeptic that the
+implementation is correct.  The independent implementation itself
+should be so simple that it is plausibly correct.
+
+One should provide test suites for all code.  We have included a
+testing mechanism in the dataclasses that will easily allow you to
+build and run your own test suites and the test suites of others.
+
+A test suite should run to completion in a reasonable amount of
+time. An unsuccessful test should dump core by calling ensure() or
+fail().
+
+The home page for "TUT", the framework we are using, is
+http://tut-framework.sourceforge.net.
+
+The source for the unit tests are located in @c
+dataclasses/private/test.  As of this writing, the test suites are not
+yet finished.  [TODO!]  We will look at @c I3HitTest.cxx, a test suite
+for the fairly trivial class @c I3Hit.  As a consequence, the tests
+themselves are also quite trivial and therefore not a good example of
+the desired rigor, but this example makes it easy to see what one must
+modify in order to create one's own test suites.
+
+
+Here is the definition of @c I3HIt:
+
+@dontinclude I3Hit.h
+@skip class I3Hit
+@until ClassDef
+@until };
+
+Now we will walk through <tt> dataclasses/private/test/I3HitTest.cxx </tt> and
+see how a test suite is constructed.  The discussion is intended to
+make it easy to follow along and create your own along the way.  Let's
+take @c MyClass to denote the class for which you are constructing a test
+suite.
+
+@dontinclude I3HitTest.cxx.dox
+@until using
+
+First we include the various header files, including that of our
+class.  Change <tt> dataclasses/I3Hit.h </tt> to 
+<tt> dataclasses/I3MyClass.h.</tt>
+
+@until };
+
+Whatever this @c struct @c I3HitTest contains will be visible inside
+each of the test routines, below.  Change this to @c I3MyClassTest and
+put in whatever you will need in all of your routines.  Consult the
+TUT man pages for more details.  Most will not want to have anything
+in this structure, as it is just as easy to put them inside the
+routines, below.  Read on for more.
+
+@until object
+
+Change the @c I3HitTest here to @c I3MyClassTest.  This is part of the
+mechanism that registers the individual test routines with the testing
+framework.  Don't mess with the @c factory::object bit.
+
+@skip namespace
+@until }
+
+Change @c "I3Hit" to @c "I3MyClass".  This is actually the identifier
+that you will use to tell the testing framework to run your unit
+tests, if you wish to specify them.  Avoid using spaces or things that
+would confuse the shell: you will have to escape them with backslashes,
+singlequotes, or what-have-you.
+
+@skip namespace
+@until }
+
+Here we have our first actual test routine.  Modify these to contain
+thorough and rigorous of your module.  To create new routines, copy
+this <tt> object::test<2>() </tt> routine and change the @c 2 to a
+different positive integer between 1 and 50.
+
+The <tt> template<> template<> </tt> business is necessary, as the
+testing framework uses template specialization as a function
+registration mechanism.  At test running time, the routines will be
+run in ascending order by their integer (1-50) argument, or you will
+be able to specify individual routines by number.
+
+@section assertion Assert type statements
+@skip template
+@until ensure
+@until ensure
+
+In "TUT", @c assert() is called @c ensure().  @c ensure() can have a
+string message associated with the assertion.
+
+@until ensure_equals
+@until ensure_equals
+
+@c ensure_equals is similar.  Why one would have this in addition to
+just @c ensure, I don't really know off hand.  Seems that 
+<tt> ensure(a==b) </tt> would work just as well as @c ensure_equals(a,b).
+
+@until tolerance
+@until tolerance
+
+@c ensure_distance() is used to test that things are within some
+distance of one another.  With floating point operations this is often
+necessary.  TODO: explain why in more detail.  
+
+@until fail
+
+A call to @c fail fails unconditionally with a message.
+
+
+
+@section running Running the test suites
+
+Building the dataclasses also builds a program called
+<tt>runtests</tt> in @c the directory @c <architecture>/bin directory
+of your workspace.  For most linux users this will be @c
+Linux-i386/bin/runtests.  This program contains all the @c object::test<n>()
+routines from all of the test moduless in the @c private/test
+directory.
+
+Running this program without arguments displays some friendly help:
+
+@verbatim
+host% Linux-i386/bin/runtests 
+dataclasses test application.
+Usage: Linux-i386/bin/runtests list|all|testgroup [testnumber]
+       list: List all groups
+       all: Run all tests
+       testgroup [testnumber]: Run entire test group,
+       or just testnumber within that group
+@endverbatim
+
+Listing the test groups looks like this:
+
+@verbatim
+30% Linux-i386/bin/runtests list
+registered test groups:
+  I3Hit
+  I3MCHit
+  I3Track
+  InIceExtractorExample
+@endverbatim
+
+You can run one particular test group by specifying it on the command line:
+
+@verbatim
+31% Linux-i386/bin/runtests I3Hit
+
+I3Hit: ......
+
+tests summary: ok:6
+@endverbatim
+
+You can run all tests with <tt> runtests all </tt>, or specify one particular routine (if, say, you are chasing some bug), by specifying its number:
+
+@verbatim
+34% Linux-i386/bin/runtests I3Hit 4
+
+I3Hit: .
+
+tests summary: ok:1
+@endverbatim
+
+@section References
+
+The "tut" testing framework, http://tut-framework.sourceforge.net.
+
+@verbatim
+Eric Sven Ristad and Peter N. Yianilos 
+Library of Practical Abstractions
+http://www.mnemonic.com/software/libpa
+February 1998
+@endverbatim
+
+*/
