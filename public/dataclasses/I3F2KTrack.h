@@ -1,17 +1,14 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KTrack.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+    $Id: I3F2KTrack.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/04/22 15:55:44 $
+    @file I3F2KTrack.h
+    @version $Revision: 1.3 $
+    @date $Date: 2004/04/22 16:55:52 $
     @author deyoung
 
     @todo
-
-    F2KTrack contains the parameter set corresponding to the F2000
-    track variables.  It is intended primarily for backward compatibility.
-
 */
 
 #include "I3TrackImpl.h"
@@ -24,6 +21,10 @@
 
 #include "dataclasses/I3Track.h"
 
+/**
+ * F2KTrack contains the parameter set corresponding to the F2000
+ * track variables.  It is intended primarily for backward compatibility.
+ */
 class I3F2KTrack : public I3TrackImpl<I3Starting,
                                       I3Energetic,
                                       I3NonComposite>

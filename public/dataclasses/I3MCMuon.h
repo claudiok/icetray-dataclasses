@@ -1,17 +1,14 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCMuon.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+    $Id: I3MCMuon.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/04/22 15:55:44 $
+    @file I3MCMuon.h
+    @version $Revision: 1.3 $
+    @date $Date: 2004/04/22 16:55:52 $
     @author deyoung
 
     @todo
-
-    For representing muons from Monte Carlo, where we have all
-    possible information.
-
 */
 
 #include "I3TrackImpl.h"
@@ -24,6 +21,10 @@
 
 #include "dataclasses/I3Track.h"
 
+/**
+ * For representing muons from Monte Carlo, where we have all
+ * possible information.
+ */
 class I3MCMuon : public I3TrackImpl<I3Contained,
                                     I3Energetic,
                                     I3Composite>

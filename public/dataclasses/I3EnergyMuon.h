@@ -1,16 +1,14 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3EnergyMuon.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+    $Id: I3EnergyMuon.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/04/22 15:55:44 $
+    @file I3EnergyMuon.h
+    @version $Revision: 1.3 $
+    @date $Date: 2004/04/22 16:55:52 $
     @author deyoung
 
     @todo
-
-    Class for infinite muon tracks with a known energy. 
-
 */
 
 #include "I3TrackImpl.h"
@@ -23,6 +21,9 @@
 
 #include "dataclasses/I3Track.h"
 
+/**
+ * Class for infinite muon tracks with a known energy. 
+ */
 class I3EnergyMuon : public I3TrackImpl<I3Infinite,
                                         I3Energetic,
                                         I3NonComposite>

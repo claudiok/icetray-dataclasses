@@ -1,16 +1,14 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DirectionalCascade.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+    $Id: I3DirectionalCascade.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/04/22 15:55:44 $
+    @file I3DirectionalCascade.h
+    @version $Revision: 1.3 $
+    @date $Date: 2004/04/22 16:55:52 $
     @author deyoung
 
     @todo
-
-    A cascade with a known direction, but no energy information.
-
 */
 
 #include "I3CascadeImpl.h"
@@ -23,6 +21,9 @@
 
 #include "dataclasses/I3Cascade.h"
 
+/**
+ * A cascade with a known direction, but no energy information.
+ */
 class I3DirectionalCascade : public I3CascadeImpl<I3Directional,
 	                                          I3Localized,
                                                   I3NonEnergetic>
