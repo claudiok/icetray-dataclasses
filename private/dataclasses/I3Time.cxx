@@ -35,10 +35,10 @@ void I3Time::SetModJulianTime(unsigned int modJulianDay,
 			      unsigned int sec,
 			      double ns)
 {
-  double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24));
+  double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24.));
   year_ = yearOf(modjulian);
-  double daysafteryear = modjulian - modjulianday(year_);
-  double secsafteryear = daysafteryear * 3600. * 24.;
+  unsigned int daysafteryear = modjulian - modjulianday(year_);
+  unsigned int secsafteryear = daysafteryear * 3600 * 24 + sec;
   daqTime_ = 
     ((long long int)secsafteryear * ((long long int)(1e10))) 
     + ((long long int)ns * ((long long int)10));
@@ -79,9 +79,11 @@ unsigned int I3Time::GetModJulianDay() const
 
 unsigned int I3Time::GetModJulianSec() const
 {
-  double modjul = modjulianday(year_,daqTime_);
-  double fract_of_day = modjul - ((unsigned int)modjul);
-  return (unsigned int)(fract_of_day * 3600. * 24.);
+  unsigned int daysafteryear = 
+    (unsigned int)(modjulianday(year_,daqTime_) - modjulianday(year_));
+  unsigned int secsafteryear = 
+    (daqTime_ - daqTime_%((long long)(1e10)))/((long long)1e10);
+  return secsafteryear - daysafteryear * 3600 * 24 ;
 }
 
 double I3Time::GetModJulianNanoSec() const

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.5 2005/03/31 14:50:49 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.6 2005/03/31 17:39:13 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2005/03/31 14:50:49 $
+    @version $Revision: 1.6 $
+    @date $Date: 2005/03/31 17:39:13 $
     @author pretz
 
     @todo
@@ -155,21 +155,21 @@ namespace tut
   {
     for(int i = 0 ; i < 100 ; i++)
       {
+	rand();
 	long long int daqTime = ((long long)rand()) 
 	  * ((long long)rand()) 
 	  * ((long long)rand()) %
  	  ((long long)24 * 365 * 3600 * ((long long)1e10) ) ;
 	if(daqTime < 0)
 	  daqTime = -daqTime;
-	int year = 1980 + (rand() % 50);
-	cout<<" checking daq time and year: "<<daqTime<<" "<<year<<endl;
+	int year = 1995 + (rand() % 20);
 	I3Time initial_time;
 	initial_time.SetDaqTime(year,daqTime);
 
 	I3Time compare_time;
-	compare_time.SetJulianTime(initial_time.GetJulianDay(),
-				   initial_time.GetJulianSec(),
-				   initial_time.GetJulianNanoSec());
+	compare_time.SetModJulianTime(initial_time.GetModJulianDay(),
+				   initial_time.GetModJulianSec(),
+				   initial_time.GetModJulianNanoSec());
 
 	ensure_equals("checking that the year is the same",
 		      initial_time.GetUTCYear(),
