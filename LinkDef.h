@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.144 2005/01/24 23:17:44 ehrlich Exp $
-// $Revision: 1.144 $
-// $Date: 2005/01/24 23:17:44 $
+// $Id: LinkDef.h,v 1.145 2005/01/31 19:10:24 pretz Exp $
+// $Revision: 1.145 $
+// $Date: 2005/01/31 19:10:24 $
 //
 
 #ifdef __CINT__
@@ -612,8 +612,6 @@
 #pragma link C++ class roost::shared_ptr<OMKey>+;
 
 #pragma link C++ typedef StationKey;
-
-#pragma link C++ class UniqueID+;
 
 #pragma link C++ class I3OMGeo+;
 #pragma link C++ typedef I3OMGeoPtr;
