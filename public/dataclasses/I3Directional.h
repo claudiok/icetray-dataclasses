@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.5 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Directional.h,v 1.6 2004/08/31 13:30:55 pretz Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/31 13:30:55 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
@@ -59,6 +59,11 @@ class I3Directional
 	  directional->fZenith = fZenith;
 	  directional->fAzimuth = fAzimuth;
 	}
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Zenith:"<<fZenith<<" Azimuth"<<fAzimuth<<"\n";
     }
  private:
   //ROOT macro

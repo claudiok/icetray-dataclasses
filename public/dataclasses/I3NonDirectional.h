@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonDirectional.h,v 1.7 2004/07/26 13:53:55 pretz Exp $
+ * $Id: I3NonDirectional.h,v 1.8 2004/08/31 13:30:55 pretz Exp $
  *
  * @file I3NonDirectional.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/07/26 13:53:55 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/08/31 13:30:55 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -31,6 +31,11 @@ class I3NonDirectional
    * Doesn't do anything.  There's nothing to copy.
    */
   void CopyTo(I3Particle&) const {}
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Direction: NonDirectional\n";
+    }
  private:
   //ROOT macro
   ClassDef(I3NonDirectional,1);

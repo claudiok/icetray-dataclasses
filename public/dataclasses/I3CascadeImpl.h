@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.9 2004/08/02 17:24:22 dule Exp $
+ * $Id: I3CascadeImpl.h,v 1.10 2004/08/31 13:30:55 pretz Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/08/02 17:24:22 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/31 13:30:55 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -86,6 +86,14 @@ class I3CascadeImpl : public I3Cascade,
   virtual void CopyFrom(const I3Particle& source)
     {
       source.CopyTo(*this);
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      I3Cascade::ToStream(o);
+      DirectionalType::ToStream(o);
+      LocalizableType::ToStream(o);
+      EnergeticType::ToStream(o);
     }
 
  private:

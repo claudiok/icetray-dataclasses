@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.5 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3Localized.h,v 1.6 2004/08/31 13:30:55 pretz Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/31 13:30:55 $
  * @author pretz
  *
  */
@@ -67,6 +67,12 @@ class I3Localized{
 	  localized->fPos = fPos;
 	  localized->fT = fT;
 	}
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"Position:\n"<<fPos
+       <<"Time:"<<fT<<"\n";
     }
  private:
   //ROOT macro

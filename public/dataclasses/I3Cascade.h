@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.10 2004/08/02 19:59:57 blaufuss Exp $
+ * $Id: I3Cascade.h,v 1.11 2004/08/31 13:30:55 pretz Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/02 19:59:57 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/08/31 13:30:55 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -64,6 +64,11 @@ class I3Cascade : public I3InIceParticle{
   virtual void CopyTo(I3Particle& destination) const
     {
       I3Particle::CopyTo(destination);
+    }
+
+  virtual void ToStream(ostream& o) const
+    {
+      I3Particle::ToStream(o);
     }
 
  private:
