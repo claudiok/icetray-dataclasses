@@ -11,6 +11,7 @@
 // namespace
 //
 #pragma link C++ namespace I3Units;
+#pragma link C++ namespace I3Constants;
 
 #pragma link C++ class I3TrackImpl<I3Starting,I3Energetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3NonComposite>+;
