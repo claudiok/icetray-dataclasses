@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.1.2.6 2004/04/16 17:10:56 pretz Exp $
+    $Id: I3BasicTrack.h,v 1.1.2.7 2004/04/16 18:35:02 pretz Exp $
 
-    @version $Revision: 1.1.2.6 $
-    @date $Date: 2004/04/16 17:10:56 $
+    @version $Revision: 1.1.2.7 $
+    @date $Date: 2004/04/16 18:35:02 $
     @author
 
     @todo
@@ -30,7 +30,6 @@
 class I3BasicTrack : public I3TrackImpl<I3Identifiable,
                                       I3Starting,
                                       I3Energetic,
-                                      I3Relativistic,
                                       I3NonComposite>
 {
  public:

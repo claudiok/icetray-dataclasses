@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.8 2004/04/16 17:10:56 pretz Exp $
+    $Id: I3Track.h,v 1.10.2.9 2004/04/16 18:35:02 pretz Exp $
 
-    @version $Revision: 1.10.2.8 $
-    @date $Date: 2004/04/16 17:10:56 $
+    @version $Revision: 1.10.2.9 $
+    @date $Date: 2004/04/16 18:35:02 $
     @author
 
     @todo
@@ -27,11 +27,6 @@ class I3Track : public I3Particle
   I3Track() {};
 
   virtual ~I3Track() {};
-
-  /**
-   * indicates that the Length() parameter is valid
-   */
-  virtual bool IsLengthy() const =0;
 
   /**
    * indicates that the 'StartX() ... ' parameters are valid
@@ -57,11 +52,6 @@ class I3Track : public I3Particle
    * indicates that the track has an energy
    */
   virtual bool IsEnergetic() const =0;
-
-  /**
-   * indicates that the track has a speed
-   */
-  virtual bool IsSpeedy() const =0;
 
   /**
    * indicates that the track is a composite track

@@ -1,10 +1,9 @@
-#ifndef I3STARTING_H
-#define I3STARTING_H
+#ifndef I3CONTAINED_H
+#define I3CONTAINED_H
 
 #include <cmath>
-#include "I3Units.h"
 
-class I3Starting{
+class I3Contained{
  private:
   double fStartX;
   double fStartY;
@@ -12,9 +11,10 @@ class I3Starting{
   double fStartT;
   double fZenith;
   double fAzimuth;
+  double fLength;
  public:
   bool IsStarting() const {return true;}
-  bool IsStopping() const {return false;}
+  bool IsStopping() const {return true;}
   bool IsDirectional() const {return true;}
 
   double StartX() const {return fStartX;}
@@ -47,25 +47,37 @@ class I3Starting{
   double Azimuth() const {return fAzimuth;}
   void Azimuth(double phi){fAzimuth = phi;}
 
-  double Length() const {return INFINITY;}
-  void Length(double) {return;}
+  double Length() const {return fLength;}
+  void Length(double length) {fLength = length;}
 
-  double StopX() const {return NAN;}
+  double StopX() const {
+    return fStartX + fLength * sin(fZenith) * cos (fAzimuth);
+  }
   void StopX(double) {return;}
 
-  double StopY() const {return NAN;}
+  double StopY() const 
+    {
+      return fStartX + fLength * sin(fZenith) * sin(fAzimuth);
+    }
   void StopY(double) {return;}
 
-  double StopZ() const {return NAN;}
+  double StopZ() const 
+    {
+      return fStartZ + fLength * cos(fZenith);
+    }
   void StopZ(double) {return;}
 
-  double StopT() const {return NAN;}
+  double StopT() const 
+    {
+      return fStartT + fLength / Speed();
+    }
   void StopT(double) {return;}
 
   double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
+
   void Speed(double) {return;}
 
-  ClassDef(I3Starting,1)
+  ClassDef(I3Contained,1)
 };
 
-#endif //I3STARTING_H
+#endif //I3CONTAINED_H

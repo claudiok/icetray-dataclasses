@@ -13,7 +13,11 @@
 
 #pragma link C++ namespace I3Units;
 
-#pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3Energetic,I3Relativistic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Starting,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Stopping,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Contained,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Identifiable,I3Infinite,I3Energetic,I3NonComposite>+;
+
 #pragma link C++ class I3BasicTrack+;
 
 #pragma link C++ class I3CascadeImpl<I3Directional,I3Identifiable,I3Localized,I3Energetic>+;
@@ -157,6 +161,7 @@
 #pragma link C++ typedef I3AtmospherePtr;
 #pragma link C++ class I3Bag+;
 #pragma link C++ class I3Cascade+;
+#pragma link C++ class I3Contained+;
 #pragma link C++ class I3Composite+;
 #pragma link C++ class I3DataExecution+;
 #pragma link C++ class I3DataHeader+;
@@ -188,6 +193,7 @@
 #pragma link C++ class I3Hit+;
 #pragma link C++ typedef I3HitPtr;
 #pragma link C++ class I3Identifiable+;
+#pragma link C++ class I3Infinite+;
 #pragma link C++ class I3Localized+;
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitPtr;
@@ -247,6 +253,7 @@
 #pragma link C++ class I3SLCReadout+;
 #pragma link C++ typedef I3SLCReadoutPtr;
 #pragma link C++ class I3Starting+;
+#pragma link C++ class I3Stopping+;
 #pragma link C++ class I3SummaryPulseReadout+;
 #pragma link C++ typedef I3SummaryPulseReadoutPtr;
 #pragma link C++ class I3TankGeo+;

@@ -7,7 +7,7 @@
 class I3NonEnergetic
 {
  public:
-  virtual bool IsEnergetic() const {return true;}
+  virtual bool IsEnergetic() const {return false;}
 
   virtual double Energy() const {return NAN;}
 

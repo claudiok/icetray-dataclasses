@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackImpl.h,v 1.1.2.1 2004/04/16 17:10:56 pretz Exp $
+    $Id: I3TrackImpl.h,v 1.1.2.2 2004/04/16 18:35:02 pretz Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/16 17:10:56 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/16 18:35:02 $
     @author
 
     @todo
@@ -24,13 +24,11 @@
 template <class IdentifiableType,
           class GeometricalType,
           class EnergeticType,
-          class SpeedyType,
           class CompositeType>
 class I3TrackImpl : public I3Track,
                     public IdentifiableType,
                     public GeometricalType,
                     public EnergeticType,
-                    public SpeedyType,
                     public CompositeType
 {
  public:
@@ -42,10 +40,14 @@ class I3TrackImpl : public I3Track,
     {
       return IdentifiableType::IsIdentifiable();
     }
-  virtual bool IsLengthy() const {return GeometricalType::IsLengthy();}
   virtual bool IsStarting() const {return GeometricalType::IsStarting();}
   virtual bool IsStopping() const {return GeometricalType::IsStopping();}
-  virtual bool IsInfinite() const {return GeometricalType::IsInfinite();}
+  virtual bool IsInfinite() const 
+    {
+      if (GeometricalType::IsStarting() || GeometricalType::IsStopping())
+	return false;
+      return true;
+    }
   virtual bool IsContained() const 
     {
       if(GeometricalType::IsStarting() && GeometricalType::IsStopping())
@@ -53,7 +55,6 @@ class I3TrackImpl : public I3Track,
       return false;
     }
   virtual bool IsEnergetic() const {return EnergeticType::IsEnergetic();}
-  virtual bool IsSpeedy() const {return SpeedyType::IsSpeedy();}
   virtual bool IsComposite() const {return CompositeType::IsComposite();}
   virtual bool IsDirectional() const {return GeometricalType::IsDirectional();}
 
@@ -75,13 +76,13 @@ class I3TrackImpl : public I3Track,
   virtual void StartZ(double startz){GeometricalType::StartZ(startz);}
 
   virtual double StartT() const {return GeometricalType::StartT();}
-  virtual void StartT(double startt){GeometricalType::StartT();}
+  virtual void StartT(double startt){GeometricalType::StartT(startt);}
 
   virtual double StopX() const {return GeometricalType::StopX();}
-  virtual void StopX(double stopx) {GeometricalType::StopX();}
+  virtual void StopX(double stopx) {GeometricalType::StopX(stopx);}
 
   virtual double StopY() const {return GeometricalType::StopY();}
-  virtual void StopY(double stopy) {GeometricalType::StopY();}
+  virtual void StopY(double stopy) {GeometricalType::StopY(stopy);}
 
   virtual double StopZ() const {return GeometricalType::StopZ();}
   virtual void StopZ(double stopz) {GeometricalType::StopZ(stopz);}
@@ -104,11 +105,11 @@ class I3TrackImpl : public I3Track,
   virtual double Energy() const {return EnergeticType::Energy();}
   virtual void Energy(double energy) {EnergeticType::Energy(energy);}
 
-  virtual double Speed() const {return SpeedyType::Speed();}
-  virtual void Speed(double speed) {SpeedyType::Speed(speed);}
+  virtual double Speed() const {return GeometricalType::Speed();}
+  virtual void Speed(double speed) {GeometricalType::Speed(speed);}
 
   virtual double Length() const {return GeometricalType::Length();}
-  virtual void Length(double length) {GeometricalType::Length();}
+  virtual void Length(double length) {GeometricalType::Length(length);}
 
   virtual int NumConstituents() const {return CompositeType::NumConstituents();}
   virtual const I3Particle& Constituent(int i) const 
