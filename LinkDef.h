@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.100 2004/07/30 02:47:56 pretz Exp $
-// $Revision: 1.100 $
-// $Date: 2004/07/30 02:47:56 $
+// $Id: LinkDef.h,v 1.101 2004/07/30 04:27:47 pretz Exp $
+// $Revision: 1.101 $
+// $Date: 2004/07/30 04:27:47 $
 //
 
 #ifdef __CINT__
@@ -352,6 +352,8 @@
 
 #pragma link C++ class I3AMANDAExtractor+;
 #pragma link C++ class I3IceCubeExtractor+;
+#pragma link C++ class I3RecoHitTimeWindowSelector+;
+#pragma link C++ class I3OMGeoListedSelector+;
 #pragma link C++ class I3TrackExtractor+;
 #pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
