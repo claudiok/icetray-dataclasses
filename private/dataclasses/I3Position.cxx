@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.10 2004/09/16 14:54:47 dule Exp $
+// $Id: I3Position.cxx,v 1.11 2004/09/21 21:24:03 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -90,7 +90,7 @@ void I3Position::ResetPosition()
   fTheta=NAN;
   fPhi=NAN;
   fRho=NAN;
-  IsCalculated=kFALSE;
+  IsCalculated=kTRUE;
 }
 
 //-----------------------------------------------------------
