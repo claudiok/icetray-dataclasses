@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.14 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3TopGeometry.h,v 1.15 2004/09/14 17:10:05 niessen Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/09/14 17:10:05 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -14,8 +14,6 @@
 #include <TObject.h>
 
 #include "I3DataExecution.h"
-#include "dataclasses/I3OMTopMap.h"
-#include "dataclasses/I3SurfModuleVector.h"
 #include "dataclasses/I3StationMap.h"
 #include "dataclasses/StationKey.h"
 #include "dataclasses/StoragePolicy.h"
@@ -42,34 +40,6 @@ class I3TopGeometry : public TObject {
   virtual ~I3TopGeometry(){}
 
   /**
-   * return the om map as a constant object
-   */
-  const I3OMTopMap &GetOMTopMap () const {
-    return fOMMap;
-  }
-
-  /**
-   * return the om map as a non-const object
-   */
-  I3OMTopMap &GetOMTopMap () {
-    return fOMMap;
-  }
-
-  /**
-   * return the tank vector as constant object
-   */
-  const I3SurfModuleVector &GetSurfModuleVector () const {
-    return fSurfModuleVector;
-  }
-
-  /**
-   * return the tank vector as a non-const object
-   */
-  I3SurfModuleVector &GetSurfModuleVector () {
-    return fSurfModuleVector;
-  }
-
-  /**
    * return the Station map as a const object
    */
   const I3StationMap &GetStationMap () const {
@@ -84,10 +54,6 @@ class I3TopGeometry : public TObject {
   }
 
  private:
-
-  I3OMTopMap fOMMap; //||  the oms inside the tanks (/modules)
-  
-  I3SurfModuleVector fSurfModuleVector; //|| the tanks of a station
 
   I3StationMap fStationMap; //|| the stations
  

@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.1 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3SurfModuleGeo.h,v 1.2 2004/09/14 17:10:05 niessen Exp $
  *
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/09/14 17:10:05 $
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
@@ -16,6 +16,7 @@
 
 #include "dataclasses/I3Constants.h"
 //#include "dataclasses/I3InIceGeometry.h"
+#include "dataclasses/OMKey.h"
 #include "dataclasses/I3OMGeo.h"
 #include "dataclasses/StoragePolicy.h"
 
@@ -29,7 +30,7 @@
  * this list is empty for SPASE. The orientantion gives the position
  * away from grid north (in radians).
  */
-class I3SurfModuleGeo : public TObject, public VectorPolicy<I3OMGeo *>::ThePolicy {
+class I3SurfModuleGeo : public TObject, public MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy {
 
  public:
 
@@ -43,6 +44,7 @@ class I3SurfModuleGeo : public TObject, public VectorPolicy<I3OMGeo *>::ThePolic
    */
   virtual ~I3SurfModuleGeo () {}
 
+#if 0
   /**
    * Get the position of the tank
    */
@@ -99,6 +101,7 @@ class I3SurfModuleGeo : public TObject, public VectorPolicy<I3OMGeo *>::ThePolic
   Float_t fOrientation; // rotation angle around the z-axis. (radians)
 
   UChar_t fVersion; // some version number
+#endif
 
   ClassDef (I3SurfModuleGeo, 1);
 

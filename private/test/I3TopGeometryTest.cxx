@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TopGeometryTest.cxx,v 1.4 2004/09/03 23:20:09 niessen Exp $
+    $Id: I3TopGeometryTest.cxx,v 1.5 2004/09/14 17:10:05 niessen Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/09/03 23:20:09 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/09/14 17:10:05 $
     @author pretz
 
     @todo
@@ -17,9 +17,11 @@
 #include <TFile.h>
 
 #include "dataclasses/I3TopGeometry.h"
-#include "dataclasses/I3OMGeoIceTop.h"
-#include "dataclasses/I3TankGeo.h"
+#include "dataclasses/I3StationMap.h"
+#include "dataclasses/I3StationGeo.h"
 #include "dataclasses/I3SurfModuleGeo.h"
+#include "dataclasses/I3TankGeo.h"
+#include "dataclasses/I3OMGeoIceTop.h"
 
 
 namespace tut
@@ -51,11 +53,6 @@ namespace tut
     I3OMGeoIceTopPtr om10 (new I3OMGeoIceTop);
     I3OMGeoIceTopPtr om11 (new I3OMGeoIceTop);
 
-    I3OMGeoIceTop &om00_p = *om00; // create pointers for reference
-    I3OMGeoIceTop &om01_p = *om01;
-    I3OMGeoIceTop &om10_p = *om10;
-    I3OMGeoIceTop &om11_p = *om11;
-
     I3Position p_om00 (I3Position (-.5, 0., 0.));
     I3Position p_om01 (I3Position (+.5, 0., 0.));
     I3Position p_om10 (I3Position (-.5, 0., 0.));
@@ -75,9 +72,6 @@ namespace tut
     //tank1->push_back (om10_p);
     //tank1->push_back (om11_p);
 
-    I3TankGeo &tank0_p = *tank0;
-    I3TankGeo &tank1_p = *tank1;
-
     I3StationGeoPtr station (new I3StationGeo);
     //station->push_back (tank0_p); // point to the 
     //station->push_back (tank1_p);
@@ -87,6 +81,7 @@ namespace tut
     // the station
     geo.GetStationMap ()[StationKey (0)] = station;
 
+#if 0
     // the tanks
     geo.GetSurfModuleVector ().push_back (tank0);
     geo.GetSurfModuleVector ().push_back (tank1);
@@ -96,6 +91,7 @@ namespace tut
     geo.GetOMTopMap ()[OMKey (1, 62)] = om01;
     geo.GetOMTopMap ()[OMKey (1, 63)] = om10;
     geo.GetOMTopMap ()[OMKey (1, 64)] = om11;
+#endif
 
     TFile file_out("test.out.root","RECREATE");
 

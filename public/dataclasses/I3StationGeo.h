@@ -1,10 +1,10 @@
 /**
  * copyright (C) 2004
- * $Id: I3StationGeo.h,v 1.1 2004/09/03 23:43:04 niessen Exp $
+ * $Id: I3StationGeo.h,v 1.2 2004/09/14 17:10:05 niessen Exp $
  *
  * @file I3StationGeo.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/09/03 23:43:04 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/09/14 17:10:05 $
  * @author niessen Wed Sep  1 20:55:17 EDT 2004
  */
 
@@ -13,8 +13,9 @@
 
 #include <TObject.h>
 
-#include "I3DataExecution.h"
-#include "dataclasses/I3TankGeo.h"
+//#include "I3DataExecution.h"
+//#include "dataclasses/I3TankGeo.h"
+#include "dataclasses/I3SurfModuleGeo.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -24,7 +25,7 @@
  * entity to organise the tanks into stations. From an organisational
  * point of view, this is on a level with I3TankGeo.
  */
-class I3StationGeo : public TObject, public VectorPolicy<I3TankGeo *>::ThePolicy {
+class I3StationGeo : public TObject, public VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy {
 
  public:
 
