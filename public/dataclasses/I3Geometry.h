@@ -25,9 +25,6 @@ class I3Geometry : public TObject
   const I3OMGeo& FindOMGeo(unsigned short omnumber) const;
   void           AddOMGeo(I3OMGeo* omgeo_);
 
- private:
-  const I3OMGeo* FindOMGeoPtr(unsigned short omnumber) const;
-
   ClassDef(I3Geometry, 1);
 };
 #endif
