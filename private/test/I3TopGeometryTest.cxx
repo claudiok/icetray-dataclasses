@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TopGeometryTest.cxx,v 1.8 2005/03/29 21:54:10 pretz Exp $
+    $Id: I3TopGeometryTest.cxx,v 1.9 2005/03/30 14:48:27 pretz Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2005/03/29 21:54:10 $
+    @version $Revision: 1.9 $
+    @date $Date: 2005/03/30 14:48:27 $
     @author pretz
 
     @todo
@@ -92,9 +92,9 @@ namespace tut
     I3StationGeo &station
       = *(array[StationKey (1)]);
 
-    I3TankGeoPtr tank (roost::dynamic_pointer_cast<I3TankGeo>(station[0]));
+    I3TankGeoPtr tank (boost::dynamic_pointer_cast<I3TankGeo>(station[0]));
 
-    I3OMGeoIceTopPtr om (roost::dynamic_pointer_cast<I3OMGeoIceTop>((*tank)[OMKey (1, 61)]));
+    I3OMGeoIceTopPtr om (boost::dynamic_pointer_cast<I3OMGeoIceTop>((*tank)[OMKey (1, 61)]));
 
     ensure ("om is displaced", om->GetPos ().GetX () == -.5);
 

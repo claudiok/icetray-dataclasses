@@ -59,7 +59,7 @@ namespace tut
 
     I3RecoResultRDMCFitPtr fit(new I3RecoResultRDMCFit);
     event.GetRecoResultDict()["f2kFit"]= fit;
-    //      roost::static_pointer_cast<I3RecoResult>(fit);
+    //      boost::static_pointer_cast<I3RecoResult>(fit);
 
     TNamed* n = new TNamed("Foo","");
     TObjectPtr obj(n);

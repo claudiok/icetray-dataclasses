@@ -13,7 +13,7 @@ I3AMANDAExtractor::I3AMANDAExtractor(map<OMKey,I3OMGeoAMANDAPtr> &geometry_to_fi
 void I3AMANDAExtractor::operator() (pair<OMKey,I3OMGeoPtr> the_pair) 
 {
   I3OMGeoPtr p = the_pair.second;
-  I3OMGeoAMANDAPtr amandap = roost::dynamic_pointer_cast<I3OMGeoAMANDA>(p);
+  I3OMGeoAMANDAPtr amandap = boost::dynamic_pointer_cast<I3OMGeoAMANDA>(p);
   // you could do whatever other filtering you want here
 
   if (amandap) 

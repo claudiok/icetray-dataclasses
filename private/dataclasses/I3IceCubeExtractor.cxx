@@ -13,7 +13,7 @@ I3IceCubeExtractor::I3IceCubeExtractor(map<OMKey,I3OMGeoIceCubePtr> &geometry_to
 void I3IceCubeExtractor::operator() (pair<OMKey,I3OMGeoPtr> the_pair) 
 {
   I3OMGeoPtr p = the_pair.second;
-  I3OMGeoIceCubePtr amandap = roost::dynamic_pointer_cast<I3OMGeoIceCube>(p);
+  I3OMGeoIceCubePtr amandap = boost::dynamic_pointer_cast<I3OMGeoIceCube>(p);
   // you could do whatever other filtering you want here
 
   if (amandap) 

@@ -26,17 +26,17 @@ class that imitates a pointer, can delete the object.
 
 A smart pointer is a template class that takes the type of the pointee
 as an argument.  The name of our shared pointer class is @c
-shared_ptr<>, and it lives in namespace @c roost.  Therefore the
+shared_ptr<>, and it lives in namespace @c boost.  Therefore the
 way to create a pointer to a @c Hit is
 @code
-#include <roost/shared_ptr.hpp>
-using namespace roost;
+#include <boost/shared_ptr.hpp>
+using namespace boost;
 
 shared_ptr<Hit> hitptr;
 @endcode
 
 For the rest of this document we will assume you have @c #include 'd
-the header file and are @c using @c namespace @c roost;
+the header file and are @c using @c namespace @c boost;
 
 @section mixing The danger of mixing bald and shared pointers
 

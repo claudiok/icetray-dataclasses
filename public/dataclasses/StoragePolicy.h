@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.17 2005/01/24 23:17:44 ehrlich Exp $
+    $Id: StoragePolicy.h,v 1.18 2005/03/30 14:48:27 pretz Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.17 $
-    @date $Date: 2005/01/24 23:17:44 $
+    @version $Revision: 1.18 $
+    @date $Date: 2005/03/30 14:48:27 $
     @author Troy D. Straszheim
 */
 
@@ -18,7 +18,7 @@
 #include "STLMapStoragePolicy.h"
 #include "STLMultiMapStoragePolicy.h"
 
-#include "roost/shared_ptr.hpp"
+#include "boost/shared_ptr.hpp"
 
 
 template <class Stored>
@@ -85,9 +85,9 @@ template <class Pointed>
 struct PtrPolicy
 {
   /**
-   * roost smart pointers.  FIXME: need docs
+   * boost smart pointers.  FIXME: need docs
    */
-  typedef roost::shared_ptr<Pointed> ThePolicy;
+  typedef boost::shared_ptr<Pointed> ThePolicy;
     // typedef Pointed* ThePolicy;
 };
 

@@ -1,18 +1,18 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.cxx,v 1.5 2005/01/31 19:16:50 dule Exp $
+ * $Id: I3StationMap.cxx,v 1.6 2005/03/30 14:48:27 pretz Exp $
  *
  * @file I3StationMap
- * @version $Revision: 1.5 $
- * @date $Date: 2005/01/31 19:16:50 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/03/30 14:48:27 $
  * @author niessen Thu Sep  2 16:38:31 EDT 2004 
  */
 
 #include "dataclasses/I3StationMap.h"
 #include "dataclasses/I3SurfModuleGeo.h"
 
-using namespace roost;
+using namespace boost;
 
 ClassImp (I3StationMap);
 

@@ -68,17 +68,17 @@ private/linefit/I3LineFit.cxx:136: error: cannot convert `
    ((+((+(&iter)->std::_Rb_tree_iterator<_Val, _Ref, _Ptr>::operator* [with 
    _Val = std::pair<const OMKey, I3OMResponsePtr>, _Ref = std::pair<const 
    OMKey, I3OMResponsePtr>&, _Ptr = std::pair<const OMKey, 
-   I3OMResponsePtr>*]()) + 20)->roost::shared_ptr<T>::operator-> [with T = 
+   I3OMResponsePtr>*]()) + 20)->boost::shared_ptr<T>::operator-> [with T = 
    I3OMResponse]()->I3OMResponse::GetDataReadoutDict()) + 
    12)->STLMapStoragePolicy<KeyType, ElementType>::operator[] [with KeyType = 
    std::string, ElementType = I3DataReadoutPtr]((&string("AMANDAAnalogReadout", 
-   (&allocator<char>()))))' from type `roost::shared_ptr<I3DataReadout>' to 
+   (&allocator<char>()))))' from type `boost::shared_ptr<I3DataReadout>' to 
    type `I3AMANDAAnalogReadout*'
 private/linefit/I3LineFit.cxx:189: error: conversion from `
    I3RecoResultSingleTrack*' to non-scalar type `
-   roost::shared_ptr<I3RecoResultSingleTrack>' requested
+   boost::shared_ptr<I3RecoResultSingleTrack>' requested
 private/linefit/I3LineFit.cxx:190: error: conversion from `I3LineFitTrack*' to 
-   non-scalar type `roost::shared_ptr<I3LineFitTrack>' requested
+   non-scalar type `boost::shared_ptr<I3LineFitTrack>' requested
 @endverbatim
 
 Oh man.  OK here's how to deal with these things.  Always deal with
@@ -99,7 +99,7 @@ cause random crashes and stuff.  (The java guys are rolling their eyes
 about now.)
 
 The from type and the to type are easy to see, though.  From @c
-roost::shared_ptr<I3DataReadout> to @c I3AMANDAAnalogReadout.  
+boost::shared_ptr<I3DataReadout> to @c I3AMANDAAnalogReadout.  
 
 We also know what line it is on.  Line 136:
 
@@ -334,11 +334,11 @@ for (I3OMResponseMap::iter = om_map.begin();
 Then we try to compile again.  Now I get the error
 
 @verbatim
-../tools/Linux-i386/roost/public/roost/shared_ptr.hpp: In constructor `
-   roost::shared_ptr<T>::shared_ptr(const roost::shared_ptr<Y>&) [with Y = 
+../tools/Linux-i386/boost/public/boost/shared_ptr.hpp: In constructor `
+   boost::shared_ptr<T>::shared_ptr(const boost::shared_ptr<Y>&) [with Y = 
    I3DataReadout, T = I3AMANDAAnalogReadout]':
 private/linefit/I3LineFit.cxx:144:   instantiated from here
-../tools/Linux-i386/roost/public/roost/shared_ptr.hpp:113: error: invalid 
+../tools/Linux-i386/boost/public/boost/shared_ptr.hpp:113: error: invalid 
    conversion from `I3DataReadout* const' to `I3AMANDAAnalogReadout*'
 @endverbatim
 and @c I3LineFit.cxx line 144 says:
@@ -364,13 +364,13 @@ that what is there is really what we hope it will be.
 that looks like this.  
 @code
 I3AMANDAAnalogReadoutPtr readout = 
-  roost::dynamic_pointer_cast<I3AMANDAAnalogReadout>(dict["AMANDAAnalogReadout"]);
+  boost::dynamic_pointer_cast<I3AMANDAAnalogReadout>(dict["AMANDAAnalogReadout"]);
 @endcode
 
 You can reduce the typing if you tell the compiler that you want to
-use what is in the @c roost namespace:  At the top of the file goes
+use what is in the @c boost namespace:  At the top of the file goes
 @code
-using namespace roost;
+using namespace boost;
 @endcode
 and your cast changes to
 @code
