@@ -15,30 +15,6 @@ I3DataReadoutList::~I3DataReadoutList()
   if (datareadout)  {datareadout->Delete();  delete datareadout;}  
 }
 
-I3DataReadoutList::I3DataReadoutList(const I3DataReadoutList& h)
-{
-  datareadout=NULL;
-  int n=h.GetNumberDataReadouts();
-  if(n>0)
-  {
-    datareadout=new TObjArray(n);
-    for(int i=0; i<n; i++) datareadout->Add(new I3DataReadout(h.GetDataReadout(i)));
-  }
-}
-
-I3DataReadoutList& I3DataReadoutList::operator=(const I3DataReadoutList& h)
-{
-  if(this==&h) return(*this);
-  datareadout=NULL;
-  int n=h.GetNumberDataReadouts();
-  if(n>0)
-  {
-    datareadout=new TObjArray(n);
-    for(int i=0; i<n; i++) datareadout->Add(new I3DataReadout(h.GetDataReadout(i)));
-  }
-  return(*this);
-}
-
 int I3DataReadoutList::GetNumberDataReadouts() const 
 {
   return((datareadout==NULL) ? 0 : datareadout->GetEntriesFast());
