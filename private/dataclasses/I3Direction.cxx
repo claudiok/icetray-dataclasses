@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.8 2004/11/19 15:38:54 dule Exp $
+// $Id: I3Direction.cxx,v 1.9 2005/02/24 17:12:42 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
@@ -19,14 +19,14 @@ I3Direction::I3Direction()
 }
 
 //-----------------------------------------------------------
-I3Direction::I3Direction(Double_t zen, Double_t azi)
+I3Direction::I3Direction(double zen, double azi)
 {
 // Creation of an I3Direction object and initialization of parameters
   SetDirection(zen,azi);
 }
 
 //-----------------------------------------------------------
-I3Direction::I3Direction(Double_t x, Double_t y, Double_t z)
+I3Direction::I3Direction(double x, double y, double z)
 {
 // Creation of an I3Direction object and initialization of parameters
   SetDirection(x,y,z);
@@ -55,74 +55,85 @@ void I3Direction::SetDirection(const I3Direction& d)
 }
 
 //-----------------------------------------------------------
-void I3Direction::SetDirection(Double_t zen, Double_t azi)
+void I3Direction::SetDirection(double zen, double azi)
 {
 // Store direction in zen, azi
-  fZenith = zen;
-  fAzimuth = azi;
+  zenith_ = zen;
+  azimuth_ = azi;
   CalcCarFromSph();
 }      
 
 //-----------------------------------------------------------
-void I3Direction::SetDirection(Double_t x, Double_t y, Double_t z)
+void I3Direction::SetDirection(double x, double y, double z)
 {
 // Store direction in x, y, z
-  fX=x;
-  fY=y;
-  fZ=z;
+  xDir_=x;
+  yDir_=y;
+  zDir_=z;
   CalcSphFromCar();
-}      
+}
+    
+//-----------------------------------------------------------
+void I3Direction::SetThetaPhi(double theta, double phi)
+{
+	zenith_ = pi-theta;
+	azimuth_ = phi+pi;
+	if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
+	azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
+	CalcCarFromSph();
+	IsCalculated=kTRUE;
+}
 
 //-----------------------------------------------------------
 void I3Direction::ResetDirection()
 {
 // Set or Reset the direction to 0.
-  fX=NAN;
-  fY=NAN;
-  fZ=NAN;
-  fZenith=NAN;
-  fAzimuth=NAN;
+  xDir_=NAN;
+  yDir_=NAN;
+  zDir_=NAN;
+  zenith_=NAN;
+  azimuth_=NAN;
   IsCalculated=kTRUE;
 }
 
 //-----------------------------------------------------------
 
 //-----------------------------------------------------------
-void I3Direction::RotateX(Double_t angle)
+void I3Direction::RotateX(double angle)
 {
 // Rotate around x-axis by angle
   if (!IsCalculated) CalcCarFromSph();
-  Double_t s=sin(angle);
-  Double_t c=cos(angle);
-  Double_t y=fY;
-  fY=c*y-s*fZ;
-  fZ=s*y+c*fZ;
+  double s=sin(angle);
+  double c=cos(angle);
+  double y=yDir_;
+  yDir_=c*y-s*zDir_;
+  zDir_=s*y+c*zDir_;
   CalcSphFromCar();
 }
 
 //-----------------------------------------------------------
-void I3Direction::RotateY(Double_t angle)
+void I3Direction::RotateY(double angle)
 {
 // Rotate around y-axis by angle
   if (!IsCalculated) CalcCarFromSph();
-  Double_t s=sin(angle);
-  Double_t c=cos(angle);
-  Double_t z=fZ;
-  fZ=c*z-s*fX;
-  fX=s*z+c*fX;
+  double s=sin(angle);
+  double c=cos(angle);
+  double z=zDir_;
+  zDir_=c*z-s*xDir_;
+  xDir_=s*z+c*xDir_;
   CalcSphFromCar();
 }
 
 //-----------------------------------------------------------
-void I3Direction::RotateZ(Double_t angle)
+void I3Direction::RotateZ(double angle)
 {
 // Rotate around z-axis by angle
   if (!IsCalculated) CalcCarFromSph();
-  Double_t s=sin(angle);
-  Double_t c=cos(angle);
-  Double_t x=fX;
-  fX=c*x-s*fY;
-  fY=s*x+c*fY;
+  double s=sin(angle);
+  double c=cos(angle);
+  double x=xDir_;
+  xDir_=c*x-s*yDir_;
+  yDir_=s*x+c*yDir_;
   CalcSphFromCar();
 }
 
@@ -144,12 +155,12 @@ void I3Direction::CalcCarFromSph() const
   // Calculate Cartesian coordinates from Spherical
   // Direction is stored on disk in Spherical coordinates only.
   // theta=pi-zenith and phi=azimuth-pi in these IceCube coordinates.
-  Double_t theta = pi-fZenith;
-  Double_t phi = fAzimuth-pi;
-  Double_t rho = sin(theta);
-  fX = rho*cos(phi);
-  fY = rho*sin(phi);
-  fZ = cos(theta);
+  double theta = pi-zenith_;
+  double phi = azimuth_-pi;
+  double rho = sin(theta);
+  xDir_ = rho*cos(phi);
+  yDir_ = rho*sin(phi);
+  zDir_ = cos(theta);
   IsCalculated=kTRUE;
 }
 
@@ -159,19 +170,21 @@ void I3Direction::CalcSphFromCar()
   // Calculate Spherical coordinates from Cartesian
   // Direction is stored on disk in Spherical coordinates only
   // zenith=pi-theta and azimuth=phi+pi in these IceCube coordinates.
-  Double_t fR = sqrt(fX*fX+fY*fY+fZ*fZ);
-  Double_t theta = 0;
-  if (fR && fabs(fZ/fR)<=1.) {
-    theta=acos(fZ/fR);
+  double r = sqrt(xDir_*xDir_+yDir_*yDir_+zDir_*zDir_);
+  double theta = 0;
+  if (r && fabs(zDir_/r)<=1.) {
+    theta=acos(zDir_/r);
   } else {
-    if (fZ<0.) theta=pi;
+    if (zDir_<0.) theta=pi;
   }
   if (theta<0.) theta+=2.*pi;
-  Double_t phi=0;
-  if (fX || fY) phi=atan2(fY,fX);
+  double phi=0;
+  if (xDir_ || yDir_) phi=atan2(yDir_,xDir_);
   if (phi<0.) phi+=2.*pi;
-  fZenith = pi-theta;
-  fAzimuth = phi+pi;
+  zenith_ = pi-theta;
+  azimuth_ = phi+pi;
+  if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
+  azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
   IsCalculated=kTRUE;
 }
 

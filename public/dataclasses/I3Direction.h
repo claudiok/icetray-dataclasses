@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.10 2004/11/19 15:41:53 dule Exp $
+ * $Id: I3Direction.h,v 1.11 2005/02/24 17:12:42 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/11/19 15:41:53 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/02/24 17:12:42 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.10 2004/11/19 15:41:53 dule Exp $
+// $Id: I3Direction.h,v 1.11 2005/02/24 17:12:42 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -51,12 +51,12 @@ class I3Direction : public TObject
   /**
    * Additional constructor: 2 arguments mean construct dir. with zen,azi
    */
-  I3Direction(Double_t zen, Double_t azi);
+  I3Direction(double zen, double azi);
 
   /**
    * Additional constructor: 3 arguments mean construct dir. with x,y,z
    */
-  I3Direction(Double_t x, Double_t y, Double_t z);
+  I3Direction(double x, double y, double z);
 
   /**
    * Copy constructor
@@ -79,14 +79,19 @@ class I3Direction : public TObject
   /**
    * Store direction with zen and azi (2 arguments)
    */
-  void SetDirection(Double_t zen, Double_t azi);
-  void SetDir(Double_t zen, Double_t azi) { SetDirection(zen, azi); }
+  void SetDirection(double zen, double azi);
+  void SetDir(double zen, double azi) { SetDirection(zen, azi); }
 
   /**
    * Store direction with x, y, z (3 arguments)
    */
-  void SetDirection(Double_t x, Double_t y, Double_t z);
-  void SetDir(Double_t x, Double_t y, Double_t z) { SetDirection(x, y, z); }
+  void SetDirection(double x, double y, double z);
+  void SetDir(double x, double y, double z) { SetDirection(x, y, z); }
+
+  /**
+	* Store direction with theta, phi
+	*/
+  void SetThetaPhi(double theta, double phi);
 
   /**
    * Reset all elements of I3Direction to NAN
@@ -105,42 +110,42 @@ class I3Direction : public TObject
   /**
    * Provide Zenith of direction
    */
-  Double_t GetZenith() const {return fZenith;}
+  double GetZenith() const {return zenith_;}
 
   /**
    * Provide Azimuth of direction
    */
-  Double_t GetAzimuth() const {return fAzimuth;}
+  double GetAzimuth() const {return azimuth_;}
 
   /**
    * Provide X of direction in cartesian ref frame
    */
-  Double_t GetX() const {
+  double GetX() const {
     if (!IsCalculated) CalcCarFromSph();
-    return fX;
+    return xDir_;
   }
 
   /**
    * Provide Y of direction in cartesian ref frame
    */
-  Double_t GetY() const {
+  double GetY() const {
     if (!IsCalculated) CalcCarFromSph();
-    return fY;
+    return yDir_;
   }
 
   /**
    * Provide Z of direction in cartesian ref frame
    */
-  Double_t GetZ() const {
+  double GetZ() const {
     if (!IsCalculated) CalcCarFromSph();
-    return fZ;
+    return zDir_;
   }
 
   /**
    * Calculate Theta of direction
    */
-  Double_t CalcTheta() const {
-    Double_t theta = 180*deg - fZenith;
+  double CalcTheta() const {
+    double theta = 180*deg - zenith_;
     if (theta > 180*deg) theta = 360*deg - theta;
     if (theta < 0) theta = -theta;
     return theta;
@@ -149,8 +154,8 @@ class I3Direction : public TObject
   /**
    * Calculate Phi of direction
    */
-  Double_t CalcPhi() const {
-    Double_t phi = fAzimuth + 180*deg;
+  double CalcPhi() const {
+    double phi = azimuth_ + 180*deg;
     if (phi >= 360*deg) phi -= 360*deg;
     if (phi < 0) phi += 360*deg;
     return phi;
@@ -161,17 +166,17 @@ class I3Direction : public TObject
   /**
    * Rotate direction around X axis by angle
    */
-  void RotateX(Double_t angle);
+  void RotateX(double angle);
 
   /**
    * Rotate direction around Y axis by angle
    */
-  void RotateY(Double_t angle);
+  void RotateY(double angle);
 
   /**
    * Rotate direction around Z axis by angle
    */
-  void RotateZ(Double_t angle);
+  void RotateZ(double angle);
 
   /**
    * Print out all information about the I3Direction to the given ostream
@@ -195,13 +200,13 @@ class I3Direction : public TObject
   /**
    * direction coordinates
    */ 
-  Double_t fZenith, fAzimuth;
-  mutable Double_t fX, fY, fZ;
+  double zenith_, azimuth_;
+  mutable double xDir_, yDir_, zDir_;
 
   /**
    * Did we calculate the directions before?
    */
-  mutable Bool_t IsCalculated; 
+  mutable bool IsCalculated; 
 
  private:
   /**
