@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.6 2004/08/09 12:13:10 troy Exp $
+    $Id: I3HitTest.cxx,v 1.7 2004/10/11 07:06:10 troy Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/08/09 12:13:10 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/10/11 07:06:10 $
     @author Troy D. Straszheim
 
     @todo
@@ -69,7 +69,7 @@ namespace
   // class you are testing.  It should have no spaces or things that
   // will confuse the shell in it, because you would have to escape
   // them when you want to run only this test.  e.g. I3MyClassTest
-  tut::factory t("I3Hit");
+  static tut::factory t("I3Hit");
 }
 
 namespace tut

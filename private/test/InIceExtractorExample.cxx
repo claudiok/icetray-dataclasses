@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.14 2004/08/09 12:13:10 troy Exp $
+    $Id: InIceExtractorExample.cxx,v 1.15 2004/10/11 07:06:10 troy Exp $
 
-    @version $Revision: 1.14 $
-    @date $Date: 2004/08/09 12:13:10 $
+    @version $Revision: 1.15 $
+    @date $Date: 2004/10/11 07:06:10 $
     @author Troy D. Straszheim
 
     @todo
@@ -39,7 +39,7 @@ namespace tut
 
 namespace
 {
-  tut::factory t("InIceExtractorExample");
+  static tut::factory t("InIceExtractorExample");
 }
 
 namespace tut

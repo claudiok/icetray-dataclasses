@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCParticleVectTest.cxx,v 1.5 2004/08/09 12:13:10 troy Exp $
+    $Id: I3MCParticleVectTest.cxx,v 1.6 2004/10/11 07:06:10 troy Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/08/09 12:13:10 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/10/11 07:06:10 $
     @author pretz
 
     @todo
@@ -38,7 +38,7 @@ namespace tut
 
 namespace
 {
-  tut::factory t("I3MCParticleVectTest");
+  static tut::factory t("I3MCParticleVectTest");
 }
 
 namespace tut

@@ -40,7 +40,7 @@ namespace tut
 
 namespace
 {
-  tut::factory t("printing");
+  static tut::factory t("printing");
 }
 
 namespace tut

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TriggerDictTest.cxx,v 1.3 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3TriggerDictTest.cxx,v 1.4 2004/10/11 07:06:11 troy Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/08/31 02:56:29 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/10/11 07:06:11 $
     @author pretz
 
     @todo
@@ -34,7 +34,7 @@ namespace tut
 
 namespace
 {
-  tut::factory t("I3TriggerDictTest");
+  static tut::factory t("I3TriggerDictTest");
 }
 
 namespace tut

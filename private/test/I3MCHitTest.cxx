@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHitTest.cxx,v 1.6 2004/08/09 12:13:10 troy Exp $
+    $Id: I3MCHitTest.cxx,v 1.7 2004/10/11 07:06:10 troy Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/08/09 12:13:10 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/10/11 07:06:10 $
     @author Troy D. Straszheim
 
     @todo
@@ -26,7 +26,7 @@ namespace tut
 namespace
 {
   // this string can be used from the command line to run just this group of tests
-  tut::factory t("I3MCHit");
+  static tut::factory t("I3MCHit");
 }
 
 namespace tut

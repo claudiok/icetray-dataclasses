@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: OMKeyTest.cxx,v 1.2 2004/08/09 12:13:10 troy Exp $
+    $Id: OMKeyTest.cxx,v 1.3 2004/10/11 07:06:10 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/08/09 12:13:10 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/10/11 07:06:10 $
     @author pretz
 
     @todo
@@ -32,7 +32,7 @@ namespace tut
 
 namespace
 {
-  tut::factory t("OMKeyTest");
+  static tut::factory t("OMKeyTest");
 }
 
 namespace tut

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackTest.cxx,v 1.6 2004/09/07 16:31:32 dule Exp $
+    $Id: I3TrackTest.cxx,v 1.7 2004/10/11 07:06:10 troy Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/09/07 16:31:32 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/10/11 07:06:10 $
     @author Troy D. Straszheim
 
     @todo
@@ -32,7 +32,7 @@ namespace tut
 
 namespace
 {
-  tut::factory t("I3TrackTest");
+  static tut::factory t("I3TrackTest");
 }
 
 namespace tut
