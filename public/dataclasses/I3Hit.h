@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.13 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Hit.h,v 1.14 2004/05/04 15:13:49 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/05/04 15:13:49 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -69,6 +69,7 @@ class I3Hit : public TObject
  * memory-mananagement implementation
  */
 typedef PtrPolicy<I3Hit>::ThePolicy I3HitPtr;
+
 
 #endif
 
