@@ -17,9 +17,10 @@
 	   
    @section overview Overview
 
-   The dataclasses were designed to represent the data that
+   The dataclasses were designed as an offline represention of the data that
    comes out of or is used to simulate the IceCube detector.  The dataclasses
-   can also be used to store data from post-acquisition processing and analysis.
+   are also used to store data from post-acquisition processing and 
+   analysis.
 
    As a physicist working with data from IceCube, you will potentially
    interact more with these containers than any other part of the
@@ -34,7 +35,7 @@
    @li <code>dataio-modules</code>: A collection of simple IceTray modules 
    which interface between the dataio classes, and the framework.
 
-   @li <code>corsika-reader</code>: A project which contains IceTray mdules
+   @li <code>corsika-reader</code>: A project which contains IceTray modules
    which work together to fill an event with the MC tracks from a Corsika file.
 
    @li <code>eventviewer</code>: A preliminary try at an event viewer. 

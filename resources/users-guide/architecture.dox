@@ -1,22 +1,110 @@
 /**
-@page architecture The theory behind the architecture of the dataclasses.
+   @page architecture The theory behind the architecture of the dataclasses.
 
-@author YOUR AD HERE (1-800-PHYSIC-7)
+   @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+   
+   @section streams Data Streams, Frames, and Database Records
 
-@section prerecs Prerequisites
+   These classes were designed to support the Frame/Stream/Stop
+   data model, which was adopted for IceCube.  This model separates
+   the data flow into several streams, based on the rate at which the
+   data changes.  For example, IceCube will have a Geometry stream,
+   with new records coming only at a glacial pace; a Physics stream
+   that records the event-by-event output of the DAQ; and several
+   streams on intermediate time scales such as OM Status, Monitoring,
+   Time Calibration, and so forth.
 
-This document assumes that you have set up the icetray environment and
-are now ready to (or are already) start writing your own module of
-some kind.  Full details at @ref index.
+   The data in one of these streams make sense only in the context of
+   all the others, so data is provided to applications in the form of
+   Frames, which contain the most recent record from each stream.
+   Because most applications are interested only in new records on a
+   single stream (usually the Physics stream), application modules
+   register their interest in a stream with the IceTray framework and
+   are provided only those frames which were generated as a result of
+   a new record (a Stop) in that stream.
 
-@section howto Details here
+   The data in most streams other than Physics is stored in the
+   IceCube database.  However, in some instances it is convenient to
+   copy the relevent database records into the data file, which
+   eliminates the need for network access.  The data classes are thus
+   organized in a header/contents fashion: each stream must contribute
+   at least a header object to each frame.  This header contains the
+   information necessary to make a database call.  The frame may
+   also contain an optional contents object containing the full
+   information.  If the full record is not present, a special-purpose
+   IceTray module can make a database query to obtain the record and
+   add the contents object before the frame is passed to processing or
+   analysis modules.  At output time, the user can decide whether the
+   full information is written to the file, or just the headers.
 
-Here goes a extensive description of both the layout of the data
-classes, and the mechanics of the code.  
-
-Explanations of what
-decisions were made and why. 
-
-Links to the doxygen generated from the code.
+   @section extension Evolution and Extension
+   
+   The data classes must be flexible enough to accommodate continued
+   development as software and analysis techniques evolve.  At the same
+   time, there must be a well-defined and universally accepted structure
+   to the data, so that different programmers share a common
+   understanding of how various types of information are to be stored and
+   users can know how to find the information they need for their analyses.
+   
+   These data classes were drawn up, based on experience from AMANDA and
+   on the design of IceCube, to provide both a standard data structure
+   and well-defined methods for extending that structure with minimal
+   disruption.  For "standard" types of data -- those which come from
+   authoritative sources, such as geometry records or DAQ output -- these
+   classes will be used directly in the event record.  Such classes will
+   typically be modified only rarely, and not by the average developer.
+   Root's automatic schema evolution will be used to accommodate such
+   evolution without user intervention.
+   
+   There are also data types which are not standardized, which are
+   produced by a variety of different algorithms and whose content is not
+   fixed.  Records such as reconstruction results, trigger and filter
+   records, feature extraction or hit reconstruction results, and OM
+   selections fall in this category.   For these data, the classes
+   provided are intended to serve as base classes which specific
+   algorithms can use to provide core functionality while extending the
+   classes through inheritance.  
+   
+   These classes thus specify a minimal interface for particular data
+   types and provide an implementation of that basic functionality, but
+   the developer should derive from these classes as needed.
+   For example, the basic @c RecoHit class includes a @c Time record, and
+   anyone developing feature extraction algorithms should use the @c
+   RecoHit class and provide times for the hits they extract.  If the
+   developer also wishes to record an uncertainty on the time, he or she
+   should define a new class inheriting from the basic @c RecoHit class
+   and adding the new features:
+   @code
+class NewRecoHit : public RecoHit {
+private:
+    double fUncert;
+public:
+    double TimeUncert() {return fUncert;};
+};
+   @endcode
+   With this method of extending classes, algorithms that are prepared to
+   make use of the extra information can access it, while algorithms that
+   do not make use of
+   the new features can simply use the base class interface without
+   knowing anything about the details of the specific algorithm or its
+   special parameters.  The goal is to make it as easy as possible for
+   non-experts to develop new algorithms and incorporate those algorithms
+   into the official production software, while minimizing the extent to
+   which existing code must be modified to adapt to such changes.
+   
+   @section root A note regarding Root
+   
+   It is expected that most users will use Root for physics analysis, and
+   these classes have been designed to work well in interactive Root
+   sessions.  Root is also used extensively for I/O in the system, and is
+   the basis for applications like the event viewer that use these
+   classes.  However, Root classes (other than @c TObject) are not
+   explicitly used in the class definitions.  We have adopted an
+   STL-style syntax for things like arrays (or 'vectors') of objects and
+   maps (lists of named objects).  The actual implementation of these
+   'container' classes is completely modular, with a global setting that
+   can be easily changed to replace STL containers with Root containers
+   or any other implementation.  This will allow us to optimize the
+   implementation without affecting existing code.
 
 */
