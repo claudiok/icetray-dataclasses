@@ -48,6 +48,8 @@ class I3CascadeImpl : public I3Cascade,
 
   virtual double T() const {return LocalizableType::T();}
 
+  virtual I3Position Pos() const {return I3Position(X(),Y(),Z(),T());}
+
   virtual double Energy() const {return EnergeticType::Energy();}
 
   ClassDef(I3CascadeImpl,1);
