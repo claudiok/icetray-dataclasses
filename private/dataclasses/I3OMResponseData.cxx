@@ -60,7 +60,7 @@ void I3OMResponseData::AddOMResponse(I3OMResponse* omresponse_)
   omresponse->Add(omresponse_);
 }
 
-I3Iterator<const I3OMResponse>* I3OMResponseData::MakeOMResponseIterator()
+I3Iterator<const I3OMResponse>* I3OMResponseData::MakeOMResponseIterator() const
 {
   if(!omresponse)
     return new I3ZeroItemIterator<const I3OMResponse>();

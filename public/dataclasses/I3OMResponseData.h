@@ -20,7 +20,7 @@ class I3OMResponseData: public TObject
   const I3OMResponse& GetOMResponse(unsigned short index) const;
   const I3OMResponse& FindOMResponse(unsigned short omnumber) const;
   void AddOMResponse(I3OMResponse* omresponse_);
-  I3Iterator<const I3OMResponse>* MakeOMResponseIterator();
+  I3Iterator<const I3OMResponse>* MakeOMResponseIterator() const;
   
   ClassDef(I3OMResponseData, 1);
 };

@@ -19,7 +19,7 @@ class I3MCHitSeries : public I3HitSeries
 
   void AddHit(I3MCHit* hit_);
 
-  I3Iterator<const I3MCHit>* MakeMCHitIterator();
+  I3Iterator<const I3MCHit>* MakeMCHitIterator() const;
 
 
   ClassDef(I3MCHitSeries, 1);

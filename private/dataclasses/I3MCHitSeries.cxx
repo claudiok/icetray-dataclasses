@@ -19,7 +19,7 @@ void I3MCHitSeries::AddHit(I3MCHit* hit_)
   I3HitSeries::AddHit(hit_);
 }
 
-I3Iterator<const I3MCHit>* I3MCHitSeries::MakeMCHitIterator()
+I3Iterator<const I3MCHit>* I3MCHitSeries::MakeMCHitIterator() const
 {
   if(!hit)
     return new I3ZeroItemIterator<const I3MCHit>();
