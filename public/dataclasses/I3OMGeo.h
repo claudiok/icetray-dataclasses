@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.19 2004/07/04 06:03:32 troy Exp $
+ * $Id: I3OMGeo.h,v 1.20 2004/07/05 17:13:11 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/07/04 06:03:32 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/07/05 17:13:11 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,6 +14,7 @@
 #define I3OMGEO_H
 
 #include <TObject.h>
+#include "dataclasses/I3Position.h"
 #include <string>
 
 /**
@@ -26,14 +27,19 @@
 class I3OMGeo : public TObject
 {
  public:
+  /**
+   * An enumerated type for the OM Orientation
+   */
   enum EOrientation {Unspecified,Up,Down};
+
+  /**
+   * An enumerated type for the possible kinds of OMs
+   */
   enum EOMType {AMANDA,IceCube};
 
  protected:
   UShort_t fOMNumber;
-  Double_t fX;
-  Double_t fY;
-  Double_t fZ;
+  I3Position fPosition;
   EOrientation fOrientation;
   Int_t fString;
   Double_t fRelativeQE;
@@ -62,9 +68,7 @@ class I3OMGeo : public TObject
     if (this == &rhs) return *this; // check for assignment to self
     TObject::operator=(rhs); // call base class assignment operator
     fOMNumber = rhs.fOMNumber;
-    fX = rhs.fX;
-    fY = rhs.fY;
-    fZ = rhs.fZ;
+    fPosition = rhs.fPosition;
     fOrientation = rhs.fOrientation;
     fRelativeQE = rhs.fRelativeQE;
     fArea = rhs.fArea;    
@@ -74,7 +78,7 @@ class I3OMGeo : public TObject
   /**
    * @return the identity of this OM, either AMANDA or IceCube 
    */
-  virtual EOMType GetOMType() =0;
+  virtual EOMType GetOMType() const =0;
 
   /**
    * @return the number of this optical module
@@ -89,33 +93,46 @@ class I3OMGeo : public TObject
   /**
    * @return the x position of the OM
    */
-  Double_t GetX() const { return fX; }
+  Double_t GetX() const { return fPosition.GetX(); }
 
   /**
    * @param x the new x position of the OM
    */
-  void   SetX(Double_t x) { fX = x; }
+  void   SetX(Double_t x) { fPosition.SetX(x); }
 
   /**
    * @return the y position of the OM
    */
-  Double_t GetY() const { return fY; }
+  Double_t GetY() const { return fPosition.GetY(); }
 
   /**
    * @param y the new y position of the OM
    */
-  void   SetY(Double_t y) { fY = y; }
+  void   SetY(Double_t y) { fPosition.SetY(y); }
 
   /**
    * @return the z position of the OM
    */
-  Double_t GetZ() const { return fZ; }
+  Double_t GetZ() const { return fPosition.GetZ(); }
 
   /**
    * @param z the new z position of the OM
    */
-  void     SetZ(Double_t z) { fZ = z; }
+  void     SetZ(Double_t z) { fPosition.SetZ(z);; }
 
+  /**
+   * @return The position of this OM
+   */
+  const I3Position& GetPosition() const { return fPosition;}
+
+  /**
+   * @param position The new position for this OM
+   */
+  void SetPosition(I3Position& position)
+    {
+      fPosition = position;
+    }
+  
   /**
    * @return kTRUE if the om is pointed down
    */
@@ -164,9 +181,6 @@ class I3OMGeo : public TObject
    * @param area the new area for the photocathode
    */
   void Area(Double_t area){fArea = area;}
-
-  // for testing
-  virtual std::string iam() { return "I3OMGeo"; }
 
  private:
   /**

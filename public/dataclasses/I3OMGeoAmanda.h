@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAmanda.h,v 1.11 2004/07/03 19:39:20 pretz Exp $
+ * $Id: I3OMGeoAmanda.h,v 1.12 2004/07/05 17:13:11 pretz Exp $
  *
  * @file I3OMGeoAmanda.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/07/03 19:39:20 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/07/05 17:13:11 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,10 +21,11 @@
  * geometry.  
  *
  * Stuff that an AMANDA OM had that an IceCube DOM doesn't *
- * @todo expand this to accomodate a full AMANDA geometry record
  */
 class I3OMGeoAmanda : public I3OMGeo
 {
+  Double_t fTZero;
+
   public:
   /**
    * constructor
@@ -44,7 +45,17 @@ class I3OMGeoAmanda : public I3OMGeo
   /**
    * Identifies this OM as an AMANDA OM
    */
-  virtual EOMType GetOMType() { return AMANDA;}
+  virtual EOMType GetOMType() const { return AMANDA;}
+
+  /**
+   * @param t0 the new TZero for this OM
+   */
+  void SetTZero(Double_t t0) { fTZero = t0;}
+
+  /**
+   * @return the TZero for this OM
+   */
+  Double_t GetTZero() const { return fTZero;}
 
   /**
    * assignment is just member-wise assignment
@@ -52,11 +63,9 @@ class I3OMGeoAmanda : public I3OMGeo
   const I3OMGeoAmanda& operator=(const I3OMGeoAmanda& rhs){
     if(this == &rhs) return *this;
     I3OMGeo::operator=(rhs);
+    fTZero = rhs.fTZero;
     return *this;
   }
-
-  // for testing
-  virtual std::string iam() { return "I3OMGeoAmanda"; }
 
  private:
 

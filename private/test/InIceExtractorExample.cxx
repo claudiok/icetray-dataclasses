@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.5 2004/07/04 06:03:32 troy Exp $
+    $Id: InIceExtractorExample.cxx,v 1.6 2004/07/05 17:13:11 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/07/04 06:03:32 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/07/05 17:13:11 $
     @author Troy D. Straszheim
 
     @todo
@@ -58,7 +58,13 @@ namespace tut
   // this prints an OM
   void PrintOM (I3OMGeoPtr p) 
   {
-    cout << "[" << p->iam() 
+    I3OMGeo::EOMType type = p->GetOMType();
+    string the_type;
+    if(type == I3OMGeo::AMANDA)
+      the_type = "AMANDA";
+    else if(type == I3OMGeo::IceCube)
+      the_type == "IceCube";
+    cout << "[" << the_type
 	 << " #" << p->GetOMNumber() 
 	 << " X:" << p->GetX() 
 	 << " Y:" << p->GetY() 
