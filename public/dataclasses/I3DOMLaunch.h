@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.2 2004/10/08 13:14:19 pretz Exp $
+ * $Id: I3DOMLaunch.h,v 1.3 2004/10/19 01:17:10 spencer Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/10/08 13:14:19 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/10/19 01:17:10 $
  * @author klein
  * @author blaufuss
  *
@@ -68,6 +68,11 @@ class I3DOMLaunch : public I3DigitalLaunch
    * This holds the 40 MHz FADC data 
    */
   vector<Int_t> fFADC;
+
+  /** 
+   * This holds the local coincidence bit
+   */
+  Bool_t fLocalCoincidence;
 
  public:
   /**
@@ -139,6 +144,17 @@ class I3DOMLaunch : public I3DigitalLaunch
   * sets the FADC waveform
   */
  void SetFADC(const vector<Int_t>& FADCdata) {fFADC=FADCdata;}
+
+  /**
+   * return local coincidence bit as a read-only object
+   */
+ Bool_t GetLCBit() const {return fLocalCoincidence;}
+  
+ /**
+  * sets the local coincidence bit
+  */
+ void SetLCBit(const Bool_t & LCBit) {fLocalCoincidence=LCBit;}
+
 
  /**
   * Dumps the file to the given ostream
