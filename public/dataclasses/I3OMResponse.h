@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.22 2004/04/22 15:51:25 pretz Exp $
+    $Id: I3OMResponse.h,v 1.23 2004/04/22 21:17:46 spencer Exp $
 
-    @version $Revision: 1.22 $
-    @date $Date: 2004/04/22 15:51:25 $
+    @version $Revision: 1.23 $
+    @date $Date: 2004/04/22 21:17:46 $
     @author
 
     @todo
@@ -20,18 +20,26 @@
 #include "I3OMGeo.h"
 #include "I3DataReadoutList.h"
 #include "I3RecoHitSeriesData.h"
-#include "I3MCHitSeries.h"
 
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.22 2004/04/22 15:51:25 pretz Exp $
+<<<<<<< I3OMResponse.h
+ * $Id: I3OMResponse.h,v 1.23 2004/04/22 21:17:46 spencer Exp $
+=======
+ * $Id: I3OMResponse.h,v 1.23 2004/04/22 21:17:46 spencer Exp $
+>>>>>>> 1.22
  *
  * The container for all the OMResponse-related data in the event
  * Has the hardware response, and the reconstructed hit series'.    
  * The Monte Carlo information is now in I3MCOMResponse.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/04/22 15:51:25 $
+<<<<<<< I3OMResponse.h
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/04/22 21:17:46 $
+=======
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/04/22 21:17:46 $
+>>>>>>> 1.22
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -47,7 +55,7 @@ class I3OMResponse : public TObject
   // "cant instantiate precompiled template
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
-  I3MCHitSeries       fMCHitSeries; //||
+
   I3DataReadoutList   fDataReadoutList; //||
   I3RecoHitSeriesData fRecoHitSeriesData; //||
 
