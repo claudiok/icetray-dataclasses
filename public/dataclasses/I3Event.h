@@ -1,12 +1,11 @@
-foobar!!!
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.20 2004/05/05 19:38:11 pretz Exp $
+ * $Id: I3Event.h,v 1.21 2004/05/05 19:42:59 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/05/05 19:38:11 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/05/05 19:42:59 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
