@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.17 2004/09/29 18:31:35 dule Exp $
+ * $Id: I3Contained.h,v 1.18 2004/10/20 14:45:53 dule Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/09/29 18:31:35 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/10/20 14:45:53 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -200,9 +200,12 @@ class I3Contained
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Starting Position:\n"<<fStartPos
+      o<<"Geometry: Contained\n"
+       <<"StartPosition:\n"<<fStartPos
+       <<"StopPosition:\n"<<GetStopPos()
        <<"Direction:\n"<<fDir
-       <<"Starting Time:"<<fStartT<<"\n";
+       <<"StartTime:"<<fStartT<<"\n";
+       <<"StopTime: "<<GetStopT()<<"\n";
     }
 
   private:

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.19 2004/09/29 21:19:35 dule Exp $
+ * $Id: I3Infinite.h,v 1.20 2004/10/20 14:45:53 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/09/29 21:19:35 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/10/20 14:45:53 $
  * @author 
  */
 
@@ -139,7 +139,8 @@ class I3Infinite{
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Position:\n"<<fPos
+      o<<"Geometry: Infinite\n"
+       <<"Position:\n"<<fPos
        <<"Direction:\n"<<fDir
        <<"Time: "<<fT<<"\n";
     }

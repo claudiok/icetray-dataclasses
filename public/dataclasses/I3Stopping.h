@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.17 2004/09/29 18:31:35 dule Exp $
+ * $Id: I3Stopping.h,v 1.18 2004/10/20 14:45:53 dule Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/09/29 18:31:35 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/10/20 14:45:53 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -160,9 +160,10 @@ class I3Stopping{
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Stopping Position:\n"<<fStopPos
+      o<<"Geometry: Stopping\n"
+       <<"StopPosition:\n"<<fStopPos
        <<"Direction:\n"<<fDir
-       <<"Stopping Time: "<<fStopT<<"\n";
+       <<"StopTime: "<<fStopT<<"\n";
     }
  private:
   // ROOT macro
