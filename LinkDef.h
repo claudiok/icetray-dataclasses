@@ -26,13 +26,14 @@
 // 'prototype for blahblah does not match any in class blahblah'
 //
 
-#pragma link C++ typedef I3RecoTrackList;
+#pragma link C++ class AugVec<I3RecoTrackListHeader, I3RecoTrack, I3RecoTrackListStoragePolicy>;
 #pragma link C++ class I3RecoTrackList+;
 #pragma link C++ class I3RecoTrackList::iterator+;
 #pragma link C++ typedef I3RecoTrackListStoragePolicy;
 #pragma link C++ class I3RecoTrackListStoragePolicy+;
 #pragma link C++ function operator!=(const I3RecoTrackList::iterator&, const I3RecoTrackList::iterator&);
-#pragma link C++ typedef I3AnalogSeries;
+
+#pragma link C++ class AugVec<I3AnalogSeriesHeader, I3Analog, I3AnalogSeriesStoragePolicy>;
 #pragma link C++ class I3AnalogSeries+;
 #pragma link C++ class I3AnalogSeries::iterator+;
 #pragma link C++ typedef I3AnalogSeriesStoragePolicy;
@@ -42,14 +43,14 @@
 #pragma link C++ typedef I3AnalogAmandaSeries;
 
 
-#pragma link C++ typedef I3DataReadoutList;
+#pragma link C++ class AugVec<I3DataReadoutListHeader, I3DataReadout, I3DataReadoutListStoragePolicy>;
 #pragma link C++ class I3DataReadoutList+;
 #pragma link C++ class I3DataReadoutList::iterator+;
 #pragma link C++ typedef I3DataReadoutListStoragePolicy;
 #pragma link C++ class I3DataReadoutListStoragePolicy+;
 #pragma link C++ function operator!=(const I3DataReadoutList::iterator&, const I3DataReadoutList::iterator&)
 
-#pragma link C++ typedef I3DigitalSeries;
+#pragma link C++ class AugVec<I3DigitalSeriesHeader, I3Digital, I3DigitalSeriesStoragePolicy>;
 #pragma link C++ class I3DigitalSeries+;
 #pragma link C++ class I3DigitalSeries::iterator+;
 #pragma link C++ typedef I3DigitalSeriesStoragePolicy;
@@ -67,7 +68,7 @@
 #pragma link C++ class I3GeometryStoragePolicy+;
 #pragma link C++ function operator!=(const I3Geometry::iterator&, const I3Geometry::iterator&)
 
-#pragma link C++ typedef I3MCHitSeries;
+#pragma link C++ class AugVec<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy>;
 #pragma link C++ class I3MCHitSeries+;
 #pragma link C++ class I3MCHitSeries::iterator+;
 #pragma link C++ typedef I3MCHitSeriesStoragePolicy;
@@ -88,13 +89,14 @@
 #pragma link C++ class I3MCTrackDataStoragePolicy+;
 #pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&)
 
-#pragma link C++ typedef I3OMResponseData;
+#pragma link C++ class AugVec<I3OMResponseDataHeader, I3OMResponse, I3OMResponseDataStoragePolicy>;
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
 #pragma link C++ typedef I3OMResponseDataStoragePolicy;
 #pragma link C++ class I3OMResponseDataStoragePolicy+;
 #pragma link C++ function operator!=(const I3OMResponseData::iterator&, const I3OMResponseData::iterator&);
-#pragma link C++ typedef I3RecoHitSeries;
+
+#pragma link C++ class AugVec<I3RecoHitSeriesHeader, I3RecoHit, I3RecoHitSeriesStoragePolicy>;
 #pragma link C++ class I3RecoHitSeries+;
 #pragma link C++ class I3RecoHitSeries::iterator+;
 #pragma link C++ typedef I3RecoHitSeriesStoragePolicy;
@@ -144,8 +146,7 @@
 #pragma link C++ function hashtest;
 #pragma link C++ class pair<string,I3MCHit>+;
 
-
-#pragma link C++ typedef I3TopGeometry;
+#pragma link C++ class AugVec<I3TopGeometryHeader, I3TankGeo, I3TopGeometryStoragePolicy>;
 #pragma link C++ class I3TopGeometry+;
 #pragma link C++ class I3TopGeometry::iterator+;
 #pragma link C++ typedef I3TopGeometryStoragePolicy;

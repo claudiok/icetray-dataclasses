@@ -13,6 +13,9 @@ class I3MCHitSeriesHeader {
 };
 
 typedef StoragePolicy<I3MCHit> I3MCHitSeriesStoragePolicy;
-typedef AugVec<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy> I3MCHitSeries;
+class I3MCHitSeries : public AugVec<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy>
+{
+  ClassDef(I3MCHitSeries,1);
+};
 
 #endif

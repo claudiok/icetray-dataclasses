@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponseData.h,v 1.10 2004/02/20 21:42:08 troy Exp $
+    $Id: I3OMResponseData.h,v 1.11 2004/02/21 17:38:10 pretz Exp $
 
-    @version $Revision: 1.10 $
-    @date $Date: 2004/02/20 21:42:08 $
+    @version $Revision: 1.11 $
+    @date $Date: 2004/02/21 17:38:10 $
     @author
 
     @todo
@@ -19,9 +19,13 @@ class I3OMResponseDataHeader { };
 
 typedef StoragePolicy<I3OMResponse> I3OMResponseDataStoragePolicy;
 
-typedef AugVec<I3OMResponseDataHeader, 
-			I3OMResponse, 
-			I3OMResponseDataStoragePolicy> I3OMResponseData;
+
+class I3OMResponseData : public AugVec<I3OMResponseDataHeader, 
+			 I3OMResponse, 
+			 I3OMResponseDataStoragePolicy>
+{
+  ClassDef(I3OMResponseData,1);
+};
 
 
 #endif

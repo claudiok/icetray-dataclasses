@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoTrackList.h,v 1.8 2004/02/20 21:42:08 troy Exp $
+    $Id: I3RecoTrackList.h,v 1.9 2004/02/21 17:38:10 pretz Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/02/20 21:42:08 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/02/21 17:38:10 $
     @author
 
     @todo
@@ -20,7 +20,12 @@
 class I3RecoTrackListHeader { };
 
 typedef StoragePolicy<I3RecoTrack> I3RecoTrackListStoragePolicy;
-typedef AugVec<I3RecoTrackListHeader, I3RecoTrack, I3RecoTrackListStoragePolicy> I3RecoTrackList;
+class I3RecoTrackList : public AugVec<I3RecoTrackListHeader, 
+			I3RecoTrack, 
+			I3RecoTrackListStoragePolicy> 
+{
+  ClassDef(I3RecoTrackList,1);
+};
 
 
 

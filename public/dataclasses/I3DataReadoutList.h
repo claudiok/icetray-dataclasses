@@ -9,9 +9,12 @@ class I3DataReadoutListHeader { };
 
 typedef StoragePolicy<I3DataReadout> I3DataReadoutListStoragePolicy;
 
-typedef AugVec<I3DataReadoutListHeader, 
-			I3DataReadout, 
-			I3DataReadoutListStoragePolicy> I3DataReadoutList;
+class I3DataReadoutList : public AugVec<I3DataReadoutListHeader, 
+			  I3DataReadout, 
+			  I3DataReadoutListStoragePolicy>
+{
+  ClassDef(I3DataReadoutList,1);
+};
 
 
 #endif

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DigitalSeries.h,v 1.9 2004/02/21 13:35:10 pretz Exp $
+    $Id: I3DigitalSeries.h,v 1.10 2004/02/21 17:38:10 pretz Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/02/21 13:35:10 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/02/21 17:38:10 $
     @author
 
     @todo
@@ -31,9 +31,10 @@ class I3DigitalSeriesHeader
 
 typedef StoragePolicy<I3Digital> I3DigitalSeriesStoragePolicy;
 
-typedef AugVec<I3DigitalSeriesHeader, 
-			I3Digital, 
-			I3DigitalSeriesStoragePolicy> I3DigitalSeries;
+class I3DigitalSeries : public AugVec<I3DigitalSeriesHeader, I3Digital, I3DigitalSeriesStoragePolicy>
+{
+  ClassDef(I3DigitalSeries,1);
+};
 
 #endif
 
