@@ -6,13 +6,13 @@
 
 class I3RecoHit : public I3Hit
 {
-  float confidence;
+  float fConfidence;
 
   public:
   I3RecoHit();
 
-  float GetConfidence() const;
-  void SetConfidence(float confidence_);
+  float Confidence() const { return fConfidence; }
+  void Confidence(float confidence_) { fConfidence = confidence_; }
 
   ClassDef(I3RecoHit, 1);
 };

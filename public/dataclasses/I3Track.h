@@ -1,3 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3Track.h,v 1.7 2004/02/17 15:48:13 troy Exp $
+
+    @version $Revision: 1.7 $
+    @date $Date: 2004/02/17 15:48:13 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3TRACK_H
 #define I3TRACK_H
 
@@ -8,229 +20,94 @@
 
 class I3Track : public TObject
 {
- public:
-  /**
-   * A typedef so that we can have a custom Track type.
-   */
-  typedef Int_t Type;
+  public:
+  enum Type {
+    Null = 0, 
+    Unknown = -100,
+    Gamma = 1,
+    EPlus = 2,
+    EMinus = 3,
+    Nu = 4,
+    MuPlus = 5,
+    MuMinus = 6,
+    Pi0 = 7, 
+    PiPlus = 8,
+    PiMinus = 9,
+    PPlus = 14,
+    PMinus = 15,
+    TauPlus = 33,
+    TauMinus = 34,
+    NuE = 201,
+    NuMu = 202,
+    NuTau = 203,
+    NuEBar = 204,
+    NuMuBar = 205,
+    NuTauBar = 206,
+    Brems = 1001,
+    DeltaE = 1002,
+    PairProd = 1003,
+    NuclInt = 1004,
+    MuPair = 1005,
+    Hadrons = 1006,
+    FiberLaser = 2100,
+    N2Laser = 2101, 
+    YAGLaser = 2201,
+    ZPrimary = 3000,
+    APrimary = 3500, 
+    Elph = 9999};
 
-  /**
-   * null particle
-   */
-  static const Type Null;
-
-  /**
-   * unknown particle
-   */
-  static const Type Unknown;
-
-  /**
-   * gamma
-   */
-  static const Type Gamma;
-
-  /**
-   * e+ particle
-   */
-  static const Type EPlus;
-
-  /**
-   * e- particle
-   */
-  static const Type EMinus;
-
-  /**
-   * nu particle
-   */
-  static const Type Nu;
-
-  /**
-   * mu+ particle
-   */
-  static const Type MuPlus;
-
-  /**
-   * mu- particle 
-   */
-  static const Type MuMinus;
-
-  /**
-   * pi0 particle
-   */
-  static const Type Pi0; 
-
-  /**
-   * pi+ particle
-   */
-  static const Type PiPlus;
-
-  /**
-   * pi- particle
-   */
-  static const Type PiMinus;
-
-  /**
-   * proton particle
-   */
-  static const Type PPlus;
-
-  /**
-   * antiproton particle
-   */
-  static const Type PMinus;
-
-  /**
-   * tau+ particle
-   */
-  static const Type TauPlus;
-
-  /**
-   * tau- particle
-   */
-  static const Type TauMinus;
-
-  /**
-   * e neutrino particle
-   */
-  static const Type NuE;
-
-  /**
-   * mu neutrino particle
-   */
-  static const Type NuMu;
-
-  /**
-   * tau neutrino particle
-   */
-  static const Type NuTau;
-
-  /**
-   * e bar neutrino particle
-   */
-  static const Type NuEBar;
-
-  /**
-   * mu bar neutrino particle
-   */
-  static const Type NuMuBar;
-
-  /**
-   * tau bar neutrino particle
-   */
-  static const Type NuTauBar;
-
-  /**
-   * Brems particle
-   */
-  static const Type Brems;
-
-  /**
-   * Delta electron particle
-   */
-  static const Type DeltaE;
-
-  /**
-   * Pair Production particle
-   */
-  static const Type PairProd;
-
-  /**
-   * Nuclear interaction
-   */
-  static const Type NuclInt;
-
-  /**
-   * muon pair particle
-   */
-  static const Type MuPair;
-
-  /**
-   * Hadrons particle
-   */
-  static const Type Hadrons;
-
-  /**
-   * fiber laser (AMANDA calibration laser)
-   */
-  static const Type FiberLaser;
-
-  /**
-   * N2 laser 
-   */
-  static const Type N2Laser;
-
-  /**
-   * YAG laser
-   */
-  static const Type YAGLaser;
-
-  /**
-   * CRPrimary starting value in Z
-   */
-  static const Type ZPrimary;
-
-  /**
-   * CR Primary starting value in A
-   */
-  static const Type APrimary;
-
-  /**
-   * Elephantino particle
-   */
-  static const Type Elph;
-
-
-  unsigned short tracknumber;
-  Type           particleid;
-  float          starttime;
-  float          startx;
-  float          starty;
-  float          startz;
-  float          stoptime;
-  float          stopx;
-  float          stopy;
-  float          stopz;
-  float          length;
-  float          zenith;
-  float          azimuth;
-  float          energy;
+ private:
+  unsigned short fTrackNumber;
+  Type           fParticleId;
+  float          fStartTime;
+  float          fStartX;
+  float          fStartY;
+  float          fStartZ;
+  float          fStopTime;
+  float          fStopX;
+  float          fStopY;
+  float          fStopZ;
+  float          fLength;
+  float          fZenith;
+  float          fAzimuth;
+  float          fEnergy;
   TRef           parenttrack;
   TRefArray      *childrentrack;
 
-  public:
-           I3Track();
+ public:
+  I3Track();
   virtual ~I3Track();
     
-  unsigned short GetTrackNumber() const;
-  Type           GetParticleID() const;
-  float          GetStartTime() const;
-  float          GetStartX() const;
-  float          GetStartY() const;
-  float          GetStartZ() const;
-  float          GetStopTime() const;
-  float          GetStopX() const;
-  float          GetStopY() const;
-  float          GetStopZ() const;
-  float          GetLength() const;
-  float          GetZenith() const;
-  float          GetAzimuth() const;
-  float          GetEnergy() const;
+  unsigned short TrackNumber() const { return fTrackNumber; }
+  Type ParticleID() const { return fParticleId; }
+  float StartTime() const { return fStartTime; }
+  float StartX() const { return fStartX; }
+  float StartY() const { return fStartY; }
+  float StartZ() const { return fStartZ; }
+  float StopTime() const { return fStopTime; }
+  float StopX() const { return fStopX; }
+  float StopY() const { return fStopY; }
+  float StopZ() const { return fStopZ; }
+  float Length() const { return fLength; }
+  float Zenith() const { return fZenith; }
+  float Azimuth() const { return fAzimuth; }
+  float Energy() const { return fEnergy; }
 
-  void SetTrackNumber(unsigned short tracknumber_);
-  void SetParticleID(Type particleid_);
-  void SetStartTime(float time);
-  void SetStartX(float x);
-  void SetStartY(float y);
-  void SetStartZ(float z);
-  void SetStopTime(float time);
-  void SetStopX(float x);
-  void SetStopY(float y);
-  void SetStopZ(float z);
-  void SetLength(float length_);
-  void SetZenith(float zenith_);
-  void SetAzimuth(float azimuth_);
-  void SetEnergy(float energy_);
-  
+  void TrackNumber(unsigned short arg) { fTrackNumber = arg; }
+  void ParticleID(Type arg) { fParticleId = arg; }
+  void StartTime(float arg) { fStartTime = arg; }
+  void StartX(float arg) { fStartX = arg; }
+  void StartY(float arg) { fStartY = arg; }
+  void StartZ(float arg) { fStartZ = arg; }
+  void StopTime(float arg) { fStopTime = arg; }
+  void StopX(float arg) { fStopX = arg; }
+  void StopY(float arg) { fStopY = arg; }
+  void StopZ(float arg) { fStopZ = arg; }
+  void Length(float arg) { fLength = arg; }
+  void Zenith(float arg) { fZenith = arg; }
+  void Azimuth(float arg) { fAzimuth = arg; }
+  void Energy(float arg) { fEnergy = arg; }
+
   bool           HasParentTrack() const;
   const I3Track& GetParentTrack() const;
   void           SetParentTrack(I3Track& parenttrack_);

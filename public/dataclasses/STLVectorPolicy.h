@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorPolicy.h,v 1.1 2004/02/15 02:33:33 troy Exp $
+    $Id: STLVectorPolicy.h,v 1.2 2004/02/17 15:48:13 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/15 02:33:33 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/17 15:48:13 $
     @author Troy Straszheim
 
 */
@@ -39,6 +39,7 @@ class STLVectorPolicy {
   iterator begin() { return vector_.begin(); }
   iterator end() { return vector_.end(); }
   
+  //
  protected:
 
   vector_type vector_;

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: TClonesPolicy.h,v 1.2 2004/02/16 20:04:26 pretz Exp $
+    $Id: TClonesPolicy.h,v 1.3 2004/02/17 15:48:13 troy Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/16 20:04:26 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/17 15:48:13 $
     @author
 
     @todo   need to get name of element class, see "new TClonesArray"
@@ -18,6 +18,10 @@
 
 template <class ElementType>
 class TClonesPolicy {
+
+ protected:
+
+  TClonesArray theclones;
 
  public:
 
@@ -44,10 +48,6 @@ class TClonesPolicy {
   // danger danger, need to get class name better
   TClonesPolicy() : theclones(ElementType::Class()->GetName(),0){ }
   ~TClonesPolicy() { }
-
- protected:
-
-  TClonesArray theclones;
 
 };
 

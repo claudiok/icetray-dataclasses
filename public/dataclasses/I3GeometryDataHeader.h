@@ -3,7 +3,7 @@
 /**
  * Class: I3GeometryDataHeader
  *
- * Version: $Id: I3GeometryDataHeader.h,v 1.1 2004/02/15 15:25:32 troy Exp $
+ * Version: $Id: I3GeometryDataHeader.h,v 1.2 2004/02/17 15:48:13 troy Exp $
  *
  * Date: 13 Jan 2004
  *
@@ -12,71 +12,20 @@
 
 // includes
 #include "I3DataHeader.h"
-#include "TString.h"
+#include <string>
+using namespace std;
 
 /**
  * I3Geometry Header is supposed to be a header for the geometry that
  * you can store in a file if you don't want to store the geometry.
  * It's supposed to have enough data to reconstruct the full geometry
  * from the database
- * @version $Id: I3GeometryDataHeader.h,v 1.1 2004/02/15 15:25:32 troy Exp $
+ * @version $Id: I3GeometryDataHeader.h,v 1.2 2004/02/17 15:48:13 troy Exp $
  * @author pretz
  */
-class I3GeometryDataHeader : public I3DataHeader{
- public:
-  /**
-   * constructor
-   */
-  I3GeometryDataHeader();
+class I3GeometryDataHeader : public I3DataHeader
+{
 
-  /**
-   * destructor
-   */
-  virtual ~I3GeometryDataHeader();
-
-  /**
-   * retrieve the number of OMs
-   * @return the number of OMs in the geometry
-   */
-  Int_t GetNumOms();
-
-  /**
-   * retrieves the number of strings
-   * @return the number of strings in the geometry
-   */
-  Int_t GetNumStrings();
-
-  /**
-   * retrieves the array name, for example AMAII
-   * or B10 or IceCube or whatever.
-   * @return the array name
-   */
-  const Char_t* GetArrayName();
-
-  /**
-   * retrieves the name of the stream this header is for.
-   * ... "Geometry"
-   */
-  const Char_t* GetDataStream();
-
-  /**
-   * sets the number of oms in the geometry header
-   * @param oms the new number of oms
-   */
-  void SetNumOms(Int_t oms);
-
-  /**
-   * sets the number of strings
-   * @param strings the new number of strings
-   */
-  void SetNumStrings(Int_t strings);
-
-  /** 
-   * sets the array name
-   * @param name the new array name
-   */
-  void SetArrayName(const Char_t* name);
- private:
   // copy and assignment are private
   I3GeometryDataHeader(const I3GeometryDataHeader&);
   I3GeometryDataHeader& operator=(const I3GeometryDataHeader&);
@@ -84,9 +33,25 @@ class I3GeometryDataHeader : public I3DataHeader{
   // instance data
   Int_t fNumOms;
   Int_t fNumStrings;
-  TString fArrayName;
+  string fArrayName;
   
-  // ROOT Macro
+ public:
+  I3GeometryDataHeader()  : fNumOms(-1), fNumStrings(-1){;}
+
+  virtual ~I3GeometryDataHeader() {;}
+
+  Int_t NumOms() { return fNumOms; }
+  void NumOms(Int_t arg) { fNumOms = arg; }
+
+  Int_t NumStrings() { return fNumStrings; }
+  void NumStrings(Int_t strings) { fNumStrings = strings; }
+
+  string ArrayName() { return fArrayName; }
+  void  ArrayName( const string &arg) { fArrayName = arg; }
+
+  // note that it is not a reference returned, we need that copy constructor
+  const string DataStream() { return "Geometry"; }
+
   ClassDef(I3GeometryDataHeader,1);
 };
 
