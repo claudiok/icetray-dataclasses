@@ -4,22 +4,25 @@
 #include <TObject.h>
 #include <TObjArray.h>
 
-#include "I3MCTrackList.h"
 #include "dataclasses/I3Iterator.h"
+
+class I3MCTrackList;
 
 class I3MCTrackData : public TObject
 {
-  TObjArray  *mctracklist;
-
-  public:
-           I3MCTrackData();
+ public:
+  I3MCTrackData();
   virtual ~I3MCTrackData();
-
   int GetNumberMCTrackLists() const;
   const I3MCTrackList& GetMCTrackList(unsigned short number) const;
+  Bool_t HasTrueMCTrackList() const;
+  const I3MCTrackList& GetTrueMCTrackList() const;
   void AddMCTrackList(I3MCTrackList* mctracklist_);
-  I3Iterator<const I3MCTrackList>* MakeTrackListIterator();
-
+  void SetTrueTrackList(I3MCTrackList& list);
+  I3Iterator<const I3MCTrackList>* MakeTrackListIterator() const;
+ private:
+  TObjArray  *mctracklist;
+  I3MCTrackList* fTrueTrackList;
   ClassDef(I3MCTrackData, 1);
 };
 #endif
