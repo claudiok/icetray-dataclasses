@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMultiMapStoragePolicy.h,v 1.3 2004/11/10 20:24:15 dule Exp $
+    $Id: STLMultiMapStoragePolicy.h,v 1.4 2005/01/04 16:07:02 dule Exp $
 
     @file STLMultiMapStoragePolicy.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/11/10 20:24:15 $
+    @version $Revision: 1.4 $
+    @date $Date: 2005/01/04 16:07:02 $
     @author Ralf Ehrlich
 
 */
@@ -59,6 +59,19 @@ class STLMultiMapStoragePolicy {
 #ifndef __CINT__
   typedef typename map_type::pointer pointer;
 #endif
+
+#ifndef __CINT__
+  /**
+   * A reference for the map.
+   */
+  typedef typename map_type::reference reference;
+
+  /**
+   * A constant reference for the map.
+   */
+  typedef typename map_type::const_reference const_reference;
+#endif
+
 
  private:
 
