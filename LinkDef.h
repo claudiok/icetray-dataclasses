@@ -147,8 +147,8 @@
 
 #pragma link C++ class I3MCTrackData+;
 #pragma link C++ class I3MCTrackData::iterator+;
-#pragma link C++ typedef MapPolicy<I3MCTrackEvent>::ThePolicy;
-#pragma link C++ class MapPolicy<I3MCTrackEvent>::ThePolicy+;
+#pragma link C++ typedef MapPointainerPolicy<I3MCTrackEventPtr>::ThePolicy;
+#pragma link C++ class MapPointainerPolicy<I3MCTrackEventPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
 #pragma link C++ typedef I3MCTrackDataPtr;
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackData.h,v 1.21 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3MCTrackData.h,v 1.22 2004/04/29 16:04:48 pretz Exp $
  *
  * @file I3MCTrackData.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/04/29 16:04:48 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -23,7 +23,7 @@
  * MC information for the tracks in the Event.  
  *
  */
-class I3MCTrackData : public TObject, public MapPolicy<I3MCTrackEvent>::ThePolicy
+class I3MCTrackData : public TObject, public MapPointainerPolicy<I3MCTrackEventPtr>::ThePolicy
 {
  public:
   /**
