@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3GeometryTest.cxx,v 1.5 2004/07/30 19:15:59 dule Exp $
+    $Id: I3GeometryTest.cxx,v 1.6 2004/07/31 22:31:10 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/07/30 19:15:59 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/07/31 22:31:10 $
     @author pretz
 
     @todo
@@ -60,11 +60,12 @@ namespace tut
   
   I3Geometry *geo_out = new I3Geometry;
   t->SetBranchAddress("branch",&geo_out);
+  t->GetEvent(0);
   ensure("checking array sizes",
 	 geometry->GetInIceGeometry().size() 
 	 == geo_out->GetInIceGeometry().size());
 
-  t->GetEvent(0);
+
   }
 
   //write straight to disk

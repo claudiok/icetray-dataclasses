@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.104 2004/07/30 20:40:59 blaufuss Exp $
-// $Revision: 1.104 $
-// $Date: 2004/07/30 20:40:59 $
+// $Id: LinkDef.h,v 1.105 2004/07/31 22:31:10 pretz Exp $
+// $Revision: 1.105 $
+// $Date: 2004/07/31 22:31:10 $
 //
 
 #ifdef __CINT__
@@ -116,8 +116,8 @@
 #pragma link C++ typedef I3DataReadoutDictPtr;
 
 #pragma link C++ class I3InIceGeometry+;
-#pragma link C++ typedef VectorPolicy<I3OMGeoPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3OMGeoPtr>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3InIceGeometry::iterator&, const I3InIceGeometry::iterator&);
 #pragma link C++ typedef I3OMGeoPtr;
 #pragma link C++ class I3OMGeoPtr+;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.17 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.18 2004/07/31 22:31:10 pretz Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/07/31 22:31:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -28,11 +28,10 @@
  * identified by its key.  An OMKey is just the (string number, om
  * number) pair that indicates the position of the module.
  * @todo make copy and assignment private.  conflict with something in tests
- * @todo should the 'mapness' be incorporated in the same kind of
- * 'Storage Policy' we have for other classes?
  */
 
-class I3InIceGeometry : public TObject, public map<OMKey,I3OMGeoPtr>
+class I3InIceGeometry : public TObject, 
+	public MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy
 {
   public:
   /** 
@@ -47,8 +46,8 @@ class I3InIceGeometry : public TObject, public map<OMKey,I3OMGeoPtr>
   
   private:
 /*   // copy and assignment are private */
-  // I3InIceGeometry(const I3InIceGeometry& rhs); 
-  // const I3InIceGeometry& operator=(const I3InIceGeometry& rhs); 
+  I3InIceGeometry(const I3InIceGeometry& rhs); 
+  const I3InIceGeometry& operator=(const I3InIceGeometry& rhs); 
 
   // ROOT macro
   ClassDef(I3InIceGeometry,1);

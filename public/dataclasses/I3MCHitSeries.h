@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.18 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3MCHitSeries.h,v 1.19 2004/07/31 22:31:10 pretz Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/07/31 22:31:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,7 +18,6 @@
 
 /**
  * @brief Array of I3MCHits
- * @todo Shouldn't this be an I3MCHitVect?
  * 
  * Vector of the I3MCHits produced at an OM in an event.  The weight
  * variable (default 1) can be used to assign a statistical weighting
