@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.14 2004/08/02 19:59:58 blaufuss Exp $
+ * $Id: I3Particle.h,v 1.15 2004/08/02 22:12:28 pretz Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/08/02 19:59:58 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/08/02 22:12:28 $
  * @author pretz
  *
  */
@@ -192,6 +192,8 @@ class I3Particle : public TObject{
      o<<"[ "<<IsA()->GetName()<<" ]\n";
    }
 
+ private:
+ // ROOT macro
   ClassDef(I3Particle,1);
 };
 

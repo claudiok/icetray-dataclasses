@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
+    $Id: I3StationHit.h,v 1.3 2004/08/02 22:12:28 pretz Exp $
     @file I3StationHit.h
-    @version $Revision: 1.2 $
+    @version $Revision: 1.3 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
@@ -118,9 +118,10 @@ class I3StationHit : public TObject,
   ClassDef(I3StationHit,1);
 };
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3StationHit>::ThePolicy I3StationHitPtr;
-
-
 
 /**
  @brief Functor for find_if

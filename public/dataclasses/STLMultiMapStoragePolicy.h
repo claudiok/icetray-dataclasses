@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMultiMapStoragePolicy.h,v 1.1 2004/07/26 23:44:09 ehrlich Exp $
+    $Id: STLMultiMapStoragePolicy.h,v 1.2 2004/08/02 22:12:28 pretz Exp $
 
     @file STLMultiMapStoragePolicy.h
-    @version $Revision: 1.1 $
-    @date $Date: 2004/07/26 23:44:09 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/08/02 22:12:28 $
     @author Ralf Ehrlich
 
 */
@@ -33,9 +33,24 @@ class STLMultiMapStoragePolicy {
  public:
 
  //  typedef string KeyType;
+  /**
+   * a type for the stl multimap that this one wraps
+   */
   typedef multimap<KeyType,ElementType> map_type;
+
+  /**
+   * an iterator type
+   */
   typedef typename map_type::iterator iterator;
+
+  /**
+   * a constant iterator type
+   */
   typedef typename map_type::const_iterator const_iterator;
+
+  /**
+   * a size type for the map
+   */
   typedef typename map_type::size_type size_type;
 
  private:
@@ -44,6 +59,9 @@ class STLMultiMapStoragePolicy {
 
  public:
 
+  /**
+   * assignment operator
+   */
   STLMultiMapStoragePolicy& operator=(const STLMultiMapStoragePolicy &rhs) {
     if (this == &rhs) return *this;
     map_ = rhs.map_;

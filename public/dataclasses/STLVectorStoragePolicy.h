@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.7 2004/07/31 23:20:55 pretz Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.8 2004/08/02 22:12:28 pretz Exp $
 
     @file STLVectorStoragePolicy.h
-    @version $Revision: 1.7 $
-    @date $Date: 2004/07/31 23:20:55 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/08/02 22:12:28 $
     @author Troy Straszheim
 */
 #ifndef STLVECTOR_POLICY_INCLUDED
@@ -27,11 +27,34 @@ class STLVectorStoragePolicy  {
 
  public:
 
+  /**
+   * a type for the stl vector that this class wraps
+   */
   typedef vector<ElementType>                           vector_type;
+
+  /**
+   * an iterator type
+   */
   typedef typename vector_type::iterator                iterator;
+
+  /**
+   * a constant iterator type.  Like a 'const XXX*'
+   */
   typedef typename vector_type::const_iterator          const_iterator;
+
+  /**
+   * an iterator that goes backwards across the vector
+   */
   typedef typename vector_type::reverse_iterator        reverse_iterator;
+
+  /**
+   * a reference type that is contained by this class
+   */
   typedef ElementType& 					reference;
+
+  /**
+   * a constant reference type
+   */
   typedef const ElementType& 				const_reference;
 
  private:
@@ -77,7 +100,7 @@ class STLVectorStoragePolicy  {
 
   /**
    * Subscript access to the data contained in the vector.
-   * @param The index of the element for which data should be accessed.
+   * @param n The index of the element for which data should be accessed.
    * @return Read-only (constant) reference to data.
    */
   const_reference operator[](size_t n) const { return vector_[n]; }

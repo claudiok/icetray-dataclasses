@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.10 2004/08/02 22:09:05 blaufuss Exp $
+ * $Id: I3TankGeo.h,v 1.11 2004/08/02 22:12:28 pretz Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/02 22:09:05 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/08/02 22:12:28 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -66,6 +66,9 @@ class I3TankGeo : public TObject,
 };
 
 #include "dataclasses/StoragePolicy.h"
+/**
+ * a pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3TankGeo>::ThePolicy I3TankGeoPtr;
 
 #endif

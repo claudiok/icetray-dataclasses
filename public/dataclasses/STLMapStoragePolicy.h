@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.11 2004/07/16 13:44:37 pretz Exp $
+    $Id: STLMapStoragePolicy.h,v 1.12 2004/08/02 22:12:28 pretz Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.11 $
-    @date $Date: 2004/07/16 13:44:37 $
+    @version $Revision: 1.12 $
+    @date $Date: 2004/08/02 22:12:28 $
     @author Troy Straszheim
 
 */
@@ -33,9 +33,24 @@ class STLMapStoragePolicy {
  public:
 
  //  typedef string KeyType;
+  /**
+   * the stl map corresponding to this one
+   */
   typedef map<KeyType,ElementType> map_type;
+
+  /**
+   * the map iterator
+   */
   typedef typename map_type::iterator iterator;
+
+  /**
+   * A constant iterator.  Like a constant pointer.
+   */
   typedef typename map_type::const_iterator const_iterator;
+
+  /**
+   * A type for the size of the map.
+   */
   typedef typename map_type::size_type size_type;
 
  private:
@@ -43,7 +58,9 @@ class STLMapStoragePolicy {
   map_type map_;
 
  public:
-
+  /** 
+   * assignment operator
+   */
   STLMapStoragePolicy& operator=(const STLMapStoragePolicy &rhs) {
     if (this == &rhs) return *this;
     map_ = rhs.map_;

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.12 2004/07/28 19:10:34 ehrlich Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.13 2004/08/02 22:12:28 pretz Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/07/28 19:10:34 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/08/02 22:12:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -64,11 +64,18 @@ class I3RecoResultSingleTrack : public I3RecoResult
     return I3ParticlePtr();
   }
 
+  /**
+   * indicates that there is a track in the result
+   */
   bool HasTrack() const {
     //TDS: the smart pointer automagically converts to bool
     return fTrack;
   }
   
+  /**
+   * sets the track in the result
+   * Fails the program if it is already set.
+   */
   void SetTrack(I3ParticlePtr fTrack_)
   {
     if(fTrack)

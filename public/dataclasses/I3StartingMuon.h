@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3StartingMuon.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3StartingMuon.h,v 1.5 2004/08/02 22:12:28 pretz Exp $
 
     @file I3StartingMuon.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/08/02 22:12:28 $
     @author deyoung
 */
 
@@ -29,8 +29,18 @@ class I3StartingMuon : public I3TrackImpl<I3Starting,
                                           I3Composite>
 {
  public:
+  /**
+   * constructor
+   */
   I3StartingMuon(){};
+
+  /**
+   * destructor
+   */
   virtual ~I3StartingMuon(){}
+
+ private:
+  //ROOT macro
   ClassDef(I3StartingMuon,1);
 };
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.9 2004/08/02 15:29:52 blaufuss Exp $
+ * $Id: I3Position.h,v 1.10 2004/08/02 22:12:28 pretz Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/08/02 15:29:52 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/02 22:12:28 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.9 2004/08/02 15:29:52 blaufuss Exp $
+// $Id: I3Position.h,v 1.10 2004/08/02 22:12:28 pretz Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -31,6 +31,7 @@ using namespace std;
  * Positions can be given in cartesian, spherical, or cylindrical coordinates.
  * 
  * @todo implement "print out" of all information in a uniform way...
+ * @todo insure that the temporary data isn't written to disk.
  */
 class I3Position
 {
@@ -187,13 +188,26 @@ class I3Position
    */
   void PrintPosition();
   
-
  protected:
-  Double_t fX, fY, fZ;        // cartesian (car)
-  Double_t fR, fTheta, fPhi;  // spherical (sph)
-  Double_t fRho;              // cylindrical (cyl) - Z and Phi are same.
-  Bool_t IsCalculated;        // Did we calculat the positions before?
+  /**
+   * cartesian (car)
+   */ 
+  Double_t fX, fY, fZ;
 
+  /**
+   * spherical (sph)
+   */
+  Double_t fR, fTheta, fPhi;  
+
+  /**
+   * cylindrical (cyl) - Z and Phi are same.
+   */
+  Double_t fRho;
+
+  /**
+   * Did we calculate the positions before?
+   */
+  Bool_t IsCalculated; 
 
  private:
   void CalcSphCylFromCar();

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.26 2004/08/02 15:29:52 blaufuss Exp $
+ * $Id: I3OMGeo.h,v 1.27 2004/08/02 22:12:28 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.26 $
- * @date $Date: 2004/08/02 15:29:52 $
+ * @version $Revision: 1.27 $
+ * @date $Date: 2004/08/02 22:12:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -101,7 +101,7 @@ class I3OMGeo : public TObject
   const I3Position& GetPos() const { return fPosition;}
 
   /**
-   * @param position The new position for this OM
+   * @param pos The new position for this OM
    */
   void SetPos(I3Position& pos)
     {fPosition.SetPosition(pos);}

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.27 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.28 2004/08/02 22:12:28 pretz Exp $
  *
  * @file I3RecoResult.h
- * @version $Revision: 1.27 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.28 $
+ * @date $Date: 2004/08/02 22:12:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -38,6 +38,9 @@ class I3RecoResult : public TObject
    */
   virtual ~I3RecoResult() {}
 
+  /**
+   * streams a RecoResult to an arbitrary ostream
+   */
   virtual void ToStream(ostream& o)
     {
       o<<"[ "<<IsA()->GetName()<<" ]\n";

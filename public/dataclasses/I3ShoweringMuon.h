@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3ShoweringMuon.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3ShoweringMuon.h,v 1.5 2004/08/02 22:12:28 pretz Exp $
 
     @file I3ShoweringMuon.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/08/02 22:12:28 $
     @author deyoung
 */
 
@@ -27,8 +27,18 @@ class I3ShoweringMuon : public I3TrackImpl<I3Infinite,
                                            I3Composite>
 {
  public:
+  /**
+   * constructor
+   */
   I3ShoweringMuon(){};
+
+  /**
+   * destructor
+   */
   virtual ~I3ShoweringMuon(){}
+
+ private:
+  // ROOT macro
   ClassDef(I3ShoweringMuon,1);
 };
 

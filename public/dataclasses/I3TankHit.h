@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.1 2004/07/13 15:37:54 niessen Exp $
+    $Id: I3TankHit.h,v 1.2 2004/08/02 22:12:28 pretz Exp $
     @file I3TankHit.h
-    @version $Revision: 1.1 $
+    @version $Revision: 1.2 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -24,11 +24,15 @@ class I3TankHit : public TObject {
 
   UShort_t fTankNumber;
 
-  // the first arrival of a particle at this particular tank
+  /**
+   * the first arrival of a particle at this particular tank
+   */
   Float_t fTime;
 
-  // the signal of the tank (can be different things like track length, charge,
-  // #mc-particles, amplitude, ...
+  /**
+   * the signal of the tank (can be different things like track length, charge,
+   * #mc-particles, amplitude, ...
+   */
   Float_t fSignal;
 
  public:
@@ -50,7 +54,7 @@ class I3TankHit : public TObject {
   UShort_t TankNumber() const { return fTankNumber; }
 
   /**
-   * @param omnumber the new tanknumber associated with this response
+   * @param tanknumber the new tanknumber associated with this response
    */
   void TankNumber(UShort_t tanknumber) { fTankNumber = tanknumber;}
   
@@ -83,6 +87,9 @@ class I3TankHit : public TObject {
   ClassDef(I3TankHit,1);
 };
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3TankHit>::ThePolicy I3TankHitPtr;
 
 
