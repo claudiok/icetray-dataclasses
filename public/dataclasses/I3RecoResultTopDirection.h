@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopDirection.h,v 1.6 2005/01/31 19:16:50 dule Exp $
+ * $Id: I3RecoResultTopDirection.h,v 1.7 2005/03/29 20:19:18 troy Exp $
  *
  * @file I3RecoResultTopDirection.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/01/31 19:16:50 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/03/29 20:19:18 $
  * @author Peter Niessen
  */
 
@@ -40,10 +40,12 @@ class I3RecoResultTopDirection : public I3RecoResult
    */
   const I3ShowerDirection& GetShowerDirection () const 
   {
-    if(fShowerDirection)
-      return (*fShowerDirection);
-    I3DataExecution::Instance().Fatal("I3RecoResultTopDirection::ShowerDirection () const asked for a shower direction which doesn't exist");
-    return(*(I3ShowerDirectionPtr)NULL);
+    if(!fShowerDirection)
+      {
+	I3DataExecution::Instance().Fatal("I3RecoResultTopDirection::ShowerDirection () const asked for a shower direction which doesn't exist");
+	throw std::runtime_error("have no shower direction");
+      }
+    return *fShowerDirection;
   }
 
   /**
@@ -51,10 +53,12 @@ class I3RecoResultTopDirection : public I3RecoResult
    */
   I3ShowerDirection& GetShowerDirection ()
   {
-    if(fShowerDirection)
-      return (*fShowerDirection);
-    I3DataExecution::Instance().Fatal("I3RecoResultSingleTopDirection::ShowerDirection() asked for a track which doesn't exist");
-    return(*(I3ShowerDirectionPtr)NULL);
+    if(!fShowerDirection)
+      {
+	I3DataExecution::Instance().Fatal("I3RecoResultSingleTopDirection::ShowerDirection() asked for a track which doesn't exist");
+	throw std::runtime_error("we have no shower direction");
+      }
+    return *fShowerDirection;
   }
 
   bool HasShowerDirection () const { return fShowerDirection; }
