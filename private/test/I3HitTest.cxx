@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.5 2004/06/30 17:20:25 pretz Exp $
+    $Id: I3HitTest.cxx,v 1.6 2004/08/09 12:13:10 troy Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/06/30 17:20:25 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/08/09 12:13:10 $
     @author Troy D. Straszheim
 
     @todo
@@ -23,7 +23,7 @@
     follow along.
 */
 
-#include "test/tut.h"
+#include "TUT/tut.h"
 
 // MODIFY: replace with include of the header file for the module you
 // are testing, or whatever headers are necessary for this test.

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.13 2004/08/05 13:00:21 troy Exp $
+    $Id: InIceExtractorExample.cxx,v 1.14 2004/08/09 12:13:10 troy Exp $
 
-    @version $Revision: 1.13 $
-    @date $Date: 2004/08/05 13:00:21 $
+    @version $Revision: 1.14 $
+    @date $Date: 2004/08/09 12:13:10 $
     @author Troy D. Straszheim
 
     @todo
@@ -12,7 +12,7 @@
     Example of how to extract stuff from a polymorphic vector
 */
 
-#include "test/tut.h"
+#include "TUT/tut.h"
 
 #include "dataclasses/I3InIceGeometry.h"
 #include "dataclasses/I3OMGeoAMANDA.h"

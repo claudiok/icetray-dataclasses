@@ -1,5 +1,5 @@
 
-#include "test/tut.h"
+#include "TUT/tut.h"
 
 // MODIFY: replace with include of the header file for the module you
 // are testing, or whatever headers are necessary for this test.

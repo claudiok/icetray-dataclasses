@@ -1,16 +1,16 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHitTest.cxx,v 1.5 2004/07/27 04:34:32 ehrlich Exp $
+    $Id: I3MCHitTest.cxx,v 1.6 2004/08/09 12:13:10 troy Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/07/27 04:34:32 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/08/09 12:13:10 $
     @author Troy D. Straszheim
 
     @todo
 
 */
-#include "test/tut.h"
+#include "TUT/tut.h"
 #include "dataclasses/I3MCHit.h"
 
 // this is a typical minimal testsuite

@@ -1,17 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: SelectorTest.cxx,v 1.2 2004/08/05 13:00:21 troy Exp $
+ * $Id: SelectorTest.cxx,v 1.3 2004/08/09 12:13:10 troy Exp $
  *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/05 13:00:21 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/09 12:13:10 $
  * @author pretz
  *
  * @todo
  *
  */
 
-#include "test/tut.h"
+#include "TUT/tut.h"
 
 #include "dataclasses/I3RecoHitTimeWindowSelector.h"
 #include "dataclasses/I3OMGeoListedSelector.h"

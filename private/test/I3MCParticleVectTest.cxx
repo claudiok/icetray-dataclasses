@@ -1,17 +1,17 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCParticleVectTest.cxx,v 1.4 2004/07/26 23:39:10 ehrlich Exp $
+    $Id: I3MCParticleVectTest.cxx,v 1.5 2004/08/09 12:13:10 troy Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/07/26 23:39:10 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/08/09 12:13:10 $
     @author pretz
 
     @todo
 
 */
 
-#include "test/tut.h"
+#include "TUT/tut.h"
 
 //#include "dataclasses/I3MCParticleVect.h"
 #include "dataclasses/I3TrackExtractor.h"

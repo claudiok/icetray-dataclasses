@@ -1,16 +1,16 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: OMKeyTest.cxx,v 1.1 2004/07/31 02:38:00 pretz Exp $
+    $Id: OMKeyTest.cxx,v 1.2 2004/08/09 12:13:10 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/07/31 02:38:00 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/08/09 12:13:10 $
     @author pretz
 
     @todo
 */
 
-#include "test/tut.h"
+#include "TUT/tut.h"
 
 #include "dataclasses/OMKey.h"
 #include "TFile.h"
