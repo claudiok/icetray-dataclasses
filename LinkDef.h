@@ -190,10 +190,6 @@
 #pragma link C++ typedef I3DetectorStatusHeaderPtr;
 #pragma link C++ class I3DigitalReadout+;
 #pragma link C++ typedef I3DigitalReadoutPtr;
-#pragma link C++ class I3DigitalATWDReadout+;
-#pragma link C++ typedef I3DigitalATWDReadoutPtr;
-#pragma link C++ class I3DigitalFADCReadout+;
-#pragma link C++ typedef I3DigitalFADCReadoutPtr;
 #pragma link C++ class I3DigitalTWRReadout+;
 #pragma link C++ typedef I3DigitalTWRReadoutPtr;
 #pragma link C++ class I3Directional+;
