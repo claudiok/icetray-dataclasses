@@ -181,7 +181,7 @@ class I3Track : public TObject
 
 
   unsigned short tracknumber;
-  Type           particletype;
+  Type           particleid;
   float          starttime;
   float          startx;
   float          starty;
@@ -201,43 +201,43 @@ class I3Track : public TObject
            I3Track();
   virtual ~I3Track();
     
-  unsigned short GetTracknumber() const;
-  Type GetParticletype() const;
-  float          GetStarttime() const;
-  float          GetStartx() const;
-  float          GetStarty() const;
-  float          GetStartz() const;
-  float          GetStoptime() const;
-  float          GetStopx() const;
-  float          GetStopy() const;
-  float          GetStopz() const;
+  unsigned short GetTrackNumber() const;
+  Type           GetParticleID() const;
+  float          GetStartTime() const;
+  float          GetStartX() const;
+  float          GetStartY() const;
+  float          GetStartZ() const;
+  float          GetStopTime() const;
+  float          GetStopX() const;
+  float          GetStopY() const;
+  float          GetStopZ() const;
   float          GetLength() const;
   float          GetZenith() const;
   float          GetAzimuth() const;
   float          GetEnergy() const;
 
-  void SetTracknumber(unsigned short tracknumber_);
-  void SetParticletype(Type particletype_);
-  void SetStarttime(float time);
-  void SetStartx(float x);
-  void SetStarty(float y);
-  void SetStartz(float z);
-  void SetStoptime(float time);
-  void SetStopx(float x);
-  void SetStopy(float y);
-  void SetStopz(float z);
+  void SetTrackNumber(unsigned short tracknumber_);
+  void SetParticleID(Type particleid_);
+  void SetStartTime(float time);
+  void SetStartX(float x);
+  void SetStartY(float y);
+  void SetStartZ(float z);
+  void SetStopTime(float time);
+  void SetStopX(float x);
+  void SetStopY(float y);
+  void SetStopZ(float z);
   void SetLength(float length_);
   void SetZenith(float zenith_);
   void SetAzimuth(float azimuth_);
   void SetEnergy(float energy_);
   
-  bool           HasParenttrack() const;
-  const I3Track& GetParenttrack() const;
-  void           SetParenttrack(I3Track& parenttrack_);
+  bool           HasParentTrack() const;
+  const I3Track& GetParentTrack() const;
+  void           SetParentTrack(I3Track& parenttrack_);
 
-  unsigned short GetNumberChildrentracks() const;
-  const I3Track& GetChildrentrack(unsigned short number) const;
-  void           AddChildrentrack(I3Track& childrentrack_);
+  unsigned short GetNumberChildrenTracks() const;
+  const I3Track& GetChildrenTrack(unsigned short number) const;
+  void           AddChildrenTrack(I3Track& childrentrack_);
 
   ClassDef(I3Track, 1);
 };

@@ -1,4 +1,5 @@
 #include "dataclasses/I3OMGeo.h"
+#include <TRef.h>
 
 ClassImp(I3OMGeo);
 
@@ -10,6 +11,7 @@ I3OMGeo::I3OMGeo()
   z=0;
   orientation=0;
   version=0;
+  TRef r=this;
 }
 
 unsigned short I3OMGeo::GetOMNumber() const                   {return(omnumber);}

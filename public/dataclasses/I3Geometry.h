@@ -21,7 +21,7 @@ class I3Geometry : public TObject
 
   int            GetNumberOMGeos() const;
   const I3OMGeo& GetOMGeo(unsigned short index) const;
-  bool HasOMGeoNumber(unsigned short omnumber) const;
+  bool           HasOMGeoNumber(unsigned short omnumber) const;
   const I3OMGeo& FindOMGeo(unsigned short omnumber) const;
   void           AddOMGeo(I3OMGeo* omgeo_);
 
