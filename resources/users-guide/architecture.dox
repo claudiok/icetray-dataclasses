@@ -2,6 +2,12 @@
    @page architecture The theory behind the architecture of the dataclasses.
 
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+
+   @section prerecs Prerequisites
+
+   This document assumes that you have set up the icetray environment and
+   are now ready to (or are already) start writing your own module of
+   some kind.  Full details at @ref index.
    
    @section streams Data Streams, Frames, and Database Records
 
