@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.10 2004/11/10 20:24:15 dule Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.10.14.1 2005/02/22 17:48:10 deyoung Exp $
 
     @file STLVectorStoragePolicy.h
-    @version $Revision: 1.10 $
-    @date $Date: 2004/11/10 20:24:15 $
+    @version $Revision: 1.10.14.1 $
+    @date $Date: 2005/02/22 17:48:10 $
     @author Troy Straszheim
 */
 #ifndef STLVECTOR_POLICY_INCLUDED
@@ -18,7 +18,29 @@ using namespace std;
  * @brief A template container akin to a STL vector but with a slightly 
  * restricted interface
  *
- * Note that the documentation text here comes from the gnu libstdc++3
+ * This template class provides the functionality of an STL vector.
+ * The regular interface to an STL map is available (most of it,
+ * anyway), as well as a more 'physics-y' interface similar to Root
+ * container classes.
+ *
+ * Vectors are containers of objects of a particular type, similar to
+ * arrays in C.  However, vectors do not have a fixed size, but can be
+ * extended dynamically.  They also come with iterators, and can be
+ * used with STL algorithms such as find(), replace(), and
+ * random_shuffle().
+ *
+ * Classes which inherit from this class are vectors, with a particular
+ * @c ElementType (this is the template parameter for this class).
+ * For example, the @c I3PMTPulseVect is a vector of pointers to 
+ * @c I3PMTPulse 's.  All vectors share the same interface,
+ * however, which is provided by this class.  The actual inheritance
+ * in the derived classes is from the @c VectorPolicy, which is
+ * presently set to be the @c STLVectorStoragePolicy.
+ *
+ * See @ref stlsyntax and @ref iterators for more information about
+ * using vectors. 
+ *
+ * The documentation text here comes from the gnu libstdc++3
  * documentaiton at http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/
  *
  */

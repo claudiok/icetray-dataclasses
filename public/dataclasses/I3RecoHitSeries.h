@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.27 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.27.16.1 2005/02/22 17:48:10 deyoung Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.27 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.27.16.1 $
+ * @date $Date: 2005/02/22 17:48:10 $
  * @author ehrlich
  * @author pretz
  */
@@ -18,7 +18,13 @@
 #include <sstream>
 
 /**
- * @brief A list of reco hits.
+ * @brief A list of @c I3RecoHit 's.  
+ *
+ * This class represents a reconstructed series of photoelectrons, or
+ * @em hits, which a particular algorithm believes to have produced the
+ * observed @c I3DataReadout in this @c I3OMResponse.  RecoHitSeries
+ * are produced by hit extraction or feature extraction algorithms,
+ * which try to extract individual PE production times from the readout.
  */
 class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePolicy
 {
@@ -65,7 +71,11 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
 	}
       o<<"]\n";
     }
-
+  
+  /** 
+   * For dumping the RecoHitSeries to a string.  For a C-style string,
+   * use ToString().c_str().
+   */
   virtual string ToString() const
     {
       ostringstream out;

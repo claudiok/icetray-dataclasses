@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.16 2004/12/16 15:41:58 troy Exp $
+    $Id: STLMapStoragePolicy.h,v 1.16.14.1 2005/02/22 17:48:10 deyoung Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.16 $
-    @date $Date: 2004/12/16 15:41:58 $
+    @version $Revision: 1.16.14.1 $
+    @date $Date: 2005/02/22 17:48:10 $
     @author Troy Straszheim
 
 */
@@ -21,25 +21,51 @@ using namespace std;
  * @brief A template which provides a restricted interface to the
  * STL map class.  
  *
- * The text for the documentation of stl methods is taken from the gnu 
+ * This template class provides the functionality of an STL map.  The
+ * regular interface to an STL map is available (most of it, anyway),
+ * as well as a more 'physics-y' interface similar to Root container
+ * classes.
+ *
+ * Maps are containers of objects of a particular type, similar to
+ * vectors or arrays.  However, these objects (the @em elements of the
+ * map) are not stored in a particular order, but rather are indexed
+ * by @em keys which identify each object.  In the dataclasses, the
+ * keys to
+ * a map are usually either strings (names) or @c OMKey 's (the string
+ * number, position on string pair that uniquely identifies each OM).
+ * Because maps are essentially look-up tables, they are also called
+ * @em dictionaries, and the names of (most) map classes in the
+ * dataclasses end with the suffix @c Dict to denote this. 
+ *
+ * Classes which inherit from this class are maps, with a particular
+ * @c KeyType and @c ElementType (these are the template parameters
+ * for this class).  For example, the 
+ * @c I3OMResponseDict is a map of pointers to @c I3OMResponse 's,
+ * indexed by @c OMKey 's.  All maps share the same interface,
+ * however, which is provided by this class.  The actual inheritance
+ * in the derived classes is from the @c MapPolicy, which is presently
+ * set to be the @c STLMapStoragePolicy.
+ *
+ * See @ref stlsyntax and @ref iterators for more information about
+ * using vectors. 
+ *
+ * The text for the documentation of STL methods is taken from the gnu 
  * libstdc++3 documentation
  * found here: http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/
  *
- * @todo fuller documentation needed
  */
 template <class KeyType, class ElementType>
 class STLMapStoragePolicy {
 
  public:
 
- //  typedef string KeyType;
   /**
-   * the stl map corresponding to this one
+   * The particular type of STL map we're dealing with.  For internal use.
    */
   typedef map<KeyType,ElementType> map_type;
 
   /**
-   * the map iterator
+   * An iterator over the map.
    */
   typedef typename map_type::iterator iterator;
 
@@ -49,7 +75,7 @@ class STLMapStoragePolicy {
   typedef typename map_type::const_iterator const_iterator;
 
   /**
-   * A type for the size of the map.
+   * A type for the size of the map.  For internal use.
    */
   typedef typename map_type::size_type size_type;
 
@@ -84,12 +110,12 @@ class STLMapStoragePolicy {
   ElementType& operator[](const KeyType& key) { return map_[key]; }
 
   /**
-   * The same as operator[]
+   * The same as operator[] -- provides access to a particular data element.
    */
   ElementType& Get(const KeyType& key) {return map_[key];}
 
   /**
-   * puts some data in the map with a particular key.  
+   * Puts some data in the map with a particular key.  
    * @param element the data to be copied into the map
    * @param key the key used to retrieve the data
    * @return true if the key isn't already used and the put succeeds,
@@ -108,7 +134,7 @@ class STLMapStoragePolicy {
   //  const ElementType& operator[](const KeyType& key) const { return map_[key]; }
 
   /**
-   * the same as begin()
+   * The same as begin()
    */
   iterator Begin() { return map_.begin();}
 
@@ -119,18 +145,20 @@ class STLMapStoragePolicy {
   iterator begin() { return map_.begin(); }
 
   /**
-   * the same as begin() const
+   * The same as the const version of begin()
    */
   const_iterator Begin() const { return map_.begin();}
 
   /**
    * Returns a read-only (constant) iterator that points to the first pair 
-   * in the map. Iteration is done in ascending order according to the keys
+   * in the map. Iteration is done in ascending order according to the
+   * keys.  This is the version of begin() that is executed if a
+   * const_iterator is requested.
    */
   const_iterator begin() const { return map_.begin(); }
 
   /**
-   * the same as end
+   * The same as end()
    */
   iterator End() {return map_.end();}
 
@@ -141,7 +169,7 @@ class STLMapStoragePolicy {
   iterator end() { return map_.end(); }
 
   /**
-   * the same as end() const
+   * The same as the const version of end()
    */
   const_iterator End() const { return map_.end();}
 
@@ -153,17 +181,17 @@ class STLMapStoragePolicy {
   const_iterator end() const { return map_.end(); }
 
   /**
-   * same as empty()
+   * The same as empty()
    */
   bool IsEmpty() const {return map_.empty();}
 
   /**
-   * Returns true if the map is empty. (Thus begin() would equal end().)
+   * Returns true if the map is empty.  (Thus begin() would equal end().)
    */
   bool empty() const { return map_.empty(); }
   
   /**
-   * the same as clear()
+   * The same as clear()
    */
   void Clear() { map_.clear();}
   
@@ -171,12 +199,13 @@ class STLMapStoragePolicy {
    * Erases all elements in a map. Note that this function only erases the 
    * elements, and that if the elements themselves are pointers, the 
    * pointed-to memory is not touched in any way. Managing the pointer is 
-   * the user's responsibilty.
+   * the user's responsibilty, but if smart pointers are being used
+   * the memory will be automatically deallocated if appropriate.
    */
   void clear() { map_.clear(); }
 
   /**
-   * same as size()
+   * The same as size()
    */
   size_type GetSize() const {return map_.size();}
 
@@ -186,7 +215,7 @@ class STLMapStoragePolicy {
   size_type size() const { return map_.size(); }
 
   /**
-   * same as max_size()
+   * The same as max_size()
    */
   size_type GetMaxSize() const {return map_.max_size();}
 
@@ -196,7 +225,7 @@ class STLMapStoragePolicy {
   size_type max_size() const { return map_.max_size(); }
 
   /**
-   * same as erase()
+   * The same as erase()
    */
   size_type Erase(const KeyType& key) { return map_.erase(key);}
 
@@ -208,7 +237,7 @@ class STLMapStoragePolicy {
   size_type erase(const KeyType &key) { return map_.erase(key); }
 
   /**
-   * same as find()
+   * The same as find()
    */
 
   iterator Find(const KeyType& key) { return map_.find(key);}

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.22 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3Hit.h,v 1.22.14.1 2005/02/22 17:48:10 deyoung Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.22.14.1 $
+ * @date $Date: 2005/02/22 17:48:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -87,7 +87,7 @@ public:
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ "<<IsA()->GetName()<<": Time:"<<fTime<<" ]\n";
+      o<<"[ "<<IsA()->GetName()<<": Time: "<<fTime<<" ID: "<<fHitID<<" ]\n";
     }
 
   virtual string ToString() const

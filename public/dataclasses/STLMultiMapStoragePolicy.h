@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMultiMapStoragePolicy.h,v 1.5 2005/01/24 23:17:44 ehrlich Exp $
+    $Id: STLMultiMapStoragePolicy.h,v 1.5.12.1 2005/02/22 17:48:10 deyoung Exp $
 
     @file STLMultiMapStoragePolicy.h
-    @version $Revision: 1.5 $
-    @date $Date: 2005/01/24 23:17:44 $
+    @version $Revision: 1.5.12.1 $
+    @date $Date: 2005/02/22 17:48:10 $
     @author Ralf Ehrlich
 
 */
@@ -21,12 +21,30 @@ using namespace std;
  * @brief A template which provides a restricted interface to the
  * STL multimap class.
  *
+ * This template class provides the functionality of an STL multimap.
+ * The regular interface to an STL multimap is available,
+ * as well as a more 'physics-y' interface similar to Root container
+ * classes.
+ *
+ * Multimaps are containers of objects of a particular type, similar to
+ * maps (see the @c STLMapStoragePolicy for more details).  
+ * @em Elements of a multimap are indexed by @em keys which identify
+ * each object.  Unlike a map, however, these keys need not be unique:
+ * the keys identify categories of objects rather than a single
+ * object.  For example, in the @c I3ParticleMultiMap 's in 
+ * @c I3MCParticleData, the keys identify the parent event of a
+ * particle; in an overlapping muon event the particles produced in
+ * the first air shower will have one key, the particles from the
+ * second shower will have a different key.
+ *
+ * See @ref stlsyntax and @ref iterators for more information about
+ * using multimaps. 
+ *
  * The text for the documentation of stl methods is taken from the gnu
  * libstdc++3 documentation
  * found here: http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/
  *
- * @todo fuller documentation needed
- */
+  */
 template <class KeyType, class ElementType>
 class STLMultiMapStoragePolicy {
 
