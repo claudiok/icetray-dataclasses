@@ -152,15 +152,26 @@ public:
    There are two basic types of containers found in the data classes.
    Following STL nomenclature these are called 'maps' and 'vectors.'
    Vectors are simply ordered lists, like C arrays.  Each element in a
-   vector has a unique index number.  Maps are like vectors, except
+   vector has a unique index number.  Vectors should be used where
+   the items are naturally identified by number, like lists of OMs or
+   hits.  
+
+   Maps are like vectors, except
    that each element is identified by name rather than by number.  The
-   syntax of addressing a particular element is the same, except that
-   the index "number" of a map is actually a string, for example
-   <code>recoResult["muonReco"]</code>.  STL provides basic methods
+   syntax of addressing a particular element is the same as for
+   vectors, except that the index "number" of a map is actually a
+   string, for example
+   <code>recoResult["muonReco"]</code>.   Maps should be used where
+   the items have some more general identity, as with the results of
+   reconstruction algorithms ("@c linefit", "@c JAMS", etc.) or the
+   particular solutions found by a reconstruction 
+   ("@c best-upgoing"). 
+
+   STL provides basic methods
    for doing things like iterating over each element in a list, adding
    elements to a list, and so forth, which also incorporate basic
    error checking.  Developers are encouraged to use these features in
-   their code.  A short tutorial is available at @ref STL-containers.
+   their code.  A short tutorial is available at @ref stlsyntax.
 
    @section pointers Pointers and references to data
 
@@ -193,9 +204,8 @@ public:
 
    Pointers to each class are typedef'd, for example @c TObjectPtr.
    Developers are strongly encouraged to use these typedefs.  These
-   will allow us to globally introduce smart pointers or other special
-   implementations to perform automatic garbage collection and so
-   forth and will contribute to world peace.
+   will allow us to globally introduce smart pointers if necessary;
+   see @ref memorymanagement for more information.
 
    @section root A note regarding Root
    
