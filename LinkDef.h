@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.146 2005/02/07 17:21:00 tmccauley Exp $
-// $Revision: 1.146 $
-// $Date: 2005/02/07 17:21:00 $
+// $Id: LinkDef.h,v 1.147 2005/02/08 20:04:27 deyoung Exp $
+// $Revision: 1.147 $
+// $Date: 2005/02/08 20:04:27 $
 //
 
 #ifdef __CINT__
@@ -469,6 +469,10 @@
 #pragma link C++ class MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy+;
 #pragma link C++ typedef I3OMSelectionDictPtr;
 #pragma link C++ class roost::shared_ptr<I3OMSelectionDict>+;
+
+#pragma link C++ class I3OMListSelection+;
+#pragma link C++ typedef I3OMListSelectionPtr;
+#pragma link C++ class roost::shared_ptr<I3OMListSelection>+;
 
 #pragma link C++ class I3OddOMSelection+;
 #pragma link C++ typedef I3OddOMSelectionPtr;

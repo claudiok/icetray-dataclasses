@@ -1,30 +1,30 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.7 2005/02/03 22:51:53 deyoung Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.8 2005/02/08 20:04:27 deyoung Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/02/03 22:51:53 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/02/08 20:04:27 $
  * @author deyoung
  */
 
 #ifndef I3GOODOMSELECTION_H_INCLUDED
 #define I3GOODOMSELECTION_H_INCLUDED
 
-#include "I3OMResponseSelection.h"
+#include "I3OMListSelection.h"
 
 class I3GoodOMSelection;
 typedef PtrPolicy<I3GoodOMSelection>::ThePolicy I3GoodOMSelectionPtr;
 
-class I3GoodOMSelection : public I3OMResponseSelection {
+class I3GoodOMSelection : public I3OMListSelection {
 
 public:
   
   I3GoodOMSelection() {};
   
-  I3GoodOMSelection(const VectorPolicy<OMKey>::ThePolicy &list) 
-    : goodOMs(list) {};
+  I3GoodOMSelection(const VectorPolicy<OMKey>::ThePolicy &theList) 
+    : I3OMListSelection(theList) {};
   
   virtual ~I3GoodOMSelection() {};
  
@@ -35,26 +35,30 @@ public:
    */
   virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) 
     {
-      if (find(goodOMs.begin(), goodOMs.end(), element.first) != goodOMs.end())
-	return true;
-      else
-	return false;
+//       if (find(omList_.begin(), omList_.end(), element.first) != omList_.end())
+// 	return true;
+//       else
+// 	return false;
+      return I3OMListSelection::operator()(element);
     };
   
   VectorPolicy<OMKey>::ThePolicy GetGoodOMs() const {
-    return goodOMs;
+    //    return omList_;
+    return I3OMListSelection::GetOMList();
   };
   
   virtual void SetGoodOMs(const VectorPolicy<OMKey>::ThePolicy& good_list) {
-    if (goodOMs.Size() > 0) {
-      log_warn("Overwriting list of good OMs.");
-      goodOMs.Clear();
-    }
-    goodOMs = good_list;
+//     if (omList_.Size() > 0) {
+//       log_warn("Overwriting list of OMs.");
+//       omList_.Clear();
+//     }
+//     omList_ = good_list;
+    I3OMListSelection::SetOMList(good_list);
   }
   
   virtual void AddGoodOM(OMKey key) {
-    goodOMs.Add(key);
+    //    omList_.Add(key);
+    I3OMListSelection::AddOM(key);
   }
 
   virtual I3OMResponseSelectionPtr GetCopy() 
@@ -64,19 +68,14 @@ public:
 
   virtual void ToStream(ostream& o) const {
     o << "[ I3GoodOMSelection: \n";
-    o << "  Good OMs: \n";
-    VectorPolicy<OMKey>::ThePolicy::const_iterator iter;
-    for(iter = goodOMs.begin(); iter != goodOMs.end(); iter++) {
-      o << *iter << "\n";
-    }
-    o << "]\n";
+    I3OMListSelection::ToStream(o);
   }
 
   // default-generated assignment and copy-constructor explicitly allowed
 
 private:
 
-  VectorPolicy<OMKey>::ThePolicy goodOMs;
+  //  VectorPolicy<OMKey>::ThePolicy omList_;
   
   ClassDef(I3GoodOMSelection,1);
 };

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.7 2005/02/03 22:35:29 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.8 2005/02/08 20:04:27 deyoung Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/02/03 22:35:29 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/02/08 20:04:27 $
  * @author deyoung
  * @author troy
  */
@@ -16,6 +16,7 @@
 #include <TObject.h>
 #include "I3OMResponse.h"
 #include "OMKey.h"
+#include "I3OMResponseMap.h"
 
 using namespace std;
 

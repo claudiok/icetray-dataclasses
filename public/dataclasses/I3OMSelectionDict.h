@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.5 2005/02/04 17:20:02 deyoung Exp $
+ * $Id: I3OMSelectionDict.h,v 1.6 2005/02/08 20:04:27 deyoung Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/02/04 17:20:02 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/02/08 20:04:27 $
  * @author deyoung
  * @author troy
  */
@@ -61,6 +61,7 @@ class I3OMSelectionDict : public TObject,
     // to the calling module, leading to a seg fault.  For now I'll
     // use the original selection, which is fine as long as nobody
     // changes its state dynamically. 
+    log_debug("Param name is %s", name.c_str());
     if (name.empty()) {
       // I should return a selector based on a base-class
       // I3OMResponseSelection.  But I need to create it dynamically
@@ -69,16 +70,21 @@ class I3OMSelectionDict : public TObject,
       // pop one off and release it, but for now I'll add it to the
       // map under a hidden name, after first checking whether it's
       // already there.
+      log_debug("Entering empty block");
       I3OMSelectionDict::iterator iter = find("_IGNORE_ME_"); 
       if (iter == end()) {
+	log_debug("No dummy selection found");
 	I3OMResponseSelectionPtr dummy(new I3OMResponseSelection);
 	(*this)["_IGNORE_ME_"] = dummy;
+      } else {
+	log_debug("Using existing dummy.");
       }
 
       I3OMResponseSelectionPtr selection = (*this)["_IGNORE_ME_"];
       return I3OMSelector(boost::make_filter_iterator<I3OMResponseSelection>
       			  (*selection, map.begin(),map.end()));
     } else {
+      log_debug("Dummy selection already exists.");
       I3OMResponseSelectionPtr selection = (*this)[name];
       return I3OMSelector(boost::make_filter_iterator<I3OMResponseSelection>
 			  (*selection, map.begin(),map.end()));
@@ -112,6 +118,8 @@ class I3OMSelectionDict : public TObject,
   }  
 
  private:
+
+  SET_LOGGER("Selectors");
 
   // ROOT macro
   ClassDef(I3OMSelectionDict,1);
