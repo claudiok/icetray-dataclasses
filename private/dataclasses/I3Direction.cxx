@@ -1,11 +1,13 @@
 
-// $Id: I3Direction.cxx,v 1.5 2004/09/21 21:25:03 dule Exp $
+// $Id: I3Direction.cxx,v 1.6 2004/10/27 14:39:42 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Constants.h"
+#include "dataclasses/I3Units.h"
 
 using namespace I3Constants;
+using namespace I3Units;
 
 ClassImp(I3Direction) // Class implementation to enable ROOT I/O
 
@@ -135,9 +137,10 @@ void I3Direction::RotateZ(Double_t angle)
 void I3Direction::ToStream(ostream& o) const
 {
   o <<"---------------------DIRECTION-INFO-----------------------\n"
-    <<"SPH coord (zen,azi): "<< GetZenith()<<" "<<GetAzimuth()<<"\n"
+    <<"SPH coord (zen,azi): "<< GetZenith()/deg<<"deg "
+    <<GetAzimuth()/deg<<"deg\n"
     <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
-    <<"---------------------------------------------------------\n";
+    <<"----------------------------------------------------------\n";
 }
 
 //-----------------------------------------------------------

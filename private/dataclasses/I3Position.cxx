@@ -1,11 +1,13 @@
 
-// $Id: I3Position.cxx,v 1.11 2004/09/21 21:24:03 dule Exp $
+// $Id: I3Position.cxx,v 1.12 2004/10/27 14:39:42 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Constants.h"
+#include "dataclasses/I3Units.h"
 
 using namespace I3Constants;
+using namespace I3Units;
 
 ClassImp(I3Position) // Class implementation to enable ROOT I/O
 
@@ -161,8 +163,10 @@ void I3Position::ToStream(ostream& o) const
 {
   o <<"---------------------POSITION-INFO-----------------------\n"
     <<"CAR coord(x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
-    <<"SPH coord(r,theta,phi): "<< GetR()<<" "<<GetTheta()<<" "<<GetPhi()<<"\n"
-    <<"CYL coord(rho,phi,z): "<< GetRho()<<" "<<GetPhi()<<" "<<GetZ()<<"\n"
+    <<"SPH coord(r,theta,phi): "<< GetR()<<" "<<GetTheta()/deg<<"deg "
+    <<GetPhi()/deg<<"deg\n"
+    <<"CYL coord(rho,phi,z): "<< GetRho()<<" "<<GetPhi()/deg<<"deg "
+    <<GetZ()<<"\n"
     <<"---------------------------------------------------------\n";
 }
 
