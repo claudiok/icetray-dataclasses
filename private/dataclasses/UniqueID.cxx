@@ -2,7 +2,7 @@
 
 ClassImp(UniqueID);
 
-void ParticleID(I3Particle *particle, UniqueID::IDOption option, Int_t &highestID)
+void ParticleID(I3ParticlePtr particle, UniqueID::IDOption option, Int_t &highestID)
 {
   if(option==UniqueID::SET_ALL_NULL) particle->SetParticleID(0);
   Int_t id=particle->GetParticleID();
@@ -10,12 +10,12 @@ void ParticleID(I3Particle *particle, UniqueID::IDOption option, Int_t &highestI
   if(option==UniqueID::SET_ALL_UNIQUE_ID && id==0) particle->SetParticleID(++highestID);
 }
 
-Int_t UniqueID::ID(TObject *obj, IDOption option)
+Int_t UniqueID::ID(TObjectPtr obj, IDOption option)
 {
   return(0);
 }
 
-Int_t UniqueID::ID(I3MCEvent *obj, IDOption option)
+Int_t UniqueID::ID(I3MCEventPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
@@ -46,7 +46,7 @@ Int_t UniqueID::ID(I3MCEvent *obj, IDOption option)
   return(highestID+1);
 }
 
-Int_t UniqueID::ID(I3MCParticleData *obj, IDOption option)
+Int_t UniqueID::ID(I3MCParticleDataPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
@@ -61,7 +61,7 @@ Int_t UniqueID::ID(I3MCParticleData *obj, IDOption option)
   return(highestID+1);
 }
 
-Int_t UniqueID::ID(I3MCParticleMultiMap *obj, IDOption option)
+Int_t UniqueID::ID(I3MCParticleMultiMapPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
@@ -71,7 +71,7 @@ Int_t UniqueID::ID(I3MCParticleMultiMap *obj, IDOption option)
   return(highestID+1);
 }
 
-Int_t UniqueID::ID(I3Event *obj, IDOption option)
+Int_t UniqueID::ID(I3EventPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
@@ -93,7 +93,7 @@ Int_t UniqueID::ID(I3Event *obj, IDOption option)
   return(highestID+1);
 }
 
-Int_t UniqueID::ID(I3RecoResultDict *obj, IDOption option)
+Int_t UniqueID::ID(I3RecoResultDictPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
@@ -114,7 +114,7 @@ Int_t UniqueID::ID(I3RecoResultDict *obj, IDOption option)
   return(highestID+1);
 }
 
-Int_t UniqueID::ID(I3RecoResult *obj, IDOption option)
+Int_t UniqueID::ID(I3RecoResultPtr obj, IDOption option)
 {
   Int_t highestID=0;
   
@@ -130,7 +130,7 @@ Int_t UniqueID::ID(I3RecoResult *obj, IDOption option)
   return(highestID+1);
 }
 
-Int_t UniqueID::ID(I3Particle *obj, IDOption option)
+Int_t UniqueID::ID(I3ParticlePtr obj, IDOption option)
 {
   Int_t highestID=0;
   ParticleID(obj, option, highestID);
