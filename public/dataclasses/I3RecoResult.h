@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.25 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.26 2004/07/12 15:30:49 pretz Exp $
  *
  * @file I3RecoResult.h
- * @version $Revision: 1.25 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.26 $
+ * @date $Date: 2004/07/12 15:30:49 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,6 +15,8 @@
 
 #include <TObject.h>
 #include "StoragePolicy.h"
+#include <TClass.h>
+#include <iostream>
 
 /**
  *
@@ -36,6 +38,11 @@ class I3RecoResult : public TObject
    */
   virtual ~I3RecoResult() {}
 
+  virtual void ToStream(ostream& o)
+    {
+      o<<"[ "<<IsA()->GetName()<<" ]\n";
+    }
+
  private:
   // copy and assignment are private
   I3RecoResult(const I3RecoResult& rhs);
@@ -44,6 +51,12 @@ class I3RecoResult : public TObject
   // ROOT macro
   ClassDef(I3RecoResult, 1);
 };
+
+inline ostream& operator<<(ostream& o,I3RecoResult& result)
+{
+  result.ToStream(o);
+  return o;
+}
 
 typedef PtrPolicy<I3RecoResult>::ThePolicy I3RecoResultPtr;
 

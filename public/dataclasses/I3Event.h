@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.29 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3Event.h,v 1.30 2004/07/12 15:30:49 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.29 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.30 $
+ * @date $Date: 2004/07/12 15:30:49 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -102,6 +102,7 @@ class I3Event : public TObject
        <<fTriggerData
        <<fFilterData
        <<fOMResponseVect
+       <<fRecoResultDict
        <<"]\n";
     }
 

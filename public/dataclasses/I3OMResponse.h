@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.31 2004/07/12 12:23:11 pretz Exp $
+    $Id: I3OMResponse.h,v 1.32 2004/07/12 15:30:49 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.31 $
-    @date $Date: 2004/07/12 12:23:11 $
+    @version $Revision: 1.32 $
+    @date $Date: 2004/07/12 15:30:49 $
     @author ehrlich
     @author troy
     @author pretz
@@ -88,7 +88,9 @@ class I3OMResponse : public TObject
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ I3OMResponse ]\n";
+      o<<"[ I3OMResponse\n"
+       <<fDataReadoutDict
+       <<"]";
     }
 
   private:

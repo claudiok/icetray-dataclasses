@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.22 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Geometry.h,v 1.23 2004/07/12 15:30:49 pretz Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/07/12 15:30:49 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -59,6 +59,14 @@ class I3Geometry : public TObject
    */
   I3TopGeometry& GetIceTopGeometry() { return fTop; }
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3Geometry\n"
+       <<fInIce
+	//<<fIceTopGeometry
+       <<"]\n";
+    }
+
  private:
   // copy and assignment private
   I3Geometry(const I3Geometry& rhs);
@@ -67,6 +75,12 @@ class I3Geometry : public TObject
   //ROOT macro
   ClassDef(I3Geometry,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3Geometry& geo)
+{
+  geo.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the

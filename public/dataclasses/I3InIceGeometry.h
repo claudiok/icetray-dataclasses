@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.14 2004/07/07 19:05:57 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.15 2004/07/12 15:30:49 pretz Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/07/07 19:05:57 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/07/12 15:30:49 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -51,6 +51,23 @@ class I3InIceGeometry : public TObject, public map<OMKey,I3OMGeoPtr>
   // ROOT macro
   ClassDef(I3InIceGeometry,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3InIceGeometry& v)
+{
+  o<<"[ I3InIceGeometry: \n";
+  I3InIceGeometry::const_iterator iter;
+  for(iter=v.begin();iter!=v.end();iter++)
+    {
+      o<<iter->first;
+      if(iter->second==I3OMGeoPtr((I3OMGeo*)0))
+	o<<"Null I3OMGeo";
+      else
+	o<<*(iter->second);
+    }
+  o<<"]\n";
+  return o;
+   
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.1 2004/07/07 19:05:57 pretz Exp $
+ * $Id: OMKey.h,v 1.2 2004/07/12 15:30:49 pretz Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/07 19:05:57 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/12 15:30:49 $
  * @author pretz
  */
 
@@ -62,5 +62,11 @@ class OMKey : public pair<int,unsigned int>
   //  int operator>(const OMKey& key) {return fKey.operator>(key.fKey);}
 
 };
+
+inline ostream& operator<<(ostream& o,const OMKey& key)
+{
+  o<<"("<<key.first<<","<<key.second<<")";
+  return o;
+}
 
 #endif

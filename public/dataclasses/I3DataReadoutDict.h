@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.2 2004/07/03 18:40:57 troy Exp $
+ * $Id: I3DataReadoutDict.h,v 1.3 2004/07/12 15:30:49 pretz Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/03 18:40:57 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/12 15:30:49 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -42,6 +42,23 @@ class I3DataReadoutDict : public TObject, public MapPolicy<I3DataReadoutPtr>::Th
   // ROOT macro
   ClassDef(I3DataReadoutDict,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3DataReadoutDict& v)
+{
+  o<<"[ I3DataReadoutDict: \n";
+  I3DataReadoutDict::const_iterator iter;
+  for(iter=v.begin();iter!=v.end();iter++)
+    {
+      o<<iter->first;
+      if(iter->second==I3DataReadoutPtr((I3DataReadout*)0))
+	o<<"Null I3DataReadout";
+      else
+	o<<*(iter->second);
+    }
+  o<<"]\n";
+  return o;
+   
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

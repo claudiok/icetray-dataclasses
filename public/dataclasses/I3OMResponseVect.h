@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseVect.h,v 1.4 2004/07/12 12:45:17 pretz Exp $
+ * $Id: I3OMResponseVect.h,v 1.5 2004/07/12 15:30:49 pretz Exp $
  *
  * @file I3OMResponseVect.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/12 12:45:17 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/12 15:30:49 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -64,6 +64,7 @@ class I3OMResponseVect : public TObject, public VectorPolicy<I3OMResponsePtr>::T
 
 inline ostream& operator<<(ostream& o,const I3OMResponseVect& v)
 {
+  o<<"[ I3OMResponseVect: \n";
   I3OMResponseVect::const_iterator iter;
   for(iter=v.begin();iter!=v.end();iter++)
     {
@@ -72,6 +73,7 @@ inline ostream& operator<<(ostream& o,const I3OMResponseVect& v)
       else
 	o<<**iter;
     }
+  o<<"]\n";
   return o;
    
 }
