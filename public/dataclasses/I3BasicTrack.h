@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.1.2.4 2004/04/14 16:39:07 pretz Exp $
+    $Id: I3BasicTrack.h,v 1.1.2.5 2004/04/15 10:47:04 troy Exp $
 
-    @version $Revision: 1.1.2.4 $
-    @date $Date: 2004/04/14 16:39:07 $
+    @version $Revision: 1.1.2.5 $
+    @date $Date: 2004/04/15 10:47:04 $
     @author
 
     @todo
@@ -56,7 +56,7 @@ class I3BasicTrack : public I3Track
   virtual bool IsBounded()  { return !isinf(Length()) && !isnan(Length()) && Length() != 0; }
   virtual bool IsUnbounded() { return Length() == 0; }
 
-  virtual void ToStream (std::ostream &s) const{s<<"A Basic Track\n";}
+  virtual void ToStream (std::ostream &s) const;
 
   ClassDef(I3BasicTrack, 1);
 };

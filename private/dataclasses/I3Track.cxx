@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.12.2.2 2004/04/15 10:33:19 troy Exp $
+    $Id: I3Track.cxx,v 1.12.2.3 2004/04/15 10:47:04 troy Exp $
 
-    @version $Revision: 1.12.2.2 $
-    @date $Date: 2004/04/15 10:33:19 $
+    @version $Revision: 1.12.2.3 $
+    @date $Date: 2004/04/15 10:47:04 $
     @author
 
     @todo
@@ -27,7 +27,7 @@ I3Track::operator=(const I3Track& rhs)
 {
   if (this == &rhs) return *this;
   
-  // David wants also a "conditional copy" operator that copies only if source fields
+  // Some want also a "conditional copy" operator that copies only if source fields
   // are not NAN.  Use something funky like "operator<-" ???  Hahahahahahha....
 
   // This assignment operator is not virtual, but these assignments
