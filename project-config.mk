@@ -13,3 +13,7 @@ USES_PROJECTS := icetray
 USES_TOOLS := root log4cplus roost TUT
 
 BUILD_FLAVOR := root
+
+DOXYFILE_EXAMPLE_PATH = resources/docs
+DOXYFILE_IMAGE_PATH = resources/docs
+
