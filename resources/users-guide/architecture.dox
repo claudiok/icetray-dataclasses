@@ -165,9 +165,9 @@ public:
    string, for example
    <code>recoResult["muonReco"]</code>.   Maps should be used where
    the items have some more general identity, as with the results of
-   reconstruction algorithms ("@c linefit", "@c JAMS", etc.) or the
+   reconstruction algorithms (@c "linefit", @c "JAMS", etc.) or the
    particular solutions found by a reconstruction 
-   ("@c best-upgoing"). 
+   (@c "best-upgoing"). 
 
    STL provides basic methods
    for doing things like iterating over each element in a list, adding
@@ -176,8 +176,6 @@ public:
    their code.  A short tutorial is available at @ref stlsyntax.
 
    @section pointers Pointers and references to data
-
-   @todo *** TALKING OUT OF ASS ***
 
    In general much of the data relies on context: a reconstruction may
    store information about what hits were used in the fit, but those
