@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.9 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3MCOMResponse.h,v 1.10 2004/11/24 18:44:30 pretz Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.9 $
-    @date $Date: 2004/07/19 16:46:01 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/11/24 18:44:30 $
     @author ehrlich
     @author troy
     @author pretz
@@ -88,6 +88,17 @@ class I3MCOMResponse : public I3OMResponse
    * @return the MC Photon Vect for this om response
    */
   I3MCPhotonVect& GetMCPhotonVect() { return fMCPhotonVect;}
+
+  /**
+   * dumps the MCOMResponse to the given ostream
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      I3OMResponse::ToStream(o);
+      o<<fMCHitSeries<<"\n"
+       <<fMCPMTResponse<<"\n"
+       <<fMCPhotonVect<<"\n";
+    }
 
   private:
   // copy and assignment are private
