@@ -202,6 +202,8 @@
 #pragma link C++ typedef I3MonitoringPtr;
 #pragma link C++ class I3MonitoringHeader+;
 #pragma link C++ typedef I3MonitoringHeaderPtr;
+#pragma link C++ class I3MultiTrackRecoResult;
+#pragma link C++ typedef I3MultiTrackRecoResultPtr;
 #pragma link C++ class I3OMGeo+;
 
 #pragma link C++ class I3OMGeoAmanda+;
@@ -233,6 +235,8 @@
 #pragma link C++ typedef I3RecoResultPtr;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ typedef I3RecoResultLikelihoodPtr;
+#pragma link C++ class I3RecoResultRDMCFit+;
+#pragma link C++ typedef I3RecoResultRDMCFitPtr;
 #pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
 #pragma link C++ class I3RecoTrack+;
