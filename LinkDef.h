@@ -58,6 +58,7 @@
 #pragma link C++ function operator!=(const I3RecoTrackList::iterator&, const I3RecoTrackList::iterator&);
 #pragma link C++ typedef I3RecoTrackListPtr;
 
+
 #pragma link C++ class I3AnalogSeries+;
 #pragma link C++ class I3AnalogSeries::iterator+;
 #pragma link C++ typedef VectorPolicy<I3Analog>::ThePolicy;
