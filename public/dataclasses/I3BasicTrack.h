@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.1.2.7 2004/04/16 18:35:02 pretz Exp $
+    $Id: I3BasicTrack.h,v 1.1.2.8 2004/04/19 20:39:40 pretz Exp $
 
-    @version $Revision: 1.1.2.7 $
-    @date $Date: 2004/04/16 18:35:02 $
+    @version $Revision: 1.1.2.8 $
+    @date $Date: 2004/04/19 20:39:40 $
     @author
 
     @todo
@@ -19,7 +19,6 @@
 #include "I3Identifiable.h"
 #include "I3Starting.h"
 #include "I3Energetic.h"
-#include "I3Relativistic.h"
 #include "I3NonComposite.h"
 
 #ifndef I3BASICTRACK_H

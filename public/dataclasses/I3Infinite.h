@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include "I3Units.h"
+#include "NanPolicy.h"
 
 class I3Infinite{
  private:
@@ -17,17 +18,45 @@ class I3Infinite{
   bool IsStopping() const {return false;}
   bool IsDirectional() const {return true;}
 
-  double StartX() const {return NAN;}
-  void StartX(double startx){return;}
+  double StartX() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StartX(double startx)
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StartY() const {return NAN;}
-  void StartY(double starty){return;}
+  double StartY() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StartY(double starty)
+    {
+      NanPolicy::Fatal();
+    }
   
-  double StartZ() const {return NAN;}
-  void StartZ(double startz) {return;}
+  double StartZ() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StartZ(double startz) 
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StartT() const {return NAN;}
-  void StartT(double startt) {return;}
+  double StartT() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StartT(double startt) 
+    {
+      NanPolicy::Fatal();
+    }
 
   double X() const {return fX;}
   void X(double x) {fX = x;}
@@ -50,17 +79,45 @@ class I3Infinite{
   double Length() const {return INFINITY;}
   void Length(double) {return;}
 
-  double StopX() const {return NAN;}
-  void StopX(double) {return;}
+  double StopX() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopX(double) 
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StopY() const {return NAN;}
-  void StopY(double) {return;}
+  double StopY() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopY(double) 
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StopZ() const {return NAN;}
-  void StopZ(double) {return;}
+  double StopZ() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopZ(double) 
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StopT() const {return NAN;}
-  void StopT(double) {return;}
+  double StopT() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopT(double)
+    {
+      NanPolicy::Fatal();
+    }
 
   double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
   void Speed(double) {return;}

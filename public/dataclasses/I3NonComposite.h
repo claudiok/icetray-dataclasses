@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "I3Particle.h"
+#include "NanPolicy.h"
 
 /**
  * @todo implement fatal call if out of bounds
@@ -17,9 +18,14 @@ class I3NonComposite
 
   bool IsComposite() const {return false;}
 
-  int NumConstituents() const {return 0;}
+  int NumConstituents() const 
+    {
+      NanPolicy::Fatal();
+      return 0;
+    }
   const I3Particle& Constituent(int i) const 
     {
+      NanPolicy::Fatal();
       return *(I3Particle*)0;
     }
   void CopyTo(I3Particle& destination) const {}

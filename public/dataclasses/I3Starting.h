@@ -5,6 +5,8 @@
 #include "I3Units.h"
 #include "I3Particle.h"
 
+#include "NanPolicy.h"
+
 class I3Starting{
  private:
   double fStartX;
@@ -51,17 +53,42 @@ class I3Starting{
   double Length() const {return INFINITY;}
   void Length(double) {return;}
 
-  double StopX() const {return NAN;}
-  void StopX(double) {return;}
+  double StopX() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopX(double) 
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StopY() const {return NAN;}
+  double StopY() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
   void StopY(double) {return;}
 
-  double StopZ() const {return NAN;}
-  void StopZ(double) {return;}
+  double StopZ() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopZ(double) 
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StopT() const {return NAN;}
-  void StopT(double) {return;}
+  double StopT() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StopT(double) 
+    {
+      NanPolicy::Fatal();
+    }
 
   double Speed() const {return 300000000 * I3Units::m / I3Units::s;}
   void Speed(double) {return;}
@@ -76,6 +103,8 @@ class I3Starting{
       starting->fAzimuth = fAzimuth;
     }
   }
+
+ protected:
 
   ClassDef(I3Starting,1)
 };

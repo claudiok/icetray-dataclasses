@@ -207,7 +207,6 @@
 #pragma link C++ class I3MultiTrackRecoResult;
 #pragma link C++ typedef I3MultiTrackRecoResultPtr;
 #pragma link C++ class I3NonIdentifiable+;
-#pragma link C++ class I3NonRelativistic+;
 #pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonComposite+;
 #pragma link C++ class I3NonEnergetic+;
@@ -251,7 +250,6 @@
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ typedef I3RecoTrackPtr;
-#pragma link C++ class I3Relativistic;
 #pragma link C++ class I3SLCReadout+;
 #pragma link C++ typedef I3SLCReadoutPtr;
 #pragma link C++ class I3Starting+;

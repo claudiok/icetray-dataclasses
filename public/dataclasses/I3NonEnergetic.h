@@ -3,14 +3,22 @@
 
 #include "Rtypes.h"
 #include <cmath>
+#include "NanPolicy.h"
 
 class I3NonEnergetic
 {
  public:
   bool IsEnergetic() const {return false;}
 
-  double Energy() const {return NAN;}
-  void Energy(double energy) {return;}
+  double Energy() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void Energy(double energy) 
+    {
+      NanPolicy::Fatal();
+    }
 
   void CopyTo(I3Particle&) {}
 

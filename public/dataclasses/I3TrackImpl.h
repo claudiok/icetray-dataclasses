@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TrackImpl.h,v 1.1.2.3 2004/04/19 18:09:53 pretz Exp $
+    $Id: I3TrackImpl.h,v 1.1.2.4 2004/04/19 20:39:40 pretz Exp $
 
-    @version $Revision: 1.1.2.3 $
-    @date $Date: 2004/04/19 18:09:53 $
+    @version $Revision: 1.1.2.4 $
+    @date $Date: 2004/04/19 20:39:40 $
     @author
 
     @todo
@@ -139,8 +139,12 @@ class I3TrackImpl : public I3Track,
       EnergeticType::CopyTo(destination);
       CompositeType::CopyTo(destination);
     }
+  
+ protected:
+  
 
   ClassDef(I3TrackImpl,1);
 };
+
 
 #endif

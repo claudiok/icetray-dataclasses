@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.10 2004/04/19 18:09:53 pretz Exp $
+    $Id: I3Track.h,v 1.10.2.11 2004/04/19 20:39:40 pretz Exp $
 
-    @version $Revision: 1.10.2.10 $
-    @date $Date: 2004/04/19 18:09:53 $
+    @version $Revision: 1.10.2.11 $
+    @date $Date: 2004/04/19 20:39:40 $
     @author
 
     @todo
@@ -103,7 +103,6 @@ class I3Track : public I3Particle
   //I3Track& operator=(const I3Track&);
   virtual void ToStream (std::ostream &s) const {s<<"A Track\n";}
  protected:
-
 
   ClassDef(I3Track, 1);
 };

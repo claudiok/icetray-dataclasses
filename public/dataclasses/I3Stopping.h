@@ -3,6 +3,7 @@
 
 #include <cmath>
 #include "I3Units.h"
+#include "NanPolicy.h"
 
 class I3Stopping{
  private:
@@ -17,17 +18,48 @@ class I3Stopping{
   bool IsStarting() const {return false;}
   bool IsDirectional() const {return true;}
 
-  double StartX() const {return NAN;}
-  void StartX(double){return;}
+  double StartX() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StartX(double)
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StartY() const {return NAN;}
-  void StartY(double){return;}
+  double StartY() const     
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+
+  void StartY(double)
+    {
+      NanPolicy::Fatal();
+    }
   
-  double StartZ() const {return NAN;}
-  void StartZ(double) {return;}
+  double StartZ() const 
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  
+  void StartZ(double) 
+    {
+      NanPolicy::Fatal();
+    }
 
-  double StartT() const {return NAN;}
-  void StartT(double) {return;}
+  double StartT() const
+    {
+      NanPolicy::Fatal();
+      return NAN;
+    }
+  void StartT(double) 
+    {
+      NanPolicy::Fatal();
+    }
+
 
   double X() const {return fStopX;}
   void X(double) {return;}
