@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3CascadeImpl.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 21:10:25 $
  * @author pretz
  *
  * @todo
@@ -50,7 +50,7 @@ class I3CascadeImpl : public I3Cascade,
    * indicates whether the cascade has an energy, and whether the Energy() 
    * method  will work
    */ 
-  virtual Bool_t IsEnergetic() const {return EnergeticType::IsEnergetic();}
+  virtual Bool_t HasEnergy() const {return EnergeticType::HasEnergy();}
 
   /**
    * indicates whether the cascade has a direction, and whether Zenith()and 

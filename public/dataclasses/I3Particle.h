@@ -9,10 +9,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.4 2004/04/23 20:36:03 deyoung Exp $
+ * $Id: I3Particle.h,v 1.5 2004/04/23 21:10:25 deyoung Exp $
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/23 20:36:03 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/04/23 21:10:25 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -62,7 +62,7 @@ class I3Particle : public TObject{
 
  private:
     ParticleType fType;
-    Ushort_t fID;
+    Int_t fID;
 
 public:
     /**
@@ -97,7 +97,7 @@ public:
       /** 
      * sets the unique ID number of the particle
      */ 
-    virtual void ParticleNumber(Ushort_t ID)
+    virtual void ParticleNumber(Int_t ID)
     {
 	fID = ID;
     };

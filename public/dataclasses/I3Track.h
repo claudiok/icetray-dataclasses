@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.11 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Track.h,v 1.12 2004/04/23 21:10:25 deyoung Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/04/23 21:10:25 $
  * @author 
  *
  * @todo
@@ -69,7 +69,7 @@ class I3Track : public I3ObservableParticle
   /**
    * indicates that the track has an energy
    */
-  virtual Bool_t IsEnergetic() const =0;
+  virtual Bool_t HasEnergy() const =0;
 
   /**
    * indicates that the track is a composite track

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Energetic.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Energetic.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
  *
  * @file I3Energetic.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 21:10:25 $
  * @author 
  *
  * @todo
@@ -27,7 +27,7 @@ class I3Energetic
   /**
    * indicates that this particle has a valid energy
    */
-  Bool_t IsEnergetic() const {return true;}
+  Bool_t HasEnergy() const {return true;}
 
   /**
    * gives the energy of the particle.

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 21:10:25 $
  * @author pretz
  *
  * @todo
@@ -49,7 +49,7 @@ class I3PrimaryImpl : public I3Primary,
   /**
    * indicates whether or not the particle has a valid energy
    */
-  virtual Bool_t IsEnergetic() const {return EnergeticType::IsEnergetic();}
+  virtual Bool_t HasEnergy() const {return EnergeticType::HasEnergy();}
 
   /**
    * indicates whether or not the particle has a valid direction
