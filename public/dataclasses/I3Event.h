@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.37 2004/07/28 22:13:13 blaufuss Exp $
+ * $Id: I3Event.h,v 1.38 2004/07/29 15:35:46 blaufuss Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.37 $
- * @date $Date: 2004/07/28 22:13:13 $
+ * @version $Revision: 1.38 $
+ * @date $Date: 2004/07/29 15:35:46 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -14,7 +14,7 @@
 #include <TObject.h>
 
 #include "I3TriggerDict.h"
-#include "I3FilterData.h"
+#include "I3FilterDict.h"
 #include "I3OMResponseMap.h"
 #include "I3ArrayHitData.h"
 #include "I3RecoResultDict.h"
@@ -34,7 +34,7 @@
 class I3Event : public TObject
 {
   I3TriggerDict    fTriggerDict; //||
-  I3FilterData     fFilterData; //||
+  I3FilterDict     fFilterDict; //||
   I3OMResponseMap  fOMResponseMap; //||
   I3ArrayHitData   fTopResponseData; //||
   I3RecoResultDict fRecoResultDict; //||
@@ -62,14 +62,14 @@ class I3Event : public TObject
   I3TriggerDict& GetTriggerDict() { return fTriggerDict; }
 
   /**
-   * @return the FilterData as a constant object
+   * @return the FilterDict as a constant object
    */
-  const I3FilterData& GetFilterData() const { return fFilterData;}
+  const I3FilterDict& GetFilterDict() const { return fFilterDict;}
 
   /**
-   * @return the FilterData as a non-constant object
+   * @return the FilterDict as a non-constant object
    */
-  I3FilterData& GetFilterData() { return fFilterData;}
+  I3FilterDict& GetFilterDict() { return fFilterDict;}
 
   /**
    * @return the OMResponseMap of the event as a non-constant object
@@ -118,7 +118,7 @@ class I3Event : public TObject
     {
       o<<"[ I3Event \n"
        <<fTriggerDict
-       <<fFilterData
+       <<fFilterDict
        <<fOMResponseMap
        <<fRecoResultDict
        <<fBag

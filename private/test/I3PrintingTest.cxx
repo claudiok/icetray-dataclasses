@@ -10,7 +10,7 @@
 #include "dataclasses/I3AMANDAAnalogReadout.h"
 #include "dataclasses/I3BasicTrack.h"
 #include "dataclasses/I3TriggerDict.h"
-#include "dataclasses/I3FilterData.h"
+#include "dataclasses/I3FilterDict.h"
 #include "dataclasses/I3MCHit.h"
 #include "dataclasses/I3Geometry.h"
 #include "dataclasses/I3RecoResultRDMCFit.h"
@@ -93,7 +93,7 @@ namespace tut
     cout<<t;
     I3TriggerDict trigger;
     cout<<trigger;
-    I3FilterData filter;
+    I3FilterDict filter;
     cout<<filter;
     I3MCHit mchit;
     mchit.SetTime(3.4);

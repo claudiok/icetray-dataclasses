@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.98 2004/07/28 22:13:12 blaufuss Exp $
-// $Revision: 1.98 $
-// $Date: 2004/07/28 22:13:12 $
+// $Id: LinkDef.h,v 1.99 2004/07/29 15:35:46 blaufuss Exp $
+// $Revision: 1.99 $
+// $Date: 2004/07/29 15:35:46 $
 //
 
 #ifdef __CINT__
@@ -103,6 +103,11 @@
 #pragma link C++ typedef MapPolicy<string,I3TriggerPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<string,I3TriggerPtr>::ThePolicy+;
 #pragma link C++ typedef I3TriggerDictPtr;
+
+#pragma link C++ class I3FilterDict+;
+#pragma link C++ typedef MapPolicy<string,I3FilterPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3FilterPtr>::ThePolicy+;
+#pragma link C++ typedef I3FilterDictPtr;
 
 #pragma link C++ class I3DataReadoutDict+;
 #pragma link C++ typedef MapPolicy<string,I3DataReadoutPtr>::ThePolicy;
@@ -261,8 +266,6 @@
 #pragma link C++ typedef I3EventPtr;
 #pragma link C++ class I3EventHeader+;
 #pragma link C++ typedef I3EventHeaderPtr;
-#pragma link C++ class I3FilterData+;
-#pragma link C++ typedef I3FilterDataPtr;
 #pragma link C++ class I3GeometryHeader+;
 #pragma link C++ typedef I3GeometryHeaderPtr;
 #pragma link C++ class I3Hit+;
@@ -344,6 +347,8 @@
 #pragma link C++ typedef I3TrackPtr;
 #pragma link C++ class I3Trigger+;
 #pragma link C++ typedef I3TriggerPtr;
+#pragma link C++ class I3Filter+;
+#pragma link C++ typedef I3FilterPtr;
 
 #pragma link C++ class AMANDAExtractor+;
 #pragma link C++ class I3TrackExtractor+;
