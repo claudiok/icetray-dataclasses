@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.17 2004/07/12 16:12:46 pretz Exp $
+ * $Id: I3Bag.h,v 1.18 2004/07/13 11:58:04 pretz Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/07/12 16:12:46 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/07/13 11:58:04 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -16,8 +16,12 @@
 
 #include "TObject.h"
 #include "StoragePolicy.h"
+#include <TClass.h>
 
-typedef TObject* TObjectPtr;
+#include <iostream>
+
+typedef PtrPolicy<TObject>::ThePolicy TObjectPtr;
+
 
 /**
  * @brief I3Bag is a generic keyed TObject container, akin to the
@@ -48,6 +52,25 @@ class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
   // ROOT macro
   ClassDef(I3Bag,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3Bag& bag)
+{
+  o<<"[ I3Bag\n";
+  I3Bag::const_iterator iter;
+  for(iter = bag.begin();iter!=bag.end();iter++)
+    {
+      o<<iter->first;
+      if(iter->second==(TObjectPtr((TObject*)0)))
+	o<<"[ Null TObject ]\n";
+      else
+	o<<"[ "
+	 <<iter->second->IsA()->GetName()
+	 <<" ]"
+	 <<"\n";
+    }
+  o<<"]";
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 
