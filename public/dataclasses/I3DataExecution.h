@@ -1,10 +1,9 @@
 #ifndef I3DATAEXECUTION_H
 #define I3DATAEXECUTION_H
-
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataExecution.h,v 1.2 2004/02/25 16:27:46 pretz Exp $
+ * $Id: I3DataExecution.h,v 1.3 2004/02/25 18:01:32 pretz Exp $
  *
  * The data structure's access to the framework.  If the 
  * data wants to get a message into the logging system or abort the job 
@@ -13,8 +12,8 @@
  * implements logging.  Right now it calls icetray's private logger, but
  * there should be a logger for just the data.
  *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/02/25 16:27:46 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/02/25 18:01:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
