@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TopGeometryTest.cxx,v 1.7 2004/10/11 07:06:10 troy Exp $
+    $Id: I3TopGeometryTest.cxx,v 1.8 2005/03/29 21:54:10 pretz Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @version $Revision: 1.8 $
+    @date $Date: 2005/03/29 21:54:10 $
     @author pretz
 
     @todo
@@ -83,10 +83,12 @@ namespace tut
     TFile file_in("test.out.root");
     I3TopGeometryPtr geo_in((I3TopGeometry*)file_in.FindObjectAny("I3TopGeometry"));
 
-    ensure("pointer is non-zero",geo_in!=0);
+    ensure("pointer is non-zero",geo_in);
 
     I3StationMap &array = geo_in->GetStationMap ();
     
+    ensure(array[StationKey(1)]);
+
     I3StationGeo &station
       = *(array[StationKey (1)]);
 
