@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.10 2004/07/29 16:02:51 pretz Exp $
+    $Id: InIceExtractorExample.cxx,v 1.11 2004/07/30 14:55:43 pretz Exp $
 
-    @version $Revision: 1.10 $
-    @date $Date: 2004/07/29 16:02:51 $
+    @version $Revision: 1.11 $
+    @date $Date: 2004/07/30 14:55:43 $
     @author Troy D. Straszheim
 
     @todo
@@ -52,7 +52,6 @@ namespace tut
   {
     I3OMGeoPtr p = the_pair.second;
     ensure(p!=0);
-    p->SetOMNumber(rand()%1024);
     p->SetX(rand()/0.002);
     p->SetY(rand()/0.002);
     p->SetZ(rand()/0.002);
@@ -69,7 +68,6 @@ namespace tut
     else if(type == I3OMGeo::IceCube)
       the_type == "IceCube";
     cout << "[" << the_type
-	 << " #" << p->GetOMNumber() 
 	 << " X:" << p->GetX() 
 	 << " Y:" << p->GetY() 
 	 << " Z:" << p->GetZ() 
@@ -100,11 +98,6 @@ namespace tut
       if (amandap) mygeometry_.push_back(amandap);
     }
   };
-
-  // for sorting by OMNumber
-  bool OMNumber_lessthan(I3OMGeoPtr l, I3OMGeoPtr r) {
-    return (l->GetOMNumber() < r->GetOMNumber());
-  }
 
   //
   //  Here's the main test routine.  You should (I will make a demo
@@ -138,8 +131,7 @@ namespace tut
     // Let's loop through the geometry and call SetOMRandomValues on
     // each member. this "for_each" technique is quicker and safer
     // than using loops, and it works on maps, lists, deques, sets,
-    // all of that.  Some of our OM's may have duplicate OMNumber
-    // values, that is OK for the purposes of this Example.
+    // all of that. 
     for_each(geometry.begin(), geometry.end(), SetOMRandomValues);
     
     // not used anymore.  The map preserves the order.  -pretz
@@ -170,12 +162,6 @@ namespace tut
     cout << "AMANDAS ONLY" << endl;
     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOMPtr);
 
-//     Not needed since now it's already sorted, being a map
-//     // now let's sort 'em by OM Number and see 'em again
-//     cout << "AMANDAS ONLY SORTED BY OMNUMBER" << endl;
-//     sort(amanda_geometry.begin(), amanda_geometry.end(), OMNumber_lessthan);
-//     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOM);
-  
       }
 
   // An example using the new OMKey access to the InIceGeometry

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.33 2004/07/16 19:51:59 pretz Exp $
+    $Id: I3OMResponse.h,v 1.34 2004/07/30 14:55:43 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.33 $
-    @date $Date: 2004/07/16 19:51:59 $
+    @version $Revision: 1.34 $
+    @date $Date: 2004/07/30 14:55:43 $
     @author ehrlich
     @author troy
     @author pretz
@@ -29,8 +29,6 @@
  */
 class I3OMResponse : public TObject
 {
-  UShort_t fOMNumber;
-
   // with the following, you either put in the two pipes or get
   // "cant instantiate precompiled template
   // even though you can branch an I3MCHitSeries, or whatever.
@@ -43,22 +41,12 @@ class I3OMResponse : public TObject
   /**
    * constructor
    */
-  I3OMResponse() {fOMNumber = 0;}
+  I3OMResponse() {}
   
   /**
    * destructor
    */
   virtual ~I3OMResponse() {;}
-  
-  /**
-   * @return the number of the OM for this response
-   */
-  UShort_t GetOMNumber() const { return fOMNumber; }
-
-  /**
-   * @param omnumber the new omnumber associated with this response
-   */
-  void SetOMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
   
   /**
    * @return the the hardware data for this response as a const object

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.22 2004/07/12 12:23:11 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.23 2004/07/30 14:55:43 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/07/12 12:23:11 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/07/30 14:55:43 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,6 +18,7 @@
 #include <TClass.h>
 #include <string>
 #include <iostream>
+#include "dataclasses/OMKey.h"
 
 using namespace std;
 
@@ -40,10 +41,8 @@ class I3OMGeo : public TObject
   enum EOMType {AMANDA,IceCube};
 
  protected:
-  UShort_t fOMNumber;
   I3Position fPosition;
   EOrientation fOrientation;
-  Int_t fString;
   Double_t fRelativeQE;
   Double_t fArea;
 
@@ -69,7 +68,6 @@ class I3OMGeo : public TObject
   const I3OMGeo& operator=(const I3OMGeo& rhs){
     if (this == &rhs) return *this; // check for assignment to self
     TObject::operator=(rhs); // call base class assignment operator
-    fOMNumber = rhs.fOMNumber;
     fPosition = rhs.fPosition;
     fOrientation = rhs.fOrientation;
     fRelativeQE = rhs.fRelativeQE;
@@ -81,16 +79,6 @@ class I3OMGeo : public TObject
    * @return the identity of this OM, either AMANDA or IceCube 
    */
   virtual EOMType GetOMType() const =0;
-
-  /**
-   * @return the number of this optical module
-   */
-  UShort_t GetOMNumber() const {return fOMNumber;}
-
-  /**
-   * @param omnumber the new number for this optical module
-   */
-  void   SetOMNumber(UShort_t omnumber) { fOMNumber = omnumber; }
 
   /**
    * @return the x position of the OM
@@ -144,16 +132,6 @@ class I3OMGeo : public TObject
    * @param orientation the new orientation for the tube
    */
   void SetOrientation(EOrientation orientation) { fOrientation = orientation; }
-
-  /**
-   * @return the string that this is an OM for
-   */
-  Int_t GetString() const {return fString;}
-
-  /**
-   * @param string the new string number for this OM
-   */
-  void SetString(Int_t string) {fString = string;}
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
