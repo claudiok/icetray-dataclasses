@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.3 2004/11/23 20:57:25 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.4 2004/12/20 20:05:58 deyoung Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/11/23 20:57:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/12/20 20:05:58 $
  * @author deyoung
  */
 
@@ -38,6 +38,25 @@ public:
     return kTRUE;
   };
 
+  // This confuses the dictionary generation, iff the function is virtual.
+//   virtual const PtrPolicy<I3OMResponseSelection>::ThePolicy GetCopy() {
+//     PtrPolicy<I3OMResponseSelection>::ThePolicy 
+//       theCopy(new I3OMResponseSelection(*this));
+//     return theCopy;
+//   };
+
+  // Pure virtual doesn't work either.
+  //  virtual const PtrPolicy<I3OMResponseSelection>::ThePolicy GetCopy() = 0;
+
+//  But this is perfectly OK; it's the pointer to this class that is
+//  confusing the dictionary generator.
+//   virtual const I3OMResponsePtr GetCopy() {
+//     I3OMResponsePtr theCopy(new I3OMResponse);
+//     return theCopy;
+//   };
+
+private:
+
   /**
    * Nothing to do for assignment, since the selection has no state
    */
@@ -50,8 +69,6 @@ public:
    */
   I3OMResponseSelection(const I3OMResponseSelection& rhs) { *this = rhs; } 
   
-private:
-
   ClassDef(I3OMResponseSelection,1);
 };
 

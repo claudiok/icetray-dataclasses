@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.4 2004/11/28 06:40:27 troy Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.5 2004/12/20 20:05:58 deyoung Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/12/20 20:05:58 $
  * @author deyoung
  */
 
@@ -56,6 +56,15 @@ public:
     return kFALSE;
   };
 
+  // Relies on the copy constructor to make an independent copy of the
+  // current (derived class) selection, and return it via a pointer to base.
+  virtual const I3OMResponseSelectionPtr GetCopy() {
+    I3OMResponseSelectionPtr theCopy(new I3GoodOMSelection(*this));
+    return theCopy;
+  };
+
+private:
+
   /**
    * assignment operator is a member-wise assignment
    */
@@ -69,8 +78,6 @@ public:
    */
   I3GoodOMSelection(const I3GoodOMSelection& rhs) { *this = rhs; } 
   
-private:
-
   VectorPolicy<OMKey>::ThePolicy fGoodOMs;
 
   ClassDef(I3GoodOMSelection,1);

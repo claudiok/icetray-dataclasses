@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.4 2004/11/28 06:40:27 troy Exp $
+ *  $Id: I3BadOMSelection.h,v 1.5 2004/12/20 20:05:58 deyoung Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/12/20 20:05:58 $
  * @author deyoung
  */
 
@@ -56,6 +56,13 @@ public:
     return kTRUE;
   };
 
+  virtual const I3OMResponseSelectionPtr GetCopy() {
+    I3OMResponseSelectionPtr theCopy(new I3BadOMSelection(*this));
+    return theCopy;
+  };
+
+private:
+
   /**
    * assignment operator is a member-wise assignment
    */
@@ -68,8 +75,6 @@ public:
    * copy constructor just uses assignment operator
    */
   I3BadOMSelection(const I3BadOMSelection& rhs) { *this = rhs; } 
-
-private:
 
   VectorPolicy<OMKey>::ThePolicy fBadOMs;
   
