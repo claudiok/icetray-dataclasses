@@ -45,5 +45,7 @@ class I3OMResponse : public TObject
 
   ClassDef(I3OMResponse,1);
 };
+
+typedef I3OMResponse* I3OMResponsePtr;
 #endif
 

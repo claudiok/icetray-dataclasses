@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DataReadoutList.h,v 1.9 2004/02/23 01:46:34 troy Exp $
+    $Id: I3DataReadoutList.h,v 1.10 2004/02/24 14:41:30 pretz Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2004/02/23 01:46:34 $
+    @version $Revision: 1.10 $
+    @date $Date: 2004/02/24 14:41:30 $
     @author
 
     @todo
@@ -31,7 +31,7 @@ class I3DataReadoutList : public VectorPolicy<I3DataReadout>::ThePolicy
   ClassDef(I3DataReadoutList,1);
 };
 
-
+typedef I3DataReadoutList* I3DataReadoutListPtr;
 
 #endif
 

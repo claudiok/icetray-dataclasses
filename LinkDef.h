@@ -45,6 +45,7 @@
 #pragma link C++ typedef VectorPolicy<I3DataReadout>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3DataReadout>::ThePolicy+;
 #pragma link C++ function operator!=(const I3DataReadoutList::iterator&, const I3DataReadoutList::iterator&);
+#pragma link C++ typedef I3DataReadoutListPtr;
 
 #pragma link C++ class I3DigitalSeries+;
 #pragma link C++ class I3DigitalSeries::iterator+;
@@ -103,11 +104,12 @@
 #pragma link C++ typedef VectorPolicy<I3OMResponse>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3OMResponse>::ThePolicy+;
 #pragma link C++ function operator!=(const I3OMResponseData::iterator&, const I3OMResponseData::iterator&);
+#pragma link C++ typedef I3OMResponsePtr;
 
 #pragma link C++ class I3RecoHitSeriesData+;
 #pragma link C++ class I3RecoHitSeriesData::iterator+;
-#pragma link C++ typedef MapPolicy<I3RecoHitSeries>::ThePolicy;
-#pragma link C++ class MapPolicy<I3RecoHitSeries>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<I3RecoHitSeriesPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<I3RecoHitSeriesPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoHitSeriesData::iterator&, const I3RecoHitSeriesData::iterator&);
 
 #pragma link C++ class I3RecoResult+;
