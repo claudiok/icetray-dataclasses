@@ -12,13 +12,13 @@ using namespace std;
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.1 2004/03/10 02:42:24 pretz Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.2 2004/03/10 19:30:37 ehrlich Exp $
  *
  * An 'AMANDA' readout.  The 'old-style' before the TWR was added.  
  * Includes a series of LE's and TOT's and a single Amplitude
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/10 02:42:24 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/03/10 19:30:37 $
  * @author pretz
  *
  *  @todo
@@ -58,6 +58,8 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
   vector<Double_t>& TOTs() {return fTOTs;}
 
   Double_t Amplitude() const {return fAmp;}
+  
+  void Amplitude(Double_t amplitude) {fAmp=amplitude;}
 
  private:
   // copy and assignment private
