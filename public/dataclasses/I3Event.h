@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Event.h,v 1.10 2004/02/23 16:31:25 pretz Exp $
+    $Id: I3Event.h,v 1.11 2004/02/23 19:13:32 ehrlich Exp $
 
-    @version $Revision: 1.10 $
-    @date $Date: 2004/02/23 16:31:25 $
+    @version $Revision: 1.11 $
+    @date $Date: 2004/02/23 19:13:32 $
     @author
 
     @todo
@@ -31,7 +31,7 @@
  * related to each event. Additionally it stores event information
  * such as time, id, etc. (it is planned to store this kind of 
  * information in a separate header class).
- * @version $Id: I3Event.h,v 1.10 2004/02/23 16:31:25 pretz Exp $
+ * @version $Id: I3Event.h,v 1.11 2004/02/23 19:13:32 ehrlich Exp $
  * @author Ralf Ehrlich
  */
 class I3Event : public TObject
@@ -45,8 +45,8 @@ class I3Event : public TObject
   I3FilterData     filterdata; //||
   I3MCTrackData    mctrackdata; //||
   I3OMResponseData omresponsedata; //||
-  I3RecoResultData recoresultdata;
-  I3Bag            bag;
+  I3RecoResultData recoresultdata; //||
+  I3Bag            bag; //||
 
   public:
   
