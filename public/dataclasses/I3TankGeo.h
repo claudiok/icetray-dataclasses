@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.14 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3TankGeo.h,v 1.15 2004/09/16 15:07:39 niessen Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/09/16 15:07:39 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -54,6 +54,12 @@ class I3TankGeo : public I3SurfModuleGeo {
   void SetHeight(Double_t h) { fHeight = h; }
 
   /**
+   * THe filling height
+   */
+  Double_t GetFillHeight () const { return fFillHeight; }
+  void SetFillHeight (Double_t h) { fFillHeight = h; }
+
+  /**
    * @todo need more implementation here
    */
   virtual void ToStream(ostream& o) const
@@ -72,8 +78,8 @@ class I3TankGeo : public I3SurfModuleGeo {
 
   Double_t fRadius; // radius of the tank
   Double_t fHeight; // height of the tank
-  
-  UChar_t fVersion; // some version number.
+
+  Double_t fFillHeight; // fill height of the tank
 
   ClassDef(I3TankGeo,2); // increased to 2 Thu Sep  2 16:13:52 EDT 2004
   // because some stuff moved up to I3SurfModuleGeo.
