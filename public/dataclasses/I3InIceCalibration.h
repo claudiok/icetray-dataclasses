@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3InIceCalibration.h,v 1.3 2005/02/07 17:21:00 tmccauley Exp $
+ * $Id: I3InIceCalibration.h,v 1.4 2005/03/17 02:44:04 dima Exp $
  *
  * @file I3InIceCalibration.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/02/07 17:21:00 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/03/17 02:44:04 $
  * @author tmccauley
  */
 
@@ -61,11 +61,11 @@ public:
 	};
     
     virtual string ToString() const
-	{  
+      {  
 	    ostringstream out;
 	    ToStream(out);
 	    return out.str(); 
-	};
+      };
     
     // NOTE: fix this later
     //I3InIceCalibration(const I3InIceCalibration& calibration);
