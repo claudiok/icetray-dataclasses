@@ -13,9 +13,9 @@ class I3AnalogSeries : public I3Datareadout
    I3AnalogSeries();
   ~I3AnalogSeries();
 
-  int             GetNumberPulses() const;
-  const I3Analog* GetPulse(unsigned short number) const;
-  void            AddPulse(I3Analog* pulse_);
+  int GetNumberPulses() const;
+  const I3Analog& GetPulse(unsigned short number) const;
+  void  AddPulse(I3Analog* pulse_);
 
   ClassDef(I3AnalogSeries,1);
 };

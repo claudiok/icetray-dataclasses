@@ -95,21 +95,23 @@ void  I3OMResponse::SetMCHitSeries(I3MCHitSeries* mchitseries_)
 {
   if(!mchitseries)       
     mchitseries=mchitseries_;             
-  else printf("MCHitSeries exists already\n");
+  else 
+I3DataExecution::Instance().Fatal("I3OMResponse::SetMCHitSeries() MCHitSeries exists already");
 }
 
 void  I3OMResponse::SetDatareadoutList(I3DatareadoutList* datareadoutlist_)
 {
   if(!datareadoutlist)
     datareadoutlist=datareadoutlist_;     
-  else printf("Datareadoutlist exists already\n");
+  else 
+I3DataExecution::Instance().Fatal("I3OMResponse::SetDataREadoutList() Datareadoutlist exists already");
 }
 
 void  I3OMResponse::SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_) {
   if(!recohitseriesdata) 
     recohitseriesdata=recohitseriesdata_; 
   else 
-    printf("RecoHitSeriesData exists already\n");
+    I3DataExecution::Instance().Fatal("I3OMResponse::SetRecoHitSeriesData() RecoHitSeriesData exists already");
 }
 
 

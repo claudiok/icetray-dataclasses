@@ -14,9 +14,9 @@ class I3DatareadoutList : public TObject
   I3DatareadoutList();
   ~I3DatareadoutList();
 
-  int                  GetNumberDatareadouts() const;
-  const I3Datareadout* GetDatareadout(unsigned short number) const;
-  void                 AddDatareadout(I3Datareadout* datareadout_);
+  int GetNumberDatareadouts() const;
+  const I3Datareadout& GetDatareadout(unsigned short number) const;
+  void AddDatareadout(I3Datareadout* datareadout_);
   
   ClassDef(I3DatareadoutList,1);
 };

@@ -6,24 +6,24 @@
 
 class I3DigitalSeries : public I3Datareadout
 {
-  protected:
+ protected:
   double    starttime;
   float     binwidth;
   TObjArray *digit;
-
-  public:
+  
+ public:
   I3DigitalSeries();
   ~I3DigitalSeries();
-
+  
   double GetStartTime() const;
   float  GetBinWidth() const;
   void   SetStartTime(double starttime_);
   void   SetBinWidth(float binwidth_);
-
-  int              GetNumberDigits() const;
-  const I3Digital* GetDigit(unsigned short number) const;
-  void             AddDigit(I3Digital* digit_);
-
+  
+  int GetNumberDigits() const;
+  const I3Digital& GetDigit(unsigned short number) const;
+  void AddDigit(I3Digital* digit_);
+  
   ClassDef(I3DigitalSeries,1);
 };
 #endif
