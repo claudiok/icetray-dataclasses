@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.2 2004/09/07 22:30:30 dule Exp $
+// $Id: I3Direction.cxx,v 1.3 2004/09/10 02:38:10 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
@@ -146,11 +146,14 @@ void I3Direction::ToStream(ostream& o) const
 void I3Direction::CalcCarFromSph() const
 {
   // Calculate Cartesian coordinates from Spherical
-  // Direction is stored on disk in Spherical coordinates only
-  Double_t rho = sin(-fZenith);
-  fX = rho*cos(-fAzimuth);
-  fY = rho*sin(-fAzimuth);
-  fZ = cos(-fZenith);
+  // Direction is stored on disk in Spherical coordinates only.
+  // theta=pi-zenith and phi=azimuth-pi in these IceCube coordinates.
+  Double_t theta = pi-fZenith;
+  Double_t phi = fAzimuth-pi;
+  Double_t rho = sin(theta);
+  fX = rho*cos(phi);
+  fY = rho*sin(phi);
+  fZ = cos(theta);
   IsCalculated=kTRUE;
 }
 
@@ -159,6 +162,7 @@ void I3Direction::CalcSphFromCar()
 {
   // Calculate Spherical coordinates from Cartesian
   // Direction is stored on disk in Spherical coordinates only
+  // zenith=pi-theta and azimuth=phi+pi in these IceCube coordinates.
   Double_t fR = sqrt(fX*fX+fY*fY+fZ*fZ);
   Double_t theta = 0;
   if (fR && fabs(fZ/fR)<=1.) {
@@ -170,8 +174,8 @@ void I3Direction::CalcSphFromCar()
   Double_t phi=0;
   if (fX || fY) phi=atan2(fY,fX);
   if (phi<0.) phi+=2.*pi;
-  fZenith = -theta;
-  fAzimuth = -phi;
+  fZenith = pi-theta;
+  fAzimuth = phi+pi;
   IsCalculated=kTRUE;
 }
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.2 2004/09/07 22:30:30 dule Exp $
+ * $Id: I3Direction.h,v 1.3 2004/09/10 02:38:10 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/09/07 22:30:30 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/09/10 02:38:10 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.2 2004/09/07 22:30:30 dule Exp $
+// $Id: I3Direction.h,v 1.3 2004/09/10 02:38:10 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -143,14 +143,14 @@ class I3Direction : public TObject
   void RotateX(Double_t angle);
 
   /**
-   * Rotate direction around X axis by angle
+   * Rotate direction around Y axis by angle
    */
   void RotateY(Double_t angle);
 
   /**
-   * Rotate direction around X axis by angle
+   * Rotate direction around Z axis by angle
    */
-  void RotateZ(Double_t amgle);
+  void RotateZ(Double_t angle);
 
   /**
    * Print out all information about the I3Direction to the given ostream
