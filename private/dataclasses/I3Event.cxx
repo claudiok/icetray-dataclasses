@@ -40,11 +40,41 @@ bool I3Event::IsMCTrackData() const    {return((mctrackdata) ? true : false);}
 bool I3Event::IsOMResponseData() const {return((omresponsedata) ? true : false);}
 bool I3Event::IsRecoResultData() const {return((recoresultdata) ? true : false);}
   
-I3TriggerData&    I3Event::GetTriggerData() const    {return((triggerdata==NULL) ? *(I3TriggerData*)NULL : *triggerdata);}
-I3FilterData&     I3Event::GetFilterData() const     {return((filterdata==NULL) ? *(I3FilterData*)NULL : *filterdata);}
-I3MCTrackData&    I3Event::GetMCTrackData() const    {return((mctrackdata==NULL) ? *(I3MCTrackData*)NULL : *mctrackdata);}
-I3OMResponseData& I3Event::GetOMResponseData() const {return((omresponsedata==NULL) ? *(I3OMResponseData*)NULL : *omresponsedata);}
-I3RecoResultData& I3Event::GetRecoResultData() const {return((recoresultdata==NULL) ? *(I3RecoResultData*)NULL : *recoresultdata);}
+I3TriggerData& I3Event::GetTriggerData() const    
+{
+  if(triggerdata) return(*triggerdata);
+  I3DataExecution::Instance().Fatal("I3Event::GetTriggerData() triggerdata does not exist");
+  return(*(I3TriggerData*)NULL);
+}
+
+I3FilterData& I3Event::GetFilterData() const 
+{
+  if(filterdata) return(*filterdata);
+  I3DataExecution::Instance().Fatal("I3Event::GetFilterData() filterdata does not exist");
+  return(*(I3FilterData*)NULL);
+}
+
+I3MCTrackData& I3Event::GetMCTrackData() const    
+{
+  if(mctrackdata) return(*mctrackdata);
+  I3DataExecution::Instance().Fatal("I3Event::GetMCTrackData() mctrackdata does not exist");
+  return(*(I3MCTrackData*)NULL);
+}
+
+I3OMResponseData& I3Event::GetOMResponseData() const
+{
+  if(omresponsedata) return(*omresponsedata);
+  I3DataExecution::Instance().Fatal("I3Event::GetOMResponseData() omresponsedata does not exist");
+  return(*(I3OMResponseData*)NULL);
+}
+
+I3RecoResultData& I3Event::GetRecoResultData() const 
+{
+  if(recoresultdata) return(*recoresultdata);
+  I3DataExecution::Instance().Fatal("I3Event::GetRecoResultData() recoresultdata does not exist");
+  return(*(I3RecoResultData*)NULL);
+}
+
   
 void I3Event::SetTriggerData(I3TriggerData* triggerdata_)          
 {
