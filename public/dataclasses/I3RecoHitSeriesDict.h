@@ -1,14 +1,14 @@
-#ifndef I3RECOHITSERIESDATA_H
-#define I3RECOHITSERIESDATA_H
+#ifndef I3RECOHITSERIESDICT_H
+#define I3RECOHITSERIESDICT_H
 
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.3 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3RecoHitSeriesDict.h,v 1.4 2004/10/27 23:09:40 spencer Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/10/27 23:09:40 $
  * @author ehrlich
  * @author troy
  * @author pretz
