@@ -1,5 +1,5 @@
 #
-# $Id: Doxyfile,v 1.5 2004/04/27 16:00:08 pretz Exp $
+# $Id: Doxyfile,v 1.6 2004/05/05 14:05:44 pretz Exp $
 #
 # Copyright (C) 1997-1999 by Dimitri van Heesch.
 #
@@ -47,7 +47,7 @@ dataclasses/public/dataclasses
 
 FILE_PATTERNS     = *.dox *.h
 DETAILS_AT_TOP    = YES
-EXAMPLE_PATH      = .
+EXAMPLE_PATH      = dataclasses/public/dataclasses dataclasses/resources/users-guide/
 RECURSIVE         = NO
 TAGFILES          =
 ALLEXTERNALS      = YES
