@@ -4,13 +4,13 @@
    This guide explains how to download, compile, use, understand,
    extend, conspire with, love, and cherish the dataclasses.
    
-   @author Eric Blaufuss (blaufuss@umdgrb.umd.edu)
+   @author Erik Blaufuss (blaufuss@umdgrb.umd.edu)
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
    @author Ralf Ehrlich (ehrlich@umdgrb.umd.edu)
    @author John Pretz (pretz@umdgrb.umd.edu)
    @author Troy Straszheim (troy@ifh.de, troy@resophonic.com)
 	   
-   @section Overview
+   @section overview Overview
 
    The dataclasses were designed to do such and such.
 
@@ -25,18 +25,18 @@
    them with the dataclasses.  The last documents explain some of the
    thinking behind the design.
 
-   @section Contents
+   @section contents Contents
 
    @li @ref sample 
 
-   @subsection Preparation
+   @subsection preparation Preparation
    @li @ref devenv-setup
    
    @li @ref icetray-setup
 
    @li @ref dataclasses-setup
 
-   @subsection Action
+   @subsection action Action
 
    @li @ref corsika-reader
 
@@ -48,7 +48,7 @@
 
    @li @ref reconstruction
 
-   @subsection Reflection
+   @subsection reflection Reflection
    @li @ref architecture
 
    @li @ref best-practices
