@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: runtests.cxx,v 1.3 2004/08/09 12:12:13 troy Exp $
+    $Id: dataclasses-test.cxx,v 1.1 2004/08/09 12:20:56 troy Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/08/09 12:12:13 $
+    @version $Revision: 1.1 $
+    @date $Date: 2004/08/09 12:20:56 $
     @author Troy D. Straszheim
 
     @todo
