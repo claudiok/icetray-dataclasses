@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.7 2004/09/24 22:31:01 dule Exp $
+ * $Id: I3Direction.h,v 1.8 2004/09/29 18:31:35 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/09/24 22:31:01 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/09/29 18:31:35 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.7 2004/09/24 22:31:01 dule Exp $
+// $Id: I3Direction.h,v 1.8 2004/09/29 18:31:35 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -40,13 +40,6 @@ class I3Direction : public TObject
  public:
 
   /**
-   * Possible reference frames.
-   */
-  //enum RefFrame { car, sph, cyl };
-
-  //--------------
-
-  /**
    * Default constructor
    */
   I3Direction();
@@ -54,8 +47,7 @@ class I3Direction : public TObject
   /**
    * Additional constructor: 2 arguments mean construct dir. with zen,azi
    */
-  //I3Direction(Double_t azi, Double_t zen, Double_t z, RefFrame f=car);
-  I3Direction(Double_t azi, Double_t zen);
+  I3Direction(Double_t zen, Double_t azi);
 
   /**
    * Additional constructor: 3 arguments mean construct dir. with x,y,z
@@ -80,7 +72,7 @@ class I3Direction : public TObject
   void SetDirection(const I3Direction& d);
 
   /**
-   * Store direction with azi and zen (2 arguments)
+   * Store direction with zen and azi (2 arguments)
    */
   void SetDirection(Double_t zen, Double_t azi);
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.16 2004/09/24 22:48:14 dule Exp $
+ * $Id: I3Starting.h,v 1.17 2004/09/29 18:31:35 dule Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/09/24 22:48:14 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/09/29 18:31:35 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -113,27 +113,27 @@ class I3Starting{
    * gives the zenith of the track
    */
   //Double_t GetZenith() const {return fZenith;}
-  Double_t GetZenith() const {return GetDir().GetZenith();}
+  Double_t GetZenith() const {return fDir.GetZenith();}
 
   /**
    * gives the azimuth of the track
    */
   //Double_t GetAzimuth() const {return fAzimuth;}
-  Double_t GetAzimuth() const {return GetDir().GetAzimuth();}
+  Double_t GetAzimuth() const {return fDir.GetAzimuth();}
 
   /** 
    * sets the zenith of the track
    */
   //void SetZenith(Double_t theta){fZenith = theta;}
   void SetZenith(Double_t zen) {
-    GetDir().SetDirection(zen,GetDir().GetAzimuth());}
+    fDir.SetDirection(zen,fDir.GetAzimuth());}
 
   /** 
    * sets the azimuth of the track
    */
   //void SetAzimuth(Double_t phi){fAzimuth = phi;}
   void SetAzimuth(Double_t azi) {
-    GetDir().SetDirection(GetDir().GetZenith(),azi);}
+    fDir.SetDirection(fDir.GetZenith(),azi);}
 
   /**
    * returns Infinity for the length of the track
