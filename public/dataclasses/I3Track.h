@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.4 2004/04/13 10:29:28 troy Exp $
+    $Id: I3Track.h,v 1.10.2.5 2004/04/14 16:39:07 pretz Exp $
 
-    @version $Revision: 1.10.2.4 $
-    @date $Date: 2004/04/13 10:29:28 $
+    @version $Revision: 1.10.2.5 $
+    @date $Date: 2004/04/14 16:39:07 $
     @author
 
     @todo
@@ -117,8 +117,8 @@ class I3Track : public TObject
   
   //FIXME:  need fns like distancefromtrack, isontrack, etc.
 
-  I3Track& operator=(const I3Track&);
-  virtual void ToStream (std::ostream &s) const;
+  //I3Track& operator=(const I3Track&);
+  virtual void ToStream (std::ostream &s) const {s<<"A Track\n";}
 
   ClassDef(I3Track, 1);
 };
