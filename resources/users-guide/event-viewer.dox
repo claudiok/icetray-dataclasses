@@ -15,10 +15,8 @@ To run a few sample scripts you first have to change into your workspace directo
 From there you can start:<br>
 @code
 % root examples-offline/resources/linefit/LineFit.C
-% root eventviewer-modules/resources/scripts/F2kEventViewer1.C
-% root eventviewer-modules/resources/scripts/F2kEventViewer2.C
 % root eventviewer-modules/resources/scripts/F2kEventViewer3.C
 @endcode
 
-These scripts are using the F2k files test1.f2k, test2.f2k and test3.f2k and display some events.
+These scripts use F2k files and display some events.
 */
