@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3FilterDict.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3FilterDict.h,v 1.3 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3FilterDict.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author blaufuss
  *
  */
@@ -15,6 +15,7 @@
 #include <TObject.h>
 #include "StoragePolicy.h"
 #include "I3Filter.h"
+#include <sstream>
 
 /**
  * @brief A place holder for the Filter data within the event
@@ -36,6 +37,28 @@ class I3FilterDict : public TObject,
    */
   virtual ~I3FilterDict() {};
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3FilterDict: \n";
+      I3FilterDict::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3FilterPtr((I3Filter*)0))
+	    o<<"Null I3Filter";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"]\n";
+    }
+  
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
  private:
 
   // copy and assignment are private
@@ -50,17 +73,7 @@ class I3FilterDict : public TObject,
  */
 inline ostream& operator<<(ostream& o,const I3FilterDict& v)
 {
-  o<<"[ I3FilterDict: \n";
-  I3FilterDict::const_iterator iter;
-  for(iter=v.begin();iter!=v.end();iter++)
-    {
-      o<<iter->first;
-      if(iter->second==I3FilterPtr((I3Filter*)0))
-        o<<"Null I3Filter";
-      else
-        o<<*(iter->second);
-    }
-  o<<"]\n";
+  v.ToStream(o);
   return o;
 }
 

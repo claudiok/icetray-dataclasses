@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.12 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3TankGeo.h,v 1.13 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -57,6 +57,13 @@ class I3TankGeo : public TObject,
   virtual void ToStream(ostream& o) const
     {
       o<<" [ I3TankGeo ]";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStationStatus.h,v 1.6 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3IceTopStationStatus.h,v 1.7 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3IceTopStationStatus.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATIONSTATUS_H
@@ -13,6 +13,7 @@
 
 #include "TObject.h"
 #include "I3OMStatusIceCube.h"
+#include <sstream>
 
 /**
  * @brief the status of an IceTop station for the DetectorStatus stream.
@@ -49,6 +50,13 @@ class I3IceTopStationStatus
 	o<<*(*iter);
     }
       o<<"]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
   
  private:

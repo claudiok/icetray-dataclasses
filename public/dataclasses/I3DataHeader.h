@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.12 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.13 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,6 +19,7 @@
 
 #include <string>
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -126,6 +127,13 @@ class I3DataHeader : public TObject
        <<"Nano Seconds: "
        <<fNanoSec
        <<"\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
   
  private:

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.22 2004/08/16 22:46:24 dule Exp $
+ * $Id: I3MCHitSeries.h,v 1.23 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/08/16 22:46:24 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,6 +15,7 @@
 
 #include "I3MCHit.h"
 #include "StoragePolicy.h"
+#include <sstream>
 
 /**
  * @brief Array of I3MCHits
@@ -75,6 +76,13 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
 	  o<<*iter;
 	}
       o<<"]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
   
   private:

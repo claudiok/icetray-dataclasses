@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.39 2004/07/30 20:41:00 blaufuss Exp $
+ * $Id: I3Event.h,v 1.40 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.39 $
- * @date $Date: 2004/07/30 20:41:00 $
+ * @version $Revision: 1.40 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -19,6 +19,8 @@
 #include "I3ArrayHitDict.h"
 #include "I3RecoResultDict.h"
 #include "I3Bag.h"
+#include <sstream>
+
 /**
  * @brief Top-level object for the event-specifc information (Physics
  * stream)
@@ -125,6 +127,12 @@ class I3Event : public TObject
        <<"]\n";
     }
 
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
  private:
   // copy and assignment private
   I3Event(const I3Event& rhs);

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Trigger.h,v 1.4 2004/08/02 16:18:32 blaufuss Exp $
+ * $Id: I3Trigger.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3Trigger.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/02 16:18:32 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author blaufuss
  * @author deyoung
  */
@@ -17,6 +17,7 @@
 #include <TClass.h>
 #include <string>
 #include <iostream>
+#include <sstream>
 
 using namespace std; 
 
@@ -126,7 +127,13 @@ public:
 	 <<fSubDetector
 	 <<" ]\n";
     }
-    
+
+    virtual string ToString() const
+      {
+	ostringstream out;
+	ToStream(out);
+	return out.str();
+      }
     
 private:
     /**

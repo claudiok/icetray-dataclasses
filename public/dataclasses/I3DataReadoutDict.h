@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.6 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3DataReadoutDict.h,v 1.7 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -17,6 +17,7 @@
 
 #include "I3DataReadout.h"
 #include "StoragePolicy.h"
+#include <sstream>
 
 /**
  * @brief Container (map) of I3DataReadouts
@@ -48,6 +49,28 @@ class I3DataReadoutDict : public TObject,
    */
   virtual ~I3DataReadoutDict(){};
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3DataReadoutDict: \n";
+      I3DataReadoutDict::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3DataReadoutPtr((I3DataReadout*)0))
+	    o<<"Null I3DataReadout";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
  private:
   // copy and assignment are private
   I3DataReadoutDict(const I3DataReadout&);
@@ -62,17 +85,7 @@ class I3DataReadoutDict : public TObject,
  */
 inline ostream& operator<<(ostream& o,const I3DataReadoutDict& v)
 {
-  o<<"[ I3DataReadoutDict: \n";
-  I3DataReadoutDict::const_iterator iter;
-  for(iter=v.begin();iter!=v.end();iter++)
-    {
-      o<<iter->first;
-      if(iter->second==I3DataReadoutPtr((I3DataReadout*)0))
-	o<<"Null I3DataReadout";
-      else
-	o<<*(iter->second);
-    }
-  o<<"]\n";
+  v.ToStream(o);
   return o;
    
 }

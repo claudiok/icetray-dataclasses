@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.18 2004/07/31 22:31:10 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.19 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/07/31 22:31:10 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,6 +20,8 @@
 #include "I3OMGeo.h"
 #include "OMKey.h"
 #include "StoragePolicy.h"
+#include <sstream>
+
 /**
  * @brief Container for IceCube and AMANDA OMGeos 
  *
@@ -43,7 +45,29 @@ class I3InIceGeometry : public TObject,
    * default destructor
    */
   virtual ~I3InIceGeometry(){};
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3InIceGeometry: \n";
+      I3InIceGeometry::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3OMGeoPtr((I3OMGeo*)0))
+	    o<<"Null I3OMGeo";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"]\n";
+    }
   
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
   private:
 /*   // copy and assignment are private */
   I3InIceGeometry(const I3InIceGeometry& rhs); 
@@ -58,17 +82,7 @@ class I3InIceGeometry : public TObject,
  */
 inline ostream& operator<<(ostream& o,const I3InIceGeometry& v)
 {
-  o<<"[ I3InIceGeometry: \n";
-  I3InIceGeometry::const_iterator iter;
-  for(iter=v.begin();iter!=v.end();iter++)
-    {
-      o<<iter->first;
-      if(iter->second==I3OMGeoPtr((I3OMGeo*)0))
-	o<<"Null I3OMGeo";
-      else
-	o<<*(iter->second);
-    }
-  o<<"]\n";
+  v.ToStream(o);
   return o;
    
 }

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ParticleMultiMap.h,v 1.2 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3ParticleMultiMap.h,v 1.3 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3ParticleMultiMap.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  */
 
@@ -46,6 +46,13 @@ class I3ParticleMultiMap : public TObject, public MultiMapPolicy<string, I3Parti
 	    o<<*(iter->second);
 	}
       o<<"\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
   
  private:

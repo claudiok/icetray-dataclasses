@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHit.h,v 1.4 2004/08/16 16:22:13 pretz Exp $
+    $Id: I3ArrayHit.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
     @file I3ArrayHit.h
-    @version $Revision: 1.4 $
+    @version $Revision: 1.5 $
     @date Fri Jul  9 10:50:16 EDT 2004 
     @author rulrich
 */
@@ -12,6 +12,7 @@
 #include <TObject.h>
 #include <TClass.h>
 
+#include <sstream>
 #include "dataclasses/I3StationHit.h"
 #include "dataclasses/StoragePolicy.h"
 
@@ -41,6 +42,13 @@ class I3ArrayHit : public TObject,
   virtual void ToStream(ostream& o) const
     {
       o<<IsA()->GetName()<<"\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:

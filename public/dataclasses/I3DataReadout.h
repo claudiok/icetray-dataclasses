@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.15 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.16 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -17,6 +17,7 @@
 #include "StoragePolicy.h"
 #include "TClass.h"
 #include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -80,6 +81,16 @@ class I3DataReadout : public TObject
   virtual void ToStream(ostream& o) const
     {
       o<<"[ "<<IsA()->GetName()<<" ]\n";
+    }
+
+  /**
+   * dumps the data readout to the given string
+   */
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:

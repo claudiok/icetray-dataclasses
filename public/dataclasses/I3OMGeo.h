@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.27 2004/08/02 22:12:28 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.28 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.27 $
- * @date $Date: 2004/08/02 22:12:28 $
+ * @version $Revision: 1.28 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,6 +18,7 @@
 #include <TClass.h>
 #include <string>
 #include <iostream>
+#include <sstream>
 #include "dataclasses/OMKey.h"
 
 using namespace std;
@@ -76,19 +77,6 @@ class I3OMGeo : public TObject
    * destructor
    */
   virtual ~I3OMGeo(){}
-
-  /**
-   * assignment is member-wise assignment
-   */
-  const I3OMGeo& operator=(const I3OMGeo& rhs){
-    if (this == &rhs) return *this; // check for assignment to self
-    TObject::operator=(rhs); // call base class assignment operator
-    fPosition = rhs.fPosition;
-    fOrientation = rhs.fOrientation;
-    fRelativeQE = rhs.fRelativeQE;
-    fArea = rhs.fArea;    
-    return *this;
-  }
 
   /**
    * @return the identity of this OM, either AMANDA or IceCube 
@@ -170,6 +158,13 @@ class I3OMGeo : public TObject
 	<<" Z:"
        <<fPosition.GetZ()
        <<" ]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.26 2004/08/16 22:46:24 dule Exp $
+ * $Id: I3RecoHitSeries.h,v 1.27 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.26 $
- * @date $Date: 2004/08/16 22:46:24 $
+ * @version $Revision: 1.27 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author pretz
  */
@@ -15,6 +15,7 @@
 
 #include "I3RecoHit.h"
 #include "StoragePolicy.h"
+#include <sstream>
 
 /**
  * @brief A list of reco hits.
@@ -64,7 +65,14 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
 	}
       o<<"]\n";
     }
-  
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
  private:
   // copy and assignment are private:
   I3RecoHitSeries (const I3RecoHitSeries& rhs);

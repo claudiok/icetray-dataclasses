@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPhoton.h,v 1.3 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3MCPhoton.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3MCPhoton.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author pretz
  */
 #ifndef I3MCPHOTON_H
@@ -52,6 +52,14 @@ class I3MCPhoton : public TObject
        <<"Time :"<<fTime;
 
     }
+  
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
  private:
   //ROOT macro
   ClassDef(I3MCPhoton,1);

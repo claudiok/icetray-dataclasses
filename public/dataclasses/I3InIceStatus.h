@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceStatus.h,v 1.6 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3InIceStatus.h,v 1.7 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3InIceStatus.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author pretz
  */
 #ifndef I3INICESTATUSDATA_H
@@ -15,6 +15,7 @@
 #include "I3OMStatusIceCube.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
+#include <sstream>
 
 /**
  * @brief The status of the DeepIce detector.  
@@ -52,6 +53,13 @@ class I3InIceStatus
 	    o<<*(iter->second);
 	}
       o<<"]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.37 2004/08/17 17:21:14 dule Exp $
+    $Id: I3OMResponse.h,v 1.38 2004/08/31 02:56:29 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.37 $
-    @date $Date: 2004/08/17 17:21:14 $
+    @version $Revision: 1.38 $
+    @date $Date: 2004/08/31 02:56:29 $
     @author ehrlich
     @author troy
     @author pretz
@@ -20,6 +20,7 @@
 #include "I3OMGeo.h"
 #include "I3DataReadoutDict.h"
 #include "I3RecoHitSeriesDict.h"
+#include <sstream>
 
 /**
  * @brief The container for all the OMResponse-related data in the event
@@ -79,6 +80,13 @@ class I3OMResponse : public TObject
       o<<"[ I3OMResponse\n"
        <<fDataReadoutDict
        <<"]";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
   private:

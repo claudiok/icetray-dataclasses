@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DecayingMuonTest.cxx,v 1.2 2004/08/30 20:27:10 pretz Exp $
+    $Id: I3DecayingMuonTest.cxx,v 1.3 2004/08/31 02:56:29 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/08/30 20:27:10 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/08/31 02:56:29 $
     @author pretz
 
     @todo
@@ -135,7 +135,7 @@ namespace tut
    void object::test<5>(){
       I3DecayingMuon the_class;
       cout<<the_class<<"\n";
-      //cout<<the_class.ToStream()<<"\n";
-      //log_debug("object written to debug %s\n",the_class.ToStream().c_str());
+      cout<<the_class.ToString()<<"\n";
+      log_debug("object written to debug %s\n",the_class.ToString().c_str());
    }
 }

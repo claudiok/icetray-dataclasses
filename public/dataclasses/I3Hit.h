@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.20 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3Hit.h,v 1.21 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -16,6 +16,7 @@
 #include <TObject.h>
 #include "StoragePolicy.h"
 #include <iostream>
+#include <sstream>
 #include "TClass.h"
 
 using namespace std;
@@ -78,6 +79,13 @@ class I3Hit : public TObject
   virtual void ToStream(ostream& o) const
     {
       o<<"[ "<<IsA()->GetName()<<": Time:"<<fTime<<" ]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:

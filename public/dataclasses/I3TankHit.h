@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.3 2004/08/16 16:22:13 pretz Exp $
+    $Id: I3TankHit.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
     @file I3TankHit.h
-    @version $Revision: 1.3 $
+    @version $Revision: 1.4 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -15,6 +15,7 @@
 #include "dataclasses/StoragePolicy.h"
 
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -96,6 +97,13 @@ class I3TankHit : public TObject {
 /*        <<fTime<<"\n"; */
     }
 
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+  
  private:
   // copy and assignment are private
   I3TankHit(const I3TankHit&); 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Filter.h,v 1.4 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3Filter.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3Filter.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author blaufuss
  */
 
@@ -16,6 +16,7 @@
 #include <TClass.h>
 #include <string>
 #include <iostream>
+#include <sstream>
 
 using namespace std; 
 
@@ -79,6 +80,12 @@ public:
 	 <<" ]\n";
     }
     
+    virtual string ToString() const
+      {
+	ostringstream out;
+	ToStream(out);
+	return out.str();
+      }
     
 private:
     /**

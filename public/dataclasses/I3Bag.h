@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.19 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3Bag.h,v 1.20 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,6 +18,7 @@
 #include "StoragePolicy.h"
 #include <TClass.h>
 
+#include <sstream>
 #include <iostream>
 
 /**
@@ -47,6 +48,31 @@ class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
    */
   ~I3Bag() {};
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3Bag\n";
+      I3Bag::const_iterator iter;
+      for(iter = begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==(TObjectPtr((TObject*)0)))
+	    o<<"[ Null TObject ]\n";
+	  else
+        o<<"[ "
+         <<iter->second->IsA()->GetName()
+         <<" ]"
+         <<"\n";
+	}
+      o<<"]";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
  private:
   // copy and assignment are private
   I3Bag(const I3Bag& rhs);
@@ -60,20 +86,7 @@ class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
  */
 inline ostream& operator<<(ostream& o,const I3Bag& bag)
 {
-  o<<"[ I3Bag\n";
-  I3Bag::const_iterator iter;
-  for(iter = bag.begin();iter!=bag.end();iter++)
-    {
-      o<<iter->first;
-      if(iter->second==(TObjectPtr((TObject*)0)))
-	o<<"[ Null TObject ]\n";
-      else
-	o<<"[ "
-	 <<iter->second->IsA()->GetName()
-	 <<" ]"
-	 <<"\n";
-    }
-  o<<"]";
+  bag.ToStream(o);
   return o;
 }
 

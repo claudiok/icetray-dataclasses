@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3OMStatus.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3OMStatus.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -14,6 +14,7 @@
 
 #include <TObject.h>
 #include <TClass.h>
+#include <sstream>
 #include "StoragePolicy.h"
 
 /**
@@ -64,6 +65,18 @@ class I3OMStatus : public TObject
    */
   void SetPMTHighVoltage(Float_t voltage){fPMTHighVoltage = voltage;}
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<IsA()->GetName()<<"\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
  private:
 
   //ROOT macro
@@ -75,7 +88,7 @@ class I3OMStatus : public TObject
  */
 inline ostream& operator<<(ostream& o,const I3OMStatus& status)
 {
-  o<<status.IsA()->GetName()<<"\n";
+  status.ToStream(o);
   return o;
 }
 

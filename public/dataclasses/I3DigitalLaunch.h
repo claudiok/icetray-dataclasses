@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalLaunch.h,v 1.3 2004/08/12 17:33:33 pretz Exp $
+ * $Id: I3DigitalLaunch.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3DigitalLaunch.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/12 17:33:33 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author blaufuss
  */
 #ifndef I3DIGITALLAUNCH_H
@@ -14,6 +14,7 @@
 #include "TObject.h"
 #include "TClass.h"
 #include "dataclasses/StoragePolicy.h"
+#include <sstream>
 
 /**
  * @brief A base class for Digital Readout Launches (DOM or TWR)
@@ -45,6 +46,12 @@ class I3DigitalLaunch : public TObject
          <<" ]\n";
     }
 
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
 
  private:
 

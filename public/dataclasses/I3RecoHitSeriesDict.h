@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.2 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3RecoHitSeriesDict.h,v 1.3 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -56,6 +56,13 @@ class I3RecoHitSeriesDict : public TObject,
 	    o<<*(iter->second);
 	}
       o<<"]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
     }
 
  private:

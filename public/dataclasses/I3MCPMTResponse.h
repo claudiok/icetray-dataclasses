@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.10 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3MCPMTResponse.h,v 1.11 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author klein
  */
 
@@ -13,6 +13,7 @@
 #define I3MCPMTRESPONSE_H
 #include <TObject.h>
 #include <TClass.h>
+#include <sstream>
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -60,6 +61,13 @@ class I3MCPMTResponse : public TObject
        o<<"[ "<<IsA()->GetName()<<" ]\n"
 	<<"StartTime: "<<fStartTime
 	<<"EndTime: "<<fEndTime;
+     }
+
+   virtual string ToString() const
+     {
+       ostringstream out;
+       ToStream(out);
+       return out.str();
      }
 
   private:

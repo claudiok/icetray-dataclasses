@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.3 2004/08/18 18:46:52 pretz Exp $
+ * $Id: I3OMResponseMap.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3OMResponseMap.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/18 18:46:52 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -41,22 +41,28 @@ class I3OMResponseMap : public TObject,
    * destructor
    */
   virtual ~I3OMResponseMap(){};
-  
-  /**
-   * loops through the omresponses looking for one with a number 'omnumber'
-   * and returns it.  Returns 0 if none are found
-   */
-/*   const I3OMResponsePtr FindOMResponse(unsigned int omnumber) const  */
-/*   {  */
-/*     const_iterator iter; */
-/*     for(iter = begin() ; iter!= end() ; iter++){ */
-/*       if(*iter != 0) */
-/* 	if((*iter)->GetOMNumber()==omnumber) */
-/* 	  return *iter; */
-/*     } */
-/*     //FIXME: ugly */
-/*     return I3OMResponsePtr(); */
-/*   } */
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3OMResponseMap: \n";
+      I3OMResponseMap::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3OMResponsePtr((I3OMResponse*)0))
+	    o<<"Null I3OMResponse";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }  
 
   private:
   // copy and assignment private
@@ -72,19 +78,8 @@ class I3OMResponseMap : public TObject,
  */
 inline ostream& operator<<(ostream& o,const I3OMResponseMap& v)
 {
-  o<<"[ I3OMResponseMap: \n";
-  I3OMResponseMap::const_iterator iter;
-  for(iter=v.begin();iter!=v.end();iter++)
-    {
-      o<<iter->first;
-      if(iter->second==I3OMResponsePtr((I3OMResponse*)0))
-	o<<"Null I3OMResponse";
-      else
-	o<<*(iter->second);
-    }
-  o<<"]\n";
+  v.ToStream(o);
   return o;
-   
 }
 
 /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultDict.h,v 1.5 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3RecoResultDict.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3RecoResultDict.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author ehrlich
  * @author pretz
  */
@@ -35,6 +35,28 @@ class I3RecoResultDict : public TObject,
    */
   virtual ~I3RecoResultDict() {};
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3RecoResultDict: \n";
+      I3RecoResultDict::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3RecoResultPtr((I3RecoResult*)0))
+	    o<<"Null I3RecoResult";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
  private:
   // copy and assignment are private
   I3RecoResultDict(const I3RecoResultDict&);
@@ -50,17 +72,7 @@ class I3RecoResultDict : public TObject,
  */
 inline ostream& operator<<(ostream& o,const I3RecoResultDict& v)
 {
-  o<<"[ I3RecoResultDict: \n";
-  I3RecoResultDict::const_iterator iter;
-  for(iter=v.begin();iter!=v.end();iter++)
-    {
-      o<<iter->first;
-      if(iter->second==I3RecoResultPtr((I3RecoResult*)0))
-	o<<"Null I3RecoResult";
-      else
-	o<<*(iter->second);
-    }
-  o<<"]\n";
+  v.ToStream(o);
   return o;
 }
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleData.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3MCParticleData.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3MCParticleData.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author pretz
  *
  */
@@ -78,6 +78,14 @@ class I3MCParticleData : public TObject
        <<fInIceParticles
        <<fIceTopParticles;
     }
+  
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
 
  private:
   // copy and assignment are private

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankMaterial.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3TankMaterial.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
  *
  * @file I3TankMaterial.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/31 02:56:29 $
  * @author Peter Niessen Thu Feb 19 11:42:22 EST 2004
  */
 #ifndef __I3TANKMATERIAL_H_
@@ -33,6 +33,20 @@ class I3TankMaterial : public TObject
   I3TankMaterial (const I3TankMaterial &right) { *this = right; }
   I3TankMaterial &operator= (const I3TankMaterial &right) { return *this; }
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3TankMaterial ]\n";
+    }
+
+  virtual string ToString() const
+    {
+      ostringstream out;
+      ToStream(out);
+      return out.str();
+    }
+
+ private:
+  // ROOT macro
   ClassDef (I3TankMaterial, 1);
 
 };
@@ -42,7 +56,8 @@ class I3TankMaterial : public TObject
  */
 inline ostream& operator<<(ostream& o, I3TankMaterial& material)
 {
-  o<<" [ I3TankMaterial ]"<<"\n";
+  material.ToStream(o);
+  return o;
 }
 
 /**
