@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.2 2005/01/24 19:45:04 deyoung Exp $
+ * $Id: I3OMSelectionDict.h,v 1.3 2005/01/25 23:22:04 ehrlich Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/01/24 19:45:04 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/01/25 23:22:04 $
  * @author deyoung
  * @author troy
  */
@@ -91,9 +91,6 @@ class I3OMSelectionDict : public TObject,
   }  
 
  private:
-  // copy and assignment private
-  I3OMSelectionDict(const I3OMSelectionDict&);
-  const I3OMSelectionDict& operator=(const I3OMSelectionDict&);
 
   // ROOT macro
   ClassDef(I3OMSelectionDict,1);
