@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.8 2004/08/02 22:12:28 pretz Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.9 2004/08/16 13:02:53 pretz Exp $
 
     @file STLVectorStoragePolicy.h
-    @version $Revision: 1.8 $
-    @date $Date: 2004/08/02 22:12:28 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/08/16 13:02:53 $
     @author Troy Straszheim
 */
 #ifndef STLVECTOR_POLICY_INCLUDED
@@ -58,7 +58,7 @@ class STLVectorStoragePolicy  {
   typedef const ElementType& 				const_reference;
 
  private:
-  vector_type vector_;
+  vector_type vector_; //||
 
  public:
 
