@@ -9,7 +9,6 @@
 #include "I3MCHitSeries.h"
 #include "I3DataReadoutList.h"
 #include "I3RecoHitSeriesData.h"
-#include "dataclasses/I3Iterator.h"
 
 class I3OMResponse : public TObject
 {

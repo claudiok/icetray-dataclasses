@@ -1,28 +1,29 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3MCTrackData.h,v 1.6 2004/02/16 04:19:10 troy Exp $
+
+    @version $Revision: 1.6 $
+    @date $Date: 2004/02/16 04:19:10 $
+    @author
+
+    @todo need to add "truth"
+
+*/
 #ifndef I3MCTRACKDATA_H
 #define I3MCTRACKDATA_H
 
-#include <TObject.h>
-#include <TObjArray.h>
+#include "dataclasses/I3MCTrackList.h"
 
-#include "dataclasses/I3Iterator.h"
+class I3MCTrackDataHeader { };
 
-class I3MCTrackList;
+typedef TClonesPolicy<I3MCTrackList> I3MCTrackDataStoragePolicy;
 
-class I3MCTrackData : public TObject
-{
- public:
-  I3MCTrackData();
-  virtual ~I3MCTrackData();
-  int GetNumberMCTrackLists() const;
-  const I3MCTrackList& GetMCTrackList(unsigned short number) const;
-  Bool_t HasTrueMCTrackList() const;
-  const I3MCTrackList& GetTrueMCTrackList() const;
-  void AddMCTrackList(I3MCTrackList* mctracklist_);
-  void SetTrueTrackList(I3MCTrackList& list);
-  I3Iterator<const I3MCTrackList>* MakeTrackListIterator() const;
- private:
-  TObjArray  *mctracklist;
-  I3MCTrackList* fTrueTrackList;
-  ClassDef(I3MCTrackData, 1);
-};
+typedef GarnishedVector<I3MCTrackDataHeader, 
+			I3MCTrackList, 
+			I3MCTrackDataStoragePolicy> I3MCTrackData;
+
+
+
+
 #endif

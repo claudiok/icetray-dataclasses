@@ -1,27 +1,32 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3RecoResultData.h,v 1.7 2004/02/16 04:19:10 troy Exp $
+
+    @version $Revision: 1.7 $
+    @date $Date: 2004/02/16 04:19:10 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3RECORESULTDATA_H
 #define I3RECORESULTDATA_H
 
-#include <TObject.h>
-#include <TObjArray.h>
-
-#include "dataclasses/I3Iterator.h"
 
 #include "I3RecoResult.h"
+#include "TClonesPolicy.h"
+#include "GarnishedVector.h"
 
 
-class I3RecoResultData : public TObject
-{
-  TObjArray    *recoresult;
 
-  public:
-           I3RecoResultData();
-  virtual ~I3RecoResultData();
+class I3RecoResultDataHeader { };
 
-  int                 GetNumberRecoResults() const;
-  const I3RecoResult& GetRecoResult(unsigned short number) const;
-  void                AddRecoResult(I3RecoResult* recoresult_);
-  I3Iterator<const I3RecoResult>* MakeRecoResultIterator() const;
+typedef TClonesPolicy<I3RecoResult> I3RecoResultDataStoragePolicy;
 
-  ClassDef(I3RecoResultData, 1);
-};
+typedef GarnishedVector<I3RecoResultDataHeader, 
+			I3RecoResult, 
+			I3RecoResultDataStoragePolicy> I3RecoResultData;
+
 #endif
+
