@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.6 2004/09/13 22:49:51 dule Exp $
+ * $Id: I3Direction.h,v 1.7 2004/09/24 22:31:01 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/09/13 22:49:51 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/09/24 22:31:01 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.6 2004/09/13 22:49:51 dule Exp $
+// $Id: I3Direction.h,v 1.7 2004/09/24 22:31:01 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -90,12 +90,12 @@ class I3Direction : public TObject
   void SetDirection(Double_t x, Double_t y, Double_t z);
 
   /**
-   * Reset direction to 0
+   * Reset all elements of I3Direction to NAN
    */
   void ResetDirection();
 
   /**
-   * Set null direction for non-existing direction
+   * Set null direction for non-existing direction (ResetDirection)
    */
   void NullDirection();
 

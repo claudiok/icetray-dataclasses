@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.13 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3Position.h,v 1.14 2004/09/24 22:31:16 dule Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/09/24 22:31:16 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.13 2004/08/31 12:35:51 pretz Exp $
+// $Id: I3Position.h,v 1.14 2004/09/24 22:31:16 dule Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -79,12 +79,12 @@ class I3Position : public TObject
   void SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame f=car);
 
   /**
-   * Reset position to 0
+   * Reset all elements of I3Position to NAN
    */
   void ResetPosition();
 
   /**
-   * Set null position for non-existing position
+   * Set null position for non-existing position (ResetPosition)
    */
   void NullPosition();
 
