@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.8 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.9 2004/02/27 22:48:20 ehrlich Exp $
  *
  * The basic Optical Module Geometry class.  This is the static 
  * frozen-in-the-ice properties of an optical module
  *
- * @version $Revision: 1.8 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/02/27 22:48:20 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,6 +20,7 @@
 
 #include <TObject.h>
 #include <TObjArray.h>
+#include <TRef.h>
 
 class I3OMGeo : public TObject
 {
@@ -35,7 +36,7 @@ class I3OMGeo : public TObject
   /**
    * constructor
    */
-  I3OMGeo() { Init(); }
+  I3OMGeo() { Init(); TRef r=this;}
 
   /**
    * copy constructor just uses assignment

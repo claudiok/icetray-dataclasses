@@ -21,6 +21,7 @@ I3Track::I3Track()
   fEnergy=0;
   parenttrack=NULL;
   childrentrack=NULL;
+  TRef r=this;
 }
   
 I3Track::~I3Track() {if (childrentrack) {childrentrack->Delete(); delete childrentrack;}}
