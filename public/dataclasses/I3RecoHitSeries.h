@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoHitSeries.h,v 1.12 2004/02/23 22:36:49 troy Exp $
+    $Id: I3RecoHitSeries.h,v 1.13 2004/02/24 01:51:35 pretz Exp $
 
-    @version $Revision: 1.12 $
-    @date $Date: 2004/02/23 22:36:49 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/02/24 01:51:35 $
     @author
 
     @todo
@@ -27,7 +27,7 @@ class I3RecoHitSeries : public VectorPolicy<I3RecoHit>::ThePolicy
   ClassDef(I3RecoHitSeries,1);
 };
 
-typedef PtrPolicy<I3RecoHitSeries> I3RecoHitSeriesPtr;
+typedef PtrPolicy<I3RecoHitSeries>::ThePolicy I3RecoHitSeriesPtr;
 
 #endif
 

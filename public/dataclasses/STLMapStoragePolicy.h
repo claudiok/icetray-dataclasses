@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.4 2004/02/23 21:45:51 troy Exp $
+    $Id: STLMapStoragePolicy.h,v 1.5 2004/02/24 01:51:35 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/02/23 21:45:51 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/02/24 01:51:35 $
     @author Troy Straszheim
 
 */
@@ -31,6 +31,7 @@ class STLMapStoragePolicy {
 
   map_type map_;
 
+ public:
   STLMapStoragePolicy& operator=(const STLMapStoragePolicy &rhs) {
     if (this == &rhs) return *this;
     map_ = rhs.map_;

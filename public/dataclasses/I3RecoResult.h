@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoResult.h,v 1.15 2004/02/23 22:36:49 troy Exp $
+    $Id: I3RecoResult.h,v 1.16 2004/02/24 01:51:35 pretz Exp $
 
-    @version $Revision: 1.15 $
-    @date $Date: 2004/02/23 22:36:49 $
+    @version $Revision: 1.16 $
+    @date $Date: 2004/02/24 01:51:35 $
     @author
 
     @todo get/set best stuff
@@ -27,6 +27,6 @@ class I3RecoResult : public VectorPolicy<I3RecoTrackList>::ThePolicy
   ClassDef(I3RecoResult, 1);
 };
 
-typedef PtrPolicy<I3RecoResult> I3RecoResultPtr;
+typedef PtrPolicy<I3RecoResult>::ThePolicy I3RecoResultPtr;
 
 #endif
