@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.4 2004/02/23 22:36:49 troy Exp $
+    $Id: StoragePolicy.h,v 1.5 2004/02/24 02:48:43 troy Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/02/23 22:36:49 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/02/24 02:48:43 $
     @author
 
     @todo
@@ -39,13 +39,13 @@ struct MapPolicy {
 
 template <class Pointed>
 struct PtrPolicy {
-  typedef SmartPtr<Pointed> ThePolicy;
+  //  typedef SmartPtr<Pointed> ThePolicy;
 
-  // to not use smart pointers:
-  // this is probably not something you ever want to do 
-  // because the app will leak memory like a stuck pig
+  // to not use smart pointers: currently this results in a bad memory
+  // leak.  We will have smart pointers working shortly, they have
+  // been tested and work, but not in this build at the moment
 
-  // typedef Pointed* ThePolicy;
+  typedef Pointed* ThePolicy;
 };
 
 #endif

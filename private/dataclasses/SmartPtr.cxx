@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: SmartPtr.cxx,v 1.1 2004/02/23 22:10:56 troy Exp $
+    $Id: SmartPtr.cxx,v 1.2 2004/02/24 02:48:43 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/23 22:10:56 $
-    @author Troy Straszheim
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/24 02:48:43 $
+    @author Troy D. Straszheim
 
     @todo
 
@@ -16,13 +16,10 @@
 #include <vector>
 #include <iostream>
 
-//templateClassImp(SmartPtr);
+// templateClassImp(SmartPtr);
 
 using namespace std;
 
-//
-// Instantiations must go in same file as definition of template class for some reason.
-//
 template<class T>
 void SmartPtr<T>::init()
 {

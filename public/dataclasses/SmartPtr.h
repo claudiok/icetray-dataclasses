@@ -1,13 +1,17 @@
-/******************************************************************************
-*                  Template Class SmartPtr (from pp. 209-210)                   *
-*                                                                             *
-* The code for SmartPtr has changed over the years in response to errors        *
-* both in the original source code as well as in the subsequent fixes.  You   *
-* can find a complete list of changes at the More Effective C++ errata page.  *
-* The code here is accurate as of the 13th printing of the book.              *
-******************************************************************************/
-#ifndef RCIPTR_H_INCLUDED
-#define RCIPTR_H_INCLUDED
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: SmartPtr.h,v 1.2 2004/02/24 02:48:43 troy Exp $
+
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/24 02:48:43 $
+    @author Troy D. Straszheim
+
+    @todo
+
+*/
+#ifndef SMARTPTR_H_INCLUDED
+#define SMARTPTR_H_INCLUDED
 
 #include "RCObject.h"
 
@@ -31,6 +35,12 @@ public:
   unsigned use_count() const {
     return counter->use_count();
   }
+
+  template <class newType>
+    operator SmartPtr<newType>() {
+    return SmartPtr<newType>(*this);
+  }
+
 
   class CountHolder: public RCObject {
   public:
