@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.23 2004/07/30 14:55:43 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.24 2004/07/30 18:08:00 dule Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/07/30 14:55:43 $
+ * @version $Revision: 1.24 $
+ * @date $Date: 2004/07/30 18:08:00 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -81,47 +81,22 @@ class I3OMGeo : public TObject
   virtual EOMType GetOMType() const =0;
 
   /**
-   * @return the x position of the OM
-   */
-  Double_t GetX() const { return fPosition.GetX(); }
-
-  /**
-   * @param x the new x position of the OM
-   */
-  void   SetX(Double_t x) { fPosition.SetX(x); }
-
-  /**
-   * @return the y position of the OM
-   */
-  Double_t GetY() const { return fPosition.GetY(); }
-
-  /**
-   * @param y the new y position of the OM
-   */
-  void   SetY(Double_t y) { fPosition.SetY(y); }
-
-  /**
-   * @return the z position of the OM
-   */
-  Double_t GetZ() const { return fPosition.GetZ(); }
-
-  /**
-   * @param z the new z position of the OM
-   */
-  void     SetZ(Double_t z) { fPosition.SetZ(z);; }
-
-  /**
    * @return The position of this OM
    */
-  const I3Position& GetPosition() const { return fPosition;}
+  const I3Position& GetPos() const { return fPosition;}
 
   /**
    * @param position The new position for this OM
    */
-  void SetPosition(I3Position& position)
-    {
-      fPosition = position;
-    }
+  void SetPos(I3Position& pos)
+    {fPosition.SetPosition(pos);}
+  
+  /**
+   * @param position The new position for this OM
+   */
+  void SetPos(Double_t r1, Double_t r2, Double_t r3, 
+	      I3Position::RefFrame frame=I3Position::car)
+    {fPosition.SetPosition(r1,r2,r3,frame);}
   
   /**
    * @return kTRUE if the om is pointed down
