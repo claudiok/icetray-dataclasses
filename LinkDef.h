@@ -44,8 +44,8 @@
 
 #pragma link C++ class I3DataReadoutList+;
 #pragma link C++ class I3DataReadoutList::iterator+;
-#pragma link C++ typedef VectorPolicy<I3DataReadout>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3DataReadout>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3DataReadoutPtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3DataReadoutPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3DataReadoutList::iterator&, const I3DataReadoutList::iterator&);
 #pragma link C++ typedef I3DataReadoutListPtr;
 

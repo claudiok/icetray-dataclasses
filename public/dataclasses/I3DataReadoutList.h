@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutList.h,v 1.12 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3DataReadoutList.h,v 1.13 2004/02/28 04:59:32 ehrlich Exp $
  *
  * Just an list of I3DataReadouts.  
  *
- * @version $Revision: 1.12 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/02/28 04:59:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,7 +19,7 @@
 #include "I3DataReadout.h"
 #include "StoragePolicy.h"
 
-class I3DataReadoutList : public VectorPolicy<I3DataReadout>::ThePolicy
+class I3DataReadoutList : public VectorPolicy<I3DataReadoutPtr>::ThePolicy
 {
 
 
