@@ -4,7 +4,7 @@
 /**
  * Class: I3RecoResult
  *
- * Version: $Id: I3RecoResult.h,v 1.6 2004/01/30 19:15:25 ehrlich Exp $
+ * Version: $Id: I3RecoResult.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
  *
  * Date: 30 Jan 2004
  *
@@ -15,9 +15,6 @@
 #include <TObjArray.h>
 #include "I3RecoTrackList.h"
 #include "dataclasses/I3Iterator.h"
-
-class I3RecoResult : public TObject
-{
 
 /**
  * I3RecoResult 
@@ -34,10 +31,11 @@ class I3RecoResult : public TObject
  * for simpler access to the reconstructed tracks. The data itself is
  * still stored as provided in this class, so that the tracks can also
  * be accessed by this class without the need of recasting.
- * @version $Id: I3RecoResult.h,v 1.6 2004/01/30 19:15:25 ehrlich Exp $
+ * @version $Id: I3RecoResult.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
  * @author Ralf Ehrlich
  */
-  
+class I3RecoResult : public TObject
+{
   protected:
   TObjArray     *recotracklist;
   TRef          bestrecotracklist;

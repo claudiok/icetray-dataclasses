@@ -4,7 +4,7 @@
 /**
  * Class: I3Event
  *
- * Version: $Id: I3Event.h,v 1.6 2004/01/30 18:03:32 ehrlich Exp $
+ * Version: $Id: I3Event.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
  *
  * Date: 30 Jan 2004
  *
@@ -22,19 +22,17 @@
 #include "I3Bag.h"
 
 
-class I3Event : public TObject
-{
-
 /**
  * I3Event 
  * This class provides access to the all data containers which are 
  * related to each event. Additionally it stores event information
  * such as time, id, etc. (it is planned to store this kind of 
  * information in a separate header class).
- * @version $Id: I3Event.h,v 1.6 2004/01/30 18:03:32 ehrlich Exp $
+ * @version $Id: I3Event.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
  * @author Ralf Ehrlich
  */
-  
+class I3Event : public TObject
+{
   unsigned long  runid;
   unsigned long  eventid;
   double         time;
@@ -163,14 +161,14 @@ class I3Event : public TObject
   /**
    * Sets the trigger container. If the container has been set 
    * already, nothing will be done and a message will be logged
-   * @param trigger container.
+   * @param triggerdata_ trigger container.
    */
   void SetTriggerData(I3TriggerData* triggerdata_);
   
   /**
    * Sets the filter container. If the container has been set
    * already, nothing will be done and a message will be logged
-   * @param filter container.
+   * @param filterdata_ filter container.
    */
   void SetFilterData(I3FilterData* filterdata_);
   
@@ -178,7 +176,7 @@ class I3Event : public TObject
    * Sets the monte carlo track container. If the container has 
    * been set already, nothing will be done and a message will 
    * be logged
-   * @param monte carlo track container.
+   * @param mctrackdata_ monte carlo track container.
    */
   void SetMCTrackData(I3MCTrackData* mctrackdata_);
   
@@ -186,7 +184,7 @@ class I3Event : public TObject
    * Sets the OM response container. If the container has 
    * been set already, nothing will be done and a message will 
    * be logged
-   * @param OM response container.
+   * @param omresponsedata_ OM response container.
    */
   void SetOMResponseData(I3OMResponseData* omresponsedata_);
   
@@ -194,7 +192,7 @@ class I3Event : public TObject
    * Sets the reconstruction result container. If the container has 
    * been set already, nothing will be done and a message will 
    * be logged
-   * @param reconstruction result container.
+   * @param recoresultdata_ reconstruction result container.
    */
   void SetRecoResultData(I3RecoResultData* recoresultdata_);
   
@@ -206,7 +204,7 @@ class I3Event : public TObject
    * which do not fit into the data structure. The bag itself
    * can hold any TObject. It can be used, e.g. to store
    * user defined information of the F2k files.
-   * @param bag container.
+   * @param bag_ bag container.
    */
   void SetBag(I3Bag* bag_);
 
