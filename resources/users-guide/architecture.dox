@@ -2,12 +2,6 @@
    @page architecture Introduction to the design of the dataclasses.
 
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
-
-   @section prereqs Prerequisites
-
-   This document assumes that you have set up the IceTray environment and
-   are now ready to (or are already) start writing your own module of
-   some kind.  Full details at @ref index.
    
    @section framework IceTray and the data classes
 
@@ -129,10 +123,11 @@ public:
    at least a rudimentary understanding of the pieces of code they are
    using.  For example, if you use a reconstruction algorithm that relies on a
    particular type of hit extraction result, you must
-   include in your processing chain a module that provides that type
-   of result, or your chain will fail.  For developers, this means
-   that it is important to document your software, and make clear what
-   requirements it has.  A list of best practices that should be
+   ensure that your processing chain includes the module that provides
+   that result, or your code will fail.  For developers, this means
+   that it is important to document your software, making clear what
+   requirements it has and what data it produces.  A list of best
+   practices that should be 
    followed in your code can be found at @ref best-practices.
   
    @section containers Lists of objects
@@ -169,6 +164,8 @@ public:
 
    @section pointers Pointers and references to data
 
+   @todo *** TALKING OUT OF ASS ***
+
    In general much of the data relies on context: a reconstruction may
    store information about what hits were used in the fit, but those
    hits are not a part of the reconstruction, because they may also be
@@ -202,6 +199,8 @@ public:
 
    @section root A note regarding Root
    
+   @todo *** TALKING OUT OF ASS ***
+
    It is expected that most users will use Root for physics analysis, and
    these classes have been designed to work well in interactive Root
    sessions.  Root is also used extensively for I/O in the system, and is

@@ -3,13 +3,7 @@
 
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
 
-   @section prereqs Prerequisites
-
-   This document assumes that you have set up the icetray environment and
-   are now ready to (or are already) start writing your own module of
-   some kind.  Full details at @ref index.
-   
-   @section particles Particles
+    @section particles Particles
 
    The basic building blocks of events, in either Monte Carlo or
    reconstruction, are referred to as "particles" and are derived from
@@ -25,11 +19,17 @@
    This means that any operation that can be performed on a parent
    class can be performed on an object of a class derived from that
    parent.  For example, although the @c ParticleType() method is not
-   shown for all classes, it is a valid method that can be called for
-   any track, cascade, or primary object.
+   shown for all classes in the diagram below, it is a valid method
+   that can be called for any track, cascade, or primary object.  The
+   items in the dashed boxes are template parameters, as discussed
+   in @ref template-blocks, below.
 
    <img src="../../dataclasses/resources/users-guide/TrackTypes.png">
    
+   @section template-blocks Templated functionality
+
    
+
+   @section composite-tracks Composite Tracks
 
 */

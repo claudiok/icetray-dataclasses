@@ -3,12 +3,6 @@
 
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
 
-   @section prereqs Prerequisites
-
-   This document assumes that you have set up the icetray environment and
-   are now ready to (or are already) start writing your own module of
-   some kind.  Full details at @ref index.
-   
    @section omresponse The OM Response
 
     The @c I3OMResponse object holds the information recorded by a
