@@ -10,7 +10,7 @@ environment set up and ready to use.  Visit the new
 
 There is also a webpage about <a href="http://glacier.lbl.gov/icetray">
 IceTray</a> that has a 
-<a href="http://glacier.lbl.gov/releases/ICETRAY-APP/V00-00-01/release/root-icetray/resources/README/bfd.html">
+<a href="http://glacier.lbl.gov/icetray/bfd.html">
 walk-though</a> of how to set up the bfd program.<br>
 
 Note that if you are working on a cluster, you may not need to install 
