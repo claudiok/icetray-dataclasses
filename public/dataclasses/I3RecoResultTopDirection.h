@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopDirection.h,v 1.4 2004/08/02 15:29:52 blaufuss Exp $
+ * $Id: I3RecoResultTopDirection.h,v 1.5 2004/08/05 13:00:21 troy Exp $
  *
  * @file I3RecoResultTopDirection.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/02 15:29:52 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/05 13:00:21 $
  * @author Peter Niessen
  */
 
@@ -33,10 +33,7 @@ class I3RecoResultTopDirection : public I3RecoResult
   /**
    * destructor
    */
-  virtual ~I3RecoResultTopDirection() {
-    if(fShowerDirection)
-      delete fShowerDirection;
-  }
+  virtual ~I3RecoResultTopDirection() { }
 
   /**
    * Retrieves the track in this reco result as a constant object
@@ -60,7 +57,7 @@ class I3RecoResultTopDirection : public I3RecoResult
     //return(*(I3ShowerDirectionPtr)NULL);
   }
 
-  bool HasShowerDirection () const {return((fShowerDirection==NULL) ? false : true);}
+  bool HasShowerDirection () const { return fShowerDirection; }
   
   void SetShowerDirection (I3ShowerDirectionPtr shower_direction)
   {

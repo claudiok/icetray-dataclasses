@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.13 2004/08/02 22:12:28 pretz Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.14 2004/08/05 13:00:21 troy Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/08/02 22:12:28 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/08/05 13:00:21 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -33,7 +33,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
   /**
    * constructor
    */
-  I3RecoResultSingleTrack() {fTrack=NULL;}
+  I3RecoResultSingleTrack() {}; //fTrack will automatically be "NULL" 
 
   /**
    * destructor

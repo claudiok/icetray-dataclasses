@@ -1,15 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopStationGeo.h,v 1.4 2004/08/02 22:12:28 pretz Exp $
+ * $Id: I3TopStationGeo.h,v 1.5 2004/08/05 13:00:21 troy Exp $
  *
  * @file I3TopStationGeo.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/02 22:12:28 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/05 13:00:21 $
  * @author PN/RU Tue Jun 22 10:30:16 EDT 2004
  */
-#ifndef __I3TankStationGEO_H_
-#define __I3TankStationGEO_H_
+#ifndef __I3TopStationGEO_H_
+#define __I3TopStationGEO_H_
 
 #include <iostream>
 

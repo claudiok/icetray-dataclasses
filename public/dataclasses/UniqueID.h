@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: UniqueID.h,v 1.4 2004/08/04 19:19:47 ehrlich Exp $
+ * $Id: UniqueID.h,v 1.5 2004/08/05 13:00:21 troy Exp $
  *
  * @file UniqueID.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/04 19:19:47 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/05 13:00:21 $
  * @author ehrlich
  */
 #ifndef UNIQUEID_H
@@ -52,6 +52,7 @@ class UniqueID
 
   UniqueID() {};
   ~UniqueID() {};
+
   Int_t ID(TObjectPtr obj, IDOption option=GET_UNIQUE_ID);
   Int_t ID(I3MCEventPtr obj, IDOption option=GET_UNIQUE_ID);
   Int_t ID(I3MCParticleDataPtr obj, IDOption option=GET_UNIQUE_ID);

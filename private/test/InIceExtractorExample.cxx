@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.12 2004/07/30 19:09:40 dule Exp $
+    $Id: InIceExtractorExample.cxx,v 1.13 2004/08/05 13:00:21 troy Exp $
 
-    @version $Revision: 1.12 $
-    @date $Date: 2004/07/30 19:09:40 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/08/05 13:00:21 $
     @author Troy D. Straszheim
 
     @todo
@@ -90,9 +90,10 @@ namespace tut
     AMANDAExtractor(vector<I3OMGeoAMANDAPtr> &geometry_to_fill) 
       : mygeometry_(geometry_to_fill) { };
 
-    void operator()(pair<OMKey,I3OMGeoPtr> the_pair) {
+    void operator()(pair<OMKey,I3OMGeoPtr> the_pair) 
+    {
       I3OMGeoPtr p = the_pair.second;
-      I3OMGeoAMANDAPtr amandap = boost::dynamic_pointer_cast<I3OMGeoAMANDA>(p);
+      I3OMGeoAMANDAPtr amandap = roost::dynamic_pointer_cast<I3OMGeoAMANDA>(p);
       if (amandap) mygeometry_.push_back(amandap);
     }
   };
@@ -116,8 +117,8 @@ namespace tut
     // Make a 30 entry-long I3Geometry with 10 each of
     // OMGeo/OMGeoAMANDA/OMGeoIceCube
     for (int i=0; i<6; i++) {
-      geometry[OMKey(1,i)] = new I3OMGeoAMANDA;
-      geometry[OMKey(2,i)] = new I3OMGeoIceCube;
+      geometry[OMKey(1,i)] = I3OMGeoPtr(new I3OMGeoAMANDA);
+      geometry[OMKey(2,i)] = I3OMGeoPtr(new I3OMGeoIceCube);
     }
   
       // loop through this geometry (from begin() to end()) and print
@@ -159,8 +160,7 @@ namespace tut
 //     // let's see what's in our new array, should be just omgeoamandas
     cout << "AMANDAS ONLY" << endl;
     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOMPtr);
-
-      }
+  }
 
   // An example using the new OMKey access to the InIceGeometry
   template<> template<>
@@ -174,13 +174,13 @@ namespace tut
 	{
 	  if(str<0)
 	    {
-	      I3OMGeoAMANDAPtr omamanda(new I3OMGeoAMANDA());
+	      I3OMGeoPtr omamanda(new I3OMGeoAMANDA());
 	      omamanda->SetPos(rand() %1000,rand() %1000,rand() %1000);
 	      geometry.GetInIceGeometry()[OMKey(str,om)] = omamanda;
 	    }
 	  if(str>0)
 	    {
-	      I3OMGeoIceCubePtr omicecube(new I3OMGeoIceCube());
+	      I3OMGeoPtr omicecube(new I3OMGeoIceCube());
 	      omicecube->SetPos(rand() %1000,rand() %1000,rand() %1000);
 	      geometry.GetInIceGeometry()[OMKey(str,om)] = omicecube;
 	    }

@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: SelectorTest.cxx,v 1.1 2004/07/30 04:27:48 pretz Exp $
+ * $Id: SelectorTest.cxx,v 1.2 2004/08/05 13:00:21 troy Exp $
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/30 04:27:48 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/05 13:00:21 $
  * @author pretz
  *
  * @todo
@@ -49,7 +49,7 @@ namespace tut
     series.resize(5);
     for(int i=0;i<5;i++)
       {
-	series[i]=new I3RecoHit();
+	series[i]= I3RecoHitPtr(new I3RecoHit);
       }
     series[0]->SetTime(3.4);
     series[1]->SetTime(5.1);
@@ -75,7 +75,7 @@ namespace tut
     vector<OMKey> bad_tubes;
     for(int string = 1;string<=5;string++)
       for(int tube=1;tube<=5;tube++)
-	geo[OMKey(string,tube)] = new I3OMGeoIceCube();
+	geo[OMKey(string,tube)] = I3OMGeoPtr(new I3OMGeoIceCube);
     bad_tubes.push_back(OMKey(3,5));
     bad_tubes.push_back(OMKey(1,2));
     bad_tubes.push_back(OMKey(1,4));

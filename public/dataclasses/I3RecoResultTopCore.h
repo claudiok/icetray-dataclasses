@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopCore.h,v 1.4 2004/08/02 15:29:52 blaufuss Exp $
+ * $Id: I3RecoResultTopCore.h,v 1.5 2004/08/05 13:00:21 troy Exp $
  *
  * @file I3RecoResultTopCore.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/02 15:29:52 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/05 13:00:21 $
  * @author Peter Niessen
  */
 
@@ -33,10 +33,7 @@ class I3RecoResultTopCore : public I3RecoResult
   /**
    * destructor
    */
-  virtual ~I3RecoResultTopCore() {
-    if(fShowerCore)
-      delete fShowerCore;
-  }
+  virtual ~I3RecoResultTopCore() {}
 
   /**
    * Retrieves the track in this reco result as a constant object
@@ -60,7 +57,7 @@ class I3RecoResultTopCore : public I3RecoResult
     //return(*(I3ShowerCorePtr)NULL);
   }
 
-  bool HasShowerCore () const {return((fShowerCore==NULL) ? false : true);}
+  bool HasShowerCore () const {return fShowerCore; } 
   
   void SetShowerCore (I3ShowerCorePtr shower_core)
   {

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3GeometryTest.cxx,v 1.6 2004/07/31 22:31:10 pretz Exp $
+    $Id: I3GeometryTest.cxx,v 1.7 2004/08/05 13:00:21 troy Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/07/31 22:31:10 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/08/05 13:00:21 $
     @author pretz
 
     @todo
@@ -50,7 +50,8 @@ namespace tut
 //   om_icecube->SetX(10.5); // changed to make consistent with I3Position
   om_icecube->SetPos(10.5,om_icecube->GetPos().GetY(),om_icecube->GetPos().GetZ());
 
-  geometry->GetInIceGeometry()[OMKey(1,15)] = om_icecube;     
+  geometry->GetInIceGeometry()[OMKey(1,15)] = om_icecube;
+
   TTree *t = new TTree("mytree","tree");
   cout<<geometry->GetInIceGeometry().size()<<endl;
       
@@ -77,7 +78,8 @@ namespace tut
 //     om_icecube->SetX(10.5); // changed to make consistent with I3Position
     om_icecube->SetPos(10.5,om_icecube->GetPos().GetY(),om_icecube->GetPos().GetZ());
 
-    geometry.GetInIceGeometry()[OMKey(1,15)] = om_icecube;      
+    geometry.GetInIceGeometry()[OMKey(1,15)] = om_icecube;
+
     ensure("checking read in value",
 	   geometry.GetInIceGeometry()[OMKey(1,15)] 
 	   != I3OMGeoPtr((I3OMGeo*)0) );

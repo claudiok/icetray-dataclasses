@@ -54,7 +54,8 @@ namespace tut
     event.GetOMResponseMap()[OMKey(1,2)]=resp;
 
     I3RecoResultRDMCFitPtr fit(new I3RecoResultRDMCFit);
-    event.GetRecoResultDict()["f2kFit"]=fit;
+    event.GetRecoResultDict()["f2kFit"]= fit;
+    //      roost::static_pointer_cast<I3RecoResult>(fit);
 
     TNamed* n = new TNamed("Foo","");
     TObjectPtr obj(n);

@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.114 2004/08/04 20:46:32 ehrlich Exp $
-// $Revision: 1.114 $
-// $Date: 2004/08/04 20:46:32 $
+// $Id: LinkDef.h,v 1.115 2004/08/05 13:00:21 troy Exp $
+// $Revision: 1.115 $
+// $Date: 2004/08/05 13:00:21 $
 //
 
 #ifdef __CINT__
@@ -383,7 +383,7 @@
 #pragma link C++ class OMKey+;
 #pragma link C++ typedef StationKey;
 
-#pragma link C++ class UniqueID;
+#pragma link C++ class UniqueID+;
 
 
 #endif
