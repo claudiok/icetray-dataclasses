@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3EnergyCascade.h,v 1.1.2.1 2004/04/16 20:27:05 deyoung Exp $
+    $Id: I3EnergyCascade.h,v 1.1.2.2 2004/04/16 21:44:33 pretz Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/16 20:27:05 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/16 21:44:33 $
     @author deyoung
 
     @todo
@@ -16,7 +16,7 @@
 #include "I3CascadeImpl.h"
 #include "I3NonDirectional.h"
 #include "I3Identifiable.h"
-#include "I3Localizable.h"
+#include "I3Localized.h"
 #include "I3Energetic.h"
 
 #ifndef I3ENERGYCASCADE_H
@@ -26,7 +26,7 @@
 
 class I3EnergyCascade : public I3CascadeImpl<I3NonDirectional,
 	                                     I3Identifiable,
-	                                     I3Localizable,
+	                                     I3Localized,
                                              I3Energetic>
 {
 public:
