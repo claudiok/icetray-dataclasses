@@ -34,14 +34,14 @@ class I3OMResponse : public TObject
 // const I3OMGeo& GetGeometry() const;
 // void SetGeometry(I3OMGeo& geometry_);
 
-  const I3MCHitSeries& GetMCHitSeries() const { return mchitseries; }
-  I3MCHitSeries& GetMCHitSeries() { return mchitseries; }
+  const I3MCHitSeries& MCHitSeries() const { return mchitseries; }
+  I3MCHitSeries& MCHitSeries() { return mchitseries; }
 
-  // const I3DataReadoutList& GetDataReadoutList() const { return datareadoutlist; }
-  // I3DataReadoutList& GetDataReadoutList() { return datareadoutlist; }
+  const I3DataReadoutList& tDataReadoutList() const { return datareadoutlist; }
+  I3DataReadoutList& DataReadoutList() { return datareadoutlist; }
 
-  // const I3RecoHitSeriesData& GetRecoHitSeriesData() const { return recohitseriesdata; }
-  // I3RecoHitSeriesData& GetRecoHitSeriesData() { return recohitseriesdata; }
+  const I3RecoHitSeriesData& RecoHitSeriesData() const { return recohitseriesdata; }
+  I3RecoHitSeriesData& RecoHitSeriesData() { return recohitseriesdata; }
 
   ClassDef(I3OMResponse,1);
 };

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DigitalSeries.h,v 1.11 2004/02/21 18:52:38 troy Exp $
+    $Id: I3DigitalSeries.h,v 1.12 2004/02/23 16:31:25 pretz Exp $
 
-    @version $Revision: 1.11 $
-    @date $Date: 2004/02/21 18:52:38 $
+    @version $Revision: 1.12 $
+    @date $Date: 2004/02/23 16:31:25 $
     @author
 
     @todo
@@ -16,7 +16,7 @@
 #include "I3Digital.h"
 #include "StoragePolicy.h"
 
-class I3DigitalSeries : VectorPolicy<I3Digital>::ThePolicy
+class I3DigitalSeries : public VectorPolicy<I3Digital>::ThePolicy
 {
   Double_t    fStarttime;
   
