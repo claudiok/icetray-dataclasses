@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackData.h,v 1.15 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3MCTrackData.h,v 1.16 2004/02/26 21:04:09 pretz Exp $
  *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/02/26 21:04:09 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -16,10 +16,12 @@
 #define I3MCTRACKDATA_H
 
 #include "dataclasses/I3MCTrackList.h"
+#include "dataclasses/I3MCPrimaryData.h"
 #include "TObject.h"
 
 class I3MCTrackData : public TObject, public MapPolicy<I3MCTrackList>::ThePolicy
 {
+  I3MCPrimaryData fPrimaryData;
  public:
   /**
    * constructor
@@ -30,6 +32,17 @@ class I3MCTrackData : public TObject, public MapPolicy<I3MCTrackList>::ThePolicy
    * destructor
    */
   virtual ~I3MCTrackData() {};
+
+  /**
+   * @return the list of primaries as a constant object
+   */
+  const I3MCPrimaryData& MCPrimaryData() const {return fPrimaryData;}
+
+  /**
+   * @return the list of primaries as a non-const object
+   */
+  I3MCPrimaryData& MCPrimaryData() {return fPrimaryData;}
+
  private:
   // copy and assignment private
   I3MCTrackData(const I3MCTrackData& rhs);

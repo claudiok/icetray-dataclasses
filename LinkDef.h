@@ -136,6 +136,13 @@
 #pragma link C++ function operator!=(const I3TopGeometry::iterator&, const I3TopGeometry::iterator&);
 
 
+#pragma link C++ class I3MCPrimaryData+;
+#pragma link C++ class I3MCPrimaryData::iterator+;
+#pragma link C++ typedef VectorPolicy<I3MCPrimary>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3MCPrimary>::ThePolicy+;
+#pragma link C++ function operator!=(const I3MCPrimaryData::iterator&, const I3MCPrimaryData::iterator&);
+#pragma link C++ typedef I3MCPrimaryDataPtr;*
+
 //
 // simple types with full value semantics
 //
@@ -196,6 +203,8 @@
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
 #pragma link C++ typedef I3TriggerDataPtr;
+#pragma link C++ class I3MCPrimary+;
+#pragma link C++ typedef I3MCPrimaryPtr;
 #endif
 
 //tds
