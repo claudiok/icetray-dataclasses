@@ -21,6 +21,6 @@
    get started using the IceCube offline software.  If you want to
    actually use the @c dataclasses in IceCube, you almost certainly
    need the entire DATACLASS-APP metaproject.  See 
-   @ref dataclasses-setup for more information.
+   <a href="../index.html"> OFFLINE INDEX </a> for more information.
 
 */
