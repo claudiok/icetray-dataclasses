@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.116 2004/08/05 13:19:22 troy Exp $
-// $Revision: 1.116 $
-// $Date: 2004/08/05 13:19:22 $
+// $Id: LinkDef.h,v 1.117 2004/08/05 14:31:11 troy Exp $
+// $Revision: 1.117 $
+// $Date: 2004/08/05 14:31:11 $
 //
 
 #ifdef __CINT__
@@ -199,12 +199,14 @@
 #pragma link C++ class VectorPolicy<I3TankGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!= (const I3TopStationGeo::iterator &, const I3TopStationGeo::iterator &);
 #pragma link C++ typedef I3TopStationGeoPtr;
+#pragma link C++ class I3TopStationGeoPtr+;
 
 #pragma link C++ class I3TankGeo+;
 #pragma link C++ typedef VectorPolicy<I3OMGeoPtr>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3OMGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!= (const I3TankGeo::iterator &, const I3TankGeo::iterator &);
 #pragma link C++ typedef I3TankGeoPtr;
+#pragma link C++ class I3TankGeoPtr+;
 
 #pragma link C++ class I3TopGeometry+;
 //#pragma link C++ class I3TopGeometry::iterator+;
@@ -226,6 +228,7 @@
 #pragma link C++ function operator!= (const I3StationHit::iterator &,
                                       const I3StationHit::iterator &);
 #pragma link C++ typedef I3StationHitPtr;
+#pragma link C++ class I3StationHitPtr+;
 
 #pragma link C++ class I3ArrayHit+;
 //#pragma link C++ class I3ArrayHit::iterator+;
