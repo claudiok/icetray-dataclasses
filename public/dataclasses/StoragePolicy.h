@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.19 2005/03/31 17:39:49 troy Exp $
-    @version $Revision: 1.19 $
-    @date $Date: 2005/03/31 17:39:49 $
+    $Id: StoragePolicy.h,v 1.20 2005/03/31 17:49:33 troy Exp $
+    @version $Revision: 1.20 $
+    @date $Date: 2005/03/31 17:49:33 $
 
     @author troy d. straszheim
 */
@@ -20,6 +20,7 @@
 #include "STLMultiMapStoragePolicy.h"
 
 #include "services/I3Logging.h"
+
 
 // temporary typedefs to compensate for removal of root shit
 
@@ -53,14 +54,15 @@ namespace boost
   namespace serialization 
   {
     class access;
-  }
-  template <class T> struct nvp;
-  template <class T> nvp<T> make_nvp(const char* name, T& t);
+    template <class T> struct nvp;
+    template <class T> nvp<T> make_nvp(const char* name, T& t);
 #ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
-  template <class Base, class Derived, class Retval>
-  Retval base_object(Derived &d);
+    template <class Base, class Derived, class Retval>
+      Retval base_object(Derived &d);
 #endif
+  }
 }
+
 using boost::serialization::make_nvp;
 using boost::serialization::base_object;
 
