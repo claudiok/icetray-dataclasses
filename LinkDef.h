@@ -139,6 +139,7 @@
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ class I3RecoResultSingleTrack+;
+#pragma link C++ class I3RecoResultAlternativeSingleTracks+;
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ class I3RecoTrackComposite+;
 #pragma link C++ class I3Track+;
