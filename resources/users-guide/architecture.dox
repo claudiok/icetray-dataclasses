@@ -209,8 +209,6 @@ public:
 
    @section root A note regarding Root
    
-   @todo *** TALKING OUT OF ASS ***
-
    It is expected that most users will use Root for physics analysis, and
    these classes have been designed to work well in interactive Root
    sessions.  Root is also used extensively for I/O in the system, and is
