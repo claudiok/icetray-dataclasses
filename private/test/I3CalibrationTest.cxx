@@ -4,6 +4,8 @@
 #include "dataclasses/I3InIceCalibration.h"
 #include "dataclasses/I3DOMCalibration.h"
 
+#include "icetray/I3TrayException.h"
+
 #include "TFile.h"
 
 #include <string>
@@ -33,6 +35,7 @@ namespace tut
     template<> template<>
     void object::test<1>()
     {	
+      try{
 	I3Calibration* calib = new I3Calibration();
 	
 	calib->ls();
@@ -108,5 +111,10 @@ namespace tut
 			intercept, domptr->GetATWDVoltage(0, 0, 0, 0), 0.0001);
 
 	//cout<<"Gain: "<< domptr->GetATWDGain(0) <<endl;
+      }
+      catch(I3TrayException& e)
+	{
+	  ensure("No exceptions thrown",0);
+	}
     }
 }

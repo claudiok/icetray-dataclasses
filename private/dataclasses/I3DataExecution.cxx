@@ -1,6 +1,7 @@
 #include "dataclasses/I3DataExecution.h"
 
 #include "services/I3Logging.h"
+#include "icetray/I3TrayException.h"
 
 #include <cstdlib>
 #include <iostream>
@@ -18,10 +19,10 @@ I3DataExecution& I3DataExecution::Instance(){
 }
 
 void I3DataExecution::Fatal(const Char_t* message){
-  log_info("This message came from the data and caused a fatal error:\"%s\"\n",
+  log_fatal("This message came from the data and caused a fatal error:\"%s\"\n",
 	message);
   // to be fancied up later and linked into icetray's 'Fatal' call
-  exit(1);
+  throw I3TrayException();
 }
 
 I3DataExecution::I3DataExecution(){
