@@ -2,11 +2,11 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.13 2004/08/02 22:12:28 pretz Exp $
+ $Id: I3Units.h,v 1.14 2004/11/03 20:17:16 pretz Exp $
  
  @file I3Units.h  
  @version $Version:$
- @date $Date: 2004/08/02 22:12:28 $
+ @date $Date: 2004/11/03 20:17:16 $
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -88,7 +88,7 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @date $Date: 2004/08/02 22:12:28 $
+ * @date $Date: 2004/11/03 20:17:16 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should we have a 'speed' here too?
@@ -332,7 +332,7 @@ namespace I3Units
   /**
    * second
    */
-  static const Double_t second      = 1.;
+  static const Double_t second      = 1.e9;
 
   /**
    * nanosecond
