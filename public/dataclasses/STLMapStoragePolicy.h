@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.17 2005/03/07 23:02:37 olivas Exp $
+    $Id: STLMapStoragePolicy.h,v 1.18 2005/03/08 14:35:51 olivas Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.17 $
-    @date $Date: 2005/03/07 23:02:37 $
+    @version $Revision: 1.18 $
+    @date $Date: 2005/03/08 14:35:51 $
     @author Troy Straszheim
 
 */
@@ -13,7 +13,9 @@
 #define STLMAPPOLICY_H
 
 #include <string>
+#include <sstream>
 #include <map>
+#include "services/I3Logging.h"
 
 using namespace std;
 
@@ -91,15 +93,17 @@ class STLMapStoragePolicy {
    */
   ElementType& Get(const KeyType& key) {
     if(!count(key)){
+      ostringstream debugStream;
       if(!IsEmpty()){
-	cerr<<"WARNING: Key \'"<<key<<"\' Not found.  Here's a list of possible keys:"<<endl;
+	debugStream<<endl<<"***WARNING: Key \'"<<key<<"\' not found."<<endl;
+	debugStream<<"Here's a list of possible keys:"<<endl;
 	for(typename map_type::iterator iter = begin(); iter != end(); iter++){
-	  cerr<<iter->first<<" ";
+	  debugStream<<iter->first<<" ";
 	}
-	cerr<<endl;
       }else{
-	cerr<<"WARNING: You're trying to look for keys in an empty map."<<endl;
+	debugStream<<"WARNING: You're trying to look for keys in an empty map."<<endl;
       }
+      log_debug("%s",debugStream.str().c_str());
     }
     return map_[key];
   }
