@@ -1,22 +1,23 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerData.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3TriggerData.h,v 1.3.2.1 2004/07/28 18:56:13 deyoung Exp $
  *
  * @file I3TriggerData.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.3.2.1 $
+ * @date $Date: 2004/07/28 18:56:13 $
  * @author ehrlich
  * @author troy
  * @author pretz
+ * @author deyoung
  *
-
  */
 #ifndef I3TRIGGERDATA_H
 #define I3TRIGGERDATA_H
 
 #include <TObject.h>
 #include "StoragePolicy.h"
+#include "I3Trigger.h"
 
 /**
  * @brief A place holder for the Trigger data within the event
@@ -24,7 +25,8 @@
  * 
  * @todo design and implement this class
  */
-class I3TriggerData : public TObject
+class I3TriggerData : public TObject,
+		      public MapPointainerPolicy<I3TriggerPtr>::ThePolicy
 {
  public:
   /**
