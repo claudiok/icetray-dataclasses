@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrackTest.cxx,v 1.1 2004/05/04 16:55:09 pretz Exp $
+    $Id: I3F2KRecoTrackTest.cxx,v 1.2 2004/05/04 17:15:35 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/05/04 16:55:09 $
-    @author Troy D. Straszheim
+    @version $Revision: 1.2 $
+    @date $Date: 2004/05/04 17:15:35 $
+    @author pretz
 
     @todo
 
