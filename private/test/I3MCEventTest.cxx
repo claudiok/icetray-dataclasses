@@ -1,23 +1,20 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCEventTest.cxx,v 1.4 2004/08/09 12:13:10 troy Exp $
+    $Id: I3MCEventTest.cxx,v 1.5 2004/08/13 17:42:19 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/08/09 12:13:10 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/08/13 17:42:19 $
     @author pretz
 
     @todo
-
 */
 
 #include "TUT/tut.h"
 
 #include "dataclasses/I3MCEvent.h"
-#include "dataclasses/I3BasicTrack.h"
 #include "TFile.h"
 #include "TTree.h"
-#include "TClass.h"
 #include <string>
 using std::string;
 using std::cout;
@@ -28,7 +25,7 @@ namespace tut
   struct I3MCEventTest
   {
   };
-    
+
   typedef test_group<I3MCEventTest> factory;
 
   typedef factory::object object;
@@ -40,74 +37,97 @@ namespace
 }
 
 namespace tut
-{
-  template<> template<>
-  void object::test<1>()
+{ 
+  /**
+   * check that constructor and destructor work
+   */
+  void object::test<1>() 
   {
-    // nothing of consequence, creation and deletion
-    I3MCEventPtr event(new I3MCEvent), event2;
-    event2 = event;
+     I3MCEventPtr ptr(new I3MCEvent());
   }
-
-  // branch empty 
-  template<> template<>
-  void object::test<2>() // dont need to start with 1
+  
+  /**
+   * check writing object to disk
+   */
+  void object::test<2>()
   {
-    printf("FIXME: (test 2) root dumps core\n");
+     I3MCEventPtr ptr(new I3MCEvent());
 
-#if 0
-    I3MCEvent *event = new I3MCEvent; 
-    
-    TTree *t = new TTree("mytree","tree");
-    
-    t->Branch("branch","I3MCEvent",&event);
-    
-    t->Fill();
-    
-    I3MCEvent *event_out = new I3MCEvent;
-    t->SetBranchAddress("branch",&event_out);
-    
-    t->GetEvent(0);
+     /** @todo should fill some data for I3MCEvent here */
 
-    delete event;
-    delete event_out;
-#endif
+     TFile f_out("test.out.root","RECREATE");
+     ptr->Write();
+     f_out.Close();
+
+     TFile f_in("test.out.root");
+     TObject* object_in =
+		f_in.FindObjectAny("I3MCEvent");
+     f_in.Close();
+     ensure("the read-in pointer is non-zero",object_in);
+     
+     I3MCEvent* tested_in = dynamic_cast<I3MCEvent*>(object_in);
+     ensure("the read-in pointer is of the right type",tested_in);
+
+     I3MCEventPtr ptr_in(tested_in);
+    
+    /** @todo should check the read-in data for I3MCEvent here */
+
   }
+   
+   /**
+    * check branching it to a tree
+    */
+   void object::test<3>(){
+   I3MCEventPtr ptr(new I3MCEvent());
+   /** @todo add some setting of data here */
+ 
+   I3MCEvent* raw_ptr = &(*ptr);
+   TTree tree("TestTree","Icecube");
+   tree.Branch("branch","I3MCEvent",&raw_ptr);
+   
+   tree.Fill();
 
-  //testing filling an event with tracks into a tree
-  template<> template<>
-  void object::test<3>() // dont need to start with 1
-  {
-    printf("FIXME: (test 3) root dumps core\n");
-#if 0
-    I3MCEventPtr event(new I3MCEvent); 
-    
-    I3BasicTrackPtr bt(new I3BasicTrack); 
-    bt->SetAzimuth(4.5);
-    bt->SetX(3.4);
-    
-    event->GetMCParticleDict()["F2k"] = I3MCParticleEventPtr(new I3MCParticleEvent);
-    event->GetMCParticleDict()["F2k"]->GetInIceParticles().push_back(bt);
-    
-    TTree *t = new TTree("mytree","tree");
-    
-    I3MCEvent *baldptr = event.get();
-    t->Branch("branch","I3MCEvent",&baldptr);
+   I3MCEvent* raw_ptr_in = new I3MCEvent();
+   I3MCEventPtr ptr_in (raw_ptr_in);
 
-    
-    t->Fill();
-    
-    I3MCEventPtr event_out(new I3MCEvent);
-    baldptr = event_out.get();
-    t->SetBranchAddress("branch",&baldptr);
-    
-    t->GetEvent(0);
+   tree.SetBranchAddress("branch",&raw_ptr_in);
+   tree.GetEvent(0);
 
-    ensure("checking the output data",
-	   event_out
-		->GetMCParticleDict()["F2k"]
-		->GetInIceParticles()[0]
-		->GetX()==3.4);
-#endif
-  }
+   /** @todo add some checking of the data of I3MCEvent here */
+
+   }
+
+   /**
+    * check branching object to a tree, writing the tree to disk,
+    * and reading the tree back in, and finding the object in the tree.
+    */
+   void object::test<4>(){
+   I3MCEventPtr ptr(new I3MCEvent());
+   /** @todo add some setting of data here */
+                                                                                
+   I3MCEvent* raw_ptr = &(*ptr);
+   TTree tree("TestTree","Icecube");
+   tree.Branch("branch","I3MCEvent",&raw_ptr);
+                                                                                
+   tree.Fill();
+
+   TFile file_out("test.out.root","RECREATE");
+   tree.Write();
+   file_out.Close();
+                    
+
+   TFile file_in("test.out.root");
+   TTree* tree_in = (TTree*)file_in.FindObjectAny("TestTree");
+   ensure("the test tree exists",tree_in);
+                                                            
+   I3MCEvent* raw_ptr_in = new I3MCEvent();
+   I3MCEventPtr ptr_in (raw_ptr_in);
+                                                                                
+   tree_in->SetBranchAddress("branch",&raw_ptr_in);
+   tree_in->GetEvent(0);
+
+   /** @todo add some checking of the data of I3MCEvent here */
+
+   delete tree_in;
+   }
 }
