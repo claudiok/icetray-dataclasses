@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.133 2004/10/27 14:14:34 pretz Exp $
-// $Revision: 1.133 $
-// $Date: 2004/10/27 14:14:34 $
+// $Id: LinkDef.h,v 1.134 2004/11/09 01:42:42 tmccauley Exp $
+// $Revision: 1.134 $
+// $Date: 2004/11/09 01:42:42 $
 //
 
 #ifdef __CINT__
@@ -138,6 +138,20 @@
 #pragma link C++ class MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy+;
 #pragma link C++ typedef I3OMGeoPtr;
 #pragma link C++ class I3OMGeoPtr+;
+
+// tpm: my addition
+#pragma link C++ class I3InIceCalibration+;
+#pragma link C++ typedef MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy+;
+#pragma link C++ typedef I3DOMCalibPtr;
+#pragma link C++ class I3DOMCalibPtr+;
+
+#pragma link C++ class I3IceTopCalibration+;
+#pragma link C++ typedef MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy+;
+#pragma link C++ typedef I3DOMCalibPtr;
+#pragma link C++ class I3DOMCalibPtr+;
+//
 
 #pragma link C++ class I3MCHitSeries+;
 #pragma link C++ typedef VectorPolicy<I3MCHit>::ThePolicy;
@@ -412,6 +426,15 @@
 #pragma link C++ class I3OMStatusIceCube+;
 #pragma link C++ typedef I3OMStatusIceCubePtr;
 #pragma link C++ class roost::shared_ptr<I3OMStatusIceCube>+;
+
+// tpm: my additions
+#pragma link C++ class I3DOMCalibration+;
+#pragma link C++ typedef I3DOMCalibPtr;
+#pragma link C++ class roost::shared_ptr<I3DOMCalibration>+;
+
+#pragma link C++ class I3Calibration+;
+#pragma link C++ typedef I3CalibPtr;
+#pragma link C++ class roost::shared_ptr<I3Calibration>+;
 
 //#warning I3OMSlr problems, fixme
 //#if 1
