@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.16 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3DataReadout.h,v 1.17 2004/09/14 14:14:26 deyoung Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/09/14 14:14:26 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -46,51 +46,48 @@ using namespace std;
  * production times -- is stored as a I3RecoHitSeries, not a 
  * @c DataReadout.
  */
-class I3DataReadout : public TObject
-{
-  Bool_t fRaw;
-
-  public:
-  /**
-   * default constructor
-   */
-  I3DataReadout(){};
-
-  /**
-   * default destructor
-   */
-  virtual ~I3DataReadout(){}
-
-  /**
-   * Indicates whether or not this readout came directly from the detector
-   * or was put in later to emulate a particular kind of data.
-   * @return kTRUE if this readout came directly from the detector
-   */
-  Bool_t IsRaw() const {return fRaw;}
-
-  /**
-   * establishes this I3DataReadout as either coming from the detector
-   * or from some later processing.
-   * @param raw kTRUE if it came straight from the detector
-   */
-  void SetRaw(Bool_t raw) {fRaw = raw;}
-
-  /**
-   * @todo finish implementing this method
-   */
-  virtual void ToStream(ostream& o) const
-    {
-      o<<"[ "<<IsA()->GetName()<<" ]\n";
+class I3DataReadout : public TObject {
+    Bool_t fRaw;
+    
+public:
+    /**
+     * default constructor
+     */
+    I3DataReadout(){};
+    
+    /**
+     * default destructor
+     */
+    virtual ~I3DataReadout(){}
+    
+    /**
+     * Indicates whether or not this readout came directly from the detector
+     * or was put in later to emulate a particular kind of data.
+     * @return kTRUE if this readout came directly from the detector
+     */
+    Bool_t IsRaw() const {return fRaw;}
+    
+    /**
+     * establishes this I3DataReadout as either coming from the detector
+     * or from some later processing.
+     * @param raw kTRUE if it came straight from the detector
+     */
+    void SetRaw(Bool_t raw) {fRaw = raw;}
+    
+    /**
+     * @todo finish implementing this method
+     */
+    virtual void ToStream(ostream& o) const {
+	o<<"[ "<<IsA()->GetName()<<" ]\n";
     }
-
-  /**
-   * dumps the data readout to the given string
-   */
-  virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
+    
+    /**
+     * dumps the data readout to the given string
+     */
+    virtual string ToString() const {
+	ostringstream out;
+	ToStream(out);
+	return out.str();
     }
 
  private:

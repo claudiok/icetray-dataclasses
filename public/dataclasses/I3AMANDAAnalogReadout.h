@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.6 2004/08/05 01:42:02 ehrlich Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.7 2004/09/14 14:14:26 deyoung Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/05 01:42:02 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/09/14 14:14:26 $
  * @author pretz
  *
  */
@@ -28,68 +28,86 @@ using namespace std;
  * amplitude measurement that represents the peak from the entire
  * event. 
  */
-class I3AMANDAAnalogReadout : public I3AnalogReadout
-{ 
-  vector<Double_t> fLEs;
-  vector<Double_t> fTOTs;
-  Double_t fAmp;
- public:
-  /**
-   * constructor
-   */
-  I3AMANDAAnalogReadout(){}
+class I3AMANDAAnalogReadout : public I3AnalogReadout { 
+ 
+    vector<Double_t> fLEs;
+    vector<Double_t> fTOTs;
+    Double_t fAmp;
+ 
+public:
+    /**
+     * constructor
+     */
+    I3AMANDAAnalogReadout(){}
+    
+    /**
+     * destructor
+     */
+    virtual ~I3AMANDAAnalogReadout() {;}
+    
+    /**
+     * @return the time of the first LE in the readout
+     */
+    virtual Double_t GetFirstLE() const {
+	if(fLEs.size() >0)
+	    return fLEs[0];
+	return 0;
+    }
+    
+    /**
+     * @return the list of LEs as a const object
+     */
+    const vector<Double_t>& GetLEs() const {return fLEs;}
+    
+    /**
+     * @return the list of LEs as a non-const object
+     */
+    vector<Double_t>& GetLEs(){return fLEs;}
+    
+    /**
+     * @return the list of TOTs as const object
+     */
+    const vector<Double_t>& GetTOTs() const {return fTOTs;}
+    
+    /**
+     * @return the list of TOTs as a non-const object
+     */
+    vector<Double_t>& GetTOTs() {return fTOTs;}
+    
+    /**
+     * @return the amplitude
+     */
+    Double_t GetAmplitude() const {return fAmp;}
+    
+    /**
+     * @param amplitude the new amplitude of the readout
+     */
+    void SetAmplitude(Double_t amplitude) {fAmp=amplitude;}
+    
 
-  /**
-   * destructor
-   */
-  virtual ~I3AMANDAAnalogReadout() {;}
+    virtual void ToStream(ostream& o) const {
+	I3AnalogReadout::ToStream(o);
+	o << "Amplitude: " << fAmp << "\n"
+	  << "Number of Pulses: " << fLEs.size() << "\n"
+	  << "Leading Edges: ";
+	for (Int_t i = 0; i < fLEs.size(); i++) {
+	    o << fLEs[i] << " ";
+	}
+	o << "\nTOTs: ";
+	for (Int_t i = 0; i < fLEs.size(); i++) {
+	    o << fTOTs[i] << " ";
+	}
+	o << "\n";
+    }
+    
 
-  /**
-   * @return the time of the first LE in the readout
-   */
-  virtual Double_t GetFirstLE() const {
-    if(fLEs.size() >0)
-      return fLEs[0];
-    return 0;
-  }
-
-  /**
-   * @return the list of LEs as a const object
-   */
-  const vector<Double_t>& GetLEs() const {return fLEs;}
-
-  /**
-   * @return the list of LEs as a non-const object
-   */
-  vector<Double_t>& GetLEs(){return fLEs;}
-
-  /**
-   * @return the list of TOTs as const object
-   */
-  const vector<Double_t>& GetTOTs() const {return fTOTs;}
-
-  /**
-   * @return the list of TOTs as a non-const object
-   */
-  vector<Double_t>& GetTOTs() {return fTOTs;}
-
-  /**
-   * @return the amplitude
-   */
-  Double_t GetAmplitude() const {return fAmp;}
-
-  /**
-   * @param amplitude the new amplitude of the readout
-   */
-  void SetAmplitude(Double_t amplitude) {fAmp=amplitude;}
-
- private:
-  // copy and assignment private
-  I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout &);
-  const I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout&);
-
-  // ROOT macro
-  ClassDef(I3AMANDAAnalogReadout,1);
+private:
+    // copy and assignment private
+    I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout &);
+    const I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout&);
+    
+    // ROOT macro
+    ClassDef(I3AMANDAAnalogReadout,1);
 };
 
 /**
