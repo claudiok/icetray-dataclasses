@@ -1,19 +1,20 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMReadout.h,v 1.4 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3DOMLaunch.h,v 1.1 2004/07/30 15:11:00 blaufuss Exp $
  *
- * @file I3DOMReadout.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @file I3DOMLaunch.h
+ * @version $Revision: 1.1 $
+ * @date $Date: 2004/07/30 15:11:00 $
  * @author klein
+ * @author blaufuss
  *
  */
-#ifndef I3DOMREADOUT_H
-#define I3DOMREADOUT_H
+#ifndef I3DOMLAUNCH_H
+#define I3DOMLAUNCH_H
 
 //#include "StoragePolicy.h"
-#include "I3DataReadout.h"
+#include "dataclasses/I3DigitalLaunch.h"
 
 using namespace std; 
 /**
@@ -26,7 +27,7 @@ using namespace std;
  * stored in the ATWDBinSize variable.
  *
  */
-class I3DOMReadout : public I3DataReadout
+class I3DOMLaunch : public I3DigitalLaunch
 {
 
   /**  
@@ -72,12 +73,12 @@ class I3DOMReadout : public I3DataReadout
   /**
    * constructor
    */
-  I3DOMReadout() {fStartTime=0.;}
+  I3DOMLaunch() {fStartTime=0.;}
 
   /**
    * destructor
    */
-  virtual ~I3DOMReadout(){;}
+  virtual ~I3DOMLaunch(){;}
   
   /**
    * return ATWD/FADC launch time
@@ -141,18 +142,18 @@ class I3DOMReadout : public I3DataReadout
 
  private:
   // copy and assignment private
-  I3DOMReadout(const I3DOMReadout&);
-  const I3DOMReadout& operator=(const I3DOMReadout&);
+  I3DOMLaunch(const I3DOMLaunch&);
+  const I3DOMLaunch& operator=(const I3DOMLaunch&);
 
   // ROOT macro
-  ClassDef(I3DOMReadout,1);
+  ClassDef(I3DOMLaunch,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3DOMReadout>::ThePolicy I3DOMReadoutPtr;
+typedef PtrPolicy<I3DOMLaunch>::ThePolicy I3DOMLaunchPtr;
 
 #endif
 

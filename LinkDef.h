@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.101 2004/07/30 04:27:47 pretz Exp $
-// $Revision: 1.101 $
-// $Date: 2004/07/30 04:27:47 $
+// $Id: LinkDef.h,v 1.102 2004/07/30 15:11:00 blaufuss Exp $
+// $Revision: 1.102 $
+// $Date: 2004/07/30 15:11:00 $
 //
 
 #ifdef __CINT__
@@ -134,6 +134,13 @@
 #pragma link C++ function operator!=(const I3MCPhotonVect::iterator&, const I3MCPhotonVect::iterator&);
 #pragma link C++ typedef I3MCPhotonVectPtr;
 
+#pragma link C++ class I3DigitalReadout+;
+#pragma link C++ typedef VectorPolicy<I3DigitalLaunch>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3DigitalLaunch>::ThePolicy+;
+#pragma link C++ function operator!=(const I3DigitalReadout::iterator&, const I3DigitalReadout::iterator&);
+#pragma link C++ typedef I3DigitalReadoutPtr;
+
+
 #pragma link C++ class I3RecoHitSeries+;
 #pragma link C++ typedef VectorPolicy<I3RecoHit>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoHit>::ThePolicy+;
@@ -252,10 +259,14 @@
 #pragma link C++ typedef I3DetectorStatusPtr;
 #pragma link C++ class I3DetectorStatusHeader;
 #pragma link C++ typedef I3DetectorStatusHeaderPtr;
-#pragma link C++ class I3DigitalReadout+;
-#pragma link C++ typedef I3DigitalReadoutPtr;
-#pragma link C++ class I3DigitalTWRReadout+;
-#pragma link C++ typedef I3DigitalTWRReadoutPtr;
+//#pragma link C++ class I3DigitalReadout+;
+//#pragma link C++ typedef I3DigitalReadoutPtr;
+#pragma link C++ class I3DigitalLaunch+;
+#pragma link C++ typedef I3DigitalLaunchPtr;
+#pragma link C++ class I3DOMLaunch+;
+#pragma link C++ typedef I3DOMLaunchPtr;
+#pragma link C++ class I3TWRLaunch+;
+#pragma link C++ typedef I3TWRLaunchPtr;
 #pragma link C++ class I3Directional+;
 #pragma link C++ class I3Energetic+;
 #pragma link C++ class I3MCEvent+;

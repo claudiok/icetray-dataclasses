@@ -1,12 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.5 2004/07/15 20:29:25 deyoung Exp $
+ * $Id: I3DigitalReadout.h,v 1.6 2004/07/30 15:11:00 blaufuss Exp $
  *
  * @file I3DigitalReadout.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/07/15 20:29:25 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/07/30 15:11:00 $
  * @author pretz
+ * @author blaufuss
  *
  */
 #ifndef I3DIGITALREADOUT_H
@@ -29,61 +30,19 @@ using namespace std;
  * Derived classes such as I3DigitalTWRReadout may provide
  * additional information.
  */
-class I3DigitalReadout : public I3DataReadout, public vector<Double_t>
+class I3DigitalReadout : public I3DataReadout, VectorPolicy<I3DigitalLaunch>::ThePolicy
 {
-  Double_t fStartTime;
-  Double_t fBinSize;
  public:
   /**
    * constructor
    */
-  I3DigitalReadout() 
-    : fStartTime(0),
-    fBinSize(0)
-    {}
+  I3DigitalReadout() {}
 
   /**
    * destructor
    */
-  virtual ~I3DigitalReadout(){;}
+  virtual ~I3DigitalReadout() {}
   
-  /** 
-   * @return the start time of the series
-   */
-  Double_t StartTime() const { return fStartTime; }
-
-  /**
-   * @param starttime the new start time for the series
-   */
-  void StartTime(Double_t starttime) { fStartTime = starttime; }
-
-  /**
-   * @return the size of the time bins in this waveform
-   */
-  Double_t BinSize() const {return fBinSize;}
-
-  /**
-   * @param binsize is the new binsize for this waveform
-   */
-  void BinSize(Double_t binsize) {fBinSize = binsize;}
-
-  /**
-   * Gives the value of the waveform in absolute time, rather than 
-   * 'by-bin.'  Give '0.0' if you ask outside bht bounds of the the array
-   * @param absolutetime the time that you want the value of
-   * @return the value of the waveform at the indicated absolutetime
-   * after scaling by the binsize and adjusting by the start time.
-   * @todo is 'truncation' right here?? I think so, but somebody should 
-   * confirm it.
-   */
-  Double_t Value(Double_t absolutetime) const
-    {
-      unsigned int binlookup = (unsigned int)
-	((absolutetime - fStartTime)/fBinSize);
-      if(binlookup < 0 || binlookup >= size())
-	return 0.0;
-      return (*this)[binlookup];
-    }
  private:
   // copy and assignment private
   I3DigitalReadout(const I3DigitalReadout&);
@@ -92,6 +51,25 @@ class I3DigitalReadout : public I3DataReadout, public vector<Double_t>
   // ROOT macro
   ClassDef(I3DigitalReadout,1);
 };
+
+/*
+ * @todo Fix this iterator.  I don't think it is right for a vector iterator
+ */
+//inline ostream& operator<<(ostream& o,const I3DigitalReadout& v)
+//{
+//  o<<"[ I3DigitalReadout: \n";
+//  I3DigitalReadout::const_iterator iter;
+//  for(iter=v.begin();iter!=v.end();iter++)
+//    {
+//      o<<iter->first;
+//     if(iter->second==I3DigitalLaunchPtr((I3DigitalLaunch*)0))
+//        o<<"Null I3DigitalLaunch";
+//      else
+//        o<<*(iter->second);
+//    }
+//  o<<"]\n";
+//  return o;
+//}
 
 /**
  * Pointer typedeffed away to insulate users from the
