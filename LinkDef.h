@@ -10,8 +10,44 @@
 //
 // namespace
 //
-
 #pragma link C++ namespace I3Units;
+
+#pragma link C++ class I3TrackImpl<I3Starting,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Contained,I3Energetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Stopping,I3Energetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Infinite,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Stopping,I3NonEnergetic,I3NonComposite>+;
+#pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>+;
+
+#pragma link C++ class I3BasicTrack+;
+#pragma link C++ class I3F2KTrack+;
+#pragma link C++ class I3BasicMuon+;
+//#pragma link C++ class I3DecayingMuon+;
+#pragma link C++ class I3DoubleBang+;
+#pragma link C++ class I3MCMuon+;
+#pragma link C++ class I3Lollipop+;
+#pragma link C++ class I3MuonBundle+;
+#pragma link C++ class I3EnergyMuon+;
+#pragma link C++ class I3ShoweringMuon+;
+#pragma link C++ class I3StartingMuon+;
+#pragma link C++ class I3StoppingMuon+;
+
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3Energetic>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3NonEnergetic>+;
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3NonEnergetic>+;
+#pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3Energetic>+;
+
+#pragma link C++ class I3BasicCascade+;
+#pragma link C++ class I3DirectionalCascade+;
+#pragma link C++ class I3EnergyCascade+;
+#pragma link C++ class I3MCCascade+;
+
+#pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
+
+#pragma link C++ class I3MCPrimary+;
 
 //
 // vector (series, list) types
@@ -109,12 +145,12 @@
 #pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
 #pragma link C++ typedef I3MCTrackDataPtr;
 
-#pragma link C++ class I3Bag+;
-#pragma link C++ class I3Bag::iterator+;
-#pragma link C++ typedef MapPointainerPolicy<TObjectPtr>::ThePolicy;
-#pragma link C++ class MapPointainerPolicy<TObjectPtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
-#pragma link C++ typedef I3BagPtr;
+//#pragma link C++ class I3Bag+;
+//#pragma link C++ class I3Bag::iterator+;
+//#pragma link C++ typedef MapPointainerPolicy<TObjectPtr>::ThePolicy;
+//#pragma link C++ class MapPointainerPolicy<TObjectPtr>::ThePolicy+;
+//#pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
+//#pragma link C++ typedef I3BagPtr;
 
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
@@ -142,7 +178,6 @@
 //
 // simple types with full value semantics
 //
-#pragma link C++ typedef TObjectPtr;
 
 #pragma link C++ class I3AltTracksRecoResult+;
 #pragma link C++ typedef I3AltTracksRecoResultPtr;
@@ -152,6 +187,11 @@
 #pragma link C++ typedef I3AnalogReadoutPtr;
 #pragma link C++ class I3Atmosphere+;
 #pragma link C++ typedef I3AtmospherePtr;
+#pragma link C++ class I3Bag+;
+#pragma link C++ class I3Cascade+;
+#pragma link C++ class I3Contained+;
+#pragma link C++ class I3Composite+;
+#pragma link C++ class I3CoreLocalized+;
 #pragma link C++ class I3DataExecution+;
 #pragma link C++ class I3DataHeader+;
 #pragma link C++ typedef I3DataHeaderPtr;
@@ -169,6 +209,8 @@
 #pragma link C++ typedef I3DigitalFADCReadoutPtr;
 #pragma link C++ class I3DigitalTWRReadout+;
 #pragma link C++ typedef I3DigitalTWRReadoutPtr;
+#pragma link C++ class I3Directional+;
+#pragma link C++ class I3Energetic+;
 #pragma link C++ class I3Event+;
 #pragma link C++ typedef I3EventPtr;
 #pragma link C++ class I3EventHeader+;
@@ -179,6 +221,8 @@
 #pragma link C++ typedef I3GeometryHeaderPtr;
 #pragma link C++ class I3Hit+;
 #pragma link C++ typedef I3HitPtr;
+#pragma link C++ class I3Infinite+;
+#pragma link C++ class I3Localized+;
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitPtr;
 #pragma link C++ class I3MCOMResponse+;
@@ -192,6 +236,10 @@
 #pragma link C++ typedef I3MonitoringHeaderPtr;
 #pragma link C++ class I3MultiTrackRecoResult;
 #pragma link C++ typedef I3MultiTrackRecoResultPtr;
+#pragma link C++ class I3NonDirectional+;
+#pragma link C++ class I3NonComposite+;
+#pragma link C++ class I3NonEnergetic+;
+#pragma link C++ class I3ObservableParticle+;
 #pragma link C++ class I3OMGeo+;
 
 #pragma link C++ class I3OMGeoAmanda+;
@@ -203,7 +251,6 @@
 #pragma link C++ typedef I3OMGeoIcecubePtr;
 //#pragma link C++ class I3OMGeoIcecubePtr+;
 
-//#pragma link C++ typedef I3RecoResultPtr;
 //#pragma link C++ class I3RecoResultPtr+;
 
 #pragma link C++ class I3Geometry+;
@@ -217,9 +264,12 @@
 #pragma link C++ typedef I3OMStatusIcecube::OnOff;
 #pragma link C++ typedef I3OMStatusIcecube::LCMode;
 #pragma link C++ typedef I3OMStatusIcecubePtr;
+#pragma link C++ class I3Particle+;
+#pragma link C++ class I3Position+;
+#pragma link C++ class I3Primary+;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ typedef I3RecoHitPtr;
-#pragma link C++ class I3RecoResult;
+#pragma link C++ class I3RecoResult+;
 #pragma link C++ typedef I3RecoResultPtr;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ typedef I3RecoResultLikelihoodPtr;
@@ -229,9 +279,10 @@
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ typedef I3RecoTrackPtr;
-#pragma link C++ class I3RecoTrackComposite+;
 #pragma link C++ class I3SLCReadout+;
 #pragma link C++ typedef I3SLCReadoutPtr;
+#pragma link C++ class I3Starting+;
+#pragma link C++ class I3Stopping+;
 #pragma link C++ class I3SummaryPulseReadout+;
 #pragma link C++ typedef I3SummaryPulseReadoutPtr;
 #pragma link C++ class I3TankGeo+;
@@ -239,11 +290,12 @@
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
 #pragma link C++ typedef I3TriggerDataPtr;
-#pragma link C++ class I3MCPrimary+;
-#pragma link C++ typedef I3MCPrimaryPtr;
 
 #pragma link C++ class AmandaExtractor+;
 #pragma link C++ class vector<I3OMGeoAmandaPtr>+;
+
+#pragma link C++ function Test();
+
 
 #endif
 

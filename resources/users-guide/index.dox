@@ -1,14 +1,18 @@
 /**
-   @mainpage Icecube Dataclasses Users Guide and Tutorials
+   @mainpage IceCube Dataclasses User's Guide and Tutorials
 
-   This document is a guide to the first version of a proposed set of classes
+   This document is a user's guide to the classes used
    to represent and store the event data of IceCube.
 
-   This guide is primarily intented for IceCube software developers who want
+   This guide is primarily intended for IceCube software developers who want
    to understand the layout and mechanics of these classes.  To this end there
    are several examples and tutorials each using different aspects of the 
    classes.  
 
+   <!--  You may also find the automatically generated 
+   <a href="../../doxygen-dataclasses/html/hierarchy.html>Doxygen
+   documentation</a> useful.  -->
+   
    Thanks for looking!
 
    @author Erik Blaufuss (blaufuss@umdgrb.umd.edu)
@@ -18,14 +22,15 @@
    @author Troy Straszheim (troy@ifh.de, troy@resophonic.com)
    @author Peter Niessen (niessen@ifh.de)
 	   
-   @section overview Overview
+   @section introduction Introduction
 
-   The dataclasses were designed as an offline represention of the data that
-   comes out of or is used to simulate the IceCube detector.  The dataclasses
+   The dataclasses were designed as an offline represention of the
+   data that is produced by the IceCube detector data acquisition
+   system or by IceCube simulations.  The dataclasses
    are also used to store data from post-acquisition processing and 
    analysis.
 
-   As a physicist working with data from IceCube, you will potentially
+   As a physicist working with data from IceCube, you will probably
    interact more with these containers than any other part of the
    system, so have a good hard look and tell us what you think.
 
@@ -33,21 +38,23 @@
    that use the dataclasses in some expected roles they will have to fill.
    These projects include:
    @li <code>dataio</code>: A project which contains classes which do the 
-   work of interacting with root files and f2k files to read and write the data.
+   work of interacting with Root files and F2K files to read and write the 
+   data.
 
    @li <code>dataio-modules</code>: A collection of simple IceTray modules 
-   which interface between the dataio classes, and the framework.
+   which interface between the @c dataio classes and the framework.
 
    @li <code>corsika-reader</code>: A project which contains IceTray modules
    which work together to fill an event with the MC tracks from a Corsika file.
 
    @li <code>eventviewer</code>: A preliminary try at an event viewer. 
 
-   @li <code>phys-services</code>: A first-start at a collection of standard
+   @li <code>phys-services</code>: A first start at a collection of standard
    services for IceTray modules.  
 
    @li <code>sim-modules</code>: A chain of mock simulation modules.  
-   The chain is real, but the modules just fill random data right now.
+   The chain is mimics the design of the real simulation, but the
+   modules just fill random data right now.
 
    @li <code>reco</code>: A simple implementation of the Dipole fit in 
    this system.
@@ -92,16 +99,21 @@
 
    @li @ref dataclass-and-root
 
-   @section reflection Reflection
+   @section overview Overview of the Data Classes
    A lot of thought has gone into the design and implementation of these 
-   classes.  If you are interested in the decisions that were made and why they 
-   were made, or if you just want to get a feel for the dataclasses as a whole, 
-   this section's are for you:
+   classes.  These sections attempt to explain the decisions that were made and why they 
+   were made, as well as giving in-depth explanations of specific
+   parts of the code.    
 
    @li @ref architecture
 
+   @li @ref layout
 
-<!--   @li @ref best-practices -->
+   <!--   @li @ref om-response
+   
+   @li @ref tracks
+   
+   @li @ref best-practices -->
    
 
 */

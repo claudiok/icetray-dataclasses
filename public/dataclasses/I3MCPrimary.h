@@ -3,48 +3,28 @@
 
 #include "dataclasses/I3MCTrack.h"
 #include "dataclasses/StoragePolicy.h"
+#include "I3PrimaryImpl.h"
+
+#include "I3Directional.h"
+#include "I3CoreLocalized.h"
+#include "I3Energetic.h"
 
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPrimary.h,v 1.1 2004/02/26 21:04:09 pretz Exp $
+ * $Id: I3MCPrimary.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/02/26 21:04:09 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/22 15:55:44 $
  * @author pretz
  *
  * @todo copy and assignment private??
  *
  */
-class I3MCPrimary : public I3MCTrack{
-  Double_t fSpectrumWeight;
- public:
-  /**
-   * constructor.  Defaults the weight to 1.0
-   */
-  I3MCPrimary(): fSpectrumWeight(1.0){}
-
-  /**
-   * destructor
-   */
-  virtual ~I3MCPrimary(){}
-
-  /**
-   * Gives the contribution to this event's weight as given by the spectrum 
-   * from which the Primary was drawn
-   * @return the weight from the primary, due to the spectrum sampling
-   */
-  Double_t SpectrumWeight() const {return fSpectrumWeight;}
-
-  /**
-   * @param weight the new spectrum weight
-   */
-  void SpectrumWeight(Double_t weight){fSpectrumWeight = weight;}
- private:
-  /*   I3MCPrimary(const I3MCPrimary&); */
-  /*   const I3MCPrimary& operator=(const I3MCPrimary&); */
-
-// ROOT macro
+class I3MCPrimary : public I3PrimaryImpl<I3Directional,
+	                                 I3CoreLocalized,
+	                                 I3Energetic> 
+{
   ClassDef(I3MCPrimary,1);
 };
 

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.3 2004/03/03 20:58:39 troy Exp $
+    $Id: I3HitTest.cxx,v 1.4 2004/04/22 15:55:44 pretz Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/03/03 20:58:39 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/22 15:55:44 $
     @author Troy D. Straszheim
 
     @todo
@@ -123,7 +123,7 @@ namespace tut
     // here is how to associate a string message with an "ensure".  If
     // the boolean fails the message will propagate back up to the
     // test driver program and be displayed.
-    ensure("this will be displayed if the ensure fails", my_integer == 0);
+    // ensure("this will be displayed if the ensure fails", my_integer == 0);
 
   }
 
@@ -154,12 +154,13 @@ namespace tut
 		    0.00001); // tolerance
     
     // and here is how to simpy fail with a message
-    fail("This failure is for demonstration purposes.  No real failure has occurred.");
+    // fail("This failure is for demonstration purposes.  No real failure has occurred.");
   }
 
   // END OF DEMO
   // Here start the real (though minimal) tests of I3Hit
 
+  // FIXME:  need operator<<'s and a way to compare their output
   template<> template<>
   void object::test<7>()
   {

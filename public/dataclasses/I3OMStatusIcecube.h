@@ -3,7 +3,7 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIcecube.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
+ * $Id: I3OMStatusIcecube.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
  *
  * I3OMStatusIcecube has status information on the IceCube
  * OM parameters that can be controlled or adjusted, such as
@@ -15,8 +15,8 @@
  * This is based on "IceCube DOMAPP CPU FPGA Interface, Version 0.6
  * bu Thorsten Stetzelberger, Jan. 24, 2004 
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/22 15:55:44 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -70,16 +70,16 @@ class I3OMStatusIcecube : public I3OMStatus
 
   void LCReceiveUp(OnOff onoff){fLCRecieveUp = onoff;}
   void LCReceiveDown(OnOff onoff){fLCRecieveDown = onoff;}
-  bool LCReceiveUp(){return fLCRecieveUp;}
-  bool LCReceiveDown(){return fLCRecieveDown;}
+  Bool_t LCReceiveUp(){return fLCRecieveUp;}
+  Bool_t LCReceiveDown(){return fLCRecieveDown;}
 
 /*  These control whether the local coincidences sending is enabled
     They should normally both be on.  */
 
   void LCSendUp(OnOff onoff){fLCSendUp = onoff;}
   void LCSendDown(OnOff onoff){fLCSendDown = onoff;}
-  bool LCSendUp() {return fLCSendUp;}
-  bool LCSendDown() {return fLCSendDown;}
+  Bool_t LCSendUp() {return fLCSendUp;}
+  Bool_t LCSendDown() {return fLCSendDown;}
 
 /*  This control the length of the local coincidence window before
     and after the discriminator.  Setting is in 100 nsec ticks */
@@ -94,8 +94,8 @@ class I3OMStatusIcecube : public I3OMStatus
 
   void LCLongCableUp(OnOff onoff) {fLCLongCableUp = onoff;}
   void LCLongCableDown(OnOff onoff) {fLCLongCableDown = onoff;}
-  bool LCLongCableUp() {return fLCLongCableUp;}
-  bool LCLongCableDown() { return fLCLongCableDown;}
+  Bool_t LCLongCableUp() {return fLCLongCableUp;}
+  Bool_t LCLongCableDown() { return fLCLongCableDown;}
 
 
 /*  Control and Monitor different parts of the OM */
@@ -103,9 +103,9 @@ class I3OMStatusIcecube : public I3OMStatus
   void StausATWD_A(OnOff onoff) {fStatusATWD_A = onoff;}
   void StatusATWD_B(OnOff onoff) {fStatusATWD_B = onoff;}
   void StatusFADC(OnOff onoff) {fStatusFADC = onoff;}
-  bool StatusATWD_A(){return fStatusATWD_A;}
-  bool StatusATWD_B(){return fStatusATWD_B;}
-  bool StatusFADC(){return fStatusFADC;}
+  Bool_t StatusATWD_A(){return fStatusATWD_A;}
+  Bool_t StatusATWD_B(){return fStatusATWD_B;}
+  Bool_t StatusFADC(){return fStatusFADC;}
 
 
 /* This controls the ATWD frequency.  Implementation, units remain TBD */

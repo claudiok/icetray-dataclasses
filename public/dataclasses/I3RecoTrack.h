@@ -1,24 +1,27 @@
-#ifndef I3RECOTRACK_H
-#define I3RECOTRACK_H
-
-#include <TObject.h>
-#include <TObjArray.h>
-#include "I3Track.h"
-#include "StoragePolicy.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoTrack.h,v 1.3 2004/03/14 15:07:12 pretz Exp $
+ * $Id: I3RecoTrack.h,v 1.4 2004/04/22 15:55:44 pretz Exp $
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/03/14 15:07:12 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/22 15:55:44 $
  * @author
  *
  * @todo
  *
  */
-class I3RecoTrack : public I3Track
+
+#ifndef I3RECOTRACK_H
+#define I3RECOTRACK_H
+
+#include <TObject.h>
+
+#include "dataclasses/I3BasicTrack.h"
+#include "StoragePolicy.h"
+
+class I3RecoTrack : public I3BasicTrack
 {
+  //FIXME: vectorvectorvector
   Int_t number_used_oms;
   Int_t *used_om;  //[number_used_oms]
 
