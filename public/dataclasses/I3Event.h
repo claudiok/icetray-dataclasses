@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.22 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Event.h,v 1.23 2004/06/30 21:22:52 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.22 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2004/06/30 21:22:52 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -16,9 +16,9 @@
 
 #include "I3TriggerData.h"
 #include "I3FilterData.h"
-#include "I3MCParticleData.h"
+#include "I3MCParticleDict.h"
 #include "I3OMResponseData.h"
-#include "I3RecoResultData.h"
+#include "I3RecoResultDict.h"
 #include "I3Bag.h"
 /**
  * @brief This class provides access to the all data containers which are 
@@ -29,9 +29,9 @@ class I3Event : public TObject
 {
   I3TriggerData    fTriggerData; //||
   I3FilterData     fFilterData; //||
-  I3MCParticleData    fMCParticleData; //||
+  I3MCParticleDict    fMCParticleData; //||
   I3OMResponseData fOMResponseData; //||
-  I3RecoResultData fRecoResultData; //||
+  I3RecoResultDict fRecoResultData; //||
   I3Bag            fBag; //||
   
  public:
@@ -68,12 +68,12 @@ class I3Event : public TObject
   /**
    * @return the MCParticleData as a constant object.
    */
-  const I3MCParticleData& GetMCParticleData() const { return fMCParticleData;}
+  const I3MCParticleDict& GetMCParticleData() const { return fMCParticleData;}
 
   /**
    * @return the MCParticleData as a non-const object.
    */
-  I3MCParticleData& GetMCParticleData(){ return fMCParticleData;}
+  I3MCParticleDict& GetMCParticleData(){ return fMCParticleData;}
 
   /**
    * @return the OMResponseData of the event as a non-constant object
@@ -88,12 +88,12 @@ class I3Event : public TObject
   /**
    * @return the RecoResult Data as a constant object
    */
-  const I3RecoResultData& GetRecoResultData() const { return fRecoResultData; }
+  const I3RecoResultDict& GetRecoResultData() const { return fRecoResultData; }
 
   /**
    * @return the RecoResultData as a non-constant object
    */
-  I3RecoResultData& GetRecoResultData() { return fRecoResultData; }
+  I3RecoResultDict& GetRecoResultData() { return fRecoResultData; }
 
   /**
    * @return the Bag for this event as a constant object

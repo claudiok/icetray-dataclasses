@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.27 2004/06/30 17:20:26 pretz Exp $
+    $Id: I3OMResponse.h,v 1.28 2004/06/30 21:22:52 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.27 $
-    @date $Date: 2004/06/30 17:20:26 $
+    @version $Revision: 1.28 $
+    @date $Date: 2004/06/30 21:22:52 $
     @author ehrlich
     @author troy
     @author pretz
@@ -19,8 +19,8 @@
 
 #include "I3DataExecution.h"
 #include "I3OMGeo.h"
-#include "I3DataReadoutList.h"
-#include "I3RecoHitSeriesData.h"
+#include "I3DataReadoutDict.h"
+#include "I3RecoHitVectDict.h"
 
 /**
  * @brief The container for all the OMResponse-related data in the event
@@ -37,8 +37,8 @@ class I3OMResponse : public TObject
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
 
-  I3DataReadoutList   fDataReadoutList; //||
-  I3RecoHitSeriesData fRecoHitSeriesData; //||
+  I3DataReadoutDict   fDataReadoutList; //||
+  I3RecoHitVectDict fRecoHitSeriesData; //||
 
  public:
   /**
@@ -64,22 +64,22 @@ class I3OMResponse : public TObject
   /**
    * @return the the hardware data for this response as a const object
    */
-  const I3DataReadoutList& GetDataReadoutList() const {return fDataReadoutList;}
+  const I3DataReadoutDict& GetDataReadoutList() const {return fDataReadoutList;}
   
   /**
    * @return the hardware data for this response as a non-const object
    */
-  I3DataReadoutList& GetDataReadoutList() {return fDataReadoutList;}
+  I3DataReadoutDict& GetDataReadoutList() {return fDataReadoutList;}
 
   /**
    * @return the reco hit series data as a const object
    */
-  const I3RecoHitSeriesData& GetRecoHitSeriesData() const {return fRecoHitSeriesData;}
+  const I3RecoHitVectDict& GetRecoHitSeriesData() const {return fRecoHitSeriesData;}
   
   /**
    * @return the reco hit series data as a non-const object
    */
-  I3RecoHitSeriesData& GetRecoHitSeriesData() {return fRecoHitSeriesData;}
+  I3RecoHitVectDict& GetRecoHitSeriesData() {return fRecoHitSeriesData;}
 
   private:
   // copy and assignment are private
