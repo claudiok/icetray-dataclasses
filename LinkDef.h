@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.108 2004/08/02 22:09:03 blaufuss Exp $
-// $Revision: 1.108 $
-// $Date: 2004/08/02 22:09:03 $
+// $Id: LinkDef.h,v 1.109 2004/08/03 16:25:13 blaufuss Exp $
+// $Revision: 1.109 $
+// $Date: 2004/08/03 16:25:13 $
 //
 
 #ifdef __CINT__
@@ -73,24 +73,23 @@
 //
 
 #pragma link C++ class I3IceTopStatus+;
-#pragma link C++ typedef VectorPolicy<I3IceTopStationStatus>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3IceTopStationStatus>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<StationKey,I3IceTopStationStatusPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<StationKey,I3IceTopStationStatusPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3IceTopStatus::iterator&, const I3IceTopStatus::iterator&);
 #pragma link C++ typedef I3IceTopStatusPtr;
 
 #pragma link C++ class I3InIceStatus+;
-#pragma link C++ typedef VectorPolicy<I3OMStatusIceCube>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3OMStatusIceCube>::ThePolicy+;
+#pragma link C++ typedef MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy;
+#pragma link C++ class MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3InIceStatus::iterator&, const I3InIceStatus::iterator&);
 #pragma link C++ typedef I3InIceStatusPtr;
 
-// below these are commented out because they are redundant in view of the
-// InIceStatusData
+
 #pragma link C++ class I3IceTopStationStatus+;
 //#pragma link C++ class I3IceTopStationStatus::iterator+;
-//#pragma link C++ typedef VectorPolicy<I3OMStatusIceCube>::ThePolicy;
-//#pragma link C++ class VectorPolicy<I3OMStatusIceCube>::ThePolicy+;
-//#pragma link C++ function operator!=(const I3IceTopStationStatus::iterator&, const I3IceTopStationStatus::iterator&);
+#pragma link C++ typedef VectorPolicy<I3OMStatusIceCubePtr>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3OMStatusIceCubePtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3IceTopStationStatus::iterator&, const I3IceTopStationStatus::iterator&);
 #pragma link C++ typedef I3IceTopStationStatusPtr;
 
 

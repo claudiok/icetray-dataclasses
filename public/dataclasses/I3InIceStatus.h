@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceStatus.h,v 1.4 2004/07/30 15:08:55 pretz Exp $
+ * $Id: I3InIceStatus.h,v 1.5 2004/08/03 16:25:14 blaufuss Exp $
  *
  * @file I3InIceStatus.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/30 15:08:55 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/03 16:25:14 $
  * @author pretz
  */
 #ifndef I3INICESTATUSDATA_H
@@ -23,7 +23,7 @@
  */
 class I3InIceStatus 
 : public TObject, 
-  public MapPolicy<OMKey,I3OMStatusIceCube>::ThePolicy{
+  public MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy{
  public:
   /**
    * constructor

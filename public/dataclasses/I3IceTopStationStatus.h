@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStationStatus.h,v 1.4 2004/07/06 14:15:31 pretz Exp $
+ * $Id: I3IceTopStationStatus.h,v 1.5 2004/08/03 16:25:14 blaufuss Exp $
  *
  * @file I3IceTopStationStatus.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/06 14:15:31 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/03 16:25:14 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATIONSTATUS_H
@@ -21,7 +21,7 @@
  */
 class I3IceTopStationStatus 
 : public TObject, 
-  public VectorPolicy<I3OMStatusIceCube>::ThePolicy{
+  public VectorPolicy<I3OMStatusIceCubePtr>::ThePolicy{
  public:
   /**
    * constructor

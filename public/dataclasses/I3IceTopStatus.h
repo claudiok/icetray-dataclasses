@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStatus.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3IceTopStatus.h,v 1.4 2004/08/03 16:25:14 blaufuss Exp $
  *
  * @file I3IceTopStatus.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/03 16:25:14 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATUS_H
@@ -17,12 +17,19 @@
 #include "StoragePolicy.h"
 
 /**
+ * @brief A station key used to access the IceTop stations.
+ *
+ * It's just an integer.
+ */
+typedef int StationKey;
+
+/**
  * @brief a container for I3IcetTopStationStatus objects.  Just holding a place
  * for now
  */
-class I3IceTopStatus 
-: public TObject, 
-  public VectorPolicy<I3IceTopStationStatus>::ThePolicy{
+class I3IceTopStatus : public TObject, 
+		       public MapPolicy<StationKey,I3IceTopStationStatusPtr>::ThePolicy
+{
  public:
   /**
    * constructor
