@@ -21,7 +21,7 @@ class I3RecoResult : public TObject
   const I3RecoTrackList& GetRecoTrackList(unsigned short index) const;
   void                   AddRecoTrackList(I3RecoTrackList* recotracklist_);
 
-  bool                   IsBestRecoTrackList() const;
+  bool                   HasBestRecoTrackList() const;
   const I3RecoTrackList& GetBestRecoTrackList() const;
   void                   SetBestRecoTrackList(I3RecoTrackList* bestrecotracklist_);
 

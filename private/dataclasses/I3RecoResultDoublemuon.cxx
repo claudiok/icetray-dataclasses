@@ -1,4 +1,5 @@
 #include "dataclasses/I3RecoResultDoublemuon.h"
+#include "dataclasses/I3DataExecution.h"
 
 ClassImp(I3RecoResultDoublemuon);
 
@@ -9,18 +10,22 @@ void  I3RecoResultDoublemuon::SetQualityparameter(float qualityparameter_) {qual
 
 bool I3RecoResultDoublemuon::HasTwoTracks() const 
 {
-  if(!IsSingleTrackList()) return(false); 
+  if(!HasSingleTrackList()) return(false); 
   return( (GetSingleTrackList().GetNumberRecoTracks()==2) ? true : false);
 }
 
 const I3RecoTrack& I3RecoResultDoublemuon::GetFirstTrack() const
 {
-  return((HasTwoTracks()) ? GetSingleTrackList().GetRecoTrack(0) : *(I3RecoTrack*)NULL);
+  if(HasTwoTracks()) return (GetSingleTrackList().GetRecoTrack(0));
+  I3DataExecution::Instance().Fatal("I3RecoResultDoublemuon::GetFirstTrack() asked for a track which doesn't exist");
+  return(*(I3RecoTrack*)NULL);
 }
   
 const I3RecoTrack& I3RecoResultDoublemuon::GetSecondTrack() const
 {
-  return((HasTwoTracks()) ? GetSingleTrackList().GetRecoTrack(1) : *(I3RecoTrack*)NULL);
+  if(HasTwoTracks()) return (GetSingleTrackList().GetRecoTrack(1));
+  I3DataExecution::Instance().Fatal("I3RecoResultDoublemuon::GetSecondTrack() asked for a track which doesn't exist");
+  return(*(I3RecoTrack*)NULL);
 }
 
 bool I3RecoResultDoublemuon::SetTracks(I3RecoTrack* firsttrack, I3RecoTrack* secondtrack) 

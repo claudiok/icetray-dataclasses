@@ -13,7 +13,7 @@ class I3RecoResultUpdown : public I3RecoResult
   float GetQualityparameter() const;
   void  SetQualityparameter(float qualityparameter_);
 
-  bool                   IsUpdownTrackList() const;
+  bool                   HasUpdownTrackList() const;
   const I3RecoTrackList& GetUpTrackList() const;
   const I3RecoTrackList& GetDownTrackList() const;
   bool                   SetUpdownTrackList(I3RecoTrackList* uptracklist, I3RecoTrackList* downtracklist);

@@ -231,7 +231,7 @@ class I3Track : public TObject
   void SetAzimuth(float azimuth_);
   void SetEnergy(float energy_);
   
-  bool           IsParenttrack() const;
+  bool           HasParenttrack() const;
   const I3Track& GetParenttrack() const;
   void           SetParenttrack(I3Track& parenttrack_);
 

@@ -1,4 +1,5 @@
 #include "dataclasses/I3Track.h"
+#include "dataclasses/I3DataExecution.h"
 
 ClassImp(I3Track);
 
@@ -92,10 +93,32 @@ void I3Track::SetZenith(float zenith_)                      {zenith=zenith_;}
 void I3Track::SetAzimuth(float azimuth_)                    {azimuth=azimuth_;}
 void I3Track::SetEnergy(float energy_)                      {energy=energy_;}
   
-bool           I3Track::IsParenttrack() const                 {return((parenttrack==NULL) ? false : true);}
-const I3Track& I3Track::GetParenttrack() const                {return((parenttrack==NULL) ? *(I3Track*)NULL : *(I3Track*)parenttrack.GetObject());}
-void           I3Track::SetParenttrack(I3Track& parenttrack_) {parenttrack=&parenttrack_;}
+bool I3Track::HasParenttrack() const
+{
+  return((parenttrack==NULL) ? false : true);
+}
+const I3Track& I3Track::GetParenttrack() const
+{
+  if(HasParenttrack()) return (*(I3Track*)parenttrack.GetObject());
+  I3DataExecution::Instance().Fatal("I3Track::GetParenttrack() asked for a parenttrack which doesn't exist");
+  return(*(I3Track*)NULL);
+}
+void I3Track::SetParenttrack(I3Track& parenttrack_)
+{
+  parenttrack=&parenttrack_;
+}
 
-unsigned short I3Track::GetNumberChildrentracks() const               {return((childrentrack==NULL) ? 0 : childrentrack->GetLast()+1);}
-const I3Track& I3Track::GetChildrentrack(unsigned short number) const {return((GetNumberChildrentracks()<=number) ? *(I3Track*)NULL : *(I3Track*)childrentrack->At(number));}
-void           I3Track::AddChildrentrack(I3Track& childrentrack_)     {if(childrentrack==NULL) childrentrack=new TRefArray; childrentrack->Add(&childrentrack_);}
+unsigned short I3Track::GetNumberChildrentracks() const
+{
+  return((childrentrack==NULL) ? 0 : childrentrack->GetLast()+1);
+}
+const I3Track& I3Track::GetChildrentrack(unsigned short number) const
+{
+  if(GetNumberChildrentracks()>number) return (*(I3Track*)childrentrack->At(number));
+  I3DataExecution::Instance().Fatal("I3Track::GetChildrentrack() asked for an index out of bounds");
+  return(*(I3Track*)NULL);
+}
+void I3Track::AddChildrentrack(I3Track& childrentrack_)
+{
+  if(childrentrack==NULL) childrentrack=new TRefArray; childrentrack->Add(&childrentrack_);
+}
