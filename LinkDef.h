@@ -144,11 +144,11 @@
 #pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
 #pragma link C++ typedef I3BagPtr;
 
-#pragma link C++ class I3OMResponseVect+;
+#pragma link C++ class I3OMResponseMap+;
 #pragma link C++ typedef VectorPolicy<I3OMResponsePtr>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3OMResponsePtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3OMResponseVect::iterator&, const I3OMResponseVect::iterator&);
-#pragma link C++ typedef I3OMResponseVectPtr;
+#pragma link C++ function operator!=(const I3OMResponseMap::iterator&, const I3OMResponseMap::iterator&);
+#pragma link C++ typedef I3OMResponseMapPtr;
 
 #pragma link C++ class I3RecoHitVectDict+;
 #pragma link C++ typedef MapPolicy<string,I3RecoHitVectPtr>::ThePolicy;

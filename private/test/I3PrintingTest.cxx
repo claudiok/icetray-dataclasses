@@ -49,9 +49,9 @@ namespace tut
     I3Event event;
 
     I3OMResponsePtr resp(new I3OMResponse());
-    event.GetOMResponseVect().push_back(resp);
+    event.GetOMResponseMap()[OMKey(1,1)] = resp;
     resp = I3OMResponsePtr(new I3OMResponse);
-    event.GetOMResponseVect().push_back(resp);
+    event.GetOMResponseMap()[OMKey(1,2)]=resp;
 
     I3RecoResultRDMCFitPtr fit(new I3RecoResultRDMCFit);
     event.GetRecoResultDict()["f2kFit"]=fit;
