@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.5 2004/06/09 21:56:34 dule Exp $
+ * $Id: I3Stopping.h,v 1.6 2004/06/14 22:28:14 dule Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/09 21:56:34 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/14 22:28:14 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -89,7 +89,8 @@ class I3Stopping{
   I3Position StartPos() const
     {
       NanPolicy::Fatal();
-      I3Position p(999,999,999);
+      I3Position p;
+      p.NullPosition();
       return p;
     }
 
@@ -166,17 +167,17 @@ class I3Stopping{
   /**
    * sets the stopping x position of the track
    */
-  void StopX(Double_t stopx) {fStopPos.SetX(stopx);}
+  void StopX(Double_t stopx) {fStopPos.X(stopx);}
 
   /**
    * sets the stopping y position of the track
    */
-  void StopY(Double_t stopy) {fStopPos.SetY(stopy);}
+  void StopY(Double_t stopy) {fStopPos.Y(stopy);}
 
   /**
    * sets the stopping z position of the track
    */
-  void StopZ(Double_t stopz) {fStopPos.SetZ(stopz);}
+  void StopZ(Double_t stopz) {fStopPos.Z(stopz);}
 
   /**
    * gives the stopping t of the track

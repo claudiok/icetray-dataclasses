@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.5 2004/06/09 21:56:34 dule Exp $
+ * $Id: I3Infinite.h,v 1.6 2004/06/14 22:28:14 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/09 21:56:34 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/14 22:28:14 $
  * @author 
  */
 
@@ -87,7 +87,8 @@ class I3Infinite{
   I3Position StartPos() const 
     {
       NanPolicy::Fatal();
-      I3Position p(999,999,999);
+      I3Position p;
+      p.NullPosition();
       return p;
     }
 
@@ -109,17 +110,17 @@ class I3Infinite{
   /**
    * sets an x position for the track
    */
-  void X(Double_t x) {fPos.SetX(x);}
+  void X(Double_t x) {fPos.X(x);}
 
   /**
    * sets an y position for the track
    */
-  void Y(Double_t y) {fPos.SetY(y);}
+  void Y(Double_t y) {fPos.Y(y);}
 
   /**
    * sets an z position for the track
    */
-  void Z(Double_t z){fPos.SetZ(z);}
+  void Z(Double_t z){fPos.Z(z);}
 
   /**
    * the time the track was at X(), Y(), and Z()
@@ -139,7 +140,7 @@ class I3Infinite{
   /**
    * sets a position along the track.
    */
-  void Pos(I3Position& p) {fPos = p;}
+  void Pos(I3Position& p) {fPos.SetPosition(p);}
 
   /**
    * sets a position along the track in any reference frame.
@@ -215,7 +216,8 @@ class I3Infinite{
   I3Position StopPos() const 
     {
       NanPolicy::Fatal();
-      I3Position p(999,999,999);
+      I3Position p;
+      p.NullPosition();
       return p;
     }
 

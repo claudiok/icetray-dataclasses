@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.6 2004/06/09 21:56:34 dule Exp $
+ * $Id: I3Contained.h,v 1.7 2004/06/14 22:28:14 dule Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/09 21:56:34 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/06/14 22:28:14 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -65,17 +65,17 @@ class I3Contained
   /**
    * sets the starting x positon
    */
-  void StartX(Double_t startx){fStartPos.SetX(startx);}
+  void StartX(Double_t startx){fStartPos.X(startx);}
 
   /**
    * sets the starting y positon
    */
-  void StartY(Double_t starty){fStartPos.SetY(starty);}
+  void StartY(Double_t starty){fStartPos.Y(starty);}
 
   /**
    * sets the starting z positon
    */
-  void StartZ(Double_t startz){fStartPos.SetZ(startz);}
+  void StartZ(Double_t startz){fStartPos.Z(startz);}
 
   /**
    * gets the starting time

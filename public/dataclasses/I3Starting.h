@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.5 2004/06/09 21:56:34 dule Exp $
+ * $Id: I3Starting.h,v 1.6 2004/06/14 22:28:14 dule Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/06/09 21:56:34 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/14 22:28:14 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -68,17 +68,17 @@ class I3Starting{
   /**
    * sets the starting x position of the particle
    */
-  void StartX(Double_t startx){fStartPos.SetX(startx);}
+  void StartX(Double_t startx){fStartPos.X(startx);}
 
   /**
    * sets the starting y position of the particle
    */
-  void StartY(Double_t starty){fStartPos.SetY(starty);}
+  void StartY(Double_t starty){fStartPos.Y(starty);}
 
   /**
    * sets the starting z position of the particle
    */
-  void StartZ(Double_t startz){fStartPos.SetZ(startz);}
+  void StartZ(Double_t startz){fStartPos.Z(startz);}
 
   /**
    * gets the starting t
@@ -205,7 +205,8 @@ class I3Starting{
   I3Position StopPos() const 
     {
       NanPolicy::Fatal();
-      I3Position p(999,999,999);
+      I3Position p;
+      p.NullPosition();
       return p;
     }
 

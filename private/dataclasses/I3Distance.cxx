@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Distance.cxx,v 1.1 2004/06/09 21:56:34 dule Exp $
+    $Id: I3Distance.cxx,v 1.2 2004/06/14 22:28:03 dule Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/06/09 21:56:34 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/06/14 22:28:03 $
     @author
 
     @todo
@@ -16,15 +16,7 @@
 using namespace std;
 
 //--------------------------------------------------------------
-// Constructor 
-// I3Distance::I3Distance(I3Position& pos, I3Track& track)
-// {
-//   fPos.SetPosition(pos);
-//   fTrack.SetPos(track.GetPosition());
-// }
-
-//--------------------------------------------------------------
-// Calculate distance to a position on track
+// Calculate distance to position Pos() on track
 Double_t I3Distance::Distance(I3Track* track, I3Position& pos)
 {
   return pos.CalcDistance(track->Pos());
@@ -52,11 +44,13 @@ Double_t I3Distance::StopDistance(I3Track* track, I3Position& pos)
 
 //--------------------------------------------------------------
 // Calculate distance to CLOSEST APPROACH to track
-void I3Distance::ClosestApproach(I3Track* track,   // input
+void I3Distance::ClosestApproach(I3Track* track,     // input
 				 I3Position& pos,    // input
-				 I3Position& appos,  // output
+				 I3Position& appos,  // output 
 				 Double_t& apdist,   // output
-				 Bool_t& ontrack)    // output
+				 I3Position& chpos,  // output
+				 Double_t& chtime,   // output
+				 Double_t ChAngle)   // input
 {
   //--Only calculate if track has direction
   if (track->HasDirection()) {
@@ -64,46 +58,84 @@ void I3Distance::ClosestApproach(I3Track* track,   // input
 
     //--Calculate position and distance of closest approach
     Double_t PT = P.CalcDistance(track->Pos()); // T=track->Pos()
-    cout <<"PT "<< PT <<endl;
     P.Translate(track->Pos());
     P.RotateZ(-(track->Azimuth()));
     P.RotateY(pi()/2-(track->Zenith()));
     Double_t TA = P.X();
-    cout <<"TA "<< TA <<endl;
     Double_t PA = sqrt(PT*PT-TA*TA);
-    cout <<"PA "<< PA <<endl;
-    apdist = PA;  // set output distance value
+
+    //--Return position and distance of closest approach
+    appos = ShiftAlongTrack(track,TA); // position A
+    apdist = PA; // distance of closest approach
+
+    //--Calculate Cherenkov photon... position on track and time of PMT hit
+    Double_t CA = PA/tan(ChAngle);
+    Double_t CP = PA/sin(ChAngle);
+    Double_t TC = TA-CA;
+    chpos = ShiftAlongTrack(track,TC); // Cherenkov position C
+    chtime = (TC+CP)/track->Speed()/I3Units::ns;
+               // total photon time from T (on track) through C to P.
 
     //--Is point of closest approach (A) on track?
+    //--Is Cherenkov origin point (C) on track?
     if (track->IsStarting()) 
-      if (track->IsStopping()) 
-	//-contained track
-	if (TA>=0 && TA<=track->Length()) ontrack=kTRUE;
-	else if (TA>=0 && TA>track->Length()) ontrack=kFALSE;
-	else ontrack=kFALSE;
-      else 
-	//-starting track
-	if (TA>=0) ontrack=kTRUE;
-	else ontrack=kFALSE;
+      if (track->IsStopping()) {
+      //-contained track...............................
+	if (TA<0) {
+	  // if A is before STARTING position
+	  appos = track->StartPos();
+	  apdist = P.CalcDistance(track->StartPos());
+	} else if (TA>track->Length()) {
+	  // if A is beyond STOPPING position
+	  appos = track->StopPos();
+	  apdist = P.CalcDistance(track->StopPos());
+	}
+	if (TC<0) {
+	  // if C is before STARTING position
+	  chpos.NullPosition();
+	  chtime = NAN;
+	} else if (TC>track->Length()) {
+	  // if C is beyond STOPPING position
+	  chpos.NullPosition();                                               
+          chtime = NAN;
+	}
+      } else {
+      //-starting track................................
+	if (TA<0) {
+	  // if A is before STARTING position
+	  appos = track->StartPos();
+	  apdist = P.CalcDistance(track->StartPos());
+	}
+	if (TC<0) {
+	  // if C is before STARTING position
+	  chpos.NullPosition();
+	  chtime = NAN;
+	}
+      }
     else
-      if (track->IsStopping())
-	//-stopping track
-	if (TA>=0) ontrack=kFALSE;
-	else ontrack=kTRUE;
-      else
-	//-infitine track
-	ontrack=kTRUE;
-
-    //--Return position of closest approach
-    appos=ShiftAlongTrack(track, TA);
-    
+      if (track->IsStopping()) {
+      //-stopping track................................
+	if (TA>0) {
+	  // if A is beyond STOPPING position
+	  appos = track->StopPos();
+	  apdist = P.CalcDistance(track->StopPos());
+	}
+	if (TC>0) {
+	  // if C is beyond STOPPING position
+	  chpos.NullPosition();
+	  chtime = NAN;
+	}
+      } else {
+      //-infitine track................................
+      }
 
     //--Don't calculate if track does not have direction
   } else {
     cout <<"I3Distance::ClosestApproach - Track has no direction. Not calculating.\n";
+    appos.NullPosition();
     apdist=NAN;
-    appos.SetPosition(999,999,999,I3Position::car);
-    ontrack=kFALSE;
+    chpos.NullPosition();
+    chtime=NAN;
   }
 }
 
@@ -123,15 +155,15 @@ I3Position I3Distance::ShiftAlongTrack(I3Track* track, Double_t dist)
 
 //--------------------------------------------------------------
 // Is a given position on a track
-Bool_t I3Distance::IsOnTrack(I3Track* track, I3Position& pos)
+Bool_t I3Distance::IsOnTrack(I3Track* track, 
+			     I3Position& pos, 
+			     Double_t Precision)
 {
-  I3Position appos;
-  Double_t apdist;
-  Bool_t ontrack;
-  ClosestApproach(track,pos,appos,apdist,ontrack);
-  if (apdist<=Precision() && ontrack==kTRUE) return kTRUE;
+  I3Position appos,chpos;
+  Double_t apdist,chtime;
+  ClosestApproach(track,pos,appos,apdist,chpos,chtime);
+  if (apdist<=Precision) return kTRUE;
   else return kFALSE;
 }
 
 //--------------------------------------------------------------
-

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.14 2004/06/09 21:56:34 dule Exp $
+    $Id: I3Track.cxx,v 1.15 2004/06/14 22:28:03 dule Exp $
 
-    @version $Revision: 1.14 $
-    @date $Date: 2004/06/09 21:56:34 $
+    @version $Revision: 1.15 $
+    @date $Date: 2004/06/14 22:28:03 $
     @author
 
     @todo
@@ -41,8 +41,8 @@ void I3Track::PrintTrack()
     StopPos().PrintPosition();
     cout <<"Stop Time (StopT): "<<StopT()<<endl;
   }
-  cout <<"Zenith: "<<Zenith()<<endl;
-  cout <<"Azimuth: "<<Azimuth()<<endl;
+  cout <<"Zenith: "<<Zenith()/I3Units::degree<<" deg"<<endl;
+  cout <<"Azimuth: "<<Azimuth()/I3Units::degree<<" deg"<<endl;
   cout <<"Length: "<<Length()<<endl;
   cout <<"========================================================="<<endl;
 }
