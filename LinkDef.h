@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.97 2004/07/28 20:05:21 ehrlich Exp $
-// $Revision: 1.97 $
-// $Date: 2004/07/28 20:05:21 $
+// $Id: LinkDef.h,v 1.98 2004/07/28 22:13:12 blaufuss Exp $
+// $Revision: 1.98 $
+// $Date: 2004/07/28 22:13:12 $
 //
 
 #ifdef __CINT__
@@ -98,6 +98,11 @@
 #pragma link C++ typedef MapPolicy<string,I3RecoResultPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<string,I3RecoResultPtr>::ThePolicy+;
 #pragma link C++ typedef I3RecoResultDictPtr;
+
+#pragma link C++ class I3TriggerDict+;
+#pragma link C++ typedef MapPolicy<string,I3TriggerPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<string,I3TriggerPtr>::ThePolicy+;
+#pragma link C++ typedef I3TriggerDictPtr;
 
 #pragma link C++ class I3DataReadoutDict+;
 #pragma link C++ typedef MapPolicy<string,I3DataReadoutPtr>::ThePolicy;
@@ -337,8 +342,8 @@
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
 #pragma link C++ typedef I3TrackPtr;
-#pragma link C++ class I3TriggerData+;
-#pragma link C++ typedef I3TriggerDataPtr;
+#pragma link C++ class I3Trigger+;
+#pragma link C++ typedef I3TriggerPtr;
 
 #pragma link C++ class AMANDAExtractor+;
 #pragma link C++ class I3TrackExtractor+;

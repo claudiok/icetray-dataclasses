@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.36 2004/07/26 19:00:54 ehrlich Exp $
+ * $Id: I3Event.h,v 1.37 2004/07/28 22:13:13 blaufuss Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.36 $
- * @date $Date: 2004/07/26 19:00:54 $
+ * @version $Revision: 1.37 $
+ * @date $Date: 2004/07/28 22:13:13 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -13,7 +13,7 @@
 
 #include <TObject.h>
 
-#include "I3TriggerData.h"
+#include "I3TriggerDict.h"
 #include "I3FilterData.h"
 #include "I3OMResponseMap.h"
 #include "I3ArrayHitData.h"
@@ -33,7 +33,7 @@
 
 class I3Event : public TObject
 {
-  I3TriggerData    fTriggerData; //||
+  I3TriggerDict    fTriggerDict; //||
   I3FilterData     fFilterData; //||
   I3OMResponseMap  fOMResponseMap; //||
   I3ArrayHitData   fTopResponseData; //||
@@ -52,14 +52,14 @@ class I3Event : public TObject
   virtual ~I3Event();
 
   /**
-   * @return the TriggerData as constant
+   * @return the TriggerDict as constant
    */
-  const I3TriggerData& GetTriggerData() const { return fTriggerData; }
+  const I3TriggerDict& GetTriggerDict() const { return fTriggerDict; }
 
   /**
-   * @return the TriggerData as non-const
+   * @return the TriggerDict as non-const
    */
-  I3TriggerData& GetTriggerData() { return fTriggerData; }
+  I3TriggerDict& GetTriggerDict() { return fTriggerDict; }
 
   /**
    * @return the FilterData as a constant object
@@ -117,7 +117,7 @@ class I3Event : public TObject
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3Event \n"
-       <<fTriggerData
+       <<fTriggerDict
        <<fFilterData
        <<fOMResponseMap
        <<fRecoResultDict

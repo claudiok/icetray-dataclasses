@@ -9,7 +9,7 @@
 #include "dataclasses/I3DataReadout.h"
 #include "dataclasses/I3AMANDAAnalogReadout.h"
 #include "dataclasses/I3BasicTrack.h"
-#include "dataclasses/I3TriggerData.h"
+#include "dataclasses/I3TriggerDict.h"
 #include "dataclasses/I3FilterData.h"
 #include "dataclasses/I3MCHit.h"
 #include "dataclasses/I3Geometry.h"
@@ -91,7 +91,7 @@ namespace tut
     cout<<a;
     I3BasicTrack t;
     cout<<t;
-    I3TriggerData trigger;
+    I3TriggerDict trigger;
     cout<<trigger;
     I3FilterData filter;
     cout<<filter;
