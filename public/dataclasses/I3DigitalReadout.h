@@ -3,30 +3,37 @@
 
 #include "StoragePolicy.h"
 #include "I3DataReadout.h"
-#include "I3Waveform.h"
+
+#include <vector>
+
+using namespace std; 
+
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.2 2004/03/13 19:51:20 pretz Exp $
+ * $Id: I3DigitalReadout.h,v 1.3 2004/03/16 12:44:36 pretz Exp $
  *
  * A collection of digital signals.
  *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/03/13 19:51:20 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/03/16 12:44:36 $
  * @author pretz
  *
  * @todo
  *
  */
-class I3DigitalReadout : public I3DataReadout
+class I3DigitalReadout : public I3DataReadout, public vector<Double_t>
 {
-  I3Waveform fWaveform;
-  Double_t fStarttime;
+  Double_t fStartTime;
+  Double_t fBinSize;
  public:
   /**
    * constructor
    */
-  I3DigitalReadout() {fStarttime = 0; }
+  I3DigitalReadout() 
+    : fStartTime(0),
+    fBinSize(0)
+    {}
 
   /**
    * destructor
@@ -36,23 +43,40 @@ class I3DigitalReadout : public I3DataReadout
   /** 
    * @return the start time of the series
    */
-  Double_t StartTime() const { return fStarttime; }
+  Double_t StartTime() const { return fStartTime; }
 
   /**
    * @param starttime the new start time for the series
    */
-  void StartTime(Double_t starttime) { fStarttime = starttime; }
+  void StartTime(Double_t starttime) { fStartTime = starttime; }
 
   /**
-   * @return the waveform that's associated with this readout as constant
+   * @return the size of the time bins in this waveform
    */
-  const I3Waveform& Waveform() const {return fWaveform;}
+  Double_t BinSize() const {return fBinSize;}
 
   /**
-   * @return the waveform that's associated with this readuot as non-const
+   * @param binsize is the new binsize for this waveform
    */
-  I3Waveform& Waveform() {return fWaveform;}
+  void BinSize(Double_t binsize) {fBinSize = binsize;}
 
+  /**
+   * Gives the value of the waveform in absolute time, rather than 
+   * 'by-bin.'  Give '0.0' if you ask outside bht bounds of the the array
+   * @param absolutetime the time that you want the value of
+   * @return the value of the waveform at the indicated absolutetime
+   * after scaling by the binsize and adjusting by the start time.
+   * @todo is 'truncation' right here?? I think so, but somebody should 
+   * confirm it.
+   */
+  Double_t Value(Double_t absolutetime) const
+    {
+      unsigned int binlookup = (unsigned int)
+	((absolutetime - fStartTime)/fBinSize);
+      if(binlookup < 0 || binlookup >= size())
+	return 0.0;
+      return (*this)[binlookup];
+    }
  private:
   // copy and assignment private
   I3DigitalReadout(const I3DigitalReadout&);

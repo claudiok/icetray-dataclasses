@@ -234,7 +234,6 @@
 #pragma link C++ typedef I3TriggerDataPtr;
 #pragma link C++ class I3MCPrimary+;
 #pragma link C++ typedef I3MCPrimaryPtr;
-#pragma link C++ class I3Waveform+;
 
 #pragma link C++ class AmandaExtractor+;
 #pragma link C++ class vector<I3OMGeoAmandaPtr>+;

@@ -1,5 +1,5 @@
 #
-# $Id: Doxyfile.full,v 1.1 2004/03/14 15:07:12 pretz Exp $
+# $Id: Doxyfile.full,v 1.2 2004/03/16 12:44:36 pretz Exp $
 #
 # Copyright (C) 1997-1999 by Dimitri van Heesch.
 #
@@ -21,6 +21,7 @@ WARNINGS          = YES
 DISABLE_INDEX     = NO
 EXTRACT_ALL       = NO
 EXTRACT_PRIVATE   = NO
+EXTRACT_LOCAL_CLASSES = YES
 GENERATE_MAN      = NO
 GENERATE_LATEX    = YES
 GENERATE_HTML     = YES
