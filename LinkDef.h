@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.124 2004/09/03 23:32:08 niessen Exp $
-// $Revision: 1.124 $
-// $Date: 2004/09/03 23:32:08 $
+// $Id: LinkDef.h,v 1.125 2004/09/04 01:05:45 niessen Exp $
+// $Revision: 1.125 $
+// $Date: 2004/09/04 01:05:45 $
 //
 
 #ifdef __CINT__
@@ -310,6 +310,10 @@
 #pragma link C++ class I3TWRLaunch+;
 #pragma link C++ typedef I3TWRLaunchPtr;
 #pragma link C++ class roost::shared_ptr<I3TWRLaunch>+;
+
+#pragma link C++ class I3Direction+;
+#pragma link C++ typedef I3DirectionPtr;
+#pragma link C++ class roost::shared_ptr<I3Direction>+;
 
 #pragma link C++ class I3Directional+;
 #pragma link C++ class I3Energetic+;
