@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.11 2004/09/07 03:33:44 dule Exp $
+ * $Id: I3Stopping.h,v 1.12 2004/09/07 15:14:05 dule Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/09/07 03:33:44 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/09/07 15:14:05 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -68,7 +68,7 @@ class I3Stopping{
   /**
    * sets the direction of the track
    */
-  void SetDir(I3DIrection& d) {fDir.SetDirection(d);}
+  void SetDir(I3Direction& d) {fDir.SetDirection(d);}
 
   /**
    * sets the direction of the track
