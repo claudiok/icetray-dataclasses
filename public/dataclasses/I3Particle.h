@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.18 2004/09/01 00:54:26 ehrlich Exp $
+ * $Id: I3Particle.h,v 1.19 2005/04/01 22:38:41 olivas Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/09/01 00:54:26 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2005/04/01 22:38:41 $
  * @author pretz
  *
  */
@@ -69,51 +69,51 @@ class I3Particle : public TObject{
   };
 
   private:
-    ParticleType fType;
-    Int_t        fID;
-    Int_t        fPrimaryID;
-    Int_t        fParentID;
+    ParticleType type_;
+    int        id_;
+    int        primaryID_;
+    int        parentID_;
 
   public:
     I3Particle()
     {
-      fType=Null;
-      fID=0;
-      fPrimaryID=0;
-      fParentID=0;
+      type_=Null;
+      id_=0;
+      primaryID_=0;
+      parentID_=0;
     }
 
     /**
      * indicates that this track is observable.
      */
-    virtual Bool_t IsObservable() const = 0;
+    virtual bool IsObservable() const = 0;
 
     /**
      * indicates that particle has a direction of origin
      */
-    virtual Bool_t HasDirection() const =0;
+    virtual bool HasDirection() const =0;
 
     /**
      * indicates that particle has an energy
      */
-    virtual Bool_t HasEnergy() const =0;
+    virtual bool HasEnergy() const =0;
 
     /**
      * indicates that particle is InIce
      */
-    virtual Bool_t IsInIce() const =0;
+    virtual bool IsInIce() const =0;
 
     /**
      * indicates that particle is in IceTop
      */
-    virtual Bool_t IsIceTop() const =0;
+    virtual bool IsIceTop() const =0;
 
     /**
      * gives the type of the particle
      */
     virtual ParticleType GetType() const
     {
-	return fType;
+	return type_;
     }
 
     /**
@@ -121,55 +121,55 @@ class I3Particle : public TObject{
      */
     virtual void SetType(ParticleType type)
     {
-	fType = type;
+	type_ = type;
     };
 
     /** 
      * gets the unique ID number of the particle
      */ 
-    virtual Int_t GetParticleID() const
+    virtual int GetParticleID() const
     {
-	return fID;
+	return id_;
     };
 
     /** 
      * sets the unique ID number of the particle
      */ 
-    virtual void SetParticleID(Int_t ID)
+    virtual void SetParticleID(int ID)
     {
-	fID = ID;
+	id_ = ID;
     };
     
     /** 
      * gets the ID number of the primary of the particle
      */ 
-    virtual Int_t GetPrimaryID() const
+    virtual int GetPrimaryID() const
     {
-	return fPrimaryID;
+	return primaryID_;
     };
 
     /** 
      * sets the ID number of the primary of the particle
      */ 
-    virtual void SetPrimaryID(Int_t PrimaryID)
+    virtual void SetPrimaryID(int PrimaryID)
     {
-	fPrimaryID = PrimaryID;
+	primaryID_ = PrimaryID;
     };
   
     /** 
      * gets the ID number of the parent of the particle
      */ 
-    virtual Int_t GetParentID() const
+    virtual int GetParentID() const
     {
-	return fParentID;
+	return parentID_;
     };
 
     /** 
      * sets the ID number of the parent of the particle
      */ 
-    virtual void SetParentID(Int_t ParentID)
+    virtual void SetParentID(int ParentID)
     {
-	fParentID = ParentID;
+	parentID_ = ParentID;
     };
 
  /**
@@ -178,10 +178,10 @@ class I3Particle : public TObject{
   */
  virtual void CopyTo(I3Particle& destination) const
    {
-     destination.fType = fType;
-     destination.fID   = fID;
-     destination.fID   = fPrimaryID;
-     destination.fID   = fParentID;
+     destination.type_ = type_;
+     destination.id_   = id_;
+     destination.id_   = primaryID_;
+     destination.id_   = parentID_;
    }
 
  /**
@@ -208,6 +208,18 @@ class I3Particle : public TObject{
      o<<"[ "<<IsA()->GetName()<<" ]\n";
    }
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Type", type_);
+    ar & make_nvp("ID", id_);
+    ar & make_nvp("PrimaryID",primaryID_);
+    ar & make_nvp("ParentID", parentID_);
+  }
+
  // ROOT macro
   ClassDef(I3Particle,1);
 };

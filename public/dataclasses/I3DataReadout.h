@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.18 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3DataReadout.h,v 1.19 2005/04/01 22:38:41 olivas Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.18 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2005/04/01 22:38:41 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -47,7 +47,7 @@ using namespace std;
  * @c DataReadout.
  */
 class I3DataReadout : public TObject {
-    Bool_t fRaw;
+    bool raw_;
     
 public:
     /**
@@ -65,14 +65,14 @@ public:
      * or was put in later to emulate a particular kind of data.
      * @return kTRUE if this readout came directly from the detector
      */
-    Bool_t IsRaw() const {return fRaw;}
+    bool IsRaw() const {return raw_;}
     
     /**
      * establishes this I3DataReadout as either coming from the detector
      * or from some later processing.
      * @param raw kTRUE if it came straight from the detector
      */
-    void SetRaw(Bool_t raw) {fRaw = raw;}
+    void SetRaw(bool raw) {raw_ = raw;}
     
     /**
      * @todo finish implementing this method
@@ -91,6 +91,14 @@ public:
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Raw", raw_);
+  }
 
   // ROOT Macro
   ClassDef(I3DataReadout,1);

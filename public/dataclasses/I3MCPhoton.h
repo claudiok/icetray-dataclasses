@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPhoton.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3MCPhoton.h,v 1.5 2005/04/01 22:38:41 olivas Exp $
  *
  * @file I3MCPhoton.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/01 22:38:41 $
  * @author pretz
  */
 #ifndef I3MCPHOTON_H
@@ -21,7 +21,7 @@
  */
 class I3MCPhoton : public TObject
 {
-  Double_t fTime;
+  double time_;
  public:
   /**
    * default constructor
@@ -38,18 +38,18 @@ class I3MCPhoton : public TObject
    * Gets the photon arrival time at a PMT
    * @return the photon arrival time
    */
-  Double_t GetTime() { return fTime;}
+  double GetTime() { return time_;}
 
   /**
    * Sets the photon arrival time at the PMT
    * @param time the new arrival time
    */
-  void SetTime(Double_t time) { fTime = time;}
+  void SetTime(double time) { time_ = time;}
 
   virtual void ToStream(ostream& o) const
     {
       o<<"[ MCPhoton ]"
-       <<"Time :"<<fTime;
+       <<"Time :"<<time_;
 
     }
   
@@ -61,6 +61,15 @@ class I3MCPhoton : public TObject
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Time", time_);
+  }
+
   //ROOT macro
   ClassDef(I3MCPhoton,1);
 };

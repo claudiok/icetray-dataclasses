@@ -1,5 +1,5 @@
 CXX_BIN_SRCDIR_NAMES := 
-TEST_SRCDIR_NAMES := test test-autogen serialization-test
+TEST_SRCDIR_NAMES := serialization-test
 
 USES_PROJECTS := icetray 
 USES_TOOLS := root log4cplus boost TUT boost

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.15 2004/11/19 15:42:12 dule Exp $
+ * $Id: I3Position.h,v 1.16 2005/04/01 22:38:41 olivas Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/11/19 15:42:12 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2005/04/01 22:38:41 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.15 2004/11/19 15:42:12 dule Exp $
+// $Id: I3Position.h,v 1.16 2005/04/01 22:38:41 olivas Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -236,6 +236,22 @@ class I3Position : public TObject
   mutable Bool_t IsCalculated; 
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("X", x_);
+    ar & make_nvp("Y", y_);
+    ar & make_nvp("Z", z_);
+    ar & make_nvp("R", r_);
+    ar & make_nvp("Theta", theta_);
+    ar & make_nvp("Phi", phi_);
+    ar & make_nvp("Rho", rho_);
+    ar & make_nvp("IsCalculated", isCalculated_);
+  }
+
   void CalcSphCylFromCar() const;
   void CalcCarCylFromSph();
   void CalcCarSphFromCyl();

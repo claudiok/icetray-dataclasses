@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulse.h,v 1.2 2005/02/08 22:45:51 ehrlich Exp $
+ * $Id: I3PMTPulse.h,v 1.3 2005/04/01 22:38:41 olivas Exp $
  *
  * @file I3PMTPulse.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/02/08 22:45:51 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/01 22:38:41 $
  * @author deyoung
  *
  */
@@ -29,30 +29,38 @@ public:
   /**
    * constructor
    */
-  I3PMTPulse() {fHitNum=0;}
+  I3PMTPulse() {hitNum_=0;}
   
   /**
    * @return the number of the hit (in the I3MCHitSeries) which caused this pulse
    */
-  UShort_t GetHitNumber() const { return fHitNum; }
+  unsigned short GetHitNumber() const { return hitNum_; }
   
   /**
    * @param hitnum set the hit which caused this pulse
    */
-  void SetHitNumber(UShort_t hitnum) { fHitNum = hitnum; }
+  void SetHitNumber(unsigned short hitnum) { hitNum_ = hitnum; }
   
   /**
    * pure virtual function must be implemented in derived class
    */
-  virtual Double_t GetVoltage(const Double_t time) = 0;
+  virtual double GetVoltage(const double time) = 0;
 
-  virtual Double_t GetPeakVoltage() = 0;
+  virtual double GetPeakVoltage() = 0;
 
-  virtual Double_t GetPeakTime() = 0;
+  virtual double GetPeakTime() = 0;
 
 private:
   
-  UShort_t fHitNum;
+  unsigned short hitNum_;
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("HitNum", hitNum_);
+  }
 
   //ROOT macro
   ClassDef(I3PMTPulse, 1);

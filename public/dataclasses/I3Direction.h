@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.11 2005/02/24 17:12:42 dule Exp $
+ * $Id: I3Direction.h,v 1.12 2005/04/01 22:38:41 olivas Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/02/24 17:12:42 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/01 22:38:41 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.11 2005/02/24 17:12:42 dule Exp $
+// $Id: I3Direction.h,v 1.12 2005/04/01 22:38:41 olivas Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -228,6 +228,18 @@ class I3Direction : public TObject
   //void CalcSphCylFromCar() const;
   //void CalcCarCylFromSph();
   //void CalcCarSphFromCyl();
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Zenith", zenith_);
+    ar & make_nvp("Azimuth", azimuth_);
+    ar & make_nvp("XDir", xDir_);
+    ar & make_nvp("YDir", yDir_);
+    ar & make_nvp("ZDir", zDir_);
+  }
 
   // ROOT macro
   ClassDef(I3Direction,1)
