@@ -81,7 +81,7 @@ void do_archive(const string& classname, const string& archive_type)
       //      t_bald = new DerivedType;
       //      cout << t_bald;
       t_out = shared_ptr<DerivedType>(new DerivedType);
-      Randomize::apply(*t_out);
+//      Randomize::apply(*t_out);
       //      cout << t_out.get();
       //      t_out = shared_ptr<DerivedType>(new DerivedType);
       //      cout << t_out.get();
