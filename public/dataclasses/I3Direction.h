@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.8 2004/09/29 18:31:35 dule Exp $
+ * $Id: I3Direction.h,v 1.9 2004/11/05 18:40:02 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/09/29 18:31:35 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/11/05 18:40:02 $
  * @author dule
  */
 
@@ -14,17 +14,21 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.8 2004/09/29 18:31:35 dule Exp $
+// $Id: I3Direction.h,v 1.9 2004/11/05 18:40:02 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
 
 #include <math.h>
-using namespace std;
-
+#include <sstream>
 #include "TObject.h"
 #include "StoragePolicy.h"
-#include <sstream>
+#include "dataclasses/I3Constants.h"
+#include "dataclasses/I3Units.h"
+
+using namespace I3Constants;
+using namespace I3Units;
+using namespace std;
 
 /**
  * @brief The basic position class for IceCube. 
@@ -94,12 +98,12 @@ class I3Direction : public TObject
   //--------------
 
   /**
-   * Provide Zenith of direction in cartesian ref frame
+   * Provide Zenith of direction
    */
   Double_t GetZenith() const {return fZenith;}
 
   /**
-   * Provide Azimuth of direction in cartesian ref frame
+   * Provide Azimuth of direction
    */
   Double_t GetAzimuth() const {return fAzimuth;}
 
@@ -125,6 +129,26 @@ class I3Direction : public TObject
   Double_t GetZ() const {
     if (!IsCalculated) CalcCarFromSph();
     return fZ;
+  }
+
+  /**
+   * Calculate Theta of direction
+   */
+  Double_t CalcTheta() const {
+    Double_t theta = 180*deg - fZenith;
+    if (theta > 180*deg) theta = 360*deg - theta;
+    if (theta < 0) theta = -theta;
+    return theta;
+  }
+
+  /**
+   * Calculate Phi of direction
+   */
+  Double_t CalcPhi() const {
+    Double_t phi = fAzimuth + 180*deg;
+    if (phi >= 360*deg) phi -= 360*deg;
+    if (phi < 0) phi += 360*deg;
+    return phi;
   }
 
   //--------------
