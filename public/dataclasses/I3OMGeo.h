@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMGeo.h,v 1.4 2004/02/18 18:44:51 pretz Exp $
+    $Id: I3OMGeo.h,v 1.5 2004/02/20 18:42:16 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/02/18 18:44:51 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/02/20 18:42:16 $
     @author
 
     @todo
@@ -51,5 +51,8 @@ class I3OMGeo : public TObject
 
   ClassDef(I3OMGeo,1);
 };
+
+typedef I3OMGeo* I3OMGeoPtr;
+
 #endif
 
