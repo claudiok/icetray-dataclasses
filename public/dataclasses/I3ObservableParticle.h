@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ObservableParticle.h,v 1.3 2004/04/23 16:37:08 pretz Exp $
+ * $Id: I3ObservableParticle.h,v 1.4 2004/04/23 19:47:40 deyoung Exp $
  *
  * @file I3ObservableParticle.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 16:37:08 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/23 19:47:40 $
  * @author pretz
  *
  * @todo
@@ -58,5 +58,7 @@ class I3ObservableParticle : public I3Particle
   //ROOT macro
   ClassDef(I3ObservableParticle,1);
 };
+
+typedef PtrPolicy<I3ObservableParticle>::ThePolicy I3ObservableParticlePtr;
 
 #endif //I3OBSERVABLEPARTICLE_H
