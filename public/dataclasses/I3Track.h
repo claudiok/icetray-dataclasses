@@ -175,7 +175,7 @@ class I3Track : public TObject
   static const Type APrimary;
 
   /**
-   * Elphantino particle
+   * Elephantino particle
    */
   static const Type Elph;
 
