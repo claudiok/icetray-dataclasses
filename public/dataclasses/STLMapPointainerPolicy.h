@@ -6,17 +6,19 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: STLMapPointainerPolicy.h,v 1.3 2004/03/10 19:17:52 pretz Exp $
+ * $Id: STLMapPointainerPolicy.h,v 1.4 2004/03/16 18:20:08 pretz Exp $
  *
  * just like an STLMapPolicy but contains the added functionality that
  * it deletes all the members when it goes out of scope.
  *
  * @version $$
- * @date $Id: STLMapPointainerPolicy.h,v 1.3 2004/03/10 19:17:52 pretz Exp $
+ * @date $Id: STLMapPointainerPolicy.h,v 1.4 2004/03/16 18:20:08 pretz Exp $
  * @author pretz
  *
  * @todo work out whether or not can implement this by just inheriting from
  * STLMapStoragePolicy
+ * @todo I have examples of templated member functions working in ROOT, but
+ * this isn't working in the interpreter.  Fix that.
  */
 
 template <class ElementType>
@@ -67,6 +69,13 @@ class STLMapPointainerPolicy {
   
   size_type erase(const KeyType &key) { return map_.erase(key); }
   iterator find (const KeyType& key) { return map_.find(key); }
+
+  template<class GottenType>
+    GottenType Get(const string& name){
+    if(find(name)==end())
+      return (GottenType)0;
+    return dynamic_cast<GottenType>(operator[](name));
+  }
 };
 
 #endif
