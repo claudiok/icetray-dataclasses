@@ -7,17 +7,19 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPrimary.h,v 1.1 2004/02/26 21:04:09 pretz Exp $
+ * $Id: I3MCPrimary.h,v 1.1.2.1 2004/04/07 16:59:31 troy Exp $
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/02/26 21:04:09 $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2004/04/07 16:59:31 $
  * @author pretz
  *
  * @todo copy and assignment private??
  *
  */
-class I3MCPrimary : public I3MCTrack{
+class I3MCPrimary : public I3MCTrack {
+
   Double_t fSpectrumWeight;
+
  public:
   /**
    * constructor.  Defaults the weight to 1.0

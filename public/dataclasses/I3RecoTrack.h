@@ -2,22 +2,22 @@
 #define I3RECOTRACK_H
 
 #include <TObject.h>
-#include <TObjArray.h>
-#include "I3Track.h"
+
+#include "dataclasses/I3BasicTrack.h"
 #include "StoragePolicy.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoTrack.h,v 1.3 2004/03/14 15:07:12 pretz Exp $
+ * $Id: I3RecoTrack.h,v 1.3.2.1 2004/04/07 16:59:31 troy Exp $
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/03/14 15:07:12 $
+ * @version $Revision: 1.3.2.1 $
+ * @date $Date: 2004/04/07 16:59:31 $
  * @author
  *
  * @todo
  *
  */
-class I3RecoTrack : public I3Track
+class I3RecoTrack : public I3BasicTrack
 {
   Int_t number_used_oms;
   Int_t *used_om;  //[number_used_oms]

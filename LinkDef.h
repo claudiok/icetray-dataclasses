@@ -227,7 +227,6 @@
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ typedef I3RecoTrackPtr;
-#pragma link C++ class I3RecoTrackComposite+;
 #pragma link C++ class I3SLCReadout+;
 #pragma link C++ typedef I3SLCReadoutPtr;
 #pragma link C++ class I3SummaryPulseReadout+;
@@ -235,6 +234,7 @@
 #pragma link C++ class I3TankGeo+;
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
+#pragma link C++ class I3BasicTrack+;
 #pragma link C++ class I3TriggerData+;
 #pragma link C++ typedef I3TriggerDataPtr;
 #pragma link C++ class I3MCPrimary+;

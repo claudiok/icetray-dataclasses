@@ -1,3 +1,16 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCTrackEvent.h,v 1.2.2.1 2004/04/07 16:59:31 troy Exp $
+ *
+ * @version $Revision: 1.2.2.1 $
+ * @date $Date: 2004/04/07 16:59:31 $
+ * @author pretz
+ *
+ * @todo work out how the copy and assignment can be private.
+ *
+ */
+
 #ifndef I3MCTRACKEVENT_H
 #define I3MCTRACKEVENT_H
 
@@ -5,22 +18,13 @@
 #include "dataclasses/I3MCTrackList.h"
 #include "dataclasses/StoragePolicy.h"
 
-/**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3MCTrackEvent.h,v 1.2 2004/03/11 12:44:47 pretz Exp $
- *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/03/11 12:44:47 $
- * @author pretz
- *
- * @todo work out how the copy and assignment can be private.
- *
- */
-class I3MCTrackEvent : public TObject{
+class I3MCTrackEvent : public TObject 
+{
+
   I3MCPrimary fPrimary;
   I3MCTrackList fInIceTracks;
   I3MCTrackList fIceTopTracks;
+
  public:
   /**
    * constructor
