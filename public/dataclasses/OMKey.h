@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.3 2004/07/31 02:38:00 pretz Exp $
+ * $Id: OMKey.h,v 1.4 2004/08/01 00:41:01 pretz Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/31 02:38:00 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author pretz
  */
 
@@ -24,7 +24,6 @@ using namespace std;
  * It inhierits from pair<int,unsigned int> so it gets the 
  * comparison operator needed to sort these into a map for free.
  *
- * @todo implement operator<<
  */
 class OMKey : public TObject //, public pair<int,unsigned int>
 {
@@ -62,6 +61,11 @@ class OMKey : public TObject //, public pair<int,unsigned int>
    */
   void SetOM(unsigned int om){fOMNumber = om;}
 
+  /**
+   * equality operator.  
+   * @return true if the string and om numbers of the two OMKey's match
+   * @param rhs the OMKey to compare this one to.
+   */
   bool operator==(const OMKey& rhs) const
     {
       if(rhs.fOMNumber == fOMNumber && rhs.fStringNumber == fStringNumber)
@@ -69,15 +73,29 @@ class OMKey : public TObject //, public pair<int,unsigned int>
       return false;
     }
 
+  /**
+   * inequality operator
+   * @return false if the string or om numbers are different
+   * @param rhs the OMKey to compare this one to.
+   */
   bool operator!=(const OMKey& rhs) const
     {
       if(rhs == *this)
 	return false;
       return true;
     }
+ private:
+  // ROOT macro
   ClassDef(OMKey,1);
 };
 
+/**
+ * comparison operator.  First compares the string numbers, then compares
+ * the om numbers.  Required to put OMKeys as the key of a map
+ * @param lhs the left-hand OMKey
+ * @param rhs the right-hand OMKey
+ * @return true if the lhs should be ordered before the rhs
+ */
 inline bool operator<(const OMKey& lhs,const OMKey& rhs)
 {
   if(lhs.GetString() < rhs.GetString())
@@ -89,6 +107,9 @@ inline bool operator<(const OMKey& lhs,const OMKey& rhs)
   return false;
 }
 
+/**
+ * streams an OMKey to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const OMKey& key)
 {
   o<<"("<<key.GetString()<<","<<key.GetOM()<<")";

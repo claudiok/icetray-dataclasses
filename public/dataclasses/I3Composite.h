@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.6 2004/07/06 15:35:52 pretz Exp $
+ * $Id: I3Composite.h,v 1.7 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/07/06 15:35:52 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -36,7 +36,7 @@ class I3Composite
   virtual ~I3Composite(){}
 
   /**
-   *
+   * indicates that the track is composite
    */
   Bool_t IsComposite() const {return true;}
 
@@ -50,6 +50,11 @@ class I3Composite
    */
   vector<I3ParticlePtr>& GetConstituents() {return fConstituents;}
 
+  /**
+   * copies this particle's data into destination if a dynamic_cast
+   * succeeds
+   * @param destination the particle we're copying to.
+   */
   void CopyTo(I3Particle& destination) const
     {
       I3Composite* composite = dynamic_cast<I3Composite*>(&destination);
@@ -58,6 +63,8 @@ class I3Composite
 	  composite->fConstituents = fConstituents;
 	}
     }
+ private:
+  // ROOT macro
   ClassDef(I3Composite,1);
 };
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAExtractor.h,v 1.1 2004/07/30 02:47:56 pretz Exp $
+ * $Id: I3AMANDAExtractor.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3AMANDAExtractor.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/30 02:47:56 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author Troy
  */
 
@@ -29,14 +29,25 @@ class I3AMANDAExtractor
   // not until we get our pointainers/smartpointers figured completely out.
   map<OMKey,I3OMGeoAMANDAPtr> &mygeometry_;
 
+  // default constructor private and unimplemented
   I3AMANDAExtractor();
 
   public:
 
-  // this is the constructor.  We pass this function object a the
-  // other vector that we want it to fill
+  /**
+   * this is the constructor.  We pass this function object a the
+   * other vector that we want it to fill
+   * @param geometry_to_fill the map that we will extract the geometry
+   * into
+   */
   I3AMANDAExtractor(map<OMKey,I3OMGeoAMANDAPtr> &geometry_to_fill); 
 
+  /**
+   * the operator that will do the extraction.  When this operator is
+   * applied to a particular pair, if the pair contains an I3OMGeoAMANDA,
+   * then the OMGeo is appended to the geometry which the extractor is 
+   * created with
+   */
   void operator()(pair<OMKey,I3OMGeoPtr> the_pair);
 
 };

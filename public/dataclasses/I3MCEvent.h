@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.8 2004/07/28 19:10:34 ehrlich Exp $
+ * $Id: I3MCEvent.h,v 1.9 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/28 19:10:34 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -41,16 +41,28 @@ class I3MCEvent : public I3Event
   virtual ~I3MCEvent(){}
 
   /**
-   * @get and set the frame start time
+   * The time that the simulation starts.  This is as opposed to the
+   * the event time, which is when the hardware thinks the event starts.
+   * This is the earliest time simulated
+   * @return the start time for the simulation
    */
   const Float_t GetMCFrameStart() const {return fMCFrameStart; }
+
+  /**
+   * sets the start time for the simulation
+   */
   void SetMCFrameStart(Float_t MCFrameStart){fMCFrameStart=MCFrameStart;}
 
   /**
-   * @get and set the frame stop time
+   * The time that the simulation stops.  See GetMCFrameStart for more.
+   * This is the latest time simulated
+   * @return the stop time for the simulation
    */
-
   const Float_t GetMCFrameStop() const {return fMCFrameStop;}
+
+  /**
+   * sets the stop time for the simulation
+   */
   void SetMCFrameStop(Float_t MCFrameStop){fMCFrameStop=MCFrameStop;}
 
   /**

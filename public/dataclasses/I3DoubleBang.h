@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DoubleBang.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3DoubleBang.h,v 1.6 2004/08/01 00:41:01 pretz Exp $
 
     @file I3DoubleBang.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/08/01 00:41:01 $
     @author deyoung
 */
 
@@ -34,8 +34,18 @@ class I3DoubleBang : public I3TrackImpl<I3Contained,
                                         I3Composite>
 {
  public:
+  /**
+   * constructor
+   */
   I3DoubleBang(){};
+
+  /**
+   * destructor
+   */
   virtual ~I3DoubleBang(){}
+
+ private:
+  // ROOT macro
   ClassDef(I3DoubleBang,1);
 };
 

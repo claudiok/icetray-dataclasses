@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHitDict.h,v 1.1 2004/07/30 20:41:00 blaufuss Exp $
-    @file I3ArrayHitDicy.h
-    @version $Revision: 1.1 $
+    $Id: I3ArrayHitDict.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
+    @file I3ArrayHitDict.h
+    @version $Revision: 1.2 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
     @author blaufuss

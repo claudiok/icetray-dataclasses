@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.34 2004/07/30 14:55:43 pretz Exp $
+    $Id: I3OMResponse.h,v 1.35 2004/08/01 00:41:01 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.34 $
-    @date $Date: 2004/07/30 14:55:43 $
+    @version $Revision: 1.35 $
+    @date $Date: 2004/08/01 00:41:01 $
     @author ehrlich
     @author troy
     @author pretz
@@ -90,12 +90,18 @@ class I3OMResponse : public TObject
   ClassDef(I3OMResponse,1);
 };
 
+/**
+ * streams an I3OMResponse to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,I3OMResponse& resp)
 {
   resp.ToStream(o);
   return o;
 }
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3OMResponse>::ThePolicy I3OMResponsePtr;
 
 #endif

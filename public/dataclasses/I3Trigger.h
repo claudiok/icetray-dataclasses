@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Trigger.h,v 1.2 2004/07/28 22:13:13 blaufuss Exp $
+ * $Id: I3Trigger.h,v 1.3 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3Trigger.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/28 22:13:13 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author blaufuss
  * @author deyoung
  */
@@ -132,6 +132,9 @@ private:
     ClassDef(I3Trigger,1);
 };
 
+/**
+ * streams an I3Trigger to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const I3Trigger& g)
 {
     g.ToStream(o); 
@@ -139,6 +142,9 @@ inline ostream& operator<<(ostream& o,const I3Trigger& g)
 }
 
 #include "dataclasses/StoragePolicy.h"
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3Trigger>::ThePolicy I3TriggerPtr;
 
 #endif

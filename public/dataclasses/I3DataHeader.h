@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.9 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.10 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -85,7 +85,8 @@ class I3DataHeader : public TObject
   ULong_t Sec() const { return fSec; }
 
   /**
-   * @param the new number of seconds after the julian day of the data event
+   * @param sec the new number of seconds after the julian day of the 
+   * data event
    */
   void Sec(ULong_t sec) { fSec = sec; }
 
@@ -95,7 +96,7 @@ class I3DataHeader : public TObject
   ULong_t NanoSec() { return fNanoSec; }
 
   /**
-   * @param the new nanosecond part of the data event
+   * @param nsec the new nanosecond part of the data event
    */
   void NanoSec(ULong_t nsec) { fNanoSec = nsec; }
 
@@ -104,6 +105,7 @@ class I3DataHeader : public TObject
    */
   virtual const std::string DataStream()=0;
 
+ private:
   // ROOT Macro
   ClassDef(I3DataHeader,1);
 };

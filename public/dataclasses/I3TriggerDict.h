@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerDict.h,v 1.1 2004/07/28 22:13:13 blaufuss Exp $
+ * $Id: I3TriggerDict.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3TriggerDict.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/28 22:13:13 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -48,6 +48,9 @@ class I3TriggerDict : public TObject,
   ClassDef(I3TriggerDict, 1);
 };
 
+/**
+ * streams an I3TriggerDict to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const I3TriggerDict& v)
 {
   o<<"[ I3TriggerDict: \n";

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.23 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3Track.h,v 1.24 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.24 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author pretz
  */
 
@@ -151,35 +151,9 @@ class I3Track : public I3ObservableParticle
   ClassDef(I3Track, 1);
 };
 
-inline 
-std::ostream& 
-operator<< (std::ostream& s, const I3Track& t) 
-{
-  // this is done through a reference, virtual call dispatch occurs.
-  // need only this function to cover all subtypes of I3Track that define
-  // the function  "void ToStream(std::ostream &) const"
-  t.ToStream(s);
-  return s;
-}
-  
-// inside here the member variables are compared one-by-one.  Each one
-// involves a virtual call dispatch.
 /**
- * @todo fix implementation of this method
+ * pointer type to insulate users from memory management
  */
-bool 
-operator== (const I3Track& lhs, const I3Track& rhs);
-
-// FIXME (rather, caution.) The "(NAN==NAN)==true" thing bothers me.
-inline 
-bool 
-operator!= (const I3Track& lhs, const I3Track& rhs) 
-{
-  return !(lhs==rhs);
-}
-
-
-
 typedef PtrPolicy<I3Track>::ThePolicy I3TrackPtr;
 
 #endif

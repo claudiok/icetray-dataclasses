@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.15 2004/07/27 04:34:32 ehrlich Exp $
+ * $Id: I3MCHit.h,v 1.16 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/07/27 04:34:32 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -70,7 +70,7 @@ class I3MCHit : public I3Hit
   Int_t GetParticleID() const { return fParticleID; }
 
   /**
-   * @param tracknum set the track which caused this hit
+   * @param ParticleID set the track which caused this hit
    */
   void SetParticleID(Int_t ParticleID) { fParticleID = ParticleID; }
 

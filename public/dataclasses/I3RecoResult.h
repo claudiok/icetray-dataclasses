@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.26 2004/07/12 15:30:49 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.27 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3RecoResult.h
- * @version $Revision: 1.26 $
- * @date $Date: 2004/07/12 15:30:49 $
+ * @version $Revision: 1.27 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -52,12 +52,18 @@ class I3RecoResult : public TObject
   ClassDef(I3RecoResult, 1);
 };
 
+/**
+ * streams an I3RecoResult to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,I3RecoResult& result)
 {
   result.ToStream(o);
   return o;
 }
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3RecoResult>::ThePolicy I3RecoResultPtr;
 
 #endif

@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.25 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3Geometry.h,v 1.26 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.25 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.26 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -59,6 +59,9 @@ class I3Geometry : public TObject
    */
   I3TopGeometry& GetIceTopGeometry() { return fTop; }
 
+  /**
+   * streams the geometry to the given ostream
+   */
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3Geometry\n"

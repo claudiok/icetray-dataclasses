@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultDict.h,v 1.4 2004/07/12 16:12:46 pretz Exp $
+ * $Id: I3RecoResultDict.h,v 1.5 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3RecoResultDict.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/12 16:12:46 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author pretz
  */
@@ -45,6 +45,9 @@ class I3RecoResultDict : public TObject,
 
 };
 
+/**
+ * streams a I3RecoResultDict to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const I3RecoResultDict& v)
 {
   o<<"[ I3RecoResultDict: \n";

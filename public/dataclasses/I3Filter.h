@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Filter.h,v 1.3 2004/07/30 21:44:19 blaufuss Exp $
+ * $Id: I3Filter.h,v 1.4 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3Filter.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/07/30 21:44:19 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author blaufuss
  */
 
@@ -89,6 +89,9 @@ private:
     ClassDef(I3Filter,1);
 };
 
+/**
+ * streams an I3Filter to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const I3Filter& g)
 {
     g.ToStream(o); 
@@ -96,6 +99,9 @@ inline ostream& operator<<(ostream& o,const I3Filter& g)
 }
 
 #include "dataclasses/StoragePolicy.h"
+/**
+ * pointer type to insulate users from memory management issues
+ */
 typedef PtrPolicy<I3Filter>::ThePolicy I3FilterPtr;
 
 #endif

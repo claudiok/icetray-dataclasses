@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ObservableParticle.h,v 1.8 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3ObservableParticle.h,v 1.9 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3ObservableParticle.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author pretz
  */
 #ifndef I3OBSERVABLEPARTICLE_H
@@ -51,6 +51,9 @@ class I3ObservableParticle : public I3Particle
   ClassDef(I3ObservableParticle,1);
 };
 
+/**
+ * pointer type to insulate users from memory management issues
+ */
 typedef PtrPolicy<I3ObservableParticle>::ThePolicy I3ObservableParticlePtr;
 
 #endif //I3OBSERVABLEPARTICLE_H

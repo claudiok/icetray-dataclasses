@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.19 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3Hit.h,v 1.20 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -52,7 +52,12 @@ class I3Hit : public TObject
     fTime = rhs.fTime;
     return *this;
   }
-      
+
+  /**
+   * equality operator
+   * @param rhs the right hand side of the equality
+   * @return true if the times are equal
+   */      
   bool operator==(const I3Hit& rhs) {
     return (fTime == rhs.fTime); 
   }
@@ -63,7 +68,7 @@ class I3Hit : public TObject
   Double_t GetTime() const { return fTime; }
 
   /**
-   * @param time_ the new time of the hit
+   * @param time the new time of the hit
    */
   void SetTime(Double_t time) { fTime = time; }
 

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DirectionalCascade.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3DirectionalCascade.h,v 1.6 2004/08/01 00:41:01 pretz Exp $
 
     @file I3DirectionalCascade.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/08/01 00:41:01 $
     @author deyoung
 */
 
@@ -27,9 +27,19 @@ class I3DirectionalCascade : public I3CascadeImpl<I3Directional,
                                                   I3NonEnergetic>
 {
 public:
-    I3DirectionalCascade(){};
-    virtual ~I3DirectionalCascade(){}
-    ClassDef(I3DirectionalCascade,1);
+  /**
+   * constructor
+   */
+  I3DirectionalCascade(){};
+
+  /**
+   * destructor
+   */
+  virtual ~I3DirectionalCascade(){}
+
+ private:
+  // ROOT macro
+  ClassDef(I3DirectionalCascade,1);
 };
 
 #endif

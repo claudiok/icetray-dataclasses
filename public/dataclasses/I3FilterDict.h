@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3FilterDict.h,v 1.1 2004/07/29 15:35:46 blaufuss Exp $
+ * $Id: I3FilterDict.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3FilterDict.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/29 15:35:46 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author blaufuss
  *
  */
@@ -45,6 +45,9 @@ class I3FilterDict : public TObject,
   ClassDef(I3FilterDict, 1);
 };
 
+/**
+ * streams the I3FilterDict to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const I3FilterDict& v)
 {
   o<<"[ I3FilterDict: \n";

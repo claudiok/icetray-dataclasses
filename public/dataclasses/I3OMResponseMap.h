@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.1 2004/07/13 12:30:55 pretz Exp $
+ * $Id: I3OMResponseMap.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3OMResponseMap.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/13 12:30:55 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -66,6 +66,9 @@ class I3OMResponseMap : public TObject, public map<OMKey,I3OMResponsePtr>
   ClassDef(I3OMResponseMap,1);
 };
 
+/**
+ * streams an I3OMResponseMap to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const I3OMResponseMap& v)
 {
   o<<"[ I3OMResponseMap: \n";

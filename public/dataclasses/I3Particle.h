@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.12 2004/07/27 04:34:32 ehrlich Exp $
+ * $Id: I3Particle.h,v 1.13 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/07/27 04:34:32 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author pretz
  *
  */
@@ -185,12 +185,18 @@ class I3Particle : public TObject{
   ClassDef(I3Particle,1);
 };
 
+/**
+ * streams an I3Particle to an arbitrary ostream
+ */
 inline ostream& operator<<(ostream& o,const I3Particle& part)
 {
   part.ToStream(o);
   return o;
 }
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3Particle>::ThePolicy I3ParticlePtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceCubeExtractor.h,v 1.1 2004/07/30 02:47:56 pretz Exp $
+ * $Id: I3IceCubeExtractor.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3IceCubeExtractor.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/30 02:47:56 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author pretz
  */
 
@@ -29,14 +29,20 @@ class I3IceCubeExtractor
   // not until we get our pointainers/smartpointers figured completely out.
   map<OMKey,I3OMGeoIceCubePtr> &mygeometry_;
 
+  // default constructor private
   I3IceCubeExtractor();
 
   public:
 
-  // this is the constructor.  We pass this function object a the
-  // other vector that we want it to fill
+  /**
+   * the constructor
+   * @param geometry_to_fill the vector that we will be extracting into
+   */
   I3IceCubeExtractor(map<OMKey,I3OMGeoIceCubePtr> &geometry_to_fill); 
 
+  /**
+   * the operator that actually does the extraction
+   */
   void operator()(pair<OMKey,I3OMGeoPtr> the_pair);
 
 };

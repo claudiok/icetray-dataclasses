@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MonoTrack.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
+    $Id: I3MonoTrack.h,v 1.4 2004/08/01 00:41:01 pretz Exp $
 
     @file I3MonoTrack.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/08/01 00:41:01 $
     @author
 */
 
@@ -23,16 +23,30 @@ class I3MonoTrack : public I3BasicTrack
   Double_t fSpeed;
 
  public:
-
+  /**
+   * constructor
+   */
   I3MonoTrack() {
     fSpeed=NAN;
   };
 
+  /**
+   * destructor
+   */
   virtual ~I3MonoTrack() {};
     
-  virtual Double_t Speed() const { return fSpeed; }
-  virtual void Speed(Double_t arg) { fSpeed = arg; }
+  /**
+   * gets the speed of the particle
+   */
+  virtual Double_t GetSpeed() const { return fSpeed; }
 
+  /**
+   * sets the speed of the particle
+   */
+  virtual void SetSpeed(Double_t arg) { fSpeed = arg; }
+
+ private:
+  // ROOT macro
   ClassDef(I3MonoTrack, 1);
 };
 

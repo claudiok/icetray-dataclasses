@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.23 2004/07/16 19:51:59 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.24 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/07/16 19:51:59 $
+ * @version $Revision: 1.24 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author pretz
  */
@@ -41,6 +41,9 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
   ClassDef(I3RecoHitSeries,1);
 };
 
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3RecoHitSeries>::ThePolicy I3RecoHitSeriesPtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAMANDA.h,v 1.1 2004/07/06 14:15:31 pretz Exp $
+ * $Id: I3OMGeoAMANDA.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
  *
  * @file I3OMGeoAMANDA.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/06 14:15:31 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/01 00:41:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -73,6 +73,9 @@ class I3OMGeoAMANDA : public I3OMGeo
 };
 
 #include "dataclasses/StoragePolicy.h"
+/**
+ * pointer type to insulate users from memory management
+ */
 typedef PtrPolicy<I3OMGeoAMANDA>::ThePolicy I3OMGeoAMANDAPtr;
 
 #endif
