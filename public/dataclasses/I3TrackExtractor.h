@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackExtractor.h,v 1.4 2004/07/26 23:39:10 ehrlich Exp $
+ * $Id: I3TrackExtractor.h,v 1.5 2004/08/02 19:59:58 blaufuss Exp $
  *
  * @file I3TrackExtractor.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/26 23:39:10 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/02 19:59:58 $
  * @author pretz
  */
 //#include "dataclasses/I3MCParticleVect.h"
@@ -25,7 +25,7 @@ class I3TrackExtractor
 
   I3TrackExtractor(vector<I3TrackPtr> &tracklist_to_fill); 
 
-  void operator()(I3ObservableParticlePtr p);
+  void operator()(I3InIceParticlePtr p);
 
 };
 

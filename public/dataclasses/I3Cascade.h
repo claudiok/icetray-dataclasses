@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.9 2004/07/30 19:15:59 dule Exp $
+ * $Id: I3Cascade.h,v 1.10 2004/08/02 19:59:57 blaufuss Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/07/30 19:15:59 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/02 19:59:57 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
 #define I3CASCADE_H
 
 #include "Rtypes.h"
-#include "I3ObservableParticle.h"
+#include "I3InIceParticle.h"
 
 /**
  * @brief The cascade interface.  
@@ -23,7 +23,7 @@
  *
  *
  */
-class I3Cascade : public I3ObservableParticle{
+class I3Cascade : public I3InIceParticle{
  public:
   /**
    * indicates that this is not a track

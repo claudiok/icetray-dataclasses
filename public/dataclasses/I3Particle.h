@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.13 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3Particle.h,v 1.14 2004/08/02 19:59:58 blaufuss Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/08/02 19:59:58 $
  * @author pretz
  *
  */
@@ -91,6 +91,16 @@ class I3Particle : public TObject{
      * indicates that particle has a direction of origin
      */
     virtual Bool_t HasDirection() const =0;
+
+    /**
+     * indicates that particle is InIce
+     */
+    virtual Bool_t IsInIce() const =0;
+
+    /**
+     * indicates that particle is in IceTop
+     */
+    virtual Bool_t IsIceTop() const =0;
     
     /**
      * gives the type of the particle

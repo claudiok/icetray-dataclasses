@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.106 2004/08/02 19:31:10 pretz Exp $
-// $Revision: 1.106 $
-// $Date: 2004/08/02 19:31:10 $
+// $Id: LinkDef.h,v 1.107 2004/08/02 19:59:57 blaufuss Exp $
+// $Revision: 1.107 $
+// $Date: 2004/08/02 19:59:57 $
 //
 
 #ifdef __CINT__
@@ -299,8 +299,10 @@
 #pragma link C++ class I3NonCoreLocalized+;
 #pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonEnergetic+;
-#pragma link C++ class I3ObservableParticle+;
-#pragma link C++ typedef I3ObservableParticlePtr;
+#pragma link C++ class I3InIceParticle+;
+#pragma link C++ typedef I3InIceParticlePtr;
+#pragma link C++ class I3IceTopParticle+;
+#pragma link C++ typedef I3IceTopParticlePtr;
 #pragma link C++ class I3OMGeo+;
 
 #pragma link C++ class I3OMGeoAMANDA+;

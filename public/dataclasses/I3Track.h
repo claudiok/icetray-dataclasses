@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.24 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3Track.h,v 1.25 2004/08/02 19:59:58 blaufuss Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.24 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.25 $
+ * @date $Date: 2004/08/02 19:59:58 $
  * @author pretz
  */
 
@@ -14,7 +14,7 @@
 #define I3TRACK_H
 
 #include <TObject.h>
-#include "dataclasses/I3ObservableParticle.h"
+#include "dataclasses/I3InIceParticle.h"
 #include "dataclasses/I3Position.h"
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/I3Units.h"
@@ -31,7 +31,7 @@
  * will work and which won't.
  * @todo implement the geometrical convenience functions
  */
-class I3Track : public I3ObservableParticle
+class I3Track : public I3InIceParticle
 {
  public:
   /**

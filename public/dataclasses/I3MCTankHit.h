@@ -1,7 +1,7 @@
 /**
-    $Id: I3MCTankHit.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3MCTankHit.h,v 1.4 2004/08/02 19:59:58 blaufuss Exp $
     @file I3MCTankHit.h
-    @version $Revision: 1.3 $
+    @version $Revision: 1.4 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -13,7 +13,7 @@
 #include <TObjArray.h>
 
 #include "dataclasses/I3TankHit.h"
-#include "dataclasses/I3ObservableParticle.h"
+#include "dataclasses/I3IceTopParticle.h"
 
 #include "dataclasses/StoragePolicy.h"
 
@@ -21,7 +21,7 @@
  * @brief The container for all the Array Hit-related data in the event
  *
  */
-class I3MCTankHit : public I3TankHit, public VectorPolicy<I3ObservableParticlePtr>::ThePolicy
+class I3MCTankHit : public I3TankHit, public VectorPolicy<I3IceTopParticlePtr>::ThePolicy
 {
 
  public:

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeExtractor.h,v 1.5 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3CascadeExtractor.h,v 1.6 2004/08/02 19:59:58 blaufuss Exp $
  *
  * @file I3CascadeExtractor.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/02 19:59:58 $
  * @author pretz
  */
 //#include "dataclasses/I3MCParticleVect.h"
@@ -33,7 +33,7 @@ class I3CascadeExtractor
   /**
    * the operator that will do the extraction
    */
-  void operator()(I3ObservableParticlePtr p);
+  void operator()(I3InIceParticlePtr p);
 
 };
 
