@@ -6,7 +6,6 @@
 
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;
-//#pragma link C++ function test1;
 
 //
 // namespace
@@ -114,6 +113,15 @@
 #pragma link C++ class I3RecoResultStoragePolicy+;
 #pragma link C++ function operator!=(const I3RecoResult::iterator&, const I3RecoResult::iterator&);
 
+#pragma link C++ typedef I3TopGeometry;
+#pragma link C++ class I3TopGeometry+;
+#pragma link C++ class I3TopGeometry::iterator+;
+#pragma link C++ typedef I3TopGeometryStoragePolicy;
+#pragma link C++ class I3TopGeometryStoragePolicy+;
+#pragma link C++ function operator!=(const I3TopGeometry::iterator&, const I3TopGeometry::iterator&);
+
+
+
 
 //
 // simple types with full value semantics
@@ -142,6 +150,8 @@
 #pragma link C++ class I3RecoResultAlternativeSingleTracks+;
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ class I3RecoTrackComposite+;
+#pragma link C++ class I3TankGeo+;
+#pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
 
