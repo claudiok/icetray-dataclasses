@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.1 2004/04/07 16:59:31 troy Exp $
+    $Id: I3Track.h,v 1.10.2.2 2004/04/08 11:52:27 troy Exp $
 
-    @version $Revision: 1.10.2.1 $
-    @date $Date: 2004/04/07 16:59:31 $
+    @version $Revision: 1.10.2.2 $
+    @date $Date: 2004/04/08 11:52:27 $
     @author
 
     @todo
@@ -59,7 +59,7 @@ class I3Track : public TObject
 
  private:
 
-  TrackType           fType;
+  TrackType      fType;
   Double_t       fX;
   Double_t       fY;
   Double_t       fZ;

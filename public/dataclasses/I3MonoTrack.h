@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MonoTrack.h,v 1.1.2.1 2004/04/07 16:59:31 troy Exp $
+    $Id: I3MonoTrack.h,v 1.1.2.2 2004/04/08 11:52:27 troy Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/07 16:59:31 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/08 11:52:27 $
     @author
 
     @todo
@@ -20,6 +20,8 @@ class I3MonoTrack : public I3BasicTrack
 {
 
   Double_t fSpeed;
+
+ public:
 
   I3MonoTrack() {
     fSpeed=NAN;
