@@ -14,6 +14,10 @@
 #include "dataclasses/I3MCHit.h"
 #include "dataclasses/I3Geometry.h"
 #include "dataclasses/I3RecoResultRDMCFit.h"
+#include "dataclasses/I3RecoResultAltTracks.h"
+#include "dataclasses/I3MCTrack.h"
+#include "dataclasses/I3MCCascade.h"
+#include "services/I3Logging.h"
 
 #include "TList.h"
 #include "TNamed.h"
@@ -99,5 +103,16 @@ namespace tut
     I3MCHit mchit;
     mchit.SetTime(3.4);
     cout<<mchit;
+  }
+
+
+  template<> template<>
+  void object::test<4>()
+  {
+    I3RecoResultAltTracks rrat;
+    rrat["foo"] = I3MCTrackPtr(new I3MCTrack());
+    rrat["bar"] = I3MCCascadePtr(new I3MCCascade());
+    cout<<rrat<<endl;
+    log_debug("here it is dumped to logging %s\n",rrat.ToStream().c_str());
   }
 }

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: test-template.cxx,v 1.2 2004/08/16 16:22:14 pretz Exp $
+    $Id: test-template.cxx,v 1.3 2004/08/30 20:27:10 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/08/16 16:22:14 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/08/30 20:27:10 $
     @author pretz
 
     @todo
@@ -15,6 +15,7 @@
 #include "dataclasses/__TESTED_CLASS__.h"
 #include "TFile.h"
 #include "TTree.h"
+#include "services/I3Logging.h"
 #include <string>
 using std::string;
 using std::cout;
@@ -134,5 +135,7 @@ namespace tut
    void object::test<5>(){
       __TESTED_CLASS__ the_class;
       cout<<the_class<<"\n";
+      //cout<<the_class.ToStream()<<"\n";
+      //log_debug("object written to debug %s\n",the_class.ToStream().c_str());
    }
 }

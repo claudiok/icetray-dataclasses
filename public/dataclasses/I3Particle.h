@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.15 2004/08/02 22:12:28 pretz Exp $
+ * $Id: I3Particle.h,v 1.16 2004/08/30 20:27:10 pretz Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/08/02 22:12:28 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/08/30 20:27:10 $
  * @author pretz
  *
  */
@@ -187,9 +187,12 @@ class I3Particle : public TObject{
  /**
   * @todo finish implementing this method
   */
- virtual void ToStream(ostream& o) const
+ virtual const string ToStream() const
    {
-     o<<"[ "<<IsA()->GetName()<<" ]\n";
+     string to_return ("[ ");
+     to_return.append(IsA()->GetName());
+     to_return.append(" ]");
+     return to_return;
    }
 
  private:
@@ -202,7 +205,7 @@ class I3Particle : public TObject{
  */
 inline ostream& operator<<(ostream& o,const I3Particle& part)
 {
-  part.ToStream(o);
+  o<<part.ToStream();
   return o;
 }
 

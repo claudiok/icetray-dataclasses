@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoResultDictTest.cxx,v 1.1 2004/08/30 16:23:14 pretz Exp $
+    $Id: I3RecoResultDictTest.cxx,v 1.2 2004/08/30 20:27:10 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/08/30 16:23:14 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/08/30 20:27:10 $
     @author pretz
 
     @todo
