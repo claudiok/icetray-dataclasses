@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.22.2.4 2005/02/05 01:33:42 troy Exp $
+ * $Id: I3Hit.h,v 1.22.2.5 2005/02/06 12:26:19 troy Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.22.2.4 $
- * @date $Date: 2005/02/05 01:33:42 $
+ * @version $Revision: 1.22.2.5 $
+ * @date $Date: 2005/02/06 12:26:19 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,37 +29,29 @@ using namespace std;
  * DAQ-level records are stored as I3DataReadouts or
  * I3MCPMTResponses.
  */
-class I3Hit // : public TObject
+class I3Hit : public TObject
 {
   
 public:
   /**
    * constructor
    */
-  I3Hit() { time_ = 0; }
-
-  /**
-   * copy constructor.
-   */
-  I3Hit(const I3Hit& rhs) { *this = rhs; }
-
-  /**
-   * assignment operator
-   */
-  const I3Hit& operator=(const I3Hit& rhs) {
-    if (this == &rhs) return *this;
-    time_ = rhs.time_;
-    return *this;
-  }
+   I3Hit() { time_ = 0; hitID_ = 0; }
 
   /**
    * equality operator
    * @param rhs the right hand side of the equality
    * @return true if the times are equal
    */      
-  bool operator==(const I3Hit& rhs) const { return time_ == rhs.time_ 
-					      && hitID_ == rhs.hitID_; }
-  bool operator!=(const I3Hit& rhs) const { return !(*this==rhs); }
+  bool operator==(const I3Hit& rhs) const 
+  { 
+    return time_ == rhs.time_ && hitID_ == rhs.hitID_; 
+  }
+
+  bool operator!=(const I3Hit& rhs) const 
+  { 
+    return !(*this==rhs); 
+  }
 
   /**
    * @return the time at which the hit occured

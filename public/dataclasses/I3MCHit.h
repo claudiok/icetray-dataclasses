@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.16.4.2 2005/02/04 21:49:05 troy Exp $
+ * $Id: I3MCHit.h,v 1.16.4.3 2005/02/06 12:26:19 troy Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.16.4.2 $
- * @date $Date: 2005/02/04 21:49:05 $
+ * @version $Revision: 1.16.4.3 $
+ * @date $Date: 2005/02/06 12:26:19 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -28,52 +28,48 @@
  */
 class I3MCHit : public I3Hit
 {
-  Float_t  fWeight;
-  Int_t    fParticleID;
+  Float_t  weight_;
+  Int_t    particleID_;
 
  public:
   /**
    * constructor
    */
-  I3MCHit() {fWeight = 0; fParticleID=0;}
+  I3MCHit() : weight_(0), particleID_(0) { }
 
-  /**
-   * copy constructor just uses assignment operator
-   */
-  I3MCHit(const I3MCHit &rhs) { *this = rhs; } 
-
-  /**
-   * assignment operator is a member-wise assignment
-   */
-  const I3MCHit& operator=(const I3MCHit &rhs) { 
-    if (this == &rhs) return *this; // check for assignment to self
-    I3Hit::operator=(rhs); // call base class assignment operator
-    fWeight = rhs.fWeight;
-    fParticleID = rhs.fParticleID; 
-    return *this;
-  }
-
+  // default copy constructor, assignment operator explicitly used
   /**
    * @return the weight contributed by this MCHit
    */
-  Float_t GetWeight() const { return fWeight; }
+  Float_t GetWeight() const { return weight_; }
 
   /**
    * @param weight the new weight for the hit
    */
-  void SetWeight(Float_t weight) { fWeight = weight; }
+  void SetWeight(Float_t weight) { weight_ = weight; }
 
   /**
    * @return the track number which caused this hit
    */
-  Int_t GetParticleID() const { return fParticleID; }
+  Int_t GetParticleID() const { return particleID_; }
 
   /**
    * @param ParticleID set the track which caused this hit
    */
-  void SetParticleID(Int_t ParticleID) { fParticleID = ParticleID; }
+  void SetParticleID(Int_t ParticleID) { particleID_ = ParticleID; }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize (Archive &ar, unsigned version)
+  {
+    ar & make_nvp("I3Hit", base_object<I3Hit>(*this));
+    ar & make_nvp("Weight", weight_);
+    ar & make_nvp("ParticleID", particleID_);
+  }     
+
 
 };
 

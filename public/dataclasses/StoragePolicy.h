@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.16.4.5 2005/02/04 21:49:05 troy Exp $
-    @version $Revision: 1.16.4.5 $
-    @date $Date: 2005/02/04 21:49:05 $
+    $Id: StoragePolicy.h,v 1.16.4.6 2005/02/06 12:26:19 troy Exp $
+    @version $Revision: 1.16.4.6 $
+    @date $Date: 2005/02/06 12:26:19 $
     @author Troy D. Straszheim
 */
 
@@ -33,10 +33,11 @@
  */
 
 #include <boost/serialization/serialization.hpp>
+#include <boost/serialization/base_object.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/export.hpp>
 using boost::serialization::make_nvp;
-
+using boost::serialization::base_object;
 
 #include <boost/shared_ptr.hpp>
 using boost::shared_ptr;
