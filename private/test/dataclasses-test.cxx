@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: dataclasses-test-autogen.cxx,v 1.1 2004/10/15 10:04:22 troy Exp $
+    $Id: dataclasses-test.cxx,v 1.3.2.2 2005/02/04 22:20:33 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/10/15 10:04:22 $
+    @version $Revision: 1.3.2.2 $
+    @date $Date: 2005/02/04 22:20:33 $
     @author Troy D. Straszheim
 
     @todo
