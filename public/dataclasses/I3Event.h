@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.25 2004/07/01 17:51:36 pretz Exp $
+ * $Id: I3Event.h,v 1.26 2004/07/01 21:37:43 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.25 $
- * @date $Date: 2004/07/01 17:51:36 $
+ * @version $Revision: 1.26 $
+ * @date $Date: 2004/07/01 21:37:43 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -29,7 +29,6 @@ class I3Event : public TObject
 {
   I3TriggerData    fTriggerData; //||
   I3FilterData     fFilterData; //||
-  I3MCParticleDict    fMCParticleDict; //||
   I3OMResponseVect fOMResponseVect; //||
   I3RecoResultDict fRecoResultDict; //||
   I3Bag            fBag; //||
@@ -64,16 +63,6 @@ class I3Event : public TObject
    * @return the FilterData as a non-constant object
    */
   I3FilterData& GetFilterData() { return fFilterData;}
-
-  /**
-   * @return the MCParticleDict as a constant object.
-   */
-  const I3MCParticleDict& GetMCParticleDict() const { return fMCParticleDict;}
-
-  /**
-   * @return the MCParticleDict as a non-const object.
-   */
-  I3MCParticleDict& GetMCParticleDict(){ return fMCParticleDict;}
 
   /**
    * @return the OMResponseVect of the event as a non-constant object
