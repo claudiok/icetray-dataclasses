@@ -428,18 +428,24 @@ namespace tut
      * Tests provided condition.
      * Throws if false.
      */
-    void ensure(bool cond)
+    // FIXME: this is a start for the "show me line numbers of ensure() failures
+    // feature
+    // static int line_no;
+    // inline bool set_line_no(unsigned u) { line_no = u; return true; }
+
+    void ensure (bool cond)
     {
-       if( !cond ) throw failure("");
+      if( !cond ) throw failure("");
     }
 
     /**
      * Tests provided condition.
      * Throws if false.
      */
-    void ensure(const char* msg,bool cond)
+    void ensure (const char* msg,bool cond)
     {
-       if( !cond ) throw failure(msg);
+       if( !cond ) 
+	 throw failure(msg);
     }
 
     /**
@@ -868,5 +874,8 @@ namespace tut
 #endif
 }
 
+// FIXME: tut should include file/line numbers in thrown errors.  
+// can we get it to run a debugger automatically?
+//#define ensure set_line_no(__LINE__) && ensure
 #endif
 

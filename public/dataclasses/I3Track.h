@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.3 2004/04/10 16:38:59 troy Exp $
+    $Id: I3Track.h,v 1.10.2.4 2004/04/13 10:29:28 troy Exp $
 
-    @version $Revision: 1.10.2.3 $
-    @date $Date: 2004/04/10 16:38:59 $
+    @version $Revision: 1.10.2.4 $
+    @date $Date: 2004/04/13 10:29:28 $
     @author
 
     @todo
@@ -17,6 +17,9 @@
 #include <TObject.h>
 #include <vector>
 #include <cmath>
+
+#include <iostream>
+
 class I3Track : public TObject
 {
  public:
@@ -112,7 +115,36 @@ class I3Track : public TObject
   virtual bool IsBounded() = 0;
   virtual bool IsUnbounded() = 0;
   
+  //FIXME:  need fns like distancefromtrack, isontrack, etc.
+
+  I3Track& operator=(const I3Track&);
+  virtual void ToStream (std::ostream &s) const;
+
   ClassDef(I3Track, 1);
 };
+
+inline 
+std::ostream& 
+operator<< (std::ostream& s, const I3Track& t) 
+{
+  // this is done through a reference, virtual call dispatch occurs.
+  // need only this function to cover all subtypes of I3Track that define
+  // the function  "void ToStream(std::ostream &) const"
+  t.ToStream(s);
+  return s;
+}
+  
+// inside here the member variables are compared one-by-one.  Each one
+// involves a virtual call dispatch.
+bool 
+operator== (const I3Track& lhs, const I3Track& rhs);
+
+// FIXME (rather, caution.) The "(NAN==NAN)==true" thing bothers me.
+inline 
+bool 
+operator!= (const I3Track& lhs, const I3Track& rhs) 
+{
+  return !(lhs==rhs);
+}
 
 #endif

@@ -151,6 +151,7 @@
 #pragma link C++ typedef I3AnalogReadoutPtr;
 #pragma link C++ class I3Atmosphere+;
 #pragma link C++ typedef I3AtmospherePtr;
+#pragma link C++ class I3Bag+;
 #pragma link C++ class I3DataExecution+;
 #pragma link C++ class I3DataHeader+;
 #pragma link C++ typedef I3DataHeaderPtr;
