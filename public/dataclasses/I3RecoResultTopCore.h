@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopCore.h,v 1.2 2004/07/13 16:24:52 niessen Exp $
+ * $Id: I3RecoResultTopCore.h,v 1.3 2004/07/13 18:48:04 niessen Exp $
  *
  * @file I3RecoResultTopCore.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/13 16:24:52 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/13 18:48:04 $
  * @author Peter Niessen
  */
 
@@ -28,7 +28,7 @@ class I3RecoResultTopCore : public I3RecoResult
   /**
    * constructor
    */
-  I3RecoResultTopCore () { fShowerCore = NULL; }
+  I3RecoResultTopCore () { /* fShowerCore = NULL; */ }
 
   /**
    * destructor
@@ -46,7 +46,7 @@ class I3RecoResultTopCore : public I3RecoResult
     if(fShowerCore)
       return (*fShowerCore);
     I3DataExecution::Instance().Fatal("I3RecoResultTopCore::ShowerCore () const asked for a shower core which doesn't exist");
-    return(*(I3ShowerCorePtr)NULL);
+    //return(*(I3ShowerCorePtr)NULL);
   }
 
   /**
@@ -57,7 +57,7 @@ class I3RecoResultTopCore : public I3RecoResult
     if(fShowerCore)
       return (*fShowerCore);
     I3DataExecution::Instance().Fatal("I3RecoResultSingleTopCore::ShowerCore() asked for a track which doesn't exist");
-    return(*(I3ShowerCorePtr)NULL);
+    //return(*(I3ShowerCorePtr)NULL);
   }
 
   bool HasShowerCore () const {return((fShowerCore==NULL) ? false : true);}

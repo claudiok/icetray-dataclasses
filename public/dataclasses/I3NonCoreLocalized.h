@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonCoreLocalized.h,v 1.1 2004/07/13 15:37:53 niessen Exp $
+ * $Id: I3NonCoreLocalized.h,v 1.2 2004/07/13 18:48:04 niessen Exp $
  *
  * @file I3NonCoreLocalized.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/13 15:37:53 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/13 18:48:04 $
  * @author Peter Niessen
  */
 #ifndef I3NONCORELOCALIZED_H
@@ -29,7 +29,7 @@ class I3NonCoreLocalized
   /**
    * gives the x position of the core
    */
-  Double_t CoreX() const {
+  Double_t GetCoreX() const {
     NanPolicy::Fatal ();
     return NAN;
   }
@@ -37,7 +37,7 @@ class I3NonCoreLocalized
   /**
    * gives the y position of the core
    */
-  Double_t CoreY() const {
+  Double_t GetCoreY() const {
     NanPolicy::Fatal ();
     return NAN;
   }
@@ -45,7 +45,7 @@ class I3NonCoreLocalized
   /**
    * gives the time of the core arrival
    */
-  Double_t CoreT() const {
+  Double_t GetCoreT() const {
     NanPolicy::Fatal ();
     return NAN;
   }
