@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.4 2004/09/16 14:50:12 dule Exp $
+// $Id: I3Direction.cxx,v 1.5 2004/09/21 21:25:03 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
@@ -80,7 +80,7 @@ void I3Direction::ResetDirection()
   fZ=NAN;
   fZenith=NAN;
   fAzimuth=NAN;
-  IsCalculated=kFALSE;
+  IsCalculated=kTRUE;
 }
 
 //-----------------------------------------------------------
