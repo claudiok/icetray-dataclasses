@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.9 2004/11/05 18:40:02 dule Exp $
+ * $Id: I3Direction.h,v 1.10 2004/11/19 15:41:53 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/11/05 18:40:02 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/11/19 15:41:53 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.9 2004/11/05 18:40:02 dule Exp $
+// $Id: I3Direction.h,v 1.10 2004/11/19 15:41:53 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -74,26 +74,31 @@ class I3Direction : public TObject
    * Store direction from direction d
    */
   void SetDirection(const I3Direction& d);
+  void SetDir(const I3Direction& d) { SetDirection(d); }
 
   /**
    * Store direction with zen and azi (2 arguments)
    */
   void SetDirection(Double_t zen, Double_t azi);
+  void SetDir(Double_t zen, Double_t azi) { SetDirection(zen, azi); }
 
   /**
    * Store direction with x, y, z (3 arguments)
    */
   void SetDirection(Double_t x, Double_t y, Double_t z);
+  void SetDir(Double_t x, Double_t y, Double_t z) { SetDirection(x, y, z); }
 
   /**
    * Reset all elements of I3Direction to NAN
    */
   void ResetDirection();
+  void ResetDir() { ResetDirection(); }
 
   /**
    * Set null direction for non-existing direction (ResetDirection)
    */
-  void NullDirection();
+  void NullDirection() { ResetDirection(); }
+  void NullDir() { ResetDirection(); }
 
   //--------------
 
