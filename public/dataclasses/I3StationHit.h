@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.h,v 1.3 2004/08/02 22:12:28 pretz Exp $
+    $Id: I3StationHit.h,v 1.4 2004/08/16 16:22:13 pretz Exp $
     @file I3StationHit.h
-    @version $Revision: 1.3 $
+    @version $Revision: 1.4 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
@@ -68,46 +68,23 @@ class I3StationHit : public TObject,
    */
   void StationNumber (UShort_t station_number);
 
-
   /**
-   * Get the signal of the station
+   * dumps the object to the indicated ostream
+   * @param o the ostream to dump the object to
    */
-  //Float_t Signal  () const;
-
-  /**
-   * Set the signal of the station
-   */
-  //void Signal (Float_t signal);
-
-  /**
-   * Get the time of the station
-   */
-  //Float_t Time () const;
-
-  /**
-   * Set the time of the station
-   */
-  //void Time (Float_t time);
-
-  /**
-   * Get the X of the station hit
-   */
-  //Float_t X () const;
-  
-  /**
-   * Set the X of the station hit
-   */
-  //void X (Float_t x);
-
-  /**
-   * Get the Y of the station hit
-   */
-  //Float_t Y () const;
-  
-  /**
-   * Set the Y of the station hit
-   */
-  //void Y (Float_t y);
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3StationHit: \n";
+      I3StationHit::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  if(*iter == I3TankHitPtr((I3TankHit*)0))
+	    o<<"Null I3TankHit";
+	  else
+	    o<<*(*iter);
+	}
+      o<<"]\n";
+    }
 
  private:
   // copy and assignment are private
@@ -117,6 +94,12 @@ class I3StationHit : public TObject,
   // ROOT macro
   ClassDef(I3StationHit,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3StationHit& hit)
+{
+  hit.ToStream(o);
+  return o;
+}
 
 /**
  * pointer type to insulate users from memory management

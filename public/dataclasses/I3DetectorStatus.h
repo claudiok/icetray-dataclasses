@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DetectorStatus.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3DetectorStatus.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3DetectorStatus.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author pretz
  */
 #ifndef I3DETECTORSTATUS_H
@@ -59,6 +59,13 @@ class I3DetectorStatus : public TObject{
    */
   I3IceTopStatus& GetIceTopStatus() { return fIceTopStatus;}
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<" [ I3DetectorStatus ]"
+       << fInIceStatus
+       <<fIceTopStatus;
+    }
+
  private:
   // copy and assignment private
   I3DetectorStatus(const I3DetectorStatus& rhs);
@@ -67,6 +74,12 @@ class I3DetectorStatus : public TObject{
   //ROOT macro
   ClassDef(I3DetectorStatus,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3DetectorStatus& stat)
+{
+  stat.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the

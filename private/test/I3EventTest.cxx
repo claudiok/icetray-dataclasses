@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3EventTest.cxx,v 1.8 2004/08/12 17:33:32 pretz Exp $
+    $Id: I3EventTest.cxx,v 1.9 2004/08/16 16:22:13 pretz Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/08/12 17:33:32 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/08/16 16:22:13 $
     @author pretz
 
     @todo
@@ -129,5 +129,10 @@ namespace tut
    /** @todo add some checking of the data of I3Event here */
 
    delete tree_in;
+   }
+
+   void object::test<5>(){
+      I3Event the_class;
+      cout<<the_class<<"\n";
    }
 }

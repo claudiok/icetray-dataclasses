@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3FilterTest.cxx,v 1.1 2004/08/12 17:33:32 pretz Exp $
+    $Id: I3FilterTest.cxx,v 1.2 2004/08/16 16:22:13 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/08/12 17:33:32 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/08/16 16:22:13 $
     @author pretz
 
     @todo
@@ -129,5 +129,10 @@ namespace tut
    /** @todo add some checking of the data of I3Filter here */
 
    delete tree_in;
+   }
+
+   void object::test<5>(){
+      I3Filter the_class;
+      cout<<the_class<<"\n";
    }
 }

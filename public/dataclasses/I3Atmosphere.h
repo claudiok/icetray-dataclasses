@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Atmosphere.h,v 1.4 2004/08/12 17:33:33 pretz Exp $
+ * $Id: I3Atmosphere.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3Atmosphere.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/12 17:33:33 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -13,6 +13,7 @@
 #define I3ATMOSPHERE_H
 
 #include <TObject.h>
+#include <TClass.h>
 #include "StoragePolicy.h"
 
 /**
@@ -86,10 +87,28 @@ class I3Atmosphere : public TObject
    */
   void SetWindSpeed(Float_t windspeed) {fWindSpeed = windspeed;}
 
+  /**
+   * dumps the object to the indicated ostream
+   * @param o the ostream to dump the object to
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ "<<IsA()->GetName()<<" ]\n"
+       <<"Pressure: "<<fPressure<<"\n"
+       <<"Temperature: "<<fTemperature<<"\n"
+       <<"WindSpeed: "<<fWindSpeed<<"\n";
+    }
+
  private:
   //ROOT macro
   ClassDef(I3Atmosphere,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3Atmosphere& atm)
+{
+  atm.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopStationGeo.h,v 1.6 2004/08/12 17:33:33 pretz Exp $
+ * $Id: I3TopStationGeo.h,v 1.7 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3TopStationGeo.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/12 17:33:33 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author PN/RU Tue Jun 22 10:30:16 EDT 2004
  */
 #ifndef __I3TopStationGEO_H_
@@ -31,11 +31,31 @@ class I3TopStationGeo : public TObject, public VectorPolicy<I3TankGeoPtr>::ThePo
   I3TopStationGeo () {}
   virtual ~I3TopStationGeo() {;}  
   
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3TopStationGeo: \n";
+      I3TopStationGeo::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  if(*iter == I3TankGeoPtr((I3TankGeo*)0))
+	    o<<"Null I3TankGeo";
+	  else
+	    o<<*(*iter);
+	}
+      o<<"]\n";
+    }
+
   private:
   //ROOT macro
 
   ClassDef(I3TopStationGeo,1);
 };
+
+inline ostream& operator<<(ostream& o, const I3TopStationGeo& geo)
+{
+  geo.ToStream(o);
+  return o;
+}
 
 /**
  * pointer type to insulate users from memory management

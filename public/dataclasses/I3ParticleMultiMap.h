@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ParticleMultiMap.h,v 1.1 2004/08/14 16:41:16 pretz Exp $
+ * $Id: I3ParticleMultiMap.h,v 1.2 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3ParticleMultiMap.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/08/14 16:41:16 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author ehrlich
  */
 
@@ -33,6 +33,21 @@ class I3ParticleMultiMap : public TObject, public MultiMapPolicy<string, I3Parti
    */
   virtual ~I3ParticleMultiMap(){};
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3OMResponseMap: ]\n";
+      I3ParticleMultiMap::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3ParticlePtr((I3Particle*)0))
+	    o<<"Null I3Particle";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"\n";
+    }
+  
  private:
   // copy and assignment private
 /*   I3ParticleMultiMap(const I3ParticleMultiMap&);  */
@@ -41,6 +56,12 @@ class I3ParticleMultiMap : public TObject, public MultiMapPolicy<string, I3Parti
   // ROOT macro
   ClassDef(I3ParticleMultiMap,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3ParticleMultiMap& rhs)
+{
+  rhs.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the

@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPhoton.h,v 1.2 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3MCPhoton.h,v 1.3 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3MCPhoton.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author pretz
  */
 #ifndef I3MCPHOTON_H
@@ -45,10 +45,23 @@ class I3MCPhoton : public TObject
    * @param time the new arrival time
    */
   void SetTime(Double_t time) { fTime = time;}
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ MCPhoton ]"
+       <<"Time :"<<fTime;
+
+    }
  private:
   //ROOT macro
   ClassDef(I3MCPhoton,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3MCPhoton& photon)
+{
+  photon.ToStream(o);
+  return o;
+}
 
 /**
  * pointer type to insulate users from memory management schemes

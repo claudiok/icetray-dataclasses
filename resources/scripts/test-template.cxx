@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: test-template.cxx,v 1.1 2004/08/14 16:43:32 pretz Exp $
+    $Id: test-template.cxx,v 1.2 2004/08/16 16:22:14 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/08/14 16:43:32 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/08/16 16:22:14 $
     @author pretz
 
     @todo
@@ -129,5 +129,10 @@ namespace tut
    /** @todo add some checking of the data of __TESTED_CLASS__ here */
 
    delete tree_in;
+   }
+
+   void object::test<5>(){
+      __TESTED_CLASS__ the_class;
+      cout<<the_class<<"\n";
    }
 }

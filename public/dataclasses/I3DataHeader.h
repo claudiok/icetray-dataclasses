@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.11 2004/08/02 15:29:52 blaufuss Exp $
+ * $Id: I3DataHeader.h,v 1.12 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/08/02 15:29:52 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,7 +14,14 @@
 #define I3DATAHEADER_H
 
 #include "TObject.h"
+#include "TClass.h"
 #include "StoragePolicy.h"
+
+#include <string>
+#include <iostream>
+
+using namespace std;
+
 /**
  * @brief This class represents a generic header for a data issued on some 
  * stream
@@ -105,10 +112,32 @@ class I3DataHeader : public TObject
    */
   virtual const std::string GetDataStream()=0;
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ "
+       <<IsA()->GetName()
+       <<" ]\n"
+       <<"Modified Julain Day: "
+       <<fMjd
+       <<"\n"
+       <<"Seconds: "
+       <<fSec
+       <<"\n"
+       <<"Nano Seconds: "
+       <<fNanoSec
+       <<"\n";
+    }
+  
  private:
   // ROOT Macro
   ClassDef(I3DataHeader,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3DataHeader& header)
+{
+  header.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

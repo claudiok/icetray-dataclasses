@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHitDict.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
+    $Id: I3ArrayHitDict.h,v 1.3 2004/08/16 16:22:13 pretz Exp $
     @file I3ArrayHitDict.h
-    @version $Revision: 1.2 $
+    @version $Revision: 1.3 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
     @author blaufuss
@@ -34,6 +34,21 @@ class I3ArrayHitDict : public TObject,
    */
   virtual ~I3ArrayHitDict() {}
   
+virtual void ToStream(ostream& o) const
+{
+  o<<"[ I3ArrayHitDict: \n";
+  I3ArrayHitDict::const_iterator iter;
+  for(iter=begin();iter!=end();iter++)
+    {
+      o<<iter->first;
+      if(iter->second==I3ArrayHitPtr((I3ArrayHit*)0))
+	o<<"Null XXX";
+      else
+	o<<*(iter->second);
+    }
+  o<<"]\n";
+}
+
  private:
   // copy and assignment are private
   I3ArrayHitDict(const I3ArrayHitDict&); 
@@ -42,6 +57,12 @@ class I3ArrayHitDict : public TObject,
   // ROOT macro
   ClassDef(I3ArrayHitDict,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3ArrayHitDict& dict)
+{
+  dict.ToStream(o);
+  return o;
+}
 
 /**
  * pointer typedeffed away to insulate users from memory managment

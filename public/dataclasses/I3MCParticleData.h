@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleData.h,v 1.4 2004/08/14 16:41:16 pretz Exp $
+ * $Id: I3MCParticleData.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3MCParticleData.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/14 16:41:16 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author pretz
  *
  */
@@ -71,6 +71,14 @@ class I3MCParticleData : public TObject
    */
   I3ParticleMultiMap& GetIceTopParticles() {return fIceTopParticles;};
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<" [ I3ParticleMultiMap ] \n"
+       <<fPrimary
+       <<fInIceParticles
+       <<fIceTopParticles;
+    }
+
  private:
   // copy and assignment are private
 /*   I3MCParticleEvent(const I3MCParticleEvent&){} */
@@ -78,6 +86,12 @@ class I3MCParticleData : public TObject
 
   ClassDef(I3MCParticleData,1);
 };
+
+inline ostream& operator<<(ostream& o, const I3MCParticleData& data)
+{
+  data.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

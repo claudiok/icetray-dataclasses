@@ -1,17 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.9 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3MCPMTResponse.h,v 1.10 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author klein
  */
 
 #ifndef I3MCPMTRESPONSE_H
 #define I3MCPMTRESPONSE_H
 #include <TObject.h>
+#include <TClass.h>
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -54,6 +55,13 @@ class I3MCPMTResponse : public TObject
    */
    Float_t GetEndTime() const {return fEndTime;}
 
+   virtual void ToStream(ostream& o) const
+     {
+       o<<"[ "<<IsA()->GetName()<<" ]\n"
+	<<"StartTime: "<<fStartTime
+	<<"EndTime: "<<fEndTime;
+     }
+
   private:
   // copy and assignment are private
    I3MCPMTResponse(const I3MCPMTResponse&); 
@@ -62,6 +70,12 @@ class I3MCPMTResponse : public TObject
   // ROOT macro
   ClassDef(I3MCPMTResponse,1);
 };
+
+inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)
+{
+  resp.ToStream(o);
+  return o;
+}
 
 /** 
  * pointer type to insulate users from memory managemnt issues

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankMaterial.h,v 1.4 2004/08/12 17:33:33 pretz Exp $
+ * $Id: I3TankMaterial.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3TankMaterial.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/12 17:33:33 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author Peter Niessen Thu Feb 19 11:42:22 EST 2004
  */
 #ifndef __I3TANKMATERIAL_H_
@@ -36,6 +36,14 @@ class I3TankMaterial : public TObject
   ClassDef (I3TankMaterial, 1);
 
 };
+
+/**
+ * @todo need to implement this better.
+ */
+inline ostream& operator<<(ostream& o, I3TankMaterial& material)
+{
+  o<<" [ I3TankMaterial ]"<<"\n";
+}
 
 /**
  * pointer type to insulate users from memory management

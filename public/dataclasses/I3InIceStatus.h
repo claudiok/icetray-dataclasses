@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceStatus.h,v 1.5 2004/08/03 16:25:14 blaufuss Exp $
+ * $Id: I3InIceStatus.h,v 1.6 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3InIceStatus.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/03 16:25:14 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author pretz
  */
 #ifndef I3INICESTATUSDATA_H
@@ -35,6 +35,25 @@ class I3InIceStatus
    */
   virtual ~I3InIceStatus(){};
 
+  /**
+   * dumps the object to the indicated ostream
+   * @param o the ostream to dump the object to
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3InIceStatus: \n";
+      I3InIceStatus::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3OMStatusIceCubePtr((I3OMStatusIceCube*)0))
+	    o<<"Null I3OMStatusIceCube";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"]\n";
+    }
+
  private:
   // copy and assignment are private
   I3InIceStatus(const I3InIceStatus& rhs);
@@ -43,6 +62,12 @@ class I3InIceStatus
   // ROOT macro
   ClassDef(I3InIceStatus,1);
 };
+
+inline ostream& operator<<(ostream& o, const I3InIceStatus& status)
+{
+  status.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the

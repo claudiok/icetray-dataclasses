@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.1 2004/07/16 19:51:59 pretz Exp $
+ * $Id: I3RecoHitSeriesDict.h,v 1.2 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/16 19:51:59 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -43,6 +43,21 @@ class I3RecoHitSeriesDict : public TObject,
    */
   virtual ~I3RecoHitSeriesDict(){};
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3RecoHitSeriesDict: \n";
+      I3RecoHitSeriesDict::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<iter->first;
+	  if(iter->second==I3RecoHitSeriesPtr((I3RecoHitSeries*)0))
+	    o<<"Null RecoHitSeries";
+	  else
+	    o<<*(iter->second);
+	}
+      o<<"]\n";
+    }
+
  private:
 /*   // copy and assignment are private */
   I3RecoHitSeriesDict(const I3RecoHitSeriesDict& rhs);
@@ -51,6 +66,12 @@ class I3RecoHitSeriesDict : public TObject,
   // ROOT macro
   ClassDef(I3RecoHitSeriesDict,1);
 };
+
+inline ostream& operator<<(ostream& o, const I3RecoHitSeriesDict& dict)
+{
+  dict.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.4 2004/07/30 15:08:55 pretz Exp $
+ * $Id: I3OMStatus.h,v 1.5 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3OMStatus.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/30 15:08:55 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -13,7 +13,7 @@
 #define I3OMSTATUS_H
 
 #include <TObject.h>
-
+#include <TClass.h>
 #include "StoragePolicy.h"
 
 /**
@@ -69,6 +69,15 @@ class I3OMStatus : public TObject
   //ROOT macro
   ClassDef(I3OMStatus,1);
 };
+
+/**
+ * @todo needs to be flushed out more
+ */
+inline ostream& operator<<(ostream& o,const I3OMStatus& status)
+{
+  o<<status.IsA()->GetName()<<"\n";
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHit.h,v 1.3 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3ArrayHit.h,v 1.4 2004/08/16 16:22:13 pretz Exp $
     @file I3ArrayHit.h
-    @version $Revision: 1.3 $
+    @version $Revision: 1.4 $
     @date Fri Jul  9 10:50:16 EDT 2004 
     @author rulrich
 */
@@ -10,6 +10,7 @@
 #define I3ArrayHit_H
 
 #include <TObject.h>
+#include <TClass.h>
 
 #include "dataclasses/I3StationHit.h"
 #include "dataclasses/StoragePolicy.h"
@@ -37,6 +38,10 @@ class I3ArrayHit : public TObject,
    */
   virtual ~I3ArrayHit() {}
   
+  virtual void ToStream(ostream& o) const
+    {
+      o<<IsA()->GetName()<<"\n";
+    }
 
  private:
   // copy and assignment are private
@@ -46,6 +51,11 @@ class I3ArrayHit : public TObject,
   // ROOT macro
   ClassDef(I3ArrayHit,1);
 };
+
+inline ostream& operator<<(ostream& o, const I3ArrayHit& hit)
+{
+  hit.ToStream(o);
+}
 
 /**
  * pointer type to insulate users from memory management

@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Monitoring.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Monitoring.h,v 1.4 2004/08/16 16:22:13 pretz Exp $
  * 
  * @file I3Monitoring.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author pretz
  */
 #ifndef I3MONITORING_H
@@ -43,6 +43,12 @@ class I3Monitoring : public TObject{
    */
   I3Atmosphere& GetAtmosphere() { return fAtmosphere;}
 
+  virtual void ToStream(ostream& o) const
+    {
+      o<<" [ I3Monitoring ]\n";
+      o<<fAtmosphere<<"\n";
+    }
+  
  private:
   // copy and assignment private
   I3Monitoring(const I3Monitoring& rhs);
@@ -51,6 +57,12 @@ class I3Monitoring : public TObject{
   //ROOT macro
   ClassDef(I3Monitoring,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3Monitoring& mon)
+{
+  mon.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the

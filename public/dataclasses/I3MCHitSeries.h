@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.20 2004/08/02 15:29:52 blaufuss Exp $
+ * $Id: I3MCHitSeries.h,v 1.21 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/08/02 15:29:52 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -47,6 +47,21 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
    */
   void SetWeight(Double_t weight) { fWeight = weight; }
 
+  /**
+   * dumps the object to the indicated ostream
+   * @param o the ostream to dump the object to
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ I3MCHitSeries: \n";
+      I3MCHitSeries::const_iterator iter;
+      for(iter=begin();iter!=end();iter++)
+	{
+	  o<<*iter;
+	}
+      o<<"]\n";
+    }
+  
   private:
 /*   // copy and assignment are private */
   I3MCHitSeries(const I3MCHitSeries&); 
@@ -55,6 +70,12 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
   //ROOT Macro
   ClassDef(I3MCHitSeries,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3MCHitSeries& series)
+{
+  series.ToStream(o);
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.2 2004/08/02 22:12:28 pretz Exp $
+    $Id: I3TankHit.h,v 1.3 2004/08/16 16:22:13 pretz Exp $
     @file I3TankHit.h
-    @version $Revision: 1.2 $
+    @version $Revision: 1.3 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -13,6 +13,10 @@
 #include <TObjArray.h>
 
 #include "dataclasses/StoragePolicy.h"
+
+#include <string>
+
+using namespace std;
 
 /**
  * @brief The container for all the Array Hit-related data in the event
@@ -78,6 +82,20 @@ class I3TankHit : public TObject {
    */
   void Signal (Float_t signal);
 
+  /**
+   * implementation problem
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<" [ I3TankHit ]\n";
+/*        <<"TankNumber: " */
+/*        <<fTankNumber */
+/*        <<"Signal: " */
+/*        <<fSignal */
+/*        <<"Time: " */
+/*        <<fTime<<"\n"; */
+    }
+
  private:
   // copy and assignment are private
   I3TankHit(const I3TankHit&); 
@@ -86,6 +104,12 @@ class I3TankHit : public TObject {
   // ROOT macro
   ClassDef(I3TankHit,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3TankHit& tankhit)
+{
+  tankhit.ToStream(o);
+  return o;
+}
 
 /**
  * pointer type to insulate users from memory management

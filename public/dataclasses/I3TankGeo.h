@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.11 2004/08/02 22:12:28 pretz Exp $
+ * $Id: I3TankGeo.h,v 1.12 2004/08/16 16:22:13 pretz Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/08/02 22:12:28 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/08/16 16:22:13 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -51,6 +51,14 @@ class I3TankGeo : public TObject,
   I3TankMaterial& Material() {return fMaterial;}
 
 
+  /**
+   * @todo need more implementation here
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      o<<" [ I3TankGeo ]";
+    }
+
  private:
 
   I3Position fTankPos; //position of the tank
@@ -64,6 +72,12 @@ class I3TankGeo : public TObject,
   ClassDef(I3TankGeo,1);
 
 };
+
+inline ostream& operator<<(ostream& o, const I3TankGeo tank)
+{
+  tank.ToStream(o);
+  return o;
+}
 
 #include "dataclasses/StoragePolicy.h"
 /**
