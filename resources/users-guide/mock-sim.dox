@@ -19,7 +19,7 @@ simulation chain, we are excercising the appropriate part of the data.
 
 There are six modules that are used in this mock simulation project.  
 
-<b>1.) I3SimulationSourceToy:</b> <br>
+@li <b>I3SimulationSourceToy:</b> <br>
 This module actually plays the part of what will be several modules in the 
 final simulation.  This module is responsible for
 lending an I3Geometry and an I3GeometryHeader into an IceTray frame and 
@@ -28,7 +28,7 @@ frame and sends that frame on to the other modules.  It continues putting
 events and event headers into the frame, until it's internal counter gets high
 enough.  Then it quits the processing.
 
-<b>2.) I3CorsikaWrapperToy: </b><br>
+@li <b>I3CorsikaWrapperToy: </b><br>
 This module is supposed to play the part of Corsika.  Whether it reads in
 Corsika output files, or uses Corsika libraries to do a simulation is not
 decided, but it's responsibility is clear.  It is responsible for filling
@@ -36,28 +36,27 @@ out the details of a shower at the surface and putting that into the Event.
 This module right now, puts in a single muon track, rather than the full shower
 and that track has random parameters.
 
-<b>3.) I3PropagatorToy:</b><br>
+@li <b>I3PropagatorToy:</b><br>
 This module plays the part of mmc, taking some input tracks, and propagating
 them though the ice.  In the current implementation, it just fills an
 I3MCTrackList with Brems and DeltaE's of random data.
 
-<b>4.) I3HitConstructorToy:</b><br>
+@li <b>I3HitConstructorToy:</b><br>
 This module is responsible for using the photon tables, or some similar 
 technique and assigning photoelecron hit at OMs in the detector.  This toy
 just fills a I3MCHitSeries with random I3MCHit's with random data.
 
-<b>5.) I3HardwareSimulatorToy:</b><br>
+@li <b>I3HardwareSimulatorToy:</b><br>
 This module is probably doing the job of several modules.  Right now it assigns
 an I3DigitalATWDReadout as the I3DataReadout for each tube that 
 was 'hit' by the HitConstructor.  The readout is filled with a random waveform.
 
-
-<b>6.) I3InitHitSeriesRecoToy:</b><br>
+@li  <b>I3InitHitSeriesRecoToy:</b><br>
 This module is responsible for looking at the DataReadouts in the event
 and deciding on the arrival times of the photons at the tubes.  It fills
 random data in an I3RecoHitSeries and puts it in each hit I3OMResponse
 
-<b>7.) I3PrintingModuleToy:</b><br>
+@li <b>I3PrintingModuleToy:</b><br>
 This module just dumps the contents of the Event to the screen.  It is just
 for looking at the data as it comes through.
 
@@ -86,7 +85,10 @@ Then you check out and build it with the standard bfd commands:<br>
 
 To run the 'simulation', first change into your workspace directory.  From
 there you can type:<br>
-<code>% root sim-modules/resources/tutorial/RunSimulation.C</code><br>
+
+@code
+% root sim-modules/resources/tutorial/RunSimulation.C
+@endcode
 
 to run the simulation.  <br>
 The simulation should run through ten events, dumping the contents of each

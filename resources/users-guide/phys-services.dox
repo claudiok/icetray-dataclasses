@@ -2,12 +2,6 @@
 @page phys-services Using the Physics Services
 @author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
 
-@section prerecs Prerequisites:
-
-@li @ref devenv-setup
-
-@li @ref dataclasses-setup
-
 @section desc Description:
 
 The <code>phys-services</code> project is a collection of common IceTray 
@@ -66,16 +60,6 @@ The @c phys-services project is located in the production cvs archive on
 glacier.lbl.gov.  CVSROOT should point to :ext:glacier.lbl.gov:/home/icecube/cvsroot and the module name is phys-services.
 It is included in the @c DATACLASS-APP metaproject, so there is no need to
 download it separate from the @c DATACLASS-APP metaproject
-
-@section build Build
-
-The @c phys-services project should have been built when you built the @c DATACLASS-APP metaproject. 
-
-<code>
-
-% doxygen phys-services/resources/Doxyfile
-</code>
-and you should get the documentation in your workspace in a directory doxygen-phys-services/
 
 <!--@section Test-->
 @section use Use

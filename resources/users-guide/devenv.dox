@@ -4,20 +4,11 @@
 
 @section howtodoit How to:
 
-BFD is the IceCube development environment.  BFD is a set of python scripts
-which provide uniform access to the external tools that IceCube software 
-is built with.  BFD also handles IceCube's revision control system by
-using cvs.
-Visit the  
-<a href="http://bfd.lbl.gov">BFD Homepage</a> to find instructions on how
-to set up BFD.<br>
-
-The standard BFD setup comes without some tool unique to IceCube.  To get some 
-instruction in how to get these tools, the 
-<a href="http://glacier.lbl.gov/icetray">
-IceTray Homepage</a> has a 
-<a href="http://glacier.lbl.gov/icetray/bfd.html">
-walk-though</a> of how to set up the aspects of BFD that you'll need here<br>
+BFD is the IceCube development environment, and you must have it and
+a collection of icecube tools to compile the DATACLASS-APP metaproject.
+For details on setting up BFD to compile DATACLASS-APP, visit the
+<a href="../software-cxx/index.html">Introduction to IceCube C++ Software</a>
+webpage.
 
 Note that if you are working on a cluster, you may not need to install 
 everything from scratch.  Odds are there is a public installation that
@@ -27,12 +18,7 @@ You will be ready to continue with the dataclass tutorials when you:
 @li Have an account on glacier.lbl.gov
 @li Have a current checkout of 'bfd' on your system with bfd in your path
 @li Have a recent copy of the icecube tools from glacier, which includes
-the ROOT tool and the rdmc tool.
+the ROOT tool, the rdmc tool and the log4cpp tool.
 
 
-<br>
-<br>
-<br><b> NB: BFD does not come with ROOT already installed.  You will need to do 
-that yourself.  <a href="http://glacier.lbl.gov/icetray/bfd.html"> IceTray's
-BFD page </a>has instructions</b>
 */

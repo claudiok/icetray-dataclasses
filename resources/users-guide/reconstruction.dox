@@ -1,48 +1,28 @@
-// put this doxygen starting tag back in later
-
-/*
+/**
 @page reconstruction The Dipolefit reconstruction
 @author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
-
-@section prerecs Prerequisites:
-
-@li @ref devenv-setup
-
-@li @ref icetray-setup
-
-@li @ref dataclasses-setup
-
-@li @ref dataio
-
-@li @ref event-viewer
 
 @section description Description
 
 Troy has taken a siglinde reconstruction module and translated it into our
-system.  The <code>reco</code> project on glacier contains this module 
+system.  The <code>examples-offline</code> project on glacier contains this 
+module 
 which performs a 
 simple dipole reconstruction and adds the fit results to the event.  The 
 distributed icetray configuration will read
 in an f2k file, perform this fit, and display the result in the event viewer.
 
-@section download Download
-
-In glacier.lbl.gov development archive <i>(Not the production archive.)</i>
-the project is called <code>reco</code>.  So do:<br>
-<code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev<br>
-% cvs co reco<br></code>
-
-@section build Build
-
-The build procedure is the familiar:<br>
-<code>% source setup.[c]sh<br>
-% ant<br></code>
-
-<!--@section Test -->
 @section use Use
-Once everything is compiled, run this command from your workspace:<br>
-<code>
-% root reco/resources/scripts/Dipoletest.C
-</code>
+Assuming you have DATACLASS-APP successfully compiled, run this command from 
+your workspace:
+@code
+% root examples-offline/resources/dipolefit/Dipole1.C
+@endcode
 
+and
+@code
+% root examples-offline/resources/dipolefit/Dipole3.C
+@endcode
+
+to see it in action.
 */

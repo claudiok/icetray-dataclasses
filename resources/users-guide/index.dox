@@ -72,17 +72,12 @@
    perform any physics.  There is also an implementation of a simple
    AMANDA reconstruction.  
 
-<!--   @li <code>sim-modules</code>: A chain of mock simulation modules.  
-   The chain is mimics the design of the real simulation, but the
-   modules just fill random data right now. -->
+   @li <code>eventviewer</code>: This is a first-cut at an eventviewer
+   for IceCube events.
 
-<!--   @li <code>reco</code>: A simple implementation of the Dipole fit in 
-   this system. -->
-   To have a walk through and play with things a bit, go through the
-   contents below in order.  The code you will need has been assembled into
-   one bfd metaproject named @c DATACLASS-APP , and the 
-   @ref preparation section will walk you through downloading and compiling
-   this metaproject.
+   @li <code>eventviewer-modules</code>: This project includes a module
+   which uses the eventviewer to sequentially look at events.  Several
+   example icetray scripts are also provided.
 
    In the @ref examples section there are details about the examples which
    are included in this metaproject.
@@ -109,26 +104,23 @@
 
    @section examples Examples
 
-   Here are a few tutorial examples.  The order is not really important here 
-   since each example contains a list of the prerequisites which must be met
-   before it can be used.
+   Here are a few tutorial examples.  They are all included in the 
+   DATACLASS-APP metaproject.
 
 <!--   @li @ref corsika-reader -->
 
    @li @ref dataio
 
-<!--   @li @ref event-viewer -->
+   @li @ref event-viewer 
    
-<!--   @li @ref mock-sim  -->
-
    @li @ref phys-services
 
-<!--   @li @ref reconstruction -->
+   @li @ref mock-sim  
+
+   @li @ref reconstruction 
 
 <!--   @li @ref dataclass-and-root -->
  
-   @li @ref examples-offline
-
    @section overview Overview of the Data Classes
    A lot of thought has gone into the design and implementation of these 
    classes.  These sections attempt to explain the decisions that were
