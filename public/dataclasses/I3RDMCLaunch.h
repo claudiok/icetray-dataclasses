@@ -1,17 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RDMCLaunch.h,v 1.2 2004/12/06 19:20:08 ehrlich Exp $
+ * $Id: I3RDMCLaunch.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3RDMCLaunch.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/12/06 19:20:08 $
+ * @version $Revision: 1.2.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  */
 #ifndef I3RDMCLAUNCH_H
 #define I3RDMCLAUNCH_H
 
-#include <TObject.h>
 #include <vector>
 #include "dataclasses/I3DigitalLaunch.h"
 

@@ -1,17 +1,16 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPhoton.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3MCPhoton.h,v 1.4.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3MCPhoton.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.4.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 #ifndef I3MCPHOTON_H
 #define I3MCPHOTON_H
 
-#include "TObject.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**

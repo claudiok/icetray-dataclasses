@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.15 2004/11/19 15:42:12 dule Exp $
+ * $Id: I3Position.h,v 1.15.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/11/19 15:42:12 $
+ * @version $Revision: 1.15.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.15 2004/11/19 15:42:12 dule Exp $
+// $Id: I3Position.h,v 1.15.2.1 2005/01/26 03:59:37 troy Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -22,7 +22,6 @@
 #include <math.h>
 using namespace std;
 
-#include "TObject.h"
 #include "StoragePolicy.h"
 #include <sstream>
 

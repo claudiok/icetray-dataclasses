@@ -1,7 +1,7 @@
 /**
-    $Id: I3ArrayHitDict.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3ArrayHitDict.h,v 1.4.4.1 2005/01/26 03:59:37 troy Exp $
     @file I3ArrayHitDict.h
-    @version $Revision: 1.4 $
+    @version $Revision: 1.4.4.1 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
     @author blaufuss
@@ -9,9 +9,6 @@
 
 #ifndef I3ArrayHitDict_H
 #define I3ArrayHitDict_H
-
-#include <TObject.h>
-#include <TObjArray.h>
 
 #include <sstream>
 #include "dataclasses/I3ArrayHit.h"

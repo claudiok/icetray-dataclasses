@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3Calibration.h,v 1.1 2004/11/09 01:38:42 tmccauley Exp $
+ * $Id: I3Calibration.h,v 1.1.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Calibration.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/11/09 01:38:42 $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author tmccauley
 
  * @todo Something is screwy when FrameAccess<I3Calibration> is used. This
@@ -22,8 +22,6 @@
 
 #include "dataclasses/I3InIceCalibration.h"
 #include "dataclasses/I3IceTopCalibration.h"
-
-#include <TObject.h>
 
 class I3Calibration : public TObject
 {

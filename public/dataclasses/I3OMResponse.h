@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.38 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3OMResponse.h,v 1.38.4.1 2005/01/26 03:59:37 troy Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.38 $
-    @date $Date: 2004/08/31 02:56:29 $
+    @version $Revision: 1.38.4.1 $
+    @date $Date: 2005/01/26 03:59:37 $
     @author ehrlich
     @author troy
     @author pretz
@@ -13,8 +13,6 @@
 */
 #ifndef I3OMRESPONSE_H
 #define I3OMRESPONSE_H
-
-#include <TObject.h>
 
 #include "I3DataExecution.h"
 #include "I3OMGeo.h"

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.13 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.13.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.13.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -13,8 +13,6 @@
 #ifndef I3DATAHEADER_H
 #define I3DATAHEADER_H
 
-#include "TObject.h"
-#include "TClass.h"
 #include "StoragePolicy.h"
 
 #include <string>

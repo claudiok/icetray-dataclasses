@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3FilterDict.h,v 1.3 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3FilterDict.h,v 1.3.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3FilterDict.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.3.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author blaufuss
  *
  */
 #ifndef I3FILTERDICT_H
 #define I3FILTERDICT_H
 
-#include <TObject.h>
 #include "StoragePolicy.h"
 #include "I3Filter.h"
 #include <sstream>

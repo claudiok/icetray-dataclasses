@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.10 2004/11/19 15:41:53 dule Exp $
+ * $Id: I3Direction.h,v 1.10.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/11/19 15:41:53 $
+ * @version $Revision: 1.10.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author dule
  */
 
@@ -14,14 +14,13 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.10 2004/11/19 15:41:53 dule Exp $
+// $Id: I3Direction.h,v 1.10.2.1 2005/01/26 03:59:37 troy Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
 
 #include <math.h>
 #include <sstream>
-#include "TObject.h"
 #include "StoragePolicy.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"

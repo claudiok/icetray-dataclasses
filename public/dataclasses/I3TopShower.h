@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShower.h,v 1.3 2004/08/12 17:33:33 pretz Exp $
+ * $Id: I3TopShower.h,v 1.3.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3TopShower.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/12 17:33:33 $
+ * @version $Revision: 1.3.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author blaufuss
   */
 
 #ifndef I3TOPSHOWER_H
 #define I3TOPSHOWER_H
 
-#include "Rtypes.h"
+#include "dataclasses/StoragePolicy.h"
 #include "I3IceTopParticle.h"
 
 /**

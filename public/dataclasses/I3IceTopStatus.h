@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStatus.h,v 1.7 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3IceTopStatus.h,v 1.7.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3IceTopStatus.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.7.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATUS_H
@@ -14,7 +14,6 @@
 
 #include <sstream>
 
-#include "TObject.h"
 #include "I3IceTopStationStatus.h"
 #include "StoragePolicy.h"
 #include "StationKey.h"

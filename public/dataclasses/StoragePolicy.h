@@ -1,16 +1,18 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.16.4.1 2005/01/25 23:33:44 troy Exp $
+    $Id: StoragePolicy.h,v 1.16.4.2 2005/01/26 03:59:37 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.16.4.1 $
-    @date $Date: 2005/01/25 23:33:44 $
+    @version $Revision: 1.16.4.2 $
+    @date $Date: 2005/01/26 03:59:37 $
     @author Troy D. Straszheim
 */
 
 #ifndef STORAGEPOLICY_H
 #define STORAGEPOLICY_H
+
+#include "dataclasses/RootHeaders.h"
 
 #include "dataclasses/copy_if.h"
 
@@ -18,7 +20,10 @@
 #include "STLMapStoragePolicy.h"
 #include "STLMultiMapStoragePolicy.h"
 
+// temporary typedefs to compensate for removal of root shit
 
+typedef int Int_t;
+typedef double Double_t;
 
 /**
  * @brief The pointer policy.  Should use typedefs of this rather than

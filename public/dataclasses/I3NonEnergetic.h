@@ -1,17 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonEnergetic.h,v 1.7 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3NonEnergetic.h,v 1.7.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3NonEnergetic.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.7.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 #ifndef I3NONENERGETIC_H
 #define I3NONENERGETIC_H
 
-#include "Rtypes.h"
+#include "dataclasses/StoragePolicy.h"
 #include <cmath>
 
 /**

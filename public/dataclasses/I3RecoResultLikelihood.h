@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultLikelihood.h,v 1.8 2004/08/19 16:10:39 pretz Exp $
+ * $Id: I3RecoResultLikelihood.h,v 1.8.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3RecoResultLikelihood.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/08/19 16:10:39 $
+ * @version $Revision: 1.8.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,7 +15,7 @@
 
 #include "I3RecoResultSingleTrack.h"
 #include "dataclasses/I3DataExecution.h"
-
+#include "services/I3Logging.h"
 /**
  * @brief The results of a likelihood fit.  
  *

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.30 2004/08/31 01:29:42 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.30.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3RecoResult.h
- * @version $Revision: 1.30 $
- * @date $Date: 2004/08/31 01:29:42 $
+ * @version $Revision: 1.30.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -13,9 +13,7 @@
 #ifndef I3RECORESULT_H
 #define I3RECORESULT_H
 
-#include <TObject.h>
 #include "StoragePolicy.h"
-#include <TClass.h>
 #include <iostream>
 #include <sstream>
 

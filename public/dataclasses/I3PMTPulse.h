@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulse.h,v 1.1 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3PMTPulse.h,v 1.1.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3PMTPulse.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author deyoung
  *
  */
 #ifndef I3PMTPULSE_H
 #define I3PMTPULSE_H
 
-#include <TObject.h>
 #include "StoragePolicy.h"
 
 /**

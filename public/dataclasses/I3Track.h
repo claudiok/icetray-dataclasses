@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.29 2004/09/07 20:09:42 dule Exp $
+ * $Id: I3Track.h,v 1.29.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.29 $
- * @date $Date: 2004/09/07 20:09:42 $
+ * @version $Revision: 1.29.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 
@@ -13,7 +13,6 @@
 #ifndef I3TRACK_H
 #define I3TRACK_H
 
-#include <TObject.h>
 #include "dataclasses/I3InIceParticle.h"
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Direction.h"

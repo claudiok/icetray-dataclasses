@@ -1,21 +1,19 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.18 2004/09/01 00:54:26 ehrlich Exp $
+ * $Id: I3Particle.h,v 1.18.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/09/01 00:54:26 $
+ * @version $Revision: 1.18.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  *
  */
 #ifndef I3PARTICLE_H
 #define I3PARTICLE_H
 
-#include "TObject.h"
 #include "I3Position.h"
 #include "StoragePolicy.h"
-#include "TClass.h"
 #include <iostream>
 #include <cmath>
 #include <sstream>

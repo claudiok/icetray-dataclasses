@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.29 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3OMGeo.h,v 1.29.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.29 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.29.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -13,9 +13,7 @@
 #ifndef I3OMGEO_H
 #define I3OMGEO_H
 
-#include <TObject.h>
 #include "dataclasses/I3Position.h"
-#include <TClass.h>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -149,9 +147,7 @@ class I3OMGeo : public TObject
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ "
-       <<IsA()->GetName()
-       <<" X:"
+      o<<"[ I3OMGeo X:"
        <<fPosition.GetX()
        <<" Y:"
        <<fPosition.GetY()

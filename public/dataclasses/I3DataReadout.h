@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.17 2004/09/14 14:14:26 deyoung Exp $
+ * $Id: I3DataReadout.h,v 1.17.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/09/14 14:14:26 $
+ * @version $Revision: 1.17.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -13,9 +13,7 @@
 #ifndef I3DATAREADOUT_H
 #define I3DATAREADOUT_H
 
-#include <TObject.h>
 #include "StoragePolicy.h"
-#include "TClass.h"
 #include <iostream>
 #include <sstream>
 

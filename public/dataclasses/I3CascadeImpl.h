@@ -1,17 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.10 2004/08/31 13:30:55 pretz Exp $
+ * $Id: I3CascadeImpl.h,v 1.10.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/31 13:30:55 $
+ * @version $Revision: 1.10.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
 #define I3CASCADEIMPL_H
 
-#include <TObject.h>
 #include "dataclasses/I3Cascade.h"
 #include <vector>
 #include <cmath>

@@ -1,15 +1,13 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationItr.cxx,v 1.2 2004/11/28 06:40:27 troy Exp $
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * $Id: I3StationItr.cxx,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
+ * @version $Revision: 1.2.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author niessen Thu Sep 16 17:24:51 EDT 2004
  */
 
 #include "dataclasses/I3StationItr.h"
-
-using namespace roost;
 
 ClassImp (station_iterator);
 

@@ -1,10 +1,11 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.8 2004/12/08 17:46:50 pretz Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.8.2.1 2005/01/26 03:59:37 troy Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
 #include "dataclasses/I3DataExecution.h"
 
+#include <cmath> // for NAN
 ClassImp(I3DOMCalibration);
 
 I3DOMCalibration::I3DOMCalibration()

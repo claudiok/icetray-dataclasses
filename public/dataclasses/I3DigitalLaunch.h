@@ -1,18 +1,16 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalLaunch.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3DigitalLaunch.h,v 1.4.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3DigitalLaunch.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.4.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author blaufuss
  */
 #ifndef I3DIGITALLAUNCH_H
 #define I3DIGITALLAUNCH_H
 
-#include "TObject.h"
-#include "TClass.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>
 

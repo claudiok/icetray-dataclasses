@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonDirectional.h,v 1.8 2004/08/31 13:30:55 pretz Exp $
+ * $Id: I3NonDirectional.h,v 1.8.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3NonDirectional.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/08/31 13:30:55 $
+ * @version $Revision: 1.8.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -13,7 +13,7 @@
 #ifndef I3NONDIRECTIONAL_H
 #define I3NONDIRECTIONAL_H
 
-#include "Rtypes.h"
+#include "StoragePolicy.h"
 
  /**
   * @brief The directional part of an I3Cascade implementation, representing 

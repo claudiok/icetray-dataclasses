@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerDict.h,v 1.3 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3TriggerDict.h,v 1.3.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3TriggerDict.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.3.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -15,7 +15,6 @@
 #ifndef I3TRIGGERDATA_H
 #define I3TRIGGERDATA_H
 
-#include <TObject.h>
 #include "StoragePolicy.h"
 #include "I3Trigger.h"
 #include <sstream>

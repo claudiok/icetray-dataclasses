@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.16 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3MCHit.h,v 1.16.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.16.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,7 +14,6 @@
 #ifndef I3MCHIT_H
 #define I3MCHIT_H
 
-#include <TObject.h>
 #include "I3Hit.h"
 #include "StoragePolicy.h"
 

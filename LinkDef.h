@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.142 2005/01/10 20:53:18 dule Exp $
-// $Revision: 1.142 $
-// $Date: 2005/01/10 20:53:18 $
+// $Id: LinkDef.h,v 1.142.2.1 2005/01/26 03:59:37 troy Exp $
+// $Revision: 1.142.2.1 $
+// $Date: 2005/01/26 03:59:37 $
 //
 
 #ifdef __CINT__
@@ -17,6 +17,7 @@
 //
 // namespace
 //
+#if 0
 #pragma link C++ namespace I3Units;
 #pragma link C++ namespace I3Constants;
 #pragma link C++ namespace roost;
@@ -593,6 +594,9 @@
 #pragma link C++ typedef StationKey;
 
 #pragma link C++ class UniqueID+;
+
+#endif
+
 
 #endif
 

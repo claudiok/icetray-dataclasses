@@ -1,19 +1,17 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.2 2004/09/17 21:12:19 niessen Exp $
+ * $Id: I3StationMap.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3StationMap.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/09/17 21:12:19 $
+ * @version $Revision: 1.2.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
 
 #ifndef I3STATIONMAP_H
 #define I3STATIONMAP_H
-
-#include <TObject.h>
 
 #include "I3DataExecution.h"
 #include "dataclasses/StationKey.h"
@@ -40,23 +38,6 @@ class I3StationMap : public TObject, public MapPolicy<StationKey, I3StationGeoPt
    * virtual destructor
    */
   virtual ~I3StationMap () {}
-
-  /**
-   * Just for debugging
-   */
-  void Hello () {
-    log_info ("Hi, this is the station map.");
-  }
-
-  /**
-   * Go to the first tank
-   */
-  void GoFirstTank ();
-
-  /**
-   * Get the next tank
-   */
-  I3TankGeo &GetNextTank ();
 
  private:
 

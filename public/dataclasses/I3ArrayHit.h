@@ -1,16 +1,13 @@
 /**
-    $Id: I3ArrayHit.h,v 1.6 2004/11/28 06:40:27 troy Exp $
+    $Id: I3ArrayHit.h,v 1.6.2.1 2005/01/26 03:59:37 troy Exp $
     @file I3ArrayHit.h
-    @version $Revision: 1.6 $
+    @version $Revision: 1.6.2.1 $
     @date Fri Jul  9 10:50:16 EDT 2004 
     @author rulrich
 */
 
 #ifndef I3ArrayHit_H
 #define I3ArrayHit_H
-
-#include <TObject.h>
-#include <TClass.h>
 
 #include <sstream>
 #include "dataclasses/I3StationHit.h"

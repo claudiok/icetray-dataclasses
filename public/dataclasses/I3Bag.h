@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.20 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3Bag.h,v 1.20.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.20.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -14,9 +14,7 @@
 #ifndef I3BAG_H
 #define I3BAG_H
 
-#include "TObject.h"
 #include "StoragePolicy.h"
-#include <TClass.h>
 
 #include <sstream>
 #include <iostream>
@@ -48,25 +46,12 @@ class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
    */
   ~I3Bag() {};
 
-  virtual void ToStream(ostream& o) const
+  void ToStream(ostream& o) const
     {
-      o<<"[ I3Bag\n";
-      I3Bag::const_iterator iter;
-      for(iter = begin();iter!=end();iter++)
-	{
-	  o<<iter->first;
-	  if(iter->second==(TObjectPtr((TObject*)0)))
-	    o<<"[ Null TObject ]\n";
-	  else
-        o<<"[ "
-         <<iter->second->IsA()->GetName()
-         <<" ]"
-         <<"\n";
-	}
-      o<<"]";
+      o<<"[ I3Bag! Wheee!]\n";
     }
 
-  virtual string ToString() const
+  string ToString() const
     {
       ostringstream out;
       ToStream(out);

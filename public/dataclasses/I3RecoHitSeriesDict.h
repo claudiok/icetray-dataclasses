@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.4 2004/10/27 23:09:40 spencer Exp $
+ * $Id: I3RecoHitSeriesDict.h,v 1.4.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/10/27 23:09:40 $
+ * @version $Revision: 1.4.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -16,7 +16,6 @@
 
 #include "I3RecoHitSeries.h"
 #include "StoragePolicy.h"
-#include "TObject.h"
 
 /// This is the container for all the hit series reconstructions
 /**

@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.4 2004/12/20 20:05:58 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.4.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/12/20 20:05:58 $
+ * @version $Revision: 1.4.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author deyoung
  */
 
 #ifndef I3OMRESPONSESELECTION_H_INCLUDED
 #define I3OMRESPONSESELECTION_H_INCLUDED
 
-#include <TObject.h>
 #include "I3OMResponse.h"
 #include "OMKey.h"
 

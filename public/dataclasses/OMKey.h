@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.7 2004/09/15 18:39:35 pretz Exp $
+ * $Id: OMKey.h,v 1.7.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/09/15 18:39:35 $
+ * @version $Revision: 1.7.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 
@@ -13,7 +13,6 @@
 #define OMKEY_H
 
 #include <utility>
-#include "TObject.h"
 #include "StoragePolicy.h"
 #include <iostream>
 

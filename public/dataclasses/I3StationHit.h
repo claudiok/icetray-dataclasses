@@ -1,15 +1,12 @@
 /**
-    $Id: I3StationHit.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3StationHit.h,v 1.5.4.1 2005/01/26 03:59:37 troy Exp $
     @file I3StationHit.h
-    @version $Revision: 1.5 $
+    @version $Revision: 1.5.4.1 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
 #ifndef I3StationHit_H
 #define I3StationHit_H
-
-#include <TObject.h>
-#include <TObjArray.h>
 
 #include "dataclasses/I3TankHit.h"
 #include "dataclasses/StoragePolicy.h"

@@ -1,18 +1,16 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.3 2004/09/15 13:44:50 niessen Exp $
+ * $Id: I3SurfModuleGeo.h,v 1.3.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/09/15 13:44:50 $
+ * @version $Revision: 1.3.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
 #ifndef I3SURFDETGEO_H
 #define I3SURFDETGEO_H
-
-#include <TObject.h>
 
 #include "dataclasses/I3Constants.h"
 //#include "dataclasses/I3InIceGeometry.h"

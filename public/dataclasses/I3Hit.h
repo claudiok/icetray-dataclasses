@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.22.2.1 2005/01/25 23:33:44 troy Exp $
+ * $Id: I3Hit.h,v 1.22.2.2 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.22.2.1 $
- * @date $Date: 2005/01/25 23:33:44 $
+ * @version $Revision: 1.22.2.2 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -13,11 +13,10 @@
 #ifndef I3HIT_H
 #define I3HIT_H
 
-#include <TObject.h>
 #include "StoragePolicy.h"
+#include "RootHeaders.h"
 #include <iostream>
 #include <sstream>
-#include "TClass.h"
 
 using namespace std;
 

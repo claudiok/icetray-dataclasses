@@ -1,18 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.12 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3MCPMTResponse.h,v 1.12.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.12.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author klein
  */
 
 #ifndef I3MCPMTRESPONSE_H_INCLUDED
 #define I3MCPMTRESPONSE_H_INCLUDED
-#include <TObject.h>
-#include <TClass.h>
 #include <sstream>
 #include "dataclasses/StoragePolicy.h"
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHit.h,v 1.11 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3RecoHit.h,v 1.11.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3RecoHit.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.11.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -13,7 +13,6 @@
 #ifndef I3RECOHIT_H
 #define I3RECOHIT_H
 
-#include <TObject.h>
 #include "I3Hit.h"
 
 /**

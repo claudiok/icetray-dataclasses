@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SPASEModuleGeo.h,v 1.2 2004/11/17 23:36:42 ehrlich Exp $
+ * $Id: I3SPASEModuleGeo.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3SPASEModuleGeo.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/17 23:36:42 $
+ * @version $Revision: 1.2.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author niessen Thu Sep  2 15:44:31 EDT 2004
  */
 
@@ -13,8 +13,6 @@
 #define I3SPASEMODULEGEO_H
 
 #include <iostream>
-
-#include <TObject.h>
 
 #include "dataclasses/I3InIceGeometry.h"
 #include "dataclasses/I3SurfModuleGeo.h"

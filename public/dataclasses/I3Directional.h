@@ -1,17 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.8 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Directional.h,v 1.8.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.8.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
 #define I3DIRECTIONAL_H
 
-#include "Rtypes.h"
 #include "dataclasses/I3Direction.h"
 
 /**

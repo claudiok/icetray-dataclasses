@@ -1,17 +1,17 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulseVect.h,v 1.2 2004/12/06 19:20:08 ehrlich Exp $
+ * $Id: I3PMTPulseVect.h,v 1.2.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3PMTPulseVect.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/12/06 19:20:08 $
+ * @version $Revision: 1.2.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author deyoung
  */
 
 #ifndef I3PMTPULSEVECT_H_INCLUDED
 #define I3PMTPULSEVECT_H_INCLUDED
-#include <TObject.h>
+
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/I3PMTPulse.h"
 

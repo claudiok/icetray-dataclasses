@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShowerImpl.h,v 1.1 2004/08/03 18:06:17 blaufuss Exp $
+ * $Id: I3TopShowerImpl.h,v 1.1.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3TopShowerImpl.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/08/03 18:06:17 $
+ * @version $Revision: 1.1.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author blaufuss
  *
  */
 #ifndef I3TOPSHOWERIMPL_H
 #define I3TOPSHOWERIMPL_H
 
-#include <TObject.h>
 #include "dataclasses/I3TopShower.h"
 #include <vector>
 #include <cmath>

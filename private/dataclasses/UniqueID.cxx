@@ -2,6 +2,8 @@
 
 ClassImp(UniqueID);
 
+#if 0 // WTF IS THIS CODE SUPPOSED TO DO?
+
 void ParticleID(I3ParticlePtr particle, UniqueID::IDOption option, Int_t &highestID)
 {
   if(option==UniqueID::SET_ALL_NULL) particle->SetParticleID(0);
@@ -146,3 +148,4 @@ Int_t UniqueID::ID(I3ParticlePtr obj, IDOption option)
   return(highestID+1);
 }
 
+#endif

@@ -1,19 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.15 2004/09/16 15:07:39 niessen Exp $
+ * $Id: I3TankGeo.h,v 1.15.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/09/16 15:07:39 $
+ * @version $Revision: 1.15.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
 #define __I3TANKGEO_H_
 
 #include <iostream>
-
-#include <TObject.h>
 
 #include "dataclasses/I3TankMaterial.h"
 #include "dataclasses/I3SurfModuleGeo.h"

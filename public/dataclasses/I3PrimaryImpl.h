@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.10 2004/08/04 14:41:56 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.10.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/04 14:41:56 $
+ * @version $Revision: 1.10.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  *
  */
 #ifndef I3PRIMARYIMPL_H
 #define I3PRIMARYIMPL_H
 
-#include <TObject.h>
 #include "dataclasses/I3Primary.h"
 #include <vector>
 #include <cmath>

@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.7 2004/12/02 23:24:38 dima Exp $
+ * $Id: I3DOMCalibration.h,v 1.7.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/12/02 23:24:38 $
+ * @version $Revision: 1.7.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -17,7 +17,6 @@
 #include "dataclasses/StoragePolicy.h"
 
 #include <map>
-#include <TObject.h>
 
 using namespace std;
 

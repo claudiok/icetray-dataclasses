@@ -1,17 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.13 2004/09/07 20:09:42 dule Exp $
+ * $Id: I3TrackImpl.h,v 1.13.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/09/07 20:09:42 $
+ * @version $Revision: 1.13.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
 #define I3TRACKIMPL_H
 
-#include <TObject.h>
 #include "dataclasses/I3Track.h"
 #include <vector>
 #include <cmath>

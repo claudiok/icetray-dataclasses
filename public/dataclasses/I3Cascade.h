@@ -1,17 +1,16 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.12 2004/09/01 00:54:26 ehrlich Exp $
+ * $Id: I3Cascade.h,v 1.12.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/09/01 00:54:26 $
+ * @version $Revision: 1.12.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
 #define I3CASCADE_H
 
-#include "Rtypes.h"
 #include "I3InIceParticle.h"
 
 /**

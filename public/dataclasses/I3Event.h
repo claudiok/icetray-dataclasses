@@ -1,17 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.41 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Event.h,v 1.41.2.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.41 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.41.2.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
 #define I3EVENT_H
-
-#include <TObject.h>
 
 #include "I3TriggerDict.h"
 #include "I3FilterDict.h"

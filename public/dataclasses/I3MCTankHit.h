@@ -1,16 +1,13 @@
 /**
-    $Id: I3MCTankHit.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3MCTankHit.h,v 1.6.4.1 2005/01/26 03:59:37 troy Exp $
     @file I3MCTankHit.h
-    @version $Revision: 1.6 $
+    @version $Revision: 1.6.4.1 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
 
 #ifndef I3MCTankHit_H
 #define I3MCTankHit_H
-
-#include <TObject.h>
-#include <TObjArray.h>
 
 #include "dataclasses/I3TankHit.h"
 #include "dataclasses/I3IceTopParticle.h"

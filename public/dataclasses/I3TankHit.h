@@ -1,16 +1,13 @@
 /**
-    $Id: I3TankHit.h,v 1.5 2004/11/28 06:40:28 troy Exp $
+    $Id: I3TankHit.h,v 1.5.2.1 2005/01/26 03:59:37 troy Exp $
     @file I3TankHit.h
-    @version $Revision: 1.5 $
+    @version $Revision: 1.5.2.1 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
 
 #ifndef I3TankHit_H
 #define I3TankHit_H
-
-#include <TObject.h>
-#include <TObjArray.h>
 
 #include "dataclasses/StoragePolicy.h"
 

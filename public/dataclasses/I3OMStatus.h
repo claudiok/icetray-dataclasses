@@ -1,19 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3OMStatus.h,v 1.6.4.1 2005/01/26 03:59:37 troy Exp $
  *
  * @file I3OMStatus.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.6.4.1 $
+ * @date $Date: 2005/01/26 03:59:37 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
 #ifndef I3OMSTATUS_H
 #define I3OMSTATUS_H
 
-#include <TObject.h>
-#include <TClass.h>
 #include <sstream>
 #include "StoragePolicy.h"
 
