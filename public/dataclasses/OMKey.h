@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.2 2004/07/12 15:30:49 pretz Exp $
+ * $Id: OMKey.h,v 1.3 2004/07/31 02:38:00 pretz Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/12 15:30:49 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/31 02:38:00 $
  * @author pretz
  */
 
@@ -13,6 +13,7 @@
 #define OMKEY
 
 #include <utility>
+#include "TObject.h"
 
 using namespace std;
 
@@ -25,47 +26,72 @@ using namespace std;
  *
  * @todo implement operator<<
  */
-class OMKey : public pair<int,unsigned int>
+class OMKey : public TObject //, public pair<int,unsigned int>
 {
+  Int_t fStringNumber;
+  UInt_t fOMNumber;
  public:
   /**
    * constructor
    */
-  OMKey() : pair<int,unsigned int>(0,0){}
+  OMKey() : fStringNumber(0), fOMNumber(0) {} //: pair<int,unsigned int>(0,0){}
 
   /**
    * destructor
    */
   OMKey(int str,unsigned int om) 
-    : pair<int,unsigned int>(str,om){}
+    : fStringNumber(str), fOMNumber(om){}
 
   /**
    * retrieves the string number for this OMKey
    */
-  int GetString() const { return this->first;}
+  int GetString() const { return fStringNumber;}
 
   /**
    * Sets the string number for this OM
    */
-  void SetString(int str){this->first = str;}
+  void SetString(int str){fStringNumber = str;}
 
   /**
    * gets the OM number on the string
    */
-  unsigned int GetOM() const { return this->second;}
+  unsigned int GetOM() const { return fOMNumber;}
 
   /**
    * sets the OM number on the string
    */
-  void SetOM(unsigned int om){this->second = om;}
+  void SetOM(unsigned int om){fOMNumber = om;}
 
-  //  int operator>(const OMKey& key) {return fKey.operator>(key.fKey);}
+  bool operator==(const OMKey& rhs) const
+    {
+      if(rhs.fOMNumber == fOMNumber && rhs.fStringNumber == fStringNumber)
+	return true;
+      return false;
+    }
 
+  bool operator!=(const OMKey& rhs) const
+    {
+      if(rhs == *this)
+	return false;
+      return true;
+    }
+  ClassDef(OMKey,1);
 };
+
+inline bool operator<(const OMKey& lhs,const OMKey& rhs)
+{
+  if(lhs.GetString() < rhs.GetString())
+    return true;
+  if(lhs.GetString() > rhs.GetString())
+    return false;
+  if(lhs.GetOM() < rhs.GetOM())
+    return true;
+  return false;
+}
 
 inline ostream& operator<<(ostream& o,const OMKey& key)
 {
-  o<<"("<<key.first<<","<<key.second<<")";
+  o<<"("<<key.GetString()<<","<<key.GetOM()<<")";
   return o;
 }
 
