@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseData.h,v 1.19 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3OMResponseVect.h,v 1.1 2004/07/01 01:31:06 pretz Exp $
  *
- * @file I3OMResponseData.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @file I3OMResponseVect.h
+ * @version $Revision: 1.1 $
+ * @date $Date: 2004/07/01 01:31:06 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -24,18 +24,18 @@
  * @todo implement the 'FindOMResponse' as a smarter search, STL???
  *
  */
-class I3OMResponseData : public TObject, public VecPointainerPolicy<I3OMResponsePtr>::ThePolicy
+class I3OMResponseVect : public TObject, public VecPointainerPolicy<I3OMResponsePtr>::ThePolicy
 {
   public:
   /**
    * constructor
    */
-  I3OMResponseData(){};
+  I3OMResponseVect(){};
 
   /**
    * destructor
    */
-  virtual ~I3OMResponseData(){};
+  virtual ~I3OMResponseVect(){};
   
   /**
    * loops through the omresponses looking for one with a number 'omnumber'
@@ -54,17 +54,17 @@ class I3OMResponseData : public TObject, public VecPointainerPolicy<I3OMResponse
 
   private:
   // copy and assignment private
-  I3OMResponseData(const I3OMResponseData&);
-  const I3OMResponseData& operator=(const I3OMResponseData&);
+  I3OMResponseVect(const I3OMResponseVect&);
+  const I3OMResponseVect& operator=(const I3OMResponseVect&);
 
   // ROOT macro
-  ClassDef(I3OMResponseData,1);
+  ClassDef(I3OMResponseVect,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3OMResponseData>::ThePolicy I3OMResponseDataPtr;
+typedef PtrPolicy<I3OMResponseVect>::ThePolicy I3OMResponseVectPtr;
 
 #endif

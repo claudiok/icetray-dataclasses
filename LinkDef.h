@@ -117,13 +117,13 @@
 #pragma link C++ function operator!=(const I3MCHitSeries::iterator&, const I3MCHitSeries::iterator&);
 #pragma link C++ typedef I3MCHitSeriesPtr;
 
-#pragma link C++ class I3RecoHitSeries+;
-#pragma link C++ class I3RecoHitSeries::iterator+;
+#pragma link C++ class I3RecoHitVect+;
+#pragma link C++ class I3RecoHitVect::iterator+;
 #pragma link C++ typedef VectorPolicy<I3RecoHit>::ThePolicy;
 #pragma link C++ class VectorPolicy<I3RecoHit>::ThePolicy+;
-#pragma link C++ function operator!=(const I3RecoHitSeries::iterator&, const I3RecoHitSeries::iterator&);
-#pragma link C++ typedef I3RecoHitSeriesPtr;
-//#pragma link C++ class I3RecoHitSeriesPtr+;
+#pragma link C++ function operator!=(const I3RecoHitVect::iterator&, const I3RecoHitVect::iterator&);
+#pragma link C++ typedef I3RecoHitVectPtr;
+//#pragma link C++ class I3RecoHitVectPtr+;
 
 #pragma link C++ class I3RecoResultAltTracks+;
 #pragma link C++ class I3RecoResultAltTracks::iterator+;
@@ -139,12 +139,12 @@
 #pragma link C++ function operator!=(const I3RecoResultMultiTracks::iterator&, const I3RecoResultMultiTracks::iterator&);
 #pragma link C++ typedef I3RecoResultMultiTracksPtr;
 
-#pragma link C++ class I3MCParticleList+;
-#pragma link C++ class I3MCParticleList::iterator+;
+#pragma link C++ class I3MCParticleVect+;
+#pragma link C++ class I3MCParticleVect::iterator+;
 #pragma link C++ typedef VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy;
 #pragma link C++ class VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3MCParticleList::iterator&, const I3MCParticleList::iterator&);
-#pragma link C++ typedef I3MCParticleListPtr;
+#pragma link C++ function operator!=(const I3MCParticleVect::iterator&, const I3MCParticleVect::iterator&);
+#pragma link C++ typedef I3MCParticleVectPtr;
 
 #pragma link C++ class I3MCParticleDict+;
 #pragma link C++ class I3MCParticleDict::iterator+;
@@ -161,17 +161,17 @@
 #pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
 #pragma link C++ typedef I3BagPtr;
 
-#pragma link C++ class I3OMResponseData+;
-#pragma link C++ class I3OMResponseData::iterator+;
+#pragma link C++ class I3OMResponseVect+;
+#pragma link C++ class I3OMResponseVect::iterator+;
 #pragma link C++ typedef VecPointainerPolicy<I3OMResponsePtr>::ThePolicy;
 #pragma link C++ class VecPointainerPolicy<I3OMResponsePtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3OMResponseData::iterator&, const I3OMResponseData::iterator&);
-#pragma link C++ typedef I3OMResponseDataPtr;
+#pragma link C++ function operator!=(const I3OMResponseVect::iterator&, const I3OMResponseVect::iterator&);
+#pragma link C++ typedef I3OMResponseVectPtr;
 
 #pragma link C++ class I3RecoHitVectDict+;
 #pragma link C++ class I3RecoHitVectDict::iterator+;
-#pragma link C++ typedef MapPointainerPolicy<I3RecoHitSeriesPtr>::ThePolicy;
-#pragma link C++ class MapPointainerPolicy<I3RecoHitSeriesPtr>::ThePolicy+;
+#pragma link C++ typedef MapPointainerPolicy<I3RecoHitVectPtr>::ThePolicy;
+#pragma link C++ class MapPointainerPolicy<I3RecoHitVectPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3RecoHitVectDict::iterator&, const I3RecoHitVectDict::iterator&);
 #pragma link C++ typedef I3RecoHitVectDictPtr;
 

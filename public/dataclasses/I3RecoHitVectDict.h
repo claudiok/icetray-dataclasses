@@ -4,17 +4,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitVectDict.h,v 1.1 2004/06/30 21:24:36 pretz Exp $
+ * $Id: I3RecoHitVectDict.h,v 1.2 2004/07/01 01:31:06 pretz Exp $
  *
  * @file I3RecoHitVectDict.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/06/30 21:24:36 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/01 01:31:06 $
  * @author ehrlich
  * @author troy
  * @author pretz
  */
 
-#include "I3RecoHitSeries.h"
+#include "I3RecoHitVect.h"
 #include "StoragePolicy.h"
 #include "TObject.h"
 
@@ -22,7 +22,7 @@
  * @brief This is the container for all the hit series reconstructions
  */
 class I3RecoHitVectDict : public TObject, 
-      	public MapPointainerPolicy<I3RecoHitSeriesPtr>::ThePolicy
+      	public MapPointainerPolicy<I3RecoHitVectPtr>::ThePolicy
 {
  public:
   /**

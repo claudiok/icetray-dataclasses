@@ -1,14 +1,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeExtractor.h,v 1.2 2004/05/05 19:34:54 pretz Exp $
+ * $Id: I3CascadeExtractor.h,v 1.3 2004/07/01 01:31:06 pretz Exp $
  *
  * @file I3CascadeExtractor.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/05/05 19:34:54 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/01 01:31:06 $
  * @author pretz
  */
-#include "dataclasses/I3MCParticleList.h"
+#include "dataclasses/I3MCParticleVect.h"
 #include "dataclasses/I3Cascade.h"
 
 /**

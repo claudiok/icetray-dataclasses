@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.23 2004/06/30 21:22:52 pretz Exp $
+ * $Id: I3Event.h,v 1.24 2004/07/01 01:31:06 pretz Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/06/30 21:22:52 $
+ * @version $Revision: 1.24 $
+ * @date $Date: 2004/07/01 01:31:06 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -17,7 +17,7 @@
 #include "I3TriggerData.h"
 #include "I3FilterData.h"
 #include "I3MCParticleDict.h"
-#include "I3OMResponseData.h"
+#include "I3OMResponseVect.h"
 #include "I3RecoResultDict.h"
 #include "I3Bag.h"
 /**
@@ -30,7 +30,7 @@ class I3Event : public TObject
   I3TriggerData    fTriggerData; //||
   I3FilterData     fFilterData; //||
   I3MCParticleDict    fMCParticleData; //||
-  I3OMResponseData fOMResponseData; //||
+  I3OMResponseVect fOMResponseData; //||
   I3RecoResultDict fRecoResultData; //||
   I3Bag            fBag; //||
   
@@ -78,12 +78,12 @@ class I3Event : public TObject
   /**
    * @return the OMResponseData of the event as a non-constant object
    */
-  const I3OMResponseData& GetOMResponseData() const { return fOMResponseData; }
+  const I3OMResponseVect& GetOMResponseData() const { return fOMResponseData; }
 
   /**
    * @return the OMResponseData as constant object
    */
-  I3OMResponseData& GetOMResponseData() { return fOMResponseData; }
+  I3OMResponseVect& GetOMResponseData() { return fOMResponseData; }
 
   /**
    * @return the RecoResult Data as a constant object
