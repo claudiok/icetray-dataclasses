@@ -27,7 +27,7 @@ const I3Analog& I3AnalogSeries::GetPulse(unsigned short number) const
   return(*(I3Analog*)NULL);
 }
 
-I3Iterator<const I3Analog>* I3AnalogSeries::MakeAnalogIterator()
+I3Iterator<const I3Analog>* I3AnalogSeries::MakeAnalogIterator() const
 {
   if(!pulse)
     return new I3ZeroItemIterator<const I3Analog>();

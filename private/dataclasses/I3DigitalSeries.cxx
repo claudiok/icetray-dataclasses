@@ -1,5 +1,8 @@
 #include "dataclasses/I3DigitalSeries.h"
 #include "dataclasses/I3DataExecution.h"
+#include "dataclasses/I3TCollectionIterator.h"
+#include "dataclasses/I3ZeroItemIterator.h"
+
 
 ClassImp(I3DigitalSeries);
   
@@ -39,3 +42,10 @@ void I3DigitalSeries::AddDigit(I3Digital* digit_)
   digit->Add(digit_);
 }
 
+I3Iterator<const I3Digital>* I3DigitalSeries::MakeDigitalIterator() const
+{
+  if(!digit)
+    return new I3ZeroItemIterator<const I3Digital>();
+  else
+    return new I3TCollectionIterator<const I3Digital>(digit);
+}

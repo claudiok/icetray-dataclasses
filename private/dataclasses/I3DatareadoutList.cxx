@@ -33,7 +33,7 @@ void I3DatareadoutList::AddDatareadout(I3Datareadout* datareadout_)
   datareadout->Add(datareadout_);
 }
 
-I3Iterator<const I3Datareadout>* I3DatareadoutList::MakeDatareadoutIterator()
+I3Iterator<const I3Datareadout>* I3DatareadoutList::MakeDatareadoutIterator() const
 {
   if(!datareadout)
     return new I3ZeroItemIterator<const I3Datareadout>();

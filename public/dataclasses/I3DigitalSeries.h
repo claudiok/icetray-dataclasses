@@ -25,7 +25,7 @@ class I3DigitalSeries : public I3Datareadout
   int GetNumberDigits() const;
   const I3Digital& GetDigit(unsigned short number) const;
   void AddDigit(I3Digital* digit_);
-  I3Iterator<const I3Digital&>* MakeDigitalIterator();
+  I3Iterator<const I3Digital>* MakeDigitalIterator() const;
   
   ClassDef(I3DigitalSeries,1);
 };
