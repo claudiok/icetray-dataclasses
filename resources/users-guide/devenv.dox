@@ -4,7 +4,11 @@
 
 @section howtodoit How to:
 
-BFD is the IceCube development environment.  Visit the new 
+BFD is the IceCube development environment.  BFD is a set of python scripts
+which provide uniform access to the external tools that IceCube software 
+is built with.  BFD also handles IceCube's revision control system by
+using cvs.
+Visit the  
 <a href="http://bfd.lbl.gov">BFD Homepage</a> to find instructions on how
 to set up BFD.<br>
 
@@ -23,7 +27,7 @@ You will be ready to continue with the dataclass tutorials when you:
 @li Have an account on glacier.lbl.gov
 @li Have a current checkout of 'bfd' on your system with bfd in your path
 @li Have a recent copy of the icecube tools from glacier, which includes
-the ROOT tool.
+the ROOT tool and the rdmc tool.
 
 
 <br>

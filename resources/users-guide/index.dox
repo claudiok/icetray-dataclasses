@@ -8,9 +8,10 @@
    to interact the C++ representation of the IceCube event data.  To this end 
    there
    are several examples each using different aspects of the 
-   classes.  Unfortunately some of these examples have been broken by
+   classes.  
+   <!--Unfortunately some of these examples have been broken by
    the latest changes to the code -- the decision was made to go ahead
-   and release the code now and fix the examples soon.
+   and release the code now and fix the examples soon.-->
 
    By looking at these webpages, you will gain an understanding of how
    to use these C++ classes in your software.
@@ -78,7 +79,7 @@
 <!--   @li <code>reco</code>: A simple implementation of the Dipole fit in 
    this system. -->
    To have a walk through and play with things a bit, go through the
-   contents below.  The code you will need has been assembled into
+   contents below in order.  The code you will need has been assembled into
    one bfd metaproject named @c DATACLASS-APP , and the 
    @ref preparation section will walk you through downloading and compiling
    this metaproject.
@@ -96,7 +97,7 @@
    @section preparation Preparation
 
    Before you are able to play with the dataclasses, you will have to do 
-   these three things:
+   these two things:
 
    @li @ref devenv-setup
    

@@ -1,36 +1,34 @@
 /**
-@page mock-sim Running a Mock Simulation
+@page mock-sim A Mock Simulation
 @author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
 
-@section prerecs Prerequisites:
+<!--@section prerecs Prerequisites:
 
 @li @ref devenv-setup
 
-@li @ref icetray-setup
-
-@li @ref dataclasses-setup
-
-@li @ref phys-services
+@li @ref dataclasses-setup-->
 
 @section desc Description:
 
-The 'sim-modules' project is a set of modules that emulate the simulation
+The 'examples-offline' project contains a set of modules that emulate the 
+simulation
 chain.  The purpose is to show off the dataclasses and how they work in
 IceTray.  No real data is filled, only random numbers, but the random numbers
 are put in the places that will be filled, so that at each step in the 
 simulation chain, we are excercising the appropriate part of the data.
 
-There are six modules included in the sim-modules project.  
+There are six modules that are used in this mock simulation project.  
 
-<b>1.) I3SimulationSource:</b> <br>
-This module actually plays the part of what will be several modules in the final simulation.  This module is responsible for
+<b>1.) I3SimulationSourceToy:</b> <br>
+This module actually plays the part of what will be several modules in the 
+final simulation.  This module is responsible for
 lending an I3Geometry and an I3GeometryHeader into an IceTray frame and 
 passing them on.  Then it puts an empty I3Event and I3EventHeader into a
 frame and sends that frame on to the other modules.  It continues putting
 events and event headers into the frame, until it's internal counter gets high
 enough.  Then it quits the processing.
 
-<b>2.) I3CorsikaWrapper: </b><br>
+<b>2.) I3CorsikaWrapperToy: </b><br>
 This module is supposed to play the part of Corsika.  Whether it reads in
 Corsika output files, or uses Corsika libraries to do a simulation is not
 decided, but it's responsibility is clear.  It is responsible for filling
@@ -38,7 +36,7 @@ out the details of a shower at the surface and putting that into the Event.
 This module right now, puts in a single muon track, rather than the full shower
 and that track has random parameters.
 
-<b>3.) I3Propagator:</b><br>
+<b>3.) I3PropagatorToy:</b><br>
 This module plays the part of mmc, taking some input tracks, and propagating
 them though the ice.  In the current implementation, it just fills an
 I3MCTrackList with Brems and DeltaE's of random data.
@@ -48,22 +46,26 @@ This module is responsible for using the photon tables, or some similar
 technique and assigning photoelecron hit at OMs in the detector.  This toy
 just fills a I3MCHitSeries with random I3MCHit's with random data.
 
-<b>5.) I3HardwareSimulator:</b><br>
+<b>5.) I3HardwareSimulatorToy:</b><br>
 This module is probably doing the job of several modules.  Right now it assigns
 an I3DigitalATWDReadout as the I3DataReadout for each tube that 
 was 'hit' by the HitConstructor.  The readout is filled with a random waveform.
 
 
-<b>6.) I3InitHitSeriesReco:</b><br>
+<b>6.) I3InitHitSeriesRecoToy:</b><br>
 This module is responsible for looking at the DataReadouts in the event
 and deciding on the arrival times of the photons at the tubes.  It fills
 random data in an I3RecoHitSeries and puts it in each hit I3OMResponse
 
-<b>7.) I3PrintingModule:</b><br>
+<b>7.) I3PrintingModuleToy:</b><br>
 This module just dumps the contents of the Event to the screen.  It is just
 for looking at the data as it comes through.
 
-@section Download
+The best way to get a feel for how these modules work is just to look at the 
+code.  The headers are in @c examples-offline/public/sim-modules and the 
+implementations are in @c examples-offline/private/sim-modules.
+
+<!--@section Download
 
 @section build Build
 
@@ -77,7 +79,7 @@ Then you check out and build it with the standard bfd commands:<br>
 % bfd co sim-modules<br>
 % source setup.(c)sh<br>
 % ant<br>
-</code>
+</code> --!>
 
 <!--@section Test-->
 @section use Use
@@ -85,6 +87,7 @@ Then you check out and build it with the standard bfd commands:<br>
 To run the 'simulation', first change into your workspace directory.  From
 there you can type:<br>
 <code>% root sim-modules/resources/tutorial/RunSimulation.C</code><br>
+
 to run the simulation.  <br>
 The simulation should run through ten events, dumping the contents of each
 to stdout.
