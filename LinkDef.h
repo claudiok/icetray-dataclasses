@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.113 2004/08/04 20:38:12 blaufuss Exp $
-// $Revision: 1.113 $
-// $Date: 2004/08/04 20:38:12 $
+// $Id: LinkDef.h,v 1.114 2004/08/04 20:46:32 ehrlich Exp $
+// $Revision: 1.114 $
+// $Date: 2004/08/04 20:46:32 $
 //
 
 #ifdef __CINT__
@@ -277,16 +277,16 @@
 #pragma link C++ typedef I3TWRLaunchPtr;
 #pragma link C++ class I3Directional+;
 #pragma link C++ class I3Energetic+;
-#pragma link C++ class I3MCEvent+;
-#pragma link C++ typedef I3MCEventPtr;
-#pragma link C++ class I3MCEventHeader+;
-#pragma link C++ typedef I3MCEventHeaderPtr;
 #pragma link C++ class I3MCPhoton+;
 #pragma link C++ typedef I3MCPhotonPtr;
 #pragma link C++ class I3Event+;
 #pragma link C++ typedef I3EventPtr;
 #pragma link C++ class I3EventHeader+;
 #pragma link C++ typedef I3EventHeaderPtr;
+#pragma link C++ class I3MCEvent+;
+#pragma link C++ typedef I3MCEventPtr;
+#pragma link C++ class I3MCEventHeader+;
+#pragma link C++ typedef I3MCEventHeaderPtr;
 #pragma link C++ class I3GeometryHeader+;
 #pragma link C++ typedef I3GeometryHeaderPtr;
 #pragma link C++ class I3Hit+;

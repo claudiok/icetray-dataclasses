@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEventHeader.h,v 1.1 2004/08/04 20:11:41 ehrlich Exp $
+ * $Id: I3MCEventHeader.h,v 1.2 2004/08/04 20:46:32 ehrlich Exp $
  *
  * @file I3MCEventHeader.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/08/04 20:11:41 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/08/04 20:46:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -34,12 +34,12 @@ class I3MCEventHeader : public I3EventHeader
   /**
    * constructor
    */
-  I3MCEventHeader();
+  I3MCEventHeader() {;}
 
   /**
    * destructor
    */
-  virtual ~I3MCEventHeader();
+  virtual ~I3MCEventHeader() {;}
 
  private:
   // instance data
