@@ -9,7 +9,6 @@
 ******************************************/
 gSystem->Load("libdataclasses.so");
 gSystem->Load("libicetray.so");
-gSystem->Load("liblog4cpp.so");
 
 I3DataExecution::Instance().
 	GetLogger().Warn("Here is a message of 'Warn' priority");
