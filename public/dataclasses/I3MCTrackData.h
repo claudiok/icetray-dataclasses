@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCTrackData.h,v 1.12 2004/02/23 17:14:19 pretz Exp $
+    $Id: I3MCTrackData.h,v 1.13 2004/02/23 17:38:39 troy Exp $
 
-    @version $Revision: 1.12 $
-    @date $Date: 2004/02/23 17:14:19 $
+    @version $Revision: 1.13 $
+    @date $Date: 2004/02/23 17:38:39 $
     @author
 
     @todo need to add "truth"
@@ -16,10 +16,10 @@
 #include "dataclasses/I3MCTrackList.h"
 #include "TObject.h"
 
-class I3MCTrackData : public TObject, public VectorPolicy<I3MCTrackList>::ThePolicy
+class I3MCTrackData : public TObject, public MapPolicy<I3MCTrackList>::ThePolicy
 {
  public:
-  virtual ~I3MCTrackData(){};
+  virtual ~I3MCTrackData() {};
   ClassDef(I3MCTrackData,1);
 };
 
