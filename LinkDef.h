@@ -7,6 +7,9 @@
 #pragma link C++ nestedclass;
 #pragma link C++ nestedtypedef;
 
+//#pragma link C++ function test1;
+//#pragma link C++ function testtestvec;
+
 //
 // namespace
 //
@@ -113,14 +116,40 @@
 #pragma link C++ class I3RecoResultStoragePolicy+;
 #pragma link C++ function operator!=(const I3RecoResult::iterator&, const I3RecoResult::iterator&);
 
+//#pragma link C++ typedef TestVecType;
+//#pragma link C++ class TestVecType+;
+//#pragma link C++ class TestVecType::iterator+;
+//#pragma link C++ typedef policy;
+//#pragma link C++ class policy+;
+//#pragma link C++ class policy::type_iterator<Derived*>+;
+//#pragma link C++ function policy::begin<Derived*>()+;
+//#pragma link C++ template function policy::begin<Derived*>();
+//#pragma link C++ function TestVecType::begin<Derived*>()+;
+//#pragma link C++ template function TestVecType::begin<Derived*>();
+//#pragma link C++ function operator!=(const policy::type_iterator<Derived*>&, const policy::type_iterator<Derived*>&);
+//
+//#pragma link C++ template class TestVecType::type_iterator<Base*>+;
+//#pragma link C++ template class TestVecType::type_iterator<Derived*>+;
+//#pragma link C++ class TestVecType::type_iterator<Derived*>+;
+//#pragma link C++ function operator!=(const TestVecType::iterator<Derived*>&, const TestVecType::iterator<Derived*>&);
+
+#pragma link C++ typedef I3TestHash;
+#pragma link C++ class I3TestHash+;
+#pragma link C++ class I3TestHash::iterator+;
+#pragma link C++ typedef I3TestHashStoragePolicy;
+#pragma link C++ class I3TestHashStoragePolicy+;
+#pragma link C++ function hashtest;
+#pragma link C++ class pair<string,I3MCHit>+;
+
+#pragma link C++ class Base+;
+#pragma link C++ class Derived+;
+
 #pragma link C++ typedef I3TopGeometry;
 #pragma link C++ class I3TopGeometry+;
 #pragma link C++ class I3TopGeometry::iterator+;
 #pragma link C++ typedef I3TopGeometryStoragePolicy;
 #pragma link C++ class I3TopGeometryStoragePolicy+;
 #pragma link C++ function operator!=(const I3TopGeometry::iterator&, const I3TopGeometry::iterator&);
-
-
 
 
 //

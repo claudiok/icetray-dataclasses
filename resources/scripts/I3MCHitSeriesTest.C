@@ -1,4 +1,4 @@
-void test()
+void I3MCHitSeriesTest()
 {
   gSystem->Load("libicetray.so");
   gSystem->Load("libdataclasses.so");
@@ -11,6 +11,8 @@ void test()
   h1.Weight(x);
   assert(h1.Weight() == x);
   h2 = h1;
+  cout << h1.Weight() << endl;
+  cout << h2.Weight() << endl;
   assert(h2.Weight() == x);
 
   I3MCHit h3(h2);
