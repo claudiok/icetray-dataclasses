@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.44 2005/01/25 22:22:34 deyoung Exp $
+ * $Id: I3Event.h,v 1.45 2005/03/09 18:21:46 blaufuss Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.44 $
- * @date $Date: 2005/01/25 22:22:34 $
+ * @version $Revision: 1.45 $
+ * @date $Date: 2005/03/09 18:21:46 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -41,6 +41,7 @@ class I3Event : public TObject
   I3TriggerDict     fTriggerDict; //||
   I3FilterDict      fFilterDict; //||
   I3OMResponseMap   fOMResponseMap; //||
+  I3OMResponseMap   fTopOMResponseMap; //||
   I3OMSelectionDict fOMSelectionDict; //||
   I3ArrayHitDict    fTopResponseDict; //||
   I3RecoResultDict  fRecoResultDict; //||
@@ -93,6 +94,16 @@ class I3Event : public TObject
 
   /**
    * @return the OMResponseMap as non-constant object
+   */
+  I3OMResponseMap& GetTopOMResponseMap() { return fTopOMResponseMap; }
+
+  /**
+   * @return the TopOMResponseMap of the event as a constant object
+   */
+  const I3OMResponseMap& GetTopOMResponseMap() const { return fTopOMResponseMap; }
+
+  /**
+   * @return the TopOMResponseMap as non-constant object
    */
   I3OMResponseMap& GetOMResponseMap() { return fOMResponseMap; }
 
@@ -147,6 +158,7 @@ class I3Event : public TObject
        <<fTriggerDict
        <<fFilterDict
        <<fOMResponseMap
+       <<fTopOMResponseMap
        <<fOMSelectionDict
        <<fRecoResultDict
        <<fBag
