@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.8 2005/02/08 20:04:27 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.9 2005/02/09 18:36:37 deyoung Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/02/08 20:04:27 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/02/09 18:36:37 $
  * @author deyoung
  * @author troy
  */
@@ -27,8 +27,11 @@ class I3OMResponseSelection;
 typedef PtrPolicy<I3OMResponseSelection>::ThePolicy I3OMResponseSelectionPtr;
 
 /**
+ * @brief Base class for selecting I3OMResponses
+ * 
  * This is the class that users will inherit from when they want to make a 
- * new selection.  This class contains the selection logic; it is
+ * new selection, and the interface that clients use to access those
+ * selections.  This class contains the selection logic; it is
  * built into a filter_iterator to make a selector.
  */
 class I3OMResponseSelection : public TObject 

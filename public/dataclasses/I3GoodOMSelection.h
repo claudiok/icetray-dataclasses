@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.9 2005/02/09 18:18:05 deyoung Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.10 2005/02/09 18:36:37 deyoung Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/02/09 18:18:05 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/02/09 18:36:37 $
  * @author deyoung
  */
 
@@ -18,7 +18,7 @@ class I3GoodOMSelection;
 typedef PtrPolicy<I3GoodOMSelection>::ThePolicy I3GoodOMSelectionPtr;
 
 /**
- * OMSelection class that selects all OMResponses whose OM keys are in
+ * @brief OMSelection class that selects all OMResponses whose OM keys are in
  * its list of good OMs.  All others are rejected.
  */
 class I3GoodOMSelection : public I3OMListSelection {

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OddOMSelection.h,v 1.6 2005/02/09 18:18:05 deyoung Exp $
+ *  $Id: I3OddOMSelection.h,v 1.7 2005/02/09 18:36:37 deyoung Exp $
  *
  * @file I3OddOMSelection.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/02/09 18:18:05 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/02/09 18:36:37 $
  * @author deyoung
  */
 
@@ -21,7 +21,7 @@ class I3OddOMSelection;
 typedef PtrPolicy<I3OddOMSelection>::ThePolicy I3OddOMSelectionPtr;
 
 /**
- * OMSelection class that selects all OMResponses from OMs with
+ * @brief OMSelection class that selects all OMResponses from OMs with
  * odd-numbered positions on their strings.
  */
 class I3OddOMSelection : public I3OMResponseSelection {

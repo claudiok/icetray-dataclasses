@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.8 2005/02/09 18:18:05 deyoung Exp $
+ *  $Id: I3BadOMSelection.h,v 1.9 2005/02/09 18:36:37 deyoung Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/02/09 18:18:05 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/02/09 18:36:37 $
  * @author deyoung
  */
 
@@ -15,7 +15,7 @@
 #include "I3OMListSelection.h"
 
 /**
- * OMSelection class that selects all OMs whose keys are *not* in its
+ * @brief OMSelection class that selects all OMs whose keys are *not* in its
  * Bad OM list.
  */
 class I3BadOMSelection : public I3OMListSelection {

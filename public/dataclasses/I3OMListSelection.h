@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMListSelection.h,v 1.2 2005/02/09 18:18:05 deyoung Exp $
+ *  $Id: I3OMListSelection.h,v 1.3 2005/02/09 18:36:37 deyoung Exp $
  *
  * @file I3OMListSelection.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/02/09 18:18:05 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/02/09 18:36:37 $
  * @author deyoung
  */
 
@@ -18,7 +18,7 @@ class I3OMListSelection;
 typedef PtrPolicy<I3OMListSelection>::ThePolicy I3OMListSelectionPtr;
 
 /**
- * Virtual base class for OMSelections that check against a list of OMKeys
+ * @brief Virtual base class for OMSelections that check against a list of OMKeys
  */
 class I3OMListSelection : public I3OMResponseSelection {
 

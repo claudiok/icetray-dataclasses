@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3EvenOMSelection.h,v 1.6 2005/02/09 18:18:05 deyoung Exp $
+ *  $Id: I3EvenOMSelection.h,v 1.7 2005/02/09 18:36:37 deyoung Exp $
  *
  * @file I3EvenOMSelection.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/02/09 18:18:05 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/02/09 18:36:37 $
  * @author deyoung
  */
 
@@ -19,7 +19,7 @@ class I3EvenOMSelection;
 typedef PtrPolicy<I3EvenOMSelection>::ThePolicy I3EvenOMSelectionPtr;
 
 /**
- * OMSelection class that selects all OMResponses from OMs with
+ * @brief OMSelection class that selects all OMResponses from OMs with
  * even-numbered positions on their strings.
  */
 class I3EvenOMSelection : public I3OMResponseSelection 
