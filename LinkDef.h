@@ -188,5 +188,8 @@
 #pragma link C++ class I3Track+;
 #pragma link C++ class I3TriggerData+;
 
+#pragma link C++ class I3DataClassTest;
+#pragma link C++ class I3DataClassFailingTest;
+
 #endif
 
