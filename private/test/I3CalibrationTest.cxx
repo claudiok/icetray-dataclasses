@@ -3,6 +3,7 @@
 #include "dataclasses/I3Calibration.h"
 #include "dataclasses/I3InIceCalibration.h"
 #include "dataclasses/I3DOMCalibration.h"
+#include "dataclasses/I3CalibrationHeader.h"
 
 #include "icetray/I3TrayException.h"
 
@@ -176,4 +177,40 @@ namespace tut
 	    ensure("No exceptions thrown",0);
 	}
     }
+
+    // Test Calibration header
+    template<> template<>
+    void object::test<4>()
+    {	
+	try
+	{
+	    I3CalibrationHeader header;
+	    
+	    header.SetJulianDay(1);
+	    header.SetSec(1);
+	    header.SetNanoSec(1);
+
+	    cout<< header.GetJulianDay() <<endl;
+	    cout<< header.GetSec() <<endl;
+	    cout<< header.GetNanoSec() <<endl;
+
+	    ensure("Failed to get julian day from calibration header", 
+		   header.GetJulianDay() == 1);
+
+	    ensure("Failed to get seconds from calibration header", 
+		   header.GetSec() == 1);
+
+	    ensure("Failed to get nanoseconds from calibration header", 
+		   header.GetNanoSec() == 1);
+
+	    header.ToStream(cout);
+	    cout<< &header <<endl;	    
+	}
+
+	catch(I3TrayException& e)
+	{
+	    ensure("No exceptions thrown",0);
+	}
+    }
+
 }
