@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulseVect.h,v 1.1 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3PMTPulseVect.h,v 1.2 2004/12/06 19:20:08 ehrlich Exp $
  *
  * @file I3PMTPulseVect.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/12/06 19:20:08 $
  * @author deyoung
  */
 
@@ -24,33 +24,46 @@
  * pulses may not include saturation or other non-linear effects.
  *
  */
-class I3PMTPulseVect : public TObject, 
-		       public VectorPolicy<I3PMTPulsePtr>::ThePolicy 
+class I3PMTPulseVect : public TObject,
+		       public VectorPolicy<I3PMTPulsePtr>::ThePolicy
 {
 
 public:
   /**
    * constructor
    */
-  I3PMTPulseVect(){} 
-  
+  I3PMTPulseVect(){}
+
   /**
    * destructor
    */
   virtual ~I3PMTPulseVect(){}
-  
-  
+
+  /**
+   * PMT output voltage as f(time). This is a superposition of all pulses
+   */
+  Float_t GetPMTVoltage(const Float_t time)
+  {
+    Double_t voltage = 0;
+    if(this->size())
+    {
+      I3PMTPulseVect::iterator iter;
+      for(iter=this->begin(); iter!=this->end(); iter++)
+        voltage+=(*iter)->GetVoltage(time);
+    }
+    return voltage;
+  }
 
 private:
   // copy and assignment are private
-  I3PMTPulseVect(const I3PMTPulseVect&); 
-  I3PMTPulseVect& operator=(const I3PMTPulseVect&); 
+  I3PMTPulseVect(const I3PMTPulseVect&);
+  I3PMTPulseVect& operator=(const I3PMTPulseVect&);
 
   // ROOT macro
   ClassDef(I3PMTPulseVect,1);
 };
 
-/** 
+/**
  * pointer type to insulate users from memory managemnt issues
  */
 typedef PtrPolicy<I3PMTPulseVect>::ThePolicy I3PMTPulseVectPtr;

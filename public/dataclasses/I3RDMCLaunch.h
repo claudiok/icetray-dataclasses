@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RDMCLaunch.h,v 1.1 2004/09/15 18:57:43 ehrlich Exp $
+ * $Id: I3RDMCLaunch.h,v 1.2 2004/12/06 19:20:08 ehrlich Exp $
  *
  * @file I3RDMCLaunch.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/09/15 18:57:43 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/12/06 19:20:08 $
  * @author ehrlich
  */
 #ifndef I3RDMCLAUNCH_H
@@ -21,7 +21,7 @@ class I3RDMCLaunch : public I3DigitalLaunch
 {
   Int_t           id;
   Float_t         start_time;
-  Float_t         time_bins;
+  Float_t         bin_size;
   Float_t         baseline;
   vector<Float_t> digi;
 
@@ -30,7 +30,7 @@ class I3RDMCLaunch : public I3DigitalLaunch
   /**
    * constructor
    */
-  I3RDMCLaunch() {id=0; start_time=0; time_bins=0; baseline=0;}
+  I3RDMCLaunch() {id=0; start_time=0; bin_size=0; baseline=0;}
 
   /**
    * destructor
@@ -41,8 +41,8 @@ class I3RDMCLaunch : public I3DigitalLaunch
   void             SetId(Int_t id_) {id=id_;}
   Float_t          GetStartTime() {return start_time;}
   void             SetStartTime(Float_t start_time_) {start_time=start_time_;}
-  Float_t          GetTimeBins() {return time_bins;}
-  void             SetTimeBins(Float_t time_bins_) {time_bins=time_bins_;}
+  Float_t          GetBinSize() {return bin_size;}
+  void             SetBinSize(Float_t bin_size_) {bin_size=bin_size_;}
   Float_t          GetBaseline() {return baseline;}
   void             SetBaseline(Float_t baseline_) {baseline=baseline_;}
   vector<Float_t>& GetDigi() {return digi;}

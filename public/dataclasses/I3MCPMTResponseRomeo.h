@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.1 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3MCPMTResponseRomeo.h,v 1.3 2004/12/06 19:20:08 ehrlich Exp $
  *
  * @file I3MCPMTResponseRomeo.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/12/06 19:20:08 $
  * @author klein
  * @author deyoung
  * @author ehrlich
@@ -24,50 +24,60 @@
  * output, simulated by ROMEO.
  *
  */
-class I3MCPMTResponseRomeo : public I3MCPMTResponse 
+class I3MCPMTResponseRomeo : public I3MCPMTResponse
 {
-  vector<TF1> fWaveform;
+  vector<Float_t> fWaveform;
+  Float_t         fBinSize;
 
   public:
-  
+
   /**
    * constructor
    */
-  I3MCPMTResponseRomeo() {}; 
-  
+  I3MCPMTResponseRomeo() {};
+
   /**
    * destructor
    */
   virtual ~I3MCPMTResponseRomeo() {};
-  
-  /**   
-   * PMT output voltage as f(time) 
+
+  /**
+   * PMT output voltage as f(time)
    */
-  virtual Float_t GetPMTVoltage(Float_t time) 
+  virtual Float_t GetPMTVoltage(Float_t time)
   {
     if (time < fStartTime || time > fEndTime) { return 0.; };
 
-    Int_t    n = fWaveform.size();
-    Double_t voltage = 0;
+    Long_t t = (Long_t)((time-fStartTime)/fBinSize);
 
-    for(Int_t i=0; i<n; i++) {voltage+=fWaveform[i].Eval(time);}
+    return fWaveform[t];
+  }
 
-    return voltage;
-  };
-
-  /** 
+  /**
    * Get the waveform
    */
-  const vector<TF1>& GetWaveform() const {return fWaveform;}
-  
-  vector<TF1>& GetWaveform() {return fWaveform;}
+  const vector<Float_t>& GetWaveform() const {return fWaveform;}
+
+  vector<Float_t>& GetWaveform() {return fWaveform;}
+
+  /**
+   * Get bin size
+   */
+  const Float_t GetBinSize() const {return fBinSize;}
+
+  Float_t GetBinSize() {return fBinSize;}
+
+  /**
+   * Set bin size
+   */
+  void SetBinSize(Float_t binsize) {fBinSize=binsize;}
 
   private:
 
   // copy and assignment are private to disable them
-  I3MCPMTResponseRomeo(const I3MCPMTResponseRomeo&); 
-  I3MCPMTResponseRomeo& operator=(const I3MCPMTResponseRomeo&); 
-  
+  I3MCPMTResponseRomeo(const I3MCPMTResponseRomeo&);
+  I3MCPMTResponseRomeo& operator=(const I3MCPMTResponseRomeo&);
+
   // ROOT macro
   ClassDef(I3MCPMTResponseRomeo,1);
 };
