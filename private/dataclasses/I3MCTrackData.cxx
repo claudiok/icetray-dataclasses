@@ -1,3 +1,3 @@
-#include "dataclasses/I3MCTrackDatan.h"
+#include "dataclasses/I3MCTrackData.h"
 
 ClassImp(I3MCTrackData);

@@ -15,30 +15,29 @@ class I3OMResponse : public TObject
   unsigned short omnumber;
   TRef           geometry;
 
-  I3MCHitSeries       *mchitseries;
-  I3DataReadoutList   *datareadoutlist;
-  I3RecoHitSeriesData *recohitseriesdata;
+  I3MCHitSeries       mchitseries;
+  I3DataReadoutList   datareadoutlist;
+  I3RecoHitSeriesData recohitseriesdata;
 
   public:
-   I3OMResponse();
+  I3OMResponse() { omnumber = 0; geometry = 0;}
   ~I3OMResponse();
 
-  unsigned short GetOMNumber() const;
-  void           SetOMNumber(unsigned short omnumber_);
+  unsigned short OMNumber() const { return omnumber; }
+  void           OMNumber(unsigned short omnumber_) { omnumber = omnumber_; }
 
   bool HasGeometry() const;
   const I3OMGeo& GetGeometry() const;
   void SetGeometry(I3OMGeo& geometry_);
 
-  bool HasMCHitSeries() const;
-  bool HasDataReadoutList() const;
-  bool HasRecoHitSeriesData() const;
-  const I3MCHitSeries& GetMCHitSeries() const;
-  const I3DataReadoutList& GetDataReadoutList() const;
-  const I3RecoHitSeriesData& GetRecoHitSeriesData() const;
-  void  SetMCHitSeries(I3MCHitSeries* mchitseries_);
-  void  SetDataReadoutList(I3DataReadoutList* datareadoutlist_);
-  void  SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_);
+  const I3MCHitSeries& GetMCHitSeries() const { return mchitseries; }
+  I3MCHitSeries& GetMCHitSeries() { return mchitseries; }
+
+  const I3DataReadoutList& GetDataReadoutList() const { return datareadoutlist; }
+  I3DataReadoutList& GetDataReadoutList() { return datareadoutlist; }
+
+  const I3RecoHitSeriesData& GetRecoHitSeriesData() const { return recohitseriesdata; }
+  I3RecoHitSeriesData& GetRecoHitSeriesData() { return recohitseriesdata; }
 
   ClassDef(I3OMResponse,1);
 };

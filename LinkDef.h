@@ -17,6 +17,10 @@
 #pragma link C++ typedef I3DataReadoutList;
 #pragma link C++ typedef I3DataReadoutListStoragePolicy;
 
-#pragma link C++ typedef I3RecoTrackList;
-#pragma link C++ typedef I3RecoTrackListStoragePolicy;
+//#pragma link C++ typedef I3RecoResultHeader;
+//#pragma link C++ typedef I3RecoResult;
+
+//#pragma link C++ typedef I3RecoTrackList;
+//#pragma link C++ typedef I3RecoTrackListStoragePolicy;
+
 

@@ -1,15 +1,18 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3Event.h,v 1.8 2004/02/16 16:13:28 troy Exp $
+
+    @version $Revision: 1.8 $
+    @date $Date: 2004/02/16 16:13:28 $
+    @author
+
+    @todo
+
+*/
+
 #ifndef I3EVENT_H
 #define I3EVENT_H
-
-/**
- * Class: I3Event
- *
- * Version: $Id: I3Event.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
- *
- * Date: 30 Jan 2004
- *
- * (c) 2004 IceCube Collaboration
- */
 
 #include <TObject.h>
 #include <TObjArray.h>
@@ -18,7 +21,7 @@
 #include "I3FilterData.h"
 #include "I3MCTrackData.h"
 #include "I3OMResponseData.h"
-#include "I3RecoResultData.h"
+//#include "I3RecoResultData.h"
 #include "I3Bag.h"
 
 
@@ -28,185 +31,61 @@
  * related to each event. Additionally it stores event information
  * such as time, id, etc. (it is planned to store this kind of 
  * information in a separate header class).
- * @version $Id: I3Event.h,v 1.7 2004/01/30 22:31:23 ehrlich Exp $
+ * @version $Id: I3Event.h,v 1.8 2004/02/16 16:13:28 troy Exp $
  * @author Ralf Ehrlich
  */
 class I3Event : public TObject
 {
-  unsigned long  runid;
-  unsigned long  eventid;
-  double         time;
-  unsigned long  day;
+  ULong_t  fRunId;
+  ULong_t  fEventId;
+  Double_t fTime;
+  ULong_t  fDay;
 
-  I3TriggerData    *triggerdata;
-  I3FilterData     *filterdata;
-  I3MCTrackData    *mctrackdata;
-  I3OMResponseData *omresponsedata;
-  I3RecoResultData *recoresultdata;
-  I3Bag            *bag;
+  I3TriggerData    triggerdata;
+  I3FilterData     filterdata;
+  I3MCTrackData    mctrackdata;
+  I3OMResponseData omresponsedata;
+  //  I3RecoResultData *recoresultdata;
+  I3Bag            bag;
 
   public:
   
-  /**
-   * Contructor
-   */
+  ULong_t RunID() const { return fRunId; }
+  void RunID(ULong_t runid_) { fRunId = runid_; }
+
+  ULong_t EventID() const { return fEventId; }
+  void EventID(ULong_t eventid_) { fEventId = eventid_; }
+  
+  Double_t Time() const { return fTime; }
+  void Time(Double_t time_) { fTime = time_; }
+
+  ULong_t Day() const { return fDay; }
+  void Day(ULong_t d) { fDay = d; }
+  
+  const I3TriggerData& TriggerData() const { return triggerdata; }
+  I3TriggerData& TriggerData() { return triggerdata; }
+
+  const I3FilterData& FilterData() const { return filterdata; }
+  I3FilterData& FilterData() { return filterdata; }
+
+  const I3MCTrackData& MCTrackData() const { return mctrackdata; }
+  I3MCTrackData& MCTrackData(){ return mctrackdata; }
+
+  const I3OMResponseData& OMResponseData() const { return omresponsedata; }
+  I3OMResponseData& OMResponseData() { return omresponsedata; }
+
+  //  const I3RecoResultData& RecoResultData() const { return recoresultdata; }
+  //  I3RecoResultData& RecoResultData() const { return recoresultdata; }
+
+  const I3Bag& Bag() const { return bag; }
+  I3Bag& Bag() { return bag; }
+
+
+
   I3Event();
   
-  /**
-   * Destructor
-   */
   ~I3Event();
 
-  /**
-   * The following Get methods return the run id, event id, 
-   * event time and event dat
-   */
-  unsigned long GetRunID() const;
-  unsigned long GetEventID() const;
-  double        GetTime() const;
-  unsigned long GetDay() const;
-  
-  /**
-   * The following Set methods can set the run id, event id, 
-   * event time and event dat
-   */
-  void SetRunID(unsigned long runid_);
-  void SetEventID(unsigned long eventid_);
-  void SetTime(double time_);
-  void SetDay(unsigned long day_);
-
-  /**
-   * Checks whether a trigger container has been set
-   */
-  bool HasTriggerData() const;
-  
-  /**
-   * Checks whether a filter container has been set
-   */
-  bool HasFilterData() const;
-  
-  /**
-   * Checks whether a monte carlo track container has 
-   * been set
-   */
-  bool HasMCTrackData() const;
-  
-  /**
-   * Checks whether an OM response container has 
-   * been set
-   */
-  bool HasOMResponseData() const;
-  
-  /**
-   * Checks whether a reconstruction result container has 
-   * been set
-   */
-  bool HasRecoResultData() const;
-  
-  /**
-   * Checks whether a "bag" container has been set
-   * The bag container is used to store additional information
-   * which do not fit into the data structure. The bag itself
-   * can hold any TObject. It can be used, e.g. to store
-   * user defined information of the F2k files.
-   */
-  bool HasBag() const;
-  
-  /**
-   * Returns the trigger container. If the container has not 
-   * been set, a fatal message will be logged.
-   * @return trigger container
-   */
-  I3TriggerData&    GetTriggerData() const;
-  
-  /**
-   * Returns the filter container. If the container has not 
-   * been set, a fatal message will be logged.
-   * @return filter container
-   */
-  I3FilterData&     GetFilterData() const;
-  
-  /**
-   * Returns the monte carlo track container. If the container 
-   * has not been set, a fatal message will be logged.
-   * @return monte carlo container
-   */
-  I3MCTrackData&    GetMCTrackData() const;
-  
-  /**
-   * Returns the OM response container. If the container 
-   * has not been set, a fatal message will be logged.
-   * @return OM response container
-   */
-  I3OMResponseData& GetOMResponseData() const;
-  
-  /**
-   * Returns the reconstruction result container. If the 
-   * container has not been set, a fatal message will be logged.
-   * @return reconstruction result container
-   */
-  I3RecoResultData& GetRecoResultData() const;
-  
-  /**
-   * Returns the bag container. If the container has not 
-   * been set, a fatal message will be logged.
-   * The bag container is used to store additional information
-   * which do not fit into the data structure. The bag itself
-   * can hold any TObject. It can be used, e.g. to store
-   * user defined information of the F2k files.
-   * @return bag container
-   */
-  I3Bag&            GetBag() const;
-  
-  /**
-   * Sets the trigger container. If the container has been set 
-   * already, nothing will be done and a message will be logged
-   * @param triggerdata_ trigger container.
-   */
-  void SetTriggerData(I3TriggerData* triggerdata_);
-  
-  /**
-   * Sets the filter container. If the container has been set
-   * already, nothing will be done and a message will be logged
-   * @param filterdata_ filter container.
-   */
-  void SetFilterData(I3FilterData* filterdata_);
-  
-  /**
-   * Sets the monte carlo track container. If the container has 
-   * been set already, nothing will be done and a message will 
-   * be logged
-   * @param mctrackdata_ monte carlo track container.
-   */
-  void SetMCTrackData(I3MCTrackData* mctrackdata_);
-  
-  /**
-   * Sets the OM response container. If the container has 
-   * been set already, nothing will be done and a message will 
-   * be logged
-   * @param omresponsedata_ OM response container.
-   */
-  void SetOMResponseData(I3OMResponseData* omresponsedata_);
-  
-  /**
-   * Sets the reconstruction result container. If the container has 
-   * been set already, nothing will be done and a message will 
-   * be logged
-   * @param recoresultdata_ reconstruction result container.
-   */
-  void SetRecoResultData(I3RecoResultData* recoresultdata_);
-  
-  /**
-   * Sets the bag container. If the container has been set 
-   * already, nothing will be done and a message will 
-   * be logged
-   * The bag container is used to store additional information
-   * which do not fit into the data structure. The bag itself
-   * can hold any TObject. It can be used, e.g. to store
-   * user defined information of the F2k files.
-   * @param bag_ bag container.
-   */
-  void SetBag(I3Bag* bag_);
 
   ClassDef(I3Event, 1);
 };

@@ -1,3 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3RecoTrackComposite.h,v 1.4 2004/02/16 16:13:28 troy Exp $
+
+    @version $Revision: 1.4 $
+    @date $Date: 2004/02/16 16:13:28 $
+    @author
+
+    @todo
+
+*/
 #ifndef TI3RECOTRACKCOMPOSITE_H
 #define TI3RECOTRACKCOMPOSITE_H
 

@@ -3,7 +3,7 @@
 /**
  * Class: I3EventHeader
  *
- * Version: $Id: I3EventHeader.h,v 1.1 2004/01/30 21:00:25 pretz Exp $
+ * Version: $Id: I3EventHeader.h,v 1.2 2004/02/16 16:13:28 troy Exp $
  *
  * Date: 13 Jan 2004
  *
@@ -18,7 +18,7 @@
  * you can store in a file if you don't want to store the event.
  * It's supposed to have enough data to reconstruct the full event
  * from the database
- * @version $Id: I3EventHeader.h,v 1.1 2004/01/30 21:00:25 pretz Exp $
+ * @version $Id: I3EventHeader.h,v 1.2 2004/02/16 16:13:28 troy Exp $
  * @author pretz
  */
 class I3EventHeader : public I3DataHeader{
@@ -38,6 +38,7 @@ class I3EventHeader : public I3DataHeader{
    * ... "Event"
    */
   const Char_t* GetDataStream();
+
  private:
   // copy and assignment are private
   I3EventHeader(const I3EventHeader&);

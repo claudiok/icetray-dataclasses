@@ -1,18 +1,20 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoResultData.h,v 1.7 2004/02/16 04:19:10 troy Exp $
+    $Id: I3RecoResultData.h,v 1.8 2004/02/16 16:13:28 troy Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2004/02/16 04:19:10 $
+    @version $Revision: 1.8 $
+    @date $Date: 2004/02/16 16:13:28 $
     @author
 
-    @todo
+    @todo fix 
 
 */
 #ifndef I3RECORESULTDATA_H
 #define I3RECORESULTDATA_H
 
+// tds:  need to fix this
+#if 0
 
 #include "I3RecoResult.h"
 #include "TClonesPolicy.h"
@@ -29,4 +31,4 @@ typedef GarnishedVector<I3RecoResultDataHeader,
 			I3RecoResultDataStoragePolicy> I3RecoResultData;
 
 #endif
-
+#endif
