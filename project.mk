@@ -4,7 +4,7 @@
 ROOT_BIN_NAMES := 
 CXX_BIN_NAMES := runtests
 ROOT_EXCLUDE_NAMES := 
-ROOT_NON_CLASSES := TClonesPolicy
-ROOT_TEMPLATES := STLVectorPolicy AugVec
+ROOT_NON_CLASSES := 
+ROOT_TEMPLATES := STLVectorPolicy
 USES_PROJECTS := icetray 
 USES_TOOLS := root log4cpp boost

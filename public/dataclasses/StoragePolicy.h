@@ -1,15 +1,13 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.10 2004/07/03 18:40:57 troy Exp $
+    $Id: StoragePolicy.h,v 1.11 2004/07/03 19:07:22 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.10 $
-    @date $Date: 2004/07/03 18:40:57 $
-    @author Troy Straszheim
+    @version $Revision: 1.11 $
+    @date $Date: 2004/07/03 19:07:22 $
+    @author Troy D. Straszheim
 */
-
-// inlcude one and only one
 
 #ifndef STORAGEPOLICY_H
 #define STORAGEPOLICY_H
@@ -19,9 +17,7 @@
 
 #include "boost/shared_ptr.hpp"
 
-//#include "TClonesPolicy.h"
 
-// something like this would be nice but root wont allow it
 template <class Stored>
 /**
  * @brief The storage policy for vectors of objects.
@@ -33,12 +29,10 @@ template <class Stored>
  */
 struct VectorPolicy {
   /**
-   * Right now, ThePolicy is an STLVectorStoragePolicy
+   *  ThePolicy is an STLVectorStoragePolicy
    */
   typedef STLVectorStoragePolicy<Stored> ThePolicy;
 
-  // half-implemented
-  // typedef TClonesArrayStoragePolicy<Stored> ThePolicy;
 };
 
 /**
@@ -52,12 +46,10 @@ struct VectorPolicy {
 template <class Stored>
 struct MapPolicy {
   /**
-   * Right now, ThePolicy is just a typedeffed STLMapStoragePolicy
+   *  ThePolicy is just a typedeffed STLMapStoragePolicy
    */
   typedef STLMapStoragePolicy<Stored> ThePolicy;
 
-  // not yet implemented
-  // typedef TMapStoragePolicy<Stored> ThePolicy;
 };
 
 /**
@@ -70,11 +62,10 @@ struct MapPolicy {
  * in this one place, and the rest of the code is unaffected
  */
 template <class Pointed>
-struct PtrPolicy {
-
+struct PtrPolicy 
+{
   /**
    * boost smart pointers.  FIXME: need docs
-   * 
    */
   typedef boost::shared_ptr<Pointed> ThePolicy;
 };
