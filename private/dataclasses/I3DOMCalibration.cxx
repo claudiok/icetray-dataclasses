@@ -1,5 +1,5 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.5 2004/11/28 06:40:27 troy Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.6 2004/12/01 15:34:08 pretz Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
@@ -56,9 +56,13 @@ I3DOMCalibration::GetATWDById(Int_t id)
 	return fATWD0;
     case 1:
 	return fATWD1;
-    default:	
+    default:
+      {
 	I3DataExecution::Instance().Fatal("Invalid ATWD Id in I3DOMCalibration");
+	return *static_cast<map<Int_t,map<Int_t,LinearFit> >*>(0);
+      }
     }
+    
 }
 
 

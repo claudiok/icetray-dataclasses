@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseToy.h,v 1.1 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3MCPMTResponseToy.h,v 1.2 2004/12/01 15:34:08 pretz Exp $
  *
  * @file I3MCPMTResponseToy.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/12/01 15:34:08 $
  * @author klein
  * @author deyoung
  */
@@ -45,7 +45,7 @@ public:
     Float_t amplitude = 0.;
     Float_t sigma = 2. * I3Units::ns;
     Float_t PMTgain = 100 * I3Units::mV;  
-    for (Int_t i = 0; i < fHitTimes.Size(); i++) {
+    for (UInt_t i = 0; i < fHitTimes.Size(); i++) {
       amplitude += exp( -(fHitTimes[i] - time) * (fHitTimes[i] - time)
 			/ (sigma * sigma));
     } 
