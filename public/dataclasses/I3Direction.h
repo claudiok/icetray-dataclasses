@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.5 2004/09/13 15:32:48 dule Exp $
+ * $Id: I3Direction.h,v 1.6 2004/09/13 22:49:51 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/09/13 15:32:48 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/09/13 22:49:51 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.5 2004/09/13 15:32:48 dule Exp $
+// $Id: I3Direction.h,v 1.6 2004/09/13 22:49:51 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -186,12 +186,13 @@ class I3Direction : public TObject
   /**
    * Change zenith,azimuth coordinates into x,y,z directional coordinates.
    * The three numbers x,y,z are calculated to add up (in quadrature) to 1.
-   * zenith,azimuth are -theta,-phi in these IceCube coordinates.
+   * theta=pi-zenith and phi=azimuth-pi in these IceCube coordinates.
    */
   void CalcCarFromSph() const;
 
   /**
    * Change x,y,z directional coordinates to zenith,azimuth coordinates.
+   * zenith=pi-theta and azimuth=phi+pi in these IceCube coordinates.
    * The three numbers DO NOT have to add up (in quadrature) to 1.
    * Even if they don't, the direction that they define is stored.
    * SO BE CAREFUL IF YOU SPECIFY THE DIRECTION IN THIS WAY!
