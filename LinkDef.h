@@ -6,6 +6,9 @@
 
 #pragma link C++ namespace I3Units;
 
+#pragma link C++ nestedtypedef;
+#pragma link C++ nestedclass;
+
 #pragma link C++ class I3Analog+;
 #pragma link C++ class I3AnalogAmandaSeries+;
 #pragma link C++ typedef I3AnalogSeries;
@@ -28,9 +31,14 @@
 #pragma link C++ class I3Hit+;
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitSeries;
+
 #pragma link C++ class I3MCHitSeries+;
 #pragma link C++ typedef I3MCHitSeriesStoragePolicy;
 #pragma link C++ class I3MCHitSeriesStoragePolicy+;
+
+#pragma link C++ vector<I3MCHit>::iterator;
+//#pragma link C++ typedef I3MCHitSeries::iterator;
+//#pragma link C++ class I3MCHitSeries::iterator+;
 
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ typedef I3MCTrackData;
@@ -63,4 +71,6 @@
 #pragma link C++ class I3OMResponse+;
 
 #pragma link C++ class I3Event+;
+
 #endif
+
