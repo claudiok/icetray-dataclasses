@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.23 2004/07/12 15:30:49 pretz Exp $
+ * $Id: I3Geometry.h,v 1.24 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/07/12 15:30:49 $
+ * @version $Revision: 1.24 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,11 +18,11 @@
 #include "I3InIceGeometry.h"
 #include "I3TopGeometry.h"
 /**
- * @brief The Geometry information for the IceCube detector.  
+ * @brief Top-level container of Geometry information
  * 
- * There's the InIce portion and the IceTop portion.  It is expected that 
- * AMANDA tubes will be incorporated as additional kinds of InIce tubes.
- *
+ * This class stores the information from the Geometry stream.
+ * Records for IceCube InIce and AMANDA OMs are in the
+ * I3InIceGeometry, and IceTop tanks are stored in the I3TopGeometry.  
  */
 class I3Geometry : public TObject 
 {

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMReadout.h,v 1.1 2004/07/01 20:15:13 spencer Exp $
+ * $Id: I3DOMReadout.h,v 1.2 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3DOMReadout.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/01 20:15:13 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author klein
  *
  */
@@ -17,7 +17,13 @@
 
 using namespace std; 
 /**
- * @brief This holds the direct (digital) of an IceCube DOM
+ * @brief The direct (digital) readout of an IceCube DOM
+ * 
+ * The full digital readout of an IceCube DOM consists of one to three
+ * short but fine-grained ATWD readouts, and a long but coarse fADC
+ * readout, all beginning at the same time.  The fADC is fixed at 40
+ * MHz, while the sampling rate of the ATWDs is adjustable and is
+ * stored in the ATWDBinSize variable.
  *
  */
 class I3DOMReadout : public I3DataReadout

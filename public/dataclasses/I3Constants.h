@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Constants.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Constants.h,v 1.4 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3Constants.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author pretz
  */
 
@@ -17,7 +17,9 @@
 /**
  * @brief A list of static variables commonly used by physics analysis
  *
- * Speed of light, and pi, for instance.
+ * Just a namespace filled with constants -- add a line
+ * <tt> using namespace I3Constants </tt> to get access to them
+ * directly, or just use @c I3Constants::pi, for example.
  * 
  * @todo probably need more constants here.   Add them here when you need them.
  */

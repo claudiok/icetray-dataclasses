@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
+    $Id: I3MCOMResponse.h,v 1.7 2004/07/15 20:29:25 deyoung Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.6 $
-    @date $Date: 2004/06/30 17:20:26 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/07/15 20:29:25 $
     @author ehrlich
     @author troy
     @author pretz
@@ -19,10 +19,12 @@
 #include "I3OMResponse.h"
 
 /**
- * @brief This contains all of the Monte Carlo OM Response information:
+ * @brief The response of an OM in a single event, including Monte
+ * Carlo truth info
  *
- * the 'true' Monte Carlo hits and the simulated PMT response.
- * all of the data and OM output is inherited from I3OMResponse
+ * In addition to the regular I3OMResponse information related to
+ * the observed OM response and reconstructed hit series, this class
+ * holds the 'true' Monte Carlo hits and the simulated PMT response.
  *
  * @todo This class needs to contain a _pointer_ to the MCPMTResponse since
  * it is supposed to be subclassed -J.Pretz

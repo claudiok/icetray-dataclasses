@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.15 2004/07/12 15:30:49 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.16 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/07/12 15:30:49 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,10 +21,12 @@
 #include "OMKey.h"
 #include "StoragePolicy.h"
 /**
- * @brief Right now just a containter for IceCube and AMANDA OMGeos. 
+ * @brief Container for IceCube and AMANDA OMGeos 
  *
- * This is the
- * the 'frozen-in-ice' information, as opposed to the stuff that changes.
+ * This class is a list of geometry records for the InIce and AMANDA
+ * optical modules.  Each module has an I3OMGeo record, which is
+ * identified by its key.  An OMKey is just the (string number, om
+ * number) pair that indicates the position of the module.
  * @todo make copy and assignment private.  conflict with something in tests
  * @todo should the 'mapness' be incorporated in the same kind of
  * 'Storage Policy' we have for other classes?

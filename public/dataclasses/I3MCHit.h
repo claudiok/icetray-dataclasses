@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.13 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3MCHit.h,v 1.14 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,8 +19,13 @@
 #include "StoragePolicy.h"
 
 /**
- * @brief Adds a 'Weight' and 'Parent track' to the standard 'Hit' class
- *
+ * @brief Derived I3Hit class with additional 'Weight' and 'Parent
+ * track' info
+ * 
+ * This class records the true (simulated) time at which a
+ * photoelectron was produced.  In addition to the time, it contains
+ * the identity of the track which was responsible for the hit, and a
+ * statistical weight to assign to the hit (default 1).
  */
 class I3MCHit : public I3Hit
 {

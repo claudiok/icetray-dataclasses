@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.7 2004/07/06 15:59:07 pretz Exp $
+ * $Id: I3MCPMTResponse.h,v 1.8 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/07/06 15:59:07 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author klein
  */
 
@@ -14,9 +14,11 @@
 #include <TObject.h>
 
 /**
- * @brief This is now a base class for the Monte-Carlo generated PMT response
+ * @brief Base class for the Monte Carlo generated PMT response
  *
- * The Chiba PMT response will inherit from this.  
+ * This class contains the PMT-level (pre-DAQ/readout) response to the
+ * hits in the event.  It represents the voltage produced at the PMT
+ * output.  The Chiba PMT response will inherit from this.  
  *
  */
 class I3MCPMTResponse : public TObject

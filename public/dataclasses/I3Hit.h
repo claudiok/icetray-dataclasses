@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.17 2004/07/12 12:45:17 pretz Exp $
+ * $Id: I3Hit.h,v 1.18 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/07/12 12:45:17 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,9 +21,13 @@
 using namespace std;
 
 /**
- * @brief I3Hit is the basic hit class.  Just a time for a PE arrival
- * at a tube.  
+ * @brief Base class for hit (photoelectron time) records
  *
+ * This class records a single photoelectron (PE) produced at the
+ * photocathode of an optical module.  I3MCHit and I3RecoHit, and
+ * further subclasses, add additional information.  Hardware or
+ * DAQ-level records are stored as I3DataReadouts or
+ * I3MCPMTResponses.
  */
 class I3Hit : public TObject
 {

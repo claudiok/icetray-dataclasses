@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.4 2004/07/12 16:12:46 pretz Exp $
+ * $Id: I3DataReadoutDict.h,v 1.5 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/12 16:12:46 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,7 +19,20 @@
 #include "StoragePolicy.h"
 
 /**
- * @brief Just an list of I3DataReadouts.  
+ * @brief Container (map) of I3DataReadouts
+ * 
+ * The I3DataReadoutDict is a container of I3DataReadouts.  It is a
+ * member of I3OMResponse, which
+ * contains all information associated with a particular OM in a
+ * single event, including hit information as well as raw and derived
+ * data readouts.  The @c DataReadoutDict may contain any number of
+ * I3DataReadouts.  Each I3DataReadout in the
+ * @c DataReadoutDict is identified by a name, given by the software
+ * that added the readout to the event.  
+ * 
+ * The @c DataReadoutDict is a map container.  The syntax for
+ * accessing elements in the map is inherited from the MapPolicy,
+ * which is currently set to STLMapStoragePolicy.
  */
 class I3DataReadoutDict : public TObject, 
 	public MapPolicy<string,I3DataReadoutPtr>::ThePolicy

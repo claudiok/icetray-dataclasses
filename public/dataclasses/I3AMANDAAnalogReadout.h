@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.5 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author pretz
  *
  */
@@ -21,9 +21,12 @@
 using namespace std;
 
 /**
- * @brief An 'AMANDA' readout.  The 'old-style' before the TWR was added.  
+ * @brief Old-style AMANDA ADC/TDC readout  
  *
- * Includes a series of LE's and TOT's and a single Amplitude
+ * This class represents an old-style AMANDA DAQ readout, with a
+ * series of leading edges and times over threshold, and a single
+ * amplitude measurement that represents the peak from the entire
+ * event. 
  */
 class I3AMANDAAnalogReadout : public I3AnalogReadout
 { 

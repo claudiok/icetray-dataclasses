@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.4 2004/07/04 06:03:32 troy Exp $
+ * $Id: I3MCEvent.h,v 1.5 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/07/04 06:03:32 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -14,8 +14,12 @@
 #include "dataclasses/I3Event.h"
 
 /**
- * @brief This holds the global event Monte Carlo information
- * For now, this is the frame start and stop times
+ * @brief Derived I3Event class with Monte Carlo information
+ *
+ * This is the Monte Carlo version of the regular I3Event, adding the
+ * MC-specific information.  For now, this is the frame start and stop
+ * times (the boundaries of the simulated time interval) and the MC
+ * track information. 
  */
 
 class I3MCEvent : public I3Event

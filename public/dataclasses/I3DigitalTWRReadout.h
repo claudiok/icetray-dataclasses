@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalTWRReadout.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3DigitalTWRReadout.h,v 1.4 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3DigitalTWRReadout.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author pretz
  *
  */
@@ -14,7 +14,7 @@
 
 #include "dataclasses/I3DigitalReadout.h"
 /**
- * @brief An implementation of the AMANDA TWR response
+ * @brief Implementation of the AMANDA TWR response
  * @todo This class isn't implemented yet.  It's just holding the place
  */
 class I3DigitalTWRReadout : public I3DigitalReadout{

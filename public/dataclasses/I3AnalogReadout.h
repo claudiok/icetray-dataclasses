@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.4 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3AnalogReadout.h,v 1.5 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -15,10 +15,14 @@
 #include "StoragePolicy.h"
 
 /**
- * @brief The base for all the I3Analog types of DataReadout.  
+ * @brief The base class for all the analog types of I3DataReadout
  * 
- * Just a 'time' which
- * is the first 'LeadingEdge' time. 
+ * This class forms the base for specific types of analog
+ * (non-digitizing) data readouts.  The basic information is just a
+ * 'time' which records the first time the signal in the channel
+ * crossed the discriminator threshold (the first 'leading edge').
+ * Derived classes such as I3AMANDAAnalogReadout may provide
+ * additional information.
  */
 class I3AnalogReadout : public I3DataReadout
 { 

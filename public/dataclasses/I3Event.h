@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.33 2004/07/13 15:37:53 niessen Exp $
+ * $Id: I3Event.h,v 1.34 2004/07/15 20:29:25 deyoung Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.33 $
- * @date $Date: 2004/07/13 15:37:53 $
+ * @version $Revision: 1.34 $
+ * @date $Date: 2004/07/15 20:29:25 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -21,8 +21,15 @@
 #include "I3RecoResultDict.h"
 #include "I3Bag.h"
 /**
- * @brief This class provides access to the all data containers which are 
- * related to each event. 
+ * @brief Top-level object for the event-specifc information (Physics
+ * stream)
+ *
+ * This class stores all the information that is specific to the
+ * single event record: OM and IceTop tank responses, reconstruction
+ * results, Monte Carlo information, trigger and filter records, etc.
+ * It does not contain more 
+ * static information, like geometry, calibration, or monitoring
+ * data.  It also contains an I3Bag of user-defined information.
  */
 
 class I3Event : public TObject
