@@ -2,11 +2,11 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.15 2004/11/30 21:39:31 tmccauley Exp $
+ $Id: I3Units.h,v 1.16 2004/11/30 22:01:25 tmccauley Exp $
  
  @file I3Units.h  
  @version $Version:$
- @date $Date: 2004/11/30 21:39:31 $
+ @date $Date: 2004/11/30 22:01:25 $
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -88,7 +88,7 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @date $Date: 2004/11/30 21:39:31 $
+ * @date $Date: 2004/11/30 22:01:25 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should we have a 'speed' here too?
@@ -460,6 +460,8 @@ namespace I3Units
   static const double eplus = 1. ;		// positron charge
   static const double eSI   = 1.602176462e-19;	// positron charge in coulomb  
   static const double coulomb = eplus/eSI;	// coulomb = 6.24150 e+18*eplus
+  static const double picocoulomb = 1.e-12*coulomb;
+    
 
   /*
    * Electric current [Q][T^-1]
