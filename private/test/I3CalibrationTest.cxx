@@ -152,8 +152,9 @@ namespace tut
 
 	    I3Calibration* calib = new I3Calibration();
        
-	    I3InIceCalibration& inice_calib = 
-		calib->GetInIceCalibration();
+	    //I3InIceCalibration& inice_calib = 
+	    //  calib->GetInIceCalibration();
+            // just to stop a warning -jpretz
 
 	    I3DOMCalibPtr dom_calib(new I3DOMCalibration);
 	

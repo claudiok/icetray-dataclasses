@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.149 2005/02/08 23:01:34 pretz Exp $
-// $Revision: 1.149 $
-// $Date: 2005/02/08 23:01:34 $
+// $Id: LinkDef.h,v 1.150 2005/02/09 16:44:53 pretz Exp $
+// $Revision: 1.150 $
+// $Date: 2005/02/09 16:44:53 $
 //
 
 #ifdef __CINT__
@@ -493,6 +493,10 @@
 #pragma link C++ class I3BadOMSelection+;
 #pragma link C++ typedef I3BadOMSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3BadOMSelection>+;
+
+#pragma link C++ class VectorPolicy<OMKey>;
+#pragma link C++ typedef VectorPolicy<OMKey>::ThePolicy;
+#pragma link C++ class VectorPolicy<OMKey>::ThePolicy+;
 
 #pragma link C++ class I3OMStatus+;
 #pragma link C++ typedef I3OMStatusPtr;
