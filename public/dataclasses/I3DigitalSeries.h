@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalSeries.h,v 1.15 2004/02/26 18:53:12 pretz Exp $
+ * $Id: I3DigitalSeries.h,v 1.16 2004/03/01 16:56:31 pretz Exp $
  *
  * A collection of digital signals.  
  *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/02/26 18:53:12 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/03/01 16:56:31 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -19,8 +19,9 @@
 
 #include "I3Digital.h"
 #include "StoragePolicy.h"
+#include "I3DataReadout.h"
 
-class I3DigitalSeries : public VectorPolicy<I3Digital>::ThePolicy
+class I3DigitalSeries : public I3DataReadout, public VectorPolicy<I3Digital>::ThePolicy
 {
   Double_t    fStarttime;
   
@@ -54,6 +55,10 @@ class I3DigitalSeries : public VectorPolicy<I3Digital>::ThePolicy
   ClassDef(I3DigitalSeries,1);
 };
 
+/**
+ * Pointer typedeffed away to insulate users from the
+ * memory-mananagement implementation
+ */
 typedef PtrPolicy<I3DigitalSeries>::ThePolicy I3DigitalSeriesPtr;
 
 #endif

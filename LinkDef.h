@@ -40,6 +40,7 @@
 #pragma link C++ class VectorPolicy<I3Analog>::ThePolicy+;
 #pragma link C++ function operator!=(const I3AnalogSeries::iterator&, const I3AnalogSeries::iterator&);
 // others which are just typedefs to this
+#pragma link C++ typedef I3AnalogSeriesPtr;
 #pragma link C++ typedef I3AnalogAmandaSeries;
 
 #pragma link C++ class I3DataReadoutList+;
