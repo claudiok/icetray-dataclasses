@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.20 2004/07/05 17:13:11 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.21 2004/07/05 18:25:56 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/07/05 17:13:11 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/07/05 18:25:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,8 +21,6 @@
  * @brief The basic Optical Module Geometry class.  
  * 
  * This is the static frozen-in-the-ice properties of an optical module
- *
- * @todo we need to implement the I3Position stuff here -J.Pretz
  */
 class I3OMGeo : public TObject
 {

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.18 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3Track.h,v 1.19 2004/07/05 18:25:56 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/07/05 18:25:56 $
  * @author pretz
  */
 
@@ -215,38 +215,6 @@ class I3Track : public I3ObservableParticle
       source.CopyTo(*this);
     }
 
-  // geometrical convenience functions
-  /**
-   * returns the point on the track that is closest to the indicated point
-   * @todo implement this method
-   */
-/*   I3Position ClosestApproach(I3Position pos); */
-
-  /**
-   * Gives the distance of the given point from the track
-   * @todo implement this method
-   */
-/*   Double_t DistanceFromTrack(I3Position); */
-
-  /**
-   * Gives the position (on the line of the track) that is the given
-   * distance from the Start position
-   * @todo is this right????  Which way do you go?  What if Start isn't 
-   * on the track.  Should go instead from the StartPos(), not a user-defined
-   * position, I think -JP
-   * @todo implement this method
-   */
-/*   virtual I3Position ShiftAlongTrack(Double_t dist); */
-
-  /**
-   * Indicates whether or not the indicated position lies on the track
-   * @todo shouldn't there be a 'tolerance' or 'radius of tolerance' parameter?
-   * @todo implement this method
-   */
-/*   Bool_t IsOnTrack(I3Position); */
-
-
-  //I3Track& operator=(const I3Track&);
   /**
    * streams the track to an ostream.  Can be used, for instance, to dump
    * to stdout.  
