@@ -146,12 +146,12 @@
 #pragma link C++ typedef I3MCTrackListPtr;
 
 
-#pragma link C++ class I3ObsParticleList+;
-//#pragma link C++ class I3ObsParticleList::iterator+;
+#pragma link C++ class I3MCParticleList+;
+//#pragma link C++ class I3MCParticleList::iterator+;
 //#pragma link C++ typedef VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy;
 //#pragma link C++ class VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3ObsParticleList::iterator&, const I3ObsParticleList::iterator&);
-#pragma link C++ typedef I3ObsParticleListPtr;
+#pragma link C++ function operator!=(const I3MCParticleList::iterator&, const I3MCParticleList::iterator&);
+#pragma link C++ typedef I3MCParticleListPtr;
 
 #pragma link C++ class I3MCParticleData+;
 #pragma link C++ class I3MCParticleData::iterator+;

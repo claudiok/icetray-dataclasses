@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleEvent.h,v 1.2 2004/05/05 15:20:48 pretz Exp $
+ * $Id: I3MCParticleEvent.h,v 1.3 2004/05/05 19:34:54 pretz Exp $
  *
  * @file I3MCParticleEvent.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/05/05 15:20:48 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/05/05 19:34:54 $
  * @author pretz
  *
  */
@@ -14,7 +14,7 @@
 #define I3MCPARTICLEEVENT_H
 
 #include "dataclasses/I3MCPrimary.h"
-#include "dataclasses/I3ObsParticleList.h"
+#include "dataclasses/I3MCParticleList.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -27,8 +27,8 @@ class I3MCParticleEvent : public TObject
 {
 
   I3MCPrimary fPrimary;
-  I3ObsParticleList fInIceParticles;
-  I3ObsParticleList fIceTopParticles;
+  I3MCParticleList fInIceParticles;
+  I3MCParticleList fIceTopParticles;
 
  public:
   /**
@@ -54,22 +54,22 @@ class I3MCParticleEvent : public TObject
   /**
    * @return the In-Ice tracks as constant
    */
-  const I3ObsParticleList& InIceParticles() const {return fInIceParticles;}
+  const I3MCParticleList& InIceParticles() const {return fInIceParticles;}
 
   /**
    * @return the In-Ice tracks as non-constant
    */
-  I3ObsParticleList& InIceParticles() {return fInIceParticles;}
+  I3MCParticleList& InIceParticles() {return fInIceParticles;}
 
   /**
    * @return the IceTop tracks as constant
    */
-  const I3ObsParticleList& IceTopParticles() const {return fIceTopParticles;}
+  const I3MCParticleList& IceTopParticles() const {return fIceTopParticles;}
 
   /**
    * @return the IceTop tracks as non-constant
    */
-  I3ObsParticleList& IceTopParticles() {return fIceTopParticles;};
+  I3MCParticleList& IceTopParticles() {return fIceTopParticles;};
 
  private:
   // copy and assignment are private

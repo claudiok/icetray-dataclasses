@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ObsParticleList.h,v 1.1 2004/05/04 21:36:17 pretz Exp $
+ * $Id: I3MCParticleList.h,v 1.1 2004/05/05 19:34:54 pretz Exp $
  *
- * @file I3ObsParticleList.h
+ * @file I3MCParticleList.h
  * @version $Revision: 1.1 $
- * @date $Date: 2004/05/04 21:36:17 $
+ * @date $Date: 2004/05/05 19:34:54 $
  * @author pretz
  */
 
@@ -20,33 +20,33 @@
  *
  * @todo figure out how to make copy and assignment private
  */
-class I3ObsParticleList : public TObject, public VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy
+class I3MCParticleList : public TObject, public VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy
 {
  public:
   /**
    * constructor
    */
-  I3ObsParticleList(){};
+  I3MCParticleList(){};
 
   /**
    * destructor
    */
-  virtual ~I3ObsParticleList(){};
+  virtual ~I3MCParticleList(){};
 
  private:
   // copy and assignment private
-/*   I3ObsParticleList(const I3ObsParticleList&);  */
-/*   const I3ObsParticleList& operator=(const I3ObsParticleList&); */ 
+/*   I3MCParticleList(const I3MCParticleList&);  */
+/*   const I3MCParticleList& operator=(const I3MCParticleList&); */ 
 
   // ROOT macro
-  ClassDef(I3ObsParticleList,1);
+  ClassDef(I3MCParticleList,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3ObsParticleList>::ThePolicy I3ObsParticleListPtr;
+typedef PtrPolicy<I3MCParticleList>::ThePolicy I3MCParticleListPtr;
 
 
 #endif

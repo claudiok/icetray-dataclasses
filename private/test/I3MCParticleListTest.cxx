@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3ObsParticleListTest.cxx,v 1.1 2004/05/05 15:20:48 pretz Exp $
+    $Id: I3MCParticleListTest.cxx,v 1.1 2004/05/05 19:34:54 pretz Exp $
 
     @version $Revision: 1.1 $
-    @date $Date: 2004/05/05 15:20:48 $
+    @date $Date: 2004/05/05 19:34:54 $
     @author pretz
 
     @todo
@@ -13,7 +13,7 @@
 
 #include "test/tut.h"
 
-#include "dataclasses/I3ObsParticleList.h"
+#include "dataclasses/I3MCParticleList.h"
 #include "dataclasses/I3TrackExtractor.h"
 #include "dataclasses/I3MCTrack.h"
 #include "dataclasses/I3MCCascade.h"
@@ -28,18 +28,18 @@ using std::endl;
 
 namespace tut
 {
-  struct I3ObsParticleListTest
+  struct I3MCParticleListTest
   {
-    I3ObsParticleList fParticles;
+    I3MCParticleList fParticles;
   };
 
-  typedef test_group<I3ObsParticleListTest> factory;
+  typedef test_group<I3MCParticleListTest> factory;
   typedef factory::object object;
 }
 
 namespace
 {
-  tut::factory t("I3ObsParticleListTest");
+  tut::factory t("I3MCParticleListTest");
 }
 
 namespace tut
