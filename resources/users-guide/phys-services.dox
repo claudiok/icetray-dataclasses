@@ -49,6 +49,14 @@ Then you can build it with the standard bfd commands:<br>
 % ant<br>
 </code>
 And you should get a successful build<br>
+If you are interested in using the services included here with your own modules
+you may want to build the documentation for the phys-services.  At this point
+all I've got is the doxygen, but you'll need to do it manually until the 
+ant 'doxygen' target is implemented.<br>
+<code>
+% doxygen phys-services/resources/Doxyfile
+</code>
+and you should get the documentation in your workspace in a directory doxygen-phys-services/
 
 <!--@section Test-->
 @section use Use

@@ -57,6 +57,8 @@
 
    @li @ref reconstruction
 
+   @li @ref dataclass-and-root
+
    @subsection reflection Reflection
    @li @ref architecture
 
