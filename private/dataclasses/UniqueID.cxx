@@ -40,16 +40,18 @@ Int_t UniqueID::ID(I3MCEventPtr obj, IDOption option)
         ParticleID( ((I3RecoResultMultiTracks&)recoresult)[j], option, highestID);
     }
     if(recoresult.InheritsFrom("I3RecoResultSingleTrack"))
-      ParticleID( ((I3RecoResultSingleTrack&)recoresult).GetTrack(), option, highestID);
+    {
+      if(((I3RecoResultSingleTrack&)recoresult).HasTrack()) ParticleID( ((I3RecoResultSingleTrack&)recoresult).GetTrack(), option, highestID);
+    }
   }
-  
+
   return(highestID+1);
 }
 
 Int_t UniqueID::ID(I3MCParticleDataPtr obj, IDOption option)
 {
   Int_t highestID=0;
-  
+
   I3ParticleMultiMap::iterator iter;
   I3ParticleMultiMap &map1 = obj->GetPrimary();
   for(iter = map1.begin(); iter!= map1.end(); iter++) ParticleID(iter->second, option, highestID);
@@ -57,24 +59,24 @@ Int_t UniqueID::ID(I3MCParticleDataPtr obj, IDOption option)
   for(iter = map2.begin(); iter!= map2.end(); iter++) ParticleID(iter->second, option, highestID);
   I3ParticleMultiMap &map3 = obj->GetInIceParticles();
   for(iter = map3.begin(); iter!= map3.end(); iter++) ParticleID(iter->second, option, highestID);
-  
+
   return(highestID+1);
 }
 
 Int_t UniqueID::ID(I3ParticleMultiMapPtr obj, IDOption option)
 {
   Int_t highestID=0;
-  
+
   I3ParticleMultiMap::iterator iter;
   for(iter = obj->begin(); iter!= obj->end(); iter++) ParticleID(iter->second, option, highestID);
-  
+
   return(highestID+1);
 }
 
 Int_t UniqueID::ID(I3EventPtr obj, IDOption option)
 {
   Int_t highestID=0;
-  
+
   I3RecoResultDict &map = obj->GetRecoResultDict();
   I3RecoResultDict::iterator iter;
   for(iter = map.begin(); iter!= map.end(); iter++)
@@ -83,20 +85,22 @@ Int_t UniqueID::ID(I3EventPtr obj, IDOption option)
     if(recoresult.InheritsFrom("I3RecoResultMultiTracks"))
     {
       Int_t nparticle=((I3RecoResultMultiTracks&)recoresult).size();
-      for(Int_t j=0; j<nparticle; j++) 
+      for(Int_t j=0; j<nparticle; j++)
         ParticleID( ((I3RecoResultMultiTracks&)recoresult)[j], option, highestID);
     }
     if(recoresult.InheritsFrom("I3RecoResultSingleTrack"))
-      ParticleID( ((I3RecoResultSingleTrack&)recoresult).GetTrack(), option, highestID);
+    {
+      if(((I3RecoResultSingleTrack&)recoresult).HasTrack()) ParticleID( ((I3RecoResultSingleTrack&)recoresult).GetTrack(), option, highestID);
+    }
   }
-  
+
   return(highestID+1);
 }
 
 Int_t UniqueID::ID(I3RecoResultDictPtr obj, IDOption option)
 {
   Int_t highestID=0;
-  
+
   I3RecoResultDict::iterator iter;
   for(iter = obj->begin(); iter!= obj->end(); iter++)
   {
@@ -104,20 +108,22 @@ Int_t UniqueID::ID(I3RecoResultDictPtr obj, IDOption option)
     if(recoresult.InheritsFrom("I3RecoResultMultiTracks"))
     {
       Int_t nparticle=((I3RecoResultMultiTracks&)recoresult).size();
-      for(Int_t j=0; j<nparticle; j++) 
+      for(Int_t j=0; j<nparticle; j++)
         ParticleID( ((I3RecoResultMultiTracks&)recoresult)[j], option, highestID);
     }
     if(recoresult.InheritsFrom("I3RecoResultSingleTrack"))
-      ParticleID( ((I3RecoResultSingleTrack&)recoresult).GetTrack(), option, highestID);
+    {
+      if(((I3RecoResultSingleTrack&)recoresult).HasTrack()) ParticleID( ((I3RecoResultSingleTrack&)recoresult).GetTrack(), option, highestID);
+    }
   }
-  
+
   return(highestID+1);
 }
 
 Int_t UniqueID::ID(I3RecoResultPtr obj, IDOption option)
 {
   Int_t highestID=0;
-  
+
   if(obj->InheritsFrom("I3RecoResultMultiTracks"))
   {
     Int_t nparticle=roost::dynamic_pointer_cast<I3RecoResultMultiTracks>(obj)->size();
@@ -125,8 +131,10 @@ Int_t UniqueID::ID(I3RecoResultPtr obj, IDOption option)
       ParticleID( (*roost::dynamic_pointer_cast<I3RecoResultMultiTracks>(obj))[j], option, highestID);
   }
   if(obj->InheritsFrom("I3RecoResultSingleTrack"))
-    ParticleID( roost::dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->GetTrack(), option, highestID);
-  
+  {
+    if(roost::dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->HasTrack()) ParticleID(roost::dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->GetTrack(), option, highestID);
+  }
+
   return(highestID+1);
 }
 
