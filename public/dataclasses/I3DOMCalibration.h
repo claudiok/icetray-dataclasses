@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.8 2005/02/07 17:21:00 tmccauley Exp $
+ * $Id: I3DOMCalibration.h,v 1.9 2005/03/16 22:06:01 dima Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/02/07 17:21:00 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/03/16 22:06:01 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -217,8 +217,12 @@ public:
     virtual void ToStream(ostream& o) const
     {
 	o<<"[ "
-	 <<"Fill me with information"
-	 <<" ]\n";
+	 <<"Calibration:"
+	 <<"\tDate: "<<fDate<<endl
+	 <<"\tDOM ID: "<<fDOMId<<endl
+	 <<"\tSPE Mean: "<<fSPEMean<<endl
+	 <<"\tPeak-to-Valley: "<<fPeakToValley<<endl
+	 <<"\tSuppressing the rest of the output ]\n";
     };
 
     virtual string ToString() const
