@@ -145,12 +145,20 @@
 #pragma link C++ function operator!=(const I3MCTrackList::iterator&, const I3MCTrackList::iterator&);
 #pragma link C++ typedef I3MCTrackListPtr;
 
-#pragma link C++ class I3MCTrackData+;
-#pragma link C++ class I3MCTrackData::iterator+;
-#pragma link C++ typedef MapPointainerPolicy<I3MCTrackEventPtr>::ThePolicy;
-#pragma link C++ class MapPointainerPolicy<I3MCTrackEventPtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
-#pragma link C++ typedef I3MCTrackDataPtr;
+
+#pragma link C++ class I3ObsParticleList+;
+//#pragma link C++ class I3ObsParticleList::iterator+;
+//#pragma link C++ typedef VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy;
+//#pragma link C++ class VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3ObsParticleList::iterator&, const I3ObsParticleList::iterator&);
+#pragma link C++ typedef I3ObsParticleListPtr;
+
+#pragma link C++ class I3MCParticleData+;
+#pragma link C++ class I3MCParticleData::iterator+;
+#pragma link C++ typedef MapPointainerPolicy<I3MCParticleEventPtr>::ThePolicy;
+#pragma link C++ class MapPointainerPolicy<I3MCParticleEventPtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3MCParticleData::iterator&, const I3MCParticleData::iterator&);
+#pragma link C++ typedef I3MCParticleDataPtr;
 
 #pragma link C++ typedef TObjectPtr;
 #pragma link C++ class I3Bag+;
@@ -232,8 +240,8 @@
 #pragma link C++ typedef I3MCHitPtr;
 #pragma link C++ class I3MCOMResponse+;
 #pragma link C++ class I3MCPMTResponse+;
-#pragma link C++ class I3MCTrackEvent+;
-#pragma link C++ typedef I3MCTrackEventPtr;
+#pragma link C++ class I3MCParticleEvent+;
+#pragma link C++ typedef I3MCParticleEventPtr;
 #pragma link C++ class I3Monitoring+;
 #pragma link C++ typedef I3MonitoringPtr;
 #pragma link C++ class I3MonitoringHeader+;
