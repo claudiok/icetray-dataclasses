@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAmanda.h,v 1.7 2004/03/03 15:37:01 troy Exp $
+ * $Id: I3OMGeoAmanda.h,v 1.8 2004/03/04 16:45:56 troy Exp $
  *
  * This is the AMANDA specialization of the standard optical module 
  * geometry.  Stuff that an AMANDA OM had that an IceCube DOM doesn't
  *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/03/03 15:37:01 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/03/04 16:45:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -49,7 +49,7 @@ class I3OMGeoAmanda : public I3OMGeo
   }
 
   // for testing
-  virtual std::string iam() { return "OMGeoAmanda"; }
+  virtual std::string iam() { return "I3OMGeoAmanda"; }
 
  private:
 

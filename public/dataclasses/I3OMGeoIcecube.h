@@ -8,13 +8,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIcecube.h,v 1.6 2004/03/03 15:37:01 troy Exp $
+ * $Id: I3OMGeoIcecube.h,v 1.7 2004/03/04 16:45:56 troy Exp $
  *
  * This is the IceCube specialization of the OMGeometry.  The stuff that 
  * an IceCube DOM has that an AMANDA OM doesn't
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/03/03 15:37:01 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/03/04 16:45:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -50,7 +50,7 @@ class I3OMGeoIcecube : public I3OMGeo
   }
 
   // for testing
-  virtual std::string iam() { return "OMGeoIcecube"; }
+  virtual std::string iam() { return "I3OMGeoIcecube"; }
 
  private:
 

@@ -1,28 +1,31 @@
-#ifndef I3GEOMETRY_H
-#define I3GEOMETRY_H
-
-#include "StoragePolicy.h"
-#include "I3InIceGeometry.h"
-#include "I3TopGeometry.h"
 /**
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.16 2004/02/26 19:58:26 pretz Exp $
+ * $Id: I3Geometry.h,v 1.17 2004/03/04 16:45:56 troy Exp $
  *
  * The Geometry information for the IceCube detector.  There's the InIce
  * portion and the IceTop portion.  It is expected that AMANDA tubes
  * will be incorporated as additional kinds of InIce tubes.
  *
- * @version $Revision: 1.16 $
- * @date $Date: 2004/02/26 19:58:26 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/03/04 16:45:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
  * @todo should the copy and assignment be private?
  */
-class I3Geometry : public TObject{
+
+#ifndef I3GEOMETRY_H
+#define I3GEOMETRY_H
+
+#include "StoragePolicy.h"
+#include "I3InIceGeometry.h"
+#include "I3TopGeometry.h"
+
+class I3Geometry : public TObject 
+{
   I3InIceGeometry fInIce; //||;
   I3TopGeometry fTop; //||
  public:

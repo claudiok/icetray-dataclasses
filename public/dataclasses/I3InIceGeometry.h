@@ -2,18 +2,25 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.5 2004/03/01 20:19:49 pretz Exp $
+ * $Id: I3InIceGeometry.h,v 1.6 2004/03/04 16:45:56 troy Exp $
  *
  * Right now just a containter for IceCube and Amanda OMGeos. This is the
  * the 'frozen-in-ice' information, as opposed to the stuff that changes.
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/03/01 20:19:49 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/03/04 16:45:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo should the copy and assignment be private?
+ * @todo should the copy and assignment be private?  
+ *
+ * @todo TDS: should contain two vectors, one by geonumber and one
+ * with the current indexing scheme, whatever that is.  HasOMGeoNumber
+ * and FindOmGeo both do the same thing (linear time search).  Lots of
+ * wasted processing here.  Fatal error on "geo not found" makes no
+ * sense.
+ *
  */
 
 
