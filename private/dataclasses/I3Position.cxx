@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.4 2004/06/30 17:20:25 pretz Exp $
+// $Id: I3Position.cxx,v 1.5 2004/08/06 16:21:14 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -20,7 +20,7 @@ I3Position::I3Position()
 I3Position::I3Position(Double_t x, Double_t y, Double_t z, RefFrame f)
 {
 // Creation of an I3Position object and initialization of parameters
-  SetPosition(x,y,z,car);
+  SetPosition(x,y,z,f);
 }
 
 //-----------------------------------------------------------
