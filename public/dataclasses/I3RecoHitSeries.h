@@ -10,6 +10,8 @@ class I3RecoHitSeries : public I3HitSeries
 
   public:
   I3RecoHitSeries();
+  I3RecoHitSeries(const I3RecoHitSeries&);
+  I3RecoHitSeries& operator=(const I3RecoHitSeries&);
 
   float GetConfidence() const;
   void  SetConfidence(float confidence_);

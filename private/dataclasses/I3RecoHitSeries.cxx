@@ -6,6 +6,33 @@ ClassImp(I3RecoHitSeries);
   
 I3RecoHitSeries::I3RecoHitSeries() {confidence=0;}
 
+I3RecoHitSeries::I3RecoHitSeries(const I3RecoHitSeries& h)
+{
+  hit=NULL;
+  int n=h.GetNumberHits();
+  if(n>0)
+  {
+    hit=new TObjArray(n);
+    for(int i=0; i<n; i++) hit->Add(new I3RecoHit(h.GetHit(i)));
+  }
+  confidence=h.confidence;
+}
+
+I3RecoHitSeries& I3RecoHitSeries::operator=(const I3RecoHitSeries& h)
+{
+  if(this==&h) return(*this);
+  if(hit) {hit->Delete(); delete hit;}
+  hit=NULL;
+  int n=h.GetNumberHits();
+  if(n>0)
+  {
+    hit=new TObjArray(n);
+    for(int i=0; i<n; i++) hit->Add(new I3RecoHit(h.GetHit(i)));
+  }
+  confidence=h.confidence;
+  return(*this);
+}
+
 float I3RecoHitSeries::GetConfidence() const            {return(confidence);}
 void  I3RecoHitSeries::SetConfidence(float confidence_) {confidence=confidence_;}
 

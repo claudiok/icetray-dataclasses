@@ -6,6 +6,33 @@ ClassImp(I3MCHitSeries);
   
 I3MCHitSeries::I3MCHitSeries() {weight=0;}
 
+I3MCHitSeries::I3MCHitSeries(const I3MCHitSeries& h)
+{
+  hit=NULL;
+  int n=h.GetNumberHits();
+  if(n>0)
+  {
+    hit=new TObjArray(n);
+    for(int i=0; i<n; i++) hit->Add(new I3MCHit(h.GetHit(i)));
+  }
+  weight=h.weight;
+}
+
+I3MCHitSeries& I3MCHitSeries::operator=(const I3MCHitSeries& h)
+{
+  if(this==&h) return(*this);
+  if(hit) {hit->Delete(); delete hit;}
+  hit=NULL;
+  int n=h.GetNumberHits();
+  if(n>0)
+  {
+    hit=new TObjArray(n);
+    for(int i=0; i<n; i++) hit->Add(new I3MCHit(h.GetHit(i)));
+  }
+  weight=h.weight;
+  return(*this);
+}
+
 float I3MCHitSeries::GetWeight() const        {return(weight);}
 void  I3MCHitSeries::SetWeight(float weight_) {weight=weight_;}
 

@@ -10,17 +10,16 @@ class I3MCHitSeries : public I3HitSeries
 
   public:
   I3MCHitSeries();
+  I3MCHitSeries(const I3MCHitSeries&);
+  I3MCHitSeries& operator=(const I3MCHitSeries&);
 
   float GetWeight() const;
-
   void  SetWeight(float weight_);
 
   const I3MCHit& GetHit(unsigned short number) const;
-
   void AddHit(I3MCHit* hit_);
 
   I3Iterator<const I3MCHit>* MakeMCHitIterator() const;
-
 
   ClassDef(I3MCHitSeries, 1);
 };

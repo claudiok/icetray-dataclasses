@@ -14,10 +14,13 @@ class I3HitSeries : public TObject
  public:
   I3HitSeries();
   virtual ~I3HitSeries();
+  I3HitSeries(const I3HitSeries&);
+  I3HitSeries& operator=(const I3HitSeries&);
   
   int GetNumberHits() const;
   virtual const I3Hit& GetHit(unsigned short number) const;
   virtual void AddHit(I3Hit* hit_);
+  
   virtual I3Iterator<const I3Hit>* MakeHitIterator();
   
   ClassDef(I3HitSeries, 1);

@@ -9,11 +9,36 @@ ClassImp(I3RecoHitSeriesData);
 I3RecoHitSeriesData::I3RecoHitSeriesData()  {recohitseries=NULL;}
 I3RecoHitSeriesData::~I3RecoHitSeriesData() {if (recohitseries)  {recohitseries->Delete();  delete recohitseries;} }
 
+I3RecoHitSeriesData::I3RecoHitSeriesData(const I3RecoHitSeriesData& h)
+{
+  recohitseries=NULL;
+  int n=h.GetNumberRecoHitSeries();
+  if(n>0)
+  {
+    recohitseries=new TObjArray(n);
+    for(int i=0; i<n; i++) recohitseries->Add(new I3RecoHitSeries(h.GetRecoHitSeries(i)));
+  }
+}
+
+I3RecoHitSeriesData& I3RecoHitSeriesData::operator=(const I3RecoHitSeriesData& h)
+{
+  if(this==&h) return(*this);
+  if(recohitseries) {recohitseries->Delete(); delete recohitseries;}
+  recohitseries=NULL;
+  int n=h.GetNumberRecoHitSeries();
+  if(n>0)
+  {
+    recohitseries=new TObjArray(n);
+    for(int i=0; i<n; i++) recohitseries->Add(new I3RecoHitSeries(h.GetRecoHitSeries(i)));
+  }
+  return(*this);
+}
+
 int I3RecoHitSeriesData::GetNumberRecoHitSeries() const                    
 {
   return((recohitseries==NULL) ? 0 : recohitseries->GetEntriesFast());
 }
-const I3RecoHitSeries& I3RecoHitSeriesData::GetRecoHitSeriesData(unsigned short number) const 
+const I3RecoHitSeries& I3RecoHitSeriesData::GetRecoHitSeries(unsigned short number) const 
 {
   if(GetNumberRecoHitSeries()>number) return (*(I3RecoHitSeries*)recohitseries->At(number));
   I3DataExecution::Instance().Fatal("I3RecoHitSeriesData::GetRecoHitSeriesData() asked for an index out of bounds");

@@ -15,6 +15,31 @@ I3HitSeries::~I3HitSeries()
   if(hit) {hit->Delete();  delete hit;} 
 }
 
+I3HitSeries::I3HitSeries(const I3HitSeries& h)
+{
+  hit=NULL;
+  int n=h.GetNumberHits();
+  if(n>0)
+  {
+    hit=new TObjArray(n);
+    for(int i=0; i<n; i++) hit->Add(new I3Hit(h.GetHit(i)));
+  }
+}
+
+I3HitSeries& I3HitSeries::operator=(const I3HitSeries& h)
+{
+  if(this==&h) return(*this);
+  if(hit) {hit->Delete(); delete hit;}
+  hit=NULL;
+  int n=h.GetNumberHits();
+  if(n>0)
+  {
+    hit=new TObjArray(n);
+    for(int i=0; i<n; i++) hit->Add(new I3Hit(h.GetHit(i)));
+  }
+  return(*this);
+}
+
 int I3HitSeries::GetNumberHits() const
 {
   return((hit==NULL) ? 0 : hit->GetEntriesFast());
