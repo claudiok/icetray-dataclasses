@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3OMStatus.h,v 1.4 2004/07/30 15:08:55 pretz Exp $
  *
  * @file I3OMStatus.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/07/30 15:08:55 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -26,7 +26,6 @@
  */
 class I3OMStatus : public TObject
 {
-  UShort_t fOMNumber;
   Float_t fPMTHighVoltage;
 
   public:
@@ -51,20 +50,9 @@ class I3OMStatus : public TObject
   const I3OMStatus& operator=(const I3OMStatus& rhs){
     if(this == &rhs) return *this;
     TObject::operator=(rhs);
-    fOMNumber = rhs.fOMNumber;
     fPMTHighVoltage = rhs.fPMTHighVoltage;
     return *this;
   }
-
-  /**
-   * @return the number of the OM that this is the status for
-   */
-  UShort_t GetOMNumber() const {return fOMNumber;}
-
-  /**
-   * @param omnumber the new number for the om
-   */
-  void SetOMNumber(UShort_t omnumber) {fOMNumber = omnumber;}
 
   /**
    * @return the high voltage setting of the PMT
