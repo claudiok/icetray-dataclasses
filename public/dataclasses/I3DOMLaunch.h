@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.9 2005/02/07 17:55:13 pretz Exp $
+ * $Id: I3DOMLaunch.h,v 1.10 2005/03/30 21:08:29 tmccauley Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/02/07 17:55:13 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/03/30 21:08:29 $
  * @author klein
  * @author blaufuss
  *
@@ -15,6 +15,7 @@
 
 //#include "StoragePolicy.h"
 #include "dataclasses/I3DigitalLaunch.h"
+#include "dataclasses/I3DataExecution.h"
 
 using namespace std; 
 /**
@@ -127,7 +128,6 @@ class I3DOMLaunch : public I3DigitalLaunch
   ATWDselect GetWhichATWD() const {return fWhichATWD;}
   void SetWhichATWD(ATWDselect WhichATWD) {fWhichATWD = WhichATWD;}
 
-
   /**
    * return ATWD 0 waveform as a read-only object
    */
@@ -149,6 +149,38 @@ class I3DOMLaunch : public I3DigitalLaunch
   const vector<Int_t>& GetATWD3() const {return fATWD3;}
 
   /**
+   * return ATWD by channel number
+   */
+    const vector<Int_t>& GetATWD(Int_t channel) const
+	{
+	    if ( channel == 0 )
+	    {
+		return fATWD0;
+	    }
+	    
+	    else if ( channel == 1 )
+	    {
+		return fATWD1;
+	    }
+	    
+	    else if ( channel == 2 )
+	    {
+		return fATWD2;
+	    }
+	    
+	    else if ( channel == 3 )
+	    {
+		return fATWD3;
+	    }
+	    
+	    else
+	    {
+		I3DataExecution::Instance().Fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
+	    }
+	}
+    
+    
+  /**
    * return FADC waveform as a read-only object
    */
   const vector<Int_t>& GetFADC() const {return fFADC;}
@@ -159,7 +191,7 @@ class I3DOMLaunch : public I3DigitalLaunch
   const vector<Double_t>& GetCombinedATWD() const
 	{
 	    return fCombinedATWD;
-	};
+	}
     
   /**
    * sets the ATWD0 waveform
@@ -180,6 +212,41 @@ class I3DOMLaunch : public I3DigitalLaunch
   * sets the ATWD2 waveform
   */
  void SetATWD3(const vector<Int_t>& ATWD3data) {fATWD3=ATWD3data;}
+
+  /** 
+   * set ATWD by channel number
+   */
+    void SetATWD(Int_t channel, const vector<Int_t>& ATWDdata)
+	{
+	    if ( channel == 0 )
+	    {
+		fATWD0 = ATWDdata;
+		return;
+	    }
+	    
+	    else if ( channel == 1 )
+	    {
+		fATWD1 = ATWDdata;
+		return;
+	    }
+	    
+	    else if ( channel == 2 )
+	    {
+		fATWD2 = ATWDdata;
+		return;
+	    }
+	    
+	    else if ( channel == 3 )
+	    {
+		fATWD3 = ATWDdata;
+		return;
+	    }
+	    
+	    else 
+	    {
+		I3DataExecution::Instance().Fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
+	    }
+	}    
 
  /**
   * sets the FADC waveform
