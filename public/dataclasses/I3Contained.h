@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.19 2004/10/20 14:57:41 dule Exp $
+ * $Id: I3Contained.h,v 1.20 2004/10/26 04:00:58 dule Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.19 $
- * @date $Date: 2004/10/20 14:57:41 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/10/26 04:00:58 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -204,7 +204,7 @@ class I3Contained
        <<"StartPosition:\n"<<fStartPos
        <<"StopPosition:\n"<<GetStopPos()
        <<"Direction:\n"<<fDir
-       <<"StartTime: "<<fStartT
+       <<"StartTime: "<<fStartT<<"\n"
        <<"StopTime: "<<GetStopT()<<"\n";
     }
 
