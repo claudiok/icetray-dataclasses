@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Cascade.h,v 1.5 2004/05/05 15:20:48 pretz Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/05/05 15:20:48 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -90,5 +90,6 @@ class I3Cascade : public I3ObservableParticle{
   ClassDef(I3Cascade,1);
 };
 
+typedef PtrPolicy<I3Cascade>::ThePolicy I3CascadePtr;
 
 #endif

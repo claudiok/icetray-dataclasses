@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.14 2004/04/28 18:14:29 pretz Exp $
+ * $Id: I3Track.h,v 1.15 2004/05/05 15:20:48 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/04/28 18:14:29 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/05/05 15:20:48 $
  * @author pretz
  */
 
@@ -16,6 +16,7 @@
 #include <TObject.h>
 #include "dataclasses/I3ObservableParticle.h"
 #include "dataclasses/I3Position.h"
+#include "dataclasses/StoragePolicy.h"
 #include <vector>
 #include <cmath>
 
@@ -277,5 +278,9 @@ operator!= (const I3Track& lhs, const I3Track& rhs)
 {
   return !(lhs==rhs);
 }
+
+
+
+typedef PtrPolicy<I3Track>::ThePolicy I3TrackPtr;
 
 #endif

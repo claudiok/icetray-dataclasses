@@ -29,7 +29,7 @@
 #pragma link C++ class I3BasicMuon+;
 #pragma link C++ class I3DecayingMuon+;
 #pragma link C++ class I3DoubleBang+;
-#pragma link C++ class I3MCMuon+;
+#pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3Lollipop+;
 #pragma link C++ class I3MuonBundle+;
 #pragma link C++ class I3EnergyMuon+;
@@ -202,6 +202,7 @@
 #pragma link C++ class I3Atmosphere+;
 #pragma link C++ typedef I3AtmospherePtr;
 #pragma link C++ class I3Cascade+;
+#pragma link C++ typedef I3CascadePtr;
 #pragma link C++ class I3Contained+;
 #pragma link C++ class I3Composite+;
 #pragma link C++ class I3CoreLocalized+;
@@ -298,12 +299,14 @@
 #pragma link C++ class I3TankGeo+;
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
+#pragma link C++ typedef I3TrackPtr;
 #pragma link C++ class I3TriggerData+;
 #pragma link C++ typedef I3TriggerDataPtr;
 
 #pragma link C++ class AmandaExtractor+;
+#pragma link C++ class I3TrackExtractor+;
+#pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAmandaPtr>+;
-
 
 
 #endif
