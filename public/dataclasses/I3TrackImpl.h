@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3TrackImpl.h,v 1.6 2004/06/09 21:56:34 dule Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/06/09 21:56:34 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -134,7 +134,7 @@ class I3TrackImpl : public I3Track,
    */
   virtual I3Position StartPos() const 
     {
-      return I3Position(StartX(),StartY(),StartZ());
+      return GeometricalType::StartPos();
     }
 
   /**
@@ -166,7 +166,7 @@ class I3TrackImpl : public I3Track,
    */
   virtual I3Position StopPos() const 
     {
-      return I3Position(StopX(),StopY(),StopZ());
+      return GeometricalType::StopPos();;
     }
 
   /**
@@ -198,8 +198,9 @@ class I3TrackImpl : public I3Track,
    */
   virtual I3Position Pos() const 
     {
-      return I3Position(X(),Y(),Z());
+      return GeometricalType::Pos();
     }
+  using GeometricalType::Pos;
 
 
   /**
@@ -247,7 +248,7 @@ class I3TrackImpl : public I3Track,
       EnergeticType::CopyTo(destination);
       CompositeType::CopyTo(destination);
     }
-  
+
  protected:
 
   // ROOT macro

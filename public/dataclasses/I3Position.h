@@ -1,78 +1,150 @@
-/**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3Position.h,v 1.3 2004/04/27 13:35:23 pretz Exp $
- *
- * @file I3Position.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 13:35:23 $
- * @author pretz
- *
- */
 #ifndef I3POSITION_H
 #define I3POSITION_H
+/* Copyright(c) 1998-1999, ALICE Experiment at CERN, All rights reserved.
+ * See cxx source for full Copyright notice                            */
+
+// $Id: I3Position.h,v 1.4 2004/06/09 21:56:34 dule Exp $
+
+#include <math.h>
+using namespace std;
 
 #include "TObject.h"
-/**
- * @brief A basic position class.  Just getters and setters for x,y,z.   
- * @todo implement other coordinate system getters.
- * @todo implement stuff like dot product etc
- * @todo can probably get some lessons from AliPosition
- *
- */
-class I3Position : public TObject
+#include "TVector3.h"
+
+class I3Position : public TVector3
 {
- private:
-  Double_t fX;
-  Double_t fY;
-  Double_t fZ;
  public:
-  /**
-   * constructor
-   */
-  I3Position() : fX(0),fY(0),fZ(0){}
+
+  enum RefFrame { car, sph, cyl }; // possible reference frames
+
+  static Double_t pi() { return 3.14159265358979323846; } // define PI
 
   /**
-   * constructor
-   * @param x the initial x position
-   * @paray y the initial y position
-   * @param z the initial z position
+   * Default constructor
    */
-  I3Position(Double_t x,Double_t y,Double_t z) :fX(x),fY(y),fZ(z){}
+  I3Position(); // ok
 
   /**
-   * gets the x value
+   * Additional constructor
    */
-  Double_t X() {return fX;}
+  I3Position(Double_t x, Double_t y, Double_t z); // ok
 
   /**
-   * sets the x value
+   * Destructor
    */
-  void X(Double_t x) {fX = x;}
+  virtual ~I3Position(); // ok
 
   /**
-   * gets the Y value
+   * Copy constructor
    */
-  Double_t Y() {return fY;}
+  I3Position(const I3Position& p); // ????
+
 
   /**
-   * sets the y value
+   * Store position r in ref frame f
    */
-  void Y(Double_t y) {fY = y;}
+  virtual void SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame f); // ok
 
   /**
-   * gets the Z value
+   * Provide position r in ref frame f
    */
-  Double_t Z() {return fZ;}
+  virtual void GetPosition(Double_t& r1, Double_t& r2, Double_t& r3, RefFrame f); // ok
 
   /**
-   * sets the z value
+   * Provide R of position in spherical ref frame
    */
-  void Z(Double_t z) {fZ = z;}
+  Double_t R() {return fR;}
+
+  /**
+   * Provide Theta of position in spherical ref frame
+   */
+  Double_t Theta() {return fTheta;}
+
+  /**
+   * Provide Phi of position in spherical or cylindrical ref frame
+   */
+  Double_t Phi() {return fPhi;}
+
+  /**
+   * Provide Rho of position in cylindrical ref frame
+   */
+  Double_t Rho() {return fRho;}
+
+  /**
+   * Reset position to 0
+   */
+  void ResetPosition(); // ok
+
+  /**
+   * Save position to disk (only save x,y,z)
+   */
+  void SavePosition(Double_t& x, Double_t& y, Double_t& z); // ok
+
+  /**
+   * Store position p
+   */
+  virtual void SetPosition(TVector3& p); // ok
+
+  /**
+   * Provide position
+   */
+  I3Position& GetPosition(); // ok
+
+
+  /**
+   * Provide distance to position p
+   */
+  Double_t CalcDistance(const I3Position& p) const;
+
+
+  /**
+   * Set unit scale (w.r.t. m) for the position coordinates (cm=0.01)
+   */
+  void SetUnitScale(Float_t s);
+
+  /**
+   * Provide unit scale (w.r.t. m) for the position coordinates (cm=0.01)
+   */
+  Float_t GetUnitScale() const;
+
+
+  /**
+   * Store position r in ref frame f
+   */
+  virtual void SetPositionErr(Double_t r1, Double_t r2, Double_t r3, RefFrame f); // ????
+
+  /**
+   * Provide position r in ref frame f
+   */
+  virtual void GetPositionErr(Double_t& r1, Double_t& r2, Double_t& r3, RefFrame f); // ????
+
+  /**
+   * Translate position by position p (i.e. 'this' - 'p')
+   */
+  void Translate(const I3Position& p);
+
+  /**
+   * Print out all information about the I3Position
+   */
+  void PrintPosition();
+  
+
+ protected:
+  // The unit scale used for the position coordinates
+  Float_t fScale;
+
+  // Position coordinates in different reference frames
+  Double_t fR, fTheta, fPhi;  // spherical (sph)
+  Double_t fRho;              // cylindrical (cyl) - Z and Phi are same.
+  Bool_t IsCalculated;        // Did we calculat the positions before?
+
 
  private:
-  // ROOT macro
-  ClassDef(I3Position,1);
-};
+  void CalcSphCylFromCar(); // ok
+  void CalcCarCylFromSph(); // ok
+  void CalcCarSphFromCyl(); // ok
 
-#endif // I3POSITION
+  // ROOT macro
+  ClassDef(I3Position,1)
+};
+#endif

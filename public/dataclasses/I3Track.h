@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.15 2004/05/05 15:20:48 pretz Exp $
+ * $Id: I3Track.h,v 1.16 2004/06/09 21:56:34 dule Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/05/05 15:20:48 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/06/09 21:56:34 $
  * @author pretz
  */
 
@@ -187,6 +187,11 @@ class I3Track : public I3ObservableParticle
   virtual int NumConstituents() const =0;
 
   /**
+   * Print all information about the I3track
+   */
+  void PrintTrack();
+
+  /**
    * the ith particle making up this composite track
    */
   virtual const I3Particle& Constituent(int i) const =0;
@@ -214,13 +219,13 @@ class I3Track : public I3ObservableParticle
    * returns the point on the track that is closest to the indicated point
    * @todo implement this method
    */
-  I3Position ClosestApproach(I3Position pos);
+/*   I3Position ClosestApproach(I3Position pos); */
 
   /**
    * Gives the distance of the given point from the track
    * @todo implement this method
    */
-  Double_t DistanceFromTrack(I3Position);
+/*   Double_t DistanceFromTrack(I3Position); */
 
   /**
    * Gives the position (on the line of the track) that is the given
@@ -230,14 +235,14 @@ class I3Track : public I3ObservableParticle
    * position, I think -JP
    * @todo implement this method
    */
-  I3Position ShiftAlongTrack(I3Position Start, Double_t distance);
+/*   virtual I3Position ShiftAlongTrack(Double_t dist); */
 
   /**
    * Indicates whether or not the indicated position lies on the track
    * @todo shouldn't there be a 'tolerance' or 'radius of tolerance' parameter?
    * @todo implement this method
    */
-  Bool_t IsOnTrack(I3Position);
+/*   Bool_t IsOnTrack(I3Position); */
 
 
   //I3Track& operator=(const I3Track&);

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Infinite.h,v 1.5 2004/06/09 21:56:34 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/06/09 21:56:34 $
  * @author 
  */
 
@@ -22,9 +22,10 @@
  */
 class I3Infinite{
  private:
-  Double_t fX;
-  Double_t fY;
-  Double_t fZ;
+/*   Double_t fX; */
+/*   Double_t fY; */
+/*   Double_t fZ; */
+  I3Position fPos;
   Double_t fT;
   Double_t fZenith;
   Double_t fAzimuth;
@@ -61,7 +62,7 @@ class I3Infinite{
       NanPolicy::Fatal();
       return NAN;
     }
-  
+
   /**
    * should not be used.  Calls Fatal().
    */
@@ -81,34 +82,44 @@ class I3Infinite{
     }
 
   /**
+   * should not be used.  Calls Fatal().
+   */
+  I3Position StartPos() const 
+    {
+      NanPolicy::Fatal();
+      I3Position p(999,999,999);
+      return p;
+    }
+
+  /**
    * gives an x position of the track
    */
-  Double_t X() const {return fX;}
+  Double_t X() const {return fPos.X();}
+
+  /**
+   * gives an y position of the track
+   */
+  Double_t Y() const {return fPos.Y();}
+
+  /**
+   * gives an z position of the track
+   */
+  Double_t Z() const {return fPos.Z();}
 
   /**
    * sets an x position for the track
    */
-  void X(Double_t x) {fX = x;}
+  void X(Double_t x) {fPos.SetX(x);}
 
   /**
-   * returns a y position of the track
+   * sets an y position for the track
    */
-  Double_t Y() const {return fY;}
+  void Y(Double_t y) {fPos.SetY(y);}
 
   /**
-   * sets a y position of the track
+   * sets an z position for the track
    */
-  void Y(Double_t y) {fY = y;}
-
-  /**
-   * gets a z position along the track.
-   */
-  Double_t Z() const {return fZ;}
-
-  /**
-   * sets a z position along the track
-   */
-  void Z(Double_t z){fZ = z;}
+  void Z(Double_t z){fPos.SetZ(z);}
 
   /**
    * the time the track was at X(), Y(), and Z()
@@ -121,19 +132,36 @@ class I3Infinite{
   void T(Double_t t){fT = t;}
 
   /**
+   * gets a position along the track.
+   */
+  I3Position Pos() const {return fPos;}
+
+  /**
+   * sets a position along the track.
+   */
+  void Pos(I3Position& p) {fPos = p;}
+
+  /**
+   * sets a position along the track in any reference frame.
+   */
+  void Pos(Double_t p1, Double_t p2, Double_t p3, 
+		I3Position::RefFrame frame)
+    {fPos.SetPosition(p1,p2,p3,frame);}
+
+  /**
    * gets the zenith of the track
    */
   Double_t Zenith() const {return fZenith;}
 
   /**
-   * sets the zenith of the track
-   */
-  void Zenith(Double_t zenith) {fZenith = zenith;}
-
-  /**
    * gets the azimuth of the track
    */
   Double_t Azimuth() const {return fAzimuth;}
+
+  /**
+   * sets the zenith of the track
+   */
+  void Zenith(Double_t zenith) {fZenith = zenith;}
 
   /**
    * sets the azimuth of the track
@@ -182,6 +210,16 @@ class I3Infinite{
     }
 
   /**
+   * should not be used.  Calls Fatal().
+   */
+  I3Position StopPos() const 
+    {
+      NanPolicy::Fatal();
+      I3Position p(999,999,999);
+      return p;
+    }
+
+  /**
    * returns the speed of light
    */
   Double_t Speed() const {return 300000000 * I3Units::m / I3Units::s;}
@@ -194,9 +232,7 @@ class I3Infinite{
     {
       I3Infinite* infinite = dynamic_cast<I3Infinite*>(&destination);
       if(infinite){
-	infinite->fX = fX;
-	infinite->fY = fY;
-	infinite->fZ = fZ;
+	infinite->fPos = fPos;
 	infinite->fZenith = fZenith;
 	infinite->fAzimuth = fAzimuth;
       }
