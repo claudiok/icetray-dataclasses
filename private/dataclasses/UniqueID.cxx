@@ -116,20 +116,18 @@ Int_t UniqueID::ID(I3RecoResultDictPtr obj, IDOption option)
 
 Int_t UniqueID::ID(I3RecoResultPtr obj, IDOption option)
 {
-#if 0
   Int_t highestID=0;
   
   if(obj->InheritsFrom("I3RecoResultMultiTracks"))
   {
-    Int_t nparticle=dynamic_pointer(*(I3RecoResultMultiTracks*)obj).size();
+    Int_t nparticle=roost::dynamic_pointer_cast<I3RecoResultMultiTracks>(obj)->size();
     for(Int_t j=0; j<nparticle; j++)
-      ParticleID( (*(I3RecoResultMultiTracks*)obj)[j], option, highestID);
+      ParticleID( (*roost::dynamic_pointer_cast<I3RecoResultMultiTracks>(obj))[j], option, highestID);
   }
   if(obj->InheritsFrom("I3RecoResultSingleTrack"))
-    ParticleID( (*(I3RecoResultSingleTrack*)obj).GetTrack(), option, highestID);
+    ParticleID( roost::dynamic_pointer_cast<I3RecoResultSingleTrack>(obj)->GetTrack(), option, highestID);
   
   return(highestID+1);
-#endif
 }
 
 Int_t UniqueID::ID(I3ParticlePtr obj, IDOption option)
