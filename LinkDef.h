@@ -87,6 +87,12 @@
 #pragma link C++ class MapPolicy<I3MCTrackList>::ThePolicy+;
 #pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
 
+#pragma link C++ class I3Bag+;
+#pragma link C++ class I3Bag::iterator+;
+#pragma link C++ typedef MapPolicy<TObjectPtr>::ThePolicy;
+#pragma link C++ class MapPolicy<TObjectPtr>::ThePolicy+;
+#pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
+
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
 #pragma link C++ typedef VectorPolicy<I3OMResponse>::ThePolicy;
@@ -116,9 +122,9 @@
 //
 // simple types with full value semantics
 //
+#pragma link C++ typedef TObjectPtr;
 
 #pragma link C++ class I3Analog+;
-#pragma link C++ class I3Bag+;
 #pragma link C++ class I3DataExecution+;
 #pragma link C++ class I3DataHeader+;
 #pragma link C++ class I3DataReadout+;
