@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3Lollipop.h,v 1.1.2.1 2004/04/20 13:38:59 pretz Exp $
+    $Id: I3Lollipop.h,v 1.1.2.2 2004/04/20 16:01:09 pretz Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/20 13:38:59 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/20 16:01:09 $
     @author deyoung
 
     @todo
@@ -13,6 +13,7 @@
     bang events).
 
 */
+
 
 #include "I3TrackImpl.h"
 #include "I3Identifiable.h"
