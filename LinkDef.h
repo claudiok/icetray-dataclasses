@@ -181,6 +181,8 @@
 #pragma link C++ typedef I3HitPtr;
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitPtr;
+#pragma link C++ class I3MCOMResponse+;
+#pragma link C++ class I3MCPMTResponse+;
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3MCTrackEvent+;
 #pragma link C++ typedef I3MCTrackEventPtr;

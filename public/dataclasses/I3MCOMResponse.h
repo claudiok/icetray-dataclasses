@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.1 2004/04/21 18:48:25 spencer Exp $
+    $Id: I3MCOMResponse.h,v 1.2 2004/04/22 15:51:25 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/04/21 18:48:25 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/04/22 15:51:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,6 +18,7 @@
 
 #include "I3MCHitSeries.h"
 #include "I3MCPMTResponse.h"
+#include "I3OMResponse.h"
 
 /**
  * This contains all of the Monte Carlo OM Response information:
@@ -37,17 +38,17 @@ class I3MCOMResponse : public I3OMResponse
   /**
    * constructor
    */
-  I3MCOMResponse()
+  I3MCOMResponse(){}
   
   /**
    * destructor
    */
-    virtual ~I3MCOMResponse()
+    virtual ~I3MCOMResponse(){}
   
   /**
    * @return the PMTResponse as a const object
    */
-    const I3MCPMTResponse & const {return fMCPMTReponse;}
+    const I3MCPMTResponse& MCMPTResponse() const {return fMCPMTResponse;}
   
   /**
    * @return the MCTruth for this response as a const object

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.21 2004/04/21 18:47:44 spencer Exp $
+    $Id: I3OMResponse.h,v 1.22 2004/04/22 15:51:25 pretz Exp $
 
-    @version $Revision: 1.21 $
-    @date $Date: 2004/04/21 18:47:44 $
+    @version $Revision: 1.22 $
+    @date $Date: 2004/04/22 15:51:25 $
     @author
 
     @todo
@@ -20,17 +20,18 @@
 #include "I3OMGeo.h"
 #include "I3DataReadoutList.h"
 #include "I3RecoHitSeriesData.h"
+#include "I3MCHitSeries.h"
 
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.21 2004/04/21 18:47:44 spencer Exp $
+ * $Id: I3OMResponse.h,v 1.22 2004/04/22 15:51:25 pretz Exp $
  *
  * The container for all the OMResponse-related data in the event
  * Has the hardware response, and the reconstructed hit series'.    
  * The Monte Carlo information is now in I3MCOMResponse.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/04/21 18:47:44 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2004/04/22 15:51:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -48,6 +49,7 @@ class I3OMResponse : public TObject
   // let us all hate root together for a moment
   I3MCHitSeries       fMCHitSeries; //||
   I3DataReadoutList   fDataReadoutList; //||
+  I3RecoHitSeriesData fRecoHitSeriesData; //||
 
  public:
   /**
