@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.6 2004/08/13 18:04:20 dule Exp $
+// $Id: I3Position.cxx,v 1.7 2004/08/13 20:28:01 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -20,7 +20,6 @@ I3Position::I3Position()
 I3Position::I3Position(Double_t x, Double_t y, Double_t z, RefFrame f)
 {
 // Creation of an I3Position object and initialization of parameters
-  IsCalculated=kFALSE;
   SetPosition(x,y,z,f);
 }
 
@@ -34,7 +33,6 @@ I3Position::~I3Position()
 I3Position::I3Position(const I3Position& p)
 {
 // Copy constructor
-  IsCalculated=kFALSE;
   SetPosition(p.GetX(), p.GetY(), p.GetZ(), car);
 }
 
@@ -51,6 +49,7 @@ void I3Position::SetPosition(const I3Position& p)
 void I3Position::SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame frame)
 {
 // Store position according to reference frame f
+  IsCalculated=kFALSE;
 
   switch (frame) {
   case car: // Input given in Cartesian coordinates
