@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.8.2.3 2005/02/04 21:51:03 troy Exp $
+    $Id: I3HitTest.cxx,v 1.1.2.1 2005/02/04 22:35:16 troy Exp $
 
-    @version $Revision: 1.8.2.3 $
-    @date $Date: 2005/02/04 21:51:03 $
+    @version $Revision: 1.1.2.1 $
+    @date $Date: 2005/02/04 22:35:16 $
     @author Troy D. Straszheim
 
 */
