@@ -8,13 +8,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackEvent.h,v 1.1 2004/03/09 17:54:24 pretz Exp $
+ * $Id: I3MCTrackEvent.h,v 1.2 2004/03/11 12:44:47 pretz Exp $
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/09 17:54:24 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/03/11 12:44:47 $
  * @author pretz
  *
- * @todo 
+ * @todo work out how the copy and assignment can be private.
  *
  */
 class I3MCTrackEvent : public TObject{
@@ -64,8 +64,8 @@ class I3MCTrackEvent : public TObject{
 
  private:
   // copy and assignment are private
-  I3MCTrackEvent(const I3MCTrackEvent&){}
-  const I3MCTrackEvent& operator=(const I3MCTrackEvent&);
+/*   I3MCTrackEvent(const I3MCTrackEvent&){} */
+/*   const I3MCTrackEvent& operator=(const I3MCTrackEvent&); */
 
   ClassDef(I3MCTrackEvent,1);
 };

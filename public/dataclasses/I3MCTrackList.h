@@ -4,17 +4,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackList.h,v 1.15 2004/03/10 19:17:52 pretz Exp $
+ * $Id: I3MCTrackList.h,v 1.16 2004/03/11 12:44:47 pretz Exp $
  *
  * A list of MCTracks.
  *
- * @version $Revision: 1.15 $
- * @date $Date: 2004/03/10 19:17:52 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2004/03/11 12:44:47 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo 
+ * @todo figure out how to make copy and assignment private
  *
  */
 
@@ -36,8 +36,8 @@ class I3MCTrackList : public TObject, public VectorPolicy<I3MCTrack>::ThePolicy
 
  private:
   // copy and assignment private
-  I3MCTrackList(const I3MCTrackList&); 
-  const I3MCTrackList& operator=(const I3MCTrackList&); 
+/*   I3MCTrackList(const I3MCTrackList&);  */
+/*   const I3MCTrackList& operator=(const I3MCTrackList&); */ 
 
   // ROOT macro
   ClassDef(I3MCTrackList,1);
