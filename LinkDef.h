@@ -126,8 +126,8 @@
 
 #pragma link C++ class I3MCTrackList+;
 #pragma link C++ class I3MCTrackList::iterator+;
-#pragma link C++ typedef VectorPolicy<I3MCTrack>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3MCTrack>::ThePolicy+;
+#pragma link C++ typedef VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3ObservableParticlePtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3MCTrackList::iterator&, const I3MCTrackList::iterator&);
 #pragma link C++ typedef I3MCTrackListPtr;
 
@@ -218,7 +218,6 @@
 #pragma link C++ typedef I3MCHitPtr;
 #pragma link C++ class I3MCOMResponse+;
 #pragma link C++ class I3MCPMTResponse+;
-#pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3MCTrackEvent+;
 #pragma link C++ typedef I3MCTrackEventPtr;
 #pragma link C++ class I3Monitoring+;
@@ -229,6 +228,7 @@
 #pragma link C++ class I3NonComposite+;
 #pragma link C++ class I3NonEnergetic+;
 #pragma link C++ class I3ObservableParticle+;
+#pragma link C++ typedef I3ObservableParticlePtr;
 #pragma link C++ class I3OMGeo+;
 
 #pragma link C++ class I3OMGeoAmanda+;

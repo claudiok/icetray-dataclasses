@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCCascade.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3MCCascade.h,v 1.4 2004/04/23 20:30:06 ehrlich Exp $
 
     @file I3MCCascade.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/23 20:30:06 $
     @author deyoung
 
     @todo
@@ -25,13 +25,19 @@
  * A cascade with full MC information.
  */
 class I3MCCascade : public I3CascadeImpl<I3Directional,
-	                                 I3Localized,
+                                         I3Localized,
                                          I3Energetic>
 {
-public:
-    I3MCCascade(){};
-    virtual ~I3MCCascade(){}
-    ClassDef(I3MCCascade,1);
+  Double_t     fWeight;
+  
+  public:
+  I3MCCascade() {fWeight=1;};
+  virtual ~I3MCCascade() {}
+  
+  Double_t Weight() const { return fWeight; }
+  void  Weight(Double_t weight_) { fWeight = weight_; }
+
+  ClassDef(I3MCCascade,1);
 };
 
 #endif

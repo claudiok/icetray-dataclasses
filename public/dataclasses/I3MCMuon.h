@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCMuon.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3MCMuon.h,v 1.4 2004/04/23 20:30:06 ehrlich Exp $
 
     @file I3MCMuon.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/23 20:30:06 $
     @author deyoung
 
     @todo
@@ -29,9 +29,15 @@ class I3MCMuon : public I3TrackImpl<I3Contained,
                                     I3Energetic,
                                     I3Composite>
 {
- public:
-  I3MCMuon(){};
+  Double_t     fWeight;
+  
+  public:
+  I3MCMuon() {fWeight=1;};
   virtual ~I3MCMuon(){}
+  
+  Double_t Weight() const { return fWeight; }
+  void  Weight(Double_t weight_) { fWeight = weight_; }
+  
   ClassDef(I3MCMuon,1);
 };
 

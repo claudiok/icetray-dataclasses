@@ -1,7 +1,6 @@
 #ifndef I3MCPRIMARY_H
 #define I3MCPRIMARY_H
 
-#include "dataclasses/I3MCTrack.h"
 #include "dataclasses/StoragePolicy.h"
 #include "I3PrimaryImpl.h"
 
@@ -12,10 +11,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPrimary.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3MCPrimary.h,v 1.3 2004/04/23 20:30:06 ehrlich Exp $
  *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/23 20:30:06 $
  * @author pretz
  *
  * @todo copy and assignment private??
