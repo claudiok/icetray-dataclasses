@@ -3,6 +3,7 @@
 
 #include <string>
 #include "TObject.h"
+#include <ostream>
 
 /**
  * @brief A class for dealing with global times.  
@@ -54,14 +55,12 @@ class I3Time : public TObject
       BadWeekday = 999
     };
 
+  /**
+   * @brief default constructor sets the time to year 0, daq UTC time 0.
+   * There's no 'nan' for unsigned and long long
+   */
   I3Time();
 	     
-/*   I3Time(int year,  */
-/* 	 long long int daqTime); */
-/*   I3Time(unsigned int julianDay, */
-/* 	 unsigned int sec,  */
-/* 	 double ns); */
-
   /**
    * @brief Sets the time in the 'daq' style where
    * @param year The year.  Something like 2005.
@@ -160,51 +159,48 @@ class I3Time : public TObject
   double GetUTCNanoSec() const;  
 
   /**
+   * @brief dumps this class to the given ostream
+   */
+  void ToStream(ostream& o) const
+    {
+      o<<"[ I3Time: Year:"<<year_
+       <<" DaqTime:"<<daqTime_<<"\n"
+       <<"Month: "<<MonthToString(GetUTCMonth())
+       <<" Day: "<<GetUTCDayOfMonth()<<"\n"
+       <<"ModJulianDay: "<<GetModJulianDay()
+       <<" ModJulianSec:"<<GetModJulianSec()<<" ]\n";
+    }
+
+  /**
    * Dumps a Month to a string for printing
    */
-  static std::string ToString(Month m);
+  static std::string MonthToString(Month m);
 
   /**
    * @brief dumps a Weekday to a string for printing.
    */
-  static std::string ToString(Weekday w);
+  static std::string WeekdayToString(Weekday w);
  private:
-  struct DaqTime
-  {
-    unsigned int year;
-    long long int time;
-  };
-
-  struct UTCTime
-  {
-    unsigned int year;
-    unsigned int sec;
-    double ns;
-  };
-
-  struct JulianTime
-  {
-    unsigned int day;
-    unsigned int sec;
-    double ns;
-  };
+  static double modjulianday(int year);
   
-  typedef JulianTime ModJulianTime;
+  static double modjulianday(int year, long long int daqTime);
 
-  static UTCTime Daq2UTC(DaqTime t);
-
-  static JulianTime Daq2Julian(DaqTime t);
-
-  static ModJulianTime Daq2ModJulian(DaqTime t);
-
-  static DaqTime Julian2Daq(JulianTime t);
+  static double julianday(int year);
   
-  static DaqTime ModJulian2Daq(ModJulianTime t);
+  static double julianday(int year, long long int daqTime);
 
+  static unsigned int yearOf(double modjulianday);
+  
   unsigned int year_;
   long long int daqTime_;
 
   ClassDef(I3Time,1);
 };
+
+inline ostream& operator<<(ostream& o, const I3Time& t)
+{
+  t.ToStream(o);
+  return o;
+}
 
 #endif
