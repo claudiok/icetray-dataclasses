@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMGeo.h,v 1.3 2004/02/15 15:25:32 troy Exp $
+    $Id: I3OMGeo.h,v 1.4 2004/02/18 18:44:51 pretz Exp $
 
-    @version $Revision: 1.3 $
-    @date $Date: 2004/02/15 15:25:32 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/02/18 18:44:51 $
     @author
 
     @todo
@@ -31,7 +31,7 @@ class I3OMGeo : public TObject
 
   I3OMGeo() { Init(); }
 
-  UShort_t OMNumber() const;
+  UShort_t OMNumber() const {return omnumber;}
   void   OMNumber(UShort_t omnumber_) { omnumber = omnumber_; }
 
   Double_t X() const { return x; }
