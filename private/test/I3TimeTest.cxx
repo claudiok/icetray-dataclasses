@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.7 2005/03/31 18:43:35 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.8 2005/04/01 20:14:45 pretz Exp $
 
-    @version $Revision: 1.7 $
-    @date $Date: 2005/03/31 18:43:35 $
+    @version $Revision: 1.8 $
+    @date $Date: 2005/04/01 20:14:45 $
     @author pretz
 
     @todo
@@ -195,5 +195,37 @@ namespace tut
   {
     ensure_distance(I3Time::julianday(2005),2453371.500000,0.00001);
     ensure_distance(I3Time::modjulianday(2005),53371.00000,0.000001);
+  }
+
+  void object::test<14>()
+  {
+    I3Time lowest;
+    lowest.SetDaqTime(2004,235918301);
+    
+    I3Time lower;
+    lower.SetDaqTime(2004,235918402);
+
+    I3Time higher;
+    higher.SetDaqTime(2008,283294782);
+
+    I3Time highest;
+    highest.SetDaqTime(2009,283294782);
+    
+    ensure("1",lowest<lower);
+    ensure("2",lowest<higher);
+    ensure("3",lowest<highest);
+    ensure("4",lower<higher);
+    ensure("5",lower<highest);
+    ensure("6",higher<highest);
+
+    ensure("7",!(lower<lowest));
+    ensure("8",!(higher<lowest));
+    ensure("9",!(highest<lowest));
+    ensure("10",!(higher<lower));
+    ensure("11",!(highest<lower));
+    ensure("12",!(highest<higher));
+    
+
+    
   }
 }

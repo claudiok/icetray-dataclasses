@@ -172,6 +172,30 @@ class I3Time : public TObject
     }
 
   /**
+   * equality operator.  
+   * @return true if the times are the same
+   * @param rhs the I3Time to compare this one to.
+   */
+  bool operator==(const I3Time& rhs) const
+    {
+      if(rhs.daqTime_ == daqTime_ && rhs.year_ == year_)
+	return true;
+      return false;
+    }
+
+  /**
+   * inequality operator
+   * @return false if the times are different
+   * @param rhs the I3Time to compare this one to.
+   */
+  bool operator!=(const I3Time& rhs) const
+    {
+      if(rhs == *this)
+	return false;
+      return true;
+    }
+
+  /**
    * Dumps a Month to a string for printing
    */
   static std::string MonthToString(Month m);
@@ -180,6 +204,8 @@ class I3Time : public TObject
    * @brief dumps a Weekday to a string for printing.
    */
   static std::string WeekdayToString(Weekday w);
+
+  
 
  public:
 
@@ -198,6 +224,25 @@ class I3Time : public TObject
 
   ClassDef(I3Time,1);
 };
+
+/**
+ * comparison operator.  
+ * Compares first the year and then the DAQ time
+ * @param lhs the left-hand I3Time
+ * @param rhs the right-hand I3Time
+ * @return true if the lhs should be ordered before the rhs
+ */
+inline bool operator<(const I3Time& lhs,const I3Time& rhs)
+{
+  if(lhs.GetUTCYear() < rhs.GetUTCYear())
+    return true;
+  if(lhs.GetUTCYear() > rhs.GetUTCYear())
+    return false;
+  if(lhs.GetUTCDaqTime() < rhs.GetUTCDaqTime())
+    return true;
+  return false;
+}
+
 
 inline ostream& operator<<(ostream& o, const I3Time& t)
 {
