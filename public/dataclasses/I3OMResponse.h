@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.28 2004/06/30 21:22:52 pretz Exp $
+    $Id: I3OMResponse.h,v 1.29 2004/07/01 17:51:36 pretz Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.28 $
-    @date $Date: 2004/06/30 21:22:52 $
+    @version $Revision: 1.29 $
+    @date $Date: 2004/07/01 17:51:36 $
     @author ehrlich
     @author troy
     @author pretz
@@ -37,8 +37,8 @@ class I3OMResponse : public TObject
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
 
-  I3DataReadoutDict   fDataReadoutList; //||
-  I3RecoHitVectDict fRecoHitSeriesData; //||
+  I3DataReadoutDict   fDataReadoutDict; //||
+  I3RecoHitVectDict fRecoHitVectDict; //||
 
  public:
   /**
@@ -64,22 +64,22 @@ class I3OMResponse : public TObject
   /**
    * @return the the hardware data for this response as a const object
    */
-  const I3DataReadoutDict& GetDataReadoutList() const {return fDataReadoutList;}
+  const I3DataReadoutDict& GetDataReadoutDict() const {return fDataReadoutDict;}
   
   /**
    * @return the hardware data for this response as a non-const object
    */
-  I3DataReadoutDict& GetDataReadoutList() {return fDataReadoutList;}
+  I3DataReadoutDict& GetDataReadoutDict() {return fDataReadoutDict;}
 
   /**
    * @return the reco hit series data as a const object
    */
-  const I3RecoHitVectDict& GetRecoHitSeriesData() const {return fRecoHitSeriesData;}
+  const I3RecoHitVectDict& GetRecoHitVectDict() const {return fRecoHitVectDict;}
   
   /**
    * @return the reco hit series data as a non-const object
    */
-  I3RecoHitVectDict& GetRecoHitSeriesData() {return fRecoHitSeriesData;}
+  I3RecoHitVectDict& GetRecoHitVectDict() {return fRecoHitVectDict;}
 
   private:
   // copy and assignment are private

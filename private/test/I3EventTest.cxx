@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3EventTest.cxx,v 1.5 2004/06/30 17:20:25 pretz Exp $
+    $Id: I3EventTest.cxx,v 1.6 2004/07/01 17:51:35 pretz Exp $
 
-    @version $Revision: 1.5 $
-    @date $Date: 2004/06/30 17:20:25 $
+    @version $Revision: 1.6 $
+    @date $Date: 2004/07/01 17:51:35 $
     @author pretz
 
     @todo
@@ -54,8 +54,8 @@ namespace tut
     bt->SetAzimuth(4.5);
     bt->SetX(3.4);
     
-    event->GetMCParticleData()["F2k"] = new I3MCParticleEvent();
-    event->GetMCParticleData()["F2k"]->GetInIceParticles().push_back(bt);
+    event->GetMCParticleDict()["F2k"] = new I3MCParticleEvent();
+    event->GetMCParticleDict()["F2k"]->GetInIceParticles().push_back(bt);
     
     TTree *t = new TTree("mytree","tree");
     
@@ -71,7 +71,7 @@ namespace tut
 
     ensure("checking the output data",
 	   event_out
-		->GetMCParticleData()["F2k"]
+		->GetMCParticleDict()["F2k"]
 		->GetInIceParticles()[0]
 		->GetX()==3.4);
   }
