@@ -1,13 +1,13 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Digital.cxx,v 1.2 2004/02/15 19:12:35 troy Exp $
+    $Id: I3Digital.cxx,v 1.3 2004/02/25 18:25:43 ehrlich Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/02/15 19:12:35 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/02/25 18:25:43 $
     @author
 
-    @todo
+    @todo 
 
 */
 #include "dataclasses/I3Digital.h"
