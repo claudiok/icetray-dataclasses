@@ -1,0 +1,222 @@
+/**
+@page iterators Iterators and Selectors
+
+@author Tyce DeYoung
+
+@section intro 
+
+The dataclasses that store event information are basically a series of
+nested containers.  For example, there is an object called an
+I3RecoResultDict which contains many I3RecoResult objects.  You've
+probably guessed that RecoResults are used to store the results of
+reconstructions that are run on the event.  The "Dict" part indicates
+that a RecoResultDict is a @em map, which is a particular type of
+container where the contents are identified by name.  (See 
+@ref stlsyntax for more information about types of containers.)  
+
+RecoResults are themselves containers, of I3Particle objects.
+Actually RecoResults don't contain I3Particles, they contain pointers
+to objects that derive from I3Particle.   This allows RecoResults to
+contain I3StoppingMuon s, I3DirectionalCascade s, and so forth,
+without worrying about what the exact contents are.  Some types of
+RecoResults, like I3RecoResultSingleTrack, contain only one Particle;
+others may contain several.
+
+Anyway, the point is that there are lots of containers in the
+dataclasses, and to do just about anything you'll need to know how to
+look at the contents of containers.  Often you won't know ahead of
+time how many objects are in the container -- for example, does that
+JAMS RecoResult contain one track candidate, or more than one?  You
+probably want to look at each element in turn, e.g. using each of the
+JAMS candidates as a seed for a likelihood reconstruction.  Or maybe
+you want to look at all the elements that have been identified as
+interesting by some previous process: all of the OM signals that have
+passed a noise cleaning filter, for example.
+
+You should use an @em iterator, or its alter ego the @em selector, for
+this sort of task.  If you just want to look at a particular element,
+you don't need to do this ; you can just get the element by name or
+number -- see @ref stlsyntax for more details.
+
+@section iterators Iterators
+
+An @em iterator is rather like a pointer that points to an object in a
+container.  But it's a little bit intelligent, in that it knows how to
+find the next item in the container.  This may not be very impressive
+in a vector, where elements are identified by consecutive numbers; but
+it's essential for maps, where there's no way to know what the name of
+the next element is.  Moreover, an iterator will make sure that it
+never returns to an element: you'll see each item once and only once.
+
+Since iterators need to know about their containers, in order to know
+how to find the next element, they are associated with the
+containers classes.  You create an iterator by declaring it, like a variable,
+but you need to specify what type of container you're going to use it
+on.  For example, you would create an iterator for an I3RecoHitSeries
+with a line like
+
+@code
+I3RecoHitSeries::iterator iter;
+@endcode
+
+The iterator knows about the class it will iterate over, but not about
+the particular object, so you also need to set it to point to the
+beginning of the container:
+
+@code 
+iter = myRecoHitSeries.begin();
+@endcode
+
+You ask the iterator for the next element in the container by using
+operator++, just like with an index variable.
+
+@code
+iter++;
+@endcode
+
+An iterator will step past the end of its container, so it needs to be
+told not to.  This is done by checking against @c container.end().  So
+with iterators, a loop that looked like this in C:
+
+@code 
+int myArray[MAX];
+int i;
+for (i = 0; i < MAX; i++) {
+  int thisElement = myArray[i];
+};
+@endcode
+
+will look like this:
+
+@code
+vector<int> myVect;
+vector<int>::iterator iter;
+for (iter = myVect.begin(); iter != myVect.end(); iter++) {
+  int thisElement = *iter;
+};
+@endcode
+
+The same syntax is used for containers of all types.  One thing to
+note, though, is that the basic element of a map is actually a
+pair<key, value>, not the value itself.  So in iterating over an 
+@c I3OMResponseMap, for example, you need to refer to @c iter->second,
+not @c *iter:
+
+@code
+I3OMResponseMap myMap;
+I3OMResponseMap::iterator iter;
+for (iter = myMap.begin(); iter != myMap.end(); iter++) {
+  I3OMResponse thisElement = iter->second;  // actually wrong, see below
+};
+@endcode
+
+And in most of the dataclasses, the map values are @em pointers to
+objects, not objects themselves, so you must also dereference the
+pointer: 
+
+@code
+I3OMResponseMap myMap;
+I3OMResponseMap::iterator iter;
+for (iter = myMap.begin(); iter != myMap.end(); iter++) {
+  I3OMResponse thisElement = *(iter->second); 
+};
+@endcode
+
+@section selectors Selectors
+
+Often you want to iterate over a container, but you are only
+interested in a subset of the elements.  This subset is often defined
+but some other algorithm: for example, a track reconstruction wants to
+use only those @c I3OMResponse s passed on by a noise cleaning
+algorithm.  In the dataclasses we use @em selectors for recording the
+results of a selection like noise cleaning.  Selectors both store the
+results of the selection, and provide access to the selected elements.
+
+A cleaning algorithm, or a pattern recognition module that attempts to
+split overlaid events into their components, or any other module that
+wishes to identify a subset of the elements in a particular container,
+should use a selector to do so.  An example of such an algorithm can
+be found in @c examples-offline/selector, which contains an IceTray
+module @c I3Selection that identifies certain @c I3OMResponse s as
+interesting, and records that judgement using an @c I3OMSlrList.  
+@em slr is used to denote a selector class, and the @em List indicates
+that the @c I3OMSlrList relies on an internal list of good OMs to make
+its judgement.  A selector's logic may be aritrarily complicated,
+though of course you will not generally wish to recompute complicated
+functions on the fly.  All selectors of @c I3OMResponse s should
+inherit from @c I3OMSlr, as @c I3OMSlrList does.  Selectors that
+operate on containers other than @c I3OMResponseMap would inherit from
+different base classes.
+
+A selector inherits from an iterator, and it is used in much the same
+way.  The difference is that when you ask a selector for the next
+element in the container, it first checks whether the next element
+passes the selection before giving it to you.  If the next element
+doesn't meet its criteria, it skips to the next element, until it
+either finds an acceptable element or reaches the end of the
+container.  This means that iterating over selected elements of a
+container is just like iterating over all elements, except that
+instead of declaring your own iterator, you get an existing selector
+out of the event.  Selectors are presently stored in the @c I3Bag, but
+in a future release a specific place for selectors will be added to
+the event.  Using a selector looks like this:
+
+@code
+I3Bag& theBag = event.GetBag();
+TObjectPtr objptr = theBag.Get(fInputName);
+I3OMSlr& slr = *(roost::dynamic_pointer_cast<I3OMSlr>(objptr));
+// error: need to set the limit here: see below!
+I3OMResponseMap &m = event.GetOMResponseMap();
+
+for (slr = m.begin(); slr != m.end(); ++slr) {
+  I3OMResponse thisElement = *(slr->second); 
+};
+@endcode
+
+The syntax for getting the selector from the bag is more complex than
+it will be when a specific selector container is added to the event:
+you won't need to start with a @c TObjectPtr and cast it to an 
+@c I3OMSlr.  
+
+The one thing you need to do with a selector that you don't need to do
+with an iterator is tell it about the end of the container it will
+loop over, as well as the beginning.  Actually, you do need to do this
+with an iterator, too, but you only have to do it in the loop logic
+itself.  The reason that a selector needs to know in advance about the
+end of the container is that if the last element in the container is
+not selected, it will blissfully walk past the end of the container
+looking for another good element.  So the correct version of the
+example above looks like this:
+
+@code
+I3Bag& theBag = event.GetBag();
+TObjectPtr objptr = theBag.Get(fInputName);
+I3OMSlr& slr = *(roost::dynamic_pointer_cast<I3OMSlr>(objptr));
+I3OMResponseMap &m = event.GetOMResponseMap();
+slr.SetLimit(m.end());
+for (slr = m.begin(); slr != m.end(); ++slr) {
+  I3OMResponse thisElement = *(slr->second); 
+};
+@endcode
+
+A module may not know in advance whether it should use a selector or
+an iterator.  Therefore, the base class of the selector is just an
+iterator: it selects every element in the container, and can be used
+in place of a regular iterator.  Take  a look at
+@c I3LineFit.cxx in @c examples-offline/private/linefit for an example
+of how to do this.
+
+A module that adds a selector to an event does so just like it would
+add any other object: it instantiates it, sets the relevant variables
+-- in this case the list of good OMs -- and adds a pointer to the
+object to the @c Bag.  Take a look at @c I3Selection.cxx in 
+@c examples-offline/private/selector/ for an example.  If you are
+adding a selector that operates over an @c I3OMResponseMap, you can
+just use an @c I3OMSlrList if you like, or create your own class of
+selector, deriving from @c I3OMSlr as @c I3OMSlrList does.  If you're
+iterating over some other kind of container, you can create a new base
+selector like @c I3OMSlr and a real selector like @c I3OMSlrList, or
+you can ask the dataclasses developers to do it for you.  It's not
+difficult, either way.
+
+*/

@@ -81,7 +81,7 @@
     want to dump it again, elsewhere, you will copy and paste this
     code, and then when you change your map or change the contents of
     @c Particle, you have to go back and find all of these code
-    pastings and recode them.  Worse, they'll could cause a crash.
+    pastings and recode them.  Worse, they could cause a crash.
     Worse yet, they could cause a crash, but only sometimes.  Much
     worse they could not cause a crash at all, but corrupt things to
     the point where a crash occurs elsewhere.  You should be feeling a

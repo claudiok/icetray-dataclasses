@@ -126,7 +126,7 @@
  
  @subsection stlmap The Map Template
 
- In addition to the vector, STL comes with a useful map class.  The 'map' class
+ In addition to the vector, STL comes with a useful 'map' class.  The map class
  takes two template arguments.  The first is the type of 'key' to be used, and
  the second is the type of 'data' to be stored.  The data is put into 
  the container and given a 'key' which is used later to get the data
@@ -195,7 +195,8 @@ Note that while I3RecoHitSeriesDict is a map, each of the elements
 last command in the snippet above is resizing the vector referred to by
 the key "PretzsResult".
 
-Classes whose names end in 'Dict' are maps and inherit the interface 
+Classes whose names end in 'Dict' (short for 'Dictionary') 
+are maps and inherit the interface 
 given in STLMapStoragePolicy.
 
 

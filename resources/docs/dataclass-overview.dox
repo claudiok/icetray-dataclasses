@@ -31,6 +31,8 @@
                                             
    Some usage notes involving STL:
                                     
+   @li @ref iterators
+
    @li @ref mapiteration
 
    @li @ref functors an STL technique.
