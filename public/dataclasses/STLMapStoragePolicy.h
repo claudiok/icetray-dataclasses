@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.1 2004/02/23 02:13:50 troy Exp $
+    $Id: STLMapStoragePolicy.h,v 1.2 2004/02/23 17:11:10 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/02/23 02:13:50 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/02/23 17:11:10 $
     @author Troy Straszheim
 
 */
@@ -32,7 +32,9 @@ class STLMapStoragePolicy {
  public:
 
   ElementType& operator[](const KeyType& key) { return map_[key]; }
+  const ElementType& operator[](const KeyType& key) const { return map_[key]; }
   iterator find (const KeyType& key) { return map_.find(key); }
+
 };
 
 #endif
