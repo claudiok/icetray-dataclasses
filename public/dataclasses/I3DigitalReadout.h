@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.9 2004/10/08 13:14:19 pretz Exp $
+ * $Id: I3DigitalReadout.h,v 1.10 2004/10/14 15:16:54 pretz Exp $
  *
  * @file I3DigitalReadout.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/10/08 13:14:19 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/10/14 15:16:54 $
  * @author pretz
  * @author blaufuss
  *
@@ -53,7 +53,7 @@ class I3DigitalReadout : public I3DataReadout, public VectorPolicy<I3DigitalLaun
       const_iterator iter;
       for(iter = begin() ; iter!= end() ; iter++)
 	{
-	  o<<(*iter);
+	  o<<*(*iter);
 	}
       o<<"\n";
     }
