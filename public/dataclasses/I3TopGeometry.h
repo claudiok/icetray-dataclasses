@@ -1,26 +1,40 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.9 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3TopGeometry.h,v 1.10 2004/07/13 15:37:54 niessen Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/07/13 15:37:54 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
 #define __I3TOPGEOMETRY_H_
 
-#include "dataclasses/I3TankGeo.h"
+#include <TObject.h>
+
+#include "I3DataExecution.h"
+#include "dataclasses/I3TopStationGeo.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief This is an collection of tanks.
  */
-class I3TopGeometry : public TObject, public VectorPolicy<I3TankGeo>::ThePolicy
+class I3TopGeometry : public TObject, public VecPointainerPolicy<I3TopStationGeoPtr>::ThePolicy
 {
  public:
-  virtual ~I3TopGeometry(){};
+
+  /**
+   * Constructor
+   */
+  I3TopGeometry () {}
+
+  /**
+   * Virtual Destructor
+   */
+  virtual ~I3TopGeometry(){}
+
+ private:
   ClassDef(I3TopGeometry,1);
 };
 

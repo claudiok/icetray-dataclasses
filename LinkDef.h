@@ -1,3 +1,10 @@
+//
+// LinkDef.h
+// $Id: LinkDef.h,v 1.89 2004/07/13 15:37:53 niessen Exp $
+// $Revision: 1.89 $
+// $Date: 2004/07/13 15:37:53 $
+//
+
 #ifdef __CINT__
 
 #pragma link off all globals;
@@ -49,9 +56,14 @@
 #pragma link C++ class I3MCCascade+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
+#pragma link C++ class I3PrimaryImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>+;
+#pragma link C++ class I3PrimaryImpl<I3Directional, I3NonCoreLocalized, I3NonEnergetic>+;
 
 #pragma link C++ class I3MCPrimary+;
-
+#pragma link C++ classs I3ShowerCore+;
+#pragma link C++ typedef I3ShowerCorePtr;
+#pragma link C++ class I3ShowerDirection+;
+#pragma link C++ class I3ShowerDirectionPtr;
 //
 // vector (series, list) types
 // these must go from outermost to innermost
@@ -157,11 +169,50 @@
 #pragma link C++ typedef I3RecoHitVectDictPtr;
 
 
+// new IceTop stuff, PN
+#pragma link C++ class I3TopStationGeo+;
+#pragma link C++ class I3TopStationGeo::iterator+;
+#pragma link C++ typedef VecPointainerPolicy<I3TankGeoPtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3TankGeoPtr>::ThePolicy+;
+#pragma link C++ function operator!= (const I3TopStationGeo::iterator &, const I3TopStationGeo::iterator &);
+#pragma link C++ typedef I3TopStationGeoPtr;
 
 #pragma link C++ class I3TopGeometry+;
-#pragma link C++ typedef VectorPolicy<I3TankGeo>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3TankGeo>::ThePolicy+;
+#pragma link C++ class I3TopGeometry::iterator+;
+#pragma link C++ typedef VecPointainerPolicy<I3TopStationGeoPtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3TopStationGeoPtr>::ThePolicy+;
 #pragma link C++ function operator!=(const I3TopGeometry::iterator&, const I3TopGeometry::iterator&);
+
+#pragma link C++ class I3MCTankHit+;
+#pragma link C++ class I3MCTankHit::iterator+;
+#pragma link C++ typedef VecPointainerPolicy<I3MCParticleEventPtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3MCParticleEventPtr>::ThePolicy;
+#pragma link C++ function operator!= (const I3MCTankHit::iterator&, const I3MCTankHit::iterator&);
+#pragma link C++ typedef I3MCTankHitPtr;
+
+#pragma link C++ class I3StationHit+;
+#pragma link C++ class I3StationHit::iterator+;
+#pragma link C++ typedef VecPointainerPolicy<I3TankHitPtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3TankHitPtr>::ThePolicy+;
+#pragma link C++ function operator!= (const I3StationHit::iterator &,
+                                      const I3StationHit::iterator &);
+#pragma link C++ typedef I3StationHitPtr;
+
+#pragma link C++ class I3ArrayHit+;
+#pragma link C++ class I3ArrayHit::iterator+;
+#pragma link C++ typedef VecPointainerPolicy<I3StationHitPtr>::ThePolicy;
+#pragma link C++ class VecPointainerPolicy<I3StationHitPtr>::ThePolicy+;
+#pragma link C++ function operator!= (const I3ArrayHit::iterator &,
+                                      const I3ArrayHit::iterator &);
+#pragma link C++ typedef I3ArrayHitPtr;
+
+#pragma link C++ class I3ArrayHitData+;
+#pragma link C++ class I3ArrayHitData::iterator+;
+#pragma link C++ typedef MapPointainerPolicy<I3ArrayHitPtr>::ThePolicy;
+#pragma link C++ class MapPointainerPolicy<I3ArrayHitPtr>::ThePolicy+;
+#pragma link C++ function operator!= (const I3ArrayHitData::iterator &,
+                                      const I3ArrayHitData::iterator &);
+#pragma link C++ typedef I3ArrayHitDataPtr;
 
 
 //
@@ -220,8 +271,9 @@
 #pragma link C++ typedef I3MonitoringPtr;
 #pragma link C++ class I3MonitoringHeader+;
 #pragma link C++ typedef I3MonitoringHeaderPtr;
-#pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonComposite+;
+#pragma link C++ class I3NonCoreLocalized+;
+#pragma link C++ class I3NonDirectional+;
 #pragma link C++ class I3NonEnergetic+;
 #pragma link C++ class I3ObservableParticle+;
 #pragma link C++ typedef I3ObservableParticlePtr;
@@ -263,6 +315,10 @@
 #pragma link C++ typedef I3RecoResultRDMCFitPtr;
 #pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
+#pragma link C++ class I3RecoResultTopCore+;
+#pragma link C++ typedef I3RecoResultTopCorePtr;
+#pragma link C++ class I3RecoResultTopDirection+;
+#pragma link C++ typedef I3RecoResultTopDirectionPtr;
 #pragma link C++ class I3SLCReadout+;
 #pragma link C++ typedef I3SLCReadoutPtr;
 #pragma link C++ class I3Starting+;
@@ -270,6 +326,9 @@
 #pragma link C++ class I3SummaryPulseReadout+;
 #pragma link C++ typedef I3SummaryPulseReadoutPtr;
 #pragma link C++ class I3TankGeo+;
+#pragma link C++ typedef I3TankGeoPtr;
+#pragma link C++ class I3TankHit+;
+#pragma link C++ typedef I3TankHitPtr;
 #pragma link C++ class I3TankMaterial+;
 #pragma link C++ class I3Track+;
 #pragma link C++ typedef I3TrackPtr;
