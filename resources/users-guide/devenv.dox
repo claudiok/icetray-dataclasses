@@ -4,9 +4,9 @@
 
 @section howtodoit How to:
 
-There is lots of information on the web of how to get the IceCube development
-environment set up and ready to use.  Visit the new 
-<a href="http://bfd.lbl.gov">BFD Homepage</a> to find a comprehensive list.<br>
+BFD is the IceCube development environment.  Visit the new 
+<a href="http://bfd.lbl.gov">BFD Homepage</a> to find instructions on how
+to set up BFD.<br>
 
 There is also a webpage about <a href="http://glacier.lbl.gov/icetray">
 IceTray</a> that has a 

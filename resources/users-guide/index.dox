@@ -88,14 +88,16 @@
 
    @section preparation Preparation
 
-   These are the minimal prerequisites to be able to start playing with the 
-   dataclasses.  When you've done the following, you will be ready to continue.
+   Before you are able to play with the dataclasses, you will have to do 
+   these three things:
 
    @li @ref devenv-setup
    
    @li @ref icetray-setup
 
    @li @ref dataclasses-setup
+
+   When you've done these three you will be ready to continue.
 
    @section examples Examples
 
