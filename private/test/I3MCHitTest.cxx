@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHitTest.cxx,v 1.1 2004/03/03 15:37:01 troy Exp $
+    $Id: I3MCHitTest.cxx,v 1.2 2004/03/03 15:50:08 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/03/03 15:37:01 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/03/03 15:50:08 $
     @author Troy D. Straszheim
 
     @todo
@@ -13,11 +13,11 @@
 #include "test/tut.h"
 #include "dataclasses/I3MCHit.h"
 
-// this is an example of a minimal testsuite
+// this is a typical minimal testsuite
 
 namespace tut
 {
-  
+  // whatever is in this struct will be visible from all object::test routines below
   struct I3MCHitTest { };
   typedef test_group<I3MCHitTest> factory;
   typedef factory::object object;
@@ -25,7 +25,8 @@ namespace tut
 
 namespace
 {
-  tut::factory t("I3MCHit tests");
+  // this string can be used from the command line to run just this group of tests
+  tut::factory t("I3MCHit");
 }
 
 namespace tut
@@ -33,6 +34,8 @@ namespace tut
   /**
    * Checks assignment/copy construction
    */
+  // you need the template<> template<> thing because this is a specialization
+  // of a template function
   template<> template<>
   void object::test<1>()
   {
@@ -44,6 +47,13 @@ namespace tut
     h = j;
     ensure_distance("simple assignment", j.Weight(), h.Weight(), (float)0.0001);
     ensure(j.TrackNumber() == j.TrackNumber());
+  }
+
+  // to run just this test, use "runtests I3MCHit 4"
+  template<> template<>
+  void object::test<4>() 
+  {
+    fail("this test is supposed to fail, this is on purpose.");
   }
 
   /**

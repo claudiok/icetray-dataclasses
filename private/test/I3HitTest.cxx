@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.1 2004/03/03 15:37:01 troy Exp $
+    $Id: I3HitTest.cxx,v 1.2 2004/03/03 15:50:08 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/03/03 15:37:01 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/03/03 15:50:08 $
     @author Troy D. Straszheim
 
     @todo
@@ -17,7 +17,8 @@
 
 namespace tut
 {
-  
+  // contents of this struct will be visible from all object::test<>() functions
+  // below
   struct I3HitTest { };
   typedef test_group<I3HitTest> factory;
   typedef factory::object object;
@@ -25,7 +26,9 @@ namespace tut
 
 namespace
 {
-  tut::factory t("I3Hit tests");
+  // this is the identifier that you can use on the command line to just run this
+  // test group
+  tut::factory t("I3Hit");
 }
 
 namespace tut
