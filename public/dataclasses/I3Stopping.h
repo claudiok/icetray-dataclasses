@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.14 2004/09/07 19:30:21 dule Exp $
+ * $Id: I3Stopping.h,v 1.15 2004/09/24 22:34:05 dule Exp $
  *
  * @file I3Stopping.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/09/07 19:30:21 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/09/24 22:34:05 $
  * @author pretz
  */
 #ifndef I3STOPPING_H
@@ -160,8 +160,8 @@ class I3Stopping{
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Stopping Position: "<<fStopPos<<"\n"
-       <<"Direction:"<<fDir<<"\n"
+      o<<"Stopping Position: "<<fStopPos
+       <<"Direction:"<<fDir
        <<"Stopping Time: "<<fStopT<<"\n";
     }
  private:

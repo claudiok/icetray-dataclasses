@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.14 2004/09/07 19:30:21 dule Exp $
+ * $Id: I3Starting.h,v 1.15 2004/09/24 22:34:05 dule Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/09/07 19:30:21 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/09/24 22:34:05 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -159,8 +159,8 @@ class I3Starting{
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"StartingPosition:"<<fStartPos<<"\n"
-       <<"Direction:"<<fDir<<"\n"
+      o<<"StartingPosition:"<<fStartPos
+       <<"Direction:"<<fDir
        <<"Starting Time:"<<fStartT<<"\n";
     }
 
