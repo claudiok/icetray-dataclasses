@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultMultiTracks.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
+ * $Id: I3RecoResultMultiTracks.h,v 1.6 2004/10/26 15:41:39 dule Exp $
  *
  * @file I3RecoResultMultiTracks.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/12 17:33:33 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/10/26 15:41:39 $
  * @author ehrlich
  */
 #ifndef I3RECORESULTMULTITRACKS_H
@@ -29,6 +29,20 @@ class I3RecoResultMultiTracks : public I3RecoResult, public VectorPolicy<I3Parti
    * destructor
    */
   virtual ~I3RecoResultMultiTracks(){}
+
+  /**
+   * Print out all information about the I3Position to the given ostream
+   */
+  virtual void ToStream(ostream& o) const
+    {
+      I3ParticlePtr particle;
+      for (Int_t i=0; i<this->size(); i++) {
+        o<<"printing MultiTracks["<<i<<"]...\n";
+	particle = roost::dynamic_pointer_cast<I3Particle>((*this)[i]);
+	particle->ToStream(o);
+	o<<endl;
+      }
+    };
 
   private:
   // copy and assignment private
