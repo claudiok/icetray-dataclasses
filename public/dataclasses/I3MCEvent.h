@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.2 2004/07/01 21:37:43 pretz Exp $
+ * $Id: I3MCEvent.h,v 1.3 2004/07/02 16:21:16 pretz Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/07/01 21:37:43 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/02 16:21:16 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -28,12 +28,12 @@ class I3MCEvent : public I3Event
   /**
    * default constructor
    */
-  I3MCEvent();
+  I3MCEvent(){}
   
   /**
    * default destructor
    */
-  virtual ~I3MCEvent();
+  virtual ~I3MCEvent(){}
 
   /**
    * @get and set the frame start time

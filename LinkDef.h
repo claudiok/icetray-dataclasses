@@ -218,6 +218,8 @@
 #pragma link C++ typedef I3DigitalTWRReadoutPtr;
 #pragma link C++ class I3Directional+;
 #pragma link C++ class I3Energetic+;
+#pragma link C++ class I3MCEvent+;
+#pragma link C++ typedef I3MCEventPtr;
 #pragma link C++ class I3Event+;
 #pragma link C++ typedef I3EventPtr;
 #pragma link C++ class I3EventHeader+;
