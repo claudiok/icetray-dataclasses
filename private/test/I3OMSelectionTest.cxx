@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMSelectionTest.cxx,v 1.1 2005/02/08 22:03:38 pretz Exp $
+ * $Id: I3OMSelectionTest.cxx,v 1.2 2005/02/08 23:01:34 pretz Exp $
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2005/02/08 22:03:38 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/02/08 23:01:34 $
  * @author pretz
  *
  * @todo
@@ -13,7 +13,6 @@
 
 #include "TUT/tut.h"
 
-#include "dataclasses/I3RecoHitTimeWindowSelector.h"
 #include "dataclasses/I3OMGeoIceCube.h"
 #include "dataclasses/I3OMResponseMap.h"
 #include "dataclasses/I3OMResponse.h"

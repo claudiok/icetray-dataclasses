@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.148 2005/02/08 22:45:51 ehrlich Exp $
-// $Revision: 1.148 $
-// $Date: 2005/02/08 22:45:51 $
+// $Id: LinkDef.h,v 1.149 2005/02/08 23:01:34 pretz Exp $
+// $Revision: 1.149 $
+// $Date: 2005/02/08 23:01:34 $
 //
 
 #ifdef __CINT__
@@ -490,6 +490,10 @@
 #pragma link C++ typedef I3GoodOMSelectionPtr;
 #pragma link C++ class roost::shared_ptr<I3GoodOMSelection>+;
 
+#pragma link C++ class I3BadOMSelection+;
+#pragma link C++ typedef I3BadOMSelectionPtr;
+#pragma link C++ class roost::shared_ptr<I3BadOMSelection>+;
+
 #pragma link C++ class I3OMStatus+;
 #pragma link C++ typedef I3OMStatusPtr;
 #pragma link C++ class roost::shared_ptr<I3OMStatus>+;
@@ -605,7 +609,6 @@
 
 #pragma link C++ class I3AMANDAExtractor+;
 #pragma link C++ class I3IceCubeExtractor+;
-#pragma link C++ class I3RecoHitTimeWindowSelector+;
 #pragma link C++ class I3OMGeoListedSelector+;
 #pragma link C++ class I3TrackExtractor+;
 #pragma link C++ class I3CascadeExtractor+;
