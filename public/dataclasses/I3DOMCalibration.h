@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.8 2005/02/07 17:21:00 tmccauley Exp $
+ * $Id: I3DOMCalibration.h,v 1.8.8.1 2005/03/17 17:39:27 dima Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/02/07 17:21:00 $
+ * @version $Revision: 1.8.8.1 $
+ * @date $Date: 2005/03/17 17:39:27 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -26,6 +26,11 @@ using namespace std;
  * @brief Class that stores the calibration information for a DOM
  * 
  * This class stores the information from the Calibration stream.
+ *
+ * ATTENTION:
+ * Calibration information is set assuming the bin number as it is in
+ * the calibration database (reversed in time for bins 0-127).
+ * Calibration information is fetched by the time-oerdered bin numbers.
  *
  @author Tom McCauley
 
@@ -74,6 +79,7 @@ public:
  
     // Return the voltage value corresponding to the count 
     // for a specific ATWD id, channel, and bin.
+
     Double_t GetATWDVoltage(Int_t id, Int_t channel, Int_t bin, Int_t count);
     
     //map<Int_t, Double_t>& GetATWDVoltage(Int_t id, Int_t channel);
@@ -217,8 +223,12 @@ public:
     virtual void ToStream(ostream& o) const
     {
 	o<<"[ "
-	 <<"Fill me with information"
-	 <<" ]\n";
+	 <<"Calibration:"
+	 <<"\tDate: "<<fDate<<endl
+	 <<"\tDOM ID: "<<fDOMId<<endl
+	 <<"\tSPE Mean: "<<fSPEMean<<endl
+	 <<"\tPeak-to-Valley: "<<fPeakToValley<<endl
+	 <<"\tSuppressing the rest of the output ]\n";
     };
 
     virtual string ToString() const
