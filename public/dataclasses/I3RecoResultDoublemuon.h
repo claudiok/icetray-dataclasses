@@ -13,7 +13,7 @@ class I3RecoResultDoublemuon : public I3RecoResultSingleTrackList
   float GetQualityparameter() const;
   void  SetQualityparameter(float qualityparameter_);
 
-  bool               AreTwotracks() const;
+  bool               HasTwoTracks() const;
   const I3RecoTrack& GetFirstTrack() const;
   const I3RecoTrack& GetSecondTrack() const;
   bool               SetTracks(I3RecoTrack* firsttrack, I3RecoTrack* secondtrack);
