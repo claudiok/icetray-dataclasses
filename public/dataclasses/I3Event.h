@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.35 2004/07/19 16:46:01 pretz Exp $
+ * $Id: I3Event.h,v 1.36 2004/07/26 19:00:54 ehrlich Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.35 $
- * @date $Date: 2004/07/19 16:46:01 $
+ * @version $Revision: 1.36 $
+ * @date $Date: 2004/07/26 19:00:54 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -15,7 +15,6 @@
 
 #include "I3TriggerData.h"
 #include "I3FilterData.h"
-#include "I3MCParticleDict.h"
 #include "I3OMResponseMap.h"
 #include "I3ArrayHitData.h"
 #include "I3RecoResultDict.h"
@@ -26,7 +25,7 @@
  *
  * This class stores all the information that is specific to the
  * single event record: OM and IceTop tank responses, reconstruction
- * results, Monte Carlo information, trigger and filter records, etc.
+ * results, trigger and filter records, etc.
  * It does not contain more 
  * static information, like geometry, calibration, or monitoring
  * data.  It also contains an I3Bag of user-defined information.
@@ -36,7 +35,7 @@ class I3Event : public TObject
 {
   I3TriggerData    fTriggerData; //||
   I3FilterData     fFilterData; //||
-  I3OMResponseMap fOMResponseMap; //||
+  I3OMResponseMap  fOMResponseMap; //||
   I3ArrayHitData   fTopResponseData; //||
   I3RecoResultDict fRecoResultDict; //||
   I3Bag            fBag; //||

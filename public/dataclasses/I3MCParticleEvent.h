@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleEvent.h,v 1.5 2004/07/01 01:31:06 pretz Exp $
+ * $Id: I3MCParticleEvent.h,v 1.6 2004/07/26 19:00:54 ehrlich Exp $
  *
  * @file I3MCParticleEvent.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/07/01 01:31:06 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/07/26 19:00:54 $
  * @author pretz
  *
  */
@@ -26,7 +26,7 @@
 class I3MCParticleEvent : public TObject 
 {
 
-  I3MCPrimary fPrimary;
+  I3MCParticleVect fPrimary;
   I3MCParticleVect fInIceParticles;
   I3MCParticleVect fIceTopParticles;
 
@@ -44,12 +44,12 @@ class I3MCParticleEvent : public TObject
   /**
    * @return the primary track as constant
    */
-  const I3MCPrimary& GetPrimary() const {return fPrimary;}
+  const I3MCParticleVect& GetPrimary() const {return fPrimary;}
 
   /**
    * @return the primary track as non-const
    */
-  I3MCPrimary& GetPrimary() {return fPrimary;}
+  I3MCParticleVect& GetPrimary() {return fPrimary;}
 
   /**
    * @return the In-Ice tracks as constant
