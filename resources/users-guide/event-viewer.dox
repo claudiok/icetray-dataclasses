@@ -16,9 +16,9 @@ The sample module I3EventViewer shows how to use these methods.
 To run a few sample scripts you first have to change into your workspace directory. 
 From there you can start:<br>
 @code
-% root dataio-modules/resources/scripts/F2kEventViewer1.C
-% root dataio-modules/resources/scripts/F2kEventViewer2.C
-% root dataio-modules/resources/scripts/F2kEventViewer3.C
+% root eventviewer-modules/resources/scripts/F2kEventViewer1.C
+% root eventviewer-modules/resources/scripts/F2kEventViewer2.C
+% root eventviewer-modules/resources/scripts/F2kEventViewer3.C
 @endcode
 These two scripts are using the F2k files test1.f2k, test2.f2k and test3.f2k and display two or three events.
 */
