@@ -1,37 +1,38 @@
-#ifndef I3RECORESULTDATA_H
-#define I3RECORESULTDATA_H
-
-#include "I3RecoResult.h"
-#include "StoragePolicy.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultData.h,v 1.16 2004/03/14 15:07:12 pretz Exp $
+ * $Id: I3RecoResultData.h,v 1.16.2.1 2004/04/10 16:38:59 troy Exp $
  *
  * This is the container for all the Track reconstruction results in
  * the event
  *
- * @version $Revision: 1.16 $
- * @date $Date: 2004/03/14 15:07:12 $
+ * @version $Revision: 1.16.2.1 $
+ * @date $Date: 2004/04/10 16:38:59 $
  * @author ehrlich
- * @author troy
  * @author pretz
  *
  * @todo
  *
  */
+
+#ifndef I3RECORESULTDATA_H
+#define I3RECORESULTDATA_H
+
+#include "I3RecoResult.h"
+#include "StoragePolicy.h"
+
 class I3RecoResultData : public TObject, public MapPointainerPolicy<I3RecoResultPtr>::ThePolicy
 {
  public:
   /**
    * constructor
    */
-  I3RecoResultData(){};
+  I3RecoResultData() {};
 
   /**
    * destructor
    */
-  virtual ~I3RecoResultData(){;}
+  virtual ~I3RecoResultData() {};
 
  private:
   // copy and assignment are private

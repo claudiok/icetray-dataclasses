@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.1.2.1 2004/04/07 16:59:31 troy Exp $
+    $Id: I3BasicTrack.h,v 1.1.2.2 2004/04/10 16:38:59 troy Exp $
 
-    @version $Revision: 1.1.2.1 $
-    @date $Date: 2004/04/07 16:59:31 $
+    @version $Revision: 1.1.2.2 $
+    @date $Date: 2004/04/10 16:38:59 $
     @author
 
     @todo
@@ -19,7 +19,7 @@
 class I3BasicTrack : public I3Track
 {
 
-  Double_t fLength, fZenith, fAzimuth;
+  Double_t fTime, fLength, fZenith, fAzimuth;
 
  public:
   I3BasicTrack() {
@@ -30,6 +30,9 @@ class I3BasicTrack : public I3Track
 
   virtual ~I3BasicTrack() {};
     
+  virtual Double_t Time() const { return fTime; }
+  virtual void Time(Double_t arg) { fTime = arg; }
+
   virtual Double_t Zenith() const { return fZenith; }
   virtual void Zenith(Double_t arg) { fZenith = arg; }
 

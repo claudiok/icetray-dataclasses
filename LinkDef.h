@@ -109,12 +109,12 @@
 #pragma link C++ function operator!=(const I3MCTrackData::iterator&, const I3MCTrackData::iterator&);
 #pragma link C++ typedef I3MCTrackDataPtr;
 
-#pragma link C++ class I3Bag+;
-#pragma link C++ class I3Bag::iterator+;
-#pragma link C++ typedef MapPointainerPolicy<TObjectPtr>::ThePolicy;
-#pragma link C++ class MapPointainerPolicy<TObjectPtr>::ThePolicy+;
-#pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
-#pragma link C++ typedef I3BagPtr;
+//#pragma link C++ class I3Bag+;
+//#pragma link C++ class I3Bag::iterator+;
+//#pragma link C++ typedef MapPointainerPolicy<TObjectPtr>::ThePolicy;
+//#pragma link C++ class MapPointainerPolicy<TObjectPtr>::ThePolicy+;
+//#pragma link C++ function operator!=(const I3Bag::iterator&, const I3Bag::iterator&);
+//#pragma link C++ typedef I3BagPtr;
 
 #pragma link C++ class I3OMResponseData+;
 #pragma link C++ class I3OMResponseData::iterator+;
@@ -142,7 +142,6 @@
 //
 // simple types with full value semantics
 //
-#pragma link C++ typedef TObjectPtr;
 
 #pragma link C++ class I3AltTracksRecoResult+;
 #pragma link C++ typedef I3AltTracksRecoResultPtr;

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.h,v 1.10.2.2 2004/04/08 11:52:27 troy Exp $
+    $Id: I3Track.h,v 1.10.2.3 2004/04/10 16:38:59 troy Exp $
 
-    @version $Revision: 1.10.2.2 $
-    @date $Date: 2004/04/08 11:52:27 $
+    @version $Revision: 1.10.2.3 $
+    @date $Date: 2004/04/10 16:38:59 $
     @author
 
     @todo
@@ -83,9 +83,12 @@ class I3Track : public TObject
   Double_t Z() const { return fZ; }
   void Z(Double_t arg) { fZ = arg; }
   
-  virtual TrackType Type() const { return fType; }
-  virtual void Type(TrackType arg) { fType = arg; }
+  TrackType Type() const { return fType; }
+  void Type(TrackType arg) { fType = arg; }
   
+  virtual Double_t Time() const { return NAN; }
+  virtual void Time(Double_t arg) { return; }
+
   virtual Double_t Zenith() const { return NAN; }
   virtual void Zenith(Double_t arg) { return; }
 
@@ -100,6 +103,9 @@ class I3Track : public TObject
 
   virtual Double_t Energy() const { return NAN; }
   virtual void Energy(Double_t arg) { return; }
+
+  virtual Double_t Weight() const { return NAN; }
+  virtual void Weight(Double_t arg) { return; }
 
   virtual bool IsStarting() = 0;
   virtual bool IsStopping() = 0;
