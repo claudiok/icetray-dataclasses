@@ -1,5 +1,5 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.8.16.1 2005/03/17 17:39:19 dima Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.8.16.2 2005/03/19 00:52:10 pretz Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
@@ -27,7 +27,7 @@ void I3DOMCalibration::SetATWDParameters(Int_t id, Int_t channel, Int_t bin,
     fit.fIntercept = intercept;
     fit.fRegressCoeff = regress_coeff;
     
-    GetATWDById(id)[channel][127-bin] = fit;
+    GetATWDById(id)[channel][bin] = fit;
 }
 
 Double_t I3DOMCalibration::GetATWDVoltage(Int_t id,  Int_t channel, 
