@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.6 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3MCPMTResponse.h,v 1.7 2004/07/06 15:59:07 pretz Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/07/06 15:59:07 $
  * @author klein
  */
 
@@ -59,5 +59,9 @@ class I3MCPMTResponse : public TObject
   // ROOT macro
   ClassDef(I3MCPMTResponse,1);
 };
+
+#include "dataclasses/StoragePolicy.h"
+typedef PtrPolicy<I3MCPMTResponse>::ThePolicy I3MCPMTResponsePtr;
+
 #endif
 

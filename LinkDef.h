@@ -215,7 +215,9 @@
 #pragma link C++ class I3MCHit+;
 #pragma link C++ typedef I3MCHitPtr;
 #pragma link C++ class I3MCOMResponse+;
+#pragma link C++ typedef I3MCOMResponsePtr;
 #pragma link C++ class I3MCPMTResponse+;
+#pragma link C++ typedef I3MCPMTResponsePtr;
 #pragma link C++ class I3MCParticleEvent+;
 #pragma link C++ typedef I3MCParticleEventPtr;
 #pragma link C++ class I3Monitoring+;
