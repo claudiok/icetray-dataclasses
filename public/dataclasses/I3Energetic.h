@@ -1,17 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Energetic.h,v 1.6 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3Energetic.h,v 1.7 2005/04/01 01:10:32 olivas Exp $
  *
  * @file I3Energetic.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/01 01:10:32 $
  * @author pretz
  */
 #ifndef I3ENERGETIC_H
 #define I3ENERGETIC_H
 
 #include "Rtypes.h"
+#include "I3Particle.h"
 
 /**
  * @brief The energy part of tracks and cascades, should they have a valid 
@@ -20,22 +21,24 @@
 class I3Energetic
 {
  private:
-  Double_t fEnergy;
+
+  double energy_;
+
  public:
   /**
    * indicates that this particle has a valid energy
    */
-  Bool_t HasEnergy() const {return true;}
+  bool HasEnergy() const {return true;}
 
   /**
    * gives the energy of the particle.
    */
-  Double_t GetEnergy() const {return fEnergy;}
+  double GetEnergy() const {return energy_;}
 
   /**
    * sets the energy of the track
    */
-  void SetEnergy(Double_t energy){fEnergy = energy;}
+  void SetEnergy(double energy){energy_ = energy;}
 
   /**
    * copies all this particles data to destination if a dynamic cast to
@@ -46,16 +49,25 @@ class I3Energetic
       I3Energetic* energetic = dynamic_cast<I3Energetic*>(&destination);
       if(energetic)
 	{
-	  energetic->fEnergy = fEnergy;
+	  energetic->energy_ = energy_;
 	}
     }
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Energy:"<<fEnergy<<"\n";
+      o<<"Energy:"<<energy_<<"\n";
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Energy", energy_);
+  }
+
   // ROOT macro
   ClassDef(I3Energetic,1);
 };
