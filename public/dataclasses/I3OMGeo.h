@@ -7,13 +7,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.14 2004/03/13 19:51:20 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.15 2004/04/01 17:08:24 pretz Exp $
  *
  * The basic Optical Module Geometry class.  This is the static 
  * frozen-in-the-ice properties of an optical module
  *
- * @version $Revision: 1.14 $
- * @date $Date: 2004/03/13 19:51:20 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/04/01 17:08:24 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -34,6 +34,7 @@ class I3OMGeo : public TObject
   EOrientation fOrientation;
   Int_t fString;
   Double_t fRelativeQE;
+  Double_t fArea;
 
   public:
   /**
@@ -62,6 +63,8 @@ class I3OMGeo : public TObject
     fY = rhs.fY;
     fZ = rhs.fZ;
     fOrientation = rhs.fOrientation;
+    fRelativeQE = rhs.fRelativeQE;
+    fArea = rhs.fArea;    
     return *this;
   }
 
@@ -113,7 +116,7 @@ class I3OMGeo : public TObject
   /**
    * @param orientation the new orientation for the tube
    */
-  void    Orientation(EOrientation orientation) { fOrientation = orientation; }
+  void Orientation(EOrientation orientation) { fOrientation = orientation; }
 
   /**
    * @return the string that this is an OM for
@@ -131,7 +134,7 @@ class I3OMGeo : public TObject
    * AMANDA experiment
    * @return the relative quantum efficiency of this OM
    */
-  Double_t RelativeQE(){return fRelativeQE;}
+  Double_t RelativeQE() const {return fRelativeQE;}
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
@@ -140,6 +143,19 @@ class I3OMGeo : public TObject
    * @param qe the new Relative Quantum Efficiency for this OM
    */
   void RelativeQE(Double_t qe) { fRelativeQE = qe;}
+
+  /**
+   * retrieves the area of the photo cathode for this tube
+   * @return the area of the photocathode
+   */
+  Double_t Area() const { return fArea;}
+
+
+  /**
+   * sets the photocathode area for this tube
+   * @param area the new area for the photocathode
+   */
+  void Area(Double_t area){fArea = area;}
 
   // for testing
   virtual std::string iam() { return "I3OMGeo"; }
