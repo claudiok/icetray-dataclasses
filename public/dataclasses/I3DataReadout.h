@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.17 2004/09/14 14:14:26 deyoung Exp $
+ * $Id: I3DataReadout.h,v 1.18 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.17 $
- * @date $Date: 2004/09/14 14:14:26 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -91,9 +91,6 @@ public:
     }
 
  private:
-  // copy and assignment are private
-  I3DataReadout(const I3DataReadout& rhs); 
-  const I3DataReadout& operator=(const I3DataReadout& rhs); 
 
   // ROOT Macro
   ClassDef(I3DataReadout,1);

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMultiMapStoragePolicy.h,v 1.4 2005/01/04 16:07:02 dule Exp $
+    $Id: STLMultiMapStoragePolicy.h,v 1.5 2005/01/24 23:17:44 ehrlich Exp $
 
     @file STLMultiMapStoragePolicy.h
-    @version $Revision: 1.4 $
-    @date $Date: 2005/01/04 16:07:02 $
+    @version $Revision: 1.5 $
+    @date $Date: 2005/01/24 23:17:44 $
     @author Ralf Ehrlich
 
 */
@@ -75,7 +75,7 @@ class STLMultiMapStoragePolicy {
 
  private:
 
-  map_type map_;
+  map_type map_; //||
 
  public:
 
@@ -298,7 +298,6 @@ class STLMultiMapStoragePolicy {
    * same as Count()
    */
   size_type count(const KeyType& key) const {return map_.count(key);}
-
 };
 
 #endif

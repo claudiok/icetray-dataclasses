@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultLikelihood.h,v 1.8 2004/08/19 16:10:39 pretz Exp $
+ * $Id: I3RecoResultLikelihood.h,v 1.9 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3RecoResultLikelihood.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/08/19 16:10:39 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -54,9 +54,6 @@ class I3RecoResultLikelihood : public I3RecoResultSingleTrack
   }
 
  private:
-  // copy and assignment are private
-  I3RecoResultLikelihood(const I3RecoResultLikelihood& rhs);
-  const I3RecoResultLikelihood& operator=(const I3RecoResultLikelihood&);
 
   // ROOT macro
   ClassDef(I3RecoResultLikelihood, 1);

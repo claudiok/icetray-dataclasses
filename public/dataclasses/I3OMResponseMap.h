@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.5 2005/01/24 22:52:08 deyoung Exp $
+ * $Id: I3OMResponseMap.h,v 1.6 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3OMResponseMap.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/01/24 22:52:08 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -65,9 +65,6 @@ class I3OMResponseMap : public TObject,
     }  
 
   private:
-  // copy and assignment private
-  I3OMResponseMap(const I3OMResponseMap&);
-  const I3OMResponseMap& operator=(const I3OMResponseMap&);
 
   // ROOT macro
   ClassDef(I3OMResponseMap,1);

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.16 2004/08/22 11:49:24 troy Exp $
+    $Id: StoragePolicy.h,v 1.17 2005/01/24 23:17:44 ehrlich Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.16 $
-    @date $Date: 2004/08/22 11:49:24 $
+    @version $Revision: 1.17 $
+    @date $Date: 2005/01/24 23:17:44 $
     @author Troy D. Straszheim
 */
 
@@ -88,7 +88,7 @@ struct PtrPolicy
    * roost smart pointers.  FIXME: need docs
    */
   typedef roost::shared_ptr<Pointed> ThePolicy;
-  //  typedef Pointed* ThePolicy;
+    // typedef Pointed* ThePolicy;
 };
 
 //TDS: workaround while we get these goddamned smart pointers working

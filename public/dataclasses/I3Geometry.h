@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.28 2004/09/14 17:10:05 niessen Exp $
+ * $Id: I3Geometry.h,v 1.29 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.28 $
- * @date $Date: 2004/09/14 17:10:05 $
+ * @version $Revision: 1.29 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -71,9 +71,6 @@ class I3Geometry : public TObject
     }
 
  private:
-  // copy and assignment private
-  I3Geometry(const I3Geometry& rhs);
-  const I3Geometry& operator=(const I3Geometry& rhs);
 
   //ROOT macro
   ClassDef(I3Geometry,1);

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultDict.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3RecoResultDict.h,v 1.7 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3RecoResultDict.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  * @author pretz
  */
@@ -58,9 +58,6 @@ class I3RecoResultDict : public TObject,
     }
 
  private:
-  // copy and assignment are private
-  I3RecoResultDict(const I3RecoResultDict&);
-  const I3RecoResultDict& operator=(const I3RecoResultDict&);
 
   // ROOT macro
   ClassDef(I3RecoResultDict,1);

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.8 2004/10/14 15:17:08 troy Exp $
+    $Id: I3HitTest.cxx,v 1.9 2005/01/24 23:17:44 ehrlich Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/10/14 15:17:08 $
+    @version $Revision: 1.9 $
+    @date $Date: 2005/01/24 23:17:44 $
     @author Troy D. Straszheim
 
     @todo
@@ -24,14 +24,19 @@
 */
 
 #include "TUT/tut.h"
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/nvp.hpp>
+
 
 // MODIFY: replace with include of the header file for the module you
 // are testing, or whatever headers are necessary for this test.
 #include "dataclasses/I3Hit.h"
 #include <string>
-using std::string;
-using std::cout;
-using std::endl;
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 namespace tut
 {
@@ -178,6 +183,35 @@ namespace tut
   /**
    * checks chains of operations
    */
+  template<> template<>
+  void object::test<8>()
+  {
+	I3Hit u;
+   // create and open a character archive for output
+    std::ofstream ofs("/tmp/filename");
+    boost::archive::text_oarchive oa(ofs);
+
+	u.SetTime(3.3333);
+    oa << u;
+    oa << u;
+    // close archive
+    ofs.close();
+
+    // ... some time later restore the class instance to its orginal state
+    // create and open an archive for input
+    std::ifstream ifs("/tmp/filename", std::ios::binary);
+    boost::archive::text_iarchive ia(ifs);
+    // read class state from archive
+
+    I3Hit newhit;
+    ia >> newhit;
+    ia >> newhit;
+	
+    ensure_distance("read in hit", newhit.GetTime(), u.GetTime(), 0.0001);
+    // close archive
+    ifs.close();
+  }
+
   template<> template<>
   void object::test<42>()
   {

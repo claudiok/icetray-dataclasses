@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ParticleMultiMap.h,v 1.3 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3ParticleMultiMap.h,v 1.4 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3ParticleMultiMap.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  */
 
@@ -56,9 +56,6 @@ class I3ParticleMultiMap : public TObject, public MultiMapPolicy<string, I3Parti
     }
   
  private:
-  // copy and assignment private
-/*   I3ParticleMultiMap(const I3ParticleMultiMap&);  */
-/*   const I3ParticleMultiMap& operator=(const I3ParticleMultiMap&); */
 
   // ROOT macro
   ClassDef(I3ParticleMultiMap,1);

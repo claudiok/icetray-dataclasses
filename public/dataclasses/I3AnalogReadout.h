@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.6 2004/09/14 14:14:26 deyoung Exp $
+ * $Id: I3AnalogReadout.h,v 1.7 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/09/14 14:14:26 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -48,9 +48,6 @@ public:
 
   
 private:
-    // copy and assignment private
-    I3AnalogReadout(const I3AnalogReadout &);
-    const I3AnalogReadout& operator=(const I3AnalogReadout&);
     
     // ROOT macro
     ClassDef(I3AnalogReadout,1);

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.9 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.10 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author pretz
  *
  */
@@ -29,7 +29,7 @@ using namespace std;
  * event. 
  */
 class I3AMANDAAnalogReadout : public I3AnalogReadout { 
- 
+
     vector<Double_t> fLEs;
     vector<Double_t> fTOTs;
     vector<UShort_t> fHitNumbers;
@@ -40,7 +40,7 @@ public:
      * constructor
      */
     I3AMANDAAnalogReadout(){}
-    
+
     /**
      * destructor
      */
@@ -84,7 +84,7 @@ public:
      * @return the list of TOTs as a non-const object
      */
     vector<UShort_t>& GetHitNumbers() {return fHitNumbers;}
-    
+
     /**
      * @return the amplitude
      */
@@ -113,10 +113,7 @@ public:
     
 
 private:
-    // copy and assignment private
-    I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout &);
-    const I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout&);
-    
+
     // ROOT macro
     ClassDef(I3AMANDAAnalogReadout,1);
 };

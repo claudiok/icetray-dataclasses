@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.7 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Localized.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author pretz
  *
  */
@@ -26,9 +26,14 @@ class I3Localized{
 
   virtual ~I3Localized() {}
   /**
+   * indicates that the core position isn't known
+   */
+  Bool_t IsCoreLocalized() const { return false;}
+
+  /**
    * indicates that this class has a localization
    */
-  virtual Bool_t IsLocalized() const { return true;}
+  Bool_t IsLocalized() const { return true;}
 
   /**
    * gets the position of the cascade

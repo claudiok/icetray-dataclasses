@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.10 2004/08/16 16:22:13 pretz Exp $
+ * $Id: I3MCEvent.h,v 1.11 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/16 16:22:13 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -85,9 +85,6 @@ class I3MCEvent : public I3Event
     }
   
  private:
-  // copy and assignment private
-  I3MCEvent(const I3MCEvent& rhs);
-  const I3MCEvent& operator=(const I3MCEvent& rhs);
 
   //ROOT macro
   ClassDef(I3MCEvent, 1);

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultMultiTracks.h,v 1.7 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3RecoResultMultiTracks.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3RecoResultMultiTracks.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  */
 #ifndef I3RECORESULTMULTITRACKS_H
@@ -45,9 +45,6 @@ class I3RecoResultMultiTracks : public I3RecoResult, public VectorPolicy<I3Parti
     };
 
   private:
-  // copy and assignment private
-  I3RecoResultMultiTracks(const I3RecoResultMultiTracks&);
-  const I3RecoResultMultiTracks operator=(const I3RecoResultMultiTracks);
 
   //ROOT macro
   ClassDef(I3RecoResultMultiTracks,1);

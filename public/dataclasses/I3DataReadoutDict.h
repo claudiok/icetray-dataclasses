@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.7 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3DataReadoutDict.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/01/24 23:17:44 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -72,9 +72,6 @@ class I3DataReadoutDict : public TObject,
     }
 
  private:
-  // copy and assignment are private
-  I3DataReadoutDict(const I3DataReadout&);
-  const I3DataReadoutDict& operator=(const I3DataReadout&);
 
   // ROOT macro
   ClassDef(I3DataReadoutDict,1);
