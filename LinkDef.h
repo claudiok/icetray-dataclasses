@@ -301,7 +301,6 @@
 #pragma link C++ class I3CascadeExtractor+;
 #pragma link C++ class vector<I3OMGeoAmandaPtr>+;
 
-#pragma link C++ class I3Distance+;
 #pragma link C++ class I3StartingTrack+;
 
 #endif
