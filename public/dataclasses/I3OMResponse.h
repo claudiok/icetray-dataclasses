@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.19 2004/03/10 19:17:52 pretz Exp $
+    $Id: I3OMResponse.h,v 1.20 2004/03/10 20:21:45 pretz Exp $
 
-    @version $Revision: 1.19 $
-    @date $Date: 2004/03/10 19:17:52 $
+    @version $Revision: 1.20 $
+    @date $Date: 2004/03/10 20:21:45 $
     @author
 
     @todo
@@ -15,7 +15,6 @@
 
 #include <TObject.h>
 #include <TObjArray.h>
-#include <TRef.h>
 
 #include "I3DataExecution.h"
 #include "I3OMGeo.h"
@@ -26,14 +25,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.19 2004/03/10 19:17:52 pretz Exp $
+ * $Id: I3OMResponse.h,v 1.20 2004/03/10 20:21:45 pretz Exp $
  *
  * The container for all the OMResponse-related data in the event
  * Has the monte-carlo truth, the hardware response, and the reconstructed
  * hit series'.    
  *
- * @version $Revision: 1.19 $
- * @date $Date: 2004/03/10 19:17:52 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/03/10 20:21:45 $
  * @author ehrlich
  * @author troy
  * @author pretz
