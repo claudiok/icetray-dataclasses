@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.115 2004/08/05 13:00:21 troy Exp $
-// $Revision: 1.115 $
-// $Date: 2004/08/05 13:00:21 $
+// $Id: LinkDef.h,v 1.116 2004/08/05 13:19:22 troy Exp $
+// $Revision: 1.116 $
+// $Date: 2004/08/05 13:19:22 $
 //
 
 #ifdef __CINT__
@@ -19,6 +19,7 @@
 //
 #pragma link C++ namespace I3Units;
 #pragma link C++ namespace I3Constants;
+#pragma link C++ namespace roost;
 
 #pragma link C++ class I3TrackImpl<I3Starting,I3Energetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3NonComposite>+;
