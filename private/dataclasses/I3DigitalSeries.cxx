@@ -52,6 +52,7 @@ const I3Digital& I3DigitalSeries::GetDigit(unsigned short number) const
        return *to_return;
   }
   I3DataExecution::Instance().Fatal("I3DigitalSeries::GetDigit() Asked for a digital response that is out of bounds");
+  return *(I3Digital*)0;
 }
 
 void I3DigitalSeries::AddDigit(I3Digital* digit_)
