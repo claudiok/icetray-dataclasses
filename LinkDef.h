@@ -1,4 +1,4 @@
-// $Id: LinkDef.h,v 1.72.2.1 2004/07/19 22:26:50 ehrlich Exp $
+// $Id: LinkDef.h,v 1.72.2.2 2004/07/29 18:56:57 ehrlich Exp $
 #ifdef __CINT__
 
 #pragma link off all globals;
@@ -47,6 +47,8 @@
 #pragma link C++ class I3DirectionalCascade+;
 #pragma link C++ class I3EnergyCascade+;
 #pragma link C++ class I3MCCascade+;
+#pragma link C++ class I3F2KRecoCascade+;
+#pragma link C++ typedef I3F2KRecoCascadePtr;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
 #pragma link C++ class I3PrimaryImpl<I3NonDirectional,I3CoreLocalized,I3NonEnergetic>+;

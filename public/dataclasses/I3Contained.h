@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3Contained.h,v 1.5.2.1 2004/07/29 18:56:57 ehrlich Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.5.2.1 $
+ * @date $Date: 2004/07/29 18:56:57 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -138,7 +138,7 @@ class I3Contained{
    * computes the stoping x of the track
    */
   Double_t StopX() const {
-    return fStartX + fLength * sin(fZenith) * cos (fAzimuth);
+    return fStartX - fLength * sin(fZenith) * cos (fAzimuth);
   }
 
   /**
@@ -146,15 +146,15 @@ class I3Contained{
    */
   Double_t StopY() const 
     {
-      return fStartX + fLength * sin(fZenith) * sin(fAzimuth);
+      return fStartX - fLength * sin(fZenith) * sin(fAzimuth);
     }
 
   /**
    * computes the stopping z of the track
    */
-  Double_t StopZ() const 
+  Double_t StopZ() const
     {
-      return fStartZ + fLength * cos(fZenith);
+      return fStartZ - fLength * cos(fZenith);
     }
 
   /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.7 2004/05/21 19:21:43 pretz Exp $
+ * $Id: I3Primary.h,v 1.7.2.1 2004/07/29 18:56:57 ehrlich Exp $
  *
  * @file I3Primary.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/05/21 19:21:43 $
+ * @version $Revision: 1.7.2.1 $
+ * @date $Date: 2004/07/29 18:56:57 $
  * @author pretz
   */
 
@@ -27,6 +27,11 @@ class I3Primary : public I3Particle{
   virtual Bool_t IsObservable() const {return false;}
    
   /**
+   * indicates whether or not the particle has a valid energy
+   */
+  virtual Bool_t HasEnergy() const = 0;
+
+  /**
    * indicatess that the particle has a core position, and so
    * asking CoreX, and CoreY and CoreT is legit.
    */
@@ -46,6 +51,11 @@ class I3Primary : public I3Particle{
    * the time the particle was at CoreX and CoreY
    */
   virtual Double_t CoreT() const =0;
+
+  /**
+   * gives the energy of the particle
+   */
+  virtual Double_t Energy() const = 0;
 
   /**
    * Copies over data from the source particle to this particle.
