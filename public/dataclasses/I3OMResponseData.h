@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponseData.h,v 1.8 2004/02/17 16:54:39 troy Exp $
+    $Id: I3OMResponseData.h,v 1.9 2004/02/18 21:39:46 troy Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/02/17 16:54:39 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/02/18 21:39:46 $
     @author
 
     @todo
@@ -17,11 +17,11 @@
 
 class I3OMResponseDataHeader { };
 
-typedef StoragePolicy<I3OMResponse> I3OMReponseDataStoragePolicy;
+typedef StoragePolicy<I3OMResponse> I3OMResponseDataStoragePolicy;
 
 typedef GarnishedVector<I3OMResponseDataHeader, 
 			I3OMResponse, 
-			I3OMReponseDataStoragePolicy> I3OMResponseData;
+			I3OMResponseDataStoragePolicy> I3OMResponseData;
 
 
 #endif

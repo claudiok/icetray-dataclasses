@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorPolicy.h,v 1.4 2004/02/17 19:49:53 troy Exp $
+    $Id: STLVectorPolicy.h,v 1.5 2004/02/18 21:39:46 troy Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/02/17 19:49:53 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/02/18 21:39:46 $
     @author Troy Straszheim
 
 */
@@ -53,7 +53,7 @@ class StoragePolicy {
   const_reference back() const { return vector_.back(); }
 
   //rootcint meckert about friend function somethingorother
-  //bool empty() const { return vector_.empty() }
+  //  bool empty() const { return vector_.empty() }
 
 };
 

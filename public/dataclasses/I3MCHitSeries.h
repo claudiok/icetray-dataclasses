@@ -15,6 +15,4 @@ class I3MCHitSeriesHeader {
 typedef StoragePolicy<I3MCHit> I3MCHitSeriesStoragePolicy;
 typedef GarnishedVector<I3MCHitSeriesHeader, I3MCHit, I3MCHitSeriesStoragePolicy> I3MCHitSeries;
 
-
-
 #endif
