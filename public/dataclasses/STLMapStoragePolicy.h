@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.19 2005/03/08 14:49:13 olivas Exp $
+    $Id: STLMapStoragePolicy.h,v 1.20 2005/04/02 17:50:11 olivas Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.19 $
-    @date $Date: 2005/03/08 14:49:13 $
+    @version $Revision: 1.20 $
+    @date $Date: 2005/04/02 17:50:11 $
     @author Troy Straszheim
 
 */
@@ -18,6 +18,20 @@
 #include "services/I3Logging.h"
 
 using namespace std;
+
+namespace boost 
+{
+  namespace serialization 
+  {
+    class access;
+    template <class T> struct nvp;
+    template <class T> nvp<T> make_nvp(const char* name, T& t);
+#ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
+    template <class Base, class Derived, class Retval>
+      Retval base_object(Derived &d);
+#endif
+  }
+}
 
 /**
  * @brief A template which provides a restricted interface to the
@@ -247,6 +261,17 @@ class STLMapStoragePolicy {
   const_iterator find (const KeyType& key) const { return map_.find(key); }
 
   size_type count(const KeyType& key){ return map_.count(key); }
+
+ private: 
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & map_;
+  }
+
 };
 
 

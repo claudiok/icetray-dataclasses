@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.39 2005/01/24 23:17:44 ehrlich Exp $
+    $Id: I3OMResponse.h,v 1.40 2005/04/02 17:50:11 olivas Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.39 $
-    @date $Date: 2005/01/24 23:17:44 $
+    @version $Revision: 1.40 $
+    @date $Date: 2005/04/02 17:50:11 $
     @author ehrlich
     @author troy
     @author pretz
@@ -35,8 +35,8 @@ class I3OMResponse : public TObject
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
 
-  I3DataReadoutDict   fDataReadoutDict; //||
-  I3RecoHitSeriesDict fRecoHitSeriesDict; //||
+  I3DataReadoutDict   dataReadoutDict_; //||
+  I3RecoHitSeriesDict recoHitSeriesDict_; //||
 
  public:
   /**
@@ -52,25 +52,25 @@ class I3OMResponse : public TObject
   /**
    * @return the the hardware data for this response as a const object
    */
-  const I3DataReadoutDict& GetDataReadoutDict() const {return fDataReadoutDict;}
+  const I3DataReadoutDict& GetDataReadoutDict() const {return dataReadoutDict_;}
   
   /**
    * @return the hardware data for this response as a non-const object
    */
-  I3DataReadoutDict& GetDataReadoutDict() {return fDataReadoutDict;}
+  I3DataReadoutDict& GetDataReadoutDict() {return dataReadoutDict_;}
 
   /**
    * @return the reco hit series data as a const object
    */
   const I3RecoHitSeriesDict& GetRecoHitSeriesDict() const 
     {
-      return fRecoHitSeriesDict;
+      return recoHitSeriesDict_;
     }
   
   /**
    * @return the reco hit series data as a non-const object
    */
-  I3RecoHitSeriesDict& GetRecoHitSeriesDict() {return fRecoHitSeriesDict;}
+  I3RecoHitSeriesDict& GetRecoHitSeriesDict() {return recoHitSeriesDict_;}
 
   /**
    * @todo finish implementing this method
@@ -78,7 +78,7 @@ class I3OMResponse : public TObject
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3OMResponse\n"
-       <<fDataReadoutDict
+       <<dataReadoutDict_
        <<"]";
     }
 
@@ -91,6 +91,15 @@ class I3OMResponse : public TObject
 
   private:
  
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("DataReadoutDict", dataReadoutDict_);
+    ar & make_nvp("RecoHitSeriesDict", recoHitSeriesDict_);
+  }
+
   // ROOT macro
   ClassDef(I3OMResponse,1);
 };

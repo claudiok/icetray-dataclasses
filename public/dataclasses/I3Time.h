@@ -4,7 +4,7 @@
 #include <string>
 #include "TObject.h"
 #include <ostream>
-
+#include "dataclasses/StoragePolicy.h"
 /**
  * @brief A class for dealing with global times.  
  *
@@ -221,6 +221,17 @@ class I3Time : public TObject
   
   unsigned int year_;
   long long int daqTime_;
+
+ private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Time", year_);
+    ar & make_nvp("HitID", daqTime_);
+  }
 
   ClassDef(I3Time,1);
 };

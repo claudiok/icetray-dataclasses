@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.15 2005/03/29 20:27:53 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.16 2005/04/02 17:50:11 olivas Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.15 $
- * @date $Date: 2005/03/29 20:27:53 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2005/04/02 17:50:11 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -89,6 +89,16 @@ class I3DataHeader : public TObject
     }
   
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("StartTime", startTime_);
+    ar & make_nvp("EndTime", endTime_);
+  }
+
   // ROOT Macro
   ClassDef(I3DataHeader,1);
 };

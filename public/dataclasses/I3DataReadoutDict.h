@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3DataReadoutDict.h,v 1.9 2005/04/02 17:50:11 olivas Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/02 17:50:11 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -72,6 +72,14 @@ class I3DataReadoutDict : public TObject,
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3DataReadoutDict", base_object< STLMapStoragePolicy<string,I3DataReadoutPtr> >(*this));
+  }
 
   // ROOT macro
   ClassDef(I3DataReadoutDict,1);
