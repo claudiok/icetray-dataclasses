@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.8 2004/07/07 19:05:57 pretz Exp $
+    $Id: InIceExtractorExample.cxx,v 1.9 2004/07/28 21:24:45 pretz Exp $
 
-    @version $Revision: 1.8 $
-    @date $Date: 2004/07/07 19:05:57 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/07/28 21:24:45 $
     @author Troy D. Straszheim
 
     @todo
@@ -59,6 +59,8 @@ namespace tut
   // this prints an OM
   void PrintOM (I3OMGeoPtr p) 
   {
+    //    I3OMGeoPtr p = iter->second;
+    ensure(p!=0);
     I3OMGeo::EOMType type = p->GetOMType();
     string the_type;
     if(type == I3OMGeo::AMANDA)
@@ -111,33 +113,41 @@ namespace tut
   template<> template<>
   void object::test<1>()
   {
-    cout<<"Took this out until I have time to update it"<<endl;
-    //@todo this needs re-worked so that the example works again.
-//     // Make a 30 entry-long I3Geometry with 10 each of
-//     // OMGeo/OMGeoAMANDA/OMGeoIceCube
-//     for (int i=0; i<6; i++) {
-//       geometry.push_back(I3OMGeoAMANDAPtr(new I3OMGeoAMANDA));
-//       geometry.push_back(I3OMGeoIceCubePtr(new I3OMGeoIceCube));
-//     }
+    // Make a 30 entry-long I3Geometry with 10 each of
+    // OMGeo/OMGeoAMANDA/OMGeoIceCube
+    for (int i=0; i<6; i++) {
+      geometry[OMKey(1,i)] = new I3OMGeoAMANDA;
+      geometry[OMKey(2,i)] = new I3OMGeoIceCube;
+    }
+  
+      // loop through this geometry (from begin() to end()) and print
+    // each element print the geometry.  see function PrintOM() above
+    cout << "INITIAL PRINTOUT OF I3Geometry" << endl;
 
-//     // loop through this geometry (from begin() to end()) and print
-//     // each element print the geometry.  see function PrintOM() above
-//     cout << "INITIAL PRINTOUT OF I3Geometry" << endl;
-//     for_each(geometry.begin(), geometry.end(), PrintOM);
-
-//     // Let's loop through the geometry and call SetOMRandomValues on
-//     // each member. this "for_each" technique is quicker and safer
-//     // than using loops, and it works on maps, lists, deques, sets,
-//     // all of that.  Some of our OM's may have duplicate OMNumber
-//     // values, that is OK for the purposes of this Example.
-//     for_each(geometry.begin(), geometry.end(), SetOMRandomValues);
-      
-//     // "random_shuffle" is an STL algorithm.  It does what you think.
-//     random_shuffle(geometry.begin(), geometry.end());  
-
-//     // Now let's see it again
-//     cout << "SHUFFLED, RANDOMIZED I3Geometry" << endl;
-//     for_each(geometry.begin(), geometry.end(), PrintOM);
+    I3InIceGeometry::iterator iter;
+    for(iter = geometry.begin();iter != geometry.end();iter++)
+      {
+ 	PrintOM(iter->second);
+      }
+    
+  
+    // Let's loop through the geometry and call SetOMRandomValues on
+    // each member. this "for_each" technique is quicker and safer
+    // than using loops, and it works on maps, lists, deques, sets,
+    // all of that.  Some of our OM's may have duplicate OMNumber
+    // values, that is OK for the purposes of this Example.
+    //    for_each(geometry.begin(), geometry.end(), SetOMRandomValues);
+    for(iter = geometry.begin() ; iter!= geometry.end() ; iter++)
+      {
+	SetOMRandomValues(iter->second);
+      }
+    
+    // not used anymore.  The map preserves the order.  -pretz
+    //     // "random_shuffle" is an STL algorithm.  It does what you think.
+    //     random_shuffle(geometry.begin(), geometry.end());  
+    //     // Now let's see it again
+    //   cout << "SHUFFLED, RANDOMIZED I3Geometry" << endl;
+    //     for_each(geometry.begin(), geometry.end(), PrintOM);
 
 //     // Let's get the GeoAMANDAs out, we want our own vector of
 //     // pointers to them to play with.  We use the "AMANDAExtractor"
@@ -163,8 +173,8 @@ namespace tut
 //     cout << "AMANDAS ONLY SORTED BY OMNUMBER" << endl;
 //     sort(amanda_geometry.begin(), amanda_geometry.end(), OMNumber_lessthan);
 //     for_each(amanda_geometry.begin(), amanda_geometry.end(), PrintOM);
-   }
-
+  
+    }
   // An example using the new OMKey access to the InIceGeometry
   template<> template<>
   void object::test<2>()
