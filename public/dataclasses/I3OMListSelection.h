@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMListSelection.h,v 1.1 2005/02/08 20:04:27 deyoung Exp $
+ *  $Id: I3OMListSelection.h,v 1.2 2005/02/09 18:18:05 deyoung Exp $
  *
  * @file I3OMListSelection.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/02/08 20:04:27 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/02/09 18:18:05 $
  * @author deyoung
  */
 
@@ -17,6 +17,9 @@
 class I3OMListSelection;
 typedef PtrPolicy<I3OMListSelection>::ThePolicy I3OMListSelectionPtr;
 
+/**
+ * Virtual base class for OMSelections that check against a list of OMKeys
+ */
 class I3OMListSelection : public I3OMResponseSelection {
 
 public:
@@ -31,7 +34,7 @@ public:
   /**
    * Virtual function for deciding whether a given <OMKey, OMResponse>
    * pair is selected.  Returns true if the OM key is in the list of
-   * good OMs, false otherwise.
+   * OMs, false otherwise.
    */
   virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) 
     {
@@ -41,10 +44,17 @@ public:
 	return false;
     };
   
+  /**
+   * Returns the list of OMs as a vector of OMKeys
+   */
   VectorPolicy<OMKey>::ThePolicy GetOMList() const {
     return omList_;
   };
   
+  /**
+   * Allows the list of OMs to be set all at once, overwriting any
+   * existing list
+   */ 
   virtual void SetOMList(const VectorPolicy<OMKey>::ThePolicy& list) {
     if (omList_.Size() > 0) {
       log_warn("Overwriting list of OMs.");
@@ -53,6 +63,9 @@ public:
     omList_ = list;
   }
   
+  /**
+   * Adds a single OMKey to the list
+   */
   virtual void AddOM(OMKey key) {
     omList_.Add(key);
   }
@@ -70,10 +83,6 @@ public:
 
   // default-generated assignment and copy-constructor explicitly allowed
 
-  //protected:
-  
-  //  bool isGood_;
-  
 private:
 
   VectorPolicy<OMKey>::ThePolicy omList_;

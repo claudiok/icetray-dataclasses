@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.7 2005/02/08 20:04:27 deyoung Exp $
+ *  $Id: I3BadOMSelection.h,v 1.8 2005/02/09 18:18:05 deyoung Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/02/08 20:04:27 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/02/09 18:18:05 $
  * @author deyoung
  */
 
@@ -14,6 +14,10 @@
 
 #include "I3OMListSelection.h"
 
+/**
+ * OMSelection class that selects all OMs whose keys are *not* in its
+ * Bad OM list.
+ */
 class I3BadOMSelection : public I3OMListSelection {
 
 public:
@@ -25,36 +29,40 @@ public:
   
   virtual ~I3BadOMSelection() {};
  
+  /**
+   * Returns the entire list of bad OMs as a vector.  Equivalent to GetOMList().
+   */
   VectorPolicy<OMKey>::ThePolicy GetBadOMs() const {
-    //    return omList_;
     return I3OMListSelection::GetOMList();
   }; 
 
+  /** 
+   * Set the list of bad OMs all at once.  Equivalent to SetOMList().
+   */
   virtual void SetBadOMs(const VectorPolicy<OMKey>::ThePolicy& list) {
-//     if (omList_.Size() > 0) {
-//       log_warn("Overwriting list of bad OMs.");
-//       omList_.Clear();
-//     }
-//     for (unsigned i = 0; i < list.Size(); ++i) {
-//       omList_.Add(list[i]);
-//     }
     I3OMListSelection::SetOMList(list);
   };
 
+  /**
+   * Add a bad OM to the list.  Equivalent to AddOM().
+   */
   virtual void AddBadOM(const OMKey& key) {
-    //    omList_.Add(key);
     I3OMListSelection::AddOM(key);
   };
 
   /**
    * Virtual function for deciding whether a given <OMKey, OMResponse>
-   * pair is selected.  Returns false if the OM key is in the list of
-   * true OMs, false otherwise.
+   * pair should be selected.  Returns false if the OM key is in the
+   * list of bad OMs, true otherwise.
    */
   virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) {
     return !(I3OMListSelection::operator()(element));
   };
 
+  /**
+   * Returns a copy of the current selection.
+   * @todo Should return an independent copy.
+   */
   virtual I3OMResponseSelectionPtr GetCopy() {
     return I3OMResponseSelectionPtr(new I3BadOMSelection(*this));
   };
@@ -79,8 +87,6 @@ private:
    */
 //   I3BadOMSelection(const I3BadOMSelection& rhs) { *this = rhs; } 
 
-  //  VectorPolicy<OMKey>::ThePolicy omList_;
-  
   ClassDef(I3BadOMSelection,1);
 };
 

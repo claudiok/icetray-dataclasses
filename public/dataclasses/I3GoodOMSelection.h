@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.8 2005/02/08 20:04:27 deyoung Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.9 2005/02/09 18:18:05 deyoung Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/02/08 20:04:27 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/02/09 18:18:05 $
  * @author deyoung
  */
 
@@ -17,6 +17,10 @@
 class I3GoodOMSelection;
 typedef PtrPolicy<I3GoodOMSelection>::ThePolicy I3GoodOMSelectionPtr;
 
+/**
+ * OMSelection class that selects all OMResponses whose OM keys are in
+ * its list of good OMs.  All others are rejected.
+ */
 class I3GoodOMSelection : public I3OMListSelection {
 
 public:
@@ -41,26 +45,32 @@ public:
 // 	return false;
       return I3OMListSelection::operator()(element);
     };
-  
+
+  /**
+   * Returns the entire list of good OMs as a vector.  Equivalent to GetOMList().
+   */
   VectorPolicy<OMKey>::ThePolicy GetGoodOMs() const {
-    //    return omList_;
     return I3OMListSelection::GetOMList();
   };
   
+  /** 
+   * Set the list of good OMs all at once.  Equivalent to SetOMList().
+   */
   virtual void SetGoodOMs(const VectorPolicy<OMKey>::ThePolicy& good_list) {
-//     if (omList_.Size() > 0) {
-//       log_warn("Overwriting list of OMs.");
-//       omList_.Clear();
-//     }
-//     omList_ = good_list;
     I3OMListSelection::SetOMList(good_list);
   }
   
+  /**
+   * Add a good OM to the list.  Equivalent to AddOM().
+   */
   virtual void AddGoodOM(OMKey key) {
-    //    omList_.Add(key);
     I3OMListSelection::AddOM(key);
   }
 
+  /**
+   * Returns a copy of the current selection.
+   * @todo Should return an independent copy.
+   */
   virtual I3OMResponseSelectionPtr GetCopy() 
     {
       return I3OMResponseSelectionPtr(new I3GoodOMSelection(*this));
@@ -75,8 +85,6 @@ public:
 
 private:
 
-  //  VectorPolicy<OMKey>::ThePolicy omList_;
-  
   ClassDef(I3GoodOMSelection,1);
 };
 

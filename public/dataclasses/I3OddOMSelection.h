@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OddOMSelection.h,v 1.5 2005/01/24 19:40:15 deyoung Exp $
+ *  $Id: I3OddOMSelection.h,v 1.6 2005/02/09 18:18:05 deyoung Exp $
  *
  * @file I3OddOMSelection.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/01/24 19:40:15 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/02/09 18:18:05 $
  * @author deyoung
  */
 
@@ -20,6 +20,10 @@ class I3OddOMSelection;
  */
 typedef PtrPolicy<I3OddOMSelection>::ThePolicy I3OddOMSelectionPtr;
 
+/**
+ * OMSelection class that selects all OMResponses from OMs with
+ * odd-numbered positions on their strings.
+ */
 class I3OddOMSelection : public I3OMResponseSelection {
 
 public:
@@ -40,11 +44,13 @@ public:
     return kFALSE;
   };
 
-  // Use the copy constructor to make the copy.
-  virtual I3OMResponseSelectionPtr GetCopy() 
-    {
-      return I3OMResponseSelectionPtr(new I3OddOMSelection(*this));
-    };
+  /**
+   * Returns a copy of the current selection.
+   */
+  virtual I3OMResponseSelectionPtr GetCopy() {
+    // The selection has no state, so we can just pop off a new one.  
+    return I3OMResponseSelectionPtr(new I3OddOMSelection);
+  };
 
   virtual void ToStream(ostream& o) const {
     o << "[ I3OddOMSelection ]\n";
