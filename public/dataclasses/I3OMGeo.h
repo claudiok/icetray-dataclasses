@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.9 2004/02/27 22:48:20 ehrlich Exp $
+ * $Id: I3OMGeo.h,v 1.10 2004/03/03 15:37:01 troy Exp $
  *
  * The basic Optical Module Geometry class.  This is the static 
  * frozen-in-the-ice properties of an optical module
  *
- * @version $Revision: 1.9 $
- * @date $Date: 2004/02/27 22:48:20 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/03/03 15:37:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,6 +21,7 @@
 #include <TObject.h>
 #include <TObjArray.h>
 #include <TRef.h>
+#include <string>
 
 class I3OMGeo : public TObject
 {
@@ -127,6 +128,9 @@ class I3OMGeo : public TObject
    * @param version the new version of the OM
    */
   void    Version(UChar_t version) { fVersion = version; }
+
+  // for testing
+  virtual std::string iam() { return "OMGeoIcecube"; }
 
  private:
   //ROOT macro

@@ -1,3 +1,15 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3OMResponse.h,v 1.17 2004/03/03 15:37:01 troy Exp $
+
+    @version $Revision: 1.17 $
+    @date $Date: 2004/03/03 15:37:01 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3OMRESPONSE_H
 #define I3OMRESPONSE_H
 
@@ -14,14 +26,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponse.h,v 1.16 2004/02/27 22:48:20 ehrlich Exp $
+ * $Id: I3OMResponse.h,v 1.17 2004/03/03 15:37:01 troy Exp $
  *
  * The container for all the OMResponse-related data in the event
  * Has the monte-carlo truth, the hardware response, and the reconstructed
  * hit series'.    
  *
- * @version $Revision: 1.16 $
- * @date $Date: 2004/02/27 22:48:20 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/03/03 15:37:01 $
  * @author ehrlich
  * @author troy
  * @author pretz

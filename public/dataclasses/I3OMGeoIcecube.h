@@ -2,22 +2,26 @@
 #define I3OMGEOICECUBE_H
 
 #include "I3OMGeo.h"
+
+#include <string>
+
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIcecube.h,v 1.5 2004/02/26 03:51:13 pretz Exp $
+ * $Id: I3OMGeoIcecube.h,v 1.6 2004/03/03 15:37:01 troy Exp $
  *
  * This is the IceCube specialization of the OMGeometry.  The stuff that 
  * an IceCube DOM has that an AMANDA OM doesn't
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/02/26 03:51:13 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/03/03 15:37:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
  * @todo 
  */
+
 class I3OMGeoIcecube : public I3OMGeo
 {
   public:
@@ -44,8 +48,12 @@ class I3OMGeoIcecube : public I3OMGeo
     I3OMGeo::operator=(rhs);
     return *this;
   }
+
+  // for testing
+  virtual std::string iam() { return "OMGeoIcecube"; }
+
  private:
-  // ROOT macro
+
   ClassDef(I3OMGeoIcecube,1);
 };
 

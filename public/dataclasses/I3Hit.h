@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.9 2004/02/26 18:53:12 pretz Exp $
+ * $Id: I3Hit.h,v 1.10 2004/03/03 15:37:01 troy Exp $
  *
  * I3Hit is the basic hit class.  Just a time for a PE arrival
  * at a tube.  
  *
- * @version $Revision: 1.9 $
- * @date $Date: 2004/02/26 18:53:12 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2004/03/03 15:37:01 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -45,6 +45,10 @@ class I3Hit : public TObject
     return *this;
   }
       
+  bool operator==(const I3Hit& rhs) {
+    return (fTime == rhs.fTime); 
+  }
+
   /**
    * @returns the time of the hit
    */
