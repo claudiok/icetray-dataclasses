@@ -249,11 +249,12 @@
 #pragma link C++ typedef I3TriggerDataPtr;
 #pragma link C++ class I3MCPrimary+;
 #pragma link C++ typedef I3MCPrimaryPtr;
+
+#pragma link C++ class AmandaExtractor+;
+#pragma link C++ class vector<I3OMGeoAmandaPtr>+;
+
 #endif
 
-//tds
-// future: member function templates:
-// where f has template argument
-//#pragma link C++ function A<int>::f(B&);
+
 
 
