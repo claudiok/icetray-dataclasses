@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.6 2004/07/05 17:13:11 pretz Exp $
+    $Id: InIceExtractorExample.cxx,v 1.7 2004/07/06 14:15:27 pretz Exp $
 
-    @version $Revision: 1.6 $
-    @date $Date: 2004/07/05 17:13:11 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/07/06 14:15:27 $
     @author Troy D. Straszheim
 
     @todo
@@ -15,8 +15,8 @@
 #include "test/tut.h"
 
 #include "dataclasses/I3InIceGeometry.h"
-#include "dataclasses/I3OMGeoAmanda.h"
-#include "dataclasses/I3OMGeoIcecube.h"
+#include "dataclasses/I3OMGeoAMANDA.h"
+#include "dataclasses/I3OMGeoIceCube.h"
 #include "dataclasses/I3OMGeo.h"
 #include <string>
 #include <vector>
@@ -72,19 +72,19 @@ namespace tut
 	 << "]" << endl; 
   }
 
-  struct AmandaExtractor
+  struct AMANDAExtractor
   {
     // I could just make this another I3InIceGeometry, but 
     // not until we get our pointainers/smartpointers figured completely out.
-    vector<I3OMGeoAmandaPtr> &mygeometry_;
+    vector<I3OMGeoAMANDAPtr> &mygeometry_;
 
     // this is the constructor.  We pass this function object a the
     // other vector that we want it to fill
-    AmandaExtractor(vector<I3OMGeoAmandaPtr> &geometry_to_fill) 
+    AMANDAExtractor(vector<I3OMGeoAMANDAPtr> &geometry_to_fill) 
       : mygeometry_(geometry_to_fill) { };
 
     void operator()(I3OMGeoPtr p) {
-      I3OMGeoAmandaPtr amandap = boost::dynamic_pointer_cast<I3OMGeoAmanda>(p);
+      I3OMGeoAMANDAPtr amandap = boost::dynamic_pointer_cast<I3OMGeoAMANDA>(p);
       if (amandap) mygeometry_.push_back(amandap);
     }
   };
@@ -111,10 +111,10 @@ namespace tut
   void object::test<1>()
   {
     // Make a 30 entry-long I3Geometry with 10 each of
-    // OMGeo/OMGeoAmanda/OMGeoIcecube
+    // OMGeo/OMGeoAMANDA/OMGeoIceCube
     for (int i=0; i<6; i++) {
-      geometry.push_back(I3OMGeoAmandaPtr(new I3OMGeoAmanda));
-      geometry.push_back(I3OMGeoIcecubePtr(new I3OMGeoIcecube));
+      geometry.push_back(I3OMGeoAMANDAPtr(new I3OMGeoAMANDA));
+      geometry.push_back(I3OMGeoIceCubePtr(new I3OMGeoIceCube));
     }
 
     // loop through this geometry (from begin() to end()) and print
@@ -136,16 +136,16 @@ namespace tut
     cout << "SHUFFLED, RANDOMIZED I3Geometry" << endl;
     for_each(geometry.begin(), geometry.end(), PrintOM);
 
-    // Let's get the GeoAmandas out, we want our own vector of
-    // pointers to them to play with.  We use the "AmandaExtractor"
+    // Let's get the GeoAMANDAs out, we want our own vector of
+    // pointers to them to play with.  We use the "AMANDAExtractor"
     // function object, above.
-    vector<I3OMGeoAmandaPtr> amanda_geometry;
+    vector<I3OMGeoAMANDAPtr> amanda_geometry;
     // we could just use another I3InIceGeometry, but the pointainer
     // thing makes this difficult as we get double deletes at the end.
 
     // create an extractor object, pass the amanda_geometry to the
     // constructor
-    AmandaExtractor the_extractor(amanda_geometry);
+    AMANDAExtractor the_extractor(amanda_geometry);
 
     // now for_each will call the "parenthesis operator", or
     // "operator()" of the_extractor, which puts the ones it likes

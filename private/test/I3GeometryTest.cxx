@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3GeometryTest.cxx,v 1.1 2004/07/05 16:20:07 pretz Exp $
+    $Id: I3GeometryTest.cxx,v 1.2 2004/07/06 14:15:27 pretz Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2004/07/05 16:20:07 $
+    @version $Revision: 1.2 $
+    @date $Date: 2004/07/06 14:15:27 $
     @author pretz
 
     @todo
@@ -14,8 +14,8 @@
 #include "test/tut.h"
 
 #include "dataclasses/I3Geometry.h"
-#include "dataclasses/I3OMGeoIcecube.h"
-#include "dataclasses/I3OMGeoAmanda.h"
+#include "dataclasses/I3OMGeoIceCube.h"
+#include "dataclasses/I3OMGeoAMANDA.h"
 #include "TFile.h"
 #include "TTree.h"
 #include "TClass.h"
@@ -46,7 +46,7 @@ namespace tut
   void object::test<1>()
   {
   I3Geometry *geometry = new I3Geometry(); 
-  I3OMGeoIcecubePtr om_icecube( new I3OMGeoIcecube());
+  I3OMGeoIceCubePtr om_icecube( new I3OMGeoIceCube());
   om_icecube->SetX(10.5);
 
   geometry->GetInIceGeometry().push_back(om_icecube);      
@@ -95,7 +95,7 @@ namespace tut
   //   void object::test<3>() // dont need to start with 1
   //  {
   //     I3Geometry *geometry = new I3Geometry(); 
-  //     I3OMGeoIcecubePtr om_icecube( new I3OMGeoIcecube());
+  //     I3OMGeoIceCubePtr om_icecube( new I3OMGeoIceCube());
   
   //     TTree *t = new TTree("mytree","tree");
   

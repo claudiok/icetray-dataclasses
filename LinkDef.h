@@ -67,8 +67,8 @@
 #pragma link C++ typedef I3IceTopStatusPtr;
 
 #pragma link C++ class I3InIceStatus+;
-#pragma link C++ typedef VectorPolicy<I3OMStatusIcecube>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3OMStatusIcecube>::ThePolicy+;
+#pragma link C++ typedef VectorPolicy<I3OMStatusIceCube>::ThePolicy;
+#pragma link C++ class VectorPolicy<I3OMStatusIceCube>::ThePolicy+;
 #pragma link C++ function operator!=(const I3InIceStatus::iterator&, const I3InIceStatus::iterator&);
 #pragma link C++ typedef I3InIceStatusPtr;
 
@@ -76,8 +76,8 @@
 // InIceStatusData
 #pragma link C++ class I3IceTopStationStatus+;
 //#pragma link C++ class I3IceTopStationStatus::iterator+;
-//#pragma link C++ typedef VectorPolicy<I3OMStatusIcecube>::ThePolicy;
-//#pragma link C++ class VectorPolicy<I3OMStatusIcecube>::ThePolicy+;
+//#pragma link C++ typedef VectorPolicy<I3OMStatusIceCube>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3OMStatusIceCube>::ThePolicy+;
 //#pragma link C++ function operator!=(const I3IceTopStationStatus::iterator&, const I3IceTopStationStatus::iterator&);
 #pragma link C++ typedef I3IceTopStationStatusPtr;
 
@@ -229,14 +229,14 @@
 #pragma link C++ typedef I3ObservableParticlePtr;
 #pragma link C++ class I3OMGeo+;
 
-#pragma link C++ class I3OMGeoAmanda+;
+#pragma link C++ class I3OMGeoAMANDA+;
 
-#pragma link C++ typedef I3OMGeoAmandaPtr;
-//#pragma link C++ class I3OMGeoAmandaPtr+;
-#pragma link C++ class I3OMGeoIcecube+;
+#pragma link C++ typedef I3OMGeoAMANDAPtr;
+//#pragma link C++ class I3OMGeoAMANDAPtr+;
+#pragma link C++ class I3OMGeoIceCube+;
 
-#pragma link C++ typedef I3OMGeoIcecubePtr;
-//#pragma link C++ class I3OMGeoIcecubePtr+;
+#pragma link C++ typedef I3OMGeoIceCubePtr;
+//#pragma link C++ class I3OMGeoIceCubePtr+;
 
 //#pragma link C++ class I3RecoResultPtr+;
 
@@ -246,11 +246,11 @@
 #pragma link C++ typedef I3OMResponsePtr;`
 #pragma link C++ class I3OMStatus+;
 #pragma link C++ typedef I3OMStatusPtr;
-#pragma link C++ class I3OMStatusIcecube+;
-#pragma link C++ typedef I3OMStatusIcecube::OMTrigSource;
-#pragma link C++ typedef I3OMStatusIcecube::OnOff;
-#pragma link C++ typedef I3OMStatusIcecube::LCMode;
-#pragma link C++ typedef I3OMStatusIcecubePtr;
+#pragma link C++ class I3OMStatusIceCube+;
+#pragma link C++ typedef I3OMStatusIceCube::OMTrigSource;
+#pragma link C++ typedef I3OMStatusIceCube::OnOff;
+#pragma link C++ typedef I3OMStatusIceCube::LCMode;
+#pragma link C++ typedef I3OMStatusIceCubePtr;
 #pragma link C++ class I3Particle+;
 #pragma link C++ typedef I3ParticlePtr;
 #pragma link C++ class I3Position+;
@@ -278,10 +278,10 @@
 #pragma link C++ class I3TriggerData+;
 #pragma link C++ typedef I3TriggerDataPtr;
 
-#pragma link C++ class AmandaExtractor+;
+#pragma link C++ class AMANDAExtractor+;
 #pragma link C++ class I3TrackExtractor+;
 #pragma link C++ class I3CascadeExtractor+;
-#pragma link C++ class vector<I3OMGeoAmandaPtr>+;
+#pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
 
 #pragma link C++ class I3StartingTrack+;
 

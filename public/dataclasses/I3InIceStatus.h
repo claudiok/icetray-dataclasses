@@ -1,27 +1,27 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceStatus.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3InIceStatus.h,v 1.3 2004/07/06 14:15:31 pretz Exp $
  *
  * @file I3InIceStatus.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/06 14:15:31 $
  * @author pretz
  */
 #ifndef I3INICESTATUSDATA_H
 #define I3INICESTATUSDATA_H
 
 #include "TObject.h"
-#include "I3OMStatusIcecube.h"
+#include "I3OMStatusIceCube.h"
 
 /**
  * @brief The status of the DeepIce detector.  
  *
- * Just a container for I3OMStatusIcecube objects
+ * Just a container for I3OMStatusIceCube objects
  */
 class I3InIceStatus 
 : public TObject, 
-  public VectorPolicy<I3OMStatusIcecube>::ThePolicy{
+  public VectorPolicy<I3OMStatusIceCube>::ThePolicy{
  public:
   /**
    * constructor

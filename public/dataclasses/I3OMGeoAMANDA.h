@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAmanda.h,v 1.12 2004/07/05 17:13:11 pretz Exp $
+ * $Id: I3OMGeoAMANDA.h,v 1.1 2004/07/06 14:15:31 pretz Exp $
  *
- * @file I3OMGeoAmanda.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/07/05 17:13:11 $
+ * @file I3OMGeoAMANDA.h
+ * @version $Revision: 1.1 $
+ * @date $Date: 2004/07/06 14:15:31 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -22,7 +22,7 @@
  *
  * Stuff that an AMANDA OM had that an IceCube DOM doesn't *
  */
-class I3OMGeoAmanda : public I3OMGeo
+class I3OMGeoAMANDA : public I3OMGeo
 {
   Double_t fTZero;
 
@@ -30,17 +30,17 @@ class I3OMGeoAmanda : public I3OMGeo
   /**
    * constructor
    */
-  I3OMGeoAmanda() {;}
+  I3OMGeoAMANDA() {;}
 
   /**
    * copy constructor just uses assignment
    */
-  I3OMGeoAmanda(const I3OMGeoAmanda& rhs){*this = rhs;}
+  I3OMGeoAMANDA(const I3OMGeoAMANDA& rhs){*this = rhs;}
 
   /**
    * destructor
    */
-  virtual ~I3OMGeoAmanda(){}
+  virtual ~I3OMGeoAMANDA(){}
 
   /**
    * Identifies this OM as an AMANDA OM
@@ -60,7 +60,7 @@ class I3OMGeoAmanda : public I3OMGeo
   /**
    * assignment is just member-wise assignment
    */
-  const I3OMGeoAmanda& operator=(const I3OMGeoAmanda& rhs){
+  const I3OMGeoAMANDA& operator=(const I3OMGeoAMANDA& rhs){
     if(this == &rhs) return *this;
     I3OMGeo::operator=(rhs);
     fTZero = rhs.fTZero;
@@ -69,11 +69,11 @@ class I3OMGeoAmanda : public I3OMGeo
 
  private:
 
-  ClassDef(I3OMGeoAmanda,1);
+  ClassDef(I3OMGeoAMANDA,1);
 };
 
 #include "dataclasses/StoragePolicy.h"
-typedef PtrPolicy<I3OMGeoAmanda>::ThePolicy I3OMGeoAmandaPtr;
+typedef PtrPolicy<I3OMGeoAMANDA>::ThePolicy I3OMGeoAMANDAPtr;
 
 #endif
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIcecube.h,v 1.5 2004/07/04 06:03:32 troy Exp $
+ * $Id: I3OMStatusIceCube.h,v 1.1 2004/07/06 14:15:31 pretz Exp $
  *
- * @file I3OMStatusIcecube.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/07/04 06:03:32 $
+ * @file I3OMStatusIceCube.h
+ * @version $Revision: 1.1 $
+ * @date $Date: 2004/07/06 14:15:31 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -18,7 +18,7 @@
 #include "I3OMStatus.h"
 
 /**
- * @brief I3OMStatusIcecube has status information on the IceCube
+ * @brief I3OMStatusIceCube has status information on the IceCube
  * OM parameters that can be controlled or adjusted, such as
  * the trigger, local coincidence and ATWD settings.
  *
@@ -30,11 +30,11 @@
  *
  * @todo the file needs the full 'doxygen' comments
  */
-class I3OMStatusIcecube : public I3OMStatus
+class I3OMStatusIceCube : public I3OMStatus
 {
  public:
-  I3OMStatusIcecube(){}
-  virtual ~I3OMStatusIcecube(){}
+  I3OMStatusIceCube(){}
+  virtual ~I3OMStatusIceCube(){}
 
 
 /*  Sets the OM Trigger to the Single or Multiple PE Discriminator, or off */
@@ -132,14 +132,14 @@ class I3OMStatusIcecube : public I3OMStatus
   OnOff fStatusFADC;
   Float_t fATWDFrequency;
 
-  ClassDef(I3OMStatusIcecube,1);
+  ClassDef(I3OMStatusIceCube,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3OMStatusIcecube>::ThePolicy I3OMStatusIcecubePtr;
+typedef PtrPolicy<I3OMStatusIceCube>::ThePolicy I3OMStatusIceCubePtr;
 
 #endif
 

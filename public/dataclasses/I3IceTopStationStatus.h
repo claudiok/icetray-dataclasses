@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceTopStationStatus.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3IceTopStationStatus.h,v 1.4 2004/07/06 14:15:31 pretz Exp $
  *
  * @file I3IceTopStationStatus.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/07/06 14:15:31 $
  * @author pretz
  */
 #ifndef I3ICETOPSTATIONSTATUS_H
 #define I3ICETOPSTATIONSTATUS_H
 
 #include "TObject.h"
-#include "I3OMStatusIcecube.h"
+#include "I3OMStatusIceCube.h"
 
 /**
  * @brief the status of an IceTop station for the DetectorStatus stream.
@@ -21,7 +21,7 @@
  */
 class I3IceTopStationStatus 
 : public TObject, 
-  public VectorPolicy<I3OMStatusIcecube>::ThePolicy{
+  public VectorPolicy<I3OMStatusIceCube>::ThePolicy{
  public:
   /**
    * constructor
