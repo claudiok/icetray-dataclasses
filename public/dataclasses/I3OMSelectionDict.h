@@ -1,13 +1,13 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.1 2005/01/24 19:40:15 deyoung Exp $
+ * $Id: I3OMSelectionDict.h,v 1.2 2005/01/24 19:45:04 deyoung Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/01/24 19:40:15 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/01/24 19:45:04 $
  * @author deyoung
- *
+ * @author troy
  */
 #ifndef I3OMSELECTIONDICT_H_INCLUDED
 #define I3OMSELECTIONDICT_H_INCLUDED
@@ -28,7 +28,8 @@ typedef PtrPolicy<I3OMSelector>::ThePolicy I3OMSelectorPtr;
 /**
  * @brief An event-level container for the OMResponseSelection's of the Event.  
  *
- * @todo implement method to return a selector built around the chosen selection
+ * @todo fix GetSelector to return copies of the selection rather than
+ * the selection itself.
  *
  */
 class I3OMSelectionDict : public TObject, 
