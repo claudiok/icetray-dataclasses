@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.96 2004/07/28 08:13:35 ehrlich Exp $
-// $Revision: 1.96 $
-// $Date: 2004/07/28 08:13:35 $
+// $Id: LinkDef.h,v 1.97 2004/07/28 20:05:21 ehrlich Exp $
+// $Revision: 1.97 $
+// $Date: 2004/07/28 20:05:21 $
 //
 
 #ifdef __CINT__
@@ -347,6 +347,9 @@
 #pragma link C++ class OMKey+;
 
 #pragma link C++ class I3StartingTrack+;
+
+#pragma link C++ class UniqueID;
+
 
 #endif
 
