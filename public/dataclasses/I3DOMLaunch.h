@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.3 2004/10/19 01:17:10 spencer Exp $
+ * $Id: I3DOMLaunch.h,v 1.4 2004/10/28 00:09:21 spencer Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/10/19 01:17:10 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/10/28 00:09:21 $
  * @author klein
  * @author blaufuss
  *
@@ -30,6 +30,12 @@ using namespace std;
 class I3DOMLaunch : public I3DigitalLaunch
 {
 
+ public:  
+
+  enum ATWDselect {ATWDa,ATWDb};
+
+ protected:
+
   /**  
    * This is the time (in nsec) in 25 nsec units, of the DOM clock 
    * which launches the ATWD (launch is synchronized to the first clock 
@@ -46,6 +52,11 @@ class I3DOMLaunch : public I3DigitalLaunch
    * This holds the trigger information -somewhat of a placeholder for now 
    */
   Int_t fTrigger;
+  /**  
+   * This tells which ATWD in the DOM was used
+   */
+
+  ATWDselect fWhichATWD;
 
   /** 
    * These contain the 3 ATWD waveforms - same time bins, but different 
@@ -86,25 +97,25 @@ class I3DOMLaunch : public I3DigitalLaunch
   virtual ~I3DOMLaunch(){;}
   
   /**
-   * return ATWD/FADC launch time
+   * return and set ATWD/FADC launch time
    */
   Double_t GetStartTime() const { return fStartTime; }
-
-  /**
-   * set ATWD/FADC launch time
-   */
   void SetStartTime(Double_t starttime) { fStartTime = starttime; }
 
   /**
-   * return ATWD time bin size
+   * return and set ATWD time bin size
    */
   Double_t GetATWDBinSize() const {return fATWDBinSize;}
+  void SetATWDBinSize(Double_t ATWDbinsize) {fATWDBinSize = ATWDbinsize;}
 
   /**
-   * set ATWD time bin size 
+   * return and set WhichATWD
    */
-  void SetATWDBinSize(Double_t ATWDbinsize) {fATWDBinSize = ATWDbinsize;}
   
+  ATWDselect GetWhichATWD() const {return fWhichATWD;}
+  void SetWhichATWD(ATWDselect WhichATWD) {fWhichATWD = WhichATWD;}
+
+
   /**
    * return ATWD 0 waveform as a read-only object
    */
