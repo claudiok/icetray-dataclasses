@@ -1,32 +1,35 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultLikelihood.h,v 1.3 2004/02/25 21:36:49 pretz Exp $
+ * $Id: I3RecoResultLikelihood.h,v 1.4 2004/03/08 21:22:51 pretz Exp $
  *
  * The results of a likelihood fit.  Just spits out a likelihood in addition
  * to the tracks.
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/02/25 21:36:49 $
- * @author
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/03/08 21:22:51 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
  *
- * @todo Shouldn't it be LogLikelihood?  Or is that equivalent in Physics-speak
+ * @todo 
  *
  */
 #ifndef I3RECORESULTLIKELIHOOD_H
 #define I3RECORESULTLIKELIHOOD_H
 
 #include "I3RecoResultSingleTrack.h"
+#include "dataclasses/I3DataExecution.h"
 
 class I3RecoResultLikelihood : public I3RecoResultSingleTrack
 {
-  Float_t fLikelihood;
+  Double_t fLogLikelihood;
 
   public:
   /**
    * constructor
    */
-  I3RecoResultLikelihood() { fLikelihood = 0; }
+  I3RecoResultLikelihood() : fLogLikelihood(0){}
 
   /**
    * destructor
@@ -34,15 +37,20 @@ class I3RecoResultLikelihood : public I3RecoResultSingleTrack
   virtual ~I3RecoResultLikelihood(){}
 
   /**
-   * @return the likelihood of this solution
-   * @todo isn't it LogLikelihood
+   * @return the log likelihood of this solution 
+   * @note this should be a negative number.
    */
-  Float_t Likelihood() const { return fLikelihood; }
+  Double_t LogLikelihood() const { return fLogLikelihood; }
 
   /**
-   * @param likelihood the new likelihood
+   * @param likelihood the new log likelihood for the solution
+   * @note this should be a negative number
    */
-  void  Likelihood(Float_t likelihood) { fLikelihood = likelihood; }
+  void LogLikelihood(Double_t likelihood) { 
+    if(likelihood > 0)
+      I3DataExecution::Instance().GetLogger().Warn("I3RecoResultLikelihood::LogLikelihood setting log likelihood to non-physical ('positive') number");
+    fLogLikelihood = likelihood; 
+  }
 
  private:
   // copy and assignment are private

@@ -1,12 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.5 2004/02/25 21:36:49 pretz Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.6 2004/03/08 21:22:51 pretz Exp $
  *
  * This is a reco result which just contains a single track
  *
- * @version $Revision: 1.5 $
- * @date $Date: 2004/02/25 21:36:49 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/03/08 21:22:51 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -18,14 +18,17 @@
 #define I3RECORESULTSINGLETRACK_H
 
 #include "I3RecoResult.h"
+#include "I3RecoTrack.h"
 
 class I3RecoResultSingleTrack : public I3RecoResult
 {
-  public:
+  I3RecoTrack fTrack;
+  
+ public:
   /**
    * constructor
    */
-  I3RecoResultSingleTrack() {;}
+  I3RecoResultSingleTrack(){}
 
   /**
    * destructor
@@ -33,11 +36,15 @@ class I3RecoResultSingleTrack : public I3RecoResult
   virtual ~I3RecoResultSingleTrack(){}
 
   /**
-   * operator[]
-   * @todo won't this conflict with the operator[] from the base class?
+   * Retrieves the track in this reco result as a constant object
    */
-  const I3RecoTrack& operator[](unsigned short tracklistindex) const;
-  
+  const I3RecoTrack& Track() const {return fTrack;}
+
+  /**
+   * Retrieves the track of this solution as a non-const object
+   */
+  I3RecoTrack& Track() {return fTrack;}
+
  private:
   // copy and assignment are private
   I3RecoResultSingleTrack(const I3RecoResultSingleTrack& rhs);

@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.18 2004/02/25 21:36:49 pretz Exp $
+ * $Id: I3RecoResult.h,v 1.19 2004/03/08 21:22:51 pretz Exp $
  *
- * @version $Revision: 1.18 $
- * @date $Date: 2004/02/25 21:36:49 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/03/08 21:22:51 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -20,9 +20,7 @@
 
 #include "StoragePolicy.h"
 
-class I3RecoResult 
-: public TObject, 
-  public VectorPolicy<I3RecoTrackList>::ThePolicy
+class I3RecoResult : public TObject
 {
  public:
   /**

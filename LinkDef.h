@@ -149,11 +149,6 @@
 #pragma link C++ function operator!=(const I3RecoHitSeriesData::iterator&, const I3RecoHitSeriesData::iterator&);
 #pragma link C++ typedef I3RecoHitSeriesDataPtr;
 
-#pragma link C++ class I3RecoResult+;
-#pragma link C++ class I3RecoResult::iterator+;
-#pragma link C++ typedef VectorPolicy<I3RecoTrackList>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3RecoTrackList>::ThePolicy+;
-#pragma link C++ function operator!=(const I3RecoResult::iterator&, const I3RecoResult::iterator&);
 
 
 #pragma link C++ class I3TopGeometry+;
@@ -234,12 +229,12 @@
 #pragma link C++ typedef I3OMStatusIcecubePtr;
 #pragma link C++ class I3RecoHit+;
 #pragma link C++ typedef I3RecoHitPtr;
+#pragma link C++ class I3RecoResult;
+#pragma link C++ typedef I3RecoResultPtr;
 #pragma link C++ class I3RecoResultLikelihood+;
 #pragma link C++ typedef I3RecoResultLikelihoodPtr;
 #pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
-#pragma link C++ class I3RecoResultAlternativeSingleTracks+;
-#pragma link C++ typedef I3RecoResultAlternativeSingleTracksPtr;
 #pragma link C++ class I3RecoTrack+;
 #pragma link C++ class I3RecoTrackComposite+;
 #pragma link C++ class I3TankGeo+;
