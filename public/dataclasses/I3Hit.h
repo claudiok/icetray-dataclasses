@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.23 2005/03/31 17:39:49 troy Exp $
+ * $Id: I3Hit.h,v 1.24 2005/03/31 18:36:40 troy Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.23 $
- * @date $Date: 2005/03/31 17:39:49 $
+ * @version $Revision: 1.24 $
+ * @date $Date: 2005/03/31 18:36:40 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -24,7 +24,7 @@
  * DAQ-level records are stored as I3DataReadouts or
  * I3MCPMTResponses.
  */
-class I3Hit 
+class I3Hit : public TObject
 {
 public:
    I3Hit() { time_ = 0; hitID_ = 0; }
