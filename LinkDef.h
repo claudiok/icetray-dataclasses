@@ -294,7 +294,6 @@
 #pragma link C++ class AmandaExtractor+;
 #pragma link C++ class vector<I3OMGeoAmandaPtr>+;
 
-#pragma link C++ function Test();
 
 
 #endif
