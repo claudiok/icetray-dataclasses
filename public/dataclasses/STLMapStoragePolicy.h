@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.15 2004/11/28 07:33:56 troy Exp $
+    $Id: STLMapStoragePolicy.h,v 1.16 2004/12/16 15:41:58 troy Exp $
 
     @file STLMapStoragePolicy.h
-    @version $Revision: 1.15 $
-    @date $Date: 2004/11/28 07:33:56 $
+    @version $Revision: 1.16 $
+    @date $Date: 2004/12/16 15:41:58 $
     @author Troy Straszheim
 
 */
@@ -212,12 +212,15 @@ class STLMapStoragePolicy {
    */
 
   iterator Find(const KeyType& key) { return map_.find(key);}
+  const_iterator Find(const KeyType& key) const { return map_.find(key);}
+
   /**
    * Tries to locate an element in a map.
    * @param key Key of (key, value) pair to be located.
    * @return Iterator pointing to sought-after element, or end() if not found.
    */
   iterator find (const KeyType& key) { return map_.find(key); }
+  const_iterator find (const KeyType& key) const { return map_.find(key); }
 };
 
 #endif
