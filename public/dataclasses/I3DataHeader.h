@@ -4,14 +4,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.6 2004/02/25 20:10:24 pretz Exp $
+ * $Id: I3DataHeader.h,v 1.7 2004/03/01 20:38:32 ehrlich Exp $
  *
  * I3DataHeader
  * This class represents a generic header for a data issued on some stream
  * Just a 'time' right now, but there may be stuff to add later.
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/02/25 20:10:24 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/03/01 20:38:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,17 +29,17 @@ class I3DataHeader : public TObject
   /**
    * the modified Julian day of the data
    */
-  Int_t fMjd;
+  ULong_t fMjd;
 
   /**
    * the number of seconds after the fMjd
    */
-  Int_t fSec;
+  ULong_t fSec;
 
   /**
    * the nanosecond part of the time
    */
-  Int_t fNanoSec;
+  ULong_t fNanoSec;
 
 
  public: 
@@ -73,32 +73,32 @@ class I3DataHeader : public TObject
   /**
    * @return the modified Julian day of the data event
    */
-  Int_t JulianDay() const { return fMjd; } 
+  ULong_t JulianDay() const { return fMjd; } 
 
   /**
    * @param day the new modified Julian day of the event
    */
-  void JulianDay(Int_t day) { fMjd = day; }
+  void JulianDay(ULong_t day) { fMjd = day; }
 
   /**
    * @return the number of seconds after the julian day of the data event
    */
-  Int_t Sec() const { return fSec; }
+  ULong_t Sec() const { return fSec; }
 
   /**
    * @param the new number of seconds after the julian day of the data event
    */
-  void Sec(Int_t sec) { fSec = sec; }
+  void Sec(ULong_t sec) { fSec = sec; }
 
   /**
    * @return the nanosecond part of the data event
    */
-  Int_t NanoSec() { return fNanoSec; }
+  ULong_t NanoSec() { return fNanoSec; }
 
   /**
    * @param the new nanosecond part of the data event
    */
-  void NanoSec(Int_t nsec) { fNanoSec = nsec; }
+  void NanoSec(ULong_t nsec) { fNanoSec = nsec; }
 
   /**
    * The name of the stream on which the data occurs
