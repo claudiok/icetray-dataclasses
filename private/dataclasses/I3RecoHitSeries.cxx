@@ -46,7 +46,7 @@ void I3RecoHitSeries::AddHit(I3RecoHit* hit_)
   I3HitSeries::AddHit(hit_);
 }
 
-I3Iterator<const I3RecoHit>* I3RecoHitSeries::MakeRecoHitIterator()
+I3Iterator<const I3RecoHit>* I3RecoHitSeries::MakeRecoHitIterator() const
 {
   if(!hit)
     return new I3ZeroItemIterator<const I3RecoHit>();

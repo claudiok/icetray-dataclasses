@@ -49,7 +49,7 @@ void I3RecoHitSeriesData::AddRecoHitSeries(I3RecoHitSeries* recohitseries_)
   if(recohitseries==NULL) recohitseries = new TObjArray(1); recohitseries->Add(recohitseries_);
 }
 
-I3Iterator<const I3RecoHitSeries>* I3RecoHitSeriesData::MakeRecoHitSeriesIterator()
+I3Iterator<const I3RecoHitSeries>* I3RecoHitSeriesData::MakeRecoHitSeriesIterator() const
 {
   if(!recohitseries)
     return new I3ZeroItemIterator<const I3RecoHitSeries>();

@@ -18,7 +18,7 @@ class I3RecoHitSeries : public I3HitSeries
 
   const I3RecoHit& GetHit(unsigned short number) const;
   void AddHit(I3RecoHit* hit_);
-  I3Iterator<const I3RecoHit>* MakeRecoHitIterator();
+  I3Iterator<const I3RecoHit>* MakeRecoHitIterator() const;
 
   ClassDef(I3RecoHitSeries, 1);
 };

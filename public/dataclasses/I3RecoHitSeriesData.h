@@ -20,7 +20,7 @@ class I3RecoHitSeriesData : public TObject
   int GetNumberRecoHitSeries() const;
   const I3RecoHitSeries& GetRecoHitSeries(unsigned short number) const;
   void AddRecoHitSeries(I3RecoHitSeries* recohitseries_);
-  I3Iterator<const I3RecoHitSeries>* MakeRecoHitSeriesIterator();
+  I3Iterator<const I3RecoHitSeries>* MakeRecoHitSeriesIterator() const;
 
   ClassDef(I3RecoHitSeriesData,1);
 };
