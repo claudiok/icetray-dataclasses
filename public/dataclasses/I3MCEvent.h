@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.7 2004/07/26 19:00:54 ehrlich Exp $
+ * $Id: I3MCEvent.h,v 1.8 2004/07/28 19:10:34 ehrlich Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/07/26 19:00:54 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/07/28 19:10:34 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
 #define I3MCEVENT_H
 
 #include "dataclasses/I3Event.h"
-#include "dataclasses/I3MCParticleEvent.h"
+#include "dataclasses/I3MCParticleData.h"
 
 /**
  * @brief Derived I3Event class with Monte Carlo information
@@ -27,7 +27,7 @@ class I3MCEvent : public I3Event
 {
   Float_t           fMCFrameStart;
   Float_t           fMCFrameStop;
-  I3MCParticleEvent fMCParticleEvent; //||
+  I3MCParticleData  fMCParticleData; //||
 
  public:
   /**
@@ -56,12 +56,12 @@ class I3MCEvent : public I3Event
   /**
    * @return the MCParticleDict as a constant object.
    */
-  const I3MCParticleEvent& GetMCParticleEvent() const { return fMCParticleEvent;}
+  const I3MCParticleData& GetMCParticleData() const { return fMCParticleData;}
 
   /**
    * @return the MCParticleDict as a non-const object.
    */
-  I3MCParticleEvent& GetMCParticleEvent(){ return fMCParticleEvent;}
+  I3MCParticleData& GetMCParticleData(){ return fMCParticleData;}
 
  private:
   // copy and assignment private

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.11 2004/07/03 18:40:57 troy Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.12 2004/07/28 19:10:34 ehrlich Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/07/03 18:40:57 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/07/28 19:10:34 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -33,7 +33,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
   /**
    * constructor
    */
-  I3RecoResultSingleTrack() {}
+  I3RecoResultSingleTrack() {fTrack=NULL;}
 
   /**
    * destructor
@@ -43,7 +43,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
   /**
    * Retrieves the track in this reco result as a constant object
    */
-  const I3ParticlePtr Track() const 
+  const I3ParticlePtr GetTrack() const 
   {
     if (fTrack) 
       return (fTrack);
@@ -55,7 +55,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
   /**
    * Retrieves the track of this solution as a non-const object
    */
-  I3ParticlePtr Track()
+  I3ParticlePtr GetTrack()
   {
     if (fTrack) 
       return fTrack;

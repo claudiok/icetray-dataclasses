@@ -1,17 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleEvent.h,v 1.7 2004/07/26 23:39:10 ehrlich Exp $
+ * $Id: I3MCParticleData.h,v 1.3 2004/07/28 19:10:34 ehrlich Exp $
  *
- * @file I3MCParticleEvent.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/07/26 23:39:10 $
+ * @file I3MCParticleData.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/07/28 19:10:34 $
  * @author pretz
  *
  */
 
-#ifndef I3MCPARTICLEEVENT_H
-#define I3MCPARTICLEEVENT_H
+#ifndef I3MCPARTICLEDATA_H
+#define I3MCPARTICLEDATA_H
 
 #include "dataclasses/I3MCPrimary.h"
 #include "dataclasses/I3MCParticleMultiMap.h"
@@ -23,7 +23,7 @@
  * The stuff at the surface, and the stuff in the ice
  * @todo work out how the copy and assignment can be private.
  */
-class I3MCParticleEvent : public TObject 
+class I3MCParticleData : public TObject 
 {
 
   I3MCParticleMultiMap fPrimary;
@@ -34,12 +34,12 @@ class I3MCParticleEvent : public TObject
   /**
    * constructor
    */
-  I3MCParticleEvent(){}
+  I3MCParticleData(){}
 
   /**
    * destructor
    */
-  virtual ~I3MCParticleEvent(){}
+  virtual ~I3MCParticleData(){}
   
   /**
    * @return the primary track as constant
@@ -76,13 +76,13 @@ class I3MCParticleEvent : public TObject
 /*   I3MCParticleEvent(const I3MCParticleEvent&){} */
 /*   const I3MCParticleEvent& operator=(const I3MCParticleEvent&); */
 
-  ClassDef(I3MCParticleEvent,1);
+  ClassDef(I3MCParticleData,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3MCParticleEvent>::ThePolicy I3MCParticleEventPtr;
+typedef PtrPolicy<I3MCParticleData>::ThePolicy I3MCParticleDataPtr;
 
-#endif //I3MCPARTICLEEVENT_H
+#endif //I3MCPARTICLEDATA_H
