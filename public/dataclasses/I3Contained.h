@@ -1,14 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.4 2004/04/25 20:40:27 ehrlich Exp $
+ * $Id: I3Contained.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/25 20:40:27 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author pretz
- *
- * @todo
  */
 #ifndef I3CONTAINED_H
 #define I3CONTAINED_H
@@ -16,7 +14,8 @@
 #include "I3Units.h"
 #include <cmath>
 /**
- * This class services the 'geometrical' part of an I3Track interface.
+ * @brief This class services the 'geometrical' part of an I3Track interface.
+ *
  * Has a starting postion, a length, and a direction.  So the full interface
  * is implemented.  Assumes the particle is relativistic.
  */

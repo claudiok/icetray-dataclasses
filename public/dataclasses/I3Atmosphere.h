@@ -1,24 +1,26 @@
-#ifndef I3ATMOSPHERE_H
-#define I3ATMOSPHERE_H
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Atmosphere.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
+ * $Id: I3Atmosphere.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
  *
- * I3Atmosphere is a class that stores atmospheric monitoring
- * data, like the pressure and temperature
- * Units, etc. remain TBD
- *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
+ * @file I3Atmosphere.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
- *
- * @todo 
  */
+#ifndef I3ATMOSPHERE_H
+#define I3ATMOSPHERE_H
 
 #include <TObject.h>
 
+/**
+ *
+ * @brief Atmospheric monitoring
+ * data, like the pressure and temperature
+ *
+ * Units, etc. remain TBD
+ */
 class I3Atmosphere : public TObject
 {
   Float_t fPressure;

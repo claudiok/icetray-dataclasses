@@ -1,10 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.2 2004/04/22 15:51:25 pretz Exp $
+    $Id: I3MCOMResponse.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/04/22 15:51:25 $
+    @file I3MCOMResponse.h
+    @version $Revision: 1.3 $
+    @date $Date: 2004/04/27 02:32:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,7 +22,8 @@
 #include "I3OMResponse.h"
 
 /**
- * This contains all of the Monte Carlo OM Response information:
+ * @brief This contains all of the Monte Carlo OM Response information:
+ *
  * the 'true' Monte Carlo hits and the simulated PMT response.
  * all of the data and OM output is inherited from I3OMResponse
  */

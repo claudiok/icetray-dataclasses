@@ -1,3 +1,15 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3GeometryHeader.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3GeometryHeader.h
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3GEOMETRYHEADER_H
 #define I3GEOMETRYHEADER_H
 
@@ -8,22 +20,13 @@
 using namespace std;
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3GeometryHeader.h,v 1.3 2004/02/26 19:58:26 pretz Exp $
+ * @brief The header for the data on the Geometry stream
  *
- * I3Geometry Header is summary information for the geometry that
+ * Summary information for the geometry that
  * which you can store in a file if you don't want to store the geometry.
  * It's will have enough data to reconstruct the full geometry
  * from the database
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/02/26 19:58:26 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
  */
 class I3GeometryHeader : public I3DataHeader
 {

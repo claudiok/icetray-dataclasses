@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCCascade.h,v 1.4 2004/04/23 20:30:06 ehrlich Exp $
+    $Id: I3MCCascade.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
 
     @file I3MCCascade.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/23 20:30:06 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
 
     @todo
@@ -22,7 +22,7 @@
 #include "dataclasses/I3Cascade.h"
 
 /**
- * A cascade with full MC information.
+ * @brief A cascade with full MC information.
  */
 class I3MCCascade : public I3CascadeImpl<I3Directional,
                                          I3Localized,

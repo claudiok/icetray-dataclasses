@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.3 2004/04/23 21:31:29 deyoung Exp $
+ * $Id: I3Directional.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
  *
- * @file 
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:31:29 $
- * @author 
- *
- * @todo
- *
+ * @file I3Directional.h
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
 #define I3DIRECTIONAL_H
@@ -17,7 +14,7 @@
 #include "Rtypes.h"
 
 /**
- * A class which implements the 'directional' aspect of an I3Cascade.
+ * @brief A class which implements the 'directional' aspect of an I3Cascade.
  */
 class I3Directional 
 {

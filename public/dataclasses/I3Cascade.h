@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
+ * $Id: I3Cascade.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:10:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author pretz
- *
- * @todo implement fatal calls
- *
  */
 #ifndef I3CASCADE_H
 #define I3CASCADE_H
@@ -18,9 +15,14 @@
 #include "I3ObservableParticle.h"
 
 /**
- * The cascade interface.  If 'IsLocalized' is true, then you should
+ * @brief The cascade interface.  
+ *
+ * If 'IsLocalized' is true, then you should
  * be able to get X,Y,Z and T out.  If HasEnergy is true, then you should
- * expect to be able to get an Energy out.
+ * expect to be able to get an Energy out. 
+ *
+ * @todo implement fatal calls
+ *
  */
 class I3Cascade : public I3ObservableParticle{
  public:

@@ -1,14 +1,12 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrack.h,v 1.1 2004/04/25 20:44:30 ehrlich Exp $
+    $Id: I3F2KRecoTrack.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
 
-    @file I3F2KTrack.h
-    @version $Revision: 1.1 $
-    @date $Date: 2004/04/25 20:44:30 $
+    @file I3F2KRecoTrack.h
+    @version $Revision: 1.2 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
-
-    @todo
 */
 
 #include "I3TrackImpl.h"
@@ -22,16 +20,28 @@
 #include "dataclasses/I3Track.h"
 
 /**
- * F2KTrack contains the parameter set corresponding to the F2000
- * track variables.  It is intended primarily for backward compatibility.
+ * @brief F2KTrack contains the parameter set corresponding to the F2000
+ * track variables.  
+ *
+ * It is intended primarily for backward compatibility.
  */
 class I3F2KRecoTrack : public I3TrackImpl<I3Contained,
                                           I3NonEnergetic,
                                           I3NonComposite>
 {
  public:
+  /**
+   * constructor
+   */
   I3F2KRecoTrack(){};
+
+  /**
+   * destructor
+   */
   virtual ~I3F2KRecoTrack(){}
+
+ private:
+  //ROOT macro
   ClassDef(I3F2KRecoTrack,1);
 };
 

@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.4 2004/04/23 21:31:29 deyoung Exp $
+ * $Id: I3CascadeImpl.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/23 21:31:29 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author pretz
- *
- * @todo
- *
  */
 #ifndef I3CASCADEIMPL_H
 #define I3CASCADEIMPL_H
@@ -22,7 +19,8 @@
 #include <iostream>
 
 /**
- * A class which modularizes how the I3Cascade interface is implemented.
+ * @brief A class which modularizes how the I3Cascade interface is implemented.
+ *
  * To pick a particular I3Cascade implementation, you need to first select
  * a DirectionalType, a LocalizableType, and an  EnergeticType.  
  * 

@@ -1,21 +1,22 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3DigitalATWDReadout.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3DigitalATWDReadout.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3DIGITALATWDREADOUT_H
 #define I3DIGITALATWDREADOUT_H
 
 #include "I3DigitalReadout.h"
+
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3DigitalATWDReadout.h,v 1.2 2004/03/13 19:51:20 pretz Exp $
- *
- * Adds the ATWD gain to the standard I3DigitalReadout
- *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/03/13 19:51:20 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
+ * @brief Adds the ATWD gain to the standard I3DigitalReadout
  *
  */
 class I3DigitalATWDReadout : public I3DigitalReadout

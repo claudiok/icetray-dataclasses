@@ -1,3 +1,16 @@
+/**
+ *
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3DetectorStatus.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3DetectorStatus.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ *
+ * @todo 
+ */
 #ifndef I3DETECTORSTATUS_H
 #define I3DETECTORSTATUS_H
 
@@ -6,20 +19,12 @@
 #include "I3IceTopStatus.h"
 
 /**
+ * @briefThis is the state of the aspects of the detector that people have 
+ * direct control over.  
  *
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3DetectorStatus.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
- *
- * This is the state of the aspects of the detector that people have direct 
- * control over.  Stuff that is a 'knob' on the detector.  This is a
+ * Stuff that is a 'knob' on the detector.  This is a
  * top-level object in the frame related to this 'Detector Status' information.
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
- * @author pretz
- *
- * @todo 
  */
 class I3DetectorStatus : public TObject{
   I3InIceStatus fInIceStatus;

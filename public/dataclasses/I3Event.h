@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Event.h,v 1.18 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3Event.h
+ * @version $Revision: 1.18 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author Ralf Ehrlich
+ */
 #ifndef I3EVENT_H
 #define I3EVENT_H
 
@@ -11,19 +21,10 @@
 #include "I3RecoResultData.h"
 #include "I3Bag.h"
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3Event.h,v 1.17 2004/03/13 19:51:20 pretz Exp $
- *
- * This class provides access to the all data containers which are 
+ * @brief This class provides access to the all data containers which are 
  * related to each event. 
- *
- * @version $Revision: 1.17 $
- * @date $Date: 2004/03/13 19:51:20 $
- * @author Ralf Ehrlich
- *
- * @todo 
  */
+
 class I3Event : public TObject
 {
   I3TriggerData    fTriggerData; //||

@@ -1,14 +1,12 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3EnergyCascade.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3EnergyCascade.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
 
     @file I3EnergyCascade.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
-
-    @todo
 */
 
 #include "I3CascadeImpl.h"
@@ -22,7 +20,7 @@
 #include "dataclasses/I3Cascade.h"
 
 /**
- * A cascade with energy information but no direction.
+ * @brief A cascade with energy information but no direction.
  */
 class I3EnergyCascade : public I3CascadeImpl<I3NonDirectional,
 	                                     I3Localized,

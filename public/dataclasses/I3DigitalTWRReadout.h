@@ -1,27 +1,39 @@
-#ifndef I3DIGITALTWRREADOUT_H
-#define I3DIGITALTWRREADOUT_H
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalTWRReadout.h,v 1.2 2004/03/10 19:17:52 pretz Exp $
+ * $Id: I3DigitalTWRReadout.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
  *
- * Just a placeholder class for a different kind of response
- *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/03/10 19:17:52 $
+ * @file I3DigitalTWRReadout.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author pretz
  *
- * @todo 
  */
-#include "dataclasses/I3DigitalReadout.h"
+#ifndef I3DIGITALTWRREADOUT_H
+#define I3DIGITALTWRREADOUT_H
 
+#include "dataclasses/I3DigitalReadout.h"
+/**
+ * @brief An implementation of the AMANDA TWR response
+ * @todo This class isn't implemented yet.  It's just holding the place
+ */
 class I3DigitalTWRReadout : public I3DigitalReadout{
  public:
+  /**
+   * constructor ... for when there's something to construct
+   */ 
   I3DigitalTWRReadout(){}
+
+  /**
+   * destructor
+   */
   virtual ~I3DigitalTWRReadout(){}
  private:
+  // copy and assignment declared private
   I3DigitalTWRReadout(const I3DigitalTWRReadout&);
   const I3DigitalTWRReadout& operator=(const I3DigitalTWRReadout&);
+
+  //ROOT macro
   ClassDef(I3DigitalTWRReadout,1);
 };
 

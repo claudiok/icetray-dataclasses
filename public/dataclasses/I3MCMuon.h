@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCMuon.h,v 1.4 2004/04/23 20:30:06 ehrlich Exp $
+    $Id: I3MCMuon.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
 
     @file I3MCMuon.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/04/23 20:30:06 $
+    @version $Revision: 1.5 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
 
     @todo
@@ -22,7 +22,7 @@
 #include "dataclasses/I3Track.h"
 
 /**
- * For representing muons from Monte Carlo, where we have all
+ * @brief For representing muons from Monte Carlo, where we have all
  * possible information.
  */
 class I3MCMuon : public I3TrackImpl<I3Contained,
@@ -32,12 +32,28 @@ class I3MCMuon : public I3TrackImpl<I3Contained,
   Double_t     fWeight;
   
   public:
+  /**
+   * constructor
+   */
   I3MCMuon() {fWeight=1;};
+
+  /**
+   * destructor
+   */
   virtual ~I3MCMuon(){}
   
+  /**
+   * gives the weight of the track
+   */
   Double_t Weight() const { return fWeight; }
+
+  /**
+   * sets the weight of the track
+   */
   void  Weight(Double_t weight_) { fWeight = weight_; }
-  
+
+ private:
+  //ROOT macro
   ClassDef(I3MCMuon,1);
 };
 

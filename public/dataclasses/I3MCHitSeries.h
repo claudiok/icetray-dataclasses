@@ -1,22 +1,23 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCHitSeries.h,v 1.17 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3MCHitSeries.h
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3MCHITSERIES_H
 #define I3MCHITSERIES_H
 
 #include "I3MCHit.h"
 #include "StoragePolicy.h"
+
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.16 2004/03/10 19:17:52 pretz Exp $
- *
- *
- *
- * @version $Revision: 1.16 $
- * @date $Date: 2004/03/10 19:17:52 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
+ * @brief just an array of I3MCHits
  */
 class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy 
 {

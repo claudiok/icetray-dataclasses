@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.3 2004/04/23 21:31:29 deyoung Exp $
+ * $Id: I3Infinite.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:31:29 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author 
- *
- * @todo
- *
  */
 
 #ifndef I3INFINITE_H
@@ -20,8 +17,8 @@
 #include "NanPolicy.h"
 
 /**
- * The geometrical part of an I3Track implementation, representing an infinite
- * track.
+ * @brief The geometrical part of an I3Track implementation, representing an 
+ * infinite track.
  */
 class I3Infinite{
  private:

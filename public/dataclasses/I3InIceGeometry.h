@@ -1,3 +1,16 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3InIceGeometry.h,v 1.11 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3InIceGeometry.h
+ * @version $Revision: 1.11 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ */
 #ifndef I3INICEGEOMETRY_H
 #define I3INICEGEOMETRY_H
 
@@ -6,28 +19,18 @@
 #include "I3OMGeo.h"
 #include "StoragePolicy.h"
 /**
+ * @brief Right now just a containter for IceCube and Amanda OMGeos. 
  *
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.10 2004/03/14 15:07:12 pretz Exp $
- *
- * Right now just a containter for IceCube and Amanda OMGeos. This is the
+ * This is the
  * the 'frozen-in-ice' information, as opposed to the stuff that changes.
- *
- * @version $Revision: 1.10 $
- * @date $Date: 2004/03/14 15:07:12 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
  * @todo make copy and assignment private.  conflict with something in tests
  * @todo TDS: should contain two vectors, one by geonumber and one
  * with the current indexing scheme, whatever that is.  HasOMGeoNumber
  * and FindOmGeo both do the same thing (linear time search).  Lots of
  * wasted processing here.  Fatal error on "geo not found" makes no
  * sense.
- *
  */
+
 class I3InIceGeometry : public TObject, public VecPointainerPolicy<I3OMGeoPtr>::ThePolicy
 {
   public:

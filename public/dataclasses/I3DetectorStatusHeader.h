@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3DetectorStatusHeader.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3DetectorStatusHeader.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ */
 #ifndef I3DETECTORSTATUSHEADER_H
 #define I3DETECTORSTATUSHEADER_H
 
@@ -6,11 +16,8 @@
 #include "StoragePolicy.h"
 #include <string>
 using namespace std;
-
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3DetectorStatusHeader.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
+ * @brief The header for data on the DetectorStatus stream
  *
  * I3DetectorStatus Header is summary information for the DetectorStatus object
  * which you can store in a file if you don't want to store the whole 
@@ -18,11 +25,6 @@ using namespace std;
  * It's will have enough data to reconstruct the full DetectorStatus object
  * from the database
  *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
- * @author pretz
- *
- * @todo 
  */
 class I3DetectorStatusHeader : public I3DataHeader
 {

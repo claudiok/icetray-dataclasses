@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3DataExecution.h,v 1.7 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3DataExecution.h
+ * @version $Revision: 1.7 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ */
 #ifndef I3DATAEXECUTION_H
 #define I3DATAEXECUTION_H
 
@@ -6,24 +16,17 @@
 
 class I3Logger;
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3DataExecution.h,v 1.6 2004/03/08 21:22:50 pretz Exp $
+ * @brief The data structure's access to the framework.  
  *
- * The data structure's access to the framework.  If the 
+ * If the 
  * data wants to get a message into the logging system or abort the job 
  * because of an illegal request, it does so through this class
  * The implementation is a bit fuzzy, since it depends on how icetray
  * implements logging.  Right now it calls icetray's private logger, but
  * there should be a logger for just the data.
  *
- * @version $Revision: 1.6 $
- * @date $Date: 2004/03/08 21:22:50 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo implement the 'Fatal' to actually 'Fatal' in the framework rather than exit(1)
+ * @todo implement the 'Fatal' to actually 'Fatal' in the framework rather 
+ * than exit(1)
  * @todo give the data its own logger rather than piggy-backing IceTray's 
  * @todo decide if this is really necessary
  * @todo if its not necessary, we can decouple dataclasses from icetray

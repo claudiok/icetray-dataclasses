@@ -1,3 +1,14 @@
+/**
+ *
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Monitoring.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ * 
+ * @file I3Monitoring.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ */
 #ifndef I3MONITORING_H
 #define I3MONITORING_H
 
@@ -5,19 +16,9 @@
 #include "I3Atmosphere.h"
 
 /**
+ * @brief This is information that we may want to monitor, but have no direct 
+ * control over.  This is a top-level object in the Frame
  *
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3Monitoring.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
- *
- * This is information that we may want to monitor, but have no direct control
- * over.  This is a top-level object in the Frame
- *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
- * @author pretz
- *
- * @todo 
  */
 class I3Monitoring : public TObject{
   I3Atmosphere fAtmosphere; //||

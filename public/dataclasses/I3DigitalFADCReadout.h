@@ -1,22 +1,25 @@
-#ifndef I3DIGITALFADCREADOUT_H
-#define I3DIGITLAFADCREADOUT_H
-
-#include "I3DigitalReadout.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalFADCReadout.h,v 1.3 2004/03/13 19:51:20 pretz Exp $
+ * $Id: I3DigitalFADCReadout.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
  *
- * A class to represent the FADC readout of a particular om.
- *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/03/13 19:51:20 $
+ * @file I3DigitalFADCReadout.h
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
- * @todo Right now, theres no implementation beyond that of I3DigitalReadout
+ */
+#ifndef I3DIGITALFADCREADOUT_H
+#define I3DIGITLAFADCREADOUT_H
+
+#include "I3DigitalReadout.h"
+
+/**
+ * @brief A class to represent the FADC readout of a particular om.
  *
+ * @todo Right now, theres no implementation beyond that of I3DigitalReadout
  */
 class I3DigitalFADCReadout : public I3DigitalReadout{
  public:

@@ -1,3 +1,18 @@
+/**
+ *
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Geometry.h,v 1.20 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3Geometry.h
+ * @version $Revision: 1.20 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ * @todo 
+ */
 #ifndef I3GEOMETRY_H
 #define I3GEOMETRY_H
 
@@ -5,22 +20,11 @@
 #include "I3InIceGeometry.h"
 #include "I3TopGeometry.h"
 /**
+ * @brief The Geometry information for the IceCube detector.  
+ * 
+ * There's the InIce portion and the IceTop portion.  It is expected that 
+ * AMANDA tubes will be incorporated as additional kinds of InIce tubes.
  *
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3Geometry.h,v 1.19 2004/03/13 19:51:20 pretz Exp $
- *
- * The Geometry information for the IceCube detector.  There's the InIce
- * portion and the IceTop portion.  It is expected that AMANDA tubes
- * will be incorporated as additional kinds of InIce tubes.
- *
- * @version $Revision: 1.19 $
- * @date $Date: 2004/03/13 19:51:20 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
  */
 class I3Geometry : public TObject 
 {

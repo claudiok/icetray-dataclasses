@@ -1,22 +1,20 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3CoreLocalized.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author pretz
- *
- * @todo
- *
  */
 #ifndef I3CORELOCALIZED_H
 #define I3CORELOCALIZED_H
 
 /**
- * The core position part of an I3Primary implementation.  Represents a 
- * a primary where the core location is known.
+ * @brief The core position part of an I3Primary implementation.  
+ * 
+ * Represents a a primary where the core location is known.
  */
 class I3CoreLocalized 
 {

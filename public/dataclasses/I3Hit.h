@@ -1,3 +1,15 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3Hit.h,v 1.13 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3Hit.h
+ * @version $Revision: 1.13 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3HIT_H
 #define I3HIT_H
 
@@ -5,20 +17,9 @@
 #include "StoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3Hit.h,v 1.12 2004/03/13 19:51:20 pretz Exp $
- *
- * I3Hit is the basic hit class.  Just a time for a PE arrival
+ * @brief I3Hit is the basic hit class.  Just a time for a PE arrival
  * at a tube.  
  *
- * @version $Revision: 1.12 $
- * @date $Date: 2004/03/13 19:51:20 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
  */
 class I3Hit : public TObject
 {

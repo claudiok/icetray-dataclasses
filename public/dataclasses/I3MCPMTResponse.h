@@ -1,22 +1,24 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.4 2004/04/25 20:40:27 ehrlich Exp $
+ * $Id: I3MCPMTResponse.h,v 1.5 2004/04/27 02:32:05 pretz Exp $
  *
- * This is now a base class for the Monte-Carlo generated PMT response
- * The Chiba PMT response will inherit from this.  
- *
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/25 20:40:27 $
+ * @file I3MCPMTResponse.h
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author klein
- *
- * @todo 
  */
 
 #ifndef I3MCPMTRESPONSE_H
 #define I3MCPMTRESPONSE_H
 #include <TObject.h>
 
+/**
+ * @brief This is now a base class for the Monte-Carlo generated PMT response
+ *
+ * The Chiba PMT response will inherit from this.  
+ *
+ */
 class I3MCPMTResponse : public TObject
 {
 

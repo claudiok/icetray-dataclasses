@@ -1,15 +1,12 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3BasicTrack.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
 
     @file I3BasicTrack.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
-
-    @todo Is this class needed anymore?
-
 */
 
 #include "I3TrackImpl.h"
@@ -23,17 +20,26 @@
 #include "dataclasses/I3Track.h"
 
 /**
- * Currently BasicTrack defines all the most common track member
- * variable.  This could be split up a bit more so people can see
- * what they are doing.
+ * @brief BasicTrack defines all the most common track member
+ * variable.  
+ * @todo Is this class needed anymore?
  */
 class I3BasicTrack : public I3TrackImpl<I3Starting,
 	                              I3Energetic,
                                       I3NonComposite>
 {
  public:
+  /**
+   * constructor
+   */
   I3BasicTrack(){};
+  
+  /**
+   * destructor
+   */
   virtual ~I3BasicTrack(){}
+ private:
+  // ROOT macro
   ClassDef(I3BasicTrack,1);
 };
 

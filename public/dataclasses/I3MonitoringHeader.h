@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MonitoringHeader.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3MonitoringHeader.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ */
 #ifndef I3MONITORINGHEADER_H
 #define I3MONITORINGHEADER_H
 
@@ -6,24 +16,16 @@
 #include "StoragePolicy.h"
 #include <string>
 using namespace std;
-
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3MonitoringHeader.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
+ * @brief The header for the data on the Monitoring stream 
  *
  * I3Monitoring Header is summary information for the Monitoring object 
  * which you can store in a file if you don't want to store the whole 
  * Monitoring object.
  * It's will have enough data to reconstruct the full Monitoring object
  * from the database
- *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
- * @author pretz
- *
- * @todo 
  */
+
 class I3MonitoringHeader : public I3DataHeader
 {
  public:

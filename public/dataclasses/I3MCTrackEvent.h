@@ -1,13 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCTrackEvent.h,v 1.3 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3MCTrackEvent.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @file I3MCTrackEvent.h
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author pretz
- *
- * @todo work out how the copy and assignment can be private.
  *
  */
 
@@ -18,6 +17,12 @@
 #include "dataclasses/I3MCTrackList.h"
 #include "dataclasses/StoragePolicy.h"
 
+/**
+ * @brief A set of causely-related MC Tracks. 
+ *
+ * The stuff at the surface, and the stuff in the ice
+ * @todo work out how the copy and assignment can be private.
+ */
 class I3MCTrackEvent : public TObject 
 {
 

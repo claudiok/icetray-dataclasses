@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Energetic.h,v 1.3 2004/04/23 21:10:25 deyoung Exp $
+ * $Id: I3Energetic.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
  *
  * @file I3Energetic.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/23 21:10:25 $
- * @author 
- *
- * @todo
- *
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
  */
 #ifndef I3ENERGETIC_H
 #define I3ENERGETIC_H
@@ -17,7 +14,8 @@
 #include "Rtypes.h"
 
 /**
- * The energy part of tracks and cascades, should they have a valid energy
+ * @brief The energy part of tracks and cascades, should they have a valid 
+ * energy
  */
 class I3Energetic
 {

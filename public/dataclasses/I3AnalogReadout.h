@@ -1,3 +1,13 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3AnalogReadout.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3AnalogReadout.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ */
 #ifndef I3ANALOGREADOUT_H
 #define I3ANALOGREADOUT_H
 
@@ -5,19 +15,10 @@
 #include "StoragePolicy.h"
 
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.2 2004/03/10 15:53:55 pretz Exp $
- *
- * The base for all the I3Analog types of DataReadout.  Just a 'time' which
+ * @brief The base for all the I3Analog types of DataReadout.  
+ * 
+ * Just a 'time' which
  * is the first 'LeadingEdge' time. 
- *
- * @version $Revision: 1.2 $
- * @date $Date: 2004/03/10 15:53:55 $
- * @author pretz
- *
- *  @todo
- *
  */
 class I3AnalogReadout : public I3DataReadout
 { 

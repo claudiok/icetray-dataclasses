@@ -1,27 +1,28 @@
-#ifndef I3DATAHEADER_H
-#define I3DATAHEADER_H
-
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.7 2004/03/01 20:38:32 ehrlich Exp $
+ * $Id: I3DataHeader.h,v 1.8 2004/04/27 02:32:05 pretz Exp $
  *
- * I3DataHeader
- * This class represents a generic header for a data issued on some stream
- * Just a 'time' right now, but there may be stuff to add later.
- *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/03/01 20:38:32 $
+ * @file I3DataHeader.h
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
  *
  * @todo 
  */
+#ifndef I3DATAHEADER_H
+#define I3DATAHEADER_H
 
 #include "TObject.h"
 #include "StoragePolicy.h"
-
+/**
+ * @brief This class represents a generic header for a data issued on some 
+ * stream
+ *
+ * Just a 'time' right now, but there may be stuff to add later.
+ */
 class I3DataHeader : public TObject
 {
  private:

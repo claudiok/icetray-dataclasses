@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3Lollipop.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3Lollipop.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
 
     @file I3Lollipop.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
 
     @todo
@@ -23,7 +23,7 @@
 #include "dataclasses/I3Track.h"
 
 /**
- * For tau leptons which enter the detector and then decay (single
+ * @brief For tau leptons which enter the detector and then decay (single
  * bang events).
  */
 class I3Lollipop : public I3TrackImpl<I3Stopping,
@@ -31,8 +31,18 @@ class I3Lollipop : public I3TrackImpl<I3Stopping,
                                       I3Composite>
 {
  public:
+  /**
+   * constructor
+   */
   I3Lollipop(){};
+
+  /**
+   * destructor
+   */
   virtual ~I3Lollipop(){}
+
+ private:
+  //ROOT macro
   ClassDef(I3Lollipop,1);
 };
 

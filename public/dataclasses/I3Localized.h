@@ -1,14 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Localized.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
  *
- * @file 
- * @version $Revision: 1.2 $
- * @date $Date: 2004/04/22 15:55:44 $
- * @author 
- *
- * @todo
+ * @file I3Localized.h
+ * @version $Revision: 1.3 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
  *
  */
 #ifndef I3LOCALIZED_H
@@ -17,7 +15,7 @@
 #include "I3Cascade.h"
 
 /**
- * A class which satisfies the "Localization" part of an I3Cascade, and 
+ * @brief A class which satisfies the "Localization" part of an I3Cascade, and 
  * allows X,Y,Z, and T to be set and got.
  */
 class I3Localized{

@@ -1,13 +1,13 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DecayingMuon.h,v 1.2 2004/04/22 15:55:44 pretz Exp $
+    $Id: I3DecayingMuon.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
 
-    @version $Revision: 1.2 $
-    @date $Date: 2004/04/22 15:55:44 $
+    @version $Revision: 1.3 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
 
-    @todo
+    @todo What's up with this class? -JP
 
     For tau leptons which enter the detector and then decay (single
     bang events).

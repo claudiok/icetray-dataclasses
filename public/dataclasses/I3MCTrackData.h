@@ -1,23 +1,26 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCTrackData.h,v 1.21 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3MCTrackData.h
+ * @version $Revision: 1.21 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ */
 #ifndef I3MCTRACKDATA_H
 #define I3MCTRACKDATA_H
 
 #include "dataclasses/I3MCTrackEvent.h"
 #include "TObject.h"
+
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3MCTrackData.h,v 1.20 2004/03/14 15:07:12 pretz Exp $
+ * @brief This is a map of I3MCTrackEvents.  
  *
- * This is a map of I3MCTrackEvents.  It is supposed to contain all the
+ * It is supposed to contain all the
  * MC information for the tracks in the Event.  
- *
- * @version $Revision: 1.20 $
- * @date $Date: 2004/03/14 15:07:12 $
- * @author ehrlich
- * @author troy
- * @author pretz
- *
- * @todo 
  *
  */
 class I3MCTrackData : public TObject, public MapPolicy<I3MCTrackEvent>::ThePolicy

@@ -1,16 +1,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.14 2004/04/22 15:55:44 pretz Exp $
+ * $Id: I3Bag.h,v 1.15 2004/04/27 02:32:05 pretz Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.14 $
- * @date $Date: 2004/04/22 15:55:44 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
- *
- * @todo 
  */
 
 #ifndef I3BAG_H
@@ -22,8 +20,10 @@
 typedef TObject* TObjectPtr;
 
 /**
- * I3Bag is a generic keyed TObject container, akin to the
- * Sieglinde bag. Each Event (and geometry etc) gets one so that it can hold 
+ * @brief I3Bag is a generic keyed TObject container, akin to the
+ * Sieglinde bag. 
+ *
+ * Each Event (and geometry etc) gets one so that it can hold 
  * stuff that  doesn't really fit into the Data structure.  Just for 
  * 'temporary' or 'personal' use.
  */

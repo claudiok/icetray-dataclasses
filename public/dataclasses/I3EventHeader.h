@@ -1,23 +1,17 @@
-#ifndef I3EVENTHEADER_H
-#define I3EVENTHEADER_H
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.7 2004/03/01 20:38:32 ehrlich Exp $
+ * $Id: I3EventHeader.h,v 1.8 2004/04/27 02:32:05 pretz Exp $
  *
- * I3Event Header is supposed to be a header for the event that
- * you can store in a file if you don't want to store the event.
- * It's supposed to have enough data to reconstruct the full event
- * from the database
- *
- * @version $Revision: 1.7 $
- * @date $Date: 2004/03/01 20:38:32 $
+ * @file I3EventHeader.h
+ * @version $Revision: 1.8 $
+ * @date $Date: 2004/04/27 02:32:05 $
  * @author ehrlich
  * @author troy
  * @author pretz
- *
- * @todo 
  */
+#ifndef I3EVENTHEADER_H
+#define I3EVENTHEADER_H
 
 // includes
 #include "I3DataHeader.h"
@@ -27,12 +21,12 @@
 using namespace std;
 
 /**
- * I3Event Header is supposed to be a header for the event that
+ * @brief The header for data on the Event stream.
+ *
+ * Supposed to be a header for the event that
  * you can store in a file if you don't want to store the event.
  * It's supposed to have enough data to reconstruct the full event
  * from the database
- * @version $Id: I3EventHeader.h,v 1.7 2004/03/01 20:38:32 ehrlich Exp $
- * @author pretz
  */
 class I3EventHeader : public I3DataHeader{
   ULong_t  fRunId;
@@ -43,6 +37,11 @@ class I3EventHeader : public I3DataHeader{
    * constructor
    */
   I3EventHeader();
+
+  /**
+   * destructor
+   */
+  virtual ~I3EventHeader();
 
   /**
    * copy constructor.  Uses assignment operator.
@@ -57,11 +56,6 @@ class I3EventHeader : public I3DataHeader{
     I3DataHeader::operator=(rhs);
     return *this;
   }
-
-  /**
-   * destructor
-   */
-  virtual ~I3EventHeader();
 
   /**
    * @return the run id for the event

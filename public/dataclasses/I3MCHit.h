@@ -1,21 +1,25 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3MCHit.h,v 1.12 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3MCHit.h
+ * @version $Revision: 1.12 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author ehrlich
+ * @author troy
+ * @author pretz
+ *
+ */
 #ifndef I3MCHIT_H
 #define I3MCHIT_H
 
 #include <TObject.h>
 #include "I3Hit.h"
 #include "StoragePolicy.h"
+
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3MCHit.h,v 1.11 2004/03/13 19:51:20 pretz Exp $
- *
- * Adds a 'Weight' and 'Parent track' to the standard 'Hit' class
- *
- * @version $Revision: 1.11 $
- * @date $Date: 2004/03/13 19:51:20 $
- * @author ehrlich
- * @author troy
- * @author pretz
+ * @brief Adds a 'Weight' and 'Parent track' to the standard 'Hit' class
  *
  */
 class I3MCHit : public I3Hit

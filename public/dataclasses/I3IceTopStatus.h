@@ -1,3 +1,14 @@
+/**
+ *
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3IceTopStatus.h,v 1.2 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3IceTopStatus.h
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ */
 #ifndef I3ICETOPSTATUS_H
 #define I3ICETOPSTATUS_H
 
@@ -6,20 +17,8 @@
 #include "StoragePolicy.h"
 
 /**
- *
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3IceTopStatus.h,v 1.1 2004/03/02 20:58:51 pretz Exp $
- *
- *
- *
- * @version $Revision: 1.1 $
- * @date $Date: 2004/03/02 20:58:51 $
- * @author pretz
- *
- * @todo 
+ * @brief a container for I3IcetTopStationStatus objects
  */
-
 class I3IceTopStatus 
 : public TObject, 
   public VectorPolicy<I3IceTopStationStatus>::ThePolicy{

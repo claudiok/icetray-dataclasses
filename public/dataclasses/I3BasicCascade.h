@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3BasicCascade.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3BasicCascade.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
 
     @file I3BasicCascade.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
 
     @todo
@@ -22,7 +22,7 @@
 #include "dataclasses/I3Cascade.h"
 
 /**
- * For a plain vanilla cascade -- no direction or energy information,
+ * @brief A plain vanilla cascade -- no direction or energy information,
  * just a position and particle type.
  */
 class I3BasicCascade : public I3CascadeImpl<I3NonDirectional,
@@ -30,9 +30,19 @@ class I3BasicCascade : public I3CascadeImpl<I3NonDirectional,
                                             I3NonEnergetic>
 {
 public:
-    I3BasicCascade(){};
-    virtual ~I3BasicCascade(){}
-    ClassDef(I3BasicCascade,1);
+  /**
+   * constructor
+   */
+  I3BasicCascade(){};
+
+  /**
+   * destructor
+   */
+  virtual ~I3BasicCascade(){}
+
+ private:
+  // ROOT macro
+  ClassDef(I3BasicCascade,1);
 };
 
 #endif

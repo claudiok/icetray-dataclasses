@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DoubleBang.h,v 1.3 2004/04/22 16:55:52 pretz Exp $
+    $Id: I3DoubleBang.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
 
     @file I3DoubleBang.h
-    @version $Revision: 1.3 $
-    @date $Date: 2004/04/22 16:55:52 $
+    @version $Revision: 1.4 $
+    @date $Date: 2004/04/27 02:32:05 $
     @author deyoung
 
     @todo
@@ -22,7 +22,9 @@
 #include "dataclasses/I3Track.h"
 
 /**
- * For representing contained tau events, consisting of two showers
+ * @brief For representing contained tau events,
+ *
+ * consisting of two showers
  * (neutrino interaction and tau lepton decay), a tau lepton track,
  * and possibly stochastic showers along the lepton track.
  * Information in this object refers to the event as a whole, with

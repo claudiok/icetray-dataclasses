@@ -1,3 +1,14 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: I3DigitalReadout.h,v 1.4 2004/04/27 02:32:05 pretz Exp $
+ *
+ * @file I3DigitalReadout.h
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/04/27 02:32:05 $
+ * @author pretz
+ *
+ */
 #ifndef I3DIGITALREADOUT_H
 #define I3DIGITALREADOUT_H
 
@@ -7,19 +18,8 @@
 #include <vector>
 
 using namespace std; 
-
 /**
- * copyright  (C) 2004
- * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.3 2004/03/16 12:44:36 pretz Exp $
- *
- * A collection of digital signals.
- *
- * @version $Revision: 1.3 $
- * @date $Date: 2004/03/16 12:44:36 $
- * @author pretz
- *
- * @todo
+ * @brief A collection of digital signals.
  *
  */
 class I3DigitalReadout : public I3DataReadout, public vector<Double_t>
