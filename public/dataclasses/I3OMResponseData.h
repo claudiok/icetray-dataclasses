@@ -8,12 +8,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseData.h,v 1.16 2004/03/10 02:42:24 pretz Exp $
+ * $Id: I3OMResponseData.h,v 1.17 2004/03/10 18:39:56 pretz Exp $
  *
  * An event-level container for the OMResponse's of the Event.  
  *
- * @version $Revision: 1.16 $
- * @date $Date: 2004/03/10 02:42:24 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2004/03/10 18:39:56 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -21,7 +21,7 @@
  * @todo implement the 'FindOMResponse' as a smarter search, STL???
  *
  */
-class I3OMResponseData : public TObject, public VectorPolicy<I3OMResponsePtr>::ThePolicy
+class I3OMResponseData : public TObject, public VecPointainerPolicy<I3OMResponsePtr>::ThePolicy
 {
   public:
   /**

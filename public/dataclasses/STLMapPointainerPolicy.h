@@ -6,13 +6,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: STLMapPointainerPolicy.h,v 1.1 2004/03/01 20:19:49 pretz Exp $
+ * $Id: STLMapPointainerPolicy.h,v 1.2 2004/03/10 18:39:56 pretz Exp $
  *
  * A STLMapPolicy which contains the added functionality that
  * it deletes all the members when it goes out of scope.
  *
  * @version $$
- * @date $Id: STLMapPointainerPolicy.h,v 1.1 2004/03/01 20:19:49 pretz Exp $
+ * @date $Id: STLMapPointainerPolicy.h,v 1.2 2004/03/10 18:39:56 pretz Exp $
  * @author pretz
  *
  * @todo 
@@ -28,8 +28,8 @@ class STLMapPointainerPolicy : public STLMapStoragePolicy<ElementType>{
   virtual ~STLMapPointainerPolicy(){
     iterator iter;
     for(iter = begin() ; iter!=end() ; iter++){
-      delete *iter;
-      *iter = 0;
+      delete (iter->second);
+      iter->second = 0;
     }
   }
 
