@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.cxx,v 1.2 2004/11/28 06:40:27 troy Exp $
+    $Id: I3TankHit.cxx,v 1.3 2005/04/04 15:49:24 pretz Exp $
     @file I3TankHit.h
-    @version $Revision: 1.2 $
+    @version $Revision: 1.3 $
     @date Fri Jul  9 21:55:18 EDT 2004
     @author rulrich
 */
@@ -29,7 +29,7 @@ const I3TankHit& I3TankHit::operator= (const I3TankHit &)
 /*************************************************************/
 
 // Get the time
-Float_t I3TankHit::Time () const
+float I3TankHit::Time () const
 {
   return fTime;
 }
@@ -37,7 +37,7 @@ Float_t I3TankHit::Time () const
 /*************************************************************/
 
 // Set the time
-void I3TankHit::Time (Float_t time)
+void I3TankHit::Time (float time)
 {
   fTime = time;
 }
@@ -45,7 +45,7 @@ void I3TankHit::Time (Float_t time)
 /*************************************************************/
 
 // Get the Amplitude
-Float_t I3TankHit::Signal () const
+float I3TankHit::Signal () const
 {
   return fSignal;
 }
@@ -53,7 +53,7 @@ Float_t I3TankHit::Signal () const
 /*************************************************************/
 
 // Set the Amplitude
-void I3TankHit::Signal (Float_t signal)
+void I3TankHit::Signal (float signal)
 {
   fSignal = signal;
 }

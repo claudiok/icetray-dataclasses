@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShowerImpl.h,v 1.2 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3TopShowerImpl.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3TopShowerImpl.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author blaufuss
  *
  */
@@ -48,17 +48,17 @@ class I3TopShowerImpl : public I3TopShower,
   /**
    * indicates whether or not the particle has a valid energy
    */
-  virtual Bool_t HasEnergy() const {return EnergeticType::HasEnergy();}
+  virtual bool HasEnergy() const {return EnergeticType::HasEnergy();}
 
   /**
    * indicates whether or not the particle has a valid direction
    */
-  virtual Bool_t HasDirection() const {return DirectionalType::HasDirection();}
+  virtual bool HasDirection() const {return DirectionalType::HasDirection();}
 
   /**
    * indicates whether or not the primary has a valid core position
    */
-  virtual Bool_t IsCoreLocalized() const {return CoreType::IsCoreLocalized();}
+  virtual bool IsCoreLocalized() const {return CoreType::IsCoreLocalized();}
 
   /**
    * 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.11 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3PrimaryImpl.h,v 1.12 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  *
  */
@@ -48,32 +48,32 @@ class I3PrimaryImpl : public I3Primary,
   /**
    * indicates whether or not the particle has a valid energy
    */
-  virtual Bool_t HasEnergy() const {return EnergeticType::HasEnergy();}
+  virtual bool HasEnergy() const {return EnergeticType::HasEnergy();}
 
   /**
    * indicates whether or not the particle has a valid direction
    */
-  virtual Bool_t HasDirection() const {return DirectionalType::HasDirection();}
+  virtual bool HasDirection() const {return DirectionalType::HasDirection();}
 
   /**
    * indicates whether or not the primary has a valid core position
    */
-  virtual Bool_t IsCoreLocalized() const {return LocalizableType::IsCoreLocalized();}
+  virtual bool IsCoreLocalized() const {return LocalizableType::IsCoreLocalized();}
 
   /**
    * indicates whether or not the primary has a valid inice position
    */
-  virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
+  virtual bool IsLocalized() const {return LocalizableType::IsLocalized();}
 
   /**
    * indicates that this is not an in ice partcile
    */
-  virtual Bool_t IsInIce() const { return kFALSE;}
+  virtual bool IsInIce() const { return kFALSE;}
 
   /** 
    * indicates taht this is not an ice top particle
    */ 
-  virtual Bool_t IsIceTop() const { return kFALSE;}
+  virtual bool IsIceTop() const { return kFALSE;}
 
   /**
    * 

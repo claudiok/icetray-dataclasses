@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h.example,v 1.1 2004/08/12 17:09:51 pretz Exp $
+ * $Id: I3Hit.h.example,v 1.2 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/08/12 17:09:51 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -31,7 +31,7 @@ using namespace std;
  */
 class I3Hit : public TObject
 {
-  Double_t fTime;
+  double fTime;
 
   public:
   /**
@@ -65,12 +65,12 @@ class I3Hit : public TObject
   /**
    * @returns the time of the hit
    */
-  Double_t GetTime() const { return fTime; }
+  double GetTime() const { return fTime; }
 
   /**
    * @param time the new time of the hit
    */
-  void SetTime(Double_t time) { fTime = time; }
+  void SetTime(double time) { fTime = time; }
 
   /**
    * @todo finish implementing this method

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.4 2005/02/08 22:45:51 ehrlich Exp $
+ * $Id: I3MCPMTResponseRomeo.h,v 1.5 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3MCPMTResponseRomeo.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/02/08 22:45:51 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author klein
  * @author deyoung
  * @author ehrlich
@@ -26,8 +26,8 @@
  */
 class I3MCPMTResponseRomeo : public I3MCPMTResponse
 {
-  vector<Float_t> fWaveform;
-  Float_t         fBinSize;
+  vector<float> fWaveform;
+  float         fBinSize;
 
   public:
 
@@ -44,7 +44,7 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
   /**
    * PMT output voltage as f(time)
    */
-  virtual Float_t GetPMTVoltage(Float_t time)
+  virtual float GetPMTVoltage(float time)
   {
     if(time < fStartTime || time > fEndTime) return(0);
     ULong_t t = (ULong_t)((time-fStartTime)/fBinSize);
@@ -55,21 +55,21 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
   /**
    * Get the waveform
    */
-  const vector<Float_t>& GetWaveform() const {return fWaveform;}
+  const vector<float>& GetWaveform() const {return fWaveform;}
 
-  vector<Float_t>& GetWaveform() {return fWaveform;}
+  vector<float>& GetWaveform() {return fWaveform;}
 
   /**
    * Get bin size
    */
-  const Float_t GetBinSize() const {return fBinSize;}
+  const float GetBinSize() const {return fBinSize;}
 
-  Float_t GetBinSize() {return fBinSize;}
+  float GetBinSize() {return fBinSize;}
 
   /**
    * Set bin size
    */
-  void SetBinSize(Float_t binsize) {fBinSize=binsize;}
+  void SetBinSize(float binsize) {fBinSize=binsize;}
 
   private:
 

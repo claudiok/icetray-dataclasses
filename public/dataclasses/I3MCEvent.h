@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.11 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3MCEvent.h,v 1.12 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -25,8 +25,8 @@
 
 class I3MCEvent : public I3Event
 {
-  Float_t           fMCFrameStart;
-  Float_t           fMCFrameStop;
+  float           fMCFrameStart;
+  float           fMCFrameStop;
   I3MCParticleData  fMCParticleData; //||
 
  public:
@@ -46,24 +46,24 @@ class I3MCEvent : public I3Event
    * This is the earliest time simulated
    * @return the start time for the simulation
    */
-  const Float_t GetMCFrameStart() const {return fMCFrameStart; }
+  const float GetMCFrameStart() const {return fMCFrameStart; }
 
   /**
    * sets the start time for the simulation
    */
-  void SetMCFrameStart(Float_t MCFrameStart){fMCFrameStart=MCFrameStart;}
+  void SetMCFrameStart(float MCFrameStart){fMCFrameStart=MCFrameStart;}
 
   /**
    * The time that the simulation stops.  See GetMCFrameStart for more.
    * This is the latest time simulated
    * @return the stop time for the simulation
    */
-  const Float_t GetMCFrameStop() const {return fMCFrameStop;}
+  const float GetMCFrameStop() const {return fMCFrameStop;}
 
   /**
    * sets the stop time for the simulation
    */
-  void SetMCFrameStop(Float_t MCFrameStop){fMCFrameStop=MCFrameStop;}
+  void SetMCFrameStop(float MCFrameStop){fMCFrameStop=MCFrameStop;}
 
   /**
    * @return the MCParticleDict as a constant object.

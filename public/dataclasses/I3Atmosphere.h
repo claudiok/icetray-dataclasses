@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Atmosphere.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3Atmosphere.h,v 1.7 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Atmosphere.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -26,9 +26,9 @@
  */
 class I3Atmosphere : public TObject
 {
-  Float_t fPressure;
-  Float_t fTemperature;
-  Float_t fWindSpeed;
+  float fPressure;
+  float fTemperature;
+  float fWindSpeed;
 
   public:
   /**
@@ -61,12 +61,12 @@ class I3Atmosphere : public TObject
    /**
     * @return the atmospheric pressure
     */
-   Float_t GetPressure() const {return fPressure;}
+   float GetPressure() const {return fPressure;}
 
    /**
     * @param pressure the new pressure for the Atmosphere
     */
-   void SetPressure(Float_t pressure){fPressure = pressure;}
+   void SetPressure(float pressure){fPressure = pressure;}
 
    /**
     * @return the temperature
@@ -81,12 +81,12 @@ class I3Atmosphere : public TObject
   /**
    * @return the windspeed 
    */
-  Float_t GetWindSpeed() const {return fWindSpeed;}
+  float GetWindSpeed() const {return fWindSpeed;}
 
   /**
    * @param windspeed the new windspeed
    */
-  void SetWindSpeed(Float_t windspeed) {fWindSpeed = windspeed;}
+  void SetWindSpeed(float windspeed) {fWindSpeed = windspeed;}
 
   /**
    * dumps the object to the indicated ostream

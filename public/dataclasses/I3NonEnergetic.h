@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonEnergetic.h,v 1.7 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3NonEnergetic.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3NonEnergetic.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3NONENERGETIC_H
@@ -24,7 +24,7 @@ class I3NonEnergetic
   /**
    * Indicates that the particle has no energy information.
    */
-  Bool_t HasEnergy() const {return false;}
+  bool HasEnergy() const {return false;}
 
   /**
    * doesn't do anything.  There's nothing to copy.

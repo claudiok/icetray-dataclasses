@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseToy.h,v 1.2 2004/12/01 15:34:08 pretz Exp $
+ * $Id: I3MCPMTResponseToy.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3MCPMTResponseToy.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/12/01 15:34:08 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author klein
  * @author deyoung
  */
@@ -38,14 +38,14 @@ public:
   /**   
    * PMT output voltage as f(time) 
    */
-  virtual Float_t GetPMTVoltage(Float_t time) {
+  virtual float GetPMTVoltage(float time) {
     if (fHitTimes.Size() == 0) { return 0.; };
     if (time < fStartTime || time > fEndTime) { return 0.; };
 
-    Float_t amplitude = 0.;
-    Float_t sigma = 2. * I3Units::ns;
-    Float_t PMTgain = 100 * I3Units::mV;  
-    for (UInt_t i = 0; i < fHitTimes.Size(); i++) {
+    float amplitude = 0.;
+    float sigma = 2. * I3Units::ns;
+    float PMTgain = 100 * I3Units::mV;  
+    for (unsigned int i = 0; i < fHitTimes.Size(); i++) {
       amplitude += exp( -(fHitTimes[i] - time) * (fHitTimes[i] - time)
 			/ (sigma * sigma));
     } 
@@ -70,7 +70,7 @@ public:
 
 private:
 
-  VectorPolicy<Double_t>::ThePolicy fHitTimes;
+  VectorPolicy<double>::ThePolicy fHitTimes;
 
   // copy and assignment are private to disable them
   I3MCPMTResponseToy(const I3MCPMTResponseToy&); 

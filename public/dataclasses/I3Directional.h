@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.8 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Directional.h,v 1.9 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
@@ -21,15 +21,15 @@ class I3Directional
 {
  private:
   I3Direction fDir;
-  //Double_t fZenith;
-  //Double_t fAzimuth;
+  //double fZenith;
+  //double fAzimuth;
  public:
 
   virtual ~I3Directional() {}
   /**
    * indicates that this cascade has a direction
    */
-  virtual Bool_t HasDirection() const {return true;}
+  virtual bool HasDirection() const {return true;}
 
   /**
    * gets the direction of the track
@@ -44,38 +44,38 @@ class I3Directional
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t zen, Double_t azi) {fDir.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi) {fDir.SetDirection(zen,azi);}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t x, Double_t y, Double_t z) 
+  void SetDir(double x, double y, double z) 
     {fDir.SetDirection(x,y,z);}
 
   /**
    * gets the zenith of the cascade
    */
-  //virtual Double_t GetZenith() const {return fZenith;}
-  Double_t GetZenith() const {return GetDir().GetZenith();}
+  //virtual double GetZenith() const {return fZenith;}
+  double GetZenith() const {return GetDir().GetZenith();}
 
   /**
    * sets the zenith of the cascade
    */
-  //virtual void SetZenith(Double_t zenith) {fZenith = zenith;}
-  void SetZenith(Double_t zen) {
+  //virtual void SetZenith(double zenith) {fZenith = zenith;}
+  void SetZenith(double zen) {
     GetDir().SetDirection(zen,GetDir().GetAzimuth());}
 
   /**
    * gets the azimuth of the cascade
    */
-  //virtual Double_t GetAzimuth() const {return fAzimuth;}
-  Double_t GetAzimuth() const {return GetDir().GetAzimuth();}
+  //virtual double GetAzimuth() const {return fAzimuth;}
+  double GetAzimuth() const {return GetDir().GetAzimuth();}
 
   /**
    * sets the Azimuth of the cascade
    */
-  //virtual void SetAzimuth(Double_t azimuth) {fAzimuth = azimuth;}
-  void SetAzimuth(Double_t azi) {
+  //virtual void SetAzimuth(double azimuth) {fAzimuth = azimuth;}
+  void SetAzimuth(double azi) {
     GetDir().SetDirection(GetDir().GetZenith(),azi);}
 
   /**

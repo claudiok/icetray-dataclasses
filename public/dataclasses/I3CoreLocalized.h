@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3CoreLocalized.h,v 1.9 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3CORELOCALIZED_H
@@ -21,7 +21,7 @@
 class I3CoreLocalized 
 {
 
-  Double_t fCoreT;
+  double fCoreT;
   I3Position fCorePos; //trying to make compatible with I3Position (dule)
 
  public:
@@ -30,12 +30,12 @@ class I3CoreLocalized
   /**
    * indicates that the core position is known
    */
-  Bool_t IsCoreLocalized() const { return true;}
+  bool IsCoreLocalized() const { return true;}
 
   /**
    * indicates that the inice position isn't known
    */
-  Bool_t IsLocalized() const { return false;}
+  bool IsLocalized() const { return false;}
 
   /**
    * gives the position of the core
@@ -54,18 +54,18 @@ class I3CoreLocalized
   /**
    * sets the position of the core by using only X and Y
    */
-  void SetCorePos(Double_t corex, Double_t corey) 
+  void SetCorePos(double corex, double corey) 
     {fCorePos.SetPosition(corex,corey,I3Constants::zIceTop);}
 
   /**
    * gives the time of the core arrival
    */
-  Double_t GetCoreT() const {return fCoreT;}
+  double GetCoreT() const {return fCoreT;}
 
   /**
    * sets the time of the core arrival
    */
-  void SetCoreT(Double_t coret) {fCoreT = coret;}
+  void SetCoreT(double coret) {fCoreT = coret;}
 
   /**
    * copys the data over to the destination particle if a dynamic_cast succeeds

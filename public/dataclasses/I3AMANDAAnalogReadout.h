@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.10 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  *
  */
@@ -30,10 +30,10 @@ using namespace std;
  */
 class I3AMANDAAnalogReadout : public I3AnalogReadout { 
 
-    vector<Double_t> fLEs;
-    vector<Double_t> fTOTs;
-    vector<UShort_t> fHitNumbers;
-    Double_t fAmp;
+    vector<double> fLEs;
+    vector<double> fTOTs;
+    vector<unsigned short> fHitNumbers;
+    double fAmp;
  
 public:
     /**
@@ -49,7 +49,7 @@ public:
     /**
      * @return the time of the first LE in the readout
      */
-    virtual Double_t GetFirstLE() const {
+    virtual double GetFirstLE() const {
 	if(fLEs.size() >0)
 	    return fLEs[0];
 	return 0;
@@ -58,42 +58,42 @@ public:
     /**
      * @return the list of LEs as a const object
      */
-    const vector<Double_t>& GetLEs() const {return fLEs;}
+    const vector<double>& GetLEs() const {return fLEs;}
     
     /**
      * @return the list of LEs as a non-const object
      */
-    vector<Double_t>& GetLEs(){return fLEs;}
+    vector<double>& GetLEs(){return fLEs;}
     
     /**
      * @return the list of TOTs as const object
      */
-    const vector<Double_t>& GetTOTs() const {return fTOTs;}
+    const vector<double>& GetTOTs() const {return fTOTs;}
     
     /**
      * @return the list of TOTs as a non-const object
      */
-    vector<Double_t>& GetTOTs() {return fTOTs;}
+    vector<double>& GetTOTs() {return fTOTs;}
     
     /**
      * @return the list of TOTs as const object
      */
-    const vector<UShort_t>& GetHitNumbers() const {return fHitNumbers;}
+    const vector<unsigned short>& GetHitNumbers() const {return fHitNumbers;}
     
     /**
      * @return the list of TOTs as a non-const object
      */
-    vector<UShort_t>& GetHitNumbers() {return fHitNumbers;}
+    vector<unsigned short>& GetHitNumbers() {return fHitNumbers;}
 
     /**
      * @return the amplitude
      */
-    Double_t GetAmplitude() const {return fAmp;}
+    double GetAmplitude() const {return fAmp;}
     
     /**
      * @param amplitude the new amplitude of the readout
      */
-    void SetAmplitude(Double_t amplitude) {fAmp=amplitude;}
+    void SetAmplitude(double amplitude) {fAmp=amplitude;}
     
 
     virtual void ToStream(ostream& o) const {

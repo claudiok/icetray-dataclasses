@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.10 2005/03/17 02:44:04 dima Exp $
+ * $Id: I3DOMCalibration.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/03/17 02:44:04 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -40,49 +40,49 @@ using namespace std;
 
 struct LinearFit
 {
-    Double_t fSlope;
-    Double_t fIntercept;
-    Double_t fRegressCoeff;
+    double fSlope;
+    double fIntercept;
+    double fRegressCoeff;
 };
 
 class I3DOMCalibration : public TObject
 {
 public:
-    Double_t GetDate()
+    double GetDate()
 	{
 	    return fDate;
 	};
     
-    UInt_t GetDOMId()
+    unsigned int GetDOMId()
 	{
 	    return fDOMId;
 	};
     
-    Double_t GetTemperature()
+    double GetTemperature()
 	{
 	    return fTemperature;
 	};
     
-    Double_t GetFADCGain()
+    double GetFADCGain()
 	{
 	    return fFADCGain;
 	};
     
-    Double_t GetFADCPedestal()
+    double GetFADCPedestal()
 	{
 	    return fFADCPedestal;
 	};
     
     // Get gain and error on gain for ATWD by channel
-    Double_t GetATWDGain(Int_t channel);
-    Double_t GetATWDGainErr(Int_t channel);
+    double GetATWDGain(int channel);
+    double GetATWDGainErr(int channel);
  
     // Return the voltage value corresponding to the count 
     // for a specific ATWD id, channel, and bin.
 
-    Double_t GetATWDVoltage(Int_t id, Int_t channel, Int_t bin, Int_t count);
+    double GetATWDVoltage(int id, int channel, int bin, int count);
     
-    //map<Int_t, Double_t>& GetATWDVoltage(Int_t id, Int_t channel);
+    //map<int, double>& GetATWDVoltage(int id, int channel);
     
 
 public:
@@ -94,131 +94,131 @@ public:
     // Perhaps this should take a time stamp as argument?
     void SetCalibrationConstants();
 
-    void SetDate(Double_t date)
+    void SetDate(double date)
 	{
 	    fDate = date;
 	};
     
-    void  SetDOMId(UInt_t id)
+    void  SetDOMId(unsigned int id)
 	{
 	    fDOMId = id;
 	};
 
-    void SetTemperature(Double_t temperature)
+    void SetTemperature(double temperature)
 	{
 	    fTemperature = temperature;
 	};
 
     // Set parameters for conversion of count to voltage 
     // for each ATWD, each ATWD channel, and each ATWD bin.
-    void SetATWDParameters(Int_t id,
-			   Int_t channel,
-			   Int_t bin,
-			   Double_t slope,
-			   Double_t intercept,
-			   Double_t regress_coeff);
+    void SetATWDParameters(int id,
+			   int channel,
+			   int bin,
+			   double slope,
+			   double intercept,
+			   double regress_coeff);
     
-    void SetFADCParameters(Double_t pedestal,
-			   Double_t gain)
+    void SetFADCParameters(double pedestal,
+			   double gain)
 	{
 	    fFADCPedestal = pedestal;
 	    fFADCGain     = gain;
 	};
       
     // Set gain and error on gain for ATWD (specified by channel).
-    void SetATWDGain(Int_t channel, Double_t gain, Double_t gainErr);
+    void SetATWDGain(int channel, double gain, double gainErr);
   
-    void SetHighVoltage(Double_t voltage)
+    void SetHighVoltage(double voltage)
 	{
 	    fPMTHighVoltage = voltage;
 	};
     
-    Double_t GetHighVoltage()
+    double GetHighVoltage()
 	{
 	    return fPMTHighVoltage;
 	};
     
-    void SetSingleSPEThresholdVoltage(Double_t voltage)
+    void SetSingleSPEThresholdVoltage(double voltage)
 	{
 	    fSingleSPEThresholdVoltage = voltage;
 	};
     
-    Double_t GetSingleSPEThresholdVoltage()
+    double GetSingleSPEThresholdVoltage()
 	{
 	    return fSingleSPEThresholdVoltage;
 	};
     
-    void SetPedestalVoltage(Double_t voltage)
+    void SetPedestalVoltage(double voltage)
 	{
 	    fPedestalVoltage = voltage;
 	};
     
-    Double_t GetPedestalVoltage()
+    double GetPedestalVoltage()
 	{
 	    return fPedestalVoltage;
 	};
 
-    void SetPeakToValley(Double_t p2v)
+    void SetPeakToValley(double p2v)
 	{
 	    fPeakToValley = p2v;
 	};
     
-    Double_t GetPeakToValley()
+    double GetPeakToValley()
 	{
 	    return fPeakToValley;
 	};
 
-    void SetSPEMean(Double_t mean)
+    void SetSPEMean(double mean)
 	{
 	    fSPEMean = mean;
 	};
     
     /*
-    void SetOnePEinPC(Double_t OnePE)
+    void SetOnePEinPC(double OnePE)
 	{
 	    fOnePEinPC = OnePE;
 	};
     */
 
-    Double_t GetSPEMean()
+    double GetSPEMean()
 	{
 	    return fSPEMean;
 	};
     
     /*
-    Double_t GetOnePEinPC()
+    double GetOnePEinPC()
 	{
 	    return fOnePEinPC;
 	};
     */
 
-    void SetSPEWidth(Double_t width)
+    void SetSPEWidth(double width)
 	{
 	    fSPEWidth = width;
 	};
     
     /*
-    void SetWidth1PEinPC(Double_t width1pe)
+    void SetWidth1PEinPC(double width1pe)
 	{
 	    fWidth1PEinPC = width1pe;
 	};
     */
 
-    Double_t GetSPEWidth()
+    double GetSPEWidth()
 	{
 	    return fSPEWidth;
 	};
     
     /*
-    Double_t GetWidth1PEinPC()
+    double GetWidth1PEinPC()
 	{
 	    return fWidth1PEinPC;
 	};
     */
 
-    void SetSamplingRate(Int_t id, Double_t rate);
+    void SetSamplingRate(int id, double rate);
     
-    Double_t GetSamplingRate(Int_t id);
+    double GetSamplingRate(int id);
 
     virtual void ToStream(ostream& o) const
     {
@@ -242,39 +242,39 @@ private:
     // Simple data types
 
     // What is Date? UTC? GPS ns?
-    Double_t  fDate;  
-    UInt_t    fDOMId;
-    Double_t  fTemperature;
+    double  fDate;  
+    unsigned int    fDOMId;
+    double  fTemperature;
     
     // Gain and pedestal values for FADC
-    Double_t fFADCGain;
-    Double_t fFADCPedestal;
+    double fFADCGain;
+    double fFADCPedestal;
 
-    Double_t fPMTHighVoltage;
-    Double_t fPedestalVoltage;
-    Double_t fSingleSPEThresholdVoltage;
+    double fPMTHighVoltage;
+    double fPedestalVoltage;
+    double fSingleSPEThresholdVoltage;
    
     // Parameters describing the SPE charge distribution
-    Double_t fPeakToValley;
-    Double_t fSPEMean;
-    Double_t fSPEWidth; 
+    double fPeakToValley;
+    double fSPEMean;
+    double fSPEWidth; 
 
-    //Double_t fOnePEinPC;
-    //Double_t fWidth1PEinPC;
+    //double fOnePEinPC;
+    //double fWidth1PEinPC;
 
-    Double_t fSamplingRate0;
-    Double_t fSamplingRate1;
+    double fSamplingRate0;
+    double fSamplingRate1;
 
     // Gain and error on gain for ATWD channels.
     // The key corresponds to the channel.
-    map<Int_t, Double_t> fAmpGains;
-    map<Int_t, Double_t> fAmpGainErrs;
+    map<int, double> fAmpGains;
+    map<int, double> fAmpGainErrs;
     
     // First key corresponds to channel.
     // Key in internal map corresponds to bin.
-    map< Int_t, map<Int_t,LinearFit> > fATWD0;
-    map< Int_t, map<Int_t,LinearFit> > fATWD1;
-    map< Int_t, map<Int_t,LinearFit> >& GetATWDById(Int_t id);
+    map< int, map<int,LinearFit> > fATWD0;
+    map< int, map<int,LinearFit> > fATWD1;
+    map< int, map<int,LinearFit> >& GetATWDById(int id);
 
     // Copy constructor and assignment operator
     I3DOMCalibration(const I3DOMCalibration& calibration);

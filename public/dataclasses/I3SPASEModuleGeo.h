@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SPASEModuleGeo.h,v 1.2 2004/11/17 23:36:42 ehrlich Exp $
+ * $Id: I3SPASEModuleGeo.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3SPASEModuleGeo.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/11/17 23:36:42 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author niessen Thu Sep  2 15:44:31 EDT 2004
  */
 
@@ -46,14 +46,14 @@ class I3SPASEModuleGeo : public I3SurfModuleGeo {
   /**
    * Get the area of the tile
    */
-  Double_t GetArea () const {
+  double GetArea () const {
     return fArea;
   }
 
   /**
    * Set the area of the tile
    */
-  void SetArea (Double_t area) {
+  void SetArea (double area) {
     fArea = area;
   }
 
@@ -66,7 +66,7 @@ class I3SPASEModuleGeo : public I3SurfModuleGeo {
 
  private:
 
-  Double_t fArea; // Was told by SZT that size of the module is
+  double fArea; // Was told by SZT that size of the module is
 		  // measured in area, not in inner/outer radius of
 		  // the hexagonal tiles.
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.29 2004/09/07 20:09:42 dule Exp $
+ * $Id: I3Track.h,v 1.30 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.29 $
- * @date $Date: 2004/09/07 20:09:42 $
+ * @version $Revision: 1.30 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 
@@ -48,32 +48,32 @@ class I3Track : public I3InIceParticle
   /**
    * indicates that this track is not a cascade
    */
-  virtual Bool_t IsCascade() {return kFALSE;}
+  virtual bool IsCascade() {return kFALSE;}
 
   /**
    * indicates that this track is a track.
    */
-  virtual Bool_t IsTrack() {return kTRUE;}
+  virtual bool IsTrack() {return kTRUE;}
 
   /**
    * indicates that the 'StartX() ... ' parameters are valid
    */
-  virtual Bool_t IsStarting() const =0;
+  virtual bool IsStarting() const =0;
 
   /**
    * indicates that the 'StopX() ...' parameters are valid
    */
-  virtual Bool_t IsStopping() const  =0;
+  virtual bool IsStopping() const  =0;
 
   /**
    * indicates that the particle is infinite
    */
-  virtual Bool_t IsInfinite() const =0;
+  virtual bool IsInfinite() const =0;
 
   /**
    * indicates that the particle is starting and stopping
    */
-  virtual Bool_t IsContained() const  =0;
+  virtual bool IsContained() const  =0;
 
   /**
    * returns the direction of the track
@@ -83,27 +83,27 @@ class I3Track : public I3InIceParticle
   /**
    * returns the zenith of the track
    */
-  virtual Double_t GetZenith() const =0;
+  virtual double GetZenith() const =0;
 
   /**
    * returns the azimuth of the track
    */
-  virtual Double_t GetAzimuth() const = 0;
+  virtual double GetAzimuth() const = 0;
 
   /**
    * indicates that the track has an energy
    */
-  virtual Bool_t HasEnergy() const =0;
+  virtual bool HasEnergy() const =0;
 
   /**
    * indicates that the track is a composite track
    */
-  virtual Bool_t IsComposite() const =0;
+  virtual bool IsComposite() const =0;
 
   /**
    * the time the track was at X(), Y() and Z()
    */
-  virtual Double_t GetT() const =0;
+  virtual double GetT() const =0;
 
   /**
    * the Position of the track at time T()
@@ -114,13 +114,13 @@ class I3Track : public I3InIceParticle
   /**
    * the speed of the particle
    */
-  virtual Double_t GetSpeed() const =0;
+  virtual double GetSpeed() const =0;
 
   // length
   /**
    * the length of the particle
    */
-  virtual Double_t GetLength() const =0;
+  virtual double GetLength() const =0;
 
   /**
    * @todo implement 'PrintTrack()' as operator<<

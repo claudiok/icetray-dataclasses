@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TWRLaunch.h,v 1.2 2005/02/21 06:47:54 ehrlich Exp $
+ * $Id: I3TWRLaunch.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3TWRLaunch.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/02/21 06:47:54 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  */
 #ifndef I3TWRLAUNCH_H
@@ -19,11 +19,11 @@ using namespace std;
 
 class I3TWRLaunch : public I3DigitalLaunch
 {
-  Int_t           id;
-  Float_t         start_time;
-  Float_t         bin_size;
-  Float_t         baseline;
-  vector<Float_t> digi;
+  int           id;
+  float         start_time;
+  float         bin_size;
+  float         baseline;
+  vector<float> digi;
 
 
   public:
@@ -37,15 +37,15 @@ class I3TWRLaunch : public I3DigitalLaunch
    */
   virtual ~I3TWRLaunch() {;}
 
-  Int_t            GetId() {return id;}
-  void             SetId(Int_t id_) {id=id_;}
-  Float_t          GetStartTime() {return start_time;}
-  void             SetStartTime(Float_t start_time_) {start_time=start_time_;}
-  Float_t          GetBinSize() {return bin_size;}
-  void             SetBinSize(Float_t bin_size_) {bin_size=bin_size_;}
-  Float_t          GetBaseline() {return baseline;}
-  void             SetBaseline(Float_t baseline_) {baseline=baseline_;}
-  vector<Float_t>& GetDigi() {return digi;}
+  int            GetId() {return id;}
+  void             SetId(int id_) {id=id_;}
+  float          GetStartTime() {return start_time;}
+  void             SetStartTime(float start_time_) {start_time=start_time_;}
+  float          GetBinSize() {return bin_size;}
+  void             SetBinSize(float bin_size_) {bin_size=bin_size_;}
+  float          GetBaseline() {return baseline;}
+  void             SetBaseline(float baseline_) {baseline=baseline_;}
+  vector<float>& GetDigi() {return digi;}
 
   private:
 

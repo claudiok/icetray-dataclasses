@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.20 2004/11/28 06:40:28 troy Exp $
+ * $Id: I3Starting.h,v 1.21 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.20 $
- * @date $Date: 2004/11/28 06:40:28 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -28,36 +28,36 @@ class I3Starting
  private:
   I3Position fStartPos;
   I3Direction fDir;
-  Double_t fStartT;
-  //Double_t fZenith;
-  //Double_t fAzimuth;
+  double fStartT;
+  //double fZenith;
+  //double fAzimuth;
  public:
 
   virtual ~I3Starting() {}
   /**
    * indicates that the particle is starting
    */
-  Bool_t IsStarting() const {return true;}
+  bool IsStarting() const {return true;}
 
   /**
    * indicates that the particle is not stopping
    */
-  Bool_t IsStopping() const {return false;}
+  bool IsStopping() const {return false;}
 
   /**
    * indicates that the particle has a direction
    */
-  Bool_t HasDirection() const {return true;}
+  bool HasDirection() const {return true;}
 
   /**
    * gets the starting t
    */
-  Double_t GetStartT() const {return fStartT;}
+  double GetStartT() const {return fStartT;}
 
   /**
    * sets the starting t
    */
-  void SetStartT(Double_t startt) {fStartT = startt;}
+  void SetStartT(double startt) {fStartT = startt;}
 
   /**
    * gets the starting position
@@ -72,14 +72,14 @@ class I3Starting
   /**
    * sets the starting position in any reference frame
    */
-  void SetStartPos(Double_t startp1, Double_t startp2, Double_t startp3, 
+  void SetStartPos(double startp1, double startp2, double startp3, 
 		I3Position::RefFrame frame=I3Position::car)
     {fStartPos.SetPosition(startp1,startp2,startp3,frame);}
 
   /**
    * gives the starting t time as a time corresponding to X(), Y(), Z()
    */
-  Double_t GetT() const {return fStartT;}
+  double GetT() const {return fStartT;}
 
   /**
    * gives the starting positition as a position on the track
@@ -104,12 +104,12 @@ class I3Starting
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t zen, Double_t azi) {fDir.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi) {fDir.SetDirection(zen,azi);}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t x, Double_t y, Double_t z) 
+  void SetDir(double x, double y, double z) 
     {
       fDir.SetDirection(x,y,z);
     }
@@ -117,38 +117,38 @@ class I3Starting
   /**
    * gives the zenith of the track
    */
-  //Double_t GetZenith() const {return fZenith;}
-  Double_t GetZenith() const {return fDir.GetZenith();}
+  //double GetZenith() const {return fZenith;}
+  double GetZenith() const {return fDir.GetZenith();}
 
   /**
    * gives the azimuth of the track
    */
-  //Double_t GetAzimuth() const {return fAzimuth;}
-  Double_t GetAzimuth() const {return fDir.GetAzimuth();}
+  //double GetAzimuth() const {return fAzimuth;}
+  double GetAzimuth() const {return fDir.GetAzimuth();}
 
   /** 
    * sets the zenith of the track
    */
-  //void SetZenith(Double_t theta){fZenith = theta;}
-  void SetZenith(Double_t zen) {
+  //void SetZenith(double theta){fZenith = theta;}
+  void SetZenith(double zen) {
     fDir.SetDirection(zen,fDir.GetAzimuth());}
 
   /** 
    * sets the azimuth of the track
    */
-  //void SetAzimuth(Double_t phi){fAzimuth = phi;}
-  void SetAzimuth(Double_t azi) {
+  //void SetAzimuth(double phi){fAzimuth = phi;}
+  void SetAzimuth(double azi) {
     fDir.SetDirection(fDir.GetZenith(),azi);}
 
   /**
    * returns Infinity for the length of the track
    */
-  Double_t GetLength() const {return INFINITY;}
+  double GetLength() const {return INFINITY;}
 
   /**
    * returns the speed of light
    */ 
-  Double_t GetSpeed() const {return I3Constants::c;}
+  double GetSpeed() const {return I3Constants::c;}
 
   /**
    * copies the data to the destination particle, if a dynamic cast succeeds

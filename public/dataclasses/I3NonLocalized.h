@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonLocalized.h,v 1.1 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3NonLocalized.h,v 1.2 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3NonLocalized.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  * @author Peter Niessen
  */
@@ -24,12 +24,12 @@ class I3NonLocalized
   /**
    * indicates that the core position isn't known
    */
-  Bool_t IsCoreLocalized() const { return false;}
+  bool IsCoreLocalized() const { return false;}
 
   /**
    * indicates that the inice position isn't known
    */
-  Bool_t IsLocalized() const { return false;}
+  bool IsLocalized() const { return false;}
 
   /**
    * nothing to copy. does nothing.

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonDirectional.h,v 1.8 2004/08/31 13:30:55 pretz Exp $
+ * $Id: I3NonDirectional.h,v 1.9 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3NonDirectional.h
- * @version $Revision: 1.8 $
- * @date $Date: 2004/08/31 13:30:55 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  *
  * @todo implement fatal calls
@@ -25,7 +25,7 @@ class I3NonDirectional
   /**
    * indicates that the cascade doesn't have a direction
    */
-  virtual Bool_t HasDirection() const {return kFALSE;}
+  virtual bool HasDirection() const {return kFALSE;}
 
   /**
    * Doesn't do anything.  There's nothing to copy.

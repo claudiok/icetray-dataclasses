@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.13 2004/11/19 15:38:54 dule Exp $
+// $Id: I3Position.cxx,v 1.14 2005/04/04 15:49:24 pretz Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -19,7 +19,7 @@ I3Position::I3Position()
 }
 
 //-----------------------------------------------------------
-I3Position::I3Position(Double_t x, Double_t y, Double_t z, RefFrame f)
+I3Position::I3Position(double x, double y, double z, RefFrame f)
 {
 // Creation of an I3Position object and initialization of parameters
   SetPosition(x,y,z,f);
@@ -48,7 +48,7 @@ void I3Position::SetPosition(const I3Position& p)
 }
 
 //-----------------------------------------------------------
-void I3Position::SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame frame)
+void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
 {
 // Store position according to reference frame f
   IsCalculated=kFALSE;
@@ -105,43 +105,43 @@ void I3Position::ShiftCoordSystem(const I3Position& p)
 }
 
 //-----------------------------------------------------------
-void I3Position::RotateX(Double_t angle)
+void I3Position::RotateX(double angle)
 {
 // Rotate around x-axis by angle
-  Double_t s=sin(angle);
-  Double_t c=cos(angle);
-  Double_t y=fY;
+  double s=sin(angle);
+  double c=cos(angle);
+  double y=fY;
   fY=c*y-s*fZ;
   fZ=s*y+c*fZ;
   CalcSphCylFromCar();
 }
 
 //-----------------------------------------------------------
-void I3Position::RotateY(Double_t angle)
+void I3Position::RotateY(double angle)
 {
 // Rotate around y-axis by angle
-  Double_t s=sin(angle);
-  Double_t c=cos(angle);
-  Double_t z=fZ;
+  double s=sin(angle);
+  double c=cos(angle);
+  double z=fZ;
   fZ=c*z-s*fX;
   fX=s*z+c*fX;
   CalcSphCylFromCar();
 }
 
 //-----------------------------------------------------------
-void I3Position::RotateZ(Double_t angle)
+void I3Position::RotateZ(double angle)
 {
 // Rotate around z-axis by angle
-  Double_t s=sin(angle);
-  Double_t c=cos(angle);
-  Double_t x=fX;
+  double s=sin(angle);
+  double c=cos(angle);
+  double x=fX;
   fX=c*x-s*fY;
   fY=s*x+c*fY;
   CalcSphCylFromCar();
 }
 
 //-----------------------------------------------------------
-Double_t I3Position::CalcDistance(const I3Position& p) const
+double I3Position::CalcDistance(const I3Position& p) const
 {
 // Provide distance of the current I3Position to position p.
   I3Position d;

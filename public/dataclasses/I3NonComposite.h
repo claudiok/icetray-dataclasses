@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonComposite.h,v 1.9 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3NonComposite.h,v 1.10 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3NonComposite.h
- * @version $Revision: 1.9 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3NONCOMPOSITE_H
@@ -36,7 +36,7 @@ class I3NonComposite
   /**
    * indicates that this track is not a composite track
    */
-  Bool_t IsComposite() const {return kFALSE;}
+  bool IsComposite() const {return kFALSE;}
 
   /**
    * Doesn't do anything since there's no data to copy.

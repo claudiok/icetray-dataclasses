@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.12 2005/04/01 22:38:41 olivas Exp $
+ * $Id: I3DOMLaunch.h,v 1.13 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/01 22:38:41 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author klein
  * @author blaufuss
  *
@@ -176,7 +176,7 @@ class I3DOMLaunch : public I3DigitalLaunch
 	    else
 	    {
 		I3DataExecution::Instance().Fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
-                return *(vector<Int_t>*)0;
+                return *(vector<int>*)0;
 	    }
 	}
     

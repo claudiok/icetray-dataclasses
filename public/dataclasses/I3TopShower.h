@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShower.h,v 1.4 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3TopShower.h,v 1.5 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3TopShower.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author blaufuss
   */
 
@@ -25,7 +25,7 @@ class I3TopShower : public I3IceTopParticle{
    * indicatess that the particle has a core position, and so
    * asking CoreX, and CoreY and CoreT is legit.
    */
-  virtual Bool_t IsCoreLocalized() const = 0;
+  virtual bool IsCoreLocalized() const = 0;
 
   /**
    * Copies over data from the source particle to this particle.

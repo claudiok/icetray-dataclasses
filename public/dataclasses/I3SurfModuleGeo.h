@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.3 2004/09/15 13:44:50 niessen Exp $
+ * $Id: I3SurfModuleGeo.h,v 1.4 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/09/15 13:44:50 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
@@ -61,21 +61,21 @@ class I3SurfModuleGeo : public TObject, public MapPolicy<OMKey, I3OMGeoPtr>::The
   /**
    * Set the position of the tank, z is set to I3Constants::zIceTop
    */
-  void SetPos (Double_t x, Double_t y) {
+  void SetPos (double x, double y) {
     fSurfModulePos.SetPosition(x,y,I3Constants::zIceTop);
   }
 
   /**
    * Get the orientation 
    */
-  Float_t GetOrientation () const {
+  float GetOrientation () const {
     return fOrientation;
   }
 
   /**
    * Set the orientation
    */
-  void SetOrientation (Float_t orientation) {
+  void SetOrientation (float orientation) {
     fOrientation = orientation;
   }
 
@@ -83,7 +83,7 @@ class I3SurfModuleGeo : public TObject, public MapPolicy<OMKey, I3OMGeoPtr>::The
 
   I3Position fSurfModulePos; // position of the surface detector
 
-  Float_t fOrientation; // rotation angle around the z-axis. (radians)
+  float fOrientation; // rotation angle around the z-axis. (radians)
 
   ClassDef (I3SurfModuleGeo, 1);
 

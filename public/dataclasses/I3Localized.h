@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3Localized.h,v 1.9 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  *
  */
@@ -20,7 +20,7 @@
  */
 class I3Localized{
  private:
-  Double_t fT;
+  double fT;
   I3Position fPos;
  public:
 
@@ -28,12 +28,12 @@ class I3Localized{
   /**
    * indicates that the core position isn't known
    */
-  Bool_t IsCoreLocalized() const { return false;}
+  bool IsCoreLocalized() const { return false;}
 
   /**
    * indicates that this class has a localization
    */
-  Bool_t IsLocalized() const { return true;}
+  bool IsLocalized() const { return true;}
 
   /**
    * gets the position of the cascade
@@ -48,19 +48,19 @@ class I3Localized{
   /**
    * sets the position of the cascade 
    */
-  void SetPos(Double_t p1, Double_t p2, Double_t p3, 
+  void SetPos(double p1, double p2, double p3, 
 	      I3Position::RefFrame frame=I3Position::car)
     {fPos.SetPosition(p1,p2,p3,frame);}
 
   /**
    * gets the time of the cascade
    */
-  Double_t GetT() const{return fT;}
+  double GetT() const{return fT;}
 
   /**
    * sets the time of the cascade
    */
-  void SetT(Double_t t){fT = t;}
+  void SetT(double t){fT = t;}
 
   /**
    * copies all of this cascade's data into 'destination' if a dynamic_cast

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.10 2004/08/31 12:35:51 pretz Exp $
+ * $Id: I3Composite.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.10 $
- * @date $Date: 2004/08/31 12:35:51 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -38,7 +38,7 @@ class I3Composite
   /**
    * indicates that the track is composite
    */
-  Bool_t IsComposite() const {return true;}
+  bool IsComposite() const {return true;}
 
   /**
    * retrieves the constituents that make up this track as const

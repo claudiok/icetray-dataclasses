@@ -300,7 +300,7 @@ for (I3OMResponseMap::iter = om_map.begin();
 Now if we look further down in the loop to see how we ill actually use
 the @c readout that we are creating a pointer to, we see only 
 @code
-	Double_t time = readout.GetFirstLE();
+	double time = readout.GetFirstLE();
 @endcode
 and so there appears to be little reason to create a reference for one
 statement which could just as easily be done through a pointer.  We

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAMANDA.h,v 1.2 2004/08/01 00:41:01 pretz Exp $
+ * $Id: I3OMGeoAMANDA.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3OMGeoAMANDA.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/01 00:41:01 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -24,7 +24,7 @@
  */
 class I3OMGeoAMANDA : public I3OMGeo
 {
-  Double_t fTZero;
+  double fTZero;
 
   public:
   /**
@@ -50,12 +50,12 @@ class I3OMGeoAMANDA : public I3OMGeo
   /**
    * @param t0 the new TZero for this OM
    */
-  void SetTZero(Double_t t0) { fTZero = t0;}
+  void SetTZero(double t0) { fTZero = t0;}
 
   /**
    * @return the TZero for this OM
    */
-  Double_t GetTZero() const { return fTZero;}
+  double GetTZero() const { return fTZero;}
 
   /**
    * assignment is just member-wise assignment

@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3StationHit.h,v 1.6 2005/04/04 15:49:25 pretz Exp $
     @file I3StationHit.h
-    @version $Revision: 1.5 $
+    @version $Revision: 1.6 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
@@ -26,7 +26,7 @@ class I3StationHit : public TObject,
  private:
 
   // the station number
-  UShort_t fStationNumber;
+  unsigned short fStationNumber;
 
   /*
     RU: I would think of a station only as a unit for triggering purposes,
@@ -35,23 +35,23 @@ class I3StationHit : public TObject,
 
   // signal of the station, to be computed from the signals in
   // the tank
-  Float_t fSignal;
+  float fSignal;
 
   // time of the station, to be computed from the times in the tank
-  Float_t fTime;
+  float fTime;
 
   // x position of the hit, to be composed from the tank x
-  Float_t fX;
+  float fX;
 
   // y postion of the hist, to be composed from the tank y
-  Float_t fY;
+  float fY;
   */
 
  public:
   /**
    * constructor
    */
-  I3StationHit(UShort_t station_number = 0) :
+  I3StationHit(unsigned short station_number = 0) :
     fStationNumber( station_number ) {}
   
   /**
@@ -62,12 +62,12 @@ class I3StationHit : public TObject,
   /**
    * Get the station number
    */
-  UShort_t StationNumber () const;
+  unsigned short StationNumber () const;
 
   /**
    * Set the station number
    */
-  void StationNumber (UShort_t station_number);
+  void StationNumber (unsigned short station_number);
 
   /**
    * dumps the object to the indicated ostream
@@ -126,7 +126,7 @@ class I3StationHitMatchesStationNumber {
   /**
    * Constructor, pass on the station number to look for
    */
-  I3StationHitMatchesStationNumber (UShort_t station_number)
+  I3StationHitMatchesStationNumber (unsigned short station_number)
     {
       fStationNumber = station_number;
     }
@@ -140,7 +140,7 @@ class I3StationHitMatchesStationNumber {
     }
 
  private:
-  UShort_t fStationNumber;
+  unsigned short fStationNumber;
 
 };
 

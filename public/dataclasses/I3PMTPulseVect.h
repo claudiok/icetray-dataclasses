@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulseVect.h,v 1.2 2004/12/06 19:20:08 ehrlich Exp $
+ * $Id: I3PMTPulseVect.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3PMTPulseVect.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/12/06 19:20:08 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author deyoung
  */
 
@@ -42,9 +42,9 @@ public:
   /**
    * PMT output voltage as f(time). This is a superposition of all pulses
    */
-  Float_t GetPMTVoltage(const Float_t time)
+  float GetPMTVoltage(const float time)
   {
-    Double_t voltage = 0;
+    double voltage = 0;
     if(this->size())
     {
       I3PMTPulseVect::iterator iter;

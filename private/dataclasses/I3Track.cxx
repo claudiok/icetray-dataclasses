@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3Track.cxx,v 1.17 2004/07/26 13:54:10 pretz Exp $
+    $Id: I3Track.cxx,v 1.18 2005/04/04 15:49:24 pretz Exp $
 
-    @version $Revision: 1.17 $
-    @date $Date: 2004/07/26 13:54:10 $
+    @version $Revision: 1.18 $
+    @date $Date: 2005/04/04 15:49:24 $
     @author
 
     @todo
@@ -53,12 +53,12 @@ using namespace std;
 //   return I3Position(NAN,NAN,NAN);
 // }
 
-// Double_t I3Track::DistanceFromTrack(I3Position){return NAN;}
+// double I3Track::DistanceFromTrack(I3Position){return NAN;}
 
-// I3Position I3Track::ShiftAlongTrack(Double_t dist)
+// I3Position I3Track::ShiftAlongTrack(double dist)
 // {
 //   I3Position p;
-//   Double_t x,y,z;
+//   double x,y,z;
 //   x = Pos().X() - dist * sin(fZenith) * cos(fAzimuth);
 //   y = Pos().Y() - dist * sin(fZenith) * sin(fAzimuth);
 //   z = Pos().Z() - dist * cos(fZenith);
@@ -66,7 +66,7 @@ using namespace std;
 //   return p;
 // }
 
-// Bool_t I3Track::IsOnTrack(I3Position)
+// bool I3Track::IsOnTrack(I3Position)
 // {
 //   return kFALSE;
 // }

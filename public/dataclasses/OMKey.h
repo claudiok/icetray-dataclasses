@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.7 2004/09/15 18:39:35 pretz Exp $
+ * $Id: OMKey.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/09/15 18:39:35 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 
@@ -29,8 +29,8 @@ using namespace std;
  */
 class OMKey : public TObject //, public pair<int,unsigned int>
 {
-  Int_t fStringNumber;
-  UInt_t fOMNumber;
+  int fStringNumber;
+  unsigned int fOMNumber;
  public:
   /**
    * constructor
@@ -56,7 +56,7 @@ class OMKey : public TObject //, public pair<int,unsigned int>
   /**
    * gets the OM number on the string
    */
-  UInt_t GetOM() const { return fOMNumber;}
+  unsigned int GetOM() const { return fOMNumber;}
 
   /**
    * sets the OM number on the string

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.13 2004/09/07 20:09:42 dule Exp $
+ * $Id: I3TrackImpl.h,v 1.14 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3TrackImpl.h
- * @version $Revision: 1.13 $
- * @date $Date: 2004/09/07 20:09:42 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -48,17 +48,17 @@ class I3TrackImpl : public I3Track,
   /**
    * indicates that the 'StartPos() ... ' parameters are valid
    */
-  virtual Bool_t IsStarting() const {return GeometricalType::IsStarting();}
+  virtual bool IsStarting() const {return GeometricalType::IsStarting();}
 
   /**
    * indicates that the 'StopPos() ...' parameters are valid
    */
-  virtual Bool_t IsStopping() const {return GeometricalType::IsStopping();}
+  virtual bool IsStopping() const {return GeometricalType::IsStopping();}
 
   /**
    * indicates that the particle is infinite
    */
-  virtual Bool_t IsInfinite() const 
+  virtual bool IsInfinite() const 
     {
       if (GeometricalType::IsStarting() || GeometricalType::IsStopping())
 	return false;
@@ -68,7 +68,7 @@ class I3TrackImpl : public I3Track,
   /**
    * indicates that the particle is starting and stopping
    */
-  virtual Bool_t IsContained() const 
+  virtual bool IsContained() const 
     {
       if(GeometricalType::IsStarting() && GeometricalType::IsStopping())
 	return true;
@@ -78,17 +78,17 @@ class I3TrackImpl : public I3Track,
   /**
    * indicates that the track has an energy
    */
-  virtual Bool_t HasEnergy() const {return EnergeticType::HasEnergy();}
+  virtual bool HasEnergy() const {return EnergeticType::HasEnergy();}
 
   /**
    * indicates that the track is a composite track
    */
-  virtual Bool_t IsComposite() const {return CompositeType::IsComposite();}
+  virtual bool IsComposite() const {return CompositeType::IsComposite();}
 
   /**
    * indicates that Zenith() and Azimuth() are valid
    */
-  virtual Bool_t HasDirection() const 
+  virtual bool HasDirection() const 
     {
       return GeometricalType::HasDirection();
     }
@@ -104,17 +104,17 @@ class I3TrackImpl : public I3Track,
   /**
    * gets the zenith
    */
-  virtual Double_t GetZenith() const {return GeometricalType::GetZenith();}
+  virtual double GetZenith() const {return GeometricalType::GetZenith();}
 
   /**
    * gets the azimuth
    */
-  virtual Double_t GetAzimuth() const {return GeometricalType::GetAzimuth();}
+  virtual double GetAzimuth() const {return GeometricalType::GetAzimuth();}
 
   /**
    * the time the track was at X, Y and Z
    */
-  virtual Double_t GetT() const {return GeometricalType::GetT();}
+  virtual double GetT() const {return GeometricalType::GetT();}
 
   /**
    * the Position of the track at time T()
@@ -127,12 +127,12 @@ class I3TrackImpl : public I3Track,
   /**
    * the speed of the particle
    */
-  virtual Double_t GetSpeed() const {return GeometricalType::GetSpeed();}
+  virtual double GetSpeed() const {return GeometricalType::GetSpeed();}
 
   /**
    * the length of the particle
    */
-  virtual Double_t GetLength() const {return GeometricalType::GetLength();}
+  virtual double GetLength() const {return GeometricalType::GetLength();}
 
   /**
    * copies over data from this particle to the destination particle

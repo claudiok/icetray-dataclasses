@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.28 2005/04/02 20:32:04 troy Exp $
+ * $Id: I3RecoHitSeries.h,v 1.29 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.28 $
- * @date $Date: 2005/04/02 20:32:04 $
+ * @version $Revision: 1.29 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  * @author pretz
  */
@@ -36,9 +36,9 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
   /**
    * earliest hit time
    */
-  Double_t GetFirstHitTime() {
+  double GetFirstHitTime() {
     if (this->size()) { 
-      Double_t min = (*this->begin())->GetTime();
+      double min = (*this->begin())->GetTime();
       I3RecoHitSeries::iterator iter;
       for(iter=this->begin(); iter!=this->end(); iter++) {
 	if(min>(*iter)->GetTime()) min=(*iter)->GetTime();

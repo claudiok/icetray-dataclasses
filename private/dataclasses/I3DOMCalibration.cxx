@@ -1,5 +1,5 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.9 2005/03/17 02:44:04 dima Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.10 2005/04/04 15:49:24 pretz Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
@@ -18,8 +18,8 @@ I3DOMCalibration::I3DOMCalibration()
 void I3DOMCalibration::SetCalibrationConstants()
 {};
 
-void I3DOMCalibration::SetATWDParameters(Int_t id, Int_t channel, Int_t bin,
-					 Double_t slope, Double_t intercept, Double_t regress_coeff)
+void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
+					 double slope, double intercept, double regress_coeff)
 {
     struct LinearFit fit;
     
@@ -30,8 +30,8 @@ void I3DOMCalibration::SetATWDParameters(Int_t id, Int_t channel, Int_t bin,
     GetATWDById(id)[channel][127-bin] = fit;
 }
 
-Double_t I3DOMCalibration::GetATWDVoltage(Int_t id,  Int_t channel, 
-					  Int_t bin, Int_t count)
+double I3DOMCalibration::GetATWDVoltage(int id,  int channel, 
+					  int bin, int count)
 {
     if ( ! GetATWDById(id).count(channel) )
     {
@@ -48,8 +48,8 @@ Double_t I3DOMCalibration::GetATWDVoltage(Int_t id,  Int_t channel,
     return ((fit.fSlope*count + fit.fIntercept) - fPedestalVoltage) / GetATWDGain(channel);
 }
 
-map<Int_t,map<Int_t,LinearFit> >& 
-I3DOMCalibration::GetATWDById(Int_t id)
+map<int,map<int,LinearFit> >& 
+I3DOMCalibration::GetATWDById(int id)
 {
     switch(id)
     {
@@ -60,20 +60,20 @@ I3DOMCalibration::GetATWDById(Int_t id)
     default:
       {
 	I3DataExecution::Instance().Fatal("Invalid ATWD Id in I3DOMCalibration");
-	return *static_cast<map<Int_t,map<Int_t,LinearFit> >*>(0);
+	return *static_cast<map<int,map<int,LinearFit> >*>(0);
       }
     }
     
 }
 
 
-void I3DOMCalibration::SetATWDGain(Int_t channel, Double_t gain, Double_t gainErr)
+void I3DOMCalibration::SetATWDGain(int channel, double gain, double gainErr)
 {
-    fAmpGains.insert(pair<Int_t,Double_t> (channel, gain));
-    fAmpGainErrs.insert(pair<Int_t,Double_t> (channel, gainErr));
+    fAmpGains.insert(pair<int,double> (channel, gain));
+    fAmpGainErrs.insert(pair<int,double> (channel, gainErr));
 }
 
-Double_t I3DOMCalibration::GetATWDGain(Int_t channel)
+double I3DOMCalibration::GetATWDGain(int channel)
 {
     if ( ! fAmpGains.count(channel) )
     {
@@ -83,7 +83,7 @@ Double_t I3DOMCalibration::GetATWDGain(Int_t channel)
     return fAmpGains[channel];
 }
 
-Double_t I3DOMCalibration::GetATWDGainErr(Int_t channel)
+double I3DOMCalibration::GetATWDGainErr(int channel)
 {
     if ( ! fAmpGainErrs.count(channel) )
     {
@@ -93,7 +93,7 @@ Double_t I3DOMCalibration::GetATWDGainErr(Int_t channel)
     return fAmpGainErrs[channel];
 }
 
-void I3DOMCalibration::SetSamplingRate(Int_t id, Double_t rate)
+void I3DOMCalibration::SetSamplingRate(int id, double rate)
 {
     switch(id)
     {
@@ -108,7 +108,7 @@ void I3DOMCalibration::SetSamplingRate(Int_t id, Double_t rate)
     }
 }
 
-Double_t I3DOMCalibration::GetSamplingRate(Int_t id)
+double I3DOMCalibration::GetSamplingRate(int id)
 {
     switch(id)
     {

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.29 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3OMGeo.h,v 1.30 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.29 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.30 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -55,12 +55,12 @@ class I3OMGeo : public TObject
   /**
    * the quantum efficiency relative to some standard
    */
-  Double_t fRelativeQE;
+  double fRelativeQE;
 
   /**
    * the cross-sectional area of the photocathode
    */
-  Double_t fArea;
+  double fArea;
 
   public:
   /**
@@ -101,7 +101,7 @@ class I3OMGeo : public TObject
    * @param r3 the third coordinate set
    * @param frame the coordinate system used. Defaults to cartesian.
    */
-  void SetPos(Double_t r1, Double_t r2, Double_t r3, 
+  void SetPos(double r1, double r2, double r3, 
 	      I3Position::RefFrame frame=I3Position::car)
     {fPosition.SetPosition(r1,r2,r3,frame);}
   
@@ -121,7 +121,7 @@ class I3OMGeo : public TObject
    * AMANDA experiment
    * @return the relative quantum efficiency of this OM
    */
-  Double_t GetRelativeQE() const {return fRelativeQE;}
+  double GetRelativeQE() const {return fRelativeQE;}
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
@@ -129,20 +129,20 @@ class I3OMGeo : public TObject
    * AMANDA experiment
    * @param qe the new Relative Quantum Efficiency for this OM
    */
-  void SetRelativeQE(Double_t qe) { fRelativeQE = qe;}
+  void SetRelativeQE(double qe) { fRelativeQE = qe;}
 
   /**
    * retrieves the area of the photo cathode for this tube
    * @return the area of the photocathode
    */
-  Double_t GetArea() const { return fArea;}
+  double GetArea() const { return fArea;}
 
 
   /**
    * sets the photocathode area for this tube
    * @param area the new area for the photocathode
    */
-  void SetArea(Double_t area){fArea = area;}
+  void SetArea(double area){fArea = area;}
 
   /**
    * @todo finish with all the data

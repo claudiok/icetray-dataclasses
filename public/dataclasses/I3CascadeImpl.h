@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CascadeImpl.h,v 1.12 2005/02/09 20:05:12 ehrlich Exp $
+ * $Id: I3CascadeImpl.h,v 1.13 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3CascadeImpl.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/02/09 20:05:12 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3CASCADEIMPL_H
@@ -50,13 +50,13 @@ class I3CascadeImpl : public I3Cascade,
    * indicates whether the cascade has an energy, and whether the Energy() 
    * method  will work
    */ 
-  virtual Bool_t HasEnergy() const {return EnergeticType::HasEnergy();}
+  virtual bool HasEnergy() const {return EnergeticType::HasEnergy();}
 
   /**
    * indicates whether the cascade has a direction, and whether Zenith()and 
    * Azimuth() are legimitate to call.
    */
-  virtual Bool_t HasDirection() const 
+  virtual bool HasDirection() const 
     {
       return DirectionalType::HasDirection();
     }
@@ -65,17 +65,17 @@ class I3CascadeImpl : public I3Cascade,
    * indicates whether the particle is localized within the detector, and 
    * whether X(), Y(), Z() and T() are legitimate to call
    */
-  virtual Bool_t IsLocalized() const {return LocalizableType::IsLocalized();}
+  virtual bool IsLocalized() const {return LocalizableType::IsLocalized();}
 
   /**
    * indicates whether the cascade is a composite cascade
    */
-  virtual Bool_t IsComposite() const {return CompositeType::IsComposite();}
+  virtual bool IsComposite() const {return CompositeType::IsComposite();}
 
   /**
    * the time of the cascade
    */
-  virtual Double_t GetT() const {return LocalizableType::GetT();}
+  virtual double GetT() const {return LocalizableType::GetT();}
 
   /**
    * the position of the cascade as an I3Position object

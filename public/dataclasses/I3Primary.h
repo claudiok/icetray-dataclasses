@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.10 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3Primary.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Primary.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
   */
 
@@ -23,19 +23,19 @@ class I3Primary : public I3Particle{
   /**
    * indicates that the particle is not an observable particle
    */
-  virtual Bool_t IsObservable() const {return false;}
+  virtual bool IsObservable() const {return false;}
    
   /**
    * indicates whether the particle has a core position, and so
    * asking CoreX, and CoreY and CoreT is legit.
    */
-  virtual Bool_t IsCoreLocalized() const = 0;
+  virtual bool IsCoreLocalized() const = 0;
 
   /**
    * indicates whether the particle has a inice position, and so
    * asking X, Y, Z and T is legit.
    */
-  virtual Bool_t IsLocalized() const = 0;
+  virtual bool IsLocalized() const = 0;
 
   /**
    * Copies over data from the source particle to this particle.

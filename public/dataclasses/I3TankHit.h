@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.5 2004/11/28 06:40:28 troy Exp $
+    $Id: I3TankHit.h,v 1.6 2005/04/04 15:49:25 pretz Exp $
     @file I3TankHit.h
-    @version $Revision: 1.5 $
+    @version $Revision: 1.6 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -27,25 +27,25 @@ class I3TankHit : public TObject {
 
  protected:
 
-  UShort_t fTankNumber;
+  unsigned short fTankNumber;
 
   /**
    * the first arrival of a particle at this particular tank
    */
-  Float_t fTime;
+  float fTime;
 
   /**
    * the signal of the tank (can be different things like track length, charge,
    * #mc-particles, amplitude, ...
    */
-  Float_t fSignal;
+  float fSignal;
 
  public:
 
   /**
    * constructor
    */
-  I3TankHit(UShort_t tank_number = 0) :
+  I3TankHit(unsigned short tank_number = 0) :
     fTankNumber(tank_number), fTime(0), fSignal(0) {}
   
   /**
@@ -56,32 +56,32 @@ class I3TankHit : public TObject {
   /**
    * @return the number of the tank for this response
    */
-  UShort_t TankNumber() const { return fTankNumber; }
+  unsigned short TankNumber() const { return fTankNumber; }
 
   /**
    * @param tanknumber the new tanknumber associated with this response
    */
-  void TankNumber(UShort_t tanknumber) { fTankNumber = tanknumber;}
+  void TankNumber(unsigned short tanknumber) { fTankNumber = tanknumber;}
   
   /**
    * Get the time
    */
-  Float_t Time () const;
+  float Time () const;
 
   /**
    * Set the time
    */
-  void Time (Float_t time);
+  void Time (float time);
 
   /**
    * Get the Signal
    */
-  Float_t Signal () const;
+  float Signal () const;
 
   /**
    * Set the Signal
    */
-  void Signal (Float_t signal);
+  void Signal (float signal);
 
   /**
    * implementation problem
@@ -138,7 +138,7 @@ class I3TankHitMatchesTankNumber {
   /**
    * Constructor, pass on the tank number to look for
    */
-  I3TankHitMatchesTankNumber (UShort_t tank_number) :
+  I3TankHitMatchesTankNumber (unsigned short tank_number) :
     fTankNumber( tank_number ) {}
 
   /**
@@ -150,7 +150,7 @@ class I3TankHitMatchesTankNumber {
     }
 
  private:
-  UShort_t fTankNumber;
+  unsigned short fTankNumber;
 
 };
 #endif

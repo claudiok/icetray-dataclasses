@@ -2,11 +2,11 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.18 2004/12/01 22:39:44 tmccauley Exp $
+ $Id: I3Units.h,v 1.19 2005/04/04 15:49:25 pretz Exp $
  
  @file I3Units.h  
  @version $Version:$
- @date $Date: 2004/12/01 22:39:44 $
+ @date $Date: 2005/04/04 15:49:25 $
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -21,7 +21,7 @@
  rootcint didn't like it.  That's all my changes.  Otherwise, it comes
  direct from Geant4
  
- Also changed it to use ROOT types, Double_t rather than Double_t, for
+ Also changed it to use ROOT types, double rather than double, for
  example
  
  Also monkied around with the comments, so it'd document in doxygen
@@ -66,7 +66,7 @@
  * @namespace I3Units
  * @brief Unit definitions for the dataclasses
  *
- * The I3Units namespace contains a bunch of "static const Double_t's" which
+ * The I3Units namespace contains a bunch of "static const double's" which
  * define the units that are used in the dataclasses.  The header originally
  * comes from Geant4, and wrapping it in and I3Units namespace is an IceCube
  * modification.
@@ -88,7 +88,7 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @date $Date: 2004/12/01 22:39:44 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should we have a 'speed' here too?
@@ -99,188 +99,188 @@ namespace I3Units
   /**
    * meter
    */
-  static const Double_t meter  = 1.;
+  static const double meter  = 1.;
   
   /**
    * square meter
    */
-  static const Double_t meter2 = meter*meter;
+  static const double meter2 = meter*meter;
 
   /**
    * cubic meter
    */
-  static const Double_t meter3 = meter*meter*meter;
+  static const double meter3 = meter*meter*meter;
   
   /**
    * millimeter
    */ 
-  static const Double_t millimeter  = 0.001*meter;
+  static const double millimeter  = 0.001*meter;
 
   /**
    * square millimeter
    */
-  static const Double_t millimeter2 = millimeter*millimeter;
+  static const double millimeter2 = millimeter*millimeter;
 
   /**
    * cubic millimeter
    */
-  static const Double_t millimeter3 = millimeter*millimeter*millimeter;
+  static const double millimeter3 = millimeter*millimeter*millimeter;
   
   /**
    * centimeter
    */
-  static const Double_t centimeter  = 10.*millimeter;   
+  static const double centimeter  = 10.*millimeter;   
 
   /**
    * square centimeter
    */
-  static const Double_t centimeter2 = centimeter*centimeter;
+  static const double centimeter2 = centimeter*centimeter;
 
   /**
    * cubic centimeter
    */
-  static const Double_t centimeter3 = centimeter*centimeter*centimeter;
+  static const double centimeter3 = centimeter*centimeter*centimeter;
   
   /**
    * kilometer
    */
-  static const Double_t kilometer = 1000.*meter;                   
+  static const double kilometer = 1000.*meter;                   
 
   /**
    * square kilometer
    */
-  static const Double_t kilometer2 = kilometer*kilometer;
+  static const double kilometer2 = kilometer*kilometer;
 
   /**
    * cubic kilometer
    */
-  static const Double_t kilometer3 = kilometer*kilometer*kilometer;
+  static const double kilometer3 = kilometer*kilometer*kilometer;
   
   /**
    * parsec
    */
-  static const Double_t parsec = 3.0856775807e+16*meter;
+  static const double parsec = 3.0856775807e+16*meter;
   
   /**
    * micrometer
    */
-  static const Double_t micrometer = 1.e-6 *meter;             
+  static const double micrometer = 1.e-6 *meter;             
 
   /**
    * nanometer
    */
-  static const Double_t  nanometer = 1.e-9 *meter;
+  static const double  nanometer = 1.e-9 *meter;
 
   /**
    * angstrom
    */
-  static const Double_t  angstrom  = 1.e-10*meter;
+  static const double  angstrom  = 1.e-10*meter;
 
   /**
    * fermi
    */
-  static const Double_t fermi     = 1.e-15*meter;
+  static const double fermi     = 1.e-15*meter;
   
   /**
    * barn
    */
-  static const Double_t barn = 1.e-28*meter2;
+  static const double barn = 1.e-28*meter2;
 
   /**
    * millibarn
    */
-  static const Double_t millibarn = 1.e-3 *barn;
+  static const double millibarn = 1.e-3 *barn;
 
   /**
    * microbarn
    */
-  static const Double_t microbarn = 1.e-6 *barn;
+  static const double microbarn = 1.e-6 *barn;
 
   /**
    * nanobarn
    */
-  static const Double_t nanobarn = 1.e-9 *barn;
+  static const double nanobarn = 1.e-9 *barn;
 
   /**
    * picobarn
    */
-  static const Double_t picobarn = 1.e-12*barn;
+  static const double picobarn = 1.e-12*barn;
   
   /**
    * feet
    */
-  static const Double_t feet = 0.3048*meter;
+  static const double feet = 0.3048*meter;
   
   // symbols
   /**
    * millimeter
    */
-  static const Double_t mm  = millimeter;                        
+  static const double mm  = millimeter;                        
 
   /**
    * square millimeter
    */
-  static const Double_t mm2 = millimeter2;
+  static const double mm2 = millimeter2;
 
   /**
    * cubic millimeter
    */
-  static const Double_t mm3 = millimeter3;
+  static const double mm3 = millimeter3;
   
   /**
    * centimeter
    */
-  static const Double_t cm  = centimeter;   
+  static const double cm  = centimeter;   
 
   /**
    * square centimeter
    */
-  static const Double_t cm2 = centimeter2;
+  static const double cm2 = centimeter2;
 
   /**
    * cubic centimeter
    */
-  static const Double_t cm3 = centimeter3;
+  static const double cm3 = centimeter3;
   
   /**
    * meter
    */
-  static const Double_t m  = meter;                  
+  static const double m  = meter;                  
 
   /**
    * square meter
    */
-  static const Double_t m2 = meter2;
+  static const double m2 = meter2;
 
   /**
    * cubic meter
    */
-  static const Double_t m3 = meter3;
+  static const double m3 = meter3;
   
   /**
    * kilometer
    */
-  static const Double_t km  = kilometer;                   
+  static const double km  = kilometer;                   
 
   /**
    * square kilometer
    */
-  static const Double_t km2 = kilometer2;
+  static const double km2 = kilometer2;
 
   /**
    * cubic kilometer
    */
-  static const Double_t km3 = kilometer3;
+  static const double km3 = kilometer3;
   
   /**
    * parsec
    */
-  static const Double_t pc = parsec;
+  static const double pc = parsec;
   
   /**
    * feet
    */
-  static const Double_t ft = feet;
+  static const double ft = feet;
   
   //
   // Angle
@@ -288,43 +288,43 @@ namespace I3Units
   /**
    * radian
    */
-  static const Double_t radian      = 1.;                  
+  static const double radian      = 1.;                  
   
   /**
    * milliradian
    */
-  static const Double_t milliradian = 1.e-3*radian;
+  static const double milliradian = 1.e-3*radian;
 
   /**
    * degree
    */
-  static const Double_t degree = (3.14159265358979323846/180.0)*radian;
+  static const double degree = (3.14159265358979323846/180.0)*radian;
   
   /**
    * steradian
    */
-  static const Double_t   steradian = 1.;
+  static const double   steradian = 1.;
   
   // symbols
   /**
    * radian
    */
-  static const Double_t rad  = radian;	
+  static const double rad  = radian;	
 
   /**
    * milliradian
    */
-  static const Double_t mrad = milliradian;
+  static const double mrad = milliradian;
 
   /**
    * steradian
    */
-  static const Double_t sr   = steradian;
+  static const double sr   = steradian;
 
   /**
    * degree
    */
-  static const Double_t deg  = degree;
+  static const double deg  = degree;
   
   //
   // Time [T]
@@ -332,58 +332,58 @@ namespace I3Units
   /**
    * second
    */
-  static const Double_t second      = 1.e9;
+  static const double second      = 1.e9;
 
   /**
    * nanosecond
    */
-  static const Double_t nanosecond  = 1.e-9 *second;
+  static const double nanosecond  = 1.e-9 *second;
 
   /**
    * millisecond
    */ 
-  static const Double_t millisecond = 1.e-3 *second;
+  static const double millisecond = 1.e-3 *second;
 
   /**
    * microsecond
    */
-  static const Double_t microsecond = 1.e-6 *second;
+  static const double microsecond = 1.e-6 *second;
 
   /**
    * picosecond
    */
-  static const Double_t  picosecond = 1.e-12*second;
+  static const double  picosecond = 1.e-12*second;
   
   /**
    * hertz
    */
-  static const Double_t hertz = 1./second;
+  static const double hertz = 1./second;
 
   /**
    * kilohertz
    */
-  static const Double_t kilohertz = 1.e+3*hertz;
+  static const double kilohertz = 1.e+3*hertz;
 
   /**
    * megahertz
    */
-  static const Double_t megahertz = 1.e+6*hertz;
+  static const double megahertz = 1.e+6*hertz;
   
   // symbols
   /**
    * nanosecond
    */
-  static const Double_t ns = nanosecond;			
+  static const double ns = nanosecond;			
 
   /**
    * second
    */
-  static const Double_t  s = second;
+  static const double  s = second;
 
   /**
    * millisecond
    */
-  static const Double_t ms = millisecond;
+  static const double ms = millisecond;
   
   //
   // Energy [E]
@@ -391,68 +391,68 @@ namespace I3Units
   /**
    * joule
    */
-  //  static const Double_t joule = kg*m*m/(s*s);
+  //  static const double joule = kg*m*m/(s*s);
   
   /**
    * eV
    */
-  static const Double_t     electronvolt = 1.0e-9;
+  static const double     electronvolt = 1.0e-9;
 
   /**
    * keV
    */
-  static const Double_t kiloelectronvolt = 1.e+3*electronvolt;
+  static const double kiloelectronvolt = 1.e+3*electronvolt;
 
   /**
    * MeV
    */
-  static const Double_t megaelectronvolt = 1.e+6*electronvolt; 
+  static const double megaelectronvolt = 1.e+6*electronvolt; 
 
   /**
    * GeV
    */
-  static const Double_t gigaelectronvolt = 1.e+9*electronvolt;
+  static const double gigaelectronvolt = 1.e+9*electronvolt;
 
   /**
    * TeV
    */
-  static const Double_t teraelectronvolt = 1.e+12*electronvolt;
+  static const double teraelectronvolt = 1.e+12*electronvolt;
 
   /**
    * PeV
    */
-  static const Double_t petaelectronvolt = 1.e+15*electronvolt;
+  static const double petaelectronvolt = 1.e+15*electronvolt;
   
   // symbols
   /**
    * MeV
    */
-  static const Double_t MeV = megaelectronvolt;
+  static const double MeV = megaelectronvolt;
 
   /**
    * eV
    */
-  static const Double_t  eV = electronvolt;
+  static const double  eV = electronvolt;
 
   /**
    * keV
    */
-  static const Double_t keV = kiloelectronvolt;
+  static const double keV = kiloelectronvolt;
 
   /**
    * GeV
    */
-  static const Double_t GeV = gigaelectronvolt;
+  static const double GeV = gigaelectronvolt;
 
   /**
    * TeV
    */
-  static const Double_t TeV = teraelectronvolt;
+  static const double TeV = teraelectronvolt;
 
   /**
    * PeV
    */
-  static const Double_t PeV = petaelectronvolt;
+  static const double PeV = petaelectronvolt;
    
   //
   // Charge
@@ -460,20 +460,20 @@ namespace I3Units
   /**
    * Charge
    */
-   static const Double_t eplus = 1.;		   // positron charge
-   static const Double_t eSI   = 1.602176462e-19;  // positron charge in coulomb  
+   static const double eplus = 1.;		   // positron charge
+   static const double eSI   = 1.602176462e-19;  // positron charge in coulomb  
    
   /**
    * Coulomb
    */ 
-   static const Double_t coulomb = eplus/eSI;      // coulomb = 6.24150e18*eplus 
-   static const Double_t C = coulomb;
+   static const double coulomb = eplus/eSI;      // coulomb = 6.24150e18*eplus 
+   static const double C = coulomb;
     
   /**
    * Picocoulomb
    */
-   static const Double_t picocoulomb = 1.e-12*coulomb;
-   static const Double_t pC = picocoulomb;
+   static const double picocoulomb = 1.e-12*coulomb;
+   static const double pC = picocoulomb;
   
   //
   // Current
@@ -481,20 +481,20 @@ namespace I3Units
   /* 
    * Ampere
    */
-   static const Double_t ampere = coulomb/second;  // ampere = 6.24150 e+9 * eplus/ns
-   static const Double_t A = ampere;
+   static const double ampere = coulomb/second;  // ampere = 6.24150 e+9 * eplus/ns
+   static const double A = ampere;
     
   /* 
    * Milliampere
    */
-   static const Double_t milliampere = 1.e-3*ampere;
-   static const Double_t mA = milliampere;
+   static const double milliampere = 1.e-3*ampere;
+   static const double mA = milliampere;
     
   /* 
    * Nanoampere
    */
-   static const Double_t nanoampere = 1.e-9*ampere;
-   static const Double_t nA = nanoampere;
+   static const double nanoampere = 1.e-9*ampere;
+   static const double nA = nanoampere;
     
   //
   // Voltage
@@ -502,26 +502,26 @@ namespace I3Units
   /**
    * Millivolt
    */
-  //static const Double_t millivolt = 1.;
-  static const Double_t millivolt = (electronvolt*1.e-3)/eplus;
-  static const Double_t mV = millivolt;
+  //static const double millivolt = 1.;
+  static const double millivolt = (electronvolt*1.e-3)/eplus;
+  static const double mV = millivolt;
 
   /**
    * Volt
    */
-  static const Double_t volt = 1.e3 * millivolt;
-  static const Double_t V = volt;
+  static const double volt = 1.e3 * millivolt;
+  static const double V = volt;
 
   /**
    * Kilovolt
    */
-  static const Double_t kilovolt = 1.e3 * volt;
-  static const Double_t kV = kilovolt;
+  static const double kilovolt = 1.e3 * volt;
+  static const double kV = kilovolt;
 
   /**
    * Microvolt
    */
-  static const Double_t microvolt = 1.e-6 * volt;
+  static const double microvolt = 1.e-6 * volt;
  
   //
   // Resistance
@@ -529,7 +529,7 @@ namespace I3Units
   /**
    * Ohm
    */
-   static const Double_t ohm = volt/ampere; 
+   static const double ohm = volt/ampere; 
 
   //
   // Miscellaneous
@@ -537,17 +537,17 @@ namespace I3Units
   /**
    * percent
    */
-  static const Double_t perCent     = 0.01 ;
+  static const double perCent     = 0.01 ;
 
   /**
    * perThousand
    */
-  static const Double_t perThousand = 0.001;
+  static const double perThousand = 0.001;
 
   /**
    * perMillion
    */
-  static const Double_t perMillion  = 0.000001;
+  static const double perMillion  = 0.000001;
   
 };
 #endif /* G4UNITSTEST_HH */

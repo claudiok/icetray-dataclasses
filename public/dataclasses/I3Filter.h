@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Filter.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3Filter.h,v 1.6 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Filter.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author blaufuss
  */
 
@@ -30,7 +30,7 @@ class I3Filter : public TObject
 public:
     
 private:
-    Bool_t fPassFilter;         ///< kTrue if the filter condition was met
+    bool fPassFilter;         ///< kTrue if the filter condition was met
     
 public:
     /**
@@ -61,12 +61,12 @@ public:
     /**
      * @return whether this filter condition was met
      */
-    Bool_t HasPassFilter() const {return fPassFilter;}
+    bool HasPassFilter() const {return fPassFilter;}
     
     /**
      * @param passed whether or not this filter condition was met
      */
-    void SetPassFilter(Bool_t passed) { fPassFilter = passed; }
+    void SetPassFilter(bool passed) { fPassFilter = passed; }
 
     /**
      * Standard output doo-hickey

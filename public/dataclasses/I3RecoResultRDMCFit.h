@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.12 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.13 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 
@@ -23,16 +23,16 @@ using namespace std;
 /**
  * @brief A container for RDMC fits.  
  * 
- * Contains a vector of Double_ts which are
+ * Contains a vector of doubles which are
  * the fit parameters and a vector of ints which are the tubes used by
  * the fit.
  *
- * @todo make sure the map<string,Double_t> works in interpreted code
+ * @todo make sure the map<string,double> works in interpreted code
  */
 class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 {
-  map<string,Double_t> fParameters;
-  vector<UShort_t> fUsedHits;
+  map<string,double> fParameters;
+  vector<unsigned short> fUsedHits;
   string fFitName;
 
   public:
@@ -60,29 +60,29 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
    * The parameters of the RDMC fit in the order they appear in the f2k file
    * @return the parameters of this fit as a const object
    */
-  const map<string,Double_t>& GetParameters() const {return fParameters;}
+  const map<string,double>& GetParameters() const {return fParameters;}
 
   /**
    * The parameters of the RDMC fit in the order they appear in the f2k file
    * @return the parameters of this fit as a non-const object
    */
-  map<string,Double_t>& GetParameters() {return fParameters;}
+  map<string,double>& GetParameters() {return fParameters;}
 
   /**
    * @return tubes used by this fit as a const object
    */
-  const vector<UShort_t>& GetUsedHits() const {return fUsedHits;}
+  const vector<unsigned short>& GetUsedHits() const {return fUsedHits;}
 
   /**
    * @return the tubes used by this fit as a non-const object
    */
-  vector<UShort_t>& GetUsedHits() {return fUsedHits;}
+  vector<unsigned short>& GetUsedHits() {return fUsedHits;}
 
   virtual void ToStream(ostream& o) const
     {
       I3RecoResultSingleTrack::ToStream(o);
       o<<"Fit Parameters:\n";
-      map<string,Double_t>::const_iterator params;
+      map<string,double>::const_iterator params;
       for(params = fParameters.begin() ; 
 	  params != fParameters.end() ; 
 	  params++)
@@ -90,7 +90,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 	  o<<params->first<<": "<<params->second<<"\n";
 	}
       o<<"Used Hits:\n";
-      vector<UShort_t>::const_iterator hits;
+      vector<unsigned short>::const_iterator hits;
       for(hits = fUsedHits.begin();
 	  hits != fUsedHits.end();
 	  hits++)

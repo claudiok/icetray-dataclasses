@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.21 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Infinite.h,v 1.22 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author 
  */
 
@@ -25,36 +25,36 @@ class I3Infinite
  private:
   I3Position fPos;
   I3Direction fDir;
-  Double_t fT;
-  //Double_t fZenith;
-  //Double_t fAzimuth;
+  double fT;
+  //double fZenith;
+  //double fAzimuth;
  public:
 
   virtual ~I3Infinite() {}
   /**
    * indicates that this is not a starting track
    */ 
-  Bool_t IsStarting() const {return false;}
+  bool IsStarting() const {return false;}
 
   /**
    * indicates that this is not a stopping track
    */
-  Bool_t IsStopping() const {return false;}
+  bool IsStopping() const {return false;}
 
   /**
    * indicates that this is a directional track
    */ 
-  Bool_t HasDirection() const {return true;}
+  bool HasDirection() const {return true;}
 
   /**
    * the time the track was at X(), Y(), and Z()
    */ 
-  Double_t GetT() const {return fT;}
+  double GetT() const {return fT;}
 
   /**
    * sets the time the track was at X(), Y(), Z()
    */
-  void SetT(Double_t t){fT = t;}
+  void SetT(double t){fT = t;}
 
   /**
    * gets a position along the track.
@@ -69,7 +69,7 @@ class I3Infinite
   /**
    * sets a position along the track in any reference frame.
    */
-  void SetPos(Double_t p1, Double_t p2, Double_t p3, 
+  void SetPos(double p1, double p2, double p3, 
 	      I3Position::RefFrame frame=I3Position::car)
     {fPos.SetPosition(p1,p2,p3,frame);}
 
@@ -86,45 +86,45 @@ class I3Infinite
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t zen, Double_t azi) {fDir.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi) {fDir.SetDirection(zen,azi);}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t x, Double_t y, Double_t z) 
+  void SetDir(double x, double y, double z) 
     {fDir.SetDirection(x,y,z);}
 
   /**
    * gets the zenith of the track
    */
-  Double_t GetZenith() const {return fDir.GetZenith();}
+  double GetZenith() const {return fDir.GetZenith();}
 
   /**
    * gets the azimuth of the track
    */
-  Double_t GetAzimuth() const {return fDir.GetAzimuth();}
+  double GetAzimuth() const {return fDir.GetAzimuth();}
 
   /**
    * sets the zenith of the track
    */
-  void SetZenith(Double_t zen) {
+  void SetZenith(double zen) {
     fDir.SetDirection(zen,fDir.GetAzimuth());}
 
   /**
    * sets the azimuth of the track
    */
-  void SetAzimuth(Double_t azi) {
+  void SetAzimuth(double azi) {
     fDir.SetDirection(fDir.GetZenith(),azi);}
 
   /**
    * returns the length of the track ... infinite
    */
-  Double_t GetLength() const {return INFINITY;}
+  double GetLength() const {return INFINITY;}
 
   /**
    * returns the speed of light
    */
-  Double_t GetSpeed() const {return I3Constants::c;}
+  double GetSpeed() const {return I3Constants::c;}
 
   /**
    * copys this particle's data to the destination particle if the destination

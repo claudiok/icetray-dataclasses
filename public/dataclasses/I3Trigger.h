@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Trigger.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3Trigger.h,v 1.6 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Trigger.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author blaufuss
  * @author deyoung
  */
@@ -35,9 +35,9 @@ public:
     enum TrigSubDetector {InIce,IceTop,Amanda,Global};
     
 private:
-    Double_t fTriggerTime;      ///< Time at which the trigger was issued
-    Double_t fTriggerLength;    ///< Duration of triggered readout window
-    Bool_t fDidTrigger;         ///< kTrue if the trigger condition was met
+    double fTriggerTime;      ///< Time at which the trigger was issued
+    double fTriggerLength;    ///< Duration of triggered readout window
+    bool fDidTrigger;         ///< kTrue if the trigger condition was met
     TrigSubDetector fSubDetector; ///< Subdetector (enum type) that initiated this trigger
     
 public:
@@ -72,37 +72,37 @@ public:
     /**
      * @return the time at which this trigger condition was met
      */
-    Double_t GetTriggerTime() const {return fTriggerTime;}
+    double GetTriggerTime() const {return fTriggerTime;}
     
     /**
      * @param time the time at which this trigger condition was met
      */
-    void SetTriggerTime(Double_t time) { fTriggerTime = time; }
+    void SetTriggerTime(double time) { fTriggerTime = time; }
 
     /**
      * @return the width of this trigger window
      */
-    Double_t GetTriggerLength() const {return fTriggerLength;}
+    double GetTriggerLength() const {return fTriggerLength;}
     
     /**
      * @param width the width of this trigger window
      */
-    void SetTriggerLength(Double_t width) { fTriggerLength = width; }
+    void SetTriggerLength(double width) { fTriggerLength = width; }
 
     /**
      * @return whether this trigger condition was met
      */
-    Bool_t GetDidTrigger() const {return fDidTrigger;}
+    bool GetDidTrigger() const {return fDidTrigger;}
 
     /**
      * @return whether this trigger condition was met
      */
-    Bool_t HasTrigger() const {return fDidTrigger;}
+    bool HasTrigger() const {return fDidTrigger;}
     
     /**
      * @param passed whether or not this trigger condition was met
      */
-    void SetDidTrigger(Bool_t passed) { fDidTrigger = passed; }
+    void SetDidTrigger(bool passed) { fDidTrigger = passed; }
 
     /**
      * @return the subdetector on which this trigger ran

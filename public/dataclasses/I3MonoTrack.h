@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MonoTrack.h,v 1.5 2004/08/12 17:33:33 pretz Exp $
+    $Id: I3MonoTrack.h,v 1.6 2005/04/04 15:49:25 pretz Exp $
 
     @file I3MonoTrack.h
-    @version $Revision: 1.5 $
-    @date $Date: 2004/08/12 17:33:33 $
+    @version $Revision: 1.6 $
+    @date $Date: 2005/04/04 15:49:25 $
     @author
 */
 
@@ -20,7 +20,7 @@
 class I3MonoTrack : public I3BasicTrack
 {
 
-  Double_t fSpeed;
+  double fSpeed;
 
  public:
   /**
@@ -38,12 +38,12 @@ class I3MonoTrack : public I3BasicTrack
   /**
    * gets the speed of the particle
    */
-  virtual Double_t GetSpeed() const { return fSpeed; }
+  virtual double GetSpeed() const { return fSpeed; }
 
   /**
    * sets the speed of the particle
    */
-  virtual void SetSpeed(Double_t arg) { fSpeed = arg; }
+  virtual void SetSpeed(double arg) { fSpeed = arg; }
 
  private:
   // ROOT macro

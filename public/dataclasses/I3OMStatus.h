@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3OMStatus.h,v 1.7 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3OMStatus.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -27,7 +27,7 @@
  */
 class I3OMStatus : public TObject
 {
-  Float_t fPMTHighVoltage;
+  float fPMTHighVoltage;
 
   public:
   /**
@@ -58,12 +58,12 @@ class I3OMStatus : public TObject
   /**
    * @return the high voltage setting of the PMT
    */
-  Float_t GetPMTHighVoltage() const {return fPMTHighVoltage;}
+  float GetPMTHighVoltage() const {return fPMTHighVoltage;}
 
   /**
    * @param voltage the new high voltage for the OM.
    */
-  void SetPMTHighVoltage(Float_t voltage){fPMTHighVoltage = voltage;}
+  void SetPMTHighVoltage(float voltage){fPMTHighVoltage = voltage;}
 
   virtual void ToStream(ostream& o) const
     {

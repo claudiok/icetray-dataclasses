@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.21 2004/11/28 06:40:27 troy Exp $
+ * $Id: I3Contained.h,v 1.22 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Contained.h
- * @version $Revision: 1.21 $
- * @date $Date: 2004/11/28 06:40:27 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -25,10 +25,10 @@ class I3Contained
  private:
   I3Position fStartPos;
   I3Direction fDir;
-  Double_t fStartT;
-  //Double_t fZenith;
-  //Double_t fAzimuth;
-  Double_t fLength;
+  double fStartT;
+  //double fZenith;
+  //double fAzimuth;
+  double fLength;
 
  public:
 
@@ -37,27 +37,27 @@ class I3Contained
   /**
    * indicates that the track is starting
    */
-  Bool_t IsStarting() const {return true;}
+  bool IsStarting() const {return true;}
 
   /**
    * indicates that the track is stopping
    */
-  Bool_t IsStopping() const {return true;}
+  bool IsStopping() const {return true;}
 
   /**
    * indicates that the track has a direction
    */
-  Bool_t HasDirection() const {return true;}
+  bool HasDirection() const {return true;}
 
   /**
    * gets the starting time
    */
-  Double_t GetStartT() const {return fStartT;}
+  double GetStartT() const {return fStartT;}
 
   /**
    * sets the starting time
    */
-  void SetStartT(Double_t startt) {fStartT = startt;}
+  void SetStartT(double startt) {fStartT = startt;}
 
   /**
    * gets the starting position
@@ -72,14 +72,14 @@ class I3Contained
   /**
    * sets the starting position in any reference frame
    */
-  void SetStartPos(Double_t startp1, Double_t startp2, Double_t startp3, 
+  void SetStartPos(double startp1, double startp2, double startp3, 
 		I3Position::RefFrame frame=I3Position::car)
     {fStartPos.SetPosition(startp1,startp2,startp3,frame);}
 
   /**
    * returns the starting time as corresponding to X,Y,Z
    */
-  Double_t GetT() const {return fStartT;}
+  double GetT() const {return fStartT;}
 
   /**
    * gives the starting positition as a position on the track
@@ -95,7 +95,7 @@ class I3Contained
    * sets the starting position as a position along the track
    * in any reference frame
    */
-  void SetPos(Double_t startp1, Double_t startp2, Double_t startp3, 
+  void SetPos(double startp1, double startp2, double startp3, 
 		I3Position::RefFrame frame=I3Position::car)
     {fStartPos.SetPosition(startp1,startp2,startp3,frame);}
 
@@ -112,54 +112,54 @@ class I3Contained
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t zen, Double_t azi) {fDir.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi) {fDir.SetDirection(zen,azi);}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(Double_t x, Double_t y, Double_t z) 
+  void SetDir(double x, double y, double z) 
     {fDir.SetDirection(x,y,z);}
 
   /**
    * gives the zenith of the track
    */
-  //Double_t GetZenith() const {return fZenith;}
-  Double_t GetZenith() const {return fDir.GetZenith();}
+  //double GetZenith() const {return fZenith;}
+  double GetZenith() const {return fDir.GetZenith();}
 
   /**
    * gives the azimuth of the track
    */
-  //Double_t GetAzimuth() const {return fAzimuth;}
-  Double_t GetAzimuth() const {return fDir.GetAzimuth();}
+  //double GetAzimuth() const {return fAzimuth;}
+  double GetAzimuth() const {return fDir.GetAzimuth();}
 
   /**
    * sets the zenith of the track
    */
-  //void SetZenith(Double_t theta){fZenith = theta;}
-  void SetZenith(Double_t zen) {
+  //void SetZenith(double theta){fZenith = theta;}
+  void SetZenith(double zen) {
     fDir.SetDirection(zen,fDir.GetAzimuth());}
 
   /**
    * sets the azimuth of the track
    */
-  //void SetAzimuth(Double_t phi){fAzimuth = phi;}
-  void SetAzimuth(Double_t azi) {
+  //void SetAzimuth(double phi){fAzimuth = phi;}
+  void SetAzimuth(double azi) {
     fDir.SetDirection(fDir.GetZenith(),azi);}
 
   /**
    * gives the length of the track
    */
-  Double_t GetLength() const {return fLength;}
+  double GetLength() const {return fLength;}
 
   /**
    * sets the length of the track
    */
-  void SetLength(Double_t length) {fLength = length;}
+  void SetLength(double length) {fLength = length;}
 
   /**
    * computes the stopping t of the track
    */
-  Double_t GetStopT() const 
+  double GetStopT() const 
     {
       return fStartT + fLength / GetSpeed();
     }
@@ -170,7 +170,7 @@ class I3Contained
   I3Position GetStopPos() const
     {
       I3Position p;
-      Double_t x,y,z;
+      double x,y,z;
       x=fStartPos.GetX()-fLength*sin(fDir.GetZenith())*cos(fDir.GetAzimuth());
       y=fStartPos.GetY()-fLength*sin(fDir.GetZenith())*sin(fDir.GetAzimuth());
       z=fStartPos.GetZ()-fLength*cos(fDir.GetZenith());
@@ -185,7 +185,7 @@ class I3Contained
   /**
    * returns the speed of light
    */
-  Double_t GetSpeed() const {return I3Constants::c;}
+  double GetSpeed() const {return I3Constants::c;}
 
   /**
    * copies all the interal data into destination if a dynamic cast

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.23 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.24 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.23 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.24 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -26,7 +26,7 @@
  */
 class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy 
 {
-  Double_t fWeight;
+  double fWeight;
  public:
   /**
    * constructor
@@ -41,19 +41,19 @@ class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy
   /**
    * @return the weight associated with this series
    */
-  Double_t GetWeight() { return fWeight; }
+  double GetWeight() { return fWeight; }
 
   /**
    * @param weight the new weight for this series
    */
-  void SetWeight(Double_t weight) { fWeight = weight; }
+  void SetWeight(double weight) { fWeight = weight; }
 
   /**
    * earliest hit time
    */
-  Double_t GetFirstHitTime() {
+  double GetFirstHitTime() {
     if (this->size()) { 
-      Double_t min = (*this->begin()).GetTime();
+      double min = (*this->begin()).GetTime();
       I3MCHitSeries::iterator iter;
       for(iter=this->begin(); iter!=this->end(); iter++) {
 	if(min>(*iter).GetTime()) min=(*iter).GetTime();

@@ -1,7 +1,7 @@
 /**
-    $Id: I3MCTankHit.h,v 1.6 2004/08/31 02:56:29 pretz Exp $
+    $Id: I3MCTankHit.h,v 1.7 2005/04/04 15:49:25 pretz Exp $
     @file I3MCTankHit.h
-    @version $Revision: 1.6 $
+    @version $Revision: 1.7 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -32,7 +32,7 @@ class I3MCTankHit : public I3TankHit, public VectorPolicy<I3IceTopParticlePtr>::
   /**
    * constructor
    */
-  I3MCTankHit(UShort_t tank_number = 0) :
+  I3MCTankHit(unsigned short tank_number = 0) :
     I3TankHit( tank_number ) {} 
   
   /**

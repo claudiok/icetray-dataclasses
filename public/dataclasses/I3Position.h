@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.16 2005/04/01 22:38:41 olivas Exp $
+ * $Id: I3Position.h,v 1.17 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.16 $
- * @date $Date: 2005/04/01 22:38:41 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.16 2005/04/01 22:38:41 olivas Exp $
+// $Id: I3Position.h,v 1.17 2005/04/04 15:49:25 pretz Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -54,7 +54,7 @@ class I3Position : public TObject
   /**
    * Additional constructor
    */
-  I3Position(Double_t x, Double_t y, Double_t z, RefFrame f=car);
+  I3Position(double x, double y, double z, RefFrame f=car);
 
   /**
    * Copy constructor
@@ -77,8 +77,8 @@ class I3Position : public TObject
   /**
    * Store position r in ref frame f
    */
-  void SetPosition(Double_t r1, Double_t r2, Double_t r3, RefFrame f=car);
-  void SetPos(Double_t r1, Double_t r2, Double_t r3, RefFrame f=car)
+  void SetPosition(double r1, double r2, double r3, RefFrame f=car);
+  void SetPos(double r1, double r2, double r3, RefFrame f=car)
     { SetPosition(r1, r2, r3, f); }
 
   /**
@@ -98,23 +98,23 @@ class I3Position : public TObject
   /**
    * Provide X of position in cartesian ref frame
    */
-  Double_t GetX() const {return fX;}
+  double GetX() const {return fX;}
 
   /**
    * Provide Y of position in cartesian ref frame
    */
-  Double_t GetY() const {return fY;}
+  double GetY() const {return fY;}
 
   /**
    * Provide Z of position in cartesian ref frame
    */
-  Double_t GetZ() const {return fZ;}
+  double GetZ() const {return fZ;}
 
   /**
    * Provide R of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetR() const {
+  double GetR() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fR;
   }
@@ -123,7 +123,7 @@ class I3Position : public TObject
    * Provide Theta of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetTheta() const {
+  double GetTheta() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fTheta;
   }
@@ -132,7 +132,7 @@ class I3Position : public TObject
    * Provide Phi of position in spherical or cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetPhi() const {
+  double GetPhi() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fPhi;
   }
@@ -141,7 +141,7 @@ class I3Position : public TObject
    * Provide Rho of position in cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  Double_t GetRho() const {
+  double GetRho() const {
     if (!IsCalculated) CalcSphCylFromCar();
     return fRho;
   }
@@ -151,7 +151,7 @@ class I3Position : public TObject
   /**
    * Set X position while keeping Y,Z constant.  Recalculate SPH and CYL.
    */
-  void SetX(Double_t x) {
+  void SetX(double x) {
     fX=x;
     IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
   }
@@ -159,7 +159,7 @@ class I3Position : public TObject
   /**
    * Set Y position while keeping X,Z constant.  Recalculate SPH and CYL.
    */
-  void SetY(Double_t y) {
+  void SetY(double y) {
     fY=y;
     IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
   }
@@ -167,7 +167,7 @@ class I3Position : public TObject
   /**
    * Set Z position while keeping X,Y constant.  Recalculate SPH and CYL.
    */
-  void SetZ(Double_t z) {
+  void SetZ(double z) {
     fZ=z;
     IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
   }
@@ -182,22 +182,22 @@ class I3Position : public TObject
   /**
    * Rotate position around X axis by angle
    */
-  void RotateX(Double_t angle);
+  void RotateX(double angle);
 
   /**
    * Rotate position around X axis by angle
    */
-  void RotateY(Double_t angle);
+  void RotateY(double angle);
 
   /**
    * Rotate position around X axis by angle
    */
-  void RotateZ(Double_t amgle);
+  void RotateZ(double amgle);
 
   /**
    * Provide distance to position p
    */
-  Double_t CalcDistance(const I3Position& p) const;
+  double CalcDistance(const I3Position& p) const;
 
   /**
    * Print out all information about the I3Position to the given ostream
@@ -218,22 +218,22 @@ class I3Position : public TObject
   /**
    * cartesian (car)
    */ 
-  Double_t fX, fY, fZ;
+  double fX, fY, fZ;
 
   /**
    * spherical (sph)
    */
-  mutable Double_t fR, fTheta, fPhi;  
+  mutable double fR, fTheta, fPhi;  
 
   /**
    * cylindrical (cyl) - Z and Phi are same.
    */
-  mutable Double_t fRho;
+  mutable double fRho;
 
   /**
    * Did we calculate the positions before?
    */
-  mutable Bool_t IsCalculated; 
+  mutable bool IsCalculated; 
 
  private:
 

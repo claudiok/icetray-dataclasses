@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.15 2004/09/16 15:07:39 niessen Exp $
+ * $Id: I3TankGeo.h,v 1.16 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.15 $
- * @date $Date: 2004/09/16 15:07:39 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -44,20 +44,20 @@ class I3TankGeo : public I3SurfModuleGeo {
   /**
    * The tank radius (outer radius)
    */
-  Double_t GetRadius() const { return fRadius; }
-  void SetRadius(Double_t r) { fRadius = r; }
+  double GetRadius() const { return fRadius; }
+  void SetRadius(double r) { fRadius = r; }
 
   /**
    * The tank height (overall height), as simulated in tanktop.
    */
-  Double_t  GetHeight() const { return fHeight; }
-  void SetHeight(Double_t h) { fHeight = h; }
+  double  GetHeight() const { return fHeight; }
+  void SetHeight(double h) { fHeight = h; }
 
   /**
    * THe filling height
    */
-  Double_t GetFillHeight () const { return fFillHeight; }
-  void SetFillHeight (Double_t h) { fFillHeight = h; }
+  double GetFillHeight () const { return fFillHeight; }
+  void SetFillHeight (double h) { fFillHeight = h; }
 
   /**
    * @todo need more implementation here
@@ -76,10 +76,10 @@ class I3TankGeo : public I3SurfModuleGeo {
 
  private:
 
-  Double_t fRadius; // radius of the tank
-  Double_t fHeight; // height of the tank
+  double fRadius; // radius of the tank
+  double fHeight; // height of the tank
 
-  Double_t fFillHeight; // fill height of the tank
+  double fFillHeight; // fill height of the tank
 
   ClassDef(I3TankGeo,2); // increased to 2 Thu Sep  2 16:13:52 EDT 2004
   // because some stuff moved up to I3SurfModuleGeo.

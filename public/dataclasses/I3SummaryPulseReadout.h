@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3SummaryPulseReadout.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3SummaryPulseReadout.h,v 1.4 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3SummaryPulseReadout.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3SUMMARYPULSEREADOUT_H
@@ -20,8 +20,8 @@
  */
 class I3SummaryPulseReadout : public I3AnalogReadout
 { 
-  Double_t fTime;
-  Double_t fAmplitude;
+  double fTime;
+  double fAmplitude;
 
  public:
   /**
@@ -37,27 +37,27 @@ class I3SummaryPulseReadout : public I3AnalogReadout
   /**
    * @return the time of the first LE in the readout
    */
-  Double_t GetFirstLE() const {return fTime;}
+  double GetFirstLE() const {return fTime;}
 
   /**
    * @return the time of the signal
    */
-  Double_t GetTime() const{ return fTime;}
+  double GetTime() const{ return fTime;}
 
   /**
    * @param time the new time for the signal
    */
-  void SetTime(Double_t time) {fTime = time;}
+  void SetTime(double time) {fTime = time;}
 
   /**
    * @return the amplitude of the signal
    */
-  Double_t GetAmplitude() {return fAmplitude;}
+  double GetAmplitude() {return fAmplitude;}
 
   /**
    * @param amp the new amplitude for the signal
    */
-  void SetAmplitude(Double_t amp){fAmplitude = amp;}
+  void SetAmplitude(double amp){fAmplitude = amp;}
 
  private:
   // copy and assignment private

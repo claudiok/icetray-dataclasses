@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.12 2004/12/01 02:27:07 ehrlich Exp $
+ * $Id: I3MCPMTResponse.h,v 1.13 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.12 $
- * @date $Date: 2004/12/01 02:27:07 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author klein
  */
 
@@ -27,8 +27,8 @@
 class I3MCPMTResponse : public TObject {
 
 protected:
-  Float_t fStartTime;
-  Float_t fEndTime;
+  float fStartTime;
+  float fEndTime;
   
 public:
   /**
@@ -44,21 +44,21 @@ public:
   /**   
    * PMT output voltage as f(time) 
    */
-  virtual Float_t GetPMTVoltage(Float_t time) { return 0.; };
+  virtual float GetPMTVoltage(float time) { return 0.; };
 
   /**  
    * First time that is meaningful (non-zero) 
    */
-  Float_t GetStartTime() const {return fStartTime;}
+  float GetStartTime() const {return fStartTime;}
 
   /** 
    * Last time that is meaningful (non-zero) 
    */
-  Float_t GetEndTime() const {return fEndTime;}
+  float GetEndTime() const {return fEndTime;}
 
-  void SetStartTime(const Float_t time) { fStartTime = time;}
+  void SetStartTime(const float time) { fStartTime = time;}
 
-  void SetEndTime(const Float_t time) { fEndTime = time;}
+  void SetEndTime(const float time) { fEndTime = time;}
   
   virtual void ToStream(ostream& o) const {
     o<<"[ "<<IsA()->GetName()<<" ]\n"

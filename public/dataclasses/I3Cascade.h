@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.13 2005/02/09 19:30:46 ehrlich Exp $
+ * $Id: I3Cascade.h,v 1.14 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/02/09 19:30:46 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -28,28 +28,28 @@ class I3Cascade : public I3InIceParticle{
   /**
    * indicates that this is not a track
    */
-  virtual Bool_t IsTrack() {return kFALSE;}
+  virtual bool IsTrack() {return kFALSE;}
 
   /**
    * indicates that this particle is a Cascade.
    */
-  virtual Bool_t IsCascade() {return kTRUE;}
+  virtual bool IsCascade() {return kTRUE;}
 
   /**
    * indicates whether the particle is localized within the detector, and
    * whether X(), Y(), Z() and T() are legitimate to call
    */
-  virtual Bool_t IsLocalized() const =0;
+  virtual bool IsLocalized() const =0;
 
   /**
    * indicates that the track is a composite track
    */
-  virtual Bool_t IsComposite() const =0;
+  virtual bool IsComposite() const =0;
 
   /**
    * the time of the cascade
    */
-  virtual Double_t GetT() const =0;
+  virtual double GetT() const =0;
 
   /**
    * the position of the cascade as an I3Position object

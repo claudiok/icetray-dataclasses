@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3GeometryHeader.h,v 1.7 2004/08/04 13:25:04 pretz Exp $
+ * $Id: I3GeometryHeader.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3GeometryHeader.h
- * @version $Revision: 1.7 $
- * @date $Date: 2004/08/04 13:25:04 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -31,8 +31,8 @@ using namespace std;
 class I3GeometryHeader : public I3DataHeader
 {
   // instance data
-  Int_t fNumOms;
-  Int_t fNumStrings;
+  int fNumOms;
+  int fNumStrings;
   string fArrayName;
   
  public:
@@ -66,22 +66,22 @@ class I3GeometryHeader : public I3DataHeader
   /**
    * @return the total number of oms for the geometry
    */
-  Int_t GetNumOms() const{ return fNumOms; }
+  int GetNumOms() const{ return fNumOms; }
 
   /**
    * @param arg the new number of oms for the geometry
    */
-  void SetNumOms(Int_t arg) { fNumOms = arg; }
+  void SetNumOms(int arg) { fNumOms = arg; }
 
   /**
    * @return the number of strings for the geometry
    */
-  Int_t GetNumStrings() const { return fNumStrings; }
+  int GetNumStrings() const { return fNumStrings; }
 
   /**
    * @param strings the new number of strings for the geometry
    */
-  void SetNumStrings(Int_t strings) { fNumStrings = strings; }
+  void SetNumStrings(int strings) { fNumStrings = strings; }
 
   /**
    * @return the name of the array.  E.g. 'AMANDAB10'

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.7 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3AnalogReadout.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/04 15:49:25 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -39,7 +39,7 @@ public:
     /**
      * @return the time of the first LE in the readout
      */
-    virtual Double_t GetFirstLE() const = 0;
+    virtual double GetFirstLE() const = 0;
   
     virtual void ToStream(ostream& o) const {
 	I3DataReadout::ToStream(o);
