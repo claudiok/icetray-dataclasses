@@ -171,6 +171,8 @@
 //
 #pragma link C++ typedef TObjectPtr;
 
+#pragma link C++ class I3AltTracksRecoResult+;
+#pragma link C++ typedef I3AltTracksRecoResultPtr;
 #pragma link C++ class I3Analog+;
 #pragma link C++ typedef I3AnalogPtr;
 #pragma link C++ class I3Atmosphere+;

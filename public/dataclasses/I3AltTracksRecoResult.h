@@ -1,16 +1,17 @@
-#ifndef I3MULTITRACKRECORESULT_H
-#define I3MULTITRACKRECORESULT_H
+#ifndef I3ALTTRACKSRECORESULT_H
+#define I3ALTTRACKSRECORESULT_H
 
 #include "dataclasses/I3RecoTrackList.h"
 #include "dataclasses/I3RecoResult.h"
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MultiTrackRecoResult.h,v 1.2 2004/03/09 14:36:05 pretz Exp $
+ * $Id: I3AltTracksRecoResult.h,v 1.1 2004/03/09 14:36:05 pretz Exp $
  *
- * A reco result which spits out several tracks expected to be in the event
+ * A reco result which can't decide among several possible tracks and returns
+ * them all
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  * @date $Date: 2004/03/09 14:36:05 $
  * @author pretz
  *
@@ -18,19 +19,19 @@
  *
  */
 
-class I3MultiTrackRecoResult : public I3RecoResult{
+class I3AltTracksRecoResult : public I3RecoResult{
   I3RecoTrackList fTrackList;
 
  public:
   /**
    * constructor
    */
-  I3MultiTrackRecoResult(){}
+  I3AltTracksRecoResult(){}
 
   /**
    * destructor
    */
-  virtual ~I3MultiTrackRecoResult(){}
+  virtual ~I3AltTracksRecoResult(){}
 
   /**
    * @return the tracks that this result thinks are in the event as a const object
@@ -44,16 +45,16 @@ class I3MultiTrackRecoResult : public I3RecoResult{
 
  private:
   // copy and assignment private
-  I3MultiTrackRecoResult(const I3MultiTrackRecoResult&);
-  const I3MultiTrackRecoResult operator=(const I3MultiTrackRecoResult);
+  I3AltTracksRecoResult(const I3AltTracksRecoResult&);
+  const I3AltTracksRecoResult operator=(const I3AltTracksRecoResult);
 
   //ROOT macro
-  ClassDef(I3MultiTrackRecoResult,1);
+  ClassDef(I3AltTracksRecoResult,1);
 };
 
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3MultiTrackRecoResult>::ThePolicy I3MultiTrackRecoResultPtr;
+typedef PtrPolicy<I3AltTracksRecoResult>::ThePolicy I3AltTracksRecoResultPtr;
 #endif
