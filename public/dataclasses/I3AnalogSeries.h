@@ -1,27 +1,26 @@
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3AnalogSeries.h,v 1.6 2004/02/15 19:27:04 troy Exp $
+
+    @version $Revision: 1.6 $
+    @date $Date: 2004/02/15 19:27:04 $
+    @author
+
+    @todo
+
+*/
 #ifndef I3ANALOGSERIES_H
 #define I3ANALOGSERIES_H
 
-#include "I3DataReadout.h"
 #include "I3Analog.h"
-#include "dataclasses/I3Iterator.h"
+#include "TClonesPolicy.h"
+#include "GarnishedVector.h"
 
-class I3AnalogSeries : public I3DataReadout
-{
-  protected:
-  TObjArray *pulse;
+class I3AnalogSeriesHeader { };
 
-  public:
-  I3AnalogSeries();
-  ~I3AnalogSeries();
-  I3AnalogSeries(const I3AnalogSeries&);
-  I3AnalogSeries& operator=(const I3AnalogSeries&);
+typedef TClonesPolicy<I3Analog> I3AnalogSeriesStoragePolicy;
+typedef GarnishedVector<I3AnalogSeriesHeader, I3Analog, I3AnalogSeriesStoragePolicy> I3AnalogSeries;
 
-  int GetNumberPulses() const;
-  const I3Analog& GetPulse(unsigned short number) const;
-  void  AddPulse(I3Analog* pulse_);
-  I3Iterator<const I3Analog>* MakeAnalogIterator() const;
-
-  ClassDef(I3AnalogSeries,1);
-};
 #endif
 
