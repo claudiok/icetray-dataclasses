@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.18 2004/10/20 14:45:53 dule Exp $
+ * $Id: I3Starting.h,v 1.19 2004/10/20 14:57:41 dule Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.18 $
- * @date $Date: 2004/10/20 14:45:53 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2004/10/20 14:57:41 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -162,7 +162,7 @@ class I3Starting{
       o<<"Geometry: Starting\n"
        <<"StartPosition:\n"<<fStartPos
        <<"Direction:\n"<<fDir
-       <<"StartTime:"<<fStartT<<"\n";
+       <<"StartTime: "<<fStartT<<"\n";
     }
 
  protected:
