@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.6 2004/07/14 16:01:01 pretz Exp $
+    $Id: STLVectorStoragePolicy.h,v 1.7 2004/07/31 23:20:55 pretz Exp $
 
     @file STLVectorStoragePolicy.h
-    @version $Revision: 1.6 $
-    @date $Date: 2004/07/14 16:01:01 $
+    @version $Revision: 1.7 $
+    @date $Date: 2004/07/31 23:20:55 $
     @author Troy Straszheim
 */
 #ifndef STLVECTOR_POLICY_INCLUDED
@@ -21,7 +21,6 @@ using namespace std;
  * Note that the documentation text here comes from the gnu libstdc++3
  * documentaiton at http://gcc.gnu.org/onlinedocs/libstdc++/latest-doxygen/
  *
- * @todo better documentation of the methods needed.
  */
 template <class ElementType>
 class STLVectorStoragePolicy  {
@@ -34,48 +33,6 @@ class STLVectorStoragePolicy  {
   typedef typename vector_type::reverse_iterator        reverse_iterator;
   typedef ElementType& 					reference;
   typedef const ElementType& 				const_reference;
-
-  template <class Type> class type_iterator
-    {
-    public:
-
-      // tds
-      const vector_type* thevec; //!
-      typename vector_type::iterator iter;
-
-
-      type_iterator() { 
-	thevec=NULL; 
-      }
-      type_iterator(const type_iterator& rhs) { *this = rhs; }
-      ~type_iterator() {;}
-
-      type_iterator& operator=(const type_iterator& rhs) {
-	thevec = rhs.thevec;
-	iter = rhs.iter;
-	return *this;
-      }
-
-      // here we need type and bounds checking
-      type_iterator& operator++(int i) 
-	{
-	  iter++; 
-	  while (iter != thevec->end())
-	    {
-	      Type t = dynamic_cast<Type>(*iter);
-	      if (t!=NULL) { return *this; }
-	      iter++;
-	    }
-	  return *this;
-	}
-      
-      Type operator->() { return dynamic_cast<Type>(*iter); }
-      Type operator*() { return dynamic_cast<Type>(*iter); }
-      bool operator!=(const type_iterator<Type> &otheriter) {
-	return (iter != otheriter.iter);
-      }
-    };
-
 
  private:
   vector_type vector_;
@@ -214,24 +171,6 @@ class STLVectorStoragePolicy  {
    */
   const_iterator end() const {return vector_.end();}
   
-  template <class Type> type_iterator<Type> begin() 
-    { 
-      type_iterator<Type> titer;
-      titer.thevec = &vector_;
-      titer.iter = vector_.begin();
-      if(dynamic_cast<Type>(*(titer.iter)) == NULL)
-	titer++;
-      return titer;
-    }
-
-  template <class Type> type_iterator<Type> end() 
-    { 
-      type_iterator<Type> titer;
-      titer.iter = vector_.end();
-      titer.thevec = &vector_;
-      return titer;
-    }
-
   /**
    * same as front() 
    */
