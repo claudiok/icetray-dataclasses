@@ -7,7 +7,10 @@
 There is lots of information on the web of how to get the IceCube development
 environment set up and ready to use.  Visit the new 
 <a href="http://bfd.lbl.gov">BFD Homepage</a> to find a comprehensive list.<br>
-<br>
+There is also a webpage about <a href="http://glacier.lbl.gov/icetray">
+IceTray</a> that has a 
+<a href="http://glacier.lbl.gov/releases/ICETRAY-APP/V00-00-01/release/root-icetray/resources/README/bfd.html">
+walk-though</a> of how to set up the bfd program.<br>
 You will be ready to continue with the dataclass tutorials when you:
 @li Have an account on glacier.lbl.gov
 @li Have a current checkout of 'bfd' on your system with bfd in your path

@@ -1,0 +1,60 @@
+/**
+@page phys-services Installing the Phys-Services
+@author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
+
+@section prerecs Prerequisites:
+
+@li @ref devenv-setup
+
+@li @ref icetray-setup
+
+@li @ref dataclasses-setup
+
+@section desc Description:
+
+The <code>phys-services</code> project is a collection of IceTray services
+for use in icetray modules.  Currently there are two types of services
+provided:
+
+@li <b>I3RandomService</b> is patterned off of ROOT's TRandom, and provides access to random numbers drawn from several possible distributions.  The 
+I3RandomService is an abstract interface, which can be serviced by any of
+several implementations.  Currently the only implementation is the 
+I3TRandomService which uses a private instance of TRandom to create its random
+numbers.
+
+@li <b>I3ParticleDataService</b> is a service dealing with the 
+IceCube particle types.  The I3ParticleDataService provides physical constants such as mass, charge, and lifetime for any I3Track::Type that is given it.  There
+are also facilites for converting between RDMC particle ids, Geant particle ids,
+and PDG particle ids, and a facility to convert an I3Track::Type into a 
+std::string.  The conversion of Geant and PDG particle types has yet to be
+implemented.
+
+@section download Download
+
+The <code>phys-services</code> project is currently located in the development
+cvs archive on glacier.lbl.gov<br>
+From your workspace do:<br>
+
+<code>%setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev</code><br>
+<code>% cvs co phys-services</code><br>
+
+@section build Build
+
+The 'phys-services' project should be pretty easy to build, once you've met the 
+prerequistes.  
+
+Then you can build it with the standard bfd commands:<br>
+<code>
+% source setup.[c]sh<br>
+% ant<br>
+</code>
+And you should get a successful build<br>
+
+<!--@section Test-->
+@section use Use
+This collection of services are not really intended to be used stand-alone, so 
+there are no examples of their use outside of the <code>sim-modules</code> 
+project in which they are used.
+
+
+*/

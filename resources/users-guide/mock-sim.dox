@@ -24,12 +24,11 @@ There are six modules included in the sim-modules project.
 
 <b>1.) I3SimulationSource:</b> <br>
 This module actually plays the part of what will be several modules in the final simulation.  This module is responsible for
-putting an I3Geometry and an I3Geometry header into an IceTray frame and 
+lending an I3Geometry and an I3GeometryHeader into an IceTray frame and 
 passing them on.  Then it puts an empty I3Event and I3EventHeader into a
 frame and sends that frame on to the other modules.  It continues putting
 events and event headers into the frame, until it's internal counter gets high
 enough.  Then it quits the processing.
-
 
 <b>2.) I3CorsikaWrapper: </b><br>
 This module is supposed to play the part of Corsika.  Whether it reads in
@@ -40,14 +39,14 @@ This module right now, puts in a single muon track, rather than the full shower
 and that track has random parameters.
 
 <b>3.) I3Propagator:</b><br>
-This module plays the part of MMC, taking some input tracks, and propagating
-them though the ice.  In the current implementation, it just fills the 
-appropriate track list with Brems and DeltaE's of random data.
+This module plays the part of mmc, taking some input tracks, and propagating
+them though the ice.  In the current implementation, it just fills an
+I3MCTrackList with Brems and DeltaE's of random data.
 
 <b>4.) I3HitConstructorToy:</b><br>
 This module is responsible for using the photon tables, or some similar 
 technique and assigning photoelecron hit at OMs in the detector.  This toy
-just fills the appropriate spots with random data.
+just fills a I3MCHitSeries with random I3MCHit's with random data.
 
 <b>5.) I3HardwareSimulator:</b><br>
 This module is probably doing the job of several modules.  Right now it assigns
@@ -80,9 +79,14 @@ Then you check out and build it with the standard bfd commands:<br>
 % ant<br>
 </code>
 
-@section Test
-@section Use
+<!--@section Test-->
+@section use Use
 
-
+To run the 'simulation', first change into your workspace directory.  From
+there you can type:<br>
+<code>% root sim-modules/resources/tutorial/RunSimulation.C</code><br>
+to run the simulation.  <br>
+The simulation should run through ten events, dumping the contents of each
+to stdout.
 
 */

@@ -1,13 +1,32 @@
 /**
 @page dataclasses-setup Download, build and test the dataclasses
-@author YOUR AD HERE (1-800-PHYSIC-7)
+@author <a href="http://umdgrb.umd.edu/pretz">John Pretz</a>
 
 @section prerecs Prerequisites
 @ref devenv-setup
+
 @ref icetray-setup
 
 @section download Download
-@section build Build
-@section test Test
 
+The <code>dataclasses</code> project is located on the development cvs archive
+on glacier.lbl.gov.  In your workspace you will need to do<br>
+<code>% setenv CVSROOT :ext:glacier.lbl.gov:/home/icecube/cvsroot-dev</code><br>
+<code>% bfd co dataclasses </code><br>
+
+@section build Build
+
+Building the dataclasses once you have checked out the code should be pretty 
+easy<br>
+
+<code>% source setup.[c]sh</code> (If you haven't already done so)<br>
+<code>% ant</code><br>
+There is an ant target for 'doxygen' but it hasn't been implemented yet, so
+if you want the documentation, you'll have to build it yourself.<br>
+<code>% doxygen dataclasses/resources/users-guide/Doxyfile.full</code><br>
+And it will create a directory dataclass-users-guide/ in your workspace with
+doxygen's html output.
+
+@section test Test
+@todo IS THE BFD FIX DONE YET, OR DO WE NEED 'copy XXX to common.mk' INSTRUCTIONS HERE?
 */

@@ -13,6 +13,9 @@ http://glacier.lbl.gov/icetray to get the instructions to check out and
 build the required <code>icetray</code> and <code>root-icetray</code> projects. 
 There is also a tutorial and example application described there.  
 In order to continue with the various dataclass tutorials, though, you will 
-only need to build <code>icetray</code> and <code>root-icetray</code>.  
+only need to build <code>icetray</code> and <code>root-icetray</code>.<br>
+You will be ready to continue with this tutorial when you:
+@li Have checked-out and built <code>icetray</code> from glacier.lbl.gov.
+@li Have checked-out and built <code>root-icetray</code> from glacier.lbl.gov
 
 */

@@ -1,9 +1,14 @@
 /**
    @mainpage Icecube Dataclasses Users Guide and Tutorials
 
-   This guide explains how to download, compile, use, understand,
-   extend, conspire with, love, and cherish the dataclasses.
-   
+   This document is a guide to the first version of a proposed set of classes
+   to represent and store the event data of IceCube.
+
+   This guide is primarily intented for IceCube software developers who want
+   to understand the layout and mechanics of these classes.  To this end there
+   are several examples and tutorials each using different aspects of the 
+   classes.  
+
    @author Erik Blaufuss (blaufuss@umdgrb.umd.edu)
    @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
    @author Ralf Ehrlich (ehrlich@umdgrb.umd.edu)
@@ -12,18 +17,22 @@
 	   
    @section overview Overview
 
-   The dataclasses were designed to do such and such.
+   The dataclasses were designed to represent the data that
+   comes out of or is used to simulate the IceCube detector.  The dataclasses
+   are intentionally extendtable and therefore can also be used to store data 
+   from post-acquisition processing and analysis.
 
-   As a physicist working with data from icecube, you will probably
+   As a physicist working with data from IceCube, you will probably
    interact more with these containers than any other part of the
    system.
 
    To have a walk through and play with things a bit, go through the
    contents (below) in order.  First you will have to set up your
-   IceTray environment, download and build the various components, and
-   then there are some walk-throughs of common tasks and how to do
-   them with the dataclasses.  The last documents explain some of the
-   thinking behind the design.
+   IceTray framework, by downloading and building the various components.
+   Then there are some walkthroughs - in the form of some example 
+   applications - of common tasks and how they are done with the dataclasses.
+   The last documents explain the thinking behind the design and mechanics
+   of the code.
 
    @section contents Contents
 
@@ -36,7 +45,7 @@
 
    @li @ref dataclasses-setup
 
-   @subsection action Action
+   @subsection examples Examples
 
    @li @ref corsika-reader
 
