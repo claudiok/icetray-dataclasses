@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.8 2004/04/27 13:35:23 pretz Exp $
+    $Id: StoragePolicy.h,v 1.9 2004/07/03 07:42:10 troy Exp $
 
     @file StoragePolicy.h
-    @version $Revision: 1.8 $
-    @date $Date: 2004/04/27 13:35:23 $
+    @version $Revision: 1.9 $
+    @date $Date: 2004/07/03 07:42:10 $
     @author troy
 */
 
@@ -20,7 +20,6 @@
 #include "STLMapPointainerPolicy.h"
 
 //#include "TClonesPolicy.h"
-#include "SmartPtr.h"
 
 // something like this would be nice but root wont allow it
 template <class Stored>
