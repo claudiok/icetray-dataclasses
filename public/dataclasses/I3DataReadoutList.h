@@ -1,26 +1,18 @@
 #ifndef I3DATAREADOUTLIST_H
 #define I3DATAREADOUTLIST_H
 
-#include <TObject.h>
-#include <TObjArray.h>
-
 #include "I3DataReadout.h"
-#include "I3Iterator.h"
+#include "TClonesPolicy.h"
+#include "GarnishedVector.h"
 
-class I3DataReadoutList : public TObject
-{
-  TObjArray  *datareadout;
+class I3DataReadoutListHeader { };
 
-  public:
-  I3DataReadoutList();
-  ~I3DataReadoutList();
+typedef TClonesPolicy<I3DataReadout> I3DataReadoutListStoragePolicy;
 
-  int GetNumberDataReadouts() const;
-  const I3DataReadout& GetDataReadout(unsigned short number) const;
-  void AddDataReadout(I3DataReadout* datareadout_);
-  I3Iterator<const I3DataReadout>* MakeDataReadoutIterator() const ;
+typedef GarnishedVector<I3DataReadoutListHeader, 
+			I3DataReadout, 
+			I3DataReadoutListStoragePolicy> I3DataReadoutList;
 
-  ClassDef(I3DataReadoutList,1);
-};
+
 #endif
 
