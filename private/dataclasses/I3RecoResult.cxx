@@ -37,7 +37,7 @@ const I3RecoTrackList& I3RecoResult::GetBestRecoTrackList() const
   return(*(I3RecoTrackList*)NULL);
 }
 
-void I3RecoResult::SetBestRecoTrackList(I3RecoTrackList* bestrecotracklist_)
+void I3RecoResult::SetBestRecoTrackList(I3RecoTrackList& bestrecotracklist_)
 {
-  bestrecotracklist=bestrecotracklist_;
+  bestrecotracklist=&bestrecotracklist_;
 }
