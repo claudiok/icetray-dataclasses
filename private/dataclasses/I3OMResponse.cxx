@@ -35,7 +35,7 @@ bool I3OMResponse::HasGeometry() const
 const I3OMGeo& I3OMResponse::GetGeometry() const
 {
   if(HasGeometry()) return(*(I3OMGeo*)geometry.GetObject());
-  I3DataExecution::Instance().Fatal("I3OMResponse::GetGeometry() the OMGeo doesn't exit");
+  I3DataExecution::Instance().Fatal("I3OMResponse::GetGeometry() the OMGeo doesn't exist");
   return *(I3OMGeo*)NULL;
 }
 
