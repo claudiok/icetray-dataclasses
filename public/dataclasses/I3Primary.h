@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.4 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3Primary.h,v 1.5 2004/05/04 17:56:38 pretz Exp $
  *
  * @file I3Primary.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2004/05/04 17:56:38 $
  * @author pretz
   */
 #ifndef I3PRIMARY_H
@@ -23,16 +23,43 @@
  */
 class I3Primary : public I3Particle{
  public:
-  virtual Bool_t IsObservable() {return false;}
+  /**
+   * indicates that the particle is not an observable particle
+   */
+  virtual Bool_t IsObservable() const {return false;}
    
-  virtual Bool_t HasCorePosition() {return false;}
+  /**
+   * indicatess that the particle has a core position, and so
+   * asking CoreX, and CoreY and CoreT is legit.
+   */
+  virtual Bool_t HasCorePosition() const = 0;
 
-  virtual Double_t CoreX() {return NAN;}
+  /**
+   * the core X position of the particle
+   */
+  virtual Double_t CoreX() const =0;
 
-  virtual Double_t CoreY() {return NAN;}
+  /**
+   * the position of the core y position of the particle
+   */
+  virtual Double_t CoreY() const =0;
 
-  virtual Double_t CoreT() {return NAN;}
+  /**
+   * the time the particle was at CoreX and CoreY
+   */
+  virtual Double_t CoreT() const =0;
 
+  /**
+   * Copies over data from the source particle to this particle.
+   * Only copies that data which the two have in common.
+   */
+  virtual void CopyFrom(const I3Particle& source)
+    {
+      source.CopyTo(*this);
+    } 
+  
+ private:
+  // ROOT macro
   ClassDef(I3Primary,1);
 };
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.5 2004/04/27 13:35:23 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.6 2004/05/04 17:56:38 pretz Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.5 $
- * @date $Date: 2004/04/27 13:35:23 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2004/05/04 17:56:38 $
  * @author pretz
  *
  */
@@ -89,6 +89,17 @@ class I3PrimaryImpl : public I3Primary,
    * gives the energy of the particle
    */
   virtual Double_t Energy() const {return EnergeticType::Energy();}
+
+  /**
+   * 
+   */
+  virtual void CopyTo(I3Particle& destination) const
+    {
+      I3Particle::CopyTo(destination);
+      DirectionalType::CopyTo(destination);
+      EnergeticType::CopyTo(destination);
+      CoreType::CopyTo(destination);
+    }
 
  private:
   //ROOT macro

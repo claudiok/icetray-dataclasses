@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.3 2004/04/27 02:32:05 pretz Exp $
+ * $Id: I3CoreLocalized.h,v 1.4 2004/05/04 17:56:38 pretz Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/04/27 02:32:05 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2004/05/04 17:56:38 $
  * @author pretz
  */
 #ifndef I3CORELOCALIZED_H
@@ -56,6 +56,20 @@ class I3CoreLocalized
    * sets the time of the core arrival
    */
   void CoreT(Double_t coret) {fCoreT = coret;}
+
+  /**
+   * copys the data over to the destination particle if a dynamic_cast succeeds
+   */
+  void CopyTo(I3Particle& destination) const
+    {
+      I3CoreLocalized* dest = dynamic_cast<I3CoreLocalized*>(&destination);
+      if(dest)
+	{
+	  dest->fCoreX = fCoreX;
+	  dest->fCoreY = fCoreY;
+	  dest->fCoreT = fCoreT;
+	}
+    }
 
  private:
   //ROOT macro
