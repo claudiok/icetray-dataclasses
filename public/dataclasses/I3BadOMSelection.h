@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.1 2004/11/19 22:10:14 deyoung Exp $
+ *  $Id: I3BadOMSelection.h,v 1.2 2004/11/23 18:57:04 deyoung Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/11/19 22:10:14 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/11/23 18:57:04 $
  * @author deyoung
  */
 
@@ -43,7 +43,7 @@ public:
    * pair is selected.  Returns false if the OM key is in the list of
    * true OMs, false otherwise.
    */
-  virtual bool operator()(const pair<OMKey, I3OMResponse>& element) {
+  virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) {
     for (Int_t i = 0; i < fBadOMs.size(); i++) {      
       if (element.first == fBadOMs[i]) {
 	return kFALSE;

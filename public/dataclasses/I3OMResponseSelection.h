@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.1 2004/11/19 22:10:14 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.2 2004/11/23 18:57:04 deyoung Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/11/19 22:10:14 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2004/11/23 18:57:04 $
  * @author deyoung
  */
 
@@ -34,7 +34,7 @@ public:
    * Virtual function for deciding whether a given <OMKey, OMResponse>
    * pair is selected.  By default, returns true for all OMResponses.
    */
-  virtual bool operator()(const pair<OMKey, I3OMResponse>& element) {
+  virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) {
     return kTRUE;
   };
 
