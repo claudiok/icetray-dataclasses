@@ -2,6 +2,10 @@
 
 #include "dataclasses/I3DataExecution.h"
 
+#include "dataclasses/I3TCollectionIterator.h"
+
+#include "dataclasses/I3ZeroItemIterator.h"
+
 ClassImp(I3OMResponse);
 
 I3OMResponse::I3OMResponse()
@@ -93,5 +97,7 @@ void  I3OMResponse::SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_
   if(!recohitseriesdata) recohitseriesdata=recohitseriesdata_; 
   else I3DataExecution::Instance().Fatal("I3OMResponse::SetRecoHitSeriesData() RecoHitSeriesData exists already");
 }
+
+
 
 

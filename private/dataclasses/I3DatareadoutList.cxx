@@ -1,5 +1,7 @@
 #include "dataclasses/I3DatareadoutList.h"
 #include "dataclasses/I3DataExecution.h"
+#include "dataclasses/I3TCollectionIterator.h"
+#include "dataclasses/I3ZeroItemIterator.h"
 
 ClassImp(I3DatareadoutList);
 
@@ -31,3 +33,11 @@ void I3DatareadoutList::AddDatareadout(I3Datareadout* datareadout_)
   datareadout->Add(datareadout_);
 }
 
+I3Iterator<const I3Datareadout>* I3DatareadoutList::MakeDatareadoutIterator()
+{
+  if(!datareadout)
+    return new I3ZeroItemIterator<const I3Datareadout>();
+  else
+    return new I3TCollectionIterator<const I3Datareadout>(datareadout);
+
+}

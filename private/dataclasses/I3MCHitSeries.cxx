@@ -1,4 +1,6 @@
 #include "dataclasses/I3MCHitSeries.h"
+#include "dataclasses/I3ZeroItemIterator.h"
+#include "dataclasses/I3TCollectionIterator.h"
 
 ClassImp(I3MCHitSeries);
   
@@ -15,4 +17,13 @@ const I3MCHit& I3MCHitSeries::GetHit(unsigned short number) const
 void I3MCHitSeries::AddHit(I3MCHit* hit_)
 {
   I3HitSeries::AddHit(hit_);
+}
+
+I3Iterator<const I3MCHit>* I3MCHitSeries::MakeMCHitIterator()
+{
+  if(!hit)
+    return new I3ZeroItemIterator<const I3MCHit>();
+  else
+    return new I3TCollectionIterator<const I3MCHit>(hit);
+
 }

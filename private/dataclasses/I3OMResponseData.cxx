@@ -1,6 +1,9 @@
 #include "dataclasses/I3OMResponseData.h"
 #include "dataclasses/I3DataExecution.h"
 
+#include "dataclasses/I3TCollectionIterator.h"
+#include "dataclasses/I3ZeroItemIterator.h"
+
 ClassImp(I3OMResponseData);
 
 I3OMResponseData::I3OMResponseData()  
@@ -57,3 +60,10 @@ void I3OMResponseData::AddOMResponse(I3OMResponse* omresponse_)
   omresponse->Add(omresponse_);
 }
 
+I3Iterator<const I3OMResponse>* I3OMResponseData::MakeOMResponseIterator()
+{
+  if(!omresponse)
+    return new I3ZeroItemIterator<const I3OMResponse>();
+  else
+    return new I3TCollectionIterator<const I3OMResponse>(omresponse);
+}

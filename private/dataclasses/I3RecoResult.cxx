@@ -1,6 +1,9 @@
 #include "dataclasses/I3RecoResult.h"
 #include "dataclasses/I3DataExecution.h"
 
+#include "dataclasses/I3TCollectionIterator.h"
+#include "dataclasses/I3ZeroItemIterator.h"
+
 ClassImp(I3RecoResult);
 
 I3RecoResult::I3RecoResult()  {recotracklist=NULL; bestrecotracklist=NULL;}
@@ -25,6 +28,14 @@ void I3RecoResult::AddRecoTrackList(I3RecoTrackList* recotracklist_)
   if(recotracklist==NULL) recotracklist = new TObjArray(1); recotracklist->Add(recotracklist_);
 }
 
+I3Iterator<const I3RecoTrackList>* I3RecoResult::MakeRecoTrackListIterator()
+{
+  if(!recotracklist)
+    return new I3ZeroItemIterator<const I3RecoTrackList>();
+  else
+    return new I3TCollectionIterator<const I3RecoTrackList>(recotracklist);
+}
+
 bool I3RecoResult::HasBestRecoTrackList() const
 {
   return((bestrecotracklist==NULL) ? false : true);
@@ -41,3 +52,4 @@ void I3RecoResult::SetBestRecoTrackList(I3RecoTrackList& bestrecotracklist_)
 {
   bestrecotracklist=&bestrecotracklist_;
 }
+

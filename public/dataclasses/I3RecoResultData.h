@@ -20,7 +20,7 @@ class I3RecoResultData : public TObject
   int                 GetNumberRecoResults() const;
   const I3RecoResult& GetRecoResult(unsigned short number) const;
   void                AddRecoResult(I3RecoResult* recoresult_);
-  I3Iterator<const I3RecoResult>* MakeRecoResultsIterator();
+  I3Iterator<const I3RecoResult>* MakeRecoResultIterator();
 
   ClassDef(I3RecoResultData, 1);
 };

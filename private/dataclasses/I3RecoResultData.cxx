@@ -1,6 +1,9 @@
 #include "dataclasses/I3RecoResultData.h"
 #include "dataclasses/I3DataExecution.h"
 
+#include "dataclasses/I3TCollectionIterator.h"
+#include "dataclasses/I3ZeroItemIterator.h"
+
 ClassImp(I3RecoResultData);
 
 I3RecoResultData::I3RecoResultData()  {recoresult=NULL; }
@@ -21,4 +24,12 @@ const I3RecoResult& I3RecoResultData::GetRecoResult(unsigned short number) const
 void I3RecoResultData::AddRecoResult(I3RecoResult* recoresult_)
 {
   if(recoresult==NULL) recoresult = new TObjArray(1); recoresult->Add(recoresult_);
+}
+
+I3Iterator<const I3RecoResult>* I3RecoResultData::MakeRecoResultIterator()
+{
+  if(!recoresult)
+    return new I3ZeroItemIterator<const I3RecoResult>();
+  else
+    return new I3TCollectionIterator<const I3RecoResult>(recoresult);
 }

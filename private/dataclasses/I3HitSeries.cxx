@@ -1,5 +1,7 @@
 #include "dataclasses/I3HitSeries.h"
 #include "dataclasses/I3DataExecution.h"
+#include "dataclasses/I3TCollectionIterator.h"
+#include "dataclasses/I3ZeroItemIterator.h"
 
 ClassImp(I3HitSeries);
 
@@ -32,6 +34,9 @@ void I3HitSeries::AddHit(I3Hit* hit_)
 }
 
 I3Iterator<const I3Hit>* I3HitSeries::MakeHitIterator(){
-  I3DataExecution::Instance().Fatal("Iterators Not implemented yet");
-  return 0;
+  if(!hit)
+    return new I3ZeroItemIterator<const I3Hit>();
+  else
+    return new I3TCollectionIterator<const I3Hit>(hit);
 }
+

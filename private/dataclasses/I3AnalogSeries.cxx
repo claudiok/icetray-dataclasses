@@ -1,5 +1,7 @@
 #include "dataclasses/I3AnalogSeries.h"
 #include "dataclasses/I3DataExecution.h"
+#include "dataclasses/I3TCollectionIterator.h"
+#include "dataclasses/I3ZeroItemIterator.h"
 
 ClassImp(I3AnalogSeries);
   
@@ -23,6 +25,15 @@ const I3Analog& I3AnalogSeries::GetPulse(unsigned short number) const
   if(GetNumberPulses()>number) return (*(I3Analog*)pulse->At(number));
   I3DataExecution::Instance().Fatal("I3AnalogSeries::GetPulse() asked for a pulse out of bounds");
   return(*(I3Analog*)NULL);
+}
+
+I3Iterator<const I3Analog>* I3AnalogSeries::MakeAnalogIterator()
+{
+  if(!pulse)
+    return new I3ZeroItemIterator<const I3Analog>();
+  else
+    return new I3TCollectionIterator<const I3Analog>(pulse);
+
 }
 
 void I3AnalogSeries::AddPulse(I3Analog* pulse_)

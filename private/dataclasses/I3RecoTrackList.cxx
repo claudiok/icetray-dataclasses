@@ -1,6 +1,9 @@
 #include "dataclasses/I3RecoTrackList.h"
 #include "dataclasses/I3DataExecution.h"
 
+#include "dataclasses/I3ZeroItemIterator.h"
+#include "dataclasses/I3TCollectionIterator.h"
+
 ClassImp(I3RecoTrackList);
 
 I3RecoTrackList::I3RecoTrackList()  {recotrack=NULL;}
@@ -21,3 +24,10 @@ void I3RecoTrackList::AddRecoTrack(I3RecoTrack* recotrack_)
   if(recotrack==NULL) recotrack = new TObjArray(1); recotrack->Add(recotrack_);
 }
 
+I3Iterator<const I3RecoTrack>* I3RecoTrackList::MakeRecoTrackIterator()
+{
+  if(!recotrack)
+    return new I3ZeroItemIterator<const I3RecoTrack>();
+  else
+    return new I3TCollectionIterator<const I3RecoTrack>(recotrack);
+}

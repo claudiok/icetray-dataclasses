@@ -40,9 +40,6 @@ class I3OMResponse : public TObject
   void  SetMCHitSeries(I3MCHitSeries* mchitseries_);
   void  SetDatareadoutList(I3DatareadoutList* datareadoutlist_);
   void  SetRecoHitSeriesData(I3RecoHitSeriesData* recohitseriesdata_);
-  I3Iterator<const I3MCHitSeries>* MakeMCHitSeriesIterator();
-  I3Iterator<const I3DatareadoutList>* MakeDatareadoutListIterator();
-  I3Iterator<const I3RecoHitSeriesData>* MakeRecoHitSeriesDataIterator();
 
   ClassDef(I3OMResponse,1);
 };
