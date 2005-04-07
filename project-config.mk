@@ -1,5 +1,5 @@
 CXX_BIN_SRCDIR_NAMES := 
-TEST_SRCDIR_NAMES := test test-autogen serialization-test
+TEST_SRCDIR_NAMES := test test-autogen serialization-test 
 
 USES_PROJECTS := icetray 
 USES_TOOLS := root log4cplus boost TUT boost
@@ -52,7 +52,6 @@ dataclasses/I3GeometryHeader.h	      dataclasses/I3Starting.h \
 dataclasses/I3GoodOMSelection.h       \
 dataclasses/I3Hit.h		      dataclasses/I3StationGeo.h \
 dataclasses/I3StationHit.h \
-dataclasses/I3StationItr.h \
 dataclasses/I3IceTopParticle.h	      dataclasses/I3StationMap.h \
 dataclasses/I3Stopping.h \
 dataclasses/I3InIceCalibration.h \

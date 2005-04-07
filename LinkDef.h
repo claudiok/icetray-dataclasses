@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.159 2005/04/07 19:58:40 troy Exp $
-// $Revision: 1.159 $
-// $Date: 2005/04/07 19:58:40 $
+// $Id: LinkDef.h,v 1.160 2005/04/07 20:25:07 olivas Exp $
+// $Revision: 1.160 $
+// $Date: 2005/04/07 20:25:07 $
 //
 
 #ifdef __CINT__
@@ -470,8 +470,6 @@
 #pragma link C++ class boost::shared_ptr<I3Track>+;
 
 #pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
-
-#pragma link C++ class station_iterator+;
 
 #pragma link C++ class std::pair<OMKey,boost::shared_ptr<I3OMGeo> >;
 #pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMResponse> >;
