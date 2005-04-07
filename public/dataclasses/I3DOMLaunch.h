@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.13 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3DOMLaunch.h,v 1.14 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author klein
  * @author blaufuss
  *
@@ -15,7 +15,6 @@
 
 //#include "StoragePolicy.h"
 #include "dataclasses/I3DigitalLaunch.h"
-#include "dataclasses/I3DataExecution.h"
 
 using namespace std; 
 /**
@@ -175,7 +174,7 @@ class I3DOMLaunch : public I3DigitalLaunch
 	    
 	    else
 	    {
-		I3DataExecution::Instance().Fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
+		log_fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
                 return *(vector<int>*)0;
 	    }
 	}
@@ -245,7 +244,8 @@ class I3DOMLaunch : public I3DigitalLaunch
 	    
 	    else 
 	    {
-		I3DataExecution::Instance().Fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
+		log_fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
+		throw std::exception();
 	    }
 	}    
 

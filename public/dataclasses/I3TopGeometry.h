@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.16 2004/09/17 21:12:19 niessen Exp $
+ * $Id: I3TopGeometry.h,v 1.17 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.16 $
- * @date $Date: 2004/09/17 21:12:19 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -13,7 +13,6 @@
 
 #include <TObject.h>
 
-#include "I3DataExecution.h"
 #include "dataclasses/I3StationMap.h"
 #include "dataclasses/StationKey.h"
 #include "dataclasses/StoragePolicy.h"

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.12 2005/01/24 23:17:44 ehrlich Exp $
+    $Id: I3MCOMResponse.h,v 1.13 2005/04/07 18:24:22 olivas Exp $
 
     @file I3MCOMResponse.h
-    @version $Revision: 1.12 $
-    @date $Date: 2005/01/24 23:17:44 $
+    @version $Revision: 1.13 $
+    @date $Date: 2005/04/07 18:24:22 $
     @author ehrlich
     @author troy
     @author pretz
@@ -18,7 +18,6 @@
 #include "I3MCHitSeries.h"
 #include "I3MCPMTResponse.h"
 #include "I3OMResponse.h"
-#include "I3MCPhotonVect.h"
 #include "I3PMTPulseVect.h"
 
 /**
@@ -39,10 +38,9 @@ class I3MCOMResponse : public I3OMResponse
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
   // @todo Is this still true?  TDY
-  I3MCHitSeries       fMCHitSeries; //||
-  I3MCPMTResponsePtr  fMCPMTResponse; //||
-  I3MCPhotonVect      fMCPhotonVect; //||
-  I3PMTPulseVect      fPMTPulseVect; //||
+  I3MCHitSeries       mCHitSeries_; //||
+  I3MCPMTResponsePtr  mCPMTResponse_; //||
+  I3PMTPulseVect      pMTPulseVect_; //||
 
  public:
   /**
@@ -58,50 +56,36 @@ class I3MCOMResponse : public I3OMResponse
   /**
    * @return a pointer to the PMTResponse as a const object
    */
-  const I3MCPMTResponsePtr GetMCPMTResponse() const {return fMCPMTResponse;}
+  const I3MCPMTResponsePtr GetMCPMTResponse() const {return mCPMTResponse_;}
   
   /**
    * @return a pointer to the PMTResponse as a non-const object
    */
-  I3MCPMTResponsePtr GetMCPMTResponse() { return fMCPMTResponse;}
+  I3MCPMTResponsePtr GetMCPMTResponse() { return mCPMTResponse_;}
 
   /** 
    * Add a MCPMTResponse to the MCOMResponse by setting the pointer
    */
   void SetMCPMTResponse(I3MCPMTResponsePtr fResp_) {
-    if(fMCPMTResponse) {
-      I3DataExecution::Instance().Fatal("An MC PMT Response already exists.");
+    if(mCPMTResponse_) {
+      log_fatal("An MC PMT Response already exists.");
       return;
     }
-    fMCPMTResponse = fResp_;
+    mCPMTResponse_ = fResp_;
   }
 
   /**
    * @return a pointer to the pe hit series for this om response, as read-only.
    * These are PE's, not photon arrivals
    */
-  const I3MCHitSeries& GetMCHitSeries() const {return fMCHitSeries;}
+  const I3MCHitSeries& GetMCHitSeries() const {return mCHitSeries_;}
 
   /**
    * Gives the MC truth for this response as a non-const object
    * These are PEs, not photon arrivals.
    * @return a pointer to the MCHitSeries for this class
    */
-  I3MCHitSeries& GetMCHitSeries() {return fMCHitSeries;}
-
-  /**
-   * Gives the MC Photon series for this om response as a read-only
-   * object.  This is the  MC truth for photon arrivals, not pes.
-   * @return the MC Photon Vect for this om response
-   */
-  const I3MCPhotonVect& GetMCPhotonVect() const { return fMCPhotonVect;}
-
-  /**
-   * Gives the MC Photon series for this om response as a non-const object
-   * This is the MC truth for the photon arrivals, not pes.
-   * @return the MC Photon Vect for this om response
-   */
-  I3MCPhotonVect& GetMCPhotonVect() { return fMCPhotonVect;}
+  I3MCHitSeries& GetMCHitSeries() {return mCHitSeries_;}
 
   /**
    * Gives the vector of individual PMT pulses for this OM response as
@@ -109,14 +93,14 @@ class I3MCOMResponse : public I3OMResponse
    *  containing any saturation or other nonlinear effects.
    * @return the PMT Pulse Vector for this OM Response
    */ 
-  const I3PMTPulseVect& GetPMTPulseVect() const { return fPMTPulseVect;}
+  const I3PMTPulseVect& GetPMTPulseVect() const { return pMTPulseVect_;}
 
   /**
    * Gives the vector of individual PMT pulses for this om response as
    *  a non-const object. 
    * @return the PMT Pulse Vector for this OM Response
    */
-  I3PMTPulseVect& GetPMTPulseVect() { return fPMTPulseVect;}
+  I3PMTPulseVect& GetPMTPulseVect() { return pMTPulseVect_;}
 
   private:
 

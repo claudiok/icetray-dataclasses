@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.45 2005/03/09 18:21:46 blaufuss Exp $
+ * $Id: I3Event.h,v 1.46 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.45 $
- * @date $Date: 2005/03/09 18:21:46 $
+ * @version $Revision: 1.46 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -13,11 +13,8 @@
 
 #include <TObject.h>
 
-#include "I3TriggerDict.h"
-#include "I3FilterDict.h"
 #include "I3OMResponseMap.h"
 #include "I3OMSelectionDict.h"
-#include "I3ArrayHitDict.h"
 #include "I3RecoResultDict.h"
 #include "I3Bag.h"
 #include <sstream>
@@ -38,21 +35,18 @@
 
 class I3Event : public TObject
 {
-  I3TriggerDict     fTriggerDict; //||
-  I3FilterDict      fFilterDict; //||
-  I3OMResponseMap   fOMResponseMap; //||
-  I3OMResponseMap   fTopOMResponseMap; //||
-  I3OMSelectionDict fOMSelectionDict; //||
-  I3ArrayHitDict    fTopResponseDict; //||
-  I3RecoResultDict  fRecoResultDict; //||
-  I3Bag             fBag; //||
+  I3OMResponseMap   oMResponseMap_; //||
+  I3OMResponseMap   topOMResponseMap_; //||
+  I3OMSelectionDict oMSelectionDict_; //||
+  I3RecoResultDict  recoResultDict_; //||
+  I3Bag             bag_; //||
   
 //  friend class boost::serialization::access;
 //
 //  template <class Archive>
 //  void serialize(Archive &ar, const unsigned int version)
 //  {
-//    ar & make_nvp("I3OMResponseMap", fOMResponseMap);
+//    ar & make_nvp("I3OMResponseMap", oMResponseMap_);
 
 //  }
 
@@ -68,86 +62,56 @@ class I3Event : public TObject
   virtual ~I3Event();
 
   /**
-   * @return the TriggerDict as constant
-   */
-  const I3TriggerDict& GetTriggerDict() const { return fTriggerDict; }
-
-  /**
-   * @return the TriggerDict as non-const
-   */
-  I3TriggerDict& GetTriggerDict() { return fTriggerDict; }
-
-  /**
-   * @return the FilterDict as a constant object
-   */
-  const I3FilterDict& GetFilterDict() const { return fFilterDict;}
-
-  /**
-   * @return the FilterDict as a non-constant object
-   */
-  I3FilterDict& GetFilterDict() { return fFilterDict;}
-
-  /**
    * @return the OMResponseMap of the event as a constant object
    */
-  const I3OMResponseMap& GetOMResponseMap() const { return fOMResponseMap; }
+  const I3OMResponseMap& GetOMResponseMap() const { return oMResponseMap_; }
 
   /**
    * @return the OMResponseMap as non-constant object
    */
-  I3OMResponseMap& GetTopOMResponseMap() { return fTopOMResponseMap; }
+  I3OMResponseMap& GetTopOMResponseMap() { return topOMResponseMap_; }
 
   /**
    * @return the TopOMResponseMap of the event as a constant object
    */
-  const I3OMResponseMap& GetTopOMResponseMap() const { return fTopOMResponseMap; }
+  const I3OMResponseMap& GetTopOMResponseMap() const { return topOMResponseMap_; }
 
   /**
    * @return the TopOMResponseMap as non-constant object
    */
-  I3OMResponseMap& GetOMResponseMap() { return fOMResponseMap; }
+  I3OMResponseMap& GetOMResponseMap() { return oMResponseMap_; }
 
   /**
    * @return the OMSelectionDict of the event as a constant object
    */
   const I3OMSelectionDict& GetOMSelectionDict() const { 
-    return fOMSelectionDict; 
+    return oMSelectionDict_; 
   }
 
   /**
    * @return the OMSelectionDict as a non-constant object
    */
-  I3OMSelectionDict& GetOMSelectionDict() { return fOMSelectionDict; }
-
-   /**
-   * @return the Array hit data as constant object
-   */
-  const I3ArrayHitDict& GeTopResponseDict () const { return fTopResponseDict; }
-
-  /**
-   * @ return the Array hit data a non-const object
-   */
-  I3ArrayHitDict& GetTopResponseDict () { return fTopResponseDict; }
+  I3OMSelectionDict& GetOMSelectionDict() { return oMSelectionDict_; }
 
   /**
    * @return the RecoResult Data as a constant object
    */
-  const I3RecoResultDict& GetRecoResultDict() const { return fRecoResultDict; }
+  const I3RecoResultDict& GetRecoResultDict() const { return recoResultDict_; }
 
   /**
    * @return the RecoResultDict as a non-constant object
    */
-  I3RecoResultDict& GetRecoResultDict() { return fRecoResultDict; }
+  I3RecoResultDict& GetRecoResultDict() { return recoResultDict_; }
 
   /**
    * @return the Bag for this event as a constant object
    */
-  const I3Bag& GetBag() const { return fBag; }
+  const I3Bag& GetBag() const { return bag_; }
 
   /**
    * @return the Bag for this event as a non-constant object
    */
-  I3Bag& GetBag() { return fBag; }
+  I3Bag& GetBag() { return bag_; }
 
   /**
    * @param o the stream we're printing the object to
@@ -155,13 +119,11 @@ class I3Event : public TObject
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3Event \n"
-       <<fTriggerDict
-       <<fFilterDict
-       <<fOMResponseMap
-       <<fTopOMResponseMap
-       <<fOMSelectionDict
-       <<fRecoResultDict
-       <<fBag
+       <<oMResponseMap_
+       <<topOMResponseMap_
+       <<oMSelectionDict_
+       <<recoResultDict_
+       <<bag_
        <<"]\n";
     }
 

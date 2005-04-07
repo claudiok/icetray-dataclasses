@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3InIceCalibration.h,v 1.4 2005/03/17 02:44:04 dima Exp $
+ * $Id: I3InIceCalibration.h,v 1.5 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3InIceCalibration.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/03/17 02:44:04 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author tmccauley
  */
 
@@ -18,7 +18,6 @@
 
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3DataExecution.h"
 #include "dataclasses/I3DOMCalibration.h"
 
 #include <map>

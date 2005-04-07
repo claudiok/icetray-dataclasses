@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.21 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3Starting.h,v 1.22 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3Starting.h
- * @version $Revision: 1.21 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author pretz
  */
 #ifndef I3STARTING_H
@@ -14,7 +14,9 @@
 #include <cmath>
 #include "I3Units.h"
 #include "I3Constants.h"
-
+#include "I3Position.h"
+#include "I3Direction.h"
+#include "I3Particle.h"
 
 /**
  * @brief This class services the 'geometrical' part of the I3Track interface.
@@ -26,11 +28,10 @@
 class I3Starting 
 {
  private:
-  I3Position fStartPos;
-  I3Direction fDir;
-  double fStartT;
-  //double fZenith;
-  //double fAzimuth;
+  I3Position startPos_;
+  I3Direction dir_;
+  double startT_;
+
  public:
 
   virtual ~I3Starting() {}
@@ -52,93 +53,93 @@ class I3Starting
   /**
    * gets the starting t
    */
-  double GetStartT() const {return fStartT;}
+  double GetStartT() const {return startT_;}
 
   /**
    * sets the starting t
    */
-  void SetStartT(double startt) {fStartT = startt;}
+  void SetStartT(double startt) {startT_ = startt;}
 
   /**
    * gets the starting position
    */
-  I3Position GetStartPos() const {return fStartPos;}
+  I3Position GetStartPos() const {return startPos_;}
 
   /**
    * sets the starting position
    */
-  void SetStartPos(I3Position& p) {fStartPos = p;}
+  void SetStartPos(I3Position& p) {startPos_ = p;}
 
   /**
    * sets the starting position in any reference frame
    */
   void SetStartPos(double startp1, double startp2, double startp3, 
 		I3Position::RefFrame frame=I3Position::car)
-    {fStartPos.SetPosition(startp1,startp2,startp3,frame);}
+    {startPos_.SetPosition(startp1,startp2,startp3,frame);}
 
   /**
    * gives the starting t time as a time corresponding to X(), Y(), Z()
    */
-  double GetT() const {return fStartT;}
+  double GetT() const {return startT_;}
 
   /**
    * gives the starting positition as a position on the track
    */
-  I3Position GetPos() const {return fStartPos;}
+  I3Position GetPos() const {return startPos_;}
 
   /**
    * sets the starting positition as a position on the track
    */
-  void SetPos(I3Position &p) {fStartPos = p;}
+  void SetPos(I3Position &p) {startPos_ = p;}
 
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return fDir;}
+  I3Direction GetDir() const {return dir_;}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {fDir.SetDirection(d);}
+  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(double zen, double azi) {fDir.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi) {dir_.SetDirection(zen,azi);}
 
   /**
    * sets the direction of the track
    */
   void SetDir(double x, double y, double z) 
     {
-      fDir.SetDirection(x,y,z);
+      dir_.SetDirection(x,y,z);
     }
 
   /**
    * gives the zenith of the track
    */
   //double GetZenith() const {return fZenith;}
-  double GetZenith() const {return fDir.GetZenith();}
+  double GetZenith() const {return dir_.GetZenith();}
 
   /**
    * gives the azimuth of the track
    */
   //double GetAzimuth() const {return fAzimuth;}
-  double GetAzimuth() const {return fDir.GetAzimuth();}
+  double GetAzimuth() const {return dir_.GetAzimuth();}
 
   /** 
    * sets the zenith of the track
    */
   //void SetZenith(double theta){fZenith = theta;}
   void SetZenith(double zen) {
-    fDir.SetDirection(zen,fDir.GetAzimuth());}
+    dir_.SetDirection(zen,dir_.GetAzimuth());}
 
   /** 
    * sets the azimuth of the track
    */
   //void SetAzimuth(double phi){fAzimuth = phi;}
   void SetAzimuth(double azi) {
-    fDir.SetDirection(fDir.GetZenith(),azi);}
+    dir_.SetDirection(dir_.GetZenith(),azi);}
 
   /**
    * returns Infinity for the length of the track
@@ -156,18 +157,18 @@ class I3Starting
   void CopyTo(I3Particle& destination) const{
     I3Starting* starting = dynamic_cast<I3Starting*>(&destination);
     if(starting){
-      starting->fStartPos = fStartPos;
-      starting->fDir = fDir;
-      starting->fStartT = fStartT;
+      starting->startPos_ = startPos_;
+      starting->dir_ = dir_;
+      starting->startT_ = startT_;
     }
   }
 
   virtual void ToStream(ostream& o) const
     {
       o<<"Geometry: Starting\n"
-       <<"StartPosition:\n"<<fStartPos
-       <<"Direction:\n"<<fDir
-       <<"StartTime: "<<fStartT<<"\n";
+       <<"StartPosition:\n"<<startPos_
+       <<"Direction:\n"<<dir_
+       <<"StartTime: "<<startT_<<"\n";
     }
 
  protected:

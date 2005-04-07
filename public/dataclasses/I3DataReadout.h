@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadout.h,v 1.20 2005/04/02 17:50:11 olivas Exp $
+ * $Id: I3DataReadout.h,v 1.21 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3DataReadout.h
- * @version $Revision: 1.20 $
- * @date $Date: 2005/04/02 17:50:11 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -97,7 +97,7 @@ public:
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("Raw", (int)raw_);
+    ar & make_nvp("Raw", raw_);
   }
 
   // ROOT Macro

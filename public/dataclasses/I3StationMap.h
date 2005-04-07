@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.3 2005/01/31 19:16:50 dule Exp $
+ * $Id: I3StationMap.h,v 1.4 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3StationMap.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/01/31 19:16:50 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
@@ -15,7 +15,6 @@
 
 #include <TObject.h>
 
-#include "I3DataExecution.h"
 #include "dataclasses/StationKey.h"
 #include "dataclasses/I3StationGeo.h"
 #include "dataclasses/I3TankGeo.h"

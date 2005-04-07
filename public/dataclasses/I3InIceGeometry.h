@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.20 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3InIceGeometry.h,v 1.21 2005/04/07 18:24:22 olivas Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.20 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.21 $
+ * @date $Date: 2005/04/07 18:24:22 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -16,7 +16,6 @@
 
 #include <TObject.h>
 #include <map>
-#include "I3DataExecution.h"
 #include "I3OMGeo.h"
 #include "OMKey.h"
 #include "StoragePolicy.h"
