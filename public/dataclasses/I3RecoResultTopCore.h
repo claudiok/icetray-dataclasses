@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultTopCore.h,v 1.6 2004/12/08 17:46:50 pretz Exp $
+ * $Id: I3RecoResultTopCore.h,v 1.7 2005/04/07 19:37:03 olivas Exp $
  *
  * @file I3RecoResultTopCore.h
- * @version $Revision: 1.6 $
- * @date $Date: 2004/12/08 17:46:50 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/07 19:37:03 $
  * @author Peter Niessen
  */
 
 #ifndef __I3RECORESULTTOPCORE_H_
 #define __I3RECORESULTTOPCORE_H_
 
-#include "I3DataExecution.h"
 #include "I3RecoResult.h"
 #include "I3ShowerCore.h"
 
@@ -42,7 +41,7 @@ class I3RecoResultTopCore : public I3RecoResult
   {
     if(fShowerCore)
       return (*fShowerCore);
-    I3DataExecution::Instance().Fatal("I3RecoResultTopCore::ShowerCore () const asked for a shower core which doesn't exist");
+    log_fatal("I3RecoResultTopCore::ShowerCore () const asked for a shower core which doesn't exist");
     return(*(I3ShowerCore*)NULL);
   }
 
@@ -53,7 +52,7 @@ class I3RecoResultTopCore : public I3RecoResult
   {
     if(fShowerCore)
       return (*fShowerCore);
-    I3DataExecution::Instance().Fatal("I3RecoResultSingleTopCore::ShowerCore() asked for a track which doesn't exist");
+    log_fatal("I3RecoResultSingleTopCore::ShowerCore() asked for a track which doesn't exist");
     return(*(I3ShowerCore*)NULL);
   }
 
@@ -63,7 +62,7 @@ class I3RecoResultTopCore : public I3RecoResult
   {
     if(fShowerCore)
     {
-      I3DataExecution::Instance().Fatal("I3RecoResultTopCore::SetShowerCore () shower core exists already");
+      log_fatal("I3RecoResultTopCore::SetShowerCore () shower core exists already");
       return;
     }
     fShowerCore = shower_core;

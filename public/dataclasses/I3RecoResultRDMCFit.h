@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.13 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.14 2005/04/07 19:37:03 olivas Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/07 19:37:03 $
  * @author pretz
  */
 
@@ -13,7 +13,6 @@
 #define I3RECORESULTRDMCFIT_H
 
 #include "I3RecoResultSingleTrack.h"
-#include "dataclasses/I3DataExecution.h"
 #include <vector>
 #include <map>
 #include <string>

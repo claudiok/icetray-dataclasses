@@ -1,18 +1,17 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleParticle.h,v 1.1 2005/02/23 21:46:58 dule Exp $
+ * $Id: I3RecoResultSingleParticle.h,v 1.2 2005/04/07 19:37:03 olivas Exp $
  *
  * @file I3RecoResultSingleParticle.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/02/23 21:46:58 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/07 19:37:03 $
  * @author dule
  */
 
 #ifndef I3RECORESULTSINGLEPARTICLE_H
 #define I3RECORESULTSINGLEPARTICLE_H
 
-#include "I3DataExecution.h"
 #include "I3RecoResult.h"
 #include "I3Particle.h"
 
@@ -62,7 +61,7 @@ class I3RecoResultSingleParticle : public I3RecoResult
 	 */
 	void SetParticle(I3ParticlePtr particle) {
 		if (particle_)	{
-			I3DataExecution::Instance().Fatal("I3RecoResultSingleParticle::SetParticle() particle exists already");
+			log_fatal("I3RecoResultSingleParticle::SetParticle() particle exists already");
 			return;
 		}
 		particle_ = particle;
