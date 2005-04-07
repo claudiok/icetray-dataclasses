@@ -1,9 +1,8 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.10 2005/04/04 15:49:24 pretz Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.11 2005/04/07 18:25:06 olivas Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
-#include "dataclasses/I3DataExecution.h"
 
 ClassImp(I3DOMCalibration);
 
@@ -35,12 +34,12 @@ double I3DOMCalibration::GetATWDVoltage(int id,  int channel,
 {
     if ( ! GetATWDById(id).count(channel) )
     {
-	I3DataExecution::Instance().Fatal("Invalid ATWD channel in I3DOMCalibration");
+	log_fatal("Invalid ATWD channel in I3DOMCalibration");
     }
 
     if ( ! GetATWDById(id)[channel].count(bin) )
     {
-	I3DataExecution::Instance().Fatal("Invalid ATWD bin in I3DOMCalibration");
+	log_fatal("Invalid ATWD bin in I3DOMCalibration");
     }
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
@@ -59,7 +58,7 @@ I3DOMCalibration::GetATWDById(int id)
 	return fATWD1;
     default:
       {
-	I3DataExecution::Instance().Fatal("Invalid ATWD Id in I3DOMCalibration");
+	log_fatal("Invalid ATWD Id in I3DOMCalibration");
 	return *static_cast<map<int,map<int,LinearFit> >*>(0);
       }
     }
@@ -77,7 +76,7 @@ double I3DOMCalibration::GetATWDGain(int channel)
 {
     if ( ! fAmpGains.count(channel) )
     {
-	I3DataExecution::Instance().Fatal("Gain not found for ATWD channel in I3DOMCalibration");
+	log_fatal("Gain not found for ATWD channel in I3DOMCalibration");
     }
     
     return fAmpGains[channel];
@@ -87,7 +86,7 @@ double I3DOMCalibration::GetATWDGainErr(int channel)
 {
     if ( ! fAmpGainErrs.count(channel) )
     {
-	I3DataExecution::Instance().Fatal("Gain error not found for ATWD channel in I3DOMCalibration");
+	log_fatal("Gain error not found for ATWD channel in I3DOMCalibration");
     }
     
     return fAmpGainErrs[channel];
@@ -104,7 +103,7 @@ void I3DOMCalibration::SetSamplingRate(int id, double rate)
 	fSamplingRate1 = rate;
 	break;
     default:
-	I3DataExecution::Instance().Fatal("Invalid ATWD Id in I3DOMCalibration");
+	log_fatal("Invalid ATWD Id in I3DOMCalibration");
     }
 }
 
@@ -117,7 +116,7 @@ double I3DOMCalibration::GetSamplingRate(int id)
     case 1:
 	return fSamplingRate1;
     default:	
-	I3DataExecution::Instance().Fatal("Sampling rate not found for ATWD ID in I3DOMCalibration");
+	log_fatal("Sampling rate not found for ATWD ID in I3DOMCalibration");
     }
     return 0;
 }
