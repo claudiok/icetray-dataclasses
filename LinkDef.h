@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.163 2005/04/08 18:12:42 olivas Exp $
-// $Revision: 1.163 $
-// $Date: 2005/04/08 18:12:42 $
+// $Id: LinkDef.h,v 1.164 2005/04/08 19:24:22 olivas Exp $
+// $Revision: 1.164 $
+// $Date: 2005/04/08 19:24:22 $
 //
 
 #ifdef __CINT__
@@ -103,9 +103,9 @@
 #pragma link C++ typedef I3InIceStatusPtr;
 
 #pragma link C++ class I3RecoResultDict+;
-#pragma link C++ typedef MapPolicy<string,I3RecoResultPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<string,I3RecoResultPtr>::ThePolicy+;
-#pragma link C++ typedef I3RecoResultDictPtr;
+//#pragma link C++ typedef MapPolicy<string,I3RecoResultPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<string,I3RecoResultPtr>::ThePolicy+;
+//#pragma link C++ typedef I3RecoResultDictPtr;
 
 #pragma link C++ class I3DataReadoutDict+;
 #pragma link C++ typedef MapPolicy<string,I3DataReadoutPtr>::ThePolicy;

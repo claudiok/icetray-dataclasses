@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultDict.h,v 1.7 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3RecoResultDict.h,v 1.8 2005/04/08 19:24:22 olivas Exp $
  *
  * @file I3RecoResultDict.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/08 19:24:22 $
  * @author ehrlich
  * @author pretz
  */
@@ -22,7 +22,7 @@
  *
  */
 class I3RecoResultDict : public TObject, 
-	public MapPolicy<string,I3RecoResultPtr>::ThePolicy
+  public STLMapStoragePolicy<string,I3RecoResultPtr>
 {
  public:
   /**
