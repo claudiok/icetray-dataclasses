@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTopShower.h,v 1.3 2005/04/08 19:01:13 olivas Exp $
+ * $Id: I3RecoResultSingleTopShower.h,v 1.4 2005/04/08 19:09:50 olivas Exp $
  *
  * @file I3RecoResultSingleTopShower.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/04/08 19:01:13 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/08 19:09:50 $
  * @author Peter Niessen
  * @author dule
  */
@@ -13,7 +13,6 @@
 #ifndef I3RECORESULTSINGLETOPSHOWER_H
 #define I3RECORESULTSINGLETOPSHOWER_H
 
-#include "I3DataExecution.h"
 #include "dataclasses/I3RecoResultSingleParticle.h"
 
 /**
