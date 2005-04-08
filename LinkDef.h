@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.168 2005/04/08 20:59:00 olivas Exp $
-// $Revision: 1.168 $
-// $Date: 2005/04/08 20:59:00 $
+// $Id: LinkDef.h,v 1.169 2005/04/08 22:19:12 olivas Exp $
+// $Revision: 1.169 $
+// $Date: 2005/04/08 22:19:12 $
 //
 
 #ifdef __CINT__
@@ -35,13 +35,13 @@
 #pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>+;
 
 #pragma link C++ class I3RecoResultSingleTopShower+;
-#pragma link C++ typedef I3RecoResultSingleTopShowerPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoResultSingleTopShower>+;
+//#pragma link C++ typedef I3RecoResultSingleTopShowerPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoResultSingleTopShower>+;
 
 
 #pragma link C++ class I3BasicTrack+;
 #pragma link C++ class I3F2KRecoTrack+;
-#pragma link C++ typedef I3F2KRecoTrackPtr;
+//#pragma link C++ typedef I3F2KRecoTrackPtr;
 #pragma link C++ class I3DoubleBang+;
 #pragma link C++ class I3MCTrack+;
 //#pragma link C++ class JAMSFitTrack+;
@@ -52,16 +52,16 @@
 #pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3Energetic,I3NonComposite>+;
 
 #pragma link C++ class I3BasicCascade+;
-#pragma link C++ typedef I3BasicCascadePtr;
-#pragma link C++ class boost::shared_ptr<I3BasicCascade>+;
+//#pragma link C++ typedef I3BasicCascadePtr;
+//#pragma link C++ class boost::shared_ptr<I3BasicCascade>+;
 
 #pragma link C++ class I3DirectionalCascade+;
-#pragma link C++ typedef I3DirectionalCascadePtr;
-#pragma link C++ class boost::shared_ptr<I3DirectionalCascade>+;
+//#pragma link C++ typedef I3DirectionalCascadePtr;
+//#pragma link C++ class boost::shared_ptr<I3DirectionalCascade>+;
 
 #pragma link C++ class I3F2KRecoCascade+;
-#pragma link C++ typedef I3F2KRecoCascadePtr;
-#pragma link C++ class boost::shared_ptr<I3F2KRecoCascade>+;
+//#pragma link C++ typedef I3F2KRecoCascadePtr;
+//#pragma link C++ class boost::shared_ptr<I3F2KRecoCascade>+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3Localized,I3Energetic>+;
@@ -70,24 +70,24 @@
 #pragma link C++ class I3TopShowerImpl<I3Directional, I3NonLocalized, I3NonEnergetic>+;
 
 #pragma link C++ class I3MCCorePrimary+;
-#pragma link C++ typedef I3MCCorePrimaryPtr;
-#pragma link C++ class boost::shared_ptr<I3MCCorePrimary>+;
+//#pragma link C++ typedef I3MCCorePrimaryPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCCorePrimary>+;
 
 #pragma link C++ class I3MCPrimary+;
-#pragma link C++ typedef I3MCPrimaryPtr;
-#pragma link C++ class boost::shared_ptr<I3MCPrimary>+;
+//#pragma link C++ typedef I3MCPrimaryPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCPrimary>+;
 
 #pragma link C++ class I3MCCascade+;
-#pragma link C++ typedef I3MCCascadePtr;
-#pragma link C++ class boost::shared_ptr<I3MCCascade>+;
+//#pragma link C++ typedef I3MCCascadePtr;
+//#pragma link C++ class boost::shared_ptr<I3MCCascade>+;
 
 #pragma link C++ class I3ShowerCore+;
-#pragma link C++ typedef I3ShowerCorePtr;
-#pragma link C++ class boost::shared_ptr<I3ShowerCore>+;
+//#pragma link C++ typedef I3ShowerCorePtr;
+//#pragma link C++ class boost::shared_ptr<I3ShowerCore>+;
 
 #pragma link C++ class I3ShowerDirection+;
-#pragma link C++ class I3ShowerDirectionPtr;
-#pragma link C++ class boost::shared_ptr<I3ShowerDirection>+;
+//#pragma link C++ class I3ShowerDirectionPtr;
+//#pragma link C++ class boost::shared_ptr<I3ShowerDirection>+;
 
 //
 // vector (series, list) types
@@ -113,16 +113,16 @@
 //#pragma link C++ typedef I3DataReadoutDictPtr;
 
 #pragma link C++ class I3DetectorStatus;
-#pragma link C++ typedef I3DetectorStatusPtr;
-#pragma link C++ class boost::shared_ptr<I3DetectorStatus>+;
+//#pragma link C++ typedef I3DetectorStatusPtr;
+//#pragma link C++ class boost::shared_ptr<I3DetectorStatus>+;
 
 #pragma link C++ class I3DetectorStatusHeader;
-#pragma link C++ typedef I3DetectorStatusHeaderPtr;
-#pragma link C++ class boost::shared_ptr<I3DetectorStatusHeader>+;
+//#pragma link C++ typedef I3DetectorStatusHeaderPtr;
+//#pragma link C++ class boost::shared_ptr<I3DetectorStatusHeader>+;
 
 #pragma link C++ class I3DigitalReadout+;
-#pragma link C++ typedef I3DigitalReadoutPtr;
-#pragma link C++ class boost::shared_ptr<I3DigitalReadout>+;
+//#pragma link C++ typedef I3DigitalReadoutPtr;
+//#pragma link C++ class boost::shared_ptr<I3DigitalReadout>+;
 
 
 #pragma link C++ class I3InIceGeometry+;
@@ -130,7 +130,7 @@
 //#pragma link C++ class MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy+;
 //#pragma link C++ typedef I3InIceGeometryPtr;
 //#pragma link C++ class boost::shared_ptr<I3InIceGeometry>+;
-#pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMGeo> >+;
+//#pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMGeo> >+;
 
 // tpm: my addition
 #pragma link C++ class I3InIceCalibration+;
@@ -169,8 +169,8 @@
 //#pragma link C++ typedef I3ParticleMultiMapPtr;
 //#pragma link C++ class boost::shared_ptr<I3ParticleMultiMap>+;
 
-#pragma link C++ typedef TObjectPtr;
-#pragma link C++ class TObjectPtr+;
+//#pragma link C++ typedef TObjectPtr;
+//#pragma link C++ class TObjectPtr+;
 #pragma link C++ class I3Bag+;
 //#pragma link C++ typedef MapPolicy<string,TObjectPtr>::ThePolicy;
 //#pragma link C++ class MapPolicy<string,TObjectPtr>::ThePolicy+;
@@ -182,7 +182,7 @@
 //#pragma link C++ class MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy+;
 //#pragma link C++ typedef I3OMResponseMapPtr;
 //#pragma link C++ class boost::shared_ptr<I3OMResponseMap>+;
-#pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMResponse> >+;
+//#pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMResponse> >+;
 
 #pragma link C++ class I3RecoHitSeriesDict+;
 //#pragma link C++ typedef MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy;
@@ -225,122 +225,122 @@
 //
 
 #pragma link C++ class I3AMANDAAnalogReadout+;
-#pragma link C++ typedef I3AMANDAAnalogReadoutPtr;
-#pragma link C++ class boost::shared_ptr<I3AMANDAAnalogReadout>+;
+//#pragma link C++ typedef I3AMANDAAnalogReadoutPtr;
+//#pragma link C++ class boost::shared_ptr<I3AMANDAAnalogReadout>+;
 
 #pragma link C++ class I3AnalogReadout+;
-#pragma link C++ typedef I3AnalogReadoutPtr;
-#pragma link C++ class boost::shared_ptr<I3AnalogReadout>+;
+//#pragma link C++ typedef I3AnalogReadoutPtr;
+//#pragma link C++ class boost::shared_ptr<I3AnalogReadout>+;
 
 #pragma link C++ class I3Cascade+;
-#pragma link C++ typedef I3CascadePtr;
-#pragma link C++ class boost::shared_ptr<I3Cascade>+;
+//#pragma link C++ typedef I3CascadePtr;
+//#pragma link C++ class boost::shared_ptr<I3Cascade>+;
 
 #pragma link C++ class I3Contained+;
 #pragma link C++ class I3Composite+;
 #pragma link C++ class I3CoreLocalized+;
 
 #pragma link C++ class I3DataHeader+;
-#pragma link C++ typedef I3DataHeaderPtr;
-#pragma link C++ class boost::shared_ptr<I3DataHeader>+;
+//#pragma link C++ typedef I3DataHeaderPtr;
+//#pragma link C++ class boost::shared_ptr<I3DataHeader>+;
 
 #pragma link C++ class I3DataReadout+;
-#pragma link C++ typedef I3DataReadoutPtr;
-#pragma link C++ class boost::shared_ptr<I3DataReadout>+;
+//#pragma link C++ typedef I3DataReadoutPtr;
+//#pragma link C++ class boost::shared_ptr<I3DataReadout>+;
 
 #pragma link C++ class I3DetectorStatusHeader;
-#pragma link C++ typedef I3DetectorStatusHeaderPtr;
-#pragma link C++ class boost::shared_ptr<I3DetectorStatusHeader>+;
+//#pragma link C++ typedef I3DetectorStatusHeaderPtr;
+//#pragma link C++ class boost::shared_ptr<I3DetectorStatusHeader>+;
 
 #pragma link C++ class I3DigitalReadout+;
-#pragma link C++ typedef I3DigitalReadoutPtr;
-#pragma link C++ class boost::shared_ptr<I3DigitalReadout>+;
+//#pragma link C++ typedef I3DigitalReadoutPtr;
+//#pragma link C++ class boost::shared_ptr<I3DigitalReadout>+;
 
 #pragma link C++ class I3DigitalLaunch+;
-#pragma link C++ typedef I3DigitalLaunchPtr;
-#pragma link C++ class boost::shared_ptr<I3DigitalLaunch>+;
+//#pragma link C++ typedef I3DigitalLaunchPtr;
+//#pragma link C++ class boost::shared_ptr<I3DigitalLaunch>+;
 
 #pragma link C++ class I3DOMLaunch+;
-#pragma link C++ typedef I3DOMLaunchPtr;
-#pragma link C++ class boost::shared_ptr<I3DOMLaunch>+;
+//#pragma link C++ typedef I3DOMLaunchPtr;
+//#pragma link C++ class boost::shared_ptr<I3DOMLaunch>+;
 
 #pragma link C++ class I3TWRLaunch+;
-#pragma link C++ typedef I3TWRLaunchPtr;
-#pragma link C++ class boost::shared_ptr<I3TWRLaunch>+;
+//#pragma link C++ typedef I3TWRLaunchPtr;
+//#pragma link C++ class boost::shared_ptr<I3TWRLaunch>+;
 
 #pragma link C++ class I3RDMCLaunch+;
-#pragma link C++ typedef I3RDMCLaunchPtr;
-#pragma link C++ class boost::shared_ptr<I3RDMCLaunch>+;
+//#pragma link C++ typedef I3RDMCLaunchPtr;
+//#pragma link C++ class boost::shared_ptr<I3RDMCLaunch>+;
 
 #pragma link C++ class I3Direction+;
-#pragma link C++ typedef I3DirectionPtr;
-#pragma link C++ class boost::shared_ptr<I3Direction>+;
+//#pragma link C++ typedef I3DirectionPtr;
+//#pragma link C++ class boost::shared_ptr<I3Direction>+;
 
 #pragma link C++ class I3Directional+;
 #pragma link C++ class I3Energetic+;
 
 #pragma link C++ class I3Event+;
-#pragma link C++ typedef I3EventPtr;
-#pragma link C++ class boost::shared_ptr<I3Event>+;
+//#pragma link C++ typedef I3EventPtr;
+//#pragma link C++ class boost::shared_ptr<I3Event>+;
 
 #pragma link C++ class I3EventHeader+;
-#pragma link C++ typedef I3EventHeaderPtr;
-#pragma link C++ class boost::shared_ptr<I3EventHeader>+;
+//#pragma link C++ typedef I3EventHeaderPtr;
+//#pragma link C++ class boost::shared_ptr<I3EventHeader>+;
 
 #pragma link C++ class I3MCEvent+;
-#pragma link C++ typedef I3MCEventPtr;
-#pragma link C++ class boost::shared_ptr<I3MCEvent>+;
+//#pragma link C++ typedef I3MCEventPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCEvent>+;
 
 #pragma link C++ class I3MCEventHeader+;
-#pragma link C++ typedef I3MCEventHeaderPtr;
-#pragma link C++ class boost::shared_ptr<I3MCEventHeader>+;
+//#pragma link C++ typedef I3MCEventHeaderPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCEventHeader>+;
 
 #pragma link C++ class I3GeometryHeader+;
-#pragma link C++ typedef I3GeometryHeaderPtr;
-#pragma link C++ class boost::shared_ptr<I3GeometryHeader>+;
+//#pragma link C++ typedef I3GeometryHeaderPtr;
+//#pragma link C++ class boost::shared_ptr<I3GeometryHeader>+;
 
 #pragma link C++ class I3CalibrationHeader+;
-#pragma link C++ typedef I3CalibrationHeaderPtr;
-#pragma link C++ class boost::shared_ptr<I3CalibrationHeader>+;
+//#pragma link C++ typedef I3CalibrationHeaderPtr;
+//#pragma link C++ class boost::shared_ptr<I3CalibrationHeader>+;
 
 #pragma link C++ class I3Hit+;
-#pragma link C++ typedef I3HitPtr;
-#pragma link C++ class boost::shared_ptr<I3Hit>+;
+//#pragma link C++ typedef I3HitPtr;
+//#pragma link C++ class boost::shared_ptr<I3Hit>+;
 
 #pragma link C++ class I3Infinite+;
 #pragma link C++ class I3Localized+;
 
 #pragma link C++ class I3MCHit+;
-#pragma link C++ typedef I3MCHitPtr;
-#pragma link C++ class boost::shared_ptr<I3MCHit>+;
+//#pragma link C++ typedef I3MCHitPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCHit>+;
 
 #pragma link C++ class I3MCOMResponse+;
-#pragma link C++ typedef I3MCOMResponsePtr;
-#pragma link C++ class boost::shared_ptr<I3MCOMResponse>+;
+//#pragma link C++ typedef I3MCOMResponsePtr;
+//#pragma link C++ class boost::shared_ptr<I3MCOMResponse>+;
 
 #pragma link C++ class I3MCPMTResponse+;
-#pragma link C++ typedef I3MCPMTResponsePtr;
-#pragma link C++ class boost::shared_ptr<I3MCPMTResponse>+;
+//#pragma link C++ typedef I3MCPMTResponsePtr;
+//#pragma link C++ class boost::shared_ptr<I3MCPMTResponse>+;
 
 #pragma link C++ class I3MCPMTResponseRomeo+;
-#pragma link C++ typedef I3MCPMTResponseRomeoPtr;
-#pragma link C++ class boost::shared_ptr<I3MCPMTResponseRomeo>+;
+//#pragma link C++ typedef I3MCPMTResponseRomeoPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCPMTResponseRomeo>+;
 
 #pragma link C++ class I3PMTPulse+;
-#pragma link C++ typedef I3PMTPulsePtr;
-#pragma link C++ class boost::shared_ptr<I3PMTPulse>+;
+//#pragma link C++ typedef I3PMTPulsePtr;
+//#pragma link C++ class boost::shared_ptr<I3PMTPulse>+;
 
 #pragma link C++ class I3GaussianPMTPulse+;
-#pragma link C++ typedef I3GaussianPMTPulsePtr;
-#pragma link C++ class boost::shared_ptr<I3GaussianPMTPulse>+;
+//#pragma link C++ typedef I3GaussianPMTPulsePtr;
+//#pragma link C++ class boost::shared_ptr<I3GaussianPMTPulse>+;
 
 #pragma link C++ class I3AMANDAPMTPulse+;
-#pragma link C++ typedef I3AMANDAPMTPulsePtr;
-#pragma link C++ class boost::shared_ptr<I3AMANDAPMTPulse>+;
+//#pragma link C++ typedef I3AMANDAPMTPulsePtr;
+//#pragma link C++ class boost::shared_ptr<I3AMANDAPMTPulse>+;
 
 #pragma link C++ class I3MCParticleData+;
-#pragma link C++ typedef I3MCParticleDataPtr;
-#pragma link C++ class boost::shared_ptr<I3MCParticleData>;
+//#pragma link C++ typedef I3MCParticleDataPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCParticleData>;
 
 #pragma link C++ class I3NonComposite+;
 #pragma link C++ class I3NonLocalized+;
@@ -348,41 +348,41 @@
 #pragma link C++ class I3NonEnergetic+;
 
 #pragma link C++ class I3InIceParticle+;
-#pragma link C++ typedef I3InIceParticlePtr;
-#pragma link C++ class boost::shared_ptr<I3InIceParticle>;
+//#pragma link C++ typedef I3InIceParticlePtr;
+//#pragma link C++ class boost::shared_ptr<I3InIceParticle>;
 
 #pragma link C++ class I3IceTopParticle+;
-#pragma link C++ typedef I3IceTopParticlePtr;
-#pragma link C++ class boost::shared_ptr<I3IceTopParticle>+;
+//#pragma link C++ typedef I3IceTopParticlePtr;
+//#pragma link C++ class boost::shared_ptr<I3IceTopParticle>+;
 
 
 #pragma link C++ class I3MCTopShower+;
-#pragma link C++ typedef I3MCTopShowerPtr;
-#pragma link C++ class boost::shared_ptr<I3MCTopShower>+;
+//#pragma link C++ typedef I3MCTopShowerPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCTopShower>+;
 
 #pragma link C++ class I3OMGeoAMANDA+;
-#pragma link C++ typedef I3OMGeoAMANDAPtr;
-#pragma link C++ class boost::shared_ptr<I3OMGeoAMANDA>+;
+//#pragma link C++ typedef I3OMGeoAMANDAPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMGeoAMANDA>+;
 
 #pragma link C++ class I3OMGeoIceTop+;
-#pragma link C++ typedef I3OMGeoIceTopPtr;
-#pragma link C++ class boost::shared_ptr<I3OMGeoIceTop>+;
+//#pragma link C++ typedef I3OMGeoIceTopPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMGeoIceTop>+;
 
 #pragma link C++ class I3OMGeoIceCube+;
-#pragma link C++ typedef I3OMGeoIceCubePtr;
-#pragma link C++ class boost::shared_ptr<I3OMGeoIceCube>+;
+//#pragma link C++ typedef I3OMGeoIceCubePtr;
+//#pragma link C++ class boost::shared_ptr<I3OMGeoIceCube>+;
 
 #pragma link C++ class I3Geometry+;
-#pragma link C++ typedef I3GeometryPtr;
-#pragma link C++ class boost::shared_ptr<I3Geometry>+;
+//#pragma link C++ typedef I3GeometryPtr;
+//#pragma link C++ class boost::shared_ptr<I3Geometry>+;
 
 #pragma link C++ class I3OMResponse+;
-#pragma link C++ typedef I3OMResponsePtr;
-#pragma link C++ class boost::shared_ptr<I3OMResponse>+;
+//#pragma link C++ typedef I3OMResponsePtr;
+//#pragma link C++ class boost::shared_ptr<I3OMResponse>+;
 
 #pragma link C++ class I3OMResponseSelection+;
-#pragma link C++ typedef I3OMResponseSelectionPtr;
-#pragma link C++ class boost::shared_ptr<I3OMResponseSelection>+;
+//#pragma link C++ typedef I3OMResponseSelectionPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMResponseSelection>+;
 
 #pragma link C++ class I3OMSelectionDict+;
 //#pragma link C++ typedef MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy;
@@ -391,12 +391,12 @@
 //#pragma link C++ class boost::shared_ptr<I3OMSelectionDict>+;
 
 #pragma link C++ class I3OMListSelection+;
-#pragma link C++ typedef I3OMListSelectionPtr;
-#pragma link C++ class boost::shared_ptr<I3OMListSelection>+;
+//#pragma link C++ typedef I3OMListSelectionPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMListSelection>+;
 
 #pragma link C++ class I3GoodOMSelection+;
-#pragma link C++ typedef I3GoodOMSelectionPtr;
-#pragma link C++ class boost::shared_ptr<I3GoodOMSelection>+;
+//#pragma link C++ typedef I3GoodOMSelectionPtr;
+//#pragma link C++ class boost::shared_ptr<I3GoodOMSelection>+;
 
 #pragma link C++ class I3BadOMSelection+;
 //#pragma link C++ typedef I3BadOMSelectionPtr;
@@ -407,23 +407,23 @@
 //#pragma link C++ class VectorPolicy<OMKey>::ThePolicy+;
 
 #pragma link C++ class I3OMStatus+;
-#pragma link C++ typedef I3OMStatusPtr;
-#pragma link C++ class boost::shared_ptr<I3OMStatus>+;
+//#pragma link C++ typedef I3OMStatusPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMStatus>+;
 
 #pragma link C++ class I3OMStatusIceCube+;
-#pragma link C++ typedef I3OMStatusIceCubePtr;
-#pragma link C++ class boost::shared_ptr<I3OMStatusIceCube>+;
+//#pragma link C++ typedef I3OMStatusIceCubePtr;
+//#pragma link C++ class boost::shared_ptr<I3OMStatusIceCube>+;
 
 // tpm: my additions
 #pragma link C++ struct LinearFit+;
 
 #pragma link C++ class I3DOMCalibration+;
-#pragma link C++ typedef I3DOMCalibPtr;
-#pragma link C++ class boost::shared_ptr<I3DOMCalibration>+;
+//#pragma link C++ typedef I3DOMCalibPtr;
+//#pragma link C++ class boost::shared_ptr<I3DOMCalibration>+;
 
 #pragma link C++ class I3Calibration+;
-#pragma link C++ typedef I3CalibPtr;
-#pragma link C++ class boost::shared_ptr<I3Calibration>+;
+//#pragma link C++ typedef I3CalibPtr;
+//#pragma link C++ class boost::shared_ptr<I3Calibration>+;
 
 //#warning I3OMSlr problems, fixme
 //#if 1
@@ -437,71 +437,71 @@
 //#endif
 
 #pragma link C++ class I3Particle+;
-#pragma link C++ typedef I3ParticlePtr;
-#pragma link C++ class boost::shared_ptr<I3Particle>+;
-#pragma link C++ class vector<I3ParticlePtr>+;
+//#pragma link C++ typedef I3ParticlePtr;
+//#pragma link C++ class boost::shared_ptr<I3Particle>+;
+//#pragma link C++ class vector<I3ParticlePtr>+;
 
 #pragma link C++ class I3Position+;
-#pragma link C++ typedef I3PositionPtr;
-#pragma link C++ class boost::shared_ptr<I3Position>+;
+//#pragma link C++ typedef I3PositionPtr;
+//#pragma link C++ class boost::shared_ptr<I3Position>+;
 
 #pragma link C++ class I3Primary+;
 #pragma link C++ class I3TopShower+;
 
 #pragma link C++ class I3RecoHit+;
-#pragma link C++ typedef I3RecoHitPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoHit>+;
+//#pragma link C++ typedef I3RecoHitPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoHit>+;
 
 #pragma link C++ class I3RecoResult+;
-#pragma link C++ typedef I3RecoResultPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoResult>+;
+//#pragma link C++ typedef I3RecoResultPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoResult>+;
 
 #pragma link C++ class I3RecoResultRDMCFit+;
-#pragma link C++ typedef I3RecoResultRDMCFitPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoResultRDMCFit>+;
+//#pragma link C++ typedef I3RecoResultRDMCFitPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoResultRDMCFit>+;
 
 #pragma link C++ class I3RecoResultSingleParticle+;
-#pragma link C++ typedef I3RecoResultSingleParticlePtr;
-#pragma link C++ class boost::shared_ptr<I3RecoResultSingleParticle>+;
+//#pragma link C++ typedef I3RecoResultSingleParticlePtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoResultSingleParticle>+;
 
 #pragma link C++ class I3RecoResultSingleTrack+;
-#pragma link C++ typedef I3RecoResultSingleTrackPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoResultSingleTrack>+;
+//#pragma link C++ typedef I3RecoResultSingleTrackPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoResultSingleTrack>+;
 
 #pragma link C++ class I3Starting+;
 #pragma link C++ class I3Stopping+;
 
 #pragma link C++ class I3TankGeo+;
-#pragma link C++ typedef I3TankGeoPtr;
-#pragma link C++ class boost::shared_ptr<I3TankGeo>+;
+//#pragma link C++ typedef I3TankGeoPtr;
+//#pragma link C++ class boost::shared_ptr<I3TankGeo>+;
 
 #pragma link C++ class I3TankHit+;
-#pragma link C++ typedef I3TankHitPtr;
-#pragma link C++ class boost::shared_ptr<I3TankHit>+;
+//#pragma link C++ typedef I3TankHitPtr;
+//#pragma link C++ class boost::shared_ptr<I3TankHit>+;
 
 #pragma link C++ class I3TopGeometry+;
-#pragma link C++ typedef I3TopGeometryPtr;
-#pragma link C++ class boost::shared_ptr<I3TopGeometry>+;
+//#pragma link C++ typedef I3TopGeometryPtr;
+//#pragma link C++ class boost::shared_ptr<I3TopGeometry>+;
 
 #pragma link C++ class I3Track+;
-#pragma link C++ typedef I3TrackPtr;
-#pragma link C++ class boost::shared_ptr<I3Track>+;
+//#pragma link C++ typedef I3TrackPtr;
+//#pragma link C++ class boost::shared_ptr<I3Track>+;
 
-#pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
+//#pragma link C++ class vector<I3OMGeoAMANDAPtr>+;
 
-#pragma link C++ class std::pair<OMKey,boost::shared_ptr<I3OMGeo> >;
-#pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMResponse> >;
-#pragma link C++ class boost::shared_ptr<TObject>;
+//#pragma link C++ class std::pair<OMKey,boost::shared_ptr<I3OMGeo> >;
+//#pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMResponse> >;
+//#pragma link C++ class boost::shared_ptr<TObject>;
 
 #pragma link C++ class OMKey+;
-#pragma link C++ typedef OMKeyPtr;
-#pragma link C++ class boost::shared_ptr<OMKey>+;
+//#pragma link C++ typedef OMKeyPtr;
+//#pragma link C++ class boost::shared_ptr<OMKey>+;
 
-#pragma link C++ typedef StationKey;
+//#pragma link C++ typedef StationKey;
 
 #pragma link C++ class I3OMGeo+;
-#pragma link C++ typedef I3OMGeoPtr;
-#pragma link C++ class boost::shared_ptr<I3OMGeo>+;
+//#pragma link C++ typedef I3OMGeoPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMGeo>+;
 
 #pragma link C++ class I3Time+;
 
