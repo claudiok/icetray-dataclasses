@@ -69,9 +69,7 @@ dataclasses/I3Event.h \
 dataclasses/I3RecoResultSingleTrack.h \
 dataclasses/I3RecoResultSingleParticle.h \
 dataclasses/I3EventHeader.h \
-dataclasses/I3RecoResultTopCore.h \
 dataclasses/I3F2KRecoCascade.h \
-dataclasses/I3RecoResultTopDirection.h \
 dataclasses/I3F2KRecoTrack.h \
 dataclasses/I3ShowerCore.h \
 dataclasses/I3GaussianPMTPulse.h \

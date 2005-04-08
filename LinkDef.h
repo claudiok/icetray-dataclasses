@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.162 2005/04/08 17:59:51 olivas Exp $
-// $Revision: 1.162 $
-// $Date: 2005/04/08 17:59:51 $
+// $Id: LinkDef.h,v 1.163 2005/04/08 18:12:42 olivas Exp $
+// $Revision: 1.163 $
+// $Date: 2005/04/08 18:12:42 $
 //
 
 #ifdef __CINT__
@@ -467,14 +467,6 @@
 #pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ typedef I3RecoResultSingleTrackPtr;
 #pragma link C++ class boost::shared_ptr<I3RecoResultSingleTrack>+;
-
-#pragma link C++ class I3RecoResultTopCore+;
-#pragma link C++ typedef I3RecoResultTopCorePtr;
-#pragma link C++ class boost::shared_ptr<I3RecoResultTopCore>+;
-
-#pragma link C++ class I3RecoResultTopDirection+;
-#pragma link C++ typedef I3RecoResultTopDirectionPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoResultTopDirection>+;
 
 #pragma link C++ class I3Starting+;
 #pragma link C++ class I3Stopping+;
