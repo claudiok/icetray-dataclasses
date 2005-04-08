@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMSelectionTest.cxx,v 1.3 2005/02/09 17:45:03 deyoung Exp $
+ * $Id: I3OMSelectionTest.cxx,v 1.4 2005/04/08 09:38:30 pretz Exp $
  *
- * @version $Revision: 1.3 $
- * @date $Date: 2005/02/09 17:45:03 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/08 09:38:30 $
  * @author pretz
  *
  * @todo
@@ -18,8 +18,8 @@
 #include "dataclasses/I3OMResponse.h"
 #include "dataclasses/I3OMSelectionDict.h"
 #include "dataclasses/I3OMResponseSelection.h"
-#include "dataclasses/I3OddOMSelection.h"
-#include "dataclasses/I3EvenOMSelection.h"
+//#include "dataclasses/I3OddOMSelection.h"
+//#include "dataclasses/I3EvenOMSelection.h"
 #include "dataclasses/I3GoodOMSelection.h"
 #include "dataclasses/I3BadOMSelection.h"
 
@@ -145,59 +145,6 @@ namespace tut
   }
 
   template<> template<>
-  void object::test<2>()
-  {
-    cout<<"Testing OddOMSelection..."<<endl;
-    I3OMResponseSelectionPtr omrs(new I3OddOMSelection);
-    I3OMSelectionDict dict;
-    dict["foo"] = omrs;
-    I3OMSelector iter = dict.GetSelector("foo",responses);
-    ensure(iter->second == om_5_15);
-    ensure(iter->first == OMKey(-5,15));
-    iter++;
-    ensure(iter->second == om0_1);
-    iter++;
-    ensure(iter->second == om0_3);
-    iter++;
-    ensure(iter->second == om1_1);
-    iter++;
-    ensure(iter->second == om1_3);
-    iter++;
-    ensure(iter->second == om14_39);
-    ensure(iter->first == OMKey(14,39));
-    iter++;
-    ensure(iter.base() == iter.end());
-  }
-
-  template<> template<>
-  void object::test<3>() 
-  {
-    cout<<"Testing EvenOMSelection..."<<endl;
-    I3OMResponseSelectionPtr omrs(new I3EvenOMSelection);
-    I3OMSelectionDict dict;
-    dict["foo"] = omrs;
-    I3OMSelector iter = dict.GetSelector("foo",responses);
-    ensure(iter->second == om0_0);
-    iter++;
-    ensure(iter->second == om0_2);
-    iter++;
-    ensure(iter->second == om1_0);
-    iter++;
-    ensure(iter->second == om1_2);
-    iter++;
-    ensure(iter->second == om7_12);
-    ensure(iter->first == OMKey(7,12));
-    iter++;
-    ensure(iter->second == om26_2);
-    ensure(iter->first == OMKey(26,2));
-    iter++;
-    ensure(iter->second == om80_60);
-    ensure(iter->first == OMKey(80,60));
-    iter++;    
-    ensure(iter.base() == iter.end());
-  }
-
-  template<> template<>
   void object::test<4>() 
   {
     cout<<"Testing backwards iteration..."<<endl;
@@ -215,25 +162,6 @@ namespace tut
     ensure(iter->second == om0_1);
   }
   
-  template<> template<>
-  void object::test<5>() 
-  {
-    cout<<"Testing backwards iteration with a real selection..."<<endl;
-    I3OMResponseSelectionPtr omrs(new I3OddOMSelection);
-    I3OMSelectionDict dict;
-    dict["foo"] = omrs;
-    I3OMSelector iter = dict.GetSelector("foo",responses);
-    ensure(iter->second == om_5_15);
-    iter++;
-    ensure(iter->second == om0_1);
-    iter--;
-    ensure(iter->second == om_5_15);
-    iter++;
-    ensure(iter->second == om0_1);
-    iter++;
-    ensure(iter->second == om0_3);
-  }
-
   template<> template<>
   void object::test<6>() 
   {

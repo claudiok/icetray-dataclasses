@@ -9,12 +9,9 @@
 #include "dataclasses/I3DataReadout.h"
 #include "dataclasses/I3AMANDAAnalogReadout.h"
 #include "dataclasses/I3BasicTrack.h"
-#include "dataclasses/I3TriggerDict.h"
-#include "dataclasses/I3FilterDict.h"
 #include "dataclasses/I3MCHit.h"
 #include "dataclasses/I3Geometry.h"
 #include "dataclasses/I3RecoResultRDMCFit.h"
-#include "dataclasses/I3RecoResultAltTracks.h"
 #include "dataclasses/I3MCTrack.h"
 #include "dataclasses/I3MCCascade.h"
 #include "services/I3Logging.h"
@@ -96,23 +93,10 @@ namespace tut
     cout<<a;
     I3BasicTrack t;
     cout<<t;
-    I3TriggerDict trigger;
-    cout<<trigger;
-    I3FilterDict filter;
-    cout<<filter;
     I3MCHit mchit;
     mchit.SetTime(3.4);
     cout<<mchit;
   }
 
 
-  template<> template<>
-  void object::test<4>()
-  {
-    I3RecoResultAltTracks rrat;
-    rrat["foo"] = I3MCTrackPtr(new I3MCTrack());
-    rrat["bar"] = I3MCCascadePtr(new I3MCCascade());
-    cout<<rrat<<endl;
-    log_debug("here it is dumped to logging %s\n",rrat.ToString().c_str());
-  }
 }
