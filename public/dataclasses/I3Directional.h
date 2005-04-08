@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Directional.h,v 1.10 2005/04/07 19:41:44 dule Exp $
+ * $Id: I3Directional.h,v 1.11 2005/04/08 19:33:23 dule Exp $
  *
  * @file I3Directional.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/04/07 19:41:44 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/08 19:33:23 $
  * @author pretz
  */
 #ifndef I3DIRECTIONAL_H
@@ -27,50 +27,52 @@ class I3Directional
   /**
    * indicates that this cascade has a direction
    */
-  virtual bool HasDirection() const {return true;}
+  virtual bool HasDirection() const { return true; }
 
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return dir_;}
+  I3Direction GetDir() const { return dir_; }
 
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
+  void SetDir(I3Direction& d) { dir_.SetDirection(d); }
 
   /**
    * sets the direction of the track
    */
-  void SetDir(double zen, double azi) {dir_.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi) { dir_.SetDirection(zen,azi); }
 
   /**
    * sets the direction of the track
    */
-  void SetDir(double x, double y, double z) 
-    {dir_.SetDirection(x,y,z);}
+  void SetDir(double x, double y, double z) { dir_.SetDirection(x,y,z); }
 
   /**
    * gets the zenith of the cascade
    */
-  double GetZenith() const {return GetDir().GetZenith();}
+  double GetZenith() const { return dir_.GetZenith(); }
 
   /**
    * sets the zenith of the cascade
    */
-  void SetZenith(double zen) {
-    SetDir(zen,GetDir().GetAzimuth());}
+  void SetZenith(double zen) { SetDir(zen,dir_.GetAzimuth()); }
 
   /**
    * gets the azimuth of the cascade
    */
-  double GetAzimuth() const {return GetDir().GetAzimuth();}
+  double GetAzimuth() const { return dir_.GetAzimuth(); }
 
   /**
    * sets the Azimuth of the cascade
    */
-  void SetAzimuth(double azi) {
-    SetDir(GetDir().GetZenith(),azi);}
+  void SetAzimuth(double azi) { SetDir(dir_.GetZenith(),azi); }
+
+  /**
+	* sets all direction variables to NAN
+	*/
+  void ResetDir() { dir_.ResetDirection(); }
 
   /**
    * copies over all the interal data to the destination particle
@@ -84,7 +86,7 @@ class I3Directional
   }
 
   virtual void ToStream(ostream& o) const {
-	  o<<"Direction:"<<dir_<<"\n";
+	  o<<"Direction:\n"<<dir_<<"\n";
   }
 
  private:
