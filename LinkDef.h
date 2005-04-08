@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.161 2005/04/08 09:57:09 pretz Exp $
-// $Revision: 1.161 $
-// $Date: 2005/04/08 09:57:09 $
+// $Id: LinkDef.h,v 1.162 2005/04/08 17:59:51 olivas Exp $
+// $Revision: 1.162 $
+// $Date: 2005/04/08 17:59:51 $
 //
 
 #ifdef __CINT__
@@ -33,6 +33,11 @@
 #pragma link C++ class I3TrackImpl<I3Stopping,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Contained,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>+;
+
+#pragma link C++ class I3RecoResultSingleTopShower+;
+#pragma link C++ typedef I3RecoResultSingleTopShowerPtr;
+#pragma link C++ class boost::shared_ptr<I3RecoResultSingleTopShower>+;
+
 
 #pragma link C++ class I3BasicTrack+;
 #pragma link C++ class I3F2KRecoTrack+;
