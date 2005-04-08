@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.160 2005/04/07 20:25:07 olivas Exp $
-// $Revision: 1.160 $
-// $Date: 2005/04/07 20:25:07 $
+// $Id: LinkDef.h,v 1.161 2005/04/08 09:57:09 pretz Exp $
+// $Revision: 1.161 $
+// $Date: 2005/04/08 09:57:09 $
 //
 
 #ifdef __CINT__
@@ -76,6 +76,10 @@
 #pragma link C++ typedef I3MCCascadePtr;
 #pragma link C++ class boost::shared_ptr<I3MCCascade>+;
 
+#pragma link C++ class I3ShowerCore+;
+#pragma link C++ typedef I3ShowerCorePtr;
+#pragma link C++ class boost::shared_ptr<I3ShowerCore>+;
+
 #pragma link C++ class I3ShowerDirection+;
 #pragma link C++ class I3ShowerDirectionPtr;
 #pragma link C++ class boost::shared_ptr<I3ShowerDirection>+;
@@ -102,6 +106,19 @@
 #pragma link C++ typedef MapPolicy<string,I3DataReadoutPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<string,I3DataReadoutPtr>::ThePolicy+;
 #pragma link C++ typedef I3DataReadoutDictPtr;
+
+#pragma link C++ class I3DetectorStatus;
+#pragma link C++ typedef I3DetectorStatusPtr;
+#pragma link C++ class boost::shared_ptr<I3DetectorStatus>+;
+
+#pragma link C++ class I3DetectorStatusHeader;
+#pragma link C++ typedef I3DetectorStatusHeaderPtr;
+#pragma link C++ class boost::shared_ptr<I3DetectorStatusHeader>+;
+
+#pragma link C++ class I3DigitalReadout+;
+#pragma link C++ typedef I3DigitalReadoutPtr;
+#pragma link C++ class boost::shared_ptr<I3DigitalReadout>+;
+
 
 #pragma link C++ class I3InIceGeometry+;
 #pragma link C++ typedef MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy;
@@ -241,6 +258,10 @@
 #pragma link C++ class I3DOMLaunch+;
 #pragma link C++ typedef I3DOMLaunchPtr;
 #pragma link C++ class boost::shared_ptr<I3DOMLaunch>+;
+
+#pragma link C++ class I3TWRLaunch+;
+#pragma link C++ typedef I3TWRLaunchPtr;
+#pragma link C++ class boost::shared_ptr<I3TWRLaunch>+;
 
 #pragma link C++ class I3RDMCLaunch+;
 #pragma link C++ typedef I3RDMCLaunchPtr;
