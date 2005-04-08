@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.6 2005/02/08 20:04:27 deyoung Exp $
+ * $Id: I3OMSelectionDict.h,v 1.7 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/02/08 20:04:27 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author deyoung
  * @author troy
  */
@@ -33,7 +33,7 @@ typedef PtrPolicy<I3OMSelector>::ThePolicy I3OMSelectorPtr;
  *
  */
 class I3OMSelectionDict : public TObject, 
-			  public MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy 
+			  public STLMapStoragePolicy<string,I3OMResponseSelectionPtr>
 {
   
  public:

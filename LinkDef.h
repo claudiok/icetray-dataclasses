@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.166 2005/04/08 19:58:13 olivas Exp $
-// $Revision: 1.166 $
-// $Date: 2005/04/08 19:58:13 $
+// $Id: LinkDef.h,v 1.167 2005/04/08 20:36:08 olivas Exp $
+// $Revision: 1.167 $
+// $Date: 2005/04/08 20:36:08 $
 //
 
 #ifdef __CINT__
@@ -98,9 +98,9 @@
 //
 
 #pragma link C++ class I3InIceStatus+;
-#pragma link C++ typedef MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy;
-#pragma link C++ class MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy+;
-#pragma link C++ typedef I3InIceStatusPtr;
+//#pragma link C++ typedef MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy+;
+//#pragma link C++ typedef I3InIceStatusPtr;
 
 #pragma link C++ class I3RecoResultDict+;
 //#pragma link C++ typedef MapPolicy<string,I3RecoResultPtr>::ThePolicy;
@@ -126,18 +126,18 @@
 
 
 #pragma link C++ class I3InIceGeometry+;
-#pragma link C++ typedef MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3InIceGeometryPtr;
-#pragma link C++ class boost::shared_ptr<I3InIceGeometry>+;
+//#pragma link C++ typedef MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy+;
+//#pragma link C++ typedef I3InIceGeometryPtr;
+//#pragma link C++ class boost::shared_ptr<I3InIceGeometry>+;
 #pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMGeo> >+;
 
 // tpm: my addition
 #pragma link C++ class I3InIceCalibration+;
-#pragma link C++ typedef MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy+;
-#pragma link C++ typedef I3DOMCalibPtr;
-#pragma link C++ class I3DOMCalibPtr+;
+//#pragma link C++ typedef MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<OMKey,I3DOMCalibPtr>::ThePolicy+;
+//#pragma link C++ typedef I3DOMCalibPtr;
+//#pragma link C++ class I3DOMCalibPtr+;
 
 #pragma link C++ class I3MCHitSeries+;
 #pragma link C++ typedef VectorPolicy<I3MCHit>::ThePolicy;
@@ -164,38 +164,38 @@
 #pragma link C++ class boost::shared_ptr<I3RecoHitSeries>+;
 
 #pragma link C++ class I3ParticleMultiMap+;
-#pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
-#pragma link C++ class MultiMapPolicy<string,I3ParticlePtr>::ThePolicy+;
-#pragma link C++ typedef I3ParticleMultiMapPtr;
-#pragma link C++ class boost::shared_ptr<I3ParticleMultiMap>+;
+//#pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
+//#pragma link C++ class MultiMapPolicy<string,I3ParticlePtr>::ThePolicy+;
+//#pragma link C++ typedef I3ParticleMultiMapPtr;
+//#pragma link C++ class boost::shared_ptr<I3ParticleMultiMap>+;
 
 #pragma link C++ typedef TObjectPtr;
 #pragma link C++ class TObjectPtr+;
 #pragma link C++ class I3Bag+;
-#pragma link C++ typedef MapPolicy<string,TObjectPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<string,TObjectPtr>::ThePolicy+;
+//#pragma link C++ typedef MapPolicy<string,TObjectPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<string,TObjectPtr>::ThePolicy+;
 //#pragma link C++ typedef I3BagPtr;
 //#pragma link C++ class boost::shared_ptr<I3Bag>+;
 
 #pragma link C++ class I3OMResponseMap+;
-#pragma link C++ typedef MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy;
-#pragma link C++ class MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy+;
-#pragma link C++ typedef I3OMResponseMapPtr;
-#pragma link C++ class boost::shared_ptr<I3OMResponseMap>+;
+//#pragma link C++ typedef MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy+;
+//#pragma link C++ typedef I3OMResponseMapPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMResponseMap>+;
 #pragma link C++ class pair<OMKey,boost::shared_ptr<I3OMResponse> >+;
 
 #pragma link C++ class I3RecoHitSeriesDict+;
-#pragma link C++ typedef MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy+;
-#pragma link C++ typedef I3RecoHitSeriesDictPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoHitSeriesDict>+;
+//#pragma link C++ typedef MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy+;
+//#pragma link C++ typedef I3RecoHitSeriesDictPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoHitSeriesDict>+;
 
 #pragma link C++ class I3SurfModuleGeo+;
-#pragma link C++ typedef MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3SurfModuleGeoPtr;
-#pragma link C++ class I3SurfModuleGeoPtr+;
-#pragma link C++ class boost::shared_ptr<I3SurfModuleGeo>+;  
+//#pragma link C++ typedef MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy+;
+//#pragma link C++ typedef I3SurfModuleGeoPtr;
+//#pragma link C++ class I3SurfModuleGeoPtr+;
+//#pragma link C++ class boost::shared_ptr<I3SurfModuleGeo>+;  
 
 #pragma link C++ classs I3StationGeo+;
 #pragma link C++ typedef VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy;
@@ -205,11 +205,11 @@
 #pragma link C++ class boost::shared_ptr<I3StationGeo>+;
 
 #pragma link C++ class I3StationMap+;
-#pragma link C++ typedef MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3StationMapPtr;
-#pragma link C++ class I3StationMapPtr+;
-#pragma link C++ class boost::shared_ptr<I3StationMap>+;
+//#pragma link C++ typedef MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy+;
+//#pragma link C++ typedef I3StationMapPtr;
+//#pragma link C++ class I3StationMapPtr+;
+//#pragma link C++ class boost::shared_ptr<I3StationMap>+;
 
 #pragma link C++ class I3StationHit+;
 #pragma link C++ typedef VectorPolicy<I3TankHitPtr>::ThePolicy;
@@ -385,10 +385,10 @@
 #pragma link C++ class boost::shared_ptr<I3OMResponseSelection>+;
 
 #pragma link C++ class I3OMSelectionDict+;
-#pragma link C++ typedef MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy;
-#pragma link C++ class MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy+;
-#pragma link C++ typedef I3OMSelectionDictPtr;
-#pragma link C++ class boost::shared_ptr<I3OMSelectionDict>+;
+//#pragma link C++ typedef MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<string,I3OMResponseSelectionPtr>::ThePolicy+;
+//#pragma link C++ typedef I3OMSelectionDictPtr;
+//#pragma link C++ class boost::shared_ptr<I3OMSelectionDict>+;
 
 #pragma link C++ class I3OMListSelection+;
 #pragma link C++ typedef I3OMListSelectionPtr;

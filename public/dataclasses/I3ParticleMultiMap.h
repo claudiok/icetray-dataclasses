@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ParticleMultiMap.h,v 1.4 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3ParticleMultiMap.h,v 1.5 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3ParticleMultiMap.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author ehrlich
  */
 
@@ -20,7 +20,7 @@
  *
  * @todo figure out how to make copy and assignment private
  */
-class I3ParticleMultiMap : public TObject, public MultiMapPolicy<string, I3ParticlePtr>::ThePolicy
+class I3ParticleMultiMap : public TObject, public STLMultiMapStoragePolicy<string, I3ParticlePtr>
 {
  public:
   /**

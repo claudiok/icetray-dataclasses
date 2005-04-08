@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.5 2005/04/02 20:32:04 troy Exp $
+ * $Id: I3RecoHitSeriesDict.h,v 1.6 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3RecoHitSeriesDict.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/02 20:32:04 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -30,7 +30,7 @@
  * STLMapStoragePolicy.
  */
 class I3RecoHitSeriesDict : public TObject, 
-      	public MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy
+      	public STLMapStoragePolicy<string,I3RecoHitSeriesPtr>
 {
  public:
   /**
@@ -76,7 +76,7 @@ class I3RecoHitSeriesDict : public TObject,
   void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3RecoHitSeriesDict", 
-		  base_object< MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy >(*this));
+		  base_object< STLMapStoragePolicy<string,I3RecoHitSeriesPtr> >(*this));
   }
 
 

@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.4 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3SurfModuleGeo.h,v 1.5 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
@@ -30,7 +30,7 @@
  * this list is empty for SPASE. The orientantion gives the position
  * away from grid north (in radians).
  */
-class I3SurfModuleGeo : public TObject, public MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy {
+class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGeoPtr> {
 
  public:
 

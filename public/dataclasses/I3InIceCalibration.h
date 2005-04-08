@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3InIceCalibration.h,v 1.5 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3InIceCalibration.h,v 1.6 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3InIceCalibration.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author tmccauley
  */
 
@@ -24,7 +24,7 @@
 #include <TObject.h>
 
 class I3InIceCalibration : public TObject, 
-			   public MapPolicy<OMKey, I3DOMCalibPtr>::ThePolicy
+			   public STLMapStoragePolicy<OMKey, I3DOMCalibPtr>
 {
 public:
     I3InIceCalibration()

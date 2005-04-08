@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.7 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3OMResponseMap.h,v 1.8 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3OMResponseMap.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -28,7 +28,7 @@ using namespace std;
  *
  */
 class I3OMResponseMap : public TObject, 
-                        public MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy
+                        public STLMapStoragePolicy<OMKey,I3OMResponsePtr>
 {
   public:
   /**

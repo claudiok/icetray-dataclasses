@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.4 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3StationMap.h,v 1.5 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3StationMap.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
@@ -26,7 +26,7 @@
  * This class is meant to allow looping over station, e.g. for trigger
  * considerations
  */
-class I3StationMap : public TObject, public MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy {
+class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3StationGeoPtr> {
 
  public:
 

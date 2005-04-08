@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.21 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3InIceGeometry.h,v 1.22 2005/04/08 20:36:08 olivas Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.21 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2005/04/08 20:36:08 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -32,7 +32,7 @@
  */
 
 class I3InIceGeometry : public TObject, 
-	public MapPolicy<OMKey,I3OMGeoPtr>::ThePolicy
+	public STLMapStoragePolicy<OMKey,I3OMGeoPtr>
 {
   public:
   /** 
