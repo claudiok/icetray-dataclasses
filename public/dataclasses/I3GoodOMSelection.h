@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.10 2005/02/09 18:36:37 deyoung Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.11 2005/04/08 20:59:00 olivas Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/02/09 18:36:37 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/08 20:59:00 $
  * @author deyoung
  */
 
@@ -27,7 +27,7 @@ public:
   
   I3GoodOMSelection() {};
   
-  I3GoodOMSelection(const VectorPolicy<OMKey>::ThePolicy &theList) 
+  I3GoodOMSelection(const STLVectorStoragePolicy<OMKey> &theList) 
     : I3OMListSelection(theList) {};
   
   virtual ~I3GoodOMSelection() {};
@@ -49,14 +49,14 @@ public:
   /**
    * Returns the entire list of good OMs as a vector.  Equivalent to GetOMList().
    */
-  VectorPolicy<OMKey>::ThePolicy GetGoodOMs() const {
+  STLVectorStoragePolicy<OMKey> GetGoodOMs() const {
     return I3OMListSelection::GetOMList();
   };
   
   /** 
    * Set the list of good OMs all at once.  Equivalent to SetOMList().
    */
-  virtual void SetGoodOMs(const VectorPolicy<OMKey>::ThePolicy& good_list) {
+  virtual void SetGoodOMs(const STLVectorStoragePolicy<OMKey>& good_list) {
     I3OMListSelection::SetOMList(good_list);
   }
   

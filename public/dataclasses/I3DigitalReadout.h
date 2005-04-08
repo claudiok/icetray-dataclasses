@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.11 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3DigitalReadout.h,v 1.12 2005/04/08 20:59:00 olivas Exp $
  *
  * @file I3DigitalReadout.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/08 20:59:00 $
  * @author pretz
  * @author blaufuss
  *
@@ -31,7 +31,7 @@ using namespace std;
  * Derived classes such as I3DigitalTWRReadout may provide
  * additional information.
  */
-class I3DigitalReadout : public I3DataReadout, public VectorPolicy<I3DigitalLaunchPtr>::ThePolicy
+class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3DigitalLaunchPtr>
 {
  public:
   /**

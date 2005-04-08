@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMListSelection.h,v 1.3 2005/02/09 18:36:37 deyoung Exp $
+ *  $Id: I3OMListSelection.h,v 1.4 2005/04/08 20:59:00 olivas Exp $
  *
  * @file I3OMListSelection.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/02/09 18:36:37 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/08 20:59:00 $
  * @author deyoung
  */
 
@@ -26,7 +26,7 @@ public:
   
   I3OMListSelection() {};
   
-  I3OMListSelection(const VectorPolicy<OMKey>::ThePolicy &list) 
+  I3OMListSelection(const STLVectorStoragePolicy<OMKey> &list) 
     : omList_(list) {};
   
   virtual ~I3OMListSelection() {};
@@ -47,7 +47,7 @@ public:
   /**
    * Returns the list of OMs as a vector of OMKeys
    */
-  VectorPolicy<OMKey>::ThePolicy GetOMList() const {
+  STLVectorStoragePolicy<OMKey> GetOMList() const {
     return omList_;
   };
   
@@ -55,7 +55,7 @@ public:
    * Allows the list of OMs to be set all at once, overwriting any
    * existing list
    */ 
-  virtual void SetOMList(const VectorPolicy<OMKey>::ThePolicy& list) {
+  virtual void SetOMList(const STLVectorStoragePolicy<OMKey>& list) {
     if (omList_.Size() > 0) {
       log_warn("Overwriting list of OMs.");
       omList_.Clear();
@@ -74,7 +74,7 @@ public:
 
   virtual void ToStream(ostream& o) const {
     o << "  OM List: \n";
-    VectorPolicy<OMKey>::ThePolicy::const_iterator iter;
+    STLVectorStoragePolicy<OMKey>::const_iterator iter;
     for(iter = omList_.begin(); iter != omList_.end(); iter++) {
       o << *iter << "\n";
     }
@@ -85,7 +85,7 @@ public:
 
 private:
 
-  VectorPolicy<OMKey>::ThePolicy omList_;
+  STLVectorStoragePolicy<OMKey> omList_;
 
   ClassDef(I3OMListSelection,1);
 };

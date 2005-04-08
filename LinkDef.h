@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.167 2005/04/08 20:36:08 olivas Exp $
-// $Revision: 1.167 $
-// $Date: 2005/04/08 20:36:08 $
+// $Id: LinkDef.h,v 1.168 2005/04/08 20:59:00 olivas Exp $
+// $Revision: 1.168 $
+// $Date: 2005/04/08 20:59:00 $
 //
 
 #ifdef __CINT__
@@ -140,28 +140,28 @@
 //#pragma link C++ class I3DOMCalibPtr+;
 
 #pragma link C++ class I3MCHitSeries+;
-#pragma link C++ typedef VectorPolicy<I3MCHit>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3MCHit>::ThePolicy+;
-#pragma link C++ typedef I3MCHitSeriesPtr;
-#pragma link C++ class boost::shared_ptr<I3MCHitSeries>+;
+//#pragma link C++ typedef VectorPolicy<I3MCHit>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3MCHit>::ThePolicy+;
+//#pragma link C++ typedef I3MCHitSeriesPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCHitSeries>+;
 
 #pragma link C++ class I3PMTPulseVect+;
-#pragma link C++ typedef VectorPolicy<I3PMTPulsePtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3PMTPulsePtr>::ThePolicy+;
-#pragma link C++ typedef I3PMTPulseVectPtr;
-#pragma link C++ class boost::shared_ptr<I3PMTPulseVect>+;
+//#pragma link C++ typedef VectorPolicy<I3PMTPulsePtr>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3PMTPulsePtr>::ThePolicy+;
+//#pragma link C++ typedef I3PMTPulseVectPtr;
+//#pragma link C++ class boost::shared_ptr<I3PMTPulseVect>+;
 
 #pragma link C++ class I3DigitalReadout+;
-#pragma link C++ typedef VectorPolicy<I3DigitalLaunchPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3DigitalLaunchPtr>::ThePolicy+;
-#pragma link C++ typedef I3DigitalReadoutPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoHitSeries>+;
+//#pragma link C++ typedef VectorPolicy<I3DigitalLaunchPtr>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3DigitalLaunchPtr>::ThePolicy+;
+//#pragma link C++ typedef I3DigitalReadoutPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoHitSeries>+;
 
 #pragma link C++ class I3RecoHitSeries+;
-#pragma link C++ typedef VectorPolicy<I3RecoHitPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3RecoHitPtr>::ThePolicy+;
-#pragma link C++ typedef I3RecoHitSeriesPtr;
-#pragma link C++ class boost::shared_ptr<I3RecoHitSeries>+;
+//#pragma link C++ typedef VectorPolicy<I3RecoHitPtr>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3RecoHitPtr>::ThePolicy+;
+//#pragma link C++ typedef I3RecoHitSeriesPtr;
+//#pragma link C++ class boost::shared_ptr<I3RecoHitSeries>+;
 
 #pragma link C++ class I3ParticleMultiMap+;
 //#pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
@@ -198,11 +198,11 @@
 //#pragma link C++ class boost::shared_ptr<I3SurfModuleGeo>+;  
 
 #pragma link C++ classs I3StationGeo+;
-#pragma link C++ typedef VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy+;
-#pragma link C++ typedef I3StationGeoPtr;
-#pragma link C++ class I3StationGeoPtr+;
-#pragma link C++ class boost::shared_ptr<I3StationGeo>+;
+//#pragma link C++ typedef VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3SurfModuleGeoPtr>::ThePolicy+;
+//#pragma link C++ typedef I3StationGeoPtr;
+//#pragma link C++ class I3StationGeoPtr+;
+//#pragma link C++ class boost::shared_ptr<I3StationGeo>+;
 
 #pragma link C++ class I3StationMap+;
 //#pragma link C++ typedef MapPolicy<StationKey, I3StationGeoPtr>::ThePolicy;
@@ -212,13 +212,13 @@
 //#pragma link C++ class boost::shared_ptr<I3StationMap>+;
 
 #pragma link C++ class I3StationHit+;
-#pragma link C++ typedef VectorPolicy<I3TankHitPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3TankHitPtr>::ThePolicy+;
-#pragma link C++ typedef I3StationHitPtr;
-#pragma link C++ class I3StationHitPtr+;
+//#pragma link C++ typedef VectorPolicy<I3TankHitPtr>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3TankHitPtr>::ThePolicy+;
+//#pragma link C++ typedef I3StationHitPtr;
+//#pragma link C++ class I3StationHitPtr+;
 
-#pragma link C++ typedef VectorPolicy<I3StationHitPtr>::ThePolicy;
-#pragma link C++ class VectorPolicy<I3StationHitPtr>::ThePolicy+;
+//#pragma link C++ typedef VectorPolicy<I3StationHitPtr>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3StationHitPtr>::ThePolicy+;
 
 //
 // simple types with full value semantics
@@ -399,12 +399,12 @@
 #pragma link C++ class boost::shared_ptr<I3GoodOMSelection>+;
 
 #pragma link C++ class I3BadOMSelection+;
-#pragma link C++ typedef I3BadOMSelectionPtr;
-#pragma link C++ class boost::shared_ptr<I3BadOMSelection>+;
+//#pragma link C++ typedef I3BadOMSelectionPtr;
+//#pragma link C++ class boost::shared_ptr<I3BadOMSelection>+;
 
-#pragma link C++ class VectorPolicy<OMKey>;
-#pragma link C++ typedef VectorPolicy<OMKey>::ThePolicy;
-#pragma link C++ class VectorPolicy<OMKey>::ThePolicy+;
+//#pragma link C++ class VectorPolicy<OMKey>;
+//#pragma link C++ typedef VectorPolicy<OMKey>::ThePolicy;
+//#pragma link C++ class VectorPolicy<OMKey>::ThePolicy+;
 
 #pragma link C++ class I3OMStatus+;
 #pragma link C++ typedef I3OMStatusPtr;

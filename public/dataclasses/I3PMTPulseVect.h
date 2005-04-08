@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulseVect.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3PMTPulseVect.h,v 1.4 2005/04/08 20:59:00 olivas Exp $
  *
  * @file I3PMTPulseVect.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/08 20:59:00 $
  * @author deyoung
  */
 
@@ -25,7 +25,7 @@
  *
  */
 class I3PMTPulseVect : public TObject,
-		       public VectorPolicy<I3PMTPulsePtr>::ThePolicy
+		       public STLVectorStoragePolicy<I3PMTPulsePtr>
 {
 
 public:

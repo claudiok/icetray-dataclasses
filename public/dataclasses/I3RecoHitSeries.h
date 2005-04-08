@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.29 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3RecoHitSeries.h,v 1.30 2005/04/08 20:59:00 olivas Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.29 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.30 $
+ * @date $Date: 2005/04/08 20:59:00 $
  * @author ehrlich
  * @author pretz
  */
@@ -20,7 +20,7 @@
 /**
  * @brief A list of reco hits.
  */
-class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePolicy
+class I3RecoHitSeries : public TObject, public STLVectorStoragePolicy<I3RecoHitPtr>
 {
  public:
   /**
@@ -84,7 +84,7 @@ class I3RecoHitSeries : public TObject, public VectorPolicy<I3RecoHitPtr>::ThePo
   void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3RecoHitSeries", 
-		  base_object< VectorPolicy<I3RecoHitPtr>::ThePolicy >(*this));
+		  base_object< STLVectorStoragePolicy<I3RecoHitPtr> >(*this));
   }
 
 

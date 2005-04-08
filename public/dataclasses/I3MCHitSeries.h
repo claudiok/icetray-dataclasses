@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.24 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3MCHitSeries.h,v 1.25 2005/04/08 20:59:00 olivas Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.24 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.25 $
+ * @date $Date: 2005/04/08 20:59:00 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -24,7 +24,7 @@
  * variable (default 1) can be used to assign a statistical weighting
  * factor to the series as a whole, independent of the individual hits.
  */
-class I3MCHitSeries : public TObject, public VectorPolicy<I3MCHit>::ThePolicy 
+class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
 {
   double fWeight;
  public:
