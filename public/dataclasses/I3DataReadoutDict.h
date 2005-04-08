@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.11 2005/04/08 19:33:19 olivas Exp $
+ * $Id: I3DataReadoutDict.h,v 1.12 2005/04/08 20:16:21 olivas Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/08 19:33:19 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/08 20:16:21 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -80,7 +80,7 @@ class I3DataReadoutDict : public TObject,
   void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3DataReadoutDict", 
-		  base_object< MapPolicy<string,I3DataReadoutPtr>::ThePolicy >(*this));
+		  base_object< STLMapStoragePolicy<string,I3DataReadoutPtr> >(*this));
   }
 
   // ROOT macro
