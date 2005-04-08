@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.165 2005/04/08 19:33:19 olivas Exp $
-// $Revision: 1.165 $
-// $Date: 2005/04/08 19:33:19 $
+// $Id: LinkDef.h,v 1.166 2005/04/08 19:58:13 olivas Exp $
+// $Revision: 1.166 $
+// $Date: 2005/04/08 19:58:13 $
 //
 
 #ifdef __CINT__
@@ -174,8 +174,8 @@
 #pragma link C++ class I3Bag+;
 #pragma link C++ typedef MapPolicy<string,TObjectPtr>::ThePolicy;
 #pragma link C++ class MapPolicy<string,TObjectPtr>::ThePolicy+;
-#pragma link C++ typedef I3BagPtr;
-#pragma link C++ class boost::shared_ptr<I3Bag>+;
+//#pragma link C++ typedef I3BagPtr;
+//#pragma link C++ class boost::shared_ptr<I3Bag>+;
 
 #pragma link C++ class I3OMResponseMap+;
 #pragma link C++ typedef MapPolicy<OMKey,I3OMResponsePtr>::ThePolicy;

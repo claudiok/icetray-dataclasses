@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.21 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3Bag.h,v 1.22 2005/04/08 19:58:13 olivas Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.21 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.22 $
+ * @date $Date: 2005/04/08 19:58:13 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -35,7 +35,7 @@ typedef PtrPolicy<TObject>::ThePolicy TObjectPtr;
  * stuff that  doesn't really fit into the Data structure.  Just for 
  * 'temporary' or 'personal' use.
  */
-class I3Bag : public TObject, public MapPolicy<string,TObjectPtr>::ThePolicy
+class I3Bag : public TObject, public STLMapStoragePolicy<string,TObjectPtr>
 {
  public:
   /**
