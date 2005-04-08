@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.10 2005/04/02 20:32:04 troy Exp $
+ * $Id: I3DataReadoutDict.h,v 1.11 2005/04/08 19:33:19 olivas Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/04/02 20:32:04 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/08 19:33:19 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -37,7 +37,7 @@
  */
 
 class I3DataReadoutDict : public TObject, 
-	public MapPolicy<string,I3DataReadoutPtr>::ThePolicy
+	public STLMapStoragePolicy<string,I3DataReadoutPtr>
 {
  public:
   /**
