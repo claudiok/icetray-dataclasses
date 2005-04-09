@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAMANDA.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3OMGeoAMANDA.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMGeoAMANDA.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -76,7 +76,7 @@ class I3OMGeoAMANDA : public I3OMGeo
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3OMGeoAMANDA>::ThePolicy I3OMGeoAMANDAPtr;
+typedef shared_ptr<I3OMGeoAMANDA>  I3OMGeoAMANDAPtr;
 
 #endif
 

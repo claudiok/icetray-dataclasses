@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.18 2005/03/31 18:39:37 troy Exp $
+ * $Id: I3MCHit.h,v 1.19 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3MCHit.h
- * @version $Revision: 1.18 $
- * @date $Date: 2005/03/31 18:39:37 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -79,7 +79,7 @@ class I3MCHit : public I3Hit
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3MCHit>::ThePolicy I3MCHitPtr;
+typedef shared_ptr<I3MCHit>  I3MCHitPtr;
 
 #endif
 

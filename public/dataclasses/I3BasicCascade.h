@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3BasicCascade.h,v 1.7 2005/02/09 19:30:46 ehrlich Exp $
+    $Id: I3BasicCascade.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
 
     @file I3BasicCascade.h
-    @version $Revision: 1.7 $
-    @date $Date: 2005/02/09 19:30:46 $
+    @version $Revision: 1.8 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author deyoung
 */
 
@@ -48,6 +48,6 @@ public:
 /**
  * pointer type to insulate users from memory management issues
  */
-typedef PtrPolicy<I3BasicCascade>::ThePolicy I3BasicCascadePtr;
+typedef shared_ptr<I3BasicCascade>  I3BasicCascadePtr;
 
 #endif

@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalLaunch.h,v 1.4 2004/08/31 02:56:29 pretz Exp $
+ * $Id: I3DigitalLaunch.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DigitalLaunch.h
- * @version $Revision: 1.4 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author blaufuss
  */
 #ifndef I3DIGITALLAUNCH_H
@@ -71,6 +71,6 @@ inline ostream& operator<<(ostream& o,const I3DigitalLaunch& g)
 /**
  * pointer type to insulate users from memory management schemes
  */
-typedef PtrPolicy<I3DigitalLaunch>::ThePolicy I3DigitalLaunchPtr;
+typedef shared_ptr<I3DigitalLaunch>  I3DigitalLaunchPtr;
 
 #endif

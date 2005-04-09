@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMListSelection.h,v 1.4 2005/04/08 20:59:00 olivas Exp $
+ *  $Id: I3OMListSelection.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMListSelection.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/08 20:59:00 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author deyoung
  */
 
@@ -15,7 +15,7 @@
 #include "I3OMResponseSelection.h"
 
 class I3OMListSelection;
-typedef PtrPolicy<I3OMListSelection>::ThePolicy I3OMListSelectionPtr;
+typedef shared_ptr<I3OMListSelection>  I3OMListSelectionPtr;
 
 /**
  * @brief Virtual base class for OMSelections that check against a list of OMKeys

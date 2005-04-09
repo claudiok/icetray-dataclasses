@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.h,v 1.7 2005/04/08 20:59:00 olivas Exp $
+    $Id: I3StationHit.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
     @file I3StationHit.h
-    @version $Revision: 1.7 $
+    @version $Revision: 1.8 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
@@ -111,7 +111,7 @@ inline ostream& operator<<(ostream& o,const I3StationHit& hit)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3StationHit>::ThePolicy I3StationHitPtr;
+typedef shared_ptr<I3StationHit>  I3StationHitPtr;
 
 /**
  @brief Functor for find_if

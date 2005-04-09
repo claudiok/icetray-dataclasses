@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3CalibrationHeader.h,v 1.1 2005/02/07 17:22:22 tmccauley Exp $
+ * $Id: I3CalibrationHeader.h,v 1.2 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3CalibrationHeader.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/02/07 17:22:22 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author tmccauley
  */
 
@@ -56,6 +56,6 @@ private:
     ClassDef(I3CalibrationHeader,1);
 };
 
-typedef PtrPolicy<I3CalibrationHeader>::ThePolicy I3CalibrationHeaderPtr;
+typedef shared_ptr<I3CalibrationHeader>  I3CalibrationHeaderPtr;
 
 #endif //I3CALIBRATIONHEADER_H

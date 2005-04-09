@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceGeometry.h,v 1.22 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3InIceGeometry.h,v 1.23 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3InIceGeometry.h
- * @version $Revision: 1.22 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -87,7 +87,7 @@ inline ostream& operator<<(ostream& o,const I3InIceGeometry& v)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3InIceGeometry>::ThePolicy I3InIceGeometryPtr;
+typedef shared_ptr<I3InIceGeometry>  I3InIceGeometryPtr;
 
 #endif //I3INICEGEOMETRY_H
  

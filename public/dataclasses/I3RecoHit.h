@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHit.h,v 1.11 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3RecoHit.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RecoHit.h
- * @version $Revision: 1.11 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -60,7 +60,7 @@ class I3RecoHit : public I3Hit
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RecoHit>::ThePolicy I3RecoHitPtr;
+typedef shared_ptr<I3RecoHit>  I3RecoHitPtr;
 
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleData.h,v 1.7 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3MCParticleData.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3MCParticleData.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  *
  */
@@ -102,6 +102,6 @@ inline ostream& operator<<(ostream& o, const I3MCParticleData& data)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3MCParticleData>::ThePolicy I3MCParticleDataPtr;
+typedef shared_ptr<I3MCParticleData>  I3MCParticleDataPtr;
 
 #endif //I3MCPARTICLEDATA_H

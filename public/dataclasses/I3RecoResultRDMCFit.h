@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.14 2005/04/07 19:37:03 olivas Exp $
+ * $Id: I3RecoResultRDMCFit.h,v 1.15 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.14 $
- * @date $Date: 2005/04/07 19:37:03 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 
@@ -110,7 +110,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RecoResultRDMCFit>::ThePolicy I3RecoResultRDMCFitPtr;
+typedef shared_ptr<I3RecoResultRDMCFit>  I3RecoResultRDMCFitPtr;
 
 
 #endif

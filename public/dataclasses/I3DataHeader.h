@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.16 2005/04/02 17:50:11 olivas Exp $
+ * $Id: I3DataHeader.h,v 1.17 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.16 $
- * @date $Date: 2005/04/02 17:50:11 $
+ * @version $Revision: 1.17 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -113,6 +113,6 @@ inline ostream& operator<<(ostream& o,const I3DataHeader& header)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3DataHeader>::ThePolicy I3DataHeaderPtr;
+typedef shared_ptr<I3DataHeader>  I3DataHeaderPtr;
 
 #endif //I3DATAHEADER_H

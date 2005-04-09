@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.17 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.17 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -105,6 +105,6 @@ class I3RecoResultSingleTrack : public I3RecoResult
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RecoResultSingleTrack>::ThePolicy I3RecoResultSingleTrackPtr;
+typedef shared_ptr<I3RecoResultSingleTrack>  I3RecoResultSingleTrackPtr;
 
 #endif

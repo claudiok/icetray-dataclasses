@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
+ * $Id: OMKey.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 
@@ -122,6 +122,6 @@ inline ostream& operator<<(ostream& o,const OMKey& key)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<OMKey>::ThePolicy OMKeyPtr;
+typedef shared_ptr<OMKey>  OMKeyPtr;
 
 #endif

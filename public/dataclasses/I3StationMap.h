@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.5 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3StationMap.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3StationMap.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
@@ -67,6 +67,6 @@ class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3St
 /**
  * isolate the user from the memory management
  */
-typedef PtrPolicy<I3StationMap>::ThePolicy I3StationMapPtr;
+typedef shared_ptr<I3StationMap>  I3StationMapPtr;
 
 #endif

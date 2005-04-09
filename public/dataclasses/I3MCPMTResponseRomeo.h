@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.6 2005/04/04 18:40:36 pretz Exp $
+ * $Id: I3MCPMTResponseRomeo.h,v 1.7 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3MCPMTResponseRomeo.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/04/04 18:40:36 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author klein
  * @author deyoung
  * @author ehrlich
@@ -84,6 +84,6 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
 /** 
  * pointer type to insulate users from memory managemnt issues
  */
-typedef PtrPolicy<I3MCPMTResponseRomeo>::ThePolicy I3MCPMTResponseRomeoPtr;
+typedef shared_ptr<I3MCPMTResponseRomeo>  I3MCPMTResponseRomeoPtr;
 
 #endif

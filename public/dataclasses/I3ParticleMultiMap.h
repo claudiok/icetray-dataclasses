@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ParticleMultiMap.h,v 1.5 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3ParticleMultiMap.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3ParticleMultiMap.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  */
 
@@ -71,6 +71,6 @@ inline ostream& operator<<(ostream& o,const I3ParticleMultiMap& rhs)
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3ParticleMultiMap>::ThePolicy I3ParticleMultiMapPtr;
+typedef shared_ptr<I3ParticleMultiMap>  I3ParticleMultiMapPtr;
 
 #endif

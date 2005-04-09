@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.5 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3SurfModuleGeo.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
@@ -92,6 +92,6 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
 /**
  * hide the memory management from the user
  */
-typedef PtrPolicy<I3SurfModuleGeo>::ThePolicy I3SurfModuleGeoPtr;
+typedef shared_ptr<I3SurfModuleGeo>  I3SurfModuleGeoPtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.41 2005/04/07 18:24:22 olivas Exp $
+    $Id: I3OMResponse.h,v 1.42 2005/04/09 03:02:10 olivas Exp $
 
     @file I3OMResponse.h
-    @version $Revision: 1.41 $
-    @date $Date: 2005/04/07 18:24:22 $
+    @version $Revision: 1.42 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author ehrlich
     @author troy
     @author pretz
@@ -115,6 +115,6 @@ inline ostream& operator<<(ostream& o,I3OMResponse& resp)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3OMResponse>::ThePolicy I3OMResponsePtr;
+typedef shared_ptr<I3OMResponse>  I3OMResponsePtr;
 
 #endif

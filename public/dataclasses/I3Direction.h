@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.13 2005/04/06 21:39:59 olivas Exp $
+ * $Id: I3Direction.h,v 1.14 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/06 21:39:59 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.13 2005/04/06 21:39:59 olivas Exp $
+// $Id: I3Direction.h,v 1.14 2005/04/09 03:02:10 olivas Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -255,6 +255,6 @@ inline ostream& operator<<(ostream& o,const I3Direction& dir)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3Direction>::ThePolicy I3DirectionPtr;
+typedef shared_ptr<I3Direction>  I3DirectionPtr;
 
 #endif

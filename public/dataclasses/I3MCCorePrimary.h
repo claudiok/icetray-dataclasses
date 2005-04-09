@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCCorePrimary.h,v 1.1 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3MCCorePrimary.h,v 1.2 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3MCCorePrimary.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author pretz
  */
@@ -34,6 +34,6 @@ class I3MCCorePrimary : public I3PrimaryImpl<I3Directional,
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3MCCorePrimary>::ThePolicy I3MCCorePrimaryPtr;
+typedef shared_ptr<I3MCCorePrimary>  I3MCCorePrimaryPtr;
 
 #endif

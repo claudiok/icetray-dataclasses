@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.12 2005/04/08 20:59:00 olivas Exp $
+ * $Id: I3DigitalReadout.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DigitalReadout.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/08 20:59:00 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  * @author blaufuss
  *
@@ -87,7 +87,7 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3DigitalReadout>::ThePolicy I3DigitalReadoutPtr;
+typedef shared_ptr<I3DigitalReadout>  I3DigitalReadoutPtr;
 
 #endif
 

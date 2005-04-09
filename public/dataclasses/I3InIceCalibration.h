@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3InIceCalibration.h,v 1.6 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3InIceCalibration.h,v 1.7 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3InIceCalibration.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author tmccauley
  */
 
@@ -82,7 +82,7 @@ inline ostream& operator<<(ostream& o,const I3InIceCalibration& v)
     return o;
 }
 
-typedef PtrPolicy<I3InIceCalibration>::ThePolicy I3InIceCalibPtr;
+typedef shared_ptr<I3InIceCalibration>  I3InIceCalibPtr;
 
 #endif // I3INICECALIBRATION_H
 

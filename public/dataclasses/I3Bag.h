@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Bag.h,v 1.22 2005/04/08 19:58:13 olivas Exp $
+ * $Id: I3Bag.h,v 1.23 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Bag.h
- * @version $Revision: 1.22 $
- * @date $Date: 2005/04/08 19:58:13 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -24,7 +24,7 @@
 /**
  * pointer typedeffed away to insulate users from memory management
  */ 
-typedef PtrPolicy<TObject>::ThePolicy TObjectPtr;
+typedef shared_ptr<TObject>  TObjectPtr;
 
 
 /**
@@ -91,6 +91,6 @@ inline ostream& operator<<(ostream& o,const I3Bag& bag)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3Bag>::ThePolicy I3BagPtr;
+typedef shared_ptr<I3Bag>  I3BagPtr;
 
 #endif //I3BAG_H

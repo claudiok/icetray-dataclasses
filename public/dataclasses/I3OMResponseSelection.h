@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.9 2005/02/09 18:36:37 deyoung Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.10 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/02/09 18:36:37 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author deyoung
  * @author troy
  */
@@ -24,7 +24,7 @@ class I3OMResponseSelection;
 /**
  * Pointer definition for use with smart pointers.
  */
-typedef PtrPolicy<I3OMResponseSelection>::ThePolicy I3OMResponseSelectionPtr;
+typedef shared_ptr<I3OMResponseSelection>  I3OMResponseSelectionPtr;
 
 /**
  * @brief Base class for selecting I3OMResponses

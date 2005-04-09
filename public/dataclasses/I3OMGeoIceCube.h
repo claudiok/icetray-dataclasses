@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIceCube.h,v 1.1 2004/07/06 14:15:31 pretz Exp $
+ * $Id: I3OMGeoIceCube.h,v 1.2 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMGeoIceCube.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/07/06 14:15:31 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -64,7 +64,7 @@ class I3OMGeoIceCube : public I3OMGeo
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3OMGeoIceCube>::ThePolicy I3OMGeoIceCubePtr;
+typedef shared_ptr<I3OMGeoIceCube>  I3OMGeoIceCubePtr;
 
 #endif
 

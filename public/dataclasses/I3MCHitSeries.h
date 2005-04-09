@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.25 2005/04/08 20:59:00 olivas Exp $
+ * $Id: I3MCHitSeries.h,v 1.26 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.25 $
- * @date $Date: 2005/04/08 20:59:00 $
+ * @version $Revision: 1.26 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -104,6 +104,6 @@ inline ostream& operator<<(ostream& o,const I3MCHitSeries& series)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3MCHitSeries>::ThePolicy I3MCHitSeriesPtr;
+typedef shared_ptr<I3MCHitSeries>  I3MCHitSeriesPtr;
 
 #endif

@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3DOMCalibration.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -293,6 +293,6 @@ inline ostream& operator<<(ostream& o, const I3DOMCalibration& c)
     return o;
 }
 
-typedef PtrPolicy<I3DOMCalibration>::ThePolicy I3DOMCalibPtr;
+typedef shared_ptr<I3DOMCalibration>  I3DOMCalibPtr;
 
 #endif

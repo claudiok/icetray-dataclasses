@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.7 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3OMSelectionDict.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author deyoung
  * @author troy
  */
@@ -22,7 +22,7 @@ using namespace std;
 #include <boost/iterator/filter_iterator.hpp>
 
 typedef boost::filter_iterator<I3OMResponseSelection,I3OMResponseMap::iterator> I3OMSelector;
-typedef PtrPolicy<I3OMSelector>::ThePolicy I3OMSelectorPtr;
+typedef shared_ptr<I3OMSelector>  I3OMSelectorPtr;
 #endif
 
 /**
@@ -138,6 +138,6 @@ inline ostream& operator<<(ostream& o,const I3OMSelectionDict& v)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3OMSelectionDict>::ThePolicy I3OMSelectionDictPtr;
+typedef shared_ptr<I3OMSelectionDict>  I3OMSelectionDictPtr;
 
 #endif

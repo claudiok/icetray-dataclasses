@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatus.h,v 1.7 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3OMStatus.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMStatus.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  */
@@ -96,6 +96,6 @@ inline ostream& operator<<(ostream& o,const I3OMStatus& status)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3OMStatus>::ThePolicy I3OMStatusPtr;
+typedef shared_ptr<I3OMStatus>  I3OMStatusPtr;
 
 #endif

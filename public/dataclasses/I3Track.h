@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.30 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3Track.h,v 1.31 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.30 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.31 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 
@@ -160,6 +160,6 @@ class I3Track : public I3InIceParticle
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3Track>::ThePolicy I3TrackPtr;
+typedef shared_ptr<I3Track>  I3TrackPtr;
 
 #endif

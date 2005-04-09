@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  *
  */
@@ -122,6 +122,6 @@ private:
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3AMANDAAnalogReadout>::ThePolicy I3AMANDAAnalogReadoutPtr;
+typedef shared_ptr<I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutPtr;
 #endif
 

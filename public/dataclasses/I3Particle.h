@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.19 2005/04/01 22:38:41 olivas Exp $
+ * $Id: I3Particle.h,v 1.20 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.19 $
- * @date $Date: 2005/04/01 22:38:41 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  *
  */
@@ -236,6 +236,6 @@ inline ostream& operator<<(ostream& o,const I3Particle& part)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3Particle>::ThePolicy I3ParticlePtr;
+typedef shared_ptr<I3Particle>  I3ParticlePtr;
 
 #endif

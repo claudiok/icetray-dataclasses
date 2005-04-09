@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.25 2005/03/31 18:39:37 troy Exp $
+ * $Id: I3Hit.h,v 1.26 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Hit.h
- * @version $Revision: 1.25 $
- * @date $Date: 2005/03/31 18:39:37 $
+ * @version $Revision: 1.26 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -106,7 +106,7 @@ inline ostream& operator<<(ostream& o,const I3Hit& hit)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3Hit>::ThePolicy I3HitPtr;
+typedef shared_ptr<I3Hit>  I3HitPtr;
 
 #endif
 

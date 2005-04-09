@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DirectionalCascade.h,v 1.8 2005/02/09 19:30:46 ehrlich Exp $
+    $Id: I3DirectionalCascade.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
 
     @file I3DirectionalCascade.h
-    @version $Revision: 1.8 $
-    @date $Date: 2005/02/09 19:30:46 $
+    @version $Revision: 1.9 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author deyoung
 */
 
@@ -47,6 +47,6 @@ public:
 /** 
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3DirectionalCascade>::ThePolicy I3DirectionalCascadePtr;
+typedef shared_ptr<I3DirectionalCascade>  I3DirectionalCascadePtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTopShower.h,v 1.4 2005/04/08 19:09:50 olivas Exp $
+ * $Id: I3RecoResultSingleTopShower.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RecoResultSingleTopShower.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/08 19:09:50 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author Peter Niessen
  * @author dule
  */
@@ -81,6 +81,6 @@ class I3RecoResultSingleTopShower : public I3RecoResultSingleParticle
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RecoResultSingleTopShower>::ThePolicy I3RecoResultSingleTopShowerPtr;
+typedef shared_ptr<I3RecoResultSingleTopShower>  I3RecoResultSingleTopShowerPtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.17 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3TankGeo.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3TankGeo.h
- * @version $Revision: 1.17 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_
@@ -94,7 +94,7 @@ inline ostream& operator<<(ostream& o, const I3TankGeo tank)
 /**
  * a pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3TankGeo>::ThePolicy I3TankGeoPtr;
+typedef shared_ptr<I3TankGeo>  I3TankGeoPtr;
 
 #endif
 

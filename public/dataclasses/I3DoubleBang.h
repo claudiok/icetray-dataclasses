@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DoubleBang.h,v 1.7 2004/08/12 17:33:33 pretz Exp $
+    $Id: I3DoubleBang.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
 
     @file I3DoubleBang.h
-    @version $Revision: 1.7 $
-    @date $Date: 2004/08/12 17:33:33 $
+    @version $Revision: 1.8 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author deyoung
 */
 
@@ -52,6 +52,6 @@ class I3DoubleBang : public I3TrackImpl<I3Contained,
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3DoubleBang>::ThePolicy I3DoubleBangPtr;
+typedef shared_ptr<I3DoubleBang>  I3DoubleBangPtr;
 
 #endif

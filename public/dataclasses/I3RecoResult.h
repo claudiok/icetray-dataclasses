@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.31 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id: I3RecoResult.h,v 1.32 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RecoResult.h
- * @version $Revision: 1.31 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @version $Revision: 1.32 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -75,6 +75,6 @@ inline ostream& operator<<(ostream& o,I3RecoResult& result)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3RecoResult>::ThePolicy I3RecoResultPtr;
+typedef shared_ptr<I3RecoResult>  I3RecoResultPtr;
 
 #endif

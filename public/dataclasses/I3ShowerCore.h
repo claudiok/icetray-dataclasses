@@ -1,11 +1,11 @@
 /**
  * Copyright (C) 2004
  * The IceCube collaboration
- * $Id: I3ShowerCore.h,v 1.2 2004/08/03 18:06:17 blaufuss Exp $
+ * $Id: I3ShowerCore.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3ShowerCore.h
- * @version $Revision: 1.2 $
- * @date $Date: 2004/08/03 18:06:17 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author Peter Niessen
  */
 
@@ -33,6 +33,6 @@ class I3ShowerCore
  * Typedeffed pointer which allows for change of technical details
  * later.
  */       
-typedef PtrPolicy<I3ShowerCore>::ThePolicy I3ShowerCorePtr;
+typedef shared_ptr<I3ShowerCore>  I3ShowerCorePtr;
 
 #endif

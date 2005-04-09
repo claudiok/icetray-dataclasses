@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCCascade.h,v 1.12 2005/04/04 15:49:25 pretz Exp $
+    $Id: I3MCCascade.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
 
     @file I3MCCascade.h
-    @version $Revision: 1.12 $
-    @date $Date: 2005/04/04 15:49:25 $
+    @version $Revision: 1.13 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author deyoung
 */
 
@@ -59,6 +59,6 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
 /**
  * pointer typedeffed away to insulate users from memory management
  */
-typedef PtrPolicy<I3MCCascade>::ThePolicy I3MCCascadePtr;
+typedef shared_ptr<I3MCCascade>  I3MCCascadePtr;
 
 #endif

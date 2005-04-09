@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TWRLaunch.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3TWRLaunch.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3TWRLaunch.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  */
 #ifndef I3TWRLAUNCH_H
@@ -57,6 +57,6 @@ class I3TWRLaunch : public I3DigitalLaunch
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3TWRLaunch>::ThePolicy I3TWRLaunchPtr;
+typedef shared_ptr<I3TWRLaunch>  I3TWRLaunchPtr;
 #endif
 

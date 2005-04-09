@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.6 2005/04/04 15:49:25 pretz Exp $
+    $Id: I3TankHit.h,v 1.7 2005/04/09 03:02:10 olivas Exp $
     @file I3TankHit.h
-    @version $Revision: 1.6 $
+    @version $Revision: 1.7 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -122,7 +122,7 @@ inline ostream& operator<<(ostream& o,const I3TankHit& tankhit)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3TankHit>::ThePolicy I3TankHitPtr;
+typedef shared_ptr<I3TankHit>  I3TankHitPtr;
 
 
 

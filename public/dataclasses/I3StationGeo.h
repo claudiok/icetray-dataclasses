@@ -1,10 +1,10 @@
 /**
  * copyright (C) 2004
- * $Id: I3StationGeo.h,v 1.5 2005/04/08 20:59:00 olivas Exp $
+ * $Id: I3StationGeo.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3StationGeo.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/08 20:59:00 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author niessen Wed Sep  1 20:55:17 EDT 2004
  */
 
@@ -51,7 +51,7 @@ class I3StationGeo : public TObject, public STLVectorStoragePolicy<I3SurfModuleG
 
 };
 
-typedef PtrPolicy<I3StationGeo>::ThePolicy I3StationGeoPtr;
+typedef shared_ptr<I3StationGeo>  I3StationGeoPtr;
 
 #endif
  

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.30 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3OMGeo.h,v 1.31 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.30 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.31 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -190,7 +190,7 @@ inline ostream& operator<<(ostream& o,const I3OMGeo& g)
 /**
  * pointer typedeffed away to insulate users from memory management
  */
-typedef PtrPolicy<I3OMGeo>::ThePolicy I3OMGeoPtr;
+typedef shared_ptr<I3OMGeo>  I3OMGeoPtr;
 
 #endif
 

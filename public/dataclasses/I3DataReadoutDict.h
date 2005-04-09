@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataReadoutDict.h,v 1.12 2005/04/08 20:16:21 olivas Exp $
+ * $Id: I3DataReadoutDict.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DataReadoutDict.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/08 20:16:21 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -101,7 +101,7 @@ inline ostream& operator<<(ostream& o,const I3DataReadoutDict& v)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3DataReadoutDict>::ThePolicy I3DataReadoutDictPtr;
+typedef shared_ptr<I3DataReadoutDict>  I3DataReadoutDictPtr;
 
 #endif
 

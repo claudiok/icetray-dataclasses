@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleParticle.h,v 1.2 2005/04/07 19:37:03 olivas Exp $
+ * $Id: I3RecoResultSingleParticle.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RecoResultSingleParticle.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/04/07 19:37:03 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author dule
  */
 
@@ -89,6 +89,6 @@ class I3RecoResultSingleParticle : public I3RecoResult
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RecoResultSingleParticle>::ThePolicy I3RecoResultSingleParticlePtr;
+typedef shared_ptr<I3RecoResultSingleParticle>  I3RecoResultSingleParticlePtr;
 
 #endif

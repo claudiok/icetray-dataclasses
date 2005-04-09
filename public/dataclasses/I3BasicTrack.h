@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.7 2004/07/19 16:46:01 pretz Exp $
+    $Id: I3BasicTrack.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
 
     @file I3BasicTrack.h
-    @version $Revision: 1.7 $
-    @date $Date: 2004/07/19 16:46:01 $
+    @version $Revision: 1.8 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author deyoung
 */
 
@@ -45,5 +45,5 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
 /**
  * pointer typedeffed away to insulate users from memory management
  */
-typedef PtrPolicy<I3BasicTrack>::ThePolicy I3BasicTrackPtr;
+typedef shared_ptr<I3BasicTrack>  I3BasicTrackPtr;
 #endif

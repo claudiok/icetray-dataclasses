@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.30 2005/04/08 20:59:00 olivas Exp $
+ * $Id: I3RecoHitSeries.h,v 1.31 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.30 $
- * @date $Date: 2005/04/08 20:59:00 $
+ * @version $Revision: 1.31 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author pretz
  */
@@ -102,7 +102,7 @@ inline ostream& operator<<(ostream& o, const I3RecoHitSeries& series)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3RecoHitSeries>::ThePolicy I3RecoHitSeriesPtr;
+typedef shared_ptr<I3RecoHitSeries>  I3RecoHitSeriesPtr;
 
 #endif
 

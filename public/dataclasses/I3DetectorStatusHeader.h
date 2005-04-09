@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DetectorStatusHeader.h,v 1.3 2004/06/30 17:20:26 pretz Exp $
+ * $Id: I3DetectorStatusHeader.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DetectorStatusHeader.h
- * @version $Revision: 1.3 $
- * @date $Date: 2004/06/30 17:20:26 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 #ifndef I3DETECTORSTATUSHEADER_H
@@ -69,6 +69,6 @@ class I3DetectorStatusHeader : public I3DataHeader
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3DetectorStatusHeader>::ThePolicy I3DetectorStatusHeaderPtr;
+typedef shared_ptr<I3DetectorStatusHeader>  I3DetectorStatusHeaderPtr;
 
 #endif 

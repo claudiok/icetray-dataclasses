@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.12 2005/04/04 18:40:36 pretz Exp $
+ * $Id: I3EventHeader.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3EventHeader.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/04 18:40:36 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -93,6 +93,6 @@ class I3EventHeader : public I3DataHeader{
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3EventHeader>::ThePolicy I3EventHeaderPtr;
+typedef shared_ptr<I3EventHeader>  I3EventHeaderPtr;
 
 #endif //I3EVENTHEADER_H

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.10 2005/04/08 20:59:00 olivas Exp $
+ *  $Id: I3BadOMSelection.h,v 1.11 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/04/08 20:59:00 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author deyoung
  */
 
@@ -93,6 +93,6 @@ private:
 /**
  * Pointer definition for use with smart pointers.
  */
-typedef PtrPolicy<I3BadOMSelection>::ThePolicy I3BadOMSelectionPtr;
+typedef shared_ptr<I3BadOMSelection>  I3BadOMSelectionPtr;
 
 #endif

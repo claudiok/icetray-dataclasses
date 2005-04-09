@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoCascade.h,v 1.3 2005/02/09 19:30:46 ehrlich Exp $
+    $Id: I3F2KRecoCascade.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
 
     @file I3F2KRecoCascade.h
-    @version $Revision: 1.3 $
-    @date $Date: 2005/02/09 19:30:46 $
+    @version $Revision: 1.4 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author ehrlich
 */
 
@@ -47,6 +47,6 @@ class I3F2KRecoCascade : public I3CascadeImpl<I3Directional,
   ClassDef(I3F2KRecoCascade,1);
 };
 
-typedef PtrPolicy<I3F2KRecoCascade>::ThePolicy I3F2KRecoCascadePtr;
+typedef shared_ptr<I3F2KRecoCascade>  I3F2KRecoCascadePtr;
 
 #endif

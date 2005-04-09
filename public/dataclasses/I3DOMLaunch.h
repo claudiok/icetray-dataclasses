@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.14 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3DOMLaunch.h,v 1.15 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.14 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author klein
  * @author blaufuss
  *
@@ -311,7 +311,7 @@ class I3DOMLaunch : public I3DigitalLaunch
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3DOMLaunch>::ThePolicy I3DOMLaunchPtr;
+typedef shared_ptr<I3DOMLaunch>  I3DOMLaunchPtr;
 
 #endif
 

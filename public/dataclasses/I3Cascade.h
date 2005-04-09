@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.14 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3Cascade.h,v 1.15 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.14 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -78,6 +78,6 @@ class I3Cascade : public I3InIceParticle{
 /** 
  * pointer type to insulate users from memory management issues
  */
-typedef PtrPolicy<I3Cascade>::ThePolicy I3CascadePtr;
+typedef shared_ptr<I3Cascade>  I3CascadePtr;
 
 #endif

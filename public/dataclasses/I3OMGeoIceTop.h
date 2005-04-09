@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIceTop.h,v 1.1 2004/09/03 23:32:08 niessen Exp $
+ * $Id: I3OMGeoIceTop.h,v 1.2 2005/04/09 03:02:10 olivas Exp $
  * 
  * @file I3OMGeoIceTop.h
- * @version $Revision: 1.1 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author niessen
  */
 
@@ -69,7 +69,7 @@ class I3OMGeoIceTop : public I3OMGeo {
 /**
  * define a pointer with the current storage policy
  */
-typedef PtrPolicy<I3OMGeoIceTop>::ThePolicy I3OMGeoIceTopPtr;
+typedef shared_ptr<I3OMGeoIceTop>  I3OMGeoIceTopPtr;
 
 #endif
  

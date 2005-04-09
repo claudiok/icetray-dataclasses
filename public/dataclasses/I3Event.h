@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.46 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3Event.h,v 1.47 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.46 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.47 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -156,6 +156,6 @@ inline ostream& operator<<(ostream& o,const I3Event& evt)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3Event>::ThePolicy I3EventPtr;
+typedef shared_ptr<I3Event>  I3EventPtr;
 
 #endif

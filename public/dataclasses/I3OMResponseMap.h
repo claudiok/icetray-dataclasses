@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.8 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3OMResponseMap.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMResponseMap.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -82,7 +82,7 @@ inline ostream& operator<<(ostream& o,const I3OMResponseMap& v)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3OMResponseMap>::ThePolicy I3OMResponseMapPtr;
+typedef shared_ptr<I3OMResponseMap>  I3OMResponseMapPtr;
 
 /** 
  * Convenience typedef

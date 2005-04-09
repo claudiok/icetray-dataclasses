@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIceCube.h,v 1.5 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3OMStatusIceCube.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3OMStatusIceCube.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -283,7 +283,7 @@ class I3OMStatusIceCube : public I3OMStatus
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3OMStatusIceCube>::ThePolicy I3OMStatusIceCubePtr;
+typedef shared_ptr<I3OMStatusIceCube>  I3OMStatusIceCubePtr;
 
 #endif
 

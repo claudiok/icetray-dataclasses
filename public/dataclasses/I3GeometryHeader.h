@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3GeometryHeader.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3GeometryHeader.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3GeometryHeader.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -109,6 +109,6 @@ class I3GeometryHeader : public I3DataHeader
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3GeometryHeader>::ThePolicy I3GeometryHeaderPtr;
+typedef shared_ptr<I3GeometryHeader>  I3GeometryHeaderPtr;
 
 #endif //I3GEOMETRYHEADER_H

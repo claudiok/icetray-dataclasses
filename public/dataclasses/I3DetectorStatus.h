@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DetectorStatus.h,v 1.7 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3DetectorStatus.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3DetectorStatus.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 #ifndef I3DETECTORSTATUS_H
@@ -80,7 +80,7 @@ inline ostream& operator<<(ostream& o,const I3DetectorStatus& stat)
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3DetectorStatus>::ThePolicy I3DetectorStatusPtr;
+typedef shared_ptr<I3DetectorStatus>  I3DetectorStatusPtr;
 
 
 #endif // I3MONITORING_H

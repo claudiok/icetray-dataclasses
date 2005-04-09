@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulse.h,v 1.3 2005/04/01 22:38:41 olivas Exp $
+ * $Id: I3PMTPulse.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3PMTPulse.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/04/01 22:38:41 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author deyoung
  *
  */
@@ -70,7 +70,7 @@ private:
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3PMTPulse>::ThePolicy I3PMTPulsePtr;
+typedef shared_ptr<I3PMTPulse>  I3PMTPulsePtr;
 
 #endif
 

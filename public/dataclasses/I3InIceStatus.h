@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceStatus.h,v 1.8 2005/04/08 20:36:08 olivas Exp $
+ * $Id: I3InIceStatus.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3InIceStatus.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/08 20:36:08 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 #ifndef I3INICESTATUSDATA_H
@@ -81,6 +81,6 @@ inline ostream& operator<<(ostream& o, const I3InIceStatus& status)
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3InIceStatus>::ThePolicy I3InIceStatusPtr;
+typedef shared_ptr<I3InIceStatus>  I3InIceStatusPtr;
 
 #endif

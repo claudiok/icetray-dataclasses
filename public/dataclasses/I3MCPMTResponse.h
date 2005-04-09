@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.13 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3MCPMTResponse.h,v 1.14 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author klein
  */
 
@@ -90,7 +90,7 @@ inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)
 /** 
  * pointer type to insulate users from memory managemnt issues
  */
-typedef PtrPolicy<I3MCPMTResponse>::ThePolicy I3MCPMTResponsePtr;
+typedef shared_ptr<I3MCPMTResponse>  I3MCPMTResponsePtr;
 
 #endif
 

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrack.h,v 1.4 2004/08/04 20:11:41 ehrlich Exp $
+    $Id: I3F2KRecoTrack.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
 
     @file I3F2KRecoTrack.h
-    @version $Revision: 1.4 $
-    @date $Date: 2004/08/04 20:11:41 $
+    @version $Revision: 1.5 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author deyoung
 */
 
@@ -48,6 +48,6 @@ class I3F2KRecoTrack : public I3TrackImpl<I3Infinite,
 /**
  * pointer typedeffed away to insulate users from memory management
  */
-typedef PtrPolicy<I3F2KRecoTrack>::ThePolicy I3F2KRecoTrackPtr;
+typedef shared_ptr<I3F2KRecoTrack>  I3F2KRecoTrackPtr;
 
 #endif

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.17 2005/04/07 18:24:22 olivas Exp $
+ * $Id: I3TopGeometry.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3TopGeometry.h
- * @version $Revision: 1.17 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -70,7 +70,7 @@ class I3TopGeometry : public TObject {
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3TopGeometry>::ThePolicy I3TopGeometryPtr;
+typedef shared_ptr<I3TopGeometry>  I3TopGeometryPtr;
 
 
 #endif

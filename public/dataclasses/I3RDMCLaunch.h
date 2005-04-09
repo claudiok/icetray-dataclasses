@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RDMCLaunch.h,v 1.4 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3RDMCLaunch.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3RDMCLaunch.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author ehrlich
  */
 #ifndef I3RDMCLAUNCH_H
@@ -57,6 +57,6 @@ class I3RDMCLaunch : public I3DigitalLaunch
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RDMCLaunch>::ThePolicy I3RDMCLaunchPtr;
+typedef shared_ptr<I3RDMCLaunch>  I3RDMCLaunchPtr;
 #endif
 

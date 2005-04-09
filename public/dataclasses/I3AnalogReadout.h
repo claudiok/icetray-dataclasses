@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3AnalogReadout.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -57,6 +57,6 @@ private:
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3AnalogReadout>::ThePolicy I3AnalogReadoutPtr;
+typedef shared_ptr<I3AnalogReadout>  I3AnalogReadoutPtr;
 #endif
 

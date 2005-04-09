@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTopShower.h,v 1.2 2005/04/04 15:49:25 pretz Exp $
+    $Id: I3MCTopShower.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
 
     @file I3MCTopShower.h
-    @version $Revision: 1.2 $
-    @date $Date: 2005/04/04 15:49:25 $
+    @version $Revision: 1.3 $
+    @date $Date: 2005/04/09 03:02:10 $
     @author blaufuss
 */
 
@@ -58,6 +58,6 @@ class I3MCTopShower : public I3TopShowerImpl<I3Directional,
 /** 
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3MCTopShower>::ThePolicy I3MCTopShowerPtr;
+typedef shared_ptr<I3MCTopShower>  I3MCTopShowerPtr;
 
 #endif

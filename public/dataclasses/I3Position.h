@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.17 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3Position.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.17 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.17 2005/04/04 15:49:25 pretz Exp $
+// $Id: I3Position.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -272,6 +272,6 @@ inline ostream& operator<<(ostream& o,const I3Position& pos)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3Position>::ThePolicy I3PositionPtr;
+typedef shared_ptr<I3Position>  I3PositionPtr;
 
 #endif

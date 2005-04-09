@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.11 2005/04/08 20:59:00 olivas Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/08 20:59:00 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author deyoung
  */
 
@@ -15,7 +15,7 @@
 #include "I3OMListSelection.h"
 
 class I3GoodOMSelection;
-typedef PtrPolicy<I3GoodOMSelection>::ThePolicy I3GoodOMSelectionPtr;
+typedef shared_ptr<I3GoodOMSelection>  I3GoodOMSelectionPtr;
 
 /**
  * @brief OMSelection class that selects all OMResponses whose OM keys are in

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceParticle.h,v 1.2 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3InIceParticle.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3InIceParticle.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author blaufuss
  */
 #ifndef I3INICEPARTICLE_H
@@ -65,6 +65,6 @@ class I3InIceParticle : public I3Particle
 /**
  * pointer type to insulate users from memory management issues
  */
-typedef PtrPolicy<I3InIceParticle>::ThePolicy I3InIceParticlePtr;
+typedef shared_ptr<I3InIceParticle>  I3InIceParticlePtr;
 
 #endif //I3INICEPARTICLE_H
