@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3InIceStatusTest.cxx,v 1.4 2004/10/11 07:06:11 troy Exp $
+    $Id: I3IceCubeStatusTest.cxx,v 1.1 2005/04/10 00:30:48 pretz Exp $
 
-    @version $Revision: 1.4 $
-    @date $Date: 2004/10/11 07:06:11 $
+    @version $Revision: 1.1 $
+    @date $Date: 2005/04/10 00:30:48 $
     @author pretz
 
     @todo
@@ -12,7 +12,7 @@
 
 #include "TUT/tut.h"
 
-#include "dataclasses/I3InIceStatus.h"
+#include "dataclasses/I3IceCubeStatus.h"
 #include "TFile.h"
 #include "TTree.h"
 #include "services/I3Logging.h"
@@ -23,18 +23,18 @@ using std::endl;
 
 namespace tut
 {
-  struct I3InIceStatusTest
+  struct I3IceCubeStatusTest
   {
   };
 
-  typedef test_group<I3InIceStatusTest> factory;
+  typedef test_group<I3IceCubeStatusTest> factory;
 
   typedef factory::object object;
 }
 
 namespace
 {
-  static tut::factory t("I3InIceStatusTest");
+  static tut::factory t("I3IceCubeStatusTest");
 }
 
 namespace tut
@@ -44,7 +44,7 @@ namespace tut
    */
   void object::test<1>() 
   {
-     I3InIceStatusPtr ptr(new I3InIceStatus());
+     I3IceCubeStatusPtr ptr(new I3IceCubeStatus());
   }
   
   /**
@@ -52,9 +52,9 @@ namespace tut
    */
   void object::test<2>()
   {
-     I3InIceStatusPtr ptr(new I3InIceStatus());
+     I3IceCubeStatusPtr ptr(new I3IceCubeStatus());
 
-     /** @todo should fill some data for I3InIceStatus here */
+     /** @todo should fill some data for I3IceCubeStatus here */
 
      TFile f_out("test.out.root","RECREATE");
      ptr->Write();
@@ -62,16 +62,16 @@ namespace tut
 
      TFile f_in("test.out.root");
      TObject* object_in =
-		f_in.FindObjectAny("I3InIceStatus");
+		f_in.FindObjectAny("I3IceCubeStatus");
      f_in.Close();
      ensure("the read-in pointer is non-zero",object_in);
      
-     I3InIceStatus* tested_in = dynamic_cast<I3InIceStatus*>(object_in);
+     I3IceCubeStatus* tested_in = dynamic_cast<I3IceCubeStatus*>(object_in);
      ensure("the read-in pointer is of the right type",tested_in);
 
-     I3InIceStatusPtr ptr_in(tested_in);
+     I3IceCubeStatusPtr ptr_in(tested_in);
     
-    /** @todo should check the read-in data for I3InIceStatus here */
+    /** @todo should check the read-in data for I3IceCubeStatus here */
 
   }
    
@@ -79,22 +79,22 @@ namespace tut
     * check branching it to a tree
     */
    void object::test<3>(){
-   I3InIceStatusPtr ptr(new I3InIceStatus());
+   I3IceCubeStatusPtr ptr(new I3IceCubeStatus());
    /** @todo add some setting of data here */
  
-   I3InIceStatus* raw_ptr = &(*ptr);
+   I3IceCubeStatus* raw_ptr = &(*ptr);
    TTree tree("TestTree","Icecube");
-   tree.Branch("branch","I3InIceStatus",&raw_ptr);
+   tree.Branch("branch","I3IceCubeStatus",&raw_ptr);
    
    tree.Fill();
 
-   I3InIceStatus* raw_ptr_in = new I3InIceStatus();
-   I3InIceStatusPtr ptr_in (raw_ptr_in);
+   I3IceCubeStatus* raw_ptr_in = new I3IceCubeStatus();
+   I3IceCubeStatusPtr ptr_in (raw_ptr_in);
 
    tree.SetBranchAddress("branch",&raw_ptr_in);
    tree.GetEvent(0);
 
-   /** @todo add some checking of the data of I3InIceStatus here */
+   /** @todo add some checking of the data of I3IceCubeStatus here */
 
    }
 
@@ -103,12 +103,12 @@ namespace tut
     * and reading the tree back in, and finding the object in the tree.
     */
    void object::test<4>(){
-   I3InIceStatusPtr ptr(new I3InIceStatus());
+   I3IceCubeStatusPtr ptr(new I3IceCubeStatus());
    /** @todo add some setting of data here */
                                                                                 
-   I3InIceStatus* raw_ptr = &(*ptr);
+   I3IceCubeStatus* raw_ptr = &(*ptr);
    TTree tree("TestTree","Icecube");
-   tree.Branch("branch","I3InIceStatus",&raw_ptr);
+   tree.Branch("branch","I3IceCubeStatus",&raw_ptr);
                                                                                 
    tree.Fill();
 
@@ -121,19 +121,19 @@ namespace tut
    TTree* tree_in = (TTree*)file_in.FindObjectAny("TestTree");
    ensure("the test tree exists",tree_in);
                                                             
-   I3InIceStatus* raw_ptr_in = new I3InIceStatus();
-   I3InIceStatusPtr ptr_in (raw_ptr_in);
+   I3IceCubeStatus* raw_ptr_in = new I3IceCubeStatus();
+   I3IceCubeStatusPtr ptr_in (raw_ptr_in);
                                                                                 
    tree_in->SetBranchAddress("branch",&raw_ptr_in);
    tree_in->GetEvent(0);
 
-   /** @todo add some checking of the data of I3InIceStatus here */
+   /** @todo add some checking of the data of I3IceCubeStatus here */
 
    delete tree_in;
    }
 
    void object::test<5>(){
-      I3InIceStatus the_class;
+      I3IceCubeStatus the_class;
       cout<<the_class<<"\n";
       cout<<the_class.ToString()<<"\n";
       log_debug("object written to debug %s\n",the_class.ToString().c_str());

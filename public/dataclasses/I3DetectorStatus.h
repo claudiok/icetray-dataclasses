@@ -2,18 +2,18 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DetectorStatus.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3DetectorStatus.h,v 1.9 2005/04/10 00:30:48 pretz Exp $
  *
  * @file I3DetectorStatus.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/10 00:30:48 $
  * @author pretz
  */
 #ifndef I3DETECTORSTATUS_H
 #define I3DETECTORSTATUS_H
 
 #include "StoragePolicy.h"
-#include "I3InIceStatus.h"
+#include "I3IceCubeStatus.h"
 #include <sstream>
 
 /**
@@ -24,8 +24,9 @@
  * top-level object in the frame related to this 'Detector Status' information.
  *
  */
-class I3DetectorStatus : public TObject{
-  I3InIceStatus inIceStatus_;
+class I3DetectorStatus : public TObject
+{
+  I3IceCubeStatus icecubeStatus_;
 
  public:
   /**
@@ -41,17 +42,17 @@ class I3DetectorStatus : public TObject{
   /**
    * @return the Atmosphere as a constant object
    */
-  const I3InIceStatus& GetInIceStatus() const { return inIceStatus_;}
+  const I3IceCubeStatus& GetIceCubeStatus() const { return icecubeStatus_;}
 
   /**
-   * @return the InIceStatus as a non-const object
+   * @return the IceCubeStatus as a non-const object
    */
-  I3InIceStatus& GetInIceStatus() { return inIceStatus_;}
+  I3IceCubeStatus& GetIceCubeStatus() { return icecubeStatus_;}
 
   virtual void ToStream(ostream& o) const
     {
       o<<" [ I3DetectorStatus ]"
-       << inIceStatus_;
+       << icecubeStatus_;
     }
 
   virtual string ToString() const

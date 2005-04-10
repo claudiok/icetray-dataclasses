@@ -89,7 +89,7 @@ dataclasses/I3InIceGeometry.h \
 dataclasses/I3SurfModuleGeo.h \
 dataclasses/I3InIceParticle.h \
 dataclasses/I3TWRLaunch.h \
-dataclasses/I3InIceStatus.h \
+dataclasses/I3IceCubeStatus.h \
 dataclasses/I3TankGeo.h \
 dataclasses/I3Infinite.h \
 dataclasses/I3TankHit.h \

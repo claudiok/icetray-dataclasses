@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.169 2005/04/08 22:19:12 olivas Exp $
-// $Revision: 1.169 $
-// $Date: 2005/04/08 22:19:12 $
+// $Id: LinkDef.h,v 1.170 2005/04/10 00:30:48 pretz Exp $
+// $Revision: 1.170 $
+// $Date: 2005/04/10 00:30:48 $
 //
 
 #ifdef __CINT__
@@ -97,10 +97,10 @@
 // 'prototype for blahblah does not match any in class blahblah'
 //
 
-#pragma link C++ class I3InIceStatus+;
+#pragma link C++ class I3IceCubeStatus+;
 //#pragma link C++ typedef MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy;
 //#pragma link C++ class MapPolicy<OMKey,I3OMStatusIceCubePtr>::ThePolicy+;
-//#pragma link C++ typedef I3InIceStatusPtr;
+//#pragma link C++ typedef I3IceCubeStatusPtr;
 
 #pragma link C++ class I3RecoResultDict+;
 //#pragma link C++ typedef MapPolicy<string,I3RecoResultPtr>::ThePolicy;
