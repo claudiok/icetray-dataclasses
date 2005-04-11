@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
+ * $Id: OMKey.h,v 1.10 2005/04/11 15:19:34 olivas Exp $
  *
  * @file OMKey.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/11 15:19:34 $
  * @author pretz
  */
 
@@ -29,39 +29,39 @@ using namespace std;
  */
 class OMKey : public TObject //, public pair<int,unsigned int>
 {
-  int fStringNumber;
-  unsigned int fOMNumber;
+  int stringNumber_;
+  unsigned int omNumber_;
  public:
   /**
    * constructor
    */
-  OMKey() : fStringNumber(0), fOMNumber(0) {} //: pair<int,unsigned int>(0,0){}
+  OMKey() : stringNumber_(0), omNumber_(0) {} //: pair<int,unsigned int>(0,0){}
 
   /**
    * destructor
    */
   OMKey(int str,unsigned int om) 
-    : fStringNumber(str), fOMNumber(om){}
+    : stringNumber_(str), omNumber_(om){}
 
   /**
    * retrieves the string number for this OMKey
    */
-  int GetString() const { return fStringNumber;}
+  int GetString() const { return stringNumber_;}
 
   /**
    * Sets the string number for this OM
    */
-  void SetString(int str){fStringNumber = str;}
+  void SetString(int str){stringNumber_ = str;}
 
   /**
    * gets the OM number on the string
    */
-  unsigned int GetOM() const { return fOMNumber;}
+  unsigned int GetOM() const { return omNumber_;}
 
   /**
    * sets the OM number on the string
    */
-  void SetOM(unsigned int om){fOMNumber = om;}
+  void SetOM(unsigned int om){omNumber_ = om;}
 
   /**
    * equality operator.  
@@ -70,7 +70,7 @@ class OMKey : public TObject //, public pair<int,unsigned int>
    */
   bool operator==(const OMKey& rhs) const
     {
-      if(rhs.fOMNumber == fOMNumber && rhs.fStringNumber == fStringNumber)
+      if(rhs.omNumber_ == omNumber_ && rhs.stringNumber_ == stringNumber_)
 	return true;
       return false;
     }
@@ -87,6 +87,15 @@ class OMKey : public TObject //, public pair<int,unsigned int>
       return true;
     }
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("StringNumber",  stringNumber_);
+    ar & make_nvp("OMNumber",  omNumber_);
+
+  }
   // ROOT macro
   ClassDef(OMKey,1);
 };
