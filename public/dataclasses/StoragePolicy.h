@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.21 2005/04/02 20:32:04 troy Exp $
-    @version $Revision: 1.21 $
-    @date $Date: 2005/04/02 20:32:04 $
+    $Id: StoragePolicy.h,v 1.22 2005/04/12 17:08:51 troy Exp $
+    @version $Revision: 1.22 $
+    @date $Date: 2005/04/12 17:08:51 $
 
     @author troy d. straszheim
 */
@@ -74,6 +74,9 @@ namespace boost
     template <class Base, class Derived, class Retval>
       Retval base_object(Derived &d);
 #endif
+#ifndef BOOST_SERIALIZATION_IS_ABSTRACT_HPP
+#define BOOST_IS_ABSTRACT(X)
+#endif
   }
 }
 
@@ -82,24 +85,24 @@ using boost::serialization::base_object;
 
 //#endif
 
-template <class Pointed>
-struct PtrPolicy
-{
+//template <class Pointed>
+//struct PtrPolicy
+//{
   /**
    * roost smart pointers.  FIXME: need docs
    */
-  typedef boost::shared_ptr<Pointed> ThePolicy;
+//  typedef boost::shared_ptr<Pointed> ThePolicy;
   //  typedef Pointed* ThePolicy;
-};
+//};
 
-template <class Stored>
-struct VectorPolicy {
+//template <class Stored>
+//struct VectorPolicy {
   /**
    *  ThePolicy is an STLVectorStoragePolicy
    */
-  typedef STLVectorStoragePolicy<Stored> ThePolicy;
+//  typedef STLVectorStoragePolicy<Stored> ThePolicy;
 
-};
+//};
 
 /**
  * @brief The storage policy for maps of objects
@@ -109,14 +112,14 @@ struct VectorPolicy {
  * provided the new implementation supplies the same interface - just by
  * changing this Mapolicy class.  That's what it is here for.
  */
-template <class Key, class Stored>
-struct MapPolicy {
+//template <class Key, class Stored>
+//struct MapPolicy {
   /**
    *  ThePolicy is just a typedeffed STLMapStoragePolicy
    */
-  typedef STLMapStoragePolicy<Key,Stored> ThePolicy;
+//  typedef STLMapStoragePolicy<Key,Stored> ThePolicy;
 
-};
+//};
 
 /**
  * @brief The storage policy for multimaps of objects
@@ -126,14 +129,14 @@ struct MapPolicy {
  * provided the new implementation supplies the same interface - just by
  * changing this MultiMapPolicy class.  That's what it is here for.
  */
-template <class Key, class Stored>
-struct MultiMapPolicy {
+//template <class Key, class Stored>
+//struct MultiMapPolicy {
   /**
    *  ThePolicy is just a typedeffed STLMapStoragePolicy
    */
-  typedef STLMultiMapStoragePolicy<Key,Stored> ThePolicy;
+//  typedef STLMultiMapStoragePolicy<Key,Stored> ThePolicy;
 
-};
+//};
 
 #endif
 
