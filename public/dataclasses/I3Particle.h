@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.21 2005/04/12 16:02:03 olivas Exp $
+ * $Id: I3Particle.h,v 1.20 2005/04/09 03:02:10 olivas Exp $
  *
  * @file I3Particle.h
- * @version $Revision: 1.21 $
- * @date $Date: 2005/04/12 16:02:03 $
+ * @version $Revision: 1.20 $
+ * @date $Date: 2005/04/09 03:02:10 $
  * @author pretz
  *
  */
@@ -19,7 +19,6 @@
 #include <iostream>
 #include <cmath>
 #include <sstream>
-#include "boost/serialization/is_abstract.hpp"
 
 using namespace std;
 
@@ -220,8 +219,6 @@ class I3Particle : public TObject{
     ar & make_nvp("PrimaryID",primaryID_);
     ar & make_nvp("ParentID", parentID_);
   }
-
-  BOOST_IS_ABSTRACT(I3Particle);
 
  // ROOT macro
   ClassDef(I3Particle,1);
