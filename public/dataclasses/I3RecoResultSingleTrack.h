@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3RecoResultSingleTrack.h,v 1.19 2005/04/12 18:04:32 olivas Exp $
  *
  * @file I3RecoResultSingleTrack.h
- * @version $Revision: 1.18 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2005/04/12 18:04:32 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -22,7 +22,7 @@
  */
 class I3RecoResultSingleTrack : public I3RecoResult
 {
-  I3ParticlePtr fTrack;
+  I3ParticlePtr track_;
   
   // TDS FIXME most of this has/get/set stuff can go away.  You just
   // get the pointer out, it either points to something valid or it
@@ -32,7 +32,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
   /**
    * constructor
    */
-  I3RecoResultSingleTrack() {}; //fTrack will automatically be "NULL" 
+  I3RecoResultSingleTrack() {}; //track_ will automatically be "NULL" 
 
   /**
    * destructor
@@ -44,8 +44,8 @@ class I3RecoResultSingleTrack : public I3RecoResult
    */
   const I3ParticlePtr GetTrack() const 
   {
-    if (fTrack) 
-      return (fTrack);
+    if (track_) 
+      return (track_);
 
     log_fatal("I3RecoResultSingleTrack::Track() asked for a track which doesn't exist");
     return I3ParticlePtr();
@@ -56,8 +56,8 @@ class I3RecoResultSingleTrack : public I3RecoResult
    */
   I3ParticlePtr GetTrack()
   {
-    if (fTrack) 
-      return fTrack;
+    if (track_) 
+      return track_;
 
     log_fatal("I3RecoResultSingleTrack::Track() asked for a track which doesn't exist");
     return I3ParticlePtr();
@@ -68,34 +68,42 @@ class I3RecoResultSingleTrack : public I3RecoResult
    */
   bool HasTrack() const {
     //TDS: the smart pointer automagically converts to bool
-    return fTrack;
+    return track_;
   }
   
   /**
    * sets the track in the result
    * Fails the program if it is already set.
    */
-  void SetTrack(I3ParticlePtr fTrack_)
+  void SetTrack(I3ParticlePtr track)
   {
-    if(fTrack)
+    if(track_)
     {
       log_fatal("I3RecoResultSingleTrack::Track() track exists already");
       return;
     }
-    fTrack=fTrack_;
+    track_=track;
   }
 
   virtual void ToStream(ostream& o) const
     {
       I3RecoResult::ToStream(o);
       o<<"The Track:\n";
-      if(fTrack)
-	o<<*fTrack<<"\n";
+      if(track_)
+	o<<*track_<<"\n";
       else
 	o<<"NULL Track\n";
     }
   
   private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Track", track_);
+  }
 
   // ROOT macro
   ClassDef(I3RecoResultSingleTrack, 1);
