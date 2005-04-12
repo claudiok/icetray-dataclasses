@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTopShower.h,v 1.6 2005/04/12 18:55:28 dule Exp $
+ * $Id: I3RecoResultSingleTopShower.h,v 1.7 2005/04/12 19:19:02 olivas Exp $
  *
  * @file I3RecoResultSingleTopShower.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/12 19:19:02 $
  * @author Peter Niessen
  * @author dule
  */
@@ -72,7 +72,16 @@ class I3RecoResultSingleTopShower : public I3RecoResultSingleParticle
   // copy and assignment are private
   //I3RecoResultTopShower (const I3RecoResultTopShower& rhs);
   //const I3RecoResultTopShower& operator= (const I3RecoResultTopShower&);
-  
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3RecoResultSingleTopShower", 
+		  base_object<I3RecoResultSingleParticle>(*this));
+  }
+
   // ROOT macro
   ClassDef(I3RecoResultSingleTopShower, 1);
 };

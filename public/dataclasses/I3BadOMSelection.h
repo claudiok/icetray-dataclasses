@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.11 2005/04/09 03:02:10 olivas Exp $
+ *  $Id: I3BadOMSelection.h,v 1.12 2005/04/12 19:21:36 olivas Exp $
  *
  * @file I3BadOMSelection.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/12 19:21:36 $
  * @author deyoung
  */
 
@@ -87,6 +87,14 @@ private:
    */
 //   I3BadOMSelection(const I3BadOMSelection& rhs) { *this = rhs; } 
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3BadOMSelection", base_object<I3OMListSelection>(*this) );
+  }
+ 
   ClassDef(I3BadOMSelection,1);
 };
 

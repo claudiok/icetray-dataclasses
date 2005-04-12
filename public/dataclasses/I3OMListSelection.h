@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMListSelection.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
+ *  $Id: I3OMListSelection.h,v 1.6 2005/04/12 19:19:31 olivas Exp $
  *
  * @file I3OMListSelection.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/12 19:19:31 $
  * @author deyoung
  */
 
@@ -87,8 +87,17 @@ private:
 
   STLVectorStoragePolicy<OMKey> omList_;
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("OMList", omList_ );
+  }
+
   ClassDef(I3OMListSelection,1);
 };
 
+BOOST_IS_ABSTRACT(I3OMListSelection);
 
 #endif
