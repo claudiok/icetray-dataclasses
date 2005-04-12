@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleParticle.h,v 1.6 2005/04/12 23:11:18 olivas Exp $
+ * $Id: I3RecoResultSingleParticle.h,v 1.7 2005/04/12 23:45:47 olivas Exp $
  *
  * @file I3RecoResultSingleParticle.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/04/12 23:11:18 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/12 23:45:47 $
  * @author dule
  */
 
@@ -92,8 +92,6 @@ class I3RecoResultSingleParticle : public I3RecoResult
   // ROOT macro
   ClassDef(I3RecoResultSingleParticle, 1);
 };
-
-BOOST_CLASS_EXPORT(I3RecoResultSingleParticle);
 
 /**
  * Pointer typedeffed away to insulate users from the 
