@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.13 2005/04/12 21:32:32 olivas Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/12 21:32:32 $
  * @author deyoung
  */
 
@@ -13,6 +13,9 @@
 #define I3GOODOMSELECTION_H_INCLUDED
 
 #include "I3OMListSelection.h"
+#include "boost/serialization/export.hpp"
+
+BOOST_CLASS_EXPORT(I3GoodOMSelection);
 
 class I3GoodOMSelection;
 typedef shared_ptr<I3GoodOMSelection>  I3GoodOMSelectionPtr;
@@ -84,6 +87,14 @@ public:
   // default-generated assignment and copy-constructor explicitly allowed
 
 private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3GoodOMSelection", base_object<I3OMListSelection>(*this) );
+  }
 
   ClassDef(I3GoodOMSelection,1);
 };
