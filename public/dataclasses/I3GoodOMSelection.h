@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.13 2005/04/12 21:32:32 olivas Exp $
+ *  $Id: I3GoodOMSelection.h,v 1.14 2005/04/12 21:51:57 troy Exp $
  *
  * @file I3GoodOMSelection.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/12 21:32:32 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/12 21:51:57 $
  * @author deyoung
  */
 
@@ -14,8 +14,6 @@
 
 #include "I3OMListSelection.h"
 #include "boost/serialization/export.hpp"
-
-BOOST_CLASS_EXPORT(I3GoodOMSelection);
 
 class I3GoodOMSelection;
 typedef shared_ptr<I3GoodOMSelection>  I3GoodOMSelectionPtr;
@@ -98,6 +96,8 @@ private:
 
   ClassDef(I3GoodOMSelection,1);
 };
+
+BOOST_CLASS_EXPORT(I3GoodOMSelection);
 
 
 #endif

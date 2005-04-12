@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.23 2005/04/12 17:24:13 troy Exp $
-    @version $Revision: 1.23 $
-    @date $Date: 2005/04/12 17:24:13 $
+    $Id: StoragePolicy.h,v 1.24 2005/04/12 21:51:57 troy Exp $
+    @version $Revision: 1.24 $
+    @date $Date: 2005/04/12 21:51:57 $
 
     @author troy d. straszheim
 */
@@ -28,6 +28,9 @@ namespace boost
 #endif
 #ifndef BOOST_SERIALIZATION_IS_ABSTRACT_CLASS_HPP
 #define BOOST_IS_ABSTRACT(X)
+#endif
+#ifndef BOOST_SERIALIZATION_EXPORT_HPP
+#define BOOST_CLASS_EXPORT(X) 
 #endif
   }
 }
