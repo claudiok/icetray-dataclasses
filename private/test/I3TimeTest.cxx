@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.9 2005/04/01 20:23:24 pretz Exp $
+    $Id: I3TimeTest.cxx,v 1.10 2005/04/12 10:08:58 troy Exp $
 
-    @version $Revision: 1.9 $
-    @date $Date: 2005/04/01 20:23:24 $
+    @version $Revision: 1.10 $
+    @date $Date: 2005/04/12 10:08:58 $
     @author pretz
 
     @todo
@@ -175,8 +175,8 @@ namespace tut
 		      initial_time.GetUTCYear(),
 		      compare_time.GetUTCYear());
 	ensure("checking that the UTC time is the same to ns",
-	       abs(initial_time.GetUTCDaqTime() 
-		   - compare_time.GetUTCDaqTime()) < 10);
+	       I3::disambiguate::llabs(initial_time.GetUTCDaqTime() 
+				       - compare_time.GetUTCDaqTime()) < 10);
 	
 	
       }
