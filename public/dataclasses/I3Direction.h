@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.14 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3Direction.h,v 1.15 2005/04/12 17:50:52 olivas Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.14 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2005/04/12 17:50:52 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.14 2005/04/09 03:02:10 olivas Exp $
+// $Id: I3Direction.h,v 1.15 2005/04/12 17:50:52 olivas Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -234,9 +234,13 @@ class I3Direction : public TObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-        ar & make_nvp("XDir", xDir_);
-        ar & make_nvp("YDir", yDir_);
-        ar & make_nvp("ZDir", zDir_);
+    xDir_ = yDir_ = zDir_ = zenith_ =azimuth_ = 1.0;
+
+    ar & make_nvp("XDir", xDir_);
+    ar & make_nvp("YDir", yDir_);
+    ar & make_nvp("ZDir", zDir_);
+    ar & make_nvp("Zenith", zenith_);
+    ar & make_nvp("Azimuth", azimuth_);
   }
 
   // ROOT macro

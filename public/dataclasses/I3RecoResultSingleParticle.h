@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleParticle.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3RecoResultSingleParticle.h,v 1.4 2005/04/12 17:50:52 olivas Exp $
  *
  * @file I3RecoResultSingleParticle.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/12 17:50:52 $
  * @author dule
  */
 
@@ -81,8 +81,16 @@ class I3RecoResultSingleParticle : public I3RecoResult
   
  private:
 
-	// ROOT macro
-	ClassDef(I3RecoResultSingleParticle, 1);
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Particle", particle_);
+  }
+  
+  // ROOT macro
+  ClassDef(I3RecoResultSingleParticle, 1);
 };
 
 /**
