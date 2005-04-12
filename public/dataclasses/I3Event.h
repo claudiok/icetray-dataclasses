@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.48 2005/04/12 18:55:28 dule Exp $
+ * $Id: I3Event.h,v 1.49 2005/04/12 23:09:08 olivas Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.48 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.49 $
+ * @date $Date: 2005/04/12 23:09:08 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -137,6 +137,17 @@ class I3Event : public TObject
   // Allowing default copy and assignment operators
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("OMResponseMap", oMResponseMap_);
+    ar & make_nvp("TopOMResponseMap", topOMResponseMap_);
+    ar & make_nvp("OMSelectionDict", oMSelectionDict_);
+    ar & make_nvp("RecoResultDict", recoResultDict_);
+  }
 
   //ROOT macro
   ClassDef(I3Event, 1);

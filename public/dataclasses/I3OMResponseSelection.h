@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.11 2005/04/12 18:55:28 dule Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.12 2005/04/12 23:09:49 olivas Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/12 23:09:49 $
  * @author deyoung
  * @author troy
  */
@@ -88,6 +88,14 @@ public:
   }  
 
 private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3OMResponseSelection", *this);
+  }
 
   ClassDef(I3OMResponseSelection,1);
 };
