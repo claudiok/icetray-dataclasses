@@ -1,5 +1,5 @@
 //
-//  $Id: I3DOMCalibration_proposal.cxx,v 1.1 2005/04/12 16:18:45 pretz Exp $
+//  $Id: I3DOMCalibration_proposal.cxx,v 1.1.2.1 2005/04/12 18:06:42 pretz Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration_proposal.h"
@@ -87,32 +87,4 @@ double I3DOMCalibration_proposal::GetATWDGainErr(int channel)
     return fAmpGainErrs[channel];
 }
 
-void I3DOMCalibration_proposal::SetSamplingRate(int id, double rate)
-{
-    switch(id)
-    {
-    case 0:
-	fSamplingRate0 = rate;
-	break;
-    case 1:
-	fSamplingRate1 = rate;
-	break;
-    default:
-	log_fatal("Invalid ATWD Id in I3DOMCalibration_proposal");
-    }
-}
-
-double I3DOMCalibration_proposal::GetSamplingRate(int id)
-{
-    switch(id)
-    {
-    case 0:
-	return fSamplingRate0;
-    case 1:
-	return fSamplingRate1;
-    default:	
-	log_fatal("Sampling rate not found for ATWD ID in I3DOMCalibration_proposal");
-    }
-    return 0;
-}
 

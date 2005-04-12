@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration_proposal.h,v 1.1 2005/04/12 16:18:46 pretz Exp $
+ * $Id: I3DOMCalibration_proposal.h,v 1.1.2.1 2005/04/12 18:06:42 pretz Exp $
  *
  * @file I3DOMCalibration_proposal.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/04/12 16:18:46 $
+ * @version $Revision: 1.1.2.1 $
+ * @date $Date: 2005/04/12 18:06:42 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_PROPOSAL_H
@@ -133,10 +133,6 @@ public:
     {
       return fSPEWidth;
     };
-  
-  void SetSamplingRate(int id, double rate);
-  
-  double GetSamplingRate(int id);
   
   virtual void ToStream(ostream& o) const
     {
