@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultDict.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3RecoResultDict.h,v 1.10 2005/04/12 23:11:18 olivas Exp $
  *
  * @file I3RecoResultDict.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/12 23:11:18 $
  * @author ehrlich
  * @author pretz
  */
@@ -58,6 +58,15 @@ class I3RecoResultDict : public TObject,
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3OMResponseSelection", 
+		  base_object< STLMapStoragePolicy<string,I3RecoResultPtr> >(*this));
+  }
 
   // ROOT macro
   ClassDef(I3RecoResultDict,1);

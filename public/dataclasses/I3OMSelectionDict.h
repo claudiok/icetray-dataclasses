@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3OMSelectionDict.h,v 1.9 2005/04/12 23:11:18 olivas Exp $
  *
  * @file I3OMSelectionDict.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/12 23:11:18 $
  * @author deyoung
  * @author troy
  */
@@ -120,6 +120,15 @@ class I3OMSelectionDict : public TObject,
  private:
 
   SET_LOGGER("Selectors");
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3OMSelectionDict", 
+		  base_object< STLMapStoragePolicy<string,I3OMResponseSelectionPtr> >(*this));
+  }
 
   // ROOT macro
   ClassDef(I3OMSelectionDict,1);
