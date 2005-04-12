@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceParticle.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3InIceParticle.h,v 1.4 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3InIceParticle.h
- * @version $Revision: 1.3 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.4 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author blaufuss
  */
 #ifndef I3INICEPARTICLE_H
@@ -23,17 +23,17 @@ class I3InIceParticle : public I3Particle
   /**
    * indicates that this track is observable.
    */
-  virtual bool IsObservable() const {return kTRUE;}
+  virtual bool IsObservable() const {return true;}
 
   /**
    * indicates that this track is InIce.
    */
-  virtual bool IsInIce() const {return kTRUE;}
+  virtual bool IsInIce() const {return true;}
 
   /**
    * indicates that this track is not IceTop.
    */
-  virtual bool IsIceTop() const {return kFALSE;}
+  virtual bool IsIceTop() const {return false;}
 
   
   /**

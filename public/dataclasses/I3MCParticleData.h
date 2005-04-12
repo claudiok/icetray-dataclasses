@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleData.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3MCParticleData.h,v 1.9 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3MCParticleData.h
- * @version $Revision: 1.8 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.9 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  *
  */
@@ -26,9 +26,9 @@
 class I3MCParticleData : public TObject 
 {
 
-  I3ParticleMultiMap fPrimary;         //||
-  I3ParticleMultiMap fInIceParticles;  //||
-  I3ParticleMultiMap fIceTopParticles; //||
+  I3ParticleMultiMap primary_;         //||
+  I3ParticleMultiMap inIceParticles_;  //||
+  I3ParticleMultiMap iceTopParticles_; //||
 
  public:
   /**
@@ -44,39 +44,39 @@ class I3MCParticleData : public TObject
   /**
    * @return the primary track as constant
    */
-  const I3ParticleMultiMap& GetPrimary() const {return fPrimary;}
+  const I3ParticleMultiMap& GetPrimary() const {return primary_;}
 
   /**
    * @return the primary track as non-const
    */
-  I3ParticleMultiMap& GetPrimary() {return fPrimary;}
+  I3ParticleMultiMap& GetPrimary() {return primary_;}
 
   /**
    * @return the In-Ice tracks as constant
    */
-  const I3ParticleMultiMap& GetInIceParticles() const {return fInIceParticles;}
+  const I3ParticleMultiMap& GetInIceParticles() const {return inIceParticles_;}
 
   /**
    * @return the In-Ice tracks as non-constant
    */
-  I3ParticleMultiMap& GetInIceParticles() {return fInIceParticles;}
+  I3ParticleMultiMap& GetInIceParticles() {return inIceParticles_;}
 
   /**
    * @return the IceTop tracks as constant
    */
-  const I3ParticleMultiMap& GetIceTopParticles() const {return fIceTopParticles;}
+  const I3ParticleMultiMap& GetIceTopParticles() const {return iceTopParticles_;}
 
   /**
    * @return the IceTop tracks as non-constant
    */
-  I3ParticleMultiMap& GetIceTopParticles() {return fIceTopParticles;};
+  I3ParticleMultiMap& GetIceTopParticles() {return iceTopParticles_;};
 
   virtual void ToStream(ostream& o) const
     {
       o<<" [ I3ParticleMultiMap ] \n"
-       <<fPrimary
-       <<fInIceParticles
-       <<fIceTopParticles;
+       <<primary_
+       <<inIceParticles_
+       <<iceTopParticles_;
     }
   
   virtual string ToString() const

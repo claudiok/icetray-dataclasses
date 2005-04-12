@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3BasicCascade.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
+    $Id: I3BasicCascade.h,v 1.9 2005/04/12 18:55:28 dule Exp $
 
     @file I3BasicCascade.h
-    @version $Revision: 1.8 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @version $Revision: 1.9 $
+    @date $Date: 2005/04/12 18:55:28 $
     @author deyoung
 */
 
@@ -25,9 +25,9 @@
  * just a position and particle type.
  */
 class I3BasicCascade : public I3CascadeImpl<I3NonDirectional,
-	                                    I3Localized,
-                                            I3NonEnergetic,
-                                            I3NonComposite>
+	 I3Localized,
+	 I3NonEnergetic,
+	 I3NonComposite>
 {
 public:
   /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAMANDA.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3OMGeoAMANDA.h,v 1.5 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3OMGeoAMANDA.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -24,7 +24,7 @@
  */
 class I3OMGeoAMANDA : public I3OMGeo
 {
-  double fTZero;
+  double tZero_;
 
   public:
   /**
@@ -50,12 +50,12 @@ class I3OMGeoAMANDA : public I3OMGeo
   /**
    * @param t0 the new TZero for this OM
    */
-  void SetTZero(double t0) { fTZero = t0;}
+  void SetTZero(double t0) { tZero_ = t0;}
 
   /**
    * @return the TZero for this OM
    */
-  double GetTZero() const { return fTZero;}
+  double GetTZero() const { return tZero_;}
 
   /**
    * assignment is just member-wise assignment
@@ -63,7 +63,7 @@ class I3OMGeoAMANDA : public I3OMGeo
   const I3OMGeoAMANDA& operator=(const I3OMGeoAMANDA& rhs){
     if(this == &rhs) return *this;
     I3OMGeo::operator=(rhs);
-    fTZero = rhs.fTZero;
+    tZero_ = rhs.tZero_;
     return *this;
   }
 

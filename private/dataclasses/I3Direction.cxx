@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.9 2005/02/24 17:12:42 dule Exp $
+// $Id: I3Direction.cxx,v 1.10 2005/04/12 18:58:42 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
@@ -81,7 +81,7 @@ void I3Direction::SetThetaPhi(double theta, double phi)
 	if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
 	azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
 	CalcCarFromSph();
-	IsCalculated=kTRUE;
+	isCalculated_=true;
 }
 
 //-----------------------------------------------------------
@@ -93,7 +93,7 @@ void I3Direction::ResetDirection()
   zDir_=NAN;
   zenith_=NAN;
   azimuth_=NAN;
-  IsCalculated=kTRUE;
+  isCalculated_=true;
 }
 
 //-----------------------------------------------------------
@@ -102,7 +102,7 @@ void I3Direction::ResetDirection()
 void I3Direction::RotateX(double angle)
 {
 // Rotate around x-axis by angle
-  if (!IsCalculated) CalcCarFromSph();
+  if (!isCalculated_) CalcCarFromSph();
   double s=sin(angle);
   double c=cos(angle);
   double y=yDir_;
@@ -115,7 +115,7 @@ void I3Direction::RotateX(double angle)
 void I3Direction::RotateY(double angle)
 {
 // Rotate around y-axis by angle
-  if (!IsCalculated) CalcCarFromSph();
+  if (!isCalculated_) CalcCarFromSph();
   double s=sin(angle);
   double c=cos(angle);
   double z=zDir_;
@@ -128,7 +128,7 @@ void I3Direction::RotateY(double angle)
 void I3Direction::RotateZ(double angle)
 {
 // Rotate around z-axis by angle
-  if (!IsCalculated) CalcCarFromSph();
+  if (!isCalculated_) CalcCarFromSph();
   double s=sin(angle);
   double c=cos(angle);
   double x=xDir_;
@@ -161,7 +161,7 @@ void I3Direction::CalcCarFromSph() const
   xDir_ = rho*cos(phi);
   yDir_ = rho*sin(phi);
   zDir_ = cos(theta);
-  IsCalculated=kTRUE;
+  isCalculated_=true;
 }
 
 //-----------------------------------------------------------
@@ -185,7 +185,7 @@ void I3Direction::CalcSphFromCar()
   azimuth_ = phi+pi;
   if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
   azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
-  IsCalculated=kTRUE;
+  isCalculated_=true;
 }
 
 //-----------------------------------------------------------

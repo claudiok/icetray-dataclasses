@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.12 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3PrimaryImpl.h,v 1.13 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  *
  */
@@ -68,12 +68,12 @@ class I3PrimaryImpl : public I3Primary,
   /**
    * indicates that this is not an in ice partcile
    */
-  virtual bool IsInIce() const { return kFALSE;}
+  virtual bool IsInIce() const { return false;}
 
   /** 
    * indicates taht this is not an ice top particle
    */ 
-  virtual bool IsIceTop() const { return kFALSE;}
+  virtual bool IsIceTop() const { return false;}
 
   /**
    * 

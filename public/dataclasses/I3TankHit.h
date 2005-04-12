@@ -1,7 +1,7 @@
 /**
-    $Id: I3TankHit.h,v 1.7 2005/04/09 03:02:10 olivas Exp $
+    $Id: I3TankHit.h,v 1.8 2005/04/12 18:55:28 dule Exp $
     @file I3TankHit.h
-    @version $Revision: 1.7 $
+    @version $Revision: 1.8 $
     @date Tue Jun 22 16:39:23 EDT 2004
     @author rulrich
 */
@@ -27,18 +27,18 @@ class I3TankHit : public TObject {
 
  protected:
 
-  unsigned short fTankNumber;
+  unsigned short tankNumber_;
 
   /**
    * the first arrival of a particle at this particular tank
    */
-  float fTime;
+  float time_;
 
   /**
    * the signal of the tank (can be different things like track length, charge,
    * #mc-particles, amplitude, ...
    */
-  float fSignal;
+  float signal_;
 
  public:
 
@@ -46,7 +46,7 @@ class I3TankHit : public TObject {
    * constructor
    */
   I3TankHit(unsigned short tank_number = 0) :
-    fTankNumber(tank_number), fTime(0), fSignal(0) {}
+    tankNumber_(tank_number), time_(0), signal_(0) {}
   
   /**
    * destructor
@@ -56,32 +56,40 @@ class I3TankHit : public TObject {
   /**
    * @return the number of the tank for this response
    */
-  unsigned short TankNumber() const { return fTankNumber; }
+  unsigned short TankNumber() const { return tankNumber_; }
 
   /**
    * @param tanknumber the new tanknumber associated with this response
    */
-  void TankNumber(unsigned short tanknumber) { fTankNumber = tanknumber;}
+  void TankNumber(unsigned short tanknumber) { tankNumber_ = tanknumber;}
   
   /**
    * Get the time
    */
-  float Time () const;
+  float Time() const {
+	  return time_;
+  }
 
   /**
    * Set the time
    */
-  void Time (float time);
+  void Time (float time) {
+	  time_ = time;
+  }
 
   /**
    * Get the Signal
    */
-  float Signal () const;
+  float Signal () const {
+	  return signal_;
+  }
 
   /**
    * Set the Signal
    */
-  void Signal (float signal);
+  void Signal (float signal) {
+	  signal_ = signal;
+  }
 
   /**
    * implementation problem
@@ -90,11 +98,11 @@ class I3TankHit : public TObject {
     {
       o<<" [ I3TankHit ]\n";
 /*        <<"TankNumber: " */
-/*        <<fTankNumber */
+/*        <<tankNumber_ */
 /*        <<"Signal: " */
-/*        <<fSignal */
+/*        <<signal_ */
 /*        <<"Time: " */
-/*        <<fTime<<"\n"; */
+/*        <<time_<<"\n"; */
     }
 
   virtual string ToString() const
@@ -139,18 +147,18 @@ class I3TankHitMatchesTankNumber {
    * Constructor, pass on the tank number to look for
    */
   I3TankHitMatchesTankNumber (unsigned short tank_number) :
-    fTankNumber( tank_number ) {}
+    tankNumber_( tank_number ) {}
 
   /**
    * Comparison operator
    */
   bool operator () (I3TankHitPtr tank)
     {
-      return tank->TankNumber () == fTankNumber;
+      return tank->TankNumber () == tankNumber_;
     }
 
  private:
-  unsigned short fTankNumber;
+  unsigned short tankNumber_;
 
 };
 #endif

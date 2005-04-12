@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3EventHeader.h,v 1.14 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3EventHeader.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,19 +29,19 @@ using namespace std;
  * from the database
  */
 class I3EventHeader : public I3DataHeader{
-  unsigned long  fRunId;
-  unsigned long  fEventId;
+  unsigned long  runId_;
+  unsigned long  eventId_;
   
  public:
   /**
    * constructor
    */
-  I3EventHeader();
+  I3EventHeader() { };
 
   /**
    * destructor
    */
-  virtual ~I3EventHeader();
+  virtual ~I3EventHeader() { };
 
   /**
    * copy constructor.  Uses assignment operator.
@@ -60,22 +60,22 @@ class I3EventHeader : public I3DataHeader{
   /**
    * @return the run id for the event
    */
-  unsigned long GetRunID() const { return fRunId; }
+  unsigned long GetRunID() const { return runId_; }
 
   /**
    * @param runid the new run id for the event
    */
-  void SetRunID(unsigned long runid) { fRunId = runid; }
+  void SetRunID(unsigned long runid) { runId_ = runid; }
 
   /**
    * @return the event id for this event
    */
-  unsigned long GetEventID() const { return fEventId; }
+  unsigned long GetEventID() const { return eventId_; }
 
   /**
    * @param eventid the new event id for the event
    */
-  void SetEventID(unsigned long eventid) { fEventId = eventid; }
+  void SetEventID(unsigned long eventid) { eventId_ = eventid; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"

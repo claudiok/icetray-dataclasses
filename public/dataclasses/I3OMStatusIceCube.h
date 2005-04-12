@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIceCube.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3OMStatusIceCube.h,v 1.7 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3OMStatusIceCube.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -37,12 +37,12 @@ class I3OMStatusIceCube : public I3OMStatus
   /**
    * constructor
    */
-  I3OMStatusIceCube(){}
+  I3OMStatusIceCube() { }
 
   /**
    * destructor
    */
-  virtual ~I3OMStatusIceCube(){}
+  virtual ~I3OMStatusIceCube() { }
 
 
   /** 
@@ -53,29 +53,29 @@ class I3OMStatusIceCube : public I3OMStatus
   /**
    * A single PE trigger
    */
-  static const OMTrigSource kSPE;
+  static const OMTrigSource SPE_;
 
   /**
    * a multi pe trigger
    */
-  static const OMTrigSource kMPE;
+  static const OMTrigSource MPE_;
 
   /**
    * no trigger
    */
-  static const OMTrigSource kTrigSourceOff;
+  static const OMTrigSource trigSourceOff_;
 
   /**
    * Sets the OM Trigger to the Single or Multiple PE Discriminator, or off 
    * @param source the new trigger source
    */
-  void SetTrigSource(OMTrigSource source){fTrigSource = source;}
+  void SetTrigSource(OMTrigSource source) { trigSource_ = source; }
 
   /**
    * Gets the current trigger source setting
    * @return the current trigger source setting
    */
-  OMTrigSource GetTrigSource(){ return fTrigSource;}
+  OMTrigSource GetTrigSource() { return trigSource_; }
 
   /*  Control the Local Coincidences */
   /*  The separate variables for Up/Down, and distance follow the
@@ -89,31 +89,31 @@ class I3OMStatusIceCube : public I3OMStatus
   /**
    * Indicates that the local coincidence signal is not sent
    */
-  static const LCMode kLCOff;
+  static const LCMode LCOff_;
 
   /**
    * Indicates that the local concidence signal is sent just to nearest 
    * neighbors
    */
-  static const LCMode kNearestNeighbor;
+  static const LCMode nearestNeighbor_;
 
   /**
    * Indicates that the local concidence signal is sent to nearest and 
    * next-to-nearest neighbors.
    */
-  static const LCMode kSecondNeighbor;  /* Includes nearest neighbor*/
+  static const LCMode secondNeighbor_;  /* Includes nearest neighbor*/
 
   /**
    * sets how far local coincidence signals are sent
    * @param mode how far the signal is sent
    */
-  void SetLocalCoincidence(LCMode mode){fLCMode = mode;}
+  void SetLocalCoincidence(LCMode mode) { LCMode_ = mode; }
 
   /**
    * gets how far local coincidence signals are sent
    * @return how far local coincidence signals are sent
    */
-  LCMode GetLocalCoincidence(){ return fLCMode;}
+  LCMode GetLocalCoincidence() { return LCMode_; }
 
   /**
    * There is also provision to turn on or off various settings in the 
@@ -124,57 +124,57 @@ class I3OMStatusIceCube : public I3OMStatus
   /**
    * On
    */
-  static const OnOff kOn;
+  static const OnOff on_;
 
   /**
    * Off
    */
-  static const OnOff kOff;
+  static const OnOff off_;
 
   /** 
    * These control whether the local coincidences recievers are enabled
    * They should normally both be on.
    * @param onoff the new setting for the local coincidence upward reciever
    */
-  void SetLCReceiveUp(OnOff onoff){fLCRecieveUp = onoff;}
+  void SetLCReceiveUp(OnOff onoff) { LCRecieveUp_ = onoff; }
 
   /**
    * Same as SetLCReceiveUp but for the downward receiver
    * @param onoff the new setting for the local concidence downward receiver
    */
-  void SetLCReceiveDown(OnOff onoff){fLCRecieveDown = onoff;}
+  void SetLCReceiveDown(OnOff onoff) { LCRecieveDown_ = onoff; }
 
   /**
    * @return the local coincidence receiver status for the upward receiver
    */
-  bool GetLCReceiveUp(){return fLCRecieveUp;}
+  bool GetLCReceiveUp() { return LCRecieveUp_; }
 
   /**
    * @return the local coincidenc receiver status for the downward receiver
    */
-  bool GetLCReceiveDown(){return fLCRecieveDown;}
+  bool GetLCReceiveDown() { return LCRecieveDown_; }
 
   /**
    * These control whether the local coincidences sending is enabled
    * They should normally both be on.  
    * @param onoff the new setting for the local coincidence upward sender
    */
-  void SetLCSendUp(OnOff onoff){fLCSendUp = onoff;}
+  void SetLCSendUp(OnOff onoff) { LCSendUp_ = onoff; }
 
   /**
    * The same as SetLCSendUp but for the downward sender
    */
-  void SetLCSendDown(OnOff onoff){fLCSendDown = onoff;}
+  void SetLCSendDown(OnOff onoff) { LCSendDown_ = onoff; }
 
   /**
    * @return the local coincidence sender status for the upward sender
    */
-  bool GetLCSendUp() {return fLCSendUp;}
+  bool GetLCSendUp() { return LCSendUp_; }
 
   /**
    * @return the local coincidence sender status for the downward sender
    */
-  bool GetLCSendDown() {return fLCSendDown;}
+  bool GetLCSendDown() { return LCSendDown_; }
 
   /**
    * This controls the length of the local coincidence window before
@@ -182,7 +182,7 @@ class I3OMStatusIceCube : public I3OMStatus
    * @param window the new local coincidence window before the descriminator in
    * 100 ns ticks
    */
-  void SetLCPreWindow(int window){ fLCPreWindow = window;}
+  void SetLCPreWindow(int window){ LCPreWindow_ = window; }
 
   /**
    * This controls the length of the local concidence window after the
@@ -190,27 +190,27 @@ class I3OMStatusIceCube : public I3OMStatus
    * @param window the new local coincidence window after the descriminator in
    * 100 ns ticks.
    */
-  void SetLCPostWindow(int window) { fLCPostWindow = window;}
+  void SetLCPostWindow(int window) { LCPostWindow_ = window; }
 
   /**
    * @return the local coincidence window before the descriminator in
    * 100 ns ticks
    */
-  int GetLCPreWindow() { return fLCPreWindow;}
+  int GetLCPreWindow() { return LCPreWindow_; }
 
   /**
    * @return the local concidence window after the descriminator in 
    * 100 ns ticks
    */
-  int GetLCPostWindow() {return fLCPostWindow;}
+  int GetLCPostWindow() {return LCPostWindow_; }
 
 /*  This controls the 'cable length correction' (widening the discriminator
     to account for the 54 meter cable length instead of 18 m.  */
 
-  void SetLCLongCableUp(OnOff onoff) {fLCLongCableUp = onoff;}
-  void SetLCLongCableDown(OnOff onoff) {fLCLongCableDown = onoff;}
-  bool GetLCLongCableUp() {return fLCLongCableUp;}
-  bool GetLCLongCableDown() { return fLCLongCableDown;}
+  void SetLCLongCableUp(OnOff onoff) { LCLongCableUp_ = onoff; }
+  void SetLCLongCableDown(OnOff onoff) { LCLongCableDown_ = onoff; }
+  bool GetLCLongCableUp() { return LCLongCableUp_; }
+  bool GetLCLongCableDown() { return LCLongCableDown_; }
 
 
   /*  Control and Monitor different parts of the OM */
@@ -219,62 +219,62 @@ class I3OMStatusIceCube : public I3OMStatus
    * Sets the status of ATWD A
    * @param onoff the new status for ATWD A
    */
-  void SetStausATWD_A(OnOff onoff) {fStatusATWD_A = onoff;}
+  void SetStausATWD_A(OnOff onoff) { statusATWD_A_ = onoff; }
 
   /**
    * Sets the status of ATWD B
    * @param onoff the new status for ATWD B 
    */
-  void SetStatusATWD_B(OnOff onoff) {fStatusATWD_B = onoff;}
+  void SetStatusATWD_B(OnOff onoff) { statusATWD_B_ = onoff; }
 
   /**
    * Sets the status of the FADC
    * @param onoff the new status of the FADC
    */
-  void SetStatusFADC(OnOff onoff) {fStatusFADC = onoff;}
+  void SetStatusFADC(OnOff onoff) { statusFADC_ = onoff; }
 
   /**
    * @return the status of ATWD A
    */
-  bool GetStatusATWD_A(){return fStatusATWD_A;}
+  bool GetStatusATWD_A() { return statusATWD_A_; }
 
   /**
    * @return the status of ATWD B
    */
-  bool GetStatusATWD_B(){return fStatusATWD_B;}
+  bool GetStatusATWD_B() { return statusATWD_B_; }
 
   /**
    * @return the status of the FADC
    */
-  bool GetStatusFADC(){return fStatusFADC;}
+  bool GetStatusFADC() { return statusFADC_; }
 
 
   /**
    * Sets the ATWD frequency.  Implementation, units remain TBD 
    */
-  void SetATWDFrequency(float freq) {fATWDFrequency = freq;}
+  void SetATWDFrequency(float freq) { ATWDFrequency_ = freq; }
 
   /**
    * Gets the ATWD frequency.  Implementation, units remain TBD
    * @return the ATWD frequency
    */
-  float GetATWDFrequency() {return fATWDFrequency;}
+  float GetATWDFrequency() { return ATWDFrequency_; }
 
  private:
-  OMTrigSource fTrigSource;
-  LCMode fLCMode;
-  OnOff fLCRecieveUp;
-  OnOff fLCRecieveDown;
-  OnOff fLCSendUp;
-  OnOff fLCSendDown;
-  int fLCPreWindow;
-  int fLCPostWindow;
-  OnOff fLCLongCableUp;
-  OnOff fLCLongCableDown;
-  OnOff fStatusATWD_A;
-  OnOff fStatusATWD_B;
-  OnOff fStatusFADC;
-  float fATWDFrequency;
+  OMTrigSource trigSource_;
+  LCMode LCMode_;
+  OnOff LCRecieveUp_;
+  OnOff LCRecieveDown_;
+  OnOff LCSendUp_;
+  OnOff LCSendDown_;
+  int LCPreWindow_;
+  int LCPostWindow_;
+  OnOff LCLongCableUp_;
+  OnOff LCLongCableDown_;
+  OnOff statusATWD_A_;
+  OnOff statusATWD_B_;
+  OnOff statusFADC_;
+  float ATWDFrequency_;
 
   ClassDef(I3OMStatusIceCube,1);
 };

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3CoreLocalized.h,v 1.9 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3CoreLocalized.h,v 1.10 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3CoreLocalized.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  */
 #ifndef I3CORELOCALIZED_H
@@ -21,8 +21,8 @@
 class I3CoreLocalized 
 {
 
-  double fCoreT;
-  I3Position fCorePos; //trying to make compatible with I3Position (dule)
+  double coreT_;
+  I3Position corePos_; //trying to make compatible with I3Position (dule)
 
  public:
 
@@ -40,32 +40,32 @@ class I3CoreLocalized
   /**
    * gives the position of the core
    */
-  I3Position GetCorePos() const {return fCorePos;}
+  I3Position GetCorePos() const {return corePos_;}
 
   /**
    * sets the position of the core
    */
   void SetCorePos(I3Position corepos)
     {
-      fCorePos.SetPosition(corepos);
-      fCorePos.SetZ(I3Constants::zIceTop); // ensure the position corresponds to IceTop
+      corePos_.SetPosition(corepos);
+      corePos_.SetZ(I3Constants::zIceTop); // ensure the position corresponds to IceTop
     }
 
   /**
    * sets the position of the core by using only X and Y
    */
   void SetCorePos(double corex, double corey) 
-    {fCorePos.SetPosition(corex,corey,I3Constants::zIceTop);}
+    {corePos_.SetPosition(corex,corey,I3Constants::zIceTop);}
 
   /**
    * gives the time of the core arrival
    */
-  double GetCoreT() const {return fCoreT;}
+  double GetCoreT() const {return coreT_;}
 
   /**
    * sets the time of the core arrival
    */
-  void SetCoreT(double coret) {fCoreT = coret;}
+  void SetCoreT(double coret) {coreT_ = coret;}
 
   /**
    * copys the data over to the destination particle if a dynamic_cast succeeds
@@ -75,8 +75,8 @@ class I3CoreLocalized
       I3CoreLocalized* dest = dynamic_cast<I3CoreLocalized*>(&destination);
       if(dest)
 	{
-	  dest->fCorePos = fCorePos;
-	  dest->fCoreT = fCoreT;
+	  dest->corePos_ = corePos_;
+	  dest->coreT_ = coreT_;
 	}
     }
 

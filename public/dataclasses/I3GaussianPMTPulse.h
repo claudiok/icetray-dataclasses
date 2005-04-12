@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3GaussianPMTPulse.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3GaussianPMTPulse.h,v 1.5 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3GaussianPMTPulse.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author deyoung
  *
  */
@@ -30,18 +30,18 @@ public:
   /**
    * constructor
    */
-  I3GaussianPMTPulse() : fNormalization(0.), 
-			 fSigma(0.),
-			 fTimeZero(0.),
-			 fPedestal(0.) {};
+  I3GaussianPMTPulse() : normalization_(0.), 
+			 sigma_(0.),
+			 timeZero_(0.),
+			 pedestal_(0.) {};
   
   /** 
    * Returns the voltage at the given time.  Voltage is negative.
    */  
   virtual double GetVoltage(const double time) {
-    return (- fNormalization / (sqrt(2 * pi) * fSigma)
-	    * exp( - (time - fTimeZero) * (time - fTimeZero) 
-		   / (2 * fSigma * fSigma)) + fPedestal);
+    return (- normalization_ / (sqrt(2 * pi) * sigma_)
+	    * exp( - (time - timeZero_) * (time - timeZero_) 
+		   / (2 * sigma_ * sigma_)) + pedestal_);
   };
 
   /** 
@@ -49,14 +49,14 @@ public:
    * so the peak value is a negative number.
    */ 
   virtual double GetPeakVoltage() {
-    return ( -fNormalization / (sqrt(2 * pi) * fSigma) + fPedestal);
+    return ( -normalization_ / (sqrt(2 * pi) * sigma_) + pedestal_);
   };
 
   /** 
    * Returns the time at which the pulse reaches its peak voltage.
    */ 
   virtual double GetPeakTime() {
-    return fTimeZero;
+    return timeZero_;
   };
 
   /** 
@@ -64,7 +64,7 @@ public:
    * the time at which the pulse reaches its peak voltage.
    */  
   virtual void SetPeakTime(const double time) {
-    fTimeZero = time;
+    timeZero_ = time;
   };
 
   /**
@@ -75,8 +75,8 @@ public:
     float thres = (threshold >= GetPedestal() ? 
 		     GetPedestal() - 1. * microvolt : 
 		     threshold);
-    return fTimeZero - fSigma * 
-      sqrt(-2 * log((fPedestal-thres) / fNormalization * fSigma * sqrt(2*pi)));
+    return timeZero_ - sigma_ * 
+      sqrt(-2 * log((pedestal_-thres) / normalization_ * sigma_ * sqrt(2*pi)));
   };
 
   /** 
@@ -84,28 +84,28 @@ public:
    * linear offset to the pulse voltage curve.
    */
   virtual double GetPedestal() {
-    return fPedestal;
+    return pedestal_;
   };
 
   /**
    * Set the pedestal for this channel.
    */
   virtual void SetPedestal(const double ped) {
-    fPedestal = ped;
+    pedestal_ = ped;
   };
 
   /**
    * Return the Gaussian width of the pulse.
    */
   virtual double GetSigma() {
-    return fSigma;
+    return sigma_;
   };
 
   /**
    * Set the Gaussian width of the pulse.
    */
   virtual void SetSigma(const double sigma) {
-    fSigma = sigma;
+    sigma_ = sigma;
   };
 
   /**
@@ -113,7 +113,7 @@ public:
    * pulse.  This is *not* the peak voltage.
    */
   virtual double GetNormalization() {
-    return fNormalization;
+    return normalization_;
   };
 
   /** 
@@ -121,15 +121,15 @@ public:
    * the peak voltage.
    */
   virtual void SetNormalization(const double norm) {
-    fNormalization = norm;
+    normalization_ = norm;
   };
 
 private:
 
-  double fNormalization;
-  double fSigma;
-  double fTimeZero;
-  double fPedestal;
+  double normalization_;
+  double sigma_;
+  double timeZero_;
+  double pedestal_;
 
   //ROOT macro
   ClassDef(I3GaussianPMTPulse, 1);

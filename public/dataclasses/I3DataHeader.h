@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DataHeader.h,v 1.17 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3DataHeader.h,v 1.18 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3DataHeader.h
- * @version $Revision: 1.17 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.18 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -38,12 +38,12 @@ class I3DataHeader : public TObject
   /**
    * constructor
    */
-  I3DataHeader();
+  I3DataHeader() : startTime_(), endTime_() { };
 
   /**
    * destructor
    */
-  virtual ~I3DataHeader();
+  virtual ~I3DataHeader() { };
 
   /**
    * Gets the start Time for this header

@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTopShower.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
+    $Id: I3MCTopShower.h,v 1.4 2005/04/12 18:55:28 dule Exp $
 
     @file I3MCTopShower.h
-    @version $Revision: 1.3 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @version $Revision: 1.4 $
+    @date $Date: 2005/04/12 18:55:28 $
     @author blaufuss
 */
 
@@ -27,13 +27,13 @@ class I3MCTopShower : public I3TopShowerImpl<I3Directional,
 	                                 I3CoreLocalized,
                                          I3Energetic>
 {
-  double     fWeight;
+  double     weight_;
   
   public:
   /**
    * constructor
    */
-  I3MCTopShower() {fWeight=1;};
+  I3MCTopShower() {weight_=1;};
 
   /**
    * destructor
@@ -43,12 +43,12 @@ class I3MCTopShower : public I3TopShowerImpl<I3Directional,
   /**
    * gives the weight of the track
    */
-  double GetWeight() const { return fWeight; }
+  double GetWeight() const { return weight_; }
 
   /**
    * sets the weight of the track
    */
-  void  SetWeight(double weight_) { fWeight = weight_; }
+  void  SetWeight(double weight_) { weight_ = weight_; }
 
  private:
   //ROOT macro

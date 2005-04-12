@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.7 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3MCPMTResponseRomeo.h,v 1.8 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3MCPMTResponseRomeo.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author klein
  * @author deyoung
  * @author ehrlich
@@ -14,7 +14,6 @@
 #ifndef I3MCPMTRESPONSEROMEO_H
 #define I3MCPMTRESPONSEROMEO_H
 #include "dataclasses/I3MCPMTResponse.h"
-#include <TF1.h>
 
 /**
  * @brief Implementation class for PMT response, simulated by ROMEO
@@ -26,8 +25,8 @@
  */
 class I3MCPMTResponseRomeo : public I3MCPMTResponse
 {
-  vector<float> fWaveform;
-  float         fBinSize;
+  vector<float> waveform_;
+  float         binSize_;
 
   public:
 
@@ -46,30 +45,30 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
    */
   virtual float GetPMTVoltage(float time)
   {
-    if(time < fStartTime || time > fEndTime) return(0);
-    unsigned long t = (unsigned long)((time-fStartTime)/fBinSize);
-    if(t>=fWaveform.size()) return(0);
-    return(fWaveform[t]);
+    if(time < startTime_ || time > endTime_) return(0);
+    unsigned long t = (unsigned long)((time-startTime_)/binSize_);
+    if(t>=waveform_.size()) return(0);
+    return(waveform_[t]);
   }
 
   /**
    * Get the waveform
    */
-  const vector<float>& GetWaveform() const {return fWaveform;}
+  const vector<float>& GetWaveform() const {return waveform_;}
 
-  vector<float>& GetWaveform() {return fWaveform;}
+  vector<float>& GetWaveform() {return waveform_;}
 
   /**
    * Get bin size
    */
-  const float GetBinSize() const {return fBinSize;}
+  const float GetBinSize() const {return binSize_;}
 
-  float GetBinSize() {return fBinSize;}
+  float GetBinSize() {return binSize_;}
 
   /**
    * Set bin size
    */
-  void SetBinSize(float binsize) {fBinSize=binsize;}
+  void SetBinSize(float binsize) {binSize_=binsize;}
 
   private:
 

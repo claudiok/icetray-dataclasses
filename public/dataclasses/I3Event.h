@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.47 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3Event.h,v 1.48 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.47 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.48 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -54,12 +54,12 @@ class I3Event : public TObject
   /**
    * default constructor
    */
-  I3Event();
+  I3Event() { };
   
   /**
    * default destructor
    */
-  virtual ~I3Event();
+  virtual ~I3Event() { };
 
   /**
    * @return the OMResponseMap of the event as a constant object

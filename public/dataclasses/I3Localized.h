@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Localized.h,v 1.9 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3Localized.h,v 1.10 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Localized.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  *
  */
@@ -20,8 +20,9 @@
  */
 class I3Localized{
  private:
-  double fT;
-  I3Position fPos;
+  double time_;
+  I3Position pos_;
+
  public:
 
   virtual ~I3Localized() {}
@@ -38,29 +39,29 @@ class I3Localized{
   /**
    * gets the position of the cascade
    */
-  I3Position GetPos() const {return fPos;}
+  I3Position GetPos() const {return pos_;}
 
   /**
    * sets the position of the cascade 
    */
-  void SetPos(I3Position p) {fPos.SetPosition(p);}
+  void SetPos(I3Position p) {pos_.SetPosition(p);}
 
   /**
    * sets the position of the cascade 
    */
   void SetPos(double p1, double p2, double p3, 
 	      I3Position::RefFrame frame=I3Position::car)
-    {fPos.SetPosition(p1,p2,p3,frame);}
+    {pos_.SetPosition(p1,p2,p3,frame);}
 
   /**
    * gets the time of the cascade
    */
-  double GetT() const{return fT;}
+  double GetT() const{return time_;}
 
   /**
    * sets the time of the cascade
    */
-  void SetT(double t){fT = t;}
+  void SetT(double t){time_ = t;}
 
   /**
    * copies all of this cascade's data into 'destination' if a dynamic_cast
@@ -71,15 +72,15 @@ class I3Localized{
       I3Localized *localized = dynamic_cast<I3Localized*>(&destination);
       if(localized)
 	{
-	  localized->fPos = fPos;
-	  localized->fT = fT;
+	  localized->pos_ = pos_;
+	  localized->time_ = time_;
 	}
     }
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Position:\n"<<fPos
-       <<"Time:"<<fT<<"\n";
+      o<<"Position:\n"<<pos_
+       <<"Time:"<<time_<<"\n";
     }
  private:
   //ROOT macro

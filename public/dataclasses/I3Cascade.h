@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Cascade.h,v 1.15 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3Cascade.h,v 1.16 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Cascade.h
- * @version $Revision: 1.15 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  */
 #ifndef I3CASCADE_H
@@ -28,12 +28,12 @@ class I3Cascade : public I3InIceParticle{
   /**
    * indicates that this is not a track
    */
-  virtual bool IsTrack() {return kFALSE;}
+  virtual bool IsTrack() {return false;}
 
   /**
    * indicates that this particle is a Cascade.
    */
-  virtual bool IsCascade() {return kTRUE;}
+  virtual bool IsCascade() {return true;}
 
   /**
    * indicates whether the particle is localized within the detector, and

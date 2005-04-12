@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3DOMCalibration.h,v 1.13 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -40,9 +40,9 @@ using namespace std;
 
 struct LinearFit
 {
-    double fSlope;
-    double fIntercept;
-    double fRegressCoeff;
+    double slope_;
+    double intercept_;
+    double regressCoeff_;
 };
 
 class I3DOMCalibration : public TObject
@@ -50,27 +50,27 @@ class I3DOMCalibration : public TObject
 public:
     double GetDate()
 	{
-	    return fDate;
+	    return date_;
 	};
     
     unsigned int GetDOMId()
 	{
-	    return fDOMId;
+	    return DOMId_;
 	};
     
     double GetTemperature()
 	{
-	    return fTemperature;
+	    return temperature_;
 	};
     
     double GetFADCGain()
 	{
-	    return fFADCGain;
+	    return FADCGain_;
 	};
     
     double GetFADCPedestal()
 	{
-	    return fFADCPedestal;
+	    return FADCPedestal_;
 	};
     
     // Get gain and error on gain for ATWD by channel
@@ -96,17 +96,17 @@ public:
 
     void SetDate(double date)
 	{
-	    fDate = date;
+	    date_ = date;
 	};
     
     void  SetDOMId(unsigned int id)
 	{
-	    fDOMId = id;
+	    DOMId_ = id;
 	};
 
     void SetTemperature(double temperature)
 	{
-	    fTemperature = temperature;
+	    temperature_ = temperature;
 	};
 
     // Set parameters for conversion of count to voltage 
@@ -121,8 +121,8 @@ public:
     void SetFADCParameters(double pedestal,
 			   double gain)
 	{
-	    fFADCPedestal = pedestal;
-	    fFADCGain     = gain;
+	    FADCPedestal_ = pedestal;
+	    FADCGain_     = gain;
 	};
       
     // Set gain and error on gain for ATWD (specified by channel).
@@ -130,89 +130,89 @@ public:
   
     void SetHighVoltage(double voltage)
 	{
-	    fPMTHighVoltage = voltage;
+	    PMTHighVoltage_ = voltage;
 	};
     
     double GetHighVoltage()
 	{
-	    return fPMTHighVoltage;
+	    return PMTHighVoltage_;
 	};
     
     void SetSingleSPEThresholdVoltage(double voltage)
 	{
-	    fSingleSPEThresholdVoltage = voltage;
+	    singleSPEThresholdVoltage_ = voltage;
 	};
     
     double GetSingleSPEThresholdVoltage()
 	{
-	    return fSingleSPEThresholdVoltage;
+	    return singleSPEThresholdVoltage_;
 	};
     
     void SetPedestalVoltage(double voltage)
 	{
-	    fPedestalVoltage = voltage;
+	    pedestalVoltage_ = voltage;
 	};
     
     double GetPedestalVoltage()
 	{
-	    return fPedestalVoltage;
+	    return pedestalVoltage_;
 	};
 
     void SetPeakToValley(double p2v)
 	{
-	    fPeakToValley = p2v;
+	    peakToValley_ = p2v;
 	};
     
     double GetPeakToValley()
-	{
-	    return fPeakToValley;
-	};
+	 {
+	    return peakToValley_;
+	 };
 
     void SetSPEMean(double mean)
 	{
-	    fSPEMean = mean;
+	    SPEMean_ = mean;
 	};
     
     /*
     void SetOnePEinPC(double OnePE)
 	{
-	    fOnePEinPC = OnePE;
+	    onePEinPC_ = OnePE;
 	};
     */
 
     double GetSPEMean()
 	{
-	    return fSPEMean;
+	    return SPEMean_;
 	};
     
     /*
     double GetOnePEinPC()
 	{
-	    return fOnePEinPC;
+	    return onePEinPC_;
 	};
     */
 
     void SetSPEWidth(double width)
 	{
-	    fSPEWidth = width;
+	    SPEWidth_ = width;
 	};
     
     /*
     void SetWidth1PEinPC(double width1pe)
 	{
-	    fWidth1PEinPC = width1pe;
+	    width1PEinPC_ = width1pe;
 	};
     */
 
     double GetSPEWidth()
 	{
-	    return fSPEWidth;
+	    return SPEWidth_;
 	};
     
     /*
     double GetWidth1PEinPC()
 	{
-	    return fWidth1PEinPC;
+	    return width1PEinPC_;
 	};
     */
 
@@ -224,56 +224,56 @@ public:
     {
 	o<<"[ "
 	 <<"Calibration:"
-	 <<"\tDate: "<<fDate<<endl
-	 <<"\tDOM ID: "<<fDOMId<<endl
-	 <<"\tSPE Mean: "<<fSPEMean<<endl
-	 <<"\tPeak-to-Valley: "<<fPeakToValley<<endl
+	 <<"\tDate: "<<date_<<endl
+	 <<"\tDOM ID: "<<DOMId_<<endl
+	 <<"\tSPE Mean: "<<SPEMean_<<endl
+	 <<"\tPeak-to-Valley: "<<peakToValley_<<endl
 	 <<"\tSuppressing the rest of the output ]\n";
     };
 
     virtual string ToString() const
     {
-	ostringstream out;
-	ToStream(out);
-	return out.str();
+		 ostringstream out;
+		 ToStream(out);
+		 return out.str();
     };
     
 private:
     // Simple data types
 
     // What is Date? UTC? GPS ns?
-    double  fDate;  
-    unsigned int    fDOMId;
-    double  fTemperature;
+    double  date_;  
+    unsigned int    DOMId_;
+    double  temperature_;
     
     // Gain and pedestal values for FADC
-    double fFADCGain;
-    double fFADCPedestal;
+    double FADCGain_;
+    double FADCPedestal_;
 
-    double fPMTHighVoltage;
-    double fPedestalVoltage;
-    double fSingleSPEThresholdVoltage;
+    double PMTHighVoltage_;
+    double pedestalVoltage_;
+    double singleSPEThresholdVoltage_;
    
     // Parameters describing the SPE charge distribution
-    double fPeakToValley;
-    double fSPEMean;
-    double fSPEWidth; 
+    double peakToValley_;
+    double SPEMean_;
+    double SPEWidth_; 
 
-    //double fOnePEinPC;
-    //double fWidth1PEinPC;
+    //double onePEinPC_;
+    //double width1PEinPC_;
 
-    double fSamplingRate0;
-    double fSamplingRate1;
+    double samplingRate0_;
+    double samplingRate1_;
 
     // Gain and error on gain for ATWD channels.
     // The key corresponds to the channel.
-    map<int, double> fAmpGains;
-    map<int, double> fAmpGainErrs;
+    map<int, double> ampGains_;
+    map<int, double> ampGainErrs_;
     
     // First key corresponds to channel.
     // Key in internal map corresponds to bin.
-    map< int, map<int,LinearFit> > fATWD0;
-    map< int, map<int,LinearFit> > fATWD1;
+    map< int, map<int,LinearFit> > ATWD0_;
+    map< int, map<int,LinearFit> > ATWD1_;
     map< int, map<int,LinearFit> >& GetATWDById(int id);
 
     // Copy constructor and assignment operator

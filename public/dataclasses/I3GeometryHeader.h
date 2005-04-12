@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3GeometryHeader.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3GeometryHeader.h,v 1.10 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3GeometryHeader.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -31,15 +31,15 @@ using namespace std;
 class I3GeometryHeader : public I3DataHeader
 {
   // instance data
-  int fNumOms;
-  int fNumStrings;
-  string fArrayName;
+  int numOMs_;
+  int numStrings_;
+  string arrayName_;
   
  public:
   /**
    * constructor
    */
-  I3GeometryHeader()  : fNumOms(-1), fNumStrings(-1){;}
+  I3GeometryHeader()  : numOMs_(-1), numStrings_(-1){;}
 
   /**
    * destructor
@@ -57,41 +57,41 @@ class I3GeometryHeader : public I3DataHeader
   const I3GeometryHeader& operator=(const I3GeometryHeader& rhs){
     if(this == &rhs) return *this;
     I3DataHeader::operator=(rhs);
-    fNumOms = rhs.fNumOms;
-    fNumStrings = rhs.fNumStrings;
-    fArrayName = rhs.fArrayName;
+    numOMs_ = rhs.numOMs_;
+    numStrings_ = rhs.numStrings_;
+    arrayName_ = rhs.arrayName_;
     return *this;
   }
 
   /**
    * @return the total number of oms for the geometry
    */
-  int GetNumOms() const{ return fNumOms; }
+  int GetNumOms() const{ return numOMs_; }
 
   /**
    * @param arg the new number of oms for the geometry
    */
-  void SetNumOms(int arg) { fNumOms = arg; }
+  void SetNumOms(int arg) { numOMs_ = arg; }
 
   /**
    * @return the number of strings for the geometry
    */
-  int GetNumStrings() const { return fNumStrings; }
+  int GetNumStrings() const { return numStrings_; }
 
   /**
    * @param strings the new number of strings for the geometry
    */
-  void SetNumStrings(int strings) { fNumStrings = strings; }
+  void SetNumStrings(int strings) { numStrings_ = strings; }
 
   /**
    * @return the name of the array.  E.g. 'AMANDAB10'
    */
-  string GetArrayName() const{ return fArrayName; }
+  string GetArrayName() const{ return arrayName_; }
 
   /**
    * @param arg the new name for the array
    */
-  void  SetArrayName( const string &arg) { fArrayName = arg; }
+  void  SetArrayName( const string &arg) { arrayName_ = arg; }
 
   // note that it is not a reference returned, we need that copy constructor
   /**

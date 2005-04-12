@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3MCEvent.h,v 1.14 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3MCEvent.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -25,9 +25,9 @@
 
 class I3MCEvent : public I3Event
 {
-  float           fMCFrameStart;
-  float           fMCFrameStop;
-  I3MCParticleData  fMCParticleData; //||
+  float           MCFrameStart_;
+  float           MCFrameStop_;
+  I3MCParticleData  MCParticleData_; //||
 
  public:
   /**
@@ -46,42 +46,42 @@ class I3MCEvent : public I3Event
    * This is the earliest time simulated
    * @return the start time for the simulation
    */
-  const float GetMCFrameStart() const {return fMCFrameStart; }
+  const float GetMCFrameStart() const {return MCFrameStart_; }
 
   /**
    * sets the start time for the simulation
    */
-  void SetMCFrameStart(float MCFrameStart){fMCFrameStart=MCFrameStart;}
+  void SetMCFrameStart(float MCFrameStart){MCFrameStart_=MCFrameStart;}
 
   /**
    * The time that the simulation stops.  See GetMCFrameStart for more.
    * This is the latest time simulated
    * @return the stop time for the simulation
    */
-  const float GetMCFrameStop() const {return fMCFrameStop;}
+  const float GetMCFrameStop() const {return MCFrameStop_;}
 
   /**
    * sets the stop time for the simulation
    */
-  void SetMCFrameStop(float MCFrameStop){fMCFrameStop=MCFrameStop;}
+  void SetMCFrameStop(float MCFrameStop){MCFrameStop_=MCFrameStop;}
 
   /**
    * @return the MCParticleDict as a constant object.
    */
-  const I3MCParticleData& GetMCParticleData() const { return fMCParticleData;}
+  const I3MCParticleData& GetMCParticleData() const { return MCParticleData_;}
 
   /**
    * @return the MCParticleDict as a non-const object.
    */
-  I3MCParticleData& GetMCParticleData(){ return fMCParticleData;}
+  I3MCParticleData& GetMCParticleData(){ return MCParticleData_;}
 
   virtual void ToStream(ostream& o) const
     {
       o<<" [ I3MCEvent ] \n";
       I3Event::ToStream(o);
-      o<<"Frame Start: "<<fMCFrameStart<<"\n"
-       <<"Frame Stop: "<<fMCFrameStop<<"\n"
-       <<fMCParticleData<<"\n";
+      o<<"Frame Start: "<<MCFrameStart_<<"\n"
+       <<"Frame Stop: "<<MCFrameStop_<<"\n"
+       <<MCParticleData_<<"\n";
     }
   
  private:

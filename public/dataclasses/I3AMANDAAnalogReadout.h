@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.13 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  *
  */
@@ -30,16 +30,16 @@ using namespace std;
  */
 class I3AMANDAAnalogReadout : public I3AnalogReadout { 
 
-    vector<double> fLEs;
-    vector<double> fTOTs;
-    vector<unsigned short> fHitNumbers;
-    double fAmp;
+    vector<double> LEs_;
+    vector<double> TOTs_;
+    vector<unsigned short> hitNumbers_;
+    double amp_;
  
 public:
     /**
      * constructor
      */
-    I3AMANDAAnalogReadout(){}
+    I3AMANDAAnalogReadout() { }
 
     /**
      * destructor
@@ -50,63 +50,63 @@ public:
      * @return the time of the first LE in the readout
      */
     virtual double GetFirstLE() const {
-	if(fLEs.size() >0)
-	    return fLEs[0];
-	return 0;
+		 if(LEs_.size() >0)
+			 return LEs_[0];
+		 return 0;
     }
     
     /**
      * @return the list of LEs as a const object
      */
-    const vector<double>& GetLEs() const {return fLEs;}
+    const vector<double>& GetLEs() const { return LEs_; }
     
     /**
      * @return the list of LEs as a non-const object
      */
-    vector<double>& GetLEs(){return fLEs;}
+    vector<double>& GetLEs() { return LEs_; }
     
     /**
      * @return the list of TOTs as const object
      */
-    const vector<double>& GetTOTs() const {return fTOTs;}
+    const vector<double>& GetTOTs() const { return TOTs_; }
     
     /**
      * @return the list of TOTs as a non-const object
      */
-    vector<double>& GetTOTs() {return fTOTs;}
+    vector<double>& GetTOTs() { return TOTs_; }
     
     /**
      * @return the list of TOTs as const object
      */
-    const vector<unsigned short>& GetHitNumbers() const {return fHitNumbers;}
+    const vector<unsigned short>& GetHitNumbers() const { return hitNumbers_; }
     
     /**
      * @return the list of TOTs as a non-const object
      */
-    vector<unsigned short>& GetHitNumbers() {return fHitNumbers;}
+    vector<unsigned short>& GetHitNumbers() { return hitNumbers_; }
 
     /**
      * @return the amplitude
      */
-    double GetAmplitude() const {return fAmp;}
+    double GetAmplitude() const { return amp_; }
     
     /**
      * @param amplitude the new amplitude of the readout
      */
-    void SetAmplitude(double amplitude) {fAmp=amplitude;}
+    void SetAmplitude(double amplitude) { amp_ = amplitude; }
     
 
     virtual void ToStream(ostream& o) const {
 	I3AnalogReadout::ToStream(o);
-	o << "Amplitude: " << fAmp << "\n"
-	  << "Number of Pulses: " << fLEs.size() << "\n"
+	o << "Amplitude: " << amp_ << "\n"
+	  << "Number of Pulses: " << LEs_.size() << "\n"
 	  << "Leading Edges: ";
-	for (unsigned i = 0; i < fLEs.size(); i++) {
-	    o << fLEs[i] << " ";
+	for (unsigned i = 0; i < LEs_.size(); i++) {
+	    o << LEs_[i] << " ";
 	}
 	o << "\nTOTs: ";
-	for (unsigned i = 0; i < fLEs.size(); i++) {
-	    o << fTOTs[i] << " ";
+	for (unsigned i = 0; i < LEs_.size(); i++) {
+	    o << TOTs_[i] << " ";
 	}
 	o << "\n";
     }

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3Composite.h,v 1.12 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Composite.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -23,7 +23,7 @@
 class I3Composite
 {
  private:
-   I3ParticleMultiMap fConstituents;
+   I3ParticleMultiMap constituents_;
  public:
   /**
    * constructor
@@ -43,12 +43,12 @@ class I3Composite
   /**
    * retrieves the constituents that make up this track as const
    */
-  const I3ParticleMultiMap& GetConstituents() const {return fConstituents;}
+  const I3ParticleMultiMap& GetConstituents() const {return constituents_;}
 
   /**
    * retrieves the constituents that make up this track as non-const
    */
-  I3ParticleMultiMap& GetConstituents() {return fConstituents;}
+  I3ParticleMultiMap& GetConstituents() {return constituents_;}
 
   /**
    * copies this particle's data into destination if a dynamic_cast
@@ -60,7 +60,7 @@ class I3Composite
       I3Composite* composite = dynamic_cast<I3Composite*>(&destination);
       if(composite)
 	{
-	  composite->fConstituents = fConstituents;
+	  composite->constituents_ = constituents_;
 	}
     }
 
@@ -68,7 +68,7 @@ class I3Composite
     {
       o<<"Consituents: \n";
       I3ParticleMultiMap::const_iterator iter;
-      for(iter= fConstituents.begin() ; iter!= fConstituents.end() ; iter++)
+      for(iter= constituents_.begin() ; iter!= constituents_.end() ; iter++)
 	{
 	  o<<iter->first<<" "<<iter->second<<"\n";
 	}

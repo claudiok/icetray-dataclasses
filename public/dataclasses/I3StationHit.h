@@ -1,7 +1,7 @@
 /**
-    $Id: I3StationHit.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
+    $Id: I3StationHit.h,v 1.9 2005/04/12 18:55:28 dule Exp $
     @file I3StationHit.h
-    @version $Revision: 1.8 $
+    @version $Revision: 1.9 $
     @date Fri Jul  9 21:16:58 EDT 2004
     @author rulrich
 */
@@ -25,33 +25,14 @@ class I3StationHit : public TObject,
  private:
 
   // the station number
-  unsigned short fStationNumber;
-
-  /*
-    RU: I would think of a station only as a unit for triggering purposes,
-        especially for low energetic air showers as a ICECUBE veto, so
-        it may not need any of these:
-
-  // signal of the station, to be computed from the signals in
-  // the tank
-  float fSignal;
-
-  // time of the station, to be computed from the times in the tank
-  float fTime;
-
-  // x position of the hit, to be composed from the tank x
-  float fX;
-
-  // y postion of the hist, to be composed from the tank y
-  float fY;
-  */
+  unsigned short stationNumber_;
 
  public:
   /**
    * constructor
    */
   I3StationHit(unsigned short station_number = 0) :
-    fStationNumber( station_number ) {}
+    stationNumber_( station_number ) {}
   
   /**
    * destructor
@@ -61,12 +42,16 @@ class I3StationHit : public TObject,
   /**
    * Get the station number
    */
-  unsigned short StationNumber () const;
+  unsigned short StationNumber () const {
+	  return stationNumber_;
+  }
 
   /**
    * Set the station number
    */
-  void StationNumber (unsigned short station_number);
+  void StationNumber (unsigned short station_number) {
+	  stationNumber_ = station_number;
+  }
 
   /**
    * dumps the object to the indicated ostream
@@ -127,7 +112,7 @@ class I3StationHitMatchesStationNumber {
    */
   I3StationHitMatchesStationNumber (unsigned short station_number)
     {
-      fStationNumber = station_number;
+      stationNumber_ = station_number;
     }
 
   /**
@@ -135,11 +120,11 @@ class I3StationHitMatchesStationNumber {
    */
   bool operator () (I3StationHitPtr station)
     {
-      return station->StationNumber () == fStationNumber;
+      return station->StationNumber () == stationNumber_;
     }
 
  private:
-  unsigned short fStationNumber;
+  unsigned short stationNumber_;
 
 };
 

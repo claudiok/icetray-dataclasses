@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3AnalogReadout.h,v 1.10 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.9 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -29,7 +29,7 @@ public:
     /**
      * constructor
      */
-    I3AnalogReadout(){}
+    I3AnalogReadout() { }
     
     /**
      * destructor

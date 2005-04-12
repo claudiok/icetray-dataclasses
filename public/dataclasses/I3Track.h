@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.31 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3Track.h,v 1.32 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Track.h
- * @version $Revision: 1.31 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.32 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author pretz
  */
 
@@ -48,12 +48,12 @@ class I3Track : public I3InIceParticle
   /**
    * indicates that this track is not a cascade
    */
-  virtual bool IsCascade() {return kFALSE;}
+  virtual bool IsCascade() {return false;}
 
   /**
    * indicates that this track is a track.
    */
-  virtual bool IsTrack() {return kTRUE;}
+  virtual bool IsTrack() {return true;}
 
   /**
    * indicates that the 'StartX() ... ' parameters are valid

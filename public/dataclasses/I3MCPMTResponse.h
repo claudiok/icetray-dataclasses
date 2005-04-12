@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.14 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3MCPMTResponse.h,v 1.15 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.14 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.15 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author klein
  */
 
@@ -27,14 +27,14 @@
 class I3MCPMTResponse : public TObject {
 
 protected:
-  float fStartTime;
-  float fEndTime;
+  float startTime_;
+  float endTime_;
   
 public:
   /**
    * constructor
    */
-  I3MCPMTResponse(){fStartTime=0.; fEndTime=0.;} 
+  I3MCPMTResponse(){startTime_=0.; endTime_=0.;} 
   
   /**
    * destructor
@@ -49,21 +49,21 @@ public:
   /**  
    * First time that is meaningful (non-zero) 
    */
-  float GetStartTime() const {return fStartTime;}
+  float GetStartTime() const {return startTime_;}
 
   /** 
    * Last time that is meaningful (non-zero) 
    */
-  float GetEndTime() const {return fEndTime;}
+  float GetEndTime() const {return endTime_;}
 
-  void SetStartTime(const float time) { fStartTime = time;}
+  void SetStartTime(const float time) { startTime_ = time;}
 
-  void SetEndTime(const float time) { fEndTime = time;}
+  void SetEndTime(const float time) { endTime_ = time;}
   
   virtual void ToStream(ostream& o) const {
     o<<"[ "<<IsA()->GetName()<<" ]\n"
-     <<"StartTime: "<<fStartTime
-     <<"EndTime: "<<fEndTime;
+     <<"StartTime: "<<startTime_
+     <<"EndTime: "<<endTime_;
   }
 
   virtual string ToString() const {

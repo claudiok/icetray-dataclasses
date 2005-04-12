@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.15 2005/04/12 17:50:52 olivas Exp $
+ * $Id: I3Direction.h,v 1.16 2005/04/12 18:59:51 dule Exp $
  *
  * @file I3Direction.h
- * @version $Revision: 1.15 $
- * @date $Date: 2005/04/12 17:50:52 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2005/04/12 18:59:51 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.15 2005/04/12 17:50:52 olivas Exp $
+// $Id: I3Direction.h,v 1.16 2005/04/12 18:59:51 dule Exp $
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H
@@ -121,7 +121,7 @@ class I3Direction : public TObject
    * Provide X of direction in cartesian ref frame
    */
   double GetX() const {
-    if (!IsCalculated) CalcCarFromSph();
+    if (!isCalculated_) CalcCarFromSph();
     return xDir_;
   }
 
@@ -129,7 +129,7 @@ class I3Direction : public TObject
    * Provide Y of direction in cartesian ref frame
    */
   double GetY() const {
-    if (!IsCalculated) CalcCarFromSph();
+    if (!isCalculated_) CalcCarFromSph();
     return yDir_;
   }
 
@@ -137,7 +137,7 @@ class I3Direction : public TObject
    * Provide Z of direction in cartesian ref frame
    */
   double GetZ() const {
-    if (!IsCalculated) CalcCarFromSph();
+    if (!isCalculated_) CalcCarFromSph();
     return zDir_;
   }
 
@@ -206,7 +206,7 @@ class I3Direction : public TObject
   /**
    * Did we calculate the directions before?
    */
-  mutable bool IsCalculated; 
+  mutable bool isCalculated_; 
 
  private:
   /**

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIceCube.h,v 1.2 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3OMGeoIceCube.h,v 1.3 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3OMGeoIceCube.h
- * @version $Revision: 1.2 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.3 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,7 +29,7 @@ class I3OMGeoIceCube : public I3OMGeo
   /**
    * constructor
    */
-  I3OMGeoIceCube();
+  I3OMGeoIceCube() { };
 
   /**
    * copy constructor just uses assignment

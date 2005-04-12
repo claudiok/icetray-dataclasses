@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCCascade.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
+    $Id: I3MCCascade.h,v 1.14 2005/04/12 18:55:28 dule Exp $
 
     @file I3MCCascade.h
-    @version $Revision: 1.13 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @version $Revision: 1.14 $
+    @date $Date: 2005/04/12 18:55:28 $
     @author deyoung
 */
 
@@ -28,13 +28,13 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
                                          I3Energetic,
                                          I3Composite>
 {
-  double     fWeight;
+  double weight_;
   
   public:
   /**
    * constructor
    */
-  I3MCCascade() {fWeight=1;};
+  I3MCCascade() {weight_=1;};
 
   /**
    * destructor
@@ -44,12 +44,12 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
   /**
    * gives the mc weight that this cascade contributes
    */
-  double GetWeight() const { return fWeight; }
+  double GetWeight() const { return weight_; }
 
   /**
    * sets the weight that this cascade will contribute
    */
-  void  SetWeight(double weight_) { fWeight = weight_; }
+  void  SetWeight(double weight) { weight_ = weight; }
 
  private:
   // ROOT macro

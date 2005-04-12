@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3AMANDAPMTPulse.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3AMANDAPMTPulse.h,v 1.5 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3AMANDAPMTPulse.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  *
  */
@@ -39,90 +39,91 @@ public:
   /**
    * constructor
    */
-  I3AMANDAPMTPulse() : fNormalization(0.), 
-	               fNorm(0.),
-		       fWeight(0.),
-		       fStddev1(0.),
-                       fMu1(0.),
-                       fStddev2(0.),
-                       fMu2(0.),
-		       fTimeZero(0.),
-		       fPedestal(0.) {};
+  I3AMANDAPMTPulse() : 
+	  normalization_(0.), 
+	  norm_(0.),
+	  weight_(0.),
+	  stdDev1_(0.),
+	  mu1_(0.),
+	  stdDev2_(0.),
+	  mu2_(0.),
+	  timeZero_(0.),
+	  pedestal_(0.) {};
   
   /**
    * Gets/Sets the normalization of this pulse
    * (e.g. ROMEO uses integrated charge * terminator [50 ohms]).
    */
-  virtual double GetNormalization() {return fNormalization;};
-  virtual void SetNormalization(const double norm) {fNormalization = norm;};
+  virtual double GetNormalization() {return normalization_;};
+  virtual void SetNormalization(const double norm) {normalization_ = norm;};
 
   /**
    * Gets/Sets the norm of this pulse 
    * (a paramter of the AMANDA waveform formula).
    */
-  virtual double GetNorm() {return fNorm;};
-  virtual void SetNorm(const double norm) {fNorm = norm;};
+  virtual double GetNorm() {return norm_;};
+  virtual void SetNorm(const double norm) {norm_ = norm;};
 
   /**
    * Gets/Sets the weight used to determine to ration between the two terms 
    * of the AMANDA waveform formula.
    */
-  virtual double GetWeight() {return fWeight;};
-  virtual void SetWeight(const double weight) {fWeight = weight;};
+  virtual double GetWeight() {return weight_;};
+  virtual void SetWeight(const double weight) {weight_ = weight;};
 
   /**
    * Gets/Sets the Stddev for the first term of the AMANDA waveform formula
    */
-  virtual double GetStddev1() {return fStddev1;};
-  virtual void SetStddev1(const double stddev1) {fStddev1 = stddev1;};
+  virtual double GetStddev1() {return stdDev1_;};
+  virtual void SetStddev1(const double stddev1) {stdDev1_ = stddev1;};
 
   /**
    * Gets/Sets Mu for the first term of the AMANDA waveform formula
    */
-  virtual double GetMu1() {return fMu1;};
-  virtual void SetMu1(const double mu1) {fMu1 = mu1;};
+  virtual double GetMu1() {return mu1_;};
+  virtual void SetMu1(const double mu1) {mu1_ = mu1;};
 
   /**
    * Gets/Sets the Stddev for the second term of the AMANDA waveform formula
    */
-  virtual double GetStddev2() {return fStddev2;};
-  virtual void SetStddev2(const double stddev2) {fStddev2 = stddev2;};
+  virtual double GetStddev2() {return stdDev2_;};
+  virtual void SetStddev2(const double stddev2) {stdDev2_ = stddev2;};
 
   /**
    * Gets/Sets Mu for the second term of the AMANDA waveform formula
    */
-  virtual double GetMu2() {return fMu2;};
-  virtual void SetMu2(const double mu2) {fMu2 = mu2;};
+  virtual double GetMu2() {return mu2_;};
+  virtual void SetMu2(const double mu2) {mu2_ = mu2;};
 
 
   /** 
    * Gets/Sets the zero time for the pulse. 
    * Times before T0 are invalid for this pulse when the pulse starts.
    */  
-  virtual double GetTimeZero() {return fTimeZero;};
-  virtual void SetTimeZero(const double time) {fTimeZero = time;};
+  virtual double GetTimeZero() {return timeZero_;};
+  virtual void SetTimeZero(const double time) {timeZero_ = time;};
 
   /** 
    * Gets/Sets the pedestal. This is a linear offset to the pulse voltage curve.
    */
-  virtual double GetPedestal() {return fPedestal;};
-  virtual void SetPedestal(const double ped) {fPedestal = ped;};
+  virtual double GetPedestal() {return pedestal_;};
+  virtual void SetPedestal(const double ped) {pedestal_ = ped;};
 
   /** 
    * Returns the voltage at the given time. Voltage is negative.
    */  
   virtual double GetVoltage(const double time) 
   {
-    double t             = (time-fTimeZero) / I3Units::ns;               //need to convert into explicite units
-    double normalization = fNormalization / (I3Units::ns * I3Units::V);  //since the formula below requires explicite units
+    double t             = (time-timeZero_) / I3Units::ns;               //need to convert into explicite units
+    double normalization = normalization_ / (I3Units::ns * I3Units::V);  //since the formula below requires explicite units
 
     return(t>0 ? 
-       - I3Units::V * normalization * fNorm 
-                * ( fWeight/(sqrt(2*pi*fStddev1*fStddev1)) * (1/t)
-                    * exp(-(log(t)-fMu1)*(log(t)-fMu1)/(2*fStddev1*fStddev1))
-                    - (1-fWeight)/(sqrt(2*pi*fStddev2*fStddev2)) * (1/t)
-                    * exp(-(log(t)-fMu2)*(log(t)-fMu2)/(2*fStddev2*fStddev2)) )
-       + fPedestal : 0);
+       - I3Units::V * normalization * norm_ 
+                * ( weight_/(sqrt(2*pi*stdDev1_*stdDev1_)) * (1/t)
+                    * exp(-(log(t)-mu1_)*(log(t)-mu1_)/(2*stdDev1_*stdDev1_))
+                    - (1-weight_)/(sqrt(2*pi*stdDev2_*stdDev2_)) * (1/t)
+                    * exp(-(log(t)-mu2_)*(log(t)-mu2_)/(2*stdDev2_*stdDev2_)) )
+       + pedestal_ : 0);
   };
 
   /** 
@@ -131,11 +132,11 @@ public:
    */ 
   virtual double GetPeakTime() 
   {
-    double t = fTimeZero / I3Units::ns;  //need to convert into explicite units
+    double t = timeZero_ / I3Units::ns;  //need to convert into explicite units
                                            //since the formula below requires explicite units
     
     //get the peak time for the first term, the peak for the entire formula should be close to it
-    double t1 = t + exp(fStddev1*fStddev1 + fMu1);  //this value is in ns
+    double t1 = t + exp(stdDev1_*stdDev1_ + mu1_);  //this value is in ns
     
     double v_before_t1 = GetVoltage((t1-1)*I3Units::ns);
     double v_at_t1     = GetVoltage((t1)*I3Units::ns);
@@ -188,15 +189,15 @@ public:
 
 private:
 
-  double fNormalization;
-  double fNorm;
-  double fWeight;
-  double fStddev1;
-  double fMu1;
-  double fStddev2;
-  double fMu2;
-  double fTimeZero;
-  double fPedestal;
+  double normalization_;
+  double norm_;
+  double weight_;
+  double stdDev1_;
+  double mu1_;
+  double stdDev2_;
+  double mu2_;
+  double timeZero_;
+  double pedestal_;
 
   //ROOT macro
   ClassDef(I3AMANDAPMTPulse, 1);

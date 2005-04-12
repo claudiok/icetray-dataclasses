@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMResponseSelection.h,v 1.10 2005/04/09 03:02:10 olivas Exp $
+ *  $Id: I3OMResponseSelection.h,v 1.11 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3OMResponseSelection.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.11 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author deyoung
  * @author troy
  */
@@ -47,7 +47,7 @@ public:
    * pair is selected.  By default, returns true for all OMResponses.
    */
   virtual bool operator()(const pair<OMKey, I3OMResponsePtr>& element) {
-    return kTRUE; 
+    return true; 
   };
 
   /**

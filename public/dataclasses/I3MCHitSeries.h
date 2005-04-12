@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.26 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3MCHitSeries.h,v 1.27 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3MCHitSeries.h
- * @version $Revision: 1.26 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.27 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -26,7 +26,7 @@
  */
 class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
 {
-  double fWeight;
+  double weight_;
  public:
   /**
    * constructor
@@ -41,12 +41,12 @@ class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
   /**
    * @return the weight associated with this series
    */
-  double GetWeight() { return fWeight; }
+  double GetWeight() { return weight_; }
 
   /**
    * @param weight the new weight for this series
    */
-  void SetWeight(double weight) { fWeight = weight; }
+  void SetWeight(double weight) { weight_ = weight; }
 
   /**
    * earliest hit time

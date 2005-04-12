@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Geometry.h,v 1.30 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3Geometry.h,v 1.31 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Geometry.h
- * @version $Revision: 1.30 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.31 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -26,8 +26,8 @@
  */
 class I3Geometry : public TObject 
 {
-  I3InIceGeometry fInIce; //||;
-  I3TopGeometry fTop; //||
+  I3InIceGeometry inIce_; //||;
+  I3TopGeometry top_; //||
  public:
   /**
    * constructor
@@ -42,22 +42,22 @@ class I3Geometry : public TObject
   /**
    * @return the In-Ice geometry as a constant object
    */
-  const I3InIceGeometry& GetInIceGeometry() const { return fInIce;}
+  const I3InIceGeometry& GetInIceGeometry() const { return inIce_;}
 
   /**
    * @return the In-Ice geometry as a non-const object
    */
-  I3InIceGeometry& GetInIceGeometry() { return fInIce;}
+  I3InIceGeometry& GetInIceGeometry() { return inIce_;}
 
   /**
    * @return the IceTop geometry as a const object
    */
-  const I3TopGeometry& GetIceTopGeometry() const{ return fTop; }
+  const I3TopGeometry& GetIceTopGeometry() const{ return top_; }
 
   /**
    * @return the IceTop geometry as a non-const object
    */
-  I3TopGeometry& GetIceTopGeometry() { return fTop; }
+  I3TopGeometry& GetIceTopGeometry() { return top_; }
 
   /**
    * streams the geometry to the given ostream
@@ -65,8 +65,8 @@ class I3Geometry : public TObject
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3Geometry\n"
-       <<fInIce
-	//<<fIceTopGeometry
+       <<inIce_
+			//<<top_
        <<"]\n";
     }
 

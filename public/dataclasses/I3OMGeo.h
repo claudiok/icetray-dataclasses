@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.31 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3OMGeo.h,v 1.32 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3OMGeo.h
- * @version $Revision: 1.31 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.32 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -45,22 +45,22 @@ class I3OMGeo : public TObject
   /**
    * the position
    */
-  I3Position fPosition;
+  I3Position position_;
 
   /**
    * the orientation
    */
-  EOrientation fOrientation;
+  EOrientation orientation_;
 
   /**
    * the quantum efficiency relative to some standard
    */
-  double fRelativeQE;
+  double relativeQE_;
 
   /**
    * the cross-sectional area of the photocathode
    */
-  double fArea;
+  double area_;
 
   public:
   /**
@@ -86,13 +86,13 @@ class I3OMGeo : public TObject
   /**
    * @return The position of this OM
    */
-  const I3Position& GetPos() const { return fPosition;}
+  const I3Position& GetPos() const { return position_;}
 
   /**
    * @param pos The new position for this OM
    */
   void SetPos(I3Position& pos)
-    {fPosition.SetPosition(pos);}
+    {position_.SetPosition(pos);}
   
   /**
    * Sets the position of the OM
@@ -103,17 +103,17 @@ class I3OMGeo : public TObject
    */
   void SetPos(double r1, double r2, double r3, 
 	      I3Position::RefFrame frame=I3Position::car)
-    {fPosition.SetPosition(r1,r2,r3,frame);}
+    {position_.SetPosition(r1,r2,r3,frame);}
   
   /**
    * @return the orientation of the tube
    */
-  EOrientation  GetOrientation() const { return fOrientation; }
+  EOrientation  GetOrientation() const { return orientation_; }
 
   /**
    * @param orientation the new orientation for the tube
    */
-  void SetOrientation(EOrientation orientation) { fOrientation = orientation; }
+  void SetOrientation(EOrientation orientation) { orientation_ = orientation; }
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
@@ -121,7 +121,7 @@ class I3OMGeo : public TObject
    * AMANDA experiment
    * @return the relative quantum efficiency of this OM
    */
-  double GetRelativeQE() const {return fRelativeQE;}
+  double GetRelativeQE() const {return relativeQE_;}
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
@@ -129,20 +129,20 @@ class I3OMGeo : public TObject
    * AMANDA experiment
    * @param qe the new Relative Quantum Efficiency for this OM
    */
-  void SetRelativeQE(double qe) { fRelativeQE = qe;}
+  void SetRelativeQE(double qe) { relativeQE_ = qe;}
 
   /**
    * retrieves the area of the photo cathode for this tube
    * @return the area of the photocathode
    */
-  double GetArea() const { return fArea;}
+  double GetArea() const { return area_;}
 
 
   /**
    * sets the photocathode area for this tube
    * @param area the new area for the photocathode
    */
-  void SetArea(double area){fArea = area;}
+  void SetArea(double area){area_ = area;}
 
   /**
    * @todo finish with all the data
@@ -152,11 +152,11 @@ class I3OMGeo : public TObject
       o<<"[ "
        <<IsA()->GetName()
        <<" X:"
-       <<fPosition.GetX()
+       <<position_.GetX()
        <<" Y:"
-       <<fPosition.GetY()
-	<<" Z:"
-       <<fPosition.GetZ()
+       <<position_.GetY()
+		 <<" Z:"
+       <<position_.GetZ()
        <<" ]\n";
     }
 
@@ -171,7 +171,11 @@ class I3OMGeo : public TObject
   /**
    * resets the data to 0's.
    */
-  void Init();
+  void Init() {
+	  orientation_ = Unspecified;
+	  relativeQE_ = 0;
+  }
+
 
   //ROOT macro
   ClassDef(I3OMGeo,1);

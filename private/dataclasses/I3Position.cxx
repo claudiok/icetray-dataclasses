@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.14 2005/04/04 15:49:24 pretz Exp $
+// $Id: I3Position.cxx,v 1.15 2005/04/12 18:55:28 dule Exp $
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -51,27 +51,27 @@ void I3Position::SetPosition(const I3Position& p)
 void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
 {
 // Store position according to reference frame f
-  IsCalculated=kFALSE;
+  isCalculated=false;
 
   switch (frame) {
   case car: // Input given in Cartesian coordinates
-    fX=r1;
-    fY=r2;
-    fZ=r3;
+    x_=r1;
+    y_=r2;
+    z_=r3;
     //CalcSphCylFromCar();
     break;
       
   case sph: // Input given in Spherical coordinates
-    fR=r1;
-    fTheta=r2;
-    fPhi=r3;
+    r_=r1;
+    theta_=r2;
+    phi_=r3;
     CalcCarCylFromSph();
     break;
 
   case cyl: // Input given in Cylindrical coordinates
-    fRho=r1;
-    fPhi=r2;
-    fZ=r3;
+    rho_=r1;
+    phi_=r2;
+    z_=r3;
     CalcCarSphFromCyl();
     break;
     
@@ -85,14 +85,14 @@ void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
 void I3Position::ResetPosition()
 {
 // Set or Reset the position to 0.
-  fX=NAN;
-  fY=NAN;
-  fZ=NAN;
-  fR=NAN;
-  fTheta=NAN;
-  fPhi=NAN;
-  fRho=NAN;
-  IsCalculated=kTRUE;
+  x_=NAN;
+  y_=NAN;
+  z_=NAN;
+  r_=NAN;
+  theta_=NAN;
+  phi_=NAN;
+  rho_=NAN;
+  isCalculated=true;
 }
 //-----------------------------------------------------------
 
@@ -101,7 +101,7 @@ void I3Position::ShiftCoordSystem(const I3Position& p)
 {
 // Shift coordinate system by position p
 // i.e. perform: this=this-p
-  SetPosition(fX-p.GetX(), fY-p.GetY(), fZ-p.GetZ(), car);
+  SetPosition(x_-p.GetX(), y_-p.GetY(), z_-p.GetZ(), car);
 }
 
 //-----------------------------------------------------------
@@ -110,9 +110,9 @@ void I3Position::RotateX(double angle)
 // Rotate around x-axis by angle
   double s=sin(angle);
   double c=cos(angle);
-  double y=fY;
-  fY=c*y-s*fZ;
-  fZ=s*y+c*fZ;
+  double y=y_;
+  y_=c*y-s*z_;
+  z_=s*y+c*z_;
   CalcSphCylFromCar();
 }
 
@@ -122,9 +122,9 @@ void I3Position::RotateY(double angle)
 // Rotate around y-axis by angle
   double s=sin(angle);
   double c=cos(angle);
-  double z=fZ;
-  fZ=c*z-s*fX;
-  fX=s*z+c*fX;
+  double z=z_;
+  z_=c*z-s*x_;
+  x_=s*z+c*x_;
   CalcSphCylFromCar();
 }
 
@@ -134,9 +134,9 @@ void I3Position::RotateZ(double angle)
 // Rotate around z-axis by angle
   double s=sin(angle);
   double c=cos(angle);
-  double x=fX;
-  fX=c*x-s*fY;
-  fY=s*x+c*fY;
+  double x=x_;
+  x_=c*x-s*y_;
+  y_=s*x+c*y_;
   CalcSphCylFromCar();
 }
 
@@ -169,48 +169,48 @@ void I3Position::CalcSphCylFromCar() const
 {
   // Calculate Spherical and Cylindrical coordinates from Cartesian
   // Position is stored on disk in Cartesian coordinates only
-  fR=sqrt(fX*fX+fY*fY+fZ*fZ);
-  fTheta=0;
-  if (fR && fabs(fZ/fR)<=1.) {
-    fTheta=acos(fZ/fR);
+  r_=sqrt(x_*x_+y_*y_+z_*z_);
+  theta_=0;
+  if (r_ && fabs(z_/r_)<=1.) {
+    theta_=acos(z_/r_);
   } else {
-    if (fZ<0.) fTheta=pi;
+    if (z_<0.) theta_=pi;
   }
-  if (fTheta<0.) fTheta+=2.*pi;
-  fPhi=0;
-  if (fX || fY) fPhi=atan2(fY,fX);
-  if (fPhi<0.) fPhi+=2.*pi;
-  fRho=fR*sin(fTheta);
-  IsCalculated=kTRUE;
+  if (theta_<0.) theta_+=2.*pi;
+  phi_=0;
+  if (x_ || y_) phi_=atan2(y_,x_);
+  if (phi_<0.) phi_+=2.*pi;
+  rho_=r_*sin(theta_);
+  isCalculated=true;
 }
 
 //-----------------------------------------------------------
 void I3Position::CalcCarCylFromSph()
 {
   // Calculate Cartesian and Cylindrical coordinates from Spherical
-  fRho=fR*sin(fTheta);
-  fX=fRho*cos(fPhi);
-  fY=fRho*sin(fPhi);
-  fZ=fR*cos(fTheta);
-  IsCalculated=kTRUE;
+  rho_=r_*sin(theta_);
+  x_=rho_*cos(phi_);
+  y_=rho_*sin(phi_);
+  z_=r_*cos(theta_);
+  isCalculated=true;
 }
 
 //-----------------------------------------------------------
 void I3Position::CalcCarSphFromCyl()
 {
   // Calculate Cartesian and Spherical coordinates from Cylindrical
-  fR=sqrt(fRho*fRho+fZ*fZ);
-  if (fPhi<0.) fPhi+=2.*pi;
-  fTheta=0;
-  if (fR && fabs(fZ/fR)<=1.) {
-    fTheta=acos(fZ/fR);
+  r_=sqrt(rho_*rho_+z_*z_);
+  if (phi_<0.) phi_+=2.*pi;
+  theta_=0;
+  if (r_ && fabs(z_/r_)<=1.) {
+    theta_=acos(z_/r_);
   } else {
-    if (fZ<0.) fTheta=pi;
+    if (z_<0.) theta_=pi;
   }
-  if (fTheta<0.) fTheta+=2.*pi;
-  fX=fRho*cos(fPhi);
-  fY=fRho*sin(fPhi);
-  IsCalculated=kTRUE;
+  if (theta_<0.) theta_+=2.*pi;
+  x_=rho_*cos(phi_);
+  y_=rho_*sin(phi_);
+  isCalculated=true;
 }
 
 //-----------------------------------------------------------

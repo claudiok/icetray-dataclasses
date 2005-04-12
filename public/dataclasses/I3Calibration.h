@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3Calibration.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3Calibration.h,v 1.5 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Calibration.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author tmccauley
  */
 
@@ -32,31 +32,31 @@ public:
     
     const I3InIceCalibration& GetInIceCalibration() const 
 	{
-	    return fInIceCalibration;
+	    return inIceCalibration_;
 	};
     
     I3InIceCalibration& GetInIceCalibration() 
 	{
-	    return fInIceCalibration;
+	    return inIceCalibration_;
 	};
 
 //    const I3IceTopCalibration& GetIceTopCalibration() const
 //	{
-//	    return fIceTopCalibration;
+//	    return iceTopCalibration_;
 //	};
 //
 //    I3IceTopCalibration& GetIceTopCalibration() 
 //	{
-//	    return fIceTopCalibration;
+//	    return iceTopCalibration_;
 //	};
     
     virtual void ToStream(ostream& o) const
 	{
-	    o<<"[ I3Calibration\n"<< fInIceCalibration <<"]\n";
+	    o<<"[ I3Calibration\n"<< inIceCalibration_ <<"]\n";
 	};
     
 private:
-    I3InIceCalibration  fInIceCalibration;
+    I3InIceCalibration inIceCalibration_;
     //I3IceTopCalibration fIceTopCalibration;
     
     I3Calibration(const I3Calibration& calibration);

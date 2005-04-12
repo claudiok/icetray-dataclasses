@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.22 2005/04/04 15:49:25 pretz Exp $
+ * $Id: I3Infinite.h,v 1.23 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Infinite.h
- * @version $Revision: 1.22 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @version $Revision: 1.23 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author 
  */
 
@@ -23,11 +23,10 @@
 class I3Infinite
 {
  private:
-  I3Position fPos;
-  I3Direction fDir;
-  double fT;
-  //double fZenith;
-  //double fAzimuth;
+  I3Position pos_;
+  I3Direction dir_;
+  double time_;
+
  public:
 
   virtual ~I3Infinite() {}
@@ -49,72 +48,72 @@ class I3Infinite
   /**
    * the time the track was at X(), Y(), and Z()
    */ 
-  double GetT() const {return fT;}
+  double GetT() const {return time_;}
 
   /**
    * sets the time the track was at X(), Y(), Z()
    */
-  void SetT(double t){fT = t;}
+  void SetT(double t){time_ = t;}
 
   /**
    * gets a position along the track.
    */
-  I3Position GetPos() const {return fPos;}
+  I3Position GetPos() const {return pos_;}
 
   /**
    * sets a position along the track.
    */
-  void SetPos(I3Position& p) {fPos.SetPosition(p);}
+  void SetPos(I3Position& p) {pos_.SetPosition(p);}
 
   /**
    * sets a position along the track in any reference frame.
    */
   void SetPos(double p1, double p2, double p3, 
 	      I3Position::RefFrame frame=I3Position::car)
-    {fPos.SetPosition(p1,p2,p3,frame);}
+    {pos_.SetPosition(p1,p2,p3,frame);}
 
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return fDir;}
+  I3Direction GetDir() const {return dir_;}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {fDir.SetDirection(d);}
+  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(double zen, double azi) {fDir.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi) {dir_.SetDirection(zen,azi);}
 
   /**
    * sets the direction of the track
    */
   void SetDir(double x, double y, double z) 
-    {fDir.SetDirection(x,y,z);}
+    {dir_.SetDirection(x,y,z);}
 
   /**
    * gets the zenith of the track
    */
-  double GetZenith() const {return fDir.GetZenith();}
+  double GetZenith() const {return dir_.GetZenith();}
 
   /**
    * gets the azimuth of the track
    */
-  double GetAzimuth() const {return fDir.GetAzimuth();}
+  double GetAzimuth() const {return dir_.GetAzimuth();}
 
   /**
    * sets the zenith of the track
    */
   void SetZenith(double zen) {
-    fDir.SetDirection(zen,fDir.GetAzimuth());}
+    dir_.SetDirection(zen,dir_.GetAzimuth());}
 
   /**
    * sets the azimuth of the track
    */
   void SetAzimuth(double azi) {
-    fDir.SetDirection(fDir.GetZenith(),azi);}
+    dir_.SetDirection(dir_.GetZenith(),azi);}
 
   /**
    * returns the length of the track ... infinite
@@ -134,18 +133,18 @@ class I3Infinite
     {
       I3Infinite* infinite = dynamic_cast<I3Infinite*>(&destination);
       if(infinite){
-	infinite->fPos = fPos;
-	infinite->fDir = fDir;
-	infinite->fT = fT;
+	infinite->pos_ = pos_;
+	infinite->dir_ = dir_;
+	infinite->time_ = time_;
       }
     }
 
   virtual void ToStream(ostream& o) const
     {
       o<<"Geometry: Infinite\n"
-       <<"Position:\n"<<fPos
-       <<"Direction:\n"<<fDir
-       <<"Time: "<<fT<<"\n";
+       <<"Position:\n"<<pos_
+       <<"Direction:\n"<<dir_
+       <<"Time: "<<time_<<"\n";
     }
 
   private:

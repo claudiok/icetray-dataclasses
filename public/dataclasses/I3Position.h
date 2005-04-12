@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3Position.h,v 1.19 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3Position.h
- * @version $Revision: 1.18 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.19 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.18 2005/04/09 03:02:10 olivas Exp $
+// $Id: I3Position.h,v 1.19 2005/04/12 18:55:28 dule Exp $
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -98,25 +98,25 @@ class I3Position : public TObject
   /**
    * Provide X of position in cartesian ref frame
    */
-  double GetX() const {return fX;}
+  double GetX() const {return x_;}
 
   /**
    * Provide Y of position in cartesian ref frame
    */
-  double GetY() const {return fY;}
+  double GetY() const {return y_;}
 
   /**
    * Provide Z of position in cartesian ref frame
    */
-  double GetZ() const {return fZ;}
+  double GetZ() const {return z_;}
 
   /**
    * Provide R of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetR() const {
-    if (!IsCalculated) CalcSphCylFromCar();
-    return fR;
+    if (!isCalculated) CalcSphCylFromCar();
+    return r_;
   }
 
   /**
@@ -124,8 +124,8 @@ class I3Position : public TObject
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetTheta() const {
-    if (!IsCalculated) CalcSphCylFromCar();
-    return fTheta;
+    if (!isCalculated) CalcSphCylFromCar();
+    return theta_;
   }
 
   /**
@@ -133,8 +133,8 @@ class I3Position : public TObject
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetPhi() const {
-    if (!IsCalculated) CalcSphCylFromCar();
-    return fPhi;
+    if (!isCalculated) CalcSphCylFromCar();
+    return phi_;
   }
 
   /**
@@ -142,8 +142,8 @@ class I3Position : public TObject
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetRho() const {
-    if (!IsCalculated) CalcSphCylFromCar();
-    return fRho;
+    if (!isCalculated) CalcSphCylFromCar();
+    return rho_;
   }
 
   //--------------
@@ -152,24 +152,24 @@ class I3Position : public TObject
    * Set X position while keeping Y,Z constant.  Recalculate SPH and CYL.
    */
   void SetX(double x) {
-    fX=x;
-    IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
+    x_=x;
+    isCalculated=false; // when accessing CYL/SPH, they will be recalculated
   }
 
   /**
    * Set Y position while keeping X,Z constant.  Recalculate SPH and CYL.
    */
   void SetY(double y) {
-    fY=y;
-    IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
+    y_=y;
+    isCalculated=false; // when accessing CYL/SPH, they will be recalculated
   }
 
   /**
    * Set Z position while keeping X,Y constant.  Recalculate SPH and CYL.
    */
   void SetZ(double z) {
-    fZ=z;
-    IsCalculated=kFALSE; // when accessing CYL/SPH, they will be recalculated
+    z_=z;
+    isCalculated=false; // when accessing CYL/SPH, they will be recalculated
   }
 
   //--------------
@@ -218,22 +218,22 @@ class I3Position : public TObject
   /**
    * cartesian (car)
    */ 
-  double fX, fY, fZ;
+  double x_, y_, z_;
 
   /**
    * spherical (sph)
    */
-  mutable double fR, fTheta, fPhi;  
+  mutable double r_, theta_, phi_;  
 
   /**
    * cylindrical (cyl) - Z and Phi are same.
    */
-  mutable double fRho;
+  mutable double rho_;
 
   /**
    * Did we calculate the positions before?
    */
-  mutable bool IsCalculated; 
+  mutable bool isCalculated; 
 
  private:
 

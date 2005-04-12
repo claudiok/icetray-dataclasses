@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleParticle.h,v 1.4 2005/04/12 17:50:52 olivas Exp $
+ * $Id: I3RecoResultSingleParticle.h,v 1.5 2005/04/12 18:55:28 dule Exp $
  *
  * @file I3RecoResultSingleParticle.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/12 17:50:52 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/12 18:55:28 $
  * @author dule
  */
 
@@ -60,23 +60,23 @@ class I3RecoResultSingleParticle : public I3RecoResult
 	 * Fails the program if it is already set.
 	 */
 	void SetParticle(I3ParticlePtr particle) {
-		if (particle_)	{
-			log_fatal("I3RecoResultSingleParticle::SetParticle() particle exists already");
-			return;
-		}
-		particle_ = particle;
+	  if (particle_) {
+	    log_fatal("I3RecoResultSingleParticle::SetParticle() particle exists already");
+	    return;
+	  }
+	  particle_ = particle;
 	}
 
 	/**
 	 * Puts the contents of the container (a reco result) into the stream
 	 */
 	virtual void ToStream(ostream& o) const {
-      I3RecoResult::ToStream(o);
-      o<<"The Particle:\n";
-      if(particle_)
-			o<<*particle_<<"\n";
-      else
-			o<<"NULL Particle\n";
+	  I3RecoResult::ToStream(o);
+	  o<<"The Particle:\n";
+	  if(particle_)
+	    o<<*particle_<<"\n";
+	  else
+	    o<<"NULL Particle\n";
 	}
   
  private:
