@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMStatusIceCube.h,v 1.7 2005/04/12 18:55:28 dule Exp $
+ * $Id: I3OMStatusIceCube.h,v 1.8 2005/04/12 20:12:56 pretz Exp $
  *
  * @file I3OMStatusIceCube.h
- * @version $Revision: 1.7 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.8 $
+ * @date $Date: 2005/04/12 20:12:56 $
  * @author Spencer Klein (design)
  * @author pretz (implementation)
  *
@@ -53,17 +53,17 @@ class I3OMStatusIceCube : public I3OMStatus
   /**
    * A single PE trigger
    */
-  static const OMTrigSource SPE_;
+  static const OMTrigSource SPE;
 
   /**
    * a multi pe trigger
    */
-  static const OMTrigSource MPE_;
+  static const OMTrigSource MPE;
 
   /**
    * no trigger
    */
-  static const OMTrigSource trigSourceOff_;
+  static const OMTrigSource trigSourceOff;
 
   /**
    * Sets the OM Trigger to the Single or Multiple PE Discriminator, or off 
@@ -89,19 +89,19 @@ class I3OMStatusIceCube : public I3OMStatus
   /**
    * Indicates that the local coincidence signal is not sent
    */
-  static const LCMode LCOff_;
+  static const LCMode LCOff;
 
   /**
    * Indicates that the local concidence signal is sent just to nearest 
    * neighbors
    */
-  static const LCMode nearestNeighbor_;
+  static const LCMode nearestNeighbor;
 
   /**
    * Indicates that the local concidence signal is sent to nearest and 
    * next-to-nearest neighbors.
    */
-  static const LCMode secondNeighbor_;  /* Includes nearest neighbor*/
+  static const LCMode secondNeighbor;  /* Includes nearest neighbor*/
 
   /**
    * sets how far local coincidence signals are sent
@@ -124,12 +124,12 @@ class I3OMStatusIceCube : public I3OMStatus
   /**
    * On
    */
-  static const OnOff on_;
+  static const OnOff on;
 
   /**
    * Off
    */
-  static const OnOff off_;
+  static const OnOff off;
 
   /** 
    * These control whether the local coincidences recievers are enabled
