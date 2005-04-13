@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMSelectionTest.cxx,v 1.4 2005/04/08 09:38:30 pretz Exp $
+ * $Id: I3OMSelectionTest.cxx,v 1.5 2005/04/13 22:00:28 olivas Exp $
  *
- * @version $Revision: 1.4 $
- * @date $Date: 2005/04/08 09:38:30 $
+ * @version $Revision: 1.5 $
+ * @date $Date: 2005/04/13 22:00:28 $
  * @author pretz
  *
  * @todo
@@ -214,7 +214,7 @@ namespace tut
   void object::test<7>()
   {
     cout<<"Testing GoodOMSelection..."<<endl;
-    VectorPolicy<OMKey>::ThePolicy oms;
+    STLVectorStoragePolicy<OMKey> oms;
     oms.push_back(OMKey(-5,15));
     oms.push_back(OMKey(1,2));
     oms.push_back(OMKey(1,3));
@@ -237,7 +237,7 @@ namespace tut
   void object::test<8>()
   {
     cout<<"Testing BadOMSelection..."<<endl;
-    VectorPolicy<OMKey>::ThePolicy oms;
+    STLVectorStoragePolicy<OMKey> oms;
     oms.push_back(OMKey(-5,15));
     oms.push_back(OMKey(1,2));
     oms.push_back(OMKey(1,3));
