@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Event.h,v 1.49 2005/04/12 23:09:08 olivas Exp $
+ * $Id: I3Event.h,v 1.50 2005/04/14 16:45:32 olivas Exp $
  *
  * @file I3Event.h
- * @version $Revision: 1.49 $
- * @date $Date: 2005/04/12 23:09:08 $
+ * @version $Revision: 1.50 $
+ * @date $Date: 2005/04/14 16:45:32 $
  * @author Ralf Ehrlich
  */
 #ifndef I3EVENT_H
@@ -144,9 +144,9 @@ class I3Event : public TObject
   void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("OMResponseMap", oMResponseMap_);
-    ar & make_nvp("TopOMResponseMap", topOMResponseMap_);
-    ar & make_nvp("OMSelectionDict", oMSelectionDict_);
-    ar & make_nvp("RecoResultDict", recoResultDict_);
+    //ar & make_nvp("TopOMResponseMap", topOMResponseMap_);
+    //ar & make_nvp("OMSelectionDict", oMSelectionDict_);
+    //ar & make_nvp("RecoResultDict", recoResultDict_);
   }
 
   //ROOT macro

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.13 2005/04/12 18:55:28 dule Exp $
+ * $Id: I3AMANDAAnalogReadout.h,v 1.14 2005/04/14 16:45:32 olivas Exp $
  *
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/14 16:45:32 $
  * @author pretz
  *
  */
@@ -114,9 +114,23 @@ public:
 
 private:
 
-    // ROOT macro
-    ClassDef(I3AMANDAAnalogReadout,1);
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3AnalogReadout", base_object< I3AnalogReadout>(*this) );
+    ar & make_nvp("LEs", LEs_ );
+    ar & make_nvp("TOTs", TOTs_ );
+    ar & make_nvp("HitNumbers", hitNumbers_ );
+    ar & make_nvp("Amp", amp_ );
+  }
+
+  // ROOT macro
+  ClassDef(I3AMANDAAnalogReadout,1);
 };
+
+BOOST_CLASS_EXPORT(I3AMANDAAnalogReadout);
 
 /**
  * Pointer typedeffed away to insulate users from the
