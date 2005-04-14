@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.13 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3DigitalReadout.h,v 1.14 2005/04/14 17:10:21 olivas Exp $
  *
  * @file I3DigitalReadout.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/14 17:10:21 $
  * @author pretz
  * @author blaufuss
  *
@@ -59,6 +59,16 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
     }
   
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3DataReadout", base_object< I3DataReadout >(*this));
+    ar & make_nvp("Vector", 
+		  base_object< STLVectorStoragePolicy<I3DigitalLaunchPtr> >(*this));
+  }
 
   // ROOT macro
   ClassDef(I3DigitalReadout,1);

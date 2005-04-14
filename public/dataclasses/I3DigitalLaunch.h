@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalLaunch.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3DigitalLaunch.h,v 1.6 2005/04/14 17:10:21 olivas Exp $
  *
  * @file I3DigitalLaunch.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/14 17:10:21 $
  * @author blaufuss
  */
 #ifndef I3DIGITALLAUNCH_H
@@ -54,6 +54,14 @@ class I3DigitalLaunch : public TObject
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3DigitalReadout", *this);
+  }
 
   //ROOT macro
   ClassDef(I3DigitalLaunch,1);

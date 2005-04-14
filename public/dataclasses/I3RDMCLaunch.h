@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RDMCLaunch.h,v 1.6 2005/04/12 18:55:28 dule Exp $
+ * $Id: I3RDMCLaunch.h,v 1.7 2005/04/14 17:10:21 olivas Exp $
  *
  * @file I3RDMCLaunch.h
- * @version $Revision: 1.6 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.7 $
+ * @date $Date: 2005/04/14 17:10:21 $
  * @author ehrlich
  */
 #ifndef I3RDMCLAUNCH_H
@@ -49,9 +49,24 @@ class I3RDMCLaunch : public I3DigitalLaunch
 
   private:
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("ID", id_ );
+    ar & make_nvp("StartTime", startTime_ );
+    ar & make_nvp("BinSize", binSize_ );
+    ar & make_nvp("Basline", baseline_ );
+    ar & make_nvp("Digi", digi_ );
+  }
+
+
   // ROOT macro
   ClassDef(I3RDMCLaunch,1);
 };
+
+BOOST_CLASS_EXPORT(I3RDMCLaunch);
 
 /**
  * Pointer typedeffed away to insulate users from the

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.15 2005/04/09 03:02:10 olivas Exp $
+ * $Id: I3DOMLaunch.h,v 1.16 2005/04/14 17:10:21 olivas Exp $
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.15 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @version $Revision: 1.16 $
+ * @date $Date: 2005/04/14 17:10:21 $
  * @author klein
  * @author blaufuss
  *
@@ -306,6 +306,8 @@ class I3DOMLaunch : public I3DigitalLaunch
   // ROOT macro
   ClassDef(I3DOMLaunch,1);
 };
+
+BOOST_CLASS_EXPORT(I3DOMLaunch);
 
 /**
  * Pointer typedeffed away to insulate users from the

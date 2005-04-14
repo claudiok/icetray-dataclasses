@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TWRLaunch.h,v 1.5 2005/04/12 18:55:28 dule Exp $
+ * $Id: I3TWRLaunch.h,v 1.6 2005/04/14 17:10:21 olivas Exp $
  *
  * @file I3TWRLaunch.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.6 $
+ * @date $Date: 2005/04/14 17:10:21 $
  * @author ehrlich
  */
 #ifndef I3TWRLAUNCH_H
@@ -34,7 +34,7 @@ class I3TWRLaunch : public I3DigitalLaunch
 
   /**
    * destructor
-   */
+ */
   virtual ~I3TWRLaunch() {;}
 
   int            GetId() {return id_;}
@@ -49,9 +49,23 @@ class I3TWRLaunch : public I3DigitalLaunch
 
   private:
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("ID", id_ );
+    ar & make_nvp("StartTime", startTime_ );
+    ar & make_nvp("BinSize", binSize_ );
+    ar & make_nvp("Basline", baseline_ );
+    ar & make_nvp("Digi", digi_ );
+  }
+
   // ROOT macro
   ClassDef(I3TWRLaunch,1);
 };
+
+BOOST_CLASS_EXPORT(I3TWRLaunch);
 
 /**
  * Pointer typedeffed away to insulate users from the
