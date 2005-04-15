@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceCubeStatus.h,v 1.1 2005/04/10 00:30:48 pretz Exp $
+ * $Id: I3IceCubeStatus.h,v 1.2 2005/04/15 17:05:50 pretz Exp $
  *
  * @file I3IceCubeStatus.h
- * @version $Revision: 1.1 $
- * @date $Date: 2005/04/10 00:30:48 $
+ * @version $Revision: 1.2 $
+ * @date $Date: 2005/04/15 17:05:50 $
  * @author pretz
  */
 #ifndef I3STATUSICECUBE_H
 #define I3STATUSICECUBE_H
 
 #include "TObject.h"
-#include "I3OMStatusIceCube.h"
+#include "I3DOMStatus.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>
@@ -24,7 +24,7 @@
  */
 class I3IceCubeStatus 
 : public TObject, 
-  public STLMapStoragePolicy<OMKey,I3OMStatusIceCubePtr>{
+  public STLMapStoragePolicy<OMKey,I3DOMStatus>{
  public:
   /**
    * constructor
@@ -42,17 +42,7 @@ class I3IceCubeStatus
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ I3IceCubeStatus: \n";
-      I3IceCubeStatus::const_iterator iter;
-      for(iter=begin();iter!=end();iter++)
-	{
-	  o<<iter->first;
-	  if(iter->second==I3OMStatusIceCubePtr((I3OMStatusIceCube*)0))
-	    o<<"Null I3OMStatusIceCube";
-	  else
-	    o<<*(iter->second);
-	}
-      o<<"]\n";
+      o<<"IMPLEMENT ME\n";
     }
 
   virtual string ToString() const

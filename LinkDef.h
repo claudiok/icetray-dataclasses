@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.170 2005/04/10 00:30:48 pretz Exp $
-// $Revision: 1.170 $
-// $Date: 2005/04/10 00:30:48 $
+// $Id: LinkDef.h,v 1.171 2005/04/15 17:05:46 pretz Exp $
+// $Revision: 1.171 $
+// $Date: 2005/04/15 17:05:46 $
 //
 
 #ifdef __CINT__
@@ -405,14 +405,6 @@
 //#pragma link C++ class VectorPolicy<OMKey>;
 //#pragma link C++ typedef VectorPolicy<OMKey>::ThePolicy;
 //#pragma link C++ class VectorPolicy<OMKey>::ThePolicy+;
-
-#pragma link C++ class I3OMStatus+;
-//#pragma link C++ typedef I3OMStatusPtr;
-//#pragma link C++ class boost::shared_ptr<I3OMStatus>+;
-
-#pragma link C++ class I3OMStatusIceCube+;
-//#pragma link C++ typedef I3OMStatusIceCubePtr;
-//#pragma link C++ class boost::shared_ptr<I3OMStatusIceCube>+;
 
 // tpm: my additions
 #pragma link C++ struct LinearFit+;

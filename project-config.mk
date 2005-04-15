@@ -35,9 +35,7 @@ dataclasses/I3OMResponseSelection.h \
 dataclasses/I3Contained.h \
 dataclasses/I3OMSelectionDict.h \
 dataclasses/I3CoreLocalized.h \
-dataclasses/I3OMStatus.h \
 dataclasses/I3DOMCalibration.h \
-dataclasses/I3OMStatusIceCube.h \
 dataclasses/I3DOMLaunch.h \
 dataclasses/I3PMTPulse.h \
 dataclasses/I3DataHeader.h \

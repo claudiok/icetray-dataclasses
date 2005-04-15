@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.13 2005/04/12 18:55:28 dule Exp $
+ * $Id: I3DOMCalibration.h,v 1.14 2005/04/15 17:05:50 pretz Exp $
  *
  * @file I3DOMCalibration.h
- * @version $Revision: 1.13 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @version $Revision: 1.14 $
+ * @date $Date: 2005/04/15 17:05:50 $
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -17,6 +17,7 @@
 #include "dataclasses/StoragePolicy.h"
 
 #include <map>
+#include <vector>
 #include <sstream>
 #include <TObject.h>
 
@@ -40,248 +41,154 @@ using namespace std;
 
 struct LinearFit
 {
-    double slope_;
-    double intercept_;
-    double regressCoeff_;
+    double fSlope;
+    double fIntercept;
+    double fRegressCoeff;
 };
 
-class I3DOMCalibration : public TObject
+struct ChargeHistogramEntry
+{
+  double charge;
+  double count;
+};
+
+struct ChargeHistogram
+{
+  double exponentialAmplitude;
+  double exponentialWidth;
+  double gaussianAmplitude;
+  double gaussianMean;
+  double gaussianWidth;
+  double voltage;
+  double convergent;
+  double peakToValley;
+  double noiseRate;
+  vector<ChargeHistogramEntry> entries;
+};
+
+class I3DOMCalibration
 {
 public:
-    double GetDate()
-	{
-	    return date_;
-	};
-    
-    unsigned int GetDOMId()
-	{
-	    return DOMId_;
-	};
-    
-    double GetTemperature()
-	{
-	    return temperature_;
-	};
-    
-    double GetFADCGain()
-	{
-	    return FADCGain_;
-	};
-    
-    double GetFADCPedestal()
-	{
-	    return FADCPedestal_;
-	};
-    
-    // Get gain and error on gain for ATWD by channel
-    double GetATWDGain(int channel);
-    double GetATWDGainErr(int channel);
- 
-    // Return the voltage value corresponding to the count 
-    // for a specific ATWD id, channel, and bin.
-
-    double GetATWDVoltage(int id, int channel, int bin, int count);
-    
-    //map<int, double>& GetATWDVoltage(int id, int channel);
-    
-
-public:
-    I3DOMCalibration();
-
-    virtual ~I3DOMCalibration()
-	{};
-     
-    // Perhaps this should take a time stamp as argument?
-    void SetCalibrationConstants();
-
-    void SetDate(double date)
-	{
-	    date_ = date;
-	};
-    
-    void  SetDOMId(unsigned int id)
-	{
-	    DOMId_ = id;
-	};
-
-    void SetTemperature(double temperature)
-	{
-	    temperature_ = temperature;
-	};
-
-    // Set parameters for conversion of count to voltage 
-    // for each ATWD, each ATWD channel, and each ATWD bin.
-    void SetATWDParameters(int id,
-			   int channel,
-			   int bin,
-			   double slope,
-			   double intercept,
-			   double regress_coeff);
-    
-    void SetFADCParameters(double pedestal,
-			   double gain)
-	{
-	    FADCPedestal_ = pedestal;
-	    FADCGain_     = gain;
-	};
-      
-    // Set gain and error on gain for ATWD (specified by channel).
-    void SetATWDGain(int channel, double gain, double gainErr);
+  double GetTemperature()
+    {
+      return fTemperature;
+    };
   
-    void SetHighVoltage(double voltage)
-	{
-	    PMTHighVoltage_ = voltage;
-	};
-    
-    double GetHighVoltage()
-	{
-	    return PMTHighVoltage_;
-	};
-    
-    void SetSingleSPEThresholdVoltage(double voltage)
-	{
-	    singleSPEThresholdVoltage_ = voltage;
-	};
-    
-    double GetSingleSPEThresholdVoltage()
-	{
-	    return singleSPEThresholdVoltage_;
-	};
-    
-    void SetPedestalVoltage(double voltage)
-	{
-	    pedestalVoltage_ = voltage;
-	};
-    
-    double GetPedestalVoltage()
-	{
-	    return pedestalVoltage_;
-	};
-
-    void SetPeakToValley(double p2v)
-	{
-	    peakToValley_ = p2v;
-	};
-    
-    double GetPeakToValley()
-	 {
-	    return peakToValley_;
-	 };
-
-    void SetSPEMean(double mean)
-	{
-	    SPEMean_ = mean;
-	};
-    
-    /*
-    void SetOnePEinPC(double OnePE)
-	{
-	    onePEinPC_ = OnePE;
-	};
-    */
-
-    double GetSPEMean()
-	{
-	    return SPEMean_;
-	};
-    
-    /*
-    double GetOnePEinPC()
-	{
-	    return onePEinPC_;
-	};
-    */
-
-    void SetSPEWidth(double width)
-	{
-	    SPEWidth_ = width;
-	};
-    
-    /*
-    void SetWidth1PEinPC(double width1pe)
-	{
-	    width1PEinPC_ = width1pe;
-	};
-    */
-
-    double GetSPEWidth()
-	{
-	    return SPEWidth_;
-	};
-    
-    /*
-    double GetWidth1PEinPC()
-	{
-	    return width1PEinPC_;
-	};
-    */
-
-    void SetSamplingRate(int id, double rate);
-    
-    double GetSamplingRate(int id);
-
-    virtual void ToStream(ostream& o) const
+  double GetFADCGain()
     {
-	o<<"[ "
-	 <<"Calibration:"
-	 <<"\tDate: "<<date_<<endl
-	 <<"\tDOM ID: "<<DOMId_<<endl
-	 <<"\tSPE Mean: "<<SPEMean_<<endl
-	 <<"\tPeak-to-Valley: "<<peakToValley_<<endl
-	 <<"\tSuppressing the rest of the output ]\n";
+      return fFADCGain;
+    };
+  
+  double GetFADCPedestal()
+    {
+      return fFADCPedestal;
+    };
+  
+  // Get gain and error on gain for ATWD by channel
+  double GetATWDGain(int channel);
+  double GetATWDGainErr(int channel);
+  
+  // Return the voltage value corresponding to the count 
+  // for a specific ATWD id, channel, and bin.  
+  // have to specify the front end pedestal which isn't known 
+  // at calibration time
+  double GetATWDVoltage(int id, int channel, int bin,double fe_pedestal, int count);
+  
+  I3DOMCalibration();
+  
+  virtual ~I3DOMCalibration()
+    {};
+  
+  void SetTemperature(double temperature)
+    {
+      fTemperature = temperature;
+    };
+  
+  // Set parameters for conversion of count to voltage 
+  // for each ATWD, each ATWD channel, and each ATWD bin.
+  void SetATWDParameters(int id,
+			 int channel,
+			 int bin,
+			 double slope,
+			 double intercept,
+			 double regress_coeff);
+  
+  void SetFADCParameters(double pedestal,
+			 double gain)
+    {
+      fFADCPedestal = pedestal;
+      fFADCGain     = gain;
     };
 
+  map<unsigned int,ChargeHistogram>& GetChargeHistograms()
+    {
+      return chargeHistograms_;
+    }
+
+  const map<unsigned int,ChargeHistogram>& GetChargeHistograms() const
+    {
+      return chargeHistograms_;
+    }
+  
+
+  /**
+   * Set gain and error on gain for ATWD (specified by channel).
+   */
+  void SetATWDGain(int channel, double gain, double gainErr);
+  
+
+  virtual void ToStream(ostream& o) const
+    {
+      o<<"[ "
+       <<"Calibration:"
+	//       <<"\tDate: "<<fDate<<endl
+	//       <<"\tDOM ID: "<<fDOMId<<endl
+	//       <<"\tSPE Mean: "<<fSPEMean<<endl
+	//       <<"\tPeak-to-Valley: "<<fPeakToValley<<endl
+       <<"\tSuppressing the rest of the output ]\n";
+    };
+  
     virtual string ToString() const
-    {
-		 ostringstream out;
-		 ToStream(out);
-		 return out.str();
-    };
+      {
+	ostringstream out;
+	ToStream(out);
+	return out.str();
+      };
     
-private:
+ private:
     // Simple data types
-
-    // What is Date? UTC? GPS ns?
-    double  date_;  
-    unsigned int    DOMId_;
-    double  temperature_;
+    double  fTemperature;
     
     // Gain and pedestal values for FADC
-    double FADCGain_;
-    double FADCPedestal_;
+    double fFADCGain;
+    double fFADCPedestal;
 
-    double PMTHighVoltage_;
-    double pedestalVoltage_;
-    double singleSPEThresholdVoltage_;
+    //    double fPMTHighVoltage;
+    double fPedestalVoltage;
    
-    // Parameters describing the SPE charge distribution
-    double peakToValley_;
-    double SPEMean_;
-    double SPEWidth_; 
+    //double fOnePEinPC;
+    //double fWidth1PEinPC;
 
-    //double onePEinPC_;
-    //double width1PEinPC_;
-
-    double samplingRate0_;
-    double samplingRate1_;
+    //    double fSamplingRate0;
+    //    double fSamplingRate1;
 
     // Gain and error on gain for ATWD channels.
     // The key corresponds to the channel.
-    map<int, double> ampGains_;
-    map<int, double> ampGainErrs_;
+    map<int, double> fAmpGains;
+    map<int, double> fAmpGainErrs;
     
     // First key corresponds to channel.
     // Key in internal map corresponds to bin.
-    map< int, map<int,LinearFit> > ATWD0_;
-    map< int, map<int,LinearFit> > ATWD1_;
+    map< int, map<int,LinearFit> > fATWD0;
+    map< int, map<int,LinearFit> > fATWD1;
     map< int, map<int,LinearFit> >& GetATWDById(int id);
+
+    map<unsigned int,ChargeHistogram> chargeHistograms_;
 
     // Copy constructor and assignment operator
     I3DOMCalibration(const I3DOMCalibration& calibration);
     const I3DOMCalibration& operator=(const I3DOMCalibration& calibration);
 
-    // ROOT macro
-    ClassDef(I3DOMCalibration,1);
 };
 
 /**
@@ -292,6 +199,8 @@ inline ostream& operator<<(ostream& o, const I3DOMCalibration& c)
     c.ToStream(o); 
     return o;
 }
+
+typedef shared_ptr<I3DOMCalibration>  I3DOMCalibrationPtr;
 
 typedef shared_ptr<I3DOMCalibration>  I3DOMCalibPtr;
 

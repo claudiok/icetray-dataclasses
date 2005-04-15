@@ -7,7 +7,7 @@
 using namespace std;
 
 /**
- * @brief I3RawDOMStatus_proposal has status information on the IceCube
+ * @brief I3RawDOMStatus has status information on the IceCube
  * OM parameters that can be controlled or adjusted, such as
  * the trigger, local coincidence and ATWD settings.
  *
@@ -19,18 +19,18 @@ using namespace std;
  *
  * @todo the file needs the full 'doxygen' comments
  */
-class I3RawDOMStatus_proposal
+class I3RawDOMStatus
 {
  public:
   /**
    * constructor
    */
-  I3RawDOMStatus_proposal(){}
+  I3RawDOMStatus(){}
 
   /**
    * destructor
    */
-  virtual ~I3RawDOMStatus_proposal(){}
+  virtual ~I3RawDOMStatus(){}
 
   /**
    * The status variables are stored as string-keyed unsigned
@@ -133,7 +133,7 @@ class I3RawDOMStatus_proposal
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef shared_ptr<I3RawDOMStatus_proposal>  I3RawDOMStatus_proposalPtr;
+typedef shared_ptr<I3RawDOMStatus>  I3RawDOMStatusPtr;
 
 #endif
 

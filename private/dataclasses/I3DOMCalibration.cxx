@@ -1,20 +1,17 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.12 2005/04/12 18:55:28 dule Exp $
+//  $Id: I3DOMCalibration.cxx,v 1.13 2005/04/15 17:05:50 pretz Exp $
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
 
-ClassImp(I3DOMCalibration);
-
 I3DOMCalibration::I3DOMCalibration()
-    : date_(NAN), DOMId_(0), temperature_(NAN),
-      FADCGain_(NAN), FADCPedestal_(NAN),
-      PMTHighVoltage_(NAN), pedestalVoltage_(NAN),
-      peakToValley_(NAN), SPEMean_(NAN), SPEWidth_(NAN),
-      samplingRate0_(NAN), samplingRate1_(NAN)
-{};
-
-void I3DOMCalibration::SetCalibrationConstants()
+    : 
+  //fDate(NAN), fDOMId(0), 
+      fTemperature(NAN),
+      fFADCGain(NAN), fFADCPedestal(NAN)
+      //      fPMTHighVoltage(NAN), fPedestalVoltage(NAN),
+      //      fPeakToValley(NAN), fSPEMean(NAN), fSPEWidth(NAN),
+      //      fSamplingRate0(NAN), fSamplingRate1(NAN)
 {};
 
 void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
@@ -22,15 +19,16 @@ void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
 {
     struct LinearFit fit;
     
-    fit.slope_ = slope;
-    fit.intercept_ = intercept;
-    fit.regressCoeff_ = regress_coeff;
+    fit.fSlope = slope;
+    fit.fIntercept = intercept;
+    fit.fRegressCoeff = regress_coeff;
     
     GetATWDById(id)[channel][127-bin] = fit;
 }
 
 double I3DOMCalibration::GetATWDVoltage(int id,  int channel, 
-					  int bin, int count)
+					int bin, double fe_pedestal,
+					int count)
 {
     if ( ! GetATWDById(id).count(channel) )
     {
@@ -44,7 +42,7 @@ double I3DOMCalibration::GetATWDVoltage(int id,  int channel,
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
        
-    return ((fit.slope_*count + fit.intercept_) - pedestalVoltage_) / GetATWDGain(channel);
+    return ((fit.fSlope*count + fit.fIntercept) - fe_pedestal) / GetATWDGain(channel);
 }
 
 map<int,map<int,LinearFit> >& 
@@ -53,13 +51,13 @@ I3DOMCalibration::GetATWDById(int id)
     switch(id)
     {
     case 0:
-		 return ATWD0_;
+	return fATWD0;
     case 1:
-		 return ATWD1_;
+	return fATWD1;
     default:
       {
-			log_fatal("Invalid ATWD Id in I3DOMCalibration");
-			return *static_cast<map<int,map<int,LinearFit> >*>(0);
+	log_fatal("Invalid ATWD Id in I3DOMCalibration");
+	return *static_cast<map<int,map<int,LinearFit> >*>(0);
       }
     }
     
@@ -68,56 +66,56 @@ I3DOMCalibration::GetATWDById(int id)
 
 void I3DOMCalibration::SetATWDGain(int channel, double gain, double gainErr)
 {
-    ampGains_.insert(pair<int,double> (channel, gain));
-    ampGainErrs_.insert(pair<int,double> (channel, gainErr));
+    fAmpGains.insert(pair<int,double> (channel, gain));
+    fAmpGainErrs.insert(pair<int,double> (channel, gainErr));
 }
 
 double I3DOMCalibration::GetATWDGain(int channel)
 {
-    if ( ! ampGains_.count(channel) )
+    if ( ! fAmpGains.count(channel) )
     {
 	log_fatal("Gain not found for ATWD channel in I3DOMCalibration");
     }
     
-    return ampGains_[channel];
+    return fAmpGains[channel];
 }
 
 double I3DOMCalibration::GetATWDGainErr(int channel)
 {
-    if ( ! ampGainErrs_.count(channel) )
+    if ( ! fAmpGainErrs.count(channel) )
     {
 	log_fatal("Gain error not found for ATWD channel in I3DOMCalibration");
     }
     
-    return ampGainErrs_[channel];
+    return fAmpGainErrs[channel];
 }
 
-void I3DOMCalibration::SetSamplingRate(int id, double rate)
-{
-    switch(id)
-    {
-    case 0:
-		 samplingRate0_ = rate;
-		 break;
-    case 1:
-		 samplingRate1_ = rate;
-		 break;
-    default:
-		 log_fatal("Invalid ATWD Id in I3DOMCalibration");
-    }
-}
+// void I3DOMCalibration::SetSamplingRate(int id, double rate)
+// {
+//     switch(id)
+//     {
+//     case 0:
+// 	fSamplingRate0 = rate;
+// 	break;
+//     case 1:
+// 	fSamplingRate1 = rate;
+// 	break;
+//     default:
+// 	log_fatal("Invalid ATWD Id in I3DOMCalibration");
+//     }
+// }
 
-double I3DOMCalibration::GetSamplingRate(int id)
-{
-    switch(id)
-    {
-    case 0:
-		 return samplingRate0_;
-    case 1:
-		 return samplingRate1_;
-    default:	
-		 log_fatal("Sampling rate not found for ATWD ID in I3DOMCalibration");
-    }
-    return 0;
-}
+// double I3DOMCalibration::GetSamplingRate(int id)
+// {
+//     switch(id)
+//     {
+//     case 0:
+// 	return fSamplingRate0;
+//     case 1:
+// 	return fSamplingRate1;
+//     default:	
+// 	log_fatal("Sampling rate not found for ATWD ID in I3DOMCalibration");
+//     }
+//     return 0;
+// }
 
