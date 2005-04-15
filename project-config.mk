@@ -47,8 +47,8 @@ dataclasses/I3EnergyMuon.h	      dataclasses/I3RecoResultMultiTracks.h \
 dataclasses/I3EvenOMSelection.h       dataclasses/I3RecoResultRDMCFit.h \
 dataclasses/I3Event.h		      dataclasses/I3RecoResultSingleTrack.h \
 dataclasses/I3RecoResultSingleTopShower.h dataclasses/I3RecoResultSingleParticle.h \
-dataclasses/I3EventHeader.h	      dataclasses/I3RecoResultTopCore.h \
-dataclasses/I3F2KRecoCascade.h	      dataclasses/I3RecoResultTopDirection.h \
+dataclasses/I3EventHeader.h \
+dataclasses/I3F2KRecoCascade.h	\
 dataclasses/I3F2KRecoTrack.h	      dataclasses/I3SLCReadout.h \
 dataclasses/I3Filter.h		      dataclasses/I3SPASEModuleGeo.h \
 dataclasses/I3FilterDict.h	      dataclasses/I3ShowerCore.h \
@@ -84,3 +84,5 @@ dataclasses/I3MCPhoton.h	      dataclasses/STLVectorStoragePolicy.h \
 dataclasses/I3MCPhotonVect.h	      dataclasses/StationKey.h \
 dataclasses/I3MCPrimary.h	      dataclasses/StoragePolicy.h \
 dataclasses/I3MCTankHit.h	      
+#	      dataclasses/I3RecoResultTopCore.h \
+#      dataclasses/I3RecoResultTopDirection.h \

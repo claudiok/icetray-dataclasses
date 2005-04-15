@@ -1,8 +1,8 @@
 //
 // LinkDef.h
-// $Id: LinkDef.h,v 1.152 2005/02/23 21:47:31 dule Exp $
-// $Revision: 1.152 $
-// $Date: 2005/02/23 21:47:31 $
+// $Id: LinkDef.h,v 1.152.2.1 2005/04/15 15:05:35 niessen Exp $
+// $Revision: 1.152.2.1 $
+// $Date: 2005/04/15 15:05:35 $
 //
 
 #ifdef __CINT__
@@ -568,13 +568,13 @@
 #pragma link C++ typedef I3RecoResultSingleTopShowerPtr;
 #pragma link C++ class roost::shared_ptr<I3RecoResultSingleTopShower>+;
 
-#pragma link C++ class I3RecoResultTopCore+;
-#pragma link C++ typedef I3RecoResultTopCorePtr;
-#pragma link C++ class roost::shared_ptr<I3RecoResultTopCore>+;
+//#pragma link C++ class I3RecoResultTopCore+;
+//#pragma link C++ typedef I3RecoResultTopCorePtr;
+//#pragma link C++ class roost::shared_ptr<I3RecoResultTopCore>+;
 
-#pragma link C++ class I3RecoResultTopDirection+;
-#pragma link C++ typedef I3RecoResultTopDirectionPtr;
-#pragma link C++ class roost::shared_ptr<I3RecoResultTopDirection>+;
+//#pragma link C++ class I3RecoResultTopDirection+;
+//#pragma link C++ typedef I3RecoResultTopDirectionPtr;
+//#pragma link C++ class roost::shared_ptr<I3RecoResultTopDirection>+;
 
 #pragma link C++ class I3SLCReadout+;
 #pragma link C++ typedef I3SLCReadoutPtr;
