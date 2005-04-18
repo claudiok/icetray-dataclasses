@@ -9,9 +9,7 @@
  * @brief A class for dealing with global times.  
  *
  * Has methods for setting the time in either the Daq UTC convention or
- * in the Julian convention 
- * @note a julian day of 0 is Jan 1st 4712 BC 
- * @note Julian days begin at noon
+ * in the Modified Julian convention 
  * 
  * @todo The library I have is using Barycentric Dynamical Time (TDB),
  * which differs from UTC by a number that is a function of year.  UTC has 
@@ -60,6 +58,11 @@ class I3Time : public TObject
    * There's no 'nan' for unsigned and long long
    */
   I3Time();
+
+  /**
+   * @brief creates the object with the given times as the DAQ time
+   */
+  I3Time(unsigned int year, long long daqTime);
 	     
   /**
    * @brief Sets the time in the 'daq' style where
@@ -67,18 +70,7 @@ class I3Time : public TObject
    * @param daqTime The number of tenths of nanoseconds since the year began
    */  
   void SetDaqTime(int year, long long int daqTime);
-
-  /**
-   * @brief Sets the time in the Julian (not modified julian) convention
-   * @note Julian days begin at noon.
-   * @param julianDay the Julian Day in the standard definition
-   * @param sec The number of seconds since the julian day began
-   * @param ns The number of ns since the most recent second began
-   */
-  void SetJulianTime(unsigned int julianDay,
-		     unsigned int sec,
-		     double ns);
-
+  
   /**
    * @brief Sets the time in the Modified julian convention
    * @param modJulianDay the modified julian day to set
@@ -89,22 +81,7 @@ class I3Time : public TObject
 			unsigned int sec,
 			double ns);
 
-  /**
-   * @brief Gets the Julian day
-   */
-  unsigned int GetJulianDay() const;
-  
-  /**
-   * @brief Gets the number of seconds since this Julian day began
-   * @note Julian days begin at noon.
-   */
-  unsigned int GetJulianSec() const;
 
-  /**
-   * @brief Gets the number of nanoseconds since this second began
-   */
-  double GetJulianNanoSec() const;
-  
   /**
    * @brief Gets the Modified Julian day
    */
