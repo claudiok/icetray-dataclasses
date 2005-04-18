@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.11 2005/04/14 16:45:32 olivas Exp $
+ * $Id: I3AnalogReadout.h,v 1.12 2005/04/18 10:35:40 troy Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.11 $
- * @date $Date: 2005/04/14 16:45:32 $
+ * @version $Revision: 1.12 $
+ * @date $Date: 2005/04/18 10:35:40 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -24,7 +24,8 @@
  * Derived classes such as I3AMANDAAnalogReadout may provide
  * additional information.
  */
-class I3AnalogReadout : public I3DataReadout { 
+class I3AnalogReadout : public I3DataReadout 
+{ 
 public:
     /**
      * constructor
@@ -57,12 +58,10 @@ private:
     ar & make_nvp("I3AnalogReadout", base_object<I3DataReadout>(*this) );
   }
 
-  // ROOT macro
   ClassDef(I3AnalogReadout,1);
 };
 
 BOOST_IS_ABSTRACT(I3AnalogReadout);
-BOOST_CLASS_EXPORT(I3AnalogReadout);
 
 /**
  * Pointer typedeffed away to insulate users from the
