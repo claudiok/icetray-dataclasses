@@ -1,8 +1,8 @@
-//
+// Trivial mod
 // LinkDef.h
-// $Id: LinkDef.h,v 1.171 2005/04/15 17:05:46 pretz Exp $
+// $Id$
 // $Revision: 1.171 $
-// $Date: 2005/04/15 17:05:46 $
+// $Date$
 //
 
 #ifdef __CINT__
