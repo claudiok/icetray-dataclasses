@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.12 2005/04/18 10:35:40 troy Exp $
+ * $Id: I3AnalogReadout.h,v 1.13 2005/04/18 13:56:20 troy Exp $
  *
  * @file I3AnalogReadout.h
- * @version $Revision: 1.12 $
- * @date $Date: 2005/04/18 10:35:40 $
+ * @version $Revision: 1.13 $
+ * @date $Date: 2005/04/18 13:56:20 $
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H
@@ -55,7 +55,7 @@ private:
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3AnalogReadout", base_object<I3DataReadout>(*this) );
+    ar & make_nvp("I3DataReadout", base_object<I3DataReadout>(*this) );
   }
 
   ClassDef(I3AnalogReadout,1);
