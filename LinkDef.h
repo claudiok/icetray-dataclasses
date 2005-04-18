@@ -1,7 +1,6 @@
 // LinkDef.h
 // $Id$
 // $Date$
-//Test
 
 
 #ifdef __CINT__
