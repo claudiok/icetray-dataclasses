@@ -1,7 +1,6 @@
-// Trivial mod
+//
 // LinkDef.h
 // $Id$
-// $Revision: 1.171 $
 // $Date$
 //
 
