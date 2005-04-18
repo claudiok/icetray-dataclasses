@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3AMANDAAnalogReadout.cxx,v 1.1 2005/04/14 17:11:03 olivas Exp $
+    $Id: I3AMANDAAnalogReadout.cxx,v 1.2 2005/04/18 13:55:07 troy Exp $
 
-    @version $Revision: 1.1 $
-    @date $Date: 2005/04/14 17:11:03 $
+    @version $Revision: 1.2 $
+    @date $Date: 2005/04/18 13:55:07 $
     @author Troy D. Straszheim
 
 */
@@ -15,3 +15,6 @@
 TEST_GROUP(I3AMANDAAnalogReadout);
 
 I3_SERIALIZATION_TEST(I3AMANDAAnalogReadout);
+
+//I3_VIRTUAL_SERIALIZATION_TEST(I3AnalogReadout, I3AMANDAAnalogReadout);
+//I3_VIRTUAL_SERIALIZATION_TEST(I3DataReadout, I3AMANDAAnalogReadout);

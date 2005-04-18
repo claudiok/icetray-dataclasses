@@ -32,10 +32,16 @@ using boost::serialization::make_nvp;
 using boost::serialization::base_object;
 
 #define I3_SERIALIZATION_TEST_ARCHIVE(TYPE, SUBTYPE, ARCHIVE, RANDOMIZE) \
-  TEST(ARCHIVE) {						\
+  TEST(ARCHIVE) {					\
     do_archive<ARCHIVE ##_oarchive, ARCHIVE ##_iarchive, TYPE, SUBTYPE,  \
        RANDOMIZE>                	                        \
     (BOOST_PP_STRINGIZE(SUBTYPE), BOOST_PP_STRINGIZE(ARCHIVE));    \
+  }
+
+#define I3_VIRTUAL_SERIALIZATION_TEST_ARCHIVE(BASE, DERIVED, ARCHIVE, RANDOMIZE) \
+  TEST(ARCHIVE ## _via_ ## BASE ) { \
+ do_archive<ARCHIVE ##_oarchive, ARCHIVE##_iarchive, BASE, DERIVED, RANDOMIZE> \
+   (BOOST_PP_STRINGIZE(DERIVED), BOOST_PP_STRINGIZE(ARCHIVE)); \
   }
 
 #define I3_SERIALIZATION_TEST(TYPE)                      		 \
@@ -44,9 +50,9 @@ using boost::serialization::base_object;
   I3_SERIALIZATION_TEST_ARCHIVE(TYPE, TYPE, xml, random_iarchive_randomize);
   
 #define I3_VIRTUAL_SERIALIZATION_TEST(BASE, DERIVED) \
-  I3_SERIALIZATION_TEST_ARCHIVE(BASE, DERIVED, text, random_iarchive_randomize);	\
-  I3_SERIALIZATION_TEST_ARCHIVE(BASE, DERIVED, binary, random_iarchive_randomize);	\
-  I3_SERIALIZATION_TEST_ARCHIVE(BASE, DERIVED, xml, random_iarchive_randomize);
+  I3_VIRTUAL_SERIALIZATION_TEST_ARCHIVE(BASE, DERIVED, text, random_iarchive_randomize);	\
+  I3_VIRTUAL_SERIALIZATION_TEST_ARCHIVE(BASE, DERIVED, binary, random_iarchive_randomize);	\
+  I3_VIRTUAL_SERIALIZATION_TEST_ARCHIVE(BASE, DERIVED, xml, random_iarchive_randomize);
 
 struct random_iarchive_randomize {
   template <typename T>
@@ -69,35 +75,39 @@ template <class OArchive,
 	  class Randomize>
 void do_archive(const string& classname, const string& archive_type)
 {
-  const unsigned numobjects = 10;
+  const unsigned numobjects = 2;
   // make archive
   string tmpfile = "/tmp/" + classname + "." + archive_type;
   std::ofstream ofs(tmpfile.c_str());
   OArchive oa(ofs);
   string ptr_classname = classname + "Ptr";
     
-  shared_ptr<DerivedType> t_out;
+  shared_ptr<BaseType> t_out;
 
   for (unsigned i=0; i<numobjects; i++)
     {
       //      t_bald = new DerivedType;
       //      cout << t_bald;
-      t_out = shared_ptr<DerivedType>(new DerivedType);
+      t_out = shared_ptr<BaseType>(new DerivedType);
+
 //      Randomize::apply(*t_out);
       //      cout << t_out.get();
       //      t_out = shared_ptr<DerivedType>(new DerivedType);
       //      cout << t_out.get();
-      oa << make_nvp(classname.c_str(), *t_out);
+      oa << make_nvp(classname.c_str(), t_out);
+      oa << make_nvp(classname.c_str(), t_out);
     }
   ofs.close();
 
   //read it back in and compare
   std::ifstream ifs(tmpfile.c_str());
   IArchive ia(ifs);
-  shared_ptr<DerivedType> t_in;
+  shared_ptr<BaseType> t_in, t_in_ptr;
   for (unsigned i=0; i<numobjects; i++)
     {
-      ia >> make_nvp(classname.c_str(), *t_out);
+      //      t_in = shared_ptr<BaseType>(new DerivedType);
+      //      ia >> make_nvp(classname.c_str(), t_in);
+      //      ia >> make_nvp(classname.c_str(), t_in);
 
       // ENSURE(t_in == t_out);
       // boost::shared_ptr<BaseType> baseptr;
