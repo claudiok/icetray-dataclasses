@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: StoragePolicy.h,v 1.24 2005/04/12 21:51:57 troy Exp $
+    $Id$
     @version $Revision: 1.24 $
-    @date $Date: 2005/04/12 21:51:57 $
+    @date $Date$
 
     @author troy d. straszheim
 */
@@ -19,9 +19,13 @@ namespace boost
 {
   namespace serialization 
   {
+    // normal forward declarations:
     class access;
     template <class T> struct nvp;
     template <class T> nvp<T> make_nvp(const char* name, T& t);
+
+    // special dummy no-ops that check to see if boost headers have
+    // already been included.
 #ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
     template <class Base, class Derived, class Retval>
       Retval base_object(Derived &d);
@@ -32,6 +36,10 @@ namespace boost
 #ifndef BOOST_SERIALIZATION_EXPORT_HPP
 #define BOOST_CLASS_EXPORT(X) 
 #endif
+#ifndef BOOST_SERIALIZATION_SHARED_PTR_HPP
+#define BOOST_SHARED_POINTER_EXPORT(X) 
+#endif
+
   }
 }
 

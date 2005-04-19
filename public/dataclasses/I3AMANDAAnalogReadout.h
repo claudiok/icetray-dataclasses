@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AMANDAAnalogReadout.h,v 1.14 2005/04/14 16:45:32 olivas Exp $
+ * $Id$
  *
  * @file I3AMANDAAnalogReadout.h
  * @version $Revision: 1.14 $
- * @date $Date: 2005/04/14 16:45:32 $
+ * @date $Date$
  * @author pretz
  *
  */
@@ -130,7 +130,7 @@ private:
   ClassDef(I3AMANDAAnalogReadout,1);
 };
 
-BOOST_CLASS_EXPORT(I3AMANDAAnalogReadout);
+BOOST_SHARED_POINTER_EXPORT(I3AMANDAAnalogReadout);
 
 /**
  * Pointer typedeffed away to insulate users from the
