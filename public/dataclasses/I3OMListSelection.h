@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3OMListSelection.h,v 1.6 2005/04/12 19:19:31 olivas Exp $
+ *  $Id$
  *
  * @file I3OMListSelection.h
  * @version $Revision: 1.6 $
- * @date $Date: 2005/04/12 19:19:31 $
+ * @date $Date$
  * @author deyoung
  */
 
@@ -92,6 +92,7 @@ private:
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("I3OMResponseSelection", base_object<I3OMResponseSelection>(*this) );
     ar & make_nvp("OMList", omList_ );
   }
 
