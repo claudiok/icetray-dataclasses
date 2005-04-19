@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3GoodOMSelection.cxx,v 1.1 2005/04/12 19:22:43 olivas Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2005/04/12 19:22:43 $
+    @date $Date$
     @author Troy D. Straszheim
 
 */
@@ -15,3 +15,7 @@
 TEST_GROUP(I3GoodOMSelection);
 
 I3_SERIALIZATION_TEST(I3GoodOMSelection);
+
+I3_VIRTUAL_SERIALIZATION_TEST(I3OMListSelection,I3GoodOMSelection);
+
+I3_VIRTUAL_SERIALIZATION_TEST(I3OMResponseSelection,I3GoodOMSelection);

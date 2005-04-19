@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3RecoResultSingleTrack.cxx,v 1.1 2005/04/12 18:04:57 olivas Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2005/04/12 18:04:57 $
+    @date $Date$
     @author Troy D. Straszheim
 
 */
@@ -15,3 +15,5 @@
 TEST_GROUP(I3RecoResultSingleTrack);
 
 I3_SERIALIZATION_TEST(I3RecoResultSingleTrack);
+
+I3_VIRTUAL_SERIALIZATION_TEST(I3RecoResult,I3RecoResultSingleTrack);
