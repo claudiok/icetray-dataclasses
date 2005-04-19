@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTrack.h,v 1.19 2005/04/12 18:04:32 olivas Exp $
+ * $Id$
  *
  * @file I3RecoResultSingleTrack.h
  * @version $Revision: 1.19 $
- * @date $Date: 2005/04/12 18:04:32 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -102,12 +102,15 @@ class I3RecoResultSingleTrack : public I3RecoResult
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("I3RecoResult", base_object<I3RecoResult>(*this));
     ar & make_nvp("Track", track_);
   }
 
   // ROOT macro
   ClassDef(I3RecoResultSingleTrack, 1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3RecoResultSingleTrack);
 
 /**
  * Pointer typedeffed away to insulate users from the 
