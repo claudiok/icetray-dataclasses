@@ -119,10 +119,11 @@ double I3RawDOMStatus::GetSingleSPEThreshold() const
 }
 
 /**
- * @brief I'll bet $10 that this isn't right.  I'll bet you need a 0.5 in there
- * or something like that.
+ * @todo These 'magic numbers' come from conversion from DAC om mainboard units
+ * to something sensible.  They are currently gleaned from Dima's code
+ * and it would be good to verify them from some document somewhere.
  */
 double I3RawDOMStatus::GetFEPedestal() const
 {
-  return (double)rawStatus_["DAC_PMT_FE_PEDESTAL"];
+  return 5.0 * ((double)rawStatus_["DAC_PMT_FE_PEDESTAL"])/4096.;
 }
