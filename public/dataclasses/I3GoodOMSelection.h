@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3GoodOMSelection.h,v 1.15 2005/04/12 23:32:11 olivas Exp $
+ *  $Id$
  *
  * @file I3GoodOMSelection.h
  * @version $Revision: 1.15 $
- * @date $Date: 2005/04/12 23:32:11 $
+ * @date $Date$
  * @author deyoung
  */
 
@@ -96,7 +96,7 @@ private:
   ClassDef(I3GoodOMSelection,1);
 };
 
-BOOST_CLASS_EXPORT(I3GoodOMSelection);
+BOOST_SHARED_POINTER_EXPORT(I3GoodOMSelection);
 
 
 #endif
