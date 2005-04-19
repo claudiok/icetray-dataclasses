@@ -125,6 +125,11 @@ class I3RawDOMStatus
    */
   double GetSingleSPEThreshold() const;
 
+  /**
+   * @gives the FE pedestal applied to the atwd chip
+   */
+  double GetFEPedestal() const;
+
  private:
   mutable map<string,unsigned int> rawStatus_;
 };

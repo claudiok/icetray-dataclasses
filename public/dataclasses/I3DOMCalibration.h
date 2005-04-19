@@ -4,11 +4,11 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DOMCalibration.h,v 1.14 2005/04/15 17:05:50 pretz Exp $
+ * $Id$
  *
  * @file I3DOMCalibration.h
  * @version $Revision: 1.14 $
- * @date $Date: 2005/04/15 17:05:50 $
+ * @date $Date$
  * @author tmccauley
  */
 #ifndef I3DOMCALIBRATION_H
@@ -84,15 +84,24 @@ public:
       return fFADCPedestal;
     };
   
-  // Get gain and error on gain for ATWD by channel
+  /**
+   * Get gain and error on gain for ATWD by channel
+   */
   double GetATWDGain(int channel);
+
   double GetATWDGainErr(int channel);
   
-  // Return the voltage value corresponding to the count 
-  // for a specific ATWD id, channel, and bin.  
-  // have to specify the front end pedestal which isn't known 
-  // at calibration time
-  double GetATWDVoltage(int id, int channel, int bin,double fe_pedestal, int count);
+  /**
+   * Return the voltage value corresponding to the count 
+   * for a specific ATWD id, channel, and bin.  
+   * have to specify the front end pedestal which isn't known 
+   * at calibration time
+   */
+  double GetATWDVoltage(int id, 
+			int channel, 
+			int bin,
+			double fe_pedestal, 
+			int count);
   
   I3DOMCalibration();
   
