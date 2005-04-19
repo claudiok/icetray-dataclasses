@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube collaboration
- *  $Id: I3BadOMSelection.h,v 1.13 2005/04/12 23:08:10 olivas Exp $
+ *  $Id$
  *
  * @file I3BadOMSelection.h
  * @version $Revision: 1.13 $
- * @date $Date: 2005/04/12 23:08:10 $
+ * @date $Date$
  * @author deyoung
  */
 
@@ -98,7 +98,7 @@ private:
   ClassDef(I3BadOMSelection,1);
 };
 
-BOOST_CLASS_EXPORT(I3BadOMSelection);
+BOOST_SHARED_POINTER_EXPORT(I3BadOMSelection);
 
 /**
  * Pointer definition for use with smart pointers.
