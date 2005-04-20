@@ -1,5 +1,5 @@
 
-// $Id: I3Position.cxx,v 1.15 2005/04/12 18:55:28 dule Exp $
+// $Id$
 
 #include <iostream>
 #include "dataclasses/I3Position.h"
@@ -51,7 +51,7 @@ void I3Position::SetPosition(const I3Position& p)
 void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
 {
 // Store position according to reference frame f
-  isCalculated=false;
+  isCalculated_=false;
 
   switch (frame) {
   case car: // Input given in Cartesian coordinates
@@ -92,7 +92,7 @@ void I3Position::ResetPosition()
   theta_=NAN;
   phi_=NAN;
   rho_=NAN;
-  isCalculated=true;
+  isCalculated_=true;
 }
 //-----------------------------------------------------------
 
@@ -181,7 +181,7 @@ void I3Position::CalcSphCylFromCar() const
   if (x_ || y_) phi_=atan2(y_,x_);
   if (phi_<0.) phi_+=2.*pi;
   rho_=r_*sin(theta_);
-  isCalculated=true;
+  isCalculated_=true;
 }
 
 //-----------------------------------------------------------
@@ -192,7 +192,7 @@ void I3Position::CalcCarCylFromSph()
   x_=rho_*cos(phi_);
   y_=rho_*sin(phi_);
   z_=r_*cos(theta_);
-  isCalculated=true;
+  isCalculated_=true;
 }
 
 //-----------------------------------------------------------
@@ -210,7 +210,7 @@ void I3Position::CalcCarSphFromCyl()
   if (theta_<0.) theta_+=2.*pi;
   x_=rho_*cos(phi_);
   y_=rho_*sin(phi_);
-  isCalculated=true;
+  isCalculated_=true;
 }
 
 //-----------------------------------------------------------
