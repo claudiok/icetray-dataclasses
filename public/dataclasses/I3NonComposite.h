@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonComposite.h,v 1.11 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3NonComposite.h
  * @version $Revision: 1.11 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3NONCOMPOSITE_H
@@ -49,6 +49,14 @@ class I3NonComposite
     }
 
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    //Nothing to serialize, but I think a serialize method
+    //is still needed
+  }
   //ROOT macro
   ClassDef(I3NonComposite,1);
 };

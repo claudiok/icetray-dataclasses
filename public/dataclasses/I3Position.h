@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Position.h,v 1.19 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3Position.h
  * @version $Revision: 1.19 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Taken from: Nick van Eijndhoven 06-feb-1999 UU-SAP Utrecht
 //***********************************************************
 
-// $Id: I3Position.h,v 1.19 2005/04/12 18:55:28 dule Exp $
+// $Id$
 
 #ifndef I3POSITION_H
 #define I3POSITION_H
@@ -115,7 +115,7 @@ class I3Position : public TObject
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetR() const {
-    if (!isCalculated) CalcSphCylFromCar();
+    if (!isCalculated_) CalcSphCylFromCar();
     return r_;
   }
 
@@ -124,7 +124,7 @@ class I3Position : public TObject
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetTheta() const {
-    if (!isCalculated) CalcSphCylFromCar();
+    if (!isCalculated_) CalcSphCylFromCar();
     return theta_;
   }
 
@@ -133,7 +133,7 @@ class I3Position : public TObject
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetPhi() const {
-    if (!isCalculated) CalcSphCylFromCar();
+    if (!isCalculated_) CalcSphCylFromCar();
     return phi_;
   }
 
@@ -142,7 +142,7 @@ class I3Position : public TObject
    * If non-cartesian have not been calculated, then calculate them first
    */
   double GetRho() const {
-    if (!isCalculated) CalcSphCylFromCar();
+    if (!isCalculated_) CalcSphCylFromCar();
     return rho_;
   }
 
@@ -153,7 +153,7 @@ class I3Position : public TObject
    */
   void SetX(double x) {
     x_=x;
-    isCalculated=false; // when accessing CYL/SPH, they will be recalculated
+    isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
 
   /**
@@ -161,7 +161,7 @@ class I3Position : public TObject
    */
   void SetY(double y) {
     y_=y;
-    isCalculated=false; // when accessing CYL/SPH, they will be recalculated
+    isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
 
   /**
@@ -169,7 +169,7 @@ class I3Position : public TObject
    */
   void SetZ(double z) {
     z_=z;
-    isCalculated=false; // when accessing CYL/SPH, they will be recalculated
+    isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
 
   //--------------
@@ -233,7 +233,7 @@ class I3Position : public TObject
   /**
    * Did we calculate the positions before?
    */
-  mutable bool isCalculated; 
+  mutable bool isCalculated_; 
 
  private:
 

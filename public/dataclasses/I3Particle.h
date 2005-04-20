@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Particle.h,v 1.22 2005/04/12 17:08:51 troy Exp $
+ * $Id$
  *
  * @file I3Particle.h
  * @version $Revision: 1.22 $
- * @date $Date: 2005/04/12 17:08:51 $
+ * @date $Date$
  * @author pretz
  *
  */

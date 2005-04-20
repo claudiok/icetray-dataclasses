@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3EventHeader.h,v 1.14 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3EventHeader.h
  * @version $Revision: 1.14 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -29,8 +29,8 @@ using namespace std;
  * from the database
  */
 class I3EventHeader : public I3DataHeader{
-  unsigned long  runId_;
-  unsigned long  eventId_;
+  unsigned long  runID_;
+  unsigned long  eventID_;
   
  public:
   /**
@@ -60,22 +60,22 @@ class I3EventHeader : public I3DataHeader{
   /**
    * @return the run id for the event
    */
-  unsigned long GetRunID() const { return runId_; }
+  unsigned long GetRunID() const { return runID_; }
 
   /**
    * @param runid the new run id for the event
    */
-  void SetRunID(unsigned long runid) { runId_ = runid; }
+  void SetRunID(unsigned long runid) { runID_ = runid; }
 
   /**
    * @return the event id for this event
    */
-  unsigned long GetEventID() const { return eventId_; }
+  unsigned long GetEventID() const { return eventID_; }
 
   /**
    * @param eventid the new event id for the event
    */
-  void SetEventID(unsigned long eventid) { eventId_ = eventid; }
+  void SetEventID(unsigned long eventid) { eventID_ = eventid; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"
@@ -83,7 +83,15 @@ class I3EventHeader : public I3DataHeader{
   const string GetDataStream(){ return "Physics";}
 
  private:
-  // instance data
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3DataHeader", base_object<I3DataHeader>(*this));
+    ar & make_nvp("RunID", runID_);
+    ar & make_nvp("EventID", eventID_);
+  }
   
   // ROOT Macro
   ClassDef(I3EventHeader,1);

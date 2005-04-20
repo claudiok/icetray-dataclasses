@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Contained.h,v 1.23 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3Contained.h
  * @version $Revision: 1.23 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3CONTAINED_H
@@ -207,6 +207,16 @@ class I3Contained
     }
 
   private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("StartPos", startPos_ );
+    ar & make_nvp("Dir", dir_ );
+    ar & make_nvp("StartT", startT_ );
+    ar & make_nvp("Length", length_ );
+  }
     //ROOT macro
   ClassDef(I3Contained,1)
 };

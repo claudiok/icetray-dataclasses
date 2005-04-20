@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Infinite.h,v 1.23 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3Infinite.h
  * @version $Revision: 1.23 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author 
  */
 
@@ -148,6 +148,15 @@ class I3Infinite
     }
 
   private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Pos", pos_ );
+    ar & make_nvp("Dir", dir_ );
+    ar & make_nvp("Time", time_ );
+  }
   //ROOT Macro
   ClassDef(I3Infinite,1)
 };

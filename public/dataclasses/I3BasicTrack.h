@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3BasicTrack.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
+    $Id$
 
     @file I3BasicTrack.h
     @version $Revision: 1.8 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @date $Date$
     @author deyoung
 */
 
@@ -38,9 +38,19 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
    */
   virtual ~I3BasicTrack(){}
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>", 
+		  base_object< I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite> >(*this));
+  }
   // ROOT macro
   ClassDef(I3BasicTrack,1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3BasicTrack);
 
 /**
  * pointer typedeffed away to insulate users from memory management

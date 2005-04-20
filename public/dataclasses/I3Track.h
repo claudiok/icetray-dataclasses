@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Track.h,v 1.32 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3Track.h
  * @version $Revision: 1.32 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  */
 
@@ -155,7 +155,18 @@ class I3Track : public I3InIceParticle
  protected:
 
   ClassDef(I3Track, 1);
+
+ private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3InIceParticle", base_object<I3InIceParticle>(*this));
+  }
 };
+
+BOOST_IS_ABSTRACT(I3Track);
 
 /**
  * pointer type to insulate users from memory management

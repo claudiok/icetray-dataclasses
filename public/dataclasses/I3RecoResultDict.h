@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultDict.h,v 1.10 2005/04/12 23:11:18 olivas Exp $
+ * $Id$
  *
  * @file I3RecoResultDict.h
  * @version $Revision: 1.10 $
- * @date $Date: 2005/04/12 23:11:18 $
+ * @date $Date$
  * @author ehrlich
  * @author pretz
  */
@@ -64,7 +64,7 @@ class I3RecoResultDict : public TObject,
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3OMResponseSelection", 
+    ar & make_nvp("I3RecoResultDict", 
 		  base_object< STLMapStoragePolicy<string,I3RecoResultPtr> >(*this));
   }
 

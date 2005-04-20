@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3InIceParticle.h,v 1.4 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3InIceParticle.h
  * @version $Revision: 1.4 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author blaufuss
  */
 #ifndef I3INICEPARTICLE_H
@@ -58,9 +58,18 @@ class I3InIceParticle : public I3Particle
    */
   virtual double GetT() const = 0;
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3Particle",base_object<I3Particle>(*this));
+  }
   //ROOT macro
   ClassDef(I3InIceParticle,1);
 };
+
+BOOST_IS_ABSTRACT(I3InIceParticle);
 
 /**
  * pointer type to insulate users from memory management issues

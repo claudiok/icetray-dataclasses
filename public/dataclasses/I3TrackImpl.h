@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TrackImpl.h,v 1.14 2005/04/04 15:49:25 pretz Exp $
+ * $Id$
  *
  * @file I3TrackImpl.h
  * @version $Revision: 1.14 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3TRACKIMPL_H
@@ -156,6 +156,16 @@ class I3TrackImpl : public I3Track,
 
  protected:
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3Track", base_object<I3Track>(*this));
+    ar & make_nvp("GeometricalType", base_object<GeometricalType>(*this));
+    ar & make_nvp("EnergeticType", base_object<EnergeticType>(*this));
+    ar & make_nvp("CompositeType", base_object<CompositeType>(*this));
+  }
   // ROOT macro
   ClassDef(I3TrackImpl,1);
 };

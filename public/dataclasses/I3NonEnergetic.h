@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonEnergetic.h,v 1.8 2005/04/04 15:49:25 pretz Exp $
+ * $Id$
  *
  * @file I3NonEnergetic.h
  * @version $Revision: 1.8 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3NONENERGETIC_H
@@ -37,6 +37,15 @@ class I3NonEnergetic
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    //Nothing to serialize, but I think a serialize method
+    //is still needed
+  }
   //ROOT macro
   ClassDef(I3NonEnergetic,1);
 

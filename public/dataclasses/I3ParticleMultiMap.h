@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3ParticleMultiMap.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3ParticleMultiMap.h
  * @version $Revision: 1.6 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author ehrlich
  */
 
@@ -56,6 +56,15 @@ class I3ParticleMultiMap : public TObject, public STLMultiMapStoragePolicy<strin
     }
   
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3ParticleMultiMap", 
+		  base_object< STLMultiMapStoragePolicy<string, I3ParticlePtr>  >(*this));
+  }
 
   // ROOT macro
   ClassDef(I3ParticleMultiMap,1);

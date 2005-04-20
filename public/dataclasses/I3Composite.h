@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Composite.h,v 1.12 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3Composite.h
  * @version $Revision: 1.12 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3COMPOSITE_H
@@ -74,6 +74,13 @@ class I3Composite
 	}
     }
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Constituents", constituents_);
+  }
   // ROOT macro
   ClassDef(I3Composite,1);
 };
