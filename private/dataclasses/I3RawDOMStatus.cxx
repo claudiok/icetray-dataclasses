@@ -109,13 +109,16 @@ double I3RawDOMStatus::GetPMTHV() const
 }
 
 /** 
- *@todo Now I _KNOW_ this isn't right.  There should be some
- * transformation of the raw DAQ value here.  Gotta look up that transformation.
- * Kael sent it to me, but I can't find it now. 
+ * @todo don't even ask me where this comes from.  I don't have the foggiest 
+ * idea.  It's cut-and-pasted from Dima's code. Need to link
+ * tis to some daq documentation so that we know it's right...
  */
 double I3RawDOMStatus::GetSingleSPEThreshold() const
 {
-  return (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
+  //  return (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
+  double raw_spe_thresh = (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
+  return (5.*raw_spe_thresh/1024.- GetFEPedestal())/(9.6*(1+2200./249.));
+
 }
 
 /**
