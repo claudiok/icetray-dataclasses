@@ -105,7 +105,7 @@ I3RawDOMStatus::OnOff I3RawDOMStatus::GetStatusFADC() const
 
 double I3RawDOMStatus::GetPMTHV() const
 {
-  return 0.5 * (double)rawStatus_["PMT_HV_DAC"] * I3Units::volt;
+  return 0.5 * (double)rawStatus_["PMT_HV_DAC"];// * I3Units::volt;
 }
 
 /** 
