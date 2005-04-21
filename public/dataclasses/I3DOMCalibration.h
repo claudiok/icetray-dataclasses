@@ -69,6 +69,8 @@ struct ChargeHistogram
 class I3DOMCalibration
 {
 public:
+  long long GetMainboardID(){return mainboardId_;}
+	
   double GetTemperature()
     {
       return fTemperature;
@@ -107,6 +109,8 @@ public:
   
   virtual ~I3DOMCalibration()
     {};
+  
+  void SetMainboardID(long long mbid){mainboardId_ = mbid;}
   
   void SetTemperature(double temperature)
     {
@@ -165,6 +169,8 @@ public:
       };
     
  private:
+    long long mainboardId_;
+    
     // Simple data types
     double  fTemperature;
     
