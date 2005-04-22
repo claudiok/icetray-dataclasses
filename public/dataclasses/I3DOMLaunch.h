@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DOMLaunch.h,v 1.16 2005/04/14 17:10:21 olivas Exp $
+ * $Id$
  *
  * @file I3DOMLaunch.h
  * @version $Revision: 1.16 $
- * @date $Date: 2005/04/14 17:10:21 $
+ * @date $Date$
  * @author klein
  * @author blaufuss
  *
@@ -290,6 +290,7 @@ class I3DOMLaunch : public I3DigitalLaunch
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this) );
     ar & make_nvp("StartTime", startTime_);
     ar & make_nvp("ATWDBinSize", aTWDBinSize_);
     ar & make_nvp("Trigger", trigger_);
@@ -300,14 +301,14 @@ class I3DOMLaunch : public I3DigitalLaunch
     ar & make_nvp("ATWD3", aTWD3_);
     ar & make_nvp("FADC", fADC_);
     ar & make_nvp("CombinedATWD", combinedATWD_);
-    ar & make_nvp("LocalCoincidence", (int)localCoincidence_);
+    ar & make_nvp("LocalCoincidence", localCoincidence_);
   }
 
   // ROOT macro
   ClassDef(I3DOMLaunch,1);
 };
 
-BOOST_CLASS_EXPORT(I3DOMLaunch);
+BOOST_SHARED_POINTER_EXPORT(I3DOMLaunch);
 
 /**
  * Pointer typedeffed away to insulate users from the

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalReadout.h,v 1.14 2005/04/14 17:10:21 olivas Exp $
+ * $Id$
  *
  * @file I3DigitalReadout.h
  * @version $Revision: 1.14 $
- * @date $Date: 2005/04/14 17:10:21 $
+ * @date $Date$
  * @author pretz
  * @author blaufuss
  *
@@ -92,6 +92,8 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
 //  o<<"]\n";
 //  return o;
 //}
+
+BOOST_SHARED_POINTER_EXPORT(I3DigitalReadout);
 
 /**
  * Pointer typedeffed away to insulate users from the

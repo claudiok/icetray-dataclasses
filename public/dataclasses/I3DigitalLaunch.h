@@ -1,11 +1,11 @@
 #/**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DigitalLaunch.h,v 1.6 2005/04/14 17:10:21 olivas Exp $
+ * $Id$
  *
  * @file I3DigitalLaunch.h
  * @version $Revision: 1.6 $
- * @date $Date: 2005/04/14 17:10:21 $
+ * @date $Date$
  * @author blaufuss
  */
 #ifndef I3DIGITALLAUNCH_H
@@ -60,7 +60,7 @@ class I3DigitalLaunch : public TObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3DigitalReadout", *this);
+    //This method needs to be empty
   }
 
   //ROOT macro

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RDMCLaunch.h,v 1.7 2005/04/14 17:10:21 olivas Exp $
+ * $Id$
  *
  * @file I3RDMCLaunch.h
  * @version $Revision: 1.7 $
- * @date $Date: 2005/04/14 17:10:21 $
+ * @date $Date$
  * @author ehrlich
  */
 #ifndef I3RDMCLAUNCH_H
@@ -54,6 +54,7 @@ class I3RDMCLaunch : public I3DigitalLaunch
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this) );
     ar & make_nvp("ID", id_ );
     ar & make_nvp("StartTime", startTime_ );
     ar & make_nvp("BinSize", binSize_ );
@@ -66,7 +67,7 @@ class I3RDMCLaunch : public I3DigitalLaunch
   ClassDef(I3RDMCLaunch,1);
 };
 
-BOOST_CLASS_EXPORT(I3RDMCLaunch);
+BOOST_SHARED_POINTER_EXPORT(I3RDMCLaunch);
 
 /**
  * Pointer typedeffed away to insulate users from the
