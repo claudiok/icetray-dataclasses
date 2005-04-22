@@ -1,17 +1,20 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3DOMLaunch.cxx,v 1.1 2005/04/01 22:38:41 olivas Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2005/04/01 22:38:41 $
+    @date $Date$
     @author Troy D. Straszheim
 
 */
 
 #include "serialization-test.h"
 #include "dataclasses/I3DOMLaunch.h"
+#include "dataclasses/I3DigitalLaunch.h"
 
 TEST_GROUP(I3DOMLaunch);
 
 I3_SERIALIZATION_TEST(I3DOMLaunch);
+
+I3_VIRTUAL_SERIALIZATION_TEST(I3DigitalLaunch,I3DOMLaunch);
