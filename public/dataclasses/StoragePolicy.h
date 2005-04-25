@@ -27,8 +27,8 @@ namespace boost
     // special dummy no-ops that check to see if boost headers have
     // already been included.
 #ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
-    template <class Base, class Derived, class Retval>
-      Retval base_object(Derived &d);
+    template <class Retval, class Derived>
+      Retval base_object(Derived);
 #endif
 #ifndef BOOST_SERIALIZATION_IS_ABSTRACT_CLASS_HPP
 #define BOOST_IS_ABSTRACT(X)
