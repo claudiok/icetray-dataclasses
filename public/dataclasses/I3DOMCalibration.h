@@ -19,6 +19,7 @@
 #include <map>
 #include <vector>
 #include <sstream>
+#include <cmath>
 #include <TObject.h>
 
 using namespace std;
