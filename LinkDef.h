@@ -190,6 +190,12 @@
 //#pragma link C++ typedef I3RecoHitSeriesDictPtr;
 //#pragma link C++ class boost::shared_ptr<I3RecoHitSeriesDict>+;
 
+#pragma link C++ class I3MCWeightDict+;
+//#pragma link C++ typedef MapPolicy<string,float>::ThePolicy;
+//#pragma link C++ class MapPolicy<string,float>::ThePolicy+;
+//#pragma link C++ typedef I3MCWeightDictPtr;
+//#pragma link C++ class boost::shared_ptr<I3MCWeightDict>+;
+
 #pragma link C++ class I3SurfModuleGeo+;
 //#pragma link C++ typedef MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy;
 //#pragma link C++ class MapPolicy<OMKey, I3OMGeoPtr>::ThePolicy+;
