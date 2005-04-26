@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TimeTest.cxx,v 1.10 2005/04/12 10:08:58 troy Exp $
+    $Id$
 
     @version $Revision: 1.10 $
-    @date $Date: 2005/04/12 10:08:58 $
+    @date $Date$
     @author pretz
 
     @todo
@@ -92,16 +92,6 @@ namespace tut
     ensure(i.weekday == 6);
   }
 
-  void object::test<5>()
-  {
-    I3Time tme;
-    tme.SetJulianTime(2453434,(unsigned int)(23.5 / 24. * 3600 * 24),0.);
-    cout<<tme.GetUTCYear()<<endl;
-    cout<<tme.GetUTCDaqTime()<<endl;
-    cout<<tme<<endl;
-      
-  }
-
   void object::test<6>()
   {
     cout<<I3Time::WeekdayToString(I3Time::Monday)<<endl;
@@ -187,7 +177,6 @@ namespace tut
     I3Time time;
     time.SetDaqTime(2005,560819884 * (long long)1e8 + 43187970);
     ensure_distance(time.GetUTCNanoSec(),844318797.0,0.1);
-    ensure_distance(time.GetJulianNanoSec(),844318797.0,0.1);
     ensure_distance(time.GetModJulianNanoSec(),844318797.0,0.1);
   }
 
