@@ -41,15 +41,6 @@ class I3Event : public TObject
   I3RecoResultDict  recoResultDict_; //||
   I3Bag             bag_; //||
   
-//  friend class boost::serialization::access;
-//
-//  template <class Archive>
-//  void serialize(Archive &ar, const unsigned int version)
-//  {
-//    ar & make_nvp("I3OMResponseMap", oMResponseMap_);
-
-//  }
-
  public:
   /**
    * default constructor
