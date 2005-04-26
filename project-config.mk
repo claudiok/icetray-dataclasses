@@ -116,3 +116,4 @@ dataclasses/StationKey.h \
 dataclasses/I3MCPrimary.h \
 dataclasses/StoragePolicy.h \
 dataclasses/I3Time.h \
+dataclasses/I3MCWeightDict.h \
