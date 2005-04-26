@@ -23,4 +23,9 @@
    need the entire DATACLASS-APP metaproject.  See 
    <a href="../index.html"> OFFLINE INDEX </a> for more information.
 
+   @section boostserialization Adding a Boost Serialization method to your class.
+
+   If you're adding a new class to dataclasses and want to be able to dump your 
+   class (or one that inherits from it) to a root tree or xml file it'll need to
+   have a serialization method.  See @ref adding-a-serialization-method.
 */

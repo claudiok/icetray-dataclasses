@@ -1,0 +1,15 @@
+/**
+   @page adding-a-serialization-method Adding a Boost Serialization method to your class 
+
+   @li @ref simplest-case - This is the simplest case possible.  You want to serialize a class that does not
+inherit from any other class and the data members are primitive types (ints, bools, doubles, etc.).
+                                                                                
+   @li @ref non-primitive-data-members 
+
+   @li @ref simplest-case-test - Writing the serialization test is nearly trivial thanks to Troy. 
+
+   @li @ref through-shared-base-pointers - My class inherits a base class and I need to be able to serialize it through a shared pointer to that base class. 
+                                                                
+   @li @ref through-shared-base-pointer-test - Extending the simple test to now test serialization through a shared pointer to the base class.
+                
+*/

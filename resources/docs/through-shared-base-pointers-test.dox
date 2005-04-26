@@ -1,0 +1,55 @@
+/**
+   @page through-shared-base-pointer-test Writing the test for serializing through a base pointer
+
+If you want to be able to serialize your class through a shared pointer to the base class you
+only need to add one line to the test you've already written.
+
+Simply write and add the test file to dataclasses/private/serialization-test.
+Your test file will look like...
+
+@verbatim
+
+/**
+    copyright  (C) 2004
+    the icecube collaboration
+    $Id: I3MyClass.cxx 1360 2005-03-31 17:38:00Z troy $
+
+    @version $Revision: 1.1 $
+    @date $Date: 2005-03-31 12:38:00 -0500 (Thu, 31 Mar 2005) $
+    @author Troy D. Straszheim
+
+*/
+
+#include "serialization-test.h"
+#include "dataclasses/I3MyClass.h"
+
+TEST_GROUP(I3MyClass);
+
+I3_SERIALIZATION_TEST(I3MyClass);
+
+I3_VIRTUAL_SERIALIZATION_TEST(I3BaseClass,I3MyClass); //<---This is the only line to add
+
+
+@endverbatim
+
+By running 'make all-tests-run' you should see the results of the tests.
+
+@verbatim
+> make-all-tests-run
+
+...
+I3RecoHit...
+  binary......................................................   ok
+  binary_via_I3Hit............................................   ok
+  text........................................................   ok
+  text_via_I3Hit..............................................   ok
+  xml.........................................................   ok
+  xml_via_I3Hit...............................................   ok
+...
+
+>
+@endverbatim
+
+If this test passes you should be able to serialize this class.
+
+*/
