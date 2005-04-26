@@ -7,8 +7,6 @@
 
 #include "icetray/I3TrayException.h"
 
-#include "TFile.h"
-
 #include <string>
 #include <iostream>
 
@@ -49,7 +47,7 @@ namespace tut
 	
 	int id = 0;
 	int channel = 0;
-	int bin = 128;
+	int bin = 127;
 	
 	double slope = -0.002;
 	double intercept = 2.9; 
@@ -66,37 +64,16 @@ namespace tut
 	
 	inice_calib[OMKey(20,20)] = dom_calib;
 	
-	TFile fileOut("test.root", "RECREATE");
-	calib->Write();
-	fileOut.Close();
-	
-	TFile fileIn("test.root");
-	
-	I3Calibration* calib_in = 
-	  (I3Calibration*) fileIn.FindObjectAny("I3Calibration");
-	ensure("Failed to find I3Calibration object on disk",
-	       calib_in != 0);
-	
-	//	    calib_in->ls();
-	
-	//	I3InIceCalibration& inice = calib_in->GetInIceCalibration();
-	//	    inice.ls();
-	
 	I3DOMCalibPtr domptr = inice_calib[OMKey(20,20)];
-	
-	ensure("Failed to get I3DOMCalibration",
-	       calib_in->GetInIceCalibration()[OMKey(20,20)] != I3DOMCalibPtr((I3DOMCalibration*)0) );
-	
-	//	    domptr->ls();
 	
 	ensure_distance("Failed to get gain from I3DOMCalibration "
 			"read from disk", 
 			gain, domptr->GetATWDGain(0), 0.0001);
-	
+	cout<<"LOOK: "<<domptr->GetATWDVoltage(0,0,0,0.0,0);
 	ensure_distance("Failed to get voltage from "
 			"I3DOMCalibration read from disk",
 			intercept, 
-			domptr->GetATWDVoltage(0, 0,128,0.0, 0), 
+			domptr->GetATWDVoltage(0, 0,0,0.0, 0)*gain, 
 			0.0001);
       }
     
@@ -106,46 +83,6 @@ namespace tut
       }
   }
   
-  //
-  template<> template<>
-  void object::test<2>()
-  {
-    try
-      {
-	I3DOMCalibration dom;
-	
-	int id = 0;
-	int channel = 0;
-	int bin = 128;
-	
-	double slope = -0.002;
-	double intercept = 2.9; 
-	double regress_coeff = 0.99;
-	double gain = -17.0;
-	
-	double val;
-	double gainErr = 0.0;
-	
-	val = slope;
-	
-	dom.SetATWDGain(channel,gain,gainErr);
-	dom.SetATWDParameters(id,channel,bin,slope,intercept,regress_coeff);
-	
-	ensure_distance("Failed to get gain from I3DOMCalibration", 
-			gain, 
-			dom.GetATWDGain(0), 
-			0.0001);
-	
-	ensure_distance("Failed to get voltage from I3DOMCalibration ",
-			intercept, 
-			dom.GetATWDVoltage(0, 0, 128,0.0, 0), 0.0001);
-      }
-    
-    catch(I3TrayException& e)
-      {
-	ensure("No Exceptions Thrown",0);
-      }
-  }
   
   // Test I/O streams
   template<> template<>
