@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEvent.h,v 1.14 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3MCEvent.h
  * @version $Revision: 1.14 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author Spencer Klein
  */
 #ifndef I3MCEVENT_H
@@ -13,6 +13,7 @@
 
 #include "dataclasses/I3Event.h"
 #include "dataclasses/I3MCParticleData.h"
+#include "dataclasses/I3MCWeightDict.h"
 
 /**
  * @brief Derived I3Event class with Monte Carlo information
@@ -28,6 +29,7 @@ class I3MCEvent : public I3Event
   float           MCFrameStart_;
   float           MCFrameStop_;
   I3MCParticleData  MCParticleData_; //||
+  I3MCWeightDict MCWeightDict_;
 
  public:
   /**
@@ -74,6 +76,17 @@ class I3MCEvent : public I3Event
    * @return the MCParticleDict as a non-const object.
    */
   I3MCParticleData& GetMCParticleData(){ return MCParticleData_;}
+
+  /**
+   * @return the MCWeightDict as a constant object.
+   */
+  const I3MCWeightDict& GetMCWeightDict() const { return MCWeightDict_;}
+
+  /**
+   * @return the MCWeightDict as a non-const object.
+   */
+  I3MCWeightDict& GetMCWeightDict(){ return MCWeightDict_;}
+
 
   virtual void ToStream(ostream& o) const
     {
