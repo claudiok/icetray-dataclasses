@@ -48,6 +48,7 @@ class I3Particle : public TObject{
     PMinus = 15,
     TauPlus = 33,
     TauMinus = 34,
+    Monopole = 41,
     NuE = 201,
     NuMu = 202,
     NuTau = 203,
