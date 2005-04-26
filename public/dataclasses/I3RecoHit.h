@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHit.h,v 1.12 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3RecoHit.h
  * @version $Revision: 1.12 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -54,7 +54,18 @@ class I3RecoHit : public I3Hit
  private:
   //ROOT macro
   ClassDef(I3RecoHit, 1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3Hit", base_object<I3Hit>(*this));
+  }
+
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3RecoHit);
 
 /**
  * Pointer typedeffed away to insulate users from the 
