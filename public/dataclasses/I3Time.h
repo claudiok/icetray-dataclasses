@@ -192,10 +192,10 @@ class I3Time : public TObject
 
   static unsigned int yearOf(double modjulianday);
   
+ private:
+
   unsigned int year_;
   long long int daqTime_;
-
- private:
 
   friend class boost::serialization::access;
 
