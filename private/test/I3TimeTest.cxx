@@ -190,7 +190,7 @@ namespace tut
   {
     I3Time lowest;
     lowest.SetDaqTime(2004,235918301);
-    
+
     I3Time lower;
     lower.SetDaqTime(2004,235918402);
 
@@ -218,9 +218,32 @@ namespace tut
     ensure("14",lower!=higher);
     ensure("15",lowest!=lower);
 
+    ensure("16",lower>lowest);
+    ensure("17",higher>lowest);
+    ensure("18",highest>lowest);
+    ensure("19",higher>lower);
+    ensure("20",highest>lower);
+    ensure("21",highest>higher);
+
+    ensure("22",lower>=lowest);
+    ensure("23",higher>=lowest);
+    ensure("24",highest>=lowest);
+    ensure("25",higher>=lower);
+    ensure("26",highest>=lower);
+    ensure("27",highest>=higher);
+
+    ensure("28",lowest<=lower);
+    ensure("29",lowest<=higher);
+    ensure("30",lowest<=highest);
+    ensure("31",lower<=higher);
+    ensure("32",lower<=highest);
+    ensure("33",higher<=highest);
+
     I3Time same;
     same.SetDaqTime(2004,235918301);
 
-    ensure("16",lowest == same);
+    ensure("34",lowest == same);
+    ensure("35",lowest <= same);
+    ensure("36",lowest >= same);
   }
 }

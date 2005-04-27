@@ -159,6 +159,49 @@ double I3Time::GetUTCNanoSec() const
   return 0.1 * daqtenthsns;
 }
 
+bool I3Time::operator<(const I3Time& rhs) const
+{
+      if(year_ < rhs.year_)
+	return true;
+      if(year_ > rhs.year_)
+	return false;
+      if(daqTime_ < rhs.daqTime_)
+	return true;
+      return false;
+}
+
+bool I3Time::operator>(const I3Time& rhs) const
+{
+      if(year_ > rhs.year_)
+	return true;
+      if(year_ < rhs.year_)
+	return false;
+      if(daqTime_ > rhs.daqTime_)
+	return true;
+      return false;
+}
+
+bool I3Time::operator==(const I3Time& rhs) const
+{
+  if(year_ == rhs.year_ && daqTime_ == rhs.daqTime_)
+    return true;
+  return false;
+}
+
+bool I3Time::operator<=(const I3Time& rhs) const
+{
+  if(*this < rhs || *this == rhs)
+    return true;
+  return false;
+}
+
+bool I3Time::operator>=(const I3Time& rhs) const
+{
+  if(*this > rhs || *this == rhs)
+    return true;
+  return false;
+}
+
 std::string I3Time::MonthToString(Month m)
 {
   switch(m)

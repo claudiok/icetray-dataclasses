@@ -153,12 +153,8 @@ class I3Time : public TObject
    * @return true if the times are the same
    * @param rhs the I3Time to compare this one to.
    */
-  bool operator==(const I3Time& rhs) const
-    {
-      if(rhs.daqTime_ == daqTime_ && rhs.year_ == year_)
-	return true;
-      return false;
-    }
+  bool operator==(const I3Time& rhs) const;
+
 
   /**
    * inequality operator
@@ -211,26 +207,26 @@ class I3Time : public TObject
   }
 
   ClassDef(I3Time,1);
+
+  /**
+   * comparison operator.  
+   * Compares first the year and then the DAQ time
+   * @return true if the lhs should be ordered before the rhs
+   */
+  bool operator<(const I3Time& rhs) const;
+
+  /**
+   * comparison operator.  
+   * Compares first the year and then the DAQ time
+   * @return true if the lhs should be ordered after the rhs
+   */
+  bool operator>(const I3Time& rhs) const;
+
+  bool operator<=(const I3Time& rhs) const;
+  
+  bool operator>=(const I3Time& rhs) const;
+  
 };
-
-/**
- * comparison operator.  
- * Compares first the year and then the DAQ time
- * @param lhs the left-hand I3Time
- * @param rhs the right-hand I3Time
- * @return true if the lhs should be ordered before the rhs
- */
-inline bool operator<(const I3Time& lhs,const I3Time& rhs)
-{
-  if(lhs.GetUTCYear() < rhs.GetUTCYear())
-    return true;
-  if(lhs.GetUTCYear() > rhs.GetUTCYear())
-    return false;
-  if(lhs.GetUTCDaqTime() < rhs.GetUTCDaqTime())
-    return true;
-  return false;
-}
-
 
 inline ostream& operator<<(ostream& o, const I3Time& t)
 {
