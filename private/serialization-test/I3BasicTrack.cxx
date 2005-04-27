@@ -9,7 +9,7 @@
 
 */
 
-#include "serialization-test.h"
+#include "icetray/test/serialization-test.h"
 #include "dataclasses/I3BasicTrack.h"
 #include "dataclasses/I3Particle.h"
 #include "dataclasses/I3InIceParticle.h"

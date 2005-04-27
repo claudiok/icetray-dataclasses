@@ -9,7 +9,7 @@
 
 */
 
-#include "serialization-test.h"
+#include "icetray/test/serialization-test.h"
 #include "dataclasses/I3DOMLaunch.h"
 #include "dataclasses/I3DigitalLaunch.h"
 

@@ -9,11 +9,9 @@
 
 */
 
-#include "serialization-test.h"
+#include "icetray/test/serialization-test.h"
 #include "dataclasses/I3RecoHit.h"
 
 TEST_GROUP(I3RecoHit);
 
 I3_SERIALIZATION_TEST(I3RecoHit);
-
-I3_VIRTUAL_SERIALIZATION_TEST(I3Hit,I3RecoHit);

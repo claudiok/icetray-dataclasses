@@ -1,15 +1,15 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMSelectionDict.cxx,v 1.1 2005/04/12 19:22:43 olivas Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2005/04/12 19:22:43 $
+    @date $Date$
     @author Troy D. Straszheim
 
 */
 
-#include "serialization-test.h"
+#include "icetray/test/serialization-test.h"
 #include "dataclasses/I3OMSelectionDict.h"
 
 TEST_GROUP(I3OMSelectionDict);

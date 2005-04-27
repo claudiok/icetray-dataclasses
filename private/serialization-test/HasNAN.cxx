@@ -1,15 +1,15 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: HasNAN.cxx,v 1.1 2005/04/07 13:16:23 olivas Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2005/04/07 13:16:23 $
+    @date $Date$
     @author Troy D. Straszheim
 
 */
 
-#include "serialization-test.h"
+#include "icetray/test/serialization-test.h"
 #include "dataclasses/I3Hit.h"
 
 struct HasNan {
