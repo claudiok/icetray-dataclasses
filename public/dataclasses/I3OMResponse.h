@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3OMResponse.h,v 1.42 2005/04/09 03:02:10 olivas Exp $
+    $Id$
 
     @file I3OMResponse.h
     @version $Revision: 1.42 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @date $Date$
     @author ehrlich
     @author troy
     @author pretz
@@ -19,6 +19,7 @@
 #include "I3OMGeo.h"
 #include "I3DataReadoutDict.h"
 #include "I3RecoHitSeriesDict.h"
+#include "I3RecoPulseSeriesDict.h"
 #include <sstream>
 
 /**
@@ -36,6 +37,7 @@ class I3OMResponse : public TObject
 
   I3DataReadoutDict   dataReadoutDict_; //||
   I3RecoHitSeriesDict recoHitSeriesDict_; //||
+  I3RecoPulseSeriesDict recoPulseSeriesDict_; //||
 
  public:
   /**
@@ -72,6 +74,16 @@ class I3OMResponse : public TObject
   I3RecoHitSeriesDict& GetRecoHitSeriesDict() {return recoHitSeriesDict_;}
 
   /**
+   * @return the reco pulse series data as a const object
+   */
+  const I3RecoPulseSeriesDict& GetRecoPulseSeriesDict() const {return recoPulseSeriesDict_;}
+
+  /**
+   * @return the reco pulse series data as a non-const object
+   */
+  I3RecoPulseSeriesDict& GetRecoPulseSeriesDict() {return recoPulseSeriesDict_;}
+
+  /**
    * @todo finish implementing this method
    */
   virtual void ToStream(ostream& o) const
@@ -97,6 +109,7 @@ class I3OMResponse : public TObject
   {
     ar & make_nvp("DataReadoutDict", dataReadoutDict_);
     ar & make_nvp("RecoHitSeriesDict", recoHitSeriesDict_);
+    ar & make_nvp("RecoPulseSeriesDict", recoPulseSeriesDict_);
   }
 
   // ROOT macro
