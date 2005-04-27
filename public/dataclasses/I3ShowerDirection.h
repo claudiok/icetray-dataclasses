@@ -1,16 +1,16 @@
 /**
  * Copyright (C) 2004
  * The IceCube collaboration
- * $Id: I3ShowerDirection.h,v 1.4 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3ShowerDirection.h
  * @version $Revision: 1.4 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author Peter Niessen
  */
 
-#ifndef __I3SHOWERPLANE_H_
-#define __I3SHOWERPLANE_H_
+#ifndef __I3SHOWERDIRECTION_H_
+#define __I3SHOWERDIRECTION_H_
 
 #include "dataclasses/StoragePolicy.h"
 #include "I3TopShowerImpl.h"
@@ -26,6 +26,9 @@
 class I3ShowerDirection
 : public I3TopShowerImpl<I3Directional, I3NonLocalized, I3NonEnergetic>
 {
+
+ private:
+
   ClassDef (I3ShowerDirection, 1);
 };
        
@@ -33,6 +36,6 @@ class I3ShowerDirection
  * Typedeffed pointer which allows for change of technical details
  * later.
  */       
-typedef shared_ptr<I3ShowerDirection>  I3ShowerDirectionPtr;
+typedef shared_ptr<I3ShowerDirection> I3ShowerDirectionPtr;
 
 #endif
