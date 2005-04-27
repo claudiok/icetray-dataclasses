@@ -65,8 +65,6 @@ class I3RecoHit : public I3Hit
 
 };
 
-BOOST_SHARED_POINTER_EXPORT(I3RecoHit);
-
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
