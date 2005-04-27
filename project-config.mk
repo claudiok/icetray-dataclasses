@@ -53,10 +53,13 @@ dataclasses/I3DigitalLaunch.h \
 dataclasses/I3RDMCLaunch.h \
 dataclasses/I3DigitalReadout.h \
 dataclasses/I3RecoHit.h \
+dataclasses/I3RecoPulse.h \
 dataclasses/I3Direction.h \
 dataclasses/I3RecoHitSeries.h \
+dataclasses/I3RecoPulseSeries.h \
 dataclasses/I3Directional.h \
 dataclasses/I3RecoHitSeriesDict.h \
+dataclasses/I3RecoPulseSeriesDict.h \
 dataclasses/I3DirectionalCascade.h \
 dataclasses/I3RecoResult.h \
 dataclasses/I3DoubleBang.h \

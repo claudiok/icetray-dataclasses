@@ -163,6 +163,8 @@
 //#pragma link C++ typedef I3RecoHitSeriesPtr;
 //#pragma link C++ class boost::shared_ptr<I3RecoHitSeries>+;
 
+#pragma link C++ class I3RecoPulseSeries+;
+
 #pragma link C++ class I3ParticleMultiMap+;
 //#pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
 //#pragma link C++ class MultiMapPolicy<string,I3ParticlePtr>::ThePolicy+;
@@ -189,6 +191,8 @@
 //#pragma link C++ class MapPolicy<string,I3RecoHitSeriesPtr>::ThePolicy+;
 //#pragma link C++ typedef I3RecoHitSeriesDictPtr;
 //#pragma link C++ class boost::shared_ptr<I3RecoHitSeriesDict>+;
+
+#pragma link C++ class I3RecoPulseSeriesDict+;
 
 #pragma link C++ class I3MCWeightDict+;
 //#pragma link C++ typedef MapPolicy<string,float>::ThePolicy;
@@ -449,6 +453,8 @@
 #pragma link C++ class I3RecoHit+;
 //#pragma link C++ typedef I3RecoHitPtr;
 //#pragma link C++ class boost::shared_ptr<I3RecoHit>+;
+
+#pragma link C++ class I3RecoPulse+;
 
 #pragma link C++ class I3RecoResult+;
 //#pragma link C++ typedef I3RecoResultPtr;
