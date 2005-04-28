@@ -14,15 +14,6 @@
    @ref dataclass-overview.  For information on specific classes,
    click the tabs at the top of the page.
    
-   @section dataclassappmetaproject The DATACLASS-APP Metaproject
-   
-   The @c dataclasses project is an important part of the DATACLASS-APP 
-   metaproject, which contains the core software projects needed to
-   get started using the IceCube offline software.  If you want to
-   actually use the @c dataclasses in IceCube, you almost certainly
-   need the entire DATACLASS-APP metaproject.  See 
-   <a href="../index.html"> OFFLINE INDEX </a> for more information.
-
    @section boostserialization Adding a Boost Serialization method to your class.
 
    If you're adding a new class to dataclasses and want to be able to dump your 
