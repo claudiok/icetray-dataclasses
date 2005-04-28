@@ -5,8 +5,6 @@
 #include "dataclasses/I3DOMCalibration.h"
 #include "dataclasses/I3CalibrationHeader.h"
 
-#include "icetray/I3TrayException.h"
-
 #include <string>
 #include <iostream>
 
@@ -77,9 +75,9 @@ namespace tut
 			0.0001);
       }
     
-    catch(I3TrayException& e)
+    catch(exception& e)
       {
-	ensure("No exceptions thrown",0);
+	ensure("No exceptions thrown ",0);
       }
   }
   
@@ -113,7 +111,7 @@ namespace tut
 	cout<< dom_calib;
       }
     
-    catch(I3TrayException& e)
+    catch(exception& e)
       {
 	ensure("No exceptions thrown",0);
       }

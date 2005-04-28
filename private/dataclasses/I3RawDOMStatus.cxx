@@ -1,6 +1,5 @@
 #include "dataclasses/I3RawDOMStatus.h"
 
-#include "icetray/I3TrayException.h"
 #include "services/I3Logging.h"
 #include "dataclasses/I3Units.h"
 
@@ -29,7 +28,6 @@ I3RawDOMStatus::TrigMode I3RawDOMStatus::GetTrigMode() const
       break;
     default:
       log_fatal("unknown 'TRIG_MODE' setting");
-      throw I3TrayException();
     }
 }
 
@@ -54,7 +52,6 @@ I3RawDOMStatus::LCMode I3RawDOMStatus::GetLCMode() const
       break;
     default:
       log_fatal("unknown 'LOCAL_COIN_MODE' setting");
-      throw I3TrayException();
     }
 }
 
