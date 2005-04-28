@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleTopShower.h,v 1.8 2005/04/12 23:11:18 olivas Exp $
+ * $Id$
  *
  * @file I3RecoResultSingleTopShower.h
  * @version $Revision: 1.8 $
- * @date $Date: 2005/04/12 23:11:18 $
+ * @date $Date$
  * @author Peter Niessen
  * @author dule
  */
@@ -86,7 +86,7 @@ class I3RecoResultSingleTopShower : public I3RecoResultSingleParticle
   ClassDef(I3RecoResultSingleTopShower, 1);
 };
 
-BOOST_CLASS_EXPORT(I3RecoResultSingleTopShower);
+BOOST_SHARED_POINTER_EXPORT(I3RecoResultSingleTopShower);
 
 /**
  * Pointer typedeffed away to insulate users from the 
