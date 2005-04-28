@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResult.h,v 1.33 2005/04/12 23:11:18 olivas Exp $
+ * $Id$
  *
  * @file I3RecoResult.h
  * @version $Revision: 1.33 $
- * @date $Date: 2005/04/12 23:11:18 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -64,7 +64,7 @@ class I3RecoResult : public TObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3RecoResult", *this);
+    //This method intentionally left blank
   }
 
   // ROOT macro
