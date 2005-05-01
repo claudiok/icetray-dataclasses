@@ -165,8 +165,8 @@ namespace tut
 		      initial_time.GetUTCYear(),
 		      compare_time.GetUTCYear());
 	ensure("checking that the UTC time is the same to ns",
-	       I3::disambiguate::llabs(initial_time.GetUTCDaqTime() 
-				       - compare_time.GetUTCDaqTime()) < 10);
+	       llabs(initial_time.GetUTCDaqTime() 
+		     - compare_time.GetUTCDaqTime()) < 10);
 	
 	
       }

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3AMANDAPMTPulse.h,v 1.5 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3AMANDAPMTPulse.h
  * @version $Revision: 1.5 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author ehrlich
  *
  */
@@ -15,13 +15,6 @@
 #include "dataclasses/I3PMTPulse.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
-
-// oddness on darwin
-#ifdef __ppc__
-#ifndef isnan 
-#define isnan __isnan
-#endif
-#endif
 
 using namespace I3Constants;
 using namespace I3Units;
@@ -33,7 +26,8 @@ using namespace I3Units;
  * time, produced by a single photoelectron (hit). 
  */
 
-class I3AMANDAPMTPulse : public I3PMTPulse {
+class I3AMANDAPMTPulse : public I3PMTPulse 
+{
     
 public:
   /**
@@ -112,80 +106,20 @@ public:
   /** 
    * Returns the voltage at the given time. Voltage is negative.
    */  
-  virtual double GetVoltage(const double time) 
-  {
-    double t             = (time-timeZero_) / I3Units::ns;               //need to convert into explicite units
-    double normalization = normalization_ / (I3Units::ns * I3Units::V);  //since the formula below requires explicite units
-
-    return(t>0 ? 
-       - I3Units::V * normalization * norm_ 
-                * ( weight_/(sqrt(2*pi*stdDev1_*stdDev1_)) * (1/t)
-                    * exp(-(log(t)-mu1_)*(log(t)-mu1_)/(2*stdDev1_*stdDev1_))
-                    - (1-weight_)/(sqrt(2*pi*stdDev2_*stdDev2_)) * (1/t)
-                    * exp(-(log(t)-mu2_)*(log(t)-mu2_)/(2*stdDev2_*stdDev2_)) )
-       + pedestal_ : 0);
-  };
+  virtual double GetVoltage(const double time);
 
   /** 
    * Returns the time at which the pulse reaches its peak voltage.
    * Returns NAN if it can't find the peak.
    */ 
-  virtual double GetPeakTime() 
-  {
-    double t = timeZero_ / I3Units::ns;  //need to convert into explicite units
-                                           //since the formula below requires explicite units
-    
-    //get the peak time for the first term, the peak for the entire formula should be close to it
-    double t1 = t + exp(stdDev1_*stdDev1_ + mu1_);  //this value is in ns
-    
-    double v_before_t1 = GetVoltage((t1-1)*I3Units::ns);
-    double v_at_t1     = GetVoltage((t1)*I3Units::ns);
-    double v_after_t1  = GetVoltage((t1+1)*I3Units::ns);
-
-    if(v_at_t1 <= v_before_t1 && v_at_t1 <= v_after_t1) return(t1*I3Units::ns);
-
-    if(v_at_t1 > v_before_t1)
-    {
-      for(int i=0; i<10000; i++)
-      {
-        t1--;
-        v_before_t1 = GetVoltage((t1-1)*I3Units::ns);
-        v_at_t1     = GetVoltage((t1)*I3Units::ns);
-        v_after_t1  = GetVoltage((t1+1)*I3Units::ns);
-        if(v_at_t1 <= v_before_t1 && v_at_t1 <= v_after_t1) return(t1*I3Units::ns);
-      }
-      return(NAN);   //didn't find peak within 10000ns
-    }
-
-    if(v_at_t1 < v_before_t1)
-    {
-      for(int i=0; i<10000; i++)
-      {
-        t1++;
-        v_before_t1 = GetVoltage((t1-1)*I3Units::ns);
-        v_at_t1     = GetVoltage((t1)*I3Units::ns);
-        v_after_t1  = GetVoltage((t1+1)*I3Units::ns);
-        if(v_at_t1 <= v_before_t1 && v_at_t1 <= v_after_t1) return(t1*I3Units::ns);
-      }
-      return(NAN);   //didn't find peak within 10000ns
-    }
-
-    return(NAN);   //didn't find peak
-  }
+  virtual double GetPeakTime(); 
 
   /** 
    * Returns the peak voltage for this pulse.  The pulse is negative,
    * so the peak value is a negative number.
    * Returns NAN if it can't find the peak.
    */ 
-  virtual double GetPeakVoltage() 
-  {
-    double peak = GetPeakTime();
-    if (isnan(peak)) 
-      return NAN;
-    else
-      return GetVoltage(peak);
-  };
+  virtual double GetPeakVoltage();
 
 private:
 
