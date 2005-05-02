@@ -1,5 +1,5 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.13 2005/04/15 17:05:50 pretz Exp $
+//  $Id$
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
@@ -25,6 +25,47 @@ void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
     
     GetATWDById(id)[channel][127-bin] = fit;
 }
+
+double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel, 
+					int bin, double fe_pedestal,
+					int count)
+{
+    if ( ! GetATWDById(id).count(channel) )
+    {
+	log_fatal("Invalid ATWD channel in I3DOMCalibration");
+    }
+
+    if ( ! GetATWDById(id)[channel].count(bin) )
+    {
+	log_fatal("Invalid ATWD bin in I3DOMCalibration");
+    }
+    
+    struct LinearFit fit = GetATWDById(id)[channel][bin];
+       
+    return (count*fit.fSlope)/GetATWDGain(channel);
+}
+
+
+int I3DOMCalibration::GetPedestalSubtracted(int id,  int channel, 
+					int bin, double fe_pedestal,
+					int count)
+
+{
+    if ( ! GetATWDById(id).count(channel) )
+    {
+	log_fatal("Invalid ATWD channel in I3DOMCalibration");
+    }
+
+    if ( ! GetATWDById(id)[channel].count(bin) )
+    {
+	log_fatal("Invalid ATWD bin in I3DOMCalibration");
+    }
+    
+    struct LinearFit fit = GetATWDById(id)[channel][bin];
+       
+    return count-(int)((fe_pedestal- fit.fIntercept)/fit.fSlope);
+}
+
 
 double I3DOMCalibration::GetATWDVoltage(int id,  int channel, 
 					int bin, double fe_pedestal,
