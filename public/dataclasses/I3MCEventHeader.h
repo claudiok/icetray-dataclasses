@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCEventHeader.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3MCEventHeader.h
  * @version $Revision: 1.3 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -43,6 +43,14 @@ class I3MCEventHeader : public I3EventHeader
 
  private:
   // instance data
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3MCEventHeader", base_object<I3MCEventHeader>(*this));
+  }
   
   // ROOT Macro
   ClassDef(I3MCEventHeader,1);
