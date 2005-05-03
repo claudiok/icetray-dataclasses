@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMultiMapStoragePolicy.h,v 1.5 2005/01/24 23:17:44 ehrlich Exp $
+    $Id$
 
     @file STLMultiMapStoragePolicy.h
     @version $Revision: 1.5 $
-    @date $Date: 2005/01/24 23:17:44 $
+    @date $Date$
     @author Ralf Ehrlich
 
 */
@@ -298,6 +298,18 @@ class STLMultiMapStoragePolicy {
    * same as Count()
    */
   size_type count(const KeyType& key) const {return map_.count(key);}
+
+
+ private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("map", map_);
+  }
+
 };
 
 #endif
