@@ -49,7 +49,7 @@ class I3MCEventHeader : public I3EventHeader
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3MCEventHeader", base_object<I3MCEventHeader>(*this));
+    ar & make_nvp("I3MCEventHeader", base_object<I3EventHeader>(*this));
   }
   
   // ROOT Macro
