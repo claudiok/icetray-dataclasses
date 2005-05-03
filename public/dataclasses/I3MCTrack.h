@@ -51,6 +51,9 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   void  SetWeight(double weight_) { weight_ = weight_; }
 
  private:
+
+  friend class boost::serialization::access;
+
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
