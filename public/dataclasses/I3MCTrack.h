@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTrack.h,v 1.14 2005/04/12 18:55:28 dule Exp $
+    $Id$
 
     @file I3MCTrack.h
     @version $Revision: 1.14 $
-    @date $Date: 2005/04/12 18:55:28 $
+    @date $Date$
     @author deyoung
 */
 
@@ -51,6 +51,15 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   void  SetWeight(double weight_) { weight_ = weight_; }
 
  private:
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3TrackImpl", base_object< I3TrackImpl<I3Contained,
+		                                              I3Energetic,
+		                                              I3Composite> >(*this));
+    ar & make_nvp("Weight", weight_ );
+  }
+
   //ROOT macro
   ClassDef(I3MCTrack,1);
 };
