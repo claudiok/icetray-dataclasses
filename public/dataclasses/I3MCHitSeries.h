@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHitSeries.h,v 1.27 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3MCHitSeries.h
  * @version $Revision: 1.27 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -89,6 +89,14 @@ class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
 /*   // copy and assignment are private */
   I3MCHitSeries(const I3MCHitSeries&); 
   const I3MCHitSeries& operator=(const I3MCHitSeries&); 
+
+  friend class boost::serialization::access;
+
+template <class Archive>
+  void serialize(Archive& ar, unsigned version){
+  ar & make_nvp("I3MCHitSeries",base_object< STLVectorStoragePolicy<I3MCHit> >(*this));
+  ar & make_nvp("Weight", weight_ );
+ }
 
   //ROOT Macro
   ClassDef(I3MCHitSeries,1);

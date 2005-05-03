@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCOMResponse.h,v 1.14 2005/04/09 03:02:10 olivas Exp $
+    $Id$
 
     @file I3MCOMResponse.h
     @version $Revision: 1.14 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @date $Date$
     @author ehrlich
     @author troy
     @author pretz
@@ -103,6 +103,15 @@ class I3MCOMResponse : public I3OMResponse
   I3PMTPulseVect& GetPMTPulseVect() { return pMTPulseVect_;}
 
   private:
+
+  friend class boost::serialization::access;
+
+template <class Archive>
+  void serialize(Archive& ar, unsigned version){
+  ar & make_nvp("MCHitSeries",mCHitSeries_);
+  ar & make_nvp("MCPMTResponse",mCPMTResponse_);
+  ar & make_nvp("PMTPulseVect",pMTPulseVect_);
+ }
 
   // ROOT macro
   ClassDef(I3MCOMResponse,1);

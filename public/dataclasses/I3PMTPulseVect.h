@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id: I3PMTPulseVect.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3PMTPulseVect.h
  * @version $Revision: 1.5 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author deyoung
  */
 
@@ -59,6 +59,13 @@ private:
   I3PMTPulseVect(const I3PMTPulseVect&);
   I3PMTPulseVect& operator=(const I3PMTPulseVect&);
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3PMTPulseVect",
+		  base_object< STLVectorStoragePolicy<I3PMTPulsePtr> >(*this));
+  }
   // ROOT macro
   ClassDef(I3PMTPulseVect,1);
 };

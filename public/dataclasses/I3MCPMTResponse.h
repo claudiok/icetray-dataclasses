@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponse.h,v 1.15 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3MCPMTResponse.h
  * @version $Revision: 1.15 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author klein
  */
 
@@ -76,6 +76,14 @@ private:
   // copy and assignment are private
   I3MCPMTResponse(const I3MCPMTResponse&); 
   I3MCPMTResponse& operator=(const I3MCPMTResponse&); 
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("StartTime", startTime_);
+    ar & make_nvp("EndTime", endTime_);
+  }
 
   // ROOT macro
   ClassDef(I3MCPMTResponse,1);
