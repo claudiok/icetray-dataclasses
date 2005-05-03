@@ -61,7 +61,13 @@ class I3MCWeightDict : public TObject, public STLMapStoragePolicy<string, float>
       return out.str();
     }
 
+  friend class boost::serialization::access;
 
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3MCWeightDict", base_object< STLMapStoragePolicy<string, float> >(*this));
+  }
   // ROOT macro
   ClassDef(I3MCWeightDict,1);
 };

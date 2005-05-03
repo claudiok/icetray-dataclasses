@@ -99,6 +99,18 @@ class I3MCEvent : public I3Event
   
  private:
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3Event", base_object<I3Event>(*this));
+    ar & make_nvp("MCFrameStart", MCFrameStart_);
+    ar & make_nvp("MCFrameStop",MCFrameStop_ );
+    ar & make_nvp("MCParticleData", MCParticleData_);
+    ar & make_nvp("MCWeightDict", MCWeightDict_);
+  }
+
   //ROOT macro
   ClassDef(I3MCEvent, 1);
 };

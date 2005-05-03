@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCParticleData.h,v 1.9 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3MCParticleData.h
  * @version $Revision: 1.9 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  *
  */
@@ -88,6 +88,16 @@ class I3MCParticleData : public TObject
 
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Primary", primary_);
+    ar & make_nvp("InIceParticles", inIceParticles_);
+    ar & make_nvp("IceTopParticle",iceTopParticles_ );
+  }
 
   ClassDef(I3MCParticleData,1);
 };
