@@ -312,7 +312,7 @@ unsigned int I3Time::yearOf(double modjulianday)
   return i.year;
 }
 
-unsigned int I3Time::dayOfYear(double modjulianday)
+unsigned int I3Time::DayOfYear(double modjulianday)
 {
     UTinstant i;
     double julianDay = modjulianday + 2400000.5;
@@ -322,7 +322,7 @@ unsigned int I3Time::dayOfYear(double modjulianday)
     return i.day_of_year;
 }
 
-unsigned int I3Time::dayOfYear(long long int daqTime)
+unsigned int I3Time::DayOfYear(long long int daqTime)
 {
     long long int tenthsOfNs = daqTime %((long long)1e10);
     long long int daqSecs = (daqTime - tenthsOfNs)/((long long)1e10);
