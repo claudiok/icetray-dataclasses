@@ -1,18 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMResponseMap.h,v 1.10 2005/04/11 15:22:25 olivas Exp $
+ * $Id$
  *
  * @file I3OMResponseMap.h
  * @version $Revision: 1.10 $
- * @date $Date: 2005/04/11 15:22:25 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
  *
  */
-#ifndef I3OMRESPONSEDATA_H
-#define I3OMRESPONSEDATA_H
+#ifndef I3OMRESPONSEMAP_H
+#define I3OMRESPONSEMAP_H
 
 #include "I3OMResponse.h"
 #include "StoragePolicy.h"
