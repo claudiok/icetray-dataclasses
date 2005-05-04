@@ -50,6 +50,7 @@
 #pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3CascadeImpl<I3NonDirectional,I3Localized,I3Energetic,I3NonComposite>+;
+#pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3Energetic,I3NonComposite>+;
 
 #pragma link C++ class I3BasicCascade+;
 //#pragma link C++ typedef I3BasicCascadePtr;
@@ -62,6 +63,8 @@
 #pragma link C++ class I3F2KRecoCascade+;
 //#pragma link C++ typedef I3F2KRecoCascadePtr;
 //#pragma link C++ class boost::shared_ptr<I3F2KRecoCascade>+;
+
+#pragma link C++ class I3CompleteCascade+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3Localized,I3Energetic>+;
