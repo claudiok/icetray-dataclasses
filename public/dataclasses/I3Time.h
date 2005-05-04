@@ -191,7 +191,11 @@ class I3Time : public TObject
   static double julianday(int year, long long int daqTime);
 
   static unsigned int yearOf(double modjulianday);
-  
+
+  static unsigned int dayOfyear(long long int daqTime);
+
+  static unsigned int dayOfyear(double modjulianday);
+
  private:
 
   unsigned int year_;
