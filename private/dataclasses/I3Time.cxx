@@ -311,3 +311,23 @@ unsigned int I3Time::yearOf(double modjulianday)
   CalDate(&i);
   return i.year;
 }
+
+unsigned int I3Time::dayOfyear(double modjulianday)
+{
+    UTinstant i;
+    double julianDay = modjulianday + 2400000.5;
+    i.j_date = julianDay;
+    CalDate(&i);
+
+    return i.day_of_year;
+}
+
+unsigned int I3Time::dayOfyear(long long int daqTime)
+{
+    long long int tenthsOfNs = daqTime %((long long)1e10);
+    long long int daqSecs = (daqTime - tenthsOfNs)/((long long)1e10);
+    long long int daqSecsSinceDay = daqSecs % ((long long)(3600 * 24));
+    long long int daqDaysSinceYear = daqSecs - daqSecsSinceDay;
+					       
+    return (int) daqDaysSinceYear; 
+}
