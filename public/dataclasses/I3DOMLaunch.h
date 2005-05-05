@@ -87,6 +87,11 @@ class I3DOMLaunch : public I3DigitalLaunch
   vector<int> fADC_;
 
   /**
+   * This holds the pedestal subtracted and gained FADC data
+   */
+  vector<double> pgfADC_;
+
+  /**
    * This holds the combined ATWD waveform (over the 3 channels).
    * The combination utilizes the calibration information.
    */
@@ -184,6 +189,12 @@ class I3DOMLaunch : public I3DigitalLaunch
    * return FADC waveform as a read-only object
    */
   const vector<int>& GetFADC() const {return fADC_;}
+
+
+  /**
+   * return the pedestal subtracted and gained FADC
+   */
+  const vector<double> &GetPGFADC () const {return pgfADC_;}
   
   /** 
    * return combined ATWD waveform
@@ -253,6 +264,11 @@ class I3DOMLaunch : public I3DigitalLaunch
   * sets the FADC waveform
   */
  void SetFADC(const vector<int>& FADCdata) {fADC_=FADCdata;}
+
+ /**
+  * sets the pgFADC waveform
+  */
+ void SetPGFADC (const vector<double> &pgfadc_data) { pgfADC_ = pgfadc_data;}
 
   /**
    * sets the combined ATWD waveform
