@@ -25,14 +25,12 @@ class I3MonitoringHeader : public I3DataHeader
     OMKey GetOMKey();
     long long int GetMBID();
     int GetRun();
-    I3Time GetTime();
 
     void SetSize(int);
     void SetType(int);
     void SetOMKey(OMKey);
     void SetMBID(long long int);
     void SetRun(int);
-    void SetTime(I3Time);
 
  private:
     OMKey om_;
@@ -40,7 +38,7 @@ class I3MonitoringHeader : public I3DataHeader
     int size_;
     int type_;
     int run_;
-    I3Time record_time_;
+
 };
 
 typedef shared_ptr<I3MonitoringHeader> I3MonitoringHeaderPtr;

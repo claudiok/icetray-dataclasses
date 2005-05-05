@@ -25,11 +25,6 @@ int I3MonitoringHeader::GetRun()
     return run_;
 }
 
-I3Time I3MonitoringHeader::GetTime()
-{
-    return record_time_;
-}
-
 void I3MonitoringHeader::SetSize(int s)
 {
     size_ = s; 
@@ -53,9 +48,4 @@ void I3MonitoringHeader::SetMBID(long long int id)
 void I3MonitoringHeader::SetRun(int r)
 {
     run_ = r;
-}
-
-void I3MonitoringHeader::SetTime(I3Time t)
-{
-    record_time_ = t;
 }
