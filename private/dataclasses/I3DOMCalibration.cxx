@@ -25,6 +25,49 @@ void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
     
     GetATWDById(id)[channel][127-bin] = fit;
 }
+
+
+double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel, 
+					int bin, double fe_pedestal,
+					int count)
+{
+    if ( ! GetATWDById(id).count(channel) )
+    {
+	log_fatal("Invalid ATWD channel in I3DOMCalibration");
+    }
+
+    if ( ! GetATWDById(id)[channel].count(bin) )
+    {
+	log_fatal("Invalid ATWD bin in I3DOMCalibration");
+    }
+    
+    struct LinearFit fit = GetATWDById(id)[channel][bin];
+       
+    return (count*fit.fSlope)/GetATWDGain(channel);
+}
+
+
+int I3DOMCalibration::GetPedestalSubtracted(int id,  int channel, 
+					int bin, double fe_pedestal,
+					int count)
+
+{
+    if ( ! GetATWDById(id).count(channel) )
+    {
+	log_fatal("Invalid ATWD channel in I3DOMCalibration");
+    }
+
+    if ( ! GetATWDById(id)[channel].count(bin) )
+    {
+	log_fatal("Invalid ATWD bin in I3DOMCalibration");
+    }
+    
+    struct LinearFit fit = GetATWDById(id)[channel][bin];
+       
+    return count-(int)((fe_pedestal- fit.fIntercept)/fit.fSlope);
+}
+
+
 void I3DOMCalibration::SetATWDFreqParameters(int chip,
 					 double slope, double intercept, double regress_coeff)
 {
