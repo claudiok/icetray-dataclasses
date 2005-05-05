@@ -512,6 +512,8 @@
 
 #pragma link C++ class I3Time+;
 
+#pragma link C++ class I3Monitoring+;
+
 #endif
 
 
