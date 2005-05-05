@@ -1,5 +1,5 @@
 //
-//  $Id: I3DOMCalibration.cxx,v 1.13 2005/04/15 17:05:50 pretz Exp $
+//  $Id$
 //
 //
 #include "dataclasses/I3DOMCalibration.h"
@@ -24,6 +24,16 @@ void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
     fit.fRegressCoeff = regress_coeff;
     
     GetATWDById(id)[channel][127-bin] = fit;
+}
+void I3DOMCalibration::SetATWDFreqParameters(int chip,
+					 double slope, double intercept, double regress_coeff)
+{
+    struct LinearFit fit;
+    
+    fit.fSlope = slope;
+    fit.fIntercept = intercept;
+    fit.fRegressCoeff = regress_coeff;
+    fATWDFreq.insert(pair<int, LinearFit> (chip, fit));
 }
 
 double I3DOMCalibration::GetATWDVoltage(int id,  int channel, 
