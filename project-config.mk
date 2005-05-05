@@ -122,3 +122,4 @@ dataclasses/StoragePolicy.h \
 dataclasses/I3Time.h \
 dataclasses/I3MCWeightDict.h \
 dataclasses/I3Monitoring.h \
+dataclasses/I3MonitoringHeader.h \
