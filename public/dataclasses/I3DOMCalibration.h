@@ -126,7 +126,16 @@ public:
 			 double slope,
 			 double intercept,
 			 double regress_coeff);
-  
+
+
+ // Set parameters for sampling rate calibration for each 
+ // ATWD chip as a function of the trigger_bias DAC setting
+
+  void SetATWDFreqParameters(int chip,
+			     double slope,
+			     double intercept,
+			     double regress_coeff);
+   
   void SetFADCParameters(double pedestal,
 			 double gain)
     {
@@ -193,12 +202,15 @@ public:
     map<int, double> fAmpGains;
     map<int, double> fAmpGainErrs;
     
+    map<int, LinearFit> fATWDFreq;
+
     // First key corresponds to channel.
     // Key in internal map corresponds to bin.
     map< int, map<int,LinearFit> > fATWD0;
     map< int, map<int,LinearFit> > fATWD1;
-    map< int, map<int,LinearFit> >& GetATWDById(int id);
 
+    map< int, map<int,LinearFit> >& GetATWDById(int id);
+   
     map<unsigned int,ChargeHistogram> chargeHistograms_;
 
     // Copy constructor and assignment operator
