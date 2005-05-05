@@ -327,8 +327,7 @@ unsigned int I3Time::DayOfYear(long long int daqTime)
     long long int tenthsOfNs = daqTime %((long long)1e10);
     long long int daqSecs = (daqTime - tenthsOfNs)/((long long)1e10);
     long long int daqSecsSinceDay = daqSecs % ((long long)(3600 * 24));
-    unsigned int day_of_year = daqSecs - daqSecsSinceDay;
+    unsigned int day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24);
 
-// What is the proper way to makey day_of_year into an unsigned int ?
     return day_of_year; 
 }
