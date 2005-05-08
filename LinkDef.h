@@ -107,6 +107,9 @@
 //#pragma link C++ class MapPolicy<string,I3RecoResultPtr>::ThePolicy+;
 //#pragma link C++ typedef I3RecoResultDictPtr;
 
+#pragma link C++ class I3TriggerDict+;
+#pragma link C++ class I3Trigger+;
+
 #pragma link C++ class I3DataReadoutDict+;
 //#pragma link C++ typedef MapPolicy<string,I3DataReadoutPtr>::ThePolicy;
 //#pragma link C++ class MapPolicy<string,I3DataReadoutPtr>::ThePolicy+;
