@@ -16,6 +16,7 @@
 #include "I3OMResponseMap.h"
 #include "I3OMSelectionDict.h"
 #include "I3RecoResultDict.h"
+#include "I3TriggerDict.h"
 #include "I3Bag.h"
 #include <sstream>
 
@@ -39,6 +40,7 @@ class I3Event : public TObject
   I3OMResponseMap   topOMResponseMap_; //||
   I3OMSelectionDict oMSelectionDict_; //||
   I3RecoResultDict  recoResultDict_; //||
+  I3TriggerDict     triggerDict_; //||
   I3Bag             bag_; //||
   
  public:
@@ -95,6 +97,16 @@ class I3Event : public TObject
   I3RecoResultDict& GetRecoResultDict() { return recoResultDict_; }
 
   /**
+   * @return the TriggerDict Data as a constant object
+   */
+  const I3TriggerDict& GetTriggerDict() const { return triggerDict_; }
+
+  /**
+   * @return the TriggerDict as a non-constant object
+   */
+  I3TriggerDict& GetTriggerDict() { return triggerDict_; }
+
+  /**
    * @return the Bag for this event as a constant object
    */
   const I3Bag& GetBag() const { return bag_; }
@@ -114,6 +126,7 @@ class I3Event : public TObject
        <<topOMResponseMap_
        <<oMSelectionDict_
        <<recoResultDict_
+       <<triggerDict_
        <<bag_
        <<"]\n";
     }
@@ -138,7 +151,12 @@ class I3Event : public TObject
     ar & make_nvp("TopOMResponseMap", topOMResponseMap_);
     ar & make_nvp("OMSelectionDict", oMSelectionDict_);
     ar & make_nvp("RecoResultDict", recoResultDict_);
+    //ar & make_nvp("TriggerDict", triggerDict_);
   }
+
+#warning Someone remind Olivas to write the serialize method 
+#warning for I3Trigger and I3TriggerDict
+
 
   //ROOT macro
   ClassDef(I3Event, 1);

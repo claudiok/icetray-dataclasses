@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerDict.h,v 1.4 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id$
  *
  * @file I3TriggerDict.h
  * @version $Revision: 1.4 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz
@@ -27,7 +27,7 @@
  *
  */
 class I3TriggerDict : public TObject,
-		      public MapPolicy<string,I3TriggerPtr>::ThePolicy
+		      public STLMapStoragePolicy<string,I3TriggerPtr>
 {
  public:
   /**
@@ -83,7 +83,7 @@ inline ostream& operator<<(ostream& o,const I3TriggerDict& v)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3TriggerDict>::ThePolicy I3TriggerDictPtr;
+typedef shared_ptr<I3TriggerDict> I3TriggerDictPtr;
 
 #endif
 

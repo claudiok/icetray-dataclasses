@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Trigger.h,v 1.5 2004/08/31 02:56:29 pretz Exp $
+ * $Id$
  *
  * @file I3Trigger.h
  * @version $Revision: 1.5 $
- * @date $Date: 2004/08/31 02:56:29 $
+ * @date $Date$
  * @author blaufuss
  * @author deyoung
  */
@@ -157,7 +157,7 @@ inline ostream& operator<<(ostream& o,const I3Trigger& g)
 /**
  * pointer type to insulate users from memory management
  */
-typedef PtrPolicy<I3Trigger>::ThePolicy I3TriggerPtr;
+typedef shared_ptr<I3Trigger> I3TriggerPtr;
 
 #endif
 
