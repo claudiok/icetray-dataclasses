@@ -1,10 +1,10 @@
 /**
  * copyright (C) 2004
- * $Id: I3StationGeo.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3StationGeo.h
  * @version $Revision: 1.6 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author niessen Wed Sep  1 20:55:17 EDT 2004
  */
 
@@ -15,6 +15,8 @@
 
 #include "dataclasses/I3SurfModuleGeo.h"
 #include "dataclasses/StoragePolicy.h"
+#include "dataclasses/I3OMGeo.h"
+#include "dataclasses/OMKey.h"
 
 /**
  * @brief "Geometry" of the station
@@ -44,6 +46,10 @@ class I3StationGeo : public TObject, public STLVectorStoragePolicy<I3SurfModuleG
     log_info ("Hi, I'm a station");
   }
 
+  /**
+   * Get the OM Geo of the OM with this key
+   */
+  I3OMGeoPtr GetOMGeoPtr (OMKey &om_key);
 
  private:
 

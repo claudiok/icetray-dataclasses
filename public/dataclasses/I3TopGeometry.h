@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopGeometry.h,v 1.19 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3TopGeometry.h
  * @version $Revision: 1.19 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
 #ifndef __I3TOPGEOMETRY_H_
@@ -58,6 +58,11 @@ class I3TopGeometry : public TObject {
   void Hello () {
     log_info ("Hi, this is the top geometry");
   }
+
+  /**
+   * Get the geometry of a certain module
+   */
+  I3OMGeoPtr GetOMGeoPtr (OMKey &om_key);
 
  private:
 
