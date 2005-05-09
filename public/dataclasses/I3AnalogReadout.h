@@ -37,10 +37,7 @@ public:
      */
     virtual ~I3AnalogReadout() {;}
     
-    virtual void ToStream(ostream& o) const {
-	I3DataReadout::ToStream(o);
-	o << "First Leading Edge: " << GetFirstLE() << "\n";
-    }
+    virtual void ToStream(ostream& o) const { }
 
   
 private:
