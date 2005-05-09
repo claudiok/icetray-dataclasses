@@ -18,6 +18,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include "dataclasses/StoragePolicy.h"
 
 using namespace std; 
 
@@ -163,7 +164,6 @@ inline ostream& operator<<(ostream& o,const I3Trigger& g)
     return o;
 }
 
-#include "dataclasses/StoragePolicy.h"
 /**
  * pointer type to insulate users from memory management
  */
