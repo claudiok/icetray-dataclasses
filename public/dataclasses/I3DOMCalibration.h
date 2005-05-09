@@ -86,14 +86,47 @@ public:
     {
       return fFADCPedestal;
     };
+ 
+  /**
+   * get slope parameter from domcal file <atwdfreq> which is 
+   * the sampling rate calibration for each ATWD chip 0 or 1 
+   */
+  double GetATWDfreqSlope(int chip)
+    {  
+      struct LinearFit fit;
+      fit = fATWDFreq[chip];
+      return  fit.fSlope;
+    };
+
+  /**
+   * get Intercept parameter from domcal file <atwdfreq> which is 
+   * the sampling rate calibration for each ATWD chip 0 or 1 
+   */
+  double GetATWDfreqIntercept(int chip)
+    {  
+      struct LinearFit fit;
+      fit = fATWDFreq[chip];
+      return  fit.fIntercept;
+    };
+
+  /**
+   * get RegressCoeff parameter from domcal file <atwdfreq> which is 
+   * the sampling rate calibration for each ATWD chip 0 or 1 
+   */
+  double GetATWDfreqRegressCoeff(int chip)
+    {  
+      struct LinearFit fit;
+      fit = fATWDFreq[chip];
+      return  fit.fRegressCoeff;
+    };
   
   /**
    * Get gain and error on gain for ATWD by channel
    */
   double GetATWDGain(int channel);
-
+  
   double GetATWDGainErr(int channel);
-
+  
   /**
    * Returns the ATWD trace in ATWD counts, not converted to
    * voltage, with the pedestal pattern subtracted 
@@ -218,9 +251,6 @@ public:
     //double fOnePEinPC;
     //double fWidth1PEinPC;
 
-    //    double fSamplingRate0;
-    //    double fSamplingRate1;
-
     // Gain and error on gain for ATWD channels.
     // The key corresponds to the channel.
     map<int, double> fAmpGains;
@@ -234,7 +264,6 @@ public:
     map< int, map<int,LinearFit> > fATWD1;
 
     map< int, map<int,LinearFit> >& GetATWDById(int id);
-   
     map<unsigned int,ChargeHistogram> chargeHistograms_;
 
     // Copy constructor and assignment operator

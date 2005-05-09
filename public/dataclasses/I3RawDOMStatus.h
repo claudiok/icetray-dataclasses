@@ -93,6 +93,12 @@ class I3RawDOMStatus
   double GetLCWindowUpPost() const;
 
   /**
+   * @return  trigger_bias DAC setting used for sampling rate calibration
+   */
+  double GetDACTriggerBias(int chip) const;
+
+
+  /**
    * @return the local coincidence window after the descriminator 
    * in standard dataclasses units (ns) for the downward coming signal
    */
