@@ -35,10 +35,10 @@ public:
     enum TrigSubDetector {InIce,IceTop,Amanda,Global};
     
 private:
-    Double_t fTriggerTime;      ///< Time at which the trigger was issued
-    Double_t fTriggerLength;    ///< Duration of triggered readout window
-    Bool_t fDidTrigger;         ///< kTrue if the trigger condition was met
-    TrigSubDetector fSubDetector; ///< Subdetector (enum type) that initiated this trigger
+    double triggerTime_;      ///< Time at which the trigger was issued
+    double triggerLength_;    ///< Duration of triggered readout window
+    bool didTrigger_;         ///< kTrue if the trigger condition was met
+    TrigSubDetector subDetector_; ///< Subdetector (enum type) that initiated this trigger
     
 public:
     /**
@@ -61,58 +61,58 @@ public:
      */
     const I3Trigger& operator=(const I3Trigger& rhs) {
 	if (this == &rhs) return *this; // check for assignment to self
-	TObject::operator=(rhs); // call base class assignment operator
-	fTriggerTime = rhs.fTriggerTime;
-	fTriggerLength = rhs.fTriggerLength;
-	fDidTrigger = rhs.fDidTrigger;
-	fSubDetector = rhs.fSubDetector;
+	//TObject::operator=(rhs); // call base class assignment operator
+	triggerTime_ = rhs.triggerTime_;
+	triggerLength_ = rhs.triggerLength_;
+	didTrigger_ = rhs.didTrigger_;
+	subDetector_ = rhs.subDetector_;
 	return *this;
     }
     
     /**
      * @return the time at which this trigger condition was met
      */
-    Double_t GetTriggerTime() const {return fTriggerTime;}
+    double GetTriggerTime() const {return triggerTime_;}
     
     /**
      * @param time the time at which this trigger condition was met
      */
-    void SetTriggerTime(Double_t time) { fTriggerTime = time; }
+    void SetTriggerTime(double time) { triggerTime_ = time; }
 
     /**
      * @return the width of this trigger window
      */
-    Double_t GetTriggerLength() const {return fTriggerLength;}
+    double GetTriggerLength() const {return triggerLength_;}
     
     /**
      * @param width the width of this trigger window
      */
-    void SetTriggerLength(Double_t width) { fTriggerLength = width; }
+    void SetTriggerLength(double width) { triggerLength_ = width; }
 
     /**
      * @return whether this trigger condition was met
      */
-    Bool_t GetDidTrigger() const {return fDidTrigger;}
+    bool GetDidTrigger() const {return didTrigger_;}
 
     /**
      * @return whether this trigger condition was met
      */
-    Bool_t HasTrigger() const {return fDidTrigger;}
+    bool HasTrigger() const {return didTrigger_;}
     
     /**
      * @param passed whether or not this trigger condition was met
      */
-    void SetDidTrigger(Bool_t passed) { fDidTrigger = passed; }
+    void SetDidTrigger(bool passed) { didTrigger_ = passed; }
 
     /**
      * @return the subdetector on which this trigger ran
      */
-    TrigSubDetector GetSubDetector() const {return fSubDetector;}
+    TrigSubDetector GetSubDetector() const {return subDetector_;}
     
     /**
      * @param detector the subdetector on which this trigger ran
      */
-    void SetSubDetector(TrigSubDetector detector) { fSubDetector = detector; }
+    void SetSubDetector(TrigSubDetector detector) { subDetector_ = detector; }
 
     /**
      * @todo finish with all the data
@@ -122,9 +122,9 @@ public:
 	o<<"[ "
 	 <<IsA()->GetName()
 	 <<" Trigger Time:"
-	 <<fTriggerTime
+	 <<triggerTime_
 	 <<" Sub Detector ID:"
-	 <<fSubDetector
+	 <<subDetector_
 	 <<" ]\n";
     }
 
@@ -139,6 +139,16 @@ private:
     /**
      * resets the data to 0's.
      */
+
+    friend class boost::serialization::access;
+
+    template <class Archive>
+      void serialize(Archive& ar, unsigned version){
+        ar & make_nvp("TriggerTime",triggerTime_);
+        ar & make_nvp("TriggerLength",triggerLength_);
+        ar & make_nvp("DidTrigger",didTrigger_);
+        ar & make_nvp("SubDetector",subDetector_);
+      }
     
     //ROOT macro
     ClassDef(I3Trigger,1);

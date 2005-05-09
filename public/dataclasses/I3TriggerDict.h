@@ -64,7 +64,14 @@ class I3TriggerDict : public TObject,
 
  private:
 
+  friend class boost::serialization::access;
 
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+    {
+      ar & make_nvp("I3TriggerDict", 
+		    base_object< STLMapStoragePolicy<string,I3TriggerPtr> >(*this));
+    }
   // ROOT Macro
   ClassDef(I3TriggerDict, 1);
 };

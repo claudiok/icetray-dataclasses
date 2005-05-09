@@ -151,12 +151,8 @@ class I3Event : public TObject
     ar & make_nvp("TopOMResponseMap", topOMResponseMap_);
     ar & make_nvp("OMSelectionDict", oMSelectionDict_);
     ar & make_nvp("RecoResultDict", recoResultDict_);
-    //ar & make_nvp("TriggerDict", triggerDict_);
+    ar & make_nvp("TriggerDict", triggerDict_);
   }
-
-#warning Someone remind Olivas to write the serialize method 
-#warning for I3Trigger and I3TriggerDict
-
 
   //ROOT macro
   ClassDef(I3Event, 1);
