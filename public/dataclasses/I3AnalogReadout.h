@@ -37,11 +37,6 @@ public:
      */
     virtual ~I3AnalogReadout() {;}
     
-    /**
-     * @return the time of the first LE in the readout
-     */
-    virtual double GetFirstLE() const = 0;
-  
     virtual void ToStream(ostream& o) const {
 	I3DataReadout::ToStream(o);
 	o << "First Leading Edge: " << GetFirstLE() << "\n";
