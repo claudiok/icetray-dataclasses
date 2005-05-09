@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: main.cxx,v 1.1 2005/03/31 17:38:00 troy Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2005/03/31 17:38:00 $
+    @date $Date$
     @author Troy D. Straszheim
 
     @todo

@@ -39,6 +39,7 @@ class I3MonitoringHeader : public I3DataHeader
     int type_;
     int run_;
 
+ ClassDef(I3MonitoringHeader,1);
 };
 
 typedef shared_ptr<I3MonitoringHeader> I3MonitoringHeaderPtr;

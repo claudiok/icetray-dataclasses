@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Direction.h,v 1.16 2005/04/12 18:59:51 dule Exp $
+ * $Id$
  *
  * @file I3Direction.h
  * @version $Revision: 1.16 $
- * @date $Date: 2005/04/12 18:59:51 $
+ * @date $Date$
  * @author dule
  */
 
@@ -14,7 +14,7 @@
 //   Done similarly to I3Position
 //***********************************************************
 
-// $Id: I3Direction.h,v 1.16 2005/04/12 18:59:51 dule Exp $
+// $Id$
 
 #ifndef I3DIRECTION_H
 #define I3DIRECTION_H

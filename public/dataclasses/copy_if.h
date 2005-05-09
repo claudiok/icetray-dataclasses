@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: copy_if.h,v 1.1 2004/08/22 11:49:24 troy Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2004/08/22 11:49:24 $
+    @date $Date$
     @author troy d. straszheim
 
 */

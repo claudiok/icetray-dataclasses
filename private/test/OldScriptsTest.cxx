@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: OldScriptsTest.cxx,v 1.1 2005/02/04 16:26:57 pretz Exp $
+    $Id$
 
     @version $Revision: 1.1 $
-    @date $Date: 2005/02/04 16:26:57 $
+    @date $Date$
     @author pretz
 
 */

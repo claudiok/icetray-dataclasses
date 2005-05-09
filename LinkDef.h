@@ -241,6 +241,10 @@
 //#pragma link C++ typedef I3AMANDAAnalogReadoutPtr;
 //#pragma link C++ class boost::shared_ptr<I3AMANDAAnalogReadout>+;
 
+#pragma link C++ class I3AMANDAAnalogReadout_calib+;
+//#pragma link C++ typedef I3AMANDAAnalogReadout_calibPtr;
+//#pragma link C++ class boost::shared_ptr<I3AMANDAAnalogReadout_calib>+;
+
 #pragma link C++ class I3AnalogReadout+;
 //#pragma link C++ typedef I3AnalogReadoutPtr;
 //#pragma link C++ class boost::shared_ptr<I3AnalogReadout>+;
@@ -277,13 +281,15 @@
 //#pragma link C++ typedef I3DOMLaunchPtr;
 //#pragma link C++ class boost::shared_ptr<I3DOMLaunch>+;
 
+#pragma link C++ class I3TWRFrag+;
+//#pragma link C++ typedef I3TWRFragPtr;
+//#pragma link C++ class boost::shared_ptr<I3TWRFrag>+;
+
 #pragma link C++ class I3TWRLaunch+;
+//#pragma link C++ typedef VectorPolicy<I3TWRFragPtr>::ThePolicy;
+//#pragma link C++ class VectorPolicy<I3TWRFragPtr>::ThePolicy+;
 //#pragma link C++ typedef I3TWRLaunchPtr;
 //#pragma link C++ class boost::shared_ptr<I3TWRLaunch>+;
-
-#pragma link C++ class I3RDMCLaunch+;
-//#pragma link C++ typedef I3RDMCLaunchPtr;
-//#pragma link C++ class boost::shared_ptr<I3RDMCLaunch>+;
 
 #pragma link C++ class I3Direction+;
 //#pragma link C++ typedef I3DirectionPtr;
@@ -421,6 +427,20 @@
 
 // tpm: my additions
 #pragma link C++ struct LinearFit+;
+
+#pragma link C++ class I3TriggerDict+;
+//#pragma link C++ typedef MapPolicy<string,I3TriggerPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<string,I3TriggerPtr>::ThePolicy+;
+//#pragma link C++ typedef I3TriggerDictPtr;
+//#pragma link C++ class boost::shared_ptr<I3TriggerDict>+;
+
+#pragma link C++ class I3Trigger+;
+//#pragma link C++ typedef I3TriggerPtr;
+//#pragma link C++ class boost::shared_ptr<I3Trigger>+;
+
+#pragma link C++ class I3TriggerAMANDA+;
+//#pragma link C++ typedef I3TriggerAMANDAPtr;
+//#pragma link C++ class boost::shared_ptr<I3TriggerAMANDA>+;
 
 #pragma link C++ class I3DOMCalibration+;
 //#pragma link C++ typedef I3DOMCalibPtr;

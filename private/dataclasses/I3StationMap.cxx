@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.cxx,v 1.6 2005/03/30 14:48:27 pretz Exp $
+ * $Id$
  *
  * @file I3StationMap
  * @version $Revision: 1.6 $
- * @date $Date: 2005/03/30 14:48:27 $
+ * @date $Date$
  * @author niessen Thu Sep  2 16:38:31 EDT 2004 
  */
 

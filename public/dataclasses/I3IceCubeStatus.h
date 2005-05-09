@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceCubeStatus.h,v 1.2 2005/04/15 17:05:50 pretz Exp $
+ * $Id$
  *
  * @file I3IceCubeStatus.h
  * @version $Revision: 1.2 $
- * @date $Date: 2005/04/15 17:05:50 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3STATUSICECUBE_H

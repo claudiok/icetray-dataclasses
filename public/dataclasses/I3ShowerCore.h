@@ -1,11 +1,11 @@
 /**
  * Copyright (C) 2004
  * The IceCube collaboration
- * $Id: I3ShowerCore.h,v 1.3 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3ShowerCore.h
  * @version $Revision: 1.3 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author Peter Niessen
  */
 

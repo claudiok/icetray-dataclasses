@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeries.h,v 1.31 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3RecoHitSeries.h
  * @version $Revision: 1.31 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author ehrlich
  * @author pretz
  */
@@ -36,16 +36,19 @@ class I3RecoHitSeries : public TObject, public STLVectorStoragePolicy<I3RecoHitP
   /**
    * earliest hit time
    */
-  double GetFirstHitTime() {
-    if (this->size()) { 
+  double GetFirstHitTime() 
+  {
+    if(this->size()) 
+    { 
       double min = (*this->begin())->GetTime();
       I3RecoHitSeries::iterator iter;
-      for(iter=this->begin(); iter!=this->end(); iter++) {
-	if(min>(*iter)->GetTime()) min=(*iter)->GetTime();
+      for(iter=this->begin(); iter!=this->end(); iter++) 
+      {
+        if(min>(*iter)->GetTime()) min=(*iter)->GetTime();
       }
       return(min);
     }
-    else return(NAN);       
+  else return(NAN);       
   };
 
   /**
@@ -53,27 +56,25 @@ class I3RecoHitSeries : public TObject, public STLVectorStoragePolicy<I3RecoHitP
    * @param o the ostream to dump the object to
    */
   virtual void ToStream(ostream& o) const
+  {
+    o<<"[ I3RecoHitSeries: \n";
+    I3RecoHitSeries::const_iterator iter;
+    for(iter=begin();iter!=end();iter++)
     {
-      o<<"[ I3RecoHitSeries: \n";
-      I3RecoHitSeries::const_iterator iter;
-      for(iter=begin();iter!=end();iter++)
-	{
-	  if(*iter == I3RecoHitPtr((I3RecoHit*)0))
-	    o<<"Null I3RecoHit";
-	  else
-	    o<<*(*iter);
-	}
-      o<<"]\n";
+     if(*iter == I3RecoHitPtr((I3RecoHit*)0)) o<<"Null I3RecoHit";
+     else o<<*(*iter);
     }
+    o<<"]\n";
+  }
 
   virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
 
- private:
+  private:
   // copy and assignment are private:
   I3RecoHitSeries (const I3RecoHitSeries& rhs);
   const I3RecoHitSeries& operator= (const I3RecoHitSeries&);
@@ -83,8 +84,7 @@ class I3RecoHitSeries : public TObject, public STLVectorStoragePolicy<I3RecoHitP
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3RecoHitSeries", 
-		  base_object< STLVectorStoragePolicy<I3RecoHitPtr> >(*this));
+    ar & make_nvp("I3RecoHitSeries", base_object< STLVectorStoragePolicy<I3RecoHitPtr> >(*this));
   }
 
 

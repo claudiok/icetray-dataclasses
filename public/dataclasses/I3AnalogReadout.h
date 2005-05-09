@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3AnalogReadout.h,v 1.13 2005/04/18 13:56:20 troy Exp $
+ * $Id$
  *
  * @file I3AnalogReadout.h
  * @version $Revision: 1.13 $
- * @date $Date: 2005/04/18 13:56:20 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3ANALOGREADOUT_H

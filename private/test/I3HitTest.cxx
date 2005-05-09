@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3HitTest.cxx,v 1.10 2005/01/26 14:20:55 pretz Exp $
+    $Id$
 
     @version $Revision: 1.10 $
-    @date $Date: 2005/01/26 14:20:55 $
+    @date $Date$
     @author Troy D. Straszheim
 
     @todo

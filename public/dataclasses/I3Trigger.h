@@ -8,6 +8,7 @@
  * @date $Date$
  * @author blaufuss
  * @author deyoung
+ * @author ehrlich
  */
 
 #ifndef I3TRIGGER_H
@@ -18,7 +19,6 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include "dataclasses/StoragePolicy.h"
 
 using namespace std; 
 
@@ -29,141 +29,64 @@ using namespace std;
  */
 class I3Trigger : public TObject
 {
-public:
-    /**
-     * An enumerated type for the Subdetector type that generated the trigger
-     */
-    enum TrigSubDetector {InIce,IceTop,Amanda,Global};
+  public:
+  /**
+   * An enumerated type for the Subdetector type that generated the trigger
+   */
+  enum TrigSubDetector {InIce,IceTop,Amanda,Global};
     
-private:
-    double triggerTime_;      ///< Time at which the trigger was issued
-    double triggerLength_;    ///< Duration of triggered readout window
-    bool didTrigger_;         ///< kTrue if the trigger condition was met
-    TrigSubDetector subDetector_; ///< Subdetector (enum type) that initiated this trigger
+  /**
+   * constructor
+   */
+  I3Trigger() {}
     
-public:
-    /**
-     * constructor
-     */
-    I3Trigger() {}
+  /**
+   * destructor
+   */
+  virtual ~I3Trigger() {}
     
-    /**
-     * copy constructor just uses assignment
-     */
-    I3Trigger(const I3Trigger& rhs){*this = rhs;}
+  /**
+   * @return the subdetector on which this trigger ran
+   */
+  virtual TrigSubDetector GetSubDetector() const = 0;
     
-    /**
-     * destructor
-     */
-    virtual ~I3Trigger() {}
-    
-    /**
-     * assignment is member-wise assignment
-     */
-    const I3Trigger& operator=(const I3Trigger& rhs) {
-	if (this == &rhs) return *this; // check for assignment to self
-	//TObject::operator=(rhs); // call base class assignment operator
-	triggerTime_ = rhs.triggerTime_;
-	triggerLength_ = rhs.triggerLength_;
-	didTrigger_ = rhs.didTrigger_;
-	subDetector_ = rhs.subDetector_;
-	return *this;
-    }
-    
-    /**
-     * @return the time at which this trigger condition was met
-     */
-    double GetTriggerTime() const {return triggerTime_;}
-    
-    /**
-     * @param time the time at which this trigger condition was met
-     */
-    void SetTriggerTime(double time) { triggerTime_ = time; }
+  /**
+   * @todo finish implementing this method
+   */
+  virtual const string ToString() const
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
 
-    /**
-     * @return the width of this trigger window
-     */
-    double GetTriggerLength() const {return triggerLength_;}
-    
-    /**
-     * @param width the width of this trigger window
-     */
-    void SetTriggerLength(double width) { triggerLength_ = width; }
+  /**
+   * 
+   */
+  virtual void ToStream(ostream& o) const
+  {
+    o<<"[ "<<IsA()->GetName()<<" ]\n";
+  }
 
-    /**
-     * @return whether this trigger condition was met
-     */
-    bool GetDidTrigger() const {return didTrigger_;}
+  private:
 
-    /**
-     * @return whether this trigger condition was met
-     */
-    bool HasTrigger() const {return didTrigger_;}
-    
-    /**
-     * @param passed whether or not this trigger condition was met
-     */
-    void SetDidTrigger(bool passed) { didTrigger_ = passed; }
+  friend class boost::serialization::access;
 
-    /**
-     * @return the subdetector on which this trigger ran
-     */
-    TrigSubDetector GetSubDetector() const {return subDetector_;}
-    
-    /**
-     * @param detector the subdetector on which this trigger ran
-     */
-    void SetSubDetector(TrigSubDetector detector) { subDetector_ = detector; }
-
-    /**
-     * @todo finish with all the data
-     */
-    virtual void ToStream(ostream& o) const
-    {
-	o<<"[ "
-	 <<IsA()->GetName()
-	 <<" Trigger Time:"
-	 <<triggerTime_
-	 <<" Sub Detector ID:"
-	 <<subDetector_
-	 <<" ]\n";
-    }
-
-    virtual string ToString() const
-      {
-	ostringstream out;
-	ToStream(out);
-	return out.str();
-      }
-    
-private:
-    /**
-     * resets the data to 0's.
-     */
-
-    friend class boost::serialization::access;
-
-    template <class Archive>
-      void serialize(Archive& ar, unsigned version){
-        ar & make_nvp("TriggerTime",triggerTime_);
-        ar & make_nvp("TriggerLength",triggerLength_);
-        ar & make_nvp("DidTrigger",didTrigger_);
-        ar & make_nvp("SubDetector",subDetector_);
-      }
-    
-    //ROOT macro
-    ClassDef(I3Trigger,1);
+  template <class Archive> void serialize(Archive& ar, unsigned version)  { }
+ 
+  ClassDef(I3Trigger,1);
 };
 
 /**
  * streams an I3Trigger to an arbitrary ostream
  */
-inline ostream& operator<<(ostream& o,const I3Trigger& g)
+inline ostream& operator<<(ostream& o,const I3Trigger& trig)
 {
-    g.ToStream(o); 
-    return o;
+  trig.ToStream(o);
+  return o;
 }
 
+#include "dataclasses/StoragePolicy.h"
 /**
  * pointer type to insulate users from memory management
  */

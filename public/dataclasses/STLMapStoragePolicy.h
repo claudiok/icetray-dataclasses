@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLMapStoragePolicy.h,v 1.21 2005/04/02 20:32:04 troy Exp $
+    $Id$
 
     @file STLMapStoragePolicy.h
     @version $Revision: 1.21 $
-    @date $Date: 2005/04/02 20:32:04 $
+    @date $Date$
     @author Troy Straszheim
 
 */

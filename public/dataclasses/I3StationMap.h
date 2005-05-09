@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3StationMap.h,v 1.6 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3StationMap.h
  * @version $Revision: 1.6 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 

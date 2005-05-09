@@ -24,97 +24,80 @@
  */
 class I3RecoPulse : public TObject
 {
-public:
-   I3RecoPulse() { time_ = 0; hitID_ = 0; }
+  int hitID_;
+  double time_;
+  double amp_;
+  double width_;
 
-  /**
-   * equality operator
-   * @param rhs the right hand side of the equality
-   * @return true if the times are equal
-   */      
-  bool operator==(const I3RecoPulse& rhs) const 
-  { 
-    return time_ == rhs.time_ && hitID_ == rhs.hitID_; 
-  }
+  public:
 
-  bool operator!=(const I3RecoPulse& rhs) const 
-  { 
-    return !(*this==rhs); 
-  }
+  I3RecoPulse() {hitID_=0; time_=NAN; width_=NAN; amp_=NAN;}
 
   /**
    * @return the time at which the Pulse occured
    */
-  double GetTime() const { return time_; }
+  double GetTime() const {return time_;}
 
   /**
    * @param time the new time of the pulse
    */
-  void SetTime(double time) { time_ = time; }
+  void SetTime(double time) {time_ = time;}
 
   /**
    * @return the unique ID of this pulse
    */
-  int GetID() const { return hitID_; }
+  int GetHitID() const {return hitID_;}
 
   /**
    * @param hitid the ID number to assign to this hit.  Should be
    * unique, but no checking is done.
    */
-  void SetID(const int hitid) { hitID_ = hitid; }
+  void SetHitID(const int hitid) {hitID_ = hitid;}
 
   /**
    * @return the Pulse Amplitude
    */
-  double GetAmplitude() const { return pulseAmp_; }
+  double GetAmplitude() const {return amp_;}
 
   /**
    * @param set the pulse amplitude
    */
-  void SetAmplitude(double ampl) { pulseAmp_ = ampl; }
+  void SetAmplitude(double amp) {amp_ = amp;}
 
   /**
    * @return the Pulse Width
    */
-  double GetWidth() const { return width_; }
+  double GetWidth() const {return width_;}
 
   /**
    * @param set pulse width
    */
-  void SetWidth(double width) { width_ = width; }
+  void SetWidth(double width) {width_ = width;}
 
   virtual ~I3RecoPulse() {}
   virtual void ToStream(ostream& o) const
-    {
-      o<<"[I3RecoPulse:  Time:"<<time_<< "\n"
-       <<"               PulseAmpl:"<<pulseAmp_<< "\n"
-       <<"               PulseWidth:"<<width_<<" ]\n";
-    }
+  {
+    o<<"[I3RecoPulse:  Time:"<<time_<< "\n"
+     <<"               PulseAmpl:"<<amp_<< "\n"
+     <<"               PulseWidth:"<<width_<<" ]\n";
+  }
 
   virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
 
-private:
-
+  private:
   friend class boost::serialization::access;
-
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
+  template <class Archive> void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("Time", time_);
     ar & make_nvp("HitID", hitID_);
-    ar & make_nvp("PulseAmp", pulseAmp_);
+    ar & make_nvp("PulseAmp", amp_);
     ar & make_nvp("Width", width_);
   }
-  
-  double time_;
-  int hitID_;
-  double pulseAmp_;
-  double width_;
 
   ClassDef(I3RecoPulse,1);
 };

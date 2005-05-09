@@ -4,11 +4,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoHitSeriesDict.h,v 1.7 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3RecoHitSeriesDict.h
  * @version $Revision: 1.7 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz

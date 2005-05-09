@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Primary.h,v 1.11 2005/04/04 15:49:25 pretz Exp $
+ * $Id$
  *
  * @file I3Primary.h
  * @version $Revision: 1.11 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @date $Date$
  * @author pretz
   */
 

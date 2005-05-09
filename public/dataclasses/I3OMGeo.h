@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeo.h,v 1.32 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3OMGeo.h
  * @version $Revision: 1.32 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Stopping.h,v 1.21 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3Stopping.h
  * @version $Revision: 1.21 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3STOPPING_H

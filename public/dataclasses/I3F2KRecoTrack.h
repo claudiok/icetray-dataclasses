@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3F2KRecoTrack.h,v 1.5 2005/04/09 03:02:10 olivas Exp $
+    $Id$
 
     @file I3F2KRecoTrack.h
     @version $Revision: 1.5 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @date $Date$
     @author deyoung
 */
 

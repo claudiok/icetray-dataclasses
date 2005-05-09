@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCPMTResponseRomeo.h,v 1.8 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3MCPMTResponseRomeo.h
  * @version $Revision: 1.8 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author klein
  * @author deyoung
  * @author ehrlich

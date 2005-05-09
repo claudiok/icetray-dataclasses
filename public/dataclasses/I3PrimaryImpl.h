@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3PrimaryImpl.h,v 1.13 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3PrimaryImpl.h
  * @version $Revision: 1.13 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  *
  */

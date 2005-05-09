@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Hit.h,v 1.26 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3Hit.h
  * @version $Revision: 1.26 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz

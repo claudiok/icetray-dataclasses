@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3SurfModuleGeo.h,v 1.7 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3SurfModuleGeo.h
  * @version $Revision: 1.7 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 

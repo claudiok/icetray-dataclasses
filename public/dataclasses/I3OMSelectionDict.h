@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: I3OMSelectionDict.h,v 1.9 2005/04/12 23:11:18 olivas Exp $
+ * $Id$
  *
  * @file I3OMSelectionDict.h
  * @version $Revision: 1.9 $
- * @date $Date: 2005/04/12 23:11:18 $
+ * @date $Date$
  * @author deyoung
  * @author troy
  */

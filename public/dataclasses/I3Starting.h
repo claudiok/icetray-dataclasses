@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Starting.h,v 1.22 2005/04/07 18:24:22 olivas Exp $
+ * $Id$
  *
  * @file I3Starting.h
  * @version $Revision: 1.22 $
- * @date $Date: 2005/04/07 18:24:22 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3STARTING_H

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TankGeo.h,v 1.19 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3TankGeo.h
  * @version $Revision: 1.19 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author PN Thu Feb 19 11:48:23 EST 2004
  */
 #ifndef __I3TANKGEO_H_

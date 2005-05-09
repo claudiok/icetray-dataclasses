@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3BasicCascade.h,v 1.9 2005/04/12 18:55:28 dule Exp $
+    $Id$
 
     @file I3BasicCascade.h
     @version $Revision: 1.9 $
-    @date $Date: 2005/04/12 18:55:28 $
+    @date $Date$
     @author deyoung
 */
 

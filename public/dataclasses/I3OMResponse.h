@@ -35,11 +35,11 @@ class I3OMResponse : public TObject
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
 
-  I3DataReadoutDict   dataReadoutDict_; //||
-  I3RecoHitSeriesDict recoHitSeriesDict_; //||
+  I3DataReadoutDict     dataReadoutDict_; //||
+  I3RecoHitSeriesDict   recoHitSeriesDict_; //||
   I3RecoPulseSeriesDict recoPulseSeriesDict_; //||
 
- public:
+  public:
   /**
    * constructor
    */
@@ -63,10 +63,7 @@ class I3OMResponse : public TObject
   /**
    * @return the reco hit series data as a const object
    */
-  const I3RecoHitSeriesDict& GetRecoHitSeriesDict() const 
-    {
-      return recoHitSeriesDict_;
-    }
+  const I3RecoHitSeriesDict& GetRecoHitSeriesDict() const {return recoHitSeriesDict_;}
   
   /**
    * @return the reco hit series data as a non-const object
@@ -104,8 +101,7 @@ class I3OMResponse : public TObject
  
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
+  template <class Archive> void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("DataReadoutDict", dataReadoutDict_);
     ar & make_nvp("RecoHitSeriesDict", recoHitSeriesDict_);

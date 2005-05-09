@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: test-template.cxx,v 1.4 2004/08/31 02:56:29 pretz Exp $
+    $Id$
 
     @version $Revision: 1.4 $
-    @date $Date: 2004/08/31 02:56:29 $
+    @date $Date$
     @author pretz
 
     @todo

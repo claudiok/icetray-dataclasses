@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: OMKeyTest.cxx,v 1.3 2004/10/11 07:06:10 troy Exp $
+    $Id$
 
     @version $Revision: 1.3 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @date $Date$
     @author pretz
 
     @todo

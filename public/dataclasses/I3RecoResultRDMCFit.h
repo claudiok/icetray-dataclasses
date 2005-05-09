@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultRDMCFit.h,v 1.16 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3RecoResultRDMCFit.h
  * @version $Revision: 1.16 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author pretz
  */
 
@@ -31,7 +31,6 @@ using namespace std;
 class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 {
   map<string,double> parameters_;
-  vector<unsigned short> usedHits_;
   string fitName_;
 
   public:
@@ -67,40 +66,26 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
    */
   map<string,double>& GetParameters() {return parameters_;}
 
-  /**
-   * @return tubes used by this fit as a const object
-   */
-  const vector<unsigned short>& GetUsedHits() const {return usedHits_;}
-
-  /**
-   * @return the tubes used by this fit as a non-const object
-   */
-  vector<unsigned short>& GetUsedHits() {return usedHits_;}
-
   virtual void ToStream(ostream& o) const
+  {
+    I3RecoResultSingleTrack::ToStream(o);
+    o<<"Fit Parameters:\n";
+    map<string,double>::const_iterator params;
+    for(params=parameters_.begin(); params!=parameters_.end(); params++)
     {
-      I3RecoResultSingleTrack::ToStream(o);
-      o<<"Fit Parameters:\n";
-      map<string,double>::const_iterator params;
-      for(params = parameters_.begin() ; 
-	  params != parameters_.end() ; 
-	  params++)
-	{
-	  o<<params->first<<": "<<params->second<<"\n";
-	}
-      o<<"Used Hits:\n";
-      vector<unsigned short>::const_iterator hits;
-      for(hits = usedHits_.begin();
-	  hits != usedHits_.end();
-	  hits++)
-	{
-	  o<<*hits<<" ";
-	}
-      o<<"\n";
-	
+      o<<params->first<<": "<<params->second<<"\n";
     }
+    o<<"\n";
+  }
 
- private:
+  private:
+  friend class boost::serialization::access;
+  template <class Archive> void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3AnalogReadout", base_object<I3RecoResultSingleTrack>(*this));
+    ar & make_nvp("FitName", fitName_);
+    ar & make_nvp("Parameters", parameters_);
+  }
 
   // ROOT macro
   ClassDef(I3RecoResultRDMCFit,1);

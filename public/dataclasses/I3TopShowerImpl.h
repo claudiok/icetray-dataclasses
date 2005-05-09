@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TopShowerImpl.h,v 1.3 2005/04/04 15:49:25 pretz Exp $
+ * $Id$
  *
  * @file I3TopShowerImpl.h
  * @version $Revision: 1.3 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @date $Date$
  * @author blaufuss
  *
  */

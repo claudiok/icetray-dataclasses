@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCCascade.h,v 1.14 2005/04/12 18:55:28 dule Exp $
+    $Id$
 
     @file I3MCCascade.h
     @version $Revision: 1.14 $
-    @date $Date: 2005/04/12 18:55:28 $
+    @date $Date$
     @author deyoung
 */
 

@@ -17,8 +17,7 @@
 #include "I3RecoPulseSeries.h"
 #include "StoragePolicy.h"
 
-class I3RecoPulseSeriesDict : public TObject, 
-	public STLMapStoragePolicy<string,I3RecoPulseSeriesPtr>
+class I3RecoPulseSeriesDict : public TObject, public STLMapStoragePolicy<string,I3RecoPulseSeriesPtr>
 
  /**
   *   Container for RecoPulseSerieses
@@ -30,39 +29,35 @@ class I3RecoPulseSeriesDict : public TObject,
   virtual ~I3RecoPulseSeriesDict(){};
 
   virtual void ToStream(ostream& o) const
+  {
+    o<<"[ I3RecoPulseSeriesDict: \n";
+    I3RecoPulseSeriesDict::const_iterator iter;
+    for(iter=begin();iter!=end();iter++)
     {
-      o<<"[ I3RecoPulseSeriesDict: \n";
-      I3RecoPulseSeriesDict::const_iterator iter;
-      for(iter=begin();iter!=end();iter++)
-	{
-	  o<<iter->first;
-	  if(iter->second==I3RecoPulseSeriesPtr((I3RecoPulseSeries*)0))
-	    o<<"Null RecoPulseSeries";
-	  else
-	    o<<*(iter->second);
-	}
-      o<<"]\n";
+      o<<iter->first;
+      if(iter->second==I3RecoPulseSeriesPtr((I3RecoPulseSeries*)0)) o<<"Null RecoPulseSeries";
+      else o<<*(iter->second);
     }
+    o<<"]\n";
+  }
 
   virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
 
- private:
+  private:
 /*   // copy and assignment are private */
   I3RecoPulseSeriesDict(const I3RecoPulseSeriesDict& rhs);
   const I3RecoPulseSeriesDict& operator=(const I3RecoPulseSeriesDict&);
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
+  template <class Archive> void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3RecoPulseSeriesDict",
-                  base_object< STLMapStoragePolicy<string,I3RecoPulseSeriesPtr> >(*this));
+    ar & make_nvp("I3RecoPulseSeriesDict", base_object< STLMapStoragePolicy<string,I3RecoPulseSeriesPtr> >(*this));
   }
 
 

@@ -5,6 +5,7 @@ USES_PROJECTS := icetray
 USES_TOOLS := root log4cplus boost TUT boost
 
 ROOT_DICTIONARY_HEADERS := dataclasses/I3AMANDAAnalogReadout.h \
+dataclasses/I3AMANDAAnalogReadout_calib.h \
 dataclasses/I3RecoResultSingleTopShower.h \
 dataclasses/I3MCTopShower.h \
 dataclasses/I3MCTrack.h \
@@ -50,7 +51,6 @@ dataclasses/I3Primary.h \
 dataclasses/I3DetectorStatusHeader.h \
 dataclasses/I3PrimaryImpl.h \
 dataclasses/I3DigitalLaunch.h \
-dataclasses/I3RDMCLaunch.h \
 dataclasses/I3DigitalReadout.h \
 dataclasses/I3RecoHit.h \
 dataclasses/I3RecoPulse.h \
@@ -91,6 +91,7 @@ dataclasses/I3InIceGeometry.h \
 dataclasses/I3SurfModuleGeo.h \
 dataclasses/I3InIceParticle.h \
 dataclasses/I3TWRLaunch.h \
+dataclasses/I3TWRFrag.h \
 dataclasses/I3IceCubeStatus.h \
 dataclasses/I3TankGeo.h \
 dataclasses/I3Infinite.h \
@@ -111,6 +112,9 @@ dataclasses/I3MCOMResponse.h \
 dataclasses/I3MCPMTResponse.h \
 dataclasses/I3Units.h \
 dataclasses/I3MCPMTResponseRomeo.h \
+dataclasses/I3TriggerDict.h \
+dataclasses/I3Trigger.h \
+dataclasses/I3TriggerAMANDA.h \
 dataclasses/OMKey.h \
 dataclasses/STLMapStoragePolicy.h \
 dataclasses/I3MCParticleData.h \

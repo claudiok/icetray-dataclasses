@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Energetic.h,v 1.7 2005/04/01 01:10:32 olivas Exp $
+ * $Id$
  *
  * @file I3Energetic.h
  * @version $Revision: 1.7 $
- * @date $Date: 2005/04/01 01:10:32 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3ENERGETIC_H

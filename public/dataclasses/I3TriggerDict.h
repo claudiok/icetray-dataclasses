@@ -22,56 +22,41 @@
 
 /**
  * @brief A place holder for the Trigger data within the event
- * 
- * 
  *
  */
-class I3TriggerDict : public TObject,
-		      public STLMapStoragePolicy<string,I3TriggerPtr>
+class I3TriggerDict : public TObject, public STLMapStoragePolicy<string,I3TriggerPtr>
 {
- public:
-  /**
-   * constructor
-   */
+  public:
   I3TriggerDict() {};
-
-  /**
-   * destructor
-   */
   virtual ~I3TriggerDict() {};
 
   virtual void ToStream(ostream& o) const
+  {
+    o<<"[ I3TriggerDict: \n";
+    I3TriggerDict::const_iterator iter;
+    for(iter=begin();iter!=end();iter++)
     {
-      o<<"[ I3TriggerDict: \n";
-      I3TriggerDict::const_iterator iter;
-      for(iter=begin();iter!=end();iter++)
-        {
-          o<<iter->first;
-          if(iter->second==I3TriggerPtr((I3Trigger*)0))
-            o<<"Null I3Trigger";
-          else
-            o<<*(iter->second);
-        }
-      o<<"]\n";
+      o<<iter->first;
+      if(iter->second==I3TriggerPtr((I3Trigger*)0)) o<<"Null I3Trigger";
+      else o<<*(iter->second);
     }
+    o<<"]\n";
+  }
   
   virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
 
- private:
-
+  private:
   friend class boost::serialization::access;
+  template <class Archive> void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3TriggerDict", base_object< STLMapStoragePolicy<string, I3TriggerPtr>  >(*this));
+  }
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-    {
-      ar & make_nvp("I3TriggerDict", 
-		    base_object< STLMapStoragePolicy<string,I3TriggerPtr> >(*this));
-    }
   // ROOT Macro
   ClassDef(I3TriggerDict, 1);
 };

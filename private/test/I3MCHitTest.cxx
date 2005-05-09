@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3MCHitTest.cxx,v 1.8 2004/10/14 15:17:08 troy Exp $
+    $Id$
 
     @version $Revision: 1.8 $
-    @date $Date: 2004/10/14 15:17:08 $
+    @date $Date$
     @author Troy D. Straszheim
 
     @todo

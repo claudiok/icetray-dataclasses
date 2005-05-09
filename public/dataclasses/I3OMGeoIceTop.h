@@ -1,11 +1,11 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoIceTop.h,v 1.2 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  * 
  * @file I3OMGeoIceTop.h
  * @version $Revision: 1.2 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author niessen
  */
 

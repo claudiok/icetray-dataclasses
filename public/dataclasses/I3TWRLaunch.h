@@ -4,7 +4,7 @@
  * $Id$
  *
  * @file I3TWRLaunch.h
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.2 $
  * @date $Date$
  * @author ehrlich
  */
@@ -14,64 +14,52 @@
 #include <TObject.h>
 #include <vector>
 #include "dataclasses/I3DigitalLaunch.h"
+#include "dataclasses/I3TWRFrag.h"
 
 using namespace std;
 
-class I3TWRLaunch : public I3DigitalLaunch
+class I3TWRLaunch : public I3DigitalLaunch, public STLVectorStoragePolicy<I3TWRFragPtr>
 {
-  int           id_;
-  float         startTime_;
-  float         binSize_;
-  float         baseline_;
-  vector<float> digi_;
-
+  Int_t   id;
+  Float_t bin_size;
+  Float_t baseline;
+  Int_t   stop_delay;
+  Int_t   threshold;
+  Bool_t  optical;
 
   public:
-  /**
-   * constructor
-   */
-  I3TWRLaunch() {id_=0; startTime_=0; binSize_=0; baseline_=0;}
-
-  /**
-   * destructor
- */
+  I3TWRLaunch() {id=0; bin_size=0; baseline=0; stop_delay=0; threshold=0; optical=false;}
   virtual ~I3TWRLaunch() {;}
-
-  int            GetId() {return id_;}
-  void             SetId(int id) {id_=id;}
-  float          GetStartTime() {return startTime_;}
-  void             SetStartTime(float start_time) {startTime_=start_time;}
-  float          GetBinSize() {return binSize_;}
-  void             SetBinSize(float bin_size) {binSize_=bin_size;}
-  float          GetBaseline() {return baseline_;}
-  void             SetBaseline(float baseline) {baseline_=baseline;}
-  vector<float>& GetDigi() {return digi_;}
+  Int_t   GetId() {return id;}
+  void    SetId(Int_t id_) {id=id_;}
+  Float_t GetBinSize() {return bin_size;}
+  void    SetBinSize(Float_t bin_size_) {bin_size=bin_size_;}
+  Float_t GetBaseline() {return baseline;}
+  void    SetBaseline(Float_t baseline_) {baseline=baseline_;}
+  Int_t   GetStopDelay() {return stop_delay;}
+  void    SetStopDelay(Int_t stop_delay_) {stop_delay=stop_delay_;}
+  Int_t   GetThreshold() {return threshold;}
+  void    SetThreshold(Int_t threshold_) {threshold=threshold_;}
+  Bool_t  GetOptical() {return optical;}
+  void    SetOptical(Bool_t optical_) {optical=optical_;}
 
   private:
-
   friend class boost::serialization::access;
-
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
+  template<class Archive> void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this) );
-    ar & make_nvp("ID", id_ );
-    ar & make_nvp("StartTime", startTime_ );
-    ar & make_nvp("BinSize", binSize_ );
-    ar & make_nvp("Basline", baseline_ );
-    ar & make_nvp("Digi", digi_ );
+    ar & make_nvp("I3TWRLaunch", base_object< STLVectorStoragePolicy<I3TWRFragPtr> >(*this));
+    ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this));
+    ar & make_nvp("ID",id);
+    ar & make_nvp("BinSize",bin_size);
+    ar & make_nvp("Baseline",baseline);
+    ar & make_nvp("StopDelay",stop_delay);
+    ar & make_nvp("Threshold",threshold);
+    ar & make_nvp("Optical",optical);
   }
 
-  // ROOT macro
   ClassDef(I3TWRLaunch,1);
 };
 
-BOOST_SHARED_POINTER_EXPORT(I3TWRLaunch);
-
-/**
- * Pointer typedeffed away to insulate users from the
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3TWRLaunch>  I3TWRLaunchPtr;
+typedef shared_ptr<I3TWRLaunch> I3TWRLaunchPtr;
 #endif
 

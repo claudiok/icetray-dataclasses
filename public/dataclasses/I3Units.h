@@ -2,11 +2,11 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id: I3Units.h,v 1.19 2005/04/04 15:49:25 pretz Exp $
+ $Id$
  
  @file I3Units.h  
  @version $Version:$
- @date $Date: 2005/04/04 15:49:25 $
+ @date $Date$
  @author Geant4 Team (original) M.Maire, S.Giani
  @author pretz (IceCube modifications)
  
@@ -88,7 +88,7 @@
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
  * 
  * @version $Version:$
- * @date $Date: 2005/04/04 15:49:25 $
+ * @date $Date$
  * @author Geant4 Team (original) M.Maire, S.Giani
  * @author pretz (IceCube modifications)
  * @todo Should we have a 'speed' here too?

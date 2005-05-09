@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DirectionalCascade.h,v 1.9 2005/04/09 03:02:10 olivas Exp $
+    $Id$
 
     @file I3DirectionalCascade.h
     @version $Revision: 1.9 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @date $Date$
     @author deyoung
 */
 

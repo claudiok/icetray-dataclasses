@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3MCHit.h,v 1.19 2005/04/09 03:02:10 olivas Exp $
+ * $Id$
  *
  * @file I3MCHit.h
  * @version $Revision: 1.19 $
- * @date $Date: 2005/04/09 03:02:10 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz

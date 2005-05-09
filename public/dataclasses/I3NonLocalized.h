@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3NonLocalized.h,v 1.2 2005/04/04 15:49:25 pretz Exp $
+ * $Id$
  *
  * @file I3NonLocalized.h
  * @version $Revision: 1.2 $
- * @date $Date: 2005/04/04 15:49:25 $
+ * @date $Date$
  * @author ehrlich
  * @author Peter Niessen
  */

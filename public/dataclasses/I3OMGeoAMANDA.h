@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMGeoAMANDA.h,v 1.5 2005/04/12 18:55:28 dule Exp $
+ * $Id$
  *
  * @file I3OMGeoAMANDA.h
  * @version $Revision: 1.5 $
- * @date $Date: 2005/04/12 18:55:28 $
+ * @date $Date$
  * @author ehrlich
  * @author troy
  * @author pretz

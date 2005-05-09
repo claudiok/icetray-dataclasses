@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: InIceExtractorExample.cxx,v 1.16 2005/03/30 14:48:27 pretz Exp $
+    $Id$
 
     @version $Revision: 1.16 $
-    @date $Date: 2005/03/30 14:48:27 $
+    @date $Date$
     @author Troy D. Straszheim
 
     @todo

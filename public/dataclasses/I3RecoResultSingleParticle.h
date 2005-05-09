@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultSingleParticle.h,v 1.7 2005/04/12 23:45:47 olivas Exp $
+ * $Id$
  *
  * @file I3RecoResultSingleParticle.h
  * @version $Revision: 1.7 $
- * @date $Date: 2005/04/12 23:45:47 $
+ * @date $Date$
  * @author dule
  */
 

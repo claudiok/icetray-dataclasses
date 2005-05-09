@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: STLVectorStoragePolicy.h,v 1.11 2005/04/02 20:32:04 troy Exp $
+    $Id$
 
     @file STLVectorStoragePolicy.h
     @version $Revision: 1.11 $
-    @date $Date: 2005/04/02 20:32:04 $
+    @date $Date$
     @author Troy Straszheim
 */
 #ifndef STLVECTOR_POLICY_INCLUDED

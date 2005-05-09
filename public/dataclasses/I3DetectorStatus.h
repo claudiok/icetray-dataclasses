@@ -2,11 +2,11 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3DetectorStatus.h,v 1.9 2005/04/10 00:30:48 pretz Exp $
+ * $Id$
  *
  * @file I3DetectorStatus.h
  * @version $Revision: 1.9 $
- * @date $Date: 2005/04/10 00:30:48 $
+ * @date $Date$
  * @author pretz
  */
 #ifndef I3DETECTORSTATUS_H

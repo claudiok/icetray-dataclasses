@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: StationKey.h,v 1.1 2004/09/03 23:32:08 niessen Exp $
+ * $Id$
  *
  * @file StationKey.h
  * @version $Revision: 1.1 $
- * @date $Date: 2004/09/03 23:32:08 $
+ * @date $Date$
  * @author niessen Wed Sep  1 21:17:16 EDT 2004
  */
 

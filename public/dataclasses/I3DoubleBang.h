@@ -1,11 +1,11 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3DoubleBang.h,v 1.8 2005/04/09 03:02:10 olivas Exp $
+    $Id$
 
     @file I3DoubleBang.h
     @version $Revision: 1.8 $
-    @date $Date: 2005/04/09 03:02:10 $
+    @date $Date$
     @author deyoung
 */
 

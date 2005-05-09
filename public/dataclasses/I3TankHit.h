@@ -1,5 +1,5 @@
 /**
-    $Id: I3TankHit.h,v 1.8 2005/04/12 18:55:28 dule Exp $
+    $Id$
     @file I3TankHit.h
     @version $Revision: 1.8 $
     @date Tue Jun 22 16:39:23 EDT 2004

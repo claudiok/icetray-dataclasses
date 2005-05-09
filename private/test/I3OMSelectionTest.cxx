@@ -1,10 +1,10 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3OMSelectionTest.cxx,v 1.5 2005/04/13 22:00:28 olivas Exp $
+ * $Id$
  *
  * @version $Revision: 1.5 $
- * @date $Date: 2005/04/13 22:00:28 $
+ * @date $Date$
  * @author pretz
  *
  * @todo

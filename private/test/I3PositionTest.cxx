@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3PositionTest.cxx,v 1.5 2004/10/11 07:06:10 troy Exp $
+    $Id$
 
     @version $Revision: 1.5 $
-    @date $Date: 2004/10/11 07:06:10 $
+    @date $Date$
     @author pretz
 
     @todo

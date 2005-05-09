@@ -43,7 +43,7 @@ class I3Event : public TObject
   I3TriggerDict     triggerDict_; //||
   I3Bag             bag_; //||
   
- public:
+  public:
   /**
    * default constructor
    */
@@ -77,9 +77,7 @@ class I3Event : public TObject
   /**
    * @return the OMSelectionDict of the event as a constant object
    */
-  const I3OMSelectionDict& GetOMSelectionDict() const { 
-    return oMSelectionDict_; 
-  }
+  const I3OMSelectionDict& GetOMSelectionDict() const { return oMSelectionDict_; }
 
   /**
    * @return the OMSelectionDict as a non-constant object
@@ -140,7 +138,7 @@ class I3Event : public TObject
 
   // Allowing default copy and assignment operators
 
- private:
+  private:
 
   friend class boost::serialization::access;
 

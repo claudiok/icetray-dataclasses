@@ -28,40 +28,35 @@ class I3RecoPulseSeries : public TObject, public STLVectorStoragePolicy<I3RecoPu
   virtual ~I3RecoPulseSeries() {};
 
   virtual void ToStream(ostream& o) const
+  {
+    o<<"[ I3RecoPulseSeries: \n";
+    I3RecoPulseSeries::const_iterator iter;
+    for(iter=begin();iter!=end();iter++)
     {
-      o<<"[ I3RecoPulseSeries: \n";
-      I3RecoPulseSeries::const_iterator iter;
-      for(iter=begin();iter!=end();iter++)
-	{
-	  if(*iter == I3RecoPulsePtr((I3RecoPulse*)0))
-	    o<<"Null I3RecoPulse";
-	  else
-	    o<<*(*iter);
-	}
-      o<<"]\n";
+      if(*iter == I3RecoPulsePtr((I3RecoPulse*)0)) o<<"Null I3RecoPulse";
+      else o<<*(*iter);
     }
+    o<<"]\n";
+  }
 
   virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
- private:
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
+
+  private:
   // copy and assignment are private:
   I3RecoPulseSeries (const I3RecoPulseSeries& rhs);
   const I3RecoPulseSeries& operator= (const I3RecoPulseSeries&);
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
+  template <class Archive> void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3RecoPulseSeries",
-                  base_object< STLVectorStoragePolicy<I3RecoPulsePtr> >(*this));
+    ar & make_nvp("I3RecoPulseSeries", base_object< STLVectorStoragePolicy<I3RecoPulsePtr> >(*this));
   }
-
-
 
   ClassDef(I3RecoPulseSeries,1);
 };

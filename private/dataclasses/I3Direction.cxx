@@ -1,5 +1,5 @@
 
-// $Id: I3Direction.cxx,v 1.10 2005/04/12 18:58:42 dule Exp $
+// $Id$
 
 #include <iostream>
 #include "dataclasses/I3Direction.h"
