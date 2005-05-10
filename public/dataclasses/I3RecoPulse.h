@@ -47,12 +47,14 @@ class I3RecoPulse : public TObject
    * @return the unique ID of this pulse
    */
   int GetHitID() const {return hitID_;}
+  int GetID() const {return hitID_;}
 
   /**
    * @param hitid the ID number to assign to this hit.  Should be
    * unique, but no checking is done.
    */
   void SetHitID(const int hitid) {hitID_ = hitid;}
+  void SetID(const int hitid) {hitID_ = hitid;}
 
   /**
    * @return the Pulse Amplitude
