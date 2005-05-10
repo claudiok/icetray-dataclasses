@@ -22,38 +22,69 @@
 using namespace std;
 
 /**
- * @brief Old-style AMANDA ADC/TDC readout (uncalibrated) 
+ * @brief Old-style AMANDA ADC/TDC readout
  *
- * This class represents an old-style AMANDA DAQ readout (uncalibrated), with a
+ * This class represents an old-style AMANDA DAQ readout, with a
  * series of LEs and TEs and a single amplitude measurement 
- * that represents the peak from the entire event. 
+ * that represents the peak from the entire event.  TOTs are generated
+ * on the fly and may be wrong if edges are missing.
  */
 class I3AMANDAAnalogReadout : public I3AnalogReadout 
 { 
-  vector<double> LEs_;   //in counts
-  vector<double> TEs_;   //in counts   //TOT = TE - LE
-  vector<int>    HitNumbers_;
-  double adc_;           //in voltage
-  bool   overflow_;
+  vector<double> LEs_; 
+  vector<double> TEs_; 
+  vector<int>    HitNumbers_;  
+  double adc_;         
+  bool   overflow_;    
  
-  public:
-  I3AMANDAAnalogReadout(){}
-  virtual ~I3AMANDAAnalogReadout() {;}
+public:
+  I3AMANDAAnalogReadout(){};
+  virtual ~I3AMANDAAnalogReadout(){};
 
-  double GetFirstLE() {if(LEs_.size()) return LEs_[0]; else return NAN;}
+  /**
+   * Returns the earliest leading edge recorded by the DAQ
+   */
+  double GetFirstLE();
     
+  /** 
+   * Returns the series of leading edges
+   */
   const vector<double>& GetLEs() const {return LEs_;}
   vector<double>& GetLEs(){return LEs_;}
     
+  /**
+   * Returns the series of trailing edges
+   */
   const vector<double>& GetTEs() const {return TEs_;}
   vector<double>& GetTEs() {return TEs_;}
     
+  /**
+   * Returns the time differences between leading and trailing edges.
+   * If some edges are missing, the series may be shorter than expected.
+   */
+  vector<double> GetTOTs();
+  // const vector<double> GetTOTs() const;
+
   const vector<int>& GetHitNumbers() const {return HitNumbers_;}
   vector<int>& GetHitNumbers() {return HitNumbers_;}
 
-  double GetADC() const {return adc_;}
-  void SetADC(double adc) {adc_=adc;}
-    
+  /** 
+   * Alternate name for the amplitude
+   */
+  double GetADC() const {return GetAmplitude();}
+  void SetADC(double adc) {SetAmplitude(adc);}
+
+  /**
+   * Returns the single amplitude recorded for the event
+   */
+  double GetAmplitude() const {return adc_;}
+  void SetAmplitude(double amp) {adc_=amp;}
+  
+  /** 
+   * Indicates whether edge pairs were lost due to buffer overflow.
+   * If true, the earliest edges are missing (FIFO buffer).  The
+   * buffer is 16 edges (8 pairs) deep.
+   */
   bool GetOverflow() const {return overflow_;}
   void SetOverflow(bool overflow) {overflow_=overflow;}
     
@@ -77,7 +108,7 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
   }
     
 
-  private:
+private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive& ar, unsigned version)
   {
