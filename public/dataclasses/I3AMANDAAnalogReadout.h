@@ -124,6 +124,8 @@ private:
   ClassDef(I3AMANDAAnalogReadout,1);
 };
 
+BOOST_SHARED_POINTER_EXPORT(I3AMANDAAnalogReadout);
+
 /**
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
