@@ -12,7 +12,7 @@
 #ifndef I3RECORESULTRDMCFIT_H
 #define I3RECORESULTRDMCFIT_H
 
-#include "I3RecoResultSingleTrack.h"
+#include "I3RecoResult.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -28,20 +28,13 @@ using namespace std;
  *
  * @todo make sure the map<string,double> works in interpreted code
  */
-class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
+class I3RecoResultRDMCFit : public I3RecoResult
 {
   map<string,double> parameters_;
   string fitName_;
 
-  public:
-  /**
-   * constructor
-   */
+ public:
   I3RecoResultRDMCFit(){}
-
-  /**
-   * destructor
-   */
   virtual ~I3RecoResultRDMCFit(){}
 
   /**
@@ -68,7 +61,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 
   virtual void ToStream(ostream& o) const
   {
-    I3RecoResultSingleTrack::ToStream(o);
+    I3RecoResult::ToStream(o);
     o<<"Fit Parameters:\n";
     map<string,double>::const_iterator params;
     for(params=parameters_.begin(); params!=parameters_.end(); params++)
@@ -78,11 +71,11 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
     o<<"\n";
   }
 
-  private:
+ private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3AnalogReadout", base_object<I3RecoResultSingleTrack>(*this));
+    ar & make_nvp("I3AnalogReadout", base_object<I3RecoResult>(*this));
     ar & make_nvp("FitName", fitName_);
     ar & make_nvp("Parameters", parameters_);
   }

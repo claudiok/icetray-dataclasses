@@ -14,29 +14,15 @@
 #ifndef I3RECORESULTSINGLETRACK_H
 #define I3RECORESULTSINGLETRACK_H
 
-#include "I3RecoResult.h"
-#include "I3Particle.h"
+#include "dataclasses/I3RecoResultSingleParticle.h"
 
 /**
  * @brief This is a reco result which just contains a single track
  */
-class I3RecoResultSingleTrack : public I3RecoResult
+class I3RecoResultSingleTrack : public I3RecoResultSingleParticle
 {
-  I3ParticlePtr track_;
-  
-  // TDS FIXME most of this has/get/set stuff can go away.  You just
-  // get the pointer out, it either points to something valid or it
-  // points to nothing.
-
-  public:
-  /**
-   * constructor
-   */
+ public:
   I3RecoResultSingleTrack() {}; //track_ will automatically be "NULL" 
-
-  /**
-   * destructor
-   */
   virtual ~I3RecoResultSingleTrack() {}
 
   /**
@@ -44,11 +30,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
    */
   const I3ParticlePtr GetTrack() const 
   {
-    if (track_) 
-      return (track_);
-
-    log_fatal("I3RecoResultSingleTrack::Track() asked for a track which doesn't exist");
-    return I3ParticlePtr();
+    return I3RecoResultSingleParticle::GetParticle(); 
   }
 
   /**
@@ -56,11 +38,7 @@ class I3RecoResultSingleTrack : public I3RecoResult
    */
   I3ParticlePtr GetTrack()
   {
-    if (track_) 
-      return track_;
-
-    log_fatal("I3RecoResultSingleTrack::Track() asked for a track which doesn't exist");
-    return I3ParticlePtr();
+    return I3RecoResultSingleParticle::GetParticle(); 
   }
 
   /**
@@ -68,42 +46,35 @@ class I3RecoResultSingleTrack : public I3RecoResult
    */
   bool HasTrack() const {
     //TDS: the smart pointer automagically converts to bool
-    return track_;
+    return I3RecoResultSingleParticle::HasParticle(); 
   }
   
   /**
    * sets the track in the result
    * Fails the program if it is already set.
    */
-  void SetTrack(I3ParticlePtr track)
-  {
-    if(track_)
-    {
-      log_fatal("I3RecoResultSingleTrack::Track() track exists already");
-      return;
-    }
-    track_=track;
+  void SetTrack(I3ParticlePtr track) {
+    I3RecoResultSingleParticle::SetParticle(track);
   }
 
-  virtual void ToStream(ostream& o) const
-    {
-      I3RecoResult::ToStream(o);
-      o<<"The Track:\n";
-      if(track_)
-	o<<*track_<<"\n";
-      else
-	o<<"NULL Track\n";
-    }
+  /**
+   * Send the contents of the container to the stream
+   */
+  virtual void ToStream(ostream& o) const {
+      I3RecoResultSingleParticle::ToStream(o);
+  }
   
-  private:
+ private:
+  I3RecoResultSingleTrack (const I3RecoResultSingleTrack& rhs);
+  const I3RecoResultSingleTrack& operator= (const I3RecoResultSingleTrack&);
 
   friend class boost::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3RecoResult", base_object<I3RecoResult>(*this));
-    ar & make_nvp("Track", track_);
+    ar & make_nvp("I3RecoResultSingleTopShower", 
+		  base_object<I3RecoResultSingleParticle>(*this));
   }
 
   // ROOT macro

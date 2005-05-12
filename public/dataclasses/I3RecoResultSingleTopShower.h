@@ -22,42 +22,35 @@ class I3RecoResultSingleTopShower : public I3RecoResultSingleParticle
 {
   
  public:
-  /**
-   * constructor
-   */
   I3RecoResultSingleTopShower() { } //particle will automatically be "NULL" 
-  
-  /**
-   * destructor
-   */
   virtual ~I3RecoResultSingleTopShower() { }
   
   /**
    * Retrieves the track in this reco result as a constant object
    */
   const I3ParticlePtr GetShower() const { 
-    return I3RecoResultSingleTopShower::GetParticle(); 
+    return I3RecoResultSingleParticle::GetParticle(); 
   }
   
   /**
    * Retrieves the track of this reco result as a non-const object
    */
   I3ParticlePtr GetShower() {
-    return I3RecoResultSingleTopShower::GetParticle(); 
+    return I3RecoResultSingleParticle::GetParticle(); 
   }
   
   /**
    * indicates that there is a particle in the result
    */
   bool HasShower () const { 
-    return I3RecoResultSingleTopShower::HasParticle(); 
+    return I3RecoResultSingleParticle::HasParticle(); 
   }
   
   /**
    * sets the particle in the result
    */
   void SetShower (I3ParticlePtr shower) {
-    I3RecoResultSingleTopShower::SetParticle(shower);
+    I3RecoResultSingleParticle::SetParticle(shower);
   }
   
   /**
@@ -65,13 +58,13 @@ class I3RecoResultSingleTopShower : public I3RecoResultSingleParticle
    * into the stream
    */
   virtual void ToStream(ostream& o) const {
-    I3RecoResultSingleTopShower::ToStream(o);
+    I3RecoResultSingleParticle::ToStream(o);
   }
   
  private:
   // copy and assignment are private
-  //I3RecoResultTopShower (const I3RecoResultTopShower& rhs);
-  //const I3RecoResultTopShower& operator= (const I3RecoResultTopShower&);
+  I3RecoResultSingleTopShower (const I3RecoResultSingleTopShower& rhs);
+  const I3RecoResultSingleTopShower& operator= (const I3RecoResultSingleTopShower&);
 
   friend class boost::serialization::access;
 
