@@ -43,7 +43,7 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>", 
+    ar & make_nvp("I3BasicTrack", 
 		  base_object< I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite> >(*this));
   }
   // ROOT macro
