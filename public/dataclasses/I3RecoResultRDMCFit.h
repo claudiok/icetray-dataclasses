@@ -12,7 +12,7 @@
 #ifndef I3RECORESULTRDMCFIT_H
 #define I3RECORESULTRDMCFIT_H
 
-#include "I3RecoResult.h"
+#include "I3RecoResultSingleTrack.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -28,7 +28,7 @@ using namespace std;
  *
  * @todo make sure the map<string,double> works in interpreted code
  */
-class I3RecoResultRDMCFit : public I3RecoResult
+class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 {
   map<string,double> parameters_;
   string fitName_;
@@ -61,7 +61,7 @@ class I3RecoResultRDMCFit : public I3RecoResult
 
   virtual void ToStream(ostream& o) const
   {
-    I3RecoResult::ToStream(o);
+    I3RecoResultSingleTrack::ToStream(o);
     o<<"Fit Parameters:\n";
     map<string,double>::const_iterator params;
     for(params=parameters_.begin(); params!=parameters_.end(); params++)
@@ -71,11 +71,11 @@ class I3RecoResultRDMCFit : public I3RecoResult
     o<<"\n";
   }
 
- private:
+  private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3AnalogReadout", base_object<I3RecoResult>(*this));
+    ar & make_nvp("I3AnalogReadout", base_object<I3RecoResultSingleTrack>(*this));
     ar & make_nvp("FitName", fitName_);
     ar & make_nvp("Parameters", parameters_);
   }
