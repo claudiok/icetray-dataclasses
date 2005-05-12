@@ -225,20 +225,16 @@ class I3Direction : public TObject
    */
   void CalcSphFromCar();
 
-  //void CalcSphCylFromCar() const;
-  //void CalcCarCylFromSph();
-  //void CalcCarSphFromCyl();
-
   friend class boost::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    xDir_ = yDir_ = zDir_ = zenith_ =azimuth_ = 1.0;
+    //xDir_ = yDir_ = zDir_ = zenith_ =azimuth_ = 1.0;
 
-    ar & make_nvp("XDir", xDir_);
-    ar & make_nvp("YDir", yDir_);
-    ar & make_nvp("ZDir", zDir_);
+    //ar & make_nvp("XDir", xDir_);
+    //ar & make_nvp("YDir", yDir_);
+    //ar & make_nvp("ZDir", zDir_);
     ar & make_nvp("Zenith", zenith_);
     ar & make_nvp("Azimuth", azimuth_);
   }
