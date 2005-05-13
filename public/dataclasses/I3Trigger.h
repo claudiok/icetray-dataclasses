@@ -20,6 +20,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "dataclasses/StoragePolicy.h"
+
 using namespace std; 
 
 /**
@@ -77,6 +79,8 @@ class I3Trigger : public TObject
   ClassDef(I3Trigger,1);
 };
 
+BOOST_IS_ABSTRACT(I3Trigger);
+
 /**
  * streams an I3Trigger to an arbitrary ostream
  */
@@ -86,7 +90,6 @@ inline ostream& operator<<(ostream& o,const I3Trigger& trig)
   return o;
 }
 
-#include "dataclasses/StoragePolicy.h"
 /**
  * pointer type to insulate users from memory management
  */
