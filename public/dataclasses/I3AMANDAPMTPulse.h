@@ -133,9 +133,27 @@ private:
   double timeZero_;
   double pedestal_;
 
+  friend class boost::serialization::access;
+  
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3PMTPulse", base_object<I3PMTPulse>(*this));
+    ar & make_nvp("Normalization",normalization_);
+    ar & make_nvp("Norm",norm_);
+    ar & make_nvp("Weight",weight_);
+    ar & make_nvp("StdDev1",stdDev1_);
+    ar & make_nvp("Mu1",mu1_);
+    ar & make_nvp("StdDev2",stdDev2_);
+    ar & make_nvp("Mu2",mu2_);
+    ar & make_nvp("TimeZero",timeZero_);
+    ar & make_nvp("Pedestal",pedestal_);
+  }
+
   //ROOT macro
   ClassDef(I3AMANDAPMTPulse, 1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3AMANDAPMTPulse);
 
 /**
  * Pointer typedeffed away to insulate users from the 
