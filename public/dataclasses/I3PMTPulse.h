@@ -66,6 +66,8 @@ private:
   ClassDef(I3PMTPulse, 1);
 };
 
+BOOST_IS_ABSTRACT(I3PMTPulse);
+
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
