@@ -71,9 +71,17 @@ class I3Cascade : public I3InIceParticle{
     }
 
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3InIceParticle", base_object<I3InIceParticle>(*this));
+  }
   //ROOT macro
   ClassDef(I3Cascade,1);
 };
+
+BOOST_IS_ABSTRACT(I3Cascade);
 
 /** 
  * pointer type to insulate users from memory management issues

@@ -83,6 +83,14 @@ class I3Localized{
        <<"Time:"<<time_<<"\n";
     }
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("Pos",pos_);
+    ar & make_nvp("Time",time_);
+  }
   //ROOT macro
   ClassDef(I3Localized,1);
 };

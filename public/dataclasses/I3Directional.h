@@ -103,6 +103,13 @@ class I3Directional
       o<<"Direction:"<<dir_<<"\n";
     }
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("Dir",dir_);
+  }
   //ROOT macro
   ClassDef(I3Directional,1);
 };

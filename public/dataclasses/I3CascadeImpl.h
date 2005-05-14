@@ -106,6 +106,17 @@ class I3CascadeImpl : public I3Cascade,
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3Cascade", base_object<I3Cascade>(*this));
+    ar & make_nvp("DirectionalType", base_object<DirectionalType>(*this));
+    ar & make_nvp("LocalizableType", base_object<LocalizableType>(*this));
+    ar & make_nvp("EnergeticType", base_object<EnergeticType>(*this));
+    ar & make_nvp("CompositeType", base_object<CompositeType>(*this));
+  }
   // ROOT macro
   ClassDef(I3CascadeImpl,1);
 };
