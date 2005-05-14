@@ -67,6 +67,8 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   ClassDef(I3MCTrack,1);
 };
 
+BOOST_SHARED_POINTER_EXPORT(I3MCTrack);
+
 /** 
  * pointer type to insulate users from memory management
  */
