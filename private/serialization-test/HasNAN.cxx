@@ -14,19 +14,23 @@
 #include <sstream>
 
 struct HasNan {
-  float f;
-  double d;
+  float f, g;
+  double d, e;
 
   HasNan() {
     f = NAN;
+    g = NAN;
     d = NAN;
+    e = NAN;
   }
 
   template <class Archive>
   void serialize(Archive &ar, unsigned version)
   {
     ar & make_nvp("f", f);
+    ar & make_nvp("f", g);
     ar & make_nvp("d", d);
+    ar & make_nvp("d", e);
   }
 };
 
@@ -36,11 +40,12 @@ I3_SERIALIZATION_TEST(HasNan);
 
 // this test shows if streaming in a float as "nan" from text actually
 // works or bails out.  The behavior is in libstdc++, not in our stuff.
+
 #if 0
 TEST(stdio_nan)
 {
   ostringstream oss;
-  float f = NAN;
+  float f = NAN, g = NAN;
   oss << f;
   istringstream iss(oss.str());
   cout << "oss.str == " << oss.str() << endl;
@@ -55,19 +60,31 @@ TEST(stdio_nan)
 }
 #endif
 
-
 TEST(a_nan)
 {
-  double d = NAN;
-  std::ofstream ofs("/tmp/one_nan.xml");
-  xml_oarchive oa(ofs);
-  oa << make_nvp("a_nan", d);
-  ofs.close();
-  std::ifstream ifs("/tmp/one_nan.xml");
-  xml_iarchive ia(ifs);
-  ia >> make_nvp("a_nan", d);
-  ENSURE(isnan(d));
-  ifs.close();
+  double nans[5];
+  {
+    for (int i=0; i<5; i++)
+      {
+	nans[i] = NAN;
+	ENSURE(isnan(nans[i]));
+      }
+    std::ofstream ofs("/tmp/one_nan.xml");
+    xml_oarchive oa(ofs);
+    for (int i=0; i<5; i++)
+      oa << make_nvp("a_nan", nans[i]);
+    ofs.close();
+  }
+  {
+    std::ifstream ifs("/tmp/one_nan.xml");
+    xml_iarchive ia(ifs);
+    for (int i=0; i<5; i++)
+      {
+	ia >> make_nvp("a_nan", nans[i]);
+	ENSURE(isnan(nans[i]));
+      }
+    ifs.close();
+  }
 }
 
 TEST(verified_nan_test)
