@@ -9,6 +9,7 @@
 
 */
 
+#include <services/I3Logging.h>
 #include "icetray/test/serialization-test.h"
 #include "dataclasses/I3Hit.h"
 
@@ -25,33 +26,53 @@ TEST_GROUP(HasBool);
 
 I3_SERIALIZATION_TEST(HasBool);
 
-TEST(verified_bool_test)
+TEST(verified_bool_test_xml)
 {
-  HasBool b;
+  HasBool btrue, bfalse;
   std::ofstream ofs("/tmp/verified_bool_test.xml");
   {
     xml_oarchive oa(ofs);
-    b.b = true;
-    oa << make_nvp("HasTrueBool", b);
-  }
-  {
-    xml_oarchive oa(ofs);
-    b.b = false;
-    oa << make_nvp("HasFalseBool", b);
+    btrue.b = true;
+    oa << make_nvp("HasTrueBool", btrue);
+    bfalse.b = false;
+    oa << make_nvp("HasFalseBool", bfalse);
   }
   ofs.close();
   std::ifstream ifs("/tmp/verified_bool_test.xml");
-  
   {
-    b.b = false;
+    btrue.b = false;
     xml_iarchive ia(ifs);
-    ia >> make_nvp("HasTrueBool", b);
-    ENSURE(b.b == true);
+    ia >> make_nvp("HasTrueBool", btrue);
+    ENSURE(btrue.b == true);
+    bfalse.b = true;
+    ia >> make_nvp("HasFalseBool", bfalse);
+    ENSURE(bfalse.b == false);
   }
+  ifs.close();
+}
+
+TEST(verified_bool_test_text)
+{
+  HasBool btrue, bfalse;
+  std::ofstream ofs("/tmp/verified_bool_test.txt");
   {
-    xml_iarchive ia(ifs);
-    ia >> make_nvp("HasFalseBool", b);
-    ENSURE(b.b == false);
+    text_oarchive oa(ofs);
+    btrue.b = true;
+    oa << make_nvp("HasTrueBool", btrue);
+    bfalse.b = false;
+    oa << make_nvp("HasFalseBool", bfalse);
+  }
+  ofs.close();
+
+  std::ifstream ifs("/tmp/verified_bool_test.txt");
+  {
+    btrue.b = false;
+    text_iarchive ia(ifs);
+    ia >> make_nvp("HasTrueBool", btrue);
+    ENSURE(btrue.b == true);
+    bfalse.b = true;
+    ia >> make_nvp("HasFalseBool", bfalse);
+    ENSURE(bfalse.b == false);
   }
   ifs.close();
 }
