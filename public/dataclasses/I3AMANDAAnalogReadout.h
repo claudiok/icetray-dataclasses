@@ -36,6 +36,7 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
   vector<int>    HitNumbers_;  
   double adc_;         
   bool   overflow_;    
+  bool   is_calib_;    
  
 public:
   I3AMANDAAnalogReadout(){};
@@ -88,6 +89,12 @@ public:
   bool GetOverflow() const {return overflow_;}
   void SetOverflow(bool overflow) {overflow_=overflow;}
     
+  /** 
+   * Indicates whether this object stores calibrated or uncalibrated data.
+   */
+  bool IsCalibrated() const {return is_calib_;}
+  void SetCalibrated(bool is_calib) {is_calib=is_calib;}
+    
 
   virtual void ToStream(ostream& o) const 
   {
@@ -118,6 +125,7 @@ private:
     ar & make_nvp("HitNumbers", HitNumbers_);
     ar & make_nvp("ADC", adc_ );
     ar & make_nvp("Overflow", overflow_ );
+    ar & make_nvp("Calib", is_calib_ );
   }
 
   // ROOT macro
