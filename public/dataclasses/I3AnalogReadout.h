@@ -36,7 +36,9 @@ public:
      * destructor
      */
     virtual ~I3AnalogReadout() {;}
-    
+
+    virtual double GetFirstLE() = 0;
+   
     virtual void ToStream(ostream& o) const { }
 
   
