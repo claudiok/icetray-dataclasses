@@ -5,7 +5,6 @@ USES_PROJECTS := icetray
 USES_TOOLS := root log4cplus boost TUT boost
 
 ROOT_DICTIONARY_HEADERS := dataclasses/I3AMANDAAnalogReadout.h \
-dataclasses/I3AMANDAAnalogReadout_calib.h \
 dataclasses/I3RecoResultSingleTopShower.h \
 dataclasses/I3MCTopShower.h \
 dataclasses/I3MCTrack.h \
