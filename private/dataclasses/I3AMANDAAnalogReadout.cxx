@@ -11,7 +11,7 @@
 
 #include "dataclasses/I3AMANDAAnalogReadout.h"
 
-double I3AMANDAAnalogReadout::GetFirstLE() {
+double I3AMANDAAnalogReadout::GetFirstLE() const {
 
   if(LEs_.size() == 0) {
     return NAN;
