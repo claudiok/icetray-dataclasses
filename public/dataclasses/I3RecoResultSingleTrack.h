@@ -73,7 +73,7 @@ class I3RecoResultSingleTrack : public I3RecoResultSingleParticle
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3RecoResultSingleParticle", 
+    ar & make_nvp("I3RecoResultSingleTrack", 
 		  base_object<I3RecoResultSingleParticle>(*this));
   }
 
