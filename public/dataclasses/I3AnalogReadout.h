@@ -37,7 +37,11 @@ public:
      */
     virtual ~I3AnalogReadout() {;}
 
-    virtual double GetFirstLE() = 0;
+    /**
+     * returns the first leading edge time in the 
+     * data
+     */
+    virtual double GetFirstLE() const = 0;
    
     virtual void ToStream(ostream& o) const { }
 
