@@ -45,7 +45,7 @@ public:
   /**
    * Returns the earliest leading edge recorded by the DAQ
    */
-  double GetFirstLE();
+  double GetFirstLE() const;
     
   /** 
    * Returns the series of leading edges
