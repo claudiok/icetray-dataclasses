@@ -42,9 +42,23 @@ class I3CompleteCascade : public I3CascadeImpl<I3Directional,
   virtual ~I3CompleteCascade() {}
   
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3CompleteCascade", 
+		  base_object<I3CascadeImpl< I3Directional,
+	                                     I3Localized,
+	                                     I3Energetic,
+		                             I3NonComposite> >(*this));
+  }
   // ROOT macro
   ClassDef(I3CompleteCascade,1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3CompleteCascade);
 
 /**
  * pointer typedeffed away to insulate users from memory management

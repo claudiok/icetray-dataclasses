@@ -83,6 +83,16 @@ class I3StationHit : public TObject,
   I3StationHit(const I3StationHit&); 
   const I3StationHit& operator=(const I3StationHit&); 
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3StationHit", 
+		  base_object< STLVectorStoragePolicy<I3TankHitPtr> >(*this));
+    ar & make_nvp("StationNumber",stationNumber_);
+
+  }
+
   // ROOT macro
   ClassDef(I3StationHit,1);
 };

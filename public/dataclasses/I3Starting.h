@@ -172,6 +172,17 @@ class I3Starting
     }
 
  protected:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("StartPos",startPos_);
+    ar & make_nvp("Dir",dir_);
+    ar & make_nvp("StartT",startT_);
+  }
+
   // ROOT macro
   ClassDef(I3Starting,1)
 };

@@ -37,6 +37,15 @@ class I3NonDirectional
       o<<"Direction: NonDirectional\n";
     }
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    //This method intentionally left blank
+  }
+
   //ROOT macro
   ClassDef(I3NonDirectional,1);
 };

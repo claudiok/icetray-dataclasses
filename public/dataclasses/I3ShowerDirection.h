@@ -29,9 +29,22 @@ class I3ShowerDirection
 
  private:
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3ShowerDirection",
+		  base_object< I3TopShowerImpl<I3Directional, 
+		                               I3NonLocalized, 
+		                               I3NonEnergetic> >(*this));
+  }
+
   ClassDef (I3ShowerDirection, 1);
 };
        
+BOOST_SHARED_POINTER_EXPORT(I3ShowerDirection);
+
 /**
  * Typedeffed pointer which allows for change of technical details
  * later.

@@ -14,6 +14,9 @@
 #include <cmath>
 #include "I3Units.h"
 #include "I3Constants.h"
+#include "I3Position.h"
+#include "I3Direction.h"
+#include "I3Particle.h"
 
 /**
  * @brief This class services the 'geometrical' part of the I3Track interface.
@@ -167,6 +170,17 @@ class I3Stopping
        <<"StopTime: "<<stopT_<<"\n";
     }
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("StopPos",stopPos_);
+    ar & make_nvp("Dir",dir_);
+    ar & make_nvp("StopT",stopT_);
+  }
+
   // ROOT macro
   ClassDef(I3Stopping,1)
 };

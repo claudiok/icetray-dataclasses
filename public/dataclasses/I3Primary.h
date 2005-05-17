@@ -47,6 +47,15 @@ class I3Primary : public I3Particle{
     } 
   
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3Primary", base_object<I3Particle>(*this));
+  }
+
   // ROOT macro
   ClassDef(I3Primary,1);
 };

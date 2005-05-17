@@ -87,6 +87,17 @@ class I3PrimaryImpl : public I3Primary,
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3Primary", base_object<I3Primary>(*this));
+    ar & make_nvp("DirectionalType", base_object<DirectionalType>(*this));
+    ar & make_nvp("LocalizableType", base_object<LocalizableType>(*this));
+    ar & make_nvp("EnergeticType", base_object<EnergeticType>(*this));
+  }
+
   //ROOT macro
   ClassDef(I3PrimaryImpl,1);
 };

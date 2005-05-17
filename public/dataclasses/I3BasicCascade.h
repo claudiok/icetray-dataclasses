@@ -41,9 +41,24 @@ public:
   virtual ~I3BasicCascade(){}
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3BasicCascade", 
+		  base_object< I3CascadeImpl<I3NonDirectional,
+		                             I3Localized,
+		                             I3NonEnergetic,
+		                             I3NonComposite> >(*this));
+  }
+
   // ROOT macro
   ClassDef(I3BasicCascade,1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3BasicCascade);
 
 /**
  * pointer type to insulate users from memory management issues

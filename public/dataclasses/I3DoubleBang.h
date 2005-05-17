@@ -45,9 +45,23 @@ class I3DoubleBang : public I3TrackImpl<I3Contained,
   virtual ~I3DoubleBang(){}
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3DoubleBang", 
+		  base_object< I3TrackImpl<I3Contained,
+		                           I3Energetic,
+                                           I3Composite> >(*this));
+  }
+
   // ROOT macro
   ClassDef(I3DoubleBang,1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3DoubleBang);
 
 /**
  * pointer type to insulate users from memory management

@@ -117,6 +117,16 @@ class I3TankHit : public TObject {
   I3TankHit(const I3TankHit&); 
   const I3TankHit& operator=(const I3TankHit&); 
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("TankNumber",tankNumber_);
+    ar & make_nvp("Time",time_);
+    ar & make_nvp("Signal",signal_);
+  }
+
   // ROOT macro
   ClassDef(I3TankHit,1);
 };

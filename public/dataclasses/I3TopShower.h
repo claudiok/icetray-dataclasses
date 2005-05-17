@@ -37,6 +37,15 @@ class I3TopShower : public I3IceTopParticle{
     } 
   
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3TopShower",base_object<I3IceTopParticle>(*this));
+  }
+
   // ROOT macro
   ClassDef(I3TopShower,1);
 };

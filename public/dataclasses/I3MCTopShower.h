@@ -51,9 +51,22 @@ class I3MCTopShower : public I3TopShowerImpl<I3Directional,
   void  SetWeight(double weight_) { weight_ = weight_; }
 
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3MCTopShower",
+		  base_object< I3TopShowerImpl<I3Directional,
+	                                       I3CoreLocalized,
+                                               I3Energetic> >(*this));
+    ar & make_nvp("Weight", weight_);
+  }
   //ROOT macro
   ClassDef(I3MCTopShower,1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3MCTopShower);
 
 /** 
  * pointer type to insulate users from memory management

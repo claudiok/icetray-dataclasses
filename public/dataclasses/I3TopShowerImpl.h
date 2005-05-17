@@ -72,6 +72,17 @@ class I3TopShowerImpl : public I3TopShower,
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3TopShower", base_object<I3TopShower>(*this));
+    ar & make_nvp("DirectionalType", base_object<DirectionalType>(*this));
+    ar & make_nvp("CoreType", base_object<CoreType>(*this));
+    ar & make_nvp("EnergeticType", base_object<EnergeticType>(*this));
+  }
+
   //ROOT macro
   ClassDef(I3TopShowerImpl,1);
 };

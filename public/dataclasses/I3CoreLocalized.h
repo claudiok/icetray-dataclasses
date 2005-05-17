@@ -81,6 +81,16 @@ class I3CoreLocalized
     }
 
  private:
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("CoreT", coreT_ );
+    ar & make_nvp("CorePos", corePos_ );
+  }
+
   //ROOT macro
   ClassDef(I3CoreLocalized,1);
 };
