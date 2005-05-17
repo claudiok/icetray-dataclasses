@@ -241,10 +241,6 @@
 //#pragma link C++ typedef I3AMANDAAnalogReadoutPtr;
 //#pragma link C++ class boost::shared_ptr<I3AMANDAAnalogReadout>+;
 
-#pragma link C++ class I3AMANDAAnalogReadout_calib+;
-//#pragma link C++ typedef I3AMANDAAnalogReadout_calibPtr;
-//#pragma link C++ class boost::shared_ptr<I3AMANDAAnalogReadout_calib>+;
-
 #pragma link C++ class I3AnalogReadout+;
 //#pragma link C++ typedef I3AnalogReadoutPtr;
 //#pragma link C++ class boost::shared_ptr<I3AnalogReadout>+;
