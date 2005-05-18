@@ -165,7 +165,7 @@ namespace tut
 		      initial_time.GetUTCYear(),
 		      compare_time.GetUTCYear());
 	ensure("checking that the UTC time is the same to ns",
-	       llabs(initial_time.GetUTCDaqTime() 
+	       std::llabs(initial_time.GetUTCDaqTime() 
 		     - compare_time.GetUTCDaqTime()) < 10);
 	
 	
