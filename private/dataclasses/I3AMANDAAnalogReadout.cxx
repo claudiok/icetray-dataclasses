@@ -10,29 +10,15 @@
  */
 
 #include "dataclasses/I3AMANDAAnalogReadout.h"
+#include <algorithm>
 
 double I3AMANDAAnalogReadout::GetFirstLE() const {
-
-  if(LEs_.size() == 0) {
+  if(LEs_.size()==0)
     return NAN;
-  }
 
-  double earliest = NAN;
-  for (vector<double>::const_iterator iter = LEs_.begin();
-       iter != LEs_.end();
-       iter++) {
-    if (isnan(*iter)) {
-      continue;
-    }
-    if (isnan(earliest)) {
-      earliest = *iter;
-      continue;
-    }
-    if (*iter < earliest) {
-      earliest = *iter;
-    }
-  }
-  return earliest;
+  vector<double> tmp=LEs_;
+  sort(tmp.begin(),tmp.end());
+  return tmp[0];
 };
 
 vector<double> I3AMANDAAnalogReadout::GetTOTs() {

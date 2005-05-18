@@ -1,6 +1,6 @@
 #include "dataclasses/I3Monitoring.h"
 
-float I3Monitoring::GetTempCelcius()
+float I3Monitoring::GetTempCelcius() const
 {
     float temp;
     if (temperature_>32767)
@@ -14,39 +14,39 @@ float I3Monitoring::GetTempCelcius()
     return temp;
 }
 
-int I3Monitoring::GetTempRaw()
+int I3Monitoring::GetTempRaw() const
 {
     return temperature_;
 }
 
-float I3Monitoring::GetSPEScalerHz()
+float I3Monitoring::GetSPEScalerHz() const
 {
     float spe = (float)(SPE_Scaler_)/0.9;
     return spe;
 }
 
-int I3Monitoring::GetSPEScalerRaw()
+int I3Monitoring::GetSPEScalerRaw() const
 {
     return SPE_Scaler_;
 }
 
-float I3Monitoring::GetMPEScalerHz()
+float I3Monitoring::GetMPEScalerHz() const
 {
     float mpe = (float)(MPE_Scaler_)/0.9;
     return mpe;
 }
 
-int I3Monitoring::GetMPEScalerRaw()
+int I3Monitoring::GetMPEScalerRaw() const
 {
     return MPE_Scaler_;
 }
 
-void I3Monitoring::SetTemperatureRaw(int temp)
+void I3Monitoring::SetTemperatureRaw(int temp) 
 {
     temperature_ = temp;
 }
 
-void I3Monitoring::SetSPEScalerRaw(int spe)
+void I3Monitoring::SetSPEScalerRaw(int spe) 
 {
     SPE_Scaler_ = spe;
 }

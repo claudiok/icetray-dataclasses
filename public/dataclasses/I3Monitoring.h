@@ -10,6 +10,10 @@
 #ifndef I3MONITORING_H
 #define I3MONITORING_H
 
+#include <iostream>
+
+using namespace std;
+
 /**
  * @brief Class to represent the contents of DOM monitoring records
  */
@@ -17,12 +21,12 @@
 class I3Monitoring 
 {
  public:
-    float GetTempCelcius();
-    int GetTempRaw();
-    float GetSPEScalerHz();
-    int GetSPEScalerRaw();
-    float GetMPEScalerHz();
-    int GetMPEScalerRaw();
+    float GetTempCelcius() const ;
+    int GetTempRaw() const;
+    float GetSPEScalerHz() const ;
+    int GetSPEScalerRaw() const ;
+    float GetMPEScalerHz() const;
+    int GetMPEScalerRaw() const;
 
     void SetTemperatureRaw(int);
     void SetSPEScalerRaw(int);
@@ -38,6 +42,15 @@ class I3Monitoring
     int SPE_Scaler_;
     int MPE_Scaler_;
 };
+
+inline ostream& operator<<(ostream& o, const I3Monitoring& m)
+{
+  o<<"[ I3Monitoring: \n"
+   <<"Temperature: "<<m.GetTempCelcius()<<" C\n"
+   <<"SPE Scaler: "<<m.GetSPEScalerHz()<<" Hz\n"
+   <<"MPE Scaler: "<<m.GetMPEScalerHz()<<" Hz ]\n"; 
+  return o;
+}
 
 typedef shared_ptr<I3Monitoring> I3MonitoringPtr;
 
