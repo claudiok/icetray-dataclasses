@@ -168,7 +168,13 @@
 
 #pragma link C++ class I3RecoPulseSeries+;
 
+#pragma link C++ class I3Particle+;
+//#pragma link C++ typedef I3ParticlePtr;
+#pragma link C++ class shared_ptr<I3Particle>+;
+//#pragma link C++ class vector<I3ParticlePtr>+;
+
 #pragma link C++ class I3ParticleMultiMap+;
+#pragma link C++ class STLMultiMapStoragePolicy< string,I3ParticlePtr>+;
 //#pragma link C++ typedef MultiMapPolicy<string,I3ParticlePtr>::ThePolicy;
 //#pragma link C++ class MultiMapPolicy<string,I3ParticlePtr>::ThePolicy+;
 //#pragma link C++ typedef I3ParticleMultiMapPtr;
@@ -456,11 +462,6 @@
 //#pragma link C++ typedef I3OMSlrListPtr;
 //#pragma link C++ class boost::shared_ptr<I3OMSlrList>+;
 //#endif
-
-#pragma link C++ class I3Particle+;
-//#pragma link C++ typedef I3ParticlePtr;
-//#pragma link C++ class boost::shared_ptr<I3Particle>+;
-//#pragma link C++ class vector<I3ParticlePtr>+;
 
 #pragma link C++ class I3Position+;
 //#pragma link C++ typedef I3PositionPtr;
