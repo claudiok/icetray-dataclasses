@@ -93,7 +93,7 @@ public:
    * Indicates whether this object stores calibrated or uncalibrated data.
    */
   bool IsCalibrated() const {return is_calib_;}
-  void SetCalibrated(bool is_calib) {is_calib=is_calib;}
+  void SetCalibrated(bool is_calib) {is_calib_=is_calib;}
     
 
   virtual void ToStream(ostream& o) const 
