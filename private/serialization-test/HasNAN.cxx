@@ -70,6 +70,8 @@ TEST(a_nan)
 	ENSURE(isnan(nans[i]));
       }
     std::ofstream ofs("/tmp/one_nan.xml");
+    string msg = "couldn't open temporary file /tmp/one_nan.xml";
+    ENSURE(ofs, msg.c_str());
     xml_oarchive oa(ofs);
     for (int i=0; i<5; i++)
       oa << make_nvp("a_nan", nans[i]);
@@ -77,6 +79,8 @@ TEST(a_nan)
   }
   {
     std::ifstream ifs("/tmp/one_nan.xml");
+    string msg = "couldn't open temporary file /tmp/one_nan.xml";
+    ENSURE(ifs, msg.c_str());
     xml_iarchive ia(ifs);
     for (int i=0; i<5; i++)
       {
@@ -85,12 +89,15 @@ TEST(a_nan)
       }
     ifs.close();
   }
+  unlink("/tmp/one_nan.xml");
 }
 
 TEST(verified_nan_test)
 {
   HasNan n;
   std::ofstream ofs("/tmp/verified_nan_test.xml");
+  string msg = "couldn't open temporary file /tmp/verified_nan_test.xml";
+  ENSURE(ofs, msg.c_str());
   {
     xml_oarchive oa(ofs);
     oa << make_nvp("HasNans", n);
@@ -104,7 +111,8 @@ TEST(verified_nan_test)
 
   ofs.close();
   std::ifstream ifs("/tmp/verified_nan_test.xml");
-  
+  msg = "couldn't open temporary file /tmp/verified_nan_test.xml";
+  ENSURE(ifs, msg.c_str());  
   {
     xml_iarchive ia(ifs);
     ia >> make_nvp("HasNans", n);
@@ -118,4 +126,5 @@ TEST(verified_nan_test)
     ENSURE(n.f== 1.0);
   }
   ifs.close();
+  unlink("/tmp/verified_nan_test.xml");
 }

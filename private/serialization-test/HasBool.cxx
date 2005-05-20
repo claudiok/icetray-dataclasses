@@ -30,6 +30,8 @@ TEST(verified_bool_test_xml)
 {
   HasBool btrue, bfalse;
   std::ofstream ofs("/tmp/verified_bool_test.xml");
+  string msg = "couldn't open temporary file /tmp/verified_bool_test.xml";
+  ENSURE(ofs, msg.c_str());  
   {
     xml_oarchive oa(ofs);
     btrue.b = true;
@@ -39,6 +41,8 @@ TEST(verified_bool_test_xml)
   }
   ofs.close();
   std::ifstream ifs("/tmp/verified_bool_test.xml");
+  msg = "couldn't open temporary file /tmp/verified_bool_test.xml";
+  ENSURE(ifs, msg.c_str());  
   {
     btrue.b = false;
     xml_iarchive ia(ifs);
@@ -49,12 +53,15 @@ TEST(verified_bool_test_xml)
     ENSURE(bfalse.b == false);
   }
   ifs.close();
+  unlink("/tmp/verified_bool_test.xml");
 }
 
 TEST(verified_bool_test_text)
 {
   HasBool btrue, bfalse;
   std::ofstream ofs("/tmp/verified_bool_test.txt");
+  string msg = "couldn't open temporary file /tmp/verified_bool_test.txt";
+  ENSURE(ofs, msg.c_str());  
   {
     text_oarchive oa(ofs);
     btrue.b = true;
@@ -65,6 +72,8 @@ TEST(verified_bool_test_text)
   ofs.close();
 
   std::ifstream ifs("/tmp/verified_bool_test.txt");
+  msg = "couldn't open temporary file /tmp/verified_bool_test.txt";
+  ENSURE(ifs, msg.c_str());  
   {
     btrue.b = false;
     text_iarchive ia(ifs);
@@ -75,5 +84,6 @@ TEST(verified_bool_test_text)
     ENSURE(bfalse.b == false);
   }
   ifs.close();
+  unlink("/tmp/verified_bool_test.txt");
 }
 
