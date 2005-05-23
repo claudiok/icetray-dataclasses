@@ -15,7 +15,6 @@
 #ifndef I3RAWDOMSTATUS_PROPOSAL_H
 #define I3RAWDOMSTATUS_PROPOSAL_H
 
-#include <map>
 #include <string>
 
 using namespace std;
@@ -60,22 +59,10 @@ public:
     virtual ~I3RawDOMStatus(){}
 
     /**
-     * The status variables are stored as string-keyed unsigned
-     * ints, the raw values that the DOMs take.
-     */
-    const virtual map<string,unsigned int>& GetRawStatus() const = 0;
-    virtual map<string,unsigned int>& GetRawStatus() = 0;
-
-    /**
      * Gets the current trigger source setting
      * @return the current trigger source setting
      */
     virtual TrigMode GetTrigMode() const = 0;    
-
-    virtual void SetTrigMode(const TrigMode trigMode)
-	{
-	    trigMode_ = trigMode;
-	};
 
     /**
      * gets how far local coincidence signals are sent
@@ -83,10 +70,6 @@ public:
      */
     virtual LCMode GetLCMode() const = 0;
 
-    virtual void SetLCMode(const LCMode lcMode)
-	{
-	    lcMode_ = lcMode;
-	};
 
     /**
      * @return the local coincidence window before the descriminator 
@@ -94,10 +77,6 @@ public:
      */
     virtual double GetLCWindowUpPre() const = 0;
 
-    virtual void SetLCWindowUpPre(const double lcWindow)
-	{
-	    lcWindowUpPre_ = lcWindow;
-	};
 
     /**
      * @return the local coincidence window before the descriminator 
@@ -105,32 +84,18 @@ public:
      */
     virtual double GetLCWindowDownPre() const = 0;
 
-    virtual void SetLCWindowDownPre(const double lcWindow)
-	{
-	    lcWindowDownPre_ = lcWindow;
-	};
-
     /**
      * @return the local coincidence window after the descriminator 
      * in standard dataclasses units (ns) for the upward coming signal
      */
     virtual double GetLCWindowUpPost() const = 0;
 
-    virtual void SetLCWindowUpPost(const double lcWindow)
-	{
-	    lcWindowUpPost_ = lcWindow;
-	};
 
     /**
      * @return the local coincidence window after the descriminator 
      * in standard dataclasses units (ns) for the downward coming signal
      */
     virtual double GetLCWindowDownPost() const = 0;
-
-    virtual void SetLCWindowDownPost(const double lcWindow)
-	{
-	    lcWindowDownPost_ = lcWindow;
-	};
 
     /*  Control and Monitor different parts of the OM */
   
@@ -139,80 +104,32 @@ public:
      */
     virtual OnOff GetStatusATWD_A() const = 0;
 
-    virtual void SetStatusATWD_A(const OnOff status)
-	{
-	    statusATWDa_ = status;
-	};
-
     /**
      * @return the status of ATWD B
      */
     virtual OnOff GetStatusATWD_B() const = 0;
 
-    virtual void SetStatusATWD_B(const OnOff status)
-	{
-	    statusATWDb_ = status;
-	};
-
     /**
      * @return the status of the FADC
      */
     virtual OnOff GetStatusFADC() const = 0;
-
-    virtual void SetStatusFADC(const OnOff status)
-	{
-	    statusFADC_ = status;
-	};
     
     /**
      * @return the high voltage on the PMT in standard dataclasses units
      */
     virtual double GetPMTHV() const = 0;
-  
-    virtual void SetPMTHV(const double hv)
-	{
-	    pmtHV_ = hv;
-	};
+
 
     /**
      * @return the voltage that is the threshold for a dom single SPE trigger
      */
     virtual double GetSingleSPEThreshold() const = 0;
 
-    virtual void SetSingleSPEThreshold(const double threshold)
-	{
-	    speThreshold_ = threshold;
-	};
-
     /**
      * @gives the FE pedestal applied to the atwd chip
      */
     virtual double GetFEPedestal() const = 0;
 
-    virtual void SetFEPedestal(const double pedestal)
-	{
-	    fePedestal_ = pedestal;
-	};
-
-protected:
-    mutable map<string,unsigned int> rawStatus_;
-
-    TrigMode trigMode_;
-    
-    LCMode lcMode_;
-    
-    double lcWindowUpPre_;
-    double lcWindowDownPre_;
-    double lcWindowUpPost_;
-    double lcWindowDownPost_;
-    
-    OnOff statusATWDa_;
-    OnOff statusATWDb_;
-    OnOff statusFADC_;
-    
-    double pmtHV_;
-    double speThreshold_;
-    double fePedestal_;
 };	
 
 /**

@@ -16,6 +16,9 @@
 #define I3TESTDAQRAWDOMSTATUS_H
 
 #include "dataclasses/I3RawDOMStatus.h"
+#include <map>
+
+using namespace std;
 
 class I3TestDaqRawDOMStatus : public I3RawDOMStatus
 {
@@ -45,6 +48,11 @@ public:
     double GetPMTHV() const;
     double GetSingleSPEThreshold() const;
     double GetFEPedestal() const;
+
+ private:
+    mutable map<string,unsigned int> rawStatus_;
 };
+
+typedef shared_ptr<I3TestDaqRawDOMStatus> I3TestDaqRawDOMStatusPtr;
 
 #endif

@@ -24,24 +24,24 @@ public:
     ~I3MCRawDOMStatus()
 	{};
     
-    const map<string,unsigned int>& GetRawStatus() const
-	{
-	    return rawStatus_;
-	};
-    
-    map<string,unsigned int>& GetRawStatus()
-	{
-	    return rawStatus_;
-	};
-    
     TrigMode GetTrigMode() const
 	{
 	    return trigMode_;
+	};
+
+    virtual void SetTrigMode(const TrigMode trigMode)
+	{
+	    trigMode_ = trigMode;
 	};
     
     LCMode GetLCMode() const
 	{
 	    return lcMode_;
+	};
+
+    virtual void SetLCMode(const LCMode lcMode)
+	{
+	    lcMode_ = lcMode;
 	};
     
     double GetLCWindowUpPre() const
@@ -49,50 +49,121 @@ public:
 	    return lcWindowUpPre_;
 	};
     
+    virtual void SetLCWindowUpPre(const double lcWindow)
+	{
+	    lcWindowUpPre_ = lcWindow;
+	};
+
     double GetLCWindowDownPre() const
 	{
 	    return lcWindowDownPre_;
 	};
-    
+
+    virtual void SetLCWindowDownPre(const double lcWindow)
+	{
+	    lcWindowDownPre_ = lcWindow;
+	};
+
     double GetLCWindowUpPost() const
 	{
 	    return lcWindowUpPost_;
+	};
+
+    virtual void SetLCWindowUpPost(const double lcWindow)
+	{
+	  lcWindowUpPost_ = lcWindow;
 	};
     
     double GetLCWindowDownPost() const
 	{
 	    return lcWindowDownPost_;
 	};
+
+    virtual void SetLCWindowDownPost(const double lcWindow)
+	{
+	    lcWindowDownPost_ = lcWindow;
+	};
+
     
     OnOff GetStatusATWD_A() const
 	{
 	    return statusATWDa_;
 	};
+
+    virtual void SetStatusATWD_A(const OnOff status)
+      {
+	statusATWDa_ = status;
+      };
     
     OnOff GetStatusATWD_B() const
 	{
 	    return statusATWDb_;
 	};
     
+    virtual void SetStatusATWD_B(const OnOff status)
+	{
+	    statusATWDb_ = status;
+	};
+
     OnOff GetStatusFADC() const
 	{
 	    return statusFADC_;
 	};
     
+    virtual void SetStatusFADC(const OnOff status)
+	{
+	    statusFADC_ = status;
+	};
+
     double GetPMTHV() const
 	{
 	    return pmtHV_;
 	};
-    
+      
+    virtual void SetPMTHV(const double hv)
+	{
+	    pmtHV_ = hv;
+	};
+
     double GetSingleSPEThreshold() const
 	{
 	    return speThreshold_;
 	};
+
+    virtual void SetSingleSPEThreshold(const double threshold)
+      {
+	speThreshold_ = threshold;
+      };
     
     double GetFEPedestal() const
 	{
 	    return fePedestal_;
 	};
+
+    virtual void SetFEPedestal(const double pedestal)
+	{
+	    fePedestal_ = pedestal;
+	};
+
+ private:
+    TrigMode trigMode_;
+    
+    LCMode lcMode_;
+    
+    double lcWindowUpPre_;
+    double lcWindowDownPre_;
+    double lcWindowUpPost_;
+    double lcWindowDownPost_;
+    
+    OnOff statusATWDa_;
+    OnOff statusATWDb_;
+    OnOff statusFADC_;
+    
+    double pmtHV_;
+    double speThreshold_;
+    double fePedestal_;
 };
+
+typedef shared_ptr<I3MCRawDOMStatus> I3MCRawDOMStatusPtr;
 
 #endif
