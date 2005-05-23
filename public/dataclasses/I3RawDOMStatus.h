@@ -90,12 +90,16 @@ public:
      */
     virtual double GetLCWindowUpPost() const = 0;
 
-
     /**
      * @return the local coincidence window after the descriminator 
      * in standard dataclasses units (ns) for the downward coming signal
      */
     virtual double GetLCWindowDownPost() const = 0;
+
+    /**
+     * @return  trigger_bias DAC setting used for sampling rate calibration
+     */
+    virtual double GetDACTriggerBias(int chip) const = 0;
 
     /*  Control and Monitor different parts of the OM */
   

@@ -146,6 +146,46 @@ public:
 	    fePedestal_ = pedestal;
 	};
 
+    virtual void SetDACTriggerBias(int bias, int chip)
+	{
+	    if ( chip == 0 )
+	    {
+		dacTriggerBias0_ = bias;
+	    }
+	    
+	    else if ( chip == 1 )
+	    {
+		dacTriggerBias1_ = bias;
+	    };
+	    
+	    else 
+	    {
+		log_fatal("Bad chip ID in I3MCRawDOMStatus::SetDACTriggerBias");
+	    };
+			  
+	};
+
+    double GetDACTriggerBias(int chip)
+	{
+	    if ( chip == 0 )
+	    {
+		return dacTriggerBias0_;
+	    };
+	    
+	    else if ( chip == 1 )
+	    {
+		return dacTriggerBias1_;
+	    };
+
+	    else 
+	    {
+		log_fatal("Bad chip ID in I3MCRawDOMStatus::GetDACTriggerBias"");
+		return 0.0;
+	    };
+	};
+    
+    
+
  private:
     TrigMode trigMode_;
     
@@ -163,6 +203,9 @@ public:
     double pmtHV_;
     double speThreshold_;
     double fePedestal_;
+    
+    double dacTriggerBias0_;
+    double dacTriggerBias1_;
 };
 
 typedef shared_ptr<I3MCRawDOMStatus> I3MCRawDOMStatusPtr;

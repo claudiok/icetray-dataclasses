@@ -127,3 +127,10 @@ double I3TestDaqRawDOMStatus::GetFEPedestal() const
 {
   return 5.0 * ((double)rawStatus_["DAC_PMT_FE_PEDESTAL"])/4096.;
 }
+
+double I3TestDaqRawDOMStatus::GetDACTriggerBias(int chip) const
+{
+    if(chip==0) return (double)rawStatus_["DAC_ATWD0_TRIGGER_BIAS"];
+    else if(chip==1) return (double)rawStatus_["DAC_ATWD1_TRIGGER_BIAS"];
+    else return 0;
+}

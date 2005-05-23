@@ -40,6 +40,8 @@ public:
     double GetLCWindowDownPre() const;
     double GetLCWindowUpPost() const;
     double GetLCWindowDownPost() const;
+
+    double GetDACTriggerBias(int) const;
     
     OnOff GetStatusATWD_A() const;
     OnOff GetStatusATWD_B() const;
