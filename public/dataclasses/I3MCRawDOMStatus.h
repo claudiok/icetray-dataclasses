@@ -19,7 +19,7 @@
 class I3MCRawDOMStatus : public I3RawDOMStatus
 {
 public:
-    I3MCRawDOMStatus();
+    I3MCRawDOMStatus(){}
     
     ~I3MCRawDOMStatus()
 	{};
