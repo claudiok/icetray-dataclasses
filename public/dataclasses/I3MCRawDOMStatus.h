@@ -156,32 +156,32 @@ public:
 	    else if ( chip == 1 )
 	    {
 		dacTriggerBias1_ = bias;
-	    };
+	    }
 	    
 	    else 
 	    {
 		log_fatal("Bad chip ID in I3MCRawDOMStatus::SetDACTriggerBias");
-	    };
+	    }
 			  
 	};
 
-    double GetDACTriggerBias(int chip)
+    double GetDACTriggerBias(int chip) const
 	{
 	    if ( chip == 0 )
 	    {
 		return dacTriggerBias0_;
-	    };
+	    }
 	    
 	    else if ( chip == 1 )
 	    {
 		return dacTriggerBias1_;
-	    };
+	    }
 
 	    else 
 	    {
-		log_fatal("Bad chip ID in I3MCRawDOMStatus::GetDACTriggerBias"");
+		log_fatal("Bad chip ID in I3MCRawDOMStatus::GetDACTriggerBias");
 		return 0.0;
-	    };
+	    }
 	};
     
     
