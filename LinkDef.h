@@ -440,10 +440,6 @@
 //#pragma link C++ typedef I3TriggerPtr;
 //#pragma link C++ class boost::shared_ptr<I3Trigger>+;
 
-#pragma link C++ class I3TriggerAMANDA+;
-//#pragma link C++ typedef I3TriggerAMANDAPtr;
-//#pragma link C++ class boost::shared_ptr<I3TriggerAMANDA>+;
-
 #pragma link C++ class I3DOMCalibration+;
 //#pragma link C++ typedef I3DOMCalibPtr;
 //#pragma link C++ class boost::shared_ptr<I3DOMCalibration>+;
