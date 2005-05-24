@@ -113,7 +113,6 @@ dataclasses/I3Units.h \
 dataclasses/I3MCPMTResponseRomeo.h \
 dataclasses/I3TriggerDict.h \
 dataclasses/I3Trigger.h \
-dataclasses/I3TriggerAMANDA.h \
 dataclasses/OMKey.h \
 dataclasses/STLMapStoragePolicy.h \
 dataclasses/I3MCParticleData.h \
