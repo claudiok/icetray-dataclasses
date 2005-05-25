@@ -15,3 +15,54 @@
 TEST_GROUP(I3EventHeader);
 
 I3_SERIALIZATION_TEST(I3EventHeader);
+
+TEST(DataMembers)
+{
+
+  unsigned long runID = 12345;
+  unsigned long eventID = 67890;
+
+  unsigned int year = 2005;
+  long long int daqStartTime = 105743003998410000;
+  long long int daqEndTime = 105743003998420000;
+
+  {
+    std::ofstream ofs("/tmp/I3EventHeader-MemberTest.xml");
+    string msg = "couldn't open temporary file /tmp/I3EventHeader-MemberTest.xml";
+    ENSURE(ofs, msg.c_str());
+
+    I3EventHeader eventHeader;
+    I3Time startTime(year,daqStartTime);
+    I3Time endTime(year,daqEndTime);
+
+    eventHeader.SetEventID(eventID);
+    eventHeader.SetRunID(runID);
+    eventHeader.SetStartTime(startTime);
+    eventHeader.SetEndTime(endTime);
+
+    xml_oarchive oa(ofs);
+    oa << make_nvp("I3EventHeader", eventHeader);
+    ofs.close();
+  }
+  {
+    std::ifstream ifs("/tmp/I3EventHeader-MemberTest.xml");
+    string msg = "couldn't open temporary file /tmp/I3EventHeader-MemberTest.xml";
+    ENSURE(ifs, msg.c_str());
+    xml_iarchive ia(ifs);
+    I3EventHeader eventHeader;
+    ia >> make_nvp("I3EventHeader", eventHeader);
+
+    ENSURE(eventHeader.GetEventID() == eventID,"EventID read is not the same as was written");
+    ENSURE(eventHeader.GetRunID() == runID,"RunID read is not the same as was written");
+    ENSURE(eventHeader.GetStartTime().GetUTCYear() == year,
+	   "StartTime.year read is not the same as was written");
+    ENSURE(eventHeader.GetStartTime().GetUTCDaqTime() == daqStartTime,
+	   "StartTime.DaqTime read is not the same as was written");
+    ENSURE(eventHeader.GetEndTime().GetUTCYear() == year,
+	   "EndTime.year read is not the same as was written");
+    ENSURE(eventHeader.GetEndTime().GetUTCDaqTime() == daqEndTime,
+	   "EndTime.DaqTime read is not the same as was written");
+    ifs.close();
+  }
+  //unlink("/tmp/I3EventHeader-MemberTest.xml");
+}
