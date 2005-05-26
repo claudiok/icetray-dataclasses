@@ -42,7 +42,7 @@ TEST(DataMembers)
     I3Direction serializedDirection;
     ia >> make_nvp("I3Direction", serializedDirection);
 
-    ENSURE(direction.GetZentith() == serializedDirection.GetZenith(),"Zenith read is not the same as was written");
+    ENSURE(direction.GetZenith() == serializedDirection.GetZenith(),"Zenith read is not the same as was written");
     ENSURE(direction.GetAzimuth() == serializedDirection.GetAzimuth(),"Azimuth read is not the same as was written");
     ENSURE(direction.GetX() == serializedDirection.GetX(),"X read is not the same as was written");
     ENSURE(direction.GetY() == serializedDirection.GetY(),"Y read is not the same as was written");
