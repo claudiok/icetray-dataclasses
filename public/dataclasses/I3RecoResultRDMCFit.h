@@ -75,7 +75,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3AnalogReadout", base_object<I3RecoResultSingleTrack>(*this));
+    ar & make_nvp("I3RecoResultSingleTrack", base_object<I3RecoResultSingleTrack>(*this));
     ar & make_nvp("FitName", fitName_);
     ar & make_nvp("Parameters", parameters_);
   }
