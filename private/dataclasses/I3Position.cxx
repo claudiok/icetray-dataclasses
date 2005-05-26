@@ -92,7 +92,7 @@ void I3Position::ResetPosition()
   theta_=NAN;
   phi_=NAN;
   rho_=NAN;
-  isCalculated_=true;
+  isCalculated_=false;
 }
 //-----------------------------------------------------------
 

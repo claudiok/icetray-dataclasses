@@ -245,11 +245,6 @@ class I3Position : public TObject
     ar & make_nvp("X", x_);
     ar & make_nvp("Y", y_);
     ar & make_nvp("Z", z_);
-    //ar & make_nvp("R", r_);
-    //ar & make_nvp("Theta", theta_);
-    //ar & make_nvp("Phi", phi_);
-    //ar & make_nvp("Rho", rho_);
-    //ar & make_nvp("IsCalculated", isCalculated_);
   }
 
   void CalcSphCylFromCar() const;

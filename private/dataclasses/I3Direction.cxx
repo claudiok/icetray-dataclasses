@@ -81,7 +81,6 @@ void I3Direction::SetThetaPhi(double theta, double phi)
 	if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
 	azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
 	CalcCarFromSph();
-	isCalculated_=true;
 }
 
 //-----------------------------------------------------------
@@ -93,7 +92,7 @@ void I3Direction::ResetDirection()
   zDir_=NAN;
   zenith_=NAN;
   azimuth_=NAN;
-  isCalculated_=true;
+  isCalculated_=false;
 }
 
 //-----------------------------------------------------------
