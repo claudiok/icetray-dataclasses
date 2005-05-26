@@ -54,6 +54,10 @@ class I3EventHeader : public I3DataHeader{
   const I3EventHeader& operator=(const I3EventHeader& rhs){
     if(this == &rhs) return *this;
     I3DataHeader::operator=(rhs);
+    //Where is this I3DataHeader::operator= defined? 
+    //TObject!?
+    this->SetRunID(rhs.GetRunID());
+    this->SetEventID(rhs.GetEventID());
     return *this;
   }
 
