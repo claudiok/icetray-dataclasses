@@ -27,6 +27,7 @@
 #pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Contained,I3Energetic,I3Composite>+;
 #pragma link C++ class I3TrackImpl<I3Stopping,I3Energetic,I3Composite>+;
+#pragma link C++ class I3TrackImpl<I3Infinite,I3Energetic,I3Composite>+;
 #pragma link C++ class I3TrackImpl<I3Infinite,I3Energetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3Composite>+;
 #pragma link C++ class I3TrackImpl<I3Starting,I3NonEnergetic,I3Composite>+;
@@ -44,6 +45,7 @@
 //#pragma link C++ typedef I3F2KRecoTrackPtr;
 #pragma link C++ class I3DoubleBang+;
 #pragma link C++ class I3MCTrack+;
+#pragma link C++ class I3MCInfiniteTrack+;
 //#pragma link C++ class JAMSFitTrack+;
 
 #pragma link C++ class I3CascadeImpl<I3Directional,I3Localized,I3Energetic,I3Composite>+;
