@@ -8,6 +8,7 @@ ROOT_DICTIONARY_HEADERS := dataclasses/I3AMANDAAnalogReadout.h \
 dataclasses/I3RecoResultSingleTopShower.h \
 dataclasses/I3MCTopShower.h \
 dataclasses/I3MCTrack.h \
+dataclasses/I3MCInfiniteTrack.h \
 dataclasses/I3AMANDAPMTPulse.h \
 dataclasses/I3AnalogReadout.h \
 dataclasses/I3NonComposite.h \
