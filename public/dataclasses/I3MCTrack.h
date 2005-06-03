@@ -48,7 +48,7 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   /**
    * sets the weight of the track
    */
-  void  SetWeight(double weight_) { weight_ = weight_; }
+  void  SetWeight(double weight) { weight_ = weight; }
 
  private:
 
@@ -57,7 +57,7 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3TrackImpl", base_object< I3TrackImpl<I3Contained,
+    ar & make_nvp("I3MCTrack", base_object< I3TrackImpl<I3Contained,
 		                                              I3Energetic,
 		                                              I3Composite> >(*this));
     ar & make_nvp("Weight", weight_ );
