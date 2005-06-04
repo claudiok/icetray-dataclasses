@@ -230,8 +230,8 @@ class I3Direction : public TObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("Zenith", zenith_);
-    ar & make_nvp("Azimuth", azimuth_);
+    ar & make_nvp("Zen", zenith_);
+    ar & make_nvp("Azi", azimuth_);
   }
 
   // ROOT macro
