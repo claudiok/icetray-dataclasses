@@ -44,7 +44,6 @@ class I3Directional
    * sets the direction of the track
    */
   void SetDir(Double_t zen, Double_t azi) {
-    log_debug ("SETTING DIR %f, %f", zen, azi);
     dir_.SetDirection(zen,azi);
   }
 
@@ -58,30 +57,24 @@ class I3Directional
    * gets the zenith of the cascade
    */
   Double_t GetZenith() const {
-    log_debug ("GETTING ZEN: %f",
-	       GetDir ().GetZenith ());
     return GetDir().GetZenith();}
 
   /**
    * sets the zenith of the cascade
    */
   void SetZenith(Double_t zen) {
-    log_debug ("SETTING ZEN: %f", zen);
     SetDir (zen, dir_.GetAzimuth());}
 
   /**
    * gets the azimuth of the cascade
    */
   Double_t GetAzimuth() const {
-    log_debug ("GETTING AZI: %f",
-	       GetDir ().GetAzimuth ());
     return GetDir().GetAzimuth();}
 
   /**
    * sets the Azimuth of the cascade
    */
   void SetAzimuth(Double_t azi) {
-    log_debug ("SETTING AZI: %f", azi);
     SetDir (dir_.GetZenith (), azi);
   }
 
