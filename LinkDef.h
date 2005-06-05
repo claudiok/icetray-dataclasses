@@ -144,6 +144,10 @@
 //#pragma link C++ typedef I3DOMCalibPtr;
 //#pragma link C++ class I3DOMCalibPtr+;
 
+#pragma link C++ class I3AMANDACalibration+;
+//#pragma link C++ typedef MapPolicy<OMKey,I3AMANDAOMCalibPtr>::ThePolicy;
+//#pragma link C++ class MapPolicy<OMKey,I3AMANDAOMCalibPtr>::ThePolicy+;
+
 #pragma link C++ class I3MCHitSeries+;
 //#pragma link C++ typedef VectorPolicy<I3MCHit>::ThePolicy;
 //#pragma link C++ class VectorPolicy<I3MCHit>::ThePolicy+;
@@ -445,6 +449,14 @@
 #pragma link C++ class I3DOMCalibration+;
 //#pragma link C++ typedef I3DOMCalibPtr;
 //#pragma link C++ class boost::shared_ptr<I3DOMCalibration>+;
+
+#pragma link C++ class I3AMANDAOMCalib+;
+//#pragma link C++ typedef I3AMANDAOMCalibPtr;
+//#pragma link C++ class boost::shared_ptr<I3AMANDAOMCalib>+;
+
+#pragma link C++ class I3AMANDAOMCalib_XTalk+;
+//#pragma link C++ typedef I3AMANDAOMCalib_XTalkPtr;
+//#pragma link C++ class boost::shared_ptr<I3AMANDAOMCalib_XTalk>+;
 
 #pragma link C++ class I3Calibration+;
 //#pragma link C++ typedef I3CalibPtr;
