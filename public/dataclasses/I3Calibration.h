@@ -17,6 +17,7 @@
 
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/I3InIceCalibration.h"
+#include "dataclasses/I3AMANDACalibration.h"
 //#include "dataclasses/I3IceTopCalibration.h"
 
 #include <TObject.h>
@@ -40,6 +41,16 @@ public:
 	    return inIceCalibration_;
 	};
 
+    const I3AMANDACalibration& GetAMANDACalibration() const 
+	{
+	    return AMANDACalibration_;
+	};
+    
+    I3AMANDACalibration& GetAMANDACalibration() 
+	{
+	    return AMANDACalibration_;
+	};
+
 //    const I3IceTopCalibration& GetIceTopCalibration() const
 //	{
 //	    return iceTopCalibration_;
@@ -56,8 +67,9 @@ public:
 	};
     
 private:
-    I3InIceCalibration inIceCalibration_;
-    //I3IceTopCalibration fIceTopCalibration;
+    I3InIceCalibration  inIceCalibration_;
+    I3AMANDACalibration AMANDACalibration_;
+    //I3IceTopCalibration fIceTopCalibration_;
     
     I3Calibration(const I3Calibration& calibration);
     const I3Calibration& operator=(const I3Calibration& calibration);
