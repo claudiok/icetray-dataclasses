@@ -37,6 +37,8 @@ dataclasses/I3Contained.h \
 dataclasses/I3OMSelectionDict.h \
 dataclasses/I3CoreLocalized.h \
 dataclasses/I3DOMCalibration.h \
+dataclasses/I3AMANDAOMCalib.h \
+dataclasses/I3AMANDAOMCalib_XTalk.h \
 dataclasses/I3DOMLaunch.h \
 dataclasses/I3PMTPulse.h \
 dataclasses/I3DataHeader.h \
@@ -87,6 +89,7 @@ dataclasses/I3IceTopParticle.h \
 dataclasses/I3StationMap.h \
 dataclasses/I3Stopping.h \
 dataclasses/I3InIceCalibration.h \
+dataclasses/I3AMANDACalibration.h \
 dataclasses/I3InIceGeometry.h \
 dataclasses/I3SurfModuleGeo.h \
 dataclasses/I3InIceParticle.h \
