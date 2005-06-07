@@ -89,6 +89,7 @@ private:
   ClassDef(I3MCPMTResponse,1);
 };
 
+
 inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)
 {
   resp.ToStream(o);
