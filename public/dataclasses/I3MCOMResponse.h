@@ -66,12 +66,12 @@ class I3MCOMResponse : public I3OMResponse
   /** 
    * Add a MCPMTResponse to the MCOMResponse by setting the pointer
    */
-  void SetMCPMTResponse(I3MCPMTResponsePtr fResp_) {
+  void SetMCPMTResponse(I3MCPMTResponsePtr resp) {
     if(mCPMTResponse_) {
       log_fatal("An MC PMT Response already exists.");
       return;
     }
-    mCPMTResponse_ = fResp_;
+    mCPMTResponse_ = resp;
   }
 
   /**
@@ -106,16 +106,19 @@ class I3MCOMResponse : public I3OMResponse
 
   friend class boost::serialization::access;
 
-template <class Archive>
-  void serialize(Archive& ar, unsigned version){
-  ar & make_nvp("MCHitSeries",mCHitSeries_);
-  ar & make_nvp("MCPMTResponse",mCPMTResponse_);
-  ar & make_nvp("PMTPulseVect",pMTPulseVect_);
- }
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version){
+    ar & make_nvp("I3OMResponse",base_object<I3OMResponse>(*this));
+    ar & make_nvp("MCHitSeries",mCHitSeries_);
+    ar & make_nvp("MCPMTResponse",mCPMTResponse_);
+    ar & make_nvp("PMTPulseVect",pMTPulseVect_);
+  }
 
   // ROOT macro
   ClassDef(I3MCOMResponse,1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3MCOMResponse);
 
 /** 
  * pointer type to insulate users from memory management
