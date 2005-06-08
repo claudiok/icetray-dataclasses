@@ -51,7 +51,7 @@ vector<double> I3AMANDAAnalogReadout::GetTOTs() {
     } 
 
     if (!isnan(nextTE)) {
-      theTOTs.push_back(*LEiter - nextTE);
+      theTOTs.push_back(nextTE -*LEiter);
     }
   }
 
