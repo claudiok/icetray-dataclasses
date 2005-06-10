@@ -75,6 +75,7 @@ dataclasses/I3EventHeader.h \
 dataclasses/I3F2KRecoCascade.h \
 dataclasses/I3CompleteCascade.h \
 dataclasses/I3F2KRecoTrack.h \
+dataclasses/I3F2KRecoInfiniteTrack.h \
 dataclasses/I3ShowerCore.h \
 dataclasses/I3GaussianPMTPulse.h \
 dataclasses/I3ShowerDirection.h \
