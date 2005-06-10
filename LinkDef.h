@@ -43,6 +43,7 @@
 #pragma link C++ class I3BasicTrack+;
 #pragma link C++ class I3F2KRecoTrack+;
 //#pragma link C++ typedef I3F2KRecoTrackPtr;
+#pragma link C++ class I3F2KRecoInfiniteTrack+;
 #pragma link C++ class I3DoubleBang+;
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3MCInfiniteTrack+;
