@@ -13,6 +13,8 @@
 #define I3GAUSSIANPMTPULSE_H_INCLUDED
 
 #include "dataclasses/I3PMTPulse.h"
+#include "dataclasses/I3Units.h"
+#include "dataclasses/I3Constants.h"
 
 using namespace I3Constants;
 using namespace I3Units;
