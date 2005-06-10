@@ -10,7 +10,7 @@
 */
 
 #include "I3TrackImpl.h"
-#include "I3Infinite.h"
+#include "I3Contained.h"
 #include "I3NonEnergetic.h"
 #include "I3NonComposite.h"
 
@@ -25,7 +25,7 @@
  *
  * It is intended primarily for backward compatibility.
  */
-class I3F2KRecoTrack : public I3TrackImpl<I3Infinite,
+class I3F2KRecoTrack : public I3TrackImpl<I3Contained,
                                           I3NonEnergetic,
                                           I3NonComposite>
 {
@@ -48,9 +48,9 @@ class I3F2KRecoTrack : public I3TrackImpl<I3Infinite,
     void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3F2KRecoTrack",
-		  base_object< I3TrackImpl< I3Infinite,
-                                              I3NonEnergetic,
-                                              I3NonComposite> >(*this));
+		  base_object< I3TrackImpl< I3Contained,
+                                            I3NonEnergetic,
+                                            I3NonComposite> >(*this));
   }
 
   //ROOT macro
