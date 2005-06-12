@@ -27,6 +27,21 @@ class I3RecoPulseSeries : public TObject, public STLVectorStoragePolicy<I3RecoPu
   I3RecoPulseSeries() {};
   virtual ~I3RecoPulseSeries() {};
 
+  double GetFirstPulseTime()
+  {
+    if(this->size())
+    {
+      double min = (*this->begin())->GetTime();
+      I3RecoPulseSeries::iterator iter;
+      for(iter=this->begin(); iter!=this->end(); iter++)
+      {
+        if(min>(*iter)->GetTime()) min=(*iter)->GetTime();
+      }
+      return(min);
+    }
+    else return(NAN);
+  };
+                                                                                                                                                             
   virtual void ToStream(ostream& o) const
   {
     o<<"[ I3RecoPulseSeries: \n";
