@@ -45,13 +45,13 @@ vector<double> I3AMANDAAnalogReadout::GetTOTs() {
       if (isnan(*TEiter)) continue;
 
       if ((*TEiter > *LEiter) &&
-	  isnan(nextTE) || *TEiter < nextTE) {
+	  (isnan(nextTE) || *TEiter < nextTE)) {
 	nextTE = *TEiter;
       }
     } 
 
     if (!isnan(nextTE)) {
-      theTOTs.push_back(*LEiter - nextTE);
+      theTOTs.push_back(nextTE -*LEiter);
     }
   }
 
