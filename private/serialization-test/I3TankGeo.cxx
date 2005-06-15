@@ -1,7 +1,7 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3PMTPulseVect.cxx 7032 2005-04-27 21:44:45Z olivas $
+    $Id: I3TankGeo.cxx 7032 2005-04-27 21:44:45Z olivas $
 
     @version $Revision: 1.1 $
     @date $Date: 2005-04-27 17:44:45 -0400 (Wed, 27 Apr 2005) $
@@ -10,9 +10,10 @@
 */
 
 #include "icetray/test/serialization-test.h"
-#include "dataclasses/I3PMTPulseVect.h"
+#include "dataclasses/I3TankGeo.h"
 
-TEST_GROUP(I3PMTPulseVect);
+TEST_GROUP(I3TankGeo);
 
-I3_SERIALIZATION_TEST(I3PMTPulseVect);
- 
+I3_SERIALIZATION_TEST(I3TankGeo);
+
+I3_VIRTUAL_SERIALIZATION_TEST(I3SurfModuleGeo,I3TankGeo);

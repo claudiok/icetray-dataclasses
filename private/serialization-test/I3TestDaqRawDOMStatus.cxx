@@ -1,7 +1,7 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3PMTPulseVect.cxx 7032 2005-04-27 21:44:45Z olivas $
+    $Id: I3TestDaqRawDOMStatus.cxx 7032 2005-04-27 21:44:45Z olivas $
 
     @version $Revision: 1.1 $
     @date $Date: 2005-04-27 17:44:45 -0400 (Wed, 27 Apr 2005) $
@@ -10,9 +10,8 @@
 */
 
 #include "icetray/test/serialization-test.h"
-#include "dataclasses/I3PMTPulseVect.h"
+#include "dataclasses/I3TestDaqRawDOMStatus.h"
 
-TEST_GROUP(I3PMTPulseVect);
+TEST_GROUP(I3TestDaqRawDOMStatus);
 
-I3_SERIALIZATION_TEST(I3PMTPulseVect);
- 
+I3_SERIALIZATION_TEST(I3TestDaqRawDOMStatus);
