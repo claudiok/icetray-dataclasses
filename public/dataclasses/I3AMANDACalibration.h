@@ -71,6 +71,16 @@ public:
     //const I3InIceCalibration& operator=(const I3InIceCalibration& calibration);
     
     ClassDef(I3AMANDACalibration,1);    
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3AMANDACalibration",
+		  base_object< STLMapStoragePolicy<OMKey, I3AMANDAOMCalibPtr> >(*this));
+  }
+
 };
 
 /**

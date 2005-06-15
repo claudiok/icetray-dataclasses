@@ -41,6 +41,20 @@ class I3CalibratedDOMStatus
   void SetSPEWidth(double width){speWidth_ = width;}
   
   double GetSPEWidth() const {return speWidth_;}
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("samplingRateA",samplingRateA_);
+    ar & make_nvp("samplingRateB",samplingRateB_);
+    ar & make_nvp("PMTGain",PMTGain_);
+    ar & make_nvp("peakToValley",peakToValley_);
+    ar & make_nvp("speMean",speMean_);
+    ar & make_nvp("speWidth",speWidth_);
+  }
+
 };
 
 typedef shared_ptr<I3CalibratedDOMStatus> I3CalibratedDOMStatusPtr;

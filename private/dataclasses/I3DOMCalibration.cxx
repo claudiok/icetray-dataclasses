@@ -7,8 +7,8 @@
 I3DOMCalibration::I3DOMCalibration()
     : 
   //fDate(NAN), fDOMId(0), 
-      fTemperature(NAN),
-      fFADCGain(NAN), fFADCPedestal(NAN)
+      temperature_(NAN),
+      fadcGain_(NAN), fadcPedestal_(NAN)
       //      fPMTHighVoltage(NAN), fPedestalVoltage(NAN),
       //      fPeakToValley(NAN), fSPEMean(NAN), fSPEWidth(NAN),
       //      fSamplingRate0(NAN), fSamplingRate1(NAN)
@@ -19,9 +19,9 @@ void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
 {
     struct LinearFit fit;
     
-    fit.fSlope = slope;
-    fit.fIntercept = intercept;
-    fit.fRegressCoeff = regress_coeff;
+    fit.slope = slope;
+    fit.intercept = intercept;
+    fit.regressCoeff = regress_coeff;
     
     GetATWDById(id)[channel][127-bin] = fit;
 }
@@ -43,7 +43,7 @@ double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel,
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
        
-    return (count*fit.fSlope)/GetATWDGain(channel);
+    return (count*fit.slope)/GetATWDGain(channel);
 }
 
 
@@ -64,7 +64,7 @@ int I3DOMCalibration::GetPedestalSubtracted(int id,  int channel,
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
        
-    return count-(int)((fe_pedestal- fit.fIntercept)/fit.fSlope);
+    return count-(int)((fe_pedestal- fit.intercept)/fit.slope);
 }
 
 
@@ -73,10 +73,10 @@ void I3DOMCalibration::SetATWDFreqParameters(int chip,
 {
     struct LinearFit fit;
     
-    fit.fSlope = slope;
-    fit.fIntercept = intercept;
-    fit.fRegressCoeff = regress_coeff;
-    fATWDFreq.insert(pair<int, LinearFit> (chip, fit));
+    fit.slope = slope;
+    fit.intercept = intercept;
+    fit.regressCoeff = regress_coeff;
+    atwdFreq_.insert(pair<int, LinearFit> (chip, fit));
 }
 
 double I3DOMCalibration::GetATWDVoltage(int id,  int channel, 
@@ -95,7 +95,7 @@ double I3DOMCalibration::GetATWDVoltage(int id,  int channel,
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
        
-    return ((fit.fSlope*count + fit.fIntercept) - fe_pedestal) / GetATWDGain(channel);
+    return ((fit.slope*count + fit.intercept) - fe_pedestal) / GetATWDGain(channel);
 }
 
 map<int,map<int,LinearFit> >& 
@@ -104,9 +104,9 @@ I3DOMCalibration::GetATWDById(int id)
     switch(id)
     {
     case 0:
-	return fATWD0;
+	return atwd0_;
     case 1:
-	return fATWD1;
+	return atwd1_;
     default:
       {
 	log_fatal("Invalid ATWD Id in I3DOMCalibration");
@@ -119,28 +119,28 @@ I3DOMCalibration::GetATWDById(int id)
 
 void I3DOMCalibration::SetATWDGain(int channel, double gain, double gainErr)
 {
-    fAmpGains.insert(pair<int,double> (channel, gain));
-    fAmpGainErrs.insert(pair<int,double> (channel, gainErr));
+    ampGains_.insert(pair<int,double> (channel, gain));
+    ampGainErrs_.insert(pair<int,double> (channel, gainErr));
 }
 
 double I3DOMCalibration::GetATWDGain(int channel)
 {
-    if ( ! fAmpGains.count(channel) )
+    if ( ! ampGains_.count(channel) )
     {
 	log_fatal("Gain not found for ATWD channel in I3DOMCalibration");
     }
     
-    return fAmpGains[channel];
+    return ampGains_[channel];
 }
 
 double I3DOMCalibration::GetATWDGainErr(int channel)
 {
-    if ( ! fAmpGainErrs.count(channel) )
+    if ( ! ampGainErrs_.count(channel) )
     {
 	log_fatal("Gain error not found for ATWD channel in I3DOMCalibration");
     }
     
-    return fAmpGainErrs[channel];
+    return ampGainErrs_[channel];
 }
 
 // void I3DOMCalibration::SetSamplingRate(int id, double rate)

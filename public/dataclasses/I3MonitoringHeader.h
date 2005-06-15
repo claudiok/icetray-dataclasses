@@ -40,6 +40,19 @@ class I3MonitoringHeader : public I3DataHeader
     int run_;
 
  ClassDef(I3MonitoringHeader,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("om",om_);
+    ar & make_nvp("mbid",mbid_);
+    ar & make_nvp("size",size_);
+    ar & make_nvp("type",type_);
+    ar & make_nvp("run",run_);
+  }
+
 };
 
 typedef shared_ptr<I3MonitoringHeader> I3MonitoringHeaderPtr;

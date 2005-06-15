@@ -64,7 +64,17 @@ class I3OMGeoIceTop : public I3OMGeo {
 
   ClassDef (I3OMGeoIceTop, 1);
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3OMGeoIceTop",base_object<I3OMGeo>(*this));
+  }
+
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3OMGeoIceTop);
 
 /**
  * define a pointer with the current storage policy

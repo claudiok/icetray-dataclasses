@@ -16,6 +16,7 @@
 #define I3RAWDOMSTATUS_PROPOSAL_H
 
 #include <string>
+#include "StoragePolicy.h"
 
 using namespace std;
 
@@ -134,7 +135,17 @@ public:
      */
     virtual double GetFEPedestal() const = 0;
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    //This method intentionally left blank
+  }
+
 };	
+
+BOOST_IS_ABSTRACT(I3RawDOMStatus);
 
 /**
  * Pointer typedeffed away to insulate users from the 

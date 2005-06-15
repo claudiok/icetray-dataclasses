@@ -11,6 +11,7 @@
 #define I3MONITORING_H
 
 #include <iostream>
+#include "StoragePolicy.h"
 
 using namespace std;
 
@@ -41,6 +42,17 @@ class I3Monitoring
     int temperature_;
     int SPE_Scaler_;
     int MPE_Scaler_;
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("temperature",temperature_);
+    ar & make_nvp("SPE_Scaler",SPE_Scaler_);
+    ar & make_nvp("MPE_Scaler",MPE_Scaler_);
+  }
+
 };
 
 inline ostream& operator<<(ostream& o, const I3Monitoring& m)

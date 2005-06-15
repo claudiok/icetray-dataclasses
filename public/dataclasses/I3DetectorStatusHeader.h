@@ -63,6 +63,15 @@ class I3DetectorStatusHeader : public I3DataHeader
   
   // ROOT macro
   ClassDef(I3DetectorStatusHeader,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3DataHeader",base_object<I3DataHeader>(*this));
+  }
+
 };
 
 /**

@@ -69,6 +69,15 @@ class I3DetectorStatus : public TObject
 
   //ROOT macro
   ClassDef(I3DetectorStatus,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("IcecubeStatus",icecubeStatus_);
+  }
+
 };
 
 inline ostream& operator<<(ostream& o,const I3DetectorStatus& stat)

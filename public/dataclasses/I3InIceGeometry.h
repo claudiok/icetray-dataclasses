@@ -71,6 +71,16 @@ class I3InIceGeometry : public TObject,
 
   // ROOT macro
   ClassDef(I3InIceGeometry,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3IceCubeStatus",
+		  base_object< STLMapStoragePolicy<OMKey,I3OMGeoPtr> >(*this));
+  }
+
 };
 
 /**

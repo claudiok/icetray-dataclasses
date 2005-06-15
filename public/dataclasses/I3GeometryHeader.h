@@ -103,6 +103,17 @@ class I3GeometryHeader : public I3DataHeader
   
   // ROOT macro
   ClassDef(I3GeometryHeader,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("numOMs",numOMs_);
+    ar & make_nvp("numStrings",numStrings_);
+    ar & make_nvp("arrayName",arrayName_);
+  }
+
 };
 
 /**

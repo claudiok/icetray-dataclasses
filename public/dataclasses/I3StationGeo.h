@@ -55,6 +55,15 @@ class I3StationGeo : public TObject, public STLVectorStoragePolicy<I3SurfModuleG
 
   ClassDef (I3StationGeo, 1);
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3StationGeo", 
+		  base_object< STLVectorStoragePolicy<I3SurfModuleGeoPtr> >(*this));
+  }
+
 };
 
 typedef shared_ptr<I3StationGeo>  I3StationGeoPtr;

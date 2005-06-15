@@ -17,7 +17,7 @@
 
 #include "dataclasses/StationKey.h"
 #include "dataclasses/I3StationGeo.h"
-#include "dataclasses/I3TankGeo.h"
+//#include "dataclasses/I3TankGeo.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -61,6 +61,15 @@ class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3St
  private:
 
   ClassDef (I3StationMap, 1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3StationMap",
+		  base_object< STLMapStoragePolicy<StationKey, I3StationGeoPtr> >(*this));
+  }
 
 };
 

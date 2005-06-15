@@ -59,6 +59,15 @@ class I3IceCubeStatus
 
   // ROOT macro
   ClassDef(I3IceCubeStatus,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3IceCubeStatus",
+		  base_object< STLMapStoragePolicy<OMKey,I3DOMStatus> >(*this));
+  }
 };
 
 inline ostream& operator<<(ostream& o, const I3IceCubeStatus& status)

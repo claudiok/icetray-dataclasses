@@ -74,6 +74,16 @@ class I3Geometry : public TObject
 
   //ROOT macro
   ClassDef(I3Geometry,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("inIce",inIce_);
+    ar & make_nvp("top",top_);
+  }
+
 };
 
 /** 

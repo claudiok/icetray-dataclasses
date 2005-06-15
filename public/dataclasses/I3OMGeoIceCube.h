@@ -58,7 +58,18 @@ class I3OMGeoIceCube : public I3OMGeo
  private:
 
   ClassDef(I3OMGeoIceCube,1);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3OMGeoIceCube", base_object<I3OMGeo>(*this));
+  }
+
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3OMGeoIceCube);
 
 /**
  * Pointer typedeffed away to insulate users from the 

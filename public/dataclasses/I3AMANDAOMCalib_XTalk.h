@@ -56,6 +56,18 @@ class I3AMANDAOMCalib_XTalk : public TObject
     return out.str();
   }
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("sender",sender_);
+    ar & make_nvp("timehigh",timehigh_);
+    ar & make_nvp("timelow",timelow_);
+    ar & make_nvp("width",width_);
+    ar & make_nvp("threshold",threshold_);
+  }
+
   ClassDef(I3AMANDAOMCalib_XTalk,1);
 };
 

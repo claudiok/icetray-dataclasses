@@ -42,15 +42,38 @@ using namespace std;
 
 struct LinearFit
 {
-    double fSlope;
-    double fIntercept;
-    double fRegressCoeff;
+  double slope;
+  double intercept;
+  double regressCoeff;
+
+  private: 
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("slope",slope);
+    ar & make_nvp("intercept",intercept);
+    ar & make_nvp("regressCoeff",regressCoeff);
+  }
 };
 
 struct ChargeHistogramEntry
 {
   double charge;
   double count;
+
+  private: 
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("charge",charge);
+    ar & make_nvp("count",count);
+  }
 };
 
 struct ChargeHistogram
@@ -65,6 +88,27 @@ struct ChargeHistogram
   double peakToValley;
   double noiseRate;
   vector<ChargeHistogramEntry> entries;
+
+  private: 
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("exponentialAmplitude",exponentialAmplitude);
+    ar & make_nvp("exponentialWidth",exponentialWidth);
+    ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
+    ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
+    ar & make_nvp("gaussianMean",gaussianMean);
+    ar & make_nvp("gaussianWidth",gaussianWidth);
+    ar & make_nvp("voltage",voltage);
+    ar & make_nvp("convergent",convergent);
+    ar & make_nvp("peakToValley",peakToValley);
+    ar & make_nvp("noiseRate",noiseRate);
+    ar & make_nvp("entries",entries);
+  }
+
 };
 
 class I3DOMCalibration
@@ -74,17 +118,17 @@ public:
 	
   double GetTemperature()
     {
-      return fTemperature;
+      return temperature_;
     };
   
   double GetFADCGain()
     {
-      return fFADCGain;
+      return fadcGain_;
     };
   
   double GetFADCPedestal()
     {
-      return fFADCPedestal;
+      return fadcPedestal_;
     };
  
   /**
@@ -94,8 +138,8 @@ public:
   double GetATWDfreqSlope(int chip)
     {  
       struct LinearFit fit;
-      fit = fATWDFreq[chip];
-      return  fit.fSlope;
+      fit = atwdFreq_[chip];
+      return  fit.slope;
     };
 
   /**
@@ -105,8 +149,8 @@ public:
   double GetATWDfreqIntercept(int chip)
     {  
       struct LinearFit fit;
-      fit = fATWDFreq[chip];
-      return  fit.fIntercept;
+      fit = atwdFreq_[chip];
+      return  fit.intercept;
     };
 
   /**
@@ -116,8 +160,8 @@ public:
   double GetATWDfreqRegressCoeff(int chip)
     {  
       struct LinearFit fit;
-      fit = fATWDFreq[chip];
-      return  fit.fRegressCoeff;
+      fit = atwdFreq_[chip];
+      return  fit.regressCoeff;
     };
   
   /**
@@ -172,7 +216,7 @@ public:
   
   void SetTemperature(double temperature)
     {
-      fTemperature = temperature;
+      temperature_ = temperature;
     };
   
   // Set parameters for conversion of count to voltage 
@@ -196,8 +240,8 @@ public:
   void SetFADCParameters(double pedestal,
 			 double gain)
     {
-      fFADCPedestal = pedestal;
-      fFADCGain     = gain;
+      fadcPedestal_ = pedestal;
+      fadcGain_     = gain;
     };
 
   map<unsigned int,ChargeHistogram>& GetChargeHistograms()
@@ -239,29 +283,29 @@ public:
     unsigned long long mainboardId_;
     
     // Simple data types
-    double  fTemperature;
+    double  temperature_;
     
     // Gain and pedestal values for FADC
-    double fFADCGain;
-    double fFADCPedestal;
+    double fadcGain_;
+    double fadcPedestal_;
 
     //    double fPMTHighVoltage;
-    double fPedestalVoltage;
+    double pedestalVoltage_;
    
     //double fOnePEinPC;
     //double fWidth1PEinPC;
 
     // Gain and error on gain for ATWD channels.
     // The key corresponds to the channel.
-    map<int, double> fAmpGains;
-    map<int, double> fAmpGainErrs;
+    map<int, double> ampGains_;
+    map<int, double> ampGainErrs_;
     
-    map<int, LinearFit> fATWDFreq;
+    map<int, LinearFit> atwdFreq_;
 
     // First key corresponds to channel.
     // Key in internal map corresponds to bin.
-    map< int, map<int,LinearFit> > fATWD0;
-    map< int, map<int,LinearFit> > fATWD1;
+    map< int, map<int,LinearFit> > atwd0_;
+    map< int, map<int,LinearFit> > atwd1_;
 
     map< int, map<int,LinearFit> >& GetATWDById(int id);
     map<unsigned int,ChargeHistogram> chargeHistograms_;
@@ -269,6 +313,24 @@ public:
     // Copy constructor and assignment operator
     I3DOMCalibration(const I3DOMCalibration& calibration);
     const I3DOMCalibration& operator=(const I3DOMCalibration& calibration);
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("mainboardId",mainboardId_);
+    ar & make_nvp("temperature",temperature_);
+    ar & make_nvp("fadcGain",fadcGain_);
+    ar & make_nvp("fadcPedestal",fadcPedestal_);
+    ar & make_nvp("pedestalVoltage",pedestalVoltage_);
+    ar & make_nvp("ampGains",ampGains_);
+    ar & make_nvp("ampGainErrs",ampGainErrs_);
+    ar & make_nvp("atwdFreq",atwdFreq_);
+    ar & make_nvp("atwd0",atwd0_);
+    ar & make_nvp("atwd1",atwd1_);
+    ar & make_nvp("chargeHistograms",chargeHistograms_);
+  }
 
 };
 

@@ -71,6 +71,16 @@ public:
     //const I3InIceCalibration& operator=(const I3InIceCalibration& calibration);
     
     ClassDef(I3InIceCalibration,1);    
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3IceCubeStatus",
+		  base_object< STLMapStoragePolicy<OMKey,I3DOMCalibPtr> >(*this));
+  }
+
 };
 
 /**

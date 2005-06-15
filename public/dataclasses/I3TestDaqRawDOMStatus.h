@@ -53,6 +53,16 @@ public:
 
  private:
     mutable map<string,unsigned int> rawStatus_;
+
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3RawDOMStatus", base_object<I3RawDOMStatus>(*this));
+    ar & make_nvp("rawStatus",rawStatus_);
+  }
+
 };
 
 typedef shared_ptr<I3TestDaqRawDOMStatus> I3TestDaqRawDOMStatusPtr;
