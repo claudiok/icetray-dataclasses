@@ -6,12 +6,8 @@
 
 I3DOMCalibration::I3DOMCalibration()
     : 
-  //fDate(NAN), fDOMId(0), 
       temperature_(NAN),
       fadcGain_(NAN), fadcPedestal_(NAN)
-      //      fPMTHighVoltage(NAN), fPedestalVoltage(NAN),
-      //      fPeakToValley(NAN), fSPEMean(NAN), fSPEWidth(NAN),
-      //      fSamplingRate0(NAN), fSamplingRate1(NAN)
 {};
 
 void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
@@ -28,8 +24,8 @@ void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
 
 
 double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel, 
-					int bin, double fe_pedestal,
-					int count)
+						      int bin, double fe_pedestal,
+						      int count)
 {
     if ( ! GetATWDById(id).count(channel) )
     {
@@ -47,9 +43,9 @@ double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel,
 }
 
 
-int I3DOMCalibration::GetPedestalSubtracted(int id,  int channel, 
-					int bin, double fe_pedestal,
-					int count)
+int I3DOMCalibration::GetPedestalSubtractedCount(int id,  int channel, 
+						 int bin, double fe_pedestal,
+						 int count)
 
 {
     if ( ! GetATWDById(id).count(channel) )
@@ -143,32 +139,4 @@ double I3DOMCalibration::GetATWDGainErr(int channel)
     return ampGainErrs_[channel];
 }
 
-// void I3DOMCalibration::SetSamplingRate(int id, double rate)
-// {
-//     switch(id)
-//     {
-//     case 0:
-// 	fSamplingRate0 = rate;
-// 	break;
-//     case 1:
-// 	fSamplingRate1 = rate;
-// 	break;
-//     default:
-// 	log_fatal("Invalid ATWD Id in I3DOMCalibration");
-//     }
-// }
-
-// double I3DOMCalibration::GetSamplingRate(int id)
-// {
-//     switch(id)
-//     {
-//     case 0:
-// 	return fSamplingRate0;
-//     case 1:
-// 	return fSamplingRate1;
-//     default:	
-// 	log_fatal("Sampling rate not found for ATWD ID in I3DOMCalibration");
-//     }
-//     return 0;
-// }
 

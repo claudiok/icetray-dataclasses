@@ -30,298 +30,373 @@ using namespace std;
 class I3DOMLaunch : public I3DigitalLaunch
 {
 
- public:  
+public:  
 
-  enum ATWDselect {ATWDa,ATWDb};
+    enum ATWDselect {ATWDa,ATWDb};
 
- protected:
+protected:
 
-  /**  
-   * This is the time (in nsec) in 25 nsec units, of the DOM clock 
-   * which launches the ATWD (launch is synchronized to the first clock 
-   * transition AFTER the discriinator fires 
-   */
-  double startTime_;  
+    /**  
+     * This is the time (in nsec) in 25 nsec units, of the DOM clock 
+     * which launches the ATWD (launch is synchronized to the first clock 
+     * transition AFTER the discriinator fires 
+     */
+    double startTime_;  
 
-  /** 
-   * This is the ATWD time bin size, in nsec 
-   */
-  double aTWDBinSize_;
+    /** 
+     * This is the ATWD time bin size, in nsec 
+     */
+    double aTWDBinSize_;
 
-  /**  
-   * This holds the trigger information -somewhat of a placeholder for now 
-   */
-  int trigger_;
-  /**  
-   * This tells which ATWD in the DOM was used
-   */
+    /**  
+     * This holds the trigger information -somewhat of a placeholder for now 
+     */
+    int trigger_;
+  
+    /**  
+     * This tells which ATWD in the DOM was used
+     */
+    ATWDselect whichATWD_;
 
-  ATWDselect whichATWD_;
+    /** 
+     * These contain the 4 ATWD waveforms - same time bins, but different 
+     * gains.  All are 128 samples 
+     */
+    vector<int> rawATWD0_;
 
-  /** 
-   * These contain the 4 ATWD waveforms - same time bins, but different 
-   * gains.  All are 128 samples 
-   */
-  vector<int> aTWD0_;
+    /** These contain the 4 ATWD waveforms - same time bins, but different 
+     *  gains. All are 128 samples 
+     */
+    vector<int> rawATWD1_;
 
-  /** These contain the 4 ATWD waveforms - same time bins, but different 
-   * gains.  All are 128 samples 
-   */
-  vector<int> aTWD1_;
+    /** 
+     * These contain the 4 ATWD waveforms - same time bins, but different 
+     * gains.  All are 128 samples 
+     */
+    vector<int> rawATWD2_;
 
-  /** 
-   * These contain the 4 ATWD waveforms - same time bins, but different 
-   * gains.  All are 128 samples 
-   */
-  vector<int> aTWD2_;
+    /** 
+     * These contain the 4 ATWD waveforms - same time bins, but different 
+     * gains.  All are 128 samples 
+     */
+    vector<int> rawATWD3_;
 
-  /** 
-   * These contain the 4 ATWD waveforms - same time bins, but different 
-   * gains.  All are 128 samples 
-   */
-  vector<int> aTWD3_;
+    /** 
+     * This holds the 40 MHz FADC data 
+     */
+    vector<int> rawFADC_;
 
-  /** 
-   * This holds the 40 MHz FADC data 
-   */
-  vector<int> fADC_;
+    /**
+     * This holds the pedestal subtracted and gain-corrected FADC data
+     */
+    vector<double> calibratedFADC_;
 
-  /**
-   * This holds the pedestal subtracted and gained FADC data
-   */
-  vector<double> pgfADC_;
-
-  /**
-   * This holds the combined ATWD waveform (over the 3 channels).
-   * The combination utilizes the calibration information.
-   */
-  vector<double> combinedATWD_;
+    /**
+     * This holds the combined (pedestal subtracted and gain-corrected)
+     * ATWD waveform (over the 3 channels).
+     * The combination utilizes the calibration information.
+     */
+    vector<double> calibratedATWD_;
     
-  /** 
-   * This holds the local coincidence bit
-   */
-  bool localCoincidence_;
+    /** 
+     * This holds the local coincidence bit
+     */
+    bool localCoincidence_;
 
- public:
-  /**
-   * constructor
-   */
-  I3DOMLaunch() {startTime_=0.;}
+    /** 
+     * Has the pedestal been subtracted from the waveforms?
+     */ 
+    bool pedestalSubtractedATWD0_;
+    bool pedestalSubtractedATWD1_;
+    bool pedestalSubtractedATWD2_;
+    bool pedestalSubtractedATWD3_;
+    
+    bool pedestalSubtractedFADC_;
+    
+public:
+    /**
+     * constructor
+     */
+    I3DOMLaunch() 
+	{
+	    startTime_ = 0.0;
+	    
+	    pedestalSubtractedATWD0_ = false;
+	    pedestalSubtractedATWD1_ = false;
+	    pedestalSubtractedATWD2_ = false;
+	    pedestalSubtractedATWD3_ = false;
 
-  /**
-   * destructor
-   */
-  virtual ~I3DOMLaunch(){;}
+	    pedestalSubtractedFADC_ = false;
+	}
+
+    /**
+     * destructor
+     */
+    virtual ~I3DOMLaunch(){;}
   
-  /**
-   * return and set ATWD/FADC launch time
-   */
-  double GetStartTime() const { return startTime_; }
-  void SetStartTime(double starttime) { startTime_ = starttime; }
+    /**
+     * return and set ATWD/FADC launch time
+     */
+    double GetStartTime() const { return startTime_; }
+    void SetStartTime(double starttime) { startTime_ = starttime; }
 
-  /**
-   * return and set ATWD time bin size
-   */
-  double GetATWDBinSize() const {return aTWDBinSize_;}
-  void SetATWDBinSize(double ATWDbinsize) {aTWDBinSize_ = ATWDbinsize;}
+    /**
+     * return and set ATWD time bin size
+     */
+    double GetATWDBinSize() const {return aTWDBinSize_;}
+    void SetATWDBinSize(double ATWDbinsize) {aTWDBinSize_ = ATWDbinsize;}
 
-  /**
-   * return and set WhichATWD
-   */
+    /**
+     * return and set WhichATWD
+     */
+    ATWDselect GetWhichATWD() const {return whichATWD_;}
+    void SetWhichATWD(ATWDselect WhichATWD) {whichATWD_ = WhichATWD;}
+
+    /**
+     * return raw ATWD 0 waveform as a read-only object
+     */
+    const vector<int>& GetRawATWD0() const {return rawATWD0_;}
   
-  ATWDselect GetWhichATWD() const {return whichATWD_;}
-  void SetWhichATWD(ATWDselect WhichATWD) {whichATWD_ = WhichATWD;}
+    /**
+     * return raw ATWD 1 waveform as a read-only object
+     */
+    const vector<int>& GetRawATWD1() const {return rawATWD1_;}
 
-  /**
-   * return ATWD 0 waveform as a read-only object
-   */
-  const vector<int>& GetATWD0() const {return aTWD0_;}
-  
-  /**
-   * return ATWD 1 waveform as a read-only object
-   */
-  const vector<int>& GetATWD1() const {return aTWD1_;}
+    /**
+     * return raw ATWD 2 waveform as a read-only object
+     */
+    const vector<int>& GetRawATWD2() const {return rawATWD2_;}
 
-  /**
-   * return ATWD 2 waveform as a read-only object
-   */
-  const vector<int>& GetATWD2() const {return aTWD2_;}
+    /**
+     * return raw ATWD 3 waveform as a read-only object
+     */
+    const vector<int>& GetRawATWD3() const {return rawATWD3_;}
 
-  /**
-   * return ATWD 3 waveform as a read-only object
-   */
-  const vector<int>& GetATWD3() const {return aTWD3_;}
-
-  /**
-   * return ATWD by channel number
-   */
-    const vector<int>& GetATWD(int channel) const
+    /**
+     * return raw ATWD by channel number
+     */
+    const vector<int>& GetRawATWD(int channel) const
 	{
 	    if ( channel == 0 )
 	    {
-		return aTWD0_;
+		return rawATWD0_;
 	    }
 	    
 	    else if ( channel == 1 )
 	    {
-		return aTWD1_;
+		return rawATWD1_;
 	    }
 	    
 	    else if ( channel == 2 )
 	    {
-		return aTWD2_;
+		return rawATWD2_;
 	    }
 	    
 	    else if ( channel == 3 )
 	    {
-		return aTWD3_;
+		return rawATWD3_;
 	    }
 	    
 	    else
 	    {
-		log_fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
+		log_fatal("Bad ATWD channel in I3DOMLaunch::GetRawATWD(channel)");
                 return *(vector<int>*)0;
 	    }
 	}
     
     
-  /**
-   * return FADC waveform as a read-only object
-   */
-  const vector<int>& GetFADC() const {return fADC_;}
+    /**
+     * return raw FADC waveform as a read-only object
+     */
+    const vector<int>& GetRawFADC() const {return rawFADC_;}
 
+    /**
+     * set if pedestal is subtracted for ATWDs and FADC
+     */
+    void SetPedestalIsSubtractedATWD0(bool subtracted) { pedestalSubtractedATWD0_ = subtracted; }
+    void SetPedestalIsSubtractedATWD1(bool subtracted) { pedestalSubtractedATWD1_ = subtracted; }
+    void SetPedestalIsSubtractedATWD2(bool subtracted) { pedestalSubtractedATWD2_ = subtracted; }
+    void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
 
-  /**
-   * return the pedestal subtracted and gained FADC
-   */
-  const vector<double> &GetPGFADC () const {return pgfADC_;}
-  
-  /** 
-   * return combined ATWD waveform
-   */
-  const vector<double>& GetCombinedATWD() const
-	{
-	    return combinedATWD_;
-	}
+    void SetPedestalIsSubtractedFADC(bool subtracted) { pedestalSubtractedFADC_ = subtracted; }
     
-  /**
-   * sets the ATWD0 waveform
-   */
- void SetATWD0(const vector<int>& ATWD0data) {aTWD0_=ATWD0data;}
+    /**
+     * is pedestal subtracted for ATWDs and FADC?
+     **/
+    bool PedestalSubtractedATWD0() { return pedestalSubtractedATWD0_; }
+    bool PedestalSubtractedATWD1() { return pedestalSubtractedATWD1_; }
+    bool PedestalSubtractedATWD2() { return pedestalSubtractedATWD2_; }
+    bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
 
- /**
-  * sets the ATWD1 waveform
-  */
- void SetATWD1(const vector<int>& ATWD1data) {aTWD1_=ATWD1data;}
+    bool PedestalSubtractedFADC() { return pedestalSubtractedFADC_; }
 
- /**
-  * sets the ATWD2 waveform
-  */
- void SetATWD2(const vector<int>& ATWD2data) {aTWD2_=ATWD2data;}
-
- /**
-  * sets the ATWD2 waveform
-  */
- void SetATWD3(const vector<int>& ATWD3data) {aTWD3_=ATWD3data;}
-
-  /** 
-   * set ATWD by channel number
-   */
-    void SetATWD(int channel, const vector<int>& ATWDdata)
+    bool PedestalSubtractedATWD(int channel)
 	{
 	    if ( channel == 0 )
 	    {
-		aTWD0_ = ATWDdata;
+		return pedestalSubtractedATWD0_;
+	    }
+	    
+	    else if ( channel == 1 )
+	    {
+		return pedestalSubtractedATWD1_;
+	    }
+	    
+	    else if ( channel == 2 )
+	    {
+		return pedestalSubtractedATWD2_;
+	    }
+	    
+	    else if ( channel == 3 )
+	    {
+		return pedestalSubtractedATWD3_;
+	    }
+	    
+	    else 
+	    {
+		log_fatal("Bad ATWD channel in I3DOMLaunch::PedestalSubtractedATWD(channel)");
+		throw std::exception();
+	    }
+	}
+
+    /**
+     * return the pedestal subtracted and gain-corrected (i.e. calibrated) FADC
+     */
+    const vector<double>& GetCalibratedFADC() const 
+	{
+	    return calibratedFADC_;
+	}
+  
+    /** 
+     * return calibrated ATWD waveform
+     */
+    const vector<double>& GetCalibratedATWD() const
+	{
+	    return calibratedATWD_;
+	}
+    
+    /**
+     * sets the raw ATWD0 waveform
+     */
+    void SetRawATWD0(const vector<int>& ATWD0data) {rawATWD0_=ATWD0data;}
+
+    /**
+     * sets the raw ATWD1 waveform
+     */
+    void SetRawATWD1(const vector<int>& ATWD1data) {rawATWD1_=ATWD1data;}
+
+    /**
+     * sets the raw ATWD2 waveform
+     */
+    void SetRawATWD2(const vector<int>& ATWD2data) {rawATWD2_=ATWD2data;}
+
+    /**
+     * sets the ATWD2 waveform
+     */
+    void SetRawATWD3(const vector<int>& ATWD3data) {rawATWD3_=ATWD3data;}
+
+    /** 
+     * set ATWD by channel number
+     */
+    void SetRawATWD(int channel, const vector<int>& ATWDdata)
+	{
+	    if ( channel == 0 )
+	    {
+		rawATWD0_ = ATWDdata;
 		return;
 	    }
 	    
 	    else if ( channel == 1 )
 	    {
-		aTWD1_ = ATWDdata;
+		rawATWD1_ = ATWDdata;
 		return;
 	    }
 	    
 	    else if ( channel == 2 )
 	    {
-		aTWD2_ = ATWDdata;
+		rawATWD2_ = ATWDdata;
 		return;
 	    }
 	    
 	    else if ( channel == 3 )
 	    {
-		aTWD3_ = ATWDdata;
+		rawATWD3_ = ATWDdata;
 		return;
 	    }
 	    
 	    else 
 	    {
-		log_fatal("Bad ATWD channel in I3DOMLaunch::GetATWD(channel)");
+		log_fatal("Bad ATWD channel in I3DOMLaunch::GetRawATWD(channel)");
 		throw std::exception();
 	    }
 	}    
 
- /**
-  * sets the FADC waveform
-  */
- void SetFADC(const vector<int>& FADCdata) {fADC_=FADCdata;}
+    /**
+     * sets the raw FADC waveform
+     */
+    void SetRawFADC(const vector<int>& FADCdata) {rawFADC_=FADCdata;}
 
- /**
-  * sets the pgFADC waveform
-  */
- void SetPGFADC (const vector<double> &pgfadc_data) { pgfADC_ = pgfadc_data;}
+    /**
+     * sets the calibrated FADC waveform
+     */
+    void SetCalibratedFADC (const vector<double> &pgfadc_data) { calibratedFADC_ = pgfadc_data;}
 
-  /**
-   * sets the combined ATWD waveform
-   */
-  void SetCombinedATWD(const vector<double>& CombinedATWD) 
+    /**
+     * sets the combined ATWD waveform
+     */
+    void SetCalibratedATWD(const vector<double>& CalibratedATWD) 
 	{
-	    combinedATWD_ = CombinedATWD;
+	    calibratedATWD_ = CalibratedATWD;
 	};
 
-  /**
-   * return local coincidence bit as a read-only object
-   */
- bool GetLCBit() const {return localCoincidence_;}
+    /**
+     * return local coincidence bit as a read-only object
+     */
+    bool GetLCBit() const {return localCoincidence_;}
   
- /**
-  * sets the local coincidence bit
-  */
- void SetLCBit(const bool & LCBit) {localCoincidence_=LCBit;}
+    /**
+     * sets the local coincidence bit
+     */
+    void SetLCBit(const bool & LCBit) {localCoincidence_=LCBit;}
 
+    /**
+     * Dumps the file to the given ostream
+     */
+    virtual void ToStream(ostream& o) const
+	{
+	    I3DigitalLaunch::ToStream(o);
+	    o<<"StartTime: "<< startTime_;
+	}
 
+private:
 
- /**
-  * Dumps the file to the given ostream
-  */
- virtual void ToStream(ostream& o) const
-   {
-     I3DigitalLaunch::ToStream(o);
-     o<<"StartTime: "<<startTime_;
-   }
+    friend class boost::serialization::access;
 
- private:
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+	{
+	    ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this) );
+	    ar & make_nvp("StartTime", startTime_);
+	    ar & make_nvp("ATWDBinSize", aTWDBinSize_);
+	    ar & make_nvp("Trigger", trigger_);
+	    ar & make_nvp("WhichATWD", whichATWD_);
+	    ar & make_nvp("RawATWD0", rawATWD0_);
+	    ar & make_nvp("RawATWD1", rawATWD1_);
+	    ar & make_nvp("RawATWD2", rawATWD2_);
+	    ar & make_nvp("RawATWD3", rawATWD3_);
+	    ar & make_nvp("RawFADC", rawFADC_);
+	    ar & make_nvp("PedestalSubtractedATWD0", pedestalSubtractedATWD0_);
+	    ar & make_nvp("PedestalSubtractedATWD1", pedestalSubtractedATWD1_);
+	    ar & make_nvp("PedestalSubtractedATWD2", pedestalSubtractedATWD2_);
+	    ar & make_nvp("PedestalSubtractedATWD2", pedestalSubtractedATWD3_);
+	    ar & make_nvp("PedestalSubtractedFADC", pedestalSubtractedFADC_);
+	    ar & make_nvp("CalibratedATWD", calibratedATWD_);
+	    ar & make_nvp("CalibratedFADC", calibratedFADC_);
+	    ar & make_nvp("LocalCoincidence", localCoincidence_);
+	}
 
-  friend class boost::serialization::access;
-
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this) );
-    ar & make_nvp("StartTime", startTime_);
-    ar & make_nvp("ATWDBinSize", aTWDBinSize_);
-    ar & make_nvp("Trigger", trigger_);
-    ar & make_nvp("WhichATWD", whichATWD_);
-    ar & make_nvp("ATWD0", aTWD0_);
-    ar & make_nvp("ATWD1", aTWD1_);
-    ar & make_nvp("ATWD2", aTWD2_);
-    ar & make_nvp("ATWD3", aTWD3_);
-    ar & make_nvp("FADC", fADC_);
-    ar & make_nvp("CombinedATWD", combinedATWD_);
-    ar & make_nvp("LocalCoincidence", localCoincidence_);
-  }
-
-  // ROOT macro
-  ClassDef(I3DOMLaunch,1);
+    // ROOT macro
+    ClassDef(I3DOMLaunch,1);
 };
 
 BOOST_SHARED_POINTER_EXPORT(I3DOMLaunch);

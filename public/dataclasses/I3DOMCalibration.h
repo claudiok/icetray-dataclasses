@@ -32,7 +32,7 @@ using namespace std;
  * ATTENTION:
  * Calibration information is set assuming the bin number as it is in
  * the calibration database (reversed in time for bins 0-127).
- * Calibration information is fetched by the time-oerdered bin numbers.
+ * Calibration information is fetched by the time-ordered bin numbers.
  *
  @author Tom McCauley
 
@@ -176,11 +176,11 @@ public:
    * voltage, with the pedestal pattern subtracted 
    */
 
-  int GetPedestalSubtracted(int id,  
-		     int channel, 
-		     int bin, 
-		     double fe_pedestal,
-		     int count);
+  int GetPedestalSubtractedCount(int id,  
+				 int channel, 
+				 int bin, 
+				 double fe_pedestal,
+				 int count);
 
 
   /**
@@ -190,10 +190,10 @@ public:
    */
 
   double GetPedestalSubtractedVoltage(int id, 
-			      int channel, 
-			      int bin, 
-			      double fe_pedestal,
-			      int count);
+				      int channel, 
+				      int bin, 
+				      double fe_pedestal,
+				      int count);
 
   /**
    * Return the voltage value corresponding to the count 
