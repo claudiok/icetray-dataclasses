@@ -10,7 +10,7 @@
     @todo
 */
 
-#include "TUT/tut.h"
+#include <I3Test.h>
 
 #include <string>
 using std::string;
@@ -24,226 +24,200 @@ extern "C"
 
 #include "dataclasses/I3Time.h"
 
-namespace tut
+TEST_GROUP(I3TimeTest);
+
+
+TEST(UTinstant_jul_to_date)
 {
-  struct I3TimeTest
-  {
-
-  };
-
-  typedef test_group<I3TimeTest> factory;
-
-  typedef factory::object object;
+  UTinstant i;
+  i.j_date=2448988.5; // should be january 1st 1993
+  CalDate(&i);
+  ENSURE(i.month == 1);
+  ENSURE(i.year == 1993);
+  ENSURE(i.i_hour == 0);
+  ENSURE(i.i_minute == 0);
+  ENSURE(i.weekday==5);
+  ENSURE(i.day_of_year == 1);
 }
-
-namespace
-{
-  static tut::factory t("I3TimeTest");
-}
-
-namespace tut
-{
-  void object::test<1>() 
-  {
-    UTinstant i;
-    i.j_date=2448988.5; // should be january 1st 1993
-    CalDate(&i);
-    ensure(i.month == 1);
-    ensure(i.year == 1993);
-    ensure(i.i_hour == 0);
-    ensure(i.i_minute == 0);
-    ensure(i.weekday==5);
-    ensure(i.day_of_year == 1);
-  }
   
-  void object::test<2>()
-  {
-    UTinstant i;
-    i.month=1;
-    i.year=1993;
-    i.day=1;
-    i.i_hour=0;
-    i.i_minute=0;
-    i.second = 0;
-    JulDate(&i);
-    ensure_distance(i.j_date,2448988.5,0.00000001);
-  }
+TEST(UTinstant_date_to_jul)
+{
+  UTinstant i;
+  i.month=1;
+  i.year=1993;
+  i.day=1;
+  i.i_hour=0;
+  i.i_minute=0;
+  i.second = 0;
+  JulDate(&i);
+  ENSURE_DISTANCE(i.j_date,2448988.5,0.00000001);
+}
 
-  void object::test<3>()
-  {
-    UTinstant i;
-    i.year=2005;
-    
-    i.day_of_year=31+28+5;
-    JulDate(&i);
-    cout<<i.j_date<<endl;
-  }
+TEST(UT_instant_weekday)
+{
+  UTinstant i;
+  i.year = 2005;
+  i.month = 1;
+  i.day = 1;
+  i.i_hour = 0;
+  i.i_minute = 0;
+  i.second = 0;
+  JulDate(&i);
+  ENSURE(i.weekday == 6);
+}
 
-  void object::test<4>()
-  {
-    UTinstant i;
-    i.year = 2005;
-    i.month = 1;
-    i.day = 1;
-    i.i_hour = 0;
-    i.i_minute = 0;
-    i.second = 0;
-    JulDate(&i);
-    ensure(i.weekday == 6);
-  }
-
-  void object::test<6>()
-  {
-    cout<<I3Time::WeekdayToString(I3Time::Monday)<<endl;
-    ensure(I3Time::WeekdayToString(I3Time::Monday) == "Monday");
-    cout<<I3Time::MonthToString(I3Time::Oct)<<endl;
-    ensure(I3Time::MonthToString(I3Time::Oct) == "Oct");
-  }
+TEST(I3Time_weekday_month)
+{
+  cout<<I3Time::WeekdayToString(I3Time::Monday)<<endl;
+  ENSURE(I3Time::WeekdayToString(I3Time::Monday) == "Monday");
+  cout<<I3Time::MonthToString(I3Time::Oct)<<endl;
+  ENSURE(I3Time::MonthToString(I3Time::Oct) == "Oct");
+}
 
   // testing that I can set a daq time and get the days and stuff out
   // as calculated by hand
-  void object::test<7>()
-  {
-    long long int daqTime = 560819884 * (long long)1e8 + 43187970;
-    I3Time tme;
-    tme.SetDaqTime(2005,daqTime);
-
-    ensure(tme.GetUTCMonth() == I3Time::Mar);
-
-    cout<<"Output day of the month"<<tme.GetUTCDayOfMonth()<<endl;
-    ensure("day of month is right",tme.GetUTCDayOfMonth()==6);
-    ensure("weekday is right",tme.GetUTCWeekday() == I3Time::Sunday);  
-    ensure("secs is right",tme.GetUTCSec()==5608198);
-    ensure_distance(tme.GetUTCNanoSec(),(double)844318797,0.1);
-  }
-
-  void object::test<8>()
-  {
-    I3Time time;
-    time.SetModJulianTime(53460,0,0);
-
-    ensure("checking modjulian sec",time.GetModJulianSec()==0);
-  }
-
-  void object::test<9>()
-  {
-    I3Time time;
-    time.SetModJulianTime(53460,0,0);
-
-    ensure("checking modjulian day",time.GetModJulianDay()==53460);
-  }
-
-  void object::test<10>()
-  {
-    I3Time time;
-    time.SetModJulianTime(53460,60*60*12,0);
-
-    ensure("checking modjulian day",time.GetModJulianDay()==53460);
-  }
-
-  void object::test<11>()
-  {
-    for(int i = 0 ; i < 100 ; i++)
-      {
-	rand();
-	long long int daqTime = ((long long)rand()) 
-	  * ((long long)rand()) 
-	  * ((long long)rand()) %
- 	  ((long long)24 * 365 * 3600 * ((long long)1e10) ) ;
-	if(daqTime < 0)
-	  daqTime = -daqTime;
-	int year = 1995 + (rand() % 20);
-	I3Time initial_time;
-	initial_time.SetDaqTime(year,daqTime);
-
-	I3Time compare_time;
-	compare_time.SetModJulianTime(initial_time.GetModJulianDay(),
-				   initial_time.GetModJulianSec(),
-				   initial_time.GetModJulianNanoSec());
-
-	ensure_equals("checking that the year is the same",
-		      initial_time.GetUTCYear(),
-		      compare_time.GetUTCYear());
-	ensure("checking that the UTC time is the same to ns",
-	       std::llabs(initial_time.GetUTCDaqTime() 
-		     - compare_time.GetUTCDaqTime()) < 10);
-	
-	
-      }
-  }
-
-  void object::test<12>()
-  {
-    I3Time time;
-    time.SetDaqTime(2005,560819884 * (long long)1e8 + 43187970);
-    ensure_distance(time.GetUTCNanoSec(),844318797.0,0.1);
-    ensure_distance(time.GetModJulianNanoSec(),844318797.0,0.1);
-  }
-
-  void object::test<13>()
-  {
-    ensure_distance(I3Time::julianday(2005),2453371.500000,0.00001);
-    ensure_distance(I3Time::modjulianday(2005),53371.00000,0.000001);
-  }
-
-  void object::test<14>()
-  {
-    I3Time lowest;
-    lowest.SetDaqTime(2004,235918301);
-
-    I3Time lower;
-    lower.SetDaqTime(2004,235918402);
-
-    I3Time higher;
-    higher.SetDaqTime(2008,283294782);
-
-    I3Time highest;
-    highest.SetDaqTime(2009,283294782);
-    
-    ensure("1",lowest<lower);
-    ensure("2",lowest<higher);
-    ensure("3",lowest<highest);
-    ensure("4",lower<higher);
-    ensure("5",lower<highest);
-    ensure("6",higher<highest);
-
-    ensure("7",!(lower<lowest));
-    ensure("8",!(higher<lowest));
-    ensure("9",!(highest<lowest));
-    ensure("10",!(higher<lower));
-    ensure("11",!(highest<lower));
-    ensure("12",!(highest<higher));
-
-    ensure("13",highest!=higher);
-    ensure("14",lower!=higher);
-    ensure("15",lowest!=lower);
-
-    ensure("16",lower>lowest);
-    ensure("17",higher>lowest);
-    ensure("18",highest>lowest);
-    ensure("19",higher>lower);
-    ensure("20",highest>lower);
-    ensure("21",highest>higher);
-
-    ensure("22",lower>=lowest);
-    ensure("23",higher>=lowest);
-    ensure("24",highest>=lowest);
-    ensure("25",higher>=lower);
-    ensure("26",highest>=lower);
-    ensure("27",highest>=higher);
-
-    ensure("28",lowest<=lower);
-    ensure("29",lowest<=higher);
-    ensure("30",lowest<=highest);
-    ensure("31",lower<=higher);
-    ensure("32",lower<=highest);
-    ensure("33",higher<=highest);
-
-    I3Time same;
-    same.SetDaqTime(2004,235918301);
-
-    ensure("34",lowest == same);
-    ensure("35",lowest <= same);
-    ensure("36",lowest >= same);
-  }
+TEST(test7)
+{
+  long long int daqTime = 560819884 * (long long)1e8 + 43187970;
+  I3Time tme;
+  tme.SetDaqTime(2005,daqTime);
+  
+  ENSURE(tme.GetUTCMonth() == I3Time::Mar);
+  
+  cout<<"Output day of the month"<<tme.GetUTCDayOfMonth()<<endl;
+  ENSURE(tme.GetUTCDayOfMonth()==6,"day of month is right");
+  ENSURE(tme.GetUTCWeekday() == I3Time::Sunday,"weekday is right");  
+  ENSURE(tme.GetUTCSec()==5608198,"secs is right");
+  ENSURE_DISTANCE(tme.GetUTCNanoSec(),(double)844318797,0.1);
 }
+
+TEST(test8)
+{
+  I3Time time;
+  time.SetModJulianTime(53460,0,0);
+  
+  ENSURE(time.GetModJulianSec()==0,"checking modjulian sec");
+}
+
+TEST(test9)
+{
+  I3Time time;
+  time.SetModJulianTime(53460,0,0);
+  
+  ENSURE(time.GetModJulianDay()==53460,"checking modjulian day");
+}
+
+TEST(test10)
+{
+  I3Time time;
+  time.SetModJulianTime(53460,60*60*12,0);
+  
+  ENSURE(time.GetModJulianDay()==53460,"checking modjulian day");
+}
+
+TEST(test11)
+{
+  for(int i = 0 ; i < 100 ; i++)
+    {
+      rand();
+      long long int daqTime = ((long long)rand()) 
+	* ((long long)rand()) 
+	* ((long long)rand()) %
+	((long long)24 * 365 * 3600 * ((long long)1e10) ) ;
+      if(daqTime < 0)
+	daqTime = -daqTime;
+      int year = 1995 + (rand() % 20);
+      I3Time initial_time;
+      initial_time.SetDaqTime(year,daqTime);
+      
+      I3Time compare_time;
+      compare_time.SetModJulianTime(initial_time.GetModJulianDay(),
+				    initial_time.GetModJulianSec(),
+				    initial_time.GetModJulianNanoSec());
+      
+      ENSURE(initial_time.GetUTCYear()==
+	     compare_time.GetUTCYear(),
+	     "checking that the year is the same");
+      ENSURE(std::llabs(initial_time.GetUTCDaqTime() 
+			- compare_time.GetUTCDaqTime()) < 10,
+	     "checking that the UTC time is the same to ns");
+      
+      
+    }
+}
+
+TEST(test12)
+{
+  I3Time time;
+  time.SetDaqTime(2005,560819884 * (long long)1e8 + 43187970);
+  ENSURE_DISTANCE(time.GetUTCNanoSec(),844318797.0,0.1);
+  ENSURE_DISTANCE(time.GetModJulianNanoSec(),844318797.0,0.1);
+}
+
+TEST(test13)
+{
+  ENSURE_DISTANCE(I3Time::julianday(2005),2453371.500000,0.00001);
+  ENSURE_DISTANCE(I3Time::modjulianday(2005),53371.00000,0.000001);
+}
+
+TEST(test14)
+{
+  I3Time lowest;
+  lowest.SetDaqTime(2004,235918301);
+  
+  I3Time lower;
+  lower.SetDaqTime(2004,235918402);
+  
+  I3Time higher;
+  higher.SetDaqTime(2008,283294782);
+  
+  I3Time highest;
+  highest.SetDaqTime(2009,283294782);
+  
+  ENSURE(lowest<lower);
+  ENSURE(lowest<higher);
+  ENSURE(lowest<highest);
+  ENSURE(lower<higher);
+  ENSURE(lower<highest);
+  ENSURE(higher<highest);
+  
+  ENSURE(!(lower<lowest));
+  ENSURE(!(higher<lowest));
+  ENSURE(!(highest<lowest));
+  ENSURE(!(higher<lower));
+  ENSURE(!(highest<lower));
+  ENSURE(!(highest<higher));
+  
+  ENSURE(highest!=higher);
+  ENSURE(lower!=higher);
+  ENSURE(lowest!=lower);
+  
+  ENSURE(lower>lowest);
+  ENSURE(higher>lowest);
+  ENSURE(highest>lowest);
+  ENSURE(higher>lower);
+  ENSURE(highest>lower);
+  ENSURE(highest>higher);
+
+  ENSURE(lower>=lowest);
+  ENSURE(higher>=lowest);
+  ENSURE(highest>=lowest);
+  ENSURE(higher>=lower);
+  ENSURE(highest>=lower);
+  ENSURE(highest>=higher);
+  
+  ENSURE(lowest<=lower);
+  ENSURE(lowest<=higher);
+  ENSURE(lowest<=highest);
+  ENSURE(lower<=higher);
+  ENSURE(lower<=highest);
+  ENSURE(higher<=highest);
+  
+  I3Time same;
+  same.SetDaqTime(2004,235918301);
+  
+  ENSURE(lowest == same);
+  ENSURE(lowest <= same);
+  ENSURE(lowest >= same);
+}
+
