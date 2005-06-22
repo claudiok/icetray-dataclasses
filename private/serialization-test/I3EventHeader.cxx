@@ -64,5 +64,5 @@ TEST(DataMembers)
 	   "EndTime.DaqTime read is not the same as was written");
     ifs.close();
   }
-  //unlink("/tmp/I3EventHeader-MemberTest.xml");
+  unlink("/tmp/I3EventHeader-MemberTest.xml");
 }
