@@ -22,7 +22,7 @@ TEST(DataMembers)
   unsigned long runID = 12345;
   unsigned long eventID = 67890;
 
-  unsigned int year = 2005;
+  int year = 2005;
   long long int daqStartTime = 105743003998410000LL;
   long long int daqEndTime = 105743003998420000LL;
 
