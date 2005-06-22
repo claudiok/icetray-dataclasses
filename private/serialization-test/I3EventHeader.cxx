@@ -23,8 +23,8 @@ TEST(DataMembers)
   unsigned long eventID = 67890;
 
   unsigned int year = 2005;
-  long long int daqStartTime = 105743003998410000;
-  long long int daqEndTime = 105743003998420000;
+  long long int daqStartTime = 105743003998410000LL;
+  long long int daqEndTime = 105743003998420000LL;
 
   {
     std::ofstream ofs("/tmp/I3EventHeader-MemberTest.xml");
