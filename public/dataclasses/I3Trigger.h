@@ -50,11 +50,11 @@ class I3Trigger : public TObject
 
   public:
 
-  const vector<double> GetTriggerTime() const {return TriggerTime;}
-  vector<double> GetTriggerTime() {return TriggerTime;}
+  const vector<double> &GetTriggerTime() const {return TriggerTime;}
+  vector<double> &GetTriggerTime() {return TriggerTime;}
 
-  const vector<double> GetTriggerLength() const {return TriggerLength;}
-  vector<double> GetTriggerLength() {return TriggerLength;}
+  const vector<double> &GetTriggerLength() const {return TriggerLength;}
+  vector<double> &GetTriggerLength() {return TriggerLength;}
 
   const int GetTriggerChannel() const {return TriggerChannel;}
   int GetTriggerChannel() {return TriggerChannel;}
