@@ -128,9 +128,8 @@ public:
    that it is important to document your software, making clear what
    requirements it has and what data it produces.  A list of best
    practices that should be followed in your code 
-<!-- can be found at @ref best-practices.
--->
-   is being produced.
+   is available in the <a href=../OFFLINE-SOFTWARE/codingstandards.html>
+   IceCube C++ Coding Standards.</a>
  
    @section containers Lists of objects
  
