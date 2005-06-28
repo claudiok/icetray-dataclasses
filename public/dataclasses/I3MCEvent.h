@@ -115,6 +115,8 @@ class I3MCEvent : public I3Event
   ClassDef(I3MCEvent, 1);
 };
 
+BOOST_SHARED_POINTER_EXPORT(I3MCEvent);
+
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
