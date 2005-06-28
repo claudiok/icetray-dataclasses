@@ -265,11 +265,11 @@ know that it is private, it is just counting references.
 
 @section containers Putting things into our containers
 
-With the @c I3ArrayHit, which looks like this:
+With the @c I3RecoHitSeries, which looks like this:
 
 @code
-class I3ArrayHit : public TObject, 
-                   public VectorPolicy<I3StationHitPtr>::ThePolicy {
+class I3RecoHitSeries : public TObject, 
+                 public STLVectorStoragePolicy<I3RecoHitPtr {
 
   ...
 

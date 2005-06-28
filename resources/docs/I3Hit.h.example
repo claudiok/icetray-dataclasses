@@ -98,7 +98,7 @@ inline ostream& operator<<(ostream& o,const I3Hit& hit)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3Hit>::ThePolicy I3HitPtr;
+typedef PtrPolicy<I3Hit> I3HitPtr;
 
 
 #endif
