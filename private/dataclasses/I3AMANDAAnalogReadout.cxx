@@ -23,37 +23,18 @@ double I3AMANDAAnalogReadout::GetFirstLE() const {
 
 vector<double> I3AMANDAAnalogReadout::GetTOTs() {
 
-  // This is quite long, but I'm not sure I can assume that the LEs
-  // and TEs vectors are sorted properly, so I'll generate the
-  // match-ups as well as the differences on the fly.
-
-  vector<double> theTOTs;
-
-  if (LEs_.size() == 0 || TEs_.size() == 0) {
-    return theTOTs;
+  if (LEs_.size() != TEs_.size()) {
+    // this is not true for AMANDA data, but this is fixed in the
+    // f2k reader
+    log_fatal("LEs.size() and TEs.size() should have same size");
   }
 
-  for (vector<double>::const_iterator LEiter = LEs_.begin();
-       LEiter != LEs_.end(); LEiter++) { 
+  vector<double> theTOTs(LEs_.size());
 
-    if (isnan(*LEiter)) continue;
-
-    double nextTE = NAN;
-    for (vector<double>::const_iterator TEiter = TEs_.begin();
-	 TEiter != TEs_.end(); TEiter++) {
-
-      if (isnan(*TEiter)) continue;
-
-      if ((*TEiter > *LEiter) &&
-	  (isnan(nextTE) || *TEiter < nextTE)) {
-	nextTE = *TEiter;
-      }
-    } 
-
-    if (!isnan(nextTE)) {
-      theTOTs.push_back(nextTE -*LEiter);
+  for(unsigned int i = 0 ; i < LEs_.size() ; i++)
+    {
+      theTOTs[i] = TEs_[i] - LEs_[i];
     }
-  }
-
+                                                                                                                                                             
   return theTOTs;
 };
