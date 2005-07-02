@@ -65,6 +65,8 @@ public:
 
 };
 
+BOOST_SHARED_POINTER_EXPORT(I3TestDaqRawDOMStatus);
+
 typedef shared_ptr<I3TestDaqRawDOMStatus> I3TestDaqRawDOMStatusPtr;
 
 #endif

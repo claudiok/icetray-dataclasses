@@ -212,6 +212,7 @@ public:
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("I3RawDOMStatus", base_object<I3RawDOMStatus>(*this));
     ar & make_nvp("trigMode",trigMode_);
     ar & make_nvp("lcMode",lcMode_);
     ar & make_nvp("lcWindowUpPre",lcWindowUpPre_);
@@ -229,6 +230,8 @@ public:
   }
 
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3MCRawDOMStatus);
 
 typedef shared_ptr<I3MCRawDOMStatus> I3MCRawDOMStatusPtr;
 
