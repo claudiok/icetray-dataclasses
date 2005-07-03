@@ -95,7 +95,11 @@ inline ostream& operator<<(ostream& o, const I3Calibration& calib)
     return o;
 }
 
-typedef shared_ptr<I3Calibration>  I3CalibPtr;
+// DELETE ME: Let's keep things consistent, at least...
+typedef shared_ptr<I3Calibration>  I3CalibPtr; 
+
+// that's better.  
+typedef shared_ptr<I3Calibration>  I3CalibrationPtr;
 
 #endif // I3CALIBRATION_H
     
