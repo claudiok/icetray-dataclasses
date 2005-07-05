@@ -29,6 +29,6 @@ BOOST_SHARED_POINTER_EXPORT(I3RecoHit);
                                      
 Now you can fill a vector of shared pointers to I3Hit (i.e. vector<I3HitPtr>)
 with shared pointers of I3RecoHit and serialize it.  Boost serialization handles 
-STL containers quite naturaully.  They should work just like primitive types.
+STL containers quite naturally.  They should work just like primitive types.
 
 */

@@ -11,5 +11,8 @@ inherit from any other class and the data members are primitive types (ints, boo
    @li @ref through-shared-base-pointers - My class inherits a base class and I need to be able to serialize it through a shared pointer to that base class. 
                                                                 
    @li @ref through-shared-base-pointer-test - Extending the simple test to now test serialization through a shared pointer to the base class.
+
+   @li @ref registering-your-class - Getting 'unregistered class' exceptions?
+
                 
 */
