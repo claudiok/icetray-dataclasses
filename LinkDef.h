@@ -500,6 +500,7 @@
 //#pragma link C++ class boost::shared_ptr<I3RecoResultSingleParticle>+;
 
 #pragma link C++ class I3RecoResultSingleTrack+;
+#pragma link C++ class I3RecoResultMultiTracks+;
 //#pragma link C++ typedef I3RecoResultSingleTrackPtr;
 //#pragma link C++ class boost::shared_ptr<I3RecoResultSingleTrack>+;
 

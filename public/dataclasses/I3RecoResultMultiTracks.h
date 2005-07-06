@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultMultiTracks.h,v 1.8 2005/01/24 23:17:44 ehrlich Exp $
+ * $Id$
  *
  * @file I3RecoResultMultiTracks.h
  * @version $Revision: 1.8 $
- * @date $Date: 2005/01/24 23:17:44 $
+ * @date $Date$
  * @author ehrlich
  */
 #ifndef I3RECORESULTMULTITRACKS_H
@@ -17,7 +17,7 @@
 /**
  * @brief Reco results with more than one track
  */
-class I3RecoResultMultiTracks : public I3RecoResult, public VectorPolicy<I3ParticlePtr>::ThePolicy
+class I3RecoResultMultiTracks : public I3RecoResult, public STLVectorStoragePolicy<I3ParticlePtr>
 {
   public:
   /**
@@ -38,21 +38,32 @@ class I3RecoResultMultiTracks : public I3RecoResult, public VectorPolicy<I3Parti
       I3ParticlePtr particle;
       for (unsigned i=0; i<this->size(); i++) {
         o<<"printing MultiTracks["<<i<<"]...\n";
-	particle = roost::dynamic_pointer_cast<I3Particle>((*this)[i]);
-	particle->ToStream(o);
+	//particle = dynamic_pointer_cast<I3Particle>((*this)[i]);
+	//particle->ToStream(o);
 	o<<endl;
       }
     };
 
   private:
 
+  friend class boost::serialization::access;
+
+  template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("I3RecoResult",base_object<I3RecoResult>(*this));
+    ar & make_nvp("I3ParticlePtrVector",base_object< STLVectorStoragePolicy<I3ParticlePtr> >(*this));
+  }
+
   //ROOT macro
   ClassDef(I3RecoResultMultiTracks,1);
 };
+
+BOOST_SHARED_POINTER_EXPORT(I3RecoResultMultiTracks);
 
 /**
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef PtrPolicy<I3RecoResultMultiTracks>::ThePolicy I3RecoResultMultiTracksPtr;
+typedef shared_ptr<I3RecoResultMultiTracks> I3RecoResultMultiTracksPtr;
 #endif

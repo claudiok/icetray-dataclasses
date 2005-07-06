@@ -1,6 +1,6 @@
 CXX_BIN_SRCDIR_NAMES := 
 TEST_SRCDIR_NAMES := test serialization-test serialization-test-special
-   
+
 USES_PROJECTS := icetray 
 USES_TOOLS := root log4cplus boost TUT boost
 
@@ -70,6 +70,7 @@ dataclasses/I3RecoResultDict.h \
 dataclasses/I3RecoResultRDMCFit.h \
 dataclasses/I3Event.h \
 dataclasses/I3RecoResultSingleTrack.h \
+dataclasses/I3RecoResultMultiTracks.h \
 dataclasses/I3RecoResultSingleParticle.h \
 dataclasses/I3EventHeader.h \
 dataclasses/I3F2KRecoCascade.h \
