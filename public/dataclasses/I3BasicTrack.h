@@ -9,13 +9,13 @@
     @author deyoung
 */
 
-#include "I3TrackImpl.h"
-#include "I3Infinite.h"
-#include "I3NonEnergetic.h"
-#include "I3NonComposite.h"
-
 #ifndef I3BASICTRACK_H
 #define I3BASICTRACK_H
+
+#include "dataclasses/I3TrackImpl.h"
+#include "dataclasses/I3Infinite.h"
+#include "dataclasses/I3NonEnergetic.h"
+#include "dataclasses/I3NonComposite.h"
 
 #include "dataclasses/I3Track.h"
 
