@@ -37,7 +37,7 @@ class I3Trigger : public TObject
    */
   enum TrigSubDetector {Unknown=0, InIce=1, IceTop=2, Amanda=3, Global=4};
     
-  I3Trigger() {}
+  I3Trigger() {TriggerChannel = -1; Fired=false;}
 
   virtual ~I3Trigger() {}
     
