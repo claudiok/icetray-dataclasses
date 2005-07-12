@@ -111,10 +111,10 @@ class I3AMANDAOMCalib : public TObject
   double GetOMO_HighLim() {return omo_highlim_;}
 
   void SetOMO_A(double a)             {omo_a_=a;}
-  void SetOMO_B(double b)             {omo_a_=b;}
-  void SetOMO_C(double c)             {omo_a_=c;}
-  void SetOMO_D(double d)             {omo_a_=d;}
-  void SetOMO_E(double e)             {omo_a_=e;}
+  void SetOMO_B(double b)             {omo_b_=b;}
+  void SetOMO_C(double c)             {omo_c_=c;}
+  void SetOMO_D(double d)             {omo_d_=d;}
+  void SetOMO_E(double e)             {omo_e_=e;}
   void SetOMO_LowLim(double lowlim)   {omo_lowlim_=lowlim;}
   void SetOMO_HighLim(double highlim) {omo_highlim_=highlim;}
 
