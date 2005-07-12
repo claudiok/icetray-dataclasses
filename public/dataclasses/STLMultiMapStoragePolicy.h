@@ -38,6 +38,21 @@ class STLMultiMapStoragePolicy {
    */
   typedef multimap<KeyType,ElementType> map_type;
 
+	/**
+	 * the multimap key type
+	 */
+	typedef typename map_type::key_type key_type;
+	 
+	/**
+	 * the multimap mapped type
+	 */
+	typedef typename map_type::mapped_type mapped_type;
+	 
+	/**
+	 * the multimap value type
+	 */
+	typedef typename map_type::value_type value_type;
+
   /**
    * an iterator type
    */

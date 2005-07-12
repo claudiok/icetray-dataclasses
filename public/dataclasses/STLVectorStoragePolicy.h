@@ -31,6 +31,11 @@ class STLVectorStoragePolicy  {
    * a type for the stl vector that this class wraps
    */
   typedef vector<ElementType>                           vector_type;
+	 
+	/**
+	 * the vector value type
+	 */
+	typedef typename vector_type::value_type 								value_type;
 
   /**
    * an iterator type

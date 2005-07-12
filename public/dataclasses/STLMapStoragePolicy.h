@@ -36,11 +36,26 @@ class STLMapStoragePolicy
 
  public:
 
- //  typedef string KeyType;
+  //  typedef string KeyType;
   /**
    * the stl map corresponding to this one
    */
   typedef map<KeyType,ElementType> map_type;
+
+	/**
+	 * the map key type
+	 */
+	typedef typename map_type::key_type key_type;
+	 
+	/**
+	 * the map mapped type
+	 */
+	typedef typename map_type::mapped_type mapped_type;
+	 
+	/**
+	 * the map value type
+	 */
+	typedef typename map_type::value_type value_type;
 
   /**
    * the map iterator
