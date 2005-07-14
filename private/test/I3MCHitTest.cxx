@@ -27,11 +27,11 @@ TEST(assignment_copy)
   I3MCHit h, j;
   ENSURE(h.GetWeight() == 0);
   ENSURE(h.GetParticleID() == 0);
-  j.SetWeight(rand() % 1000000 /0.3234);
+  j.SetWeight(M_PI);
   j.SetParticleID(rand()%256);
   h = j;
   ENSURE_DISTANCE(0.1, 0.1, 0.0001,"ensure test");
-  ENSURE_DISTANCE(j.GetWeight(), h.GetWeight(), (float)0.1,"simple assignment");
+  ENSURE_DISTANCE(j.GetWeight(), h.GetWeight(), (float)0.0001,"simple assignment");
   ENSURE(j.GetParticleID() == j.GetParticleID());
 }
 
