@@ -92,7 +92,7 @@ class STLMultiMapStoragePolicy {
 
   map_type map_; //||
 
- public:
+public:
 
   /**
    * assignment operator
@@ -314,6 +314,7 @@ class STLMultiMapStoragePolicy {
    */
   size_type count(const KeyType& key) const {return map_.count(key);}
 
+  virtual ~STLMultiMapStoragePolicy() { }
 
  private:
 

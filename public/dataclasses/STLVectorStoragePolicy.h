@@ -263,7 +263,7 @@ class STLVectorStoragePolicy  {
   //  bool empty() const { return vector_.empty() }
 
   // dont do this it is messy
-  //  virtual ~StoragePolicy() {;}
+  virtual ~STLVectorStoragePolicy() { }
 
   //  ClassDef(StoragePolicy,1);
 };

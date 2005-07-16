@@ -265,6 +265,8 @@ class STLMapStoragePolicy
 
   size_type count(const KeyType& key){ return map_.count(key); }
 
+  virtual ~STLMapStoragePolicy() { }
+
  private: 
 
   friend class boost::serialization::access;

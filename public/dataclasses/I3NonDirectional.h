@@ -36,6 +36,9 @@ class I3NonDirectional
     {
       o<<"Direction: NonDirectional\n";
     }
+
+  virtual ~I3NonDirectional() { }
+
  private:
 
   friend class boost::serialization::access;
