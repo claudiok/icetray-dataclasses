@@ -58,6 +58,7 @@ class I3Energetic
       o<<"Energy:"<<energy_<<"\n";
     }
 
+  virtual ~I3Energetic() { }
  private:
 
   friend class boost::serialization::access;

@@ -36,6 +36,8 @@ class I3NonEnergetic
       o<<"Energy: Non-energetic\n";
     }
 
+  virtual ~I3NonEnergetic() { }
+
  private:
 
   friend class boost::serialization::access;
