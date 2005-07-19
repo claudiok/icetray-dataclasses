@@ -80,6 +80,13 @@ class I3CoreLocalized
 	}
     }
 
+  virtual void ToStream(ostream& o) const
+  {
+    o<<"Position:\n"<<corePos_
+     <<"Time:"<<coreT_<<"\n";
+  }
+
+
  private:
 
   friend class boost::serialization::access;

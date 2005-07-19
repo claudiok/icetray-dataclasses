@@ -86,6 +86,14 @@ class I3PrimaryImpl : public I3Primary,
       LocalizableType::CopyTo(destination);
     }
 
+  virtual void ToStream(ostream& o) const
+    {
+      I3Particle::ToStream(o);
+      DirectionalType::ToStream(o);
+      EnergeticType::ToStream(o);
+      LocalizableType::ToStream(o);
+    }
+
  private:
 
   friend class boost::serialization::access;
