@@ -217,7 +217,7 @@ class I3Particle : public TObject{
   {
     ar & make_nvp("Type", type_);
     ar & make_nvp("ID", id_);
-    ar & make_nvp("PrimaryID",primaryID_);
+    ar & make_nvp("PrimaryID", primaryID_);
     ar & make_nvp("ParentID", parentID_);
   }
 

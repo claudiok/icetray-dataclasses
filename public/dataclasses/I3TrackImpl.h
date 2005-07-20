@@ -162,7 +162,7 @@ class I3TrackImpl : public I3Track,
   void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3Track", base_object<I3Track>(*this));
-    ar & make_nvp("GeometricalType", base_object<GeometricalType>(*this));
+    ar & make_nvp("Geo", base_object<GeometricalType>(*this));
     ar & make_nvp("EnergeticType", base_object<EnergeticType>(*this));
     ar & make_nvp("CompositeType", base_object<CompositeType>(*this));
   }
