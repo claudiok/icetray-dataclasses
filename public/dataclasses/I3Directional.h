@@ -27,8 +27,7 @@ class I3Directional
   /**
    * indicates that this cascade has a direction
    */
-  virtual Bool_t HasDirection() const {log_debug ("Are you there?");
-  return true;}
+  virtual Bool_t HasDirection() const {return true;}
 
   /**
    * gets the direction of the track
