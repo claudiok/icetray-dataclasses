@@ -20,7 +20,7 @@
 
 class I3AMANDAOMCalib_XTalk : public TObject
 {
-  OMKey  sender_;
+  OMKey  receiver_;
   double timehigh_;
   double timelow_;
   double width_;
@@ -30,13 +30,13 @@ class I3AMANDAOMCalib_XTalk : public TObject
   I3AMANDAOMCalib_XTalk() {timehigh_=NAN; timelow_=NAN; width_=NAN;}
   virtual ~I3AMANDAOMCalib_XTalk() {;}
   
-  OMKey  GetSender()    {return sender_;}
+  OMKey  GetReceiver()  {return receiver_;}
   double GetTimeHigh()  {return timehigh_;}
   double GetTimeLow()   {return timelow_;}
   double GetWidth()     {return width_;}
   double GetThreshold() {return threshold_;}
 
-  void SetSender(OMKey sender)      {sender_=sender;}
+  void SetReceiver(OMKey receiver)    {receiver_=receiver;}
   void SetTimeHigh(double timehigh)   {timehigh_=timehigh;}
   void SetTimeLow(double timelow)     {timelow_=timelow;}
   void SetWidth(double width)         {width_=width;}
@@ -61,7 +61,7 @@ class I3AMANDAOMCalib_XTalk : public TObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("sender",sender_);
+    ar & make_nvp("receiver",receiver_);
     ar & make_nvp("timehigh",timehigh_);
     ar & make_nvp("timelow",timelow_);
     ar & make_nvp("width",width_);

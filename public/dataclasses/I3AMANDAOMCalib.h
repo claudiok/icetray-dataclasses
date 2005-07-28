@@ -52,7 +52,7 @@ class I3AMANDAOMCalib : public TObject
   double omo_lowlim_;
   double omo_highlim_;
 
-  vector<I3AMANDAOMCalib_XTalk> xtalk_senders_;
+  vector<I3AMANDAOMCalib_XTalk> xtalk_receivers_;
 
   public:
 
@@ -118,7 +118,7 @@ class I3AMANDAOMCalib : public TObject
   void SetOMO_LowLim(double lowlim)   {omo_lowlim_=lowlim;}
   void SetOMO_HighLim(double highlim) {omo_highlim_=highlim;}
 
-  vector<I3AMANDAOMCalib_XTalk> &GetXTalk_Senders() {return xtalk_senders_;}
+  vector<I3AMANDAOMCalib_XTalk> &GetXTalk_Receivers() {return xtalk_receivers_;}
 
   virtual void ToStream(ostream& o) const
   {
@@ -157,7 +157,7 @@ class I3AMANDAOMCalib : public TObject
     ar & make_nvp("omo_e",omo_e_);
     ar & make_nvp("omo_lowlim",omo_lowlim_);
     ar & make_nvp("omo_highlim",omo_highlim_);
-    ar & make_nvp("xtalk_senders",xtalk_senders_);
+    ar & make_nvp("xtalk_senders",xtalk_receivers_);
   }
 
 };
