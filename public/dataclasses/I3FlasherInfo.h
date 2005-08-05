@@ -60,11 +60,8 @@ public:
     /**
      * constructor
      */
-    I3FlasherInfo() 
+     I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
 	{
-	    flashTime_ = 0.0;
-	    LEDBrightness_=0;
-
 	}
 
     /**
@@ -134,29 +131,23 @@ private:
     template <class Archive>
     void serialize(Archive& ar, unsigned version)
 	{
-
-	  /* is the next line correct?*/
 	    ar & make_nvp("FlasherOM", flasherOM_);
 	    ar & make_nvp("FlashTime", flashTime_);
 	    ar & make_nvp("ATWDBinSize", aTWDBinSize_);
-	    ar & make_nvp("Trigger", trigger_);
+	    //ar & make_nvp("Trigger", trigger_);
+	    //trigger_ isn't defined anywhere
 	    ar & make_nvp("RawATWD3", rawATWD3_);
 	    ar & make_nvp("PedestalSubtractedATWD3", pedestalSubtractedATWD3_);
 	    ar & make_nvp("mask", mask_);
 	    ar & make_nvp("LEDBrightness", LEDBrightness_);
-
-
-
 	}
 
-    // ROOT macro
-    ClassDef(I3FlasherInfo,1);
 };
 
 /**
  * There is only one I3FlasherInfo, so should be no need for pointers
  */
-//typedef shared_ptr<I3FlasherInfo>  I3FlasherInfoPtr;
+typedef shared_ptr<I3FlasherInfo>  I3FlasherInfoPtr;
 
 
 #endif
