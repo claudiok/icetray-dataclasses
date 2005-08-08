@@ -71,6 +71,16 @@ namespace I3Constants
    * of AMANDA hole 4.  If not, then correct for the difference.
    */
   static const double zIceTop = SurfaceElev-OriginElev;
+
+
+  /**
+   * Conversion between IceCube and AMANDA coordinates
+   * from docushare file by Kurt Woschnagg
+   * (x,y,z)icecube = (x,y,z)amanda - (x,y,z)shift
+   */
+  static const double Coordinate_shift_x = -339.8*I3Units::m;
+  static const double Coordinate_shift_y = -117.4*I3Units::m;
+  static const double Coordinate_shift_z = -216.0*I3Units::m;
 };
 
 #endif
