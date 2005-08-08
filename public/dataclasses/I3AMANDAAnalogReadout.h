@@ -34,6 +34,7 @@ class I3AMANDAAnalogReadout : public I3AnalogReadout
   vector<double> LEs_; 
   vector<double> TEs_; 
   vector<int>    HitNumbers_;  
+  vector<int>    ParentIDs_;  
   double adc_;         
   bool   overflow_;    
   bool   is_calib_;    
@@ -68,6 +69,9 @@ public:
 
   const vector<int>& GetHitNumbers() const {return HitNumbers_;}
   vector<int>& GetHitNumbers() {return HitNumbers_;}
+
+  const vector<int>& GetParentIDs() const {return ParentIDs_;}
+  vector<int>& GetParentIDs() {return ParentIDs_;}
 
   /** 
    * Alternate name for the amplitude
@@ -123,6 +127,7 @@ private:
     ar & make_nvp("LEs", LEs_);
     ar & make_nvp("TEs", TEs_);
     ar & make_nvp("HitNumbers", HitNumbers_);
+    ar & make_nvp("ParentIDs", ParentIDs_);
     ar & make_nvp("ADC", adc_ );
     ar & make_nvp("Overflow", overflow_ );
     ar & make_nvp("Calib", is_calib_ );

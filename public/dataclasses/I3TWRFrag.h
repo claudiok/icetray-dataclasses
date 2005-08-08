@@ -19,6 +19,7 @@ using namespace std;
 class I3TWRFrag : public TObject
 {
   Int_t            id;
+  Int_t            parent_id;
   Float_t          frag_start_time;
   Int_t            frag_start_bin;
   vector<Double_t> waveform;
@@ -29,6 +30,8 @@ class I3TWRFrag : public TObject
 
   Int_t          GetId() {return id;}
   void           SetId(Int_t id_) {id=id_;}
+  Int_t          GetParentId() {return id;}
+  void           SetParentId(Int_t parent_id_) {parent_id=parent_id_;}
   Float_t        GetStartTime() {return frag_start_time;}
   void           SetStartTime(Float_t frag_start_time_) {frag_start_time=frag_start_time_;}
   Int_t          GetStartBin() {return frag_start_bin;}
@@ -41,6 +44,7 @@ class I3TWRFrag : public TObject
   template<class Archive> void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("ID",id);
+    ar & make_nvp("ParentID",parent_id);
     ar & make_nvp("FragStartTime",frag_start_time);
     ar & make_nvp("FragStartBin",frag_start_bin);
     ar & make_nvp("Waveform",waveform);
