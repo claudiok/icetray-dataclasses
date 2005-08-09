@@ -7,9 +7,9 @@
  * to the raw dom status.
  */
 class I3CalibratedDOMStatus
-{
-  double samplingRateA_;
-  double samplingRateB_;
+{  double samplingRateA_;
+    double samplingRateB_;
+    
   double PMTGain_;
   double peakToValley_;
   double speMean_;

@@ -38,8 +38,8 @@ double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel,
     }
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
-       
-    return (count*fit.slope)/GetATWDGain(channel);
+   
+    return (count*fit.slope + fit.intercept)/GetATWDGain(channel);
 }
 
 
