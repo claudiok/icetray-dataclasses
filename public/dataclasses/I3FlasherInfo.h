@@ -55,6 +55,8 @@ protected:
 
      int LEDBrightness_;
 
+     int muon_;
+
     
 public:
     /**
@@ -62,6 +64,7 @@ public:
      */
      I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
 	{
+	  muon_=-1;
 	}
 
     /**
@@ -98,6 +101,13 @@ public:
     unsigned int GetMask() const { return mask_; }
     void SetMask(int LEDmask) { mask_ = LEDmask; }
 
+
+    /* return and set whether a particular event is a muon or not
+     * for use by muon-filter
+     */
+    
+     int GetEventIsMuon() const {return muon_;}
+     void SetEventIsMuon(int muon) {muon_=muon;}
 
 
     /**
@@ -140,6 +150,7 @@ private:
 	    ar & make_nvp("PedestalSubtractedATWD3", pedestalSubtractedATWD3_);
 	    ar & make_nvp("mask", mask_);
 	    ar & make_nvp("LEDBrightness", LEDBrightness_);
+	    ar & make_nvp("muon", muon_);
 	}
 
 };
