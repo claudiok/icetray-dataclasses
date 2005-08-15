@@ -96,7 +96,7 @@ class I3TrackImpl : public I3Track,
   /**
    * gets the direction
    */
-  virtual I3Direction GetDir() const 
+  virtual const I3Direction& GetDir() const 
     {
       return GeometricalType::GetDir();
     }
@@ -119,7 +119,7 @@ class I3TrackImpl : public I3Track,
   /**
    * the Position of the track at time T()
    */
-  virtual I3Position GetPos() const 
+  virtual const I3Position& GetPos() const 
     {
       return GeometricalType::GetPos();
     }

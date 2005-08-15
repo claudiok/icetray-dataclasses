@@ -63,7 +63,7 @@ class I3Starting
   /**
    * gets the starting position
    */
-  I3Position GetStartPos() const {return startPos_;}
+  const I3Position& GetStartPos() const {return startPos_;}
 
   /**
    * sets the starting position
@@ -85,7 +85,7 @@ class I3Starting
   /**
    * gives the starting positition as a position on the track
    */
-  I3Position GetPos() const {return startPos_;}
+  const I3Position& GetPos() const {return startPos_;}
 
   /**
    * sets the starting positition as a position on the track
@@ -95,7 +95,7 @@ class I3Starting
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return dir_;}
+  const I3Direction& GetDir() const {return dir_;}
 
   /**
    * sets the direction of the track

@@ -32,7 +32,7 @@ class I3Directional
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return dir_;}
+  const I3Direction& GetDir() const {return dir_;}
 
   /**
    * sets the direction of the track

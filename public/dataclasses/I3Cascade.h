@@ -54,7 +54,7 @@ class I3Cascade : public I3InIceParticle{
   /**
    * the position of the cascade as an I3Position object
    */
-  virtual I3Position GetPos() const =0;
+  virtual const I3Position& GetPos() const =0;
 
  /**
   * Copies the data from the source particle into this particle

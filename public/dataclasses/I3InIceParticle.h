@@ -51,7 +51,7 @@ class I3InIceParticle : public I3Particle
   /**
    * Gives an position along the track, at time T.
    */
-  virtual I3Position GetPos() const = 0;
+  virtual const I3Position& GetPos() const = 0;
 
   /**
    * Gives a T along the track, corresponding to X,Y and Z

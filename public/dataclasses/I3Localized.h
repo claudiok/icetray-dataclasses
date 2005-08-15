@@ -39,7 +39,7 @@ class I3Localized{
   /**
    * gets the position of the cascade
    */
-  I3Position GetPos() const {return pos_;}
+  const I3Position& GetPos() const {return pos_;}
 
   /**
    * sets the position of the cascade 

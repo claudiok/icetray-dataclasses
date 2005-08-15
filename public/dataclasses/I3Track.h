@@ -78,7 +78,7 @@ class I3Track : public I3InIceParticle
   /**
    * returns the direction of the track
    */
-  virtual I3Direction GetDir() const =0;
+  virtual const I3Direction& GetDir() const =0;
 
   /**
    * returns the zenith of the track
@@ -108,7 +108,7 @@ class I3Track : public I3InIceParticle
   /**
    * the Position of the track at time T()
    */
-  virtual I3Position GetPos() const =0;
+  virtual const I3Position& GetPos() const =0;
   
   // speed 
   /**

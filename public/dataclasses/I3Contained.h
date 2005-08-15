@@ -24,12 +24,22 @@ class I3Contained
 {
  private:
   I3Position startPos_;
+  mutable I3Position stopPos_;
+  mutable bool calculateStopPos_;
   I3Direction dir_;
   double startT_;
   double length_;
 
  public:
 
+  /**
+   * default constructor.
+   */
+  I3Contained() : calculateStopPos_(true) {}
+
+  /**
+   * destructor.
+   */
   virtual ~I3Contained() {}
 
   /**
@@ -60,19 +70,26 @@ class I3Contained
   /**
    * gets the starting position
    */
-  I3Position GetStartPos() const {return startPos_;}
+  const I3Position& GetStartPos() const {return startPos_;}
 
   /**
    * sets the starting position
    */
-  void SetStartPos(I3Position& p) {startPos_ = p;}
+  void SetStartPos(const I3Position& p)
+  {
+    startPos_ = p;
+    calculateStopPos_ = true;
+  }
 
   /**
    * sets the starting position in any reference frame
    */
-  void SetStartPos(double startp1, double startp2, double startp3, 
-		I3Position::RefFrame frame=I3Position::car)
-    {startPos_.SetPosition(startp1,startp2,startp3,frame);}
+  void SetStartPos(double startp1, double startp2, double startp3,
+  I3Position::RefFrame frame=I3Position::car)
+  {
+    startPos_.SetPosition(startp1,startp2,startp3,frame);
+    calculateStopPos_ = true;
+  }
 
   /**
    * returns the starting time as corresponding to X,Y,Z
@@ -82,41 +99,59 @@ class I3Contained
   /**
    * gives the starting positition as a position on the track
    */
-  I3Position GetPos() const {return startPos_;}
+  const I3Position& GetPos() const {return startPos_;}
 
   /**
    * sets the starting positition as a position on the track
    */
-  void SetPos(I3Position& p) {startPos_ = p;}
+  void SetPos(I3Position& p)
+  {
+    startPos_ = p;
+    calculateStopPos_ = true;
+  }
 
   /**
    * sets the starting position as a position along the track
    * in any reference frame
    */
   void SetPos(double startp1, double startp2, double startp3, 
-		I3Position::RefFrame frame=I3Position::car)
-    {startPos_.SetPosition(startp1,startp2,startp3,frame);}
+  I3Position::RefFrame frame=I3Position::car)
+  {
+    startPos_.SetPosition(startp1,startp2,startp3,frame);
+    calculateStopPos_ = true;
+  }
 
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return dir_;}
+  const I3Direction& GetDir() const {return dir_;}
 
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
+  void SetDir(const I3Direction& d)
+  {
+    dir_.SetDirection(d);
+    calculateStopPos_ = true;
+  }
 
   /**
    * sets the direction of the track
    */
-  void SetDir(double zen, double azi) {dir_.SetDirection(zen,azi);}
+  void SetDir(double zen, double azi)
+  {
+    dir_.SetDirection(zen,azi);
+    calculateStopPos_ = true;
+  }
 
   /**
    * sets the direction of the track
    */
-  void SetDir(double x, double y, double z) 
-    {dir_.SetDirection(x,y,z);}
+  void SetDir(double x, double y, double z)
+  {
+    dir_.SetDirection(x,y,z);
+    calculateStopPos_ = true;
+  }
 
   /**
    * gives the zenith of the track
@@ -131,14 +166,20 @@ class I3Contained
   /**
    * sets the zenith of the track
    */
-  void SetZenith(double zen) {
-    dir_.SetDirection(zen,dir_.GetAzimuth());}
+  void SetZenith(double zen)
+  {
+    dir_.SetDirection(zen,dir_.GetAzimuth());
+    calculateStopPos_ = true;
+  }
 
   /**
    * sets the azimuth of the track
    */
-  void SetAzimuth(double azi) {
-    dir_.SetDirection(dir_.GetZenith(),azi);}
+  void SetAzimuth(double azi)
+  {
+    dir_.SetDirection(dir_.GetZenith(),azi);
+    calculateStopPos_ = true;
+  }
 
   /**
    * gives the length of the track
@@ -148,7 +189,11 @@ class I3Contained
   /**
    * sets the length of the track
    */
-  void SetLength(double length) {length_ = length;}
+  void SetLength(double length)
+  {
+    length_ = length;
+    calculateStopPos_ = true;
+  }
 
   /**
    * computes the stopping t of the track
@@ -161,20 +206,22 @@ class I3Contained
   /**
    * computes the stopping position of the track
    */
-  I3Position GetStopPos() const
+  const I3Position& GetStopPos() const
+  {
+    if(calculateStopPos_)
     {
-      I3Position p;
-      double x,y,z;
-      x=startPos_.GetX()-length_*sin(dir_.GetZenith())*cos(dir_.GetAzimuth());
-      y=startPos_.GetY()-length_*sin(dir_.GetZenith())*sin(dir_.GetAzimuth());
-      z=startPos_.GetZ()-length_*cos(dir_.GetZenith());
+      double x=startPos_.GetX()-length_*sin(dir_.GetZenith())*cos(dir_.GetAzimuth());
+      double y=startPos_.GetY()-length_*sin(dir_.GetZenith())*sin(dir_.GetAzimuth());
+      double z=startPos_.GetZ()-length_*cos(dir_.GetZenith());
       // According to IceCube angle definitions, zenith and azimuth are
       // defined for the minus track direction, i.e. where the track came from
       // This means that there is a minus sign in the calculations.
-      p.SetPosition(x,y,z,I3Position::car);
-      return p;
-/*       return I3Distance::ShiftAlongTrack(this, length_); */
+      stopPos_.SetPosition(x,y,z,I3Position::car);
+      // use I3Distance::ShiftAlongTrack(this, length_) ???
+      calculateStopPos_ = false;
     }
+    return stopPos_;
+  }
 
   /**
    * returns the speed of light
@@ -193,14 +240,15 @@ class I3Contained
 	contained->dir_ = dir_;
 	contained->startT_ = startT_;
 	contained->length_ = length_;
+  contained->calculateStopPos_ = true;
       }
     }
 
   virtual void ToStream(ostream& o) const
     {
       o<<"Geometry: Contained\n"
-       <<"StartPosition:\n"<<startPos_
-       <<"StopPosition:\n"<<GetStopPos()
+       <<"StartPosition:\n"<<GetStopPos()
+       <<"StopPosition:\n"<<stopPos_
        <<"Direction:\n"<<dir_
        <<"StartTime: "<<startT_<<"\n"
        <<"StopTime: "<<GetStopT()<<"\n";
@@ -209,6 +257,15 @@ class I3Contained
   private:
   friend class boost::serialization::access;
 
+  //template <class Archive>
+  //void save(Archive& ar, unsigned version) const
+  //{
+  //  ar & make_nvp("StartPos", startPos_ );
+  //  ar & make_nvp("Dir", dir_ );
+  //  ar & make_nvp("StartT", startT_ );
+  //  ar & make_nvp("Length", length_ );
+  //}
+
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
@@ -216,8 +273,14 @@ class I3Contained
     ar & make_nvp("Dir", dir_ );
     ar & make_nvp("StartT", startT_ );
     ar & make_nvp("Length", length_ );
+    
+    calculateStopPos_ = true;
   }
-    //ROOT macro
+  //BOOST_SERIALIZATION_SPLIT_MEMBER()
+  //would be much better to split serialize into save and load
+  //but rootcint can not deal with above macro ... need to check in detail
+  
+  //ROOT macro
   ClassDef(I3Contained,1)
 };
 

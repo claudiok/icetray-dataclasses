@@ -58,7 +58,7 @@ class I3Infinite
   /**
    * gets a position along the track.
    */
-  I3Position GetPos() const {return pos_;}
+  const I3Position& GetPos() const {return pos_;}
 
   /**
    * sets a position along the track.
@@ -75,7 +75,7 @@ class I3Infinite
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return dir_;}
+  const I3Direction& GetDir() const {return dir_;}
 
   /**
    * sets the direction of the track

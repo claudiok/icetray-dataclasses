@@ -57,7 +57,7 @@ class I3Stopping
   /**
    * gives the stopping positition as a position on the track
    */
-  I3Position GetPos() const {return stopPos_;}
+  const I3Position& GetPos() const {return stopPos_;}
 
   /**
    * sets the stopping positition as a position on the track
@@ -67,7 +67,7 @@ class I3Stopping
   /**
    * gets the direction of the track
    */
-  I3Direction GetDir() const {return dir_;}
+  const I3Direction& GetDir() const {return dir_;}
 
   /**
    * sets the direction of the track
@@ -129,7 +129,7 @@ class I3Stopping
   /**
    * gets the stopping position
    */
-  I3Position GetStopPos() const {return stopPos_;}
+  const I3Position& GetStopPos() const {return stopPos_;}
 
   /**
    * sets the stopping position

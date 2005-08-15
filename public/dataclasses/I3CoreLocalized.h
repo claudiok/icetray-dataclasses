@@ -40,7 +40,7 @@ class I3CoreLocalized
   /**
    * gives the position of the core
    */
-  I3Position GetCorePos() const {return corePos_;}
+  const I3Position& GetCorePos() const {return corePos_;}
 
   /**
    * sets the position of the core

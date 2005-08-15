@@ -80,7 +80,7 @@ class I3CascadeImpl : public I3Cascade,
   /**
    * the position of the cascade as an I3Position object
    */
-  virtual I3Position GetPos() const {return LocalizableType::GetPos();}
+  virtual const I3Position& GetPos() const {return LocalizableType::GetPos();}
 
   virtual void CopyTo(I3Particle& destination) const
     {

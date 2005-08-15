@@ -47,7 +47,7 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
   /**
    * Get the position of the tank
    */
-  I3Position GetPos() const {
+  const I3Position& GetPos() const {
     return surfModulePos_;
   }
 
