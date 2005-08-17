@@ -91,7 +91,7 @@ class I3OMGeo : public TObject
   /**
    * @param pos The new position for this OM
    */
-  void SetPos(I3Position& pos)
+  void SetPos(const I3Position& pos)
     {position_.SetPosition(pos);}
   
   /**

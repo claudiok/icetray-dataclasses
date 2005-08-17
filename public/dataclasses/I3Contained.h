@@ -11,7 +11,8 @@
 #ifndef I3CONTAINED_H
 #define I3CONTAINED_H
 
-#include "I3Units.h"
+#include "I3Position.h"
+#include "I3Direction.h"
 #include "I3Constants.h"
 #include <cmath>
 /**
@@ -104,7 +105,7 @@ class I3Contained
   /**
    * sets the starting positition as a position on the track
    */
-  void SetPos(I3Position& p)
+  void SetPos(const I3Position& p)
   {
     startPos_ = p;
     calculateStopPos_ = true;
@@ -257,17 +258,17 @@ class I3Contained
   private:
   friend class boost::serialization::access;
 
-  //template <class Archive>
-  //void save(Archive& ar, unsigned version) const
-  //{
-  //  ar & make_nvp("StartPos", startPos_ );
-  //  ar & make_nvp("Dir", dir_ );
-  //  ar & make_nvp("StartT", startT_ );
-  //  ar & make_nvp("Length", length_ );
-  //}
+  template <class Archive>
+  void save(Archive& ar, unsigned version) const
+  {
+    ar & make_nvp("StartPos", startPos_ );
+    ar & make_nvp("Dir", dir_ );
+    ar & make_nvp("StartT", startT_ );
+    ar & make_nvp("Length", length_ );
+  }
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
+  void load(Archive& ar, unsigned version)
   {
     ar & make_nvp("StartPos", startPos_ );
     ar & make_nvp("Dir", dir_ );
@@ -276,12 +277,10 @@ class I3Contained
     
     calculateStopPos_ = true;
   }
-  //BOOST_SERIALIZATION_SPLIT_MEMBER()
-  //would be much better to split serialize into save and load
-  //but rootcint can not deal with above macro ... need to check in detail
+  BOOST_SERIALIZATION_SPLIT_MEMBER()
   
   //ROOT macro
-  ClassDef(I3Contained,1)
+  ClassDef(I3Contained,2)
 };
 
 #endif //I3CONTAINED_H

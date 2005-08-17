@@ -13,11 +13,11 @@
 #ifndef I3DATAREADOUT_H
 #define I3DATAREADOUT_H
 
-#include <TObject.h>
-#include "StoragePolicy.h"
-#include "TClass.h"
 #include <iostream>
 #include <sstream>
+#include <TObject.h>
+#include <TClass.h>
+#include "StoragePolicy.h"
 
 using namespace std;
 
@@ -53,7 +53,7 @@ public:
     /**
      * default constructor
      */
-    I3DataReadout(){};
+    I3DataReadout(){}
     
     /**
      * default destructor
@@ -100,6 +100,10 @@ public:
     ar & make_nvp("Raw", raw_);
   }
 
+  // private copy constructors and assignment
+  I3DataReadout(const I3DataReadout& other);
+  I3DataReadout& operator=(const I3DataReadout& other);
+
   // ROOT Macro
   ClassDef(I3DataReadout,1);
 };
@@ -117,7 +121,7 @@ inline ostream& operator<<(ostream& o,const I3DataReadout& readout)
  * Pointer typedeffed away to insulate users from the 
  * memory-mananagement implementation
  */
-typedef shared_ptr<I3DataReadout>  I3DataReadoutPtr;
+typedef shared_ptr<I3DataReadout> I3DataReadoutPtr;
 
 #endif
 

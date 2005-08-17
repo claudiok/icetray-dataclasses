@@ -13,19 +13,26 @@
 #include <algorithm>
 #include <functional>
 
+using namespace std;
+
 double I3AMANDAAnalogReadout::GetFirstLE() const
 {
-  if(LEs_.size()==0)
-    return NAN;
+  if(LEs_.empty()) return NAN;
 
-  vector<double> tmp=LEs_;
-  sort(tmp.begin(),tmp.end());
-  return tmp[0];
+  if(processFirstLE_)
+  {
+    vector<double> tmp = LEs_;
+    sort(tmp.begin(),tmp.end());
+    firstLE_ = tmp[0];
+    processFirstLE_ = false;
+  }
+  
+  return firstLE_;
 }
 
 const vector<double>& I3AMANDAAnalogReadout::GetTOTs() const
 {
-  if(calculateTOTs_)
+  if(processTOTs_)
   {
     // this is not true for AMANDA data, but this is fixed in the
     // f2k reader
@@ -34,7 +41,7 @@ const vector<double>& I3AMANDAAnalogReadout::GetTOTs() const
 
     TOTs_.resize(LEs_.size());
     transform(TEs_.begin(), TEs_.end(), LEs_.begin(), TOTs_.begin(), minus<double>());
-    calculateTOTs_ = false;
+    processTOTs_ = false;
   }
                                                                                                                             
   return TOTs_;

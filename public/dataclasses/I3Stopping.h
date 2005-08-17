@@ -12,7 +12,6 @@
 #define I3STOPPING_H
 
 #include <cmath>
-#include "I3Units.h"
 #include "I3Constants.h"
 #include "I3Position.h"
 #include "I3Direction.h"
@@ -62,7 +61,7 @@ class I3Stopping
   /**
    * sets the stopping positition as a position on the track
    */
-  void SetPos(I3Position& p) {stopPos_ = p;}
+  void SetPos(const I3Position& p) {stopPos_ = p;}
 
   /**
    * gets the direction of the track
@@ -72,7 +71,7 @@ class I3Stopping
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
+  void SetDir(const I3Direction& d) {dir_.SetDirection(d);}
 
   /**
    * sets the direction of the track
@@ -134,7 +133,7 @@ class I3Stopping
   /**
    * sets the stopping position
    */
-  void SetStopPos(I3Position& p) {stopPos_ = p;}
+  void SetStopPos(const I3Position& p) {stopPos_ = p;}
 
   /**
    * sets the stopping position in any reference frame

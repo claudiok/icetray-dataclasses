@@ -37,7 +37,7 @@ class I3Directional
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
+  void SetDir(const I3Direction& d) {dir_.SetDirection(d);}
 
   /**
    * sets the direction of the track

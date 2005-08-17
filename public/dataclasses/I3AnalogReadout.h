@@ -11,7 +11,7 @@
 #ifndef I3ANALOGREADOUT_H
 #define I3ANALOGREADOUT_H
 
-#include "dataclasses/I3DataReadout.h"
+#include "I3DataReadout.h"
 #include "StoragePolicy.h"
 
 /**
@@ -30,12 +30,12 @@ public:
     /**
      * constructor
      */
-    I3AnalogReadout() { }
+    I3AnalogReadout() {}
     
     /**
      * destructor
      */
-    virtual ~I3AnalogReadout() {;}
+    virtual ~I3AnalogReadout() {}
 
     /**
      * returns the first leading edge time in the 
@@ -43,7 +43,7 @@ public:
      */
     virtual double GetFirstLE() const = 0;
    
-    virtual void ToStream(ostream& o) const { }
+    virtual void ToStream(ostream& o) const {}
 
   
 private:
@@ -56,6 +56,10 @@ private:
     ar & make_nvp("I3DataReadout", base_object<I3DataReadout>(*this) );
   }
 
+  // private copy constructors and assignment
+  I3AnalogReadout(const I3AnalogReadout& other);
+  I3AnalogReadout& operator=(const I3AnalogReadout& other);
+
   ClassDef(I3AnalogReadout,1);
 };
 
@@ -65,6 +69,6 @@ BOOST_IS_ABSTRACT(I3AnalogReadout);
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef shared_ptr<I3AnalogReadout>  I3AnalogReadoutPtr;
+typedef shared_ptr<I3AnalogReadout> I3AnalogReadoutPtr;
 #endif
 

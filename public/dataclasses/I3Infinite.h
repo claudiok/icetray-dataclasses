@@ -13,8 +13,9 @@
 #define I3INFINITE_H
 
 #include <cmath>
-#include "I3Units.h"
 #include "I3Constants.h"
+#include "I3Direction.h"
+#include "I3Position.h"
 
 /**
  * @brief The geometrical part of an I3Track implementation, representing an 
@@ -63,7 +64,7 @@ class I3Infinite
   /**
    * sets a position along the track.
    */
-  void SetPos(I3Position& p) {pos_.SetPosition(p);}
+  void SetPos(const I3Position& p) {pos_.SetPosition(p);}
 
   /**
    * sets a position along the track in any reference frame.
@@ -80,7 +81,7 @@ class I3Infinite
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
+  void SetDir(const I3Direction& d) {dir_.SetDirection(d);}
 
   /**
    * sets the direction of the track

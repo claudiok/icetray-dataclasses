@@ -11,7 +11,8 @@
 #ifndef I3CORELOCALIZED_H
 #define I3CORELOCALIZED_H
 
-#include "dataclasses/I3Constants.h"
+#include "I3Constants.h"
+#include "I3Position.h"
 
 /**
  * @brief The core position part of an I3Primary implementation.  
@@ -45,7 +46,7 @@ class I3CoreLocalized
   /**
    * sets the position of the core
    */
-  void SetCorePos(I3Position corepos)
+  void SetCorePos(const I3Position& corepos)
     {
       corePos_.SetPosition(corepos);
       corePos_.SetZ(I3Constants::zIceTop); // ensure the position corresponds to IceTop

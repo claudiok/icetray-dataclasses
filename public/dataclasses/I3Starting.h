@@ -12,7 +12,6 @@
 #define I3STARTING_H
 
 #include <cmath>
-#include "I3Units.h"
 #include "I3Constants.h"
 #include "I3Position.h"
 #include "I3Direction.h"
@@ -68,7 +67,7 @@ class I3Starting
   /**
    * sets the starting position
    */
-  void SetStartPos(I3Position& p) {startPos_ = p;}
+  void SetStartPos(const I3Position& p) {startPos_ = p;}
 
   /**
    * sets the starting position in any reference frame
@@ -90,7 +89,7 @@ class I3Starting
   /**
    * sets the starting positition as a position on the track
    */
-  void SetPos(I3Position &p) {startPos_ = p;}
+  void SetPos(const I3Position &p) {startPos_ = p;}
 
   /**
    * gets the direction of the track
@@ -100,7 +99,7 @@ class I3Starting
   /**
    * sets the direction of the track
    */
-  void SetDir(I3Direction& d) {dir_.SetDirection(d);}
+  void SetDir(const I3Direction& d) {dir_.SetDirection(d);}
 
   /**
    * sets the direction of the track

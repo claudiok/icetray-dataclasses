@@ -13,13 +13,11 @@
 #ifndef I3DIGITALREADOUT_H
 #define I3DIGITALREADOUT_H
 
+#include <iostream>
 #include "StoragePolicy.h"
 #include "I3DataReadout.h"
 #include "I3DigitalLaunch.h"
 
-#include <vector>
-
-using namespace std; 
 /**
  * @brief Base class for digitial I3DataReadouts (containing waveform
  * information)
@@ -47,7 +45,7 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
   /**
    * dumps the class to the given ostream
    */
-  virtual void ToStream(ostream& o) const
+  virtual void ToStream(std::ostream& o) const
     {
       I3DataReadout::ToStream(o);
       const_iterator iter;
@@ -69,6 +67,10 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
     ar & make_nvp("Vector", 
 		  base_object< STLVectorStoragePolicy<I3DigitalLaunchPtr> >(*this));
   }
+
+  // private copy constructors and assignment
+  I3DigitalReadout(const I3DigitalReadout& other);
+  I3DigitalReadout& operator=(const I3DigitalReadout& other);
 
   // ROOT macro
   ClassDef(I3DigitalReadout,1);

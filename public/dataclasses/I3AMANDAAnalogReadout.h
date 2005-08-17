@@ -13,13 +13,11 @@
 #ifndef I3AMANDAANALOGREADOUT_H
 #define I3AMANDAANALOGREADOUT_H
 
-#include "I3AnalogReadout.h"
-#include "I3DataReadout.h"
-#include "StoragePolicy.h"
-
+#include <iostream>
 #include <vector>
 
-using namespace std;
+#include "I3AnalogReadout.h"
+#include "StoragePolicy.h"
 
 /**
  * @brief Old-style AMANDA ADC/TDC readout
@@ -31,19 +29,28 @@ using namespace std;
  */
 class I3AMANDAAnalogReadout : public I3AnalogReadout 
 { 
-  vector<double> LEs_; 
-  vector<double> TEs_; 
-  mutable vector<double> TOTs_;
-  mutable bool calculateTOTs_;
-  vector<int>    HitNumbers_;  
-  vector<int>    ParentIDs_;  
+  std::vector<double> LEs_; 
+  std::vector<double> TEs_; 
+  mutable double firstLE_;
+  mutable bool processFirstLE_;
+  mutable std::vector<double> TOTs_;
+  mutable bool processTOTs_;
+  std::vector<int> HitNumbers_;  
+  std::vector<int> ParentIDs_;  
   double adc_;         
-  bool   overflow_;    
-  bool   is_calib_;    
+  bool overflow_;    
+  bool is_calib_;    
  
 public:
-  I3AMANDAAnalogReadout() : calculateTOTs_(true) {};
-  virtual ~I3AMANDAAnalogReadout(){};
+  /**
+   * Default constructor.
+   */
+  I3AMANDAAnalogReadout() : processFirstLE_(true), processTOTs_(true) {}
+  
+  /**
+   * Destructor.
+   */
+  virtual ~I3AMANDAAnalogReadout(){}
 
   /**
    * Returns the earliest leading edge recorded by the DAQ
@@ -53,20 +60,21 @@ public:
   /** 
    * Returns the series of leading edges
    */
-  const vector<double>& GetLEs() const {return LEs_;}
-  vector<double>& GetLEs()
+  const std::vector<double>& GetLEs() const {return LEs_;}
+  std::vector<double>& GetLEs()
   { 
-    calculateTOTs_ = true;
+    processFirstLE_ = true;
+    processTOTs_ = true;
     return LEs_;
   }
     
   /**
    * Returns the series of trailing edges
    */
-  const vector<double>& GetTEs() const {return TEs_;}
-  vector<double>& GetTEs()
+  const std::vector<double>& GetTEs() const {return TEs_;}
+  std::vector<double>& GetTEs()
   {
-    calculateTOTs_ = true;    
+    processTOTs_ = true;    
     return TEs_;
   }
     
@@ -74,13 +82,13 @@ public:
    * Returns the time differences between leading and trailing edges.
    * If some edges are missing, the series may be shorter than expected.
    */
-  const vector<double>& GetTOTs() const;
+  const std::vector<double>& GetTOTs() const;
 
-  const vector<int>& GetHitNumbers() const {return HitNumbers_;}
-  vector<int>& GetHitNumbers() {return HitNumbers_;}
+  const std::vector<int>& GetHitNumbers() const {return HitNumbers_;}
+  std::vector<int>& GetHitNumbers() {return HitNumbers_;}
 
-  const vector<int>& GetParentIDs() const {return ParentIDs_;}
-  vector<int>& GetParentIDs() {return ParentIDs_;}
+  const std::vector<int>& GetParentIDs() const {return ParentIDs_;}
+  std::vector<int>& GetParentIDs() {return ParentIDs_;}
 
   /** 
    * Alternate name for the amplitude
@@ -109,7 +117,7 @@ public:
   void SetCalibrated(bool is_calib) {is_calib_=is_calib;}
     
 
-  virtual void ToStream(ostream& o) const 
+  virtual void ToStream(std::ostream& o) const 
   {
     I3AnalogReadout::ToStream(o);
     o << "Amplitude: " << adc_ << "\n"
@@ -130,20 +138,20 @@ public:
 
 private:
   friend class boost::serialization::access;
-  
-  //template <class Archive> void save(Archive& ar, unsigned version) const
-  //{
-  //  ar & make_nvp("I3AnalogReadout", base_object<I3AnalogReadout>(*this));
-  //  ar & make_nvp("LEs", LEs_);
-  //  ar & make_nvp("TEs", TEs_);
-  //  ar & make_nvp("HitNumbers", HitNumbers_);
-  //  ar & make_nvp("ParentIDs", ParentIDs_);
-  //  ar & make_nvp("ADC", adc_ );
-  //  ar & make_nvp("Overflow", overflow_ );
-  //  ar & make_nvp("Calib", is_calib_ );
-  //}
 
-  template <class Archive> void serialize(Archive& ar, unsigned version)
+  template <class Archive> void save(Archive& ar, unsigned version) const
+  {
+    ar & make_nvp("I3AnalogReadout", base_object<I3AnalogReadout>(*this));
+    ar & make_nvp("LEs", LEs_);
+    ar & make_nvp("TEs", TEs_);
+    ar & make_nvp("HitNumbers", HitNumbers_);
+    ar & make_nvp("ParentIDs", ParentIDs_);
+    ar & make_nvp("ADC", adc_ );
+    ar & make_nvp("Overflow", overflow_ );
+    ar & make_nvp("Calib", is_calib_ );
+  }
+
+  template <class Archive> void load(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3AnalogReadout", base_object<I3AnalogReadout>(*this));
     ar & make_nvp("LEs", LEs_);
@@ -154,14 +162,17 @@ private:
     ar & make_nvp("Overflow", overflow_ );
     ar & make_nvp("Calib", is_calib_ );
     
-    calculateTOTs_ = true;
+    processFirstLE_ = true;
+    processTOTs_ = true;
   }
-  //BOOST_SERIALIZATION_SPLIT_MEMBER()
-  //would be much better to split serialize into save and load
-  //but rootcint can not deal with above macro ... need to check in detail
+  BOOST_SERIALIZATION_SPLIT_MEMBER()
+
+  // private copy constructors and assignment
+  I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout& other);
+  I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout& other);
 
   // ROOT macro
-  ClassDef(I3AMANDAAnalogReadout,1);
+  ClassDef(I3AMANDAAnalogReadout,2);
 };
 
 BOOST_SHARED_POINTER_EXPORT(I3AMANDAAnalogReadout);

@@ -54,7 +54,7 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
   /**
    * Set the position of the tank, in x, y and z
    */
-  void SetPos (I3Position pos) {
+  void SetPos (const I3Position& pos) {
     surfModulePos_.SetPosition(pos);
   }
 

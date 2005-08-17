@@ -12,7 +12,7 @@
 #ifndef I3LOCALIZED_H
 #define I3LOCALIZED_H
 
-#include "I3Cascade.h"
+#include "I3Position.h"
 
 /**
  * @brief A class which satisfies the "Localization" part of an I3Cascade, and 
@@ -44,7 +44,7 @@ class I3Localized{
   /**
    * sets the position of the cascade 
    */
-  void SetPos(I3Position p) {pos_.SetPosition(p);}
+  void SetPos(const I3Position& p) {pos_.SetPosition(p);}
 
   /**
    * sets the position of the cascade 
