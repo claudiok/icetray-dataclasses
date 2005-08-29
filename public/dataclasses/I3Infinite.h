@@ -95,6 +95,11 @@ class I3Infinite
     {dir_.SetDirection(x,y,z);}
 
   /**
+   * sets the direction of the track
+   */
+  void SetThetaPhi(double theta, double phi) {dir_.SetThetaPhi(theta,phi);}
+
+  /**
    * gets the zenith of the track
    */
   double GetZenith() const {return dir_.GetZenith();}

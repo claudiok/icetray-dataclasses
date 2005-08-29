@@ -145,9 +145,7 @@ class I3Direction : public TObject
    * Calculate Theta of direction
    */
   double CalcTheta() const {
-    double theta = 180*deg - zenith_;
-    if (theta > 180*deg) theta = 360*deg - theta;
-    if (theta < 0) theta = -theta;
+    double theta = pi - zenith_;
     return theta;
   }
 
@@ -155,9 +153,8 @@ class I3Direction : public TObject
    * Calculate Phi of direction
    */
   double CalcPhi() const {
-    double phi = azimuth_ + 180*deg;
-    if (phi >= 360*deg) phi -= 360*deg;
-    if (phi < 0) phi += 360*deg;
+    double phi = pi + azimuth_;
+    if (phi >= 2*pi) phi -= 2*pi;
     return phi;
   }
 

@@ -76,11 +76,11 @@ void I3Direction::SetDirection(double x, double y, double z)
 //-----------------------------------------------------------
 void I3Direction::SetThetaPhi(double theta, double phi)
 {
-	zenith_ = pi-theta;
-	azimuth_ = phi+pi;
-	if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
-	azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
-	CalcCarFromSph();
+  if (theta>pi) theta = 2*pi-theta;
+  zenith_ = pi-theta;
+  azimuth_ = pi+phi;
+  if (azimuth_>=2.*pi) azimuth_ -= 2*pi;
+  CalcCarFromSph();
 }
 
 //-----------------------------------------------------------
