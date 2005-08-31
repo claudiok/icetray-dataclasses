@@ -29,7 +29,7 @@ TEST(assignment_copy)
   ENSURE(h.GetTriggerFired() == false);
   ENSURE(h.GetTriggerTime() == 0.0);
   ENSURE(h.GetTriggerLength() == 0.0);
-  ENSURE(h.GetSubDectector() == Unkown);
+  ENSURE(h.GetSubDetector() == Unkown);
   //Now set some values.
   j.SetTriggerTime(12345.67);
   j.SetTriggerLength(1567.89);
