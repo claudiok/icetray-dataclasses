@@ -29,19 +29,19 @@ TEST(assignment_copy)
   ENSURE(h.GetTriggerFired() == false);
   ENSURE(h.GetTriggerTime() == 0.0);
   ENSURE(h.GetTriggerLength() == 0.0);
-  ENSURE(h.GetSubDetector() == Unkown);
+  ENSURE(h.GetSubDetector() == I3Trigger::Unknown);
   //Now set some values.
   j.SetTriggerTime(12345.67);
   j.SetTriggerLength(1567.89);
   j.SetTriggerFired(true);
-  j.SetSubDetector(InIce);
+  j.SetSubDetector(I3Trigger::InIce);
   //test assignment one object to another
   h = j;
   //Check it correct.
   ENSURE_DISTANCE(0.1, 0.1, 0.0001,"ensure test");
-  ENSURE_DISTANCE(j.GetTriggerTime(), h.GetTriggerTime, (float)0.0001,
+  ENSURE_DISTANCE(j.GetTriggerTime(), h.GetTriggerTime(), 0.001,
 		  "trigger time simple assignment");
-  ENSURE_DISTANCE(j.GetTriggerLength(), h.GetTriggerLength, (float)0.0001,
+  ENSURE_DISTANCE(j.GetTriggerLength(), h.GetTriggerLength(), 0.001,
 		  "trigger length simple assignment");
   ENSURE(j.GetTriggerFired() == j.GetTriggerFired());
   ENSURE(j.GetSubDetector() == j.GetSubDetector());
