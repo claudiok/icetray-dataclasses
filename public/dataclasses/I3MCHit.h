@@ -69,7 +69,7 @@ class I3MCHit : public I3Hit
   /**
    * @param CherenkovDistance set the direct path distance to track which caused this hit
    */
-  void SetParticleID(double CherenkovDistance) { cherenkovDistance_ = CherenkovDistance; }
+  void SetCherenkovDistance(double CherenkovDistance) { cherenkovDistance_ = CherenkovDistance; }
 
   virtual ~I3MCHit() {} 
 
