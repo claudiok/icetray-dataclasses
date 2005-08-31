@@ -29,9 +29,12 @@ TEST(assignment_copy)
   ENSURE(h.GetParticleID() == 0);
   j.SetWeight(M_PI);
   j.SetParticleID(rand()%256);
+  j.SetCherenkovDistance(123.45);
   h = j;
   ENSURE_DISTANCE(0.1, 0.1, 0.0001,"ensure test");
   ENSURE_DISTANCE(j.GetWeight(), h.GetWeight(), (float)0.0001,"simple assignment");
+  ENSURE_DISTANCE(j.GetCherenkovDistance(),h.GetCherenkovDistance(), 0.01, 
+		  "CherenkovDistance test");
   ENSURE(j.GetParticleID() == j.GetParticleID());
 }
 
