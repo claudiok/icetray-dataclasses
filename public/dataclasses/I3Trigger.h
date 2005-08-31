@@ -35,41 +35,41 @@ class I3Trigger : public TObject
   /**
    * An enumerated type for the Subdetector type that generated the trigger
    */
-  enum TrigSubDetector {Unknown=0, InIce=1, IceTop=2, Amanda=3, Global=4};
+  enum TrigSubDetector {Unknown=0, InIce=1, IceTop=2, Amanda=3, Global=4, Calib=5};
     
-  I3Trigger() {TriggerChannel = -1; Fired=false;}
+  I3Trigger() {
+    fired_=false; 
+    triggerTime_=0.0; 
+    triggerLength_=0.0; 
+    triggerSubDetector_=Unknown;
+  }
 
   virtual ~I3Trigger() {}
     
   private:
-  vector<double>  TriggerTime;       // Time at which the trigger was issued
-  vector<double>  TriggerLength;     // Duration of triggered readout window
-  int             TriggerChannel;    // Trigger Channel
-  bool            Fired;             // true id trigger fired
-  TrigSubDetector TriggerSubDetector;// subdetector on which this trigger ran
+  double  triggerTime_;       // Time at which the trigger was issued
+  double  triggerLength_;     // Duration of triggered readout window
+  bool    fired_;             // true if trigger fired (used for simulations)
+  TrigSubDetector triggerSubDetector_;// subdetector on which this trigger ran
 
   public:
 
-  const vector<double> &GetTriggerTime() const {return TriggerTime;}
-  vector<double> &GetTriggerTime() {return TriggerTime;}
+  const double GetTriggerTime() const {return triggerTime_;}
+  double GetTriggerTime() {return triggerTime_;}
+  void SetTriggerTime(double time) {triggerTime_ = time;}
 
-  const vector<double> &GetTriggerLength() const {return TriggerLength;}
-  vector<double> &GetTriggerLength() {return TriggerLength;}
+  const double GetTriggerLength() const {return triggerLength_;}
+  double GetTriggerLength() {return triggerLength_;}
+  void SetTriggerLength(double length) {triggerLength_ = length;}
 
-  const int GetTriggerChannel() const {return TriggerChannel;}
-  int GetTriggerChannel() {return TriggerChannel;}
+  const bool GetTriggerFired() const {return fired_;}
+  bool GetTriggerFired() {return fired_;}
+  void SetTriggerFired(bool fired) {fired_ = fired;}
 
-  void SetTriggerChannel(int channel) {TriggerChannel = channel;}
-
-  const bool GetTriggerFired() const {return Fired;}
-  bool GetTriggerFired() {return Fired;}
-
-  void SetTriggerFired(bool fired) {Fired = fired;}
-
-  const TrigSubDetector GetSubDetector() const {return TriggerSubDetector;}
-  TrigSubDetector GetSubDetector() {return TriggerSubDetector;}
+  const TrigSubDetector GetSubDetector() const {return triggerSubDetector_;}
+  TrigSubDetector GetSubDetector() {return triggerSubDetector_;}
   
-  void SetSubDetector(TrigSubDetector subdetector) {TriggerSubDetector = subdetector;}
+  void SetSubDetector(TrigSubDetector subdetector) {triggerSubDetector_ = subdetector;}
 
   /**
    * @todo finish implementing this method
@@ -86,7 +86,10 @@ class I3Trigger : public TObject
    */
   virtual void ToStream(ostream& o) const
   {
-    o<<"[ "<<IsA()->GetName()<<" ]\n";
+  o<<"[I3Trigger:   TrigTime:"<<triggerTime_<< "\n"
+     <<"            TrigLength:"<<triggerLength_<< "\n"
+     <<"            SubDectectorID:"<<triggerSubDetector_<< "\n"
+     <<"            Fired:"<<fired_<<" ]\n";
   }
 
   private:
@@ -95,11 +98,10 @@ class I3Trigger : public TObject
 
   template <class Archive> void serialize(Archive& ar, unsigned version)  
   { 
-    ar & make_nvp("TriggerTime",TriggerTime);
-    ar & make_nvp("TriggerLength",TriggerLength);
-    ar & make_nvp("TriggerChannel",TriggerChannel);
-    ar & make_nvp("Fired",Fired);
-    ar & make_nvp("TriggerSubDetector",TriggerSubDetector);
+    ar & make_nvp("TriggerTime",triggerTime_);
+    ar & make_nvp("TriggerLength",triggerLength_);
+    ar & make_nvp("Fired",fired_);
+    ar & make_nvp("TriggerSubDetector",triggerSubDetector_);
   }
  
   ClassDef(I3Trigger,1);
