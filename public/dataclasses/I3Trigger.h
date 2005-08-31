@@ -54,19 +54,16 @@ class I3Trigger : public TObject
 
   public:
 
-  const double GetTriggerTime() const {return triggerTime_;}
-  double GetTriggerTime() {return triggerTime_;}
+  double GetTriggerTime() const {return triggerTime_;}
   void SetTriggerTime(double time) {triggerTime_ = time;}
 
-  const double GetTriggerLength() const {return triggerLength_;}
-  double GetTriggerLength() {return triggerLength_;}
+  double GetTriggerLength() const {return triggerLength_;}
   void SetTriggerLength(double length) {triggerLength_ = length;}
 
-  const bool GetTriggerFired() const {return fired_;}
-  bool GetTriggerFired() {return fired_;}
-  void SetTriggerFired(bool fired) {fired_ = fired;}
+  bool GetTriggerFired() const {return fired_;}
+    void SetTriggerFired(bool fired) {fired_ = fired;}
 
-  const TrigSubDetector GetSubDetector() const {return triggerSubDetector_;}
+  TrigSubDetector GetSubDetector() const {return triggerSubDetector_;}
   TrigSubDetector GetSubDetector() {return triggerSubDetector_;}
   
   void SetSubDetector(TrigSubDetector subdetector) {triggerSubDetector_ = subdetector;}
