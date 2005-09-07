@@ -33,9 +33,14 @@ using namespace std;
 /**
  * @brief The basic position class for IceCube. 
  *
- * All positions in IceCube should be written with this class.
- * Positions can be given in cartesian, spherical, or cylindrical coordinates.
+ * All directions in IceCube should be written with this class.
+ * Directions can be given in zenith/azimuth or direction cosines.
+ * Optionally, they can also be set with theta/phi.
  * 
+ * See the graphic of the definitions of Zenith/Azimuth and theta/Phi 
+ * direction angles:
+ * http://icecube.umd.edu/dule/icecube/axes.html
+ *
  * @todo implement "print out" of all information in a uniform way...
  * @todo insure that the temporary data isn't written to disk.
  */
