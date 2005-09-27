@@ -60,8 +60,7 @@ class I3TWRLaunch : public I3DigitalLaunch, public STLVectorStoragePolicy<I3TWRF
   ClassDef(I3TWRLaunch,1);
 };
 
-BOOST_SHARED_POINTER_EXPORT(I3TWRLaunch);
-
 typedef shared_ptr<I3TWRLaunch> I3TWRLaunchPtr;
 #endif
+
 

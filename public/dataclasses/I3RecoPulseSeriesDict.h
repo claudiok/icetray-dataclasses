@@ -55,13 +55,8 @@ class I3RecoPulseSeriesDict : public TObject, public STLMapStoragePolicy<string,
 
   friend class boost::serialization::access;
 
-  template <class Archive> void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoPulseSeriesDict", base_object< STLMapStoragePolicy<string,I3RecoPulseSeriesPtr> >(*this));
-  }
-
-
-  ClassDef(I3RecoPulseSeriesDict,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3RecoPulseSeriesDict,1);
 };
 
 inline ostream& operator<<(ostream& o, const I3RecoPulseSeriesDict& dict)
@@ -73,4 +68,5 @@ inline ostream& operator<<(ostream& o, const I3RecoPulseSeriesDict& dict)
 typedef shared_ptr<I3RecoPulseSeriesDict> I3RecoPulseSeriesDictPtr;
 
 #endif
+
 

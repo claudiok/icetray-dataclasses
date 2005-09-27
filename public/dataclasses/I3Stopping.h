@@ -172,16 +172,10 @@ class I3Stopping
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("StopPos",stopPos_);
-    ar & make_nvp("Dir",dir_);
-    ar & make_nvp("StopT",stopT_);
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3Stopping,1)
 };
 
 #endif //I3STOPPING_H
+

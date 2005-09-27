@@ -32,13 +32,8 @@ class I3DOMStatus
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("rawStatus",rawStatus_);
-    ar & make_nvp("calibratedStatus",calibratedStatus_);
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 #endif
+

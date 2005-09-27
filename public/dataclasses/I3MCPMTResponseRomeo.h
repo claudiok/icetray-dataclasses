@@ -80,15 +80,8 @@ class I3MCPMTResponseRomeo : public I3MCPMTResponse
   ClassDef(I3MCPMTResponseRomeo,1);
 
   friend class boost::serialization::access;
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("I3MCPMTResponse",base_object<I3MCPMTResponse>(*this));
-    ar & make_nvp("Waveform",waveform_);
-    ar & make_nvp("BinSize",binSize_);
-  }
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3MCPMTResponseRomeo);
 
 /** 
  * pointer type to insulate users from memory managemnt issues
@@ -96,3 +89,4 @@ BOOST_SHARED_POINTER_EXPORT(I3MCPMTResponseRomeo);
 typedef shared_ptr<I3MCPMTResponseRomeo>  I3MCPMTResponseRomeoPtr;
 
 #endif
+

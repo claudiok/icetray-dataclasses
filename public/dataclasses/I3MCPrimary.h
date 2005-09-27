@@ -32,19 +32,9 @@ class I3MCPrimary : public I3PrimaryImpl<I3Directional,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3MCPrimary",  
-		  base_object< I3PrimaryImpl<I3Directional,
-	                                     I3Localized,
-	                                     I3Energetic> >(*this));
-  }
-
-  ClassDef(I3MCPrimary,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3MCPrimary,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3MCPrimary);
 
 /**
  * Pointer typedeffed away to insulate users from the 
@@ -53,3 +43,4 @@ BOOST_SHARED_POINTER_EXPORT(I3MCPrimary);
 typedef shared_ptr<I3MCPrimary>  I3MCPrimaryPtr;
 
 #endif
+

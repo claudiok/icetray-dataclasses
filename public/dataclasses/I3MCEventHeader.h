@@ -46,17 +46,10 @@ class I3MCEventHeader : public I3EventHeader
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3MCEventHeader", base_object<I3EventHeader>(*this));
-  }
-  
-  // ROOT Macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT Macro
   ClassDef(I3MCEventHeader,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3MCEventHeader);
 
 /**
  * Pointer typedeffed away to insulate users from the 
@@ -65,3 +58,4 @@ BOOST_SHARED_POINTER_EXPORT(I3MCEventHeader);
 typedef shared_ptr<I3MCEventHeader> I3MCEventHeaderPtr;
 
 #endif //I3MCEVENTHEADER_H
+

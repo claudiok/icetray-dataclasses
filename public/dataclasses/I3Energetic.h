@@ -63,14 +63,10 @@ class I3Energetic
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Energy", energy_);
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3Energetic,1);
 };
 
 #endif // I3ENERGETIC_H
+

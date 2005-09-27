@@ -87,16 +87,9 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3GoodOMSelection", base_object<I3OMListSelection>(*this) );
-  }
-
-  ClassDef(I3GoodOMSelection,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3GoodOMSelection,1);
 };
 
-BOOST_SHARED_POINTER_EXPORT(I3GoodOMSelection);
-
-
 #endif
+

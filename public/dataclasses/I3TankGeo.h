@@ -86,18 +86,8 @@ class I3TankGeo : public I3SurfModuleGeo {
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3SurfModuleGeo",base_object< I3SurfModuleGeo >(*this));
-    ar & make_nvp("radius",radius_);
-    ar & make_nvp("height",height_);
-    ar & make_nvp("fillHeight",fillHeight_);
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3TankGeo);
 
 inline ostream& operator<<(ostream& o, const I3TankGeo tank)
 {
@@ -111,4 +101,5 @@ inline ostream& operator<<(ostream& o, const I3TankGeo tank)
 typedef shared_ptr<I3TankGeo>  I3TankGeoPtr;
 
 #endif
+
 

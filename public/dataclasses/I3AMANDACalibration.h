@@ -74,13 +74,7 @@ public:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3AMANDACalibration",
-		  base_object< STLMapStoragePolicy<OMKey, I3AMANDAOMCalibPtr> >(*this));
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /**
@@ -98,3 +92,4 @@ typedef shared_ptr<I3AMANDACalibration> I3AMANDACalibrationPtr;
 
 
     
+

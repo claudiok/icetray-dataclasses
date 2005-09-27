@@ -13,7 +13,7 @@
 #define I3LOCALIZED_H
 
 #include "I3Position.h"
-
+#include "dataclasses/I3Particle.h"
 /**
  * @brief A class which satisfies the "Localization" part of an I3Cascade, and 
  * allows X,Y,Z, and T to be set and got.
@@ -86,13 +86,10 @@ class I3Localized{
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("Pos",pos_);
-    ar & make_nvp("Time",time_);
-  }
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3Localized,1);
 };
 
 #endif //I3LOCALIZED_H
+

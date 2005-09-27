@@ -76,14 +76,8 @@ class I3RecoResultSingleParticle : public I3RecoResult
 
   friend class boost::serialization::access;
   
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoResult", base_object<I3RecoResult>(*this));
-    ar & make_nvp("Particle", particle_);
-  }
-  
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3RecoResultSingleParticle, 1);
 };
 
@@ -94,3 +88,4 @@ class I3RecoResultSingleParticle : public I3RecoResult
 typedef shared_ptr<I3RecoResultSingleParticle>  I3RecoResultSingleParticlePtr;
 
 #endif
+

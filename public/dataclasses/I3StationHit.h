@@ -85,15 +85,8 @@ class I3StationHit : public TObject,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("I3StationHit", 
-		  base_object< STLVectorStoragePolicy<I3TankHitPtr> >(*this));
-    ar & make_nvp("StationNumber",stationNumber_);
-
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3StationHit,1);
 };
 
@@ -139,3 +132,4 @@ class I3StationHitMatchesStationNumber {
 };
 
 #endif
+

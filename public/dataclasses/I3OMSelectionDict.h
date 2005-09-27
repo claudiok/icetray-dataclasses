@@ -123,14 +123,8 @@ class I3OMSelectionDict : public TObject,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3OMSelectionDict", 
-		  base_object< STLMapStoragePolicy<string,I3OMResponseSelectionPtr> >(*this));
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3OMSelectionDict,1);
 };
 
@@ -150,3 +144,4 @@ inline ostream& operator<<(ostream& o,const I3OMSelectionDict& v)
 typedef shared_ptr<I3OMSelectionDict>  I3OMSelectionDictPtr;
 
 #endif
+

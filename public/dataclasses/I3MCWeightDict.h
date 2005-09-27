@@ -63,12 +63,8 @@ class I3MCWeightDict : public TObject, public STLMapStoragePolicy<string, float>
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3MCWeightDict", base_object< STLMapStoragePolicy<string, float> >(*this));
-  }
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3MCWeightDict,1);
 };
 
@@ -86,4 +82,5 @@ inline ostream& operator<<(ostream& o,const I3MCWeightDict& v)
 typedef shared_ptr<I3MCWeightDict>  I3MCWeightDictPtr;
 
 #endif
+
 

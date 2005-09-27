@@ -67,14 +67,8 @@ class I3OMResponseMap : public TObject,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3OMResponseMap", 
-		  base_object< STLMapStoragePolicy<OMKey,I3OMResponsePtr> >(*this));
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3OMResponseMap,1);
 };
 
@@ -99,3 +93,4 @@ typedef shared_ptr<I3OMResponseMap>  I3OMResponseMapPtr;
 typedef I3OMResponseMap::iterator I3OMResponseItr;
 
 #endif
+

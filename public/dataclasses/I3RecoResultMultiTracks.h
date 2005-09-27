@@ -48,18 +48,10 @@ class I3RecoResultMultiTracks : public I3RecoResult, public STLVectorStoragePoli
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoResult",base_object<I3RecoResult>(*this));
-    ar & make_nvp("I3ParticlePtrVector",base_object< STLVectorStoragePolicy<I3ParticlePtr> >(*this));
-  }
-
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3RecoResultMultiTracks,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3RecoResultMultiTracks);
 
 /**
  * Pointer typedeffed away to insulate users from the 
@@ -67,3 +59,4 @@ BOOST_SHARED_POINTER_EXPORT(I3RecoResultMultiTracks);
  */
 typedef shared_ptr<I3RecoResultMultiTracks> I3RecoResultMultiTracksPtr;
 #endif
+

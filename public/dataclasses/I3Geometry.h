@@ -77,13 +77,7 @@ class I3Geometry : public TObject
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("inIce",inIce_);
-    ar & make_nvp("top",top_);
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /** 
@@ -103,3 +97,4 @@ typedef shared_ptr<I3Geometry>  I3GeometryPtr;
 
 
 #endif // I3GEOMETRY_H
+

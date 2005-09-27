@@ -94,13 +94,8 @@ public:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Raw", raw_);
-  }
-
-  // private copy constructors and assignment
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// private copy constructors and assignment
   I3DataReadout(const I3DataReadout& other);
   I3DataReadout& operator=(const I3DataReadout& other);
 
@@ -124,4 +119,5 @@ inline ostream& operator<<(ostream& o,const I3DataReadout& readout)
 typedef shared_ptr<I3DataReadout> I3DataReadoutPtr;
 
 #endif
+
 

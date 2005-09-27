@@ -61,13 +61,8 @@ class I3RecoResult : public TObject
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //This method intentionally left blank
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3RecoResult, 1);
 };
 
@@ -86,3 +81,4 @@ inline ostream& operator<<(ostream& o,I3RecoResult& result)
 typedef shared_ptr<I3RecoResult>  I3RecoResultPtr;
 
 #endif
+

@@ -138,17 +138,8 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    make_nvp("I3PMTPulse",base_object<I3PMTPulse>(*this));
-    make_nvp("Normalization",normalization_);
-    make_nvp("Sigma",sigma_);
-    make_nvp("TimeZero",timeZero_);
-    make_nvp("Pedestal",pedestal_);
-  }
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3GaussianPMTPulse);
 
 /**
  * Pointer typedeffed away to insulate users from the 
@@ -157,3 +148,4 @@ BOOST_SHARED_POINTER_EXPORT(I3GaussianPMTPulse);
 typedef shared_ptr<I3GaussianPMTPulse>  I3GaussianPMTPulsePtr;
 
 #endif
+

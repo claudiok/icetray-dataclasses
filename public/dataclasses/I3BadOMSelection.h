@@ -89,16 +89,9 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3BadOMSelection", base_object<I3OMListSelection>(*this) );
-  }
- 
-  ClassDef(I3BadOMSelection,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3BadOMSelection,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3BadOMSelection);
 
 /**
  * Pointer definition for use with smart pointers.
@@ -106,3 +99,4 @@ BOOST_SHARED_POINTER_EXPORT(I3BadOMSelection);
 typedef shared_ptr<I3BadOMSelection>  I3BadOMSelectionPtr;
 
 #endif
+

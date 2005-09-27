@@ -29,20 +29,10 @@ class I3ShowerCore
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3ShowerCore",
-		  base_object< I3TopShowerImpl<I3NonDirectional,
-	                                       I3CoreLocalized,
-                                               I3NonEnergetic> >(*this));
-  }
-
-  ClassDef (I3ShowerCore, 1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef (I3ShowerCore, 1);
 };
        
-BOOST_SHARED_POINTER_EXPORT(I3ShowerCore);
-
 /**
  * Typedeffed pointer which allows for change of technical details
  * later.
@@ -50,3 +40,4 @@ BOOST_SHARED_POINTER_EXPORT(I3ShowerCore);
 typedef shared_ptr<I3ShowerCore>  I3ShowerCorePtr;
 
 #endif
+

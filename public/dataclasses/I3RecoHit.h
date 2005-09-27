@@ -57,12 +57,7 @@ class I3RecoHit : public I3Hit
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3Hit", base_object<I3Hit>(*this));
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /**
@@ -73,4 +68,5 @@ typedef shared_ptr<I3RecoHit>  I3RecoHitPtr;
 
 
 #endif
+
 

@@ -76,14 +76,11 @@ class I3Composite
  private:
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Constituents", constituents_);
-  }
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3Composite,1);
 };
 
 #endif
+
 

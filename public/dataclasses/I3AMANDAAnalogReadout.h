@@ -139,33 +139,9 @@ public:
 private:
   friend class boost::serialization::access;
 
-  template <class Archive> void save(Archive& ar, unsigned version) const
-  {
-    ar & make_nvp("I3AnalogReadout", base_object<I3AnalogReadout>(*this));
-    ar & make_nvp("LEs", LEs_);
-    ar & make_nvp("TEs", TEs_);
-    ar & make_nvp("HitNumbers", HitNumbers_);
-    ar & make_nvp("ParentIDs", ParentIDs_);
-    ar & make_nvp("ADC", adc_ );
-    ar & make_nvp("Overflow", overflow_ );
-    ar & make_nvp("Calib", is_calib_ );
-  }
-
-  template <class Archive> void load(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3AnalogReadout", base_object<I3AnalogReadout>(*this));
-    ar & make_nvp("LEs", LEs_);
-    ar & make_nvp("TEs", TEs_);
-    ar & make_nvp("HitNumbers", HitNumbers_);
-    ar & make_nvp("ParentIDs", ParentIDs_);
-    ar & make_nvp("ADC", adc_ );
-    ar & make_nvp("Overflow", overflow_ );
-    ar & make_nvp("Calib", is_calib_ );
-    
-    processFirstLE_ = true;
-    processTOTs_ = true;
-  }
-  BOOST_SERIALIZATION_SPLIT_MEMBER()
+  template <class Archive> void save(Archive& ar, unsigned version) const;
+  template <class Archive> void load(Archive& ar, unsigned version);
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 
   // private copy constructors and assignment
   I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout& other);
@@ -174,8 +150,6 @@ private:
   // ROOT macro
   ClassDef(I3AMANDAAnalogReadout,2);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3AMANDAAnalogReadout);
 
 /**
  * Pointer typedeffed away to insulate users from the

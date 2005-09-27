@@ -46,22 +46,12 @@ class I3F2KRecoCascade : public I3CascadeImpl<I3Directional,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3F2KRecoCascade",
-		  base_object< I3CascadeImpl< I3Directional,
-                                              I3Localized,
-                                              I3NonEnergetic,
-                                              I3NonComposite> >(*this));
-  }
-
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3F2KRecoCascade,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3F2KRecoCascade);
 
 typedef shared_ptr<I3F2KRecoCascade>  I3F2KRecoCascadePtr;
 
 #endif
+

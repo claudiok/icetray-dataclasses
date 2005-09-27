@@ -12,6 +12,7 @@
 #ifndef I3NONLOCALIZED_H
 #define I3NONLOCALIZED_H
 
+#include "dataclasses/I3Particle.h"
 
 /**
  * @brief The core position part of an I3Primary implementation.  
@@ -42,14 +43,10 @@ class I3NonLocalized
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //This method intentionally left blank
-  }
-
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3NonLocalized,1);
 };
 
 #endif
+

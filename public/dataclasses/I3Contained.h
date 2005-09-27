@@ -12,6 +12,7 @@
 #define I3CONTAINED_H
 
 #include "I3Position.h"
+#include "dataclasses/I3Particle.h"
 #include "I3Direction.h"
 #include "I3Constants.h"
 #include <cmath>

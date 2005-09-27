@@ -82,14 +82,8 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Time", time_);
-    ar & make_nvp("HitID", hitID_);
-  }
-  
-  double time_;
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+double time_;
   int hitID_;
 
   ClassDef(I3Hit,1);
@@ -109,4 +103,5 @@ inline ostream& operator<<(ostream& o,const I3Hit& hit)
 typedef shared_ptr<I3Hit>  I3HitPtr;
 
 #endif
+
 

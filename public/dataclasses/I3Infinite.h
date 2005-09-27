@@ -13,6 +13,7 @@
 #define I3INFINITE_H
 
 #include <cmath>
+#include "dataclasses/I3Particle.h"
 #include "I3Constants.h"
 #include "I3Direction.h"
 #include "I3Position.h"
@@ -156,15 +157,10 @@ class I3Infinite
   private:
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Pos", pos_ );
-    ar & make_nvp("Dir", dir_ );
-    ar & make_nvp("Time", time_ );
-  }
-  //ROOT Macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT Macro
   ClassDef(I3Infinite,1)
 };
 
 #endif //I3INFINITE_H
+

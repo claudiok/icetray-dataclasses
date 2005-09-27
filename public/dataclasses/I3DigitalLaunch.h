@@ -57,13 +57,8 @@ class I3DigitalLaunch : public TObject
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //This method needs to be empty
-  }
-
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3DigitalLaunch,1);
 };
 
@@ -82,3 +77,4 @@ inline ostream& operator<<(ostream& o,const I3DigitalLaunch& g)
 typedef shared_ptr<I3DigitalLaunch>  I3DigitalLaunchPtr;
 
 #endif
+

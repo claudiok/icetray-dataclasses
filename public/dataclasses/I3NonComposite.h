@@ -51,15 +51,11 @@ class I3NonComposite
  private:
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //Nothing to serialize, but I think a serialize method
-    //is still needed
-  }
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3NonComposite,1);
 };
 
 #endif
+
 

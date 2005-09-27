@@ -56,14 +56,10 @@ private:
     ClassDef(I3CalibrationHeader,1);
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3DataHeader",base_object<I3DataHeader>(*this));
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 typedef shared_ptr<I3CalibrationHeader>  I3CalibrationHeaderPtr;
 
 #endif //I3CALIBRATIONHEADER_H
+

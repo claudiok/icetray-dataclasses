@@ -94,3 +94,4 @@ inline ostream& operator<<(ostream& o,const I3Bag& bag)
 typedef shared_ptr<I3Bag>  I3BagPtr;
 
 #endif //I3BAG_H
+

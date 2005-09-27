@@ -90,15 +90,8 @@ class I3MCParticleData : public TObject
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Primary", primary_);
-    ar & make_nvp("InIceParticles", inIceParticles_);
-    ar & make_nvp("IceTopParticle",iceTopParticles_ );
-  }
-
-  ClassDef(I3MCParticleData,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3MCParticleData,1);
 };
 
 inline ostream& operator<<(ostream& o, const I3MCParticleData& data)
@@ -114,3 +107,4 @@ inline ostream& operator<<(ostream& o, const I3MCParticleData& data)
 typedef shared_ptr<I3MCParticleData>  I3MCParticleDataPtr;
 
 #endif //I3MCPARTICLEDATA_H
+

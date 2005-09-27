@@ -119,15 +119,8 @@ class I3TankHit : public TObject {
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("TankNumber",tankNumber_);
-    ar & make_nvp("Time",time_);
-    ar & make_nvp("Signal",signal_);
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3TankHit,1);
 };
 
@@ -172,3 +165,4 @@ class I3TankHitMatchesTankNumber {
 
 };
 #endif
+

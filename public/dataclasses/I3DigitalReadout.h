@@ -60,15 +60,8 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3DataReadout", base_object< I3DataReadout >(*this));
-    ar & make_nvp("Vector", 
-		  base_object< STLVectorStoragePolicy<I3DigitalLaunchPtr> >(*this));
-  }
-
-  // private copy constructors and assignment
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// private copy constructors and assignment
   I3DigitalReadout(const I3DigitalReadout& other);
   I3DigitalReadout& operator=(const I3DigitalReadout& other);
 
@@ -95,8 +88,6 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
 //  return o;
 //}
 
-BOOST_SHARED_POINTER_EXPORT(I3DigitalReadout);
-
 /**
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
@@ -104,4 +95,5 @@ BOOST_SHARED_POINTER_EXPORT(I3DigitalReadout);
 typedef shared_ptr<I3DigitalReadout>  I3DigitalReadoutPtr;
 
 #endif
+
 
