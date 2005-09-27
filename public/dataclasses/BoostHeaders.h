@@ -46,21 +46,21 @@ void instantiate_polymorphics<T>::instantiate(pi & ia, T & t)
 namespace detail 
 {
   template <typename T>
-  void inst (boost::archive::polymorphic_oarchive& poa, const T* t)
+  void inst (boost::archive::polymorphic_oarchive& poa, const T& t)
   {
     poa & t;
   }
 
   template <typename T>
-  void inst (boost::archive::polymorphic_iarchive& pia, T* t)
+  void inst (boost::archive::polymorphic_iarchive& pia, T& t)
   {
     pia & t;
   }
 }
 
 #define I3_SERIALIZABLE(T)						\
-  template void detail::inst(boost::archive::polymorphic_oarchive&, const T*); \
-  template void detail::inst(boost::archive::polymorphic_iarchive&, T*); \
+  template void detail::inst<T>(boost::archive::polymorphic_oarchive&, const T&); \
+  template void detail::inst<T>(boost::archive::polymorphic_iarchive&, T&); \
   BOOST_SHARED_POINTER_EXPORT(T);					
 
 #endif

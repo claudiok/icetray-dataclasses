@@ -15,8 +15,6 @@
 #ifndef I3RAWDOMSTATUS_PROPOSAL_H
 #define I3RAWDOMSTATUS_PROPOSAL_H
 
-#include <boost/serialization/is_abstract.hpp>
-
 #include <string>
 #include "StoragePolicy.h"
 
