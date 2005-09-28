@@ -89,15 +89,8 @@ class I3EventHeader : public I3DataHeader{
  private:
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3DataHeader", base_object<I3DataHeader>(*this));
-    ar & make_nvp("RunID", runID_);
-    ar & make_nvp("EventID", eventID_);
-  }
-  
-  // ROOT Macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT Macro
   ClassDef(I3EventHeader,1);
 };
 
@@ -108,3 +101,4 @@ class I3EventHeader : public I3DataHeader{
 typedef shared_ptr<I3EventHeader>  I3EventHeaderPtr;
 
 #endif //I3EVENTHEADER_H
+

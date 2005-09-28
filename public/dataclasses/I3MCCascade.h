@@ -55,21 +55,10 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("I3MCCascade",
-		  base_object< I3CascadeImpl<I3Directional,
-		  I3Localized,
-		  I3Energetic,
-		  I3Composite> >(*this));
-    ar & make_nvp("Weight",weight_);
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3MCCascade,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3MCCascade);
 
 /**
  * pointer typedeffed away to insulate users from memory management
@@ -77,3 +66,4 @@ BOOST_SHARED_POINTER_EXPORT(I3MCCascade);
 typedef shared_ptr<I3MCCascade>  I3MCCascadePtr;
 
 #endif
+

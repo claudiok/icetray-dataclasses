@@ -138,21 +138,7 @@ private:
 
     friend class boost::serialization::access;
 
-    template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-	{
-	    ar & make_nvp("FlasherOM", flasherOM_);
-	    ar & make_nvp("FlashTime", flashTime_);
-	    ar & make_nvp("ATWDBinSize", aTWDBinSize_);
-	    //ar & make_nvp("Trigger", trigger_);
-	    //trigger_ isn't defined anywhere
-	    ar & make_nvp("RawATWD3", rawATWD3_);
-	    ar & make_nvp("PedestalSubtractedATWD3", pedestalSubtractedATWD3_);
-	    ar & make_nvp("mask", mask_);
-	    ar & make_nvp("LEDBrightness", LEDBrightness_);
-	    ar & make_nvp("muon", muon_);
-	}
-
+    template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /**
@@ -162,4 +148,5 @@ typedef shared_ptr<I3FlasherInfo>  I3FlasherInfoPtr;
 
 
 #endif
+
 

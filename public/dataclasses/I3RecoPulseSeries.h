@@ -68,12 +68,8 @@ class I3RecoPulseSeries : public TObject, public STLVectorStoragePolicy<I3RecoPu
 
   friend class boost::serialization::access;
 
-  template <class Archive> void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoPulseSeries", base_object< STLVectorStoragePolicy<I3RecoPulsePtr> >(*this));
-  }
-
-  ClassDef(I3RecoPulseSeries,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3RecoPulseSeries,1);
 };
 
 inline ostream& operator<<(ostream& o, const I3RecoPulseSeries& series)
@@ -85,4 +81,5 @@ inline ostream& operator<<(ostream& o, const I3RecoPulseSeries& series)
 typedef shared_ptr<I3RecoPulseSeries> I3RecoPulseSeriesPtr;
 
 #endif
+
 

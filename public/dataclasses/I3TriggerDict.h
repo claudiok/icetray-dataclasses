@@ -52,12 +52,8 @@ class I3TriggerDict : public TObject, public STLMapStoragePolicy<string,I3Trigge
 
   private:
   friend class boost::serialization::access;
-  template <class Archive> void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3TriggerDict", base_object< STLMapStoragePolicy<string, I3TriggerPtr>  >(*this));
-  }
-
-  // ROOT Macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT Macro
   ClassDef(I3TriggerDict, 1);
 };
 
@@ -78,4 +74,5 @@ inline ostream& operator<<(ostream& o,const I3TriggerDict& v)
 typedef shared_ptr<I3TriggerDict> I3TriggerDictPtr;
 
 #endif
+
 

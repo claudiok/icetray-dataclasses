@@ -45,20 +45,10 @@ class I3F2KRecoInfiniteTrack : public I3TrackImpl<I3Infinite,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3F2KRecoInfiniteTrack",
-		  base_object< I3TrackImpl< I3Infinite,
-                                            I3NonEnergetic,
-                                            I3NonComposite> >(*this));
-  }
-
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3F2KRecoInfiniteTrack,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3F2KRecoInfiniteTrack);
 
 /**
  * pointer typedeffed away to insulate users from memory management
@@ -66,3 +56,4 @@ BOOST_SHARED_POINTER_EXPORT(I3F2KRecoInfiniteTrack);
 typedef shared_ptr<I3F2KRecoInfiniteTrack>  I3F2KRecoInfiniteTrackPtr;
 
 #endif
+

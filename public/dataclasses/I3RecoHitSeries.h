@@ -81,15 +81,8 @@ class I3RecoHitSeries : public TObject, public STLVectorStoragePolicy<I3RecoHitP
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoHitSeries", base_object< STLVectorStoragePolicy<I3RecoHitPtr> >(*this));
-  }
-
-
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3RecoHitSeries,1);
 };
 
@@ -105,4 +98,5 @@ inline ostream& operator<<(ostream& o, const I3RecoHitSeries& series)
 typedef shared_ptr<I3RecoHitSeries>  I3RecoHitSeriesPtr;
 
 #endif
+
 

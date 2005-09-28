@@ -76,14 +76,8 @@ class I3DataReadoutDict : public TObject,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3DataReadoutDict", 
-		  base_object< STLMapStoragePolicy<string,I3DataReadoutPtr> >(*this));
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3DataReadoutDict,1);
 };
 
@@ -104,4 +98,5 @@ inline ostream& operator<<(ostream& o,const I3DataReadoutDict& v)
 typedef shared_ptr<I3DataReadoutDict>  I3DataReadoutDictPtr;
 
 #endif
+
 

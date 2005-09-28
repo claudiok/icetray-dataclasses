@@ -93,15 +93,8 @@ class I3Trigger : public TObject
 
   friend class boost::serialization::access;
 
-  template <class Archive> void serialize(Archive& ar, unsigned version)  
-  { 
-    ar & make_nvp("TriggerTime",triggerTime_);
-    ar & make_nvp("TriggerLength",triggerLength_);
-    ar & make_nvp("Fired",fired_);
-    ar & make_nvp("TriggerSubDetector",triggerSubDetector_);
-  }
- 
-  ClassDef(I3Trigger,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3Trigger,1);
 };
 
 BOOST_IS_ABSTRACT(I3Trigger);
@@ -121,4 +114,5 @@ inline ostream& operator<<(ostream& o,const I3Trigger& trig)
 typedef shared_ptr<I3Trigger> I3TriggerPtr;
 
 #endif
+
 

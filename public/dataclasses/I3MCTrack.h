@@ -54,20 +54,10 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3MCTrack", base_object< I3TrackImpl<I3Contained,
-		                                              I3Energetic,
-		                                              I3Composite> >(*this));
-    ar & make_nvp("Weight", weight_ );
-  }
-
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3MCTrack,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3MCTrack);
 
 /** 
  * pointer type to insulate users from memory management
@@ -75,3 +65,4 @@ BOOST_SHARED_POINTER_EXPORT(I3MCTrack);
 typedef shared_ptr<I3MCTrack>  I3MCTrackPtr;
 
 #endif
+

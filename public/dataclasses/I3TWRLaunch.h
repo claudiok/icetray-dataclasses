@@ -45,23 +45,13 @@ class I3TWRLaunch : public I3DigitalLaunch, public STLVectorStoragePolicy<I3TWRF
 
   private:
   friend class boost::serialization::access;
-  template<class Archive> void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3TWRLaunch", base_object< STLVectorStoragePolicy<I3TWRFragPtr> >(*this));
-    ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this));
-    ar & make_nvp("ID",id);
-    ar & make_nvp("BinSize",bin_size);
-    ar & make_nvp("Baseline",baseline);
-    ar & make_nvp("StopDelay",stop_delay);
-    ar & make_nvp("Threshold",threshold);
-    ar & make_nvp("Optical",optical);
-  }
+  template<class Archive> void serialize(Archive& ar, unsigned version);
+
 
   ClassDef(I3TWRLaunch,1);
 };
 
-BOOST_SHARED_POINTER_EXPORT(I3TWRLaunch);
-
 typedef shared_ptr<I3TWRLaunch> I3TWRLaunchPtr;
 #endif
+
 

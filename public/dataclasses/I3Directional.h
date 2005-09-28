@@ -12,6 +12,7 @@
 #define I3DIRECTIONAL_H
 
 #include "Rtypes.h"
+#include "dataclasses/I3Particle.h"
 #include "dataclasses/I3Direction.h"
 
 /**
@@ -98,12 +99,10 @@ class I3Directional
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("Dir",dir_);
-  }
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3Directional,1);
 };
 
 #endif // I3DIRECTIONAL
+

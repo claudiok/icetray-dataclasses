@@ -68,18 +68,10 @@ class I3RecoResultSingleTopShower : public I3RecoResultSingleParticle
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoResultSingleTopShower", 
-		  base_object<I3RecoResultSingleParticle>(*this));
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3RecoResultSingleTopShower, 1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3RecoResultSingleTopShower);
 
 /**
  * Pointer typedeffed away to insulate users from the 
@@ -88,3 +80,4 @@ BOOST_SHARED_POINTER_EXPORT(I3RecoResultSingleTopShower);
 typedef shared_ptr<I3RecoResultSingleTopShower>  I3RecoResultSingleTopShowerPtr;
 
 #endif
+

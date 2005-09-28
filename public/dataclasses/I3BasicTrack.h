@@ -40,20 +40,14 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
  private:
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3BasicTrack", 
-		  base_object< I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite> >(*this));
-  }
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3BasicTrack,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3BasicTrack);
 
 /**
  * pointer typedeffed away to insulate users from memory management
  */
 typedef shared_ptr<I3BasicTrack>  I3BasicTrackPtr;
 #endif
+

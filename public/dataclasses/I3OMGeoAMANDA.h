@@ -73,16 +73,8 @@ class I3OMGeoAMANDA : public I3OMGeo
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3OMGeo",base_object<I3OMGeo>(*this));
-    ar & make_nvp("tZero",tZero_);
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3OMGeoAMANDA);
 
 #include "dataclasses/StoragePolicy.h"
 /**
@@ -91,4 +83,5 @@ BOOST_SHARED_POINTER_EXPORT(I3OMGeoAMANDA);
 typedef shared_ptr<I3OMGeoAMANDA>  I3OMGeoAMANDAPtr;
 
 #endif
+
 

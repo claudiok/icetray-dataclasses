@@ -93,15 +93,8 @@ class I3RecoPulse : public TObject
 
   private:
   friend class boost::serialization::access;
-  template <class Archive> void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Time", time_);
-    ar & make_nvp("HitID", hitID_);
-    ar & make_nvp("PulseAmp", amp_);
-    ar & make_nvp("Width", width_);
-  }
-
-  ClassDef(I3RecoPulse,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3RecoPulse,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3RecoPulse& pulse)
@@ -118,4 +111,5 @@ inline ostream& operator<<(ostream& o,const I3RecoPulse& pulse)
 typedef shared_ptr<I3RecoPulse>  I3RecoPulsePtr;
 
 #endif
+
 

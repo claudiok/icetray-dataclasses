@@ -61,14 +61,8 @@ class I3RecoResultDict : public TObject,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoResultDict", 
-		  base_object< STLMapStoragePolicy<string,I3RecoResultPtr> >(*this));
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3RecoResultDict,1);
 
 };
@@ -89,3 +83,4 @@ inline ostream& operator<<(ostream& o,const I3RecoResultDict& v)
 typedef shared_ptr<I3RecoResultDict>  I3RecoResultDictPtr;
 
 #endif
+

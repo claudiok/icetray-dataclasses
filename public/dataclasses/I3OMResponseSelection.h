@@ -91,13 +91,8 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //Empty seriliaze method is needed here
-  }
-
-  ClassDef(I3OMResponseSelection,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3OMResponseSelection,1);
 };
 
 /**
@@ -111,3 +106,4 @@ inline ostream& operator<<(ostream& o,const I3OMResponseSelection& readout)
 
 
 #endif
+

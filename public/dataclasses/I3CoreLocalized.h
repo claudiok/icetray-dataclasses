@@ -13,7 +13,7 @@
 
 #include "I3Constants.h"
 #include "I3Position.h"
-
+#include "I3Particle.h"
 /**
  * @brief The core position part of an I3Primary implementation.  
  * 
@@ -92,15 +92,10 @@ class I3CoreLocalized
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("CoreT", coreT_ );
-    ar & make_nvp("CorePos", corePos_ );
-  }
-
-  //ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT macro
   ClassDef(I3CoreLocalized,1);
 };
 
 #endif
+

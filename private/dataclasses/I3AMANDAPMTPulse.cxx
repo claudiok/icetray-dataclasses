@@ -1,5 +1,6 @@
 #include <cmath>
 #include <math.h>
+#include "dataclasses/BoostHeaders.h"
 #include "dataclasses/I3AMANDAPMTPulse.h"
 
 double I3AMANDAPMTPulse::GetVoltage(const double time) 
@@ -67,3 +68,20 @@ double I3AMANDAPMTPulse::GetPeakVoltage()
   else
     return GetVoltage(peak);
 };
+
+template <class Archive>
+void I3AMANDAPMTPulse::serialize(Archive& ar, unsigned version){
+  ar & make_nvp("I3PMTPulse", base_object<I3PMTPulse>(*this));
+    ar & make_nvp("Normalization",normalization_);
+    ar & make_nvp("Norm",norm_);
+    ar & make_nvp("Weight",weight_);
+    ar & make_nvp("StdDev1",stdDev1_);
+    ar & make_nvp("Mu1",mu1_);
+    ar & make_nvp("StdDev2",stdDev2_);
+    ar & make_nvp("Mu2",mu2_);
+    ar & make_nvp("TimeZero",timeZero_);
+    ar & make_nvp("Pedestal",pedestal_);
+}
+
+I3_SERIALIZABLE(I3AMANDAPMTPulse);
+

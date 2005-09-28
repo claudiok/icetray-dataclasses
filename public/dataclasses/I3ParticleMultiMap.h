@@ -59,14 +59,8 @@ class I3ParticleMultiMap : public TObject, public STLMultiMapStoragePolicy<strin
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3ParticleMultiMap", 
-		  base_object< STLMultiMapStoragePolicy<string, I3ParticlePtr>  >(*this));
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3ParticleMultiMap,1);
 };
 
@@ -83,3 +77,4 @@ inline ostream& operator<<(ostream& o,const I3ParticleMultiMap& rhs)
 typedef shared_ptr<I3ParticleMultiMap>  I3ParticleMultiMapPtr;
 
 #endif
+

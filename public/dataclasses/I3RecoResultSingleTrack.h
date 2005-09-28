@@ -70,18 +70,11 @@ class I3RecoResultSingleTrack : public I3RecoResultSingleParticle
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoResultSingleParticle", 
-		  base_object<I3RecoResultSingleParticle>(*this));
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3RecoResultSingleTrack, 1);
 };
 
-BOOST_SHARED_POINTER_EXPORT(I3RecoResultSingleTrack);
 
 /**
  * Pointer typedeffed away to insulate users from the 
@@ -90,3 +83,4 @@ BOOST_SHARED_POINTER_EXPORT(I3RecoResultSingleTrack);
 typedef shared_ptr<I3RecoResultSingleTrack>  I3RecoResultSingleTrackPtr;
 
 #endif
+

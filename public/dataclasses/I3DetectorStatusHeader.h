@@ -66,12 +66,7 @@ class I3DetectorStatusHeader : public I3DataHeader
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3DataHeader",base_object<I3DataHeader>(*this));
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /**
@@ -81,3 +76,4 @@ class I3DetectorStatusHeader : public I3DataHeader
 typedef shared_ptr<I3DetectorStatusHeader>  I3DetectorStatusHeaderPtr;
 
 #endif 
+

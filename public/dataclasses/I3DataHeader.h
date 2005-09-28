@@ -92,14 +92,8 @@ class I3DataHeader : public TObject
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("StartTime", startTime_);
-    ar & make_nvp("EndTime", endTime_);
-  }
-
-  // ROOT Macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT Macro
   ClassDef(I3DataHeader,1);
 };
 
@@ -116,3 +110,4 @@ inline ostream& operator<<(ostream& o,const I3DataHeader& header)
 typedef shared_ptr<I3DataHeader>  I3DataHeaderPtr;
 
 #endif //I3DATAHEADER_H
+

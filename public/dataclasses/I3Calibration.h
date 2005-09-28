@@ -77,13 +77,7 @@ private:
     ClassDef(I3Calibration,1);
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("InIceCalibration",inIceCalibration_);
-    ar & make_nvp("AMANDACalibration",AMANDACalibration_);
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /** 
@@ -103,3 +97,4 @@ typedef shared_ptr<I3Calibration>  I3CalibrationPtr;
 
 #endif // I3CALIBRATION_H
     
+

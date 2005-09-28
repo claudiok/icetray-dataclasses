@@ -79,13 +79,8 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("StartTime", startTime_);
-    ar & make_nvp("EndTime", endTime_);
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3MCPMTResponse,1);
 };
 
@@ -101,4 +96,5 @@ inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)
 typedef shared_ptr<I3MCPMTResponse>  I3MCPMTResponsePtr;
 
 #endif
+
 

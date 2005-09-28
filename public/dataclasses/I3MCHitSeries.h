@@ -92,13 +92,8 @@ class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
 
   friend class boost::serialization::access;
 
-template <class Archive>
-  void serialize(Archive& ar, unsigned version){
-  ar & make_nvp("I3MCHitSeries",base_object< STLVectorStoragePolicy<I3MCHit> >(*this));
-  ar & make_nvp("Weight", weight_ );
- }
-
-  //ROOT Macro
+template <class Archive> void serialize(Archive & ar, unsigned version);
+//ROOT Macro
   ClassDef(I3MCHitSeries,1);
 };
 
@@ -115,3 +110,4 @@ inline ostream& operator<<(ostream& o,const I3MCHitSeries& series)
 typedef shared_ptr<I3MCHitSeries>  I3MCHitSeriesPtr;
 
 #endif
+

@@ -58,17 +58,8 @@ class I3AMANDAOMCalib_XTalk : public TObject
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("receiver",receiver_);
-    ar & make_nvp("timehigh",timehigh_);
-    ar & make_nvp("timelow",timelow_);
-    ar & make_nvp("width",width_);
-    ar & make_nvp("threshold",threshold_);
-  }
-
-  ClassDef(I3AMANDAOMCalib_XTalk,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3AMANDAOMCalib_XTalk,1);
 };
 
 /**
@@ -83,3 +74,4 @@ inline ostream& operator<<(ostream& o, const I3AMANDAOMCalib_XTalk& c)
 typedef shared_ptr<I3AMANDAOMCalib_XTalk>  I3AMANDAOMCalib_XTalkPtr;
 
 #endif
+

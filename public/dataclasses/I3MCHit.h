@@ -77,16 +77,8 @@ class I3MCHit : public I3Hit
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize (Archive &ar, unsigned version)
-  {
-    ar & make_nvp("I3Hit", base_object<I3Hit>(*this));
-    ar & make_nvp("Weight", weight_);
-    ar & make_nvp("ParticleID", particleID_);
-    ar & make_nvp("CherenkovDistance", cherenkovDistance_);
-  }     
-
-  ClassDef(I3MCHit,1);
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+ClassDef(I3MCHit,1);
 };
 
 /**
@@ -96,3 +88,4 @@ class I3MCHit : public I3Hit
 typedef shared_ptr<I3MCHit>  I3MCHitPtr;
 
 #endif
+

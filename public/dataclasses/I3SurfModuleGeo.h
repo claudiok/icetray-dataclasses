@@ -89,15 +89,7 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3SurfModuleGeo",
-		  base_object< STLMapStoragePolicy<OMKey, I3OMGeoPtr> >(*this));
-    ar & make_nvp("surfModulePos",surfModulePos_);
-    ar & make_nvp("orientation",orientation_);
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /**
@@ -106,3 +98,4 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
 typedef shared_ptr<I3SurfModuleGeo>  I3SurfModuleGeoPtr;
 
 #endif
+

@@ -1,5 +1,5 @@
+#include "dataclasses/BoostHeaders.h"
 #include "dataclasses/I3TestDaqRawDOMStatus.h"
-
 #include "services/I3Logging.h"
 #include "dataclasses/I3Units.h"
 
@@ -134,3 +134,12 @@ double I3TestDaqRawDOMStatus::GetDACTriggerBias(int chip) const
     else if(chip==1) return (double)rawStatus_["DAC_ATWD1_TRIGGER_BIAS"];
     else return 0;
 }
+
+template <class Archive>
+void I3TestDaqRawDOMStatus::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("I3RawDOMStatus", base_object<I3RawDOMStatus>(*this));
+  ar & make_nvp("rawStatus",rawStatus_);
+}
+
+I3_SERIALIZABLE(I3TestDaqRawDOMStatus);

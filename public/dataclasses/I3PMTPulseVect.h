@@ -61,12 +61,8 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("I3PMTPulseVect",
-		  base_object< STLVectorStoragePolicy<I3PMTPulsePtr> >(*this));
-  }
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3PMTPulseVect,1);
 };
 
@@ -76,4 +72,5 @@ private:
 typedef shared_ptr<I3PMTPulseVect>  I3PMTPulseVectPtr;
 
 #endif
+
 

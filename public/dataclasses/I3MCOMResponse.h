@@ -106,19 +106,10 @@ class I3MCOMResponse : public I3OMResponse
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-    void serialize(Archive& ar, unsigned version){
-    ar & make_nvp("I3OMResponse",base_object<I3OMResponse>(*this));
-    ar & make_nvp("MCHitSeries",mCHitSeries_);
-    ar & make_nvp("MCPMTResponse",mCPMTResponse_);
-    ar & make_nvp("PMTPulseVect",pMTPulseVect_);
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3MCOMResponse,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3MCOMResponse);
 
 /** 
  * pointer type to insulate users from memory management
@@ -126,4 +117,5 @@ BOOST_SHARED_POINTER_EXPORT(I3MCOMResponse);
 typedef shared_ptr<I3MCOMResponse>  I3MCOMResponsePtr;
 
 #endif
+
 

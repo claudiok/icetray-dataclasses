@@ -74,13 +74,7 @@ class I3InIceGeometry : public TObject,
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3IceCubeStatus",
-		  base_object< STLMapStoragePolicy<OMKey,I3OMGeoPtr> >(*this));
-  }
-
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 /**
@@ -101,3 +95,4 @@ typedef shared_ptr<I3InIceGeometry>  I3InIceGeometryPtr;
 
 #endif //I3INICEGEOMETRY_H
  
+

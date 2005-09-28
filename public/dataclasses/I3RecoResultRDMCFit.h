@@ -73,18 +73,10 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 
   private:
   friend class boost::serialization::access;
-  template <class Archive> void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoResultSingleTrack", base_object<I3RecoResultSingleTrack>(*this));
-    ar & make_nvp("FitName", fitName_);
-    ar & make_nvp("Parameters", parameters_);
-  }
-
-  // ROOT macro
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+// ROOT macro
   ClassDef(I3RecoResultRDMCFit,1);
 };
-
-BOOST_SHARED_POINTER_EXPORT(I3RecoResultRDMCFit);
 
 /**
  * Pointer typedeffed away to insulate users from the 
@@ -94,4 +86,5 @@ typedef shared_ptr<I3RecoResultRDMCFit>  I3RecoResultRDMCFitPtr;
 
 
 #endif
+
 

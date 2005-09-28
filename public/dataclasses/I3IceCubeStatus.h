@@ -62,12 +62,7 @@ class I3IceCubeStatus
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3IceCubeStatus",
-		  base_object< STLMapStoragePolicy<OMKey,I3DOMStatus> >(*this));
-  }
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 inline ostream& operator<<(ostream& o, const I3IceCubeStatus& status)
@@ -83,3 +78,4 @@ inline ostream& operator<<(ostream& o, const I3IceCubeStatus& status)
 typedef shared_ptr<I3IceCubeStatus>  I3IceCubeStatusPtr;
 
 #endif
+
