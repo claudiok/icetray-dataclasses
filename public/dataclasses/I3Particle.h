@@ -202,6 +202,11 @@ class I3Particle : public TObject{
    }
 
  /**
+  * @brief A simple method which will dump the ParticleType as a string.
+  */
+ static string Stringize(ParticleType particle);
+
+ /**
   * 
   */
  virtual void ToStream(ostream& o) const
