@@ -1,3 +1,4 @@
+#include "dataclasses/BoostHeaders.h"
 #include "dataclasses/I3MonitoringHeader.h"
 
 int I3MonitoringHeader::GetSize()
@@ -15,7 +16,7 @@ OMKey I3MonitoringHeader::GetOMKey()
     return om_;
 }
 
-long long int I3MonitoringHeader::GetMBID()
+int64_t I3MonitoringHeader::GetMBID()
 {
     return mbid_;
 }
@@ -40,7 +41,7 @@ void I3MonitoringHeader::SetOMKey(OMKey ok)
     om_ = ok;
 }
 
-void I3MonitoringHeader::SetMBID(long long int id)
+void I3MonitoringHeader::SetMBID(int64_t id)
 {
     mbid_ = id;
 }
@@ -49,3 +50,17 @@ void I3MonitoringHeader::SetRun(int r)
 {
     run_ = r;
 }
+
+template <class Archive>
+void 
+I3MonitoringHeader::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("om",om_);
+  ar & make_nvp("mbid",mbid_);
+  ar & make_nvp("size",size_);
+  ar & make_nvp("type",type_);
+  ar & make_nvp("run",run_);
+}
+
+I3_SERIALIZABLE(I3MonitoringHeader);
+
