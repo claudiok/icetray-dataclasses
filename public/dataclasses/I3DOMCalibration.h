@@ -16,6 +16,7 @@
 
 #include "dataclasses/StoragePolicy.h"
 
+#include <stdint.h>
 #include <map>
 #include <vector>
 #include <sstream>
@@ -51,12 +52,7 @@ struct LinearFit
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("slope",slope);
-    ar & make_nvp("intercept",intercept);
-    ar & make_nvp("regressCoeff",regressCoeff);
-  }
+  void serialize(Archive& ar, unsigned version);
 };
 
 struct ChargeHistogramEntry
@@ -69,11 +65,7 @@ struct ChargeHistogramEntry
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("charge",charge);
-    ar & make_nvp("count",count);
-  }
+  void serialize(Archive& ar, unsigned version);
 };
 
 struct ChargeHistogram
@@ -94,27 +86,13 @@ struct ChargeHistogram
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("exponentialAmplitude",exponentialAmplitude);
-    ar & make_nvp("exponentialWidth",exponentialWidth);
-    ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
-    ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
-    ar & make_nvp("gaussianMean",gaussianMean);
-    ar & make_nvp("gaussianWidth",gaussianWidth);
-    ar & make_nvp("voltage",voltage);
-    ar & make_nvp("convergent",convergent);
-    ar & make_nvp("peakToValley",peakToValley);
-    ar & make_nvp("noiseRate",noiseRate);
-    ar & make_nvp("entries",entries);
-  }
-
+  void serialize(Archive& ar, unsigned version);
 };
 
 class I3DOMCalibration
 {
 public:
-  unsigned long long GetMainboardID(){return mainboardId_;}
+  uint64_t GetMainboardID(){return mainboardId_;}
 	
   double GetTemperature()
     {
@@ -212,7 +190,7 @@ public:
   virtual ~I3DOMCalibration()
     {};
   
-  void SetMainboardID(unsigned long long mbid){mainboardId_ = mbid;}
+  void SetMainboardID(uint64_t mbid){mainboardId_ = mbid;}
   
   void SetTemperature(double temperature)
     {
@@ -280,7 +258,7 @@ public:
       };
     
  private:
-    unsigned long long mainboardId_;
+    uint64_t mainboardId_;
     
     // Simple data types
     double  temperature_;
@@ -314,23 +292,10 @@ public:
     I3DOMCalibration(const I3DOMCalibration& calibration);
     const I3DOMCalibration& operator=(const I3DOMCalibration& calibration);
 
-  friend class boost::serialization::access;
+    friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("mainboardId",mainboardId_);
-    ar & make_nvp("temperature",temperature_);
-    ar & make_nvp("fadcGain",fadcGain_);
-    ar & make_nvp("fadcPedestal",fadcPedestal_);
-    ar & make_nvp("pedestalVoltage",pedestalVoltage_);
-    ar & make_nvp("ampGains",ampGains_);
-    ar & make_nvp("ampGainErrs",ampGainErrs_);
-    ar & make_nvp("atwdFreq",atwdFreq_);
-    ar & make_nvp("atwd0",atwd0_);
-    ar & make_nvp("atwd1",atwd1_);
-    ar & make_nvp("chargeHistograms",chargeHistograms_);
-  }
+    template <class Archive>
+      void serialize(Archive& ar, unsigned version);
 
 };
 
