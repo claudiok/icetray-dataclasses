@@ -23,18 +23,18 @@ class I3MonitoringHeader : public I3DataHeader
     int GetSize();
     int GetType();
     OMKey GetOMKey();
-    long long int GetMBID();
+    int64_t GetMBID();
     int GetRun();
 
     void SetSize(int);
     void SetType(int);
     void SetOMKey(OMKey);
-    void SetMBID(long long int);
+    void SetMBID(int64_t);
     void SetRun(int);
 
  private:
     OMKey om_;
-    long long int mbid_;
+    int64_t mbid_;
     int size_;
     int type_;
     int run_;
@@ -44,15 +44,7 @@ class I3MonitoringHeader : public I3DataHeader
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("om",om_);
-    ar & make_nvp("mbid",mbid_);
-    ar & make_nvp("size",size_);
-    ar & make_nvp("type",type_);
-    ar & make_nvp("run",run_);
-  }
-
+    void serialize(Archive& ar, unsigned version);
 };
 
 typedef shared_ptr<I3MonitoringHeader> I3MonitoringHeaderPtr;

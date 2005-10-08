@@ -2,6 +2,7 @@
 //  $Id$
 //
 //
+#include <dataclasses/BoostHeaders.h>
 #include "dataclasses/I3DOMCalibration.h"
 
 I3DOMCalibration::I3DOMCalibration()
@@ -138,5 +139,65 @@ double I3DOMCalibration::GetATWDGainErr(int channel)
     
     return ampGainErrs_[channel];
 }
+
+
+template <class Archive>
+void 
+LinearFit::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("slope",slope);
+  ar & make_nvp("intercept",intercept);
+  ar & make_nvp("regressCoeff",regressCoeff);
+}
+
+I3_SERIALIZABLE(LinearFit);
+
+template <class Archive>
+void 
+ChargeHistogramEntry::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("charge",charge);
+  ar & make_nvp("count",count);
+}
+
+I3_SERIALIZABLE(ChargeHistogramEntry);
+
+template <class Archive>
+void 
+ChargeHistogram::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("exponentialAmplitude",exponentialAmplitude);
+  ar & make_nvp("exponentialWidth",exponentialWidth);
+  ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
+  ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
+  ar & make_nvp("gaussianMean",gaussianMean);
+  ar & make_nvp("gaussianWidth",gaussianWidth);
+  ar & make_nvp("voltage",voltage);
+  ar & make_nvp("convergent",convergent);
+  ar & make_nvp("peakToValley",peakToValley);
+  ar & make_nvp("noiseRate",noiseRate);
+  ar & make_nvp("entries",entries);
+}
+
+I3_SERIALIZABLE(ChargeHistogram);
+
+template <class Archive>
+void 
+I3DOMCalibration::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("mainboardId",mainboardId_);
+  ar & make_nvp("temperature",temperature_);
+  ar & make_nvp("fadcGain",fadcGain_);
+  ar & make_nvp("fadcPedestal",fadcPedestal_);
+  ar & make_nvp("pedestalVoltage",pedestalVoltage_);
+  ar & make_nvp("ampGains",ampGains_);
+  ar & make_nvp("ampGainErrs",ampGainErrs_);
+  ar & make_nvp("atwdFreq",atwdFreq_);
+  ar & make_nvp("atwd0",atwd0_);
+  ar & make_nvp("atwd1",atwd1_);
+  ar & make_nvp("chargeHistograms",chargeHistograms_);
+}
+
+I3_SERIALIZABLE(I3DOMCalibration);
 
 

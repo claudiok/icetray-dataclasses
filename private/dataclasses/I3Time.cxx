@@ -17,12 +17,12 @@ I3Time::I3Time()
   daqTime_ = 0;
 }
 
-I3Time::I3Time(unsigned int year, long long daqTime) : year_(year),daqTime_(daqTime)
+I3Time::I3Time(unsigned int year, int64_t daqTime) : year_(year),daqTime_(daqTime)
 {
 }
 
 void I3Time::SetDaqTime(int year, 
-			long long int daqTime)
+			int64_t daqTime)
 {
   year_ = year;
   daqTime_ = daqTime;
@@ -37,8 +37,8 @@ void I3Time::SetModJulianTime(unsigned int modJulianDay,
   unsigned int daysafteryear = (unsigned int)(modjulian - modjulianday(year_));
   unsigned int secsafteryear = daysafteryear * 3600 * 24 + sec;
   daqTime_ =
-    ((long long int)secsafteryear * ((long long int)(1e10)))
-    + ((long long int)ns * ((long long int)10));
+    ((int64_t)secsafteryear * ((int64_t)(1e10)))
+    + ((int64_t)ns * ((int64_t)10));
 }
 
 
@@ -47,7 +47,7 @@ int I3Time::GetUTCYear() const
   return year_;
 }
 
-long long int I3Time::GetUTCDaqTime() const
+int64_t I3Time::GetUTCDaqTime() const
 {
   return daqTime_;
 }
@@ -62,13 +62,13 @@ unsigned int I3Time::GetModJulianSec() const
   unsigned int daysafteryear = 
     (unsigned int)(modjulianday(year_,daqTime_) - modjulianday(year_));
   unsigned int secsafteryear = 
-    (daqTime_ - daqTime_%((long long)(1e10)))/((long long)1e10);
+    (daqTime_ - daqTime_%((int64_t)(1e10)))/((int64_t)1e10);
   return secsafteryear - daysafteryear * 3600 * 24 ;
 }
 
 double I3Time::GetModJulianNanoSec() const
 {
-  long long daqtenthsns = daqTime_ %((long long)1e10);
+  int64_t daqtenthsns = daqTime_ %((int64_t)1e10);
   return 0.1 * daqtenthsns;
 }
 
@@ -148,14 +148,14 @@ unsigned int I3Time::GetUTCDayOfMonth() const
 
 unsigned int I3Time::GetUTCSec() const
 {
-  long long int tenthsOfNs = daqTime_ %((long long)1e10);
-  unsigned int daqSecs = (daqTime_ - tenthsOfNs)/((long long)1e10);
+  int64_t tenthsOfNs = daqTime_ %((int64_t)1e10);
+  unsigned int daqSecs = (daqTime_ - tenthsOfNs)/((int64_t)1e10);
   return daqSecs;
 }
 
 double I3Time::GetUTCNanoSec() const
 {
-  long long daqtenthsns = daqTime_ %((long long)1e10);
+  int64_t daqtenthsns = daqTime_ %((int64_t)1e10);
   return 0.1 * daqtenthsns;
 }
 
@@ -271,10 +271,10 @@ double I3Time::modjulianday(int year)
   return JulDate(&i) - 2400000.5;
 }
 
-double I3Time::modjulianday(int year, long long int daqTime)
+double I3Time::modjulianday(int year, int64_t daqTime)
 {
-  long long int tenthsOfNs = daqTime %((long long)1e10);
-  long long int daqSecs = (daqTime - tenthsOfNs)/((long long)1e10);
+  int64_t tenthsOfNs = daqTime %((int64_t)1e10);
+  int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
   double daqDaysSinceYear = ((double)(daqSecs))/(3600. * 24.);
   double modjulian_of_year = modjulianday(year);
   return modjulian_of_year + daqDaysSinceYear;
@@ -293,10 +293,10 @@ double I3Time::julianday(int year)
   return JulDate(&i);
 }
 
-double I3Time::julianday(int year, long long int daqTime)
+double I3Time::julianday(int year, int64_t daqTime)
 {
-  long long int tenthsOfNs = daqTime %((long long)1e10);
-  long long int daqSecs = (daqTime - tenthsOfNs)/((long long)1e10);
+  int64_t tenthsOfNs = daqTime %((int64_t)1e10);
+  int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
   double daqDaysSinceYear = ((double)(daqSecs))/(3600. * 24.);
   double julian_of_year = julianday(year);
   return julian_of_year + daqDaysSinceYear;
@@ -322,11 +322,11 @@ unsigned int I3Time::DayOfYear(double modjulianday)
     return i.day_of_year;
 }
 
-unsigned int I3Time::DayOfYear(long long int daqTime)
+unsigned int I3Time::DayOfYear(int64_t daqTime)
 {
-    long long int tenthsOfNs = daqTime %((long long)1e10);
-    long long int daqSecs = (daqTime - tenthsOfNs)/((long long)1e10);
-    long long int daqSecsSinceDay = daqSecs % ((long long)(3600 * 24));
+    int64_t tenthsOfNs = daqTime %((int64_t)1e10);
+    int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
+    int64_t daqSecsSinceDay = daqSecs % ((int64_t)(3600 * 24));
     unsigned int day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24);
 
     return day_of_year; 

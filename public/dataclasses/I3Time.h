@@ -62,14 +62,14 @@ class I3Time : public TObject
   /**
    * @brief creates the object with the given times as the DAQ time
    */
-  I3Time(unsigned int year, long long daqTime);
+  I3Time(unsigned int year, int64_t daqTime);
 	     
   /**
    * @brief Sets the time in the 'daq' style where
    * @param year The year.  Something like 2005.
    * @param daqTime The number of tenths of nanoseconds since the year began
    */  
-  void SetDaqTime(int year, long long int daqTime);
+  void SetDaqTime(int year, int64_t daqTime);
   
   /**
    * @brief Sets the time in the Modified julian convention
@@ -107,7 +107,7 @@ class I3Time : public TObject
    * @brief Gets the appropriate time for the DAQ.  tenths of nanoseconds
    * since the start of the UTC year.
    */  
-  long long int GetUTCDaqTime() const;
+  int64_t GetUTCDaqTime() const;
 
   /**
    * @brief Gets the appropriate UTC Month
@@ -184,22 +184,22 @@ class I3Time : public TObject
 
   static double modjulianday(int year);
   
-  static double modjulianday(int year, long long int daqTime);
+  static double modjulianday(int year, int64_t daqTime);
 
   static double julianday(int year);
   
-  static double julianday(int year, long long int daqTime);
+  static double julianday(int year, int64_t daqTime);
 
   static unsigned int yearOf(double modjulianday);
 
-  static unsigned int DayOfYear(long long int daqTime);
+  static unsigned int DayOfYear(int64_t daqTime);
 
   static unsigned int DayOfYear(double modjulianday);
 
  private:
 
   unsigned int year_;
-  long long int daqTime_;
+  int64_t daqTime_;
 
   friend class boost::serialization::access;
 

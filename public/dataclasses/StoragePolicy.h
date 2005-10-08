@@ -12,7 +12,7 @@
 #define STORAGEPOLICY_H
 
 #include "TObject.h"
-
+#include <stdint.h> //int64_t, etc
 #include "dataclasses/copy_if.h"
 
 namespace boost 
