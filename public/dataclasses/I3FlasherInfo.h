@@ -20,6 +20,10 @@ using namespace std;
  *
  * It holds the flashing DOMs OMKey, brightness level, mask (which LEDs fired)
  * firing time, and ATWD trace of the LED current pulse 
+ * 
+ * This will be changed into a I3Trigger derrived class eventually, once there
+ * is sufficient funcionality to get Flasher settings somewhere.
+ * Included here for use by flasher analysis people.  It can be "I3Bagged".
  *
  */
 class I3FlasherInfo
