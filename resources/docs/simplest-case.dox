@@ -19,12 +19,29 @@ in the class' private area.
   friend class boost::serialization::access;
 
   template <class Archive>
+  void serialize(Archive& ar, unsigned version);
+   @endverbatim	            
+
+If this class does not have a source file, onre will need to be added to <project>/private.
+In this case it is datclasses/private/I3Hit.cxx.
+
+   @verbatim
+  #include <dataclasses/BoostHeaders.h>
+  #include <dataclasses/I3Hit.h>
+
+  template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("Time", time_);
     ar & make_nvp("HitID", hitID_);
   }
+
+  I3_SERIALIZABLE(I3Hit);
    @endverbatim	            
 
+Note that not only did we move the implementation of the serialize method to its own source file,
+but the we included the macro I3_SERIALIZABLE().
+
 For a more detailed explanation of the above code check out @ref detailed-simplest-case.
+
 */

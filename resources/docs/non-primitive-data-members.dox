@@ -17,8 +17,6 @@ The relevant code for I3Hit then looks like...
 The serialization method is modified as shown below...
 
    @verbatim
-  friend class boost::serialization::access;
-
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
