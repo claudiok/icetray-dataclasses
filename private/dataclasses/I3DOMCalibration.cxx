@@ -82,12 +82,12 @@ double I3DOMCalibration::GetATWDVoltage(int id,  int channel,
 {
     if ( ! GetATWDById(id).count(channel) )
     {
-	log_fatal("Invalid ATWD channel in I3DOMCalibration");
+	log_fatal("Invalid ATWD channel in I3DOMCalibration::GetATWDVoltage()");
     }
 
     if ( ! GetATWDById(id)[channel].count(bin) )
     {
-	log_fatal("Invalid ATWD bin in I3DOMCalibration");
+	log_fatal("Invalid ATWD bin in I3DOMCalibration::GetATWDVoltage()");
     }
     
     struct LinearFit fit = GetATWDById(id)[channel][bin];
@@ -100,7 +100,23 @@ double I3DOMCalibration::GetATWDCount(int id,
 				      int bin,
 				      double fe_pedestal,
 				      double voltage)
-{}
+{
+    if ( ! GetATWDById(id).count(channel) )
+    {
+	log_fatal("Invalid ATWD channel in I3DOMCalibration::GetATWDCount()");
+    }
+
+    if ( ! GetATWDById(id)[channel].count(bin) )
+    {
+	log_fatal("Invalid ATWD bin in I3DOMCalibration::GetATWDCount()");
+    }
+    
+    struct LinearFit fit = GetATWDById(id)[channel][bin];
+
+    // NOTE: check units!
+
+    return (GetATWDGain(channel)*voltage - (fit.intercept - fe_pedestal))/ fit.slope;
+}
 
 map<int,map<int,LinearFit> >& 
 I3DOMCalibration::GetATWDById(int id)
