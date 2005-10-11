@@ -23,7 +23,7 @@ void I3DOMCalibration::SetATWDParameters(int id, int channel, int bin,
     GetATWDById(id)[channel][127-bin] = fit;
 }
 
-
+/*
 double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel, 
 						      int bin, double fe_pedestal,
 						      int count)
@@ -42,8 +42,8 @@ double I3DOMCalibration::GetPedestalSubtractedVoltage(int id,  int channel,
    
     return (count*fit.slope)/GetATWDGain(channel);
 }
-
-
+*/
+/*
 int I3DOMCalibration::GetPedestalSubtractedCount(int id,  int channel, 
 						 int bin, double fe_pedestal,
 						 int count)
@@ -63,7 +63,7 @@ int I3DOMCalibration::GetPedestalSubtractedCount(int id,  int channel,
        
     return count-(int)((fe_pedestal- fit.intercept)/fit.slope);
 }
-
+*/
 
 void I3DOMCalibration::SetATWDFreqParameters(int chip,
 					 double slope, double intercept, double regress_coeff)
@@ -94,6 +94,13 @@ double I3DOMCalibration::GetATWDVoltage(int id,  int channel,
        
     return ((fit.slope*count + fit.intercept) - fe_pedestal) / GetATWDGain(channel);
 }
+
+double I3DOMCalibration::GetATWDCount(int id, 
+				      int channel,
+				      int bin,
+				      double fe_pedestal,
+				      double voltage)
+{}
 
 map<int,map<int,LinearFit> >& 
 I3DOMCalibration::GetATWDById(int id)

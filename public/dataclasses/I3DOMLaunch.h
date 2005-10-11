@@ -13,7 +13,6 @@
 #ifndef I3DOMLAUNCH_H
 #define I3DOMLAUNCH_H
 
-//#include "StoragePolicy.h"
 #include "dataclasses/I3DigitalLaunch.h"
 
 using namespace std; 
@@ -106,13 +105,17 @@ protected:
     /** 
      * Has the pedestal been subtracted from the waveforms?
      */ 
+
+    /*
+      NOTE: no longer needed - tpm
     bool pedestalSubtractedATWD0_;
     bool pedestalSubtractedATWD1_;
     bool pedestalSubtractedATWD2_;
     bool pedestalSubtractedATWD3_;
     
     bool pedestalSubtractedFADC_;
-    
+    */
+
 public:
     /**
      * constructor
@@ -120,13 +123,16 @@ public:
     I3DOMLaunch() 
 	{
 	    startTime_ = 0.0;
-	    
+	   
+	    /*	
+	      NOTE: no longer needed - tpm
 	    pedestalSubtractedATWD0_ = false;
 	    pedestalSubtractedATWD1_ = false;
 	    pedestalSubtractedATWD2_ = false;
 	    pedestalSubtractedATWD3_ = false;
 
 	    pedestalSubtractedFADC_ = false;
+	    */
 	}
 
     /**
@@ -213,16 +219,21 @@ public:
     /**
      * set if pedestal is subtracted for ATWDs and FADC
      */
+    /*
+      NOTE: no longer needed - tpm
     void SetPedestalIsSubtractedATWD0(bool subtracted) { pedestalSubtractedATWD0_ = subtracted; }
     void SetPedestalIsSubtractedATWD1(bool subtracted) { pedestalSubtractedATWD1_ = subtracted; }
     void SetPedestalIsSubtractedATWD2(bool subtracted) { pedestalSubtractedATWD2_ = subtracted; }
     void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
 
     void SetPedestalIsSubtractedFADC(bool subtracted) { pedestalSubtractedFADC_ = subtracted; }
+    */
     
     /**
      * is pedestal subtracted for ATWDs and FADC?
      **/
+    /*
+      NOTE: no longer needed - tpm
     bool PedestalSubtractedATWD0() { return pedestalSubtractedATWD0_; }
     bool PedestalSubtractedATWD1() { return pedestalSubtractedATWD1_; }
     bool PedestalSubtractedATWD2() { return pedestalSubtractedATWD2_; }
@@ -258,6 +269,7 @@ public:
 		throw std::exception();
 	    }
 	}
+    */
 
     /**
      * return the pedestal subtracted and gain-corrected (i.e. calibrated) FADC

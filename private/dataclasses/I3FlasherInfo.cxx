@@ -10,7 +10,7 @@ template <class Archive>
 	    //ar & make_nvp("Trigger", trigger_);
 	    //trigger_ isn't defined anywhere
 	    ar & make_nvp("RawATWD3", rawATWD3_);
-	    ar & make_nvp("PedestalSubtractedATWD3", pedestalSubtractedATWD3_);
+	    // tpm ar & make_nvp("PedestalSubtractedATWD3", pedestalSubtractedATWD3_);
 	    ar & make_nvp("mask", mask_);
 	    ar & make_nvp("LEDBrightness", LEDBrightness_);
 	    ar & make_nvp("muon", muon_);

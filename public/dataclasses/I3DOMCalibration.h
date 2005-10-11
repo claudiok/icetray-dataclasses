@@ -35,7 +35,7 @@ using namespace std;
  * the calibration database (reversed in time for bins 0-127).
  * Calibration information is fetched by the time-ordered bin numbers.
  *
- @author Tom McCauley
+ @author Tom McCauley <tpmccauley@lbl.gov>
 
  @todo Not all of the calib. info. is dealt with here. Documentation
        needs to be added as well as units (or is that handled by the user?) 
@@ -153,30 +153,35 @@ public:
    * Returns the ATWD trace in ATWD counts, not converted to
    * voltage, with the pedestal pattern subtracted 
    */
-
-  int GetPedestalSubtractedCount(int id,  
-				 int channel, 
-				 int bin, 
-				 double fe_pedestal,
-				 int count);
-
+    /*
+      NOTE: Not needed anymore - tpm
+    
+    int GetPedestalSubtractedCount(int id,  
+				   int channel, 
+				   int bin, 
+				   double fe_pedestal,
+				    int count);
+    */
 
   /**
    * Converts the pedestal-subtracted ATWD trace from
    * ATWD counts to voltage.
    *
    */
+    /*
+      NOTE: Not needed anymore - tpm
 
-  double GetPedestalSubtractedVoltage(int id, 
-				      int channel, 
-				      int bin, 
-				      double fe_pedestal,
-				      int count);
+    double GetPedestalSubtractedVoltage(int id, 
+					int channel, 
+					int bin, 
+					double fe_pedestal,
+					int count);
+    */
 
   /**
    * Return the voltage value corresponding to the count 
-   * for a specific ATWD id, channel, and bin.  
-   * have to specify the front end pedestal which isn't known 
+   * for a specific ATWD id, channel, and bin.
+   * Have to specify the front end pedestal which isn't known 
    * at calibration time
    */
   double GetATWDVoltage(int id, 
@@ -184,7 +189,18 @@ public:
 			int bin,
 			double fe_pedestal, 
 			int count);
-  
+   
+    /**
+     * Return the count value corresponding to a voltage
+     * for a specific ATWD id, channel, and bin: 
+     * the inverse calibration, if you will
+     */
+    double GetATWDCount(int id, 
+			int channel,
+			int bin,
+			double fe_pedestal,
+			double voltage);
+
   I3DOMCalibration();
   
   virtual ~I3DOMCalibration()

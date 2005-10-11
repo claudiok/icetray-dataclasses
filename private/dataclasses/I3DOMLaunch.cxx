@@ -14,11 +14,12 @@ template <class Archive>
 	    ar & make_nvp("RawATWD2", rawATWD2_);
 	    ar & make_nvp("RawATWD3", rawATWD3_);
 	    ar & make_nvp("RawFADC", rawFADC_);
-	    ar & make_nvp("PedestalSubtractedATWD0", pedestalSubtractedATWD0_);
-	    ar & make_nvp("PedestalSubtractedATWD1", pedestalSubtractedATWD1_);
-	    ar & make_nvp("PedestalSubtractedATWD2", pedestalSubtractedATWD2_);
-	    ar & make_nvp("PedestalSubtractedATWD2", pedestalSubtractedATWD3_);
-	    ar & make_nvp("PedestalSubtractedFADC", pedestalSubtractedFADC_);
+	    // no longer used - tpm
+	    //ar & make_nvp("PedestalSubtractedATWD0", pedestalSubtractedATWD0_);
+	    //ar & make_nvp("PedestalSubtractedATWD1", pedestalSubtractedATWD1_);
+	    //ar & make_nvp("PedestalSubtractedATWD2", pedestalSubtractedATWD2_);
+	    //ar & make_nvp("PedestalSubtractedATWD2", pedestalSubtractedATWD3_);
+	    //ar & make_nvp("PedestalSubtractedFADC", pedestalSubtractedFADC_);
 	    ar & make_nvp("CalibratedATWD", calibratedATWD_);
 	    ar & make_nvp("CalibratedFADC", calibratedFADC_);
 	    ar & make_nvp("LocalCoincidence", localCoincidence_);
