@@ -1,9 +1,11 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3FlasherInfo.h>
+#include <dataclasses/I3Trigger.h>
 
 template <class Archive>
     void I3FlasherInfo::serialize(Archive& ar, unsigned version)
 	{
+	    ar & make_nvp("I3Trigger", base_object<I3Trigger>(*this) );
 	    ar & make_nvp("FlasherOM", flasherOM_);
 	    ar & make_nvp("FlashTime", flashTime_);
 	    ar & make_nvp("ATWDBinSize", aTWDBinSize_);
