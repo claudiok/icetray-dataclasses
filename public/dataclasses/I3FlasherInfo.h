@@ -13,6 +13,7 @@
 #define I3FLASHERINFO_H
 
 #include "dataclasses/OMKey.h"
+#include "dataclasses/I3Trigger.h"
 
 using namespace std; 
 /**
@@ -26,7 +27,7 @@ using namespace std;
  * Included here for use by flasher analysis people.  It can be "I3Bagged".
  *
  */
-class I3FlasherInfo
+class I3FlasherInfo : public I3Trigger
 {
 
 protected:
@@ -143,6 +144,8 @@ private:
     friend class boost::serialization::access;
 
     template <class Archive> void serialize(Archive & ar, unsigned version);
+
+ClassDef(I3FlasherInfo,1);
 };
 
 /**
