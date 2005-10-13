@@ -40,7 +40,7 @@ TEST(conversion_counts_to_volts)
 	int count = 100;
 
 	dom_calib->SetATWDGain(channel,gain,gainErr);
-	dom_calib->SetATWDParameters(id,channel,bin,slope,intercept,regress_coeff);
+	dom_calib->SetATWDBinParameters(id,channel,bin,slope,intercept,regress_coeff);
       
 	inice_calib[OMKey(20,20)] = dom_calib;
       
@@ -91,7 +91,7 @@ TEST(to_stream)
 	double gainErr = 0.0;
       
 	dom_calib->SetATWDGain(channel,gain,gainErr);
-	dom_calib->SetATWDParameters(id,channel,bin,slope,intercept,regress_coeff);
+	dom_calib->SetATWDBinParameters(id,channel,bin,slope,intercept,regress_coeff);
       
 	dom_calib->ToStream(cout);
 	cout<< dom_calib;
