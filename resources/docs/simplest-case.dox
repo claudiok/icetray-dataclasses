@@ -13,7 +13,7 @@ I3Hit has only two data members.  A double and an integer.
    @endverbatim	                                                                                
 
 To be able to serialize this class' data members you only need to add the following lines
-in the class' private area.
+in the class' private portion of the class header file (in the project/public area).
 
    @verbatim
   friend class boost::serialization::access;
@@ -40,7 +40,8 @@ In this case it is datclasses/private/I3Hit.cxx.
    @endverbatim	            
 
 Note that not only did we move the implementation of the serialize method to its own source file,
-but the we included the macro I3_SERIALIZABLE().
+but the we included the macro I3_SERIALIZABLE().  The  I3_SERIALIZABLE macro makes sure
+the boost::serialization libraries properly know about your class.
 
 For a more detailed explanation of the above code check out @ref detailed-simplest-case.
 

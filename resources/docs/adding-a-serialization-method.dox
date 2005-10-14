@@ -8,7 +8,8 @@ inherit from any other class and the data members are primitive types (ints, boo
 
    @li @ref simplest-case-test - Writing the serialization test is nearly trivial thanks to Troy. 
 
-   @li <b> Getting your class to serialize through its base pointer </b> - My class inherits a base class and I need to be able to serialize it through a shared pointer to that base class.  This is done for you now by the I3_SERIALIZABLE macro.  You're still likely going to want to write a test, so skip to the next section.
+   @li @ref serializing-to-base - My class inherits a base class and I need to be able to serialize it through a shared pointer to that base class.
+	You're still likely going to want to write a test that includes handling the class via a base pointer, so also see the next section.
                                                                 
    @li @ref through-shared-base-pointer-test - Extending the simple test to now test serialization through a shared pointer to the base class.
 

@@ -12,5 +12,6 @@ an email to remind me to do this.
     ar & make_nvp("Time", time_);
     ar & make_nvp("HitID", hitID_);
   }
+  I3_SERIALIZABLE(I3Hit);
    @endverbatim	     
 */

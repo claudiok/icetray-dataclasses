@@ -1,0 +1,46 @@
+/**
+   @page serializing-to-base Serializing a class derrived from a base class
+
+Lets consider I3MCHit, a trivial extension of the I3Hit class.
+
+@verbatim
+class I3MCHit : public I3Hit
+{
+  float  weight_;
+  int    particleID_;
+  double  cherenkovDistance_;
+}
+@endverbatim
+
+I3MCHit adds three primitive types to the base class of I3Hit.
+
+Again, in the classes header file (public/dataclasses/I3MCHit.h here), you need
+a similar entry in the private member function as I3Hit has:
+
+@verbatim
+  friend class boost::serialization::access;
+
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+@endverbatim
+
+The magic happens in the serialize method in the source file (private/dataclasses/I3MCHit.cxx):
+
+@verbatim
+#include <dataclasses/BoostHeaders.h>
+#include <dataclasses/I3MCHit.h>
+
+template <class Archive>
+  void I3MCHit::serialize (Archive &ar, unsigned version)
+  {
+    ar & make_nvp("I3Hit", base_object<I3Hit>(*this));
+    ar & make_nvp("Weight", weight_);
+    ar & make_nvp("ParticleID", particleID_);
+    ar & make_nvp("CherenkovDistance", cherenkovDistance_);
+  }
+I3_SERIALIZABLE(I3MCHit);
+@endverbatim
+
+To make sure the base class is serialized as well, the "I3Hit" entry in this
+serialize method is required.
+
+*/
