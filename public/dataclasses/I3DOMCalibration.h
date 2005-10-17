@@ -121,7 +121,7 @@ public:
      * Get slope parameter from domcal file <atwdfreq> which is 
      * the sampling rate calibration for each ATWD chip 0 or 1 
      */
-    double GetATWDFreqSlope(int chip)
+    double GetATWDFreqSlope(unsigned int chip)
 	{  
 	    struct LinearFit fit;
 	    fit = atwdFreq_[chip];
@@ -132,7 +132,7 @@ public:
      * Get Intercept parameter from domcal file <atwdfreq> which is 
      * the sampling rate calibration for each ATWD chip 0 or 1 
      */
-    double GetATWDFreqIntercept(int chip)
+    double GetATWDFreqIntercept(unsigned int chip)
 	{  
 	    struct LinearFit fit;
 	    fit = atwdFreq_[chip];
@@ -143,7 +143,7 @@ public:
      * Get RegressCoeff parameter from domcal file <atwdfreq> which is 
      * the sampling rate calibration for each ATWD chip 0 or 1 
      */
-    double GetATWDFreqRegressCoeff(int chip)
+    double GetATWDFreqRegressCoeff(unsigned int chip)
 	{  
 	    struct LinearFit fit;
 	    fit = atwdFreq_[chip];
@@ -155,41 +155,48 @@ public:
      * This is really the conversion factor from
      * counts to volts.
      */
-    double GetATWDBinSlope(int id,	
-			   int channel,
-			   int bin)
+    double GetATWDBinSlope(unsigned int id,	
+			   unsigned int channel,
+			   unsigned int bin)
 	{
-	    struct LinearFit fit = GetATWDById(id)[channel][bin];
+	    struct LinearFit fit = GetATWDBinParameters(id)[channel][bin];
 	    return fit.slope;
 	};
     
     /**
      * Get the intercept for the bin calibration.
      */
-    double GetATWDBinIntercept(int id,
-			       int channel,
-			       int bin)
+    double GetATWDBinIntercept(unsigned int id,
+			       unsigned int channel,
+			       unsigned int bin)
 	{
-	    struct LinearFit fit = GetATWDById(id)[channel][bin];
+	    struct LinearFit fit = GetATWDBinParameters(id)[channel][bin];
 	    return fit.intercept;
 	};
     
     /**
      * Get the regression coeff. for the bin calibration.
      */
-    double GetATWDBinRegressCoeff(int id, 
-				  int channel,
-				  int bin)
+    double GetATWDBinRegressCoeff(unsigned int id, 
+				  unsigned int channel,
+				  unsigned int bin)
 	{
-	    struct LinearFit fit = GetATWDById(id)[channel][bin];
+	    struct LinearFit fit = GetATWDBinParameters(id)[channel][bin];
 	    return fit.regressCoeff;
 	};
         
     /**
+     * Get the baseline for a given ATWD, channel, and HV
+     * This return value is a linear interpolation from 
+     * the baseline vs. HV calibration parameters
+     */
+    double GetATWDBaseline(unsigned int id, unsigned int channel, double HV);
+    
+    /**
      * Get gain and error on gain for ATWD by channel
      */
-    double GetATWDGain(int channel);
-    double GetATWDGainErr(int channel);
+    double GetATWDGain(unsigned int channel);
+    double GetATWDGainErr(unsigned int channel);
   
     /**
      * Return the voltage value corresponding to the count 
@@ -197,9 +204,9 @@ public:
      * Have to specify the front end pedestal which isn't known 
      * at calibration time
      */
-    double GetATWDVoltage(int id, 
-			  int channel, 
-			  int bin,
+    double GetATWDVoltage(unsigned int id, 
+			  unsigned int channel, 
+			  unsigned int bin,
 			  double fe_pedestal, 
 			  int count);
    
@@ -208,9 +215,9 @@ public:
      * for a specific ATWD id, channel, and bin: 
      * the inverse calibration, if you will
      */
-    double GetATWDCount(int id, 
-			int channel,
-			int bin,
+    double GetATWDCount(unsigned int id, 
+			unsigned int channel,
+			unsigned int bin,
 			double fe_pedestal,
 			double voltage);
 
@@ -231,9 +238,9 @@ public:
      * this name is woefully generic. Perhaps it should be
      * SetATWDBinParameters? -tpm
      */
-    void SetATWDBinParameters(int id,
-			      int channel,
-			      int bin,
+    void SetATWDBinParameters(unsigned int id,
+			      unsigned int channel,
+			      unsigned int bin,
 			      double slope,
 			      double intercept,
 			      double regress_coeff);
@@ -242,11 +249,19 @@ public:
      * Set parameters for sampling rate calibration for each 
      * ATWD chip as a function of the trigger_bias DAC setting
      */
-    void SetATWDFreqParameters(int chip,
+    void SetATWDFreqParameters(unsigned int chip,
 			       double slope,
 			       double intercept,
 			       double regress_coeff);
    
+    /**
+     * Set the baseline parameters (baseline vs. HV) 
+     * for each ATWD and each channel
+     */
+    void SetATWDBaselineParameters(unsigned int id,
+				   unsigned int channel,
+				   double HV, double baseline);
+    
     /**
      * Set FADC calibration parameters. Currently the FADC
      * calibration is a work in progress and a moving target
@@ -272,7 +287,7 @@ public:
     /**
      * Set gain and error on gain for ATWD (specified by channel).
      */
-    void SetATWDGain(int channel, double gain, double gainErr);
+    void SetATWDGain(unsigned int channel, double gain, double gainErr);
   
     virtual void ToStream(ostream& o) const
 	{
@@ -289,6 +304,8 @@ public:
       };
     
 private:
+    static const unsigned int N_ATWD_BINS;
+
     uint64_t mainboardId_;
     double  temperature_;
     
@@ -298,16 +315,17 @@ private:
     double fadcGain_;
     double fadcPedestal_;
 
-    double pedestalVoltage_;
-
     /**
      * Gain and error on gain for ATWD channels.
      * The key corresponds to the channel.
      */
-    map<int, double> ampGains_;
-    map<int, double> ampGainErrs_;
+    map<unsigned int, double> ampGains_;
+    map<unsigned int, double> ampGainErrs_;
     
-    map<int, LinearFit> atwdFreq_;
+    /**
+     * Linear fit for each ATWD sampling frequency
+     */
+    map<unsigned int, LinearFit> atwdFreq_;
 
     /**
      * Results of the linear fit for the bin calibration
@@ -316,10 +334,26 @@ private:
      * First key corresponds to channel.
      * Key in internal map corresponds to bin.
      */
-    map< int, map<int,LinearFit> > atwd0_;
-    map< int, map<int,LinearFit> > atwd1_;
+    map< unsigned int, map<unsigned int,LinearFit> > atwdBin0_;
+    map< unsigned int, map<unsigned int,LinearFit> > atwdBin1_;
+    
+    map< unsigned int, map<unsigned int,LinearFit> >& GetATWDBinParameters(unsigned int id);
 
-    map< int, map<int,LinearFit> >& GetATWDById(int id);
+    /**
+     * The remnant baseline (measured at various HV settings)
+     * These are subtracted after the waveforms are converted 
+     * from counts to volts and the bias level has been subtracted
+     * The outer index is the ATWD channel and the interior map
+     * is: map<double HV, double baseline>
+     */
+    map< unsigned int, map<double,double> > atwdBaseline0_;
+    map< unsigned int, map<double,double> > atwdBaseline1_;
+
+    map< unsigned int, map<double,double> >& GetATWDBaselineParameters(unsigned int id);
+    
+    /**
+     *	Charge histogram parameters
+     */
     map<unsigned int,ChargeHistogram> chargeHistograms_;
 
     /**
