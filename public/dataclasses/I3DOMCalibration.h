@@ -43,54 +43,53 @@ using namespace std;
  * @todo My big worry is that the interface is too tied to the way the calibration is done.
  *       Will the calibration ever change too much in the future (or change too rapidly) 
  *       that this interface will become obsolete and useless?
+ * @todo The FADC calibration is still a work a progress and therefore changes 
+ *       Here will be necessary.
 */
 
 struct LinearFit
 {
-  double slope;
-  double intercept;
-  double regressCoeff;
+    double slope;
+    double intercept;
+    double regressCoeff;
 
-  private: 
+private: 
+    friend class boost::serialization::access;
 
-  friend class boost::serialization::access;
-
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version);
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version);
 };
 
 struct ChargeHistogramEntry
 {
-  double charge;
-  double count;
+    double charge;
+    double count;
 
-  private: 
+private: 
+    friend class boost::serialization::access;
 
-  friend class boost::serialization::access;
-
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version);
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version);
 };
 
 struct ChargeHistogram
 {
-  double exponentialAmplitude;
-  double exponentialWidth;
-  double gaussianAmplitude;
-  double gaussianMean;
-  double gaussianWidth;
-  double voltage;
-  double convergent;
-  double peakToValley;
-  double noiseRate;
-  vector<ChargeHistogramEntry> entries;
+    double exponentialAmplitude;
+    double exponentialWidth;
+    double gaussianAmplitude;
+    double gaussianMean;
+    double gaussianWidth;
+    double voltage;
+    double convergent;
+    double peakToValley;
+    double noiseRate;
+    vector<ChargeHistogramEntry> entries;
 
-  private: 
+private: 
+    friend class boost::serialization::access;
 
-  friend class boost::serialization::access;
-
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version);
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version);
 };
 
 class I3DOMCalibration
@@ -190,24 +189,27 @@ public:
      * This return value is a linear interpolation from 
      * the baseline vs. HV calibration parameters
      */
-    double GetATWDBaseline(unsigned int id, unsigned int channel, double HV);
+    double GetATWDBaseline(unsigned int id, 
+			   unsigned int channel, 
+			   double HV);
     
     /**
      * Get gain and error on gain for ATWD by channel
      */
     double GetATWDGain(unsigned int channel);
-    double GetATWDGainErr(unsigned int channel);
+    double GetATWDGainErr(unsigned int channel);	
   
     /**
      * Return the voltage value corresponding to the count 
      * for a specific ATWD id, channel, and bin.
-     * Have to specify the front end pedestal which isn't known 
-     * at calibration time
+     * Have to specify the bias voltage and PMT HV 
+     * which aren't known at calibration time
      */
     double GetATWDVoltage(unsigned int id, 
 			  unsigned int channel, 
 			  unsigned int bin,
-			  double fe_pedestal, 
+			  double fe_pedestal,
+			  double pmtHV,
 			  int count);
    
     /**
@@ -219,7 +221,18 @@ public:
 			unsigned int channel,
 			unsigned int bin,
 			double fe_pedestal,
+			double pmtHV,
 			double voltage);
+
+    map<unsigned int,ChargeHistogram>& GetChargeHistograms()
+	{
+	    return chargeHistograms_;
+	}
+
+    const map<unsigned int,ChargeHistogram>& GetChargeHistograms() const
+	{
+	    return chargeHistograms_;
+	}
 
     void SetMainboardID(uint64_t mbid)
 	{
@@ -274,21 +287,11 @@ public:
 	    fadcGain_     = gain;
 	};
 
-    map<unsigned int,ChargeHistogram>& GetChargeHistograms()
-	{
-	    return chargeHistograms_;
-	}
-
-    const map<unsigned int,ChargeHistogram>& GetChargeHistograms() const
-	{
-	    return chargeHistograms_;
-	}
-  
     /**
      * Set gain and error on gain for ATWD (specified by channel).
      */
     void SetATWDGain(unsigned int channel, double gain, double gainErr);
-  
+    
     virtual void ToStream(ostream& o) const
 	{
 	    o<<"[ "
@@ -366,7 +369,6 @@ private:
 
     template <class Archive>
       void serialize(Archive& ar, unsigned version);
-
 };
 
 /**

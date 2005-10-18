@@ -14,8 +14,12 @@ I3DOMCalibration::I3DOMCalibration()
       fadcGain_(NAN), fadcPedestal_(NAN)
 {};
 
-void I3DOMCalibration::SetATWDBinParameters(unsigned int id, unsigned int channel, unsigned int bin,
-					    double slope, double intercept, double regress_coeff)
+void I3DOMCalibration::SetATWDBinParameters(unsigned int id, 
+					    unsigned int channel, 
+					    unsigned int bin,
+					    double slope, 
+					    double intercept, 
+					    double regress_coeff)
 {
     struct LinearFit fit;
     
@@ -26,8 +30,10 @@ void I3DOMCalibration::SetATWDBinParameters(unsigned int id, unsigned int channe
     GetATWDBinParameters(id)[channel][(N_ATWD_BINS-1)-bin] = fit;
 }
 
-void I3DOMCalibration::SetATWDFreqParameters(unsigned int chip, double slope, 
-					     double intercept, double regress_coeff)
+void I3DOMCalibration::SetATWDFreqParameters(unsigned int chip, 
+					     double slope, 
+					     double intercept, 	
+					     double regress_coeff)
 {
     struct LinearFit fit;
     
@@ -37,14 +43,19 @@ void I3DOMCalibration::SetATWDFreqParameters(unsigned int chip, double slope,
     atwdFreq_.insert(pair<int, LinearFit> (chip, fit));
 }
 
-void I3DOMCalibration::SetATWDBaselineParameters(unsigned int id, unsigned int channel,
-						 double HV,  double baseline)
+void I3DOMCalibration::SetATWDBaselineParameters(unsigned int id, 
+						 unsigned int channel,
+						 double HV, 
+						 double baseline)
 {
     GetATWDBaselineParameters(id)[channel][HV] = baseline;
 }
 
-double I3DOMCalibration::GetATWDVoltage(unsigned int id,  unsigned int channel, 
-					unsigned int bin, double fe_pedestal,
+double I3DOMCalibration::GetATWDVoltage(unsigned int id,  
+					unsigned int channel, 
+					unsigned int bin, 
+					double fe_pedestal,
+					double pmtHV, 
 					int count)
 {
     if ( ! GetATWDBinParameters(id).count(channel) )
@@ -59,13 +70,16 @@ double I3DOMCalibration::GetATWDVoltage(unsigned int id,  unsigned int channel,
     
     struct LinearFit fit = GetATWDBinParameters(id)[channel][bin];
        
-    return ((fit.slope*count + fit.intercept) - fe_pedestal) / GetATWDGain(channel);
+    double voltage = (fit.slope*count + fit.intercept);
+    voltage = voltage - (fe_pedestal + GetATWDBaseline(id, channel, pmtHV));
+    return voltage/GetATWDGain(channel);
 }
 
 double I3DOMCalibration::GetATWDCount(unsigned int id, 
 				      unsigned int channel,
 				      unsigned int bin,
 				      double fe_pedestal,
+				      double pmtHV,
 				      double voltage)
 {
     if ( ! GetATWDBinParameters(id).count(channel) )
@@ -80,10 +94,14 @@ double I3DOMCalibration::GetATWDCount(unsigned int id,
     
     struct LinearFit fit = GetATWDBinParameters(id)[channel][bin];
 
-    return (GetATWDGain(channel)*voltage - (fit.intercept - fe_pedestal))/ fit.slope;
+    double count =  GetATWDGain(channel)*voltage;
+    count += fe_pedestal + GetATWDBaseline(id, channel, pmtHV) - fit.intercept;
+    return count/fit.slope;
 }
 
-double I3DOMCalibration::GetATWDBaseline(unsigned int id, unsigned int channel, double HV)
+double I3DOMCalibration::GetATWDBaseline(unsigned int id, 
+					 unsigned int channel, 
+					 double HV)
 {
     if ( ! GetATWDBaselineParameters(id).count(channel) )
     {
@@ -173,7 +191,9 @@ I3DOMCalibration::GetATWDBaselineParameters(unsigned int id)
     }
 }
 
-void I3DOMCalibration::SetATWDGain(unsigned int channel, double gain, double gainErr)
+void I3DOMCalibration::SetATWDGain(unsigned int channel, 
+				   double gain, 
+				   double gainErr)
 {
     ampGains_.insert(pair<int,double> (channel, gain));
     ampGainErrs_.insert(pair<int,double> (channel, gainErr));
@@ -204,9 +224,9 @@ template <class Archive>
 void 
 LinearFit::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("slope",slope);
-  ar & make_nvp("intercept",intercept);
-  ar & make_nvp("regressCoeff",regressCoeff);
+    ar & make_nvp("slope",slope);
+    ar & make_nvp("intercept",intercept);
+    ar & make_nvp("regressCoeff",regressCoeff);
 }
 
 I3_SERIALIZABLE(LinearFit);
@@ -215,8 +235,8 @@ template <class Archive>
 void 
 ChargeHistogramEntry::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("charge",charge);
-  ar & make_nvp("count",count);
+    ar & make_nvp("charge",charge);
+    ar & make_nvp("count",count);
 }
 
 I3_SERIALIZABLE(ChargeHistogramEntry);
@@ -225,17 +245,17 @@ template <class Archive>
 void 
 ChargeHistogram::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("exponentialAmplitude",exponentialAmplitude);
-  ar & make_nvp("exponentialWidth",exponentialWidth);
-  ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
-  ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
-  ar & make_nvp("gaussianMean",gaussianMean);
-  ar & make_nvp("gaussianWidth",gaussianWidth);
-  ar & make_nvp("voltage",voltage);
-  ar & make_nvp("convergent",convergent);
-  ar & make_nvp("peakToValley",peakToValley);
-  ar & make_nvp("noiseRate",noiseRate);
-  ar & make_nvp("entries",entries);
+    ar & make_nvp("exponentialAmplitude",exponentialAmplitude);
+    ar & make_nvp("exponentialWidth",exponentialWidth);
+    ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
+    ar & make_nvp("gaussianAmplitude",gaussianAmplitude);
+    ar & make_nvp("gaussianMean",gaussianMean);
+    ar & make_nvp("gaussianWidth",gaussianWidth);
+    ar & make_nvp("voltage",voltage);
+    ar & make_nvp("convergent",convergent);
+    ar & make_nvp("peakToValley",peakToValley);
+    ar & make_nvp("noiseRate",noiseRate);
+    ar & make_nvp("entries",entries);
 }
 
 I3_SERIALIZABLE(ChargeHistogram);
@@ -244,19 +264,18 @@ template <class Archive>
 void 
 I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("mainboardId",mainboardId_);
-  ar & make_nvp("temperature",temperature_);
-  ar & make_nvp("fadcGain",fadcGain_);
-  ar & make_nvp("fadcPedestal",fadcPedestal_);
-  //ar & make_nvp("pedestalVoltage",pedestalVoltage_);
-  ar & make_nvp("ampGains",ampGains_);
-  ar & make_nvp("ampGainErrs",ampGainErrs_);
-  ar & make_nvp("atwdFreq",atwdFreq_);
-  ar & make_nvp("atwd0BinParameters",atwdBin0_);
-  ar & make_nvp("atwd1BinParameters",atwdBin1_);
-  ar & make_nvp("atwd0BaselineParameters",atwdBaseline0_);
-  ar & make_nvp("atwd1BaselineParameters",atwdBaseline1_);
-  ar & make_nvp("chargeHistograms",chargeHistograms_);
+    ar & make_nvp("mainboardId",mainboardId_);
+    ar & make_nvp("temperature",temperature_);
+    ar & make_nvp("fadcGain",fadcGain_);
+    ar & make_nvp("fadcPedestal",fadcPedestal_);
+    ar & make_nvp("ampGains",ampGains_);
+    ar & make_nvp("ampGainErrs",ampGainErrs_);
+    ar & make_nvp("atwdFreq",atwdFreq_);
+    ar & make_nvp("atwd0BinParameters",atwdBin0_);
+    ar & make_nvp("atwd1BinParameters",atwdBin1_);
+    ar & make_nvp("atwd0BaselineParameters",atwdBaseline0_);
+    ar & make_nvp("atwd1BaselineParameters",atwdBaseline1_);
+    ar & make_nvp("chargeHistograms",chargeHistograms_);
 }
 
 I3_SERIALIZABLE(I3DOMCalibration);
