@@ -46,6 +46,7 @@ TEST(bin_parameters)
 				    intercept,
 				    regress_coeff);
 
+    /*
     dom_calib->SetATWDBaselineParameters(id, channel, 
 					 1200*I3Units::V, 
 					 0.0);
@@ -55,7 +56,8 @@ TEST(bin_parameters)
 					 0.0);
     
     double HV = 1250*I3Units::V;
-					     
+    */
+				     
     inice_calib[OMKey(20,20)] = dom_calib;
     
     I3DOMCalibPtr domptr = inice_calib[OMKey(20,20)];
@@ -65,29 +67,30 @@ TEST(bin_parameters)
 		    0.0001,
 		    "Failed to get proper gain from I3DOMCalibration");
       
+    /*
     ENSURE_DISTANCE(0.0, 
 		    domptr->GetATWDBaseline(id,channel,HV),
 		    0.0001*I3Units::V,
 		    "Failed to get proper baseline from I3DOMCalibration");
-	
+    */
+
     bin = 0; // Remember: for some reason the bin order is reversed; 
              // I think this is (was?) the way it was filled in the Db 
 
     ENSURE_DISTANCE(150.0,
-		    domptr->GetATWDCount(id,channel,bin,fe_pedestal,HV,0.0),
+		    domptr->GetATWDCount(id,channel,bin,fe_pedestal,0.0),
 		    0.0001,
 		    "Failed to properly return count (test1)");
 
-    double voltage = domptr->GetATWDVoltage(id,channel,bin,fe_pedestal,HV,350);
+    double voltage = domptr->GetATWDVoltage(id,channel,bin,fe_pedestal,350);
     
     ENSURE_DISTANCE(350,
-		    domptr->GetATWDCount(id,channel,bin,fe_pedestal,HV,voltage),
+		    domptr->GetATWDCount(id,channel,bin,fe_pedestal,voltage),
 		    0.0001,
 		    "Failed to properly return count (test2)");
-    
-    
 }
 
+/*
 // Test baseline parameters
 TEST(baseline_parameters)
 {
@@ -139,8 +142,8 @@ TEST(baseline_parameters)
 		    domptr->GetATWDBaseline(1,2,HV), 0.0001*I3Units::V,
 		    "Failed to get baseline from I3DOMCalibration");
 }
+*/
 
-  
 // Test I/O streams
 TEST(to_stream)
 {	
@@ -150,8 +153,8 @@ TEST(to_stream)
     int channel = 0;
     int bin = 128;
     
-    double slope = -0.002;
-    double intercept = 2.9; 
+    double slope = -0.002*I3Units::V;
+    double intercept = 2.9*I3Units::V; 
     double regress_coeff = 0.99;
     double gain = -17.0;
 	

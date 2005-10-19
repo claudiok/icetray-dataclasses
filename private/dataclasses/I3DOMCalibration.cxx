@@ -9,8 +9,7 @@
 const unsigned int I3DOMCalibration::N_ATWD_BINS = 128;
 
 I3DOMCalibration::I3DOMCalibration()
-    : 
-      temperature_(NAN),
+    : temperature_(NAN),
       fadcGain_(NAN), fadcPedestal_(NAN)
 {};
 
@@ -43,6 +42,7 @@ void I3DOMCalibration::SetATWDFreqParameters(unsigned int chip,
     atwdFreq_.insert(pair<int, LinearFit> (chip, fit));
 }
 
+/*
 void I3DOMCalibration::SetATWDBaselineParameters(unsigned int id, 
 						 unsigned int channel,
 						 double HV, 
@@ -50,12 +50,12 @@ void I3DOMCalibration::SetATWDBaselineParameters(unsigned int id,
 {
     GetATWDBaselineParameters(id)[channel][HV] = baseline;
 }
+*/
 
 double I3DOMCalibration::GetATWDVoltage(unsigned int id,  
 					unsigned int channel, 
 					unsigned int bin, 
-					double fe_pedestal,
-					double pmtHV, 
+					double fe_pedestal, 
 					int count)
 {
     if ( ! GetATWDBinParameters(id).count(channel) )
@@ -71,7 +71,8 @@ double I3DOMCalibration::GetATWDVoltage(unsigned int id,
     struct LinearFit fit = GetATWDBinParameters(id)[channel][bin];
        
     double voltage = (fit.slope*count + fit.intercept);
-    voltage = voltage - (fe_pedestal + GetATWDBaseline(id, channel, pmtHV));
+    voltage = voltage - fe_pedestal;
+    //voltage = voltage - (fe_pedestal + GetATWDBaseline(id, channel, pmtHV));
     return voltage/GetATWDGain(channel);
 }
 
@@ -79,7 +80,6 @@ double I3DOMCalibration::GetATWDCount(unsigned int id,
 				      unsigned int channel,
 				      unsigned int bin,
 				      double fe_pedestal,
-				      double pmtHV,
 				      double voltage)
 {
     if ( ! GetATWDBinParameters(id).count(channel) )
@@ -95,10 +95,12 @@ double I3DOMCalibration::GetATWDCount(unsigned int id,
     struct LinearFit fit = GetATWDBinParameters(id)[channel][bin];
 
     double count =  GetATWDGain(channel)*voltage;
-    count += fe_pedestal + GetATWDBaseline(id, channel, pmtHV) - fit.intercept;
+    count += fe_pedestal - fit.intercept;
+    //count += fe_pedestal + GetATWDBaseline(id, channel, pmtHV) - fit.intercept;
     return count/fit.slope;
 }
 
+/*
 double I3DOMCalibration::GetATWDBaseline(unsigned int id, 
 					 unsigned int channel, 
 					 double HV)
@@ -156,6 +158,7 @@ double I3DOMCalibration::GetATWDBaseline(unsigned int id,
     double coeff = (HV-voltageBelow)/(voltageAbove-voltageBelow);
     return coeff*(baselineAbove-baselineBelow) + baselineBelow;
 }
+*/
 
 map<unsigned int,map<unsigned int,LinearFit> >& 
 I3DOMCalibration::GetATWDBinParameters(unsigned int id)
@@ -174,6 +177,7 @@ I3DOMCalibration::GetATWDBinParameters(unsigned int id)
     }
 }
 
+/*
 map<unsigned int, map<double,double> >&
 I3DOMCalibration::GetATWDBaselineParameters(unsigned int id)
 {
@@ -190,6 +194,7 @@ I3DOMCalibration::GetATWDBaselineParameters(unsigned int id)
 	}
     }
 }
+*/
 
 void I3DOMCalibration::SetATWDGain(unsigned int channel, 
 				   double gain, 
@@ -273,8 +278,8 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     ar & make_nvp("atwdFreq",atwdFreq_);
     ar & make_nvp("atwd0BinParameters",atwdBin0_);
     ar & make_nvp("atwd1BinParameters",atwdBin1_);
-    ar & make_nvp("atwd0BaselineParameters",atwdBaseline0_);
-    ar & make_nvp("atwd1BaselineParameters",atwdBaseline1_);
+    //ar & make_nvp("atwd0BaselineParameters",atwdBaseline0_);
+    //ar & make_nvp("atwd1BaselineParameters",atwdBaseline1_);
     ar & make_nvp("chargeHistograms",chargeHistograms_);
 }
 

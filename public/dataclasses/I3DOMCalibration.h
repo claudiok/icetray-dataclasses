@@ -44,7 +44,7 @@ using namespace std;
  *       Will the calibration ever change too much in the future (or change too rapidly) 
  *       that this interface will become obsolete and useless?
  * @todo The FADC calibration is still a work a progress and therefore changes 
- *       Here will be necessary.
+ *       here will be necessary.
 */
 
 struct LinearFit
@@ -189,10 +189,12 @@ public:
      * This return value is a linear interpolation from 
      * the baseline vs. HV calibration parameters
      */
+    /*
     double GetATWDBaseline(unsigned int id, 
 			   unsigned int channel, 
 			   double HV);
-    
+    */
+
     /**
      * Get gain and error on gain for ATWD by channel
      */
@@ -202,27 +204,42 @@ public:
     /**
      * Return the voltage value corresponding to the count 
      * for a specific ATWD id, channel, and bin.
-     * Have to specify the bias voltage and PMT HV 
+     * Have to specify the bias voltage 
      * which aren't known at calibration time
      */
+    double GetATWDVoltage(unsigned int id,
+			  unsigned int channel, 
+			  unsigned int bin,
+			  double fe_pedestal,
+			  int count);
+    /*
     double GetATWDVoltage(unsigned int id, 
 			  unsigned int channel, 
 			  unsigned int bin,
 			  double fe_pedestal,
 			  double pmtHV,
 			  int count);
-   
+    */
+
     /**
      * Return the count value corresponding to a voltage
      * for a specific ATWD id, channel, and bin: 
      * the inverse calibration, if you will
      */
+    double GetATWDCount(unsigned int id,
+			unsigned int channel,
+			unsigned int bin,
+			double fe_pedestal,
+			double voltage);
+
+    /*
     double GetATWDCount(unsigned int id, 
 			unsigned int channel,
 			unsigned int bin,
 			double fe_pedestal,
 			double pmtHV,
 			double voltage);
+    */
 
     map<unsigned int,ChargeHistogram>& GetChargeHistograms()
 	{
@@ -247,9 +264,6 @@ public:
     /**
      * Set parameters for conversion of count to voltage 
      * for each ATWD, each ATWD channel, and each ATWD bin.
-     * NOTE: Loathe as I am to monkey about with the interface,
-     * this name is woefully generic. Perhaps it should be
-     * SetATWDBinParameters? -tpm
      */
     void SetATWDBinParameters(unsigned int id,
 			      unsigned int channel,
@@ -271,10 +285,12 @@ public:
      * Set the baseline parameters (baseline vs. HV) 
      * for each ATWD and each channel
      */
+    /*
     void SetATWDBaselineParameters(unsigned int id,
 				   unsigned int channel,
 				   double HV, double baseline);
-    
+    */
+
     /**
      * Set FADC calibration parameters. Currently the FADC
      * calibration is a work in progress and a moving target
@@ -348,12 +364,21 @@ private:
      * from counts to volts and the bias level has been subtracted
      * The outer index is the ATWD channel and the interior map
      * is: map<double HV, double baseline>
+     *
+     * NOTE: This doesn't seem to be a reliable function of HV
+     * and furthermore it's not clear that why it should be.
+     * It's probably best to dynamically subtract whatever 
+     * baseline is left on a waveform-by-waveform basis 
+     * dynamically.
+     * I'll leave the support for it here anyway (commented out) - tpm
      */
+    /*
     map< unsigned int, map<double,double> > atwdBaseline0_;
     map< unsigned int, map<double,double> > atwdBaseline1_;
 
     map< unsigned int, map<double,double> >& GetATWDBaselineParameters(unsigned int id);
-    
+    */
+
     /**
      *	Charge histogram parameters
      */
