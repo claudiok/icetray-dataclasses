@@ -58,25 +58,25 @@ I3RawDOMStatus::LCMode I3TestDaqRawDOMStatus::GetLCMode() const
 /** @todo Are the units on LOCAL_COIN_WIN_UP_PRE just nanoseconds?" */
 double I3TestDaqRawDOMStatus::GetLCWindowUpPre() const
 {
-  return ((double)rawStatus_["LOCAL_COIN_WIN_UP_PRE"]) * I3Units::ns;
+  return (static_cast<double>(rawStatus_["LOCAL_COIN_WIN_UP_PRE"])) * I3Units::ns;
 }
 
 /** @todo Are the units on LOCAL_COIN_WIN_DOWN_PRE just nanoseconds?" */
 double I3TestDaqRawDOMStatus::GetLCWindowDownPre() const
 {
-  return ((double)rawStatus_["LOCAL_COIN_WIN_DOWN_PRE"]) * I3Units::ns;
+  return (static_cast<double>(rawStatus_["LOCAL_COIN_WIN_DOWN_PRE"])) * I3Units::ns;
 }
 
 /** @todo Are the units on LOCAL_COIN_WIN_UP_POST just nanoseconds?" */
 double I3TestDaqRawDOMStatus::GetLCWindowUpPost() const
 {
-  return ((double)rawStatus_["LOCAL_COIN_WIN_UP_Post"]) * I3Units::ns;
+  return (static_cast<double>(rawStatus_["LOCAL_COIN_WIN_UP_Post"])) * I3Units::ns;
 }
 
 /** @todo Are the units on LOCAL_COIN_WIN_DOWN_POST just nanoseconds?" */
 double I3TestDaqRawDOMStatus::GetLCWindowDownPost() const
 {
-  return ((double)rawStatus_["LOCAL_COIN_WIN_DOWN_POST"]) * I3Units::ns;
+  return (static_cast<double>(rawStatus_["LOCAL_COIN_WIN_DOWN_POST"])) * I3Units::ns;
 }
 
 I3RawDOMStatus::OnOff I3TestDaqRawDOMStatus::GetStatusATWD_A() const
@@ -102,7 +102,7 @@ I3RawDOMStatus::OnOff I3TestDaqRawDOMStatus::GetStatusFADC() const
 
 double I3TestDaqRawDOMStatus::GetPMTHV() const
 {
-  return 0.5 * (double)rawStatus_["PMT_HV_DAC"];// * I3Units::volt;
+  return 0.5 * static_cast<double>(rawStatus_["PMT_HV_DAC"]);// * I3Units::volt;
 }
 
 /** 
@@ -113,7 +113,7 @@ double I3TestDaqRawDOMStatus::GetPMTHV() const
 double I3TestDaqRawDOMStatus::GetSingleSPEThreshold() const
 {
   //  return (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
-  double raw_spe_thresh = (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
+  double raw_spe_thresh = static_cast<double>(rawStatus_["DAC_SINGLE_SPE_THRESH"]);
   return (5.*raw_spe_thresh/1024.- GetFEPedestal())/(9.6*(1+2200./249.));
 
 }
@@ -125,14 +125,33 @@ double I3TestDaqRawDOMStatus::GetSingleSPEThreshold() const
  */
 double I3TestDaqRawDOMStatus::GetFEPedestal() const
 {
-  return 5.0 * ((double)rawStatus_["DAC_PMT_FE_PEDESTAL"])/4096.;
+  return 5.0 * (static_cast<double>(rawStatus_["DAC_PMT_FE_PEDESTAL"]))/4096.;
 }
 
 double I3TestDaqRawDOMStatus::GetDACTriggerBias(int chip) const
 {
-    if(chip==0) return (double)rawStatus_["DAC_ATWD0_TRIGGER_BIAS"];
-    else if(chip==1) return (double)rawStatus_["DAC_ATWD1_TRIGGER_BIAS"];
+    if(chip==0) return static_cast<double>(rawStatus_["DAC_ATWD0_TRIGGER_BIAS"]);
+    else if(chip==1) return static_cast<double>(rawStatus_["DAC_ATWD1_TRIGGER_BIAS"]);
     else return 0;
+}
+
+unsigned int I3TestDaqRawDOMStatus::GetNBinsATWD(unsigned int channel) const
+{
+    if ( channel == 0 )
+	return static_cast<unsigned int>(rawStatus_["NUM_SAMPLES_ch0"]);
+    else if ( channel == 1 )
+	return static_cast<unsigned int>(rawStatus_["NUM_SAMPLES_ch1"]);
+    else if ( channel == 2 )
+	return static_cast<unsigned int>(rawStatus_["NUM_SAMPLES_ch2"]);
+    else if ( channel == 3 )
+	return static_cast<unsigned int>(rawStatus_["NUM_SAMPLES_ch3"]);
+    else 
+	log_fatal("Unknown ATWD channel in I3TestDaqRawDOMStatus::GetNBinsATWD");
+}
+
+unsigned int I3TestDaqRawDOMStatus::GetNBinsFADC() const
+{
+    return static_cast<unsigned int>(rawStatus_["NUM_FADC_SAMPLES"]);
 }
 
 template <class Archive>

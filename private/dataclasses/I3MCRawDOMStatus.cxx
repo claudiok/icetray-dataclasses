@@ -19,6 +19,11 @@ template <class Archive>
     ar & make_nvp("fePedestal",fePedestal_);
     ar & make_nvp("dacTriggerBias0",dacTriggerBias0_);
     ar & make_nvp("dacTriggerBias1",dacTriggerBias1_);
+    ar & make_nvp("nBinsATWD0",nBinsATWD0_);
+    ar & make_nvp("nBinsATWD1",nBinsATWD1_);
+    ar & make_nvp("nBinsATWD2",nBinsATWD2_);
+    ar & make_nvp("nBinsATWD3",nBinsATWD3_);
+    ar & make_nvp("nBinsFADC",nBinsFADC_);
   }
 
 

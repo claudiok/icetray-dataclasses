@@ -124,7 +124,6 @@ public:
      */
     virtual double GetPMTHV() const = 0;
 
-
     /**
      * @return the voltage that is the threshold for a dom single SPE trigger
      */
@@ -135,14 +134,23 @@ public:
      */
     virtual double GetFEPedestal() const = 0;
 
-  friend class boost::serialization::access;
+    /**
+     * @return the number of samples in the ATWDs (by channel)
+     */  
+    virtual unsigned int GetNBinsATWD(unsigned int) const = 0;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //This method intentionally left blank
-  }
+    /**
+     * @return the number of FADC samples
+     */
+    virtual unsigned int GetNBinsFADC() const = 0;
+  
+    friend class boost::serialization::access;
 
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version)
+	{
+	    //This method intentionally left blank
+	}
 };	
 
 BOOST_IS_ABSTRACT(I3RawDOMStatus);

@@ -51,6 +51,9 @@ public:
     double GetSingleSPEThreshold() const;
     double GetFEPedestal() const;
 
+    unsigned int GetNBinsATWD(unsigned int) const;
+    unsigned int GetNBinsFADC() const;
+
  private:
     mutable map<string,unsigned int> rawStatus_;
 

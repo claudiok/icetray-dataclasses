@@ -93,7 +93,7 @@ public:
 
     virtual void SetStatusATWD_A(const OnOff status)
       {
-	statusATWDa_ = status;
+	  statusATWDa_ = status;
       };
     
     OnOff GetStatusATWD_B() const
@@ -133,7 +133,7 @@ public:
 
     virtual void SetSingleSPEThreshold(const double threshold)
       {
-	speThreshold_ = threshold;
+	  speThreshold_ = threshold;
       };
     
     double GetFEPedestal() const
@@ -149,43 +149,62 @@ public:
     virtual void SetDACTriggerBias(int bias, int chip)
 	{
 	    if ( chip == 0 )
-	    {
 		dacTriggerBias0_ = bias;
-	    }
-	    
 	    else if ( chip == 1 )
-	    {
 		dacTriggerBias1_ = bias;
-	    }
-	    
 	    else 
-	    {
 		log_fatal("Bad chip ID in I3MCRawDOMStatus::SetDACTriggerBias");
-	    }
-			  
 	};
 
     double GetDACTriggerBias(int chip) const
 	{
 	    if ( chip == 0 )
-	    {
 		return dacTriggerBias0_;
-	    }
-	    
 	    else if ( chip == 1 )
-	    {
 		return dacTriggerBias1_;
-	    }
-
 	    else 
-	    {
 		log_fatal("Bad chip ID in I3MCRawDOMStatus::GetDACTriggerBias");
 		return 0.0;
-	    }
 	};
     
+    virtual void SetNBinsATWD(unsigned int channel, unsigned int samples)
+	{
+	    if ( channel == 0 )
+		nBinsATWD0_ = samples;
+	    else if ( channel == 1 )
+		nBinsATWD1_ = samples;
+	    else if ( channel == 2 )
+		nBinsATWD2_ = samples;
+	    else if ( channel == 3 )
+		nBinsATWD3_ = samples;
+	    else
+		log_fatal("Bad ATWD channel in I3MCRawDOMStatus::SetNBinsATWD");
+	};
     
+    unsigned int GetNBinsATWD(unsigned int channel) const
+	{
+	    if ( channel == 0 )
+		return nBinsATWD0_;
+	    else if ( channel == 1 )
+		return nBinsATWD1_;
+	    else if ( channel == 2 )
+		return nBinsATWD2_;
+	    else if ( channel == 3 )
+		return nBinsATWD3_;
+	    else
+		log_fatal("Bad ATWD channel in I3MCRawDOMStatus::GetNBinsATWD");
+	};
+    
+    virtual void SetNBinsFADC(unsigned int samples)
+	{
+	    nBinsFADC_ = samples;
+	};
 
+    unsigned int GetNBinsFADC() const
+	{
+	    return nBinsFADC_;
+	};
+    
  private:
     TrigMode trigMode_;
     
@@ -207,6 +226,13 @@ public:
     double dacTriggerBias0_;
     double dacTriggerBias1_;
 
+    unsigned int nBinsATWD0_;
+    unsigned int nBinsATWD1_;
+    unsigned int nBinsATWD2_;
+    unsigned int nBinsATWD3_;
+
+    unsigned int nBinsFADC_;
+    
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
