@@ -120,7 +120,7 @@ class STLMapStoragePolicy
       }else{
 	debugStream<<"WARNING: You're trying to look for keys in an empty map."<<endl;
       }
-      log_debug("%s",debugStream.str().c_str());
+      log_error("%s",debugStream.str().c_str());
     }
     return map_[key];
   }
