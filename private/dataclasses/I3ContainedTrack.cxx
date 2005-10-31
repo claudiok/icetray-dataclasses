@@ -1,10 +1,10 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3F2KRecoTrack.h>
+#include <dataclasses/I3ContainedTrack.h>
 
 template <class Archive>
-    void I3F2KRecoTrack::serialize(Archive& ar, unsigned version)
+    void I3ContainedTrack::serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3F2KRecoTrack",
+    ar & make_nvp("I3ContainedTrack",
 		  base_object< I3TrackImpl< I3Contained,
                                             I3NonEnergetic,
                                             I3NonComposite> >(*this));
@@ -12,4 +12,4 @@ template <class Archive>
 
   
 
-I3_SERIALIZABLE(I3F2KRecoTrack);
+I3_SERIALIZABLE(I3ContainedTrack);

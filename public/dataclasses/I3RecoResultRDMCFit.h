@@ -12,7 +12,7 @@
 #ifndef I3RECORESULTRDMCFIT_H
 #define I3RECORESULTRDMCFIT_H
 
-#include "I3RecoResultSingleTrack.h"
+#include "I3RecoResultSingleParticle.h"
 #include <vector>
 #include <map>
 #include <string>
@@ -28,7 +28,7 @@ using namespace std;
  *
  * @todo make sure the map<string,double> works in interpreted code
  */
-class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
+class I3RecoResultRDMCFit : public I3RecoResultSingleParticle
 {
   map<string,double> parameters_;
   string fitName_;
@@ -61,7 +61,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleTrack
 
   virtual void ToStream(ostream& o) const
   {
-    I3RecoResultSingleTrack::ToStream(o);
+    I3RecoResultSingleParticle::ToStream(o);
     o<<"Fit Parameters:\n";
     map<string,double>::const_iterator params;
     for(params=parameters_.begin(); params!=parameters_.end(); params++)

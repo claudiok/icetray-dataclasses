@@ -30,12 +30,9 @@
 #pragma link C++ class I3TrackImpl<I3Contained,I3NonEnergetic,I3NonComposite>+;
 #pragma link C++ class I3TrackImpl<I3Infinite,I3NonEnergetic,I3NonComposite>+;
 
-#pragma link C++ class I3RecoResultSingleTopShower+;
-
 #pragma link C++ class I3BasicTrack+;
-#pragma link C++ class I3F2KRecoTrack+;
+#pragma link C++ class I3ContainedTrack+;
 
-#pragma link C++ class I3F2KRecoInfiniteTrack+;
 #pragma link C++ class I3DoubleBang+;
 #pragma link C++ class I3MCTrack+;
 #pragma link C++ class I3MCInfiniteTrack+;
@@ -50,10 +47,6 @@
 #pragma link C++ class I3BasicCascade+;
 
 #pragma link C++ class I3DirectionalCascade+;
-
-#pragma link C++ class I3F2KRecoCascade+;
-
-#pragma link C++ class I3CompleteCascade+;
 
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3CoreLocalized,I3Energetic>+;
 #pragma link C++ class I3PrimaryImpl<I3Directional,I3Localized,I3Energetic>+;
@@ -167,13 +160,7 @@
 
 #pragma link C++ class I3MCPMTResponse+;
 
-#pragma link C++ class I3MCPMTResponseRomeo+;
-
 #pragma link C++ class I3PMTPulse+;
-
-#pragma link C++ class I3GaussianPMTPulse+;
-
-#pragma link C++ class I3AMANDAPMTPulse+;
 
 #pragma link C++ class I3MCParticleData+;
 
@@ -229,7 +216,6 @@
 #pragma link C++ class I3RecoResultRDMCFit+;
 #pragma link C++ class I3RecoResultSingleParticle+;
 
-#pragma link C++ class I3RecoResultSingleTrack+;
 #pragma link C++ class I3RecoResultMultiTracks+;
 
 #pragma link C++ class I3Starting+;

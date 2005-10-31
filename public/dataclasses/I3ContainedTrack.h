@@ -1,12 +1,13 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id$
+    $Id: I3ContainedTrack.h 11091 2005-09-27 09:32:13Z troy $
 
-    @file I3F2KRecoTrack.h
+    @file I3ContainedTrack.h
     @version $Revision: 1.5 $
-    @date $Date$
+    @date $Date: 2005-09-27 05:32:13 -0400 (Tue, 27 Sep 2005) $
     @author deyoung
+    @author blaufuss
 */
 
 #include "I3TrackImpl.h"
@@ -14,18 +15,18 @@
 #include "I3NonEnergetic.h"
 #include "I3NonComposite.h"
 
-#ifndef I3F2KRECOTRACK_H
-#define I3F2KRECOTRACK_H
+#ifndef I3CONTAINEDTRACK_H
+#define I3CONTAINEDTRACK_H
 
 #include "dataclasses/I3Track.h"
 
 /**
- * @brief F2KTrack contains the parameter set corresponding to the F2000
- * track variables.  
+ * @brief Basic track implementaion.  Contained, Non-energetic, non-composite
+ *    track.  Similiar to the I3BasicTrack, but contained.
  *
- * It is intended primarily for backward compatibility.
+ * 
  */
-class I3F2KRecoTrack : public I3TrackImpl<I3Contained,
+class I3ContainedTrack : public I3TrackImpl<I3Contained,
                                           I3NonEnergetic,
                                           I3NonComposite>
 {
@@ -33,12 +34,12 @@ class I3F2KRecoTrack : public I3TrackImpl<I3Contained,
   /**
    * constructor
    */
-  I3F2KRecoTrack(){};
+  I3ContainedTrack(){};
 
   /**
    * destructor
    */
-  virtual ~I3F2KRecoTrack(){}
+  virtual ~I3ContainedTrack(){}
 
  private:
 
@@ -46,13 +47,13 @@ class I3F2KRecoTrack : public I3TrackImpl<I3Contained,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3F2KRecoTrack,1);
+  ClassDef(I3ContainedTrack,1);
 };
 
 /**
  * pointer typedeffed away to insulate users from memory management
  */
-typedef shared_ptr<I3F2KRecoTrack>  I3F2KRecoTrackPtr;
+typedef shared_ptr<I3ContainedTrack>  I3ContainedTrackPtr;
 
 #endif
 

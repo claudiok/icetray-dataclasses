@@ -5,11 +5,9 @@ USES_PROJECTS := icetray
 USES_TOOLS := root log4cplus boost TUT boost
 
 ROOT_DICTIONARY_HEADERS := dataclasses/I3AMANDAAnalogReadout.h \
-dataclasses/I3RecoResultSingleTopShower.h \
 dataclasses/I3MCTopShower.h \
 dataclasses/I3MCTrack.h \
 dataclasses/I3MCInfiniteTrack.h \
-dataclasses/I3AMANDAPMTPulse.h \
 dataclasses/I3AnalogReadout.h \
 dataclasses/I3NonComposite.h \
 dataclasses/I3BadOMSelection.h \
@@ -69,16 +67,11 @@ dataclasses/I3Energetic.h \
 dataclasses/I3RecoResultDict.h \
 dataclasses/I3RecoResultRDMCFit.h \
 dataclasses/I3Event.h \
-dataclasses/I3RecoResultSingleTrack.h \
 dataclasses/I3RecoResultMultiTracks.h \
 dataclasses/I3RecoResultSingleParticle.h \
 dataclasses/I3EventHeader.h \
-dataclasses/I3F2KRecoCascade.h \
-dataclasses/I3CompleteCascade.h \
-dataclasses/I3F2KRecoTrack.h \
-dataclasses/I3F2KRecoInfiniteTrack.h \
+dataclasses/I3ContainedTrack.h \
 dataclasses/I3ShowerCore.h \
-dataclasses/I3GaussianPMTPulse.h \
 dataclasses/I3ShowerDirection.h \
 dataclasses/I3Geometry.h \
 dataclasses/I3GeometryHeader.h \
@@ -116,7 +109,6 @@ dataclasses/I3MCHitSeries.h \
 dataclasses/I3MCOMResponse.h \
 dataclasses/I3MCPMTResponse.h \
 dataclasses/I3Units.h \
-dataclasses/I3MCPMTResponseRomeo.h \
 dataclasses/I3TriggerDict.h \
 dataclasses/I3Trigger.h \
 dataclasses/OMKey.h \
