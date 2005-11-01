@@ -102,7 +102,7 @@ I3RawDOMStatus::OnOff I3TestDaqRawDOMStatus::GetStatusFADC() const
 
 double I3TestDaqRawDOMStatus::GetPMTHV() const
 {
-  return 0.5 * (double)rawStatus_["PMT_HV_DAC"];// * I3Units::volt;
+  return 0.5 * (double)rawStatus_["PMT_HV_DAC"] * I3Units::volt;
 }
 
 /** 
@@ -114,7 +114,7 @@ double I3TestDaqRawDOMStatus::GetSingleSPEThreshold() const
 {
   //  return (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
   double raw_spe_thresh = (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
-  return (5.*raw_spe_thresh/1024.- GetFEPedestal())/(9.6*(1+2200./249.));
+  return (5.*raw_spe_thresh/1024.- GetFEPedestal())/(9.6*(1+2200./249.)) * I3Units::volt;
 
 }
 
