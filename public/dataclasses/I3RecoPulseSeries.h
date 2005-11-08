@@ -35,7 +35,7 @@ class I3RecoPulseSeries : public TObject, public STLVectorStoragePolicy<I3RecoPu
       I3RecoPulseSeries::iterator iter;
       for(iter=this->begin(); iter!=this->end(); iter++)
       {
-        if(min>(*iter)->GetTime()) min=(*iter)->GetTime();
+        if(*iter) {if(min>(*iter)->GetTime()) min=(*iter)->GetTime();}
       }
       return(min);
     }
