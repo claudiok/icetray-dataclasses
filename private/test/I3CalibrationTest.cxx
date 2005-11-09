@@ -22,146 +22,81 @@ TEST(bin_parameters)
       
     I3InIceCalibration& inice_calib = calib->GetInIceCalibration();
     
-    I3DOMCalibPtr dom_calib(new I3DOMCalibration);
+    I3DOMCalibrationPtr dom_calib(new I3DOMCalibration);
     
     int id = 0;
     int channel = 0;
     int bin = 127;
-      
-    double slope = -0.002*I3Units::V;  // volt/count
-    double intercept = 2.9*I3Units::V; 
-    double regress_coeff = 0.00;
- 
-    double gain = -17.0;
-    double gainErr = 0.0;
     
-    double fe_pedestal = 2.6*I3Units::V;
+    LinearFit fit;  
+    fit.slope = -0.002*I3Units::V;  // volt/count
+    fit.intercept = 2.9; 
     
-    dom_calib->SetATWDGain(channel,gain,gainErr);
+    const double temp = 900.00;
     
-    dom_calib->SetATWDBinParameters(id,
-				    channel,
-				    bin,
-				    slope,
-				    intercept,
-				    regress_coeff);
+    
+    
 
-    /*
-    dom_calib->SetATWDBaselineParameters(id, channel, 
-					 1200*I3Units::V, 
-					 0.0);
-	
-    dom_calib->SetATWDBaselineParameters(id, channel, 
-					 1300*I3Units::V, 
-					 0.0);
+    double gain = -17.0;
     
-    double HV = 1250*I3Units::V;
-    */
-				     
+    dom_calib->SetTemperature(temp);
+    
+    dom_calib->SetATWDGain(channel,gain);
+    
+    dom_calib->SetATWDBinCalibFit(id,
+				  channel,
+				  bin,
+				  fit);
+
     inice_calib[OMKey(20,20)] = dom_calib;
     
-    I3DOMCalibPtr domptr = inice_calib[OMKey(20,20)];
+    I3DOMCalibrationPtr domptr = inice_calib[OMKey(20,20)];
       
     ENSURE_DISTANCE(gain, 
 		    domptr->GetATWDGain(channel), 
 		    0.0001,
 		    "Failed to get proper gain from I3DOMCalibration");
       
-    /*
-    ENSURE_DISTANCE(0.0, 
-		    domptr->GetATWDBaseline(id,channel,HV),
-		    0.0001*I3Units::V,
-		    "Failed to get proper baseline from I3DOMCalibration");
-    */
-
     bin = 0; // Remember: for some reason the bin order is reversed; 
              // I think this is (was?) the way it was filled in the Db 
 
-    ENSURE_DISTANCE(150.0,
-		    domptr->GetATWDCount(id,channel,bin,fe_pedestal,0.0),
-		    0.0001,
-		    "Failed to properly return count (test1)");
+    //check we got what we stored.
+    ENSURE_DISTANCE(900.00,
+		    domptr->GetTemperature(),0.1,
+		    "Temperature came back from storage with wrong value");
 
-    double voltage = domptr->GetATWDVoltage(id,channel,bin,fe_pedestal,350);
-    
-    ENSURE_DISTANCE(350,
-		    domptr->GetATWDCount(id,channel,bin,fe_pedestal,voltage),
+
+
+//    ENSURE_DISTANCE(-0.002,
+//		    domptr->GetATWDBinCalibFit(id,channel,bin).slope*I3Units::V,
+//		    0.0001,
+//		    "Failed to properly return fit slope (test1)");
+
+    ENSURE_DISTANCE(2.9,
+		    domptr->GetATWDBinCalibFit(id,channel,bin).intercept,
 		    0.0001,
 		    "Failed to properly return count (test2)");
-}
-
-/*
-// Test baseline parameters
-TEST(baseline_parameters)
-{
-    I3Calibration* calib = new I3Calibration();
-    I3InIceCalibration& inice_calib = calib->GetInIceCalibration();
-    I3DOMCalibPtr dom_calib(new I3DOMCalibration);
-      
-    dom_calib->SetATWDBaselineParameters(0, 0, 1800*I3Units::V, 0.0030828859*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(0, 1, 1800*I3Units::V, -6.415634e-4*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(0, 2, 1800*I3Units::V, 1.4792923e-4*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(1, 0, 1800*I3Units::V, 0.0016722014*I3Units::V);	
-    dom_calib->SetATWDBaselineParameters(1, 1, 1800*I3Units::V, -2.7254072e-4*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(1, 2, 1800*I3Units::V, 6.474013e-4*I3Units::V);
-	
-    dom_calib->SetATWDBaselineParameters(0, 0, 1900*I3Units::V, 0.003377001*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(0, 1, 1900*I3Units::V, -6.809217e-4*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(0, 2, 1900*I3Units::V, 1.644716e-4*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(1, 0, 1900*I3Units::V, 0.0018482722*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(1, 1, 1900*I3Units::V, -3.1075595e-4*I3Units::V);
-    dom_calib->SetATWDBaselineParameters(1, 2, 1900*I3Units::V, 6.432433e-4*I3Units::V);
-	
-    inice_calib[OMKey(20,20)] = dom_calib;
-    I3DOMCalibPtr domptr = inice_calib[OMKey(20,20)];
-	
-    // Test that you get back what you put in for a HV value
-    double HV = 1899*I3Units::V;
-      
-    ENSURE_DISTANCE(0.003377001*I3Units::V, 
-		    domptr->GetATWDBaseline(0,0,HV), 0.0001*I3Units::V,
-		    "Failed to get baseline from I3DOMCalibration");
-
-    ENSURE_DISTANCE(-6.809217e-4*I3Units::V, 
-		    domptr->GetATWDBaseline(0,1,HV), 0.0001*I3Units::V,
-		    "Failed to get baseline from I3DOMCalibration");
-
-    ENSURE_DISTANCE(1.644716e-4*I3Units::V, 
-		    domptr->GetATWDBaseline(0,2,HV), 0.0001*I3Units::V,
-		    "Failed to get baseline from I3DOMCalibration");
-
-    ENSURE_DISTANCE(0.0018482722*I3Units::V, 
-		    domptr->GetATWDBaseline(1,0,HV), 0.0001*I3Units::V,
-		    "Failed to get baseline from I3DOMCalibration");
     
-    ENSURE_DISTANCE(-3.1075595e-4*I3Units::V, 
-		    domptr->GetATWDBaseline(1,1,HV), 0.0001*I3Units::V,
-		    "Failed to get baseline from I3DOMCalibration");
-	
-    ENSURE_DISTANCE(6.432433e-4*I3Units::V, 
-		    domptr->GetATWDBaseline(1,2,HV), 0.0001*I3Units::V,
-		    "Failed to get baseline from I3DOMCalibration");
+
 }
-*/
 
 // Test I/O streams
 TEST(to_stream)
 {	
-    I3DOMCalibPtr dom_calib(new I3DOMCalibration);
+    I3DOMCalibrationPtr dom_calib(new I3DOMCalibration);
     
     int id = 0;
     int channel = 0;
-    int bin = 128;
-    
-    double slope = -0.002*I3Units::V;
-    double intercept = 2.9*I3Units::V; 
-    double regress_coeff = 0.99;
+    int bin = 1;
+
+    LinearFit fit;      
+    fit.slope = -0.002*I3Units::V;
+    fit.intercept = 2.9*I3Units::V; 
     double gain = -17.0;
 	
-    double gainErr = 0.0;
     
-    dom_calib->SetATWDGain(channel,gain,gainErr);
-    dom_calib->SetATWDBinParameters(id,channel,bin,slope,intercept,regress_coeff);
+    dom_calib->SetATWDGain(channel,gain);
+    dom_calib->SetATWDBinCalibFit(id,channel,bin,fit);
     
     dom_calib->ToStream(cout);
 }

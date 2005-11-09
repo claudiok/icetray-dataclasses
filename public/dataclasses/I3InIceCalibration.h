@@ -24,7 +24,7 @@
 #include <TObject.h>
 
 class I3InIceCalibration : public TObject, 
-			   public STLMapStoragePolicy<OMKey, I3DOMCalibPtr>
+			   public STLMapStoragePolicy<OMKey, I3DOMCalibrationPtr>
 {
 public:
     I3InIceCalibration()
@@ -45,7 +45,7 @@ public:
 	    {
 		o<<iter->first;
 		
-		if( iter->second == I3DOMCalibPtr((I3DOMCalibration*)0) )
+		if( iter->second == I3DOMCalibrationPtr((I3DOMCalibration*)0) )
 		{
 		    o<<"Null I3DOMCalibration";
 		}
