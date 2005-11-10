@@ -8,19 +8,30 @@
 
 const unsigned int I3DOMCalibration::N_ATWD_BINS = 128;
 
+//Number of ATWD channels is set to 3 (4th ATWD channel doesn't have DOMCAL now)
+const unsigned int I3DOMCalibration::N_ATWD_CHANNELS = 3;
+
 I3DOMCalibration::I3DOMCalibration()
     : temperature_(NAN),
       fadcGain_(NAN), fadcPedestal_(NAN)
     {};
 
 /**
- * @todo  should put some checks on the id, channel, bin.  Make sure they are legit
+ * @todo  should put some checks on the channel, bin.  Make sure they are legit
  */
 const LinearFit I3DOMCalibration::GetATWDBinCalibFit(unsigned int id, 
 						     unsigned int channel, 
 						     unsigned int bin)
     {
-    return GetATWDBinParameters(id)[channel][bin];
+    if(channel<N_ATWD_CHANNELS&&bin<N_ATWD_BINS)
+	{
+	return GetATWDBinParameters(id)[channel][bin];
+	}
+    else
+	{
+	log_fatal("No ATWD bin calibration for requested bin %ui channel %ui",
+		  bin,channel);
+	}
     }
 
 void I3DOMCalibration::SetATWDBinCalibFit(unsigned int id, 

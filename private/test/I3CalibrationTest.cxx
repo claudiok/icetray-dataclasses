@@ -26,11 +26,11 @@ TEST(bin_parameters)
     
     int id = 0;
     int channel = 0;
-    int bin = 127;
+    int bin = 127;  //Set() method expects time reversed order.this is earliest bin
     
     LinearFit fit;  
     fit.slope = -0.002*I3Units::V;  // volt/count
-    fit.intercept = 2.9; 
+    fit.intercept = 2.9*I3Units::V; 
     
     const double temp = 900.00;
     
@@ -57,8 +57,7 @@ TEST(bin_parameters)
 		    0.0001,
 		    "Failed to get proper gain from I3DOMCalibration");
       
-    bin = 0; // Remember: for some reason the bin order is reversed; 
-             // I think this is (was?) the way it was filled in the Db 
+    bin = 0; //We store the domcal info in proper time order
 
     //check we got what we stored.
     ENSURE_DISTANCE(900.00,
@@ -67,13 +66,13 @@ TEST(bin_parameters)
 
 
 
-//    ENSURE_DISTANCE(-0.002,
-//		    domptr->GetATWDBinCalibFit(id,channel,bin).slope*I3Units::V,
-//		    0.0001,
-//		    "Failed to properly return fit slope (test1)");
+    ENSURE_DISTANCE(-0.002,
+		    domptr->GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
+		    0.0001,
+		    "Failed to properly return fit slope (test1)");
 
     ENSURE_DISTANCE(2.9,
-		    domptr->GetATWDBinCalibFit(id,channel,bin).intercept,
+		    domptr->GetATWDBinCalibFit(id,channel,bin).intercept/I3Units::V,
 		    0.0001,
 		    "Failed to properly return count (test2)");
     

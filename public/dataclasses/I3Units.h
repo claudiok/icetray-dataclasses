@@ -86,6 +86,18 @@
  *
  * The SI numerical value of the positron charge is defined here,
  * as it is needed for conversion factor : positron charge = e_SI (coulomb)
+ *
+ *
+ *  This clearly needs more docs.
+ *  In general, you want to "add units" when you store them in
+ *      container, and "remove" them when you fetch them.  This 
+ *      ensures that all data is stored uniformly.
+ *    For example:
+ *      double myvoltage = 45.00*I3Units::V;
+ *      myContainerPtr->SetVoltage(myvoltage);
+ *
+ *      .....
+ *      readvoltage = myContainerPtr->GetVoltage()/I3Units::V;
  * 
  * @version $Version:$
  * @date $Date$

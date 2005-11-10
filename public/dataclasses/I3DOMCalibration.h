@@ -200,7 +200,8 @@ public:
     
 private:
     static const unsigned int N_ATWD_BINS;
-    
+    static const unsigned int N_ATWD_CHANNELS;
+
     double  temperature_;
     
     /**
