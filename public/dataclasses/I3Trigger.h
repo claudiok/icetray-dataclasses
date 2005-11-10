@@ -97,8 +97,6 @@ class I3Trigger : public TObject
 ClassDef(I3Trigger,1);
 };
 
-BOOST_IS_ABSTRACT(I3Trigger);
-
 /**
  * streams an I3Trigger to an arbitrary ostream
  */
