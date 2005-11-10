@@ -25,6 +25,42 @@
 
 using namespace std;
 
+ /**
+  * @brief A struct to hold a linear fit 
+  * A simple struct to define a linear fit:  intercept + slope*x
+  */
+struct LinearFit
+    {
+    double slope;
+    double intercept;
+    
+    private: 
+    friend class boost::serialization::access;
+    
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version);
+    };
+
+ /**
+  *  @brief A struct to hold the parameters of a Quadratic fit
+  *  A simple struct to define a Quadratic fit:  A + B*x + C*x*x
+  */
+struct QuadraticFit
+    {
+    double quadFitA;
+    double quadFitB;
+    double quadFitC;
+    
+    private: 
+    friend class boost::serialization::access;
+    
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version);
+    };
+
+
+
+
 /**
  * @brief Class that stores the calibration information for a DOM
  * 
@@ -43,38 +79,6 @@ using namespace std;
  *
  * 
 */
-
- /**
-  *  A simple struct to define a linear fit:  intercept + slope*x
-  */
-struct LinearFit
-    {
-    double slope;
-    double intercept;
-    
-    private: 
-    friend class boost::serialization::access;
-    
-    template <class Archive>
-    void serialize(Archive& ar, unsigned version);
-    };
-
- /**
-  *  A simple struct to define a Quadratic fit:  A + B*x + C*x*x
-  */
-struct QuadraticFit
-    {
-    double quadFitA;
-    double quadFitB;
-    double quadFitC;
-    
-    private: 
-    friend class boost::serialization::access;
-    
-    template <class Archive>
-    void serialize(Archive& ar, unsigned version);
-    };
-
 
 class I3DOMCalibration
     {
