@@ -86,7 +86,7 @@ inline ostream& operator<<(ostream& o,const I3InIceCalibration& v)
     return o;
 }
 
-typedef shared_ptr<I3InIceCalibration>  I3InIceCalibPtr;
+typedef shared_ptr<I3InIceCalibration>  I3InIceCalibrationPtr;
 
 #endif // I3INICECALIBRATION_H
 

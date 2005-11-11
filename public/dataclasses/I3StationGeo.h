@@ -40,13 +40,6 @@ class I3StationGeo : public TObject, public STLVectorStoragePolicy<I3SurfModuleG
   virtual ~I3StationGeo () {}
 
   /**
-   * Say hello
-   */
-  void Hello () {
-    log_info ("Hi, I'm a station");
-  }
-
-  /**
    * Get the OM Geo of the OM with this key
    */
   I3OMGeoPtr GetOMGeoPtr (OMKey &om_key);

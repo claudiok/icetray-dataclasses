@@ -53,13 +53,6 @@ class I3TopGeometry : public TObject {
   }
 
   /**
-   * Just for test
-   */
-  void Hello () {
-    log_info ("Hi, this is the top geometry");
-  }
-
-  /**
    * Get the geometry of a certain module
    */
   I3OMGeoPtr GetOMGeoPtr (OMKey &om_key);

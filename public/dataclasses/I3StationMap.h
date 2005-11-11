@@ -41,13 +41,6 @@ class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3St
   virtual ~I3StationMap () {}
 
   /**
-   * Just for debugging
-   */
-  void Hello () {
-    log_info ("Hi, this is the station map.");
-  }
-
-  /**
    * Go to the first tank
    */
   void GoFirstTank ();
