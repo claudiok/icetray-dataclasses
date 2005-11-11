@@ -18,7 +18,6 @@
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/I3InIceCalibration.h"
 #include "dataclasses/I3AMANDACalibration.h"
-//#include "dataclasses/I3IceTopCalibration.h"
 
 #include <TObject.h>
 
@@ -51,15 +50,15 @@ public:
 	    return AMANDACalibration_;
 	};
 
-//    const I3IceTopCalibration& GetIceTopCalibration() const
-//	{
-//	    return iceTopCalibration_;
-//	};
-//
-//    I3IceTopCalibration& GetIceTopCalibration() 
-//	{
-//	    return iceTopCalibration_;
-//	};
+    const I3InIceCalibration& GetIceTopCalibration() const
+	    {
+	    return iceTopCalibration_;
+	    };
+    
+    I3InIceCalibration& GetIceTopCalibration() 
+	    {
+	    return iceTopCalibration_;
+	    };
     
     virtual void ToStream(ostream& o) const
 	{
@@ -69,7 +68,7 @@ public:
 private:
     I3InIceCalibration  inIceCalibration_;
     I3AMANDACalibration AMANDACalibration_;
-    //I3IceTopCalibration fIceTopCalibration_;
+    I3InIceCalibration  iceTopCalibration_;
     
     I3Calibration(const I3Calibration& calibration);
     const I3Calibration& operator=(const I3Calibration& calibration);
@@ -88,9 +87,6 @@ inline ostream& operator<<(ostream& o, const I3Calibration& calib)
     calib.ToStream(o);
     return o;
 }
-
-// DELETE ME: Let's keep things consistent, at least...
-typedef shared_ptr<I3Calibration>  I3CalibPtr; 
 
 // that's better.  
 typedef shared_ptr<I3Calibration>  I3CalibrationPtr;

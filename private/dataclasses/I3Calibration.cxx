@@ -6,6 +6,7 @@ template <class Archive>
   {
     ar & make_nvp("InIceCalibration",inIceCalibration_);
     ar & make_nvp("AMANDACalibration",AMANDACalibration_);
+    ar & make_nvp("AMANDACalibration",iceTopCalibration_);
   }
 
 

@@ -13,7 +13,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
-TEST_GROUP(I3CalibrationTest);
+TEST_GROUP(I3DOMCalibrationTest);
 
 // Test conversion back and forth from counts to volts
 TEST(bin_parameters)
