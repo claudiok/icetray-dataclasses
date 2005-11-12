@@ -28,9 +28,16 @@ void dump_graph(const Graph& g, const VertexPropertyMap& propertymap)
     }
 }
 
+template <typename Vertex, typename Graph>
+Vertex parent(const Vertex &v, const Graph &g)
+{
+  assert(in_degree(v,g) == 1);
+  Vertex parent_vertex = source(*(in_edges(v, g).first), g);
+  return parent_vertex;
+}
 
 template <typename Graph, typename Vertex, typename PropertyMap>
-std::string branchname(Graph g, Vertex v, PropertyMap p, unsigned maxdepth=32)
+std::string branchname(Graph g, Vertex v, PropertyMap p, unsigned maxdepth=32, bool leaf=true)
 {
   string the_branchname;
 
@@ -41,12 +48,14 @@ std::string branchname(Graph g, Vertex v, PropertyMap p, unsigned maxdepth=32)
   if (in_degree(v,g) <= 0 || maxdepth <= 1)
     return my_name;
   
-  Vertex parent = source(*(in_edges(v, g).first), g);
+  Vertex up = parent(v,g);
   
-  if (out_degree(parent, g) > 1)
-    return branchname (g, parent, p, maxdepth-1) + "." + my_name;
+  // v is an only child and is not a leaf, omit my_name
+  if (out_degree(up, g) == 1 && !leaf)
+    return branchname (g, up, p, maxdepth-1, false);
   else
-    return branchname (g, parent, p, maxdepth-1);
+    // my name is useful.  keep it.
+    return branchname (g, up, p, maxdepth-1, false) + "_" + my_name;
 }
 
 //
@@ -107,8 +116,9 @@ void generate_branchnames(const Graph &g, VertexProperties& props)
 	    {
 	      for (unsigned int j=0; j<v.size(); j++)
 		{
-		  string new_branchname = branchname (g, v[j], props, depth);
-		  get(props, v[j]).branch_name = new_branchname;
+		  //		  string old_branchname = get(props, v[j]).branch_name;
+		  get(props, v[j]).branch_name = branchname (g, v[j], props, depth);
+
 		  //		  cout << "SET TO:" << get(props, v[j]).branch_name << "?=" << new_branchname << "\n";
 		}
 	    }
