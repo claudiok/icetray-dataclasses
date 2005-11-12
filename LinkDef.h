@@ -69,7 +69,7 @@
 // 'specializaton after instantiation', and
 // 'prototype for blahblah does not match any in class blahblah'
 
-#pragma link C++ class I3IceCubeStatus+;
+#pragma link C++ class I3IceCubeDOMStatusDict+;
 #pragma link C++ class I3RecoResultDict+;
 #pragma link C++ class I3DataReadoutDict+;
 #pragma link C++ class I3DetectorStatus;
@@ -198,6 +198,10 @@
 #pragma link C++ class I3TriggerDict+;
 
 #pragma link C++ class I3Trigger+;
+
+#pragma link C++ class I3TriggerStatusDict+;
+#pragma link C++ class I3TriggerStatus+;
+
 
 #pragma link C++ class I3DOMCalibration+;
 

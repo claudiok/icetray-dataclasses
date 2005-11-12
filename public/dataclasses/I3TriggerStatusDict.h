@@ -1,40 +1,40 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
+ * $Id: I3TriggerStatusDict.h 11091 2005-09-27 09:32:13Z  $
  *
- * @file I3IceCubeStatus.h
+ * @file I3TriggerStatusDict.h
  * @version $Revision: 1.2 $
- * @date $Date$
- * @author pretz
+ * @date $Date: 2005-09-27 05:32:13 -0400 (Tue, 27 Sep 2005) $
+ * @author blaufuss
  */
-#ifndef I3STATUSICECUBE_H
-#define I3STATUSICECUBE_H
+#ifndef I3TRIGGERSTATUSDICT_H
+#define I3TRIGGERSTATUSDICT_H
 
 #include "TObject.h"
-#include "I3DOMStatus.h"
+#include "dataclasses/I3TriggerStatus.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**
- * @brief The status of the DeepIce detector.  
+ * @brief The set of Trigger status objects.  
  *
- * Just a container for I3OMStatusIceCube objects
+ * Just a container for I3TriggerStatus objects
  */
-class I3IceCubeStatus 
+class I3TriggerStatusDict 
 : public TObject, 
-  public STLMapStoragePolicy<OMKey,I3DOMStatus>{
+  public STLMapStoragePolicy<OMKey,I3TriggerStatus>{
  public:
   /**
    * constructor
    */
-  I3IceCubeStatus(){}
+  I3TriggerStatusDict(){}
 
   /**
    * destructor
    */
-  virtual ~I3IceCubeStatus(){};
+  virtual ~I3TriggerStatusDict(){};
 
   /**
    * dumps the object to the indicated ostream
@@ -54,18 +54,18 @@ class I3IceCubeStatus
 
  private:
   // copy and assignment are private
-  I3IceCubeStatus(const I3IceCubeStatus& rhs);
-  const I3IceCubeStatus& operator=(const I3IceCubeStatus& rhs);
+  I3TriggerStatusDict(const I3TriggerStatusDict& rhs);
+  const I3TriggerStatusDict& operator=(const I3TriggerStatusDict& rhs);
 
   // ROOT macro
-  ClassDef(I3IceCubeStatus,1);
+  ClassDef(I3TriggerStatusDict,1);
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-inline ostream& operator<<(ostream& o, const I3IceCubeStatus& status)
+inline ostream& operator<<(ostream& o, const I3TriggerStatusDict& status)
 {
   status.ToStream(o);
   return o;
@@ -75,7 +75,7 @@ inline ostream& operator<<(ostream& o, const I3IceCubeStatus& status)
  * Pointer typedeffed away to insulate users from the
  * memory-mananagement implementation
  */
-typedef shared_ptr<I3IceCubeStatus>  I3IceCubeStatusPtr;
+typedef shared_ptr<I3TriggerStatusDict>  I3TriggerStatusDictPtr;
 
 #endif
 

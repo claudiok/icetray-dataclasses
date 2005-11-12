@@ -90,7 +90,7 @@ dataclasses/I3SurfModuleGeo.h \
 dataclasses/I3InIceParticle.h \
 dataclasses/I3TWRLaunch.h \
 dataclasses/I3TWRFrag.h \
-dataclasses/I3IceCubeStatus.h \
+dataclasses/I3IceCubeDOMStatusDict.h \
 dataclasses/I3TankGeo.h \
 dataclasses/I3Infinite.h \
 dataclasses/I3TankHit.h \
@@ -111,6 +111,8 @@ dataclasses/I3MCPMTResponse.h \
 dataclasses/I3Units.h \
 dataclasses/I3TriggerDict.h \
 dataclasses/I3Trigger.h \
+dataclasses/I3TriggerStatusDict.h \
+dataclasses/I3TriggerStatus.h \
 dataclasses/OMKey.h \
 dataclasses/STLMapStoragePolicy.h \
 dataclasses/I3MCParticleData.h \
