@@ -31,10 +31,11 @@ namespace boost {
       public boost::archive::detail::common_oarchive<ttree_oarchive_impl>
     {
       typedef boost::mpl::vector<const char*,
+				 bool,
 				 char, unsigned char,
 				 short, unsigned short,
 				 int, unsigned int,
-				 long, unsigned long,
+				 int64_t, uint64_t,
 				 float, double> treeable_types;
 
       unsigned stack;

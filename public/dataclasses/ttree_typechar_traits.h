@@ -13,17 +13,17 @@ namespace boost {
 template <> struct typechar_traits<TYPE> { static char const value = CHAR; }
 
     // C : a character string terminated by the 0 character
-    // O : a boolean (Bool_t)  but bool isnt here, we just convert to unsigned.
-    // B : an 8 bit signed integer (Char_t)
-    // b : an 8 bit unsigned integer (UChar_t)
-    // S : a 16 bit signed integer (Short_t)
-    // s : a 16 bit unsigned integer (UShort_t)
-    // I : a 32 bit signed integer (Int_t)
-    // i : a 32 bit unsigned integer (UInt_t)            	
-    // F : a 32 bit floating point (Float_t)            	
-    // D : a 64 bit floating point (Double_t)            	
-    // L : a 64 bit signed integer (Long64_t)            	
-    // l : a 64 bit unsigned integer (ULong64_t)            	
+    // O : bool:              (Bool_t)
+    // B : char:              an 8 bit signed integer (Char_t)
+    // b : unsigned char:     an 8 bit unsigned integer (UChar_t)
+    // S : short:             a 16 bit signed integer (Short_t)
+    // s : unsigned short:    a 16 bit unsigned integer (UShort_t)
+    // I : int:               a 32 bit signed integer (Int_t)
+    // i : unsigned int:      a 32 bit unsigned integer (UInt_t)            	
+    // F : float:             a 32 bit floating point (Float_t)            	
+    // D : double:            a 64 bit floating point (Double_t)            	
+    // L : int64_t:           a 64 bit signed integer (Long64_t)            	
+    // l : uint64_t:          a 64 bit unsigned integer (ULong64_t)            	
 
       template <typename T>
       struct typechar_traits {
@@ -31,6 +31,7 @@ template <> struct typechar_traits<TYPE> { static char const value = CHAR; }
       };
 
       TRAIT(const char*,'C');
+      TRAIT(bool,'O');
       TRAIT(char,'B');
       TRAIT(unsigned char,'b');
       TRAIT(short,'S');
@@ -39,8 +40,8 @@ template <> struct typechar_traits<TYPE> { static char const value = CHAR; }
       TRAIT(unsigned int, 'i');
       TRAIT(float, 'F');
       TRAIT(double, 'D');
-      TRAIT(long, 'L');
-      TRAIT(unsigned long, 'l');
+      TRAIT(int64_t, 'L');
+      TRAIT(uint64_t, 'l');
 	    
     }
   }
