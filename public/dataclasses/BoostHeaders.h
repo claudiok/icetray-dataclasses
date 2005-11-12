@@ -1,6 +1,8 @@
 #ifndef BOOSTHEADERS_H
 #define BOOSTHEADERS_H
 
+#include "dataclasses/ttree_oarchive.h"
+
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 
@@ -48,19 +50,26 @@ namespace detail
   template <typename T>
   void inst (boost::archive::polymorphic_oarchive& poa, const T& t)
   {
-    poa & t;
+    poa & BOOST_SERIALIZATION_NVP(t);
+  }
+
+  template <typename T>
+  void inst (boost::archive::ttree_oarchive_impl& poa, const T& t)
+  {
+    poa & BOOST_SERIALIZATION_NVP(t);
   }
 
   template <typename T>
   void inst (boost::archive::polymorphic_iarchive& pia, T& t)
   {
-    pia & t;
+    pia & BOOST_SERIALIZATION_NVP(t);
   }
 }
 
 #define I3_SERIALIZABLE(T)						\
-  template void detail::inst<T>(boost::archive::polymorphic_oarchive&, const T&); \
-  template void detail::inst<T>(boost::archive::polymorphic_iarchive&, T&); \
+  template void ::detail::inst<T>(boost::archive::ttree_oarchive_impl&, const T&); \
+  template void ::detail::inst<T>(boost::archive::polymorphic_oarchive&, const T&); \
+  template void ::detail::inst<T>(boost::archive::polymorphic_iarchive&, T&); \
   BOOST_SHARED_POINTER_EXPORT(T);					
 
 #endif
