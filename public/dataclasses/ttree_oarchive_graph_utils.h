@@ -49,20 +49,23 @@ std::string branchname(Graph g, Vertex v, PropertyMap p, unsigned maxdepth=32)
     return branchname (g, parent, p, maxdepth-1);
 }
 
+//
+// "data" nodes are those whose px != null
+//
 template <typename Graph, typename PropertyMap>
 std::vector<typename graph_traits<Graph>::vertex_descriptor>
-leaf_nodes(const Graph& g, const PropertyMap& p)
+data_nodes(const Graph& g, const PropertyMap& p)
 {
   std::vector<typename graph_traits<Graph>::vertex_descriptor> v;
 
-  typedef typename graph_traits<Graph>::vertex_iterator iter_t;
+  typename graph_traits<Graph>::vertex_iterator current, end;
   
-  for (pair<iter_t, iter_t> p = vertices(g);
-       p.first != p.second;
-       ++p.first)
+  for (tie(current, end) = vertices(g);
+       current != end;
+       ++current)
     {
-      if (out_degree(*p.first,g) == 0)
-	v.push_back(*p.first);
+      if (get(p, *current).px != NULL)
+	v.push_back(*current);
     }
   return v;
 }
@@ -75,7 +78,7 @@ void generate_branchnames(const Graph &g, VertexProperties& props)
   typedef map<std::string, std::vector<vertex_desc> > vertex_name_map_t;
   vertex_name_map_t vertex_name_map;
 
-  vertex_vec leaves = leaf_nodes(g,props);
+  vertex_vec leaves = data_nodes(g,props);
 
   bool collision_remains = true;
 
@@ -122,6 +125,7 @@ void generate_branchnames(const Graph &g, VertexProperties& props)
 	    collision_remains = true;
 	}
     } 
+  //  dump_graph(g, props);
 }
 
 #endif

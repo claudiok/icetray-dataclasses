@@ -103,7 +103,7 @@ namespace boost {
 	generate_branchnames(g, props);
 
 	typedef std::vector<vertex_descriptor> vertex_vec;
-	vertex_vec leaves = leaf_nodes(g, props);
+	vertex_vec leaves = data_nodes(g, props);
 
 	for (vertex_vec::iterator i = leaves.begin(); 
 	     i != leaves.end(); 
@@ -113,6 +113,7 @@ namespace boost {
 	    const char    type_char   = get(props, *i).type_char;
 	    void *address             = get(props, *i).px;
 	    const string branch_name_w_spec = branch_name + "/" + type_char;
+	    //	    cout << "branch_name_w_spec=" << branch_name_w_spec << "\n";
 	    if (write_header)
 	      tree_.Branch(branch_name.c_str(), address, branch_name_w_spec.c_str());
 	    else
