@@ -1,24 +1,13 @@
 #ifndef TTREE_OARCHIVE_H_INCLUDED
 #define TTREE_OARCHIVE_H_INCLUDED
 
-#include <dataclasses/ttree_typechar_traits.h>
-
-#include <I3/name_of.h>
-#include <services/I3Logging.h>
 #include <boost/archive/detail/common_oarchive.hpp>
 
 #include <boost/utility/enable_if.hpp>
 #include <boost/mpl/bool.hpp>
-#include <boost/type_traits/is_arithmetic.hpp>
-#include <boost/type_traits/is_same.hpp>
-
-#include <boost/mpl/bool.hpp>
 #include <boost/mpl/vector.hpp>
 #include <boost/mpl/contains.hpp>
-#include <boost/type_traits/is_arithmetic.hpp>
-#include <boost/type_traits/is_same.hpp>
-#include <boost/variant.hpp>
-#include <deque>
+
 #include <typeinfo>
 #include <memory>
 #include <stdexcept>
@@ -27,14 +16,12 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <TTree.h>
 
-//
-// convenience debugging stuff
-//
 #include <iostream>
 #include <iomanip>
 using namespace std;
 
-#include "dataclasses/ttree_oarchive_graph_utils.h"
+#include <dataclasses/ttree_oarchive_graph_utils.h>
+#include <dataclasses/ttree_typechar_traits.h>
 
 namespace boost { 
 
@@ -50,15 +37,8 @@ namespace boost {
 				 long, unsigned long,
 				 float, double> treeable_types;
 
-      std::deque<std::string> deck;
-
-      unsigned current_column_index;
+      unsigned stack;
       bool write_header;
-      
-      vector<string> column_names_in_order;
-      typedef map<string,void*> data_map_type;
-
-      data_map_type data;
       TTree& tree_;
 
     public:
@@ -83,6 +63,7 @@ namespace boost {
 			       vertex_properties> directed_graph;
       typedef graph_traits<directed_graph>::vertex_descriptor vertex_descriptor;
       typedef property_map<directed_graph, vertex_data_t>::type vertex_property_map;
+
       directed_graph g;
       vertex_property_map props;
       vertex_descriptor current_vertex;
@@ -100,20 +81,6 @@ namespace boost {
 	if (! boost::mpl::contains<treeable_types, T>::value)
 	  return;
 	string column_name;
-
-	column_name = *(deck.begin());
-	for (std::deque<std::string>::const_iterator iter = ++deck.begin();
-	     iter!=deck.end();
-	     iter++)
-	  {
-	    column_name += *iter;
-	  }
-	column_name += "/";
-	column_name += boost::archive::root::typechar_traits<T>::value;
-
- 	data_map_type::iterator iter = data.find(column_name);
-	data[column_name] = const_cast<T*>(&t);
-	column_names_in_order.push_back(column_name);
 
 	get(props, current_vertex).type_char = boost::archive::root::typechar_traits<T>::value;
 	get(props, current_vertex).px = const_cast<T*>(&t);
@@ -133,6 +100,8 @@ namespace boost {
 
       void write_to_stream()
       {
+	generate_branchnames(g, props);
+
 	typedef std::vector<vertex_descriptor> vertex_vec;
 	vertex_vec leaves = leaf_nodes(g, props);
 
@@ -154,28 +123,6 @@ namespace boost {
 	      }
 	  }
 
-//	for (vector<string>::iterator iter = column_names_in_order.begin();
-//	     iter != column_names_in_order.end();
-//	     iter++)
-//	  {
-//	    string longbranchname = *iter;
-//	    while (longbranchname.length() > 61)
-//	      longbranchname.erase(0,1);
-//	    // trim slash-whatever from end of string.
-//	    string shortbranchname = longbranchname;
-//	    shortbranchname.resize(shortbranchname.length() - 2);
-//
-//	    if (write_header)
-//	      {
-//		tree_.Branch(shortbranchname.c_str(),
-//			     data[*iter],
-//			     longbranchname.c_str());
-//	      } else {
-//	      TBranch* branch = tree_.GetBranch(shortbranchname.c_str());
-//	      assert(branch);
-//	      branch->SetAddress(data[*iter]);
-//	    }
-//	  }
 	tree_.Fill();
       }
 
@@ -188,7 +135,7 @@ namespace boost {
 	// enums get converted to ints, called with nvp with null name.
 	if (nv_pair.name())
 	  {
-	    deck.push_back(nv_pair.name());
+	    stack++;
 	    if (num_vertices(g) == 0)
 	      {
 		current_vertex = add_vertex(g);
@@ -202,31 +149,29 @@ namespace boost {
 		current_vertex = new_vertex;
 	      }
 	  }
+
 	archive::save(*this->This(), nv_pair.value());
+
 	if (nv_pair.name())
 	  {
-	    deck.pop_back();
-	    // pop up to parent
+	    stack--;
 	    current_vertex = source(*(in_edges(current_vertex, g).first), g);
+
+	    if (stack == 0)
+	      write_to_stream();
 	  }
 	       
-	if (deck.size() == 0)
-	  {
-	    generate_branchnames(g, props);
-	    //	    dump_graph(g, props);
-	    write_to_stream();
-	  }
       }
 
       template <typename T>
       void
       save_override(const ::boost::serialization::nvp<shared_ptr<T> >& nv_pair, int)
       {
-	deck.push_back(nv_pair.name());
+	stack++;
 	archive::save(*this->This(), nv_pair.value().px);
-	deck.pop_back();
+	stack--;
 
-	if (deck.size() == 0)
+	if (stack == 0)
 	  write_to_stream();
       }
 
@@ -248,7 +193,7 @@ namespace boost {
 
     public:
       ttree_oarchive_impl(TTree& tree, bool write_header_ = false) 
-	: write_header(write_header_), tree_(tree) 
+	: stack(0), write_header(write_header_), tree_(tree) 
       { 
 	props = get(vertex_data, g);
       }
