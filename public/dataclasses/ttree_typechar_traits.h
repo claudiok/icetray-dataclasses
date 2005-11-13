@@ -1,5 +1,5 @@
-#ifndef ROOT_TYPECHAR_TRAITS_H_INCLUDED
-#define ROOT_TYPECHAR_TRAITS_H_INCLUDED
+#ifndef TTREE_TYPECHAR_TRAITS_H_INCLUDED
+#define TTREE_TYPECHAR_TRAITS_H_INCLUDED
 
 namespace boost {
   namespace archive {
@@ -43,6 +43,8 @@ template <> struct typechar_traits<TYPE> { static char const value = CHAR; }
       TRAIT(int64_t, 'L');
       TRAIT(uint64_t, 'l');
 	    
+#undef TRAIT
+      
     }
   }
 }
