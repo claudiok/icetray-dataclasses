@@ -146,11 +146,11 @@ namespace boost {
 	void *px;
 	std::string name;
 	std::string branch_name;
-	bool is_unique;
-	vertex_data_struct() : type_char('_'), px(0), name(""), is_unique(false) 
+	int branch_order;
+	vertex_data_struct() : type_char('_'), px(0), name(""), branch_order(-1) 
 	{ }
 	vertex_data_struct(char type_char_, void* px_, std::string name_) :
-	  type_char(type_char_), px(px_), name(name_), is_unique(false)
+	  type_char(type_char_), px(px_), name(name_), branch_order(-1)
 	{ }
       };
       
@@ -159,7 +159,7 @@ namespace boost {
       operator<<(ostream& os, const vertex_data_struct& ndata)
       {
 	os << "[n:" << ndata.name << " bn:" << ndata.branch_name << " tc:" << ndata.type_char 
-	   << " px:" << ndata.px << " u:" << ndata.is_unique << "]";
+	   << " px:" << ndata.px << " u:" << ndata.branch_order << "]";
 	return os;
       }
 
@@ -169,6 +169,9 @@ namespace boost {
       typedef graph_traits<directed_graph>::vertex_descriptor vertex_descriptor;
       typedef property_map<directed_graph, vertex_data_t>::type vertex_property_map;
 
+      //
+      //  implements the ttree proxy
+      // 
       class ttree_proxy_impl
       {
 	directed_graph g;
@@ -178,9 +181,13 @@ namespace boost {
 	TTree& tree_;
 	bool write_header;
 	
+	// for speed
+	unsigned branch_counter;
+	vector<pair<TBranch*,void*> > branched;
+
       public:
 
-	ttree_proxy_impl(TTree & tree) : tree_(tree), write_header(true)
+	ttree_proxy_impl(TTree & tree) : tree_(tree), write_header(true), branch_counter(0)
 	{
 	  props = get(vertex_data, g);
 	}
@@ -188,67 +195,91 @@ namespace boost {
 	void 
 	branch(char type_char, void* px)
 	{
-	  get(props, current_vertex).type_char = type_char;
-	  get(props, current_vertex).px = px;
+	  if (write_header)
+	    {
+	      get(props, current_vertex).type_char = type_char;
+	      get(props, current_vertex).px = px;
+	      get(props, current_vertex).branch_order = branch_counter;
+	    }
+	  else
+	    branched[branch_counter].second = px;
+
+	  branch_counter++;
 	}
 
 	void push(const std::string & name)
 	{
-	  if (num_vertices(g) == 0)
-	    {
-	      current_vertex = add_vertex(g);
-	      put(props, current_vertex, vertex_data_struct('_', NULL, name));
-	    }
-	  else
-	    {
-	      vertex_descriptor new_vertex = add_vertex(g);
-	      put(props, new_vertex, vertex_data_struct('_', NULL, name));
-	      add_edge(current_vertex, new_vertex, g);
-	      current_vertex = new_vertex;
-	    }
+	  // TODO:  check here for bogus push of same name twice
+	  if (write_header)
+	    if (num_vertices(g) == 0)
+	      {
+		current_vertex = add_vertex(g);
+		put(props, current_vertex, vertex_data_struct('_', NULL, name));
+	      }
+	    else
+	      {
+		vertex_descriptor new_vertex = add_vertex(g);
+		put(props, new_vertex, vertex_data_struct('_', NULL, name));
+		add_edge(current_vertex, new_vertex, g);
+		current_vertex = new_vertex;
+	      }
 	}
 
 	void pop()
 	{
-	  current_vertex = source(*(in_edges(current_vertex, g).first), g);
+	  if (write_header)
+	    current_vertex = source(*(in_edges(current_vertex, g).first), g);
 	}
 
 	void fill()
 	{
-	  generate_branchnames(g, props);
-	  
-	  typedef std::vector<vertex_descriptor> vertex_vec;
-	  vertex_vec leaves = data_nodes(g, props);
-
-	  for (vertex_vec::iterator i = leaves.begin(); 
-	       i != leaves.end(); 
-	       i++)
+	  if (write_header)
 	    {
-	      const string& branch_name = get(props, *i).branch_name;
-	      const char    type_char   = get(props, *i).type_char;
-	      void *address             = get(props, *i).px;
-	      const string branch_name_w_spec = branch_name + "/" + type_char;
+	      generate_branchnames(g, props);
+	  
+	      typedef std::vector<vertex_descriptor> vertex_vec;
+	      vertex_vec leaves = data_nodes(g, props);
 
-	      if (write_header)
+	      branched.resize(branch_counter);
+
+	      for (vertex_vec::iterator i = leaves.begin(); 
+		   i != leaves.end(); 
+		   i++)
 		{
-		  tree_.Branch(branch_name.c_str(), address, branch_name_w_spec.c_str());
-		}
-	      else
-		{
-		  TBranch* branch = tree_.GetBranch(branch_name.c_str());
-		  assert(branch);
-		  branch->SetAddress(address);
+		  const string& branch_name = get(props, *i).branch_name;
+		  const char    type_char   = get(props, *i).type_char;
+		  void *address             = get(props, *i).px;
+		  int branchnum             = get(props, *i).branch_order;
+		  const string branch_name_w_spec = branch_name + "/" + type_char;
+		  
+		  branched[branchnum].first = 
+		    tree_.Branch(branch_name.c_str(), address, branch_name_w_spec.c_str());
+		  assert(branched[branchnum].first);
 		}
 	    }
-	  tree_.Fill();
-	  write_header = false;
+	  else
+	    {
+	      for (unsigned j=0; j<branched.size(); j++)
+		{
+		  assert(branched[j].first);
+		  assert(branched[j].second);
+		  branched[j].first->SetAddress(branched[j].second);
+		}
+	    }
 
-	  // clearing these graphs entirely is kind of a complicated
-	  // business.  First the edges, then the vertices.
-	  remove_edge_if(always_true(), g);
-	  assert(num_edges(g) == 0);
-	  g = directed_graph(); 
-	  assert(num_vertices(g) == 0);
+	  tree_.Fill();
+	  branch_counter = 0;
+
+	  if (write_header)
+	    {
+	      // clearing these graphs entirely is kind of a complicated
+	      // business.  First the edges, then the vertices.
+	      remove_edge_if(always_true(), g);
+	      assert(num_edges(g) == 0);
+	      g = directed_graph(); 
+	      assert(num_vertices(g) == 0);
+	      write_header = false;
+	    }
 	}
       };
 
