@@ -128,9 +128,9 @@ public:
     virtual void SetDACTriggerBias(int bias, int chip)
 	{
 	    if ( chip == 0 )
-		dacTriggerBias0_ = bias;
+		dacTriggerBias0_ = static_cast<double>(bias);
 	    else if ( chip == 1 )
-		dacTriggerBias1_ = bias;
+		dacTriggerBias1_ = static_cast<double>(bias);
 	    else 
 		log_fatal("Bad chip ID in I3MCRawDOMStatus::SetDACTriggerBias");
 	};

@@ -111,16 +111,6 @@ public:
      */
     virtual double GetFEPedestal() const = 0;
 
-    /**
-     * @return the number of samples in the ATWDs (by channel)
-     */  
-    virtual unsigned int GetNBinsATWD(unsigned int) const = 0;
-
-    /**
-     * @return the number of FADC samples
-     */
-    virtual unsigned int GetNBinsFADC() const = 0;
-  
     friend class boost::serialization::access;
 
     template <class Archive>
