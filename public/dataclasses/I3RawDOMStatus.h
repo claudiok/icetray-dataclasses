@@ -31,7 +31,7 @@ using namespace std;
  * This is based on "IceCube DOMAPP CPU FPGA Interface, Version 0.6
  * bu Thorsten Stetzelberger, Jan. 24, 2004 
  *
- * @todo the file needs the full 'doxygen' comments
+ * Updated Nov 05- Real DAQ updates.
  */
 
 class I3RawDOMStatus
@@ -41,12 +41,12 @@ public:
      * The different kinds of triggers that can be used for the dom
      * The standard data-taking operation is SPE
      */
-    enum TrigMode { TestPattern = 0 , CPU = 1, SPE = 2 };
+    enum TrigMode { TestPattern = 0 , CPU = 1, SPE = 2, Flasher=3 };
 
     /**  
      * This controls how far the local coincidence signal is sent 
      */
-    enum LCMode {LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown = 4};
+    enum LCMode {LCOff = 0, UpOrDown = 1, Up = 2, Down = 3 };
 
     /**
      * There is also provision to turn on or off various settings in the 
@@ -74,28 +74,15 @@ public:
 
     /**
      * @return the local coincidence window before the descriminator 
-     * in standard dataclasses units (ns) for the upward coming signal
+     * in standard dataclasses units (ns) for any signal
      */
-    virtual double GetLCWindowUpPre() const = 0;
-
-
-    /**
-     * @return the local coincidence window before the descriminator 
-     * in standard dataclasses units (ns) for the downward coming signal
-     */
-    virtual double GetLCWindowDownPre() const = 0;
+    virtual double GetLCWindowPre() const = 0;
 
     /**
      * @return the local coincidence window after the descriminator 
-     * in standard dataclasses units (ns) for the upward coming signal
+     * in standard dataclasses units (ns) for the any signal
      */
-    virtual double GetLCWindowUpPost() const = 0;
-
-    /**
-     * @return the local coincidence window after the descriminator 
-     * in standard dataclasses units (ns) for the downward coming signal
-     */
-    virtual double GetLCWindowDownPost() const = 0;
+    virtual double GetLCWindowPost() const = 0;
 
     /**
      * @return  trigger_bias DAC setting used for sampling rate calibration
@@ -104,16 +91,6 @@ public:
 
     /*  Control and Monitor different parts of the OM */
   
-    /**
-     * @return the status of ATWD A
-     */
-    virtual OnOff GetStatusATWD_A() const = 0;
-
-    /**
-     * @return the status of ATWD B
-     */
-    virtual OnOff GetStatusATWD_B() const = 0;
-
     /**
      * @return the status of the FADC
      */

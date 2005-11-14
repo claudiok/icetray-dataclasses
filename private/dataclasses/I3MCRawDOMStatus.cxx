@@ -7,10 +7,8 @@ template <class Archive>
     ar & make_nvp("I3RawDOMStatus", base_object<I3RawDOMStatus>(*this));
     ar & make_nvp("trigMode",trigMode_);
     ar & make_nvp("lcMode",lcMode_);
-    ar & make_nvp("lcWindowUpPre",lcWindowUpPre_);
-    ar & make_nvp("lcWindowDownPre",lcWindowDownPre_);
-    ar & make_nvp("lcWindowUpPost",lcWindowUpPost_);
-    ar & make_nvp("lcWindowDownPost",lcWindowDownPost_);
+    ar & make_nvp("lcWindowPre",lcWindowPre_);
+    ar & make_nvp("lcWindowPost",lcWindowPost_);
     ar & make_nvp("statusATWDa",statusATWDa_);
     ar & make_nvp("statusATWDb",statusATWDb_);
     ar & make_nvp("statusFADC",statusFADC_);

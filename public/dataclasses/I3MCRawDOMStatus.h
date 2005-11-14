@@ -45,46 +45,25 @@ public:
 	    lcMode_ = lcMode;
 	};
     
-    double GetLCWindowUpPre() const
+    double GetLCWindowPre() const
 	{
-	    return lcWindowUpPre_;
+	    return lcWindowPre_;
 	};
     
-    virtual void SetLCWindowUpPre(const double lcWindow)
+    virtual void SetLCWindowPre(const double lcWindow)
 	{
-	    lcWindowUpPre_ = lcWindow;
+	    lcWindowPre_ = lcWindow;
 	};
 
-    double GetLCWindowDownPre() const
+    double GetLCWindowPost() const
 	{
-	    return lcWindowDownPre_;
+	    return lcWindowPost_;
 	};
 
-    virtual void SetLCWindowDownPre(const double lcWindow)
+    virtual void SetLCWindowPost(const double lcWindow)
 	{
-	    lcWindowDownPre_ = lcWindow;
+	  lcWindowPost_ = lcWindow;
 	};
-
-    double GetLCWindowUpPost() const
-	{
-	    return lcWindowUpPost_;
-	};
-
-    virtual void SetLCWindowUpPost(const double lcWindow)
-	{
-	  lcWindowUpPost_ = lcWindow;
-	};
-    
-    double GetLCWindowDownPost() const
-	{
-	    return lcWindowDownPost_;
-	};
-
-    virtual void SetLCWindowDownPost(const double lcWindow)
-	{
-	    lcWindowDownPost_ = lcWindow;
-	};
-
     
     OnOff GetStatusATWD_A() const
 	{
@@ -210,10 +189,8 @@ public:
     
     LCMode lcMode_;
     
-    double lcWindowUpPre_;
-    double lcWindowDownPre_;
-    double lcWindowUpPost_;
-    double lcWindowDownPost_;
+    double lcWindowPre_;
+    double lcWindowPost_;
     
     OnOff statusATWDa_;
     OnOff statusATWDb_;

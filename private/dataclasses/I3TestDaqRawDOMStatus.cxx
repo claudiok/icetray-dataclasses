@@ -47,9 +47,6 @@ I3RawDOMStatus::LCMode I3TestDaqRawDOMStatus::GetLCMode() const
     case 3:
       return Down;
       break;
-    case 4:
-      return UpAndDown;
-      break;
     default:
       log_fatal("unknown 'LOCAL_COIN_MODE' setting");
     }

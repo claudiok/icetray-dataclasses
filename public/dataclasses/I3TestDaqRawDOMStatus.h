@@ -35,6 +35,18 @@ public:
     TrigMode GetTrigMode() const;
     
     LCMode GetLCMode() const;
+
+    /**
+     * Get LCWindowPre...for now, to fufill virtual interface. 
+     *   return the up, they are pretty much always the same
+     */
+    double GetLCWindowPre() const { return GetLCWindowUpPre(); }
+
+    /**
+     * Get LCWindowPost...for now, to fufill virtual interface. 
+     *   return the up, they are pretty much always the same
+     */
+    double GetLCWindowPost() const { return GetLCWindowUpPost(); }
     
     double GetLCWindowUpPre() const;
     double GetLCWindowDownPre() const;

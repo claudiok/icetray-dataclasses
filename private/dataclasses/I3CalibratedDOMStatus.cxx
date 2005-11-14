@@ -7,9 +7,7 @@ template <class Archive>
     ar & make_nvp("samplingRateA",samplingRateA_);
     ar & make_nvp("samplingRateB",samplingRateB_);
     ar & make_nvp("PMTGain",PMTGain_);
-    ar & make_nvp("peakToValley",peakToValley_);
     ar & make_nvp("speMean",speMean_);
-    ar & make_nvp("speWidth",speWidth_);
   }
 
 
