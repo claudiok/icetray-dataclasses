@@ -8,6 +8,7 @@
  * @date $Date$
  * @author klein
  * @author blaufuss
+ * @author tmccauley
  *
  */
 #ifndef I3DOMLAUNCH_H
@@ -26,21 +27,26 @@ using namespace std;
  * stored in the ATWDBinSize variable.
  *
  */
+
 class I3DOMLaunch : public I3DigitalLaunch
 {
 
 public:  
-
     enum ATWDselect {ATWDa,ATWDb};
 
 protected:
-
     /**  
      * This is the time (in nsec) in 25 nsec units, of the DOM clock 
      * which launches the ATWD (launch is synchronized to the first clock 
-     * transition AFTER the discriinator fires 
+     * transition AFTER the discriminator fires 
      */
     double startTime_;  
+
+    /**  
+     * This holds the trigger information -somewhat of a placeholder for now 
+     * Q: Will this be used at all? -tpm
+     */
+    int trigger_;
 
     /** 
      * This is the ATWD time bin size, in nsec 
@@ -48,37 +54,36 @@ protected:
     double aTWDBinSize_;
 
     /**  
-     * This holds the trigger information -somewhat of a placeholder for now 
-     */
-    int trigger_;
-  
-    /**  
      * This tells which ATWD in the DOM was used
      */
     ATWDselect whichATWD_;
 
     /** 
-     * These contain the 4 ATWD waveforms - same time bins, but different 
-     * gains.  All are 128 samples 
+     * Raw ATWD channel 0 waveform
      */
     vector<int> rawATWD0_;
 
-    /** These contain the 4 ATWD waveforms - same time bins, but different 
-     *  gains. All are 128 samples 
+    /** 
+     * Raw ATWD channel 1 waveform
      */
     vector<int> rawATWD1_;
 
     /** 
-     * These contain the 4 ATWD waveforms - same time bins, but different 
-     * gains.  All are 128 samples 
+     * Raw ATWD channel 2 waveform 
      */
     vector<int> rawATWD2_;
 
     /** 
-     * These contain the 4 ATWD waveforms - same time bins, but different 
-     * gains.  All are 128 samples 
+     * Raw ATWD channel 3 waveform
      */
     vector<int> rawATWD3_;
+
+    /**
+     * This holds the pedestal-subtracted and gain-corrected ATWD waveform.
+     * Depending on the specific calibration, this is either a combination
+     * of the ATWD channels or the lowest gain channel that doesn't have saturation.
+     */
+    vector<double> calibratedATWD_;
 
     /** 
      * This holds the 40 MHz FADC data 
@@ -86,54 +91,37 @@ protected:
     vector<int> rawFADC_;
 
     /**
-     * This holds the pedestal subtracted and gain-corrected FADC data
+     * This holds the pedestal-subtracted and gain-corrected FADC data
      */
     vector<double> calibratedFADC_;
 
-    /**
-     * This holds the combined (pedestal subtracted and gain-corrected)
-     * ATWD waveform (over the 3 channels).
-     * The combination utilizes the calibration information.
-     */
-    vector<double> calibratedATWD_;
-    
     /** 
      * This holds the local coincidence bit
      */
     bool localCoincidence_;
 
-    /** 
-     * Has the pedestal been subtracted from the waveforms?
-     */ 
+    /**
+     * Raw course charge stamp
+     */
+    vector<int> rawChargeStamp_;
 
-    /*
-      NOTE: no longer needed - tpm
-    bool pedestalSubtractedATWD0_;
-    bool pedestalSubtractedATWD1_;
-    bool pedestalSubtractedATWD2_;
-    bool pedestalSubtractedATWD3_;
+    /**
+     * The raw course charge stamp is 9-bit, so
+     * this tells us whether we're using the
+     * upper or lower 10-bit range 
+     */
+    bool chargeStampRange_;
     
-    bool pedestalSubtractedFADC_;
-    */
+    /**
+     * Calibrated course charge stamp
+     */
+    vector<double> calibratedChargeStamp_;
 
 public:
     /**
      * constructor
      */
-    I3DOMLaunch() 
-	{
-	    startTime_ = 0.0;
-	   
-	    /*	
-	      NOTE: no longer needed - tpm
-	    pedestalSubtractedATWD0_ = false;
-	    pedestalSubtractedATWD1_ = false;
-	    pedestalSubtractedATWD2_ = false;
-	    pedestalSubtractedATWD3_ = false;
-
-	    pedestalSubtractedFADC_ = false;
-	    */
-	}
+    I3DOMLaunch();
 
     /**
      * destructor
@@ -209,67 +197,11 @@ public:
                 return *(vector<int>*)0;
 	    }
 	}
-    
-    
+        
     /**
      * return raw FADC waveform as a read-only object
      */
     const vector<int>& GetRawFADC() const {return rawFADC_;}
-
-    /**
-     * set if pedestal is subtracted for ATWDs and FADC
-     */
-    /*
-      NOTE: no longer needed - tpm
-    void SetPedestalIsSubtractedATWD0(bool subtracted) { pedestalSubtractedATWD0_ = subtracted; }
-    void SetPedestalIsSubtractedATWD1(bool subtracted) { pedestalSubtractedATWD1_ = subtracted; }
-    void SetPedestalIsSubtractedATWD2(bool subtracted) { pedestalSubtractedATWD2_ = subtracted; }
-    void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
-
-    void SetPedestalIsSubtractedFADC(bool subtracted) { pedestalSubtractedFADC_ = subtracted; }
-    */
-    
-    /**
-     * is pedestal subtracted for ATWDs and FADC?
-     **/
-    /*
-      NOTE: no longer needed - tpm
-    bool PedestalSubtractedATWD0() { return pedestalSubtractedATWD0_; }
-    bool PedestalSubtractedATWD1() { return pedestalSubtractedATWD1_; }
-    bool PedestalSubtractedATWD2() { return pedestalSubtractedATWD2_; }
-    bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
-
-    bool PedestalSubtractedFADC() { return pedestalSubtractedFADC_; }
-
-    bool PedestalSubtractedATWD(int channel)
-	{
-	    if ( channel == 0 )
-	    {
-		return pedestalSubtractedATWD0_;
-	    }
-	    
-	    else if ( channel == 1 )
-	    {
-		return pedestalSubtractedATWD1_;
-	    }
-	    
-	    else if ( channel == 2 )
-	    {
-		return pedestalSubtractedATWD2_;
-	    }
-	    
-	    else if ( channel == 3 )
-	    {
-		return pedestalSubtractedATWD3_;
-	    }
-	    
-	    else 
-	    {
-		log_fatal("Bad ATWD channel in I3DOMLaunch::PedestalSubtractedATWD(channel)");
-		throw std::exception();
-	    }
-	}
-    */
 
     /**
      * return the pedestal subtracted and gain-corrected (i.e. calibrated) FADC
@@ -286,7 +218,36 @@ public:
 	{
 	    return calibratedATWD_;
 	}
+
+    /**
+     * return local coincidence bit as a read-only object
+     */
+    bool GetLCBit() const {return localCoincidence_;}
+
+    /** 
+     * Return the raw charge stamp
+     */
+    const vector<int>& GetRawChargeStamp() const 
+	{
+	    return rawChargeStamp_;
+	};
+
+    /**
+     * Return the range for the raw charge stamp
+     */
+    const bool GetChargeStampRange() const
+	{
+	    return chargeStampRange_;
+	};
     
+    /**
+     * Return the calibrated charge stamp
+     */
+    const vector<double>& GetCalibratedChargeStamp() const
+	{
+	    return calibratedChargeStamp_;
+	};
+   
     /**
      * sets the raw ATWD0 waveform
      */
@@ -360,17 +321,36 @@ public:
 	{
 	    calibratedATWD_ = CalibratedATWD;
 	};
-
-    /**
-     * return local coincidence bit as a read-only object
-     */
-    bool GetLCBit() const {return localCoincidence_;}
   
     /**
      * sets the local coincidence bit
      */
     void SetLCBit(const bool & LCBit) {localCoincidence_=LCBit;}
 
+    /**
+     * Set the coarse charge stamp
+     */
+    void SetRawChargeStamp(const vector<int>& chargeStamp)
+	{
+	    rawChargeStamp_ = chargeStamp;
+	};
+
+    /** 
+     * Set the bit range for the raw charge stamp
+     */
+    void SetChargeStampRange(const bool range)
+	{
+	    chargeStampRange_ = range;
+	};
+    
+    /** 
+     * Set the calibrated charge stamp
+     */
+    void SetCalibratedChargeStamp(const vector<double>& chargeStamp)
+	{
+	    calibratedChargeStamp_ = chargeStamp;
+	};
+    
     /**
      * Dumps the file to the given ostream
      */
@@ -385,7 +365,8 @@ private:
     friend class boost::serialization::access;
 
     template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
+    
+    // ROOT macro
     ClassDef(I3DOMLaunch,1);
 };
 
