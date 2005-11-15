@@ -543,6 +543,15 @@ namespace I3Units
    */
    static const double ohm = volt/ampere; 
 
+    //
+    // Temperature
+    //
+    /** 
+     * Kelvin
+     */ 
+    static const double kelvin = 1.0;
+    
+
   //
   // Miscellaneous
   //
