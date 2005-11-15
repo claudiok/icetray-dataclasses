@@ -161,10 +161,10 @@ class I3TrackImpl : public I3Track,
   template <class Archive>
   void serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3Track", base_object<I3Track>(*this));
-    ar & make_nvp("Geo", base_object<GeometricalType>(*this));
-    ar & make_nvp("EnergeticType", base_object<EnergeticType>(*this));
-    ar & make_nvp("CompositeType", base_object<CompositeType>(*this));
+    ar & make_nvp("Track", base_object<I3Track>(*this));
+    ar & make_nvp("Geom", base_object<GeometricalType>(*this));
+    ar & make_nvp("Energ", base_object<EnergeticType>(*this));
+    ar & make_nvp("Comp", base_object<CompositeType>(*this));
   }
   // ROOT macro
   ClassDef(I3TrackImpl,1);

@@ -6,6 +6,8 @@
 #include <string>
 #include <TTree.h>
 
+#include "services/I3Logging.h"
+
 using namespace std;
 using boost::tuples::tie;
 
@@ -47,6 +49,30 @@ namespace boost {
 	return parent_vertex;
       }
 
+      template <typename Vertex, typename Graph>
+      Vertex parent_n(const Vertex &v, const Graph &g, unsigned n)
+      {
+	Vertex parent_v = v;
+	for (int i = 0; i<n; i++)
+	  parent_v = parent(parent_v, g);
+	return parent_v;
+      }
+      
+      template <typename Vertex, typename Graph>
+      unsigned depth(const Vertex &v, const Graph &g)
+      {
+	Vertex u = v;
+	unsigned depth_=0;
+
+	while (in_degree(u,g) == 1)
+	  {
+	    assert(in_degree(u,g) < 2);
+	    u = parent(u,g);
+	    depth_++;
+	  }
+	return depth_;
+      }
+
       template <typename Graph, typename Vertex, typename PropertyMap>
       std::string branchname(Graph g, Vertex v, PropertyMap p, unsigned maxdepth=32, bool leaf=true)
       {
@@ -63,7 +89,10 @@ namespace boost {
   
 	// v is an only child and is not a leaf, omit my_name
 	if (out_degree(up, g) == 1 && !leaf)
-	  return branchname (g, up, p, maxdepth-1, false);
+	  {
+	    log_trace("skipping %s", my_name.c_str());
+	    return branchname (g, up, p, maxdepth-1, false);
+	  }
 	else
 	  // my name is useful.  keep it.
 	  return branchname (g, up, p, maxdepth-1, false) + "_" + my_name;
@@ -105,6 +134,7 @@ namespace boost {
 	unsigned depth = 1;
 	while(collision_remains) 
 	  {
+	    //	    dump_graph(g,props);
 	    vertex_name_map.clear();
 
 	    for (typename vertex_vec::iterator i = leaves.begin(); 
@@ -114,6 +144,8 @@ namespace boost {
 		vertex_name_map[get(props, *i).branch_name].push_back(*i);
 	      }
 
+	    // where vertex name map contains > 1 entry there is a name collison
+	    // 
 	    for (typename vertex_name_map_t::iterator i = vertex_name_map.begin();
 		 i != vertex_name_map.end();
 		 i++)
@@ -134,7 +166,10 @@ namespace boost {
 	      {
 		std::vector<vertex_desc> v = i->second;
 		if (v.size() > 1)
-		  collision_remains = true;
+		  {
+		    collision_remains = true;
+		    log_trace("collision(%u) %s", v.size(), (i->first).c_str());
+		  }
 	      }
 	  } 
       }
@@ -246,10 +281,10 @@ namespace boost {
 		   i != leaves.end(); 
 		   i++)
 		{
-		  const string& branch_name = get(props, *i).branch_name;
-		  const char    type_char   = get(props, *i).type_char;
-		  void *address             = get(props, *i).px;
-		  int branchnum             = get(props, *i).branch_order;
+		  const string& branch_name       = get(props, *i).branch_name;
+		  const char    type_char         = get(props, *i).type_char;
+		  void *address                   = get(props, *i).px;
+		  int branchnum                   = get(props, *i).branch_order;
 		  const string branch_name_w_spec = branch_name + "/" + type_char;
 		  
 		  branched[branchnum].first = 

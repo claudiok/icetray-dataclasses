@@ -87,16 +87,28 @@ namespace boost {
 	       
       }
 
+      // special case to skip px in shared_ptr
       template <typename T>
       void
-      save_override(const ::boost::serialization::nvp<shared_ptr<T> >& nv_pair, int)
+      save_override(const ::boost::serialization::nvp< ::boost::shared_ptr<T> >& nv_pair, int)
       {
-	stack++;
-	archive::save(*this->This(), nv_pair.value().px);
-	stack--;
+	// enums get converted to ints, called with nvp with null name.
+	if (nv_pair.name())
+	  {
+	    ttree_proxy_.push(nv_pair.name());
+	    stack++;
+	  }
 
-	if (stack == 0)
-	  ttree_proxy_.fill();
+	archive::save(*this->This(), nv_pair.value().px);
+
+	if (nv_pair.name())
+	  {
+	    stack--;
+	    ttree_proxy_.pop();
+	    if (stack == 0)
+	      ttree_proxy_.fill();
+	  }
+	       
       }
 
       //////////////////////////////////////////////////////////
