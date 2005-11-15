@@ -111,6 +111,8 @@ dataclasses/I3MCPMTResponse.h \
 dataclasses/I3Units.h \
 dataclasses/I3TriggerDict.h \
 dataclasses/I3Trigger.h \
+dataclasses/I3FilterDict.h \
+dataclasses/I3Filter.h \
 dataclasses/I3TriggerStatusDict.h \
 dataclasses/I3TriggerStatus.h \
 dataclasses/OMKey.h \

@@ -17,6 +17,7 @@
 #include "I3OMSelectionDict.h"
 #include "I3RecoResultDict.h"
 #include "I3TriggerDict.h"
+#include "I3FilterDict.h"
 #include "I3Bag.h"
 #include <sstream>
 
@@ -41,6 +42,7 @@ class I3Event : public TObject
   I3OMSelectionDict oMSelectionDict_; //||
   I3RecoResultDict  recoResultDict_; //||
   I3TriggerDict     triggerDict_; //||
+  I3FilterDict      filterDict_; //||
   I3Bag             bag_; //||
   
   public:
@@ -105,6 +107,16 @@ class I3Event : public TObject
   I3TriggerDict& GetTriggerDict() { return triggerDict_; }
 
   /**
+   * @return the FilterDict Data as a constant object
+   */
+  const I3FilterDict& GetFilterDict() const { return filterDict_; }
+
+  /**
+   * @return the FilerDict as a non-constant object
+   */
+  I3FilterDict& GetFilterDict() { return filterDict_; }
+
+  /**
    * @return the Bag for this event as a constant object
    */
   const I3Bag& GetBag() const { return bag_; }
@@ -125,6 +137,7 @@ class I3Event : public TObject
        <<oMSelectionDict_
        <<recoResultDict_
        <<triggerDict_
+       <<filterDict_
        <<bag_
        <<"]\n";
     }

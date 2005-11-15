@@ -196,8 +196,10 @@
 #pragma link C++ struct LinearFit+;
 
 #pragma link C++ class I3TriggerDict+;
-
 #pragma link C++ class I3Trigger+;
+
+#pragma link C++ class I3FilterDict+;
+#pragma link C++ class I3Filter+;
 
 #pragma link C++ class I3TriggerStatusDict+;
 #pragma link C++ class I3TriggerStatus+;
