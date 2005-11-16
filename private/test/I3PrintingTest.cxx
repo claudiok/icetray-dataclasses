@@ -1,0 +1,82 @@
+
+#include <I3Test.h>
+
+// MODIFY: replace with include of the header file for the module you
+// are testing, or whatever headers are necessary for this test.
+#include "dataclasses/I3Event.h"
+#include "dataclasses/I3OMGeoIceCube.h"
+#include "dataclasses/I3OMResponse.h"
+#include "dataclasses/I3DataReadout.h"
+#include "dataclasses/I3AMANDAAnalogReadout.h"
+#include "dataclasses/I3BasicTrack.h"
+#include "dataclasses/I3MCHit.h"
+#include "dataclasses/I3Geometry.h"
+#include "dataclasses/I3RecoResultRDMCFit.h"
+#include "dataclasses/I3MCTrack.h"
+#include "dataclasses/I3MCCascade.h"
+#include "services/I3Logging.h"
+
+#include "TList.h"
+#include "TNamed.h"
+
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+TEST_GROUP(I3PrintingTest);
+
+TEST(event_print)
+{
+  cout<<"Testing 'printing' an event"<<endl;
+  cout<<"****************************"<<endl;
+  I3Event event;
+  
+  I3OMResponsePtr resp(new I3OMResponse());
+  event.GetOMResponseMap()[OMKey(1,1)] = resp;
+  resp = I3OMResponsePtr(new I3OMResponse);
+  event.GetOMResponseMap()[OMKey(1,2)]=resp;
+  
+  I3RecoResultRDMCFitPtr fit(new I3RecoResultRDMCFit);
+  event.GetRecoResultDict()["f2kFit"]= fit;
+  //      boost::static_pointer_cast<I3RecoResult>(fit);
+  
+  TNamed* n = new TNamed("Foo","");
+  TObjectPtr obj(n);
+  event.GetBag()["Object"] = obj;
+  TList* l = new TList();
+  obj = TObjectPtr(l);
+  event.GetBag()["List"] = obj;
+  cout<<event.GetBag().size()<<endl;
+  
+  cout<<event;
+}
+
+TEST(geom_print)
+{
+  cout<<"Testing 'printing' a geometry"<<endl;
+  cout<<"****************************"<<endl;
+  I3Geometry geometry;
+  I3OMGeoPtr geo(new I3OMGeoIceCube());
+  geometry.GetInIceGeometry()[OMKey(1,1)] = geo;
+  geo = I3OMGeoPtr(new I3OMGeoIceCube());
+  geometry.GetInIceGeometry()[OMKey(1,2)] = geo;
+  geo = I3OMGeoPtr((I3OMGeo*)0);
+  geometry.GetInIceGeometry()[OMKey(99,99)] = geo;
+  cout<<geometry;
+}
+
+TEST(other_print)
+{
+  cout<<"Testing 'printing' some random objects"<<endl;
+  cout<<"****************************"<<endl;
+  I3AMANDAAnalogReadout a;
+  cout<<a;
+  I3BasicTrack t;
+  cout<<t;
+  I3MCHit mchit;
+  mchit.SetTime(3.4);
+  cout<<mchit;
+}
+
+

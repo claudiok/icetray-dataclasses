@@ -1,0 +1,400 @@
+/**
+
+@page sharedpointer Shared pointers in practice
+
+@author troy d. straszheim <a href="http://www.resophonic.com">@<troy@resophonic.com@></a>
+
+@section ownership A shift of ownership
+
+The discussion at @ref memorymanagement addresses the basic issues of
+memory management.  When must one @c delete, when can one @c delete,
+and when mustn't one?  As discussed, the question can also be phrased
+"who owns this object?"  In the overwhelming majority of cases, one
+wants ownership of the object to be shared amongst all who have
+pointers to it.  When pointers to the object no longer exist, we want
+that object to be returned to free store, or @c delete 'd).
+
+A fairly simple paradigm shift accomplishes this goal.  One gives
+ownership of the object to its set of "client" pointers, taking
+ownership away from the objects that contain the pointers.  As long as
+some mechanism exists whereby the pointers can know when the last one
+disappears, (this is the point at which the pointee is in danger of
+being "leaked"), then the pointer itself, actually now a lightweight
+class that imitates a pointer, can delete the object.
+
+@section using Creating a smart pointer
+
+A smart pointer is a template class that takes the type of the pointee
+as an argument.  The name of our shared pointer class is @c
+shared_ptr<>, and it lives in namespace @c boost.  Therefore the
+way to create a pointer to a @c Hit is
+@code
+#include <boost/shared_ptr.hpp>
+using namespace boost;
+
+shared_ptr<Hit> hitptr;
+@endcode
+
+For the rest of this document we will assume you have @c #include 'd
+the header file and are @c using @c namespace @c boost;
+
+@section mixing The danger of mixing bald and shared pointers
+
+There is one situation where you must treat @c shared_ptr 's
+differently than bald pointers, and this one comes up fairly often.
+It is at initialization time.  Otherwise there are no major
+differences.
+
+Consider the following code fragment.  It won't compile (because the shared
+pointer is designed not to let you make this mistake), this is just
+for illustration:
+@code
+void normalize_hit(Hit *incoming_hit) 
+{
+  shared_ptr<Hit> local_hitptr = incoming_hit;  // wont compile. illustration.
+
+  // do something to the hit
+}
+
+Hit *outer_hitptr = new Hit;
+
+normalize_hit(outer_hitptr);
+do_something_else_to_hit(outer_hitptr);
+delete outer_hitptr;
+@endcode  
+
+The excerpt creates a Hit with @c new, and passes a pointer to it to
+the functon @c normalize_hit, which creates a smart pointer to the
+Hit, and then presumably does something physics-y to it.  When @c
+local_hitptr is initialized with the parameter @c incoming_hit, it
+starts to keep track of how many people are pointing to @c
+incoming_hit.  It of course starts with 1 (itself).  When the function @c
+normalize_hit returns, @c local_hitptr goes out of scope.  It checks to
+see how many people know about what it points to, and since that
+number is one, it knows that only it knows about that @c Hit, and
+instead of leaking the memory, it @c deletes the @c Hit.
+
+Now proceed to the next function call: @c do_something_else_to_hit().
+At this point the @c Hit pointed to by @c outer_hitptr has been @c
+delete 'd.  This is obviously not what we want.  @c
+do_something_else_to_hit is called with an invalid pointer, and if we
+do not have access to the source code of @c normalize_hit(), we will
+not expect it to be.  The call might even succeed, if the operating
+system has marked the hit as free but not done anything to it.  The
+author of @c normalize_hit() is at fault, since he/she has mixed a
+bald and a smart pointer.
+
+@section initialization Proper pointer handling
+
+The @c shared_ptr<> class, by design, disallows initialization in the
+regular C-style (as in the previous example) and thereby creates a
+very effective border between shared and bald pointers.  You
+initialize the smart pointer with a bald pointer in its constructor.
+Here is the above example, rewritten properly:
+
+@code
+// void normalize_hit(Hit *incoming_hit)  
+void normalize_hit(shared_ptr<Hit> incoming_hit) 
+{
+  shared_ptr<Hit> inner_hitptr = incoming_hit;  // now this will compile
+  // do something to the hit
+}
+
+// Hit *h = new Hit;
+shared_ptr<Hit> outer_hitptr(new Hit);  // good version
+
+normalize_hit(outer_hitptr);
+do_something_else_to_hit(outer_hitptr);
+@endcode  
+
+In this version, the number of pointers to the @c new @c Hit starts
+with 1 when @c outer_hitptr is initialized.  When @c inner_hitptr is
+initialized, the count goes to 2, and this time when @c inner_hitptr's
+destructor is called (when @c normalize_hit exits), it knows that
+others still have pointers to that @c Hit.  Therefore it does not @c
+delete it and the call to @c do_something_else_to_hit() proceeds as
+desired.  In this approach (passing the return of @c new to the
+constructor), there are never any extra bald pointers floating around,
+and such situations don't come up.
+
+The statement 
+@code
+  shared_ptr<Hit> inner_hitptr = incoming_hit;  // now this will compile
+@endcode
+will now compile because @c incoming_hit and @c inner_hitptr are of
+the same type... it is no longer an assignment from bald pointer to
+shared pointer.
+
+@section typedefs The convenience typedefs
+
+The hard part (not so hard) is over.  Use a different initialization
+for your pointers and don't mix them with regular pointers.  
+
+All the typing @c shared_ptr<MyClass> can get tedious.  All of the
+dataclasses have associated @c typedefs, which just means that we've
+given the type @c shared_ptr<MyClass> an additional, more convenient
+name.  That is in all cases @c MyClassPtr.   The code snippet above
+would therefore look like this:
+@code
+void normalize_hit(HitPtr incoming_hit) 
+{
+  HitPtr inner_hitptr = incoming_hit;
+  // do something to the hit
+}
+
+HitPtr outer_hitptr = shared_pointer_cast<Hit>(new Hit);
+// also fine:   HitPtr outer_hitptr(new Hit); 
+
+normalize_hit(outer_hitptr);
+do_something_else_to_hit(outer_hitptr);
+@endcode
+
+@section nulls Shared pointers and NULL
+
+You do not need to initialize shared pointers to NULL or zero.  They
+do it themselves, in the constructor.  This is one of the advantages
+of using a class (<tt>shared_ptr<int></t>) over using a raw data type
+(<tt>int*</tt>).  Raw data types are not initialized to any particular
+value.
+
+You also don't need to compare to NULL in boolean contexts.  Just
+evaluate the pointer itself:
+
+@code
+HitPtr p;
+if (!p)
+{
+  printf("it's NULL");
+}
+@endcode
+
+A smart pointer used in a boolean context, like inside the
+parenthesis of an @c if() statement, will evaluate to @c false if it
+points to @c NULL, and to @c true otherwise.
+
+Classes that have a @c bool @c HasSomething() type accessor function
+do not need it in the presence of smart pointers.  Code becomes
+simpler and cleaner.  Smart pointers are set to NULL when they are
+created, they do not need to be initialized. Here is a typical
+bald-pointer style implementation:
+
+@code
+class SomeClass {
+  Something *fSomething;
+public:
+  bool HasSomething() 
+  { 
+    if (fSomething == NULL) 
+      return false;
+    else
+      return true;
+  }
+
+  Something *GetSomething() {
+    // maybe check again to see if it is NULL and throw an error.
+    return fSomething;
+  }
+};
+@endcode
+
+But this is better:
+@code
+class SomeClass {
+  SomethingPtr fSomething;  // this one is smart
+public:
+  SomethingPtr GetSomething() {
+    return fSomething;
+  }  
+};
+
+// clean: to see if SomeClass HasSomething, do
+if (someclass.GetSomething()) then { ... }
+
+// or maybe like this
+SomethingPtr p = someclass.GetSomething();
+if (p) 
+{
+   // it puts the lotion in the basket
+} else {
+   // it gets the hose again
+}
+@endcode
+
+And the following idiom should disappear completely, for a couple of
+reasons: 
+@code 
+SomeClass 
+{
+  Something *fSomething	  
+
+public:
+
+  ~SomeClass() 
+  {
+    if (fSomething != NULL)
+      delete fSomething;
+  }
+};
+@endcode
+
+First of all the @c NULL checking in the destructor should have never
+been there in the first place, because it is OK to @c delete @c NULL;
+that's in the C++ standard.  
+
+@code 
+SomeClass 
+{
+  SomethingPtr p; // deletes the pointee when destructor is called
+                  // while inside SomeClass' destructor, if 
+		  // somebody else isn't pointing to it.
+
+public:
+  SomeClass() 
+  { 
+    p = shared_pointer_cast<Something>(new Something);
+  }
+
+  ~SomeClass() {}
+
+};
+@endcode
+
+In this case, notice that since @c p is a private member of @c
+SomeClass, nobody else @em should be able to see it, but @c p doesn't
+know that it is private, it is just counting references.
+
+@section containers Putting things into our containers
+
+With the @c I3RecoHitSeries, which looks like this:
+
+@code
+class I3RecoHitSeries : public TObject, 
+                 public STLVectorStoragePolicy<I3RecoHitPtr {
+
+  ...
+
+};
+@endcode
+
+You can do:
+@code
+I3ArrayHit a_hit;
+I3StationHitPtr s_hit = shared_pointer_cast<I3StationHit>(new I3StationHit);
+// or like this: I3StationHitPtr s_hit(new I3StationHit);
+a_hit.push_back(s_hit);
+@endcode
+
+which shows you what's going on, or 
+
+@code
+I3ArrayHit a_hit;
+a_hit.resize(10);
+// with a temporary
+a_hit[4] = I3StationHitPtr(new I3StationHit);	
+
+// or with the cast
+a_hit[3] = static_pointer_cast<I3StationHit>(new I3StationHit);	
+
+// bad, won't compile: cant assign bald pointer to smart pointer
+a_hit[6] = new I3StationHit;
+@endcode
+
+@section conversions Automatic conversions
+
+Regular pointer type conversions all happen as expected.  You can
+initialize a pointer to @c Base with a pointer to @c Derived, and
+assign a @c Derived to a pointer to @c Base, as with bald pointers:
+@code
+// all legal
+BasePtr b = shared_pointer_cast<Base>(new Derived);
+BasePtr b2(new Derived); 
+DerivedPtr d(new Derived);
+b = d;
+
+Derived *d = new Base // error 
+
+DerivedPtr d2(new Base); // also an error 
+DerivedPtr d3 = shared_pointer_cast<Derived>(new Base); // error
+DerivedPtr d4 = shared_pointer_cast<Base>(new Base); // error
+@endcode
+The convertability at initialization is the same as the compile-time
+convertibility of the underlying bald pointer types.
+
+@section casting Casts in C++
+
+The casts for these @c shared_ptr<>'s are similar to the standard C++
+pointer casts, and they all simply perform the standard C++ casts
+under the hood.   Information on these casts is available in any
+decent C++ text.
+
+@subsection static C-style casts and static_cast<>()
+Here is an example of a C-style cast that comes from the ROOT manual:
+
+@code
+TTree *t1 = (TTree*)f->Get("t1");
+@endcode
+
+This is still legal but very strongly discouraged.  These casts are a
+major source of bugs, as the compiler accepts them unconditionally,
+and at runtime no checking is done.  They are also invisible to tools
+like @c grep.  If you use C-style casts and want to see a list of all
+your unchecked pointer conversions, you will have to read every line
+of your code.
+
+In C++ one uses @c static_cast<>() for bald pointers, and @c
+static_pointer_cast<>() for shared pointers.  The equivalent code
+would look like this:
+
+@code
+TTree *t1 = static_cast<TTree>(f->Get("t1"));
+@endcode
+
+This is just as dangerous as the code above, but easier to find. This
+syntax has nothing to do with the shared pointers, it is now the
+C++-wide recommended best practice, because it makes casts easy to see
+and harder to do inadvertently, assisting debugging.
+
+@subsection dynamiccast dynamic_cast<> and dynamic_pointer_cast<>
+
+I have no idea why ROOT appears to continue to promote the use of the
+C-style cast.  The C++ @c dynamic_cast<> is a cast with a check: it
+does an RTTI (Run Time Type Information) lookup, which uses
+essentially the same mechanism as a virtual function call, to
+determine if the source object is actually of the destination type.
+This requires that the object have @em some dynamic type, of course
+(e.g. a virtual function), but in this example, clearly the object
+should have virtual functions, since it is inherited from TObject.
+Given that all of our I3 classes have dynamic type, all
+of our IceTray casts should be @c dynamic_cast<>.
+
+The smart-pointer equivalent is the @c dynamic_pointer_cast<>(),
+essentially a convenience wrapper around dynamic_cast<>() that allows
+you to convert from a smart pointer of one type to a smart pointer of
+another type, again without ever touching the contained bald pointer.
+
+An example:
+@code
+HitPtr h(new DerivedHit); // shared-pointer-to-base, pointing to
+                          // derived
+
+DerivedHitPtr dhit = dynamic_pointer_cast<DerivedHit>(h);
+// succeeds, now dhit points to same thing as h
+
+MintJulepPtr mjp(new MintJulep);
+dhit = dynamic_pointer_cast<DerivedHit>(mjp);
+// fails, dhit now is NULL
+@endcode
+
+@subsection spc shared_pointer_cast<>
+Explained in @ref initialization
+
+@todo 
+polymorphic_pointer_cast<>
+
+@section links Other Smart Pointer Resources
+
+The main boost page documenting the @c shared_ptr<> is at 
+<a class="el" href="http://www.boost.org/libs/smart_ptr/shared_ptr.htm">
+http://www.boost.org/libs/smart_ptr/shared_ptr.htm</a>
+
+*/

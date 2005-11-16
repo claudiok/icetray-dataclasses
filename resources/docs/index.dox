@@ -1,0 +1,22 @@
+/**
+   @mainpage Dataclasses Documentation
+
+   @author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
+
+   @section Description
+   This is the automatic documentation of the @c dataclasses project.  This 
+   project provides C++ classes which are used to represent IceCube data
+   for passing between IceTray modules and for writing to disk.
+   
+   @section an-overview Overview of the Data Classes
+   
+   For an overview of the design of the @c dataclasses library, see
+   @ref dataclass-overview.  For information on specific classes,
+   click the tabs at the top of the page.
+   
+   @section boostserialization Adding a Boost Serialization method to your class.
+
+   If you're adding a new class to dataclasses and want to be able to dump your 
+   class (or one that inherits from it) to a root tree or xml file it'll need to
+   have a serialization method.  See @ref adding-a-serialization-method.
+*/

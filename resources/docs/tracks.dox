@@ -1,0 +1,152 @@
+/**
+   @page tracks Particles, Tracks, Cascades, and Primaries
+
+   @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+
+    @section particles Particles
+
+   The basic building blocks of events, in either Monte Carlo or
+   reconstruction, are referred to as "particles" and are derived from
+   the @c I3Particle parent class.  There are three basic types of
+   particles: I3Primary, whose presence is inferred but which are not
+   directly observed; I3InIceParticle, which are particles
+   which enter the
+   active volume of the InIce detector; and I3IceTopParticle which are 
+   particles observed at the IceTop surface array.  I3InIceParticle
+   is presently divided into two subtypes, I3Track and
+   I3Cascade.
+
+   All of these classes are related by inheritance, as shown below.
+   This means that any operation that can be performed on a parent
+   class can be performed on an object of a class derived from that
+   parent.  For example, although the @c ParticleType() method is not
+   shown for all classes in the diagram below, it is a valid method
+   that can be called for any track, cascade, or primary object.  The
+   items in the dashed boxes are template parameters, as discussed
+   in @ref template_blocks, below.
+
+   @image html ParticleTypes.png
+   
+   @section template_blocks Templated functionality
+
+   The information associated with a track or cascade varies
+   considerably, depending on the reconstruction or simulation
+   algorithm that produced the record.  Attempting to accommodate all
+   of this variable information in a single type of record leads to a
+   very heavyweight object which is still not flexible enough for all
+   purposes (see @ref reco).  The solution is to allow for different
+   types of track records.  We distinguish two types of track data,
+   'generic' and 'specific', and rely on two mechanisms to provide the
+   necessary flexibility.
+
+   'Specific' track data is that which is produced by a particular
+   reconstruction algorithm or family of algorithms.  These data are
+   frequently goodness-of-fit or quality parameters.  Examples
+   include the moments calculated by the tensor of inertia fit, 
+   likelihoods or
+   covariance matrices produced by likelihood fits, the velocity
+   parameter produced by the line fit (which is not normally
+   interpreted as an actual particle velocity), or air shower
+   parameters like s30.  As described in 
+   @ref extension, these parameters should be added by individual
+   developers via inheritance from the base particle classes.
+
+   'Generic' track data, on the other hand, are not tied to a specific
+   algorithm.  Some of these data are required, like the direction of a
+   track; others are optional, but if they are present they are
+   fundamental characteristics of the 
+   particle.  Examples of generic data are the direction of a cascade,
+   the starting or stopping points of a track, or the energy of a
+   primary.  Although one's instinct is to include this information
+   through inheritance as well, this is not a feasible solution
+   because the various data are independently optional: a track can
+   have a starting point but not an energy, an energy but not a
+   starting point, both, or neither.  It is therefore not possible to
+   create an inheritance hierarchy without either extensive multiple
+   inheritance or duplicate implementation of code, or both.
+
+   The solution is to provide the optional generic data through
+   templated inheritance of blocks of functionality.  (One could also
+   contain these blocks as data members, but we feel that templated
+   inheritance provides a more user-friendly interface to the data.)
+   These blocks are listed in
+   the dashed boxes in the diagram above; for example, an 
+   @c I3Primary class will inherit an @c EnergyType block, a 
+   @c DirectionType block, and a @c CoreType block.  These correspond
+   to information about the primary's energy, angle of incidence, and
+   core location on the surface, each of which is an independent
+   optional part of the primary record.
+
+   Particular types of particles are created by specifying which
+   blocks will be built into the particular subclass.  The diagram
+   below, for example, shows four types of cascade classes.
+
+   @image html CascadeTypes.png
+
+   The four specific cascade classes in the diagram are effectively
+   aliases for particular instantiations of the template class.  We
+   have used inheritance, rather than @c typedef statements, because
+   it hides the template instantiation from the user and makes RTTI
+   (in Root, for example) much nicer.  Similarly, the @c I3Cascade
+   class is not a template class but merely specifies the interface;
+   there is an implementation class, @c I3CascadeImpl, not shown,
+   which handles the actual templated inheritance.  In using these
+   particle classes or developing a
+   new type of particle class based on one of the implemented track or
+   cascade classes, one should not need to deal with templates at all.
+
+   @section composite_tracks Composite Tracks
+
+   Most of the functionality blocks are fairly self-explanatory.  The
+   exception is the @c CompositeType block, which can be part of a
+   track class (but not a cascade or primary).  Compositeness is based
+   on an observation by Peter Steffen, that tracks in an event can
+   often be grouped together into logical units.  No such mechanism
+   exists in AMANDA software, which led to extremely long lists of
+   Monte Carlo tracks even when only a few were of interest, making
+   it difficult to determine which were the "important" tracks.
+
+   Composite tracks are intended to represent tracks that can be
+   viewed either as individual objects or as collections of objects,
+   depending on the context.  Using the regular track methods, like 
+   @c Energy() or @c Pos(), will be interpreted in the context of a
+   single (though composite) track.  Information about the individual
+   components of the composite track can be obtained through the 
+   @c Consituents() vector.
+
+   Mechanically, a composite track is a track object that contains
+   other particles.  However, it is important to note that composite
+   tracks model a "whole-parts" relationship, not a "has-a" nor a
+   "was-produced-by"
+   relationship.  That is, <b>the top-level track refers to the
+   collection as a whole, viewed as a single track</b>, not to a
+   particular individual track
+   that may be the most important, nor to the parent track in a
+   production/decay hierarchy.  
+
+   Examples of items that should be represented as composite tracks
+   are muon bundles, tau tracks, and showering muons.  For a muon
+   bundle, the constituents are the individual muons (and any
+   stochastics), while the top-level information refers to the entire
+   collection as a whole.  As an example, the particle type of the
+   composite track 
+   would be "MuonBundle," while the type of each of the consituents
+   would be "MuPlus" or "MuMinus."  For a tau track, the constituents
+   would be the interaction and decay showers, plus the tau lepton
+   track.  Many of the composite tau's data (i.e., the top-level
+   information) would be identical to those of the tau lepton
+   constituent's -- direction, length, particle type, and so forth.
+   Energy information, however, would come primarily from the
+   shower(s).  Finally, a showering muon would be essentially similar
+   to a tau -- we simply note that there would be a consituent
+   @c BasicMuon (or @c StartingMuon or @c StoppingMuon) particle in
+   addition to the various stochastic @c Cascade particles in the
+   list.
+
+   With this mechanism, most InIce events will contain only one track
+   (which may be composite, of course).  Second tracks will usually
+   indicate overlapping events such as independent air showers.
+   A reconstruction that dealt with both IceTop and the InIce detector
+   would store the surface shower and the InIce particles as separate
+   objects, however.
+*/

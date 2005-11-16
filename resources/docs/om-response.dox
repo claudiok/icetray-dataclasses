@@ -1,0 +1,70 @@
+/**
+   @page om-response Optical Module Responses
+
+   @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+
+   @section omresponse The OM Response
+
+    The @c I3OMResponse object holds the information recorded by a
+    particular OM in a single event.  It also holds OM-specific
+    information added by offline software, such as hit extraction
+    results.  A derived class, @c I3MCOMResponse, also includes Monte
+    Carlo information, such as the true hit times and the true PMT
+    voltage information.
+
+    There are two basic types of information stored
+    in the @c OMResponse.  The first type is hardware output, like
+    that recorded by the DAQ, which is stored in the 
+    @c I3DataReadoutDict.  There are different @c I3DataReadout classes
+    for AMANDA analog readouts, and IceCube digital readouts.  There is a 
+    different kind of @c I3DataReadout for each different kind of readout.
+    @c I3MCOMResponse also contains an @c I3MCPMTResponse,
+    which contains information about the raw PMT output voltage,
+    before processing by the DOM electronics.  The @c I3MCPMTResponse
+    class is presently an abstract class, because the details of the
+    implementation of this class have not been fleshed out.
+
+    The other type of information is hit information.  "Hit" is used
+    to mean a single photoelectron
+    (PE) arrival time.  It does not include amplitude information,
+    because it is independent of the hardware.  Hits are stored in 
+    @c HitSeries objects in the @c I3OMResponse.  These @c HitSeries are
+    found in the @c I3RecoHitSeriesDict object.
+    @c I3MCOMResponse also contains a special @c HitSeries named
+    @c I3MCHitSeries, which stores the true series of arrival times.
+    The layout of the @c I3OMResponse is shown below.
+
+    Additionally the I3MCOMResponse contains an I3MCPhotonVect which 
+    is a vector<I3MCPhoton>.  The I3MCPhoton is distinguished from the 
+    I3MCHit because I3MCPhoton is taken to be the arrival of a photon at a 
+    Optical Module and the I3MCHit is taken to be the creation of a 
+    photoelectron.
+
+    @image html OMResponseOverview.png
+
+    Offline software can add new @c I3DataReadout's or @c HitSeries to
+    the @c I3OMResponse.  "Real" @c I3DataReadout's -- those recorded by
+    the DAQ -- are distinguished from later additions by the @c 
+    I3DataReadout::IsRaw()
+    flag.  The DAQ does not produce hit series, so there is no
+    comparable flag for hit series in the @c I3RecoHitSeriesDict list.
+    Both the @c I3DataReadoutDict and the @c I3RecoHitSeriesDict are maps,
+    so each @c I3DataReadout or @c I3RecoHitSeries is identified by a
+    unique name.
+
+    @c I3RecoHitSeries objects (or rather, objects derived from 
+    @c I3RecoHitSeries) are used to store the results of hit extraction
+    algorithms which produce lists of PE times.  This is the input
+    required for many likelihood reconstruction algorithms.
+    Reconstruction algorithms may also make direct use of the 
+    @c I3DataReadout information, without going through the intermediate
+    step of hit extraction.
+
+    Routines which preprocess the DAQ information, but not to the
+    level of extracting single PEs, store their results in the 
+    @c I3DataReadoutDict, as derived (rather than @c Raw) 
+    @c DataReadouts.  Examples would be AMANDA calibration routines or
+    algorithms that produce combined waveforms from IceCube ATWD and
+    fADC waveforms.
+
+*/

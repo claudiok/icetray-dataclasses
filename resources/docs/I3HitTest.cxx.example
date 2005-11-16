@@ -1,0 +1,93 @@
+#include "TUT/tut.h"
+#include "dataclasses/I3Hit.h"
+#include <string>
+using namespace std;
+
+namespace tut
+{
+  struct I3HitTest 
+  {
+    int my_integer;
+    string my_string;
+    I3Hit my_hit;
+  };
+
+  typedef test_group<I3HitTest> factory;
+  // leave this
+  typedef factory::object object;
+}
+
+namespace
+{
+  tut::factory t("I3Hit");
+}
+
+namespace tut
+{
+
+  template<> template<>
+  void object::test<2>() // dont need to start with 1
+  {
+    // this demonstrates that the contents of struct I3HitTest simply
+    // appear as local variables in the test functions.  This saves
+    // typing.
+    my_string = "initialized";
+    my_hit.Time(0.42);
+    my_integer = 42;
+  }
+  
+  template<> template<>
+  void object::test<3>() {
+
+    ensure(my_string == ""); 
+
+    ensure("this will be displayed if the ensure fails", my_integer == 0);
+
+    ensure_equals(my_integer, 0);
+
+    ensure_equals("my_integer is not zero!", my_integer, 0);
+
+    my_hit.Time(0.42);
+    ensure_distance(my_hit.Time(), // left side of equality
+		    0.42, // right side of equality
+		    0.00001); // tolerance
+
+    // or the same with a failure message
+    ensure_distance("Oh dear something is not right.  We'll never make it home now, Toto!",
+		    my_hit.Time(), // left side of equality
+		    0.42, // right side of equality
+		    0.00001); // tolerance
+    
+    fail("This failure is for demonstration purposes.  No real failure has occurred.");
+  }
+
+  // END OF DEMO
+  // Here start the real (though minimal) tests of I3Hit
+
+  // FIXME:  need operator<<'s and a way to compare their output
+  template<> template<>
+  void object::test<7>()
+  {
+    I3Hit h, j;
+    ensure(h.Time() == 0);
+    j.Time(rand()/0.3234);
+    h = j;
+    ensure_distance("simple assignment", j.Time(), h.Time(), 0.0001);
+    ensure (h==j);
+    I3Hit k(h);
+    ensure (k==j);
+  }
+
+  /**
+   * checks chains of operations
+   */
+  template<> template<>
+  void object::test<42>()
+  {
+    I3Hit u, v, w, x;
+    x.Time(rand()/0.235234);
+    u = u = v = v = w = x;
+    ensure_distance("chain of assignment operators", u.Time(), x.Time(), 0.0001);
+  }
+}
+
