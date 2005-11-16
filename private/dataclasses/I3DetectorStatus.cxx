@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3DetectorStatus.h>
 
+I3DetectorStatus::~I3DetectorStatus() {}
+
 template <class Archive>
   void I3DetectorStatus::serialize(Archive& ar, unsigned version)
   {

@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3BasicCascade.h>
 
+I3BasicCascade::~I3BasicCascade(){}
+
 template <class Archive>
     void I3BasicCascade::serialize(Archive& ar, unsigned version)
   {

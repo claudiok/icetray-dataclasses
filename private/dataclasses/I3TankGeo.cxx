@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3TankGeo.h>
 
+I3TankGeo::~I3TankGeo() {}
+
 template <class Archive>
   void I3TankGeo::serialize(Archive& ar, unsigned version)
   {

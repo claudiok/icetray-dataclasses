@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCPMTResponse.h>
 
+I3MCPMTResponse::~I3MCPMTResponse(){}
+
 template <class Archive>
     void I3MCPMTResponse::serialize(Archive& ar, unsigned version){
     ar & make_nvp("StartTime", startTime_);

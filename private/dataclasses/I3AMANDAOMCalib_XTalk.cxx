@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3AMANDAOMCalib_XTalk.h>
 
+I3AMANDAOMCalib_XTalk::~I3AMANDAOMCalib_XTalk() {}
+
 template <class Archive>
   void I3AMANDAOMCalib_XTalk::serialize(Archive& ar, unsigned version)
   {

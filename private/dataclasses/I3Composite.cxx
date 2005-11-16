@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3Composite.h>
 
+I3Composite::~I3Composite() {}
+
 template <class Archive>
   void I3Composite::serialize(Archive& ar, unsigned version)
   {

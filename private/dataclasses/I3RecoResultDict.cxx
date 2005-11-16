@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3RecoResultDict.h>
 
+I3RecoResultDict::~I3RecoResultDict() {}
+
 template <class Archive>
   void I3RecoResultDict::serialize(Archive& ar, unsigned version)
   {

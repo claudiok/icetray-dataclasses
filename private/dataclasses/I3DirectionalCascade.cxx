@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3DirectionalCascade.h>
 
+I3DirectionalCascade::~I3DirectionalCascade(){}
+
 template <class Archive>
     void I3DirectionalCascade::serialize(Archive& ar, unsigned version)
   {

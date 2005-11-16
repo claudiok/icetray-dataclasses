@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCCascade.h>
 
+I3MCCascade::~I3MCCascade() {}
+
 template <class Archive>
     void I3MCCascade::serialize(Archive& ar, unsigned version){
     ar & make_nvp("I3MCCascade",

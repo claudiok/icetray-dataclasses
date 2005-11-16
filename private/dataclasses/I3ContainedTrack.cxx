@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3ContainedTrack.h>
 
+I3ContainedTrack::~I3ContainedTrack() {}
+
 template <class Archive>
     void I3ContainedTrack::serialize(Archive& ar, unsigned version)
   {

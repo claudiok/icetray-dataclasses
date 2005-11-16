@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3RecoPulseSeriesDict.h>
 
+I3RecoPulseSeriesDict::~I3RecoPulseSeriesDict() {}
+
 template <class Archive> void I3RecoPulseSeriesDict::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3RecoPulseSeriesDict", base_object< STLMapStoragePolicy<string,I3RecoPulseSeriesPtr> >(*this));

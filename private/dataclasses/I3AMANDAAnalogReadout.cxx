@@ -16,6 +16,8 @@
 
 using namespace std;
 
+I3AMANDAAnalogReadout::~I3AMANDAAnalogReadout() {}
+
 template <class Archive> 
 void 
 I3AMANDAAnalogReadout::save(Archive& ar, unsigned version) const

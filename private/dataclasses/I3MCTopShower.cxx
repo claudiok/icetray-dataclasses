@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCTopShower.h>
 
+I3MCTopShower::~I3MCTopShower() {}
+
 template <class Archive>
     void I3MCTopShower::serialize(Archive& ar, unsigned version)
   {

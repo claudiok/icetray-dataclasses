@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3RecoPulse.h>
 
+I3RecoPulse::~I3RecoPulse() {}
+
 template <class Archive> void I3RecoPulse::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("Time", time_);

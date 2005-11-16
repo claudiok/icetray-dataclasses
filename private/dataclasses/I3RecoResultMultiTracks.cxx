@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3RecoResultMultiTracks.h>
 
+I3RecoResultMultiTracks::~I3RecoResultMultiTracks() {}
+
 template <class Archive>
     void I3RecoResultMultiTracks::serialize(Archive& ar, unsigned version)
   {
