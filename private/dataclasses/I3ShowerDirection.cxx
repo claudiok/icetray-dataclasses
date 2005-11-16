@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3ShowerDirection.h>
 
+I3ShowerDirection::~I3ShowerDirection() {}
+
 template <class Archive>
     void I3ShowerDirection::serialize(Archive& ar, unsigned version)
   {

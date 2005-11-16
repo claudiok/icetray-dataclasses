@@ -25,6 +25,7 @@
  */
 class I3Cascade : public I3InIceParticle{
  public:
+  virtual ~I3Cascade();
   /**
    * indicates that this is not a track
    */

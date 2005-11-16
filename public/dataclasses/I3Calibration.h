@@ -27,8 +27,7 @@ public:
     I3Calibration()
 	{};
     
-    virtual ~I3Calibration()
-	{};
+    virtual ~I3Calibration();
     
     const I3InIceCalibration& GetInIceCalibration() const 
 	{

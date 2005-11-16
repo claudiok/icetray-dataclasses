@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3TriggerStatus.h>
 
+I3TriggerStatus::~I3TriggerStatus() {}
+
 template <class Archive>
   void I3TriggerStatus::serialize(Archive& ar, unsigned version)
   {

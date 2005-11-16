@@ -10,6 +10,8 @@ class I3DOMStatus
   I3CalibratedDOMStatusPtr calibratedStatus_;
 
  public:
+  virtual ~I3DOMStatus();
+
   void SetRawStatus(I3RawDOMStatusPtr status)
     {
       rawStatus_ = status;

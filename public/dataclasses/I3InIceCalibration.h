@@ -30,8 +30,7 @@ public:
     I3InIceCalibration()
 	{};
     
-    virtual ~I3InIceCalibration()
-	{};
+    virtual ~I3InIceCalibration();
     
     virtual void ToStream(ostream& o) const
 	{

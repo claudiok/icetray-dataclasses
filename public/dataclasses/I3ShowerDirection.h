@@ -26,8 +26,10 @@
 class I3ShowerDirection
 : public I3TopShowerImpl<I3Directional, I3NonLocalized, I3NonEnergetic>
 {
+public:
+  virtual ~I3ShowerDirection();
 
- private:
+private:
 
   friend class boost::serialization::access;
 

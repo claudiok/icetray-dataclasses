@@ -20,6 +20,7 @@
 class I3MonitoringHeader : public I3DataHeader
 {
  public:
+    virtual ~I3MonitoringHeader();
     int GetSize();
     int GetType();
     OMKey GetOMKey();

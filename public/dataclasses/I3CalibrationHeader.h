@@ -26,8 +26,7 @@ public:
     I3CalibrationHeader()
 	{};
 
-    virtual ~I3CalibrationHeader() 
-	{};
+    virtual ~I3CalibrationHeader();
 
     I3CalibrationHeader(const I3CalibrationHeader& calib)
 	{

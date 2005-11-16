@@ -20,6 +20,7 @@
 class I3IceTopParticle : public I3Particle
 {
  public:
+  virtual ~I3IceTopParticle();
   /**
    * indicates that this track is observable.
    */

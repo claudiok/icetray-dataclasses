@@ -30,6 +30,7 @@ public:
    * constructor
    */
   I3PMTPulse() {hitNum_=0;}
+  virtual ~I3PMTPulse();
   
   /**
    * @return the number of the hit (in the I3MCHitSeries) which caused this pulse
