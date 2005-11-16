@@ -17,6 +17,8 @@ I3Time::I3Time()
   daqTime_ = 0;
 }
 
+I3Time::~I3Time() {}
+
 I3Time::I3Time(unsigned int year, int64_t daqTime) : year_(year),daqTime_(daqTime)
 {
 }

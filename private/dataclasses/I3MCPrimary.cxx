@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCPrimary.h>
 
+I3MCPrimary::~I3MCPrimary() { }
+
 template <class Archive>
     void I3MCPrimary::serialize(Archive& ar, unsigned version)
   {

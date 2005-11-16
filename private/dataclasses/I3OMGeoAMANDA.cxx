@@ -1,5 +1,6 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3OMGeoAMANDA.h>
+I3OMGeoAMANDA::~I3OMGeoAMANDA() {}
 
 template <class Archive>
   void I3OMGeoAMANDA::serialize(Archive& ar, unsigned version)

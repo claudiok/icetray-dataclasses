@@ -14,8 +14,6 @@
 
 using namespace boost;
 
-ClassImp (I3StationMap);
-
 void I3StationMap::GoFirstTank () {
 
 #if 0
