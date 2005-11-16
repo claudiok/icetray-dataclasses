@@ -6,5 +6,6 @@
 #include "dataclasses/I3NonComposite.h"
 #include "dataclasses/I3Composite.h"
 
-I3TrackImpl<I3Infinite, I3NonEnergetic, I3NonComposite>::~I3TrackImpl() {}
-I3TrackImpl<I3Contained, I3Energetic, I3Composite>::~I3TrackImpl() {}
+template <typename ContainedT, typename EnergyT, typename CompositeT>
+I3TrackImpl<ContainedT, EnergyT, CompositeT>::~I3TrackImpl() {}
+
