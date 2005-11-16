@@ -30,8 +30,7 @@ public:
     I3AMANDACalibration()
 	{};
     
-    virtual ~I3AMANDACalibration()
-	{};
+    virtual ~I3AMANDACalibration();
     
     virtual void ToStream(ostream& o) const
 	{

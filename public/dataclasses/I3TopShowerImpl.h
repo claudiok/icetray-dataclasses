@@ -43,7 +43,7 @@ class I3TopShowerImpl : public I3TopShower,
   /**
    * destructor
    */
-  virtual ~I3TopShowerImpl() {};
+  virtual ~I3TopShowerImpl();
 
   /**
    * indicates whether or not the particle has a valid energy

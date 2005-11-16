@@ -32,12 +32,12 @@ class I3StationGeo : public TObject, public STLVectorStoragePolicy<I3SurfModuleG
   /**
    * constructor
    */
-  I3StationGeo () {}
+  I3StationGeo ();
 
   /**
    * virtual destructor
    */
-  virtual ~I3StationGeo () {}
+  virtual ~I3StationGeo ();
 
   /**
    * Get the OM Geo of the OM with this key
@@ -49,11 +49,7 @@ class I3StationGeo : public TObject, public STLVectorStoragePolicy<I3SurfModuleG
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3StationGeo", 
-		  base_object< STLVectorStoragePolicy<I3SurfModuleGeoPtr> >(*this));
-  }
+  void serialize(Archive& ar, unsigned version);
 
 };
 

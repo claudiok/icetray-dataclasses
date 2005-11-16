@@ -37,7 +37,7 @@ class I3StationHit : public TObject,
   /**
    * destructor
    */
-  virtual ~I3StationHit() {;}
+  virtual ~I3StationHit();
 
   /**
    * Get the station number

@@ -32,7 +32,7 @@ class I3Stopping
   double stopT_;
 
  public:
-  virtual ~I3Stopping() {}
+  virtual ~I3Stopping();
   /**
    * indicates that the particle is stopping
    */

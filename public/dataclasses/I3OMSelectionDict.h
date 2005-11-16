@@ -46,7 +46,7 @@ class I3OMSelectionDict : public TObject,
   /**
    * destructor
    */
-  virtual ~I3OMSelectionDict(){};
+  virtual ~I3OMSelectionDict();
 
 #ifndef __CINT__
 

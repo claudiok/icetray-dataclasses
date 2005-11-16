@@ -44,7 +44,7 @@ class I3GeometryHeader : public I3DataHeader
   /**
    * destructor
    */
-  virtual ~I3GeometryHeader() {;}
+  virtual ~I3GeometryHeader();
 
   /**
    * copy constructor just uses assignment

@@ -30,7 +30,7 @@ class I3CalibratedDOMStatus
 
  public:
   I3CalibratedDOMStatus(){}
-  virtual ~I3CalibratedDOMStatus(){}
+  virtual ~I3CalibratedDOMStatus();
   
   double GetSamplingRateA() const {return samplingRateA_;}
   

@@ -37,7 +37,7 @@ class I3DetectorStatusHeader : public I3DataHeader
   /**
    * destructor
    */
-  virtual ~I3DetectorStatusHeader() {;}
+  virtual ~I3DetectorStatusHeader();
 
   /**
    * copy constructor just uses assignment

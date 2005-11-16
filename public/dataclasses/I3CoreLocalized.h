@@ -27,7 +27,7 @@ class I3CoreLocalized
 
  public:
 
-  virtual ~I3CoreLocalized() {}
+  virtual ~I3CoreLocalized();
   /**
    * indicates that the core position is known
    */

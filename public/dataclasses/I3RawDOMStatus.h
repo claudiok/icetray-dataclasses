@@ -57,7 +57,7 @@ public:
     /**
      * destructor
      */
-    virtual ~I3RawDOMStatus(){}
+    virtual ~I3RawDOMStatus();
 
     /**
      * Gets the current trigger source setting
@@ -115,9 +115,10 @@ public:
 
     template <class Archive>
     void serialize(Archive& ar, unsigned version)
-	{
-	    //This method intentionally left blank
-	}
+     {
+         //This method intentionally left blank
+     }
+
 };	
 
 BOOST_IS_ABSTRACT(I3RawDOMStatus);

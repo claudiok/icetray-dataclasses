@@ -51,7 +51,7 @@ class I3TankHit : public TObject {
   /**
    * destructor
    */
-  virtual ~I3TankHit() {}
+  virtual ~I3TankHit();
   
   /**
    * @return the number of the tank for this response

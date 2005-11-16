@@ -34,7 +34,7 @@ class I3RecoHit : public I3Hit
   /**
    * destructor
    */
-  virtual ~I3RecoHit(){}
+  virtual ~I3RecoHit();
 
   /**
    * copy constructor just uses assignment

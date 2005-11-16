@@ -28,7 +28,7 @@ class I3RecoResultMultiTracks : public I3RecoResult, public STLVectorStoragePoli
   /**
    * destructor
    */
-  virtual ~I3RecoResultMultiTracks(){}
+  virtual ~I3RecoResultMultiTracks();
 
   /**
    * Print out all information about the I3Position to the given ostream

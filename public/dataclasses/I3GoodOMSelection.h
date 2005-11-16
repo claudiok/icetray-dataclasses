@@ -30,7 +30,7 @@ public:
   I3GoodOMSelection(const STLVectorStoragePolicy<OMKey> &theList) 
     : I3OMListSelection(theList) {};
   
-  virtual ~I3GoodOMSelection() {};
+  virtual ~I3GoodOMSelection();
  
   /**
    * Virtual function for deciding whether a given <OMKey, OMResponse>

@@ -37,7 +37,7 @@ public:
   /**
    * destructor
    */
-  virtual ~I3DirectionalCascade(){}
+  virtual ~I3DirectionalCascade();
 
  private:
 

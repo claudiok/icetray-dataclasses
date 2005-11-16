@@ -39,7 +39,7 @@ class I3TankGeo : public I3SurfModuleGeo {
   /**
    * virtual destructor
    */
-  virtual ~I3TankGeo() {}
+  virtual ~I3TankGeo();
 
   /**
    * The tank radius (outer radius)

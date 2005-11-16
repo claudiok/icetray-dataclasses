@@ -38,7 +38,7 @@ public:
   /**
    * destructor
    */
-  virtual ~I3BasicCascade(){}
+  virtual ~I3BasicCascade();
 
  private:
 

@@ -14,6 +14,9 @@
 #define I3NONDIRECTIONAL_H
 
 #include "Rtypes.h"
+#include "dataclasses/I3Particle.h"
+#include "dataclasses/I3Direction.h"
+
 
  /**
   * @brief The directional part of an I3Cascade implementation, representing 
@@ -37,17 +40,14 @@ class I3NonDirectional
       o<<"Direction: NonDirectional\n";
     }
 
-  virtual ~I3NonDirectional() { }
+  virtual ~I3NonDirectional();
 
  private:
 
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //This method intentionally left blank
-  }
+  void serialize(Archive& ar, unsigned version);
 
   //ROOT macro
   //ClassDef(I3NonDirectional,1);

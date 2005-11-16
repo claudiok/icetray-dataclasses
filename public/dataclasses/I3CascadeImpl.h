@@ -44,7 +44,7 @@ class I3CascadeImpl : public I3Cascade,
   /**
    * destructor
    */
-  virtual ~I3CascadeImpl() {};
+  virtual ~I3CascadeImpl();
 
   /**
    * indicates whether the cascade has an energy, and whether the Energy() 

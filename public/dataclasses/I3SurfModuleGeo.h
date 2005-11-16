@@ -42,7 +42,7 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
   /**
    * virtual destructor
    */
-  virtual ~I3SurfModuleGeo () {}
+  virtual ~I3SurfModuleGeo();
 
   /**
    * Get the position of the tank

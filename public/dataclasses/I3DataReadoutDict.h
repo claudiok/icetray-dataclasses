@@ -48,7 +48,7 @@ class I3DataReadoutDict : public TObject,
   /**
    * destructor 
    */
-  virtual ~I3DataReadoutDict(){};
+  virtual ~I3DataReadoutDict();
 
   virtual void ToStream(ostream& o) const
     {

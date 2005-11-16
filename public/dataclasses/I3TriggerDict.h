@@ -28,7 +28,7 @@ class I3TriggerDict : public TObject, public STLMapStoragePolicy<string,I3Trigge
 {
   public:
   I3TriggerDict() {};
-  virtual ~I3TriggerDict() {};
+  virtual ~I3TriggerDict();
 
   virtual void ToStream(ostream& o) const
   {

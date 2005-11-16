@@ -26,7 +26,7 @@ class I3RecoPulseSeriesDict : public TObject, public STLMapStoragePolicy<string,
 {
   public:
   I3RecoPulseSeriesDict(){}
-  virtual ~I3RecoPulseSeriesDict(){};
+  virtual ~I3RecoPulseSeriesDict();
 
   virtual void ToStream(ostream& o) const
   {

@@ -41,7 +41,7 @@ class I3EventHeader : public I3DataHeader{
   /**
    * destructor
    */
-  virtual ~I3EventHeader() { };
+  virtual ~I3EventHeader();
 
   /**
    * copy constructor.  Uses assignment operator.

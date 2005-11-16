@@ -37,7 +37,7 @@ class I3NonLocalized
    */
   void CopyTo(I3Particle& destination) const {}
 
-  virtual ~I3NonLocalized() { }
+  virtual ~I3NonLocalized();
 
  private:
 

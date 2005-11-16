@@ -39,7 +39,7 @@ class I3MCEventHeader : public I3EventHeader
   /**
    * destructor
    */
-  virtual ~I3MCEventHeader() {;}
+  virtual ~I3MCEventHeader();
 
  private:
   // instance data

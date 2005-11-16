@@ -40,7 +40,7 @@ public:
   
   I3Filter() {;}
   
-  virtual ~I3Filter() {;}
+  virtual ~I3Filter();
   
   
   virtual const string ToString() const

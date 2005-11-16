@@ -25,7 +25,7 @@ class I3RecoPulseSeries : public TObject, public STLVectorStoragePolicy<I3RecoPu
 {
   public:
   I3RecoPulseSeries() {};
-  virtual ~I3RecoPulseSeries() {};
+  virtual ~I3RecoPulseSeries();
 
   double GetFirstPulseTime()
   {

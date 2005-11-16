@@ -43,7 +43,7 @@ class I3InIceGeometry : public TObject,
   /**
    * default destructor
    */
-  virtual ~I3InIceGeometry(){};
+  virtual ~I3InIceGeometry();
 
   virtual void ToStream(ostream& o) const
     {

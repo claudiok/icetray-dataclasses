@@ -26,8 +26,7 @@ public:
     I3TestDaqRawDOMStatus()
 	{};
 
-    ~I3TestDaqRawDOMStatus()
-	{};
+    virtual ~I3TestDaqRawDOMStatus();
     
     const map<string,unsigned int>& GetRawStatus() const;
     map<string,unsigned int>& GetRawStatus();

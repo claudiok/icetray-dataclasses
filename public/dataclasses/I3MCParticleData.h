@@ -38,7 +38,7 @@ class I3MCParticleData : public TObject
   /**
    * destructor
    */
-  virtual ~I3MCParticleData(){}
+  virtual ~I3MCParticleData();
   
   /**
    * @return the primary track as constant

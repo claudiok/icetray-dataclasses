@@ -33,7 +33,7 @@ class I3RecoResultDict : public TObject,
   /**
    * destructor
    */
-  virtual ~I3RecoResultDict() {};
+  virtual ~I3RecoResultDict();
 
   virtual void ToStream(ostream& o) const
     {

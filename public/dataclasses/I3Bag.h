@@ -46,7 +46,7 @@ class I3Bag : public TObject, public STLMapStoragePolicy<string,TObjectPtr>
   /**
    * destructor
    */
-  ~I3Bag() {};
+  virtual ~I3Bag();
 
   virtual void ToStream(ostream& o) const
     {

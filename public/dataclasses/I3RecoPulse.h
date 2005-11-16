@@ -76,7 +76,7 @@ class I3RecoPulse : public TObject
    */
   void SetWidth(double width) {width_ = width;}
 
-  virtual ~I3RecoPulse() {}
+  virtual ~I3RecoPulse();
   virtual void ToStream(ostream& o) const
   {
     o<<"[I3RecoPulse:  Time:"<<time_<< "\n"

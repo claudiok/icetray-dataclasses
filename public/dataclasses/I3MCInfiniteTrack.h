@@ -38,7 +38,7 @@ class I3MCInfiniteTrack : public I3TrackImpl<I3Infinite,
   /**
    * destructor
    */
-  virtual ~I3MCInfiniteTrack(){}
+  virtual ~I3MCInfiniteTrack();
   
   /**
    * gives the weight of the track

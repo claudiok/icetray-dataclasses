@@ -39,7 +39,7 @@ class I3OMResponseMap : public TObject,
   /**
    * destructor
    */
-  virtual ~I3OMResponseMap(){};
+  virtual ~I3OMResponseMap();
 
   virtual void ToStream(ostream& o) const
     {

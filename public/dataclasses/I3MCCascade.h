@@ -39,7 +39,7 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
   /**
    * destructor
    */
-  virtual ~I3MCCascade() {}
+  virtual ~I3MCCascade();
   
   /**
    * gives the mc weight that this cascade contributes

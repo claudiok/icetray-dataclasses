@@ -33,7 +33,7 @@ class I3Composite
   /**
    * destructor
    */
-  virtual ~I3Composite(){}
+  virtual ~I3Composite();
 
   /**
    * indicates that the track is composite

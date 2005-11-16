@@ -43,7 +43,7 @@ class I3DetectorStatus : public TObject
   /**
    * destructor
    */
-  virtual ~I3DetectorStatus(){};
+  virtual ~I3DetectorStatus();
   
   /**
    * @return the InIce DOM settings dict 

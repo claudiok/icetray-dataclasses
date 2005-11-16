@@ -34,7 +34,7 @@ class I3TriggerStatusDict
   /**
    * destructor
    */
-  virtual ~I3TriggerStatusDict(){};
+  virtual ~I3TriggerStatusDict();
 
   /**
    * dumps the object to the indicated ostream

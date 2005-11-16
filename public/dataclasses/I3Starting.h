@@ -33,7 +33,7 @@ class I3Starting
 
  public:
 
-  virtual ~I3Starting() {}
+  virtual ~I3Starting();
   /**
    * indicates that the particle is starting
    */

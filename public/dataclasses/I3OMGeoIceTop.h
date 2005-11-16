@@ -41,7 +41,7 @@ class I3OMGeoIceTop : public I3OMGeo {
   /**
    * virtual destructor
    */
-  virtual ~I3OMGeoIceTop () {}
+  virtual ~I3OMGeoIceTop();
 
   /**
    * assignment operator

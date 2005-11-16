@@ -51,7 +51,7 @@ class I3MCOMResponse : public I3OMResponse
   /**
    * destructor
    */
-  virtual ~I3MCOMResponse(){}
+  virtual ~I3MCOMResponse();
   
   /**
    * @return a pointer to the PMTResponse as a const object

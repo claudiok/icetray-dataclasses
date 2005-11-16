@@ -40,7 +40,7 @@ public:
   
   I3OMResponseSelection() {};
   
-  virtual ~I3OMResponseSelection() {};
+  virtual ~I3OMResponseSelection();
  
   /**
    * Virtual function for deciding whether a given <OMKey, OMResponse>

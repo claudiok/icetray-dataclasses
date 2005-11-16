@@ -38,7 +38,7 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   /**
    * destructor
    */
-  virtual ~I3MCTrack(){}
+  virtual ~I3MCTrack();
   
   /**
    * gives the weight of the track

@@ -35,7 +35,7 @@ class I3IceCubeDOMStatusDict
   /**
    * destructor
    */
-  virtual ~I3IceCubeDOMStatusDict(){};
+  virtual ~I3IceCubeDOMStatusDict();
 
   /**
    * dumps the object to the indicated ostream

@@ -41,7 +41,7 @@ class I3RecoHitSeriesDict : public TObject,
   /**
    * destructor
    */
-  virtual ~I3RecoHitSeriesDict(){};
+  virtual ~I3RecoHitSeriesDict();
 
   virtual void ToStream(ostream& o) const
     {

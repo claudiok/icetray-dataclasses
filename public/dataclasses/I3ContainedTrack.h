@@ -39,7 +39,7 @@ class I3ContainedTrack : public I3TrackImpl<I3Contained,
   /**
    * destructor
    */
-  virtual ~I3ContainedTrack(){}
+  virtual ~I3ContainedTrack();
 
  private:
 

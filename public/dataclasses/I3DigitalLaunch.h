@@ -34,7 +34,7 @@ class I3DigitalLaunch : public TObject
   /**
    * default destructor
    */
-  virtual ~I3DigitalLaunch() {}
+  virtual ~I3DigitalLaunch();
 
   /**
    * streams the I3DigitalLaunch to the indicated ostream

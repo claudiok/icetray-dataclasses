@@ -37,7 +37,7 @@ public:
   /**
    * destructor
    */
-  virtual ~I3PMTPulseVect(){}
+  virtual ~I3PMTPulseVect();
 
   /**
    * PMT output voltage as f(time). This is a superposition of all pulses

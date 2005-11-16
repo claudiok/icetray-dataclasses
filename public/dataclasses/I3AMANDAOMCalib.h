@@ -76,7 +76,7 @@ class I3AMANDAOMCalib : public TObject
     omo_lowlim_=NAN;
     omo_highlim_=NAN;
   };
-  virtual ~I3AMANDAOMCalib() {};
+  virtual ~I3AMANDAOMCalib();
 
   double GetADC_A0()     {return adc_a0_;}
   double GetADC_Beta()   {return adc_beta_;}

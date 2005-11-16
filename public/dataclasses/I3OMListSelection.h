@@ -29,7 +29,7 @@ public:
   I3OMListSelection(const STLVectorStoragePolicy<OMKey> &list) 
     : omList_(list) {};
   
-  virtual ~I3OMListSelection() {};
+  virtual ~I3OMListSelection();
  
   /**
    * Virtual function for deciding whether a given <OMKey, OMResponse>
@@ -89,12 +89,12 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3OMResponseSelection", base_object<I3OMResponseSelection>(*this) );
-    ar & make_nvp("OMList", omList_ );
-  }
+  template <class Archive>  void serialize(Archive& ar, unsigned version)
+   {
+     ar & make_nvp("I3OMResponseSelection", base_object<I3OMResponseSelection>(*this) );
+     ar & make_nvp("OMList", omList_ );
+   }
+
 
 };
 

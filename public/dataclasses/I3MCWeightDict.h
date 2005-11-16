@@ -37,7 +37,7 @@ class I3MCWeightDict : public TObject, public STLMapStoragePolicy<string, float>
   /**
    * destructor 
    */
-  virtual ~I3MCWeightDict(){};
+  virtual ~I3MCWeightDict();
 
   virtual void ToStream(ostream& o) const
     {

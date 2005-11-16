@@ -39,7 +39,7 @@ public:
   /**
    * destructor
    */
-  virtual ~I3MCPMTResponse(){}
+  virtual ~I3MCPMTResponse();
   
   /**   
    * PMT output voltage as f(time) 

@@ -31,7 +31,7 @@ class I3RecoHitSeries : public TObject, public STLVectorStoragePolicy<I3RecoHitP
   /**
    * destructor
    */
-  virtual ~I3RecoHitSeries() {};
+  virtual ~I3RecoHitSeries();
 
   /**
    * earliest hit time

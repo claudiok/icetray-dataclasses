@@ -40,7 +40,7 @@ class I3MCEvent : public I3Event
   /**
    * default destructor
    */
-  virtual ~I3MCEvent(){}
+  virtual ~I3MCEvent();
 
   /**
    * The time that the simulation starts.  This is as opposed to the

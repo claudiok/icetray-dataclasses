@@ -126,7 +126,7 @@ public:
     /**
      * destructor
      */
-    virtual ~I3DOMLaunch(){;}
+    virtual ~I3DOMLaunch();
   
     /**
      * return and set ATWD/FADC launch time

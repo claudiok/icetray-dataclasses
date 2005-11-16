@@ -36,7 +36,7 @@ class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
   /**
    * destructor
    */
-  virtual ~I3MCHitSeries(){}
+  virtual ~I3MCHitSeries();
 
   /**
    * @return the weight associated with this series

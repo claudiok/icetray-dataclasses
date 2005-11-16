@@ -29,7 +29,7 @@ class I3TWRLaunch : public I3DigitalLaunch, public STLVectorStoragePolicy<I3TWRF
 
   public:
   I3TWRLaunch() {id=0; bin_size=0; baseline=0; stop_delay=0; threshold=0; optical=false;}
-  virtual ~I3TWRLaunch() {;}
+  virtual ~I3TWRLaunch();
   Int_t   GetId() {return id;}
   void    SetId(Int_t id_) {id=id_;}
   Float_t GetBinSize() {return bin_size;}

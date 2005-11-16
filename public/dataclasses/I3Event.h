@@ -54,7 +54,7 @@ class I3Event : public TObject
   /**
    * default destructor
    */
-  virtual ~I3Event() { };
+  virtual ~I3Event();
 
   /**
    * @return the OMResponseMap of the event as a constant object

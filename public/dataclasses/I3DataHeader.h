@@ -43,7 +43,7 @@ class I3DataHeader : public TObject
   /**
    * destructor
    */
-  virtual ~I3DataHeader() { };
+  virtual ~I3DataHeader();
 
   /**
    * Gets the start Time for this header

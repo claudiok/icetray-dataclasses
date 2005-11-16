@@ -31,7 +31,7 @@ class I3ParticleMultiMap : public TObject, public STLMultiMapStoragePolicy<strin
   /**
    * destructor
    */
-  virtual ~I3ParticleMultiMap(){};
+  virtual ~I3ParticleMultiMap();
 
   virtual void ToStream(ostream& o) const
     {
