@@ -57,7 +57,7 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3MCCascade,1);
+  //ClassDef(I3MCCascade,1);
 };
 
 /**

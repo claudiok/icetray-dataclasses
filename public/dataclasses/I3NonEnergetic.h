@@ -11,6 +11,7 @@
 #ifndef I3NONENERGETIC_H
 #define I3NONENERGETIC_H
 
+#include "dataclasses/I3Particle.h"
 #include "Rtypes.h"
 #include <cmath>
 
@@ -36,20 +37,16 @@ class I3NonEnergetic
       o<<"Energy: Non-energetic\n";
     }
 
-  virtual ~I3NonEnergetic() { }
+  virtual ~I3NonEnergetic();
 
  private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    //Nothing to serialize, but I think a serialize method
-    //is still needed
-  }
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+
   //ROOT macro
-  ClassDef(I3NonEnergetic,1);
+  //ClassDef(I3NonEnergetic,1);
 
 };
 

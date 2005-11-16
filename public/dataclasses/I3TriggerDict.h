@@ -53,8 +53,7 @@ class I3TriggerDict : public TObject, public STLMapStoragePolicy<string,I3Trigge
   private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT Macro
-  ClassDef(I3TriggerDict, 1);
+
 };
 
 /**

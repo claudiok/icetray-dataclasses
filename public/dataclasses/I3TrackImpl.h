@@ -43,7 +43,7 @@ class I3TrackImpl : public I3Track,
   /**
    * destructor
    */
-  virtual ~I3TrackImpl() {};
+  virtual ~I3TrackImpl();
 
   /**
    * indicates that the 'StartPos() ... ' parameters are valid
@@ -167,7 +167,7 @@ class I3TrackImpl : public I3Track,
     ar & make_nvp("Comp", base_object<CompositeType>(*this));
   }
   // ROOT macro
-  ClassDef(I3TrackImpl,1);
+  //ClassDef(I3TrackImpl,1);
 };
 
 

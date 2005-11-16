@@ -91,7 +91,7 @@ class I3MCParticleData : public TObject
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3MCParticleData,1);
+
 };
 
 inline ostream& operator<<(ostream& o, const I3MCParticleData& data)

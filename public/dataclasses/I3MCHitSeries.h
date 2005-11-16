@@ -93,8 +93,6 @@ class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
   friend class boost::serialization::access;
 
 template <class Archive> void serialize(Archive & ar, unsigned version);
-//ROOT Macro
-  ClassDef(I3MCHitSeries,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3MCHitSeries& series)

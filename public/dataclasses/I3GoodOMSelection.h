@@ -88,7 +88,7 @@ private:
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3GoodOMSelection,1);
+
 };
 
 #endif

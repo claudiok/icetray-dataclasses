@@ -94,7 +94,7 @@ class I3CoreLocalized
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3CoreLocalized,1);
+  //ClassDef(I3CoreLocalized,1);
 };
 
 #endif

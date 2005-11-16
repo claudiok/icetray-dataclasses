@@ -158,8 +158,6 @@ class I3Event : public TObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 
-  //ROOT macro
-  ClassDef(I3Event, 1);
 };
 
 

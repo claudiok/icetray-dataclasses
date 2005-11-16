@@ -85,8 +85,6 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
 
   float orientation_; // rotation angle around the z-axis. (radians)
 
-  ClassDef (I3SurfModuleGeo, 1);
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

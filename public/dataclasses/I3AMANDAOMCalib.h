@@ -134,7 +134,6 @@ class I3AMANDAOMCalib : public TObject
     return out.str();
   };
 
-  ClassDef(I3AMANDAOMCalib,1);
 
   friend class boost::serialization::access;
 

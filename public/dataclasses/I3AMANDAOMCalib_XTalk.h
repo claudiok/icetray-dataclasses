@@ -59,7 +59,6 @@ class I3AMANDAOMCalib_XTalk : public TObject
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3AMANDAOMCalib_XTalk,1);
 };
 
 /**

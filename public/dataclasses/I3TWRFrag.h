@@ -50,7 +50,7 @@ class I3TWRFrag : public TObject
     ar & make_nvp("Waveform",waveform);
   }
 
-  ClassDef(I3TWRFrag,1);
+  //ClassDef(I3TWRFrag,1);
 };
 
 /**

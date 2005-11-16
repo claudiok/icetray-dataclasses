@@ -38,12 +38,12 @@ class I3PrimaryImpl : public I3Primary,
   /**
    * constructor
    */
-  I3PrimaryImpl() {};
+  I3PrimaryImpl() {}
 
   /**
    * destructor
    */
-  virtual ~I3PrimaryImpl() {};
+  virtual ~I3PrimaryImpl();
 
   /**
    * indicates whether or not the particle has a valid energy
@@ -107,7 +107,7 @@ class I3PrimaryImpl : public I3Primary,
   }
 
   //ROOT macro
-  ClassDef(I3PrimaryImpl,1);
+  //ClassDef(I3PrimaryImpl,1);
 };
 
 #endif

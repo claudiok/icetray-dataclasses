@@ -58,9 +58,6 @@ class I3IceCubeDOMStatusDict
   I3IceCubeDOMStatusDict(const I3IceCubeDOMStatusDict& rhs);
   const I3IceCubeDOMStatusDict& operator=(const I3IceCubeDOMStatusDict& rhs);
 
-  // ROOT macro
-  ClassDef(I3IceCubeDOMStatusDict,1);
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

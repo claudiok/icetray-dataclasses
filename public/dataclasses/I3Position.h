@@ -252,7 +252,7 @@ class I3Position : public TObject
   void CalcCarSphFromCyl();
 
   // ROOT macro
-  ClassDef(I3Position,1)
+  //ClassDef(I3Position,1)
 };
 
 /**

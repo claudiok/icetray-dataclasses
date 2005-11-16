@@ -39,8 +39,6 @@ class I3MonitoringHeader : public I3DataHeader
     int type_;
     int run_;
 
- ClassDef(I3MonitoringHeader,1);
-
   friend class boost::serialization::access;
 
   template <class Archive>

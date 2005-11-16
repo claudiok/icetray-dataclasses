@@ -57,9 +57,6 @@ class I3TriggerStatusDict
   I3TriggerStatusDict(const I3TriggerStatusDict& rhs);
   const I3TriggerStatusDict& operator=(const I3TriggerStatusDict& rhs);
 
-  // ROOT macro
-  ClassDef(I3TriggerStatusDict,1);
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

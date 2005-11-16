@@ -96,7 +96,6 @@ private:
     ar & make_nvp("OMList", omList_ );
   }
 
-  ClassDef(I3OMListSelection,1);
 };
 
 BOOST_IS_ABSTRACT(I3OMListSelection);

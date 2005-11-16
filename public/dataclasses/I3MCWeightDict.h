@@ -64,8 +64,7 @@ class I3MCWeightDict : public TObject, public STLMapStoragePolicy<string, float>
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3MCWeightDict,1);
+
 };
 
 

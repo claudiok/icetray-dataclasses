@@ -65,7 +65,7 @@ public:
    */
   void SetID(const int hitid) { hitID_ = hitid; }
 
-  virtual ~I3Hit() {}
+  virtual ~I3Hit();
   virtual void ToStream(ostream& o) const
     {
       o<<"[I3Hit: Time:"<<time_<<" ]\n";
@@ -86,7 +86,7 @@ private:
 double time_;
   int hitID_;
 
-  ClassDef(I3Hit,1);
+  //ClassDef(I3Hit,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3Hit& hit)

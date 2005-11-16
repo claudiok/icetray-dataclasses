@@ -37,14 +37,14 @@ class I3RecoResult : public TObject
   /**
    * destructor
    */
-  virtual ~I3RecoResult() {}
+  virtual ~I3RecoResult();
 
   /**
    * streams a RecoResult to an arbitrary ostream
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ "<<IsA()->GetName()<<" ]\n";
+      o<<"[ I3RecoResult ] Output withheld\n";
     }
 
   /**
@@ -63,7 +63,7 @@ class I3RecoResult : public TObject
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3RecoResult, 1);
+  //ClassDef(I3RecoResult, 1);
 };
 
 /**

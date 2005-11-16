@@ -69,9 +69,6 @@ class I3InIceGeometry : public TObject,
 
   private:
 
-  // ROOT macro
-  ClassDef(I3InIceGeometry,1);
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

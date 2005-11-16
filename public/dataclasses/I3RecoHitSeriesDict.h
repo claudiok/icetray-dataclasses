@@ -73,8 +73,7 @@ class I3RecoHitSeriesDict : public TObject,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3RecoHitSeriesDict,1);
+
 };
 
 inline ostream& operator<<(ostream& o, const I3RecoHitSeriesDict& dict)

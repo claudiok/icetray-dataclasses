@@ -20,6 +20,7 @@
 class I3InIceParticle : public I3Particle
 {
  public:
+  virtual ~I3InIceParticle();
   /**
    * indicates that this track is observable.
    */
@@ -66,7 +67,7 @@ class I3InIceParticle : public I3Particle
     ar & make_nvp("I3Particle",base_object<I3Particle>(*this));
   }
   //ROOT macro
-  ClassDef(I3InIceParticle,1);
+  //ClassDef(I3InIceParticle,1);
 };
 
 BOOST_IS_ABSTRACT(I3InIceParticle);

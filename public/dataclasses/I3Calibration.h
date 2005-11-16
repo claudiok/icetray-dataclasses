@@ -73,7 +73,6 @@ private:
     I3Calibration(const I3Calibration& calibration);
     const I3Calibration& operator=(const I3Calibration& calibration);
 
-    ClassDef(I3Calibration,1);
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

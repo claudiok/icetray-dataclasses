@@ -28,7 +28,7 @@ class I3RecoResultSingleParticle : public I3RecoResult
 
  public:
   I3RecoResultSingleParticle() { } // particle will automatically be "NULL" 
-  virtual ~I3RecoResultSingleParticle() { }
+  virtual ~I3RecoResultSingleParticle();
 
   /**
    * Retrieves the particle in this reco result as a constant object
@@ -78,7 +78,7 @@ class I3RecoResultSingleParticle : public I3RecoResult
   
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3RecoResultSingleParticle, 1);
+  //ClassDef(I3RecoResultSingleParticle, 1);
 };
 
 /**

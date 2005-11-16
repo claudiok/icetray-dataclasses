@@ -41,9 +41,7 @@ class I3DigitalLaunch : public TObject
    */
   virtual void ToStream(ostream& o) const
     {
-        o<<"[ "
-         <<IsA()->GetName()
-         <<" ]\n";
+        o<<"[ I3DigitalLaunch ] Output withheld\n";
     }
 
   virtual string ToString() const
@@ -59,7 +57,7 @@ class I3DigitalLaunch : public TObject
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3DigitalLaunch,1);
+  //ClassDef(I3DigitalLaunch,1);
 };
 
 /**

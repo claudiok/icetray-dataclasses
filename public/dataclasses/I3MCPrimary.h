@@ -29,11 +29,13 @@ class I3MCPrimary : public I3PrimaryImpl<I3Directional,
 	                                 I3Localized,
 	                                 I3Energetic> 
 {
+public:
+  virtual ~I3MCPrimary();
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3MCPrimary,1);
+  //ClassDef(I3MCPrimary,1);
 };
 
 /**

@@ -53,7 +53,6 @@ public:
 	};
 private:
   
-    ClassDef(I3CalibrationHeader,1);
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

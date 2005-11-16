@@ -47,8 +47,7 @@ class I3MCEventHeader : public I3EventHeader
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT Macro
-  ClassDef(I3MCEventHeader,1);
+
 };
 
 /**

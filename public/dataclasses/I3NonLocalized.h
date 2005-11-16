@@ -45,7 +45,7 @@ class I3NonLocalized
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3NonLocalized,1);
+  //ClassDef(I3NonLocalized,1);
 };
 
 #endif

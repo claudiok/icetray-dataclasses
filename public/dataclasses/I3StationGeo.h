@@ -46,8 +46,6 @@ class I3StationGeo : public TObject, public STLVectorStoragePolicy<I3SurfModuleG
 
  private:
 
-  ClassDef (I3StationGeo, 1);
-
   friend class boost::serialization::access;
 
   template <class Archive>

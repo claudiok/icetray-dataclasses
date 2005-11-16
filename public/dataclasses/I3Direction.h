@@ -237,7 +237,7 @@ class I3Direction : public TObject
   }
 
   // ROOT macro
-  ClassDef(I3Direction,1)
+  //ClassDef(I3Direction,1)
 };
 
 /**

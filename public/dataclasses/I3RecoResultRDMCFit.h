@@ -35,7 +35,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleParticle
 
  public:
   I3RecoResultRDMCFit(){}
-  virtual ~I3RecoResultRDMCFit(){}
+  virtual ~I3RecoResultRDMCFit();
 
   /**
    * @return the type of this fit as a const object
@@ -75,7 +75,7 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleParticle
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3RecoResultRDMCFit,1);
+  //ClassDef(I3RecoResultRDMCFit,1);
 };
 
 /**

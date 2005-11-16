@@ -50,7 +50,7 @@ class I3RecoResultMultiTracks : public I3RecoResult, public STLVectorStoragePoli
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3RecoResultMultiTracks,1);
+  //ClassDef(I3RecoResultMultiTracks,1);
 };
 
 /**

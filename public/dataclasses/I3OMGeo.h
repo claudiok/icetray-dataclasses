@@ -76,7 +76,7 @@ class I3OMGeo : public TObject
   /**
    * destructor
    */
-  virtual ~I3OMGeo(){}
+  virtual ~I3OMGeo();
 
   /**
    * @return the identity of this OM, either AMANDA or IceCube 
@@ -149,8 +149,7 @@ class I3OMGeo : public TObject
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ "
-       <<IsA()->GetName()
+      o<<"[ I3OMGeo ]\n"
        <<" X:"
        <<position_.GetX()
        <<" Y:"
@@ -178,7 +177,7 @@ class I3OMGeo : public TObject
 
 
   //ROOT macro
-  ClassDef(I3OMGeo,1);
+  //ClassDef(I3OMGeo,1);
 
   friend class boost::serialization::access;
 

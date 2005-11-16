@@ -59,7 +59,7 @@ class I3Bag : public TObject, public STLMapStoragePolicy<string,TObjectPtr>
 	    o<<"[ Null TObject ]\n";
 	  else
         o<<"[ "
-         <<iter->second->IsA()->GetName()
+         <<iter->first
          <<" ]"
          <<"\n";
 	}
@@ -75,8 +75,6 @@ class I3Bag : public TObject, public STLMapStoragePolicy<string,TObjectPtr>
 
  private:
 
-  // ROOT macro
-  ClassDef(I3Bag,1);
 };
 /**
  * streaming operator

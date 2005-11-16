@@ -61,8 +61,6 @@ class I3TopGeometry : public TObject {
 
   I3StationMap stationMap_; //|| the stations
  
-  ClassDef (I3TopGeometry,2);  // changed Thu Sep  2 17:08:19 EDT 2004
-
   friend class boost::serialization::access;
 
   template <class Archive>

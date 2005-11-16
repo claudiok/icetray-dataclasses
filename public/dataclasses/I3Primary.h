@@ -20,6 +20,7 @@
  */
 class I3Primary : public I3Particle{
  public:
+  virtual ~I3Primary();
   /**
    * indicates that the particle is not an observable particle
    */
@@ -57,7 +58,7 @@ class I3Primary : public I3Particle{
   }
 
   // ROOT macro
-  ClassDef(I3Primary,1);
+  //ClassDef(I3Primary,1);
 };
 
 

@@ -62,8 +62,6 @@ class I3RecoResultDict : public TObject,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3RecoResultDict,1);
 
 };
 

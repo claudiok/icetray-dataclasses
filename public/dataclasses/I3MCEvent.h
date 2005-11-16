@@ -103,8 +103,6 @@ class I3MCEvent : public I3Event
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 
-  //ROOT macro
-  ClassDef(I3MCEvent, 1);
 };
 
 /**

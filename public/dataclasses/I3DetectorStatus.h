@@ -132,9 +132,6 @@ class I3DetectorStatus : public TObject
   I3DetectorStatus(const I3DetectorStatus& rhs);
   const I3DetectorStatus& operator=(const I3DetectorStatus& rhs);
 
-  //ROOT macro
-  ClassDef(I3DetectorStatus,1);
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

@@ -47,7 +47,7 @@ class I3TopShower : public I3IceTopParticle{
   }
 
   // ROOT macro
-  ClassDef(I3TopShower,1);
+  //ClassDef(I3TopShower,1);
 };
 
 /**

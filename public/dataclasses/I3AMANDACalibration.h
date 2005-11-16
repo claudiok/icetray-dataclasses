@@ -70,7 +70,6 @@ public:
     //I3InIceCalibration(const I3InIceCalibration& calibration);
     //const I3InIceCalibration& operator=(const I3InIceCalibration& calibration);
     
-    ClassDef(I3AMANDACalibration,1);    
 
   friend class boost::serialization::access;
 

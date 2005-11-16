@@ -84,7 +84,7 @@ class I3TopShowerImpl : public I3TopShower,
   }
 
   //ROOT macro
-  ClassDef(I3TopShowerImpl,1);
+  //ClassDef(I3TopShowerImpl,1);
 };
 
 #endif

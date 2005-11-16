@@ -108,7 +108,7 @@ class I3MCOMResponse : public I3OMResponse
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3MCOMResponse,1);
+  //ClassDef(I3MCOMResponse,1);
 };
 
 /** 

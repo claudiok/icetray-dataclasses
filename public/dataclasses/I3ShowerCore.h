@@ -30,7 +30,7 @@ class I3ShowerCore
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef (I3ShowerCore, 1);
+//ClassDef (I3ShowerCore, 1);
 };
        
 /**

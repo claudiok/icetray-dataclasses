@@ -53,8 +53,6 @@ class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3St
 
  private:
 
-  ClassDef (I3StationMap, 1);
-
   friend class boost::serialization::access;
 
   template <class Archive>

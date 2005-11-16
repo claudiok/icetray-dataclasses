@@ -101,8 +101,6 @@ class I3GeometryHeader : public I3DataHeader
 
  private:
   
-  // ROOT macro
-  ClassDef(I3GeometryHeader,1);
 
   friend class boost::serialization::access;
 
