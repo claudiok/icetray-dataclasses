@@ -2,12 +2,20 @@
 // $Id$
 
 #include <iostream>
+#include <dataclasses/BoostHeaders.h>
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
 
 using namespace I3Constants;
 using namespace I3Units;
+
+template <class Archive> void I3Direction::serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Zen", zenith_);
+    ar & make_nvp("Azi", azimuth_);
+  }
+I3_SERIALIZABLE(I3Direction)
 
 //-----------------------------------------------------------
 I3Direction::I3Direction()

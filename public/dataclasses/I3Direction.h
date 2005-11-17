@@ -230,11 +230,7 @@ class I3Direction : public TObject
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Zen", zenith_);
-    ar & make_nvp("Azi", azimuth_);
-  }
+  void serialize(Archive& ar, unsigned version);
 
   // ROOT macro
   ClassDef(I3Direction,1)

@@ -240,12 +240,7 @@ class I3Position : public TObject
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("X", x_);
-    ar & make_nvp("Y", y_);
-    ar & make_nvp("Z", z_);
-  }
+  void serialize(Archive& ar, unsigned version);
 
   void CalcSphCylFromCar() const;
   void CalcCarCylFromSph();

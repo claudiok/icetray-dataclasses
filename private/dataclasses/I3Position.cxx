@@ -2,12 +2,25 @@
 // $Id$
 
 #include <iostream>
+#include <dataclasses/BoostHeaders.h>
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
 
 using namespace I3Constants;
 using namespace I3Units;
+
+//Serialize method
+//-----------------------------------------------
+template <class Archive> 
+  void I3Position::serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("X", x_);
+    ar & make_nvp("Y", y_);
+    ar & make_nvp("Z", z_);
+  }
+
+I3_SERIALIZABLE(I3Position);
 
 //-----------------------------------------------------------
 I3Position::I3Position()
