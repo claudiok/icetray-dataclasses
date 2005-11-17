@@ -39,7 +39,7 @@ class I3ContainedTrack : public I3TrackImpl<I3Contained,
   /**
    * destructor
    */
-  virtual ~I3ContainedTrack(){}
+  virtual ~I3ContainedTrack();
 
  private:
 
@@ -47,7 +47,7 @@ class I3ContainedTrack : public I3TrackImpl<I3Contained,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3ContainedTrack,1);
+  //ClassDef(I3ContainedTrack,1);
 };
 
 /**

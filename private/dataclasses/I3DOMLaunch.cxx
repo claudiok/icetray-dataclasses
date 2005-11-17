@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3DOMLaunch.h>
 
+I3DOMLaunch::~I3DOMLaunch() {}
+
 I3DOMLaunch::I3DOMLaunch() 
     : startTime_(0.0)
 {}

@@ -34,7 +34,7 @@ class I3RecoHit : public I3Hit
   /**
    * destructor
    */
-  virtual ~I3RecoHit(){}
+  virtual ~I3RecoHit();
 
   /**
    * copy constructor just uses assignment
@@ -53,7 +53,7 @@ class I3RecoHit : public I3Hit
 
  private:
   //ROOT macro
-  ClassDef(I3RecoHit, 1);
+  //ClassDef(I3RecoHit, 1);
 
   friend class boost::serialization::access;
 

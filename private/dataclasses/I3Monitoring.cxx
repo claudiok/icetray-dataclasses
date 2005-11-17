@@ -1,5 +1,7 @@
 #include "dataclasses/I3Monitoring.h"
 
+I3Monitoring::~I3Monitoring() {}
+
 float I3Monitoring::GetTempCelcius() const
 {
     float temp;

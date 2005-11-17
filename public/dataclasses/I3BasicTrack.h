@@ -36,13 +36,13 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
   /**
    * destructor
    */
-  virtual ~I3BasicTrack(){}
+  virtual ~I3BasicTrack();
  private:
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3BasicTrack,1);
+  //ClassDef(I3BasicTrack,1);
 };
 
 /**

@@ -26,7 +26,7 @@ class I3TWRFrag : public TObject
 
   public:
   I3TWRFrag() {id=0; frag_start_time=NAN; frag_start_bin=0;}
-  virtual ~I3TWRFrag() {;}
+  virtual ~I3TWRFrag();
 
   Int_t          GetId() {return id;}
   void           SetId(Int_t id_) {id=id_;}
@@ -41,16 +41,9 @@ class I3TWRFrag : public TObject
 
   private:
   friend class boost::serialization::access;
-  template<class Archive> void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("ID",id);
-    ar & make_nvp("ParentID",parent_id);
-    ar & make_nvp("FragStartTime",frag_start_time);
-    ar & make_nvp("FragStartBin",frag_start_bin);
-    ar & make_nvp("Waveform",waveform);
-  }
+  template<class Archive> void serialize(Archive& ar, unsigned version);
 
-  ClassDef(I3TWRFrag,1);
+  //ClassDef(I3TWRFrag,1);
 };
 
 /**

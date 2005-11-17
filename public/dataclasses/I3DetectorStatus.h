@@ -43,7 +43,7 @@ class I3DetectorStatus : public TObject
   /**
    * destructor
    */
-  virtual ~I3DetectorStatus(){};
+  virtual ~I3DetectorStatus();
   
   /**
    * @return the InIce DOM settings dict 
@@ -131,9 +131,6 @@ class I3DetectorStatus : public TObject
   // copy and assignment private
   I3DetectorStatus(const I3DetectorStatus& rhs);
   const I3DetectorStatus& operator=(const I3DetectorStatus& rhs);
-
-  //ROOT macro
-  ClassDef(I3DetectorStatus,1);
 
   friend class boost::serialization::access;
 

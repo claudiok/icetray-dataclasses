@@ -40,7 +40,7 @@ public:
   
   I3Filter() {;}
   
-  virtual ~I3Filter() {;}
+  virtual ~I3Filter();
   
   
   virtual const string ToString() const
@@ -61,7 +61,7 @@ private:
   friend class boost::serialization::access;
   
   template <class Archive> void serialize(Archive & ar, unsigned version);
-  ClassDef(I3Filter,1);
+
 };
 
 /**

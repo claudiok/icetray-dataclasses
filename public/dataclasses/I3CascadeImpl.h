@@ -44,7 +44,7 @@ class I3CascadeImpl : public I3Cascade,
   /**
    * destructor
    */
-  virtual ~I3CascadeImpl() {};
+  virtual ~I3CascadeImpl();
 
   /**
    * indicates whether the cascade has an energy, and whether the Energy() 
@@ -118,7 +118,7 @@ class I3CascadeImpl : public I3Cascade,
     ar & make_nvp("CompositeType", base_object<CompositeType>(*this));
   }
   // ROOT macro
-  ClassDef(I3CascadeImpl,1);
+  //ClassDef(I3CascadeImpl,1);
 };
 
 #endif

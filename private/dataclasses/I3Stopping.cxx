@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3Stopping.h>
 
+I3Stopping::~I3Stopping() {}
+
 template <class Archive>
   void I3Stopping::serialize(Archive& ar, unsigned version)
   {

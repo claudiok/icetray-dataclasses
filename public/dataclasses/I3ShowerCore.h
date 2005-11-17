@@ -26,11 +26,13 @@
 class I3ShowerCore
 : public I3TopShowerImpl<I3NonDirectional, I3CoreLocalized, I3NonEnergetic>
 {
-
+public:
+  virtual ~I3ShowerCore();
+private:
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef (I3ShowerCore, 1);
+//ClassDef (I3ShowerCore, 1);
 };
        
 /**

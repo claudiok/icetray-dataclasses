@@ -37,7 +37,7 @@ public:
   /**
    * destructor
    */
-  virtual ~I3DirectionalCascade(){}
+  virtual ~I3DirectionalCascade();
 
  private:
 
@@ -45,7 +45,7 @@ public:
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3DirectionalCascade,1);
+  //ClassDef(I3DirectionalCascade,1);
 };
 
 /** 

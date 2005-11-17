@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3TWRLaunch.h>
 
+I3TWRLaunch::~I3TWRLaunch() {}
+
 template<class Archive> 
 void 
 I3TWRLaunch::serialize (Archive& ar, unsigned version)

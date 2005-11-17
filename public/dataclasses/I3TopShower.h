@@ -21,6 +21,8 @@
 class I3TopShower : public I3IceTopParticle{
  public:
    
+  virtual ~I3TopShower();
+
   /**
    * indicatess that the particle has a core position, and so
    * asking CoreX, and CoreY and CoreT is legit.
@@ -47,7 +49,7 @@ class I3TopShower : public I3IceTopParticle{
   }
 
   // ROOT macro
-  ClassDef(I3TopShower,1);
+  //ClassDef(I3TopShower,1);
 };
 
 /**

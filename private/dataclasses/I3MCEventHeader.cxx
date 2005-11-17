@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCEventHeader.h>
 
+I3MCEventHeader::~I3MCEventHeader() {}
+
 template <class Archive>
   void I3MCEventHeader::serialize(Archive& ar, unsigned version)
   {

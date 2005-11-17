@@ -20,6 +20,7 @@
 class I3MonitoringHeader : public I3DataHeader
 {
  public:
+    virtual ~I3MonitoringHeader();
     int GetSize();
     int GetType();
     OMKey GetOMKey();
@@ -38,8 +39,6 @@ class I3MonitoringHeader : public I3DataHeader
     int size_;
     int type_;
     int run_;
-
- ClassDef(I3MonitoringHeader,1);
 
   friend class boost::serialization::access;
 

@@ -40,7 +40,7 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
   /**
    * destructor
    */
-  virtual ~I3DigitalReadout() {}
+  virtual ~I3DigitalReadout();
 
   /**
    * dumps the class to the given ostream
@@ -66,7 +66,7 @@ class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3D
   I3DigitalReadout& operator=(const I3DigitalReadout& other);
 
   // ROOT macro
-  ClassDef(I3DigitalReadout,1);
+  //ClassDef(I3DigitalReadout,1);
 };
 
 /*

@@ -32,7 +32,7 @@ class I3Stopping
   double stopT_;
 
  public:
-  virtual ~I3Stopping() {}
+  virtual ~I3Stopping();
   /**
    * indicates that the particle is stopping
    */
@@ -174,7 +174,7 @@ class I3Stopping
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3Stopping,1)
+  //ClassDef(I3Stopping,1)
 };
 
 #endif //I3STOPPING_H

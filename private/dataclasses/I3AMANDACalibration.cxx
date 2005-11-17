@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3AMANDACalibration.h>
 
+I3AMANDACalibration::~I3AMANDACalibration(){}
+
 template <class Archive>
   void I3AMANDACalibration::serialize(Archive& ar, unsigned version)
   {

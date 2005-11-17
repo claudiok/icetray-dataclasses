@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3RecoResultSingleParticle.h>
 
+I3RecoResultSingleParticle::~I3RecoResultSingleParticle() {}
+
 template <class Archive>
   void I3RecoResultSingleParticle::serialize(Archive& ar, unsigned version)
   {

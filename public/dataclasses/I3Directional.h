@@ -24,7 +24,7 @@ class I3Directional
   I3Direction dir_;
  public:
 
-  virtual ~I3Directional() {}
+  virtual ~I3Directional();
   /**
    * indicates that this cascade has a direction
    */
@@ -101,7 +101,7 @@ class I3Directional
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3Directional,1);
+  //ClassDef(I3Directional,1);
 };
 
 #endif // I3DIRECTIONAL

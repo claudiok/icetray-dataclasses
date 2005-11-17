@@ -265,7 +265,6 @@ class STLVectorStoragePolicy  {
   // dont do this it is messy
   virtual ~STLVectorStoragePolicy() { }
 
-  //  ClassDef(StoragePolicy,1);
 };
 
 #endif

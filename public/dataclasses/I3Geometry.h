@@ -37,7 +37,7 @@ class I3Geometry : public TObject
   /**
    * destructor
    */
-  virtual ~I3Geometry(){};
+  virtual ~I3Geometry();
 
   /**
    * @return the In-Ice geometry as a constant object
@@ -71,9 +71,6 @@ class I3Geometry : public TObject
     }
 
  private:
-
-  //ROOT macro
-  ClassDef(I3Geometry,1);
 
   friend class boost::serialization::access;
 

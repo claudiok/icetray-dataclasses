@@ -41,7 +41,7 @@ class I3OMGeoIceTop : public I3OMGeo {
   /**
    * virtual destructor
    */
-  virtual ~I3OMGeoIceTop () {}
+  virtual ~I3OMGeoIceTop();
 
   /**
    * assignment operator
@@ -62,7 +62,7 @@ class I3OMGeoIceTop : public I3OMGeo {
 
  private:
 
-  ClassDef (I3OMGeoIceTop, 1);
+  //ClassDef (I3OMGeoIceTop, 1);
 
   friend class boost::serialization::access;
 

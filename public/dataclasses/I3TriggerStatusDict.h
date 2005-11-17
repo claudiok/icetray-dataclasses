@@ -34,7 +34,7 @@ class I3TriggerStatusDict
   /**
    * destructor
    */
-  virtual ~I3TriggerStatusDict(){};
+  virtual ~I3TriggerStatusDict();
 
   /**
    * dumps the object to the indicated ostream
@@ -56,9 +56,6 @@ class I3TriggerStatusDict
   // copy and assignment are private
   I3TriggerStatusDict(const I3TriggerStatusDict& rhs);
   const I3TriggerStatusDict& operator=(const I3TriggerStatusDict& rhs);
-
-  // ROOT macro
-  ClassDef(I3TriggerStatusDict,1);
 
   friend class boost::serialization::access;
 

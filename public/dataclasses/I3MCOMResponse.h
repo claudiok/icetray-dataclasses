@@ -51,7 +51,7 @@ class I3MCOMResponse : public I3OMResponse
   /**
    * destructor
    */
-  virtual ~I3MCOMResponse(){}
+  virtual ~I3MCOMResponse();
   
   /**
    * @return a pointer to the PMTResponse as a const object
@@ -108,7 +108,7 @@ class I3MCOMResponse : public I3OMResponse
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3MCOMResponse,1);
+  //ClassDef(I3MCOMResponse,1);
 };
 
 /** 

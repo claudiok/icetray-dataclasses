@@ -39,7 +39,7 @@ class I3OMResponseMap : public TObject,
   /**
    * destructor
    */
-  virtual ~I3OMResponseMap(){};
+  virtual ~I3OMResponseMap();
 
   virtual void ToStream(ostream& o) const
     {
@@ -68,8 +68,7 @@ class I3OMResponseMap : public TObject,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3OMResponseMap,1);
+
 };
 
 /**

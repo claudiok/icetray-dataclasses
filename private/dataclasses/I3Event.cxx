@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3Event.h>
 
+I3Event::~I3Event() {}
+
 template <class Archive>
 void 
 I3Event::serialize(Archive& ar, unsigned version)

@@ -86,8 +86,7 @@ class I3DOMCalibration
 
 public:
     I3DOMCalibration();
-    virtual ~I3DOMCalibration()
-	    {};
+    virtual ~I3DOMCalibration();
     
     /**
      * Get MB Temperature at time of calibration

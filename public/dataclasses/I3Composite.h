@@ -33,7 +33,7 @@ class I3Composite
   /**
    * destructor
    */
-  virtual ~I3Composite(){}
+  virtual ~I3Composite();
 
   /**
    * indicates that the track is composite
@@ -78,7 +78,7 @@ class I3Composite
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3Composite,1);
+  //ClassDef(I3Composite,1);
 };
 
 #endif

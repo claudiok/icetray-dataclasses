@@ -43,7 +43,7 @@ class I3DataHeader : public TObject
   /**
    * destructor
    */
-  virtual ~I3DataHeader() { };
+  virtual ~I3DataHeader();
 
   /**
    * Gets the start Time for this header
@@ -67,18 +67,6 @@ class I3DataHeader : public TObject
 
   virtual void ToStream(ostream& o) const
     {
-/*       o<<"[ " */
-/*        <<IsA()->GetName() */
-/*        <<" ]\n" */
-/*        <<"Modified Julain Day: " */
-/*        <<fMjd */
-/*        <<"\n" */
-/*        <<"Seconds: " */
-/*        <<fSec */
-/*        <<"\n" */
-/*        <<"Nano Seconds: " */
-/*        <<fNanoSec */
-/*        <<"\n"; */
     }
 
   virtual string ToString() const
@@ -93,8 +81,7 @@ class I3DataHeader : public TObject
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT Macro
-  ClassDef(I3DataHeader,1);
+
 };
 
 inline ostream& operator<<(ostream& o,const I3DataHeader& header)

@@ -1,6 +1,6 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCHit.h>
-
+I3MCHit::~I3MCHit() { }
 template <class Archive>
   void I3MCHit::serialize (Archive &ar, unsigned version)
   {

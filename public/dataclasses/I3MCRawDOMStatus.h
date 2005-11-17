@@ -22,8 +22,7 @@ public:
     I3MCRawDOMStatus()
 	{};
     
-    ~I3MCRawDOMStatus()
-	{};
+    virtual ~I3MCRawDOMStatus();
     
     TrigMode GetTrigMode() const
 	{

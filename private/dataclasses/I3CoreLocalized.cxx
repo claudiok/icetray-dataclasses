@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3CoreLocalized.h>
 
+I3CoreLocalized::~I3CoreLocalized() {}
+
 template <class Archive>
   void I3CoreLocalized::serialize(Archive& ar, unsigned version)
   {

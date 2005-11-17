@@ -39,7 +39,7 @@ class I3OMGeoIceCube : public I3OMGeo
   /**
    * destructor
    */
-  virtual ~I3OMGeoIceCube(){};
+  virtual ~I3OMGeoIceCube();
 
   /**
    * assignment is just member-wise assignment
@@ -57,7 +57,7 @@ class I3OMGeoIceCube : public I3OMGeo
 
  private:
 
-  ClassDef(I3OMGeoIceCube,1);
+  //ClassDef(I3OMGeoIceCube,1);
 
   friend class boost::serialization::access;
 

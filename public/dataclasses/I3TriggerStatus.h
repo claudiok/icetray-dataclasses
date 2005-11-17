@@ -23,6 +23,8 @@ using namespace std;
 class I3TriggerStatus 
 {
  public:
+
+  virtual ~I3TriggerStatus();
   
   /**
    * Get TriggerType  - the unique ID PER Subdetector SourceID

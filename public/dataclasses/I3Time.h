@@ -63,6 +63,8 @@ class I3Time : public TObject
    * @brief creates the object with the given times as the DAQ time
    */
   I3Time(unsigned int year, int64_t daqTime);
+
+  virtual ~I3Time();
 	     
   /**
    * @brief Sets the time in the 'daq' style where
@@ -178,7 +180,25 @@ class I3Time : public TObject
    */
   static std::string WeekdayToString(Weekday w);
 
-  
+   /**
+   * comparison operator.
+   * Compares first the year and then the DAQ time
+   * @return true if the lhs should be ordered before the rhs
+   */
+  bool operator<(const I3Time& rhs) const;
+
+  /**
+   * comparison operator.
+   * Compares first the year and then the DAQ time
+   * @return true if the lhs should be ordered after the rhs
+   */
+  bool operator>(const I3Time& rhs) const;
+
+  bool operator<=(const I3Time& rhs) const;
+
+  bool operator>=(const I3Time& rhs) const;
+
+ 
 
  public:
 
@@ -210,25 +230,8 @@ class I3Time : public TObject
     ar & make_nvp("HitID", daqTime_);
   }
 
-  ClassDef(I3Time,1);
+  //ClassDef(I3Time,1);
 
-  /**
-   * comparison operator.  
-   * Compares first the year and then the DAQ time
-   * @return true if the lhs should be ordered before the rhs
-   */
-  bool operator<(const I3Time& rhs) const;
-
-  /**
-   * comparison operator.  
-   * Compares first the year and then the DAQ time
-   * @return true if the lhs should be ordered after the rhs
-   */
-  bool operator>(const I3Time& rhs) const;
-
-  bool operator<=(const I3Time& rhs) const;
-  
-  bool operator>=(const I3Time& rhs) const;
   
 };
 

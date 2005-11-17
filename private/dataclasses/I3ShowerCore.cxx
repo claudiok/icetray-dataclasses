@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3ShowerCore.h>
 
+I3ShowerCore::~I3ShowerCore() {}
+
 template <class Archive>
     void I3ShowerCore::serialize(Archive& ar, unsigned version)
   {

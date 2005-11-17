@@ -38,7 +38,7 @@ class I3MCTopShower : public I3TopShowerImpl<I3Directional,
   /**
    * destructor
    */
-  virtual ~I3MCTopShower(){}
+  virtual ~I3MCTopShower();
   
   /**
    * gives the weight of the track
@@ -55,7 +55,7 @@ class I3MCTopShower : public I3TopShowerImpl<I3Directional,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3MCTopShower,1);
+  //ClassDef(I3MCTopShower,1);
 };
 
 /** 

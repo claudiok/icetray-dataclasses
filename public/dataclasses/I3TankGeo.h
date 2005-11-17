@@ -39,7 +39,7 @@ class I3TankGeo : public I3SurfModuleGeo {
   /**
    * virtual destructor
    */
-  virtual ~I3TankGeo() {}
+  virtual ~I3TankGeo();
 
   /**
    * The tank radius (outer radius)
@@ -81,8 +81,6 @@ class I3TankGeo : public I3SurfModuleGeo {
 
   double fillHeight_; // fill height of the tank
 
-  ClassDef(I3TankGeo,2); // increased to 2 Thu Sep  2 16:13:52 EDT 2004
-  // because some stuff moved up to I3SurfModuleGeo.
 
   friend class boost::serialization::access;
 

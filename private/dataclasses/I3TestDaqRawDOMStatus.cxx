@@ -3,6 +3,8 @@
 #include "services/I3Logging.h"
 #include "dataclasses/I3Units.h"
 
+I3TestDaqRawDOMStatus::~I3TestDaqRawDOMStatus() {}
+
 const map<string,unsigned int>& I3TestDaqRawDOMStatus::GetRawStatus() const
 {
   return rawStatus_;

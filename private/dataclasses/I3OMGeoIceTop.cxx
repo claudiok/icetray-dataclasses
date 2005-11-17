@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3OMGeoIceTop.h>
 
+I3OMGeoIceTop::~I3OMGeoIceTop() {}
+
 template <class Archive>
   void I3OMGeoIceTop::serialize(Archive& ar, unsigned version)
   {

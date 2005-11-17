@@ -37,7 +37,7 @@ public:
   /**
    * destructor
    */
-  virtual ~I3PMTPulseVect(){}
+  virtual ~I3PMTPulseVect();
 
   /**
    * PMT output voltage as f(time). This is a superposition of all pulses
@@ -62,8 +62,6 @@ private:
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3PMTPulseVect,1);
 };
 
 /**

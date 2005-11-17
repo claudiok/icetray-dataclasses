@@ -38,7 +38,7 @@ class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3St
   /**
    * virtual destructor
    */
-  virtual ~I3StationMap () {}
+  virtual ~I3StationMap();
 
   /**
    * Go to the first tank
@@ -53,16 +53,10 @@ class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3St
 
  private:
 
-  ClassDef (I3StationMap, 1);
-
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3StationMap",
-		  base_object< STLMapStoragePolicy<StationKey, I3StationGeoPtr> >(*this));
-  }
+  void serialize(Archive& ar, unsigned version);
 
 };
 

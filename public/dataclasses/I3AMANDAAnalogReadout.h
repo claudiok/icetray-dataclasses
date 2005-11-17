@@ -50,7 +50,7 @@ public:
   /**
    * Destructor.
    */
-  virtual ~I3AMANDAAnalogReadout(){}
+  virtual ~I3AMANDAAnalogReadout();
 
   /**
    * Returns the earliest leading edge recorded by the DAQ
@@ -148,7 +148,7 @@ private:
   I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout& other);
 
   // ROOT macro
-  ClassDef(I3AMANDAAnalogReadout,2);
+  //ClassDef(I3AMANDAAnalogReadout,2);
 };
 
 /**

@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCParticleData.h>
 
+I3MCParticleData::~I3MCParticleData(){}
+
 template <class Archive>
   void I3MCParticleData::serialize(Archive& ar, unsigned version)
   {

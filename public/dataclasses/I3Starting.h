@@ -33,7 +33,7 @@ class I3Starting
 
  public:
 
-  virtual ~I3Starting() {}
+  virtual ~I3Starting();
   /**
    * indicates that the particle is starting
    */
@@ -176,7 +176,7 @@ class I3Starting
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3Starting,1)
+  //ClassDef(I3Starting,1)
 };
 
 #endif //I3STARTING_H

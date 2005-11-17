@@ -48,7 +48,7 @@ class I3DataReadoutDict : public TObject,
   /**
    * destructor 
    */
-  virtual ~I3DataReadoutDict(){};
+  virtual ~I3DataReadoutDict();
 
   virtual void ToStream(ostream& o) const
     {
@@ -77,8 +77,7 @@ class I3DataReadoutDict : public TObject,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3DataReadoutDict,1);
+
 };
 
 /**

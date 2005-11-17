@@ -37,7 +37,7 @@ class I3DetectorStatusHeader : public I3DataHeader
   /**
    * destructor
    */
-  virtual ~I3DetectorStatusHeader() {;}
+  virtual ~I3DetectorStatusHeader();
 
   /**
    * copy constructor just uses assignment
@@ -61,9 +61,6 @@ class I3DetectorStatusHeader : public I3DataHeader
 
  private:
   
-  // ROOT macro
-  ClassDef(I3DetectorStatusHeader,1);
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

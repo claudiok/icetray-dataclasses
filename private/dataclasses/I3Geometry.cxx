@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3Geometry.h>
 
+I3Geometry::~I3Geometry() {}
+
 template <class Archive>
   void I3Geometry::serialize(Archive& ar, unsigned version)
   {

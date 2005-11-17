@@ -35,7 +35,7 @@ class I3IceCubeDOMStatusDict
   /**
    * destructor
    */
-  virtual ~I3IceCubeDOMStatusDict(){};
+  virtual ~I3IceCubeDOMStatusDict();
 
   /**
    * dumps the object to the indicated ostream
@@ -57,9 +57,6 @@ class I3IceCubeDOMStatusDict
   // copy and assignment are private
   I3IceCubeDOMStatusDict(const I3IceCubeDOMStatusDict& rhs);
   const I3IceCubeDOMStatusDict& operator=(const I3IceCubeDOMStatusDict& rhs);
-
-  // ROOT macro
-  ClassDef(I3IceCubeDOMStatusDict,1);
 
   friend class boost::serialization::access;
 

@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3OMSelectionDict.h>
 
+I3OMSelectionDict::~I3OMSelectionDict() {}
+
 template <class Archive>
   void I3OMSelectionDict::serialize(Archive& ar, unsigned version)
   {

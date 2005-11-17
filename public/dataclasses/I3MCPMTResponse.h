@@ -39,7 +39,7 @@ public:
   /**
    * destructor
    */
-  virtual ~I3MCPMTResponse(){}
+  virtual ~I3MCPMTResponse();
   
   /**   
    * PMT output voltage as f(time) 
@@ -61,7 +61,7 @@ public:
   void SetEndTime(const float time) { endTime_ = time;}
   
   virtual void ToStream(ostream& o) const {
-    o<<"[ "<<IsA()->GetName()<<" ]\n"
+    o<<"[ I3MCPMTResponse ]\n"
      <<"StartTime: "<<startTime_
      <<"EndTime: "<<endTime_;
   }
@@ -81,7 +81,7 @@ private:
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3MCPMTResponse,1);
+  //ClassDef(I3MCPMTResponse,1);
 };
 
 inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)

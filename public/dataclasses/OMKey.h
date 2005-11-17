@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: OMKey.h,v 1.10 2005/04/11 15:19:34 olivas Exp $
+ * $Id$
  *
  * @file OMKey.h
  * @version $Revision: 1.10 $
- * @date $Date: 2005/04/11 15:19:34 $
+ * @date $Date$
  * @author pretz
  */
 
@@ -37,11 +37,12 @@ class OMKey : public TObject //, public pair<int,unsigned int>
    */
   OMKey() : stringNumber_(0), omNumber_(0) {} //: pair<int,unsigned int>(0,0){}
 
+  OMKey(int str,unsigned int om) 
+    : stringNumber_(str), omNumber_(om){}
   /**
    * destructor
    */
-  OMKey(int str,unsigned int om) 
-    : stringNumber_(str), omNumber_(om){}
+  virtual ~OMKey(); 
 
   /**
    * retrieves the string number for this OMKey
@@ -97,7 +98,7 @@ class OMKey : public TObject //, public pair<int,unsigned int>
 
   }
   // ROOT macro
-  ClassDef(OMKey,1);
+  //ClassDef(OMKey,1);
 };
 
 /**

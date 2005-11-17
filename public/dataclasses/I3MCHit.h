@@ -71,14 +71,14 @@ class I3MCHit : public I3Hit
    */
   void SetCherenkovDistance(double CherenkovDistance) { cherenkovDistance_ = CherenkovDistance; }
 
-  virtual ~I3MCHit() {} 
+  virtual ~I3MCHit();
 
  private:
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3MCHit,1);
+//ClassDef(I3MCHit,1);
 };
 
 /**

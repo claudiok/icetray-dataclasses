@@ -25,7 +25,7 @@ class I3Localized{
 
  public:
 
-  virtual ~I3Localized() {}
+  virtual ~I3Localized();
   /**
    * indicates that the core position isn't known
    */
@@ -88,7 +88,7 @@ class I3Localized{
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3Localized,1);
+  //ClassDef(I3Localized,1);
 };
 
 #endif //I3LOCALIZED_H

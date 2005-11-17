@@ -27,7 +27,7 @@ public:
   I3BadOMSelection(const STLVectorStoragePolicy<OMKey> list) 
     : I3OMListSelection(list) {};
   
-  virtual ~I3BadOMSelection() {};
+  virtual ~I3BadOMSelection();
  
   /**
    * Returns the entire list of bad OMs as a vector.  Equivalent to GetOMList().
@@ -90,7 +90,7 @@ private:
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3BadOMSelection,1);
+
 };
 
 /**

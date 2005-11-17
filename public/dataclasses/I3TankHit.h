@@ -51,7 +51,7 @@ class I3TankHit : public TObject {
   /**
    * destructor
    */
-  virtual ~I3TankHit() {}
+  virtual ~I3TankHit();
   
   /**
    * @return the number of the tank for this response
@@ -121,7 +121,7 @@ class I3TankHit : public TObject {
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3TankHit,1);
+  //ClassDef(I3TankHit,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3TankHit& tankhit)

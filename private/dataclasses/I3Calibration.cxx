@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3Calibration.h>
 
+I3Calibration::~I3Calibration() {}
+
 template <class Archive>
   void I3Calibration::serialize(Archive& ar, unsigned version)
   {

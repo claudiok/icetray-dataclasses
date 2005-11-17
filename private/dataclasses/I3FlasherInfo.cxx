@@ -2,6 +2,8 @@
 #include <dataclasses/I3FlasherInfo.h>
 #include <dataclasses/I3Trigger.h>
 
+I3FlasherInfo::~I3FlasherInfo() { }
+
 template <class Archive>
     void I3FlasherInfo::serialize(Archive& ar, unsigned version)
 	{

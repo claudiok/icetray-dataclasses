@@ -26,8 +26,7 @@ public:
     I3CalibrationHeader()
 	{};
 
-    virtual ~I3CalibrationHeader() 
-	{};
+    virtual ~I3CalibrationHeader();
 
     I3CalibrationHeader(const I3CalibrationHeader& calib)
 	{
@@ -53,7 +52,6 @@ public:
 	};
 private:
   
-    ClassDef(I3CalibrationHeader,1);
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);

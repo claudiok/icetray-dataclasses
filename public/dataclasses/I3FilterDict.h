@@ -28,7 +28,7 @@ class I3FilterDict : public TObject, public STLMapStoragePolicy<string,I3FilterP
 {
   public:
   I3FilterDict() {};
-  virtual ~I3FilterDict() {};
+  virtual ~I3FilterDict();
 
   virtual void ToStream(ostream& o) const
   {
@@ -53,8 +53,7 @@ class I3FilterDict : public TObject, public STLMapStoragePolicy<string,I3FilterP
   private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT Macro
-  ClassDef(I3FilterDict, 1);
+
 };
 
 /**

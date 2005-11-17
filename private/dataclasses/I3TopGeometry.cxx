@@ -8,8 +8,17 @@
  * @date $Date: 2005-04-12 14:59:51 -0400 (Tue, 12 Apr 2005) $
  * @author niessen Fri May  6 16:39:38 EDT 2005
  */
-
+#include <dataclasses/BoostHeaders.h>
 #include "dataclasses/I3TopGeometry.h"
+
+I3TopGeometry::~I3TopGeometry() {}
+
+template <class Archive>
+  void I3TopGeometry::serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("stationMap",stationMap_);
+  }
+
 
 I3OMGeoPtr I3TopGeometry::GetOMGeoPtr (OMKey &om_key) {
 
@@ -22,3 +31,4 @@ I3OMGeoPtr I3TopGeometry::GetOMGeoPtr (OMKey &om_key) {
 
   return I3OMGeoPtr ();
 }
+I3_SERIALIZABLE(I3TopGeometry);

@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCInfiniteTrack.h>
 
+I3MCInfiniteTrack::~I3MCInfiniteTrack() {}
+
 template <class Archive>
   void I3MCInfiniteTrack::serialize(Archive& ar, unsigned version)
   {

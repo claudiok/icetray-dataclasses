@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3AMANDAOMCalib.h>
 
+I3AMANDAOMCalib::~I3AMANDAOMCalib() {}
+
 template <class Archive>
   void I3AMANDAOMCalib::serialize(Archive& ar, unsigned version)
   {

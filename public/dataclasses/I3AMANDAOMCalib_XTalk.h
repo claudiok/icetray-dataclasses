@@ -28,7 +28,7 @@ class I3AMANDAOMCalib_XTalk : public TObject
   
   public:
   I3AMANDAOMCalib_XTalk() {timehigh_=NAN; timelow_=NAN; width_=NAN;}
-  virtual ~I3AMANDAOMCalib_XTalk() {;}
+  virtual ~I3AMANDAOMCalib_XTalk();
   
   OMKey  GetReceiver()  {return receiver_;}
   double GetTimeHigh()  {return timehigh_;}
@@ -59,7 +59,6 @@ class I3AMANDAOMCalib_XTalk : public TObject
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3AMANDAOMCalib_XTalk,1);
 };
 
 /**

@@ -43,7 +43,7 @@ class I3Track : public I3InIceParticle
   /**
    * destructor
    */
-  virtual ~I3Track() {};
+  virtual ~I3Track();
 
   /**
    * indicates that this track is not a cascade
@@ -154,7 +154,7 @@ class I3Track : public I3InIceParticle
   virtual void ToStream (std::ostream &s) const {I3Particle::ToStream(s);}
  protected:
 
-  ClassDef(I3Track, 1);
+  //ClassDef(I3Track, 1);
 
  private:
   friend class boost::serialization::access;

@@ -40,7 +40,7 @@ class I3OMGeoAMANDA : public I3OMGeo
   /**
    * destructor
    */
-  virtual ~I3OMGeoAMANDA(){}
+  virtual ~I3OMGeoAMANDA();
 
   /**
    * Identifies this OM as an AMANDA OM
@@ -68,8 +68,7 @@ class I3OMGeoAMANDA : public I3OMGeo
   }
 
  private:
-
-  ClassDef(I3OMGeoAMANDA,1);
+  //ClassDef(I3OMGeoAMANDA,1);
 
   friend class boost::serialization::access;
 

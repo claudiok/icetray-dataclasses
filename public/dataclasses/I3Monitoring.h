@@ -22,6 +22,7 @@ using namespace std;
 class I3Monitoring 
 {
  public:
+    virtual ~I3Monitoring();
     float GetTempCelcius() const ;
     int GetTempRaw() const;
     float GetSPEScalerHz() const ;

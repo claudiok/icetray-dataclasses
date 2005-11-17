@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCWeightDict.h>
 
+I3MCWeightDict::~I3MCWeightDict(){}
+
 template <class Archive>
   void I3MCWeightDict::serialize(Archive& ar, unsigned version)
   {

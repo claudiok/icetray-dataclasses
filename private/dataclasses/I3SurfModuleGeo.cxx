@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3SurfModuleGeo.h>
 
+I3SurfModuleGeo::~I3SurfModuleGeo() {}
+
 template <class Archive>
   void I3SurfModuleGeo::serialize(Archive& ar, unsigned version)
   {

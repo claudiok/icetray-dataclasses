@@ -71,7 +71,7 @@ public:
     /**
      * destructor
      */
-    virtual ~I3FlasherInfo(){;}
+    virtual ~I3FlasherInfo();
 
 
     /* return and set OMKey */
@@ -141,7 +141,7 @@ private:
 
     template <class Archive> void serialize(Archive & ar, unsigned version);
 
-ClassDef(I3FlasherInfo,1);
+//ClassDef(I3FlasherInfo,1);
 };
 
 

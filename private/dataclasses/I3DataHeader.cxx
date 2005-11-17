@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3DataHeader.h>
 
+I3DataHeader::~I3DataHeader(){}
+
 template <class Archive>
   void I3DataHeader::serialize(Archive& ar, unsigned version)
   {

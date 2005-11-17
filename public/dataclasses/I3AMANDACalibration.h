@@ -30,8 +30,7 @@ public:
     I3AMANDACalibration()
 	{};
     
-    virtual ~I3AMANDACalibration()
-	{};
+    virtual ~I3AMANDACalibration();
     
     virtual void ToStream(ostream& o) const
 	{
@@ -70,7 +69,6 @@ public:
     //I3InIceCalibration(const I3InIceCalibration& calibration);
     //const I3InIceCalibration& operator=(const I3InIceCalibration& calibration);
     
-    ClassDef(I3AMANDACalibration,1);    
 
   friend class boost::serialization::access;
 

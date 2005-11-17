@@ -46,7 +46,7 @@ class I3OMSelectionDict : public TObject,
   /**
    * destructor
    */
-  virtual ~I3OMSelectionDict(){};
+  virtual ~I3OMSelectionDict();
 
 #ifndef __CINT__
 
@@ -124,8 +124,7 @@ class I3OMSelectionDict : public TObject,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3OMSelectionDict,1);
+
 };
 
 /**

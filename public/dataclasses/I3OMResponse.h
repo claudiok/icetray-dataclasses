@@ -48,7 +48,7 @@ class I3OMResponse : public TObject
   /**
    * destructor
    */
-  virtual ~I3OMResponse() {;}
+  virtual ~I3OMResponse();
   
   /**
    * @return the the hardware data for this response as a const object
@@ -103,7 +103,7 @@ class I3OMResponse : public TObject
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3OMResponse,1);
+  //ClassDef(I3OMResponse,1);
 };
 
 /**

@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3TankHit.h>
 
+I3TankHit::~I3TankHit() {}
+
 template <class Archive>
   void I3TankHit::serialize(Archive& ar, unsigned version)
   {

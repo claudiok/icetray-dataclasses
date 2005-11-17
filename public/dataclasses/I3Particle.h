@@ -83,6 +83,7 @@ class I3Particle : public TObject{
       primaryID_=0;
       parentID_=0;
     }
+    virtual ~I3Particle();
 
     /**
      * indicates that this track is observable.
@@ -211,7 +212,7 @@ class I3Particle : public TObject{
   */
  virtual void ToStream(ostream& o) const
    {
-     o<<"[ "<<IsA()->GetName()<<" ]\n";
+     o<<"[ I3Particle ] Output withheld\n";
    }
  private:
 
@@ -227,7 +228,7 @@ class I3Particle : public TObject{
   }
 
  // ROOT macro
-  ClassDef(I3Particle,1);
+  //ClassDef(I3Particle,1);
 };
 
 BOOST_IS_ABSTRACT(I3Particle);

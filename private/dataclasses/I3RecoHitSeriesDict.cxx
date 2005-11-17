@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3RecoHitSeriesDict.h>
 
+I3RecoHitSeriesDict::~I3RecoHitSeriesDict() {}
+
 template <class Archive>
   void I3RecoHitSeriesDict::serialize(Archive& ar, unsigned version)
   {

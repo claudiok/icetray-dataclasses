@@ -6,6 +6,8 @@
 #include "dataclasses/I3DOMCalibration.h"
 #include "dataclasses/I3Units.h"
 
+I3DOMCalibration::~I3DOMCalibration() {}
+
 const unsigned int I3DOMCalibration::N_ATWD_BINS = 128;
 
 //Number of ATWD channels is set to 3 (4th ATWD channel doesn't have DOMCAL now)

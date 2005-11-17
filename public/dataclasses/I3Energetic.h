@@ -58,14 +58,14 @@ class I3Energetic
       o<<"Energy:"<<energy_<<"\n";
     }
 
-  virtual ~I3Energetic() { }
+  virtual ~I3Energetic();
  private:
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  ClassDef(I3Energetic,1);
+  //ClassDef(I3Energetic,1);
 };
 
 #endif // I3ENERGETIC_H

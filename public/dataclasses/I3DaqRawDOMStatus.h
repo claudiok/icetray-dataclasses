@@ -22,8 +22,7 @@ public:
     I3DaqRawDOMStatus()
 	{};
     
-    ~I3DaqRawDOMStatus()
-	{};
+    virtual ~I3DaqRawDOMStatus();
     
     /**
      * Gets the current DOM trigger source setting

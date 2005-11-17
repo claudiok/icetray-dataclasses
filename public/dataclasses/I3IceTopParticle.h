@@ -20,6 +20,7 @@
 class I3IceTopParticle : public I3Particle
 {
  public:
+  virtual ~I3IceTopParticle();
   /**
    * indicates that this track is observable.
    */
@@ -47,7 +48,7 @@ class I3IceTopParticle : public I3Particle
     }
 
   //ROOT macro
-  ClassDef(I3IceTopParticle,1);
+  //ClassDef(I3IceTopParticle,1);
 };
 
 BOOST_IS_ABSTRACT(I3IceTopParticle);

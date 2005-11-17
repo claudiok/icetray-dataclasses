@@ -9,8 +9,6 @@
 using namespace I3Constants;
 using namespace I3Units;
 
-ClassImp(I3Direction) // Class implementation to enable ROOT I/O
-
 //-----------------------------------------------------------
 I3Direction::I3Direction()
 {

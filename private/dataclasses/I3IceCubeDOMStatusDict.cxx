@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3IceCubeDOMStatusDict.h>
 
+I3IceCubeDOMStatusDict::~I3IceCubeDOMStatusDict() {}
+
 template <class Archive>
   void I3IceCubeDOMStatusDict::serialize(Archive& ar, unsigned version)
   {

@@ -43,7 +43,7 @@ class I3InIceGeometry : public TObject,
   /**
    * default destructor
    */
-  virtual ~I3InIceGeometry(){};
+  virtual ~I3InIceGeometry();
 
   virtual void ToStream(ostream& o) const
     {
@@ -68,9 +68,6 @@ class I3InIceGeometry : public TObject,
     }
 
   private:
-
-  // ROOT macro
-  ClassDef(I3InIceGeometry,1);
 
   friend class boost::serialization::access;
 

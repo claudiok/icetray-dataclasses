@@ -44,7 +44,7 @@ class I3GeometryHeader : public I3DataHeader
   /**
    * destructor
    */
-  virtual ~I3GeometryHeader() {;}
+  virtual ~I3GeometryHeader();
 
   /**
    * copy constructor just uses assignment
@@ -101,8 +101,6 @@ class I3GeometryHeader : public I3DataHeader
 
  private:
   
-  // ROOT macro
-  ClassDef(I3GeometryHeader,1);
 
   friend class boost::serialization::access;
 

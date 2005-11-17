@@ -41,7 +41,7 @@ class I3EventHeader : public I3DataHeader{
   /**
    * destructor
    */
-  virtual ~I3EventHeader() { };
+  virtual ~I3EventHeader();
 
   /**
    * copy constructor.  Uses assignment operator.
@@ -90,8 +90,7 @@ class I3EventHeader : public I3DataHeader{
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT Macro
-  ClassDef(I3EventHeader,1);
+
 };
 
 /**

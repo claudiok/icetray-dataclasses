@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCTrack.h>
 
+I3MCTrack::~I3MCTrack(){}
+
 template <class Archive>
   void I3MCTrack::serialize(Archive& ar, unsigned version)
   {

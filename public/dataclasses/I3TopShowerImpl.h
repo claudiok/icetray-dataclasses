@@ -43,7 +43,7 @@ class I3TopShowerImpl : public I3TopShower,
   /**
    * destructor
    */
-  virtual ~I3TopShowerImpl() {};
+  virtual ~I3TopShowerImpl();
 
   /**
    * indicates whether or not the particle has a valid energy
@@ -84,7 +84,7 @@ class I3TopShowerImpl : public I3TopShower,
   }
 
   //ROOT macro
-  ClassDef(I3TopShowerImpl,1);
+  //ClassDef(I3TopShowerImpl,1);
 };
 
 #endif

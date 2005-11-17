@@ -25,6 +25,7 @@
  */
 class I3Cascade : public I3InIceParticle{
  public:
+  virtual ~I3Cascade();
   /**
    * indicates that this is not a track
    */
@@ -78,7 +79,7 @@ class I3Cascade : public I3InIceParticle{
     ar & make_nvp("I3InIceParticle", base_object<I3InIceParticle>(*this));
   }
   //ROOT macro
-  ClassDef(I3Cascade,1);
+  //ClassDef(I3Cascade,1);
 };
 
 BOOST_IS_ABSTRACT(I3Cascade);

@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3CalibratedDOMStatus.h>
 
+I3CalibratedDOMStatus::~I3CalibratedDOMStatus(){}
+
 template <class Archive>
   void I3CalibratedDOMStatus::serialize(Archive& ar, unsigned version)
   {

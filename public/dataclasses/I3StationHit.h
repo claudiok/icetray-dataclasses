@@ -37,7 +37,7 @@ class I3StationHit : public TObject,
   /**
    * destructor
    */
-  virtual ~I3StationHit() {;}
+  virtual ~I3StationHit();
 
   /**
    * Get the station number
@@ -86,8 +86,6 @@ class I3StationHit : public TObject,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  ClassDef(I3StationHit,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3StationHit& hit)

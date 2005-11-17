@@ -36,7 +36,7 @@ class I3TopGeometry : public TObject {
   /**
    * Virtual Destructor
    */
-  virtual ~I3TopGeometry(){}
+  virtual ~I3TopGeometry();
 
   /**
    * return the Station map as a const object
@@ -61,15 +61,10 @@ class I3TopGeometry : public TObject {
 
   I3StationMap stationMap_; //|| the stations
  
-  ClassDef (I3TopGeometry,2);  // changed Thu Sep  2 17:08:19 EDT 2004
-
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("stationMap",stationMap_);
-  }
+  void serialize(Archive& ar, unsigned version);
 
 };
 

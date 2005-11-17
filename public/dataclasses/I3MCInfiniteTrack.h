@@ -38,7 +38,7 @@ class I3MCInfiniteTrack : public I3TrackImpl<I3Infinite,
   /**
    * destructor
    */
-  virtual ~I3MCInfiniteTrack(){}
+  virtual ~I3MCInfiniteTrack();
   
   /**
    * gives the weight of the track
@@ -56,7 +56,7 @@ class I3MCInfiniteTrack : public I3TrackImpl<I3Infinite,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3MCInfiniteTrack,1);
+  //ClassDef(I3MCInfiniteTrack,1);
 };
 
 /** 

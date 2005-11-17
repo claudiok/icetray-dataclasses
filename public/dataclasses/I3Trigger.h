@@ -44,7 +44,7 @@ class I3Trigger : public TObject
     triggerSubDetector_=Unknown;
   }
 
-  virtual ~I3Trigger() {}
+  virtual ~I3Trigger();
     
   private:
   double  triggerTime_;       // Time at which the trigger was issued
@@ -94,7 +94,7 @@ class I3Trigger : public TObject
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3Trigger,1);
+//ClassDef(I3Trigger,1);
 };
 
 /**

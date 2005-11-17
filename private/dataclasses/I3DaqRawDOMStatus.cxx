@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3DaqRawDOMStatus.h>
 
+I3DaqRawDOMStatus::~I3DaqRawDOMStatus() {}
+
 template <class Archive>
   void I3DaqRawDOMStatus::serialize(Archive& ar, unsigned version)
   {

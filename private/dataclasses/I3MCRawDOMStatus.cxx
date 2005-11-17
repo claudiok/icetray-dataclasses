@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3MCRawDOMStatus.h>
 
+I3MCRawDOMStatus::~I3MCRawDOMStatus() {}
+
 template <class Archive>
   void I3MCRawDOMStatus::serialize(Archive& ar, unsigned version)
   {

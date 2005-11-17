@@ -58,7 +58,7 @@ public:
     /**
      * default destructor
      */
-    virtual ~I3DataReadout(){}
+    virtual ~I3DataReadout();
     
     /**
      * Indicates whether or not this readout came directly from the detector
@@ -78,7 +78,7 @@ public:
      * @todo finish implementing this method
      */
     virtual void ToStream(ostream& o) const {
-	o<<"[ "<<IsA()->GetName()<<" ]\n";
+	o<<"[ I3DataReadout ] Output withheld\n";
     }
     
     /**
@@ -100,7 +100,7 @@ public:
   I3DataReadout& operator=(const I3DataReadout& other);
 
   // ROOT Macro
-  ClassDef(I3DataReadout,1);
+  //ClassDef(I3DataReadout,1);
 };
 
 /**

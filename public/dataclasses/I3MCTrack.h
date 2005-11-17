@@ -38,7 +38,7 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   /**
    * destructor
    */
-  virtual ~I3MCTrack(){}
+  virtual ~I3MCTrack();
   
   /**
    * gives the weight of the track
@@ -56,7 +56,7 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  ClassDef(I3MCTrack,1);
+  //ClassDef(I3MCTrack,1);
 };
 
 /** 

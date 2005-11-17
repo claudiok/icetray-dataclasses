@@ -26,7 +26,7 @@ class I3RecoPulseSeriesDict : public TObject, public STLMapStoragePolicy<string,
 {
   public:
   I3RecoPulseSeriesDict(){}
-  virtual ~I3RecoPulseSeriesDict(){};
+  virtual ~I3RecoPulseSeriesDict();
 
   virtual void ToStream(ostream& o) const
   {
@@ -56,7 +56,7 @@ class I3RecoPulseSeriesDict : public TObject, public STLMapStoragePolicy<string,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-ClassDef(I3RecoPulseSeriesDict,1);
+
 };
 
 inline ostream& operator<<(ostream& o, const I3RecoPulseSeriesDict& dict)

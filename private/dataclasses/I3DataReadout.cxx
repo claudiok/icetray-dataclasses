@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3DataReadout.h>
 
+I3DataReadout::~I3DataReadout() {}
+
 template <class Archive>
   void I3DataReadout::serialize(Archive& ar, unsigned version)
   {

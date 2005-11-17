@@ -126,7 +126,7 @@ public:
     /**
      * destructor
      */
-    virtual ~I3DOMLaunch(){;}
+    virtual ~I3DOMLaunch();
   
     /**
      * return and set ATWD/FADC launch time
@@ -367,7 +367,7 @@ private:
     template <class Archive> void serialize(Archive & ar, unsigned version);
     
     // ROOT macro
-    ClassDef(I3DOMLaunch,1);
+    //ClassDef(I3DOMLaunch,1);
 };
 
 /**

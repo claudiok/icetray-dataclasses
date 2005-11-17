@@ -42,7 +42,7 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
   /**
    * virtual destructor
    */
-  virtual ~I3SurfModuleGeo () {}
+  virtual ~I3SurfModuleGeo();
 
   /**
    * Get the position of the tank
@@ -84,8 +84,6 @@ class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGe
   I3Position surfModulePos_; // position of the surface detector
 
   float orientation_; // rotation angle around the z-axis. (radians)
-
-  ClassDef (I3SurfModuleGeo, 1);
 
   friend class boost::serialization::access;
 
