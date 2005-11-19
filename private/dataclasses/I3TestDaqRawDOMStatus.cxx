@@ -124,7 +124,7 @@ double I3TestDaqRawDOMStatus::GetSingleSPEThreshold() const
  */
 double I3TestDaqRawDOMStatus::GetFEPedestal() const
 {
-  return 5.0 * (static_cast<double>(rawStatus_["DAC_PMT_FE_PEDESTAL"]))/4096.;
+  return (5.0 * (static_cast<double>(rawStatus_["DAC_PMT_FE_PEDESTAL"]))/4096.)*I3Units::volt;
 }
 
 double I3TestDaqRawDOMStatus::GetDACTriggerBias(int chip) const
