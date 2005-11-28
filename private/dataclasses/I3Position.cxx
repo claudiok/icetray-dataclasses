@@ -124,7 +124,7 @@ void I3Position::RotateX(double angle)
   double y=y_;
   y_=c*y-s*z_;
   z_=s*y+c*z_;
-  CalcSphCylFromCar();
+  isCalculated_ = false;
 }
 
 //-----------------------------------------------------------
@@ -136,7 +136,7 @@ void I3Position::RotateY(double angle)
   double z=z_;
   z_=c*z-s*x_;
   x_=s*z+c*x_;
-  CalcSphCylFromCar();
+  isCalculated_ = false;
 }
 
 //-----------------------------------------------------------
@@ -148,7 +148,7 @@ void I3Position::RotateZ(double angle)
   double x=x_;
   x_=c*x-s*y_;
   y_=s*x+c*y_;
-  CalcSphCylFromCar();
+  isCalculated_ = false;
 }
 
 //-----------------------------------------------------------
