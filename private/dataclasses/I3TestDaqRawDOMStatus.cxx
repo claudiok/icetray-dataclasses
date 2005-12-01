@@ -113,7 +113,7 @@ double I3TestDaqRawDOMStatus::GetSingleSPEThreshold() const
 {
   //  return (double)rawStatus_["DAC_SINGLE_SPE_THRESH"];
   double raw_spe_thresh = static_cast<double>(rawStatus_["DAC_SINGLE_SPE_THRESH"]);
-  return ((5.*raw_spe_thresh/1024.- GetFEPedestal())/(9.6*(1+2200./249.))*I3Units::volt);
+  return ((5.*raw_spe_thresh/1024.- GetFEPedestal()/I3Units::volt)/(9.6*(1+2200./249.))*I3Units::volt);
 
 }
 
