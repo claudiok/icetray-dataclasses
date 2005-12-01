@@ -38,9 +38,9 @@ class I3MCOMResponse : public I3OMResponse
   // even though you can branch an I3MCHitSeries, or whatever.
   // let us all hate root together for a moment
   // @todo Is this still true?  TDY
-  I3MCHitSeries       mCHitSeries_; //||
-  I3MCPMTResponsePtr  mCPMTResponse_; //||
-  I3PMTPulseVect      pMTPulseVect_; //||
+  I3MCHitSeries       mCHitSeries_; 
+  I3MCPMTResponsePtr  mCPMTResponse_; 
+  I3PMTPulseVect      pMTPulseVect_; 
 
  public:
   /**

@@ -26,8 +26,8 @@
  */
 class I3Geometry : public TObject 
 {
-  I3InIceGeometry inIce_; //||;
-  I3TopGeometry top_; //||
+  I3InIceGeometry inIce_; 
+  I3TopGeometry top_; 
  public:
   /**
    * constructor

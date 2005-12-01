@@ -37,13 +37,13 @@
 
 class I3Event : public TObject
 {
-  I3OMResponseMap   oMResponseMap_; //||
-  I3OMResponseMap   topOMResponseMap_; //||
-  I3OMSelectionDict oMSelectionDict_; //||
-  I3RecoResultDict  recoResultDict_; //||
-  I3TriggerDict     triggerDict_; //||
-  I3FilterDict      filterDict_; //||
-  I3Bag             bag_; //||
+  I3OMResponseMap   oMResponseMap_; 
+  I3OMResponseMap   topOMResponseMap_; 
+  I3OMSelectionDict oMSelectionDict_; 
+  I3RecoResultDict  recoResultDict_; 
+  I3TriggerDict     triggerDict_; 
+  I3FilterDict      filterDict_; 
+  I3Bag             bag_; 
   
   public:
   /**

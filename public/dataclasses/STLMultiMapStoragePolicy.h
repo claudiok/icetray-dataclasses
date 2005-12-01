@@ -90,7 +90,7 @@ class STLMultiMapStoragePolicy {
 
  private:
 
-  map_type map_; //||
+  map_type map_; 
 
 public:
 

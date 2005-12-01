@@ -25,9 +25,9 @@
 class I3MCParticleData : public TObject 
 {
 
-  I3ParticleMultiMap primary_;         //||
-  I3ParticleMultiMap inIceParticles_;  //||
-  I3ParticleMultiMap iceTopParticles_; //||
+  I3ParticleMultiMap primary_;         
+  I3ParticleMultiMap inIceParticles_;  
+  I3ParticleMultiMap iceTopParticles_; 
 
  public:
   /**

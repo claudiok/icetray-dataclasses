@@ -59,8 +59,8 @@ class I3TopGeometry : public TObject {
 
  private:
 
-  I3StationMap stationMap_; //|| the stations
- 
+  I3StationMap stationMap_; // the stations
+
   friend class boost::serialization::access;
 
   template <class Archive>

@@ -28,7 +28,7 @@ class I3MCEvent : public I3Event
 {
   float           MCFrameStart_;
   float           MCFrameStop_;
-  I3MCParticleData  MCParticleData_; //||
+  I3MCParticleData  MCParticleData_; 
   I3MCWeightDict MCWeightDict_;
 
  public:

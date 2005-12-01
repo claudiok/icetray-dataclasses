@@ -70,7 +70,7 @@ class STLVectorStoragePolicy  {
 #endif
 
  private:
-  vector_type vector_; //||
+  vector_type vector_; 
 
   friend class boost::serialization::access;
 
