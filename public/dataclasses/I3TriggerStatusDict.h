@@ -24,7 +24,7 @@
  */
 class I3TriggerStatusDict 
 : public TObject, 
-  public STLMapStoragePolicy<TriggerKey,I3TriggerStatus>{
+  public STLMapStoragePolicy<TriggerKey,I3TriggerStatusPtr>{
  public:
   /**
    * constructor

@@ -27,16 +27,6 @@ class I3TriggerStatus
   virtual ~I3TriggerStatus();
   
   /**
-   * Get TriggerType  - the unique ID PER Subdetector SourceID
-   */
-  unsigned int GetTriggerType() const { return triggerType_; }
-  
-  /**
-   * Set TriggerType  - the unique ID PER Subdetector SourceID
-   */
-  void SetTriggerType(unsigned int triggerType) {triggerType_ = triggerType; }
-
-  /**
    * Get TriggerName  - name of trigger
    */
   string GetTriggerName() const { return triggerName_; }
@@ -45,16 +35,6 @@ class I3TriggerStatus
    * Set TriggerName  - name of trigger
    */
   void SetTriggerName(string triggerName) {triggerName_ = triggerName; }
-  
-  /**
-   * Get SourceID  - the unique Subdetector ID
-   */
-  unsigned int GetSourceID() const { return trigSourceID_; }
-  
-  /**
-   * Set SourceID  - the unique Subdetector ID
-   */
-  void SetSourceID(unsigned int sourceID) {trigSourceID_ = sourceID; }
   
   /**
    * Get Map of settings, pairs of setting name : int
@@ -72,9 +52,8 @@ class I3TriggerStatus
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3TriggerStatus]\n"
-       <<"TriggerName: "<<triggerName_
-       <<"TriggerType: "<<triggerType_
-       <<"TriggerSourceID: "<<trigSourceID_;
+       <<"TriggerName: "<<triggerName_;
+
     };
   
   virtual string ToString() const
@@ -85,8 +64,6 @@ class I3TriggerStatus
     };
 
  private:
-  unsigned int triggerType_;
-  unsigned int trigSourceID_;
   string triggerName_;
   map<string, int> triggerSettings_;
   
@@ -94,6 +71,8 @@ class I3TriggerStatus
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
+
+typedef shared_ptr<I3TriggerStatus> I3TriggerStatusPtr;
 
 #endif
 

@@ -41,11 +41,14 @@ TEST(jam_triggers_into_map)
   //Now. round me up a trigger
   I3TriggerPtr trig(new I3Trigger());
   trig->SetTriggerTime(10.0);
-  //Now, jam into triggerdict.
-  tdp[TriggerKey(123,456,4000)] = trig;
+  TriggerKey mykey(123,456,4000);
+  string themapkey = TriggerKey::GenerateName(mykey);
+
+ //Now, jam into triggerdict.
+  tdp[themapkey] = trig;
 
   //alright smartass, you've stored it, Now find it....
-  const I3TriggerPtr mytrig = tdp.find(TriggerKey(123,456,4000))->second;
+  const I3TriggerPtr mytrig = tdp.find(themapkey)->second;
   ENSURE_DISTANCE(mytrig->GetTriggerTime(),10.0,0.01,"triggers do` not match");
 
 }
