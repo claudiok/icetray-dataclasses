@@ -16,8 +16,9 @@
 #define I3TRIGGERDATA_H
 
 #include <TObject.h>
-#include "StoragePolicy.h"
-#include "I3Trigger.h"
+#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/I3Trigger.h"
+//#include "dataclasses/TriggerKey.h"
 #include <sstream>
 
 /**

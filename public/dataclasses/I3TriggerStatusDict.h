@@ -13,7 +13,7 @@
 
 #include "TObject.h"
 #include "dataclasses/I3TriggerStatus.h"
-#include "dataclasses/OMKey.h"
+#include "dataclasses/TriggerKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
@@ -24,7 +24,7 @@
  */
 class I3TriggerStatusDict 
 : public TObject, 
-  public STLMapStoragePolicy<OMKey,I3TriggerStatus>{
+  public STLMapStoragePolicy<TriggerKey,I3TriggerStatus>{
  public:
   /**
    * constructor
@@ -42,7 +42,7 @@ class I3TriggerStatusDict
    */
   virtual void ToStream(ostream& o) const
     {
-      o<<"IMPLEMENT ME\n";
+      o<<"IMPLEMENT ME: no status for you\n";
     }
 
   virtual string ToString() const

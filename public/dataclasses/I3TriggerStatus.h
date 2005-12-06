@@ -35,6 +35,16 @@ class I3TriggerStatus
    * Set TriggerType  - the unique ID PER Subdetector SourceID
    */
   void SetTriggerType(unsigned int triggerType) {triggerType_ = triggerType; }
+
+  /**
+   * Get TriggerName  - name of trigger
+   */
+  string GetTriggerName() const { return triggerName_; }
+  
+  /**
+   * Set TriggerName  - name of trigger
+   */
+  void SetTriggerName(string triggerName) {triggerName_ = triggerName; }
   
   /**
    * Get SourceID  - the unique Subdetector ID
@@ -58,9 +68,11 @@ class I3TriggerStatus
     { triggerSettings_= settings; }
   
 
+
   virtual void ToStream(ostream& o) const
     {
       o<<"[ I3TriggerStatus]\n"
+       <<"TriggerName: "<<triggerName_
        <<"TriggerType: "<<triggerType_
        <<"TriggerSourceID: "<<trigSourceID_;
     };
@@ -75,6 +87,7 @@ class I3TriggerStatus
  private:
   unsigned int triggerType_;
   unsigned int trigSourceID_;
+  string triggerName_;
   map<string, int> triggerSettings_;
   
   friend class boost::serialization::access;
