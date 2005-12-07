@@ -24,3 +24,25 @@ string TriggerKey::GenerateName(const TriggerKey& mykey)
   return mystring;
 
 }
+
+TriggerKey TriggerKey::ParseName(const string& myname)
+{
+  //Take our nicely generated string and deconvolve into a TriggerKey
+  TriggerKey myKey;
+
+  int sourceID, triggerType, configID;
+  size_t  strpos = myname.find("_", 0);
+  //Let's cut off of the trig_
+  string temp = myname.substr(strpos+1, myname.size());
+
+  const char* mycharstring = temp.c_str();
+  sscanf(mycharstring,"%i_%i_%i",&sourceID,&triggerType,&configID);
+  log_trace("ParseName found SourceID: %i triggerType: %i ConfigID: %i",sourceID,triggerType,configID);
+
+  myKey.SetSourceID(sourceID);
+  myKey.SetTriggerType(triggerType);
+  myKey.SetTriggerConfigID(configID);
+
+  return myKey;
+
+}

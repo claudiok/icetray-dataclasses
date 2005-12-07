@@ -41,8 +41,11 @@ TEST(jam_triggers_into_map)
   //Now. round me up a trigger
   I3TriggerPtr trig(new I3Trigger());
   trig->SetTriggerTime(10.0);
-  TriggerKey mykey(123,456,4000);
+  TriggerKey mykey(4000,123,456);
   string themapkey = TriggerKey::GenerateName(mykey);
+  TriggerKey key2 = TriggerKey::ParseName(themapkey);
+
+  ENSURE(mykey==key2,"Map Keys not equal");
 
  //Now, jam into triggerdict.
   tdp[themapkey] = trig;
