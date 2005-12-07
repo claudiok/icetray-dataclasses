@@ -37,5 +37,7 @@ class I3DOMStatus
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
+typedef shared_ptr<I3DOMStatus> I3DOMStatusPtr;
+
 #endif
 

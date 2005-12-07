@@ -36,7 +36,12 @@ TriggerKey TriggerKey::ParseName(const string& myname)
   string temp = myname.substr(strpos+1, myname.size());
 
   const char* mycharstring = temp.c_str();
-  sscanf(mycharstring,"%i_%i_%i",&sourceID,&triggerType,&configID);
+  int scanread = sscanf(mycharstring,"%i_%i_%i",&sourceID,&triggerType,&configID);
+  if(scanread != 3) //Failed to find right number of parameters!
+    {
+    log_fatal("TriggerKey::ParseName failed to find correct number of parameters in string");
+    }
+
   log_trace("ParseName found SourceID: %i triggerType: %i ConfigID: %i",sourceID,triggerType,configID);
 
   myKey.SetSourceID(sourceID);

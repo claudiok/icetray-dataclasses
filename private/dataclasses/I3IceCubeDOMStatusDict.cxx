@@ -7,7 +7,7 @@ template <class Archive>
   void I3IceCubeDOMStatusDict::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3IceCubeDOMStatus",
-		  base_object< STLMapStoragePolicy<OMKey,I3DOMStatus> >(*this));
+		  base_object< STLMapStoragePolicy<OMKey,I3DOMStatusPtr> >(*this));
   }
 
 
