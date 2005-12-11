@@ -16,11 +16,19 @@
 #include "dataclasses/I3Trigger.h"
 
 using namespace std; 
+
+enum EventFlasherStatusType{single_flasher = 0, muon_event = 1, 
+  multi_flasher = 2,flasher_not_set = -1};
+
 /**
  * @brief This contains the data on which DOM flashed during flasher runs
  *
  * It holds the flashing DOMs OMKey, brightness level, mask (which LEDs fired)
  * firing time, and ATWD trace of the LED current pulse 
+ * 
+ * This will be changed into a I3Trigger derrived class eventually, once there
+ * is sufficient funcionality to get Flasher settings somewhere.
+ * Included here for use by flasher analysis people.  It can be "I3Bagged".
  *
  */
 class I3FlasherInfo : public I3Trigger
@@ -34,7 +42,7 @@ protected:
 
     OMKey flasherOM_; 
     /**
-     *  Time (in nsec) in 25 nsec units, of the LED
+     *  Time (in nsec) in 25 nsec units, of the LED flash time.
      */
 
     double flashTime_;  
@@ -56,7 +64,7 @@ protected:
 
      int LEDBrightness_;
 
-     int muon_;
+     EventFlasherStatusType eventFlasherStatus_;
 
     
 public:
@@ -65,13 +73,13 @@ public:
      */
      I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
 	{
-	  muon_=-1;
+	  eventFlasherStatus_= flasher_not_set;
 	}
 
     /**
      * destructor
      */
-    virtual ~I3FlasherInfo();
+    virtual ~I3FlasherInfo(){;}
 
 
     /* return and set OMKey */
@@ -107,8 +115,10 @@ public:
      * for use by muon-filter
      */
     
-     int GetEventIsMuon() const {return muon_;}
-     void SetEventIsMuon(int muon) {muon_=muon;}
+     EventFlasherStatusType GetEventFlasherStatus() const 
+     {return eventFlasherStatus_;}
+     void SetEventFlasherStatus(EventFlasherStatusType eventFlasherStatus) 
+     {eventFlasherStatus_=eventFlasherStatus;}
 
 
     /**
@@ -118,11 +128,11 @@ public:
     const vector<int>& GetRawATWD3() const {return rawATWD3_;}
   
 
-    // tpm void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
+    void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
 
     
     /* is ATWD3 pedestal subtracted? */
-    // tpm bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
+    bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
 
     /* sets the ATWD3 waveform */
     void SetRawATWD3(const vector<int>& ATWD3data) {rawATWD3_=ATWD3data;}
@@ -141,9 +151,8 @@ private:
 
     template <class Archive> void serialize(Archive & ar, unsigned version);
 
-//ClassDef(I3FlasherInfo,1);
+ClassDef(I3FlasherInfo,1);
 };
-
 
 /**
  * There is only one I3FlasherInfo, so should be no need for pointers
