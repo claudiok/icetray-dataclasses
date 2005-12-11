@@ -128,11 +128,11 @@ public:
     const vector<int>& GetRawATWD3() const {return rawATWD3_;}
   
 
-    void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
+ //   void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
 
     
     /* is ATWD3 pedestal subtracted? */
-    bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
+   // bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
 
     /* sets the ATWD3 waveform */
     void SetRawATWD3(const vector<int>& ATWD3data) {rawATWD3_=ATWD3data;}
@@ -151,7 +151,7 @@ private:
 
     template <class Archive> void serialize(Archive & ar, unsigned version);
 
-ClassDef(I3FlasherInfo,1);
+//ClassDef(I3FlasherInfo,1);
 };
 
 /**
