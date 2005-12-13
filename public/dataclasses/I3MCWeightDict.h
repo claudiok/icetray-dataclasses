@@ -27,7 +27,8 @@
  * accessing elements in the map is inherited from the MapPolicy,
  * which is currently set to STLMapStoragePolicy.
  */
-class I3MCWeightDict : public TObject, public STLMapStoragePolicy<string, float> {
+class I3MCWeightDict : public TObject, public STLMapStoragePolicy<string, double> 
+{
  public:
   /**
    * constructor
