@@ -107,6 +107,12 @@ class STLMapStoragePolicy
    * whether the key exists before retrieving it.
    * If it does not find the key you're looking for
    * it prints an error message and a list of possible keys.
+   * WARNING!!! - Use with caution. I may not be obvious at first
+   * glance, but if the element you're looking for is not found
+   * an *empty* entry will be added to the map.  This can cause
+   * serious headaches for modules down the chain.  I *STRONGLY*
+   * suggest you use find() to verify the element exist before
+   * trying to Get() it.
    */
   ElementType& Get(const KeyType& key) {
     if(!count(key)){
