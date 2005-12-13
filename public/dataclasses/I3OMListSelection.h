@@ -20,7 +20,8 @@ typedef shared_ptr<I3OMListSelection>  I3OMListSelectionPtr;
 /**
  * @brief Virtual base class for OMSelections that check against a list of OMKeys
  */
-class I3OMListSelection : public I3OMResponseSelection {
+class I3OMListSelection : public I3OMResponseSelection 
+{
 
 public:
   
@@ -56,9 +57,9 @@ public:
    * existing list
    */ 
   virtual void SetOMList(const STLVectorStoragePolicy<OMKey>& list) {
-    if (omList_.Size() > 0) {
+    if (omList_.size() > 0) {
       log_warn("Overwriting list of OMs.");
-      omList_.Clear();
+      omList_.clear();
     }
     omList_ = list;
   }
@@ -67,7 +68,7 @@ public:
    * Adds a single OMKey to the list
    */
   virtual void AddOM(OMKey key) {
-    omList_.Add(key);
+    omList_.push_back(key);
   }
 
   virtual I3OMResponseSelectionPtr GetCopy() = 0;

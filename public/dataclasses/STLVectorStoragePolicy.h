@@ -84,11 +84,6 @@ class STLVectorStoragePolicy  {
  public:
 
   /**
-   * the same as push_back()
-   */
-  void Add(const ElementType& e) { vector_.push_back(e);}
-
-  /**
    * Add data to the end of the vector.
    * @param e Data to be added.
    */
@@ -98,11 +93,6 @@ class STLVectorStoragePolicy  {
    * Removes last element.
    */
   void pop_back() { vector_.pop_back(); }
-
-  /**
-   * the same as clear()
-   */
-  void Clear() { vector_.clear();}
 
   /**
    * Erases all the elements. Note that this function only erases the 
@@ -127,39 +117,14 @@ class STLVectorStoragePolicy  {
   const_reference operator[](size_t n) const { return vector_[n]; }
 
   /**
-   * the same as operator[]()
-   */
-  reference Get(size_t n) {return vector_[n];}
-
-  /**
-   * the same as operator[]()
-   */
-  const_reference Get(size_t n) const {return vector_[n];}
-
-  /**
-   * the same as size()
-   */
-  size_t Size() const {return vector_.size();}
-
-  /**
    * Returns the number of elements in the vector.
    */
   size_t size() const { return vector_.size(); }
 
   /**
-   * the same as resize()
-   */
-  void Resize(size_t newsize) { vector_.resize(newsize);}
-
-  /**
    * Resizes the vector to the specified number of elements.
    */
   void resize(size_t newsize_) { vector_.resize(newsize_); }
-
-  /**
-   * the same reserve()
-   */
-  void Reserve(size_t n) { vector_.reserve(n);}
 
   /**
    * Attempt to preallocate enough memory for specified number of elements.
@@ -172,20 +137,10 @@ class STLVectorStoragePolicy  {
   // ElementType (for a "regular" element)
 
   /**
-   * same as begin()
-   */
-  iterator Begin() { return vector_.begin();}
-
-  /**
    * Returns a read/write iterator that points to the first element 
    * in the vector. Iteration is done in ordinary element order.
    */
   iterator begin() { return vector_.begin(); }
-
-  /**
-   * same as begin() const
-   */
-  const_iterator Begin() const {return vector_.begin();}
 
   /**
    * Returns a read-only (constant) iterator that points to the first 
@@ -194,20 +149,10 @@ class STLVectorStoragePolicy  {
   const_iterator begin() const {return vector_.begin();}
 
   /**
-   * same as end()
-   */
-  iterator End() { return vector_.end();}
-
-  /**
    * Returns a read/write iterator that points one past the last element 
    * in the vector. Iteration is done in ordinary element order.
    */
   iterator end() { return vector_.end(); }
-
-  /**
-   * same as end() const
-   */
-  const_iterator End() const {return vector_.end();}
 
   /**
    * Returns a read-only (constant) iterator that points one past the 
@@ -216,20 +161,10 @@ class STLVectorStoragePolicy  {
   const_iterator end() const {return vector_.end();}
   
   /**
-   * same as front() 
-   */
-  reference Front() { return vector_.front();}
-
-  /**
    * Returns a read/write reference to the data at the first element of 
    * the vector.
    */
   reference front() { return vector_.front(); }
-
-  /**
-   * same as front() const
-   */
-  const_reference Front() const { return vector_.front();}
 
   /**
    * Returns a read-only (constant) reference to the data at the first 
@@ -238,20 +173,10 @@ class STLVectorStoragePolicy  {
   const_reference front() const { return vector_.front(); }
 
   /**
-   * same as back()
-   */
-  reference Back() { return vector_.back();}
-
-  /**
    * Returns a read/write reference to the data at the last element of the 
    * vector.
    */
   reference back() { return vector_.back(); }
-
-  /**
-   * same as back() const
-   */
-  const_reference Back() const { return vector_.back();}
 
   /**
    * Returns a read-only (constant) reference to the data at the last 

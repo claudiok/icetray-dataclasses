@@ -42,20 +42,20 @@ class STLMapStoragePolicy
    */
   typedef map<KeyType,ElementType> map_type;
 
-	/**
-	 * the map key type
-	 */
-	typedef typename map_type::key_type key_type;
+  /**
+   * the map key type
+   */
+  typedef typename map_type::key_type key_type;
 	 
-	/**
-	 * the map mapped type
-	 */
-	typedef typename map_type::mapped_type mapped_type;
+  /**
+   * the map mapped type
+   */
+  typedef typename map_type::mapped_type mapped_type;
 	 
-	/**
-	 * the map value type
-	 */
-	typedef typename map_type::value_type value_type;
+  /**
+   * the map value type
+   */
+  typedef typename map_type::value_type value_type;
 
   /**
    * the map iterator
@@ -117,7 +117,7 @@ class STLMapStoragePolicy
   ElementType& Get(const KeyType& key) {
     if(!count(key)){
       ostringstream debugStream;
-      if(!IsEmpty()){
+      if(!empty()){
 	debugStream<<endl<<"***WARNING: Key \'"<<key<<"\' not found."<<endl;
 	debugStream<<"Here's a list of possible keys:"<<endl;
 	for(typename map_type::iterator iter = begin(); iter != end(); iter++){
@@ -155,20 +155,10 @@ class STLMapStoragePolicy
   //  const ElementType& operator[](const KeyType& key) const { return map_[key]; }
 
   /**
-   * the same as begin()
-   */
-  iterator Begin() { return map_.begin();}
-
-  /**
    * Returns a read/write iterator that points to the first pair in the map. 
    * Iteration is done in ascending order according to the keys.
    */
   iterator begin() { return map_.begin(); }
-
-  /**
-   * the same as begin() const
-   */
-  const_iterator Begin() const { return map_.begin();}
 
   /**
    * Returns a read-only (constant) iterator that points to the first pair 
@@ -177,20 +167,10 @@ class STLMapStoragePolicy
   const_iterator begin() const { return map_.begin(); }
 
   /**
-   * the same as end
-   */
-  iterator End() {return map_.end();}
-
-  /**
    * Returns a read/write iterator that points one past the last pair in the 
    * map. Iteration is done in ascending order according to the keys.
    */
   iterator end() { return map_.end(); }
-
-  /**
-   * the same as end() const
-   */
-  const_iterator End() const { return map_.end();}
 
   /**
    * Returns a read-only (constant) iterator that points one past the last 
@@ -200,19 +180,9 @@ class STLMapStoragePolicy
   const_iterator end() const { return map_.end(); }
 
   /**
-   * same as empty()
-   */
-  bool IsEmpty() const {return map_.empty();}
-
-  /**
    * Returns true if the map is empty. (Thus begin() would equal end().)
    */
   bool empty() const { return map_.empty(); }
-  
-  /**
-   * the same as clear()
-   */
-  void Clear() { map_.clear();}
   
   /**
    * Erases all elements in a map. Note that this function only erases the 
@@ -223,19 +193,9 @@ class STLMapStoragePolicy
   void clear() { map_.clear(); }
 
   /**
-   * same as size()
-   */
-  size_type GetSize() const {return map_.size();}
-
-  /**
    * Returns the size of the map.
    */
   size_type size() const { return map_.size(); }
-
-  /**
-   * same as max_size()
-   */
-  size_type GetMaxSize() const {return map_.max_size();}
 
   /**
    * Returns the maximum size of the map.
@@ -243,23 +203,11 @@ class STLMapStoragePolicy
   size_type max_size() const { return map_.max_size(); }
 
   /**
-   * same as erase()
-   */
-  size_type Erase(const KeyType& key) { return map_.erase(key);}
-
-  /**
    * Erases elements according to the provided key.
    * @param key Key of element to be erased.
    * @return The number of elements erased.
    */
   size_type erase(const KeyType &key) { return map_.erase(key); }
-
-  /**
-   * same as find()
-   */
-
-  iterator Find(const KeyType& key) { return map_.find(key);}
-  const_iterator Find(const KeyType& key) const { return map_.find(key);}
 
   /**
    * Tries to locate an element in a map.
