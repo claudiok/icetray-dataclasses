@@ -20,6 +20,7 @@
  */
 class I3RecoResultSingleParticle : public I3RecoResult
 {
+ protected:
   I3ParticlePtr particle_;
   
   // TDS FIXME most of this has/get/set stuff can go away.  You just
@@ -63,22 +64,13 @@ class I3RecoResultSingleParticle : public I3RecoResult
   /**
    * Puts the contents of the container (a reco result) into the stream
    */
-  virtual void ToStream(ostream& o) const {
-    I3RecoResult::ToStream(o);
-    o<<"The Particle:\n";
-    if(particle_)
-      o<<*particle_<<"\n";
-    else
-      o<<"NULL Particle\n";
-  }
+  virtual void ToStream(ostream& o) const;
   
  private:
 
   friend class boost::serialization::access;
-  
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  //ClassDef(I3RecoResultSingleParticle, 1);
+
 };
 
 /**
