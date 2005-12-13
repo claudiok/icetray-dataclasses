@@ -52,6 +52,8 @@ class I3AMANDAOMCalib : public TObject
   double omo_lowlim_;
   double omo_highlim_;
 
+  double pe_area_;  //TWR p.e/unit area constant
+
   vector<I3AMANDAOMCalib_XTalk> xtalk_receivers_;
 
   public:
@@ -75,6 +77,8 @@ class I3AMANDAOMCalib : public TObject
     omo_e_=NAN;
     omo_lowlim_=NAN;
     omo_highlim_=NAN;
+
+    pe_area_=NAN;
   };
   virtual ~I3AMANDAOMCalib();
 
@@ -117,6 +121,9 @@ class I3AMANDAOMCalib : public TObject
   void SetOMO_E(double e)             {omo_e_=e;}
   void SetOMO_LowLim(double lowlim)   {omo_lowlim_=lowlim;}
   void SetOMO_HighLim(double highlim) {omo_highlim_=highlim;}
+
+  void SetPEarea(double pe)           {pe_area_=pe;}
+  double GetPEarea()                  {return pe_area_;}
 
   vector<I3AMANDAOMCalib_XTalk> &GetXTalk_Receivers() {return xtalk_receivers_;}
 

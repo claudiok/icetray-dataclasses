@@ -22,6 +22,7 @@ template <class Archive>
     ar & make_nvp("omo_e",omo_e_);
     ar & make_nvp("omo_lowlim",omo_lowlim_);
     ar & make_nvp("omo_highlim",omo_highlim_);
+    ar & make_nvp("pe_area",pe_area_);
     ar & make_nvp("xtalk_senders",xtalk_receivers_);
   }
 
