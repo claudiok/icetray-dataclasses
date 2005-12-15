@@ -117,6 +117,16 @@ class STLVectorStoragePolicy  {
   const_reference operator[](size_t n) const { return vector_[n]; }
 
   /**
+   * the same as operator[]()
+   */
+  reference Get(size_t n) {return vector_[n];}
+
+  /**
+   * the same as operator[]()
+   */
+  const_reference Get(size_t n) const {return vector_[n];}
+
+  /**
    * Returns the number of elements in the vector.
    */
   size_t size() const { return vector_.size(); }
