@@ -13,9 +13,10 @@
 #define I3FLASHERINFO_H
 
 #include "dataclasses/OMKey.h"
-#include "dataclasses/I3Trigger.h"
+//#include "dataclasses/I3Trigger.h"
 
 using namespace std; 
+
 /**
  * @brief This contains the data on which DOM flashed during flasher runs
  *
@@ -27,7 +28,7 @@ using namespace std;
  * Included here for use by flasher analysis people.  It can be "I3Bagged".
  *
  */
-class I3FlasherInfo : public I3Trigger
+class I3FlasherInfo //: public I3Trigger
 {
 
 protected:
@@ -38,7 +39,7 @@ protected:
 
     OMKey flasherOM_; 
     /**
-     *  Time (in nsec) in 25 nsec units, of the LED
+     *  Time (in nsec) in 25 nsec units, of the LED flash time.
      */
 
     double flashTime_;  
@@ -60,8 +61,6 @@ protected:
 
      int LEDBrightness_;
 
-     int muon_;
-
     
 public:
     /**
@@ -69,7 +68,6 @@ public:
      */
      I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
 	{
-	  muon_=-1;
 	}
 
     /**
@@ -106,15 +104,6 @@ public:
     unsigned int GetMask() const { return mask_; }
     void SetMask(int LEDmask) { mask_ = LEDmask; }
 
-
-    /* return and set whether a particular event is a muon or not
-     * for use by muon-filter
-     */
-    
-     int GetEventIsMuon() const {return muon_;}
-     void SetEventIsMuon(int muon) {muon_=muon;}
-
-
     /**
      * return raw ATWD3 waveform as a read-only object
      * ATWD3 holds the digitized LED current pulse; the others channels are empty
@@ -122,11 +111,11 @@ public:
     const vector<int>& GetRawATWD3() const {return rawATWD3_;}
   
 
-    void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
+ //   void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
 
     
     /* is ATWD3 pedestal subtracted? */
-    bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
+   // bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
 
     /* sets the ATWD3 waveform */
     void SetRawATWD3(const vector<int>& ATWD3data) {rawATWD3_=ATWD3data;}

@@ -132,3 +132,4 @@ dataclasses/I3MCWeightDict.h \
 dataclasses/I3Monitoring.h \
 dataclasses/I3MonitoringHeader.h \
 dataclasses/I3FlasherInfo.h \
+dataclasses/I3FlasherInfoVect.h

@@ -252,6 +252,7 @@
 #pragma link C++ class I3MonitoringHeader+;
 
 #pragma link C++ class I3FlasherInfo+;
+#pragma link C++ class I3FlasherInfoVect+;
 
 #endif
 
