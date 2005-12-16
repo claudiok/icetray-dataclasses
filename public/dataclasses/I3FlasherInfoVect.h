@@ -11,7 +11,7 @@ class I3FlasherInfoVect : public I3Trigger
 {
   public:
     I3FlasherInfoVect(){}
-    virtual vector<I3FlasherInfoPtr>& GetFlashers() 
+    vector<I3FlasherInfoPtr>& GetFlashers() 
     {return flashers_;}
 
     virtual void ToStream(ostream& o) const
