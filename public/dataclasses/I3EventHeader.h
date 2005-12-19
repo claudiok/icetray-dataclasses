@@ -28,7 +28,8 @@ using namespace std;
  * It's supposed to have enough data to reconstruct the full event
  * from the database
  */
-class I3EventHeader : public I3DataHeader{
+class I3EventHeader : public I3DataHeader
+{
   unsigned long  runID_;
   unsigned long  eventID_;
   
@@ -36,7 +37,7 @@ class I3EventHeader : public I3DataHeader{
   /**
    * constructor
    */
-  I3EventHeader() { };
+  I3EventHeader();
 
   /**
    * destructor

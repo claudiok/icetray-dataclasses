@@ -1,7 +1,15 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/I3EventHeader.h>
 
+I3EventHeader::I3EventHeader() :
+  runID_(std::numeric_limits<unsigned long>::max()),
+  eventID_(std::numeric_limits<unsigned long>::max())
+{
+}
+
 I3EventHeader::~I3EventHeader() {}
+
+
 
 template <class Archive>
   void I3EventHeader::serialize(Archive& ar, unsigned version)
