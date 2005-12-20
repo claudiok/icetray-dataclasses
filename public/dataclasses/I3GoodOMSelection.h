@@ -47,9 +47,18 @@ public:
     };
 
   /**
-   * Returns the entire list of good OMs as a vector.  Equivalent to GetOMList().
+   * Returns the entire list of good OMs as a vector.  Equivalent to 
+   * GetOMList().
    */
-  STLVectorStoragePolicy<OMKey> GetGoodOMs() const {
+  STLVectorStoragePolicy<OMKey> GetGoodOMs() {
+    return I3OMListSelection::GetOMList();
+  };
+
+  /**
+   * Returns the entire list of good OMs as a vector.  Equivalent to 
+   * GetOMList().
+   */
+  const STLVectorStoragePolicy<OMKey>& GetGoodOMs() const {
     return I3OMListSelection::GetOMList();
   };
   
