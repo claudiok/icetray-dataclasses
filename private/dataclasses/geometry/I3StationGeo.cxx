@@ -11,7 +11,7 @@
  */
 
 #include <dataclasses/BoostHeaders.h>
-#include "dataclasses/I3StationGeo.h"
+#include "dataclasses/geometry/I3StationGeo.h"
 
 I3StationGeo::~I3StationGeo() {}
 I3StationGeo::I3StationGeo() {}

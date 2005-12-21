@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3TankGeo.h>
+#include <dataclasses/geometry/I3TankGeo.h>
 
 I3TankGeo::~I3TankGeo() {}
 

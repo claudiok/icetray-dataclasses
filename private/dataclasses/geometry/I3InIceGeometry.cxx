@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3InIceGeometry.h>
+#include <dataclasses/geometry/I3InIceGeometry.h>
 
 I3InIceGeometry::~I3InIceGeometry() {}
 

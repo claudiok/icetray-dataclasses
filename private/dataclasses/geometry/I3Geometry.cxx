@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Geometry.h>
+#include <dataclasses/geometry/I3Geometry.h>
 
 I3Geometry::~I3Geometry() {}
 

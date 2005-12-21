@@ -13,7 +13,7 @@
 
 #include <TObject.h>
 
-#include "dataclasses/I3StationMap.h"
+#include "dataclasses/geometry/I3StationMap.h"
 #include "dataclasses/StationKey.h"
 #include "dataclasses/StoragePolicy.h"
 

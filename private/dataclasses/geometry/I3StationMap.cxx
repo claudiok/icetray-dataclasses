@@ -9,8 +9,8 @@
  * @author niessen Thu Sep  2 16:38:31 EDT 2004 
  */
 #include <dataclasses/BoostHeaders.h>
-#include "dataclasses/I3StationMap.h"
-#include "dataclasses/I3SurfModuleGeo.h"
+#include "dataclasses/geometry/I3StationMap.h"
+#include "dataclasses/geometry/I3SurfModuleGeo.h"
 
 I3StationMap::~I3StationMap() {}
 

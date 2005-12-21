@@ -13,9 +13,9 @@
 
 #include <TObject.h>
 
-#include "dataclasses/I3SurfModuleGeo.h"
+#include "dataclasses/geometry/I3SurfModuleGeo.h"
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3OMGeo.h"
+#include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/OMKey.h"
 
 /**

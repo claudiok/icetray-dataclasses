@@ -14,8 +14,8 @@
 #define I3GEOMETRYHEADER_H
 
 // includes
-#include "I3DataHeader.h"
-#include "StoragePolicy.h"
+#include "dataclasses/I3DataHeader.h"
+#include "dataclasses/StoragePolicy.h"
 #include <string>
 using namespace std;
 

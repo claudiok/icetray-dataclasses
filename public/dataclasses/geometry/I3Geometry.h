@@ -14,9 +14,9 @@
 #ifndef I3GEOMETRY_H
 #define I3GEOMETRY_H
 
-#include "StoragePolicy.h"
-#include "I3InIceGeometry.h"
-#include "I3TopGeometry.h"
+#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/geometry/I3InIceGeometry.h"
+#include "dataclasses/geometry/I3TopGeometry.h"
 /**
  * @brief Top-level container of Geometry information
  * 

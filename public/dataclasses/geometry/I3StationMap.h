@@ -16,8 +16,7 @@
 #include <TObject.h>
 
 #include "dataclasses/StationKey.h"
-#include "dataclasses/I3StationGeo.h"
-//#include "dataclasses/I3TankGeo.h"
+#include "dataclasses/geometry/I3StationGeo.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**

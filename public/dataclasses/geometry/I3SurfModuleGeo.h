@@ -17,7 +17,7 @@
 #include "dataclasses/I3Constants.h"
 //#include "dataclasses/I3InIceGeometry.h"
 #include "dataclasses/OMKey.h"
-#include "dataclasses/I3OMGeo.h"
+#include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**

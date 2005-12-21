@@ -16,9 +16,9 @@
 
 #include <TObject.h>
 #include <map>
-#include "I3OMGeo.h"
-#include "OMKey.h"
-#include "StoragePolicy.h"
+#include "dataclasses/geometry/I3OMGeo.h"
+#include "dataclasses/OMKey.h"
+#include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3SurfModuleGeo.h>
+#include <dataclasses/geometry/I3SurfModuleGeo.h>
 
 I3SurfModuleGeo::~I3SurfModuleGeo() {}
 

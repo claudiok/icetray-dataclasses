@@ -9,7 +9,7 @@
  * @author niessen Fri May  6 16:39:38 EDT 2005
  */
 #include <dataclasses/BoostHeaders.h>
-#include "dataclasses/I3TopGeometry.h"
+#include "dataclasses/geometry/I3TopGeometry.h"
 
 I3TopGeometry::~I3TopGeometry() {}
 

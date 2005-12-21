@@ -16,7 +16,7 @@
 #include <TObject.h>
 
 //#include "dataclasses/I3TankMaterial.h"
-#include "dataclasses/I3SurfModuleGeo.h"
+#include "dataclasses/geometry/I3SurfModuleGeo.h"
 #include "dataclasses/StoragePolicy.h"
 using namespace std;
 
