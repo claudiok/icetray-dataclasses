@@ -79,11 +79,6 @@ class I3OMGeo : public TObject
   virtual ~I3OMGeo();
 
   /**
-   * @return the identity of this OM, either AMANDA or IceCube 
-   */
-  virtual EOMType GetOMType() const =0;
-
-  /**
    * @return The position of this OM
    */
   const I3Position& GetPos() const { return position_;}
