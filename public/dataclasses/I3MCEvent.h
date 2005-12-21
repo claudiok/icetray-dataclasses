@@ -13,7 +13,6 @@
 
 #include "dataclasses/I3Event.h"
 #include "dataclasses/I3MCParticleData.h"
-#include "dataclasses/I3MCWeightDict.h"
 
 /**
  * @brief Derived I3Event class with Monte Carlo information
@@ -29,7 +28,6 @@ class I3MCEvent : public I3Event
   float           MCFrameStart_;
   float           MCFrameStop_;
   I3MCParticleData  MCParticleData_; 
-  I3MCWeightDict MCWeightDict_;
 
  public:
   /**
@@ -66,27 +64,6 @@ class I3MCEvent : public I3Event
    * sets the stop time for the simulation
    */
   void SetMCFrameStop(float MCFrameStop){MCFrameStop_=MCFrameStop;}
-
-  /**
-   * @return the MCParticleDict as a constant object.
-   */
-  const I3MCParticleData& GetMCParticleData() const { return MCParticleData_;}
-
-  /**
-   * @return the MCParticleDict as a non-const object.
-   */
-  I3MCParticleData& GetMCParticleData(){ return MCParticleData_;}
-
-  /**
-   * @return the MCWeightDict as a constant object.
-   */
-  const I3MCWeightDict& GetMCWeightDict() const { return MCWeightDict_;}
-
-  /**
-   * @return the MCWeightDict as a non-const object.
-   */
-  I3MCWeightDict& GetMCWeightDict(){ return MCWeightDict_;}
-
 
   virtual void ToStream(ostream& o) const
     {

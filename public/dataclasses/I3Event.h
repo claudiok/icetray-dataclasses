@@ -14,11 +14,6 @@
 #include <TObject.h>
 
 #include "I3OMResponseMap.h"
-#include "I3OMSelectionDict.h"
-#include "I3RecoResultDict.h"
-#include "I3TriggerDict.h"
-#include "I3FilterDict.h"
-#include "I3Bag.h"
 #include <sstream>
 
 /**
@@ -39,11 +34,6 @@ class I3Event : public TObject
 {
   I3OMResponseMap   oMResponseMap_; 
   I3OMResponseMap   topOMResponseMap_; 
-  I3OMSelectionDict oMSelectionDict_; 
-  I3RecoResultDict  recoResultDict_; 
-  I3TriggerDict     triggerDict_; 
-  I3FilterDict      filterDict_; 
-  I3Bag             bag_; 
   
   public:
   /**
@@ -77,46 +67,6 @@ class I3Event : public TObject
   I3OMResponseMap& GetOMResponseMap() { return oMResponseMap_; }
 
   /**
-   * @return the OMSelectionDict of the event as a constant object
-   */
-  const I3OMSelectionDict& GetOMSelectionDict() const { return oMSelectionDict_; }
-
-  /**
-   * @return the OMSelectionDict as a non-constant object
-   */
-  I3OMSelectionDict& GetOMSelectionDict() { return oMSelectionDict_; }
-
-  /**
-   * @return the TriggerDict Data as a constant object
-   */
-  const I3TriggerDict& GetTriggerDict() const { return triggerDict_; }
-
-  /**
-   * @return the TriggerDict as a non-constant object
-   */
-  I3TriggerDict& GetTriggerDict() { return triggerDict_; }
-
-  /**
-   * @return the FilterDict Data as a constant object
-   */
-  const I3FilterDict& GetFilterDict() const { return filterDict_; }
-
-  /**
-   * @return the FilerDict as a non-constant object
-   */
-  I3FilterDict& GetFilterDict() { return filterDict_; }
-
-  /**
-   * @return the Bag for this event as a constant object
-   */
-  const I3Bag& GetBag() const { return bag_; }
-
-  /**
-   * @return the Bag for this event as a non-constant object
-   */
-  I3Bag& GetBag() { return bag_; }
-
-  /**
    * @param o the stream we're printing the object to
    */
   virtual void ToStream(ostream& o) const
@@ -124,11 +74,6 @@ class I3Event : public TObject
       o<<"[ I3Event \n"
        <<oMResponseMap_
        <<topOMResponseMap_
-       <<oMSelectionDict_
-       <<recoResultDict_
-       <<triggerDict_
-       <<filterDict_
-       <<bag_
        <<"]\n";
     }
 

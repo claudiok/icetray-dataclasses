@@ -9,9 +9,6 @@ I3Event::serialize(Archive& ar, unsigned version)
 {
   ar & make_nvp("OMResponseMap", oMResponseMap_);
   ar & make_nvp("TopOMResponseMap", topOMResponseMap_);
-  ar & make_nvp("OMSelectionDict", oMSelectionDict_);
-  ar & make_nvp("TriggerDict", triggerDict_);
-  ar & make_nvp("FilterDict", filterDict_);
 }
 
 I3_SERIALIZABLE(I3Event);
