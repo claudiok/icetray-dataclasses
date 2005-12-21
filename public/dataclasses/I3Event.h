@@ -87,16 +87,6 @@ class I3Event : public TObject
   I3OMSelectionDict& GetOMSelectionDict() { return oMSelectionDict_; }
 
   /**
-   * @return the RecoResult Data as a constant object
-   */
-  const I3RecoResultDict& GetRecoResultDict() const { return recoResultDict_; }
-
-  /**
-   * @return the RecoResultDict as a non-constant object
-   */
-  I3RecoResultDict& GetRecoResultDict() { return recoResultDict_; }
-
-  /**
    * @return the TriggerDict Data as a constant object
    */
   const I3TriggerDict& GetTriggerDict() const { return triggerDict_; }
