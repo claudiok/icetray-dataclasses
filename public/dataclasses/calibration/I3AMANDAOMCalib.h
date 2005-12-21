@@ -19,7 +19,7 @@
 #define I3AMANDAOMCALIBRATION_H
 
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3AMANDAOMCalib_XTalk.h"
+#include "dataclasses/calibration/I3AMANDAOMCalib_XTalk.h"
 
 #include <vector>
 #include <sstream>

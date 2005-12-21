@@ -3,8 +3,8 @@
 //
 //
 #include <dataclasses/BoostHeaders.h>
-#include "dataclasses/I3DOMCalibration.h"
-#include "dataclasses/I3Units.h"
+#include <dataclasses/calibration/I3DOMCalibration.h>
+#include <dataclasses/I3Units.h>
 
 I3DOMCalibration::~I3DOMCalibration() {}
 

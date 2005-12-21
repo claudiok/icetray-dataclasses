@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3InIceCalibration.h>
+#include <dataclasses/calibration/I3InIceCalibration.h>
 
 I3InIceCalibration::~I3InIceCalibration() {}
 

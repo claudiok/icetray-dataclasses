@@ -19,7 +19,7 @@
 
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3AMANDAOMCalib.h"
+#include "dataclasses/calibration/I3AMANDAOMCalib.h"
 
 #include <map>
 #include <TObject.h>

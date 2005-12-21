@@ -18,7 +18,7 @@
 
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3DOMCalibration.h"
+#include "dataclasses/calibration/I3DOMCalibration.h"
 
 #include <map>
 #include <TObject.h>

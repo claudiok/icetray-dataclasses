@@ -16,8 +16,8 @@
 #define I3CALIBRATION_H
 
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3InIceCalibration.h"
-#include "dataclasses/I3AMANDACalibration.h"
+#include "dataclasses/calibration/I3InIceCalibration.h"
+#include "dataclasses/calibration/I3AMANDACalibration.h"
 
 #include <TObject.h>
 

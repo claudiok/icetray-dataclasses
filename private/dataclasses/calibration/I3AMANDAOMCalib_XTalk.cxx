@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3AMANDAOMCalib_XTalk.h>
+#include <dataclasses/calibration/I3AMANDAOMCalib_XTalk.h>
 
 I3AMANDAOMCalib_XTalk::~I3AMANDAOMCalib_XTalk() {}
 

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3AMANDAOMCalib.h>
+#include <dataclasses/calibration/I3AMANDAOMCalib.h>
 
 I3AMANDAOMCalib::~I3AMANDAOMCalib() {}
 
