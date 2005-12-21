@@ -21,7 +21,7 @@
  * @brief A list of reco pulses
  */
 
-class I3RecoPulseSeries : public TObject, public STLVectorStoragePolicy<I3RecoPulsePtr>
+class I3RecoPulseSeries : public TObject, public vector<I3RecoPulsePtr>
 {
   public:
   I3RecoPulseSeries() {};

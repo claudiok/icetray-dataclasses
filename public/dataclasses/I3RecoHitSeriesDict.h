@@ -27,10 +27,10 @@
  * is a map, with each I3RecoHitSeries identified by a name chosen by
  * the module which produced it.  The syntax for accessing elements in
  * the map is inherited from the MapPolicy, which is currently set to
- * STLMapStoragePolicy.
+ * map.
  */
 class I3RecoHitSeriesDict : public TObject, 
-      	public STLMapStoragePolicy<string,I3RecoHitSeriesPtr>
+      	public map<string,I3RecoHitSeriesPtr>
 {
  public:
   /**

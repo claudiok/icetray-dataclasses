@@ -25,7 +25,7 @@
  *
  */
 class I3PMTPulseVect : public TObject,
-		       public STLVectorStoragePolicy<I3PMTPulsePtr>
+		       public vector<I3PMTPulsePtr>
 {
 
 public:

@@ -18,7 +18,7 @@
 
 using namespace std;
 
-class I3TWRLaunch : public I3DigitalLaunch, public STLVectorStoragePolicy<I3TWRFragPtr>
+class I3TWRLaunch : public I3DigitalLaunch, public vector<I3TWRFragPtr>
 {
   Int_t   id;
   Float_t bin_size;

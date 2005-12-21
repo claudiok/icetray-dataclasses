@@ -7,7 +7,7 @@ template<class Archive>
 void 
 I3TWRLaunch::serialize (Archive& ar, unsigned version)
 {
-  ar & make_nvp("I3TWRLaunch", base_object< STLVectorStoragePolicy<I3TWRFragPtr> >(*this));
+  ar & make_nvp("I3TWRLaunch", base_object< vector<I3TWRFragPtr> >(*this));
   ar & make_nvp("I3DigitalLaunch", base_object<I3DigitalLaunch>(*this));
   ar & make_nvp("ID",id);
   ar & make_nvp("BinSize",bin_size);

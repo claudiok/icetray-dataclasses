@@ -27,7 +27,7 @@ public:
   
   I3OMListSelection() {};
   
-  I3OMListSelection(const STLVectorStoragePolicy<OMKey> &list) 
+  I3OMListSelection(const vector<OMKey> &list) 
     : omList_(list) {};
   
   virtual ~I3OMListSelection();
@@ -48,14 +48,14 @@ public:
   /**
    * Returns the list of OMs as a vector of OMKeys
    */
-  STLVectorStoragePolicy<OMKey>& GetOMList() {
+  vector<OMKey>& GetOMList() {
     return omList_;
   };
 
   /**
    * Returns the list of OMs as a vector of OMKeys
    */
-  const STLVectorStoragePolicy<OMKey>& GetOMList() const {
+  const vector<OMKey>& GetOMList() const {
     return omList_;
   };
   
@@ -63,7 +63,7 @@ public:
    * Allows the list of OMs to be set all at once, overwriting any
    * existing list
    */ 
-  virtual void SetOMList(const STLVectorStoragePolicy<OMKey>& list) {
+  virtual void SetOMList(const vector<OMKey>& list) {
     if (omList_.size() > 0) {
       log_warn("Overwriting list of OMs.");
       omList_.clear();
@@ -82,7 +82,7 @@ public:
 
   virtual void ToStream(ostream& o) const {
     o << "  OM List: \n";
-    STLVectorStoragePolicy<OMKey>::const_iterator iter;
+    vector<OMKey>::const_iterator iter;
     for(iter = omList_.begin(); iter != omList_.end(); iter++) {
       o << *iter << "\n";
     }
@@ -93,7 +93,7 @@ public:
 
 private:
 
-  STLVectorStoragePolicy<OMKey> omList_;
+  vector<OMKey> omList_;
 
   friend class boost::serialization::access;
 

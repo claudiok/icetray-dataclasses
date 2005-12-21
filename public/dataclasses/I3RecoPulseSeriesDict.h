@@ -17,7 +17,7 @@
 #include "I3RecoPulseSeries.h"
 #include "StoragePolicy.h"
 
-class I3RecoPulseSeriesDict : public TObject, public STLMapStoragePolicy<string,I3RecoPulseSeriesPtr>
+class I3RecoPulseSeriesDict : public TObject, public map<string,I3RecoPulseSeriesPtr>
 
  /**
   *   Container for RecoPulseSerieses

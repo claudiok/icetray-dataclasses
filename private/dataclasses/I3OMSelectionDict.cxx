@@ -7,7 +7,7 @@ template <class Archive>
   void I3OMSelectionDict::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3OMSelectionDict", 
-		  base_object< STLMapStoragePolicy<string,I3OMResponseSelectionPtr> >(*this));
+		  base_object< map<string,I3OMResponseSelectionPtr> >(*this));
   }
 
   

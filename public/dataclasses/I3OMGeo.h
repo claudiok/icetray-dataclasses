@@ -36,11 +36,6 @@ class I3OMGeo : public TObject
    */
   enum EOrientation {Unspecified,Up,Down};
 
-  /**
-   * An enumerated type for the possible kinds of OMs
-   */
-  enum EOMType {AMANDA,IceCube,IceTop};
-
  protected:
   /**
    * the position

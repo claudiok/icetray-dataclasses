@@ -20,7 +20,7 @@
 /**
  * @brief A list of reco hits.
  */
-class I3RecoHitSeries : public TObject, public STLVectorStoragePolicy<I3RecoHitPtr>
+class I3RecoHitSeries : public TObject, public vector<I3RecoHitPtr>
 {
  public:
   /**

@@ -28,7 +28,7 @@ using namespace std;
  *
  */
 class I3OMResponseMap : public TObject, 
-                        public STLMapStoragePolicy<OMKey,I3OMResponsePtr>
+                        public map<OMKey,I3OMResponsePtr>
 {
   public:
   /**

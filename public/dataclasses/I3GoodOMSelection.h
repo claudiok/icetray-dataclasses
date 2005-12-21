@@ -27,7 +27,7 @@ public:
   
   I3GoodOMSelection() {};
   
-  I3GoodOMSelection(const STLVectorStoragePolicy<OMKey> &theList) 
+  I3GoodOMSelection(const vector<OMKey> &theList) 
     : I3OMListSelection(theList) {};
   
   virtual ~I3GoodOMSelection();
@@ -50,7 +50,7 @@ public:
    * Returns the entire list of good OMs as a vector.  Equivalent to 
    * GetOMList().
    */
-  STLVectorStoragePolicy<OMKey> GetGoodOMs() {
+  vector<OMKey> GetGoodOMs() {
     return I3OMListSelection::GetOMList();
   };
 
@@ -58,14 +58,14 @@ public:
    * Returns the entire list of good OMs as a vector.  Equivalent to 
    * GetOMList().
    */
-  const STLVectorStoragePolicy<OMKey>& GetGoodOMs() const {
+  const vector<OMKey>& GetGoodOMs() const {
     return I3OMListSelection::GetOMList();
   };
   
   /** 
    * Set the list of good OMs all at once.  Equivalent to SetOMList().
    */
-  virtual void SetGoodOMs(const STLVectorStoragePolicy<OMKey>& good_list) {
+  virtual void SetGoodOMs(const vector<OMKey>& good_list) {
     I3OMListSelection::SetOMList(good_list);
   }
   

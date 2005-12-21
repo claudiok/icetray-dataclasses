@@ -20,7 +20,7 @@
  *
  * @todo figure out how to make copy and assignment private
  */
-class I3ParticleMultiMap : public TObject, public STLMultiMapStoragePolicy<string, I3ParticlePtr>
+class I3ParticleMultiMap : public TObject, public multimap<string, I3ParticlePtr>
 {
  public:
   /**

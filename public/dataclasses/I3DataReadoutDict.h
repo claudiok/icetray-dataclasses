@@ -33,11 +33,11 @@
  * 
  * The @c DataReadoutDict is a map container.  The syntax for
  * accessing elements in the map is inherited from the MapPolicy,
- * which is currently set to STLMapStoragePolicy.
+ * which is currently set to map.
  */
 
 class I3DataReadoutDict : public TObject, 
-	public STLMapStoragePolicy<string,I3DataReadoutPtr>
+	public map<string,I3DataReadoutPtr>
 {
  public:
   /**

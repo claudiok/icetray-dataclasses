@@ -5,7 +5,7 @@ I3RecoPulseSeries::~I3RecoPulseSeries(){}
 
 template <class Archive> void I3RecoPulseSeries::serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3RecoPulseSeries", base_object< STLVectorStoragePolicy<I3RecoPulsePtr> >(*this));
+    ar & make_nvp("I3RecoPulseSeries", base_object< vector<I3RecoPulsePtr> >(*this));
   }
 
   

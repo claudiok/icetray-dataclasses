@@ -48,10 +48,6 @@ namespace boost
 using boost::serialization::make_nvp;
 using boost::serialization::base_object;
 
-#include "STLVectorStoragePolicy.h"
-#include "STLMapStoragePolicy.h"
-#include "STLMultiMapStoragePolicy.h"
-
 #include "services/I3Logging.h"
 
 

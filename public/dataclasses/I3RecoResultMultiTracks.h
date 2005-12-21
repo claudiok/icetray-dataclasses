@@ -17,7 +17,7 @@
 /**
  * @brief Reco results with more than one track
  */
-class I3RecoResultMultiTracks : public I3RecoResult, public STLVectorStoragePolicy<I3ParticlePtr>
+class I3RecoResultMultiTracks : public I3RecoResult, public vector<I3ParticlePtr>
 {
   public:
   /**

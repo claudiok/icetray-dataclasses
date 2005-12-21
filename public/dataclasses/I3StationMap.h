@@ -26,7 +26,7 @@
  * This class is meant to allow looping over station, e.g. for trigger
  * considerations
  */
-class I3StationMap : public TObject, public STLMapStoragePolicy<StationKey, I3StationGeoPtr> {
+class I3StationMap : public TObject, public map<StationKey, I3StationGeoPtr> {
 
  public:
 

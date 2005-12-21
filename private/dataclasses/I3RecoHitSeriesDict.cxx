@@ -7,7 +7,7 @@ template <class Archive>
   void I3RecoHitSeriesDict::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3RecoHitSeriesDict", 
-		  base_object< STLMapStoragePolicy<string,I3RecoHitSeriesPtr> >(*this));
+		  base_object< map<string,I3RecoHitSeriesPtr> >(*this));
   }
 
 

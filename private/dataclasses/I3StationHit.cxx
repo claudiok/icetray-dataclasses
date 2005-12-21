@@ -6,7 +6,7 @@ I3StationHit::~I3StationHit() {}
 template <class Archive>
     void I3StationHit::serialize(Archive& ar, unsigned version){
     ar & make_nvp("I3StationHit", 
-		  base_object< STLVectorStoragePolicy<I3TankHitPtr> >(*this));
+		  base_object< vector<I3TankHitPtr> >(*this));
     ar & make_nvp("StationNumber",stationNumber_);
 
   }

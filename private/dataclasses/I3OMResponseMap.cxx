@@ -7,7 +7,7 @@ template <class Archive>
   void I3OMResponseMap::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3OMResponseMap", 
-		  base_object< STLMapStoragePolicy<OMKey,I3OMResponsePtr> >(*this));
+		  base_object< map<OMKey,I3OMResponsePtr> >(*this));
   }
 
   

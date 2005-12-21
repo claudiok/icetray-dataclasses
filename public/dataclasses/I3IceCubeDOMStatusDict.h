@@ -25,7 +25,7 @@
  */
 class I3IceCubeDOMStatusDict 
 : public TObject, 
-  public STLMapStoragePolicy<OMKey,I3DOMStatusPtr>{
+  public map<OMKey,I3DOMStatusPtr>{
  public:
   /**
    * constructor

@@ -20,13 +20,13 @@ template <class Archive>
   void I3StationGeo::serialize(Archive& ar, unsigned version)
     {	
 	ar & make_nvp("I3StationGeo",
-        base_object< STLVectorStoragePolicy<I3SurfModuleGeoPtr> >(*this));  
+        base_object< vector<I3SurfModuleGeoPtr> >(*this));  
     }
 	
 
 I3OMGeoPtr I3StationGeo::GetOMGeoPtr (OMKey &om_key) {
 
-  for (STLVectorStoragePolicy<I3SurfModuleGeoPtr>::iterator i_surf_module
+  for (vector<I3SurfModuleGeoPtr>::iterator i_surf_module
 	 = this->begin ();
        i_surf_module != this->end ();
        ++i_surf_module) {

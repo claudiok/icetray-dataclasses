@@ -33,7 +33,7 @@ typedef shared_ptr<I3OMSelector>  I3OMSelectorPtr;
  *
  */
 class I3OMSelectionDict : public TObject, 
-			  public STLMapStoragePolicy<string,I3OMResponseSelectionPtr>
+			  public map<string,I3OMResponseSelectionPtr>
 {
   
  public:

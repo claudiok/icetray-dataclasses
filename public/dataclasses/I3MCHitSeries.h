@@ -24,7 +24,7 @@
  * variable (default 1) can be used to assign a statistical weighting
  * factor to the series as a whole, independent of the individual hits.
  */
-class I3MCHitSeries : public TObject, public STLVectorStoragePolicy<I3MCHit>
+class I3MCHitSeries : public TObject, public vector<I3MCHit>
 {
   double weight_;
  public:

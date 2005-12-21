@@ -25,9 +25,9 @@
  * The @c I3MCWeightDict may contain any number of float of weights.
  * The @c I3MCWeightDict is a map container.  The syntax for
  * accessing elements in the map is inherited from the MapPolicy,
- * which is currently set to STLMapStoragePolicy.
+ * which is currently set to map.
  */
-class I3MCWeightDict : public TObject, public STLMapStoragePolicy<string, double> 
+class I3MCWeightDict : public TObject, public map<string, double> 
 {
  public:
   /**

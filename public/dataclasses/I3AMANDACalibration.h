@@ -24,7 +24,7 @@
 #include <map>
 #include <TObject.h>
 
-class I3AMANDACalibration : public TObject, public STLMapStoragePolicy<OMKey, I3AMANDAOMCalibPtr>
+class I3AMANDACalibration : public TObject, public map<OMKey, I3AMANDAOMCalibPtr>
 {
 public:
     I3AMANDACalibration()

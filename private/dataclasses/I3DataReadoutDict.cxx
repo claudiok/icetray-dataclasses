@@ -7,7 +7,7 @@ template <class Archive>
   void I3DataReadoutDict::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3DataReadoutDict", 
-		  base_object< STLMapStoragePolicy<string,I3DataReadoutPtr> >(*this));
+		  base_object< map<string,I3DataReadoutPtr> >(*this));
   }
 
   

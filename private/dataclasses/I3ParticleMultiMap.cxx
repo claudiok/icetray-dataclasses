@@ -7,7 +7,7 @@ template <class Archive>
   void I3ParticleMultiMap::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3ParticleMultiMap", 
-		  base_object< STLMultiMapStoragePolicy<string, I3ParticlePtr>  >(*this));
+		  base_object< multimap<string, I3ParticlePtr>  >(*this));
   }
 
   

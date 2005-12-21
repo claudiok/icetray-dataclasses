@@ -6,7 +6,7 @@ I3MCWeightDict::~I3MCWeightDict(){}
 template <class Archive>
   void I3MCWeightDict::serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3MCWeightDict", base_object< STLMapStoragePolicy<string, double> >(*this));
+    ar & make_nvp("I3MCWeightDict", base_object< map<string, double> >(*this));
   }
   
 

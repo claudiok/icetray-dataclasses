@@ -8,7 +8,7 @@ template <class Archive>
   {
     ar & make_nvp("I3DataReadout", base_object< I3DataReadout >(*this));
     ar & make_nvp("Vector", 
-		  base_object< STLVectorStoragePolicy<I3DigitalLaunchPtr> >(*this));
+		  base_object< vector<I3DigitalLaunchPtr> >(*this));
   }
 
   

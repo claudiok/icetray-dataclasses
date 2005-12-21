@@ -24,7 +24,7 @@
 #include <TObject.h>
 
 class I3InIceCalibration : public TObject, 
-			   public STLMapStoragePolicy<OMKey, I3DOMCalibrationPtr>
+			   public map<OMKey, I3DOMCalibrationPtr>
 {
 public:
     I3InIceCalibration()

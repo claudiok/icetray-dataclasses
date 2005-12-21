@@ -29,7 +29,7 @@
  * Derived classes such as I3DigitalTWRReadout may provide
  * additional information.
  */
-class I3DigitalReadout : public I3DataReadout, public STLVectorStoragePolicy<I3DigitalLaunchPtr>
+class I3DigitalReadout : public I3DataReadout, public vector<I3DigitalLaunchPtr>
 {
  public:
   /**

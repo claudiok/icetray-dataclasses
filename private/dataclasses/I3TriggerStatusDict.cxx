@@ -7,7 +7,7 @@ template <class Archive>
   void I3TriggerStatusDict::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3TriggerStatus",
-		  base_object< STLMapStoragePolicy<TriggerKey,I3TriggerStatusPtr> >(*this));
+		  base_object< map<TriggerKey,I3TriggerStatusPtr> >(*this));
   }
 
 

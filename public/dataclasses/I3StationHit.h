@@ -20,7 +20,7 @@
  *
  */
 class I3StationHit : public TObject, 
-	 public STLVectorStoragePolicy<I3TankHitPtr> {
+	 public vector<I3TankHitPtr> {
 
  private:
 

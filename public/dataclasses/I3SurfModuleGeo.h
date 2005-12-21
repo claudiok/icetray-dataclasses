@@ -30,7 +30,7 @@
  * this list is empty for SPASE. The orientantion gives the position
  * away from grid north (in radians).
  */
-class I3SurfModuleGeo : public TObject, public STLMapStoragePolicy<OMKey, I3OMGeoPtr> {
+class I3SurfModuleGeo : public TObject, public map<OMKey, I3OMGeoPtr> {
 
  public:
 

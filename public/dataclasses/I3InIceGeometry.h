@@ -32,7 +32,7 @@
  */
 
 class I3InIceGeometry : public TObject, 
-	public STLMapStoragePolicy<OMKey,I3OMGeoPtr>
+	public map<OMKey,I3OMGeoPtr>
 {
   public:
   /** 
