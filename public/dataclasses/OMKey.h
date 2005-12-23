@@ -22,10 +22,6 @@ using namespace std;
 /**
  * @brief A small class which is the string number and om number
  * for an om
- *
- * It inhierits from pair<int,unsigned int> so it gets the 
- * comparison operator needed to sort these into a map for free.
- *
  */
 class OMKey : public TObject //, public pair<int,unsigned int>
 {
