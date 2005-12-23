@@ -1,4 +1,4 @@
-#include "dataclasses/I3Particle.h"
+#include "dataclasses/physics/I3Particle.h"
 I3Particle::~I3Particle() {}
 
 std::string I3Particle::Stringize(I3Particle::ParticleType type)

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCHitSeries.h>
+#include <dataclasses/physics/I3MCHitSeries.h>
 
 I3MCHitSeries::~I3MCHitSeries() {}
 

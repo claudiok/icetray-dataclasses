@@ -1,2 +1,2 @@
-#include <dataclasses/I3IceTopParticle.h>
+#include <dataclasses/physics/I3IceTopParticle.h>
 I3IceTopParticle::~I3IceTopParticle() { }

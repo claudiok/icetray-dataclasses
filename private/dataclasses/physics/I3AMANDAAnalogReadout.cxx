@@ -10,7 +10,7 @@
  */
 
 #include <dataclasses/BoostHeaders.h>
-#include "dataclasses/I3AMANDAAnalogReadout.h"
+#include "dataclasses/physics/I3AMANDAAnalogReadout.h"
 #include <algorithm>
 #include <functional>
 

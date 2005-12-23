@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Stopping.h>
+#include <dataclasses/physics/I3Stopping.h>
 
 I3Stopping::~I3Stopping() {}
 

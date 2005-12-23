@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3PMTPulseVect.h>
+#include <dataclasses/physics/I3PMTPulseVect.h>
 
 I3PMTPulseVect::~I3PMTPulseVect() {}
 

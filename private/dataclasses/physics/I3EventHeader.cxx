@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3EventHeader.h>
+#include <dataclasses/physics/I3EventHeader.h>
 
 I3EventHeader::I3EventHeader() :
   runID_(std::numeric_limits<unsigned long>::max()),

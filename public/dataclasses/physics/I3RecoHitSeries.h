@@ -14,7 +14,7 @@
 #define I3RECOHITSERIES_H
 
 #include "I3RecoHit.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**

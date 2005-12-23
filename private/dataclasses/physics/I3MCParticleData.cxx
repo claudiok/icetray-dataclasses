@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCParticleData.h>
+#include <dataclasses/physics/I3MCParticleData.h>
 
 I3MCParticleData::~I3MCParticleData(){}
 

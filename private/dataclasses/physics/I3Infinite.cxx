@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Infinite.h>
+#include <dataclasses/physics/I3Infinite.h>
 
 I3Infinite::~I3Infinite() {}
 

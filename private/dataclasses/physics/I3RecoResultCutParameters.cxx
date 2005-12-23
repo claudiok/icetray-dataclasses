@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3RecoResultCutParameters.h>
+#include <dataclasses/physics/I3RecoResultCutParameters.h>
 
 I3RecoResultCutParameters::~I3RecoResultCutParameters() {}
 

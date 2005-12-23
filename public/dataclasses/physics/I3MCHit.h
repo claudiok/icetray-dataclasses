@@ -15,7 +15,7 @@
 #define I3MCHIT_H
 
 #include "I3Hit.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief Derived I3Hit class with additional 'Weight' and 'Parent

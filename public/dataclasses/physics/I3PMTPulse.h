@@ -13,7 +13,7 @@
 #define I3PMTPULSE_H
 
 #include <TObject.h>
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief PMT voltage curve produced by a single hit

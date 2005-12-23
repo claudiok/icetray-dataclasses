@@ -14,7 +14,7 @@
 #define I3MCHITSERIES_H
 
 #include "I3MCHit.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**

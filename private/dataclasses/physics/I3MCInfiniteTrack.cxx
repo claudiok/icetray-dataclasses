@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCInfiniteTrack.h>
+#include <dataclasses/physics/I3MCInfiniteTrack.h>
 
 I3MCInfiniteTrack::~I3MCInfiniteTrack() {}
 

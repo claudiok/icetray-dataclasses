@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3DataReadoutDict.h>
+#include <dataclasses/physics/I3DataReadoutDict.h>
 
 I3DataReadoutDict::~I3DataReadoutDict() {}
 

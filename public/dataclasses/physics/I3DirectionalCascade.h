@@ -18,7 +18,7 @@
 #ifndef I3DIRECTIONALCASCADE_H
 #define I3DIRECTIONALCASCADE_H
 
-#include "dataclasses/I3Cascade.h"
+#include "dataclasses/physics/I3Cascade.h"
 
 /**
  * @brief A cascade with a known direction, but no energy information.

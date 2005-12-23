@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3FlasherInfo.h>
+#include <dataclasses/physics/I3FlasherInfo.h>
 
 template <class Archive>
     void I3FlasherInfo::serialize(Archive& ar, unsigned version)

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3TWRFrag.h>
+#include <dataclasses/physics/I3TWRFrag.h>
 I3TWRFrag::~I3TWRFrag() { }
 
 template<class Archive>

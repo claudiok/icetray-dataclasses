@@ -12,12 +12,12 @@
 #ifndef I3BASICTRACK_H
 #define I3BASICTRACK_H
 
-#include "dataclasses/I3TrackImpl.h"
-#include "dataclasses/I3Infinite.h"
-#include "dataclasses/I3NonEnergetic.h"
-#include "dataclasses/I3NonComposite.h"
+#include "dataclasses/physics/I3TrackImpl.h"
+#include "dataclasses/physics/I3Infinite.h"
+#include "dataclasses/physics/I3NonEnergetic.h"
+#include "dataclasses/physics/I3NonComposite.h"
 
-#include "dataclasses/I3Track.h"
+#include "dataclasses/physics/I3Track.h"
 
 /**
  * @brief BasicTrack is for vanilla track (i.e. not cascade)

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3DoubleBang.h>
+#include <dataclasses/physics/I3DoubleBang.h>
 
 I3DoubleBang::~I3DoubleBang() {}
 

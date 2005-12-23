@@ -13,7 +13,7 @@
 #define I3FLASHERINFO_H
 
 #include "dataclasses/OMKey.h"
-#include "dataclasses/I3Trigger.h"
+#include "dataclasses/physics/I3Trigger.h"
 
 using namespace std; 
 

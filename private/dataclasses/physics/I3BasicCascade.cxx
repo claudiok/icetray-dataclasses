@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3BasicCascade.h>
+#include <dataclasses/physics/I3BasicCascade.h>
 
 I3BasicCascade::~I3BasicCascade(){}
 

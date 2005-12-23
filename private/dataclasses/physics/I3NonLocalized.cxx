@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3NonLocalized.h>
+#include <dataclasses/physics/I3NonLocalized.h>
 
 I3NonLocalized::~I3NonLocalized() {}
 

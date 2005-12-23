@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3ContainedTrack.h>
+#include <dataclasses/physics/I3ContainedTrack.h>
 
 I3ContainedTrack::~I3ContainedTrack() {}
 

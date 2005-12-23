@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3DOMLaunch.h>
+#include <dataclasses/physics/I3DOMLaunch.h>
 
 I3DOMLaunch::~I3DOMLaunch() {}
 

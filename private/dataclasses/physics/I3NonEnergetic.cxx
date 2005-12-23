@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3NonEnergetic.h>
+#include <dataclasses/physics/I3NonEnergetic.h>
 
 I3NonEnergetic::~I3NonEnergetic(){}
 

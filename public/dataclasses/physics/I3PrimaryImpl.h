@@ -13,7 +13,7 @@
 #define I3PRIMARYIMPL_H
 
 #include <TObject.h>
-#include "dataclasses/I3Primary.h"
+#include "dataclasses/physics/I3Primary.h"
 #include <vector>
 #include <cmath>
 

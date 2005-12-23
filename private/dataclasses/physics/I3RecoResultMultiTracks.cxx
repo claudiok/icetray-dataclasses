@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3RecoResultMultiTracks.h>
+#include <dataclasses/physics/I3RecoResultMultiTracks.h>
 
 I3RecoResultMultiTracks::~I3RecoResultMultiTracks() {}
 

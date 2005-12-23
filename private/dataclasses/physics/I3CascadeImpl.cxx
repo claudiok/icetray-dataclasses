@@ -1,11 +1,11 @@
-#include "dataclasses/I3CascadeImpl.h"
-#include "dataclasses/I3NonEnergetic.h"
-#include "dataclasses/I3Energetic.h"
-#include "dataclasses/I3NonComposite.h"
-#include "dataclasses/I3Composite.h"
-#include "dataclasses/I3Directional.h"
-#include "dataclasses/I3NonDirectional.h"
-#include "dataclasses/I3Localized.h"
+#include "dataclasses/physics/I3CascadeImpl.h"
+#include "dataclasses/physics/I3NonEnergetic.h"
+#include "dataclasses/physics/I3Energetic.h"
+#include "dataclasses/physics/I3NonComposite.h"
+#include "dataclasses/physics/I3Composite.h"
+#include "dataclasses/physics/I3Directional.h"
+#include "dataclasses/physics/I3NonDirectional.h"
+#include "dataclasses/physics/I3Localized.h"
 
 
 template <typename DirectionT, typename LocalT, typename EnergyT, typename CompositeT>

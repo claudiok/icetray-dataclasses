@@ -17,7 +17,7 @@
 #ifndef I3MCINFINITETRACK_H
 #define I3MCINFINITETRACK_H
 
-#include "dataclasses/I3Track.h"
+#include "dataclasses/physics/I3Track.h"
 
 /**
  * @brief For representing infinite tracks from Monte Carlo, where we have all

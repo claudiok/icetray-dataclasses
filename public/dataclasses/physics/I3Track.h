@@ -14,11 +14,10 @@
 #define I3TRACK_H
 
 #include <TObject.h>
-#include "dataclasses/I3InIceParticle.h"
+#include "dataclasses/physics/I3InIceParticle.h"
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3Units.h"
 #include <vector>
 #include <cmath>
 

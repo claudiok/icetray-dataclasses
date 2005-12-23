@@ -12,10 +12,10 @@
 #define I3STOPPING_H
 
 #include <cmath>
-#include "I3Constants.h"
-#include "I3Position.h"
-#include "I3Direction.h"
-#include "I3Particle.h"
+#include "dataclasses/I3Constants.h"
+#include "dataclasses/I3Position.h"
+#include "dataclasses/I3Direction.h"
+#include "dataclasses/physics/I3Particle.h"
 
 /**
  * @brief This class services the 'geometrical' part of the I3Track interface.

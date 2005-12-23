@@ -17,7 +17,7 @@
 #include <vector>
 
 #include "I3AnalogReadout.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief Old-style AMANDA ADC/TDC readout

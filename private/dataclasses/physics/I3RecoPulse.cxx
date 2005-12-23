@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3RecoPulse.h>
+#include <dataclasses/physics/I3RecoPulse.h>
 
 I3RecoPulse::~I3RecoPulse() {}
 

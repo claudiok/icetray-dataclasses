@@ -13,8 +13,8 @@
 
 #include <TObject.h>
 #include <vector>
-#include "dataclasses/I3DigitalLaunch.h"
-#include "dataclasses/I3TWRFrag.h"
+#include "dataclasses/physics/I3DigitalLaunch.h"
+#include "dataclasses/physics/I3TWRFrag.h"
 
 using namespace std;
 

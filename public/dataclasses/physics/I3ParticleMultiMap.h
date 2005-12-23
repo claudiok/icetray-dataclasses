@@ -13,7 +13,7 @@
 #define I3MCPARTICLEMULTIMAP_H
 
 #include "I3Particle.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief A list of MC particles

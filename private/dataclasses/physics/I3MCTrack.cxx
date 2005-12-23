@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCTrack.h>
+#include <dataclasses/physics/I3MCTrack.h>
 
 I3MCTrack::~I3MCTrack(){}
 

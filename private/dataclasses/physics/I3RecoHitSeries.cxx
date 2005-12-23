@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3RecoHitSeries.h>
+#include <dataclasses/physics/I3RecoHitSeries.h>
 
 I3RecoHitSeries::~I3RecoHitSeries() {}
 

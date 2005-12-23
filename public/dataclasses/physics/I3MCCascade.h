@@ -18,7 +18,7 @@
 #ifndef I3MCCASCADE_H
 #define I3MCCASCADE_H
 
-#include "dataclasses/I3Cascade.h"
+#include "dataclasses/physics/I3Cascade.h"
 
 /**
  * @brief A cascade with full MC information.

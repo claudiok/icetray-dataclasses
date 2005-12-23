@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3ShowerCore.h>
+#include <dataclasses/physics/I3ShowerCore.h>
 
 I3ShowerCore::~I3ShowerCore() {}
 

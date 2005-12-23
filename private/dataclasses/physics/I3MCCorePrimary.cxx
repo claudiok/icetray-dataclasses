@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCCorePrimary.h>
+#include <dataclasses/physics/I3MCCorePrimary.h>
 
 template <class Archive>
     void I3MCCorePrimary::serialize(Archive& ar, unsigned version)

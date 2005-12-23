@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Filter.h>
+#include <dataclasses/physics/I3Filter.h>
 
 I3Filter::~I3Filter() {}
 

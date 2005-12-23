@@ -1,8 +1,8 @@
 #ifndef I3DOMSTATUS_H
 #define I3DOMSTATUS_H
 
-#include "dataclasses/I3RawDOMStatus.h"
-#include "dataclasses/I3CalibratedDOMStatus.h"
+#include "dataclasses/physics/I3RawDOMStatus.h"
+#include "dataclasses/physics/I3CalibratedDOMStatus.h"
 
 class I3DOMStatus 
 {

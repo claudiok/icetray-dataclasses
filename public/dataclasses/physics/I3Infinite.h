@@ -13,10 +13,10 @@
 #define I3INFINITE_H
 
 #include <cmath>
-#include "dataclasses/I3Particle.h"
-#include "I3Constants.h"
-#include "I3Direction.h"
-#include "I3Position.h"
+#include "dataclasses/physics/I3Particle.h"
+#include "dataclasses/I3Constants.h"
+#include "dataclasses/I3Direction.h"
+#include "dataclasses/I3Position.h"
 
 /**
  * @brief The geometrical part of an I3Track implementation, representing an 

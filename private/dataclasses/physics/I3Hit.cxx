@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Hit.h>
+#include <dataclasses/physics/I3Hit.h>
 I3Hit::~I3Hit() {}
 template <class Archive>
   void I3Hit::serialize(Archive& ar, unsigned version)

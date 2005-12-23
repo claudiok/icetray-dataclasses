@@ -14,7 +14,7 @@
 #define I3EVENTHEADER_H
 
 // includes
-#include "I3DataHeader.h"
+#include "dataclasses/I3DataHeader.h"
 
 #include <string>
 

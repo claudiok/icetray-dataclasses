@@ -1,5 +1,5 @@
 #include "dataclasses/BoostHeaders.h"
-#include "dataclasses/I3MonitoringHeader.h"
+#include "dataclasses/monitoring/I3MonitoringHeader.h"
 
 I3MonitoringHeader::~I3MonitoringHeader() {}
 

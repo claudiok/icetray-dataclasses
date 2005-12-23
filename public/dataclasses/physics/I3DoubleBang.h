@@ -17,7 +17,7 @@
 #ifndef I3DOUBLEBANG_H
 #define I3DOUBLEBANG_H
 
-#include "dataclasses/I3Track.h"
+#include "dataclasses/physics/I3Track.h"
 
 /**
  * @brief For representing contained tau events,

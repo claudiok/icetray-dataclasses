@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3TWRLaunch.h>
+#include <dataclasses/physics/I3TWRLaunch.h>
 
 I3TWRLaunch::~I3TWRLaunch() {}
 

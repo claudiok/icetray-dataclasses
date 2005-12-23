@@ -13,8 +13,8 @@
 #define I3PARTICLE_H
 
 #include "TObject.h"
-#include "I3Position.h"
-#include "StoragePolicy.h"
+#include "dataclasses/I3Position.h"
+#include "dataclasses/StoragePolicy.h"
 #include "TClass.h"
 #include <iostream>
 #include <cmath>

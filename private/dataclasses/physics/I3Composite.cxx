@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Composite.h>
+#include <dataclasses/physics/I3Composite.h>
 
 I3Composite::~I3Composite() {}
 

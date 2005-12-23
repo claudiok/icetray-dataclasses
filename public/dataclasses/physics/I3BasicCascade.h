@@ -9,16 +9,16 @@
     @author deyoung
 */
 
-#include "I3CascadeImpl.h"
-#include "I3NonDirectional.h"
-#include "I3Localized.h"
-#include "I3NonEnergetic.h"
-#include "I3NonComposite.h"
+#include "dataclasses/physics/I3CascadeImpl.h"
+#include "dataclasses/physics/I3NonDirectional.h"
+#include "dataclasses/physics/I3Localized.h"
+#include "dataclasses/physics/I3NonEnergetic.h"
+#include "dataclasses/physics/I3NonComposite.h"
 
 #ifndef I3BASICCASCADE_H
 #define I3BASICCASCADE_H
 
-#include "dataclasses/I3Cascade.h"
+#include "dataclasses/physics/I3Cascade.h"
 
 /**
  * @brief A plain vanilla cascade -- no direction or energy information,

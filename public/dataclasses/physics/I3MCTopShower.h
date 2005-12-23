@@ -17,7 +17,7 @@
 #ifndef I3MCTOPSHOWER_H
 #define I3MCTOPSHOWER_H
 
-#include "dataclasses/I3TopShower.h"
+#include "dataclasses/physics/I3TopShower.h"
 
 /**
  * @brief For representing IceTop tracks from Monte Carlo, where we have all

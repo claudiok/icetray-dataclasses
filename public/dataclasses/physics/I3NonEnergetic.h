@@ -11,7 +11,7 @@
 #ifndef I3NONENERGETIC_H
 #define I3NONENERGETIC_H
 
-#include "dataclasses/I3Particle.h"
+#include "dataclasses/physics/I3Particle.h"
 #include "Rtypes.h"
 #include <cmath>
 

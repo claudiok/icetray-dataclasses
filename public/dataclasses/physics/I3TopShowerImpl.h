@@ -13,7 +13,7 @@
 #define I3TOPSHOWERIMPL_H
 
 #include <TObject.h>
-#include "dataclasses/I3TopShower.h"
+#include "dataclasses/physics/I3TopShower.h"
 #include <vector>
 #include <cmath>
 

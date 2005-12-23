@@ -15,7 +15,7 @@
  */
 
 #include "I3RecoHitSeries.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include "TObject.h"
 
 /// This is the container for all the hit series reconstructions

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCCascade.h>
+#include <dataclasses/physics/I3MCCascade.h>
 
 I3MCCascade::~I3MCCascade() {}
 

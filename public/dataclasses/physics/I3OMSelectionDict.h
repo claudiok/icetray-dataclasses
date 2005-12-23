@@ -15,7 +15,7 @@
 #include "I3OMResponseSelection.h"
 #include "I3OMResponseMap.h"
 #include "I3OMResponse.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 using namespace std;
 
 #ifndef __CINT__

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3RecoResultSingleParticle.h>
+#include <dataclasses/physics/I3RecoResultSingleParticle.h>
 
 I3RecoResultSingleParticle::~I3RecoResultSingleParticle() {}
 

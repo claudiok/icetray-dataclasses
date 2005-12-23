@@ -12,7 +12,7 @@
 #define I3DIRECTIONAL_H
 
 #include "Rtypes.h"
-#include "dataclasses/I3Particle.h"
+#include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/I3Direction.h"
 
 /**

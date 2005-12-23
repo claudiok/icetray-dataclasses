@@ -12,7 +12,7 @@
 #define I3CASCADEIMPL_H
 
 #include <TObject.h>
-#include "dataclasses/I3Cascade.h"
+#include "dataclasses/physics/I3Cascade.h"
 #include <vector>
 #include <cmath>
 

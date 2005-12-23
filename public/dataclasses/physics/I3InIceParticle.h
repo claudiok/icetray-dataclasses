@@ -11,7 +11,7 @@
 #ifndef I3INICEPARTICLE_H
 #define I3INICEPARTICLE_H
 
-#include "dataclasses/I3Particle.h"
+#include "dataclasses/physics/I3Particle.h"
 
 /**
  * @brief This class is a base class for the different particles that can 

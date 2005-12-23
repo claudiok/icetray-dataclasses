@@ -13,7 +13,7 @@
 #ifndef I3MCPARTICLEDATA_H
 #define I3MCPARTICLEDATA_H
 
-#include "dataclasses/I3ParticleMultiMap.h"
+#include "dataclasses/physics/I3ParticleMultiMap.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**

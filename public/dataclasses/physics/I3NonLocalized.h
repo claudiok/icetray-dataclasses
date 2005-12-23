@@ -12,7 +12,7 @@
 #ifndef I3NONLOCALIZED_H
 #define I3NONLOCALIZED_H
 
-#include "dataclasses/I3Particle.h"
+#include "dataclasses/physics/I3Particle.h"
 
 /**
  * @brief The core position part of an I3Primary implementation.  

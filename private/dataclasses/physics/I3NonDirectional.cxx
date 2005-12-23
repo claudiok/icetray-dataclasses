@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3NonDirectional.h>
+#include <dataclasses/physics/I3NonDirectional.h>
 
 I3NonDirectional::~I3NonDirectional() {}
 

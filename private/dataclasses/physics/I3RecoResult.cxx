@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3RecoResult.h>
+#include <dataclasses/physics/I3RecoResult.h>
 
 I3RecoResult::~I3RecoResult(){}
 

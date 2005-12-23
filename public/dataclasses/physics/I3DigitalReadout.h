@@ -14,7 +14,7 @@
 #define I3DIGITALREADOUT_H
 
 #include <iostream>
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include "I3DataReadout.h"
 #include "I3DigitalLaunch.h"
 

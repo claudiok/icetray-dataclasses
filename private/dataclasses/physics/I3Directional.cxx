@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Directional.h>
+#include <dataclasses/physics/I3Directional.h>
 
 I3Directional::~I3Directional(){ }
 

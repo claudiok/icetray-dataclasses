@@ -12,12 +12,12 @@
 #ifndef I3MCTRACK_H
 #define I3MCTRACK_H
 
-#include "dataclasses/I3TrackImpl.h"
-#include "dataclasses/I3Contained.h"
-#include "dataclasses/I3Composite.h"
-#include "dataclasses/I3Energetic.h"
+#include "dataclasses/physics/I3TrackImpl.h"
+#include "dataclasses/physics/I3Contained.h"
+#include "dataclasses/physics/I3Composite.h"
+#include "dataclasses/physics/I3Energetic.h"
 
-#include "dataclasses/I3Track.h"
+#include "dataclasses/physics/I3Track.h"
 
 /**
  * @brief For representing tracks from Monte Carlo, where we have all

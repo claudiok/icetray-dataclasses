@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3TankHit.h>
+#include <dataclasses/physics/I3TankHit.h>
 
 I3TankHit::~I3TankHit() {}
 

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3CoreLocalized.h>
+#include <dataclasses/physics/I3CoreLocalized.h>
 
 I3CoreLocalized::~I3CoreLocalized() {}
 

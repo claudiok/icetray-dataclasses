@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Trigger.h>
+#include <dataclasses/physics/I3Trigger.h>
 
 I3Trigger::~I3Trigger(){ }
 template <class Archive> void I3Trigger::serialize(Archive& ar, unsigned version)  

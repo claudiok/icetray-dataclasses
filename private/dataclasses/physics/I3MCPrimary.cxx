@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCPrimary.h>
+#include <dataclasses/physics/I3MCPrimary.h>
 
 I3MCPrimary::~I3MCPrimary() { }
 

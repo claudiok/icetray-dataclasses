@@ -18,7 +18,7 @@
 #ifndef I3CONTAINEDTRACK_H
 #define I3CONTAINEDTRACK_H
 
-#include "dataclasses/I3Track.h"
+#include "dataclasses/physics/I3Track.h"
 
 /**
  * @brief Basic track implementaion.  Contained, Non-energetic, non-composite

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCWeightDict.h>
+#include <dataclasses/physics/I3MCWeightDict.h>
 
 I3MCWeightDict::~I3MCWeightDict(){}
 

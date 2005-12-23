@@ -13,7 +13,7 @@
 #ifndef I3MCWEIGHTDICT_H
 #define I3MCWEIGHTDICT_H
 
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**

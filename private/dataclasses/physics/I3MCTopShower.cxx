@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCTopShower.h>
+#include <dataclasses/physics/I3MCTopShower.h>
 
 I3MCTopShower::~I3MCTopShower() {}
 

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3ShowerDirection.h>
+#include <dataclasses/physics/I3ShowerDirection.h>
 
 I3ShowerDirection::~I3ShowerDirection() {}
 

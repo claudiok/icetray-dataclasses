@@ -16,7 +16,7 @@
 #define I3DATAREADOUTLIST_H
 
 #include "I3DataReadout.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**

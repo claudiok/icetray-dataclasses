@@ -12,7 +12,7 @@
 #define I3ANALOGREADOUT_H
 
 #include "I3DataReadout.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief The base class for all the analog types of I3DataReadout

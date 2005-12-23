@@ -14,7 +14,7 @@
 #ifndef I3DOMLAUNCH_H
 #define I3DOMLAUNCH_H
 
-#include "dataclasses/I3DigitalLaunch.h"
+#include "dataclasses/physics/I3DigitalLaunch.h"
 
 using namespace std; 
 /**

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCEventHeader.h>
+#include <dataclasses/physics/I3MCEventHeader.h>
 
 I3MCEventHeader::~I3MCEventHeader() {}
 

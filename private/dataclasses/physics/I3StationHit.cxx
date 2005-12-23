@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3StationHit.h>
+#include <dataclasses/physics/I3StationHit.h>
 
 I3StationHit::~I3StationHit() {}
 

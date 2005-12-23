@@ -13,7 +13,7 @@
 #define I3PMTPULSEVECT_H_INCLUDED
 #include <TObject.h>
 #include "dataclasses/StoragePolicy.h"
-#include "dataclasses/I3PMTPulse.h"
+#include "dataclasses/physics/I3PMTPulse.h"
 
 /**
  * @brief List of PMT pulses produced by individual hits

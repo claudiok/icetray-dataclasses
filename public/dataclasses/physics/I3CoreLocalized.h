@@ -11,9 +11,9 @@
 #ifndef I3CORELOCALIZED_H
 #define I3CORELOCALIZED_H
 
-#include "I3Constants.h"
-#include "I3Position.h"
-#include "I3Particle.h"
+#include "dataclasses/I3Constants.h"
+#include "dataclasses/I3Position.h"
+#include "dataclasses/physics/I3Particle.h"
 /**
  * @brief The core position part of an I3Primary implementation.  
  * 

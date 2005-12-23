@@ -14,7 +14,7 @@
 #define I3RECORESULT_H
 
 #include <TObject.h>
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include <TClass.h>
 #include <iostream>
 #include <sstream>

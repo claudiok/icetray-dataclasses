@@ -15,7 +15,7 @@
  */
 
 #include "I3RecoPulseSeries.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 
 class I3RecoPulseSeriesDict : public TObject, public map<string,I3RecoPulseSeriesPtr>
 

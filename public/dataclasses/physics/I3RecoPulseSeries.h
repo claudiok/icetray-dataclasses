@@ -14,7 +14,7 @@
 #define I3RECOPULSESERIES_H
 
 #include "I3RecoPulse.h"
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**

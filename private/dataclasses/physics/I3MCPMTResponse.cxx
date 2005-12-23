@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCPMTResponse.h>
+#include <dataclasses/physics/I3MCPMTResponse.h>
 
 I3MCPMTResponse::~I3MCPMTResponse(){}
 

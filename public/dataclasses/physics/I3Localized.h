@@ -12,8 +12,8 @@
 #ifndef I3LOCALIZED_H
 #define I3LOCALIZED_H
 
-#include "I3Position.h"
-#include "dataclasses/I3Particle.h"
+#include "dataclasses/I3Position.h"
+#include "dataclasses/physics/I3Particle.h"
 /**
  * @brief A class which satisfies the "Localization" part of an I3Cascade, and 
  * allows X,Y,Z, and T to be set and got.
