@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3IceCubeDOMStatusDict.h>
+#include <dataclasses/status/I3IceCubeDOMStatusDict.h>
 
 I3IceCubeDOMStatusDict::~I3IceCubeDOMStatusDict() {}
 

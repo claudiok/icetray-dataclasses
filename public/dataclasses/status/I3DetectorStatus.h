@@ -12,9 +12,9 @@
 #ifndef I3DETECTORSTATUS_H
 #define I3DETECTORSTATUS_H
 
-#include "StoragePolicy.h"
-#include "dataclasses/I3IceCubeDOMStatusDict.h"
-#include "dataclasses/I3TriggerStatusDict.h"
+#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/status/I3IceCubeDOMStatusDict.h"
+#include "dataclasses/status/I3TriggerStatusDict.h"
 #include <sstream>
 
 /**

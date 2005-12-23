@@ -12,7 +12,7 @@
 #define I3TRIGGERSTATUSDICT_H
 
 #include "TObject.h"
-#include "dataclasses/physics/I3TriggerStatus.h"
+#include "dataclasses/status/I3TriggerStatus.h"
 #include "dataclasses/TriggerKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>

@@ -14,6 +14,7 @@
 
 #include "I3Particle.h"
 #include "dataclasses/StoragePolicy.h"
+#include <map>
 
 /**
  * @brief A list of MC particles

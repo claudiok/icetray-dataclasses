@@ -13,7 +13,7 @@
 #define I3ICECUBEDOMSTATUSDICT_H
 
 #include "TObject.h"
-#include "I3DOMStatus.h"
+#include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3DetectorStatus.h>
+#include <dataclasses/status/I3DetectorStatus.h>
 
 I3DetectorStatus::~I3DetectorStatus() {}
 

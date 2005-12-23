@@ -14,7 +14,7 @@
 #ifndef I3DAQRAWDOMSTATUS_H
 #define I3DAQRAWDOMSTATUS_H
 
-#include "dataclasses/I3RawDOMStatus.h"
+#include "dataclasses/status/I3RawDOMStatus.h"
 
 class I3DaqRawDOMStatus : public I3RawDOMStatus
     {

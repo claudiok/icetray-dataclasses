@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3TriggerStatusDict.h>
+#include <dataclasses/status/I3TriggerStatusDict.h>
 
 I3TriggerStatusDict::~I3TriggerStatusDict() {}
 

@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3DOMStatus.h>
+#include <dataclasses/status/I3DOMStatus.h>
 
 I3DOMStatus::~I3DOMStatus() {}
 

@@ -15,7 +15,7 @@
 #ifndef I3TESTDAQRAWDOMSTATUS_H
 #define I3TESTDAQRAWDOMSTATUS_H
 
-#include "dataclasses/I3RawDOMStatus.h"
+#include "dataclasses/status/I3RawDOMStatus.h"
 #include <map>
 
 using namespace std;

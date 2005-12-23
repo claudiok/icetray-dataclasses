@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3CalibratedDOMStatus.h>
+#include <dataclasses/status/I3CalibratedDOMStatus.h>
 
 I3CalibratedDOMStatus::~I3CalibratedDOMStatus(){}
 

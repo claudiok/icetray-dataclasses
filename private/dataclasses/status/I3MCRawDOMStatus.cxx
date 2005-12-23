@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3MCRawDOMStatus.h>
+#include <dataclasses/status/I3MCRawDOMStatus.h>
 
 I3MCRawDOMStatus::~I3MCRawDOMStatus() {}
 

@@ -16,7 +16,7 @@
 #define I3RAWDOMSTATUS_PROPOSAL_H
 
 #include <string>
-#include "StoragePolicy.h"
+#include "dataclasses/StoragePolicy.h"
 
 using namespace std;
 
