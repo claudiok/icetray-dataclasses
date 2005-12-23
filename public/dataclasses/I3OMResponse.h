@@ -30,11 +30,6 @@
  */
 class I3OMResponse : public TObject
 {
-  // with the following, you either put in the two pipes or get
-  // "cant instantiate precompiled template
-  // even though you can branch an I3MCHitSeries, or whatever.
-  // let us all hate root together for a moment
-
   I3DataReadoutDict     dataReadoutDict_; 
   I3RecoHitSeriesDict   recoHitSeriesDict_; 
   I3RecoPulseSeriesDict recoPulseSeriesDict_; 
