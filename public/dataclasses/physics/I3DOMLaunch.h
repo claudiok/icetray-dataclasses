@@ -14,7 +14,8 @@
 #ifndef I3DOMLAUNCH_H
 #define I3DOMLAUNCH_H
 
-#include "dataclasses/physics/I3DigitalLaunch.h"
+#include "TObject.h"
+#include "dataclasses/StoragePolicy.h"
 
 using namespace std; 
 /**
@@ -28,7 +29,7 @@ using namespace std;
  *
  */
 
-class I3DOMLaunch : public I3DigitalLaunch
+class I3DOMLaunch : public TObject
 {
 
 public:  
@@ -356,7 +357,6 @@ public:
      */
     virtual void ToStream(ostream& o) const
 	{
-	    I3DigitalLaunch::ToStream(o);
 	    o<<"StartTime: "<< startTime_;
 	}
 

@@ -13,14 +13,14 @@
 #ifndef I3RECOHITSERIES_H
 #define I3RECOHITSERIES_H
 
-#include "I3RecoHit.h"
+#include "I3Hit.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**
  * @brief A list of reco hits.
  */
-class I3RecoHitSeries : public TObject, public vector<I3RecoHitPtr>
+class I3RecoHitSeries : public TObject, public vector<I3HitPtr>
 {
  public:
   /**
@@ -61,7 +61,7 @@ class I3RecoHitSeries : public TObject, public vector<I3RecoHitPtr>
     I3RecoHitSeries::const_iterator iter;
     for(iter=begin();iter!=end();iter++)
     {
-     if(*iter == I3RecoHitPtr((I3RecoHit*)0)) o<<"Null I3RecoHit";
+     if(*iter == I3HitPtr((I3Hit*)0)) o<<"Null I3RecoHit";
      else o<<*(*iter);
     }
     o<<"]\n";

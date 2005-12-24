@@ -13,12 +13,11 @@
 
 #include <TObject.h>
 #include <vector>
-#include "dataclasses/physics/I3DigitalLaunch.h"
 #include "dataclasses/physics/I3TWRFrag.h"
 
 using namespace std;
 
-class I3TWRLaunch : public I3DigitalLaunch, public vector<I3TWRFragPtr>
+class I3TWRLaunch : public TObject, public vector<I3TWRFragPtr>
 {
   Int_t   id;
   Float_t bin_size;

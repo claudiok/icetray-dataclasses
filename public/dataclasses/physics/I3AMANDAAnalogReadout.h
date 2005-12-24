@@ -16,7 +16,7 @@
 #include <iostream>
 #include <vector>
 
-#include "I3AnalogReadout.h"
+#include "TObject.h"
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -27,7 +27,7 @@
  * that represents the peak from the entire event.  TOTs are generated
  * on the fly and may be wrong if edges are missing.
  */
-class I3AMANDAAnalogReadout : public I3AnalogReadout 
+class I3AMANDAAnalogReadout : public TObject 
 { 
   std::vector<double> LEs_; 
   std::vector<double> TEs_; 
@@ -119,7 +119,6 @@ public:
 
   virtual void ToStream(std::ostream& o) const 
   {
-    I3AnalogReadout::ToStream(o);
     o << "Amplitude: " << adc_ << "\n"
       << "Number of Pulses: " << LEs_.size() << "\n"
       << "Leading Edges: ";
