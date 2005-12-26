@@ -17,7 +17,7 @@
 
 using namespace std;
 
-class I3TWRLaunch : public TObject, public vector<I3TWRFragPtr>
+class I3TWRLaunch : public TObject, public vector<I3TWRFrag>
 {
   Int_t   id;
   Float_t bin_size;

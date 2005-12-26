@@ -21,7 +21,7 @@
  * @brief A list of reco pulses
  */
 
-class I3RecoPulseSeries : public TObject, public vector<I3RecoPulsePtr>
+class I3RecoPulseSeries : public TObject, public vector<I3RecoPulse>
 {
   public:
   I3RecoPulseSeries() {};
@@ -31,11 +31,11 @@ class I3RecoPulseSeries : public TObject, public vector<I3RecoPulsePtr>
   {
     if(this->size())
     {
-      double min = (*this->begin())->GetTime();
+      double min = this->begin()->GetTime();
       I3RecoPulseSeries::iterator iter;
       for(iter=this->begin(); iter!=this->end(); iter++)
       {
-        if(*iter) {if(min>(*iter)->GetTime()) min=(*iter)->GetTime();}
+        if(min>iter->GetTime()) min=iter->GetTime();
       }
       return(min);
     }
@@ -48,8 +48,7 @@ class I3RecoPulseSeries : public TObject, public vector<I3RecoPulsePtr>
     I3RecoPulseSeries::const_iterator iter;
     for(iter=begin();iter!=end();iter++)
     {
-      if(*iter == I3RecoPulsePtr((I3RecoPulse*)0)) o<<"Null I3RecoPulse";
-      else o<<*(*iter);
+      o<<*iter;
     }
     o<<"]\n";
   }

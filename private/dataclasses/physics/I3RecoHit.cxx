@@ -1,5 +1,5 @@
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3RecoHit.h>
+#include <dataclasses/physics/I3RecoHit.h>
 
 I3RecoHit::~I3RecoHit() {}
 

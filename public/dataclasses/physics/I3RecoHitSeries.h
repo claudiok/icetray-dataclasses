@@ -13,14 +13,14 @@
 #ifndef I3RECOHITSERIES_H
 #define I3RECOHITSERIES_H
 
-#include "I3Hit.h"
+#include "dataclasses/physics/I3RecoHit.h"
 #include "dataclasses/StoragePolicy.h"
 #include <sstream>
 
 /**
  * @brief A list of reco hits.
  */
-class I3RecoHitSeries : public TObject, public vector<I3HitPtr>
+class I3RecoHitSeries : public TObject, public vector<I3RecoHit>
 {
  public:
   /**
@@ -40,11 +40,11 @@ class I3RecoHitSeries : public TObject, public vector<I3HitPtr>
   {
     if(this->size()) 
     { 
-      double min = (*this->begin())->GetTime();
+      double min = this->begin()->GetTime();
       I3RecoHitSeries::iterator iter;
       for(iter=this->begin(); iter!=this->end(); iter++) 
       {
-        if(min>(*iter)->GetTime()) min=(*iter)->GetTime();
+        if(min>iter->GetTime()) min=iter->GetTime();
       }
       return(min);
     }
@@ -61,8 +61,7 @@ class I3RecoHitSeries : public TObject, public vector<I3HitPtr>
     I3RecoHitSeries::const_iterator iter;
     for(iter=begin();iter!=end();iter++)
     {
-     if(*iter == I3HitPtr((I3Hit*)0)) o<<"Null I3RecoHit";
-     else o<<*(*iter);
+     o<<*iter;
     }
     o<<"]\n";
   }

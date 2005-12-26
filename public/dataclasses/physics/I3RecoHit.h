@@ -14,7 +14,7 @@
 #define I3RECOHIT_H
 
 #include <TObject.h>
-#include "I3Hit.h"
+#include "dataclasses/physics/I3Hit.h"
 
 /**
  * @brief A base class for reconstruted hits.  
