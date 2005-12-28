@@ -26,44 +26,22 @@
 class I3RecoHit : public I3Hit
 {
   public:
-  /**
-   * constructor
-   */
   I3RecoHit(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3RecoHit();
 
-  /**
-   * copy constructor just uses assignment
-   */
-  I3RecoHit(const I3RecoHit& rhs){*this = rhs;}
+  const map<string,double>& GetUserParameters() const {return user_;}
 
-  /**
-   * assignment is just member-wise assignment
-   */
-  //const I3RecoHit& operator=(const I3RecoHit& rhs){
-  //  if (this == &rhs) return *this; // check for assignment to self
-  //  I3Hit::operator=(rhs); // call base class assignment operator
-  //  fConfidence = rhs.fConfidence;
-  //  return *this;
-  //}
+  map<string,double>& GetUserParameters(){return user_;}
 
  private:
-  //ROOT macro
-  //ClassDef(I3RecoHit, 1);
+  map<string,double> user_;
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
 typedef shared_ptr<I3RecoHit>  I3RecoHitPtr;
 
 

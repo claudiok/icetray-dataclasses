@@ -47,10 +47,25 @@ class I3Trigger : public TObject
   virtual ~I3Trigger();
     
   private:
-  double  triggerTime_;       // Time at which the trigger was issued
-  double  triggerLength_;     // Duration of triggered readout window
-  bool    fired_;             // true if trigger fired (used for simulations)
-  TrigSubDetector triggerSubDetector_;// subdetector on which this trigger ran
+  /**
+   * Time at which the trigger was issued
+   */
+  double  triggerTime_;  
+
+  /**
+   * Duration of triggered readout window     
+   */
+  double  triggerLength_;
+
+  /**
+   * true if trigger fired (used for simulations)
+   */
+  bool    fired_;
+
+  /**
+   * subdetector on which this trigger ran
+   */
+  TrigSubDetector triggerSubDetector_;
 
   public:
 
