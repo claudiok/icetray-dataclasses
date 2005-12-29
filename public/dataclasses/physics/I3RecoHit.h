@@ -14,7 +14,6 @@
 #define I3RECOHIT_H
 
 #include <TObject.h>
-#include "dataclasses/physics/I3Hit.h"
 
 /**
  * @brief A base class for reconstruted hits.  
@@ -23,10 +22,10 @@
  * but can be sub-classed as part of a hit series reconstruction.
  *
  */
-class I3RecoHit : public I3Hit
+class I3RecoHit : public TObject
 {
   public:
-  I3RecoHit(){}
+  I3RecoHit() : time_(NAN),hitID_(-1){}
 
   virtual ~I3RecoHit();
 
@@ -34,13 +33,32 @@ class I3RecoHit : public I3Hit
 
   map<string,double>& GetUserParameters(){return user_;}
 
+  double GetTime() const { return time_; }
+
+  void SetTime(double time) { time_ = time; }
+
+  int GetID() const { return hitID_; }
+
+  void SetID(const int hitid) { hitID_ = hitid; }
+
  private:
+
+  double time_;
+
+  int hitID_;
+
   map<string,double> user_;
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
+
+inline ostream& operator<<(ostream& o,const I3RecoHit& key)
+{
+  o<<"[ I3RecoHit ]\n";
+  return o;
+}
 
 typedef shared_ptr<I3RecoHit>  I3RecoHitPtr;
 

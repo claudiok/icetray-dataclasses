@@ -6,7 +6,8 @@ I3RecoHit::~I3RecoHit() {}
 template <class Archive>
     void I3RecoHit::serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3Hit", base_object<I3Hit>(*this));
+    ar & make_nvp("time",time_);
+    ar & make_nvp("hitID",hitID_);
     ar & make_nvp("user",user_);
   }
 

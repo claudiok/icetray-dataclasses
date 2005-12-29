@@ -14,7 +14,7 @@
 #ifndef I3MCHIT_H
 #define I3MCHIT_H
 
-#include "I3Hit.h"
+#include <TObject.h>
 #include "dataclasses/StoragePolicy.h"
 
 /**
@@ -28,37 +28,39 @@
  * CherenkovDistance- direct path distance to the track that generated
  * this hit.
  */
-class I3MCHit : public I3Hit
+class I3MCHit : public TObject
 {
-  float  weight_;
+  double time_;
+  int hitID_;
+  double  weight_;
   int    particleID_;
   double  cherenkovDistance_;
 
  public:
-  /**
-   * constructor
-   */
-  I3MCHit() : weight_(0), particleID_(0), cherenkovDistance_(0) { }
 
-  // default copy constructor, assignment operator explicitly used
-  /**
-   * @return the weight contributed by this MCHit
-   */
-  float GetWeight() const { return weight_; }
+  I3MCHit() : 
+    time_(NAN), 
+    hitID_(-1),
+    weight_(NAN), 
+    particleID_(-1), 
+    cherenkovDistance_(NAN) { }
 
-  /**
-   * @param weight the new weight for the hit
-   */
-  void SetWeight(float weight) { weight_ = weight; }
+  virtual ~I3MCHit();
 
-  /**
-   * @return the track number which caused this hit
-   */
+  double GetTime() const { return time_;}
+
+  void SetTime(double time){time_ = time;}
+
+  int GetHitID() const { return hitID_;}
+
+  void SetHitID(int hitID){hitID_ = hitID;}
+
+  double GetWeight() const { return weight_; }
+
+  void SetWeight(double weight) { weight_ = weight; }
+
   int GetParticleID() const { return particleID_; }
 
-  /**
-   * @param ParticleID set the track which caused this hit
-   */
   void SetParticleID(int ParticleID) { particleID_ = ParticleID; }
 
   /**
@@ -67,11 +69,11 @@ class I3MCHit : public I3Hit
   double GetCherenkovDistance() const { return cherenkovDistance_; }
 
   /**
-   * @param CherenkovDistance set the direct path distance to track which caused this hit
+   * @param CherenkovDistance set the direct path distance to track which 
+   * caused this hit
    */
   void SetCherenkovDistance(double CherenkovDistance) { cherenkovDistance_ = CherenkovDistance; }
 
-  virtual ~I3MCHit();
 
  private:
 
@@ -80,6 +82,12 @@ class I3MCHit : public I3Hit
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ClassDef(I3MCHit,1);
 };
+
+inline ostream& operator<<(ostream& o,const I3MCHit& key)
+{
+  o<<"[ I3MCHit ]\n";
+  return o;
+}
 
 /**
  * Pointer typedeffed away to insulate users from the 

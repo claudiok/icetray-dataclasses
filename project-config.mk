@@ -22,7 +22,6 @@ dataclasses/physics/I3DirectionalCascade.h \
 dataclasses/physics/I3DoubleBang.h \
 dataclasses/physics/I3Energetic.h \
 dataclasses/physics/I3FlasherInfo.h \
-dataclasses/physics/I3Hit.h \
 dataclasses/physics/I3IceTopParticle.h \
 dataclasses/physics/I3InIceParticle.h \
 dataclasses/physics/I3Infinite.h \
