@@ -15,7 +15,6 @@
 
 #include <TObject.h>
 #include "dataclasses/I3Position.h"
-#include <TClass.h>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -66,7 +65,10 @@ class I3OMGeo : public TObject
   /**
    * constructor
    */
-  I3OMGeo() { Init();}
+  I3OMGeo():
+    orientation_(Unspecified),
+    relativeQE_(NAN),
+    area_(NAN){};
 
   /**
    * copy constructor just uses assignment
@@ -167,14 +169,6 @@ class I3OMGeo : public TObject
     }
 
  private:
-  /**
-   * resets the data to 0's.
-   */
-  void Init() {
-	  orientation_ = Unspecified;
-	  relativeQE_ = 0;
-  }
-
 
   //ROOT macro
   //ClassDef(I3OMGeo,1);
