@@ -1,7 +1,6 @@
 // LinkDef.h
 // $Id$
 // $Date$
-
 #ifdef __CINT__
 
 #pragma link off all globals;
@@ -212,6 +211,16 @@
 
 #pragma link C++ class I3Trigger+;
 
+// kf begin
+#pragma link C++ class I3Trigger+;
+#pragma link C++ class I3TriggerDict+;
+#pragma link C++ class I3TriggerDict::iterator;
+#pragma link C++ function operator != (I3TriggerDict::iterator, I3TriggerDict::iterator);
+#pragma link C++ class shared_ptr<I3Trigger>+;
+#pragma link C++ class STLMapStoragePolicy<string,shared_ptr<I3Trigger>>+;
+#pragma link C++ class pair<string,shared_ptr<I3Trigger>>+;
+// kf end
+
 #pragma link C++ class I3DOMCalibration+;
 
 #pragma link C++ class I3AMANDAOMCalib+;
@@ -254,7 +263,5 @@
 #pragma link C++ class I3FlasherInfo+;
 
 #endif
-
-
 
 
