@@ -45,7 +45,7 @@ public:
   /**
    * Default constructor.
    */
-  I3AMANDAAnalogReadout() : processFirstLE_(true), processTOTs_(true) {}
+  I3AMANDAAnalogReadout() : processFirstLE_(true), processTOTs_(true), overflow_(false), is_calib_(false) {}
   
   /**
    * Destructor.

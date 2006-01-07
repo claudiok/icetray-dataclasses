@@ -46,14 +46,15 @@ using namespace std;
  * production times -- is stored as a I3RecoHitSeries, not a 
  * @c DataReadout.
  */
-class I3DataReadout : public TObject {
+class I3DataReadout : public TObject 
+{
     bool raw_;
     
 public:
     /**
      * default constructor
      */
-    I3DataReadout(){}
+  I3DataReadout() : raw_(false) {}
     
     /**
      * default destructor
