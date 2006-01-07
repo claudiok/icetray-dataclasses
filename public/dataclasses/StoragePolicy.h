@@ -22,8 +22,11 @@ namespace boost
     // normal forward declarations:
     class access;
     template <class T> struct nvp;
+#if BOOST_VERSION > 103200
+    template <class T> const nvp<T> make_nvp(const char* name, T& t);
+#else
     template <class T> nvp<T> make_nvp(const char* name, T& t);
-
+#endif
     // special dummy no-ops that check to see if boost headers have
     // already been included.
 #ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP

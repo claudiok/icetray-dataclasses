@@ -1,8 +1,9 @@
 #ifndef TTREE_OARCHIVE_H_INCLUDED
 #define TTREE_OARCHIVE_H_INCLUDED
 
+#include <boost/archive/detail/oserializer.hpp>
+#include <boost/archive/detail/basic_pointer_oserializer.hpp>
 #include <boost/archive/detail/common_oarchive.hpp>
-
 #include <typeinfo>
 #include <memory>
 #include <stdexcept>
@@ -75,7 +76,10 @@ namespace boost {
 	    stack++;
 	  }
 
-	archive::save(*this->This(), nv_pair.value());
+	// 1.33.1 requires this intermediate const, otherwise a static
+	// 1.33.assertion trips
+	const T& t(nv_pair.value());
+	archive::save(*this->This(), t);
 
 	if (nv_pair.name())
 	  {
@@ -99,7 +103,8 @@ namespace boost {
 	    stack++;
 	  }
 
-	archive::save(*this->This(), nv_pair.value().px);
+	// TDS: fixme!  pointer (px) is private within this context
+	archive::save(*this->This(), nv_pair.value().get());
 
 	if (nv_pair.name())
 	  {
@@ -129,7 +134,13 @@ namespace boost {
 
     public:
       ttree_oarchive_impl(ttree_proxy& ttree_proxy__) 
-	: stack(0), ttree_proxy_(ttree_proxy__)
+#if BOOST_VERSION > 103200
+      	: boost::archive::detail::common_oarchive<ttree_oarchive_impl>(0), 
+#else
+	: boost::archive::detail::common_oarchive<ttree_oarchive_impl>(), 
+#endif
+	  stack(0), 
+	  ttree_proxy_(ttree_proxy__)
       { 
 	//	props = get(vertex_data, g);
       }

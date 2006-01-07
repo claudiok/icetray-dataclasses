@@ -11,6 +11,7 @@
 #include <boost/serialization/base_object.hpp>
 #include <boost/serialization/is_abstract.hpp>
 #include <boost/serialization/export.hpp>
+#include <boost/serialization/tracking.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/map.hpp>
@@ -54,9 +55,10 @@ namespace detail
   }
 
   template <typename T>
-  void inst (boost::archive::ttree_oarchive_impl& poa, const T& t)
+  void 
+  inst (ttree_oarchive& poa, const T& t)
   {
-    poa & BOOST_SERIALIZATION_NVP(t);
+    poa << BOOST_SERIALIZATION_NVP(t);
   }
 
   template <typename T>
@@ -66,10 +68,23 @@ namespace detail
   }
 }
 
+#if BOOST_VERSION > 103200
+#define I3_BOOST_EXPORT_MACROS(T) \
+  BOOST_CLASS_TRACKING(T, boost::serialization::track_always); \
+  BOOST_CLASS_EXPORT(T);
+
+#else
+#define I3_BOOST_EXPORT_MACROS(T) \
+  BOOST_SHARED_POINTER_EXPORT(T);
+#endif
+
 #define I3_SERIALIZABLE(T)						\
-  template void ::detail::inst<T>(boost::archive::ttree_oarchive_impl&, const T&); \
+  I3_BOOST_EXPORT_MACROS(T)						\
   template void ::detail::inst<T>(boost::archive::polymorphic_oarchive&, const T&); \
   template void ::detail::inst<T>(boost::archive::polymorphic_iarchive&, T&); \
-  BOOST_SHARED_POINTER_EXPORT(T);					
+  template void ::detail::inst<T>(ttree_oarchive&, const T&);
+
+
+  //  BOOST_SHARED_POINTER_EXPORT(T);					
 
 #endif

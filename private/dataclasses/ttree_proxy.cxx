@@ -168,7 +168,7 @@ namespace boost {
 		if (v.size() > 1)
 		  {
 		    collision_remains = true;
-		    log_trace("collision(%u) %s", v.size(), (i->first).c_str());
+		    log_trace("collision(%zu) %s", v.size(), (i->first).c_str());
 		  }
 	      }
 	  } 

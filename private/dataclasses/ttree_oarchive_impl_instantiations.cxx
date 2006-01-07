@@ -9,6 +9,8 @@
 //  See http://www.boost.org for updates, documentation, and revision history.
 
 #define BOOST_ARCHIVE
+#include <boost/archive/binary_oarchive.hpp>
+
 #include <dataclasses/ttree_oarchive.h>
 
 #include <sstream>
@@ -17,6 +19,9 @@
 //#include <boost/archive/impl/basic_binary_oprimitive.ipp> // contains init(), etc
 #include <boost/archive/impl/archive_pointer_oserializer.ipp>
 #include <boost/archive/basic_binary_oprimitive.hpp>
+#include <boost/archive/detail/basic_pointer_oserializer.hpp>
+#include <boost/archive/detail/oserializer.hpp>
+
 
 namespace boost {
 namespace archive {
