@@ -7,18 +7,15 @@
  * @version $Revision: 1.0 $
  * @date $Date: 2005-06-16 14:39:52 -0700 (Thu, 16 Jun 2005) $
  * @author klein
- *
+ * @author Doug Rutledge (Made Revisions)
  */
 #ifndef I3FLASHERINFO_H
 #define I3FLASHERINFO_H
 
 #include "dataclasses/OMKey.h"
-#include "dataclasses/I3Trigger.h"
+//#include "dataclasses/I3Trigger.h"
 
 using namespace std; 
-
-enum EventFlasherStatusType{single_flasher = 0, muon_event = 1, 
-  multi_flasher = 2,flasher_not_set = -1};
 
 /**
  * @brief This contains the data on which DOM flashed during flasher runs
@@ -31,7 +28,7 @@ enum EventFlasherStatusType{single_flasher = 0, muon_event = 1,
  * Included here for use by flasher analysis people.  It can be "I3Bagged".
  *
  */
-class I3FlasherInfo : public I3Trigger
+class I3FlasherInfo //: public I3Trigger
 {
 
 protected:
@@ -42,7 +39,7 @@ protected:
 
     OMKey flasherOM_; 
     /**
-     *  Time (in nsec) in 25 nsec units, of the LED flash time.
+     *  Time (in nsec), of the LED flash time.
      */
 
     double flashTime_;  
@@ -64,8 +61,6 @@ protected:
 
      int LEDBrightness_;
 
-     EventFlasherStatusType eventFlasherStatus_;
-
     
 public:
     /**
@@ -73,7 +68,6 @@ public:
      */
      I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
 	{
-	  eventFlasherStatus_= flasher_not_set;
 	}
 
     /**
@@ -109,17 +103,6 @@ public:
 
     unsigned int GetMask() const { return mask_; }
     void SetMask(int LEDmask) { mask_ = LEDmask; }
-
-
-    /* return and set whether a particular event is a muon or not
-     * for use by muon-filter
-     */
-    
-     EventFlasherStatusType GetEventFlasherStatus() const 
-     {return eventFlasherStatus_;}
-     void SetEventFlasherStatus(EventFlasherStatusType eventFlasherStatus) 
-     {eventFlasherStatus_=eventFlasherStatus;}
-
 
     /**
      * return raw ATWD3 waveform as a read-only object
