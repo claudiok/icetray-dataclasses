@@ -1,6 +1,6 @@
 #include "dataclasses/BoostHeaders.h"
 #include "dataclasses/I3TestDaqRawDOMStatus.h"
-#include "services/I3Logging.h"
+#include "icetray/services/I3Logging.h"
 #include "dataclasses/I3Units.h"
 
 I3TestDaqRawDOMStatus::~I3TestDaqRawDOMStatus() {}

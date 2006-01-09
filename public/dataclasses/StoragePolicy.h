@@ -55,7 +55,7 @@ using boost::serialization::base_object;
 #include "STLMapStoragePolicy.h"
 #include "STLMultiMapStoragePolicy.h"
 
-#include "services/I3Logging.h"
+#include "icetray/services/I3Logging.h"
 
 
 #endif

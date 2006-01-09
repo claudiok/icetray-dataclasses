@@ -14,7 +14,7 @@
 #include "dataclasses/I3RecoResultRDMCFit.h"
 #include "dataclasses/I3MCTrack.h"
 #include "dataclasses/I3MCCascade.h"
-#include "services/I3Logging.h"
+#include "icetray/services/I3Logging.h"
 
 #include "TList.h"
 #include "TNamed.h"

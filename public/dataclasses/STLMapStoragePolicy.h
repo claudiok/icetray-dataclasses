@@ -15,7 +15,7 @@
 #include <string>
 #include <sstream>
 #include <map>
-#include "services/I3Logging.h"
+#include "icetray/services/I3Logging.h"
 
 using namespace std;
 
