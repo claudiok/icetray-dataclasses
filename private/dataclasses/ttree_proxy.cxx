@@ -6,7 +6,7 @@
 #include <string>
 #include <TTree.h>
 
-#include "services/I3Logging.h"
+#include "icetray/services/I3Logging.h"
 
 using namespace std;
 using boost::tuples::tie;

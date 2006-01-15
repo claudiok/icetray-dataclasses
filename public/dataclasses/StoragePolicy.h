@@ -48,7 +48,7 @@ namespace boost
 using boost::serialization::make_nvp;
 using boost::serialization::base_object;
 
-#include "services/I3Logging.h"
+#include "icetray/services/I3Logging.h"
 
 
 #endif
