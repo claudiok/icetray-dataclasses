@@ -14,6 +14,7 @@ template <class Archive>
 	    //ar & make_nvp("PedestalSubtractedATWD3", pedestalSubtractedATWD3_);
 	    ar & make_nvp("mask", mask_);
 	    ar & make_nvp("LEDBrightness", LEDBrightness_);
+            ar & make_nvp("width", width_);
 //	    ar & make_nvp("EventFlasherStatus", eventFlasherStatus_);
 	}
 
