@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3TopGeometry.h
- * @version $Revision: 1.19 $
  * @date $Date$
- * @author Peter Niessen Thu Feb 19 12:48:42 EST 2004
  */
-#ifndef __I3TOPGEOMETRY_H_
-#define __I3TOPGEOMETRY_H_
+
+#ifndef I3TOPGEOMETRY_H_INCLUDED
+#define I3TOPGEOMETRY_H_INCLUDED
 
 #include <TObject.h>
 
@@ -28,14 +26,8 @@ class I3TopGeometry : public TObject {
 
  public:
 
-  /**
-   * Constructor
-   */
   I3TopGeometry () {}
 
-  /**
-   * Virtual Destructor
-   */
   virtual ~I3TopGeometry();
 
   /**
@@ -74,4 +66,4 @@ class I3TopGeometry : public TObject {
 typedef shared_ptr<I3TopGeometry>  I3TopGeometryPtr;
 
 
-#endif
+#endif //I3TOPGEOMETRY_H_INCLUDED

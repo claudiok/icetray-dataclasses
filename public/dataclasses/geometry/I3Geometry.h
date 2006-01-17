@@ -2,17 +2,13 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version n$Id$
  * @file I3Geometry.h
- * @version $Revision: 1.31 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3GEOMETRY_H
-#define I3GEOMETRY_H
+
+#ifndef I3GEOMETRY_H_INCLUDED
+#define I3GEOMETRY_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/geometry/I3InIceGeometry.h"
@@ -29,14 +25,9 @@ class I3Geometry : public TObject
   I3InIceGeometry inIce_; 
   I3TopGeometry top_; 
  public:
-  /**
-   * constructor
-   */
+
   I3Geometry(){};
 
-  /**
-   * destructor
-   */
   virtual ~I3Geometry();
 
   /**
@@ -93,5 +84,5 @@ inline ostream& operator<<(ostream& o,const I3Geometry& geo)
 typedef shared_ptr<I3Geometry>  I3GeometryPtr;
 
 
-#endif // I3GEOMETRY_H
+#endif // I3GEOMETRY_H_INCLUDED
 

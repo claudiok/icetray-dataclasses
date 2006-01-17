@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3OMGeo.h
- * @version $Revision: 1.32 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3OMGEO_H
-#define I3OMGEO_H
+
+#ifndef I3OMGEO_H_INCLUDED
+#define I3OMGEO_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/I3Position.h"
@@ -58,19 +54,14 @@ class I3OMGeo : public TObject
   double area_;
 
   public:
-  /**
-   * constructor
-   */
+
   I3OMGeo() { Init();}
 
-  /**
+   /**
    * copy constructor just uses assignment
    */
   I3OMGeo(const I3OMGeo& rhs){*this = rhs;}
 
-  /**
-   * destructor
-   */
   virtual ~I3OMGeo();
 
   /**
@@ -199,5 +190,5 @@ inline ostream& operator<<(ostream& o,const I3OMGeo& g)
  */
 typedef shared_ptr<I3OMGeo>  I3OMGeoPtr;
 
-#endif
+#endif //I3OMGEO_H_INCLUDED
 

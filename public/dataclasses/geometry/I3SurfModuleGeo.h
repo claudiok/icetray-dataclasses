@@ -1,18 +1,15 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3SurfModuleGeo.h
- * @version $Revision: 1.7 $
  * @date $Date$
- * @author niessen Thu Sep  2 12:02:04 EDT 2004
  */
 
-#ifndef I3SURFDETGEO_H
-#define I3SURFDETGEO_H
+#ifndef I3SURFMODULEGEO_H_INCLUDED
+#define I3SURFMODULEGEO_H_INCLUDED
 
-#include <TObject.h>
+#include "dataclasses/I3Map.h"
 
 #include "dataclasses/I3Constants.h"
 //#include "dataclasses/I3InIceGeometry.h"
@@ -30,18 +27,12 @@
  * this list is empty for SPASE. The orientantion gives the position
  * away from grid north (in radians).
  */
-class I3SurfModuleGeo : public TObject, public map<OMKey, I3OMGeoPtr> {
+class I3SurfModuleGeo : public I3Map<OMKey, I3OMGeoPtr> {
 
  public:
 
-  /**
-   * constructor
-   */
   I3SurfModuleGeo () {}
 
-  /**
-   * virtual destructor
-   */
   virtual ~I3SurfModuleGeo();
 
   /**
@@ -95,5 +86,5 @@ class I3SurfModuleGeo : public TObject, public map<OMKey, I3OMGeoPtr> {
  */
 typedef shared_ptr<I3SurfModuleGeo>  I3SurfModuleGeoPtr;
 
-#endif
+#endif //I3SURFMODULEGEO_H_INCLUDED
 

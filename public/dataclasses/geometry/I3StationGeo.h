@@ -1,17 +1,14 @@
 /**
  * copyright (C) 2004
- * $Id$
- *
+ * @version $Id$
  * @file I3StationGeo.h
- * @version $Revision: 1.6 $
  * @date $Date$
- * @author niessen Wed Sep  1 20:55:17 EDT 2004
  */
 
-#ifndef __I3STATIONGEO_H_
-#define __I3STATIONGEO_H_
+#ifndef I3STATIONGEO_H_INCLUDED
+#define I3STATIONGEO_H_INCLUDED
 
-#include <TObject.h>
+#include "dataclasses/I3Vector.h"
 
 #include "dataclasses/geometry/I3SurfModuleGeo.h"
 #include "dataclasses/StoragePolicy.h"
@@ -25,18 +22,12 @@
  * entity to organise the tanks into stations. From an organisational
  * point of view, this is on a level with I3TankGeo.
  */
-class I3StationGeo : public TObject, public vector<I3SurfModuleGeoPtr> {
+class I3StationGeo : public I3Vector<I3SurfModuleGeoPtr> {
 
  public:
 
-  /**
-   * constructor
-   */
   I3StationGeo ();
 
-  /**
-   * virtual destructor
-   */
   virtual ~I3StationGeo ();
 
   /**
@@ -55,5 +46,5 @@ class I3StationGeo : public TObject, public vector<I3SurfModuleGeoPtr> {
 
 typedef shared_ptr<I3StationGeo>  I3StationGeoPtr;
 
-#endif
+#endif //I3STATIONGEO_H_INCLUDED
  

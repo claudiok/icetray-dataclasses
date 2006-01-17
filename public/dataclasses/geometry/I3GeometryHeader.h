@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3GeometryHeader.h
- * @version $Revision: 1.10 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3GEOMETRYHEADER_H
-#define I3GEOMETRYHEADER_H
+
+#ifndef I3GEOMETRYHEADER_H_INCLUDED
+#define I3GEOMETRYHEADER_H_INCLUDED
 
 // includes
 #include "dataclasses/I3DataHeader.h"
@@ -36,14 +32,9 @@ class I3GeometryHeader : public I3DataHeader
   string arrayName_;
   
  public:
-  /**
-   * constructor
-   */
+
   I3GeometryHeader()  : numOMs_(-1), numStrings_(-1){;}
 
-  /**
-   * destructor
-   */
   virtual ~I3GeometryHeader();
 
   /**
@@ -113,5 +104,4 @@ class I3GeometryHeader : public I3DataHeader
  */
 typedef shared_ptr<I3GeometryHeader>  I3GeometryHeaderPtr;
 
-#endif //I3GEOMETRYHEADER_H
-
+#endif //I3GEOMETRYHEADER_H_INCLUDED

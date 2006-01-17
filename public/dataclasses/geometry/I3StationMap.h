@@ -1,19 +1,16 @@
 /**
  * copyright (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3StationMap.h
- * @version $Revision: 1.6 $
  * @date $Date$
- * @author niessen Wed Sep  1 20:28:03 EDT 2004
  */
 
 
-#ifndef I3STATIONMAP_H
-#define I3STATIONMAP_H
+#ifndef I3STATIONMAP_H_INCLUDED
+#define I3STATIONMAP_H_INCLUDED
 
-#include <TObject.h>
+#include "dataclasses/I3Map.h"
 
 #include "dataclasses/StationKey.h"
 #include "dataclasses/geometry/I3StationGeo.h"
@@ -25,18 +22,12 @@
  * This class is meant to allow looping over station, e.g. for trigger
  * considerations
  */
-class I3StationMap : public TObject, public map<StationKey, I3StationGeoPtr> {
+class I3StationMap : public I3Map<StationKey, I3StationGeoPtr> {
 
  public:
 
-  /**
-   * constructor
-   */
   I3StationMap () {}
 
-  /**
-   * virtual destructor
-   */
   virtual ~I3StationMap();
 
   /**
@@ -64,4 +55,4 @@ class I3StationMap : public TObject, public map<StationKey, I3StationGeoPtr> {
  */
 typedef shared_ptr<I3StationMap>  I3StationMapPtr;
 
-#endif
+#endif //I3STATIONMAP_H_INCLUDED

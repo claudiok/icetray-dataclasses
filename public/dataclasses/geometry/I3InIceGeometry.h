@@ -1,21 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3InIceGeometry.h
- * @version $Revision: 1.23 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
- *
  */
-#ifndef I3INICEGEOMETRY_H
-#define I3INICEGEOMETRY_H
 
-#include <TObject.h>
-#include <map>
+#ifndef I3INICEGEOMETRY_H_INCLUDED
+#define I3INICEGEOMETRY_H_INCLUDED
+
+#include "dataclasses/I3Map.h"
 #include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
@@ -31,18 +25,12 @@
  * @todo make copy and assignment private.  conflict with something in tests
  */
 
-class I3InIceGeometry : public TObject, 
-	public map<OMKey,I3OMGeoPtr>
+class I3InIceGeometry : public I3Map<OMKey,I3OMGeoPtr>
 {
   public:
-  /** 
-   * constructor
-   */
+
   I3InIceGeometry(){};
 
-  /**
-   * default destructor
-   */
   virtual ~I3InIceGeometry();
 
   virtual void ToStream(ostream& o) const
@@ -90,6 +78,6 @@ inline ostream& operator<<(ostream& o,const I3InIceGeometry& v)
  */
 typedef shared_ptr<I3InIceGeometry>  I3InIceGeometryPtr;
 
-#endif //I3INICEGEOMETRY_H
+#endif //I3INICEGEOMETRY_H_INCLUDED
  
 

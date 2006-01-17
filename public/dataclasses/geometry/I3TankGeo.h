@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3TankGeo.h
- * @version $Revision: 1.19 $
  * @date $Date$
- * @author PN Thu Feb 19 11:48:23 EST 2004
  */
-#ifndef __I3TANKGEO_H_
-#define __I3TANKGEO_H_
+
+#ifndef I3TANKGEO_H_INCLUDED
+#define I3TANKGEO_H_INCLUDED
 
 #include <iostream>
 
@@ -31,14 +29,8 @@ class I3TankGeo : public I3SurfModuleGeo {
 
   public:
 
-  /**
-   * constructor
-   */
   I3TankGeo() {}
 
-  /**
-   * virtual destructor
-   */
   virtual ~I3TankGeo();
 
   /**
@@ -98,6 +90,6 @@ inline ostream& operator<<(ostream& o, const I3TankGeo tank)
  */
 typedef shared_ptr<I3TankGeo>  I3TankGeoPtr;
 
-#endif
+#endif //I3TANKGEO_H_INCLUDED
 
 
