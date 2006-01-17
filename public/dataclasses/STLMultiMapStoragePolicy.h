@@ -114,6 +114,11 @@ public:
   }
 
   /**
+   * same as Insert
+   */
+  void Add(const KeyType& key, const ElementType& element) {map_.insert(pair<KeyType, ElementType>(key, element));}
+  
+  /**
    * Returns a read/write iterator that points to the first pair in the map.
    * Iteration is done in ascending order according to the keys.
    */
