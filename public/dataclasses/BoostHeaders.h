@@ -1,5 +1,6 @@
-#ifndef BOOSTHEADERS_H
-#define BOOSTHEADERS_H
+
+#ifndef BOOSTHEADERS_H_INCLUDED
+#define BOOSTHEADERS_H_INCLUDED
 
 #include "dataclasses/ttree_oarchive.h"
 
@@ -72,4 +73,4 @@ namespace detail
   template void ::detail::inst<T>(boost::archive::polymorphic_iarchive&, T&); \
   BOOST_SHARED_POINTER_EXPORT(T);					
 
-#endif
+#endif //BOOSTHEADERS_H_INCLUDED
