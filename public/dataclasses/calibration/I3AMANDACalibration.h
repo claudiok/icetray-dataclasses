@@ -4,27 +4,22 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3AMANDACalibration.h 7468 2005-05-09 20:09:11Z ehrlich $
+ * @version $Id: I3AMANDACalibration.h 7468 2005-05-09 20:09:11Z ehrlich $
  *
  * @file I3AMANDACalibration.h
- * @version $Revision: 1.7 $
  * @date $Date: 2005-05-09 16:09:11 -0400 (Mon, 09 May 2005) $
- * @author tmccauley
- * @author ehrlich
- */
+*/
 
-#ifndef I3AMANDACALIBRATION_H
-#define I3AMANDACALIBRATION_H
+#ifndef I3AMANDACALIBRATION_H_INCLUDED
+#define I3AMANDACALIBRATION_H_INCLUDED
 
 
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/calibration/I3AMANDAOMCalib.h"
+#include "dataclasses/I3Map.h"
 
-#include <map>
-#include <TObject.h>
-
-class I3AMANDACalibration : public TObject, public map<OMKey, I3AMANDAOMCalibPtr>
+ I3AMANDACalibration : public I3Map<OMKey, I3AMANDACalibrationPtr>
 {
 public:
     I3AMANDACalibration()
@@ -86,7 +81,7 @@ inline ostream& operator<<(ostream& o,const I3AMANDACalibration& v)
 
 typedef shared_ptr<I3AMANDACalibration> I3AMANDACalibrationPtr;
 
-#endif
+#endif //I3AMANDACALIBRATION_H_INCLUDED
 
 
     
