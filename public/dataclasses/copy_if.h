@@ -1,13 +1,9 @@
 /**
-    copyright  (C) 2004
-    the icecube collaboration
-    $Id$
-
-    @version $Revision: 1.1 $
-    @date $Date$
-    @author troy d. straszheim
-
-*/
+ *    copyright  (C) 2004
+ *  the icecube collaboration
+ *  @version $Id$
+ *  @date $Date$
+ */
 
 //
 // implementation of copy_if, which, inexplicably, is missing
@@ -36,4 +32,4 @@ copy_if(InputIterator begin,
   return destBegin;
 }
 
-#endif
+#endif //COPY_IF_H_INCLUDED
