@@ -84,6 +84,11 @@ class STLVectorStoragePolicy  {
  public:
 
   /**
+   * the same as push_back()
+   */
+  void Add(const ElementType& e) { vector_.push_back(e);}
+
+  /**
    * Add data to the end of the vector.
    * @param e Data to be added.
    */
