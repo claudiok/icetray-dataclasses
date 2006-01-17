@@ -19,7 +19,7 @@
 #include "dataclasses/calibration/I3AMANDAOMCalib.h"
 #include "dataclasses/I3Map.h"
 
-class I3AMANDACalibration : public I3Map<OMKey, I3AMANDACalibrationPtr>
+class I3AMANDACalibration : public I3Map<OMKey, I3AMANDAOMCalibPtr>
 {
 public:
     I3AMANDACalibration()
