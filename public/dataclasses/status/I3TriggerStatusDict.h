@@ -11,7 +11,7 @@
 #ifndef I3TRIGGERSTATUSDICT_H
 #define I3TRIGGERSTATUSDICT_H
 
-#include "TObject.h"
+#include "dataclasses/I3Map.h"
 #include "dataclasses/status/I3TriggerStatus.h"
 #include "dataclasses/TriggerKey.h"
 #include "dataclasses/StoragePolicy.h"
@@ -22,18 +22,12 @@
  *
  * Just a container for I3TriggerStatus objects
  */
-class I3TriggerStatusDict 
-: public TObject, 
-  public map<TriggerKey,I3TriggerStatusPtr>{
+class I3TriggerStatusDict : public I3Map<TriggerKey,I3TriggerStatusPtr>
+{
  public:
-  /**
-   * constructor
-   */
+
   I3TriggerStatusDict(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3TriggerStatusDict();
 
   /**
