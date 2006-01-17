@@ -4,16 +4,13 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Calibration.h
- * @version $Revision: 1.5 $
  * @date $Date$
- * @author tmccauley
  */
 
-#ifndef I3CALIBRATION_H
-#define I3CALIBRATION_H
+#ifndef I3CALIBRATION_H_INCLUDED
+#define I3CALIBRATION_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/calibration/I3InIceCalibration.h"
@@ -89,6 +86,6 @@ inline ostream& operator<<(ostream& o, const I3Calibration& calib)
 // that's better.  
 typedef shared_ptr<I3Calibration>  I3CalibrationPtr;
 
-#endif // I3CALIBRATION_H
+#endif // I3CALIBRATION_H_INCLUDED
     
 

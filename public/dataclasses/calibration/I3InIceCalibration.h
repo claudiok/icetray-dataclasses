@@ -4,27 +4,23 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3InIceCalibration.h
- * @version $Revision: 1.7 $
  * @date $Date$
- * @author tmccauley
  */
 
-#ifndef I3INICECALIBRATION_H
-#define I3INICECALIBRATION_H
+#ifndef I3INICECALIBRATION_H_INCLUDED
+#define I3INICECALIBRATION_H_INCLUDED
 
 
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
+//changed these to be the newly created header files NOTE: Cannot find where Vector is used
+#include "dataclasses/I3Map.h"
+#include "dataclasses/I3Vector.h"
 
-#include <map>
-#include <TObject.h>
-
-class I3InIceCalibration : public TObject, 
-			   public map<OMKey, I3DOMCalibrationPtr>
+class I3InIceCalibration : public I3Map<OMKey, I3DOMCalibrationPtr>
 {
 public:
     I3InIceCalibration()
@@ -85,7 +81,7 @@ inline ostream& operator<<(ostream& o,const I3InIceCalibration& v)
 
 typedef shared_ptr<I3InIceCalibration>  I3InIceCalibrationPtr;
 
-#endif // I3INICECALIBRATION_H
+#endif // I3INICECALIBRATION_H_INCLUDED
 
 
     

@@ -6,24 +6,18 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3AMANDAOMCalibration.h 7421 2005-05-09 03:41:09Z aya $
- *
+ * @version $Id: I3AMANDAOMCalibration.h 7421 2005-05-09 03:41:09Z aya $
  * @file I3AMANDAOMCalibration.h
- * @version $Revision: 1.14 $
  * @date $Date: 2005-05-08 23:41:09 -0400 (Sun, 08 May 2005) $
- * @author tmccauley
- * @author olivas
- * @author ehrlich
  */
-#ifndef I3AMANDAOMCALIBRATION_H
-#define I3AMANDAOMCALIBRATION_H
+
+#ifndef I3AMANDAOMCALIBRATION_H_INCLUDED
+#define I3AMANDAOMCALIBRATION_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/calibration/I3AMANDAOMCalib_XTalk.h"
-
-#include <vector>
+#include "dataclasses/I3Vector.h"
 #include <sstream>
-#include <TObject.h>
 
 using namespace std;
 

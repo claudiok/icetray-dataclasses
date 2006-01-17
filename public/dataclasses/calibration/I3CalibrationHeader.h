@@ -4,16 +4,13 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3CalibrationHeader.h
- * @version $Revision: 1.2 $
  * @date $Date$
- * @author tmccauley
  */
 
-#ifndef I3CALIBRATIONHEADER_H
-#define I3CALIBRATIONHEADER_H
+#ifndef I3CALIBRATIONHEADER_H_INCLUDED
+#define I3CALIBRATIONHEADER_H_INCLUDED
 
 #include "dataclasses/I3DataHeader.h"
 #include "dataclasses/StoragePolicy.h"
@@ -59,5 +56,5 @@ private:
 
 typedef shared_ptr<I3CalibrationHeader>  I3CalibrationHeaderPtr;
 
-#endif //I3CALIBRATIONHEADER_H
+#endif //I3CALIBRATIONHEADER_H_INCLUDED
 

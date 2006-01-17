@@ -5,22 +5,22 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3DOMCalibration.h
- * @version $Revision: 1.14 $
  * @date $Date$
- * @author tmccauley
- * @author blaufuss
  */
-#ifndef I3DOMCALIBRATION_H
-#define I3DOMCALIBRATION_H
+
+#ifndef I3DOMCALIBRATION_H_INCLUDED
+#define I3DOMCALIBRATION_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 
+#include "dataclasses/I3Map.h"
+#include "dataclasses/I3Vector.h"
+
 #include <stdint.h>
-#include <map>
-#include <vector>
+//#include <map>
+//#include <vector>
 #include <sstream>
 #include <cmath>
 
@@ -261,4 +261,4 @@ inline ostream& operator<<(ostream& o, const I3DOMCalibration& c)
 
 typedef shared_ptr<I3DOMCalibration>  I3DOMCalibrationPtr;
 
-#endif
+#endif //I3DOMCALIBRATION_H_INCLUDED
