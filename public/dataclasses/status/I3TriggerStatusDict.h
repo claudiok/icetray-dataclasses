@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerStatusDict.h 11091 2005-09-27 09:32:13Z  $
- *
+ * @version $Id: I3TriggerStatusDict.h 11091 2005-09-27 09:32:13Z  $
  * @file I3TriggerStatusDict.h
- * @version $Revision: 1.2 $
  * @date $Date: 2005-09-27 05:32:13 -0400 (Tue, 27 Sep 2005) $
- * @author blaufuss
  */
-#ifndef I3TRIGGERSTATUSDICT_H
-#define I3TRIGGERSTATUSDICT_H
+
+#ifndef I3TRIGGERSTATUSDICT_H_INCLUDED
+#define I3TRIGGERSTATUSDICT_H_INCLUDED
 
 #include "dataclasses/I3Map.h"
 #include "dataclasses/status/I3TriggerStatus.h"
@@ -68,5 +66,5 @@ inline ostream& operator<<(ostream& o, const I3TriggerStatusDict& status)
  */
 typedef shared_ptr<I3TriggerStatusDict>  I3TriggerStatusDictPtr;
 
-#endif
+#endif //I3TRIGGERSTATUSDICT_H_INCLUDED
 
