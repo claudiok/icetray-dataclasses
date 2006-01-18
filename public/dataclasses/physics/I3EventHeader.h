@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3EventHeader.h
- * @version $Revision: 1.14 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3EVENTHEADER_H
-#define I3EVENTHEADER_H
+
+#ifndef I3EVENTHEADER_H_INCLUDED
+#define I3EVENTHEADER_H_INCLUDED
 
 // includes
 #include "dataclasses/I3DataHeader.h"
@@ -34,14 +30,9 @@ class I3EventHeader : public I3DataHeader
   unsigned long  eventID_;
   
  public:
-  /**
-   * constructor
-   */
+
   I3EventHeader();
 
-  /**
-   * destructor
-   */
   virtual ~I3EventHeader();
 
   /**
@@ -100,5 +91,5 @@ class I3EventHeader : public I3DataHeader
  */
 typedef shared_ptr<I3EventHeader>  I3EventHeaderPtr;
 
-#endif //I3EVENTHEADER_H
+#endif //I3EVENTHEADER_H_INCLUDED
 

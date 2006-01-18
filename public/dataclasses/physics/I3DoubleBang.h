@@ -1,12 +1,9 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id$
-
+    @version $Id$
     @file I3DoubleBang.h
-    @version $Revision: 1.8 $
     @date $Date$
-    @author deyoung
 */
 
 #include "I3TrackImpl.h"
@@ -14,8 +11,8 @@
 #include "I3Composite.h"
 #include "I3Energetic.h"
 
-#ifndef I3DOUBLEBANG_H
-#define I3DOUBLEBANG_H
+#ifndef I3DOUBLEBANG_H_INCLUDED
+#define I3DOUBLEBANG_H_INCLUDED
 
 #include "dataclasses/physics/I3Track.h"
 
@@ -36,14 +33,9 @@ class I3DoubleBang : public I3TrackImpl<I3Contained,
                                         I3Composite>
 {
  public:
-  /**
-   * constructor
-   */
+
   I3DoubleBang(){};
 
-  /**
-   * destructor
-   */
   virtual ~I3DoubleBang();
 
  private:
@@ -60,5 +52,5 @@ class I3DoubleBang : public I3TrackImpl<I3Contained,
  */
 typedef shared_ptr<I3DoubleBang>  I3DoubleBangPtr;
 
-#endif
+#endif //I3DOUBLEBANG_H_INCLUDED
 

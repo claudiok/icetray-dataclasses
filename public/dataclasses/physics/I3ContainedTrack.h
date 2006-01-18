@@ -1,13 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3ContainedTrack.h 11091 2005-09-27 09:32:13Z troy $
-
+    @version $Id: I3ContainedTrack.h 11091 2005-09-27 09:32:13Z troy $
     @file I3ContainedTrack.h
-    @version $Revision: 1.5 $
     @date $Date: 2005-09-27 05:32:13 -0400 (Tue, 27 Sep 2005) $
-    @author deyoung
-    @author blaufuss
 */
 
 #include "I3TrackImpl.h"
@@ -15,8 +11,8 @@
 #include "I3NonEnergetic.h"
 #include "I3NonComposite.h"
 
-#ifndef I3CONTAINEDTRACK_H
-#define I3CONTAINEDTRACK_H
+#ifndef I3CONTAINEDTRACK_H_INCLUDED
+#define I3CONTAINEDTRACK_H_INCLUDED
 
 #include "dataclasses/physics/I3Track.h"
 
@@ -55,5 +51,5 @@ class I3ContainedTrack : public I3TrackImpl<I3Contained,
  */
 typedef shared_ptr<I3ContainedTrack>  I3ContainedTrackPtr;
 
-#endif
+#endif //I3CONTAINEDTRACK_H_INCLUDED
 

@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Directional.h
- * @version $Revision: 1.11 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3DIRECTIONAL_H
-#define I3DIRECTIONAL_H
+
+#ifndef I3DIRECTIONAL_H_INCLUDED
+#define I3DIRECTIONAL_H_INCLUDED
 
 #include "Rtypes.h"
 #include "dataclasses/physics/I3Particle.h"
@@ -104,5 +102,5 @@ class I3Directional
   //ClassDef(I3Directional,1);
 };
 
-#endif // I3DIRECTIONAL
+#endif // I3DIRECTIONAL_H_INCLUDED
 

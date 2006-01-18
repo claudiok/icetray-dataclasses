@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Flasherinfo srklein$
- *
+ * @version $Id: I3Flasherinfo srklein$
  * @file I3FlasherInfo.h
- * @version $Revision: 1.0 $
  * @date $Date: 2005-06-16 14:39:52 -0700 (Thu, 16 Jun 2005) $
- * @author klein
- *
  */
-#ifndef I3FLASHERINFO_H
-#define I3FLASHERINFO_H
+
+#ifndef I3FLASHERINFO_H_INCLUDED
+#define I3FLASHERINFO_H_INCLUDED
 
 #include "dataclasses/OMKey.h"
 #include "dataclasses/physics/I3Trigger.h"
@@ -68,17 +65,12 @@ protected:
 
     
 public:
-    /**
-     * constructor
-     */
-     I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
+ 
+    I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
 	{
 	  eventFlasherStatus_= flasher_not_set;
 	}
 
-    /**
-     * destructor
-     */
     virtual ~I3FlasherInfo(){;}
 
 
@@ -160,6 +152,6 @@ private:
 typedef shared_ptr<I3FlasherInfo>  I3FlasherInfoPtr;
 
 
-#endif
+#endif //I3FLASHERINFO_H_INCLUDED
 
 

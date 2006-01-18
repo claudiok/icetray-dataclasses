@@ -1,18 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3DOMLaunch.h
- * @version $Revision: 1.16 $
  * @date $Date$
- * @author klein
- * @author blaufuss
- * @author tmccauley
- *
  */
-#ifndef I3DOMLAUNCH_H
-#define I3DOMLAUNCH_H
+
+#ifndef I3DOMLAUNCH_H_INCLUDED
+#define I3DOMLAUNCH_H_INCLUDED
 
 #include "TObject.h"
 #include "dataclasses/StoragePolicy.h"
@@ -119,14 +114,9 @@ protected:
     vector<double> calibratedChargeStamp_;
 
 public:
-    /**
-     * constructor
-     */
+
     I3DOMLaunch();
 
-    /**
-     * destructor
-     */
     virtual ~I3DOMLaunch();
   
     /**
@@ -376,6 +366,6 @@ private:
  */
 typedef shared_ptr<I3DOMLaunch>  I3DOMLaunchPtr;
 
-#endif
+#endif //I3DOMLAUNCH_H_INCLUDED
 
 

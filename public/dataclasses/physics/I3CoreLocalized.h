@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3CoreLocalized.h
- * @version $Revision: 1.10 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3CORELOCALIZED_H
-#define I3CORELOCALIZED_H
+
+#ifndef I3CORELOCALIZED_H_INCLUDED
+#define I3CORELOCALIZED_H_INCLUDED
 
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Position.h"
@@ -97,5 +95,5 @@ class I3CoreLocalized
   //ClassDef(I3CoreLocalized,1);
 };
 
-#endif
+#endif //I3CORELOCALIZED_H_INCLUDED
 

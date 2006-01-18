@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Contained.h
- * @version $Revision: 1.23 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3CONTAINED_H
-#define I3CONTAINED_H
+
+#ifndef I3CONTAINED_H_INCLUDED
+#define I3CONTAINED_H_INCLUDED
 
 #include "dataclasses/I3Position.h"
 #include "dataclasses/physics/I3Particle.h"
@@ -284,4 +282,4 @@ class I3Contained
   //ClassDef(I3Contained,2)
 };
 
-#endif //I3CONTAINED_H
+#endif //I3CONTAINED_H_INCLUDED

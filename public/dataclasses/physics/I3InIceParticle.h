@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3InIceParticle.h
- * @version $Revision: 1.4 $
  * @date $Date$
- * @author blaufuss
  */
-#ifndef I3INICEPARTICLE_H
-#define I3INICEPARTICLE_H
+
+#ifndef I3INICEPARTICLE_H_INCLUDED
+#define I3INICEPARTICLE_H_INCLUDED
 
 #include "dataclasses/physics/I3Particle.h"
 
@@ -77,4 +75,4 @@ BOOST_IS_ABSTRACT(I3InIceParticle);
  */
 typedef shared_ptr<I3InIceParticle>  I3InIceParticlePtr;
 
-#endif //I3INICEPARTICLE_H
+#endif //I3INICEPARTICLE_H_INCLUDED

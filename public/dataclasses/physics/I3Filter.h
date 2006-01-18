@@ -1,18 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Filter.h 11091 2005-09-27 09:32:13Z troy $
- *
+ * @version $Id: I3Filter.h 11091 2005-09-27 09:32:13Z troy $
  * @file I3Filter.h
- * @version $Revision: 1.5 $
  * @date $Date: 2005-09-27 05:32:13 -0400 (Tue, 27 Sep 2005) $
- * @author blaufuss
- * @author deyoung
- * @author ehrlich
  */
 
-#ifndef I3FILTER_H
-#define I3FILTER_H
+#ifndef I3FILTER_H_INCLUDED
+#define I3FILTER_H_INCLUDED
 
 #include <TObject.h>
 #include <TClass.h>
@@ -78,6 +73,6 @@ inline ostream& operator<<(ostream& o,const I3Filter& filt)
  */
 typedef shared_ptr<I3Filter> I3FilterPtr;
 
-#endif
+#endif //I3FILTER_H_INCLUDED
 
 

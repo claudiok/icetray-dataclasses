@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Composite.h
- * @version $Revision: 1.12 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3COMPOSITE_H
-#define I3COMPOSITE_H
+
+#ifndef I3COMPOSITE_H_INCLUDED
+#define I3COMPOSITE_H_INCLUDED
 
 #include "I3Particle.h"
 #include "I3ParticleMultiMap.h"
@@ -25,14 +23,9 @@ class I3Composite
  private:
    I3ParticleMultiMap constituents_;
  public:
-  /**
-   * constructor
-   */
+
   I3Composite(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3Composite();
 
   /**
@@ -81,6 +74,6 @@ class I3Composite
   //ClassDef(I3Composite,1);
 };
 
-#endif
+#endif //I3COMPOSITE_H_INCLUDED
 
 

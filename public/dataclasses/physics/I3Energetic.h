@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Energetic.h
- * @version $Revision: 1.7 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3ENERGETIC_H
-#define I3ENERGETIC_H
+
+#ifndef I3ENERGETIC_H_INCLUDED
+#define I3ENERGETIC_H_INCLUDED
 
 #include "Rtypes.h"
 #include "I3Particle.h"
@@ -68,5 +66,5 @@ class I3Energetic
   //ClassDef(I3Energetic,1);
 };
 
-#endif // I3ENERGETIC_H
+#endif // I3ENERGETIC_H_INCLUDED
 

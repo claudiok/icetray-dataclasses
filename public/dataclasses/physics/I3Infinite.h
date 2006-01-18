@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Infinite.h
- * @version $Revision: 1.23 $
  * @date $Date$
- * @author 
  */
 
-#ifndef I3INFINITE_H
-#define I3INFINITE_H
+#ifndef I3INFINITE_H_INCLUDED
+#define I3INFINITE_H_INCLUDED
 
 #include <cmath>
 #include "dataclasses/physics/I3Particle.h"
@@ -162,5 +159,5 @@ class I3Infinite
   //ClassDef(I3Infinite,1)
 };
 
-#endif //I3INFINITE_H
+#endif //I3INFINITE_H_INCLUDED
 

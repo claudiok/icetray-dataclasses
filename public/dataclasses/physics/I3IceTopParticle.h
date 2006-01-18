@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3IceTopParticle.h
- * @version $Revision: 1.5 $
  * @date $Date$
- * @author blaufuss
  */
-#ifndef I3ICETOPPARTICLE_H
-#define I3ICETOPPARTICLE_H
+
+#ifndef I3ICETOPPARTICLE_H_INCLUDED
+#define I3ICETOPPARTICLE_H_INCLUDED
 
 #include "dataclasses/physics/I3Particle.h"
 
@@ -58,4 +56,4 @@ BOOST_IS_ABSTRACT(I3IceTopParticle);
  */
 typedef shared_ptr<I3IceTopParticle>  I3IceTopParticlePtr;
 
-#endif //I3ICETOPPARTICLE_H
+#endif //I3ICETOPPARTICLE_H_INCLUDED

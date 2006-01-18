@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Localized.h
- * @version $Revision: 1.10 $
  * @date $Date$
- * @author pretz
- *
  */
-#ifndef I3LOCALIZED_H
-#define I3LOCALIZED_H
+
+#ifndef I3LOCALIZED_H_INCLUDED
+#define I3LOCALIZED_H_INCLUDED
 
 #include "dataclasses/I3Position.h"
 #include "dataclasses/physics/I3Particle.h"
@@ -91,5 +88,5 @@ class I3Localized{
   //ClassDef(I3Localized,1);
 };
 
-#endif //I3LOCALIZED_H
+#endif //I3LOCALIZED_H_INCLUDED
 
