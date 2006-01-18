@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Cascade.h
- * @version $Revision: 1.16 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3CASCADE_H
-#define I3CASCADE_H
+
+#ifndef I3CASCADE_H_INCLUDED
+#define I3CASCADE_H_INCLUDED
 
 #include "Rtypes.h"
 #include "I3InIceParticle.h"
@@ -25,6 +23,7 @@
  */
 class I3Cascade : public I3InIceParticle{
  public:
+
   virtual ~I3Cascade();
   /**
    * indicates that this is not a track
@@ -89,4 +88,4 @@ BOOST_IS_ABSTRACT(I3Cascade);
  */
 typedef shared_ptr<I3Cascade>  I3CascadePtr;
 
-#endif
+#endif //I3CASCADE_H_INCLUDED

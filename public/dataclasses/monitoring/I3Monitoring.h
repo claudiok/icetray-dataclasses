@@ -3,12 +3,10 @@
  * the icecube collaboration
  *
  * @file I3Monitoring.h
- * @author pretz
- * @author Taboada
  */
 
-#ifndef I3MONITORING_H
-#define I3MONITORING_H
+#ifndef I3MONITORING_H_INCLUDED
+#define I3MONITORING_H_INCLUDED
 
 #include <iostream>
 #include "dataclasses/StoragePolicy.h"
@@ -67,4 +65,4 @@ inline ostream& operator<<(ostream& o, const I3Monitoring& m)
 
 typedef shared_ptr<I3Monitoring> I3MonitoringPtr;
 
-#endif
+#endif //I3MONITERING_H_INCLUDED

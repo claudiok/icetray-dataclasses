@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3DataHeader.h
- * @version $Revision: 1.18 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3DATAHEADER_H
-#define I3DATAHEADER_H
+
+#ifndef I3DATAHEADER_H_INCLUDED
+#define I3DATAHEADER_H_INCLUDED
 
 #include "TObject.h"
 #include "TClass.h"
@@ -96,5 +92,5 @@ inline ostream& operator<<(ostream& o,const I3DataHeader& header)
  */
 typedef shared_ptr<I3DataHeader>  I3DataHeaderPtr;
 
-#endif //I3DATAHEADER_H
+#endif //I3DATAHEADER_H_INCLUDED
 

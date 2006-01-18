@@ -1,16 +1,13 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id$
-
+    @version $Id$
     @file I3BasicTrack.h
-    @version $Revision: 1.8 $
     @date $Date$
-    @author deyoung
 */
 
-#ifndef I3BASICTRACK_H
-#define I3BASICTRACK_H
+#ifndef I3BASICTRACK_H_INCLUDED
+#define I3BASICTRACK_H_INCLUDED
 
 #include "dataclasses/physics/I3TrackImpl.h"
 #include "dataclasses/physics/I3Infinite.h"
@@ -28,15 +25,11 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
                                       I3NonComposite>
 {
  public:
-  /**
-   * constructor
-   */
+
   I3BasicTrack(){};
   
-  /**
-   * destructor
-   */
   virtual ~I3BasicTrack();
+
  private:
   friend class boost::serialization::access;
 
@@ -49,5 +42,6 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
  * pointer typedeffed away to insulate users from memory management
  */
 typedef shared_ptr<I3BasicTrack>  I3BasicTrackPtr;
-#endif
+#endif //I3BASICTRACK_H_INCLUDED
+
 

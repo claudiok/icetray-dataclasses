@@ -16,7 +16,7 @@
 
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/calibration/I3AMANDAOMCalib_XTalk.h"
-#include "dataclasses/I3Vector.h"
+#include <vector>
 #include <sstream>
 
 using namespace std;

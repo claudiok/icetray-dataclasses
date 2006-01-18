@@ -1,14 +1,11 @@
 /**
  * copyright  (C) 2005
  * the icecube collaboration
- *
  * @file I3MonitoringHeader.h
- * @author pretz
- * @author Taboada
  */
 
-#ifndef I3MONITORINGHEADER_H
-#define I3MONITORINGHEADER_H
+#ifndef I3MONITORINGHEADER_H_INCLUDED
+#define I3MONITORINGHEADER_H_INCLUDED
 
 #include "dataclasses/I3DataHeader.h"
 #include "dataclasses/OMKey.h"
@@ -48,4 +45,4 @@ class I3MonitoringHeader : public I3DataHeader
 
 typedef shared_ptr<I3MonitoringHeader> I3MonitoringHeaderPtr;
 
-#endif
+#endif //I3MONITERINGHEADER_H_INCLUDED

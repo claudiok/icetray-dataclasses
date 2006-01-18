@@ -15,12 +15,9 @@
 
 #include "dataclasses/StoragePolicy.h"
 
-#include "dataclasses/I3Map.h"
-#include "dataclasses/I3Vector.h"
-
+#include <map>
+#include <vector>
 #include <stdint.h>
-//#include <map>
-//#include <vector>
 #include <sstream>
 #include <cmath>
 

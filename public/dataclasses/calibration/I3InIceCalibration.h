@@ -16,9 +16,10 @@
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
-//changed these to be the newly created header files NOTE: Cannot find where Vector is used
 #include "dataclasses/I3Map.h"
-#include "dataclasses/I3Vector.h"
+
+#include <vector>
+
 
 class I3InIceCalibration : public I3Map<OMKey, I3DOMCalibrationPtr>
 {

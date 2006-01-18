@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3AMANDAAnalogReadout.h
- * @version $Revision: 1.10 $
  * @date $Date$
- * @author pretz
- * @author ehrlich
- *
  */
-#ifndef I3AMANDAANALOGREADOUT_H
-#define I3AMANDAANALOGREADOUT_H
+
+#ifndef I3AMANDAANALOGREADOUT_H_INCLUDED
+#define I3AMANDAANALOGREADOUT_H_INCLUDED
 
 #include <iostream>
 #include <vector>
@@ -42,14 +38,9 @@ class I3AMANDAAnalogReadout : public TObject
   bool is_calib_;    
  
 public:
-  /**
-   * Default constructor.
-   */
+
   I3AMANDAAnalogReadout() : processFirstLE_(true), processTOTs_(true) {}
   
-  /**
-   * Destructor.
-   */
   virtual ~I3AMANDAAnalogReadout();
 
   /**
@@ -155,5 +146,5 @@ private:
  * memory-mananagement implementation
  */
 typedef shared_ptr<I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutPtr;
-#endif
+#endif //I3AMANDAANALOGREADOUT_H_INCLUDED
 

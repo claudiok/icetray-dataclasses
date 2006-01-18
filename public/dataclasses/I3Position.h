@@ -1,12 +1,9 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Position.h
- * @version $Revision: 1.19 $
  * @date $Date$
- * @author dule
  */
 
 //***********************************************************
@@ -16,8 +13,8 @@
 
 // $Id$
 
-#ifndef I3POSITION_H
-#define I3POSITION_H
+#ifndef I3POSITION_H_INCLUDED
+#define I3POSITION_H_INCLUDED
 
 #include <math.h>
 using namespace std;
@@ -264,4 +261,4 @@ inline ostream& operator<<(ostream& o,const I3Position& pos)
  */
 typedef shared_ptr<I3Position>  I3PositionPtr;
 
-#endif
+#endif //I3POSITION_H_INCLUDED

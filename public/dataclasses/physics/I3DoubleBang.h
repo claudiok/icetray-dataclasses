@@ -29,6 +29,8 @@
  * information about specific elements (e.g., the hadronic shower)
  * available in the constituent particles.
  */
+
+
 class I3DoubleBang : public I3TrackImpl<I3Contained,
                                         I3Energetic,
                                         I3Composite>

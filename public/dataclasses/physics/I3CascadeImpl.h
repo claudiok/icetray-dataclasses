@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3CascadeImpl.h
- * @version $Revision: 1.13 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3CASCADEIMPL_H
-#define I3CASCADEIMPL_H
+
+#ifndef I3CASCADEIMPL_H_INCLUDED
+#define I3CASCADEIMPL_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/physics/I3Cascade.h"
@@ -36,14 +34,9 @@ class I3CascadeImpl : public I3Cascade,
                       public CompositeType
 {
  public:
-  /**
-   * constructor
-   */
+
   I3CascadeImpl() {};
 
-  /**
-   * destructor
-   */
   virtual ~I3CascadeImpl();
 
   /**
@@ -121,4 +114,4 @@ class I3CascadeImpl : public I3Cascade,
   //ClassDef(I3CascadeImpl,1);
 };
 
-#endif
+#endif //I3CASCADEIMPL_H_INCLUDED

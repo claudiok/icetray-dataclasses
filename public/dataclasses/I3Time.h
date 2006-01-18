@@ -1,5 +1,5 @@
-#ifndef I3TIME_H
-#define I3TIME_H
+#ifndef I3TIME_H_INCLUDED
+#define I3TIME_H_INCLUDED
 
 #include <string>
 #include "TObject.h"
@@ -241,4 +241,4 @@ inline ostream& operator<<(ostream& o, const I3Time& t)
   return o;
 }
 
-#endif
+#endif //I3TIME_H_INCLUDED

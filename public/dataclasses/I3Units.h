@@ -2,13 +2,9 @@
  @brief A ripped Geant4 header declaring unit conventions
 
  Modified 2-17-04 by John Pretz from a Geant4 header
- $Id$
- 
+ @version $Id$
  @file I3Units.h  
- @version $Version:$
  @date $Date$
- @author Geant4 Team (original) M.Maire, S.Giani
- @author pretz (IceCube modifications)
  
  Changes (c) 2004 IceCube Collaboration
  
@@ -57,8 +53,8 @@
 </b>
 */
 
-#ifndef G4UNITSTEST_HH
-#define G4UNITSTEST_HH
+#ifndef G4UNITSTEST_HH_INCLUDED
+#define G4UNITSTEST_HH_INCLUDED
 
 //#include <CLHEP/config/CLHEP.h>
 
@@ -571,5 +567,5 @@ namespace I3Units
   static const double perMillion  = 0.000001;
   
 };
-#endif /* G4UNITSTEST_HH */
+#endif /* G4UNITSTEST_HH_INCLUDED */
 

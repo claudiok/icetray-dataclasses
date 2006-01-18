@@ -1,5 +1,5 @@
-#ifndef I3DATAACCESS_H
-#define I3DATAACCESS_H
+#ifndef I3DATAACCESS_H_INCLUDED
+#define I3DATAACCESS_H_INCLUDED
 
 const map<OMKey,I3AMANDAAnalogReadout> 
 GetAMANDAAnalogReadouts(I3Frame& frame,
@@ -61,5 +61,5 @@ GetMCWeight(I3Frame& frame,
 
 // mc tracks missing
 
-#endif
+#endif //I3DATAACCESS_H_INCLUDED
  

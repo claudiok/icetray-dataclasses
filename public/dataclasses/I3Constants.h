@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Constants.h
- * @version $Revision: 1.9 $
  * @date $Date$
- * @author pretz
  */
 
-#ifndef I3CONSTANTS_H
-#define I3CONSTANTS_H
+#ifndef I3CONSTANTS_H_INCLUDE
+#define I3CONSTANTS_H_INCLUDE
 
 #include "dataclasses/I3Units.h"
 #include <cmath>
@@ -83,5 +80,5 @@ namespace I3Constants
   static const double Coordinate_shift_z = -216.0*I3Units::m;
 };
 
-#endif
+#endif //I3CONSTANTS_H_INCLUDED
 

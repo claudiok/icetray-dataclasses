@@ -1,12 +1,9 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id$
-
+    @version $Id$
     @file I3BasicCascade.h
-    @version $Revision: 1.9 $
     @date $Date$
-    @author deyoung
 */
 
 #include "dataclasses/physics/I3CascadeImpl.h"
@@ -15,8 +12,8 @@
 #include "dataclasses/physics/I3NonEnergetic.h"
 #include "dataclasses/physics/I3NonComposite.h"
 
-#ifndef I3BASICCASCADE_H
-#define I3BASICCASCADE_H
+#ifndef I3BASICCASCADE_H_INCLUDED
+#define I3BASICCASCADE_H_INCLUDED
 
 #include "dataclasses/physics/I3Cascade.h"
 
@@ -30,14 +27,9 @@ class I3BasicCascade : public I3CascadeImpl<I3NonDirectional,
 	 I3NonComposite>
 {
 public:
-  /**
-   * constructor
-   */
+
   I3BasicCascade(){};
 
-  /**
-   * destructor
-   */
   virtual ~I3BasicCascade();
 
  private:
@@ -54,5 +46,5 @@ public:
  */
 typedef shared_ptr<I3BasicCascade>  I3BasicCascadePtr;
 
-#endif
+#endif //I3BASICCASCADE_H_INCLUDED
 

@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file OMKey.h
- * @version $Revision: 1.10 $
  * @date $Date$
- * @author pretz
  */
 
-#ifndef OMKEY_H
-#define OMKEY_H
+#ifndef OMKEY_H_INCLUDED
+#define OMKEY_H_INCLUDED
 
 #include <utility>
 #include "TObject.h"
@@ -129,4 +126,4 @@ inline ostream& operator<<(ostream& o,const OMKey& key)
  */
 typedef shared_ptr<OMKey>  OMKeyPtr;
 
-#endif
+#endif //OMKEY_H_INCLUDED
