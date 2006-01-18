@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3RecoHit.h
- * @version $Revision: 1.12 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3RECOHIT_H
-#define I3RECOHIT_H
+
+#ifndef I3RECOHIT_H_INCLUDED
+#define I3RECOHIT_H_INCLUDED
 
 #include <TObject.h>
 
@@ -63,6 +59,6 @@ inline ostream& operator<<(ostream& o,const I3RecoHit& key)
 typedef shared_ptr<I3RecoHit>  I3RecoHitPtr;
 
 
-#endif
+#endif //I3RECOHIT_H_INCLUDED
 
 

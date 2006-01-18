@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Primary.h
- * @version $Revision: 1.11 $
  * @date $Date$
- * @author pretz
   */
 
-#ifndef I3PRIMARY_H
-#define I3PRIMARY_H
+#ifndef I3PRIMARY_H_INCLUDED
+#define I3PRIMARY_H_INCLUDED
 
 #include "Rtypes.h"
 #include "I3Particle.h"
@@ -62,4 +59,4 @@ class I3Primary : public I3Particle{
 };
 
 
-#endif
+#endif //I3PRIMARY_H_INCLUDED

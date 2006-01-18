@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: $
- *
+ * @version $Id: $
  * @file I3RecoPulse.h
- * @version $Revision: 1.26 $
  * @date $Date: $
- * @author ehrlich
- * @author blaufuss
  */
 
-#ifndef I3RECOPULSE_H
-#define I3RECOPULSE_H
+#ifndef I3RECOPULSE_H_INCLUDED
+#define I3RECOPULSE_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 
@@ -88,6 +84,6 @@ inline ostream& operator<<(ostream& o,const I3RecoPulse& pulse)
  */
 typedef shared_ptr<I3RecoPulse>  I3RecoPulsePtr;
 
-#endif
+#endif //I3RECOPULSE_H_INCLUDED
 
 

@@ -1,17 +1,14 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Track.h
- * @version $Revision: 1.32 $
  * @date $Date$
- * @author pretz
  */
 
 
-#ifndef I3TRACK_H
-#define I3TRACK_H
+#ifndef I3TRACK_H_INCLUDED
+#define I3TRACK_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/physics/I3InIceParticle.h"
@@ -34,14 +31,9 @@
 class I3Track : public I3InIceParticle
 {
  public:
-  /**
-   * constructor
-   */
+
   I3Track() {};
 
-  /**
-   * destructor
-   */
   virtual ~I3Track();
 
   /**
@@ -172,4 +164,4 @@ BOOST_IS_ABSTRACT(I3Track);
  */
 typedef shared_ptr<I3Track>  I3TrackPtr;
 
-#endif
+#endif //I3TRACK_H_INCLUDED

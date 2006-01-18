@@ -1,36 +1,28 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3RecoHitSeries.h
- * @version $Revision: 1.31 $
  * @date $Date$
- * @author ehrlich
- * @author pretz
  */
 
-#ifndef I3RECOHITSERIES_H
-#define I3RECOHITSERIES_H
+#ifndef I3RECOHITSERIES_H_INCLUDED
+#define I3RECOHITSERIES_H_INCLUDED
 
 #include "dataclasses/physics/I3RecoHit.h"
 #include "dataclasses/StoragePolicy.h"
+#include "dataclasses/I3Vector.h"
 #include <sstream>
 
 /**
  * @brief A list of reco hits.
  */
-class I3RecoHitSeries : public TObject, public vector<I3RecoHit>
+class I3RecoHitSeries : public I3Vector<I3RecoHit>
 {
  public:
-  /**
-   *constructor
-   */
+
   I3RecoHitSeries() {};
 
-  /**
-   * destructor
-   */
   virtual ~I3RecoHitSeries();
 
   /**
@@ -94,6 +86,6 @@ inline ostream& operator<<(ostream& o, const I3RecoHitSeries& series)
  */
 typedef shared_ptr<I3RecoHitSeries>  I3RecoHitSeriesPtr;
 
-#endif
+#endif //I3RECOHITSERIES_H_INCLUDED
 
 

@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3NonLocalized.h
- * @version $Revision: 1.2 $
  * @date $Date$
- * @author ehrlich
- * @author Peter Niessen
  */
-#ifndef I3NONLOCALIZED_H
-#define I3NONLOCALIZED_H
+
+#ifndef I3NONLOCALIZED_H_INCLUDED
+#define I3NONLOCALIZED_H_INCLUDED
 
 #include "dataclasses/physics/I3Particle.h"
 
@@ -48,5 +45,5 @@ class I3NonLocalized
   //ClassDef(I3NonLocalized,1);
 };
 
-#endif
+#endif //I3NONLOCALIZED_H_INCLUDED
 

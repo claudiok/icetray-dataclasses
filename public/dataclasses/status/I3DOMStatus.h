@@ -1,5 +1,5 @@
-#ifndef I3DOMSTATUS_H
-#define I3DOMSTATUS_H
+#ifndef I3DOMSTATUS_H_INCLUDED
+#define I3DOMSTATUS_H_INCLUDED
 
 #include "dataclasses/status/I3RawDOMStatus.h"
 #include "dataclasses/status/I3CalibratedDOMStatus.h"
@@ -39,5 +39,5 @@ class I3DOMStatus
 
 typedef shared_ptr<I3DOMStatus> I3DOMStatusPtr;
 
-#endif
+#endif //I3DOMSTATUS_H_INCLUDED
 

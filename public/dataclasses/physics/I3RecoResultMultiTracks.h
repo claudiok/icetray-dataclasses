@@ -1,33 +1,27 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3RecoResultMultiTracks.h
- * @version $Revision: 1.8 $
  * @date $Date$
- * @author ehrlich
  */
-#ifndef I3RECORESULTMULTITRACKS_H
-#define I3RECORESULTMULTITRACKS_H
+
+#ifndef I3RECORESULTMULTITRACKS_H_INCLUDED
+#define I3RECORESULTMULTITRACKS_H_INCLUDED
 
 #include "I3RecoResult.h"
 #include "I3Particle.h"
+#include "dataclasses/I3Vector.h"
 
 /**
  * @brief Reco results with more than one track
  */
-class I3RecoResultMultiTracks : public I3RecoResult, public vector<I3ParticlePtr>
+class I3RecoResultMultiTracks : public I3RecoResult, public I3Vector<I3ParticlePtr>
 {
   public:
-  /**
-   * constructor
-   */
+
   I3RecoResultMultiTracks(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3RecoResultMultiTracks();
 
   /**
@@ -58,5 +52,5 @@ class I3RecoResultMultiTracks : public I3RecoResult, public vector<I3ParticlePtr
  * memory-mananagement implementation
  */
 typedef shared_ptr<I3RecoResultMultiTracks> I3RecoResultMultiTracksPtr;
-#endif
+#endif //I3RECORESULTMULTITRACKS_H_INCLUDED
 

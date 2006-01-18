@@ -12,8 +12,14 @@
 #include <vector>
 
 template <typename T>
-class I3Vector : public TObject, public std::vector<T>
-{ };
+struct I3Vector : public TObject, public std::vector<T>
+{ 
+  template <class Archive>
+  void serialize(Archive & ar, unsigned version)
+  {
+    ar & make_nvp("vector", base_object< std::vector<T> >(*this));
+  }
+};
 
 #endif // I3VECTOR_H_INCLUDED
 

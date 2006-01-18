@@ -1,15 +1,12 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TWRLaunch.h,v 1.2 2005/02/21 06:47:54 ehrlich Exp $
- *
+ * @version $Id: I3TWRLaunch.h,v 1.2 2005/02/21 06:47:54 ehrlich Exp $
  * @file I3TWRLaunch.h
- * @version $Revision: 1.2 $
  * @date $Date: 2005/02/21 06:47:54 $
- * @author ehrlich
  */
-#ifndef I3TWRFRAG_H
-#define I3TWRFRAG_H
+#ifndef I3TWRFRAG_H_INCLUDED
+#define I3TWRFRAG_H_INCLUDED
 
 #include <TObject.h>
 #include <vector>
@@ -51,6 +48,6 @@ class I3TWRFrag : public TObject
  * memory-mananagement implementation
  */
 typedef shared_ptr<I3TWRFrag> I3TWRFragPtr;
-#endif
+#endif //I3TWRFRAG_H_INCLUDED
 
 

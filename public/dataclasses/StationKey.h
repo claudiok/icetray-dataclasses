@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file StationKey.h
- * @version $Revision: 1.1 $
  * @date $Date$
- * @author niessen Wed Sep  1 21:17:16 EDT 2004
  */
 
-#ifndef STATIONKEY_H
-#define STATIONKEY_H
+#ifndef STATIONKEY_H_INCLUDED
+#define STATIONKEY_H_INCLUDED
 
 /**
  * @brief the station key. Basically a number (the string it is on
@@ -18,4 +15,4 @@
  */
 typedef int StationKey;
 
-#endif
+#endif //STATIONKEY_H_INCLUDED

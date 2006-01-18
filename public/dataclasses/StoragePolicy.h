@@ -1,15 +1,12 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id$
-    @version $Revision: 1.24 $
+    @version $Id$
     @date $Date$
-
-    @author troy d. straszheim
 */
 
-#ifndef STORAGEPOLICY_H
-#define STORAGEPOLICY_H
+#ifndef STORAGEPOLICY_H_INCLUDED
+#define STORAGEPOLICY_H_INCLUDED
 
 #include "TObject.h"
 #include <stdint.h> //int64_t, etc
@@ -51,5 +48,5 @@ using boost::serialization::base_object;
 #include "icetray/services/I3Logging.h"
 
 
-#endif
+#endif //STORAGEPOLICY_H_INCLUDED
 

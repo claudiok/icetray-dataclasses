@@ -1,23 +1,20 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3TWRLaunch.h
- * @version $Revision: 1.2 $
  * @date $Date$
- * @author ehrlich
  */
-#ifndef I3TWRLAUNCH_H
-#define I3TWRLAUNCH_H
 
-#include <TObject.h>
-#include <vector>
+#ifndef I3TWRLAUNCH_H_INCLUDED
+#define I3TWRLAUNCH_H_INCLUDED
+
+#include "dataclasses/I3Vector.h"
 #include "dataclasses/physics/I3TWRFrag.h"
 
 using namespace std;
 
-class I3TWRLaunch : public TObject, public vector<I3TWRFrag>
+class I3TWRLaunch : public I3Vector<I3TWRFrag>
 {
   Int_t   id;
   Float_t bin_size;
@@ -51,6 +48,6 @@ class I3TWRLaunch : public TObject, public vector<I3TWRFrag>
 };
 
 typedef shared_ptr<I3TWRLaunch> I3TWRLaunchPtr;
-#endif
+#endif //I3TWRLAUNCH_H_INCLUDED
 
 

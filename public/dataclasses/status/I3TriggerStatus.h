@@ -1,5 +1,5 @@
-#ifndef I3TRIGGERSTATUS_H
-#define I3TRIGGERSTATUS_H
+#ifndef I3TRIGGERSTATUS_H_INCLUDED
+#define I3TRIGGERSTATUS_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 
@@ -74,5 +74,5 @@ class I3TriggerStatus
 
 typedef shared_ptr<I3TriggerStatus> I3TriggerStatusPtr;
 
-#endif
+#endif //I3TRIGGERSTATUS_H_INCLUDED
 

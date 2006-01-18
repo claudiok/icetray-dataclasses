@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Starting.h
- * @version $Revision: 1.22 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3STARTING_H
-#define I3STARTING_H
+
+#ifndef I3STARTING_H_INCLUDED
+#define I3STARTING_H_INCLUDED
 
 #include <cmath>
 #include "dataclasses/I3Constants.h"
@@ -179,5 +177,5 @@ class I3Starting
   //ClassDef(I3Starting,1)
 };
 
-#endif //I3STARTING_H
+#endif //I3STARTING_H_INCLUDED
 

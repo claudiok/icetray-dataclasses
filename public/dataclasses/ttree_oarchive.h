@@ -159,4 +159,4 @@ public:
   ttree_oarchive(TTree& tree) : ttree_proxy_(tree) { }
 
 };
-#endif
+#endif //TTREE_OARCHIVE_H_INCLUDED

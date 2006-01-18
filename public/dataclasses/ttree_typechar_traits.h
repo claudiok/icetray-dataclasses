@@ -48,4 +48,4 @@ template <> struct typechar_traits<TYPE> { static char const value = CHAR; }
     }
   }
 }
-#endif
+#endif //TTREE_TYPECHAR_TRAITS_H_INCLUDED

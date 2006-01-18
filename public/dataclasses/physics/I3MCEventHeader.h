@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3MCEventHeader.h
- * @version $Revision: 1.3 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3MCEVENTHEADER_H
-#define I3MCEVENTHEADER_H
+
+#ifndef I3MCEVENTHEADER_H_INCLUDED
+#define I3MCEVENTHEADER_H_INCLUDED
 
 // includes
 #include "I3EventHeader.h"
@@ -31,14 +27,9 @@ using namespace std;
 class I3MCEventHeader : public I3EventHeader
 {
  public:
-  /**
-   * constructor
-   */
+
   I3MCEventHeader() {;}
 
-  /**
-   * destructor
-   */
   virtual ~I3MCEventHeader();
 
  private:
@@ -56,5 +47,5 @@ class I3MCEventHeader : public I3EventHeader
  */
 typedef shared_ptr<I3MCEventHeader> I3MCEventHeaderPtr;
 
-#endif //I3MCEVENTHEADER_H
+#endif //I3MCEVENTHEADER_H_INCLUDED
 

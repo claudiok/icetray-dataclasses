@@ -1,27 +1,24 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoPulseSeries.h,v 1.27 2004/08/31 02:56:29 pretz Exp $
- *
+ * @version $Id: I3RecoPulseSeries.h,v 1.27 2004/08/31 02:56:29 pretz Exp $
  * @file I3RecoPulseSeries.h
- * @version $Revision: 1.27 $
  * @date $Date: 2004/08/31 02:56:29 $
- * @author ehrlich
- * @author pretz
  */
 
-#ifndef I3RECOPULSESERIES_H
-#define I3RECOPULSESERIES_H
+#ifndef I3RECOPULSESERIES_H_INCLUDED
+#define I3RECOPULSESERIES_H_INCLUDED
 
 #include "I3RecoPulse.h"
 #include "dataclasses/StoragePolicy.h"
+#include "dataclasses/I3Vector.h"
 #include <sstream>
 
 /**
  * @brief A list of reco pulses
  */
 
-class I3RecoPulseSeries : public TObject, public vector<I3RecoPulse>
+class I3RecoPulseSeries : public I3Vector<I3RecoPulse>
 {
   public:
   I3RecoPulseSeries() {};
@@ -78,6 +75,6 @@ inline ostream& operator<<(ostream& o, const I3RecoPulseSeries& series)
 
 typedef shared_ptr<I3RecoPulseSeries> I3RecoPulseSeriesPtr;
 
-#endif
+#endif //I3RECOPULSESERIES_H_INCLUDED
 
 

@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3PMTPulse.h
- * @version $Revision: 1.4 $
  * @date $Date$
- * @author deyoung
- *
  */
-#ifndef I3PMTPULSE_H
-#define I3PMTPULSE_H
+
+#ifndef I3PMTPULSE_H_INCLUDED
+#define I3PMTPULSE_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/StoragePolicy.h"
@@ -26,10 +23,9 @@
 class I3PMTPulse : public TObject {
     
 public:
-  /**
-   * constructor
-   */
+
   I3PMTPulse() {hitNum_=0;}
+
   virtual ~I3PMTPulse();
   
   /**
@@ -75,5 +71,5 @@ BOOST_IS_ABSTRACT(I3PMTPulse);
  */
 typedef shared_ptr<I3PMTPulse>  I3PMTPulsePtr;
 
-#endif
+#endif //I3PMTPULSE_H_INCLUDED
 

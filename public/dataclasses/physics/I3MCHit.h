@@ -1,18 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3MCHit.h
- * @version $Revision: 1.19 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
- *
  */
-#ifndef I3MCHIT_H
-#define I3MCHIT_H
+
+#ifndef I3MCHIT_H_INCLUDED
+#define I3MCHIT_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/StoragePolicy.h"
@@ -95,5 +90,5 @@ inline ostream& operator<<(ostream& o,const I3MCHit& key)
  */
 typedef shared_ptr<I3MCHit>  I3MCHitPtr;
 
-#endif
+#endif //I3MCHIT_H_INCLUDED
 

@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3NonEnergetic.h
- * @version $Revision: 1.8 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3NONENERGETIC_H
-#define I3NONENERGETIC_H
+
+#ifndef I3NONENERGETIC_H_INCLUDED
+#define I3NONENERGETIC_H_INCLUDED
 
 #include "dataclasses/physics/I3Particle.h"
 #include "Rtypes.h"
@@ -50,4 +48,4 @@ class I3NonEnergetic
 
 };
 
-#endif // I3ENERGETIC_H
+#endif // I3ENERGETIC_H_INCLUDED

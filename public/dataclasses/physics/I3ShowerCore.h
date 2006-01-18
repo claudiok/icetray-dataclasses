@@ -1,16 +1,13 @@
 /**
  * Copyright (C) 2004
  * The IceCube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3ShowerCore.h
- * @version $Revision: 1.3 $
  * @date $Date$
- * @author Peter Niessen
  */
 
-#ifndef __I3SHOWERCORE_H_
-#define __I3SHOWERCORE_H_
+#ifndef I3SHOWERCORE_H_INCLUDED
+#define I3SHOWERCORE_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 #include "I3TopShowerImpl.h"
@@ -41,5 +38,5 @@ private:
  */       
 typedef shared_ptr<I3ShowerCore>  I3ShowerCorePtr;
 
-#endif
+#endif //I3SHOWERCORE_H_INCLUDED
 

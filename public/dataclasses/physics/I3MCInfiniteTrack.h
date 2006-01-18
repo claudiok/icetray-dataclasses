@@ -1,12 +1,9 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id: I3MCTrack.h 7619 2005-05-14 18:52:55Z olivas $
-
+    @version $Id: I3MCTrack.h 7619 2005-05-14 18:52:55Z olivas $
     @file I3MCTrack.h
-    @version $Revision: 1.14 $
     @date $Date: 2005-05-14 14:52:55 -0400 (Sat, 14 May 2005) $
-    @author deyoung
 */
 
 #include "I3TrackImpl.h"
@@ -14,8 +11,8 @@
 #include "I3Composite.h"
 #include "I3Energetic.h"
 
-#ifndef I3MCINFINITETRACK_H
-#define I3MCINFINITETRACK_H
+#ifndef I3MCINFINITETRACK_H_INCLUDED
+#define I3MCINFINITETRACK_H_INCLUDED
 
 #include "dataclasses/physics/I3Track.h"
 
@@ -30,14 +27,9 @@ class I3MCInfiniteTrack : public I3TrackImpl<I3Infinite,
   double     weight_;
   
   public:
-  /**
-   * constructor
-   */
+
   I3MCInfiniteTrack() {weight_=1;};
 
-  /**
-   * destructor
-   */
   virtual ~I3MCInfiniteTrack();
   
   /**
@@ -64,5 +56,5 @@ class I3MCInfiniteTrack : public I3TrackImpl<I3Infinite,
  */
 typedef shared_ptr<I3MCInfiniteTrack>  I3MCInfiniteTrackPtr;
 
-#endif
+#endif //I3MCINFINITETRACK_H_INCLUDED
 

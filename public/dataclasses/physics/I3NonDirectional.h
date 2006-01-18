@@ -1,17 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3NonDirectional.h
- * @version $Revision: 1.10 $
  * @date $Date$
- * @author pretz
  *
  * @todo implement fatal calls
  */
-#ifndef I3NONDIRECTIONAL_H
-#define I3NONDIRECTIONAL_H
+
+#ifndef I3NONDIRECTIONAL_H_INCLUDED
+#define I3NONDIRECTIONAL_H_INCLUDED
 
 #include "Rtypes.h"
 #include "dataclasses/physics/I3Particle.h"
@@ -53,4 +51,4 @@ class I3NonDirectional
   //ClassDef(I3NonDirectional,1);
 };
 
-#endif // I3NONDIRECTIONAL
+#endif // I3NONDIRECTIONAL_INCLUDED

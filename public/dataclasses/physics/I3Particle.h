@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Particle.h
- * @version $Revision: 1.22 $
  * @date $Date$
- * @author pretz
- *
  */
-#ifndef I3PARTICLE_H
-#define I3PARTICLE_H
+
+#ifndef I3PARTICLE_H_INCLUDED
+#define I3PARTICLE_H_INCLUDED
 
 #include "TObject.h"
 #include "dataclasses/I3Position.h"
@@ -247,4 +244,4 @@ inline ostream& operator<<(ostream& o,const I3Particle& part)
  */
 typedef shared_ptr<I3Particle>  I3ParticlePtr;
 
-#endif
+#endif //I3PARTICLE_H_INCLUDED

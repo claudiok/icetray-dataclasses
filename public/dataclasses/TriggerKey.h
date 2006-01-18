@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: TriggerKey.h 13154 2005-12-01 21:45:55Z  $
- *
+ * @version $Id: TriggerKey.h 13154 2005-12-01 21:45:55Z  $
  * @file TriggerKey.h
- * @version $Revision: 1.10 $
  * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
- * @author blaufuss
  */
 
-#ifndef TRIGGERKEY_H
-#define TRIGGERKEY_H
+#ifndef TRIGGERKEY_H_INCLUDED
+#define TRIGGERKEY_H_INCLUDED
 
 #include <utility>
 #include "TObject.h"
@@ -174,4 +171,4 @@ inline ostream& operator<<(ostream& o,const TriggerKey& key)
  */
 typedef shared_ptr<TriggerKey>  TriggerKeyPtr;
 
-#endif
+#endif //TRIGGERKEY_H_INCLUDED

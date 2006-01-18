@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3RecoResultSingleParticle.h
- * @version $Revision: 1.7 $
  * @date $Date$
- * @author dule
  */
 
-#ifndef I3RECORESULTSINGLEPARTICLE_H
-#define I3RECORESULTSINGLEPARTICLE_H
+#ifndef I3RECORESULTSINGLEPARTICLE_H_INCLUDED
+#define I3RECORESULTSINGLEPARTICLE_H_INCLUDED
 
 #include "I3RecoResult.h"
 #include "I3Particle.h"
@@ -79,5 +76,5 @@ class I3RecoResultSingleParticle : public I3RecoResult
  */
 typedef shared_ptr<I3RecoResultSingleParticle>  I3RecoResultSingleParticlePtr;
 
-#endif
+#endif //I3RECORESULTSINGLEPARTICLE_H_INCLUDED
 

@@ -3,16 +3,13 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3CalibratedDOMStatus.h
- * @version $Revision: 1.14 $
  * @date $Date$
- * @author blaufuss and others
-
  */
-#ifndef I3CALIBRATEDDOMSTATUS_H
-#define I3CALIBRATEDDOMSTATUS_H
+
+#ifndef I3CALIBRATEDDOMSTATUS_H_INCLUDED
+#define I3CALIBRATEDDOMSTATUS_H_INCLUDED
 
 /**
  * This is an object which goes in the DetectorStatus stream.  Not the
@@ -55,5 +52,5 @@ class I3CalibratedDOMStatus
 
 typedef shared_ptr<I3CalibratedDOMStatus> I3CalibratedDOMStatusPtr;
 
-#endif
+#endif //I3CALIBRATEDDOMSTATUS_H_INCLUDED
 

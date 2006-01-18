@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3NonComposite.h
- * @version $Revision: 1.11 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3NONCOMPOSITE_H
-#define I3NONCOMPOSITE_H
+
+#ifndef I3NONCOMPOSITE_H_INCLUDED
+#define I3NONCOMPOSITE_H_INCLUDED
 
 #include <vector>
 #include "I3Particle.h"
@@ -23,14 +21,9 @@
 class I3NonComposite
 {
  public:
-  /**
-   * constructor
-   */
+
   I3NonComposite(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3NonComposite();
 
   /**
@@ -56,6 +49,6 @@ class I3NonComposite
   //ClassDef(I3NonComposite,1);
 };
 
-#endif
+#endif //I3NONCOMPOSITE_H_INCLUDED
 
 

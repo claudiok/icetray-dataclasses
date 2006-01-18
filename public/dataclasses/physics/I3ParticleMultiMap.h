@@ -1,37 +1,29 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3ParticleMultiMap.h
- * @version $Revision: 1.6 $
  * @date $Date$
- * @author ehrlich
  */
 
-#ifndef I3MCPARTICLEMULTIMAP_H
-#define I3MCPARTICLEMULTIMAP_H
+#ifndef I3MCPARTICLEMULTIMAP_H_INCLUDED
+#define I3MCPARTICLEMULTIMAP_H_INCLUDED
 
 #include "I3Particle.h"
 #include "dataclasses/StoragePolicy.h"
-#include <map>
+#include "dataclasses/I3Map.h"
 
 /**
  * @brief A list of MC particles
  *
  * @todo figure out how to make copy and assignment private
  */
-class I3ParticleMultiMap : public TObject, public multimap<string, I3ParticlePtr>
+class I3ParticleMultiMap : public I3Map<string, I3ParticlePtr>
 {
  public:
-  /**
-   * constructor
-   */
+
   I3ParticleMultiMap(){};
 
-  /**
-   * destructor
-   */
   virtual ~I3ParticleMultiMap();
 
   virtual void ToStream(ostream& o) const
@@ -76,5 +68,5 @@ inline ostream& operator<<(ostream& o,const I3ParticleMultiMap& rhs)
  */
 typedef shared_ptr<I3ParticleMultiMap>  I3ParticleMultiMapPtr;
 
-#endif
+#endif //I3MCPARTICLEMULTIMAP_H_INCLUDED
 

@@ -1,18 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Trigger.h
- * @version $Revision: 1.5 $
  * @date $Date$
- * @author blaufuss
- * @author deyoung
- * @author ehrlich
  */
 
-#ifndef I3TRIGGER_H
-#define I3TRIGGER_H
+#ifndef I3TRIGGER_H_INCLUDED
+#define I3TRIGGER_H_INCLUDED
 
 #include <TObject.h>
 #include <TClass.h>
@@ -126,6 +121,6 @@ inline ostream& operator<<(ostream& o,const I3Trigger& trig)
  */
 typedef shared_ptr<I3Trigger> I3TriggerPtr;
 
-#endif
+#endif //I3TRIGGER_H_INCLUDED
 
 

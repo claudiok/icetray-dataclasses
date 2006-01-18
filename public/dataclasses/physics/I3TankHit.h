@@ -1,13 +1,11 @@
 /**
-    $Id$
+    @version $Id$
     @file I3TankHit.h
-    @version $Revision: 1.8 $
     @date Tue Jun 22 16:39:23 EDT 2004
-    @author rulrich
 */
 
-#ifndef I3TankHit_H
-#define I3TankHit_H
+#ifndef I3TANKHIT_H_INCLUDED
+#define I3TANKHIT_H_INCLUDED
 
 #include <TObject.h>
 #include <TObjArray.h>
@@ -42,15 +40,9 @@ class I3TankHit : public TObject {
 
  public:
 
-  /**
-   * constructor
-   */
   I3TankHit(unsigned short tank_number = 0) :
     tankNumber_(tank_number), time_(0), signal_(0) {}
   
-  /**
-   * destructor
-   */
   virtual ~I3TankHit();
   
   /**
@@ -164,5 +156,5 @@ class I3TankHitMatchesTankNumber {
   unsigned short tankNumber_;
 
 };
-#endif
+#endif //I3TANKHIT_H_INCLUDED
 

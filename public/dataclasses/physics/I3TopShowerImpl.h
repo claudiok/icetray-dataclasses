@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3TopShowerImpl.h
- * @version $Revision: 1.3 $
  * @date $Date$
- * @author blaufuss
- *
  */
-#ifndef I3TOPSHOWERIMPL_H
-#define I3TOPSHOWERIMPL_H
+
+#ifndef I3TOPSHOWERIMPL_H_INCLUDED
+#define I3TOPSHOWERIMPL_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/physics/I3TopShower.h"
@@ -35,14 +32,9 @@ class I3TopShowerImpl : public I3TopShower,
                         public EnergeticType
 {
  public:
-  /**
-   * constructor
-   */
+
   I3TopShowerImpl() {};
 
-  /**
-   * destructor
-   */
   virtual ~I3TopShowerImpl();
 
   /**
@@ -87,4 +79,4 @@ class I3TopShowerImpl : public I3TopShower,
   //ClassDef(I3TopShowerImpl,1);
 };
 
-#endif
+#endif //I3TOPSHOWERIMPL_H_INCLUDED

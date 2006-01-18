@@ -1,12 +1,9 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id$
-
+    @version $Id$
     @file I3MCCascade.h
-    @version $Revision: 1.14 $
     @date $Date$
-    @author deyoung
 */
 
 #include "I3CascadeImpl.h"
@@ -15,8 +12,8 @@
 #include "I3Energetic.h"
 #include "I3Composite.h"
 
-#ifndef I3MCCASCADE_H
-#define I3MCCASCADE_H
+#ifndef I3MCCASCADE_H_INCLUDED
+#define I3MCCASCADE_H_INCLUDED
 
 #include "dataclasses/physics/I3Cascade.h"
 
@@ -31,14 +28,9 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
   double weight_;
   
   public:
-  /**
-   * constructor
-   */
+
   I3MCCascade() {weight_=1;};
 
-  /**
-   * destructor
-   */
   virtual ~I3MCCascade();
   
   /**
@@ -65,5 +57,5 @@ class I3MCCascade : public I3CascadeImpl<I3Directional,
  */
 typedef shared_ptr<I3MCCascade>  I3MCCascadePtr;
 
-#endif
+#endif //I3MCCASCADE_H_INCLUDED
 

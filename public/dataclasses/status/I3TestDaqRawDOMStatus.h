@@ -3,17 +3,13 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3TestDaqRawDOMStatus.h 6917 2005-04-26 02:56:37Z dima $
- *
+ * @version $Id: I3TestDaqRawDOMStatus.h 6917 2005-04-26 02:56:37Z dima $
  * @file I3TestDaqRawDOMStatus.h
- * @version $Revision: 1.14 $
  * @date $Date: 2005-04-25 22:56:37 -0400 (Mon, 25 Apr 2005) $
- * @author pretz
- * @author tmccauley
  */
 
-#ifndef I3TESTDAQRAWDOMSTATUS_H
-#define I3TESTDAQRAWDOMSTATUS_H
+#ifndef I3TESTDAQRAWDOMSTATUS_H_INCLUDED
+#define I3TESTDAQRAWDOMSTATUS_H_INCLUDED
 
 #include "dataclasses/status/I3RawDOMStatus.h"
 #include <map>
@@ -77,4 +73,4 @@ public:
 
 typedef shared_ptr<I3TestDaqRawDOMStatus> I3TestDaqRawDOMStatusPtr;
 
-#endif
+#endif //I3TESTDAQRAWDOMSTATUS_H_INCLUDED

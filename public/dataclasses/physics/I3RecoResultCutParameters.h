@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3RecoResultCutParameters.h 12685 2005-11-17 15:04:25Z blaufuss $
- *
+ * @version $Id: I3RecoResultCutParameters.h 12685 2005-11-17 15:04:25Z blaufuss $
  * @file I3RecoResultCutParameters.h
- * @version $Revision: 1.7 $
  * @date $Date: 2005-11-17 10:04:25 -0500 (Thu, 17 Nov 2005) $
- * @author dule
  */
 
-#ifndef I3RECORESULTCUTPARAMETERS_H
-#define I3RECORESULTCUTPARAMETERS_H
+#ifndef I3RECORESULTCUTPARAMETERS_H_INCLUDED
+#define I3RECORESULTCUTPARAMETERS_H_INCLUDED
 
 #include "I3RecoResultSingleParticle.h"
 
@@ -91,5 +88,5 @@ class I3RecoResultCutParameters : public I3RecoResultSingleParticle
  */
 typedef shared_ptr<I3RecoResultCutParameters> I3RecoResultCutParametersPtr;
 
-#endif
+#endif //I3RECORESULTCUTPARAMETERS_H_INCLUDED
 

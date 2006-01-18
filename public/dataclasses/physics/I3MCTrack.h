@@ -1,16 +1,13 @@
 /**
     copyright  (C) 2004
     the IceCube collaboration
-    $Id$
-
+    @version $Id$
     @file I3MCTrack.h
-    @version $Revision: 1.14 $
     @date $Date$
-    @author deyoung
 */
 
-#ifndef I3MCTRACK_H
-#define I3MCTRACK_H
+#ifndef I3MCTRACK_H_INCLUDED
+#define I3MCTRACK_H_INCLUDED
 
 #include "dataclasses/physics/I3TrackImpl.h"
 #include "dataclasses/physics/I3Contained.h"
@@ -30,14 +27,9 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
   double     weight_;
   
   public:
-  /**
-   * constructor
-   */
+
   I3MCTrack() {weight_=1;};
 
-  /**
-   * destructor
-   */
   virtual ~I3MCTrack();
   
   /**
@@ -64,5 +56,5 @@ class I3MCTrack : public I3TrackImpl<I3Contained,
  */
 typedef shared_ptr<I3MCTrack>  I3MCTrackPtr;
 
-#endif
+#endif //I3MCTRACK_H_INCLUDED
 

@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3RecoResult.h
- * @version $Revision: 1.33 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3RECORESULT_H
-#define I3RECORESULT_H
+
+#ifndef I3RECORESULT_H_INCLUDED
+#define I3RECORESULT_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/StoragePolicy.h"
@@ -29,14 +25,9 @@
 class I3RecoResult : public TObject
 {
  public:
-  /**
-   * constructor
-   */ 
+
   I3RecoResult(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3RecoResult();
 
   /**
@@ -80,5 +71,5 @@ inline ostream& operator<<(ostream& o,I3RecoResult& result)
  */
 typedef shared_ptr<I3RecoResult>  I3RecoResultPtr;
 
-#endif
+#endif //I3RECORESULT_H_INCLUDED
 

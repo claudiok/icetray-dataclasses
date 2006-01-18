@@ -1,20 +1,18 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3MCHitSeries.h
- * @version $Revision: 1.27 $
  * @date $Date$
- * @author ehrlich
- * @author troy
- * @author pretz
  */
-#ifndef I3MCHITSERIES_H
-#define I3MCHITSERIES_H
+
+#ifndef I3MCHITSERIES_H_INCLUDED
+#define I3MCHITSERIES_H_INCLUDED
 
 #include "I3MCHit.h"
 #include "dataclasses/StoragePolicy.h"
+#include "dataclasses/I3Vector.h"
+
 #include <sstream>
 
 /**
@@ -24,18 +22,13 @@
  * variable (default 1) can be used to assign a statistical weighting
  * factor to the series as a whole, independent of the individual hits.
  */
-class I3MCHitSeries : public TObject, public vector<I3MCHit>
+class I3MCHitSeries : public I3Vector<I3MCHit>
 {
   double weight_;
  public:
-  /**
-   * constructor
-   */
+
   I3MCHitSeries(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3MCHitSeries();
 
   /**
@@ -107,5 +100,5 @@ inline ostream& operator<<(ostream& o,const I3MCHitSeries& series)
  */
 typedef shared_ptr<I3MCHitSeries>  I3MCHitSeriesPtr;
 
-#endif
+#endif //I3MCHITSERIES_H_INCLUDED
 

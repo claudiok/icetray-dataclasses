@@ -3,16 +3,13 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id: I3DaqRawDOMStatus.h 6917 2005-04-26 02:56:37Z dima $
- *
+ * @version $Id: I3DaqRawDOMStatus.h 6917 2005-04-26 02:56:37Z dima $
  * @file I3DaqRawDOMStatus.h
- * @version $Revision: 1.14 $
  * @date $Date: 2005-04-25 22:56:37 -0400 (Mon, 25 Apr 2005) $
- * @author blaufuss
  */
 
-#ifndef I3DAQRAWDOMSTATUS_H
-#define I3DAQRAWDOMSTATUS_H
+#ifndef I3DAQRAWDOMSTATUS_H_INCLUDED
+#define I3DAQRAWDOMSTATUS_H_INCLUDED
 
 #include "dataclasses/status/I3RawDOMStatus.h"
 
@@ -219,5 +216,5 @@ private:
 
 typedef shared_ptr<I3DaqRawDOMStatus> I3DaqRawDOMStatusPtr;
 
-#endif
+#endif //I3DAQRAWDOMSTATUS_H_INCLUDED
 

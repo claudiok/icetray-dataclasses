@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3MCCorePrimary.h
- * @version $Revision: 1.2 $
  * @date $Date$
- * @author ehrlich
- * @author pretz
  */
-#ifndef I3MCCOREPRIMARY_H
-#define I3MCCOREPRIMARY_H
+
+#ifndef I3MCCOREPRIMARY_H_INCLUDED
+#define I3MCCOREPRIMARY_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 #include "I3PrimaryImpl.h"
@@ -40,5 +37,5 @@ class I3MCCorePrimary : public I3PrimaryImpl<I3Directional,
  */
 typedef shared_ptr<I3MCCorePrimary>  I3MCCorePrimaryPtr;
 
-#endif
+#endif //I3MCCOREPRIMARY_H_INCLUDED
 

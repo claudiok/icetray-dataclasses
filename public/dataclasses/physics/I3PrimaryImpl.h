@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3PrimaryImpl.h
- * @version $Revision: 1.13 $
  * @date $Date$
- * @author pretz
- *
  */
-#ifndef I3PRIMARYIMPL_H
-#define I3PRIMARYIMPL_H
+
+#ifndef I3PRIMARYIMPL_H_INCLUDED
+#define I3PRIMARYIMPL_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/physics/I3Primary.h"
@@ -35,14 +32,9 @@ class I3PrimaryImpl : public I3Primary,
                       public EnergeticType
 {
  public:
-  /**
-   * constructor
-   */
+
   I3PrimaryImpl() {}
 
-  /**
-   * destructor
-   */
   virtual ~I3PrimaryImpl();
 
   /**
@@ -110,4 +102,4 @@ class I3PrimaryImpl : public I3Primary,
   //ClassDef(I3PrimaryImpl,1);
 };
 
-#endif
+#endif //I3PRIMARYIMPL_H_INCLUDED

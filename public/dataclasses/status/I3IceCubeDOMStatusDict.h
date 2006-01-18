@@ -1,18 +1,15 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3IceCubeDOMStatusDict.h 11091 2005-09-27 09:32:13Z  $
- *
+ * @version $Id: I3IceCubeDOMStatusDict.h 11091 2005-09-27 09:32:13Z  $
  * @file I3IceCubeDOMStatusDict.h
- * @version $Revision: 1.2 $
  * @date $Date: 2005-09-27 05:32:13 -0400 (Tue, 27 Sep 2005) $
- * @author pretz
- * @author blaufuss
  */
-#ifndef I3ICECUBEDOMSTATUSDICT_H
-#define I3ICECUBEDOMSTATUSDICT_H
 
-#include "TObject.h"
+#ifndef I3ICECUBEDOMSTATUSDICT_H_INCLUDED
+#define I3ICECUBEDOMSTATUSDICT_H_INCLUDED
+
+#include "dataclasses/I3Map.h"
 #include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/StoragePolicy.h"
@@ -24,17 +21,11 @@
  * Just a container for I3OMStatusIceCube objects
  */
 class I3IceCubeDOMStatusDict 
-: public TObject, 
-  public map<OMKey,I3DOMStatusPtr>{
+: public I3Map<OMKey,I3DOMStatusPtr>{
  public:
-  /**
-   * constructor
-   */
+
   I3IceCubeDOMStatusDict(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3IceCubeDOMStatusDict();
 
   /**
@@ -75,5 +66,5 @@ inline ostream& operator<<(ostream& o, const I3IceCubeDOMStatusDict& status)
  */
 typedef shared_ptr<I3IceCubeDOMStatusDict>  I3IceCubeDOMStatusDictPtr;
 
-#endif
+#endif //I3ICECUBEDOMSTATUSDICT_H_INCLUDED
 

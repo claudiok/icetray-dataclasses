@@ -1,19 +1,16 @@
 /**
  * copyright  (C) 2004
  * the IceCube Collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3PMTPulseVect.h
- * @version $Revision: 1.5 $
  * @date $Date$
- * @author deyoung
  */
 
 #ifndef I3PMTPULSEVECT_H_INCLUDED
 #define I3PMTPULSEVECT_H_INCLUDED
-#include <TObject.h>
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/physics/I3PMTPulse.h"
+#include "dataclasses/I3Vector.h"
 
 /**
  * @brief List of PMT pulses produced by individual hits
@@ -24,19 +21,13 @@
  * pulses may not include saturation or other non-linear effects.
  *
  */
-class I3PMTPulseVect : public TObject,
-		       public vector<I3PMTPulsePtr>
+class I3PMTPulseVect : public I3Vector<I3PMTPulsePtr>
 {
 
 public:
-  /**
-   * constructor
-   */
+
   I3PMTPulseVect(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3PMTPulseVect();
 
   /**
@@ -69,6 +60,6 @@ private:
  */
 typedef shared_ptr<I3PMTPulseVect>  I3PMTPulseVectPtr;
 
-#endif
+#endif //I3PMTPULSEVECT_H_INCLUDED
 
 

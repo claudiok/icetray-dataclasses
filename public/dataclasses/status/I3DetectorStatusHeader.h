@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3DetectorStatusHeader.h
- * @version $Revision: 1.4 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3DETECTORSTATUSHEADER_H
-#define I3DETECTORSTATUSHEADER_H
+
+#ifndef I3DETECTORSTATUSHEADER_H_INCLUDED
+#define I3DETECTORSTATUSHEADER_H_INCLUDED
 
 // includes
 #include "dataclasses/I3DataHeader.h"
@@ -29,14 +27,9 @@ using namespace std;
 class I3DetectorStatusHeader : public I3DataHeader
 {
  public:
-  /**
-   * constructor
-   */
+
   I3DetectorStatusHeader(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3DetectorStatusHeader();
 
   /**
@@ -72,5 +65,5 @@ class I3DetectorStatusHeader : public I3DataHeader
  */
 typedef shared_ptr<I3DetectorStatusHeader>  I3DetectorStatusHeaderPtr;
 
-#endif 
+#endif //I3DETECTORSTATUSHEADER_H_INCLUDED
 

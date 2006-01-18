@@ -1,17 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3MCParticleData.h
- * @version $Revision: 1.9 $
  * @date $Date$
- * @author pretz
- *
  */
 
-#ifndef I3MCPARTICLEDATA_H
-#define I3MCPARTICLEDATA_H
+#ifndef I3MCPARTICLEDATA_H_INCLUDED
+#define I3MCPARTICLEDATA_H_INCLUDED
 
 #include "dataclasses/physics/I3ParticleMultiMap.h"
 #include "dataclasses/StoragePolicy.h"
@@ -30,14 +26,9 @@ class I3MCParticleData : public TObject
   I3ParticleMultiMap iceTopParticles_; 
 
  public:
-  /**
-   * constructor
-   */
+
   I3MCParticleData(){}
 
-  /**
-   * destructor
-   */
   virtual ~I3MCParticleData();
   
   /**
@@ -106,5 +97,5 @@ inline ostream& operator<<(ostream& o, const I3MCParticleData& data)
  */
 typedef shared_ptr<I3MCParticleData>  I3MCParticleDataPtr;
 
-#endif //I3MCPARTICLEDATA_H
+#endif //I3MCPARTICLEDATA_H_INCLUDED
 

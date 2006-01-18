@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3TrackImpl.h
- * @version $Revision: 1.14 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3TRACKIMPL_H
-#define I3TRACKIMPL_H
+
+#ifndef I3TRACKIMPL_H_INCLUDED
+#define I3TRACKIMPL_H_INCLUDED
 
 #include <TObject.h>
 #include "dataclasses/physics/I3Track.h"
@@ -35,14 +33,9 @@ class I3TrackImpl : public I3Track,
                     public CompositeType
 {
  public:
-  /**
-   * constructor
-   */
+
   I3TrackImpl() {};
 
-  /**
-   * destructor
-   */
   virtual ~I3TrackImpl();
 
   /**
@@ -171,4 +164,4 @@ class I3TrackImpl : public I3Track,
 };
 
 
-#endif
+#endif //I3TRACKIMPL_H_INCLUDED

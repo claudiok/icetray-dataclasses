@@ -2,15 +2,13 @@
  *
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3DetectorStatus.h
- * @version $Revision: 1.9 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3DETECTORSTATUS_H
-#define I3DETECTORSTATUS_H
+
+#ifndef I3DETECTORSTATUS_H_INCLUDED
+#define I3DETECTORSTATUS_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/status/I3IceCubeDOMStatusDict.h"
@@ -35,14 +33,8 @@ class I3DetectorStatus : public TObject
   //  Impl when needed
   //enum DaqMode { PhysicsRun = 0, CalibRun = 1, TestRun=2, Other=3 };
   //enum FilterMode { PhysicsFilt = 0, RandomFilt = 1, NoFilt =2 } ;
-  /**
-   * constructor
-   */
   I3DetectorStatus(){};
   
-  /**
-   * destructor
-   */
   virtual ~I3DetectorStatus();
   
   /**
@@ -150,5 +142,5 @@ inline ostream& operator<<(ostream& o,const I3DetectorStatus& stat)
 typedef shared_ptr<I3DetectorStatus>  I3DetectorStatusPtr;
 
 
-#endif // I3MONITORING_H
+#endif // I3DETECTORSTATUS_H_INCLUDED
 

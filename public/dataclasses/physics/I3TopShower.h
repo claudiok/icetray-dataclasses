@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3TopShower.h
- * @version $Revision: 1.6 $
  * @date $Date$
- * @author blaufuss
   */
 
-#ifndef I3TOPSHOWER_H
-#define I3TOPSHOWER_H
+#ifndef I3TOPSHOWER_H_INCLUDED
+#define I3TOPSHOWER_H_INCLUDED
 
 #include "Rtypes.h"
 #include "I3IceTopParticle.h"
@@ -57,4 +54,4 @@ class I3TopShower : public I3IceTopParticle{
  */
 typedef shared_ptr<I3TopShower>  I3TopShowerPtr;
 
-#endif
+#endif //I3TOPSHOWER_H_INCLUDED

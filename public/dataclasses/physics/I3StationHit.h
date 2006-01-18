@@ -1,26 +1,25 @@
 /**
-    $Id$
+    @version $Id$
     @file I3StationHit.h
-    @version $Revision: 1.9 $
     @date Fri Jul  9 21:16:58 EDT 2004
-    @author rulrich
 */
-#ifndef I3StationHit_H
-#define I3StationHit_H
+
+#ifndef I3STATIONHIT_H_INCLUDED
+#define I3STATIONHIT_H_INCLUDED
 
 #include <TObject.h>
 #include <TObjArray.h>
 
 #include "dataclasses/physics/I3TankHit.h"
 #include "dataclasses/StoragePolicy.h"
+#include "dataclasses/I3Vector.h"
 
 #include <sstream>
 /**
  * @brief The container for all the Station Hit-related data in an array
  *
  */
-class I3StationHit : public TObject, 
-	 public vector<I3TankHitPtr> {
+class I3StationHit : public I3Vector<I3TankHitPtr> {
 
  private:
 
@@ -28,15 +27,10 @@ class I3StationHit : public TObject,
   unsigned short stationNumber_;
 
  public:
-  /**
-   * constructor
-   */
+
   I3StationHit(unsigned short station_number = 0) :
     stationNumber_( station_number ) {}
   
-  /**
-   * destructor
-   */
   virtual ~I3StationHit();
 
   /**
@@ -129,5 +123,5 @@ class I3StationHitMatchesStationNumber {
 
 };
 
-#endif
+#endif //I3STATIONHIT_H_INCLUDED
 

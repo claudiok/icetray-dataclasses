@@ -1,16 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3RecoResultRDMCFit.h
- * @version $Revision: 1.16 $
  * @date $Date$
- * @author pretz
  */
 
-#ifndef I3RECORESULTRDMCFIT_H
-#define I3RECORESULTRDMCFIT_H
+#ifndef I3RECORESULTRDMCFIT_H_INCLUDED
+#define I3RECORESULTRDMCFIT_H_INCLUDED
 
 #include "I3RecoResultSingleParticle.h"
 #include <vector>
@@ -85,6 +82,6 @@ class I3RecoResultRDMCFit : public I3RecoResultSingleParticle
 typedef shared_ptr<I3RecoResultRDMCFit>  I3RecoResultRDMCFitPtr;
 
 
-#endif
+#endif //I3RECORESULTRDMCFIT_H_INCLUDED
 
 

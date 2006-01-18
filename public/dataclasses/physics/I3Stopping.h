@@ -1,15 +1,13 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Stopping.h
- * @version $Revision: 1.21 $
  * @date $Date$
- * @author pretz
  */
-#ifndef I3STOPPING_H
-#define I3STOPPING_H
+
+#ifndef I3STOPPING_H_INCLUDED
+#define I3STOPPING_H_INCLUDED
 
 #include <cmath>
 #include "dataclasses/I3Constants.h"
@@ -177,5 +175,5 @@ class I3Stopping
   //ClassDef(I3Stopping,1)
 };
 
-#endif //I3STOPPING_H
+#endif //I3STOPPING_H_INCLUDED
 

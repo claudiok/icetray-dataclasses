@@ -1,12 +1,9 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3MCPMTResponse.h
- * @version $Revision: 1.15 $
  * @date $Date$
- * @author klein
  */
 
 #ifndef I3MCPMTRESPONSE_H_INCLUDED
@@ -31,14 +28,9 @@ protected:
   float endTime_;
   
 public:
-  /**
-   * constructor
-   */
+
   I3MCPMTResponse(){startTime_=0.; endTime_=0.;} 
   
-  /**
-   * destructor
-   */
   virtual ~I3MCPMTResponse();
   
   /**   
@@ -95,6 +87,6 @@ inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)
  */
 typedef shared_ptr<I3MCPMTResponse>  I3MCPMTResponsePtr;
 
-#endif
+#endif //I3MCPMTRESPONSE_H_INCLUDED
 
 

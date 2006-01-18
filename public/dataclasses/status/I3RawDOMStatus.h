@@ -3,17 +3,13 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3RawDOMStatus.h
- * @version $Revision: 1.14 $
  * @date $Date$
- * @author pretz
- * @author tmccauley
  */
 
-#ifndef I3RAWDOMSTATUS_PROPOSAL_H
-#define I3RAWDOMSTATUS_PROPOSAL_H
+#ifndef I3RAWDOMSTATUS_H_INCLUDED
+#define I3RAWDOMSTATUS_H_INCLUDED
 
 #include <string>
 #include "dataclasses/StoragePolicy.h"
@@ -54,9 +50,6 @@ public:
      */
     enum OnOff {Off = 0, On = 1};
 
-    /**
-     * destructor
-     */
     virtual ~I3RawDOMStatus();
 
     /**
@@ -129,6 +122,6 @@ BOOST_IS_ABSTRACT(I3RawDOMStatus);
  */
 typedef shared_ptr<I3RawDOMStatus>  I3RawDOMStatusPtr;
 
-#endif
+#endif //I3RAWDOMSTATUS_H_INCLUDED
 
 

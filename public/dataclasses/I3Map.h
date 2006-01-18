@@ -12,8 +12,16 @@
 #include <map>
 
 template <typename Key, typename Value>
-class I3Map : public TObject, public std::map<Key, Value>
-{ };
+struct I3Map : public TObject, public std::map<Key, Value>
+{ 
+  template <class Archive>
+  void serialize(Archive & ar, unsigned version)
+  {
+    ar & make_nvp("map", base_object< std::map<Key, Value> >(*this));
+  }
+
+};
+
 
 #endif // I3MAP_H_INCLUDED
 
