@@ -10,6 +10,7 @@
 #define I3RECOHIT_H_INCLUDED
 
 #include <TObject.h>
+#include "dataclasses/StoragePolicy.h"
 
 /**
  * @brief A base class for reconstruted hits.  

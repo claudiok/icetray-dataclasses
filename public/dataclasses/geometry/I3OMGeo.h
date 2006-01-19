@@ -30,7 +30,12 @@ class I3OMGeo : public TObject
   /**
    * An enumerated type for the OM Orientation
    */
-  enum EOrientation {Unspecified,Up,Down};
+  enum Orientation {Unspecified,Up,Down};
+
+  /**
+   * An enumerated type for the possible kinds of OMs
+   */
+  enum OMType {AMANDA,IceCube,IceTop};
 
  protected:
   /**
@@ -41,7 +46,12 @@ class I3OMGeo : public TObject
   /**
    * the orientation
    */
-  EOrientation orientation_;
+  Orientation orientation_;
+
+  /**
+   * the type (AMANDA or IceCube)
+   */
+  OMType type_;
 
   /**
    * the quantum efficiency relative to some standard
@@ -53,7 +63,7 @@ class I3OMGeo : public TObject
    */
   double area_;
 
-  public:
+ public:
 
   I3OMGeo() { Init();}
 
@@ -89,12 +99,12 @@ class I3OMGeo : public TObject
   /**
    * @return the orientation of the tube
    */
-  EOrientation  GetOrientation() const { return orientation_; }
+  Orientation  GetOrientation() const { return orientation_; }
 
   /**
    * @param orientation the new orientation for the tube
    */
-  void SetOrientation(EOrientation orientation) { orientation_ = orientation; }
+  void SetOrientation(Orientation orientation) { orientation_ = orientation; }
 
   /**
    * This is the relative quantum efficiency of this OM.  Relative
@@ -118,12 +128,23 @@ class I3OMGeo : public TObject
    */
   double GetArea() const { return area_;}
 
-
   /**
    * sets the photocathode area for this tube
    * @param area the new area for the photocathode
    */
   void SetArea(double area){area_ = area;}
+
+  void SetOMType(OMType type)
+    {
+      type_ = type;
+    }
+
+  OMType GetOMType() const 
+    {
+      return type_;
+    }
+
+
 
   /**
    * @todo finish with all the data
@@ -167,6 +188,7 @@ class I3OMGeo : public TObject
   {
     ar & make_nvp("position",position_);
     ar & make_nvp("orientation",orientation_);
+    ar & make_nvp("type",type_);
     ar & make_nvp("relativeQE",relativeQE_);
     ar & make_nvp("area",area_);
   }

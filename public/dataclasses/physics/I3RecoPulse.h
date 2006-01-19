@@ -10,6 +10,10 @@
 #define I3RECOPULSE_H_INCLUDED
 
 #include "dataclasses/StoragePolicy.h"
+#include <map>
+#include <string>
+
+using namespace std;
 
 /**
  * @brief Base class for recopulse.
