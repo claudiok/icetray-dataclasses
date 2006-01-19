@@ -61,7 +61,7 @@ protected:
 
      int LEDBrightness_;
 
-    
+    int width_;
 public:
     /**
      * constructor
@@ -104,7 +104,13 @@ public:
     unsigned int GetMask() const { return mask_; }
     void SetMask(int LEDmask) { mask_ = LEDmask; }
 
-    /**
+    
+     /* return and set width */
+ 
+    unsigned int GetWidth() const { return width_; }
+    void SetWidth(int width) { width_ = width; }
+
+/**
      * return raw ATWD3 waveform as a read-only object
      * ATWD3 holds the digitized LED current pulse; the others channels are empty
      */
