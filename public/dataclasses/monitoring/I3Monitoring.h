@@ -17,7 +17,7 @@ using namespace std;
  * @brief Class to represent the contents of DOM monitoring records
  */
 
-class I3Monitoring 
+class I3Monitoring : public TObject
 {
  public:
     virtual ~I3Monitoring();
