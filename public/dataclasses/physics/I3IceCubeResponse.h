@@ -17,4 +17,6 @@ class I3IceCubeResponse : public I3Map<OMKey,vector<I3DOMLaunch> >
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
+typedef shared_ptr<I3IceCubeResponse> I3IceCubeResponsePtr;
+
 #endif
