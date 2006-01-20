@@ -65,11 +65,6 @@ class I3RecoHitSeries : public I3Vector<I3RecoHit>
     return out.str();
   }
 
-  private:
-  // copy and assignment are private:
-  I3RecoHitSeries (const I3RecoHitSeries& rhs);
-  const I3RecoHitSeries& operator= (const I3RecoHitSeries&);
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
