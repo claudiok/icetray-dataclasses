@@ -10,7 +10,7 @@ class I3IceCubeResponse : public I3Map<OMKey,vector<I3DOMLaunch> >
  public:
   I3IceCubeResponse(){}
   
-  virtual ~I3IceCubeResponse()
+  virtual ~I3IceCubeResponse();
 
   friend class boost::serialization::access;
 
