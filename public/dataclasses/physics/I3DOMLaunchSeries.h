@@ -1,0 +1,62 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * @version $Id: I3DOMLaunchSeries.h 14593 2006-01-20 16:50:01Z pretz $
+ * @file I3DOMLaunchSeries.h
+ * @date $Date: 2006-01-20 11:50:01 -0500 (Fri, 20 Jan 2006) $
+ */
+
+#ifndef I3DOMLAUNCHSERIES_H_INCLUDED
+#define I3DOMLAUNCHSERIES_H_INCLUDED
+
+#include "dataclasses/physics/I3DOMLaunch.h"
+#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/I3Vector.h"
+#include <sstream>
+
+/**
+ * @brief A list of reco hits.
+ */
+class I3DOMLaunchSeries : public I3Vector<I3DOMLaunch>
+{
+ public:
+
+  I3DOMLaunchSeries() {};
+
+  virtual ~I3DOMLaunchSeries();
+
+  /**
+   * dumps the object to the indicated ostream
+   * @param o the ostream to dump the object to
+   */
+  virtual void ToStream(ostream& o) const
+  {
+    o<<"[ I3DOMLaunchSeries: ]\n";
+  }
+
+  virtual string ToString() const
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
+
+  friend class boost::serialization::access;
+
+  template <class Archive> void serialize(Archive & ar, unsigned version);
+};
+
+inline ostream& operator<<(ostream& o, const I3DOMLaunchSeries& series)
+{
+  series.ToStream(o);
+  return o;
+}
+
+/**
+ * pointer type to insulate users from memory management
+ */
+typedef shared_ptr<I3DOMLaunchSeries>  I3DOMLaunchSeriesPtr;
+
+#endif //I3DOMLAUNCHSERIES_H_INCLUDED
+
+
