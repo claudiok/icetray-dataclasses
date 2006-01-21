@@ -11,6 +11,8 @@
 
 #include <TObject.h>
 #include "dataclasses/StoragePolicy.h"
+#include <map>
+#include <string>
 
 /**
  * @brief A base class for reconstruted hits.  
