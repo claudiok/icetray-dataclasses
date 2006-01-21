@@ -11,7 +11,7 @@
 
 */
 #include <I3Test.h>
-#include "dataclasses/I3MCHit.h"
+#include "dataclasses/physics/I3MCHit.h"
 
 // this is a typical minimal testsuite
 
