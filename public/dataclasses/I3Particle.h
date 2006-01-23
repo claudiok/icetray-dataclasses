@@ -74,6 +74,7 @@ class I3Particle : public TObject{
     int        id_;
     int        primaryID_;
     int        parentID_;
+    string     recoName_;
 
   public:
     I3Particle()
@@ -82,6 +83,7 @@ class I3Particle : public TObject{
       id_=0;
       primaryID_=0;
       parentID_=0;
+      recoName_="";
     }
     virtual ~I3Particle();
 
@@ -174,6 +176,22 @@ class I3Particle : public TObject{
 	parentID_ = ParentID;
     };
 
+    /**
+     * gets the reconstruction name for the particle
+     */
+    virtual string GetRecoName() const
+      {
+	return recoName_;
+      };
+    
+    /**
+     * sets the reconstruction name for the particle
+     */
+    virtual void SetRecoName(string RecoName)
+      {
+	recoName_ = RecoName;
+      };
+
  /**
   * copies over data from this particle to the destination particle
   * Only copies that data which the two have in common
@@ -225,6 +243,7 @@ class I3Particle : public TObject{
     ar & make_nvp("ID", id_);
     ar & make_nvp("PrimaryID", primaryID_);
     ar & make_nvp("ParentID", parentID_);
+    ar & make_nvp("RecoName", recoName_);
   }
 
  // ROOT macro
