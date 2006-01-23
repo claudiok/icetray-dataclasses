@@ -121,7 +121,7 @@ class STLMapStoragePolicy
 	debugStream<<endl<<"***WARNING: Key \'"<<key<<"\' not found."<<endl;
 	debugStream<<"Here's a list of possible keys:"<<endl;
 	for(typename map_type::iterator iter = begin(); iter != end(); iter++){
-	  debugStream<<iter->first<<" ";
+	  debugStream<<iter->first<<", ";
 	}
       }else{
 	debugStream<<"WARNING: You're trying to look for keys in an empty map."<<endl;
@@ -143,8 +143,8 @@ class STLMapStoragePolicy
       iterator iter = find(key);
       ostringstream debugStream;
       if(iter != end()){
-	debugStream<<"WARNING: Key \'"<<key<<"\' already used."<<endl;
-	log_debug("%s",debugStream.str().c_str());
+	debugStream<<"WARNING: Key \'"<<key<<"\' already used.  Nothing has been added."<<endl;
+	log_error("%s",debugStream.str().c_str());
 	return false;
       }else{
 	this->operator[](key) = element;
