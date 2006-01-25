@@ -33,7 +33,8 @@ class I3OMGeo : public TObject
   /**
    * An enumerated type for the OM Orientation
    */
-  enum EOrientation {Unspecified,Up,Down};
+  //enum EOrientation {Unspecified,Up,Down};
+  enum EOrientation {Unspecified=0,Up=1,Down=-1};
 
   /**
    * An enumerated type for the possible kinds of OMs
