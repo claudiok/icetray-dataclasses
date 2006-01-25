@@ -14,5 +14,6 @@ I3CascadeImpl<DirectionT, LocalT, EnergyT, CompositeT>::~I3CascadeImpl() {}
 template class I3CascadeImpl<I3NonDirectional, I3Localized, I3NonEnergetic, I3NonComposite>;
 template class I3CascadeImpl<I3Directional, I3Localized, I3Energetic, I3Composite>;
 template class I3CascadeImpl<I3Directional, I3Localized, I3NonEnergetic, I3NonComposite>;
+template class I3CascadeImpl<I3Directional, I3Localized, I3Energetic, I3NonComposite>;
 
 
