@@ -55,17 +55,21 @@ namespace detail
   }
 
   template <typename T>
-  void 
-  inst (ttree_oarchive& poa, const T& t)
-  {
-    poa << BOOST_SERIALIZATION_NVP(t);
-  }
-
-  template <typename T>
   void inst (boost::archive::polymorphic_iarchive& pia, T& t)
   {
     pia & BOOST_SERIALIZATION_NVP(t);
   }
+
+  class ttree_oarchive;
+  template <typename T>
+  void 
+  inst (ttree_oarchive& poa, const T& t)
+  {
+#ifndef I3_NO_TTREE_OARCHIVE
+    poa << BOOST_SERIALIZATION_NVP(t);
+#endif
+  }
+
 }
 
 #if BOOST_VERSION > 103200

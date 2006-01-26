@@ -8,6 +8,8 @@
 
 //  See http://www.boost.org for updates, documentation, and revision history.
 
+#ifndef I3_NO_TTREE_OARCHIVE
+
 #define BOOST_ARCHIVE
 #include <boost/archive/binary_oarchive.hpp>
 
@@ -34,3 +36,4 @@ namespace archive {
 } // namespace archive
 } // namespace boost
 
+#endif

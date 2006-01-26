@@ -1,6 +1,8 @@
 #ifndef TTREE_OARCHIVE_H_INCLUDED
 #define TTREE_OARCHIVE_H_INCLUDED
 
+#ifndef I3_NO_TTREE_OARCHIVE
+
 #include <boost/archive/detail/oserializer.hpp>
 #include <boost/archive/detail/basic_pointer_oserializer.hpp>
 #include <boost/archive/detail/common_oarchive.hpp>
@@ -170,4 +172,7 @@ public:
   ttree_oarchive(TTree& tree) : ttree_proxy_(tree) { }
 
 };
+
+#endif
+
 #endif

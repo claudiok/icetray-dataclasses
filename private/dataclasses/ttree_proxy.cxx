@@ -1,3 +1,5 @@
+#ifndef I3_NO_TTREE_OARCHIVE
+
 #include <dataclasses/ttree_proxy.h>
 #include <boost/tuple/tuple.hpp>
 #include <boost/graph/adjacency_list.hpp>
@@ -357,3 +359,4 @@ ttree_proxy::fill()
 
 ttree_proxy::~ttree_proxy() { }
 
+#endif
