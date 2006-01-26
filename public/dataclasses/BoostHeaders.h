@@ -46,6 +46,8 @@ void instantiate_polymorphics<T>::instantiate(pi & ia, T & t)
   ia & t;
 }
 
+class ttree_oarchive;
+
 namespace detail 
 {
   template <typename T>
@@ -60,7 +62,6 @@ namespace detail
     pia & BOOST_SERIALIZATION_NVP(t);
   }
 
-  class ttree_oarchive;
   template <typename T>
   void 
   inst (ttree_oarchive& poa, const T& t)
