@@ -18,6 +18,7 @@ struct I3Map : public TObject, public std::map<Key, Value>
   void serialize(Archive & ar, unsigned version)
   {
     ar & make_nvp("map", base_object< std::map<Key, Value> >(*this));
+    ar & make_nvp("TObject", base_object< TObject >(*this));
   }
 
 };

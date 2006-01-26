@@ -18,6 +18,7 @@ struct I3Vector : public TObject, public std::vector<T>
   void serialize(Archive & ar, unsigned version)
   {
     ar & make_nvp("vector", base_object< std::vector<T> >(*this));
+    ar & make_nvp("TObject", base_object< TObject >(*this));
   }
 };
 

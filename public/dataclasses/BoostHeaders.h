@@ -6,6 +6,10 @@
 
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/nvp.hpp>
@@ -20,6 +24,14 @@
 
 using boost::serialization::make_nvp;
 using boost::serialization::base_object;
+
+// this is a no-op.  Allows us to serialize classes derived from
+// TObject via ptr/ref to TObject.
+template <class Archive>
+void 
+serialize(Archive & ar, TObject & tobj, unsigned version)
+{  
+}
 
 template <typename T>
 struct instantiate_polymorphics
@@ -49,6 +61,24 @@ void instantiate_polymorphics<T>::instantiate(pi & ia, T & t)
 namespace detail 
 {
   template <typename T>
+  void inst (boost::archive::binary_oarchive& poa, const T& t)
+  {
+    poa & BOOST_SERIALIZATION_NVP(t);
+  }
+
+  template <typename T>
+  void inst (boost::archive::binary_iarchive& poa, T& t)
+  {
+    poa & BOOST_SERIALIZATION_NVP(t);
+  }
+
+  template <typename T>
+  void inst (boost::archive::xml_oarchive& poa, const T& t)
+  {
+    poa & BOOST_SERIALIZATION_NVP(t);
+  }
+
+  template <typename T>
   void inst (boost::archive::polymorphic_oarchive& poa, const T& t)
   {
     poa & BOOST_SERIALIZATION_NVP(t);
@@ -65,11 +95,20 @@ namespace detail
   {
     pia & BOOST_SERIALIZATION_NVP(t);
   }
+  template <typename T>
+  void inst (boost::archive::xml_iarchive& pia, T& t)
+  {
+    pia & BOOST_SERIALIZATION_NVP(t);
+  }
 }
 
 #define I3_SERIALIZABLE(T)						\
   template void ::detail::inst<T>(boost::archive::ttree_oarchive_impl&, const T&); \
   template void ::detail::inst<T>(boost::archive::polymorphic_oarchive&, const T&); \
+  template void ::detail::inst<T>(boost::archive::xml_iarchive&, T&); \
+  template void ::detail::inst<T>(boost::archive::xml_oarchive&, const T&); \
+  template void ::detail::inst<T>(boost::archive::binary_iarchive&, T&); \
+  template void ::detail::inst<T>(boost::archive::binary_oarchive&, const T&); \
   template void ::detail::inst<T>(boost::archive::polymorphic_iarchive&, T&); \
   BOOST_SHARED_POINTER_EXPORT(T);					
 

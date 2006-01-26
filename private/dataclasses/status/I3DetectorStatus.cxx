@@ -6,6 +6,7 @@ I3DetectorStatus::~I3DetectorStatus() {}
 template <class Archive>
   void I3DetectorStatus::serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("TObject", base_object<TObject>(*this));
     ar & make_nvp("IcecubeDOMStatus",icecubeDOMStatus_);
     ar & make_nvp("IcetopDOMStatus",icetopDOMStatus_);
     ar & make_nvp("IcecubeTriggerStatus",icecubeTrigStatus_);

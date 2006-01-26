@@ -6,6 +6,7 @@ I3BasicTrack::~I3BasicTrack() {}
 template <class Archive>
   void I3BasicTrack::serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("TObject", base_object<TObject>(*this));
     ar & make_nvp("pos",pos_);
     ar & make_nvp("dir",dir_);
     ar & make_nvp("time",time_);

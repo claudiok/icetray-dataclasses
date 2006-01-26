@@ -21,15 +21,14 @@
 class I3Calibration : public TObject
 {
 public:
-    I3Calibration()
-	{};
+  I3Calibration() {};
     
-    virtual ~I3Calibration();
+  virtual ~I3Calibration();
     
-    const I3InIceCalibration& GetInIceCalibration() const 
-	{
-	    return inIceCalibration_;
-	};
+  const I3InIceCalibration& GetInIceCalibration() const 
+  {
+    return inIceCalibration_;
+  };
     
     I3InIceCalibration& GetInIceCalibration() 
 	{

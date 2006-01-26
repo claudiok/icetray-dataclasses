@@ -85,13 +85,14 @@ class I3BasicTrack : public TObject
   map<string,double>& GetUserParameters(){return user_;}
 
  private:
+
   I3Position pos_;
   I3Direction dir_;
   double time_;
   double energy_;
   double length_;
   I3Particle::ParticleType type_;
-  map<string,double> user_;
+  map<string,double> user_; //!
      
 
   friend class boost::serialization::access;

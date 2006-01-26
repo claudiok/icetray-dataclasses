@@ -19,7 +19,7 @@
 
 using namespace std;
 
-class I3Particle
+class I3Particle : public TObject
 {
  public:
   /**
