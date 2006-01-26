@@ -72,8 +72,11 @@ struct QuadraticFit
  * the calibration database (reversed in time for bins 0-127).
  * Calibration information is fetched by the time-ordered bin numbers.
  *
- * Nothing here really has units.  Most are fits/offsets that
- * convert values for later storage (at that SHOULD use I3Units)
+ * WARNING:
+ * See documentation below and in the DOMCal XML Users' Guide for
+ * guidance on the units of the values returned in the Linear and
+ * Quadratic fits. These return the raw values from the DOMCal file.
+ * Use them without understanding at your peril. 
  *
  * @author Tom McCauley <tpmccauley@lbl.gov>
  * @author Erik Blaufuss <blaufuss at icecube umd edu>
@@ -99,7 +102,7 @@ public:
     void SetTemperature(double temperature) { temperature_ = temperature; }
 
     /**
-     * Get DOMCAL measured PMT transit time
+     * Get DOMCAL measured PMT transit time relation:  time(ns) = slope/sqrt(V) + intercept
      */
     LinearFit GetTransitTime() const { return pmtTransitTime_; }
 
