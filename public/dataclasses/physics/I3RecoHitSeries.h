@@ -12,6 +12,8 @@
 #include "dataclasses/physics/I3RecoHit.h"
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
 #include <sstream>
 
 /**
@@ -80,6 +82,7 @@ inline ostream& operator<<(ostream& o, const I3RecoHitSeries& series)
  * pointer type to insulate users from memory management
  */
 typedef shared_ptr<I3RecoHitSeries>  I3RecoHitSeriesPtr;
+typedef I3Map<OMKey,I3RecoHitSeries>  I3RecoHitSeriesMap;
 
 #endif //I3RECOHITSERIES_H_INCLUDED
 

@@ -12,6 +12,8 @@
 #include "dataclasses/physics/I3DOMLaunch.h"
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
 #include <sstream>
 
 /**
@@ -56,6 +58,7 @@ inline ostream& operator<<(ostream& o, const I3DOMLaunchSeries& series)
  * pointer type to insulate users from memory management
  */
 typedef shared_ptr<I3DOMLaunchSeries>  I3DOMLaunchSeriesPtr;
+typedef I3Map<OMKey, I3DOMLaunchSeries>  I3DOMLaunchSeriesMap;
 
 #endif //I3DOMLAUNCHSERIES_H_INCLUDED
 
