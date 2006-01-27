@@ -6,6 +6,7 @@ I3AMANDAOMCalib::~I3AMANDAOMCalib() {}
 template <class Archive>
   void I3AMANDAOMCalib::serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("TObject", base_object< TObject >(*this));
     ar & make_nvp("adc_a0_",adc_a0_);
     ar & make_nvp("adc_beta",adc_beta_);
     ar & make_nvp("tdc_alpha",tdc_alpha_);

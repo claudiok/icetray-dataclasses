@@ -4,10 +4,12 @@
 I3MCHitSeries::~I3MCHitSeries() {}
 
 template <class Archive>
-  void I3MCHitSeries::serialize(Archive& ar, unsigned version){
-  ar & make_nvp("I3MCHitSeries",base_object< vector<I3MCHit> >(*this));
+void 
+I3MCHitSeries::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("I3MCHitSeries",base_object< I3Vector<I3MCHit> >(*this));
   ar & make_nvp("Weight", weight_ );
- }
+}
 
   
 

@@ -57,6 +57,7 @@ template <class Archive>
 void 
 I3MonitoringHeader::serialize(Archive& ar, unsigned version)
 {
+  ar & make_nvp("I3DataHeader", base_object< I3DataHeader >(*this));
   ar & make_nvp("om",om_);
   ar & make_nvp("mbid",mbid_);
   ar & make_nvp("size",size_);

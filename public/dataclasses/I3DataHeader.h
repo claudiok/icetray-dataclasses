@@ -92,5 +92,5 @@ inline ostream& operator<<(ostream& o,const I3DataHeader& header)
  */
 typedef shared_ptr<I3DataHeader>  I3DataHeaderPtr;
 
-#endif //I3DATAHEADER_H_INCLUDED
+#endif // I3DATAHEADER_H_INCLUDED
 

@@ -6,6 +6,7 @@ I3AMANDAOMCalib_XTalk::~I3AMANDAOMCalib_XTalk() {}
 template <class Archive>
   void I3AMANDAOMCalib_XTalk::serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("TObject", base_object< TObject >(*this));
     ar & make_nvp("receiver",receiver_);
     ar & make_nvp("timehigh",timehigh_);
     ar & make_nvp("timelow",timelow_);

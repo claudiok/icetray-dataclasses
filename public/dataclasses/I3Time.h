@@ -224,11 +224,7 @@ class I3Time : public TObject
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("Time", year_);
-    ar & make_nvp("HitID", daqTime_);
-  }
+  void serialize(Archive& ar, unsigned version);
 
   //ClassDef(I3Time,1);
 

@@ -17,11 +17,12 @@ I3StationGeo::~I3StationGeo() {}
 I3StationGeo::I3StationGeo() {}
 
 template <class Archive>
-  void I3StationGeo::serialize(Archive& ar, unsigned version)
-    {	
-	ar & make_nvp("I3StationGeo",
-        base_object< vector<I3SurfModuleGeoPtr> >(*this));  
-    }
+void 
+I3StationGeo::serialize(Archive& ar, unsigned version)
+{	
+  ar & make_nvp("I3StationGeo",
+		base_object< I3Vector<I3SurfModuleGeoPtr> >(*this));  
+}
 	
 
 I3OMGeoPtr I3StationGeo::GetOMGeoPtr (OMKey &om_key) {

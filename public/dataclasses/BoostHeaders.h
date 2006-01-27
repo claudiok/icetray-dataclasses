@@ -103,13 +103,17 @@ namespace detail
 }
 
 #define I3_SERIALIZABLE(T)						\
+  template void ::detail::inst<T>(boost::archive::binary_oarchive&, const T&); \
+  BOOST_SHARED_POINTER_EXPORT(T);					
+
+#if 0
   template void ::detail::inst<T>(boost::archive::ttree_oarchive_impl&, const T&); \
   template void ::detail::inst<T>(boost::archive::polymorphic_oarchive&, const T&); \
   template void ::detail::inst<T>(boost::archive::xml_iarchive&, T&); \
   template void ::detail::inst<T>(boost::archive::xml_oarchive&, const T&); \
   template void ::detail::inst<T>(boost::archive::binary_iarchive&, T&); \
-  template void ::detail::inst<T>(boost::archive::binary_oarchive&, const T&); \
   template void ::detail::inst<T>(boost::archive::polymorphic_iarchive&, T&); \
-  BOOST_SHARED_POINTER_EXPORT(T);					
+
+#endif
 
 #endif //BOOSTHEADERS_H_INCLUDED

@@ -4,7 +4,7 @@
 #include "dataclasses/status/I3RawDOMStatus.h"
 #include "dataclasses/status/I3CalibratedDOMStatus.h"
 
-class I3DOMStatus 
+class I3DOMStatus : public TObject
 {
   I3RawDOMStatusPtr rawStatus_;
   I3CalibratedDOMStatusPtr calibratedStatus_;

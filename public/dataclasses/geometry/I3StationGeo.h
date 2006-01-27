@@ -22,7 +22,8 @@
  * entity to organise the tanks into stations. From an organisational
  * point of view, this is on a level with I3TankGeo.
  */
-class I3StationGeo : public I3Vector<I3SurfModuleGeoPtr> {
+class I3StationGeo : public I3Vector<I3SurfModuleGeoPtr> 
+{
 
  public:
 

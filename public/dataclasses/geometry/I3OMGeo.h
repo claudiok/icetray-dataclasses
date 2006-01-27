@@ -184,18 +184,9 @@ class I3OMGeo : public TObject
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("position",position_);
-    ar & make_nvp("orientation",orientation_);
-    ar & make_nvp("type",type_);
-    ar & make_nvp("relativeQE",relativeQE_);
-    ar & make_nvp("area",area_);
-  }
+  void serialize(Archive& ar, unsigned version);
 
 };
-
-BOOST_IS_ABSTRACT(I3OMGeo);
 
 /**
  * streams an I3OMGeo to an arbitrary ostream

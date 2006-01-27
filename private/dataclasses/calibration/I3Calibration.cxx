@@ -6,6 +6,7 @@ I3Calibration::~I3Calibration() {}
 template <class Archive>
   void I3Calibration::serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("TObject", base_object< TObject >(*this));
     ar & make_nvp("InIceCalibration",inIceCalibration_);
     ar & make_nvp("AMANDACalibration",AMANDACalibration_);
     ar & make_nvp("IceTopCalibration",iceTopCalibration_);

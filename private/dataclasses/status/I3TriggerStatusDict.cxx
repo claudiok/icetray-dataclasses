@@ -4,11 +4,12 @@
 I3TriggerStatusDict::~I3TriggerStatusDict() {}
 
 template <class Archive>
-  void I3TriggerStatusDict::serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3TriggerStatus",
-		  base_object< I3Map<TriggerKey,I3TriggerStatusPtr> >(*this));
-  }
+void 
+I3TriggerStatusDict::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("I3TriggerStatus",
+		base_object< I3Map<TriggerKey,I3TriggerStatusPtr> >(*this));
+}
 
 
 I3_SERIALIZABLE(I3TriggerStatusDict);

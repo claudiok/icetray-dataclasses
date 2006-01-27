@@ -3,10 +3,12 @@
 
 I3RecoPulseSeries::~I3RecoPulseSeries(){}
 
-template <class Archive> void I3RecoPulseSeries::serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("I3RecoPulseSeries", base_object< vector<I3RecoPulse> >(*this));
-  }
+template <class Archive> 
+void 
+I3RecoPulseSeries::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("I3RecoPulseSeries", base_object< I3Vector<I3RecoPulse> >(*this));
+}
 
   
 

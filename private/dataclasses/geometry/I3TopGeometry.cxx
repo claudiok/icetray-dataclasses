@@ -16,6 +16,7 @@ I3TopGeometry::~I3TopGeometry() {}
 template <class Archive>
   void I3TopGeometry::serialize(Archive& ar, unsigned version)
   {
+    ar & make_nvp("TObject", base_object< TObject >(*this));
     ar & make_nvp("stationMap",stationMap_);
   }
 

@@ -15,10 +15,10 @@
 I3StationMap::~I3StationMap() {}
 
 template <class Archive>
-  void I3StationMap::serialize(Archive& ar, unsigned version)
+  void I3StationMap::serialize (Archive& ar, unsigned version)
   {
     ar & make_nvp("I3StationMap",
-      base_object< map<StationKey, I3StationGeoPtr> >(*this));
+      base_object< I3Map<StationKey, I3StationGeoPtr> >(*this));
   }
 
 

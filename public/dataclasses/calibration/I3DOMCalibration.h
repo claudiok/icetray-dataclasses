@@ -23,38 +23,38 @@
 
 using namespace std;
 
- /**
-  * @brief A struct to hold a linear fit 
-  * A simple struct to define a linear fit:  intercept + slope*x
-  */
+/**
+ * @brief A struct to hold a linear fit 
+ * A simple struct to define a linear fit:  intercept + slope*x
+ */
 struct LinearFit
-    {
-    double slope;
-    double intercept;
+{
+  double slope;
+  double intercept;
     
-    private: 
-    friend class boost::serialization::access;
+private: 
+  friend class boost::serialization::access;
     
-    template <class Archive>
-    void serialize(Archive& ar, unsigned version);
-    };
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version);
+};
 
- /**
-  *  @brief A struct to hold the parameters of a Quadratic fit
-  *  A simple struct to define a Quadratic fit:  A + B*x + C*x*x
-  */
+/**
+ *  @brief A struct to hold the parameters of a Quadratic fit
+ *  A simple struct to define a Quadratic fit:  A + B*x + C*x*x
+ */
 struct QuadraticFit
-    {
-    double quadFitA;
-    double quadFitB;
-    double quadFitC;
+{
+  double quadFitA;
+  double quadFitB;
+  double quadFitC;
     
-    private: 
-    friend class boost::serialization::access;
+private: 
+  friend class boost::serialization::access;
     
-    template <class Archive>
-    void serialize(Archive& ar, unsigned version);
-    };
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version);
+};
 
 
 
@@ -76,175 +76,175 @@ struct QuadraticFit
  * @author Erik Blaufuss <blaufuss at icecube umd edu>
  *
  * 
-*/
+ */
 
-class I3DOMCalibration
-    {
+class I3DOMCalibration : public TObject
+{
 
 public:
-    I3DOMCalibration();
-    virtual ~I3DOMCalibration();
+  I3DOMCalibration();
+  virtual ~I3DOMCalibration();
     
-    /**
-     * Get MB Temperature at time of calibration
-     */
-    double GetTemperature() const { return temperature_; }
+  /**
+   * Get MB Temperature at time of calibration
+   */
+  double GetTemperature() const { return temperature_; }
 
-    /**
-     * Set MB Temperature at time of calibration
-     */
-    void SetTemperature(double temperature) { temperature_ = temperature; }
+  /**
+   * Set MB Temperature at time of calibration
+   */
+  void SetTemperature(double temperature) { temperature_ = temperature; }
 
-    /**
-     * Get DOMCAL measured PMT transit time
-     */
-    LinearFit GetTransitTime() const { return pmtTransitTime_; }
+  /**
+   * Get DOMCAL measured PMT transit time
+   */
+  LinearFit GetTransitTime() const { return pmtTransitTime_; }
 
-    /**
-     * Set DOMCAL measured PMT transit time
-     */
-    void SetTransitTime(LinearFit pmtTransitTime) { pmtTransitTime_ = pmtTransitTime; }
+  /**
+   * Set DOMCAL measured PMT transit time
+   */
+  void SetTransitTime(LinearFit pmtTransitTime) { pmtTransitTime_ = pmtTransitTime; }
     
-    /**
-     * Get DOMCAL measured PMT gain/HV relation:  log(10)Gain = slope*log(10)V + intercept
-     */
-    LinearFit GetHVGainFit() const { return hvGainRelation_; }
+  /**
+   * Get DOMCAL measured PMT gain/HV relation:  log(10)Gain = slope*log(10)V + intercept
+   */
+  LinearFit GetHVGainFit() const { return hvGainRelation_; }
 
-    /**
-     * Set DOMCAL measured PMT gain/HV relation
-     */
-    void SetHVGainFit(LinearFit hvGainRelation) { hvGainRelation_ = hvGainRelation; }
+  /**
+   * Set DOMCAL measured PMT gain/HV relation
+   */
+  void SetHVGainFit(LinearFit hvGainRelation) { hvGainRelation_ = hvGainRelation; }
     
 
-    /**
-     * Get FADC Gain- relation between measured counts and mV.
-     */
-    double GetFADCGain() const { return fadcGain_; }
+  /**
+   * Get FADC Gain- relation between measured counts and mV.
+   */
+  double GetFADCGain() const { return fadcGain_; }
 
-    /**
-     * Get FADC Pedestal- baseline point from which waveforms start.
-     */
-    double GetFADCPedestal() const { return fadcPedestal_; }
+  /**
+   * Get FADC Pedestal- baseline point from which waveforms start.
+   */
+  double GetFADCPedestal() const { return fadcPedestal_; }
 
-    /**
-     * Set FADC calibration parameters. Currently the FADC
-     * calibration is a work in progress and a moving target
-     * so this is only a tentative interface -tpm
-     */
-    void SetFADCParameters(double pedestal,
-			   double gain)
-	    {
-	    fadcPedestal_ = pedestal;
-	    fadcGain_     = gain;
-	    };
+  /**
+   * Set FADC calibration parameters. Currently the FADC
+   * calibration is a work in progress and a moving target
+   * so this is only a tentative interface -tpm
+   */
+  void SetFADCParameters(double pedestal,
+			 double gain)
+  {
+    fadcPedestal_ = pedestal;
+    fadcGain_     = gain;
+  };
     
-    /**
-     * Get gain and error on gain for ATWD by channel
-     */
-    const double GetATWDGain(unsigned int channel);
-    /**
-     * Set gain and error on gain for ATWD (specified by channel).
-     */
-    void SetATWDGain(unsigned int channel, double gain);
+  /**
+   * Get gain and error on gain for ATWD by channel
+   */
+  const double GetATWDGain(unsigned int channel);
+  /**
+   * Set gain and error on gain for ATWD (specified by channel).
+   */
+  void SetATWDGain(unsigned int channel, double gain);
 
-    /**
-     * Get fit parameters from domcal file <atwdfreq> which is 
-     * the sampling rate calibration for each ATWD chip 0 or 1 
-     */
-    const QuadraticFit GetATWDFreqFit(unsigned int chip);
+  /**
+   * Get fit parameters from domcal file <atwdfreq> which is 
+   * the sampling rate calibration for each ATWD chip 0 or 1 
+   */
+  const QuadraticFit GetATWDFreqFit(unsigned int chip);
     
-    /**
-     * Set parameters for sampling rate calibration for each 
-     * ATWD chip as a function of the trigger_bias DAC setting
-     */
-    void SetATWDFreqFit(unsigned int chip, QuadraticFit fitParams);
+  /**
+   * Set parameters for sampling rate calibration for each 
+   * ATWD chip as a function of the trigger_bias DAC setting
+   */
+  void SetATWDFreqFit(unsigned int chip, QuadraticFit fitParams);
 			       
 
-    /**
-     * Get the fit paramaters for the bin calibration.
-     * This is really the conversion factor from
-     * counts to volts.
-     */
+  /**
+   * Get the fit paramaters for the bin calibration.
+   * This is really the conversion factor from
+   * counts to volts.
+   */
 
-    const LinearFit GetATWDBinCalibFit(unsigned int id,	
-				    unsigned int channel,
-				    unsigned int bin);
+  const LinearFit GetATWDBinCalibFit(unsigned int id,	
+				     unsigned int channel,
+				     unsigned int bin);
 
-    /**
-     * Set parameters for conversion of count to voltage 
-     * for each ATWD, each ATWD channel, and each ATWD bin.
-     */
-    void SetATWDBinCalibFit(unsigned int id,
-			    unsigned int channel,
-			    unsigned int bin,
-			    LinearFit fitParams);
+  /**
+   * Set parameters for conversion of count to voltage 
+   * for each ATWD, each ATWD channel, and each ATWD bin.
+   */
+  void SetATWDBinCalibFit(unsigned int id,
+			  unsigned int channel,
+			  unsigned int bin,
+			  LinearFit fitParams);
 
    
     
-    virtual void ToStream(ostream& o) const
-	{
-	    o<<"[ "
-	     <<"Calibration:"
-	     <<"\tSuppressing the rest of the output.  I am big. ]\n";
-	};
+  virtual void ToStream(ostream& o) const
+  {
+    o<<"[ "
+     <<"Calibration:"
+     <<"\tSuppressing the rest of the output.  I am big. ]\n";
+  };
   
-    virtual string ToString() const
-      {
-	  ostringstream out;
-	  ToStream(out);
-	  return out.str();
-      };
+  virtual string ToString() const
+  {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  };
     
 private:
-    static const unsigned int N_ATWD_BINS;
-    static const unsigned int N_ATWD_CHANNELS;
+  static const unsigned int N_ATWD_BINS;
+  static const unsigned int N_ATWD_CHANNELS;
 
-    double  temperature_;
+  double  temperature_;
     
-    /**
-     * Gain and pedestal values for FADC
-     */
-    double fadcGain_;
-    double fadcPedestal_;
+  /**
+   * Gain and pedestal values for FADC
+   */
+  double fadcGain_;
+  double fadcPedestal_;
 
-    /**
-     * Gain for ATWD channels.
-     * The key corresponds to the channel (0,1,2)
-     */
-    map<unsigned int, double> ampGains_;
+  /**
+   * Gain for ATWD channels.
+   * The key corresponds to the channel (0,1,2)
+   */
+  map<unsigned int, double> ampGains_;
     
-    /**
-     * Linear fit for each ATWD sampling frequency, one for each chip (0,1)
-     * As of DOMCAL 5.14, this will be a quadratic fit.  So, use a Quadratic fit
-     * and asuume a linear fit if quadFitC==NULL.
-     */
-    map<unsigned int, QuadraticFit> atwdFreq_;
+  /**
+   * Linear fit for each ATWD sampling frequency, one for each chip (0,1)
+   * As of DOMCAL 5.14, this will be a quadratic fit.  So, use a Quadratic fit
+   * and asuume a linear fit if quadFitC==NULL.
+   */
+  map<unsigned int, QuadraticFit> atwdFreq_;
 
-    /**
-     * Results of the linear fit for the bin calibration
-     * i.e. the values needed to convert from counts to voltage
-     * for each bin in the ATWD.
-     * First key corresponds to channel.
-     * Key in internal map corresponds to bin.
-     */
-    map< unsigned int, map<unsigned int,LinearFit> > atwdBin0_;
-    map< unsigned int, map<unsigned int,LinearFit> > atwdBin1_;
-    /**
-     *  A convienence function to index these two mega-maps
-     */
-    map< unsigned int, map<unsigned int,LinearFit> >& GetATWDBinParameters(unsigned int id);
+  /**
+   * Results of the linear fit for the bin calibration
+   * i.e. the values needed to convert from counts to voltage
+   * for each bin in the ATWD.
+   * First key corresponds to channel.
+   * Key in internal map corresponds to bin.
+   */
+  map< unsigned int, map<unsigned int,LinearFit> > atwdBin0_;
+  map< unsigned int, map<unsigned int,LinearFit> > atwdBin1_;
+  /**
+   *  A convienence function to index these two mega-maps
+   */
+  map< unsigned int, map<unsigned int,LinearFit> >& GetATWDBinParameters(unsigned int id);
 
-    /** 
-     *  DOMCAL calculated pmt transit time fit function.
-     */
+  /** 
+   *  DOMCAL calculated pmt transit time fit function.
+   */
 
-    LinearFit pmtTransitTime_;
-    LinearFit hvGainRelation_;
+  LinearFit pmtTransitTime_;
+  LinearFit hvGainRelation_;
 
-    friend class boost::serialization::access;
+  friend class boost::serialization::access;
 
-    template <class Archive>
-      void serialize(Archive& ar, unsigned version);
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version);
 };
 
 /**
@@ -252,8 +252,8 @@ private:
  */
 inline ostream& operator<<(ostream& o, const I3DOMCalibration& c)
 {
-    c.ToStream(o); 
-    return o;
+  c.ToStream(o); 
+  return o;
 }
 
 typedef shared_ptr<I3DOMCalibration>  I3DOMCalibrationPtr;

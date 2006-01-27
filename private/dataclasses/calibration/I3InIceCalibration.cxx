@@ -7,7 +7,7 @@ template <class Archive>
   void I3InIceCalibration::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3IceCubeStatus",
-		  base_object< map<OMKey,I3DOMCalibrationPtr> >(*this));
+		  base_object< I3Map<OMKey,I3DOMCalibrationPtr> >(*this));
   }
 
 

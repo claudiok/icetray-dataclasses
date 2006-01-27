@@ -20,7 +20,7 @@ using namespace std;
  */
 
 
-class I3TriggerStatus 
+class I3TriggerStatus : public TObject
 {
  public:
 

@@ -17,7 +17,7 @@
  * to the raw dom status. Stores values that have been calculated
  * by combining calibration and status items.
  */
-class I3CalibratedDOMStatus
+class I3CalibratedDOMStatus : public TObject
 { 
  private:
   double samplingRateA_;

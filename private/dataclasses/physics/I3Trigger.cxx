@@ -2,13 +2,16 @@
 #include <dataclasses/physics/I3Trigger.h>
 
 I3Trigger::~I3Trigger(){ }
-template <class Archive> void I3Trigger::serialize(Archive& ar, unsigned version)  
-  { 
-    ar & make_nvp("TriggerTime",triggerTime_);
-    ar & make_nvp("TriggerLength",triggerLength_);
-    ar & make_nvp("Fired",fired_);
-    ar & make_nvp("TriggerSubDetector",triggerSubDetector_);
-  }
+template <class Archive> 
+void 
+I3Trigger::serialize(Archive& ar, unsigned version)  
+{ 
+  ar & make_nvp("TObject", base_object< TObject >(*this));
+  ar & make_nvp("TriggerTime",triggerTime_);
+  ar & make_nvp("TriggerLength",triggerLength_);
+  ar & make_nvp("Fired",fired_);
+  ar & make_nvp("TriggerSubDetector",triggerSubDetector_);
+}
  
   
 

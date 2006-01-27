@@ -22,7 +22,8 @@
  * This class is meant to allow looping over station, e.g. for trigger
  * considerations
  */
-class I3StationMap : public I3Map<StationKey, I3StationGeoPtr> {
+class I3StationMap : public I3Map<StationKey, I3StationGeoPtr> 
+{
 
  public:
 

@@ -3,8 +3,8 @@ extern "C"
 #include "dataclasses/jday.h"
 }
 
+#include "dataclasses/BoostHeaders.h"
 #include "dataclasses/I3Time.h"
-
 #include <iostream>
 #include <cassert>
 
@@ -333,3 +333,16 @@ unsigned int I3Time::DayOfYear(int64_t daqTime)
 
     return day_of_year; 
 }
+
+
+template <class Archive>
+void 
+I3Time::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("TObject", base_object<TObject>(*this));
+  ar & make_nvp("Time", year_);
+  ar & make_nvp("HitID", daqTime_);
+}
+
+I3_SERIALIZABLE(I3Time);
+

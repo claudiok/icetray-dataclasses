@@ -98,10 +98,10 @@ const double I3DOMCalibration::GetATWDGain(unsigned int channel)
 template <class Archive>
 void 
 LinearFit::serialize(Archive& ar, unsigned version)
-    {
-    ar & make_nvp("slope",slope);
-    ar & make_nvp("intercept",intercept);
-    }
+{
+  ar & make_nvp("slope",slope);
+  ar & make_nvp("intercept",intercept);
+}
 
 I3_SERIALIZABLE(LinearFit);
 
@@ -120,17 +120,18 @@ I3_SERIALIZABLE(QuadraticFit);
 template <class Archive>
 void 
 I3DOMCalibration::serialize(Archive& ar, unsigned version)
-    {
-    ar & make_nvp("temperature",temperature_);
-    ar & make_nvp("fadcGain",fadcGain_);
-    ar & make_nvp("fadcPedestal",fadcPedestal_);
-    ar & make_nvp("ampGains",ampGains_);
-    ar & make_nvp("atwdFreq",atwdFreq_);
-    ar & make_nvp("atwd0BinParameters",atwdBin0_);
-    ar & make_nvp("atwd1BinParameters",atwdBin1_);
-    ar & make_nvp("pmtTransitTime",pmtTransitTime_);
-    ar & make_nvp("hvGainRelation",hvGainRelation_);
-    }
+{
+  ar & make_nvp("TObject", base_object< TObject >(*this));
+  ar & make_nvp("temperature",temperature_);
+  ar & make_nvp("fadcGain",fadcGain_);
+  ar & make_nvp("fadcPedestal",fadcPedestal_);
+  ar & make_nvp("ampGains",ampGains_);
+  ar & make_nvp("atwdFreq",atwdFreq_);
+  ar & make_nvp("atwd0BinParameters",atwdBin0_);
+  ar & make_nvp("atwd1BinParameters",atwdBin1_);
+  ar & make_nvp("pmtTransitTime",pmtTransitTime_);
+  ar & make_nvp("hvGainRelation",hvGainRelation_);
+}
 
 I3_SERIALIZABLE(I3DOMCalibration);
 
