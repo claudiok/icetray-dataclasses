@@ -64,7 +64,7 @@ private:
   }
 
   //ROOT macro
-  //ClassDef(I3PMTPulse, 1);
+  ClassDef(I3PMTPulse, 1);
 };
 
 BOOST_IS_ABSTRACT(I3PMTPulse);

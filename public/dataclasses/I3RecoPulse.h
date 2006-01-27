@@ -94,7 +94,7 @@ class I3RecoPulse : public TObject
   private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
-//ClassDef(I3RecoPulse,1);
+  ClassDef(I3RecoPulse,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3RecoPulse& pulse)

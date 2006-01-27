@@ -68,6 +68,7 @@ class I3RecoResultSingleParticle : public I3RecoResult
   
  private:
 
+  //ClassDef(I3RecoResultSingleParticle,1);
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 

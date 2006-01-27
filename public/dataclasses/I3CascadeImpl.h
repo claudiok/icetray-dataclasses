@@ -118,7 +118,7 @@ class I3CascadeImpl : public I3Cascade,
     ar & make_nvp("CompositeType", base_object<CompositeType>(*this));
   }
   // ROOT macro
-  //ClassDef(I3CascadeImpl,1);
+  ClassDef(I3CascadeImpl,1);
 };
 
 #endif

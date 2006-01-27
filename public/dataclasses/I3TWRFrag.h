@@ -43,7 +43,7 @@ class I3TWRFrag : public TObject
   friend class boost::serialization::access;
   template<class Archive> void serialize(Archive& ar, unsigned version);
 
-  //ClassDef(I3TWRFrag,1);
+  ClassDef(I3TWRFrag,1);
 };
 
 /**

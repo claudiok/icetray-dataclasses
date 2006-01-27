@@ -50,7 +50,7 @@ class I3DoubleBang : public I3TrackImpl<I3Contained,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  //ClassDef(I3DoubleBang,1);
+  ClassDef(I3DoubleBang,1);
 };
 
 /**

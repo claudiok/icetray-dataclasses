@@ -60,6 +60,7 @@ class I3ParticleMultiMap : public TObject, public STLMultiMapStoragePolicy<strin
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
+  ClassDef(I3ParticleMultiMap,1);
 
 };
 

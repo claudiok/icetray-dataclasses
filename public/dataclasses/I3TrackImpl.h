@@ -167,7 +167,7 @@ class I3TrackImpl : public I3Track,
     ar & make_nvp("Comp", base_object<CompositeType>(*this));
   }
   // ROOT macro
-  //ClassDef(I3TrackImpl,1);
+  ClassDef(I3TrackImpl,1);
 };
 
 

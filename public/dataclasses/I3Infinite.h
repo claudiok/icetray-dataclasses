@@ -159,7 +159,7 @@ class I3Infinite
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT Macro
-  //ClassDef(I3Infinite,1)
+  ClassDef(I3Infinite,1)
 };
 
 #endif //I3INFINITE_H

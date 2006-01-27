@@ -31,7 +31,7 @@ class I3MCCorePrimary : public I3PrimaryImpl<I3Directional,
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-//ClassDef(I3MCCorePrimary,1);
+ClassDef(I3MCCorePrimary,1);
 };
 
 /**

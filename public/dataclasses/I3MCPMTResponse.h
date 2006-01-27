@@ -81,7 +81,7 @@ private:
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  //ClassDef(I3MCPMTResponse,1);
+  ClassDef(I3MCPMTResponse,1);
 };
 
 inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)

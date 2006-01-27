@@ -101,7 +101,7 @@ class I3Directional
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  //ClassDef(I3Directional,1);
+  ClassDef(I3Directional,1);
 };
 
 #endif // I3DIRECTIONAL

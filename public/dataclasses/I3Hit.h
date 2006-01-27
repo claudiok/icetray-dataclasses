@@ -86,7 +86,7 @@ private:
 double time_;
   int hitID_;
 
-  //ClassDef(I3Hit,1);
+  ClassDef(I3Hit,1);
 };
 
 inline ostream& operator<<(ostream& o,const I3Hit& hit)

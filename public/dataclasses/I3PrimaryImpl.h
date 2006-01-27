@@ -107,7 +107,7 @@ class I3PrimaryImpl : public I3Primary,
   }
 
   //ROOT macro
-  //ClassDef(I3PrimaryImpl,1);
+  ClassDef(I3PrimaryImpl,1);
 };
 
 #endif

@@ -101,7 +101,7 @@ public:
   I3DataReadout& operator=(const I3DataReadout& other);
 
   // ROOT Macro
-  //ClassDef(I3DataReadout,1);
+  ClassDef(I3DataReadout,1);
 };
 
 /**

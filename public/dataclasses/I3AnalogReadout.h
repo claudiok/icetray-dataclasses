@@ -60,7 +60,7 @@ private:
   I3AnalogReadout(const I3AnalogReadout& other);
   I3AnalogReadout& operator=(const I3AnalogReadout& other);
 
-  //ClassDef(I3AnalogReadout,1);
+  ClassDef(I3AnalogReadout,1);
 };
 
 BOOST_IS_ABSTRACT(I3AnalogReadout);

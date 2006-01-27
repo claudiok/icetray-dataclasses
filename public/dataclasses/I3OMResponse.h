@@ -98,7 +98,7 @@ class I3OMResponse : public TObject
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  //ClassDef(I3OMResponse,1);
+  ClassDef(I3OMResponse,1);
 };
 
 /**

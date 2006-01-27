@@ -94,7 +94,7 @@ class I3Trigger : public TObject
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-//ClassDef(I3Trigger,1);
+ClassDef(I3Trigger,1);
 };
 
 /**

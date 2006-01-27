@@ -42,7 +42,7 @@ class I3BasicTrack : public I3TrackImpl<I3Infinite,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  //ClassDef(I3BasicTrack,1);
+  ClassDef(I3BasicTrack,1);
 };
 
 /**

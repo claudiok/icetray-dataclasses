@@ -47,7 +47,7 @@ class I3CompleteCascade : public I3CascadeImpl<I3Directional,
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-//  ClassDef(I3CompleteCascade,1);
+  ClassDef(I3CompleteCascade,1);
 };
 
 /**

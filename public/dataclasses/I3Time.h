@@ -230,7 +230,7 @@ class I3Time : public TObject
     ar & make_nvp("HitID", daqTime_);
   }
 
-  //ClassDef(I3Time,1);
+  ClassDef(I3Time,1);
 
   
 };

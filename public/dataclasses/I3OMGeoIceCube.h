@@ -57,7 +57,7 @@ class I3OMGeoIceCube : public I3OMGeo
 
  private:
 
-  //ClassDef(I3OMGeoIceCube,1);
+  ClassDef(I3OMGeoIceCube,1);
 
   friend class boost::serialization::access;
 

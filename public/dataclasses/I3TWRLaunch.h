@@ -48,7 +48,7 @@ class I3TWRLaunch : public I3DigitalLaunch, public STLVectorStoragePolicy<I3TWRF
   template<class Archive> void serialize(Archive& ar, unsigned version);
 
 
-  //ClassDef(I3TWRLaunch,1);
+  ClassDef(I3TWRLaunch,1);
 };
 
 typedef shared_ptr<I3TWRLaunch> I3TWRLaunchPtr;

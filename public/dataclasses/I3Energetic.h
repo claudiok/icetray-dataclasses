@@ -65,7 +65,7 @@ class I3Energetic
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  //ClassDef(I3Energetic,1);
+  ClassDef(I3Energetic,1);
 };
 
 #endif // I3ENERGETIC_H

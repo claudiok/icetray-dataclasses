@@ -57,7 +57,7 @@ class I3DigitalLaunch : public TObject
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  //ClassDef(I3DigitalLaunch,1);
+  ClassDef(I3DigitalLaunch,1);
 };
 
 /**

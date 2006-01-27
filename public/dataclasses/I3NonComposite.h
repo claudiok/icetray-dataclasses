@@ -53,7 +53,7 @@ class I3NonComposite
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 //ROOT macro
-  //ClassDef(I3NonComposite,1);
+  ClassDef(I3NonComposite,1);
 };
 
 #endif

@@ -10,6 +10,7 @@ dataclasses/I3AnalogReadout.h \
 dataclasses/I3BasicCascade.h \
 dataclasses/I3BasicTrack.h \
 dataclasses/I3Cascade.h \
+dataclasses/I3CompleteCascade.h \
 dataclasses/I3CascadeImpl.h \
 dataclasses/I3Composite.h \
 dataclasses/I3Constants.h \
@@ -34,7 +35,6 @@ dataclasses/I3Localized.h \
 dataclasses/I3MCCascade.h \
 dataclasses/I3MCCorePrimary.h \
 dataclasses/I3MCHit.h \
-dataclasses/I3MCHitSeries.h \
 dataclasses/I3MCInfiniteTrack.h \
 dataclasses/I3MCOMResponse.h \
 dataclasses/I3MCPMTResponse.h \
@@ -51,19 +51,12 @@ dataclasses/I3OMGeoIceCube.h \
 dataclasses/I3OMGeoIceTop.h \
 dataclasses/I3OMResponse.h \
 dataclasses/I3PMTPulse.h \
-dataclasses/I3PMTPulseVect.h \
 dataclasses/I3Particle.h \
 dataclasses/I3Position.h \
 dataclasses/I3Primary.h \
 dataclasses/I3PrimaryImpl.h \
 dataclasses/I3RecoHit.h \
-dataclasses/I3RecoHitSeries.h \
 dataclasses/I3RecoPulse.h \
-dataclasses/I3RecoPulseSeries.h \
-dataclasses/I3RecoResult.h \
-dataclasses/I3RecoResultMultiTracks.h \
-dataclasses/I3RecoResultRDMCFit.h \
-dataclasses/I3RecoResultSingleParticle.h \
 dataclasses/I3ShowerCore.h \
 dataclasses/I3ShowerDirection.h \
 dataclasses/I3Starting.h \

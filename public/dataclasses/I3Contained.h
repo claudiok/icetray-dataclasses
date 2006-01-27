@@ -281,7 +281,7 @@ class I3Contained
   BOOST_SERIALIZATION_SPLIT_MEMBER()
   
   //ROOT macro
-  //ClassDef(I3Contained,2)
+  ClassDef(I3Contained,2)
 };
 
 #endif //I3CONTAINED_H

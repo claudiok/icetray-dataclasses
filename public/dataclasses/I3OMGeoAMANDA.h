@@ -68,7 +68,7 @@ class I3OMGeoAMANDA : public I3OMGeo
   }
 
  private:
-  //ClassDef(I3OMGeoAMANDA,1);
+  ClassDef(I3OMGeoAMANDA,1);
 
   friend class boost::serialization::access;
 

@@ -176,7 +176,7 @@ class I3Starting
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 // ROOT macro
-  //ClassDef(I3Starting,1)
+  ClassDef(I3Starting,1)
 };
 
 #endif //I3STARTING_H

@@ -247,7 +247,7 @@ class I3Particle : public TObject{
   }
 
  // ROOT macro
-  //ClassDef(I3Particle,1);
+  ClassDef(I3Particle,1);
 };
 
 BOOST_IS_ABSTRACT(I3Particle);

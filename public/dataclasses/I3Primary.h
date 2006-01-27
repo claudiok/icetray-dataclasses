@@ -58,7 +58,7 @@ class I3Primary : public I3Particle{
   }
 
   // ROOT macro
-  //ClassDef(I3Primary,1);
+  ClassDef(I3Primary,1);
 };
 
 

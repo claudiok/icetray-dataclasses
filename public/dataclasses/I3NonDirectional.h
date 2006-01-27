@@ -50,7 +50,7 @@ class I3NonDirectional
   void serialize(Archive& ar, unsigned version);
 
   //ROOT macro
-  //ClassDef(I3NonDirectional,1);
+  ClassDef(I3NonDirectional,1);
 };
 
 #endif // I3NONDIRECTIONAL

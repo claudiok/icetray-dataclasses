@@ -172,7 +172,7 @@ class I3OMGeo : public TObject
  private:
 
   //ROOT macro
-  //ClassDef(I3OMGeo,1);
+  ClassDef(I3OMGeo,1);
 
   friend class boost::serialization::access;
 

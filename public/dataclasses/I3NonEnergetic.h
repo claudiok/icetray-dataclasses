@@ -46,7 +46,7 @@ class I3NonEnergetic
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
   //ROOT macro
-  //ClassDef(I3NonEnergetic,1);
+  ClassDef(I3NonEnergetic,1);
 
 };
 

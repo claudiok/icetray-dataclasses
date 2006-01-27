@@ -89,7 +89,7 @@ class OMKey : public TObject //, public pair<int,unsigned int>
 
   }
   // ROOT macro
-  //ClassDef(OMKey,1);
+  ClassDef(OMKey,1);
 };
 
 /**
