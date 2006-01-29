@@ -47,7 +47,7 @@ public:
   /**
    * Returns the list of OMs as a vector of OMKeys
    */
-  STLVectorStoragePolicy<OMKey> GetOMList() const {
+  const STLVectorStoragePolicy<OMKey>& GetOMList() const {
     return omList_;
   };
   

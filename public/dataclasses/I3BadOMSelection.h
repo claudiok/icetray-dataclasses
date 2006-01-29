@@ -32,7 +32,7 @@ public:
   /**
    * Returns the entire list of bad OMs as a vector.  Equivalent to GetOMList().
    */
-  STLVectorStoragePolicy<OMKey> GetBadOMs() const {
+  const STLVectorStoragePolicy<OMKey>& GetBadOMs() const {
     return I3OMListSelection::GetOMList();
   }; 
 
