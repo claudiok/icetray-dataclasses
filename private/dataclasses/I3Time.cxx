@@ -340,7 +340,7 @@ void
 I3Time::serialize(Archive& ar, unsigned version)
 {
   ar & make_nvp("TObject", base_object<TObject>(*this));
-  ar & make_nvp("Time", year_);
+  ar & make_nvp("Year", year_);
   ar & make_nvp("DaqTime", daqTime_);
 }
 
