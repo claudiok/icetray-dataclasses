@@ -231,6 +231,8 @@ class I3Time : public TObject
   
 };
 
+typedef shared_ptr<I3Time> I3TimePtr;
+
 inline ostream& operator<<(ostream& o, const I3Time& t)
 {
   t.ToStream(o);
