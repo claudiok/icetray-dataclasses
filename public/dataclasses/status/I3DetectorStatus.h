@@ -13,6 +13,7 @@
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/status/I3IceCubeDOMStatusDict.h"
 #include "dataclasses/status/I3TriggerStatusDict.h"
+#include "dataclasses/I3Time.h"
 #include <sstream>
 
 /**
@@ -28,6 +29,8 @@
  */
 class I3DetectorStatus : public TObject
 {
+  I3Time startTime_;
+  I3Time endTime_;
  public:
   // @todo Make sure this is correct and complete w/Chucks list
   //  Impl when needed
@@ -84,7 +87,14 @@ class I3DetectorStatus : public TObject
    */
   I3TriggerStatusDict& GetIceTopTriggerStatus() 
     { return icetopTrigStatus_;}
-
+  
+  I3Time GetStartTime() const { return startTime_;}
+  
+  void SetStartTime(const I3Time& t) { startTime_ = t;}
+  
+  void SetEndTime(const I3Time& t){endTime_ = t;}
+  
+  I3Time GetEndTime() const { return endTime_;}
 
   virtual void ToStream(ostream& o) const
     {

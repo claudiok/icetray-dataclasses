@@ -13,6 +13,8 @@
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/geometry/I3InIceGeometry.h"
 #include "dataclasses/geometry/I3TopGeometry.h"
+#include "dataclasses/I3Time.h"
+
 /**
  * @brief Top-level container of Geometry information
  * 
@@ -24,11 +26,33 @@ class I3Geometry : public TObject
 {
   I3InIceGeometry inIce_; 
   I3TopGeometry top_; 
+  I3Time startTime_;
+  I3Time endTime_;
  public:
 
   I3Geometry(){};
 
   virtual ~I3Geometry();
+
+  /**
+   * Gets the start Time for this header
+   */
+  I3Time GetStartTime() const { return startTime_;}
+
+  /**
+   * Sets the start Time for this header
+   */
+  void SetStartTime(const I3Time& t) { startTime_ = t;}
+
+  /**
+   * Sets the ending time for this header
+   */
+  void SetEndTime(const I3Time& t){endTime_ = t;}
+
+  /**
+   * Gets the ending time for this header
+   */
+  I3Time GetEndTime() const { return endTime_;}
 
   /**
    * @return the In-Ice geometry as a constant object

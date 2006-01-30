@@ -10,6 +10,8 @@ template <class Archive>
     ar & make_nvp("InIceCalibration",inIceCalibration_);
     ar & make_nvp("AMANDACalibration",AMANDACalibration_);
     ar & make_nvp("IceTopCalibration",iceTopCalibration_);
+    ar & make_nvp("StartTime",startTime_);
+    ar & make_nvp("EndTime",endTime_);
   }
 
 

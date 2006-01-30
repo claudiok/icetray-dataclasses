@@ -10,9 +10,9 @@
 #define I3EVENTHEADER_H_INCLUDED
 
 // includes
-#include "dataclasses/I3DataHeader.h"
-
+#include "dataclasses/I3Time.h"
 #include <string>
+#include <TObject.h>
 
 using namespace std;
 
@@ -24,34 +24,42 @@ using namespace std;
  * It's supposed to have enough data to reconstruct the full event
  * from the database
  */
-class I3EventHeader : public I3DataHeader
+class I3EventHeader : public TObject
 {
   unsigned long  runID_;
   unsigned long  eventID_;
-  
+  I3Time startTime_;
+  I3Time endTime_;
+
  public:
 
   I3EventHeader();
 
   virtual ~I3EventHeader();
 
-  /**
-   * copy constructor.  Uses assignment operator.
-   */
-  I3EventHeader(const I3EventHeader& rhs){*this = rhs;}
+  I3Time GetStartTime() const
+    {
+      return startTime_;
+    }
+
+  void SetStartTime(I3Time time)
+    {
+      startTime_ = time;
+    }
+
+  I3Time GetEndTime() const
+    {
+      return startTime_;
+    }
+
+  void SetEndTime(I3Time time)
+    {
+      startTime_ = time;
+    }
 
   /**
    * assignment operator.  Just a member-wise copy.
    */
-  const I3EventHeader& operator=(const I3EventHeader& rhs){
-    if(this == &rhs) return *this;
-    I3DataHeader::operator=(rhs);
-    //Where is this I3DataHeader::operator= defined? 
-    //TObject!?
-    this->SetRunID(rhs.GetRunID());
-    this->SetEventID(rhs.GetEventID());
-    return *this;
-  }
 
   /**
    * @return the run id for the event

@@ -12,6 +12,8 @@ I3DetectorStatus::serialize(Archive& ar, unsigned version)
   ar & make_nvp("IcetopDOMStatus",icetopDOMStatus_);
   ar & make_nvp("IcecubeTriggerStatus",icecubeTrigStatus_);
   ar & make_nvp("IcetopTriggerStatus",icetopTrigStatus_);
+  ar & make_nvp("StartTime",startTime_);
+  ar & make_nvp("EndTime",endTime_);
   //ar & make_nvp("DaqMode",daqMode_);
   //ar & make_nvp("FilterMode",filterMode_);
 }

@@ -15,16 +15,27 @@
 #include "dataclasses/StoragePolicy.h"
 #include "dataclasses/calibration/I3InIceCalibration.h"
 #include "dataclasses/calibration/I3AMANDACalibration.h"
+#include "dataclasses/I3Time.h"
 
 #include <TObject.h>
 
 class I3Calibration : public TObject
 {
+  I3Time startTime_;
+  I3Time endTime_;
 public:
   I3Calibration() {};
     
   virtual ~I3Calibration();
     
+  I3Time GetStartTime() const { return startTime_;}
+
+  void SetStartTime(const I3Time& t) { startTime_ = t;}
+
+  void SetEndTime(const I3Time& t){endTime_ = t;}
+
+  I3Time GetEndTime() const { return endTime_;}
+
   const I3InIceCalibration& GetInIceCalibration() const 
   {
     return inIceCalibration_;
