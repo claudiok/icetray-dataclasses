@@ -53,7 +53,7 @@ class I3FlasherInfoVect : public I3Trigger
     friend class boost::serialization::access;
     template<class Archive> void serialize(Archive& archive, unsigned version);
     
-   typedef shared_ptr<I3FlasherInfoVect> I3FlasherInfoVectPtr; 
 };
 
+typedef shared_ptr<I3FlasherInfoVect> I3FlasherInfoVectPtr; 
 #endif
