@@ -26,8 +26,8 @@ using namespace std;
  */
 class I3EventHeader : public TObject
 {
-  unsigned long  runID_;
-  unsigned long  eventID_;
+  uint64_t  runID_;
+  uint64_t  eventID_;
   I3Time startTime_;
   I3Time endTime_;
 
@@ -64,22 +64,22 @@ class I3EventHeader : public TObject
   /**
    * @return the run id for the event
    */
-  unsigned long GetRunID() const { return runID_; }
+  uint64_t GetRunID() const { return runID_; }
 
   /**
    * @param runid the new run id for the event
    */
-  void SetRunID(unsigned long runid) { runID_ = runid; }
+  void SetRunID(uint64_t runid) { runID_ = runid; }
 
   /**
    * @return the event id for this event
    */
-  unsigned long GetEventID() const { return eventID_; }
+  uint64_t GetEventID() const { return eventID_; }
 
   /**
    * @param eventid the new event id for the event
    */
-  void SetEventID(unsigned long eventid) { eventID_ = eventid; }
+  void SetEventID(uint64_t eventid) { eventID_ = eventid; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"
