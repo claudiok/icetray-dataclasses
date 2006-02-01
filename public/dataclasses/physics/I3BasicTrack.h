@@ -20,7 +20,7 @@
  * @brief BasicTrack is for vanilla track (i.e. not cascade)
  * particles.  No starting, stopping points, no energy, etc.
   */
-class I3BasicTrack : public TObject
+class I3BasicTrack : public I3Particle
 {
  public:
 
@@ -29,8 +29,7 @@ class I3BasicTrack : public TObject
     dir_(),
     time_(NAN),
     energy_(NAN),
-    length_(NAN),
-    type_(I3Particle::Null)
+    length_(NAN)
     {};
   
   virtual ~I3BasicTrack();
@@ -76,10 +75,6 @@ class I3BasicTrack : public TObject
 
   void SetEnergy(double energy) { energy_ = energy;}
 
-  I3Particle::ParticleType GetType() const { return type_;}
-
-  void SetType(I3Particle::ParticleType type){type_ = type;}
-
   const map<string,double>& GetUserParameters() const {return user_;}
 
   map<string,double>& GetUserParameters(){return user_;}
@@ -91,7 +86,6 @@ class I3BasicTrack : public TObject
   double time_;
   double energy_;
   double length_;
-  I3Particle::ParticleType type_;
   map<string,double> user_; //!
      
 

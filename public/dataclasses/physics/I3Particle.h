@@ -10,23 +10,28 @@
 #define I3PARTICLE_H_INCLUDED
 
 #include "TObject.h"
-#include "dataclasses/I3Position.h"
 #include "dataclasses/StoragePolicy.h"
-#include "TClass.h"
-#include <iostream>
-#include <cmath>
-#include <sstream>
-
-using namespace std;
+#include <string>
 
 class I3Particle : public TObject
 {
  public:
+
+  virtual ~I3Particle();
+
+  I3Particle():
+    type_(InIce),
+    mcID_(Null),
+    parentID_(INT_MAX),
+    primaryID_(INT_MAX),
+    myID_(INT_MAX),
+    recoName_("Default")
+    {};
   /**
    * enumerated type of the different paricles.
    * follows the f2k convention for numbering
    */
- enum ParticleType {
+ enum MCID {
     Unknown = -100,
     Null = 0,
     Gamma = 1,
@@ -63,8 +68,47 @@ class I3Particle : public TObject
     Elph = 9999
   };
 
- static string Stringize(I3Particle::ParticleType);
+ enum ParticleType{InIce, IceTop, Primary};
+ 
+ static std::string Stringize(I3Particle::ParticleType);
+ 
+ I3Particle::ParticleType GetType() const { return type_;}
+ 
+ void SetType(I3Particle::ParticleType type){type_ = type;}
 
+ MCID GetMCID() const { return mcID_;}
+ 
+ void SetType(MCID mcID){mcID_ = mcID;}
+
+ unsigned GetParentID() const { return parentID_;}
+ 
+ void SetParentID(unsigned parentID){parentID_ = parentID;}
+
+ unsigned GetPrimaryID() const { return primaryID_;}
+ 
+ void SetPrimaryID(unsigned primaryID){primaryID_ = primaryID;}
+
+ unsigned GetMyID() const { return myID_;}
+ 
+ void SetMyID(unsigned myID){myID_ = myID;}
+
+ const std::string& GetRecoName() const { return recoName_;}
+ 
+ void SetRecoName(std::string& recoName){recoName_ = recoName;}
+
+ private:
+
+  ParticleType type_;
+  MCID mcID_;
+  unsigned parentID_;
+  unsigned primaryID_;
+  unsigned myID_;
+  std::string recoName_;
+
+  friend class boost::serialization::access;
+
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
+typedef shared_ptr<I3Particle>  I3ParticlePtr;
 #endif //I3PARTICLE_H_INCLUDED
