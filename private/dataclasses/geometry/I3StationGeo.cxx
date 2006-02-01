@@ -25,7 +25,9 @@ I3StationGeo::serialize(Archive& ar, unsigned version)
 }
 	
 
-I3OMGeoPtr I3StationGeo::GetOMGeoPtr (OMKey &om_key) {
+I3OMGeoPtr
+I3StationGeo::GetOMGeoPtr (const OMKey &om_key)
+{
 
   for (vector<I3SurfModuleGeoPtr>::iterator i_surf_module
 	 = this->begin ();

@@ -47,7 +47,7 @@ class I3TopGeometry : public TObject {
   /**
    * Get the geometry of a certain module
    */
-  I3OMGeoPtr GetOMGeoPtr (OMKey &om_key);
+  I3OMGeoPtr GetOMGeoPtr (const OMKey &om_key) const;
 
  private:
 

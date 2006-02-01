@@ -10,6 +10,7 @@
 
 #include "TObject.h"
 #include <vector>
+#include "dataclasses/StoragePolicy.h"
 
 template <typename T>
 struct I3Vector : public TObject, public std::vector<T>

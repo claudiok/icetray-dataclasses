@@ -34,7 +34,7 @@ class I3StationGeo : public I3Vector<I3SurfModuleGeoPtr>
   /**
    * Get the OM Geo of the OM with this key
    */
-  I3OMGeoPtr GetOMGeoPtr (OMKey &om_key);
+  I3OMGeoPtr GetOMGeoPtr (const OMKey &om_key);
 
  private:
 

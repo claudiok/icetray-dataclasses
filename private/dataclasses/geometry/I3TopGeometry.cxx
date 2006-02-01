@@ -14,16 +14,19 @@
 I3TopGeometry::~I3TopGeometry() {}
 
 template <class Archive>
-  void I3TopGeometry::serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("TObject", base_object< TObject >(*this));
-    ar & make_nvp("stationMap",stationMap_);
-  }
+void
+I3TopGeometry::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("TObject", base_object< TObject >(*this));
+  ar & make_nvp("stationMap",stationMap_);
+}
 
 
-I3OMGeoPtr I3TopGeometry::GetOMGeoPtr (OMKey &om_key) {
+I3OMGeoPtr
+I3TopGeometry::GetOMGeoPtr (const OMKey &om_key) const
+{
 
-  for (I3StationMap::iterator i_station = stationMap_.begin ();
+  for (I3StationMap::const_iterator i_station = stationMap_.begin ();
        i_station != stationMap_.end ();
        ++i_station) {
     if (0 != i_station->second->GetOMGeoPtr (om_key))

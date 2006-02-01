@@ -87,6 +87,9 @@ class I3Geometry : public TObject
 
  private:
 
+  I3Geometry(const I3Geometry& geometry);
+  const I3Geometry& operator=(const I3Geometry& geometry);
+
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
