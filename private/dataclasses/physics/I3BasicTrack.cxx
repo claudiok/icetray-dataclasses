@@ -3,6 +3,20 @@
 
 I3BasicTrack::~I3BasicTrack() {}
 
+void I3BasicTrack::ToStream(ostream& o) const
+{
+  o<<"Position:\n"<<pos_;
+  o<<"Direction:\n"<<dir_;
+  o<<"Time: "<<time_<<"\n";
+  o<<"Energy: "<<energy_<<"\n";
+  o<<"Length: "<<length_<<"\n";
+  map<string,double>::const_iterator iter;
+  for (iter=user_.begin(); iter!=user_.end(); iter++) {
+    o<<iter->first<<": "<<iter->second<<"\n";
+  }
+  //o<<"\n";
+}
+
 template <class Archive>
   void I3BasicTrack::serialize(Archive& ar, unsigned version)
   {

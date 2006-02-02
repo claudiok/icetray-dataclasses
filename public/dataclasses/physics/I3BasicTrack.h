@@ -12,7 +12,7 @@
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Direction.h"
-#include <TObject.h>
+//#include <TObject.h>
 #include <map>
 #include <string>
 
@@ -78,6 +78,8 @@ class I3BasicTrack : public I3Particle
   const map<string,double>& GetUserParameters() const {return user_;}
 
   map<string,double>& GetUserParameters(){return user_;}
+
+  void ToStream(ostream& o) const;
 
  private:
 
