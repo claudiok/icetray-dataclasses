@@ -143,8 +143,8 @@ class STLMapStoragePolicy
       iterator iter = find(key);
       ostringstream debugStream;
       if(iter != end()){
-	debugStream<<"WARNING: Key \'"<<key<<"\' already used.  Nothing has been added."<<endl;
-	log_error("%s",debugStream.str().c_str());
+	//debugStream<<"WARNING: Key \'"<<key<<"\' already used.  Nothing has been added."<<endl;
+	//og_error("%s",debugStream.str().c_str());
 	return false;
       }else{
 	this->operator[](key) = element;
