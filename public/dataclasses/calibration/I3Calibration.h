@@ -16,6 +16,7 @@
 #include "dataclasses/calibration/I3InIceCalibration.h"
 #include "dataclasses/calibration/I3AMANDACalibration.h"
 #include "dataclasses/I3Time.h"
+#include <icetray/I3FrameTraits.h>
 
 #include <TObject.h>
 
@@ -83,6 +84,13 @@ private:
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
+
+template<>
+struct I3FrameTraits<I3Calibration>
+{
+  static const char* defaultName;
+};
+
 
 /** 
  * streaming operator

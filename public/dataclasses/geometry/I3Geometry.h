@@ -14,6 +14,7 @@
 #include "dataclasses/geometry/I3InIceGeometry.h"
 #include "dataclasses/geometry/I3TopGeometry.h"
 #include "dataclasses/I3Time.h"
+#include <icetray/I3FrameTraits.h>
 
 /**
  * @brief Top-level container of Geometry information
@@ -103,6 +104,12 @@ inline ostream& operator<<(ostream& o,const I3Geometry& geo)
   geo.ToStream(o);
   return o;
 }
+
+template<>
+struct I3FrameTraits<I3Geometry>
+{
+  static const char* defaultName;
+};
 
 /**
  * Pointer typedeffed away to insulate users from the

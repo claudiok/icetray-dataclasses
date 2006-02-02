@@ -14,6 +14,7 @@
 #include "dataclasses/status/I3IceCubeDOMStatusDict.h"
 #include "dataclasses/status/I3TriggerStatusDict.h"
 #include "dataclasses/I3Time.h"
+#include <icetray/I3FrameTraits.h>
 #include <sstream>
 
 /**
@@ -144,6 +145,12 @@ inline ostream& operator<<(ostream& o,const I3DetectorStatus& stat)
   stat.ToStream(o);
   return o;
 }
+
+template<>
+struct I3FrameTraits<I3DetectorStatus>
+{
+  static const char* defaultName;
+};
 
 /**
  * Pointer typedeffed away to insulate users from the

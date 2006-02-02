@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/calibration/I3Calibration.h>
 
+const char* I3FrameTraits<I3Calibration>::defaultName = "Calibration";
+
 I3Calibration::~I3Calibration() {}
 
 template <class Archive>
