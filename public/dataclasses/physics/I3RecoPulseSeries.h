@@ -61,8 +61,8 @@ class I3RecoPulseSeries : public I3Vector<I3RecoPulse>
 
   private:
   // copy and assignment are private:
-  I3RecoPulseSeries (const I3RecoPulseSeries& rhs);
-  const I3RecoPulseSeries& operator= (const I3RecoPulseSeries&);
+  //  I3RecoPulseSeries (const I3RecoPulseSeries& rhs);
+  //  const I3RecoPulseSeries& operator= (const I3RecoPulseSeries&);
 
   friend class boost::serialization::access;
 
