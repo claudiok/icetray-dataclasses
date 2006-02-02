@@ -94,6 +94,8 @@ class I3BasicTrack : public I3Particle
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
+
+  ClassDef(I3BasicTrack,1);
 };
 
 /**

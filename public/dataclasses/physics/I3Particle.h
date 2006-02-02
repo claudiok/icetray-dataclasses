@@ -70,7 +70,7 @@ class I3Particle : public TObject
 
  enum ParticleType{InIce, IceTop, Primary};
  
- static std::string Stringize(I3Particle::ParticleType);
+ static std::string Stringize(I3Particle::MCID);
  
  I3Particle::ParticleType GetType() const { return type_;}
  
@@ -108,6 +108,8 @@ class I3Particle : public TObject
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
+  
+  ClassDef(I3Particle,1);
 };
 
 typedef shared_ptr<I3Particle>  I3ParticlePtr;
