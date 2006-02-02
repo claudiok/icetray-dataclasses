@@ -82,6 +82,8 @@ class I3OMResponse : public TObject
     {
       o<<"[ I3OMResponse\n"
        <<dataReadoutDict_
+       <<recoHitSeriesDict_
+       <<recoPulseSeriesDict_ 
        <<"]";
     }
 
