@@ -93,7 +93,7 @@ class I3Directional
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"Direction:"<<dir_<<"\n";
+      o<<"Direction:\n"<<dir_;
     }
  private:
 

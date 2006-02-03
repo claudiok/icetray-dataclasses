@@ -35,7 +35,7 @@ class I3ParticleMultiMap : public TObject, public STLMultiMapStoragePolicy<strin
 
   virtual void ToStream(ostream& o) const
     {
-      o<<"[ I3OMResponseMap: ]\n";
+      o<<"[ I3ParticleMultiMap: ]\n";
       I3ParticleMultiMap::const_iterator iter;
       for(iter=begin();iter!=end();iter++)
 	{
