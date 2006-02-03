@@ -118,5 +118,6 @@ struct I3FrameTraits<I3Geometry>
 typedef shared_ptr<I3Geometry>  I3GeometryPtr;
 
 
+
 #endif // I3GEOMETRY_H_INCLUDED
 
