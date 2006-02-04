@@ -62,7 +62,7 @@ class I3Time : public TObject
   /**
    * @brief creates the object with the given times as the DAQ time
    */
-  I3Time(unsigned int year, int64_t daqTime);
+  I3Time(int32_t year, int64_t daqTime);
 
   virtual ~I3Time();
 	     
@@ -79,21 +79,21 @@ class I3Time : public TObject
    * @param sec the number of secs after this modified julian day began
    * @param ns the number of ns after this second began.
    */
-  void SetModJulianTime(unsigned int modJulianDay,
-			unsigned int sec,
+  void SetModJulianTime(int32_t modJulianDay,
+			int32_t sec,
 			double ns);
 
 
   /**
    * @brief Gets the Modified Julian day
    */
-  unsigned int GetModJulianDay() const;
+  int32_t GetModJulianDay() const;
   
   /**
    * @brief Gets the number of seconds since this Modified Julian day began
    * @note Modified Julian days begin at midnight
    */
-  unsigned int GetModJulianSec() const;
+  int32_t GetModJulianSec() const;
   
   /**
    * @brief Gets the number of nanoseconds since this second began
@@ -125,12 +125,12 @@ class I3Time : public TObject
    * @brief Gets the day of the month.  This is calendar day, so
    * there is no '0'
    */
-  unsigned int GetUTCDayOfMonth() const;
+  int32_t GetUTCDayOfMonth() const;
 
   /**
    * @brief Gets the number of seconds since this UTC year started
    */
-  unsigned int GetUTCSec() const;
+  int32_t GetUTCSec() const;
   
   /**
    * @brief Gets the number of nanoseconds since this current second started.
@@ -210,15 +210,15 @@ class I3Time : public TObject
   
   static double julianday(int year, int64_t daqTime);
 
-  static unsigned int yearOf(double modjulianday);
+  static int32_t yearOf(double modjulianday);
 
-  static unsigned int DayOfYear(int64_t daqTime);
+  static int32_t DayOfYear(int64_t daqTime);
 
-  static unsigned int DayOfYear(double modjulianday);
+  static int32_t DayOfYear(double modjulianday);
 
  private:
 
-  unsigned int year_;
+  int32_t year_;
   int64_t daqTime_;
 
   friend class boost::serialization::access;
