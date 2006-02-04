@@ -42,14 +42,12 @@ class I3IceTopParticle : public I3Particle
   template <class Archive>
     void serialize(Archive& ar, unsigned version)
     {
-      ar & make_nvp("I3IceTopParticle", base_object<I3Particle>(*this));
+      ar & make_nvp("I3Particle", base_object<I3Particle>(*this));
     }
 
   //ROOT macro
   //ClassDef(I3IceTopParticle,1);
 };
-
-BOOST_IS_ABSTRACT(I3IceTopParticle);
 
 /**
  * pointer type to insulate users from memory management issues

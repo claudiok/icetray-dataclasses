@@ -56,53 +56,79 @@ public:
      * Gets the current trigger source setting
      * @return the current trigger source setting
      */
-    virtual TrigMode GetTrigMode() const = 0;    
-
+    virtual TrigMode GetTrigMode() const
+    {  
+      log_fatal("pure virtual method called"); return TestPattern;
+    }
     /**
      * gets how far local coincidence signals are sent
      * @return how far local coincidence signals are sent
      */
-    virtual LCMode GetLCMode() const = 0;
+    virtual LCMode GetLCMode() const
+    {  
+      log_fatal("pure virtual method called"); return LCOff;
+    }
 
 
     /**
      * @return the local coincidence window before the descriminator 
      * in standard dataclasses units (ns) for any signal
      */
-    virtual double GetLCWindowPre() const = 0;
+    virtual double GetLCWindowPre() const
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
     /**
      * @return the local coincidence window after the descriminator 
      * in standard dataclasses units (ns) for the any signal
      */
-    virtual double GetLCWindowPost() const = 0;
+    virtual double GetLCWindowPost() const
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
     /**
      * @return  trigger_bias DAC setting used for sampling rate calibration
      */
-    virtual double GetDACTriggerBias(int chip) const = 0;
+    virtual double GetDACTriggerBias(int chip) const
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
     /*  Control and Monitor different parts of the OM */
   
     /**
      * @return the status of the FADC
      */
-    virtual OnOff GetStatusFADC() const = 0;
+    virtual OnOff GetStatusFADC() const
+    {  
+      log_fatal("pure virtual method called"); return Off;
+    }
     
     /**
      * @return the high voltage on the PMT in standard dataclasses units
      */
-    virtual double GetPMTHV() const = 0;
+    virtual double GetPMTHV() const
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
     /**
      * @return the voltage that is the threshold for a dom single SPE trigger
      */
-    virtual double GetSingleSPEThreshold() const = 0;
+    virtual double GetSingleSPEThreshold() const
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
     /**
      * @gives the FE pedestal applied to the atwd chip
      */
-    virtual double GetFEPedestal() const = 0;
+    virtual double GetFEPedestal() const 
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
     friend class boost::serialization::access;
 
@@ -113,8 +139,6 @@ public:
      }
 
 };	
-
-BOOST_IS_ABSTRACT(I3RawDOMStatus);
 
 /**
  * Pointer typedeffed away to insulate users from the 

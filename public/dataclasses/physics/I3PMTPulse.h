@@ -41,11 +41,20 @@ public:
   /**
    * pure virtual function must be implemented in derived class
    */
-  virtual double GetVoltage(const double time) = 0;
+  virtual double GetVoltage(const double time) 
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
-  virtual double GetPeakVoltage() = 0;
+  virtual double GetPeakVoltage()
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
-  virtual double GetPeakTime() = 0;
+  virtual double GetPeakTime()
+    {  
+      log_fatal("pure virtual method called"); return 0.0; 
+    }
 
 private:
   
@@ -62,8 +71,6 @@ private:
   //ROOT macro
   //ClassDef(I3PMTPulse, 1);
 };
-
-BOOST_IS_ABSTRACT(I3PMTPulse);
 
 /**
  * Pointer typedeffed away to insulate users from the 
