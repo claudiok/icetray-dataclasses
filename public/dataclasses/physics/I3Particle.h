@@ -64,12 +64,6 @@ class I3Particle : public TObject
     Elph = 9999
   };
 
-  static std::string Stringize(I3Particle::MCTruthID);
- 
-  I3Particle::MCTruthID GetMCTruthID() const { return mcTruthID_;}
- 
-  void SetMCTruthID(MCTruthID mcTruthID){mcTruthID_ = mcTruthID;}
-
   enum ParticleType{InIce, IceTop, Primary};
  
   I3Particle::ParticleType GetType() const { return type_;}
@@ -99,7 +93,6 @@ class I3Particle : public TObject
   unsigned primaryID_;
   unsigned myID_;
   std::string recoName_;
-  MCTruthID mcTruthID_;
 
   friend class boost::serialization::access;
 
