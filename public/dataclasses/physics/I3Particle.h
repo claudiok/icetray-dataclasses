@@ -21,17 +21,13 @@ class I3Particle : public TObject
 
   I3Particle():
     type_(InIce),
-    mcID_(Null),
     parentID_(INT_MAX),
     primaryID_(INT_MAX),
     myID_(INT_MAX),
     recoName_("Default")
     {};
-  /**
-   * enumerated type of the different paricles.
-   * follows the f2k convention for numbering
-   */
- enum MCID {
+
+  enum MCTruthID {
     Unknown = -100,
     Null = 0,
     Gamma = 1,
@@ -68,42 +64,42 @@ class I3Particle : public TObject
     Elph = 9999
   };
 
- enum ParticleType{InIce, IceTop, Primary};
+  static std::string Stringize(I3Particle::MCTruthID);
  
- static std::string Stringize(I3Particle::MCID);
+  I3Particle::MCTruthID GetMCTruthID() const { return mcTruthID_;}
  
- I3Particle::ParticleType GetType() const { return type_;}
- 
- void SetType(I3Particle::ParticleType type){type_ = type;}
+  void SetMCTruthID(MCTruthID mcTruthID){mcTruthID_ = mcTruthID;}
 
- MCID GetMCID() const { return mcID_;}
+  enum ParticleType{InIce, IceTop, Primary};
  
- void SetType(MCID mcID){mcID_ = mcID;}
+  I3Particle::ParticleType GetType() const { return type_;}
+ 
+  void SetType(I3Particle::ParticleType type){type_ = type;}
 
- unsigned GetParentID() const { return parentID_;}
+  unsigned GetParentID() const { return parentID_;}
  
- void SetParentID(unsigned parentID){parentID_ = parentID;}
+  void SetParentID(unsigned parentID){parentID_ = parentID;}
 
- unsigned GetPrimaryID() const { return primaryID_;}
+  unsigned GetPrimaryID() const { return primaryID_;}
  
- void SetPrimaryID(unsigned primaryID){primaryID_ = primaryID;}
+  void SetPrimaryID(unsigned primaryID){primaryID_ = primaryID;}
 
- unsigned GetMyID() const { return myID_;}
+  unsigned GetMyID() const { return myID_;}
  
- void SetMyID(unsigned myID){myID_ = myID;}
+  void SetMyID(unsigned myID){myID_ = myID;}
 
- const std::string& GetRecoName() const { return recoName_;}
+  const std::string& GetRecoName() const { return recoName_;}
  
- void SetRecoName(std::string& recoName){recoName_ = recoName;}
+  void SetRecoName(std::string& recoName){recoName_ = recoName;}
 
  private:
 
   ParticleType type_;
-  MCID mcID_;
   unsigned parentID_;
   unsigned primaryID_;
   unsigned myID_;
   std::string recoName_;
+  MCTruthID mcTruthID_;
 
   friend class boost::serialization::access;
 

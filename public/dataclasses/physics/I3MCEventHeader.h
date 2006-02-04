@@ -32,8 +32,19 @@ class I3MCEventHeader : public I3EventHeader
 
   virtual ~I3MCEventHeader();
 
+  void SetStartTime(double& startTime){ startTime_ = startTime; };
+
+  const double& GetStartTime(){ return startTime_; };
+
+  void SetStopTime(double& stopTime){ stopTime_ = stopTime; };
+
+  const double& GetStopTime(){ return stopTime_; };
+
  private:
   // instance data
+
+  double startTime_;
+  double stopTime_;
 
   friend class boost::serialization::access;
 
