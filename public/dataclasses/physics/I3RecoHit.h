@@ -28,9 +28,9 @@ class I3RecoHit : public TObject
 
   virtual ~I3RecoHit();
 
-  const map<string,double>& GetUserParameters() const {return user_;}
+  const std::map<std::string,double>& GetUserParameters() const {return user_;}
 
-  map<string,double>& GetUserParameters(){return user_;}
+  std::map<std::string,double>& GetUserParameters(){return user_;}
 
   double GetTime() const { return time_; }
 
@@ -46,7 +46,7 @@ class I3RecoHit : public TObject
 
   int hitID_;
 
-  map<string,double> user_;
+  std::map<std::string,double> user_;
 
   friend class boost::serialization::access;
 

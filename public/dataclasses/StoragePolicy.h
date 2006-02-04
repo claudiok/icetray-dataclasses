@@ -19,7 +19,7 @@ namespace boost
     // normal forward declarations:
     class access;
     template <class T> struct nvp;
-    template <class T> nvp<T> make_nvp(const char* name, T& t);
+    template <class T> const nvp<T> make_nvp(const char* name, T& t);
 
     // special dummy no-ops that check to see if boost headers have
     // already been included.

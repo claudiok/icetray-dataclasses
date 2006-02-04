@@ -71,9 +71,9 @@ class I3MCHitSeries : public I3Vector<I3MCHit>
       o<<"]\n";
     }
 
-  virtual string ToString() const
+  virtual std::string ToString() const
     {
-      ostringstream out;
+      std::ostringstream out;
       ToStream(out);
       return out.str();
     }

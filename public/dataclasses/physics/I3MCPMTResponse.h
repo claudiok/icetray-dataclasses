@@ -58,8 +58,8 @@ public:
      <<"EndTime: "<<endTime_;
   }
 
-  virtual string ToString() const {
-    ostringstream out;
+  virtual std::string ToString() const {
+    std::ostringstream out;
     ToStream(out);
     return out.str();
   }
