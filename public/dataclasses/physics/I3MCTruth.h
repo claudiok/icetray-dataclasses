@@ -19,10 +19,14 @@ class I3MCTruth : public TObject
 
   virtual ~I3MCTruth();
 
+  enum MCID { PLEASE, BE, CAREFUL, COMMITING, WHEN, ITS, THREE, DAYS, TO, THE, WORKSHOP, Null };
+
   I3MCTruth():
     mcID_(Null),
     mcLength_(NAN)
     {};
+
+
   /**
    * enumerated type of the different paricles.
    * follows the f2k convention for numbering
