@@ -70,6 +70,12 @@ class I3Particle : public TObject
  
   void SetType(I3Particle::ParticleType type){type_ = type;}
 
+  I3Particle::MCTruthID GetMCTruth() const { return mcTruthID_;}
+ 
+  void SetMCTruthID(I3Particle::MCTruthID mcTruthID){mcTruthID_ = mcTruthID;}
+
+  I3Particle::MCTruthID GetMCTruthID() const { return mcTruthID_;}
+
   unsigned GetParentID() const { return parentID_;}
  
   void SetParentID(unsigned parentID){parentID_ = parentID;}
@@ -93,6 +99,7 @@ class I3Particle : public TObject
   unsigned primaryID_;
   unsigned myID_;
   std::string recoName_;
+  MCTruthID mcTruthID_;
 
   friend class boost::serialization::access;
 
