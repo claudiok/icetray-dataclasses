@@ -16,6 +16,7 @@
 #include <iostream>
 #include <sstream>
 #include "dataclasses/OMKey.h"
+#include "dataclasses/Utility.h"
 
 using namespace std;
 
@@ -197,11 +198,7 @@ inline ostream& operator<<(ostream& o,const I3OMGeo& g)
   return o;
 }
 
-#include "dataclasses/StoragePolicy.h"
-/**
- * pointer typedeffed away to insulate users from memory management
- */
-typedef shared_ptr<I3OMGeo>  I3OMGeoPtr;
+I3_POINTER_TYPEDEFS(I3OMGeo);
 
 #endif //I3OMGEO_H_INCLUDED
 

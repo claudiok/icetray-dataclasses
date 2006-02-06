@@ -13,7 +13,7 @@
 
 #include "dataclasses/geometry/I3StationMap.h"
 #include "dataclasses/StationKey.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 /**
  * @brief This is the surface (top) geometry. We have stations,
@@ -60,10 +60,6 @@ class I3TopGeometry : public TObject {
 
 };
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3TopGeometry>  I3TopGeometryPtr;
-
+I3_POINTER_TYPEDEFS(I3TopGeometry);
 
 #endif //I3TOPGEOMETRY_H_INCLUDED

@@ -5,8 +5,8 @@
     @date $Date$
 */
 
-#ifndef STORAGEPOLICY_H_INCLUDED
-#define STORAGEPOLICY_H_INCLUDED
+#ifndef UTILITY_H_INCLUDED
+#define UTILITY_H_INCLUDED
 
 #include "TObject.h"
 #include <stdint.h> //int64_t, etc
@@ -47,6 +47,11 @@ using boost::serialization::base_object;
 
 #include "icetray/services/I3Logging.h"
 
+// for generating pointer typedefs in dataclass structures.
+// pointer to const object and pointer to object
+#define I3_POINTER_TYPEDEFS(class) \
+typedef shared_ptr<class> class##Ptr; \
+typedef shared_ptr<const class> class##ConstPtr;
 
 #endif //STORAGEPOLICY_H_INCLUDED
 

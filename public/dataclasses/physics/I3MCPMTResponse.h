@@ -11,7 +11,7 @@
 #include <TObject.h>
 #include <TClass.h>
 #include <sstream>
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 /**
  * @brief Base class for the Monte Carlo generated PMT response
@@ -82,10 +82,7 @@ inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)
   return o;
 }
 
-/** 
- * pointer type to insulate users from memory managemnt issues
- */
-typedef shared_ptr<I3MCPMTResponse>  I3MCPMTResponsePtr;
+I3_POINTER_TYPEDEFS(I3MCPMTResponse);
 
 #endif //I3MCPMTRESPONSE_H_INCLUDED
 

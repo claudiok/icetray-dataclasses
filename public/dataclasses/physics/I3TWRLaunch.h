@@ -47,7 +47,8 @@ class I3TWRLaunch : public I3Vector<I3TWRFrag>
   //ClassDef(I3TWRLaunch,1);
 };
 
-typedef shared_ptr<I3TWRLaunch> I3TWRLaunchPtr;
+I3_POINTER_TYPEDEFS(I3TWRLaunch);
+
 #endif //I3TWRLAUNCH_H_INCLUDED
 
 

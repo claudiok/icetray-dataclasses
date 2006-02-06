@@ -10,7 +10,7 @@
 #include <TObject.h>
 #include <TObjArray.h>
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 #include <string>
 #include <sstream>
@@ -122,12 +122,7 @@ inline ostream& operator<<(ostream& o,const I3TankHit& tankhit)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3TankHit>  I3TankHitPtr;
-
-
+I3_POINTER_TYPEDEFS(I3TankHit);
 
 /**
  @brief Functor for find_if
@@ -156,5 +151,6 @@ class I3TankHitMatchesTankNumber {
   unsigned short tankNumber_;
 
 };
+
 #endif //I3TANKHIT_H_INCLUDED
 

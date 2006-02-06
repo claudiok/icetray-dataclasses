@@ -15,7 +15,7 @@
 //#include "dataclasses/I3InIceGeometry.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/geometry/I3OMGeo.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 /**
  * @brief Class describing the commons of surface detectors
@@ -82,10 +82,7 @@ class I3SurfModuleGeo : public I3Map<OMKey, I3OMGeoPtr>
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-/**
- * hide the memory management from the user
- */
-typedef shared_ptr<I3SurfModuleGeo>  I3SurfModuleGeoPtr;
+I3_POINTER_TYPEDEFS(I3SurfModuleGeo);
 
 #endif //I3SURFMODULEGEO_H_INCLUDED
 

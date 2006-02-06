@@ -10,7 +10,7 @@
 #define I3MCHITSERIES_H_INCLUDED
 
 #include "I3MCHit.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
 
 #include <sstream>
@@ -94,11 +94,7 @@ inline ostream& operator<<(ostream& o,const I3MCHitSeries& series)
   return o;
 }
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3MCHitSeries>  I3MCHitSeriesPtr;
+I3_POINTER_TYPEDEFS(I3MCHitSeries);
 
 #endif //I3MCHITSERIES_H_INCLUDED
 

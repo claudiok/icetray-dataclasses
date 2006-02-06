@@ -11,7 +11,7 @@
 
 #include <utility>
 #include "TObject.h"
-#include "StoragePolicy.h"
+#include "Utility.h"
 #include <iostream>
 
 using namespace std;
@@ -166,9 +166,6 @@ inline ostream& operator<<(ostream& o,const TriggerKey& key)
    return o; 
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<TriggerKey>  TriggerKeyPtr;
+I3_POINTER_TYPEDEFS(TriggerKey);
 
 #endif //TRIGGERKEY_H_INCLUDED

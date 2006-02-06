@@ -1,7 +1,7 @@
 #ifndef I3TRIGGERSTATUS_H_INCLUDED
 #define I3TRIGGERSTATUS_H_INCLUDED
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 using namespace std;
 
@@ -72,7 +72,7 @@ class I3TriggerStatus : public TObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-typedef shared_ptr<I3TriggerStatus> I3TriggerStatusPtr;
+I3_POINTER_TYPEDEFS(I3TriggerStatus);
 
 #endif //I3TRIGGERSTATUS_H_INCLUDED
 

@@ -49,9 +49,6 @@ class I3TopShower : public I3IceTopParticle{
   //ClassDef(I3TopShower,1);
 };
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3TopShower>  I3TopShowerPtr;
+I3_POINTER_TYPEDEFS(I3TopShower);
 
 #endif //I3TOPSHOWER_H_INCLUDED

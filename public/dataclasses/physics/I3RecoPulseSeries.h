@@ -10,7 +10,7 @@
 #define I3RECOPULSESERIES_H_INCLUDED
 
 #include "I3RecoPulse.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
 #include "dataclasses/OMKey.h"
@@ -75,8 +75,10 @@ inline ostream& operator<<(ostream& o, const I3RecoPulseSeries& series)
   return o;
 }
 
-typedef shared_ptr<I3RecoPulseSeries> I3RecoPulseSeriesPtr;
+I3_POINTER_TYPEDEFS(I3RecoPulseSeries);
+
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;
+I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
 
 #endif //I3RECOPULSESERIES_H_INCLUDED
 

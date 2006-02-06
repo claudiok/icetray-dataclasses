@@ -10,7 +10,7 @@
 #define I3MCTRUTH_H_INCLUDED
 
 #include "TObject.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include <string>
 
 class I3MCTruth : public TObject
@@ -46,5 +46,6 @@ class I3MCTruth : public TObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-typedef shared_ptr<I3MCTruth>  I3MCTruthPtr;
+I3_POINTER_TYPEDEFS(I3MCTruth);
+
 #endif //I3PARTICLE_H_INCLUDED

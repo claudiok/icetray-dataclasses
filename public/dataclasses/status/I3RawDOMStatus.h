@@ -12,7 +12,7 @@
 #define I3RAWDOMSTATUS_H_INCLUDED
 
 #include <string>
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 using namespace std;
 
@@ -140,11 +140,8 @@ public:
 
 };	
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3RawDOMStatus>  I3RawDOMStatusPtr;
+
+I3_POINTER_TYPEDEFS(I3RawDOMStatus);
 
 #endif //I3RAWDOMSTATUS_H_INCLUDED
 

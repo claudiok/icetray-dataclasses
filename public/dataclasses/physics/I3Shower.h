@@ -96,10 +96,8 @@ class I3Shower : public I3Particle
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-/**
- * pointer typedeffed away to insulate users from memory management
- */
-typedef shared_ptr<I3Shower>  I3ShowerPtr;
+I3_POINTER_TYPEDEFS(I3Shower);
+
 #endif //I3BASICTRACK_H_INCLUDED
 
 

@@ -12,7 +12,7 @@
 #ifndef I3CALIBRATION_H_INCLUDED
 #define I3CALIBRATION_H_INCLUDED
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3InIceCalibration.h"
 #include "dataclasses/calibration/I3AMANDACalibration.h"
 #include "dataclasses/I3Time.h"
@@ -101,8 +101,7 @@ inline ostream& operator<<(ostream& o, const I3Calibration& calib)
     return o;
 }
 
-// that's better.  
-typedef shared_ptr<I3Calibration>  I3CalibrationPtr;
+I3_POINTER_TYPEDEFS(I3Calibration);
 
 #endif // I3CALIBRATION_H_INCLUDED
     

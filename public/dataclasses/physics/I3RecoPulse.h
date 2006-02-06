@@ -9,7 +9,7 @@
 #ifndef I3RECOPULSE_H_INCLUDED
 #define I3RECOPULSE_H_INCLUDED
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include <map>
 #include <string>
 
@@ -81,12 +81,7 @@ inline ostream& operator<<(ostream& o,const I3RecoPulse& pulse)
   return o;
 }
 
-
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3RecoPulse>  I3RecoPulsePtr;
+I3_POINTER_TYPEDEFS(I3RecoPulse);
 
 #endif //I3RECOPULSE_H_INCLUDED
 

@@ -68,7 +68,7 @@ inline ostream& operator<<(ostream& o, const I3AMANDAOMCalib_XTalk& c)
     return o;
 }
 
-typedef shared_ptr<I3AMANDAOMCalib_XTalk>  I3AMANDAOMCalib_XTalkPtr;
+I3_POINTER_TYPEDEFS(I3AMANDAOMCalib_XTalk);
 
 #endif //I3AMANDAOMCALIB_XTALK_H_INCLUDED
 

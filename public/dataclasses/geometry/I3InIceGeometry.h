@@ -12,7 +12,7 @@
 #include "dataclasses/I3Map.h"
 #include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/OMKey.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include <sstream>
 
 /**
@@ -72,11 +72,7 @@ inline ostream& operator<<(ostream& o,const I3InIceGeometry& v)
    
 }
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3InIceGeometry>  I3InIceGeometryPtr;
+I3_POINTER_TYPEDEFS(I3InIceGeometry);
 
 #endif //I3INICEGEOMETRY_H_INCLUDED
  

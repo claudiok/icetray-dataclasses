@@ -13,7 +13,7 @@
 #ifndef I3DOMCALIBRATION_H_INCLUDED
 #define I3DOMCALIBRATION_H_INCLUDED
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 #include <map>
 #include <vector>
@@ -256,6 +256,6 @@ inline ostream& operator<<(ostream& o, const I3DOMCalibration& c)
   return o;
 }
 
-typedef shared_ptr<I3DOMCalibration>  I3DOMCalibrationPtr;
+I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
 #endif //I3DOMCALIBRATION_H_INCLUDED

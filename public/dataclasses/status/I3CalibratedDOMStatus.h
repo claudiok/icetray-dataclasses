@@ -11,6 +11,8 @@
 #ifndef I3CALIBRATEDDOMSTATUS_H_INCLUDED
 #define I3CALIBRATEDDOMSTATUS_H_INCLUDED
 
+#include <dataclasses/Utility.h>
+
 /**
  * This is an object which goes in the DetectorStatus stream.  Not the
  * Calibration stream.  It is the result of applying the calibrations
@@ -50,7 +52,7 @@ class I3CalibratedDOMStatus : public TObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-typedef shared_ptr<I3CalibratedDOMStatus> I3CalibratedDOMStatusPtr;
+I3_POINTER_TYPEDEFS(I3CalibratedDOMStatus);
 
 #endif //I3CALIBRATEDDOMSTATUS_H_INCLUDED
 

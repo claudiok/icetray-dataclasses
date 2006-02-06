@@ -90,10 +90,8 @@ class I3InfiniteTrack : public I3Particle
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-/**
- * pointer typedeffed away to insulate users from memory management
- */
-typedef shared_ptr<I3InfiniteTrack>  I3InfiniteTrackPtr;
+I3_POINTER_TYPEDEFS(I3InfiniteTrack);
+
 #endif //I3BASICTRACK_H_INCLUDED
 
 

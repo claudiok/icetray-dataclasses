@@ -52,11 +52,7 @@ class I3MCEventHeader : public I3EventHeader
 
 };
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3MCEventHeader> I3MCEventHeaderPtr;
+I3_POINTER_TYPEDEFS(I3MCEventHeader);
 
 #endif //I3MCEVENTHEADER_H_INCLUDED
 

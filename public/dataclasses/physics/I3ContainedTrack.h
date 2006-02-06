@@ -96,10 +96,8 @@ class I3ContainedTrack : public I3Particle
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-/**
- * pointer typedeffed away to insulate users from memory management
- */
-typedef shared_ptr<I3ContainedTrack>  I3ContainedTrackPtr;
+I3_POINTER_TYPEDEFS(I3ContainedTrack);
+
 #endif //I3BASICTRACK_H_INCLUDED
 
 

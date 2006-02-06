@@ -10,6 +10,7 @@
 
 #include <TObject.h>
 #include <vector>
+#include "dataclasses/Utility.h"
 
 using namespace std;
 
@@ -43,11 +44,8 @@ class I3TWRFrag : public TObject
   //ClassDef(I3TWRFrag,1);
 };
 
-/**
- * Pointer typedeffed away to insulate users from the
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3TWRFrag> I3TWRFragPtr;
+I3_POINTER_TYPEDEFS(I3TWRFrag);
+
 #endif //I3TWRFRAG_H_INCLUDED
 
 

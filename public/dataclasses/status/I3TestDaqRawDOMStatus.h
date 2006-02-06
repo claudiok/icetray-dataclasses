@@ -71,6 +71,6 @@ public:
 
 };
 
-typedef shared_ptr<I3TestDaqRawDOMStatus> I3TestDaqRawDOMStatusPtr;
+I3_POINTER_TYPEDEFS(I3TestDaqRawDOMStatus);
 
 #endif //I3TESTDAQRAWDOMSTATUS_H_INCLUDED

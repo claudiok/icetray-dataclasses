@@ -4,7 +4,7 @@
 #include <string>
 #include "TObject.h"
 #include <ostream>
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 /**
  * @brief A class for dealing with global times.  
  *
@@ -231,7 +231,7 @@ class I3Time : public TObject
   
 };
 
-typedef shared_ptr<I3Time> I3TimePtr;
+I3_POINTER_TYPEDEFS(I3Time);
 
 inline ostream& operator<<(ostream& o, const I3Time& t)
 {

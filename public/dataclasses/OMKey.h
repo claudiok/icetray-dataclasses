@@ -11,7 +11,7 @@
 
 #include <utility>
 #include "TObject.h"
-#include "StoragePolicy.h"
+#include "Utility.h"
 #include <iostream>
 
 using namespace std;
@@ -117,9 +117,6 @@ inline ostream& operator<<(ostream& o,const OMKey& key)
    return o; 
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<OMKey>  OMKeyPtr;
+I3_POINTER_TYPEDEFS(OMKey);
 
 #endif //OMKEY_H_INCLUDED

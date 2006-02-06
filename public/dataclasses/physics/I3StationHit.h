@@ -11,7 +11,7 @@
 #include <TObjArray.h>
 
 #include "dataclasses/physics/I3TankHit.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
 
 #include <sstream>
@@ -88,10 +88,7 @@ inline ostream& operator<<(ostream& o,const I3StationHit& hit)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3StationHit>  I3StationHitPtr;
+I3_POINTER_TYPEDEFS(I3StationHit);
 
 /**
  @brief Functor for find_if

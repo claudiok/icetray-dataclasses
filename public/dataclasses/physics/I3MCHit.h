@@ -10,7 +10,7 @@
 #define I3MCHIT_H_INCLUDED
 
 #include <TObject.h>
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 /**
  * @brief Derived I3Hit class with additional 'Weight' and 'Parent
@@ -84,11 +84,7 @@ inline ostream& operator<<(ostream& o,const I3MCHit& key)
   return o;
 }
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3MCHit>  I3MCHitPtr;
+I3_POINTER_TYPEDEFS(I3MCHit);
 
 #endif //I3MCHIT_H_INCLUDED
 

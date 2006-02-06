@@ -10,7 +10,7 @@
 #define I3RECOHIT_H_INCLUDED
 
 #include <TObject.h>
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include <map>
 #include <string>
 
@@ -59,8 +59,7 @@ inline ostream& operator<<(ostream& o,const I3RecoHit& key)
   return o;
 }
 
-typedef shared_ptr<I3RecoHit>  I3RecoHitPtr;
-
+I3_POINTER_TYPEDEFS(I3RecoHit);
 
 #endif //I3RECOHIT_H_INCLUDED
 

@@ -146,11 +146,7 @@ private:
 //ClassDef(I3FlasherInfo,1);
 };
 
-/**
- * There is only one I3FlasherInfo, so should be no need for pointers
- */
-typedef shared_ptr<I3FlasherInfo>  I3FlasherInfoPtr;
-
+I3_POINTER_TYPEDEFS(I3FlasherInfo);
 
 #endif //I3FLASHERINFO_H_INCLUDED
 

@@ -15,7 +15,7 @@
 
 
 #include "dataclasses/OMKey.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3AMANDAOMCalib.h"
 #include "dataclasses/I3Map.h"
 
@@ -79,7 +79,7 @@ inline ostream& operator<<(ostream& o,const I3AMANDACalibration& v)
     return o;
 }
 
-typedef shared_ptr<I3AMANDACalibration> I3AMANDACalibrationPtr;
+I3_POINTER_TYPEDEFS(I3AMANDACalibration);
 
 #endif //I3AMANDACALIBRATION_H_INCLUDED
 

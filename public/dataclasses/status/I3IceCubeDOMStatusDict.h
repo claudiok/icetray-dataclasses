@@ -12,7 +12,7 @@
 #include "dataclasses/I3Map.h"
 #include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/OMKey.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include <sstream>
 
 /**
@@ -60,11 +60,8 @@ inline ostream& operator<<(ostream& o, const I3IceCubeDOMStatusDict& status)
   return o;
 }
 
-/**
- * Pointer typedeffed away to insulate users from the
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3IceCubeDOMStatusDict>  I3IceCubeDOMStatusDictPtr;
+
+I3_POINTER_TYPEDEFS(I3IceCubeDOMStatusDict);
 
 #endif //I3ICECUBEDOMSTATUSDICT_H_INCLUDED
 

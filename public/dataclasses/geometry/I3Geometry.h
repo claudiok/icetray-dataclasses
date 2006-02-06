@@ -10,7 +10,7 @@
 #ifndef I3GEOMETRY_H_INCLUDED
 #define I3GEOMETRY_H_INCLUDED
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/geometry/I3InIceGeometry.h"
 #include "dataclasses/geometry/I3TopGeometry.h"
 #include "dataclasses/I3Time.h"
@@ -111,13 +111,7 @@ struct I3FrameTraits<I3Geometry>
   static const char* defaultName;
 };
 
-/**
- * Pointer typedeffed away to insulate users from the
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3Geometry>  I3GeometryPtr;
-
-
+I3_POINTER_TYPEDEFS(I3Geometry);
 
 #endif // I3GEOMETRY_H_INCLUDED
 

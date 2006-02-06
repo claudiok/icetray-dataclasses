@@ -98,10 +98,8 @@ class I3BasicTrack : public I3Particle
   ClassDef(I3BasicTrack,1);
 };
 
-/**
- * pointer typedeffed away to insulate users from memory management
- */
-typedef shared_ptr<I3BasicTrack>  I3BasicTrackPtr;
+I3_POINTER_TYPEDEFS(I3BasicTrack);
+
 #endif //I3BASICTRACK_H_INCLUDED
 
 

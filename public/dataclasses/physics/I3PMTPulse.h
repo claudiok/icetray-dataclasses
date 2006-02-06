@@ -10,7 +10,7 @@
 #define I3PMTPULSE_H_INCLUDED
 
 #include <TObject.h>
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 /**
  * @brief PMT voltage curve produced by a single hit
@@ -72,11 +72,7 @@ private:
   //ClassDef(I3PMTPulse, 1);
 };
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3PMTPulse>  I3PMTPulsePtr;
+I3_POINTER_TYPEDEFS(I3PMTPulse);
 
 #endif //I3PMTPULSE_H_INCLUDED
 

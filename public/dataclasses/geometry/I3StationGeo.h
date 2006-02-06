@@ -11,7 +11,7 @@
 #include "dataclasses/I3Vector.h"
 
 #include "dataclasses/geometry/I3SurfModuleGeo.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/OMKey.h"
 
@@ -45,7 +45,7 @@ class I3StationGeo : public I3Vector<I3SurfModuleGeoPtr>
 
 };
 
-typedef shared_ptr<I3StationGeo>  I3StationGeoPtr;
+I3_POINTER_TYPEDEFS(I3StationGeo);
 
 #endif //I3STATIONGEO_H_INCLUDED
  

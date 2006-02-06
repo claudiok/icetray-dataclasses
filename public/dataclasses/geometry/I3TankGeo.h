@@ -15,7 +15,7 @@
 
 //#include "dataclasses/I3TankMaterial.h"
 #include "dataclasses/geometry/I3SurfModuleGeo.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 using namespace std;
 
 /**
@@ -85,10 +85,7 @@ inline ostream& operator<<(ostream& o, const I3TankGeo tank)
   return o;
 }
 
-/**
- * a pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3TankGeo>  I3TankGeoPtr;
+I3_POINTER_TYPEDEFS(I3TankGeo);
 
 #endif //I3TANKGEO_H_INCLUDED
 

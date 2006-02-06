@@ -15,7 +15,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 using namespace std; 
 
@@ -116,10 +116,7 @@ inline ostream& operator<<(ostream& o,const I3Trigger& trig)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3Trigger> I3TriggerPtr;
+I3_POINTER_TYPEDEFS(I3Trigger);
 
 #endif //I3TRIGGER_H_INCLUDED
 

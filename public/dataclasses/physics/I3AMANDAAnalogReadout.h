@@ -13,7 +13,7 @@
 #include <vector>
 
 #include "TObject.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 /**
  * @brief Old-style AMANDA ADC/TDC readout
@@ -141,10 +141,7 @@ private:
   //ClassDef(I3AMANDAAnalogReadout,2);
 };
 
-/**
- * Pointer typedeffed away to insulate users from the
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutPtr;
+I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);
+
 #endif //I3AMANDAANALOGREADOUT_H_INCLUDED
 

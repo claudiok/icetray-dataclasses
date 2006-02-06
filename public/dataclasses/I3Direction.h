@@ -19,7 +19,7 @@
 #include <math.h>
 #include <sstream>
 #include "TObject.h"
-#include "StoragePolicy.h"
+#include "Utility.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
 
@@ -236,9 +236,6 @@ inline ostream& operator<<(ostream& o,const I3Direction& dir)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3Direction>  I3DirectionPtr;
+I3_POINTER_TYPEDEFS(I3Direction);
 
 #endif //I3DIRECTION_H_INCLUDED

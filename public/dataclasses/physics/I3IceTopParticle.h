@@ -49,9 +49,6 @@ class I3IceTopParticle : public I3Particle
   //ClassDef(I3IceTopParticle,1);
 };
 
-/**
- * pointer type to insulate users from memory management issues
- */
-typedef shared_ptr<I3IceTopParticle>  I3IceTopParticlePtr;
+I3_POINTER_TYPEDEFS(I3IceTopParticle);
 
 #endif //I3ICETOPPARTICLE_H_INCLUDED

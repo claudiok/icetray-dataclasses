@@ -10,7 +10,7 @@
 #define I3DOMLAUNCH_H_INCLUDED
 
 #include "TObject.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 using namespace std; 
 /**
@@ -360,11 +360,7 @@ private:
     //ClassDef(I3DOMLaunch,1);
 };
 
-/**
- * Pointer typedeffed away to insulate users from the
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3DOMLaunch>  I3DOMLaunchPtr;
+I3_POINTER_TYPEDEFS(I3DOMLaunch);
 
 #endif //I3DOMLAUNCH_H_INCLUDED
 

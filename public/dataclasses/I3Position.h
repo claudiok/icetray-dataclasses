@@ -20,7 +20,7 @@
 using namespace std;
 
 #include "TObject.h"
-#include "StoragePolicy.h"
+#include "Utility.h"
 #include <sstream>
 
 /**
@@ -256,9 +256,6 @@ inline ostream& operator<<(ostream& o,const I3Position& pos)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3Position>  I3PositionPtr;
+I3_POINTER_TYPEDEFS(I3Position);
 
 #endif //I3POSITION_H_INCLUDED

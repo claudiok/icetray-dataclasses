@@ -15,7 +15,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 using namespace std; 
 
@@ -68,10 +68,7 @@ inline ostream& operator<<(ostream& o,const I3Filter& filt)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3Filter> I3FilterPtr;
+I3_POINTER_TYPEDEFS(I3Filter);
 
 #endif //I3FILTER_H_INCLUDED
 

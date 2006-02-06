@@ -211,7 +211,7 @@ public:
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-typedef shared_ptr<I3MCRawDOMStatus> I3MCRawDOMStatusPtr;
+I3_POINTER_TYPEDEFS(I3MCRawDOMStatus);
 
 #endif //I3MCRAWDOMSTATUS_H_INCLUDED
 

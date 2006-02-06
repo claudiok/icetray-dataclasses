@@ -37,7 +37,7 @@ class I3DOMStatus : public TObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-typedef shared_ptr<I3DOMStatus> I3DOMStatusPtr;
+I3_POINTER_TYPEDEFS(I3DOMStatus);
 
 #endif //I3DOMSTATUS_H_INCLUDED
 

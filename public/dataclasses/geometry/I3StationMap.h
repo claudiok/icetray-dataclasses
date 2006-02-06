@@ -14,7 +14,7 @@
 
 #include "dataclasses/StationKey.h"
 #include "dataclasses/geometry/I3StationGeo.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 
 /**
  * @brief Class which allows looping over stations.
@@ -51,9 +51,6 @@ class I3StationMap : public I3Map<StationKey, I3StationGeoPtr>
 
 };
 
-/**
- * isolate the user from the memory management
- */
-typedef shared_ptr<I3StationMap>  I3StationMapPtr;
+I3_POINTER_TYPEDEFS(I3StationMap);
 
 #endif //I3STATIONMAP_H_INCLUDED

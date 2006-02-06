@@ -14,7 +14,7 @@
 #ifndef I3AMANDAOMCALIBRATION_H_INCLUDED
 #define I3AMANDAOMCALIBRATION_H_INCLUDED
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3AMANDAOMCalib_XTalk.h"
 #include <vector>
 #include <sstream>
@@ -150,7 +150,7 @@ inline ostream& operator<<(ostream& o, const I3AMANDAOMCalib& c)
     return o;
 }
 
-typedef shared_ptr<I3AMANDAOMCalib>  I3AMANDAOMCalibPtr;
+I3_POINTER_TYPEDEFS(I3AMANDAOMCalib);
 
 #endif
 

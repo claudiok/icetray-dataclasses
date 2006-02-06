@@ -8,7 +8,7 @@
 
 #ifndef I3PMTPULSEVECT_H_INCLUDED
 #define I3PMTPULSEVECT_H_INCLUDED
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/physics/I3PMTPulse.h"
 #include "dataclasses/I3Vector.h"
 
@@ -55,10 +55,7 @@ private:
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-/**
- * pointer type to insulate users from memory managemnt issues
- */
-typedef shared_ptr<I3PMTPulseVect>  I3PMTPulseVectPtr;
+I3_POINTER_TYPEDEFS(I3PMTPulseVect);
 
 #endif //I3PMTPULSEVECT_H_INCLUDED
 

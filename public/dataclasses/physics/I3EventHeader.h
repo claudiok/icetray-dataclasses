@@ -94,11 +94,7 @@ class I3EventHeader : public TObject
 
 };
 
-/**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3EventHeader>  I3EventHeaderPtr;
+I3_POINTER_TYPEDEFS(I3EventHeader);
 
 #endif //I3EVENTHEADER_H_INCLUDED
 

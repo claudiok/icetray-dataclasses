@@ -10,7 +10,7 @@
 #ifndef I3DETECTORSTATUS_H_INCLUDED
 #define I3DETECTORSTATUS_H_INCLUDED
 
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/status/I3IceCubeDOMStatusDict.h"
 #include "dataclasses/status/I3TriggerStatusDict.h"
 #include "dataclasses/I3Time.h"
@@ -152,12 +152,7 @@ struct I3FrameTraits<I3DetectorStatus>
   static const char* defaultName;
 };
 
-/**
- * Pointer typedeffed away to insulate users from the
- * memory-mananagement implementation
- */
-typedef shared_ptr<I3DetectorStatus>  I3DetectorStatusPtr;
-
+I3_POINTER_TYPEDEFS(I3DetectorStatus);
 
 #endif // I3DETECTORSTATUS_H_INCLUDED
 

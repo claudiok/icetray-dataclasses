@@ -14,7 +14,7 @@
 
 
 #include "dataclasses/OMKey.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/I3Map.h"
 
@@ -80,7 +80,7 @@ inline ostream& operator<<(ostream& o,const I3InIceCalibration& v)
     return o;
 }
 
-typedef shared_ptr<I3InIceCalibration>  I3InIceCalibrationPtr;
+I3_POINTER_TYPEDEFS(I3InIceCalibration);
 
 #endif // I3INICECALIBRATION_H_INCLUDED
 

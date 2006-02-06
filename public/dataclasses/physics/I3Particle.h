@@ -10,7 +10,7 @@
 #define I3PARTICLE_H_INCLUDED
 
 #include "TObject.h"
-#include "dataclasses/StoragePolicy.h"
+#include "dataclasses/Utility.h"
 #include <string>
 
 class I3Particle : public TObject
@@ -108,5 +108,6 @@ class I3Particle : public TObject
   ClassDef(I3Particle,1);
 };
 
-typedef shared_ptr<I3Particle>  I3ParticlePtr;
+I3_POINTER_TYPEDEFS(I3Particle);
+
 #endif //I3PARTICLE_H_INCLUDED
