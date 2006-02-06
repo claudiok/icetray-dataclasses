@@ -38,7 +38,7 @@ class I3ContainedTrack : public I3Particle
 
   void SetT(double t){time_ = t;}
 
-  const I3Position& GetPos() const {return startPos_;}
+  const I3Position& GetStartPos() const {return startPos_;}
 
   void SetStartPos(const I3Position& p) {startPos_.SetPosition(p);}
 

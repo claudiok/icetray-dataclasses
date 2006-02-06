@@ -34,15 +34,15 @@ class I3Shower : public I3Particle
   
   virtual ~I3Shower();
 
-  double GetT() const {return time_;}
+  double GetCoreT() const {return time_;}
 
-  void SetT(double t){time_ = t;}
+  void SetCoreT(double t){time_ = t;}
 
-  const I3Position& GetPos() const {return pos_;}
+  const I3Position& GetCorePos() const {return pos_;}
 
-  void SetPos(const I3Position& p) {pos_.SetPosition(p);}
+  void SetCorePos(const I3Position& p) {pos_.SetPosition(p);}
 
-  void SetPos(double p1, double p2, double p3, 
+  void SetCorePos(double p1, double p2, double p3, 
 	      I3Position::RefFrame frame=I3Position::car)
     {pos_.SetPosition(p1,p2,p3,frame);}
 
