@@ -215,22 +215,26 @@ class I3Position : public TObject
   /**
    * cartesian (car)
    */ 
-  double x_, y_, z_;
+  double x_;
+  double y_;
+  double z_;
 
   /**
    * spherical (sph)
    */
-  mutable double r_, theta_, phi_;  
+  mutable double r_; //!
+  mutable double theta_; //!
+  mutable double phi_; //!
 
   /**
    * cylindrical (cyl) - Z and Phi are same.
    */
-  mutable double rho_;
+  mutable double rho_; //!
 
   /**
    * Did we calculate the positions before?
    */
-  mutable bool isCalculated_; 
+  mutable bool isCalculated_; //!
 
  private:
 

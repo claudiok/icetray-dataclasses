@@ -191,15 +191,22 @@ class I3Direction : public TObject
 
  protected:
   /**
-   * direction coordinates
+   * direction coordinates -- spherical
    */ 
-  double zenith_, azimuth_;
-  mutable double xDir_, yDir_, zDir_;
+  double zenith_;
+  double azimuth_;
+
+  /**
+   * direction coordinates -- cartesian (direction cosines)
+   */ 
+  mutable double xDir_; //!
+  mutable double yDir_; //!
+  mutable double zDir_; //!
 
   /**
    * Did we calculate the directions before?
    */
-  mutable bool isCalculated_; 
+  mutable bool isCalculated_; //!
 
  private:
   /**

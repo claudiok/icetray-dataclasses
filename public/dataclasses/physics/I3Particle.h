@@ -94,11 +94,11 @@ class I3Particle : public TObject
 
  private:
 
-  ParticleType type_;
+  ParticleType type_; //!
   unsigned parentID_;
   unsigned primaryID_;
   unsigned myID_;
-  std::string recoName_;
+  std::string recoName_; //!
   MCTruthID mcTruthID_;
 
   friend class boost::serialization::access;
