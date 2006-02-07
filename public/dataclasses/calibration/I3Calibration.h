@@ -91,6 +91,12 @@ struct I3FrameTraits<I3Calibration>
   static const char* defaultName;
 };
 
+template<>
+struct I3FrameTraits<const I3Calibration>
+{
+  static const char* defaultName;
+};
+
 
 /** 
  * streaming operator

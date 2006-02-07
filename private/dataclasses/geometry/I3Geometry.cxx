@@ -3,6 +3,8 @@
 
 const char* I3FrameTraits<I3Geometry>::defaultName = "Geometry";
 
+const char* I3FrameTraits<const I3Geometry>::defaultName = "Geometry";
+
 I3Geometry::~I3Geometry() {}
 
 template <class Archive>

@@ -152,6 +152,12 @@ struct I3FrameTraits<I3DetectorStatus>
   static const char* defaultName;
 };
 
+template<>
+struct I3FrameTraits<const I3DetectorStatus>
+{
+  static const char* defaultName;
+};
+
 I3_POINTER_TYPEDEFS(I3DetectorStatus);
 
 #endif // I3DETECTORSTATUS_H_INCLUDED

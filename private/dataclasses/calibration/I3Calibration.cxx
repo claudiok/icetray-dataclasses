@@ -3,6 +3,8 @@
 
 const char* I3FrameTraits<I3Calibration>::defaultName = "Calibration";
 
+const char* I3FrameTraits<const I3Calibration>::defaultName = "Calibration";
+
 I3Calibration::~I3Calibration() {}
 
 template <class Archive>
