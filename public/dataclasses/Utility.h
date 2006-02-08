@@ -53,5 +53,6 @@ using boost::serialization::base_object;
 typedef shared_ptr<class> class##Ptr; \
 typedef shared_ptr<const class> class##ConstPtr;
 
-#endif //STORAGEPOLICY_H_INCLUDED
+
+#endif 
 

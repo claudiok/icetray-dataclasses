@@ -4,7 +4,7 @@
 #include "dataclasses/calibration/I3Calibration.h"
 #include "dataclasses/calibration/I3InIceCalibration.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
-#include "dataclasses/calibration/I3CalibrationHeader.h"
+
 #include "dataclasses/I3Units.h"
 
 #include <string>
