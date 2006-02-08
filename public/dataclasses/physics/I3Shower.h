@@ -75,9 +75,9 @@ class I3Shower : public I3Particle
 
   void SetEnergy(double energy) { energy_ = energy;}
 
-  const map<string,double>& GetUserParameters() const {return user_;}
+  const map<string,double>& GetParameters() const {return user_;}
 
-  map<string,double>& GetUserParameters(){return user_;}
+  map<string,double>& GetParameters(){return user_;}
 
   void ToStream(ostream& o) const;
 

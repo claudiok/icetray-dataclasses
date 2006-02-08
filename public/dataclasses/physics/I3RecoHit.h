@@ -28,9 +28,9 @@ class I3RecoHit : public TObject
 
   virtual ~I3RecoHit();
 
-  const std::map<std::string,double>& GetUserParameters() const {return user_;}
+  const std::map<std::string,double>& GetParameters() const {return user_;}
 
-  std::map<std::string,double>& GetUserParameters(){return user_;}
+  std::map<std::string,double>& GetParameters(){return user_;}
 
   double GetTime() const { return time_; }
 

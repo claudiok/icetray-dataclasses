@@ -50,9 +50,9 @@ class I3RecoPulse : public TObject
 
   void SetWidth(double width) {width_ = width;}
 
-  const map<string,double>& GetUserParameters() const {return user_;} 
+  const map<string,double>& GetParameters() const {return user_;} 
 
-  map<string,double>& GetUserParameters(){return user_;} 
+  map<string,double>& GetParameters(){return user_;} 
 
   virtual ~I3RecoPulse();
 

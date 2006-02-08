@@ -5,6 +5,7 @@ USES_PROJECTS := icetray
 USES_TOOLS := root log4cplus boost TUT boost
 
 ROOT_DICTIONARY_HEADERS := \
+dataclasses/physics/I3Particle2.h \
 dataclasses/physics/I3AMANDAAnalogReadout.h \
 dataclasses/physics/I3BasicTrack.h \
 dataclasses/I3Constants.h \
