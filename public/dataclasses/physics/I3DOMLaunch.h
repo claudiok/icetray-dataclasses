@@ -107,30 +107,6 @@ public:
     void SetWhichATWD(ATWDselect WhichATWD) { whichATWD_ = WhichATWD; }
 
     /**
-     * Return raw ATWD 0 waveform.
-     */
-    const I3Vector<int>& GetRawATWD0() const { return rawATWD_[0]; }
-    I3Vector<int>& GetRawATWD0() { return rawATWD_[0]; }
-  
-    /**
-     * Return raw ATWD 1 waveform.
-     */
-    const I3Vector<int>& GetRawATWD1() const { return rawATWD_[1]; }
-    I3Vector<int>& GetRawATWD1() { return rawATWD_[1]; }
-
-    /**
-     * Return raw ATWD 2 waveform.
-     */
-    const I3Vector<int>& GetRawATWD2() const { return rawATWD_[2]; }
-    I3Vector<int>& GetRawATWD2() { return rawATWD_[2]; }
-
-    /**
-     * Return raw ATWD 3 waveform.
-     */
-    const I3Vector<int>& GetRawATWD3() const { return rawATWD_[3]; }
-    I3Vector<int>& GetRawATWD3() { return rawATWD_[3]; }
-
-    /**
      * Return raw ATWD by channel number
      */
     const I3Vector<int>& GetRawATWD(unsigned int channel) const
