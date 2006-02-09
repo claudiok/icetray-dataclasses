@@ -36,9 +36,9 @@ class I3DOMLaunchSeries : public I3Vector<I3DOMLaunch>
     o<<"[ I3DOMLaunchSeries: ]\n";
   }
 
-  virtual string ToString() const
+  virtual std::string ToString() const
   {
-    ostringstream out;
+    std::ostringstream out;
     ToStream(out);
     return out.str();
   }

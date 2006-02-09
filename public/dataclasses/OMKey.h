@@ -14,8 +14,6 @@
 #include "Utility.h"
 #include <iostream>
 
-using namespace std;
-
 /**
  * @brief A small class which is the string number and om number
  * for an om
@@ -24,37 +22,37 @@ using namespace std;
  * comparison operator needed to sort these into a map for free.
  *
  */
-class OMKey : public TObject //, public pair<int,unsigned int>
+class OMKey : public TObject
 {
   int stringNumber_;
   unsigned int omNumber_;
  public:
-  OMKey() : stringNumber_(0), omNumber_(0) {} //: pair<int,unsigned int>(0,0){}
+  OMKey() : stringNumber_(0), omNumber_(0) {}
 
   OMKey(int str,unsigned int om) 
     : stringNumber_(str), omNumber_(om){}
 
-  ~OMKey(); 
+  virtual ~OMKey(); 
 
   /**
    * retrieves the string number for this OMKey
    */
-  int GetString() const { return stringNumber_;}
+  int GetString() const { return stringNumber_; }
 
   /**
    * Sets the string number for this OM
    */
-  void SetString(int str){stringNumber_ = str;}
+  void SetString(int str){ stringNumber_ = str; }
 
   /**
    * gets the OM number on the string
    */
-  unsigned int GetOM() const { return omNumber_;}
+  unsigned int GetOM() const { return omNumber_; }
 
   /**
    * sets the OM number on the string
    */
-  void SetOM(unsigned int om){omNumber_ = om;}
+  void SetOM(unsigned int om){ omNumber_ = om; }
 
   /**
    * equality operator.  
@@ -84,9 +82,6 @@ class OMKey : public TObject //, public pair<int,unsigned int>
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
-
-  // ROOT macro
-  //ClassDef(OMKey,1);
 };
 
 /**
