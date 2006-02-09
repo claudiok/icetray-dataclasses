@@ -28,10 +28,6 @@ class I3Hit : public TObject
 
   virtual ~I3Hit();
 
-  const std::map<std::string,double>& GetParameters() const {return user_;}
-
-  std::map<std::string,double>& GetParameters(){return user_;}
-
   double GetTime() const { return time_; }
 
   void SetTime(double time) { time_ = time; }
@@ -45,8 +41,6 @@ class I3Hit : public TObject
   double time_;
 
   int hitID_;
-
-  std::map<std::string,double> user_;
 
   friend class boost::serialization::access;
 
