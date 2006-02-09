@@ -1,53 +1,92 @@
+/**
+ * copyright  (C) 2004
+ * the icecube collaboration
+ * $Id: TriggerKey.cxx 13154 2005-12-01 21:45:55Z  $
+ *
+ * @file TriggerKey.cxx
+ * @version $Revision: 1.10 $
+ * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
+ */
+#include <dataclasses/BoostHeaders.h>
 #include <dataclasses/TriggerKey.h>
-TriggerKey::~TriggerKey() { }
 
-string TriggerKey::GenerateName(const TriggerKey& mykey)
+
+using namespace std;
+
+
+string TriggerKey::GenerateName(const TriggerKey& myKey)
 {
-  //Take our triggerKey, turn it into a unique string
-  const string prefix = "Trig_";
-  string sourceID,triggerType,configID,mystring;
+  // Take our trigger key, turn it into a unique string.
+  std::ostringstream myName("Trig_");
+  
+  myName << myKey.GetSource();
+  myName << "_";
+  myName << myKey.GetType();
+  myName << "_";
+  if(myKey.CheckConfigID())
+    myName << myKey.GetConfigID();
+  else
+    myName << "?";
 
-  std::ostringstream strm_sourceID;
-  strm_sourceID << mykey.GetSourceID();
-  sourceID = strm_sourceID.str();
- 
-  std::ostringstream strm_triggerType;
-  strm_triggerType << mykey.GetTriggerType();
-  triggerType = strm_triggerType.str();
- 
-  std::ostringstream strm_configID;
-  strm_configID << mykey.GetTriggerConfigID();
-  configID = strm_configID.str();
-
-  mystring = prefix+sourceID+"_"+triggerType+"_"+configID;
-  log_trace("GenerateName: Created name: %s",mystring.c_str());
-  return mystring;
-
+  return myName.str();
 }
 
-TriggerKey TriggerKey::ParseName(const string& myname)
+
+TriggerKey TriggerKey::ParseName(const string& myName)
 {
-  //Take our nicely generated string and deconvolve into a TriggerKey
+  const char* format1 = "Trig_%i_%i_%i";
+  const char* format2 = "Trig_%i_%i_?";
+  
   TriggerKey myKey;
-
-  int sourceID, triggerType, configID;
-  size_t  strpos = myname.find("_", 0);
-  //Let's cut off of the trig_
-  string temp = myname.substr(strpos+1, myname.size());
-
-  const char* mycharstring = temp.c_str();
-  int scanread = sscanf(mycharstring,"%i_%i_%i",&sourceID,&triggerType,&configID);
-  if(scanread != 3) //Failed to find right number of parameters!
-    {
-    log_fatal("TriggerKey::ParseName failed to find correct number of parameters in string");
-    }
-
-  log_trace("ParseName found SourceID: %i triggerType: %i ConfigID: %i",sourceID,triggerType,configID);
-
-  myKey.SetSourceID(sourceID);
-  myKey.SetTriggerType(triggerType);
-  myKey.SetTriggerConfigID(configID);
+  
+  // Take our nicely generated string and deconvolve into a trigger key.
+  int src, type, cfg;
+  
+  if(sscanf(myName.c_str(), format1, &src, &type, &cfg) == 3)
+    myKey = TriggerKey(static_cast<SourceID>(src), static_cast<TypeID>(type), cfg);
+  else if(sscanf(myName.c_str(), format2, &src, &type) == 2)
+    myKey = TriggerKey(static_cast<SourceID>(src), static_cast<TypeID>(type));
+  else
+    log_fatal("Could not parse string.");
 
   return myKey;
-
 }
+
+
+TriggerKey::SourceID TriggerKey::CheckTriggerSource(SourceID source)
+{
+  SourceID retVal = UNKNOWN_SOURCE;
+
+  if((source >= 0) && (source <= UNKNOWN_SOURCE))
+    retVal = source;
+
+  return retVal;
+}
+
+
+TriggerKey::TypeID TriggerKey::CheckTriggerType(TypeID type)
+{
+  TypeID retVal = UNKNOWN_TYPE;
+
+  if((type >= 0) && (type <= UNKNOWN_TYPE))
+    retVal = type;
+
+  return retVal;
+}
+
+
+TriggerKey::~TriggerKey() {}
+
+
+template <class Archive>
+void TriggerKey::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("TObject", base_object<TObject>(*this));
+  ar & make_nvp("SourceID", source_);
+  ar & make_nvp("TypeID", type_);
+  ar & make_nvp("ConfigIDSet", configIDSet_);
+  ar & make_nvp("ConfigID", configID_);
+}
+
+  
+I3_SERIALIZABLE(TriggerKey);

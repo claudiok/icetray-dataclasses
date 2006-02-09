@@ -26,5 +26,7 @@ dataclasses/physics/I3TWRLaunch.h \
 dataclasses/physics/I3TankHit.h \
 dataclasses/I3Time.h \
 dataclasses/physics/I3Trigger.h \
+dataclasses/status/I3TriggerStatus.h \
 dataclasses/I3Units.h \
-dataclasses/OMKey.h 
+dataclasses/OMKey.h \
+dataclasses/TriggerKey.h 
