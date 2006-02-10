@@ -23,4 +23,6 @@ class I3Bool : public TObject
   bool value_;
 };
 
+I3_POINTER_TYPEDEFS(I3Bool);
+
 #endif
