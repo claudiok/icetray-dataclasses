@@ -40,16 +40,16 @@ class I3AMANDAOMCalib_XTalk : public TObject
   void SetWidth(double width)         {width_=width;}
   void SetThreshold(double threshold) {threshold_=threshold;}
 
-  virtual void ToStream(ostream& o) const
+  virtual void ToStream(std::ostream& o) const
   {
     o<<"[ "
      <<"AMANDACalibration_XTalk"
      <<"]\n";
   };
   
-  virtual string ToString() const
+  virtual std::string ToString() const
   {
-    ostringstream out;
+    std::ostringstream out;
     ToStream(out);
     return out.str();
   }
