@@ -8,7 +8,7 @@
  * @date $Date: 2005-11-17 16:04:25 +0100 (Thu, 17 Nov 2005) $
  */
 #include <dataclasses/BoostHeaders.h>
-#include <dataclasses/I3Trigger.h>
+#include <dataclasses/physics/I3Trigger.h>
 
 
 I3Trigger::~I3Trigger() {}
