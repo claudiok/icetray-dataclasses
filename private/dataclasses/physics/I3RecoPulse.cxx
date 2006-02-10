@@ -12,7 +12,6 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
     ar & make_nvp("HitID", hitID_);
     ar & make_nvp("PulseAmp", amp_);
     ar & make_nvp("Width", width_);
-    ar & make_nvp("user",user_);
   }
 
   

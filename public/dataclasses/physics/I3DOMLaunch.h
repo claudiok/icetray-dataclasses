@@ -11,6 +11,9 @@
 
 #include "TObject.h"
 #include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
+
 
 /**
  * @brief The direct (digital) readout of an IceCube DOM
@@ -164,6 +167,9 @@ private:
 };
 
 I3_POINTER_TYPEDEFS(I3DOMLaunch);
+
+typedef I3Vector<I3DOMLaunch> I3DOMLaunchSeries;
+typedef I3Map<OMKey, I3DOMLaunchSeries> I3DOMLaunchSeriesMap;
 
 #endif //I3DOMLAUNCH_H_INCLUDED
 

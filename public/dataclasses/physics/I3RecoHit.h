@@ -11,8 +11,10 @@
 
 #include <TObject.h>
 #include "dataclasses/Utility.h"
-#include <map>
-#include <string>
+#include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
+
 
 /**
  * @brief A base class for reconstruted hits.  
@@ -28,10 +30,6 @@ class I3RecoHit : public TObject
 
   virtual ~I3RecoHit();
 
-  const std::map<std::string,double>& GetParameters() const {return user_;}
-
-  std::map<std::string,double>& GetParameters(){return user_;}
-
   double GetTime() const { return time_; }
 
   void SetTime(double time) { time_ = time; }
@@ -46,8 +44,6 @@ class I3RecoHit : public TObject
 
   int hitID_;
 
-  std::map<std::string,double> user_;
-
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
@@ -60,6 +56,9 @@ inline ostream& operator<<(ostream& o,const I3RecoHit& key)
 }
 
 I3_POINTER_TYPEDEFS(I3RecoHit);
+
+typedef I3Vector<I3RecoHit> I3RecoHitSeries;
+typedef I3Map<OMKey, I3RecoHitSeries> I3RecoHitSeriesMap;
 
 #endif //I3RECOHIT_H_INCLUDED
 

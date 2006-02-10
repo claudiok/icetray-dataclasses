@@ -10,8 +10,9 @@
 #define I3RECOPULSE_H_INCLUDED
 
 #include "dataclasses/Utility.h"
-#include <map>
-#include <string>
+#include "dataclasses/I3Vector.h"
+#include "dataclasses/OMKey.h"
+#include "dataclasses/I3Map.h"
 
 using namespace std;
 
@@ -28,7 +29,6 @@ class I3RecoPulse : public TObject
   double time_;
   double amp_;
   double width_;
-  map<string,double> user_;
 
   public:
 
@@ -49,10 +49,6 @@ class I3RecoPulse : public TObject
   double GetWidth() const {return width_;}
 
   void SetWidth(double width) {width_ = width;}
-
-  const map<string,double>& GetParameters() const {return user_;} 
-
-  map<string,double>& GetParameters(){return user_;} 
 
   virtual ~I3RecoPulse();
 
@@ -82,6 +78,9 @@ inline ostream& operator<<(ostream& o,const I3RecoPulse& pulse)
 }
 
 I3_POINTER_TYPEDEFS(I3RecoPulse);
+
+typedef I3Vector<I3RecoPulse> I3RecoPulseSeries;
+typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;
 
 #endif //I3RECOPULSE_H_INCLUDED
 

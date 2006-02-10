@@ -18,9 +18,7 @@ dataclasses/physics/I3PMTPulse.h \
 dataclasses/physics/I3PMTPulseVect.h \
 dataclasses/physics/I3Particle.h \
 dataclasses/I3Position.h \
-dataclasses/physics/I3RecoHitSeries.h \
 dataclasses/physics/I3RecoPulse.h \
-dataclasses/physics/I3RecoPulseSeries.h \
 dataclasses/physics/I3TWRFrag.h \
 dataclasses/physics/I3TWRLaunch.h \
 dataclasses/physics/I3TankHit.h \
