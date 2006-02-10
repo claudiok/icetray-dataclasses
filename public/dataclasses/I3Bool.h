@@ -2,6 +2,7 @@
 #define I3BOOL_H
 
 #include <TObject.h>
+#include <dataclasses/Utility.h>
 
 // This works for me, but others may want to design it better.
 // Feel free to change it. (pretz)
