@@ -225,14 +225,14 @@ public:
 
   virtual void ToStream(std::ostream& o) const
   {
-    o << "[TriggerKey: \n"
-      << " SourceID: " << source_ << "\n"
-      << " TypeID: " << type_ <<  "\n";
+    o << "[ TriggerKey ] (SrcID = "
+      << source_ << ", TypeID = "
+      << type_ <<  ", ConfigID = ";
     if(configIDSet_)
-      o << " ConfigID: " << configID_;
+      o << configID_;
     else
-      o << " ConfigID: ?";
-    o << "]";
+      o << "?";
+    o << ")";
   }
   
   /**

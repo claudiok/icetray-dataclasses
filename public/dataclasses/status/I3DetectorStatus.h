@@ -12,7 +12,9 @@
 
 #include "dataclasses/Utility.h"
 #include "dataclasses/status/I3IceCubeDOMStatusDict.h"
-#include "dataclasses/status/I3TriggerStatusDict.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/TriggerKey.h";
+#include "dataclasses/status/I3TriggerStatus.h"
 #include "dataclasses/I3Time.h"
 #include <icetray/I3FrameTraits.h>
 #include <sstream>
@@ -37,7 +39,7 @@ class I3DetectorStatus : public TObject
   //  Impl when needed
   //enum DaqMode { PhysicsRun = 0, CalibRun = 1, TestRun=2, Other=3 };
   //enum FilterMode { PhysicsFilt = 0, RandomFilt = 1, NoFilt =2 } ;
-  I3DetectorStatus(){};
+  I3DetectorStatus() {};
   
   virtual ~I3DetectorStatus();
   
@@ -45,57 +47,45 @@ class I3DetectorStatus : public TObject
    * @return the InIce DOM settings dict 
    */
   const I3IceCubeDOMStatusDict& GetIceCubeDOMStatus() const 
-    { return icecubeDOMStatus_;}
+    { return icecubeDOMStatus_; }
 
   /**
    * @return the InIce DOM settings dict as a non-const object
    */
   I3IceCubeDOMStatusDict& GetIceCubeDOMStatus() 
-    { return icecubeDOMStatus_;}
+    { return icecubeDOMStatus_; }
 
   /**
    * @return the IceTop DOM settings dict 
    */
   const I3IceCubeDOMStatusDict& GetIceTopDOMStatus() const 
-    { return icetopDOMStatus_;}
+    { return icetopDOMStatus_; }
 
   /**
    * @return the IceTop DOM settings dict as a non-const object
    */
   I3IceCubeDOMStatusDict& GetIceTopDOMStatus() 
-    { return icetopDOMStatus_;}
+    { return icetopDOMStatus_; }
 
   /**
-   * @return the InIce Trigger settings dict 
+   * @return the trigger settings 
    */
-  const I3TriggerStatusDict& GetIceCubeTriggerStatus() const 
-    { return icecubeTrigStatus_;}
+  const I3Map<TriggerKey, I3TriggerStatus>& GetTriggerStatus() const 
+    { return trigStatus_; }
 
   /**
-   * @return the InIce Trigger settings dict as a non-const object
+   * @return the trigger settings dict as a non-const object
    */
-  I3TriggerStatusDict& GetIceCubeTriggerStatus() 
-    { return icecubeTrigStatus_;}
-
-  /**
-   * @return the InTop Trigger settings dict 
-   */
-  const I3TriggerStatusDict& GetIceTopTriggerStatus() const 
-    { return icetopTrigStatus_;}
-
-  /**
-   * @return the InTop Trigger settings dict as a non-const object
-   */
-  I3TriggerStatusDict& GetIceTopTriggerStatus() 
-    { return icetopTrigStatus_;}
+  I3Map<TriggerKey, I3TriggerStatus>& GetTriggerStatus() 
+    { return trigStatus_; }
   
-  I3Time GetStartTime() const { return startTime_;}
+  I3Time GetStartTime() const { return startTime_; }
   
-  void SetStartTime(const I3Time& t) { startTime_ = t;}
+  void SetStartTime(const I3Time& t) { startTime_ = t; }
   
-  void SetEndTime(const I3Time& t){endTime_ = t;}
+  void SetEndTime(const I3Time& t){ endTime_ = t; }
   
-  I3Time GetEndTime() const { return endTime_;}
+  I3Time GetEndTime() const { return endTime_; }
 
   virtual void ToStream(ostream& o) const
     {
@@ -103,10 +93,11 @@ class I3DetectorStatus : public TObject
        << icecubeDOMStatus_
       <<" [ IceTop I3DetectorDOMStatus ]"
        << icetopDOMStatus_
-      <<" [ InIce I3DetectorTriggerStatus ]"
-       << icecubeTrigStatus_
-      <<" [ IceTop I3DetectorTriggerStatus ]"
-       << icetopTrigStatus_;
+      <<" [ I3DetectorTriggerStatus ]";
+      for(I3Map<TriggerKey, I3TriggerStatus>::const_iterator iter = trigStatus_.begin();
+          iter != trigStatus_.end();
+          ++iter)
+        o<< "(" << iter->first << ", " << iter->second << ")";
     }
 
   virtual string ToString() const
@@ -120,9 +111,7 @@ class I3DetectorStatus : public TObject
    I3IceCubeDOMStatusDict icecubeDOMStatus_;
    //icetop gets another one for now. Until they do something special
    I3IceCubeDOMStatusDict icetopDOMStatus_;
-   I3TriggerStatusDict icecubeTrigStatus_;
-   //icetop gets another one for now. Until they do something special
-   I3TriggerStatusDict icetopTrigStatus_;
+   I3Map<TriggerKey, I3TriggerStatus> trigStatus_;
    //@todo  DOM hubs have settings. Impl when needed. 
    //I3IceCubeHubStatusDict icecubeHubStatus_;
    //@todo Presumably AMANDA has some per run settings, impl when needed
