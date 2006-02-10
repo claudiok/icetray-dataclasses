@@ -13,7 +13,7 @@
 #include "dataclasses/Utility.h"
 #include "dataclasses/status/I3IceCubeDOMStatusDict.h"
 #include "dataclasses/I3Map.h"
-#include "dataclasses/TriggerKey.h";
+#include "dataclasses/TriggerKey.h"
 #include "dataclasses/status/I3TriggerStatus.h"
 #include "dataclasses/I3Time.h"
 #include <icetray/I3FrameTraits.h>

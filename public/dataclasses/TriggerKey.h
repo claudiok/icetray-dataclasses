@@ -263,10 +263,7 @@ public:
     return !(rhs == *this);
   }
 
-private:
-  friend class boost::serialization::access;
   template <class Archive> void serialize (Archive& ar, unsigned version);
-
 
   // logging
   SET_LOGGER("TriggerKey");

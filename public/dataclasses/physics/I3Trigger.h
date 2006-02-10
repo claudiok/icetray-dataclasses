@@ -21,6 +21,7 @@
 
 #include "dataclasses/TriggerKey.h"
 #include "icetray/services/I3Logging.h"
+#include "dataclasses/Utility.h"
 
 
 /**
@@ -111,18 +112,12 @@ public:
       << " Fired:" << fired_ << "]";
   }
 
-private:
-  friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
-
 
   // logging
   SET_LOGGER("I3Trigger");
 };
 
-/**
- * pointer type to insulate users from memory management
- */
 I3_POINTER_TYPEDEFS(I3Trigger);
 
 /**
