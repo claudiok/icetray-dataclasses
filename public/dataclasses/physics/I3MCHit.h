@@ -11,6 +11,9 @@
 
 #include <TObject.h>
 #include "dataclasses/Utility.h"
+#include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
 
 /**
  * @brief Derived I3Hit class with additional 'Weight' and 'Parent
@@ -85,6 +88,9 @@ inline ostream& operator<<(ostream& o,const I3MCHit& key)
 }
 
 I3_POINTER_TYPEDEFS(I3MCHit);
+
+typedef I3Vector<I3MCHit> I3MCHitSeries;
+typedef I3Map<OMKey, I3MCHitSeries> I3MCHitSeriesMap; 
 
 #endif //I3MCHIT_H_INCLUDED
 
