@@ -28,6 +28,24 @@ class I3Particle : public TObject
   enum ParticleType { Null, Primary, TopShower, Cascade, InfiniteTrack, 
 		      StartingTrack, StoppingTrack, ContainedTrack };
 
+ private:
+
+  int number_;
+  int parentID_;
+  int primID_;
+  ParticleID id_;
+  ParticleType type_;
+  I3Position pos_;
+  I3Direction dir_;
+  double time_;
+  double energy_;
+  double length_;
+  double speed_;
+  map<string,double> user_; //!
+  vector<I3Particle> composite_; //!
+
+ public:
+
   I3Particle() : 
     number_(-1),
     parentID_(-1),
@@ -44,19 +62,40 @@ class I3Particle : public TObject
   
   virtual ~I3Particle();
 
-  const int GetParticleNumber() const { return number_; }
+  bool IsTrack() const {
+    if (type_==InfiniteTrack || type_==StartingTrack ||
+	type_==StoppingTrack || type_==ContainedTrack) return true;
+    else return false;
+  }
+
+  bool IsCascade() const {
+    if (type_==Cascade) return true;
+    else return false;
+  }
+
+  bool IsPrimary() const {
+    if (type_==Primary) return true;
+    else return false;
+  }
+
+  bool IsTopShower() const {
+    if (type_==TopShower) return true;
+    else return false;
+  }
+
+  int GetParticleNumber() const { return number_; }
   void SetParticleNumber(int number) { number_ = number; }
 
-  const int GetParentID() const { return parentID_; }
+  int GetParentID() const { return parentID_; }
   void SetParentID(int id) { parentID_ = id; }
 
-  const int GetPrimaryID() const { return primID_; }
+  int GetPrimaryID() const { return primID_; }
   void SetPrimaryID(int id) { primID_ = id; }
 
-  const ParticleID GetParticleID() const { return id_; }
+  ParticleID GetParticleID() const { return id_; }
   void SetParticleID(ParticleID id) { id_ = id; }
 
-  const ParticleType GetParticleType() const { return type_; }
+  ParticleType GetParticleType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
 
   const I3Position& GetPos() const { return pos_; }
@@ -97,6 +136,20 @@ class I3Particle : public TObject
   const vector<I3Particle>& GetComposite() const { return composite_; }
   vector<I3Particle>& GetComposite() { return composite_; }
 
+  I3Position ShiftAlongTrack(double dist) const {
+    if (IsTrack()) {
+      double x = GetX() - dist * sin(GetZenith()) * cos(GetAzimuth());
+      double y = GetY() - dist * sin(GetZenith()) * sin(GetAzimuth());
+      double z = GetZ() - dist * cos(GetZenith());
+      I3Position p(x,y,z,I3Position::car);
+      return p;
+    }
+    else {
+      I3Position nullpos;
+      return nullpos;
+    }
+  }
+
   I3Position GetStartPos() const { 
     if (type_==StartingTrack || type_==ContainedTrack) return pos_;
     else {
@@ -104,6 +157,7 @@ class I3Particle : public TObject
       return nullpos;
     }
   }
+
   double GetStartT() const {
     if (type_==StartingTrack || type_==ContainedTrack) return time_;
     else return NAN;
@@ -111,41 +165,23 @@ class I3Particle : public TObject
 
   I3Position GetStopPos() const {
     if (type_==StoppingTrack) return pos_;
-    else if (type_==ContainedTrack) {
-      double x = GetX() - length_ * sin(GetZenith()) * cos(GetAzimuth());
-      double y = GetY() - length_ * sin(GetZenith()) * sin(GetAzimuth());
-      double z = GetZ() - length_ * cos(GetZenith());
-      I3Position stoppos(x,y,z,I3Position::car);
-      return stoppos;
-    }
+    else if (type_==ContainedTrack) return ShiftAlongTrack(length_);
     else {
       I3Position nullpos;
       return nullpos;
     }
   }
+
   double GetStopT() const { 
     if (type_==StoppingTrack) return time_;
     else if (type_==ContainedTrack) { return time_ + length_/speed_; }
     else return NAN;
   }
 
+
   void ToStream(ostream& o) const;
 
  private:
-
-  int number_;
-  int parentID_;
-  int primID_;
-  ParticleID id_;
-  ParticleType type_;
-  I3Position pos_;
-  I3Direction dir_;
-  double time_;
-  double energy_;
-  double length_;
-  double speed_;
-  map<string,double> user_; //!
-  vector<I3Particle> composite_; //!
 
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
