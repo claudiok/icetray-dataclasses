@@ -9,7 +9,7 @@
 class I3Bool : public TObject
 {
  public:
-  operator bool()
+  operator bool() const
     {
       return value_;
     }
