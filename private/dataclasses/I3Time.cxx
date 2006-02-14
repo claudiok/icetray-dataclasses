@@ -3,7 +3,7 @@ extern "C"
 #include "dataclasses/jday.h"
 }
 
-#include "dataclasses/BoostHeaders.h"
+#include <icetray/serialization.h>
 #include "dataclasses/I3Time.h"
 #include <iostream>
 #include <cassert>
