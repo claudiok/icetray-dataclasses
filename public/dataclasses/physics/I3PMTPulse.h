@@ -11,6 +11,9 @@
 
 #include <TObject.h>
 #include "dataclasses/Utility.h"
+#include "dataclasses/OMKey.h"
+#include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
 
 /**
  * @brief PMT voltage curve produced by a single hit
@@ -73,6 +76,9 @@ private:
 };
 
 I3_POINTER_TYPEDEFS(I3PMTPulse);
+
+typedef I3Vector<I3PMTPulse> I3PMTPulseSeries;
+typedef I3Map<OMKey, I3PMTPulseSeries> I3PMTPulseSeriesMap;
 
 #endif //I3PMTPULSE_H_INCLUDED
 

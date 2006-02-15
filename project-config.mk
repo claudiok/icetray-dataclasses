@@ -20,7 +20,6 @@ dataclasses/physics/I3FlasherInfo.h \
 dataclasses/physics/I3MCHit.h \
 dataclasses/physics/I3MCPMTResponse.h \
 dataclasses/physics/I3PMTPulse.h \
-dataclasses/physics/I3PMTPulseVect.h \
 dataclasses/physics/I3Particle.h \
 dataclasses/physics/I3RecoHit.h \
 dataclasses/physics/I3RecoPulse.h \

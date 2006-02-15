@@ -28,3 +28,7 @@ template <class Archive>
 	}
 
 I3_SERIALIZABLE(I3DOMLaunch);
+
+I3_SERIALIZABLE(I3DOMLaunchSeries);
+
+I3_SERIALIZABLE(I3DOMLaunchSeriesMap);
