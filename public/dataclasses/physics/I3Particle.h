@@ -16,6 +16,8 @@
 #include <map>
 #include <string>
 
+using namespace std;
+
 /**
  * @brief 
  */
@@ -41,7 +43,6 @@ class I3Particle : public TObject
   double energy_;
   double length_;
   double speed_;
-  map<string,double> user_; //!
   vector<I3Particle> composite_; //!
 
  public:
@@ -96,7 +97,7 @@ class I3Particle : public TObject
   void SetParticleID(ParticleID id) { id_ = id; }
 
   ParticleType GetParticleType() const { return type_; }
-  void SetType(ParticleType type) { type_ = type; }
+  void SetParticleType(ParticleType type) { type_ = type; }
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
@@ -118,8 +119,8 @@ class I3Particle : public TObject
   double GetY() const { return pos_.GetY(); }
   double GetZ() const { return pos_.GetZ(); }
 
-  double GetT() const { return time_; }
-  void SetT(double t) { time_ = t; }
+  double GetTime() const { return time_; }
+  void SetTime(double t) { time_ = t; }
 
   double GetLength() const { return length_; }
   void SetLength(double length) { length_ = length; }
@@ -129,9 +130,6 @@ class I3Particle : public TObject
 
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
-
-  const map<string,double>& GetParameters() const { return user_; }
-  map<string,double>& GetParameters() { return user_; }
 
   const vector<I3Particle>& GetComposite() const { return composite_; }
   vector<I3Particle>& GetComposite() { return composite_; }
@@ -158,7 +156,7 @@ class I3Particle : public TObject
     }
   }
 
-  double GetStartT() const {
+  double GetStartTime() const {
     if (type_==StartingTrack || type_==ContainedTrack) return time_;
     else return NAN;
   }
@@ -172,12 +170,13 @@ class I3Particle : public TObject
     }
   }
 
-  double GetStopT() const { 
+  double GetStopTime() const { 
     if (type_==StoppingTrack) return time_;
     else if (type_==ContainedTrack) { return time_ + length_/speed_; }
     else return NAN;
   }
 
+  void CopyTo(I3Particle& destination) const;
 
   void ToStream(ostream& o) const;
 

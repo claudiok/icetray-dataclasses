@@ -82,6 +82,8 @@ I3_POINTER_TYPEDEFS(I3RecoPulse);
 typedef I3Vector<I3RecoPulse> I3RecoPulseSeries;
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;
 
+I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
+
 #endif //I3RECOPULSE_H_INCLUDED
 
 
