@@ -12,13 +12,14 @@ using namespace I3Units;
 
 template <class Archive> 
 void 
-I3Direction::serialize (Archive& ar, unsigned version)
+I3Direction::serialize(Archive& ar, unsigned version)
 {
+  ar & make_nvp("TObject", base_object<TObject>(*this));
   ar & make_nvp("Zen", zenith_);
   ar & make_nvp("Azi", azimuth_);
 }
 
-I3_SERIALIZABLE(I3Direction);
+I3_SERIALIZABLE(I3Direction)
 
 //-----------------------------------------------------------
 I3Direction::I3Direction()

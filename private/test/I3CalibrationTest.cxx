@@ -1,10 +1,10 @@
 
 #include <I3Test.h>
 
-#include "dataclasses/I3Calibration.h"
-#include "dataclasses/I3InIceCalibration.h"
-#include "dataclasses/I3DOMCalibration.h"
-#include "dataclasses/I3CalibrationHeader.h"
+#include "dataclasses/calibration/I3Calibration.h"
+#include "dataclasses/calibration/I3InIceCalibration.h"
+#include "dataclasses/calibration/I3DOMCalibration.h"
+
 #include "dataclasses/I3Units.h"
 
 #include <string>

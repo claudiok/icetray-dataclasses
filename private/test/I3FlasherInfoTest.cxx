@@ -12,7 +12,7 @@
 
 #include <I3Test.h>
 
-#include "dataclasses/I3FlasherInfo.h"
+#include "dataclasses/physics/I3FlasherInfo.h"
 #include "icetray/I3Frame.h"
 
 using std::string;

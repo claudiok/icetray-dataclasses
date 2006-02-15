@@ -3,8 +3,8 @@ extern "C"
 #include "dataclasses/jday.h"
 }
 
+#include <icetray/serialization.h>
 #include "dataclasses/I3Time.h"
-
 #include <iostream>
 #include <cassert>
 
@@ -19,7 +19,7 @@ I3Time::I3Time()
 
 I3Time::~I3Time() {}
 
-I3Time::I3Time(unsigned int year, int64_t daqTime) : year_(year),daqTime_(daqTime)
+I3Time::I3Time(int32_t year, int64_t daqTime) : year_(year),daqTime_(daqTime)
 {
 }
 
@@ -30,14 +30,14 @@ void I3Time::SetDaqTime(int year,
   daqTime_ = daqTime;
 }
 
-void I3Time::SetModJulianTime(unsigned int modJulianDay,
-			      unsigned int sec,
+void I3Time::SetModJulianTime(int32_t modJulianDay,
+			      int32_t sec,
 			      double ns)
 {
   double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24.));
   year_ = yearOf(modjulian);
-  unsigned int daysafteryear = (unsigned int)(modjulian - modjulianday(year_));
-  unsigned int secsafteryear = daysafteryear * 3600 * 24 + sec;
+  int32_t daysafteryear = (int32_t)(modjulian - modjulianday(year_));
+  int32_t secsafteryear = daysafteryear * 3600 * 24 + sec;
   daqTime_ =
     ((int64_t)secsafteryear * ((int64_t)(1e10)))
     + ((int64_t)ns * ((int64_t)10));
@@ -54,16 +54,16 @@ int64_t I3Time::GetUTCDaqTime() const
   return daqTime_;
 }
 
-unsigned int I3Time::GetModJulianDay() const
+int32_t I3Time::GetModJulianDay() const
 {
-  return (unsigned int)modjulianday(year_,daqTime_);
+  return (int32_t)modjulianday(year_,daqTime_);
 }
 
-unsigned int I3Time::GetModJulianSec() const
+int32_t I3Time::GetModJulianSec() const
 {
-  unsigned int daysafteryear = 
-    (unsigned int)(modjulianday(year_,daqTime_) - modjulianday(year_));
-  unsigned int secsafteryear = 
+  int32_t daysafteryear = 
+    (int32_t)(modjulianday(year_,daqTime_) - modjulianday(year_));
+  int32_t secsafteryear = 
     (daqTime_ - daqTime_%((int64_t)(1e10)))/((int64_t)1e10);
   return secsafteryear - daysafteryear * 3600 * 24 ;
 }
@@ -139,7 +139,7 @@ I3Time::Weekday I3Time::GetUTCWeekday() const
 
 }
 
-unsigned int I3Time::GetUTCDayOfMonth() const
+int32_t I3Time::GetUTCDayOfMonth() const
 {
   double julday = julianday(year_,daqTime_);
   UTinstant i;
@@ -148,10 +148,10 @@ unsigned int I3Time::GetUTCDayOfMonth() const
   return i.day;
 }
 
-unsigned int I3Time::GetUTCSec() const
+int32_t I3Time::GetUTCSec() const
 {
   int64_t tenthsOfNs = daqTime_ %((int64_t)1e10);
-  unsigned int daqSecs = (daqTime_ - tenthsOfNs)/((int64_t)1e10);
+  int32_t daqSecs = (daqTime_ - tenthsOfNs)/((int64_t)1e10);
   return daqSecs;
 }
 
@@ -305,7 +305,7 @@ double I3Time::julianday(int year, int64_t daqTime)
   
 }
 
-unsigned int I3Time::yearOf(double modjulianday)
+int32_t I3Time::yearOf(double modjulianday)
 {
   double julianDay = modjulianday + 2400000.5;
   UTinstant i;
@@ -314,7 +314,7 @@ unsigned int I3Time::yearOf(double modjulianday)
   return i.year;
 }
 
-unsigned int I3Time::DayOfYear(double modjulianday)
+int32_t I3Time::DayOfYear(double modjulianday)
 {
     UTinstant i;
     double julianDay = modjulianday + 2400000.5;
@@ -324,12 +324,25 @@ unsigned int I3Time::DayOfYear(double modjulianday)
     return i.day_of_year;
 }
 
-unsigned int I3Time::DayOfYear(int64_t daqTime)
+int32_t I3Time::DayOfYear(int64_t daqTime)
 {
     int64_t tenthsOfNs = daqTime %((int64_t)1e10);
     int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
     int64_t daqSecsSinceDay = daqSecs % ((int64_t)(3600 * 24));
-    unsigned int day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24);
+    int32_t day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24);
 
     return day_of_year; 
 }
+
+
+template <class Archive>
+void 
+I3Time::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("TObject", base_object<TObject>(*this));
+  ar & make_nvp("Year", year_);
+  ar & make_nvp("DaqTime", daqTime_);
+}
+
+I3_SERIALIZABLE(I3Time);
+

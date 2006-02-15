@@ -1,12 +1,9 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Position.h
- * @version $Revision: 1.19 $
  * @date $Date$
- * @author dule
  */
 
 //***********************************************************
@@ -16,14 +13,14 @@
 
 // $Id$
 
-#ifndef I3POSITION_H
-#define I3POSITION_H
+#ifndef I3POSITION_H_INCLUDED
+#define I3POSITION_H_INCLUDED
 
 #include <math.h>
 using namespace std;
 
 #include "TObject.h"
-#include "StoragePolicy.h"
+#include "Utility.h"
 #include <sstream>
 
 /**
@@ -218,22 +215,26 @@ class I3Position : public TObject
   /**
    * cartesian (car)
    */ 
-  double x_, y_, z_;
+  double x_;
+  double y_;
+  double z_;
 
   /**
    * spherical (sph)
    */
-  mutable double r_, theta_, phi_;  
+  mutable double r_; //!
+  mutable double theta_; //!
+  mutable double phi_; //!
 
   /**
    * cylindrical (cyl) - Z and Phi are same.
    */
-  mutable double rho_;
+  mutable double rho_; //!
 
   /**
    * Did we calculate the positions before?
    */
-  mutable bool isCalculated_; 
+  mutable bool isCalculated_; //!
 
  private:
 
@@ -259,9 +260,6 @@ inline ostream& operator<<(ostream& o,const I3Position& pos)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3Position>  I3PositionPtr;
+I3_POINTER_TYPEDEFS(I3Position);
 
-#endif
+#endif //I3POSITION_H_INCLUDED

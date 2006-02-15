@@ -11,7 +11,7 @@
 
 */
 #include <I3Test.h>
-#include "dataclasses/I3Trigger.h"
+#include "dataclasses/physics/I3Trigger.h"
 
 // this is a typical minimal testsuite
 
@@ -29,12 +29,10 @@ TEST(assignment_copy)
   ENSURE(h.GetTriggerFired() == false);
   ENSURE(h.GetTriggerTime() == 0.0);
   ENSURE(h.GetTriggerLength() == 0.0);
-  ENSURE(h.GetSubDetector() == I3Trigger::Unknown);
   //Now set some values.
   j.SetTriggerTime(12345.67);
   j.SetTriggerLength(1567.89);
   j.SetTriggerFired(true);
-  j.SetSubDetector(I3Trigger::InIce);
   //test assignment one object to another
   h = j;
   //Check it correct.
@@ -44,6 +42,5 @@ TEST(assignment_copy)
   ENSURE_DISTANCE(j.GetTriggerLength(), h.GetTriggerLength(), 0.001,
 		  "trigger length simple assignment");
   ENSURE(j.GetTriggerFired() == j.GetTriggerFired());
-  ENSURE(j.GetSubDetector() == j.GetSubDetector());
 }
 

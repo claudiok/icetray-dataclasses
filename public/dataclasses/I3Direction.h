@@ -1,12 +1,9 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id$
- *
+ * @version $Id$
  * @file I3Direction.h
- * @version $Revision: 1.16 $
  * @date $Date$
- * @author dule
  */
 
 //***********************************************************
@@ -16,13 +13,13 @@
 
 // $Id$
 
-#ifndef I3DIRECTION_H
-#define I3DIRECTION_H
+#ifndef I3DIRECTION_H_INCLUDED
+#define I3DIRECTION_H_INCLUDED
 
 #include <math.h>
 #include <sstream>
 #include "TObject.h"
-#include "StoragePolicy.h"
+#include "Utility.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
 
@@ -48,9 +45,6 @@ class I3Direction : public TObject
 {
  public:
 
-  /**
-   * Default constructor
-   */
   I3Direction();
 
   /**
@@ -68,9 +62,6 @@ class I3Direction : public TObject
    */
   I3Direction(const I3Direction& d);
 
-  /**
-   * Destructor
-   */
   virtual ~I3Direction();
 
   //--------------
@@ -200,15 +191,22 @@ class I3Direction : public TObject
 
  protected:
   /**
-   * direction coordinates
+   * direction coordinates -- spherical
    */ 
-  double zenith_, azimuth_;
-  mutable double xDir_, yDir_, zDir_;
+  double zenith_;
+  double azimuth_;
+
+  /**
+   * direction coordinates -- cartesian (direction cosines)
+   */ 
+  mutable double xDir_; //!
+  mutable double yDir_; //!
+  mutable double zDir_; //!
 
   /**
    * Did we calculate the directions before?
    */
-  mutable bool isCalculated_; 
+  mutable bool isCalculated_; //!
 
  private:
   /**
@@ -245,9 +243,6 @@ inline ostream& operator<<(ostream& o,const I3Direction& dir)
   return o;
 }
 
-/**
- * pointer type to insulate users from memory management
- */
-typedef shared_ptr<I3Direction>  I3DirectionPtr;
+I3_POINTER_TYPEDEFS(I3Direction);
 
-#endif
+#endif //I3DIRECTION_H_INCLUDED
