@@ -122,6 +122,10 @@ class I3Particle : public TObject
   double GetTime() const { return time_; }
   void SetTime(double t) { time_ = t; }
 
+  // DO NOT REMOVE THESE UNTIL OFFLINE-SOFTWARE/TRUNK COMPILES WITHOUT THEM
+  double GetT() const { return time_; }
+  void SetT(double t) { time_ = t; }
+
   double GetLength() const { return length_; }
   void SetLength(double length) { length_ = length; }
 
