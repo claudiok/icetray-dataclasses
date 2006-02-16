@@ -45,7 +45,7 @@ namespace boost
 using boost::serialization::make_nvp;
 using boost::serialization::base_object;
 
-#include "icetray/services/I3Logging.h"
+#include <icetray/I3Logging.h>
 
 // for generating pointer typedefs in dataclass structures.
 // pointer to const object and pointer to object

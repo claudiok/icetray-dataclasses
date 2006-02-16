@@ -18,8 +18,7 @@
 #include <TObject.h>
 
 #include <dataclasses/Utility.h>
-#include "dataclasses/I3Map.h"
-#include "icetray/services/I3Logging.h"
+#include <dataclasses/I3Map.h>
 
 
 /**

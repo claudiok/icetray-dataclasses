@@ -19,9 +19,8 @@
 #include <sstream>
 #include <TObject.h>
 
-#include "dataclasses/TriggerKey.h"
-#include "icetray/services/I3Logging.h"
-#include "dataclasses/Utility.h"
+#include <dataclasses/TriggerKey.h>
+#include <dataclasses/Utility.h>
 
 
 /**

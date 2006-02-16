@@ -17,7 +17,7 @@
 #include <sstream>
 #include <TObject.h>
 
-#include "icetray/services/I3Logging.h"
+#include <icetray/I3Logging.h>
 
 
 /**
