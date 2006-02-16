@@ -3,13 +3,16 @@
 
 #include <vector>
 #include <TObject.h>
+#include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
 
 using namespace std;
 
 class I3Waveform : public TObject
 {
- public:
-  enum Source
+public:
+    enum Source
     {
       ATWD,
       FADC,
@@ -18,12 +21,13 @@ class I3Waveform : public TObject
       ETC
     };
 
- private:
+private:
   double startTime_;
   double binWidth_;
   vector<double> waveform_;
   Source source_;
   
+public:
   double GetStartTime() const {return startTime_;}
 
   void SetStartTime(double startTime){startTime_ = startTime;}
@@ -40,8 +44,14 @@ class I3Waveform : public TObject
 
   void SetSource(Source source){source_ = source;}
 
-  template<class Archive>
-    void serialize(Archive& ar, unsigned version);
+private:
+    friend class boost::serialization::access;
+    template<class Archive> void serialize(Archive& ar, unsigned version);
 };
+
+I3_POINTER_TYPEDEFS(I3Waveform);
+
+typedef I3Vector<I3Waveform> I3WaveformSeries;
+typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
 #endif
