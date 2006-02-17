@@ -12,6 +12,7 @@
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Units.h"
+#include "dataclasses/I3Vector.h"
 #include <TObject.h>
 #include <map>
 #include <string>
@@ -200,6 +201,9 @@ class I3Particle : public TObject
 };
 
 I3_POINTER_TYPEDEFS(I3Particle);
+
+typedef I3Vector<I3Particle> I3ParticleVect;
+I3_POINTER_TYPEDEFS(I3ParticleVect);
 
 #endif 
 
