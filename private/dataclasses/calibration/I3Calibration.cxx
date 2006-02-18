@@ -11,11 +11,10 @@ template <class Archive>
   void I3Calibration::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("TObject", base_object< TObject >(*this));
-    ar & make_nvp("InIceCalibration",inIceCalibration_);
-    ar & make_nvp("AMANDACalibration",AMANDACalibration_);
-    ar & make_nvp("IceTopCalibration",iceTopCalibration_);
-    ar & make_nvp("StartTime",startTime_);
-    ar & make_nvp("EndTime",endTime_);
+    ar & make_nvp("domcal",domcal);
+    ar & make_nvp("amandacal",amandacal);
+    ar & make_nvp("StartTime",startTime);
+    ar & make_nvp("EndTime",endTime);
   }
 
 

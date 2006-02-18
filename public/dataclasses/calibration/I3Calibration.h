@@ -13,72 +13,26 @@
 #define I3CALIBRATION_H_INCLUDED
 
 #include "dataclasses/Utility.h"
-#include "dataclasses/calibration/I3InIceCalibration.h"
-#include "dataclasses/calibration/I3AMANDACalibration.h"
+#include "dataclasses/calibration/I3DOMCalibration.h"
+#include "dataclasses/calibration/I3AMANDAOMCalibration.h"
 #include "dataclasses/I3Time.h"
+#include "dataclasses/OMKey.h"
 #include <icetray/I3FrameTraits.h>
 
 #include <TObject.h>
 
-class I3Calibration : public TObject
+struct I3Calibration : public TObject
 {
-  I3Time startTime_;
-  I3Time endTime_;
 public:
+  I3Time startTime;
+  I3Time endTime;
+
   I3Calibration() {};
     
   virtual ~I3Calibration();
     
-  I3Time GetStartTime() const { return startTime_;}
-
-  void SetStartTime(const I3Time& t) { startTime_ = t;}
-
-  void SetEndTime(const I3Time& t){endTime_ = t;}
-
-  I3Time GetEndTime() const { return endTime_;}
-
-  const I3InIceCalibration& GetInIceCalibration() const 
-  {
-    return inIceCalibration_;
-  };
-    
-    I3InIceCalibration& GetInIceCalibration() 
-	{
-	    return inIceCalibration_;
-	};
-
-    const I3AMANDACalibration& GetAMANDACalibration() const 
-	{
-	    return AMANDACalibration_;
-	};
-    
-    I3AMANDACalibration& GetAMANDACalibration() 
-	{
-	    return AMANDACalibration_;
-	};
-
-    const I3InIceCalibration& GetIceTopCalibration() const
-	    {
-	    return iceTopCalibration_;
-	    };
-    
-    I3InIceCalibration& GetIceTopCalibration() 
-	    {
-	    return iceTopCalibration_;
-	    };
-    
-    virtual void ToStream(ostream& o) const
-	{
-	    o<<"[ I3Calibration\n"<< inIceCalibration_ <<"]\n";
-	};
-    
-private:
-    I3InIceCalibration  inIceCalibration_;
-    I3AMANDACalibration AMANDACalibration_;
-    I3InIceCalibration  iceTopCalibration_;
-    
-    I3Calibration(const I3Calibration& calibration);
-    const I3Calibration& operator=(const I3Calibration& calibration);
+  map<OMKey, I3DOMCalibration> domcal;
+  map<OMKey, I3AMANDAOMCalibration> amandacal;
 
   friend class boost::serialization::access;
 
@@ -98,14 +52,7 @@ struct I3FrameTraits<const I3Calibration>
 };
 
 
-/** 
- * streaming operator
- */
-inline ostream& operator<<(ostream& o, const I3Calibration& calib)
-{
-    calib.ToStream(o);
-    return o;
-}
+
 
 I3_POINTER_TYPEDEFS(I3Calibration);
 

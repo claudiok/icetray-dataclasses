@@ -2,9 +2,8 @@
 #include <I3Test.h>
 
 #include "dataclasses/calibration/I3Calibration.h"
-#include "dataclasses/calibration/I3InIceCalibration.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
-
+#include "dataclasses/OMKey.h"
 #include "dataclasses/I3Units.h"
 
 #include <string>
@@ -19,11 +18,10 @@ TEST_GROUP(I3DOMCalibrationTest);
 // Test conversion back and forth from counts to volts
 TEST(bin_parameters)
 {	
-    I3Calibration* calib = new I3Calibration();
-      
-    I3InIceCalibration& inice_calib = calib->GetInIceCalibration();
+    I3CalibrationPtr calib(new I3Calibration());
+    OMKey omkey(20,20);
     
-    I3DOMCalibrationPtr dom_calib(new I3DOMCalibration);
+    I3DOMCalibration dom_calib;
     
     int id = 0;
     int channel = 0;
@@ -40,21 +38,20 @@ TEST(bin_parameters)
 
     double gain = -17.0;
     
-    dom_calib->SetTemperature(temp);
+    dom_calib.SetTemperature(temp);
     
-    dom_calib->SetATWDGain(channel,gain);
+    dom_calib.SetATWDGain(channel,gain);
     
-    dom_calib->SetATWDBinCalibFit(id,
+    dom_calib.SetATWDBinCalibFit(id,
 				  channel,
 				  bin,
 				  fit);
 
-    inice_calib[OMKey(20,20)] = dom_calib;
+    calib->domcal[omkey] = dom_calib;
     
-    I3DOMCalibrationPtr domptr = inice_calib[OMKey(20,20)];
       
     ENSURE_DISTANCE(gain, 
-		    domptr->GetATWDGain(channel), 
+		    calib->domcal[omkey].GetATWDGain(channel), 
 		    0.0001,
 		    "Failed to get proper gain from I3DOMCalibration");
       
@@ -62,18 +59,18 @@ TEST(bin_parameters)
 
     //check we got what we stored.
     ENSURE_DISTANCE(900.00,
-		    domptr->GetTemperature(),0.1,
+		    calib->domcal[omkey].GetTemperature(),0.1,
 		    "Temperature came back from storage with wrong value");
 
 
 
     ENSURE_DISTANCE(-0.002,
-		    domptr->GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
+		    calib->domcal[omkey].GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
 		    0.0001,
 		    "Failed to properly return fit slope (test1)");
 
     ENSURE_DISTANCE(2.9,
-		    domptr->GetATWDBinCalibFit(id,channel,bin).intercept/I3Units::V,
+		    calib->domcal[omkey].GetATWDBinCalibFit(id,channel,bin).intercept/I3Units::V,
 		    0.0001,
 		    "Failed to properly return count (test2)");
     
@@ -100,4 +97,5 @@ TEST(to_stream)
     
     dom_calib->ToStream(cout);
 }
+
 
