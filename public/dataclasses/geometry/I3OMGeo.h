@@ -20,6 +20,8 @@
 
 using namespace std;
 
+//Simple struct to contain all pertinent OM info.  
+//See I3Geometry.h for more info
 
 struct I3OMGeo
 {

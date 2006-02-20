@@ -17,18 +17,30 @@
 #include <icetray/I3FrameTraits.h>
 /*
   The following is a flattened version of the Geometry Class for dcv2
-  Instead of the 8 classes before, geometry has been reduced to 3.  
+  The 8 classes of old are now 3 structs.  
+
   (1) I3Geometry contains the 'master' data, namely the map of OMKey to OM 
   (for inice, icetop, and amanda), as well as the map of the stations.
+
   (2) I3OMGeo contains all the necessary information for a single OM, including
   an enum to specify what type of OM it is.
+
   (3) I3TankGeo which represents the 2 tanks within an icetop station.
 
   The major change is that there are no longer InIce and IceTop objects that
-  can be called from the geometry class.  When one needs to loop over the OMs,
-  simply use the map<OMKey, I3OMGeoPtr> omgeo in this struct.  Granted, it
-  has all the OMs, but the 
+  can be called from the geometry class.  Instead, one should call the
+  I3OMGeoMap object directly and use this.  Hence, a change would look like:
+  old: I3InIceGeometry inice = Geometry.GetInIceGeometry();
+  new: I3OMGeoMap geomap = Geometry.omgeo;
+
+  The other changes were minor (simply eliminating the Get/Set functions in
+  favor of direct setting) 
+
+  -bchristy
 */
+
+
+//Typedefs to avoid having to write the same thing over and over again.
 typedef vector<I3TankGeoPtr> I3StationGeo;
 I3_POINTER_TYPEDEFS(I3StationGeo)
 
@@ -43,7 +55,11 @@ struct I3Geometry:public TObject
   I3Geometry(){};
   virtual ~I3Geometry();
 
+  //Map of all OMs based on their OMKey
   I3OMGeoMap omgeo;
+
+  //Map of all the stations. 
+  //Each int specifies a StationGeo object, which is a vector of 2 TankGeo's.
   I3StationGeoMap stationgeo;
 
   I3Time startTime;
