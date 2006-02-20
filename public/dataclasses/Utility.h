@@ -11,13 +11,14 @@
 #include "TObject.h"
 #include <stdint.h> //int64_t, etc
 #include "dataclasses/copy_if.h"
+#include <icetray/IcetrayFwd.h>
+
 
 namespace boost 
 {
   namespace serialization 
   {
     // normal forward declarations:
-    class access;
     template <class T> struct nvp;
     template <class T> const nvp<T> make_nvp(const char* name, T& t);
 
@@ -47,12 +48,4 @@ using boost::serialization::base_object;
 
 #include <icetray/I3Logging.h>
 
-// for generating pointer typedefs in dataclass structures.
-// pointer to const object and pointer to object
-#define I3_POINTER_TYPEDEFS(class) \
-typedef shared_ptr<class> class##Ptr; \
-typedef shared_ptr<const class> class##ConstPtr;
-
-
 #endif 
-
