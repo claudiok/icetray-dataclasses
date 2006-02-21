@@ -123,10 +123,6 @@ class I3Particle : public TObject
   double GetTime() const { return time_; }
   void SetTime(double t) { time_ = t; }
 
-  // DO NOT REMOVE THESE UNTIL OFFLINE-SOFTWARE/TRUNK COMPILES WITHOUT THEM
-  double GetT() const { return time_; }
-  void SetT(double t) { time_ = t; }
-
   double GetLength() const { return length_; }
   void SetLength(double length) { length_ = length; }
 
@@ -181,9 +177,13 @@ class I3Particle : public TObject
     else return NAN;
   }
 
-  void CopyTo(I3Particle& destination) const;
-
   void ToStream(ostream& o) const;
+
+  const string ToString() const {
+    ostringstream out;
+    ToStream(out);
+    return out.str();
+  }
 
   // don't take these out until the projects that use them are updated.
   const map<string,double>& GetParameters() const { return user_; }
