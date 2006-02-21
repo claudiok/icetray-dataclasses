@@ -27,16 +27,58 @@ class I3Particle : public TObject
     
  public:
 
-  enum ParticleID { null, e, mu };
-  enum ParticleType { Null, Primary, TopShower, Cascade, InfiniteTrack, 
-		      StartingTrack, StoppingTrack, ContainedTrack };
+  enum MCParticleType {
+    unknown = -100,
+    Gamma = 1,
+    EPlus = 2,
+    EMinus = 3,
+    Nu = 4,
+    MuPlus = 5,
+    MuMinus = 6,
+    Pi0 = 7,
+    PiPlus = 8,
+    PiMinus = 9,
+    PPlus = 14,
+    PMinus = 15,
+    TauPlus = 33,
+    TauMinus = 34,
+    Monopole = 41,
+    NuE = 201,
+    NuMu = 202,
+    NuTau = 203,
+    NuEBar = 204,
+    NuMuBar = 205,
+    NuTauBar = 206,
+    Brems = 1001,
+    DeltaE = 1002,
+    PairProd = 1003,
+    NuclInt = 1004,
+    MuPair = 1005,
+    Hadrons = 1006,
+    FiberLaser = 2100,
+    N2Laser = 2101,
+    YAGLaser = 2201,
+    ZPrimary = 3000,
+    APrimary = 3500,
+    Elph = 9999
+  };
+  enum ParticleType { 
+    Null, 
+    Primary, 
+    TopShower, 
+    Cascade, 
+    InfiniteTrack, 
+    StartingTrack, 
+    StoppingTrack, 
+    ContainedTrack
+  };
 
  private:
 
-  int number_;
+  int ID_;
   int parentID_;
-  int primID_;
-  ParticleID id_;
+  int primaryID_;
+  MCParticleType mctype_;
   ParticleType type_;
   I3Position pos_;
   I3Direction dir_;
@@ -49,10 +91,10 @@ class I3Particle : public TObject
  public:
 
   I3Particle() : 
-    number_(-1),
+    ID_(-1),
     parentID_(-1),
-    primID_(-1),
-    id_(null),
+    primaryID_(-1),
+    mctype_(unknown),
     type_(Null),
     pos_(),
     dir_(),
@@ -85,20 +127,20 @@ class I3Particle : public TObject
     else return false;
   }
 
-  int GetParticleNumber() const { return number_; }
-  void SetParticleNumber(int number) { number_ = number; }
+  int GetID() const { return ID_; }
+  void SetID(int id) { ID_ = id; }
 
   int GetParentID() const { return parentID_; }
   void SetParentID(int id) { parentID_ = id; }
 
-  int GetPrimaryID() const { return primID_; }
-  void SetPrimaryID(int id) { primID_ = id; }
+  int GetPrimaryID() const { return primaryID_; }
+  void SetPrimaryID(int id) { primaryID_ = id; }
 
-  ParticleID GetParticleID() const { return id_; }
-  void SetParticleID(ParticleID id) { id_ = id; }
+  MCParticleType GetMCType() const { return mctype_; }
+  void SetMCType(MCParticleType mctype) { mctype_ = mctype; }
 
-  ParticleType GetParticleType() const { return type_; }
-  void SetParticleType(ParticleType type) { type_ = type; }
+  ParticleType GetType() const { return type_; }
+  void SetType(ParticleType type) { type_ = type; }
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }

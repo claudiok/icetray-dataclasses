@@ -7,7 +7,10 @@ I3Particle::~I3Particle() {}
 
 void I3Particle::ToStream(ostream& o) const
 {
-  o<<"ID: "<<id_<<"\n";
+  o<<"ID: "<<ID_<<"\n";
+  o<<"ParentID: "<<parentID_<<"\n";
+  o<<"PrimaryID: "<<primaryID_<<"\n";
+  o<<"MCType: "<<mctype_<<"\n";
   o<<"Type: "<<type_<<"\n";
   o<<"Position:\n"<<pos_;
   o<<"Direction:\n"<<dir_;
@@ -26,8 +29,11 @@ template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("TObject", base_object<TObject>(*this));
-    ar & make_nvp("id",id_);
-    ar & make_nvp("type",type_);
+    ar & make_nvp("ID",ID_);
+    ar & make_nvp("ParentID",parentID_);
+    ar & make_nvp("PrimaryID",primaryID_);
+    ar & make_nvp("MCType",mctype_);
+    ar & make_nvp("Type",type_);
     ar & make_nvp("pos",pos_);
     ar & make_nvp("dir",dir_);
     ar & make_nvp("time",time_);
