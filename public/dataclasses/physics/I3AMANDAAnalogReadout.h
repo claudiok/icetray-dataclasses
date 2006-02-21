@@ -14,6 +14,9 @@
 
 #include "TObject.h"
 #include "dataclasses/Utility.h"
+#include "dataclasses/I3Vector.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
 
 /**
  * @brief Old-style AMANDA ADC/TDC readout
@@ -142,6 +145,11 @@ private:
 };
 
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);
+
+typedef I3Vector<I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutSeries;
+typedef I3Map<OMKey, I3AMANDAAnalogReadoutSeries> I3AMANDAAnalogReadoutSeriesMap;
+
+I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadoutSeriesMap);
 
 #endif //I3AMANDAANALOGREADOUT_H_INCLUDED
 
