@@ -146,10 +146,9 @@ private:
 
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);
 
-typedef I3Vector<I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutSeries;
-typedef I3Map<OMKey, I3AMANDAAnalogReadoutSeries> I3AMANDAAnalogReadoutSeriesMap;
+typedef I3Map<OMKey, I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutMap;
 
-I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadoutSeriesMap);
+I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadoutMap);
 
 #endif //I3AMANDAANALOGREADOUT_H_INCLUDED
 
