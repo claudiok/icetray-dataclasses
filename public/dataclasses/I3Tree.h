@@ -13,7 +13,7 @@
 #define I3_TREE_H_INCLUDED
 
 #include <TObject.h>
-#include <tree.hh>
+#include <dataclasses/external/tree.hh>
 
 
 template <typename T>

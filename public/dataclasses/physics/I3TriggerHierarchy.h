@@ -12,7 +12,7 @@
 #define I3_TRIGGER_HIERARCHY_H_INCLUDED
 
 #include "dataclasses/I3Tree.h"
-#include "dataclasses/I3Trigger.h"
+#include "dataclasses/physics/I3Trigger.h"
 
 typedef I3Tree<I3Trigger> I3TriggerHierarchy;
 
