@@ -138,7 +138,7 @@ private:
 
   // private copy constructors and assignment
   I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout& other);
-  I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout& other);
+  //  I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout& other);
 
   // ROOT macro
   //ClassDef(I3AMANDAAnalogReadout,2);
@@ -147,7 +147,6 @@ private:
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);
 
 typedef I3Map<OMKey, I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutMap;
-
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadoutMap);
 
 #endif //I3AMANDAANALOGREADOUT_H_INCLUDED
