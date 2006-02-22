@@ -41,13 +41,13 @@
 
 
 //Typedefs to avoid having to write the same thing over and over again.
-typedef vector<I3TankGeoPtr> I3StationGeo;
+typedef vector<I3TankGeo> I3StationGeo;
 I3_POINTER_TYPEDEFS(I3StationGeo)
 
-typedef map<OMKey, I3OMGeoPtr> I3OMGeoMap;
+typedef map<OMKey, I3OMGeo> I3OMGeoMap;
 I3_POINTER_TYPEDEFS(I3OMGeoMap)
 
-typedef map<int, I3StationGeoPtr> I3StationGeoMap;
+typedef map<int, I3StationGeo> I3StationGeoMap;
 I3_POINTER_TYPEDEFS(I3StationGeoMap)
 
 struct I3Geometry:public TObject
