@@ -137,7 +137,9 @@ private:
   BOOST_SERIALIZATION_SPLIT_MEMBER();
 
   // private copy constructors and assignment
-  I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout& other);
+  // I commented these out for version 2.  Pretty sure that was the
+  // right thing to do.  (proth)
+  //  I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout& other);
   //  I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout& other);
 
   // ROOT macro
