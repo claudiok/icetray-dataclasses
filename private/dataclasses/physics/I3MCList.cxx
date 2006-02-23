@@ -6,7 +6,7 @@ I3MCList::~I3MCList() {}
 template <class Archive>
   void I3MCList::serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("I3MCList", base_object< I3Vector<I3ParticlePtr> >(*this));
+    ar & make_nvp("I3MCList", base_object< I3Vector<I3Particle> >(*this));
   }
   
 

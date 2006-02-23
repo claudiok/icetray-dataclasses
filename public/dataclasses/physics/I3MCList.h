@@ -15,7 +15,7 @@
 /**
  * @brief Track is for vanilla track (i.e. not cascade)
   */
-class I3MCList : public I3Vector<I3ParticlePtr>
+class I3MCList : public I3Vector<I3Particle>
 {
  public:
 
