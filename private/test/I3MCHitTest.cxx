@@ -11,6 +11,7 @@
 
 */
 #include <I3Test.h>
+#include <cmath>
 #include "dataclasses/physics/I3MCHit.h"
 
 // this is a typical minimal testsuite
@@ -25,8 +26,8 @@ TEST_GROUP(I3MCHitTest);
 TEST(assignment_copy)
 {
   I3MCHit h, j;
-  ENSURE(h.GetWeight() == 0);
-  ENSURE(h.GetParticleID() == 0);
+  ENSURE(isnan(h.GetWeight()));
+  ENSURE(h.GetParticleID()==-1);
   j.SetWeight(M_PI);
   j.SetParticleID(rand()%256);
   j.SetCherenkovDistance(123.45);
