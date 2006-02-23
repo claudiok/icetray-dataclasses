@@ -141,7 +141,7 @@ public:
   /**
    * Get gain and error on gain for ATWD by channel
    */
-  const double GetATWDGain(unsigned int channel);
+  double GetATWDGain(unsigned int channel) const;
   /**
    * Set gain and error on gain for ATWD (specified by channel).
    */
@@ -151,7 +151,7 @@ public:
    * Get fit parameters from domcal file <atwdfreq> which is 
    * the sampling rate calibration for each ATWD chip 0 or 1 
    */
-  const QuadraticFit GetATWDFreqFit(unsigned int chip);
+  QuadraticFit GetATWDFreqFit (unsigned int chip) const;
     
   /**
    * Set parameters for sampling rate calibration for each 
@@ -166,9 +166,9 @@ public:
    * counts to volts.
    */
 
-  const LinearFit GetATWDBinCalibFit(unsigned int id,	
+  LinearFit GetATWDBinCalibFit(unsigned int id,	
 				     unsigned int channel,
-				     unsigned int bin);
+				     unsigned int bin) const;
 
   /**
    * Set parameters for conversion of count to voltage 
@@ -232,7 +232,7 @@ private:
   /**
    *  A convienence function to index these two mega-maps
    */
-  map< unsigned int, map<unsigned int,LinearFit> >& GetATWDBinParameters(unsigned int id);
+  map< unsigned int, map<unsigned int,LinearFit> >& GetATWDBinParameters(unsigned int id) const;
 
   /** 
    *  DOMCAL calculated pmt transit time fit function.

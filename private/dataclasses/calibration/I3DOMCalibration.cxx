@@ -21,9 +21,10 @@ I3DOMCalibration::I3DOMCalibration()
 /**
  * @todo  should put some checks on the channel, bin.  Make sure they are legit
  */
-const LinearFit I3DOMCalibration::GetATWDBinCalibFit(unsigned int id, 
+LinearFit I3DOMCalibration::GetATWDBinCalibFit (unsigned int id, 
 						     unsigned int channel, 
-						     unsigned int bin)
+						     unsigned int bin) const 
+
     {
     if(channel<N_ATWD_CHANNELS&&bin<N_ATWD_BINS)
 	{
@@ -45,13 +46,14 @@ void I3DOMCalibration::SetATWDBinCalibFit(unsigned int id,
     }
 
 //EKB
-const QuadraticFit I3DOMCalibration::GetATWDFreqFit(unsigned int chip) 
+QuadraticFit I3DOMCalibration::GetATWDFreqFit(unsigned int chip)const
     {
-    if ( ! atwdFreq_.count(chip) )
+      map<unsigned int, QuadraticFit>::const_iterator iter = atwdFreq_.find(chip);
+      if ( iter == atwdFreq_.end() )
 	{
-	log_fatal("Frequency calib not found for ATWD chip in I3DOMCalibration");
+	  log_fatal("Frequency calib not found for ATWD chip in I3DOMCalibration");
 	}
-    return atwdFreq_[chip];    
+      return  iter->second;    
     }
 
 //EKB
@@ -63,14 +65,14 @@ void I3DOMCalibration::SetATWDFreqFit(unsigned int chip,
 
 //EKB
 map<unsigned int,map<unsigned int,LinearFit> >& 
-I3DOMCalibration::GetATWDBinParameters(unsigned int id)
+I3DOMCalibration::GetATWDBinParameters(unsigned int id) const
     {
     switch(id)
 	{
 	case 0:
-	    return atwdBin0_;
+	    return const_cast < map< unsigned int, map<unsigned int,LinearFit> >& > (atwdBin0_);
 	case 1:
-	    return atwdBin1_;
+	    return const_cast < map< unsigned int, map<unsigned int,LinearFit> >& > (atwdBin1_);
 	default:
 	{
 	log_fatal("Invalid ATWD Id in I3DOMCalibration::GetATWDBinParameters(Id)");
@@ -85,14 +87,14 @@ void I3DOMCalibration::SetATWDGain(unsigned int channel,
     ampGains_.insert(pair<int,double> (channel, gain));
     }
 //EKB
-const double I3DOMCalibration::GetATWDGain(unsigned int channel)
+ double I3DOMCalibration::GetATWDGain(unsigned int channel) const
     {
-    if ( ! ampGains_.count(channel) )
+      map<unsigned int, double>::const_iterator iter = ampGains_.find(channel);
+      if ( iter == ampGains_.end() )
 	{
-	log_fatal("Gain not found for ATWD channel in I3DOMCalibration");
+	  log_fatal("Gain not found for ATWD channel in I3DOMCalibration");
 	}
-    
-    return ampGains_[channel];
+      return  iter->second;      
     }
 
 template <class Archive>
