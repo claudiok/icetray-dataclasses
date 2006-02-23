@@ -56,9 +56,6 @@ private:
   void serialize(Archive& ar, unsigned version);
 };
 
-
-
-
 /**
  * @brief Class that stores the calibration information for a DOM
  * 
@@ -166,9 +163,9 @@ public:
    * counts to volts.
    */
 
-  LinearFit GetATWDBinCalibFit(unsigned int id,	
-				     unsigned int channel,
-				     unsigned int bin) const;
+  const LinearFit& GetATWDBinCalibFit(unsigned int id,	
+				      unsigned int channel,
+				      unsigned int bin) const;
 
   /**
    * Set parameters for conversion of count to voltage 
@@ -196,8 +193,11 @@ public:
   };
     
 private:
-  static const unsigned int N_ATWD_BINS;
-  static const unsigned int N_ATWD_CHANNELS;
+  static const unsigned int N_ATWD_BINS = 128;
+  
+  //  Number of ATWD channels is set to 3 (4th ATWD channel doesn't
+  //  have DOMCAL now)
+  static const unsigned int N_ATWD_CHANNELS = 3;
 
   double  temperature_;
     
@@ -227,12 +227,18 @@ private:
    * First key corresponds to channel.
    * Key in internal map corresponds to bin.
    */
-  map< unsigned int, map<unsigned int,LinearFit> > atwdBin0_;
-  map< unsigned int, map<unsigned int,LinearFit> > atwdBin1_;
+  typedef map<unsigned, map<unsigned, LinearFit> > ATWDBinParam_t;
+
+  ATWDBinParam_t atwdBin0_, atwdBin1_;
   /**
    *  A convienence function to index these two mega-maps
    */
-  map< unsigned int, map<unsigned int,LinearFit> >& GetATWDBinParameters(unsigned int id) const;
+
+  const ATWDBinParam_t& 
+  GetATWDBinParameters(unsigned int id) const;
+
+  ATWDBinParam_t& 
+  GetATWDBinParameters(unsigned int id);
 
   /** 
    *  DOMCAL calculated pmt transit time fit function.
