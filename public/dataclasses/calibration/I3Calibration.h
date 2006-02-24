@@ -34,8 +34,6 @@ public:
   map<OMKey, I3DOMCalibration> domcal;
   map<OMKey, I3AMANDAOMCalibration> amandacal;
 
-  friend class boost::serialization::access;
-
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 

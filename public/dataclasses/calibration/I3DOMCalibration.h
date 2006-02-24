@@ -32,9 +32,6 @@ struct LinearFit
   double slope;
   double intercept;
     
-private: 
-  friend class boost::serialization::access;
-    
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 };
@@ -48,9 +45,6 @@ struct QuadraticFit
   double quadFitA;
   double quadFitB;
   double quadFitC;
-    
-private: 
-  friend class boost::serialization::access;
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -191,6 +185,9 @@ public:
     ToStream(out);
     return out.str();
   };
+  
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version);
     
 private:
   static const unsigned int N_ATWD_BINS = 128;
@@ -247,10 +244,6 @@ private:
   LinearFit pmtTransitTime_;
   LinearFit hvGainRelation_;
 
-  friend class boost::serialization::access;
-
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version);
 };
 
 /**
