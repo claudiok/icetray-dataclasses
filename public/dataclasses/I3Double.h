@@ -1,27 +1,23 @@
-#ifndef I3DOUBLE_H
-#define I3DOUBLE_H
+#ifndef DATACLASSES_I3DOUBLE_H_INCLUDED
+#define DATACLASSES_I3DOUBLE_H_INCLUDED
 
 #include <TObject.h>
 #include <dataclasses/Utility.h>
 
 // Basically stole pretz form of I3Bool and made a double out of it
+// Revised by stealing troy's I3Bool revision.
 
-class I3Double : public TObject
+struct I3Double : public TObject
 {
- public:
-  operator double() const
-    {
-      return value_;
-    }
+  double value;
   
-  I3Double(double value) : value_(value){}
-
-  I3Double() : value_(0.0){}
+  I3Double();
+  I3Double(double d);
+  I3Double(const I3Double&);
+  I3Double& operator=(const I3Double&);
 
   template <typename Archive>
     void serialize(Archive&,unsigned);
- private:
-  double value_;
 };
 
 I3_POINTER_TYPEDEFS(I3Double);
