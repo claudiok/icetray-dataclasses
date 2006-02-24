@@ -31,8 +31,8 @@ public:
     
   virtual ~I3Calibration();
     
-  map<OMKey, I3DOMCalibration> domcal;
-  map<OMKey, I3AMANDAOMCalibration> amandacal;
+  map<OMKey, I3DOMCalibration> domCal;
+  map<OMKey, I3AMANDAOMCalibration> amandaCal;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };

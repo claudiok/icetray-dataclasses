@@ -11,8 +11,8 @@ template <class Archive>
   void I3Calibration::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("TObject", base_object< TObject >(*this));
-    ar & make_nvp("domcal",domcal);
-    ar & make_nvp("amandacal",amandacal);
+    ar & make_nvp("domcal",domCal);
+    ar & make_nvp("amandacal",amandaCal);
     ar & make_nvp("StartTime",startTime);
     ar & make_nvp("EndTime",endTime);
   }

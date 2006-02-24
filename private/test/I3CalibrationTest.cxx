@@ -47,11 +47,11 @@ TEST(bin_parameters)
 				  bin,
 				  fit);
 
-    calib->domcal[omkey] = dom_calib;
+    calib->domCal[omkey] = dom_calib;
     
       
     ENSURE_DISTANCE(gain, 
-		    calib->domcal[omkey].GetATWDGain(channel), 
+		    calib->domCal[omkey].GetATWDGain(channel), 
 		    0.0001,
 		    "Failed to get proper gain from I3DOMCalibration");
       
@@ -59,18 +59,18 @@ TEST(bin_parameters)
 
     //check we got what we stored.
     ENSURE_DISTANCE(900.00,
-		    calib->domcal[omkey].GetTemperature(),0.1,
+		    calib->domCal[omkey].GetTemperature(),0.1,
 		    "Temperature came back from storage with wrong value");
 
 
 
     ENSURE_DISTANCE(-0.002,
-		    calib->domcal[omkey].GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
+		    calib->domCal[omkey].GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
 		    0.0001,
 		    "Failed to properly return fit slope (test1)");
 
     ENSURE_DISTANCE(2.9,
-		    calib->domcal[omkey].GetATWDBinCalibFit(id,channel,bin).intercept/I3Units::V,
+		    calib->domCal[omkey].GetATWDBinCalibFit(id,channel,bin).intercept/I3Units::V,
 		    0.0001,
 		    "Failed to properly return count (test2)");
     
