@@ -5,7 +5,7 @@ const char* I3FrameTraits<I3DetectorStatus>::defaultName = "DetectorStatus";
 
 const char* I3FrameTraits<const I3DetectorStatus>::defaultName = "DetectorStatus";
 
-//I3DetectorStatus::~I3DetectorStatus() {}
+I3DetectorStatus::~I3DetectorStatus() {}
 
 template <class Archive>
 void 

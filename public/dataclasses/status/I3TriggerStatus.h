@@ -18,7 +18,7 @@
 #include <TObject.h>
 
 #include <dataclasses/Utility.h>
-#include <dataclasses/I3Map.h>
+#include <map>
 
 
 /**
@@ -34,7 +34,7 @@ class I3TriggerStatus : public TObject
 {
 private:
   std::string name_;
-  I3Map<std::string, int> settings_;
+  map<std::string, int> settings_;
 
 public:
 
@@ -50,7 +50,7 @@ public:
    * @param settings Trigger settings: string, integer values.
    */
   I3TriggerStatus(const std::string& name,
-                  const I3Map<std::string, int>& settings)
+                  const map<std::string, int>& settings)
     : name_(name), settings_(settings) {}
   
   /**
@@ -72,8 +72,8 @@ public:
    * @return Trigger settings: string, integer values
    * (contents vary by trigger type).
    */
-  virtual const I3Map<std::string, int>& GetTriggerSettings() const { return settings_; }
-  virtual I3Map<std::string, int>& GetTriggerSettings() { return settings_; }  
+  virtual const map<std::string, int>& GetTriggerSettings() const { return settings_; }
+  virtual map<std::string, int>& GetTriggerSettings() { return settings_; }  
 
   virtual void ToStream(std::ostream& o) const
   {
@@ -83,7 +83,7 @@ public:
     if(!settings_.empty())
     {
       o << "\n Settings:";
-      for(I3Map<std::string, int>::const_iterator iter = settings_.begin();
+      for(map<std::string, int>::const_iterator iter = settings_.begin();
           iter != settings_.end();
           ++iter)
         o << "\n  " << iter->first << ": " << iter->second;

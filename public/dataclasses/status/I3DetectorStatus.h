@@ -30,6 +30,8 @@
  *            map of active domhubs (and their settings)...eventually
  *
  */
+#include <TObject.h>
+
 struct I3DetectorStatus : public TObject
 {
   I3Time startTime;
@@ -37,17 +39,15 @@ struct I3DetectorStatus : public TObject
   map<OMKey,I3DOMStatus> domStatus;
   map<TriggerKey, I3TriggerStatus> triggerStatus;
   
-  //I3DetectorStatus() {};
+  I3DetectorStatus() {};
   
-  //virtual ~I3DetectorStatus();
+  virtual ~I3DetectorStatus();
   
   //These might be good someday.  Impl when needed
   //DaqMode daqMode;
   //FilterMode filterMode;
   
 
-  friend class boost::serialization::access;
-  
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 

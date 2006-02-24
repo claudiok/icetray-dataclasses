@@ -87,8 +87,6 @@ struct I3DOMStatus : public TObject
   unsigned int fbRate;
 
 
-  friend class boost::serialization::access;
-
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
