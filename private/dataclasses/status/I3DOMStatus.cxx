@@ -20,6 +20,7 @@ void I3DOMStatus::serialize (Archive& ar, unsigned version)
   ar & make_nvp("fePedestal",fePedestal);
   ar & make_nvp("dacTriggerBias0",dacTriggerBias0);
   ar & make_nvp("dacTriggerBias1",dacTriggerBias1);
+  ar & make_nvp("dacFADCRef",dacFADCRef);
   ar & make_nvp("nBinsATWD0",nBinsATWD0);
   ar & make_nvp("nBinsATWD1",nBinsATWD1);
   ar & make_nvp("nBinsATWD2",nBinsATWD2);

@@ -72,6 +72,11 @@ struct I3DOMStatus : public TObject
    * Sets ATWD1 sampling speed. Higher DAC setting is faster sample rate.
    */
   double dacTriggerBias1;
+
+  /**
+   * FADC_DAC_REF - reference setting for FADC baseline
+   */
+  double dacFADCRef;
   
   unsigned int nBinsATWD0;
   unsigned int nBinsATWD1;

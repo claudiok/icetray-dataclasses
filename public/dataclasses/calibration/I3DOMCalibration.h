@@ -115,19 +115,22 @@ public:
   /**
    * Get FADC Pedestal- baseline point from which waveforms start.
    */
-  double GetFADCPedestal() const { return fadcPedestal_; }
+  LinearFit GetFADCBaselineFit() const { return fadcBaselineFit_ ; }
 
   /**
    * Set FADC calibration parameters. Currently the FADC
    * calibration is a work in progress and a moving target
    * so this is only a tentative interface -tpm
    */
-  void SetFADCParameters(double pedestal,
-			 double gain)
+  void SetFADCGain(double gain)
   {
-    fadcPedestal_ = pedestal;
     fadcGain_     = gain;
   };
+
+  void SetFADCBaselineFit(LinearFit basefit)
+    {
+      fadcBaselineFit_ = basefit;
+    }
     
   /**
    * Get gain and error on gain for ATWD by channel
@@ -202,7 +205,7 @@ private:
    * Gain and pedestal values for FADC
    */
   double fadcGain_;
-  double fadcPedestal_;
+  LinearFit fadcBaselineFit_;
 
   /**
    * Gain for ATWD channels.

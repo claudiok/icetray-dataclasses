@@ -76,3 +76,14 @@ double SPEMean (const I3DOMStatus& status ,
   }
   return spemean;
 }
+
+double FADCBaseline (const I3DOMStatus& status , 
+		     const I3DOMCalibration& calib)
+{
+  const LinearFit fadcbase = calib.GetFADCBaselineFit();
+  double dacFADCRef = status.dacFADCRef;
+  
+  double baseline = fadcbase.slope * dacFADCRef + fadcbase.intercept;
+
+  return baseline;
+}

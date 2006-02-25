@@ -35,6 +35,9 @@ double PMTGain (const I3DOMStatus& , const I3DOMCalibration&);
  */
 double SPEMean (const I3DOMStatus& , const I3DOMCalibration&);
 
-
+/**
+ * Get the FADC baseline (in counts)
+ */
+double FADCBasline (const I3DOMStatus& , const I3DOMCalibration&);
 
 #endif //I3DOMFUNCTIONS_H_INCLUDED
