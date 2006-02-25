@@ -34,6 +34,12 @@ struct LinearFit
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
+  LinearFit()
+  {
+    slope = NAN;
+    intercept = NAN;
+  }
+
 };
 
 /**
@@ -48,6 +54,13 @@ struct QuadraticFit
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
+  QuadraticFit()
+  {
+    quadFitA = NAN;
+    quadFitB = NAN;
+    quadFitC = NAN;
+  }
+
 };
 
 /**
