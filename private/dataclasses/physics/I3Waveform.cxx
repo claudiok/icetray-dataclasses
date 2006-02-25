@@ -12,3 +12,5 @@ template <class Archive>
   }
 
 I3_SERIALIZABLE(I3Waveform);
+I3_SERIALIZABLE(I3WaveformSeries);
+I3_SERIALIZABLE(I3WaveformSeriesMap);
