@@ -10,3 +10,5 @@ template <class Archive>
     ar & make_nvp("waveform",waveform_);
     ar & make_nvp("source",source_);
   }
+
+I3_SERIALIZABLE(I3Waveform);

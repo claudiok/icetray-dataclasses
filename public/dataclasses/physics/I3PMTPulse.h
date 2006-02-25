@@ -65,11 +65,7 @@ private:
 
   friend class boost::serialization::access;
 
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version)
-  {
-    ar & make_nvp("HitNum", hitNum_);
-  }
+  template <class Archive>void serialize(Archive& ar, unsigned version);
 
   //ROOT macro
   //ClassDef(I3PMTPulse, 1);
