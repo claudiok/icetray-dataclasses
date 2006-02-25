@@ -68,7 +68,7 @@ double SPEMean (const I3DOMStatus& status ,
   //First use PMTGain() to get the gain
   double pmtgain = PMTGain(status,calib);
   if(pmtgain>0.0) {
-    spemean = pmtgain *I3Units::eSI; 
+    spemean = pmtgain *I3Units::eSI*I3Units::pC; 
   }
   else {
     log_warn("DOM gain is zero.  SPE also zero");
