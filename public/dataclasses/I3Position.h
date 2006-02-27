@@ -232,8 +232,6 @@ class I3Position : public I3FrameObject
   void CalcCarCylFromSph();
   void CalcCarSphFromCyl();
 
-  // ROOT macro
-  ClassDef(I3Position,1)
 };
 
 I3_POINTER_TYPEDEFS(I3Position);

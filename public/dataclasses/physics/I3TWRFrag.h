@@ -15,32 +15,31 @@ using namespace std;
 
 class I3TWRFrag 
 {
-  Int_t            id;
-  Int_t            parent_id;
-  Float_t          frag_start_time;
-  Int_t            frag_start_bin;
-  vector<Double_t> waveform;
+  int            id;
+  int            parent_id;
+  float          frag_start_time;
+  int            frag_start_bin;
+  vector<double> waveform;
 
   public:
   I3TWRFrag() {id=0; frag_start_time=NAN; frag_start_bin=0;}
   virtual ~I3TWRFrag();
 
-  Int_t          GetId() {return id;}
-  void           SetId(Int_t id_) {id=id_;}
-  Int_t          GetParentId() {return id;}
-  void           SetParentId(Int_t parent_id_) {parent_id=parent_id_;}
-  Float_t        GetStartTime() {return frag_start_time;}
-  void           SetStartTime(Float_t frag_start_time_) {frag_start_time=frag_start_time_;}
-  Int_t          GetStartBin() {return frag_start_bin;}
-  void           SetStartBin(Int_t frag_start_bin_) {frag_start_bin=frag_start_bin_;}
+  int          GetId() {return id;}
+  void           SetId(int id_) {id=id_;}
+  int          GetParentId() {return id;}
+  void           SetParentId(int parent_id_) {parent_id=parent_id_;}
+  float        GetStartTime() {return frag_start_time;}
+  void           SetStartTime(float frag_start_time_) {frag_start_time=frag_start_time_;}
+  int          GetStartBin() {return frag_start_bin;}
+  void           SetStartBin(int frag_start_bin_) {frag_start_bin=frag_start_bin_;}
   
-  vector<Double_t>& GetWaveform() {return waveform;}
+  vector<double>& GetWaveform() {return waveform;}
 
   private:
   friend class boost::serialization::access;
   template<class Archive> void serialize(Archive& ar, unsigned version);
 
-  //ClassDef(I3TWRFrag,1);
 };
 
 I3_POINTER_TYPEDEFS(I3TWRFrag);

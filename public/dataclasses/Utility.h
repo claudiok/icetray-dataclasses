@@ -8,7 +8,6 @@
 #ifndef UTILITY_H_INCLUDED
 #define UTILITY_H_INCLUDED
 
-#include "TObject.h"
 #include <stdint.h> //int64_t, etc
 #include "dataclasses/copy_if.h"
 #include <icetray/IcetrayFwd.h>

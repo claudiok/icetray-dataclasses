@@ -16,35 +16,33 @@ using namespace std;
 
 class I3TWRLaunch : public I3Vector<I3TWRFrag>
 {
-  Int_t   id;
-  Float_t bin_size;
-  Float_t baseline;
-  Int_t   stop_delay;
-  Int_t   threshold;
-  Bool_t  optical;
+  int   id;
+  float bin_size;
+  float baseline;
+  int   stop_delay;
+  int   threshold;
+  bool  optical;
 
   public:
   I3TWRLaunch() {id=0; bin_size=0; baseline=0; stop_delay=0; threshold=0; optical=false;}
   virtual ~I3TWRLaunch();
-  Int_t   GetId() {return id;}
-  void    SetId(Int_t id_) {id=id_;}
-  Float_t GetBinSize() {return bin_size;}
-  void    SetBinSize(Float_t bin_size_) {bin_size=bin_size_;}
-  Float_t GetBaseline() {return baseline;}
-  void    SetBaseline(Float_t baseline_) {baseline=baseline_;}
-  Int_t   GetStopDelay() {return stop_delay;}
-  void    SetStopDelay(Int_t stop_delay_) {stop_delay=stop_delay_;}
-  Int_t   GetThreshold() {return threshold;}
-  void    SetThreshold(Int_t threshold_) {threshold=threshold_;}
-  Bool_t  GetOptical() {return optical;}
-  void    SetOptical(Bool_t optical_) {optical=optical_;}
+  int   GetId() {return id;}
+  void    SetId(int id_) {id=id_;}
+  float GetBinSize() {return bin_size;}
+  void    SetBinSize(float bin_size_) {bin_size=bin_size_;}
+  float GetBaseline() {return baseline;}
+  void    SetBaseline(float baseline_) {baseline=baseline_;}
+  int   GetStopDelay() {return stop_delay;}
+  void    SetStopDelay(int stop_delay_) {stop_delay=stop_delay_;}
+  int   GetThreshold() {return threshold;}
+  void    SetThreshold(int threshold_) {threshold=threshold_;}
+  bool  GetOptical() {return optical;}
+  void    SetOptical(bool optical_) {optical=optical_;}
 
   private:
   friend class boost::serialization::access;
   template<class Archive> void serialize(Archive& ar, unsigned version);
 
-
-  //ClassDef(I3TWRLaunch,1);
 };
 
 I3_POINTER_TYPEDEFS(I3TWRLaunch);

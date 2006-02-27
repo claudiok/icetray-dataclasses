@@ -1,8 +1,6 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3Particle.h>
 
-ClassImp(I3Particle);
-
 I3Particle::~I3Particle() {}
 
 template <class Archive>

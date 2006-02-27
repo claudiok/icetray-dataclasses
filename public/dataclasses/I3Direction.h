@@ -212,9 +212,6 @@ class I3Direction : public I3FrameObject
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
-
-  // ROOT macro
-  ClassDef(I3Direction,1)
 };
 
 I3_POINTER_TYPEDEFS(I3Direction);

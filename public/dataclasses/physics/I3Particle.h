@@ -232,7 +232,6 @@ class I3Particle : public I3FrameObject
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
-  ClassDef(I3Particle,1);
 };
 
 I3_POINTER_TYPEDEFS(I3Particle);
