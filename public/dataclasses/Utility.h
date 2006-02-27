@@ -47,12 +47,16 @@ using boost::serialization::base_object;
 
 #include <icetray/I3Logging.h>
 
-// Stuff for writing out objects into a string or stream (for debugging mostly)
-#include <sstream>
 using namespace std;
 
-string ToString(shared_ptr<const TObject> obj);
+// forward declarations.  Instantiations come via I3_SERIALIZABLE().
+// icetray/serialization.h
+template <typename T>
+std::string 
+ToString(shared_ptr<const T> obj);
 
-string ToString(const TObject& obj);
+template <typename T>
+std::string 
+ToString(const T& ob);
 
 #endif 
