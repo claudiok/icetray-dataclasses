@@ -111,24 +111,6 @@ public:
   void SetCalibrated(bool is_calib) {is_calib_=is_calib;}
     
 
-  virtual void ToStream(std::ostream& o) const 
-  {
-    o << "Amplitude: " << adc_ << "\n"
-      << "Number of Pulses: " << LEs_.size() << "\n"
-      << "Leading Edges: ";
-    for(unsigned i=0; i<LEs_.size(); i++) 
-    {
-      o << LEs_[i] << " ";
-    }
-    o << "\nTEs: ";
-    for(unsigned i=0; i<TEs_.size(); i++) 
-    {
-      o << TEs_[i] << " ";
-    }
-    o << "\n";
-  }
-    
-
 private:
   friend class boost::serialization::access;
 

@@ -14,8 +14,6 @@ I3Geometry::serialize(Archive& ar, unsigned version)
   ar & make_nvp("TObject", base_object< TObject >(*this));
   ar & make_nvp("OMGeo", omgeo);
   ar & make_nvp("StationGeo", stationgeo);
-  //ar & make_nvp("inIce",inIce_);
-  //ar & make_nvp("top",top_);
   ar & make_nvp("StartTime",startTime);
   ar & make_nvp("EndTime",endTime);
 }

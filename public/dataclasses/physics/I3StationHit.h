@@ -47,31 +47,6 @@ class I3StationHit : public I3Vector<I3TankHitPtr> {
 	  stationNumber_ = station_number;
   }
 
-  /**
-   * dumps the object to the indicated ostream
-   * @param o the ostream to dump the object to
-   */
-  virtual void ToStream(ostream& o) const
-    {
-      o<<"[ I3StationHit: \n";
-      I3StationHit::const_iterator iter;
-      for(iter=begin();iter!=end();iter++)
-	{
-	  if(*iter == I3TankHitPtr((I3TankHit*)0))
-	    o<<"Null I3TankHit";
-	  else
-	    o<<*(*iter);
-	}
-      o<<"]\n";
-    }
-
-  virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
-
  private:
   // copy and assignment are private
   I3StationHit(const I3StationHit&); 
@@ -81,12 +56,6 @@ class I3StationHit : public I3Vector<I3TankHitPtr> {
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
-
-inline ostream& operator<<(ostream& o,const I3StationHit& hit)
-{
-  hit.ToStream(o);
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3StationHit);
 

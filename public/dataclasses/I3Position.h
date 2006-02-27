@@ -19,7 +19,7 @@
 #include <math.h>
 using namespace std;
 
-#include "TObject.h"
+#include <TObject.h>
 #include "Utility.h"
 #include <sstream>
 
@@ -196,21 +196,6 @@ class I3Position : public TObject
    */
   double CalcDistance(const I3Position& p) const;
 
-  /**
-   * Print out all information about the I3Position to the given ostream
-   */
-  virtual void ToStream(ostream& o) const;
-
-  /**
-   * dump the I3Position to a std::string
-   */
-  string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
-  
  protected:
   /**
    * cartesian (car)
@@ -250,15 +235,6 @@ class I3Position : public TObject
   // ROOT macro
   ClassDef(I3Position,1)
 };
-
-/**
- * for streaming to an ostream
- */
-inline ostream& operator<<(ostream& o,const I3Position& pos)
-{
-  pos.ToStream(o);
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3Position);
 

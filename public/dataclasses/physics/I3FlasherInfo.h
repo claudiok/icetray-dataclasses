@@ -130,13 +130,6 @@ public:
     void SetRawATWD3(const vector<int>& ATWD3data) {rawATWD3_=ATWD3data;}
 
 
-    /* Dumps the file to the given ostream */
-
-    virtual void ToStream(ostream& o) const
-	{
-	  o<<"LED Firing Time: "<< flashTime_ << " Intensity "<<LEDBrightness_;
-	}
-
 private:
 
     friend class boost::serialization::access;

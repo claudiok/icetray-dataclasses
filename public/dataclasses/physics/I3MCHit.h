@@ -81,12 +81,6 @@ class I3MCHit : public TObject
 //ClassDef(I3MCHit,1);
 };
 
-inline ostream& operator<<(ostream& o,const I3MCHit& key)
-{
-  o<<"[ I3MCHit ]\n";
-  return o;
-}
-
 I3_POINTER_TYPEDEFS(I3MCHit);
 
 typedef I3Vector<I3MCHit> I3MCHitSeries;

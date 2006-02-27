@@ -23,7 +23,7 @@ using namespace std;
 //Simple struct to contain all pertinent OM info.  
 //See I3Geometry.h for more info
 
-struct I3OMGeo
+struct I3OMGeo : public TObject
 {
 
   enum Orientation {Unspecified=0, Up=1, Down=-1};
@@ -40,28 +40,6 @@ struct I3OMGeo
   double area; //Effective collection area (use I3Units)
   double aziangle; //relative rotation angle of DOM in azimuth
 
-  /**
-   * @todo finish with all the data
-   */
-  virtual void ToStream(ostream& o) const
-    {
-      o<<"[ I3OMGeo ]\n"
-       <<" X:"
-       <<position.GetX()
-       <<" Y:"
-       <<position.GetY()
-       <<" Z:"
-       <<position.GetZ()
-       <<" ]\n";
-    }
-
-  virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
-  
   void Init() {
     orientation = Unspecified;
   }
@@ -70,15 +48,6 @@ struct I3OMGeo
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 };
-
-/**
- * streams an I3OMGeo to an arbitrary ostream
- */
-inline ostream& operator<<(ostream& o,const I3OMGeo& g)
-{
-  g.ToStream(o); 
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3OMGeo);
 

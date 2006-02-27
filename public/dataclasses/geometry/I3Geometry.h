@@ -15,6 +15,7 @@
 #include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/I3Time.h"
 #include <icetray/I3FrameTraits.h>
+#include <TObject.h>
 /*
   The following is a flattened version of the Geometry Class for dcv2
   The 8 classes of old are now 3 structs.  
@@ -65,13 +66,6 @@ struct I3Geometry:public TObject
   I3Time startTime;
   I3Time endTime;
 
-  virtual void ToStream(ostream& o) const
-    {
-      o<<"[ I3Geometry\n"
-	//<<inIce_//<<top_
-       <<"]\n";
-    }
-
   I3Geometry(const I3Geometry& geometry);
   const I3Geometry& operator=(const I3Geometry& geometry);
 
@@ -83,11 +77,6 @@ struct I3Geometry:public TObject
 /** 
  * streaming operator
  */
-inline ostream& operator<<(ostream& o,const I3Geometry& geo)
-{
-  geo.ToStream(o);
-  return o;
-};
 
 template<>
 struct I3FrameTraits<I3Geometry>

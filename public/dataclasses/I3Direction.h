@@ -171,23 +171,6 @@ class I3Direction : public TObject
    */
   void RotateZ(double angle);
 
-  /**
-   * Print out all information about the I3Direction to the given ostream
-   */
-  virtual void ToStream(ostream& o) const;
-
-  /**
-   * dump the I3Direction to a std::string
-   */
-  string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
-  
-  //--------------
-
 
  protected:
   /**
@@ -233,15 +216,6 @@ class I3Direction : public TObject
   // ROOT macro
   ClassDef(I3Direction,1)
 };
-
-/**
- * for streaming to an ostream
- */
-inline ostream& operator<<(ostream& o,const I3Direction& dir)
-{
-  dir.ToStream(o);
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3Direction);
 

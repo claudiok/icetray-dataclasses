@@ -2,7 +2,7 @@
 #define I3TIME_H_INCLUDED
 
 #include <string>
-#include "TObject.h"
+#include <TObject.h>
 #include <ostream>
 #include "dataclasses/Utility.h"
 /**
@@ -137,18 +137,6 @@ class I3Time : public TObject
    */
   double GetUTCNanoSec() const;  
 
-  /**
-   * @brief dumps this class to the given ostream
-   */
-  void ToStream(ostream& o) const
-    {
-      o<<"[ I3Time: Year:"<<year_
-       <<" DaqTime:"<<daqTime_<<"\n"
-       <<"Month: "<<MonthToString(GetUTCMonth())
-       <<" Day: "<<GetUTCDayOfMonth()<<"\n"
-       <<"ModJulianDay: "<<GetModJulianDay()
-       <<" ModJulianSec:"<<GetModJulianSec()<<" ]\n";
-    }
 
   /**
    * equality operator.  
@@ -233,10 +221,5 @@ class I3Time : public TObject
 
 I3_POINTER_TYPEDEFS(I3Time);
 
-inline ostream& operator<<(ostream& o, const I3Time& t)
-{
-  t.ToStream(o);
-  return o;
-}
 
 #endif //I3TIME_H_INCLUDED

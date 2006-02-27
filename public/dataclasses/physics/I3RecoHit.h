@@ -49,11 +49,6 @@ class I3RecoHit : public TObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-inline ostream& operator<<(ostream& o,const I3RecoHit& key)
-{
-  o<<"[ I3RecoHit ]\n";
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3RecoHit);
 

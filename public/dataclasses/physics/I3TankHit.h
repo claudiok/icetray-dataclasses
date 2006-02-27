@@ -83,26 +83,6 @@ class I3TankHit : public TObject {
 	  signal_ = signal;
   }
 
-  /**
-   * implementation problem
-   */
-  virtual void ToStream(ostream& o) const
-    {
-      o<<" [ I3TankHit ]\n";
-/*        <<"TankNumber: " */
-/*        <<tankNumber_ */
-/*        <<"Signal: " */
-/*        <<signal_ */
-/*        <<"Time: " */
-/*        <<time_<<"\n"; */
-    }
-
-  virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
   
  private:
   // copy and assignment are private
@@ -115,12 +95,6 @@ class I3TankHit : public TObject {
 // ROOT macro
   //ClassDef(I3TankHit,1);
 };
-
-inline ostream& operator<<(ostream& o,const I3TankHit& tankhit)
-{
-  tankhit.ToStream(o);
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3TankHit);
 

@@ -188,19 +188,6 @@ public:
 
    
     
-  virtual void ToStream(ostream& o) const
-  {
-    o<<"[ "
-     <<"Calibration:"
-     <<"\tSuppressing the rest of the output.  I am big. ]\n";
-  };
-  
-  virtual string ToString() const
-  {
-    ostringstream out;
-    ToStream(out);
-    return out.str();
-  };
   
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -262,14 +249,6 @@ private:
 
 };
 
-/**
- * streams an I3DOMCalibration to an arbitrary ostream
- */
-inline ostream& operator<<(ostream& o, const I3DOMCalibration& c)
-{
-  c.ToStream(o); 
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 

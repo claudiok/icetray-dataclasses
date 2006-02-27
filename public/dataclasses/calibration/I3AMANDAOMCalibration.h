@@ -18,6 +18,7 @@
 #include "dataclasses/calibration/I3AMANDAOM_XTalk.h"
 #include <vector>
 #include <sstream>
+#include <TObject.h>
 
 using namespace std;
 

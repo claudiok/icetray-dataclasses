@@ -27,7 +27,7 @@ using namespace std;
 */
 
 
-struct I3TankGeo
+struct I3TankGeo : public TObject
 {
   I3TankGeo() {}
   virtual ~I3TankGeo();
@@ -43,24 +43,9 @@ struct I3TankGeo
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-  virtual void ToStream(ostream& o) const
-    {
-      o<<" [ I3TankGeo ]";
-    }
-
-  virtual string ToString() const
-    {
-      ostringstream out;
-      ToStream(out);
-      return out.str();
-    }
 
 };
-inline ostream& operator<<(ostream& o, const I3TankGeo tank)
-{
-  tank.ToStream(o);
-  return o;
-}
+
 
 I3_POINTER_TYPEDEFS(I3TankGeo);
 

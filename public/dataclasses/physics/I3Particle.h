@@ -219,13 +219,7 @@ class I3Particle : public TObject
     else return NAN;
   }
 
-  void ToStream(ostream& o) const;
 
-  const string ToString() const {
-    ostringstream out;
-    ToStream(out);
-    return out.str();
-  }
 
   // don't take these out until the projects that use them are updated.
   const map<string,double>& GetParameters() const { return user_; }

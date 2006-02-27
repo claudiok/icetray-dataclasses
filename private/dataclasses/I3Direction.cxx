@@ -146,17 +146,6 @@ void I3Direction::RotateZ(double angle)
   CalcSphFromCar();
 }
 
-//-----------------------------------------------------------
-void I3Direction::ToStream(ostream& o) const
-{
-  o <<"---------------------DIRECTION-INFO-----------------------\n"
-    <<"SPH coord (zen,azi): "<< GetZenith()/deg<<"deg "
-    <<GetAzimuth()/deg<<"deg\n"
-    <<"CAR coord (x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
-    <<"----------------------------------------------------------\n";
-}
-
-//-----------------------------------------------------------
 
 //-----------------------------------------------------------
 void I3Direction::CalcCarFromSph() const

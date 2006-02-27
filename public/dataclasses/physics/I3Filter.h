@@ -38,18 +38,6 @@ public:
   virtual ~I3Filter();
   
   
-  virtual const string ToString() const
-  {
-    ostringstream out;
-    ToStream(out);
-    return out.str();
-  }
-  
-  virtual void ToStream(ostream& o) const
-  {
-    o<<"[I3Filter:   FilterPass:"<<filterPass_;
-  }
-  
 private:
   FilterPass filterPass_;       // Did the event pass this filter
   
@@ -59,14 +47,6 @@ private:
 
 };
 
-/**
- * streams an I3Filter to an arbitrary ostream
- */
-inline ostream& operator<<(ostream& o,const I3Filter& filt)
-{
-  filt.ToStream(o);
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3Filter);
 

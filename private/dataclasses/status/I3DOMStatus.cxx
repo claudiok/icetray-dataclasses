@@ -1,7 +1,7 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/status/I3DOMStatus.h>
 
-//I3DOMStatus::~I3DOMStatus() {}
+I3DOMStatus::~I3DOMStatus() {}
 
 template <class Archive>
 void I3DOMStatus::serialize (Archive& ar, unsigned version)

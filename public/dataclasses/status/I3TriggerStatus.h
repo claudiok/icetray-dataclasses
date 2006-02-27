@@ -75,30 +75,6 @@ public:
   virtual const map<std::string, int>& GetTriggerSettings() const { return settings_; }
   virtual map<std::string, int>& GetTriggerSettings() { return settings_; }  
 
-  virtual void ToStream(std::ostream& o) const
-  {
-    o << "[I3TriggerStatus: \n"
-      << " Name: " << name_;
-    
-    if(!settings_.empty())
-    {
-      o << "\n Settings:";
-      for(map<std::string, int>::const_iterator iter = settings_.begin();
-          iter != settings_.end();
-          ++iter)
-        o << "\n  " << iter->first << ": " << iter->second;
-    }
-      
-    o << "]";
-  };
-  
-  virtual std::string ToString() const
-    {
-      std::ostringstream out;
-      ToStream(out);
-      return out.str();
-    };
-
 private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
@@ -113,21 +89,6 @@ private:
  * memory-mananagement implementation
  */
 I3_POINTER_TYPEDEFS(I3TriggerStatus);
-
-/**
- * Streams a trigger statusto an arbitrary ostream.
- * 
- * @param o An arbitrary ostream.
- * @param status A trigger status.
- * @return The ostream.
- */
-inline std::ostream&
-operator<<(std::ostream& o, const I3TriggerStatus& status)
-{
-  status.ToStream(o);
-  
-  return o;
-}
 
 #endif
 

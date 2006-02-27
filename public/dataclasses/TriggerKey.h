@@ -216,25 +216,6 @@ public:
     configIDSet_ = true;
   }
 
-  virtual const std::string ToString() const
-  {
-    std::ostringstream out;
-    ToStream(out);
-    return out.str();
-  }
-
-  virtual void ToStream(std::ostream& o) const
-  {
-    o << "[ TriggerKey ] (SrcID = "
-      << source_ << ", TypeID = "
-      << type_ <<  ", ConfigID = ";
-    if(configIDSet_)
-      o << configID_;
-    else
-      o << "?";
-    o << ")";
-  }
-  
   /**
    * Equality operator.
    * 
@@ -342,20 +323,5 @@ operator<=(const TriggerKey& lhs, const TriggerKey& rhs)
   return !(lhs > rhs);
 }
 
-
-/**
- * Streams a trigger key to an arbitrary ostream.
- * 
- * @param o An arbitrary ostream.
- * @param key A trigger key.
- * @return The ostream.
- */
-inline std::ostream&
-operator<< (std::ostream& o, const TriggerKey& key)
-{
-  key.ToStream(o);
-  
-  return o;
-}
 
 #endif

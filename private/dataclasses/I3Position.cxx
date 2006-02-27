@@ -163,19 +163,6 @@ double I3Position::CalcDistance(const I3Position& p) const
   return d.GetR();
 }
 
-//-----------------------------------------------------------
-void I3Position::ToStream(ostream& o) const
-{
-  o <<"---------------------POSITION-INFO-----------------------\n"
-    <<"CAR coord(x,y,z): "<< GetX()<<" "<<GetY()<<" "<<GetZ()<<"\n"
-    <<"SPH coord(r,theta,phi): "<< GetR()<<" "<<GetTheta()/deg<<"deg "
-    <<GetPhi()/deg<<"deg\n"
-    <<"CYL coord(rho,phi,z): "<< GetRho()<<" "<<GetPhi()/deg<<"deg "
-    <<GetZ()<<"\n"
-    <<"---------------------------------------------------------\n";
-}
-
-//-----------------------------------------------------------
 
 //-----------------------------------------------------------
 void I3Position::CalcSphCylFromCar() const

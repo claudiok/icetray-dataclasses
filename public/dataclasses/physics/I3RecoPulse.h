@@ -52,30 +52,10 @@ class I3RecoPulse : public TObject
 
   virtual ~I3RecoPulse();
 
-  virtual void ToStream(ostream& o) const
-  {
-    o<<"[I3RecoPulse:  Time:"<<time_<< "\n"
-     <<"               PulseAmpl:"<<amp_<< "\n"
-     <<"               PulseWidth:"<<width_<<" ]\n";
-  }
-
-  virtual string ToString() const
-  {
-    ostringstream out;
-    ToStream(out);
-    return out.str();
-  }
-
   private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
-
-inline ostream& operator<<(ostream& o,const I3RecoPulse& pulse)
-{
-  pulse.ToStream(o);
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3RecoPulse);
 

@@ -51,18 +51,6 @@ public:
   void SetStartTime(const float time) { startTime_ = time;}
 
   void SetEndTime(const float time) { endTime_ = time;}
-  
-  virtual void ToStream(ostream& o) const {
-    o<<"[ I3MCPMTResponse ]\n"
-     <<"StartTime: "<<startTime_
-     <<"EndTime: "<<endTime_;
-  }
-
-  virtual std::string ToString() const {
-    std::ostringstream out;
-    ToStream(out);
-    return out.str();
-  }
 
 private:
   // copy and assignment are private
@@ -76,11 +64,6 @@ private:
   //ClassDef(I3MCPMTResponse,1);
 };
 
-inline ostream& operator<<(ostream& o, const I3MCPMTResponse& resp)
-{
-  resp.ToStream(o);
-  return o;
-}
 
 I3_POINTER_TYPEDEFS(I3MCPMTResponse);
 

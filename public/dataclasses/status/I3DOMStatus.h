@@ -2,9 +2,11 @@
 #define I3DOMSTATUS_H_INCLUDED
 
 #include "dataclasses/Utility.h"
+#include <TObject.h>
 
 struct I3DOMStatus : public TObject
 {
+  virtual ~I3DOMStatus();
   /**
    * The different kinds of triggers that can be used for the dom
    * The standard data-taking operation is SPE

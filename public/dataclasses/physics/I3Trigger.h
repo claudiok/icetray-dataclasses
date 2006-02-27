@@ -95,22 +95,6 @@ public:
   const TriggerKey& GetTriggerKey() const {return key_;}
   TriggerKey& GetTriggerKey() {return key_;}
 
-  virtual const std::string ToString() const
-  {
-    std::ostringstream out;
-    ToStream(out);
-    return out.str();
-  }
-
-  virtual void ToStream(std::ostream& o) const
-  {
-    o << "[I3Trigger: \n"
-      << " Time:" << time_ << "\n"
-      << " Length:" << length_ << "\n"
-      << " Key:" << key_ << "\n"
-      << " Fired:" << fired_ << "]";
-  }
-
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
   // logging
@@ -118,21 +102,6 @@ public:
 };
 
 I3_POINTER_TYPEDEFS(I3Trigger);
-
-/**
- * Streams a trigger to an arbitrary ostream.
- * 
- * @param o An arbitrary ostream.
- * @param trigger A trigger.
- * @return The ostream.
- */
-inline std::ostream&
-operator<<(std::ostream& o, const I3Trigger& trigger)
-{
-  trigger.ToStream(o);
-  
-  return o;
-}
 
 #endif
 

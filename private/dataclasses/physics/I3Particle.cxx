@@ -5,26 +5,6 @@ ClassImp(I3Particle);
 
 I3Particle::~I3Particle() {}
 
-void I3Particle::ToStream(ostream& o) const
-{
-  o<<"ID: "<<ID_<<"\n";
-  o<<"ParentID: "<<parentID_<<"\n";
-  o<<"PrimaryID: "<<primaryID_<<"\n";
-  o<<"MCType: "<<mctype_<<"\n";
-  o<<"Type: "<<type_<<"\n";
-  o<<"Position:\n"<<pos_;
-  o<<"Direction:\n"<<dir_;
-  o<<"Time: "<<time_<<"\n";
-  o<<"Energy: "<<energy_<<"\n";
-  o<<"Length: "<<length_<<"\n";
-  o<<"Speed: "<<speed_<<"\n";
-  if (composite_.size()>0) {
-    o<<"[ Composite Particle ]: "<<endl;
-    for (unsigned int i=0; i<composite_.size(); i++)
-      composite_[i].ToStream(o);
-  }
-}
-
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
   {
