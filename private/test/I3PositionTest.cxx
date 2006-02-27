@@ -31,33 +31,7 @@ TEST(constructor)
   I3PositionPtr ptr(new I3Position());
 }
 
-/**
- * check writing object to disk
- */
-TEST(write)
-{
-  I3PositionPtr ptr(new I3Position());
-  
-  /** @todo should fill some data for I3Position here */
-  
-  TFile f_out("test.out.root","RECREATE");
-  ptr->Write();
-  f_out.Close();
-  
-  TFile f_in("test.out.root");
-  TObject* object_in =
-    f_in.FindObjectAny("I3Position");
-  f_in.Close();
-  ENSURE(object_in,"the read-in pointer is non-zero");
-  
-  I3Position* tested_in = dynamic_cast<I3Position*>(object_in);
-  ENSURE(tested_in,"the read-in pointer is of the right type");
-  
-  I3PositionPtr ptr_in(tested_in);
-  
-  /** @todo should check the read-in data for I3Position here */
 
-}
 
 /**
  * check branching it to a tree

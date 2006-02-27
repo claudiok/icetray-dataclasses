@@ -32,33 +32,6 @@ TEST(const_dest)
   I3DirectionPtr ptr(new I3Direction());
 }
   
-/**
- * check writing object to disk
- */
-TEST(write_to_disk)
-{
-  I3DirectionPtr ptr(new I3Direction());
-  
-  /** @todo should fill some data for I3Direction here */
-  
-  TFile f_out("test.out.root","RECREATE");
-  ptr->Write();
-  f_out.Close();
-  
-  TFile f_in("test.out.root");
-  TObject* object_in =
-    f_in.FindObjectAny("I3Direction");
-  f_in.Close();
-  ENSURE(object_in,"the read-in pointer is non-zero");
-  
-  I3Direction* tested_in = dynamic_cast<I3Direction*>(object_in);
-  ENSURE(tested_in,"the read-in pointer is of the right type");
-  
-  I3DirectionPtr ptr_in(tested_in);
-  
-  /** @todo should check the read-in data for I3Direction here */
-  
-}
    
 /**
  * check branching it to a tree
