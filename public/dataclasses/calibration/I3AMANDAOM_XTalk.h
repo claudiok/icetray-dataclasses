@@ -13,10 +13,9 @@
 #define I3AMANDAOMCALIBRATION_XTALK_H_INCLUDED
 
 #include <sstream>
-#include <TObject.h>
 #include "dataclasses/OMKey.h"
 
-struct I3AMANDAOM_XTalk : public TObject
+struct I3AMANDAOM_XTalk 
 {
   OMKey  receiver;
   double timehigh;

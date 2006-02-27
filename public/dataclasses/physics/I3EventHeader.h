@@ -12,7 +12,7 @@
 // includes
 #include "dataclasses/I3Time.h"
 #include <string>
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ using namespace std;
  * It's supposed to have enough data to reconstruct the full event
  * from the database
  */
-class I3EventHeader : public TObject
+class I3EventHeader : public I3FrameObject
 {
   unsigned  runID_;
   unsigned  eventID_;

@@ -7,7 +7,6 @@ template <class Archive>
 void 
 I3RecoPulse::serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("TObject", base_object< TObject >(*this));
     ar & make_nvp("Time", time_);
     ar & make_nvp("HitID", hitID_);
     ar & make_nvp("PulseAmp", amp_);

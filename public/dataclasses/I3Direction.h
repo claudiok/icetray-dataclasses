@@ -18,7 +18,7 @@
 
 #include <math.h>
 #include <sstream>
-#include "TObject.h"
+#include "icetray/I3FrameObject.h"
 #include "Utility.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
@@ -41,7 +41,7 @@ using namespace std;
  * @todo implement "print out" of all information in a uniform way...
  * @todo insure that the temporary data isn't written to disk.
  */
-class I3Direction : public TObject
+class I3Direction : public I3FrameObject
 {
  public:
 

@@ -82,8 +82,7 @@ struct QuadraticFit
  * 
  */
 
-class I3DOMCalibration : public TObject
-{
+class I3DOMCalibration {
 
 public:
   I3DOMCalibration();

@@ -2,7 +2,7 @@
 #define I3TIME_H_INCLUDED
 
 #include <string>
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
 #include <ostream>
 #include "dataclasses/Utility.h"
 /**
@@ -18,7 +18,7 @@
  * http://jday.sourceforge.net/index.php for reference
  *
  */
-class I3Time : public TObject
+class I3Time : public I3FrameObject
 {
  public:
   /**

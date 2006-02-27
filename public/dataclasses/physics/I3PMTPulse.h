@@ -9,7 +9,6 @@
 #ifndef I3PMTPULSE_H_INCLUDED
 #define I3PMTPULSE_H_INCLUDED
 
-#include <TObject.h>
 #include "dataclasses/Utility.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/I3Vector.h"
@@ -23,7 +22,7 @@
  * voltage curve, it contains the identity of the hit which produed
  * it (and which is recorded in the MCHitSeries). 
  */
-class I3PMTPulse : public TObject {
+class I3PMTPulse {
     
 public:
 

@@ -18,10 +18,10 @@
 #include "dataclasses/I3Time.h"
 #include "dataclasses/OMKey.h"
 #include <icetray/I3FrameTraits.h>
+#include "icetray/I3FrameObject.h"
 
-#include <TObject.h>
 
-struct I3Calibration : public TObject
+struct I3Calibration : public I3FrameObject
 {
 public:
   I3Time startTime;

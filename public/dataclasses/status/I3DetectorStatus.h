@@ -17,6 +17,7 @@
 #include "dataclasses/I3Time.h"
 #include "dataclasses/OMKey.h"
 #include <icetray/I3FrameTraits.h>
+#include "icetray/I3FrameObject.h"
 #include <sstream>
 
 /**
@@ -30,9 +31,8 @@
  *            map of active domhubs (and their settings)...eventually
  *
  */
-#include <TObject.h>
 
-struct I3DetectorStatus : public TObject
+struct I3DetectorStatus : public I3FrameObject
 {
   I3Time startTime;
   I3Time endTime;

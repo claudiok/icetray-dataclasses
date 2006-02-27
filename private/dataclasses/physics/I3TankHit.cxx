@@ -6,7 +6,6 @@ I3TankHit::~I3TankHit() {}
 template <class Archive>
   void I3TankHit::serialize(Archive& ar, unsigned version)
   {
-    ar & make_nvp("TObject", base_object< TObject >(*this));
     ar & make_nvp("TankNumber",tankNumber_);
     ar & make_nvp("Time",time_);
     ar & make_nvp("Signal",signal_);

@@ -15,7 +15,6 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <TObject.h>
 
 #include <dataclasses/Utility.h>
 #include <map>
@@ -30,7 +29,7 @@
  * - a map of trigger settings:  string, integer values
  *   (contents vary by trigger type)
  */
-class I3TriggerStatus : public TObject
+class I3TriggerStatus 
 {
 private:
   std::string name_;

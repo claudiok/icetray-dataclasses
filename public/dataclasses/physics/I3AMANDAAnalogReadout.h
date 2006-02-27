@@ -12,7 +12,6 @@
 #include <iostream>
 #include <vector>
 
-#include "TObject.h"
 #include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
@@ -26,7 +25,7 @@
  * that represents the peak from the entire event.  TOTs are generated
  * on the fly and may be wrong if edges are missing.
  */
-class I3AMANDAAnalogReadout : public TObject 
+class I3AMANDAAnalogReadout 
 { 
   std::vector<double> LEs_; 
   std::vector<double> TEs_; 

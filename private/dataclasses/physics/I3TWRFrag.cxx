@@ -6,7 +6,6 @@ template<class Archive>
 void 
 I3TWRFrag::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("TObject", base_object< TObject >(*this));
   ar & make_nvp("ID",id);
   ar & make_nvp("ParentID",parent_id);
   ar & make_nvp("FragStartTime",frag_start_time);

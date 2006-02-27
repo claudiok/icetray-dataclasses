@@ -2,14 +2,13 @@
 #define I3_WAVEFORM_H
 
 #include <vector>
-#include <TObject.h>
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
 #include "dataclasses/OMKey.h"
 
 using namespace std;
 
-class I3Waveform : public TObject
+class I3Waveform 
 {
 public:
     enum Source

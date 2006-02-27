@@ -21,7 +21,7 @@ template <class Archive>
 void
 I3Bool::serialize(Archive& ar,unsigned)
 {
-  ar & make_nvp("TObject", base_object<TObject>(*this));
+  ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("value", value);
 }
 

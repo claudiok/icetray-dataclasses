@@ -9,7 +9,6 @@
 #ifndef I3RECOHIT_H_INCLUDED
 #define I3RECOHIT_H_INCLUDED
 
-#include <TObject.h>
 #include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
@@ -23,7 +22,7 @@
  * but can be sub-classed as part of a hit series reconstruction.
  *
  */
-class I3RecoHit : public TObject
+class I3RecoHit 
 {
   public:
   I3RecoHit() : time_(NAN),hitID_(-1){}

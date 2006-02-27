@@ -9,7 +9,6 @@
 #ifndef I3DOMLAUNCH_H_INCLUDED
 #define I3DOMLAUNCH_H_INCLUDED
 
-#include "TObject.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
 #include "dataclasses/OMKey.h"
@@ -25,7 +24,7 @@
  * stored in the ATWDBinSize variable.
  *
  */
-class I3DOMLaunch : public TObject
+class I3DOMLaunch 
 {
 
 public:  

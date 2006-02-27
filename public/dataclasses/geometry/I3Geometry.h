@@ -15,7 +15,8 @@
 #include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/I3Time.h"
 #include <icetray/I3FrameTraits.h>
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
+
 /*
   The following is a flattened version of the Geometry Class for dcv2
   The 8 classes of old are now 3 structs.  
@@ -51,7 +52,7 @@ I3_POINTER_TYPEDEFS(I3OMGeoMap)
 typedef map<int, I3StationGeo> I3StationGeoMap;
 I3_POINTER_TYPEDEFS(I3StationGeoMap)
 
-struct I3Geometry:public TObject
+     struct I3Geometry : public I3FrameObject
 {
   I3Geometry(){};
   virtual ~I3Geometry();

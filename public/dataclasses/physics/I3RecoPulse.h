@@ -13,7 +13,6 @@
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/I3Map.h"
-#include <TObject.h>
 
 using namespace std;
 
@@ -24,7 +23,7 @@ using namespace std;
  * A readout independent representation of a waveform feature or Analog
  *  readout.
  */
-class I3RecoPulse : public TObject
+class I3RecoPulse 
 {
   int hitID_;
   double time_;

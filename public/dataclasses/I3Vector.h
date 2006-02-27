@@ -8,18 +8,18 @@
 #ifndef DATACLASSES_I3VECTOR_H_INCLUDED
 #define DATACLASSES_I3VECTOR_H_INCLUDED
 
-#include "TObject.h"
+#include "icetray/I3FrameObject.h"
 #include <vector>
 #include "dataclasses/Utility.h"
 
 template <typename T>
-struct I3Vector : public TObject, public std::vector<T>
+struct I3Vector : public I3FrameObject, public std::vector<T>
 { 
   template <class Archive>
   void serialize(Archive & ar, unsigned version)
   {
+    ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("vector", base_object< std::vector<T> >(*this));
-    ar & make_nvp("TObject", base_object< TObject >(*this));
   }
 };
 

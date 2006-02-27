@@ -9,7 +9,6 @@
 #ifndef I3MCHIT_H_INCLUDED
 #define I3MCHIT_H_INCLUDED
 
-#include <TObject.h>
 #include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
@@ -26,7 +25,7 @@
  * CherenkovDistance- direct path distance to the track that generated
  * this hit.
  */
-class I3MCHit : public TObject
+class I3MCHit
 {
   double time_;
   int hitID_;

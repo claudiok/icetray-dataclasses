@@ -15,7 +15,6 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <TObject.h>
 
 #include <icetray/I3Logging.h>
 
@@ -34,7 +33,7 @@
  *
  * Go bug the DAQ SW folks for more info. I can't make this stuff up.
  */
-class TriggerKey : public TObject
+class TriggerKey 
 {
 public:
   /**

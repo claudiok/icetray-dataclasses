@@ -2,9 +2,9 @@
 #define I3DOMSTATUS_H_INCLUDED
 
 #include "dataclasses/Utility.h"
-#include <TObject.h>
 
-struct I3DOMStatus : public TObject
+
+struct I3DOMStatus 
 {
   virtual ~I3DOMStatus();
   /**

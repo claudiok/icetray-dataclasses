@@ -22,7 +22,6 @@ template <class Archive>
 void 
 I3AMANDAAnalogReadout::save(Archive& ar, unsigned version) const
 {
-  ar & make_nvp("TObject", base_object< TObject >(*this));
   ar & make_nvp("LEs", LEs_);
   ar & make_nvp("TEs", TEs_);
   ar & make_nvp("HitNumbers", HitNumbers_);
@@ -36,7 +35,6 @@ template <class Archive>
 void 
 I3AMANDAAnalogReadout::load(Archive& ar, unsigned version)
 {
-  ar & make_nvp("TObject", base_object< TObject >(*this));
   ar & make_nvp("LEs", LEs_);
   ar & make_nvp("TEs", TEs_);
   ar & make_nvp("HitNumbers", HitNumbers_);

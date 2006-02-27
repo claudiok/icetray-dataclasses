@@ -9,7 +9,7 @@
 #ifndef I3FLASHERINFO_H_INCLUDED
 #define I3FLASHERINFO_H_INCLUDED
 
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
 #include "dataclasses/OMKey.h"
 
 using namespace std; 
@@ -28,7 +28,7 @@ enum EventFlasherStatusType{single_flasher = 0, muon_event = 1,
  * Included here for use by flasher analysis people.  It can be "I3Bagged".
  *
  */
-class I3FlasherInfo : public TObject
+class I3FlasherInfo : public I3FrameObject
 {
 
 protected:

@@ -8,17 +8,17 @@
 #ifndef I3MAP_H_INCLUDED
 #define I3MAP_H_INCLUDED
 
-#include "TObject.h"
+#include "icetray/I3FrameObject.h"
 #include <map>
 
 template <typename Key, typename Value>
-struct I3Map : public TObject, public std::map<Key, Value>
+struct I3Map : public I3FrameObject, public std::map<Key, Value>
 { 
   template <class Archive>
   void serialize(Archive & ar, unsigned version)
   {
+    ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("map", base_object< std::map<Key, Value> >(*this));
-    ar & make_nvp("TObject", base_object< TObject >(*this));
   }
 
 };

@@ -8,13 +8,12 @@
 #ifndef I3TWRFRAG_H_INCLUDED
 #define I3TWRFRAG_H_INCLUDED
 
-#include <TObject.h>
 #include <vector>
 #include "dataclasses/Utility.h"
 
 using namespace std;
 
-class I3TWRFrag : public TObject
+class I3TWRFrag 
 {
   Int_t            id;
   Int_t            parent_id;

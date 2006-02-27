@@ -9,9 +9,7 @@
 #ifndef I3OMGEO_H_INCLUDED
 #define I3OMGEO_H_INCLUDED
 
-#include <TObject.h>
 #include "dataclasses/I3Position.h"
-#include <TClass.h>
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -23,7 +21,7 @@ using namespace std;
 //Simple struct to contain all pertinent OM info.  
 //See I3Geometry.h for more info
 
-struct I3OMGeo : public TObject
+struct I3OMGeo 
 {
 
   enum Orientation {Unspecified=0, Up=1, Down=-1};

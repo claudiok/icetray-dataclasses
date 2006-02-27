@@ -9,8 +9,7 @@
 #ifndef I3FILTER_H_INCLUDED
 #define I3FILTER_H_INCLUDED
 
-#include <TObject.h>
-#include <TClass.h>
+#include "icetray/I3FrameObject.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -24,7 +23,7 @@ using namespace std;
  * 
  * This is the base class for trigger records that will live in the I3FilterDict.
  */
-class I3Filter : public TObject
+class I3Filter : public I3FrameObject
 {
 public:
   

@@ -81,7 +81,6 @@ TriggerKey::~TriggerKey() {}
 template <class Archive>
 void TriggerKey::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("TObject", base_object<TObject>(*this));
   ar & make_nvp("SourceID", source_);
   ar & make_nvp("TypeID", type_);
   ar & make_nvp("ConfigIDSet", configIDSet_);

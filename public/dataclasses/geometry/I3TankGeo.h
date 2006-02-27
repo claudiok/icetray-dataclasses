@@ -11,7 +11,6 @@
 
 #include <iostream>
 
-#include <TObject.h>
 #include "dataclasses/I3Position.h"
 #include "dataclasses/Utility.h"
 using namespace std;
@@ -27,7 +26,7 @@ using namespace std;
 */
 
 
-struct I3TankGeo : public TObject
+struct I3TankGeo 
 {
   I3TankGeo() {}
   virtual ~I3TankGeo();

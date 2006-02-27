@@ -1,13 +1,13 @@
 #ifndef DATACLASSES_I3DOUBLE_H_INCLUDED
 #define DATACLASSES_I3DOUBLE_H_INCLUDED
 
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
 #include <dataclasses/Utility.h>
 
 // Basically stole pretz form of I3Bool and made a double out of it
 // Revised by stealing troy's I3Bool revision.
 
-struct I3Double : public TObject
+struct I3Double :public I3FrameObject
 {
   double value;
   

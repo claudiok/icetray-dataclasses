@@ -1,7 +1,7 @@
 #ifndef DATACLASSES_I3BOOL_H_INCLUDED
 #define DATACLASSES_I3BOOL_H_INCLUDED
 
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
 #include <dataclasses/Utility.h>
 
 //
@@ -10,7 +10,7 @@
 //  to use, say, vector<I3Double> instead of just vector<double>.
 //  They are instead holders of values, with member "value".
 //
-struct I3Bool : public TObject
+struct I3Bool : public I3FrameObject
 {
   bool value;
 

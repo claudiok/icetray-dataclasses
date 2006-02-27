@@ -158,7 +158,6 @@ template <class Archive>
 void 
 I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("TObject", base_object< TObject >(*this));
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
   ar & make_nvp("fadcBasline",fadcBaselineFit_);

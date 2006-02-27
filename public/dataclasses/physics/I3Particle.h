@@ -13,7 +13,6 @@
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Units.h"
 #include "dataclasses/I3Vector.h"
-#include <TObject.h>
 #include <map>
 #include <string>
 
@@ -22,7 +21,7 @@ using namespace std;
 /**
  * @brief 
  */
-class I3Particle : public TObject
+class I3Particle : public I3FrameObject
 {
     
  public:

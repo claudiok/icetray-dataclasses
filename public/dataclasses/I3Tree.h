@@ -12,23 +12,23 @@
 #ifndef I3_TREE_H_INCLUDED
 #define I3_TREE_H_INCLUDED
 
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
 #include <dataclasses/external/tree.hh>
 
 
 template <typename T>
-class I3Tree : public TObject, public tree<T>
+struct I3Tree : public I3FrameObject , public tree<T>
 {
-private:
-  friend class boost::serialization::access;
   /**
    * @todo need to implement serialization of tree!!!
    */
   template <class Archive>
   void serialize(Archive & ar, unsigned version)
   {
-    // ...
+    ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+    //ar & make_nvp("thetree", base_object< tree<Key, Value> >(*this));
   }
+
 };
 
 

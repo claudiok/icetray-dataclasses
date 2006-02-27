@@ -19,7 +19,7 @@
 #include <math.h>
 using namespace std;
 
-#include <TObject.h>
+#include "icetray/I3FrameObject.h"
 #include "Utility.h"
 #include <sstream>
 
@@ -32,7 +32,7 @@ using namespace std;
  * @todo implement "print out" of all information in a uniform way...
  * @todo insure that the temporary data isn't written to disk.
  */
-class I3Position : public TObject
+class I3Position : public I3FrameObject
 {
  public:
 

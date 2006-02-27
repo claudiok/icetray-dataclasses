@@ -8,8 +8,6 @@
 
 #ifndef I3MCPMTRESPONSE_H_INCLUDED
 #define I3MCPMTRESPONSE_H_INCLUDED
-#include <TObject.h>
-#include <TClass.h>
 #include <sstream>
 #include "dataclasses/Utility.h"
 
@@ -21,8 +19,8 @@
  * output.  The Chiba PMT response will inherit from this.  
  *
  */
-class I3MCPMTResponse : public TObject {
-
+class I3MCPMTResponse 
+{
 protected:
   float startTime_;
   float endTime_;

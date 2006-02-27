@@ -17,7 +17,6 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <TObject.h>
 
 #include <dataclasses/TriggerKey.h>
 #include <dataclasses/Utility.h>
@@ -28,7 +27,7 @@
  * 
  * This is the base class for trigger records that will live in the I3TriggerDict.
  */
-class I3Trigger : public TObject
+class I3Trigger 
 {
 private:
   double     time_;             // Time at which the trigger was issued

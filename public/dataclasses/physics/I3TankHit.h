@@ -7,8 +7,6 @@
 #ifndef I3TANKHIT_H_INCLUDED
 #define I3TANKHIT_H_INCLUDED
 
-#include <TObject.h>
-#include <TObjArray.h>
 
 #include "dataclasses/Utility.h"
 
@@ -21,7 +19,8 @@ using namespace std;
  * @brief The container for all the Array Hit-related data in the event
  *
  */
-class I3TankHit : public TObject {
+class I3TankHit 
+{
 
  protected:
 

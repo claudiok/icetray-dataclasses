@@ -18,7 +18,6 @@
 #include "dataclasses/calibration/I3AMANDAOM_XTalk.h"
 #include <vector>
 #include <sstream>
-#include <TObject.h>
 
 using namespace std;
 
@@ -29,7 +28,7 @@ using namespace std;
  *
  */
 
-struct I3AMANDAOMCalibration : public TObject
+struct I3AMANDAOMCalibration 
 {
 
   double adc_a0;

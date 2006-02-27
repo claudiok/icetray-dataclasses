@@ -7,9 +7,6 @@
 #ifndef I3STATIONHIT_H_INCLUDED
 #define I3STATIONHIT_H_INCLUDED
 
-#include <TObject.h>
-#include <TObjArray.h>
-
 #include "dataclasses/physics/I3TankHit.h"
 #include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
