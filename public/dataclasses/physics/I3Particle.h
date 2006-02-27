@@ -227,7 +227,7 @@ class I3Particle : public I3FrameObject
  private:
 
   // don't take these out until the projects that use them are updated.
-  map<string,double> user_;
+  map<string,double> user_; //! dont dict me
 
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
