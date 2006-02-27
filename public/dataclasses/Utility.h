@@ -51,9 +51,8 @@ using boost::serialization::base_object;
 #include <sstream>
 using namespace std;
 
-string ToString(shared_ptr<const TObject> ob);
-string ToString(const TObject& ob);
-ostream& operator<<(ostream& o, shared_ptr<const TObject> obj);
-ostream& operator<<(ostream& o, const TObject& ob);
+string ToString(shared_ptr<const TObject> obj);
+
+string ToString(const TObject& obj);
 
 #endif 
