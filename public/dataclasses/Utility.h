@@ -53,10 +53,10 @@ using namespace std;
 // icetray/serialization.h
 template <typename T>
 std::string 
-ToString(shared_ptr<const T> obj);
+AsXML(shared_ptr<const T> obj);
 
 template <typename T>
 std::string 
-ToString(const T& ob);
+AsXML(const T& ob);
 
 #endif 
