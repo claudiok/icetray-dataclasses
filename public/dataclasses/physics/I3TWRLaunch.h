@@ -11,6 +11,8 @@
 
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/physics/I3TWRFrag.h"
+#include "dataclasses/I3Map.h"
+#include "dataclasses/OMKey.h"
 
 using namespace std;
 
@@ -44,6 +46,8 @@ class I3TWRLaunch : public I3Vector<I3TWRFrag>
   template<class Archive> void serialize(Archive& ar, unsigned version);
 
 };
+
+typedef I3Map<OMKey, I3TWRLaunch> I3TWRLaunchMap;
 
 I3_POINTER_TYPEDEFS(I3TWRLaunch);
 

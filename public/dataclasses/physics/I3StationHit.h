@@ -10,6 +10,8 @@
 #include "dataclasses/physics/I3TankHit.h"
 #include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
+#include "dataclasses/StationKey.h"
+#include "dataclasses/I3Map.h"
 
 #include <sstream>
 /**
@@ -56,6 +58,11 @@ class I3StationHit : public I3Vector<I3TankHitPtr> {
 
 I3_POINTER_TYPEDEFS(I3StationHit);
 
+typedef I3Map<StationKey, I3StationHit> I3StationHitMap;
+
+
+I3_POINTER_TYPEDEFS(I3StationHitMap);
+
 /**
  @brief Functor for find_if
  @class I3StationHitMatchesStationNumber
@@ -85,6 +92,8 @@ class I3StationHitMatchesStationNumber {
   unsigned short stationNumber_;
 
 };
+
+
 
 #endif //I3STATIONHIT_H_INCLUDED
 
