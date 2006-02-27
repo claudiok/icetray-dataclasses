@@ -95,7 +95,8 @@ TEST(to_stream)
     dom_calib->SetATWDGain(channel,gain);
     dom_calib->SetATWDBinCalibFit(id,channel,bin,fit);
     
-    dom_calib->ToStream(cout);
+    //dom_calib->ToStream(cout);
+    log_info("Calibration %s",ToString(dom_calib).c_str());
 }
 
 
