@@ -8,3 +8,5 @@ template <class Archive>
 	  ar & make_nvp("HitNum", hitNum_);
 	}
 I3_SERIALIZABLE(I3PMTPulse);
+I3_SERIALIZABLE(I3PMTPulseSeries);
+I3_SERIALIZABLE(I3PMTPulseSeriesMap);

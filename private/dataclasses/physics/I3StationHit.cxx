@@ -16,3 +16,4 @@ I3StationHit::serialize (Archive& ar, unsigned version)
   
 
 I3_SERIALIZABLE(I3StationHit);
+I3_SERIALIZABLE(I3StationHitMap);

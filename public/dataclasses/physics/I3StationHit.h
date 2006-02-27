@@ -47,9 +47,6 @@ class I3StationHit : public I3Vector<I3TankHitPtr> {
   }
 
  private:
-  // copy and assignment are private
-  I3StationHit(const I3StationHit&); 
-  const I3StationHit& operator=(const I3StationHit&); 
 
   friend class boost::serialization::access;
 

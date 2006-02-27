@@ -14,3 +14,5 @@ template <class Archive>
   
 
 I3_SERIALIZABLE(I3MCHit);
+I3_SERIALIZABLE(I3MCHitSeries);
+I3_SERIALIZABLE(I3MCHitSeriesMap);
