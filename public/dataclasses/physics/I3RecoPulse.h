@@ -13,6 +13,7 @@
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/I3Map.h"
+#include <TObject.h>
 
 using namespace std;
 
