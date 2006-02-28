@@ -24,6 +24,8 @@
  * "Global triggers" might be assigned as childs to an additional "global trigger"
  * of type "MERGED", if two or more of these overlap in time.
  * 
+ * @image html aTriggerHierarchy.jpg
+ * 
  * Triggering at "string processor" level will add one additional level of
  * siblings in future.
  * 
