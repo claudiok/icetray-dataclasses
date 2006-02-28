@@ -117,14 +117,6 @@ private:
   template <class Archive> void load(Archive& ar, unsigned version);
   BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-  // private copy constructors and assignment
-  // I commented these out for version 2.  Pretty sure that was the
-  // right thing to do.  (proth)
-  //  I3AMANDAAnalogReadout(const I3AMANDAAnalogReadout& other);
-  //  I3AMANDAAnalogReadout& operator=(const I3AMANDAAnalogReadout& other);
-
-  // ROOT macro
-  //ClassDef(I3AMANDAAnalogReadout,2);
 };
 
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);

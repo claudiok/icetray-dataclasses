@@ -53,6 +53,7 @@ typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3Waveform);
 I3_POINTER_TYPEDEFS(I3WaveformSeries);
+I3_POINTER_TYPEDEFS(I3WaveformSeriesMap);
 
 
 

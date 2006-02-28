@@ -77,13 +77,16 @@ class I3MCHit
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-//ClassDef(I3MCHit,1);
+
 };
 
 I3_POINTER_TYPEDEFS(I3MCHit);
 
 typedef I3Vector<I3MCHit> I3MCHitSeries;
 typedef I3Map<OMKey, I3MCHitSeries> I3MCHitSeriesMap; 
+
+I3_POINTER_TYPEDEFS(I3MCHitSeries);
+I3_POINTER_TYPEDEFS(I3MCHitSeriesMap);
 
 #endif //I3MCHIT_H_INCLUDED
 

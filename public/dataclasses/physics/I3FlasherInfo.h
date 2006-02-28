@@ -136,7 +136,6 @@ private:
 
     template <class Archive> void serialize(Archive & ar, unsigned version);
 
-//ClassDef(I3FlasherInfo,1);
 };
 
 I3_POINTER_TYPEDEFS(I3FlasherInfo);

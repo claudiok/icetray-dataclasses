@@ -29,13 +29,13 @@ class I3TankHit
   /**
    * the first arrival of a particle at this particular tank
    */
-  float time_;
+  double time_;
 
   /**
    * the signal of the tank (can be different things like track length, charge,
    * #mc-particles, amplitude, ...
    */
-  float signal_;
+  double signal_;
 
  public:
 
@@ -57,42 +57,38 @@ class I3TankHit
   /**
    * Get the time
    */
-  float Time() const {
+  double Time() const {
 	  return time_;
   }
 
   /**
    * Set the time
    */
-  void Time (float time) {
+  void Time (double time) {
 	  time_ = time;
   }
 
   /**
    * Get the Signal
    */
-  float Signal () const {
+  double Signal () const {
 	  return signal_;
   }
 
   /**
    * Set the Signal
    */
-  void Signal (float signal) {
+  void Signal (double signal) {
 	  signal_ = signal;
   }
 
   
  private:
-  // copy and assignment are private
-  I3TankHit(const I3TankHit&); 
-  const I3TankHit& operator=(const I3TankHit&); 
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-// ROOT macro
-  //ClassDef(I3TankHit,1);
+
 };
 
 I3_POINTER_TYPEDEFS(I3TankHit);

@@ -214,8 +214,6 @@ class I3Time : public I3FrameObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 
-  //ClassDef(I3Time,1);
-
   
 };
 

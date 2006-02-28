@@ -54,6 +54,7 @@ I3_POINTER_TYPEDEFS(I3RecoHit);
 typedef I3Vector<I3RecoHit> I3RecoHitSeries;
 typedef I3Map<OMKey, I3RecoHitSeries> I3RecoHitSeriesMap;
 
+I3_POINTER_TYPEDEFS(I3RecoHitSeries);
 I3_POINTER_TYPEDEFS(I3RecoHitSeriesMap);
 
 #endif //I3RECOHIT_H_INCLUDED
