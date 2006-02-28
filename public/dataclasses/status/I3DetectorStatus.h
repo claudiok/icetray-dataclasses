@@ -26,10 +26,10 @@
  *
  * Stuff that is a 'knob' on the detector.  This is a
  * top-level object in the frame related to this 'Detector Status' information.
- * Contains:  map of per DOM configurations (also the list of active DOMs)
- *            map of active triggers (and their configurations)
- *            map of active domhubs (and their settings)...eventually
- *
+ * Contains: 
+ * - map of per DOM configurations (also the list of active DOMs),
+ * - map of active triggers (and their configurations) and
+ * - map of active domhubs (and their settings) ... eventually.
  */
 
 struct I3DetectorStatus : public I3FrameObject

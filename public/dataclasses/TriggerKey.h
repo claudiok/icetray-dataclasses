@@ -17,19 +17,21 @@
 #include <sstream>
 
 #include <icetray/I3Logging.h>
+#include <dataclasses/Utility.h>
 
 
 /**
- * @brief A small class which is the "key" for trigger maps.
+ * @brief A small class which is the "key" for the trigger status/config map in I3DetectorStatus.
  * 
- * In DAQ, triggers are identified in "event data" by three 
- * flags. These three IDs make a "unique" identifier that can be
- * used to look up other trigger information.
+ * In DAQ, triggers are identified in "event data" by three IDs.
+ * These three IDs make a "unique" identifier that can be used to look up
+ * additional trigger information like "prescale" for "MIN_BIAS" triggers
+ * or "threshold" and "timeWindow" for "SIMPLE_MULTIPLICITY" triggers.
  * 
- * Those 3 pieces are:
- *  - sourceID
- *  - triggerType
- *  - triggerConfigID
+ * Those three pieces are:
+ *  - Source ID
+ *  - Type ID
+ *  - Config ID
  *
  * Go bug the DAQ SW folks for more info. I can't make this stuff up.
  */
@@ -37,8 +39,9 @@ class TriggerKey
 {
 public:
   /**
+   * Enumeration describing what "subdetector" issued a trigger.
    */
-  enum SourceID	                // incomplete enumeration of trigger sources
+  enum SourceID	                // probably incomplete enumeration of trigger sources
   {
     IN_ICE = 0,
     ICE_TOP,
@@ -52,8 +55,9 @@ public:
   };
 
   /**
+   * Enumeration describing what "algorithm" issued a trigger.
    */
-  enum TypeID                   // incomplete enumeration of trigger types
+  enum TypeID                   // probably incomplete enumeration of trigger types
   {
     SIMPLE_MULTIPLICITY = 0,
     CALIBRATION,
@@ -62,7 +66,8 @@ public:
     TWO_COINCIDENCE,
     THREE_COINCIDENCE,
     AMANDA_MULTIPLICITY,
-    MERGED,
+    MERGED,                     // -^-^-^ used for IceCube data
+                                // -^-^-^ used for AMANDA data
     UNKNOWN_TYPE                // UNKNOWN should always be the last enum
   };
 
@@ -173,7 +178,7 @@ public:
    * Indicates, if a configuration ID is set.
    * 
    * The triplet of (SourceID source, TypeID type, int configID)
-   * corresponds to a trigger configuration used in the IceCube DAQ.
+   * corresponds to a trigger status/config used in the IceCube DAQ.
    * AMANDA has no such trigger configurations, so that the
    * configuration ID might not be set.
    * @return True, if configuration ID is set.
@@ -243,7 +248,10 @@ public:
     return !(rhs == *this);
   }
 
+private:
+  friend class boost::serialization::access;
   template <class Archive> void serialize (Archive& ar, unsigned version);
+
 
   // logging
   SET_LOGGER("TriggerKey");
@@ -252,7 +260,7 @@ public:
 /**
  * pointer type to insulate users from memory management
  */
-
+I3_POINTER_TYPEDEFS(TriggerKey);
 
 /**
  * Comparison operator. Required to use TriggerKeys as a key of a map.

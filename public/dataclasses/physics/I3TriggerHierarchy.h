@@ -14,11 +14,27 @@
 #include "dataclasses/I3Tree.h"
 #include "dataclasses/physics/I3Trigger.h"
 
+/**
+ * Type definition for a n-ary tree of I3Trigger.
+ * 
+ * In contrast to AMANDA, there is no "flat" structure of coincident triggers
+ * in IceCube anymore. DAQ provides a more complicated n-ary tree-like hierarchy
+ * of triggers instead. So called "global triggers" hold "subdetector triggers"
+ * (child nodes of the corresponding node within the tree).
+ * "Global triggers" might be assigned as childs to an additional "global trigger"
+ * of type "MERGED", if two or more of these overlap in time.
+ * 
+ * Triggering at "string processor" level will add one additional level of
+ * siblings in future.
+ * 
+ * A n-ary tree of I3Trigger describes both scenarios very well.
+ * One might only use top level siblings for triggers in AMANDA and a full
+ * tree-like hierarchy for triggers in IceCube.
+ */
 typedef I3Tree<I3Trigger> I3TriggerHierarchy;
 
 /**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
+ * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(I3TriggerHierarchy);
 

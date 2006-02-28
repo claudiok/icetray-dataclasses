@@ -84,7 +84,8 @@ void TriggerKey::serialize(Archive& ar, unsigned version)
   ar & make_nvp("SourceID", source_);
   ar & make_nvp("TypeID", type_);
   ar & make_nvp("ConfigIDSet", configIDSet_);
-  ar & make_nvp("ConfigID", configID_);
+  if (configIDSet_)
+    ar & make_nvp("ConfigID", configID_);
 }
 
   
