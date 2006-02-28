@@ -59,6 +59,4 @@ template <typename T>
 std::string 
 AsXML(const T& ob);
 
-shared_ptr<I3FrameObject> Clone(shared_ptr<const I3FrameObject> ptr);
-
 #endif 
