@@ -21,13 +21,43 @@
 
 
 /**
- * @brief A trigger configuration object.
+ * @brief A trigger status/configuration object.
  *
- * A class to describe a basic trigger configuration.
- * Will make available the basics of a trigger:
- * - name
- * - a map of trigger settings:  string, integer values
- *   (contents vary by trigger type)
+ * A class describing all additional trigger information beside source and type
+ * that are encapsulated in a TriggerKey already.
+ * It only consists of 
+ * - a name and
+ * - a map of trigger settings:  string, integer values,
+ * since most trigger information varies by trigger type.
+ *
+ *  Most probably, these settings are ...<BR>
+ * <BR>... simple multiplicity trigger:<BR>
+ * "threshold" - number of hits required in a time window<BR>
+ * "timeWindow" - lenth of sliding time window (in ns)<BR>
+ * <BR>... calibration trigger<BR>
+ * "hitType" - type of hit to trigger on (0(test), 1 (CPU), 2 (SPE), 3 (flasher))<BR>
+ * <BR>... min bias trigger<BR>
+ * "prescale" - one over the fraction of hits to trigger on<BR>
+ * <BR>... two coincidence trigger<BR>
+ * "triggerType1" - trigger type of first trigger<BR>
+ * "triggerConfigId1" - trigger config ID of first trigger<BR>
+ * "sourceId1" - source ID of first trigger<BR>
+ * "triggerType2" - trigger type of second trigger<BR>
+ * "triggerConfigId2" - trigger config ID of second trigger<BR>
+ * "sourceId2" - source ID of second trigger<BR>
+ * <BR>... three coincidence trigger<BR>
+ * "triggerType1" - trigger type of first trigger<BR>
+ * "triggerConfigId1" - trigger config ID of first trigger<BR>
+ * "sourceId1" - source ID of first trigger<BR>
+ * "triggerType2" - trigger type of second trigger<BR>
+ * "triggerConfigId2" - trigger config ID of second trigger<BR>
+ * "sourceId2" - source ID of second trigger<BR>
+ * "triggerType3" - trigger type of third trigger<BR>
+ * "triggerConfigId3" - trigger config ID of third trigger<BR>
+ * "sourceId3" - source ID of third trigger<BR>
+ * <BR>... AMANDA multiplicity trigger<BR>
+ * "threshold" - number of hits required in a time window<BR>
+ * "timeWindow" - lenth of sliding time window (in ns)<BR>
  */
 class I3TriggerStatus 
 {
@@ -84,8 +114,7 @@ private:
 };
 
 /**
- * Pointer typedeffed away to insulate users from the 
- * memory-mananagement implementation
+ * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(I3TriggerStatus);
 
