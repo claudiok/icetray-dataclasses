@@ -23,9 +23,9 @@
 
 
 /**
- * @brief The basic Trigger class.  
+ * @brief The basic trigger class.  
  * 
- * This is the base class for trigger records that will live in the I3TriggerDict.
+ * This is the base class for trigger records that will live in the I3TriggerHierarchy.
  */
 class I3Trigger 
 {
@@ -79,6 +79,7 @@ public:
    * @return true, if the trigger was fired.
    */
   bool GetTriggerFired() const {return fired_;}
+  
   /**
    * Sets, if the trigger was fired (used for simulations).
    * 
@@ -94,12 +95,18 @@ public:
   const TriggerKey& GetTriggerKey() const {return key_;}
   TriggerKey& GetTriggerKey() {return key_;}
 
+private:
+  friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
+
 
   // logging
   SET_LOGGER("I3Trigger");
 };
 
+/**
+ * pointer type to insulate users from memory management
+ */
 I3_POINTER_TYPEDEFS(I3Trigger);
 
 #endif
