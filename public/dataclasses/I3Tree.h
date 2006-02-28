@@ -16,6 +16,16 @@
 #include <dataclasses/external/tree.hh>
 
 
+/**
+ * STL-like container class for n-ary trees.
+ * 
+ * I3Tree derives from tree that is provided by k.peeters@damtp.cam.ac.uk.
+ * You might want to check his documentation
+ * ($I3_WORK/dataclasses/resources/external/tree.pdf) until we provide our own
+ * docs.
+ * We will change I3Tree/tree probably soon and add const_iterators + corresponding
+ * access methods.
+ */
 template <typename T>
 struct I3Tree : public I3FrameObject , public tree<T>
 {
@@ -26,7 +36,7 @@ struct I3Tree : public I3FrameObject , public tree<T>
   void serialize(Archive & ar, unsigned version)
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-    //ar & make_nvp("thetree", base_object< tree<Key, Value> >(*this));
+    // ar & make_nvp("thetree", base_object< tree<Key, Value> >(*this));
   }
 
 };
