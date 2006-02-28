@@ -25,7 +25,7 @@ TEST(I3Direction)
 {
   I3Direction dir;
   cout << AsXML(dir);
-  I3DirectonPtr dirptr(new I3Direction);
+  I3DirectionPtr dirptr(new I3Direction);
   cout << AsXML(dirptr);
   I3DirectionConstPtr dircnstptr(new I3Direction);
   cout << AsXML(dircnstptr);
