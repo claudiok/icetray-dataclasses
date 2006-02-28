@@ -11,6 +11,7 @@
 #include <stdint.h> //int64_t, etc
 #include "dataclasses/copy_if.h"
 #include <icetray/IcetrayFwd.h>
+#include "icetray/I3FrameObject.h"
 
 namespace boost 
 {
@@ -57,5 +58,7 @@ AsXML(shared_ptr<const T> obj);
 template <typename T>
 std::string 
 AsXML(const T& ob);
+
+shared_ptr<I3FrameObject> Clone(shared_ptr<const I3FrameObject> ptr);
 
 #endif 
