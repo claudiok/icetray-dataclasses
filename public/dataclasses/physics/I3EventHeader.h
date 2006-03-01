@@ -50,12 +50,12 @@ class I3EventHeader : public I3FrameObject
 
   I3Time GetEndTime() const
     {
-      return startTime_;
+      return endTime_;
     }
 
   void SetEndTime(I3Time time)
     {
-      startTime_ = time;
+      endTime_ = time;
     }
 
   /**
