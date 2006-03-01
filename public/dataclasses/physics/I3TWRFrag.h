@@ -17,7 +17,7 @@ class I3TWRFrag
 {
   int            id;
   int            parent_id;
-  float          frag_start_time;
+  double         frag_start_time;
   int            frag_start_bin;
   vector<double> waveform;
 
@@ -25,15 +25,16 @@ class I3TWRFrag
   I3TWRFrag() {id=0; frag_start_time=NAN; frag_start_bin=0;}
   virtual ~I3TWRFrag();
 
-  int          GetId() {return id;}
-  void           SetId(int id_) {id=id_;}
-  int          GetParentId() {return id;}
-  void           SetParentId(int parent_id_) {parent_id=parent_id_;}
-  float        GetStartTime() {return frag_start_time;}
-  void           SetStartTime(float frag_start_time_) {frag_start_time=frag_start_time_;}
-  int          GetStartBin() {return frag_start_bin;}
-  void           SetStartBin(int frag_start_bin_) {frag_start_bin=frag_start_bin_;}
+  int          GetId() const {return id;}
+  void         SetId(int id_) {id=id_;}
+  int          GetParentId() const {return id;}
+  void         SetParentId(int parent_id_) {parent_id=parent_id_;}
+  double       GetStartTime() const {return frag_start_time;}
+  void         SetStartTime(double frag_start_time_) {frag_start_time=frag_start_time_;}
+  int          GetStartBin() const {return frag_start_bin;}
+  void         SetStartBin(int frag_start_bin_) {frag_start_bin=frag_start_bin_;}
   
+  const vector<double>& GetWaveform() const {return waveform;}
   vector<double>& GetWaveform() {return waveform;}
 
   private:

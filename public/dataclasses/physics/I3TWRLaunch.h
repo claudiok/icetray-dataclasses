@@ -18,27 +18,27 @@ using namespace std;
 
 class I3TWRLaunch : public I3Vector<I3TWRFrag>
 {
-  int   id;
-  float bin_size;
-  float baseline;
-  int   stop_delay;
-  int   threshold;
-  bool  optical;
+  int    id;
+  double bin_size;
+  double baseline;
+  int    stop_delay;
+  int    threshold;
+  bool   optical;
 
   public:
   I3TWRLaunch() {id=0; bin_size=0; baseline=0; stop_delay=0; threshold=0; optical=false;}
   virtual ~I3TWRLaunch();
-  int   GetId() {return id;}
+  int     GetId() {return id;}
   void    SetId(int id_) {id=id_;}
-  float GetBinSize() {return bin_size;}
-  void    SetBinSize(float bin_size_) {bin_size=bin_size_;}
-  float GetBaseline() {return baseline;}
-  void    SetBaseline(float baseline_) {baseline=baseline_;}
-  int   GetStopDelay() {return stop_delay;}
+  double  GetBinSize() const {return bin_size;}
+  void    SetBinSize(double bin_size_) {bin_size=bin_size_;}
+  double  GetBaseline() const {return baseline;}
+  void    SetBaseline(double baseline_) {baseline=baseline_;}
+  int     GetStopDelay() const {return stop_delay;}
   void    SetStopDelay(int stop_delay_) {stop_delay=stop_delay_;}
-  int   GetThreshold() {return threshold;}
+  int     GetThreshold() const {return threshold;}
   void    SetThreshold(int threshold_) {threshold=threshold_;}
-  bool  GetOptical() {return optical;}
+  bool    GetOptical() const {return optical;}
   void    SetOptical(bool optical_) {optical=optical_;}
 
   private:
