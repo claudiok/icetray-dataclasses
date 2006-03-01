@@ -17,4 +17,5 @@ I3TWRLaunch::serialize (Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3TWRLaunch);
-I3_SERIALIZABLE(I3TWRLaunchMap);
+I3_SERIALIZABLE(I3TWRLaunchSeries);
+I3_SERIALIZABLE(I3TWRLaunchSeriesMap);

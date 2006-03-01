@@ -47,10 +47,13 @@ class I3TWRLaunch : public I3Vector<I3TWRFrag>
 
 };
 
-typedef I3Map<OMKey, I3TWRLaunch> I3TWRLaunchMap;
+typedef I3Vector<I3TWRLaunch> I3TWRLaunchSeries;
+typedef I3Map<OMKey, I3TWRLaunchSeries> I3TWRLaunchSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3TWRLaunch);
-I3_POINTER_TYPEDEFS(I3TWRLaunchMap);
+I3_POINTER_TYPEDEFS(I3TWRLaunchSeries);
+I3_POINTER_TYPEDEFS(I3TWRLaunchSeriesMap);
+
 
 #endif //I3TWRLAUNCH_H_INCLUDED
 
