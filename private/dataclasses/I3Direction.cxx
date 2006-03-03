@@ -19,7 +19,7 @@ I3Direction::serialize(Archive& ar, unsigned version)
   ar & make_nvp("Azi", azimuth_);
 }
 
-I3_SERIALIZABLE(I3Direction)
+I3_SERIALIZABLE(I3Direction);
 
 //-----------------------------------------------------------
 I3Direction::I3Direction()

@@ -16,7 +16,7 @@
 #include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/I3Time.h"
 #include "dataclasses/OMKey.h"
-#include <icetray/I3FrameTraits.h>
+#include <icetray/I3DefaultName.h>
 #include "icetray/I3FrameObject.h"
 #include <sstream>
 
@@ -51,18 +51,7 @@ struct I3DetectorStatus : public I3FrameObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-template<>
-struct I3FrameTraits<I3DetectorStatus>
-{
-  static const char* defaultName;
-};
-
-template<>
-struct I3FrameTraits<const I3DetectorStatus>
-{
-  static const char* defaultName;
-};
-
+I3_DEFAULT_NAME(I3DetectorStatus);
 I3_POINTER_TYPEDEFS(I3DetectorStatus);
 
 #endif // I3DETECTORSTATUS_H_INCLUDED

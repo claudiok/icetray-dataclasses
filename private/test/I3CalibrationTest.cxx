@@ -5,7 +5,7 @@
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/I3Units.h"
-
+#include <dataclasses/Utility.h>
 #include <string>
 #include <iostream>
 
@@ -96,12 +96,8 @@ TEST(to_stream)
     dom_calib->SetATWDBinCalibFit(id,channel,bin,fit);
     
     //dom_calib->ToStream(cout);
-
-#warning AsXML busted
-
+    log_info("Calibration %s",AsXML(*dom_calib).c_str());
     //log_info("Calibration %s",AsXML(dom_calib).c_str());
-
-
 }
 
 

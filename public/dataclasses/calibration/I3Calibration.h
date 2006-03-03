@@ -17,9 +17,8 @@
 #include "dataclasses/calibration/I3AMANDAOMCalibration.h"
 #include "dataclasses/I3Time.h"
 #include "dataclasses/OMKey.h"
-#include <icetray/I3FrameTraits.h>
-#include "icetray/I3FrameObject.h"
-
+#include <icetray/I3FrameObject.h>
+#include <icetray/I3DefaultName.h>
 
 struct I3Calibration : public I3FrameObject
 {
@@ -37,21 +36,7 @@ public:
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-template<>
-struct I3FrameTraits<I3Calibration>
-{
-  static const char* defaultName;
-};
-
-template<>
-struct I3FrameTraits<const I3Calibration>
-{
-  static const char* defaultName;
-};
-
-
-
-
+I3_DEFAULT_NAME(I3Calibration);
 I3_POINTER_TYPEDEFS(I3Calibration);
 
 #endif // I3CALIBRATION_H_INCLUDED

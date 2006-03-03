@@ -14,7 +14,7 @@
 #include "dataclasses/geometry/I3TankGeo.h"
 #include "dataclasses/geometry/I3OMGeo.h"
 #include "dataclasses/I3Time.h"
-#include <icetray/I3FrameTraits.h>
+#include <icetray/I3DefaultName.h>
 #include "icetray/I3FrameObject.h"
 
 /*
@@ -75,22 +75,7 @@ I3_POINTER_TYPEDEFS(I3StationGeoMap)
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-/** 
- * streaming operator
- */
-
-template<>
-struct I3FrameTraits<I3Geometry>
-{
-  static const char* defaultName;
-};
-
-template<>
-struct I3FrameTraits<const I3Geometry>
-{
-  static const char* defaultName;
-};
-
-I3_POINTER_TYPEDEFS(I3Geometry)
+I3_DEFAULT_NAME(I3Geometry);
+I3_POINTER_TYPEDEFS(I3Geometry);
 
 #endif // I3GEOMETRY_H_INCLUDED
