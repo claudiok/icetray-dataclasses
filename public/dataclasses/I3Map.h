@@ -21,6 +21,12 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
     ar & make_nvp("map", base_object< std::map<Key, Value> >(*this));
   }
 
+  const Value& at(const Key& key) const{
+    typename std::map<Key, Value>::const_iterator iter = find(key);
+    if(iter == this->end()) log_fatal("Key not found!  Check for existence before calling 'at'.");
+    return iter->second;
+  }
+
 };
 
 

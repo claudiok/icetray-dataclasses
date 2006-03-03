@@ -186,7 +186,8 @@ class I3Time : public I3FrameObject
 
   bool operator>=(const I3Time& rhs) const;
 
- 
+  I3Time operator+(const double);
+  I3Time operator+(const I3Time&);
 
  public:
 
