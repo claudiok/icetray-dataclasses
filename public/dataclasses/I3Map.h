@@ -8,8 +8,15 @@
 #ifndef I3MAP_H_INCLUDED
 #define I3MAP_H_INCLUDED
 
-#include "icetray/I3FrameObject.h"
 #include <map>
+#include <string>
+
+#include <dataclasses/Utility.h>
+#include <icetray/I3Logging.h>
+#include <icetray/I3FrameObject.h>
+
+#include <icetray/lexical_casts.h>
+#include <boost/lexical_cast.hpp>
 
 template <typename Key, typename Value>
 struct I3Map : public I3FrameObject, public std::map<Key, Value>
@@ -21,12 +28,25 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
     ar & make_nvp("map", base_object< std::map<Key, Value> >(*this));
   }
 
-  const Value& at(const Key& key) const{
-    typename std::map<Key, Value>::const_iterator iter = find(key);
-    if(iter == this->end()) log_fatal("Key not found!  Check for existence before calling 'at'.");
+  const Value& 
+  at(const Key& where) const
+  {
+    typename std::map<Key, Value>::const_iterator iter = find(where);
+    if (iter == this->end())
+      log_fatal("Map contains nothing at %s.", boost::lexical_cast<std::string>(where).c_str());
+
     return iter->second;
   }
 
+  Value& 
+  at(const Key& where) 
+  {
+    typename std::map<Key, Value>::iterator iter = find(where);
+    if (iter == this->end())
+      log_fatal("Map contains nothing at %s.", boost::lexical_cast<std::string>(where).c_str());
+
+    return iter->second;
+  }
 };
 
 
