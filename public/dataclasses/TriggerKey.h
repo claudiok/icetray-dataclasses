@@ -33,9 +33,11 @@
  *  - Type ID
  *  - Config ID
  *
- * Go bug the DAQ SW folks for more info. I can't make this stuff up.
+ * 
+ * 
+ * (Go bug the DAQ SW folks for more info. I can't make this stuff up.)
  */
-class TriggerKey 
+class TriggerKey
 {
 public:
   /**
