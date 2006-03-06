@@ -13,8 +13,11 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+//#include <dataclasses/BoostHeaders.h>
 #include <I3Test.h>
-#include "dataclasses/I3Tree.h"
+#include <dataclasses/I3Tree.h>
 
 using namespace std;
 
@@ -309,4 +312,29 @@ TEST(l_merge)
   t3.append_child(iter, 8);
   ENSURE_EQUAL(t1.size(), t3.size());
   ENSURE(equal(t1.begin(), t1.end(), t3.begin()));
+}
+
+TEST(m_serialization_of_a_full_tree_using_an_xml_archive)
+{
+  I3Tree<int> t1;
+  I3Tree<int> t2;
+
+  createTree(t1);
+  
+  ostringstream os;
+  {
+    boost::archive::xml_oarchive oa(os);
+    oa << boost::serialization::make_nvp("mytree", t1);
+  }
+  
+  istringstream is;
+  is.str(os.str());
+  {
+    boost::archive::xml_iarchive ia(is);
+    ia >> boost::serialization::make_nvp("mytree", t2);
+  }
+  t2.swap(t2.begin());
+  
+  ENSURE_EQUAL(t1.size(), t2.size());
+  ENSURE(equal(t1.begin(), t1.end(), t2.begin()));    
 }
