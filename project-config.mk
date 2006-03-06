@@ -7,6 +7,7 @@ USES_TOOLS := root log4cplus boost boost
 ROOT_DICTIONARY_HEADERS := \
 dataclasses/I3Position.h \
 dataclasses/I3Direction.h \
+dataclasses/I3Double.h \
 dataclasses/physics/I3Particle.h
 
 GIMP = dataclasses/I3Time.h \

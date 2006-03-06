@@ -19,8 +19,8 @@
 
 #pragma link C++ class I3Position+; //
 #pragma link C++ class I3Direction+; //
-
 #pragma link C++ class I3Particle+;
+#pragma link C++ class I3Double+;
 
 #endif
 
