@@ -12,7 +12,7 @@
 */
 #include <I3Test.h>
 #include "dataclasses/physics/I3Trigger.h"
-
+#include "dataclasses/TriggerKey.h"
 // this is a typical minimal testsuite
 
 // This string identifies the test suite in the list of test suites.
@@ -25,6 +25,7 @@ TEST_GROUP(I3TriggerTest);
 TEST(assignment_copy)
 {
   I3Trigger h, j;
+
   //Check that constructor preset values are set properly
   ENSURE(h.GetTriggerFired() == false);
   ENSURE(h.GetTriggerTime() == 0.0);
@@ -33,6 +34,7 @@ TEST(assignment_copy)
   j.SetTriggerTime(12345.67);
   j.SetTriggerLength(1567.89);
   j.SetTriggerFired(true);
+  j.GetTriggerKey().SetSource(TriggerKey::AMANDA);
   //test assignment one object to another
   h = j;
   //Check it correct.
@@ -42,5 +44,7 @@ TEST(assignment_copy)
   ENSURE_DISTANCE(j.GetTriggerLength(), h.GetTriggerLength(), 0.001,
 		  "trigger length simple assignment");
   ENSURE(j.GetTriggerFired() == j.GetTriggerFired());
+
+  ENSURE(j.GetTriggerKey().GetSource() == TriggerKey::AMANDA);
 }
 
