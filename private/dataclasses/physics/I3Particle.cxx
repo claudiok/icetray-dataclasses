@@ -1,7 +1,7 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3Particle.h>
 
-I3Particle::~I3Particle() {}
+I3Particle::~I3Particle() { }
 
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
