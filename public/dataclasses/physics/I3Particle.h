@@ -219,15 +219,7 @@ class I3Particle : public I3FrameObject
   }
 
 
-
-  // don't take these out until the projects that use them are updated.
-  const map<string,double>& GetParameters() const { return user_; }
-  map<string,double>& GetParameters() { return user_; }
-
  private:
-
-  // don't take these out until the projects that use them are updated.
-  map<string,double> user_; //! dont dict me
 
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
