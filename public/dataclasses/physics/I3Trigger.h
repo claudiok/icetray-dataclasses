@@ -14,10 +14,6 @@
 #ifndef I3_TRIGGER_H_INCLUDED
 #define I3_TRIGGER_H_INCLUDED
 
-#include <string>
-#include <iostream>
-#include <sstream>
-
 #include <dataclasses/TriggerKey.h>
 #include <dataclasses/Utility.h>
 

@@ -13,8 +13,6 @@
 
 
 #include <string>
-#include <iostream>
-#include <sstream>
 
 #include <icetray/I3Logging.h>
 #include <dataclasses/Utility.h>
