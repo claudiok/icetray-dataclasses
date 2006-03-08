@@ -8,6 +8,7 @@
 #ifndef I3MAP_H_INCLUDED
 #define I3MAP_H_INCLUDED
 
+#include "icetray/I3Logging.h"
 #include <map>
 #include <string>
 

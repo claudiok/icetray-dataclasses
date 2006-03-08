@@ -186,10 +186,21 @@ class I3Time : public I3FrameObject
 
   bool operator>=(const I3Time& rhs) const;
 
-  I3Time operator+(const double);
-  I3Time operator+(const I3Time&);
+  /**
+   *Adds a double to I3Time
+   *Takes into account rounding and leap years
+   */
+  I3Time operator+(const double) const;
+  I3Time operator-(const double) const;
 
- public:
+  /**
+   *Adds an I3Time to I3Time
+   *Takes into account rounding and leap years
+   */
+  I3Time operator+(const I3Time&) const;
+  I3Time operator-(const I3Time&) const;
+
+ public: 
 
   static double modjulianday(int year);
   
@@ -209,6 +220,8 @@ class I3Time : public I3FrameObject
 
   int32_t year_;
   int64_t daqTime_;
+
+  bool I3Time::LeapYear(const int year) const;
 
   friend class boost::serialization::access;
 
