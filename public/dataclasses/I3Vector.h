@@ -23,5 +23,15 @@ struct I3Vector : public I3FrameObject, public std::vector<T>
   }
 };
 
+typedef I3Vector<string> I3VectorString;
+typedef I3Vector<double> I3VectorDouble;
+typedef I3Vector<int> I3VectorInt;
+typedef I3Vector<bool> I3VectorBool;
+
+I3_POINTER_TYPEDEFS(I3VectorString);
+I3_POINTER_TYPEDEFS(I3VectorDouble);
+I3_POINTER_TYPEDEFS(I3VectorInt);
+I3_POINTER_TYPEDEFS(I3VectorBool);
+
 #endif // I3VECTOR_H_INCLUDED
 
