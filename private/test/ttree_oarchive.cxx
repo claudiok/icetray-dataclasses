@@ -1,4 +1,4 @@
-#ifndef I3_NO_TTREE_OARCHIVE
+#ifndef DISABLE_TTREE_OARCHIVE
 
 #include <icetray/serialization.h>
 
