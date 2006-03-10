@@ -23,3 +23,5 @@ template <class Archive>
   
 
 I3_SERIALIZABLE(I3Particle);
+
+I3_SERIALIZABLE(I3ParticleVect);
