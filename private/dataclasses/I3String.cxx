@@ -7,7 +7,7 @@ using namespace std;
 
 I3String::I3String() { }
 
-I3String::I3String(string s) : value(s) {}
+I3String::I3String(const std::string& s) : value(s) {}
 
 I3String::I3String(const I3String& rhs) : value(rhs.value) {}
 

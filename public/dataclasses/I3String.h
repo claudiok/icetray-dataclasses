@@ -13,7 +13,7 @@ struct I3String : public I3FrameObject
   std::string value;
   
   I3String();
-  I3String(string s);
+  I3String(const std::string& s);
   I3String(const I3String&);
   I3String& operator=(const I3String&);
 
