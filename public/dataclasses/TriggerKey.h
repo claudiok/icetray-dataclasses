@@ -67,7 +67,18 @@ public:
     THREE_COINCIDENCE,
     AMANDA_MULTIPLICITY,
     MERGED,                     // -^-^-^ used for IceCube data
-                                // -^-^-^ used for AMANDA data
+    COMBINED_TRIGGER,
+    AMANDA_A,
+    MULTIPLICITY,
+    MULTIPLICITY_4,
+    MULTIPLICITY_10,
+    AMANDA_A_MULTIPLICITY_COINCIDENCES,
+    STRING,
+    DOWNSCALED_MULTIPLICITY,
+    TDC_CALIBRATION,
+    GENERAL_SPASE,
+    SPASE_1,
+    SPASE_2,                    // -^-^-^ used for AMANDA data
     UNKNOWN_TYPE                // UNKNOWN should always be the last enum
   };
 
