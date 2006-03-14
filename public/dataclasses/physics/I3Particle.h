@@ -26,7 +26,7 @@ class I3Particle : public I3FrameObject
     
  public:
 
-  enum MCParticleType {
+  enum ParticleType {
     unknown = -100,
     Gamma = 1,
     EPlus = 2,
@@ -61,15 +61,22 @@ class I3Particle : public I3FrameObject
     APrimary = 3500,
     Elph = 9999
   };
-  enum ParticleType { 
-    Null, 
-    Primary, 
-    TopShower, 
-    Cascade, 
-    InfiniteTrack, 
-    StartingTrack, 
-    StoppingTrack, 
-    ContainedTrack
+  enum ParticleShape { 
+    Null = 0, 
+    Primary = 1, 
+    TopShower = 2, 
+    Cascade = 3, 
+    InfiniteTrack = 4, 
+    StartingTrack = 5, 
+    StoppingTrack = 6, 
+    ContainedTrack = 7
+  };
+  enum FitStatus {
+    OK = 0,
+    UnknownFailure = 1,
+    InsufficientHits = 2,
+    FailedToConverge = 3,
+    MissingSeed = 4
   };
 
  private:
@@ -77,8 +84,9 @@ class I3Particle : public I3FrameObject
   int ID_;
   int parentID_;
   int primaryID_;
-  MCParticleType mctype_;
   ParticleType type_;
+  ParticleShape shape_;
+  FitStatus status_;
   I3Position pos_;
   I3Direction dir_;
   double time_;
@@ -93,8 +101,8 @@ class I3Particle : public I3FrameObject
     ID_(-1),
     parentID_(-1),
     primaryID_(-1),
-    mctype_(unknown),
-    type_(Null),
+    type_(unknown),
+    shape_(Null),
     pos_(),
     dir_(),
     time_(NAN),
@@ -106,23 +114,23 @@ class I3Particle : public I3FrameObject
   virtual ~I3Particle();
 
   bool IsTrack() const {
-    if (type_==InfiniteTrack || type_==StartingTrack ||
-	type_==StoppingTrack || type_==ContainedTrack) return true;
+    if (shape_==InfiniteTrack || shape_==StartingTrack ||
+	shape_==StoppingTrack || shape_==ContainedTrack) return true;
     else return false;
   }
 
   bool IsCascade() const {
-    if (type_==Cascade) return true;
+    if (shape_==Cascade) return true;
     else return false;
   }
 
   bool IsPrimary() const {
-    if (type_==Primary) return true;
+    if (shape_==Primary) return true;
     else return false;
   }
 
   bool IsTopShower() const {
-    if (type_==TopShower) return true;
+    if (shape_==TopShower) return true;
     else return false;
   }
 
@@ -135,11 +143,14 @@ class I3Particle : public I3FrameObject
   int GetPrimaryID() const { return primaryID_; }
   void SetPrimaryID(int id) { primaryID_ = id; }
 
-  MCParticleType GetMCType() const { return mctype_; }
-  void SetMCType(MCParticleType mctype) { mctype_ = mctype; }
-
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
+
+  ParticleShape GetShape() const { return shape_; }
+  void SetShape(ParticleShape shape) { shape_ = shape; }
+
+  FitStatus GetFitStatus() const { return status_; }
+  void SetFitStatus(FitStatus status) { status_ = status; }
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
@@ -191,7 +202,7 @@ class I3Particle : public I3FrameObject
   }
 
   I3Position GetStartPos() const { 
-    if (type_==StartingTrack || type_==ContainedTrack) return pos_;
+    if (shape_==StartingTrack || shape_==ContainedTrack) return pos_;
     else {
       I3Position nullpos;
       return nullpos;
@@ -199,13 +210,13 @@ class I3Particle : public I3FrameObject
   }
 
   double GetStartTime() const {
-    if (type_==StartingTrack || type_==ContainedTrack) return time_;
+    if (shape_==StartingTrack || shape_==ContainedTrack) return time_;
     else return NAN;
   }
 
   I3Position GetStopPos() const {
-    if (type_==StoppingTrack) return pos_;
-    else if (type_==ContainedTrack) return ShiftAlongTrack(length_);
+    if (shape_==StoppingTrack) return pos_;
+    else if (shape_==ContainedTrack) return ShiftAlongTrack(length_);
     else {
       I3Position nullpos;
       return nullpos;
@@ -213,8 +224,8 @@ class I3Particle : public I3FrameObject
   }
 
   double GetStopTime() const { 
-    if (type_==StoppingTrack) return time_;
-    else if (type_==ContainedTrack) { return time_ + length_/speed_; }
+    if (shape_==StoppingTrack) return time_;
+    else if (shape_==ContainedTrack) { return time_ + length_/speed_; }
     else return NAN;
   }
 

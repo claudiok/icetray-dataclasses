@@ -8,10 +8,11 @@ template <class Archive>
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
-    ar & make_nvp("ParentID",parentID_);
-    ar & make_nvp("PrimaryID",primaryID_);
-    ar & make_nvp("MCType",mctype_);
-    ar & make_nvp("Type",type_);
+    ar & make_nvp("parentID",parentID_);
+    ar & make_nvp("primaryID",primaryID_);
+    ar & make_nvp("type",type_);
+    ar & make_nvp("shape",shape_);
+    ar & make_nvp("fitStatus",status_);
     ar & make_nvp("pos",pos_);
     ar & make_nvp("dir",dir_);
     ar & make_nvp("time",time_);
