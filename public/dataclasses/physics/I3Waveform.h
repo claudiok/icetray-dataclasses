@@ -6,8 +6,6 @@
 #include "dataclasses/I3Map.h"
 #include "dataclasses/OMKey.h"
 
-using namespace std;
-
 class I3Waveform 
 {
 public:
@@ -23,7 +21,7 @@ public:
 private:
   double startTime_;
   double binWidth_;
-  vector<double> waveform_;
+  std::vector<double> waveform_;
   Source source_;
   
 public:
@@ -35,9 +33,11 @@ public:
 
   void SetBinWidth(double binWidth){binWidth_ = binWidth;}
 
-  const vector<double>& GetWaveform() const {return waveform_;}
+  const std::vector<double>& GetWaveform() const {return waveform_;}
 
-  void SetWaveform(const vector<double>& waveform){waveform_ = waveform;}
+  std::vector<double>& GetWaveform() {return waveform_;}
+
+  void SetWaveform(const std::vector<double>& waveform){waveform_ = waveform;}
 
   Source GetSource() const{return source_;}
 
