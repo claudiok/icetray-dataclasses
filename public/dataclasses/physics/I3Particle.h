@@ -72,8 +72,9 @@ class I3Particle : public I3FrameObject
     ContainedTrack = 7
   };
   enum FitStatus {
+    NotSet = -1,
     OK = 0,
-    UnknownFailure = 1,
+    GeneralFailure = 1,
     InsufficientHits = 2,
     FailedToConverge = 3,
     MissingSeed = 4
@@ -103,6 +104,7 @@ class I3Particle : public I3FrameObject
     primaryID_(-1),
     type_(unknown),
     shape_(Null),
+    status_(NotSet),
     pos_(),
     dir_(),
     time_(NAN),
@@ -111,6 +113,14 @@ class I3Particle : public I3FrameObject
     speed_(I3Constants::c)
     {};
   
+  I3Particle(ParticleShape shape) :
+    shape_(shape)
+    {};
+
+  I3Particle(ParticleType type) :
+    type_(unknown)
+    {};
+
   virtual ~I3Particle();
 
   bool IsTrack() const {
