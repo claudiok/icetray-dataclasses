@@ -46,7 +46,7 @@ TEST(GetOMGeoX)
   //Look for something not there.
   OMKey fives(5,5);
   try{
-    double nothit =  georef.omgeo.at(fives).position.GetX();
+    georef.omgeo.at(fives).position.GetX();
     FAIL("That at() call should not work");
   } catch (const std::exception&e) { }
 

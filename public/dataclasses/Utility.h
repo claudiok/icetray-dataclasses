@@ -53,10 +53,6 @@ using namespace std;
 // icetray/serialization.h
 template <typename T>
 std::string 
-AsXML(shared_ptr<const T> obj);
-
-template <typename T>
-std::string 
 AsXML(const T& ob);
 
 #endif 

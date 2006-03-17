@@ -8,12 +8,13 @@
 
 #include "dataclasses/Utility.h"
 #include "dataclasses/physics/I3Particle.h"
+#include "dataclasses/geometry/I3Geometry.h"
+#include "dataclasses/I3Direction.h"
 
 using namespace std;
 
-TEST_GROUP(AsXMLTest);
-#warning AsXML needs fixings
-/*
+TEST_GROUP(AsXML);
+
 TEST(I3Position)
 {
   I3Position pos;
@@ -37,4 +38,14 @@ TEST(I3Particle)
   I3Particle muon;
   cout << AsXML(muon);
 }
-*/
+
+TEST(I3Geometry)
+{
+  I3Geometry geo;
+  cout << AsXML(geo);
+  I3GeometryPtr geoptr(new I3Geometry);
+  cout << AsXML(geoptr);
+  
+  I3GeometryConstPtr geocp(new I3Geometry);
+  cout << AsXML(geocp);
+}

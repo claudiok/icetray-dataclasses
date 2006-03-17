@@ -2,7 +2,7 @@
 // $Id$
 
 #include <iostream>
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
