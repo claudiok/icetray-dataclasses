@@ -10,6 +10,7 @@
 
 #include "icetray/I3FrameObject.h"
 #include <map>
+#include "dataclasses/Utility.h"
 
 template <typename Key, typename Value>
 struct I3Map : public I3FrameObject, public std::map<Key, Value>
