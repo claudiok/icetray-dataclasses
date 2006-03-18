@@ -27,12 +27,12 @@ class I3RecoPulse
 {
   int hitID_;
   double time_;
-  double amp_;
+  double charge_;
   double width_;
 
   public:
 
-  I3RecoPulse() {hitID_=0; time_=NAN; width_=NAN; amp_=NAN;}
+  I3RecoPulse() {hitID_=0; time_=NAN; width_=NAN; charge_=NAN;}
 
   double GetTime() const {return time_;}
 
@@ -42,9 +42,9 @@ class I3RecoPulse
 
   void SetID(const int hitid) {hitID_ = hitid;}
 
-  double GetAmplitude() const {return amp_;}
+  double GetCharge() const {return charge_;}
 
-  void SetAmplitude(double amp) {amp_ = amp;}
+  void SetCharge(double charge) {charge_ = charge;}
 
   double GetWidth() const {return width_;}
 
