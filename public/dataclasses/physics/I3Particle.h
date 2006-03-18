@@ -98,12 +98,12 @@ class I3Particle : public I3FrameObject
 
  public:
 
-  I3Particle() : 
+  I3Particle(ParticleShape shape = Null, ParticleType type = unknown) : 
     ID_(-1),
     parentID_(-1),
     primaryID_(-1),
-    type_(unknown),
-    shape_(Null),
+    type_(type),
+    shape_(shape),
     status_(NotSet),
     pos_(),
     dir_(),
@@ -113,14 +113,6 @@ class I3Particle : public I3FrameObject
     speed_(I3Constants::c)
     {};
   
-  I3Particle(ParticleShape shape) :
-    shape_(shape)
-    {};
-
-  I3Particle(ParticleType type) :
-    type_(unknown)
-    {};
-
   virtual ~I3Particle();
 
   bool IsTrack() const {
