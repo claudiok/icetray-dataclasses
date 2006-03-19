@@ -5,6 +5,8 @@
 
     @section particles Particles
 
+  This is all dated
+
    The basic building blocks of events, in either Monte Carlo or
    reconstruction, are referred to as "particles" and are derived from
    the @c I3Particle parent class.  There are three basic types of
