@@ -67,7 +67,6 @@ I3_POINTER_TYPEDEFS(I3StationGeoMap)
   I3Time startTime;
   I3Time endTime;
 
-  I3Geometry(const I3Geometry& geometry);
   const I3Geometry& operator=(const I3Geometry& geometry);
 
   friend class boost::serialization::access;
