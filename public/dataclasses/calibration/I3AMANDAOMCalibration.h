@@ -82,8 +82,6 @@ struct I3AMANDAOMCalibration
 
   virtual ~I3AMANDAOMCalibration();
 
-  friend class boost::serialization::access;
-
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 

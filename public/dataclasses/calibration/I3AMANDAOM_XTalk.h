@@ -27,9 +27,8 @@ struct I3AMANDAOM_XTalk
   I3AMANDAOM_XTalk() {timehigh=NAN; timelow=NAN; width=NAN;}
   virtual ~I3AMANDAOM_XTalk();
 
-  friend class boost::serialization::access;
-
-  template <class Archive> void serialize(Archive & ar, unsigned version);
+  template <class Archive> 
+  void serialize(Archive & ar, unsigned version);
 };
 
 I3_POINTER_TYPEDEFS(I3AMANDAOM_XTalk);
