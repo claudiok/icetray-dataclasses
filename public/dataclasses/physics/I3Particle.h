@@ -63,21 +63,21 @@ class I3Particle : public I3FrameObject
   };
   enum ParticleShape { 
     Null = 0, 
-    Primary = 1, 
-    TopShower = 2, 
-    Cascade = 3, 
-    InfiniteTrack = 4, 
-    StartingTrack = 5, 
-    StoppingTrack = 6, 
-    ContainedTrack = 7
+    Primary = 10, 
+    TopShower = 20, 
+    Cascade = 30, 
+    InfiniteTrack = 40, 
+    StartingTrack = 50, 
+    StoppingTrack = 60, 
+    ContainedTrack = 70
   };
   enum FitStatus {
     NotSet = -1,
     OK = 0,
-    GeneralFailure = 1,
-    InsufficientHits = 2,
-    FailedToConverge = 3,
-    MissingSeed = 4
+    GeneralFailure = 10,
+    InsufficientHits = 20,
+    FailedToConverge = 30,
+    MissingSeed = 40
   };
 
  private:
