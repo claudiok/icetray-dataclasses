@@ -10,9 +10,11 @@
 #define I3EVENTHEADER_H_INCLUDED
 
 // includes
-#include "dataclasses/I3Time.h"
+#include <dataclasses/I3Time.h>
+
 #include <string>
-#include "icetray/I3FrameObject.h"
+#include <icetray/I3FrameObject.h>
+#include <icetray/I3DefaultName.h>
 
 using namespace std;
 
@@ -95,6 +97,7 @@ class I3EventHeader : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3EventHeader);
+I3_DEFAULT_NAME(I3EventHeader);
 
 #endif //I3EVENTHEADER_H_INCLUDED
 
