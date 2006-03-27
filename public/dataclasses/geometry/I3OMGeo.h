@@ -25,7 +25,7 @@ struct I3OMGeo
 {
 
   enum Orientation {Unspecified=0, Up=1, Down=-1};
-  enum OMType {AMANDA, IceCube, IceTop};
+  enum OMType {AMANDA = 10, IceCube = 20, IceTop = 30};
 
   I3OMGeo() {Init();}
   //copy constructor just uses assignment

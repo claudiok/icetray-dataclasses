@@ -11,11 +11,11 @@ class I3Waveform
 public:
     enum Source
     {
-      ATWD,
-      FADC,
-      TWR_ELECTRICAL,
-      TWR_OPTICAL,
-      ETC
+      ATWD = 0,
+      FADC = 10,
+      TWR_ELECTRICAL = 20,
+      TWR_OPTICAL = 30,
+      ETC = 40
     };
 
 private:

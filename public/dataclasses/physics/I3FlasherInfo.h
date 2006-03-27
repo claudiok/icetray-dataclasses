@@ -14,8 +14,8 @@
 
 using namespace std; 
 
-enum EventFlasherStatusType{single_flasher = 0, muon_event = 10, 
-  multi_flasher = 20,flasher_not_set = -1};
+enum EventFlasherStatusType{single_flasher = 0, muon_event = 1, 
+  multi_flasher = 2, flasher_not_set = -1};
 
 /**
  * @brief This contains the data on which DOM flashed during flasher runs

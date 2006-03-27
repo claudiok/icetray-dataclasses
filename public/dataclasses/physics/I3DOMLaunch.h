@@ -29,7 +29,7 @@ class I3DOMLaunch
 {
 
 public:  
-    enum ATWDselect {ATWDa,ATWDb};
+    enum ATWDselect {ATWDa = 1, ATWDb = 2};
 
 private:
     /**  

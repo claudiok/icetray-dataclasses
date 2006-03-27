@@ -39,7 +39,7 @@ class I3Position : public I3FrameObject
   /**
    * Possible reference frames.
    */
-  enum RefFrame { car, sph, cyl };
+  enum RefFrame { car = 0, sph = 1, cyl = 2 };
 
   //--------------
 
