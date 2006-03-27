@@ -44,14 +44,14 @@ public:
   enum SourceID	                // probably incomplete enumeration of trigger sources
   {
     IN_ICE = 0,
-    ICE_TOP,
-    AMANDA,
-    EXTERNAL,
-    GLOBAL,                     // -^-^-^ used for IceCube data
-    AMANDA_MUON_DAQ,
-    AMANDA_TWR_DAQ,
-    SPASE,                      // -^-^-^ used for AMANDA data
-    UNKNOWN_SOURCE              // UNKNOWN should always be the last enum
+    ICE_TOP = 10,
+    AMANDA = 20,
+    EXTERNAL = 30,
+    GLOBAL = 40,                     // -^-^-^ used for IceCube data
+    AMANDA_MUON_DAQ = 50,
+    AMANDA_TWR_DAQ = 60,
+    SPASE = 70,                      // -^-^-^ used for AMANDA data
+    UNKNOWN_SOURCE = 80              // UNKNOWN should always be the last enum
   };
 
   /**
@@ -60,24 +60,24 @@ public:
   enum TypeID                   // probably incomplete enumeration of trigger types
   {
     SIMPLE_MULTIPLICITY = 0,
-    CALIBRATION,
-    MIN_BIAS,
-    THROUGHPUT,
-    TWO_COINCIDENCE,
-    THREE_COINCIDENCE,
-    AMANDA_MULTIPLICITY,
-    MERGED,                     // -^-^-^ used for IceCube data
-    MAIN,
-    AMANDA_A,
-    MULTIPLICITY,
-    AMANDA_A_MULTIPLICITY_COINCIDENCES,
-    STRING,
-    DOWNSCALED_MULTIPLICITY,
-    TDC_CALIBRATION,
-    GENERAL_SPASE,
-    SPASE_1,
-    SPASE_2,                    // -^-^-^ used for AMANDA data
-    UNKNOWN_TYPE                // UNKNOWN should always be the last enum
+    CALIBRATION = 10,
+    MIN_BIAS = 20,
+    THROUGHPUT = 30,
+    TWO_COINCIDENCE = 40,
+    THREE_COINCIDENCE = 50,
+    AMANDA_MULTIPLICITY = 60,
+    MERGED = 70,                     // -^-^-^ used for IceCube data
+    MAIN = 80,
+    AMANDA_A = 90,
+    MULTIPLICITY = 100,
+    AMANDA_A_MULTIPLICITY_COINCIDENCES = 110, 
+    STRING = 120,
+    DOWNSCALED_MULTIPLICITY = 130,
+    TDC_CALIBRATION = 140,
+    GENERAL_SPASE = 150,
+    SPASE_1 = 160,
+    SPASE_2 = 170,                    // -^-^-^ used for AMANDA data
+    UNKNOWN_TYPE = 180                // UNKNOWN should always be the last enum
   };
 
   /**
