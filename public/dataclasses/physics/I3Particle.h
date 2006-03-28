@@ -77,7 +77,8 @@ class I3Particle : public I3FrameObject
     GeneralFailure = 10,
     InsufficientHits = 20,
     FailedToConverge = 30,
-    MissingSeed = 40
+    MissingSeed = 40,
+    InsufficientQuality = 50
   };
 
  private:
