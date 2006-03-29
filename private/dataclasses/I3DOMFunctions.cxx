@@ -16,9 +16,10 @@ double ATWDSamplingRate ( unsigned int chip,
 {
    double rateCorrected=0; //sampling rate in MHz
    const QuadraticFit atwdQFit  = calib.GetATWDFreqFit(chip);
+   double dacTrigBias;
    if(isnan(atwdQFit.quadFitC)) // Old style linear fit
      {
-       double dacTrigBias;
+       log_trace("Linear fit from DOMCAL");
        double slope = atwdQFit.quadFitB;
        double intercept = atwdQFit.quadFitA;
        if(chip == 0) dacTrigBias =  status.dacTriggerBias0;
@@ -28,11 +29,26 @@ double ATWDSamplingRate ( unsigned int chip,
        rateCorrected = (slope * dacTrigBias + intercept)*20.;  //
        log_trace("calculated rate corrected %f MHz, for chip %d", rateCorrected, chip);
      }
-   else
+   else // if not linear fit
      {
-       log_error("Quadratic fit found.  I need to be implemented!!");
-       // @todo implement this
-       rateCorrected = 0.0;
+       log_trace("Quadratic Fit from DOMcal");
+       
+       if (atwdQFit.quadFitC == 0.0) 
+	 {
+	   log_warn("Found a quadratic fit with C=0.0, are you sure this is is a quadratic fit??");
+	 } 
+       else {                   
+	 double c0 = atwdQFit.quadFitA;
+	 double c1 = atwdQFit.quadFitB;
+	 double c2 = atwdQFit.quadFitC;
+	 if(chip == 0) dacTrigBias =  status.dacTriggerBias0;
+	 else if(chip == 1) dacTrigBias =  status.dacTriggerBias1;
+	 else log_fatal ("No trigger bias for chip %ui\n",chip);
+	 
+	 // f(MHz) = c2*dac*dac + c1*dac + c0
+	 rateCorrected = (c2 * dacTrigBias * dacTrigBias + c1 * dacTrigBias + c0);
+	 log_trace("I3DOMFunctions: rate corrected %f MHz, for chip %d", rateCorrected, chip);
+       }                         
      }
    return rateCorrected / I3Units::microsecond;
 }
