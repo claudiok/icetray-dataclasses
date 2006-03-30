@@ -11,11 +11,8 @@
 
 #include "icetray/I3FrameObject.h"
 #include "dataclasses/OMKey.h"
-
+#include "dataclasses/I3Vector.h"
 using namespace std; 
-
-enum EventFlasherStatusType{single_flasher = 0, muon_event = 1, 
-  multi_flasher = 2, flasher_not_set = -1};
 
 /**
  * @brief This contains the data on which DOM flashed during flasher runs
@@ -61,14 +58,14 @@ protected:
 
      int LEDBrightness_;
 
-     EventFlasherStatusType eventFlasherStatus_;
+     int width_;
+
 
     
 public:
  
     I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
 	{
-	  eventFlasherStatus_= flasher_not_set;
 	}
 
     virtual ~I3FlasherInfo(){;}
@@ -103,14 +100,10 @@ public:
     void SetMask(int LEDmask) { mask_ = LEDmask; }
 
 
-    /* return and set whether a particular event is a muon or not
-     * for use by muon-filter
-     */
-    
-     EventFlasherStatusType GetEventFlasherStatus() const 
-     {return eventFlasherStatus_;}
-     void SetEventFlasherStatus(EventFlasherStatusType eventFlasherStatus) 
-     {eventFlasherStatus_=eventFlasherStatus;}
+      /* return and set width */
+ 
+    unsigned int GetWidth() const { return width_; }
+    void SetWidth(int width) { width_ = width; }
 
 
     /**
@@ -140,6 +133,8 @@ private:
 
 I3_POINTER_TYPEDEFS(I3FlasherInfo);
 
+typedef I3Vector<I3FlasherInfo> I3FlasherInfoVect;
+I3_POINTER_TYPEDEFS(I3FlasherInfoVect);
 #endif //I3FLASHERINFO_H_INCLUDED
 
 
