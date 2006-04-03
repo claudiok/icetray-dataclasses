@@ -11,8 +11,13 @@
 #ifndef I3_TRIGGER_HIERARCHY_H_INCLUDED
 #define I3_TRIGGER_HIERARCHY_H_INCLUDED
 
+#include <algorithm>
+#include <boost/lambda/lambda.hpp>
+#include <boost/lambda/bind.hpp>
+
 #include "dataclasses/I3Tree.h"
 #include "dataclasses/physics/I3Trigger.h"
+#include "icetray/I3DefaultName.h"
 
 /**
  * Type definition for a n-ary tree of I3Trigger.
@@ -39,6 +44,107 @@ typedef I3Tree<I3Trigger> I3TriggerHierarchy;
  * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(I3TriggerHierarchy);
+
+/**
+ * define a default name to address hierarchy in a frame
+ */
+I3_DEFAULT_NAME(I3TriggerHierarchy);
+
+namespace I3TriggerHierarchyUtils
+{
+  namespace internal
+  {
+    inline bool EqualSrc(const I3Trigger& trigger, TriggerKey::SourceID src)
+    { return trigger.GetTriggerKey().GetSource() == src; }
+
+    inline bool EqualType(const I3Trigger& trigger, TriggerKey::TypeID type)
+    { return trigger.GetTriggerKey().GetType() == type; }
+
+    inline bool EqualSrcType(const I3Trigger& trigger,
+                             TriggerKey::SourceID src, TriggerKey::TypeID type)
+    { return (trigger.GetTriggerKey().GetSource() == src)
+              && (trigger.GetTriggerKey().GetType() == type); }
+
+    inline bool EqualKey(const I3Trigger& trigger, const TriggerKey& key)
+    { return trigger.GetTriggerKey() == key; }
+  }
+  
+  inline size_t
+  Count(const I3TriggerHierarchy& triggers,
+        TriggerKey::SourceID src)
+  {
+    return count_if(triggers.begin(), triggers.end(),
+                    boost::lambda::bind(internal::EqualSrc,
+                                        boost::lambda::_1, src));
+  }
+
+  inline size_t
+  Count(const I3TriggerHierarchy& triggers,
+        TriggerKey::TypeID type)
+  {
+    return count_if(triggers.begin(), triggers.end(),
+                    boost::lambda::bind(internal::EqualType,
+                                        boost::lambda::_1, type));
+  }
+
+  inline size_t
+  Count(const I3TriggerHierarchy& triggers,
+        TriggerKey::SourceID src, TriggerKey::TypeID type)
+  {
+    return count_if(triggers.begin(), triggers.end(),
+                    boost::lambda::bind(internal::EqualSrcType,
+                                        boost::lambda::_1, src, type));
+  }
+
+  inline size_t
+  Count(const I3TriggerHierarchy& triggers,
+        const TriggerKey& key)
+  {
+    return count_if(triggers.begin(), triggers.end(),
+                    boost::lambda::bind(internal::EqualKey,
+                                        boost::lambda::_1, key));
+  }
+
+  inline I3TriggerHierarchy::iterator
+  Find(const I3TriggerHierarchy& triggers,
+       TriggerKey::SourceID src,
+       I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
+  {
+    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+                   boost::lambda::bind(internal::EqualSrc,
+                                       boost::lambda::_1, src));
+  }
+
+  inline I3TriggerHierarchy::iterator
+  Find(const I3TriggerHierarchy& triggers,
+       TriggerKey::TypeID type,
+       I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
+  {
+    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+                   boost::lambda::bind(internal::EqualType,
+                                       boost::lambda::_1, type));
+  }
+
+  inline I3TriggerHierarchy::iterator
+  Find(const I3TriggerHierarchy& triggers,
+       TriggerKey::SourceID src, TriggerKey::TypeID type,
+       I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
+  {
+    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+                   boost::lambda::bind(internal::EqualSrcType,
+                                       boost::lambda::_1, src, type));
+  }
+
+  inline I3TriggerHierarchy::iterator
+  Find(const I3TriggerHierarchy& triggers,
+       const TriggerKey& key,
+       I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
+  {
+    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+                   boost::lambda::bind(internal::EqualKey,
+                                       boost::lambda::_1, key));
+  }
+}
 
 #endif
 
