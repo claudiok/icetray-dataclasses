@@ -6,22 +6,16 @@
     @version $Revision: 1.8 $
     @date $Date: 2005-08-31 12:19:29 -0400 (Wed, 31 Aug 2005) $
     @author tschmidt
-
-    @todo
-
 */
 #include <vector>
 #include <algorithm>
 #include <sstream>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-//#include <dataclasses/BoostHeaders.h>
 #include <I3Test.h>
 #include <dataclasses/I3Tree.h>
 
 using namespace std;
-
-// this is a typical minimal testsuite
 
 // This string identifies the test suite in the list of test suites.
 TEST_GROUP(I3TreeTest);
