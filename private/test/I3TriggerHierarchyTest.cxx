@@ -40,30 +40,30 @@ TEST(I3TriggerHierarchyUtils)
                                      TriggerKey::SIMPLE_MULTIPLICITY, 5);
 
 
-  ENSURE_EQUAL(0, I3TriggerHierarchyUtils::Count(t, TriggerKey::EXTERNAL));
-  ENSURE_EQUAL(1, I3TriggerHierarchyUtils::Count(t, TriggerKey::AMANDA));
-  ENSURE_EQUAL(3, I3TriggerHierarchyUtils::Count(t, TriggerKey::GLOBAL));
+  ENSURE_EQUAL(0u, I3TriggerHierarchyUtils::Count(t, TriggerKey::EXTERNAL));
+  ENSURE_EQUAL(1u, I3TriggerHierarchyUtils::Count(t, TriggerKey::AMANDA));
+  ENSURE_EQUAL(3u, I3TriggerHierarchyUtils::Count(t, TriggerKey::GLOBAL));
   
-  ENSURE_EQUAL(0, I3TriggerHierarchyUtils::Count(t, TriggerKey::MIN_BIAS));
-  ENSURE_EQUAL(2, I3TriggerHierarchyUtils::Count(t, TriggerKey::SIMPLE_MULTIPLICITY));
+  ENSURE_EQUAL(0u, I3TriggerHierarchyUtils::Count(t, TriggerKey::MIN_BIAS));
+  ENSURE_EQUAL(2u, I3TriggerHierarchyUtils::Count(t, TriggerKey::SIMPLE_MULTIPLICITY));
   
-  ENSURE_EQUAL(0, I3TriggerHierarchyUtils::Count(t, TriggerKey::IN_ICE,
-                                                 TriggerKey::CALIBRATION));
-  ENSURE_EQUAL(1, I3TriggerHierarchyUtils::Count(t, TriggerKey::GLOBAL,
-                                                 TriggerKey::MERGED));
+  ENSURE_EQUAL(0u, I3TriggerHierarchyUtils::Count(t, TriggerKey::IN_ICE,
+                                                  TriggerKey::CALIBRATION));
+  ENSURE_EQUAL(1u, I3TriggerHierarchyUtils::Count(t, TriggerKey::GLOBAL,
+                                                  TriggerKey::MERGED));
   
-  ENSURE_EQUAL(0, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::GLOBAL,
-                                                               TriggerKey::MERGED, 1)));
-  ENSURE_EQUAL(1, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::GLOBAL,
-                                                               TriggerKey::MERGED)));
-  ENSURE_EQUAL(0, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::GLOBAL,
-                                                               TriggerKey::THROUGHPUT)));
-  ENSURE_EQUAL(0, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::ICE_TOP,
-                                                               TriggerKey::SIMPLE_MULTIPLICITY,
-                                                               6)));
-  ENSURE_EQUAL(1, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::ICE_TOP,
-                                                               TriggerKey::SIMPLE_MULTIPLICITY,
-                                                               5)));
+  ENSURE_EQUAL(0u, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::GLOBAL,
+                                                                TriggerKey::MERGED, 1)));
+  ENSURE_EQUAL(1u, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::GLOBAL,
+                                                                TriggerKey::MERGED)));
+  ENSURE_EQUAL(0u, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::GLOBAL,
+                                                                TriggerKey::THROUGHPUT)));
+  ENSURE_EQUAL(0u, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::ICE_TOP,
+                                                                TriggerKey::SIMPLE_MULTIPLICITY,
+                                                                6)));
+  ENSURE_EQUAL(1u, I3TriggerHierarchyUtils::Count(t, TriggerKey(TriggerKey::ICE_TOP,
+                                                                TriggerKey::SIMPLE_MULTIPLICITY,
+                                                                5)));
                                                                
   ENSURE(I3TriggerHierarchyUtils::Find(t, TriggerKey::EXTERNAL) == t.end());
   iter = I3TriggerHierarchyUtils::Find(t, TriggerKey::AMANDA);
@@ -89,5 +89,5 @@ TEST(I3TriggerHierarchyUtils)
     ++counter;
     ++iter;
   }
-  ENSURE_EQUAL(2, counter);
+  ENSURE_EQUAL(2u, counter);
 }
