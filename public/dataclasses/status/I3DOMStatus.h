@@ -15,7 +15,7 @@ struct I3DOMStatus
   /**  
    * This controls how far the local coincidence signal is sent 
    */
-  enum LCMode {LCOff = 0, UpOrDown = 1, Up = 2, Down = 3 };
+  enum LCMode {LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4};
   /**
    * There is also provision to turn on or off various settings in the 
    * DOM
