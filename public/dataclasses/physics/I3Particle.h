@@ -149,11 +149,17 @@ class I3Particle : public I3FrameObject
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
 
+  string GetTypeString() const;
+
   ParticleShape GetShape() const { return shape_; }
   void SetShape(ParticleShape shape) { shape_ = shape; }
 
+  string GetShapeString() const;
+
   FitStatus GetFitStatus() const { return status_; }
   void SetFitStatus(FitStatus status) { status_ = status; }
+
+  string GetFitStatusString() const;
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
