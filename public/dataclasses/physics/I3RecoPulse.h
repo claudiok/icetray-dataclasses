@@ -42,7 +42,17 @@ class I3RecoPulse
 
   void SetID(const int hitid) {hitID_ = hitid;}
 
+    /**
+     * GetCharge() - Returns the number of PE's seen in this pulse
+     *       PEs are used since they are independent of HW, gain, etc.
+     */
+
   double GetCharge() const {return charge_;}
+
+    /**
+     * SetCharge() - Sets the number of PE's seen in this pulse
+     *       PEs are used since they are independent of HW, gain, etc.
+     */
 
   void SetCharge(double charge) {charge_ = charge;}
 
