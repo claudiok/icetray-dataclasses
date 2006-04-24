@@ -12,7 +12,8 @@ template <class Archive>
     ar & make_nvp("TankRadius", tankradius);
     ar & make_nvp("TankHeight", tankheight);
     ar & make_nvp("FillHeight", fillheight);
-    ar & make_nvp("OMKeyList", omKeyList_);
+    if (version > 0)
+      ar & make_nvp("OMKeyList", omKeyList_);
 
   }
 
