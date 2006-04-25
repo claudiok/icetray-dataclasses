@@ -13,6 +13,9 @@
 
 #include "dataclasses/I3Position.h"
 #include "dataclasses/Utility.h"
+#include "dataclasses/OMKey.h"
+#include "dataclasses/I3Vector.h"
+
 using namespace std;
 
 /*Simple struct that contains all the pertinent Tank info.
@@ -38,6 +41,7 @@ struct I3TankGeo
   double tankradius; //tank radius (I3Units!)
   double tankheight; //tank height (I3Units!)
   double fillheight; //water/ice level height (I3Units!)
+  I3Vector<OMKey> omKeyList_;
 
   friend class boost::serialization::access;
 
