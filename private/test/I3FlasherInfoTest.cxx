@@ -76,7 +76,7 @@ TEST(SetAndGet){
     double atwdBinSize_f = (double)rand()/(double)rand();
     int ledBrightness_f = rand();
     unsigned int mask_f = rand();
-    int width_f = rand();
+    unsigned width_f = rand();
     OMKey omKey_f(string_f,om_f);
 
     ENSURE(flasherInfoPtr->GetFlashingOM() == omKey_f,"OMKey is not the same");
