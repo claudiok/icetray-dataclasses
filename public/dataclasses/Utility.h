@@ -55,6 +55,8 @@ template <typename T>
 std::string 
 AsXML(const T& ob);
 
+// hide Get from ROOT since Rene doesn't like templates
+#ifndef __CINT__
 namespace I3
 {
 
@@ -76,6 +78,9 @@ namespace I3
       return found->second;
     }
   
+  /**
+   * @brief function to get data out of a map-like object.  
+   */
   template <class MapType>
     const typename MapType::value_type::second_type& 
     Get(const typename MapType::key_type& key,
@@ -92,5 +97,6 @@ namespace I3
       return found->second;
     }
 };
+#endif
 
 #endif 

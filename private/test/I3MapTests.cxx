@@ -38,16 +38,16 @@ TEST(GetOMGeoX)
   const_cast<I3Geometry&>(georef).omgeo[keyone] = omone;
   const_cast<I3Geometry&>(georef).omgeo[keytwo] = omtwo;
 
-  //Now. lets' try to access....using at
+  //Now. lets' try to access....using Get
   
-  double hitx = georef.omgeo.at(keyone).position.GetX(); 
+  double hitx = I3::Get(keyone,georef.omgeo).position.GetX(); 
   ENSURE_DISTANCE(hitx,posone.GetX(),0.01,"Bad X value from map");
 
   //Look for something not there.
   OMKey fives(5,5);
   try{
-    georef.omgeo.at(fives).position.GetX();
-    FAIL("That at() call should not work");
+    I3::Get(fives,georef.omgeo).position.GetX();
+    FAIL("That Get() call should not work");
   } catch (const std::exception&e) { }
 
 }
