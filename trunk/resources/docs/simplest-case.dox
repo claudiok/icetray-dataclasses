@@ -1,0 +1,30 @@
+/**
+   @page simplest-case Simplest serialization method example
+
+I use I3Hit as an example of the simplest case.  Even though it does inherit from TObject we're not
+going to want to write any of the TObject information to a file so our serialize method does not have to
+know about TObjects at all.
+
+I3Hit has only two data members.  A double and an integer.
+   
+   @verbatim
+  double time_;
+  int hitID_;
+   @endverbatim	                                                                                
+
+To be able to serialize this class' data members you only need to add the following lines
+in the class' private area.
+
+   @verbatim
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version)
+  {
+    ar & make_nvp("Time", time_);
+    ar & make_nvp("HitID", hitID_);
+  }
+   @endverbatim	            
+
+For a more detailed explanation of the above code check out @ref detailed-simplest-case.
+*/

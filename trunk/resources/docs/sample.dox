@@ -1,0 +1,40 @@
+// put back this doxygen starting tag later
+
+/*
+@page sample Adding to this documentation:  a template for dataclassers
+
+@author Me (him@them.us)
+
+The main page for doxygen documentation is at
+http://www.stack.nl/~dimitri/doxygen/manual.html.  The list of all
+formatting commands and their arguments are at http://www.stack.nl/~dimitri/doxygen/commands.html 
+
+@section basics The basics
+
+You can put something in typewriter font, like the name of some class
+@c MyClass by using @c @@c.  To put an ampersand in to the text you
+have to use two ampersands.
+
+@subsection basic-subtopic Here is a subsection of the basics.  
+
+The sectioning commands go all the way to @c @@subsubsection or
+thereabouts.  You can refer back to them with @c @@ref.  Like this:
+see @ref basics.  You can specify the main page with @c index.  See
+@ref index.  
+
+So classnames should be specified like this: @c MyClass.  If you need
+<tt> multiple words in code format </tt> you use the html tags for
+"typewriter type" (tt).  
+
+Here's a code snippets:
+@code
+void mungeit(int bazang) 
+{
+  kapow();
+}
+@endcode
+
+Check out @c @@dontinclude if you want to include snippets from an
+external file and walk through them.
+
+*/

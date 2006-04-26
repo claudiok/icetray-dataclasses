@@ -1,0 +1,109 @@
+/**
+   @page reco-results Reconstruction Results
+
+   @author Tyce DeYoung (deyoung@umdgrb.umd.edu)
+
+   @section prereqs Prerequisites
+
+   This document assumes that you have set up the icetray environment and
+   are now ready to (or are already) start writing your own module of
+   some kind.  Full details at @ref index.
+   
+   @section reco Reconstructions
+
+   Reconstruction in IceCube is very much a work in progress.  There
+   are a wide variety of algorithms in use, and more are certain to be
+   developed over the course of the experiment.  These algorithms
+   produce fundamentally different results -- many are based on the
+   assumption of a single infinite minimum ionizing muon, for example,
+   while others may allow for other types of solutions, including such
+   parameters as energy, starting or stopping points, speeds below
+   <i>c</i>, and so forth.  At a more fundamental level, some
+   reconstructions produce exactly one solution, a single track or
+   cascade.  Others, however, may return a collection of tracks, such
+   as a pair of independent muons from simultaneous air showers, which
+   jointly describe the event.  Still others may find several
+   alternative solutions, each of which should be recorded.  And
+   beyond these basic differences in type, most reconstructions
+   produce idiosyncratic goodness-of-fit or auxiliary parameters.  
+
+   The AMANDA offline software and data format attempted to represent
+   all of these reconstruction and track types with a single,
+   one-size-fits-all approach.  This was modified somewhat over the
+   years, with the association of @c USER lines with fits and with the
+   reuse of the parameters of @c FRESULT lines by various
+   reconstructions.  The result was a confusing system ("What does 
+   @c jkprob[6] mean, anyway?") which nevertheless failed to fully
+   accommodate the needs of all reconstructions.
+
+   In the IceCube data classes we have included a number of mechanisms
+   to provide the required flexibility.  In the process we have abandoned the
+   one-size-fits-all approach, so that different types of
+   reconstruction result objects will provide different interfaces to
+   their contents.  This means that users will need a
+   basic understanding of the results produced by the different
+   reconstruction algorithms whose results they wish to use, so that
+   they know which interface to use.  We feel,
+   however, that this requirement is not wholly undesireable.
+
+   @ref recoresults, below, discusses the various types of
+   reconstruction result classes that can be used.  @ref tracks
+   discusses the various types of tracks, cascade, and so forth that
+   can be stored in these reconstruction result classes.  These two
+   mechanisms provide the flexibility to store all of the "generic"
+   information produced by reconstruction algorithms.  For "specific"
+   types of information, reconstruction developers should make use of
+   inheritance, as described in @ref extension.
+
+   @section recoresults RecoResult classes
+
+   Events in IceCube store the results of reconstructions in the 
+   @c I3RecoResultData object.  This is a map (list of named objects;
+   see @ref containers) of objects derived from the @c I3RecoResult
+   class.  These @c I3RecoResult objects contain the various tracks,
+   cascades, etc. that make up the result of the reconstruction.  They
+   can also hold any quality parameters that refer to the
+   reconstruction result as a whole -- likelihoods, lists of used OMs,
+   etc.  As described in @ref extension, we do not attempt to
+   implement all of the various algorithm-specific parameters that may
+   be used; reconstruction developers should derive specific 
+   @c I3RecoResult classes from those provided.  The classes described
+   here represent only the minimum interface that should be respected
+   by various algorithms.
+
+   Three basic types of @c RecoResults are provided: 
+   @c I3RecoResultSingleTrack, @c I3RecoResultMultiTracks, and 
+   @c I3RecoResultAltTracks.  It is not sufficient to simply make 
+   @c I3RecoResult a container for a list of tracks, because there are
+   different logical relationships possible between the tracks in the
+   list.  This is the information that is represented by the different
+   basic @c I3RecoResult classes.
+
+   The first type, of course, is intended for
+   algorithms that produce a single track.  It is possible that at some
+   point in the future this class will be modified to permit direct
+   access to track parameters, without needing to go through the
+   intermediate layer of the @c I3RecoResult.  For now, however, 
+   @c I3RecoResultSingleTrack simply contains a pointer to an arbitrary
+   @c I3Particle object (i.e., a generic track or cascade; see 
+   @ref particles). 
+
+   @c I3RecoResultMultiTracks is a vector of particle pointers, rather
+   than a single pointer.  It is intended to hold reconstructions
+   which interpret the event as the result of several independent
+   tracks or groups of tracks (see @ref composite_tracks for a
+   discussion of groups of tracks).  An example of a fit that should
+   used this class is one which finds simultaneous muons
+   from independent air showers.
+
+   Finally, @c I3RecoResultAltTracks is a map of particles.  It should
+   be used for reconstructions that produce alternative explanations
+   of an event, and provides for a name to be given to each
+   alternative.  Examples of fits that should use this type of class
+   are JAMS or the best-upgoing/best-downgoing @c recoos searches.  In
+   each of these cases, of course, the developer of the specific
+   algorithm will probably wish to inherit from these classes rather
+   than use them directly, so that additional parameters may be stored
+   in the reconstruction result.
+
+*/
