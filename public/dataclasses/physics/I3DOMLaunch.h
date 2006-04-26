@@ -168,7 +168,7 @@ private:
 
 I3_POINTER_TYPEDEFS(I3DOMLaunch);
 
-typedef I3Vector<I3DOMLaunch> I3DOMLaunchSeries;
+typedef std::vector<I3DOMLaunch> I3DOMLaunchSeries;
 typedef I3Map<OMKey, I3DOMLaunchSeries> I3DOMLaunchSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeries);

@@ -14,8 +14,6 @@
 #include "dataclasses/OMKey.h"
 #include "dataclasses/I3Map.h"
 
-using namespace std;
-
 /**
  * @brief Base class for recopulse.
  *
@@ -69,7 +67,7 @@ class I3RecoPulse
 
 I3_POINTER_TYPEDEFS(I3RecoPulse);
 
-typedef I3Vector<I3RecoPulse> I3RecoPulseSeries;
+typedef std::vector<I3RecoPulse> I3RecoPulseSeries;
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);

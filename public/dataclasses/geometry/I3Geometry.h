@@ -46,10 +46,10 @@
 typedef vector<I3TankGeo> I3StationGeo;
 I3_POINTER_TYPEDEFS(I3StationGeo)
 
-typedef I3Map<OMKey, I3OMGeo> I3OMGeoMap;
+typedef map<OMKey, I3OMGeo> I3OMGeoMap;
 I3_POINTER_TYPEDEFS(I3OMGeoMap)
 
-typedef I3Map<int, I3StationGeo> I3StationGeoMap;
+typedef map<int, I3StationGeo> I3StationGeoMap;
 I3_POINTER_TYPEDEFS(I3StationGeoMap)
 
      struct I3Geometry : public I3FrameObject

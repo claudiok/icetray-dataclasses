@@ -50,6 +50,7 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
 
     return iter->second;
   }
+
 };
 
 template <typename Key, typename Value>

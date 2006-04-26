@@ -82,7 +82,7 @@ class I3MCHit
 
 I3_POINTER_TYPEDEFS(I3MCHit);
 
-typedef I3Vector<I3MCHit> I3MCHitSeries;
+typedef std::vector<I3MCHit> I3MCHitSeries;
 typedef I3Map<OMKey, I3MCHitSeries> I3MCHitSeriesMap; 
 
 I3_POINTER_TYPEDEFS(I3MCHitSeries);

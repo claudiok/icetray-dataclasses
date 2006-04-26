@@ -14,8 +14,6 @@
 #include "dataclasses/I3Map.h"
 #include "dataclasses/OMKey.h"
 
-using namespace std;
-
 class I3TWRLaunch : public I3Vector<I3TWRFrag>
 {
   int    id;
@@ -47,7 +45,7 @@ class I3TWRLaunch : public I3Vector<I3TWRFrag>
 
 };
 
-typedef I3Vector<I3TWRLaunch> I3TWRLaunchSeries;
+typedef std::vector<I3TWRLaunch> I3TWRLaunchSeries;
 typedef I3Map<OMKey, I3TWRLaunchSeries> I3TWRLaunchSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3TWRLaunch);

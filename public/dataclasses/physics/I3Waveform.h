@@ -48,7 +48,7 @@ private:
     template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
-typedef I3Vector<I3Waveform> I3WaveformSeries;
+typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3Waveform);
