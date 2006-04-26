@@ -40,13 +40,13 @@ TEST(GetOMGeoX)
 
   //Now. lets' try to access....using Get
   
-  double hitx = I3::Get(keyone,georef.omgeo).position.GetX(); 
+  double hitx = I3MapGet(keyone,georef.omgeo).position.GetX(); 
   ENSURE_DISTANCE(hitx,posone.GetX(),0.01,"Bad X value from map");
 
   //Look for something not there.
   OMKey fives(5,5);
   try{
-    I3::Get(fives,georef.omgeo).position.GetX();
+    I3MapGet(fives,georef.omgeo).position.GetX();
     FAIL("That Get() call should not work");
   } catch (const std::exception&e) { }
 
@@ -57,16 +57,16 @@ TEST(stlmapwithI3Get)
 {
   map<string,int> m;
   m["hello"] = 5;
-  cout<<I3::Get("hello",m)<<endl;
-  ENSURE_EQUAL(I3::Get("hello",m),5,"non-const map");
+  cout<<I3MapGet("hello",m)<<endl;
+  ENSURE_EQUAL(I3MapGet("hello",m),5,"non-const map");
 
   const map<string,int>& cm = m;
-  cout<<I3::Get("hello",cm)<<endl;
-  ENSURE_EQUAL(I3::Get("hello",cm),5,"non-const map");
+  cout<<I3MapGet("hello",cm)<<endl;
+  ENSURE_EQUAL(I3MapGet("hello",cm),5,"non-const map");
 
   try 
     {
-      cout<<I3::Get("foo",m)<<endl;
+      cout<<I3MapGet("foo",m)<<endl;
       ENSURE(0,"Should have thrown");
     }
   catch(const exception& e)
@@ -76,7 +76,7 @@ TEST(stlmapwithI3Get)
 
   try 
     {
-      cout<<I3::Get("foo",cm)<<endl;
+      cout<<I3MapGet("foo",cm)<<endl;
       ENSURE(0,"Should have thrown");
     }
   catch(const exception& e)
@@ -91,16 +91,16 @@ TEST(I3MapwithI3Get)
 {
   I3Map<string,int> m;
   m["hello"] = 5;
-  cout<<I3::Get("hello",m)<<endl;
-  ENSURE_EQUAL(I3::Get("hello",m),5,"non-const map");
+  cout<<I3MapGet("hello",m)<<endl;
+  ENSURE_EQUAL(I3MapGet("hello",m),5,"non-const map");
 
   const I3Map<string,int>& cm = m;
-  cout<<I3::Get("hello",cm)<<endl;
-  ENSURE_EQUAL(I3::Get("hello",cm),5,"non-const map");
+  cout<<I3MapGet("hello",cm)<<endl;
+  ENSURE_EQUAL(I3MapGet("hello",cm),5,"non-const map");
 
   try 
     {
-      cout<<I3::Get("foo",m)<<endl;
+      cout<<I3MapGet("foo",m)<<endl;
       ENSURE(0,"Should have thrown");
     }
   catch(const exception& e)
@@ -110,7 +110,7 @@ TEST(I3MapwithI3Get)
 
   try 
     {
-      cout<<I3::Get("foo",cm)<<endl;
+      cout<<I3MapGet("foo",cm)<<endl;
       ENSURE(0,"Should have thrown");
     }
   catch(const exception& e)
@@ -125,16 +125,16 @@ TEST(I3MapwithI3GetandOMKeys)
 {
   I3Map<OMKey,int> m;
   m[OMKey(4,5)] = 5;
-  cout<<I3::Get(OMKey(4,5),m)<<endl;
-  ENSURE_EQUAL(I3::Get(OMKey(4,5),m),5,"non-const map");
+  cout<<I3MapGet(OMKey(4,5),m)<<endl;
+  ENSURE_EQUAL(I3MapGet(OMKey(4,5),m),5,"non-const map");
 
   const I3Map<OMKey,int>& cm = m;
-  cout<<I3::Get(OMKey(4,5),cm)<<endl;
-  ENSURE_EQUAL(I3::Get(OMKey(4,5),cm),5,"non-const map");
+  cout<<I3MapGet(OMKey(4,5),cm)<<endl;
+  ENSURE_EQUAL(I3MapGet(OMKey(4,5),cm),5,"non-const map");
 
   try 
     {
-      cout<<I3::Get(OMKey(4,4),m)<<endl;
+      cout<<I3MapGet(OMKey(4,4),m)<<endl;
       ENSURE(0,"Should have thrown");
     }
   catch(const exception& e)
@@ -144,7 +144,7 @@ TEST(I3MapwithI3GetandOMKeys)
 
   try 
     {
-      cout<<I3::Get(OMKey(4,4),cm)<<endl;
+      cout<<I3MapGet(OMKey(4,4),cm)<<endl;
       ENSURE(0,"Should have thrown");
     }
   catch(const exception& e)
