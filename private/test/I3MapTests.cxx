@@ -11,7 +11,7 @@
 #include <I3Test.h>
 
 #include "dataclasses/geometry/I3Geometry.h"
-
+#include "dataclasses/Utility.h"
 
 TEST_GROUP(I3MapStuff);
 
@@ -49,5 +49,73 @@ TEST(GetOMGeoX)
     georef.omgeo.at(fives).position.GetX();
     FAIL("That at() call should not work");
   } catch (const std::exception&e) { }
+
+}
+
+
+TEST(stlmapwithI3Get)
+{
+  map<string,int> m;
+  m["hello"] = 5;
+  cout<<I3::Get("hello",m)<<endl;
+  ENSURE_EQUAL(I3::Get("hello",m),5,"non-const map");
+
+  const map<string,int>& cm = m;
+  cout<<I3::Get("hello",cm)<<endl;
+  ENSURE_EQUAL(I3::Get("hello",cm),5,"non-const map");
+
+  try 
+    {
+      cout<<I3::Get("foo",m)<<endl;
+      ENSURE(0,"Should have thrown");
+    }
+  catch(const exception& e)
+    {
+
+    }
+
+  try 
+    {
+      cout<<I3::Get("foo",cm)<<endl;
+      ENSURE(0,"Should have thrown");
+    }
+  catch(const exception& e)
+    {
+
+    }
+
+}
+
+
+TEST(I3MapwithI3Get)
+{
+  I3Map<string,int> m;
+  m["hello"] = 5;
+  cout<<I3::Get("hello",m)<<endl;
+  ENSURE_EQUAL(I3::Get("hello",m),5,"non-const map");
+
+  const I3Map<string,int>& cm = m;
+  cout<<I3::Get("hello",cm)<<endl;
+  ENSURE_EQUAL(I3::Get("hello",cm),5,"non-const map");
+
+  try 
+    {
+      cout<<I3::Get("foo",m)<<endl;
+      ENSURE(0,"Should have thrown");
+    }
+  catch(const exception& e)
+    {
+
+    }
+
+  try 
+    {
+      cout<<I3::Get("foo",cm)<<endl;
+      ENSURE(0,"Should have thrown");
+    }
+  catch(const exception& e)
+    {
+
+    }
 
 }

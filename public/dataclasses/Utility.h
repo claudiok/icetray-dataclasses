@@ -55,4 +55,42 @@ template <typename T>
 std::string 
 AsXML(const T& ob);
 
+namespace I3
+{
+
+  /**
+   * @brief function to get data out of a map-like object.  
+   */
+  template <class MapType>
+    typename MapType::value_type::second_type& 
+    Get(const typename MapType::key_type& key,
+	MapType& themap)
+    {
+      typename MapType::iterator found = themap.find(key);
+      if(found == themap.end())
+	{
+	  ostringstream error;
+	  error<<"Couldn't find key "<<key<<" in this map";
+	  log_fatal(error.str().c_str());
+	}
+      return found->second;
+    }
+  
+  template <class MapType>
+    const typename MapType::value_type::second_type& 
+    Get(const typename MapType::key_type& key,
+	const MapType& themap)
+    {
+      typename MapType::const_iterator found = themap.find(key);
+      if(found == themap.end())
+      if(found == themap.end())
+	{
+	  ostringstream error;
+	  error<<"Couldn't find key "<<key<<" in this map";
+	  log_fatal(error.str().c_str());
+	}
+      return found->second;
+    }
+};
+
 #endif 
