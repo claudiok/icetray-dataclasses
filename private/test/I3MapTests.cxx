@@ -119,3 +119,37 @@ TEST(I3MapwithI3Get)
     }
 
 }
+
+
+TEST(I3MapwithI3GetandOMKeys)
+{
+  I3Map<OMKey,int> m;
+  m[OMKey(4,5)] = 5;
+  cout<<I3::Get(OMKey(4,5),m)<<endl;
+  ENSURE_EQUAL(I3::Get(OMKey(4,5),m),5,"non-const map");
+
+  const I3Map<OMKey,int>& cm = m;
+  cout<<I3::Get(OMKey(4,5),cm)<<endl;
+  ENSURE_EQUAL(I3::Get(OMKey(4,5),cm),5,"non-const map");
+
+  try 
+    {
+      cout<<I3::Get(OMKey(4,4),m)<<endl;
+      ENSURE(0,"Should have thrown");
+    }
+  catch(const exception& e)
+    {
+
+    }
+
+  try 
+    {
+      cout<<I3::Get(OMKey(4,4),cm)<<endl;
+      ENSURE(0,"Should have thrown");
+    }
+  catch(const exception& e)
+    {
+
+    }
+
+}
