@@ -6,21 +6,49 @@
 
 struct I3DOMStatus 
 {
+
+  I3DOMStatus():
+    trigMode(UnknownTrigMode),
+       lcMode(UnknownLCMode),
+       lcWindowPre(NAN),
+       lcWindowPost(NAN),
+       lcSpan(INT_MAX),
+       statusATWDa(Unknown),
+       statusATWDb(Unknown),
+       statusFADC(Unknown),
+       pmtHV(NAN),
+       speThreshold(NAN),
+       dacTriggerBias0(NAN),
+       dacTriggerBias1(NAN),
+       dacFADCRef(NAN),
+       nBinsATWD0(0),
+       nBinsATWD1(0),
+       nBinsATWD2(0),
+       nBinsATWD3(0),
+       nBinsFADC(0),
+       fbState(Unknown),
+       fbBrightness(INT_MAX),
+       fbLength(INT_MAX),
+       fbDelay(INT_MAX),
+       fbMask(INT_MAX),
+       fbRate(INT_MAX)
+  {};
+
   virtual ~I3DOMStatus();
   /**
    * The different kinds of triggers that can be used for the dom
    * The standard data-taking operation is SPE
    */
-  enum TrigMode { TestPattern = 0 , CPU = 1, SPE = 2, Flasher=3 };
+  enum TrigMode { UnknownTrigMode = -1 , TestPattern = 0 , CPU = 1, SPE = 2, Flasher=3 };
   /**  
    * This controls how far the local coincidence signal is sent 
    */
-  enum LCMode {LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4};
+  enum LCMode {UnknownLCMode = -1, LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4};
   /**
    * There is also provision to turn on or off various settings in the 
    * DOM
    */
-  enum OnOff {Off = 0, On = 1};
+  enum OnOff {Unknown = -1, Off = 0, On = 1};
  
   /**
    * DOM internal trigger mode
