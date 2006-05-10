@@ -3,33 +3,67 @@
  * copyright  (C) 2004
  * the icecube collaboration
  * @version $Id$
+ *
  * @file I3DOMLaunch.h
+ * @version $Revision: 1.10 $
  * @date $Date$
  */
 
 #ifndef I3DOMLAUNCH_H_INCLUDED
 #define I3DOMLAUNCH_H_INCLUDED
 
-#include "dataclasses/I3Vector.h"
-#include "dataclasses/I3Map.h"
-#include "dataclasses/OMKey.h"
+#include <vector>
+
+#include <dataclasses/I3Vector.h>
+#include <dataclasses/I3Map.h>
+#include <dataclasses/OMKey.h>
 
 
 /**
  * @brief The direct (digital) readout of an IceCube DOM
  * 
- * The full digital readout of an IceCube DOM consists of one to three
+ * The full digital readout of an IceCube DOM consists of one to four
  * short but fine-grained ATWD readouts, and a long but coarse fADC
- * readout, all beginning at the same time.  The fADC is fixed at 40
- * MHz, while the sampling rate of the ATWDs is adjustable and is
- * stored in the ATWDBinSize variable.
- *
+ * readout, all beginning at the same time. The fADC is fixed at 40
+ * MHz, while the sampling rate of the ATWDs is adjustable and will be
+ * determined by the DOM calibrator.
  */
 class I3DOMLaunch 
 {
-
 public:  
-    enum ATWDselect {ATWDa = 1, ATWDb = 2};
+    enum ATWDselect
+    {
+      ATWDa = 1,
+      ATWDb = 2
+    };
+    
+    enum TriggerType
+    {
+      TEST_PATTERN = 0,
+      CPU_REQUESTED = 1,
+      SPE_DISCRIMINATOR_TRIGGER = 2,
+      FLASHER_BOARD_TRIGGER = 3
+    };
+    
+    enum TriggerMode
+    {
+      UNDEFINED = 0,
+      /** Set if signals from both upper and lower DOMs are required
+       *  to satisfy local coincidence */
+      REQUIRE_BOTH = 1,
+      /** Set if flasher board run is in the progress */
+      FR_RUN = 2,
+      /** Set if local coincidence requirement is met, and
+       *  LC has been configured to be received by the lower DOM */
+      LC_LOWER = 4,
+      /** Set if local coincidence requirement is met, and
+       *  LC has been configured to be received by the upper DOM */
+      LC_UPPER = 8,
+      /** in case of an invalid trigger setting, the UNKNOWN_MODE is set and
+       *  the test pattern trigger is used */
+      UNKNOWN_MODE = 16,
+      LAST_TRIGGER_SITUATION = 1 << 5
+    };
 
 private:
     /**  
@@ -40,10 +74,14 @@ private:
     double startTime_;  
 
     /**  
-     * This holds the trigger information -somewhat of a placeholder for now 
-     * Q: Will this be used at all? -tpm
+     * This represents the trigger type
      */
-    int trigger_;
+    TriggerType trigger_;
+    
+    /**
+     * This signals special trigger circumstances
+     */
+    TriggerMode mode_;
 
     /**  
      * This tells which ATWD in the DOM was used
@@ -98,6 +136,34 @@ public:
      * Set ATWD/FADC launch time.
      */
     void SetStartTime(double starttime) { startTime_ = starttime; }
+    
+    /**
+     * Return the trigger type/why this launch was recorded
+     * (SPE_DISCRIMINATOR_TRIGGER is the standard 'physics data').
+     */
+    TriggerType GetTriggerType() const { return trigger_; }
+    
+    /**
+     * Specify the trigger type/why this launch was recorded.
+     */
+    void SetTriggerType(TriggerType trigger) { trigger_ = trigger; }
+
+    /**
+     * Signals the special trigger circumstances. 
+     *
+     * Note: In testdomapp, the current FPGA implementation in the DOM, there is
+     * no information available that would indicate which neighbouring DOM
+     * caused the LC requirement to be met. Rather, modes LC_UPPER and LC_LOWER
+     * are a reflection of how the DOM was configured at the time this launch
+     * was recorded. So if signals from both upper and lower DOMs are required
+     * to satisfy local coincidence, LC_UPPER and LC_LOWER will be set.
+     */
+    TriggerMode GetTriggerMode() const { return mode_; }
+    
+    /**
+     * Sets the special trigger circumstances.
+     */
+    void SetTriggerMode(TriggerMode situation) { mode_ = situation; }
 
     /**
      * Return which ATWD.
@@ -174,6 +240,60 @@ typedef I3Map<OMKey, I3DOMLaunchSeries> I3DOMLaunchSeriesMap;
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeries);
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeriesMap);
 
-#endif //I3DOMLAUNCH_H_INCLUDED
+
+/**
+ * Bit operators to combine different trigger modes.
+ * 
+ * As an example:
+ * One might set I3DOMLaunch::LC_LOWER | I3DOMLaunch::LC_UPPER, if the local
+ * coincidence condition for the lower and upper DOM is met at the same time.
+ */
+inline I3DOMLaunch::TriggerMode
+operator|(I3DOMLaunch::TriggerMode a, I3DOMLaunch::TriggerMode b)
+{
+  return I3DOMLaunch::TriggerMode(static_cast<int>(a) | static_cast<int>(b));
+}
 
 
+inline I3DOMLaunch::TriggerMode
+operator&(I3DOMLaunch::TriggerMode a, I3DOMLaunch::TriggerMode b)
+{
+  return I3DOMLaunch::TriggerMode(static_cast<int>(a) & static_cast<int>(b));
+}
+
+
+inline I3DOMLaunch::TriggerMode
+operator^(I3DOMLaunch::TriggerMode a, I3DOMLaunch::TriggerMode b)
+{
+  return I3DOMLaunch::TriggerMode(static_cast<int>(a) ^ static_cast<int>(b));
+}
+
+
+inline I3DOMLaunch::TriggerMode&
+operator|=(I3DOMLaunch::TriggerMode& a, I3DOMLaunch::TriggerMode b)
+{
+  return a = a | b;
+}
+
+
+inline I3DOMLaunch::TriggerMode&
+operator&=(I3DOMLaunch::TriggerMode& a, I3DOMLaunch::TriggerMode b)
+{
+  return a = a & b;
+}
+
+
+inline I3DOMLaunch::TriggerMode&
+operator^=(I3DOMLaunch::TriggerMode& a, I3DOMLaunch::TriggerMode b)
+{
+  return a = a ^ b;
+}
+
+
+inline I3DOMLaunch::TriggerMode
+operator~(I3DOMLaunch::TriggerMode a)
+{
+  return I3DOMLaunch::TriggerMode(~static_cast<int>(a));
+}
+
+#endif // I3DOMLAUNCH_H_INCLUDED
