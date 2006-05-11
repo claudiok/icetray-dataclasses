@@ -129,6 +129,11 @@ public:
    */
   LinearFit GetFADCBaselineFit() const { return fadcBaselineFit_ ; }
 
+    /**
+     *  Get the FADC intrinsic time offset (in units of time)
+     */
+    double GetFADCDeltaT() const { return fadcDeltaT_; }
+    
   /**
    * Set FADC calibration parameters. Currently the FADC
    * calibration is a work in progress and a moving target
@@ -143,6 +148,11 @@ public:
     {
       fadcBaselineFit_ = basefit;
     }
+    
+    void SetFADCDeltaT(double deltaT)
+	{
+	    fadcDeltaT_ = deltaT;
+	}
     
   /**
    * Get gain and error on gain for ATWD by channel
@@ -206,6 +216,11 @@ private:
   double fadcGain_;
   LinearFit fadcBaselineFit_;
 
+    /**
+     *	FADC inherent time offset 
+     */
+    double fadcDeltaT_;
+   
   /**
    * Gain for ATWD channels.
    * The key corresponds to the channel (0,1,2)

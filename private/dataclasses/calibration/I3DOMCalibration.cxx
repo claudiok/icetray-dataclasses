@@ -10,7 +10,8 @@ I3DOMCalibration::~I3DOMCalibration() { }
 
 I3DOMCalibration::I3DOMCalibration()
   : temperature_(NAN),
-    fadcGain_(NAN)
+    fadcGain_(NAN),
+    fadcDeltaT_(NAN)
 { }
 
 /**
@@ -160,7 +161,8 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
-  ar & make_nvp("fadcBasline",fadcBaselineFit_);
+  ar & make_nvp("fadcBaseline",fadcBaselineFit_);
+  ar & make_nvp("fadcDeltaT", fadcDeltaT_);
   ar & make_nvp("ampGains",ampGains_);
   ar & make_nvp("atwdFreq",atwdFreq_);
   ar & make_nvp("atwd0BinParameters",atwdBin0_);
