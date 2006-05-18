@@ -19,7 +19,8 @@
 
 
 /**
- * @brief A small class which is the "key" for the trigger status/config map in I3DetectorStatus.
+ * @brief A small class which is the "key" for the trigger status/config map 
+ * in I3DetectorStatus.
  * 
  * In DAQ, triggers are identified in "event data" by three IDs.
  * These three IDs make a "unique" identifier that can be used to look up
@@ -41,7 +42,7 @@ public:
   /**
    * Enumeration describing what "subdetector" issued a trigger.
    */
-  enum SourceID	                // probably incomplete enumeration of trigger sources
+  enum SourceID	     // probably incomplete enumeration of trigger sources
   {
     IN_ICE = 0,
     ICE_TOP = 10,
@@ -57,7 +58,7 @@ public:
   /**
    * Enumeration describing what "algorithm" issued a trigger.
    */
-  enum TypeID                   // probably incomplete enumeration of trigger types
+  enum TypeID         // probably incomplete enumeration of trigger types
   {
     SIMPLE_MULTIPLICITY = 0,
     CALIBRATION = 10,
@@ -154,6 +155,11 @@ public:
   }
 
   /**
+   * Returns the string of the name of the SourceID enum
+   */
+  string GetSourceString() const;
+
+  /**
    * Sets the source ID.
    * 
    * @param source Source ID.
@@ -172,6 +178,11 @@ public:
   {
     return type_;
   }
+
+  /**
+   * Returns the string of the name of the TypeID enum
+   */
+  string GetTypeString() const;
 
   /**
    * Sets the type ID.
@@ -277,7 +288,8 @@ I3_POINTER_TYPEDEFS(TriggerKey);
  * @param rhs the right-hand trigger key.
  * @return true if the lhs should be ordered before the rhs.
  *
- * Precedence between source ID, type ID and configuration ID is somewhat arbitrary,
+ * Precedence between source ID, type ID and configuration ID is somewhat 
+ * arbitrary,
  * so I've picked:
  * source ID, type ID, configuration ID in order of descending importance.
  */

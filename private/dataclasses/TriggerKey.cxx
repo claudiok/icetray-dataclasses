@@ -74,6 +74,50 @@ TriggerKey::TypeID TriggerKey::CheckTriggerType(TypeID type)
   return retVal;
 }
 
+string TriggerKey::GetSourceString() const
+{
+  string str;
+  switch (source_) {
+  case  0: str = "IN_ICE"; break;
+  case 10: str = "ICE_TOP"; break;
+  case 20: str = "AMANDA"; break;
+  case 30: str = "EXTERNAL"; break;
+  case 40: str = "GLOBAL"; break;
+  case 50: str = "AMANDA_MUON_DAQ"; break;
+  case 60: str = "AMANDA_TWR_DAQ"; break;
+  case 70: str = "SPASE"; break;
+  case 80: str = "UNKNOWN_SOURCE"; break;
+  }
+  return str;
+}
+
+string TriggerKey::GetTypeString() const
+{
+  string str;
+  switch (type_) {
+  case   0: str = "SIMPLE_MULTIPLICITY"; break;
+  case  10: str = "CALIBRATION"; break;
+  case  20: str = "MIN_BIAS"; break;
+  case  30: str = "THROUGHPUT"; break;
+  case  40: str = "TWO_COINCIDENCE"; break;
+  case  50: str = "THREE_COINCIDENCE"; break;
+  case  60: str = "AMANDA_MULTIPLICITY"; break;
+  case  70: str = "MERGED"; break;
+  case  80: str = "MAIN"; break;
+  case  90: str = "AMANDA_A"; break;
+  case 100: str = "MULTIPLICITY"; break;
+  case 110: str = "AMANDA_A_MULTIPLICITY_COINCIDENCES"; break;
+  case 120: str = "STRING"; break;
+  case 130: str = "DOWNSCALED_MULTIPLICITY"; break;
+  case 140: str = "TDC_CALIBRATION"; break;
+  case 150: str = "GENERAL_SPASE"; break;
+  case 160: str = "SPASE_1"; break;
+  case 170: str = "SPASE_2"; break;
+  case 180: str = "UNKNOWN_TYPE"; break;
+  }
+  return str;
+}
+
 
 TriggerKey::~TriggerKey() {}
 
