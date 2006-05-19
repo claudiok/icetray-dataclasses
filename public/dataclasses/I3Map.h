@@ -63,12 +63,14 @@ typedef I3Map<std::string, bool> I3MapStringBool;
 typedef I3Map<std::string, I3MapStringDouble> I3MapStringStringDouble;
 
 typedef I3Map<unsigned, unsigned> I3MapUnsignedUnsigned;
+typedef I3Map<unsigned short, unsigned short> I3MapUShortUShort;
 
 I3_POINTER_TYPEDEFS(I3MapStringDouble);
 I3_POINTER_TYPEDEFS(I3MapStringInt);
 I3_POINTER_TYPEDEFS(I3MapStringBool);
 I3_POINTER_TYPEDEFS(I3MapStringStringDouble);
 I3_POINTER_TYPEDEFS(I3MapUnsignedUnsigned);
+I3_POINTER_TYPEDEFS(I3MapUShortUShort);
 
 
 #endif // I3MAP_H_INCLUDED
