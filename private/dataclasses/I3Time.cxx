@@ -5,6 +5,7 @@ extern "C"
 
 #include <icetray/serialization.h>
 #include "dataclasses/I3Time.h"
+#include "dataclasses/I3Units.h"
 #include <iostream>
 #include <cassert>
 
@@ -223,9 +224,10 @@ I3Time I3Time::operator+(const double second_term) const
   int64_t localDaqTime = this->GetUTCDaqTime();
   int64_t maxDaqTime;
   LeapYear(localYear) ? maxDaqTime = MAX_DAQTIME.first : maxDaqTime = MAX_DAQTIME.second;
-  int64_t daqtime = static_cast<int64_t>(second_term + 0.5); //The 0.5 effectively rounds
-  localYear += maxDaqTime / daqtime; //This should always be one or zero
-  localDaqTime += maxDaqTime % daqtime;
+  //The 0.5 effectively rounds
+  int64_t daqtime = static_cast<int64_t>((10.*second_term/I3Units::ns)+ 0.5); 
+  localYear += daqtime / maxDaqTime; //This should always be one or zero
+  localDaqTime += daqtime % maxDaqTime;
 
   return I3Time(localYear,localDaqTime);
  }
@@ -236,9 +238,10 @@ I3Time I3Time::operator-(const double second_term) const
   int64_t localDaqTime = this->GetUTCDaqTime();
   int64_t maxDaqTime;
   LeapYear(localYear) ? maxDaqTime = MAX_DAQTIME.first : maxDaqTime = MAX_DAQTIME.second;
-  int64_t daqtime = static_cast<int64_t>(second_term + 0.5); //The 0.5 effectively rounds
-  localYear -= maxDaqTime / daqtime; //This should always be one or zero
-  localDaqTime -= maxDaqTime % daqtime;
+  //The 0.5 effectively rounds
+  int64_t daqtime = static_cast<int64_t>((10.*second_term/I3Units::ns)+ 0.5); 
+  localYear -= daqtime / maxDaqTime; //This should always be one or zero
+  localDaqTime -= daqtime % maxDaqTime;
 
   return I3Time(localYear,localDaqTime);
  }
