@@ -14,8 +14,26 @@
 #include "dataclasses/OMKey.h"
 
 template <typename T>
-struct I3Vector : public I3FrameObject, public std::vector<T>
+struct I3Vector : public std::vector<T>, public I3FrameObject
 { 
+  typedef std::vector<T> base_t;
+
+  I3Vector() { }
+  
+  I3Vector(typename base_t::size_type s, const T& value) 
+    : base_t(s, value) { }
+    
+  explicit I3Vector(typename base_t::size_type n) : base_t(n) { }
+
+  I3Vector(const I3Vector& rhs) : base_t(rhs) { }
+
+  // strangely, this constructor-from-pair-of-iterators is not visible
+  // to users of I3Vector.  When you add it here, it hides all the
+  // other constructors, so you add them all, explicitly.
+
+  template <typename Iterator>
+  I3Vector(Iterator l, Iterator r) : base_t(l, r) { }
+
   template <class Archive>
   void serialize(Archive & ar, unsigned version)
   {
