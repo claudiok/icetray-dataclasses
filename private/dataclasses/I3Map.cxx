@@ -8,3 +8,4 @@ I3_SERIALIZABLE(I3MapStringDouble);
 I3_SERIALIZABLE(I3MapStringInt);
 I3_SERIALIZABLE(I3MapStringBool);
 I3_SERIALIZABLE(I3MapStringStringDouble);
+I3_SERIALIZABLE(I3MapUnsignedUnsigned);
