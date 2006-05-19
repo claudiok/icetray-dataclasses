@@ -1,7 +1,7 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: TriggerKey.cxx 13154 2005-12-01 21:45:55Z  $
+ * $Id: TriggerKey.cxx 13154 2005-12-01 21:45:55Z tschmidt $
  *
  * @file TriggerKey.cxx
  * @version $Revision: 1.10 $
@@ -14,108 +14,84 @@
 using namespace std;
 
 
-string TriggerKey::GenerateName(const TriggerKey& myKey)
+const char*
+TriggerKey::GetSourceString(SourceID source)
 {
-  // Take our trigger key, turn it into a unique string.
-  std::ostringstream myName("Trig_");
-  
-  myName << myKey.GetSource();
-  myName << "_";
-  myName << myKey.GetType();
-  myName << "_";
-  if(myKey.CheckConfigID())
-    myName << myKey.GetConfigID();
-  else
-    myName << "?";
-
-  return myName.str();
-}
-
-
-TriggerKey TriggerKey::ParseName(const string& myName)
-{
-  const char* format1 = "Trig_%i_%i_%i";
-  const char* format2 = "Trig_%i_%i_?";
-  
-  TriggerKey myKey;
-  
-  // Take our nicely generated string and deconvolve into a trigger key.
-  int src, type, cfg;
-  
-  if(sscanf(myName.c_str(), format1, &src, &type, &cfg) == 3)
-    myKey = TriggerKey(static_cast<SourceID>(src), static_cast<TypeID>(type), cfg);
-  else if(sscanf(myName.c_str(), format2, &src, &type) == 2)
-    myKey = TriggerKey(static_cast<SourceID>(src), static_cast<TypeID>(type));
-  else
-    log_fatal("Could not parse string.");
-
-  return myKey;
-}
-
-
-TriggerKey::SourceID TriggerKey::CheckTriggerSource(SourceID source)
-{
-  SourceID retVal = UNKNOWN_SOURCE;
-
-  if((source >= 0) && (source <= UNKNOWN_SOURCE))
-    retVal = source;
-
-  return retVal;
-}
-
-
-TriggerKey::TypeID TriggerKey::CheckTriggerType(TypeID type)
-{
-  TypeID retVal = UNKNOWN_TYPE;
-
-  if((type >= 0) && (type <= UNKNOWN_TYPE))
-    retVal = type;
-
-  return retVal;
-}
-
-string TriggerKey::GetSourceString() const
-{
-  string str;
-  switch (source_) {
-  case  0: str = "IN_ICE"; break;
-  case 10: str = "ICE_TOP"; break;
-  case 20: str = "AMANDA"; break;
-  case 30: str = "EXTERNAL"; break;
-  case 40: str = "GLOBAL"; break;
-  case 50: str = "AMANDA_MUON_DAQ"; break;
-  case 60: str = "AMANDA_TWR_DAQ"; break;
-  case 70: str = "SPASE"; break;
-  case 80: str = "UNKNOWN_SOURCE"; break;
+  switch (source)
+  {
+    case IN_ICE:
+      return("IN_ICE");
+    case ICE_TOP:
+      return("ICE_TOP");
+    case AMANDA:
+      return("AMANDA");
+    case EXTERNAL:
+      return("EXTERNAL");
+    case GLOBAL:
+      return("GLOBAL");
+    case AMANDA_MUON_DAQ:
+      return("AMANDA_MUON_DAQ");
+    case AMANDA_TWR_DAQ:
+      return("AMANDA_TWR_DAQ");
+    case SPASE:
+      return("SPASE");
+    case UNKNOWN_SOURCE:
+      return("UNKNOWN_SOURCE");
   }
-  return str;
+  log_warn("undefined source ID");
+  
+  return NULL;
 }
 
-string TriggerKey::GetTypeString() const
+const char *
+TriggerKey::GetTypeString (TypeID type)
 {
-  string str;
-  switch (type_) {
-  case   0: str = "SIMPLE_MULTIPLICITY"; break;
-  case  10: str = "CALIBRATION"; break;
-  case  20: str = "MIN_BIAS"; break;
-  case  30: str = "THROUGHPUT"; break;
-  case  40: str = "TWO_COINCIDENCE"; break;
-  case  50: str = "THREE_COINCIDENCE"; break;
-  case  60: str = "AMANDA_MULTIPLICITY"; break;
-  case  70: str = "MERGED"; break;
-  case  80: str = "MAIN"; break;
-  case  90: str = "AMANDA_A"; break;
-  case 100: str = "MULTIPLICITY"; break;
-  case 110: str = "AMANDA_A_MULTIPLICITY_COINCIDENCES"; break;
-  case 120: str = "STRING"; break;
-  case 130: str = "DOWNSCALED_MULTIPLICITY"; break;
-  case 140: str = "TDC_CALIBRATION"; break;
-  case 150: str = "GENERAL_SPASE"; break;
-  case 160: str = "SPASE_1"; break;
-  case 170: str = "SPASE_2"; break;
-  case 180: str = "UNKNOWN_TYPE"; break;
+  switch(type)
+  {
+    case SIMPLE_MULTIPLICITY:
+      return("SIMPLE_MULTIPLICITY");
+    case CALIBRATION:
+      return("CALIBRATION");
+    case MIN_BIAS:
+      return("MIN_BIAS");
+    case THROUGHPUT:
+      return("THROUGHPUT");
+    case TWO_COINCIDENCE:
+      return("TWO_COINCIDENCE");
+    case THREE_COINCIDENCE:
+      return("THREE_COINCIDENCE");
+    case AMANDA_MULTIPLICITY:
+      return("AMANDA_MULTIPLICITY");
+    case MERGED:
+      return("MERGED");
+    case MAIN:
+      return("MAIN");
+    case AMANDA_A:
+      return("AMANDA_A");
+    case MULTIPLICITY:
+      return("MULTIPLICITY");
+    case AMANDA_A_MULTIPLICITY_COINCIDENCES:
+      return("AMANDA_A_MULTIPLICITY_COINCIDENCES");
+    case STRING:
+      return("STRING");
+    case VOLUME:
+      return("VOLUME");
+    case DOWNSCALED_MULTIPLICITY:
+      return("DOWNSCALED_MULTIPLICITY");
+    case TDC_CALIBRATION:
+      return("TDC_CALIBRATION");
+    case GENERAL_SPASE:
+      return("GENERAL_SPASE");
+    case SPASE_1:
+      return("SPASE_1");
+    case SPASE_2:
+      return("SPASE_2");
+    case UNKNOWN_TYPE:
+      return("UNKNOWN_TYPE");
   }
-  return str;
+  log_warn("undefined type ID");
+
+  return NULL;
 }
 
 
