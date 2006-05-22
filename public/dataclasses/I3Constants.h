@@ -29,11 +29,6 @@ namespace I3Constants
   static const double c = 2.99792458e8 * I3Units::m / (I3Units::second);
 
   /**
-   * The index of refraction of ice
-   */
-  // static const double n_ice = 1.31;
-
-  /**
    * The "average" phase velocity (for wavelength of 400nm)
    * @sa http://icecube.berkeley.edu/amanda-private/abs/ice/r_index.html
    * @sa http://icecube.berkeley.edu/amanda-private/abs/ice/Buford_and_Kurt.ps
@@ -46,6 +41,11 @@ namespace I3Constants
    * @sa http://icecube.berkeley.edu/amanda-private/abs/ice/Buford_and_Kurt.ps
    */
   static const double n_ice_group = 1.35634;
+
+  /**
+   * The index of refraction of ice
+   */
+  static const double n_ice = n_ice_group;
 
   /**
    * The Cherenkov angle in ice
