@@ -76,6 +76,8 @@ TriggerKey::GetTypeString (TypeID type)
       return("STRING");
     case VOLUME:
       return("VOLUME");
+    case SPHERE:
+      return("SPHERE");
     case DOWNSCALED_MULTIPLICITY:
       return("DOWNSCALED_MULTIPLICITY");
     case TDC_CALIBRATION:
