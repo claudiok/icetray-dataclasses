@@ -324,11 +324,11 @@ TEST(minus_double){
 
 TEST(add_subtract_double){
 
-  boost::rand48 rng(static_cast<int>(time(0)));
-  boost::uniform_smallint<int> string_rng(1990,2020);
-
-  boost::uniform_smallint<int64_t> om_rng(0,);
-  boost::uniform_smallint<double> delta(0,10e7);
+//  boost::rand48 rng(static_cast<int>(time(0)));
+//  boost::uniform_smallint<int> string_rng(1990,2020);
+//
+//  boost::uniform_smallint<int64_t> om_rng(0,);
+//  boost::uniform_smallint<double> delta(0,10e7);
 
   int year(2006);
   double t(3.14);
