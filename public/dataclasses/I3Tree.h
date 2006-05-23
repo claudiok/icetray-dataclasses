@@ -31,6 +31,16 @@
 template <typename T>
 struct I3Tree : public I3FrameObject , public tree<T>
 {
+  typedef typename tree<T>::iterator_base iterator_base;
+  
+
+  I3Tree(){}
+  
+  I3Tree(const T& value) : tree<T>(value){}
+  
+  I3Tree(const iterator_base& other) : tree<T>(other){}
+
+
   template<class Archive>
   void save(Archive& ar, const unsigned int version) const
   {

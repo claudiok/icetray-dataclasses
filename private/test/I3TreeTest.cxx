@@ -201,19 +201,21 @@ TEST(g_equal_and_flatten)
   createTree(t2);
   createTree(t3);
     
-  ENSURE(t1.equal(t1.begin(), t1.end(), t2.begin()));
   ENSURE(equal(t1.begin(), t1.end(), t2.begin()));
-  ENSURE(t1.equal(t1.begin(), t1.end(), t3.begin()));
+  ENSURE(t1.equal(t1.begin(), t1.end(), t2.begin()));
   ENSURE(equal(t1.begin(), t1.end(), t3.begin()));
+  ENSURE(t1.equal(t1.begin(), t1.end(), t3.begin()));
   
   *(t2.begin()) = 111;
-  t3.flatten(t3.begin());
   
-  ENSURE(!t1.equal(t1.begin(), t1.end(), t2.begin()));
   ENSURE(!equal(t1.begin(), t1.end(), t2.begin()));
-  ENSURE(!t1.equal(t1.begin(), t1.end(), t3.begin()));
-  ENSURE(equal(t1.begin(), t1.end(), t3.begin()));
+  ENSURE(!t1.equal(t1.begin(), t1.end(), t2.begin()));
   
+  t3.flatten(t3.begin());
+
+  ENSURE(equal(t1.begin(), t1.end(), t3.begin()));
+  ENSURE(!t1.equal(t1.begin(), t1.end(), t3.begin()));
+
   I3Tree<int>::sibling_iterator iter = t3.begin();
   while(iter != t3.end())
   {
@@ -306,6 +308,7 @@ TEST(l_merge)
   t3.append_child(iter, 8);
   ENSURE_EQUAL(t1.size(), t3.size());
   ENSURE(equal(t1.begin(), t1.end(), t3.begin()));
+  ENSURE(t1.equal(t1.begin(), t1.end(), t3.begin()));
 }
 
 TEST(m_serialization_of_a_full_tree_using_an_xml_archive)
@@ -331,4 +334,26 @@ TEST(m_serialization_of_a_full_tree_using_an_xml_archive)
   
   ENSURE_EQUAL(t1.size(), t2.size());
   ENSURE(equal(t1.begin(), t1.end(), t2.begin()));    
+  ENSURE(t1.equal(t1.begin(), t1.end(), t2.begin()));    
+}
+
+TEST(n_nontrivial_constructors_and_assignment)
+{
+  I3Tree<int> t1;
+  
+  createTree(t1);
+  
+  I3Tree<int> t2(*(t1.begin()));
+  ENSURE_EQUAL(*(t1.begin()), *(t2.begin()));
+  
+  t2 = t1;
+  ENSURE(equal(t1.begin(), t1.end(), t2.begin()));
+  ENSURE(t1.equal(t1.begin(), t1.end(), t2.begin()));
+  
+  I3Tree<int> t3(t1);
+  ENSURE(equal(t1.begin(), t1.end(), t3.begin()));
+  ENSURE(t1.equal(t1.begin(), t1.end(), t3.begin()));
+  
+  I3Tree<int> t4(t1.begin());
+  ENSURE(t1.equal_subtree(t1.begin(), t4.begin()));
 }
