@@ -23,6 +23,9 @@ extern "C"
 }
 
 #include "dataclasses/I3Time.h"
+#include "dataclasses/I3Units.h"
+
+#include "boost/random.hpp"
 
 TEST_GROUP(I3TimeTest);
 
@@ -221,3 +224,128 @@ TEST(test14)
   ENSURE(lowest >= same);
 }
 
+TEST(leap_year){
+  std::vector<int> leap_years;
+  leap_years.resize(4);
+  leap_years[0] = 2000;
+  leap_years[1] = 2004;
+  leap_years[2] = 2008;
+  leap_years[3] = 2012;
+  std::vector<int>::iterator i;
+  for(i=leap_years.begin(); i != leap_years.end(); ++i){
+    std::cout<<*i<<endl;
+    ENSURE(I3TimeUtils::leap_year(*i),"This is, in fact, a leap year!");
+  }
+
+  std::vector<int> not_leap_years;
+  not_leap_years.resize(4);
+  not_leap_years[0] = 1999;
+  not_leap_years[1] = 2003;
+  not_leap_years[2] = 2007;
+  not_leap_years[3] = 2010;
+
+  for(i=not_leap_years.begin(); i != not_leap_years.end(); ++i)
+    ENSURE(!(I3TimeUtils::leap_year(*i)),"This is, in fact, NOT a leap year!");
+}
+
+TEST(ns_to_daqtime_rounding){
+
+  std::vector<double> times_to_test;
+  times_to_test.resize(7);
+  times_to_test[0] = 0.01;//round down
+  times_to_test[1] = 0.11;//round down
+  times_to_test[2] = 0.08;//round up
+  times_to_test[3] = 0.23;//round down
+  times_to_test[4] = 0.25;//round up
+  times_to_test[5] = 0.54;//round down
+  times_to_test[6] = 0.79;//round up
+  std::vector<int64_t> result_times;
+  result_times.resize(7);
+  result_times[0] = 0;
+  result_times[1] = 1;
+  result_times[2] = 1;
+  result_times[3] = 2;
+  result_times[4] = 3;
+  result_times[5] = 5;
+  result_times[6] = 8;
+
+  std::vector<double>::iterator i;
+  std::vector<int64_t>::iterator j;
+  for(i=times_to_test.begin(), j=result_times.begin(); 
+      i != times_to_test.end(); 
+      ++i,++j)
+    ENSURE(I3TimeUtils::ns_to_daqtime(*i * I3Units::ns) == *j);
+}
+
+TEST(plus_double){
+  int year(2005);
+  int64_t delta(10);
+  double t(1.);
+  int64_t daqTime = I3TimeUtils::max_DAQ_time(year) - delta/2;
+  I3Time t0(year,daqTime);
+  I3Time t1(year+1,delta/2); //should go over by half a delta
+  I3Time t1_prime = t0 + t;
+
+  std::cout<<"Year: "<<t1_prime.GetUTCYear()<<endl;
+  std::cout<<"DAQTime: "<<t1_prime.GetUTCDaqTime()<<endl;
+
+  ENSURE(t1_prime == t1,"Someone doesn't know how to add");
+}
+
+TEST(plus_double_leap_year){
+  int year(2000);
+  int64_t delta(10);
+  double t(1.);
+  int64_t daqTime = I3TimeUtils::max_DAQ_time(year) - delta/2;
+  I3Time t0(year,daqTime);
+  I3Time t1(year+1,delta/2); //should go over by half a delta
+  I3Time t1_prime = t0 + t;
+
+  std::cout<<"Year: "<<t1_prime.GetUTCYear()<<endl;
+  std::cout<<"DAQTime: "<<t1_prime.GetUTCDaqTime()<<endl;
+
+  ENSURE(t1_prime == t1,"Someone doesn't know how to add");
+}
+
+TEST(minus_double){
+  int year(2006);
+  int64_t delta(10);
+  double t(1.);
+  int64_t daqTime = delta/2;
+  I3Time t0(year,daqTime);
+  I3Time t1(year-1,I3TimeUtils::max_DAQ_time(year) - delta/2); //should go over by half a delta
+  I3Time t1_prime = t0 - t;
+
+  std::cout<<"Year: "<<t1_prime.GetUTCYear()<<endl;
+  std::cout<<"DAQTime: "<<t1_prime.GetUTCDaqTime()<<endl;
+
+  ENSURE(t1_prime == t1,"Someone doesn't know how to subtract");
+}
+
+TEST(add_subtract_double){
+
+  boost::rand48 rng(static_cast<int>(time(0)));
+  boost::uniform_smallint<int> string_rng(1990,2020);
+
+  boost::uniform_smallint<int64_t> om_rng(0,);
+  boost::uniform_smallint<double> delta(0,10e7);
+
+  int year(2006);
+  double t(3.14);
+  int64_t daqTime = 1209820980;
+
+  I3Time t0(year,daqTime);
+  I3Time t1_prime = t0 - t;
+  I3Time t0_prime = t1_prime + t;
+
+  std::cout<<"t0 Year: "<<t0.GetUTCYear()<<endl;
+  std::cout<<"t0 DAQTime: "<<t0.GetUTCDaqTime()<<endl;
+
+  std::cout<<"t1' Year: "<<t1_prime.GetUTCYear()<<endl;
+  std::cout<<"t1' DAQTime: "<<t1_prime.GetUTCDaqTime()<<endl;
+
+  std::cout<<"t0' Year: "<<t0_prime.GetUTCYear()<<endl;
+  std::cout<<"t0' DAQTime: "<<t0_prime.GetUTCDaqTime()<<endl;
+
+  ENSURE(t0 == t0_prime,"+/- are not inverses of each other");
+}

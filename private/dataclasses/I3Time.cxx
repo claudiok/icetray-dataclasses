@@ -11,18 +11,28 @@ extern "C"
 
 using std::cout;
 using std::endl;
-//Number of tenths of ns in a year and leap year respectively        
-//                         Number of tenths of seconds in a leap year 864000000000000
-const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
 
 /**
  *Returns true if year is a leap year.
  *Meaning if is divisible by 4 and is NOT a century
  *year and in that case must be divisible by 400
  */
-bool I3Time::LeapYear(const int year) const{
-  return(((year%4)&&!(year%100)) || //divisible by four and not a century year
-	 ((year%400)&&(year%100))); //a century year and divisible by four hundred
+bool I3TimeUtils::leap_year(const int year){
+  return ((!(year%4)&&(year%100)) || //divisible by four and not a century year
+	   (!(year%400)&&!(year%100))); //a century year and divisible by four hundred
+}
+
+int64_t I3TimeUtils::max_DAQ_time(const int year){
+  if(I3TimeUtils::leap_year(year)){
+    return MAX_DAQTIME.first; 
+  }else{
+    return MAX_DAQTIME.second;
+  }
+}
+
+int64_t I3TimeUtils::ns_to_daqtime( const double time){
+  //the addition of 0.5 effectively rounds
+  return static_cast<int64_t>((10.*time/I3Units::ns)+ 0.5); 
 }
 
 I3Time::I3Time()
@@ -218,32 +228,42 @@ bool I3Time::operator>=(const I3Time& rhs) const
   return false;
 }
 
+
 I3Time I3Time::operator+(const double second_term) const
 {
-  int localYear = this->GetUTCYear();
-  int64_t localDaqTime = this->GetUTCDaqTime();
-  int64_t maxDaqTime;
-  LeapYear(localYear) ? maxDaqTime = MAX_DAQTIME.first : maxDaqTime = MAX_DAQTIME.second;
-  //The 0.5 effectively rounds
-  int64_t daqtime = static_cast<int64_t>((10.*second_term/I3Units::ns)+ 0.5); 
-  localYear += daqtime / maxDaqTime; //This should always be one or zero
-  localDaqTime += daqtime % maxDaqTime;
+  //new_years should always be one or zero
+  bool new_years_eve = (I3TimeUtils::ns_to_daqtime(second_term) + daqTime_) > I3TimeUtils::max_DAQ_time(year_);
+  int32_t year = year_ + static_cast<int>(new_years_eve);
 
-  return I3Time(localYear,localDaqTime);
+  int64_t daqTime;
+  if(new_years_eve){
+    //just the remainder
+    daqTime = daqTime_ + I3TimeUtils::ns_to_daqtime(second_term) - I3TimeUtils::max_DAQ_time(year_);
+  }else{
+    //just add 'em
+    daqTime = daqTime_ + I3TimeUtils::ns_to_daqtime(second_term);
+  }
+
+  return I3Time(year,daqTime);
  }
 
 I3Time I3Time::operator-(const double second_term) const
 {
-  int localYear = this->GetUTCYear();
-  int64_t localDaqTime = this->GetUTCDaqTime();
-  int64_t maxDaqTime;
-  LeapYear(localYear) ? maxDaqTime = MAX_DAQTIME.first : maxDaqTime = MAX_DAQTIME.second;
-  //The 0.5 effectively rounds
-  int64_t daqtime = static_cast<int64_t>((10.*second_term/I3Units::ns)+ 0.5); 
-  localYear -= daqtime / maxDaqTime; //This should always be one or zero
-  localDaqTime -= daqtime % maxDaqTime;
+  //new_years_eve should always be one or zero
+  bool new_years_eve = I3TimeUtils::ns_to_daqtime(second_term) > daqTime_; 
+  int32_t year = year_ - static_cast<int>(new_years_eve);
 
-  return I3Time(localYear,localDaqTime);
+  int64_t daqTime;
+  if(new_years_eve){
+    //just the remainder
+    //What I care about in subtraction is whether *last* year was a leap year
+    daqTime = daqTime_ - I3TimeUtils::ns_to_daqtime(second_term) + I3TimeUtils::max_DAQ_time(year);
+  }else{
+    //just subtract 'em
+    daqTime = daqTime_ - I3TimeUtils::ns_to_daqtime(second_term);
+  }
+
+  return I3Time(year,daqTime);
  }
 
 std::string I3Time::MonthToString(Month m)

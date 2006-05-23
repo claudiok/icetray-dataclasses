@@ -18,6 +18,17 @@
  * http://jday.sourceforge.net/index.php for reference
  *
  */
+
+//Number of tenths of ns in a year and leap year respectively        
+//                         Number of tenths of seconds in a leap year 864000000000000
+const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
+
+namespace I3TimeUtils{
+  bool leap_year(const int year);
+  int64_t max_DAQ_time(const int year);
+  int64_t ns_to_daqtime( const double time);
+}
+
 class I3Time : public I3FrameObject
 {
  public:
@@ -187,18 +198,12 @@ class I3Time : public I3FrameObject
   bool operator>=(const I3Time& rhs) const;
 
   /**
-   *Adds a double to I3Time
+   *Adds a double (please use I3Units of time) to I3Time
    *Takes into account rounding and leap years
    */
   I3Time operator+(const double) const;
   I3Time operator-(const double) const;
 
-  /**
-   *Adds an I3Time to I3Time
-   *Takes into account rounding and leap years
-   */
-  I3Time operator+(const I3Time&) const;
-  I3Time operator-(const I3Time&) const;
 
  public: 
 
@@ -220,8 +225,6 @@ class I3Time : public I3FrameObject
 
   int32_t year_;
   int64_t daqTime_;
-
-  bool I3Time::LeapYear(const int year) const;
 
   friend class boost::serialization::access;
 
