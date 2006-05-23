@@ -70,6 +70,8 @@ TriggerKey::GetTypeString (TypeID type)
       return("AMANDA_A");
     case MULTIPLICITY:
       return("MULTIPLICITY");
+    case FRAGEMENT_MULTIPLICITY:
+      return("FRAGEMENT_MULTIPLICITY");
     case AMANDA_A_MULTIPLICITY_COINCIDENCES:
       return("AMANDA_A_MULTIPLICITY_COINCIDENCES");
     case STRING:
