@@ -24,8 +24,20 @@
 const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
 
 namespace I3TimeUtils{
+  /**
+   *Returns true if the year is a leap year
+   */
   bool leap_year(const int year);
+  /**
+   *Returns the number of tenths of nanoseconds it the year, depending
+   *on whether it's a leap year or not.
+   */
   int64_t max_DAQ_time(const int year);
+  /**
+   *Converts a time of type double with I3Units of time (your choice) to
+   *the number of tenths of nanoseconds (i.e. "daqtime").  This takes
+   *into account rounding.
+   */
   int64_t ns_to_daqtime( const double time);
 }
 
