@@ -162,7 +162,10 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
   ar & make_nvp("fadcBaseline",fadcBaselineFit_);
-  ar & make_nvp("fadcDeltaT", fadcDeltaT_);
+  if(version > 0)
+  {
+    ar & make_nvp("fadcDeltaT", fadcDeltaT_);
+  }
   ar & make_nvp("ampGains",ampGains_);
   ar & make_nvp("atwdFreq",atwdFreq_);
   ar & make_nvp("atwd0BinParameters",atwdBin0_);
@@ -171,5 +174,6 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("hvGainRelation",hvGainRelation_);
 }
 
+BOOST_CLASS_VERSION(I3DOMCalibration, 1);
 I3_SERIALIZABLE(I3DOMCalibration);
 
