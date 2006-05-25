@@ -1,7 +1,37 @@
 #include "dataclasses/physics/I3MCTree.h"
+#include "icetray/I3Frame.h"
+
+std::vector<I3Composite> 
+I3MCTree::GetComposites()
+{
+  std::vector<I3Composite> c_list;
+  I3MCTree::iterator i;
+  for(i=this->begin(); i!=this->end(); ++i){
+    if(i->GetCompositeType() == I3Particle::Head){
+      I3Composite c;
+      c.particle = *i;
+      //fill the vector composite
+      I3Particle constituent;
+      constituent.SetCompositeType(I3Particle::Child);//just for illustrative purposes
+      if(constituent.GetCompositeType() == I3Particle::Child)
+	c.composite.push_back(constituent);
+      c_list.push_back(c);
+    }
+  }
+  return c_list;
+}
+
+std::vector<I3Particle>
+I3MCTree::GetPrimaries(){
+  std::vector<I3Particle> primaryList;
+  I3MCTree::sibling_iterator i;
+  for(i=this->begin(); i!=this->end(); ++i)
+    primaryList.push_back(*i);
+  return primaryList;
+}
 
 template <class T>
-void MCTreeUtils::Split_And_Load(I3FramePtr frame,std::string name,I3Tree<I3MCParticle<T> >& mcTree){
+void I3MCTreeUtils::Split_And_Load(I3FramePtr frame,std::string name,I3Tree<I3MCParticle<T> >& mcTree){
 
   I3MCTreePtr i3particleTree;
   shared_ptr<I3Tree<T> > payloadTree;
@@ -29,7 +59,7 @@ void MCTreeUtils::Split_And_Load(I3FramePtr frame,std::string name,I3Tree<I3MCPa
 }
 
 template <class T>
-void MCTreeUtils::Merge_And_Put(I3FramePtr frame,std::string name,const I3MCTree& i3mcTree,I3Tree<I3MCParticle<T> >& mcTree){
+void I3MCTreeUtils::Merge_And_Put(I3FramePtr frame,std::string name,const I3MCTree& i3mcTree,I3Tree<I3MCParticle<T> >& mcTree){
   
   typename I3Tree<I3MCParticle<T> >::iterator head_iter = mcTree.begin();
   typename I3Tree<I3MCParticle<T> >::sibling_iterator siter;
@@ -45,15 +75,14 @@ void MCTreeUtils::Merge_And_Put(I3FramePtr frame,std::string name,const I3MCTree
 }
 
 template <class T>
-T MCTreeUtils::Get(I3Tree<T>& tree, I3Particle&){
+T I3MCTreeUtils::Get(I3Tree<T>& tree, I3Particle&){
   
 }
 
 template <class T>
-MCTreeUtils::I3Tree<I3MCParticle<T> > Recreate(I3Tree<T>& tree, I3MCTree&){
+I3Tree<I3MCParticle<T> > 
+I3MCTreeUtils::Recreate(I3Tree<T>& tree, I3MCTree&){
   
 }
-
-#endif 
 
 

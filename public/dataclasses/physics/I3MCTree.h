@@ -10,8 +10,10 @@
 #define I3MCTREE_H_INCLUDED
 
 #include "dataclasses/physics/I3Particle.h"
+#include "dataclasses/physics/I3Composite.h"
 #include "dataclasses/physics/I3MCParticle.h"
 #include "dataclasses/I3Tree.h"
+#include "icetray/I3DefaultName.h"
 
 /**
  *I3MCTree - This goes into the frame and everyone can see it
@@ -28,7 +30,7 @@ class I3MCTree : public I3Tree<I3Particle>
   std::vector<I3Particle> GetPrimaries();
   I3Tree<I3Particle> GetInIceParticles();
   I3Tree<I3Particle> GetIceTopParticles();
-  std::vector<I3Particle> GetComposites();
+  std::vector<I3Composite> GetComposites();
 
 
  private:

@@ -81,6 +81,12 @@ class I3Particle : public I3FrameObject
     InsufficientQuality = 50
   };
 
+  enum CompositeType {
+    NonComposite = 0,
+    Head = 1,
+    Child = 2
+  };
+
  private:
 
   int ID_;
@@ -95,7 +101,7 @@ class I3Particle : public I3FrameObject
   double energy_;
   double length_;
   double speed_;
-  bool composite_;
+  CompositeType compositeType_;
   //vector<I3Particle> composite_; //!
 
  public:
@@ -113,7 +119,7 @@ class I3Particle : public I3FrameObject
     energy_(NAN),
     length_(NAN),
     speed_(I3Constants::c),
-    composite_(false)
+    compositeType_(NonComposite)
     {};
   
   virtual ~I3Particle();
@@ -195,8 +201,8 @@ class I3Particle : public I3FrameObject
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
 
-  bool GetComposite() const { return composite_; }
-  void SetComposite(bool c) { composite_ = c; }
+  CompositeType GetCompositeType() const { return compositeType_; }
+  void SetCompositeType(CompositeType c) { compositeType_ = c; }
 
   I3Position ShiftAlongTrack(double dist) const {
     if (IsTrack()) {
