@@ -95,7 +95,8 @@ class I3Particle : public I3FrameObject
   double energy_;
   double length_;
   double speed_;
-  vector<I3Particle> composite_; //!
+  bool composite_;
+  //vector<I3Particle> composite_; //!
 
  public:
 
@@ -111,7 +112,8 @@ class I3Particle : public I3FrameObject
     time_(NAN),
     energy_(NAN),
     length_(NAN),
-    speed_(I3Constants::c)
+    speed_(I3Constants::c),
+    composite_(false)
     {};
   
   virtual ~I3Particle();
@@ -193,8 +195,8 @@ class I3Particle : public I3FrameObject
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
 
-  const vector<I3Particle>& GetComposite() const { return composite_; }
-  vector<I3Particle>& GetComposite() { return composite_; }
+  bool GetComposite() const { return composite_; }
+  void SetComposite(bool c) { composite_ = c; }
 
   I3Position ShiftAlongTrack(double dist) const {
     if (IsTrack()) {

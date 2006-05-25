@@ -16,16 +16,9 @@
  */
 template<class MCInfo>
 struct I3MCParticle
-{
-    
+{    
   I3Particle particle;
   MCInfo     mc;
-
-  template <class Archive> void serialize(Archive & ar, unsigned version)
-  {
-    ar & make_nvp("I3Particle", particle );
-    ar & make_nvp("MCInfo", mc );
-  }
 };
 
 #endif 
