@@ -108,3 +108,17 @@ double FADCBaseline (const I3DOMStatus& status ,
 
   return baseline;
 }
+
+double TransitTime(const I3DOMStatus& status,
+		   const I3DOMCalibration& calib)
+{
+    const LinearFit transitTimeFit = calib.GetTransitTime();
+    double pmtHV = status.pmtHV/I3Units::V;
+ 
+    // The linear relation returns the tarnsit time in ns.
+    // transit time [ns] = slope / sqrt( V [volts]) + intercept
+   
+    double transitTime = transitTimeFit.slope/sqrt(pmtHV) + transitTimeFit.intercept;
+
+    return transitTime*I3Units::ns;    
+}
