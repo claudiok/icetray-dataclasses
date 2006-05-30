@@ -61,6 +61,11 @@ double PMTGain (const I3DOMStatus& status ,
   double currentVoltage=(status.pmtHV/I3Units::volt);
   const LinearFit hvgain = calib.GetHVGainFit();
   
+  if (hvgain.slope==0&&hvgain.intercept==0) {
+    log_error("slope and intercept = 0");
+    return NAN;
+  }
+
   if(currentVoltage >0.0)
     {
       log_gain = hvgain.slope*log10(currentVoltage) + hvgain.intercept;
@@ -87,8 +92,8 @@ double SPEMean (const I3DOMStatus& status ,
     spemean = pmtgain *I3Units::eSI*I3Units::C; 
   }
   else {
-    log_warn("DOM gain is zero.  SPE also zero");
-    spemean = 0.0;
+    log_error("DOM gain is zero or NAN. Return SPE=NAN");
+    spemean = NAN;
   }
   return spemean;
 }
