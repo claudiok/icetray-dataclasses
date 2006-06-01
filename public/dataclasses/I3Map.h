@@ -16,7 +16,6 @@
 #include <icetray/I3Logging.h>
 #include <icetray/I3FrameObject.h>
 
-#include <icetray/lexical_casts.h>
 #include <boost/lexical_cast.hpp>
 
 template <typename Key, typename Value>
