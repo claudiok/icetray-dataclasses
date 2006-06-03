@@ -31,3 +31,13 @@ TEST(comparison_operator)
   ENSURE(OMKey(1,1) < OMKey(2,2),"operator< works as expected");
   
 }
+
+TEST(isIceTopInIce)
+{
+  ENSURE( OMKey(1,1).IsInIce(), "OM should be InIce");
+  ENSURE( !(OMKey(1,1).IsIceTop()), "OM should not be IceTop");
+  ENSURE( !(OMKey(1,61).IsInIce()), "OM should not be InIce");
+  ENSURE( OMKey(1,61).IsIceTop(), "OM should be IceTop");
+  ENSURE( !(OMKey(1,70).IsInIce()), "OM should not be InIce");
+  ENSURE( !(OMKey(1,70).IsIceTop()), "OM should not be InTop");
+}
