@@ -23,8 +23,6 @@ TriggerKey::GetSourceString(SourceID source)
       return("IN_ICE");
     case ICE_TOP:
       return("ICE_TOP");
-    case AMANDA:
-      return("AMANDA");
     case EXTERNAL:
       return("EXTERNAL");
     case GLOBAL:
@@ -60,34 +58,16 @@ TriggerKey::GetTypeString (TypeID type)
       return("TWO_COINCIDENCE");
     case THREE_COINCIDENCE:
       return("THREE_COINCIDENCE");
-    case AMANDA_MULTIPLICITY:
-      return("AMANDA_MULTIPLICITY");
     case MERGED:
       return("MERGED");
-    case MAIN:
-      return("MAIN");
-    case AMANDA_A:
-      return("AMANDA_A");
-    case MULTIPLICITY:
-      return("MULTIPLICITY");
     case FRAGMENT_MULTIPLICITY:
       return("FRAGMENT_MULTIPLICITY");
-    case AMANDA_A_MULTIPLICITY_COINCIDENCES:
-      return("AMANDA_A_MULTIPLICITY_COINCIDENCES");
     case STRING:
       return("STRING");
     case VOLUME:
       return("VOLUME");
     case SPHERE:
       return("SPHERE");
-    case DOWNSCALED_MULTIPLICITY:
-      return("DOWNSCALED_MULTIPLICITY");
-    case TDC_CALIBRATION:
-      return("TDC_CALIBRATION");
-    case GENERAL_SPASE:
-      return("GENERAL_SPASE");
-    case SPASE_1:
-      return("SPASE_1");
     case SPASE_2:
       return("SPASE_2");
     case UNKNOWN_TYPE:
