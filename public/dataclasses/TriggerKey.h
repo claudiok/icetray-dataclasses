@@ -46,10 +46,10 @@ public:
   {
     IN_ICE = 0,           //InIce trigger system
     ICE_TOP = 10,         //IceTop trigger system
+    AMANDA_TWR_DAQ = 20,  //AMANDA TWR DAq triggers
     EXTERNAL = 30,        //Some external trigger
     GLOBAL = 40,          //IceCube global trigger system
     AMANDA_MUON_DAQ = 50, //AMANDA Mu daq triggers
-    AMANDA_TWR_DAQ = 60,  //AMANDA TWR DAq triggers
     SPASE = 70,           //A trigger from the SPASE shack
     UNKNOWN_SOURCE = 80   //A mysterious source
   };
