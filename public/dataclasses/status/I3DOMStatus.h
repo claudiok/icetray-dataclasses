@@ -31,7 +31,8 @@ struct I3DOMStatus
        fbLength(INT_MAX),
        fbDelay(INT_MAX),
        fbMask(INT_MAX),
-       fbRate(INT_MAX)
+       fbRate(INT_MAX),
+       domGainType(UnknownGainType)
   {};
 
   virtual ~I3DOMStatus();
@@ -49,6 +50,12 @@ struct I3DOMStatus
    * DOM
    */
   enum OnOff {Unknown = -1, Off = 0, On = 1};
+
+ /**
+   * IceTop DOMs can be a "high gain" or a "low gain" variety
+   *    all InIce DOMs are "high gain"
+   */
+  enum DOMGain {UnknownGainType = -1, High = 0, Low = 1};
  
   /**
    * DOM internal trigger mode
@@ -120,7 +127,10 @@ struct I3DOMStatus
   unsigned int fbDelay;
   unsigned int fbMask;
   unsigned int fbRate;
-
+  /**
+   * Is this DOM a high gain or low gain
+   */
+  DOMGain domGainType;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
