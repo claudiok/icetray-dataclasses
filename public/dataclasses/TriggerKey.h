@@ -63,7 +63,7 @@ public:
   {
     SIMPLE_MULTIPLICITY = 0,   // Any trigger the uses summed multiplicity
     CALIBRATION = 10,          // A calibration trigger
-    MIN_BIAS = 20,             // Minumum bias trigger
+    MIN_BIAS = 20,             // Minumum bias (random) trigger
     THROUGHPUT = 30,           // An IceCube global trigger pass-thru trigger
     TWO_COINCIDENCE = 40,      // IceCube global trigger:  combined 2 trigs
     THREE_COINCIDENCE = 50,    // IceCube global trigger:  combined 3 trigs
