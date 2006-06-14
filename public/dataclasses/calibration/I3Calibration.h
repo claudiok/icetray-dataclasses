@@ -15,6 +15,7 @@
 #include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/calibration/I3AMANDAOMCalibration.h"
+#include "dataclasses/calibration/I3TankCalibration.h"
 #include "dataclasses/I3Time.h"
 #include "dataclasses/OMKey.h"
 #include <icetray/I3FrameObject.h>
@@ -32,6 +33,7 @@ public:
     
   map<OMKey, I3DOMCalibration> domCal;
   map<OMKey, I3AMANDAOMCalibration> amandaCal;
+  map<int, I3TankCalibration> tankCal;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
