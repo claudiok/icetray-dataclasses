@@ -18,6 +18,9 @@
 
 using namespace std;
 
+class I3IDService;
+I3_POINTER_TYPEDEFS(I3IDService);
+
 /**
  * @brief 
  */
@@ -61,9 +64,9 @@ class I3Particle : public I3FrameObject
     APrimary = 3500,
     Elph = 9999
   };
+
   enum ParticleShape { 
     Null = 0, 
-    Primary = 10, 
     TopShower = 20, 
     Cascade = 30, 
     InfiniteTrack = 40, 
@@ -71,6 +74,7 @@ class I3Particle : public I3FrameObject
     StoppingTrack = 60, 
     ContainedTrack = 70
   };
+
   enum FitStatus {
     NotSet = -1,
     OK = 0,
@@ -87,11 +91,16 @@ class I3Particle : public I3FrameObject
     Child = 2
   };
 
+  enum LocationType {
+    Anywhere = 0,
+    IceTopParticle = 10,
+    InIceParticle = 20
+  };
+
+
  private:
 
   int ID_;
-  int parentID_;
-  int primaryID_;
   ParticleType type_;
   ParticleShape shape_;
   FitStatus status_;
@@ -102,14 +111,12 @@ class I3Particle : public I3FrameObject
   double length_;
   double speed_;
   CompositeType compositeType_;
-  //vector<I3Particle> composite_; //!
+  LocationType locationType_;
 
  public:
 
   I3Particle(ParticleShape shape = Null, ParticleType type = unknown) : 
     ID_(-1),
-    parentID_(-1),
-    primaryID_(-1),
     type_(type),
     shape_(shape),
     status_(NotSet),
@@ -135,24 +142,13 @@ class I3Particle : public I3FrameObject
     else return false;
   }
 
-  bool IsPrimary() const {
-    if (shape_==Primary) return true;
-    else return false;
-  }
-
   bool IsTopShower() const {
     if (shape_==TopShower) return true;
     else return false;
   }
 
   int GetID() const { return ID_; }
-  void SetID(int id) { ID_ = id; }
-
-  int GetParentID() const { return parentID_; }
-  void SetParentID(int id) { parentID_ = id; }
-
-  int GetPrimaryID() const { return primaryID_; }
-  void SetPrimaryID(int id) { primaryID_ = id; }
+  void SetID(I3IDServicePtr id_serv);
 
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
@@ -203,6 +199,9 @@ class I3Particle : public I3FrameObject
 
   CompositeType GetCompositeType() const { return compositeType_; }
   void SetCompositeType(CompositeType c) { compositeType_ = c; }
+
+  LocationType GetLocationType() const { return locationType_; }
+  void SetLocationType(LocationType c) { locationType_ = c; }
 
   I3Position ShiftAlongTrack(double dist) const {
     if (IsTrack()) {

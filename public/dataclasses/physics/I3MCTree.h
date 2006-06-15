@@ -27,6 +27,8 @@ class I3MCTree : public I3Tree<I3Particle>
   
   virtual ~I3MCTree();
 
+  void AddPrimary(I3Particle&);
+  void AppendChild(I3Particle&, I3Particle&);
   std::vector<I3Particle> GetPrimaries();
   I3Tree<I3Particle> GetInIceParticles();
   I3Tree<I3Particle> GetIceTopParticles();
@@ -51,9 +53,16 @@ namespace I3MCTreeUtils{
    *This is meant mostly for propagators.
    */
   template <class T>
-    void Split_And_Load(I3FramePtr frame,
+    void split_and_load(I3FramePtr frame,
 			std::string name,
 			I3Tree<I3MCParticle<T> >& mcTree);
+
+  /**
+   *Splits the tree into two seperate trees.
+   */
+  template <class T>
+    std::pair< I3MCTreePtr, shared_ptr<I3Tree<T> > >
+    split(I3Tree<I3MCParticle<T> >& mcTree);
 
   /**
    *Extracts the I3Particle from mcTree and adds it to i3mcTree and puts the result tree
@@ -61,7 +70,7 @@ namespace I3MCTreeUtils{
    *the name 'name'
    */
   template <class T>
-    void Merge_And_Put(I3FramePtr frame,
+    void merge_and_put(I3FramePtr frame,
 		       std::string name,
 		       const I3MCTree& i3mcTree,
 		       I3Tree<I3MCParticle<T> >& mcTree);
@@ -70,7 +79,7 @@ namespace I3MCTreeUtils{
    *Returns the 'extra' info from a tree corresponding to a given particle.
    */
   template <class T>
-    T Get(I3Tree<T>& tree, I3Particle&);
+    T GetMCInfo(I3Tree<T>& tree, I3Particle&);
 
   /**
    *Recreates the tree with the particle and all of the extras

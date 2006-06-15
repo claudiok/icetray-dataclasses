@@ -1,5 +1,6 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3Particle.h>
+#include "dataclasses/I3IDService.h"
 
 I3Particle::~I3Particle() { }
 
@@ -49,7 +50,6 @@ string I3Particle::GetShapeString() const
   string str;
   switch (shape_) {
   case  0: str = "Null"; break;
-  case 10: str = "Primary"; break;
   case 20: str = "TopShower"; break;
   case 30: str = "Cascade"; break;
   case 40: str = "InfiniteTrack"; break;
@@ -75,13 +75,13 @@ string I3Particle::GetFitStatusString() const
   return str;
 }
 
+void I3Particle::SetID(I3IDServicePtr id_serv) { ID_ = id_serv->GetID(); }
+
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
-    ar & make_nvp("parentID",parentID_);
-    ar & make_nvp("primaryID",primaryID_);
     ar & make_nvp("type",type_);
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
