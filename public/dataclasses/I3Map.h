@@ -33,7 +33,7 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
   const Value& 
   at(const Key& where) const
   {
-    typename std::map<Key, Value>::const_iterator iter = find(where);
+    typename std::map<Key, Value>::const_iterator iter = this->find(where);
     if (iter == this->end())
       log_fatal("Map contains nothing at %s.", boost::lexical_cast<std::string>(where).c_str());
 
@@ -43,7 +43,7 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
   Value& 
   at(const Key& where) 
   {
-    typename std::map<Key, Value>::iterator iter = find(where);
+    typename std::map<Key, Value>::iterator iter = this->find(where);
     if (iter == this->end())
       log_fatal("Map contains nothing at %s.", boost::lexical_cast<std::string>(where).c_str());
 
