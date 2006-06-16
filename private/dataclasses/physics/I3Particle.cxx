@@ -75,7 +75,7 @@ string I3Particle::GetFitStatusString() const
   return str;
 }
 
-void I3Particle::SetID(I3IDServicePtr id_serv) { ID_ = id_serv->GetID(); }
+void I3Particle::SetID(I3IDServicePtr id_serv) { ID_ = id_serv->ServeID(); }
 
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)

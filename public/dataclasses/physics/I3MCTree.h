@@ -16,28 +16,7 @@
 /**
  *I3MCTree - This goes into the frame and everyone can see it
  */
-class I3MCTree : public I3Tree<I3Particle>
-{
- public:
-
-  I3MCTree()
-    {};
-  
-  virtual ~I3MCTree();
-
-  void AddPrimary(I3Particle&);
-  void AppendChild(I3Particle&, I3Particle&);
-  std::vector<I3Particle> GetPrimaries();
-  I3Tree<I3Particle> GetInIceParticles();
-  I3Tree<I3Particle> GetIceTopParticles();
-  std::vector<I3Composite> GetComposites();
-
- private:
-
-  friend class boost::serialization::access;
-
-  template <class Archive> void serialize(Archive & ar, unsigned version);
-};
+typedef I3Tree<I3Particle> I3MCTree;
 
 I3_POINTER_TYPEDEFS(I3MCTree);
 I3_DEFAULT_NAME(I3MCTree);

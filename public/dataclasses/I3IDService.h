@@ -33,11 +33,14 @@ class I3IDService
  public:
 
   /**
-   * @brief This method should fill the frame with all the relevent
-   * frame data.  Returned is the time of the event.
+   * @brief Serves up the current ID and increments it.
    */
-  int GetID(){ return id_++; }
-    
+  int ServeID(){ return id_++; }
+
+  /**
+   * @brief Serves up the current ID without incrementing it.
+   */
+  int GetCurrentID() const{ return id_; }    
 
   I3IDService():
     id_(0)
