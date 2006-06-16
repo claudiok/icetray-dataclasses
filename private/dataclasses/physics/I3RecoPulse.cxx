@@ -11,9 +11,13 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
     ar & make_nvp("HitID", hitID_);
     ar & make_nvp("PulseCharge", charge_);
     ar & make_nvp("Width", width_);
+  if(version > 0)
+    {
+      ar & make_nvp("sourceIndex",sourceIndex_);
+    }
   }
 
-  
+BOOST_CLASS_VERSION(I3RecoPulse, 1);
 
 I3_SERIALIZABLE(I3RecoPulse);
 
