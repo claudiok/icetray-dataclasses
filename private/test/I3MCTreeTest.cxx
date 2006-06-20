@@ -25,8 +25,8 @@ TEST(add_and_get_primaries)
   I3Particle p1;
   I3Particle p2;
 
-  p1.SetID(id_service);
-  p2.SetID(id_service);
+  //p1.SetID(id_service);
+  //p2.SetID(id_service);
   //should have unique IDs now
 
   I3MCTree t;
@@ -55,8 +55,8 @@ TEST(add_children_to_primaries)
   I3Particle p1;
   I3Particle p2;
 
-  p1.SetID(id_service);//0
-  p2.SetID(id_service);//1
+  //p1.SetID(id_service);//0
+  //p2.SetID(id_service);//1
   //should have unique IDs now
 
   I3MCTree t;
@@ -82,10 +82,10 @@ TEST(add_children_to_primaries)
   I3Particle c3;
   I3Particle c4;
 
-  c1.SetID(id_service);//2
-  c2.SetID(id_service);//3
-  c3.SetID(id_service);//4
-  c4.SetID(id_service);//5
+  //c1.SetID(id_service);//2
+  //c2.SetID(id_service);//3
+  //c3.SetID(id_service);//4
+  //c4.SetID(id_service);//5
 
   I3MCTreeUtils::append_child(t,p1,c1);
   I3MCTreeUtils::append_child(t,p1,c2);

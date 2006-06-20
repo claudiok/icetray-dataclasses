@@ -2,6 +2,8 @@
 #include <dataclasses/physics/I3Particle.h>
 #include "dataclasses/I3IDService.h"
 
+int I3Particle::global_id_ = 0;
+
 I3Particle::~I3Particle() { }
 
 string I3Particle::GetTypeString() const
@@ -74,8 +76,6 @@ string I3Particle::GetFitStatusString() const
   }
   return str;
 }
-
-void I3Particle::SetID(I3IDServicePtr id_serv) { ID_ = id_serv->ServeID(); }
 
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)

@@ -27,6 +27,8 @@ I3_POINTER_TYPEDEFS(I3IDService);
 class I3Particle : public I3FrameObject
 {
     
+  static int global_id_;
+
  public:
 
   enum ParticleType {
@@ -116,7 +118,6 @@ class I3Particle : public I3FrameObject
  public:
 
   I3Particle(ParticleShape shape = Null, ParticleType type = unknown) : 
-    ID_(-1),
     type_(type),
     shape_(shape),
     status_(NotSet),
@@ -127,7 +128,7 @@ class I3Particle : public I3FrameObject
     length_(NAN),
     speed_(I3Constants::c),
     compositeType_(NonComposite)
-    {};
+    { ID_ = global_id_++; };
   
   virtual ~I3Particle();
 
@@ -148,7 +149,6 @@ class I3Particle : public I3FrameObject
   }
 
   int GetID() const { return ID_; }
-  void SetID(I3IDServicePtr id_serv);
 
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
