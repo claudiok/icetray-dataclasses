@@ -11,7 +11,8 @@ I3DOMCalibration::~I3DOMCalibration() { }
 I3DOMCalibration::I3DOMCalibration()
   : temperature_(NAN),
     fadcGain_(NAN),
-    fadcDeltaT_(NAN)
+    fadcDeltaT_(NAN),
+    frontEndImpedance_(NAN)
 { }
 
 /**
@@ -172,8 +173,12 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("atwd1BinParameters",atwdBin1_);
   ar & make_nvp("pmtTransitTime",pmtTransitTime_);
   ar & make_nvp("hvGainRelation",hvGainRelation_);
+  if(version > 1)
+  {
+    ar & make_nvp("frontEndImpedance", frontEndImpedance_);
+  }
 }
 
-BOOST_CLASS_VERSION(I3DOMCalibration, 1);
+BOOST_CLASS_VERSION(I3DOMCalibration, 2);
 I3_SERIALIZABLE(I3DOMCalibration);
 

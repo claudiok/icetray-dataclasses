@@ -33,14 +33,15 @@ TEST(bin_parameters)
     fit.slope = -0.002*I3Units::V;  // volt/count
     fit.intercept = 2.9*I3Units::V; 
     
-    const double temp = 900.00;
+    const double temp = 900.00*I3Units::kelvin;
     
+    double feImpedance = 45.2*I3Units::ohm;
     
-    
-
     double gain = -17.0;
     
     dom_calib.SetTemperature(temp);
+
+    dom_calib.SetFrontEndImpedance(feImpedance);
     
     dom_calib.SetATWDGain(channel,gain);
     
@@ -69,10 +70,12 @@ TEST(bin_parameters)
 
     //check we got what we stored.
     ENSURE_DISTANCE(900.00,
-		    calib->domCal[omkey].GetTemperature(),0.1,
+		    calib->domCal[omkey].GetTemperature()/I3Units::kelvin,0.1,
 		    "Temperature came back from storage with wrong value");
 
-
+    ENSURE_DISTANCE(45.2,
+		    calib->domCal[omkey].GetFrontEndImpedance()/I3Units::ohm,0.1,
+		    "Temperature came back from storage with wrong value");
 
     ENSURE_DISTANCE(-0.002,
 		    calib->domCal[omkey].GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
