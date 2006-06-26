@@ -1,6 +1,6 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3Particle.h>
-#include "dataclasses/I3IDService.h"
+//#include "dataclasses/I3IDService.h"
 
 int I3Particle::global_id_ = 0;
 
