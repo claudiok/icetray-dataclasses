@@ -11,7 +11,6 @@
 #include <I3Test.h>
 #include <dataclasses/physics/I3MCTree.h>
 #include <dataclasses/physics/I3MCTreeUtils.h>
-#include <dataclasses/I3IDService.h>
 
 using namespace std;
 
@@ -20,14 +19,9 @@ TEST_GROUP(I3MCTreeTest);
 
 TEST(add_and_get_primaries)
 {
-  shared_ptr<I3IDService> id_service(new I3IDService);
 
   I3Particle p1;
   I3Particle p2;
-
-  //p1.SetID(id_service);
-  //p2.SetID(id_service);
-  //should have unique IDs now
 
   I3MCTree t;
   I3MCTreeUtils::add_primary(t,p1);
@@ -50,14 +44,8 @@ TEST(add_and_get_primaries)
 
 TEST(add_children_to_primaries)
 {
-  shared_ptr<I3IDService> id_service(new I3IDService);
-
   I3Particle p1;
   I3Particle p2;
-
-  //p1.SetID(id_service);//0
-  //p2.SetID(id_service);//1
-  //should have unique IDs now
 
   I3MCTree t;
   I3MCTreeUtils::add_primary(t,p1);
@@ -81,11 +69,6 @@ TEST(add_children_to_primaries)
   I3Particle c2;
   I3Particle c3;
   I3Particle c4;
-
-  //c1.SetID(id_service);//2
-  //c2.SetID(id_service);//3
-  //c3.SetID(id_service);//4
-  //c4.SetID(id_service);//5
 
   I3MCTreeUtils::append_child(t,p1,c1);
   I3MCTreeUtils::append_child(t,p1,c2);
