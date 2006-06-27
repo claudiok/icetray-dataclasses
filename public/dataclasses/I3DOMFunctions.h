@@ -40,9 +40,4 @@ double SPEMean (const I3DOMStatus& , const I3DOMCalibration&);
  */
 double FADCBaseline (const I3DOMStatus& , const I3DOMCalibration&);
 
-/**
- * Get the total transit time (PMT transit time + delay)
- */
-double TransitTime (const I3DOMStatus&, const I3DOMCalibration&);
-
 #endif //I3DOMFUNCTIONS_H_INCLUDED

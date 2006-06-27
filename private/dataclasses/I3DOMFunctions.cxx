@@ -61,11 +61,6 @@ double PMTGain (const I3DOMStatus& status ,
   double currentVoltage=(status.pmtHV/I3Units::volt);
   const LinearFit hvgain = calib.GetHVGainFit();
   
-  if (hvgain.slope==0&&hvgain.intercept==0) {
-    log_error("slope and intercept = 0");
-    return NAN;
-  }
-
   if(currentVoltage >0.0)
     {
       log_gain = hvgain.slope*log10(currentVoltage) + hvgain.intercept;
@@ -92,8 +87,8 @@ double SPEMean (const I3DOMStatus& status ,
     spemean = pmtgain *I3Units::eSI*I3Units::C; 
   }
   else {
-    log_error("DOM gain is zero or NAN. Return SPE=NAN");
-    spemean = NAN;
+    log_warn("DOM gain is zero.  SPE also zero");
+    spemean = 0.0;
   }
   return spemean;
 }
@@ -107,18 +102,4 @@ double FADCBaseline (const I3DOMStatus& status ,
   double baseline = fadcbase.slope * dacFADCRef + fadcbase.intercept;
 
   return baseline;
-}
-
-double TransitTime(const I3DOMStatus& status,
-		   const I3DOMCalibration& calib)
-{
-    const LinearFit transitTimeFit = calib.GetTransitTime();
-    double pmtHV = status.pmtHV/I3Units::V;
- 
-    // The linear relation returns the tarnsit time in ns.
-    // transit time [ns] = slope / sqrt( V [volts]) + intercept
-   
-    double transitTime = transitTimeFit.slope/sqrt(pmtHV) + transitTimeFit.intercept;
-
-    return transitTime*I3Units::ns;    
 }

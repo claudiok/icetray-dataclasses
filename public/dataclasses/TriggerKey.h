@@ -44,36 +44,44 @@ public:
    */
   enum SourceID	     // probably incomplete enumeration of trigger sources
   {
-    IN_ICE = 0,           //InIce trigger system
-    ICE_TOP = 10,         //IceTop trigger system
-    AMANDA_TWR_DAQ = 20,  //AMANDA TWR DAq triggers
-    EXTERNAL = 30,        //Some external trigger
-    GLOBAL = 40,          //IceCube global trigger system
-    AMANDA_MUON_DAQ = 50, //AMANDA Mu daq triggers
-    SPASE = 70,           //A trigger from the SPASE shack
-    UNKNOWN_SOURCE = 80   //A mysterious source
+    IN_ICE = 0,
+    ICE_TOP = 10,
+    AMANDA = 20,
+    EXTERNAL = 30,
+    GLOBAL = 40,                     // -^-^-^ used for IceCube data
+    AMANDA_MUON_DAQ = 50,
+    AMANDA_TWR_DAQ = 60,
+    SPASE = 70,                      // -^-^-^ used for AMANDA data
+    UNKNOWN_SOURCE = 80              // UNKNOWN should always be the last enum
   };
 
   /**
    * Enumeration describing what "algorithm" issued a trigger.
-   *  More details about a specific trigger can be stored in the
-   *   I3TriggerStatus map in the I3Detector Status frame
    */
   enum TypeID         // probably incomplete enumeration of trigger types
   {
-    SIMPLE_MULTIPLICITY = 0,   // Any trigger the uses summed multiplicity
-    CALIBRATION = 10,          // A calibration trigger
-    MIN_BIAS = 20,             // Minumum bias (random) trigger
-    THROUGHPUT = 30,           // An IceCube global trigger pass-thru trigger
-    TWO_COINCIDENCE = 40,      // IceCube global trigger:  combined 2 trigs
-    THREE_COINCIDENCE = 50,    // IceCube global trigger:  combined 3 trigs
-    MERGED = 70,               // A trigger from a merging of events
-    FRAGMENT_MULTIPLICITY = 105, //TWR trigger based on fragment counts
-    STRING = 120,              // A trigger based on # hits in a string
-    VOLUME = 125,              // A volume/geometry specific trigger
+    SIMPLE_MULTIPLICITY = 0,
+    CALIBRATION = 10,
+    MIN_BIAS = 20,
+    THROUGHPUT = 30,
+    TWO_COINCIDENCE = 40,
+    THREE_COINCIDENCE = 50,
+    AMANDA_MULTIPLICITY = 60,
+    MERGED = 70,                     // -^-^-^ used for IceCube data
+    MAIN = 80,
+    AMANDA_A = 90,
+    MULTIPLICITY = 100,
+    FRAGMENT_MULTIPLICITY = 105,
+    AMANDA_A_MULTIPLICITY_COINCIDENCES = 110, 
+    STRING = 120,
+    VOLUME = 125,
     SPHERE = 127,
-    SPASE_2 = 170,             // SPASE trigger
-    UNKNOWN_TYPE = 180               
+    DOWNSCALED_MULTIPLICITY = 130,
+    TDC_CALIBRATION = 140,
+    GENERAL_SPASE = 150,
+    SPASE_1 = 160,
+    SPASE_2 = 170,                    // -^-^-^ used for AMANDA data
+    UNKNOWN_TYPE = 180                // UNKNOWN should always be the last enum
   };
 
 

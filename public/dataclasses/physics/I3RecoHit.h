@@ -25,7 +25,7 @@
 class I3RecoHit 
 {
   public:
-  I3RecoHit() : time_(NAN),hitID_(-1),sourceIndex_(-1){}
+  I3RecoHit() : time_(NAN),hitID_(-1){}
 
   virtual ~I3RecoHit();
 
@@ -36,26 +36,12 @@ class I3RecoHit
   int GetID() const { return hitID_; }
 
   void SetID(const int hitid) { hitID_ = hitid; }
-/**
- *  GetSourceIndex - The Source Index can be used to keep track
- *    of which rawReadout index (from readout vector, like DOMLaunchSeries,
- *    that gave rise to this pariticular hit.  Index value defaults to -1.
- */
-  int GetSourceIndex() const { return sourceIndex_; }
-/**
- *  SetSourceIndex - The Source Index can be used to keep track
- *    of which rawReadout index (from readout vector, like DOMLaunchSeries,
- *    that gave rise to this pariticular hit.  Index value defaults to -1.
- */
-  void SetSourceIndex(const int srcid) { sourceIndex_ = srcid; }
 
  private:
 
   double time_;
 
   int hitID_;
-
-  int sourceIndex_;
 
   friend class boost::serialization::access;
 

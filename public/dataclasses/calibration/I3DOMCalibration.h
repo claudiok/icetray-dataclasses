@@ -129,15 +129,10 @@ public:
    */
   LinearFit GetFADCBaselineFit() const { return fadcBaselineFit_ ; }
 
-  /**
-   *  Get the FADC intrinsic time offset (in units of time)
-   */
-  double GetFADCDeltaT() const { return fadcDeltaT_; }
-  
-  /**
-   *  Get the Front End impedance (units are resistance)
-   */
-  double GetFrontEndImpedance() const { return frontEndImpedance_; }
+    /**
+     *  Get the FADC intrinsic time offset (in units of time)
+     */
+    double GetFADCDeltaT() const { return fadcDeltaT_; }
     
   /**
    * Set FADC calibration parameters. Currently the FADC
@@ -154,15 +149,10 @@ public:
       fadcBaselineFit_ = basefit;
     }
     
-  void SetFADCDeltaT(double deltaT)
-    {
-      fadcDeltaT_ = deltaT;
-    }
-
-  void SetFrontEndImpedance(double feImped)
-    {
-      frontEndImpedance_ = feImped;
-    }
+    void SetFADCDeltaT(double deltaT)
+	{
+	    fadcDeltaT_ = deltaT;
+	}
     
   /**
    * Get gain and error on gain for ATWD by channel
@@ -227,13 +217,9 @@ private:
   LinearFit fadcBaselineFit_;
 
     /**
-     *	FADC inherent time offset (ns)
+     *	FADC inherent time offset 
      */
     double fadcDeltaT_;
-    /**
-     *	Front-end impedance (Ohms)
-     */
-    double frontEndImpedance_;
    
   /**
    * Gain for ATWD channels.

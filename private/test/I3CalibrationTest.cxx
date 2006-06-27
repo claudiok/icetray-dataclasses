@@ -3,9 +3,7 @@
 
 #include "dataclasses/calibration/I3Calibration.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
-#include "dataclasses/calibration/I3TankCalibration.h"
 #include "dataclasses/OMKey.h"
-#include "dataclasses/TankKey.h"
 #include "dataclasses/I3Units.h"
 #include <dataclasses/Utility.h>
 #include <string>
@@ -33,15 +31,14 @@ TEST(bin_parameters)
     fit.slope = -0.002*I3Units::V;  // volt/count
     fit.intercept = 2.9*I3Units::V; 
     
-    const double temp = 900.00*I3Units::kelvin;
+    const double temp = 900.00;
     
-    double feImpedance = 45.2*I3Units::ohm;
     
+    
+
     double gain = -17.0;
     
     dom_calib.SetTemperature(temp);
-
-    dom_calib.SetFrontEndImpedance(feImpedance);
     
     dom_calib.SetATWDGain(channel,gain);
     
@@ -51,15 +48,7 @@ TEST(bin_parameters)
 				  fit);
 
     calib->domCal[omkey] = dom_calib;
-
-    I3TankCalibration tank_calib;
-    tank_calib.avgMuonPE=45.3;
-    tank_calib.avgMuonRisetime = 10.5*I3Units::ns;
-    tank_calib.avgMuonWidth = 15.2*I3Units::ns;
-
-    TankKey tk(20,TankKey::TankA);
-
-    calib->tankCal[tk] = tank_calib;
+    
       
     ENSURE_DISTANCE(gain, 
 		    calib->domCal[omkey].GetATWDGain(channel), 
@@ -70,12 +59,10 @@ TEST(bin_parameters)
 
     //check we got what we stored.
     ENSURE_DISTANCE(900.00,
-		    calib->domCal[omkey].GetTemperature()/I3Units::kelvin,0.1,
+		    calib->domCal[omkey].GetTemperature(),0.1,
 		    "Temperature came back from storage with wrong value");
 
-    ENSURE_DISTANCE(45.2,
-		    calib->domCal[omkey].GetFrontEndImpedance()/I3Units::ohm,0.1,
-		    "Temperature came back from storage with wrong value");
+
 
     ENSURE_DISTANCE(-0.002,
 		    calib->domCal[omkey].GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
@@ -87,20 +74,7 @@ TEST(bin_parameters)
 		    0.0001,
 		    "Failed to properly return count (test2)");
     
-    ENSURE_DISTANCE(45.3,
-		    calib->tankCal[tk].avgMuonPE,
-		    0.0001,
-	            "Failed to return proper I3TankCalibration avgMuonPE");
- 
-    ENSURE_DISTANCE(10.5,
-		    calib->tankCal[tk].avgMuonRisetime/I3Units::ns,
-		    0.0001,
-	            "Failed to return proper I3TankCalibration avgMuonRisetime");
 
-    ENSURE_DISTANCE(15.2,
-		    calib->tankCal[tk].avgMuonWidth/I3Units::ns,
-		    0.0001,
-	            "Failed to return proper I3TankCalibration avgMuonWidth");
 }
 
 // Test I/O streams

@@ -34,7 +34,7 @@ TEST(assignment_copy)
   j.SetTriggerTime(12345.67);
   j.SetTriggerLength(1567.89);
   j.SetTriggerFired(true);
-  j.GetTriggerKey().SetSource(TriggerKey::AMANDA_MUON_DAQ);
+  j.GetTriggerKey().SetSource(TriggerKey::AMANDA);
   //test assignment one object to another
   h = j;
   //Check it correct.
@@ -45,6 +45,6 @@ TEST(assignment_copy)
 		  "trigger length simple assignment");
   ENSURE(j.GetTriggerFired() == j.GetTriggerFired());
 
-  ENSURE(j.GetTriggerKey().GetSource() == TriggerKey::AMANDA_MUON_DAQ);
+  ENSURE(j.GetTriggerKey().GetSource() == TriggerKey::AMANDA);
 }
 

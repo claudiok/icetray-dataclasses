@@ -27,11 +27,10 @@ class I3RecoPulse
   double time_;
   double charge_;
   double width_;
-  int sourceIndex_;
 
   public:
 
-  I3RecoPulse() {hitID_=0; time_=NAN; width_=NAN; charge_=NAN;sourceIndex_=-1;}
+  I3RecoPulse() {hitID_=0; time_=NAN; width_=NAN; charge_=NAN;}
 
   double GetTime() const {return time_;}
 
@@ -58,20 +57,6 @@ class I3RecoPulse
   double GetWidth() const {return width_;}
 
   void SetWidth(double width) {width_ = width;}
-
-/**
- *  GetSourceIndex - The Source Index can be used to keep track
- *    of which rawReadout index (from readout vector, like DOMLaunchSeries,
- *    that gave rise to this pariticular hit.  Index value defaults to -1.
- */
-
-  int GetSourceIndex() const { return sourceIndex_; }
-/**
- *  SetSourceIndex - The Source Index can be used to keep track
- *    of which rawReadout index (from readout vector, like DOMLaunchSeries,
- *    that gave rise to this pariticular hit.  Index value defaults to -1.
- */
-  void SetSourceIndex(const int srcid) { sourceIndex_ = srcid; }
 
   virtual ~I3RecoPulse();
 

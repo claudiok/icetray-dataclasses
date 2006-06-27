@@ -16,6 +16,7 @@
 #include <icetray/I3Logging.h>
 #include <icetray/I3FrameObject.h>
 
+#include <icetray/lexical_casts.h>
 #include <boost/lexical_cast.hpp>
 
 template <typename Key, typename Value>
@@ -33,7 +34,7 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
   const Value& 
   at(const Key& where) const
   {
-    typename std::map<Key, Value>::const_iterator iter = this->find(where);
+    typename std::map<Key, Value>::const_iterator iter = find(where);
     if (iter == this->end())
       log_fatal("Map contains nothing at %s.", boost::lexical_cast<std::string>(where).c_str());
 
@@ -43,7 +44,7 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
   Value& 
   at(const Key& where) 
   {
-    typename std::map<Key, Value>::iterator iter = this->find(where);
+    typename std::map<Key, Value>::iterator iter = find(where);
     if (iter == this->end())
       log_fatal("Map contains nothing at %s.", boost::lexical_cast<std::string>(where).c_str());
 
