@@ -24,19 +24,38 @@
 namespace I3Constants
 {
   /**
-   * The speed of light
+   * The speed of light in vacuum
    */
   static const double c = 2.99792458e8 * I3Units::m / (I3Units::second);
 
   /**
+   * The "average" phase velocity (for wavelength of 400nm)
+   * @sa http://icecube.berkeley.edu/amanda-private/abs/ice/r_index.html
+   * @sa http://icecube.berkeley.edu/amanda-private/abs/ice/Buford_and_Kurt.ps
+   */
+  static const double n_ice_phase = 1.3195;
+
+  /**
+   * The "average" group velocity (for wavelength of 400nm)
+   * @sa http://icecube.berkeley.edu/amanda-private/abs/ice/r_index.html
+   * @sa http://icecube.berkeley.edu/amanda-private/abs/ice/Buford_and_Kurt.ps
+   */
+  static const double n_ice_group = 1.35634;
+
+  /**
    * The index of refraction of ice
    */
-  static const double n_ice = 1.31;
+  static const double n_ice = n_ice_group;
 
   /**
    * The Cherenkov angle in ice
    */
-  static const double theta_cherenkov = std::acos(1/n_ice) * I3Units::rad;
+  static const double theta_cherenkov = std::acos(1/n_ice_phase) * I3Units::rad;
+
+  /**
+   * The speed of light in ice
+   */
+  static const double c_ice = c/n_ice_group;
   
   /**
    * pi.

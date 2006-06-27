@@ -95,8 +95,8 @@ class I3Particle : public I3FrameObject
 
   enum LocationType {
     Anywhere = 0,
-    IceTopParticle = 10,
-    InIceParticle = 20
+    IceTop = 10,
+    InIce = 20
   };
 
 
