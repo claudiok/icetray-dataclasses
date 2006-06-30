@@ -8,30 +8,31 @@ struct I3DOMStatus
 {
 
   I3DOMStatus():
-    trigMode(UnknownTrigMode),
-       lcMode(UnknownLCMode),
-       lcWindowPre(NAN),
-       lcWindowPost(NAN),
-       lcSpan(INT_MAX),
-       statusATWDa(Unknown),
-       statusATWDb(Unknown),
-       statusFADC(Unknown),
-       pmtHV(NAN),
-       speThreshold(NAN),
-       dacTriggerBias0(NAN),
-       dacTriggerBias1(NAN),
-       dacFADCRef(NAN),
-       nBinsATWD0(0),
-       nBinsATWD1(0),
-       nBinsATWD2(0),
-       nBinsATWD3(0),
-       nBinsFADC(0),
-       fbState(Unknown),
-       fbBrightness(INT_MAX),
-       fbLength(INT_MAX),
-       fbDelay(INT_MAX),
-       fbMask(INT_MAX),
-       fbRate(INT_MAX)
+      trigMode(UnknownTrigMode),
+      lcMode(UnknownLCMode),
+      cableType(UnknownType),
+      lcWindowPre(NAN),
+      lcWindowPost(NAN),
+      lcSpan(INT_MAX),
+      statusATWDa(Unknown),
+      statusATWDb(Unknown),
+      statusFADC(Unknown),
+      pmtHV(NAN),
+      speThreshold(NAN),
+      dacTriggerBias0(NAN),
+      dacTriggerBias1(NAN),
+      dacFADCRef(NAN),
+      nBinsATWD0(0),
+      nBinsATWD1(0),
+      nBinsATWD2(0),
+      nBinsATWD3(0),
+      nBinsFADC(0),
+      fbState(Unknown),
+      fbBrightness(INT_MAX),
+      fbLength(INT_MAX),
+      fbDelay(INT_MAX),
+      fbMask(INT_MAX),
+      fbRate(INT_MAX)
   {};
 
   virtual ~I3DOMStatus();
@@ -44,12 +45,27 @@ struct I3DOMStatus
    * This controls how far the local coincidence signal is sent 
    */
   enum LCMode {UnknownLCMode = -1, LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4};
-  /**
+  /**	
    * There is also provision to turn on or off various settings in the 
    * DOM
    */
   enum OnOff {Unknown = -1, Off = 0, On = 1};
  
+    /**
+     * Whether the DOM has a terminated ("A" or "T") or unterminated ("B" or "U") cable.
+     * Perhaps this should go in I3OMGeo? Maybe not, since that class could deal with 
+     * AMANDA OMs and this only with IceCube DOMs. Perhaps a bool would work here, but I'm
+     * not sure what the story is with IceTop DOMs. For now keep the "don't know" option.
+     */
+    enum CableType 
+    {
+	UnknownType = -1,
+	Terminated = 0,
+	Unterminated = 1
+    };
+    
+	
+
   /**
    * DOM internal trigger mode
    */
@@ -59,6 +75,12 @@ struct I3DOMStatus
    * LC mode:  hard, soft, none
    */
   LCMode lcMode;
+
+    /**
+     * Cable type: unknown, terminated, unterminated
+     */
+    CableType cableType;
+    
 
   /**
    *  Local coincidence window size, before ATWD launch window
