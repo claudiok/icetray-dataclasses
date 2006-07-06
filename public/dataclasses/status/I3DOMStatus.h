@@ -32,7 +32,8 @@ struct I3DOMStatus
        fbDelay(INT_MAX),
        fbMask(INT_MAX),
        fbRate(INT_MAX),
-       domGainType(UnknownGainType)
+       domGainType(UnknownGainType),
+       cableType(UnknownCableType)
   {};
 
   virtual ~I3DOMStatus();
@@ -56,7 +57,21 @@ struct I3DOMStatus
    *    all InIce DOMs are "high gain"
    */
   enum DOMGain {UnknownGainType = -1, High = 0, Low = 1};
- 
+
+    /**
+     * Whether the DOM has a terminated ("A" or "T") or unterminated ("B" or "U") cable.
+     * Perhaps this should go in I3OMGeo? Maybe not, since that class could deal with 
+     * AMANDA OMs and this only with IceCube DOMs. Perhaps a bool would work here, but I'm
+     * not sure what the story is with IceTop DOMs. For now keep the "don't know" option.
+     */
+    enum CableType 
+    {
+	UnknownCableType = -1,
+	Terminated = 0,
+	Unterminated = 1
+    };
+    
+   
   /**
    * DOM internal trigger mode
    */
@@ -131,6 +146,11 @@ struct I3DOMStatus
    * Is this DOM a high gain or low gain
    */
   DOMGain domGainType;
+
+     /**
+     * Cable type: unknown, terminated, unterminated
+     */
+    CableType cableType;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };

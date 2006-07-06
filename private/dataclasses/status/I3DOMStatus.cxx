@@ -31,16 +31,27 @@ void I3DOMStatus::serialize (Archive& ar, unsigned version)
   ar & make_nvp("fbDelay",fbDelay);
   ar & make_nvp("fbMask",fbMask);
   ar & make_nvp("fbRate",fbRate);
-    if(version > 0)
-    {
+
+  if(version > 0)
+  {
       ar & make_nvp("domGainType",domGainType);
-    }
+  }
   else
-    {
+  {
       domGainType = I3DOMStatus::UnknownGainType;
-    }
+  }	
+
+  if ( version > 1 )
+  {
+      ar & make_nvp("cableType", cableType);
+  }
+    
+  else 
+  {
+      cableType = I3DOMStatus::UnknownCableType;
+  }
 }
 
-BOOST_CLASS_VERSION(I3DOMStatus, 1);
+BOOST_CLASS_VERSION(I3DOMStatus, 2);
 
 I3_SERIALIZABLE(I3DOMStatus);
