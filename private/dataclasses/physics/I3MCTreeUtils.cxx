@@ -25,26 +25,6 @@ void I3MCTreeUtils::append_child(I3MCTree& t, I3Particle& parent, I3Particle& ch
   }
 }
 
-std::vector<I3Composite> 
-I3MCTreeUtils::get_composites(I3MCTree& t)
-{
-  std::vector<I3Composite> c_list;
-  I3MCTree::iterator i;
-  for(i=t.begin(); i!=t.end(); ++i){
-    if(i->GetCompositeType() == I3Particle::Head){
-      I3Composite c;
-      c.particle = *i;
-      //fill the vector composite
-      I3Particle constituent;
-      constituent.SetCompositeType(I3Particle::Child);//just for illustrative purposes
-      if(constituent.GetCompositeType() == I3Particle::Child)
-	c.composite.push_back(constituent);
-      c_list.push_back(c);
-    }
-  }
-  return c_list;
-}
-
 std::vector<I3Particle>
 I3MCTreeUtils::get_primaries(I3MCTree& t){
   std::vector<I3Particle> primaryList;

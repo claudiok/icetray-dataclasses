@@ -18,9 +18,6 @@
 
 using namespace std;
 
-class I3IDService;
-I3_POINTER_TYPEDEFS(I3IDService);
-
 /**
  * @brief 
  */
@@ -87,12 +84,6 @@ class I3Particle : public I3FrameObject
     InsufficientQuality = 50
   };
 
-  enum CompositeType {
-    NonComposite = 0,
-    Head = 1,
-    Child = 2
-  };
-
   enum LocationType {
     Anywhere = 0,
     IceTop = 10,
@@ -112,7 +103,6 @@ class I3Particle : public I3FrameObject
   double energy_;
   double length_;
   double speed_;
-  CompositeType compositeType_;
   LocationType locationType_;
 
  public:
@@ -126,8 +116,7 @@ class I3Particle : public I3FrameObject
     time_(NAN),
     energy_(NAN),
     length_(NAN),
-    speed_(I3Constants::c),
-    compositeType_(NonComposite)
+    speed_(I3Constants::c)
     { ID_ = global_id_++; };
   
   virtual ~I3Particle();
@@ -196,9 +185,6 @@ class I3Particle : public I3FrameObject
 
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
-
-  CompositeType GetCompositeType() const { return compositeType_; }
-  void SetCompositeType(CompositeType c) { compositeType_ = c; }
 
   LocationType GetLocationType() const { return locationType_; }
   void SetLocationType(LocationType c) { locationType_ = c; }

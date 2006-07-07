@@ -91,7 +91,7 @@ template <class Archive>
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
-    ar & make_nvp("compositeType",compositeType_);
+    ar & make_nvp("locationType",locationType_);
   }
 
 I3_SERIALIZABLE(I3Particle);
