@@ -20,6 +20,7 @@
 #include <stdint.h>
 #include <sstream>
 #include <cmath>
+#include <string>
 
 using namespace std;
 
@@ -205,9 +206,19 @@ public:
 			  unsigned int bin,
 			  LinearFit fitParams);
 
-   
+    /**
+     *  Get/Set the version of DOMCal.
+     */
+    const string GetDOMCalVersion()
+	{
+	    return domcalVersion_;
+	}
     
-  
+    void SetDOMCalVersion(string version)
+	{
+	    domcalVersion_ = version;
+	}
+    
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
     
@@ -274,6 +285,15 @@ private:
 
   LinearFit pmtTransitTime_;
   LinearFit hvGainRelation_;
+
+    /**
+     * Version of DOMCal used. For now, this only affects the 
+     * FE load impedance. It might be useful for FADC calibration
+     * as well. Use a string since we may have version numbers like
+     * 6.1.2, e.g.
+     */
+    string domcalVersion_;
+    
 
 };
 

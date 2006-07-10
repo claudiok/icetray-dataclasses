@@ -12,7 +12,8 @@ I3DOMCalibration::I3DOMCalibration()
   : temperature_(NAN),
     fadcGain_(NAN),
     fadcDeltaT_(NAN),
-    frontEndImpedance_(NAN)
+    frontEndImpedance_(NAN),
+    domcalVersion_("unknown")
 { }
 
 /**
@@ -177,8 +178,14 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("frontEndImpedance", frontEndImpedance_);
   }
+
+  if (version > 2)
+  {
+      ar & make_nvp("domcalVersion", domcalVersion_);
+  }
+  
 }
 
-BOOST_CLASS_VERSION(I3DOMCalibration, 2);
+BOOST_CLASS_VERSION(I3DOMCalibration, 3);
 I3_SERIALIZABLE(I3DOMCalibration);
 
