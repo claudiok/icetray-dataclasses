@@ -209,10 +209,10 @@ public:
     /**
      *  Get/Set the version of DOMCal.
      */
-    const string GetDOMCalVersion()
+    string GetDOMCalVersion() const
 	{
 	    return domcalVersion_;
-	}
+	}	
     
     void SetDOMCalVersion(string version)
 	{

@@ -9,11 +9,22 @@
 
 #include <sstream>
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 // Test some of Calibrate Module functionality
 TEST_GROUP(DOMFunctions);
+
+TEST(DoCalibTestDOMCalVersion)
+{
+    I3DOMCalibration calib;
+    calib.SetDOMCalVersion("6.12.0");
+    
+    vector<int> version = DOMCalVersion(calib);
+    ENSURE(version[0] == 6,  "Failed to get proper DOMCal version[0]");
+    ENSURE(version[1] == 12, "Failed to get proper DOMCal version[0]");
+    ENSURE(version[2] == 0,  "Failed to get proper DOMCal version[0]");
+}
 
 TEST(DoCalibTestLinearFit)
     {

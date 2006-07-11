@@ -9,6 +9,7 @@
 
 #include "dataclasses/I3DOMFunctions.h"
 #include "dataclasses/I3Units.h"
+#include <string>
 
 double ATWDSamplingRate ( unsigned int chip,
 			  const I3DOMStatus& status, 
@@ -121,4 +122,37 @@ double TransitTime(const I3DOMStatus& status,
     double transitTime = transitTimeFit.slope/sqrt(pmtHV) + transitTimeFit.intercept;
 
     return transitTime*I3Units::ns;    
+}
+
+vector<int> DOMCalVersion(const I3DOMCalibration& calib)
+{
+    // We assume here that the version given is sensible
+    // i.e. something like "6.1.0"
+    // Since it's a string I'm not sure how to deal
+    // with whatever madness may be contained in it.
+
+    string version = calib.GetDOMCalVersion();
+    
+    vector<int> nums;
+    string::iterator iter;
+    string num;
+    
+    for ( iter  = version.begin();
+	  iter != version.end();
+	  ++iter )
+    {
+	num.push_back(*iter);
+	
+	if ( *iter == '.' )
+	{
+	    num = num.erase(num.size() - 1);
+	    nums.push_back(atoi(num.c_str()));
+	    num = "";
+	}
+    }
+    
+    if ( num != "" )
+	nums.push_back(atoi(num.c_str()));
+
+    return nums;
 }
