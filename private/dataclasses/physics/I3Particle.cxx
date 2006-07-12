@@ -1,6 +1,8 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3Particle.h>
 
+int I3Particle::global_id_ = 0;
+
 I3Particle::~I3Particle() { }
 
 string I3Particle::GetTypeString() const
