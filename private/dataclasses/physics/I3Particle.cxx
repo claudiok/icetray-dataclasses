@@ -88,8 +88,13 @@ template <class Archive>
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
-    ar & make_nvp("composite",composite_);
+    if(version == 0)
+      ar & make_nvp("composite",composite_);
+    if(version>0)
+      ar & make_nvp("LocationType",locationType_);
   }
+
+BOOST_CLASS_VERSION(I3Particle,1);
 
 I3_SERIALIZABLE(I3Particle);
 

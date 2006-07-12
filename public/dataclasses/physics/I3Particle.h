@@ -23,6 +23,8 @@ using namespace std;
  */
 class I3Particle : public I3FrameObject
 {
+
+  static int global_id_;
     
  public:
 
@@ -71,6 +73,7 @@ class I3Particle : public I3FrameObject
     StoppingTrack = 60, 
     ContainedTrack = 70
   };
+
   enum FitStatus {
     NotSet = -1,
     OK = 0,
@@ -79,6 +82,12 @@ class I3Particle : public I3FrameObject
     FailedToConverge = 30,
     MissingSeed = 40,
     InsufficientQuality = 50
+  };
+
+  enum LocationType {
+    Anywhere = 0,
+    IceTop = 10,
+    InIce = 20
   };
 
  private:
@@ -96,6 +105,7 @@ class I3Particle : public I3FrameObject
   double length_;
   double speed_;
   vector<I3Particle> composite_; //!
+  LocationType locationType_;
 
  public:
 
@@ -111,19 +121,30 @@ class I3Particle : public I3FrameObject
     time_(NAN),
     energy_(NAN),
     length_(NAN),
-    speed_(I3Constants::c)
-    {};
+    speed_(I3Constants::c),
+    locationType_(Anywhere)
+    {ID_ = global_id_++;};
   
   virtual ~I3Particle();
 
   bool IsTrack() const {
     if (shape_==InfiniteTrack || shape_==StartingTrack ||
-	shape_==StoppingTrack || shape_==ContainedTrack) return true;
+	shape_==StoppingTrack || shape_==ContainedTrack ||
+        type_==MuPlus || type_==MuMinus ||
+	type_==TauPlus || type_==TauMinus ||
+	type_==Monopole)
+      return true;
     else return false;
   }
 
   bool IsCascade() const {
-    if (shape_==Cascade) return true;
+    if (shape_==Cascade ||
+	type_ == EPlus || type_== EMinus ||
+	type_ == Brems || type_ == DeltaE ||
+	type_ == PairProd || type_ == NuclInt ||
+	type_ == Gamma || type_==Hadrons ||
+	type_== PiPlus || type_ == PiMinus) 
+      return true;
     else return false;
   }
 
@@ -138,13 +159,10 @@ class I3Particle : public I3FrameObject
   }
 
   int GetID() const { return ID_; }
-  void SetID(int id) { ID_ = id; }
 
   int GetParentID() const { return parentID_; }
-  void SetParentID(int id) { parentID_ = id; }
 
   int GetPrimaryID() const { return primaryID_; }
-  void SetPrimaryID(int id) { primaryID_ = id; }
 
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
@@ -194,7 +212,6 @@ class I3Particle : public I3FrameObject
   void SetSpeed(double s) { speed_ = s; }
 
   const vector<I3Particle>& GetComposite() const { return composite_; }
-  vector<I3Particle>& GetComposite() { return composite_; }
 
   I3Position ShiftAlongTrack(double dist) const {
     if (IsTrack()) {
@@ -205,6 +222,7 @@ class I3Particle : public I3FrameObject
       return p;
     }
     else {
+      log_warn("ShiftAlongTrack undefined for a particle that is not a track.");
       I3Position nullpos;
       return nullpos;
     }
@@ -213,6 +231,7 @@ class I3Particle : public I3FrameObject
   I3Position GetStartPos() const { 
     if (shape_==StartingTrack || shape_==ContainedTrack) return pos_;
     else {
+      log_warn("GetStartPos undefined for a particle that is neither starting nor contained.");
       I3Position nullpos;
       return nullpos;
     }
@@ -220,13 +239,17 @@ class I3Particle : public I3FrameObject
 
   double GetStartTime() const {
     if (shape_==StartingTrack || shape_==ContainedTrack) return time_;
-    else return NAN;
+    else{
+      log_warn("GetStartTime undefined for a particle that is neither starting nor contained.");
+      return NAN;
+    }
   }
 
   I3Position GetStopPos() const {
     if (shape_==StoppingTrack) return pos_;
     else if (shape_==ContainedTrack) return ShiftAlongTrack(length_);
     else {
+      log_warn("GetStopPos undefined for a particle that is neither stopping nor contained.");
       I3Position nullpos;
       return nullpos;
     }
@@ -235,7 +258,10 @@ class I3Particle : public I3FrameObject
   double GetStopTime() const { 
     if (shape_==StoppingTrack) return time_;
     else if (shape_==ContainedTrack) { return time_ + length_/speed_; }
-    else return NAN;
+    else{
+      log_warn("GetStopTime undefined for a particle that is neither stopping nor contained.");
+      return NAN;
+    }
   }
 
 
