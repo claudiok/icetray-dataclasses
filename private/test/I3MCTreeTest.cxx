@@ -47,6 +47,9 @@ TEST(add_children_to_primaries)
   I3Particle p1;
   I3Particle p2;
 
+  int p1_id = p1.GetID();
+  int p2_id = p2.GetID();
+
   I3MCTree t;
   I3MCTreeUtils::add_primary(t,p1);
   I3MCTreeUtils::add_primary(t,p2);
@@ -70,6 +73,11 @@ TEST(add_children_to_primaries)
   I3Particle c3;
   I3Particle c4;
 
+  int c1_id = c1.GetID();
+  int c2_id = c2.GetID();
+  int c3_id = c3.GetID();
+  int c4_id = c4.GetID();
+
   I3MCTreeUtils::append_child(t,p1,c1);
   I3MCTreeUtils::append_child(t,p1,c2);
   I3MCTreeUtils::append_child(t,p2,c3);
@@ -77,18 +85,18 @@ TEST(add_children_to_primaries)
 
   I3Tree<I3Particle>::sibling_iterator si(t.begin());
 
-  ENSURE(si->GetID() == 0);
+  ENSURE(si->GetID() == p1_id);
 
   I3Tree<I3Particle>::sibling_iterator ci(t.begin(si));
-  ENSURE(ci->GetID() == 2);
+  ENSURE(ci->GetID() == c1_id);
   ci++;
-  ENSURE(ci->GetID() == 3);
+  ENSURE(ci->GetID() == c2_id);
 
   si++;
-  ENSURE(si->GetID() == 1);
+  ENSURE(si->GetID() == p2_id);
   ci = t.begin(si);
-  ENSURE(ci->GetID() == 4);
+  ENSURE(ci->GetID() == c3_id);
   ci++;
-  ENSURE(ci->GetID() == 5);
+  ENSURE(ci->GetID() == c4_id);
 
 }
