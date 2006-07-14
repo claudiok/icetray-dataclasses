@@ -41,7 +41,7 @@ void I3DOMStatus::serialize (Archive& ar, unsigned version)
       domGainType = I3DOMStatus::UnknownGainType;
   }	
 
-  if ( version > 1 )
+  if ( version > 0 )
   {
       ar & make_nvp("cableType", cableType);
   }
@@ -52,6 +52,6 @@ void I3DOMStatus::serialize (Archive& ar, unsigned version)
   }
 }
 
-BOOST_CLASS_VERSION(I3DOMStatus, 2);
+BOOST_CLASS_VERSION(I3DOMStatus, 1);
 
 I3_SERIALIZABLE(I3DOMStatus);
