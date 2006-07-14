@@ -108,10 +108,24 @@ TEST(add_children_to_primaries)
   d_iter++;
   ENSURE(d_iter->GetID() == c2.GetID());
 
+  ENSURE(I3MCTreeUtils::HasParent(t,c1));
+  I3Particle& p1_1 = I3MCTreeUtils::GetParent(t,c1);
+  ENSURE(I3MCTreeUtils::HasParent(t,c2));
+  I3Particle& p1_2 = I3MCTreeUtils::GetParent(t,c2);
+  ENSURE(p1_1.GetID() == p1.GetID());
+  ENSURE(p1_2.GetID() == p1.GetID());
+
   d_list = I3MCTreeUtils::GetDaughters(t,p2);
   d_iter = d_list.begin();
   ENSURE(d_iter->GetID() == c3.GetID());
   d_iter++;
   ENSURE(d_iter->GetID() == c4.GetID());
+
+  ENSURE(I3MCTreeUtils::HasParent(t,c3));
+  I3Particle& p2_3 = I3MCTreeUtils::GetParent(t,c3);
+  ENSURE(I3MCTreeUtils::HasParent(t,c4));
+  I3Particle& p2_4 = I3MCTreeUtils::GetParent(t,c4);
+  ENSURE(p2_3.GetID() == p2.GetID());
+  ENSURE(p2_4.GetID() == p2.GetID());
 
 }

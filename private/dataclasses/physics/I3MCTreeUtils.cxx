@@ -51,4 +51,27 @@ I3MCTreeUtils::GetDaughters(I3MCTree& t, I3Particle& parent){
   return daughterList;
 }
 
+I3Particle&
+I3MCTreeUtils::GetParent(I3MCTree& t, I3Particle& child){
+
+  I3MCTree::iterator i = t.begin();
+  for( ; i != t.end(); i++){
+    if(i->GetID() == child.GetID())
+      return *(t.parent(i));
+  }
+  log_fatal("No parent found for this particle.");
+}
+
+bool
+I3MCTreeUtils::HasParent(I3MCTree& t, I3Particle& child){
+
+  I3MCTree::iterator i = t.begin();
+  for( ; i != t.end(); i++)
+    if(i->GetID() == child.GetID())
+      if(t.parent(i) != t.end()) return true;
+  return false;
+}
+
+
+
 
