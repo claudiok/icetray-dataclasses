@@ -24,10 +24,10 @@ TEST(add_and_get_primaries)
   I3Particle p2;
 
   I3MCTree t;
-  I3MCTreeUtils::add_primary(t,p1);
-  I3MCTreeUtils::add_primary(t,p2);
+  I3MCTreeUtils::AddPrimary(t,p1);
+  I3MCTreeUtils::AddPrimary(t,p2);
   
-  std::vector<I3Particle> p_list = I3MCTreeUtils::get_primaries(t);
+  std::vector<I3Particle> p_list = I3MCTreeUtils::GetPrimaries(t);
   std::vector<I3Particle>::iterator i;
 
   bool found1 = false;
@@ -51,10 +51,10 @@ TEST(add_children_to_primaries)
   int p2_id = p2.GetID();
 
   I3MCTree t;
-  I3MCTreeUtils::add_primary(t,p1);
-  I3MCTreeUtils::add_primary(t,p2);
+  I3MCTreeUtils::AddPrimary(t,p1);
+  I3MCTreeUtils::AddPrimary(t,p2);
   
-  std::vector<I3Particle> p_list = I3MCTreeUtils::get_primaries(t);
+  std::vector<I3Particle> p_list = I3MCTreeUtils::GetPrimaries(t);
   std::vector<I3Particle>::iterator i;
 
   bool found1 = false;
@@ -78,10 +78,10 @@ TEST(add_children_to_primaries)
   int c3_id = c3.GetID();
   int c4_id = c4.GetID();
 
-  I3MCTreeUtils::append_child(t,p1,c1);
-  I3MCTreeUtils::append_child(t,p1,c2);
-  I3MCTreeUtils::append_child(t,p2,c3);
-  I3MCTreeUtils::append_child(t,p2,c4);
+  I3MCTreeUtils::AppendChild(t,p1,c1);
+  I3MCTreeUtils::AppendChild(t,p1,c2);
+  I3MCTreeUtils::AppendChild(t,p2,c3);
+  I3MCTreeUtils::AppendChild(t,p2,c4);
 
   I3Tree<I3Particle>::sibling_iterator si(t.begin());
 
@@ -98,5 +98,20 @@ TEST(add_children_to_primaries)
   ENSURE(ci->GetID() == c3_id);
   ci++;
   ENSURE(ci->GetID() == c4_id);
+
+  std::vector<I3Particle>::iterator d_iter;
+  std::vector<I3Particle> d_list;
+
+  d_list = I3MCTreeUtils::GetDaughters(t,p1);
+  d_iter = d_list.begin();
+  ENSURE(d_iter->GetID() == c1.GetID());
+  d_iter++;
+  ENSURE(d_iter->GetID() == c2.GetID());
+
+  d_list = I3MCTreeUtils::GetDaughters(t,p2);
+  d_iter = d_list.begin();
+  ENSURE(d_iter->GetID() == c3.GetID());
+  d_iter++;
+  ENSURE(d_iter->GetID() == c4.GetID());
 
 }

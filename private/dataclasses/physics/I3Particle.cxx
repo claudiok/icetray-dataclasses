@@ -79,8 +79,10 @@ template <class Archive>
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
-    ar & make_nvp("parentID",parentID_);
-    ar & make_nvp("primaryID",primaryID_);
+    if(version == 0){
+      ar & make_nvp("parentID",parentID_);
+      ar & make_nvp("primaryID",primaryID_);
+    }
     ar & make_nvp("type",type_);
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);

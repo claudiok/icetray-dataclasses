@@ -14,11 +14,13 @@
 
 namespace I3MCTreeUtils{
 
-  void add_primary(I3MCTree&, I3Particle&);
+  void AddPrimary(I3MCTree&, I3Particle&);
 
-  void append_child(I3MCTree&, I3Particle&, I3Particle&);
+  void AppendChild(I3MCTree&, I3Particle&, I3Particle&);
 
-  std::vector<I3Particle> get_primaries(I3MCTree&);
+  std::vector<I3Particle> GetPrimaries(I3MCTree&);
+
+  std::vector<I3Particle> GetDaughters(I3MCTree&, I3Particle&);
 
 }
 
