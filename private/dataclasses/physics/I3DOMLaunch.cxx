@@ -1,6 +1,12 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3DOMLaunch.h>
 
+//hack to make a failing test
+//for serialization
+namespace temp_hack{
+  const unsigned DOMLAUNCH_VERSION = 1;
+}
+
 I3DOMLaunch::I3DOMLaunch() 
   : startTime_(0.0),
     trigger_(TEST_PATTERN),
@@ -19,6 +25,8 @@ I3DOMLaunch::~I3DOMLaunch() {}
 template <class Archive>
 void I3DOMLaunch::serialize(Archive& ar, unsigned version)
 {
+  if(version != temp_hack::DOMLAUNCH_VERSION) 
+    log_fatal("I3DOMLaunch:class versioning does not appear to work.");
   ar & make_nvp("StartTime", startTime_);
   // ignore the "Trigger" information from serialization of old data
   if(version < 1)
@@ -47,7 +55,7 @@ void I3DOMLaunch::serialize(Archive& ar, unsigned version)
   ar & make_nvp("ChargeStampRange", chargeStampRange_);
 }
 
-BOOST_CLASS_VERSION(I3DOMLaunch, 1);
+BOOST_CLASS_VERSION(I3DOMLaunch, temp_hack::DOMLAUNCH_VERSION);
 I3_SERIALIZABLE(I3DOMLaunch);
 
 I3_SERIALIZABLE(I3DOMLaunchSeries);
