@@ -12,39 +12,56 @@
 #include "dataclasses/I3Tree.h"
 #include "icetray/I3DefaultName.h"
 
-namespace I3MCTreeUtils{
-
+namespace I3MCTreeUtils
+{
   /**
    *Adds a primary (top-level node) to the tree.
    *The primary has no parent.
    *A tree can have multiple primaries.
    */
-  void AddPrimary(I3MCTree&, I3Particle&);
+  void AddPrimary(I3MCTree&, const I3Particle&);
+  void AddPrimary(I3MCTreePtr, const I3Particle&);
 
   /**
    *Appends a child to the parent particle
    */
-  void AppendChild(I3MCTree&, I3Particle&, I3Particle&);
+  void AppendChild(I3MCTree&, const I3Particle&, const I3Particle&);
+  void AppendChild(I3MCTreePtr, const I3Particle&, const I3Particle&);
 
   /**
    *Gets a list of primaries from the tree
    */
-  std::vector<I3Particle> GetPrimaries(I3MCTree&);
+  const std::vector<I3Particle> GetPrimaries(const I3MCTree&);
+  const std::vector<I3Particle> GetPrimaries(I3MCTreeConstPtr);
 
   /**
    *Gets a list of daughters of the parent particle.
    */
-  std::vector<I3Particle> GetDaughters(I3MCTree&, I3Particle&);
+  const std::vector<I3Particle> GetDaughters(const I3MCTree&, const I3Particle&);
+  const std::vector<I3Particle> GetDaughters(I3MCTreeConstPtr, const I3Particle&);
 
   /**
    *Gets the parent of a particle.  log_fatals if parent does not exist.
    */
-  I3Particle& GetParent(I3MCTree&, I3Particle&);
+  const I3Particle& GetParent(const I3MCTree&, const I3Particle&);
+  const I3Particle& GetParent(I3MCTreeConstPtr, const I3Particle&);
 
   /**
    *Returns true if the particle has a parent
    */
-  bool HasParent(I3MCTree&, I3Particle&);
+  bool HasParent(const I3MCTree&, const I3Particle&);
+  bool HasParent(I3MCTreeConstPtr, const I3Particle&);
+
+  /**
+   *Returns the first daughter of the first primary in the MCTree.
+   *There will, in general, be multiple primaries in an MCTree, 
+   *and each primary will have multiple daughters (i.e. there will, in general,
+   *be multiple direct secondaries in an MCTree), so this method simply returns
+   *what is believed to be the most widely used secondary.
+   *For example, "the muon" which was created by the atmospheric neutrino.
+   */
+  const I3Particle& GetDefaultSecondary(const I3MCTree&);
+  const I3Particle& GetDefaultSecondary(I3MCTreeConstPtr);
 }
 
 #endif 
