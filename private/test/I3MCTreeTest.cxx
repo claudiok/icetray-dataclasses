@@ -135,7 +135,7 @@ TEST(get_most_energetic)
   I3MCTree tree;
   I3MCTreePtr tree_ptr(new I3MCTree(tree));
   I3Particle p1, p2, p3, p4, p5, p6;
-  p1.SetEnergy(10); p1.SetLocationType(I3Particle::Anywhere);
+  p1.SetEnergy(10);
   p2.SetEnergy(100); p2.SetLocationType(I3Particle::InIce);
   p3.SetEnergy(20); p3.SetLocationType(I3Particle::InIce);
   p4.SetEnergy(56); p4.SetLocationType(I3Particle::InIce);

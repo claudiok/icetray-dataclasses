@@ -84,6 +84,102 @@ string I3Particle::GetLocationTypeString() const
   }
 }
 
+bool I3Particle::IsTrack() const 
+{
+  if (shape_==InfiniteTrack || shape_==StartingTrack ||
+      shape_==StoppingTrack || shape_==ContainedTrack ||
+      type_==MuPlus || type_==MuMinus ||
+      type_==TauPlus || type_==TauMinus ||
+      type_==Monopole)
+    return true;
+  else return false;
+}
+
+bool I3Particle::IsCascade() const
+{
+  if (shape_==Cascade ||
+      type_ == EPlus || type_== EMinus ||
+      type_ == Brems || type_ == DeltaE ||
+      type_ == PairProd || type_ == NuclInt ||
+      type_ == Gamma || type_==Hadrons ||
+      type_== PiPlus || type_ == PiMinus) 
+    return true;
+  else return false;
+}
+
+bool I3Particle::IsPrimary() const 
+{
+  if (shape_==Primary) return true;
+  else return false;
+}
+
+bool I3Particle::IsTopShower() const
+{
+  if (shape_==TopShower) return true;
+  else return false;
+}
+
+I3Position I3Particle::ShiftAlongTrack(double dist) const 
+{
+  if (IsTrack()) {
+    double x = GetX() - dist * sin(GetZenith()) * cos(GetAzimuth());
+    double y = GetY() - dist * sin(GetZenith()) * sin(GetAzimuth());
+    double z = GetZ() - dist * cos(GetZenith());
+    I3Position p(x,y,z,I3Position::car);
+    return p;
+  }
+  else {
+    log_warn("ShiftAlongTrack undefined for a particle that is not a track.");
+    I3Position nullpos;
+    return nullpos;
+  }
+}
+
+I3Position I3Particle::GetStartPos() const 
+{ 
+  if (shape_==StartingTrack || shape_==ContainedTrack) return pos_;
+  else {
+    log_warn("GetStartPos undefined for a particle that is neither starting "
+	     "nor contained.");
+    I3Position nullpos;
+    return nullpos;
+  }
+}
+
+double I3Particle::GetStartTime() const 
+{
+  if (shape_==StartingTrack || shape_==ContainedTrack) return time_;
+  else{
+    log_warn("GetStartTime undefined for a particle that is neither starting "
+	     "nor contained.");
+    return NAN;
+  }
+}
+
+I3Position I3Particle::GetStopPos() const 
+{
+  if (shape_==StoppingTrack) return pos_;
+  else if (shape_==ContainedTrack) return ShiftAlongTrack(length_);
+  else {
+    log_warn("GetStopPos undefined for a particle that is neither stopping "
+	     "nor contained.");
+    I3Position nullpos;
+    return nullpos;
+  }
+}
+
+double I3Particle::GetStopTime() const 
+{ 
+  if (shape_==StoppingTrack) return time_;
+  else if (shape_==ContainedTrack) { return time_ + length_/speed_; }
+  else{
+    log_warn("GetStopTime undefined for a particle that is neither stopping "
+	     "nor contained.");
+    return NAN;
+  }
+}
+
+
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
   {
