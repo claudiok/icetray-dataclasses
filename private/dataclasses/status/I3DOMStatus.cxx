@@ -1,23 +1,11 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/status/I3DOMStatus.h>
 
-//hack to make a failing test
-//for serialization
-namespace temp_hack{
-  const unsigned DOMSTATUS_VERSION = 1;
-}
-
 I3DOMStatus::~I3DOMStatus() {}
 
-BOOST_CLASS_VERSION(I3DOMStatus, temp_hack::DOMSTATUS_VERSION);
-
 template <class Archive>
-void I3DOMStatus::serialize (Archive& ar, unsigned version)
+void I3DOMStatus::serialize (Archive& ar, const unsigned version)
 {
-
-  if(version != temp_hack::DOMSTATUS_VERSION) 
-    log_fatal("I3DOMStatus: class versioning does not appear to work.");
-
   ar & make_nvp("TrigMode",trigMode);
   ar & make_nvp("LCMode",lcMode);
   ar & make_nvp("LCWindowPre",lcWindowPre);
@@ -53,7 +41,7 @@ void I3DOMStatus::serialize (Archive& ar, unsigned version)
       domGainType = I3DOMStatus::UnknownGainType;
   }	
 
-  if ( version > 0 )
+  if (version > 0)
   {
       ar & make_nvp("cableType", cableType);
   }

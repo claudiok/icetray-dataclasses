@@ -81,6 +81,7 @@ class I3RecoPulse
 };
 
 I3_POINTER_TYPEDEFS(I3RecoPulse);
+BOOST_CLASS_VERSION(I3RecoPulse, 1);
 
 typedef std::vector<I3RecoPulse> I3RecoPulseSeries;
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;

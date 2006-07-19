@@ -34,7 +34,6 @@ void I3Waveform::serialize(Archive& ar, unsigned version)
   ar & make_nvp("source", source_);
 }
 
-BOOST_CLASS_VERSION(I3Waveform, 1);
 I3_SERIALIZABLE(I3Waveform);
 
 I3_SERIALIZABLE(I3WaveformSeries);

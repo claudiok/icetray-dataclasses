@@ -17,7 +17,6 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
     }
   }
 
-BOOST_CLASS_VERSION(I3RecoPulse, 1);
 
 I3_SERIALIZABLE(I3RecoPulse);
 

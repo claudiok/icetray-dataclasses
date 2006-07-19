@@ -17,5 +17,4 @@ template <class Archive>
 
   }
 
-BOOST_CLASS_VERSION(I3TankGeo, 1);
 I3_SERIALIZABLE(I3TankGeo);

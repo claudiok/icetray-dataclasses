@@ -64,6 +64,7 @@ class I3RecoHit
 
 
 I3_POINTER_TYPEDEFS(I3RecoHit);
+BOOST_CLASS_VERSION(I3RecoHit, 1);
 
 typedef std::vector<I3RecoHit> I3RecoHitSeries;
 typedef I3Map<OMKey, I3RecoHitSeries> I3RecoHitSeriesMap;

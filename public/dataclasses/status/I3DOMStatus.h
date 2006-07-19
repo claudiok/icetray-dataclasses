@@ -2,7 +2,7 @@
 #define I3DOMSTATUS_H_INCLUDED
 
 #include "dataclasses/Utility.h"
-
+#include <boost/serialization/version.hpp>
 
 struct I3DOMStatus 
 {
@@ -152,10 +152,12 @@ struct I3DOMStatus
      */
     CableType cableType;
 
-  template <class Archive> void serialize(Archive & ar, unsigned version);
+  template <class Archive> void serialize(Archive & ar, const unsigned version);
 };
 
 I3_POINTER_TYPEDEFS(I3DOMStatus);
+
+BOOST_CLASS_VERSION(I3DOMStatus, 1);
 
 #endif //I3DOMSTATUS_H_INCLUDED
 

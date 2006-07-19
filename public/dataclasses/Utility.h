@@ -13,6 +13,12 @@
 #include <icetray/IcetrayFwd.h>
 #include "icetray/I3FrameObject.h"
 
+#ifndef __CINT__
+#include <boost/serialization/version.hpp>
+#else
+#define BOOST_CLASS_VERSION(T,V) 
+#endif
+
 namespace boost 
 {
   namespace serialization 

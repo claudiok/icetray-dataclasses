@@ -49,7 +49,7 @@ struct I3TankGeo
 
 };
 
-
+BOOST_CLASS_VERSION(I3TankGeo, 1);
 I3_POINTER_TYPEDEFS(I3TankGeo);
 
 #endif //I3TANKGEO_H_INCLUDED

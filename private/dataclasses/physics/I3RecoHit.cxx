@@ -14,7 +14,6 @@ I3RecoHit::serialize(Archive& ar, unsigned version)
       ar & make_nvp("sourceIndex",sourceIndex_);
     }
 }
-BOOST_CLASS_VERSION(I3RecoHit, 1);
 
 I3_SERIALIZABLE(I3RecoHit);
 

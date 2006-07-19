@@ -186,6 +186,5 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   
 }
 
-BOOST_CLASS_VERSION(I3DOMCalibration, 2);
 I3_SERIALIZABLE(I3DOMCalibration);
 

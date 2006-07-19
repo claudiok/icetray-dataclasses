@@ -98,8 +98,6 @@ template <class Archive>
       ar & make_nvp("LocationType",locationType_);
   }
 
-BOOST_CLASS_VERSION(I3Particle,1);
-
 I3_SERIALIZABLE(I3Particle);
 
 I3_SERIALIZABLE(I3ParticleVect);
