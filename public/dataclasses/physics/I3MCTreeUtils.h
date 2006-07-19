@@ -53,15 +53,12 @@ namespace I3MCTreeUtils
   bool HasParent(I3MCTreeConstPtr, const I3Particle&);
 
   /**
-   *Returns the first daughter of the first primary in the MCTree.
-   *There will, in general, be multiple primaries in an MCTree, 
-   *and each primary will have multiple daughters (i.e. there will, in general,
-   *be multiple direct secondaries in an MCTree), so this method simply returns
-   *what is believed to be the most widely used secondary.
-   *For example, "the muon" which was created by the atmospheric neutrino.
+   *Returns the InIce particle with highest energy.
+   *This is useful for example in extracting "the muon" from the 
+   *atmospheric neutrino data.
    */
-  const I3Particle& GetDefaultSecondary(const I3MCTree&);
-  const I3Particle& GetDefaultSecondary(I3MCTreeConstPtr);
+  const I3Particle& GetMostEnergeticInIce(const I3MCTree&);
+  const I3Particle& GetMostEnergeticInIce(I3MCTreeConstPtr);
 }
 
 #endif 

@@ -109,9 +109,9 @@ TEST(add_children_to_primaries)
   ENSURE(d_iter->GetID() == c2.GetID());
 
   ENSURE(I3MCTreeUtils::HasParent(t,c1));
-  I3Particle& p1_1 = I3MCTreeUtils::GetParent(t,c1);
+  const I3Particle& p1_1 = I3MCTreeUtils::GetParent(t,c1);
   ENSURE(I3MCTreeUtils::HasParent(t,c2));
-  I3Particle& p1_2 = I3MCTreeUtils::GetParent(t,c2);
+  const I3Particle& p1_2 = I3MCTreeUtils::GetParent(t,c2);
   ENSURE(p1_1.GetID() == p1.GetID());
   ENSURE(p1_2.GetID() == p1.GetID());
 
@@ -122,10 +122,27 @@ TEST(add_children_to_primaries)
   ENSURE(d_iter->GetID() == c4.GetID());
 
   ENSURE(I3MCTreeUtils::HasParent(t,c3));
-  I3Particle& p2_3 = I3MCTreeUtils::GetParent(t,c3);
+  const I3Particle& p2_3 = I3MCTreeUtils::GetParent(t,c3);
   ENSURE(I3MCTreeUtils::HasParent(t,c4));
-  I3Particle& p2_4 = I3MCTreeUtils::GetParent(t,c4);
+  const I3Particle& p2_4 = I3MCTreeUtils::GetParent(t,c4);
   ENSURE(p2_3.GetID() == p2.GetID());
   ENSURE(p2_4.GetID() == p2.GetID());
 
+}
+
+TEST(get_most_energetic)
+{
+  I3MCTree tree;
+  I3MCTreePtr tree_ptr(new I3MCTree(tree));
+  I3Particle p1, p2, p3, p4, p5, p6;
+  p1.SetEnergy(10); p1.SetLocationType(I3Particle::Anywhere);
+  p2.SetEnergy(100); p2.SetLocationType(I3Particle::InIce);
+  p3.SetEnergy(20); p3.SetLocationType(I3Particle::InIce);
+  p4.SetEnergy(56); p4.SetLocationType(I3Particle::InIce);
+  I3MCTreeUtils::AddPrimary(tree_ptr, p1);
+  I3MCTreeUtils::AppendChild(tree_ptr, p1, p2);
+  I3MCTreeUtils::AppendChild(tree_ptr, p2, p3);
+  I3MCTreeUtils::AppendChild(tree_ptr, p2, p3);
+  I3MCTreeUtils::AppendChild(tree_ptr, p2, p4);
+  ENSURE_DISTANCE(I3MCTreeUtils::GetMostEnergeticInIce(tree_ptr).GetEnergy(),100,0.001);
 }

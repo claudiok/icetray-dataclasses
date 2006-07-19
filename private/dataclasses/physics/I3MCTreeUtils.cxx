@@ -116,15 +116,22 @@ I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3Particle& child)
 
 
 const I3Particle& 
-I3MCTreeUtils::GetDefaultSecondary(const I3MCTree& t)
+I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
 {
-  const I3Particle& primary = I3MCTreeUtils::GetPrimaries(t)[0];
-  const I3Particle& track = I3MCTreeUtils::GetDaughters(t, primary)[0];
-  return track;
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return;
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && 
+	iter->GetLocationType()==I3Particle::InIce) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return *iter_return;
 }
 
 const I3Particle& 
-I3MCTreeUtils::GetDefaultSecondary(I3MCTreeConstPtr t)
+I3MCTreeUtils::GetMostEnergeticInIce(I3MCTreeConstPtr t)
 {
-  return I3MCTreeUtils::GetDefaultSecondary(*t);
+  return GetMostEnergeticInIce(*t);
 }

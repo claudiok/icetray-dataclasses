@@ -179,6 +179,11 @@ class I3Particle : public I3FrameObject
 
   string GetFitStatusString() const;
 
+  LocationType GetLocationType() const { return locationType_; }
+  void SetLocationType(LocationType type) { locationType_ = type; }
+
+  string GetLocationTypeString() const;
+
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
   void SetPos(double p1, double p2, double p3, 

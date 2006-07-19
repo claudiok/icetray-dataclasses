@@ -74,6 +74,16 @@ string I3Particle::GetFitStatusString() const
   }
 }
 
+string I3Particle::GetLocationTypeString() const
+{
+  switch (locationType_) {
+  case Anywhere: return("Anywhere");
+  case IceTop:   return("IceTop");
+  case InIce:    return("InIce");
+  default:       return("undefined location type");
+  }
+}
+
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
   {
