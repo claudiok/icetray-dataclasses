@@ -135,3 +135,39 @@ I3MCTreeUtils::GetMostEnergeticInIce(I3MCTreeConstPtr t)
 {
   return GetMostEnergeticInIce(*t);
 }
+
+
+const vector<I3Particle> 
+I3MCTreeUtils::Get(const I3MCTree& t, I3Particle::LocationType l)
+{
+  vector<I3Particle> v;
+  I3MCTree::iterator iter;
+  for (iter=t.begin(); iter!=t.end(); ++iter) 
+    if (iter->GetLocationType()==l) 
+      v.push_back(*iter);
+  return v;
+}
+
+const vector<I3Particle> 
+I3MCTreeUtils::GetInIce(const I3MCTree& t)
+{
+  return Get(t,I3Particle::InIce);
+}
+
+const vector<I3Particle> 
+I3MCTreeUtils::GetInIce(I3MCTreeConstPtr t)
+{
+  return Get(*t,I3Particle::InIce);
+}
+
+const vector<I3Particle> 
+I3MCTreeUtils::GetIceTop(const I3MCTree& t)
+{
+  return Get(t,I3Particle::IceTop);
+}
+
+const vector<I3Particle> 
+I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
+{
+  return Get(*t,I3Particle::IceTop);
+}
