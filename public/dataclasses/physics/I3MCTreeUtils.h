@@ -20,13 +20,13 @@ namespace I3MCTreeUtils
    *A tree can have multiple primaries.
    */
   void AddPrimary(I3MCTree&, const I3Particle&);
-  void AddPrimary(I3MCTreePtr, const I3Particle&);
+  void AddPrimary(I3MCTreePtr,  const I3Particle&);
 
   /**
    *Appends a child to the parent particle
    */
-  void AppendChild(I3MCTree&, const I3Particle&, const I3Particle&);
-  void AppendChild(I3MCTreePtr, const I3Particle&, const I3Particle&);
+  void AppendChild(I3MCTree&,  const I3Particle&,  const I3Particle&);
+  void AppendChild(I3MCTreePtr,  const I3Particle&,  const I3Particle&);
 
   /**
    *Gets a list of primaries from the tree
@@ -59,6 +59,20 @@ namespace I3MCTreeUtils
    */
   const I3Particle& GetMostEnergeticInIce(const I3MCTree&);
   const I3Particle& GetMostEnergeticInIce(I3MCTreeConstPtr);
+
+  /**
+   *Returns a vector of particles that are InIce.
+   */
+  const vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
+
+  const vector<I3Particle> GetInIce(const I3MCTree&);
+  const vector<I3Particle> GetInIce(I3MCTreeConstPtr);
+
+  /**
+   *Returns a vector of particles that are IceTop.
+   */
+  const vector<I3Particle> GetIceTop(const I3MCTree&);
+  const vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
 }
 
 #endif 
