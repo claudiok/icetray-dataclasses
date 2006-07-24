@@ -114,7 +114,7 @@ I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3Particle& child)
   return I3MCTreeUtils::HasParent(*t, child);
 }
 
-
+/*
 const I3Particle& 
 I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
 {
@@ -171,3 +171,4 @@ I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
 {
   return Get(*t,I3Particle::IceTop);
 }
+*/

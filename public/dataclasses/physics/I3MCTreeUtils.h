@@ -57,22 +57,22 @@ namespace I3MCTreeUtils
    *This is useful for example in extracting "the muon" from the 
    *atmospheric neutrino data.
    */
-  const I3Particle& GetMostEnergeticInIce(const I3MCTree&);
-  const I3Particle& GetMostEnergeticInIce(I3MCTreeConstPtr);
+  //const I3Particle& GetMostEnergeticInIce(const I3MCTree&);
+  //const I3Particle& GetMostEnergeticInIce(I3MCTreeConstPtr);
 
   /**
    *Returns a vector of particles that are InIce.
    */
-  const vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
+  //const vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
 
-  const vector<I3Particle> GetInIce(const I3MCTree&);
-  const vector<I3Particle> GetInIce(I3MCTreeConstPtr);
+  //const vector<I3Particle> GetInIce(const I3MCTree&);
+  //const vector<I3Particle> GetInIce(I3MCTreeConstPtr);
 
   /**
    *Returns a vector of particles that are IceTop.
    */
-  const vector<I3Particle> GetIceTop(const I3MCTree&);
-  const vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
+  //const vector<I3Particle> GetIceTop(const I3MCTree&);
+  //const vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
 }
 
 #endif 
