@@ -165,7 +165,9 @@ TEST(get_inice_icetop){
   I3MCTreeUtils::AppendChild(tree_ptr, p1, p5);
   I3MCTreeUtils::AppendChild(tree_ptr, p1, p6);
 
+  unsigned int inicesize = 3;
+  unsigned int icetopsize = 2;
 
-  ENSURE_EQUAL(I3MCTreeUtils::GetInIce(tree_ptr).size(),3);
-  ENSURE_EQUAL(I3MCTreeUtils::GetIceTop(tree_ptr).size(),2);
+  ENSURE_EQUAL(I3MCTreeUtils::GetInIce(tree_ptr).size(),inicesize);
+  ENSURE_EQUAL(I3MCTreeUtils::GetIceTop(tree_ptr).size(),icetopsize);
 }
