@@ -56,8 +56,8 @@ public:
 
   /**
    * Enumeration describing what "algorithm" issued a trigger.
-   *  More details about a specific trigger can be stored in the
-   *   I3TriggerStatus map in the I3Detector Status frame
+   * More details about a specific trigger can be stored in the
+   * I3TriggerStatus map in the I3Detector Status frame
    */
   enum TypeID         // probably incomplete enumeration of trigger types
   {
