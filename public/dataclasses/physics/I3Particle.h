@@ -61,6 +61,11 @@ class I3Particle : public I3FrameObject
     YAGLaser = 2201,
     ZPrimary = 3000,
     APrimary = 3500,
+    CRProton = 4001,
+    CRHelium = 4004,
+    CROxygen = 4016,
+    CRSilicon = 4028,
+    CRIron = 4056,
     Elph = 9999
   };
   enum ParticleShape { 

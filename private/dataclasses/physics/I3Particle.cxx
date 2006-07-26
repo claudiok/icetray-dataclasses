@@ -40,6 +40,11 @@ string I3Particle::GetTypeString() const
   case YAGLaser:   return("YAGLaser");
   case ZPrimary:   return("ZPrimary");
   case APrimary:   return("APrimary");
+  case CRProton:   return("CRProton");
+  case CRHelium:   return("CRHelium");
+  case CROxygen:   return("CROxygen");
+  case CRSilicon:  return("CRSilicon");
+  case CRIron:     return("CRIron");
   case Elph:       return("Elph");
   default:         return("undefined particle type");
   }
