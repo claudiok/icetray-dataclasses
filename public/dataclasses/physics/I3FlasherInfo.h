@@ -59,7 +59,7 @@ protected:
      int LEDBrightness_;
 
      int width_;
-
+     int rate_;
 
     
 public:
@@ -105,6 +105,11 @@ public:
     unsigned int GetWidth() const { return width_; }
     void SetWidth(int width) { width_ = width; }
 
+
+    /* return and set rate */
+ 
+    unsigned int GetRate() const { return rate_; }
+    void SetRate(int rate) { rate_ = rate; }
 
     /**
      * return raw ATWD3 waveform as a read-only object
