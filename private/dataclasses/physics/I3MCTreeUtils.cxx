@@ -122,7 +122,7 @@ I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
   I3MCTree::iterator iter, iter_return;
   for (iter=t.begin(); iter!=t.end(); ++iter) {
     if (iter->GetEnergy()>maxenergy && 
-	iter->GetLocationType()==I3Particle::InIce) {
+	iter->GetShape()!=I3Particle::Primary) {
       maxenergy = iter->GetEnergy();
       iter_return = iter;
     }
