@@ -53,10 +53,39 @@ namespace I3MCTreeUtils
   bool HasParent(const I3MCTree&, const I3Particle&);
   bool HasParent(I3MCTreeConstPtr, const I3Particle&);
 
-
+  /**
+   * Function that converts am I3MCList to an I3MCTree.
+   * NOTE: No attempt has been made to construct trees
+   * from flat lists.  All particles in the I3MCList
+   * go into the top level of the tree, so will be
+   * considered a primary.  Particles in composite
+   * lists become daughters in the tree.  The parentID
+   * and primaryID remain unchanged in the conversion.
+   */
   I3MCTreePtr ListToTree(const I3MCList&);
+  I3MCTreePtr ListToTree(I3MCListConstPtr);
+
+  /**
+   * Gets either an I3MCList or an I3MCTree from the frame
+   * with the specificed key.  If the object is an I3MCList
+   * it is converted to an I3MCTree with ListToTree.
+   */
   I3MCTreeConstPtr Get(I3FramePtr, std::string);
-  void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const vector<I3Particle>&);
+
+  /**
+   * Used internally by ListToTree and called recursively.
+   * The general population probably won't find this useful.
+   * To use it properly, you need to...
+   * 1) Copy the particle you want to add
+   * 2) Clear the composite list of the copy
+   * 3) Append the copy (with the empty composite list) to the tree with insert.
+   * 4) Pass to ConvertComposite the tree, the iterator (return value from insert call),
+        and the composite list of the original particle.
+   *  Again probably not for general consumption.
+   */
+  namespace internal{
+    void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const vector<I3Particle>&);
+  }
 
   /**
    *Returns the InIce particle with highest energy.

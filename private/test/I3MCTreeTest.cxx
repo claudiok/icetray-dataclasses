@@ -148,7 +148,7 @@ TEST(convert_composite){
   si = t.end(t.begin());
   I3Tree<I3Particle>::iterator p_iter = t.insert(si,dummy);
 
-  I3MCTreeUtils::ConvertComposite(t,p_iter,p1.GetComposite());
+  I3MCTreeUtils::internal::ConvertComposite(t,p_iter,p1.GetComposite());
 
   ENSURE(static_cast<int>(t.size())==3);
 
