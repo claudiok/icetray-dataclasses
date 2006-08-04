@@ -114,18 +114,18 @@ I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3Particle& child)
   return I3MCTreeUtils::HasParent(*t, child);
 }
 
-void I3MCTreeUtils::ConvertComposite(I3MCTree& t, I3MCTree::iterator& i){
-  I3MCTree::sibling_iterator j = t.begin(i);
-  for( ; j!=t.end(i); j++){
+void I3MCTreeUtils::ConvertComposite(I3MCTree& t, I3MCTree::iterator& i, const vector<I3Particle>& cl){
+  vector<I3Particle>::const_iterator j = cl.begin();
+  for( ; j!=cl.end(); j++){
     I3Particle p(*j);
     p.GetComposite().clear();
     I3MCTree::iterator k = t.append_child(i,p);
-    I3MCTreeUtils::ConvertComposite(t,k);
+    I3MCTreeUtils::ConvertComposite(t,k,j->GetComposite());
   }
 }
 
 I3MCTreePtr I3MCTreeUtils::ListToTree(const I3MCList& list){
-  I3MCTreePtr t;
+  I3MCTreePtr t(new I3MCTree);
   I3MCList::const_iterator i = list.begin();
   for( ; i!=list.end(); i++){
     I3Tree<I3Particle>::iterator si;
@@ -134,7 +134,7 @@ I3MCTreePtr I3MCTreeUtils::ListToTree(const I3MCList& list){
     p.GetComposite().clear();
     I3MCTree::iterator iter = t->insert(si,p);
     //This is a recursive function
-    I3MCTreeUtils::ConvertComposite(*t,iter);
+    I3MCTreeUtils::ConvertComposite(*t,iter,i->GetComposite());
   }
   return t;
 }

@@ -56,7 +56,7 @@ namespace I3MCTreeUtils
 
   I3MCTreePtr ListToTree(const I3MCList&);
   I3MCTreeConstPtr Get(I3FramePtr, std::string);
-  void ConvertComposite(I3MCTree&, I3MCTree::iterator&);
+  void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const vector<I3Particle>&);
 
   /**
    *Returns the InIce particle with highest energy.
