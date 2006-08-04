@@ -9,6 +9,7 @@
 
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/physics/I3MCTree.h"
+#include "dataclasses/physics/I3MCList.h"
 #include "dataclasses/I3Tree.h"
 #include "icetray/I3DefaultName.h"
 
@@ -51,6 +52,11 @@ namespace I3MCTreeUtils
    */
   bool HasParent(const I3MCTree&, const I3Particle&);
   bool HasParent(I3MCTreeConstPtr, const I3Particle&);
+
+
+  I3MCTreePtr ListToTree(const I3MCList&);
+  I3MCTreeConstPtr Get(I3FramePtr, std::string);
+  void ConvertComposite(I3MCTree&, I3MCTree::iterator&);
 
   /**
    *Returns the InIce particle with highest energy.
