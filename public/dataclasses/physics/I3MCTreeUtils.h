@@ -9,6 +9,7 @@
 
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/physics/I3MCTree.h"
+#include "dataclasses/physics/I3MCList.h"
 #include "dataclasses/I3Tree.h"
 #include "icetray/I3DefaultName.h"
 
@@ -53,26 +54,60 @@ namespace I3MCTreeUtils
   bool HasParent(I3MCTreeConstPtr, const I3Particle&);
 
   /**
+   * Function that converts am I3MCList to an I3MCTree.
+   * NOTE: No attempt has been made to construct trees
+   * from flat lists.  All particles in the I3MCList
+   * go into the top level of the tree, so will be
+   * considered a primary.  Particles in composite
+   * lists become daughters in the tree.  The parentID
+   * and primaryID remain unchanged in the conversion.
+   */
+  I3MCTreePtr ListToTree(const I3MCList&);
+  I3MCTreePtr ListToTree(I3MCListConstPtr);
+
+  /**
+   * Gets either an I3MCList or an I3MCTree from the frame
+   * with the specificed key.  If the object is an I3MCList
+   * it is converted to an I3MCTree with ListToTree.
+   */
+  I3MCTreeConstPtr Get(I3FramePtr, std::string);
+
+  /**
+   * Used internally by ListToTree and called recursively.
+   * The general population probably won't find this useful.
+   * To use it properly, you need to...
+   * 1) Copy the particle you want to add
+   * 2) Clear the composite list of the copy
+   * 3) Append the copy (with the empty composite list) to the tree with insert.
+   * 4) Pass to ConvertComposite the tree, the iterator (return value from insert call),
+        and the composite list of the original particle.
+   *  Again probably not for general consumption.
+   */
+  namespace internal{
+    void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const vector<I3Particle>&);
+  }
+
+  /**
    *Returns the InIce particle with highest energy.
    *This is useful for example in extracting "the muon" from the 
    *atmospheric neutrino data.
    */
-  const I3Particle& GetMostEnergeticInIce(const I3MCTree&);
-  const I3Particle& GetMostEnergeticInIce(I3MCTreeConstPtr);
+  //const I3Particle& GetMostEnergeticInIce(const I3MCTree&);
+  //const I3Particle& GetMostEnergeticInIce(I3MCTreeConstPtr);
 
   /**
    *Returns a vector of particles that are InIce.
    */
-  const vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
+  //const vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
 
-  const vector<I3Particle> GetInIce(const I3MCTree&);
-  const vector<I3Particle> GetInIce(I3MCTreeConstPtr);
+  //const vector<I3Particle> GetInIce(const I3MCTree&);
+  //const vector<I3Particle> GetInIce(I3MCTreeConstPtr);
 
   /**
    *Returns a vector of particles that are IceTop.
    */
-  const vector<I3Particle> GetIceTop(const I3MCTree&);
-  const vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
+  //const vector<I3Particle> GetIceTop(const I3MCTree&);
+  //const vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
 }
 
 #endif 

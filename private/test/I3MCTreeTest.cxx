@@ -44,8 +44,8 @@ TEST(add_and_get_primaries)
 
 TEST(add_children_to_primaries)
 {
-  I3Particle p1;
-  I3Particle p2;
+  I3Particle p1; 
+  I3Particle p2; 
 
   int p1_id = p1.GetID();
   int p2_id = p2.GetID();
@@ -68,10 +68,10 @@ TEST(add_children_to_primaries)
 
   ENSURE(found1 && found2);
 
-  I3Particle c1;
-  I3Particle c2;
-  I3Particle c3;
-  I3Particle c4;
+  I3Particle c1; 
+  I3Particle c2; 
+  I3Particle c3; 
+  I3Particle c4; 
 
   int c1_id = c1.GetID();
   int c2_id = c2.GetID();
@@ -130,44 +130,3 @@ TEST(add_children_to_primaries)
 
 }
 
-TEST(get_most_energetic)
-{
-  I3MCTree tree;
-  I3MCTreePtr tree_ptr(new I3MCTree(tree));
-  I3Particle p1, p2, p3, p4, p5, p6;
-  p1.SetEnergy(10);
-  p2.SetEnergy(100); p2.SetLocationType(I3Particle::InIce);
-  p3.SetEnergy(20); p3.SetLocationType(I3Particle::InIce);
-  p4.SetEnergy(56); p4.SetLocationType(I3Particle::InIce);
-  I3MCTreeUtils::AddPrimary(tree_ptr, p1);
-  I3MCTreeUtils::AppendChild(tree_ptr, p1, p2);
-  I3MCTreeUtils::AppendChild(tree_ptr, p2, p3);
-  I3MCTreeUtils::AppendChild(tree_ptr, p2, p3);
-  I3MCTreeUtils::AppendChild(tree_ptr, p2, p4);
-  ENSURE_DISTANCE(I3MCTreeUtils::GetMostEnergeticInIce(tree_ptr).GetEnergy(),100,0.001);
-}
-
-TEST(get_inice_icetop){
-  I3MCTree tree;
-  I3MCTreePtr tree_ptr(new I3MCTree(tree));
-  I3Particle p1, p2, p3, p4, p5, p6;
-  p1.SetEnergy(10);
-  p2.SetEnergy(100); p2.SetLocationType(I3Particle::InIce);
-  p3.SetEnergy(20); p3.SetLocationType(I3Particle::InIce);
-  p4.SetEnergy(56); p4.SetLocationType(I3Particle::InIce);
-  p4.SetLocationType(I3Particle::IceTop);
-  p5.SetLocationType(I3Particle::IceTop);
-  I3MCTreeUtils::AddPrimary(tree_ptr, p1);
-  I3MCTreeUtils::AppendChild(tree_ptr, p1, p2);
-  I3MCTreeUtils::AppendChild(tree_ptr, p2, p3);
-  I3MCTreeUtils::AppendChild(tree_ptr, p2, p3);
-  I3MCTreeUtils::AppendChild(tree_ptr, p2, p4);
-  I3MCTreeUtils::AppendChild(tree_ptr, p1, p5);
-  I3MCTreeUtils::AppendChild(tree_ptr, p1, p6);
-
-  unsigned int inicesize = 3;
-  unsigned int icetopsize = 2;
-
-  ENSURE_EQUAL(I3MCTreeUtils::GetInIce(tree_ptr).size(),inicesize);
-  ENSURE_EQUAL(I3MCTreeUtils::GetIceTop(tree_ptr).size(),icetopsize);
-}
