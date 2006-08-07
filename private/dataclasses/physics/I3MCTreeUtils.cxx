@@ -118,7 +118,7 @@ void I3MCTreeUtils::internal::ConvertComposite(I3MCTree& t, I3MCTree::iterator& 
   vector<I3Particle>::const_iterator j = cl.begin();
   for( ; j!=cl.end(); j++){
     I3Particle p(*j);
-    p.ClearComposite();
+    p.GetComposite().clear();
     I3MCTree::iterator k = t.append_child(i,p);
     I3MCTreeUtils::internal::ConvertComposite(t,k,j->GetComposite());
   }
@@ -131,7 +131,7 @@ I3MCTreePtr I3MCTreeUtils::ListToTree(const I3MCList& list){
     I3Tree<I3Particle>::iterator si;
     si = t->end(t->begin());
     I3Particle p(*i);
-    p.ClearComposite();
+    p.GetComposite().clear();
     I3MCTree::iterator iter = t->insert(si,p);
     //This is a recursive function
     I3MCTreeUtils::internal::ConvertComposite(*t,iter,i->GetComposite());
@@ -153,7 +153,6 @@ I3MCTreeUtils::Get(I3FramePtr frame, string key){
   }
 }
 
-/*
 const I3Particle& 
 I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
 {
@@ -210,4 +209,4 @@ I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
 {
   return Get(*t,I3Particle::IceTop);
 }
-*/
+

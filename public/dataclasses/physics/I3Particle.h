@@ -190,7 +190,7 @@ class I3Particle : public I3FrameObject
   void SetSpeed(double s) { speed_ = s; }
 
   const vector<I3Particle>& GetComposite() const { return composite_; }
-  void ClearComposite() { composite_.clear(); }
+  vector<I3Particle>& GetComposite() { return composite_; }
 
   I3Position ShiftAlongTrack(double dist) const;
 
