@@ -28,6 +28,22 @@ public:
       ETC = 40
     };
     
+    /** Describes possible artefacts within the data.
+     * 
+     * The waveform is a hardware independent representation of the data aquired.
+     * Nevertheless, it can carry artefacts due to hardware imperfections.
+     * 
+     * Saturation is an example, which is hard to recognize, since the waveform is
+     * a vector of doubles. Of course, it is still possible to regognize saturation
+     * using some more or less fancy algorithm, but the module converting the hardware
+     * dependent data into hardware independent data can recognize artefacts much easier.
+     * It should record this information using this enumeration.
+     * 
+     * If the DOM calibrator combines the ATWD channels, it should call bins that
+     * saturate even in the lowest amplified channel ADULTERATED, bins that saturate
+     * only in some channels SHADY and bins that do not saturate in the highest
+     * amplified channel VIRGINAL.
+     */
     enum Status
     {
       VIRGINAL = 0,
