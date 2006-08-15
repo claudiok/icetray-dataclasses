@@ -73,4 +73,76 @@ TEST(CopyObjConstructor)
                   "Copied directions do not match");
 }
 
+TEST(istrack){
 
+  I3Particle itrack; 
+  I3Particle start_track;
+  I3Particle stop_track;
+  I3Particle cont_track;
+  I3Particle muplus;
+  I3Particle muminus;
+  I3Particle tauplus;
+  I3Particle tauminus;
+  I3Particle mp;
+
+  itrack.SetShape(I3Particle::InfiniteTrack);
+  start_track.SetShape(I3Particle::StartingTrack);
+  stop_track.SetShape(I3Particle::StoppingTrack);
+  cont_track.SetShape(I3Particle::ContainedTrack);
+  muplus.SetType(I3Particle::MuPlus);
+  muminus.SetType(I3Particle::MuMinus);
+  tauplus.SetType(I3Particle::TauPlus);
+  tauminus.SetType(I3Particle::MuMinus);
+  mp.SetType(I3Particle::Monopole);
+
+  ENSURE(itrack.IsTrack()); 
+  ENSURE(start_track.IsTrack());
+  ENSURE(stop_track.IsTrack());
+  ENSURE(cont_track.IsTrack());
+  ENSURE(muplus.IsTrack());
+  ENSURE(muminus.IsTrack());
+  ENSURE(tauplus.IsTrack());
+  ENSURE(tauminus.IsTrack());
+  ENSURE(mp.IsTrack());
+  
+
+}
+
+TEST(iscascade){
+
+  I3Particle cascade; 
+  I3Particle eplus; 
+  I3Particle eminus; 
+  I3Particle brem; 
+  I3Particle delta; 
+  I3Particle pair; 
+  I3Particle nucl; 
+  I3Particle gamma; 
+  I3Particle hadron; 
+  I3Particle piplus; 
+  I3Particle piminus; 
+
+  cascade.SetShape(I3Particle::Cascade);
+  eplus.SetType(I3Particle::EPlus); 
+  eminus.SetType(I3Particle::EMinus); 
+  brem.SetType(I3Particle::Brems); 
+  delta.SetType(I3Particle::DeltaE); 
+  pair.SetType(I3Particle::PairProd); 
+  nucl.SetType(I3Particle::NuclInt); 
+  gamma.SetType(I3Particle::Gamma); 
+  hadron.SetType(I3Particle::Hadrons); 
+  piplus.SetType(I3Particle::PiPlus); 
+  piminus.SetType(I3Particle::PiMinus); 
+
+  ENSURE(cascade.IsCascade()); 
+  ENSURE(eplus.IsCascade()); 
+  ENSURE(eminus.IsCascade()); 
+  ENSURE(brem.IsCascade()); 
+  ENSURE(delta.IsCascade()); 
+  ENSURE(pair.IsCascade()); 
+  ENSURE(nucl.IsCascade()); 
+  ENSURE(gamma.IsCascade()); 
+  ENSURE(hadron.IsCascade()); 
+  ENSURE(piplus.IsCascade()); 
+  ENSURE(piminus.IsCascade()); 
+}

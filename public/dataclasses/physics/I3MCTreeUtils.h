@@ -70,7 +70,15 @@ namespace I3MCTreeUtils
    * with the specificed key.  If the object is an I3MCList
    * it is converted to an I3MCTree with ListToTree.
    */
-  I3MCTreeConstPtr Get(I3FramePtr, std::string);
+  I3MCTreeConstPtr Get(I3FramePtr, const std::string&);
+
+  /**
+   * Will search for I3MCList and I3MCTree by either of two keys.
+   * It's common for the key to change from someting like...
+   * "MyList" to "MyTree"  Now you can give both to Get and it'll
+   * look for both.
+   */
+  I3MCTreeConstPtr Get(I3FramePtr, const std::string&, const std::string&);
 
   /**
    * Used internally by ListToTree and called recursively.

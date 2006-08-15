@@ -11,6 +11,7 @@
 #include <I3Test.h>
 #include <dataclasses/physics/I3MCTree.h>
 #include <dataclasses/physics/I3MCTreeUtils.h>
+#include <icetray/I3Frame.h>
 
 using namespace std;
 
@@ -130,3 +131,157 @@ TEST(add_children_to_primaries)
 
 }
 
+TEST(mclist_to_mctree){
+
+  I3Particle p;
+  I3Particle c1;
+  I3Particle c2;
+  I3Particle c3;
+
+  I3Particle gc1;
+  I3Particle gc2;
+  I3Particle gc3;
+  I3Particle gc4;
+  I3Particle gc5;
+
+  c1.GetComposite().push_back(gc1);
+  c1.GetComposite().push_back(gc2);
+
+  c2.GetComposite().push_back(gc3);
+  c2.GetComposite().push_back(gc4);
+  c2.GetComposite().push_back(gc5);
+
+  p.GetComposite().push_back(c1);
+  p.GetComposite().push_back(c2);
+  p.GetComposite().push_back(c3);
+
+  I3MCListPtr l(new I3MCList);
+  l->push_back(p);
+
+  I3FramePtr frame(new I3Frame(I3Frame::Physics));
+  frame->Put("TestI3MCList",l);
+
+  I3MCTreeConstPtr t = I3MCTreeUtils::Get(frame,"TestI3MCList","BLAH");
+  ENSURE(t->size() == 9); 
+
+  I3Particle primary = I3MCTreeUtils::GetPrimaries(*t)[0];
+  ENSURE(primary.GetID() == p.GetID());
+  ENSURE(primary.GetComposite().size()==0);
+
+  vector<I3Particle> d_list = I3MCTreeUtils::GetDaughters(*t,primary);
+  ENSURE(d_list.size() == 3);
+  I3Particle d1 = d_list[0];
+  I3Particle d2 = d_list[1];
+  I3Particle d3 = d_list[2];
+
+  ENSURE(d1.GetComposite().size()==0);
+  ENSURE(d2.GetComposite().size()==0);
+  ENSURE(d3.GetComposite().size()==0);
+
+  ENSURE(((d1.GetID() == c1.GetID()) && (d2.GetID() == c2.GetID()) && (d3.GetID() == c3.GetID())) ||
+	 ((d1.GetID() == c2.GetID()) && (d2.GetID() == c1.GetID()) && (d3.GetID() == c3.GetID())) ||
+	 ((d1.GetID() == c2.GetID()) && (d2.GetID() == c3.GetID()) && (d3.GetID() == c1.GetID())) ||
+	 ((d1.GetID() == c3.GetID()) && (d2.GetID() == c2.GetID()) && (d3.GetID() == c1.GetID())) ||
+	 ((d1.GetID() == c3.GetID()) && (d2.GetID() == c1.GetID()) && (d3.GetID() == c2.GetID())) ||
+	 ((d1.GetID() == c1.GetID()) && (d2.GetID() == c3.GetID()) && (d3.GetID() == c2.GetID())));
+
+  vector<I3Particle> gd_1_list = I3MCTreeUtils::GetDaughters(*t,d1);
+  vector<I3Particle> gd_2_list = I3MCTreeUtils::GetDaughters(*t,d2);
+  vector<I3Particle> gd_3_list = I3MCTreeUtils::GetDaughters(*t,d3);
+
+  ENSURE(((gd_1_list.size() == 0) && (gd_2_list.size() == 2) && (gd_3_list.size() == 3)) ||
+	 ((gd_1_list.size() == 2) && (gd_2_list.size() == 0) && (gd_3_list.size() == 3)) ||
+	 ((gd_1_list.size() == 2) && (gd_2_list.size() == 3) && (gd_3_list.size() == 0)) ||
+	 ((gd_1_list.size() == 3) && (gd_2_list.size() == 2) && (gd_3_list.size() == 0)) ||
+	 ((gd_1_list.size() == 3) && (gd_2_list.size() == 0) && (gd_3_list.size() == 2)) ||
+	 ((gd_1_list.size() == 0) && (gd_2_list.size() == 3) && (gd_3_list.size() == 2)));
+
+  if(gd_1_list.size()){
+    if(gd_1_list.size() == 2){
+      ENSURE(((gd_1_list[0].GetID() == gc1.GetID()) && (gd_1_list[1].GetID() == gc2.GetID()))||
+	     ((gd_1_list[0].GetID() == gc2.GetID()) && (gd_1_list[1].GetID() == gc1.GetID())));
+    }else{
+      ENSURE(((gd_1_list[0].GetID() == gc4.GetID()) && (gd_1_list[1].GetID() == gc5.GetID()) && (gd_1_list[2].GetID() == gc3.GetID())) ||
+	     ((gd_1_list[0].GetID() == gc4.GetID()) && (gd_1_list[1].GetID() == gc3.GetID()) && (gd_1_list[2].GetID() == gc5.GetID())) ||
+	     ((gd_1_list[0].GetID() == gc3.GetID()) && (gd_1_list[1].GetID() == gc4.GetID()) && (gd_1_list[2].GetID() == gc5.GetID())) ||
+	     ((gd_1_list[0].GetID() == gc3.GetID()) && (gd_1_list[1].GetID() == gc5.GetID()) && (gd_1_list[2].GetID() == gc4.GetID())) ||
+	     ((gd_1_list[0].GetID() == gc5.GetID()) && (gd_1_list[1].GetID() == gc3.GetID()) && (gd_1_list[2].GetID() == gc4.GetID())) ||
+	     ((gd_1_list[0].GetID() == gc5.GetID()) && (gd_1_list[1].GetID() == gc4.GetID()) && (gd_1_list[2].GetID() == gc3.GetID())));
+    }
+  }
+  if(gd_2_list.size()){
+    if(gd_2_list.size() == 2){
+      ENSURE(((gd_2_list[0].GetID() == gc1.GetID()) && (gd_2_list[1].GetID() == gc2.GetID()))||
+	     ((gd_2_list[0].GetID() == gc2.GetID()) && (gd_2_list[1].GetID() == gc1.GetID())));
+    }else{
+      ENSURE(((gd_2_list[0].GetID() == gc4.GetID()) && (gd_2_list[1].GetID() == gc5.GetID()) && (gd_2_list[2].GetID() == gc3.GetID())) ||
+	     ((gd_2_list[0].GetID() == gc4.GetID()) && (gd_2_list[1].GetID() == gc3.GetID()) && (gd_2_list[2].GetID() == gc5.GetID())) ||
+	     ((gd_2_list[0].GetID() == gc3.GetID()) && (gd_2_list[1].GetID() == gc4.GetID()) && (gd_2_list[2].GetID() == gc5.GetID())) ||
+	     ((gd_2_list[0].GetID() == gc3.GetID()) && (gd_2_list[1].GetID() == gc5.GetID()) && (gd_2_list[2].GetID() == gc4.GetID())) ||
+	     ((gd_2_list[0].GetID() == gc5.GetID()) && (gd_2_list[1].GetID() == gc3.GetID()) && (gd_2_list[2].GetID() == gc4.GetID())) ||
+	     ((gd_2_list[0].GetID() == gc5.GetID()) && (gd_2_list[1].GetID() == gc4.GetID()) && (gd_2_list[2].GetID() == gc3.GetID())));
+    }
+  }
+  if(gd_3_list.size()){
+    if(gd_3_list.size() == 2){
+      ENSURE(((gd_3_list[0].GetID() == gc1.GetID()) && (gd_3_list[1].GetID() == gc2.GetID()))||
+	     ((gd_3_list[0].GetID() == gc2.GetID()) && (gd_3_list[1].GetID() == gc1.GetID())));
+    }else{
+      ENSURE(((gd_3_list[0].GetID() == gc4.GetID()) && (gd_3_list[1].GetID() == gc5.GetID()) && (gd_3_list[2].GetID() == gc3.GetID())) ||
+	     ((gd_3_list[0].GetID() == gc4.GetID()) && (gd_3_list[1].GetID() == gc3.GetID()) && (gd_3_list[2].GetID() == gc5.GetID())) ||
+	     ((gd_3_list[0].GetID() == gc3.GetID()) && (gd_3_list[1].GetID() == gc4.GetID()) && (gd_3_list[2].GetID() == gc5.GetID())) ||
+	     ((gd_3_list[0].GetID() == gc3.GetID()) && (gd_3_list[1].GetID() == gc5.GetID()) && (gd_3_list[2].GetID() == gc4.GetID())) ||
+	     ((gd_3_list[0].GetID() == gc5.GetID()) && (gd_3_list[1].GetID() == gc3.GetID()) && (gd_3_list[2].GetID() == gc4.GetID())) ||
+	     ((gd_3_list[0].GetID() == gc5.GetID()) && (gd_3_list[1].GetID() == gc4.GetID()) && (gd_3_list[2].GetID() == gc3.GetID())));
+    }
+  }
+}
+
+TEST(get_mctree_from_frame){
+
+  I3Particle p;
+  I3Particle c1;
+  I3Particle c2;
+  I3Particle c3;
+
+  I3Particle gc1;
+  I3Particle gc2;
+  I3Particle gc3;
+  I3Particle gc4;
+  I3Particle gc5;
+
+  c1.GetComposite().push_back(gc1);
+  c1.GetComposite().push_back(gc2);
+
+  c2.GetComposite().push_back(gc3);
+  c2.GetComposite().push_back(gc4);
+  c2.GetComposite().push_back(gc5);
+
+  p.GetComposite().push_back(c1);
+  p.GetComposite().push_back(c2);
+  p.GetComposite().push_back(c3);
+
+  I3MCListPtr l(new I3MCList);
+  l->push_back(p);
+
+  I3FramePtr frame(new I3Frame(I3Frame::Physics));
+  frame->Put("TestI3MCList",l);
+
+  I3MCTreeConstPtr t = I3MCTreeUtils::Get(frame,"TestI3MCList","BLAH");
+  ENSURE(t->size() == 9); 
+
+  I3MCTreeConstPtr t2 = I3MCTreeUtils::Get(frame,"BLAH","TestI3MCList");
+  ENSURE(t2->size() == 9); 
+
+  frame->Put(t);
+  I3MCTreeConstPtr t3 = I3MCTreeUtils::Get(frame,"I3MCTree","BLAH");
+  I3MCTreeConstPtr t4 = I3MCTreeUtils::Get(frame,"BLAH","I3MCTree");
+  I3MCTreeConstPtr t5 = I3MCTreeUtils::Get(frame,"I3MCTree");
+  I3MCTreeConstPtr t6 = I3MCTreeUtils::Get(frame,"TestI3MCList");
+
+
+  ENSURE(t3->size() == 9); 
+  ENSURE(t4->size() == 9); 
+  ENSURE(t5->size() == 9); 
+  ENSURE(t6->size() == 9); 
+}
