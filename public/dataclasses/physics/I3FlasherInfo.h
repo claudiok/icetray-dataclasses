@@ -137,6 +137,7 @@ private:
 };
 
 I3_POINTER_TYPEDEFS(I3FlasherInfo);
+BOOST_CLASS_VERSION(I3FlasherInfo, 1);
 
 typedef I3Vector<I3FlasherInfo> I3FlasherInfoVect;
 I3_POINTER_TYPEDEFS(I3FlasherInfoVect);
