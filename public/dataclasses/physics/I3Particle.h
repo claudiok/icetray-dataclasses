@@ -25,7 +25,7 @@ class I3Particle : public I3FrameObject
 {
 
   static int global_id_;
-    
+
  public:
 
   enum ParticleType {
@@ -138,8 +138,11 @@ class I3Particle : public I3FrameObject
   bool IsTopShower() const;
 
   int GetID() const { return ID_; }
+  void SetID(int i) { ID_=i; }
   int GetParentID() const { return parentID_; }
+  void SetParentID(int i) { parentID_=i; }
   int GetPrimaryID() const { return primaryID_; }
+  void SetPrimaryID(int i) { primaryID_=i; }
 
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
@@ -211,7 +214,12 @@ class I3Particle : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Particle);
-BOOST_CLASS_VERSION(I3Particle,1);
+/**
+ *This is for IceSim only and it's only temporary
+ *Until we switch to trees we'll still be writing
+ *version 0 I3Particles
+ */
+BOOST_CLASS_VERSION(I3Particle,0);
 
 typedef I3Vector<I3Particle> I3ParticleVect;
 I3_POINTER_TYPEDEFS(I3ParticleVect);
