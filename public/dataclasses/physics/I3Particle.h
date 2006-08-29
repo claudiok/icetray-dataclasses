@@ -137,6 +137,10 @@ class I3Particle : public I3FrameObject
   bool IsPrimary() const;
   bool IsTopShower() const;
 
+  bool HasPosition() const;
+  bool HasDirection() const;
+  bool HasEnergy() const;
+
   int GetID() const { return ID_; }
   int GetParentID() const { return parentID_; }
   int GetPrimaryID() const { return primaryID_; }

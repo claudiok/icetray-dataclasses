@@ -112,6 +112,24 @@ bool I3Particle::IsCascade() const
   else return false;
 }
 
+bool I3Particle::HasPosition() const
+{
+  if ( isnan(GetX()) || isnan(GetY()) || isnan(GetZ()) ) return false;
+  else return true;
+}
+
+bool I3Particle::HasDirection() const
+{
+  if (isnan(GetZenith()) || isnan(GetAzimuth()) ) return false;
+  else return true;
+}
+
+bool I3Particle::HasEnergy() const
+{ 
+  if (isnan(energy_)) return false; 
+  else return true; 
+}
+
 bool I3Particle::IsPrimary() const 
 {
   if (shape_==Primary) return true;
