@@ -12,7 +12,6 @@
 
 #include <utility>
 #include <vector>
-#include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
 #include <dataclasses/OMKey.h>
 
@@ -54,7 +53,7 @@ public:
     class StatusCompound
     {
     private:
-      std::pair<std::vector<double>::size_type, std::vector<double>::size_type>
+      std::pair<unsigned long long int, unsigned long long int>
         interval_;
       Status status_;
     
@@ -63,11 +62,10 @@ public:
       
       virtual ~StatusCompound();
       
-      const
-      std::pair<std::vector<double>::size_type, std::vector<double>::size_type>&
+      const std::pair<unsigned long long int, unsigned long long int>&
       GetInterval() const { return interval_; }
       
-      std::pair<std::vector<double>::size_type, std::vector<double>::size_type>&
+      std::pair<unsigned long long int, unsigned long long int>&
       GetInterval() { return interval_; }
       
       Status GetStatus() const { return status_; }
