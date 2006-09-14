@@ -154,7 +154,7 @@ private:
 typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
-BOOST_CLASS_VERSION(I3Waveform, 1);
+BOOST_CLASS_VERSION(I3Waveform, 2);
 I3_POINTER_TYPEDEFS(I3Waveform);
 I3_POINTER_TYPEDEFS(I3WaveformSeries);
 I3_POINTER_TYPEDEFS(I3WaveformSeriesMap);
