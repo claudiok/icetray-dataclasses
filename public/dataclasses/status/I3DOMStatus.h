@@ -41,7 +41,7 @@ struct I3DOMStatus
    * The different kinds of triggers that can be used for the dom
    * The standard data-taking operation is SPE
    */
-  enum TrigMode { UnknownTrigMode = -1 , TestPattern = 0 , CPU = 1, SPE = 2, Flasher=3 };
+  enum TrigMode { UnknownTrigMode = -1 , TestPattern = 0 , CPU = 1, SPE = 2, Flasher=3, MPE=4 };
   /**  
    * This controls how far the local coincidence signal is sent 
    */
