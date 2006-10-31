@@ -1,8 +1,9 @@
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3DOMLaunch.h>
 
+
 I3DOMLaunch::I3DOMLaunch() 
-  : startTime_(0.0),
+  : startTime_(NAN),
     trigger_(TEST_PATTERN),
     mode_(UNDEFINED),
     whichATWD_(ATWDa),
@@ -47,7 +48,7 @@ void I3DOMLaunch::serialize(Archive& ar, unsigned version)
   ar & make_nvp("ChargeStampRange", chargeStampRange_);
 }
 
-I3_SERIALIZABLE(I3DOMLaunch);
 
+I3_SERIALIZABLE(I3DOMLaunch);
 I3_SERIALIZABLE(I3DOMLaunchSeries);
 I3_SERIALIZABLE(I3DOMLaunchSeriesMap);

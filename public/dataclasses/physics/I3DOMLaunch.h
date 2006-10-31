@@ -8,14 +8,12 @@
  * @version $Revision: 1.10 $
  * @date $Date$
  */
-
 #ifndef I3DOMLAUNCH_H_INCLUDED
 #define I3DOMLAUNCH_H_INCLUDED
 
-#include <vector>
 
-#include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
+#include <dataclasses/I3Vector.h>
 #include <dataclasses/OMKey.h>
 
 
@@ -235,7 +233,7 @@ private:
 BOOST_CLASS_VERSION(I3DOMLaunch, 1);
 I3_POINTER_TYPEDEFS(I3DOMLaunch);
 
-typedef std::vector<I3DOMLaunch> I3DOMLaunchSeries;
+typedef I3Vector<I3DOMLaunch> I3DOMLaunchSeries;
 typedef I3Map<OMKey, I3DOMLaunchSeries> I3DOMLaunchSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeries);
