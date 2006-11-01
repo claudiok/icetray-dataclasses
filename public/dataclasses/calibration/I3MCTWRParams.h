@@ -30,6 +30,8 @@ double afterpulse_time;
 double noise_rate;
 double amplitude;
 double cable_delay;
+bool optical;
+
   I3MCTWRParams() 
   {
     stop_delay=INT_MIN;
@@ -42,6 +44,7 @@ double cable_delay;
     noise_rate=NAN;
     amplitude=NAN;
     cable_delay=NAN;
+    optical=false;
   }
 
   virtual ~I3MCTWRParams();
