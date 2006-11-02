@@ -8,6 +8,11 @@
 #ifndef I3TWRLAUNCH_H_INCLUDED
 #define I3TWRLAUNCH_H_INCLUDED
 
+// forward declarations
+
+
+// header files
+
 #include <vector>
 
 #include <dataclasses/I3Map.h>
@@ -15,6 +20,8 @@
 #include <dataclasses/OMKey.h>
 #include <dataclasses/Utility.h>
 #include <dataclasses/physics/I3TWRFrag.h>
+
+// definitions
 
 
 class I3TWRLaunch
@@ -56,6 +63,7 @@ class I3TWRLaunch
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
+//TODO: backwards compatible serialization
 //BOOST_CLASS_VERSION(I3TWRLaunch, 1);
 
 typedef I3Vector<I3TWRLaunch> I3TWRLaunchSeries;
@@ -65,6 +73,6 @@ I3_POINTER_TYPEDEFS(I3TWRLaunch);
 I3_POINTER_TYPEDEFS(I3TWRLaunchSeries);
 I3_POINTER_TYPEDEFS(I3TWRLaunchSeriesMap);
 
-#endif /* I3TWRLAUNCH_H_INCLUDED */
+#endif /*I3TWRLAUNCH_H_INCLUDED*/
 
 

@@ -10,9 +10,16 @@
 #ifndef I3TWRFRAG_H_INCLUDED
 #define I3TWRFRAG_H_INCLUDED
 
+// forward declarations
+
+
+// header files
+
 #include <vector>
 
 #include <dataclasses/Utility.h>
+
+// definitions
 
 
 class I3TWRFrag 
@@ -55,10 +62,11 @@ class I3TWRFrag
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
+//TODO: backwards compatible serialization
 //BOOST_CLASS_VERSION(I3TWRFrag, 1);
 
 I3_POINTER_TYPEDEFS(I3TWRFrag);
 
-#endif // I3TWRFRAG_H_INCLUDED
+#endif /*I3TWRFRAG_H_INCLUDED*/
 
 
