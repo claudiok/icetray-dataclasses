@@ -145,6 +145,10 @@ class I3Particle : public I3FrameObject
   int GetParentID() const { return parentID_; }
   int GetPrimaryID() const { return primaryID_; }
 
+  void SetID(int i) { ID_ = i; }
+  void SetParentID(int i) { parentID_ = i; }
+  void SetPrimaryID(int i) { primaryID_ = i; }
+
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
   string GetTypeString() const;
@@ -215,7 +219,7 @@ class I3Particle : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Particle);
-BOOST_CLASS_VERSION(I3Particle,1);
+BOOST_CLASS_VERSION(I3Particle,0);
 
 typedef I3Vector<I3Particle> I3ParticleVect;
 I3_POINTER_TYPEDEFS(I3ParticleVect);
