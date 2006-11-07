@@ -14,6 +14,7 @@
 #ifndef I3_TRIGGER_H_INCLUDED
 #define I3_TRIGGER_H_INCLUDED
 
+#include <icetray/I3Logging.h>
 #include <dataclasses/TriggerKey.h>
 #include <dataclasses/Utility.h>
 
@@ -92,6 +93,9 @@ public:
   TriggerKey& GetTriggerKey() {return key_;}
 
 private:
+  static const double FROM_TENTH_NS_TO_NS_CORRECTION_FACTOR;
+  
+  
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
@@ -99,6 +103,8 @@ private:
   // logging
   SET_LOGGER("I3Trigger");
 };
+
+BOOST_CLASS_VERSION(I3Trigger, 1);
 
 /**
  * pointer type to insulate users from memory management
