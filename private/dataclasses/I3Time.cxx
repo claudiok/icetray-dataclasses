@@ -1,16 +1,11 @@
 extern "C"
 {
-#include "dataclasses/jday.h"
+#include <dataclasses/jday.h>
 }
 
 #include <icetray/serialization.h>
-#include "dataclasses/I3Time.h"
-#include "dataclasses/I3Units.h"
-#include <iostream>
-#include <cassert>
-
-using std::cout;
-using std::endl;
+#include <dataclasses/I3Time.h>
+#include <dataclasses/I3Units.h>
 
 /**
  *Returns true if year is a leap year.
@@ -43,20 +38,18 @@ I3Time::I3Time()
 
 I3Time::~I3Time() {}
 
-I3Time::I3Time(int32_t year, int64_t daqTime) : year_(year),daqTime_(daqTime)
-{
-}
+I3Time::I3Time(int32_t year, int64_t daqTime) : year_(year),daqTime_(daqTime) {}
 
 void I3Time::SetDaqTime(int year, 
-			int64_t daqTime)
+                        int64_t daqTime)
 {
   year_ = year;
   daqTime_ = daqTime;
 }
 
 void I3Time::SetModJulianTime(int32_t modJulianDay,
-			      int32_t sec,
-			      double ns)
+                              int32_t sec,
+                              double ns)
 {
   double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24.));
   year_ = yearOf(modjulian);
@@ -67,6 +60,11 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
     + ((int64_t)ns * ((int64_t)10));
 }
 
+void I3Time::SetUnixTime(time_t unixTime)
+{
+  if(unixTime < 0) log_fatal("invalid Unix time");
+  SetModJulianTime(unixTime / 86400 + 40587, unixTime % 86400, 0);
+}
 
 int I3Time::GetUTCYear() const
 {
@@ -187,24 +185,24 @@ double I3Time::GetUTCNanoSec() const
 
 bool I3Time::operator<(const I3Time& rhs) const
 {
-      if(year_ < rhs.year_)
-	return true;
-      if(year_ > rhs.year_)
-	return false;
-      if(daqTime_ < rhs.daqTime_)
-	return true;
-      return false;
+  if(year_ < rhs.year_)
+    return true;
+  if(year_ > rhs.year_)
+    return false;
+  if(daqTime_ < rhs.daqTime_)
+    return true;
+  return false;
 }
 
 bool I3Time::operator>(const I3Time& rhs) const
 {
-      if(year_ > rhs.year_)
-	return true;
-      if(year_ < rhs.year_)
-	return false;
-      if(daqTime_ > rhs.daqTime_)
-	return true;
-      return false;
+  if(year_ > rhs.year_)
+    return true;
+  if(year_ < rhs.year_)
+    return false;
+  if(daqTime_ > rhs.daqTime_)
+    return true;
+  return false;
 }
 
 bool I3Time::operator==(const I3Time& rhs) const
@@ -228,7 +226,6 @@ bool I3Time::operator>=(const I3Time& rhs) const
   return false;
 }
 
-
 I3Time I3Time::operator+(const double second_term) const
 {
   //new_years should always be one or zero
@@ -245,7 +242,7 @@ I3Time I3Time::operator+(const double second_term) const
   }
 
   return I3Time(year,daqTime);
- }
+}
 
 I3Time I3Time::operator-(const double second_term) const
 {
@@ -264,7 +261,7 @@ I3Time I3Time::operator-(const double second_term) const
   }
 
   return I3Time(year,daqTime);
- }
+}
 
 std::string I3Time::MonthToString(Month m)
 {
@@ -320,7 +317,6 @@ std::string I3Time::WeekdayToString(Weekday w)
     default:
       return "BadWeekday";
     }
-
 }
 
 double I3Time::modjulianday(int year)
@@ -378,24 +374,23 @@ int32_t I3Time::yearOf(double modjulianday)
 
 int32_t I3Time::DayOfYear(double modjulianday)
 {
-    UTinstant i;
-    double julianDay = modjulianday + 2400000.5;
-    i.j_date = julianDay;
-    CalDate(&i);
-
-    return i.day_of_year;
+  UTinstant i;
+  double julianDay = modjulianday + 2400000.5;
+  i.j_date = julianDay;
+  CalDate(&i);
+  
+  return i.day_of_year;
 }
 
 int32_t I3Time::DayOfYear(int64_t daqTime)
 {
-    int64_t tenthsOfNs = daqTime %((int64_t)1e10);
-    int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
-    int64_t daqSecsSinceDay = daqSecs % ((int64_t)(3600 * 24));
-    int32_t day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24);
-
-    return day_of_year; 
+  int64_t tenthsOfNs = daqTime %((int64_t)1e10);
+  int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
+  int64_t daqSecsSinceDay = daqSecs % ((int64_t)(3600 * 24));
+  int32_t day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24);
+  
+  return day_of_year; 
 }
-
 
 template <class Archive>
 void 
@@ -407,4 +402,3 @@ I3Time::serialize(Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3Time);
-

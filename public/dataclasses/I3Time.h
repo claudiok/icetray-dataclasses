@@ -2,9 +2,11 @@
 #define I3TIME_H_INCLUDED
 
 #include <string>
-#include "icetray/I3FrameObject.h"
-#include <ostream>
-#include "dataclasses/Utility.h"
+#include <time.h>
+
+#include <icetray/I3FrameObject.h>
+#include <dataclasses/Utility.h>
+
 /**
  * @brief A class for dealing with global times.  
  *
@@ -23,16 +25,19 @@
 //                         Number of tenths of seconds in a leap year 864000000000000
 const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
 
-namespace I3TimeUtils{
+namespace I3TimeUtils
+{
   /**
    *Returns true if the year is a leap year
    */
   bool leap_year(const int year);
+  
   /**
    *Returns the number of tenths of nanoseconds it the year, depending
    *on whether it's a leap year or not.
    */
   int64_t max_DAQ_time(const int year);
+  
   /**
    *Converts a time of type double with I3Units of time (your choice) to
    *the number of tenths of nanoseconds (i.e. "daqtime").  This takes
@@ -47,19 +52,22 @@ class I3Time : public I3FrameObject
   /**
    * @brief enum for the Month
    */
-  enum Month{Jan = 1, 
-	     Feb = 2, 
-	     Mar = 3, 
-	     Apr = 4, 
-	     May = 5, 
-	     Jun = 6,
-	     Jul = 7,
-	     Aug = 8,
-	     Sep = 9,
-	     Oct = 10,
-	     Nov = 11,
-	     Dec = 12,
-	     BadMonth = 999};
+  enum Month
+    {
+      Jan = 1, 
+      Feb = 2, 
+      Mar = 3, 
+      Apr = 4, 
+      May = 5, 
+      Jun = 6,
+      Jul = 7,
+      Aug = 8,
+      Sep = 9,
+      Oct = 10,
+      Nov = 11,
+      Dec = 12,
+      BadMonth = 999
+    };
 
   /**
    * @brief enum for days of the week
@@ -106,6 +114,12 @@ class I3Time : public I3FrameObject
 			int32_t sec,
 			double ns);
 
+  /**
+   * @brief Sets the time in the Unix convention
+   * @param unixTime time since the Epoch (00:00:00 UTC, January 1, 1970),
+   * measured in seconds
+   */
+  void SetUnixTime(time_t unixTime);
 
   /**
    * @brief Gets the Modified Julian day
@@ -160,14 +174,12 @@ class I3Time : public I3FrameObject
    */
   double GetUTCNanoSec() const;  
 
-
   /**
    * equality operator.  
    * @return true if the times are the same
    * @param rhs the I3Time to compare this one to.
    */
   bool operator==(const I3Time& rhs) const;
-
 
   /**
    * inequality operator
@@ -177,7 +189,7 @@ class I3Time : public I3FrameObject
   bool operator!=(const I3Time& rhs) const
     {
       if(rhs == *this)
-	return false;
+        return false;
       return true;
     }
 
@@ -216,7 +228,6 @@ class I3Time : public I3FrameObject
   I3Time operator+(const double) const;
   I3Time operator-(const double) const;
 
-
  public: 
 
   static double modjulianday(int year);
@@ -242,11 +253,8 @@ class I3Time : public I3FrameObject
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
-
-  
 };
 
 I3_POINTER_TYPEDEFS(I3Time);
-
 
 #endif //I3TIME_H_INCLUDED
