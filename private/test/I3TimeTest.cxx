@@ -77,8 +77,8 @@ TEST(I3Time_weekday_month)
   ENSURE(I3Time::MonthToString(I3Time::Oct) == "Oct");
 }
 
-  // testing that I can set a daq time and get the days and stuff out
-  // as calculated by hand
+// testing that I can set a daq time and get the days and stuff out
+// as calculated by hand
 TEST(test7)
 {
   long long int daqTime = 560819884 * (long long)1e8 + 43187970;
@@ -224,7 +224,8 @@ TEST(test14)
   ENSURE(lowest >= same);
 }
 
-TEST(leap_year){
+TEST(leap_year)
+{
   std::vector<int> leap_years;
   leap_years.resize(4);
   leap_years[0] = 2000;
@@ -248,8 +249,8 @@ TEST(leap_year){
     ENSURE(!(I3TimeUtils::leap_year(*i)),"This is, in fact, NOT a leap year!");
 }
 
-TEST(ns_to_daqtime_rounding){
-
+TEST(ns_to_daqtime_rounding)
+{
   std::vector<double> times_to_test;
   times_to_test.resize(7);
   times_to_test[0] = 0.01;//round down
@@ -277,7 +278,8 @@ TEST(ns_to_daqtime_rounding){
     ENSURE(I3TimeUtils::ns_to_daqtime(*i * I3Units::ns) == *j);
 }
 
-TEST(plus_double){
+TEST(plus_double)
+{
   int year(2005);
   int64_t delta(10);
   double t(1.);
@@ -292,7 +294,8 @@ TEST(plus_double){
   ENSURE(t1_prime == t1,"Someone doesn't know how to add");
 }
 
-TEST(plus_double_leap_year){
+TEST(plus_double_leap_year)
+{
   int year(2000);
   int64_t delta(10);
   double t(1.);
@@ -307,7 +310,8 @@ TEST(plus_double_leap_year){
   ENSURE(t1_prime == t1,"Someone doesn't know how to add");
 }
 
-TEST(minus_double){
+TEST(minus_double)
+{
   int year(2006);
   int64_t delta(10);
   double t(1.);
@@ -322,8 +326,8 @@ TEST(minus_double){
   ENSURE(t1_prime == t1,"Someone doesn't know how to subtract");
 }
 
-TEST(add_subtract_double){
-
+TEST(add_subtract_double)
+{
 //  boost::rand48 rng(static_cast<int>(time(0)));
 //  boost::uniform_smallint<int> string_rng(1990,2020);
 //
@@ -348,4 +352,13 @@ TEST(add_subtract_double){
   std::cout<<"t0' DAQTime: "<<t0_prime.GetUTCDaqTime()<<endl;
 
   ENSURE(t0 == t0_prime,"+/- are not inverses of each other");
+}
+
+TEST(test_unix_time)
+{
+  I3Time tm;
+  tm.SetUnixTime(1163203200);
+  ENSURE_EQUAL(tm.GetUTCYear(), 2006);
+  ENSURE_EQUAL(tm.GetUTCMonth(), I3Time::Nov);
+  ENSURE_EQUAL(tm.GetUTCDayOfMonth(), 11);
 }
