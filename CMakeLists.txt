@@ -1,5 +1,7 @@
 I3_PROJECT (dataclasses
-  "private/dataclasses/*.cxx")
+  private/dataclasses/*.cxx
+  private/dataclasses/*.c
+  private/dataclasses/*/*.cxx)
 
 USE_PROJECT(icetray)
 
