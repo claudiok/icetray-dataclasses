@@ -1,4 +1,3 @@
 
-
 #include <icetray/serialization.h>
 
