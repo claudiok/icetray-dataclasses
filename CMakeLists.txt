@@ -1,13 +1,10 @@
 PROJECT(dataclasses)
 
-LIB (dataclasses
-  private/dataclasses/*.cxx
+LIB (private/dataclasses/*.cxx
   private/dataclasses/*.c
   private/dataclasses/*/*.cxx)
 
-USE_TOOL(log4cplus)
-USE_TOOL(boost)
-USE_TOOL(root)
+USE_TOOLS(log4cplus boost root)
 
 USE_PROJECTS(icetray)
 
