@@ -229,3 +229,45 @@ I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
   return Get(*t,I3Particle::IceTop);
 }
 
+I3MCTree::iterator 
+I3MCTreeUtils::GetIterator(I3MCTreePtr t, const I3Particle& p){
+  I3MCTree::iterator i;
+  for(i=t->begin() ; i!= t->end(); i++)
+    if(i->GetID() == p.GetID())
+      return i;
+  return t->end();
+}
+
+void I3MCTreeUtils::internal::DumpChildren(const I3MCTree& t,I3MCTree::iterator i){
+  I3MCTree::sibling_iterator si;
+  for(si = t.begin(i); si != t.end(i); si++){
+    for(int j=0; j<5*t.depth(si); j++) cout<<" ";
+    cout<<si->GetTypeString()<<" "
+	<<si->GetID()<<" "
+	<<endl;
+    DumpChildren(t,si);
+  }
+}
+
+
+void I3MCTreeUtils::Dump(const I3MCTree& t){
+  I3MCTree::sibling_iterator i;
+  cout<<"*** TREE DUMP - BEGIN***"<<endl;
+  cout<<"*** "<<t.size()<<" elements"<<endl;
+  for(i = t.begin(); i != t.end(); i++){
+    for(int j=0; j<5*t.depth(i); j++) cout<<" ";
+    cout<<i->GetTypeString()<<" "
+	<<i->GetID()<<" "
+	<<endl;
+    internal::DumpChildren(t,i);
+  }
+  cout<<"*** TREE DUMP - END***"<<endl;
+}
+
+void I3MCTreeUtils::Dump(I3MCTreeConstPtr t){
+  Dump(*t);
+}
+
+void I3MCTreeUtils::Dump(I3MCTreePtr t){
+  Dump(*t);
+}
