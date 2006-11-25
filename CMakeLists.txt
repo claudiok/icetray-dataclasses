@@ -14,7 +14,5 @@ ROOTCINT(dataclasses/I3Position.h
   dataclasses/I3Time.h 
   dataclasses/physics/I3Particle.h)
 
-
-FILE(GLOB dataclasses_test_source "private/test/*.cxx")
-ADD_TEST(dataclasses-test ${dataclasses_test_source})
+TEST_EXECUTABLE(test private/test/*.cxx)
 
