@@ -18,4 +18,3 @@ ROOTCINT(dataclasses/I3Position.h
 FILE(GLOB dataclasses_test_source "private/test/*.cxx")
 ADD_TEST(dataclasses-test ${dataclasses_test_source})
 
-TEST_SCRIPTS(resources/scripts/*.py)
