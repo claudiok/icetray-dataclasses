@@ -14,10 +14,6 @@ I3Calibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("tankcal",tankCal);
     }
-  if(version > 1)
-    {
-      ar & make_nvp("twrparams",twrParams);
-    }
   ar & make_nvp("StartTime",startTime);
   ar & make_nvp("EndTime",endTime);
 }

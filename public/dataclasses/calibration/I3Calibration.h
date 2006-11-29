@@ -16,7 +16,6 @@
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/calibration/I3AMANDAOMCalibration.h"
 #include "dataclasses/calibration/I3TankCalibration.h"
-#include "dataclasses/calibration/I3MCTWRParams.h"
 #include "dataclasses/I3Time.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/TankKey.h"
@@ -36,12 +35,11 @@ public:
   map<OMKey, I3DOMCalibration> domCal;
   map<OMKey, I3AMANDAOMCalibration> amandaCal;
   map<TankKey, I3TankCalibration> tankCal;
-  map<OMKey, I3MCTWRParams> twrParams;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3Calibration, 2);
+BOOST_CLASS_VERSION(I3Calibration, 1);
 I3_DEFAULT_NAME(I3Calibration);
 I3_POINTER_TYPEDEFS(I3Calibration);
 
