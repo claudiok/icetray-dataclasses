@@ -1,5 +1,4 @@
 /**
- *
  * copyright  (C) 2004
  * the icecube collaboration
  * @version $Id$
@@ -10,15 +9,17 @@
 #ifndef I3DETECTORSTATUS_H_INCLUDED
 #define I3DETECTORSTATUS_H_INCLUDED
 
-#include "dataclasses/Utility.h"
-#include "dataclasses/TriggerKey.h"
-#include "dataclasses/status/I3TriggerStatus.h"
-#include "dataclasses/status/I3DOMStatus.h"
-#include "dataclasses/I3Time.h"
-#include "dataclasses/OMKey.h"
+#include <map>
+
 #include <icetray/I3DefaultName.h>
-#include "icetray/I3FrameObject.h"
-#include <sstream>
+#include <icetray/I3FrameObject.h>
+#include <dataclasses/I3Time.h>
+#include <dataclasses/OMKey.h>
+#include <dataclasses/TriggerKey.h>
+#include <dataclasses/Utility.h>
+#include <dataclasses/status/I3DOMStatus.h>
+#include <dataclasses/status/I3TriggerStatus.h>
+#include <dataclasses/status/TWRAOMStatus.h>
 
 /**
  * @brief This is the state of the aspects of the detector that people have 
@@ -31,15 +32,15 @@
  * - map of active triggers (and their configurations) and
  * - map of active domhubs (and their settings) ... eventually.
  */
-
 struct I3DetectorStatus : public I3FrameObject
 {
   I3Time startTime;
   I3Time endTime;
-  map<OMKey,I3DOMStatus> domStatus;
-  map<TriggerKey, I3TriggerStatus> triggerStatus;
+  std::map<OMKey, I3DOMStatus> domStatus;
+  std::map<OMKey, TWRAOMStatus> aomStatus;
+  std::map<TriggerKey, I3TriggerStatus> triggerStatus;
   
-  I3DetectorStatus() {};
+  I3DetectorStatus() {}
   
   virtual ~I3DetectorStatus();
   
@@ -51,8 +52,10 @@ struct I3DetectorStatus : public I3FrameObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
+BOOST_CLASS_VERSION(I3DetectorStatus, 1);
+
 I3_DEFAULT_NAME(I3DetectorStatus);
 I3_POINTER_TYPEDEFS(I3DetectorStatus);
 
-#endif // I3DETECTORSTATUS_H_INCLUDED
+#endif /*I3DETECTORSTATUS_H_INCLUDED*/
 
