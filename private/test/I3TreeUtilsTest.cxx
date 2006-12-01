@@ -198,19 +198,16 @@ TEST(h_get_nonexistant_parent)
   int_t i1(1);
   try {
     ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetID(), 0);
+    FAIL("getting parent of primary object should have called log_fatal.");
   }
-  catch(const std::exception &e){
-    cerr<<"Error: This LOG_FATAL was expected when getting parent of primary: "
-	<<e.what()<<" ... test passed!"<<endl;
-  }
+  catch(const std::exception &e){  }
 
   int_t i2(20);
   try {
     ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i2).GetID(), 0);
+    FAIL("getting parent of object which is not in the tree should have "
+	 "called log_fatal.");
   }
-  catch(const std::exception &e){
-    cerr<<"Error: This LOG_FATAL was expected when getting parent of object "
-      "which is not in th tree: "<<e.what()<<" ... test passed!"<<endl;
-  }
+  catch(const std::exception &e){  }
 
 }

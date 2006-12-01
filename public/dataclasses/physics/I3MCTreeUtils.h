@@ -10,7 +10,6 @@
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/physics/I3MCTree.h"
 #include "dataclasses/physics/I3MCList.h"
-#include "dataclasses/I3Tree.h"
 #include "icetray/I3DefaultName.h"
 
 namespace I3MCTreeUtils
