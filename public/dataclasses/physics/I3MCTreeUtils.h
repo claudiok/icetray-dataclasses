@@ -10,6 +10,7 @@
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/physics/I3MCTree.h"
 #include "dataclasses/physics/I3MCList.h"
+#include "dataclasses/I3Tree.h"
 #include "icetray/I3DefaultName.h"
 
 namespace I3MCTreeUtils
@@ -92,7 +93,6 @@ namespace I3MCTreeUtils
    */
   namespace internal{
     void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const vector<I3Particle>&);
-    void DumpChildren(const I3MCTree&,I3MCTree::iterator);
   }
 
   /**
@@ -116,13 +116,6 @@ namespace I3MCTreeUtils
    */
   const vector<I3Particle> GetIceTop(const I3MCTree&);
   const vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetIterator(I3MCTreePtr, const I3Particle&);
-
-  void Dump(const I3MCTree&);
-  void Dump(I3MCTreeConstPtr);
-  void Dump(I3MCTreePtr);
-
 }
 
 #endif 

@@ -1,10 +1,11 @@
 #include "dataclasses/physics/I3MCTreeUtils.h"
-#include "dataclasses/I3TreeUtils.h"
 #include "icetray/I3Frame.h"
 
 void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 {
-  I3TreeUtils::AddPrimary<I3Particle>(t, p);
+  I3Tree<I3Particle>::iterator si;
+  si = t.end(t.begin());
+  t.insert(si,p);
 }
 
 void I3MCTreeUtils::AddPrimary(I3MCTreePtr t, const I3Particle& p)
@@ -17,7 +18,19 @@ void I3MCTreeUtils::AppendChild(I3MCTree& t, const I3Particle& parent, const I3P
 {
   //Need to find the iterator of the parent
   //do it bonehead-style first
-  I3TreeUtils::AppendChild<I3Particle>(t, parent, child);
+  I3MCTree::iterator i;
+  I3MCTree::iterator p_iter;
+  for(i=t.begin(); i!=t.end(); ++i){
+    if(i->GetID() == parent.GetID()){
+      p_iter = i;
+      break;
+    }
+  }
+  if(p_iter != t.end()){
+    t.append_child(p_iter,child);
+  }else{
+    log_error("attempt to add a child to a non-existant parent.");
+  }
 }
 
 void I3MCTreeUtils::AppendChild(I3MCTreePtr t, const I3Particle& parent, const I3Particle& child)
@@ -29,7 +42,11 @@ void I3MCTreeUtils::AppendChild(I3MCTreePtr t, const I3Particle& parent, const I
 const std::vector<I3Particle>
 I3MCTreeUtils::GetPrimaries(const I3MCTree& t)
 {
-  return I3TreeUtils::GetPrimaries<I3Particle>(t);
+  std::vector<I3Particle> primaryList;
+  I3MCTree::sibling_iterator i;
+  for(i=t.begin(); i!=t.end(); ++i)
+    primaryList.push_back(*i);
+  return primaryList;
 }
 
 const std::vector<I3Particle>
@@ -42,7 +59,18 @@ I3MCTreeUtils::GetPrimaries(I3MCTreeConstPtr t)
 const std::vector<I3Particle>
 I3MCTreeUtils::GetDaughters(const I3MCTree& t, const I3Particle& parent)
 {
-  return I3TreeUtils::GetDaughters<I3Particle>(t, parent);
+  std::vector<I3Particle> daughterList;
+  I3MCTree::iterator i = t.begin();
+  for( ; i != t.end(); i++){
+    if(i->GetID() == parent.GetID()){
+      I3MCTree::sibling_iterator j(i);
+      for(j=t.begin(i); j!=t.end(i); ++j)
+	daughterList.push_back(*j);
+      return daughterList;
+    }
+  }
+  log_warn("No daughters found for this particle.");
+  return daughterList;
 }
 
 const std::vector<I3Particle>
@@ -55,7 +83,12 @@ I3MCTreeUtils::GetDaughters(I3MCTreeConstPtr t, const I3Particle& parent)
 const I3Particle&
 I3MCTreeUtils::GetParent(const I3MCTree& t, const I3Particle& child)
 {
-  return I3TreeUtils::GetParent<I3Particle>(t, child);
+  I3MCTree::iterator i = t.begin();
+  for( ; i != t.end(); i++){
+    if(i->GetID() == child.GetID())
+      return *(t.parent(i));
+  }
+  log_fatal("No parent found for this particle.");
 }
 
 const I3Particle&
@@ -68,7 +101,11 @@ I3MCTreeUtils::GetParent(I3MCTreeConstPtr t, const I3Particle& child)
 bool
 I3MCTreeUtils::HasParent(const I3MCTree& t, const I3Particle& child)
 {
-  return I3TreeUtils::HasParent(t, child);
+  I3MCTree::iterator i = t.begin();
+  for( ; i != t.end(); i++)
+    if(i->GetID() == child.GetID())
+      if(t.parent(i) != t.end()) return true;
+  return false;
 }
 
 bool
@@ -76,8 +113,6 @@ I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3Particle& child)
 {
   return I3MCTreeUtils::HasParent(*t, child);
 }
-
-
 
 void I3MCTreeUtils::internal::ConvertComposite(I3MCTree& t, I3MCTree::iterator& i, const vector<I3Particle>& cl){
   vector<I3Particle>::const_iterator j = cl.begin();
@@ -194,45 +229,3 @@ I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
   return Get(*t,I3Particle::IceTop);
 }
 
-I3MCTree::iterator 
-I3MCTreeUtils::GetIterator(I3MCTreePtr t, const I3Particle& p){
-  I3MCTree::iterator i;
-  for(i=t->begin() ; i!= t->end(); i++)
-    if(i->GetID() == p.GetID())
-      return i;
-  return t->end();
-}
-
-void I3MCTreeUtils::internal::DumpChildren(const I3MCTree& t,I3MCTree::iterator i){
-  I3MCTree::sibling_iterator si;
-  for(si = t.begin(i); si != t.end(i); si++){
-    for(int j=0; j<5*t.depth(si); j++) cout<<" ";
-    cout<<si->GetTypeString()<<" "
-	<<si->GetID()<<" "
-	<<endl;
-    DumpChildren(t,si);
-  }
-}
-
-
-void I3MCTreeUtils::Dump(const I3MCTree& t){
-  I3MCTree::sibling_iterator i;
-  cout<<"*** TREE DUMP - BEGIN***"<<endl;
-  cout<<"*** "<<t.size()<<" elements"<<endl;
-  for(i = t.begin(); i != t.end(); i++){
-    for(int j=0; j<5*t.depth(i); j++) cout<<" ";
-    cout<<i->GetTypeString()<<" "
-	<<i->GetID()<<" "
-	<<endl;
-    internal::DumpChildren(t,i);
-  }
-  cout<<"*** TREE DUMP - END***"<<endl;
-}
-
-void I3MCTreeUtils::Dump(I3MCTreeConstPtr t){
-  Dump(*t);
-}
-
-void I3MCTreeUtils::Dump(I3MCTreePtr t){
-  Dump(*t);
-}
