@@ -24,6 +24,8 @@
 // definitions
 
 
+/** The direct/raw digital readout of an Amanda OM using the TWR DAQ.
+ */
 class I3TWRLaunch
 {
   private:

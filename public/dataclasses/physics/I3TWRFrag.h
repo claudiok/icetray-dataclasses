@@ -22,6 +22,13 @@
 // definitions
 
 
+/** A fragment of the direct/raw digital readout of an Amanda OM using the TWR DAQ.
+ * 
+ * The digital readout is fragment into waveform elements that show some pulse activity,
+ * to reduce the data acquired by a TWR.
+ * Every fragment has a start bin that determines the position of the fragment within
+ * the waveform relative to its start.
+ */
 class I3TWRFrag 
 {
   private:
