@@ -81,7 +81,7 @@ void
 I3DOMCalibration::SetATWDFreqFit (unsigned int chip, 
 				  QuadraticFit fitParams)
 {
-  atwdFreq_.insert(pair<int, QuadraticFit> (chip, fitParams));
+  atwdFreq_[chip] = fitParams;
 }
 
 const map<unsigned int,map<unsigned int,LinearFit> >& 
@@ -118,7 +118,7 @@ void
 I3DOMCalibration::SetATWDGain (unsigned int channel, 
 			       double gain) 
 {
-  ampGains_.insert(make_pair(channel, gain));
+  ampGains_[channel]=gain;
 }
 
 double 
