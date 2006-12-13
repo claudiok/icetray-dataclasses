@@ -69,8 +69,7 @@ class I3TWRFrag
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
-//TODO: backwards compatible serialization
-//BOOST_CLASS_VERSION(I3TWRFrag, 1);
+BOOST_CLASS_VERSION(I3TWRFrag, 1);
 
 I3_POINTER_TYPEDEFS(I3TWRFrag);
 

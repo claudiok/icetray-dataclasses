@@ -65,10 +65,9 @@ class I3TWRLaunch
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
-//TODO: backwards compatible serialization
-//BOOST_CLASS_VERSION(I3TWRLaunch, 1);
+BOOST_CLASS_VERSION(I3TWRLaunch, 1);
 
-typedef I3Vector<I3TWRLaunch> I3TWRLaunchSeries;
+typedef std::vector<I3TWRLaunch> I3TWRLaunchSeries;
 typedef I3Map<OMKey, I3TWRLaunchSeries> I3TWRLaunchSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3TWRLaunch);
