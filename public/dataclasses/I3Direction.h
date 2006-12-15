@@ -28,18 +28,36 @@ using namespace I3Units;
 using namespace std;
 
 /**
- * @brief The basic position class for IceCube. 
+ * @brief The basic direction class for IceCube. 
  *
  * All directions in IceCube should be written with this class.
  * Directions can be given in zenith/azimuth or direction cosines.
  * Optionally, they can also be set with theta/phi.
  * 
+ * Theta/Phi angles refer to the direction of travel of the particle -- the
+ * direction that the particle is going.  If you consider the direction vector
+ * which starts at the origin, theta is the angle from the +z axis to that
+ * vector; phi is the angle from the +x axis to the x-y projection of that
+ * vector.
+ *
+ * The direction cosines (x,y,z) refer to this same direction vector -- the
+ * vector of the direction of travel of the particle; they simply describe
+ * the end point of that vector.  When you set a direction with the direction
+ * cosines, they don't have to be normalized, but when you get them out (with
+ * GetX(), GetY(), GetZ()) they will be normalized to 1.
+ *
+ * Zenith/Azimuth angles refer to the direction which is opposite to the
+ * particle's direction; i.e. they refer to the direction the particle (track)
+ * came from.  If you consider this "opposite" direction vector, zenith is the
+ * angle from the +z axis to that vector; azimuth is the angle from the
+ * +x axis to the x-y projection of that vector.
+ *
  * See the graphic of the definitions of Zenith/Azimuth and theta/Phi 
  * direction angles:
  * http://icecube.umd.edu/dule/icecube/axes.html
  *
  * @todo implement "print out" of all information in a uniform way...
- * @todo insure that the temporary data isn't written to disk.
+ * @todo ensure that the temporary data isn't written to disk.
  */
 class I3Direction : public I3FrameObject
 {
