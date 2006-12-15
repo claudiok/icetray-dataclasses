@@ -183,7 +183,7 @@ void I3Direction::CalcSphFromCar()
   azimuth_ = phi+pi;
   if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
   azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
-  isCalculated_=true;
+  isCalculated_=false;
 }
 
 //-----------------------------------------------------------
