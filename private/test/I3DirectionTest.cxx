@@ -170,3 +170,26 @@ TEST(coord_change)
   
 }
 
+TEST(setdir)
+{
+  I3Direction d(90*deg,-90*deg);
+  ENSURE_DISTANCE(d.GetX(),0,0.0001);
+  ENSURE_DISTANCE(d.GetY(),1,0.0001);
+  ENSURE_DISTANCE(d.GetZ(),0,0.0001);
+  ENSURE_DISTANCE(d.GetZenith(),90*deg,0.0001);
+  ENSURE_DISTANCE(d.GetAzimuth(),-90*deg,0.0001);
+
+  d.SetDir(1,1,1);
+  ENSURE_DISTANCE(d.GetX(),1./sqrt(3.),0.0001);
+  ENSURE_DISTANCE(d.GetY(),1./sqrt(3.),0.0001);
+  ENSURE_DISTANCE(d.GetZ(),1./sqrt(3.),0.0001);
+  ENSURE_DISTANCE(d.GetZenith(),2.18627,0.0001);
+  ENSURE_DISTANCE(d.GetAzimuth(),225*deg,0.0001);
+
+  d.SetDir(2.18627,-135*deg);
+  ENSURE_DISTANCE(d.GetX(),1./sqrt(3.),0.0001);
+  ENSURE_DISTANCE(d.GetY(),1./sqrt(3.),0.0001);
+  ENSURE_DISTANCE(d.GetZ(),1./sqrt(3.),0.0001);
+  ENSURE_DISTANCE(d.GetZenith(),2.18627,0.0001);
+  ENSURE_DISTANCE(d.GetAzimuth(),-135*deg,0.0001);
+}
