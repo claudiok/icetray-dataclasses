@@ -97,6 +97,14 @@ namespace I3Constants
   static const double Coordinate_shift_x = -339.8*I3Units::m;
   static const double Coordinate_shift_y = -117.4*I3Units::m;
   static const double Coordinate_shift_z = -216.0*I3Units::m;
+
+
+  /**
+   * Default values for time residual calculations
+   * It's good to have these in one central place.
+   */
+  static const double dt_window_l = -15*I3Units::ns;
+  static const double dt_window_h = +25*I3Units::ns;
 };
 
 #endif //I3CONSTANTS_H_INCLUDED
