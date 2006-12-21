@@ -52,7 +52,8 @@ I3_POINTER_TYPEDEFS(I3OMGeoMap)
 typedef map<int, I3StationGeo> I3StationGeoMap;
 I3_POINTER_TYPEDEFS(I3StationGeoMap)
 
-     struct I3Geometry : public I3FrameObject
+struct I3Geometry 
+  : public I3FrameObject
 {
   I3Geometry(){};
   virtual ~I3Geometry();
