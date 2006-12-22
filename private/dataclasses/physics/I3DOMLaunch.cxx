@@ -7,7 +7,7 @@ I3DOMLaunch::I3DOMLaunch()
     mode_(UNDEFINED),
     whichATWD_(ATWDa),
     localCoincidence_(false),
-    chargeStampRange_(false)
+    chargeStampHighestSample_(-1)
 {
   rawATWD_.resize(4);
 }
@@ -44,7 +44,7 @@ void I3DOMLaunch::serialize(Archive& ar, unsigned version)
   ar & make_nvp("RawFADC", rawFADC_);
   ar & make_nvp("LocalCoincidence", localCoincidence_);
   ar & make_nvp("RawChargeStamp", rawChargeStamp_);
-  ar & make_nvp("ChargeStampRange", chargeStampRange_);
+  ar & make_nvp("ChargeStampHighestSample", chargeStampHighestSample_);
 }
 
 I3_SERIALIZABLE(I3DOMLaunch);

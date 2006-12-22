@@ -5,7 +5,7 @@
  * @version $Id$
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @date $Date$
  */
 
@@ -18,15 +18,15 @@
 #include <dataclasses/I3Map.h>
 #include <dataclasses/OMKey.h>
 
-
 /**
  * @brief The direct (digital) readout of an IceCube DOM
  * 
- * The full digital readout of an IceCube DOM consists of one to four
+ * The full digital readout of an IceCube DOM consists of 1-4
  * short but fine-grained ATWD readouts, and a long but coarse fADC
  * readout, all beginning at the same time. The fADC is fixed at 40
- * MHz, while the sampling rate of the ATWDs is adjustable and will be
- * determined by the DOM calibrator.
+ * MHz, while the sampling rate of the ATWDs is adjustable and is
+ * determined by the DOM calibrator. There is also a 'coarse charge stamp'
+ * containing the 3 largest samples out of the first 16 fADC samples
  */
 class I3DOMLaunch 
 {
@@ -105,15 +105,20 @@ private:
 
     /**
      * Raw course charge stamp
+     * These values are already unpacked to full 10-bit numbers
      */
+
     I3Vector<int> rawChargeStamp_;
 
     /**
-     * The raw course charge stamp is 9-bit, so
-     * this tells us whether we're using the
-     * upper or lower 10-bit range 
+     *  chargeStampHighestSample runs from 1-16, and points to the highest fADC
+     *  sample in the first 16 samples; this is from the charge stmap
      */
-    bool chargeStampRange_;
+
+    int chargeStampHighestSample_;
+
+    /*  chargeStampRange_ has been deleted - on the rare occassions anyone cares, 
+     *  they can see if any of the samples are above 512  */
 
 public:
 
@@ -152,17 +157,19 @@ public:
      * Signals the special trigger circumstances. 
      *
      * Note: In testdomapp, the current FPGA implementation in the DOM, there is
-     * no information available that would indicate which neighbouring DOM
+     * no information available to indicate which neighbouring DOM
      * caused the LC requirement to be met. Rather, modes LC_UPPER and LC_LOWER
-     * are a reflection of how the DOM was configured at the time this launch
+     * reflect how the DOM was configured at the time this launch
      * was recorded. So if signals from both upper and lower DOMs are required
      * to satisfy local coincidence, LC_UPPER and LC_LOWER will be set.
      */
+
     TriggerMode GetTriggerMode() const { return mode_; }
     
     /**
      * Sets the special trigger circumstances.
      */
+
     void SetTriggerMode(TriggerMode situation) { mode_ = situation; }
 
     /**
@@ -178,6 +185,7 @@ public:
     /**
      * Return raw ATWD by channel number
      */
+
     const I3Vector<int>& GetRawATWD(unsigned int channel) const
     {
       if(channel >= rawATWD_.size())
@@ -208,6 +216,7 @@ public:
      */
     void SetLCBit(bool LCBit) {localCoincidence_=LCBit;}
 
+
     /** 
      * Return the raw charge stamp.
      */
@@ -215,17 +224,19 @@ public:
     I3Vector<int>& GetRawChargeStamp() { return rawChargeStamp_; }
 
     /**
-     * Return the range for the raw charge stamp.
+     * Return charge stamp highest sample
      */
-    const bool GetChargeStampRange() const { return chargeStampRange_; }
+    int GetChargeStampHighestSample() const { return chargeStampHighestSample_; }
+
 
     /** 
-     * Set the range for the raw charge stamp.
+     * Set the charge stamp highest sample
      */
-    void SetChargeStampRange(bool range)
+    void SetChargeStampHighestSample(int highsample)
     {
-      chargeStampRange_ = range;
+      chargeStampHighestSample_ = highsample;
     };
+
 
 private:
     friend class boost::serialization::access;
