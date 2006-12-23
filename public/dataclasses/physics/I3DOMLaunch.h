@@ -107,21 +107,18 @@ private:
      * Raw course charge stamp
      * These values are already unpacked to full 10-bit numbers
      */
-
     I3Vector<int> rawChargeStamp_;
 
     /**
      *  chargeStampHighestSample runs from 1-16, and points to the highest fADC
-     *  sample in the first 16 samples; this is from the charge stmap
+     *  sample in the first 16 samples; this is from the charge stamp
      */
-
-    int chargeStampHighestSample_;
+    unsigned int chargeStampHighestSample_;
 
     /*  chargeStampRange_ has been deleted - on the rare occassions anyone cares, 
      *  they can see if any of the samples are above 512  */
 
 public:
-
     /**
      * Default constructor.
      */
@@ -163,13 +160,11 @@ public:
      * was recorded. So if signals from both upper and lower DOMs are required
      * to satisfy local coincidence, LC_UPPER and LC_LOWER will be set.
      */
-
     TriggerMode GetTriggerMode() const { return mode_; }
     
     /**
      * Sets the special trigger circumstances.
      */
-
     void SetTriggerMode(TriggerMode situation) { mode_ = situation; }
 
     /**
@@ -185,7 +180,6 @@ public:
     /**
      * Return raw ATWD by channel number
      */
-
     const I3Vector<int>& GetRawATWD(unsigned int channel) const
     {
       if(channel >= rawATWD_.size())
@@ -216,7 +210,6 @@ public:
      */
     void SetLCBit(bool LCBit) {localCoincidence_=LCBit;}
 
-
     /** 
      * Return the raw charge stamp.
      */
@@ -226,24 +219,22 @@ public:
     /**
      * Return charge stamp highest sample
      */
-    int GetChargeStampHighestSample() const { return chargeStampHighestSample_; }
-
+    unsigned int GetChargeStampHighestSample() const { return chargeStampHighestSample_; }
 
     /** 
      * Set the charge stamp highest sample
      */
-    void SetChargeStampHighestSample(int highsample)
+    void SetChargeStampHighestSample(unsigned int highsample)
     {
       chargeStampHighestSample_ = highsample;
     };
-
 
 private:
     friend class boost::serialization::access;
     template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3DOMLaunch, 1);
+BOOST_CLASS_VERSION(I3DOMLaunch, 2);
 I3_POINTER_TYPEDEFS(I3DOMLaunch);
 
 typedef std::vector<I3DOMLaunch> I3DOMLaunchSeries;
