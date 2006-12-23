@@ -59,7 +59,7 @@ void I3DOMLaunch::serialize(Archive& ar, unsigned version)
   // use a value of 0 instead - should be fine since rawChargeStamp_ is empty
   else
   {
-    if(rawChargeStamp_.empty()) log_warn("oops, coarse charge stamp is not empty");
+    if(!rawChargeStamp_.empty()) log_warn("oops, coarse charge stamp is not empty");
     chargeStampHighestSample_ = 0u;
   }
 }
