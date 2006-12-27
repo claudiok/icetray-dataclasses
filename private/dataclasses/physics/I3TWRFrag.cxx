@@ -1,16 +1,66 @@
+/**
+ * (c) 2005
+ * the IceCube Collaboration
+ * $Id:  $
+ *
+ * @file I3TWRFrag.cxx
+ * @brief implementation of the I3TWRFrag class
+ * @version $Revision:  $
+ * @date $Date:  $
+ * @author tschmidt
+ */
+ 
+// class header file
+
 #include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3TWRFrag.h>
-I3TWRFrag::~I3TWRFrag() { }
+
+#include <math.h>
+
+// namespace declarations
+
+
+// implementation
+
+I3TWRFrag::~I3TWRFrag()
+{
+}
+
 
 template<class Archive>
 void 
 I3TWRFrag::serialize(Archive& ar, unsigned version)
 {
-  ar & make_nvp("ID",id);
-  ar & make_nvp("ParentID",parent_id);
-  ar & make_nvp("FragStartTime",frag_start_time);
-  ar & make_nvp("FragStartBin",frag_start_bin);
-  ar & make_nvp("Waveform",waveform);
+  if(version < 1)
+  {
+    int id;
+    ar & make_nvp("ID", id);
+    int parentId;
+    ar & make_nvp("ParentID", parentId);
+    double fragStartTime;
+    ar & make_nvp("FragStartTime", fragStartTime);
+
+    int fragStartBin;
+    ar & make_nvp("FragStartBin", fragStartBin);
+    if(fragStartBin < 0) log_fatal("invalid start bin");
+    startBin_ = static_cast<unsigned int>(fragStartBin);
+    
+    vector<double> waveform;
+    ar & make_nvp("Waveform", waveform);
+    rawFADC_.resize(waveform.size());
+    for(unsigned int i = 0; i < waveform.size(); ++i)
+    {
+      waveform[i] = round(waveform[i]);
+      if(waveform[i] < 0) log_fatal("invalid waveform value");
+      rawFADC_[i] = static_cast<unsigned int>(waveform[i]);
+    }
+  }
+  else
+  {
+    ar & make_nvp("StartBin", startBin_);
+    ar & make_nvp("RawFADC", rawFADC_);
+  }
 }
+
 
 I3_SERIALIZABLE(I3TWRFrag);
