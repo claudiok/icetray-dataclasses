@@ -13,12 +13,12 @@
 namespace I3TreeUtils
 {
   /**
-   * Adds a primary (top-level node) to the tree.
-   * The primary has no parent.
-   * A tree can have multiple primaries.
+   * Adds a top-level node to the tree.
+   * The top level object has no parent.
+   * A tree can have multiple top level objects.
    */
   template<class Type>
-    void AddPrimary(I3Tree<Type>& t, const Type& p)
+    void AddTopLevel(I3Tree<Type>& t, const Type& p)
     {
       typename I3Tree<Type>::iterator si;
       si = t.end(t.begin());
@@ -26,12 +26,12 @@ namespace I3TreeUtils
     }
 
   /**
-   * Alternative way to add primary
+   * Alternative way to add top level object
    */
   template<class Type>
-    void AddPrimary(shared_ptr<I3Tree<Type> > t, const Type& p)
+    void AddTopLevel(shared_ptr<I3Tree<Type> > t, const Type& p)
     {
-      AddPrimary<Type>(*t, p);
+      AddTopLevel<Type>(*t, p);
     }
 
   /**
@@ -94,25 +94,25 @@ namespace I3TreeUtils
 
 
   /**
-   * Gets a list of primaries from the tree
+   * Gets a list of top level objects from the tree
    */
   template<class Type>
-    const std::vector<Type> GetPrimaries(const I3Tree<Type>& t)
+    const std::vector<Type> GetTopLevelList(const I3Tree<Type>& t)
     {
-      std::vector<Type> primaryList;
+      std::vector<Type> topLevelList;
       typename I3Tree<Type>::sibling_iterator i;
       for (i=t.begin(); i!=t.end(); ++i)
-	primaryList.push_back(*i);
-      return primaryList;
+	topLevelList.push_back(*i);
+      return topLevelList;
     }
 
   /**
-   * Alternative way to get primaries
+   * Alternative way to get top level objects
    */
   template<class Type>
-    const std::vector<Type> GetPrimaries(shared_ptr<const I3Tree<Type> > t)
+    const std::vector<Type> GetTopLevelList(shared_ptr<const I3Tree<Type> > t)
     {
-      return GetPrimaries<Type>(*t);
+      return GetTopLevelList<Type>(*t);
     }
 
   /**
@@ -146,10 +146,10 @@ namespace I3TreeUtils
     }
 
   /**
-   * Returns true if the object is a primary
+   * Returns true if the object is a top level object
    */
   template<class Type>
-    bool IsPrimary(const I3Tree<Type>& t, const Type& p)
+    bool IsTopLevel(const I3Tree<Type>& t, const Type& p)
     {
       typename I3Tree<Type>::sibling_iterator s;
       for (s=t.begin(); s!=t.end(); s++)
@@ -158,12 +158,12 @@ namespace I3TreeUtils
     }
 
   /**
-   * Alternate way to check if object is a primary
+   * Alternate way to check if object is a top level object
    */
   template<class Type>
-    bool IsPrimary(shared_ptr<const I3Tree<Type> > t, const Type& p)
+    bool IsTopLevel(shared_ptr<const I3Tree<Type> > t, const Type& p)
     {
-      return IsPrimary<Type>(*t, p);
+      return IsTopLevel<Type>(*t, p);
     }
 
   /**
@@ -174,7 +174,7 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::iterator i = t.begin();
       for( ; i != t.end(); i++){
-	if(i->GetID() == child.GetID() && !IsPrimary<Type>(t,child))
+	if(i->GetID() == child.GetID() && !IsTopLevel<Type>(t,child))
 	  if(t.parent(i) != t.end()) return true;
       }
       return false;
@@ -197,7 +197,7 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::iterator i = t.begin();
       for( ; i != t.end(); i++){
-	if(i->GetID() == child.GetID() && !IsPrimary<Type>(t,child))
+	if(i->GetID() == child.GetID() && !IsTopLevel<Type>(t,child))
 	  return *(t.parent(i));
       }
       log_fatal("No parent found for this object.");

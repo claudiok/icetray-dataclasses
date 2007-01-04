@@ -38,7 +38,7 @@ TEST(a_insert_and_append)
   ENSURE(t.begin() == t.end());
 
   int_t one(1);
-  I3TreeUtils::AddPrimary<int_t>(t, one);
+  I3TreeUtils::AddTopLevel<int_t>(t, one);
 
   ENSURE(!t.empty());
   ENSURE_EQUAL(1, t.size());
@@ -89,14 +89,14 @@ namespace UtilsTest
     int_t three(3);
     int_t four(4);
     int_t five(5);
-    I3TreeUtils::AddPrimary<int_t>(t, one);
+    I3TreeUtils::AddTopLevel<int_t>(t, one);
     I3TreeUtils::AppendChild<int_t>(t, one, two);
     I3TreeUtils::AppendChild<int_t>(t, one, three);
     I3TreeUtils::AppendChild<int_t>(t, two, four);
     I3TreeUtils::AppendChild<int_t>(t, two, five);
     int_t eleven(11);
     int_t twelve(12);
-    I3TreeUtils::AddPrimary<int_t>(t, eleven);
+    I3TreeUtils::AddTopLevel<int_t>(t, eleven);
     I3TreeUtils::AppendChild<int_t>(t, eleven, twelve);
   }
 }
@@ -113,12 +113,12 @@ TEST(b_get_object)
   ENSURE_EQUAL(i.GetID(),2);
 }
 
-TEST(c_get_primaries)
+TEST(c_get_toplevel)
 {
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  vector<int_t> v = I3TreeUtils::GetPrimaries<int_t>(t);
+  vector<int_t> v = I3TreeUtils::GetTopLevelList<int_t>(t);
   ENSURE((int)v.size() > 0);
   ENSURE_EQUAL(v[0].GetID(), 1);
 }
@@ -128,7 +128,7 @@ TEST(d_get_daughters)
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  vector<int_t> v = I3TreeUtils::GetPrimaries<int_t>(t);
+  vector<int_t> v = I3TreeUtils::GetTopLevelList<int_t>(t);
   ENSURE((int)v.size() > 0);
 
   vector<int_t> v1 = I3TreeUtils::GetDaughters<int_t>(t,v[0]);
@@ -142,16 +142,16 @@ TEST(d_get_daughters)
   ENSURE_EQUAL(v2[1].GetID(), 5);
 }
 
-TEST(e_is_primary)
+TEST(e_is_toplevel)
 {
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
   int_t i1(1);
-  ENSURE(I3TreeUtils::IsPrimary<int_t>(t,i1));
+  ENSURE(I3TreeUtils::IsTopLevel<int_t>(t,i1));
 
   int_t i2(2);
-  ENSURE(!I3TreeUtils::IsPrimary<int_t>(t,i2));
+  ENSURE(!I3TreeUtils::IsTopLevel<int_t>(t,i2));
 }
 
 TEST(f_has_parent)
@@ -198,7 +198,7 @@ TEST(h_get_nonexistant_parent)
   int_t i1(1);
   try {
     ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetID(), 0);
-    FAIL("getting parent of primary object should have called log_fatal.");
+    FAIL("getting parent of toplevel object should have called log_fatal.");
   }
   catch(const std::exception &e){  }
 

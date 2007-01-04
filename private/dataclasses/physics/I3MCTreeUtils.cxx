@@ -4,7 +4,7 @@
 
 void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 {
-  I3TreeUtils::AddPrimary<I3Particle>(t, p);
+  I3TreeUtils::AddTopLevel<I3Particle>(t, p);
 }
 
 void I3MCTreeUtils::AddPrimary(I3MCTreePtr t, const I3Particle& p)
@@ -29,7 +29,7 @@ void I3MCTreeUtils::AppendChild(I3MCTreePtr t, const I3Particle& parent, const I
 const std::vector<I3Particle>
 I3MCTreeUtils::GetPrimaries(const I3MCTree& t)
 {
-  return I3TreeUtils::GetPrimaries<I3Particle>(t);
+  return I3TreeUtils::GetTopLevelList<I3Particle>(t);
 }
 
 const std::vector<I3Particle>
