@@ -8,6 +8,7 @@
 #ifndef DATACLASSES_I3VECTOR_H_INCLUDED
 #define DATACLASSES_I3VECTOR_H_INCLUDED
 
+#include <icetray/serialization.h>
 #include "icetray/I3FrameObject.h"
 #include <vector>
 #include "dataclasses/Utility.h"

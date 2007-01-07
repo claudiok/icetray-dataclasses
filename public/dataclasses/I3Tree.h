@@ -12,6 +12,7 @@
 #ifndef I3_TREE_H_INCLUDED
 #define I3_TREE_H_INCLUDED
 
+#include <icetray/serialization.h>
 #include <stack>
 #include <dataclasses/external/tree.hh>
 #include <dataclasses/Utility.h>

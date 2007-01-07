@@ -1,5 +1,5 @@
 
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/I3Map.h>
 #include <string>
 

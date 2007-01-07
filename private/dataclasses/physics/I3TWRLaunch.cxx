@@ -12,7 +12,7 @@
  
 // class header file
 
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/physics/I3TWRLaunch.h>
 
 #include <math.h>

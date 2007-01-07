@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/I3Bool.h>
 
 I3Bool::I3Bool() : value(false) { }

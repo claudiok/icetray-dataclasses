@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/physics/I3MCList.h>
 
 I3MCList::~I3MCList() {}

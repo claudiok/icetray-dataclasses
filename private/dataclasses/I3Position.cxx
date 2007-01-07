@@ -3,7 +3,7 @@
 
 
 #include <iostream>
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"

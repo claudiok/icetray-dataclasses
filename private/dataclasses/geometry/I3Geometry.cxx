@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/geometry/I3Geometry.h>
 
 I3Geometry::~I3Geometry() {}

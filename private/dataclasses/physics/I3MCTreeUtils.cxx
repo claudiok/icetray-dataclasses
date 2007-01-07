@@ -1,6 +1,6 @@
+#include "icetray/I3Frame.h"
 #include "dataclasses/physics/I3MCTreeUtils.h"
 #include "dataclasses/I3TreeUtils.h"
-#include "icetray/I3Frame.h"
 
 void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 {

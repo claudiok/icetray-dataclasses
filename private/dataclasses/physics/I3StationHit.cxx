@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/physics/I3StationHit.h>
 
 I3StationHit::~I3StationHit() {}

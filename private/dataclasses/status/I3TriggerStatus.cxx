@@ -7,7 +7,7 @@
  * @version $Revision: 1.10 $
  * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
  */
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/status/I3TriggerStatus.h>
 
 

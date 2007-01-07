@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/calibration/I3TankCalibration.h>
 
 I3TankCalibration::~I3TankCalibration() {}

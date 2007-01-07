@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/I3Double.h>
 
 I3Double::I3Double() : value(0) {}

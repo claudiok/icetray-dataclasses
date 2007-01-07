@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/calibration/I3AMANDAOM_XTalk.h>
 
 I3AMANDAOM_XTalk::~I3AMANDAOM_XTalk() {}

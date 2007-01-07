@@ -7,7 +7,7 @@
  * @version $Revision: 1.5 $
  * @date $Date: 2005-11-17 16:04:25 +0100 (Thu, 17 Nov 2005) $
  */
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/physics/I3TriggerHierarchy.h>
 
 I3_SERIALIZABLE(I3TriggerHierarchy);

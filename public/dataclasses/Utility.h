@@ -9,54 +9,15 @@
 #define UTILITY_H_INCLUDED
 
 #include <stdint.h> //int64_t, etc
-#include "dataclasses/copy_if.h"
+#include <dataclasses/copy_if.h>
 #include <icetray/IcetrayFwd.h>
-#include "icetray/I3FrameObject.h"
-
-#ifndef __CINT__
-#include <boost/serialization/version.hpp>
-#else
-#define BOOST_CLASS_VERSION(T,V) 
-#endif
-
-namespace boost 
-{
-  namespace serialization 
-  {
-    // normal forward declarations:
-    template <class T> struct nvp;
-    template <class T> const nvp<T> make_nvp(const char* name, T& t);
-
-    // special dummy no-ops that check to see if boost headers have
-    // already been included.
-#ifndef BOOST_SERIALIZATION_BASE_OBJECT_HPP
-    template <class Retval, class Derived>
-      Retval base_object(Derived);
-#endif
-#ifndef BOOST_SERIALIZATION_IS_ABSTRACT_CLASS_HPP
-#define BOOST_IS_ABSTRACT(X)
-#endif
-#ifndef BOOST_SERIALIZATION_EXPORT_HPP
-#define BOOST_CLASS_EXPORT(X) 
-#endif
-#ifndef BOOST_SERIALIZATION_SHARED_PTR_HPP
-#define BOOST_SHARED_POINTER_EXPORT(X) 
-#endif
-#ifndef BOOST_SERIALIZATION_SPLIT_MEMBER_HPP
-#define BOOST_SERIALIZATION_SPLIT_MEMBER()
-#endif
-  }
-}
-
-using boost::serialization::make_nvp;
-using boost::serialization::base_object;
+#include <icetray/I3FrameObject.h>
 
 #include <icetray/I3Logging.h>
 
 using namespace std;
 
-// forward declarations.  Instantiations come via I3_SERIALIZABLE().
-// icetray/serialization.h
+// forward declarations.  
 template <typename T>
 std::string 
 AsXML(const T& ob);

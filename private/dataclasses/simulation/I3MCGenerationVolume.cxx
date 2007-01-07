@@ -6,7 +6,7 @@
   @date $Date: (Mon, June 26, 2006) $
  **/
 
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/simulation/I3MCGenerationVolume.h>
 
 I3MCGenerationVolume::~I3MCGenerationVolume() { }

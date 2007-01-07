@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/status/I3DetectorStatus.h>
 
 I3DetectorStatus::~I3DetectorStatus() {}
