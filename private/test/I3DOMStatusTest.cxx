@@ -13,7 +13,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include "boost/archive/xml_oarchive.hpp"
 #include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/physics/I3DOMLaunch.h"
