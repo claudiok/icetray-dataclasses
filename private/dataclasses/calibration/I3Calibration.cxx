@@ -18,5 +18,4 @@ I3Calibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("EndTime",endTime);
 }
 
-BOOST_CLASS_VERSION(I3Calibration, 1);
 I3_SERIALIZABLE(I3Calibration);

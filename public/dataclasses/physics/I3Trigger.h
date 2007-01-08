@@ -104,6 +104,7 @@ private:
   SET_LOGGER("I3Trigger");
 };
 
+BOOST_CLASS_VERSION(I3Trigger, 1);
 /**
  * pointer type to insulate users from memory management
  */

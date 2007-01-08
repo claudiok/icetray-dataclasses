@@ -30,5 +30,4 @@ template <class Archive> void I3Trigger::serialize(Archive& ar, unsigned version
   ar & make_nvp("TriggerKey", key_);
 }
   
-BOOST_CLASS_VERSION(I3Trigger, 1);
 I3_SERIALIZABLE(I3Trigger);

@@ -297,6 +297,7 @@ private:
 
 };
 
+BOOST_CLASS_VERSION(I3DOMCalibration, 2);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
 #endif //I3DOMCALIBRATION_H_INCLUDED

@@ -39,6 +39,7 @@ public:
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
+BOOST_CLASS_VERSION(I3Calibration, 1);
 I3_DEFAULT_NAME(I3Calibration);
 I3_POINTER_TYPEDEFS(I3Calibration);
 
