@@ -10,6 +10,7 @@
 
 #include <stdint.h> //int64_t, etc
 #include <dataclasses/copy_if.h>
+#include <icetray/serialization.h>
 #include <icetray/IcetrayFwd.h>
 #include <icetray/I3FrameObject.h>
 
