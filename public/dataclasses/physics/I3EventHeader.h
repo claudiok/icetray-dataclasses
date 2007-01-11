@@ -29,6 +29,7 @@ using namespace std;
 class I3EventHeader : public I3FrameObject
 {
   unsigned  runID_;
+  unsigned  subRunID_;
   unsigned  eventID_;
 
   I3Time startTime_;
@@ -75,6 +76,16 @@ class I3EventHeader : public I3FrameObject
   void SetRunID(unsigned runid) { runID_ = runid; }
 
   /**
+   * @return the subrun id for the event
+   */
+  unsigned GetSubRunID() const { return subRunID_; }
+
+  /**
+   * @param runid the new subrun id for the event
+   */
+  void SetSubRunID(unsigned runid) { subRunID_ = runid; }
+
+  /**
    * @return the event id for this event
    */
   unsigned GetEventID() const { return eventID_; }
@@ -96,6 +107,7 @@ class I3EventHeader : public I3FrameObject
 
 };
 
+BOOST_CLASS_VERSION(I3EventHeader,1);
 I3_POINTER_TYPEDEFS(I3EventHeader);
 I3_DEFAULT_NAME(I3EventHeader);
 

@@ -3,6 +3,7 @@
 
 I3EventHeader::I3EventHeader() :
   runID_(std::numeric_limits<unsigned int>::max()),
+  subRunID_(std::numeric_limits<unsigned int>::max()),
   eventID_(std::numeric_limits<unsigned int>::max())
 {
 }
@@ -17,6 +18,14 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
 {
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("RunID", runID_);
+  if(version > 0)
+    {
+      ar & make_nvp("SubRunID", subRunID_);
+    }
+  else
+    {
+      subRunID_ = 0;
+    }
   ar & make_nvp("EventID", eventID_);
   ar & make_nvp("StartTime",startTime_);
   ar & make_nvp("EndTime",endTime_);
