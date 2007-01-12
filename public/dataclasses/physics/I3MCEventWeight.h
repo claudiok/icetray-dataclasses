@@ -22,7 +22,7 @@ class I3MCEventWeight : public I3FrameObject
   double weight;
   double livetimePerFile;
   
-  virtual I3MCEventWeight::~I3MCEventWeight();
+  virtual ~I3MCEventWeight();
 
   template <class Archive>
     void serialize(Archive& ar,unsigned version);

@@ -9,7 +9,8 @@ dataclasses/I3Position.h \
 dataclasses/I3Direction.h \
 dataclasses/I3Double.h \
 dataclasses/I3Time.h \
-dataclasses/physics/I3Particle.h
+dataclasses/physics/I3Particle.h \
+dataclasses/physics/I3MCEventWeight.h
 
 GIMP = dataclasses/I3Time.h \
 dataclasses/OMKey.h \

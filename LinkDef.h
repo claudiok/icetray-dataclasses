@@ -22,6 +22,7 @@
 #pragma link C++ class I3Particle+;
 #pragma link C++ class I3Double+;
 #pragma link C++ class I3Time+;
+#pragma link C++ class I3MCEventWeight+;
 
 #endif
 
