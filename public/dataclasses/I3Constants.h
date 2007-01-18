@@ -71,7 +71,7 @@ namespace I3Constants
    *  Avaogadro's Number
    */
  
-  static const double NA = 6.022141510e23;
+  static const double NA = 6.0221415e23;
 
   /**
    * Elevation of ice surface (of AMANDA hole 4)
