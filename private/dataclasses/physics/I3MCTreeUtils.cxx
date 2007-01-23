@@ -198,7 +198,8 @@ I3MCTree::iterator
 I3MCTreeUtils::GetIterator(I3MCTreePtr t, const I3Particle& p){
   I3MCTree::iterator i;
   for(i=t->begin() ; i!= t->end(); i++)
-    if(i->GetID() == p.GetID())
+    if((i->GetMinorID() == p.GetMinorID()) &&
+       (i->GetMajorID() == p.GetMajorID()))
       return i;
   return t->end();
 }
@@ -208,7 +209,8 @@ void I3MCTreeUtils::internal::DumpChildren(const I3MCTree& t,I3MCTree::iterator 
   for(si = t.begin(i); si != t.end(i); si++){
     for(int j=0; j<5*t.depth(si); j++) cout<<" ";
     cout<<si->GetTypeString()<<" "
-	<<si->GetID()<<" "
+	<<si->GetMajorID()<<" "
+	<<si->GetMinorID()<<" "
 	<<endl;
     DumpChildren(t,si);
   }
@@ -222,7 +224,8 @@ void I3MCTreeUtils::Dump(const I3MCTree& t){
   for(i = t.begin(); i != t.end(); i++){
     for(int j=0; j<5*t.depth(i); j++) cout<<" ";
     cout<<i->GetTypeString()<<" "
-	<<i->GetID()<<" "
+	<<i->GetMinorID()<<" "
+	<<i->GetMajorID()<<" "
 	<<endl;
     internal::DumpChildren(t,i);
   }
