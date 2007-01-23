@@ -45,7 +45,8 @@ namespace I3TreeUtils
       typename I3Tree<Type>::iterator i;
       typename I3Tree<Type>::iterator p_iter;
       for (i=t.begin(); i!=t.end(); ++i) {
-	if (i->GetID() == parent.GetID()) {
+	if ((i->GetMinorID() == parent.GetMinorID()) && 
+	    (i->GetMajorID() == parent.GetMajorID())) {
 	  p_iter = i;
 	  break;
 	}
@@ -124,7 +125,8 @@ namespace I3TreeUtils
       std::vector<Type> daughterList;
       typename I3Tree<Type>::iterator i;
       for (i=t.begin(); i != t.end(); i++) {
-	if (i->GetID() == p.GetID()) {
+	if ((i->GetMinorID() == p.GetMinorID())  &&
+	    (i->GetMajorID() == p.GetMajorID())){
 	  typename I3Tree<Type>::sibling_iterator j(i);
 	  for (j=t.begin(i); j!=t.end(i); ++j)
 	    daughterList.push_back(*j);
@@ -153,7 +155,8 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::sibling_iterator s;
       for (s=t.begin(); s!=t.end(); s++)
-	if (s->GetID() == p.GetID()) return true;
+	if (s->GetMinorID() == p.GetMinorID() &&
+	    s->GetMajorID() == p.GetMajorID()) return true;
       return false;
     }
 
@@ -174,7 +177,9 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::iterator i = t.begin();
       for( ; i != t.end(); i++){
-	if(i->GetID() == child.GetID() && !IsPrimary<Type>(t,child))
+	if(i->GetMinorID() == child.GetMinorID() && 
+	   i->GetMajorID() == child.GetMajorID() && 
+	   !IsPrimary<Type>(t,child))
 	  if(t.parent(i) != t.end()) return true;
       }
       return false;
@@ -197,7 +202,9 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::iterator i = t.begin();
       for( ; i != t.end(); i++){
-	if(i->GetID() == child.GetID() && !IsPrimary<Type>(t,child))
+	if(i->GetMinorID() == child.GetMinorID() &&
+	   i->GetMajorID() == child.GetMajorID() &&
+	   !IsPrimary<Type>(t,child))
 	  return *(t.parent(i));
       }
       log_fatal("No parent found for this object.");
