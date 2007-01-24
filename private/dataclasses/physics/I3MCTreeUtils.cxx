@@ -12,6 +12,12 @@ void I3MCTreeUtils::AddPrimary(I3MCTreePtr t, const I3Particle& p)
   I3MCTreeUtils::AddPrimary(*t, p);
 }
 
+void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3MCTree& subt)
+{
+  //I3MCTree subtt(subt);
+  I3TreeUtils::AddTopLevel<I3Particle>(t, subt);
+}
+
 
 void I3MCTreeUtils::AppendChild(I3MCTree& t, const I3Particle& parent, const I3Particle& child)
 {
@@ -238,4 +244,16 @@ void I3MCTreeUtils::Dump(I3MCTreeConstPtr t){
 
 void I3MCTreeUtils::Dump(I3MCTreePtr t){
   Dump(*t);
+}
+
+I3Particle
+I3MCTreeUtils::Get(const I3MCTree& t, const I3MCHit& mchit)
+{
+  I3MCTree::iterator iter;
+  for (iter=t.begin(); iter!=t.end(); ++iter) 
+    if (iter->GetMajorID()== mchit.GetParticleMajorID() && 
+	iter->GetMinorID()== mchit.GetParticleMinorID()) 
+      return *iter;
+  log_error("Could not find I3Particle associated with I3MCHit");
+  return I3Particle();
 }

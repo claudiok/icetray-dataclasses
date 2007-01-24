@@ -60,7 +60,7 @@ class I3MCHit
 
   void SetWeight(double weight) { weight_ = weight; }
 
-  int GetParticleID() const { return particleID_; }
+  int GetParticleMinorID() const { return particleID_; }
 
   int GetParticleMajorID() const { return particleMajorID_; }
 

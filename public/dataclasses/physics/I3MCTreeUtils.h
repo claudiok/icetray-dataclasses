@@ -10,6 +10,7 @@
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/physics/I3MCTree.h"
 #include "dataclasses/physics/I3MCList.h"
+#include "dataclasses/physics/I3MCHit.h"
 #include "icetray/I3DefaultName.h"
 
 namespace I3MCTreeUtils
@@ -21,6 +22,8 @@ namespace I3MCTreeUtils
    */
   void AddPrimary(I3MCTree&, const I3Particle&);
   void AddPrimary(I3MCTreePtr,  const I3Particle&);
+
+  void AddPrimary(I3MCTree&,  const I3MCTree&);
 
   /**
    *Appends a child to the parent particle
@@ -110,6 +113,11 @@ namespace I3MCTreeUtils
 
   const vector<I3Particle> GetInIce(const I3MCTree&);
   const vector<I3Particle> GetInIce(I3MCTreeConstPtr);
+
+  /**
+   * This gets the particle that created the hit;
+   */
+  I3Particle Get(const I3MCTree&, const I3MCHit&);
 
   /**
    *Returns a vector of particles that are IceTop.

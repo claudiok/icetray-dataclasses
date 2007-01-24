@@ -26,11 +26,11 @@ namespace I3TreeUtils
     }
 
   template<class Type>
-    void AddTopLevel(I3Tree<Type>& t, I3Tree<Type>& subt)
+    void AddTopLevel(I3Tree<Type>& t, const I3Tree<Type>& subt)
     {
       typename I3Tree<Type>::iterator si;
       si = t.end(t.begin());
-      t.insert_subtree(si,subt);
+      t.insert_subtree(si,subt.begin());
     }
 
   /**
