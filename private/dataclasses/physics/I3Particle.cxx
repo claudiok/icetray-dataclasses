@@ -1,9 +1,34 @@
-#include <icetray/serialization.h>
+#include <dataclasses/BoostHeaders.h>
 #include <dataclasses/physics/I3Particle.h>
+#include <boost/functional/hash/hash.hpp>
 
-int I3Particle::global_id_ = 0;
+int I3Particle::global_minor_id_ = 0;
+long I3Particle::global_major_id_ = -1;
 
 I3Particle::~I3Particle() { }
+I3Particle::I3Particle(ParticleShape shape, ParticleType type) : 
+  parentID_(-1),
+  primaryID_(-1),
+  type_(type),
+  shape_(shape),
+  status_(NotSet),
+  pos_(),
+  dir_(),
+  time_(NAN),
+  energy_(NAN),
+  length_(NAN),
+  speed_(I3Constants::c),
+  locationType_(Anywhere)
+{
+  ID_ = global_minor_id_++;
+  if(global_major_id_ <0){
+    boost::hash<std::string> string_hash;
+    stringstream s;
+    s<<time(0)<<getpid()<<getenv("HOST");
+    global_major_id_ = string_hash(s.str());
+  }
+  major_ID_ = global_major_id_;
+}
 
 string I3Particle::GetTypeString() const
 {
@@ -202,12 +227,14 @@ double I3Particle::GetStopTime() const
   }
 }
 
-
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
+    if(version>0){
+      ar & make_nvp("",major_ID_);
+    }
     if(version == 0){
       ar & make_nvp("parentID",parentID_);
       ar & make_nvp("primaryID",primaryID_);

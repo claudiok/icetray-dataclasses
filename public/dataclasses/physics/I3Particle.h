@@ -24,7 +24,8 @@ using namespace std;
 class I3Particle : public I3FrameObject
 {
 
-  static int global_id_;
+  static int global_minor_id_;
+  static long global_major_id_;
     
  public:
 
@@ -98,6 +99,7 @@ class I3Particle : public I3FrameObject
  private:
 
   int ID_;
+  long major_ID_;
   int parentID_;
   int primaryID_;
   ParticleType type_;
@@ -114,21 +116,7 @@ class I3Particle : public I3FrameObject
 
  public:
 
-  I3Particle(ParticleShape shape = Null, ParticleType type = unknown) : 
-    ID_(-1),
-    parentID_(-1),
-    primaryID_(-1),
-    type_(type),
-    shape_(shape),
-    status_(NotSet),
-    pos_(),
-    dir_(),
-    time_(NAN),
-    energy_(NAN),
-    length_(NAN),
-    speed_(I3Constants::c),
-    locationType_(Anywhere)
-    {ID_ = global_id_++;};
+  I3Particle(ParticleShape shape = Null, ParticleType type = unknown);
   
   virtual ~I3Particle();
 
@@ -141,7 +129,9 @@ class I3Particle : public I3FrameObject
   bool HasDirection() const;
   bool HasEnergy() const;
 
-  int GetID() const { return ID_; }
+  int GetMinorID() const { return ID_; }
+  long GetMajorID() const { return major_ID_; }
+
   int GetParentID() const { return parentID_; }
   int GetPrimaryID() const { return primaryID_; }
 
