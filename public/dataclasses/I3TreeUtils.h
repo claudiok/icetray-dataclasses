@@ -25,6 +25,14 @@ namespace I3TreeUtils
       t.insert(si,p);
     }
 
+  template<class Type>
+    void AddTopLevel(I3Tree<Type>& t, const I3Tree<Type>& subt)
+    {
+      typename I3Tree<Type>::iterator si;
+      si = t.end(t.begin());
+      t.insert_subtree(si,subt.begin());
+    }
+
   /**
    * Alternative way to add top level object
    */
@@ -45,7 +53,8 @@ namespace I3TreeUtils
       typename I3Tree<Type>::iterator i;
       typename I3Tree<Type>::iterator p_iter;
       for (i=t.begin(); i!=t.end(); ++i) {
-	if (i->GetID() == parent.GetID()) {
+	if (i->GetMajorID() == parent.GetMajorID() &&
+	    i->GetMinorID() == parent.GetMinorID() ) {
 	  p_iter = i;
 	  break;
 	}
@@ -71,15 +80,18 @@ namespace I3TreeUtils
    * Random access to the tree objects
    */
   template<class Type>
-    Type& GetObject(const I3Tree<Type>& t, int id)
+    Type& GetObject(const I3Tree<Type>& t, long major_id, int minor_id)
     {
       typename I3Tree<Type>::iterator i;
       for (i=t.begin(); i!=t.end(); ++i) {
-	if (i->GetID() == id) {
+	if ((i->GetMajorID() == major_id) &&
+	    (i->GetMinorID() == minor_id)) {
 	  return *i;
 	}
       }
-      log_fatal("There is no object with ID = %i",id);
+      log_fatal("There is no object with ID = (%li,%i) ",
+		major_id,
+		minor_id);
       return *i;
     }
 
@@ -87,9 +99,9 @@ namespace I3TreeUtils
    * Alternative way to get object from tree
    */
   template<class Type>
-    Type& GetObject(shared_ptr<const I3Tree<Type> > t, int id)
+    Type& GetObject(shared_ptr<const I3Tree<Type> > t, long major_id, int minor_id)
     {
-      return GetObject<Type>(*t, id);
+      return GetObject<Type>(*t, major_id, minor_id);
     }
 
 
@@ -124,7 +136,8 @@ namespace I3TreeUtils
       std::vector<Type> daughterList;
       typename I3Tree<Type>::iterator i;
       for (i=t.begin(); i != t.end(); i++) {
-	if (i->GetID() == p.GetID()) {
+	if (i->GetMajorID() == p.GetMajorID() &&
+	    i->GetMinorID() == p.GetMinorID()) {
 	  typename I3Tree<Type>::sibling_iterator j(i);
 	  for (j=t.begin(i); j!=t.end(i); ++j)
 	    daughterList.push_back(*j);
@@ -153,7 +166,9 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::sibling_iterator s;
       for (s=t.begin(); s!=t.end(); s++)
-	if (s->GetID() == p.GetID()) return true;
+	if (s->GetMajorID() == p.GetMajorID() &&
+	    s->GetMinorID() == p.GetMinorID() ) 
+	  return true;
       return false;
     }
 
@@ -174,7 +189,9 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::iterator i = t.begin();
       for( ; i != t.end(); i++){
-	if(i->GetID() == child.GetID() && !IsTopLevel<Type>(t,child))
+	if(i->GetMajorID() == child.GetMajorID() && 
+	   i->GetMinorID() == child.GetMinorID() && 
+	   !IsTopLevel<Type>(t,child))
 	  if(t.parent(i) != t.end()) return true;
       }
       return false;
@@ -197,7 +214,9 @@ namespace I3TreeUtils
     {
       typename I3Tree<Type>::iterator i = t.begin();
       for( ; i != t.end(); i++){
-	if(i->GetID() == child.GetID() && !IsTopLevel<Type>(t,child))
+	if(i->GetMajorID() == child.GetMajorID() && 
+	   i->GetMinorID() == child.GetMinorID() && 
+	   !IsTopLevel<Type>(t,child))
 	  return *(t.parent(i));
       }
       log_fatal("No parent found for this object.");

@@ -25,12 +25,15 @@
  * CherenkovDistance- direct path distance to the track that generated
  * this hit.
  */
+class I3Particle;
+
 class I3MCHit
 {
   double time_;
   int hitID_;
   double  weight_;
   int    particleID_;
+  long    particleMajorID_;
   double  cherenkovDistance_;
 
  public:
@@ -40,6 +43,7 @@ class I3MCHit
     hitID_(-1),
     weight_(NAN), 
     particleID_(-1), 
+    particleMajorID_(-1), 
     cherenkovDistance_(NAN) { }
 
   virtual ~I3MCHit();
@@ -56,9 +60,11 @@ class I3MCHit
 
   void SetWeight(double weight) { weight_ = weight; }
 
-  int GetParticleID() const { return particleID_; }
+  int GetParticleMinorID() const { return particleID_; }
 
-  void SetParticleID(int ParticleID) { particleID_ = ParticleID; }
+  int GetParticleMajorID() const { return particleMajorID_; }
+
+  void SetParticleID(const I3Particle& );
 
   /**
    * @return the direct path distance to the track which caused this hit
@@ -79,6 +85,8 @@ class I3MCHit
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };
+
+BOOST_CLASS_VERSION(I3MCHit,1);
 
 I3_POINTER_TYPEDEFS(I3MCHit);
 

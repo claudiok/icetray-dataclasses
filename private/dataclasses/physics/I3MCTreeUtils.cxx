@@ -1,6 +1,6 @@
-#include "icetray/I3Frame.h"
 #include "dataclasses/physics/I3MCTreeUtils.h"
 #include "dataclasses/I3TreeUtils.h"
+#include "icetray/I3Frame.h"
 
 void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 {
@@ -10,6 +10,12 @@ void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 void I3MCTreeUtils::AddPrimary(I3MCTreePtr t, const I3Particle& p)
 {
   I3MCTreeUtils::AddPrimary(*t, p);
+}
+
+void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3MCTree& subt)
+{
+  //I3MCTree subtt(subt);
+  I3TreeUtils::AddTopLevel<I3Particle>(t, subt);
 }
 
 
@@ -198,7 +204,8 @@ I3MCTree::iterator
 I3MCTreeUtils::GetIterator(I3MCTreePtr t, const I3Particle& p){
   I3MCTree::iterator i;
   for(i=t->begin() ; i!= t->end(); i++)
-    if(i->GetID() == p.GetID())
+    if((i->GetMinorID() == p.GetMinorID()) &&
+       (i->GetMajorID() == p.GetMajorID()))
       return i;
   return t->end();
 }
@@ -208,7 +215,8 @@ void I3MCTreeUtils::internal::DumpChildren(const I3MCTree& t,I3MCTree::iterator 
   for(si = t.begin(i); si != t.end(i); si++){
     for(int j=0; j<5*t.depth(si); j++) cout<<" ";
     cout<<si->GetTypeString()<<" "
-	<<si->GetID()<<" "
+	<<si->GetMajorID()<<" "
+	<<si->GetMinorID()<<" "
 	<<endl;
     DumpChildren(t,si);
   }
@@ -222,7 +230,8 @@ void I3MCTreeUtils::Dump(const I3MCTree& t){
   for(i = t.begin(); i != t.end(); i++){
     for(int j=0; j<5*t.depth(i); j++) cout<<" ";
     cout<<i->GetTypeString()<<" "
-	<<i->GetID()<<" "
+	<<i->GetMinorID()<<" "
+	<<i->GetMajorID()<<" "
 	<<endl;
     internal::DumpChildren(t,i);
   }
@@ -235,4 +244,16 @@ void I3MCTreeUtils::Dump(I3MCTreeConstPtr t){
 
 void I3MCTreeUtils::Dump(I3MCTreePtr t){
   Dump(*t);
+}
+
+I3Particle
+I3MCTreeUtils::Get(const I3MCTree& t, const I3MCHit& mchit)
+{
+  I3MCTree::iterator iter;
+  for (iter=t.begin(); iter!=t.end(); ++iter) 
+    if (iter->GetMajorID()== mchit.GetParticleMajorID() && 
+	iter->GetMinorID()== mchit.GetParticleMinorID()) 
+      return *iter;
+  log_error("Could not find I3Particle associated with I3MCHit");
+  return I3Particle();
 }
