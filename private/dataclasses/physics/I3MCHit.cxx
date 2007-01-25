@@ -1,4 +1,4 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/physics/I3MCHit.h>
 #include <dataclasses/physics/I3Particle.h>
 I3MCHit::~I3MCHit() { }
