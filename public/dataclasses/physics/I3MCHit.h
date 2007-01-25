@@ -33,7 +33,7 @@ class I3MCHit
   int hitID_;
   double  weight_;
   int    particleID_;
-  long    particleMajorID_;
+  uint64_t    particleMajorID_;
   double  cherenkovDistance_;
 
  public:
@@ -43,7 +43,7 @@ class I3MCHit
     hitID_(-1),
     weight_(NAN), 
     particleID_(-1), 
-    particleMajorID_(-1), 
+    particleMajorID_(0), 
     cherenkovDistance_(NAN) { }
 
   virtual ~I3MCHit();
@@ -62,7 +62,7 @@ class I3MCHit
 
   int GetParticleMinorID() const { return particleID_; }
 
-  int GetParticleMajorID() const { return particleMajorID_; }
+  uint64_t GetParticleMajorID() const { return particleMajorID_; }
 
   void SetParticleID(const I3Particle& );
 
