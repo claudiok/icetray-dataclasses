@@ -24,7 +24,8 @@ class int_t
 {
 public:
   int id;
-  const int GetID() const { return id; }
+  const int GetMinorID() const { return id; }
+  const int GetMajorID() const { return id; }
   int_t(int i) : id(i) { }
 };
 
@@ -47,7 +48,7 @@ TEST(a_insert_and_append)
   ENSURE(t.begin() == iter1);
   ENSURE(t.is_valid(iter1));
   ENSURE_EQUAL(0, t.depth(iter1));
-  ENSURE_EQUAL(1, iter1->GetID());
+  ENSURE_EQUAL(1, iter1->GetMinorID());
   ENSURE_EQUAL(0u, iter1.number_of_children());
   ENSURE_EQUAL(0u, t.number_of_siblings(iter1));
   
@@ -59,10 +60,10 @@ TEST(a_insert_and_append)
   iter1++;
   ENSURE(t.is_valid(iter1));
   ENSURE_EQUAL(1, t.depth(iter1));
-  ENSURE_EQUAL(2, iter1->GetID());
+  ENSURE_EQUAL(2, iter1->GetMinorID());
   ENSURE_EQUAL(0u, iter1.number_of_children());
   ENSURE_EQUAL(0u, t.number_of_siblings(iter1));
-  ENSURE_EQUAL(2, (t.child(t.begin(), 0))->GetID());
+  ENSURE_EQUAL(2, (t.child(t.begin(), 0))->GetMinorID());
   
   int_t three(3);
   I3TreeUtils::AppendChild<int_t>(t, one, three);
@@ -72,12 +73,12 @@ TEST(a_insert_and_append)
   iter1++;
   ENSURE(t.is_valid(iter1));
   ENSURE_EQUAL(1, t.depth(iter1));
-  ENSURE_EQUAL(3, iter1->GetID());
+  ENSURE_EQUAL(3, iter1->GetMinorID());
   ENSURE_EQUAL(0u, iter1.number_of_children());
   ENSURE_EQUAL(0u, t.number_of_siblings(iter1));
   iter1--;
   ENSURE_EQUAL(1u, t.number_of_siblings(iter1));
-  ENSURE_EQUAL(3, (t.child(t.begin(), 1))->GetID());
+  ENSURE_EQUAL(3, (t.child(t.begin(), 1))->GetMinorID());
 }
 
 namespace UtilsTest
@@ -106,11 +107,11 @@ TEST(b_get_object)
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  int_t i = I3TreeUtils::GetObject<int_t>(t,5);
-  ENSURE_EQUAL(i.GetID(),5);
+  int_t i = I3TreeUtils::GetObject<int_t>(t,5,5);
+  ENSURE_EQUAL(i.GetMinorID(),5);
 
-  i = I3TreeUtils::GetObject<int_t>(t,2);
-  ENSURE_EQUAL(i.GetID(),2);
+  i = I3TreeUtils::GetObject<int_t>(t,2,2);
+  ENSURE_EQUAL(i.GetMinorID(),2);
 }
 
 TEST(c_get_toplevel)
@@ -120,7 +121,7 @@ TEST(c_get_toplevel)
 
   vector<int_t> v = I3TreeUtils::GetTopLevelList<int_t>(t);
   ENSURE((int)v.size() > 0);
-  ENSURE_EQUAL(v[0].GetID(), 1);
+  ENSURE_EQUAL(v[0].GetMinorID(), 1);
 }
 
 TEST(d_get_daughters)
@@ -133,13 +134,13 @@ TEST(d_get_daughters)
 
   vector<int_t> v1 = I3TreeUtils::GetDaughters<int_t>(t,v[0]);
   ENSURE_EQUAL((int)v1.size(), 2);
-  ENSURE_EQUAL(v1[0].GetID(), 2);
-  ENSURE_EQUAL(v1[1].GetID(), 3);
+  ENSURE_EQUAL(v1[0].GetMinorID(), 2);
+  ENSURE_EQUAL(v1[1].GetMinorID(), 3);
 
   vector<int_t> v2 = I3TreeUtils::GetDaughters<int_t>(t,v1[0]);
   ENSURE_EQUAL((int)v2.size(), 2);
-  ENSURE_EQUAL(v2[0].GetID(), 4);
-  ENSURE_EQUAL(v2[1].GetID(), 5);
+  ENSURE_EQUAL(v2[0].GetMinorID(), 4);
+  ENSURE_EQUAL(v2[1].GetMinorID(), 5);
 }
 
 TEST(e_is_toplevel)
@@ -182,12 +183,12 @@ TEST(g_get_parent)
   UtilsTest::FillTree(t);
 
   int_t i1(3);
-  ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetID(), 1);
+  ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetMinorID(), 1);
   int_t i2(5);
-  ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i2).GetID(), 2);
+  ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i2).GetMinorID(), 2);
 
   int_t i3(12);
-  ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i3).GetID(), 11);
+  ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i3).GetMinorID(), 11);
 }
 
 TEST(h_get_nonexistant_parent)
@@ -197,14 +198,14 @@ TEST(h_get_nonexistant_parent)
 
   int_t i1(1);
   try {
-    ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetID(), 0);
+    ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetMinorID(), 0);
     FAIL("getting parent of toplevel object should have called log_fatal.");
   }
   catch(const std::exception &e){  }
 
   int_t i2(20);
   try {
-    ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i2).GetID(), 0);
+    ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i2).GetMinorID(), 0);
     FAIL("getting parent of object which is not in the tree should have "
 	 "called log_fatal.");
   }

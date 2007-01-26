@@ -13,6 +13,7 @@
 #include <I3Test.h>
 #include <cmath>
 #include "dataclasses/physics/I3MCHit.h"
+#include "dataclasses/physics/I3Particle.h"
 
 // this is a typical minimal testsuite
 
@@ -27,16 +28,21 @@ TEST(assignment_copy)
 {
   I3MCHit h, j;
   ENSURE(isnan(h.GetWeight()));
-  ENSURE(h.GetParticleID()==-1);
+  ENSURE(h.GetParticleMinorID()==-1);
+  ENSURE(h.GetParticleMajorID()==0);
+
+  I3Particle p;
+
+  j.SetParticleID(p);
   j.SetWeight(M_PI);
-  j.SetParticleID(rand()%256);
   j.SetCherenkovDistance(123.45);
   h = j;
   ENSURE_DISTANCE(0.1, 0.1, 0.0001,"ensure test");
   ENSURE_DISTANCE(j.GetWeight(), h.GetWeight(), (float)0.0001,"simple assignment");
   ENSURE_DISTANCE(j.GetCherenkovDistance(),h.GetCherenkovDistance(), 0.01, 
 		  "CherenkovDistance test");
-  ENSURE(j.GetParticleID() == j.GetParticleID());
+  ENSURE(h.GetParticleMajorID() == j.GetParticleMajorID());
+  ENSURE(h.GetParticleMinorID() == j.GetParticleMinorID());
 }
 
 /**

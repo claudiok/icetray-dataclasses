@@ -1,9 +1,9 @@
-#include <dataclasses/BoostHeaders.h>
+#include <icetray/serialization.h>
 #include <dataclasses/physics/I3Particle.h>
 #include <boost/functional/hash/hash.hpp>
 
 int I3Particle::global_minor_id_ = 0;
-long I3Particle::global_major_id_ = -1;
+uint64_t I3Particle::global_major_id_ = 0;
 
 I3Particle::~I3Particle() { }
 I3Particle::I3Particle(ParticleShape shape, ParticleType type) : 
@@ -21,7 +21,7 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   locationType_(Anywhere)
 {
   ID_ = global_minor_id_++;
-  if(global_major_id_ <0){
+  if(global_major_id_ ==0){
     boost::hash<std::string> string_hash;
     stringstream s;
     s<<time(0)<<getpid()<<getenv("HOST");

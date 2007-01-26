@@ -25,7 +25,7 @@ class I3Particle : public I3FrameObject
 {
 
   static int global_minor_id_;
-  static long global_major_id_;
+  static uint64_t global_major_id_;
     
  public:
 
@@ -99,7 +99,7 @@ class I3Particle : public I3FrameObject
  private:
 
   int ID_;
-  long major_ID_;
+  uint64_t major_ID_;
   int parentID_;
   int primaryID_;
   ParticleType type_;
@@ -130,7 +130,7 @@ class I3Particle : public I3FrameObject
   bool HasEnergy() const;
 
   int GetMinorID() const { return ID_; }
-  long GetMajorID() const { return major_ID_; }
+  uint64_t GetMajorID() const { return major_ID_; }
 
   int GetParentID() const { return parentID_; }
   int GetPrimaryID() const { return primaryID_; }

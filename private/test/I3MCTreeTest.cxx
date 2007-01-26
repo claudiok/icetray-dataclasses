@@ -35,10 +35,10 @@ TEST(add_and_get_primaries)
   bool found2 = false;
 
   for(i = p_list.begin(); i!= p_list.end(); ++i)
-    if(i->GetID() == p1.GetID()) found1 = true;
+    if(i->GetMinorID() == p1.GetMinorID()) found1 = true;
 
   for(i = p_list.begin(); i!= p_list.end(); ++i)
-    if(i->GetID() == p2.GetID()) found2 = true;
+    if(i->GetMinorID() == p2.GetMinorID()) found2 = true;
 
   ENSURE(found1 && found2);
 }
@@ -48,8 +48,8 @@ TEST(add_children_to_primaries)
   I3Particle p1; 
   I3Particle p2; 
 
-  int p1_id = p1.GetID();
-  int p2_id = p2.GetID();
+  int p1_id = p1.GetMinorID();
+  int p2_id = p2.GetMinorID();
 
   I3MCTree t;
   I3MCTreeUtils::AddPrimary(t,p1);
@@ -62,10 +62,10 @@ TEST(add_children_to_primaries)
   bool found2 = false;
 
   for(i = p_list.begin(); i!= p_list.end(); ++i)
-    if(i->GetID() == p1.GetID()) found1 = true;
+    if(i->GetMinorID() == p1.GetMinorID()) found1 = true;
 
   for(i = p_list.begin(); i!= p_list.end(); ++i)
-    if(i->GetID() == p2.GetID()) found2 = true;
+    if(i->GetMinorID() == p2.GetMinorID()) found2 = true;
 
   ENSURE(found1 && found2);
 
@@ -74,10 +74,10 @@ TEST(add_children_to_primaries)
   I3Particle c3; 
   I3Particle c4; 
 
-  int c1_id = c1.GetID();
-  int c2_id = c2.GetID();
-  int c3_id = c3.GetID();
-  int c4_id = c4.GetID();
+  int c1_id = c1.GetMinorID();
+  int c2_id = c2.GetMinorID();
+  int c3_id = c3.GetMinorID();
+  int c4_id = c4.GetMinorID();
 
   I3MCTreeUtils::AppendChild(t,p1,c1);
   I3MCTreeUtils::AppendChild(t,p1,c2);
@@ -86,48 +86,48 @@ TEST(add_children_to_primaries)
 
   I3Tree<I3Particle>::sibling_iterator si(t.begin());
 
-  ENSURE(si->GetID() == p1_id);
+  ENSURE(si->GetMinorID() == p1_id);
 
   I3Tree<I3Particle>::sibling_iterator ci(t.begin(si));
-  ENSURE(ci->GetID() == c1_id);
+  ENSURE(ci->GetMinorID() == c1_id);
   ci++;
-  ENSURE(ci->GetID() == c2_id);
+  ENSURE(ci->GetMinorID() == c2_id);
 
   si++;
-  ENSURE(si->GetID() == p2_id);
+  ENSURE(si->GetMinorID() == p2_id);
   ci = t.begin(si);
-  ENSURE(ci->GetID() == c3_id);
+  ENSURE(ci->GetMinorID() == c3_id);
   ci++;
-  ENSURE(ci->GetID() == c4_id);
+  ENSURE(ci->GetMinorID() == c4_id);
 
   std::vector<I3Particle>::iterator d_iter;
   std::vector<I3Particle> d_list;
 
   d_list = I3MCTreeUtils::GetDaughters(t,p1);
   d_iter = d_list.begin();
-  ENSURE(d_iter->GetID() == c1.GetID());
+  ENSURE(d_iter->GetMinorID() == c1.GetMinorID());
   d_iter++;
-  ENSURE(d_iter->GetID() == c2.GetID());
+  ENSURE(d_iter->GetMinorID() == c2.GetMinorID());
 
   ENSURE(I3MCTreeUtils::HasParent(t,c1));
   const I3Particle& p1_1 = I3MCTreeUtils::GetParent(t,c1);
   ENSURE(I3MCTreeUtils::HasParent(t,c2));
   const I3Particle& p1_2 = I3MCTreeUtils::GetParent(t,c2);
-  ENSURE(p1_1.GetID() == p1.GetID());
-  ENSURE(p1_2.GetID() == p1.GetID());
+  ENSURE(p1_1.GetMinorID() == p1.GetMinorID());
+  ENSURE(p1_2.GetMinorID() == p1.GetMinorID());
 
   d_list = I3MCTreeUtils::GetDaughters(t,p2);
   d_iter = d_list.begin();
-  ENSURE(d_iter->GetID() == c3.GetID());
+  ENSURE(d_iter->GetMinorID() == c3.GetMinorID());
   d_iter++;
-  ENSURE(d_iter->GetID() == c4.GetID());
+  ENSURE(d_iter->GetMinorID() == c4.GetMinorID());
 
   ENSURE(I3MCTreeUtils::HasParent(t,c3));
   const I3Particle& p2_3 = I3MCTreeUtils::GetParent(t,c3);
   ENSURE(I3MCTreeUtils::HasParent(t,c4));
   const I3Particle& p2_4 = I3MCTreeUtils::GetParent(t,c4);
-  ENSURE(p2_3.GetID() == p2.GetID());
-  ENSURE(p2_4.GetID() == p2.GetID());
+  ENSURE(p2_3.GetMinorID() == p2.GetMinorID());
+  ENSURE(p2_4.GetMinorID() == p2.GetMinorID());
 
 }
 
@@ -165,7 +165,7 @@ TEST(mclist_to_mctree){
   ENSURE(t->size() == 9); 
 
   I3Particle primary = I3MCTreeUtils::GetPrimaries(*t)[0];
-  ENSURE(primary.GetID() == p.GetID());
+  ENSURE(primary.GetMinorID() == p.GetMinorID());
   ENSURE(primary.GetComposite().size()==0);
 
   vector<I3Particle> d_list = I3MCTreeUtils::GetDaughters(*t,primary);
@@ -178,12 +178,24 @@ TEST(mclist_to_mctree){
   ENSURE(d2.GetComposite().size()==0);
   ENSURE(d3.GetComposite().size()==0);
 
-  ENSURE(((d1.GetID() == c1.GetID()) && (d2.GetID() == c2.GetID()) && (d3.GetID() == c3.GetID())) ||
-	 ((d1.GetID() == c2.GetID()) && (d2.GetID() == c1.GetID()) && (d3.GetID() == c3.GetID())) ||
-	 ((d1.GetID() == c2.GetID()) && (d2.GetID() == c3.GetID()) && (d3.GetID() == c1.GetID())) ||
-	 ((d1.GetID() == c3.GetID()) && (d2.GetID() == c2.GetID()) && (d3.GetID() == c1.GetID())) ||
-	 ((d1.GetID() == c3.GetID()) && (d2.GetID() == c1.GetID()) && (d3.GetID() == c2.GetID())) ||
-	 ((d1.GetID() == c1.GetID()) && (d2.GetID() == c3.GetID()) && (d3.GetID() == c2.GetID())));
+  ENSURE(((d1.GetMinorID() == c1.GetMinorID()) && 
+	  (d2.GetMinorID() == c2.GetMinorID()) && 
+	  (d3.GetMinorID() == c3.GetMinorID())) ||
+	 ((d1.GetMinorID() == c2.GetMinorID()) && 
+	  (d2.GetMinorID() == c1.GetMinorID()) && 
+	  (d3.GetMinorID() == c3.GetMinorID())) ||
+	 ((d1.GetMinorID() == c2.GetMinorID()) && 
+	  (d2.GetMinorID() == c3.GetMinorID()) && 
+	  (d3.GetMinorID() == c1.GetMinorID())) ||
+	 ((d1.GetMinorID() == c3.GetMinorID()) && 
+	  (d2.GetMinorID() == c2.GetMinorID()) && 
+	  (d3.GetMinorID() == c1.GetMinorID())) ||
+	 ((d1.GetMinorID() == c3.GetMinorID()) && 
+	  (d2.GetMinorID() == c1.GetMinorID()) && 
+	  (d3.GetMinorID() == c2.GetMinorID())) ||
+	 ((d1.GetMinorID() == c1.GetMinorID()) && 
+	  (d2.GetMinorID() == c3.GetMinorID()) && 
+	  (d3.GetMinorID() == c2.GetMinorID())));
 
   vector<I3Particle> gd_1_list = I3MCTreeUtils::GetDaughters(*t,d1);
   vector<I3Particle> gd_2_list = I3MCTreeUtils::GetDaughters(*t,d2);
@@ -198,41 +210,81 @@ TEST(mclist_to_mctree){
 
   if(gd_1_list.size()){
     if(gd_1_list.size() == 2){
-      ENSURE(((gd_1_list[0].GetID() == gc1.GetID()) && (gd_1_list[1].GetID() == gc2.GetID()))||
-	     ((gd_1_list[0].GetID() == gc2.GetID()) && (gd_1_list[1].GetID() == gc1.GetID())));
+      ENSURE(((gd_1_list[0].GetMinorID() == gc1.GetMinorID()) && (gd_1_list[1].GetMinorID() == gc2.GetMinorID()))||
+	     ((gd_1_list[0].GetMinorID() == gc2.GetMinorID()) && (gd_1_list[1].GetMinorID() == gc1.GetMinorID())));
     }else{
-      ENSURE(((gd_1_list[0].GetID() == gc4.GetID()) && (gd_1_list[1].GetID() == gc5.GetID()) && (gd_1_list[2].GetID() == gc3.GetID())) ||
-	     ((gd_1_list[0].GetID() == gc4.GetID()) && (gd_1_list[1].GetID() == gc3.GetID()) && (gd_1_list[2].GetID() == gc5.GetID())) ||
-	     ((gd_1_list[0].GetID() == gc3.GetID()) && (gd_1_list[1].GetID() == gc4.GetID()) && (gd_1_list[2].GetID() == gc5.GetID())) ||
-	     ((gd_1_list[0].GetID() == gc3.GetID()) && (gd_1_list[1].GetID() == gc5.GetID()) && (gd_1_list[2].GetID() == gc4.GetID())) ||
-	     ((gd_1_list[0].GetID() == gc5.GetID()) && (gd_1_list[1].GetID() == gc3.GetID()) && (gd_1_list[2].GetID() == gc4.GetID())) ||
-	     ((gd_1_list[0].GetID() == gc5.GetID()) && (gd_1_list[1].GetID() == gc4.GetID()) && (gd_1_list[2].GetID() == gc3.GetID())));
+      ENSURE(((gd_1_list[0].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_1_list[1].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_1_list[2].GetMinorID() == gc3.GetMinorID())) ||
+	     ((gd_1_list[0].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_1_list[1].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_1_list[2].GetMinorID() == gc5.GetMinorID())) ||
+	     ((gd_1_list[0].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_1_list[1].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_1_list[2].GetMinorID() == gc5.GetMinorID())) ||
+	     ((gd_1_list[0].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_1_list[1].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_1_list[2].GetMinorID() == gc4.GetMinorID())) ||
+	     ((gd_1_list[0].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_1_list[1].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_1_list[2].GetMinorID() == gc4.GetMinorID())) ||
+	     ((gd_1_list[0].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_1_list[1].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_1_list[2].GetMinorID() == gc3.GetMinorID())));
     }
   }
   if(gd_2_list.size()){
     if(gd_2_list.size() == 2){
-      ENSURE(((gd_2_list[0].GetID() == gc1.GetID()) && (gd_2_list[1].GetID() == gc2.GetID()))||
-	     ((gd_2_list[0].GetID() == gc2.GetID()) && (gd_2_list[1].GetID() == gc1.GetID())));
+      ENSURE(((gd_2_list[0].GetMinorID() == gc1.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc2.GetMinorID()))||
+	     ((gd_2_list[0].GetMinorID() == gc2.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc1.GetMinorID())));
     }else{
-      ENSURE(((gd_2_list[0].GetID() == gc4.GetID()) && (gd_2_list[1].GetID() == gc5.GetID()) && (gd_2_list[2].GetID() == gc3.GetID())) ||
-	     ((gd_2_list[0].GetID() == gc4.GetID()) && (gd_2_list[1].GetID() == gc3.GetID()) && (gd_2_list[2].GetID() == gc5.GetID())) ||
-	     ((gd_2_list[0].GetID() == gc3.GetID()) && (gd_2_list[1].GetID() == gc4.GetID()) && (gd_2_list[2].GetID() == gc5.GetID())) ||
-	     ((gd_2_list[0].GetID() == gc3.GetID()) && (gd_2_list[1].GetID() == gc5.GetID()) && (gd_2_list[2].GetID() == gc4.GetID())) ||
-	     ((gd_2_list[0].GetID() == gc5.GetID()) && (gd_2_list[1].GetID() == gc3.GetID()) && (gd_2_list[2].GetID() == gc4.GetID())) ||
-	     ((gd_2_list[0].GetID() == gc5.GetID()) && (gd_2_list[1].GetID() == gc4.GetID()) && (gd_2_list[2].GetID() == gc3.GetID())));
+      ENSURE(((gd_2_list[0].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_2_list[2].GetMinorID() == gc3.GetMinorID())) ||
+	     ((gd_2_list[0].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_2_list[2].GetMinorID() == gc5.GetMinorID())) ||
+	     ((gd_2_list[0].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_2_list[2].GetMinorID() == gc5.GetMinorID())) ||
+	     ((gd_2_list[0].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_2_list[2].GetMinorID() == gc4.GetMinorID())) ||
+	     ((gd_2_list[0].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_2_list[2].GetMinorID() == gc4.GetMinorID())) ||
+	     ((gd_2_list[0].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_2_list[1].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_2_list[2].GetMinorID() == gc3.GetMinorID())));
     }
   }
   if(gd_3_list.size()){
     if(gd_3_list.size() == 2){
-      ENSURE(((gd_3_list[0].GetID() == gc1.GetID()) && (gd_3_list[1].GetID() == gc2.GetID()))||
-	     ((gd_3_list[0].GetID() == gc2.GetID()) && (gd_3_list[1].GetID() == gc1.GetID())));
+      ENSURE(((gd_3_list[0].GetMinorID() == gc1.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc2.GetMinorID()))||
+	     ((gd_3_list[0].GetMinorID() == gc2.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc1.GetMinorID())));
     }else{
-      ENSURE(((gd_3_list[0].GetID() == gc4.GetID()) && (gd_3_list[1].GetID() == gc5.GetID()) && (gd_3_list[2].GetID() == gc3.GetID())) ||
-	     ((gd_3_list[0].GetID() == gc4.GetID()) && (gd_3_list[1].GetID() == gc3.GetID()) && (gd_3_list[2].GetID() == gc5.GetID())) ||
-	     ((gd_3_list[0].GetID() == gc3.GetID()) && (gd_3_list[1].GetID() == gc4.GetID()) && (gd_3_list[2].GetID() == gc5.GetID())) ||
-	     ((gd_3_list[0].GetID() == gc3.GetID()) && (gd_3_list[1].GetID() == gc5.GetID()) && (gd_3_list[2].GetID() == gc4.GetID())) ||
-	     ((gd_3_list[0].GetID() == gc5.GetID()) && (gd_3_list[1].GetID() == gc3.GetID()) && (gd_3_list[2].GetID() == gc4.GetID())) ||
-	     ((gd_3_list[0].GetID() == gc5.GetID()) && (gd_3_list[1].GetID() == gc4.GetID()) && (gd_3_list[2].GetID() == gc3.GetID())));
+      ENSURE(((gd_3_list[0].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_3_list[2].GetMinorID() == gc3.GetMinorID())) ||
+	     ((gd_3_list[0].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_3_list[2].GetMinorID() == gc5.GetMinorID())) ||
+	     ((gd_3_list[0].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_3_list[2].GetMinorID() == gc5.GetMinorID())) ||
+	     ((gd_3_list[0].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_3_list[2].GetMinorID() == gc4.GetMinorID())) ||
+	     ((gd_3_list[0].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc3.GetMinorID()) && 
+	      (gd_3_list[2].GetMinorID() == gc4.GetMinorID())) ||
+	     ((gd_3_list[0].GetMinorID() == gc5.GetMinorID()) && 
+	      (gd_3_list[1].GetMinorID() == gc4.GetMinorID()) && 
+	      (gd_3_list[2].GetMinorID() == gc3.GetMinorID())));
     }
   }
 }
