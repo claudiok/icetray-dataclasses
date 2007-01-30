@@ -232,7 +232,7 @@ template <class Archive>
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
-    if(version>0){
+    if(version>1){
       ar & make_nvp("MajorID",major_ID_);
     }
     if(version == 0){

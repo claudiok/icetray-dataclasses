@@ -205,7 +205,7 @@ class I3Particle : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Particle);
-BOOST_CLASS_VERSION(I3Particle,1);
+BOOST_CLASS_VERSION(I3Particle,2);
 
 typedef I3Vector<I3Particle> I3ParticleVect;
 I3_POINTER_TYPEDEFS(I3ParticleVect);
