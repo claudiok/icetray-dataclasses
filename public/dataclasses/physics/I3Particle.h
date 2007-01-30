@@ -129,7 +129,7 @@ class I3Particle : public I3FrameObject
   bool HasDirection() const;
   bool HasEnergy() const;
 
-  int GetMinorID() const { return ID_; }
+  int GetID() const { return ID_; }
   uint64_t GetMajorID() const { return major_ID_; }
 
   int GetParentID() const { return parentID_; }

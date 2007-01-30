@@ -4,7 +4,7 @@
 I3MCHit::~I3MCHit() { }
 
 void I3MCHit::SetParticleID(const I3Particle& p) { 
-  particleID_ = p.GetMinorID(); 
+  particleID_ = p.GetID(); 
   particleMajorID_ = p.GetMajorID();
 }
 

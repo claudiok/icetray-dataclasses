@@ -24,8 +24,10 @@ class int_t
 {
 public:
   int id;
+  uint64_t major_id;
   const int GetID() const { return id; }
-  int_t(int i) : id(i) { }
+  const uint64_t GetMajorID() const { return major_id; }
+  int_t(int i, uint64_t m) : id(i), major_id(m) { }
 };
 
 TEST(a_insert_and_append)
@@ -37,7 +39,7 @@ TEST(a_insert_and_append)
   ENSURE(!t.is_valid(t.begin()));
   ENSURE(t.begin() == t.end());
 
-  int_t one(1);
+  int_t one(1,1);
   I3TreeUtils::AddTopLevel<int_t>(t, one);
 
   ENSURE(!t.empty());
@@ -51,7 +53,7 @@ TEST(a_insert_and_append)
   ENSURE_EQUAL(0u, iter1.number_of_children());
   ENSURE_EQUAL(0u, t.number_of_siblings(iter1));
   
-  int_t two(2);
+  int_t two(2,2);
   I3TreeUtils::AppendChild<int_t>(t, one, two);
 
   ENSURE_EQUAL(2, t.size());
@@ -64,7 +66,7 @@ TEST(a_insert_and_append)
   ENSURE_EQUAL(0u, t.number_of_siblings(iter1));
   ENSURE_EQUAL(2, (t.child(t.begin(), 0))->GetID());
   
-  int_t three(3);
+  int_t three(3,3);
   I3TreeUtils::AppendChild<int_t>(t, one, three);
 
   ENSURE_EQUAL(3, t.size());
@@ -84,18 +86,18 @@ namespace UtilsTest
 {
   void FillTree(I3Tree<int_t>& t)
   {
-    int_t one(1);
-    int_t two(2);
-    int_t three(3);
-    int_t four(4);
-    int_t five(5);
+    int_t one(1,1);
+    int_t two(2,2);
+    int_t three(3,3);
+    int_t four(4,4);
+    int_t five(5,5);
     I3TreeUtils::AddTopLevel<int_t>(t, one);
     I3TreeUtils::AppendChild<int_t>(t, one, two);
     I3TreeUtils::AppendChild<int_t>(t, one, three);
     I3TreeUtils::AppendChild<int_t>(t, two, four);
     I3TreeUtils::AppendChild<int_t>(t, two, five);
-    int_t eleven(11);
-    int_t twelve(12);
+    int_t eleven(11,11);
+    int_t twelve(12,12);
     I3TreeUtils::AddTopLevel<int_t>(t, eleven);
     I3TreeUtils::AppendChild<int_t>(t, eleven, twelve);
   }
@@ -106,10 +108,10 @@ TEST(b_get_object)
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  int_t i = I3TreeUtils::GetObject<int_t>(t,5);
+  int_t i = I3TreeUtils::GetObject<int_t>(t,5,5);
   ENSURE_EQUAL(i.GetID(),5);
 
-  i = I3TreeUtils::GetObject<int_t>(t,2);
+  i = I3TreeUtils::GetObject<int_t>(t,2,2);
   ENSURE_EQUAL(i.GetID(),2);
 }
 
@@ -147,10 +149,10 @@ TEST(e_is_toplevel)
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  int_t i1(1);
+  int_t i1(1,1);
   ENSURE(I3TreeUtils::IsTopLevel<int_t>(t,i1));
 
-  int_t i2(2);
+  int_t i2(2,2);
   ENSURE(!I3TreeUtils::IsTopLevel<int_t>(t,i2));
 }
 
@@ -159,20 +161,20 @@ TEST(f_has_parent)
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  int_t i1(1);
+  int_t i1(1,1);
   ENSURE(!(I3TreeUtils::HasParent<int_t>(t,i1)));
-  int_t i2(2);
+  int_t i2(2,2);
   ENSURE(I3TreeUtils::HasParent<int_t>(t,i2));
-  int_t i3(3);
+  int_t i3(3,3);
   ENSURE(I3TreeUtils::HasParent<int_t>(t,i3));
-  int_t i4(4);
+  int_t i4(4,4);
   ENSURE(I3TreeUtils::HasParent<int_t>(t,i4));
-  int_t i5(5);
+  int_t i5(5,5);
   ENSURE(I3TreeUtils::HasParent<int_t>(t,i5));
 
-  int_t i11(11);
+  int_t i11(11,11);
   ENSURE(!I3TreeUtils::HasParent<int_t>(t,i11));
-  int_t i12(12);
+  int_t i12(12,12);
   ENSURE(I3TreeUtils::HasParent<int_t>(t,i12));
 }
 
@@ -181,12 +183,12 @@ TEST(g_get_parent)
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  int_t i1(3);
+  int_t i1(3,3);
   ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetID(), 1);
-  int_t i2(5);
+  int_t i2(5,5);
   ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i2).GetID(), 2);
 
-  int_t i3(12);
+  int_t i3(12,12);
   ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i3).GetID(), 11);
 }
 
@@ -195,14 +197,14 @@ TEST(h_get_nonexistant_parent)
   I3Tree<int_t> t;
   UtilsTest::FillTree(t);
 
-  int_t i1(1);
+  int_t i1(1,1);
   try {
     ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i1).GetID(), 0);
     FAIL("getting parent of toplevel object should have called log_fatal.");
   }
   catch(const std::exception &e){  }
 
-  int_t i2(20);
+  int_t i2(20,20);
   try {
     ENSURE_EQUAL(I3TreeUtils::GetParent<int_t>(t,i2).GetID(), 0);
     FAIL("getting parent of object which is not in the tree should have "
