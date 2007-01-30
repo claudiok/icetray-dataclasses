@@ -129,6 +129,10 @@ class I3Particle : public I3FrameObject
   bool HasDirection() const;
   bool HasEnergy() const;
 
+  int GetID() const { 
+    log_warn("I3Particle::GetID is deprecated.  Please use I3Particle::GetMinorID.");
+    return ID_; 
+  }
   int GetMinorID() const { return ID_; }
   uint64_t GetMajorID() const { return major_ID_; }
 
@@ -205,7 +209,7 @@ class I3Particle : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Particle);
-BOOST_CLASS_VERSION(I3Particle,1);
+BOOST_CLASS_VERSION(I3Particle,2);
 
 typedef I3Vector<I3Particle> I3ParticleVect;
 I3_POINTER_TYPEDEFS(I3ParticleVect);

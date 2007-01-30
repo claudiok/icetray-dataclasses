@@ -60,6 +60,11 @@ class I3MCHit
 
   void SetWeight(double weight) { weight_ = weight; }
 
+  int GetParticleID() const { 
+    log_warn("I3MCHit::GetParticleID is deprecated.  Please use I3MCHit::GetParticleMinorID");
+    return particleID_; 
+  }
+
   int GetParticleMinorID() const { return particleID_; }
 
   uint64_t GetParticleMajorID() const { return particleMajorID_; }
