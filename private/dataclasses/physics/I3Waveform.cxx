@@ -1,6 +1,14 @@
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3Waveform.h>
 
+#include <algorithm>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/lambda.hpp>
+
+
+using namespace std;
+using namespace boost::lambda;
+
 
 I3Waveform::StatusCompound::~StatusCompound() {}
 
@@ -13,6 +21,20 @@ void I3Waveform::StatusCompound::serialize(Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3Waveform::StatusCompound);
+
+
+I3Waveform::Status I3Waveform::GetStatus(const vector<StatusCompound>& waveformInfo)
+{
+  Status retVal;
+  
+  if(waveformInfo.empty()) retVal = VIRGINAL;
+  else
+    retVal =
+      max_element(waveformInfo.begin(), waveformInfo.end(),
+                  bind(&StatusCompound::GetStatus, _1) < bind(&StatusCompound::GetStatus, _2))->GetStatus();
+    
+  return(retVal);
+}
 
 
 I3Waveform::~I3Waveform() {}

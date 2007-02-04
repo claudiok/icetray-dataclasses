@@ -17,75 +17,82 @@
 
 class I3Waveform 
 {
-public:
-    enum Source
-    {
-      ATWD = 0,
-      FADC = 10,
-      TWR_ELECTRICAL = 20,
-      TWR_OPTICAL = 30,
-      ETC = 40
-    };
+ public:
+  enum Source
+  {
+    ATWD = 0,
+    FADC = 10,
+    TWR_ELECTRICAL = 20,
+    TWR_OPTICAL = 30,
+    ETC = 40
+  };
+  
+  /** Describes possible artefacts within the data.
+   * 
+   * The waveform is a hardware independent representation of the data aquired.
+   * Nevertheless, it can carry artefacts due to hardware imperfections.
+   * 
+   * Saturation is an example, which is hard to recognize, since the waveform is
+   * a vector of doubles. Of course, it is still possible to regognize saturation
+   * using some more or less fancy algorithm, but the module converting the hardware
+   * dependent data into hardware independent data can recognize artefacts much easier.
+   * It should record this information using this enumeration.
+   * 
+   * If the DOM calibrator combines the ATWD channels, it should call bins that
+   * saturate even in the lowest amplified channel ADULTERATED, bins that saturate
+   * only in some channels SHADY and bins that do not saturate in the highest
+   * amplified channel VIRGINAL.
+   */
+  enum Status
+  {
+    VIRGINAL = 0,
+    SHADY = 10,
+    ADULTERATED = 20
+  };
+  
+  class StatusCompound
+  {
+   private:
+    std::pair<unsigned long long int, unsigned long long int>
+      interval_;
+    Status status_;
+  
+   public:
+    StatusCompound() : interval_(std::make_pair(0, 0)), status_(ADULTERATED) {}
     
-    /** Describes possible artefacts within the data.
-     * 
-     * The waveform is a hardware independent representation of the data aquired.
-     * Nevertheless, it can carry artefacts due to hardware imperfections.
-     * 
-     * Saturation is an example, which is hard to recognize, since the waveform is
-     * a vector of doubles. Of course, it is still possible to regognize saturation
-     * using some more or less fancy algorithm, but the module converting the hardware
-     * dependent data into hardware independent data can recognize artefacts much easier.
-     * It should record this information using this enumeration.
-     * 
-     * If the DOM calibrator combines the ATWD channels, it should call bins that
-     * saturate even in the lowest amplified channel ADULTERATED, bins that saturate
-     * only in some channels SHADY and bins that do not saturate in the highest
-     * amplified channel VIRGINAL.
-     */
-    enum Status
-    {
-      VIRGINAL = 0,
-      SHADY = 10,
-      ADULTERATED = 20
-    };
+    virtual ~StatusCompound();
     
-    class StatusCompound
-    {
-    private:
-      std::pair<unsigned long long int, unsigned long long int>
-        interval_;
-      Status status_;
+    const std::pair<unsigned long long int, unsigned long long int>&
+    GetInterval() const { return interval_; }
     
-    public:
-      StatusCompound() : interval_(std::make_pair(0, 0)), status_(ADULTERATED) {}
-      
-      virtual ~StatusCompound();
-      
-      const std::pair<unsigned long long int, unsigned long long int>&
-      GetInterval() const { return interval_; }
-      
-      std::pair<unsigned long long int, unsigned long long int>&
-      GetInterval() { return interval_; }
-      
-      Status GetStatus() const { return status_; }
-      
-      void SetStatus(Status status) { status_ = status; }
-      
-    private:
+    std::pair<unsigned long long int, unsigned long long int>&
+    GetInterval() { return interval_; }
     
-      friend class boost::serialization::access;
-      template<class Archive> void serialize(Archive& ar, unsigned version);
-    };
+    Status GetStatus() const { return status_; }
+    
+    void SetStatus(Status status) { status_ = status; }
+    
+   private:
+    friend class boost::serialization::access;
+    template<class Archive> void serialize(Archive& ar, unsigned version);
+  };
 
-private:
+  /**
+   * Returns a summary of a given waveform/status information.
+   * 
+   * @return ADULTERATED/SHADY if any included status compound is ADULTERATED/SHADY,
+   * or VIRGINAL.
+   */
+  static Status GetStatus(const std::vector<StatusCompound>& waveformInfo);
+
+ private:
   double startTime_;
   double binWidth_;
   std::vector<double> waveform_;
   std::vector<StatusCompound> waveformInfo_;
   Source source_;
   
-public:
+ public:
   I3Waveform() {}
   
   virtual ~I3Waveform();
@@ -146,7 +153,7 @@ public:
 
   void SetSource(Source source){source_ = source;}
 
-private:
+ private:
   friend class boost::serialization::access;
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
