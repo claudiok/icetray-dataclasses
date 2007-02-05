@@ -9,7 +9,6 @@
 #ifndef I3MCHIT_H_INCLUDED
 #define I3MCHIT_H_INCLUDED
 
-#include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
 #include "dataclasses/OMKey.h"

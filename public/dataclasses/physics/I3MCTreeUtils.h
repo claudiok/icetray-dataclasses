@@ -11,7 +11,6 @@
 #include "dataclasses/physics/I3MCTree.h"
 #include "dataclasses/physics/I3MCList.h"
 #include "dataclasses/physics/I3MCHit.h"
-#include "icetray/I3DefaultName.h"
 
 namespace I3MCTreeUtils
 {
