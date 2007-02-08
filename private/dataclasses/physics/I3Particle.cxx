@@ -71,7 +71,7 @@ string I3Particle::GetTypeString() const
   case CRSilicon:  return("CRSilicon");
   case CRIron:     return("CRIron");
   case Elph:       return("Elph");
-  default:         return("undefined particle type");
+  default:         return("undefined_particle_type");
   }
 }
 
@@ -86,7 +86,7 @@ string I3Particle::GetShapeString() const
   case StartingTrack:  return("StartingTrack");
   case StoppingTrack:  return("StoppingTrack");
   case ContainedTrack: return("ContainedTrack");
-  default:             return("undefined particle shape");
+  default:             return("undefined_particle_shape");
   }
 }
 
@@ -100,7 +100,7 @@ string I3Particle::GetFitStatusString() const
   case FailedToConverge:    return("FailedToConverge");
   case MissingSeed:         return("MissingSeed");
   case InsufficientQuality: return("InsufficientQuality");
-  default:                  return("undefined fit status");
+  default:                  return("undefined_fit_status");
   }
 }
 
@@ -110,7 +110,7 @@ string I3Particle::GetLocationTypeString() const
   case Anywhere: return("Anywhere");
   case IceTop:   return("IceTop");
   case InIce:    return("InIce");
-  default:       return("undefined location type");
+  default:       return("undefined_location_type");
   }
 }
 
