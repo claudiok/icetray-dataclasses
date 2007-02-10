@@ -48,7 +48,7 @@ class I3TWRLaunch
    * 
    * @param baseline The baseline/mean value.
    */
-  void SetBaseline(unsigned int baseline){ baseline_ = baseline_; }
+  void SetBaseline(unsigned int baseline){ baseline_ = baseline; }
   /** Provides access to the waveform's fragments.
    * 
    * @return Collection of waveform fragments.
