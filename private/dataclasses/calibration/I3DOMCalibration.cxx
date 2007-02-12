@@ -6,7 +6,7 @@
 #include <dataclasses/calibration/I3DOMCalibration.h>
 #include <dataclasses/I3Units.h>
 
-I3DOMCalibration::~I3DOMCalibration() { }
+I3DOMCalibration::~I3DOMCalibration() { } 
 
 I3DOMCalibration::I3DOMCalibration()
   : temperature_(NAN),
@@ -164,6 +164,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
   ar & make_nvp("fadcBaseline",fadcBaselineFit_);
+
   if(version > 0)
   {
     ar & make_nvp("fadcDeltaT", fadcDeltaT_);
@@ -182,6 +183,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   if (version > 1)
   {
       ar & make_nvp("domcalVersion", domcalVersion_);
+      ar & make_nvp("tauparameters", tauparameters_);
   }
   
 }

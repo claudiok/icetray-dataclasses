@@ -1,4 +1,3 @@
-
 /**
  *
  * Definition of I3DOMCalibration class
@@ -64,6 +63,8 @@ struct QuadraticFit
 
 };
 
+
+
 /**
  * @brief Class that stores the calibration information for a DOM
  * 
@@ -84,16 +85,16 @@ struct QuadraticFit
  */
 
 class I3DOMCalibration {
-
-public:
+  
+ public:
   I3DOMCalibration();
   virtual ~I3DOMCalibration();
-    
+  
   /**
    * Get MB Temperature at time of calibration
    */
   double GetTemperature() const { return temperature_; }
-
+  
   /**
    * Set MB Temperature at time of calibration
    */
@@ -140,6 +141,7 @@ public:
    */
   double GetFrontEndImpedance() const { return frontEndImpedance_; }
     
+
   /**
    * Set FADC calibration parameters. Currently the FADC
    * calibration is a work in progress and a moving target
@@ -179,7 +181,8 @@ public:
    * the sampling rate calibration for each ATWD chip 0 or 1 
    */
   QuadraticFit GetATWDFreqFit (unsigned int chip) const;
-    
+  
+ 
   /**
    * Set parameters for sampling rate calibration for each 
    * ATWD chip as a function of the trigger_bias DAC setting
@@ -206,46 +209,51 @@ public:
 			  unsigned int bin,
 			  LinearFit fitParams);
 
-    /**
-     *  Get/Set the version of DOMCal.
-     */
-    string GetDOMCalVersion() const
-	{
-	    return domcalVersion_;
-	}	
-    
-    void SetDOMCalVersion(string version)
-	{
-	    domcalVersion_ = version;
-	}
-    
+  /**
+   *  Get/Set the version of DOMCal.
+   */
+  string GetDOMCalVersion() const
+  {
+    return domcalVersion_;
+  }	
+  
+  void SetDOMCalVersion(string version)
+  {
+    domcalVersion_ = version;
+  }
+  
   template <class Archive>
-  void serialize(Archive& ar, unsigned version);
+    void serialize(Archive& ar, unsigned version);
     
-private:
+ private:
   static const unsigned int N_ATWD_BINS = 128;
   
   //  Number of ATWD channels is set to 3 (4th ATWD channel doesn't
   //  have DOMCAL now)
   static const unsigned int N_ATWD_CHANNELS = 3;
-
+  
   double  temperature_;
-    
+ 
   /**
    * Gain and pedestal values for FADC
    */
   double fadcGain_;
   LinearFit fadcBaselineFit_;
-
-    /**
-     *	FADC inherent time offset (ns)
-     */
-    double fadcDeltaT_;
-    /**
-     *	Front-end impedance (Ohms)
-     */
-    double frontEndImpedance_;
-   
+  
+  /**
+   *	FADC inherent time offset (ns)
+   */
+  double fadcDeltaT_;
+  /**
+   *	Front-end impedance (Ohms)
+   */
+  double frontEndImpedance_;
+  
+  /**
+   *   Parameters for droop correction   
+   */
+  vector<double> tauparameters_;
+  
   /**
    * Gain for ATWD channels.
    * The key corresponds to the channel (0,1,2)
@@ -255,7 +263,7 @@ private:
   /**
    * Linear fit for each ATWD sampling frequency, one for each chip (0,1)
    * As of DOMCAL 5.14, this will be a quadratic fit.  So, use a Quadratic fit
-   * and asuume a linear fit if quadFitC==NULL.
+   * and assume a linear fit if quadFitC==NULL.
    */
   map<unsigned int, QuadraticFit> atwdFreq_;
 
