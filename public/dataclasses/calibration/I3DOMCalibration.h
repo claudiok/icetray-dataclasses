@@ -141,6 +141,17 @@ class I3DOMCalibration {
    */
   double GetFrontEndImpedance() const { return frontEndImpedance_; }
     
+  /**
+   * Get parameters for droop correction on the baseline
+   */
+  vector<double> GetTauParameters() const { return tauparameters_; }
+  
+  /**
+   * Set parameters for droop correction on the baseline
+   */
+  void SetTauParameters(vector<double> tauparameters) { tauparameters_ = tauparameters; }
+
+
 
   /**
    * Set FADC calibration parameters. Currently the FADC
