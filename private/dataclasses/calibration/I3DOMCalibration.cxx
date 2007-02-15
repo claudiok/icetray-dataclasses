@@ -181,10 +181,14 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   }
 
   if (version > 1)
-  {
+    {
       ar & make_nvp("domcalVersion", domcalVersion_);
+    }
+  if (version > 2)
+    {
       ar & make_nvp("tauparameters", tauparameters_);
-  }
+      
+    }
   
 }
 
