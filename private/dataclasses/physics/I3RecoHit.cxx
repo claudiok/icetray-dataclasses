@@ -17,6 +17,4 @@ I3RecoHit::serialize(Archive& ar, unsigned version)
 
 I3_SERIALIZABLE(I3RecoHit);
 
-I3_SERIALIZABLE(I3RecoHitSeries);
-
 I3_SERIALIZABLE(I3RecoHitSeriesMap);

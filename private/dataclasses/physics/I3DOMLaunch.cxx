@@ -66,5 +66,4 @@ void I3DOMLaunch::serialize(Archive& ar, unsigned version)
 
 I3_SERIALIZABLE(I3DOMLaunch);
 
-I3_SERIALIZABLE(I3DOMLaunchSeries);
 I3_SERIALIZABLE(I3DOMLaunchSeriesMap);

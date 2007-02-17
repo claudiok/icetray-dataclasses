@@ -58,5 +58,4 @@ void I3Waveform::serialize(Archive& ar, unsigned version)
 
 I3_SERIALIZABLE(I3Waveform);
 
-I3_SERIALIZABLE(I3WaveformSeries);
 I3_SERIALIZABLE(I3WaveformSeriesMap);
