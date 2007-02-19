@@ -42,14 +42,17 @@ struct I3Vector : public std::vector<T>, public I3FrameObject
   }
 };
 
+// important to use the raw types here.  Don't do I3Vector<int64_t>, as that
+// will be I3Vector<long> some places and I3Vector<long long> others, and then
+// dynamic casting breaks since the two have different typeids. 
 typedef I3Vector<bool> I3VectorBool;
 typedef I3Vector<char> I3VectorChar;
 typedef I3Vector<short> I3VectorShort;
 typedef I3Vector<unsigned short> I3VectorUShort;
 typedef I3Vector<int> I3VectorInt;
 typedef I3Vector<unsigned int> I3VectorUInt;
-typedef I3Vector<int64_t> I3VectorInt64;
-typedef I3Vector<uint64_t> I3VectorUInt64;
+typedef I3Vector<long long> I3VectorInt64;
+typedef I3Vector<unsigned long long> I3VectorUInt64;
 typedef I3Vector<string> I3VectorString;
 typedef I3Vector<float> I3VectorFloat;
 typedef I3Vector<double> I3VectorDouble;
