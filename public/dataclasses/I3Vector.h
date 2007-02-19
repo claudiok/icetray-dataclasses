@@ -42,18 +42,35 @@ struct I3Vector : public std::vector<T>, public I3FrameObject
   }
 };
 
-typedef I3Vector<string> I3VectorString;
-typedef I3Vector<double> I3VectorDouble;
-typedef I3Vector<int> I3VectorInt;
 typedef I3Vector<bool> I3VectorBool;
+typedef I3Vector<char> I3VectorChar;
+typedef I3Vector<short> I3VectorShort;
+typedef I3Vector<unsigned short> I3VectorUShort;
+typedef I3Vector<int> I3VectorInt;
+typedef I3Vector<unsigned int> I3VectorUInt;
+typedef I3Vector<int64_t> I3VectorInt64;
+typedef I3Vector<uint64_t> I3VectorUInt64;
+typedef I3Vector<string> I3VectorString;
+typedef I3Vector<float> I3VectorFloat;
+typedef I3Vector<double> I3VectorDouble;
+
 typedef I3Vector<OMKey> I3VectorOMKey;
+
+I3_POINTER_TYPEDEFS(I3VectorBool);
+I3_POINTER_TYPEDEFS(I3VectorChar);
+I3_POINTER_TYPEDEFS(I3VectorInt);
+I3_POINTER_TYPEDEFS(I3VectorUInt);
+I3_POINTER_TYPEDEFS(I3VectorInt64);
+I3_POINTER_TYPEDEFS(I3VectorUInt64);
+I3_POINTER_TYPEDEFS(I3VectorFloat);
+I3_POINTER_TYPEDEFS(I3VectorDouble);
+I3_POINTER_TYPEDEFS(I3VectorString);
+
+I3_POINTER_TYPEDEFS(I3VectorOMKey);
+
+// inconsistent
 typedef I3Vector<unsigned int> I3VectorUnsignedInt;
 I3_POINTER_TYPEDEFS(I3VectorUnsignedInt);
-I3_POINTER_TYPEDEFS(I3VectorString);
-I3_POINTER_TYPEDEFS(I3VectorDouble);
-I3_POINTER_TYPEDEFS(I3VectorInt);
-I3_POINTER_TYPEDEFS(I3VectorBool);
-I3_POINTER_TYPEDEFS(I3VectorOMKey);
 
 #endif // I3VECTOR_H_INCLUDED
 
