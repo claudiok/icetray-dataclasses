@@ -22,8 +22,8 @@
  * @brief A small class which is the "key" for the trigger status/config map 
  * in I3DetectorStatus.
  * 
- * In DAQ, triggers are identified in "event data" by three IDs.
- * These three IDs make a "unique" identifier that can be used to look up
+ * Triggers are identified by three IDs in the IceCube DAQ system/global trigger.
+ * These three IDs make an "unique" identifier that can be used to look up
  * additional trigger information like "prescale" for "MIN_BIAS" triggers
  * or "threshold" and "timeWindow" for "SIMPLE_MULTIPLICITY" triggers.
  * 
@@ -31,33 +31,37 @@
  *  - Source ID
  *  - Type ID
  *  - Config ID
- *
  * 
- * 
- * (Go bug the DAQ SW folks for more info. I can't make this stuff up.)
+ * Software triggers from the TWR DAQ system are somewhat special, if processed
+ * by the global trigger. A configuration that corresponds to a given source,
+ * type and config ID triplet describes how the trigger is processed by
+ * global trigger, but it carries no information about the TWR DAQ trigger system.
+ * There is no more difference between a simple multiplicity of 18 or 24. Thus is
+ * this triplet complemented by a subtype - it will only be used in connection with
+ * software triggers.
  */
 class TriggerKey
 {
-public:
+ public:
   /**
    * Enumeration describing what "subdetector" issued a trigger.
    */
   enum SourceID	     // probably incomplete enumeration of trigger sources
   {
-    IN_ICE = 0,           //InIce trigger system
-    ICE_TOP = 10,         //IceTop trigger system
-    AMANDA_TWR_DAQ = 20,  //AMANDA TWR DAq triggers
-    EXTERNAL = 30,        //Some external trigger
-    GLOBAL = 40,          //IceCube global trigger system
-    AMANDA_MUON_DAQ = 50, //AMANDA Mu daq triggers
-    SPASE = 70,           //A trigger from the SPASE shack
-    UNKNOWN_SOURCE = 80   //A mysterious source
+    IN_ICE = 0,           // InIce trigger system
+    ICE_TOP = 10,         // IceTop trigger system
+    AMANDA_TWR_DAQ = 20,  // AMANDA TWR DAQ triggers
+    EXTERNAL = 30,        // Some external trigger
+    GLOBAL = 40,          // IceCube global trigger system
+    AMANDA_MUON_DAQ = 50, // AMANDA Muon DAQ triggers
+    SPASE = 70,           // A trigger from the SPASE shack
+    UNKNOWN_SOURCE = 80   // A mysterious source
   };
 
   /**
    * Enumeration describing what "algorithm" issued a trigger.
    * More details about a specific trigger can be stored in the
-   * I3TriggerStatus map in the I3Detector Status frame
+   * I3TriggerStatus maps as part of the detector status
    */
   enum TypeID         // probably incomplete enumeration of trigger types
   {
@@ -68,12 +72,29 @@ public:
     TWO_COINCIDENCE = 40,      // IceCube global trigger:  combined 2 trigs
     THREE_COINCIDENCE = 50,    // IceCube global trigger:  combined 3 trigs
     MERGED = 70,               // A trigger from a merging of events
-    FRAGMENT_MULTIPLICITY = 105, //TWR trigger based on fragment counts
+    FRAGMENT_MULTIPLICITY = 105, // TWR trigger based on fragment counts
     STRING = 120,              // A trigger based on # hits in a string
     VOLUME = 125,              // A volume/geometry specific trigger
     SPHERE = 127,
     SPASE_2 = 170,             // SPASE trigger
+                               // ... I still don't understand for what this is needed for,
+                               // ... or why this isn't a value of SourceID (SPASE_1/SPASE_2)
+                               // ... (tschmidt)
     UNKNOWN_TYPE = 180               
+  };
+  
+  /**
+   * Enumeration describing how a software trigger was orginally "configured"
+   * within the TWR DAQ trigger system.
+   */
+  enum SubtypeID
+  {
+    NO_SUBTYPE = 0,
+    M18 = 50,
+    M24 = 100,
+    T0 = 150,
+    LASER = 200,
+    UNKNOWN_SUBTYPE = 250
   };
 
 
@@ -93,18 +114,19 @@ public:
    */
   static const char* GetTypeString(TypeID type);
 
-private:
+ private:
   SourceID source_;
   TypeID type_;
+  SubtypeID subtype_;
   int configID_;
   bool configIDSet_;
 
-public:
+ public:
   /**
    * Default constructor.
    */
   TriggerKey()
-    : source_(UNKNOWN_SOURCE), type_(UNKNOWN_TYPE),
+    : source_(UNKNOWN_SOURCE), type_(UNKNOWN_TYPE), subtype_(NO_SUBTYPE),
       configIDSet_(false) {}
 
   /**
@@ -112,9 +134,11 @@ public:
    * 
    * @param source Source ID.
    * @param type Type ID.
+   * @param subtype Subtype ID (optional; default is NO_SUBTYPE).
    */
-  TriggerKey(SourceID source, TypeID type)
-    : source_(source), type_(type), configIDSet_(false) {}
+  TriggerKey(SourceID source, TypeID type, SubtypeID subtype = NO_SUBTYPE)
+    : source_(source), type_(type), subtype_(subtype),
+      configIDSet_(false) {}
 
   /**
    * Constructor.
@@ -122,9 +146,11 @@ public:
    * @param source Source ID.
    * @param type Type ID.
    * @param configID Configuration ID.
+   * @param subtype Subtype ID (optional; default is NO_SUBTYPE).
    */
-  TriggerKey(SourceID source, TypeID type, int configID)
-    : source_(source), type_(type), configID_(configID), configIDSet_(true) {}
+  TriggerKey(SourceID source, TypeID type, int configID, SubtypeID subtype = NO_SUBTYPE)
+    : source_(source), type_(type), subtype_(subtype),
+      configID_(configID), configIDSet_(true) {}
 
   /**
    * Destructor.
@@ -192,6 +218,26 @@ public:
   }
 
   /**
+   * Retrieves the subtype ID.
+   * 
+   * @return Subtype ID.
+   */
+  SubtypeID GetSubtype() const
+  {
+    return subtype_;
+  }
+
+  /**
+   * Sets the subtype ID.
+   * 
+   * @param subtype Subtype ID.
+   */
+  void SetSubtype(SubtypeID subtype)
+  {
+    subtype_ = subtype;
+  }
+
+  /**
    * Indicates, if a configuration ID is set.
    * 
    * The triplet of (SourceID source, TypeID type, int configID)
@@ -241,13 +287,14 @@ public:
    * Equality operator.
    * 
    * @param rhs The trigger key to compare this one to.
-   * @return true if source ID, type ID and configuration ID of the two
+   * @return true if source, type, subtype and configuration ID of the two
    * trigger keys match.
    */
   bool operator==(const TriggerKey& rhs) const
   {
     return((rhs.source_ == source_)
            && (rhs.type_ == type_)
+           && (rhs.subtype_ == subtype_)
            && ((!rhs.configIDSet_ && !configIDSet_)
                || (rhs.configIDSet_ && configIDSet_
                    && (rhs.configID_ == configID_))));
@@ -257,7 +304,7 @@ public:
    * Inequality operator.
    * 
    * @param rhs The trigger key to compare this one to.
-   * @return false if source ID, type ID and configuration ID of the two
+   * @return false if source, type, subtype and configuration ID of the two
    * trigger keys are different.
    */
   bool operator!= (const TriggerKey & rhs) const
@@ -265,7 +312,7 @@ public:
     return !(rhs == *this);
   }
 
-private:
+ private:
   friend class boost::serialization::access;
   template <class Archive> void serialize (Archive& ar, unsigned version);
 
@@ -274,10 +321,13 @@ private:
   SET_LOGGER("TriggerKey");
 };
 
+BOOST_CLASS_VERSION(TriggerKey, 1);
+
 /**
  * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(TriggerKey);
+
 
 /**
  * Comparison operator. Required to use TriggerKeys as a key of a map.
@@ -285,10 +335,9 @@ I3_POINTER_TYPEDEFS(TriggerKey);
  * @param rhs the right-hand trigger key.
  * @return true if the lhs should be ordered before the rhs.
  *
- * Precedence between source ID, type ID and configuration ID is somewhat 
- * arbitrary,
+ * Precedence between source, type, subtype and configuration ID is somewhat arbitrary,
  * so I've picked:
- * source ID, type ID, configuration ID in order of descending importance.
+ * source, type, subtype, configuration ID in order of descending importance.
  */
 inline bool
 operator<(const TriggerKey& lhs, const TriggerKey& rhs)
@@ -297,13 +346,16 @@ operator<(const TriggerKey& lhs, const TriggerKey& rhs)
     return true;
   if(lhs.GetSource() > rhs.GetSource())
     return false;
-  //OK, so the source ID are equal so far ... continue.
   if(lhs.GetType() < rhs.GetType())
     return true;
   if(lhs.GetType() > rhs.GetType())
     return false;
+  if(lhs.GetSubtype() < rhs.GetSubtype())
+    return true;
+  if(lhs.GetSubtype() > rhs.GetSubtype())
+    return false;
 
-  // OK, so the source ID and type ID are equal ... save us configID!
+  // OK, so the source ID and type ID etc. are equal ... save us configID!
   return((!lhs.CheckConfigID() && rhs.CheckConfigID())
          || (lhs.CheckConfigID() && rhs.CheckConfigID()
              && lhs.GetConfigID() < rhs.GetConfigID()));
@@ -323,6 +375,7 @@ operator>=(const TriggerKey& lhs, const TriggerKey& rhs)
   return !(lhs < rhs);
 }
 
+
 /**
  * Comparison operator.
  * @param lhs the left-hand trigger key.
@@ -334,6 +387,7 @@ operator>(const TriggerKey& lhs, const TriggerKey& rhs)
 {
   return((lhs >= rhs) && (lhs != rhs));
 }
+
 
 /**
  * Comparison operator.
@@ -347,6 +401,5 @@ operator<=(const TriggerKey& lhs, const TriggerKey& rhs)
 {
   return !(lhs > rhs);
 }
-
 
 #endif

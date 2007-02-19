@@ -23,14 +23,14 @@ TriggerKey::GetSourceString(SourceID source)
       return("IN_ICE");
     case ICE_TOP:
       return("ICE_TOP");
+    case AMANDA_TWR_DAQ:
+      return("AMANDA_TWR_DAQ");
     case EXTERNAL:
       return("EXTERNAL");
     case GLOBAL:
       return("GLOBAL");
     case AMANDA_MUON_DAQ:
       return("AMANDA_MUON_DAQ");
-    case AMANDA_TWR_DAQ:
-      return("AMANDA_TWR_DAQ");
     case SPASE:
       return("SPASE");
     case UNKNOWN_SOURCE:
@@ -87,9 +87,12 @@ void TriggerKey::serialize(Archive& ar, unsigned version)
 {
   ar & make_nvp("SourceID", source_);
   ar & make_nvp("TypeID", type_);
+  // for version > 0 there is a subtype ID to be serialized
+  // for version <= 0 there is no subtype ID available ... use default value instead
+  if(version > 0) ar & make_nvp("SubtypeID", subtype_);
+  else subtype_ = NO_SUBTYPE;
   ar & make_nvp("ConfigIDSet", configIDSet_);
-  if (configIDSet_)
-    ar & make_nvp("ConfigID", configID_);
+  if (configIDSet_) ar & make_nvp("ConfigID", configID_);
 }
 
   
