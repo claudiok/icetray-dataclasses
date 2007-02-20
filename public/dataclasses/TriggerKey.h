@@ -38,7 +38,8 @@
  * global trigger, but it carries no information about the TWR DAQ trigger system.
  * There is no more difference between a simple multiplicity of 18 or 24. Thus is
  * this triplet complemented by a subtype - it will only be used in connection with
- * software triggers.
+ * software triggers. The subtype will also avoid ambiguities, when decoding data
+ * from IceCube DAQ/global trigger.
  */
 class TriggerKey
 {
