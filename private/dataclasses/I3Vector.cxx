@@ -4,14 +4,14 @@
 #include <string>
 
 I3_SERIALIZABLE(I3VectorBool);
-I3_SERIALIZABLE(I3Vector<char>);
+I3_SERIALIZABLE(I3VectorChar);
 
 I3_SERIALIZABLE(I3VectorShort);
 I3_SERIALIZABLE(I3VectorUShort);
 I3_SERIALIZABLE(I3VectorInt);
-I3_SERIALIZABLE(I3Vector<unsigned int>);
-I3_SERIALIZABLE(I3Vector<long long>);
-I3_SERIALIZABLE(I3Vector<unsigned long long>);
+I3_SERIALIZABLE(I3VectorUnsignedInt); // this is anomalous... but *dont* change it
+I3_SERIALIZABLE(I3VectorInt64);
+I3_SERIALIZABLE(I3VectorUInt64);
 
 I3_SERIALIZABLE(I3VectorFloat);
 I3_SERIALIZABLE(I3VectorDouble);

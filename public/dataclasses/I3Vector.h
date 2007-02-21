@@ -71,7 +71,9 @@ I3_POINTER_TYPEDEFS(I3VectorString);
 
 I3_POINTER_TYPEDEFS(I3VectorOMKey);
 
-// inconsistent
+// inconsistent... if you take this out, though, you have to be sure
+// that you add it to I3Vector.cxx so that I3VectorUnsignedInt is
+// always serialized with that name.  
 typedef I3Vector<unsigned int> I3VectorUnsignedInt;
 I3_POINTER_TYPEDEFS(I3VectorUnsignedInt);
 
