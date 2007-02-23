@@ -145,15 +145,11 @@ I3MCTreeUtils::Get(I3FramePtr frame, const string& key1, const string& key2){
 
 //------------------------------
 
-//vector<I3Particle>::const_iterator
 I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticPrimary(const I3MCTree& t)
 {
   double maxenergy = 0.;
-  //const vector<I3Particle>& v = GetPrimaries(t);
-  //vector<I3Particle>::const_iterator iter, iter_return;
   I3MCTree::iterator iter, iter_return;
-  //for (iter=v.begin(); iter!=v.end(); iter++) {
   for (iter=t.begin(); iter!=t.end(); iter++) {
     if (iter->GetEnergy()>maxenergy && !HasParent(t,*iter)) {
       maxenergy = iter->GetEnergy();
@@ -163,28 +159,11 @@ I3MCTreeUtils::GetMostEnergeticPrimary(const I3MCTree& t)
   return iter_return;
 }
 
-//vector<I3Particle>::const_iterator
 I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticPrimary(I3MCTreeConstPtr t)
 {
   return GetMostEnergeticPrimary(*t);
 }
-
-/*
-I3MCTree::iterator
-I3MCTreeUtils::GetMostEnergetic(const I3MCTree& t, bool b)
-{
-  double maxenergy = 0.;
-  I3MCTree::iterator iter, iter_return;
-  for (iter=t.begin(); iter!=t.end(); ++iter) {
-    if (iter->GetEnergy()>maxenergy && b) {
-      maxenergy = iter->GetEnergy();
-      iter_return = iter;
-    }
-  }
-  return iter_return;
-}
-*/
 
 I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
