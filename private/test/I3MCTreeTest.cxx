@@ -337,3 +337,68 @@ TEST(get_mctree_from_frame){
   ENSURE(t5->size() == 9); 
   ENSURE(t6->size() == 9); 
 }
+
+TEST(most_energetic)
+{
+  I3Particle p1, p2;
+  I3Particle m1, m2, m3;
+  I3Particle c1, c2, c3; 
+
+  p1.SetEnergy(500);
+  p2.SetEnergy(700);
+
+  m1.SetLocationType(I3Particle::InIce);
+  m1.SetType(I3Particle::MuPlus);
+  m1.SetEnergy(100);
+  m2.SetLocationType(I3Particle::InIce);
+  m2.SetType(I3Particle::MuMinus);
+  m2.SetEnergy(300);
+  m3.SetLocationType(I3Particle::InIce);
+  m3.SetType(I3Particle::TauPlus);
+  m3.SetEnergy(200);
+
+  c1.SetLocationType(I3Particle::InIce);
+  c1.SetType(I3Particle::EPlus);
+  c1.SetEnergy(400);
+  c2.SetLocationType(I3Particle::InIce);
+  c2.SetType(I3Particle::Brems);
+  c2.SetEnergy(600);
+  c3.SetLocationType(I3Particle::InIce);
+  c3.SetType(I3Particle::DeltaE);
+  c3.SetEnergy(500);
+
+  I3MCTree t;
+  I3MCTreeUtils::AddPrimary(t,p1);
+  I3MCTreeUtils::AddPrimary(t,p2);
+  I3MCTreeUtils::AppendChild(t,p2,m1);
+  I3MCTreeUtils::AppendChild(t,p2,m2);
+  I3MCTreeUtils::AppendChild(t,p2,m3);
+  I3MCTreeUtils::AppendChild(t,m2,c1);
+  I3MCTreeUtils::AppendChild(t,m2,c2);
+  I3MCTreeUtils::AppendChild(t,m2,c3);
+
+  I3MCTree::iterator p = I3MCTreeUtils::GetMostEnergeticPrimary(t);
+  ENSURE(p->GetEnergy()==700);
+  ENSURE(p->GetMinorID()==p2.GetMinorID());
+
+  p = I3MCTreeUtils::GetMostEnergeticInIce(t);
+  ENSURE(p->GetEnergy()==600);
+  ENSURE(p->GetMinorID()==c2.GetMinorID());
+
+  p = I3MCTreeUtils::GetMostEnergeticTrack(t);
+  ENSURE(p->GetEnergy()==300);
+  ENSURE(p->GetMinorID()==m2.GetMinorID());
+
+  p = I3MCTreeUtils::GetMostEnergeticCascade(t);
+  ENSURE(p->GetEnergy()==600);
+  ENSURE(p->GetMinorID()==c2.GetMinorID());
+
+  I3Particle px;
+  px.SetType(I3Particle::MuPlus);
+  px.SetEnergy(1000);
+  I3MCTreeUtils::AppendChild(t,p1,px);
+
+  p = I3MCTreeUtils::GetMostEnergeticInIce(t);
+  ENSURE(p->GetEnergy()==600);
+  ENSURE(p->GetMinorID()==c2.GetMinorID());
+}

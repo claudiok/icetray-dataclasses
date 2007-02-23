@@ -143,7 +143,50 @@ I3MCTreeUtils::Get(I3FramePtr frame, const string& key1, const string& key2){
   return I3MCTreeConstPtr();
 }
 
-const I3Particle& 
+//------------------------------
+
+//vector<I3Particle>::const_iterator
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticPrimary(const I3MCTree& t)
+{
+  double maxenergy = 0.;
+  //const vector<I3Particle>& v = GetPrimaries(t);
+  //vector<I3Particle>::const_iterator iter, iter_return;
+  I3MCTree::iterator iter, iter_return;
+  //for (iter=v.begin(); iter!=v.end(); iter++) {
+  for (iter=t.begin(); iter!=t.end(); iter++) {
+    if (iter->GetEnergy()>maxenergy && !HasParent(t,*iter)) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+//vector<I3Particle>::const_iterator
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticPrimary(I3MCTreeConstPtr t)
+{
+  return GetMostEnergeticPrimary(*t);
+}
+
+/*
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergetic(const I3MCTree& t, bool b)
+{
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return;
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && b) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+*/
+
+I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
 {
   double maxenergy = 0.;
@@ -155,15 +198,78 @@ I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
       iter_return = iter;
     }
   }
-  return *iter_return;
+  return iter_return;
 }
 
-const I3Particle& 
+I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticInIce(I3MCTreeConstPtr t)
 {
   return GetMostEnergeticInIce(*t);
 }
 
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergetic(const I3MCTree& t,
+				I3Particle::ParticleType type)
+{
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return;
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && iter->GetType()==type) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergetic(I3MCTreeConstPtr t,
+				I3Particle::ParticleType type)
+{
+  return GetMostEnergetic(*t, type);
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticTrack(const I3MCTree& t)
+{
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return;
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && iter->IsTrack()) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticTrack(I3MCTreeConstPtr t)
+{
+  return GetMostEnergeticTrack(*t);
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticCascade(const I3MCTree& t)
+{
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return;
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && iter->IsCascade()) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticCascade(I3MCTreeConstPtr t)
+{
+  return GetMostEnergeticCascade(*t);
+}
+
+//------------------------------
 
 const vector<I3Particle> 
 I3MCTreeUtils::Get(const I3MCTree& t, I3Particle::LocationType l)
