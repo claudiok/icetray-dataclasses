@@ -393,12 +393,27 @@ TEST(most_energetic)
   ENSURE(p->GetEnergy()==600);
   ENSURE(p->GetMinorID()==c2.GetMinorID());
 
+  p = I3MCTreeUtils::GetMostEnergetic(t,I3Particle::MuPlus);
+  ENSURE(p->GetEnergy()==100);
+  ENSURE(p->GetMinorID()==m1.GetMinorID());
+
   I3Particle px;
   px.SetType(I3Particle::MuPlus);
   px.SetEnergy(1000);
   I3MCTreeUtils::AppendChild(t,p1,px);
-
   p = I3MCTreeUtils::GetMostEnergeticInIce(t);
   ENSURE(p->GetEnergy()==600);
   ENSURE(p->GetMinorID()==c2.GetMinorID());
+
+  I3MCTree t2;
+  p = I3MCTreeUtils::GetMostEnergeticPrimary(t2);
+  ENSURE(p==t2.end());
+  p = I3MCTreeUtils::GetMostEnergeticInIce(t2);
+  ENSURE(p==t2.end());
+  p = I3MCTreeUtils::GetMostEnergeticTrack(t2);
+  ENSURE(p==t2.end());
+  p = I3MCTreeUtils::GetMostEnergeticCascade(t2);
+  ENSURE(p==t2.end());
+  p = I3MCTreeUtils::GetMostEnergetic(t2,I3Particle::MuPlus);
+  ENSURE(p==t2.end());
 }

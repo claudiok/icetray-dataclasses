@@ -149,7 +149,7 @@ I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticPrimary(const I3MCTree& t)
 {
   double maxenergy = 0.;
-  I3MCTree::iterator iter, iter_return;
+  I3MCTree::iterator iter, iter_return = t.end();
   for (iter=t.begin(); iter!=t.end(); iter++) {
     if (iter->GetEnergy()>maxenergy && !HasParent(t,*iter)) {
       maxenergy = iter->GetEnergy();
@@ -169,7 +169,7 @@ I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticInIce(const I3MCTree& t)
 {
   double maxenergy = 0.;
-  I3MCTree::iterator iter, iter_return;
+  I3MCTree::iterator iter, iter_return = t.end();
   for (iter=t.begin(); iter!=t.end(); ++iter) {
     if (iter->GetEnergy()>maxenergy && 
 	iter->GetLocationType()==I3Particle::InIce) {
@@ -191,7 +191,7 @@ I3MCTreeUtils::GetMostEnergetic(const I3MCTree& t,
 				I3Particle::ParticleType type)
 {
   double maxenergy = 0.;
-  I3MCTree::iterator iter, iter_return;
+  I3MCTree::iterator iter, iter_return = t.end();
   for (iter=t.begin(); iter!=t.end(); ++iter) {
     if (iter->GetEnergy()>maxenergy && iter->GetType()==type) {
       maxenergy = iter->GetEnergy();
@@ -212,7 +212,7 @@ I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticTrack(const I3MCTree& t)
 {
   double maxenergy = 0.;
-  I3MCTree::iterator iter, iter_return;
+  I3MCTree::iterator iter, iter_return = t.end();
   for (iter=t.begin(); iter!=t.end(); ++iter) {
     if (iter->GetEnergy()>maxenergy && iter->IsTrack()) {
       maxenergy = iter->GetEnergy();
@@ -232,7 +232,7 @@ I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticCascade(const I3MCTree& t)
 {
   double maxenergy = 0.;
-  I3MCTree::iterator iter, iter_return;
+  I3MCTree::iterator iter, iter_return = t.end();
   for (iter=t.begin(); iter!=t.end(); ++iter) {
     if (iter->GetEnergy()>maxenergy && iter->IsCascade()) {
       maxenergy = iter->GetEnergy();
