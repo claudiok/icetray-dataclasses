@@ -30,9 +30,9 @@ private:
   double     time_;             // Time at which the trigger was issued
   double     length_;           // Duration of triggered readout window
   bool       fired_;            // True, if trigger fired (used for simulations)
-  TriggerKey key_;              // Trigger key that identifies source, type and config
+  TriggerKey key_;              // Trigger key that identifies source, type, subtype and config
 
-public:
+ public:
   /**
    * Default constructor.
    */
@@ -92,7 +92,7 @@ public:
   const TriggerKey& GetTriggerKey() const {return key_;}
   TriggerKey& GetTriggerKey() {return key_;}
 
-private:
+ private:
   static const double FROM_TENTH_NS_TO_NS_CORRECTION_FACTOR;
   
   

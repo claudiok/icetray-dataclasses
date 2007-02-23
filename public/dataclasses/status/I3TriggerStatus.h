@@ -21,14 +21,14 @@
 /**
  * @brief A trigger status/configuration object.
  *
- * A class describing all additional trigger information beside source and type
- * that are encapsulated in a TriggerKey already.
+ * A class describing all additional trigger information beside source, type
+ * and subtype that are encapsulated in a TriggerKey already.
  * It only consists of 
  * - a name and
  * - a map of trigger settings:  string, integer values,
  * since most trigger information varies by trigger type.
  *
- *  Most probably, these settings are ...<BR>
+ *  For IceCube triggers, these settings are most probably ...<BR>
  * <BR>... simple multiplicity trigger:<BR>
  * "threshold" - number of hits required in a time window<BR>
  * "timeWindow" - lenth of sliding time window (in ns)<BR>
@@ -53,18 +53,14 @@
  * "triggerType3" - trigger type of third trigger<BR>
  * "triggerConfigId3" - trigger config ID of third trigger<BR>
  * "sourceId3" - source ID of third trigger<BR>
- * <BR>... AMANDA multiplicity trigger<BR>
- * "threshold" - number of hits required in a time window<BR>
- * "timeWindow" - lenth of sliding time window (in ns)<BR>
  */
 class I3TriggerStatus 
 {
-private:
+ private:
   std::string name_;
   map<std::string, int> settings_;
 
-public:
-
+ public:
   /**
    * Default constructor.
    */
@@ -102,7 +98,7 @@ public:
   virtual const map<std::string, int>& GetTriggerSettings() const { return settings_; }
   virtual map<std::string, int>& GetTriggerSettings() { return settings_; }  
 
-private:
+ private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 

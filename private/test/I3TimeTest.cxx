@@ -361,6 +361,18 @@ TEST(test_unix_time)
   ENSURE_EQUAL(tm.GetUTCYear(), 2006);
   ENSURE_EQUAL(tm.GetUTCMonth(), I3Time::Nov);
   ENSURE_EQUAL(tm.GetUTCDayOfMonth(), 11);
+
+  tm.SetUnixTime(1704071648);
+  ENSURE_EQUAL(tm.GetUTCYear(), 2024);
+  ENSURE_EQUAL(tm.GetUTCMonth(), I3Time::Jan);
+  ENSURE_EQUAL(tm.GetUTCDayOfMonth(), 1);
+  ENSURE_EQUAL(tm.GetUTCSec(), 4448);
+
+  tm.SetUnixTime(1900800);
+  ENSURE_EQUAL(tm.GetModJulianDay(), 40609);
+
+  tm.SetUnixTime(1308787200);
+  ENSURE_EQUAL(tm.GetModJulianDay(), 55735);
 }
 
 

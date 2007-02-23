@@ -29,7 +29,9 @@
  * top-level object in the frame related to this 'Detector Status' information.
  * Contains: 
  * - map of per DOM configurations (also the list of active DOMs),
- * - map of active triggers (and their configurations) and
+ * - map of per AOM configurations (including AOMs read out by the TWR DAQ),
+ * - map of active icecube triggers (and their configurations),
+ * - map of active amanda triggers (and their configurations) and
  * - map of active domhubs (and their settings) ... eventually.
  */
 struct I3DetectorStatus : public I3FrameObject
@@ -39,6 +41,7 @@ struct I3DetectorStatus : public I3FrameObject
   std::map<OMKey, I3DOMStatus> domStatus;
   std::map<OMKey, TWRAOMStatus> aomStatus;
   std::map<TriggerKey, I3TriggerStatus> triggerStatus;
+  std::map<TriggerKey, I3TriggerStatus> amandaTriggerStatus;
   
   I3DetectorStatus() {}
   
@@ -52,7 +55,7 @@ struct I3DetectorStatus : public I3FrameObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3DetectorStatus, 1);
+BOOST_CLASS_VERSION(I3DetectorStatus, 2);
 
 I3_DEFAULT_NAME(I3DetectorStatus);
 I3_POINTER_TYPEDEFS(I3DetectorStatus);

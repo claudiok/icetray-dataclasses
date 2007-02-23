@@ -20,6 +20,16 @@ I3DetectorStatus::serialize(Archive& ar, unsigned version)
     aomStatus.clear();
   }  
   ar & make_nvp("TriggerStatus", triggerStatus);
+  // for version > 1 there are Amanda trigger stati to be serialized
+  if(version > 1)
+  {
+    ar & make_nvp("AmandaTriggerStatus", amandaTriggerStatus);
+  }
+  // for version <= 1 there are noAmanda trigger stati available
+  else
+  {
+    amandaTriggerStatus.clear();
+  }  
   ar & make_nvp("StartTime", startTime);
   ar & make_nvp("EndTime", endTime);
   //ar & make_nvp("DaqMode", daqMode_);
