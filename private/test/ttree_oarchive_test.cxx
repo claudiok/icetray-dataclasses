@@ -252,4 +252,5 @@ TEST(particle_via_sharedframeobjptr_1)
       ENSURE_DISTANCE(z, db.GetPos().GetZ(), 0.00001);
     }
 }
-#endif
+#endif // not DISABLE_TTREE_OARCHIVE
+#endif // I3_USE_ROOT
