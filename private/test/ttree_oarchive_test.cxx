@@ -1,4 +1,12 @@
-#ifndef DISABLE_TTREE_OARCHIVE
+#include <I3Test.h>
+TEST_GROUP(ttree_oarchive)
+
+#ifdef I3_USE_ROOT
+#ifdef DISABLE_TTREE_OARCHIVE
+
+TEST(disabled) { }
+
+#else
 
 #include <icetray/serialization.h>
 
@@ -25,8 +33,6 @@ using boost::serialization::base_object;
 #include <TFile.h>
 #include <TTree.h>
 #include <boost/preprocessor.hpp>
-
-TEST_GROUP(ttree_oarchive);
 
 const string fname = "I3Particle_via_I3FrameObject.root";
 const unsigned nentries = 50000;
