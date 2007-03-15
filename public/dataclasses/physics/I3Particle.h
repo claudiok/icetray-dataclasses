@@ -214,6 +214,8 @@ BOOST_CLASS_VERSION(I3Particle,2);
 typedef I3Vector<I3Particle> I3ParticleVect;
 I3_POINTER_TYPEDEFS(I3ParticleVect);
 
+typedef vector<I3Particle> I3Particle_vect; // for analysis-tree
+
 #endif 
 
 
