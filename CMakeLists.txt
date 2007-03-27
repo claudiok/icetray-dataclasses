@@ -12,6 +12,7 @@ ROOTCINT(public/dataclasses/I3Position.h
   public/dataclasses/I3Direction.h 
   public/dataclasses/I3Double.h 
   public/dataclasses/I3Time.h 
+  public/dataclasses/I3Bool.h 
   public/dataclasses/physics/I3Particle.h)
 
 TEST_EXECUTABLE(test private/test/*.cxx)
