@@ -23,6 +23,7 @@
 #pragma link C++ class I3Particle_vect+;
 #pragma link C++ class I3Double+;
 #pragma link C++ class I3Time+;
+#pragma link C++ class I3Bool+;
 
 #endif
 

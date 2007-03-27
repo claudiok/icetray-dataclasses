@@ -9,6 +9,7 @@ dataclasses/I3Position.h \
 dataclasses/I3Direction.h \
 dataclasses/I3Double.h \
 dataclasses/I3Time.h \
+dataclasses/I3Bool.h \
 dataclasses/physics/I3Particle.h
 
 GIMP = dataclasses/I3Time.h \
@@ -29,4 +30,4 @@ dataclasses/physics/I3TWRLaunch.h \
 dataclasses/physics/I3TankHit.h \
 dataclasses/physics/I3Trigger.h \
 dataclasses/I3Constants.h \
-dataclasses/I3Units.h
+dataclasses/I3Units.h 
