@@ -89,7 +89,7 @@ namespace I3TreeUtils
 	  return *i;
 	}
       }
-      log_fatal("There is no object with ID = (%li,%i) ",
+      log_fatal("There is no object with ID = (%lli,%i) ",
 		major_id,
 		minor_id);
       return *i;
