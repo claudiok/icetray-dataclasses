@@ -46,5 +46,6 @@ TEST(assignment_copy)
   ENSURE(j.GetTriggerFired() == j.GetTriggerFired());
 
   ENSURE(j.GetTriggerKey().GetSource() == TriggerKey::AMANDA_MUON_DAQ);
+  ENSURE(TriggerKey::GetSourceFromString("AMANDA_MUON_DAQ") == TriggerKey::AMANDA_MUON_DAQ);
 }
 

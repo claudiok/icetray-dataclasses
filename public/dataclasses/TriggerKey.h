@@ -106,6 +106,7 @@ class TriggerKey
    * @return The name.
    */
   static const char* GetSourceString(SourceID source);
+  static SourceID GetSourceFromString(string sourcestr);
 
   /**
    * Returns the name of a type ID.
@@ -114,6 +115,7 @@ class TriggerKey
    * @return The name.
    */
   static const char* GetTypeString(TypeID type);
+  static TypeID GetTypeFromString(string typestr);
 
  private:
   SourceID source_;

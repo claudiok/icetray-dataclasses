@@ -41,6 +41,31 @@ TriggerKey::GetSourceString(SourceID source)
   return NULL;
 }
 
+TriggerKey::SourceID
+TriggerKey::GetSourceFromString(string sourcestr)
+{
+  if (sourcestr=="IN_ICE")
+    return(IN_ICE);
+  if (sourcestr=="ICE_TOP")
+    return(ICE_TOP);
+  if (sourcestr=="AMANDA_TWR_DAQ")
+    return(AMANDA_TWR_DAQ);
+  if (sourcestr=="EXTERNAL")
+    return(EXTERNAL);
+  if (sourcestr=="GLOBAL")
+    return(GLOBAL);
+  if (sourcestr=="AMANDA_MUON_DAQ")
+    return(AMANDA_MUON_DAQ);
+  if (sourcestr=="SPASE")
+    return(SPASE);
+  if (sourcestr=="UNKNOWN_SOURCE")
+    return(UNKNOWN_SOURCE);
+
+  log_warn("undefined source string %s",sourcestr.c_str());
+  
+  return UNKNOWN_SOURCE;
+}
+
 const char *
 TriggerKey::GetTypeString (TypeID type)
 {
@@ -76,6 +101,41 @@ TriggerKey::GetTypeString (TypeID type)
   log_warn("undefined type ID %u",type);
 
   return NULL;
+}
+
+TriggerKey::TypeID
+TriggerKey::GetTypeFromString (string typestr)
+{
+  if (typestr=="SIMPLE_MULTIPLICITY")
+    return(SIMPLE_MULTIPLICITY);
+  if (typestr=="CALIBRATION")
+    return(CALIBRATION);
+  if (typestr=="MIN_BIAS")
+    return(MIN_BIAS);
+  if (typestr=="THROUGHPUT")
+    return(THROUGHPUT);
+  if (typestr=="TWO_COINCIDENCE")
+    return(TWO_COINCIDENCE);
+  if (typestr=="THREE_COINCIDENCE")
+    return(THREE_COINCIDENCE);
+  if (typestr=="MERGED")
+    return(MERGED);
+  if (typestr=="FRAGMENT_MULTIPLICITY")
+    return(FRAGMENT_MULTIPLICITY);
+  if (typestr=="STRING")
+    return(STRING);
+  if (typestr=="VOLUME")
+    return(VOLUME);
+  if (typestr=="SPHERE")
+    return(SPHERE);
+  if (typestr=="SPASE_2")
+    return(SPASE_2);
+  if (typestr=="UNKNOWN_TYPE")
+    return(UNKNOWN_TYPE);
+
+  log_warn("undefined type string %s",typestr.c_str());
+
+  return UNKNOWN_TYPE;
 }
 
 
