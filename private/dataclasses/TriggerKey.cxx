@@ -36,7 +36,7 @@ TriggerKey::GetSourceString(SourceID source)
     case UNKNOWN_SOURCE:
       return("UNKNOWN_SOURCE");
   }
-  log_warn("undefined source ID");
+  log_warn("undefined source ID %u",source);
   
   return NULL;
 }
@@ -73,7 +73,7 @@ TriggerKey::GetTypeString (TypeID type)
     case UNKNOWN_TYPE:
       return("UNKNOWN_TYPE");
   }
-  log_warn("undefined type ID");
+  log_warn("undefined type ID %u",type);
 
   return NULL;
 }
