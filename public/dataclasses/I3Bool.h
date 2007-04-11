@@ -20,7 +20,7 @@ struct I3Bool : public I3FrameObject
   I3Bool& operator=(const I3Bool&);
 
   template <typename Archive>
-    void serialize(Archive& ar,unsigned version);
+    void serialize(Archive&,unsigned);
 
 };
 

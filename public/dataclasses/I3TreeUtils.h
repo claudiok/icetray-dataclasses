@@ -80,7 +80,7 @@ namespace I3TreeUtils
    * Random access to the tree objects
    */
   template<class Type>
-    Type& GetObject(const I3Tree<Type>& t, uint64_t major_id, int minor_id)
+    Type& GetObject(const I3Tree<Type>& t, long major_id, int minor_id)
     {
       typename I3Tree<Type>::iterator i;
       for (i=t.begin(); i!=t.end(); ++i) {
@@ -89,7 +89,7 @@ namespace I3TreeUtils
 	  return *i;
 	}
       }
-      log_fatal("There is no object with ID = (%lli,%i) ",
+      log_fatal("There is no object with ID = (%li,%i) ",
 		major_id,
 		minor_id);
       return *i;
@@ -99,7 +99,7 @@ namespace I3TreeUtils
    * Alternative way to get object from tree
    */
   template<class Type>
-    Type& GetObject(shared_ptr<const I3Tree<Type> > t, uint64_t major_id, int minor_id)
+    Type& GetObject(shared_ptr<const I3Tree<Type> > t, long major_id, int minor_id)
     {
       return GetObject<Type>(*t, major_id, minor_id);
     }
