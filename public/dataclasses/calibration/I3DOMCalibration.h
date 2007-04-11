@@ -144,12 +144,12 @@ class I3DOMCalibration {
   /**
    * Get parameters for droop correction on the baseline
    */
-  vector<double> GetTauParameters() const { return tauparameters_; }
+//  vector<double> GetTauParameters() const { return tauparameters_; }
   
   /**
    * Set parameters for droop correction on the baseline
    */
-  void SetTauParameters(vector<double> tauparameters) { tauparameters_ = tauparameters; }
+//  void SetTauParameters(vector<double> tauparameters) { tauparameters_ = tauparameters; }
 
 
 
@@ -263,7 +263,7 @@ class I3DOMCalibration {
   /**
    *   Parameters for droop correction   
    */
-  vector<double> tauparameters_;
+//  vector<double> tauparameters_;
   
   /**
    * Gain for ATWD channels.
@@ -316,7 +316,7 @@ class I3DOMCalibration {
 
 };
 
-BOOST_CLASS_VERSION(I3DOMCalibration, 3);
+BOOST_CLASS_VERSION(I3DOMCalibration, 2);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
 #endif //I3DOMCALIBRATION_H_INCLUDED
