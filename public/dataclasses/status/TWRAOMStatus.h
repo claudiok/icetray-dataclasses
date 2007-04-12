@@ -25,6 +25,9 @@
 /** This class provides information about some DAQ parameters of an analog OM connected
  *  to the TWR DAQ.
  */
+
+static const unsigned twraomstatus_version_ = 0;
+
 class TWRAOMStatus
 {
   public:
@@ -83,5 +86,6 @@ class TWRAOMStatus
  * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(TWRAOMStatus);
+BOOST_CLASS_VERSION(TWRAOMStatus, twraomstatus_version_);
 
 #endif /*TWRAOMSTATUS_H_INCLUDED*/

@@ -7,6 +7,9 @@ template <class Archive>
 void 
 I3Geometry::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3geometry_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3Geometry class.", version, i3geometry_version_);
+
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("OMGeo", omgeo);
   ar & make_nvp("StationGeo", stationgeo);

@@ -17,7 +17,10 @@ TWRAOMStatus::~TWRAOMStatus() {}
 template <class Archive>
 void
 TWRAOMStatus::serialize(Archive& ar, unsigned version)  
-{ 
+{
+  if (version>twraomstatus_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of TWRAOMStatus class.",version,twraomstatus_version_);
+ 
   ar & make_nvp("BinSize", binSize_);
   ar & make_nvp("StopDelay", stopDelay_);
   ar & make_nvp("Baseline", baseline_);

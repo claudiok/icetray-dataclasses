@@ -14,6 +14,8 @@
 #include "dataclasses/I3Vector.h"
 using namespace std; 
 
+static const unsigned i3flasherinfo_version_ = 1;
+
 /**
  * @brief This contains the data on which DOM flashed during flasher runs
  *
@@ -137,7 +139,7 @@ private:
 };
 
 I3_POINTER_TYPEDEFS(I3FlasherInfo);
-BOOST_CLASS_VERSION(I3FlasherInfo, 1);
+BOOST_CLASS_VERSION(I3FlasherInfo, i3flasherinfo_version_);
 
 typedef I3Vector<I3FlasherInfo> I3FlasherInfoVect;
 I3_POINTER_TYPEDEFS(I3FlasherInfoVect);

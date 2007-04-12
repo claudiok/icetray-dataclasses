@@ -40,7 +40,7 @@
 
   -bchristy
 */
-
+static const unsigned i3geometry_version_ = 0;
 
 //Typedefs to avoid having to write the same thing over and over again.
 typedef vector<I3TankGeo> I3StationGeo;
@@ -77,5 +77,6 @@ struct I3Geometry
 
 I3_DEFAULT_NAME(I3Geometry);
 I3_POINTER_TYPEDEFS(I3Geometry);
+BOOST_CLASS_VERSION(I3Geometry, i3geometry_version_);
 
 #endif // I3GEOMETRY_H_INCLUDED

@@ -24,6 +24,8 @@
  * CherenkovDistance- direct path distance to the track that generated
  * this hit.
  */
+static const unsigned i3mchit_version_ = 1;
+
 class I3Particle;
 
 class I3MCHit
@@ -90,7 +92,7 @@ class I3MCHit
 
 };
 
-BOOST_CLASS_VERSION(I3MCHit,1);
+BOOST_CLASS_VERSION(I3MCHit,i3mchit_version_);
 
 I3_POINTER_TYPEDEFS(I3MCHit);
 

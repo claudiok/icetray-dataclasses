@@ -7,6 +7,9 @@ template <class Archive>
 void
 I3DetectorStatus::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3detectorstatus_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3DetectorStatus class.",version,i3detectorstatus_version_);
+
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("DOMStatus", domStatus);
   // for version > 0 there are TWR AOM stati to be serialized

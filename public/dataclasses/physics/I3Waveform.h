@@ -15,6 +15,7 @@
 #include <dataclasses/I3Map.h>
 #include <dataclasses/OMKey.h>
 
+static const unsigned i3waveform_version_ = 2;
 class I3Waveform 
 {
  public:
@@ -161,7 +162,7 @@ class I3Waveform
 typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
-BOOST_CLASS_VERSION(I3Waveform, 2);
+BOOST_CLASS_VERSION(I3Waveform, i3waveform_version_);
 I3_POINTER_TYPEDEFS(I3Waveform);
 I3_POINTER_TYPEDEFS(I3WaveformSeries);
 I3_POINTER_TYPEDEFS(I3WaveformSeriesMap);

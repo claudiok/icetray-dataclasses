@@ -6,6 +6,8 @@ I3TankGeo::~I3TankGeo() {}
 template <class Archive>
   void I3TankGeo::serialize(Archive& ar, unsigned version)
   {
+    if (version>i3tankgeo_version_)
+      log_fatal("Attempting to read version %zu from file but running version %zu of I3TankGeo class.",version,i3tankgeo_version_);
 
     ar & make_nvp("Position", position);
     ar & make_nvp("Orientation", orientation);

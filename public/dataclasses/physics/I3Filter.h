@@ -16,7 +16,9 @@
 
 #include "dataclasses/Utility.h"
 
-using namespace std; 
+using namespace std;
+ 
+static const unsigned i3filter_version_ = 0;
 
 /**
  * @brief The basic Filter class.  
@@ -48,6 +50,7 @@ private:
 
 
 I3_POINTER_TYPEDEFS(I3Filter);
+BOOST_CLASS_VERSION(I3Filter, i3filter_version_);
 
 #endif //I3FILTER_H_INCLUDED
 

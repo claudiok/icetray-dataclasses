@@ -16,6 +16,9 @@ template <class Archive>
 void 
 I3EventHeader::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3eventheader_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3EventHeader class.",version,i3eventheader_version_);
+
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("RunID", runID_);
   if(version > 0)

@@ -18,6 +18,8 @@
 
 using namespace std;
 
+static const unsigned i3tankgeo_version_ = 1;
+
 /*Simple struct that contains all the pertinent Tank info.
   Note that there is no OM information for this struct. 
   This is what led me to comment out the cryptic switch statement in
@@ -49,7 +51,7 @@ struct I3TankGeo
 
 };
 
-BOOST_CLASS_VERSION(I3TankGeo, 1);
+BOOST_CLASS_VERSION(I3TankGeo, i3tankgeo_version_);
 I3_POINTER_TYPEDEFS(I3TankGeo);
 
 #endif //I3TANKGEO_H_INCLUDED

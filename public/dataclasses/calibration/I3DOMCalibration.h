@@ -22,6 +22,7 @@
 #include <string>
 
 using namespace std;
+static const unsigned i3domcalibration_version_ = 3;
 
 /**
  * @brief A struct to hold a linear fit 
@@ -316,7 +317,7 @@ class I3DOMCalibration {
 
 };
 
-BOOST_CLASS_VERSION(I3DOMCalibration, 3);
+BOOST_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
 #endif //I3DOMCALIBRATION_H_INCLUDED

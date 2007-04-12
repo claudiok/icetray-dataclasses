@@ -17,6 +17,7 @@
 #include <string>
 
 using namespace std;
+static const unsigned i3particle_version_ = 2;
 
 /**
  * @brief 
@@ -209,7 +210,7 @@ class I3Particle : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Particle);
-BOOST_CLASS_VERSION(I3Particle,2);
+BOOST_CLASS_VERSION(I3Particle,i3particle_version_);
 
 typedef I3Vector<I3Particle> I3ParticleVect;
 I3_POINTER_TYPEDEFS(I3ParticleVect);

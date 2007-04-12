@@ -25,6 +25,8 @@
  * that represents the peak from the entire event.  TOTs are generated
  * on the fly and may be wrong if edges are missing.
  */
+static const unsigned i3amandaanalogreadout_version_ = 0;
+
 class I3AMANDAAnalogReadout 
 { 
   std::vector<double> LEs_; 
@@ -123,6 +125,7 @@ I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);
 
 typedef I3Map<OMKey, I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutMap;
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadoutMap);
+BOOST_CLASS_VERSION(I3AMANDAAnalogReadoutMap, i3amandaanalogreadout_version_);
 
 #endif //I3AMANDAANALOGREADOUT_H_INCLUDED
 

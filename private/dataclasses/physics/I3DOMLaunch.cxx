@@ -18,6 +18,9 @@ I3DOMLaunch::~I3DOMLaunch() {}
 template <class Archive>
 void I3DOMLaunch::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3domlaunch_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMLaunch class.",version,i3domlaunch_version_);
+
   ar & make_nvp("StartTime", startTime_);
   // ignore the "Trigger" information of old data
   if(version < 1)

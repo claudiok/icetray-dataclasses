@@ -15,6 +15,8 @@
 #include <sstream>
 #include "dataclasses/OMKey.h"
 
+static const unsigned i3amandaom_xtalk_version_ = 0;
+
 struct I3AMANDAOM_XTalk 
 {
   OMKey  receiver;
@@ -32,6 +34,7 @@ struct I3AMANDAOM_XTalk
 };
 
 I3_POINTER_TYPEDEFS(I3AMANDAOM_XTalk);
+BOOST_CLASS_VERSION(I3AMANDAOM_XTalk, i3amandaom_xtalk_version_);
 
 #endif //I3AMANDAOMCALIB_XTALK_H_INCLUDED
 

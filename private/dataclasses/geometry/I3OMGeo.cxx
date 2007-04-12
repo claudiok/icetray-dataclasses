@@ -7,6 +7,9 @@ template <class Archive>
 void 
 I3OMGeo::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3omgeo_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3OMGeo class.",version,i3omgeo_version_);
+
   ar & make_nvp("Position", position);
   ar & make_nvp("Orientation", orientation);
   ar & make_nvp("OMType", omtype);

@@ -18,6 +18,8 @@
  * @brief The container for all the Station Hit-related data in an array
  *
  */
+static const unsigned i3stationhit_version_ = 0;
+
 class I3StationHit : public I3Vector<I3TankHitPtr> {
 
  private:
@@ -54,6 +56,7 @@ class I3StationHit : public I3Vector<I3TankHitPtr> {
 };
 
 I3_POINTER_TYPEDEFS(I3StationHit);
+BOOST_CLASS_VERSION(I3StationHit, i3stationhit_version_);
 
 typedef I3Map<StationKey, I3StationHit> I3StationHitMap;
 

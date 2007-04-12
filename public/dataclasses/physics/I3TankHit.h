@@ -19,6 +19,8 @@ using namespace std;
  * @brief The container for all the Array Hit-related data in the event
  *
  */
+static const unsigned i3tankhit_version_ = 0;
+
 class I3TankHit 
 {
 
@@ -92,6 +94,7 @@ class I3TankHit
 };
 
 I3_POINTER_TYPEDEFS(I3TankHit);
+BOOST_CLASS_VERSION(I3TankHit, i3tankhit_version_);
 
 /**
  @brief Functor for find_if

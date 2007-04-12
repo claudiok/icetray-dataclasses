@@ -4,6 +4,8 @@
 #include "dataclasses/Utility.h"
 #include <boost/serialization/version.hpp>
 
+static const unsigned i3domstatus_version_ = 1;
+
 struct I3DOMStatus 
 {
 
@@ -156,8 +158,7 @@ struct I3DOMStatus
 };
 
 I3_POINTER_TYPEDEFS(I3DOMStatus);
-
-BOOST_CLASS_VERSION(I3DOMStatus, 1);
+BOOST_CLASS_VERSION(I3DOMStatus, i3domstatus_version_);
 
 #endif //I3DOMSTATUS_H_INCLUDED
 

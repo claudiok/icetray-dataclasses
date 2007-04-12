@@ -18,6 +18,8 @@
 
 using namespace std;
 
+static const unsigned i3omgeo_version_ = 0;
+
 //Simple struct to contain all pertinent OM info.  
 //See I3Geometry.h for more info
 
@@ -48,5 +50,6 @@ struct I3OMGeo
 };
 
 I3_POINTER_TYPEDEFS(I3OMGeo);
+BOOST_CLASS_VERSION(I3OMGeo, i3omgeo_version_);
 
 #endif //I3OMGEO_H_INCLUDED

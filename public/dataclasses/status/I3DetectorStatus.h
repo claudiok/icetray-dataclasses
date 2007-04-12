@@ -34,6 +34,8 @@
  * - map of active amanda triggers (and their configurations) and
  * - map of active domhubs (and their settings) ... eventually.
  */
+static const unsigned i3detectorstatus_version_ = 2;
+
 struct I3DetectorStatus : public I3FrameObject
 {
   I3Time startTime;
@@ -55,8 +57,7 @@ struct I3DetectorStatus : public I3FrameObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3DetectorStatus, 2);
-
+BOOST_CLASS_VERSION(I3DetectorStatus, i3detectorstatus_version_);
 I3_DEFAULT_NAME(I3DetectorStatus);
 I3_POINTER_TYPEDEFS(I3DetectorStatus);
 

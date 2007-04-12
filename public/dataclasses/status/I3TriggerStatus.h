@@ -54,6 +54,8 @@
  * "triggerConfigId3" - trigger config ID of third trigger<BR>
  * "sourceId3" - source ID of third trigger<BR>
  */
+static const unsigned i3triggerstatus_version_ = 0;
+
 class I3TriggerStatus 
 {
  private:
@@ -111,6 +113,7 @@ class I3TriggerStatus
  * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(I3TriggerStatus);
+BOOST_CLASS_VERSION(I3TriggerStatus, i3triggerstatus_version_);
 
 #endif
 

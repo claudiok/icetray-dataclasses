@@ -24,6 +24,8 @@
  * 
  * This is the base class for trigger records that will live in the I3TriggerHierarchy.
  */
+static const unsigned i3trigger_version_ = 1;
+
 class I3Trigger 
 {
 private:
@@ -104,7 +106,7 @@ private:
   SET_LOGGER("I3Trigger");
 };
 
-BOOST_CLASS_VERSION(I3Trigger, 1);
+BOOST_CLASS_VERSION(I3Trigger, i3trigger_version_);
 /**
  * pointer type to insulate users from memory management
  */

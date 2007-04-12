@@ -14,6 +14,9 @@ template <class Archive>
 void 
 I3Direction::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3direction_version_)
+    log_fatal("Attempting to read version %s from file but running version %s of I3Direction class.",version,i3direction_version_);
+
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("Zen", zenith_);
   ar & make_nvp("Azi", azimuth_);

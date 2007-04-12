@@ -139,6 +139,9 @@ template <class Archive>
 void 
 LinearFit::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3domcalibration_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMCalibration class.",version,i3domcalibration_version_);
+
   ar & make_nvp("slope",slope);
   ar & make_nvp("intercept",intercept);
 }
@@ -149,6 +152,9 @@ template <class Archive>
 void 
 QuadraticFit::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3domcalibration_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMCalibration class.",version,i3domcalibration_version_);
+
   ar & make_nvp("quadraticA",quadFitA);
   ar & make_nvp("quadraticB",quadFitB);
   ar & make_nvp("quadraticC",quadFitC);
@@ -161,6 +167,9 @@ template <class Archive>
 void 
 I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3domcalibration_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMCalibration class.",version,i3domcalibration_version_);
+
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
   ar & make_nvp("fadcBaseline",fadcBaselineFit_);

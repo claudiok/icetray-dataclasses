@@ -17,6 +17,9 @@ I3TriggerStatus::~I3TriggerStatus() {}
 template <class Archive>
 void I3TriggerStatus::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3triggerstatus_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3TriggerStatus class.",version,i3triggerstatus_version_);
+
   ar & make_nvp("Name", name_);
   ar & make_nvp("Settings", settings_);
 }

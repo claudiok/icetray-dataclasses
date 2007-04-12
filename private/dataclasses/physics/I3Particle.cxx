@@ -230,6 +230,9 @@ double I3Particle::GetStopTime() const
 template <class Archive>
   void I3Particle::serialize(Archive& ar, unsigned version)
   {
+  if (version>i3particle_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3Particle class.",version,i3particle_version_);
+
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
     if(version>1){

@@ -28,6 +28,8 @@
  * determined by the DOM calibrator. There is also a 'coarse charge stamp'
  * containing the 3 largest samples out of the first 16 fADC samples
  */
+static const unsigned i3domlaunch_version_ = 2;
+
 class I3DOMLaunch 
 {
 public:  
@@ -234,7 +236,7 @@ private:
     template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3DOMLaunch, 2);
+BOOST_CLASS_VERSION(I3DOMLaunch, i3domlaunch_version_);
 I3_POINTER_TYPEDEFS(I3DOMLaunch);
 
 typedef std::vector<I3DOMLaunch> I3DOMLaunchSeries;
