@@ -10,7 +10,9 @@ dataclasses/I3Direction.h \
 dataclasses/I3Double.h \
 dataclasses/I3Time.h \
 dataclasses/I3Bool.h \
-dataclasses/physics/I3Particle.h
+dataclasses/physics/I3Particle.h \
+dataclasses/physics/I3Trigger.h \
+dataclasses/TriggerKey.h 
 
 GIMP = dataclasses/I3Time.h \
 dataclasses/OMKey.h \
