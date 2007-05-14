@@ -149,9 +149,9 @@ I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergeticPrimary(const I3MCTree& t)
 {
   double maxenergy = 0.;
-  I3MCTree::iterator iter, iter_return = t.end();
+  I3MCTree::sibling_iterator iter, iter_return = t.end();
   for (iter=t.begin(); iter!=t.end(); iter++) {
-    if (iter->GetEnergy()>maxenergy && !HasParent(t,*iter)) {
+    if (iter->GetEnergy()>maxenergy) {
       maxenergy = iter->GetEnergy();
       iter_return = iter;
     }
