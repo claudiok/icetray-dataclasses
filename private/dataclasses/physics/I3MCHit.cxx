@@ -19,6 +19,10 @@ template <class Archive>
     if(version>0)
       ar & make_nvp("ParticleMajorID", particleMajorID_);
     ar & make_nvp("CherenkovDistance", cherenkovDistance_);
+    if(version>1){
+      ar & make_nvp("HitSource", source_);
+      ar & make_nvp("Amplitude", amplitude_);
+    }
   }     
 
   

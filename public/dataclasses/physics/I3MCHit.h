@@ -9,7 +9,6 @@
 #ifndef I3MCHIT_H_INCLUDED
 #define I3MCHIT_H_INCLUDED
 
-#include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
 #include "dataclasses/OMKey.h"
 
@@ -28,14 +27,15 @@ class I3Particle;
 
 class I3MCHit
 {
-  double time_;
-  int hitID_;
-  double  weight_;
-  int    particleID_;
-  uint64_t    particleMajorID_;
-  double  cherenkovDistance_;
-
  public:
+
+  enum HitSource{
+    UNKOWN = 0,
+    PE = 10,
+    AFTER_PULSE = 20,
+    PRE_PULSE = 30,
+    RANDOM = 40
+  };
 
   I3MCHit() : 
     time_(NAN), 
@@ -43,7 +43,8 @@ class I3MCHit
     weight_(NAN), 
     particleID_(-1), 
     particleMajorID_(0), 
-    cherenkovDistance_(NAN) { }
+    cherenkovDistance_(NAN),
+    amplitude_(1){ }
 
   virtual ~I3MCHit();
 
@@ -81,8 +82,29 @@ class I3MCHit
    */
   void SetCherenkovDistance(double CherenkovDistance) { cherenkovDistance_ = CherenkovDistance; }
 
+  /**
+   * Sets/Gets the source of the MCHit
+   */
+  void SetHitSource(HitSource s){ source_= s; }
+  HitSource GetHitSource() const { return source_; }
+
+  /**
+   * Sets/Gets the number of PEs, or after pulses, or pre-pulses, etc...
+   */
+  unsigned int GetAmplitude() const { return amplitude_; }
+
+  void SetAmplitude(unsigned int n) { amplitude_ = n; }
 
  private:
+
+  double time_;
+  int hitID_;
+  double  weight_;
+  int    particleID_;
+  uint64_t    particleMajorID_;
+  double  cherenkovDistance_;
+  HitSource source_;
+  unsigned int amplitude_;
 
   friend class boost::serialization::access;
 
@@ -90,7 +112,7 @@ class I3MCHit
 
 };
 
-BOOST_CLASS_VERSION(I3MCHit,1);
+BOOST_CLASS_VERSION(I3MCHit,2);
 
 I3_POINTER_TYPEDEFS(I3MCHit);
 
