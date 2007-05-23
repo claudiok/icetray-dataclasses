@@ -27,8 +27,10 @@ tray = I3Tray()
 # Streams from the test file that don't apply to current test are
 # not read in.
 
+workspace = expandvars("$I3_WORK")
+infile = workspace + "/dataclasses/vsn99_detectorstatus.i3"
 tray.AddService("I3ReaderServiceFactory","i3reader")(
-    ("Filename", "vsn99_detectorstatus.i3")
+    ("Filename", infile)
     )
 
 tray.AddModule("I3Muxer","muxer")    # should throw error due to version number
