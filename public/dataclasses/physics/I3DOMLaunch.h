@@ -231,10 +231,13 @@ public:
 
 private:
     friend class boost::serialization::access;
-    template <class Archive> void serialize(Archive & ar, unsigned version);
+	
+    template <class Archive> void save(Archive & ar, unsigned version) const;
+    template <class Archive> void load(Archive & ar, unsigned version);
+	BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
 
-BOOST_CLASS_VERSION(I3DOMLaunch, 2);
+BOOST_CLASS_VERSION(I3DOMLaunch, 3);
 I3_POINTER_TYPEDEFS(I3DOMLaunch);
 
 typedef std::vector<I3DOMLaunch> I3DOMLaunchSeries;
