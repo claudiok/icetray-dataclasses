@@ -32,6 +32,8 @@ using namespace std;
  * @todo implement "print out" of all information in a uniform way...
  * @todo insure that the temporary data isn't written to disk.
  */
+static const unsigned i3position_version_ = 0;
+
 class I3Position : public I3FrameObject
 {
  public:
@@ -235,5 +237,6 @@ class I3Position : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Position);
+BOOST_CLASS_VERSION(I3Position, i3position_version_);
 
 #endif //I3POSITION_H_INCLUDED

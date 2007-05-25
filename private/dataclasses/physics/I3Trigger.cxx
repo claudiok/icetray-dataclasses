@@ -18,7 +18,10 @@ I3Trigger::~I3Trigger() {}
 
 
 template <class Archive> void I3Trigger::serialize(Archive& ar, unsigned version)  
-{ 
+{
+  if (version>i3trigger_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3Trigger class.",version,i3trigger_version_);
+ 
   ar & make_nvp("TriggerTime", time_);
   ar & make_nvp("TriggerLength", length_);
   if(version < 1) // this corrects for the fact that trigger time and length was given

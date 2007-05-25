@@ -26,6 +26,8 @@
 
 /** The direct/raw digital readout of an Amanda OM using the TWR DAQ.
  */
+static const unsigned i3twrlaunch_version_ = 1;
+
 class I3TWRLaunch
 {
   private:
@@ -65,7 +67,7 @@ class I3TWRLaunch
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3TWRLaunch, 1);
+BOOST_CLASS_VERSION(I3TWRLaunchSeriesMap, i3twrlaunch_version_);
 
 typedef std::vector<I3TWRLaunch> I3TWRLaunchSeries;
 typedef I3Map<OMKey, I3TWRLaunchSeries> I3TWRLaunchSeriesMap;

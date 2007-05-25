@@ -15,6 +15,8 @@
 /**
  * @brief Track is for vanilla track (i.e. not cascade)
   */
+static const unsigned i3mclist_version_ = 0;
+
 class I3MCList : public I3Vector<I3Particle>
 {
  public:
@@ -31,6 +33,7 @@ class I3MCList : public I3Vector<I3Particle>
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
+BOOST_CLASS_VERSION(I3MCList, i3mclist_version_);
 I3_POINTER_TYPEDEFS(I3MCList);
 
 #endif 

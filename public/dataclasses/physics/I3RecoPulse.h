@@ -21,6 +21,8 @@
  * A readout independent representation of a waveform feature or Analog
  *  readout.
  */
+static const unsigned i3recopulse_version_ = 1;
+
 class I3RecoPulse 
 {
   int hitID_;
@@ -81,7 +83,7 @@ class I3RecoPulse
 };
 
 I3_POINTER_TYPEDEFS(I3RecoPulse);
-BOOST_CLASS_VERSION(I3RecoPulse, 1);
+BOOST_CLASS_VERSION(I3RecoPulse, i3recopulse_version_);
 
 typedef std::vector<I3RecoPulse> I3RecoPulseSeries;
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;

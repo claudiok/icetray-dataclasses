@@ -19,11 +19,11 @@
  * now they're ~68 seconds different.  May need to account for this.
  * http://jday.sourceforge.net/index.php for reference
  *
- *
  */
 
 //Number of tenths of ns in a year and leap year respectively        
 //                         Number of tenths of seconds in a leap year 864000000000000
+static const unsigned i3time_version_ = 0;
 const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
 
 namespace I3TimeUtils
@@ -257,5 +257,6 @@ class I3Time : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Time);
+BOOST_CLASS_VERSION(I3Time, i3time_version_);
 
 #endif //I3TIME_H_INCLUDED

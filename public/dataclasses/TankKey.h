@@ -17,6 +17,7 @@
  * for an IceTop tank
  *
  */
+static const unsigned tankkey_version_ = 0;
 
 class TankKey 
 {
@@ -104,5 +105,6 @@ inline bool operator<(const TankKey& lhs,const TankKey& rhs)
 }
 
 I3_POINTER_TYPEDEFS(TankKey);
+BOOST_CLASS_VERSION(TankKey, tankkey_version_);
 
 #endif //TANKKEY_H_INCLUDED

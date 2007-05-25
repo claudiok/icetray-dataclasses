@@ -96,6 +96,9 @@ string I3MCGenerationVolume::GetTypeString() const
 
 template <class Archive> void I3MCGenerationVolume::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3mcgenerationvolume_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3MCGenerationVolume class.",version,i3mcgenerationvolume_version_);
+
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("type",type);
 	ar & make_nvp("x",x);

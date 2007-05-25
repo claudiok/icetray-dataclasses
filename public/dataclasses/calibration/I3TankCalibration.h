@@ -3,6 +3,8 @@
 
 #include "dataclasses/Utility.h"
 
+static const unsigned i3tankcalibration_version_ = 0;
+
 struct I3TankCalibration
 {
 
@@ -32,5 +34,6 @@ struct I3TankCalibration
 };
 
 I3_POINTER_TYPEDEFS(I3TankCalibration);
+BOOST_CLASS_VERSION(I3TankCalibration, i3tankcalibration_version_);
 
 #endif //I3TANKCALIBRATION_H_INCLUDED

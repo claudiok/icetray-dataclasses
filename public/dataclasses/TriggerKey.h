@@ -41,6 +41,8 @@
  * software triggers. The subtype will also avoid ambiguities, when decoding data
  * from IceCube DAQ/global trigger.
  */
+static const unsigned triggerkey_version_ = 1;
+
 class TriggerKey
 {
  public:
@@ -324,13 +326,11 @@ class TriggerKey
   SET_LOGGER("TriggerKey");
 };
 
-BOOST_CLASS_VERSION(TriggerKey, 1);
-
 /**
  * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(TriggerKey);
-
+BOOST_CLASS_VERSION(TriggerKey, triggerkey_version_);
 
 /**
  * Comparison operator. Required to use TriggerKeys as a key of a map.

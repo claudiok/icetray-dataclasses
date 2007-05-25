@@ -31,6 +31,9 @@ template<class Archive>
 void 
 I3TWRFrag::serialize(Archive& ar, unsigned version)
 {
+   if (version>i3twrfrag_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3TWRFrag class.",version,i3twrfrag_version_);
+
   if(version < 1)
   {
     int id;

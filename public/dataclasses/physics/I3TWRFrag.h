@@ -29,6 +29,8 @@
  * Every fragment has a start bin that determines the position of the fragment within
  * the waveform relative to its start.
  */
+static const unsigned i3twrfrag_version_ = 1;
+
 class I3TWRFrag 
 {
   private:
@@ -69,8 +71,7 @@ class I3TWRFrag
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3TWRFrag, 1);
-
+BOOST_CLASS_VERSION(I3TWRFrag, i3twrfrag_version_);
 I3_POINTER_TYPEDEFS(I3TWRFrag);
 
 #endif /*I3TWRFRAG_H_INCLUDED*/

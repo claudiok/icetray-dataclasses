@@ -17,6 +17,7 @@
 #include <icetray/I3DefaultName.h>
 
 using namespace std;
+static const unsigned i3eventheader_version_ = 1;
 
 /**
  * @brief The header for data on the Event stream.
@@ -107,7 +108,7 @@ class I3EventHeader : public I3FrameObject
 
 };
 
-BOOST_CLASS_VERSION(I3EventHeader,1);
+BOOST_CLASS_VERSION(I3EventHeader, i3eventheader_version_);
 I3_POINTER_TYPEDEFS(I3EventHeader);
 I3_DEFAULT_NAME(I3EventHeader);
 

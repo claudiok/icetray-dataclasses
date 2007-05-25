@@ -145,6 +145,9 @@ TriggerKey::~TriggerKey() {}
 template <class Archive>
 void TriggerKey::serialize(Archive& ar, unsigned version)
 {
+  if (version>triggerkey_version_)
+    log_fatal("Attempting to read version %s from file but running version %s of TriggerKey class.",version,triggerkey_version_);
+
   ar & make_nvp("SourceID", source_);
   ar & make_nvp("TypeID", type_);
   // for version > 0 there is a subtype ID to be serialized

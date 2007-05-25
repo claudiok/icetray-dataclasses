@@ -27,6 +27,8 @@ using namespace I3Constants;
 using namespace I3Units;
 using namespace std;
 
+static const unsigned i3direction_version_ = 0;
+
 /**
  * @brief The basic direction class for IceCube. 
  *
@@ -233,5 +235,6 @@ class I3Direction : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3Direction);
+BOOST_CLASS_VERSION(I3Direction, i3direction_version_);
 
 #endif //I3DIRECTION_H_INCLUDED

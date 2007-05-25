@@ -16,6 +16,9 @@ I3Waveform::StatusCompound::~StatusCompound() {}
 template <class Archive>
 void I3Waveform::StatusCompound::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3waveform_version_)
+    log_fatal("Attempting to read version %s from file but running version %s of I3Waveform class",version,i3waveform_version_);
+
   ar & make_nvp("interval", interval_);
   ar & make_nvp("status", status_);
 }
@@ -43,6 +46,9 @@ I3Waveform::~I3Waveform() {}
 template <class Archive>
 void I3Waveform::serialize(Archive& ar, unsigned version)
 {
+  if (version>i3waveform_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3Waveform class.",version,i3waveform_version_);
+
   ar & make_nvp("startTime", startTime_);
   ar & make_nvp("binWidth", binWidth_);
   ar & make_nvp("waveform", waveform_);

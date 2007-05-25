@@ -12,6 +12,8 @@
 #include <dataclasses/Utility.h>
 #include <string>
 
+static const unsigned i3mcgenerationvolume_version_ = 0;
+
 class I3MCGenerationVolume : public I3FrameObject
 {
 
@@ -53,6 +55,6 @@ class I3MCGenerationVolume : public I3FrameObject
 };
 
 I3_POINTER_TYPEDEFS(I3MCGenerationVolume);
-
+BOOST_CLASS_VERSION(I3MCGenerationVolume, i3mcgenerationvolume_version_);
 
 #endif

@@ -22,6 +22,8 @@
  * but can be sub-classed as part of a hit series reconstruction.
  *
  */
+static const unsigned i3recohit_version_ = 1;
+
 class I3RecoHit 
 {
   public:
@@ -64,7 +66,7 @@ class I3RecoHit
 
 
 I3_POINTER_TYPEDEFS(I3RecoHit);
-BOOST_CLASS_VERSION(I3RecoHit, 1);
+BOOST_CLASS_VERSION(I3RecoHit, i3recohit_version_);
 
 typedef std::vector<I3RecoHit> I3RecoHitSeries;
 typedef I3Map<OMKey, I3RecoHitSeries> I3RecoHitSeriesMap;

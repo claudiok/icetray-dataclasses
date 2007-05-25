@@ -6,6 +6,9 @@ I3AMANDAOMCalibration::~I3AMANDAOMCalibration() {}
 template <class Archive>
   void I3AMANDAOMCalibration::serialize(Archive& ar, unsigned version)
   {
+  if (version>i3amandaomcalibration_version_)
+    log_fatal("Attempting to read version %zu from file but running version %zu of I3AMANDAOMCalibration class.",version,i3amandaomcalibration_version_);
+
     ar & make_nvp("adc_a0_",adc_a0);
     ar & make_nvp("adc_beta",adc_beta);
     ar & make_nvp("tdc_alpha",tdc_alpha);

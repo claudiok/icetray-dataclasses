@@ -28,6 +28,8 @@ using namespace std;
  *
  */
 
+static const unsigned i3amandaomcalibration_version_ = 0;
+
 struct I3AMANDAOMCalibration 
 {
 
@@ -86,6 +88,7 @@ struct I3AMANDAOMCalibration
 };
 
 I3_POINTER_TYPEDEFS(I3AMANDAOMCalibration);
+BOOST_CLASS_VERSION(I3AMANDAOMCalibration, i3amandaomcalibration_version_);
 
 #endif
 
