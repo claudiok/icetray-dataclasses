@@ -17,7 +17,7 @@ template <class Archive>
 void I3Waveform::StatusCompound::serialize(Archive& ar, unsigned version)
 {
   if (version>i3waveform_version_)
-    log_fatal("Attempting to read version %s from file but running version %s of I3Waveform class",version,i3waveform_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3Waveform class",version,i3waveform_version_);
 
   ar & make_nvp("interval", interval_);
   ar & make_nvp("status", status_);
