@@ -5,7 +5,7 @@ TankKey::~TankKey() { }
 
 template <typename Archive>
 void 
-TankKey::serialize (Archive & ar, unsigned)
+TankKey::serialize (Archive & ar, unsigned version)
 {
   if (version>tankkey_version_)
     log_fatal("Attempting to read version %s from file but running version %s of TankKey class.",version,tankkey_version_);
