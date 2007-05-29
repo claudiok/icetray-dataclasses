@@ -268,3 +268,4 @@ namespace I3DeltaCompression
 	} // DeltaCompressor::getPrevBtw( int )
 
 } // namespace I3DeltaCompression
+
