@@ -28,7 +28,7 @@ tray = I3Tray()
 # not read in.
 
 workspace = expandvars("$I3_WORK")
-infile = workspace + "/dataclasses/vsn99_calibration.i3"
+infile = workspace + "/dataclasses/resources/testdata/vsn99_calibration.i3"
 tray.AddService("I3ReaderServiceFactory","i3reader")(
     ("Filename", infile)
     )
