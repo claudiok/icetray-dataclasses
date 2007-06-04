@@ -31,10 +31,11 @@ class I3MCHit
 
   enum HitSource{
     UNKOWN = 0,
-    PE = 10,
-    AFTER_PULSE = 20,
-    PRE_PULSE = 30,
-    RANDOM = 40
+    SPE = 10,
+    RANDOM = 20,
+    AFTER_PULSE = 30,
+    PRE_PULSE = 40,
+    LATE_PULSE = 50
   };
 
   I3MCHit() : 
