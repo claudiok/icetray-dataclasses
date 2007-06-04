@@ -45,10 +45,11 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       && 
       ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) )
   {
+    
     try
     {
       I3DeltaCompression::DeltaCompressor compressor;
-      I3Vector<I3VectorUnsignedInt> compressedATWD;
+      vector< vector<unsigned int> > compressedATWD;
       
       I3Vector<I3Vector<int> >::const_iterator it;
       for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ )
@@ -59,8 +60,8 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
         
         // copy the compressed ATWD waveform to the compressed vector and 
         // add the vector to the fector of compressed ATWD waveforms.
-        vector<unsigned int> compVals = compressor.getCompressed();
-        I3VectorUnsignedInt compVector( compVals.begin(), compVals.end() );
+        const vector<unsigned int>& compVals = compressor.getCompressed();
+        vector<unsigned int> compVector( compVals.begin(), compVals.end() );
         compressedATWD.push_back( compVector );
       }
       // serialize all compressed ATWD waveforms
@@ -79,10 +80,10 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       compressor.reset();
       compressor.compress( rawFADC_ );
       
-      // copy the compressed waveform to the output vector and serialize tihs 
+      // copy the compressed waveform to the output vector and serialize this 
       // vector with the compressed FADC waveform.
-      vector<unsigned int> compVals = compressor.getCompressed();
-      I3VectorUnsignedInt compressedFADC( compVals.begin(), compVals.end() );
+      const vector<unsigned int>& compVals = compressor.getCompressed();
+      vector<unsigned int> compressedFADC( compVals.begin(), compVals.end() );
       ar & make_nvp("CompressedFADC", compressedFADC );
       
       // also write the number of samples for this waveform to the archive
@@ -155,10 +156,10 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       
       // Create the data structure for the compressed version 
       // of the waveforms and deserialize fro the archive
-      I3Vector<I3VectorUnsignedInt> compressedATWD( rawATWD_.size() );
+      vector< vector<unsigned int> > compressedATWD( rawATWD_.size() );
       ar & make_nvp("CompressedATWD", compressedATWD);
       
-      I3Vector<I3VectorUnsignedInt>::const_iterator it;
+      vector< vector<unsigned int> >::const_iterator it;
       I3Vector<I3VectorInt >::iterator it2 = rawATWD_.begin();
       for( it = compressedATWD.begin(); it < compressedATWD.end(); it++, it2++ )
       {
@@ -177,9 +178,9 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
         (*it2).resize( numSamples );
       }
       
-      I3VectorUnsignedInt compressedFADC;
+      vector<unsigned int> compressedFADC;
       ar & make_nvp("CompressedFADC", compressedFADC);
-      
+
       // reset compressor and initialize with the compressed data.
       compressor.reset();
       compressor.setCompressed( compressedFADC );
