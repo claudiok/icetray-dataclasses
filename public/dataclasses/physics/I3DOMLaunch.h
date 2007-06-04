@@ -44,7 +44,9 @@ public:
       TEST_PATTERN = 0,
       CPU_REQUESTED = 1,
       SPE_DISCRIMINATOR_TRIGGER = 2,
-      FLASHER_BOARD_TRIGGER = 3
+      FLASHER_BOARD_TRIGGER = 3,
+      MPE_DISCRIMINATOR_TRIGGER = 4,
+      ONBOARD_LED = 5
     };
     
     enum TriggerMode
