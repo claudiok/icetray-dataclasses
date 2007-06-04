@@ -155,7 +155,7 @@ namespace I3DeltaCompression
        *
        * @param vals const vector representing a compressed waveform.
 			 */         
-			void setCompressed( const std::vector<unsigned int> vals ) 
+			void setCompressed( const std::vector<unsigned int>& vals ) 
 			{
 			  compressed_.clear();
 			  compressed_.assign( vals.begin(), vals.end() );
