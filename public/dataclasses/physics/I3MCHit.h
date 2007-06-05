@@ -24,20 +24,23 @@
  * CherenkovDistance- direct path distance to the track that generated
  * this hit.
  */
-static const unsigned i3mchit_version_ = 1;
+static const unsigned i3mchit_version_ = 2;
 
 class I3Particle;
 
 class I3MCHit
 {
-  double time_;
-  int hitID_;
-  double  weight_;
-  int    particleID_;
-  uint64_t    particleMajorID_;
-  double  cherenkovDistance_;
 
  public:
+
+  enum HitSource{
+    UNKNOWN = 0,
+    SPE = 10,
+    RANDOM = 20,
+    AFTER_PULSE = 30,
+    PRE_PULSE = 40,
+    LATE_PULSE = 50
+  };
 
   I3MCHit() : 
     time_(NAN), 
@@ -45,7 +48,8 @@ class I3MCHit
     weight_(NAN), 
     particleID_(-1), 
     particleMajorID_(0), 
-    cherenkovDistance_(NAN) { }
+    cherenkovDistance_(NAN),
+    source_(UNKNOWN) { }
 
   virtual ~I3MCHit();
 
@@ -83,8 +87,21 @@ class I3MCHit
    */
   void SetCherenkovDistance(double CherenkovDistance) { cherenkovDistance_ = CherenkovDistance; }
 
+  /**
+   * Sets/Gets the source of the MCHit
+   */
+  void SetHitSource(HitSource s){ source_= s; }
+  HitSource GetHitSource() const { return source_; }
 
  private:
+
+  double time_;
+  int hitID_;
+  double  weight_;
+  int    particleID_;
+  uint64_t    particleMajorID_;
+  double  cherenkovDistance_;
+  HitSource source_;
 
   friend class boost::serialization::access;
 

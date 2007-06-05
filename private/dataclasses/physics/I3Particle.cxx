@@ -128,11 +128,13 @@ bool I3Particle::IsTrack() const
 bool I3Particle::IsCascade() const
 {
   if (shape_==Cascade ||
-      type_ == EPlus || type_== EMinus ||
-      type_ == Brems || type_ == DeltaE ||
+      type_ == EPlus    || type_== EMinus   ||
+      type_ == Brems    || type_ == DeltaE  ||
       type_ == PairProd || type_ == NuclInt ||
-      type_ == Gamma || type_==Hadrons ||
-      type_== PiPlus || type_ == PiMinus) 
+      type_ == Gamma    || type_ == Hadrons ||
+      type_ == PiPlus   || type_ == PiMinus ||
+      type_ == Pi0      || type_ == MuPair  ||
+      type_ == PPlus    || type_ == PMinus )  
     return true;
   else return false;
 }
