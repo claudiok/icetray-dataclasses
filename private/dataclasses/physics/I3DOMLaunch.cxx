@@ -8,7 +8,8 @@ I3DOMLaunch::I3DOMLaunch()
     trigger_(TEST_PATTERN),
     mode_(UNDEFINED),
     whichATWD_(ATWDa),
-    localCoincidence_(false)
+    localCoincidence_(false),
+    pedestal_(false)
 {
   rawATWD_.resize(4);
 }
@@ -103,7 +104,10 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
     ar & make_nvp("RawFADC", rawFADC_);
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
-  ar & make_nvp("RawChargeStamp", rawChargeStamp_);    
+  ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  // Putting Pedestal into DOMLaunch for delta compressed data
+  ar & make_nvp("Pedestal", pedestal_);
+
   // ignore the range for the raw charge stamp of old data
   if(version < 2)
   {
@@ -142,7 +146,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
     mode_ = UNDEFINED;
   }
   ar & make_nvp("WhichATWD", whichATWD_);
-  
+ 
   // since version 3 of the file the raw waveforms are stored in delta
   // compressed form. This is only done, if archived to a non XML archive,
   // to allow to inspect the waveforms with dataio_shovel.
@@ -206,7 +210,11 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
     ar & make_nvp("RawFADC", rawFADC_);
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
-  ar & make_nvp("RawChargeStamp", rawChargeStamp_);    
+  ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  if(version > 3)
+    {
+      ar & make_nvp("Pedestal", pedestal_);
+    }
   // ignore the range for the raw charge stamp of old data
   if(version < 2)
   {

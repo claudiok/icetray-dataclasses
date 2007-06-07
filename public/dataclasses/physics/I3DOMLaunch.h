@@ -28,7 +28,7 @@
  * determined by the DOM calibrator. There is also a 'coarse charge stamp'
  * containing the 3 largest samples out of the first 16 fADC samples
  */
-static const unsigned i3domlaunch_version_ = 3;
+static const unsigned i3domlaunch_version_ = 4;
 
 class I3DOMLaunch 
 {
@@ -121,6 +121,14 @@ private:
 
     /*  chargeStampRange_ has been deleted - on the rare occassions anyone cares, 
      *  they can see if any of the samples are above 512  */
+  /**
+   * pedestal_ is a bool that tells you if the pedestal_ has or has not
+   * been subtracted from the waveforms. This is only for delta-compressed
+   * waveforms. True means pedestal has been subtracted. Flase means it
+   * has not been subtracted.
+   */
+    bool pedestal_;
+  
 
 public:
     /**
@@ -213,8 +221,18 @@ public:
      * Set the local coincidence bit.
      */
     void SetLCBit(bool LCBit) {localCoincidence_=LCBit;}
-
-    /** 
+  
+    /**
+    * return Pedestal bool.
+    */
+   bool GetPedestal() const { return pedestal_; }
+  
+    /**
+    * Set the pedestal bool
+    */
+   void SetPedestal(bool Pedestal) {pedestal_ = Pedestal;}
+  
+  /** 
      * Return the raw charge stamp.
      */
     const I3Vector<int>& GetRawChargeStamp() const { return rawChargeStamp_; }
