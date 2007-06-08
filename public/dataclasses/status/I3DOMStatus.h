@@ -4,7 +4,7 @@
 #include "dataclasses/Utility.h"
 #include <boost/serialization/version.hpp>
 
-static const unsigned i3domstatus_version_ = 1;
+static const unsigned i3domstatus_version_ = 2;
 
 struct I3DOMStatus 
 {
@@ -28,6 +28,7 @@ struct I3DOMStatus
        nBinsATWD2(0),
        nBinsATWD3(0),
        nBinsFADC(0),
+       deltaCompress(Unknown),
        fbState(Unknown),
        fbBrightness(INT_MAX),
        fbLength(INT_MAX),
@@ -47,7 +48,7 @@ struct I3DOMStatus
   /**  
    * This controls how far the local coincidence signal is sent 
    */
-  enum LCMode {UnknownLCMode = -1, LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4};
+  enum LCMode {UnknownLCMode = -1, LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4, SoftLC=5};
   /**
    * There is also provision to turn on or off various settings in the 
    * DOM
@@ -132,13 +133,26 @@ struct I3DOMStatus
    */
   double dacFADCRef;
   
+  /**
+   * NBins per Engineering readout.  Keep in mind, delta-compressed data automatically adjusts number of
+   *    readouts per Launch based on waveform size, but if present, should always be 128 samples.
+   */
   unsigned int nBinsATWD0;
   unsigned int nBinsATWD1;
   unsigned int nBinsATWD2;
   unsigned int nBinsATWD3;
   unsigned int nBinsFADC;
+
+  /**
+   *  IS the dom configured to make delta-compression readouts?
+   */
+  OnOff deltaCompress;
     
+  /**
+   * Flasher board state and flasher settings
+   */
   OnOff fbState;
+
   unsigned int fbBrightness;
   unsigned int fbLength;
   unsigned int fbDelay;

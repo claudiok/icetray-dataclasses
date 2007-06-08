@@ -52,6 +52,15 @@ void I3DOMStatus::serialize (Archive& ar, const unsigned version)
   {
       cableType = I3DOMStatus::UnknownCableType;
   }
+  if(version > 1)
+  {
+      ar & make_nvp("deltaCompress",deltaCompress);
+  }
+  else
+  {
+      deltaCompress = I3DOMStatus::Unknown;
+  }	
+
 }
 
 I3_SERIALIZABLE(I3DOMStatus);
