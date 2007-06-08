@@ -139,9 +139,6 @@ template <class Archive>
 void 
 LinearFit::serialize(Archive& ar, unsigned version)
 {
-  if (version>i3domcalibration_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMCalibration class.",version,i3domcalibration_version_);
-
   ar & make_nvp("slope",slope);
   ar & make_nvp("intercept",intercept);
 }
@@ -152,9 +149,6 @@ template <class Archive>
 void 
 QuadraticFit::serialize(Archive& ar, unsigned version)
 {
-  if (version>i3domcalibration_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMCalibration class.",version,i3domcalibration_version_);
-
   ar & make_nvp("quadraticA",quadFitA);
   ar & make_nvp("quadraticB",quadFitB);
   ar & make_nvp("quadraticC",quadFitC);
@@ -162,14 +156,25 @@ QuadraticFit::serialize(Archive& ar, unsigned version)
 
 I3_SERIALIZABLE(QuadraticFit);
 
+template <class Archive>
+void 
+TauParam::serialize(Archive& ar, unsigned version)
+{
+  ar & make_nvp("P0",P0);
+  ar & make_nvp("P1",P1);
+  ar & make_nvp("P2",P2);
+  ar & make_nvp("P3",P3);
+  ar & make_nvp("P4",P4);
+  ar & make_nvp("P5",P5);
+}
+
+I3_SERIALIZABLE(TauParam);
+
 
 template <class Archive>
 void 
 I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
-  if (version>i3domcalibration_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMCalibration class.",version,i3domcalibration_version_);
-
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
   ar & make_nvp("fadcBaseline",fadcBaselineFit_);
@@ -193,12 +198,6 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("domcalVersion", domcalVersion_);
     }
-  if (version > 2)
-    {
-      ar & make_nvp("tauparameters", tauparameters_);
-      
-    }
-  
 }
 
 I3_SERIALIZABLE(I3DOMCalibration);

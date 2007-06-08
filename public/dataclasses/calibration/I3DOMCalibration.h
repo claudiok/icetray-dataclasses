@@ -22,7 +22,6 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 3;
 
 /**
  * @brief A struct to hold a linear fit 
@@ -63,6 +62,36 @@ struct QuadraticFit
   }
 
 };
+
+/**
+ *  @brief A struct to hold the parameters of the toroid time constants
+ * for electronic droop correction
+ */
+
+struct TauParam
+{
+  double P0;
+  double P1;
+  double P2;
+  double P3;
+  double P4;
+  double P5;
+    
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version);
+  TauParam()
+  {
+    P0 = NAN;
+    P1 = NAN;
+    P2 = NAN;
+    P3 = NAN;
+    P4 = NAN;
+    P5 = NAN;
+  }
+
+};
+
+
 
 
 
@@ -145,12 +174,13 @@ class I3DOMCalibration {
   /**
    * Get parameters for droop correction on the baseline
    */
-  vector<double> GetTauParameters() const { return tauparameters_; }
+  //CR test
+  TauParam GetTauParameters() const { return tauparameters_; }
   
   /**
    * Set parameters for droop correction on the baseline
    */
-  void SetTauParameters(vector<double> tauparameters) { tauparameters_ = tauparameters; }
+  void SetTauParameters(TauParam tauparameters) { tauparameters_ = tauparameters; }
 
 
 
@@ -264,7 +294,7 @@ class I3DOMCalibration {
   /**
    *   Parameters for droop correction   
    */
-  vector<double> tauparameters_;
+  TauParam tauparameters_;
   
   /**
    * Gain for ATWD channels.
@@ -317,7 +347,7 @@ class I3DOMCalibration {
 
 };
 
-BOOST_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
+BOOST_CLASS_VERSION(I3DOMCalibration, 2);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
 #endif //I3DOMCALIBRATION_H_INCLUDED
