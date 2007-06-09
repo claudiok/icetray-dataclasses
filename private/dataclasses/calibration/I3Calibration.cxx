@@ -1,6 +1,6 @@
 #include <icetray/serialization.h>
 #include <dataclasses/calibration/I3Calibration.h>
-
+#include "I3TankCalibrationBackwardsCompat.h"
 I3Calibration::~I3Calibration() {}
 
 template <class Archive>
@@ -13,12 +13,28 @@ I3Calibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("domcal",domCal);
   ar & make_nvp("amandacal",amandaCal);
-  if(version > 0)
+  if(version = 1)
     {
-      ar & make_nvp("tankcal",tankCal);
+      I3TankCalibrationBackwardsCompat garbage;
+      ar & make_nvp("tankcal",garbage);
+    }
+  if(version > 1)
+    {
+      ar & make_nvp("vemcal",vemCal);
     }
   ar & make_nvp("StartTime",startTime);
   ar & make_nvp("EndTime",endTime);
 }
 
 I3_SERIALIZABLE(I3Calibration);
+
+I3TankCalibrationBackwardsCompat::~I3TankCalibrationBackwardsCompat() {}
+
+template <class Archive>
+void I3TankCalibrationBackwardsCompat::serialize (Archive& ar, unsigned version)
+{
+  ar & make_nvp("AvgMuonPE",avgMuonPE);
+  ar & make_nvp("AvgMuonRisetime",avgMuonRisetime);
+  ar & make_nvp("AvgMuonWidth",avgMuonWidth);
+}
+I3_SERIALIZABLE(I3TankCalibrationBackwardsCompat);
