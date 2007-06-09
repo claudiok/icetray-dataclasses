@@ -2,8 +2,6 @@
 #include <I3Test.h>
 
 #include "dataclasses/calibration/I3Calibration.h"
-#include "dataclasses/calibration/I3DOMCalibration.h"
-#include "dataclasses/calibration/I3TankCalibration.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/TankKey.h"
 #include "dataclasses/I3Units.h"
@@ -58,14 +56,11 @@ TEST(bin_parameters)
 
     calib->domCal[omkey] = dom_calib;
 
-    I3TankCalibration tank_calib;
-    tank_calib.avgMuonPE=45.3;
-    tank_calib.avgMuonRisetime = 10.5*I3Units::ns;
-    tank_calib.avgMuonWidth = 15.2*I3Units::ns;
+    I3VEMCalibration tank_calib;
+    tank_calib.SetPEperVEM(45.3);
+    tank_calib.SetMuonWidth(15.2*I3Units::ns);
 
-    TankKey tk(20,TankKey::TankA);
-
-    calib->tankCal[tk] = tank_calib;
+    calib->vemCal[omkey] = tank_calib;
 
     ENSURE_DISTANCE(gain, 
 		    calib->domCal[omkey].GetATWDGain(channel), 
@@ -99,19 +94,14 @@ TEST(bin_parameters)
 		    "Failed to proper Baseline value (test2)");
     
     ENSURE_DISTANCE(45.3,
-		    calib->tankCal[tk].avgMuonPE,
+		    calib->vemCal[omkey].GetPEperVEM(),
 		    0.0001,
-	            "Failed to return proper I3TankCalibration avgMuonPE");
+	            "Failed to return proper I3VEMCalibration PEperVEM");
  
-    ENSURE_DISTANCE(10.5,
-		    calib->tankCal[tk].avgMuonRisetime/I3Units::ns,
-		    0.0001,
-	            "Failed to return proper I3TankCalibration avgMuonRisetime");
-
     ENSURE_DISTANCE(15.2,
-		    calib->tankCal[tk].avgMuonWidth/I3Units::ns,
+		    calib->vemCal[omkey].GetMuonWidth()/I3Units::ns,
 		    0.0001,
-	            "Failed to return proper I3TankCalibration avgMuonWidth");
+	            "Failed to return proper IVEMCalibration MuonWidth");
 }
 
 // Test I/O streams
