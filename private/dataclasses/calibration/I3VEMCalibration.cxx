@@ -15,9 +15,9 @@ I3VEMCalibration::I3VEMCalibration():
     muPeakWidth_(NAN),
     hglgCrossOver_(NAN),
     corrFactor_(1.0)
-{
+{}
 
-}
+I3VEMCalibration::~I3VEMCalibration() {}
 
 template <class Archive>
 void I3VEMCalibration::serialize(Archive& ar, unsigned version)
