@@ -22,6 +22,10 @@
 #include <string>
 
 using namespace std;
+static const unsigned i3domcalibration_version_ = 3;
+static const unsigned linearfit_version_ = 0;
+static const unsigned quadraticfit_version_ = 0;
+static const unsigned tauparam_version_ = 0;
 
 /**
  * @brief A struct to hold a linear fit 
@@ -41,7 +45,7 @@ struct LinearFit
   }
 
 };
-
+BOOST_CLASS_VERSION(LinearFit, linearfit_version_);
 /**
  *  @brief A struct to hold the parameters of a Quadratic fit
  *  A simple struct to define a Quadratic fit:  A + B*x + C*x*x
@@ -62,10 +66,15 @@ struct QuadraticFit
   }
 
 };
+BOOST_CLASS_VERSION(QuadraticFit, quadraticfit_version_);
 
 /**
  *  @brief A struct to hold the parameters of the toroid time constants
  * for electronic droop correction
+ *  Two time constants paramerterize this correction as a
+ *    function of temperature (T):
+ *    Tau_1(T) = P0 + ( P1/(1++exp(-(T/P2)) ))
+ *    Tau_2(T) = P3 + ( P4/(1++exp(-(T/P5)) ))
  */
 
 struct TauParam
@@ -91,7 +100,7 @@ struct TauParam
 
 };
 
-
+BOOST_CLASS_VERSION(TauParam, tauparam_version_);
 
 
 
@@ -347,7 +356,7 @@ class I3DOMCalibration {
 
 };
 
-BOOST_CLASS_VERSION(I3DOMCalibration, 2);
+BOOST_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
 #endif //I3DOMCALIBRATION_H_INCLUDED
