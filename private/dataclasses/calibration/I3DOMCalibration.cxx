@@ -132,6 +132,42 @@ I3DOMCalibration::GetATWDGain (unsigned int channel) const
   return iter->second;      
 }
 
+double I3DOMCalibration::GetATWDBaseline(unsigned int id,	
+		       unsigned int channel,
+		       unsigned int bin) const
+{
+  //apply some bounds checks
+  if( (id == 0 || id ==1) && 
+      ( channel == 0 || channel == 1 || channel == 2) &&
+      ( bin>=0 && bin <128) )
+    {
+      return atwdBaselines_[id][channel][bin];
+    }
+  else
+    {
+      log_fatal("Invalid id, channel, bin specified for GetATWDBaseline");
+    }
+}
+
+void I3DOMCalibration::SetATWDBaseline(unsigned int id,
+		       unsigned int channel,
+		       unsigned int bin,
+		       double baseval)
+{
+  if( (id == 0 || id ==1) && 
+      ( channel == 0 || channel == 1 || channel == 2) &&
+      ( bin>=0 && bin <128) )
+    {
+      // Don't forget the domcal information is stored in correct time
+      //   ordering (reversed in domcal raw data)
+      atwdBaselines_[id][channel][(N_ATWD_BINS-1)-bin] = baseval;
+    }
+  else
+    {
+      log_fatal("Invalid id, channel, bin specified for SetATWDBaseline");
+    }
+}
+
 //
 // these are some beeeeautiful serialization functions.
 //
@@ -213,6 +249,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   if (version > 2)
     {
       ar & make_nvp("tauparameters", tauparameters_);
+      ar & make_nvp("ATWDBaselines", atwdBaselines_);
     }
 
 

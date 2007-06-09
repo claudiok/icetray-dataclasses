@@ -272,7 +272,24 @@ class I3DOMCalibration {
   {
     domcalVersion_ = version;
   }
+
+  /**
+   *  Get the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
+   */
   
+  double GetATWDBaseline(unsigned int id,	
+			       unsigned int channel,
+			       unsigned int bin) const;
+  /**
+   *  Set the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
+   */
+  
+  void SetATWDBaseline(unsigned int id,
+		       unsigned int channel,
+		       unsigned int bin,
+		       double baseval);
+
+
   template <class Archive>
     void serialize(Archive& ar, unsigned version);
     
@@ -345,14 +362,21 @@ class I3DOMCalibration {
   LinearFit pmtTransitTime_;
   LinearFit hvGainRelation_;
 
-    /**
-     * Version of DOMCal used. For now, this only affects the 
-     * FE load impedance. It might be useful for FADC calibration
-     * as well. Use a string since we may have version numbers like
-     * 6.1.2, e.g.
-     */
-    string domcalVersion_;
-    
+  /**
+   * Version of DOMCal used. For now, this only affects the 
+   * FE load impedance. It might be useful for FADC calibration
+   * as well. Use a string since we may have version numbers like
+   * 6.1.2, e.g.
+   */
+  string domcalVersion_;
+
+  /**
+   *  Dumb-ol-array to hold the baseline corrections.
+   *  [atwd chip id (0-1)] [ gain channel(0-2) ] [ atwd bin (0-127) ]
+   */
+
+  double atwdBaselines_[2][3][128];
+
 
 };
 

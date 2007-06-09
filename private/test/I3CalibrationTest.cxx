@@ -39,6 +39,8 @@ TEST(bin_parameters)
     
     double gain = -17.0;
     
+    double baseline = 0.00125*I3Units::V;
+
     dom_calib.SetTemperature(temp);
 
     dom_calib.SetFrontEndImpedance(feImpedance);
@@ -49,6 +51,10 @@ TEST(bin_parameters)
 				  channel,
 				  bin,
 				  fit);
+    dom_calib.SetATWDBaseline(id,
+				channel,
+				bin,
+				baseline);
 
     calib->domCal[omkey] = dom_calib;
 
@@ -60,7 +66,7 @@ TEST(bin_parameters)
     TankKey tk(20,TankKey::TankA);
 
     calib->tankCal[tk] = tank_calib;
-      
+
     ENSURE_DISTANCE(gain, 
 		    calib->domCal[omkey].GetATWDGain(channel), 
 		    0.0001,
@@ -86,6 +92,11 @@ TEST(bin_parameters)
 		    calib->domCal[omkey].GetATWDBinCalibFit(id,channel,bin).intercept/I3Units::V,
 		    0.0001,
 		    "Failed to properly return count (test2)");
+
+    ENSURE_DISTANCE(0.00125,
+		    calib->domCal[omkey].GetATWDBaseline(id,channel,bin)/I3Units::V,
+		    0.00001,
+		    "Failed to proper Baseline value (test2)");
     
     ENSURE_DISTANCE(45.3,
 		    calib->tankCal[tk].avgMuonPE,
