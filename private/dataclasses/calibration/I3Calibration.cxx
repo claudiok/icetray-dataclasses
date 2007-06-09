@@ -15,7 +15,7 @@ I3Calibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("amandacal",amandaCal);
   if(version == 1)
     {
-      I3TankCalibrationBackwardsCompat garbage;
+      map<TankKey, I3TankCalibrationBackwardsCompat> garbage;
       ar & make_nvp("tankcal",garbage);
     }
   if(version > 1)
