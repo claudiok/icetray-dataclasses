@@ -24,3 +24,4 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
 I3_SERIALIZABLE(I3RecoPulse);
 
 I3_SERIALIZABLE(I3RecoPulseSeriesMap);
+I3_SERIALIZABLE(I3RecoPulseMap);
