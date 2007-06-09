@@ -13,7 +13,7 @@ I3Calibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("domcal",domCal);
   ar & make_nvp("amandacal",amandaCal);
-  if(version = 1)
+  if(version == 1)
     {
       I3TankCalibrationBackwardsCompat garbage;
       ar & make_nvp("tankcal",garbage);
@@ -28,13 +28,3 @@ I3Calibration::serialize(Archive& ar, unsigned version)
 
 I3_SERIALIZABLE(I3Calibration);
 
-I3TankCalibrationBackwardsCompat::~I3TankCalibrationBackwardsCompat() {}
-
-template <class Archive>
-void I3TankCalibrationBackwardsCompat::serialize (Archive& ar, unsigned version)
-{
-  ar & make_nvp("AvgMuonPE",avgMuonPE);
-  ar & make_nvp("AvgMuonRisetime",avgMuonRisetime);
-  ar & make_nvp("AvgMuonWidth",avgMuonWidth);
-}
-I3_SERIALIZABLE(I3TankCalibrationBackwardsCompat);
