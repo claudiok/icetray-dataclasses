@@ -106,7 +106,10 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
   ar & make_nvp("LocalCoincidence", localCoincidence_);
   ar & make_nvp("RawChargeStamp", rawChargeStamp_);
   // Putting Pedestal into DOMLaunch for delta compressed data
-  ar & make_nvp("Pedestal", pedestal_);
+  if(version > 2)
+    {
+      ar & make_nvp("Pedestal", pedestal_);
+    }
 
   // ignore the range for the raw charge stamp of old data
   if(version < 2)
@@ -211,7 +214,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
   ar & make_nvp("RawChargeStamp", rawChargeStamp_);
-  if(version > 3)
+  if(version > 2)
     {
       ar & make_nvp("Pedestal", pedestal_);
     }
