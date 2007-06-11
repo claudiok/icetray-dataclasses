@@ -57,8 +57,8 @@ TEST(bin_parameters)
     calib->domCal[omkey] = dom_calib;
 
     I3VEMCalibration tank_calib;
-    tank_calib.SetPEperVEM(45.3);
-    tank_calib.SetMuonWidth(15.2*I3Units::ns);
+    tank_calib.pePerVEM = 45.3;
+    tank_calib.muPeakWidth = 15.2*I3Units::ns;
 
     calib->vemCal[omkey] = tank_calib;
 
@@ -94,12 +94,12 @@ TEST(bin_parameters)
 		    "Failed to proper Baseline value (test2)");
     
     ENSURE_DISTANCE(45.3,
-		    calib->vemCal[omkey].GetPEperVEM(),
+		    calib->vemCal[omkey].pePerVEM,
 		    0.0001,
 	            "Failed to return proper I3VEMCalibration PEperVEM");
  
     ENSURE_DISTANCE(15.2,
-		    calib->vemCal[omkey].GetMuonWidth()/I3Units::ns,
+		    calib->vemCal[omkey].muPeakWidth/I3Units::ns,
 		    0.0001,
 	            "Failed to return proper IVEMCalibration MuonWidth");
 }

@@ -11,7 +11,7 @@ struct I3TankCalibrationBackwardsCompat
   double avgMuonRisetime;
   double avgMuonWidth;
   template <class Archive>
-  void I3TankCalibrationBackwardsCompat::serialize (Archive& ar, unsigned version){
+  void serialize (Archive& ar, unsigned version){
     ar & make_nvp("AvgMuonPE",avgMuonPE);
     ar & make_nvp("AvgMuonRisetime",avgMuonRisetime);
     ar & make_nvp("AvgMuonWidth",avgMuonWidth);
