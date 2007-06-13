@@ -41,6 +41,8 @@ class I3Particle : public I3FrameObject
     Pi0 = 7,
     PiPlus = 8,
     PiMinus = 9,
+    KPlus = 11,
+    KMinus = 12,
     PPlus = 14,
     PMinus = 15,
     TauPlus = 33,
