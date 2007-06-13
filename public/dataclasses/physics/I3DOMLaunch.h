@@ -225,12 +225,12 @@ public:
     /**
     * return Pedestal bool.
     */
-   bool GetPedestal() const { return pedestal_; }
+   bool GetIsPedestalSub() const { return pedestal_; }
   
     /**
     * Set the pedestal bool
     */
-   void SetPedestal(bool Pedestal) {pedestal_ = Pedestal;}
+   void SetIsPedestalSub(bool Pedestal) {pedestal_ = Pedestal;}
   
   /** 
      * Return the raw charge stamp.
