@@ -217,7 +217,7 @@ double I3Particle::GetStopTime() const
   }
 }
 
-I3Particle::ParticleType I3Particle::convert_rdmc(int t){
+I3Particle::ParticleType I3Particle::convert_rdmc(int t) const{
   switch(t){
   case RDMCParticleTypes::unknown:
     return I3Particle::unknown; break;

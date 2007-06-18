@@ -286,7 +286,7 @@ class I3Particle : public I3FrameObject
   template <class Archive> void load(Archive & ar, unsigned version);
   BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-  ParticleType convert_rdmc(int);
+  ParticleType convert_rdmc(int) const ;
 
 };
 
