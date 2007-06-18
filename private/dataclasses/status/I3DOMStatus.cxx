@@ -7,7 +7,7 @@ template <class Archive>
 void I3DOMStatus::serialize (Archive& ar, const unsigned version)
 {
   if (version>i3domstatus_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMStatus class.",version,i3domstatus_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3DOMStatus class.",version,i3domstatus_version_);
 
   ar & make_nvp("TrigMode",trigMode);
   ar & make_nvp("LCMode",lcMode);

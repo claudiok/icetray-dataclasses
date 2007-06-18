@@ -7,7 +7,7 @@ template <class Archive>
   void I3TankHit::serialize(Archive& ar, unsigned version)
   {
     if (version>i3tankhit_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3TankHit class.",version,i3tankhit_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3TankHit class.",version,i3tankhit_version_);
 
     ar & make_nvp("TankNumber",tankNumber_);
     ar & make_nvp("Time",time_);

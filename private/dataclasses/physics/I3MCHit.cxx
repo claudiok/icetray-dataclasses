@@ -13,7 +13,7 @@ template <class Archive>
   void I3MCHit::serialize (Archive &ar, unsigned version)
   {
   if (version>i3mchit_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3MCHit class.",version,i3mchit_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3MCHit class.",version,i3mchit_version_);
 
     ar & make_nvp("time",time_);
     ar & make_nvp("hitID",hitID_);

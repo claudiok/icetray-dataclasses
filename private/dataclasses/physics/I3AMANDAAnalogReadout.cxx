@@ -23,7 +23,7 @@ void
 I3AMANDAAnalogReadout::save(Archive& ar, unsigned version) const
 {
   if (version>i3amandaanalogreadout_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3AMANDAAnalogReadout class.",version,i3amandaanalogreadout_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3AMANDAAnalogReadout class.",version,i3amandaanalogreadout_version_);
 
   ar & make_nvp("LEs", LEs_);
   ar & make_nvp("TEs", TEs_);
@@ -39,7 +39,7 @@ void
 I3AMANDAAnalogReadout::load(Archive& ar, unsigned version)
 {
   if (version>i3amandaanalogreadout_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3AMANDAAnalogReadout class.",version,i3amandaanalogreadout_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3AMANDAAnalogReadout class.",version,i3amandaanalogreadout_version_);
 
   ar & make_nvp("LEs", LEs_);
   ar & make_nvp("TEs", TEs_);
