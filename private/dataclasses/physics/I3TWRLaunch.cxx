@@ -32,7 +32,7 @@ void
 I3TWRLaunch::serialize (Archive& ar, unsigned version)
 {
   if (version>i3twrlaunch_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3TWRLaunch class.",version,i3twrlaunch_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3TWRLaunch class.",version,i3twrlaunch_version_);
 
   if(version < 1)
   {

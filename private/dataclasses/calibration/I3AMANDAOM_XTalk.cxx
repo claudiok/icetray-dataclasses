@@ -7,7 +7,7 @@ template <class Archive>
   void I3AMANDAOM_XTalk::serialize(Archive& ar, unsigned version)
   {
   if (version>i3amandaom_xtalk_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3AMANDAOM_XTalk class.",version,i3amandaom_xtalk_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3AMANDAOM_XTalk class.",version,i3amandaom_xtalk_version_);
 
     ar & make_nvp("receiver",receiver);
     ar & make_nvp("timehigh",timehigh);

@@ -342,3 +342,33 @@ I3MCTreeUtils::Get(const I3MCTree& t, const I3MCHit& mchit)
   log_error("Could not find I3Particle associated with I3MCHit");
   return I3Particle();
 }
+
+I3ParticlePtr
+I3MCTreeUtils::GetPrimary(const I3MCTree& t, const I3Particle& p)
+{
+  I3MCTreePtr t_ptr(new I3MCTree(t));
+  const I3MCTree::iterator p_iter = I3MCTreeUtils::GetIterator(t_ptr,p);
+  if(t_ptr->depth(p_iter) == 0 )
+    return I3ParticlePtr(new I3Particle(p));
+
+  I3MCTree::iterator parent_iter = t_ptr->parent(p_iter);
+  while(t_ptr->depth(parent_iter) != 0)
+    parent_iter = t_ptr->parent(parent_iter);
+
+  if(parent_iter != t_ptr->end())
+    return I3ParticlePtr(new I3Particle(*parent_iter));
+  else
+    log_error("couldn't find the primary");
+
+  return I3ParticlePtr();
+}
+
+I3ParticlePtr
+I3MCTreeUtils::GetPrimary(I3MCTreePtr t, const I3Particle& p){
+  return GetPrimary(*t,p);
+}
+
+I3ParticlePtr
+I3MCTreeUtils::GetPrimary(I3MCTreeConstPtr t, const I3Particle& p){
+  return GetPrimary(*t,p);
+}

@@ -57,7 +57,7 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
   int32_t secsafteryear = daysafteryear * 3600 * 24 + sec;
   daqTime_ =
     ((int64_t)secsafteryear * ((int64_t)(1e10)))
-    + ((int64_t)ns * ((int64_t)10));
+    + ((int64_t)(ns * 10.));
 }
 
 void I3Time::SetUnixTime(time_t unixTime)

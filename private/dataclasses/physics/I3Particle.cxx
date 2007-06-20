@@ -37,7 +37,6 @@ string I3Particle::GetTypeString() const
   case Gamma:      return("Gamma");
   case EPlus:      return("EPlus");
   case EMinus:     return("EMinus");
-  case Nu:         return("Nu");
   case MuPlus:     return("MuPlus");
   case MuMinus:    return("MuMinus");
   case Pi0:        return("Pi0");
@@ -60,17 +59,6 @@ string I3Particle::GetTypeString() const
   case NuclInt:    return("NuclInt");
   case MuPair:     return("MuPair");
   case Hadrons:    return("Hadrons");
-  case FiberLaser: return("FiberLaser");
-  case N2Laser:    return("N2Laser");
-  case YAGLaser:   return("YAGLaser");
-  case ZPrimary:   return("ZPrimary");
-  case APrimary:   return("APrimary");
-  case CRProton:   return("CRProton");
-  case CRHelium:   return("CRHelium");
-  case CROxygen:   return("CROxygen");
-  case CRSilicon:  return("CRSilicon");
-  case CRIron:     return("CRIron");
-  case Elph:       return("Elph");
   default:         return("undefined_particle_type");
   }
 }
@@ -229,11 +217,93 @@ double I3Particle::GetStopTime() const
   }
 }
 
+I3Particle::ParticleType I3Particle::convert_rdmc(int t) const{
+  switch(t){
+  case RDMCParticleTypes::unknown:
+    return I3Particle::unknown; break;
+  case RDMCParticleTypes::Gamma:
+    return I3Particle::Gamma; break;
+  case RDMCParticleTypes::EPlus:
+    return I3Particle::EPlus; break;
+  case RDMCParticleTypes::EMinus:
+    return I3Particle::EMinus; break;
+  case RDMCParticleTypes::Nu:
+    return I3Particle::Nu; break;
+  case RDMCParticleTypes::MuPlus:
+    return I3Particle::MuPlus; break;
+  case RDMCParticleTypes::MuMinus:
+    return I3Particle::MuMinus; break;
+  case RDMCParticleTypes::Pi0:
+    return I3Particle::Pi0; break;
+  case RDMCParticleTypes::PiPlus:
+    return I3Particle::PiPlus; break;
+  case RDMCParticleTypes::PiMinus:
+    return I3Particle::PiMinus; break;
+  case RDMCParticleTypes::PPlus:
+    return I3Particle::PPlus; break;
+  case RDMCParticleTypes::PMinus:
+    return I3Particle::PMinus; break;
+  case RDMCParticleTypes::TauPlus:
+    return I3Particle::TauPlus; break;
+  case RDMCParticleTypes::TauMinus:
+    return I3Particle::TauMinus; break;
+  case RDMCParticleTypes::Monopole:
+    return I3Particle::Monopole; break;
+  case RDMCParticleTypes::NuE:
+    return I3Particle::NuE; break;
+  case RDMCParticleTypes::NuMu:
+    return I3Particle::NuMu; break;
+  case RDMCParticleTypes::NuTau:
+    return I3Particle::NuTau; break;
+  case RDMCParticleTypes::NuEBar:
+    return I3Particle::NuEBar; break;
+  case RDMCParticleTypes::NuMuBar:
+    return I3Particle::NuMuBar; break;
+  case RDMCParticleTypes::NuTauBar:
+    return I3Particle::NuTauBar; break;
+  case RDMCParticleTypes::Brems:
+    return I3Particle::Brems; break;
+  case RDMCParticleTypes::DeltaE:
+    return I3Particle::DeltaE; break;
+  case RDMCParticleTypes::PairProd:
+    return I3Particle::PairProd; break;
+  case RDMCParticleTypes::NuclInt:
+    return I3Particle::NuclInt; break;
+  case RDMCParticleTypes::MuPair:
+    return I3Particle::MuPair; break;
+  case RDMCParticleTypes::Hadrons:
+    return I3Particle::Hadrons; break;
+  case RDMCParticleTypes::FiberLaser:
+    return I3Particle::FiberLaser; break;
+  case RDMCParticleTypes::N2Laser:
+    return I3Particle::N2Laser; break;
+  case RDMCParticleTypes::YAGLaser:
+    return I3Particle::YAGLaser; break;
+  case RDMCParticleTypes::ZPrimary:
+    return I3Particle::unknown; break;
+  case RDMCParticleTypes::APrimary:
+    return I3Particle::unknown; break;
+  case RDMCParticleTypes::CRProton:
+    return I3Particle::PPlus; break;
+  case RDMCParticleTypes::CRHelium:
+    return I3Particle::He4Nucleus; break;
+  case RDMCParticleTypes::CROxygen:
+    return I3Particle::O16Nucleus; break;
+  case RDMCParticleTypes::CRSilicon:
+    return I3Particle::Si28Nucleus; break;
+  case RDMCParticleTypes::CRIron:
+    return I3Particle::Fe56Nucleus; break;
+  case RDMCParticleTypes::Elph:
+    return I3Particle::unknown; break;
+  }
+  return I3Particle::unknown;
+}
+
 template <class Archive>
-  void I3Particle::serialize(Archive& ar, unsigned version)
+  void I3Particle::save(Archive& ar, unsigned version) const
   {
   if (version>i3particle_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3Particle class.",version,i3particle_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3Particle class.",version,i3particle_version_);
 
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
@@ -245,6 +315,42 @@ template <class Archive>
       ar & make_nvp("primaryID",primaryID_);
     }
     ar & make_nvp("type",type_);
+    ar & make_nvp("shape",shape_);
+    ar & make_nvp("fitStatus",status_);
+    ar & make_nvp("pos",pos_);
+    ar & make_nvp("dir",dir_);
+    ar & make_nvp("time",time_);
+    ar & make_nvp("energy",energy_);
+    ar & make_nvp("length",length_);
+    ar & make_nvp("speed",speed_);
+    if(version == 0)
+      ar & make_nvp("composite",composite_);
+    if(version>0)
+      ar & make_nvp("LocationType",locationType_);
+  }
+
+template <class Archive>
+  void I3Particle::load(Archive& ar, unsigned version)
+  {
+  if (version>i3particle_version_)
+    log_fatal("Attempting to read version %u from file but running version %u of I3Particle class.",version,i3particle_version_);
+
+    ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+    ar & make_nvp("ID",ID_);
+    if(version>1){
+      ar & make_nvp("MajorID",major_ID_);
+    }
+    if(version == 0){
+      ar & make_nvp("parentID",parentID_);
+      ar & make_nvp("primaryID",primaryID_);
+    }
+    if(version > 2){
+      ar & make_nvp("type",type_);
+    }else{
+      I3Particle::ParticleType t;
+      ar & make_nvp("type",t);
+      type_ = convert_rdmc(t);
+    }
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
     ar & make_nvp("pos",pos_);

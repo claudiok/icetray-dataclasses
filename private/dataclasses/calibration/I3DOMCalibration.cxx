@@ -1,3 +1,4 @@
+
 //
 //  $Id$
 //
@@ -13,7 +14,9 @@ I3DOMCalibration::I3DOMCalibration()
     fadcGain_(NAN),
     fadcDeltaT_(NAN),
     frontEndImpedance_(NAN),
-    domcalVersion_("unknown")
+    domcalVersion_("unknown"), 
+    atwdResponseWidth_(NAN),
+    fadcResponseWidth_(NAN)
 { }
 
 /**
@@ -176,7 +179,7 @@ void
 LinearFit::serialize(Archive& ar, unsigned version)
 {
   if (version>linearfit_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of LinearFit class.",version,linearfit_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of LinearFit class.",version,linearfit_version_);
 
   ar & make_nvp("slope",slope);
   ar & make_nvp("intercept",intercept);
@@ -189,7 +192,7 @@ void
 QuadraticFit::serialize(Archive& ar, unsigned version)
 {
   if (version>quadraticfit_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of QuadraticFit class.",version,quadraticfit_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of QuadraticFit class.",version,quadraticfit_version_);
 
   ar & make_nvp("quadraticA",quadFitA);
   ar & make_nvp("quadraticB",quadFitB);
@@ -203,7 +206,8 @@ void
 TauParam::serialize(Archive& ar, unsigned version)
 {
   if (version>tauparam_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of TuaParam class.",version,tauparam_version_);
+
+    log_fatal("Attempting to read version %u from file but running version %u of TuaParam class.",version,tauparam_version_);
 
   ar & make_nvp("P0",P0);
   ar & make_nvp("P1",P1);
@@ -211,6 +215,7 @@ TauParam::serialize(Archive& ar, unsigned version)
   ar & make_nvp("P3",P3);
   ar & make_nvp("P4",P4);
   ar & make_nvp("P5",P5);
+  ar & make_nvp("TauFrac",TauFrac);
 }
 
 I3_SERIALIZABLE(TauParam);
@@ -221,7 +226,7 @@ void
 I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
   if (version>i3domcalibration_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMCalibration class.",version,i3domcalibration_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3DOMCalibration class.",version,i3domcalibration_version_);
 
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
@@ -250,6 +255,9 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("tauparameters", tauparameters_);
       ar & make_nvp("ATWDBaselines", atwdBaselines_);
+      ar & make_nvp("ATWDResponseWidth", atwdResponseWidth_);
+      ar & make_nvp("FADCResponseWidth", fadcResponseWidth_);
+      
     }
 
 

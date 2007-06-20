@@ -22,7 +22,7 @@ template <class Archive>
 void I3DOMLaunch::save(Archive& ar, unsigned version) const
 {
   if (version>i3domlaunch_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3DOMLaunch class.",version,i3domlaunch_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3DOMLaunch class.",version,i3domlaunch_version_);
 
   ar & make_nvp("StartTime", startTime_);
   // ignore the "Trigger" information of old data

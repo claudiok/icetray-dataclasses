@@ -140,6 +140,13 @@ namespace I3MCTreeUtils
 
   I3MCTree::iterator GetIterator(I3MCTreePtr, const I3Particle&);
 
+  /**
+   * This gets the primary that created the particle;
+   */
+  I3ParticlePtr GetPrimary(const I3MCTree&, const I3Particle&);
+  I3ParticlePtr GetPrimary(I3MCTreePtr, const I3Particle&);
+  I3ParticlePtr GetPrimary(I3MCTreeConstPtr, const I3Particle&);
+
   void Dump(const I3MCTree&);
   void Dump(I3MCTreeConstPtr);
   void Dump(I3MCTreePtr);

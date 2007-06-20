@@ -17,19 +17,9 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3particle_version_ = 2;
+static const unsigned i3particle_version_ = 3;
 
-/**
- * @brief 
- */
-class I3Particle : public I3FrameObject
-{
-
-  static int global_minor_id_;
-  static uint64_t global_major_id_;
-    
- public:
-
+namespace RDMCParticleTypes{
   enum ParticleType {
     unknown = -100,
     Gamma = 1,
@@ -72,6 +62,90 @@ class I3Particle : public I3FrameObject
     CRIron = 4056,
     Elph = 9999
   };
+};
+
+/**
+ * @brief 
+ */
+class I3Particle : public I3FrameObject
+{
+
+  static int global_minor_id_;
+  static uint64_t global_major_id_;
+    
+ public:
+
+  enum ParticleType {
+    unknown = 0,
+    Gamma = 1,
+    EPlus = 2,
+    EMinus = 3,
+    MuPlus = 5,
+    MuMinus = 6,
+    Pi0 = 7,
+    PiPlus = 8,
+    PiMinus = 9,
+    K0_Long = 10,
+    KPlus = 11,
+    KMinus = 12,
+    Neutron = 13,
+    PPlus = 14,
+    PMinus = 15,
+    K0_Short = 16,
+    NuE = 66,
+    NuEBar = 67,
+    NuMu = 68,
+    NuMuBar = 69,
+    TauPlus = 131,
+    TauMinus = 132,
+    NuTau = 133,
+    NuTauBar = 134,
+    /**
+     * In CORSIKA nuclei numbers
+     * are A x 100 + Z 
+     */
+    He4Nucleus = 402,
+    Li7Nucleus = 703,
+    Be9Nucleus = 904,
+    B11Nucleus = 1105,
+    C12Nucleus = 1206,
+    N14Nucleus = 1407,
+    O16Nucleus = 1608,
+    F19Nucleus = 1909,
+    Ne20Nucleus = 2010,
+    Na23Nucleus = 2311,
+    Mg24Nucleus = 2412,
+    Al27Nucleus = 2713,
+    Si28Nucleus = 2814,
+    P31Nucleus = 3115,
+    S32Nucleus = 3216,
+    Cl35Nucleus = 3517,
+    Ar40Nucleus = 4018,
+    K39Nucleus = 3919,
+    Ca40Nucleus = 4020,
+    Sc45Nucleus = 4521,
+    Ti48Nucleus = 4822,
+    V51Nucleus = 5123,
+    Cr52Nucleus = 5224,
+    Mn55Nucleus = 5525,
+    Fe56Nucleus = 5626,
+    CherenkovPhoton = 9900,
+    /**
+     *Particle types not in CORSIKA
+     */
+    Nu = -4,
+    Monopole = -41,
+    Brems = -1001,
+    DeltaE = -1002,
+    PairProd = -1003,
+    NuclInt = -1004,
+    MuPair = -1005,
+    Hadrons = -1006,
+    FiberLaser = -2100,
+    N2Laser = -2101,
+    YAGLaser = -2201
+  };
+
   enum ParticleShape { 
     Null = 0, 
     Primary = 10, 
@@ -144,6 +218,7 @@ class I3Particle : public I3FrameObject
 
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
+  void SetRDMCType(int type) { type_ = convert_rdmc(type); }
   string GetTypeString() const;
 
   ParticleShape GetShape() const { return shape_; }
@@ -207,7 +282,11 @@ class I3Particle : public I3FrameObject
  private:
 
   friend class boost::serialization::access;
-  template <class Archive> void serialize(Archive & ar, unsigned version);
+  template <class Archive> void save(Archive & ar, unsigned version) const;
+  template <class Archive> void load(Archive & ar, unsigned version);
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
+
+  ParticleType convert_rdmc(int) const ;
 
 };
 

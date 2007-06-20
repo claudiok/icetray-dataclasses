@@ -39,7 +39,8 @@ class I3MCHit
     RANDOM = 20,
     AFTER_PULSE = 30,
     PRE_PULSE = 40,
-    LATE_PULSE = 50
+    ELASTIC_LATE_PULSE = 50,
+    INELASTIC_LATE_PULSE = 60
   };
 
   I3MCHit() : 

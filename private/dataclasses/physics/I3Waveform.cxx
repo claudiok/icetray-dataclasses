@@ -47,7 +47,7 @@ template <class Archive>
 void I3Waveform::serialize(Archive& ar, unsigned version)
 {
   if (version>i3waveform_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3Waveform class.",version,i3waveform_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3Waveform class.",version,i3waveform_version_);
 
   ar & make_nvp("startTime", startTime_);
   ar & make_nvp("binWidth", binWidth_);

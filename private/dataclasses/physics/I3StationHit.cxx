@@ -8,7 +8,7 @@ void
 I3StationHit::serialize (Archive& ar, unsigned version)
 {
   if (version>i3stationhit_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3StationHit class.",version,i3stationhit_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3StationHit class.",version,i3stationhit_version_);
 
   ar & make_nvp("I3StationHit", 
 		base_object< I3Vector<I3TankHitPtr> >(*this));

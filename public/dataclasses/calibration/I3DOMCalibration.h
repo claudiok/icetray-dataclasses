@@ -69,12 +69,14 @@ struct QuadraticFit
 BOOST_CLASS_VERSION(QuadraticFit, quadraticfit_version_);
 
 /**
- *  @brief A struct to hold the parameters of the toroid time constants
+ *  @brief A struct to hold the parameters of the toroid time constants parameters
  * for electronic droop correction
- *  Two time constants paramerterize this correction as a
- *    function of temperature (T):
- *    Tau_1(T) = P0 + ( P1/(1++exp(-(T/P2)) ))
- *    Tau_2(T) = P3 + ( P4/(1++exp(-(T/P5)) ))
+ * The two time constants parametrize this correction as a
+ * function of temperature (T):
+ *   Tau_1(T) = P0 + ( P1/(1+exp(-(T/P2)) ))
+ *   Tau_2(T) = P3 + ( P4/(1+exp(-(T/P5)) ))
+ * the functions exp(-t/tau1) and exp(-t/tau2) are combined in the TauFrac proportion to reproduce
+ * the electronics behaviour through (1-Taufrac)exp(-t/tau1) + TauFrac exp(-t/tau2)
  */
 
 struct TauParam
@@ -85,6 +87,7 @@ struct TauParam
   double P3;
   double P4;
   double P5;
+  double TauFrac;
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -96,6 +99,7 @@ struct TauParam
     P3 = NAN;
     P4 = NAN;
     P5 = NAN;
+    TauFrac = NAN;
   }
 
 };
@@ -183,7 +187,6 @@ class I3DOMCalibration {
   /**
    * Get parameters for droop correction on the baseline
    */
-  //CR test
   TauParam GetTauParameters() const { return tauparameters_; }
   
   /**
@@ -290,6 +293,27 @@ class I3DOMCalibration {
 		       double baseval);
 
 
+  /**
+   * Get electronics response width for ATWD 
+   */
+  double GetATWDResponseWidth() const { return atwdResponseWidth_; }
+  
+  /**
+   * Set electronics response width for ATWD 
+   */
+  void SetATWDResponseWidth(double atwdResponseWidth) { atwdResponseWidth_ = atwdResponseWidth; }
+  /**
+   * Get electronics response width for FADC 
+   */
+  double GetFADCResponseWidth() const { return fadcResponseWidth_; }
+  
+  /**
+   * Set electronics response width for FADC 
+   */
+  void SetFADCResponseWidth(double fadcResponseWidth) { fadcResponseWidth_ = fadcResponseWidth; }
+
+
+
   template <class Archive>
     void serialize(Archive& ar, unsigned version);
     
@@ -376,6 +400,20 @@ class I3DOMCalibration {
    */
 
   double atwdBaselines_[2][3][128];
+
+  /**
+   *  Stores the response witdth of the electronics to a pulse (ATWD). To be used with  
+   *  the simulation. It changed with 2006 toroid change.  
+   */
+
+  double atwdResponseWidth_;
+
+  /**
+   *  Stores the response witdth of the electronics to a pulse (FADC). To be used with  
+   *  the simulation. It changed with 2006 toroid change.  
+   */
+
+  double fadcResponseWidth_;
 
 
 };

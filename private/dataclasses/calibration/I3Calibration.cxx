@@ -8,7 +8,7 @@ void
 I3Calibration::serialize(Archive& ar, unsigned version)
 {
   if (version>i3calibration_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3Calibration class.",version,i3calibration_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3Calibration class.",version,i3calibration_version_);
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("domcal",domCal);

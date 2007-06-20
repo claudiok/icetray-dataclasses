@@ -8,7 +8,7 @@ void
 I3RecoHit::serialize(Archive& ar, unsigned version)
 {
   if (version>i3recohit_version_)
-    log_fatal("Attempting to read version %zu from file but running version %zu of I3RecoHit class.",version,i3recohit_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of I3RecoHit class.",version,i3recohit_version_);
 
   ar & make_nvp("time",time_);
   ar & make_nvp("hitID",hitID_);
