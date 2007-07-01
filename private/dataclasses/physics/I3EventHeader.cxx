@@ -10,7 +10,15 @@ I3EventHeader::I3EventHeader() :
 
 I3EventHeader::~I3EventHeader() {}
 
-
+bool
+I3EventHeader::operator==(const I3EventHeader& rhs)
+{
+  return rhs.runID_ == runID_
+    && rhs.subRunID_ == subRunID_
+    && rhs.eventID_ == eventID_
+    && rhs.startTime_ == startTime_
+    && rhs.endTime_ == endTime_;
+}
 
 template <class Archive>
 void 

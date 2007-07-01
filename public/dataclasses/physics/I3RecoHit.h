@@ -29,6 +29,7 @@ class I3RecoHit
   public:
   I3RecoHit() : time_(NAN),hitID_(-1),sourceIndex_(-1){}
 
+  bool operator==(const I3RecoHit&);
   virtual ~I3RecoHit();
 
   double GetTime() const { return time_; }

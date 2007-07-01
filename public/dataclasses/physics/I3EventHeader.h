@@ -42,6 +42,8 @@ class I3EventHeader : public I3FrameObject
 
   virtual ~I3EventHeader();
 
+  bool operator==(const I3EventHeader& rhs);
+
   I3Time GetStartTime() const
     {
       return startTime_;
