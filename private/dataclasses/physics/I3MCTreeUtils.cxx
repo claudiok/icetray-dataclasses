@@ -315,8 +315,8 @@ void I3MCTreeUtils::Dump(const I3MCTree& t){
   for(i = t.begin(); i != t.end(); i++){
     for(int j=0; j<5*t.depth(i); j++) cout<<" ";
     cout<<i->GetTypeString()<<" "
-	<<i->GetMinorID()<<" "
 	<<i->GetMajorID()<<" "
+	<<i->GetMinorID()<<" "
 	<<endl;
     internal::DumpChildren(t,i);
   }
