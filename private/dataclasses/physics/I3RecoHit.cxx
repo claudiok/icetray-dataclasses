@@ -3,14 +3,6 @@
 
 I3RecoHit::~I3RecoHit() {}
 
-bool
-I3RecoHit::operator==(const I3RecoHit& rhs)
-{
-  return rhs.time_ == time_
-    && rhs.hitID_ == hitID_
-    && rhs.sourceIndex_ == sourceIndex_;
-}
-
 template <class Archive>
 void 
 I3RecoHit::serialize(Archive& ar, unsigned version)
