@@ -330,6 +330,59 @@ I3Particle::ParticleType I3Particle::convert_rdmc(int t) const{
     return I3Particle::Fe56Nucleus; break;
   case RDMCParticleTypes::Elph:
     return I3Particle::unknown; break;
+  case 3001:
+    return I3Particle::PPlus; break;
+  case 3002:
+    return I3Particle::He4Nucleus; break;
+  case 3003:
+    return I3Particle::Li7Nucleus; break;
+  case 3004:
+    return I3Particle::Be9Nucleus; break;
+  case 3005:
+    return I3Particle::B11Nucleus; break;
+  case 3006:
+    return I3Particle::C12Nucleus; break;
+  case 3007:
+    return I3Particle::N14Nucleus; break;
+  case 3008:
+    return I3Particle::O16Nucleus; break;
+  case 3009:
+    return I3Particle::F19Nucleus; break;
+  case 3010:
+    return I3Particle::Ne20Nucleus; break;
+  case 3011:
+    return I3Particle::Na23Nucleus; break;
+  case 3012:
+    return I3Particle::Mg24Nucleus; break;
+  case 3013:
+    return I3Particle::Al27Nucleus; break;
+  case 3014:
+    return I3Particle::Si28Nucleus; break;
+  case 3015:
+    return I3Particle::P31Nucleus; break;
+  case 3016:
+    return I3Particle::S32Nucleus; break;
+  case 3017:
+    return I3Particle::Cl35Nucleus; break;
+  case 3018:
+    return I3Particle::Ar40Nucleus; break;
+  case 3019:
+    return I3Particle::K39Nucleus; break;
+  case 3020:
+    return I3Particle::Ca40Nucleus; break;
+  case 3021:
+    return I3Particle::Sc45Nucleus; break;
+  case 3022:
+    return I3Particle::Ti48Nucleus; break;
+  case 3023:
+    return I3Particle::V51Nucleus; break;
+  case 3024:
+    return I3Particle::Cr52Nucleus; break;
+  case 3025:
+    return I3Particle::Mn55Nucleus; break;
+  case 3026:
+    return I3Particle::Fe56Nucleus; break;
+    
   }
   return I3Particle::unknown;
 }
