@@ -15,12 +15,13 @@
 namespace I3MCTreeUtils
 {
   /**
-   *Adds a primary (top-level node) to the tree.
-   *The primary has no parent.
-   *A tree can have multiple primaries.
+   * Adds a primary (top-level node) to the tree.
+   * The primary has no parent.
+   * A tree can have multiple primaries.
+   * Sets the shape to Primary
    */
-  void AddPrimary(I3MCTree&, const I3Particle&);
-  void AddPrimary(I3MCTreePtr,  const I3Particle&);
+  void AddPrimary(I3MCTree&, I3Particle&);
+  void AddPrimary(I3MCTreePtr, I3Particle&);
 
   void AddPrimary(I3MCTree&,  const I3MCTree&);
 
