@@ -111,6 +111,22 @@ namespace I3MCTreeUtils
   I3MCTree::iterator GetMostEnergeticInIce(const I3MCTree&);
   I3MCTree::iterator GetMostEnergeticInIce(I3MCTreeConstPtr);
 
+//----------Added by seo: Start-----------------------------------------
+
+  I3MCTree::iterator GetMostEnergeticStochastics(const I3MCTree&);
+  I3MCTree::iterator GetMostEnergeticStochastics(I3MCTreeConstPtr);
+
+  int GetNumberOfStochastics(const I3MCTree&, double&);
+  int GetNumberOfStochastics(I3MCTreeConstPtr, double&);
+
+  int GetNumberOfAtmosphericMuons(const I3MCTree&);
+  int GetNumberOfAtmosphericMuons(I3MCTreeConstPtr);
+
+  bool IsCosmicRayParticle(const I3Particle&);
+  bool IsCosmicRayParticle(I3ParticlePtr);
+
+//----------Added by seo: End-----------------------------------------
+
   I3MCTree::iterator GetMostEnergetic(const I3MCTree&, I3Particle::ParticleType);
   I3MCTree::iterator GetMostEnergetic(I3MCTreeConstPtr, I3Particle::ParticleType);
 

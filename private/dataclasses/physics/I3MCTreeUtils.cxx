@@ -185,6 +185,122 @@ I3MCTreeUtils::GetMostEnergeticInIce(I3MCTreeConstPtr t)
   return GetMostEnergeticInIce(*t);
 }
 
+//----------Added by seo: Start-----------------------------------------
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticStochastics(const I3MCTree& t)
+{
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return = t.end();
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && 
+	(iter->GetType()==I3Particle::Brems ||
+        iter->GetType()==I3Particle::PairProd ||
+        iter->GetType()==I3Particle::DeltaE ||
+        iter->GetType()==I3Particle::NuclInt) ) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticStochastics(I3MCTreeConstPtr t)
+{
+  return GetMostEnergeticInIce(*t);
+}
+
+int I3MCTreeUtils::GetNumberOfStochastics(const I3MCTree& t, double& thresholdEnergy)
+{
+  int numberOfStochastics = 0;
+  I3MCTree::iterator iter;
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>thresholdEnergy && 
+	(iter->GetType()==I3Particle::Brems ||
+        iter->GetType()==I3Particle::PairProd ||
+        iter->GetType()==I3Particle::DeltaE ||
+        iter->GetType()==I3Particle::NuclInt) ) {
+      numberOfStochastics++;
+    }
+  }
+  return numberOfStochastics;
+}
+
+int I3MCTreeUtils::GetNumberOfStochastics(I3MCTreeConstPtr t, double& thresholdEnergy)
+{
+  return GetNumberOfStochastics(*t, thresholdEnergy);
+}
+
+int I3MCTreeUtils::GetNumberOfAtmosphericMuons(const I3MCTree& t)
+{
+  int numberOfAtmosphericMuons = 0;
+
+  //--check for primary particle type
+  const std::vector<I3Particle> vec_primaries = GetPrimaries(t);
+  for(int j=0; j < vec_primaries.size(); j++){
+
+      const I3Particle& primary = vec_primaries[j];
+
+      if (IsCosmicRayParticle(primary)){ 
+          const std::vector<I3Particle> vec_daughters = GetDaughters(t, primary);
+          for(int k=0; k < vec_daughters.size(); k++){
+              I3Particle particle = vec_daughters[k];
+              if(particle.GetType()==I3Particle::MuPlus ||
+                 particle.GetType()==I3Particle::MuMinus){
+                 numberOfAtmosphericMuons++;
+              }
+          }//for(int k=0; k < vec_daughters.size; k++){
+
+      }//if (primary.GetType() >= I3Particle::ZPrimary &&
+  }
+  return numberOfAtmosphericMuons;
+}
+
+int I3MCTreeUtils::GetNumberOfAtmosphericMuons(I3MCTreeConstPtr t)
+{
+  return GetNumberOfAtmosphericMuons(*t);
+}
+
+bool I3MCTreeUtils::IsCosmicRayParticle(const I3Particle& particle)
+{
+  bool isCosmicRayParticle = false;
+  if (particle.GetType() ==  I3Particle::He4Nucleus ||
+      particle.GetType() ==  I3Particle::Li7Nucleus ||
+      particle.GetType() ==  I3Particle::Be9Nucleus ||
+      particle.GetType() ==  I3Particle::B11Nucleus ||
+      particle.GetType() ==  I3Particle::C12Nucleus ||
+      particle.GetType() ==  I3Particle::N14Nucleus ||
+      particle.GetType() ==  I3Particle::O16Nucleus ||
+      particle.GetType() ==  I3Particle::F19Nucleus ||
+      particle.GetType() ==  I3Particle::Ne20Nucleus ||
+      particle.GetType() ==  I3Particle::Na23Nucleus ||
+      particle.GetType() ==  I3Particle::Mg24Nucleus ||
+      particle.GetType() ==  I3Particle::Al27Nucleus ||
+      particle.GetType() ==  I3Particle::Si28Nucleus ||
+      particle.GetType() ==  I3Particle::P31Nucleus ||
+      particle.GetType() ==  I3Particle::S32Nucleus ||
+      particle.GetType() ==  I3Particle::Cl35Nucleus ||
+      particle.GetType() ==  I3Particle::Ar40Nucleus ||
+      particle.GetType() ==  I3Particle::K39Nucleus ||
+      particle.GetType() ==  I3Particle::Ca40Nucleus ||
+      particle.GetType() ==  I3Particle::Sc45Nucleus ||
+      particle.GetType() ==  I3Particle::Ti48Nucleus ||
+      particle.GetType() ==  I3Particle::V51Nucleus ||
+      particle.GetType() ==  I3Particle::Cr52Nucleus ||
+      particle.GetType() ==  I3Particle::Mn55Nucleus ||
+      particle.GetType() ==  I3Particle::Fe56Nucleus){
+
+       isCosmicRayParticle = true;
+  }
+  return isCosmicRayParticle; 
+}
+
+bool I3MCTreeUtils::IsCosmicRayParticle(I3ParticlePtr p)
+{
+    return IsCosmicRayParticle(*p);    
+}
+//----------Added by seo: End-----------------------------------------
 I3MCTree::iterator
 I3MCTreeUtils::GetMostEnergetic(const I3MCTree& t,
 				I3Particle::ParticleType type)
