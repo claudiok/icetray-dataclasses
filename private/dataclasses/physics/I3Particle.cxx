@@ -143,22 +143,80 @@ bool I3Particle::IsTrack() const
       shape_==StoppingTrack || shape_==ContainedTrack ||
       type_==MuPlus || type_==MuMinus ||
       type_==TauPlus || type_==TauMinus ||
-      type_==Monopole)
-    return true;
+      type_==Monopole ||
+      (shape_ == Primary && 
+       ( type_ == PPlus       ||
+	 type_ == PMinus      ||
+	 type_ == He4Nucleus  ||
+	 type_ == Li7Nucleus  ||
+	 type_ == Be9Nucleus  ||
+	 type_ == B11Nucleus  ||
+	 type_ == C12Nucleus  ||
+	 type_ == N14Nucleus  ||
+	 type_ == O16Nucleus  ||
+	 type_ == F19Nucleus  ||
+	 type_ == Ne20Nucleus ||
+	 type_ == Na23Nucleus ||
+	 type_ == Mg24Nucleus ||
+	 type_ == Al27Nucleus ||
+	 type_ == Si28Nucleus ||
+	 type_ == P31Nucleus  ||
+	 type_ == S32Nucleus  ||
+	 type_ == Cl35Nucleus ||
+	 type_ == Ar40Nucleus ||
+	 type_ == K39Nucleus  ||
+	 type_ == Ca40Nucleus ||
+	 type_ == Sc45Nucleus ||
+	 type_ == Ti48Nucleus ||
+	 type_ == V51Nucleus  ||
+	 type_ == Cr52Nucleus ||
+	 type_ == Mn55Nucleus ||
+	 type_ == Fe56Nucleus ||
+	 type_ == Gamma )
+       )
+      ) return true;    
   else return false;
 }
 
 bool I3Particle::IsCascade() const
 {
-  if (shape_==Cascade ||
+  if (shape_ == Cascade ||
       type_ == EPlus    || type_== EMinus   ||
       type_ == Brems    || type_ == DeltaE  ||
       type_ == PairProd || type_ == NuclInt ||
-      type_ == Gamma    || type_ == Hadrons ||
-      type_ == PiPlus   || type_ == PiMinus ||
-      type_ == Pi0      || type_ == MuPair  ||
-      type_ == PPlus    || type_ == PMinus )  
-    return true;
+      type_ == Hadrons  || type_ == Pi0     ||
+      type_ == PiPlus   || type_ == PiMinus ||      
+      (shape_ != Primary && 
+       ( type_ == PPlus       ||
+	 type_ == PMinus      ||
+	 type_ == He4Nucleus  ||
+	 type_ == Li7Nucleus  ||
+	 type_ == Be9Nucleus  ||
+	 type_ == B11Nucleus  ||
+	 type_ == C12Nucleus  ||
+	 type_ == N14Nucleus  ||
+	 type_ == O16Nucleus  ||
+	 type_ == F19Nucleus  ||
+	 type_ == Ne20Nucleus ||
+	 type_ == Na23Nucleus ||
+	 type_ == Mg24Nucleus ||
+	 type_ == Al27Nucleus ||
+	 type_ == Si28Nucleus ||
+	 type_ == P31Nucleus  ||
+	 type_ == S32Nucleus  ||
+	 type_ == Cl35Nucleus ||
+	 type_ == Ar40Nucleus ||
+	 type_ == K39Nucleus  ||
+	 type_ == Ca40Nucleus ||
+	 type_ == Sc45Nucleus ||
+	 type_ == Ti48Nucleus ||
+	 type_ == V51Nucleus  ||
+	 type_ == Cr52Nucleus ||
+	 type_ == Mn55Nucleus ||
+	 type_ == Fe56Nucleus ||
+	 type_ == Gamma )
+       )
+      ) return true;    
   else return false;
 }
 

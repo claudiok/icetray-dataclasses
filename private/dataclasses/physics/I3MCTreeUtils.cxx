@@ -2,27 +2,26 @@
 #include "dataclasses/I3TreeUtils.h"
 #include "icetray/I3Frame.h"
 
-void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
+void I3MCTreeUtils::AddPrimary(I3MCTree& t, I3Particle& p)
 {
+  p.SetShape(I3Particle::Primary);
   I3TreeUtils::AddTopLevel<I3Particle>(t, p);
 }
 
-void I3MCTreeUtils::AddPrimary(I3MCTreePtr t, const I3Particle& p)
+void I3MCTreeUtils::AddPrimary(I3MCTreePtr t, I3Particle& p)
 {
+  p.SetShape(I3Particle::Primary);
   I3MCTreeUtils::AddPrimary(*t, p);
 }
 
 void I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3MCTree& subt)
 {
-  //I3MCTree subtt(subt);
   I3TreeUtils::AddTopLevel<I3Particle>(t, subt);
 }
 
 
 void I3MCTreeUtils::AppendChild(I3MCTree& t, const I3Particle& parent, const I3Particle& child)
 {
-  //Need to find the iterator of the parent
-  //do it bonehead-style first
   I3TreeUtils::AppendChild<I3Particle>(t, parent, child);
 }
 
