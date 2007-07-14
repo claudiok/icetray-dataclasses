@@ -265,7 +265,9 @@ int I3MCTreeUtils::GetNumberOfAtmosphericMuons(I3MCTreeConstPtr t)
 bool I3MCTreeUtils::IsCosmicRayParticle(const I3Particle& particle)
 {
   bool isCosmicRayParticle = false;
-  if (particle.GetType() ==  I3Particle::He4Nucleus ||
+  if (particle.GetType() ==  I3Particle::PPlus ||
+      particle.GetType() ==  I3Particle::PMinus ||
+      particle.GetType() ==  I3Particle::He4Nucleus ||
       particle.GetType() ==  I3Particle::Li7Nucleus ||
       particle.GetType() ==  I3Particle::Be9Nucleus ||
       particle.GetType() ==  I3Particle::B11Nucleus ||
