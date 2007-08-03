@@ -89,6 +89,7 @@ typedef std::vector<I3RecoPulse> I3RecoPulseSeries;
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;
 typedef I3Map<OMKey, I3RecoPulse> I3RecoPulseMap;
 
+I3_POINTER_TYPEDEFS(I3RecoPulseSeries);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
 I3_POINTER_TYPEDEFS(I3RecoPulseMap);
 
