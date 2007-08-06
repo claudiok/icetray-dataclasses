@@ -16,13 +16,14 @@
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/calibration/I3AMANDAOMCalibration.h"
 #include "dataclasses/calibration/I3VEMCalibration.h"
+#include "dataclasses/calibration/TWRCalibration.h"
 #include "dataclasses/I3Time.h"
 #include "dataclasses/OMKey.h"
 #include "dataclasses/TankKey.h"
 #include <icetray/I3FrameObject.h>
 #include <icetray/I3DefaultName.h>
 
-static const unsigned i3calibration_version_ = 2;
+static const unsigned i3calibration_version_ = 3;
 
 struct I3Calibration : public I3FrameObject
 {
@@ -37,6 +38,9 @@ public:
   map<OMKey, I3DOMCalibration> domCal;
   map<OMKey, I3AMANDAOMCalibration> amandaCal;
   map<OMKey, I3VEMCalibration> vemCal;
+  map<OMKey, TWRCalibration> twrCal;
+  double TWRGlobalT0;
+  double TWRI3TimeOffset;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };

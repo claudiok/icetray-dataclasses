@@ -22,6 +22,12 @@ I3Calibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("vemcal",vemCal);
     }
+  if(version > 2)
+    {
+      ar & make_nvp("twrcal",twrCal);
+      ar & make_nvp("TWRGlobalT0",TWRGlobalT0);
+      ar & make_nvp("TWRI3TimeOffset",TWRI3TimeOffset);
+    }
   ar & make_nvp("StartTime",startTime);
   ar & make_nvp("EndTime",endTime);
 }
