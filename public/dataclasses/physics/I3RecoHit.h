@@ -51,6 +51,12 @@ class I3RecoHit
  */
   void SetSourceIndex(const int srcid) { sourceIndex_ = srcid; }
 
+  bool operator==(const I3RecoHit& rhs) {
+    return time_ == rhs.time_ 
+      && hitID_ == rhs.hitID_
+      && sourceIndex_ == rhs.sourceIndex_;
+  }
+
  private:
 
   double time_;
