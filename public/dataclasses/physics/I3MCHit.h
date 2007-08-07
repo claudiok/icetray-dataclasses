@@ -95,6 +95,16 @@ class I3MCHit
   void SetHitSource(HitSource s){ source_= s; }
   HitSource GetHitSource() const { return source_; }
 
+  bool operator==(const I3MCHit& rhs) {
+    return time_ == rhs.time_
+      && hitID_ == rhs.hitID_
+      && weight_ == rhs.weight_
+      && particleID_ == rhs.particleID_
+      && particleMajorID_ == rhs.particleMajorID_
+      && cherenkovDistance_ == rhs.cherenkovDistance_
+      && source_ == rhs.source_;
+  }
+
  private:
 
   double time_;
