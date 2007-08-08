@@ -251,6 +251,8 @@ public:
       chargeStampHighestSample_ = highsample;
     };
 
+    friend inline bool operator==(I3DOMLaunch& a, I3DOMLaunch& b);
+
 private:
     friend class boost::serialization::access;
 	
@@ -267,6 +269,21 @@ typedef I3Map<OMKey, I3DOMLaunchSeries> I3DOMLaunchSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeries);
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeriesMap);
+
+
+inline bool operator==(I3DOMLaunch& a, I3DOMLaunch& b)
+{
+  return ( a.startTime_==b.startTime_ ) &&
+    (a.trigger_ == b.trigger_)&&
+    (a. mode_   == b. mode_)  &&
+    (a.whichATWD_==b.whichATWD_)&&
+    (a.rawATWD_==b.rawATWD_)&&
+    (a.rawFADC_==b.rawFADC_)&&
+    (a.localCoincidence_ == b.localCoincidence_)&&
+    (a.rawChargeStamp_   == b.rawChargeStamp_)&&
+    (a.chargeStampHighestSample_==b.chargeStampHighestSample_)&&
+    (a.pedestal_==a.pedestal_);
+}
 
 
 /**

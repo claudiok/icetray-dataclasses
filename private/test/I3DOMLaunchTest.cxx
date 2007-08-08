@@ -88,7 +88,7 @@ TEST(serializeStandardWave)
                 "size of noisy waveforms don't agree" ); 
   ENSURE( std::equal( wave.GetRawFADC().begin(), wave.GetRawFADC().end(), wave2.GetRawFADC().begin() ),
           "noisy waveforms don't agree" );
-  	
+  
 }
 
 TEST(serializeMaxIntegerWave)
@@ -125,4 +125,47 @@ TEST(serializeMaxIntegerWave)
   {
     
   }
+}
+
+
+
+TEST(SerializeRandomWave)
+{
+  
+  const int waveform_constant=RAND_MAX/128;  
+
+
+  for (int test=0; test<1000; test++)
+    {
+      I3DOMLaunch launch1;
+
+      for( int i=0; i< 128; i++) 
+	{
+	  launch1.GetRawATWD(0).push_back( rand()/waveform_constant );            
+	  launch1.GetRawATWD(1).push_back( rand()/waveform_constant );           
+	  launch1.GetRawATWD(2).push_back( rand()/waveform_constant );          
+	}
+  
+      for( int i=0; i< 256; i++) 
+	{
+	  launch1.GetRawFADC().push_back( rand()/waveform_constant );           
+	}
+	
+      // Build a binary stringtream and serialize the I3DOMLaunch
+      std::ostringstream oss(std::ostringstream::binary);
+      {
+	boost::archive::portable_binary_oarchive outAr( oss );
+	outAr & make_nvp("Test", launch1);;
+      }
+  
+      // Deserialize a second I3DOMLaunch from the serialized stream for comparison
+      I3DOMLaunch launch2;
+      std::istringstream iss( oss.str(), std::istringstream::binary );
+      {
+	boost::archive::portable_binary_iarchive inAr( iss );
+	inAr & make_nvp("Test", launch2);
+      }
+      
+      ENSURE(launch1==launch2);
+    }
 }

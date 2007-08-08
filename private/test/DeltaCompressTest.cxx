@@ -7,18 +7,12 @@
  * @file    $File$
  * @version $Revision$
  * @date    $Date$
- * @author  Martin Merck
+ * @author  Kevin Meagher
  */
 #include <I3Test.h>
-#include <dataclasses/physics/I3DOMLaunch.h>
-#include <icetray/serialization.h>
 #include <../private/dataclasses/physics/DeltaCompressor.h>
 
-#include <sstream>
-#include <algorithm>
-#include <iterator>
-#include <cstdlib> 
-#include <limits> 
+using namespace std;
 
 TEST_GROUP(DeltaCompressionTest)
 
