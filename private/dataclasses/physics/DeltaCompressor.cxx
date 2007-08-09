@@ -40,7 +40,7 @@ namespace I3DeltaCompression
 			lastVal = *it;
 			compressDelta( delta );
 		}
-
+		compressed_.push_back( currCompressedValue_ );
 		return;
 	}
 	
