@@ -43,6 +43,13 @@ TEST(RandomWaveTest)
       vector<int> new_waveform;
       new_waveform.clear();
       uncompressor.decompress( new_waveform );
+      /*
+      Delta decompression dosn't know when to stop so you have remember how big the 
+      uncompressed waveform is and cut it off.
+      Maybe in the future this can be fixed in the deltacompression class but for now 
+      the "user" ie I3DOMLaunch has to fix it.
+      */
+      new_waveform.resize(128);
 
       ENSURE(orig_waveform==new_waveform);
     }
