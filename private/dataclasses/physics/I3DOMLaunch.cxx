@@ -21,32 +21,18 @@ I3DOMLaunch::~I3DOMLaunch() {}
 template <class Archive>
 void I3DOMLaunch::save(Archive& ar, unsigned version) const
 {
-  if (version>i3domlaunch_version_)
-    log_fatal("Attempting to read version %u from file but running version %u of I3DOMLaunch class.",version,i3domlaunch_version_);
-
   ar & make_nvp("StartTime", startTime_);
-  // ignore the "Trigger" information of old data
-  if(version < 1)
-  {
-    int tmp;
-    ar & make_nvp("Trigger", tmp);
-  }
-  // for version > 0 there is a trigger type and mode to be serialized
-  if(version > 0)
-  {
-    ar & make_nvp("TriggerType", trigger_);
-    ar & make_nvp("TriggerSituation", mode_);
-  }
+
+  ar & make_nvp("TriggerType", trigger_);
+  ar & make_nvp("TriggerSituation", mode_);
+
   ar & make_nvp("WhichATWD", whichATWD_);
   
   // since version 3 of the file the raw waveforms are stored in delta
   // compressed form. This is only done, if archived to a non XML archive,
   // to allow to inspect the waveforms with dataio_shovel.
-  if( ( version > 2 )
-      && 
-      ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) )
+  if(  ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) )
   {
-    
     try
     {
       I3DeltaCompression::DeltaCompressor compressor;
@@ -105,24 +91,8 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
   ar & make_nvp("RawChargeStamp", rawChargeStamp_);
-  // Putting Pedestal into DOMLaunch for delta compressed data
-  if(version > 2)
-    {
-      ar & make_nvp("Pedestal", pedestal_);
-    }
-
-  // ignore the range for the raw charge stamp of old data
-  if(version < 2)
-  {
-    bool tmp;
-    ar & make_nvp("ChargeStampRange", tmp);
-  }
-  // for version > 1 there is an index to be serialized,
-  // addressing the highest sample of the charge stamp
-  if(version > 1)
-  {
-    ar & make_nvp("ChargeStampHighestSample", chargeStampHighestSample_);    
-  }
+  ar & make_nvp("Pedestal", pedestal_);
+  ar & make_nvp("ChargeStampHighestSample", chargeStampHighestSample_);    
 }
 
 template <class Archive>
@@ -150,10 +120,17 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
   }
   ar & make_nvp("WhichATWD", whichATWD_);
  
+
+  // version 3 containd a bug
+  if ( version == 3)
+    {
+      log_fatal("Version 3 of I3DOMLaunch containd a serious data curruption bug. Files Saved with this version should be deleted and regenerated with a newer version of dataclasses.");
+    }
+
   // since version 3 of the file the raw waveforms are stored in delta
   // compressed form. This is only done, if archived to a non XML archive,
   // to allow to inspect the waveforms with dataio_shovel.
-  if( ( version > 2 )
+  if( ( version > 3 )
       && 
       ( typeid(ar) != typeid(boost::archive::xml_iarchive) ) )
   {
@@ -180,8 +157,14 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
         
         // get the number of real samples of the waveform and truncate any
         // extra values from the vector.
-        int numSamples;
+        unsigned int numSamples;
         ar & make_nvp( "NumSamplesATWD", numSamples );
+	if (numSamples > it2->size())
+	  {
+	    log_fatal("error delta decompressing");
+	  }
+
+
         (*it2).resize( numSamples );
       }
       
@@ -198,8 +181,13 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       
       // get the number of real samples of the waveform and truncate any
       // extra values from the vector.
-      int numFADCSamples;
+      unsigned int numFADCSamples;
       ar & make_nvp("NumSamplesFADC", numFADCSamples);
+	if (numFADCSamples > rawFADC_.size())
+	  {
+	    log_fatal("error delta decompressing");
+	  }
+
       rawFADC_.resize(numFADCSamples);
     }
     catch( const std::domain_error& ex )

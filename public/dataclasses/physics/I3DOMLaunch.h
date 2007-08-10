@@ -28,7 +28,7 @@
  * determined by the DOM calibrator. There is also a 'coarse charge stamp'
  * containing the 3 largest samples out of the first 16 fADC samples
  */
-static const unsigned i3domlaunch_version_ = 3;
+static const unsigned i3domlaunch_version_ = 4;
 
 class I3DOMLaunch 
 {

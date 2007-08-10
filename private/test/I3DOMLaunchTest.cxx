@@ -132,24 +132,30 @@ TEST(serializeMaxIntegerWave)
 TEST(SerializeRandomWave)
 {
   
-  const int waveform_constant=RAND_MAX/128;  
-
-
   for (int test=0; test<1000; test++)
     {
       I3DOMLaunch launch1;
 
+      launch1.SetStartTime(rand());
+      launch1.SetTriggerType(I3DOMLaunch::TriggerType(rand()%6));
+      launch1.SetTriggerMode(I3DOMLaunch::TriggerMode(rand()%32));
+      launch1.SetWhichATWD(I3DOMLaunch::ATWDselect(rand()%2+1));
+
       for( int i=0; i< 128; i++) 
 	{
-	  launch1.GetRawATWD(0).push_back( rand()/waveform_constant );            
-	  launch1.GetRawATWD(1).push_back( rand()/waveform_constant );           
-	  launch1.GetRawATWD(2).push_back( rand()/waveform_constant );          
+	  launch1.GetRawATWD(0).push_back( rand()%2048 );            
+	  launch1.GetRawATWD(1).push_back( rand()%2048 );           
+	  launch1.GetRawATWD(2).push_back( rand()%2048 );          
 	}
   
       for( int i=0; i< 256; i++) 
 	{
-	  launch1.GetRawFADC().push_back( rand()/waveform_constant );           
+	  launch1.GetRawFADC().push_back( rand()%2048 );           
 	}
+
+      launch1.SetLCBit(rand()%2);
+      launch1.SetIsPedestalSub(rand()%2);
+      launch1.SetChargeStampHighestSample(rand());
 	
       // Build a binary stringtream and serialize the I3DOMLaunch
       std::ostringstream oss(std::ostringstream::binary);
