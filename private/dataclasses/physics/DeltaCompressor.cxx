@@ -40,7 +40,6 @@ namespace I3DeltaCompression
 			lastVal = *it;
 			compressDelta( delta );
 		}
-		compressed_.push_back( currCompressedValue_ );
 		return;
 	}
 	
@@ -67,13 +66,22 @@ namespace I3DeltaCompression
 			return;
 		unsigned int data = *it_++;
 		
-		while( true )
+        bool endCondition = false;
+		while( !endCondition )
 		{
-			if( offset_ + btw_ < 32 )
+			if( offset_ + btw_ <= 32 )
 			{
 				int mask = ( 1 << btw_ ) - 1;
 				mask = mask << offset_;
 				datum = ( data & mask) >> offset_;	
+
+                if( (offset_ + btw_) == 32)
+                {
+                    if( it_ ==  compressed_.end() )
+                        endCondition = true;
+                    else
+                        data = *it_++;
+                }
 			}
 			else
 			{
