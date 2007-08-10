@@ -16,10 +16,7 @@
 #include <sstream>
 #include <algorithm>
 #include <iterator>
-#include <cstdlib> 
 #include <limits> 
-//#include <boost/archive/binary_oarchive.hpp>
-//#include <boost/archive/binary_iarchive.hpp>
 
 TEST_GROUP(I3DOMLaunch)
 
@@ -127,7 +124,60 @@ TEST(serializeMaxIntegerWave)
   }
 }
 
+// This testcase tests a bugfix for the condition where the
+// compressed bitstram totally fills the last compressed byte.
+TEST(serializeFullCompressed)
+{
+  I3DOMLaunch wave;
+  I3Vector<int>& atwd0 = wave.GetRawATWD(0);
+  
+  int vals[] = {
+         142,142,142,141,142,142,149,156,154,146,143,142,141,139,141,139,
+         141,143,150,146,144,150,154,146,142,141,140,138,139,139,139,138,
+         138,138,138,138,139,138,139,139,140,139,140,141,140,139,139,139,
+         139,140,140,140,140,139,140,140,140,139,140,140,140,140,141,140,
+         141,140,140,140,142,140,141,140,140,140,142,139,140,140,140,139,
+         140,140,140,140,140,139,140,139,140,140,139,139,142,141,140,141,
+         142,140,142,141,142,140,142,140,140,139,140,139,142,140,142,140,
+         142,141,142,141,142,142,142,142,142,142,142,141,142,141,142,142,
+         140,141,140,142,142,142,142,142,142,141,141,141,140,141,142,142,
+         142,140,141,141,141,141,141,142,142,142,142,141,142,141,142,142,
+         140,141,142,142,142,140,142,142,142,140,140,141,142,142,142,140,
+         142,142,142,141,142,142,142,142,142,141,142,142,142,142,142,142,
+         142,139,142,141,142,141,142,141,142,142,143,142,142,142,142,142,
+         142,142,142,142,142,142,142,141,142,142,142,141,142,142,142,142,
+         142,142,142,142,142,142,142,142,142,142,141,142,142,141,140,140,
+         142,142,142,141,141,142,142,141,142,141,142,140,141,141,142,142};
+         
+         
+  for( int i=0; i< 256; i++) 
+  {
+      atwd0.push_back( vals[i] );       
+  }
+  
+  // Build a binary stringtream and serialize the I3DOMLaunch
+  std::ostringstream oss(std::ostringstream::binary);
+  {
+    boost::archive::portable_binary_oarchive outAr( oss );
+    outAr & make_nvp("Test", wave);;
+  }
+    
+  // Deserialize a second I3DOMLaunch from the serialized stream for comparison
+  I3DOMLaunch wave2;
+  std::istringstream iss( oss.str(), std::istringstream::binary );
+  {
+    boost::archive::portable_binary_iarchive inAr( iss );
+    inAr & make_nvp("Test", wave2);
+  }
 
+  // Compare size and content of waveform and ensure that they are equal.
+  ENSURE_EQUAL( wave.GetRawATWD(0).size(), wave2.GetRawATWD(0).size(), 
+                "size of special waveforms don't agree" ); 
+  
+  ENSURE( std::equal( wave.GetRawATWD(0).begin(), wave.GetRawATWD(0).end(), wave2.GetRawATWD(0).begin() ),
+          "special waveforms don't agree" );
+  
+}
 
 TEST(SerializeRandomWave)
 {
