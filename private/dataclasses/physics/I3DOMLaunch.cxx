@@ -119,18 +119,11 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
     mode_ = UNDEFINED;
   }
   ar & make_nvp("WhichATWD", whichATWD_);
- 
-
-  // version 3 containd a bug
-  if ( version == 3)
-    {
-      log_fatal("Version 3 of I3DOMLaunch containd a serious data curruption bug. Files Saved with this version should be deleted and regenerated with a newer version of dataclasses.");
-    }
 
   // since version 3 of the file the raw waveforms are stored in delta
   // compressed form. This is only done, if archived to a non XML archive,
   // to allow to inspect the waveforms with dataio_shovel.
-  if( ( version > 3 )
+  if( ( version > 2 )
       && 
       ( typeid(ar) != typeid(boost::archive::xml_iarchive) ) )
   {
