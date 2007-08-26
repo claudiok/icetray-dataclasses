@@ -10,6 +10,8 @@ I3_SERIALIZABLE(I3VectorShort);
 I3_SERIALIZABLE(I3VectorUShort);
 I3_SERIALIZABLE(I3VectorInt);
 I3_SERIALIZABLE(I3VectorUnsignedInt); // this is anomalous... but *dont* change it
+                                      // until we work in multiple-class-registration
+                                      // names.
 I3_SERIALIZABLE(I3VectorInt64);
 I3_SERIALIZABLE(I3VectorUInt64);
 
