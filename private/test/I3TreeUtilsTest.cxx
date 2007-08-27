@@ -23,10 +23,10 @@ TEST_GROUP(I3TreeUtilsTest);
 class int_t
 {
 public:
-  int id;
+  uint64_t id;
   const int GetMinorID() const { return id; }
-  const int GetMajorID() const { return id; }
-  int_t(int i) : id(i) { }
+  const uint64_t GetMajorID() const { return id; }
+  int_t(uint64_t i) : id(i) { }
 };
 
 TEST(a_insert_and_append)
