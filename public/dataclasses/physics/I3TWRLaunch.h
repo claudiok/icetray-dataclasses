@@ -69,7 +69,7 @@ typedef std::vector<I3TWRLaunch> I3TWRLaunchSeries;
 typedef I3Map<OMKey, I3TWRLaunchSeries> I3TWRLaunchSeriesMap;
 
 static const unsigned i3twrlaunch_version_ = 1;
-BOOST_CLASS_VERSION(I3TWRLaunchSeriesMap, i3twrlaunch_version_);
+BOOST_CLASS_VERSION(I3TWRLaunch, i3twrlaunch_version_);
 
 I3_POINTER_TYPEDEFS(I3TWRLaunch);
 I3_POINTER_TYPEDEFS(I3TWRLaunchSeries);
