@@ -47,7 +47,7 @@ I3TWRFrag::serialize(Archive& ar, unsigned version)
     double fragStartTime = 0.0;
     ar & make_nvp("FragStartTime", fragStartTime);
 
-    int fragStartBin = 0.0;
+    int fragStartBin = 0;
     ar & make_nvp("FragStartBin", fragStartBin);
     if(fragStartBin < 0) log_fatal("invalid start bin");
     startBin_ = static_cast<unsigned int>(fragStartBin);
