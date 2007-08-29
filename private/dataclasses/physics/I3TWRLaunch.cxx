@@ -36,26 +36,28 @@ I3TWRLaunch::serialize (Archive& ar, unsigned version)
 
   if(version < 1)
   {
+    if (typename Archive::is_saving())
+      log_fatal("Impossible: we are saving at version 0");
     I3Vector<I3TWRFrag> tmp;
     ar & make_nvp("I3TWRLaunch", tmp);
     fragments_.swap(tmp);
   
-    int id;
+    int id = 0;
     ar & make_nvp("ID", id);
-    double binSize;
+    double binSize = 0.0;
     ar & make_nvp("BinSize", binSize);
 
-    double baseline;
+    double baseline = 0.0;
     ar & make_nvp("Baseline", baseline);
     baseline = round(baseline);
     if(baseline < 0) log_fatal("invalid baseline value");
     baseline_ = static_cast<unsigned int>(baseline);
 
-    int stopDelay;
+    int stopDelay = 0;
     ar & make_nvp("StopDelay", stopDelay);
-    int threshold;
+    int threshold = 0;
     ar & make_nvp("Threshold", threshold);
-    bool optical;
+    bool optical = 0;
     ar & make_nvp("Optical", optical);
   }
   else

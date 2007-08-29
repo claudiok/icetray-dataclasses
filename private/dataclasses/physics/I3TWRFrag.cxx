@@ -36,14 +36,18 @@ I3TWRFrag::serialize(Archive& ar, unsigned version)
 
   if(version < 1)
   {
-    int id;
+    // initialize these temporaries or you get warnings.  
+    // Note that we'll never be saving when version < 1
+    if (typename Archive::is_saving())
+      log_fatal("The impossible has happened... we are saving at version 0");
+    int id = 0; 
     ar & make_nvp("ID", id);
-    int parentId;
+    int parentId = 0;
     ar & make_nvp("ParentID", parentId);
-    double fragStartTime;
+    double fragStartTime = 0.0;
     ar & make_nvp("FragStartTime", fragStartTime);
 
-    int fragStartBin;
+    int fragStartBin = 0.0;
     ar & make_nvp("FragStartBin", fragStartBin);
     if(fragStartBin < 0) log_fatal("invalid start bin");
     startBin_ = static_cast<unsigned int>(fragStartBin);
