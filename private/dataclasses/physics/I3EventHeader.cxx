@@ -21,13 +21,14 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("RunID", runID_);
-  if(version > 0)
+  if(version > 1)
     {
       ar & make_nvp("SubRunID", subRunID_);
     }
   else
     {
       subRunID_ = 0;
+      ar & make_nvp("SubRunID", subRunID_);
     }
   ar & make_nvp("EventID", eventID_);
   ar & make_nvp("StartTime",startTime_);

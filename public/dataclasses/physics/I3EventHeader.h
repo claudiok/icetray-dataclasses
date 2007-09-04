@@ -17,7 +17,7 @@
 #include <icetray/I3DefaultName.h>
 
 using namespace std;
-static const unsigned i3eventheader_version_ = 1;
+static const unsigned i3eventheader_version_ = 2;
 
 /**
  * @brief The header for data on the Event stream.
@@ -30,7 +30,7 @@ static const unsigned i3eventheader_version_ = 1;
 class I3EventHeader : public I3FrameObject
 {
   unsigned  runID_;
-  unsigned  subRunID_;
+  int  subRunID_;
   unsigned  eventID_;
 
   I3Time startTime_;
@@ -84,7 +84,7 @@ class I3EventHeader : public I3FrameObject
   /**
    * @param runid the new subrun id for the event
    */
-  void SetSubRunID(unsigned runid) { subRunID_ = runid; }
+  void SetSubRunID(int runid) { subRunID_ = runid; }
 
   /**
    * @return the event id for this event
