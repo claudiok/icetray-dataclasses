@@ -30,7 +30,7 @@ static const unsigned i3eventheader_version_ = 2;
 class I3EventHeader : public I3FrameObject
 {
   unsigned  runID_;
-  int  subRunID_;
+  int32_t   subRunID_;
   unsigned  eventID_;
 
   I3Time startTime_;
@@ -84,7 +84,7 @@ class I3EventHeader : public I3FrameObject
   /**
    * @param runid the new subrun id for the event
    */
-  void SetSubRunID(int runid) { subRunID_ = runid; }
+  void SetSubRunID(int32_t runid) { subRunID_ = runid; }
 
   /**
    * @return the event id for this event

@@ -27,8 +27,12 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
     }
   else
     {
-      subRunID_ = 0;
-      ar & make_nvp("SubRunID", subRunID_);
+      //in version 0 and 1 the sub run ID was always zero. Hence if we are
+      //reading data of that version we have to make sure that it is always
+      //zero as well. Also the subrunID changed from an unsigned to an int.
+      unsigned temp = 0;
+      ar & make_nvp("SubRunID", temp);
+      subRunID_ = temp;
     }
   ar & make_nvp("EventID", eventID_);
   ar & make_nvp("StartTime",startTime_);
