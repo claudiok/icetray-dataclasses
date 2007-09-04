@@ -10,13 +10,15 @@
 #define I3EVENTHEADER_H_INCLUDED
 
 // includes
-#include <dataclasses/I3Time.h>
 
 #include <string>
-#include <icetray/I3FrameObject.h>
-#include <icetray/I3DefaultName.h>
 
-using namespace std;
+#include <dataclasses/I3Time.h>
+#include <icetray/I3DefaultName.h>
+#include <icetray/I3FrameObject.h>
+#include <icetray/I3PointerTypedefs.h>
+#include <icetray/serialization.h>
+
 static const unsigned i3eventheader_version_ = 2;
 
 /**
@@ -29,15 +31,15 @@ static const unsigned i3eventheader_version_ = 2;
  */
 class I3EventHeader : public I3FrameObject
 {
-  unsigned  runID_;
-  int32_t   subRunID_;
-  unsigned  eventID_;
+ private:
+  unsigned runID_;
+  int subRunID_;
+  unsigned eventID_;
 
   I3Time startTime_;
   I3Time endTime_;
 
  public:
-
   I3EventHeader();
 
   virtual ~I3EventHeader();
@@ -63,10 +65,6 @@ class I3EventHeader : public I3FrameObject
     }
 
   /**
-   * assignment operator.  Just a member-wise copy.
-   */
-
-  /**
    * @return the run id for the event
    */
   unsigned GetRunID() const { return runID_; }
@@ -79,12 +77,12 @@ class I3EventHeader : public I3FrameObject
   /**
    * @return the subrun id for the event
    */
-  unsigned GetSubRunID() const { return subRunID_; }
+  int GetSubRunID() const { return subRunID_; }
 
   /**
-   * @param runid the new subrun id for the event
+   * @param subrunid the new subrun id for the event
    */
-  void SetSubRunID(int32_t runid) { subRunID_ = runid; }
+  void SetSubRunID(int subrunid) { subRunID_ = subrunid; }
 
   /**
    * @return the event id for this event
@@ -99,13 +97,12 @@ class I3EventHeader : public I3FrameObject
   /**
    * @return the name of the stream this header is for.... "Physics"
    */
-  const string GetDataStream(){ return "Physics";}
+  const std::string GetDataStream(){ return "Physics";}
 
  private:
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-
 };
 
 BOOST_CLASS_VERSION(I3EventHeader, i3eventheader_version_);
