@@ -6,8 +6,9 @@
 
 I3EventHeader::I3EventHeader()
   : runID_(std::numeric_limits<unsigned int>::max()),
-    subRunID_(std::numeric_limits<int>::max()),
-    eventID_(std::numeric_limits<unsigned int>::max())
+    subRunID_(std::numeric_limits<unsigned int>::max()),
+    eventID_(std::numeric_limits<unsigned int>::max()),
+    state_(OK)
 {
 }
 
@@ -26,19 +27,9 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
   ar & make_nvp("RunID", runID_);
-  if(version > 1)
+  if(version > 0)
     {
       ar & make_nvp("SubRunID", subRunID_);
-    }
-  else if(version > 0)
-    {
-      // in version 1 the sub run ID was not signed, but unsigned
-      // ... no problem at all for sub run IDs <= INT_MAX
-      // ... using INT_MAX for sub run ID > INT_MAX
-      unsigned temp = 0;
-      ar & make_nvp("SubRunID", temp);
-      subRunID_ = (temp > static_cast<unsigned>(std::numeric_limits<int>::max())) ?
-                  std::numeric_limits<int>::max() : temp;
     }
   else
     {
@@ -47,6 +38,16 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
       subRunID_ = 0;
     }
   ar & make_nvp("EventID", eventID_);
+  if(version > 1)
+    {
+      ar & make_nvp("State", state_);
+    }
+  else
+    {
+      // in version <= 1 there was no state
+      // ... using OK as a default value
+      state_ = OK;
+    }
   ar & make_nvp("StartTime", startTime_);
   ar & make_nvp("EndTime", endTime_);
 }

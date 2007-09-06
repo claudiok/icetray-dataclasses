@@ -31,10 +31,20 @@ static const unsigned i3eventheader_version_ = 2;
  */
 class I3EventHeader : public I3FrameObject
 {
+ public:
+  enum State
+  {
+    UNKNOWN_STATE = 0,
+    OK = 20,
+    CONFIG_IN_TRANSITION = 40
+  };
+  
  private:
   unsigned runID_;
-  int subRunID_;
+  unsigned subRunID_;
   unsigned eventID_;
+  
+  State state_;
 
   I3Time startTime_;
   I3Time endTime_;
@@ -77,12 +87,12 @@ class I3EventHeader : public I3FrameObject
   /**
    * @return the subrun id for the event
    */
-  int GetSubRunID() const { return subRunID_; }
+  unsigned GetSubRunID() const { return subRunID_; }
 
   /**
    * @param subrunid the new subrun id for the event
    */
-  void SetSubRunID(int subrunid) { subRunID_ = subrunid; }
+  void SetSubRunID(unsigned subrunid) { subRunID_ = subrunid; }
 
   /**
    * @return the event id for this event
@@ -93,6 +103,16 @@ class I3EventHeader : public I3FrameObject
    * @param eventid the new event id for the event
    */
   void SetEventID(unsigned eventid) { eventID_ = eventid; }
+
+  /**
+   * @return the state for the event
+   */
+  unsigned GetState() const { return state_; }
+
+  /**
+   * @param state the new state for the event
+   */
+  void SetState(State state) { state_ = state; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"
