@@ -27,7 +27,7 @@ tray = I3Tray()
 # Streams from the test file that don't apply to current test are
 # not read in.
 
-workspace = expandvars("$I3_WORK")
+workspace = expandvars("$I3_SRC")
 infile = workspace + "/dataclasses/resources/testdata/vsn99_calibration.i3"
 tray.AddService("I3ReaderServiceFactory","i3reader")(
     ("Filename", infile)

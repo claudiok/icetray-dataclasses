@@ -24,7 +24,7 @@
  * 
  * I3Tree derives from tree that is provided by k.peeters@damtp.cam.ac.uk.
  * You might want to check his documentation
- * ($I3_WORK/dataclasses/resources/external/tree.pdf) until we provide our own
+ * ($I3_SRC/dataclasses/resources/external/tree.pdf) until we provide our own
  * docs.
  * We will change I3Tree/tree probably soon and add const_iterators + corresponding
  * access methods.
