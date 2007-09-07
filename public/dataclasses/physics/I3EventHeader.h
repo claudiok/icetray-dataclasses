@@ -10,14 +10,16 @@
 #define I3EVENTHEADER_H_INCLUDED
 
 // includes
-#include <dataclasses/I3Time.h>
 
 #include <string>
-#include <icetray/I3FrameObject.h>
-#include <icetray/I3DefaultName.h>
 
-using namespace std;
-static const unsigned i3eventheader_version_ = 1;
+#include <dataclasses/I3Time.h>
+#include <icetray/I3DefaultName.h>
+#include <icetray/I3FrameObject.h>
+#include <icetray/I3PointerTypedefs.h>
+#include <icetray/serialization.h>
+
+static const unsigned i3eventheader_version_ = 2;
 
 /**
  * @brief The header for data on the Event stream.
@@ -29,15 +31,25 @@ static const unsigned i3eventheader_version_ = 1;
  */
 class I3EventHeader : public I3FrameObject
 {
-  unsigned  runID_;
-  unsigned  subRunID_;
-  unsigned  eventID_;
+ public:
+  enum State
+  {
+    UNKNOWN_STATE = 0,
+    OK = 20,
+    CONFIG_IN_TRANSITION = 40
+  };
+  
+ private:
+  unsigned runID_;
+  unsigned subRunID_;
+  unsigned eventID_;
+  
+  State state_;
 
   I3Time startTime_;
   I3Time endTime_;
 
  public:
-
   I3EventHeader();
 
   virtual ~I3EventHeader();
@@ -63,10 +75,6 @@ class I3EventHeader : public I3FrameObject
     }
 
   /**
-   * assignment operator.  Just a member-wise copy.
-   */
-
-  /**
    * @return the run id for the event
    */
   unsigned GetRunID() const { return runID_; }
@@ -82,9 +90,9 @@ class I3EventHeader : public I3FrameObject
   unsigned GetSubRunID() const { return subRunID_; }
 
   /**
-   * @param runid the new subrun id for the event
+   * @param subrunid the new subrun id for the event
    */
-  void SetSubRunID(unsigned runid) { subRunID_ = runid; }
+  void SetSubRunID(unsigned subrunid) { subRunID_ = subrunid; }
 
   /**
    * @return the event id for this event
@@ -95,17 +103,26 @@ class I3EventHeader : public I3FrameObject
    * @param eventid the new event id for the event
    */
   void SetEventID(unsigned eventid) { eventID_ = eventid; }
+
+  /**
+   * @return the state for the event
+   */
+  unsigned GetState() const { return state_; }
+
+  /**
+   * @param state the new state for the event
+   */
+  void SetState(State state) { state_ = state; }
   
   /**
    * @return the name of the stream this header is for.... "Physics"
    */
-  const string GetDataStream(){ return "Physics";}
+  const std::string GetDataStream(){ return "Physics";}
 
  private:
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
-
 };
 
 BOOST_CLASS_VERSION(I3EventHeader, i3eventheader_version_);
