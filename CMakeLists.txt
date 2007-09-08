@@ -1,5 +1,5 @@
 #
-# $Id$
+# 
 #
 i3_project(dataclasses)
 

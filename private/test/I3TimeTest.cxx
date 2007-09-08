@@ -17,10 +17,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
-extern "C"
-{
 #include "dataclasses/jday.h"
-}
 
 #include "dataclasses/I3Time.h"
 #include "dataclasses/I3Units.h"

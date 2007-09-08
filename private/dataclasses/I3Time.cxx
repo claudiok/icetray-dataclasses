@@ -1,7 +1,4 @@
-extern "C"
-{
 #include <dataclasses/jday.h>
-}
 
 #include <icetray/serialization.h>
 #include <dataclasses/I3Time.h>

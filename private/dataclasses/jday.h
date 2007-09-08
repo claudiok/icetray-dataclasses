@@ -41,7 +41,7 @@
 #ifndef	_jday_h_
 #define _jday_h_
 
-typedef struct ut_instant {
+struct UTinstant {
 	double	j_date; /* julian decimal date, 0 = 01 Jan -4712 12 HR UT */
 	int	 year; /* year, valid range [-4,712, +2,147,483,647] */
 	int	month;	/*	[1-12]	*/
@@ -53,10 +53,10 @@ typedef struct ut_instant {
 	double	d_minute;	/*	[0.0-59.9999] includes second	*/
 	int	weekday;	/*	[0-6]	*/
 	int	day_of_year;	/*	[1-366]	*/
-} UTinstant, * UTinstantPtr;
+};
 
 /*	Functions in caldate.c	*/
-int CalDate( UTinstantPtr );	/* converts julian date to year,mo,da */
-double JulDate( UTinstantPtr );	/* returns julian day from year,mo,da */
+int CalDate( UTinstant* );	/* converts julian date to year,mo,da */
+double JulDate( UTinstant* );	/* returns julian day from year,mo,da */
 
 #endif	/*	_jday_h_	*/

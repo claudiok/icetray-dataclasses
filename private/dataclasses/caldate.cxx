@@ -55,8 +55,7 @@
 #include "jday.h"	/*	time structures	*/
 
 int
-CalDate( date )
-struct ut_instant * date;
+CalDate( UTinstant * date )
 {
 	double frac;
 	int jd;
@@ -72,13 +71,13 @@ struct ut_instant * date;
 	ka = (int) jd;
 	if ( jd >= 2299161L )
 	{
-		ialp = ( (double) jd - 1867216.25 ) / ( 36524.25 );
-		ka = jd + 1L + ialp - ( ialp >> 2 );
+	  ialp =int( ( (double) jd - 1867216.25 ) / ( 36524.25 ));
+	  ka = jd + 1L + ialp - ( ialp >> 2 );
 	}
 	kb = ka + 1524L;
-	kc =  ( (double) kb - 122.1 ) / 365.25;
-	kd = (double) kc * 365.25;
-	ke = (double) ( kb - kd ) / 30.6001;
+	kc = int( ( (double) kb - 122.1 ) / 365.25);
+	kd = int( (double) kc * 365.25);
+	ke = int( (double) ( kb - kd ) / 30.6001);
 	date->day = kb - kd - ((int) ( (double) ke * 30.6001 ));
 	if ( ke > 13L )
 		date->month = ke - 13L;
@@ -92,9 +91,11 @@ struct ut_instant * date;
 		date->year = kc - 4716L;
 	else
 		date->year = kc - 4715L;
-	date->i_hour = date->d_hour = frac * 24.0;	/* hour */
-	date->i_minute = date->d_minute =
+	date->d_hour = frac * 24.0;	/* hour */
+	date->i_hour = (int)date->d_hour;
+	date->d_minute =
 		( date->d_hour - (double) date->i_hour ) * 60.0; /* minute */
+	date->i_minute = (int)date->d_minute;
 	date->second =
 		( date->d_minute - (double) date->i_minute ) * 60.0;/* second */
 	date->weekday = (jd + 1L) % 7L;	/* day of week */
@@ -128,8 +129,7 @@ struct ut_instant * date;
  *	50 Year canon of solar eclipses: 1986-2035
  */
 
-double JulDate( date )
-struct ut_instant * date;
+double JulDate( UTinstant * date )
 {
 	double frac, gyr;
 	int iy0, im0;
