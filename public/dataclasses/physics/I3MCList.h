@@ -24,6 +24,8 @@ class I3MCList : public I3Vector<I3Particle>
   I3MCList()
     {};
   
+  I3MCList(I3Vector<I3Particle>::iterator l,I3Vector<I3Particle>::iterator r) : I3Vector<I3Particle>(l, r) { }
+
   virtual ~I3MCList();
 
  private:

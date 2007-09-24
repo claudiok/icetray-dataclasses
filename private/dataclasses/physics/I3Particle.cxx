@@ -511,6 +511,24 @@ template <class Archive>
       ar & make_nvp("LocationType",locationType_);
   }
 
+bool operator==(const I3Particle& lhs, const I3Particle& rhs){
+  return ( lhs.GetMinorID() == rhs.GetMinorID() &&
+	   lhs.GetMajorID() == rhs.GetMajorID() &&
+	   lhs.GetParentID() == rhs.GetParentID() &&
+	   lhs.GetPrimaryID() == rhs.GetPrimaryID() &&
+	   lhs.GetType() == rhs.GetType() &&
+	   lhs.GetShape() == rhs.GetShape() &&
+	   lhs.GetFitStatus() == rhs.GetFitStatus() &&
+	   lhs.GetLocationType() == rhs.GetLocationType() &&
+	   lhs.GetPos() == rhs.GetPos() &&
+	   lhs.GetDir() == rhs.GetDir() &&
+	   lhs.GetTime() == rhs.GetTime() &&
+	   lhs.GetLength() == rhs.GetLength() &&
+	   lhs.GetEnergy() == rhs.GetEnergy() &&
+	   lhs.GetSpeed() == rhs.GetSpeed()
+	   );
+}
+
 I3_SERIALIZABLE(I3Particle);
 
 I3_SERIALIZABLE(I3ParticleVect);

@@ -218,3 +218,11 @@ void I3Position::CalcCarSphFromCyl()
 }
 
 //-----------------------------------------------------------
+
+bool operator==(const I3Position& lhs, const I3Position& rhs){
+  return ( lhs.GetX() == rhs.GetX() &&
+	   lhs.GetY() == rhs.GetY() &&
+	   lhs.GetZ() == rhs.GetZ() );
+}
+
+//-----------------------------------------------------------

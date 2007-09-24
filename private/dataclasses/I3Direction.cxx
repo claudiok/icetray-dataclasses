@@ -190,3 +190,12 @@ void I3Direction::CalcSphFromCar()
 }
 
 //-----------------------------------------------------------
+
+
+bool operator==(const I3Direction& lhs, const I3Direction& rhs){
+  return ( lhs.GetZenith() == rhs.GetZenith() &&
+	   lhs.GetAzimuth() == rhs.GetAzimuth()
+	   );
+}
+
+//-----------------------------------------------------------

@@ -234,6 +234,8 @@ class I3Direction : public I3FrameObject
   void serialize(Archive& ar, unsigned version);
 };
 
+bool operator==(const I3Direction& lhs, const I3Direction& rhs);
+
 I3_POINTER_TYPEDEFS(I3Direction);
 BOOST_CLASS_VERSION(I3Direction, i3direction_version_);
 

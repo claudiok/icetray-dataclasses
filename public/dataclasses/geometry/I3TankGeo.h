@@ -36,8 +36,6 @@ struct I3TankGeo
   I3TankGeo() {}
   virtual ~I3TankGeo();
 
-  
-
   I3Position position; //tank x,y,z position
   double orientation; //relative angular rotation of tank
   double tankradius; //tank radius (I3Units!)
@@ -50,6 +48,8 @@ struct I3TankGeo
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };
+
+bool operator==(const I3TankGeo& lhs, const I3TankGeo& rhs);
 
 BOOST_CLASS_VERSION(I3TankGeo, i3tankgeo_version_);
 I3_POINTER_TYPEDEFS(I3TankGeo);
