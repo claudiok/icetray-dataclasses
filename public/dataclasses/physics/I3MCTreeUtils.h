@@ -103,29 +103,11 @@ namespace I3MCTreeUtils
    *This is useful for example in extracting "the muon" from the 
    *atmospheric neutrino data.
    */
-  //vector<I3Particle>::const_iterator GetMostEnergeticPrimary(const I3MCTree&);
-  //vector<I3Particle>::const_iterator GetMostEnergeticPrimary(I3MCTreeConstPtr);
   I3MCTree::iterator GetMostEnergeticPrimary(const I3MCTree&);
   I3MCTree::iterator GetMostEnergeticPrimary(I3MCTreeConstPtr);
 
   I3MCTree::iterator GetMostEnergeticInIce(const I3MCTree&);
   I3MCTree::iterator GetMostEnergeticInIce(I3MCTreeConstPtr);
-
-//----------Added by seo: Start-----------------------------------------
-
-  I3MCTree::iterator GetMostEnergeticStochastics(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticStochastics(I3MCTreeConstPtr);
-
-  int GetNumberOfStochastics(const I3MCTree&, double&);
-  int GetNumberOfStochastics(I3MCTreeConstPtr, double&);
-
-  int GetNumberOfAtmosphericMuons(const I3MCTree&);
-  int GetNumberOfAtmosphericMuons(I3MCTreeConstPtr);
-
-  bool IsCosmicRayParticle(const I3Particle&);
-  bool IsCosmicRayParticle(I3ParticlePtr);
-
-//----------Added by seo: End-----------------------------------------
 
   I3MCTree::iterator GetMostEnergetic(const I3MCTree&, I3Particle::ParticleType);
   I3MCTree::iterator GetMostEnergetic(I3MCTreeConstPtr, I3Particle::ParticleType);
@@ -163,10 +145,6 @@ namespace I3MCTreeUtils
   I3ParticlePtr GetPrimary(const I3MCTree&, const I3Particle&);
   I3ParticlePtr GetPrimary(I3MCTreePtr, const I3Particle&);
   I3ParticlePtr GetPrimary(I3MCTreeConstPtr, const I3Particle&);
-
-  void Dump(const I3MCTree&);
-  void Dump(I3MCTreeConstPtr);
-  void Dump(I3MCTreePtr);
 
 }
 
