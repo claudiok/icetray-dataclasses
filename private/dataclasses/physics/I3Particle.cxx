@@ -525,7 +525,8 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   lhs.GetTime() == rhs.GetTime() &&
 	   lhs.GetLength() == rhs.GetLength() &&
 	   lhs.GetEnergy() == rhs.GetEnergy() &&
-	   lhs.GetSpeed() == rhs.GetSpeed()
+	   lhs.GetSpeed() == rhs.GetSpeed() &&
+	   lhs.GetComposite()==rhs.GetComposite()
 	   );
 }
 
