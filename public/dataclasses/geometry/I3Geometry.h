@@ -47,7 +47,6 @@ typedef vector<I3TankGeo> I3StationGeo;
 I3_POINTER_TYPEDEFS(I3StationGeo)
 
 typedef map<OMKey, I3OMGeo> I3OMGeoMap;
-typedef pair<OMKey, I3OMGeo> I3OMGeoPair;
 I3_POINTER_TYPEDEFS(I3OMGeoMap)
 
 typedef map<int, I3StationGeo> I3StationGeoMap;
