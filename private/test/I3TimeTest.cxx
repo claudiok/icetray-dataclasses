@@ -369,10 +369,17 @@ TEST(test_unix_time)
 
   tm.SetUnixTime(1308787200);
   ENSURE_EQUAL(tm.GetModJulianDay(), 55735);
+}
 
+TEST(test_modjulianday)
+{
+  I3Time tm;
   tm.SetUnixTime(1192228335);
+  ENSURE_EQUAL(tm.GetUTCYear(), 2007);
+  ENSURE_EQUAL(tm.GetUTCMonth(), I3Time::Oct);
+  ENSURE_EQUAL(tm.GetUTCDayOfMonth(), 12);
+  ENSURE_EQUAL(tm.GetUTCSec(), 24618735);
+
   ENSURE_DISTANCE(I3Time::modjulianday(tm.GetUTCYear(),tm.GetUTCDaqTime()),
                   54385.9390625, 0.0000001);
 }
-
-
