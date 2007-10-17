@@ -201,6 +201,7 @@ class I3Particle : public I3FrameObject
   bool IsCascade() const;
   bool IsPrimary() const;
   bool IsTopShower() const;
+  bool IsNeutrino() const;
 
   bool HasPosition() const;
   bool HasDirection() const;

@@ -220,6 +220,20 @@ bool I3Particle::IsCascade() const
   else return false;
 }
 
+bool I3Particle::IsNeutrino() const
+{
+  if( type_==NuE ||
+      type_==NuEBar ||
+      type_==NuMu ||
+      type_==NuMuBar ||
+      type_==NuTau||
+      type_==NuTauBar||
+      type_==Nu )
+    return true;
+  else
+    return false;
+}
+
 bool I3Particle::HasPosition() const
 {
   if ( isnan(GetX()) || isnan(GetY()) || isnan(GetZ()) ) return false;
