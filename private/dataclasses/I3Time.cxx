@@ -384,7 +384,7 @@ int32_t I3Time::DayOfYear(int64_t daqTime)
   int64_t tenthsOfNs = daqTime %((int64_t)1e10);
   int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
   int64_t daqSecsSinceDay = daqSecs % ((int64_t)(3600 * 24));
-  int32_t day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24);
+  int32_t day_of_year = (daqSecs - daqSecsSinceDay)/(3600 * 24) + 1;
   
   return day_of_year; 
 }

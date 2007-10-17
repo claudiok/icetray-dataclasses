@@ -383,3 +383,18 @@ TEST(test_modjulianday)
   ENSURE_DISTANCE(I3Time::modjulianday(tm.GetUTCYear(),tm.GetUTCDaqTime()),
                   54385.9390625, 0.0000001);
 }
+
+TEST(day_of_year_test)
+{
+  I3Time myTime;
+  // Jan 1 2007 at 18:00  "Day 1 of 2007"
+  myTime.SetDaqTime(2007,6480000ll * (long long)1e8 + 43187970);
+  double myTimeMJD2 = I3Time::modjulianday(2007,6480000ll * (long long)1e8 + 43187970);
+  // Check int32_t I3Time::DayOfYear(double modjulianday)
+  int32_t myTimeDOY = I3Time::DayOfYear(myTimeMJD2);
+  // Check int32_t I3Time::DayOfYear(int64_t daqtime) 
+  int32_t myTimeDOY2 = I3Time::DayOfYear(myTime.GetUTCDaqTime());
+  ENSURE_EQUAL(myTimeDOY,1,"DayOfYear incorrect");
+  ENSURE_EQUAL(myTimeDOY2,1,"DayOfYear incorrect");
+  ENSURE_EQUAL(myTimeDOY,myTimeDOY2,"DayOfYear do not agree");
+}
