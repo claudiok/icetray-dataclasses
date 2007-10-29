@@ -66,6 +66,8 @@ public:
       /** in case of an invalid trigger setting, the UNKNOWN_MODE is set and
        *  the test pattern trigger is used */
       UNKNOWN_MODE = 16,
+      /** set if the DOM Triggered with SLC condition met */
+      SLC_READOUT = 64,
       LAST_TRIGGER_SITUATION = 1 << 5
     };
 
