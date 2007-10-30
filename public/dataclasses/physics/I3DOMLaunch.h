@@ -54,21 +54,25 @@ public:
       UNDEFINED = 0,
       /** Set if signals from both upper and lower DOMs are required
        *  to satisfy local coincidence */
-      REQUIRE_BOTH = 1,
+      REQUIRE_BOTH = 1L << 0,
       /** Set if flasher board run is in the progress */
-      FR_RUN = 2,
+      FR_RUN = 1L << 1,
       /** Set if local coincidence requirement is met, and
        *  LC has been configured to be received by the lower DOM */
-      LC_LOWER = 4,
+      LC_LOWER = 1L << 2,
       /** Set if local coincidence requirement is met, and
        *  LC has been configured to be received by the upper DOM */
-      LC_UPPER = 8,
+      LC_UPPER = 1L << 3,
       /** in case of an invalid trigger setting, the UNKNOWN_MODE is set and
        *  the test pattern trigger is used */
-      UNKNOWN_MODE = 16,
-      /** set if the DOM Triggered with SLC condition met */
-      SLC_READOUT = 64,
-      LAST_TRIGGER_SITUATION = 1 << 5
+      UNKNOWN_MODE = 1L << 4,
+      // first five bits come originally from the engineering format
+      // keep three additional bits reserved
+      // and use the upper eight bits for artificial modes like SLC
+      /** Set if the DOM triggered with SLC condition met */
+      SLC_READOUT = 1L << 8,
+      /** limit this enum on a 16 bit value range */
+      LAST_TRIGGER_SITUATION = 1 << 16
     };
 
 private:
