@@ -14,7 +14,6 @@ I3DOMLaunch::I3DOMLaunch()
   rawATWD_.resize(4);
 }
 
-
 I3DOMLaunch::~I3DOMLaunch() {}
 
 
@@ -218,6 +217,22 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
     if(!rawChargeStamp_.empty()) log_warn("oops, coarse charge stamp is not empty");
     chargeStampHighestSample_ = 0u;
   }
+}
+
+bool operator==(const I3DOMLaunch& lhs, const I3DOMLaunch& rhs){
+  return ( lhs.GetStartTime() == rhs.GetStartTime() &&
+	   lhs.GetTriggerType() == rhs.GetTriggerType() &&	  
+	   lhs.GetTriggerMode() == rhs.GetTriggerMode() &&	  
+	   lhs.GetWhichATWD() == rhs.GetWhichATWD() &&	  
+	   lhs.GetRawATWD(0) == rhs.GetRawATWD(0) &&	  
+	   lhs.GetRawATWD(1) == rhs.GetRawATWD(1) &&	  
+	   lhs.GetRawATWD(2) == rhs.GetRawATWD(2) &&	  
+	   lhs.GetRawATWD(3) == rhs.GetRawATWD(3) &&	  
+	   lhs.GetRawFADC() == rhs.GetRawFADC() &&	  
+	   lhs.GetLCBit() == rhs.GetLCBit() &&	  
+	   lhs.GetIsPedestalSub() == rhs.GetIsPedestalSub() &&	  
+	   lhs.GetRawChargeStamp() == rhs.GetRawChargeStamp() &&	  
+	   lhs.GetChargeStampHighestSample() == rhs.GetChargeStampHighestSample() );
 }
 
 I3_SERIALIZABLE(I3DOMLaunch);
