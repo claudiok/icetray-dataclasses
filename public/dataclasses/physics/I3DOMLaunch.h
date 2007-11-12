@@ -257,8 +257,6 @@ public:
       chargeStampHighestSample_ = highsample;
     };
 
-    friend inline bool operator==(I3DOMLaunch& a, I3DOMLaunch& b);
-
 private:
     friend class boost::serialization::access;
 	
