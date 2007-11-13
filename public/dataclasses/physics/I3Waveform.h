@@ -73,6 +73,11 @@ class I3Waveform
     
     void SetStatus(Status status) { status_ = status; }
     
+    bool operator==(const StatusCompound& rhs) const
+    {
+      return status_ == rhs.status_
+	&& interval_ == rhs.interval_;
+    }
    private:
     friend class boost::serialization::access;
     template<class Archive> void serialize(Archive& ar, unsigned version);
@@ -158,6 +163,8 @@ class I3Waveform
   friend class boost::serialization::access;
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
+
+bool operator==(const I3Waveform& lhs, const I3Waveform& rhs);
 
 typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;

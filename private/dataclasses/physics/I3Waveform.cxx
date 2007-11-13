@@ -62,6 +62,16 @@ void I3Waveform::serialize(Archive& ar, unsigned version)
   ar & make_nvp("source", source_);
 }
 
+bool
+operator==(const I3Waveform& lhs, const I3Waveform& rhs)
+{
+  return lhs.GetStartTime() == rhs.GetStartTime() 
+    && lhs.GetBinWidth() == rhs.GetBinWidth() 
+    && lhs.GetWaveform() == rhs.GetWaveform()
+    && lhs.GetWaveformInformation() == rhs.GetWaveformInformation();
+}
+
+
 I3_SERIALIZABLE(I3Waveform);
 
 I3_SERIALIZABLE(I3WaveformSeriesMap);
