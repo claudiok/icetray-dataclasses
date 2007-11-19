@@ -4,7 +4,7 @@
 #include "dataclasses/Utility.h"
 #include <boost/serialization/version.hpp>
 
-static const unsigned i3domstatus_version_ = 2;
+static const unsigned i3domstatus_version_ = 3;
 
 struct I3DOMStatus 
 {
@@ -36,7 +36,8 @@ struct I3DOMStatus
        fbMask(INT_MAX),
        fbRate(INT_MAX),
        domGainType(UnknownGainType),
-       cableType(UnknownCableType)
+       cableType(UnknownCableType),
+      SLCActive(false)
   {};
 
   virtual ~I3DOMStatus();
@@ -47,6 +48,9 @@ struct I3DOMStatus
   enum TrigMode { UnknownTrigMode = -1 , TestPattern = 0 , CPU = 1, SPE = 2, Flasher=3, MPE=4 };
   /**  
    * This controls how far the local coincidence signal is sent 
+   *   Turns out you can not encode SLC active or not here.  
+   *   IF SoftLC is set here, then ONLY SLC hits are to be expected.
+   *    There is a SLCActive bool now in the this struct.
    */
   enum LCMode {UnknownLCMode = -1, LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4, SoftLC=5};
   /**
@@ -167,6 +171,12 @@ struct I3DOMStatus
      * Cable type: unknown, terminated, unterminated
      */
     CableType cableType;
+
+  /**
+   *  SLCActive - bool to indicate if SLC readouts are active 
+   *     as well as the HLC readouts described above.
+   */
+  bool SLCActive;
 
   template <class Archive> void serialize(Archive & ar, const unsigned version);
 };

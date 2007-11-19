@@ -60,6 +60,14 @@ void I3DOMStatus::serialize (Archive& ar, const unsigned version)
   {
       deltaCompress = I3DOMStatus::Unknown;
   }	
+  if(version > 2)
+  {
+      ar & make_nvp("SLCActive",SLCActive);
+  }
+  else
+  {
+      SLCActive = false;
+  }	
 
 }
 
