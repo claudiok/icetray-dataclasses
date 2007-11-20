@@ -63,6 +63,11 @@ void I3Time::SetUnixTime(time_t unixTime)
   SetModJulianTime(unixTime / 86400 + 40587, unixTime % 86400, 0);
 }
 
+time_t I3Time::GetUnixTime() const
+{
+  return (GetModJulianDay()-40587)*86400+GetModJulianSec();
+}
+
 int I3Time::GetUTCYear() const
 {
   return year_;

@@ -139,6 +139,12 @@ class I3Time : public I3FrameObject
   double GetModJulianNanoSec() const;
 
   /**
+   * @brief Gets the time in Unix convention
+   * @returns The number of seconds since the Epoch (00:00:00 UTC, January 1, 1970)
+   */
+  time_t GetUnixTime() const;
+
+  /**
    * @brief Gets the year in the UTC convention
    */
   int GetUTCYear() const;
