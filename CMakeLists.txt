@@ -1,5 +1,5 @@
 #
-# 
+#   
 #
 i3_project(dataclasses)
 
