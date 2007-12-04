@@ -272,6 +272,9 @@ typedef std::vector<I3DOMLaunch> I3DOMLaunchSeries;
 typedef I3Map<OMKey, I3DOMLaunchSeries> I3DOMLaunchSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeries);
+#ifdef I3_USE_FAST_OMKEY_MAP
+BOOST_CLASS_VERSION(I3DOMLaunchSeriesMap, 1);
+#endif
 I3_POINTER_TYPEDEFS(I3DOMLaunchSeriesMap);
 
 bool operator==(const I3DOMLaunch& lhs, const I3DOMLaunch& rhs);

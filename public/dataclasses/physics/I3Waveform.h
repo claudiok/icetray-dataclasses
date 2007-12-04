@@ -173,5 +173,7 @@ BOOST_CLASS_VERSION(I3Waveform, i3waveform_version_);
 I3_POINTER_TYPEDEFS(I3Waveform);
 I3_POINTER_TYPEDEFS(I3WaveformSeries);
 I3_POINTER_TYPEDEFS(I3WaveformSeriesMap);
-
+#ifdef I3_USE_FAST_OMKEY_MAP
+BOOST_CLASS_VERSION(I3WaveformSeriesMap, 1);
+#endif
 #endif // I3_WAVEFORM_H_INCLUDED

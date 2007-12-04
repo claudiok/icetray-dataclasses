@@ -5,8 +5,8 @@
     @date    $Date: 2006-01-15 10:15:08 -0500 (Sun, 15 Jan 2006) $
 */
 
-#ifndef I3MAP_H_INCLUDED
-#define I3MAP_H_INCLUDED
+#ifndef DATACLASSES_I3MAP_H_INCLUDED
+#define DATACLASSES_I3MAP_H_INCLUDED
 
 #include <icetray/serialization.h>
 #include "icetray/I3Logging.h"
@@ -57,6 +57,11 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
 template <typename Key, typename Value>
 I3Map<Key, Value> :: ~I3Map() { }
 
+#ifdef I3_USE_FAST_OMKEY_MAP
+#include <dataclasses/I3MapOMKey.h>
+#endif
+
+
 typedef I3Map<std::string, double> I3MapStringDouble;
 typedef I3Map<std::string, int> I3MapStringInt;
 typedef I3Map<std::string, bool> I3MapStringBool;
@@ -77,7 +82,13 @@ I3_POINTER_TYPEDEFS(I3MapStringStringDouble);
 I3_POINTER_TYPEDEFS(I3MapUnsignedUnsigned);
 I3_POINTER_TYPEDEFS(I3MapUShortUShort);
 I3_POINTER_TYPEDEFS(I3MapIntVectorInt);
+#ifdef I3_USE_FAST_OMKEY_MAP
+BOOST_CLASS_VERSION(I3MapKeyVectorDouble, 1);
+#endif
 I3_POINTER_TYPEDEFS(I3MapKeyVectorDouble);
+#ifdef I3_USE_FAST_OMKEY_MAP
+BOOST_CLASS_VERSION(I3MapKeyVectorInt, 1);
+#endif
 I3_POINTER_TYPEDEFS(I3MapKeyVectorInt);
 
 #endif // I3MAP_H_INCLUDED

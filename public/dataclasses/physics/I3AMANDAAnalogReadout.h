@@ -25,7 +25,11 @@
  * that represents the peak from the entire event.  TOTs are generated
  * on the fly and may be wrong if edges are missing.
  */
+#ifdef I3_USE_FAST_OMKEY_MAP
+static const unsigned i3amandaanalogreadout_version_ = 1;
+#else
 static const unsigned i3amandaanalogreadout_version_ = 0;
+#endif
 
 class I3AMANDAAnalogReadout 
 { 
@@ -124,6 +128,7 @@ private:
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);
 
 typedef I3Map<OMKey, I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutMap;
+
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadoutMap);
 BOOST_CLASS_VERSION(I3AMANDAAnalogReadoutMap, i3amandaanalogreadout_version_);
 

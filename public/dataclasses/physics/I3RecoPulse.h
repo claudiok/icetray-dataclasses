@@ -91,8 +91,13 @@ typedef I3Map<OMKey, I3RecoPulse> I3RecoPulseMap;
 
 I3_POINTER_TYPEDEFS(I3RecoPulseSeries);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
+#ifdef I3_USE_FAST_OMKEY_MAP
+BOOST_CLASS_VERSION(I3RecoPulseSeriesMap, 1);
+#endif
 I3_POINTER_TYPEDEFS(I3RecoPulseMap);
-
+#ifdef I3_USE_FAST_OMKEY_MAP
+BOOST_CLASS_VERSION(I3RecoPulseMap, 1);
+#endif
 #endif //I3RECOPULSE_H_INCLUDED
 
 

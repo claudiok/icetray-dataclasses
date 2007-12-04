@@ -79,6 +79,9 @@ typedef I3Map<OMKey, I3RecoHitSeries> I3RecoHitSeriesMap;
 
 I3_POINTER_TYPEDEFS(I3RecoHitSeries);
 I3_POINTER_TYPEDEFS(I3RecoHitSeriesMap);
+#ifdef I3_USE_FAST_OMKEY_MAP
+BOOST_CLASS_VERSION(I3RecoHitSeriesMap, 1);
+#endif
 
 #endif //I3RECOHIT_H_INCLUDED
 
