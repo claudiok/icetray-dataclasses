@@ -25,7 +25,8 @@ class I3Waveform
     FADC = 10,
     TWR_ELECTRICAL = 20,
     TWR_OPTICAL = 30,
-    ETC = 40
+    ETC = 40,
+    SLC = 50
   };
   
   /** Describes possible artefacts within the data.
