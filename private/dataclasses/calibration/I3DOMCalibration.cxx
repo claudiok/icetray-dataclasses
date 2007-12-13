@@ -45,12 +45,21 @@ I3DOMCalibration::GetATWDBinCalibFit (unsigned int id,
 {
   if(channel<N_ATWD_CHANNELS&&bin<N_ATWD_BINS)
     {
-      // do these one at a time, one per line, so you can see wtf is
-      // happening.
-      const ATWDBinParam_t& atwd = GetATWDBinParameters(id);
-      const map<unsigned, LinearFit>& fitmap = at(atwd, channel);
-      const LinearFit& fit = at(fitmap, bin);
-      return fit;
+      switch(id)
+	{
+	case 0:
+	  {
+	    const LinearFit& fit = atwdBin0_[channel][bin];
+	    return fit;
+	  }
+	case 1:
+	  {
+	    const LinearFit& fit = atwdBin1_[channel][bin];
+	    return fit;
+	  }
+	default:
+	  log_fatal("Invalid ATWD Id in I3DOMCalibration::SetATWDBinCalibFit");
+	}
     }
   else
     {
@@ -65,74 +74,74 @@ I3DOMCalibration::SetATWDBinCalibFit (unsigned int id,
 				      unsigned int bin,
 				      LinearFit fitParams)
 {
-  GetATWDBinParameters(id)[channel][(N_ATWD_BINS-1)-bin] = fitParams;
+  switch(id)
+    {
+    case 0:
+      atwdBin0_[channel][(N_ATWD_BINS-1)-bin] = fitParams;
+      return;
+    case 1:
+      atwdBin1_[channel][(N_ATWD_BINS-1)-bin] = fitParams;
+      return;
+    default:
+      log_fatal("Invalid ATWD Id in I3DOMCalibration::SetATWDBinCalibFit");
+    }
 }
 
 
 QuadraticFit 
 I3DOMCalibration::GetATWDFreqFit (unsigned int chip) const
 {
-  map<unsigned int, QuadraticFit>::const_iterator iter = atwdFreq_.find(chip);
-  if ( iter == atwdFreq_.end() )
+  //map<unsigned int, QuadraticFit>::const_iterator iter = atwdFreq_.find(chip);
+  
+  if(chip == 0 || chip ==1 )
+    {
+      return atwdFreq_[chip];
+    }
+  else
     {
       log_fatal("Frequency calib not found for ATWD chip in I3DOMCalibration");
     }
-  return  iter->second;    
 }
 
 void 
 I3DOMCalibration::SetATWDFreqFit (unsigned int chip, 
 				  QuadraticFit fitParams)
 {
-  atwdFreq_[chip] = fitParams;
-}
-
-const map<unsigned int,map<unsigned int,LinearFit> >& 
-I3DOMCalibration::GetATWDBinParameters (unsigned int id) const
-{
-  switch(id)
+  if(chip == 0 || chip ==1 )
     {
-    case 0:
-      return atwdBin0_;
-    case 1:
-      return atwdBin1_;
-    default:
-      log_fatal("Invalid ATWD Id in I3DOMCalibration::GetATWDBinParameters(Id)");
+      atwdFreq_[chip] = fitParams;
+    }
+  else
+    {
+      log_fatal("Invalid chip specified in I3DOMCalibration::SetATWDFreqFit");
     }
 }
-
-
-map<unsigned int,map<unsigned int,LinearFit> >& 
-I3DOMCalibration::GetATWDBinParameters(unsigned int id)
-{
-  switch(id)
-    {
-    case 0:
-      return atwdBin0_;
-    case 1:
-      return atwdBin1_;
-    default:
-      log_fatal("Invalid ATWD Id in I3DOMCalibration::GetATWDBinParameters(Id)");
-    }
-}
-
 
 void 
 I3DOMCalibration::SetATWDGain (unsigned int channel, 
 			       double gain) 
 {
-  ampGains_[channel]=gain;
+  if(channel == 0 || channel == 1 || channel == 2)
+    {
+      ampGains_[channel]=gain;
+    }
+  else
+    {
+      log_fatal("Invalid channel specified in I3DOMCalibration::SetATWDGain");
+    }
 }
 
 double 
 I3DOMCalibration::GetATWDGain (unsigned int channel) const
 {
-  map<unsigned int, double>::const_iterator iter = ampGains_.find(channel);
-
-  if ( iter == ampGains_.end() )
-    log_fatal("Gain not found for ATWD channel in I3DOMCalibration");
-  
-  return iter->second;      
+  if(channel == 0 || channel == 1 || channel == 2)
+    {
+      return ampGains_[channel];
+    }
+  else
+    {
+      log_fatal("Invalid ATWD channel requested I3DOMCalibration::GetATWDGain");
+    }
 }
 
 double I3DOMCalibration::GetATWDBaseline(unsigned int id,	
@@ -227,7 +236,6 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
   if (version>i3domcalibration_version_)
     log_fatal("Attempting to read version %u from file but running version %u of I3DOMCalibration class.",version,i3domcalibration_version_);
-
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
   ar & make_nvp("fadcBaseline",fadcBaselineFit_);
@@ -236,10 +244,121 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   {
     ar & make_nvp("fadcDeltaT", fadcDeltaT_);
   }
-  ar & make_nvp("ampGains",ampGains_);
-  ar & make_nvp("atwdFreq",atwdFreq_);
-  ar & make_nvp("atwd0BinParameters",atwdBin0_);
-  ar & make_nvp("atwd1BinParameters",atwdBin1_);
+  if(version < 4)
+    {
+      //In this case, we need to convert the old map<> struct to simple array
+      map<unsigned int, double> ampGains_temp;
+      ar & make_nvp("ampGains",ampGains_temp);
+      map<unsigned int, double>::iterator iter = ampGains_temp.begin();
+      while(iter != ampGains_temp.end())
+	{
+	  if(iter->first < 3)
+	    {
+	      ampGains_[iter->first] = iter->second;
+	    }
+	  else
+	    {
+	      log_fatal("Invalid channel for ampGains in I3DOMCalibration::serialize");
+	    }
+          iter++;
+	}
+    }
+  else
+    {
+      ar & make_nvp("ampGains",ampGains_);
+    }
+  if(version < 4)
+    {
+      //In this case, we need to convert the old map<> struct to simple array
+      map<unsigned int, QuadraticFit> atwdFreq_temp;
+      ar & make_nvp("atwdFreq",atwdFreq_temp);
+      map<unsigned int, QuadraticFit>::iterator iter = atwdFreq_temp.begin();
+      while(iter !=  atwdFreq_temp.end())
+	{
+	  if(iter->first < 2)
+	    {
+	      atwdFreq_[iter->first] = iter->second;
+	    }
+	  else
+	    {
+	      log_fatal("Invalid chip number for atwdFreq in I3DOMCalibration::serialize");
+	    }
+          iter++;
+	}
+    }
+  else
+    {
+      ar & make_nvp("atwdFreq",atwdFreq_);
+    }
+  if(version < 4)
+    {
+      //In this case, we need to convert the old map<> struct to simple array
+      map<unsigned, map<unsigned, LinearFit> > atwdBin0_temp;
+      map<unsigned, map<unsigned, LinearFit> > atwdBin1_temp;
+      ar & make_nvp("atwd0BinParameters",atwdBin0_temp);
+      ar & make_nvp("atwd1BinParameters",atwdBin1_temp);
+      //  For atwdBin0:
+      //first iterate over the outer map, this is over all channels (0-2)
+      map<unsigned, map<unsigned, LinearFit> >::iterator iter_nch = atwdBin0_temp.begin();
+      while(iter_nch != atwdBin0_temp.end())
+	{
+	  if(iter_nch->first <3)
+	    {
+	      // now for each channel, iterate over all bins (0-127)
+	      map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
+	      while(iter_nbin != iter_nch->second.end() )
+		{
+		  if(iter_nbin->first<128)
+		    {
+		      atwdBin0_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
+		    }
+		  else
+		    {
+		      log_fatal("Invalid bin for atwdBin_ in I3DOMCalibration::serialize");
+		    }
+                  iter_nbin++;
+		}
+	    }
+	  else
+	    {
+	      log_fatal("Invalid channel for atwdBin_ in I3DOMCalibration::serialize");
+	    }
+          iter_nch++;
+	}
+      //  For atwdBin1:
+      //first iterate over the outer map, this is over all channels (0-2)
+      iter_nch = atwdBin1_temp.begin();
+      while(iter_nch != atwdBin1_temp.end())
+	{
+	  if(iter_nch->first <3)
+	    {
+	      // now for each channel, iterate over all bins (0-127)
+	      map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
+	      while(iter_nbin != iter_nch->second.end() )
+		{
+		  if(iter_nbin->first<128)
+		    {
+		      atwdBin1_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
+		    }
+		  else
+		    {
+		      log_fatal("Invalid bin for atwdBin_ in I3DOMCalibration::serialize");
+		    }
+                  iter_nbin++;
+		}
+	    }
+	  else
+	    {
+	      log_fatal("Invalid channel for atwdBin_ in I3DOMCalibration::serialize");
+	    }
+          iter_nch++;
+	}
+    }
+  else
+    {
+      ar & make_nvp("atwd0BinParameters",atwdBin0_);
+      ar & make_nvp("atwd1BinParameters",atwdBin1_);
+    }
   ar & make_nvp("pmtTransitTime",pmtTransitTime_);
   ar & make_nvp("hvGainRelation",hvGainRelation_);
   if(version > 1)

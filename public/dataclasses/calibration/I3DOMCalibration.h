@@ -22,7 +22,7 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 3;
+static const unsigned i3domcalibration_version_ = 4;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
@@ -350,34 +350,33 @@ class I3DOMCalibration {
    * Gain for ATWD channels.
    * The key corresponds to the channel (0,1,2)
    */
-  map<unsigned int, double> ampGains_;
-    
+  //map<unsigned int, double> ampGains_;
+  double ampGains_[3];
+
   /**
    * Linear fit for each ATWD sampling frequency, one for each chip (0,1)
    * As of DOMCAL 5.14, this will be a quadratic fit.  So, use a Quadratic fit
    * and assume a linear fit if quadFitC==NULL.
    */
-  map<unsigned int, QuadraticFit> atwdFreq_;
-
-  /**
+  //map<unsigned int, QuadraticFit> atwdFreq_;
+  QuadraticFit atwdFreq_[2];
+  
+/**
    * Results of the linear fit for the bin calibration
    * i.e. the values needed to convert from counts to voltage
    * for each bin in the ATWD.
    * First key corresponds to channel.
    * Key in internal map corresponds to bin.
    */
-  typedef map<unsigned, map<unsigned, LinearFit> > ATWDBinParam_t;
-
-  ATWDBinParam_t atwdBin0_, atwdBin1_;
+  //typedef map<unsigned, map<unsigned, LinearFit> > ATWDBinParam_t;
+  //ATWDBinParam_t atwdBin0_, atwdBin1_;
+ 
+  LinearFit atwdBin0_[N_ATWD_CHANNELS][N_ATWD_BINS];
+  LinearFit atwdBin1_[N_ATWD_CHANNELS][N_ATWD_BINS];
+  
   /**
    *  A convienence function to index these two mega-maps
    */
-
-  const ATWDBinParam_t& 
-  GetATWDBinParameters(unsigned int id) const;
-
-  ATWDBinParam_t& 
-  GetATWDBinParameters(unsigned int id);
 
   /** 
    *  DOMCAL calculated pmt transit time fit function.
@@ -399,7 +398,7 @@ class I3DOMCalibration {
    *  [atwd chip id (0-1)] [ gain channel(0-2) ] [ atwd bin (0-127) ]
    */
 
-  double atwdBaselines_[2][3][128];
+  double atwdBaselines_[2][N_ATWD_CHANNELS][N_ATWD_BINS];
 
   /**
    *  Stores the response witdth of the electronics to a pulse (ATWD). To be used with  
