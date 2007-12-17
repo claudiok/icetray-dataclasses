@@ -267,12 +267,10 @@ I3Time I3Time::operator-(const double second_term) const
 
 double operator-(const I3Time t1,const I3Time t2) 
 {
-  return t1.GetModJulianDay() * 8.64e13 
-       + t1.GetModJulianSec() * 1e9 
-       + t1.GetModJulianNanoSec() 
-       - t2.GetModJulianDay() * 8.64e13 
-       - t2.GetModJulianSec() * 1e9 
-       - t2.GetModJulianNanoSec() ;
+  return 
+    ( t1.GetModJulianNanoSec() - t2.GetModJulianNanoSec() ) * I3Units::nanosecond +
+    ( t1.GetModJulianSec()     - t2.GetModJulianSec()     ) * I3Units::second +
+    ( t1.GetModJulianDay()     - t2.GetModJulianDay()     ) * I3Units::day;
 }
 
 std::string I3Time::MonthToString(Month m)
