@@ -21,6 +21,16 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
   }
 
 
+bool 
+I3RecoPulse::operator==(const I3RecoPulse& rhs) const
+{
+  return hitID_ == rhs.hitID_ 
+    && time_ == rhs.time_
+    && charge_ == rhs.charge_
+    && width_ == rhs.width_
+    && sourceIndex_ == rhs.sourceIndex_;
+}
+
 I3_SERIALIZABLE(I3RecoPulse);
 
 I3_SERIALIZABLE(I3RecoPulseSeriesMap);

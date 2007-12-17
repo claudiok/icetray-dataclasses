@@ -77,6 +77,8 @@ class I3RecoPulse
 
   virtual ~I3RecoPulse();
 
+  bool operator==(const I3RecoPulse& rhs) const;
+
   private:
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
