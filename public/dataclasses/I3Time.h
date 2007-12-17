@@ -262,6 +262,11 @@ class I3Time : public I3FrameObject
   void serialize(Archive& ar, unsigned version);
 };
 
+/**
+ * Returns the difference between two I3Times in nanoseconds
+ */
+double operator-(const I3Time t1,const I3Time t2);
+
 I3_POINTER_TYPEDEFS(I3Time);
 BOOST_CLASS_VERSION(I3Time, i3time_version_);
 
