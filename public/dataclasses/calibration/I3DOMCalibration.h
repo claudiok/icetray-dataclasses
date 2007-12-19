@@ -374,10 +374,6 @@ class I3DOMCalibration {
   LinearFit atwdBin0_[N_ATWD_CHANNELS][N_ATWD_BINS];
   LinearFit atwdBin1_[N_ATWD_CHANNELS][N_ATWD_BINS];
   
-  /**
-   *  A convienence function to index these two mega-maps
-   */
-
   /** 
    *  DOMCAL calculated pmt transit time fit function.
    */
