@@ -53,6 +53,15 @@ class I3MCHit
     cherenkovDistance_(NAN),
     source_(UNKNOWN) { }
 
+ I3MCHit(uint64_t mid, int id) : 
+    time_(NAN), 
+    hitID_(-1),
+    weight_(NAN), 
+    particleID_(id), 
+    particleMajorID_(mid), 
+    cherenkovDistance_(NAN),
+    source_(UNKNOWN) { }
+
   virtual ~I3MCHit();
 
   double GetTime() const { return time_;}
