@@ -57,10 +57,10 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
     + ((int64_t)(ns * 10.));
 }
 
-void I3Time::SetUnixTime(time_t unixTime)
+void I3Time::SetUnixTime(time_t unixTime,double ns)
 {
   if(unixTime < 0) log_fatal("invalid Unix time");
-  SetModJulianTime(unixTime / 86400 + 40587, unixTime % 86400, 0);
+  SetModJulianTime(unixTime / 86400 + 40587, unixTime % 86400, ns);
 }
 
 time_t I3Time::GetUnixTime() const

@@ -119,8 +119,9 @@ class I3Time : public I3FrameObject
    * @brief Sets the time in the Unix convention
    * @param unixTime time since the Epoch (00:00:00 UTC, January 1, 1970),
    * measured in seconds
+   * @param ns the number of ns after this second began.
    */
-  void SetUnixTime(time_t unixTime);
+  void SetUnixTime(time_t unixTime,double ns=0);
 
   /**
    * @brief Gets the Modified Julian day
