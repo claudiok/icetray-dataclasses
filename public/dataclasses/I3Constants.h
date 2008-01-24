@@ -74,14 +74,15 @@ namespace I3Constants
   static const double NA = 6.0221415e23;
 
   /**
-   * Elevation of ice surface (of AMANDA hole 4)
-   * From email from Kurt Woschnagg on 08/25/2004
+   * Elevation of ice surface (floor of string 21 deployment tower)
+   * @sa http://wiki.icecube.wisc.edu/index.php/Coordinate_system
    */
-  static const double SurfaceElev = 9284.46*I3Units::feet;
+  static const double SurfaceElev = 9291.31*I3Units::feet;
 
   /**
    * Elevation of IceCube origin (z=0) -- BY DEFINITION
    * From email from Kurt Woschnagg on 08/25/2004
+   * @sa http://wiki.icecube.wisc.edu/index.php/Coordinate_system
    */
   static const double OriginElev = 2900*I3Units::feet;
 
