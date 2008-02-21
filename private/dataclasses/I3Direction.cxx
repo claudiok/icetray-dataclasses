@@ -23,6 +23,7 @@ I3Direction::serialize(Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3Direction);
+I3_SERIALIZABLE(I3DirectionVect);
 
 //-----------------------------------------------------------
 I3Direction::I3Direction()

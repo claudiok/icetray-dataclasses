@@ -22,6 +22,7 @@
 #include "Utility.h"
 #include "dataclasses/I3Constants.h"
 #include "dataclasses/I3Units.h"
+#include "dataclasses/I3Vector.h"
 
 using namespace I3Constants;
 using namespace I3Units;
@@ -238,5 +239,8 @@ bool operator==(const I3Direction& lhs, const I3Direction& rhs);
 
 I3_POINTER_TYPEDEFS(I3Direction);
 BOOST_CLASS_VERSION(I3Direction, i3direction_version_);
+
+typedef I3Vector<I3Direction> I3DirectionVect;
+I3_POINTER_TYPEDEFS(I3DirectionVect);
 
 #endif //I3DIRECTION_H_INCLUDED
