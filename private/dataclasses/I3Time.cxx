@@ -185,6 +185,15 @@ double I3Time::GetUTCNanoSec() const
   return 0.1 * daqtenthsns;
 }
 
+string I3Time::GetUTCString(string format)const
+{
+  time_t t=GetUnixTime();
+  struct tm *tm=gmtime(&t);
+  char datestring[256];
+  strftime (datestring, sizeof(datestring), format.c_str(), tm);
+  return datestring;
+}
+
 bool I3Time::operator<(const I3Time& rhs) const
 {
   if(year_ < rhs.year_)

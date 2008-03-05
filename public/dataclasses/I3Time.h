@@ -182,6 +182,12 @@ class I3Time : public I3FrameObject
    */
   double GetUTCNanoSec() const;  
 
+
+  /**
+   * @brief Gets a string representing the time in UTC
+   */
+  string GetUTCString(string format="%Y-%m-%d %H:%M:%S UTC")const;
+
   /**
    * equality operator.  
    * @return true if the times are the same
