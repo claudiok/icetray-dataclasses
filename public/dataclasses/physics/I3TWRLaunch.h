@@ -65,6 +65,8 @@ class I3TWRLaunch
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
+bool operator==(const I3TWRLaunch& lhs, const I3TWRLaunch& rhs);
+
 typedef std::vector<I3TWRLaunch> I3TWRLaunchSeries;
 typedef I3Map<OMKey, I3TWRLaunchSeries> I3TWRLaunchSeriesMap;
 

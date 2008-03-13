@@ -68,5 +68,13 @@ I3TWRLaunch::serialize (Archive& ar, unsigned version)
 }
 
 
+bool operator==(const I3TWRLaunch& lhs, const I3TWRLaunch& rhs)
+{
+  return ( lhs.GetBaseline() ==rhs.GetBaseline() &&
+	   lhs.GetFragments()==rhs.GetFragments()
+	   )
+}
+
+
 I3_SERIALIZABLE(I3TWRLaunch);
 I3_SERIALIZABLE(I3TWRLaunchSeriesMap);
