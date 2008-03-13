@@ -114,7 +114,25 @@ class I3Time : public I3FrameObject
   void SetModJulianTime(int32_t modJulianDay,
 			int32_t sec,
 			double ns);
-
+  
+  /**
+   * @brief Sets the time in the UTC calendar date convention
+   * @param year The year. Something like 2005.
+   * @param month The month. A number in the range of [1, 12].
+   * @param day The day. A number between 1 and the maximun number of days in the month
+   * @param hour The hour. A number in the range of [0, 23].
+   * @param minute The minute. A number in the range of [0, 59].
+   * @param sec The second. A number in the range of [0, 59].
+   * @param ns the number of ns in the range of [0,1e9) after this second began.
+   */
+  void SetUTCCalDate(int year,
+		     int month,
+		     int day,
+		     int hour,
+		     int minute,
+		     int sec,
+		     double ns=0.0);
+  
   /**
    * @brief Sets the time in the Unix convention
    * @param unixTime time since the Epoch (00:00:00 UTC, January 1, 1970),

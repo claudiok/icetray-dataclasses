@@ -398,3 +398,80 @@ TEST(day_of_year_test)
   ENSURE_EQUAL(myTimeDOY2,1,"DayOfYear incorrect");
   ENSURE_EQUAL(myTimeDOY,myTimeDOY2,"DayOfYear do not agree");
 }
+
+
+TEST(test_utc_caldate)
+{
+    struct caldate_t 
+    {
+	int year;
+	int month;
+	int day;
+	int hour;
+	int minute;
+	int sec;
+    };
+    
+    const int NUM_DATES = 4;
+    caldate_t test_dates[NUM_DATES];
+    
+    // Test new years eve
+    test_dates[0].year   = 2007;
+    test_dates[0].month  = 12;
+    test_dates[0].day    = 31;
+    test_dates[0].hour   = 23;
+    test_dates[0].minute = 59;
+    test_dates[0].sec    = 59;
+    
+    // Test Feb. 28
+    test_dates[1].year   = 2007;
+    test_dates[1].month  = 2;
+    test_dates[1].day    = 28;
+    test_dates[1].hour   = 23;
+    test_dates[1].minute = 59;
+    test_dates[1].sec    = 59;
+    
+    // Test Feb. 29
+    test_dates[2].year   = 2008;
+    test_dates[2].month  = 2;
+    test_dates[2].day    = 29;
+    test_dates[2].hour   = 23;
+    test_dates[2].minute = 59;
+    test_dates[2].sec    = 59;
+    
+    // Test Jan. 1, 2050
+    test_dates[3].year   = 2050;
+    test_dates[3].month  = 1;
+    test_dates[3].day    = 1;
+    test_dates[3].hour   = 0;
+    test_dates[3].minute = 0;
+    test_dates[3].sec    = 0;
+    
+    for(int i=0; i<NUM_DATES; i++)
+    {
+	I3Time testtime;
+	testtime.SetUTCCalDate(test_dates[i].year,
+			       test_dates[i].month,
+			       test_dates[i].day,
+			       test_dates[i].hour,
+			       test_dates[i].minute,
+			       test_dates[i].sec);
+	
+	int dayOfYear    = (int)testtime.DayOfYear(testtime.GetUTCDaqTime()) - 1;
+	int secondOfYear = (int)3600*24*dayOfYear;
+	
+	int secondOfDay = (int)testtime.GetUTCSec() - secondOfYear;
+	int minuteOfDay = (int)floor(secondOfDay/60.0);
+	
+	int hour   = (int)floor(minuteOfDay/60.0);
+	int minute = minuteOfDay - hour*60;
+	int second = secondOfDay - hour*3600 - minute*60;
+	
+	ENSURE_EQUAL(testtime.GetUTCYear(),       test_dates[i].year);
+	ENSURE_EQUAL(testtime.GetUTCMonth(),      test_dates[i].month);
+	ENSURE_EQUAL(testtime.GetUTCDayOfMonth(), test_dates[i].day);
+	ENSURE_EQUAL(hour,                        test_dates[i].hour);
+	ENSURE_EQUAL(minute,                      test_dates[i].minute);
+	ENSURE_EQUAL(second,                      test_dates[i].sec);
+    }
+}

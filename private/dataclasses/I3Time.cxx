@@ -57,6 +57,61 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
     + ((int64_t)(ns * 10.));
 }
 
+void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, int sec, double ns)
+{
+    int daysOfMonth[12] = {31,28,31,30,31,30,31,31,30,31,30,31}; 
+    if(I3TimeUtils::leap_year(year)) daysOfMonth[1] = 29;
+    
+    if(month<1 || month>12)
+    {
+        log_error("Invalid month!");
+        return;
+    }
+
+    if(day<1 || day>daysOfMonth[month-1])
+    {
+        log_error("Invalid day!");
+        return;
+    }
+    
+    if(hour<0 || hour>23)
+    {
+        log_error("Invalid hour!");
+        return;
+    }
+
+    if(minute<0 || minute>59)
+    {
+        log_error("Invalid minute!");
+        return;
+    }
+
+    if(sec<0 || sec>59)
+    {
+        log_error("Invalid second!");
+        return;
+    }
+    
+    if(ns<0 || ns>=1e9)
+    {
+        log_error("Invalid nanosecond!");
+        return;
+    }
+    
+    UTinstant i;
+    i.year     = year;
+    i.month    = month;
+    i.day      = day;
+    i.i_hour   = 0;
+    i.i_minute = 0;
+    i.second   = 0;
+    
+    int32_t modJulDay = (int32_t)(JulDate(&i) - 2400000.5);
+    int32_t second = (int32_t)(hour*3600 + minute*60 + sec);
+    
+    SetModJulianTime(modJulDay, second, ns);
+}
+
 void I3Time::SetUnixTime(time_t unixTime,double ns)
 {
   if(unixTime < 0) log_fatal("invalid Unix time");
