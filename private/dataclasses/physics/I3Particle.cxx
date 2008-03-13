@@ -94,6 +94,8 @@ string I3Particle::GetTypeString() const
   case FiberLaser: return("FiberLaser");
   case N2Laser:    return("N2Laser");
   case YAGLaser:   return("YAGLaser");
+  case STauPlus:   return("STauPlus");
+  case STauMinus:  return("STauMinus");
   default:         return("undefined_particle_type");
   }
 }

@@ -143,7 +143,12 @@ class I3Particle : public I3FrameObject
     Hadrons = -1006,
     FiberLaser = -2100,
     N2Laser = -2101,
-    YAGLaser = -2201
+    YAGLaser = -2201,
+    /**
+     * Make SUSY partners -(9000 + SM_number)
+     */
+    STauPlus = -9131,
+    STauMinus = -9132
   };
 
   enum ParticleShape { 
