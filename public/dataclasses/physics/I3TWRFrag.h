@@ -69,6 +69,8 @@ class I3TWRFrag
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
+bool operator==(const I3TWRFrag& lhs, const I3TWRFrag& rhs);
+
 static const unsigned i3twrfrag_version_ = 1;
 BOOST_CLASS_VERSION(I3TWRFrag, i3twrfrag_version_);
 

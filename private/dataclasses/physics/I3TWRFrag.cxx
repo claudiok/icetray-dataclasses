@@ -69,5 +69,11 @@ I3TWRFrag::serialize(Archive& ar, unsigned version)
   }
 }
 
+bool operator==(const I3TWRFrag& lhs, const I3TWRFrag& rhs)
+{
+  return ( lhs.GetStartBin() == rhs.GetStartBin() &&
+	   lhs.GetWaveform() == rhs.GetWaveform()
+	   );
+}
 
 I3_SERIALIZABLE(I3TWRFrag);

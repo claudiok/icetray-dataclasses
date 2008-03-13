@@ -72,7 +72,7 @@ bool operator==(const I3TWRLaunch& lhs, const I3TWRLaunch& rhs)
 {
   return ( lhs.GetBaseline() ==rhs.GetBaseline() &&
 	   lhs.GetFragments()==rhs.GetFragments()
-	   )
+	   );
 }
 
 
