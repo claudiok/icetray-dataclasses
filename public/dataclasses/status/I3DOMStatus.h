@@ -4,7 +4,7 @@
 #include "dataclasses/Utility.h"
 #include <boost/serialization/version.hpp>
 
-static const unsigned i3domstatus_version_ = 3;
+static const unsigned i3domstatus_version_ = 4;
 
 struct I3DOMStatus 
 {
@@ -37,7 +37,8 @@ struct I3DOMStatus
        fbRate(INT_MAX),
        domGainType(UnknownGainType),
        cableType(UnknownCableType),
-      SLCActive(false)
+       SLCActive(false),
+       mpeThreshold(NAN)
   {};
 
   virtual ~I3DOMStatus();
@@ -114,7 +115,7 @@ struct I3DOMStatus
   double pmtHV;
 
   /**
-   *  Single PE (MPE) discriminator level. 
+   *  Single PE (SPE) discriminator level. 
    */
   double speThreshold;
   /**
@@ -177,6 +178,10 @@ struct I3DOMStatus
    *     as well as the HLC readouts described above.
    */
   bool SLCActive;
+  /**
+   *  Multiple PE (MPE) discriminator level. 
+   */
+  double mpeThreshold;
 
   template <class Archive> void serialize(Archive & ar, const unsigned version);
 };

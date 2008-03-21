@@ -68,7 +68,10 @@ void I3DOMStatus::serialize (Archive& ar, const unsigned version)
   {
       SLCActive = false;
   }	
-
+  if(version > 3)
+  {
+    ar & make_nvp("mpeThreshold",mpeThreshold);
+  }
 }
 
 I3_SERIALIZABLE(I3DOMStatus);

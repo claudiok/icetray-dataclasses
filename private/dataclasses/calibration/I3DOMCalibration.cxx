@@ -144,6 +144,33 @@ I3DOMCalibration::GetATWDGain (unsigned int channel) const
     }
 }
 
+void 
+I3DOMCalibration::SetATWDDeltaT (unsigned int chip, 
+			       double deltat) 
+{
+  if(chip == 0 || chip == 1)
+    {
+      atwdDeltaT_[chip]=deltat;
+    }
+  else
+    {
+      log_fatal("Invalid chip id specified in I3DOMCalibration::SetATWDDeltaT");
+    }
+}
+
+double 
+I3DOMCalibration::GetATWDDeltaT (unsigned int chip) const
+{
+  if(chip == 0 || chip == 1)
+    {
+      return atwdDeltaT_[chip];
+    }
+  else
+    {
+      log_fatal("Invalid chip id requested I3DOMCalibration::GetATWDDeltaT");
+    }
+}
+
 double I3DOMCalibration::GetATWDBaseline(unsigned int id,	
 		       unsigned int channel,
 		       unsigned int bin) const
@@ -378,7 +405,10 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("FADCResponseWidth", fadcResponseWidth_);
       
     }
-
+  if (version > 4)
+    {
+      ar & make_nvp("atwdDeltaT", atwdDeltaT_);
+    }
 
 }
 

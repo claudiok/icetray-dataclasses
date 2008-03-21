@@ -22,7 +22,7 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 4;
+static const unsigned i3domcalibration_version_ = 5;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
@@ -231,6 +231,15 @@ class I3DOMCalibration {
   void SetATWDGain(unsigned int channel, double gain);
 
   /**
+   * Get atwd DeltaT by chip
+   */
+  double GetATWDDeltaT(unsigned int chip) const;
+  /**
+   * Set atwd DeltaT by chip
+   */
+  void SetATWDDeltaT(unsigned int chip, double deltat);
+
+  /**
    * Get fit parameters from domcal file <atwdfreq> which is 
    * the sampling rate calibration for each ATWD chip 0 or 1 
    */
@@ -409,6 +418,15 @@ class I3DOMCalibration {
    */
 
   double fadcResponseWidth_;
+
+  /**
+   *  Store the ATWD time offset from domcal calibration.  the ATWD used in transit time
+   *  calibratin will be 0.0, while the other could have up to a few ns offset...
+   */
+
+  double atwdDeltaT_[2];
+
+
 
 
 };
