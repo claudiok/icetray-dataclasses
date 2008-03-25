@@ -108,7 +108,7 @@ class TriggerKey
    * @return The name.
    */
   static const char* GetSourceString(SourceID source);
-  static SourceID GetSourceFromString(string sourcestr);
+  static SourceID GetSourceFromString(const std::string& sourcestr);
 
   /**
    * Returns the name of a type ID.
@@ -117,7 +117,7 @@ class TriggerKey
    * @return The name.
    */
   static const char* GetTypeString(TypeID type);
-  static TypeID GetTypeFromString(string typestr);
+  static TypeID GetTypeFromString(const std::string& typestr);
 
  private:
   SourceID source_;
@@ -312,7 +312,7 @@ class TriggerKey
    * @return false if source, type, subtype and configuration ID of the two
    * trigger keys are different.
    */
-  bool operator!= (const TriggerKey & rhs) const
+  bool operator!=(const TriggerKey& rhs) const
   {
     return !(rhs == *this);
   }

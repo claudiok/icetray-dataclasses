@@ -28,12 +28,12 @@
  * - a map of trigger settings:  string, integer values,
  * since most trigger information varies by trigger type.
  *
- *  For IceCube triggers, these settings are most probably ...<BR>
+ * For IceCube triggers, these settings are most probably ...<BR>
  * <BR>... simple multiplicity trigger:<BR>
  * "threshold" - number of hits required in a time window<BR>
- * "timeWindow" - lenth of sliding time window (in ns)<BR>
+ * "timeWindow" - length of sliding time window (in ns)<BR>
  * <BR>... calibration trigger<BR>
- * "hitType" - type of hit to trigger on (0(test), 1 (CPU), 2 (SPE), 3 (flasher))<BR>
+ * "hitType" - type of hit to trigger on (0 (test), 1 (CPU), 2 (SPE), 3 (flasher))<BR>
  * <BR>... min bias trigger<BR>
  * "prescale" - one over the fraction of hits to trigger on<BR>
  * <BR>... two coincidence trigger<BR>

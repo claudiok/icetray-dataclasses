@@ -42,7 +42,7 @@ TriggerKey::GetSourceString(SourceID source)
 }
 
 TriggerKey::SourceID
-TriggerKey::GetSourceFromString(string sourcestr)
+TriggerKey::GetSourceFromString(const string& sourcestr)
 {
   if (sourcestr=="IN_ICE")
     return(IN_ICE);
@@ -67,7 +67,7 @@ TriggerKey::GetSourceFromString(string sourcestr)
 }
 
 const char *
-TriggerKey::GetTypeString (TypeID type)
+TriggerKey::GetTypeString(TypeID type)
 {
   switch(type)
   {
@@ -104,7 +104,7 @@ TriggerKey::GetTypeString (TypeID type)
 }
 
 TriggerKey::TypeID
-TriggerKey::GetTypeFromString (string typestr)
+TriggerKey::GetTypeFromString(const string& typestr)
 {
   if (typestr=="SIMPLE_MULTIPLICITY")
     return(SIMPLE_MULTIPLICITY);
