@@ -11,6 +11,7 @@
 
 #include <utility>
 #include "Utility.h"
+#include <icetray/OMKey.h>
 #include <iostream>
 /**
  * @brief A small class which is the string number and tank number
@@ -31,7 +32,9 @@ class TankKey
 
   TankKey(int str,TankID tank) 
     : stringNumber_(str), tankID_(tank){}
-
+  
+  TankKey(const OMKey& omKey) {SetOMKey(omKey);} 
+  
   virtual ~TankKey(); 
 
   /**
@@ -53,7 +56,17 @@ class TankKey
    * sets the Tank number on the station
    */
   void SetTank(TankID tank){ tankID_ = tank; }
-
+  
+  /**
+   * Sets the stringNumber and tankID of this tank according to the OMKey
+   */
+  void SetOMKey(const OMKey& omKey);
+  
+  /**
+   * Returns a tank label
+   */
+  std::string str() const;
+    
   /**
    * equality operator.  
    * @return true if the string and tank numbers of the two TankKey's match
@@ -103,6 +116,12 @@ inline bool operator<(const TankKey& lhs,const TankKey& rhs)
     return true;
   return false;
 }
+
+/**
+ * streams an TankKey to an arbitrary ostream.
+ */
+std::ostream& operator<<(std::ostream&, const TankKey& key);
+
 
 I3_POINTER_TYPEDEFS(TankKey);
 BOOST_CLASS_VERSION(TankKey, tankkey_version_);
