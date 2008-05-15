@@ -124,6 +124,47 @@ double TransitTime(const I3DOMStatus& status,
     return transitTime*I3Units::ns;    
 }
 
+double SPEDiscriminatorThreshold(const I3DOMStatus& status,
+				 const I3DOMCalibration& calib)
+
+{
+  const LinearFit speCalibFit = calib.GetSPEDiscCalib();
+  double speThresh = status.speThreshold/I3Units::V;
+  // I3Db module converts this speThresh to a voltage from raw DAC value.
+  //  but we need the raw DAC value, invert the voodoo.
+  double fePedestal = status.fePedestal/I3Units::volt;
+  double speDAC = (1024./5.) * ( speThresh*(9.6*(1+2200./249.))  + fePedestal );
+
+  //  Now use the linear relation between DAC and SPE Discriminator threshold:
+
+  double discrimThresh = speCalibFit.slope * speDAC + speCalibFit.intercept;
+  log_trace("speDAC: %f   disc thresh: %f pC",speDAC,discrimThresh);
+
+  return discrimThresh*I3Units::pC;
+  
+}
+
+double MPEDiscriminatorThreshold(const I3DOMStatus& status,
+				 const I3DOMCalibration& calib)
+
+{
+  const LinearFit mpeCalibFit = calib.GetMPEDiscCalib();
+  double mpeThresh = status.mpeThreshold/I3Units::V;
+  // I3Db module converts this mpeThresh to a voltage from raw DAC value.
+  //  but we need the raw DAC value, invert the voodoo.
+  double fePedestal = status.fePedestal/I3Units::volt;
+  double mpeDAC = (1024./5.) * ( (mpeThresh/10.)*(9.6*(1+2200./249.))  + fePedestal );
+
+  //  Now use the linear relation between DAC and MPE Discriminator threshold:
+
+  double discrimThresh = mpeCalibFit.slope * mpeDAC + mpeCalibFit.intercept;
+  log_trace("mpeDAC: %f   disc thresh: %f pC",mpeDAC,discrimThresh);
+
+  return discrimThresh*I3Units::pC;
+  
+}
+
+
 vector<int> DOMCalVersion(const I3DOMCalibration& calib)
 {
     // We assume here that the version given is sensible

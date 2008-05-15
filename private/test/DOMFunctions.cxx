@@ -117,3 +117,35 @@ TEST(DoCalibTestQuadraticFit)
 		      1.0e2,"Failed to return proper gain");
     }
 
+TEST(DiscrimThresholds)
+    {
+      I3DOMStatus rawstatus;
+      
+      I3DOMCalibration calib;
+
+      //Values taken from domcal file and GCD file...
+      LinearFit speCal;
+      speCal.slope = 0.0137063;
+      speCal.intercept = -7.39653;
+      calib.SetSPEDiscCalib(speCal);
+      LinearFit mpeCal;
+      mpeCal.slope = 0.131823;
+      mpeCal.intercept = -70.4468;
+      calib.SetMPEDiscCalib(mpeCal);
+
+      rawstatus.fePedestal = 2.6000976562500007e-09;
+      rawstatus.speThreshold = 4.5249879773951117e-12;
+      rawstatus.mpeThreshold = 1.4221390786098917e-11;
+
+      double speDiscThresh = SPEDiscriminatorThreshold(rawstatus, calib);
+      double mpeDiscThresh = MPEDiscriminatorThreshold(rawstatus, calib);
+
+      ENSURE_DISTANCE(1.101376,
+		      speDiscThresh/I3Units::pC, 0.00001,
+		      "Failed to return proper calibrated SPE discriminator threshold");
+      ENSURE_DISTANCE(3.374080,
+		      mpeDiscThresh/I3Units::pC, 0.00001,
+		      "Failed to return proper calibrated MPE discriminator threshold");
+
+
+    }

@@ -409,6 +409,11 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("atwdDeltaT", atwdDeltaT_);
     }
+  if (version > 5)
+    {
+      ar & make_nvp("speDiscrimCalib", speDiscrimCalib_);
+      ar & make_nvp("mpeDiscrimCalib", mpeDiscrimCalib_);
+    }
 
 }
 

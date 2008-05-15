@@ -54,6 +54,13 @@ TEST(bin_parameters)
 				bin,
 				baseline);
 
+    LinearFit specal;
+    // Taken from actual domcal file
+    specal.slope = 0.0137063;
+    specal.intercept = -7.39653;
+    
+    dom_calib.SetSPEDiscCalib(specal);
+
     calib->domCal[omkey] = dom_calib;
 
     I3VEMCalibration tank_calib;
@@ -122,6 +129,14 @@ TEST(bin_parameters)
 		    calib->twrCal[omkeya].xtcal.chargeVsAmplCut.intercept,
 		    0.0001,
 	            "Failed to return proper TWRCalibration xtcal.chargeVsAmplCut.intercept");
+    ENSURE_DISTANCE(0.0137063,
+		    calib->domCal[omkey].GetSPEDiscCalib().slope,
+		    0.00001,
+		    "Failed to return proper SPEDiscCalib slope");
+    ENSURE_DISTANCE(-7.39653,
+		    calib->domCal[omkey].GetSPEDiscCalib().intercept,
+		    0.00001,
+		    "Failed to return proper SPEDiscCalib intercept");
 
 }
 

@@ -47,6 +47,18 @@ double FADCBaseline (const I3DOMStatus& , const I3DOMCalibration&);
 double TransitTime (const I3DOMStatus&, const I3DOMCalibration&);
 
 /**
+ * Get the calibrated SPE Discrimiator threshold (pC)
+ */
+double SPEDiscriminatorThreshold (const I3DOMStatus&, const I3DOMCalibration&);
+
+/**
+ * Get the calibrated MPE Discrimiator threshold (pC)
+ */
+double MPEDiscriminatorThreshold (const I3DOMStatus&, const I3DOMCalibration&);
+
+
+
+/**
  * Given a string which contains the DOMCal version (e.g. "6.1.0"), return a vector<int>
  * which contains the numbers as its elements (i.e. what's between the separating "."s)
  */

@@ -22,7 +22,7 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 5;
+static const unsigned i3domcalibration_version_ = 6;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
@@ -322,6 +322,27 @@ class I3DOMCalibration {
   void SetFADCResponseWidth(double fadcResponseWidth) { fadcResponseWidth_ = fadcResponseWidth; }
 
 
+  /**
+   *  Get/Set functions for speDiscrimCalib
+   */
+  void SetSPEDiscCalib(LinearFit speDiscrimCalib) 
+  {
+    speDiscrimCalib_ = speDiscrimCalib;
+  }
+
+  LinearFit GetSPEDiscCalib() const { return speDiscrimCalib_ ; }  
+
+  /**
+   *  Get/Set functions for mpeDiscrimCalib
+   */
+  void SetMPEDiscCalib(LinearFit mpeDiscrimCalib) 
+  {
+    mpeDiscrimCalib_ = mpeDiscrimCalib;
+  }
+
+  LinearFit GetMPEDiscCalib() const { return mpeDiscrimCalib_ ; }  
+
+
 
   template <class Archive>
     void serialize(Archive& ar, unsigned version);
@@ -425,6 +446,18 @@ class I3DOMCalibration {
    */
 
   double atwdDeltaT_[2];
+
+  /**
+   * The SPE discriminator calibration.  A linear fit between
+   *   DAC(9) value and charge level in pC.
+   */
+  LinearFit speDiscrimCalib_;
+
+  /**
+   * The MPE discriminator calibration.  A linear fit between
+   *   DAC(8) value and charge level in pC.
+   */
+  LinearFit mpeDiscrimCalib_;
 
 
 
