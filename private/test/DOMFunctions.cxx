@@ -134,18 +134,19 @@ TEST(DiscrimThresholds)
       calib.SetMPEDiscCalib(mpeCal);
 
       rawstatus.fePedestal = 2.6000976562500007e-09;
+
       rawstatus.speThreshold = 4.5249879773951117e-12;
       rawstatus.mpeThreshold = 1.4221390786098917e-11;
+
 
       double speDiscThresh = SPEDiscriminatorThreshold(rawstatus, calib);
       double mpeDiscThresh = MPEDiscriminatorThreshold(rawstatus, calib);
 
-      ENSURE_DISTANCE(1.101376,
-		      speDiscThresh/I3Units::pC, 0.00001,
+      ENSURE_DISTANCE(8.1*1.101376,
+		      speDiscThresh/I3Units::mV, 0.00001,
 		      "Failed to return proper calibrated SPE discriminator threshold");
-      ENSURE_DISTANCE(3.374080,
-		      mpeDiscThresh/I3Units::pC, 0.00001,
+      ENSURE_DISTANCE(8.1*3.374080,
+		      mpeDiscThresh/I3Units::mV, 0.00001,
 		      "Failed to return proper calibrated MPE discriminator threshold");
-
 
     }

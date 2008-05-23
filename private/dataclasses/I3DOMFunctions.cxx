@@ -136,11 +136,12 @@ double SPEDiscriminatorThreshold(const I3DOMStatus& status,
   double speDAC = (1024./5.) * ( speThresh*(9.6*(1+2200./249.))  + fePedestal );
 
   //  Now use the linear relation between DAC and SPE Discriminator threshold:
+  // and convert it in voltage (another voodoo factor...)
+  double discrimThresh = 8.1 * (speCalibFit.slope * speDAC + speCalibFit.intercept);
+  
+  log_trace("speDAC: %f   disc thresh: %f mV",speDAC,discrimThresh);
 
-  double discrimThresh = speCalibFit.slope * speDAC + speCalibFit.intercept;
-  log_trace("speDAC: %f   disc thresh: %f pC",speDAC,discrimThresh);
-
-  return discrimThresh*I3Units::pC;
+  return discrimThresh*I3Units::mV;
   
 }
 
@@ -156,11 +157,12 @@ double MPEDiscriminatorThreshold(const I3DOMStatus& status,
   double mpeDAC = (1024./5.) * ( (mpeThresh/10.)*(9.6*(1+2200./249.))  + fePedestal );
 
   //  Now use the linear relation between DAC and MPE Discriminator threshold:
+  // and get it in voltage 
+  double discrimThresh = 8.1 * (mpeCalibFit.slope * mpeDAC + mpeCalibFit.intercept);
 
-  double discrimThresh = mpeCalibFit.slope * mpeDAC + mpeCalibFit.intercept;
-  log_trace("mpeDAC: %f   disc thresh: %f pC",mpeDAC,discrimThresh);
 
-  return discrimThresh*I3Units::pC;
+  log_trace("mpeDAC: %f   disc thresh: %f mV",mpeDAC,discrimThresh);
+  return discrimThresh*I3Units::mV;
   
 }
 
