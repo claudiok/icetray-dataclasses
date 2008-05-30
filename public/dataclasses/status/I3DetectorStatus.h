@@ -34,7 +34,7 @@
  * - map of active amanda triggers (and their configurations) and
  * - map of active domhubs (and their settings) ... eventually.
  */
-static const unsigned i3detectorstatus_version_ = 2;
+static const unsigned i3detectorstatus_version_ = 3;
 
 struct I3DetectorStatus : public I3FrameObject
 {
@@ -44,7 +44,8 @@ struct I3DetectorStatus : public I3FrameObject
   std::map<OMKey, TWRAOMStatus> aomStatus;
   std::map<TriggerKey, I3TriggerStatus> triggerStatus;
   std::map<TriggerKey, I3TriggerStatus> amandaTriggerStatus;
-  
+  std::string daqConfigurationName;
+
   I3DetectorStatus() {}
   
   virtual ~I3DetectorStatus();

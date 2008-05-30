@@ -35,6 +35,10 @@ I3DetectorStatus::serialize(Archive& ar, unsigned version)
   }  
   ar & make_nvp("StartTime", startTime);
   ar & make_nvp("EndTime", endTime);
+  if(version > 2)
+  {
+    ar & make_nvp("DaqConfigurationName", daqConfigurationName);
+  }
   //ar & make_nvp("DaqMode", daqMode_);
   //ar & make_nvp("FilterMode", filterMode_);
 }
