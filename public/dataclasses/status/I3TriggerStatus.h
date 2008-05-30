@@ -53,14 +53,22 @@
  * "triggerType3" - trigger type of third trigger<BR>
  * "triggerConfigId3" - trigger config ID of third trigger<BR>
  * "sourceId3" - source ID of third trigger<BR>
+ * 
+ * Additionally, the per-trigger readout instructions:
+ *  readoutTimeMinus  : time before the trigger time to set the readout window
+ *  readoutTimePlus  : time after the trigger time to set the readout window
+ *  readoutTimeOffset : time shift relatve to the trigger time to set the readout windoow
  */
-static const unsigned i3triggerstatus_version_ = 0;
+static const unsigned i3triggerstatus_version_ = 1;
 
 class I3TriggerStatus 
 {
  private:
   std::string name_;
   map<std::string, int> settings_;
+  double readoutTimeMinus_;
+  double readoutTimePlus_;
+  double readoutTimeOffset_;
 
  public:
   /**
@@ -75,8 +83,12 @@ class I3TriggerStatus
    * @param settings Trigger settings: string, integer values.
    */
   I3TriggerStatus(const std::string& name,
-                  const map<std::string, int>& settings)
-    : name_(name), settings_(settings) {}
+                  const map<std::string, int>& settings,
+		  double readoutTimeMinus,
+		  double readoutTimePlus,
+		  double readoutTimeOffset)
+    : name_(name), settings_(settings), readoutTimeMinus_(readoutTimeMinus),
+    readoutTimePlus_(readoutTimePlus), readoutTimeOffset_(readoutTimeOffset) {}
   
   /**
    * Destructor.
@@ -90,7 +102,21 @@ class I3TriggerStatus
    */
   virtual const std::string& GetTriggerName() const { return name_; }
   virtual std::string& GetTriggerName() { return name_; }
-  
+
+  /**
+   *  Get the time window settings
+   */
+  double GetReadoutTimeMinus() const { return readoutTimeMinus_; }
+  double GetReadoutTimePlus() const { return readoutTimePlus_; }
+  double GetReadoutTimeOffset() const { return readoutTimeOffset_; }
+
+  /**
+   *  Set the time window settings
+   */
+  void SetReadoutTimeMinus(double timeMinus) { readoutTimeMinus_ = timeMinus; }
+  void SetReadoutTimePlus(double timePlus) { readoutTimePlus_ = timePlus; }
+  void SetReadoutTimeOffset(double timeOffset) { readoutTimeOffset_ = timeOffset; }
+
   /**
    * Get trigger settings.
    * 

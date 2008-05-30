@@ -22,6 +22,12 @@ void I3TriggerStatus::serialize(Archive& ar, unsigned version)
 
   ar & make_nvp("Name", name_);
   ar & make_nvp("Settings", settings_);
+  if(version>0)
+    {
+      ar & make_nvp("ReadoutTimeMinus", readoutTimeMinus_);
+      ar & make_nvp("ReadoutTimePlus", readoutTimePlus_);
+      ar & make_nvp("ReadoutTimeOffset", readoutTimeOffset_);
+    }
 }
 
 
