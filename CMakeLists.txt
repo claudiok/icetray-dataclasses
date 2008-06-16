@@ -27,10 +27,6 @@ i3_test_executable(test
   USE_PROJECTS dataclasses
   )
 
-i3_executable(foo
-  foo.cxx
-  USE_PROJECTS dataclasses)
-
 i3_test_scripts(resources/scripts/*.py)
 
 add_subdirectory(private/pybindings)
