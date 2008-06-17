@@ -159,7 +159,9 @@ class I3Particle : public I3FrameObject
     InfiniteTrack = 40, 
     StartingTrack = 50, 
     StoppingTrack = 60, 
-    ContainedTrack = 70
+    ContainedTrack = 70,
+    MCTrack = 80,
+    Dark = 90
   };
 
   enum FitStatus {
@@ -175,7 +177,7 @@ class I3Particle : public I3FrameObject
   enum LocationType {
     Anywhere = 0,
     IceTop = 10,
-    InIce = 20
+    InIce = 20    
   };
 
  private:

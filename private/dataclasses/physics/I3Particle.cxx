@@ -111,6 +111,8 @@ string I3Particle::GetShapeString() const
   case StartingTrack:  return("StartingTrack");
   case StoppingTrack:  return("StoppingTrack");
   case ContainedTrack: return("ContainedTrack");
+  case MCTrack:        return("MCTrack");
+  case Dark:           return("Dark");
   default:             return("undefined_particle_shape");
   }
 }
@@ -284,7 +286,9 @@ I3Position I3Particle::ShiftAlongTrack(double dist) const
 
 I3Position I3Particle::GetStartPos() const 
 { 
-  if (shape_==StartingTrack || shape_==ContainedTrack) return pos_;
+  if (shape_ == StartingTrack || 
+      shape_ == ContainedTrack || 
+      shape_ == MCTrack) return pos_;
   else {
     log_warn("GetStartPos undefined for a particle that is neither starting "
 	     "nor contained.");
@@ -295,7 +299,9 @@ I3Position I3Particle::GetStartPos() const
 
 double I3Particle::GetStartTime() const 
 {
-  if (shape_==StartingTrack || shape_==ContainedTrack) return time_;
+  if (shape_ == StartingTrack || 
+      shape_ == ContainedTrack ||
+      shape_ == MCTrack ) return time_;
   else{
     log_warn("GetStartTime undefined for a particle that is neither starting "
 	     "nor contained.");
@@ -306,7 +312,9 @@ double I3Particle::GetStartTime() const
 I3Position I3Particle::GetStopPos() const 
 {
   if (shape_==StoppingTrack) return pos_;
-  else if (shape_==ContainedTrack) return ShiftAlongTrack(length_);
+  else if (shape_ == ContainedTrack || shape_ == MCTrack){
+    return ShiftAlongTrack(length_);
+  }
   else {
     log_warn("GetStopPos undefined for a particle that is neither stopping "
 	     "nor contained.");
@@ -318,8 +326,9 @@ I3Position I3Particle::GetStopPos() const
 double I3Particle::GetStopTime() const 
 { 
   if (shape_==StoppingTrack) return time_;
-  else if (shape_==ContainedTrack) { return time_ + length_/speed_; }
-  else{
+  else if (shape_ == ContainedTrack || shape_ == MCTrack){ 
+    return time_ + length_/speed_; 
+  }else{  
     log_warn("GetStopTime undefined for a particle that is neither stopping "
 	     "nor contained.");
     return NAN;
