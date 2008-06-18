@@ -4,7 +4,7 @@
 #include "dataclasses/Utility.h"
 #include <boost/serialization/version.hpp>
 
-static const unsigned i3domstatus_version_ = 4;
+static const unsigned i3domstatus_version_ = 5;
 
 struct I3DOMStatus 
 {
