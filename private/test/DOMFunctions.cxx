@@ -133,11 +133,14 @@ TEST(DiscrimThresholds)
       mpeCal.intercept = -70.4468;
       calib.SetMPEDiscCalib(mpeCal);
 
-      rawstatus.fePedestal = 2.6000976562500007e-09;
+      // Values used prior to switch to raw DAC values in I3DOMStatus
+      //rawstatus.fePedestal = 2.6000976562500007e-09;
+      //rawstatus.speThreshold = 4.5249879773951117e-12;
+      //rawstatus.mpeThreshold = 1.4221390786098917e-11;
 
-      rawstatus.speThreshold = 4.5249879773951117e-12;
-      rawstatus.mpeThreshold = 1.4221390786098917e-11;
-
+      rawstatus.fePedestal = 2130.;
+      rawstatus.speThreshold = 620.;
+      rawstatus.mpeThreshold = 560;
 
       double speDiscThresh = SPEDiscriminatorThreshold(rawstatus, calib);
       double mpeDiscThresh = MPEDiscriminatorThreshold(rawstatus, calib);

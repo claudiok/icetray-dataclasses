@@ -129,17 +129,18 @@ double SPEDiscriminatorThreshold(const I3DOMStatus& status,
 
 {
   const LinearFit speCalibFit = calib.GetSPEDiscCalib();
-  double speThresh = status.speThreshold/I3Units::V;
+  // This is outdated.  I3DOMStatus has raw dac values now
   // I3Db module converts this speThresh to a voltage from raw DAC value.
   //  but we need the raw DAC value, invert the voodoo.
-  double fePedestal = status.fePedestal/I3Units::volt;
-  double speDAC = (1024./5.) * ( speThresh*(9.6*(1+2200./249.))  + fePedestal );
+  //double fePedestal = status.fePedestal/I3Units::volt;
+  //double speDAC = (1024./5.) * ( speThresh*(9.6*(1+2200./249.))  + fePedestal );
+  double speDAC = status.speThreshold;
 
   //  Now use the linear relation between DAC and SPE Discriminator threshold:
   // and convert it in voltage (another voodoo factor...)
   double discrimThresh = 8.1 * (speCalibFit.slope * speDAC + speCalibFit.intercept);
   
-  log_trace("speDAC: %f   disc thresh: %f mV",speDAC,discrimThresh);
+  log_error("speDAC: %f   disc thresh: %f mV",speDAC,discrimThresh);
 
   return discrimThresh*I3Units::mV;
   
@@ -150,18 +151,19 @@ double MPEDiscriminatorThreshold(const I3DOMStatus& status,
 
 {
   const LinearFit mpeCalibFit = calib.GetMPEDiscCalib();
-  double mpeThresh = status.mpeThreshold/I3Units::V;
+  // This is outdated.  I3DOMStatus has raw dac values now
   // I3Db module converts this mpeThresh to a voltage from raw DAC value.
   //  but we need the raw DAC value, invert the voodoo.
-  double fePedestal = status.fePedestal/I3Units::volt;
-  double mpeDAC = (1024./5.) * ( (mpeThresh/10.)*(9.6*(1+2200./249.))  + fePedestal );
+  // double fePedestal = status.fePedestal/I3Units::volt;
+  //double mpeDAC = (1024./5.) * ( (mpeThresh/10.)*(9.6*(1+2200./249.))  + fePedestal );
+  double mpeDAC = status.mpeThreshold;
 
   //  Now use the linear relation between DAC and MPE Discriminator threshold:
   // and get it in voltage 
   double discrimThresh = 8.1 * (mpeCalibFit.slope * mpeDAC + mpeCalibFit.intercept);
 
 
-  log_trace("mpeDAC: %f   disc thresh: %f mV",mpeDAC,discrimThresh);
+  log_error("mpeDAC: %f   disc thresh: %f mV",mpeDAC,discrimThresh);
   return discrimThresh*I3Units::mV;
   
 }
