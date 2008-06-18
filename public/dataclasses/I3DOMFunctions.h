@@ -11,6 +11,8 @@
 //includes
 #include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
+#include "dataclasses/physics/I3DOMLaunch.h"
+
 #include <vector>
 
 /** 
@@ -63,5 +65,17 @@ double MPEDiscriminatorThreshold (const I3DOMStatus&, const I3DOMCalibration&);
  * which contains the numbers as its elements (i.e. what's between the separating "."s)
  */
 vector<int> DOMCalVersion (const I3DOMCalibration&);
+
+/**
+ * Converts a ATWDselect enumeration into ATWD ID.
+ *  This corrects the problem that I3DOMLaunch::ATWDSelect is enumd 1 or 2
+ *   while all I3DOMCalibration are enumerated as 0 or 1 for the 2 ATWD chips.
+ *   Changing the enum in I3DOMLaunch would cause nasty serialization issues.
+ *   This moves the conversion function that has always been in DOMCalibrator
+ *   to DOMFunctions to be available to all.
+ */
+
+unsigned int WhichATWD(const I3DOMLaunch&);
+
 
 #endif //I3DOMFUNCTIONS_H_INCLUDED

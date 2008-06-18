@@ -201,3 +201,15 @@ vector<int> DOMCalVersion(const I3DOMCalibration& calib)
 
     return nums;
 }
+
+unsigned int WhichATWD(const I3DOMLaunch& domLaunch)
+{
+    I3DOMLaunch::ATWDselect whichATWD = domLaunch.GetWhichATWD();
+    
+    if ( whichATWD == I3DOMLaunch::ATWDa )
+        return 0;
+    else if ( whichATWD == I3DOMLaunch::ATWDb )
+        return 1;
+    else 
+        log_fatal("invalid ATWD ID in I3DOMcalibrator::WhichATWD");
+}
