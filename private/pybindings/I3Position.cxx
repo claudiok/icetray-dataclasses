@@ -25,11 +25,18 @@
 
 using namespace boost::python;
 
+string dump(I3Position p){
+  ostringstream s;
+  s << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
+  return s.str();
+}
+
 void register_I3Position()
 {
 
   class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >("I3Position")
     //.def(init<double,double,double,int>())
+    .def(init<double,double,double>())
     PROPERTY(I3Position, X, X)
     PROPERTY(I3Position, Y, Y)
     PROPERTY(I3Position, Z, Z)
@@ -42,6 +49,7 @@ void register_I3Position()
     .def("RotateY", &I3Position::RotateY)
     .def("RotateZ", &I3Position::RotateZ)
     .def("CalcDistance", &I3Position::CalcDistance)
+    .def("__str__",dump)
     ;
   
 }

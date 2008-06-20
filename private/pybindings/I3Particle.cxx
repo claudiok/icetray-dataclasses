@@ -70,7 +70,8 @@ static std::string
 i3particle_prettyprint(const I3Particle& p)
 {
   ostringstream oss;
-  oss << "[I3Particle theta:" << get_theta(p) << " phi:" << get_phi(p) << "]";
+  oss << "[I3Particle Zenith:" << p.GetZenith() << " Azimuth:" << p.GetAzimuth() << " X:" << p.GetX() << " Y:" << p.GetY() << " Z:" << p.GetZ() 
+      << " Energy:" << p.GetEnergy() << " Speed: " << p.GetSpeed() << " Time:" << p.GetTime() << "]";
   return oss.str();
 }
 
@@ -95,6 +96,7 @@ void register_I3Particle()
       .def("GetPhi", &get_phi)
       .def("GetLocationType", &I3Particle::GetLocationType)
       .def("GetThetaPhi", &set_theta_phi)
+      .def("GetShape",&I3Particle::GetShape)
       .def("SetDir", &set_dir_angles)
       .def("SetDir", &set_dir_unitvect)
       .def("SetPos", &set_position)
@@ -105,6 +107,7 @@ void register_I3Particle()
       .def("SetLength", &I3Particle::SetLength)
       .def("SetFitStatus", &I3Particle::SetFitStatus)
       .def("SetLocationType", &I3Particle::SetLocationType)
+      .def("SetShape",&I3Particle::SetShape)
       .def("__str__", i3particle_prettyprint)
       ;
 
@@ -188,6 +191,19 @@ void register_I3Particle()
       .value("YAGLaser",I3Particle::YAGLaser)
       .value("STauMinus",I3Particle::STauMinus)
       .value("STauPlus",I3Particle::STauPlus)
+      ;
+
+    enum_<I3Particle::ParticleShape>("ParticleShape")
+      .value("Null",I3Particle::Null)
+      .value("Primary",I3Particle::Primary)
+      .value("TopShower",I3Particle::TopShower)
+      .value("Cascade",I3Particle::Cascade)
+      .value("InfiniteTrack",I3Particle::InfiniteTrack)
+      .value("StartingTrack",I3Particle::StartingTrack)
+      .value("StoppingTrack",I3Particle::StoppingTrack)
+      .value("ContainedTrack",I3Particle::ContainedTrack)
+      .value("MCTrack",I3Particle::MCTrack)
+      .value("Dark",I3Particle::Dark)
       ;
 
   }
