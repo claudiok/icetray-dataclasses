@@ -74,7 +74,11 @@ class I3TriggerStatus
   /**
    * Default constructor.
    */
-  I3TriggerStatus() {}
+  I3TriggerStatus():
+	readoutTimeMinus_(NAN),
+	readoutTimePlus_(NAN),
+	readoutTimeOffset_(NAN)
+	 {}
   
   /**
    * Constructor.
