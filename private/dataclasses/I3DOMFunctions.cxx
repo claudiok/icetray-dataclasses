@@ -140,7 +140,7 @@ double SPEDiscriminatorThreshold(const I3DOMStatus& status,
   // and convert it in voltage (another voodoo factor...)
   double discrimThresh = 8.1 * (speCalibFit.slope * speDAC + speCalibFit.intercept);
   
-  log_error("speDAC: %f   disc thresh: %f mV",speDAC,discrimThresh);
+  log_trace("speDAC: %f   disc thresh: %f mV",speDAC,discrimThresh);
 
   return discrimThresh*I3Units::mV;
   
@@ -163,7 +163,7 @@ double MPEDiscriminatorThreshold(const I3DOMStatus& status,
   double discrimThresh = 8.1 * (mpeCalibFit.slope * mpeDAC + mpeCalibFit.intercept);
 
 
-  log_error("mpeDAC: %f   disc thresh: %f mV",mpeDAC,discrimThresh);
+  log_trace("mpeDAC: %f   disc thresh: %f mV",mpeDAC,discrimThresh);
   return discrimThresh*I3Units::mV;
   
 }
