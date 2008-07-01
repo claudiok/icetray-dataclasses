@@ -152,4 +152,13 @@ TEST(DiscrimThresholds)
 		      mpeDiscThresh/I3Units::mV, 0.00001,
 		      "Failed to return proper calibrated MPE discriminator threshold");
 
+      double oldSPEDisc = OldspeThreshold(rawstatus);
+      double oldMPEDisc = OldmpeThreshold(rawstatus);
+      ENSURE_DISTANCE(4.5249879773951117E-12/I3Units::mV,
+		      oldSPEDisc/I3Units::mV, 0.00001,
+		      "OldSPEDisc failed to return old and busted values");
+      ENSURE_DISTANCE(1.4221390786098917e-11/I3Units::mV,
+		      oldMPEDisc/I3Units::mV, 0.00001,
+		      "OldMPEDisc failed to return old and busted values");
+
     }
