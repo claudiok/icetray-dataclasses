@@ -168,6 +168,23 @@ double MPEDiscriminatorThreshold(const I3DOMStatus& status,
   
 }
 
+double OldspeThreshold(const I3DOMStatus& status)
+{
+  double fePedest = (5.0 * (static_cast<double>(status.fePedestal))/4096.);
+  double speThresher = ((5.*status.speThreshold/1024.- fePedest)/
+			(9.6*(1+2200./249.))*I3Units::volt);
+  
+  return speThresher;
+}
+
+double OldmpeThreshold(const I3DOMStatus& status)
+{
+  double fePedest = (5.0 * (static_cast<double>(status.fePedestal))/4096.);
+  double mpeThresher = 10.*((5.*status.mpeThreshold/1024.- fePedest)/
+			(9.6*(1+2200./249.))*I3Units::volt);
+  
+  return mpeThresher;
+}
 
 vector<int> DOMCalVersion(const I3DOMCalibration& calib)
 {
