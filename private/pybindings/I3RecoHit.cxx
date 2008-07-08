@@ -33,11 +33,11 @@ void register_I3RecoHit()
     PROPERTY(I3RecoHit, SourceIndex, SourceIndex)
     ;
 
-  class_<std::vector<I3RecoHit> >("Vector_I3RecoHit")
+  class_<std::vector<I3RecoHit> >("vector_I3RecoHit")
     .def(vector_indexing_suite<std::vector<I3RecoHit> >())
     ;
 
-  class_<I3RecoHitSeriesMap, bases<I3FrameObject>, I3RecoHitSeriesMapPtr>("Map_OMKey_VectorI3RecoHit")
+  class_<I3RecoHitSeriesMap, bases<I3FrameObject>, I3RecoHitSeriesMapPtr>("I3RecoHitSeriesMap")
     .def(map_indexing_suite<I3RecoHitSeriesMap>())
     ;
 }
