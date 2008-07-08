@@ -25,17 +25,57 @@
 
 using namespace boost::python;
 
-string dump(I3Position p){
+string dump(const I3Position &p){
   ostringstream s;
   s << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
   return s.str();
 }
 
+tuple i3position_to_tuple(const I3Position& p)
+{
+  return make_tuple(p.GetX(), p.GetY(), p.GetZ());
+}
+
+unsigned i3position_len(const I3Position&) { return 3; }
+
+double i3position_getitem(const I3Position& self, unsigned index) 
+{ 
+  switch(index)
+    {
+    case 0:
+      return self.GetX();
+    case 1:
+      return self.GetY();
+    case 2:
+      return self.GetZ();
+    default:
+      throw std::out_of_range("index out of range");
+    }
+}
+
+void i3position_setitem(I3Position& self, unsigned index, double value) 
+{ 
+  switch(index)
+    {
+    case 0:
+      self.SetX(value);
+    case 1:
+      self.SetY(value);
+    case 2:
+      self.SetZ(value);
+    default:
+      throw std::out_of_range("index out of range");
+    }
+}
+
 void register_I3Position()
 {
 
-  class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >("I3Position")
-    //.def(init<double,double,double,int>())
+  def("i3position_to_tuple", i3position_to_tuple);
+
+  class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >
+    ("I3Position",
+     "I3Position objects can subscripted like 5-element arrays (x, y, z, theta, phi) and converted to tuples and lists")
     .def(init<double,double,double>())
     PROPERTY(I3Position, X, X)
     PROPERTY(I3Position, Y, Y)
@@ -49,7 +89,12 @@ void register_I3Position()
     .def("RotateY", &I3Position::RotateY)
     .def("RotateZ", &I3Position::RotateZ)
     .def("CalcDistance", &I3Position::CalcDistance)
-    .def("__str__",dump)
+    .def("__str__", dump)
+    .def("__len__", i3position_len)
+    .def("__getitem__", i3position_getitem)
+    .def("__setitem__", i3position_setitem)
     ;
+
+  implicitly_convertible<I3Position, tuple>();
   
 }
