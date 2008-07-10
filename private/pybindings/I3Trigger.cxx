@@ -158,6 +158,7 @@ string print(I3TriggerHierarchyPtr t){
   return s.str();
 }
 
+
 int length(I3TriggerHierarchyPtr t){
   if(t){
     return  t->size();
@@ -165,6 +166,10 @@ int length(I3TriggerHierarchyPtr t){
   return 0;
 }
 
+TriggerKey get_trigkey(const I3Trigger& self)
+{
+  return self.GetTriggerKey();
+}
 
 void register_I3Trigger()
 {
@@ -174,6 +179,8 @@ void register_I3Trigger()
       PROPERTY(I3Trigger, Time, TriggerTime)
       PROPERTY(I3Trigger, Length, TriggerLength)
       PROPERTY(I3Trigger, Fired, TriggerFired)
+      // force copy of trigkey via standalone fn
+      .add_property("Key", get_trigkey, "Get TriggerKey")
       .def("__str__", TriggerPrettyPrint)
       ;
 
@@ -205,12 +212,24 @@ void register_I3Trigger()
       .value("SPASE_2",TriggerKey::SPASE_2)
       .value("UNKNOWN_TYPE",TriggerKey::UNKNOWN_TYPE)
       ;
-
-
-
     def("identity", identity_<TriggerKey::TypeID>);
 
   }
+
+  class_<TriggerKey>("TriggerKey")
+    .add_property("Source", &TriggerKey::GetSource, &TriggerKey::SetSource)
+    .add_property("Type", &TriggerKey::GetType, &TriggerKey::SetType)
+    .add_property("Subtype", &TriggerKey::GetSubtype, &TriggerKey::SetSubtype)
+    .add_property("ConfigID", &TriggerKey::GetConfigID, 
+		  (void (TriggerKey::*)(int)) &TriggerKey::SetConfigID)
+    .def("CheckConfigID", &TriggerKey::CheckConfigID)
+    .def("ResetConfigID", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
+    .def(self < self)
+    .def(self >= self)
+    .def(self > self)
+    .def(self <= self)
+    ;
+    
 
   class_<I3TriggerHierarchy, bases<I3FrameObject>, I3TriggerHierarchyPtr>("I3TriggerHierarchy")
     .def("FindTrigger", &FindTrigger1)
