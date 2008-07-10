@@ -25,6 +25,7 @@
 #include <dataclasses/physics/I3TriggerHierarchy.h>
 
 using namespace boost::python;
+namespace bp = boost::python;
 
 I3TriggerPtr FindTrigger1(I3TriggerHierarchyPtr t, 
 			 int srcID, int typeID, int configID){
@@ -165,25 +166,51 @@ int length(I3TriggerHierarchyPtr t){
   return 0;
 }
 
+
 void register_I3Trigger()
 {
   {
     scope trigscope = 
       class_<I3Trigger, I3TriggerPtr>("I3Trigger")
-      PROPERTY(I3Trigger, TriggerTime, TriggerTime)
-      PROPERTY(I3Trigger, TriggerLength, TriggerLength)
-      PROPERTY(I3Trigger, TriggerFired, TriggerFired)
+      PROPERTY(I3Trigger, Time, TriggerTime)
+      PROPERTY(I3Trigger, Length, TriggerLength)
+      PROPERTY(I3Trigger, Fired, TriggerFired)
+      .def("__str__", TriggerPrettyPrint)
       ;
-
-    enum_<TriggerKey::TypeID>("TypeID")
-      .value("SIMPLE_MULTIPLICITY",TriggerKey::SIMPLE_MULTIPLICITY)
-      ;
-    def("identity", identity_<TriggerKey::TypeID>);
 
     enum_<TriggerKey::SourceID>("SourceID")
       .value("IN_ICE",TriggerKey::IN_ICE)
+      .value("ICE_TOP",TriggerKey::ICE_TOP)
+      .value("AMANDA_TWR_DAW",TriggerKey::AMANDA_TWR_DAQ)
+      .value("EXTERNAL",TriggerKey::EXTERNAL)
+      .value("GLOBAL",TriggerKey::GLOBAL)
+      .value("AMANDA_MUON_DAW",TriggerKey::AMANDA_MUON_DAQ)
+      .value("SPASE",TriggerKey::SPASE)
+      .value("UNKNOWN_SOURCE",TriggerKey::UNKNOWN_SOURCE)
       ;
     def("identity", identity_<TriggerKey::SourceID>);
+
+
+    enum_<TriggerKey::TypeID>("TypeID")
+      .value("SIMPLE_MULTIPLICITY",TriggerKey::SIMPLE_MULTIPLICITY)
+      .value("CALIBRATION",TriggerKey::CALIBRATION)
+      .value("MIN_BIAS",TriggerKey::MIN_BIAS)
+      .value("THROUGHPUT",TriggerKey::THROUGHPUT)
+      .value("TWO_COINCIDENCE",TriggerKey::TWO_COINCIDENCE)
+      .value("THREE_COINCIDENCE",TriggerKey::THREE_COINCIDENCE)
+      .value("MERGED",TriggerKey::MERGED)
+      .value("FRAGMENT_MULTIPLICITY",TriggerKey::FRAGMENT_MULTIPLICITY)
+      .value("STRING",TriggerKey::STRING)
+      .value("VOLUME",TriggerKey::VOLUME)
+      .value("SPHERE",TriggerKey::SPHERE)
+      .value("SPASE_2",TriggerKey::SPASE_2)
+      .value("UNKNOWN_TYPE",TriggerKey::UNKNOWN_TYPE)
+      ;
+
+
+
+    def("identity", identity_<TriggerKey::TypeID>);
+
   }
 
   class_<I3TriggerHierarchy, bases<I3FrameObject>, I3TriggerHierarchyPtr>("I3TriggerHierarchy")
@@ -195,6 +222,8 @@ void register_I3Trigger()
     .def("__str__", &print)
     .def("__len__", &length)
     .def("GetTriggerLengths",&get_trigger_lengths)
+    // this means that 
+    .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     ;
 
 }
