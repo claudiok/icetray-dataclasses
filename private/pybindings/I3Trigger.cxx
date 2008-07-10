@@ -128,7 +128,6 @@ string TriggerPrettyPrint(const I3Trigger& t){
   s<<" ";
   s<<" length = "<<t.GetTriggerLength()/I3Units::microsecond<<" mus";
   s<<" time = "<<t.GetTriggerTime()/I3Units::microsecond<<" mus";
-  s<<endl;
   return s.str();
 }
 
@@ -138,7 +137,7 @@ string DumpChildren(I3TriggerHierarchyPtr t,
   I3TriggerHierarchy::sibling_iterator si;
   for(si = t->begin(i); si != t->end(i); si++){
     for(int j=0; j<2*t->depth(si); j++) s<<" ";
-    s<<TriggerPrettyPrint(*si);
+    s<<TriggerPrettyPrint(*si) << endl;
     s<<DumpChildren(t,si);
   }
   return s.str();
@@ -151,7 +150,7 @@ string print(I3TriggerHierarchyPtr t){
   s<<"*** TRIGGER DUMP - BEGIN***"<<endl;
   for(i = t->begin(); i != t->end(); i++){
     for(int j=0; j<2*t->depth(i); j++) s<<" ";
-    s<<TriggerPrettyPrint(*i);
+    s<<TriggerPrettyPrint(*i) << endl;
     s<<DumpChildren(t,i);
   }
   s<<"*** TRIGGER DUMP - END***"<<endl;
@@ -181,10 +180,10 @@ void register_I3Trigger()
     enum_<TriggerKey::SourceID>("SourceID")
       .value("IN_ICE",TriggerKey::IN_ICE)
       .value("ICE_TOP",TriggerKey::ICE_TOP)
-      .value("AMANDA_TWR_DAW",TriggerKey::AMANDA_TWR_DAQ)
+      .value("AMANDA_TWR_DAQ",TriggerKey::AMANDA_TWR_DAQ)
       .value("EXTERNAL",TriggerKey::EXTERNAL)
       .value("GLOBAL",TriggerKey::GLOBAL)
-      .value("AMANDA_MUON_DAW",TriggerKey::AMANDA_MUON_DAQ)
+      .value("AMANDA_MUON_DAQ",TriggerKey::AMANDA_MUON_DAQ)
       .value("SPASE",TriggerKey::SPASE)
       .value("UNKNOWN_SOURCE",TriggerKey::UNKNOWN_SOURCE)
       ;
@@ -222,7 +221,6 @@ void register_I3Trigger()
     .def("__str__", &print)
     .def("__len__", &length)
     .def("GetTriggerLengths",&get_trigger_lengths)
-    // this means that 
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     ;
 
