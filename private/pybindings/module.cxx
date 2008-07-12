@@ -40,7 +40,7 @@ namespace bp = boost::python;
   (I3Waveform)(I3DOMLaunch)(I3EventHeader)(I3RecoHit)			\
   (I3TWRFrag)(I3TWRLaunch)                                              \
   (I3MCHit)(I3MCList)							\
-  (i3_containers_of_pod)(I3Bool)(I3Double)(I3String)(I3Constants)
+  (i3_containers_of_pod)(I3Double)(I3String)(I3Constants)
 
 #define I3_REGISTRATION_FN_DECL(r, data, t) void BOOST_PP_CAT(register_,t)();
 #define I3_REGISTER(r, data, t) BOOST_PP_CAT(register_,t)();
