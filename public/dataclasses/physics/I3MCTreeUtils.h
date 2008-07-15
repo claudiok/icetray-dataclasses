@@ -73,6 +73,7 @@ namespace I3MCTreeUtils
    * it is converted to an I3MCTree with ListToTree.
    */
   I3MCTreeConstPtr Get(I3FramePtr, const std::string&);
+  I3MCTreeConstPtr Get(const I3Frame & , const std::string&);
 
   /**
    * Will search for I3MCList and I3MCTree by either of two keys.
@@ -81,6 +82,7 @@ namespace I3MCTreeUtils
    * look for both.
    */
   I3MCTreeConstPtr Get(I3FramePtr, const std::string&, const std::string&);
+  I3MCTreeConstPtr Get(const I3Frame &, const std::string&, const std::string&);
 
   /**
    * Used internally by ListToTree and called recursively.

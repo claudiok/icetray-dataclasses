@@ -114,32 +114,42 @@ I3MCTreePtr I3MCTreeUtils::ListToTree(I3MCListConstPtr list){
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(I3FramePtr frame, const string& key){
-  I3MCListConstPtr list  = frame->Get<I3MCListConstPtr>(key);
-  if(list){
+I3MCTreeUtils::Get(const I3Frame &frame, const string& key){
+  I3MCListConstPtr list = frame.Get<I3MCListConstPtr>(key);
+  if (list) {
     return I3MCTreeUtils::ListToTree(*list);
-  }else{
-    return frame->Get<I3MCTreeConstPtr>(key);
+  } else {
+    return frame.Get<I3MCTreeConstPtr>(key);
   }
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(I3FramePtr frame, const string& key1, const string& key2){
-  I3MCListConstPtr list1  = frame->Get<I3MCListConstPtr>(key1);
-  I3MCListConstPtr list2  = frame->Get<I3MCListConstPtr>(key2);
-  if(list1 || list2){
-    if(list1) return I3MCTreeUtils::ListToTree(*list1);
-    if(list2) return I3MCTreeUtils::ListToTree(*list2);
-  }else{
-    I3MCTreeConstPtr tree1  = frame->Get<I3MCTreeConstPtr>(key1);
-    I3MCTreeConstPtr tree2  = frame->Get<I3MCTreeConstPtr>(key2);
-    if(tree1 || tree2){
-      if(tree1) return tree1;
-      if(tree2) return tree2;
+I3MCTreeUtils::Get(I3FramePtr frame, const string& key){
+  return I3MCTreeUtils::Get(*frame,key);
+}
+
+I3MCTreeConstPtr
+I3MCTreeUtils::Get(const I3Frame &frame, const string& key1, const string& key2){
+  I3MCListConstPtr list1 = frame.Get<I3MCListConstPtr>(key1);
+  I3MCListConstPtr list2 = frame.Get<I3MCListConstPtr>(key2);
+  if (list1 || list2){
+    if (list1) return I3MCTreeUtils::ListToTree(*list1);
+    if (list2) return I3MCTreeUtils::ListToTree(*list2);
+  } else {
+    I3MCTreeConstPtr tree1  = frame.Get<I3MCTreeConstPtr>(key1);
+    I3MCTreeConstPtr tree2  = frame.Get<I3MCTreeConstPtr>(key2);
+    if (tree1 || tree2){
+      if (tree1) return tree1;
+      if (tree2) return tree2;
     }
     return I3MCTreeConstPtr();
   }
   return I3MCTreeConstPtr();
+}
+
+I3MCTreeConstPtr
+I3MCTreeUtils::Get(I3FramePtr frame, const string& key1, const string& key2){
+  return I3MCTreeUtils::Get(*frame,key1,key2);
 }
 
 //------------------------------
