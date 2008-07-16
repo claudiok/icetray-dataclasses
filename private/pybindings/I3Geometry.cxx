@@ -40,10 +40,6 @@ void register_I3Geometry()
     .def_readwrite("endTime", &I3Geometry::endTime)
     ;
 
-  class_<std::vector<OMKey> >("Vector_OMKey")
-    .def(vector_indexing_suite<std::vector<OMKey> >())
-    ;
-
   class_<std::map<OMKey, I3OMGeo> >("Map_OMKey_I3OMGeo")
     .def(map_indexing_suite<std::map<OMKey, I3OMGeo> >())
     ;

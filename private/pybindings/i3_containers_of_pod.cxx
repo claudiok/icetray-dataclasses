@@ -19,7 +19,6 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include <icetray/OMKey.h>
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
 #include <vector>
