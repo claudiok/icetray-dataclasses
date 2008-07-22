@@ -94,6 +94,7 @@ void register_I3Position()
     .def("__getitem__", i3position_getitem)
     .def("__setitem__", i3position_setitem)
     ;
+  register_pointer_conversions<I3Position>();
 
   implicitly_convertible<I3Position, tuple>();
   

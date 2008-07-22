@@ -30,9 +30,11 @@ void register_i3_containers_of_pod()
 {
   class_<I3Vector<int>, bases<I3FrameObject>, boost::shared_ptr<I3Vector<int> > >("I3Vector_int")
     .def(vector_indexing_suite<I3Vector<int> >());
+  register_pointer_conversions<I3Vector<int> >();
 
   class_<I3MapStringDouble, bases<I3FrameObject>, I3MapStringDoublePtr>("I3MapStringDouble")
     .def(map_indexing_suite<I3MapStringDouble >())
     ;
+  register_pointer_conversions<I3MapStringDouble>();
 }
 

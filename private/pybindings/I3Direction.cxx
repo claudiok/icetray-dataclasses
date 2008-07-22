@@ -50,4 +50,5 @@ void register_I3Direction()
     .def("RotateY", &I3Direction::RotateY)
     .def("RotateZ", &I3Direction::RotateZ)
     ;
+  register_pointer_conversions<I3Direction>();
 }
