@@ -27,16 +27,18 @@ using namespace boost::python;
 
 void register_I3DOMLaunch()
 {
-  I3Vector<int>& (I3DOMLaunch::*get_raw_FADC)(void) = &I3DOMLaunch::GetRawFADC;
+  //  I3Vector<int>& (I3DOMLaunch::*)() = &I3DOMLaunch::GetRawFADC;
 
   {
     scope outer = 
     class_<I3DOMLaunch, boost::shared_ptr<I3DOMLaunch> >("I3DOMLaunch")
-    .def("GetStartTime", &I3DOMLaunch::GetStartTime)
-    .def("GetLCBit", &I3DOMLaunch::GetLCBit)
-    .def("GetTriggerType", &I3DOMLaunch::GetTriggerType)
-    .def("GetTriggerMode", &I3DOMLaunch::GetTriggerMode)
-    .def("GetRawFADC", get_raw_FADC,
+      .def("GetStartTime", &I3DOMLaunch::GetStartTime)
+      .def("GetLCBit", &I3DOMLaunch::GetLCBit)
+      .def("GetTriggerType", &I3DOMLaunch::GetTriggerType)
+      .def("GetTriggerMode", &I3DOMLaunch::GetTriggerMode)
+      .def("GetRawFADC", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
+	 return_internal_reference<1>())
+      .def("GetRawATWD", (I3Vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD,
 	 return_internal_reference<1>())
     ;
 
