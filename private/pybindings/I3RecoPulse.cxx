@@ -35,11 +35,11 @@ void register_I3RecoPulse()
     PROPERTY(I3RecoPulse, Width, Width)
     ;
 
-  class_<std::vector<I3RecoPulse> >("Vector_I3RecoPulse")
+  class_<std::vector<I3RecoPulse> >("vector_I3RecoPulse")
     .def(vector_indexing_suite<std::vector<I3RecoPulse> >())
     ;
 
-  class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("Map_OMKey_VectorI3RecoPulse")
+  class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
     .def(map_indexing_suite<I3RecoPulseSeriesMap>())
     ;
 }
