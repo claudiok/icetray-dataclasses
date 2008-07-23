@@ -40,4 +40,5 @@ void register_I3RecoHit()
   class_<I3RecoHitSeriesMap, bases<I3FrameObject>, I3RecoHitSeriesMapPtr>("I3RecoHitSeriesMap")
     .def(map_indexing_suite<I3RecoHitSeriesMap>())
     ;
+  register_pointer_conversions<I3RecoHitSeriesMap>();
 }
