@@ -8,7 +8,7 @@ i3_add_library(dataclasses
   private/dataclasses/*.c
   private/dataclasses/*/*.cxx
 
-  USE_TOOLS log4cplus boost root
+  USE_TOOLS log4cplus boost root python
 
   USE_PROJECTS icetray
 

@@ -28,13 +28,24 @@ using namespace boost::python;
 
 void register_I3EventHeader()
 {
-  class_<I3EventHeader, bases<I3FrameObject>, boost::shared_ptr<I3EventHeader> >("I3EventHeader")
-    PROPERTY(I3EventHeader, StartTime, StartTime)
-    PROPERTY(I3EventHeader, EndTime, EndTime)
-    PROPERTY(I3EventHeader, EventID, EventID)
-    .def("GetDataStream", &I3EventHeader::GetDataStream)
-    ;
+  {
+    scope event_header_scope = 
+      class_<I3EventHeader, bases<I3FrameObject>, boost::shared_ptr<I3EventHeader> >("I3EventHeader")
+      PROPERTY(I3EventHeader, RunID,     RunID)
+      PROPERTY(I3EventHeader, SubRunID,  SubRunID)
+      PROPERTY(I3EventHeader, EventID,   EventID)
+      PROPERTY(I3EventHeader, State,     State)
+      PROPERTY(I3EventHeader, StartTime, StartTime)
+      PROPERTY(I3EventHeader, EndTime,   EndTime)
+      .def("GetDataStream", &I3EventHeader::GetDataStream)
+      ;
 
-  register_pointer_conversions<I3EventHeader>();
+    register_pointer_conversions<I3EventHeader>();
 
+    enum_<I3EventHeader::State>("StateType")
+      .value("UnknownState"      ,I3EventHeader::UNKNOWN_STATE)
+      .value("OK"                ,I3EventHeader::OK)
+      .value("ConfigInTransition",I3EventHeader::CONFIG_IN_TRANSITION)
+      ;
+  }
 }
