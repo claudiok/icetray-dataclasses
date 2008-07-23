@@ -43,9 +43,9 @@ void register_I3EventHeader()
     register_pointer_conversions<I3EventHeader>();
 
     enum_<I3EventHeader::State>("StateType")
-      .value("UnknownState"      ,I3EventHeader::UNKNOWN_STATE)
-      .value("OK"                ,I3EventHeader::OK)
-      .value("ConfigInTransition",I3EventHeader::CONFIG_IN_TRANSITION)
+      .value("UNKNOWN_STATE"       ,I3EventHeader::UNKNOWN_STATE)
+      .value("OK"                  ,I3EventHeader::OK)
+      .value("CONFIG_IN_TRANSITION",I3EventHeader::CONFIG_IN_TRANSITION)
       ;
   }
 }
