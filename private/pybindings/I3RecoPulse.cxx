@@ -42,4 +42,6 @@ void register_I3RecoPulse()
   class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
     .def(map_indexing_suite<I3RecoPulseSeriesMap>())
     ;
+  register_pointer_conversions<I3RecoPulseSeriesMap>();
+
 }
