@@ -18,6 +18,7 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   energy_(NAN),
   length_(NAN),
   speed_(I3Constants::c),
+  weight_(1.0),
   locationType_(Anywhere)
 {
   ID_ = global_minor_id_++;
@@ -494,10 +495,14 @@ template <class Archive>
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
+    if(version>3){
+      ar & make_nvp("weight",weight_);
+    }
     if(version == 0)
       ar & make_nvp("composite",composite_);
     if(version>0)
       ar & make_nvp("LocationType",locationType_);
+
   }
 
 template <class Archive>
@@ -530,6 +535,9 @@ template <class Archive>
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
+    if(version>3){
+      ar & make_nvp("weight",weight_);
+    }
     if(version == 0)
       ar & make_nvp("composite",composite_);
     if(version>0)
@@ -551,6 +559,7 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   lhs.GetLength() == rhs.GetLength() &&
 	   lhs.GetEnergy() == rhs.GetEnergy() &&
 	   lhs.GetSpeed() == rhs.GetSpeed() &&
+	   lhs.GetWeight() == rhs.GetWeight() &&
 	   lhs.GetComposite()==rhs.GetComposite()
 	   );
 }

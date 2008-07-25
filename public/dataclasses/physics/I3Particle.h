@@ -17,7 +17,7 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3particle_version_ = 3;
+static const unsigned i3particle_version_ = 4;
 
 namespace RDMCParticleTypes{
   enum ParticleType {
@@ -177,7 +177,7 @@ class I3Particle : public I3FrameObject
   enum LocationType {
     Anywhere = 0,
     IceTop = 10,
-    InIce = 20    
+    InIce = 20
   };
 
  private:
@@ -195,6 +195,7 @@ class I3Particle : public I3FrameObject
   double energy_;
   double length_;
   double speed_;
+  double weight_;
   vector<I3Particle> composite_; //!
   LocationType locationType_;
 
@@ -272,6 +273,9 @@ class I3Particle : public I3FrameObject
 
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
+
+  double GetWeight() const { return weight_; }
+  void SetWeight(double w) { weight_ = w; }
 
   const vector<I3Particle>& GetComposite() const { return composite_; }
   vector<I3Particle>& GetComposite() { return composite_; }
