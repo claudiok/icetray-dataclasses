@@ -88,6 +88,10 @@ void I3DOMStatus::serialize (Archive& ar, const unsigned version)
 				    + temp_feped ); 
       fePedestal = 4096.0 * temp_feped / 5.0;
     }
+  if(version > 5)
+    {
+      ar & make_nvp("TXMode",txMode);
+    }
 
 }
 

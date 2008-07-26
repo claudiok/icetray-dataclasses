@@ -4,7 +4,7 @@
 #include "dataclasses/Utility.h"
 #include <boost/serialization/version.hpp>
 
-static const unsigned i3domstatus_version_ = 5;
+static const unsigned i3domstatus_version_ = 6;
 
 struct I3DOMStatus 
 {
@@ -12,6 +12,7 @@ struct I3DOMStatus
   I3DOMStatus():
     trigMode(UnknownTrigMode),
        lcMode(UnknownLCMode),
+       txMode(UnknownLCMode),
        lcWindowPre(NAN),
        lcWindowPost(NAN),
        lcSpan(INT_MAX),
@@ -48,10 +49,14 @@ struct I3DOMStatus
    */
   enum TrigMode { UnknownTrigMode = -1 , TestPattern = 0 , CPU = 1, SPE = 2, Flasher=3, MPE=4 };
   /**  
-   * This controls how far the local coincidence signal is sent 
+   * This controls how far the local coincidence signal is sent and received
    *   Turns out you can not encode SLC active or not here.  
    *   IF SoftLC is set here, then ONLY SLC hits are to be expected.
    *    There is a SLCActive bool now in the this struct.
+   *
+   *  Each dom has two LC settings:
+   *    lcMode - how the dom is configured to listen for LC signals
+   *    txMode - how the dom is configured to generate LC signals
    */
   enum LCMode {UnknownLCMode = -1, LCOff = 0, UpOrDown = 1, Up = 2, Down = 3, UpAndDown =4, SoftLC=5};
   /**
@@ -86,9 +91,14 @@ struct I3DOMStatus
   TrigMode trigMode;
   
   /**
-   * LC mode:  hard, soft, none
+   * LC RX mode:  hard, soft, none, etc:  how this dom listens for LC info
    */
   LCMode lcMode;
+
+  /**
+   * LC TX mode:  hard, soft, none, etc:  how this dom broadcasts  LC info
+   */
+  LCMode txMode;
 
   /**
    *  Local coincidence window size, before ATWD launch window

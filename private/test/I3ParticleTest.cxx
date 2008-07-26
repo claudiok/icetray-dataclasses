@@ -28,21 +28,32 @@ TEST(CopyPtrConstructor)
   p1->SetShape(I3Particle::Cascade);
   p1->SetEnergy(100*I3Units::GeV);
   p1->SetSpeed(I3Constants::c);
+  p1->SetWeight(42.0);
   cout<<AsXML(p1);
 
   I3ParticlePtr p2(p1);
   cout<<AsXML(p2);
 
   ENSURE_DISTANCE(p1->GetX(),p2->GetX(),0.01,
-                  "Copied positions do not match");
+                  "Copied position (X) do not match");
   ENSURE_DISTANCE(p1->GetY(),p2->GetY(),0.01,
-                  "Copied positions do not match");
+                  "Copied position (Y) do not match");
   ENSURE_DISTANCE(p1->GetZ(),p2->GetZ(),0.01,
-                  "Copied positions do not match");
+                  "Copied position (Z) do not match");
   ENSURE_DISTANCE(p1->GetZenith(),p2->GetZenith(),0.01,
-                  "Copied directions do not match");
+                  "Copied direction (Zenith) does not match");
   ENSURE_DISTANCE(p1->GetAzimuth(),p2->GetAzimuth(),0.01,
-                  "Copied directions do not match");
+                  "Copied direction (Azimuth) does not match");
+  ENSURE_DISTANCE(p1->GetEnergy(),p2->GetEnergy(),0.01,
+                  "Copied energy does not match");
+  ENSURE_DISTANCE(p1->GetSpeed(),p2->GetSpeed(),0.01,
+                  "Copied speed does not match");
+  ENSURE_DISTANCE(p1->GetWeight(),p2->GetWeight(),0.01,
+                  "Copied weight does not match");
+  ENSURE( p1->GetType() == p2->GetType(),
+                  "Copied type do not match");
+  ENSURE( p1->GetShape() == p2->GetShape(),
+                  "Copied shape do not match");
 
 }
 
@@ -62,15 +73,26 @@ TEST(CopyObjConstructor)
   cout<<AsXML(p2);
 
   ENSURE_DISTANCE(p1.GetX(),p2.GetX(),0.01,
-                  "Copied positions do not match");
+                  "Copied position (X) do not match");
   ENSURE_DISTANCE(p1.GetY(),p2.GetY(),0.01,
-                  "Copied positions do not match");
+                  "Copied position (Y) do not match");
   ENSURE_DISTANCE(p1.GetZ(),p2.GetZ(),0.01,
-                  "Copied positions do not match");
+                  "Copied position (Z) do not match");
   ENSURE_DISTANCE(p1.GetZenith(),p2.GetZenith(),0.01,
-                  "Copied directions do not match");
+                  "Copied direction (Zenith) does not match");
   ENSURE_DISTANCE(p1.GetAzimuth(),p2.GetAzimuth(),0.01,
-                  "Copied directions do not match");
+                  "Copied direction (Azimuth) does not match");
+  ENSURE_DISTANCE(p1.GetEnergy(),p2.GetEnergy(),0.01,
+                  "Copied energy does not match");
+  ENSURE_DISTANCE(p1.GetSpeed(),p2.GetSpeed(),0.01,
+                  "Copied speed does not match");
+  ENSURE_DISTANCE(p1.GetWeight(),p2.GetWeight(),0.01,
+                  "Copied weight does not match");
+  ENSURE( p1.GetType() == p2.GetType(),
+                  "Copied type do not match");
+  ENSURE( p1.GetShape() == p2.GetShape(),
+                  "Copied shape do not match");
+
 }
 
 TEST(istrack){
