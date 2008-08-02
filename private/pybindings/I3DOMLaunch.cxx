@@ -65,11 +65,11 @@ void register_I3DOMLaunch()
     def("identity", identity_<I3DOMLaunch::TriggerMode>);
   }
 
-  class_<std::vector<I3DOMLaunch> >("Vector_I3DOMLaunch")
+  class_<std::vector<I3DOMLaunch> >("vector_I3DOMLaunch")
     .def(vector_indexing_suite<std::vector<I3DOMLaunch> >())
     ;
     
-  class_<I3DOMLaunchSeriesMap, bases<I3FrameObject>, I3DOMLaunchSeriesMapPtr>("Map_OMKey_VectorI3DOMLaunch")
+  class_<I3DOMLaunchSeriesMap, bases<I3FrameObject>, I3DOMLaunchSeriesMapPtr>("I3DOMLaunchSeriesMap")
     .def(map_indexing_suite<I3DOMLaunchSeriesMap>())
     ;
     
