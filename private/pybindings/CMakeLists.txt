@@ -20,6 +20,7 @@
 
 if(BUILD_PYBINDINGS)
   i3_add_pybindings(dataclasses
+    I3Calibration.cxx
     I3Constants.cxx
     I3DOMLaunch.cxx
     I3DetectorStatus.cxx
