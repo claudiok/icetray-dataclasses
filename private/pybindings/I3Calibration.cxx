@@ -21,7 +21,7 @@
 
 #include <vector>
 
-#include <dataclasses/status/I3Calibration.h>
+#include <dataclasses/calibration/I3Calibration.h>
 
 using namespace boost::python;
 
@@ -70,25 +70,27 @@ void register_I3Calibration()
 
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
-      .def_readwrite("temperature", &I3DOMCalibration::temperature)
-      .def_readwrite("fadcGain", &I3DOMCalibration::fadcGain)
-      .def_readwrite("fadcBaselineFit", &I3DOMCalibration::fadcBaselineFit)
-      .def_readwrite("fadcDeltaT", &I3DOMCalibration::fadcDeltaT)
-      .def_readwrite("frontEndImpedance", &I3DOMCalibration::frontEndImpedance)
-      .def_readwrite("tauparameters", &I3DOMCalibration::tauparameters)
-      .def_readwrite("ampGains", &I3DOMCalibration::ampGains)
-      .def_readwrite("atwdFreq", &I3DOMCalibration::atwdFreq)
-      .def_readwrite("atwdBin0", &I3DOMCalibration::atwdBin0)
-      .def_readwrite("atwdBin1", &I3DOMCalibration::atwdBin1)
-      .def_readwrite("pmtTransitTime", &I3DOMCalibration::pmtTransitTime)
-      .def_readwrite("hvGainRelation", &I3DOMCalibration::hvGainRelation)
-      .def_readwrite("domcalVersion", &I3DOMCalibration::domcalVersion)
-      .def_readwrite("atwdBaselines", &I3DOMCalibration::atwdBaselines)
-      .def_readwrite("atwdResponseWidth", &I3DOMCalibration::atwdResponseWidth)
-      .def_readwrite("fadcResponseWidth", &I3DOMCalibration::fadcResponseWidth)
-      .def_readwrite("atwdDeltaT", &I3DOMCalibration::atwdDeltaT)
-      .def_readwrite("speDiscrimCalib", &I3DOMCalibration::speDiscrimCalib)
-      .def_readwrite("mpeDiscrimCalib", &I3DOMCalibration::mpeDiscrimCalib)
+      PROPERTY(I3DOMCalibration, Temperature, Temperature)
+      PROPERTY(I3DOMCalibration, TransitTime, TransitTime)
+      PROPERTY(I3DOMCalibration, HVGainFit, HVGainFit)
+      PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
+      PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
+      PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
+      PROPERTY(I3DOMCalibration, TauParameters, TauParameters)
+      PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
+      PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
+      PROPERTY(I3DOMCalibration, FADCDeltaT, FADCDeltaT)
+      PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
+      PROPERTY(I3DOMCalibration, ATWDGain, ATWDGain)
+      PROPERTY(I3DOMCalibration, ATWDDeltaT, ATWDDeltaT)
+      PROPERTY(I3DOMCalibration, ATWDFreqFit, ATWDFreqFit)
+      PROPERTY(I3DOMCalibration, DOMCalVersion, DOMCalVersion)
+      PROPERTY(I3DOMCalibration, ATWDBaseline, ATWDBaseline)
+      PROPERTY(I3DOMCalibration, ATWDResponseWidth, ATWDResponseWidth)
+      PROPERTY(I3DOMCalibration, FADCResponseWidth, FADCResponseWidth)
+      PROPERTY(I3DOMCalibration, FADCResponseWidth, FADCResponseWidth)
+      PROPERTY(I3DOMCalibration, SPEDiscCalib, SPEDiscCalib)
+      PROPERTY(I3DOMCalibration, MPEDiscCalib, MPEDiscCalib)
       ;
 
   }
