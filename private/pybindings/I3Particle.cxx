@@ -71,7 +71,7 @@ i3particle_prettyprint(const I3Particle& p)
 {
   ostringstream oss;
   oss << "[I3Particle Zenith:" << p.GetZenith() << " Azimuth:" << p.GetAzimuth() << " X:" << p.GetX() << " Y:" << p.GetY() << " Z:" << p.GetZ() 
-      << " Energy:" << p.GetEnergy() << " Speed: " << p.GetSpeed() << " Time:" << p.GetTime() << "]";
+      << " Energy:" << p.GetEnergy() << " Speed: " << p.GetSpeed() << " Time:" << p.GetTime() << " Weight:" << p.GetWeight() << "]";
   return oss.str();
 }
 
@@ -87,6 +87,7 @@ void register_I3Particle()
       .def("GetPos", &get_pos)	
       .def("GetEnergy", &I3Particle::GetEnergy)
       .def("GetSpeed", &I3Particle::GetSpeed)
+      .def("GetWeight", &I3Particle::GetWeight)
       .def("GetZenith", &I3Particle::GetZenith)
       .def("GetAzimuth", &I3Particle::GetAzimuth)
       .def("GetType", &I3Particle::GetType)
@@ -103,6 +104,7 @@ void register_I3Particle()
       .def("SetTime", &I3Particle::SetTime)
       .def("SetEnergy", &I3Particle::SetEnergy)
       .def("SetSpeed", &I3Particle::SetSpeed)
+      .def("SetWeight", &I3Particle::SetWeight)
       .def("SetType", &I3Particle::SetType)
       .def("SetLength", &I3Particle::SetLength)
       .def("SetFitStatus", &I3Particle::SetFitStatus)
