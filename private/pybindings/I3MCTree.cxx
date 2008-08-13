@@ -144,6 +144,16 @@ GetDaughters(I3MCTreePtr t, I3ParticlePtr p){
   return I3MCTreeUtils::GetDaughters(*t,*p);
 }
 
+inline I3ParticlePtr Get(const I3MCTree& tree, const I3MCHit& hit)
+{
+  return I3ParticlePtr(new I3Particle(I3MCTreeUtils::Get(tree,hit)));
+}
+
+inline I3ParticlePtr GetPrimary(const I3MCTree& tree, const I3Particle& particle)
+{
+  return I3ParticlePtr(new I3Particle(*I3MCTreeUtils::GetPrimary(tree,particle)));
+}
+
 void register_I3MCTree()
 {
   class_<I3MCTree, bases<I3FrameObject>, I3MCTreePtr>("I3MCTree")
@@ -161,6 +171,8 @@ void register_I3MCTree()
     .def("GetDaughters",&GetDaughters)
     .def("AddPrimary",&AddPrimary)
     .def("AppendChild",&AppendChild)
+    .def("Get",&Get)
+    .def("GetPrimary",&GetPrimary)
     ;
 
   register_pointer_conversions<I3MCTree>();

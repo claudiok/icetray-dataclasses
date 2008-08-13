@@ -34,6 +34,8 @@ void register_I3MCHit()
       PROPERTY(I3MCHit, HitID, HitID)
       PROPERTY(I3MCHit, Weight, Weight)
       PROPERTY(I3MCHit, CherenkovDistance, CherenkovDistance)
+      .def("GetParticleMajorID", &I3MCHit::GetParticleMajorID)
+      .def("GetParticleMinorID", &I3MCHit::GetParticleMinorID)
       .def("GetHitSource", &I3MCHit::GetHitSource)
       ;
 
