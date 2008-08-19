@@ -71,7 +71,7 @@ void register_I3Waveform()
       ;
   }
 
-  class_<std::vector<I3Waveform> >("VectorI3Waveform")
+  class_<std::vector<I3Waveform> >("I3WaveformSeries")
     .def(vector_indexing_suite<std::vector<I3Waveform> >())
     ;
 
@@ -79,7 +79,7 @@ void register_I3Waveform()
     .def(vector_indexing_suite<std::vector<I3Waveform::StatusCompound> >())
     ;
 
-  class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("MapOMKeyVectorI3Waveform")
+  class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("I3WaveformSeriesMap")
     .def(map_indexing_suite<I3WaveformSeriesMap>())
     .def("iteritems", boost::python::iterator<I3WaveformSeriesMap>())
     ;

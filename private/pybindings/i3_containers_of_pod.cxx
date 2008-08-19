@@ -26,19 +26,32 @@
 using namespace boost::python;
 using std::vector;
 
+static std::string 
+string_I3VectorChar(const I3Vector<char> &vc)
+{
+  return std::string(vc.begin(),vc.end());
+}
+
 void register_i3_containers_of_pod()
 {
   class_<I3Vector<int>, bases<I3FrameObject>, boost::shared_ptr<I3Vector<int> > >("I3VectorInt")
-    .def(vector_indexing_suite<I3Vector<int> >());
+    .def(vector_indexing_suite<I3Vector<int> >())
+    ;
   register_pointer_conversions<I3Vector<int> >();
 
   class_<I3Vector<char>, bases<I3FrameObject>, boost::shared_ptr<I3Vector<char> > >("I3VectorChar")
-    .def(vector_indexing_suite<I3Vector<char> >());
+    .def(vector_indexing_suite<I3Vector<char> >())
+    .def("__str__",string_I3VectorChar)
+    ;
   register_pointer_conversions<I3Vector<char> >();
 
   class_<I3MapStringDouble, bases<I3FrameObject>, I3MapStringDoublePtr>("I3MapStringDouble")
     .def(map_indexing_suite<I3MapStringDouble >())
     ;
   register_pointer_conversions<I3MapStringDouble>();
+
+  class_<vector<double> >("vector_double")
+    .def(vector_indexing_suite<vector<double> >())
+    ;
 }
 
