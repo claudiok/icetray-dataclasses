@@ -50,8 +50,5 @@ void register_i3_containers_of_pod()
     ;
   register_pointer_conversions<I3MapStringDouble>();
 
-  class_<vector<double> >("vector_double")
-    .def(vector_indexing_suite<vector<double> >())
-    ;
 }
 
