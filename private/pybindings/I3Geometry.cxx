@@ -44,17 +44,26 @@ void register_I3Geometry()
     .def(map_indexing_suite<std::map<OMKey, I3OMGeo> >())
     ;
 
-  //
-  // I3OMGeo
-  //
-  class_<I3OMGeo, boost::shared_ptr<I3OMGeo> >("I3OMGeo")
-    .def_readwrite("position", &I3OMGeo::position)
-    .def_readwrite("omtype", &I3OMGeo::omtype)
-    .def_readwrite("orientation", &I3OMGeo::orientation)
-    .def_readwrite("area", &I3OMGeo::area)
-    .def_readwrite("aziangle", &I3OMGeo::aziangle)
-    ;
+  {
+    //
+    // I3OMGeo
+    //
+    scope omg = class_<I3OMGeo, boost::shared_ptr<I3OMGeo> >("I3OMGeo")
+      .def_readwrite("position", &I3OMGeo::position)
+      .def_readwrite("omtype", &I3OMGeo::omtype)
+      .def_readwrite("orientation", &I3OMGeo::orientation)
+      .def_readwrite("area", &I3OMGeo::area)
+      .def_readwrite("aziangle", &I3OMGeo::aziangle)
+      ;
 
+    enum_<I3OMGeo::OMType>("OMType")
+      .value("AMANDA", I3OMGeo::AMANDA)
+      .value("IceCube", I3OMGeo::IceCube)
+      .value("IceTop", I3OMGeo::IceTop)
+      .export_values()
+      ;
+  }
+  def("identity", identity_<I3OMGeo::OMType>);
   //
   // I3TankGeo
   //
