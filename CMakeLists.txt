@@ -1,7 +1,8 @@
 #
 #   
 #
-i3_project(dataclasses)
+i3_project(dataclasses
+  DOCS_DIR resources/docs)
 
 i3_add_library(dataclasses
   private/dataclasses/*.cxx
