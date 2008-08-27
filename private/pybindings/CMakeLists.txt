@@ -24,6 +24,7 @@ if(BUILD_PYBINDINGS)
     I3Constants.cxx
     I3DOMLaunch.cxx
     I3DetectorStatus.cxx
+    I3DOMFunctions.cxx
     I3Direction.cxx
     I3Double.cxx
     I3EventHeader.cxx
