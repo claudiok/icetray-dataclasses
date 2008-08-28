@@ -28,7 +28,6 @@ TEST(CopyPtrConstructor)
   p1->SetShape(I3Particle::Cascade);
   p1->SetEnergy(100*I3Units::GeV);
   p1->SetSpeed(I3Constants::c);
-  p1->SetWeight(42.0);
   cout<<AsXML(p1);
 
   I3ParticlePtr p2(p1);
@@ -48,8 +47,6 @@ TEST(CopyPtrConstructor)
                   "Copied energy does not match");
   ENSURE_DISTANCE(p1->GetSpeed(),p2->GetSpeed(),0.01,
                   "Copied speed does not match");
-  ENSURE_DISTANCE(p1->GetWeight(),p2->GetWeight(),0.01,
-                  "Copied weight does not match");
   ENSURE( p1->GetType() == p2->GetType(),
                   "Copied type do not match");
   ENSURE( p1->GetShape() == p2->GetShape(),
@@ -86,8 +83,6 @@ TEST(CopyObjConstructor)
                   "Copied energy does not match");
   ENSURE_DISTANCE(p1.GetSpeed(),p2.GetSpeed(),0.01,
                   "Copied speed does not match");
-  ENSURE_DISTANCE(p1.GetWeight(),p2.GetWeight(),0.01,
-                  "Copied weight does not match");
   ENSURE( p1.GetType() == p2.GetType(),
                   "Copied type do not match");
   ENSURE( p1.GetShape() == p2.GetShape(),
