@@ -18,7 +18,9 @@
 #include <icetray/I3FrameObject.h>
 #include "icetray/OMKey.h"
 
+#ifndef __CINT__  // it puts the lotion in the basket
 #include <boost/lexical_cast.hpp>
+#endif
 
 template <typename Key, typename Value>
 struct I3Map : public I3FrameObject, public std::map<Key, Value>
