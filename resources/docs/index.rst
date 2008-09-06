@@ -233,7 +233,26 @@ Getting the energy of the most energetic primary
   Out[8]: 497.685
 
 
-  
+FAQ
+---
+
+I can't make pybindings to an I3Vector of my class
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+the ``vector_indexing_suite`` requires that the classes inside the
+vector have an ``operator==``, so that it is possible to write
+constructs like::
+
+  v = I3VectorMyType()
+  mt = MyType()
+
+  if mt in v:
+     # do something
+
+So if you get deep compiler errors that involve 'operator==', check 
+that your class is equality-comparable.
+
+
 
 
 
