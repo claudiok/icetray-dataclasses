@@ -24,8 +24,8 @@ class int_t
 {
 public:
   uint64_t id;
-  const int GetMinorID() const { return id; }
-  const uint64_t GetMajorID() const { return id; }
+  int GetMinorID() const { return id; }
+  uint64_t GetMajorID() const { return id; }
   int_t(uint64_t i) : id(i) { }
 };
 
