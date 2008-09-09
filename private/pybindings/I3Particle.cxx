@@ -44,6 +44,12 @@ set_position(I3Particle& self, double x, double y, double z)
 }
 
 static void 
+set_position_i3pos(I3Particle& self, const I3Position& p)
+{
+  self.SetPos(p);
+}
+
+static void 
 set_theta_phi(I3Particle& self, double theta, double phi)
 {
   self.SetThetaPhi(theta,phi);
@@ -102,6 +108,7 @@ void register_I3Particle()
       .def("SetDir", &set_dir_angles)
       .def("SetDir", &set_dir_unitvect)
       .def("SetPos", &set_position)
+      .def("SetPos", &set_position_i3pos)
       .def("SetTime", &I3Particle::SetTime)
       .def("SetEnergy", &I3Particle::SetEnergy)
       .def("SetSpeed", &I3Particle::SetSpeed)
