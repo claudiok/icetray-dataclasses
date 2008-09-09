@@ -73,10 +73,12 @@ void register_I3Position()
 
   def("i3position_to_tuple", i3position_to_tuple);
 
-  class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >
+  scope position_scope = 
+    class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >
     ("I3Position",
      "I3Position objects can subscripted like 5-element arrays (x, y, z, theta, phi) and converted to tuples and lists")
     .def(init<double,double,double>())
+    .def(init<double,double,double,I3Position::RefFrame>())
     PROPERTY(I3Position, X, X)
     PROPERTY(I3Position, Y, Y)
     PROPERTY(I3Position, Z, Z)
@@ -94,6 +96,13 @@ void register_I3Position()
     .def("__getitem__", i3position_getitem)
     .def("__setitem__", i3position_setitem)
     ;
+
+  enum_<I3Position::RefFrame>("RefFrame")
+    .value("car",I3Position::car)
+    .value("sph",I3Position::sph)
+    .value("cyl",I3Position::cyl)
+    ;
+
   register_pointer_conversions<I3Position>();
 
   implicitly_convertible<I3Position, tuple>();
