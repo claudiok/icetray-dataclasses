@@ -67,7 +67,8 @@ set_dir_unitvect(I3Particle& self, double x, double y, double z)
   self.SetDir(x,y,z);
 }
 
-inline boost::shared_ptr<I3Position> get_pos(I3Particle * particle)
+inline boost::shared_ptr<I3Position> 
+get_pos(I3Particle * particle)
 {
   return I3PositionPtr(new I3Position(particle->GetPos()));
 }
@@ -91,6 +92,7 @@ void register_I3Particle()
       .def("GetY", &I3Particle::GetY)
       .def("GetZ", &I3Particle::GetZ)
       .def("GetPos", &get_pos)	
+      .def("GetDir", &I3Particle::GetDir, return_internal_reference<1>())
       .def("GetEnergy", &I3Particle::GetEnergy)
       .def("GetSpeed", &I3Particle::GetSpeed)
       .def("GetZenith", &I3Particle::GetZenith)
