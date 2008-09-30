@@ -46,7 +46,8 @@ public:
       SPE_DISCRIMINATOR_TRIGGER = 2,
       FLASHER_BOARD_TRIGGER = 3,
       MPE_DISCRIMINATOR_TRIGGER = 4,
-      ONBOARD_LED = 5
+      ONBOARD_LED = 5,
+      MIN_BIAS = 6
     };
     
     enum TriggerMode
