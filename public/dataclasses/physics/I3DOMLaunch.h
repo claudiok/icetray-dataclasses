@@ -46,8 +46,7 @@ public:
       SPE_DISCRIMINATOR_TRIGGER = 2,
       FLASHER_BOARD_TRIGGER = 3,
       MPE_DISCRIMINATOR_TRIGGER = 4,
-      ONBOARD_LED = 5,
-      MIN_BIAS = 6
+      ONBOARD_LED = 5
     };
     
     enum TriggerMode
@@ -72,6 +71,9 @@ public:
       // and use the upper eight bits for artificial modes like SLC
       /** Set if the DOM triggered with SLC condition met */
       SLC_READOUT = 1L << 8,
+      /** Set if a launch is triggered by a min bias hit
+       * (q.v. IceTop calibration/monitoring) */
+      MIN_BIAS = 1L << 9,
       /** limit this enum on a 16 bit value range */
       LAST_TRIGGER_SITUATION = 1 << 16
     };
