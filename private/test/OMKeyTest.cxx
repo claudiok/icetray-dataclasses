@@ -13,7 +13,6 @@
 #include <I3Test.h>
 
 #include "dataclasses/OMKey.h"
-#include "TFile.h"
 #include <string>
 using std::string;
 using std::cout;
