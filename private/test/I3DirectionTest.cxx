@@ -14,25 +14,17 @@
 
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Units.h"
-#include "TFile.h"
-#include "TTree.h"
 #include <string>
 using std::string;
 using std::cout;
 using std::endl;
 using namespace I3Units;
 
-TEST_GROUP(I3DirectionTest);
-  
-/**
- * check that constructor and destructor work
- */
-TEST(const_dest)
-{
-  I3DirectionPtr ptr(new I3Direction());
-}
-  
-   
+
+#ifdef I3_USE_ROOT
+#include "TFile.h"
+#include "TTree.h"
+
 /**
  * check branching it to a tree
  */
@@ -90,7 +82,19 @@ TEST(branch_and_write)
   
   delete tree_in;
 }
+#endif
 
+TEST_GROUP(I3DirectionTest);
+  
+/**
+ * check that constructor and destructor work
+ */
+TEST(const_dest)
+{
+  I3DirectionPtr ptr(new I3Direction());
+}
+  
+   
 /**
  * Make sure that the changing of coordinate systems works well
  */

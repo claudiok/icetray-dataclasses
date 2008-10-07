@@ -13,8 +13,6 @@
 #include <I3Test.h>
 
 #include "dataclasses/I3Position.h"
-#include "TFile.h"
-#include "TTree.h"
 #include <string>
 using std::string;
 using std::cout;
@@ -33,6 +31,9 @@ TEST(constructor)
 
 
 
+#ifdef I3_USE_ROOT
+#include "TFile.h"
+#include "TTree.h"
 /**
  * check branching it to a tree
  */
@@ -90,6 +91,7 @@ TEST(branch_and_write)
   
   delete tree_in;
 }
+#endif
 
 /**
  * Make sure that the changing of coordinate systems works well
