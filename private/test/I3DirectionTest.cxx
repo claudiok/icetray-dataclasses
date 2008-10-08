@@ -20,14 +20,17 @@ using std::cout;
 using std::endl;
 using namespace I3Units;
 
+TEST_GROUP(I3DirectionTest); 
 
 #ifdef I3_USE_ROOT
 #include "TFile.h"
 #include "TTree.h"
 
+
 /**
  * check branching it to a tree
  */
+
 TEST(branch_to_tree)
 {
   I3DirectionPtr ptr(new I3Direction());
@@ -84,8 +87,6 @@ TEST(branch_and_write)
 }
 #endif
 
-TEST_GROUP(I3DirectionTest);
-  
 /**
  * check that constructor and destructor work
  */
