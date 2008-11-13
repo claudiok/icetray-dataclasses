@@ -29,6 +29,13 @@ string dump(I3Time t){
   return t.GetUTCString();
 }
 
+string repr(I3Time t){
+  std::stringstream out;
+  out <<  "I3Time(" << t.GetUTCYear() << "," << t.GetUTCDaqTime() << ")";
+  return out.str();
+}
+
+
 void register_I3Time()
 {
 
@@ -49,6 +56,7 @@ void register_I3Time()
     .def("SetUnixTime", &I3Time::SetUnixTime)
     .def("SetDaqTime", &I3Time::SetDaqTime)
     .def("__str__",&dump)
+    .def("__repr__",&repr)
     .def(self-self)
     .def(self-double())
     .def(self+double())
