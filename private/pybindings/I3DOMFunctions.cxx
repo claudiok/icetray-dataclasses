@@ -33,8 +33,8 @@ void register_I3DOMFunctions()
   def("SPEMean",&SPEMean);
   def("FADCBaseline",&FADCBaseline);
   def("TransitTime",&TransitTime);
-  def("SPEDriscriminatorThreshold",&SPEDiscriminatorThreshold);
-  def("MPEDriscriminatorThreshold",&MPEDiscriminatorThreshold);
+  def("SPEDiscriminatorThreshold",&SPEDiscriminatorThreshold);
+  def("MPEDiscriminatorThreshold",&MPEDiscriminatorThreshold);
   def("OldspeThreshold",&OldspeThreshold);
   def("OldmpeThreshold",&OldmpeThreshold);
   def("DOMCalVersion",&DOMCalVersion);
