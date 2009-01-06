@@ -80,7 +80,7 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
     }
     catch( const std::domain_error& ex )
     {
-        log_fatal( ex.what() );
+      log_fatal("%s", ex.what());
     }
   }
   else
@@ -184,7 +184,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
     }
     catch( const std::domain_error& ex )
     {
-        log_fatal( ex.what() );
+      log_fatal("%s", ex.what());
     }
   }
   else
