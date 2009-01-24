@@ -39,7 +39,7 @@ I3MapGet(const typename MapType::key_type& key,
     {
       ostringstream error;
       error<<"Couldn't find key "<<key<<" in this map";
-      log_fatal(error.str().c_str());
+      log_fatal("%s",error.str().c_str());
     }
   return found->second;
 }
@@ -58,7 +58,7 @@ I3MapGet(const typename MapType::key_type& key,
       {
 	ostringstream error;
 	error<<"Couldn't find key "<<key<<" in this map";
-	log_fatal(error.str().c_str());
+	log_fatal("%s", error.str().c_str());
       }
   return found->second;
 }
