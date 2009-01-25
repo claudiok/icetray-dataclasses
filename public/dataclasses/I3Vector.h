@@ -51,8 +51,15 @@ typedef I3Vector<short> I3VectorShort;
 typedef I3Vector<unsigned short> I3VectorUShort;
 typedef I3Vector<int> I3VectorInt;
 typedef I3Vector<unsigned int> I3VectorUInt;
+
+#if __WORDSIZE == 64
+typedef I3Vector<long> I3VectorInt64;
+typedef I3Vector<unsigned long> I3VectorUInt64;
+#else
 typedef I3Vector<long long> I3VectorInt64;
 typedef I3Vector<unsigned long long> I3VectorUInt64;
+#endif
+
 typedef I3Vector<string> I3VectorString;
 typedef I3Vector<float> I3VectorFloat;
 typedef I3Vector<double> I3VectorDouble;
