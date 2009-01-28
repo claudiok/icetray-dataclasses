@@ -22,6 +22,7 @@
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
 #include <vector>
+#include <string>
 
 using namespace boost::python;
 using std::vector;
@@ -32,23 +33,51 @@ string_I3VectorChar(const I3Vector<char> &vc)
   return std::string(vc.begin(),vc.end());
 }
 
+template <typename T>
+void 
+register_i3vector_of(const std::string& s)
+{
+  typedef I3Vector<T> vec_t;
+  class_<vec_t, bases<I3FrameObject>, boost::shared_ptr<vec_t> > ((std::string("I3Vector") + s).c_str())
+    .def(vector_indexing_suite<vec_t>())
+    ;
+  register_pointer_conversions<vec_t>();
+}
+
+
 void register_i3_containers_of_pod()
 {
-  class_<I3Vector<int>, bases<I3FrameObject>, boost::shared_ptr<I3Vector<int> > >("I3VectorInt")
-    .def(vector_indexing_suite<I3Vector<int> >())
-    ;
-  register_pointer_conversions<I3Vector<int> >();
-
+  // 'char' has a special method that converts to string
   class_<I3Vector<char>, bases<I3FrameObject>, boost::shared_ptr<I3Vector<char> > >("I3VectorChar")
     .def(vector_indexing_suite<I3Vector<char> >())
     .def("__str__",string_I3VectorChar)
     ;
   register_pointer_conversions<I3Vector<char> >();
 
+  //
+  // others are consistent with each other
+  //
+  register_i3vector_of<std::string>("String");
+
+  register_i3vector_of<bool>("Bool");
+
+  register_i3vector_of<int16_t>("Short");
+  register_i3vector_of<uint16_t>("UShort");
+
+  register_i3vector_of<int32_t>("Int");
+  register_i3vector_of<uint32_t>("UInt");
+
+  register_i3vector_of<I3VectorInt64::value_type>("Int64");
+  register_i3vector_of<I3VectorUInt64::value_type>("UInt64");
+
+  register_i3vector_of<float>("Float");
+  register_i3vector_of<double>("Double");
+
+
+
   class_<I3MapStringDouble, bases<I3FrameObject>, I3MapStringDoublePtr>("I3MapStringDouble")
     .def(map_indexing_suite<I3MapStringDouble >())
     ;
   register_pointer_conversions<I3MapStringDouble>();
-
 }
 
