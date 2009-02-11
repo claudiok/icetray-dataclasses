@@ -142,6 +142,7 @@ TEST(DiscrimThresholds)
       rawstatus.speThreshold = 620.;
       rawstatus.mpeThreshold = 560;
 
+      double domThresh = SPEDOMThreshold(rawstatus, calib);
       double speDiscThresh = SPEDiscriminatorThreshold(rawstatus, calib);
       double mpeDiscThresh = MPEDiscriminatorThreshold(rawstatus, calib);
 
@@ -151,6 +152,9 @@ TEST(DiscrimThresholds)
       ENSURE_DISTANCE(8.1*3.374080,
 		      mpeDiscThresh/I3Units::mV, 0.00001,
 		      "Failed to return proper calibrated MPE discriminator threshold");
+      ENSURE_DISTANCE(4.15551,
+		      domThresh/I3Units::mV, 0.00001,
+		      "Failed to return proper calibrated SPE dom threshold");
 
       double oldSPEDisc = OldspeThreshold(rawstatus);
       double oldMPEDisc = OldmpeThreshold(rawstatus);
