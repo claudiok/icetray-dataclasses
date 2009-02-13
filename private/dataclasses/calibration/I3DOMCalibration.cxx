@@ -414,6 +414,10 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("speDiscrimCalib", speDiscrimCalib_);
       ar & make_nvp("mpeDiscrimCalib", mpeDiscrimCalib_);
     }
+  if (version > 6)
+    {
+      ar & make_nvp("pmtDiscrimCalib", pmtDiscrimCalib_);
+    }
 
 }
 

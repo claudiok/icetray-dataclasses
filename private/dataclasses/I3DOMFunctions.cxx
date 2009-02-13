@@ -158,7 +158,7 @@ double MPEDiscriminatorThreshold(const I3DOMStatus& status,
   
 }
 
-double SPEDOMThreshold(const I3DOMStatus& status,
+double SPEPMTThreshold(const I3DOMStatus& status,
 		    const I3DOMCalibration& calib)
 {
   const LinearFit speCalibFit = calib.GetSPEDiscCalib();

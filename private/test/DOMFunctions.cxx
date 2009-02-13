@@ -142,7 +142,7 @@ TEST(DiscrimThresholds)
       rawstatus.speThreshold = 620.;
       rawstatus.mpeThreshold = 560;
 
-      double domThresh = SPEDOMThreshold(rawstatus, calib);
+      double domThresh = SPEPMTThreshold(rawstatus, calib);
       double speDiscThresh = SPEDiscriminatorThreshold(rawstatus, calib);
       double mpeDiscThresh = MPEDiscriminatorThreshold(rawstatus, calib);
 
