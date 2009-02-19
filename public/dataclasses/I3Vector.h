@@ -63,6 +63,7 @@ typedef I3Vector<unsigned long long> I3VectorUInt64;
 typedef I3Vector<string> I3VectorString;
 typedef I3Vector<float> I3VectorFloat;
 typedef I3Vector<double> I3VectorDouble;
+typedef I3Vector<std::pair<double, double> > I3VectorDoubleDouble;
 
 typedef I3Vector<OMKey> I3VectorOMKey;
 
@@ -77,6 +78,7 @@ I3_POINTER_TYPEDEFS(I3VectorDouble);
 I3_POINTER_TYPEDEFS(I3VectorString);
 
 I3_POINTER_TYPEDEFS(I3VectorOMKey);
+I3_POINTER_TYPEDEFS(I3VectorDoubleDouble);
 
 // inconsistent... if you take this out, though, you have to be sure
 // that you add it to I3Vector.cxx so that I3VectorUnsignedInt is

@@ -44,6 +44,19 @@ register_i3vector_of(const std::string& s)
   register_pointer_conversions<vec_t>();
 }
 
+template <typename T, typename U>
+void
+register_std_pair(const char* s)
+{
+  typedef std::pair<T, U> type_t;
+
+  class_<type_t>(s)
+    .def_readwrite("first", &type_t::first)
+    .def_readwrite("second", &type_t::second)
+    ;
+
+  def("make_pair", &std::make_pair<T, U>);
+}
 
 void register_i3_containers_of_pod()
 {
@@ -73,7 +86,9 @@ void register_i3_containers_of_pod()
   register_i3vector_of<float>("Float");
   register_i3vector_of<double>("Double");
 
+  register_i3vector_of<std::pair<double, double> >("DoubleDouble");
 
+  register_std_pair<double, double>("pair_double_double");
 
   class_<I3MapStringDouble, bases<I3FrameObject>, I3MapStringDoublePtr>("I3MapStringDouble")
     .def(map_indexing_suite<I3MapStringDouble >())

@@ -21,3 +21,5 @@ I3_SERIALIZABLE(I3VectorDouble);
 I3_SERIALIZABLE(I3VectorString);
 I3_SERIALIZABLE(I3VectorOMKey);
 
+I3_SERIALIZABLE(I3VectorDoubleDouble);
+
