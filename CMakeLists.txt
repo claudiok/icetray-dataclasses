@@ -4,12 +4,16 @@
 i3_project(dataclasses
   DOCS_DIR resources/docs)
 
+if (USE_ROOT)
+  set(ROOT_TOOL root)
+endif (USE_ROOT)
+
 i3_add_library(dataclasses
   private/dataclasses/*.cxx
   private/dataclasses/*.c
   private/dataclasses/*/*.cxx
 
-  USE_TOOLS log4cplus boost root python
+  USE_TOOLS log4cplus boost python ${ROOT_TOOL}
 
   USE_PROJECTS icetray
 
