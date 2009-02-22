@@ -76,6 +76,7 @@ typedef I3Map<unsigned short, unsigned short> I3MapUShortUShort;
 typedef I3Map<int, vector<int> > I3MapIntVectorInt;
 typedef I3Map<OMKey, vector<double> > I3MapKeyVectorDouble;
 typedef I3Map<OMKey, vector<int> > I3MapKeyVectorInt;
+typedef I3Map<OMKey, double > I3MapKeyDouble;
 
 I3_POINTER_TYPEDEFS(I3MapStringDouble);
 I3_POINTER_TYPEDEFS(I3MapStringInt);
@@ -92,6 +93,7 @@ I3_POINTER_TYPEDEFS(I3MapKeyVectorDouble);
 BOOST_CLASS_VERSION(I3MapKeyVectorInt, 1);
 #endif
 I3_POINTER_TYPEDEFS(I3MapKeyVectorInt);
+I3_POINTER_TYPEDEFS(I3MapKeyDouble);
 
 #endif // I3MAP_H_INCLUDED
 

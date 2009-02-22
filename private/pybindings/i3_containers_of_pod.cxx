@@ -94,5 +94,53 @@ void register_i3_containers_of_pod()
     .def(map_indexing_suite<I3MapStringDouble >())
     ;
   register_pointer_conversions<I3MapStringDouble>();
+
+
+
+  class_<I3MapStringInt, bases<I3FrameObject>, I3MapStringIntPtr>("I3MapStringInt")
+    .def(map_indexing_suite<I3MapStringInt >())
+    ;
+  register_pointer_conversions<I3MapStringInt>();
+
+  class_<I3MapStringBool, bases<I3FrameObject>, I3MapStringBoolPtr>("I3MapStringBool")
+    .def(map_indexing_suite<I3MapStringBool >())
+    ;
+  register_pointer_conversions<I3MapStringBool>();
+
+  class_<I3MapStringStringDouble, bases<I3FrameObject>, I3MapStringStringDoublePtr>("I3MapStringStringDouble")
+    .def(map_indexing_suite<I3MapStringStringDouble >())
+    ;
+  register_pointer_conversions<I3MapStringStringDouble>();
+
+  class_<I3MapUnsignedUnsigned, bases<I3FrameObject>, I3MapUnsignedUnsignedPtr>("I3MapUnsignedUnsigned")
+    .def(map_indexing_suite<I3MapUnsignedUnsigned >())
+    ;
+  register_pointer_conversions<I3MapUnsignedUnsigned>();
+
+  class_<I3MapUShortUShort, bases<I3FrameObject>, I3MapUShortUShortPtr>("I3MapUShortUShort")
+    .def(map_indexing_suite<I3MapUShortUShort >())
+    ;
+  register_pointer_conversions<I3MapUShortUShort>();
+
+  class_<I3MapIntVectorInt, bases<I3FrameObject>, I3MapIntVectorIntPtr>("I3MapIntVectorInt")
+    .def(map_indexing_suite<I3MapIntVectorInt >())
+    ;
+  register_pointer_conversions<I3MapIntVectorInt>();
+
+  class_<I3MapKeyVectorDouble, bases<I3FrameObject>, I3MapKeyVectorDoublePtr>("I3MapKeyVectorDouble")
+    .def(map_indexing_suite<I3MapKeyVectorDouble >())
+    ;
+  register_pointer_conversions<I3MapKeyVectorDouble>();
+
+  class_<I3MapKeyVectorInt, bases<I3FrameObject>, I3MapKeyVectorIntPtr>("I3MapKeyVectorInt")
+    .def(map_indexing_suite<I3MapKeyVectorInt >())
+    ;
+  register_pointer_conversions<I3MapKeyVectorInt>();
+
+  class_<I3MapKeyDouble, bases<I3FrameObject>, I3MapKeyDoublePtr>("I3MapKeyDouble")
+    .def(map_indexing_suite<I3MapKeyDouble >())
+    ;
+  register_pointer_conversions<I3MapKeyDouble>();
+
 }
 
