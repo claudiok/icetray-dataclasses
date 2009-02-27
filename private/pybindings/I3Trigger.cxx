@@ -68,6 +68,16 @@ bool IceTop_triggered(I3TriggerHierarchyPtr t){
   return false;
 }
 
+bool InIce_triggered(I3TriggerHierarchyPtr t){  
+  I3TriggerHierarchy::iterator t_iter = t->begin();
+  for(; t_iter != t->end(); t_iter++){
+    if(t_iter->GetTriggerKey().GetSource() == TriggerKey::IN_ICE &&
+       t_iter->GetTriggerFired())
+      return true;
+  }
+  return false;
+}
+
 bool InIce_SMT_ONLY(I3TriggerHierarchyPtr t){  
   if(t->size() != 2) return false;
 
@@ -233,7 +243,8 @@ void register_I3Trigger()
 
   class_<I3TriggerHierarchy, bases<I3FrameObject>, I3TriggerHierarchyPtr>("I3TriggerHierarchy")
     .def("FindTrigger", &FindTrigger1)
-    .def("FindTrigger", &FindTrigger2)
+    .def("FindTrigger", &FindTrigger2)   
+    .def("InIce_triggered", &InIce_triggered)
     .def("IceTop_triggered", &IceTop_triggered)
     .def("AMANDA_triggered", &AMANDA_triggered)
     .def("InIce_SMT_ONLY", &InIce_SMT_ONLY)
