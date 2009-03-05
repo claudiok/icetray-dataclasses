@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 #include <boost/random.hpp>
 
@@ -137,7 +138,7 @@ TEST(test11)
       ENSURE(initial_time.GetUTCYear()==
 	     compare_time.GetUTCYear(),
 	     "checking that the year is the same");
-      ENSURE(std::llabs(initial_time.GetUTCDaqTime() 
+      ENSURE(llabs(initial_time.GetUTCDaqTime() 
 			- compare_time.GetUTCDaqTime()) < 10,
 	     "checking that the UTC time is the same to ns");
       
