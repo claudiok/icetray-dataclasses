@@ -94,28 +94,37 @@ class i3_map_extras : public def_visitor<i3_map_extras<Map> >
       t.append(make_tuple(it->first, it->second));
     return t;
   }
-// set up operators to extract the key, value, or a tuple from a std::pair 
-  struct transform_first {
-	typedef key_type result_type;
-	result_type operator()(value_type const& x) const { return x.first; }
-	};
+
+  // set up operators to extract the key, value, or a tuple from a std::pair 
+  struct iterkeys
+  {
+    typedef key_type result_type;
+
+    result_type operator()(value_type const& x) const 
+    { 
+      return x.first; 
+    }
+  };
 	
-  struct transform_second {
-	typedef data_type result_type;
-	result_type operator()(value_type const& x) const { return x.second; }
-	};
+  struct itervalues 
+  {
+    typedef data_type result_type;
+
+    result_type operator()(value_type const& x) const 
+    { 
+      return x.second; 
+    }
+  };
 	
-  struct transform_tuple {
-	typedef tuple result_type;
-	result_type operator()(value_type const& x) const { return make_tuple(x.first,x.second); }
-	};
-// set up iterators to that return the key, value or tuple from a std::pair	
-  static boost::transform_iterator< transform_first, const_iterator > transform_first_begin( Map const& x) { return boost::make_transform_iterator< transform_first >(x.begin(), transform_first()); }
-  static boost::transform_iterator< transform_first, const_iterator > transform_first_end( Map const& x) { return boost::make_transform_iterator< transform_first >(x.end(), transform_first()); }
-  static boost::transform_iterator< transform_second, const_iterator > transform_second_begin( Map const& x) { return boost::make_transform_iterator< transform_second >(x.begin(), transform_second()); }
-  static boost::transform_iterator< transform_second, const_iterator > transform_second_end( Map const& x) { return boost::make_transform_iterator< transform_second >(x.end(), transform_second()); }
-  static boost::transform_iterator< transform_tuple, const_iterator > transform_tuple_begin( Map const& x) { return boost::make_transform_iterator< transform_tuple >(x.begin(), transform_tuple()); }
-  static boost::transform_iterator< transform_tuple, const_iterator > transform_tuple_end( Map const& x) { return boost::make_transform_iterator< transform_tuple >(x.end(), transform_tuple()); }
+  struct iteritems {
+    typedef tuple result_type;
+
+    result_type operator()(value_type const& x) const 
+    { 
+      return make_tuple(x.first,x.second); 
+    }
+  };
+
 
   //TODO: the stock map_indexing_suite provides an __iter__ that returns the entire std::pair for each entry.
   // there should be a way to automatically upack arguments from this pair, e.g. key,value = pair
@@ -129,6 +138,33 @@ class i3_map_extras : public def_visitor<i3_map_extras<Map> >
   // update()
   // setdefault() 
 	
+  template <typename Transform>
+  struct make_transform_impl 
+  {
+    typedef boost::transform_iterator<Transform, const_iterator> iterator;
+
+    static iterator begin(const Map& m)
+    { 
+      return boost::make_transform_iterator(m.begin(), Transform()); 
+    }
+    static iterator end(const Map& m)
+    { 
+      return boost::make_transform_iterator(m.end(), Transform()); 
+    }
+    
+    static boost::python::object range()
+    {
+      return boost::python::range(&begin, &end);
+    }
+  };
+
+  template <typename Transform>
+  boost::python::object 
+  make_transform() const
+  {
+    return make_transform_impl<Transform>::range();
+  }
+
   template <typename Class>
   void visit(Class& cl) const
   {	
@@ -137,9 +173,16 @@ class i3_map_extras : public def_visitor<i3_map_extras<Map> >
       .def("has_key", &map_indexing_suite<Map >::contains, "D.has_key(k) -> True if D has a key k, else False\n") // don't re-invent the wheel
       .def("values", &values, "D.values() -> list of D's values\n")
       .def("items", &items, "D.items() -> list of D's (key, value) pairs, as 2-tuples\n")
-      .def("iteritems", boost::python::range(&transform_tuple_begin,&transform_tuple_end),"D.iteritems() -> an iterator over the (key, value) items of D\n")
-      .def("iterkeys", boost::python::range(&transform_first_begin,&transform_first_end), "D.iterkeys() -> an iterator over the keys of D\n")
-      .def("itervalues", boost::python::range(&transform_second_begin,&transform_second_end), "D.itervalues() -> an iterator over the values of D\n")
+      .def("iteritems", 
+	   make_transform<iteritems>(),
+	   "D.iteritems() -> an iterator over the (key, value) items of D\n")
+      .def("iterkeys", 
+	   make_transform<iterkeys>(),
+	   "D.iterkeys() -> an iterator over the keys of D\n")
+      .def("itervalues", 
+	   make_transform<itervalues>(),
+	   //	   boost::python::range(&transform_second_begin,&transform_second_end), 
+	   "D.itervalues() -> an iterator over the values of D\n")
       ;
 
   }
