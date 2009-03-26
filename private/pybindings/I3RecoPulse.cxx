@@ -25,6 +25,34 @@
 
 using namespace boost::python;
 
+// more pythonic interfaces for the std::map
+template <typename MapType>
+static list map_keys(MapType const& x)
+{
+        list t;
+        for(typename MapType::const_iterator it = x.begin(); it != x.end(); it++)
+          t.append(it->first);
+        return t;
+}
+
+template <typename MapType>
+static list map_values(MapType const& x)
+{
+        list t;
+        for(typename MapType::const_iterator it = x.begin(); it != x.end(); it++)
+          t.append(it->second);
+        return t;
+}
+
+template <typename MapType, typename KeyType>
+static bool map_has_key(const MapType &x, const KeyType &k)
+{
+        bool found=false;
+	typename MapType::const_iterator it = x.find(k);
+	if (it != x.end()) found = true;
+	return found;
+}
+
 void register_I3RecoPulse()
 {
   class_<I3RecoPulse, boost::shared_ptr<I3RecoPulse> >("I3RecoPulse")
@@ -41,6 +69,9 @@ void register_I3RecoPulse()
 
   class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
     .def(map_indexing_suite<I3RecoPulseSeriesMap>())
+    .def("keys",&map_keys<I3RecoPulseSeriesMap>)
+    .def("values",&map_values<I3RecoPulseSeriesMap>)
+    .def("has_key",&map_has_key<I3RecoPulseSeriesMap, OMKey>)
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
 

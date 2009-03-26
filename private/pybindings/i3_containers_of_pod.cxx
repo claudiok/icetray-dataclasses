@@ -23,6 +23,7 @@
 #include <dataclasses/I3Map.h>
 #include <vector>
 #include <string>
+#include <boost/iterator/transform_iterator.hpp>
 
 using namespace boost::python;
 using std::vector;
@@ -58,6 +59,94 @@ register_std_pair(const char* s)
   def("make_pair", &std::make_pair<T, U>);
 }
 
+// more pythonic interfaces for std::map
+template <typename Map>
+class i3_map_extras : public def_visitor<i3_map_extras<Map> >
+{
+  typedef typename Map::value_type value_type;
+  typedef typename Map::key_type key_type;
+  typedef typename Map::mapped_type data_type;
+  typedef typename Map::const_iterator const_iterator;
+
+// return a list of keys
+  static list keys(Map const&  x)
+  {
+    list t;
+    for(typename Map::const_iterator it = x.begin(); it != x.end(); it++)
+      t.append(it->first);
+    return t;
+  }
+// return a list of values
+  static list values(Map const&  x)
+  {
+    list t;
+    for(typename Map::const_iterator it = x.begin(); it != x.end(); it++)
+      t.append(it->second);
+    return t;
+  }
+// return a list of (key,value) tuples
+  static list items(Map const&  x)
+  {
+    list t;
+    for(typename Map::const_iterator it = x.begin(); it != x.end(); it++)
+      t.append(make_tuple(it->first, it->second));
+    return t;
+  }
+// set up operators to extract the key, value, or a tuple from a std::pair 
+  struct transform_first {
+	typedef key_type result_type;
+	result_type operator()(value_type const& x) const { return x.first; }
+	};
+	
+  struct transform_second {
+	typedef data_type result_type;
+	result_type operator()(value_type const& x) const { return x.second; }
+	};
+	
+  struct transform_tuple {
+	typedef tuple result_type;
+	result_type operator()(value_type const& x) const { return make_tuple(x.first,x.second); }
+	};
+// set up iterators to that return the key, value or tuple from a std::pair	
+  static boost::transform_iterator< transform_first, const_iterator > transform_first_begin( Map const& x) { return boost::make_transform_iterator< transform_first >(x.begin(), transform_first()); }
+  static boost::transform_iterator< transform_first, const_iterator > transform_first_end( Map const& x) { return boost::make_transform_iterator< transform_first >(x.end(), transform_first()); }
+  static boost::transform_iterator< transform_second, const_iterator > transform_second_begin( Map const& x) { return boost::make_transform_iterator< transform_second >(x.begin(), transform_second()); }
+  static boost::transform_iterator< transform_second, const_iterator > transform_second_end( Map const& x) { return boost::make_transform_iterator< transform_second >(x.end(), transform_second()); }
+  static boost::transform_iterator< transform_tuple, const_iterator > transform_tuple_begin( Map const& x) { return boost::make_transform_iterator< transform_tuple >(x.begin(), transform_tuple()); }
+  static boost::transform_iterator< transform_tuple, const_iterator > transform_tuple_end( Map const& x) { return boost::make_transform_iterator< transform_tuple >(x.end(), transform_tuple()); }
+
+  //TODO: the stock map_indexing_suite provides an __iter__ that returns the entire std::pair for each entry.
+  // there should be a way to automatically upack arguments from this pair, e.g. key,value = pair
+  // => it needs to be iterable. how to handle heterogenous types on the C++ side?
+  // moreover: how to get a pointer to the class_<value_type> object once it's been declared?
+
+  //TODO: implement the following methods: (which are actually useful?)
+  // popitem()
+  // clear()
+  // copy()
+  // update()
+  // setdefault() 
+	
+  template <typename Class>
+  void visit(Class& cl) const
+  {	
+    cl
+      .def("keys", &keys, "D.keys() -> list of D's keys\n")
+      .def("has_key", &map_indexing_suite<Map >::contains, "D.has_key(k) -> True if D has a key k, else False\n") // don't re-invent the wheel
+      .def("values", &values, "D.values() -> list of D's values\n")
+      .def("items", &items, "D.items() -> list of D's (key, value) pairs, as 2-tuples\n")
+      .def("iteritems", boost::python::range(&transform_tuple_begin,&transform_tuple_end),"D.iteritems() -> an iterator over the (key, value) items of D\n")
+      .def("iterkeys", boost::python::range(&transform_first_begin,&transform_first_end), "D.iterkeys() -> an iterator over the keys of D\n")
+      .def("itervalues", boost::python::range(&transform_second_begin,&transform_second_end), "D.itervalues() -> an iterator over the values of D\n")
+      ;
+
+  }
+
+  friend class boost::python::def_visitor_access;
+
+};
+
+
 void register_i3_containers_of_pod()
 {
   // 'char' has a special method that converts to string
@@ -70,75 +159,84 @@ void register_i3_containers_of_pod()
   //
   // others are consistent with each other
   //
+
   register_i3vector_of<std::string>("String");
-
+  
   register_i3vector_of<bool>("Bool");
-
+  
   register_i3vector_of<int16_t>("Short");
   register_i3vector_of<uint16_t>("UShort");
-
+  
   register_i3vector_of<int32_t>("Int");
   register_i3vector_of<uint32_t>("UInt");
-
+  
   register_i3vector_of<I3VectorInt64::value_type>("Int64");
   register_i3vector_of<I3VectorUInt64::value_type>("UInt64");
-
+  
   register_i3vector_of<float>("Float");
   register_i3vector_of<double>("Double");
-
+  
   register_i3vector_of<std::pair<double, double> >("DoubleDouble");
-
+  
   register_std_pair<double, double>("pair_double_double");
 
   class_<I3MapStringDouble, bases<I3FrameObject>, I3MapStringDoublePtr>("I3MapStringDouble")
     .def(map_indexing_suite<I3MapStringDouble >())
+    .def(i3_map_extras<I3MapStringDouble >())
     ;
   register_pointer_conversions<I3MapStringDouble>();
 
-
-
   class_<I3MapStringInt, bases<I3FrameObject>, I3MapStringIntPtr>("I3MapStringInt")
     .def(map_indexing_suite<I3MapStringInt >())
+    .def(i3_map_extras<I3MapStringInt >())
     ;
   register_pointer_conversions<I3MapStringInt>();
-
+  
   class_<I3MapStringBool, bases<I3FrameObject>, I3MapStringBoolPtr>("I3MapStringBool")
     .def(map_indexing_suite<I3MapStringBool >())
+    .def(i3_map_extras<I3MapStringBool >())
     ;
   register_pointer_conversions<I3MapStringBool>();
-
+  
   class_<I3MapStringStringDouble, bases<I3FrameObject>, I3MapStringStringDoublePtr>("I3MapStringStringDouble")
     .def(map_indexing_suite<I3MapStringStringDouble >())
+    .def(i3_map_extras<I3MapStringStringDouble >())
     ;
   register_pointer_conversions<I3MapStringStringDouble>();
-
+  
   class_<I3MapUnsignedUnsigned, bases<I3FrameObject>, I3MapUnsignedUnsignedPtr>("I3MapUnsignedUnsigned")
     .def(map_indexing_suite<I3MapUnsignedUnsigned >())
+    .def(i3_map_extras<I3MapUnsignedUnsigned >())
     ;
   register_pointer_conversions<I3MapUnsignedUnsigned>();
-
+  
   class_<I3MapUShortUShort, bases<I3FrameObject>, I3MapUShortUShortPtr>("I3MapUShortUShort")
     .def(map_indexing_suite<I3MapUShortUShort >())
+    .def(i3_map_extras<I3MapUShortUShort >())
     ;
   register_pointer_conversions<I3MapUShortUShort>();
-
+  
   class_<I3MapIntVectorInt, bases<I3FrameObject>, I3MapIntVectorIntPtr>("I3MapIntVectorInt")
     .def(map_indexing_suite<I3MapIntVectorInt >())
+    .def(i3_map_extras<I3MapIntVectorInt >())
     ;
   register_pointer_conversions<I3MapIntVectorInt>();
-
+  
   class_<I3MapKeyVectorDouble, bases<I3FrameObject>, I3MapKeyVectorDoublePtr>("I3MapKeyVectorDouble")
     .def(map_indexing_suite<I3MapKeyVectorDouble >())
+    .def(i3_map_extras<I3MapKeyVectorDouble >())
     ;
   register_pointer_conversions<I3MapKeyVectorDouble>();
-
+  
   class_<I3MapKeyVectorInt, bases<I3FrameObject>, I3MapKeyVectorIntPtr>("I3MapKeyVectorInt")
     .def(map_indexing_suite<I3MapKeyVectorInt >())
+    .def(i3_map_extras<I3MapKeyVectorInt >())
     ;
   register_pointer_conversions<I3MapKeyVectorInt>();
-
+  
   class_<I3MapKeyDouble, bases<I3FrameObject>, I3MapKeyDoublePtr>("I3MapKeyDouble")
     .def(map_indexing_suite<I3MapKeyDouble >())
+    .def(i3_map_extras<I3MapKeyDouble >())
     ;
   register_pointer_conversions<I3MapKeyDouble>();
 
