@@ -26,6 +26,8 @@
 #include <boost/iterator/transform_iterator.hpp>
 
 using namespace boost::python;
+namespace bp = boost::python;
+
 using std::vector;
 
 static std::string 
@@ -69,25 +71,25 @@ class i3_map_extras : public def_visitor<i3_map_extras<Map> >
   typedef typename Map::const_iterator const_iterator;
 
 // return a list of keys
-  static list keys(Map const&  x)
+  static bp::list keys(Map const&  x)
   {
-    list t;
+    bp::list t;
     for(typename Map::const_iterator it = x.begin(); it != x.end(); it++)
       t.append(it->first);
     return t;
   }
 // return a list of values
-  static list values(Map const&  x)
+  static bp::list values(Map const&  x)
   {
-    list t;
+    bp::list t;
     for(typename Map::const_iterator it = x.begin(); it != x.end(); it++)
       t.append(it->second);
     return t;
   }
 // return a list of (key,value) tuples
-  static list items(Map const&  x)
+  static bp::list items(Map const&  x)
   {
-    list t;
+    bp::list t;
     for(typename Map::const_iterator it = x.begin(); it != x.end(); it++)
       t.append(make_tuple(it->first, it->second));
     return t;

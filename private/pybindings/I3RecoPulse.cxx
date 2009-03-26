@@ -27,18 +27,18 @@ using namespace boost::python;
 
 // more pythonic interfaces for the std::map
 template <typename MapType>
-static list map_keys(MapType const& x)
+static boost::python::list map_keys(MapType const& x)
 {
-        list t;
+        boost::python::list t;
         for(typename MapType::const_iterator it = x.begin(); it != x.end(); it++)
           t.append(it->first);
         return t;
 }
 
 template <typename MapType>
-static list map_values(MapType const& x)
+static boost::python::list map_values(MapType const& x)
 {
-        list t;
+        boost::python::list t;
         for(typename MapType::const_iterator it = x.begin(); it != x.end(); it++)
           t.append(it->second);
         return t;
