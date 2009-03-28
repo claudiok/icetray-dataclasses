@@ -71,14 +71,7 @@ namespace boost { namespace python {
         typedef typename Container::difference_type difference_type;
         typedef typename Container::const_iterator const_iterator;
         
- // TODO: implement the following methods: (which are actually useful?)
- // popitem()
- // clear()
- // copy()
- // update()
- // setdefault() 
 
-		
         // __getitem__ for std::pair
         static object pair_getitem(value_type const& x, int i) {
             if (i==0 || i==-2) return object(x.first);
@@ -117,6 +110,97 @@ namespace boost { namespace python {
           return t;
         }
 
+        // return a shallow copy of the map
+        // FIXME: is this actually a shallow copy, or did i duplicate the pairs?
+        static Container copy(Container const& x)
+        {
+            Container newmap = Container();
+            for(const_iterator it = x.begin();it != x.end();it++) newmap.insert(*it);
+            return newmap;
+        }
+        
+        // get with default value
+        static object dict_get(Container const& x, index_type const& k, object const& default_val = object())
+        {
+            const_iterator it = x.find(k);
+            if (it != x.end()) return object(it->second);
+            else return default_val;
+        }
+        // preserve default value info
+        BOOST_PYTHON_FUNCTION_OVERLOADS(dict_get_overloads, dict_get, 2, 3);
+        
+        // pop map[key], or throw an error if it doesn't exist
+        static object dict_pop(Container & x, index_type const& k)
+        {
+            const_iterator it = x.find(k);
+            object result;
+            if (it != x.end()) {
+                result = object(it->second);
+                x.erase(it->first);
+                return result;
+            }
+            else {
+                PyErr_SetString(PyExc_KeyError,"Key not found.");
+                throw_error_already_set();
+                return object(); // None
+            };
+        }
+        
+        // pop map[key], or return default_val if it doesn't exist
+        static object dict_pop_default(Container & x, index_type const& k, object const& default_val)
+        {
+            const_iterator it = x.find(k);
+            object result;
+            if (it != x.end()) {
+                result = object(it->second);
+                x.erase(it->first);
+                return result;
+            }
+            else return default_val;
+        }
+        
+        // pop a tuple, or throw an error if empty
+        static object dict_pop_item(Container & x)
+        {
+            const_iterator it = x.begin();
+            object result;
+            if (it != x.end()) {
+                result = make_tuple(it->first,it->second);
+                x.erase(it->first);
+                return result;
+            }
+            else {
+                PyErr_SetString(PyExc_KeyError,"No more items to pop");
+                throw_error_already_set();
+                return object(); // None
+            };
+        }
+        
+        // create a new map with given keys, initialialized to value
+        static object dict_fromkeys(object const& keys, object const& value)
+        {
+            object newmap = object(Container());
+            int numkeys = extract<int>(keys.attr("__len__")());
+            for(int i=0;i<numkeys;i++) { // 'cuz python is more fun in C++...
+                newmap.attr("__setitem__")
+                  (keys.attr("__getitem__")(i),value);
+            }
+            return newmap;
+        }
+        
+        // copy keys and values from dictlike object (anything with keys())
+        static void dict_update(object & x, object const& dictlike)
+        {
+            object key;
+            object keys = dictlike.attr("keys")();
+            int numkeys = extract<int>(keys.attr("__len__")());
+            for(int i=0;i<numkeys;i++) {
+                key = keys.attr("__getitem__")(i);
+                x.attr("__setitem__")(key,dictlike.attr("__getitem__")(key));
+            }
+            
+        }
+        
         // set up operators to extract the key, value, or a tuple from a std::pair 
         struct iterkeys
         {
@@ -265,9 +349,11 @@ namespace boost { namespace python {
         {
             //  Wrap the map's element (value_type)
             std::string elem_name = "std_map_indexing_suite_";
+			std::string cl_name;
             object class_name(cl.attr("__name__"));
             extract<std::string> class_name_extractor(class_name);
-            elem_name += class_name_extractor();
+			cl_name = class_name_extractor();
+            elem_name += cl_name;
             elem_name += "_entry";
 
             typedef typename mpl::if_<
@@ -290,11 +376,26 @@ namespace boost { namespace python {
                    "K.second() -> the second item in this pair.\n")
             ;
             // add convenience methods to the map
+
             cl
                 .def("keys", &keys, "D.keys() -> list of D's keys\n")
                 .def("has_key", &contains, "D.has_key(k) -> True if D has a key k, else False\n") // don't re-invent the wheel
                 .def("values", &values, "D.values() -> list of D's values\n")
                 .def("items", &items, "D.items() -> list of D's (key, value) pairs, as 2-tuples\n")
+                .def("clear", &Container::clear, "D.clear() -> None.  Remove all items from D.\n")
+                .def("copy", &copy, "D.copy() -> a shallow copy of D\n")
+                .def("get", dict_get, dict_get_overloads(args("default_val"),
+                 "D.get(k[,d]) -> D[k] if k in D, else d.  d defaults to None.\n"))
+                .def("pop", &dict_pop )
+                .def("pop", &dict_pop_default, 
+                 "D.pop(k[,d]) -> v, remove specified key and return the corresponding value\nIf key is not found, d is returned if given, otherwise KeyError is raised\n")
+                .def("popitem", &dict_pop_item, 
+                 "D.popitem() -> (k, v), remove and return some (key, value) pair as a\n2-tuple; but raise KeyError if D is empty\n")
+                .def("fromkeys", &dict_fromkeys, 
+                 (cl_name+".fromkeys(S,v) -> New "+cl_name+" with keys from S and values equal to v.\n").c_str())
+                .staticmethod("fromkeys")
+                .def("update", &dict_update, 
+                 "D.update(E) -> None.  Update D from E: for k in E: D[k] = E[k]\n")
                 .def("iteritems", 
                  make_transform<iteritems>(),
                  "D.iteritems() -> an iterator over the (key, value) items of D\n")
