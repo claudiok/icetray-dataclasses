@@ -187,6 +187,14 @@ namespace boost { namespace python {
             }
             return newmap;
         }
+
+        // create a new map with given keys, initialialized to value
+        //FIXME: how to hook this into a constructor for the wrapped class?
+        static void dict_init_fromobject(object & newmap, object const& iter_or_map)
+        {
+            object dict = bp::dict(iter_or_map); // we get this for free
+            newmap.attr("update")(dict);         // this too
+        }
         
         // copy keys and values from dictlike object (anything with keys())
         static void dict_update(object & x, object const& dictlike)
@@ -349,10 +357,10 @@ namespace boost { namespace python {
         {
             //  Wrap the map's element (value_type)
             std::string elem_name = "std_map_indexing_suite_";
-			std::string cl_name;
+            std::string cl_name;
             object class_name(cl.attr("__name__"));
             extract<std::string> class_name_extractor(class_name);
-			cl_name = class_name_extractor();
+            cl_name = class_name_extractor();
             elem_name += cl_name;
             elem_name += "_entry";
 
@@ -378,6 +386,9 @@ namespace boost { namespace python {
             // add convenience methods to the map
 
             cl
+                // FIXME: how to hook this function into the constructor for Container?
+                // .def("__init__", &dict_init_fromobject)
+                //.def(init<bp::object>())
                 .def("keys", &keys, "D.keys() -> list of D's keys\n")
                 .def("has_key", &contains, "D.has_key(k) -> True if D has a key k, else False\n") // don't re-invent the wheel
                 .def("values", &values, "D.values() -> list of D's values\n")
@@ -406,7 +417,7 @@ namespace boost { namespace python {
                  make_transform<itervalues>(),
                  "D.itervalues() -> an iterator over the values of D\n")
               ;
-		      
+              
         }
 
     };

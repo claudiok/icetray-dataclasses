@@ -22,8 +22,9 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 	# update (kwargs as keys can only work with string maps)
 	def setUp(self):
 		from icecube import icetray,dataclasses
+		self.mapClass = dataclasses.TestMapStringString
 		self.dict = {'foo':'bar', 'bom':'baz', 'steam':'locomotive'} 
-		self.map = dataclasses.TestMapStringString()
+		self.map = self.mapClass()
 		for k in self.dict.keys(): self.map[k] = self.dict[k]
 	
 	def test___class__(self):
@@ -72,7 +73,14 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		"""Not strictly speaking equal to each other. Skip."""
 		pass
 	def test___init__(self):
-		"""Skip."""
+		"""map accepts the same constructors as dict"""
+		newMap = self.mapClass()
+		self.assertEquals(newMap.items(),[])
+		newMap = self.mapClass(self.dict)
+		self.assertEquals(sorted(newMap.items()),self.dict.items())
+		newMap = self.mapClass(self.dict.items())
+		self.assertEquals(sorted(newMap.items()),self.dict.items())
+		
 		pass
 	def test___iter__(self):
 		"""dict.__iter__() is equivalent to map.__iter__()"""
