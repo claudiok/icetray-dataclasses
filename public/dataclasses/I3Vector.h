@@ -52,7 +52,7 @@ typedef I3Vector<unsigned short> I3VectorUShort;
 typedef I3Vector<int> I3VectorInt;
 typedef I3Vector<unsigned int> I3VectorUInt;
 
-#if __WORDSIZE == 64
+#if __WORDSIZE == 64 || defined(_LP64)
 typedef I3Vector<long> I3VectorInt64;
 typedef I3Vector<unsigned long> I3VectorUInt64;
 #else
