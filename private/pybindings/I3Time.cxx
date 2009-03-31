@@ -22,11 +22,19 @@
 #include <vector>
 
 #include <dataclasses/I3Time.h>
+#include <datetime.h>
 
 using namespace boost::python;
 
 string dump(I3Time t){
-  return t.GetUTCString();
+  double ns=t.GetModJulianNanoSec();
+  stringstream s;
+  s << t.GetUTCString("%Y-%m-%d %H:%M:%S.");
+  s << setw(3) << setfill('0') << int(ns/1e6) << ',';
+  s << setw(3) << setfill('0') << int(ns/1e3)%1000 << ',';
+  s << setw(3) << setfill('0') << int(ns)%1000 << ',';
+  s << int(ns*10)%10 << " UTC";
+  return s.str();
 }
 
 string repr(I3Time t){
@@ -35,9 +43,54 @@ string repr(I3Time t){
   return out.str();
 }
 
+PyObject* GetDateTime(I3Time t){
+  return PyDateTime_FromDateAndTime(t.GetUTCYear(), 
+				    t.GetUTCMonth(), 
+				    t.GetUTCDayOfMonth(),
+				    t.GetModJulianSec()/3600,
+				    t.GetModJulianSec()%3600/60,
+				    t.GetModJulianSec()%60,
+				    int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
+				    );
+}
+
+I3Time GetI3Time(PyObject* datetime)
+{
+  I3Time t;
+
+  //datetime is a subclass of date so check for that before date
+  if (PyDateTime_Check(datetime))
+    {
+      t.SetUTCCalDate(PyDateTime_GET_YEAR(datetime),
+		      PyDateTime_GET_MONTH(datetime),
+		      PyDateTime_GET_DAY(datetime),
+		      PyDateTime_DATE_GET_HOUR(datetime),
+		      PyDateTime_DATE_GET_MINUTE(datetime),
+		      PyDateTime_DATE_GET_SECOND(datetime),
+		      PyDateTime_DATE_GET_MICROSECOND(datetime)*1e3
+		      );
+    }
+  else if (PyDate_Check(datetime))
+    {
+      t.SetUTCCalDate(PyDateTime_GET_YEAR(datetime),
+		      PyDateTime_GET_MONTH(datetime),
+		      PyDateTime_GET_DAY(datetime),
+		      0,0,0,0);
+    }
+  else
+    {
+      PyErr_SetString(PyExc_TypeError, "Argument for GetI3Time must be of type datetime.datetime or datetime.date");
+      throw_error_already_set();
+    }
+  return t;
+}
+
 
 void register_I3Time()
 {
+  PyDateTime_IMPORT;
+
+  def("GetI3Time",&GetI3Time);
 
   scope i3time_scope = class_<I3Time, bases<I3FrameObject>, boost::shared_ptr<I3Time> >("I3Time")
     .def(init<int32_t,int64_t>())
@@ -48,13 +101,13 @@ void register_I3Time()
     .def("SetUTCCalDate",&I3Time::SetUTCCalDate)
     .def("GetUTCYear", &I3Time::GetUTCYear)
     .def("GetUTCMonth", &I3Time::GetUTCMonth)
-    .def("GetUTCMonth", &I3Time::GetUTCMonth)
     .def("GetUTCDaqTime", &I3Time::GetUTCDaqTime)
     .def("GetUTCString", &I3Time::GetUTCString)
     .def("GetUTCString",&dump)
     .def("GetUnixTime", &I3Time::GetUnixTime)
     .def("SetUnixTime", &I3Time::SetUnixTime)
     .def("SetDaqTime", &I3Time::SetDaqTime)
+    .def("GetDateTime", &GetDateTime)
     .def("__str__",&dump)
     .def("__repr__",&repr)
     .def(self-self)
