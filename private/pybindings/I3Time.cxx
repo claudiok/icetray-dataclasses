@@ -33,7 +33,7 @@ string dump(I3Time t){
   s << setw(3) << setfill('0') << int(ns/1e6) << ',';
   s << setw(3) << setfill('0') << int(ns/1e3)%1000 << ',';
   s << setw(3) << setfill('0') << int(ns)%1000 << ',';
-  s << int(ns*10)%10 << " UTC";
+  s << uint64_t(ns*10)%10 << " UTC";
   return s.str();
 }
 
@@ -43,20 +43,25 @@ string repr(I3Time t){
   return out.str();
 }
 
-PyObject* GetDateTime(I3Time t){
-  return PyDateTime_FromDateAndTime(t.GetUTCYear(), 
-				    t.GetUTCMonth(), 
-				    t.GetUTCDayOfMonth(),
-				    t.GetModJulianSec()/3600,
-				    t.GetModJulianSec()%3600/60,
-				    t.GetModJulianSec()%60,
-				    int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
-				    );
+boost::python::object GetDateTime(const I3Time& t)
+{
+  PyObject* obj = PyDateTime_FromDateAndTime(t.GetUTCYear(), 
+					     t.GetUTCMonth(), 
+					     t.GetUTCDayOfMonth(),
+					     t.GetModJulianSec()/3600,
+					     t.GetModJulianSec()%3600/60,
+					     t.GetModJulianSec()%60,
+					     int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
+					     );
+  handle<> h(obj);
+  boost::python::object o(h);
+  return o;
 }
 
-I3Time GetI3Time(PyObject* datetime)
+I3Time GetI3Time(const boost::python::object& datetime_obj)
 {
   I3Time t;
+  PyObject* datetime = datetime_obj.ptr();
 
   //datetime is a subclass of date so check for that before date
   if (PyDateTime_Check(datetime))
@@ -90,7 +95,7 @@ void register_I3Time()
 {
   PyDateTime_IMPORT;
 
-  def("GetI3Time",&GetI3Time);
+  def("make_I3Time",&GetI3Time);
 
   scope i3time_scope = class_<I3Time, bases<I3FrameObject>, boost::shared_ptr<I3Time> >("I3Time")
     .def(init<int32_t,int64_t>())
