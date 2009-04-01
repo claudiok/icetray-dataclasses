@@ -77,9 +77,9 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		newMap = self.mapClass()
 		self.assertEquals(newMap.items(),[])
 		newMap = self.mapClass(self.dict)
-		self.assertEquals(sorted(newMap.items()),self.dict.items())
+		self.assertEquals(sorted(newMap.items()),sorted(self.dict.items()))
 		newMap = self.mapClass(self.dict.items())
-		self.assertEquals(sorted(newMap.items()),self.dict.items())
+		self.assertEquals(sorted(newMap.items()),sorted(self.dict.items()))
 		
 		pass
 	def test___iter__(self):

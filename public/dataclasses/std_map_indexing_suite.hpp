@@ -187,14 +187,41 @@ namespace boost { namespace python {
             }
             return newmap;
         }
+        
+		// spice up the constructors a bit
+        template <typename PyClassT>
+        struct init_factory {
+            typedef typename PyClassT::metadata::holder Holder;
+            typedef bp::objects::instance<Holder> instance_t;
+            
+            // connect the PyObject to a wrapped C++ instance
+            // borrowed from boost/python/object/make_holder.hpp
+            static void make_holder(PyObject *p)
+            { 
+                void* memory = Holder::allocate(p, offsetof(instance_t, storage), sizeof(Holder));
 
-        // create a new map with given keys, initialialized to value
-        //FIXME: how to hook this into a constructor for the wrapped class?
-        static void dict_init_fromobject(object & newmap, object const& iter_or_map)
-        {
-            object dict = bp::dict(iter_or_map); // we get this for free
-            newmap.attr("update")(dict);         // this too
-        }
+                try {
+                    // this only works for blank () constructors
+                    (new (memory) Holder(p))->install(p);
+                }
+                catch(...) {
+                    Holder::deallocate(p, memory);
+                    throw;
+                }
+            }
+            static void from_dict(PyObject *p, bp::dict const& dict) 
+            {
+                make_holder(p);
+                object newmap = object(bp::handle<>(borrowed(p)));
+                newmap.attr("update")(dict);
+            }
+            static void from_list(PyObject *p, bp::list const& list) 
+            {
+                make_holder(p);
+                object newmap = object(bp::handle<>(borrowed(p)));
+                newmap.attr("update")(bp::dict(list));
+            }
+        }; 
         
         // copy keys and values from dictlike object (anything with keys())
         static void dict_update(object & x, object const& dictlike)
@@ -386,9 +413,13 @@ namespace boost { namespace python {
             // add convenience methods to the map
 
             cl
-                // FIXME: how to hook this function into the constructor for Container?
-                // .def("__init__", &dict_init_fromobject)
-                //.def(init<bp::object>())
+                // declare constructors in descending order of arity
+                .def("__init__", init_factory<Class>::from_list, 
+                 "Initialize with keys and values from a Python dictionary: {'key':'value'}\n")
+                .def("__init__", init_factory<Class>::from_dict,
+                 "Initialize with keys and values as tuples in a Python list: [('key','value')]\n")
+                .def(init<>()) // restore default constructor
+                
                 .def("keys", &keys, "D.keys() -> list of D's keys\n")
                 .def("has_key", &contains, "D.has_key(k) -> True if D has a key k, else False\n") // don't re-invent the wheel
                 .def("values", &values, "D.values() -> list of D's values\n")
