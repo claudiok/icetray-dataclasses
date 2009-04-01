@@ -133,16 +133,10 @@ TEST(DiscrimThresholds)
       mpeCal.intercept = -70.4468;
       calib.SetMPEDiscCalib(mpeCal);
 
-      // Values used prior to switch to raw DAC values in I3DOMStatus
-      //rawstatus.fePedestal = 2.6000976562500007e-09;
-      //rawstatus.speThreshold = 4.5249879773951117e-12;
-      //rawstatus.mpeThreshold = 1.4221390786098917e-11;
-
       rawstatus.fePedestal = 2130.;
       rawstatus.speThreshold = 620.;
       rawstatus.mpeThreshold = 560;
 
-      double domThresh = SPEPMTThreshold(rawstatus, calib);
       double speDiscThresh = SPEDiscriminatorThreshold(rawstatus, calib);
       double mpeDiscThresh = MPEDiscriminatorThreshold(rawstatus, calib);
 
@@ -152,9 +146,6 @@ TEST(DiscrimThresholds)
       ENSURE_DISTANCE(8.1*3.374080,
 		      mpeDiscThresh/I3Units::mV, 0.00001,
 		      "Failed to return proper calibrated MPE discriminator threshold");
-      ENSURE_DISTANCE(4.15551,
-		      domThresh/I3Units::mV, 0.00001,
-		      "Failed to return proper calibrated SPE dom threshold");
 
       double oldSPEDisc = OldspeThreshold(rawstatus);
       double oldMPEDisc = OldmpeThreshold(rawstatus);
@@ -164,5 +155,65 @@ TEST(DiscrimThresholds)
       ENSURE_DISTANCE(1.4221390786098917e-11/I3Units::mV,
 		      oldMPEDisc/I3Units::mV, 0.00001,
 		      "OldMPEDisc failed to return old and busted values");
+
+    }
+
+TEST(PMTDiscThresholdOldValue)
+    {
+      //This test will find nan for new PMT discrim calib.
+
+      I3DOMStatus rawstatus;
+      
+      I3DOMCalibration calib;
+
+      //Values taken from domcal file and GCD file...
+      LinearFit speCal;
+      speCal.slope = 0.0140356;
+      speCal.intercept = -7.48874;
+      calib.SetSPEDiscCalib(speCal);
+      LinearFit pmtCal;
+      pmtCal.slope = NAN;
+      pmtCal.intercept = NAN;
+      calib.SetPMTDiscCalib(pmtCal);
+
+      rawstatus.fePedestal = 2130.;
+      rawstatus.speThreshold = 620.;
+      rawstatus.mpeThreshold = 560;
+
+      double spePmtThresh = SPEPMTThreshold(rawstatus, calib);
+
+      ENSURE_DISTANCE(4.524988,
+		      spePmtThresh/I3Units::mV, 0.00001,
+		      "Failed to return proper calibrated SPE PMT discriminator threshold");
+
+    }
+
+TEST(PMTDiscThresholdNewValue)
+    {
+      //This test will find correct values for new PMT discrim calib.
+
+      I3DOMStatus rawstatus;
+      
+      I3DOMCalibration calib;
+
+      //Values taken from domcal file and GCD file...
+      LinearFit speCal;
+      speCal.slope = 0.0140356;
+      speCal.intercept = -7.48874;
+      calib.SetSPEDiscCalib(speCal);
+      LinearFit pmtCal;
+      pmtCal.slope = 0.0166609;
+      pmtCal.intercept = -8.78959;
+      calib.SetPMTDiscCalib(pmtCal);
+
+      rawstatus.fePedestal = 2130.;
+      rawstatus.speThreshold = 620.;
+      rawstatus.mpeThreshold = 560;
+
+      double spePmtThresh = SPEPMTThreshold(rawstatus, calib);
+
+      ENSURE_DISTANCE(1.540168,
+		      spePmtThresh/I3Units::mV, 0.00001,
+		      "Failed to return proper calibrated SPE PMT discriminator threshold");
 
     }
