@@ -129,11 +129,6 @@ double SPEDiscriminatorThreshold(const I3DOMStatus& status,
 
 {
   const LinearFit speCalibFit = calib.GetSPEDiscCalib();
-  // This is outdated.  I3DOMStatus has raw dac values now
-  // I3Db module converts this speThresh to a voltage from raw DAC value.
-  //  but we need the raw DAC value, invert the voodoo.
-  //double fePedestal = status.fePedestal/I3Units::volt;
-  //double speDAC = (1024./5.) * ( speThresh*(9.6*(1+2200./249.))  + fePedestal );
   double speDAC = status.speThreshold;
 
   //  Now use the linear relation between DAC and SPE Discriminator threshold:
@@ -151,11 +146,6 @@ double MPEDiscriminatorThreshold(const I3DOMStatus& status,
 
 {
   const LinearFit mpeCalibFit = calib.GetMPEDiscCalib();
-  // This is outdated.  I3DOMStatus has raw dac values now
-  // I3Db module converts this mpeThresh to a voltage from raw DAC value.
-  //  but we need the raw DAC value, invert the voodoo.
-  // double fePedestal = status.fePedestal/I3Units::volt;
-  //double mpeDAC = (1024./5.) * ( (mpeThresh/10.)*(9.6*(1+2200./249.))  + fePedestal );
   double mpeDAC = status.mpeThreshold;
 
   //  Now use the linear relation between DAC and MPE Discriminator threshold:
@@ -181,10 +171,43 @@ double OldmpeThreshold(const I3DOMStatus& status)
 {
   double fePedest = (5.0 * (static_cast<double>(status.fePedestal))/4096.);
   double mpeThresher = 10.*((5.*status.mpeThreshold/1024.- fePedest)/
-			(9.6*(1+2200./249.))*I3Units::volt);
+			    (9.6*(1+2200./249.))*I3Units::volt);
   
   return mpeThresher;
 }
+
+double SPEPMTThreshold(const I3DOMStatus& status,
+		    const I3DOMCalibration& calib)
+{
+
+  //
+  // This function will attempt to always return the "best" SPE PMT Treshold.
+  //   1.  Will check the domcal record, and see if slope/intercept of GetPMTDiscCalib()
+  //   2a.  If these values are non-NAN, then use new calibration calculation relation 
+  //       with these values.
+  //   2b. If these values are NAN, will return to the safety of the OldspeThreshold()
+  //        calculation.
+  //
+  const LinearFit pmtCalibFit = calib.GetPMTDiscCalib();
+  const double speDAC = status.speThreshold;
+  double speThresher;
+
+  if (isnan(pmtCalibFit.slope) || isnan(pmtCalibFit.intercept))
+    {  // Use OldseThreshold
+      speThresher = OldspeThreshold(status)/I3Units::mV;
+      log_trace("PMTDiscCalib was nan, using old method, found %f",
+		speThresher);
+    }
+  else
+    {  //New calc
+      speThresher = pmtCalibFit.slope * speDAC + pmtCalibFit.intercept;
+      
+      log_trace("PMTDiscCalib found, using best method, speDAC: %f   disc thresh: %f mV",
+		speDAC,speThresher);
+    }
+  
+  return speThresher*I3Units::mV;  
+} 
 
 vector<int> DOMCalVersion(const I3DOMCalibration& calib)
 {

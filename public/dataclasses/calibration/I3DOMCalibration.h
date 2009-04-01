@@ -22,7 +22,7 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 6;
+static const unsigned i3domcalibration_version_ = 7;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
@@ -342,6 +342,15 @@ class I3DOMCalibration {
 
   LinearFit GetMPEDiscCalib() const { return mpeDiscrimCalib_ ; }  
 
+  /**
+   *  Get/Set functions for pmtDiscrimCalib
+   */
+  void SetPMTDiscCalib(LinearFit pmtDiscrimCalib) 
+  {
+    pmtDiscrimCalib_ = pmtDiscrimCalib;
+  }
+
+  LinearFit GetPMTDiscCalib() const { return pmtDiscrimCalib_ ; }  
 
 
   template <class Archive>
@@ -458,6 +467,12 @@ class I3DOMCalibration {
    *   DAC(8) value and charge level in pC.
    */
   LinearFit mpeDiscrimCalib_;
+
+  /**
+   * A refined SPE discriminator calibration generated using actual PMT pulses.  
+   *   A linear fit between DAC(8) value and charge level in pC.
+   */
+  LinearFit pmtDiscrimCalib_;
 
 
 

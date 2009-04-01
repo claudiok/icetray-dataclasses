@@ -54,6 +54,11 @@ double TransitTime (const I3DOMStatus&, const I3DOMCalibration&);
 double SPEDiscriminatorThreshold (const I3DOMStatus&, const I3DOMCalibration&);
 
 /**
+ *  Updated approximation function for SPE DOM threshold from D.Chirkin
+ */
+double SPEPMTThreshold (const I3DOMStatus&, const I3DOMCalibration&);
+
+/**
  * Get the calibrated MPE Discrimiator threshold (pC)
  */
 double MPEDiscriminatorThreshold (const I3DOMStatus&, const I3DOMCalibration&);
