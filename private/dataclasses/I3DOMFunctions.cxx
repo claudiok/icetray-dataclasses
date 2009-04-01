@@ -194,19 +194,32 @@ double SPEPMTThreshold(const I3DOMStatus& status,
 
   if (isnan(pmtCalibFit.slope) || isnan(pmtCalibFit.intercept))
     {  // Use OldseThreshold
-      speThresher = OldspeThreshold(status)/I3Units::mV;
+      //Value returned is already stored with proper units.
+      speThresher = OldspeThreshold(status);
       log_trace("PMTDiscCalib was nan, using old method, found %f",
 		speThresher);
     }
   else
     {  //New calc
-      speThresher = pmtCalibFit.slope * speDAC + pmtCalibFit.intercept;
-      
+      // slope of threshold vs DAC setting is given by constant factor (5/1024)*(9.6*(1+2200./249.))
+      //     (this is the same as in OldspeThreshold())
+      // but we use pmtCalibFit to tell us the DAC setting (dacOffset) which gives threshold=0
+      //     (pmtCalibFit constants are measured in terms of charge not volts, but
+      //      zero charge equals zero volts so dacOffset is still valid)
+      //  Function returns in I3Units::Volts
+
+      double dacOffset =  - pmtCalibFit.intercept / pmtCalibFit.slope ;
+      speThresher =(5.*(speDAC-dacOffset)/1024.)/
+	           (9.6*(1+2200./249.))*I3Units::V;
+
       log_trace("PMTDiscCalib found, using best method, speDAC: %f   disc thresh: %f mV",
 		speDAC,speThresher);
+
+      //      speThresher = pmtCalibFit.slope * speDAC + pmtCalibFit.intercept;
+      
     }
   
-  return speThresher*I3Units::mV;  
+  return speThresher;  
 } 
 
 vector<int> DOMCalVersion(const I3DOMCalibration& calib)
