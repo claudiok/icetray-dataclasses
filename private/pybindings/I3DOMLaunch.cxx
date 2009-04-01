@@ -36,10 +36,23 @@ void register_I3DOMLaunch()
       .def("GetLCBit", &I3DOMLaunch::GetLCBit)
       .def("GetTriggerType", &I3DOMLaunch::GetTriggerType)
       .def("GetTriggerMode", &I3DOMLaunch::GetTriggerMode)
+      .def("GetWhichATWD", &I3DOMLaunch::GetWhichATWD)
+      .def("GetIsPedestalSub", &I3DOMLaunch::GetIsPedestalSub)
+      .def("GetChargeStampHighestSample", &I3DOMLaunch::GetChargeStampHighestSample)
       .def("GetRawFADC", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
-	 return_internal_reference<1>())
+	   return_internal_reference<1>())
       .def("GetRawATWD", (I3Vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD,
-	 return_internal_reference<1>())
+	   return_internal_reference<1>())
+      .def("GetRawChargeStamp", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
+	   return_internal_reference<1>())
+      .def("SetStartTime",&I3DOMLaunch::SetStartTime)
+      .def("SetTriggerType", &I3DOMLaunch::SetTriggerType)
+      .def("SetTriggerMode", &I3DOMLaunch::SetTriggerMode)
+      .def("SetWhichATWD", &I3DOMLaunch::SetWhichATWD)
+      .def("SetLCBit", &I3DOMLaunch::SetLCBit)
+      .def("SetIsPedestalSub", &I3DOMLaunch::SetIsPedestalSub)
+      .def("SetChargeStampHighestSample", &I3DOMLaunch::SetChargeStampHighestSample)
+
     ;
 
     enum_<I3DOMLaunch::TriggerType>("TriggerType")
