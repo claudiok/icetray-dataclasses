@@ -8,6 +8,14 @@
 
 import unittest
 
+try:
+	from icecube import icetray,dataclasses
+	dataclasses.I3MapStringDouble.keys
+	dataclasses.I3MapUnsignedUnsigned.keys
+except AttributeError:
+	print 'You appear to be using the default map_indexing_suite. Not running tests for std_map_indexing_suite.'
+	quit()
+
 class I3MapStringDoubleTest(unittest.TestCase):
 	"""A demonstration of the more pythonic features in std_map_index_suite"""
 	def setUp(self):
