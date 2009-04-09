@@ -62,6 +62,14 @@ void register_I3Geometry()
       .value("IceTop", I3OMGeo::IceTop)
       .export_values()
       ;
+
+    enum_<I3OMGeo::Orientation>("Orientation")
+    .value("Unspecified", I3OMGeo::Unspecified)
+    .value("Up", I3OMGeo::Up)
+    .value("Down", I3OMGeo::Down)
+    .export_values()
+    ;
+
   }
   def("identity", identity_<I3OMGeo::OMType>);
   //
