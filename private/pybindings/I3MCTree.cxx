@@ -144,6 +144,10 @@ GetDaughters(I3MCTreePtr t, I3ParticlePtr p){
   return I3MCTreeUtils::GetDaughters(*t,*p);
 }
 
+bool HasParent(I3MCTreePtr t, I3ParticlePtr c){
+  return I3MCTreeUtils::HasParent(*t,*c);
+}
+
 inline I3ParticlePtr Get(const I3MCTree& tree, const I3MCHit& hit)
 {
   return I3ParticlePtr(new I3Particle(I3MCTreeUtils::Get(tree,hit)));
@@ -169,6 +173,7 @@ void register_I3MCTree()
     .def("Merge",&Merge)
     .def("TimeShift",&TimeShift)
     .def("GetDaughters",&GetDaughters)
+	.def("HasParent",&HasParent)
     .def("AddPrimary",&AddPrimary)
     .def("AppendChild",&AppendChild)
     .def("Get",&Get)
