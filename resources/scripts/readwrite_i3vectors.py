@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 from icecube import icetray, dataclasses, dataio
 from os.path import expandvars
