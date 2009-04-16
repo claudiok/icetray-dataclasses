@@ -22,9 +22,14 @@
 #include <vector>
 
 #include <dataclasses/I3Time.h>
+#include <Python.h>
 #include <datetime.h>
 
 using namespace boost::python;
+
+#if PY_VERSION_HEX >= 0x02040000
+#define HAVE_PYDATETIME_API
+#endif
 
 string dump(I3Time t){
   double ns=t.GetModJulianNanoSec();
@@ -43,6 +48,7 @@ string repr(I3Time t){
   return out.str();
 }
 
+#ifdef HAVE_PYDATETIME_API
 boost::python::object GetDateTime(const I3Time& t)
 {
   PyObject* obj = PyDateTime_FromDateAndTime(t.GetUTCYear(), 
@@ -89,13 +95,16 @@ I3Time GetI3Time(const boost::python::object& datetime_obj)
     }
   return t;
 }
+#endif
 
 
 void register_I3Time()
 {
+#ifdef HAVE_PYDATETIME_API
   PyDateTime_IMPORT;
 
   def("make_I3Time",&GetI3Time);
+#endif
 
   scope i3time_scope = class_<I3Time, bases<I3FrameObject>, boost::shared_ptr<I3Time> >("I3Time")
     .def(init<int32_t,int64_t>())
@@ -112,7 +121,9 @@ void register_I3Time()
     .def("GetUnixTime", &I3Time::GetUnixTime)
     .def("SetUnixTime", &I3Time::SetUnixTime)
     .def("SetDaqTime", &I3Time::SetDaqTime)
+#ifdef HAVE_PYDATETIME_API
     .def("GetDateTime", &GetDateTime)
+#endif
     .def("__str__",&dump)
     .def("__repr__",&repr)
     .def(self-self)
