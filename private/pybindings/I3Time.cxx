@@ -19,6 +19,9 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+// this pragma has to go before any functions or whatever are defined.
+#pragma GCC diagnostic ignored "-Wwrite-strings"
+
 #include <vector>
 
 #include <dataclasses/I3Time.h>
