@@ -18,35 +18,33 @@
 #  along with this program.  If not, see <http://www.gnu.org/licenses/>
 #  
 
-if(BUILD_PYBINDINGS)
-  i3_add_pybindings(dataclasses
-    I3AMANDAAnalogReadout.cxx
-    I3Calibration.cxx
-    I3Constants.cxx
-    I3DOMLaunch.cxx
-    I3DetectorStatus.cxx
-    I3DOMFunctions.cxx
-    I3Direction.cxx
-    I3Double.cxx
-    I3EventHeader.cxx
-    I3Geometry.cxx
-    I3MCHit.cxx
-    I3MCList.cxx
-    I3MCTree.cxx
-    I3Particle.cxx
-    I3Position.cxx
-    I3RecoHit.cxx
-    I3RecoPulse.cxx
-    I3String.cxx
-    I3TWRFrag.cxx
-    I3TWRLaunch.cxx
-    I3Time.cxx
-    I3Trigger.cxx
-    I3Waveform.cxx
-    i3_containers_of_pod.cxx
-    module.cxx
-    USE_TOOLS boost python log4cplus
-    USE_PROJECTS icetray dataclasses
-    )
-endif(BUILD_PYBINDINGS)
+i3_add_pybindings(dataclasses
+  I3AMANDAAnalogReadout.cxx
+  I3Calibration.cxx
+  I3Constants.cxx
+  I3DOMLaunch.cxx
+  I3DetectorStatus.cxx
+  I3DOMFunctions.cxx
+  I3Direction.cxx
+  I3Double.cxx
+  I3EventHeader.cxx
+  I3Geometry.cxx
+  I3MCHit.cxx
+  I3MCList.cxx
+  I3MCTree.cxx
+  I3Particle.cxx
+  I3Position.cxx
+  I3RecoHit.cxx
+  I3RecoPulse.cxx
+  I3String.cxx
+  I3TWRFrag.cxx
+  I3TWRLaunch.cxx
+  I3Time.cxx
+  I3Trigger.cxx
+  I3Waveform.cxx
+  i3_containers_of_pod.cxx
+  module.cxx
+  USE_TOOLS boost python log4cplus
+  USE_PROJECTS icetray dataclasses
+  )
 
