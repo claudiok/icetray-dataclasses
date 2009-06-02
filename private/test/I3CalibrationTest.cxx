@@ -163,4 +163,13 @@ TEST(to_stream)
     //log_info("Calibration %s",AsXML(dom_calib).c_str());
 }
 
-
+TEST(simple_DomCalibration)
+{
+  I3DOMCalibration mydomcal;
+  mydomcal.SetDomNoiseRate(650.0*I3Units::hertz);
+  mydomcal.SetRelativeDomEff(1.25);
+  ENSURE_DISTANCE(650.0,mydomcal.GetDomNoiseRate()/I3Units::hertz, 0.001,
+		  "Noise rates do not match.");
+  ENSURE_DISTANCE(1.25,mydomcal.GetRelativeDomEff(),0.001,
+		  "RelativeDomEff do not match.");
+}

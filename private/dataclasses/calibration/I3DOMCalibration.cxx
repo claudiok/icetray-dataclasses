@@ -418,6 +418,11 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("pmtDiscrimCalib", pmtDiscrimCalib_);
     }
+  if (version > 7)
+    {
+      ar & make_nvp("relativeDomEff", relativeDomEff_);
+      ar & make_nvp("noiseRate", noiseRate_);
+    }
 
 }
 
