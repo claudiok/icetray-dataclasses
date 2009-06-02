@@ -28,7 +28,7 @@
  * determined by the DOM calibrator. There is also a 'coarse charge stamp'
  * containing the 3 largest samples out of the first 16 fADC samples
  */
-static const unsigned i3domlaunch_version_ = 3;
+static const unsigned i3domlaunch_version_ = 4;
 
 class I3DOMLaunch 
 {
@@ -130,6 +130,19 @@ private:
 
     /*  chargeStampRange_ has been deleted - on the rare occassions anyone cares, 
      *  they can see if any of the samples are above 512  */
+
+    /**
+     * Places to store the IceTop-style SLC radouts
+     *   rawATWDChargeStamp_ : Sum of all 128 channels in selected ATWD, after pedestal sub.
+     */
+    unsigned int rawATWDChargeStamp_;
+
+    /**
+     * Places to store the IceTop-style SLC radouts
+     *   whichATWDChargeStamp_ : which of the 3 ATWD channels was used in sum
+     */
+    unsigned int whichATWDChargeStamp_;
+
     /**
      * pedestal_ is a bool that tells you if the pedestal_ has or has not
      * been subtracted from the waveforms. This is only for delta-compressed
@@ -259,6 +272,23 @@ public:
     {
       chargeStampHighestSample_ = highsample;
     };
+    /**
+     * Return/Set ATWDCharge stamp, used for IceTop style SLC readout
+     */
+    unsigned int GetRawATWDChargeStamp() const { return rawATWDChargeStamp_; }
+    void SetRawATWDChargeStamp(unsigned int chargesum)
+    {
+      rawATWDChargeStamp_ = chargesum;
+    }
+    /**
+     * Return/Set ATWDCharge channel (which ATWD was used), used for IceTop style SLC readout
+     */
+    unsigned int GetWhichATWDChargeStamp() const { return whichATWDChargeStamp_; }
+    void SetWhichATWDChargeStamp(unsigned int channelid)
+    {
+      whichATWDChargeStamp_ = channelid;
+    }
+
 
 private:
     friend class boost::serialization::access;

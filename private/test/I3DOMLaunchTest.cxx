@@ -225,3 +225,15 @@ TEST(SerializeRandomWave)
       ENSURE(launch1==launch2);
     }
 }
+
+TEST(JustSomeSLCStuff)
+{
+  I3DOMLaunch mylaunch;
+  mylaunch.SetRawATWDChargeStamp(1000);
+  mylaunch.SetWhichATWDChargeStamp(1);
+
+  ENSURE_EQUAL(1000u,mylaunch.GetRawATWDChargeStamp(),
+	 "RawATWDChargeStamps do not agree");
+  ENSURE_EQUAL(1u,mylaunch.GetWhichATWDChargeStamp(),
+	 "WhichATWDChargeStamps do not agree");
+}
