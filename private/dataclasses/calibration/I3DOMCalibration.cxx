@@ -16,7 +16,9 @@ I3DOMCalibration::I3DOMCalibration()
     frontEndImpedance_(NAN),
     domcalVersion_("unknown"), 
     atwdResponseWidth_(NAN),
-    fadcResponseWidth_(NAN)
+    fadcResponseWidth_(NAN),
+    relativeDomEff_(NAN),
+    noiseRate_(NAN)
 { }
 
 /**
