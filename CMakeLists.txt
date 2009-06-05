@@ -1,5 +1,5 @@
 #
-#   
+# C   
 #
 i3_project(dataclasses
   DOCS_DIR resources/docs)
