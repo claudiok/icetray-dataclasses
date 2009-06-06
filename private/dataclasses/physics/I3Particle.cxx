@@ -147,6 +147,7 @@ bool I3Particle::IsTrack() const
       shape_==StoppingTrack || shape_==ContainedTrack ||
       type_==MuPlus || type_==MuMinus ||
       type_==TauPlus || type_==TauMinus ||
+      type_==STauPlus || type_==STauMinus ||
       type_==Monopole ||
       (shape_ == Primary && 
        ( type_ == PPlus       ||
