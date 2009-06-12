@@ -7,6 +7,7 @@
 # JvS 2009-03-26
 
 import unittest
+import sys
 
 try:
 	from icecube import icetray,dataclasses
@@ -14,7 +15,7 @@ try:
 	dataclasses.I3MapUnsignedUnsigned.keys
 except AttributeError:
 	print 'You appear to be using the default map_indexing_suite. Not running tests for std_map_indexing_suite.'
-	quit()
+	sys.exit(0)
 
 class I3MapStringDoubleTest(unittest.TestCase):
 	"""A demonstration of the more pythonic features in std_map_index_suite"""
