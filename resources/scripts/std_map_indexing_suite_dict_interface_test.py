@@ -8,6 +8,16 @@
 
 import unittest
 
+try:
+	sorted([3,2,1])
+except NameError:
+	print 'sorted() is not defined, providing a work-around for python < 2.3'
+	import copy
+	def sorted(lst):
+		cpy = list(copy.copy(lst)) 
+		cpy.sort()
+		return cpy
+
 class I3MapDictInterfaceTest(unittest.TestCase):
 	"""Kick the tires on the dict interface.
 	
