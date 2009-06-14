@@ -131,8 +131,8 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 	def test___setitem__(self):
 		"""dict.__setitem__() is equivalent to map.__setitem__()"""
 		k = 'a new key!'; v = 'a new value!'
-		self.assertFalse(k in self.dict)
-		self.assertFalse(k in self.map)
+		self.assertEquals(k in self.dict,False)
+		self.assertEquals(k in self.map,False)
 		self.dict.__setitem__(k,v)
 		self.map.__setitem__(k,v)
 		self.assertEquals(self.map[k],self.dict[k])
@@ -190,8 +190,8 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		nokey = 'i am not a key'
 		self.assertEquals(self.map.has_key(key),self.dict.has_key(key))
 		self.assertEquals(self.map.has_key(nokey),self.dict.has_key(nokey))
-		self.assertTrue(self.map.has_key(key))
-		self.assertFalse(self.map.has_key(nokey))
+		self.assertEquals(self.map.has_key(key),True)
+		self.assertEquals(self.map.has_key(nokey),False)
 		pass
 	def test_items(self):
 		"""dict.items() is equivalent to map.items()"""
