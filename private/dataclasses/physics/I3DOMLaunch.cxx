@@ -9,7 +9,9 @@ I3DOMLaunch::I3DOMLaunch()
     mode_(UNDEFINED),
     whichATWD_(ATWDa),
     localCoincidence_(false),
-    pedestal_(false)
+    pedestal_(false),
+    rawATWDChargeStamp_(0),
+    whichATWDChargeStamp_(0)
 {
   rawATWD_.resize(4);
 }
@@ -80,7 +82,7 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
     }
     catch( const std::domain_error& ex )
     {
-        log_fatal( ex.what() );
+      log_fatal("%s", ex.what());
     }
   }
   else
@@ -92,6 +94,8 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
   ar & make_nvp("RawChargeStamp", rawChargeStamp_);
   ar & make_nvp("Pedestal", pedestal_);
   ar & make_nvp("ChargeStampHighestSample", chargeStampHighestSample_);    
+  ar & make_nvp("RawATWDChargeStamp", rawATWDChargeStamp_);    
+  ar & make_nvp("WhichATWDChargeStamp", whichATWDChargeStamp_);    
 }
 
 template <class Archive>
@@ -184,7 +188,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
     }
     catch( const std::domain_error& ex )
     {
-        log_fatal( ex.what() );
+      log_fatal("%s", ex.what());
     }
   }
   else
@@ -217,6 +221,11 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
     if(!rawChargeStamp_.empty()) log_warn("oops, coarse charge stamp is not empty");
     chargeStampHighestSample_ = 0u;
   }
+  if(version>3)
+    {
+      ar & make_nvp("RawATWDChargeStamp", rawATWDChargeStamp_);    
+      ar & make_nvp("WhichATWDChargeStamp", whichATWDChargeStamp_);    
+    }
 }
 
 bool operator==(const I3DOMLaunch& lhs, const I3DOMLaunch& rhs){
