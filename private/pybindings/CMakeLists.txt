@@ -42,7 +42,10 @@ i3_add_pybindings(dataclasses
   I3Time.cxx
   I3Trigger.cxx
   I3Waveform.cxx
-  i3_containers_of_pod.cxx
+  I3Vectors.cxx
+  I3MapString.cxx
+  I3MapInt.cxx
+  I3MapKey.cxx
   module.cxx
   USE_TOOLS boost python log4cplus
   USE_PROJECTS icetray dataclasses

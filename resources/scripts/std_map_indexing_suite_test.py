@@ -90,7 +90,7 @@ class I3MapStringDoubleTest(unittest.TestCase):
 			self.assertEquals([entry.key(),entry.data()], list(entry))
 			self.assertEquals(len(entry), 2)
 
-class IterRunner():
+class IterRunner(object):
 	def setUp(self):
 		from icecube import icetray,dataclasses
 		self.map = dataclasses.I3MapStringDouble()
@@ -126,7 +126,7 @@ class I3MapStringDoublePerformanceTest(unittest.TestCase):
 		setup = 'from %s import IterRunner; case = IterRunner(); case.setUp()' % this_script
 		def runCase(meth,desc,num=100):
 			print '%3.dx %s:' % (num,desc)
-			results = timeit.Timer('case.%s()'%meth,setup).timeit(num)
+			results = timeit.Timer(stmt='case.%s()'%meth,setup=setup).timeit(num)
 			print '===> %.3f s' % results
 		print ''
 		print 'Performance improvements (and some regressions) with the new map interfaces:'
