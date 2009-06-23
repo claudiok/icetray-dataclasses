@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3Waveform.h>
+#include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -80,8 +81,8 @@ void register_I3Waveform()
     ;
 
   class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("I3WaveformSeriesMap")
-    .def(map_indexing_suite<I3WaveformSeriesMap>())
-    .def("iteritems", boost::python::iterator<I3WaveformSeriesMap>())
+    .def(std_map_indexing_suite<I3WaveformSeriesMap>())
+    //.def("iteritems", boost::python::iterator<I3WaveformSeriesMap>())
     ;
 
   register_pointer_conversions<I3WaveformSeriesMap>();

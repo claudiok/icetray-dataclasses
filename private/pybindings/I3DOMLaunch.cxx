@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3DOMLaunch.h>
+#include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -83,7 +84,7 @@ void register_I3DOMLaunch()
     ;
     
   class_<I3DOMLaunchSeriesMap, bases<I3FrameObject>, I3DOMLaunchSeriesMapPtr>("I3DOMLaunchSeriesMap")
-    .def(map_indexing_suite<I3DOMLaunchSeriesMap>())
+    .def(std_map_indexing_suite<I3DOMLaunchSeriesMap>())
     ;
     
   register_pointer_conversions<I3DOMLaunchSeriesMap>();

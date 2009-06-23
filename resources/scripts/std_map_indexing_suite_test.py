@@ -17,6 +17,17 @@ except AttributeError:
 	print 'You appear to be using the default map_indexing_suite. Not running tests for std_map_indexing_suite.'
 	sys.exit(0)
 
+try:
+	sorted([3,2,1])
+except NameError:
+	print 'sorted() is not defined, providing a work-around for python < 2.3'
+	import copy
+	def sorted(lst):
+		cpy = list(copy.copy(lst)) 
+		cpy.sort()
+		return cpy
+
+
 class I3MapStringDoubleTest(unittest.TestCase):
 	"""A demonstration of the more pythonic features in std_map_index_suite"""
 	def setUp(self):
@@ -78,6 +89,52 @@ class I3MapStringDoubleTest(unittest.TestCase):
 			self.assertRaises(IndexError, entry.__getitem__, 2)
 			self.assertEquals([entry.key(),entry.data()], list(entry))
 			self.assertEquals(len(entry), 2)
+
+class IterRunner():
+	def setUp(self):
+		from icecube import icetray,dataclasses
+		self.map = dataclasses.I3MapStringDouble()
+		for i in xrange(10000):
+			v = i/1.0e4
+			k = str(hash(v))
+			self.map[k] = v 
+	def iterClassic(self):
+		return [(pair.key(),pair.data()) for pair in self.map]
+	def iterClassicUnpack(self):
+		return [(key,value) for key,value in self.map] 
+	def getItems(self):
+		return self.map.items()
+	def getItemsUnpack(self):
+		return [(key,value) for key,value in self.map.items()]
+	def iterItems(self):
+		return [item for item in self.map.iteritems()]
+	def iterItemsUnpack(self):
+		return [(key,value) for key,value in self.map.iteritems()]
+
+class I3MapStringDoublePerformanceTest(unittest.TestCase):
+	"""Run some quick benchmarks"""
+	def setUp(self):
+		from icecube import icetray,dataclasses
+		self.map = dataclasses.I3MapStringDouble()
+		for i in xrange(5000):
+			v = i/5.0e3
+			k = str(hash(v))
+			self.map[k] = v 
+	def testPerformance(self):
+		import os,timeit
+		this_script = os.path.basename(os.path.splitext(__file__)[0])
+		setup = 'from %s import IterRunner; case = IterRunner(); case.setUp()' % this_script
+		def runCase(meth,desc,num=100):
+			print '%3.dx %s:' % (num,desc)
+			results = timeit.Timer('case.%s()'%meth,setup).timeit(num)
+			print '===> %.3f s' % results
+		print ''
+		print 'Performance improvements (and some regressions) with the new map interfaces:'
+		runCase('iterClassic','[(pair.key(),pair.data()) for pair in i3map]\t(the old way)')
+		runCase('iterClassicUnpack','[(key,value) for key,value in i3map]\t\t(with implicit unpacking)')
+		runCase('iterItemsUnpack','[(key,value) for key,value in i3map.iteritems()]\t(item iterator with implicit unpacking)')
+		runCase('iterItems','[item for item in i3map.iteritems()]\t\t(using iterators + list comprehensions)')
+		runCase('getItems','i3map.items()\t\t\t\t\t(internal iterator only)')
 
 class I3MapUnsignedUnsignedTest(I3MapStringDoubleTest):
 	def setUp(self):

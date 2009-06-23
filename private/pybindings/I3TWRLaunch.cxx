@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3TWRLaunch.h>
+#include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -44,7 +45,7 @@ void register_I3TWRLaunch()
     ;
     
   class_<I3TWRLaunchSeriesMap, bases<I3FrameObject>, I3TWRLaunchSeriesMapPtr>("Map_OMKey_VectorI3TWRLaunch")
-    .def(map_indexing_suite<I3TWRLaunchSeriesMap>())
+    .def(std_map_indexing_suite<I3TWRLaunchSeriesMap>())
     ;
     
   register_pointer_conversions<I3TWRLaunchSeriesMap>();

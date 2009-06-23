@@ -20,6 +20,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3AMANDAAnalogReadout.h>
+#include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -44,7 +45,7 @@ void register_I3AMANDAAnalogReadout()
   class_<I3AMANDAAnalogReadoutMap, 
     bases<I3FrameObject>, 
     I3AMANDAAnalogReadoutMapPtr>("I3AMANDAAnalogReadoutMap")
-    .def(map_indexing_suite<I3AMANDAAnalogReadoutMap>())
+    .def(std_map_indexing_suite<I3AMANDAAnalogReadoutMap>())
     ;
 
   register_pointer_conversions<I3AMANDAAnalogReadoutMap>();

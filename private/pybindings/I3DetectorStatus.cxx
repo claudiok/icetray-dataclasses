@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/status/I3DetectorStatus.h>
+#include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -37,7 +38,7 @@ void register_I3DetectorStatus()
     ;
 
   class_<std::map<OMKey, I3DOMStatus> >("Map_OMKey_I3DOMStatus")
-    .def(map_indexing_suite<std::map<OMKey, I3DOMStatus> >())
+    .def(std_map_indexing_suite<std::map<OMKey, I3DOMStatus> >())
     ;
     
   //

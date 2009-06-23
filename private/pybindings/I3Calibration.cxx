@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/calibration/I3Calibration.h>
+#include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -39,7 +40,7 @@ void register_I3Calibration()
     ;
 
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
-    .def(map_indexing_suite<std::map<OMKey, I3DOMCalibration> >())
+    .def(std_map_indexing_suite<std::map<OMKey, I3DOMCalibration> >())
     ;
     
   //
