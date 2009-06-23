@@ -43,7 +43,7 @@ class I3MapStringDoubleTest(unittest.TestCase):
 		"""map.keys() returns a list of keys"""
 		keys = self.map.keys()
 		for k in keys:
-			self.assertTrue(k in self.sourceDict.keys())
+			self.assertEquals(k in self.sourceDict.keys(),True)
 	def testKeyIterables(self):
 		"""Various equivalent ways of getting the keys"""
 		self.assertEquals(self.map.keys(), [ key           for key       in self.map.iterkeys() ])
@@ -58,13 +58,13 @@ class I3MapStringDoubleTest(unittest.TestCase):
 		self.assertEquals(self.map.values(), [ entry.second() for entry     in self.map              ])
 	def testIterators(self):
 		"""Iterators work for keys, values, and (k,v) tuples"""
-		self.assertTrue( type( self.map.iteritems().next()  ) == tuple                             )
-		self.assertTrue( type( self.map.iterkeys().next()   ) == type( self.sourceDict.keys()[0]   ))
-		self.assertTrue( type( self.map.itervalues().next() ) == type( self.sourceDict.values()[0] ))
+		self.assertEquals( type( self.map.iteritems().next()  ),tuple)
+		self.assertEquals( type( self.map.iterkeys().next()   ), type( self.sourceDict.keys()[0]   ))
+		self.assertEquals( type( self.map.itervalues().next() ), type( self.sourceDict.values()[0] ))
 	def testHasKey(self):
 		"""map.has_key() is equivalent to 'key in map'"""
 		key = self.sourceDict.keys()[0]
-		self.assertTrue(key in self.map)
+		self.assertEquals(key in self.map,True)
 		self.assertEquals(key in self.map, self.map.has_key(key))
 	def testCopyKeys(self):
 		"""can produce a new, equivalent dict from sourceDict via dict.update(map)"""
