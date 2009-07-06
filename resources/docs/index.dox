@@ -1,8 +1,6 @@
 /**
    @mainpage Dataclasses Documentation
 
-   @author <a href="http://icecube.umd.edu/pretz">John Pretz</a>
-
    @section Description
    This is the automatic documentation of the @c dataclasses project.  This 
    project provides C++ classes which are used to represent IceCube data

@@ -1,5 +1,6 @@
 Dataclasses documentation
 =========================
+Dataclasses are the common classes used to describe objects in IceCube/Icetray.  These classes are the objects exchanged by I3Modules.
 
 Dataclasses still needs more docs.  
 
@@ -12,4 +13,5 @@ Table of Contents:
    python
    faq-common-probs
 
-  
+Also see the `doxygen <../../doxygen/dataclasses/index.html>`_ docs.
+ 
