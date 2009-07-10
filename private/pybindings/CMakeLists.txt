@@ -28,6 +28,7 @@ i3_add_pybindings(dataclasses
   I3Direction.cxx
   I3Double.cxx
   I3EventHeader.cxx
+  I3FlasherInfo.cxx
   I3Geometry.cxx
   I3MCHit.cxx
   I3MCList.cxx
