@@ -40,6 +40,9 @@ namespace boost { namespace python { namespace detail {
          static bool
          contains(Container& container, key_type const& key)
          {
+            PyErr_SetString(PyExc_TypeError,"This vector does not support __contains__().");
+            throw_error_already_set();
+
             return false; 
          }
     };
