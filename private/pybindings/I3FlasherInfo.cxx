@@ -53,7 +53,7 @@ void register_I3FlasherInfo()
 
  {
    scope outer = 
-   class_<I3FlasherInfo,bases<I3FrameObject>, boost::shared_ptr<I3FlasherInfo> >("I3FlasherInfo")
+   class_<I3FlasherInfo, bases<I3FrameObject>, I3FlasherInfoPtr>("I3FlasherInfo")
      .def("GetFlashingOM", &I3FlasherInfo::GetFlashingOM)
      .def("GetFlashTime", &I3FlasherInfo::GetFlashTime)
      .def("GetATWDBinSize", &I3FlasherInfo::GetATWDBinSize)
@@ -75,10 +75,11 @@ void register_I3FlasherInfo()
 
  }
 
- class_<I3Vector<I3FlasherInfo> >("I3FlasherInfoVect")
-   .def(vector_indexing_suite<I3Vector<I3FlasherInfo>, 
-        false, detail::vector_no_equality<I3Vector<I3FlasherInfo> > >())
+ class_<I3FlasherInfoVect, bases<I3FrameObject>, I3FlasherInfoVectPtr>("I3FlasherInfoVect")
+   .def(vector_indexing_suite<I3FlasherInfoVect, 
+        false, detail::vector_no_equality<I3FlasherInfoVect> >())
    ;
 
  register_pointer_conversions<I3FlasherInfo>();
+ register_pointer_conversions<I3FlasherInfoVect>();
 }
