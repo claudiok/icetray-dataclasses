@@ -50,7 +50,7 @@ namespace boost { namespace python { namespace detail {
 
 void register_I3FlasherInfo()
 {
-
+ const std::vector<int>& (I3FlasherInfo::*get_waveform)() const = &I3FlasherInfo::GetRawATWD3;
  {
    scope outer = 
    class_<I3FlasherInfo, bases<I3FrameObject>, I3FlasherInfoPtr>("I3FlasherInfo")
@@ -61,8 +61,7 @@ void register_I3FlasherInfo()
      .def("GetMask", &I3FlasherInfo::GetMask)
      .def("GetWidth", &I3FlasherInfo::GetWidth)
      .def("GetRate", &I3FlasherInfo::GetRate)
-     .def("GetRawATWD3", (vector<int>& (I3DOMLaunch::*)(unsigned)) &I3FlasherInfo::GetRawATWD3,
-	   return_internal_reference<1>())
+     .def("GetRawATWD3", get_waveform,return_internal_reference<1>())
      .def("SetFlashingOM", &I3FlasherInfo::SetFlashingOM)
      .def("SetFlashTime", &I3FlasherInfo::SetFlashTime)
      .def("SetATWDBinSize", &I3FlasherInfo::SetATWDBinSize)
