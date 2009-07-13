@@ -48,7 +48,7 @@ namespace bp = boost::python;
 #define I3_REGISTER(r, data, t) BOOST_PP_CAT(register_,t)();
 BOOST_PP_SEQ_FOR_EACH(I3_REGISTRATION_FN_DECL, ~, REGISTER_THESE_THINGS)
 
-BOOST_PYTHON_MODULE(dataclasses)
+I3_PYTHON_MODULE(dataclasses)
 {
   load_project("libdataclasses", false);
 

@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3Particle.h>
+#include <boost/preprocessor/seq.hpp>
 
 using namespace boost::python;
 
@@ -87,38 +88,23 @@ void register_I3Particle()
   {
     scope particle_scope = 
       class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> >("I3Particle")
-      .def("GetTime", &I3Particle::GetTime)
-      .def("GetX", &I3Particle::GetX)
-      .def("GetY", &I3Particle::GetY)
-      .def("GetZ", &I3Particle::GetZ)
+	#define RO_PROPERTIES (X)(Y)(Z)(Zenith)(Azimuth)(MajorID)(MinorID)
+	#define PROPERTIES (Time)(Energy)(Shape)(Type)(Length)(Speed)(FitStatus)(LocationType)
+	#define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_GET, I3Particle, RO_PROPERTIES)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Particle, RO_PROPERTIES)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3Particle, PROPERTIES)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_DEF, I3Particle, CONVENIENCE_BOOLS)
       .def("GetPos", &get_pos)	
-      .def("GetDir", &I3Particle::GetDir, return_internal_reference<1>())
-      .def("GetEnergy", &I3Particle::GetEnergy)
-      .def("GetSpeed", &I3Particle::GetSpeed)
-      .def("GetZenith", &I3Particle::GetZenith)
-      .def("GetAzimuth", &I3Particle::GetAzimuth)
-      .def("GetType", &I3Particle::GetType)
-      .def("GetLength", &I3Particle::GetLength)
-      .def("GetFitStatus", &I3Particle::GetFitStatus)
       .def("GetTheta", &get_theta)
       .def("GetPhi", &get_phi)
-      .def("GetLocationType", &I3Particle::GetLocationType)
-      .def("SetThetaPhi", &set_theta_phi)
-      .def("GetShape",&I3Particle::GetShape)
-      .def("GetMajorID",&I3Particle::GetMajorID)
-      .def("GetMinorID",&I3Particle::GetMinorID)
-      .def("SetDir", &set_dir_angles)
-      .def("SetDir", &set_dir_unitvect)
+      .def("GetDir", &I3Particle::GetDir, return_internal_reference<1>())
       .def("SetPos", &set_position)
       .def("SetPos", &set_position_i3pos)
-      .def("SetTime", &I3Particle::SetTime)
-      .def("SetEnergy", &I3Particle::SetEnergy)
-      .def("SetSpeed", &I3Particle::SetSpeed)
-      .def("SetType", &I3Particle::SetType)
-      .def("SetLength", &I3Particle::SetLength)
-      .def("SetFitStatus", &I3Particle::SetFitStatus)
-      .def("SetLocationType", &I3Particle::SetLocationType)
-      .def("SetShape",&I3Particle::SetShape)
+      .def("SetThetaPhi", &set_theta_phi)
+      .def("SetDir", &set_dir_angles)
+      .def("SetDir", &set_dir_unitvect)
       .def("__str__", i3particle_prettyprint)
       ;
 
