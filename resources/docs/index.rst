@@ -12,6 +12,7 @@ Table of Contents:
    particle
    python
    faq-common-probs
+   i3double
 
 Also see the `doxygen <../../doxygen/dataclasses/index.html>`_ docs.
  
