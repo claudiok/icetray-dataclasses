@@ -25,6 +25,14 @@
 
 using namespace boost::python;
 
+static std::string 
+i3double_prettyprint(const I3Double& d)
+{
+  std::ostringstream oss;
+  oss << "I3Double(" << d.value << ")";
+  return oss.str();
+}
+
 void register_I3Double()
 {
   class_<I3Double, bases<I3FrameObject>, boost::shared_ptr<I3Double> >("I3Double")
@@ -32,6 +40,7 @@ void register_I3Double()
     .def(init<double>())
     .def(init<const I3Double&>())
     .def_readwrite("value", &I3Double::value)
+    .def("__repr__",i3double_prettyprint)
     ;
 
   register_pointer_conversions<I3Double>();
