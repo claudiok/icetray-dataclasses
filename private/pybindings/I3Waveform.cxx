@@ -31,6 +31,8 @@ void register_I3Waveform()
   std::vector<double>& (I3Waveform::*get_waveform)() = &I3Waveform::GetWaveform;
   const std::vector<I3Waveform::StatusCompound>& 
     (I3Waveform::*get_waveform_information)() const = &I3Waveform::GetWaveformInformation;
+  object get_waveform_func = make_function(get_waveform, return_internal_reference<1>());
+  object get_waveform_information_func = make_function(get_waveform_information, return_internal_reference<1>());
 
   {
     scope waveform_scope =
@@ -39,9 +41,13 @@ void register_I3Waveform()
       .def("SetStartTime", &I3Waveform::SetStartTime)
       .def("GetBinWidth", &I3Waveform::GetBinWidth)
       .def("SetBinWidth", &I3Waveform::SetBinWidth)
-      .def("GetWaveform", get_waveform, return_internal_reference<1>())
+      .def("GetWaveform", get_waveform_func)
       .def("SetWaveform", &I3Waveform::SetWaveform)
-      .def("GetWaveformInformation", get_waveform_information, return_internal_reference<1>())
+      .def("GetWaveformInformation", get_waveform_information_func)
+	#define PROPS (StartTime)(BinWidth)(Source)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
+      .add_property("waveform",get_waveform_func,&I3Waveform::SetWaveform)
+      .add_property("waveform_information",get_waveform_information_func)
       // for static methods you need the both of these
       .def("GetStatus", &I3Waveform::GetStatus)
       .staticmethod("GetStatus")
