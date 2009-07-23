@@ -29,9 +29,8 @@ tray = I3Tray()
 
 workspace = expandvars("$I3_SRC")
 infile = workspace + "/dataclasses/resources/testdata/vsn99_calibration.i3"
-tray.AddService("I3ReaderServiceFactory","i3reader")(
-    ("Filename", infile)
-    )
+tray.AddService("I3ReaderServiceFactory","i3reader",
+		Filename =  infile)
 
 tray.AddModule("I3Muxer","muxer")    # should throw error due to version number
 
@@ -41,5 +40,5 @@ try:
 	tray.Execute()  # should result in throw
 except:
 	sys.exit(0) # indicate successfully passed test
-
-sys.exit(1)  # indicate failure (didn't throw when given bad vsn number)
+else:
+	sys.exit(1)  # indicate failure (didn't throw when given bad vsn number)
