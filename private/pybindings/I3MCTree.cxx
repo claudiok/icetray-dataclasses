@@ -158,6 +158,10 @@ inline I3ParticlePtr GetPrimary(const I3MCTree& tree, const I3Particle& particle
   return I3ParticlePtr(new I3Particle(*I3MCTreeUtils::GetPrimary(tree,particle)));
 }
 
+#define WRAP_PROP_FN(R, Data, Elem)\
+	.add_property(snake_case(BOOST_PP_STRINGIZE(Elem)), BOOST_PP_CAT(&Get,Elem))
+#define WRAP_PROP_BARE(R, Data, Elem)\
+	.add_property(snake_case(BOOST_PP_STRINGIZE(Elem)), &Elem)
 void register_I3MCTree()
 {
   class_<I3MCTree, bases<I3FrameObject>, I3MCTreePtr>("I3MCTree")
@@ -184,6 +188,13 @@ void register_I3MCTree()
 	  (I3MCTree::pre_order_iterator(I3MCTree::*)() const) &I3MCTree::end
 	  )
 	 )
+	#define PROPS (MostEnergeticPrimary)(MostEnergeticCascade)\
+		      (MostEnergeticInIce)(MostEnergetic)\
+		      (MostEnergeticTrack)(InIce)\
+		      (Primaries)(Primary)(Daughters)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_FN, ~, PROPS)
+	#define BARE_PROPS (NCascades)(MPSpeedProfile)
+	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
     ;
 
   register_pointer_conversions<I3MCTree>();
