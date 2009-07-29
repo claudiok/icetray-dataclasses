@@ -153,6 +153,11 @@ double I3Time::GetModJulianNanoSec() const
   return 0.1 * daqtenthsns;
 }
 
+double I3Time::GetModJulianDayDouble() const
+{
+  return GetModJulianDay() + GetModJulianSec()/86400. + GetModJulianNanoSec()/8.64e13;
+}
+
 I3Time::Month I3Time::GetUTCMonth() const
 {
   double julday = julianday(year_,daqTime_);
