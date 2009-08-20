@@ -39,15 +39,22 @@ i3string_get_string(const I3String& s)
   return s.value;
 }
 
+size_t 
+i3string_get_length(const I3String& s)
+{
+  return s.value.size();
+}
+
 void register_I3String()
 {
-  class_<I3String, boost::shared_ptr<I3String> >("I3String")
+  class_<I3String, bases<I3FrameObject>, boost::shared_ptr<I3String> >("I3String")
     .def(init<>())
     .def(init<const std::string&>())
     .def(init<const I3String&>())
     .def_readwrite("value", &I3String::value)
     .def("__repr__",i3string_prettyprint)
     .def("__str__",i3string_get_string)
+    .def("__len__",i3string_get_length)
     ;
 
   register_pointer_conversions<I3String>();
