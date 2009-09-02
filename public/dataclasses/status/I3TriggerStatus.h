@@ -95,6 +95,7 @@ class I3TriggerStatus
    *  2 = InIce DOMS
    */
   enum Subdetector{
+    NOT_SPECIFIED=-1,
     ALL=0, 
     ICETOP=1,
     INICE=2
