@@ -18,7 +18,7 @@
 
 using namespace std;
 
-static const unsigned i3tankgeo_version_ = 1;
+static const unsigned i3tankgeo_version_ = 2;
 
 /*Simple struct that contains all the pertinent Tank info.
   Note that there is no OM information for this struct. 
@@ -36,12 +36,16 @@ struct I3TankGeo
   I3TankGeo() {}
   virtual ~I3TankGeo();
 
+  enum TankType {NotSet = 0, Tyvek_Lined = 1, Zirconium_Lined = 2};
+
   I3Position position; //tank x,y,z position
   double orientation; //relative angular rotation of tank
   double tankradius; //tank radius (I3Units!)
   double tankheight; //tank height (I3Units!)
   double fillheight; //water/ice level height (I3Units!)
   I3Vector<OMKey> omKeyList_;
+  double snowheight; // snow "overburden" (use I3Units)
+  TankType tanktype; // Type of tank.
 
   friend class boost::serialization::access;
 
