@@ -92,6 +92,8 @@ void register_I3Calibration()
       PROPERTY(I3DOMCalibration, FADCResponseWidth, FADCResponseWidth)
       PROPERTY(I3DOMCalibration, SPEDiscCalib, SPEDiscCalib)
       PROPERTY(I3DOMCalibration, MPEDiscCalib, MPEDiscCalib)
+      PROPERTY(I3DOMCalibration, DomNoiseRate, DomNoiseRate)
+      PROPERTY(I3DOMCalibration, RelativeDomEff, RelativeDomEff)
       ;
 
   }
