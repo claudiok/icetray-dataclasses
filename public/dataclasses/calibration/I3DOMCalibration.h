@@ -22,7 +22,7 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 7;
+static const unsigned i3domcalibration_version_ = 8;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
@@ -352,7 +352,24 @@ class I3DOMCalibration {
 
   LinearFit GetPMTDiscCalib() const { return pmtDiscrimCalib_ ; }  
 
+  /**
+   *  Get/set for relativeDomEff
+   */
+  double GetRelativeDomEff() const { return relativeDomEff_ ; }
+  void SetRelativeDomEff(double relaeff)
+  {
+    relativeDomEff_ = relaeff;
+  }
 
+  /**
+   * Get/set for DOM noise rate
+   */
+  double GetDomNoiseRate() const { return noiseRate_ ; }
+  void SetDomNoiseRate(double noiserate)
+  {
+    noiseRate_ = noiserate;
+  }
+ 
   template <class Archive>
     void serialize(Archive& ar, unsigned version);
     
@@ -474,7 +491,15 @@ class I3DOMCalibration {
    */
   LinearFit pmtDiscrimCalib_;
 
+  /**
+   *  Relative DOM efficiency, normalized to 1.0 for the average dom.
+   */
+  double relativeDomEff_;
 
+  /**
+   *  Measure DOM noise rate, in Hz, 
+   */
+  double noiseRate_;
 
 
 };

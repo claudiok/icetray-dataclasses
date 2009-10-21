@@ -16,7 +16,10 @@ template <class Archive>
     ar & make_nvp("FillHeight", fillheight);
     if (version > 0)
       ar & make_nvp("OMKeyList", omKeyList_);
-
+    if (version > 1){
+      ar & make_nvp("SnowHeight", snowheight);
+      ar & make_nvp("TankType", tanktype);
+    }
   }
 
 
@@ -26,6 +29,8 @@ bool operator==(const I3TankGeo& lhs, const I3TankGeo& rhs){
 	   lhs.tankradius == rhs.tankradius &&
 	   lhs.tankheight == rhs.tankheight &&
 	   lhs.fillheight == rhs.fillheight &&
+	   lhs.snowheight == rhs.snowheight &&
+	   lhs.tanktype == rhs.tanktype &&
 	   lhs.omKeyList_ == rhs.omKeyList_ );
 }
 

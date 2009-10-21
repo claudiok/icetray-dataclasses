@@ -16,7 +16,9 @@ I3DOMCalibration::I3DOMCalibration()
     frontEndImpedance_(NAN),
     domcalVersion_("unknown"), 
     atwdResponseWidth_(NAN),
-    fadcResponseWidth_(NAN)
+    fadcResponseWidth_(NAN),
+    relativeDomEff_(NAN),
+    noiseRate_(NAN)
 { }
 
 /**
@@ -417,6 +419,11 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   if (version > 6)
     {
       ar & make_nvp("pmtDiscrimCalib", pmtDiscrimCalib_);
+    }
+  if (version > 7)
+    {
+      ar & make_nvp("relativeDomEff", relativeDomEff_);
+      ar & make_nvp("noiseRate", noiseRate_);
     }
 
 }

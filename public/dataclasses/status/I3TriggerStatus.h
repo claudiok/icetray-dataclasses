@@ -54,31 +54,58 @@
  * "triggerConfigId3" - trigger config ID of third trigger<BR>
  * "sourceId3" - source ID of third trigger<BR>
  * 
- * Additionally, the per-trigger readout instructions:
+ * Additionally, the per-trigger readout instructions, specified for each subdetector:
  *  readoutTimeMinus  : time before the trigger time to set the readout window
  *  readoutTimePlus  : time after the trigger time to set the readout window
  *  readoutTimeOffset : time shift relatve to the trigger time to set the readout windoow
  */
-static const unsigned i3triggerstatus_version_ = 1;
+static const unsigned i3triggerstatus_version_ = 2;
+static const unsigned i3triggerreadoutconfig_version_ = 0;
+
+/**
+ *  A simple struct to hold the per-subdetector readout configurations.
+ */
+struct I3TriggerReadoutConfig
+{
+  double readoutTimeMinus;
+  double readoutTimePlus;
+  double readoutTimeOffset;
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version);
+
+  I3TriggerReadoutConfig()
+  {
+    readoutTimeMinus = NAN;
+    readoutTimePlus = NAN;
+    readoutTimeOffset = NAN;
+  }
+
+};
+
+BOOST_CLASS_VERSION(I3TriggerReadoutConfig, i3triggerreadoutconfig_version_);
 
 class I3TriggerStatus 
 {
- private:
-  std::string name_;
-  map<std::string, int> settings_;
-  double readoutTimeMinus_;
-  double readoutTimePlus_;
-  double readoutTimeOffset_;
-
  public:
+
+  /**
+   * Subdetector enum, values match the daq labeling for subdirs.
+   *  0 = ALL doms (InIce, IceTop) together
+   *  1 = IceTop portion
+   *  2 = InIce DOMS
+   */
+  enum Subdetector{
+    NOT_SPECIFIED=-1,
+    ALL=0, 
+    ICETOP=1,
+    INICE=2
+  };
+
   /**
    * Default constructor.
    */
-  I3TriggerStatus():
-	readoutTimeMinus_(NAN),
-	readoutTimePlus_(NAN),
-	readoutTimeOffset_(NAN)
-	 {}
+  I3TriggerStatus()
+    {};
   
   /**
    * Constructor.
@@ -87,12 +114,8 @@ class I3TriggerStatus
    * @param settings Trigger settings: string, integer values.
    */
   I3TriggerStatus(const std::string& name,
-                  const map<std::string, int>& settings,
-		  double readoutTimeMinus,
-		  double readoutTimePlus,
-		  double readoutTimeOffset)
-    : name_(name), settings_(settings), readoutTimeMinus_(readoutTimeMinus),
-    readoutTimePlus_(readoutTimePlus), readoutTimeOffset_(readoutTimeOffset) {}
+                  const map<std::string, int>& settings)
+    : name_(name), settings_(settings) {}
   
   /**
    * Destructor.
@@ -104,22 +127,8 @@ class I3TriggerStatus
    * 
    * @return Name of trigger.
    */
-  virtual const std::string& GetTriggerName() const { return name_; }
-  virtual std::string& GetTriggerName() { return name_; }
-
-  /**
-   *  Get the time window settings
-   */
-  double GetReadoutTimeMinus() const { return readoutTimeMinus_; }
-  double GetReadoutTimePlus() const { return readoutTimePlus_; }
-  double GetReadoutTimeOffset() const { return readoutTimeOffset_; }
-
-  /**
-   *  Set the time window settings
-   */
-  void SetReadoutTimeMinus(double timeMinus) { readoutTimeMinus_ = timeMinus; }
-  void SetReadoutTimePlus(double timePlus) { readoutTimePlus_ = timePlus; }
-  void SetReadoutTimeOffset(double timeOffset) { readoutTimeOffset_ = timeOffset; }
+  const std::string& GetTriggerName() const { return name_; }
+  std::string& GetTriggerName() { return name_; }
 
   /**
    * Get trigger settings.
@@ -127,10 +136,19 @@ class I3TriggerStatus
    * @return Trigger settings: string, integer values
    * (contents vary by trigger type).
    */
-  virtual const map<std::string, int>& GetTriggerSettings() const { return settings_; }
-  virtual map<std::string, int>& GetTriggerSettings() { return settings_; }  
+  const map<std::string, int>& GetTriggerSettings() const { return settings_; }
+  map<std::string, int>& GetTriggerSettings() { return settings_; }  
+
+  const map<Subdetector, I3TriggerReadoutConfig>& 
+    GetReadoutSettings() const { return readoutconfigs_; }
+  map<Subdetector, I3TriggerReadoutConfig>& 
+    GetReadoutSettings() { return readoutconfigs_; }  
 
  private:
+  std::string name_;
+  map<std::string, int> settings_;
+  map<Subdetector, I3TriggerReadoutConfig> readoutconfigs_;
+
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
