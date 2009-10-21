@@ -26,6 +26,22 @@
 
 using namespace boost::python;
 
+map<std::string, int>
+get_trigger_settings(I3TriggerStatusPtr ts){
+  return ts->GetTriggerSettings();
+}
+
+map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
+get_readout_settings(I3TriggerStatusPtr ts){
+  return ts->GetReadoutSettings();
+}
+
+
+string get_trigger_name(I3TriggerStatusPtr ts){
+  return ts->GetTriggerName();
+}
+
+
 void register_I3DetectorStatus()
 {
   class_<I3DetectorStatus, bases<I3FrameObject>, boost::shared_ptr<I3DetectorStatus> >("I3DetectorStatus")
@@ -120,6 +136,26 @@ void register_I3DetectorStatus()
       ;
     def("identity", identity_<I3DOMStatus::CableType>);
 
+  }
+
+  //
+  // I3TriggerStatus
+  //
+  {
+    scope outer = 
+      class_<I3TriggerStatus, boost::shared_ptr<I3TriggerStatus> >("I3TriggerStatus")
+      .def("GetTriggerName", &get_trigger_name)
+      .def("GetTriggerSettings", &get_trigger_settings)
+      .def("GetReadoutSettings", &get_readout_settings)
+      ;
+
+    enum_<I3TriggerStatus::Subdetector>("Subdetector")
+      .value("NOT_SPECIFIED",I3TriggerStatus::NOT_SPECIFIED)
+      .value("ALL",I3TriggerStatus::ALL)
+      .value("ICETOP",I3TriggerStatus::ICETOP)
+      .value("INICE",I3TriggerStatus::INICE)
+      ;
+    def("identity", identity_<I3TriggerStatus::Subdetector>);
   }
 
   register_pointer_conversions<I3DetectorStatus>();
