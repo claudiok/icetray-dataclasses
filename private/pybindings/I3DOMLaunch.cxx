@@ -79,7 +79,7 @@ void register_I3DOMLaunch()
     def("identity", identity_<I3DOMLaunch::TriggerMode>);
   }
 
-  class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSseries")
+  class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSeries")
     .def(vector_indexing_suite<std::vector<I3DOMLaunch> >())
     ;
     
