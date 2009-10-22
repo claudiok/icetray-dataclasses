@@ -56,6 +56,10 @@ void register_I3DetectorStatus()
   class_<std::map<OMKey, I3DOMStatus> >("Map_OMKey_I3DOMStatus")
     .def(std_map_indexing_suite<std::map<OMKey, I3DOMStatus> >())
     ;
+
+  class_<std::map<TriggerKey, I3TriggerStatus> >("Map_TriggerKey_I3TriggerStatus")
+    .def(std_map_indexing_suite<std::map<TriggerKey, I3TriggerStatus> >())
+    ;
     
   //
   // I3DOMStatus
