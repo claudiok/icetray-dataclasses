@@ -78,8 +78,24 @@ static std::string
 i3particle_prettyprint(const I3Particle& p)
 {
   ostringstream oss;
-  oss << "[I3Particle Zenith:" << p.GetZenith() << " Azimuth:" << p.GetAzimuth() << " X:" << p.GetX() << " Y:" << p.GetY() << " Z:" << p.GetZ() 
-      << " Energy:" << p.GetEnergy() << " Speed: " << p.GetSpeed() << " Time:" << p.GetTime() << "]";
+  oss << "[ I3Particle MajorID : " << p.GetMajorID() << endl
+      << "             MinorID : " << p.GetMinorID() << endl
+      << "              Zenith : " << p.GetZenith()  << endl
+      << "             Azimuth : " << p.GetAzimuth()  << endl
+      << "                   X : " << p.GetX() << endl
+      << "                   Y : " << p.GetY() << endl
+      << "                   Z : " << p.GetZ() << endl
+      << "                Time : " << p.GetTime() << endl
+      << "              Energy : " << p.GetEnergy() << endl
+      << "               Speed : " << p.GetSpeed() <<  endl
+      << "              Length : " << p.GetLength() << endl
+      << "                Type : " << p.GetTypeString() << endl
+      << "               Shape : " << p.GetShapeString() << endl
+      << "              Status : " << p.GetFitStatusString() <<  endl
+      << "            Location : " << p.GetLocationTypeString() << endl 
+      << "]" ;
+
+;
   return oss.str();
 }
 

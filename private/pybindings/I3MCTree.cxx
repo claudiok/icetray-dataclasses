@@ -182,6 +182,7 @@ void register_I3MCTree()
     .def("AppendChild",&AppendChild)
     .def("Get",&Get)
     .def("GetPrimary",&GetPrimary)
+    .def("__len__",&I3MCTree::size)
     .def("__iter__", range<return_value_policy<copy_non_const_reference> >
 	 (
 	  (I3MCTree::pre_order_iterator(I3MCTree::*)() const) &I3MCTree::begin, 
