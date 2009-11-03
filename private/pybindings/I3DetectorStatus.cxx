@@ -22,13 +22,17 @@
 #include <vector>
 
 #include <dataclasses/status/I3DetectorStatus.h>
+#include <dataclasses/I3Map.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
-map<std::string, int>
+I3MapStringIntPtr
 get_trigger_settings(I3TriggerStatusPtr ts){
-  return ts->GetTriggerSettings();
+  I3MapStringIntPtr r_map(new I3MapStringInt); 
+  BOOST_FOREACH(I3MapStringInt::value_type p, ts->GetTriggerSettings())
+    r_map->insert(p);
+  return r_map;
 }
 
 map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
@@ -153,6 +157,12 @@ void register_I3DetectorStatus()
       .def("GetReadoutSettings", &get_readout_settings)
       ;
 
+    class_<I3TriggerReadoutConfig, boost::shared_ptr<I3TriggerReadoutConfig> >("I3TriggerReadoutConfig")
+      .def_readwrite("readoutTimeMinus", &I3TriggerReadoutConfig::readoutTimeMinus)
+      .def_readwrite("readoutTimePlus", &I3TriggerReadoutConfig::readoutTimePlus)
+      .def_readwrite("readoutTimeOffset", &I3TriggerReadoutConfig::readoutTimeOffset)
+      ;
+
     enum_<I3TriggerStatus::Subdetector>("Subdetector")
       .value("NOT_SPECIFIED",I3TriggerStatus::NOT_SPECIFIED)
       .value("ALL",I3TriggerStatus::ALL)
@@ -160,6 +170,11 @@ void register_I3DetectorStatus()
       .value("INICE",I3TriggerStatus::INICE)
       ;
     def("identity", identity_<I3TriggerStatus::Subdetector>);
+
+    class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
+      .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
+      ;
+
   }
 
   register_pointer_conversions<I3DetectorStatus>();
