@@ -21,7 +21,9 @@
 
 #include <vector>
 
+#define private public
 #include <dataclasses/status/I3DetectorStatus.h>
+#undef private
 #include <dataclasses/I3Map.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 
@@ -152,9 +154,9 @@ void register_I3DetectorStatus()
   {
     scope outer = 
       class_<I3TriggerStatus, boost::shared_ptr<I3TriggerStatus> >("I3TriggerStatus")
-      .def("GetTriggerName", &get_trigger_name)
-      .def("GetTriggerSettings", &get_trigger_settings)
-      .def("GetReadoutSettings", &get_readout_settings)
+      .def_readwrite("TriggerName", &I3TriggerStatus::name_)
+      .def_readwrite("TriggerSettings",&I3TriggerStatus::settings_)
+      .def_readwrite("ReadoutSettings",&I3TriggerStatus::readoutconfigs_)
       ;
 
     class_<I3TriggerReadoutConfig, boost::shared_ptr<I3TriggerReadoutConfig> >("I3TriggerReadoutConfig")
@@ -174,7 +176,6 @@ void register_I3DetectorStatus()
     class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
       .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
       ;
-
   }
 
   register_pointer_conversions<I3DetectorStatus>();

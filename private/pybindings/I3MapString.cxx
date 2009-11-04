@@ -49,4 +49,7 @@ void register_I3MapString()
   class_<std::map<std::string,std::string > >("TestMapStringString",no_init)
     .def(std_map_indexing_suite<std::map<std::string,std::string > >())
     ;
+  class_<std::map<std::string,int > >("std_map_string_int",no_init)
+    .def(std_map_indexing_suite<std::map<std::string,int > >())
+    ;
 }
