@@ -101,6 +101,7 @@ void register_I3Position()
     .value("car",I3Position::car)
     .value("sph",I3Position::sph)
     .value("cyl",I3Position::cyl)
+    .export_values()
     ;
 
   register_pointer_conversions<I3Position>();

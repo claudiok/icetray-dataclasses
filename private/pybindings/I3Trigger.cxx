@@ -203,6 +203,7 @@ void register_I3Trigger()
       .value("AMANDA_MUON_DAQ",TriggerKey::AMANDA_MUON_DAQ)
       .value("SPASE",TriggerKey::SPASE)
       .value("UNKNOWN_SOURCE",TriggerKey::UNKNOWN_SOURCE)
+      .export_values()
       ;
     def("identity", identity_<TriggerKey::SourceID>);
 
@@ -221,6 +222,7 @@ void register_I3Trigger()
       .value("SPHERE",TriggerKey::SPHERE)
       .value("SPASE_2",TriggerKey::SPASE_2)
       .value("UNKNOWN_TYPE",TriggerKey::UNKNOWN_TYPE)
+      .export_values()
       ;
     def("identity", identity_<TriggerKey::TypeID>);
 

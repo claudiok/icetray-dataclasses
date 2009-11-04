@@ -111,6 +111,7 @@ void register_I3DetectorStatus()
       .value("SPE",I3DOMStatus::SPE)
       .value("Flasher",I3DOMStatus::Flasher)
       .value("MPE",I3DOMStatus::MPE)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::TrigMode>);
 
@@ -122,6 +123,7 @@ void register_I3DetectorStatus()
       .value("Down",I3DOMStatus::Down)
       .value("UpAndDown",I3DOMStatus::UpAndDown)
       .value("SoftLC",I3DOMStatus::SoftLC)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::LCMode>);
 
@@ -129,6 +131,7 @@ void register_I3DetectorStatus()
       .value("Unknown",I3DOMStatus::Unknown)
       .value("Off",I3DOMStatus::Off)
       .value("On",I3DOMStatus::On)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::OnOff>);
 
@@ -136,6 +139,7 @@ void register_I3DetectorStatus()
       .value("UnknownGainType",I3DOMStatus::UnknownGainType)
       .value("High",I3DOMStatus::High)
       .value("Low",I3DOMStatus::Low)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::DOMGain>);
 
@@ -143,7 +147,9 @@ void register_I3DetectorStatus()
       .value("UnknownCableType",I3DOMStatus::UnknownCableType)
       .value("Terminated",I3DOMStatus::Terminated)
       .value("Unterminated",I3DOMStatus::Unterminated)
+      .export_values()
       ;
+
     def("identity", identity_<I3DOMStatus::CableType>);
 
   }
@@ -170,6 +176,7 @@ void register_I3DetectorStatus()
       .value("ALL",I3TriggerStatus::ALL)
       .value("ICETOP",I3TriggerStatus::ICETOP)
       .value("INICE",I3TriggerStatus::INICE)
+      .export_values()
       ;
     def("identity", identity_<I3TriggerStatus::Subdetector>);
 

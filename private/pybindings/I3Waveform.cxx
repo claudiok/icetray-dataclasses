@@ -69,12 +69,14 @@ void register_I3Waveform()
       .value("TWR_ELECTRICAL", I3Waveform::TWR_ELECTRICAL)
       .value("TWR_OPTICAL", I3Waveform::TWR_OPTICAL)
       .value("ETC", I3Waveform::ETC)
+      .export_values()
       ;
 
     enum_<I3Waveform::Status>("Status")
       .value("VIRGINAL", I3Waveform::VIRGINAL)
       .value("SHADY", I3Waveform::SHADY)
       .value("ADULTERATED", I3Waveform::ADULTERATED)
+      .export_values()
       ;
   }
 
