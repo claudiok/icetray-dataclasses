@@ -48,6 +48,7 @@ void register_I3EventHeader()
       .value("UNKNOWN_STATE"       ,I3EventHeader::UNKNOWN_STATE)
       .value("OK"                  ,I3EventHeader::OK)
       .value("CONFIG_IN_TRANSITION",I3EventHeader::CONFIG_IN_TRANSITION)
+      .export_values()
       ;
   }
 }

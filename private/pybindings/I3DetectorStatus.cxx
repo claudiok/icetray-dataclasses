@@ -21,14 +21,20 @@
 
 #include <vector>
 
+#define private public
 #include <dataclasses/status/I3DetectorStatus.h>
+#undef private
+#include <dataclasses/I3Map.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 
 using namespace boost::python;
 
-map<std::string, int>
+I3MapStringIntPtr
 get_trigger_settings(I3TriggerStatusPtr ts){
-  return ts->GetTriggerSettings();
+  I3MapStringIntPtr r_map(new I3MapStringInt); 
+  BOOST_FOREACH(I3MapStringInt::value_type p, ts->GetTriggerSettings())
+    r_map->insert(p);
+  return r_map;
 }
 
 map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
@@ -105,6 +111,7 @@ void register_I3DetectorStatus()
       .value("SPE",I3DOMStatus::SPE)
       .value("Flasher",I3DOMStatus::Flasher)
       .value("MPE",I3DOMStatus::MPE)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::TrigMode>);
 
@@ -116,6 +123,7 @@ void register_I3DetectorStatus()
       .value("Down",I3DOMStatus::Down)
       .value("UpAndDown",I3DOMStatus::UpAndDown)
       .value("SoftLC",I3DOMStatus::SoftLC)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::LCMode>);
 
@@ -123,6 +131,7 @@ void register_I3DetectorStatus()
       .value("Unknown",I3DOMStatus::Unknown)
       .value("Off",I3DOMStatus::Off)
       .value("On",I3DOMStatus::On)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::OnOff>);
 
@@ -130,6 +139,7 @@ void register_I3DetectorStatus()
       .value("UnknownGainType",I3DOMStatus::UnknownGainType)
       .value("High",I3DOMStatus::High)
       .value("Low",I3DOMStatus::Low)
+      .export_values()
       ;
     def("identity", identity_<I3DOMStatus::DOMGain>);
 
@@ -137,7 +147,9 @@ void register_I3DetectorStatus()
       .value("UnknownCableType",I3DOMStatus::UnknownCableType)
       .value("Terminated",I3DOMStatus::Terminated)
       .value("Unterminated",I3DOMStatus::Unterminated)
+      .export_values()
       ;
+
     def("identity", identity_<I3DOMStatus::CableType>);
 
   }
@@ -148,9 +160,15 @@ void register_I3DetectorStatus()
   {
     scope outer = 
       class_<I3TriggerStatus, boost::shared_ptr<I3TriggerStatus> >("I3TriggerStatus")
-      .def("GetTriggerName", &get_trigger_name)
-      .def("GetTriggerSettings", &get_trigger_settings)
-      .def("GetReadoutSettings", &get_readout_settings)
+      .def_readwrite("TriggerName", &I3TriggerStatus::name_)
+      .def_readwrite("TriggerSettings",&I3TriggerStatus::settings_)
+      .def_readwrite("ReadoutSettings",&I3TriggerStatus::readoutconfigs_)
+      ;
+
+    class_<I3TriggerReadoutConfig, boost::shared_ptr<I3TriggerReadoutConfig> >("I3TriggerReadoutConfig")
+      .def_readwrite("readoutTimeMinus", &I3TriggerReadoutConfig::readoutTimeMinus)
+      .def_readwrite("readoutTimePlus", &I3TriggerReadoutConfig::readoutTimePlus)
+      .def_readwrite("readoutTimeOffset", &I3TriggerReadoutConfig::readoutTimeOffset)
       ;
 
     enum_<I3TriggerStatus::Subdetector>("Subdetector")
@@ -158,8 +176,13 @@ void register_I3DetectorStatus()
       .value("ALL",I3TriggerStatus::ALL)
       .value("ICETOP",I3TriggerStatus::ICETOP)
       .value("INICE",I3TriggerStatus::INICE)
+      .export_values()
       ;
     def("identity", identity_<I3TriggerStatus::Subdetector>);
+
+    class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
+      .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
+      ;
   }
 
   register_pointer_conversions<I3DetectorStatus>();

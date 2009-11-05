@@ -49,6 +49,7 @@ void register_I3MCHit()
       .value("ELASTIC_LATE_PULSE", I3MCHit::ELASTIC_LATE_PULSE)
       .value("INELASTIC_LATE_PULSE", I3MCHit::INELASTIC_LATE_PULSE)
       .value("EARLY_AFTER_PULSE", I3MCHit::EARLY_AFTER_PULSE)
+      .export_values()
       ;
     def("identity", identity_<I3MCHit::HitSource>);  
   }

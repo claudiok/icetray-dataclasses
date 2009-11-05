@@ -132,12 +132,14 @@ void register_I3Particle()
       .value("FailedToConverge",I3Particle::FailedToConverge)
       .value("MissingSeed",I3Particle::MissingSeed)
       .value("InsufficientQuality",I3Particle::InsufficientQuality)
+      .export_values()
       ;
 
     enum_<I3Particle::LocationType>("LocationType")
       .value("Anywhere",I3Particle::Anywhere)
       .value("IceTop",I3Particle::IceTop)
       .value("InIce",I3Particle::InIce)
+      .export_values()
       ;
 
     enum_<I3Particle::ParticleType>("ParticleType")
@@ -204,6 +206,7 @@ void register_I3Particle()
       .value("YAGLaser",I3Particle::YAGLaser)
       .value("STauMinus",I3Particle::STauMinus)
       .value("STauPlus",I3Particle::STauPlus)
+      .export_values()
       ;
 
     enum_<I3Particle::ParticleShape>("ParticleShape")
@@ -217,6 +220,7 @@ void register_I3Particle()
       .value("ContainedTrack",I3Particle::ContainedTrack)
       .value("MCTrack",I3Particle::MCTrack)
       .value("Dark",I3Particle::Dark)
+      .export_values()
       ;
 
   }

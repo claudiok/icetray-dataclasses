@@ -155,6 +155,7 @@ void register_I3Time()
     .value("Nov", I3Time::Nov)
     .value("Dec", I3Time::Dec)
     .value("BadMonth", I3Time::BadMonth)
+    .export_values()
     ;
 
   enum_<I3Time::Weekday>("Weekday")
@@ -166,5 +167,6 @@ void register_I3Time()
     .value("Friday", I3Time::Friday)
     .value("Saturday", I3Time::Saturday)
     .value("BadWeekday", I3Time::BadWeekday)
+    .export_values()
     ;
 }

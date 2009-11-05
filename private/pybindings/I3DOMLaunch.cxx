@@ -63,6 +63,7 @@ void register_I3DOMLaunch()
       .value("FLASHER_BOARD_TRIGGER",I3DOMLaunch::FLASHER_BOARD_TRIGGER)
       .value("MPE_DISCRIMINATOR_TRIGGER",I3DOMLaunch::MPE_DISCRIMINATOR_TRIGGER)
       .value("ONBOARD_LED",I3DOMLaunch::ONBOARD_LED)
+      .export_values()
       ;
     def("identity", identity_<I3DOMLaunch::TriggerType>);
   
@@ -74,7 +75,9 @@ void register_I3DOMLaunch()
       .value("LC_UPPER", I3DOMLaunch::LC_UPPER)
       .value("UNKNOWN_MODE", I3DOMLaunch::UNKNOWN_MODE)
       .value("SLC_READOUT", I3DOMLaunch::SLC_READOUT)
-      .value("LAST_TRIGGER_SITUATION", I3DOMLaunch::LAST_TRIGGER_SITUATION);
+      .value("LAST_TRIGGER_SITUATION", I3DOMLaunch::LAST_TRIGGER_SITUATION)
+      .export_values()
+      ;
   
     def("identity", identity_<I3DOMLaunch::TriggerMode>);
   }
