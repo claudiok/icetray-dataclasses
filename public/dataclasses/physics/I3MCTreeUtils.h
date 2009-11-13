@@ -120,6 +120,9 @@ namespace I3MCTreeUtils
   I3MCTree::iterator GetMostEnergeticCascade(const I3MCTree&);
   I3MCTree::iterator GetMostEnergeticCascade(I3MCTreeConstPtr);
 
+  I3MCTree::iterator GetMostEnergeticInIceCascade(const I3MCTree&);
+  I3MCTree::iterator GetMostEnergeticInIceCascade(I3MCTreeConstPtr);
+
   /**
    *Returns a vector of particles that are InIce.
    */

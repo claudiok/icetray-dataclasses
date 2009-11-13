@@ -257,6 +257,27 @@ I3MCTreeUtils::GetMostEnergeticCascade(I3MCTreeConstPtr t)
   return GetMostEnergeticCascade(*t);
 }
 
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticInIceCascade(const I3MCTree& t)
+{
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return = t.end();
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && iter->IsCascade() && 
+	iter->GetLocationType() == I3Particle::InIce) {
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticInIceCascade(I3MCTreeConstPtr t)
+{
+  return GetMostEnergeticInIceCascade(*t);
+}
+
 //------------------------------
 
 const vector<I3Particle> 
