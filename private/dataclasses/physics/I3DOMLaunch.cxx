@@ -9,9 +9,9 @@ I3DOMLaunch::I3DOMLaunch()
     mode_(UNDEFINED),
     whichATWD_(ATWDa),
     localCoincidence_(false),
-    pedestal_(false),
     rawATWDChargeStamp_(0),
     whichATWDChargeStamp_(0)
+    pedestal_(false),
 {
   rawATWD_.resize(4);
 }
