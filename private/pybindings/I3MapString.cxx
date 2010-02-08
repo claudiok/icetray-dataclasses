@@ -41,6 +41,13 @@ void register_I3MapString()
     ;
   register_pointer_conversions<I3MapStringBool>();
   
+  class_<I3MapStringVectorDouble, bases<I3FrameObject>, I3MapStringVectorDoublePtr>("I3MapStringVectorDouble")
+    .def(std_map_indexing_suite<I3MapStringVectorDouble >())
+    ;
+  register_pointer_conversions<I3MapStringVectorDouble>();
+
+
+
   class_<I3MapStringStringDouble, bases<I3FrameObject>, I3MapStringStringDoublePtr>("I3MapStringStringDouble")
     .def(std_map_indexing_suite<I3MapStringStringDouble >())
     ;
