@@ -25,6 +25,7 @@
 #include <dataclasses/geometry/I3OMGeo.h>
 #include <dataclasses/geometry/I3TankGeo.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
 
@@ -35,6 +36,7 @@ void register_I3Geometry()
   // I3Geometry
   //
   class_<I3Geometry, bases<I3FrameObject>, boost::shared_ptr<I3Geometry> >("I3Geometry")
+    .def(copy_suite<I3Geometry>())
     .def_readwrite("omgeo", &I3Geometry::omgeo)
     .def_readwrite("stationgeo", &I3Geometry::stationgeo)
     .def_readwrite("startTime", &I3Geometry::startTime)
@@ -50,6 +52,7 @@ void register_I3Geometry()
     // I3OMGeo
     //
     scope omg = class_<I3OMGeo, boost::shared_ptr<I3OMGeo> >("I3OMGeo")
+      .def(copy_suite<I3OMGeo>())
       .def_readwrite("position", &I3OMGeo::position)
       .def_readwrite("omtype", &I3OMGeo::omtype)
       .def_readwrite("orientation", &I3OMGeo::orientation)
@@ -82,6 +85,7 @@ void register_I3Geometry()
     ;
 
   class_<I3TankGeo, boost::shared_ptr<I3TankGeo> >("I3TankGeo")
+    .def(copy_suite<I3TankGeo>())
     .def_readwrite("position",&I3TankGeo::position)
     .def_readwrite("orientation",&I3TankGeo::orientation)
     .def_readwrite("tankradius",&I3TankGeo::tankradius)

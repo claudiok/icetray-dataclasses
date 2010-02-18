@@ -23,12 +23,14 @@
 
 #include <dataclasses/calibration/I3Calibration.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
 
 void register_I3Calibration()
 {
   class_<I3Calibration, bases<I3FrameObject>, boost::shared_ptr<I3Calibration> >("I3Calibration")
+    .def(copy_suite<I3Calibration>())
     .def_readwrite("startTime", &I3Calibration::startTime)
     .def_readwrite("endTime", &I3Calibration::endTime)
     .def_readwrite("domCal", &I3Calibration::domCal)
@@ -71,6 +73,7 @@ void register_I3Calibration()
 
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
+      .def(copy_suite<I3DOMCalibration>())
       PROPERTY(I3DOMCalibration, Temperature, Temperature)
       PROPERTY(I3DOMCalibration, TransitTime, TransitTime)
       PROPERTY(I3DOMCalibration, HVGainFit, HVGainFit)

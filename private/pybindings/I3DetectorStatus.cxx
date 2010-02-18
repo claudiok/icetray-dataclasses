@@ -26,6 +26,7 @@
 #undef private
 #include <dataclasses/I3Map.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
 
@@ -51,6 +52,7 @@ string get_trigger_name(I3TriggerStatusPtr ts){
 void register_I3DetectorStatus()
 {
   class_<I3DetectorStatus, bases<I3FrameObject>, boost::shared_ptr<I3DetectorStatus> >("I3DetectorStatus")
+    .def(copy_suite<I3DetectorStatus>())
     .def_readwrite("startTime", &I3DetectorStatus::startTime)
     .def_readwrite("endTime", &I3DetectorStatus::endTime)
     .def_readwrite("domStatus", &I3DetectorStatus::domStatus)
@@ -73,6 +75,7 @@ void register_I3DetectorStatus()
   {
     scope outer = 
       class_<I3DOMStatus, boost::shared_ptr<I3DOMStatus> >("I3DOMStatus")
+      .def(copy_suite<I3DOMStatus>())
       .def_readwrite("trigMode", &I3DOMStatus::trigMode)
       .def_readwrite("lcMode", &I3DOMStatus::lcMode)
       .def_readwrite("lcWindowPre", &I3DOMStatus::lcWindowPre)
@@ -160,12 +163,14 @@ void register_I3DetectorStatus()
   {
     scope outer = 
       class_<I3TriggerStatus, boost::shared_ptr<I3TriggerStatus> >("I3TriggerStatus")
+      .def(copy_suite<I3TriggerStatus>())
       .def_readwrite("TriggerName", &I3TriggerStatus::name_)
       .def_readwrite("TriggerSettings",&I3TriggerStatus::settings_)
       .def_readwrite("ReadoutSettings",&I3TriggerStatus::readoutconfigs_)
       ;
 
     class_<I3TriggerReadoutConfig, boost::shared_ptr<I3TriggerReadoutConfig> >("I3TriggerReadoutConfig")
+      .def(copy_suite<I3TriggerReadoutConfig>())
       .def_readwrite("readoutTimeMinus", &I3TriggerReadoutConfig::readoutTimeMinus)
       .def_readwrite("readoutTimePlus", &I3TriggerReadoutConfig::readoutTimePlus)
       .def_readwrite("readoutTimeOffset", &I3TriggerReadoutConfig::readoutTimeOffset)
