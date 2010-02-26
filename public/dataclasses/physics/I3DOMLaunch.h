@@ -30,6 +30,22 @@
  */
 static const unsigned i3domlaunch_version_ = 4;
 
+/**
+ * List the names of enumeration members defined in this file
+ * here. These can be used for e.g. pybindings, which require
+ * the names of the enumeration members to be known. This list
+ * should be updated whenver members or new enums are added to
+ * the class.
+ */
+#define I3DOMLAUNCH_H_I3DOMLaunch_ATWDselect                        \
+    (ATWDa)(ATWDb)
+#define I3DOMLAUNCH_H_I3DOMLaunch_TriggerType                       \
+    (TEST_PATTERN)(CPU_REQUESTED)(SPE_DISCRIMINATOR_TRIGGER)        \
+    (FLASHER_BOARD_TRIGGER)(MPE_DISCRIMINATOR_TRIGGER)(ONBOARD_LED)
+#define I3DOMLAUNCH_H_I3DOMLaunch_TriggerMode                       \
+    (UNDEFINED)(REQUIRE_BOTH)(FR_RUN)(LC_LOWER)(LC_UPPER)           \
+    (UNKNOWN_MODE)(SLC_READOUT)(MIN_BIAS)(LAST_TRIGGER_SITUATION)
+
 class I3DOMLaunch 
 {
 public:  
