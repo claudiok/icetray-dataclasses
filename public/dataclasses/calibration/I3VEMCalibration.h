@@ -59,6 +59,8 @@ struct I3VEMCalibration
 
 };
 
+
+BOOST_CLASS_VERSION(I3VEMCalibration, i3vemcalibration_version_);
 I3_POINTER_TYPEDEFS(I3VEMCalibration);
 
 #endif //I3VEMCALIBRATION_H_INCLUDED

@@ -35,7 +35,11 @@ void register_I3Calibration()
     .def_readwrite("endTime", &I3Calibration::endTime)
     .def_readwrite("domCal", &I3Calibration::domCal)
     //.def_readwrite("amandaCal", &I3Calibration::amandaCal)
-    //.def_readwrite("vemCal", &I3Calibration::vemCal)
+
+    //=====================================================
+    .def_readwrite("vemCal", &I3Calibration::vemCal)
+    //=====================================================
+
     //.def_readwrite("twrCal", &I3Calibration::twrCal)
     .def_readwrite("TWRGlobalT0", &I3Calibration::TWRGlobalT0)
     .def_readwrite("TWRI3TimeOffset", &I3Calibration::TWRI3TimeOffset)
@@ -44,6 +48,13 @@ void register_I3Calibration()
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
     .def(std_map_indexing_suite<std::map<OMKey, I3DOMCalibration> >())
     ;
+
+  //=======================================================================
+  class_<std::map<OMKey, I3VEMCalibration> >("Map_OMKey_I3VEMCalibration")
+    .def(std_map_indexing_suite<std::map<OMKey, I3VEMCalibration> >())
+    ;
+  //=======================================================================
+
     
   //
   // I3DOMCalibration
@@ -53,6 +64,14 @@ void register_I3Calibration()
     class_<LinearFit>("LinearFit")
       .def_readwrite("slope", &LinearFit::slope)
       .def_readwrite("intercept", &LinearFit::intercept)
+      ;
+
+    class_<I3VEMCalibration>("I3VEMCalibration")
+      .def(copy_suite<I3VEMCalibration>())
+      .def_readwrite("pePerVEM", &I3VEMCalibration::pePerVEM)
+      .def_readwrite("muPeakWidth", &I3VEMCalibration::muPeakWidth)
+      .def_readwrite("hglgCroddOver", &I3VEMCalibration::hglgCrossOver)
+      .def_readwrite("corrFactor", &I3VEMCalibration::corrFactor)
       ;
 
     class_<QuadraticFit>("QuadraticFit")

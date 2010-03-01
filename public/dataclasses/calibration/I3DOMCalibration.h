@@ -46,6 +46,7 @@ struct LinearFit
 
 };
 BOOST_CLASS_VERSION(LinearFit, linearfit_version_);
+
 /**
  *  @brief A struct to hold the parameters of a Quadratic fit
  *  A simple struct to define a Quadratic fit:  A + B*x + C*x*x

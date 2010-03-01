@@ -95,6 +95,7 @@ void register_I3Geometry()
     ;
 
   class_<std::vector<I3TankGeo> >("I3StationGeo")
+    .def(copy_suite<I3StationGeo>())
     .def(vector_indexing_suite<std::vector<I3TankGeo> >())
     ;
 
