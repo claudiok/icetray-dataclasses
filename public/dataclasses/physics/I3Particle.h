@@ -19,6 +19,42 @@
 using namespace std;
 static const unsigned i3particle_version_ = 3;
 
+/**
+ * List the names of enumeration members defined in this file
+ * here. These can be used for e.g. pybindings, which require
+ * the names of the enumeration members to be known. This list
+ * should be updated whenver members or new enums are added to
+ * the class.
+ */
+#define I3PARTICLE_H_RDMCParticleTypes_ParticleType                               \
+    (unknown)(Gamma)(EPlus)(EMinus)(Nu)(MuPlus)(MuMinus)(Pi0)(PiPlus)(PiMinus)    \
+    (KPlus)(KMinus)(PPlus)(PMinus)(TauPlus)(TauMinus)(Monopole)(NuE)(NuMu)        \
+    (NuTau)(NuEBar)(NuMuBar)(NuTauBar)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)  \
+    (Hadrons)(FiberLaser)(N2Laser)(YAGLaser)(ZPrimary)(APrimary)(CRProton)        \
+    (CRHelium)(CROxygen)(CRSilicon)(CRIron)(Elph)
+
+#define I3PARTICLE_H_I3Particle_ParticleType                                      \
+    (unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0)(PiPlus)(PiMinus)        \
+    (K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)(NuE)(NuEBar)       \
+    (NuMu)(NuMuBar)(TauPlus)(TauMinus)(NuTau)(NuTauBar)(He4Nucleus)(Li7Nucleus)   \
+    (Be9Nucleus)(B11Nucleus)(C12Nucleus)(N14Nucleus)(O16Nucleus)(F19Nucleus)      \
+    (Ne20Nucleus)(Na23Nucleus)(Mg24Nucleus)(Al27Nucleus)(Si28Nucleus)(P31Nucleus) \
+    (S32Nucleus)(Cl35Nucleus)(Ar40Nucleus)(K39Nucleus)(Ca40Nucleus)(Sc45Nucleus)  \
+    (Ti48Nucleus)(V51Nucleus)(Cr52Nucleus)(Mn55Nucleus)(Fe56Nucleus)              \
+    (CherenkovPhoton)(Nu)(Monopole)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)     \
+    (Hadrons)(FiberLaser)(N2Laser)(YAGLaser)(STauPlus)(STauMinus)                 \
+
+#define I3PARTICLE_H_I3Particle_ParticleShape                                     \
+    (Null)(Primary)(TopShower)(Cascade)(InfiniteTrack)(StartingTrack)             \
+    (StoppingTrack)(ContainedTrack)(MCTrack)(Dark)
+    
+#define I3PARTICLE_H_I3Particle_FitStatus                                         \
+    (NotSet)(OK)(GeneralFailure)(InsufficientHits)(FailedToConverge)              \
+    (MissingSeed)(InsufficientQuality)
+
+#define I3PARTICLE_H_I3Particle_LocationType                                      \
+    (Anywhere)(IceTop)(InIce)
+
 namespace RDMCParticleTypes{
   enum ParticleType {
     unknown = -100,

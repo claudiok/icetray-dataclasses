@@ -26,6 +26,18 @@
  */
 static const unsigned i3mchit_version_ = 2;
 
+/**
+ * List the names of enumeration members defined in this file
+ * here. These can be used for e.g. pybindings, which require
+ * the names of the enumeration members to be known. This list
+ * should be updated whenver members or new enums are added to
+ * the class.
+ */
+#define I3MCHIT_H_I3MCHit_HitSource                     \
+    (UNKNOWN)(SPE)(RANDOM)(AFTER_PULSE)(PRE_PULSE)      \
+    (ELASTIC_LATE_PULSE)(INELASTIC_LATE_PULSE)          \
+    (EARLY_AFTER_PULSE)                                 
+
 class I3Particle;
 
 class I3MCHit
