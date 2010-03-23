@@ -31,7 +31,7 @@ public:
   I3Time startTime;
   I3Time endTime;
 
-  I3Calibration() {};
+  I3Calibration();
     
   virtual ~I3Calibration();
     
