@@ -100,7 +100,7 @@ class I3Waveform
   Source source_;
   
  public:
-  I3Waveform() {}
+  I3Waveform() :  startTime_(0), binWidth_(0), source_(ATWD) {}
   
   virtual ~I3Waveform();
   
