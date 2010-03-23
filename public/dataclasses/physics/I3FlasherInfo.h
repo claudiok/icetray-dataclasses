@@ -66,9 +66,15 @@ protected:
     
 public:
  
-    I3FlasherInfo():flashTime_(0.0),LEDBrightness_(0)
-	{
-	}
+  I3FlasherInfo()
+    : flashTime_(0.0), 
+      aTWDBinSize_(0),
+      pedestalSubtractedATWD3_(false),
+      mask_(0),
+      LEDBrightness_(0),
+      width_(0),
+      rate_(0)
+  { }
 
     virtual ~I3FlasherInfo(){;}
 
