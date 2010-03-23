@@ -34,7 +34,7 @@ public:
    */
   enum FilterPass { No = 0, Yes = 1};
   
-  I3Filter() {;}
+  I3Filter() : filterPass_(No) {;}
   
   virtual ~I3Filter();
   
