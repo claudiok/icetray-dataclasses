@@ -19,6 +19,25 @@
 
 
 /**
+ * List the names of enumeration members defined in this file
+ * here. These can be used for e.g. pybindings, which require
+ * the names of the enumeration members to be known. This list
+ * should be updated whenever members or new enums are added to
+ * the class.
+ */
+#define TRIGGERKEY_H_TriggerKey_SourceID                                 \
+    (IN_ICE)(ICE_TOP)(AMANDA_TWR_DAQ)(EXTERNAL)(GLOBAL)(AMANDA_MUON_DAQ) \
+    (SPASE)(UNKNOWN_SOURCE)
+
+#define TRIGGERKEY_H_TriggerKey_TypeID                                   \
+    (SIMPLE_MULTIPLICITY)(CALIBRATION)(MIN_BIAS)(THROUGHPUT)             \
+    (TWO_COINCIDENCE)(THREE_COINCIDENCE)(MERGED)(FRAGMENT_MULTIPLICITY)  \
+    (STRING)(VOLUME)(SPHERE)(SPASE_2)(UNKNOWN_TYPE)
+
+#define TRIGGERKEY_H_TriggerKey_SubtypeID                                \
+    (NO_SUBTYPE)(M18)(M24)(T0)(LASER)(UNKNOWN_SUBTYPE)
+
+/**
  * @brief A small class which is the "key" for the trigger status/config map 
  * in I3DetectorStatus.
  * 
