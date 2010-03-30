@@ -16,17 +16,9 @@
 #ifndef I3DIRECTION_H_INCLUDED
 #define I3DIRECTION_H_INCLUDED
 
-#include <math.h>
-#include <sstream>
-#include "icetray/I3FrameObject.h"
+#include <icetray/I3FrameObject.h>
 #include "Utility.h"
-#include "dataclasses/I3Constants.h"
-#include "dataclasses/I3Units.h"
-#include "dataclasses/I3Vector.h"
-
-using namespace I3Constants;
-using namespace I3Units;
-using namespace std;
+#include <dataclasses/I3Vector.h>
 
 static const unsigned i3direction_version_ = 0;
 
@@ -106,8 +98,8 @@ class I3Direction : public I3FrameObject
   void SetDir(double x, double y, double z) { SetDirection(x, y, z); }
 
   /**
-	* Store direction with theta, phi
-	*/
+   * Store direction with theta, phi
+   */
   void SetThetaPhi(double theta, double phi);
 
   /**
@@ -161,19 +153,12 @@ class I3Direction : public I3FrameObject
   /**
    * Calculate Theta of direction
    */
-  double CalcTheta() const {
-    double theta = pi - zenith_;
-    return theta;
-  }
+  double CalcTheta() const;
 
   /**
    * Calculate Phi of direction
    */
-  double CalcPhi() const {
-    double phi = pi + azimuth_;
-    if (phi >= 2*pi) phi -= 2*pi;
-    return phi;
-  }
+  double CalcPhi() const;
 
   //--------------
 

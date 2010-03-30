@@ -14,7 +14,7 @@
 // namespaces
 
 #pragma link C++ namespace I3Units;
-#pragma link C++ namespace I3Constants;
+//#pragma link C++ namespace I3Constants;
 #pragma link C++ namespace boost;
 
 #pragma link C++ class I3Position+; //

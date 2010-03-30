@@ -3,12 +3,10 @@
 
 #include <iostream>
 #include <icetray/serialization.h>
-#include "dataclasses/I3Direction.h"
-#include "dataclasses/I3Constants.h"
-#include "dataclasses/I3Units.h"
+#include <dataclasses/I3Direction.h>
+#include <dataclasses/I3Constants.h>
+#include <math.h>
 
-using namespace I3Constants;
-using namespace I3Units;
 
 template <class Archive> 
 void 
@@ -90,10 +88,10 @@ void I3Direction::SetDirection(double x, double y, double z)
 //-----------------------------------------------------------
 void I3Direction::SetThetaPhi(double theta, double phi)
 {
-  if (theta>pi) theta = 2*pi-theta;
-  zenith_ = pi-theta;
-  azimuth_ = pi+phi;
-  if (azimuth_>=2.*pi) azimuth_ -= 2*pi;
+  if (theta>I3Constants::pi) theta = 2*I3Constants::pi-theta;
+  zenith_ = I3Constants::pi-theta;
+  azimuth_ = I3Constants::pi+phi;
+  if (azimuth_>=2.*I3Constants::pi) azimuth_ -= 2*I3Constants::pi;
   CalcCarFromSph();
 }
 
@@ -110,6 +108,19 @@ void I3Direction::ResetDirection()
 }
 
 //-----------------------------------------------------------
+double I3Direction::CalcTheta() const
+{
+  double theta = I3Constants::pi - zenith_;
+  return theta;
+}
+
+//-----------------------------------------------------------
+double I3Direction::CalcPhi() const
+{
+  double phi = I3Constants::pi + azimuth_;
+  if (phi >= 2*I3Constants::pi) phi -= 2*I3Constants::pi;
+  return phi;
+}
 
 //-----------------------------------------------------------
 void I3Direction::RotateX(double angle)
@@ -157,8 +168,8 @@ void I3Direction::CalcCarFromSph() const
   // Calculate Cartesian coordinates from Spherical
   // Direction is stored on disk in Spherical coordinates only.
   // theta=pi-zenith and phi=azimuth-pi in these IceCube coordinates.
-  double theta = pi-zenith_;
-  double phi = azimuth_-pi;
+  double theta = I3Constants::pi-zenith_;
+  double phi = azimuth_-I3Constants::pi;
   double rho = sin(theta);
   xDir_ = rho*cos(phi);
   yDir_ = rho*sin(phi);
@@ -177,16 +188,16 @@ void I3Direction::CalcSphFromCar()
   if (r && fabs(zDir_/r)<=1.) {
     theta=acos(zDir_/r);
   } else {
-    if (zDir_<0.) theta=pi;
+    if (zDir_<0.) theta=I3Constants::pi;
   }
-  if (theta<0.) theta+=2.*pi;
+  if (theta<0.) theta+=2.*I3Constants::pi;
   double phi=0;
   if (xDir_ || yDir_) phi=atan2(yDir_,xDir_);
-  if (phi<0.) phi+=2.*pi;
-  zenith_ = pi-theta;
-  azimuth_ = phi+pi;
-  if (zenith_>pi) zenith_ -= pi-(zenith_-pi);
-  azimuth_ -= (int)(azimuth_/(2*pi))*(2*pi);
+  if (phi<0.) phi+=2.*I3Constants::pi;
+  zenith_ = I3Constants::pi-theta;
+  azimuth_ = phi+I3Constants::pi;
+  if (zenith_>I3Constants::pi) zenith_ -= I3Constants::pi-(zenith_-I3Constants::pi);
+  azimuth_ -= (int)(azimuth_/(2*I3Constants::pi))*(2*I3Constants::pi);
   isCalculated_=false;
 }
 

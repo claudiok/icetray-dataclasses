@@ -23,6 +23,7 @@
 
 #include <dataclasses/physics/I3MCTreeUtils.h>
 #include <dataclasses/physics/I3MCTree.h>
+#include <dataclasses/I3Constants.h>
 
 using namespace boost::python;
 

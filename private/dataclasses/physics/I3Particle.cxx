@@ -1,6 +1,7 @@
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3Particle.h>
 #include <boost/functional/hash/hash.hpp>
+#include <dataclasses/I3Constants.h>
 
 int I3Particle::global_minor_id_ = 0;
 uint64_t I3Particle::global_major_id_ = 0;
