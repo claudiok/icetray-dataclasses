@@ -13,6 +13,7 @@
 #include <iostream>
 #include <string>
 #include "dataclasses/physics/I3Particle.h"
+#include "dataclasses/I3Constants.h"
 
 using namespace std;
 
