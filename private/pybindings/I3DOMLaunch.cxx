@@ -1,7 +1,7 @@
 //
-//   Copyright (c) 2004, 2005, 2006, 2007   Troy D. Straszheim  
+//   Copyright (c) 2004, 2005, 2006, 2007, 2008   Troy D. Straszheim  
 //   
-//   $Id: ithon.cxx 25598 2006-11-25 02:52:57Z troy $
+//   $Id: pybindings/I3DOMLaunch.cxx 46254 2008-06-14 02:50:30Z troy $
 //
 //   This file is part of IceTray.
 //
@@ -80,6 +80,13 @@ void register_I3DOMLaunch()
       ;
   
     def("identity", identity_<I3DOMLaunch::TriggerMode>);
+
+    enum_<I3DOMLaunch::ATWDselect>("ATWDselect")
+      .value("ATWDa", I3DOMLaunch::ATWDa)
+      .value("ATWDb", I3DOMLaunch::ATWDb)
+      .export_values()
+      ;
+    def("identity", identity_<I3DOMLaunch::ATWDselect>);
   }
 
   class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSeries")
