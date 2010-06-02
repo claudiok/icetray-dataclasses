@@ -14,11 +14,15 @@ bool I3TimeUtils::leap_year(const int year){
 	   (!(year%400)&&!(year%100))); //a century year and divisible by four hundred
 }
 
+//Figure out the right length of a year.  Is it a leap year?
+//  MAX_DAQTIME pair has run lengths:
+//    first: normal year
+//    second:  leap year
 int64_t I3TimeUtils::max_DAQ_time(const int year){
   if(I3TimeUtils::leap_year(year)){
-    return MAX_DAQTIME.first; 
-  }else{
-    return MAX_DAQTIME.second;
+    return MAX_DAQTIME.second; 
+  }else{  //NOT leap year
+    return MAX_DAQTIME.first;
   }
 }
 
@@ -48,9 +52,11 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
                               int32_t sec,
                               double ns)
 {
-  double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24.));
-  year_ = yearOf(modjulian);
-  int32_t daysafteryear = (int32_t)(modjulian - modjulianday(year_));
+  // Add a check, and log_warn about secs more than year length...
+  //double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24.));
+  year_ = yearOf(modJulianDay);
+  //int32_t daysafteryear = (int32_t)(modjulian - modjulianday(year_));
+  int32_t daysafteryear = modJulianDay - (int32_t)modjulianday(year_);
   int32_t secsafteryear = daysafteryear * 3600 * 24 + sec;
   daqTime_ =
     ((int64_t)secsafteryear * ((int64_t)(1e10)))
@@ -299,34 +305,35 @@ bool I3Time::operator>=(const I3Time& rhs) const
 
 I3Time I3Time::operator+(const double second_term) const
 {
-  //new_years should always be one or zero
-  bool new_years_eve = (I3TimeUtils::ns_to_daqtime(second_term) + daqTime_) > I3TimeUtils::max_DAQ_time(year_);
-  int32_t year = year_ + static_cast<int>(new_years_eve);
 
   int64_t daqTime;
-  if(new_years_eve){
+  int32_t year;
+  if((I3TimeUtils::ns_to_daqtime(second_term) + daqTime_) > I3TimeUtils::max_DAQ_time(year_) ){
+    year = year_ + 1;
     //just the remainder
     daqTime = daqTime_ + I3TimeUtils::ns_to_daqtime(second_term) - I3TimeUtils::max_DAQ_time(year_);
-  }else{
-    //just add 'em
+  }
+  else{
+    year = year_;
     daqTime = daqTime_ + I3TimeUtils::ns_to_daqtime(second_term);
   }
 
   return I3Time(year,daqTime);
 }
 
+
 I3Time I3Time::operator-(const double second_term) const
 {
-  //new_years_eve should always be one or zero
-  bool new_years_eve = I3TimeUtils::ns_to_daqtime(second_term) > daqTime_; 
-  int32_t year = year_ - static_cast<int>(new_years_eve);
-
   int64_t daqTime;
-  if(new_years_eve){
+  int32_t year;
+  if(I3TimeUtils::ns_to_daqtime(second_term) > daqTime_){
+    year = year_ - 1;
     //just the remainder
     //What I care about in subtraction is whether *last* year was a leap year
     daqTime = daqTime_ - I3TimeUtils::ns_to_daqtime(second_term) + I3TimeUtils::max_DAQ_time(year);
-  }else{
+  }
+  else{
+    year = year_;
     //just subtract 'em
     daqTime = daqTime_ - I3TimeUtils::ns_to_daqtime(second_term);
   }

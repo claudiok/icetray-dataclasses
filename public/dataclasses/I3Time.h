@@ -21,10 +21,15 @@
  *
  */
 
+static const unsigned i3time_version_ = 0;
 //Number of tenths of ns in a year and leap year respectively        
 //                         Number of tenths of seconds in a leap year 864000000000000
-static const unsigned i3time_version_ = 0;
-const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
+//    **Updated May 26, 2010**:  This somehow takes into account a 365.24 days/yr schedule
+//      which is just wrong for leap/non leap year lengths.
+//  Old and busted:
+//const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
+// New and shiny (and correct), 365|366d * 24h * 60m * 60 s * 10^10 
+const std::pair<int64_t,int64_t> MAX_DAQTIME(315360000000000000LL, 316224000000000000LL);
 
 namespace I3TimeUtils
 {

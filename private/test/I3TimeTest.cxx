@@ -483,12 +483,11 @@ TEST( year_transitions )
     This test assumes no leap seconds, it will have to be changed if leapsecond support is added to I3Time
    */
   I3Time t1,t2;
-  for ( int year=1990; year<=2030; year++)
+  for ( int year=1989; year<=2030; year++)
     {
       t1.SetUTCCalDate(year,12,31,23,59,59);
-      t2.SetUTCCalDate(year+1,1,1,0,0,0);
-      
-      ENSURE ( t1+1*I3Units::s == t2 , "Adding One Second to year-12-31 23:59:59 muse equal (year+1)-1-1 00:00:00");
-      ENSURE ( t1 == t2-1*I3Units::s , "Subtracting One Second from (year+1)-1-1 00:00:00 muse equal year-12-31 23:59:5");      
+      t2.SetUTCCalDate(year+1,1,1,0,0,1);
+      ENSURE ( t1+2*I3Units::s == t2 , "Adding Two Seconds to year-12-31 23:59:59 must equal (year+1)-1-1 00:00:01");
+      ENSURE ( t1 == t2-2*I3Units::s , "Subtracting Two Seconds from (year+1)-1-1 00:00:01 must equal year-12-31 23:59:59");      
     }
 }
