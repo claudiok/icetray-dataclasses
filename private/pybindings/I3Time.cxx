@@ -109,8 +109,10 @@ void register_I3Time()
   def("make_I3Time",&GetI3Time);
 #endif
 
-  scope i3time_scope = class_<I3Time, bases<I3FrameObject>, boost::shared_ptr<I3Time> >("I3Time")
+  scope i3time_scope = class_<I3Time, bases<I3FrameObject>, 
+    boost::shared_ptr<I3Time> >("I3Time")
     .def(init<int32_t,int64_t>())
+    .def(init<const I3Time&>())
     .def("GetModJulianDay", &I3Time::GetModJulianDay)
     .def("GetModJulianSec", &I3Time::GetModJulianSec)
     .def("GetModJulianNanoSec", &I3Time::GetModJulianNanoSec)
