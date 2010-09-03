@@ -23,6 +23,7 @@
 
 #include <dataclasses/physics/I3RecoHit.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -35,7 +36,7 @@ void register_I3RecoHit()
     ;
 
   class_<std::vector<I3RecoHit> >("vector_I3RecoHit")
-    .def(vector_indexing_suite<std::vector<I3RecoHit> >())
+    .def(std_vector_indexing_suite<std::vector<I3RecoHit> >())
     ;
 
   class_<I3RecoHitSeriesMap, bases<I3FrameObject>, I3RecoHitSeriesMapPtr>("I3RecoHitSeriesMap")

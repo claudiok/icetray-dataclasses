@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3TWRFrag.h>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -40,7 +41,7 @@ void register_I3TWRFrag()
   }
 
   class_<std::vector<I3TWRFrag> >("Vector_I3TWRFrag")
-    .def(vector_indexing_suite<std::vector<I3TWRFrag> >())
+    .def(std_vector_indexing_suite<std::vector<I3TWRFrag> >())
     ;
     
 }

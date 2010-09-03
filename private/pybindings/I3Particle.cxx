@@ -23,6 +23,7 @@
 
 #include <dataclasses/physics/I3Particle.h>
 #include <boost/preprocessor/seq.hpp>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -227,7 +228,7 @@ void register_I3Particle()
   }
 
   class_<std::vector<I3Particle> >("Vector_I3Particle")
-    .def(vector_indexing_suite<std::vector<I3Particle> >())
+    .def(std_vector_indexing_suite<std::vector<I3Particle> >())
     ;
 
   register_pointer_conversions<I3Particle>();

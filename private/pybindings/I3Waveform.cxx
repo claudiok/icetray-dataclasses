@@ -23,6 +23,7 @@
 
 #include <dataclasses/physics/I3Waveform.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -81,11 +82,11 @@ void register_I3Waveform()
   }
 
   class_<std::vector<I3Waveform> >("I3WaveformSeries")
-    .def(vector_indexing_suite<std::vector<I3Waveform> >())
+    .def(std_vector_indexing_suite<std::vector<I3Waveform> >())
     ;
 
   class_<std::vector<I3Waveform::StatusCompound> >("VectorI3WaveformStatusCompound")
-    .def(vector_indexing_suite<std::vector<I3Waveform::StatusCompound> >())
+    .def(std_vector_indexing_suite<std::vector<I3Waveform::StatusCompound> >())
     ;
 
   class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("I3WaveformSeriesMap")

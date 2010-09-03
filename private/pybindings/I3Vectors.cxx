@@ -20,6 +20,7 @@
 //
 
 #include <dataclasses/I3Vector.h>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 #include <vector>
 
 using namespace boost::python;
@@ -38,7 +39,7 @@ register_i3vector_of(const std::string& s)
 {
   typedef I3Vector<T> vec_t;
   class_<vec_t, bases<I3FrameObject>, boost::shared_ptr<vec_t> > ((std::string("I3Vector") + s).c_str())
-    .def(vector_indexing_suite<vec_t>())
+    .def(std_vector_indexing_suite<vec_t>())
     ;
   register_pointer_conversions<vec_t>();
 }
@@ -61,7 +62,7 @@ void register_I3Vectors()
 {
   // 'char' has a special method that converts to string
   class_<I3Vector<char>, bases<I3FrameObject>, boost::shared_ptr<I3Vector<char> > >("I3VectorChar")
-    .def(vector_indexing_suite<I3Vector<char> >())
+    .def(std_vector_indexing_suite<I3Vector<char> >())
     .def("__str__",string_I3VectorChar)
     ;
   register_pointer_conversions<I3Vector<char> >();

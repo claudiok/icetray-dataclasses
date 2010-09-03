@@ -25,6 +25,7 @@
 #include <dataclasses/geometry/I3OMGeo.h>
 #include <dataclasses/geometry/I3TankGeo.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
@@ -81,7 +82,7 @@ void register_I3Geometry()
   //
 
   class_<I3Vector<OMKey>, bases<I3FrameObject> >("I3Vector_OMKey")
-    .def(vector_indexing_suite<I3Vector<OMKey> >())
+    .def(std_vector_indexing_suite<I3Vector<OMKey> >())
     ;
 
   class_<I3TankGeo, boost::shared_ptr<I3TankGeo> >("I3TankGeo")
@@ -96,7 +97,7 @@ void register_I3Geometry()
 
   class_<std::vector<I3TankGeo> >("I3StationGeo")
     .def(copy_suite<I3StationGeo>())
-    .def(vector_indexing_suite<std::vector<I3TankGeo> >())
+    .def(std_vector_indexing_suite<std::vector<I3TankGeo> >())
     ;
 
   class_<std::map<int, I3StationGeo> >("I3StationGeoMap")

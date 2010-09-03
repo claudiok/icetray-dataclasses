@@ -23,6 +23,7 @@
 
 #include <dataclasses/physics/I3MCHit.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -64,7 +65,7 @@ void register_I3MCHit()
     ;
 
   class_<std::vector<I3MCHit> >("vector_I3MCHit")
-    .def(vector_indexing_suite<std::vector<I3MCHit> >())
+    .def(std_vector_indexing_suite<std::vector<I3MCHit> >())
     ;
 
   class_<I3MCHitSeriesMap, bases<I3FrameObject>, I3MCHitSeriesMapPtr>("I3MCHitSeriesMap")
