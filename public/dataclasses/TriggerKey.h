@@ -98,6 +98,7 @@ class TriggerKey
     STRING = 120,              // A trigger based on # hits in a string
     VOLUME = 125,              // A volume/geometry specific trigger
     SPHERE = 127,
+    CYLINDER = 19,             // A Cylinder Trigger (added for the IC86 season)
     SPASE_2 = 170,             // SPASE trigger
                                // ... I still don't understand for what this is needed for,
                                // ... or why this isn't a value of SourceID (SPASE_1/SPASE_2)
