@@ -77,23 +77,34 @@ void register_I3Geometry()
 
   }
   def("identity", identity_<I3OMGeo::OMType>);
-  //
-  // I3TankGeo
-  //
 
   class_<I3Vector<OMKey>, bases<I3FrameObject> >("I3Vector_OMKey")
     .def(std_vector_indexing_suite<I3Vector<OMKey> >())
     ;
 
-  class_<I3TankGeo, boost::shared_ptr<I3TankGeo> >("I3TankGeo")
-    .def(copy_suite<I3TankGeo>())
-    .def_readwrite("position",&I3TankGeo::position)
-    .def_readwrite("orientation",&I3TankGeo::orientation)
-    .def_readwrite("tankradius",&I3TankGeo::tankradius)
-    .def_readwrite("tankheight",&I3TankGeo::tankheight)
-    .def_readwrite("fillheight",&I3TankGeo::fillheight)
-    .def_readwrite("omKeyList",&I3TankGeo::omKeyList_)
-    ;
+  //
+  // I3TankGeo
+  //
+  {
+    scope tankgeo = class_<I3TankGeo, boost::shared_ptr<I3TankGeo> >("I3TankGeo")
+      .def(copy_suite<I3TankGeo>())
+      .def_readwrite("position",&I3TankGeo::position)
+      .def_readwrite("orientation",&I3TankGeo::orientation)
+      .def_readwrite("tankradius",&I3TankGeo::tankradius)
+      .def_readwrite("tankheight",&I3TankGeo::tankheight)
+      .def_readwrite("fillheight",&I3TankGeo::fillheight)
+      .def_readwrite("omKeyList",&I3TankGeo::omKeyList_)
+      .def_readwrite("snowheight",&I3TankGeo::snowheight)
+      .def_readwrite("tanktype",&I3TankGeo::tanktype)
+      ;
+
+    enum_<I3TankGeo::TankType>("TankType")
+      .value("NotSet", I3TankGeo::NotSet)
+      .value("Tyvek_Lined", I3TankGeo::Tyvek_Lined)
+      .value("Zirconium_Lined", I3TankGeo::Zirconium_Lined)
+      .export_values()
+      ; 
+  }
 
   class_<std::vector<I3TankGeo> >("I3StationGeo")
     .def(copy_suite<I3StationGeo>())
