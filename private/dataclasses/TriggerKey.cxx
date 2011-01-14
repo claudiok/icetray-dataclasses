@@ -91,8 +91,6 @@ TriggerKey::GetTypeString(TypeID type)
       return("STRING");
     case VOLUME:
       return("VOLUME");
-    case CYLINDER:
-      return("CYLINDER");
     case SPHERE:
       return("SPHERE");
     case SPASE_2:
@@ -128,8 +126,6 @@ TriggerKey::GetTypeFromString(const string& typestr)
     return(STRING);
   if (typestr=="VOLUME")
     return(VOLUME);
-  if (typestr=="CYLINDER")
-    return(CYLINDER);
   if (typestr=="SPHERE")
     return(SPHERE);
   if (typestr=="SPASE_2")
