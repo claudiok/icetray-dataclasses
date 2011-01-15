@@ -62,6 +62,7 @@ void register_I3Geometry()
       ;
 
     enum_<I3OMGeo::OMType>("OMType")
+      .value("UnknownType", I3OMGeo::UnknownType)
       .value("AMANDA", I3OMGeo::AMANDA)
       .value("IceCube", I3OMGeo::IceCube)
       .value("IceTop", I3OMGeo::IceTop)
