@@ -256,4 +256,5 @@ void register_I3Trigger()
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     ;
 
+  register_pointer_conversions<I3TriggerHierarchy>();
 }
