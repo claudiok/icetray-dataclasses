@@ -104,11 +104,7 @@ void register_I3Calibration()
       PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
       PROPERTY(I3DOMCalibration, FADCDeltaT, FADCDeltaT)
       PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
-      PROPERTY(I3DOMCalibration, ATWDGain, ATWDGain)
-      PROPERTY(I3DOMCalibration, ATWDDeltaT, ATWDDeltaT)
-      PROPERTY(I3DOMCalibration, ATWDFreqFit, ATWDFreqFit)
       PROPERTY(I3DOMCalibration, DOMCalVersion, DOMCalVersion)
-      PROPERTY(I3DOMCalibration, ATWDBaseline, ATWDBaseline)
       PROPERTY(I3DOMCalibration, ATWDResponseWidth, ATWDResponseWidth)
       PROPERTY(I3DOMCalibration, FADCResponseWidth, FADCResponseWidth)
       PROPERTY(I3DOMCalibration, FADCResponseWidth, FADCResponseWidth)
@@ -117,6 +113,11 @@ void register_I3Calibration()
       PROPERTY(I3DOMCalibration, PMTDiscCalib, PMTDiscCalib)
       PROPERTY(I3DOMCalibration, DomNoiseRate, DomNoiseRate)
       PROPERTY(I3DOMCalibration, RelativeDomEff, RelativeDomEff)
+      /* XXX FIXME: find a better way to expose the channel argument. */
+      #define EVIL_PROPS (ATWDBaseline)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
+      #undef EVIL_PROPS
+      .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>())
       ;
 
   }
