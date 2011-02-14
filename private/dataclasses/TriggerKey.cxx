@@ -85,6 +85,8 @@ TriggerKey::GetTypeString(TypeID type)
       return("THREE_COINCIDENCE");
     case MERGED:
       return("MERGED");
+    case SLOW_PARTICLE:
+      return("SLOW_PARTICLE");
     case FRAGMENT_MULTIPLICITY:
       return("FRAGMENT_MULTIPLICITY");
     case STRING:
@@ -120,6 +122,8 @@ TriggerKey::GetTypeFromString(const string& typestr)
     return(THREE_COINCIDENCE);
   if (typestr=="MERGED")
     return(MERGED);
+  if (typestr=="SLOW_PARTICLE")
+    return(SLOW_PARTICLE);
   if (typestr=="FRAGMENT_MULTIPLICITY")
     return(FRAGMENT_MULTIPLICITY);
   if (typestr=="STRING")
