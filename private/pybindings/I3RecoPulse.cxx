@@ -24,6 +24,8 @@
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
 
@@ -35,14 +37,17 @@ void register_I3RecoPulse()
     PROPERTY(I3RecoPulse, SourceIndex, SourceIndex)
     PROPERTY(I3RecoPulse, Charge, Charge)
     PROPERTY(I3RecoPulse, Width, Width)
+    .def(copy_suite<I3RecoPulse>())
     ;
 
   class_<std::vector<I3RecoPulse> >("vector_I3RecoPulse")
     .def(std_vector_indexing_suite<std::vector<I3RecoPulse> >())
+    .def(copy_suite<std::vector<I3RecoPulse> >())
     ;
 
   class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
     .def(std_map_indexing_suite<I3RecoPulseSeriesMap>())
+    .def(copy_suite<I3RecoPulseSeriesMap>())
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
 

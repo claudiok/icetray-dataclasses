@@ -24,6 +24,7 @@
 #include <dataclasses/physics/I3Waveform.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
 
@@ -38,6 +39,7 @@ void register_I3Waveform()
   {
     scope waveform_scope =
       class_<I3Waveform, bases<I3FrameObject>, boost::shared_ptr<I3Waveform> >("I3Waveform")
+      .def(copy_suite<I3Waveform>())
       .def("GetStartTime", &I3Waveform::GetStartTime)
       .def("SetStartTime", &I3Waveform::SetStartTime)
       .def("GetBinWidth", &I3Waveform::GetBinWidth)
@@ -83,15 +85,17 @@ void register_I3Waveform()
 
   class_<std::vector<I3Waveform> >("I3WaveformSeries")
     .def(std_vector_indexing_suite<std::vector<I3Waveform> >())
+    .def(copy_suite<std::vector<I3Waveform> >())
     ;
 
   class_<std::vector<I3Waveform::StatusCompound> >("VectorI3WaveformStatusCompound")
     .def(std_vector_indexing_suite<std::vector<I3Waveform::StatusCompound> >())
+    .def(copy_suite<std::vector<I3Waveform::StatusCompound> >())
     ;
 
   class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("I3WaveformSeriesMap")
     .def(std_map_indexing_suite<I3WaveformSeriesMap>())
-    //.def("iteritems", boost::python::iterator<I3WaveformSeriesMap>())
+    .def(copy_suite<I3WaveformSeriesMap>())
     ;
 
   register_pointer_conversions<I3WaveformSeriesMap>();
