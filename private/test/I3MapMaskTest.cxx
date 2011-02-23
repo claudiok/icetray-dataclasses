@@ -352,7 +352,7 @@ TEST(Not)
 
 #define ROUND_UP(num, denom) (num % denom == 0) ? num/denom : (num/denom) + 1
 
-#if 1
+#if 0
 TEST(Serialization)
 {
 	I3RecoPulseSeriesMapPtr pulses, masked;
