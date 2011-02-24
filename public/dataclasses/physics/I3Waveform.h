@@ -15,7 +15,7 @@
 #include <dataclasses/I3Map.h>
 #include <dataclasses/OMKey.h>
 
-static const unsigned i3waveform_version_ = 2;
+static const unsigned i3waveform_version_ = 3;
 class I3Waveform 
 {
  public:
@@ -58,6 +58,7 @@ class I3Waveform
     std::pair<unsigned long long int, unsigned long long int>
       interval_;
     Status status_;
+    int8_t channel_;
   
    public:
     StatusCompound() : interval_(std::make_pair(0, 0)), status_(ADULTERATED) {}
@@ -73,6 +74,10 @@ class I3Waveform
     Status GetStatus() const { return status_; }
     
     void SetStatus(Status status) { status_ = status; }
+
+    int8_t GetChannel() const { return channel_; }
+
+    void SetChannel(int8_t channel) { channel_ = channel; }
     
     bool operator==(const StatusCompound& rhs) const
     {
@@ -81,7 +86,9 @@ class I3Waveform
     }
    private:
     friend class boost::serialization::access;
-    template<class Archive> void serialize(Archive& ar, unsigned version);
+    template<class Archive> void save(Archive& ar, unsigned version) const;
+    template<class Archive> void load(Archive& ar, unsigned version);
+    BOOST_SERIALIZATION_SPLIT_MEMBER();
   };
 
   /**
@@ -96,7 +103,6 @@ class I3Waveform
   double startTime_;
   double binWidth_;
   std::vector<double> waveform_;
-  std::vector<double> waveformSteps_; /* Digitizer step; unserialized for now. */
   std::vector<StatusCompound> waveformInfo_;
   Source source_;
   
@@ -112,10 +118,6 @@ class I3Waveform
   double GetBinWidth() const {return binWidth_;}
 
   void SetBinWidth(double binWidth) {binWidth_ = binWidth;}
-
-  const std::vector<double>& GetWaveformSteps() const { return waveformSteps_; }
-
-  void SetWaveformSteps(const std::vector<double>& steps) { waveformSteps_ = steps; }
 
   const std::vector<double>& GetWaveform() const {return waveform_;}
 
