@@ -96,6 +96,7 @@ class I3Waveform
   double startTime_;
   double binWidth_;
   std::vector<double> waveform_;
+  std::vector<double> waveformSteps_; /* Digitizer step; unserialized for now. */
   std::vector<StatusCompound> waveformInfo_;
   Source source_;
   
@@ -111,6 +112,10 @@ class I3Waveform
   double GetBinWidth() const {return binWidth_;}
 
   void SetBinWidth(double binWidth) {binWidth_ = binWidth;}
+
+  const std::vector<double>& GetWaveformSteps() const { return waveformSteps_; }
+
+  void SetWaveformSteps(const std::vector<double>& steps) { waveformSteps_ = steps; }
 
   const std::vector<double>& GetWaveform() const {return waveform_;}
 
