@@ -19,15 +19,39 @@ static const unsigned i3waveform_version_ = 3;
 class I3Waveform 
 {
  public:
+
   enum Source
   {
     ATWD = 0,
-    FADC = 10,
-    TWR_ELECTRICAL = 20,
-    TWR_OPTICAL = 30,
-    ETC = 40,
-    SLC = 50
+    FADC = 1,
+    TWR_ELECTRICAL = 2,
+    TWR_OPTICAL = 3,
+    ETC = 4,
+    SLC = 5
   };
+
+  union SourceCompound {
+    struct {
+      #ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
+      uint8_t slop   : 4;
+      uint8_t id     : 1;
+      uint8_t source : 3;
+      #else
+      uint8_t source : 3; /* Source ID */
+      uint8_t id     : 1; /* Source index (e.g. ATWDa/ATWDb) */
+      uint8_t slop   : 4; /* Unused space */
+      #endif
+    } fields;
+    uint8_t bits;
+
+    SourceCompound(Source source = ATWD, unsigned id = 0) 
+    {
+      fields.source = source;
+      fields.id = (id > 0);
+      fields.slop = 0;
+    }
+  } __attribute((packed));
+
   
   /** Describes possible artefacts within the data.
    * 
@@ -104,7 +128,8 @@ class I3Waveform
   double binWidth_;
   std::vector<double> waveform_;
   std::vector<StatusCompound> waveformInfo_;
-  Source source_;
+  SourceCompound source_;
+  // Source source_;
   
  public:
   I3Waveform() :  startTime_(0), binWidth_(0), source_(ATWD) {}
@@ -163,13 +188,22 @@ class I3Waveform
   void SetWaveformInformation(const std::vector<StatusCompound>& info)
     {waveformInfo_ = info;}
 
-  Source GetSource() const{return source_;}
+  Source GetSource() const { return (Source)(unsigned)(source_.fields.source); }
 
-  void SetSource(Source source){source_ = source;}
+  void SetSource(Source source) { source_.fields.source = source; }
+
+  /**
+   * Get the source index for this waveform (e.g. the ATWD chip ID)
+   */
+  unsigned GetSourceIndex() const { return source_.fields.id; }
+
+  void SetSourceIndex(unsigned num) { source_.fields.id = (num > 0); }
 
  private:
   friend class boost::serialization::access;
-  template<class Archive> void serialize(Archive& ar, unsigned version);
+  template<class Archive> void save(Archive& ar, unsigned version) const;
+  template<class Archive> void load(Archive& ar, unsigned version);
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
 
 bool operator==(const I3Waveform& lhs, const I3Waveform& rhs);
