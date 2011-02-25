@@ -209,6 +209,68 @@ void I3DOMCalibration::SetATWDBaseline(unsigned int id,
     }
 }
 
+/*
+ * Pulse template functions for use in simulation and reconstruction.
+ * 
+ * Per discussion with C. Wendt Jan. 13, 2011, his FADC fits are offset 50 ns
+ * and ATWD fits offset 5 ns. Other parameters from web page at 
+ * http://www.icecube.wisc.edu/~chwendt/dom-spe-waveform-shape/
+ * or, in the case of the denominator of c, the result of numerical integrals.
+ */
+
+#define CAUSALITY_SHIFT -11.5	/* Nanoseconds from peak center to photon */
+
+static double
+SPEWendtFADC(double t)
+{
+	const double c = 25.12 / 71.363940160184669;
+	const double x0 = 61.27 - 50 - CAUSALITY_SHIFT;
+	const double b1 = 30.;
+	const double b2 = 186.;
+
+	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
+}
+
+static double
+SPEWendtATWDNew(double t)
+{
+	const double c = 17.899 / 14.970753076313095;
+	const double x0 = -4.24 - 5 - CAUSALITY_SHIFT;
+	const double b1 = 5.5;
+	const double b2 = 42.;
+
+	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
+}
+
+static double
+SPEWendtATWDOld(double t)
+{
+	const double c = 15.47 / 13.292860653948139;
+	const double x0 = -3.929 - 5 - CAUSALITY_SHIFT;
+	const double b1 = 4.7;
+	const double b2 = 39.;
+
+	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
+}
+
+#undef CAUSALITY_SHIFT
+
+double
+I3DOMCalibration::ATWDPulseTemplate(double t) const
+{
+	switch (toroidType_) {
+		case OLD_TOROID: return SPEWendtATWDOld(t);
+		default: return SPEWendtATWDNew(t);
+	}
+}
+
+double
+I3DOMCalibration::FADCPulseTemplate(double t) const
+{
+	return SPEWendtFADC(t);
+}
+
+
 //
 // these are some beeeeautiful serialization functions.
 //
@@ -425,6 +487,8 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("relativeDomEff", relativeDomEff_);
       ar & make_nvp("noiseRate", noiseRate_);
     }
+
+  toroidType_ = (atwdResponseWidth_ > 0.4) ? NEW_TOROID : OLD_TOROID;
 
 }
 

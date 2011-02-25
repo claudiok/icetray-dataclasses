@@ -311,7 +311,12 @@ class I3DOMCalibration {
   /**
    * Set electronics response width for ATWD 
    */
-  void SetATWDResponseWidth(double atwdResponseWidth) { atwdResponseWidth_ = atwdResponseWidth; }
+  void SetATWDResponseWidth(double atwdResponseWidth)
+  {
+    atwdResponseWidth_ = atwdResponseWidth;
+    toroidType_ = (atwdResponseWidth_ > 0.4) ? NEW_TOROID : OLD_TOROID;
+  }
+
   /**
    * Get electronics response width for FADC 
    */
@@ -370,6 +375,9 @@ class I3DOMCalibration {
   {
     noiseRate_ = noiserate;
   }
+
+  double ATWDPulseTemplate(double time) const;
+  double FADCPulseTemplate(double time) const;
  
   template <class Archive>
     void serialize(Archive& ar, unsigned version);
@@ -381,6 +389,11 @@ class I3DOMCalibration {
   //  have DOMCAL now)
   static const unsigned int N_ATWD_CHANNELS = 3;
   
+  enum ToroidType {
+    OLD_TOROID = 0,
+    NEW_TOROID = 1
+  };
+
   double  temperature_;
  
   /**
@@ -453,6 +466,11 @@ class I3DOMCalibration {
 
   double atwdBaselines_[2][N_ATWD_CHANNELS][N_ATWD_BINS];
 
+  /**
+   *  Stores the toroid type (pre-2006 droopy or post-2006 sligthly-less-droopy) 
+   */
+  ToroidType toroidType_;
+  
   /**
    *  Stores the response witdth of the electronics to a pulse (ATWD). To be used with  
    *  the simulation. It changed with 2006 toroid change.  
