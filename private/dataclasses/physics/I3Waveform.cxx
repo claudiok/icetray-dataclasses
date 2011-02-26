@@ -94,7 +94,9 @@ void I3Waveform::load(Archive& ar, unsigned version)
 		source_.bits = 0;
 		source_.fields.source = source/10;
 	} else {
-		ar & make_nvp("source", source_.bits);
+		uint8_t bits;
+		ar & make_nvp("source", bits);
+		source_.bits = bits;
 	}
 }
 
