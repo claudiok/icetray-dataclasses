@@ -72,6 +72,7 @@ void register_I3Waveform()
       .value("TWR_ELECTRICAL", I3Waveform::TWR_ELECTRICAL)
       .value("TWR_OPTICAL", I3Waveform::TWR_OPTICAL)
       .value("ETC", I3Waveform::ETC)
+      .value("SLC", I3Waveform::SLC)
       .export_values()
       ;
 
