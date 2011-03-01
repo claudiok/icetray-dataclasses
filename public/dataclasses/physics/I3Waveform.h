@@ -30,6 +30,7 @@ class I3Waveform
     SLC = 5
   };
 
+#ifndef __CINT__
   union SourceCompound {
     struct {
       #ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
@@ -51,7 +52,7 @@ class I3Waveform
       fields.slop = 0;
     }
   } __attribute((packed));
-
+#endif // __CINT__
   
   /** Describes possible artefacts within the data.
    * 
@@ -128,8 +129,10 @@ class I3Waveform
   double binWidth_;
   std::vector<double> waveform_;
   std::vector<StatusCompound> waveformInfo_;
+#ifndef __CINT__
   SourceCompound source_;
   // Source source_;
+#endif // __CINT__
   
  public:
   I3Waveform() :  startTime_(0), binWidth_(0), source_(ATWD) {}
