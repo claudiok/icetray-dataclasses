@@ -29,10 +29,8 @@ tray = I3Tray()
 
 workspace = expandvars("$I3_SRC")
 infile = workspace + "/dataclasses/resources/testdata/vsn99_calibration.i3"
-tray.AddService("I3ReaderServiceFactory","i3reader",
-		Filename =  infile)
 
-tray.AddModule("I3Muxer","muxer")    # should throw error due to version number
+tray.AddModule("I3Reader","reader",Filename=infile)    # should throw error due to version number
 
 tray.AddModule("TrashCan","adios")
 
