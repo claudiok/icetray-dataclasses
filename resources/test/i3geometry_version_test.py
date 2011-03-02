@@ -22,11 +22,6 @@ load("libexamples")
 
 tray = I3Tray()
 
-#
-# Default configuration of the I3Muxer and the I3ReaderServices. 
-# Streams from the test file that don't apply to current test are
-# not read in.
-
 workspace = expandvars("$I3_SRC")
 infile = workspace + "/dataclasses/resources/testdata/vsn99_geometry.i3"
 
