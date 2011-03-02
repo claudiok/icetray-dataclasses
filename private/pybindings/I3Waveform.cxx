@@ -47,8 +47,9 @@ void register_I3Waveform()
       .def("GetWaveform", get_waveform_func)
       .def("SetWaveform", &I3Waveform::SetWaveform)
       .def("GetWaveformInformation", get_waveform_information_func)
-	#define PROPS (StartTime)(BinWidth)(Source)
+	#define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
+	#undef PROPS
       .add_property("waveform",get_waveform_func,&I3Waveform::SetWaveform)
       .add_property("waveform_information",get_waveform_information_func)
       // for static methods you need the both of these
@@ -64,6 +65,10 @@ void register_I3Waveform()
       .def("GetInterval", get_interval, return_value_policy<copy_const_reference>())
       .def("GetStatus", &I3Waveform::StatusCompound::GetStatus)
       .def("SetStatus", &I3Waveform::StatusCompound::SetStatus)
+      #define PROPS (Status)(Channel)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform::StatusCompound, PROPS)
+      #undef PROPS
+      .add_property("interval", bp::make_function(get_interval, return_value_policy<copy_const_reference>()))
       ;
 
     enum_<I3Waveform::Source>("Source")
@@ -76,10 +81,11 @@ void register_I3Waveform()
       .export_values()
       ;
 
-    enum_<I3Waveform::Status>("Status")
+    enum_<unsigned>("Status") /* Only a _little_ bit evil. */
       .value("VIRGINAL", I3Waveform::VIRGINAL)
-      .value("SHADY", I3Waveform::SHADY)
-      .value("ADULTERATED", I3Waveform::ADULTERATED)
+      .value("COMBINED", I3Waveform::COMBINED)
+      .value("SATURATED", I3Waveform::SATURATED)
+      .value("UNDERSHOT", I3Waveform::UNDERSHOT)
       .export_values()
       ;
   }

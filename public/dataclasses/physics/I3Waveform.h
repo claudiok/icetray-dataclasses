@@ -35,11 +35,13 @@ class I3Waveform
     struct {
       #ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
       uint8_t slop   : 4;
+      uint8_t hlc    : 1;
       uint8_t id     : 1;
       uint8_t source : 3;
       #else
       uint8_t source : 3; /* Source ID */
       uint8_t id     : 1; /* Source index (e.g. ATWDa/ATWDb) */
+      uint8_t hlc    : 1; /* Readout type (e.g. SLC/HLC) */
       uint8_t slop   : 4; /* Unused space */
       #endif
     } fields;
@@ -66,27 +68,33 @@ class I3Waveform
    * It should record this information using this enumeration.
    * 
    * If the DOM calibrator combines the ATWD channels, it should call bins that
-   * saturate even in the lowest amplified channel ADULTERATED, bins that saturate
-   * only in some channels SHADY and bins that do not saturate in the highest
-   * amplified channel VIRGINAL.
+   * saturate even in the lowest amplified channel SATURATED, bins that saturate
+   * only in some channels COMBINED and bins that do not saturate in the highest
+   * amplified channel VIRGINAL. Bins that have drooped below the bias voltage
+   * should be marked as UNDERSHOT. These will be combined by GetStatus() in cases
+   * where the waveform is clipped on both sides, e.g. a droopy FADC waveform that
+   * saturates at the beginning and undershoots in the middle will be marked
+   * SATURATED | UNDERSHOT.
+   *
+   * CHANGED in I3Waveform version 3: SHADY => COMBINED, ADULTERATED => SATURATED
    */
-  enum Status
-  {
-    VIRGINAL = 0,
-    SHADY = 10,
-    ADULTERATED = 20
-  };
+   enum {
+     VIRGINAL = 0,
+     COMBINED  = (1 << 1), /* NB: 1 is sometimes used as a flag by other modules. */
+     SATURATED = (1 << 2),
+     UNDERSHOT = (1 << 3)
+   };
   
   class StatusCompound
   {
    private:
     std::pair<unsigned long long int, unsigned long long int>
       interval_;
-    Status status_;
+    unsigned status_;
     int8_t channel_;
   
    public:
-    StatusCompound() : interval_(std::make_pair(0, 0)), status_(ADULTERATED) {}
+    StatusCompound() : interval_(std::make_pair(0, 0)), status_(SATURATED) {}
     
     virtual ~StatusCompound();
     
@@ -96,9 +104,9 @@ class I3Waveform
     std::pair<unsigned long long int, unsigned long long int>&
     GetInterval() { return interval_; }
     
-    Status GetStatus() const { return status_; }
+    unsigned GetStatus() const { return status_; }
     
-    void SetStatus(Status status) { status_ = status; }
+    void SetStatus(unsigned status) { status_ = status; }
 
     int8_t GetChannel() const { return channel_; }
 
@@ -122,7 +130,7 @@ class I3Waveform
    * @return ADULTERATED/SHADY if any included status compound is ADULTERATED/SHADY,
    * or VIRGINAL.
    */
-  static Status GetStatus(const std::vector<StatusCompound>& waveformInfo);
+  static unsigned GetStatus(const std::vector<StatusCompound>& waveformInfo);
 
  private:
   double startTime_;

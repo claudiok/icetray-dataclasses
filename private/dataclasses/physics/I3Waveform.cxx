@@ -28,29 +28,35 @@ void I3Waveform::StatusCompound::load(Archive& ar, unsigned version)
     log_fatal("Attempting to read version %u from file but running version %u of I3Waveform class",version,i3waveform_version_);
 
   ar & make_nvp("interval", interval_);
-  ar & make_nvp("status", status_);
 
-  if (version < 3)
+  if (version < 3) {
+    unsigned status;
+    ar & make_nvp("status", status);
+    switch (status) {
+      case 0: status_ = VIRGINAL; break;  /* was: VIRGINAL */
+      case 10: status_ = COMBINED; break; /* was: SHADY */
+      default: status_ = SATURATED;       /* was: ADULTERATED (20) */
+    }
     channel_ = -1;
-  else
+  } else {
+    ar & make_nvp("status", status_);
     ar & make_nvp("channel", channel_);
+  }
 }
 
 
 I3_SERIALIZABLE(I3Waveform::StatusCompound);
 
 
-I3Waveform::Status I3Waveform::GetStatus(const vector<StatusCompound>& waveformInfo)
+unsigned I3Waveform::GetStatus(const vector<StatusCompound>& waveformInfo)
 {
-  Status retVal;
-  
-  if(waveformInfo.empty()) retVal = VIRGINAL;
-  else
-    retVal =
-      max_element(waveformInfo.begin(), waveformInfo.end(),
-                  bind(&StatusCompound::GetStatus, _1) < bind(&StatusCompound::GetStatus, _2))->GetStatus();
-    
-  return(retVal);
+  unsigned retVal = VIRGINAL;
+
+  std::vector<StatusCompound>::const_iterator it = waveformInfo.begin();
+  for ( ; it != waveformInfo.end(); it++)
+    retVal |= it->GetStatus();
+
+  return retVal;
 }
 
 
