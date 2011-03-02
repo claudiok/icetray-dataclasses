@@ -25,7 +25,10 @@ tray = I3Tray()
 workspace = expandvars("$I3_SRC")
 infile = workspace + "/dataclasses/resources/testdata/vsn99_eventheader.i3"
 
-tray.AddModule("I3Reader","reader", Filename = infile)    # should throw error due to version number
+tray.AddModule("I3Reader","reader", Filename = infile)
+def getheader(fr):
+        header = fr['I3EventHeader'] # should throw error due to version number
+tray.AddModule(getheader, 'getheader')
 
 tray.AddModule("TrashCan","adios")
 

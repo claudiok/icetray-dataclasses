@@ -25,8 +25,10 @@ tray = I3Tray()
 workspace = expandvars("$I3_SRC")
 infile = workspace + "/dataclasses/resources/testdata/vsn99_calibration.i3"
 
-tray.AddModule("I3Reader","reader",Filename=infile)    # should throw error due to version number
-
+tray.AddModule("I3Reader","reader", Filename=infile)
+def getcal(fr):
+        cal = fr['I3Calibration'] # should throw error due to version number
+tray.AddModule(getcal, 'getcal')
 tray.AddModule("TrashCan","adios")
 
 try:
