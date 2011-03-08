@@ -22,7 +22,7 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 8;
+static const unsigned i3domcalibration_version_ = 9;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
@@ -171,6 +171,15 @@ class I3DOMCalibration {
   double GetFADCGain() const { return fadcGain_; }
 
   /**
+   * Get the FADC baseline in data-taking mode, as measured from beacon launches.
+   *
+   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * on the front-end bias voltage. If the bias voltage is ever changed, new
+   * baselines will have to be collected.
+   */
+  double GetFADCBeaconBaseline() const { return fadcBeaconBaseline_; }
+
+  /**
    * Get FADC Pedestal- baseline point from which waveforms start.
    */
   LinearFit GetFADCBaselineFit() const { return fadcBaselineFit_ ; }
@@ -206,6 +215,11 @@ class I3DOMCalibration {
   {
     fadcGain_     = gain;
   };
+
+  void SetFADCBeaconBaseline(double bsl)
+  {
+    fadcBeaconBaseline_ = bsl;
+  }
 
   void SetFADCBaselineFit(LinearFit basefit)
     {
@@ -302,6 +316,16 @@ class I3DOMCalibration {
 		       unsigned int bin,
 		       double baseval);
 
+  /**
+   * Get the average ATWD baseline in data-taking mode, as measured from beacon launches.
+   *
+   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * on the front-end bias voltage. If the bias voltage is ever changed, new
+   * baselines will have to be collected.
+   */
+  double GetATWDBeaconBaseline(unsigned int id, unsigned int channel);
+ 
+  void SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl);  
 
   /**
    * Get electronics response width for ATWD 
@@ -401,6 +425,14 @@ class I3DOMCalibration {
    */
   double fadcGain_;
   LinearFit fadcBaselineFit_;
+
+  /**
+   * Pedestal in data-taking mode, as measured from beacon launches.
+   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * on the front-end bias voltage. If the bias voltage is ever changed, new
+   * baselines will have to be collected.
+   */
+  double fadcBeaconBaseline_;
   
   /**
    *	FADC inherent time offset (ns)
@@ -465,6 +497,17 @@ class I3DOMCalibration {
    */
 
   double atwdBaselines_[2][N_ATWD_CHANNELS][N_ATWD_BINS];
+
+  /**
+   *  Dumb-ol-array to hold the average baseline corrections measured from beacon launches.
+   *  [atwd chip id (0-1)] [ gain channel(0-2) ]
+   *
+   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * on the front-end bias voltage. If the bias voltage is ever changed, new
+   * baselines will have to be collected.
+   */
+
+  double atwdBeaconBaselines_[2][N_ATWD_CHANNELS];
 
   /**
    *  Stores the toroid type (pre-2006 droopy or post-2006 sligthly-less-droopy) 

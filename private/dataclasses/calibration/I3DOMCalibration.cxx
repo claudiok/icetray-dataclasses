@@ -209,6 +209,28 @@ void I3DOMCalibration::SetATWDBaseline(unsigned int id,
     }
 }
 
+double
+I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel)
+{
+	if ((id == 0 || id ==1) && 
+	    ( channel == 0 || channel == 1 || channel == 2)) {
+		return atwdBeaconBaselines_[id][channel];
+	} else {
+		log_fatal("Invalid id, channel, bin specified for GetATWDBeaconBaseline");
+	}
+}
+
+void
+I3DOMCalibration::SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl)
+{
+	if ((id == 0 || id ==1) && 
+	    ( channel == 0 || channel == 1 || channel == 2)) {
+		atwdBeaconBaselines_[id][channel] = bsl;
+	} else {
+		log_fatal("Invalid id, channel, bin specified for SetATWDBeaconBaseline");
+	}
+}
+
 /*
  * Pulse template functions for use in simulation and reconstruction.
  * 
@@ -469,6 +491,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("FADCResponseWidth", fadcResponseWidth_);
       
     }
+
   if (version > 4)
     {
       ar & make_nvp("atwdDeltaT", atwdDeltaT_);
@@ -486,6 +509,11 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("relativeDomEff", relativeDomEff_);
       ar & make_nvp("noiseRate", noiseRate_);
+    }
+  if (version > 8)
+    {
+      ar & make_nvp("ATWDBeaconBaselines", atwdBeaconBaselines_);
+      ar & make_nvp("FADCBeaconBaselines", fadcBeaconBaseline_);
     }
 
   toroidType_ = (atwdResponseWidth_ > 0.4) ? NEW_TOROID : OLD_TOROID;
