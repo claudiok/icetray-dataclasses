@@ -223,6 +223,7 @@ typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
 BOOST_CLASS_VERSION(I3Waveform, i3waveform_version_);
+BOOST_CLASS_VERSION(I3Waveform::StatusCompound, i3waveform_version_);
 I3_POINTER_TYPEDEFS(I3Waveform);
 I3_POINTER_TYPEDEFS(I3WaveformSeries);
 I3_POINTER_TYPEDEFS(I3WaveformSeriesMap);
