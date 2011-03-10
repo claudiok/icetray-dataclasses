@@ -31,7 +31,8 @@
 
 #define TRIGGERKEY_H_TriggerKey_TypeID                                   \
     (SIMPLE_MULTIPLICITY)(CALIBRATION)(MIN_BIAS)(THROUGHPUT)             \
-    (TWO_COINCIDENCE)(THREE_COINCIDENCE)(MERGED)(FRAGMENT_MULTIPLICITY)  \
+    (TWO_COINCIDENCE)(THREE_COINCIDENCE)(MERGED)(SLOW_PARTICLE)          \
+    (FRAGMENT_MULTIPLICITY)                                              \
     (STRING)(VOLUME)(SPHERE)(SPASE_2)(UNKNOWN_TYPE)
 
 #define TRIGGERKEY_H_TriggerKey_SubtypeID                                \
@@ -94,6 +95,7 @@ class TriggerKey
     TWO_COINCIDENCE = 40,      // IceCube global trigger:  combined 2 trigs
     THREE_COINCIDENCE = 50,    // IceCube global trigger:  combined 3 trigs
     MERGED = 70,               // A trigger from a merging of events
+    SLOW_PARTICLE = 80,        // A trigger for slow particles (long readouts)
     FRAGMENT_MULTIPLICITY = 105, // TWR trigger based on fragment counts
     STRING = 120,              // A trigger based on # hits in a string
     VOLUME = 125,              // A volume/geometry specific trigger
