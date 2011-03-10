@@ -1,9 +1,22 @@
+/**
+ *  $Id$
+ *  
+ *  Copyright (C) 2011
+ *  Jakob van Santen <vansanten@wisc.edu>
+ *  and the IceCube Collaboration <http://www.icecube.wisc.edu>
+ *  
+ */
+
+#ifndef DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED
+#define DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED
 
 #include "icetray/I3FrameObject.h"
 #include "icetray/OMKey.h"
 #include "icetray/I3Frame.h"
 #include "icetray/serialization.h"
 #include "dataclasses/physics/I3RecoPulse.h"
+
+static const unsigned i3recopulseseriesmapmask_version_ = 0;
 
 class I3RecoPulseSeriesMapMask : public I3FrameObject {
 public:
@@ -47,12 +60,21 @@ public:
 	unsigned GetSum() const;
 	
 	/*
+	 * Are any bits set?
+	 */
+	bool GetAnySet() const;
+	
+	/*
+	 * Are all bits set?
+	 */
+	bool GetAllSet() const;
+	
+	/*
 	 * Logical operators, applied elementwise.
 	 */
 	I3RecoPulseSeriesMapMask operator&(const I3RecoPulseSeriesMapMask&) const;
 	I3RecoPulseSeriesMapMask operator|(const I3RecoPulseSeriesMapMask&) const;
 	I3RecoPulseSeriesMapMask operator^(const I3RecoPulseSeriesMapMask&) const;
-	I3RecoPulseSeriesMapMask operator~() const;
 	
 	/* Default ctor. */
 	I3RecoPulseSeriesMapMask() {};
@@ -72,6 +94,8 @@ private:
 		~bitmask();
 		void set_all();
 		void unset_all();
+		inline bool any() const;
+		inline bool all() const;
 		inline void set(const unsigned, bool);
 		
 		inline bool get(const unsigned) const;
@@ -121,3 +145,9 @@ private:
 	
 	SET_LOGGER("I3RecoPulseSeriesMapMask");
 };
+
+BOOST_CLASS_VERSION(I3RecoPulseSeriesMapMask, i3recopulseseriesmapmask_version_);
+I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMapMask);
+
+#endif /* DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED */
+

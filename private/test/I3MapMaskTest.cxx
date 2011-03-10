@@ -332,24 +332,6 @@ TEST(XOr)
 	ENSURE_EQUAL(mask_3.GetSum(), 0u);
 }
 
-TEST(Not)
-{
-	I3RecoPulseSeriesMapPtr pulses, masked;
-	pulses = manufacture_pulsemap();
-		
-	I3Frame frame;
-	frame.Put("foo", pulses);
-	const I3RecoPulseSeriesMapMask consty(frame, "foo");
-	
-	I3RecoPulseSeriesMapMask mask = ~consty;
-	
-	ENSURE_EQUAL(mask.GetSum(), 0u);
-	
-	masked = mask.Apply(frame);
-	
-	ENSURE_EQUAL(masked->size(), 0u);
-}
-
 #define ROUND_UP(num, denom) (num % denom == 0) ? num/denom : (num/denom) + 1
 
 #if 0

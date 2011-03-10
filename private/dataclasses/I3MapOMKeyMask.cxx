@@ -1,3 +1,11 @@
+/**
+ *  $Id$
+ *  
+ *  Copyright (C) 2011
+ *  Jakob van Santen <vansanten@wisc.edu>
+ *  and the IceCube Collaboration <http://www.icecube.wisc.edu>
+ *  
+ */
 
 #include "dataclasses/I3MapOMKeyMask.h"
 #include "dataclasses/physics/I3RecoPulse.h"
@@ -94,6 +102,27 @@ I3RecoPulseSeriesMapMask::GetSum() const
 		sum += list_it->sum();
 	
 	return sum;
+}
+
+bool
+I3RecoPulseSeriesMapMask::GetAnySet() const
+{
+	return (omkey_mask_.any());
+}
+
+bool
+I3RecoPulseSeriesMapMask::GetAllSet() const
+{
+	if (omkey_mask_.all()) {
+		bool all = true;
+		std::list<bitmask>::const_iterator list_it = element_masks_.begin();
+		for ( ; list_it != element_masks_.end(); list_it++)
+			all = (all && list_it->all());
+		
+		return all;
+	} else {
+		return false;
+	}
 }
 
 int
@@ -251,17 +280,6 @@ I3RecoPulseSeriesMapMask::operator^(const I3RecoPulseSeriesMapMask &other) const
 	return ApplyBinaryOperator<operator_xor>(other);
 }
 
-I3RecoPulseSeriesMapMask
-I3RecoPulseSeriesMapMask::operator~() const
-{
-	I3RecoPulseSeriesMapMask newmask(*this);
-	
-	newmask.SetNone();
-	
-	return newmask;
-}
-
-
 template <typename BinaryOperator>
 I3RecoPulseSeriesMapMask
 I3RecoPulseSeriesMapMask::ApplyBinaryOperator(const I3RecoPulseSeriesMapMask &other) const
@@ -400,6 +418,29 @@ I3RecoPulseSeriesMapMask::bitmask::~bitmask()
 	if (mask_)
 		free(mask_);
 };
+
+inline bool
+I3RecoPulseSeriesMapMask::bitmask::any() const
+{
+	mask_t test = 0;
+	for (unsigned i = 0; i < size_; i++)
+		test |= mask_[i];
+	
+	return (test != 0);
+}
+
+inline bool
+I3RecoPulseSeriesMapMask::bitmask::all() const
+{
+	bool test = true;
+	const mask_t all = std::numeric_limits<mask_t>::max();
+	
+	const unsigned max_i = (size_ == 0) ? 0 : size_-1;
+	for (unsigned i = 0; i < max_i; i++)
+		test = test && (mask_[i] == all);
+	
+	return (test && ((mask_[size_-1] == (all >> padding_))));
+}
 
 void
 I3RecoPulseSeriesMapMask::bitmask::set_all()
