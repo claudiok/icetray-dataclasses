@@ -15,6 +15,16 @@
 #include <dataclasses/I3Map.h>
 #include <dataclasses/OMKey.h>
 
+/**
+ * List the names of enumeration members defined in this file
+ * here. These can be used for e.g. pybindings, which require
+ * the names of the enumeration members to be known. This list
+ * should be updated whenver members or new enums are added to
+ * the class.
+ */
+#define I3WAVEFORM_H_I3Waveform_Source (ATWD)(FADC)(TWR_ELECTRICAL)(TWR_OPTICAL)(ETC)(SLC)
+#define I3WAVEFORM_H_I3Waveform_Status (VIRGINAL)(COMBINED)(SATURATED)(UNDERSHOT)
+
 static const unsigned i3waveform_version_ = 3;
 class I3Waveform 
 {
@@ -78,7 +88,7 @@ class I3Waveform
    *
    * CHANGED in I3Waveform version 3: SHADY => COMBINED, ADULTERATED => SATURATED
    */
-   enum {
+   enum Status {
      VIRGINAL = 0,
      COMBINED  = (1 << 1), /* NB: 1 is sometimes used as a flag by other modules. */
      SATURATED = (1 << 2),
@@ -90,7 +100,7 @@ class I3Waveform
    private:
     std::pair<unsigned long long int, unsigned long long int>
       interval_;
-    unsigned status_;
+    Status status_;
     int8_t channel_;
   
    public:
@@ -104,9 +114,9 @@ class I3Waveform
     std::pair<unsigned long long int, unsigned long long int>&
     GetInterval() { return interval_; }
     
-    unsigned GetStatus() const { return status_; }
+    Status GetStatus() const { return status_; }
     
-    void SetStatus(unsigned status) { status_ = status; }
+    void SetStatus(Status status) { status_ = status; }
 
     int8_t GetChannel() const { return channel_; }
 

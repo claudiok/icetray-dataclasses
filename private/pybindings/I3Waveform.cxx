@@ -81,7 +81,7 @@ void register_I3Waveform()
       .export_values()
       ;
 
-    enum_<unsigned>("Status") /* Only a _little_ bit evil. */
+    enum_<I3Waveform::Status>("Status")
       .value("VIRGINAL", I3Waveform::VIRGINAL)
       .value("COMBINED", I3Waveform::COMBINED)
       .value("SATURATED", I3Waveform::SATURATED)
