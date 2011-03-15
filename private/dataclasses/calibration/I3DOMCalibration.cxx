@@ -210,7 +210,7 @@ void I3DOMCalibration::SetATWDBaseline(unsigned int id,
 }
 
 double
-I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel)
+I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel) const
 {
 	if ((id == 0 || id ==1) && 
 	    ( channel == 0 || channel == 1 || channel == 2)) {

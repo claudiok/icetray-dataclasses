@@ -323,7 +323,7 @@ class I3DOMCalibration {
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
-  double GetATWDBeaconBaseline(unsigned int id, unsigned int channel);
+  double GetATWDBeaconBaseline(unsigned int id, unsigned int channel) const;
  
   void SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl);  
 
