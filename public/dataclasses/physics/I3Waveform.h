@@ -104,7 +104,7 @@ class I3Waveform
     int8_t channel_;
   
    public:
-    StatusCompound() : interval_(std::make_pair(0, 0)), status_(SATURATED) {}
+    StatusCompound() : interval_(std::make_pair(0, 0)), status_(SATURATED), channel_(-1) {}
     
     virtual ~StatusCompound();
     
