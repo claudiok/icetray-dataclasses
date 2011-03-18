@@ -19,7 +19,15 @@ I3DOMCalibration::I3DOMCalibration()
     fadcResponseWidth_(NAN),
     relativeDomEff_(NAN),
     noiseRate_(NAN)
-{ }
+{
+	fadcBeaconBaseline_ = NAN;
+	atwdBeaconBaselines_[0][0] = NAN;
+	atwdBeaconBaselines_[0][1] = NAN;
+	atwdBeaconBaselines_[0][2] = NAN;
+	atwdBeaconBaselines_[1][0] = NAN;
+	atwdBeaconBaselines_[1][1] = NAN;
+	atwdBeaconBaselines_[1][2] = NAN;
+}
 
 /**
    Little convenience function that gets something out of a const map
