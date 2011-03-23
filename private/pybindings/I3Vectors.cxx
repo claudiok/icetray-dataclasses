@@ -74,6 +74,7 @@ void register_I3Vectors()
   register_i3vector_of<std::string>("String");
   
   register_i3vector_of<bool>("Bool");
+  register_i3vector_of<OMKey>("OMKey");
   
   register_i3vector_of<int16_t>("Short");
   register_i3vector_of<uint16_t>("UShort");
