@@ -25,32 +25,47 @@ TEST(GetStatusFromWaveformInformation)
   I3Waveform::StatusCompound virginal;
   I3Waveform::StatusCompound shady;
   I3Waveform::StatusCompound adulterated;
+  I3Waveform::StatusCompound undershot;
   
   virginal.SetStatus(I3Waveform::VIRGINAL);
-  shady.SetStatus(I3Waveform::SHADY);
-  adulterated.SetStatus(I3Waveform::ADULTERATED);
+  shady.SetStatus(I3Waveform::COMBINED);
+  adulterated.SetStatus(I3Waveform::SATURATED);
+  undershot.SetStatus(I3Waveform::UNDERSHOT);
   
-  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), I3Waveform::VIRGINAL);
+  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), (unsigned)I3Waveform::VIRGINAL);
   
   waveformInfo.push_back(virginal);
-  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), I3Waveform::VIRGINAL);
+  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), (unsigned)I3Waveform::VIRGINAL);
   
   waveformInfo.push_back(shady);
-  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), I3Waveform::SHADY);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::COMBINED);
+  ENSURE(!(I3Waveform::GetStatus(waveformInfo) & I3Waveform::SATURATED));
+  ENSURE(!(I3Waveform::GetStatus(waveformInfo) & I3Waveform::UNDERSHOT));
   
   waveformInfo.push_back(virginal);
-  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), I3Waveform::SHADY);
+  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), (unsigned)I3Waveform::COMBINED);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::COMBINED);
+  ENSURE(!(I3Waveform::GetStatus(waveformInfo) & I3Waveform::SATURATED));
+  ENSURE(!(I3Waveform::GetStatus(waveformInfo) & I3Waveform::UNDERSHOT));
   
   waveformInfo.push_back(adulterated);
-  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), I3Waveform::ADULTERATED);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::COMBINED);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::SATURATED);
+  ENSURE(!(I3Waveform::GetStatus(waveformInfo) & I3Waveform::UNDERSHOT));
   
   waveformInfo.push_back(shady);
   waveformInfo.push_back(virginal);
-  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), I3Waveform::ADULTERATED);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::COMBINED);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::SATURATED);
+  ENSURE(!(I3Waveform::GetStatus(waveformInfo) & I3Waveform::UNDERSHOT));
 
+  waveformInfo.push_back(undershot);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::COMBINED);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::SATURATED);
+  ENSURE(I3Waveform::GetStatus(waveformInfo) & I3Waveform::UNDERSHOT);
 
   waveformInfo.clear();
   waveformInfo.push_back(shady);
   waveformInfo.push_back(shady);  
-  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), I3Waveform::SHADY);
+  ENSURE_EQUAL(I3Waveform::GetStatus(waveformInfo), (unsigned)I3Waveform::COMBINED);
 }

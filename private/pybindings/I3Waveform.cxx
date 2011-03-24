@@ -24,6 +24,7 @@
 #include <dataclasses/physics/I3Waveform.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
 
@@ -38,6 +39,7 @@ void register_I3Waveform()
   {
     scope waveform_scope =
       class_<I3Waveform, bases<I3FrameObject>, boost::shared_ptr<I3Waveform> >("I3Waveform")
+      .def(copy_suite<I3Waveform>())
       .def("GetStartTime", &I3Waveform::GetStartTime)
       .def("SetStartTime", &I3Waveform::SetStartTime)
       .def("GetBinWidth", &I3Waveform::GetBinWidth)
@@ -45,8 +47,9 @@ void register_I3Waveform()
       .def("GetWaveform", get_waveform_func)
       .def("SetWaveform", &I3Waveform::SetWaveform)
       .def("GetWaveformInformation", get_waveform_information_func)
-	#define PROPS (StartTime)(BinWidth)(Source)
+	#define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
+	#undef PROPS
       .add_property("waveform",get_waveform_func,&I3Waveform::SetWaveform)
       .add_property("waveform_information",get_waveform_information_func)
       // for static methods you need the both of these
@@ -62,6 +65,10 @@ void register_I3Waveform()
       .def("GetInterval", get_interval, return_value_policy<copy_const_reference>())
       .def("GetStatus", &I3Waveform::StatusCompound::GetStatus)
       .def("SetStatus", &I3Waveform::StatusCompound::SetStatus)
+      #define PROPS (Status)(Channel)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform::StatusCompound, PROPS)
+      #undef PROPS
+      .add_property("interval", bp::make_function(get_interval, return_value_policy<copy_const_reference>()))
       ;
 
     enum_<I3Waveform::Source>("Source")
@@ -70,28 +77,32 @@ void register_I3Waveform()
       .value("TWR_ELECTRICAL", I3Waveform::TWR_ELECTRICAL)
       .value("TWR_OPTICAL", I3Waveform::TWR_OPTICAL)
       .value("ETC", I3Waveform::ETC)
+      .value("SLC", I3Waveform::SLC)
       .export_values()
       ;
 
     enum_<I3Waveform::Status>("Status")
       .value("VIRGINAL", I3Waveform::VIRGINAL)
-      .value("SHADY", I3Waveform::SHADY)
-      .value("ADULTERATED", I3Waveform::ADULTERATED)
+      .value("COMBINED", I3Waveform::COMBINED)
+      .value("SATURATED", I3Waveform::SATURATED)
+      .value("UNDERSHOT", I3Waveform::UNDERSHOT)
       .export_values()
       ;
   }
 
   class_<std::vector<I3Waveform> >("I3WaveformSeries")
     .def(std_vector_indexing_suite<std::vector<I3Waveform> >())
+    .def(copy_suite<std::vector<I3Waveform> >())
     ;
 
   class_<std::vector<I3Waveform::StatusCompound> >("VectorI3WaveformStatusCompound")
     .def(std_vector_indexing_suite<std::vector<I3Waveform::StatusCompound> >())
+    .def(copy_suite<std::vector<I3Waveform::StatusCompound> >())
     ;
 
   class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("I3WaveformSeriesMap")
     .def(std_map_indexing_suite<I3WaveformSeriesMap>())
-    //.def("iteritems", boost::python::iterator<I3WaveformSeriesMap>())
+    .def(copy_suite<I3WaveformSeriesMap>())
     ;
 
   register_pointer_conversions<I3WaveformSeriesMap>();
