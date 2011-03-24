@@ -15,19 +15,56 @@
 #include <dataclasses/I3Map.h>
 #include <dataclasses/OMKey.h>
 
-static const unsigned i3waveform_version_ = 2;
+/**
+ * List the names of enumeration members defined in this file
+ * here. These can be used for e.g. pybindings, which require
+ * the names of the enumeration members to be known. This list
+ * should be updated whenver members or new enums are added to
+ * the class.
+ */
+#define I3WAVEFORM_H_I3Waveform_Source (ATWD)(FADC)(TWR_ELECTRICAL)(TWR_OPTICAL)(ETC)(SLC)
+#define I3WAVEFORM_H_I3Waveform_Status (VIRGINAL)(COMBINED)(SATURATED)(UNDERSHOT)
+
+static const unsigned i3waveform_version_ = 3;
 class I3Waveform 
 {
  public:
+
   enum Source
   {
     ATWD = 0,
-    FADC = 10,
-    TWR_ELECTRICAL = 20,
-    TWR_OPTICAL = 30,
-    ETC = 40,
-    SLC = 50
+    FADC = 1,
+    TWR_ELECTRICAL = 2,
+    TWR_OPTICAL = 3,
+    ETC = 4,
+    SLC = 5
   };
+
+#ifndef __CINT__
+  union SourceCompound {
+    struct {
+      #ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
+      uint8_t slop   : 4;
+      uint8_t hlc    : 1;
+      uint8_t id     : 1;
+      uint8_t source : 3;
+      #else
+      uint8_t source : 3; /* Source ID */
+      uint8_t id     : 1; /* Source index (e.g. ATWDa/ATWDb) */
+      uint8_t hlc    : 1; /* Readout type (e.g. SLC/HLC) */
+      uint8_t slop   : 4; /* Unused space */
+      #endif
+    } fields;
+    uint8_t bits;
+
+    SourceCompound(Source source = ATWD, unsigned id = 0) 
+    {
+      fields.source = source;
+      fields.id = (id > 0);
+      fields.slop = 0;
+    }
+  } __attribute((packed));
+#endif // __CINT__
   
   /** Describes possible artefacts within the data.
    * 
@@ -41,16 +78,22 @@ class I3Waveform
    * It should record this information using this enumeration.
    * 
    * If the DOM calibrator combines the ATWD channels, it should call bins that
-   * saturate even in the lowest amplified channel ADULTERATED, bins that saturate
-   * only in some channels SHADY and bins that do not saturate in the highest
-   * amplified channel VIRGINAL.
+   * saturate even in the lowest amplified channel SATURATED, bins that saturate
+   * only in some channels COMBINED and bins that do not saturate in the highest
+   * amplified channel VIRGINAL. Bins that have drooped below the bias voltage
+   * should be marked as UNDERSHOT. These will be combined by GetStatus() in cases
+   * where the waveform is clipped on both sides, e.g. a droopy FADC waveform that
+   * saturates at the beginning and undershoots in the middle will be marked
+   * SATURATED | UNDERSHOT.
+   *
+   * CHANGED in I3Waveform version 3: SHADY => COMBINED, ADULTERATED => SATURATED
    */
-  enum Status
-  {
-    VIRGINAL = 0,
-    SHADY = 10,
-    ADULTERATED = 20
-  };
+   enum Status {
+     VIRGINAL = 0,
+     COMBINED  = (1 << 1), /* NB: 1 is sometimes used as a flag by other modules. */
+     SATURATED = (1 << 2),
+     UNDERSHOT = (1 << 3)
+   };
   
   class StatusCompound
   {
@@ -58,9 +101,10 @@ class I3Waveform
     std::pair<unsigned long long int, unsigned long long int>
       interval_;
     Status status_;
+    int8_t channel_;
   
    public:
-    StatusCompound() : interval_(std::make_pair(0, 0)), status_(ADULTERATED) {}
+    StatusCompound() : interval_(std::make_pair(0, 0)), status_(SATURATED), channel_(-1) {}
     
     virtual ~StatusCompound();
     
@@ -73,6 +117,10 @@ class I3Waveform
     Status GetStatus() const { return status_; }
     
     void SetStatus(Status status) { status_ = status; }
+
+    int8_t GetChannel() const { return channel_; }
+
+    void SetChannel(int8_t channel) { channel_ = channel; }
     
     bool operator==(const StatusCompound& rhs) const
     {
@@ -81,7 +129,9 @@ class I3Waveform
     }
    private:
     friend class boost::serialization::access;
-    template<class Archive> void serialize(Archive& ar, unsigned version);
+    template<class Archive> void save(Archive& ar, unsigned version) const;
+    template<class Archive> void load(Archive& ar, unsigned version);
+    BOOST_SERIALIZATION_SPLIT_MEMBER();
   };
 
   /**
@@ -90,14 +140,17 @@ class I3Waveform
    * @return ADULTERATED/SHADY if any included status compound is ADULTERATED/SHADY,
    * or VIRGINAL.
    */
-  static Status GetStatus(const std::vector<StatusCompound>& waveformInfo);
+  static unsigned GetStatus(const std::vector<StatusCompound>& waveformInfo);
 
  private:
   double startTime_;
   double binWidth_;
   std::vector<double> waveform_;
   std::vector<StatusCompound> waveformInfo_;
-  Source source_;
+#ifndef __CINT__
+  SourceCompound source_;
+  // Source source_;
+#endif // __CINT__
   
  public:
   I3Waveform() :  startTime_(0), binWidth_(0), source_(ATWD) {}
@@ -156,13 +209,22 @@ class I3Waveform
   void SetWaveformInformation(const std::vector<StatusCompound>& info)
     {waveformInfo_ = info;}
 
-  Source GetSource() const{return source_;}
+  Source GetSource() const { return (Source)(unsigned)(source_.fields.source); }
 
-  void SetSource(Source source){source_ = source;}
+  void SetSource(Source source) { source_.fields.source = source; }
+
+  /**
+   * Get the source index for this waveform (e.g. the ATWD chip ID)
+   */
+  unsigned GetSourceIndex() const { return source_.fields.id; }
+
+  void SetSourceIndex(unsigned num) { source_.fields.id = (num > 0); }
 
  private:
   friend class boost::serialization::access;
-  template<class Archive> void serialize(Archive& ar, unsigned version);
+  template<class Archive> void save(Archive& ar, unsigned version) const;
+  template<class Archive> void load(Archive& ar, unsigned version);
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
 
 bool operator==(const I3Waveform& lhs, const I3Waveform& rhs);
@@ -171,6 +233,7 @@ typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
 BOOST_CLASS_VERSION(I3Waveform, i3waveform_version_);
+BOOST_CLASS_VERSION(I3Waveform::StatusCompound, i3waveform_version_);
 I3_POINTER_TYPEDEFS(I3Waveform);
 I3_POINTER_TYPEDEFS(I3WaveformSeries);
 I3_POINTER_TYPEDEFS(I3WaveformSeriesMap);

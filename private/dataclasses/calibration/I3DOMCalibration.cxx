@@ -19,7 +19,15 @@ I3DOMCalibration::I3DOMCalibration()
     fadcResponseWidth_(NAN),
     relativeDomEff_(NAN),
     noiseRate_(NAN)
-{ }
+{
+	fadcBeaconBaseline_ = NAN;
+	atwdBeaconBaselines_[0][0] = NAN;
+	atwdBeaconBaselines_[0][1] = NAN;
+	atwdBeaconBaselines_[0][2] = NAN;
+	atwdBeaconBaselines_[1][0] = NAN;
+	atwdBeaconBaselines_[1][1] = NAN;
+	atwdBeaconBaselines_[1][2] = NAN;
+}
 
 /**
    Little convenience function that gets something out of a const map
@@ -208,6 +216,90 @@ void I3DOMCalibration::SetATWDBaseline(unsigned int id,
       log_fatal("Invalid id, channel, bin specified for SetATWDBaseline");
     }
 }
+
+double
+I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel) const
+{
+	if ((id == 0 || id ==1) && 
+	    ( channel == 0 || channel == 1 || channel == 2)) {
+		return atwdBeaconBaselines_[id][channel];
+	} else {
+		log_fatal("Invalid id, channel, bin specified for GetATWDBeaconBaseline");
+	}
+}
+
+void
+I3DOMCalibration::SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl)
+{
+	if ((id == 0 || id ==1) && 
+	    ( channel == 0 || channel == 1 || channel == 2)) {
+		atwdBeaconBaselines_[id][channel] = bsl;
+	} else {
+		log_fatal("Invalid id, channel, bin specified for SetATWDBeaconBaseline");
+	}
+}
+
+/*
+ * Pulse template functions for use in simulation and reconstruction.
+ * 
+ * Per discussion with C. Wendt Jan. 13, 2011, his FADC fits are offset 50 ns
+ * and ATWD fits offset 5 ns. Other parameters from web page at 
+ * http://www.icecube.wisc.edu/~chwendt/dom-spe-waveform-shape/
+ * or, in the case of the denominator of c, the result of numerical integrals.
+ */
+
+#define CAUSALITY_SHIFT -11.5	/* Nanoseconds from peak center to photon */
+
+static double
+SPEWendtFADC(double t)
+{
+	const double c = 25.12 / 71.363940160184669;
+	const double x0 = 61.27 - 50 - CAUSALITY_SHIFT;
+	const double b1 = 30.;
+	const double b2 = 186.;
+
+	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
+}
+
+static double
+SPEWendtATWDNew(double t)
+{
+	const double c = 17.899 / 14.970753076313095;
+	const double x0 = -4.24 - 5 - CAUSALITY_SHIFT;
+	const double b1 = 5.5;
+	const double b2 = 42.;
+
+	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
+}
+
+static double
+SPEWendtATWDOld(double t)
+{
+	const double c = 15.47 / 13.292860653948139;
+	const double x0 = -3.929 - 5 - CAUSALITY_SHIFT;
+	const double b1 = 4.7;
+	const double b2 = 39.;
+
+	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
+}
+
+#undef CAUSALITY_SHIFT
+
+double
+I3DOMCalibration::ATWDPulseTemplate(double t) const
+{
+	switch (toroidType_) {
+		case OLD_TOROID: return SPEWendtATWDOld(t);
+		default: return SPEWendtATWDNew(t);
+	}
+}
+
+double
+I3DOMCalibration::FADCPulseTemplate(double t) const
+{
+	return SPEWendtFADC(t);
+}
+
 
 //
 // these are some beeeeautiful serialization functions.
@@ -407,6 +499,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("FADCResponseWidth", fadcResponseWidth_);
       
     }
+
   if (version > 4)
     {
       ar & make_nvp("atwdDeltaT", atwdDeltaT_);
@@ -425,6 +518,13 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("relativeDomEff", relativeDomEff_);
       ar & make_nvp("noiseRate", noiseRate_);
     }
+  if (version > 8)
+    {
+      ar & make_nvp("ATWDBeaconBaselines", atwdBeaconBaselines_);
+      ar & make_nvp("FADCBeaconBaselines", fadcBeaconBaseline_);
+    }
+
+  toroidType_ = (atwdResponseWidth_ > 0.4) ? NEW_TOROID : OLD_TOROID;
 
 }
 
