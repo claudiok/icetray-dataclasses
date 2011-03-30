@@ -323,7 +323,7 @@ class I3DOMCalibration {
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
-  double GetATWDBeaconBaseline(unsigned int id, unsigned int channel);
+  double GetATWDBeaconBaseline(unsigned int id, unsigned int channel) const;
  
   void SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl);  
 
@@ -400,7 +400,7 @@ class I3DOMCalibration {
     noiseRate_ = noiserate;
   }
 
-  double ATWDPulseTemplate(double time) const;
+  double ATWDPulseTemplate(double time, unsigned int channel = 0) const;
   double FADCPulseTemplate(double time) const;
  
   template <class Archive>

@@ -23,6 +23,35 @@ TEST_GROUP(I3DOMLaunch)
 //using boost::serialization::make_nvp;
 //using boost::serialization::base_object;
 
+TEST(BooleryTomfoolery)
+{
+	I3DOMLaunch baddie;
+	
+	char wicked = CHAR_MAX >> 1; /* All bits set */
+	bool tricksy = *((bool*)&wicked);
+	
+	baddie.SetLCBit(tricksy);
+	ENSURE(int(baddie.GetLCBit()) == wicked);
+	ENSURE(int(!baddie.GetLCBit()) == wicked-1);
+	
+	if (baddie.GetLCBit())
+		if (!baddie.GetLCBit())
+			ENSURE(false); /* Should never get here */
+	// ENSURE(baddie.GetLCBit() && !baddie.GetLCBit());
+	
+	std::ostringstream oarchive_stream;
+	/* This is the archive type instantiated by I3_SERIALIZABLE */
+	boost::archive::portable_binary_oarchive oarchive(oarchive_stream);
+	oarchive << baddie;
+	
+	std::istringstream iarchive_stream(oarchive_stream.str());
+	boost::archive::portable_binary_iarchive iarchive(iarchive_stream);
+	I3DOMLaunch badum;
+	iarchive >> badum;
+	
+	ENSURE(int(badum.GetLCBit()) == 1);
+}
+
 TEST(serializeStandardWave)
 {
 	I3DOMLaunch wave;

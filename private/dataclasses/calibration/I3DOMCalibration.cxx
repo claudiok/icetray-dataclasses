@@ -19,7 +19,15 @@ I3DOMCalibration::I3DOMCalibration()
     fadcResponseWidth_(NAN),
     relativeDomEff_(NAN),
     noiseRate_(NAN)
-{ }
+{
+	fadcBeaconBaseline_ = NAN;
+	atwdBeaconBaselines_[0][0] = NAN;
+	atwdBeaconBaselines_[0][1] = NAN;
+	atwdBeaconBaselines_[0][2] = NAN;
+	atwdBeaconBaselines_[1][0] = NAN;
+	atwdBeaconBaselines_[1][1] = NAN;
+	atwdBeaconBaselines_[1][2] = NAN;
+}
 
 /**
    Little convenience function that gets something out of a const map
@@ -210,7 +218,7 @@ void I3DOMCalibration::SetATWDBaseline(unsigned int id,
 }
 
 double
-I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel)
+I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel) const
 {
 	if ((id == 0 || id ==1) && 
 	    ( channel == 0 || channel == 1 || channel == 2)) {
@@ -238,58 +246,91 @@ I3DOMCalibration::SetATWDBeaconBaseline(unsigned int id, unsigned int channel, d
  * and ATWD fits offset 5 ns. Other parameters from web page at 
  * http://www.icecube.wisc.edu/~chwendt/dom-spe-waveform-shape/
  * or, in the case of the denominator of c, the result of numerical integrals.
+ *
  */
 
 #define CAUSALITY_SHIFT -11.5	/* Nanoseconds from peak center to photon */
 
+struct SPETemplate {
+	double c, x0, b1, b2;
+};
+
+const SPETemplate ATWDNewToroidTemplate[3] = {
+	/* Channel 0: fit from SPE pulses */
+	{
+		17.899 / 14.970753076313095,
+		-4.24 - 5 - CAUSALITY_SHIFT,
+		5.5,
+		42
+	},
+	/* Channel 1: bootstrapped from channel 0 */
+	{
+		1.6581978,
+		-11.70227755 - CAUSALITY_SHIFT,
+		5.4664884,
+		36.22319705,
+	},
+	/* Channel 2: bootstrapped from channel 1 */
+	{
+		0.80663351,
+		-10.57794674 - CAUSALITY_SHIFT,
+		3.67798693, 
+		40.64740927,
+	},
+};
+
+const SPETemplate ATWDOldToroidTemplate[3] = {
+	/* Channel 0: fit from SPE pulses */
+	{
+		15.47 / 13.292860653948139,
+		-3.929 - 5 - CAUSALITY_SHIFT,
+		4.7,
+		39.
+	},
+	/* Channel 1: bootstrapped from channel 0 */
+	{
+		2.07399312,
+		-10.95781298 - CAUSALITY_SHIFT,
+		4.86019733,
+		30.74826947
+	},
+	/* Channel 2: TODO */
+	{
+		0.80663351,
+		-10.57794674 - CAUSALITY_SHIFT,
+		3.67798693,
+		40.64740927
+	},
+};
+
+const SPETemplate FADCTemplate = {
+	25.12 / 71.363940160184669,
+	61.27 - 50 - CAUSALITY_SHIFT,
+	30.,
+	186.
+};
+
 static double
-SPEWendtFADC(double t)
+SPEPulseShape(double t, const SPETemplate &p)
 {
-	const double c = 25.12 / 71.363940160184669;
-	const double x0 = 61.27 - 50 - CAUSALITY_SHIFT;
-	const double b1 = 30.;
-	const double b2 = 186.;
-
-	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
-}
-
-static double
-SPEWendtATWDNew(double t)
-{
-	const double c = 17.899 / 14.970753076313095;
-	const double x0 = -4.24 - 5 - CAUSALITY_SHIFT;
-	const double b1 = 5.5;
-	const double b2 = 42.;
-
-	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
-}
-
-static double
-SPEWendtATWDOld(double t)
-{
-	const double c = 15.47 / 13.292860653948139;
-	const double x0 = -3.929 - 5 - CAUSALITY_SHIFT;
-	const double b1 = 4.7;
-	const double b2 = 39.;
-
-	return c*pow(exp(-(t - x0)/b1) + exp((t - x0)/b2),-8);
+	return p.c*pow(exp(-(t - p.x0)/p.b1) + exp((t - p.x0)/p.b2),-8);
 }
 
 #undef CAUSALITY_SHIFT
 
 double
-I3DOMCalibration::ATWDPulseTemplate(double t) const
+I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel) const
 {
 	switch (toroidType_) {
-		case OLD_TOROID: return SPEWendtATWDOld(t);
-		default: return SPEWendtATWDNew(t);
+		case OLD_TOROID: return SPEPulseShape(t, ATWDOldToroidTemplate[channel]);
+		default: return SPEPulseShape(t, ATWDNewToroidTemplate[channel]);
 	}
 }
 
 double
 I3DOMCalibration::FADCPulseTemplate(double t) const
 {
-	return SPEWendtFADC(t);
+	return SPEPulseShape(t, FADCTemplate);
 }
 
 

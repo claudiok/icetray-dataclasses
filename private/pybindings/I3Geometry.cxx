@@ -79,10 +79,6 @@ void register_I3Geometry()
   }
   def("identity", identity_<I3OMGeo::OMType>);
 
-  class_<I3Vector<OMKey>, bases<I3FrameObject> >("I3Vector_OMKey")
-    .def(std_vector_indexing_suite<I3Vector<OMKey> >())
-    ;
-
   //
   // I3TankGeo
   //
