@@ -275,10 +275,10 @@ const SPETemplate ATWDNewToroidTemplate[3] = {
 	},
 	/* Channel 2: bootstrapped from channel 1 */
 	{
-		0.80663351,
-		-10.57794674 - CAUSALITY_SHIFT,
-		3.67798693, 
-		40.64740927,
+		0.70944364,
+		-10.58782492- CAUSALITY_SHIFT,
+		3.48330553,
+		42.10873959
 	},
 };
 
@@ -297,12 +297,12 @@ const SPETemplate ATWDOldToroidTemplate[3] = {
 		4.86019733,
 		30.74826947
 	},
-	/* Channel 2: TODO */
+	/* Channel 2: bootstrapped from channel 1 */
 	{
-		0.80663351,
-		-10.57794674 - CAUSALITY_SHIFT,
-		3.67798693,
-		40.64740927
+		1.35835821,
+		-9.68624195 - CAUSALITY_SHIFT,
+		3.5016398,
+		30.96897853
 	},
 };
 
