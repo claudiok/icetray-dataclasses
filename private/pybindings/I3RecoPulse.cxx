@@ -24,7 +24,6 @@
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
 
 using namespace boost::python;
