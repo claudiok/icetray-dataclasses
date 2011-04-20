@@ -90,6 +90,13 @@ void register_I3Calibration()
       .def_readwrite("TauFrac", &TauParam::TauFrac)
       ;
 
+    class_<SPETemplate>("SPETemplate")
+      .def_readwrite("c", &SPETemplate::c)
+      .def_readwrite("x0", &SPETemplate::x0)
+      .def_readwrite("b1", &SPETemplate::b1)
+      .def_readwrite("b2", &SPETemplate::b2)
+      ;
+
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
       .def(copy_suite<I3DOMCalibration>())
@@ -99,6 +106,7 @@ void register_I3Calibration()
       PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
       PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
       PROPERTY(I3DOMCalibration, FADCBeaconBaseline, FADCBeaconBaseline)
+      PROPERTY(I3DOMCalibration, FADCPulseShape, FADCPulseShape)
       PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
       PROPERTY(I3DOMCalibration, TauParameters, TauParameters)
       PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
@@ -114,7 +122,7 @@ void register_I3Calibration()
       PROPERTY(I3DOMCalibration, DomNoiseRate, DomNoiseRate)
       PROPERTY(I3DOMCalibration, RelativeDomEff, RelativeDomEff)
       /* XXX FIXME: find a better way to expose the channel argument. */
-      #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
+      #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDPulseShape)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
       .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>())

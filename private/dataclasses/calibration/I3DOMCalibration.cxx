@@ -254,64 +254,60 @@ I3DOMCalibration::SetATWDBeaconBaseline(unsigned int id, unsigned int channel, d
 
 #define CAUSALITY_SHIFT -11.5	/* Nanoseconds from peak center to photon */
 
-struct SPETemplate {
-	double c, x0, b1, b2;
-};
-
 const SPETemplate ATWDNewToroidTemplate[3] = {
 	/* Channel 0: fit from SPE pulses */
-	{
+	SPETemplate(
 		17.899 / 14.970753076313095,
 		-4.24 - 5 - CAUSALITY_SHIFT,
 		5.5,
 		42
-	},
+	),
 	/* Channel 1: bootstrapped from channel 0 */
-	{
+	SPETemplate(
 		1.6581978,
 		-11.70227755 - CAUSALITY_SHIFT,
 		5.4664884,
-		36.22319705,
-	},
+		36.22319705
+	),
 	/* Channel 2: bootstrapped from channel 1 */
-	{
+	SPETemplate(
 		0.70944364,
 		-10.58782492- CAUSALITY_SHIFT,
 		3.48330553,
 		42.10873959
-	},
+	),
 };
 
 const SPETemplate ATWDOldToroidTemplate[3] = {
 	/* Channel 0: fit from SPE pulses */
-	{
+	SPETemplate(
 		15.47 / 13.292860653948139,
 		-3.929 - 5 - CAUSALITY_SHIFT,
 		4.7,
 		39.
-	},
+	),
 	/* Channel 1: bootstrapped from channel 0 */
-	{
+	SPETemplate(
 		2.07399312,
 		-10.95781298 - CAUSALITY_SHIFT,
 		4.86019733,
 		30.74826947
-	},
+	),
 	/* Channel 2: bootstrapped from channel 1 */
-	{
+	SPETemplate(
 		1.35835821,
 		-9.68624195 - CAUSALITY_SHIFT,
 		3.5016398,
 		30.96897853
-	},
+	),
 };
 
-const SPETemplate FADCTemplate = {
+const SPETemplate FADCTemplate = SPETemplate(
 	25.12 / 71.363940160184669,
 	61.27 - 50 - CAUSALITY_SHIFT,
 	30.,
 	186.
-};
+);
 
 static double
 SPEPulseShape(double t, const SPETemplate &p)
@@ -326,6 +322,8 @@ I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel) const
 {
 	if (channel > 2)
 		log_fatal("Unknown ATWD channel %u", channel);
+	if (atwdSPETemplate_[channel].IsValid())
+		return SPEPulseShape(t, atwdSPETemplate_[channel]);
 	switch (toroidType_) {
 		case OLD_TOROID: return SPEPulseShape(t, ATWDOldToroidTemplate[channel]);
 		default: return SPEPulseShape(t, ATWDNewToroidTemplate[channel]);
@@ -335,6 +333,8 @@ I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel) const
 double
 I3DOMCalibration::FADCPulseTemplate(double t) const
 {
+	if (fadcSPETemplate_.IsValid())
+		return SPEPulseShape(t, fadcSPETemplate_);
 	return SPEPulseShape(t, FADCTemplate);
 }
 
@@ -388,6 +388,20 @@ TauParam::serialize(Archive& ar, unsigned version)
 
 I3_SERIALIZABLE(TauParam);
 
+template <class Archive>
+void 
+SPETemplate::serialize(Archive& ar, unsigned version)
+{
+  if (version>pulsetemplate_version_)
+    log_fatal("Attempting to read version %u from file but running version %u of PulseTemplate class.",version,tauparam_version_);
+
+  ar & make_nvp("c", c);
+  ar & make_nvp("x0", x0);
+  ar & make_nvp("b1", b1);
+  ar & make_nvp("b2", b2);
+}
+
+I3_SERIALIZABLE(SPETemplate);
 
 template <class Archive>
 void 

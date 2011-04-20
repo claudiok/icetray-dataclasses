@@ -22,10 +22,11 @@
 #include <string>
 
 using namespace std;
-static const unsigned i3domcalibration_version_ = 9;
+static const unsigned i3domcalibration_version_ = 10;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
+static const unsigned pulsetemplate_version_ = 0;
 
 /**
  * @brief A struct to hold a linear fit 
@@ -107,7 +108,18 @@ struct TauParam
 
 BOOST_CLASS_VERSION(TauParam, tauparam_version_);
 
+struct SPETemplate {
+	double c;
+	double x0;
+	double b1;
+	double b2;
+	template <class Archive> void serialize(Archive& ar, unsigned version);
+	SPETemplate() : c(NAN), x0(NAN), b1(NAN), b2(NAN) {};
+	SPETemplate(double ci, double x0i, double b1i, double b2i) : c(ci), x0(x0i), b1(b1i), b2(b2i) {}; 
+	bool IsValid() const { return !isnan(c); };
+};
 
+BOOST_CLASS_VERSION(SPETemplate, pulsetemplate_version_);
 
 /**
  * @brief Class that stores the calibration information for a DOM
@@ -178,6 +190,24 @@ class I3DOMCalibration {
    * baselines will have to be collected.
    */
   double GetFADCBeaconBaseline() const { return fadcBeaconBaseline_; }
+
+  void SetATWDPulseShape(unsigned channel, const SPETemplate &tmpl) {
+    if (channel < 3)
+      atwdSPETemplate_[channel] = tmpl;
+    else
+      log_fatal("Invalid ATWD channel %u", channel);
+  }
+
+  SPETemplate GetATWDPulseShape(unsigned channel) const {
+    if (channel < 3)
+      return atwdSPETemplate_[channel];
+    else
+      log_fatal("Invalid ATWD channel %u", channel);
+  }
+
+  void SetFADCPulseShape(const SPETemplate &tmpl) { fadcSPETemplate_ = tmpl; }
+  
+  SPETemplate GetFADCPulseShape() const { return fadcSPETemplate_; }
 
   /**
    * Get FADC Pedestal- baseline point from which waveforms start.
@@ -266,7 +296,6 @@ class I3DOMCalibration {
    * ATWD chip as a function of the trigger_bias DAC setting
    */
   void SetATWDFreqFit(unsigned int chip, QuadraticFit fitParams);
-			       
 
   /**
    * Get the fit paramaters for the bin calibration.
@@ -508,6 +537,16 @@ class I3DOMCalibration {
    */
 
   double atwdBeaconBaselines_[2][N_ATWD_CHANNELS];
+
+  /**
+   * SPE pulse shape templates for each ATWD channel
+   */
+  SPETemplate atwdSPETemplate_[3];
+  
+  /**
+   * SPE pulse shape template for the FADC
+   */
+  SPETemplate fadcSPETemplate_;
 
   /**
    *  Stores the toroid type (pre-2006 droopy or post-2006 sligthly-less-droopy) 
