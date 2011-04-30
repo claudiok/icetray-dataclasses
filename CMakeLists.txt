@@ -24,10 +24,43 @@ i3_add_library(dataclasses
   public/dataclasses/TriggerKey.h
   )
 
-i3_test_executable(test 
-  private/test/*.cxx
-  USE_PROJECTS dataclasses
-  )
+if(NOT USE_ROOT)
+  i3_test_executable(test 
+    private/test/*.cxx
+    USE_PROJECTS dataclasses
+    )
+else(NOT USE_ROOT)
+  configure_file(${CMAKE_SRC_DIR}/${PROJECT_NAME}/private/test/I3DirectionTest.cxx.in
+    ${CMAKE_SRC_DIR}/${PROJECT_NAME}/private/test/I3DirectionTest.cxx
+    @ONLY)
+  i3_test_executable(test 
+    AsXMLTest.cxx
+    DOMFunctions.cxx
+    DeltaCompressTest.cxx
+    I3CalibrationTest.cxx
+    I3DOMLaunchTest.cxx
+    I3DOMStatusTest.cxx
+    I3FlasherInfoTest.cxx
+    I3MCHitTest.cxx
+    I3MCTreeTest.cxx
+    I3MapMaskTest.cxx
+    I3MapTest.cxx
+    I3MapTests.cxx
+    I3ParticleTest.cxx
+    I3TimeTest.cxx
+    I3TreeTest.cxx
+    I3TreeUtilsTest.cxx
+    I3TriggerHierarchyTest.cxx
+    I3TriggerStatusTest.cxx
+    I3TriggerTest.cxx
+    I3VectorTest.cxx
+    I3WaveformTest.cxx
+    OMKeyTest.cxx
+    OldScriptsTest.cxx
+    main.cxx
+    USE_PROJECTS dataclasses
+    )
+endif(NOT USE_ROOT)
 
 i3_test_scripts(resources/test/*.py)
 

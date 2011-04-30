@@ -31,7 +31,7 @@ TEST_GROUP(I3DirectionTest);
  * check branching it to a tree
  */
 
-TEST(branch_to_tree)
+T@USE_ROOT@EST(branch_to_tree)
 {
   I3DirectionPtr ptr(new I3Direction());
   /** @todo add some setting of data here */
@@ -56,7 +56,7 @@ TEST(branch_to_tree)
  * check branching object to a tree, writing the tree to disk,
  * and reading the tree back in, and finding the object in the tree.
  */
-TEST(branch_and_write)
+T@USE_ROOT@EST(branch_and_write)
 {
   I3DirectionPtr ptr(new I3Direction());
   /** @todo add some setting of data here */
