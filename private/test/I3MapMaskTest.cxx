@@ -65,6 +65,40 @@ TEST(Apply)
 	}
 }
 
+TEST(ApplyAutomagically)
+{
+	I3RecoPulseSeriesMapPtr pulses = manufacture_pulsemap();
+		
+	I3Frame frame;
+	frame.Put("foo", pulses);
+	I3RecoPulseSeriesMapMaskPtr mask = 
+	    boost::make_shared<I3RecoPulseSeriesMapMask>(frame, "foo");
+	
+	frame.Put("foomask", mask);
+	
+	/* Apply the mask behind the scenes. */
+	I3RecoPulseSeriesMapConstPtr masked =
+	    frame.Get<I3RecoPulseSeriesMapConstPtr>("foomask");
+	
+	ENSURE(masked, "Mask was applied by I3Frame");
+	ENSURE_EQUAL(pulses->size(), masked->size());
+	ENSURE_EQUAL(masked->begin()->second.size(), 9u);
+	
+	/* Ensure that original and masked pulse series maps are identical. */
+	I3RecoPulseSeriesMap::const_iterator mit1, mit2;
+	mit1 = pulses->begin();
+	mit2 = masked->begin();
+	for ( ; mit1 != pulses->end(); mit1++, mit2++) {
+		ENSURE_EQUAL(mit1->first, mit2->first);
+		ENSURE_EQUAL(mit1->second.size(), mit2->second.size());
+		I3RecoPulseSeries::const_iterator vit1, vit2;
+		vit1 = mit1->second.begin();
+		vit2 = mit2->second.begin();
+		for ( ; vit1 != mit1->second.end(); vit1++, vit2++)
+			ENSURE(*vit1 == *vit2);
+	}
+}
+
 TEST(SetSinglePulse)
 {
 	I3RecoPulseSeriesMapPtr pulses, masked;

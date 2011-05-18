@@ -100,6 +100,18 @@ I3_POINTER_TYPEDEFS(I3RecoPulseMap);
 #ifdef I3_USE_FAST_OMKEY_MAP
 BOOST_CLASS_VERSION(I3RecoPulseMap, 1);
 #endif
+
+/*
+ * Specialize I3Frame::Get() to turn convert various objects
+ * in the frame into I3RecoPulseSeriesMaps.
+ */
+
+#include "icetray/I3Frame.h"
+
+template <>
+I3RecoPulseSeriesMapConstPtr
+I3Frame::Get(const std::string& name, bool quietly, void*, void*) const;
+
 #endif //I3RECOPULSE_H_INCLUDED
 
 
