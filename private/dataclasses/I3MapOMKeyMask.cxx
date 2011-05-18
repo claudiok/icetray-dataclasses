@@ -563,5 +563,8 @@ I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
 	I3RecoPulseSeriesMapMaskConstPtr mask = 
 	    dynamic_pointer_cast<I3RecoPulseSeriesMapMaskConstPtr::value_type>(focp);
 	
-	return mask->Apply(*this); 
+	if (mask)
+		return mask->Apply(*this); 
+	else
+		return pulses;
 }

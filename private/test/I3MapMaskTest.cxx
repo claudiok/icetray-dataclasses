@@ -1,6 +1,7 @@
 #include <I3Test.h>
 #include "dataclasses/I3MapOMKeyMask.h"
 #include "dataclasses/physics/I3RecoPulse.h"
+#include "dataclasses/I3Double.h"
 #include "boost/make_shared.hpp"
 
 TEST_GROUP(I3MapMask);
@@ -97,6 +98,16 @@ TEST(ApplyAutomagically)
 		for ( ; vit1 != mit1->second.end(); vit1++, vit2++)
 			ENSURE(*vit1 == *vit2);
 	}
+	
+	/* Now, make sure it fails cleanly */
+	I3DoublePtr dub = boost::make_shared<I3Double>();
+	frame.Put("dub", dub);
+	
+	masked = frame.Get<I3RecoPulseSeriesMapConstPtr>("dub");
+	ENSURE(!masked, "I3Frame::Get() returns a null pointer");
+	
+	masked = frame.Get<I3RecoPulseSeriesMapConstPtr>("nonexistant");
+	ENSURE(!masked, "I3Frame::Get() returns a null pointer");
 }
 
 TEST(SetSinglePulse)
