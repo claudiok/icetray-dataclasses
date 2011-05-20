@@ -25,8 +25,8 @@
 
 using namespace boost::python;
 
-string dump(const I3Position &p){
-  ostringstream s;
+std::string dump(const I3Position &p){
+  std::ostringstream s;
   s << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
   return s.str();
 }

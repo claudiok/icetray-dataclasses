@@ -3,6 +3,7 @@
 //  $Id$
 //
 //
+#include <map>
 #include <icetray/serialization.h>
 #include <dataclasses/calibration/I3DOMCalibration.h>
 #include <dataclasses/I3Units.h>
@@ -36,9 +37,9 @@ I3DOMCalibration::I3DOMCalibration()
 template <typename K, typename V>
 static 
 const V& 
-at (const map<K, V>& a_map, const K& key) 
+at (const std::map<K, V>& a_map, const K& key) 
 {
-  typename map<K, V>::const_iterator iter = a_map.find(key);
+  typename std::map<K, V>::const_iterator iter = a_map.find(key);
   if (iter == a_map.end())
     log_fatal("Failure to find key in map.  I know this error message is vague.");
   return iter->second;
@@ -406,9 +407,9 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   if(version < 4)
     {
       //In this case, we need to convert the old map<> struct to simple array
-      map<unsigned int, double> ampGains_temp;
+      std::map<unsigned int, double> ampGains_temp;
       ar & make_nvp("ampGains",ampGains_temp);
-      map<unsigned int, double>::iterator iter = ampGains_temp.begin();
+      std::map<unsigned int, double>::iterator iter = ampGains_temp.begin();
       while(iter != ampGains_temp.end())
 	{
 	  if(iter->first < 3)
@@ -429,9 +430,9 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   if(version < 4)
     {
       //In this case, we need to convert the old map<> struct to simple array
-      map<unsigned int, QuadraticFit> atwdFreq_temp;
+      std::map<unsigned int, QuadraticFit> atwdFreq_temp;
       ar & make_nvp("atwdFreq",atwdFreq_temp);
-      map<unsigned int, QuadraticFit>::iterator iter = atwdFreq_temp.begin();
+      std::map<unsigned int, QuadraticFit>::iterator iter = atwdFreq_temp.begin();
       while(iter !=  atwdFreq_temp.end())
 	{
 	  if(iter->first < 2)
@@ -452,19 +453,19 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   if(version < 4)
     {
       //In this case, we need to convert the old map<> struct to simple array
-      map<unsigned, map<unsigned, LinearFit> > atwdBin0_temp;
-      map<unsigned, map<unsigned, LinearFit> > atwdBin1_temp;
+      std::map<unsigned, std::map<unsigned, LinearFit> > atwdBin0_temp;
+      std::map<unsigned, std::map<unsigned, LinearFit> > atwdBin1_temp;
       ar & make_nvp("atwd0BinParameters",atwdBin0_temp);
       ar & make_nvp("atwd1BinParameters",atwdBin1_temp);
       //  For atwdBin0:
       //first iterate over the outer map, this is over all channels (0-2)
-      map<unsigned, map<unsigned, LinearFit> >::iterator iter_nch = atwdBin0_temp.begin();
+      std::map<unsigned, std::map<unsigned, LinearFit> >::iterator iter_nch = atwdBin0_temp.begin();
       while(iter_nch != atwdBin0_temp.end())
 	{
 	  if(iter_nch->first <3)
 	    {
 	      // now for each channel, iterate over all bins (0-127)
-	      map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
+	      std::map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
 	      while(iter_nbin != iter_nch->second.end() )
 		{
 		  if(iter_nbin->first<128)
@@ -492,7 +493,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
 	  if(iter_nch->first <3)
 	    {
 	      // now for each channel, iterate over all bins (0-127)
-	      map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
+	      std::map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
 	      while(iter_nbin != iter_nch->second.end() )
 		{
 		  if(iter_nbin->first<128)

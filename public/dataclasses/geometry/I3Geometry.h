@@ -10,6 +10,7 @@
 #ifndef I3GEOMETRY_H_INCLUDED
 #define I3GEOMETRY_H_INCLUDED
 
+#include <vector>
 #include "dataclasses/Utility.h"
 #include "dataclasses/geometry/I3TankGeo.h"
 #include "dataclasses/geometry/I3OMGeo.h"
@@ -21,8 +22,8 @@
   The following is a flattened version of the Geometry Class for dcv2
   The 8 classes of old are now 3 structs.  
 
-  (1) I3Geometry contains the 'master' data, namely the map of OMKey to OM 
-  (for inice, icetop, and amanda), as well as the map of the stations.
+  (1) I3Geometry contains the 'master' data, namely the std::map of OMKey to OM 
+  (for inice, icetop, and amanda), as well as the std::map of the stations.
 
   (2) I3OMGeo contains all the necessary information for a single OM, including
   an enum to specify what type of OM it is.
@@ -46,18 +47,18 @@ static const unsigned i3geometry_version_ = 1;
 static const unsigned i3geometry_version_ = 0;
 #endif
 //Typedefs to avoid having to write the same thing over and over again.
-typedef vector<I3TankGeo> I3StationGeo;
+typedef std::vector<I3TankGeo> I3StationGeo;
 I3_POINTER_TYPEDEFS(I3StationGeo)
 
 
 #ifdef I3_USE_FAST_OMKEY_MAP
 typedef __gnu_cxx::hash_map<OMKey, I3OMGeo, OMKey::hash> I3OMGeoMap;
 #else
-typedef map<OMKey, I3OMGeo> I3OMGeoMap;
+typedef std::map<OMKey, I3OMGeo> I3OMGeoMap;
 #endif
 I3_POINTER_TYPEDEFS(I3OMGeoMap)
 
-typedef map<int, I3StationGeo> I3StationGeoMap;
+typedef std::map<int, I3StationGeo> I3StationGeoMap;
 I3_POINTER_TYPEDEFS(I3StationGeoMap)
 
 struct I3Geometry 
@@ -70,7 +71,7 @@ struct I3Geometry
   I3OMGeoMap omgeo;
 
   //Map of all the stations. 
-  //Each int specifies a StationGeo object, which is a vector of 2 TankGeo's.
+  //Each int specifies a StationGeo object, which is a std::vector of 2 TankGeo's.
   I3StationGeoMap stationgeo;
 
   I3Time startTime;

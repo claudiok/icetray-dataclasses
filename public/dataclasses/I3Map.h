@@ -12,6 +12,7 @@
 #include "icetray/I3Logging.h"
 #include <map>
 #include <string>
+#include <vector>
 
 #include <dataclasses/Utility.h>
 #include <icetray/I3Logging.h>
@@ -76,9 +77,9 @@ typedef I3Map<std::string, I3MapStringDouble> I3MapStringStringDouble;
 typedef I3Map<unsigned, unsigned> I3MapUnsignedUnsigned;
 typedef I3Map<unsigned short, unsigned short> I3MapUShortUShort;
 
-typedef I3Map<int, vector<int> > I3MapIntVectorInt;
-typedef I3Map<OMKey, vector<double> > I3MapKeyVectorDouble;
-typedef I3Map<OMKey, vector<int> > I3MapKeyVectorInt;
+typedef I3Map<int, std::vector<int> > I3MapIntVectorInt;
+typedef I3Map<OMKey, std::vector<double> > I3MapKeyVectorDouble;
+typedef I3Map<OMKey, std::vector<int> > I3MapKeyVectorInt;
 typedef I3Map<OMKey, double > I3MapKeyDouble;
 
 I3_POINTER_TYPEDEFS(I3MapStringDouble);
@@ -100,6 +101,4 @@ I3_POINTER_TYPEDEFS(I3MapKeyVectorInt);
 I3_POINTER_TYPEDEFS(I3MapKeyDouble);
 
 #endif // I3MAP_H_INCLUDED
-
-
 

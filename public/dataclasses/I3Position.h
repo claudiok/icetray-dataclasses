@@ -17,7 +17,6 @@
 #define I3POSITION_H_INCLUDED
 
 #include <math.h>
-using namespace std;
 
 #include "icetray/I3FrameObject.h"
 #include "Utility.h"

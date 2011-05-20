@@ -38,13 +38,13 @@ get_trigger_settings(I3TriggerStatusPtr ts){
   return r_map;
 }
 
-map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
+std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
 get_readout_settings(I3TriggerStatusPtr ts){
   return ts->GetReadoutSettings();
 }
 
 
-string get_trigger_name(I3TriggerStatusPtr ts){
+std::string get_trigger_name(I3TriggerStatusPtr ts){
   return ts->GetTriggerName();
 }
 

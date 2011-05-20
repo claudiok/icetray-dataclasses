@@ -114,7 +114,7 @@ class I3TriggerStatus
    * @param settings Trigger settings: string, integer values.
    */
   I3TriggerStatus(const std::string& name,
-                  const map<std::string, int>& settings)
+                  const std::map<std::string, int>& settings)
     : name_(name), settings_(settings) {}
   
   /**
@@ -136,18 +136,18 @@ class I3TriggerStatus
    * @return Trigger settings: string, integer values
    * (contents vary by trigger type).
    */
-  const map<std::string, int>& GetTriggerSettings() const { return settings_; }
-  map<std::string, int>& GetTriggerSettings() { return settings_; }  
+  const std::map<std::string, int>& GetTriggerSettings() const { return settings_; }
+  std::map<std::string, int>& GetTriggerSettings() { return settings_; }  
 
-  const map<Subdetector, I3TriggerReadoutConfig>& 
+  const std::map<Subdetector, I3TriggerReadoutConfig>& 
     GetReadoutSettings() const { return readoutconfigs_; }
-  map<Subdetector, I3TriggerReadoutConfig>& 
+  std::map<Subdetector, I3TriggerReadoutConfig>& 
     GetReadoutSettings() { return readoutconfigs_; }  
 
  private:
   std::string name_;
-  map<std::string, int> settings_;
-  map<Subdetector, I3TriggerReadoutConfig> readoutconfigs_;
+  std::map<std::string, int> settings_;
+  std::map<Subdetector, I3TriggerReadoutConfig> readoutconfigs_;
 
   friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);

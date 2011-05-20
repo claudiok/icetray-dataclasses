@@ -78,22 +78,22 @@ get_pos(I3Particle * particle)
 static std::string 
 i3particle_prettyprint(const I3Particle& p)
 {
-  ostringstream oss;
-  oss << "[ I3Particle MajorID : " << p.GetMajorID() << endl
-      << "             MinorID : " << p.GetMinorID() << endl
-      << "              Zenith : " << p.GetZenith()  << endl
-      << "             Azimuth : " << p.GetAzimuth()  << endl
-      << "                   X : " << p.GetX() << endl
-      << "                   Y : " << p.GetY() << endl
-      << "                   Z : " << p.GetZ() << endl
-      << "                Time : " << p.GetTime() << endl
-      << "              Energy : " << p.GetEnergy() << endl
-      << "               Speed : " << p.GetSpeed() <<  endl
-      << "              Length : " << p.GetLength() << endl
-      << "                Type : " << p.GetTypeString() << endl
-      << "               Shape : " << p.GetShapeString() << endl
-      << "              Status : " << p.GetFitStatusString() <<  endl
-      << "            Location : " << p.GetLocationTypeString() << endl 
+  std::ostringstream oss;
+  oss << "[ I3Particle MajorID : " << p.GetMajorID() << std::endl
+      << "             MinorID : " << p.GetMinorID() << std::endl
+      << "              Zenith : " << p.GetZenith()  << std::endl
+      << "             Azimuth : " << p.GetAzimuth()  << std::endl
+      << "                   X : " << p.GetX() << std::endl
+      << "                   Y : " << p.GetY() << std::endl
+      << "                   Z : " << p.GetZ() << std::endl
+      << "                Time : " << p.GetTime() << std::endl
+      << "              Energy : " << p.GetEnergy() << std::endl
+      << "               Speed : " << p.GetSpeed() <<  std::endl
+      << "              Length : " << p.GetLength() << std::endl
+      << "                Type : " << p.GetTypeString() << std::endl
+      << "               Shape : " << p.GetShapeString() << std::endl
+      << "              Status : " << p.GetFitStatusString() <<  std::endl
+      << "            Location : " << p.GetLocationTypeString() << std::endl 
       << "]" ;
 
 ;

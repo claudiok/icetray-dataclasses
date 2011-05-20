@@ -84,8 +84,8 @@ I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3Particle& child)
 
 
 
-void I3MCTreeUtils::internal::ConvertComposite(I3MCTree& t, I3MCTree::iterator& i, const vector<I3Particle>& cl){
-  vector<I3Particle>::const_iterator j = cl.begin();
+void I3MCTreeUtils::internal::ConvertComposite(I3MCTree& t, I3MCTree::iterator& i, const std::vector<I3Particle>& cl){
+  std::vector<I3Particle>::const_iterator j = cl.begin();
   for( ; j!=cl.end(); j++){
     I3Particle p(*j);
     p.GetComposite().clear();
@@ -114,7 +114,7 @@ I3MCTreePtr I3MCTreeUtils::ListToTree(I3MCListConstPtr list){
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(const I3Frame &frame, const string& key){
+I3MCTreeUtils::Get(const I3Frame &frame, const std::string& key){
   I3MCListConstPtr list = frame.Get<I3MCListConstPtr>(key);
   if (list) {
     return I3MCTreeUtils::ListToTree(*list);
@@ -124,12 +124,12 @@ I3MCTreeUtils::Get(const I3Frame &frame, const string& key){
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(I3FramePtr frame, const string& key){
+I3MCTreeUtils::Get(I3FramePtr frame, const std::string& key){
   return I3MCTreeUtils::Get(*frame,key);
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(const I3Frame &frame, const string& key1, const string& key2){
+I3MCTreeUtils::Get(const I3Frame &frame, const std::string& key1, const std::string& key2){
   I3MCListConstPtr list1 = frame.Get<I3MCListConstPtr>(key1);
   I3MCListConstPtr list2 = frame.Get<I3MCListConstPtr>(key2);
   if (list1 || list2){
@@ -148,7 +148,7 @@ I3MCTreeUtils::Get(const I3Frame &frame, const string& key1, const string& key2)
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(I3FramePtr frame, const string& key1, const string& key2){
+I3MCTreeUtils::Get(I3FramePtr frame, const std::string& key1, const std::string& key2){
   return I3MCTreeUtils::Get(*frame,key1,key2);
 }
 
@@ -280,10 +280,10 @@ I3MCTreeUtils::GetMostEnergeticInIceCascade(I3MCTreeConstPtr t)
 
 //------------------------------
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::Get(const I3MCTree& t, I3Particle::LocationType l)
 {
-  vector<I3Particle> v;
+  std::vector<I3Particle> v;
   I3MCTree::iterator iter;
   for (iter=t.begin(); iter!=t.end(); ++iter) 
     if (iter->GetLocationType()==l) 
@@ -291,25 +291,25 @@ I3MCTreeUtils::Get(const I3MCTree& t, I3Particle::LocationType l)
   return v;
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetInIce(const I3MCTree& t)
 {
   return Get(t,I3Particle::InIce);
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetInIce(I3MCTreeConstPtr t)
 {
   return Get(*t,I3Particle::InIce);
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetIceTop(const I3MCTree& t)
 {
   return Get(t,I3Particle::IceTop);
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
 {
   return Get(*t,I3Particle::IceTop);

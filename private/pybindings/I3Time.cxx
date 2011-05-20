@@ -34,18 +34,18 @@ using namespace boost::python;
 #define HAVE_PYDATETIME_API
 #endif
 
-string dump(I3Time t){
+std::string dump(I3Time t){
   double ns=t.GetModJulianNanoSec();
-  stringstream s;
+  std::stringstream s;
   s << t.GetUTCString("%Y-%m-%d %H:%M:%S.");
-  s << setw(3) << setfill('0') << int(ns/1e6) << ',';
-  s << setw(3) << setfill('0') << int(ns/1e3)%1000 << ',';
-  s << setw(3) << setfill('0') << int(ns)%1000 << ',';
+  s << std::setw(3) << std::setfill('0') << int(ns/1e6) << ',';
+  s << std::setw(3) << std::setfill('0') << int(ns/1e3)%1000 << ',';
+  s << std::setw(3) << std::setfill('0') << int(ns)%1000 << ',';
   s << uint64_t(ns*10)%10 << " UTC";
   return s.str();
 }
 
-string repr(I3Time t){
+std::string repr(I3Time t){
   std::stringstream out;
   out <<  "I3Time(" << t.GetUTCYear() << "," << t.GetUTCDaqTime() << ")";
   return out.str();

@@ -16,7 +16,6 @@
 #include "dataclasses/OMKey.h"
 #include "dataclasses/I3Vector.h"
 
-using namespace std;
 
 static const unsigned i3tankgeo_version_ = 2;
 

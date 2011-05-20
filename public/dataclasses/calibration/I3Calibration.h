@@ -12,6 +12,8 @@
 #ifndef I3CALIBRATION_H_INCLUDED
 #define I3CALIBRATION_H_INCLUDED
 
+#include <map>
+
 #include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/calibration/I3AMANDAOMCalibration.h"
@@ -35,10 +37,10 @@ public:
     
   virtual ~I3Calibration();
     
-  map<OMKey, I3DOMCalibration> domCal;
-  map<OMKey, I3AMANDAOMCalibration> amandaCal;
-  map<OMKey, I3VEMCalibration> vemCal;
-  map<OMKey, TWRCalibration> twrCal;
+  std::map<OMKey, I3DOMCalibration> domCal;
+  std::map<OMKey, I3AMANDAOMCalibration> amandaCal;
+  std::map<OMKey, I3VEMCalibration> vemCal;
+  std::map<OMKey, TWRCalibration> twrCal;
   double TWRGlobalT0;
   double TWRI3TimeOffset;
 

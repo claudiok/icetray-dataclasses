@@ -1,3 +1,4 @@
+#include <vector>
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <dataclasses/physics/DeltaCompressor.h>
@@ -37,7 +38,7 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
     try
     {
       I3DeltaCompression::DeltaCompressor compressor;
-      vector< vector<unsigned int> > compressedATWD;
+      std::vector< std::vector<unsigned int> > compressedATWD;
       
       I3Vector<I3Vector<int> >::const_iterator it;
       for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ )
@@ -46,10 +47,10 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
         compressor.reset();
         compressor.compress( *it );
         
-        // copy the compressed ATWD waveform to the compressed vector and 
-        // add the vector to the fector of compressed ATWD waveforms.
-        const vector<unsigned int>& compVals = compressor.getCompressed();
-        vector<unsigned int> compVector( compVals.begin(), compVals.end() );
+        // copy the compressed ATWD waveform to the compressed std::vector and 
+        // add the std::vector to the fector of compressed ATWD waveforms.
+        const std::vector<unsigned int>& compVals = compressor.getCompressed();
+        std::vector<unsigned int> compVector( compVals.begin(), compVals.end() );
         compressedATWD.push_back( compVector );
       }
       // serialize all compressed ATWD waveforms
@@ -68,10 +69,10 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       compressor.reset();
       compressor.compress( rawFADC_ );
       
-      // copy the compressed waveform to the output vector and serialize this 
-      // vector with the compressed FADC waveform.
-      const vector<unsigned int>& compVals = compressor.getCompressed();
-      vector<unsigned int> compressedFADC( compVals.begin(), compVals.end() );
+      // copy the compressed waveform to the output std::vector and serialize this 
+      // std::vector with the compressed FADC waveform.
+      const std::vector<unsigned int>& compVals = compressor.getCompressed();
+      std::vector<unsigned int> compressedFADC( compVals.begin(), compVals.end() );
       ar & make_nvp("CompressedFADC", compressedFADC );
       
       // also write the number of samples for this waveform to the archive
@@ -136,10 +137,10 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       
       // Create the data structure for the compressed version 
       // of the waveforms and deserialize fro the archive
-      vector< vector<unsigned int> > compressedATWD( rawATWD_.size() );
+      std::vector< std::vector<unsigned int> > compressedATWD( rawATWD_.size() );
       ar & make_nvp("CompressedATWD", compressedATWD);
       
-      vector< vector<unsigned int> >::const_iterator it;
+      std::vector< std::vector<unsigned int> >::const_iterator it;
       I3Vector<I3VectorInt >::iterator it2 = rawATWD_.begin();
       for( it = compressedATWD.begin(); it < compressedATWD.end(); it++, it2++ )
       {
@@ -149,10 +150,10 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
         
         // clear the rawATWD_ waveform and fill it with the decompressed values.
         (*it2).clear();
-        compressor.decompress( dynamic_cast< vector<int>& >(*it2) );
+        compressor.decompress( dynamic_cast< std::vector<int>& >(*it2) );
         
         // get the number of real samples of the waveform and truncate any
-        // extra values from the vector.
+        // extra values from the std::vector.
         unsigned int numSamples;
         ar & make_nvp( "NumSamplesATWD", numSamples );
 	if (numSamples > it2->size())
@@ -164,7 +165,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
         (*it2).resize( numSamples );
       }
       
-      vector<unsigned int> compressedFADC;
+      std::vector<unsigned int> compressedFADC;
       ar & make_nvp("CompressedFADC", compressedFADC);
 
       // reset compressor and initialize with the compressed data.
@@ -176,7 +177,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       compressor.decompress( rawFADC_ );
       
       // get the number of real samples of the waveform and truncate any
-      // extra values from the vector.
+      // extra values from the std::vector.
       unsigned int numFADCSamples;
       ar & make_nvp("NumSamplesFADC", numFADCSamples);
 	if (numFADCSamples > rawFADC_.size())

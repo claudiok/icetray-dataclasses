@@ -1,3 +1,4 @@
+#include <string>
 #include <dataclasses/jday.h>
 
 #include <icetray/serialization.h>
@@ -251,7 +252,7 @@ double I3Time::GetUTCNanoSec() const
   return 0.1 * daqtenthsns;
 }
 
-string I3Time::GetUTCString(string format)const
+std::string I3Time::GetUTCString(std::string format)const
 {
   time_t t=GetUnixTime();
   struct tm *tm=gmtime(&t);

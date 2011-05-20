@@ -215,7 +215,7 @@ class I3Time : public I3FrameObject
   /**
    * @brief Gets a string representing the time in UTC
    */
-  string GetUTCString(string format="%Y-%m-%d %H:%M:%S UTC")const;
+  std::string GetUTCString(std::string format="%Y-%m-%d %H:%M:%S UTC")const;
 
   /**
    * equality operator.  

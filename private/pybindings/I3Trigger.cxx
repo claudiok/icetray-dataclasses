@@ -109,9 +109,9 @@ bool AMANDA_triggered(I3TriggerHierarchyPtr t){
   return false;
 }
 
-vector<double> get_trigger_lengths(I3TriggerHierarchyPtr t, 
+std::vector<double> get_trigger_lengths(I3TriggerHierarchyPtr t, 
 				   int srcID, int typeID){
-  vector<double> tlengths;
+  std::vector<double> tlengths;
   TriggerKey::SourceID s = static_cast<TriggerKey::SourceID>(srcID);
   TriggerKey::TypeID ty = static_cast<TriggerKey::TypeID>(typeID);
 
@@ -125,8 +125,8 @@ vector<double> get_trigger_lengths(I3TriggerHierarchyPtr t,
   }
   return tlengths;
 }
-string TriggerPrettyPrint(const I3Trigger& t){
-  stringstream s;
+std::string TriggerPrettyPrint(const I3Trigger& t){
+  std::stringstream s;
   s<<t.GetTriggerKey().GetSourceString()<<" "
    <<t.GetTriggerKey().GetTypeString()<<" "
    <<t.GetTriggerKey().GetSubtype()<<" ";
@@ -141,29 +141,29 @@ string TriggerPrettyPrint(const I3Trigger& t){
   return s.str();
 }
 
-string DumpChildren(I3TriggerHierarchyPtr t,
+std::string DumpChildren(I3TriggerHierarchyPtr t,
 		    I3TriggerHierarchy::iterator i){
-  stringstream s;
+  std::stringstream s;
   I3TriggerHierarchy::sibling_iterator si;
   for(si = t->begin(i); si != t->end(i); si++){
     for(int j=0; j<2*t->depth(si); j++) s<<" ";
-    s<<TriggerPrettyPrint(*si) << endl;
+    s<<TriggerPrettyPrint(*si) << std::endl;
     s<<DumpChildren(t,si);
   }
   return s.str();
 }
 
-string print(I3TriggerHierarchyPtr t){
-  stringstream s;
+std::string print(I3TriggerHierarchyPtr t){
+  std::stringstream s;
 
   I3TriggerHierarchy::sibling_iterator i;
-  s<<"*** TRIGGER DUMP - BEGIN***"<<endl;
+  s<<"*** TRIGGER DUMP - BEGIN***"<<std::endl;
   for(i = t->begin(); i != t->end(); i++){
     for(int j=0; j<2*t->depth(i); j++) s<<" ";
-    s<<TriggerPrettyPrint(*i) << endl;
+    s<<TriggerPrettyPrint(*i) << std::endl;
     s<<DumpChildren(t,i);
   }
-  s<<"*** TRIGGER DUMP - END***"<<endl;
+  s<<"*** TRIGGER DUMP - END***"<<std::endl;
 
   return s.str();
 }

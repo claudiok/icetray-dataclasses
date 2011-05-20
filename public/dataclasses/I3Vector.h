@@ -8,6 +8,7 @@
 #ifndef DATACLASSES_I3VECTOR_H_INCLUDED
 #define DATACLASSES_I3VECTOR_H_INCLUDED
 
+#include <string>
 #include <icetray/serialization.h>
 #include "icetray/I3FrameObject.h"
 #include <vector>
@@ -60,7 +61,7 @@ typedef I3Vector<long long> I3VectorInt64;
 typedef I3Vector<unsigned long long> I3VectorUInt64;
 #endif
 
-typedef I3Vector<string> I3VectorString;
+typedef I3Vector<std::string> I3VectorString;
 typedef I3Vector<float> I3VectorFloat;
 typedef I3Vector<double> I3VectorDouble;
 typedef I3Vector<std::pair<double, double> > I3VectorDoubleDouble;

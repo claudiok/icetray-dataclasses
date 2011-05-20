@@ -19,7 +19,6 @@
 #include <vector>
 #include <sstream>
 
-using namespace std;
 
 /**
  * @brief Class that stores the calibration information for an AMANDA OM
@@ -56,7 +55,7 @@ struct I3AMANDAOMCalibration
   double pe_area;  
 
 
-  vector<I3AMANDAOM_XTalk> xtalk_receivers;
+  std::vector<I3AMANDAOM_XTalk> xtalk_receivers;
 
 
   I3AMANDAOMCalibration() 

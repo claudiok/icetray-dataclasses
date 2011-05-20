@@ -16,7 +16,6 @@
 #include "dataclasses/OMKey.h"
 #include "dataclasses/Utility.h"
 
-using namespace std;
 
 static const unsigned i3omgeo_version_ = 0;
 

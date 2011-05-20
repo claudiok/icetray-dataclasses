@@ -96,7 +96,7 @@ namespace I3MCTreeUtils
    *  Again probably not for general consumption.
    */
   namespace internal{
-    void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const vector<I3Particle>&);
+    void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const std::vector<I3Particle>&);
     void DumpChildren(const I3MCTree&,I3MCTree::iterator);
   }
 
@@ -124,12 +124,12 @@ namespace I3MCTreeUtils
   I3MCTree::iterator GetMostEnergeticInIceCascade(I3MCTreeConstPtr);
 
   /**
-   *Returns a vector of particles that are InIce.
+   *Returns a std::vector of particles that are InIce.
    */
-  const vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
+  const std::vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
 
-  const vector<I3Particle> GetInIce(const I3MCTree&);
-  const vector<I3Particle> GetInIce(I3MCTreeConstPtr);
+  const std::vector<I3Particle> GetInIce(const I3MCTree&);
+  const std::vector<I3Particle> GetInIce(I3MCTreeConstPtr);
 
   /**
    * This gets the particle that created the hit;
@@ -137,10 +137,10 @@ namespace I3MCTreeUtils
   I3Particle Get(const I3MCTree&, const I3MCHit&);
 
   /**
-   *Returns a vector of particles that are IceTop.
+   *Returns a std::vector of particles that are IceTop.
    */
-  const vector<I3Particle> GetIceTop(const I3MCTree&);
-  const vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
+  const std::vector<I3Particle> GetIceTop(const I3MCTree&);
+  const std::vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
 
   I3MCTree::iterator GetIterator(I3MCTreePtr, const I3Particle&);
 

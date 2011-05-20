@@ -1,3 +1,4 @@
+#include <map>
 #include <icetray/serialization.h>
 #include <dataclasses/calibration/I3Calibration.h>
 #include "I3TankCalibrationBackwardsCompat.h"
@@ -21,7 +22,7 @@ I3Calibration::serialize(Archive& ar, unsigned version)
   ar & make_nvp("amandacal",amandaCal);
   if(version == 1)
     {
-      map<TankKey, I3TankCalibrationBackwardsCompat> garbage;
+      std::map<TankKey, I3TankCalibrationBackwardsCompat> garbage;
       ar & make_nvp("tankcal",garbage);
     }
   if(version > 1)

@@ -12,6 +12,7 @@
 #ifndef I3DOMCALIBRATION_H_INCLUDED
 #define I3DOMCALIBRATION_H_INCLUDED
 
+#include <string>
 #include "dataclasses/Utility.h"
 
 #include <map>
@@ -21,7 +22,6 @@
 #include <cmath>
 #include <string>
 
-using namespace std;
 static const unsigned i3domcalibration_version_ = 9;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
@@ -290,12 +290,12 @@ class I3DOMCalibration {
   /**
    *  Get/Set the version of DOMCal.
    */
-  string GetDOMCalVersion() const
+ std::string GetDOMCalVersion() const
   {
     return domcalVersion_;
   }	
   
-  void SetDOMCalVersion(string version)
+  void SetDOMCalVersion(std::string version)
   {
     domcalVersion_ = version;
   }
@@ -486,10 +486,10 @@ class I3DOMCalibration {
   /**
    * Version of DOMCal used. For now, this only affects the 
    * FE load impedance. It might be useful for FADC calibration
-   * as well. Use a string since we may have version numbers like
+   * as well. Use a std::string since we may have version numbers like
    * 6.1.2, e.g.
    */
-  string domcalVersion_;
+ std::string domcalVersion_;
 
   /**
    *  Dumb-ol-array to hold the baseline corrections.

@@ -6,6 +6,7 @@
   @date $Date: (Mon, June 26, 2006) $
  **/
 
+#include <string>
 #include <icetray/serialization.h>
 #include <dataclasses/simulation/I3MCGenerationVolume.h>
 
@@ -81,7 +82,7 @@ double I3MCGenerationVolume::Get()
 }
 
 
-string I3MCGenerationVolume::GetTypeString() const
+std::string I3MCGenerationVolume::GetTypeString() const
 {
 	switch( type ){
 		case UNKNOWN: return("unknown");

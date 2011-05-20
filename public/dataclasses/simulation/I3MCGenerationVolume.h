@@ -44,7 +44,7 @@ class I3MCGenerationVolume : public I3FrameObject
 	  I3MCGenerationVolume& operator=(const I3MCGenerationVolume&);
 
 	  double Get();
-	  string GetTypeString() const;
+	  std::string GetTypeString() const;
 
 	  virtual ~I3MCGenerationVolume();
 	  

@@ -88,8 +88,8 @@ inline boost::shared_ptr<I3Particle> GetMostEnergeticCascade(I3MCTree* tree)
     }
 }
 
-inline vector<double> MPSpeedProfile(I3MCTree* tree){
-  vector<double> speed_prof;
+inline std::vector<double> MPSpeedProfile(I3MCTree* tree){
+  std::vector<double> speed_prof;
   I3MCTree::iterator iter = I3MCTreeUtils::GetMostEnergeticPrimary(*tree);
   while(iter.number_of_children()){
     if(iter.number_of_children() > 1) log_fatal("wasn't expecting more than one child.");
@@ -101,7 +101,7 @@ inline vector<double> MPSpeedProfile(I3MCTree* tree){
   return speed_prof;
 }
 
-vector<I3Particle> GetInIce(I3MCTreePtr t){
+std::vector<I3Particle> GetInIce(I3MCTreePtr t){
   return I3MCTreeUtils::GetInIce(t);
 }
 
@@ -122,7 +122,7 @@ int NCascades(I3MCTreePtr t){
   return n_cascades;
 }
 
-vector<I3Particle> GetPrimaries(I3MCTreePtr t){
+std::vector<I3Particle> GetPrimaries(I3MCTreePtr t){
   return I3MCTreeUtils::GetPrimaries(t);
 }
 
@@ -140,7 +140,7 @@ void TimeShift(I3MCTreePtr t, double dt){
   }
 }
 
-vector<I3Particle> 
+std::vector<I3Particle> 
 GetDaughters(I3MCTreePtr t, I3ParticlePtr p){
   return I3MCTreeUtils::GetDaughters(*t,*p);
 }

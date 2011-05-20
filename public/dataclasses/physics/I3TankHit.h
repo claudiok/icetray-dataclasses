@@ -13,7 +13,6 @@
 #include <string>
 #include <sstream>
 
-using namespace std;
 
 /**
  * @brief The container for all the Array Hit-related data in the event

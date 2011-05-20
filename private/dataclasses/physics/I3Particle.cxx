@@ -24,14 +24,14 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   ID_ = global_minor_id_++;
   if(global_major_id_ ==0){
     boost::hash<std::string> string_hash;
-    stringstream s;
+    std::stringstream s;
     s<<time(0)<<getpid()<<getenv("HOST");
     global_major_id_ = string_hash(s.str());
   }
   major_ID_ = global_major_id_;
 }
 
-string I3Particle::GetTypeString() const
+std::string I3Particle::GetTypeString() const
 {
   switch (type_) {
   case unknown:    return("unknown");
@@ -101,7 +101,7 @@ string I3Particle::GetTypeString() const
   }
 }
 
-string I3Particle::GetShapeString() const
+std::string I3Particle::GetShapeString() const
 {
   switch (shape_) {
   case Null:           return("Null");
@@ -118,7 +118,7 @@ string I3Particle::GetShapeString() const
   }
 }
 
-string I3Particle::GetFitStatusString() const
+std::string I3Particle::GetFitStatusString() const
 {
   switch (status_) {
   case NotSet:              return("NotSet");
@@ -132,7 +132,7 @@ string I3Particle::GetFitStatusString() const
   }
 }
 
-string I3Particle::GetLocationTypeString() const
+std::string I3Particle::GetLocationTypeString() const
 {
   switch (locationType_) {
   case Anywhere: return("Anywhere");

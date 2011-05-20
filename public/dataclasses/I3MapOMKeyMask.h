@@ -10,6 +10,9 @@
 #ifndef DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED
 #define DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED
 
+#include <functional>
+#include <string>
+#include <list>
 #include "icetray/I3FrameObject.h"
 #include "icetray/OMKey.h"
 #include "icetray/I3Frame.h"
@@ -125,15 +128,15 @@ private:
 	template <typename BinaryOperator>
 	I3RecoPulseSeriesMapMask ApplyBinaryOperator(const I3RecoPulseSeriesMapMask&) const;
 	
-	struct operator_and : public binary_function<mask_t, mask_t, mask_t> {
+	struct operator_and : public std::binary_function<mask_t, mask_t, mask_t> {
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs & rhs; }
 	};
 	
-	struct operator_or : public binary_function<mask_t, mask_t, mask_t> {
+	struct operator_or : public std::binary_function<mask_t, mask_t, mask_t> {
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs | rhs; }
 	};
 	
-	struct operator_xor : public binary_function<mask_t, mask_t, mask_t> {
+	struct operator_xor : public std::binary_function<mask_t, mask_t, mask_t> {
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs ^ rhs; }
 	};
 	
