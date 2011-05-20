@@ -48,6 +48,7 @@ i3_add_pybindings(dataclasses
   I3MapString.cxx
   I3MapInt.cxx
   I3MapKey.cxx
+  I3SuperDST.cxx
   module.cxx
   USE_TOOLS boost python log4cplus
   USE_PROJECTS icetray dataclasses

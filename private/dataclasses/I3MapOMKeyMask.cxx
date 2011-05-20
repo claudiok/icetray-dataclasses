@@ -542,29 +542,3 @@ I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 }
 
 I3_SERIALIZABLE(I3RecoPulseSeriesMapMask);
-
-/*
- * Only a little bit evil: Specialize the I3Frame::Get() to apply
- * a mask behind the scenes. This lets client code treat masks
- * just like I3RecoPulseSeriesMaps.
- */ 
-template <>
-I3RecoPulseSeriesMapConstPtr
-I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
-{
-	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name);
-	
-	I3RecoPulseSeriesMapConstPtr pulses =
-	    dynamic_pointer_cast<I3RecoPulseSeriesMapConstPtr::value_type>(focp);
-	
-	if (!focp || pulses)
-		return pulses;
-		
-	I3RecoPulseSeriesMapMaskConstPtr mask = 
-	    dynamic_pointer_cast<I3RecoPulseSeriesMapMaskConstPtr::value_type>(focp);
-	
-	if (mask)
-		return mask->Apply(*this); 
-	else
-		return pulses;
-}
