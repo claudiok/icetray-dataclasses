@@ -186,7 +186,7 @@ struct I3SuperDSTRecoPulseUtils {
 	static bool
 	IsBorked(const I3RecoPulse &p1)
 	{
-		return (!isfinite(p1.GetTime()) || !isfinite(p1.GetCharge())
+		return (!std::isfinite(p1.GetTime()) || !std::isfinite(p1.GetCharge())
 		    || (p1.GetCharge() < 0.0));
 	}
 };
@@ -267,7 +267,7 @@ I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &hlc_pulses,
 	 * Get the earliest leading-edge time present in the input.
 	 * This must be >= -512 ns to be representable.
 	 */
-	const double t0 = min(FindStartTime(hlc_pulses), FindStartTime(slc_pulses));
+	const double t0 = std::min(FindStartTime(hlc_pulses), FindStartTime(slc_pulses));
 	assert(t0 >= tmin_);
 	
 	/* 
@@ -560,7 +560,7 @@ I3SuperDST::FindStartTime(const I3RecoPulseSeriesMap &pmap)
 	for ( ; map_it != pmap.end() ; map_it++)
 		for (pulse_it = map_it->second.begin();
 		    pulse_it != map_it->second.end(); pulse_it++)
-			if (isfinite(pulse_it->GetTime()) &&
+			if (std::isfinite(pulse_it->GetTime()) &&
 			    pulse_it->GetTime() < tmin)
 				tmin = pulse_it->GetTime();
 				
