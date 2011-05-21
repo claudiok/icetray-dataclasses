@@ -4,6 +4,12 @@
 
 namespace bp = boost::python;
 
+I3RecoPulseSeriesMapPtr
+underhanded_apply(const I3RecoPulseSeriesMapMask& mask, const I3Frame &frame)
+{
+	return boost::const_pointer_cast<I3RecoPulseSeriesMap>(mask.Apply(frame));
+}
+
 void register_I3RecoPulseSeriesMapMask()
 {
 	void (I3RecoPulseSeriesMapMask::*set_om_all)(const OMKey&, bool) = &I3RecoPulseSeriesMapMask::Set;
@@ -17,7 +23,7 @@ void register_I3RecoPulseSeriesMapMask()
 		.def("__and__", &I3RecoPulseSeriesMapMask::operator&)
 		.def("__or__", &I3RecoPulseSeriesMapMask::operator|)
 		.def("__xor__", &I3RecoPulseSeriesMapMask::operator^)
-		.def("apply", &I3RecoPulseSeriesMapMask::Apply, "Apply the mask to an I3Frame, returning an I3RecoPulseSeries.")
+		.def("apply", &underhanded_apply, "Apply the mask to an I3Frame, returning an I3RecoPulseSeries.")
 		.def("any", &I3RecoPulseSeriesMapMask::GetAnySet, "Are any of the bits set in the mask?")
 		.def("all", &I3RecoPulseSeriesMapMask::GetAllSet, "Are all of the bits set in the mask?")
 		.def("sum", &I3RecoPulseSeriesMapMask::GetSum, "Get the number of set bits in the mask.")
