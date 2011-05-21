@@ -141,6 +141,9 @@ class I3Waveform
    * or VIRGINAL.
    */
   static unsigned GetStatus(const std::vector<StatusCompound>& waveformInfo);
+  
+  unsigned GetStatus() const;
+  int GetChannel() const;
 
  private:
   double startTime_;

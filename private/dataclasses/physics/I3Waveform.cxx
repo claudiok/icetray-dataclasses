@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/lambda.hpp>
+#include <boost/foreach.hpp>
 
 
 using namespace std;
@@ -57,6 +58,24 @@ unsigned I3Waveform::GetStatus(const vector<StatusCompound>& waveformInfo)
     retVal |= it->GetStatus();
 
   return retVal;
+}
+
+unsigned
+I3Waveform::GetStatus() const
+{
+	return GetStatus(waveformInfo_);
+}
+
+int
+I3Waveform::GetChannel() const
+{
+	int channel = 0;
+	
+	BOOST_FOREACH(const StatusCompound &stat, waveformInfo_)
+		if (stat.GetChannel() > channel)
+			channel = stat.GetChannel();
+	
+	return channel;
 }
 
 
