@@ -55,7 +55,7 @@ public:
 	/*
 	 * Apply the mask to the target map in the frame.
 	 */
-	boost::shared_ptr<I3RecoPulseSeriesMap> Apply(const I3Frame &frame) const;
+	boost::shared_ptr<const I3RecoPulseSeriesMap> Apply(const I3Frame &frame) const;
 	
 	/*
 	 * Get the number of set bits in the mask.
@@ -116,7 +116,10 @@ private:
 	std::string key_;
 	bitmask omkey_mask_;
 	std::list<bitmask> element_masks_;
-	boost::shared_ptr<const I3RecoPulseSeriesMap> source_;
+	I3RecoPulseSeriesMapConstPtr source_;
+	mutable I3RecoPulseSeriesMapPtr masked_;
+	
+	inline void ResetCache() { masked_.reset(); }
 
 	int FindKey(const OMKey &key, std::list<bitmask>::iterator &list_it,
 	    const I3RecoPulseSeriesMap::mapped_type **vec);

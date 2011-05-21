@@ -89,6 +89,8 @@ I3RecoPulseSeriesMapMask::SetNone()
 {
 	omkey_mask_.unset_all();
 	element_masks_.clear();
+	
+	ResetCache();
 }
 
 
@@ -147,8 +149,6 @@ I3RecoPulseSeriesMapMask::FindKey(const OMKey &key,
 	for (unsigned i = 0; i < omkey_idx; i++)
 		if (omkey_mask_.get(i))
 			list_it++;
-			
-	assert(list_it != element_masks_.end());
 	
 	return omkey_idx;
 }
@@ -160,6 +160,8 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key,
 	int omkey_idx;
 	std::list<bitmask>::iterator list_it;
 	const I3RecoPulseSeriesMap::mapped_type *vec;
+	
+	ResetCache();
 	
 	if ((omkey_idx = FindKey(key, list_it, &vec)) < 0)
 		return;
@@ -179,7 +181,7 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key,
 		if (*vec_it == target) {
 			list_it->set(idx, set_it);
 			break;
-		}
+		}	
 }
 
 
@@ -189,6 +191,8 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, const unsigned idx, bool set_it)
 	int omkey_idx;
 	std::list<bitmask>::iterator list_it;
 	const I3RecoPulseSeriesMap::mapped_type *vec;
+	
+	ResetCache();
 	
 	if ((omkey_idx = FindKey(key, list_it, &vec)) < 0)
 		return;
@@ -211,6 +215,8 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, bool set_it)
 	int omkey_idx;
 	std::list<bitmask>::iterator list_it;
 	const I3RecoPulseSeriesMap::mapped_type *vec;
+	
+	ResetCache();
 	
 	if ((omkey_idx = FindKey(key, list_it, &vec)) < 0)
 		return;
@@ -334,20 +340,22 @@ I3RecoPulseSeriesMapMask::ApplyBinaryOperator(const I3RecoPulseSeriesMapMask &ot
 	return newmask;
 }
 
-boost::shared_ptr<I3RecoPulseSeriesMap>
+boost::shared_ptr<const I3RecoPulseSeriesMap>
 I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 {
+	if (masked_)
+		return masked_;
+	
 	boost::shared_ptr<const I3RecoPulseSeriesMap> source =
 	    frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMap> >(key_);
 	
 	if (!source)
 		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
 	
-	boost::shared_ptr<I3RecoPulseSeriesMap> target =
-	    boost::make_shared<I3RecoPulseSeriesMap>();
+	masked_ = boost::make_shared<I3RecoPulseSeriesMap>();
 	
 	I3RecoPulseSeriesMap::const_iterator source_it = source->begin();
-	I3RecoPulseSeriesMap::iterator inserter = target->begin();
+	I3RecoPulseSeriesMap::iterator inserter = masked_->begin();
 	std::list<bitmask>::const_iterator list_it = element_masks_.begin();
 	unsigned omkey_idx = 0;
 	
@@ -364,13 +372,13 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 			if (list_it->get(idx))
 				target_vec.push_back(*source_vit);
 				
-		inserter = target->insert(inserter,
+		inserter = masked_->insert(inserter,
 		    std::make_pair(source_it->first, target_vec));
 			
 		list_it++;
 	}
 	
-	return target;
+	return masked_;
 }
 
 

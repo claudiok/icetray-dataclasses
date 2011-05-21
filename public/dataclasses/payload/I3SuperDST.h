@@ -129,7 +129,7 @@ public:
 	 * Expand charge stamps into fake I3RecoPulses, packing everything into
 	 * a single map.
 	 */
-	I3RecoPulseSeriesMapPtr Unpack() const;
+	I3RecoPulseSeriesMapConstPtr Unpack() const;
 	
 	std::list<I3SuperDSTReadout> GetHLCReadouts() const
 	    { return GetReadouts(true); };
@@ -167,6 +167,7 @@ private:
 	std::list<I3SuperDSTReadout> readouts_;
 	std::deque<std::pair<std::list<I3SuperDSTReadout>::const_iterator,
 	    std::list<I3SuperDSTReadout>::const_iterator> > subevent_ranges_;
+	mutable I3RecoPulseSeriesMapPtr unpacked_;
 	
 	void AddPulseMap(const I3RecoPulseSeriesMap &pulses, bool hlc, double t0);
 	std::list<I3SuperDSTReadout> GetReadouts(bool hlc) const;

@@ -198,6 +198,8 @@ I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses, bool hlc, double t0)
 	std::list<I3RecoPulse> pulse_list;
 	std::list<I3RecoPulse>::const_iterator pulse_head, pulse_tail;
 	
+	unpacked_.reset();
+	
 	/* Find the maximum time difference we can represent within a single readout. */
 	const unsigned max_timecode = (1 << I3SUPERDSTCHARGESTAMP_TIME_BITS_V0) - 1;
 	const double tmax = I3SuperDST::DecodeTime(max_timecode, i3superdst_version_);
@@ -389,9 +391,12 @@ I3SuperDST::Unpack(I3RecoPulseSeriesMapPtr &hlc_pulses,
 	return success;
 }
 
-I3RecoPulseSeriesMapPtr
+I3RecoPulseSeriesMapConstPtr
 I3SuperDST::Unpack() const
 {
+	if (unpacked_)
+		return unpacked_;
+	
 	I3RecoPulseSeriesMapPtr hlc_pulses, slc_pulses;
 	
 	Unpack(hlc_pulses, slc_pulses);
@@ -414,7 +419,9 @@ I3SuperDST::Unpack() const
 		}
 	}
 	
-	return hlc_pulses;
+	unpacked_ = hlc_pulses;
+	
+	return unpacked_;
 }
 
 uint32_t

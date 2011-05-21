@@ -3,6 +3,7 @@
 #include "dataclasses/physics/I3RecoPulse.h"
 #include "dataclasses/I3Double.h"
 #include "boost/make_shared.hpp"
+#include "boost/foreach.hpp"
 
 TEST_GROUP(I3MapMask);
 
@@ -37,7 +38,8 @@ manufacture_pulsemap()
 
 TEST(Apply)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	pulses = manufacture_pulsemap();
 		
 	I3Frame frame;
@@ -99,6 +101,29 @@ TEST(ApplyAutomagically)
 			ENSURE(*vit1 == *vit2);
 	}
 	
+	/*
+	 * Now, ask for a reference. This will blow up unless the mask
+	 * manages the lifetime of the pulse series returned by Apply().
+	 */
+	const I3RecoPulseSeriesMap &masked_ref =
+	    frame.Get<I3RecoPulseSeriesMap>("foomask");
+	
+	ENSURE_EQUAL(pulses->size(), masked_ref.size());
+	ENSURE_EQUAL(masked_ref.begin()->second.size(), 9u);
+	
+	/* Ensure that original and masked pulse series maps are identical. */
+	mit1 = pulses->begin();
+	mit2 = masked_ref.begin();
+	for ( ; mit1 != pulses->end(); mit1++, mit2++) {
+		ENSURE_EQUAL(mit1->first, mit2->first);
+		ENSURE_EQUAL(mit1->second.size(), mit2->second.size());
+		I3RecoPulseSeries::const_iterator vit1, vit2;
+		vit1 = mit1->second.begin();
+		vit2 = mit2->second.begin();
+		for ( ; vit1 != mit1->second.end(); vit1++, vit2++)
+			ENSURE(*vit1 == *vit2);
+	}
+	
 	/* Now, make sure it fails cleanly */
 	I3DoublePtr dub = boost::make_shared<I3Double>();
 	frame.Put("dub", dub);
@@ -112,7 +137,8 @@ TEST(ApplyAutomagically)
 
 TEST(SetSinglePulse)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	pulses = manufacture_pulsemap();
 		
 	I3Frame frame;
@@ -148,9 +174,44 @@ TEST(SetSinglePulse)
 	ENSURE_EQUAL(masked->begin()->second.size(), 9u);
 }
 
+TEST(SetSinglePulseFromBlankMask)
+{
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
+	pulses = manufacture_pulsemap();
+		
+	I3Frame frame;
+	frame.Put("foo", pulses);
+	I3RecoPulseSeriesMapMask mask(frame, "foo");
+	
+	mask.SetNone();
+	
+	/* Re-set every other pulse, and make sure it comes back. */
+	unsigned total = 0;
+	BOOST_FOREACH(const I3RecoPulseSeriesMap::value_type &pair, *pulses) {
+		unsigned domcount = 0;
+		bool skip = false;
+		BOOST_FOREACH(const I3RecoPulse &pulse, pair.second) {
+			if (skip) {
+				skip = false;
+			} else {
+				mask.Set(pair.first, pulse, true);
+				masked = mask.Apply(frame);
+				total++;
+				domcount++;
+				skip = true;
+			}
+			ENSURE_EQUAL(mask.GetSum(), total);
+			ENSURE_EQUAL(masked->find(pair.first)->second.size(), domcount);
+		}
+	}
+}
+
+
 TEST(SetOM)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	pulses = manufacture_pulsemap();
 		
 	I3Frame frame;
@@ -180,7 +241,8 @@ TEST(SetOM)
 
 TEST(ConstructAsDiff)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	I3RecoPulseSeriesMap::const_iterator mit1, mit2;
 	I3RecoPulseSeriesMapMask mask;
 	pulses = manufacture_pulsemap();
@@ -252,7 +314,8 @@ TEST(ConstructAsDiff)
 
 TEST(Clear)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	pulses = manufacture_pulsemap();
 		
 	I3Frame frame;
@@ -270,7 +333,8 @@ TEST(Clear)
 
 TEST(And)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	pulses = manufacture_pulsemap();
 		
 	I3Frame frame;
@@ -298,7 +362,8 @@ TEST(And)
 
 TEST(Or)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	pulses = manufacture_pulsemap();
 		
 	I3Frame frame;
@@ -338,7 +403,8 @@ TEST(Or)
 
 TEST(XOr)
 {
-	I3RecoPulseSeriesMapPtr pulses, masked;
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
 	pulses = manufacture_pulsemap();
 		
 	I3Frame frame;
