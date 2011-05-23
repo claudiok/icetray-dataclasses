@@ -32,7 +32,7 @@ class I3RecoPulse
   flags_t flags_;
 
   public:
-  enum {
+  enum PulseFlags {
 	LC = (1 << 0),
 	ATWD = (1 << 1),
 	FADC = (1 << 2),

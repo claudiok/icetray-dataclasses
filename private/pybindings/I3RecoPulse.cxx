@@ -52,7 +52,9 @@ void register_I3RecoPulse()
     .def(copy_suite<I3RecoPulse>())
     ;
   
-  enum_<I3RecoPulse::Flags>("Flags")
+  enum_<I3RecoPulse::PulseFlags>("PulseFlags")
     .value("LC", I3RecoPulse::LC)
+    .value("ATWD", I3RecoPulse::ATWD)
+    .value("FADC", I3RecoPulse::FADC)
     ;
 }
