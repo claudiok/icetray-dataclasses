@@ -44,3 +44,4 @@ register_I3SuperDST()
 		BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3SuperDST, RO_PROPS);
 		;
 }
+
