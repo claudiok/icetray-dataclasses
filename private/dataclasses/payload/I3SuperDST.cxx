@@ -409,8 +409,7 @@ I3SuperDST::Unpack() const
 			continue;
 		
 		BOOST_FOREACH(I3RecoPulse &pulse, slc_map_it->second) {
-			/* FIXME: this is a horrible abuse of a poorly-defined API */
-			pulse.SetSourceIndex(I3Waveform::SLC);
+			pulse.SetFlags(I3RecoPulse::LC);
 			I3RecoPulseSeries::iterator insertion_point =
 			    std::lower_bound(hlc_map_it->second.begin(),
 			    hlc_map_it->second.end(), pulse,

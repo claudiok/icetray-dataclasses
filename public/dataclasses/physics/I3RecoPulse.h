@@ -21,59 +21,54 @@
  * A readout independent representation of a waveform feature or Analog
  *  readout.
  */
-static const unsigned i3recopulse_version_ = 1;
+static const unsigned i3recopulse_version_ = 2;
 
 class I3RecoPulse 
 {
-  int hitID_;
-  double time_;
-  double charge_;
-  double width_;
-  int sourceIndex_;
+  float time_;
+  float charge_;
+  float width_;
+  typedef uint8_t flags_t;
+  flags_t flags_;
 
   public:
+	
+	enum Flags{
+		LC = (1 >> 0),
+		ATWD = (1 >> 1),
+		FADC = (1 >> 2),
+	};
 
-  I3RecoPulse() {hitID_=0; time_=NAN; width_=NAN; charge_=NAN;sourceIndex_=-1;}
+  I3RecoPulse() : time_(NAN), charge_(NAN), width_(NAN), flags_(0) {}
 
-  double GetTime() const {return time_;}
+  /*
+   * @brief A bitwise combination of I3RecoPulse::Flags
+   */
+  flags_t GetFlags() const { return flags_; } 
 
-  void SetTime(double time) {time_ = time;}
+  void SetFlags(flags_t flags) { flags_ = flags; } 
 
-  int GetID() const {return hitID_;}
+  float GetTime() const {return time_;}
 
-  void SetID(const int hitid) {hitID_ = hitid;}
+  void SetTime(float time) {time_ = time;}
 
     /**
      * GetCharge() - Returns the number of PE's seen in this pulse
      *       PEs are used since they are independent of HW, gain, etc.
      */
 
-  double GetCharge() const {return charge_;}
+  float GetCharge() const {return charge_;}
 
     /**
      * SetCharge() - Sets the number of PE's seen in this pulse
      *       PEs are used since they are independent of HW, gain, etc.
      */
 
-  void SetCharge(double charge) {charge_ = charge;}
+  void SetCharge(float charge) {charge_ = charge;}
 
-  double GetWidth() const {return width_;}
+  float GetWidth() const {return width_;}
 
-  void SetWidth(double width) {width_ = width;}
-
-/**
- *  GetSourceIndex - The Source Index can be used to keep track
- *    of which rawReadout index (from readout vector, like DOMLaunchSeries,
- *    that gave rise to this pariticular hit.  Index value defaults to -1.
- */
-
-  int GetSourceIndex() const { return sourceIndex_; }
-/**
- *  SetSourceIndex - The Source Index can be used to keep track
- *    of which rawReadout index (from readout vector, like DOMLaunchSeries,
- *    that gave rise to this pariticular hit.  Index value defaults to -1.
- */
-  void SetSourceIndex(const int srcid) { sourceIndex_ = srcid; }
+  void SetWidth(float width) {width_ = width;}
 
   virtual ~I3RecoPulse();
 

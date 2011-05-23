@@ -30,15 +30,6 @@ using namespace boost::python;
 
 void register_I3RecoPulse()
 {
-  class_<I3RecoPulse, boost::shared_ptr<I3RecoPulse> >("I3RecoPulse")
-    PROPERTY(I3RecoPulse, Time, Time)
-    PROPERTY(I3RecoPulse, ID, ID)
-    PROPERTY(I3RecoPulse, SourceIndex, SourceIndex)
-    PROPERTY(I3RecoPulse, Charge, Charge)
-    PROPERTY(I3RecoPulse, Width, Width)
-    .def(copy_suite<I3RecoPulse>())
-    ;
-
   class_<std::vector<I3RecoPulse> >("vector_I3RecoPulse")
     .def(std_vector_indexing_suite<std::vector<I3RecoPulse> >())
     .def(copy_suite<std::vector<I3RecoPulse> >())
@@ -50,4 +41,18 @@ void register_I3RecoPulse()
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
 
+  scope outer = 
+  class_<I3RecoPulse, boost::shared_ptr<I3RecoPulse> >("I3RecoPulse")
+    PROPERTY(I3RecoPulse, Time, Time)
+    PROPERTY(I3RecoPulse, Charge, Charge)
+    PROPERTY(I3RecoPulse, Width, Width)
+    #define PROPS (Time)(Charge)(Width)(Flags)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3RecoPulse, PROPS)
+    #undef PROPS
+    .def(copy_suite<I3RecoPulse>())
+    ;
+  
+  enum_<I3RecoPulse::Flags>("Flags")
+    .value("LC", I3RecoPulse::LC)
+    ;
 }
