@@ -1,5 +1,6 @@
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3RecoPulse.h>
+#include <dataclasses/physics/I3Waveform.h>
 
 I3RecoPulse::~I3RecoPulse() {}
 
@@ -23,6 +24,18 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
 		if (version > 0) {
 			int sourceindex(-1);
 			ar & make_nvp("sourceIndex",sourceindex);
+
+			// Try to guess what this was supposed to be,
+			// canonicalizing NFE's definition. NFE and FE pulses
+			// used different meanings here, which are not actually
+			// distinguishable.
+			flags_ = 0;
+			if (sourceindex == I3Waveform::ATWD)
+				flags_ |= I3RecoPulse::ATWD;
+			if (sourceindex == I3Waveform::FADC)
+				flags_ |= I3RecoPulse::FADC;
+			if (sourceindex != I3Waveform::SLC)
+				flags_ |= I3RecoPulse::LC;
 		}
 	} else {
 		ar & make_nvp("Time", time_);
