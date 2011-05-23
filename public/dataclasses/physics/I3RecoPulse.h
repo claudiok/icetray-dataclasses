@@ -32,12 +32,11 @@ class I3RecoPulse
   flags_t flags_;
 
   public:
-	
-	enum Flags{
-		LC = (1 >> 0),
-		ATWD = (1 >> 1),
-		FADC = (1 >> 2),
-	};
+  enum {
+	LC = (1 << 0),
+	ATWD = (1 << 1),
+	FADC = (1 << 2),
+  };
 
   I3RecoPulse() : time_(NAN), charge_(NAN), width_(NAN), flags_(0) {}
 
