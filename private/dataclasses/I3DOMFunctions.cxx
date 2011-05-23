@@ -265,5 +265,5 @@ unsigned int WhichATWD(const I3DOMLaunch& domLaunch)
     else if ( whichATWD == I3DOMLaunch::ATWDb )
         return 1;
     else 
-        log_fatal("invalid ATWD ID in I3DOMcalibrator::WhichATWD");
+        log_fatal("invalid ATWD ID in WhichATWD");
 }
