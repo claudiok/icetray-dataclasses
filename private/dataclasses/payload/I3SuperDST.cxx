@@ -356,6 +356,8 @@ I3SuperDST::Unpack(I3RecoPulseSeriesMapPtr &hlc_pulses,
 		I3RecoPulseSeriesMapPtr target_map = 
 		    (readout_it->kind_ == I3SuperDSTChargeStamp::HLC) ?
 		    hlc_pulses : slc_pulses;
+		int flags = (readout_it->kind_ == I3SuperDSTChargeStamp::HLC) ?
+		    I3RecoPulse::ATWD | I3RecoPulse::FADC | I3RecoPulse::LC : I3RecoPulse::FADC;
 		I3RecoPulseSeries &target = target_map->operator[](readout_it->om_);
 		
 		/* Use the discretization step as the pulse width. Hacky. */
@@ -372,6 +374,7 @@ I3SuperDST::Unpack(I3RecoPulseSeriesMapPtr &hlc_pulses,
 			pulse.SetTime(t_ref);
 			pulse.SetCharge(stamp_it->GetCharge());
 			pulse.SetWidth(PULSE_WIDTH);
+			pulse.SetFlags(flags);
 			target.push_back(pulse);
 			
 			stamp_it++;
@@ -384,6 +387,7 @@ I3SuperDST::Unpack(I3RecoPulseSeriesMapPtr &hlc_pulses,
 			pulse.SetTime(t_ref_internal);
 			pulse.SetCharge(stamp_it->GetCharge());
 			pulse.SetWidth(PULSE_WIDTH);
+			pulse.SetFlags(flags);
 			target.push_back(pulse);
 		}
 	}
@@ -409,7 +413,6 @@ I3SuperDST::Unpack() const
 			continue;
 		
 		BOOST_FOREACH(I3RecoPulse &pulse, slc_map_it->second) {
-			pulse.SetFlags(I3RecoPulse::LC);
 			I3RecoPulseSeries::iterator insertion_point =
 			    std::lower_bound(hlc_map_it->second.begin(),
 			    hlc_map_it->second.end(), pulse,
