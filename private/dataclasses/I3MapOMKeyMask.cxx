@@ -401,10 +401,12 @@ I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)
 
 #undef ROUND_UP
 
-I3RecoPulseSeriesMapMask::bitmask::bitmask(const bitmask& other) : size_(other.size_), padding_(other.padding_)
+I3RecoPulseSeriesMapMask::bitmask::bitmask(const bitmask& other) : size_(other.size_), padding_(other.padding_), mask_(NULL)
 {
-	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
-	memcpy(mask_, other.mask_, size_*sizeof(mask_t));
+	if (size_ != 0) {
+		mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
+		memcpy(mask_, other.mask_, size_*sizeof(mask_t));
+	}
 }
 
 I3RecoPulseSeriesMapMask::bitmask&

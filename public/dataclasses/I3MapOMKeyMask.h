@@ -90,7 +90,7 @@ private:
 		uint8_t padding_;
 		mask_t *mask_;
 		
-		bitmask() : mask_(NULL) {};
+		bitmask() : size_(0), padding_(0), mask_(NULL) {};
 		bitmask(unsigned length, bool set=true);
 		bitmask(const bitmask& other);
 		bitmask& operator=(const bitmask& other);
