@@ -401,10 +401,12 @@ I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)
 
 #undef ROUND_UP
 
-I3RecoPulseSeriesMapMask::bitmask::bitmask(const bitmask& other) : size_(other.size_), padding_(other.padding_)
+I3RecoPulseSeriesMapMask::bitmask::bitmask(const bitmask& other) : size_(other.size_), padding_(other.padding_), mask_(NULL)
 {
-	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
-	memcpy(mask_, other.mask_, size_*sizeof(mask_t));
+	if (size_ != 0) {
+		mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
+		memcpy(mask_, other.mask_, size_*sizeof(mask_t));
+	}
 }
 
 I3RecoPulseSeriesMapMask::bitmask&
@@ -531,6 +533,7 @@ I3RecoPulseSeriesMapMask::load(Archive & ar, unsigned version)
 	std::vector<bitmask> elements;
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("Key", key_);
 	ar & make_nvp("OMKeyMask", omkey_mask_);
 	ar & make_nvp("ElementMasks", elements);
 	
@@ -545,6 +548,7 @@ I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 	std::copy(element_masks_.begin(), element_masks_.end(), std::back_inserter(elements));
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("Key", key_);
 	ar & make_nvp("OMKeyMask", omkey_mask_);
 	ar & make_nvp("ElementMasks", elements);
 }
