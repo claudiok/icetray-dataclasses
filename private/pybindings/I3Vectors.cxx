@@ -20,6 +20,7 @@
 //
 
 #include <dataclasses/I3Vector.h>
+#include <dataclasses/physics/I3Particle.h>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <vector>
 
@@ -89,6 +90,8 @@ void register_I3Vectors()
   register_i3vector_of<double>("Double");
   
   register_i3vector_of<std::pair<double, double> >("DoubleDouble");
+
+  register_i3vector_of<I3Particle>("I3Particle");
   
   register_std_pair<double, double>("pair_double_double");
 }
