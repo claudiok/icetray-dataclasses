@@ -533,6 +533,7 @@ I3RecoPulseSeriesMapMask::load(Archive & ar, unsigned version)
 	std::vector<bitmask> elements;
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("Key", key_);
 	ar & make_nvp("OMKeyMask", omkey_mask_);
 	ar & make_nvp("ElementMasks", elements);
 	
@@ -547,6 +548,7 @@ I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 	std::copy(element_masks_.begin(), element_masks_.end(), std::back_inserter(elements));
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("Key", key_);
 	ar & make_nvp("OMKeyMask", omkey_mask_);
 	ar & make_nvp("ElementMasks", elements);
 }
