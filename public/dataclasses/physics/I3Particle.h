@@ -16,7 +16,6 @@
 #include <map>
 #include <string>
 
-using namespace std;
 static const unsigned i3particle_version_ = 3;
 
 /**
@@ -231,7 +230,7 @@ class I3Particle : public I3FrameObject
   double energy_;
   double length_;
   double speed_;
-  vector<I3Particle> composite_; //!
+  std::vector<I3Particle> composite_; //!
   LocationType locationType_;
 
  public:
@@ -263,19 +262,19 @@ class I3Particle : public I3FrameObject
   ParticleType GetType() const { return type_; }
   void SetType(ParticleType type) { type_ = type; }
   void SetRDMCType(int type) { type_ = convert_rdmc(type); }
-  string GetTypeString() const;
+  std::string GetTypeString() const;
 
   ParticleShape GetShape() const { return shape_; }
   void SetShape(ParticleShape shape) { shape_ = shape; }
-  string GetShapeString() const;
+  std::string GetShapeString() const;
 
   FitStatus GetFitStatus() const { return status_; }
   void SetFitStatus(FitStatus status) { status_ = status; }
-  string GetFitStatusString() const;
+  std::string GetFitStatusString() const;
 
   LocationType GetLocationType() const { return locationType_; }
   void SetLocationType(LocationType type) { locationType_ = type; }
-  string GetLocationTypeString() const;
+  std::string GetLocationTypeString() const;
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
@@ -309,8 +308,8 @@ class I3Particle : public I3FrameObject
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
 
-  const vector<I3Particle>& GetComposite() const { return composite_; }
-  vector<I3Particle>& GetComposite() { return composite_; }
+  const std::vector<I3Particle>& GetComposite() const { return composite_; }
+  std::vector<I3Particle>& GetComposite() { return composite_; }
 
   I3Position ShiftAlongTrack(double dist) const;
 
