@@ -135,6 +135,58 @@ TEST(ApplyAutomagically)
 	ENSURE(!masked, "I3Frame::Get() returns a null pointer");
 }
 
+TEST(UnsetAllForOM)
+{
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMap::const_iterator mit1, mit2;
+	I3RecoPulseSeriesMapConstPtr masked;
+	I3RecoPulseSeriesMapMask mask;
+	pulses = manufacture_pulsemap();
+		
+	I3Frame frame;
+	frame.Put("foo", pulses);
+
+	I3RecoPulseSeriesMap subpulses(*pulses);
+	subpulses.erase(pulses->begin()->first);
+
+	/* First, try unsetting every pulse in the DOM in one go*/
+	mask = I3RecoPulseSeriesMapMask(frame, "foo");
+	mask.Set(pulses->begin()->first, false);
+	masked = mask.Apply(frame);
+
+	/* Ensure that original and masked pulse series maps are identical. */
+	mit1 = subpulses.begin();
+	mit2 = masked->begin();
+	for ( ; mit1 != subpulses.end(); mit1++, mit2++) {
+		ENSURE_EQUAL(mit1->first, mit2->first);
+		ENSURE_EQUAL(mit1->second.size(), mit2->second.size());
+		I3RecoPulseSeries::const_iterator vit1, vit2;
+		vit1 = mit1->second.begin();
+		vit2 = mit2->second.begin();
+		for ( ; vit1 != mit1->second.end(); vit1++, vit2++)
+			ENSURE(*vit1 == *vit2);
+	}
+
+	/* Now, try unsetting every pulse one by one. This must be equivalent! */
+	mask = I3RecoPulseSeriesMapMask(frame, "foo");
+	for (unsigned i = 0; i < pulses->begin()->second.size(); i++)
+		mask.Set(pulses->begin()->first, i, false);
+	masked = mask.Apply(frame);
+
+	/* Ensure that original and masked pulse series maps are identical. */
+	mit1 = subpulses.begin();
+	mit2 = masked->begin();
+	for ( ; mit1 != subpulses.end(); mit1++, mit2++) {
+		ENSURE_EQUAL(mit1->first, mit2->first);
+		ENSURE_EQUAL(mit1->second.size(), mit2->second.size());
+		I3RecoPulseSeries::const_iterator vit1, vit2;
+		vit1 = mit1->second.begin();
+		vit2 = mit2->second.begin();
+		for ( ; vit1 != mit1->second.end(); vit1++, vit2++)
+			ENSURE(*vit1 == *vit2);
+	}
+}
+	
 TEST(SetSinglePulse)
 {
 	I3RecoPulseSeriesMapPtr pulses;
