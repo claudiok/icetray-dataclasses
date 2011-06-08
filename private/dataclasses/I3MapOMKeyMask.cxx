@@ -361,8 +361,12 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 	
 	for ( ; source_it != source->end(); source_it++, omkey_idx++) {
 		
-		if (!omkey_mask_.get(omkey_idx) || list_it->sum() == 0)
+		if (!omkey_mask_.get(omkey_idx))
 			continue;
+		else if (list_it->sum() == 0) {
+			list_it++;
+			continue;
+		}
 		
 		unsigned idx = 0;
 		I3RecoPulseSeriesMap::mapped_type target_vec;
