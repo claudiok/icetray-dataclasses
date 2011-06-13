@@ -400,8 +400,9 @@ class I3DOMCalibration {
     noiseRate_ = noiserate;
   }
 
-  double ATWDPulseTemplate(double time, unsigned int channel = 0) const;
-  double FADCPulseTemplate(double time) const;
+  double DiscriminatorPulseTemplate(double time, bool droopy = false) const;
+  double ATWDPulseTemplate(double time, unsigned int channel = 0, bool droopy = false) const;
+  double FADCPulseTemplate(double time, bool droopy = false) const;
  
   template <class Archive>
     void serialize(Archive& ar, unsigned version);

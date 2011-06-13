@@ -323,7 +323,17 @@ SPEPulseShape(double t, const SPETemplate &p)
 #undef CAUSALITY_SHIFT
 
 double
-I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel) const
+I3DOMCalibration::DiscriminatorPulseTemplate(double t, bool droopy) const
+{
+	switch (toroidType_) {
+		case OLD_TOROID: return SPEPulseShape(t, ATWDOldToroidTemplate[0]);
+		default: return SPEPulseShape(t, ATWDNewToroidTemplate[0]);
+	}
+}
+
+
+double
+I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel, bool droopy) const
 {
 	if (channel > 2)
 		log_fatal("Unknown ATWD channel %u", channel);
@@ -334,7 +344,7 @@ I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel) const
 }
 
 double
-I3DOMCalibration::FADCPulseTemplate(double t) const
+I3DOMCalibration::FADCPulseTemplate(double t, bool droopy) const
 {
 	return SPEPulseShape(t, FADCTemplate);
 }
