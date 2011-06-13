@@ -123,7 +123,7 @@ BOOST_CLASS_VERSION(TauParam, tauparam_version_);
  * convert values for later storage (at that SHOULD use I3Units)
  *
  * @author Tom McCauley <tpmccauley@lbl.gov>
- * @author Erik Blaufuss <blaufuss at icecube umd edu>
+ * @author Erik Blaufuss \<blaufuss at icecube umd edu\>
  *
  * 
  */
@@ -255,7 +255,7 @@ class I3DOMCalibration {
   void SetATWDDeltaT(unsigned int chip, double deltat);
 
   /**
-   * Get fit parameters from domcal file <atwdfreq> which is 
+   * Get fit parameters from domcal file \<atwdfreq\> which is 
    * the sampling rate calibration for each ATWD chip 0 or 1 
    */
   QuadraticFit GetATWDFreqFit (unsigned int chip) const;

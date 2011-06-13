@@ -34,7 +34,7 @@ class I3TankHit
 
   /**
    * the signal of the tank (can be different things like track length, charge,
-   * #mc-particles, amplitude, ...
+   * \#mc-particles, amplitude, ...
    */
   double signal_;
 

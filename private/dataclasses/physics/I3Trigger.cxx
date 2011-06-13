@@ -3,7 +3,7 @@
  * the icecube collaboration
  * $Id: I3Trigger.cxx 12685 2005-11-17 15:04:25Z blaufuss $
  *
- * @file I3Trigger.cxx
+ * @file dataclasses/private/dataclasses/physics/I3Trigger.cxx
  * @version $Revision: 1.5 $
  * @date $Date: 2005-11-17 16:04:25 +0100 (Thu, 17 Nov 2005) $
  */

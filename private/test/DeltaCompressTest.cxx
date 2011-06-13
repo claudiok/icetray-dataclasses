@@ -4,7 +4,7 @@
  *
  * Test Delta Compressions ability to encode and decode 
  *
- * @file    $File$
+ * @file    dataclasses/private/test/DeltaCompressTest.cxx
  * @version $Revision$
  * @date    $Date$
  * @author  Kevin Meagher

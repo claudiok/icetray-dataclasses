@@ -3,7 +3,7 @@
  * the IceCube Collaboration
  * $Id:  $
  *
- * @file I3TWRLaunch.cxx
+ * @file dataclasses/private/dataclasses/physics/I3TWRLaunch.cxx
  * @brief implementation of the I3TWRLaunch class
  * @version $Revision:  $
  * @date $Date:  $

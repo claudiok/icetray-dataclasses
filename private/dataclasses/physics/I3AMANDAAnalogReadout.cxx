@@ -3,7 +3,7 @@
  * the IceCube Collaboration
  * $Id: $
  *
- * @file I3AMANDAAnalogReadout.cxx
+ * @file dataclasses/private/dataclasses/physics/I3AMANDAAnalogReadout.cxx
  * @version $Revision: $
  * @date $Date: $
  * @author deyoung

@@ -113,7 +113,7 @@ class I3EventHeader : public I3FrameObject
   unsigned GetSubEventID() const { return subEventID_; }
 
   /**
-   * @param subeventid the new subevent id for the subevent
+   * @param eventid the new subevent id for the subevent
    */
   void SetSubEventID(unsigned eventid) { subEventID_ = eventid; }
 

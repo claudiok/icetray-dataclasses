@@ -2,7 +2,7 @@
  * copyright  (C) 2006
  * the icecube collaboration
  * @version $Id:  $
- * @file I3DOMFunctions.cxx
+ * @file dataclasses/private/dataclasses/I3DOMFunctions.cxx
  * @date $Date: $
  */
 

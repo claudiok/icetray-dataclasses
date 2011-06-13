@@ -4,7 +4,7 @@
  *
  * Test cases to test the compression of ATWD and FADC waveforms
  *
- * @file    $File$
+ * @file    /dataclasses/private/test/I3DOMLaunchTest.cxx
  * @version $Revision$
  * @date    $Date$
  * @author  Martin Merck
