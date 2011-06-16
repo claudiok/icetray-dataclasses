@@ -70,7 +70,7 @@ void register_I3Calibration()
       .def(copy_suite<I3VEMCalibration>())
       .def_readwrite("pePerVEM", &I3VEMCalibration::pePerVEM)
       .def_readwrite("muPeakWidth", &I3VEMCalibration::muPeakWidth)
-      .def_readwrite("hglgCroddOver", &I3VEMCalibration::hglgCrossOver)
+      .def_readwrite("hglgCrossOver", &I3VEMCalibration::hglgCrossOver)
       .def_readwrite("corrFactor", &I3VEMCalibration::corrFactor)
       ;
 
