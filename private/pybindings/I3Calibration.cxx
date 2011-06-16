@@ -118,6 +118,11 @@ void register_I3Calibration()
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
       .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>())
+      .def("ATWDPulseTemplate", &I3DOMCalibration::ATWDPulseTemplate)
+      .def("FADCPulseTemplate", &I3DOMCalibration::FADCPulseTemplate)
+      .def("DiscriminatorPulseTemplate", &I3DOMCalibration::DiscriminatorPulseTemplate)
+
+
       ;
 
   }

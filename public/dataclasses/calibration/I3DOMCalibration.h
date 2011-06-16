@@ -107,7 +107,7 @@ struct TauParam
 
 BOOST_CLASS_VERSION(TauParam, tauparam_version_);
 
-
+struct SPETemplate;
 
 /**
  * @brief Class that stores the calibration information for a DOM
@@ -142,7 +142,7 @@ class I3DOMCalibration {
   /**
    * Set MB Temperature at time of calibration
    */
-  void SetTemperature(double temperature) { temperature_ = temperature; }
+  void SetTemperature(double temperature);
 
   /**
    * Get DOMCAL measured PMT transit time
@@ -202,7 +202,7 @@ class I3DOMCalibration {
   /**
    * Set parameters for droop correction on the baseline
    */
-  void SetTauParameters(TauParam tauparameters) { tauparameters_ = tauparameters; }
+  void SetTauParameters(TauParam tauparameters);
 
 
 
@@ -418,6 +418,11 @@ class I3DOMCalibration {
     OLD_TOROID = 0,
     NEW_TOROID = 1
   };
+
+  double SPEPulseTemplate(double t, const SPETemplate& templ,
+    const SPETemplate& droop, bool droopy) const;
+
+  double droopTimeConstants_[2];
 
   double  temperature_;
  

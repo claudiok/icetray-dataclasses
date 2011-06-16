@@ -240,6 +240,25 @@ I3DOMCalibration::SetATWDBeaconBaseline(unsigned int id, unsigned int channel, d
 	}
 }
 
+void
+I3DOMCalibration::SetTemperature(double temperature)
+{
+	temperature_ = temperature;
+	SetTauParameters(tauparameters_);
+}
+
+void
+I3DOMCalibration::SetTauParameters(TauParam tauparameters)
+{
+	tauparameters_ = tauparameters;
+	
+	droopTimeConstants_[0] = tauparameters_.P0 + tauparameters_.P1 /
+	    (1.0 + exp(-((temperature_-273.0)/tauparameters_.P2)));
+	droopTimeConstants_[1] = tauparameters_.P3 + tauparameters_.P4 /
+	    (1.0 + exp(-((temperature_-273.0)/tauparameters_.P5)));
+}
+
+
 /*
  * Pulse template functions for use in simulation and reconstruction.
  * 
@@ -283,6 +302,27 @@ const SPETemplate ATWDNewToroidTemplate[3] = {
 	},
 };
 
+const SPETemplate ATWDNewToroidDroopTemplate[3] = {
+	{
+		-0.8644871211757873,
+		-0.39712728498041222,
+		2.2153931795324807e-08,
+		0.18265408524009966
+	},
+	{
+		-0.60714457126191879,
+		1.0708609673531526,
+		0.85478360796100328,
+		0.22084066752348605
+	},
+	{
+		-1.4510165738141465,
+		-0.29659623453192685,
+		7.5567807067886802e-09,
+		0.18209846421412432
+	},
+};
+
 const SPETemplate ATWDOldToroidTemplate[3] = {
 	/* Channel 0: fit from SPE pulses */
 	{
@@ -307,6 +347,27 @@ const SPETemplate ATWDOldToroidTemplate[3] = {
 	},
 };
 
+const SPETemplate ATWDOldToroidDroopTemplate[3] = {
+	{
+		-0.87271352029389926,
+		-0.37445896923019595,
+		0.05292192451474604,
+		0.2015123032569355
+	},
+	{
+		-0.48448879003182993,
+		0.035060687415361419,
+		0.044493411456291751,
+		0.25894387769482058
+	},
+	{
+		-0.74959447466950724,
+		0.16580945347622786,
+		0.055065176963265461,
+		0.25173422056591982
+	},
+};
+
 const SPETemplate FADCTemplate = {
 	25.12 / 71.363940160184669,
 	61.27 - 50 - CAUSALITY_SHIFT,
@@ -314,23 +375,65 @@ const SPETemplate FADCTemplate = {
 	186.
 };
 
+const SPETemplate FADCDroopTemplate = {
+	-2.8837584956162883,
+	0.57888025049064207,
+	0.81965713180496758,
+	0.04299648444652391
+};
+
+#undef CAUSALITY_SHIFT
+
 static double
 SPEPulseShape(double t, const SPETemplate &p)
 {
 	return p.c*pow(exp(-(t - p.x0)/p.b1) + exp((t - p.x0)/p.b2),-8);
 }
 
-#undef CAUSALITY_SHIFT
+// Distort the pulse shape to approximate the effect of
+// an exponentially-decaying reaction voltage.
+static double
+DroopReactionShape(double t, const SPETemplate &p, const SPETemplate &d,
+    double tau)
+{
+	return (p.c*d.c/tau)*pow(exp(-(t - p.x0*d.x0)/(p.b1*d.b1)) + 
+	    exp((t - p.x0*d.x0)/(p.b2*d.b2*tau)),-8);
+}
 
+double
+I3DOMCalibration::SPEPulseTemplate(double t, const SPETemplate& templ,
+    const SPETemplate& droop, bool droopy) const
+{
+	if (!droopy)
+		return SPEPulseShape(t, templ);
+	
+	double f = tauparameters_.TauFrac;
+	double t1 = droopTimeConstants_[0];
+	double t2 = droopTimeConstants_[1];
+	double norm = (1.0 - f)*t1 + f*t2;
+	double c1 = (1.0 - f)*t1/norm;
+	double c2 = f*t2/norm;
+	
+	return SPEPulseShape(t, templ) +
+	    c1*DroopReactionShape(t, templ, droop, droopTimeConstants_[0]) +
+	    c2*DroopReactionShape(t, templ, droop, droopTimeConstants_[1]);
+}
+
+// FIXME: Add a real, properly timed pulse template for the discriminator
+// For now, use ATWD0 shifted earlier by 25 ns (a made-up number)
+#define DISC_OFFSET 25.0
 double
 I3DOMCalibration::DiscriminatorPulseTemplate(double t, bool droopy) const
 {
 	switch (toroidType_) {
-		case OLD_TOROID: return SPEPulseShape(t, ATWDOldToroidTemplate[0]);
-		default: return SPEPulseShape(t, ATWDNewToroidTemplate[0]);
+		case OLD_TOROID: return SPEPulseTemplate(t + DISC_OFFSET,
+		    ATWDOldToroidTemplate[0],
+		    ATWDOldToroidDroopTemplate[0], droopy);
+		default: return SPEPulseTemplate(t + DISC_OFFSET,
+		    ATWDNewToroidTemplate[0],
+		    ATWDNewToroidDroopTemplate[0], droopy);
 	}
 }
-
 
 double
 I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel, bool droopy) const
@@ -338,15 +441,19 @@ I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel, bool droopy) con
 	if (channel > 2)
 		log_fatal("Unknown ATWD channel %u", channel);
 	switch (toroidType_) {
-		case OLD_TOROID: return SPEPulseShape(t, ATWDOldToroidTemplate[channel]);
-		default: return SPEPulseShape(t, ATWDNewToroidTemplate[channel]);
+		case OLD_TOROID: return SPEPulseTemplate(t,
+		    ATWDOldToroidTemplate[channel],
+		    ATWDOldToroidDroopTemplate[channel], droopy);
+		default: return SPEPulseTemplate(t,
+		    ATWDNewToroidTemplate[channel],
+		    ATWDNewToroidDroopTemplate[channel], droopy);
 	}
 }
 
 double
 I3DOMCalibration::FADCPulseTemplate(double t, bool droopy) const
 {
-	return SPEPulseShape(t, FADCTemplate);
+	return SPEPulseTemplate(t, FADCTemplate, FADCDroopTemplate, droopy);
 }
 
 
@@ -543,6 +650,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
   if (version > 2)
     {
       ar & make_nvp("tauparameters", tauparameters_);
+      SetTauParameters(tauparameters_);
       ar & make_nvp("ATWDBaselines", atwdBaselines_);
       ar & make_nvp("ATWDResponseWidth", atwdResponseWidth_);
       ar & make_nvp("FADCResponseWidth", fadcResponseWidth_);
