@@ -143,6 +143,7 @@ namespace I3MCTreeUtils
   const std::vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
 
   I3MCTree::iterator GetIterator(I3MCTreePtr, const I3Particle&);
+  I3MCTree::iterator GetIterator(I3MCTree&, const I3Particle&);
 
   /**
    * This gets the primary that created the particle;

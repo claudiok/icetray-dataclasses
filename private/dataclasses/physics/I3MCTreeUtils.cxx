@@ -317,12 +317,17 @@ I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
 
 I3MCTree::iterator 
 I3MCTreeUtils::GetIterator(I3MCTreePtr t, const I3Particle& p){
+  return GetIterator(*t, p);
+}
+
+I3MCTree::iterator 
+I3MCTreeUtils::GetIterator(I3MCTree& t, const I3Particle& p){
   I3MCTree::iterator i;
-  for(i=t->begin() ; i!= t->end(); i++)
+  for(i=t.begin() ; i!= t.end(); i++)
     if((i->GetMinorID() == p.GetMinorID()) &&
        (i->GetMajorID() == p.GetMajorID()))
       return i;
-  return t->end();
+  return t.end();
 }
 
 I3Particle

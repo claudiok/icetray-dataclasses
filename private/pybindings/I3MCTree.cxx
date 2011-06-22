@@ -159,6 +159,11 @@ inline I3ParticlePtr GetPrimary(const I3MCTree& tree, const I3Particle& particle
   return I3ParticlePtr(new I3Particle(*I3MCTreeUtils::GetPrimary(tree,particle)));
 }
 
+inline int depth(I3MCTree& tree, const I3Particle& p){
+  I3MCTree::iterator iter = I3MCTreeUtils::GetIterator(tree,p);
+  return tree.depth(iter);
+}
+
 #define WRAP_PROP_FN(R, Data, Elem)\
 	.add_property(snake_case(BOOST_PP_STRINGIZE(Elem)), BOOST_PP_CAT(&Get,Elem))
 #define WRAP_PROP_BARE(R, Data, Elem)\
@@ -197,6 +202,7 @@ void register_I3MCTree()
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_FN, ~, PROPS)
 	#define BARE_PROPS (NCascades)(MPSpeedProfile)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
+    .def("depth", &depth)
     ;
 
   register_pointer_conversions<I3MCTree>();
