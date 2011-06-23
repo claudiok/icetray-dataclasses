@@ -185,10 +185,11 @@ void register_I3DetectorStatus()
       ;
     def("identity", identity_<I3TriggerStatus::Subdetector>);
 
-    class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
-      .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
-      ;
   }
 
+  class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
+    .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
+    ;
+  
   register_pointer_conversions<I3DetectorStatus>();
 }
