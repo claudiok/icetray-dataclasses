@@ -47,6 +47,7 @@ void register_I3DOMLaunch()
 	   return_internal_reference<1>())
       .def("GetRawChargeStamp", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
 	   return_internal_reference<1>())
+      .def("GetWhichATWDChargeStamp", &I3DOMLaunch::GetWhichATWDChargeStamp)
       .def("SetStartTime",&I3DOMLaunch::SetStartTime)
       .def("SetTriggerType", &I3DOMLaunch::SetTriggerType)
       .def("SetTriggerMode", &I3DOMLaunch::SetTriggerMode)
@@ -54,6 +55,7 @@ void register_I3DOMLaunch()
       .def("SetLCBit", &I3DOMLaunch::SetLCBit)
       .def("SetIsPedestalSub", &I3DOMLaunch::SetIsPedestalSub)
       .def("SetChargeStampHighestSample", &I3DOMLaunch::SetChargeStampHighestSample)
+      .def("SetWhichATWDChargeStamp", &I3DOMLaunch::SetWhichATWDChargeStamp)
 
     ;
 
