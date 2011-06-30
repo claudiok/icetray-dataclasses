@@ -11,7 +11,7 @@
 
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Direction.h"
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
 #include "dataclasses/I3Vector.h"
 #include <map>
 #include <string>

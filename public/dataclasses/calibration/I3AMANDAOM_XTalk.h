@@ -13,7 +13,7 @@
 #define I3AMANDAOMCALIBRATION_XTALK_H_INCLUDED
 
 #include <sstream>
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 
 static const unsigned i3amandaom_xtalk_version_ = 0;
 

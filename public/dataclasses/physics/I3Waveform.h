@@ -13,7 +13,7 @@
 #include <utility>
 #include <vector>
 #include <dataclasses/I3Map.h>
-#include <dataclasses/OMKey.h>
+#include <icetray/OMKey.h>
 
 /**
  * List the names of enumeration members defined in this file

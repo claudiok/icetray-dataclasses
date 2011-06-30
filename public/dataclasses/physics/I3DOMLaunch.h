@@ -16,7 +16,7 @@
 
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
-#include <dataclasses/OMKey.h>
+#include <icetray/OMKey.h>
 
 /**
  * @brief The direct (digital) readout of an IceCube DOM

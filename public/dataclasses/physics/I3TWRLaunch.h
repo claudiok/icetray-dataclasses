@@ -17,7 +17,7 @@
 
 #include <dataclasses/I3Map.h>
 #include <dataclasses/I3Vector.h>
-#include <dataclasses/OMKey.h>
+#include <icetray/OMKey.h>
 #include <dataclasses/Utility.h>
 #include <dataclasses/physics/I3TWRFrag.h>
 

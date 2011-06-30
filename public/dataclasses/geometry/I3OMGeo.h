@@ -13,7 +13,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/Utility.h"
 
 

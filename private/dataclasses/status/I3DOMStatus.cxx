@@ -1,6 +1,6 @@
 #include <icetray/serialization.h>
 #include <dataclasses/status/I3DOMStatus.h>
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
 
 I3DOMStatus::~I3DOMStatus() {}
 

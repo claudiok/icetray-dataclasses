@@ -2,9 +2,9 @@
 #include <I3Test.h>
 
 #include "dataclasses/calibration/I3Calibration.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/TankKey.h"
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
 #include <dataclasses/Utility.h>
 #include <string>
 #include <iostream>

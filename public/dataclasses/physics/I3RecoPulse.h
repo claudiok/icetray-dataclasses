@@ -11,7 +11,7 @@
 
 #include "dataclasses/Utility.h"
 #include "dataclasses/I3Vector.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/I3Map.h"
 
 /**

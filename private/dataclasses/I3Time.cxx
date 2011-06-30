@@ -3,7 +3,7 @@
 
 #include <icetray/serialization.h>
 #include <dataclasses/I3Time.h>
-#include <dataclasses/I3Units.h>
+#include <icetray/I3Units.h>
 
 /**
  *Returns true if year is a leap year.

@@ -13,7 +13,7 @@
 #include "icetray/I3FrameObject.h"
 #include <vector>
 #include "dataclasses/Utility.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 template <typename T>
 struct I3Vector : public std::vector<T>, public I3FrameObject
 { 

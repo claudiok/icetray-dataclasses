@@ -6,7 +6,7 @@
 #include <icetray/serialization.h>
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Constants.h"
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
 
 using namespace I3Constants;
 using namespace I3Units;

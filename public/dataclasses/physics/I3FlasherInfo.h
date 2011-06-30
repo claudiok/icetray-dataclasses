@@ -11,7 +11,7 @@
 
 #include <vector>
 #include "icetray/I3FrameObject.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/I3Vector.h"
 
 static const unsigned i3flasherinfo_version_ = 1;

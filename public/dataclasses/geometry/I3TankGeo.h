@@ -13,7 +13,7 @@
 
 #include "dataclasses/I3Position.h"
 #include "dataclasses/Utility.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/I3Vector.h"
 
 

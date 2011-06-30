@@ -13,7 +13,7 @@
 #include <I3Test.h>
 
 #include "dataclasses/I3Direction.h"
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
 #include <string>
 using std::string;
 using std::cout;

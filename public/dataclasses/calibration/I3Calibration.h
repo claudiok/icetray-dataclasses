@@ -20,7 +20,7 @@
 #include "dataclasses/calibration/I3VEMCalibration.h"
 #include "dataclasses/calibration/TWRCalibration.h"
 #include "dataclasses/I3Time.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/TankKey.h"
 #include <icetray/I3FrameObject.h>
 #include <icetray/I3DefaultName.h>

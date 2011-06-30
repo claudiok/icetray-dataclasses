@@ -14,7 +14,7 @@
 #include <icetray/I3DefaultName.h>
 #include <icetray/I3FrameObject.h>
 #include <dataclasses/I3Time.h>
-#include <dataclasses/OMKey.h>
+#include <icetray/OMKey.h>
 #include <dataclasses/TriggerKey.h>
 #include <dataclasses/Utility.h>
 #include <dataclasses/status/I3DOMStatus.h>
