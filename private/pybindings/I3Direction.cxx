@@ -32,7 +32,6 @@ void register_I3Direction()
   void (I3Direction::* threeary)(double, double, double) = &I3Direction::SetDirection;
 
   class_<I3Direction, bases<I3FrameObject>, boost::shared_ptr<I3Direction> >("I3Direction")
-    //.def(init<double,double,double,int>())
     .def(init<double,double>())
     .def("SetDirection", oneary)
     .def("SetDirection", twoary)
@@ -50,6 +49,13 @@ void register_I3Direction()
     .def("RotateX", &I3Direction::RotateX)
     .def("RotateY", &I3Direction::RotateY)
     .def("RotateZ", &I3Direction::RotateZ)
+    .def_readonly("Zenith", &I3Direction::GetZenith)
+    .def_readonly("Azimuth", &I3Direction::GetAzimuth)
+    .def_readonly("X", &I3Direction::GetX)
+    .def_readonly("Y", &I3Direction::GetY)
+    .def_readonly("Z", &I3Direction::GetZ)
+    .def_readonly("Theta", &I3Direction::CalcTheta)
+    .def_readonly("Phi", &I3Direction::CalcPhi)
     ;
   register_pointer_conversions<I3Direction>();
 }
