@@ -53,8 +53,9 @@ struct I3Map<OMKey, Value> : public I3FrameObject, public __gnu_cxx::hash_map<OM
   // preallocating these 6336 locations 
   // (80 Icecube strings + 19 amanda strings + the 'zero' string, 64 oms/string)
   // should only cost on the order of 6336 pointers worth of space, and no time
-  //
-  I3Map<OMKey, Value>() : hashmap_t((80+19)*64) { }
+  // Updated to account for DeepCore.  There are 78 InIce + 8 DeepCore + 19 AMANDA with 60 DOMs each
+  // 80 IceTop stations with 4 DOMs and 2 zero-string DOMs.
+  I3Map<OMKey, Value>() : hashmap_t((78 + 8 + 19)*60 + (80 * 4) + 2) { }
 
   template <class Archive>
   void 
