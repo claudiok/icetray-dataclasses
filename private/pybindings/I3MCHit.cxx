@@ -32,6 +32,7 @@ void register_I3MCHit()
   {
     scope mchit_scope = 
       class_<I3MCHit, boost::shared_ptr<I3MCHit> >("I3MCHit")
+      .def(init<uint64_t,int>() )
       PROPERTY(I3MCHit, Time, Time)
       PROPERTY(I3MCHit, HitID, HitID)
       PROPERTY(I3MCHit, Weight, Weight)
