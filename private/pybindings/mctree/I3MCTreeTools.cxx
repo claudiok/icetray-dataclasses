@@ -194,14 +194,20 @@ I3MCTreeTools::GetNeutrinoEventType(const I3MCTree& t){
   int max_depth(INT_MIN);
   BOOST_FOREACH(const I3Particle& p, I3MCTreeUtils::GetInIce(t)){
     if(IsNeutrino(p)){
-      I3MCTree::iterator iter = I3MCTreeUtils::GetIterator(I3MCTreePtr( new I3MCTree(t)) ,p);
+ 
+      I3MCTree::iterator iter = t.begin();
+      for( ; iter != t.end(); iter++){
+	if(iter->GetMajorID() == p.GetMajorID() &&
+	   iter->GetMinorID() == p.GetMinorID() ) break;
+      }
+      if(iter == t.end()) return NO_INTERACTION;
 
       bool inice_daughters(I3MCTreeUtils::GetDaughters(t,p).size());
       BOOST_FOREACH(const I3Particle& d, I3MCTreeUtils::GetDaughters(t,p))
 	if(d.GetLocationType() != I3Particle::InIce){
 	  inice_daughters = false;
 	}
-
+      
       if(t.depth(iter) > max_depth && inice_daughters){
 	max_depth = t.depth(iter);
 	nu_cand = I3ParticlePtr(new I3Particle(*iter));
@@ -214,13 +220,13 @@ I3MCTreeTools::GetNeutrinoEventType(const I3MCTree& t){
       I3MCTreeUtils::AppendChild(inice_vtx_tree,*nu_cand,d);
     }
   }
-
+  
   if(!inice_vtx_tree->size()) return etype;
-
+  
   if(IsNeutralCurrent(*inice_vtx_tree)) etype = NEUTRAL_CURRENT;
   if(IsChargedCurrent(*inice_vtx_tree)) etype = CHARGED_CURRENT;
   if(IsGlashowResonance(*inice_vtx_tree)) etype = GLASHOW_RESONANCE;
-
+  
   return etype;
 }
 
