@@ -181,6 +181,17 @@ TriggerKey get_trigkey(const I3Trigger& self)
   return self.GetTriggerKey();
 }
 
+std::string PrettyPrintTriggerKey(const TriggerKey& k){
+  std::stringstream s;
+  s << "[";
+  s << k.GetSourceString() << ":"
+    << k.GetTypeString();
+  if(k.CheckConfigID())
+    s << ":"<<k.GetConfigID() ;
+  s << "]" ;
+  return s.str();
+}
+
 void register_I3Trigger()
 {
   {
@@ -230,6 +241,8 @@ void register_I3Trigger()
   }
 
   class_<TriggerKey>("TriggerKey")
+    .def(init<TriggerKey::SourceID, TriggerKey::TypeID>() )
+    .def(init<TriggerKey::SourceID, TriggerKey::TypeID, int>() )
     .add_property("Source", &TriggerKey::GetSource, &TriggerKey::SetSource)
     .add_property("Type", &TriggerKey::GetType, &TriggerKey::SetType)
     .add_property("Subtype", &TriggerKey::GetSubtype, &TriggerKey::SetSubtype)
@@ -237,10 +250,13 @@ void register_I3Trigger()
 		  (void (TriggerKey::*)(int)) &TriggerKey::SetConfigID)
     .def("CheckConfigID", &TriggerKey::CheckConfigID)
     .def("ResetConfigID", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
+    .def("__str__", &PrettyPrintTriggerKey)
     .def(self < self)
     .def(self >= self)
     .def(self > self)
     .def(self <= self)
+    .def(self == self)
+    .def(self != self)
     ;
     
 
