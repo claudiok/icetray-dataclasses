@@ -39,8 +39,6 @@ i3_add_pybindings(dataclasses
   I3RecoPulse.cxx
   I3String.cxx
   I3MapOMKeyMask.cxx
-  I3TWRFrag.cxx
-  I3TWRLaunch.cxx
   I3Time.cxx
   I3Trigger.cxx
   I3Waveform.cxx
