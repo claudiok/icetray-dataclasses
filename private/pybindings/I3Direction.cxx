@@ -33,6 +33,7 @@ void register_I3Direction()
 
   class_<I3Direction, bases<I3FrameObject>, boost::shared_ptr<I3Direction> >("I3Direction")
     .def(init<double,double>())
+    .def(init<double,double,double>())
     .def("SetDirection", oneary)
     .def("SetDirection", twoary)
     .def("SetDirection", threeary)
