@@ -109,6 +109,8 @@ void register_I3Time()
   def("make_I3Time",&GetI3Time);
 #endif
 
+  void (I3Time::* set_unix_time)(time_t, double) = &I3Time::SetUnixTime;
+
   scope i3time_scope = class_<I3Time, bases<I3FrameObject>, 
     boost::shared_ptr<I3Time> >("I3Time")
     .def(init<int32_t,int64_t>())
@@ -116,7 +118,8 @@ void register_I3Time()
     .def("SetModJulianTime", &I3Time::SetModJulianTime)
     .def("SetUTCCalDate",&I3Time::SetUTCCalDate)
     .add_property("UTCString", &I3Time::GetUTCString)
-    .add_property("UnixTime", &I3Time::GetUnixTime, &I3Time::SetUnixTime(unixTime, ns))
+    .add_property("UnixTime", &I3Time::GetUnixTime, &I3Time::SetUnixTime)
+    .def("SetUnixTime", set_unix_time)
     .def("SetDaqTime", &I3Time::SetDaqTime)
 #ifdef HAVE_PYDATETIME_API
     .add_property("DateTime", &GetDateTime)
