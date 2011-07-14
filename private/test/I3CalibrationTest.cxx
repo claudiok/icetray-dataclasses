@@ -3,7 +3,6 @@
 
 #include "dataclasses/calibration/I3Calibration.h"
 #include "icetray/OMKey.h"
-#include "dataclasses/TankKey.h"
 #include "icetray/I3Units.h"
 #include <dataclasses/Utility.h>
 #include <string>

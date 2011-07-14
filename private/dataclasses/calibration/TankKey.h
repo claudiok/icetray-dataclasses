@@ -10,7 +10,6 @@
 #define TANKKEY_H_INCLUDED
 
 #include <utility>
-#include "Utility.h"
 #include <icetray/OMKey.h>
 #include <iostream>
 /**

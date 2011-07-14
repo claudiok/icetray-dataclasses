@@ -2,6 +2,7 @@
 #include <icetray/serialization.h>
 #include <dataclasses/calibration/I3Calibration.h>
 #include "I3TankCalibrationBackwardsCompat.h"
+#include "TankKey.h"
 
 I3Calibration::I3Calibration()
   : TWRGlobalT0(0), TWRI3TimeOffset(0) 
