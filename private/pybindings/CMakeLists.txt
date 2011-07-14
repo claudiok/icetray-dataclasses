@@ -19,7 +19,6 @@
 #  
 
 i3_add_pybindings(dataclasses
-  I3AMANDAAnalogReadout.cxx
   I3Calibration.cxx
   I3Constants.cxx
   I3DOMLaunch.cxx
