@@ -48,6 +48,7 @@ void register_I3DOMLaunch()
       .add_property("RawChargeStamp", make_function((I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
                                                     return_internal_reference<1>()))
       .add_property("WhichATWDChargeStamp", &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
+      .def(self == self)
     ;
 
     enum_<I3DOMLaunch::TriggerType>("TriggerType")
@@ -69,6 +70,7 @@ void register_I3DOMLaunch()
       .value("LC_UPPER", I3DOMLaunch::LC_UPPER)
       .value("UNKNOWN_MODE", I3DOMLaunch::UNKNOWN_MODE)
       .value("SLC_READOUT", I3DOMLaunch::SLC_READOUT)
+      .value("MIN_BIAS", I3DOMLaunch::MIN_BIAS)
       .value("LAST_TRIGGER_SITUATION", I3DOMLaunch::LAST_TRIGGER_SITUATION)
       .export_values()
       ;
