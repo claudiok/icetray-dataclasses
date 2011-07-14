@@ -75,14 +75,14 @@ void register_I3DOMLaunch()
       .export_values()
       ;
   
-    def("identity", identity_<I3DOMLaunch::TriggerMode>);
+    def("Identity", identity_<I3DOMLaunch::TriggerMode>);
 
     enum_<I3DOMLaunch::ATWDselect>("ATWDselect")
       .value("ATWDa", I3DOMLaunch::ATWDa)
       .value("ATWDb", I3DOMLaunch::ATWDb)
       .export_values()
       ;
-    def("identity", identity_<I3DOMLaunch::ATWDselect>);
+    def("Identity", identity_<I3DOMLaunch::ATWDselect>);
   }
 
   class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSeries")

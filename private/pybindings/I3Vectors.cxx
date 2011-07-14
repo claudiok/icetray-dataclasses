@@ -52,11 +52,11 @@ register_std_pair(const char* s)
   typedef std::pair<T, U> type_t;
 
   class_<type_t>(s)
-    .def_readwrite("first", &type_t::first)
-    .def_readwrite("second", &type_t::second)
+    .def_readwrite("First", &type_t::first)
+    .def_readwrite("Second", &type_t::second)
     ;
 
-  def("make_pair", &std::make_pair<T, U>);
+  def("MakePair", &std::make_pair<T, U>);
 }
 
 void register_I3Vectors()
@@ -93,5 +93,5 @@ void register_I3Vectors()
 
   register_i3vector_of<I3Particle>("I3Particle");
   
-  register_std_pair<double, double>("pair_double_double");
+  register_std_pair<double, double>("PairDoubleDouble");
 }

@@ -31,13 +31,12 @@ void register_I3Calibration()
 {
   class_<I3Calibration, bases<I3FrameObject>, boost::shared_ptr<I3Calibration> >("I3Calibration")
     .def(copy_suite<I3Calibration>())
-    .def_readwrite("startTime", &I3Calibration::startTime)
-    .def_readwrite("endTime", &I3Calibration::endTime)
-    .def_readwrite("domCal", &I3Calibration::domCal)
-    //.def_readwrite("amandaCal", &I3Calibration::amandaCal)
+    .def_readwrite("StartTime", &I3Calibration::startTime)
+    .def_readwrite("EndTime", &I3Calibration::endTime)
+    .def_readwrite("DOMCal", &I3Calibration::domCal)
 
     //=====================================================
-    .def_readwrite("vemCal", &I3Calibration::vemCal)
+    .def_readwrite("VEMCal", &I3Calibration::vemCal)
     //=====================================================
     ;
 
@@ -58,22 +57,22 @@ void register_I3Calibration()
   {
  
     class_<LinearFit>("LinearFit")
-      .def_readwrite("slope", &LinearFit::slope)
-      .def_readwrite("intercept", &LinearFit::intercept)
+      .def_readwrite("Slope", &LinearFit::slope)
+      .def_readwrite("Intercept", &LinearFit::intercept)
       ;
 
     class_<I3VEMCalibration>("I3VEMCalibration")
       .def(copy_suite<I3VEMCalibration>())
-      .def_readwrite("pePerVEM", &I3VEMCalibration::pePerVEM)
-      .def_readwrite("muPeakWidth", &I3VEMCalibration::muPeakWidth)
+      .def_readwrite("PEPerVEM", &I3VEMCalibration::pePerVEM)
+      .def_readwrite("MuPeakWidth", &I3VEMCalibration::muPeakWidth)
       .def_readwrite("hglgCrossOver", &I3VEMCalibration::hglgCrossOver)
-      .def_readwrite("corrFactor", &I3VEMCalibration::corrFactor)
+      .def_readwrite("CorrFactor", &I3VEMCalibration::corrFactor)
       ;
 
     class_<QuadraticFit>("QuadraticFit")
-      .def_readwrite("quadFitA", &QuadraticFit::quadFitA)
-      .def_readwrite("quadFitB", &QuadraticFit::quadFitB)
-      .def_readwrite("quadFitC", &QuadraticFit::quadFitC)
+      .def_readwrite("QuadFitA", &QuadraticFit::quadFitA)
+      .def_readwrite("QuadFitB", &QuadraticFit::quadFitB)
+      .def_readwrite("QuadFitC", &QuadraticFit::quadFitC)
       ;
 
     class_<TauParam>("TauParam")

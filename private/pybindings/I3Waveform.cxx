@@ -41,16 +41,16 @@ void register_I3Waveform()
     scope waveform_scope =
       class_<I3Waveform, bases<I3FrameObject>, boost::shared_ptr<I3Waveform> >("I3Waveform")
       .def(copy_suite<I3Waveform>())
-      .add_property("StartTime", &I3Waveform::GetStartTime, &I3Waveform::SetStartTime)
-      .add_property("BinWidth", &I3Waveform::GetBinWidth, &I3Waveform::SetBinWidth)
+      #define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_NC, I3Waveform, PROPS)
+      #undef PROPS
       .add_property("Waveform", get_waveform_func, &I3Waveform::SetWaveform)
       .add_property("WaveformInformation", get_waveform_information_func, &I3Waveform::SetWaveformInformation)
-	#define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
-	#undef PROPS
+
       // for static methods you need the both of these
       .def("GetStatus", get_status_static)
       .staticmethod("GetStatus")
+      .def(self == self)
       ;
 
     const std::pair<unsigned long long int, unsigned long long int>&
@@ -58,9 +58,8 @@ void register_I3Waveform()
       = &I3Waveform::StatusCompound::GetInterval;
 
     class_<I3Waveform::StatusCompound>("StatusCompound")
-      .add_property("Status", &I3Waveform::StatusCompound::GetStatus, &I3Waveform::StatusCompound::SetStatus)
       #define PROPS (Status)(Channel)
-      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform::StatusCompound, PROPS)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_NC, I3Waveform::StatusCompound, PROPS)
       #undef PROPS
       .add_property("Interval", make_function(get_interval, return_value_policy<copy_const_reference>()))
       ;

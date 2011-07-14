@@ -41,10 +41,10 @@ void register_I3MCHit()
       .add_property("ParticleMinorID", &I3MCHit::GetParticleMinorID)
       .add_property("HitSource", &I3MCHit::GetHitSource)
       // better pybindings.
-      #define PROPERTIES (Time)(HitID)(HitSource)(Weight)(CherenkovDistance)
-      #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)
-      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3MCHit, PROPERTIES)
-      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
+      // #define PROPERTIES (Time)(HitID)(HitSource)(Weight)(CherenkovDistance)
+      // #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)
+      // BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3MCHit, PROPERTIES)
+      // BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
       ;
 
     enum_<I3MCHit::HitSource>("HitSource")

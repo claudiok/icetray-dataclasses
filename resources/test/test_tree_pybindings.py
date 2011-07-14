@@ -34,13 +34,13 @@ def test_tree(tree):
     d = dataclasses.I3Particle()
     tree.AppendChild(p,d)
 
-    print d.GetMajorID()
-    print d.GetMinorID()
-    hit = dataclasses.I3MCHit(d.GetMajorID(),d.GetMinorID())
+    print d.MajorID
+    print d.MinorID
+    hit = dataclasses.I3MCHit(d.MajorID,d.MinorID)
 
     light_generator = tree.GetParticleFromHit(hit)
-    ENSURE(light_generator.GetMajorID() == d.GetMajorID() , "this is not the particle you're looking for" )
-    ENSURE(light_generator.GetMinorID() == d.GetMinorID() , "this is not the particle you're looking for" )
+    ENSURE(light_generator.MajorID == d.MajorID, "this is not the particle you're looking for" )
+    ENSURE(light_generator.MinorID == d.MinorID, "this is not the particle you're looking for" )
 
     primaries = tree.GetPrimaries()
     for p in primaries:

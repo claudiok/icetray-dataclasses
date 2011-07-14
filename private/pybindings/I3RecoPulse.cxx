@@ -43,11 +43,8 @@ void register_I3RecoPulse()
 
   scope outer = 
   class_<I3RecoPulse, boost::shared_ptr<I3RecoPulse> >("I3RecoPulse")
-    PROPERTY(I3RecoPulse, Time, Time)
-    PROPERTY(I3RecoPulse, Charge, Charge)
-    PROPERTY(I3RecoPulse, Width, Width)
     #define PROPS (Time)(Charge)(Width)(Flags)
-    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3RecoPulse, PROPS)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_NC, I3RecoPulse, PROPS)
     #undef PROPS
     .def(copy_suite<I3RecoPulse>())
     ;

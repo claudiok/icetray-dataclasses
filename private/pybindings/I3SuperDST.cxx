@@ -42,6 +42,7 @@ register_I3SuperDST()
 		    "into I3RecoPulses. Returns a tuple (HLC pulses, SLC pulses).")
 		#define RO_PROPS (SubEvents)
 		BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3SuperDST, RO_PROPS);
+		#undef RO_PROPS
 		;
 }
 
