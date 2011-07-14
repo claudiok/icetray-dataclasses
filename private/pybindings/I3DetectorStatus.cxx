@@ -74,7 +74,7 @@ void register_I3DetectorStatus()
     scope outer = 
       class_<I3DOMStatus, boost::shared_ptr<I3DOMStatus> >("I3DOMStatus")
       .def(copy_suite<I3DOMStatus>())
-      .def_readwrite("GrigMode", &I3DOMStatus::trigMode)
+      .def_readwrite("TrigMode", &I3DOMStatus::trigMode)
       .def_readwrite("LCMode", &I3DOMStatus::lcMode)
       .def_readwrite("LCWindowPre", &I3DOMStatus::lcWindowPre)
       .def_readwrite("LCWindowPost", &I3DOMStatus::lcWindowPost)
