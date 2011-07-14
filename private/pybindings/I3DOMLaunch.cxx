@@ -34,29 +34,20 @@ void register_I3DOMLaunch()
   {
     scope outer = 
     class_<I3DOMLaunch, boost::shared_ptr<I3DOMLaunch> >("I3DOMLaunch")
-      .def("GetStartTime", &I3DOMLaunch::GetStartTime)
-      .def("GetLCBit", &I3DOMLaunch::GetLCBit)
-      .def("GetTriggerType", &I3DOMLaunch::GetTriggerType)
-      .def("GetTriggerMode", &I3DOMLaunch::GetTriggerMode)
-      .def("GetWhichATWD", &I3DOMLaunch::GetWhichATWD)
-      .def("GetIsPedestalSub", &I3DOMLaunch::GetIsPedestalSub)
-      .def("GetChargeStampHighestSample", &I3DOMLaunch::GetChargeStampHighestSample)
-      .def("GetRawFADC", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
-	   return_internal_reference<1>())
-      .def("GetRawATWD", (I3Vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD,
-	   return_internal_reference<1>())
-      .def("GetRawChargeStamp", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
-	   return_internal_reference<1>())
-      .def("GetWhichATWDChargeStamp", &I3DOMLaunch::GetWhichATWDChargeStamp)
-      .def("SetStartTime",&I3DOMLaunch::SetStartTime)
-      .def("SetTriggerType", &I3DOMLaunch::SetTriggerType)
-      .def("SetTriggerMode", &I3DOMLaunch::SetTriggerMode)
-      .def("SetWhichATWD", &I3DOMLaunch::SetWhichATWD)
-      .def("SetLCBit", &I3DOMLaunch::SetLCBit)
-      .def("SetIsPedestalSub", &I3DOMLaunch::SetIsPedestalSub)
-      .def("SetChargeStampHighestSample", &I3DOMLaunch::SetChargeStampHighestSample)
-      .def("SetWhichATWDChargeStamp", &I3DOMLaunch::SetWhichATWDChargeStamp)
-
+      .add_property("StartTime", &I3DOMLaunch::GetStartTime, &I3DOMLaunch::SetStartTime)
+      .add_property("LCBit", &I3DOMLaunch::GetLCBit, &I3DOMLaunch::SetLCBit)
+      .add_property("TriggerType", &I3DOMLaunch::GetTriggerType, &I3DOMLaunch::SetTriggerType)
+      .add_property("TriggerMode", &I3DOMLaunch::GetTriggerMode, &I3DOMLaunch::SetTriggerMode)
+      .add_property("WhichATWD", &I3DOMLaunch::GetWhichATWD, &I3DOMLaunch::SetWhichATWD)
+      .add_property("IsPedestalSub", &I3DOMLaunch::GetIsPedestalSub, &I3DOMLaunch::SetIsPedestalSub)
+      .add_property("ChargeStampHighestSample", &I3DOMLaunch::GetChargeStampHighestSample, &I3DOMLaunch::SetChargeStampHighestSample)
+      .add_property("RawFADC", make_function((I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
+                                             return_internal_reference<1>()))
+      .add_property("RawATWD", make_function((I3Vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD,
+                                             return_internal_reference<1>()))
+      .add_property("RawChargeStamp", make_function((I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
+                                                    return_internal_reference<1>()))
+      .add_property("WhichATWDChargeStamp", &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
     ;
 
     enum_<I3DOMLaunch::TriggerType>("TriggerType")

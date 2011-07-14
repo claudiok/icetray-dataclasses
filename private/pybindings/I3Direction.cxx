@@ -50,6 +50,7 @@ void register_I3Direction()
     .add_property("Z", &I3Direction::GetZ)
     .add_property("Theta", &I3Direction::CalcTheta)
     .add_property("Phi", &I3Direction::CalcPhi)
+    .def(self == self)
     ;
   register_pointer_conversions<I3Direction>();
 }

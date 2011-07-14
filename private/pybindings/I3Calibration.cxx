@@ -39,10 +39,6 @@ void register_I3Calibration()
     //=====================================================
     .def_readwrite("vemCal", &I3Calibration::vemCal)
     //=====================================================
-
-    //.def_readwrite("twrCal", &I3Calibration::twrCal)
-    .def_readwrite("TWRGlobalT0", &I3Calibration::TWRGlobalT0)
-    .def_readwrite("TWRI3TimeOffset", &I3Calibration::TWRI3TimeOffset)
     ;
 
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
@@ -117,7 +113,7 @@ void register_I3Calibration()
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
-      .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>())
+      .add_property("ATWDBinCalibFit", boost::python::make_function(&I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>()), &I3DOMCalibration::SetATWDBinCalibFit)
       .def("ATWDPulseTemplate", &I3DOMCalibration::ATWDPulseTemplate)
       .def("FADCPulseTemplate", &I3DOMCalibration::FADCPulseTemplate)
       .def("DiscriminatorPulseTemplate", &I3DOMCalibration::DiscriminatorPulseTemplate)

@@ -41,18 +41,13 @@ void register_I3Waveform()
     scope waveform_scope =
       class_<I3Waveform, bases<I3FrameObject>, boost::shared_ptr<I3Waveform> >("I3Waveform")
       .def(copy_suite<I3Waveform>())
-      .def("GetStartTime", &I3Waveform::GetStartTime)
-      .def("SetStartTime", &I3Waveform::SetStartTime)
-      .def("GetBinWidth", &I3Waveform::GetBinWidth)
-      .def("SetBinWidth", &I3Waveform::SetBinWidth)
-      .def("GetWaveform", get_waveform_func)
-      .def("SetWaveform", &I3Waveform::SetWaveform)
-      .def("GetWaveformInformation", get_waveform_information_func)
+      .add_property("StartTime", &I3Waveform::GetStartTime, &I3Waveform::SetStartTime)
+      .add_property("BinWidth", &I3Waveform::GetBinWidth, &I3Waveform::SetBinWidth)
+      .add_property("Waveform", get_waveform_func, &I3Waveform::SetWaveform)
+      .add_property("WaveformInformation", get_waveform_information_func, &I3Waveform::SetWaveformInformation)
 	#define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
 	#undef PROPS
-      .add_property("waveform",get_waveform_func,&I3Waveform::SetWaveform)
-      .add_property("waveform_information",get_waveform_information_func)
       // for static methods you need the both of these
       .def("GetStatus", get_status_static)
       .staticmethod("GetStatus")
@@ -63,13 +58,11 @@ void register_I3Waveform()
       = &I3Waveform::StatusCompound::GetInterval;
 
     class_<I3Waveform::StatusCompound>("StatusCompound")
-      .def("GetInterval", get_interval, return_value_policy<copy_const_reference>())
-      .def("GetStatus", &I3Waveform::StatusCompound::GetStatus)
-      .def("SetStatus", &I3Waveform::StatusCompound::SetStatus)
+      .add_property("Status", &I3Waveform::StatusCompound::GetStatus, &I3Waveform::StatusCompound::SetStatus)
       #define PROPS (Status)(Channel)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform::StatusCompound, PROPS)
       #undef PROPS
-      .add_property("interval", bp::make_function(get_interval, return_value_policy<copy_const_reference>()))
+      .add_property("Interval", make_function(get_interval, return_value_policy<copy_const_reference>()))
       ;
 
     enum_<I3Waveform::Source>("Source")

@@ -269,7 +269,7 @@ void register_I3Trigger()
     .def("InIce_SMT_ONLY", &InIce_SMT_ONLY)
     .def("__str__", &print)
     .def("__len__", &length)
-    .def("GetTriggerLengths",&get_trigger_lengths)
+    .add_property("TriggerLengths",&get_trigger_lengths)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     ;
 

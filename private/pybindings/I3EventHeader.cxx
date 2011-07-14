@@ -40,7 +40,7 @@ void register_I3EventHeader()
       PROPERTY(I3EventHeader, State,     State)
       PROPERTY(I3EventHeader, StartTime, StartTime)
       PROPERTY(I3EventHeader, EndTime,   EndTime)
-      .def("GetDataStream", &I3EventHeader::GetDataStream)
+      .add_property("DataStream", &I3EventHeader::GetDataStream)
       .def(copy_suite<I3EventHeader>())
       ;
 

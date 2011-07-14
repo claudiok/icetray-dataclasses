@@ -40,7 +40,7 @@ get_phi(const I3Particle& self)
 }
 
 static void 
-set_position(I3Particle& self, double x, double y, double z)
+set_position(I3Particle& self, const double x, const double y, const double z)
 {
   self.SetPos(x,y,z);
 }
@@ -52,19 +52,25 @@ set_position_i3pos(I3Particle& self, const I3Position& p)
 }
 
 static void 
-set_theta_phi(I3Particle& self, double theta, double phi)
+set_theta_phi(I3Particle& self, const double theta, const double phi)
 {
   self.SetThetaPhi(theta,phi);
 }
 
 static void 
-set_dir_angles(I3Particle& self, double zen, double azi)
+set_dir(I3Particle& self, const I3Direction& d)
+{
+  self.SetDir(d);
+}
+
+static void 
+set_dir_angles(I3Particle& self, const double zen, const double azi)
 {
   self.SetDir(zen,azi);
 }
 
 static void 
-set_dir_unitvect(I3Particle& self, double x, double y, double z)
+set_dir_unitvect(I3Particle& self, const double x, const double y, const double z)
 {
   self.SetDir(x,y,z);
 }
@@ -113,14 +119,15 @@ void register_I3Particle()
 	BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3Particle, PROPERTIES)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_DEF, I3Particle, CONVENIENCE_BOOLS)
-      .def("GetPos", &get_pos)	
-      .def("GetTheta", &get_theta)
-      .def("GetPhi", &get_phi)
-      .def("GetDir", &I3Particle::GetDir, return_internal_reference<1>())
+      .add_property("Pos", &get_pos)	
+      .add_property("Theta", &get_theta)
+      .add_property("Phi", &get_phi)
+      .add_property("Dir", make_function(&I3Particle::GetDir, return_internal_reference<1>()))
       .def("ShiftAlongTrack", &I3Particle::ShiftAlongTrack)
       .def("SetPos", &set_position)
       .def("SetPos", &set_position_i3pos)
       .def("SetThetaPhi", &set_theta_phi)
+      .def("SetDir", &set_dir)
       .def("SetDir", &set_dir_angles)
       .def("SetDir", &set_dir_unitvect)
       .def("__str__", i3particle_prettyprint)
