@@ -1,5 +1,6 @@
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3RecoHit.h>
+#include <dataclasses/external/CompareFloatingPoint.h>
 
 I3RecoHit::~I3RecoHit() {}
 
@@ -17,6 +18,13 @@ I3RecoHit::serialize(Archive& ar, unsigned version)
       ar & make_nvp("sourceIndex",sourceIndex_);
     }
 }
+
+bool 
+I3RecoHit::operator==(const I3RecoHit& rhs) const{
+  return CompareFloatingPoint::Compare(time_ , rhs.time_ )
+      && hitID_ == rhs.hitID_
+      && sourceIndex_ == rhs.sourceIndex_;
+  }
 
 I3_SERIALIZABLE(I3RecoHit);
 

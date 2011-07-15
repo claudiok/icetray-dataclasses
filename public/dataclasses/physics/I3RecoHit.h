@@ -26,7 +26,7 @@ static const unsigned i3recohit_version_ = 1;
 
 class I3RecoHit 
 {
-  public:
+ public:
   I3RecoHit() : time_(NAN),hitID_(-1),sourceIndex_(-1){}
 
   virtual ~I3RecoHit();
@@ -51,11 +51,7 @@ class I3RecoHit
  */
   void SetSourceIndex(const int srcid) { sourceIndex_ = srcid; }
 
-  bool operator==(const I3RecoHit& rhs) {
-    return time_ == rhs.time_ 
-      && hitID_ == rhs.hitID_
-      && sourceIndex_ == rhs.sourceIndex_;
-  }
+  bool operator==(const I3RecoHit& rhs) const ;
 
  private:
 

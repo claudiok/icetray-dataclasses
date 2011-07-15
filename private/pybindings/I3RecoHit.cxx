@@ -33,6 +33,7 @@ void register_I3RecoHit()
     PROPERTY(I3RecoHit, Time, Time)
     PROPERTY(I3RecoHit, ID, ID)
     PROPERTY(I3RecoHit, SourceIndex, SourceIndex)
+    .def(self == self)
     ;
 
   class_<std::vector<I3RecoHit> >("vector_I3RecoHit")
