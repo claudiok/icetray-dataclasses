@@ -25,11 +25,11 @@ TEST_GROUP(I3DOMLaunch)
 
 TEST(serializeStandardWave)
 {
-	I3DOMLaunch wave;
-  I3Vector<int>& atwd0 = wave.GetRawATWD(0);
-  I3Vector<int>& atwd1 = wave.GetRawATWD(1);
-  I3Vector<int>& atwd2 = wave.GetRawATWD(2);
-  I3Vector<int>& fadc = wave.GetRawFADC();
+  I3DOMLaunch wave;
+  std::vector<int>& atwd0 = wave.GetRawATWD(0);
+  std::vector<int>& atwd1 = wave.GetRawATWD(1);
+  std::vector<int>& atwd2 = wave.GetRawATWD(2);
+  std::vector<int>& fadc = wave.GetRawFADC();
   
   for( int i=0; i< 128; i++) 
   {
@@ -91,7 +91,7 @@ TEST(serializeStandardWave)
 TEST(serializeMaxIntegerWave)
 {
 	I3DOMLaunch wave;
-  I3Vector<int>& atwd0 = wave.GetRawATWD(0);
+  std::vector<int>& atwd0 = wave.GetRawATWD(0);
   
   for( int i=0; i< 128; i++) 
   {
@@ -129,7 +129,7 @@ TEST(serializeMaxIntegerWave)
 TEST(serializeFullCompressed)
 {
   I3DOMLaunch wave;
-  I3Vector<int>& atwd0 = wave.GetRawATWD(0);
+  std::vector<int>& atwd0 = wave.GetRawATWD(0);
   
   int vals[] = {
          142,142,142,141,142,142,149,156,154,146,143,142,141,139,141,139,

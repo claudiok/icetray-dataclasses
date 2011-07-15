@@ -70,140 +70,140 @@ namespace I3DeltaCompression
 	class DeltaCompressor
 	{
 		public:
-      /**
-       * Enumeration of the variable bitwidth used. 
-       */
-		  enum BTW
-			{
-				Lv0 = 1,
-				Lv1 = 2,
-				Lv2 = 3,
-				Lv3 = 6,
-				Lv4 = 11,
-				Lv5 = 20,
-				Lv6 = 31,
-			};
-			
-		public:
-			/**
-			 * Default constructor.
-       * Initializes the bitwidth with Lv2.
-			 */
-			DeltaCompressor();
-			
-			/**
-			 * Compresses the waveform passed in the vector of values. The compressed
-			 * waveform is stored internally and can be retrieved using the the getCompressed()
-			 * method.
-			 * The internal state of the compressor is not reset by this call. This allows
-			 * to compress several waveforms to the same internal compressed bitstream, by
-			 * calling compress several times.
-       * The rationale behind this design is to allow for an emulation of the DOMs which
-       * combine all waveforms to on compressed stream.
-			 *
-			 * @param values The vector with the waveform to be compressed.
-       * @exception A std::domain_error is thrown in case of internal conpression error.
-			 */
-      void compress( const std::vector<int>& values);
-			
-			/**
-			 * Decompresses the internal compressed waveform and append the restored values
-       * to the vector passed by reference. If this vector already contains elements,
-       * the decompressed waveform will be appended.
-       * The decompressed wafeform will most likely have more values then the original
-       * waveform with the additional bins all having the same value as the last bin
-       * of the original waveform (deltas of 0). It is the responsability of the caller
-       * to truncate this vector to the correct size.
-			 *
-			 * @param values A reference to a vector to which the decompressed waveform will
-       *               be appended.
-       * @exception A std::domain_error is thrown in case of internal conpression error.
-			 */
-		  void decompress( std::vector<int>& values );
-			
-			/**
-			 * Reset the internal state of the compressor by deleting the stored compressed
-       * waveform and resetting the variable bitwidth to the default value.
-			 */
-			void reset()
-			{
-			  offset_ = 0;
-			  btw_ = Lv2;
-			  compressed_.clear();
-			}
-      
-			/**
-			 * Get a reference to the vector containing the compressed waveform.
-       *
-       * @return a const vector of unsigned integers representing the 
-       *         compressed bitstream.
-			 */    
-			const std::vector<unsigned int>& getCompressed()
-      {
-      	if( offset_ != 0)
-          compressed_.push_back( currCompressedValue_ );
-          
-        offset_ = 0;
-        btw_ = Lv2;
-        
-        return compressed_; 
-      };
-      
-			/**
-			 * Set the internal compressed waveform to the values of the passed vector.
-       * The waveform is coppied to the internal representation.
-       *
-       * @param vals const vector representing a compressed waveform.
-			 */         
-			void setCompressed( const std::vector<unsigned int>& vals ) 
-			{
-			  compressed_.clear();
-			  compressed_.assign( vals.begin(), vals.end() );
-			}
-		
-		private:
-    
-      /**
-       * Utillity function to get the next higher bitwidth.
-       *
-       * @param btw current bitwidth
-       * @return next higher bitwidth
-       * @exception a std::domain_error is thrown when the function is called
-        *           with the highest btw or an invalid btw.
-       */
-			int getNextBtw( int btw ) const;
-
-      /**
-       * Utillity function to get the next lower bitwidth.
-       *
-       * @param btw current bitwidth
-       * @return next lower bitwidth
-       * @exception a std::domain_error is thrown when the function is called
-        *           with the lowest btw or an invalid btw.
-       */
-			int getPrevBtw( int btw ) const;
-      
-      /**
-       * Write the compressed bits corresponding to a passed delta value.
-       *
-       * @param delta difference to previous bin to be written in compressed form.
-       */
-			void compressDelta( int delta );
-
-      /**
-       * Output len bits of the word to the compressed bitstream.
-       *
-       * @param word Bits to write.
-       * @param len length of significant bits which should be written.
-       */
-			void outputBits( int word, int len );
-									
-		private:
-			int btw_;
-			unsigned int offset_;
-			unsigned int currCompressedValue_;
-			std::vector<unsigned int> compressed_;
-			std::vector<unsigned int>::iterator it_;
+	  /**
+	   * Enumeration of the variable bitwidth used. 
+	   */
+	  enum BTW
+	  {
+	    Lv0 = 1,
+	    Lv1 = 2,
+	    Lv2 = 3,
+	    Lv3 = 6,
+	    Lv4 = 11,
+	    Lv5 = 20,
+	    Lv6 = 31,
+	  };
+	  
+	public:
+	  /**
+	   * Default constructor.
+	   * Initializes the bitwidth with Lv2.
+	   */
+	  DeltaCompressor();
+	  
+	  /**
+	   * Compresses the waveform passed in the vector of values. The compressed
+	   * waveform is stored internally and can be retrieved using the the getCompressed()
+	   * method.
+	   * The internal state of the compressor is not reset by this call. This allows
+	   * to compress several waveforms to the same internal compressed bitstream, by
+	   * calling compress several times.
+	   * The rationale behind this design is to allow for an emulation of the DOMs which
+	   * combine all waveforms to on compressed stream.
+	   *
+	   * @param values The vector with the waveform to be compressed.
+	   * @exception A std::domain_error is thrown in case of internal conpression error.
+	   */
+	  void compress( const std::vector<int>& values);
+	  
+	  /**
+	   * Decompresses the internal compressed waveform and append the restored values
+	   * to the vector passed by reference. If this vector already contains elements,
+	   * the decompressed waveform will be appended.
+	   * The decompressed wafeform will most likely have more values then the original
+	   * waveform with the additional bins all having the same value as the last bin
+	   * of the original waveform (deltas of 0). It is the responsability of the caller
+	   * to truncate this vector to the correct size.
+	   *
+	   * @param values A reference to a vector to which the decompressed waveform will
+	   *               be appended.
+	   * @exception A std::domain_error is thrown in case of internal conpression error.
+	   */
+	  void decompress( std::vector<int>& values );
+	  
+	  /**
+	   * Reset the internal state of the compressor by deleting the stored compressed
+	   * waveform and resetting the variable bitwidth to the default value.
+	   q*/
+	  void reset()
+	  {
+	    offset_ = 0;
+	    btw_ = Lv2;
+	    compressed_.clear();
+	  }
+	  
+	  /**
+	   * Get a reference to the vector containing the compressed waveform.
+	   *
+	   * @return a const vector of unsigned integers representing the 
+	   *         compressed bitstream.
+	   */    
+	  const std::vector<unsigned int>& getCompressed()
+	  {
+	      if( offset_ != 0)
+		compressed_.push_back( currCompressedValue_ );
+	    
+	    offset_ = 0;
+	    btw_ = Lv2;
+	    
+	    return compressed_; 
+	  };
+	  
+	  /**
+	   * Set the internal compressed waveform to the values of the passed vector.
+	   * The waveform is coppied to the internal representation.
+	   *
+	   * @param vals const vector representing a compressed waveform.
+	   */         
+	  void setCompressed( const std::vector<unsigned int>& vals ) 
+	  {
+	    compressed_.clear();
+	    compressed_.assign( vals.begin(), vals.end() );
+	  }
+	  
+	 private:
+	  
+	  /**
+	   * Utillity function to get the next higher bitwidth.
+	   *
+	   * @param btw current bitwidth
+	   * @return next higher bitwidth
+	   * @exception a std::domain_error is thrown when the function is called
+	   *           with the highest btw or an invalid btw.
+	   */
+	  int getNextBtw( int btw ) const;
+	  
+	  /**
+	   * Utillity function to get the next lower bitwidth.
+	   *
+	   * @param btw current bitwidth
+	   * @return next lower bitwidth
+	   * @exception a std::domain_error is thrown when the function is called
+	   *           with the lowest btw or an invalid btw.
+	   */
+	  int getPrevBtw( int btw ) const;
+	  
+	  /**
+	   * Write the compressed bits corresponding to a passed delta value.
+	   *
+	   * @param delta difference to previous bin to be written in compressed form.
+	   */
+	  void compressDelta( int delta );
+	  
+	  /**
+	   * Output len bits of the word to the compressed bitstream.
+	   *
+	   * @param word Bits to write.
+	   * @param len length of significant bits which should be written.
+	   */
+	  void outputBits( int word, int len );
+	  
+	private:
+	  int btw_;
+	  unsigned int offset_;
+	  unsigned int currCompressedValue_;
+	  std::vector<unsigned int> compressed_;
+	  std::vector<unsigned int>::iterator it_;
 	};
 }
 

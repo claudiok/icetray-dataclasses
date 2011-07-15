@@ -29,7 +29,6 @@ using namespace boost::python;
 
 void register_I3DOMLaunch()
 {
-  //  I3Vector<int>& (I3DOMLaunch::*)() = &I3DOMLaunch::GetRawFADC;
 
   {
     scope outer = 
@@ -41,12 +40,18 @@ void register_I3DOMLaunch()
       .add_property("WhichATWD", &I3DOMLaunch::GetWhichATWD, &I3DOMLaunch::SetWhichATWD)
       .add_property("IsPedestalSub", &I3DOMLaunch::GetIsPedestalSub, &I3DOMLaunch::SetIsPedestalSub)
       .add_property("ChargeStampHighestSample", &I3DOMLaunch::GetChargeStampHighestSample, &I3DOMLaunch::SetChargeStampHighestSample)
-      .add_property("RawFADC", make_function((I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
-                                             return_internal_reference<1>()))
-      .add_property("RawATWD", make_function((I3Vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD,
-                                             return_internal_reference<1>()))
-      .add_property("RawChargeStamp", make_function((I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
-                                                    return_internal_reference<1>()))
+      .add_property("RawFADC", make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
+                                             return_internal_reference<1>()),
+		    make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC, return_internal_reference<1>()))				  
+      .add_property("RawATWDs", make_function((std::vector<std::vector<int> >& (I3DOMLaunch::*)(void)) &I3DOMLaunch::GetRawATWDs,
+					      return_internal_reference<1>()),
+		    make_function((std::vector<std::vector<int> >& (I3DOMLaunch::*)(void)) &I3DOMLaunch::GetRawATWDs,
+				  return_internal_reference<1>()))
+      .def("GetRawATWD", (std::vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD, return_internal_reference<1>())	   
+      .add_property("RawChargeStamp", make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
+                                                    return_internal_reference<1>()),
+		    make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
+				  return_internal_reference<1>()))
       .add_property("WhichATWDChargeStamp", &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
       .def(self == self)
     ;

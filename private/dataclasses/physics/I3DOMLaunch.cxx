@@ -3,6 +3,8 @@
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <dataclasses/physics/DeltaCompressor.h>
 #include <stdexcept>
+#include <dataclasses/I3Vector.h>
+#include <boost/foreach.hpp>
 
 I3DOMLaunch::I3DOMLaunch() 
   : startTime_(0.0),
@@ -33,16 +35,13 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
   // since version 3 of the file the raw waveforms are stored in delta
   // compressed form. This is only done, if archived to a non XML archive,
   // to allow to inspect the waveforms with dataio_shovel.
-  if(  ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) )
-  {
-    try
-    {
+  if(  ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) ){
+    try{
       I3DeltaCompression::DeltaCompressor compressor;
       std::vector< std::vector<unsigned int> > compressedATWD;
       
-      I3Vector<I3Vector<int> >::const_iterator it;
-      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ )
-      {
+      std::vector<std::vector<int> >::const_iterator it;
+      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ ){
         // reset the compressor and compresse the waveform
         compressor.reset();
         compressor.compress( *it );
@@ -59,8 +58,7 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       // also write the number of samples for each ATWD waveform to the archive
       // as the decompressed waveforms need to be truncated from extra values
       // which are appended as the algorithm doesn't allow for a end marker.
-      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ )
-      {
+      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ ){
         int numSamples = static_cast<int>( (*it).size() );
         ar & make_nvp( "NumSamplesATWD", numSamples );
       }
@@ -81,13 +79,12 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       int numSamples =  rawFADC_.size();
       ar & make_nvp("NumSamplesFADC", numSamples );
     }
-    catch( const std::domain_error& ex )
-    {
+    catch( const std::domain_error& ex ) {
       log_fatal("%s", ex.what());
     }
-  }
-  else
-  {
+  }else{
+    // since the serialization method is split we only need to 
+    // worry about the load method so we can read old I3Vector data
     ar & make_nvp("RawATWD", rawATWD_);
     ar & make_nvp("RawFADC", rawFADC_);
   }
@@ -141,7 +138,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       ar & make_nvp("CompressedATWD", compressedATWD);
       
       std::vector< std::vector<unsigned int> >::const_iterator it;
-      I3Vector<I3VectorInt >::iterator it2 = rawATWD_.begin();
+      std::vector<std::vector<int> >::iterator it2 = rawATWD_.begin();
       for( it = compressedATWD.begin(); it < compressedATWD.end(); it++, it2++ )
       {
         // reset compressor and initialize with the compressed data.
@@ -194,11 +191,33 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
   }
   else
   {
-    ar & make_nvp("RawATWD", rawATWD_);
-    ar & make_nvp("RawFADC", rawFADC_);
+    if(version > 4){
+      ar & make_nvp("RawATWD", rawATWD_);
+      ar & make_nvp("RawFADC", rawFADC_);
+    }else{
+      // need to deserialize I3Vectors and translate to std::vector
+      I3Vector< I3Vector<int> > tempRawATWD;
+      ar & make_nvp("RawATWD", tempRawATWD);
+
+      BOOST_FOREACH(I3VectorInt& wf, tempRawATWD){
+	std::vector<int> temp;
+	BOOST_FOREACH(int& i, wf) temp.push_back(int(i)); 
+	rawATWD_.push_back(temp);
+      }
+
+      I3Vector<int> tempRawFADC;      
+      ar & make_nvp("RawFADC", tempRawFADC);
+      BOOST_FOREACH(int& i, tempRawFADC) rawFADC_.push_back(int(i));
+    }
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
-  ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  if( version > 4){
+    ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  }else{
+    I3Vector<int> tempRawChargeStamp;
+    ar & make_nvp("RawChargeStamp", tempRawChargeStamp);
+    BOOST_FOREACH(int& i, tempRawChargeStamp) rawChargeStamp_.push_back(int(i));
+  }
   if(version > 2)
     {
       ar & make_nvp("Pedestal", pedestal_);
