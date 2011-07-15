@@ -103,9 +103,6 @@ TEST(compare_float_as_int){
   float smallestDenormal = 0;
   (*(int*)&smallestDenormal) += 1;
   
-  cerr<<ToString((float)pow(2,23));
-  cerr<<ToString((double)pow(2,52));
-
   cerr<<"negativeZero " <<endl;
   cerr<<ToString(negativeZero);
   cerr<<"nan1 " <<endl;
