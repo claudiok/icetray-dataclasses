@@ -47,6 +47,7 @@ void register_I3RecoPulse()
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_NC, I3RecoPulse, PROPS)
     #undef PROPS
     .def(copy_suite<I3RecoPulse>())
+    .def( self == self )
     ;
   
   enum_<I3RecoPulse::PulseFlags>("PulseFlags")

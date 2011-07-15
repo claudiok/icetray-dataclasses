@@ -1,6 +1,9 @@
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <dataclasses/physics/I3Waveform.h>
+#include <dataclasses/external/CompareFloatingPoint.h>
+
+using CompareFloatingPoint::Compare;
 
 I3RecoPulse::~I3RecoPulse() {}
 
@@ -50,9 +53,9 @@ bool
 I3RecoPulse::operator==(const I3RecoPulse& rhs) const
 {
   return flags_ == flags_ 
-    && (time_ == rhs.time_)
-    && (charge_ == rhs.charge_)
-    && ((std::isnan(width_) && std::isnan(rhs.width_)) || width_ == rhs.width_);
+    && Compare(time_, rhs.time_)
+    && Compare(charge_, rhs.charge_)
+    && Compare(width_, rhs.width_);
 }
 
 I3_SERIALIZABLE(I3RecoPulse);
