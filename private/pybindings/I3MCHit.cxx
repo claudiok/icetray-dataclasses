@@ -47,7 +47,7 @@ void register_I3MCHit()
       // BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
       ;
 
-    enum_<I3MCHit::HitSource>("HitSource")
+    enum_<I3MCHit::HitSource>("I3MCHitSource")
       .value("UNKNOWN", I3MCHit::UNKNOWN)
       .value("SPE", I3MCHit::SPE)
       .value("RANDOM", I3MCHit::RANDOM)
