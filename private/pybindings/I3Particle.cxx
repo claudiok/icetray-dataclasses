@@ -131,7 +131,7 @@ void register_I3Particle()
       .def("__str__", i3particle_prettyprint)
       ;
 
-    enum_<I3Particle::FitStatus>("FitStatus")
+    enum_<I3Particle::FitStatus>("I3ParticleFitStatus")
       .value("NotSet",I3Particle::NotSet)
       .value("OK",I3Particle::OK)
       .value("GeneralFailure",I3Particle::GeneralFailure)
@@ -149,7 +149,7 @@ void register_I3Particle()
       .export_values()
       ;
 
-    enum_<I3Particle::ParticleType>("ParticleType")
+    enum_<I3Particle::ParticleType>("I3ParticleParticleType")
       .value("unknown",I3Particle::unknown)
       .value("Gamma",I3Particle::Gamma)
       .value("EPlus",I3Particle::EPlus)
@@ -216,7 +216,7 @@ void register_I3Particle()
       .export_values()
       ;
 
-    enum_<I3Particle::ParticleShape>("ParticleShape")
+    enum_<I3Particle::ParticleShape>("I3ParticleParticleShape")
       .value("Null",I3Particle::Null)
       .value("Primary",I3Particle::Primary)
       .value("TopShower",I3Particle::TopShower)
