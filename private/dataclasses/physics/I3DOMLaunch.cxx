@@ -198,16 +198,20 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       // need to deserialize I3Vectors and translate to std::vector
       I3Vector< I3Vector<int> > tempRawATWD;
       ar & make_nvp("RawATWD", tempRawATWD);
-
-      BOOST_FOREACH(I3VectorInt& wf, tempRawATWD){
-	std::vector<int> temp;
-	BOOST_FOREACH(int& i, wf) temp.push_back(int(i)); 
-	rawATWD_.push_back(temp);
+      //need to clear the vectors before filling them
+      rawATWD_.clear();
+      BOOST_FOREACH(I3Vector<int>& wf, tempRawATWD){
+	std::vector<int> tempWF;
+	BOOST_FOREACH(int i, wf) tempWF.push_back(i);
+	rawATWD_.push_back(tempWF);
       }
 
+      //need to clear the vectors before filling them
       I3Vector<int> tempRawFADC;      
       ar & make_nvp("RawFADC", tempRawFADC);
-      BOOST_FOREACH(int& i, tempRawFADC) rawFADC_.push_back(int(i));
+      rawFADC_.clear();
+      BOOST_FOREACH(int i, tempRawFADC) 
+	rawFADC_.push_back(i);
     }
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
@@ -216,7 +220,9 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
   }else{
     I3Vector<int> tempRawChargeStamp;
     ar & make_nvp("RawChargeStamp", tempRawChargeStamp);
-    BOOST_FOREACH(int& i, tempRawChargeStamp) rawChargeStamp_.push_back(int(i));
+    rawChargeStamp_.clear();
+    BOOST_FOREACH(int i, tempRawChargeStamp) 
+      rawChargeStamp_.push_back(i);    
   }
   if(version > 2)
     {
