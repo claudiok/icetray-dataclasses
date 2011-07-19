@@ -120,9 +120,9 @@ void register_I3Time()
 #define DEFS (SetModJulianTime)(SetUTCCalDate)(SetUnixTime)(SetDaqTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Time, DEFS)
 #undef  DEFS
-    .add_property("UnixTime", &I3Time::GetUnixTime, set_unix_time_default)
+    .add_property("unix_time", &I3Time::GetUnixTime, set_unix_time_default)
 #ifdef HAVE_PYDATETIME_API
-    .add_property("DateTime", &GetDateTime)
+    .add_property("date_time", &GetDateTime)
 #endif
 #define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UTCYear)(UTCMonth)(UTCDaqTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Time, RO_PROPS)
