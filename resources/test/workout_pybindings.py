@@ -122,7 +122,7 @@ ENSURE(dmstat.has_key(mykey),'Can not find my new dom status')
 print 'Testing I3DOMLaunch'
 dl = dataclasses.I3DOMLaunch()
 fadc = icetray.vector_int()
-[fadc.append(i) for i in range(10)]3
+[fadc.append(i) for i in range(10)]
 ## TODO:  fixme
 ##dl.RawFADC = fadc
 
