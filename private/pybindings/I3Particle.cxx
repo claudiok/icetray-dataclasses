@@ -26,61 +26,7 @@
 #include <icetray/python/std_vector_indexing_suite.hpp>
 
 using namespace boost::python;
-
-static double 
-get_theta(const I3Particle& self)
-{
-  return self.GetDir().CalcTheta();
-}
-
-static double 
-get_phi(const I3Particle& self)
-{
-  return self.GetDir().CalcPhi();
-}
-
-static void 
-set_position(I3Particle& self, const double x, const double y, const double z)
-{
-  self.SetPos(x,y,z);
-}
-
-static void 
-set_position_i3pos(I3Particle& self, const I3Position& p)
-{
-  self.SetPos(p);
-}
-
-static void 
-set_theta_phi(I3Particle& self, const double theta, const double phi)
-{
-  self.SetThetaPhi(theta,phi);
-}
-
-static void 
-set_dir(I3Particle& self, const I3Direction& d)
-{
-  self.SetDir(d);
-}
-
-static void 
-set_dir_angles(I3Particle& self, const double zen, const double azi)
-{
-  self.SetDir(zen,azi);
-}
-
-static void 
-set_dir_unitvect(I3Particle& self, const double x, const double y, const double z)
-{
-  self.SetDir(x,y,z);
-}
-
-inline boost::shared_ptr<I3Position> 
-get_pos(I3Particle * particle)
-{
-  return I3PositionPtr(new I3Position(particle->GetPos()));
-}
-
+ 
 static std::string 
 i3particle_prettyprint(const I3Particle& p)
 {
@@ -101,33 +47,26 @@ i3particle_prettyprint(const I3Particle& p)
       << "              Status : " << p.GetFitStatusString() <<  std::endl
       << "            Location : " << p.GetLocationTypeString() << std::endl 
       << "]" ;
-
-;
   return oss.str();
 }
 
 void register_I3Particle()
 {
+
   {
     scope particle_scope = 
       class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> >("I3Particle")
-	#define RO_PROPERTIES (X)(Y)(Z)(Zenith)(Azimuth)(MajorID)(MinorID)
+	#define RO_PROPERTIES (MajorID)(MinorID)
 	#define PROPERTIES (Time)(Energy)(Shape)(Type)(Length)(Speed)(FitStatus)(LocationType)
 	#define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Particle, RO_PROPERTIES)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
 	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BOOL, I3Particle, CONVENIENCE_BOOLS)
-      .add_property("pos", &get_pos)	
-      .add_property("theta", &get_theta)
-      .add_property("phi", &get_phi)
-      .add_property("dir", make_function(&I3Particle::GetDir, return_internal_reference<1>()))
+      .add_property("pos", make_function( (const I3Position& (I3Particle::*)()) &I3Particle::GetPos, return_internal_reference<1>() ),
+					  (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos ) 
+      .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
+					  (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir ) 
       .def("shift_along_track", &I3Particle::ShiftAlongTrack)
-      .def("set_pos", &set_position)
-      .def("set_pos", &set_position_i3pos)
-      .def("set_theta_phi", &set_theta_phi)
-      .def("set_dir", &set_dir)
-      .def("set_dir", &set_dir_angles)
-      .def("set_dir", &set_dir_unitvect)
       .def("__str__", i3particle_prettyprint)
       ;
 
