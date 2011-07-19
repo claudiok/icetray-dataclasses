@@ -92,10 +92,10 @@ ENSURE(pos.R == distance, "Distances don't match")
 #I3Time
 print 'Testing I3Time'
 time = dataclasses.I3Time()
-time.SetDaqTime(2010,111111111123456789)
+time.set_daq_time(2010,111111111123456789)
 print time
-print time.ModJulianDayDouble
-print time.ModJulianDay, time.ModJulianSec, time.ModJulianNanoSec
+print time.mod_julian_day_double
+print time.mod_julian_day, time.mod_julian_sec, time.mod_julian_nano_sec
 
 time2 = dataclasses.I3Time(2009,111111111123456789)
 
