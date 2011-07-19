@@ -41,17 +41,17 @@ print 'c',dataclasses.I3Constants.c
 
 print 'Testing I3Direction'
 dir = dataclasses.I3Direction(1.0, 1.0, 1.0)
-print "Directions!", dir.Theta, dir.Phi, dir.Azimuth, dir.Zenith
+print "Directions!", dir.theta, dir.phi, dir.azimuth, dir.zenith
 
 dir2 = dataclasses.I3Direction(1.0, 0.0, 0.0)
 # TODO: This needs pretty print
 print dir2
 
-dir2.RotateZ(90*icetray.I3Units.deg)
+dir2.rotate_z(90*icetray.I3Units.deg)
 print dir2
 
 dir3 = dataclasses.I3Direction()
-dir3.SetDirection(dir2)
+dir3.set_direction(dir2)
 print dir3
 
 # Testing DOMFunctions
