@@ -44,7 +44,6 @@ dir = dataclasses.I3Direction(1.0, 1.0, 1.0)
 print "Directions!", dir.Theta, dir.Phi, dir.Azimuth, dir.Zenith
 
 dir2 = dataclasses.I3Direction(1.0, 0.0, 0.0)
-TODO
 # TODO: This needs pretty print
 print dir2
 
