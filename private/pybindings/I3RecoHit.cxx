@@ -30,9 +30,9 @@ using namespace boost::python;
 void register_I3RecoHit()
 {
   class_<I3RecoHit, boost::shared_ptr<I3RecoHit> >("I3RecoHit")
-    PROPERTY(I3RecoHit, Time, Time)
-    PROPERTY(I3RecoHit, ID, ID)
-    PROPERTY(I3RecoHit, SourceIndex, SourceIndex)
+    PROPERTY(I3RecoHit, time, Time)
+    PROPERTY(I3RecoHit, id, ID)
+    PROPERTY(I3RecoHit, source_index, SourceIndex)
     .def(self == self)
     ;
 

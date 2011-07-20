@@ -33,18 +33,10 @@ void register_I3MCHit()
     scope mchit_scope = 
       class_<I3MCHit, boost::shared_ptr<I3MCHit> >("I3MCHit")
       .def(init<uint64_t,int>() )
-      PROPERTY(I3MCHit, Time, Time)
-      PROPERTY(I3MCHit, HitID, HitID)
-      PROPERTY(I3MCHit, Weight, Weight)
-      PROPERTY(I3MCHit, CherenkovDistance, CherenkovDistance)
-      .add_property("ParticleMajorID", &I3MCHit::GetParticleMajorID)
-      .add_property("ParticleMinorID", &I3MCHit::GetParticleMinorID)
-      .add_property("HitSource", &I3MCHit::GetHitSource)
-      // better pybindings.
-      // #define PROPERTIES (Time)(HitID)(HitSource)(Weight)(CherenkovDistance)
-      // #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)
-      // BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3MCHit, PROPERTIES)
-      // BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
+      #define PROPERTIES (Time)(HitID)(Weight)(CherenkovDistance)
+      #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)(HitSource)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3MCHit, PROPERTIES)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
       ;
 
     enum_<I3MCHit::HitSource>("I3MCHitSource")

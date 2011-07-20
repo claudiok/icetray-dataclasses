@@ -14,9 +14,9 @@ from icecube.icetray.I3Test import *
 
 print 'Testing TriggerKey pybindings'
 tk = dataclasses.TriggerKey()
-tk.ConfigID = 1002
+tk.config_id = 1002
 ENSURE(tk.check_config_id() == True, "CheckConfigID fail")
-ENSURE(tk.ConfigID == 1002, "Wrong ConfigID")
+ENSURE(tk.config_id == 1002, "Wrong ConfigID")
 
 tk.Source = dataclasses.I3Trigger.IN_ICE
 ENSURE(tk.Source == dataclasses.I3Trigger.IN_ICE, "Wrong Trigger Source")
@@ -27,8 +27,8 @@ ENSURE(tk.Type == dataclasses.I3Trigger.SIMPLE_MULTIPLICITY, "Wrong Trigger Type
 #pretty print works
 print tk
 
-tk.ResetConfigID() 
-ENSURE(tk.CheckConfigID() == False, "CheckConfigID fail")
+tk.reset_config_id() 
+ENSURE(tk.check_config_id() == False, "CheckConfigID fail")
 
 print 'Testing I3Constants'
 print 'NA',dataclasses.I3Constants.NA
