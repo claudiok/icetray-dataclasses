@@ -86,7 +86,7 @@ void register_I3Position()
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Position, RO_PROPERTIES)
 #undef  RO_PROPERTIES
 #define DEFS (ShiftCoordSystem)(RotateX)(RotateY)(RotateZ)(CalcDistance)
-    BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Position, RO_PROPERTIES)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Position, DEFS)
 #undef  DEFS
     .def("__str__", dump)
     .def("__len__", i3position_len)
