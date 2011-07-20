@@ -86,8 +86,8 @@ print 'Testing I3Position'
 pos = dataclasses.I3Position(1.1, 2.2, 3.3)
 print pos
 pos2 = dataclasses.I3Position(0, 0, 0)
-distance = pos.CalcDistance(pos2)
-ENSURE(pos.R == distance, "Distances don't match")
+distance = pos.calc_distance(pos2)
+ENSURE(pos.r == distance, "Distances don't match")
 
 #I3Time
 print 'Testing I3Time'
