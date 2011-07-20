@@ -15,7 +15,7 @@ from icecube.icetray.I3Test import *
 print 'Testing TriggerKey pybindings'
 tk = dataclasses.TriggerKey()
 tk.ConfigID = 1002
-ENSURE(tk.CheckConfigID() == True, "CheckConfigID fail")
+ENSURE(tk.check_config_id() == True, "CheckConfigID fail")
 ENSURE(tk.ConfigID == 1002, "Wrong ConfigID")
 
 tk.Source = dataclasses.I3Trigger.IN_ICE

@@ -197,11 +197,11 @@ void register_I3Trigger()
   {
     scope trigscope = 
       class_<I3Trigger, I3TriggerPtr>("I3Trigger")
-      PROPERTY(I3Trigger, Time, TriggerTime)
-      PROPERTY(I3Trigger, Length, TriggerLength)
-      PROPERTY(I3Trigger, Fired, TriggerFired)
+      PROPERTY(I3Trigger, time, TriggerTime)
+      PROPERTY(I3Trigger, length, TriggerLength)
+      PROPERTY(I3Trigger, fired, TriggerFired)
       // force copy of trigkey via standalone fn
-      .add_property("Key", get_trigkey, "Get TriggerKey")
+      .add_property("key", get_trigkey, "Get TriggerKey")
       .def("__str__", TriggerPrettyPrint)
       ;
 
@@ -243,13 +243,13 @@ void register_I3Trigger()
   class_<TriggerKey>("TriggerKey")
     .def(init<TriggerKey::SourceID, TriggerKey::TypeID>() )
     .def(init<TriggerKey::SourceID, TriggerKey::TypeID, int>() )
-    .add_property("Source", &TriggerKey::GetSource, &TriggerKey::SetSource)
-    .add_property("Type", &TriggerKey::GetType, &TriggerKey::SetType)
-    .add_property("Subtype", &TriggerKey::GetSubtype, &TriggerKey::SetSubtype)
-    .add_property("ConfigID", &TriggerKey::GetConfigID, 
+#define PROPERTIES (Source)(Type)(Subtype)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, TriggerKey, PROPERTIES)
+#undef  PROPERTIES
+    .add_property("config_id", &TriggerKey::GetConfigID, 
 		  (void (TriggerKey::*)(int)) &TriggerKey::SetConfigID)
-    .def("CheckConfigID", &TriggerKey::CheckConfigID)
-    .def("ResetConfigID", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
+    .def("check_config_id", &TriggerKey::CheckConfigID)
+    .def("reset_config_id", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
     .def("__str__", &PrettyPrintTriggerKey)
     .def(self < self)
     .def(self >= self)
@@ -261,15 +261,15 @@ void register_I3Trigger()
     
 
   class_<I3TriggerHierarchy, bases<I3FrameObject>, I3TriggerHierarchyPtr>("I3TriggerHierarchy")
-    .def("FindTrigger", &FindTrigger1)
-    .def("FindTrigger", &FindTrigger2)   
-    .def("InIce_triggered", &InIce_triggered)
-    .def("IceTop_triggered", &IceTop_triggered)
-    .def("AMANDA_triggered", &AMANDA_triggered)
-    .def("InIce_SMT_ONLY", &InIce_SMT_ONLY)
+    .def("find_trigger", &FindTrigger1)
+    .def("find_trigger", &FindTrigger2)   
+    .def("in_ice_triggered", &InIce_triggered)
+    .def("ice_top_triggered", &IceTop_triggered)
+    .def("amanda_triggered", &AMANDA_triggered)
+    .def("in_ice_smt_only", &InIce_SMT_ONLY)
     .def("__str__", &print)
     .def("__len__", &length)
-    .add_property("TriggerLengths",&get_trigger_lengths)
+    .add_property("trigger_lengths",&get_trigger_lengths)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     ;
 

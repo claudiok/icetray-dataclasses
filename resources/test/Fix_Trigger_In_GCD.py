@@ -23,13 +23,13 @@ while oldgcd.more():
         ## clear the the old triggers
         i3ds.TriggerStatus.clear()
 
-        ## Setup the SMT 8 thrigger
+        ## Setup the SMT 8 trigger
         smt_ts = dataclasses.I3TriggerStatus()
         smt_tk = dataclasses.TriggerKey()
 
-        smt_tk.ConfigID = 1006
-        smt_tk.Source = dataclasses.I3Trigger.IN_ICE
-        smt_tk.Type = dataclasses.I3Trigger.SIMPLE_MULTIPLICITY
+        smt_tk.config_id = 1006
+        smt_tk.source = dataclasses.I3Trigger.IN_ICE
+        smt_tk.type = dataclasses.I3Trigger.SIMPLE_MULTIPLICITY
         
         smt_ts.TriggerName = 'SimpleMajorityTrigger'
         trigSet = smt_ts.TriggerSettings
@@ -58,9 +58,9 @@ while oldgcd.more():
         str_ts = dataclasses.I3TriggerStatus()
         str_tk = dataclasses.TriggerKey()
         
-        str_tk.ConfigID = 1007
-        str_tk.Source = dataclasses.I3Trigger.IN_ICE
-        str_tk.Type = dataclasses.I3Trigger.STRING
+        str_tk.config_id = 1007
+        str_tk.source = dataclasses.I3Trigger.IN_ICE
+        str_tk.type = dataclasses.I3Trigger.STRING
         
         str_ts.TriggerName = 'ClusterTrigger'
         trigSet2 = str_ts.TriggerSettings
@@ -90,10 +90,10 @@ while oldgcd.more():
 
         ## print what we've got
         for trigKey,trigStat in i3ds.TriggerStatus:
-            if trigKey.CheckConfigID():
-                print 'Key',trigKey.Source, trigKey.Type, trigKey.ConfigID
+            if trigKey.check_config_id():
+                print 'Key',trigKey.source, trigKey.type, trigKey.config_id
             else:
-                print 'Key',trigKey.Source, trigKey.Type
+                print 'Key',trigKey.source, trigKey.type
             print 'TriggerStatus for:',trigStat.TriggerName
             print 'ReadoutConfig:'
             readoutset = trigStat.ReadoutSettings
