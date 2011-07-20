@@ -20,6 +20,9 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame, const s
 		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
 
 	I3RecoPulseSeriesMap::const_iterator it = source_->begin();
+	if (source_->size() == 0)
+		return;
+
 	omkey_mask_ = bitmask(source_->size());
 	for ( ; it != source_->end(); it++)
 		element_masks_.push_back(bitmask(it->second.size()));
