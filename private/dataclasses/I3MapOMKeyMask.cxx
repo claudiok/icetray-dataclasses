@@ -24,8 +24,13 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame, const s
 		return;
 
 	omkey_mask_ = bitmask(source_->size());
-	for ( ; it != source_->end(); it++)
-		element_masks_.push_back(bitmask(it->second.size()));
+	for ( ; it != source_->end(); it++) {
+		if (it->second.size() > 0)
+			element_masks_.push_back(bitmask(it->second.size()));
+		else
+			omkey_mask_.set(std::distance(source_->begin(), it),
+			    false);
+	}
 }
 
 void
@@ -226,7 +231,7 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, bool set_it)
 	
 	/* Insert a new bitmask if necessary. */
 	if (!omkey_mask_.get(omkey_idx)) {
-		if (set_it) {
+		if (set_it && vec->size() > 0) {
 			list_it = element_masks_.insert(list_it,
 			     bitmask(vec->size(), true));
 			omkey_mask_.set(omkey_idx, true);
@@ -234,11 +239,13 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, bool set_it)
 		return;
 	}
 	
-	if (set_it) {
+	if (set_it && vec->size() > 0) {
 		list_it->set_all();
 	} else {
 		omkey_mask_.set(omkey_idx, false);
-		element_masks_.erase(list_it);
+
+		if (!set_it)
+			element_masks_.erase(list_it);
 	}
 }
 
