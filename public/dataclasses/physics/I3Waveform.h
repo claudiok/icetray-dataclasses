@@ -44,7 +44,7 @@ class I3Waveform
   union SourceCompound {
     struct {
       #ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
-      uint8_t slop   : 4;
+      uint8_t slop   : 3;
       uint8_t hlc    : 1;
       uint8_t id     : 1;
       uint8_t source : 3;
@@ -52,7 +52,7 @@ class I3Waveform
       uint8_t source : 3; /* Source ID */
       uint8_t id     : 1; /* Source index (e.g. ATWDa/ATWDb) */
       uint8_t hlc    : 1; /* Readout type (e.g. SLC/HLC) */
-      uint8_t slop   : 4; /* Unused space */
+      uint8_t slop   : 3; /* Unused space */
       #endif
     } fields;
     uint8_t bits;
