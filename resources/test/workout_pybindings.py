@@ -106,15 +106,25 @@ ENSURE(time>time2,'Time order not correct')
 #I3DetectorStatus
 print 'Testing I3DectorStatus'
 ds = dataclasses.I3DetectorStatus()
-dmstat = ds.DOMStatus
+dmstat = ds.dom_status
 adom = dataclasses.I3DOMStatus()
-adom.PMTHV = 1500*icetray.I3Units.V
+adom.pmt_hv = 1500*icetray.I3Units.V
 dmstat[icetray.OMKey(1,1)] = adom
 mykey = icetray.OMKey(1,1)
 ENSURE(dmstat.has_key(mykey),'Can not find my new dom status')
 
 # I3Geometry example? (olivas have one?)
-
+print "Testing I3Geometry"
+omg = dataclasses.I3OMGeo()
+omg.position.x=100.0
+omg.position.y=101.0
+omg.position.z=102.0
+i3g = dataclasses.I3Geometry()
+i3g.omgeo[icetray.OMKey(1,1)] = omg
+ENSURE(i3g.omgeo.has_key(icetray.OMKey(1,1)), 'can not find my omkey in i3geo')
+ENSURE( (not i3g.omgeo.has_key(icetray.OMKey(1,2))), 'found a bad omkey in i3geo')
+newom = i3g.omgeo[icetray.OMKey(1,1)]
+ENSURE(newom.position.x > 99.0, 'Failed to get the right OMGeo position back')
 # I3Calibratopm example? (olivas have one?)
 
 #I3DOMLaunch
@@ -123,7 +133,7 @@ dl = dataclasses.I3DOMLaunch()
 fadc = icetray.vector_int()
 [fadc.append(i) for i in range(10)]
 ## TODO:  fixme
-##dl.RawFADC = fadc
+#dl.RawFADC = fadc
 
 dl.LCBit = True
 ENSURE(dl.LCBit == True, 'Got wrong LCBit')
@@ -141,8 +151,6 @@ print dl
 #I3FlasherInfo
 
 #I3MCHits
-
-#I3MCTree
 
 #I3Particle
 

@@ -31,13 +31,8 @@ void register_I3Calibration()
 {
   class_<I3Calibration, bases<I3FrameObject>, boost::shared_ptr<I3Calibration> >("I3Calibration")
     .def(copy_suite<I3Calibration>())
-    .def_readwrite("StartTime", &I3Calibration::startTime)
-    .def_readwrite("EndTime", &I3Calibration::endTime)
-    .def_readwrite("DOMCal", &I3Calibration::domCal)
-
-    //=====================================================
-    .def_readwrite("VEMCal", &I3Calibration::vemCal)
-    //=====================================================
+    #define I3CALPROPS (startTime)(endTime)(domCal)(vemCal)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Calibration, I3CALPROPS)
     ;
 
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
@@ -57,65 +52,46 @@ void register_I3Calibration()
   {
  
     class_<LinearFit>("LinearFit")
-      .def_readwrite("Slope", &LinearFit::slope)
-      .def_readwrite("Intercept", &LinearFit::intercept)
+      .def_readwrite("slope", &LinearFit::slope)
+      .def_readwrite("intercept", &LinearFit::intercept)
       ;
 
     class_<I3VEMCalibration>("I3VEMCalibration")
       .def(copy_suite<I3VEMCalibration>())
-      .def_readwrite("PEPerVEM", &I3VEMCalibration::pePerVEM)
-      .def_readwrite("MuPeakWidth", &I3VEMCalibration::muPeakWidth)
-      .def_readwrite("hglgCrossOver", &I3VEMCalibration::hglgCrossOver)
-      .def_readwrite("CorrFactor", &I3VEMCalibration::corrFactor)
+      #define I3VEMCALPROPS (pePerVEM)(muPeakWidth)(hglgCrossOver)(corrFactor) 
+      BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3VEMCalibration, I3VEMCALPROPS)
       ;
 
     class_<QuadraticFit>("QuadraticFit")
-      .def_readwrite("QuadFitA", &QuadraticFit::quadFitA)
-      .def_readwrite("QuadFitB", &QuadraticFit::quadFitB)
-      .def_readwrite("QuadFitC", &QuadraticFit::quadFitC)
+      .def_readwrite("quad_fit_a", &QuadraticFit::quadFitA)
+      .def_readwrite("quad_fit_b", &QuadraticFit::quadFitB)
+      .def_readwrite("quad_fit_v", &QuadraticFit::quadFitC)
       ;
 
     class_<TauParam>("TauParam")
-      .def_readwrite("P0", &TauParam::P0)
-      .def_readwrite("P1", &TauParam::P1)
-      .def_readwrite("P2", &TauParam::P2)
-      .def_readwrite("P3", &TauParam::P3)
-      .def_readwrite("P4", &TauParam::P4)
-      .def_readwrite("P5", &TauParam::P5)
-      .def_readwrite("TauFrac", &TauParam::TauFrac)
+      .def_readwrite("p0", &TauParam::P0)
+      .def_readwrite("p1", &TauParam::P1)
+      .def_readwrite("p2", &TauParam::P2)
+      .def_readwrite("p3", &TauParam::P3)
+      .def_readwrite("p4", &TauParam::P4)
+      .def_readwrite("p5", &TauParam::P5)
+      .def_readwrite("tau_frac", &TauParam::TauFrac)
       ;
 
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
       .def(copy_suite<I3DOMCalibration>())
-      PROPERTY(I3DOMCalibration, Temperature, Temperature)
-      PROPERTY(I3DOMCalibration, TransitTime, TransitTime)
-      PROPERTY(I3DOMCalibration, HVGainFit, HVGainFit)
-      PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
-      PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
-      PROPERTY(I3DOMCalibration, FADCBeaconBaseline, FADCBeaconBaseline)
-      PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
-      PROPERTY(I3DOMCalibration, TauParameters, TauParameters)
-      PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
-      PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
-      PROPERTY(I3DOMCalibration, FADCDeltaT, FADCDeltaT)
-      PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
-      PROPERTY(I3DOMCalibration, DOMCalVersion, DOMCalVersion)
-      PROPERTY(I3DOMCalibration, ATWDResponseWidth, ATWDResponseWidth)
-      PROPERTY(I3DOMCalibration, FADCResponseWidth, FADCResponseWidth)
-      PROPERTY(I3DOMCalibration, SPEDiscCalib, SPEDiscCalib)
-      PROPERTY(I3DOMCalibration, MPEDiscCalib, MPEDiscCalib)
-      PROPERTY(I3DOMCalibration, PMTDiscCalib, PMTDiscCalib)
-      PROPERTY(I3DOMCalibration, DomNoiseRate, DomNoiseRate)
-      PROPERTY(I3DOMCalibration, RelativeDomEff, RelativeDomEff)
+      #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)(FADCBaselineFit)(FrontEndImpedance)(TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)(ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)(MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       /* XXX FIXME: find a better way to expose the channel argument. */
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
+      //BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
-      .add_property("ATWDBinCalibFit", boost::python::make_function(&I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>()), &I3DOMCalibration::SetATWDBinCalibFit)
-      .def("ATWDPulseTemplate", &I3DOMCalibration::ATWDPulseTemplate)
-      .def("FADCPulseTemplate", &I3DOMCalibration::FADCPulseTemplate)
-      .def("DiscriminatorPulseTemplate", &I3DOMCalibration::DiscriminatorPulseTemplate)
+      .add_property("atwd_bin_calib_fit", boost::python::make_function(&I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>()), &I3DOMCalibration::SetATWDBinCalibFit)
+      .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
+      .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
+      .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)
 
 
       ;
