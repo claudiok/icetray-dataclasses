@@ -216,6 +216,11 @@ class I3Waveform
 
   void SetSource(Source source) { source_.fields.source = source; }
 
+  bool IsHLC() const { return (bool)(source_.fields.hlc); }
+  bool IsSLC() const { return !(bool)(source_.fields.hlc); }
+
+  void SetHLC(bool hlc) { source_.fields.hlc = hlc; }
+
   /**
    * Get the source index for this waveform (e.g. the ATWD chip ID)
    */

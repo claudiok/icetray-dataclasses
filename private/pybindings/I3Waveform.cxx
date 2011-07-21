@@ -46,6 +46,7 @@ void register_I3Waveform()
       #undef PROPS
       .add_property("waveform", get_waveform_func, &I3Waveform::SetWaveform)
       .add_property("waveform_information", get_waveform_information_func, &I3Waveform::SetWaveformInformation)
+      .add_property("hlc", &I3Waveform::IsHLC, &I3Waveform::SetHLC)
 
       // for static methods you need the both of these
       .def("get_status", get_status_static)
