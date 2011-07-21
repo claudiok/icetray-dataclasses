@@ -41,7 +41,7 @@ void register_I3Waveform()
     scope waveform_scope =
       class_<I3Waveform, bases<I3FrameObject>, boost::shared_ptr<I3Waveform> >("I3Waveform")
       .def(copy_suite<I3Waveform>())
-      #define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)
+      #define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)(Digitizer)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
       #undef PROPS
       .add_property("waveform", get_waveform_func, &I3Waveform::SetWaveform)

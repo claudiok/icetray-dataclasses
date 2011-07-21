@@ -212,14 +212,35 @@ class I3Waveform
   void SetWaveformInformation(const std::vector<StatusCompound>& info)
     {waveformInfo_ = info;}
 
-  Source GetSource() const { return (Source)(unsigned)(source_.fields.source); }
+  /**
+   * Returns the source flag. This is a legacy function to maintain compatibility
+   * with old code. It returns I3Waveform::SLC for SLC waveforms and the
+   * digitizer for HLC waveforms.
+   *
+   * To get more detailed information use IsHLC and GetDigitizer instead.
+   */
+  Source GetSource() const { return IsSLC() ? I3Waveform::SLC : GetDigitizer(); }
 
+  /**
+   * Deprecated. Use SetDigitizer to set the chip information (ATWD or FADC) and
+   * SetHLC to switch HLC flag on or off.
+   */
+#ifndef __CINT__
+  __attribute__ ((deprecated))
+#endif // __CINT__
   void SetSource(Source source) { source_.fields.source = source; }
 
   bool IsHLC() const { return (bool)(source_.fields.hlc); }
   bool IsSLC() const { return !(bool)(source_.fields.hlc); }
 
   void SetHLC(bool hlc) { source_.fields.hlc = hlc; }
+
+  /// Returns the digitizer (ATWD or FADC)
+  Source GetDigitizer() const { return (Source)(unsigned)(source_.fields.source); }
+
+  /// Set the digitizer (ATWD or FADC). Do not set to SLC.
+  void SetDigitizer(Source source) { source_.fields.source = source; }
+
 
   /**
    * Get the source index for this waveform (e.g. the ATWD chip ID)
