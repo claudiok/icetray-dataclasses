@@ -63,13 +63,13 @@ void PrintNumbers()
       <<ToString((double)0.0) <<endl;
 
   cerr<<"Zero plus -0 should also be 0"<<endl
-      <<ToString((double)0.0, 0x8000000000000000)<<endl;
+      <<ToString((double)0.0, 0x8000000000000000LL)<<endl;
   
   cerr<<"Offset to 0.0 runs from 3 to -3"<<endl;
   for (long i = 3; i >= 0; --i)
     cerr<<ToString( (double)0.0, i ) <<endl;
   for (long i = 0; i <= 3; ++i)
-    cerr<<ToString( (double)0.0, i + 0x8000000000000000 )<<endl;
+    cerr<<ToString( (double)0.0, i + 0x8000000000000000LL )<<endl;
 }
 
 TEST(compare_float_as_int){
@@ -173,7 +173,7 @@ TEST(compare_double_as_long){
  // Create various special numbers
   double negativeZeroD;
   // Initialize negativeZero with its integer representation
-  *(long*)&negativeZeroD = 0x8000000000000000;
+  *(long*)&negativeZeroD = 0x8000000000000000LL;
   // Create a NAN
   double nan1D = sqrt(-1.0f);
   // Create a NAN a different way - should give the same NAN on

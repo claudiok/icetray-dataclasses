@@ -53,10 +53,10 @@ inline bool IsInfinite(float A)
 inline bool IsInfinite(double A)
 {
 
-  const long INF_AS_LONG = 0x7FF0000000000000;
+  const long INF_AS_LONG = 0x7FF0000000000000LL;
     // An infinity has an exponent of 2047 (shift left 52 positions) and
     // a zero mantissa. There are two infinities - positive and negative.
-    if ((*(long*)&A & 0x7FFFFFFFFFFFFFFF  ) == INF_AS_LONG)
+    if ((*(long*)&A & 0x7FFFFFFFFFFFFFFFLL  ) == INF_AS_LONG)
         return true;
     return false;
 }
@@ -76,9 +76,9 @@ inline bool IsNan(double A)
 {
     // A NAN has an exponent of 2047 (shifted left 52 positions) and
     // a non-zero mantissa.
-  const long INF_AS_LONG = 0x7FF0000000000000;
-  long mantissa = *(long*)&A & 0xFFFFFFFFFFFFF;
-  if ( ( (*(long*)&A & 0x7FF0000000000000) == INF_AS_LONG)  &&
+  const long INF_AS_LONG = 0x7FF0000000000000LL;
+  long mantissa = *(long*)&A & 0xFFFFFFFFFFFFFLL;
+  if ( ( (*(long*)&A & 0x7FF0000000000000LL) == INF_AS_LONG)  &&
     mantissa != 0)
     return true;
   return false;
@@ -93,7 +93,7 @@ inline int Sign(float A)
 inline long Sign(double A)
 {
     // The sign bit of a number is the high bit.
-    return (*(long*)&A) & 0x8000000000000000;
+    return (*(long*)&A) & 0x8000000000000000LL;
 }
 
 // This is the 'final' version of the AlmostEqualUlps function.
@@ -204,11 +204,11 @@ inline bool Compare(double A, double B, long maxUlps = 10)
     long aLong = *(long*)&A;
     // Make aLong lexicographically ordered as a twos-complement long
     if (aLong < 0)
-        aLong = 0x8000000000000000 - aLong;
+        aLong = 0x8000000000000000LL - aLong;
     // Make bLong lexicographically ordered as a twos-complement long
     long bLong = *(long*)&B;
     if (bLong < 0)
-        bLong = 0x8000000000000000 - bLong;
+        bLong = 0x8000000000000000LL - bLong;
 
     // Now we can compare aLong and bLong to find out how far apart A and B
     // are.
