@@ -1,5 +1,5 @@
 #include <icetray/serialization.h>
-#include "calibration/TankKey.h"
+#include "dataclasses/TankKey.h"
 
 
 template <typename Archive>
