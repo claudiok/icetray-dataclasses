@@ -19,42 +19,27 @@
  */
 static const unsigned tankkey_version_ = 0;
 
-class TankKey 
-{
- public:
-  enum TankID {TankA=0,TankB=1};
- private:
-  int stringNumber_;
-  TankID tankID_;
- public:
-  TankKey() : stringNumber_(0), tankID_(TankA) {}
+struct TankKey {
+public:
+  enum TankID { TankA=0, TankB=1 };
 
-  TankKey(int str,TankID tank) 
-    : stringNumber_(str), tankID_(tank){}
+  int string;
+  TankID tank;
+
+
+  TankKey()
+    : string(0), tank(TankA)
+  {}
+
+  TankKey(int str,TankID tank_)
+    : string(str), tank(tank_)
+  {}
   
-  TankKey(const OMKey& omKey) {SetOMKey(omKey);} 
-  
-  virtual ~TankKey(); 
+  explicit TankKey(const OMKey& omKey)
+  {
+    SetOMKey(omKey);
+  }
 
-  /**
-   * retrieves the string number for this TankKey
-   */
-  int GetString() const { return stringNumber_; }
-
-  /**
-   * Sets the string number for this Tank
-   */
-  void SetString(int str){ stringNumber_ = str; }
-
-  /**
-   * gets the Tank number on the station
-   */
-  TankID GetTank() const { return tankID_; }
-
-  /**
-   * sets the Tank number on the station
-   */
-  void SetTank(TankID tank){ tankID_ = tank; }
   
   /**
    * Sets the stringNumber and tankID of this tank according to the OMKey
@@ -72,31 +57,27 @@ class TankKey
    * @param rhs the TankKey to compare this one to.
    */
   bool operator==(const TankKey& rhs) const
-    {
-      if(rhs.tankID_ == tankID_ && rhs.stringNumber_ == stringNumber_)
-	return true;
-      return false;
-    }
+  {
+    if(rhs.tank == tank && rhs.string == string)
+      return true;
+    return false;
+  }
 
   /**
    * inequality operator
    * @return false if the string or tank numbers are different
    * @param rhs the TankKey to compare this one to.
    */
-  bool operator!=(const TankKey& rhs) const
-    {
-      if(rhs == *this)
-	return false;
-      return true;
-    }
+  bool operator!=(const TankKey& rhs) const { return !(rhs == *this); }
 
 
- private:
+private:
   friend class boost::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 };
+
 
 /**
  * comparison operator.  First compares the string numbers, then compares
@@ -105,13 +86,13 @@ class TankKey
  * @param rhs the right-hand TankKey
  * @return true if the lhs should be ordered before the rhs
  */
-inline bool operator<(const TankKey& lhs,const TankKey& rhs)
+inline bool operator<(const TankKey& lhs, const TankKey& rhs)
 {
-  if(lhs.GetString() < rhs.GetString())
+  if(lhs.string < rhs.string)
     return true;
-  if(lhs.GetString() > rhs.GetString())
+  if(lhs.string > rhs.string)
     return false;
-  if(lhs.GetTank() < rhs.GetTank())
+  if(lhs.tank < rhs.tank)
     return true;
   return false;
 }
