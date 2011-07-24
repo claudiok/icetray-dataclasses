@@ -55,9 +55,9 @@ void register_I3FlasherInfo()
  {
    scope outer = 
    class_<I3FlasherInfo, bases<I3FrameObject>, I3FlasherInfoPtr>("I3FlasherInfo")
-#define PROPS (FlashingOM)(FlashTime)(ATWDBinSize)(LEDBrightness)(Mask)(Width)(Rate)
+     #define PROPS (FlashingOM)(FlashTime)(ATWDBinSize)(LEDBrightness)(Mask)(Width)(Rate)
      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3FlasherInfo, PROPS)
-#undef PROPS
+     #undef PROPS
      .add_property("RawATWD3", make_function(get_waveform,return_internal_reference<1>()), &I3FlasherInfo::SetRawATWD3)
    ;
 

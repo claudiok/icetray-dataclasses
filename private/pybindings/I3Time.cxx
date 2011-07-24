@@ -117,16 +117,16 @@ void register_I3Time()
     boost::shared_ptr<I3Time> >("I3Time")
     .def(init<int32_t,int64_t>())
     .def(init<const I3Time&>())
-#define DEFS (SetModJulianTime)(SetUTCCalDate)(SetUnixTime)(SetDaqTime)
+    #define DEFS (SetModJulianTime)(SetUTCCalDate)(SetUnixTime)(SetDaqTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Time, DEFS)
-#undef  DEFS
+    #undef  DEFS
     .add_property("unix_time", &I3Time::GetUnixTime, set_unix_time_default)
 #ifdef HAVE_PYDATETIME_API
     .add_property("date_time", &GetDateTime)
 #endif
-#define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UTCYear)(UTCMonth)(UTCDaqTime)
+    #define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UTCYear)(UTCMonth)(UTCDaqTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Time, RO_PROPS)
-#undef  RO_PROPS
+    #undef  RO_PROPS
     .def("__str__",&dump)
     .def("__repr__",&repr)
     .def(self == self)

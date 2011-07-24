@@ -37,6 +37,8 @@ void register_I3MCHit()
       #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)(HitSource)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3MCHit, PROPERTIES)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
+      #undef PROPERTIES
+      #undef RO_PROPERTIES
       ;
 
     enum_<I3MCHit::HitSource>("I3MCHitSource")

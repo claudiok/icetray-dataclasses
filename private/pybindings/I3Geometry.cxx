@@ -40,6 +40,7 @@ void register_I3Geometry()
     .def(copy_suite<I3Geometry>())
     #define GEOMPROPS (omgeo)(stationgeo)(startTime)(endTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Geometry, GEOMPROPS )
+    #undef GEOMPROPS
     ;
 
   class_<std::map<OMKey, I3OMGeo> >("Map_OMKey_I3OMGeo")
@@ -54,6 +55,7 @@ void register_I3Geometry()
       .def(copy_suite<I3OMGeo>())
       #define I3OMGEOPROPS (position)(omtype)(orientation)(area)(aziangle) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3OMGeo, I3OMGEOPROPS )
+      #undef I3OMGEOPROPS
       ;
 
     enum_<I3OMGeo::OMType>("OMType")
@@ -80,9 +82,10 @@ void register_I3Geometry()
   {
     scope tankgeo = class_<I3TankGeo, boost::shared_ptr<I3TankGeo> >("I3TankGeo")
       .def(copy_suite<I3TankGeo>())
-#define TANKGEOPROPS (position)(orientation)(tankradius)(tankheight)(fillheight)(snowheight)(tanktype)
+      #define TANKGEOPROPS (position)(orientation)(tankradius)(tankheight)(fillheight)(snowheight)(tanktype)
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3TankGeo, TANKGEOPROPS )
       .def_readwrite("omkey_list",&I3TankGeo::omKeyList_)
+      #undef TANKGEOPROPS
       ;
 
     enum_<I3TankGeo::TankType>("TankType")

@@ -33,6 +33,7 @@ void register_I3Calibration()
     .def(copy_suite<I3Calibration>())
     #define I3CALPROPS (startTime)(endTime)(domCal)(vemCal)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Calibration, I3CALPROPS)
+    #undef I3CALPROPS
     ;
 
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
@@ -60,6 +61,7 @@ void register_I3Calibration()
       .def(copy_suite<I3VEMCalibration>())
       #define I3VEMCALPROPS (pePerVEM)(muPeakWidth)(hglgCrossOver)(corrFactor) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3VEMCalibration, I3VEMCALPROPS)
+      #undef I3VEMCALPROPS
       ;
 
     class_<QuadraticFit>("QuadraticFit")
@@ -83,6 +85,7 @@ void register_I3Calibration()
       .def(copy_suite<I3DOMCalibration>())
       #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)(FADCBaselineFit)(FrontEndImpedance)(TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)(ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)(MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
+      #undef I3DOMCALPROPS
       /* XXX FIXME: find a better way to expose the channel argument. */
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)

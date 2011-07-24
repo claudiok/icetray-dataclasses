@@ -99,8 +99,10 @@ void register_I3MCTree()
 	(MostEnergeticTrack)(InIce)				\
 	(Primaries)(Primary)(Daughters)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_FN, ~, PROPS)
+      #undef PROPS
       #define BARE_PROPS (NCascades)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
+      #undef BARE_PROPS
       ;
 
     enum_<NuEventType>("NuEventType")
@@ -114,3 +116,5 @@ void register_I3MCTree()
 
     register_pointer_conversions<I3MCTree>();
 }
+#undef WRAP_PROP_FN
+#undef WRAP_PROP_BARE

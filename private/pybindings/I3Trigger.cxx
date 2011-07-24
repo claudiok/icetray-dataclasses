@@ -243,9 +243,9 @@ void register_I3Trigger()
   class_<TriggerKey>("TriggerKey")
     .def(init<TriggerKey::SourceID, TriggerKey::TypeID>() )
     .def(init<TriggerKey::SourceID, TriggerKey::TypeID, int>() )
-#define PROPERTIES (Source)(Type)(Subtype)
+    #define PROPERTIES (Source)(Type)(Subtype)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, TriggerKey, PROPERTIES)
-#undef  PROPERTIES
+    #undef  PROPERTIES
     .add_property("config_id", &TriggerKey::GetConfigID, 
 		  (void (TriggerKey::*)(int)) &TriggerKey::SetConfigID)
     .def("check_config_id", &TriggerKey::CheckConfigID)

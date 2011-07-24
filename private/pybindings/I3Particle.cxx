@@ -56,12 +56,15 @@ void register_I3Particle()
   {
     scope particle_scope = 
       class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> >("I3Particle")
-	#define RO_PROPERTIES (MajorID)(MinorID)
-	#define PROPERTIES (Time)(Energy)(Shape)(Type)(Length)(Speed)(FitStatus)(LocationType)
-	#define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Particle, RO_PROPERTIES)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BOOL, I3Particle, CONVENIENCE_BOOLS)
+      #define RO_PROPERTIES (MajorID)(MinorID)
+      #define PROPERTIES (Time)(Energy)(Shape)(Type)(Length)(Speed)(FitStatus)(LocationType)
+      #define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Particle, RO_PROPERTIES)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BOOL, I3Particle, CONVENIENCE_BOOLS)
+      #undef RO_PROPERTIES
+      #undef PROPERTIES
+      #undef CONVENIENCE_BOOLS
       .add_property("pos", make_function( (const I3Position& (I3Particle::*)()) &I3Particle::GetPos, return_internal_reference<1>() ),
 					  (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos ) 
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
