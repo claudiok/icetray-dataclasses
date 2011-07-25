@@ -26,6 +26,21 @@
 
 using namespace boost::python;
 
+static std::string 
+i3eventheader_prettyprint(const I3EventHeader& eh)
+{
+  std::ostringstream oss;
+  oss << "[ I3EventHeader  :: " << std::endl
+      << "           StartTime: " << eh.GetStartTime().GetUTCString() << std::endl
+      << "            EndTime : " << eh.GetEndTime().GetUTCString() << std::endl
+      << "              RunID : " << eh.GetRunID() << std::endl
+      << "           SubrunID : " << eh.GetSubRunID() << std::endl
+      << "            EventID : " << eh.GetEventID() << std::endl
+      << "         SubEventID : " << eh.GetSubEventID() << std::endl
+      << "     SubEventStream : " << eh.GetSubEventStream() << std::endl
+      << "]" ;
+  return oss.str();
+}
 
 void register_I3EventHeader()
 {
@@ -42,6 +57,7 @@ void register_I3EventHeader()
       PROPERTY(I3EventHeader, end_time,         EndTime)
       .add_property("data_stream", &I3EventHeader::GetDataStream)
       .def(copy_suite<I3EventHeader>())
+      .def("__str__", i3eventheader_prettyprint)
       ;
 
     register_pointer_conversions<I3EventHeader>();

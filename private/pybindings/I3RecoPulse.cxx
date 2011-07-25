@@ -28,6 +28,22 @@
 
 using namespace boost::python;
 
+static std::string 
+i3recopulse_prettyprint(const I3RecoPulse& p)
+{
+  std::string flagstr;
+  if (p.GetFlags() & I3RecoPulse::LC) flagstr.append("LC ");
+  if (p.GetFlags() & I3RecoPulse::ATWD) flagstr.append("ATWD ");
+  if (p.GetFlags() & I3RecoPulse::FADC) flagstr.append("FADC ");
+  std::ostringstream oss;
+  oss << "[ I3RecoPulse Time : " << p.GetTime() << std::endl
+      << "            Charge : " << p.GetCharge() << std::endl
+      << "             Width : " << p.GetWidth()  << std::endl
+      << "             Flags : " << flagstr << std::endl
+      << "]" ;
+  return oss.str();
+}
+
 void register_I3RecoPulse()
 {
   class_<std::vector<I3RecoPulse> >("vector_I3RecoPulse")
@@ -48,6 +64,7 @@ void register_I3RecoPulse()
     #undef PROPS
     .def(copy_suite<I3RecoPulse>())
     .def( self == self )
+    .def("__str__", i3recopulse_prettyprint)
     ;
   
   enum_<I3RecoPulse::PulseFlags>("PulseFlags")
