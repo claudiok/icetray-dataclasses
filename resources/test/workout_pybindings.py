@@ -24,6 +24,16 @@ ENSURE(tk.Source == dataclasses.I3Trigger.IN_ICE, "Wrong Trigger Source")
 tk.Type = dataclasses.I3Trigger.SIMPLE_MULTIPLICITY
 ENSURE(tk.Type == dataclasses.I3Trigger.SIMPLE_MULTIPLICITY, "Wrong Trigger Type")
 
+mytrig = dataclasses.I3Trigger()
+mytrig.fired = True
+mytrig.time = 5.0 * icetray.I3Units.microsecond
+mytrig.length = 1.0 * icetray.I3Units.microsecond
+mytrig.key.config_id = 1002
+mytrig.key.Source = dataclasses.I3Trigger.IN_ICE
+
+my_th = dataclasses.I3TriggerHierarchy()
+## TODO  seems to be no pybindings for the TriggerHierarchy..no way to add my trigger
+
 #pretty print works
 print tk
 
@@ -109,7 +119,6 @@ time2 = dataclasses.I3Time(2009,111111111123456789)
 
 ENSURE(time>time2,'Time order not correct')
 
-#I3Tree -> triggers for example....see Fix_Trigger_In_GCD.py test
 
 #I3DetectorStatus
 print 'Testing I3DectorStatus'
@@ -120,6 +129,9 @@ adom.pmt_hv = 1500*icetray.I3Units.V
 dmstat[icetray.OMKey(1,1)] = adom
 mykey = icetray.OMKey(1,1)
 ENSURE(dmstat.has_key(mykey),'Can not find my new dom status')
+
+#Also...see Fix_Trigger_In_GCD.py test
+
 
 # I3Geometry example? (olivas have one?)
 print "Testing I3Geometry"
@@ -133,7 +145,9 @@ ENSURE(i3g.omgeo.has_key(icetray.OMKey(1,1)), 'can not find my omkey in i3geo')
 ENSURE( (not i3g.omgeo.has_key(icetray.OMKey(1,2))), 'found a bad omkey in i3geo')
 newom = i3g.omgeo[icetray.OMKey(1,1)]
 ENSURE(newom.position.x > 99.0, 'Failed to get the right OMGeo position back')
-# I3Calibratopm example? (olivas have one?)
+
+# I3Calibratoim example? (olivas have one?)
+## TODO: poke olivas for his exmaple
 
 #I3DOMLaunch
 print 'Testing I3DOMLaunch'
@@ -155,15 +169,80 @@ print dl
 
 
 #I3EventHeader
-
-#I3FlasherInfo
-
-#I3MCHits
+header_t = dataclasses.I3Time(2008, 87695866111263130)
+header = dataclasses.I3EventHeader()
+header.run_id = 110811
+header.event_id = 0
+header.start_time = header_t
+header.end_time = header_t+10*icetray.I3Units.microsecond
+header.sub_event_stream = 'MyFirstSplit'
+#TODO: pretty print
+print header
 
 #I3Particle
+print 'Testing I3Particle'
+mypart = dataclasses.I3Particle()
+mypart.dir = dataclasses.I3Direction(90.0*icetray.I3Units.deg,180*icetray.I3Units.deg)
+mypart.pos = dataclasses.I3Position(10.0*icetray.I3Units.m, 10.0*icetray.I3Units.m, 10.0*icetray.I3Units.m)
+mypart.time = 0.0 * icetray.I3Units.ns
+mypart.energy = 1000.0 * icetray.I3Units.GeV
+mypart.shape = dataclasses.I3Particle.InfiniteTrack
+mypart.fit_status = dataclasses.I3Particle.OK
+
+
+print mypart
+
+mypartvec = dataclasses.I3ParticleVect()
+mypartvec.append(mypart)
+
+for party in mypartvec:
+    print party
+
 
 #I3RecoPulse
+print 'Testing I3RecoPulse'
+rp = dataclasses.I3RecoPulse()
+rp.charge = 1.5   ## PEs
+rp.time = 100.0 * icetray.I3Units.ns
+rp.flags = dataclasses.I3RecoPulse.PulseFlags.ATWD
 
-#I3Trigger
+print rp
+
+rps = dataclasses.I3RecoPulseSeries()
+rps.append(rp)
+
+for pulse in rps:
+    print pulse
+
+rpsm = dataclasses.I3RecoPulseSeriesMap()
+rpsm[icetray.OMKey(1,1)] = rps
+
+for key,pseries in rpsm:
+    print key
+    for pulse in pseries:
+        print pulse
+
 
 #I3Waveform
+print 'Testing I3Waveform'
+my_wf = dataclasses.I3Waveform()
+my_wf.time = 100.0 * icetray.I3Units.ns
+my_wf.bin_width = 3.3 * icetray.I3Units.ns
+awave = [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0]
+my_wf.waveform = awave
+my_wf.digitizer = dataclasses.I3Waveform.Source.FADC
+my_wf.hlc = True
+
+wv_series = dataclasses.I3WaveformSeries()
+wv_series.append(my_wf)
+for wv in wv_series:
+    print wv.time
+
+wv_ser_map = dataclasses.I3WaveformSeriesMap()
+wv_ser_map[icetray.OMKey(2,2)] = wv_series
+
+ENSURE(wv_ser_map.has_key(icetray.OMKey(2,2)), 'I3Waveform not present in map!')
+ENSURE(not wv_ser_map.has_key(icetray.OMKey(2,3)), 'mystery I3waveform in map!')
+
+## TODO:  pretty printer
+print my_wf
