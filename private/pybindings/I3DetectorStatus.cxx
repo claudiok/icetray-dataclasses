@@ -73,7 +73,7 @@ void register_I3DetectorStatus()
     scope outer = 
       class_<I3DOMStatus, boost::shared_ptr<I3DOMStatus> >("I3DOMStatus")
       .def(copy_suite<I3DOMStatus>())
-      #define DOMSTATUSPROPERTIES (pmtHV)(lcMode)(lcWindowPre)(lcWindowPost)(lcSpan)(statusATWDa)(statusATWDb)(statusFADC)(pmtHV)(speThreshold)(fePedestal)(dacTriggerBias0)(dacTriggerBias1)(dacFADCRef)(deltaCompress)(domGainType)(cableType)(SLCActive)
+      #define DOMSTATUSPROPERTIES (pmtHV)(lcMode)(txMode)(lcWindowPre)(lcWindowPost)(lcSpan)(statusATWDa)(statusATWDb)(statusFADC)(pmtHV)(speThreshold)(fePedestal)(dacTriggerBias0)(dacTriggerBias1)(dacFADCRef)(deltaCompress)(domGainType)(cableType)(SLCActive)(mpeThreshold)
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DOMStatus, DOMSTATUSPROPERTIES)
       #undef DOMSTATUSPROPERTIES
       ;

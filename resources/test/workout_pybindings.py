@@ -59,7 +59,7 @@ print 'Testing I3DOMFunctions'
 ds = dataclasses.I3DOMStatus()
 dc = dataclasses.I3DOMCalibration()
 
-transittime = dataclasses.TransitTime(ds, dc)
+transittime = dataclasses.transit_time(ds, dc)
 
 #I3Double
 print 'Testing I3Double'
@@ -80,6 +80,14 @@ ENSURE(mapy.get("bar") == 2, "Failed to get from I3Map")
 
 ## TODO:  needs a pretty print.  Can we use items() for I3Maps?
 print mapy
+
+#I3Vector
+print 'Testing I3Vector'
+vecy = dataclasses.I3VectorInt([1,2,3,4,5,6,7,8,9,10])
+vecy.append(11)
+
+## TODO:  needs a pretty print.  Can we use some printer for vectors?
+print vecy
 
 #I3Postion
 print 'Testing I3Position'
