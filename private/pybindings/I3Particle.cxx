@@ -174,7 +174,7 @@ void register_I3Particle()
 
   }
 
-  class_<std::vector<I3Particle> >("Vector_I3Particle")
+  class_<std::vector<I3Particle> >("I3ParticleVect")
     .def(std_vector_indexing_suite<std::vector<I3Particle> >())
     ;
 
