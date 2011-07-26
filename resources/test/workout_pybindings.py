@@ -154,15 +154,15 @@ print 'Testing I3DOMLaunch'
 dl = dataclasses.I3DOMLaunch()
 fadc = icetray.vector_int()
 [fadc.append(i) for i in range(10)]
-## TODO:  fixme
-#dl.RawFADC = fadc
-
-dl.LCBit = True
-ENSURE(dl.LCBit == True, 'Got wrong LCBit')
+dl.RawFADC = fadc
+atwd0 = icetray.vector_int()
+[atwd0.append(i) for i in range(100)]
+dl.raw_atwd[0] = atwd0
+dl.lc_bit = True
+ENSURE(dl.lc_bit == True, 'Got wrong LCBit')
 dl.TriggerType = dataclasses.I3DOMLaunch.SPE_DISCRIMINATOR_TRIGGER
 dl.TriggerMode = dataclasses.I3DOMLaunch.LC_UPPER
 dl.WhichATWD = dataclasses.I3DOMLaunch.ATWDb
-
 
 #TODO This needs some better pretty print
 print dl
