@@ -28,7 +28,7 @@
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
-std::ostream& operator<<(std::ostream& oss, I3DOMLaunch& d){
+std::ostream& operator<<(std::ostream& oss, const I3DOMLaunch& d){
   oss <<" time = "<< d.GetStartTime();
   return oss;
 }
@@ -61,6 +61,7 @@ void register_I3DOMLaunch()
       .add_property("raw_charge_stamp", get_raw_charge_stamp_func, get_raw_charge_stamp_func)
       .add_property("which_atwd_charge_stamp", 
 		    &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
+      .def("__str__", &stream_to_string<I3DOMLaunch>)
       .def(self == self)
     ;
 

@@ -558,7 +558,7 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   );
 }
 
-std::ostream& operator<<(std::ostream& oss, I3Particle& d){
+std::ostream& operator<<(std::ostream& oss, const I3Particle& d){
   return oss;
 }
 

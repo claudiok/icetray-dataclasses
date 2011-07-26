@@ -335,7 +335,7 @@ class I3Particle : public I3FrameObject
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs);
 
-std::ostream& operator<<(std::ostream& oss, I3Particle& d);
+std::ostream& operator<<(std::ostream& oss, const I3Particle& d);
 
 I3_POINTER_TYPEDEFS(I3Particle);
 BOOST_CLASS_VERSION(I3Particle,i3particle_version_);
