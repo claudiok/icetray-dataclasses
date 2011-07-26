@@ -558,7 +558,23 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   );
 }
 
-std::ostream& operator<<(std::ostream& oss, const I3Particle& d){
+std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
+  oss << "[ I3Particle MajorID : " << p.GetMajorID() << std::endl
+      << "             MinorID : " << p.GetMinorID() << std::endl
+      << "              Zenith : " << p.GetZenith()  << std::endl
+      << "             Azimuth : " << p.GetAzimuth()  << std::endl
+      << "                   X : " << p.GetX() << std::endl
+      << "                   Y : " << p.GetY() << std::endl
+      << "                   Z : " << p.GetZ() << std::endl
+      << "                Time : " << p.GetTime() << std::endl
+      << "              Energy : " << p.GetEnergy() << std::endl
+      << "               Speed : " << p.GetSpeed() <<  std::endl
+      << "              Length : " << p.GetLength() << std::endl
+      << "                Type : " << p.GetTypeString() << std::endl
+      << "               Shape : " << p.GetShapeString() << std::endl
+      << "              Status : " << p.GetFitStatusString() <<  std::endl
+      << "            Location : " << p.GetLocationTypeString() << std::endl 
+      << "]" ;
   return oss;
 }
 

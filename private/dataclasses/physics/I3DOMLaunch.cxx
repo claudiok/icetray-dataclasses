@@ -270,6 +270,17 @@ bool operator==(const I3DOMLaunch& lhs, const I3DOMLaunch& rhs){
 	   lhs.GetChargeStampHighestSample() == rhs.GetChargeStampHighestSample() );
 }
 
+std::ostream& operator<<(std::ostream& oss, const I3DOMLaunch& d)
+{
+  oss << "[ I3DOMLaunch  :: " << std::endl
+      << "          StartTime : " << d.GetStartTime() << std::endl
+      << "              LCBit : " << d.GetLCBit() << std::endl
+      << "]" ;
+  
+  return oss;
+}
+
+
 I3_SERIALIZABLE(I3DOMLaunch);
 
 I3_SERIALIZABLE(I3DOMLaunchSeriesMap);

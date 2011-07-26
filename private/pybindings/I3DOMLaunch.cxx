@@ -28,10 +28,6 @@
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
-std::ostream& operator<<(std::ostream& oss, const I3DOMLaunch& d){
-  oss <<" time = "<< d.GetStartTime();
-  return oss;
-}
 
 void register_I3DOMLaunch()
 {

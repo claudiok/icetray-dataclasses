@@ -388,4 +388,7 @@ operator~(I3DOMLaunch::TriggerMode a)
   return I3DOMLaunch::TriggerMode(~static_cast<int>(a));
 }
 
+std::ostream& operator<<(std::ostream& oss, const I3DOMLaunch& d);
+
+
 #endif // I3DOMLAUNCH_H_INCLUDED

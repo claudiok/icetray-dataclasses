@@ -24,32 +24,11 @@
 #include <dataclasses/physics/I3Particle.h>
 #include <boost/preprocessor/seq.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
  
-static std::string 
-i3particle_prettyprint(const I3Particle& p)
-{
-  std::ostringstream oss;
-  oss << "[ I3Particle MajorID : " << p.GetMajorID() << std::endl
-      << "             MinorID : " << p.GetMinorID() << std::endl
-      << "              Zenith : " << p.GetZenith()  << std::endl
-      << "             Azimuth : " << p.GetAzimuth()  << std::endl
-      << "                   X : " << p.GetX() << std::endl
-      << "                   Y : " << p.GetY() << std::endl
-      << "                   Z : " << p.GetZ() << std::endl
-      << "                Time : " << p.GetTime() << std::endl
-      << "              Energy : " << p.GetEnergy() << std::endl
-      << "               Speed : " << p.GetSpeed() <<  std::endl
-      << "              Length : " << p.GetLength() << std::endl
-      << "                Type : " << p.GetTypeString() << std::endl
-      << "               Shape : " << p.GetShapeString() << std::endl
-      << "              Status : " << p.GetFitStatusString() <<  std::endl
-      << "            Location : " << p.GetLocationTypeString() << std::endl 
-      << "]" ;
-  return oss.str();
-}
-
 void register_I3Particle()
 {
 
@@ -70,7 +49,7 @@ void register_I3Particle()
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
 					  (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir ) 
       .def("shift_along_track", &I3Particle::ShiftAlongTrack)
-      .def("__str__", i3particle_prettyprint)
+      .def("__str__", &stream_to_string<I3Particle>)
       ;
 
     enum_<I3Particle::FitStatus>("FitStatus")
@@ -176,6 +155,7 @@ void register_I3Particle()
 
   class_<std::vector<I3Particle> >("I3ParticleVect")
     .def(std_vector_indexing_suite<std::vector<I3Particle> >())
+    .def("__str__", &stream_to_string<std::vector<I3Particle> >)
     ;
 
   register_pointer_conversions<I3Particle>();
