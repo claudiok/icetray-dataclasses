@@ -43,6 +43,9 @@ typedef I3Tree<I3Trigger> I3TriggerHierarchy;
 /**
  * pointer type to insulate users from memory management
  */
+
+std::ostream& operator<<(std::ostream& oss, const I3TriggerHierarchy& t);
+
 I3_POINTER_TYPEDEFS(I3TriggerHierarchy);
 
 /**
@@ -145,6 +148,7 @@ namespace I3TriggerHierarchyUtils
                                        boost::lambda::_1, key));
   }
 }
+
 
 #endif
 

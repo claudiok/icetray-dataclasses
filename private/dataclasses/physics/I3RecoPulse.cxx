@@ -2,6 +2,7 @@
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <dataclasses/physics/I3Waveform.h>
 #include <dataclasses/external/CompareFloatingPoint.h>
+#include <string>
 
 using CompareFloatingPoint::Compare;
 
@@ -57,6 +58,21 @@ I3RecoPulse::operator==(const I3RecoPulse& rhs) const
     && Compare(charge_, rhs.charge_)
     && Compare(width_, rhs.width_);
 }
+
+std::ostream& operator<<(std::ostream& oss, const I3RecoPulse& p){
+
+  std::string flagstr;
+  if (p.GetFlags() & I3RecoPulse::LC) flagstr.append("LC ");
+  if (p.GetFlags() & I3RecoPulse::ATWD) flagstr.append("ATWD ");
+  if (p.GetFlags() & I3RecoPulse::FADC) flagstr.append("FADC ");
+  oss << "[ I3RecoPulse Time : " << p.GetTime() << std::endl
+      << "            Charge : " << p.GetCharge() << std::endl
+      << "             Width : " << p.GetWidth()  << std::endl
+      << "             Flags : " << flagstr << std::endl
+      << "]" ;
+  return oss;
+}
+
 
 I3_SERIALIZABLE(I3RecoPulse);
 

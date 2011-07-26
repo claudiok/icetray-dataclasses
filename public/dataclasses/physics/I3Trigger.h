@@ -106,6 +106,9 @@ private:
   SET_LOGGER("I3Trigger");
 };
 
+std::ostream& operator<<(std::ostream& oss, const I3Trigger& t);
+
+
 BOOST_CLASS_VERSION(I3Trigger, i3trigger_version_);
 /**
  * pointer type to insulate users from memory management

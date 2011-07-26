@@ -21,6 +21,8 @@ struct I3String : public I3FrameObject
     void serialize(Archive& ar, unsigned version);
 };
 
+std::ostream& operator<<(std::ostream& oss, const I3String& s);
+
 I3_POINTER_TYPEDEFS(I3String);
 
 #endif

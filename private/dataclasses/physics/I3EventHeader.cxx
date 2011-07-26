@@ -58,5 +58,19 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
    ar & make_nvp("StartTime", startTime_);
    ar & make_nvp("EndTime", endTime_);
 }
+
+std::ostream& operator<<(std::ostream& oss, const I3EventHeader& eh){
+  oss << "[ I3EventHeader  :: " << std::endl
+      << "           StartTime: " << eh.GetStartTime().GetUTCString() << std::endl
+      << "            EndTime : " << eh.GetEndTime().GetUTCString() << std::endl
+      << "              RunID : " << eh.GetRunID() << std::endl
+      << "           SubrunID : " << eh.GetSubRunID() << std::endl
+      << "            EventID : " << eh.GetEventID() << std::endl
+      << "         SubEventID : " << eh.GetSubEventID() << std::endl
+      << "     SubEventStream : " << eh.GetSubEventStream() << std::endl
+      << "]" ;
+  return oss;
+}
+
   
 I3_SERIALIZABLE(I3EventHeader);

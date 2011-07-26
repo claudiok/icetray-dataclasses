@@ -350,6 +350,18 @@ double operator-(const I3Time t1,const I3Time t2)
     ( t1.GetModJulianDay()     - t2.GetModJulianDay()     ) * I3Units::day;
 }
 
+std::ostream& operator<<(std::ostream& oss, const I3Time& t){
+  double ns=t.GetModJulianNanoSec();
+  oss << t.GetUTCString("%Y-%m-%d %H:%M:%S.");
+  oss << std::setw(3) << std::setfill('0') << int(ns/1e6) << ',';
+  oss << std::setw(3) << std::setfill('0') << int(ns/1e3)%1000 << ',';
+  oss << std::setw(3) << std::setfill('0') << int(ns)%1000 << ',';
+  oss << uint64_t(ns*10)%10 << " UTC";
+
+  return oss;
+}
+
+
 std::string I3Time::MonthToString(Month m)
 {
   switch(m)

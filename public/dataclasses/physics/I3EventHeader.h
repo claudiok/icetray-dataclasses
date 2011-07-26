@@ -148,6 +148,8 @@ class I3EventHeader : public I3FrameObject
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
+std::ostream& operator<<(std::ostream& oss, const I3EventHeader& eh);
+
 BOOST_CLASS_VERSION(I3EventHeader, i3eventheader_version_);
 I3_POINTER_TYPEDEFS(I3EventHeader);
 I3_DEFAULT_NAME(I3EventHeader);

@@ -23,6 +23,8 @@
 #include <icetray/I3Units.h>
 #include <dataclasses/physics/I3Trigger.h>
 #include <dataclasses/physics/I3TriggerHierarchy.h>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 namespace bp = boost::python;
@@ -125,49 +127,6 @@ std::vector<double> get_trigger_lengths(I3TriggerHierarchyPtr t,
   }
   return tlengths;
 }
-std::string TriggerPrettyPrint(const I3Trigger& t){
-  std::stringstream s;
-  s<<t.GetTriggerKey().GetSourceString()<<" "
-   <<t.GetTriggerKey().GetTypeString()<<" "
-   <<t.GetTriggerKey().GetSubtype()<<" ";
-  if(t.GetTriggerKey().CheckConfigID())
-    s<<t.GetTriggerKey().GetConfigID()<<" ";
-  else
-    s<<"configID not set ";
-  t.GetTriggerFired() ? s<<"FIRED":s<<"NOT_FIRED";
-  s<<" ";
-  s<<" length = "<<t.GetTriggerLength()/I3Units::microsecond<<" mus";
-  s<<" time = "<<t.GetTriggerTime()/I3Units::microsecond<<" mus";
-  return s.str();
-}
-
-std::string DumpChildren(I3TriggerHierarchyPtr t,
-		    I3TriggerHierarchy::iterator i){
-  std::stringstream s;
-  I3TriggerHierarchy::sibling_iterator si;
-  for(si = t->begin(i); si != t->end(i); si++){
-    for(int j=0; j<2*t->depth(si); j++) s<<" ";
-    s<<TriggerPrettyPrint(*si) << std::endl;
-    s<<DumpChildren(t,si);
-  }
-  return s.str();
-}
-
-std::string print(I3TriggerHierarchyPtr t){
-  std::stringstream s;
-
-  I3TriggerHierarchy::sibling_iterator i;
-  s<<"*** TRIGGER DUMP - BEGIN***"<<std::endl;
-  for(i = t->begin(); i != t->end(); i++){
-    for(int j=0; j<2*t->depth(i); j++) s<<" ";
-    s<<TriggerPrettyPrint(*i) << std::endl;
-    s<<DumpChildren(t,i);
-  }
-  s<<"*** TRIGGER DUMP - END***"<<std::endl;
-
-  return s.str();
-}
-
 
 int length(I3TriggerHierarchyPtr t){
   if(t){
@@ -181,17 +140,6 @@ TriggerKey get_trigkey(const I3Trigger& self)
   return self.GetTriggerKey();
 }
 
-std::string PrettyPrintTriggerKey(const TriggerKey& k){
-  std::stringstream s;
-  s << "[";
-  s << k.GetSourceString() << ":"
-    << k.GetTypeString();
-  if(k.CheckConfigID())
-    s << ":"<<k.GetConfigID() ;
-  s << "]" ;
-  return s.str();
-}
-
 void register_I3Trigger()
 {
   {
@@ -202,7 +150,7 @@ void register_I3Trigger()
       PROPERTY(I3Trigger, fired, TriggerFired)
       // force copy of trigkey via standalone fn
       .add_property("key", get_trigkey, "Get TriggerKey")
-      .def("__str__", TriggerPrettyPrint)
+      .def("__str__", &stream_to_string<I3Trigger>)
       ;
 
     enum_<TriggerKey::SourceID>("SourceID")
@@ -250,7 +198,7 @@ void register_I3Trigger()
 		  (void (TriggerKey::*)(int)) &TriggerKey::SetConfigID)
     .def("check_config_id", &TriggerKey::CheckConfigID)
     .def("reset_config_id", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
-    .def("__str__", &PrettyPrintTriggerKey)
+    .def("__str__", &stream_to_string<TriggerKey>)
     .def(self < self)
     .def(self >= self)
     .def(self > self)
@@ -267,7 +215,7 @@ void register_I3Trigger()
     .def("ice_top_triggered", &IceTop_triggered)
     .def("amanda_triggered", &AMANDA_triggered)
     .def("in_ice_smt_only", &InIce_SMT_ONLY)
-    .def("__str__", &print)
+    .def("__str__", &stream_to_string<I3TriggerHierarchy>)
     .def("__len__", &length)
     .add_property("trigger_lengths",&get_trigger_lengths)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())

@@ -27,23 +27,15 @@
 #include <dataclasses/I3Time.h>
 #include <Python.h>
 #include <datetime.h>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
+
 
 using namespace boost::python;
 
 #if PY_VERSION_HEX >= 0x02040000
 #define HAVE_PYDATETIME_API
 #endif
-
-std::string dump(I3Time t){
-  double ns=t.GetModJulianNanoSec();
-  std::stringstream s;
-  s << t.GetUTCString("%Y-%m-%d %H:%M:%S.");
-  s << std::setw(3) << std::setfill('0') << int(ns/1e6) << ',';
-  s << std::setw(3) << std::setfill('0') << int(ns/1e3)%1000 << ',';
-  s << std::setw(3) << std::setfill('0') << int(ns)%1000 << ',';
-  s << uint64_t(ns*10)%10 << " UTC";
-  return s.str();
-}
 
 std::string repr(I3Time t){
   std::stringstream out;
@@ -127,7 +119,7 @@ void register_I3Time()
     #define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UTCYear)(UTCMonth)(UTCDaqTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Time, RO_PROPS)
     #undef  RO_PROPS
-    .def("__str__",&dump)
+    .def("__str__",&stream_to_string<I3Time>)
     .def("__repr__",&repr)
     .def(self == self)
     .def(self-self)

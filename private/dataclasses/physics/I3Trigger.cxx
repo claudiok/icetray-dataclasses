@@ -9,6 +9,7 @@
  */
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3Trigger.h>
+#include <icetray/I3Units.h>
 
 
 const double I3Trigger::FROM_TENTH_NS_TO_NS_CORRECTION_FACTOR = 0.1;
@@ -31,6 +32,22 @@ template <class Archive> void I3Trigger::serialize(Archive& ar, unsigned version
   }
   ar & make_nvp("Fired", fired_);
   ar & make_nvp("TriggerKey", key_);
+}
+
+std::ostream& operator<<(std::ostream& oss, const I3Trigger& t){
+    oss<<t.GetTriggerKey().GetSourceString()<<" "
+   <<t.GetTriggerKey().GetTypeString()<<" "
+   <<t.GetTriggerKey().GetSubtype()<<" ";
+  if(t.GetTriggerKey().CheckConfigID())
+    oss<<t.GetTriggerKey().GetConfigID()<<" ";
+  else
+    oss<<"configID not set ";
+  t.GetTriggerFired() ? oss<<"FIRED":oss<<"NOT_FIRED";
+  oss<<" ";
+  oss<<" length = "<<t.GetTriggerLength()/I3Units::microsecond<<" mus";
+  oss<<" time = "<<t.GetTriggerTime()/I3Units::microsecond<<" mus";
+
+  return oss;
 }
   
 I3_SERIALIZABLE(I3Trigger);

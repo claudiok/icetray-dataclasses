@@ -22,14 +22,10 @@
 #include <vector>
 
 #include <dataclasses/I3Position.h>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
-
-std::string dump(const I3Position &p){
-  std::ostringstream s;
-  s << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
-  return s.str();
-}
 
 tuple i3position_to_tuple(const I3Position& p)
 {
@@ -88,7 +84,7 @@ void register_I3Position()
 #define DEFS (ShiftCoordSystem)(RotateX)(RotateY)(RotateZ)(CalcDistance)
     BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Position, DEFS)
 #undef  DEFS
-    .def("__str__", dump)
+    .def("__str__", &stream_to_string<I3Position>)
     .def("__len__", i3position_len)
     .def("__getitem__", i3position_getitem)
     .def("__setitem__", i3position_setitem)

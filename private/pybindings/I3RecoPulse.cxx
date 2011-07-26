@@ -25,35 +25,23 @@
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
-
-static std::string 
-i3recopulse_prettyprint(const I3RecoPulse& p)
-{
-  std::string flagstr;
-  if (p.GetFlags() & I3RecoPulse::LC) flagstr.append("LC ");
-  if (p.GetFlags() & I3RecoPulse::ATWD) flagstr.append("ATWD ");
-  if (p.GetFlags() & I3RecoPulse::FADC) flagstr.append("FADC ");
-  std::ostringstream oss;
-  oss << "[ I3RecoPulse Time : " << p.GetTime() << std::endl
-      << "            Charge : " << p.GetCharge() << std::endl
-      << "             Width : " << p.GetWidth()  << std::endl
-      << "             Flags : " << flagstr << std::endl
-      << "]" ;
-  return oss.str();
-}
 
 void register_I3RecoPulse()
 {
   class_<std::vector<I3RecoPulse> >("vector_I3RecoPulse")
     .def(std_vector_indexing_suite<std::vector<I3RecoPulse> >())
     .def(copy_suite<std::vector<I3RecoPulse> >())
+    .def("__str__", &stream_to_string<std::vector<I3RecoPulse> >)
     ;
 
   class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
     .def(std_map_indexing_suite<I3RecoPulseSeriesMap>())
     .def(copy_suite<I3RecoPulseSeriesMap>())
+    .def("__str__", &stream_to_string<I3RecoPulseSeriesMap>)
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
 
@@ -64,7 +52,7 @@ void register_I3RecoPulse()
     #undef PROPS
     .def(copy_suite<I3RecoPulse>())
     .def( self == self )
-    .def("__str__", i3recopulse_prettyprint)
+    .def("__str__", &stream_to_string<I3RecoPulse>)
     ;
   
   enum_<I3RecoPulse::PulseFlags>("PulseFlags")

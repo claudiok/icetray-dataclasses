@@ -29,5 +29,10 @@ I3String::serialize(Archive& ar,unsigned)
   ar & make_nvp("value",value);
 }
 
+std::ostream& operator<<(std::ostream& oss, const I3String& s){
+  oss << "I3String(\"" << s.value << "\")";
+  return oss;
+}
+
 I3_SERIALIZABLE(I3String);
 

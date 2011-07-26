@@ -303,6 +303,9 @@ class I3Time : public I3FrameObject
  */
 double operator-(const I3Time t1,const I3Time t2);
 
+std::ostream& operator<<(std::ostream& oss, const I3Time& d);
+
+
 I3_POINTER_TYPEDEFS(I3Time);
 BOOST_CLASS_VERSION(I3Time, i3time_version_);
 

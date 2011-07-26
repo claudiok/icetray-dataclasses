@@ -426,4 +426,6 @@ operator<=(const TriggerKey& lhs, const TriggerKey& rhs)
   return !(lhs > rhs);
 }
 
+std::ostream& operator<<(std::ostream& oss, const TriggerKey& k);
+
 #endif

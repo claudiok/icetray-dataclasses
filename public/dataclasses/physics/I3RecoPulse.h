@@ -85,6 +85,9 @@ typedef std::vector<I3RecoPulse> I3RecoPulseSeries;
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;
 typedef I3Map<OMKey, I3RecoPulse> I3RecoPulseMap;
 
+std::ostream& operator<<(std::ostream& oss, const I3RecoPulse& p);
+
+
 I3_POINTER_TYPEDEFS(I3RecoPulseSeries);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
 #ifdef I3_USE_FAST_OMKEY_MAP
@@ -105,6 +108,7 @@ BOOST_CLASS_VERSION(I3RecoPulseMap, 1);
 template <>
 I3RecoPulseSeriesMapConstPtr
 I3Frame::Get(const std::string& name, bool quietly, void*, void*) const;
+
 
 #endif //I3RECOPULSE_H_INCLUDED
 

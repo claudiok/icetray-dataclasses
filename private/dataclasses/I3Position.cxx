@@ -226,3 +226,7 @@ bool operator==(const I3Position& lhs, const I3Position& rhs){
 }
 
 //-----------------------------------------------------------
+std::ostream& operator<<(std::ostream& oss, const I3Position& p){
+  oss << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
+  return oss;
+}

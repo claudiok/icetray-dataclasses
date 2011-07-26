@@ -22,16 +22,11 @@
 #include <vector>
 
 #include <dataclasses/I3String.h>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 
-static std::string 
-i3string_prettyprint(const I3String& s)
-{
-  std::ostringstream oss;
-  oss << "I3String(\"" << s.value << "\")";
-  return oss.str();
-}
 
 static std::string
 i3string_get_string(const I3String& s)
@@ -52,8 +47,8 @@ void register_I3String()
     .def(init<const std::string&>())
     .def(init<const I3String&>())
     .def_readwrite("value", &I3String::value)
-    .def("__repr__",i3string_prettyprint)
-    .def("__str__",i3string_get_string)
+    .def("__repr__",&stream_to_string<I3String>)
+    .def("__str__",&stream_to_string<I3String>)
     .def("__len__",i3string_get_length)
     ;
 

@@ -162,5 +162,15 @@ void TriggerKey::serialize(Archive& ar, unsigned version)
   if (configIDSet_) ar & make_nvp("ConfigID", configID_);
 }
 
+std::ostream& operator<<(std::ostream& oss, const TriggerKey& k){
+  oss << "[";
+  oss << k.GetSourceString() << ":"
+      << k.GetTypeString();
+  if(k.CheckConfigID())
+    oss << ":"<<k.GetConfigID() ;
+  oss << "]" ;
+  return oss;
+}
+
   
 I3_SERIALIZABLE(TriggerKey);
