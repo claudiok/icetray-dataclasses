@@ -245,11 +245,15 @@ public:
     const std::vector<std::vector<int> >& GetRawATWDs() const{ return rawATWD_; }
     std::vector<std::vector<int> >& GetRawATWDs() { return rawATWD_; }
 
+    void SetRawATWD( std::vector<std::vector<int> >& v ){ rawATWD_ = v; }
+
     /**
      * Return raw FADC waveform.
      */
     const std::vector<int>& GetRawFADC() const { return rawFADC_; }
     std::vector<int>& GetRawFADC() { return rawFADC_; }
+
+    void SetRawFADC( std::vector<int>& v){ rawFADC_ = v; }
 
     /**
      * Return local coincidence bit.

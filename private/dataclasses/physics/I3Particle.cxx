@@ -558,6 +558,11 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   );
 }
 
+std::ostream& operator<<(std::ostream& oss, I3Particle& d){
+  return oss;
+}
+
+
 I3_SERIALIZABLE(I3Particle);
 
 I3_SERIALIZABLE(I3ParticleVect);

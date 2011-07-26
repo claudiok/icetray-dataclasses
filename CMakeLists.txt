@@ -9,6 +9,7 @@ i3_add_library(dataclasses
   private/dataclasses/*.cxx
   private/dataclasses/*.c
   private/dataclasses/*/*.cxx
+  private/dataclasses/stream_overloads.cpp
 
   USE_TOOLS log4cplus boost python root
 

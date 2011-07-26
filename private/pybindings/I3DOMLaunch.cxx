@@ -24,35 +24,43 @@
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
+std::ostream& operator<<(std::ostream& oss, I3DOMLaunch& d){
+  oss <<" time = "<< d.GetStartTime();
+  return oss;
+}
 
 void register_I3DOMLaunch()
 {
 
+  std::vector<int>& (I3DOMLaunch::*get_raw_fadc)(void) = &I3DOMLaunch::GetRawFADC;
+  object get_raw_fadc_func = make_function(get_raw_fadc, return_internal_reference<>());
+  
+  std::vector< std::vector<int> >& (I3DOMLaunch::*get_raw_atwds)(void) = &I3DOMLaunch::GetRawATWDs;
+  object get_raw_atwds_func = make_function(get_raw_atwds, return_internal_reference<>());
+
+  std::vector<int>& (I3DOMLaunch::*get_raw_charge_stamp)(void) = &I3DOMLaunch::GetRawChargeStamp;
+  object get_raw_charge_stamp_func = make_function(get_raw_charge_stamp, return_internal_reference<>());
+
   {
     scope outer = 
     class_<I3DOMLaunch, boost::shared_ptr<I3DOMLaunch> >("I3DOMLaunch")
-      .add_property("StartTime", &I3DOMLaunch::GetStartTime, &I3DOMLaunch::SetStartTime)
-      .add_property("LCBit", &I3DOMLaunch::GetLCBit, &I3DOMLaunch::SetLCBit)
-      .add_property("TriggerType", &I3DOMLaunch::GetTriggerType, &I3DOMLaunch::SetTriggerType)
-      .add_property("TriggerMode", &I3DOMLaunch::GetTriggerMode, &I3DOMLaunch::SetTriggerMode)
-      .add_property("WhichATWD", &I3DOMLaunch::GetWhichATWD, &I3DOMLaunch::SetWhichATWD)
-      .add_property("IsPedestalSub", &I3DOMLaunch::GetIsPedestalSub, &I3DOMLaunch::SetIsPedestalSub)
-      .add_property("ChargeStampHighestSample", &I3DOMLaunch::GetChargeStampHighestSample, &I3DOMLaunch::SetChargeStampHighestSample)
-      .add_property("RawFADC", make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
-                                             return_internal_reference<1>()),
-		    make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC, return_internal_reference<1>()))				  
-      .add_property("RawATWDs", make_function((std::vector<std::vector<int> >& (I3DOMLaunch::*)(void)) &I3DOMLaunch::GetRawATWDs,
-					      return_internal_reference<1>()),
-		    make_function((std::vector<std::vector<int> >& (I3DOMLaunch::*)(void)) &I3DOMLaunch::GetRawATWDs,
-				  return_internal_reference<1>()))
-      .def("GetRawATWD", (std::vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD, return_internal_reference<1>())	   
-      .add_property("RawChargeStamp", make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
-                                                    return_internal_reference<1>()),
-		    make_function((std::vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
-				  return_internal_reference<1>()))
-      .add_property("WhichATWDChargeStamp", &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
+      .add_property("time", &I3DOMLaunch::GetStartTime, &I3DOMLaunch::SetStartTime)
+      .add_property("lc_bit", &I3DOMLaunch::GetLCBit, &I3DOMLaunch::SetLCBit)
+      .add_property("trigger_type", &I3DOMLaunch::GetTriggerType, &I3DOMLaunch::SetTriggerType)
+      .add_property("trigger_mode", &I3DOMLaunch::GetTriggerMode, &I3DOMLaunch::SetTriggerMode)
+      .add_property("which_atwd", &I3DOMLaunch::GetWhichATWD, &I3DOMLaunch::SetWhichATWD)
+      .add_property("is_pedestal_sub", &I3DOMLaunch::GetIsPedestalSub, &I3DOMLaunch::SetIsPedestalSub)
+      .add_property("charge_stamp_highest_sample", 
+		    &I3DOMLaunch::GetChargeStampHighestSample, &I3DOMLaunch::SetChargeStampHighestSample)
+      .add_property("raw_fadc", get_raw_fadc_func, &I3DOMLaunch::SetRawFADC)
+      .add_property("raw_atwd", get_raw_atwds_func, get_raw_atwds_func)
+      .add_property("raw_charge_stamp", get_raw_charge_stamp_func, get_raw_charge_stamp_func)
+      .add_property("which_atwd_charge_stamp", 
+		    &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
       .def(self == self)
     ;
 
@@ -92,10 +100,12 @@ void register_I3DOMLaunch()
 
   class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSeries")
     .def(std_vector_indexing_suite<std::vector<I3DOMLaunch> >())
+    .def("__str__", &stream_to_string<I3DOMLaunchSeries>)
     ;
     
   class_<I3DOMLaunchSeriesMap, bases<I3FrameObject>, I3DOMLaunchSeriesMapPtr>("I3DOMLaunchSeriesMap")
     .def(std_map_indexing_suite<I3DOMLaunchSeriesMap>())
+    .def("__str__", &stream_to_string<I3DOMLaunchSeriesMap>)
     ;
     
   register_pointer_conversions<I3DOMLaunchSeriesMap>();
