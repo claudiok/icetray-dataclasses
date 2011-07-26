@@ -401,6 +401,8 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)
 {
 	size_ = ROUND_UP(length, 8*sizeof(mask_t));
+	if (size_ == 0)
+		size_ = 8*sizeof(mask_t);
 	assert(size_ > 0);
 	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
 	padding_ = length % (8*sizeof(mask_t));
