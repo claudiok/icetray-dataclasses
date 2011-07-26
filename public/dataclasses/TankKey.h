@@ -11,6 +11,7 @@
 
 #include <utility>
 #include <icetray/OMKey.h>
+#include <icetray/serialization.h>
 #include <iostream>
 /**
  * @brief A small class which is the string number and tank number

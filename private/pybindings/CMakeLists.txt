@@ -46,6 +46,7 @@ i3_add_pybindings(dataclasses
   I3MapInt.cxx
   I3MapKey.cxx
   I3SuperDST.cxx
+  TankKey.cxx
   mctree/I3MCTreeTools.cxx
   module.cxx
   USE_TOOLS boost python log4cplus
