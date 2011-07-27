@@ -144,7 +144,7 @@ newom = i3g.omgeo[icetray.OMKey(1,1)]
 ENSURE(newom.position.x > 99.0, 'Failed to get the right OMGeo position back')
 
 # I3Calibratoim example? (olivas have one?)
-## TODO: poke olivas for his exmaple
+## See the Fix_Cals_in_GCD.py script for full example
 
 #I3DOMLaunch
 print 'Testing I3DOMLaunch'
