@@ -54,9 +54,9 @@ bool
 I3RecoPulse::operator==(const I3RecoPulse& rhs) const
 {
   return flags_ == flags_ 
-    && Compare(time_, rhs.time_)
-    && Compare(charge_, rhs.charge_)
-    && Compare(width_, rhs.width_);
+    && (time_ == rhs.time_ || (isnan(time_) && isnan(rhs.time_)))
+    && (charge_ == rhs.charge_ || (isnan(charge_) && isnan(rhs.charge_)))
+    && (width_ == rhs.width_ || (isnan(width_) && isnan(rhs.width_)));
 }
 
 std::ostream& operator<<(std::ostream& oss, const I3RecoPulse& p){
