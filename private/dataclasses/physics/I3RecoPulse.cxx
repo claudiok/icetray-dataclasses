@@ -50,9 +50,9 @@ bool
 I3RecoPulse::operator==(const I3RecoPulse& rhs) const
 {
   return flags_ == flags_ 
-    && (time_ == rhs.time_)
-    && (charge_ == rhs.charge_)
-    && ((std::isnan(width_) && std::isnan(rhs.width_)) || width_ == rhs.width_);
+    && (time_ == rhs.time_ || (isnan(time_) && isnan(rhs.time_)))
+    && (charge_ == rhs.charge_ || (isnan(charge_) && isnan(rhs.charge_)))
+    && (width_ == rhs.width_ || (isnan(width_) && isnan(rhs.width_)));
 }
 
 I3_SERIALIZABLE(I3RecoPulse);
