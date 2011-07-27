@@ -19,11 +19,11 @@ while f.more():
             try :
                 # these are the new pybindings
                 print 4*" " + "RawFADC"
-                print 8*" " + str(l.RawFADC)
+                print 8*" " + str(l.raw_fadc)
                 print 4*" " + "RawChargeStamp"
-                print 8*" " + str(l.RawChargeStamp)
+                print 8*" " + str(l.raw_charge_stamp)
                 print 4*" " + "RawATWDs"
-                for n,a in enumerate(l.RawATWDs):
+                for n,a in enumerate(l.raw_atwd):
                     print 8*" "  + "[%d]" % n + str(a)
             except AttributeError :
                 # these are the old ones
