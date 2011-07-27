@@ -257,6 +257,7 @@ class I3Waveform
 };
 
 bool operator==(const I3Waveform& lhs, const I3Waveform& rhs);
+std::ostream& operator<<(std::ostream& oss, const I3Waveform& wf);
 
 typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;

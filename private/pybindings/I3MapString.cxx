@@ -21,6 +21,8 @@
 
 #include <dataclasses/I3Map.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 
@@ -28,21 +30,25 @@ void register_I3MapString()
 {
   class_<I3MapStringDouble, bases<I3FrameObject>, I3MapStringDoublePtr>("I3MapStringDouble")
     .def(std_map_indexing_suite<I3MapStringDouble >())
+    .def("__str__", &stream_to_string<I3MapStringDouble>)
     ;
   register_pointer_conversions<I3MapStringDouble>();
 
   class_<I3MapStringInt, bases<I3FrameObject>, I3MapStringIntPtr>("I3MapStringInt")
     .def(std_map_indexing_suite<I3MapStringInt >())
+    .def("__str__", &stream_to_string<I3MapStringInt>)
     ;
   register_pointer_conversions<I3MapStringInt>();
   
   class_<I3MapStringBool, bases<I3FrameObject>, I3MapStringBoolPtr>("I3MapStringBool")
     .def(std_map_indexing_suite<I3MapStringBool >())
+    .def("__str__", &stream_to_string<I3MapStringBool>)
     ;
   register_pointer_conversions<I3MapStringBool>();
   
   class_<I3MapStringVectorDouble, bases<I3FrameObject>, I3MapStringVectorDoublePtr>("I3MapStringVectorDouble")
     .def(std_map_indexing_suite<I3MapStringVectorDouble >())
+    .def("__str__", &stream_to_string<I3MapStringVectorDouble>)
     ;
   register_pointer_conversions<I3MapStringVectorDouble>();
 
@@ -50,6 +56,7 @@ void register_I3MapString()
 
   class_<I3MapStringStringDouble, bases<I3FrameObject>, I3MapStringStringDoublePtr>("I3MapStringStringDouble")
     .def(std_map_indexing_suite<I3MapStringStringDouble >())
+    .def("__str__", &stream_to_string<I3MapStringStringDouble>)
     ;
   register_pointer_conversions<I3MapStringStringDouble>();
 

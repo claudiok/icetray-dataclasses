@@ -222,6 +222,8 @@ class I3Direction : public I3FrameObject
 
 bool operator==(const I3Direction& lhs, const I3Direction& rhs);
 
+std::ostream& operator<<(std::ostream& oss, const I3Direction& d);
+
 I3_POINTER_TYPEDEFS(I3Direction);
 BOOST_CLASS_VERSION(I3Direction, i3direction_version_);
 

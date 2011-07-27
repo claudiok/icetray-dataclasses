@@ -134,6 +134,22 @@ operator==(const I3Waveform& lhs, const I3Waveform& rhs)
     && lhs.GetWaveformInformation() == rhs.GetWaveformInformation();
 }
 
+std::ostream& operator<<(std::ostream& oss, const I3Waveform& wf)
+{
+  std::string srcstr;
+  if (wf.GetSource() == I3Waveform::ATWD) srcstr.append("ATWD ");
+  if (wf.GetSource() == I3Waveform::FADC) srcstr.append("FADC ");
+  if (wf.GetSource() == I3Waveform::SLC) srcstr.append("SLC ");
+
+  oss << "[ I3Waveform  :: " << std::endl
+      << "          StartTime : " << wf.GetStartTime() << std::endl
+      << "              isHLC : " << wf.IsHLC() << std::endl
+      << "             Source : " << srcstr << std::endl
+
+      << "]" ;
+  
+  return oss;
+}
 
 I3_SERIALIZABLE(I3Waveform);
 

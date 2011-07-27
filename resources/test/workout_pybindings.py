@@ -23,6 +23,10 @@ ENSURE(tk.Source == dataclasses.I3Trigger.IN_ICE, "Wrong Trigger Source")
 
 tk.Type = dataclasses.I3Trigger.SIMPLE_MULTIPLICITY
 ENSURE(tk.Type == dataclasses.I3Trigger.SIMPLE_MULTIPLICITY, "Wrong Trigger Type")
+print tk
+tk.reset_config_id() 
+ENSURE(tk.check_config_id() == False, "CheckConfigID fail")
+
 
 mytrig = dataclasses.I3Trigger()
 mytrig.fired = True
@@ -31,14 +35,10 @@ mytrig.length = 1.0 * icetray.I3Units.microsecond
 mytrig.key.config_id = 1002
 mytrig.key.Source = dataclasses.I3Trigger.IN_ICE
 
+print mytrig
+
 my_th = dataclasses.I3TriggerHierarchy()
-## TODO  seems to be no pybindings for the TriggerHierarchy..no way to add my trigger
-
-#pretty print works
-print tk
-
-tk.reset_config_id() 
-ENSURE(tk.check_config_id() == False, "CheckConfigID fail")
+## TriggerHierarchy is RO right now from the python side.
 
 print 'Testing I3Constants'
 print 'NA',dataclasses.I3Constants.NA
@@ -54,7 +54,6 @@ dir = dataclasses.I3Direction(1.0, 1.0, 1.0)
 print "Directions!", dir.theta, dir.phi, dir.azimuth, dir.zenith
 
 dir2 = dataclasses.I3Direction(1.0, 0.0, 0.0)
-# TODO: This needs pretty print
 print dir2
 
 dir2.rotate_z(90*icetray.I3Units.deg)
@@ -88,7 +87,6 @@ mapy["bar"] = 2
 ENSURE(mapy.has_key("foo") == True, "Failed to search the I3Map")
 ENSURE(mapy.get("bar") == 2, "Failed to get from I3Map")
 
-## TODO:  needs a pretty print.  Can we use items() for I3Maps?
 print mapy
 
 #I3Vector
@@ -96,7 +94,6 @@ print 'Testing I3Vector'
 vecy = dataclasses.I3VectorInt([1,2,3,4,5,6,7,8,9,10])
 vecy.append(11)
 
-## TODO:  needs a pretty print.  Can we use some printer for vectors?
 print vecy
 
 #I3Postion
@@ -164,7 +161,6 @@ dl.TriggerType = dataclasses.I3DOMLaunch.SPE_DISCRIMINATOR_TRIGGER
 dl.TriggerMode = dataclasses.I3DOMLaunch.LC_UPPER
 dl.WhichATWD = dataclasses.I3DOMLaunch.ATWDb
 
-#TODO This needs some better pretty print
 print dl
 
 
@@ -176,7 +172,6 @@ header.event_id = 0
 header.start_time = header_t
 header.end_time = header_t+10*icetray.I3Units.microsecond
 header.sub_event_stream = 'MyFirstSplit'
-#TODO: pretty print
 print header
 
 #I3Particle
@@ -244,5 +239,4 @@ wv_ser_map[icetray.OMKey(2,2)] = wv_series
 ENSURE(wv_ser_map.has_key(icetray.OMKey(2,2)), 'I3Waveform not present in map!')
 ENSURE(not wv_ser_map.has_key(icetray.OMKey(2,3)), 'mystery I3waveform in map!')
 
-## TODO:  pretty printer
 print my_wf

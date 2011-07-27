@@ -25,6 +25,8 @@
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 
@@ -52,6 +54,7 @@ void register_I3Waveform()
       // for static methods you need the both of these
       .def("get_status", get_status_static)
       .staticmethod("get_status")
+      .def("__str__", &stream_to_string<I3Waveform>)
       .def(self == self)
       ;
 
