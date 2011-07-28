@@ -97,6 +97,15 @@ void set_unix_time_default(I3Time& t, time_t ut){
   t.SetUnixTime(ut);
 }
 
+int32_t  (*fx1)(double) = &I3Time::DayOfYear;
+int32_t  (*fx2)(int64_t) = &I3Time::DayOfYear;
+double   (*fx3)(int) = &I3Time::modjulianday;
+double   (*fx4)(int, int64_t) = &I3Time::modjulianday;
+double   (*fx5)(int) = &I3Time::julianday;
+double   (*fx6)(int, int64_t) = &I3Time::modjulianday;
+
+// MonthToString, WeekdayToString are better done in pythonia
+
 void register_I3Time()
 {
 #ifdef HAVE_PYDATETIME_API
@@ -104,6 +113,13 @@ void register_I3Time()
 
   def("make_I3Time",&GetI3Time);
 #endif
+  def("day_of_year",fx1,"I3Time::DayOfYear(double modjulianday)");
+  def("day_of_year",fx2,"I3Time::DayOfYear(int64_t daqTime)");
+  def("modjulianday", fx3,"I3Time::modjulianday(int year)");
+  def("modjulianday", fx4,"I3Time::modjulianday(int year, int64_t daqTime)");
+  def("julianday", fx5,"I3Time::julianday(int year)");
+  def("julianday", fx6,"I3Time::julianday(int year, int64_t daqTime)");
+  def("year_of",&I3Time::yearOf,"I3Time::yearOf(double modjulianday)");
 
   scope i3time_scope = class_<I3Time, bases<I3FrameObject>, 
     boost::shared_ptr<I3Time> >("I3Time")
@@ -116,7 +132,7 @@ void register_I3Time()
 #ifdef HAVE_PYDATETIME_API
     .add_property("date_time", &GetDateTime)
 #endif
-    #define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UTCYear)(UTCMonth)(UTCDaqTime)
+#define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UTCYear)(UTCMonth)(UTCDaqTime)(UTCSec)(UTCNanoSec)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Time, RO_PROPS)
     #undef  RO_PROPS
     .def("__str__",&stream_to_string<I3Time>)
@@ -130,6 +146,7 @@ void register_I3Time()
     .def(self<=self)
     .def(self>=self)
     ;
+
 
   register_pointer_conversions<I3Time>();
   
