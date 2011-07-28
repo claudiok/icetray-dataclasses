@@ -24,7 +24,6 @@
 #include <dataclasses/physics/I3MCHit.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/class_freeze.hpp>
 
 using namespace boost::python;
 
@@ -40,7 +39,7 @@ void register_I3MCHit()
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
       #undef PROPERTIES
       #undef RO_PROPERTIES
-      .def("__setattr__", &setattr_with_dynamism_disabled)
+      .def( freeze() )
       ;
 
     enum_<I3MCHit::HitSource>("I3MCHitSource")
