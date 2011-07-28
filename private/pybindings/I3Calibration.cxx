@@ -91,10 +91,13 @@ void register_I3Calibration()
       #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)(FADCBaselineFit)(FrontEndImpedance)(TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)(ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)(MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       #undef I3DOMCALPROPS
-      /* XXX FIXME: find a better way to expose the channel argument. */
+      // XXX Note:  These are some ugly interfaces from I3DOMCalibration that 
+      //     proved to be difficult to handle in boost::python.  Left exposed for
+      //     expert use, but proper pybindings here will have to wait for an
+      //     updated I3DOMCalibration class  XXX 
+      //      See TRAC ticket #300
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
-      //BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
       .add_property("atwd_bin_calib_fit", boost::python::make_function(&I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>()), &I3DOMCalibration::SetATWDBinCalibFit)
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
