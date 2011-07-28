@@ -55,6 +55,7 @@ void register_I3Trigger()
       // force copy of trigkey via standalone fn
       .add_property("key", get_trigkey, "Get TriggerKey")
       .def("__str__", &stream_to_string<I3Trigger>)
+      .def( freeze() )
       ;
 
     enum_<TriggerKey::SourceID>("SourceID")
@@ -109,6 +110,7 @@ void register_I3Trigger()
     .def(self <= self)
     .def(self == self)
     .def(self != self)
+    .def( freeze() )
     ;
     
   class_<I3TriggerHierarchy, bases<I3FrameObject>, I3TriggerHierarchyPtr>("I3TriggerHierarchy")

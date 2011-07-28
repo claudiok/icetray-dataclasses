@@ -138,6 +138,7 @@ void register_I3DetectorStatus()
       .def_readwrite("trigger_name", &I3TriggerStatus::name_)
       .def_readwrite("trigger_settings",&I3TriggerStatus::settings_)
       .def_readwrite("readout_settings",&I3TriggerStatus::readoutconfigs_)
+      .def( freeze() )
       ;
 
     class_<I3TriggerReadoutConfig, boost::shared_ptr<I3TriggerReadoutConfig> >("I3TriggerReadoutConfig")
@@ -145,6 +146,7 @@ void register_I3DetectorStatus()
       .def_readwrite("readout_time_minus", &I3TriggerReadoutConfig::readoutTimeMinus)
       .def_readwrite("readout_time_plus", &I3TriggerReadoutConfig::readoutTimePlus)
       .def_readwrite("readout_time_offset", &I3TriggerReadoutConfig::readoutTimeOffset)
+      .def( freeze() )
       ;
 
     enum_<I3TriggerStatus::Subdetector>("Subdetector")
@@ -160,6 +162,7 @@ void register_I3DetectorStatus()
 
   class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
     .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
+    .def( freeze() )
     ;
   
   register_pointer_conversions<I3DetectorStatus>();

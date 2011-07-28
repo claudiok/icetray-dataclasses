@@ -34,6 +34,7 @@ void register_I3RecoHit()
     PROPERTY(I3RecoHit, id, ID)
     PROPERTY(I3RecoHit, source_index, SourceIndex)
     .def(self == self)
+    .def( freeze() )
     ;
 
   class_<std::vector<I3RecoHit> >("vector_I3RecoHit")

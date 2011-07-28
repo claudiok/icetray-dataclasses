@@ -58,15 +58,18 @@ void register_I3MCHit()
 
   class_<std::map<OMKey, I3MCHit> >("map_OMKey_I3MCHit")
     .def(std_map_indexing_suite<std::map<OMKey, I3MCHit> >())
+    .def( freeze() )
     ;
 
   class_<std::vector<I3MCHit> >("vector_I3MCHit")
     .def(std_vector_indexing_suite<std::vector<I3MCHit> >())
+    .def( freeze() )
     ;
 
   class_<I3MCHitSeriesMap, bases<I3FrameObject>, I3MCHitSeriesMapPtr>("I3MCHitSeriesMap")
     .def(std_map_indexing_suite<I3MCHitSeriesMap>())
+    .def( freeze() )
     ;
-
+  
   register_pointer_conversions<I3MCHitSeriesMap>();
 }

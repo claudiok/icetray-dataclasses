@@ -59,6 +59,7 @@ void register_I3FlasherInfo()
      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3FlasherInfo, PROPS)
      #undef PROPS
      .add_property("raw_atwd3", make_function(get_waveform,return_internal_reference<1>()), &I3FlasherInfo::SetRawATWD3)
+     .def( freeze() )
    ;
 
  }

@@ -50,6 +50,7 @@ void register_I3String()
     .def("__repr__",&stream_to_string<I3String>)
     .def("__str__",&stream_to_string<I3String>)
     .def("__len__",i3string_get_length)
+    .def( freeze() )
     ;
 
   register_pointer_conversions<I3String>();

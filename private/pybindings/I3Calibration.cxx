@@ -34,6 +34,7 @@ void register_I3Calibration()
     #define I3CALPROPS (startTime)(endTime)(domCal)(vemCal)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Calibration, I3CALPROPS)
     #undef I3CALPROPS
+    .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
@@ -55,6 +56,7 @@ void register_I3Calibration()
     class_<LinearFit>("LinearFit")
       .def_readwrite("slope", &LinearFit::slope)
       .def_readwrite("intercept", &LinearFit::intercept)
+      .def( freeze() )
       ;
 
     class_<I3VEMCalibration>("I3VEMCalibration")
@@ -62,12 +64,14 @@ void register_I3Calibration()
       #define I3VEMCALPROPS (pePerVEM)(muPeakWidth)(hglgCrossOver)(corrFactor) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3VEMCalibration, I3VEMCALPROPS)
       #undef I3VEMCALPROPS
+      .def( freeze() )
       ;
 
     class_<QuadraticFit>("QuadraticFit")
       .def_readwrite("quad_fit_a", &QuadraticFit::quadFitA)
       .def_readwrite("quad_fit_b", &QuadraticFit::quadFitB)
       .def_readwrite("quad_fit_v", &QuadraticFit::quadFitC)
+      .def( freeze() )
       ;
 
     class_<TauParam>("TauParam")
@@ -78,6 +82,7 @@ void register_I3Calibration()
       .def_readwrite("p4", &TauParam::P4)
       .def_readwrite("p5", &TauParam::P5)
       .def_readwrite("tau_frac", &TauParam::TauFrac)
+      .def( freeze() )
       ;
 
     scope outer = 
@@ -95,8 +100,7 @@ void register_I3Calibration()
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
       .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
       .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)
-
-
+      .def( freeze() )
       ;
 
   }

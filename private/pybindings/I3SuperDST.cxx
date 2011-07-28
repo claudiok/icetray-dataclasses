@@ -40,8 +40,9 @@ register_I3SuperDST()
 		    const I3RecoPulseSeriesMap &>(bp::args("hlc_pulses", "slc_pulses")))
 		.def("Unpack", &Unpack, bp::args("self"), "Unpack the compressed event data "
 		    "into I3RecoPulses. Returns a tuple (HLC pulses, SLC pulses).")
+	        .def( freeze() )
 		#define RO_PROPS (SubEvents)
-		BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3SuperDST, RO_PROPS);
+		BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3SuperDST, RO_PROPS)
 		#undef RO_PROPS
 		;
 }

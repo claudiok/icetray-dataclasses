@@ -41,6 +41,7 @@ void register_I3Geometry()
     #define GEOMPROPS (omgeo)(stationgeo)(startTime)(endTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Geometry, GEOMPROPS )
     #undef GEOMPROPS
+    .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3OMGeo> >("Map_OMKey_I3OMGeo")
@@ -56,6 +57,7 @@ void register_I3Geometry()
       #define I3OMGEOPROPS (position)(omtype)(orientation)(area)(aziangle) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3OMGeo, I3OMGEOPROPS )
       #undef I3OMGEOPROPS
+      .def( freeze() )
       ;
 
     enum_<I3OMGeo::OMType>("OMType")
@@ -86,6 +88,7 @@ void register_I3Geometry()
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3TankGeo, TANKGEOPROPS )
       .def_readwrite("omkey_list",&I3TankGeo::omKeyList_)
       #undef TANKGEOPROPS
+      .def( freeze() )
       ;
 
     enum_<I3TankGeo::TankType>("TankType")

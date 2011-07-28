@@ -41,6 +41,7 @@ void register_I3Double()
     .def(init<const I3Double&>())
     .def_readwrite("value", &I3Double::value)
     .def("__repr__",i3double_prettyprint)
+    .def( freeze() )
     ;
 
   register_pointer_conversions<I3Double>();

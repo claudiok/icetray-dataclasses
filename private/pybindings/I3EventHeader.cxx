@@ -44,6 +44,7 @@ void register_I3EventHeader()
       .add_property("data_stream", &I3EventHeader::GetDataStream)
       .def(copy_suite<I3EventHeader>())
       .def("__str__", &stream_to_string<I3EventHeader>)
+      .def( freeze() )
       ;
 
     register_pointer_conversions<I3EventHeader>();

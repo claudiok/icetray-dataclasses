@@ -59,7 +59,8 @@ void register_I3DOMLaunch()
 		    &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
       .def("__str__", &stream_to_string<I3DOMLaunch>)
       .def(self == self)
-    ;
+      .def( freeze() )
+      ;
 
     enum_<I3DOMLaunch::TriggerType>("TriggerType")
       .value("TEST_PATTERN",I3DOMLaunch::TEST_PATTERN)

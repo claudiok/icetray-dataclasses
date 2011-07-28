@@ -103,6 +103,7 @@ void register_I3MCTree()
       #define BARE_PROPS (NCascades)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
       #undef BARE_PROPS
+      .def( freeze() )      
       ;
 
     enum_<NuEventType>("NuEventType")

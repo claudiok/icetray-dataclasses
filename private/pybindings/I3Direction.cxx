@@ -49,6 +49,7 @@ void register_I3Direction()
     .add_property("phi", &I3Direction::CalcPhi)
     .def("__str__", &stream_to_string<I3Direction>)
     .def(self == self)
+    .def( freeze() )
     ;
   register_pointer_conversions<I3Direction>();
 }

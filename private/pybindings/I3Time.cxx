@@ -145,6 +145,7 @@ void register_I3Time()
     .def(self>self)
     .def(self<=self)
     .def(self>=self)
+    .def( freeze() )
     ;
 
 

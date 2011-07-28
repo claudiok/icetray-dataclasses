@@ -56,6 +56,7 @@ void register_I3Waveform()
       .staticmethod("get_status")
       .def("__str__", &stream_to_string<I3Waveform>)
       .def(self == self)
+      .def( freeze() )
       ;
 
     const std::pair<unsigned long long int, unsigned long long int>&
@@ -67,6 +68,7 @@ void register_I3Waveform()
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform::StatusCompound, PROPS)
       #undef PROPS
       .add_property("interval", make_function(get_interval, return_value_policy<copy_const_reference>()))
+      .def( freeze() )
       ;
 
     enum_<I3Waveform::Source>("Source")

@@ -32,6 +32,7 @@ void register_TankKey()
     .def(copy_suite<TankKey>())
     .def_readwrite("string", &TankKey::string)
     .def_readwrite("tank", &TankKey::tank)
+    .def( freeze() )
     ;
   enum_<TankKey::TankID>("TankID")
     .value("TankA", TankKey::TankA)
