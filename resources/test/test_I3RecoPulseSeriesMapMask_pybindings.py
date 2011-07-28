@@ -12,23 +12,23 @@ class I3RecoPulseSeriesMapMaskTest(unittest.TestCase):
 		key1 = icetray.OMKey(42, 7)
 		vec = dataclasses.I3RecoPulseSeries()
 		pulse = dataclasses.I3RecoPulse()
-		pulse.Time = 1.0
+		pulse.time = 1.0
 		pulse.Charge = 2.3
 		vec.append(pulse)
-		pulse.Time = 2.0
+		pulse.time = 2.0
 		vec.append(pulse)
-		pulse.Time = 15.0
+		pulse.time = 15.0
 		vec.append(pulse)
 		pulses[key1] = vec
 		
 		key2 = icetray.OMKey(7,7)
 		vec = dataclasses.I3RecoPulseSeries()
-		pulse.Time = 1.0
+		pulse.time = 1.0
 		pulse.Charge = 2.3
 		vec.append(pulse)
-		pulse.Time = 2.0
+		pulse.time = 2.0
 		vec.append(pulse)
-		pulse.Time = 15.0
+		pulse.time = 15.0
 		vec.append(pulse)
 		pulses[key2] = vec
 		
