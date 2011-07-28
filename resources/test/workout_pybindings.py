@@ -15,16 +15,15 @@ from I3Tray import I3Units
 
 
 print 'Testing TriggerKey pybindings'
-tk = dataclasses.TriggerKey()
-tk.config_id = 1002
+tk = dataclasses.TriggerKey(dataclasses.I3Trigger.IN_ICE,
+                            dataclasses.I3Trigger.SIMPLE_MULTIPLICITY,
+                            1002)
 ENSURE(tk.check_config_id() == True, "CheckConfigID fail")
 ENSURE(tk.config_id == 1002, "Wrong ConfigID")
 
-tk.Source = dataclasses.I3Trigger.IN_ICE
-ENSURE(tk.Source == dataclasses.I3Trigger.IN_ICE, "Wrong Trigger Source")
+ENSURE(tk.source == dataclasses.I3Trigger.IN_ICE, "Wrong Trigger Source")
 
-tk.Type = dataclasses.I3Trigger.SIMPLE_MULTIPLICITY
-ENSURE(tk.Type == dataclasses.I3Trigger.SIMPLE_MULTIPLICITY, "Wrong Trigger Type")
+ENSURE(tk.type == dataclasses.I3Trigger.SIMPLE_MULTIPLICITY, "Wrong Trigger Type")
 print tk
 tk.reset_config_id() 
 ENSURE(tk.check_config_id() == False, "CheckConfigID fail")
@@ -34,8 +33,6 @@ mytrig = dataclasses.I3Trigger()
 mytrig.fired = True
 mytrig.time = 5.0 * icetray.I3Units.microsecond
 mytrig.length = 1.0 * icetray.I3Units.microsecond
-mytrig.key.config_id = 1002
-mytrig.key.Source = dataclasses.I3Trigger.IN_ICE
 
 print mytrig
 
@@ -153,7 +150,7 @@ print 'Testing I3DOMLaunch'
 dl = dataclasses.I3DOMLaunch()
 fadc = icetray.vector_int()
 for i in range(10) : fadc.append(i) 
-dl.RawFADC = fadc
+dl.raw_fadc = fadc
 print fadc
 
 vc = dataclasses.I3VectorChar()
@@ -166,9 +163,9 @@ atwd0 = icetray.vector_int()
 dl.raw_atwd[0] = atwd0
 dl.lc_bit = True
 ENSURE(dl.lc_bit == True, 'Got wrong LCBit')
-dl.TriggerType = dataclasses.I3DOMLaunch.SPE_DISCRIMINATOR_TRIGGER
-dl.TriggerMode = dataclasses.I3DOMLaunch.LC_UPPER
-dl.WhichATWD = dataclasses.I3DOMLaunch.ATWDb
+dl.trigger_type = dataclasses.I3DOMLaunch.SPE_DISCRIMINATOR_TRIGGER
+dl.trigger_mode = dataclasses.I3DOMLaunch.LC_UPPER
+dl.which_atwd = dataclasses.I3DOMLaunch.ATWDb
 
 launch_time  = 10*I3Units.microsecond
 dl.time = launch_time
