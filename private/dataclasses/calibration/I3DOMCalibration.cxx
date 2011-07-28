@@ -225,7 +225,7 @@ I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel) c
 	    ( channel == 0 || channel == 1 || channel == 2)) {
 		return atwdBeaconBaselines_[id][channel];
 	} else {
-		log_fatal("Invalid id, channel, bin specified for GetATWDBeaconBaseline");
+		log_fatal("Invalid id, channel specified for GetATWDBeaconBaseline");
 	}
 }
 
@@ -236,7 +236,7 @@ I3DOMCalibration::SetATWDBeaconBaseline(unsigned int id, unsigned int channel, d
 	    ( channel == 0 || channel == 1 || channel == 2)) {
 		atwdBeaconBaselines_[id][channel] = bsl;
 	} else {
-		log_fatal("Invalid id, channel, bin specified for SetATWDBeaconBaseline");
+		log_fatal("Invalid id, channel specified for SetATWDBeaconBaseline");
 	}
 }
 
