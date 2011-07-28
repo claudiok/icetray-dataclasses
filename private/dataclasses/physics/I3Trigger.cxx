@@ -10,6 +10,7 @@
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3Trigger.h>
 #include <icetray/I3Units.h>
+#include <dataclasses/external/CompareFloatingPoint.h>
 
 const double I3Trigger::FROM_TENTH_NS_TO_NS_CORRECTION_FACTOR = 0.1;
 
