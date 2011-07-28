@@ -3,6 +3,8 @@
 from icecube import icetray, dataclasses
 from icecube.icetray.I3Test import *
 
+from I3Tray import I3Units
+
 #
 #  This file is not a hard test per-say, but just exercises some of the 
 #        python bindings for dataclasses.  Might be useful for example usage.
@@ -150,8 +152,15 @@ ENSURE(newom.position.x > 99.0, 'Failed to get the right OMGeo position back')
 print 'Testing I3DOMLaunch'
 dl = dataclasses.I3DOMLaunch()
 fadc = icetray.vector_int()
-[fadc.append(i) for i in range(10)]
+for i in range(10) : fadc.append(i) 
 dl.RawFADC = fadc
+print fadc
+
+vc = dataclasses.I3VectorChar()
+for c in "I am an I3Vector<char>" :
+    vc.append(c)
+print vc
+
 atwd0 = icetray.vector_int()
 [atwd0.append(i) for i in range(100)]
 dl.raw_atwd[0] = atwd0
@@ -161,6 +170,21 @@ dl.TriggerType = dataclasses.I3DOMLaunch.SPE_DISCRIMINATOR_TRIGGER
 dl.TriggerMode = dataclasses.I3DOMLaunch.LC_UPPER
 dl.WhichATWD = dataclasses.I3DOMLaunch.ATWDb
 
+launch_time  = 10*I3Units.microsecond
+dl.time = launch_time
+ENSURE( dl.time == launch_time , "Got the wrong time")
+
+dl.lc_bit = True
+ENSURE(dl.lc_bit == True, 'Got wrong LCBit')
+
+ 
+dl.trigger_type = dataclasses.I3DOMLaunch.SPE_DISCRIMINATOR_TRIGGER
+dl.trigger_mode = dataclasses.I3DOMLaunch.LC_UPPER
+dl.which_atwd = dataclasses.I3DOMLaunch.ATWDb
+
+
+#TODO This needs some better pretty print
+=======
 print dl
 
 
@@ -202,6 +226,9 @@ rp.time = 100.0 * icetray.I3Units.ns
 rp.flags = dataclasses.I3RecoPulse.PulseFlags.ATWD
 
 print rp
+trigger_vect = dataclasses.I3VectorI3Trigger()
+trigger_vect.append(dataclasses.I3Trigger())
+print trigger_vect
 
 rps = dataclasses.I3RecoPulseSeries()
 rps.append(rp)
