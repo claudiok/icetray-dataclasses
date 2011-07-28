@@ -24,6 +24,7 @@
 #include <dataclasses/physics/I3Particle.h>
 #include <boost/preprocessor/seq.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/class_freeze.hpp>
 #include <icetray/python/stream_to_string.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
@@ -49,6 +50,7 @@ void register_I3Particle()
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
 					  (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir ) 
       .def("shift_along_track", &I3Particle::ShiftAlongTrack)
+      .def("__setattr__", setattr_with_dynamism_disabled )
       .def("__str__", &stream_to_string<I3Particle>)
       ;
 
