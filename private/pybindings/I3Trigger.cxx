@@ -39,6 +39,14 @@ int length(I3TriggerHierarchyPtr t){
   return 0;
 }
 
+using boost::python::object;
+object
+get_config_id_optional( const TriggerKey& tk){
+  if( tk.GetConfigIDOptional() )
+    return object(tk.GetConfigIDOptional().get() );
+  else object();
+}
+
 TriggerKey get_trigkey(const I3Trigger& self)
 {
   return self.GetTriggerKey();
@@ -99,7 +107,7 @@ void register_I3Trigger()
     #define PROPERTIES (Source)(Type)(Subtype)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, TriggerKey, PROPERTIES)
     #undef  PROPERTIES
-    .add_property("config_id", &TriggerKey::GetConfigID, 
+    .add_property("config_id", get_config_id_optional, 
 		  (void (TriggerKey::*)(int)) &TriggerKey::SetConfigID)
     .def("check_config_id", &TriggerKey::CheckConfigID)
     .def("reset_config_id", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)

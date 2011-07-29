@@ -147,7 +147,7 @@ TriggerKey::~TriggerKey() {}
 
 
 template <class Archive>
-void TriggerKey::serialize(Archive& ar, unsigned version)
+void TriggerKey::load(Archive& ar, unsigned version)
 {
   if (version>triggerkey_version_)
     log_fatal("Attempting to read version %u from file but running version %u of TriggerKey class.",version,triggerkey_version_);
@@ -158,8 +158,31 @@ void TriggerKey::serialize(Archive& ar, unsigned version)
   // for version <= 0 there is no subtype ID available ... use default value instead
   if(version > 0) ar & make_nvp("SubtypeID", subtype_);
   else subtype_ = NO_SUBTYPE;
-  ar & make_nvp("ConfigIDSet", configIDSet_);
-  if (configIDSet_) ar & make_nvp("ConfigID", configID_);
+
+  bool configIDSet;
+  ar & make_nvp("ConfigIDSet", configIDSet);
+  if (configIDSet){
+    int configID;
+    ar & make_nvp("ConfigID", configID);
+    configID_ = configID;
+  }
+}
+
+template <class Archive>
+void TriggerKey::save(Archive& ar, unsigned version) const
+{
+  if (version>triggerkey_version_)
+    log_fatal("Attempting to read version %u from file but running version %u of TriggerKey class.",version,triggerkey_version_);
+
+  ar & make_nvp("SourceID", source_);
+  ar & make_nvp("TypeID", type_);
+  // for version > 0 there is a subtype ID to be serialized
+  // for version <= 0 there is no subtype ID available ... use default value instead
+  ar & make_nvp("SubtypeID", subtype_);
+ 
+  bool configIDSet( configID_ ? true : false);
+  ar & make_nvp("ConfigIDSet", configIDSet );
+  if (configID_) ar & make_nvp("ConfigID", configID_.get() );
 }
 
 std::ostream& operator<<(std::ostream& oss, const TriggerKey& k){
