@@ -55,33 +55,24 @@ void register_I3MCTree()
     scope outer = 
       class_<I3MCTree, bases<I3FrameObject>, I3MCTreePtr>("I3MCTree")
       // I3MCTreeUtils
-      .def("GetMostEnergeticPrimary",&GetMostEnergeticPrimary)
-      .def("GetMostEnergeticCascade",&GetMostEnergeticCascade)
-      .def("GetMostEnergeticInIce",&GetMostEnergeticInIce)
-      .def("GetMostEnergetic",&GetMostEnergetic)
-      .def("GetMostEnergeticTrack",&GetMostEnergeticTrack)
-      .def("GetMostEnergeticStochastic",&GetMostEnergeticStochastic)
-      .def("GetNumberOfStochastics",&GetNumberOfStochastics)
-      .def("GetNumberOfAtmosphericMuons",&GetNumberOfAtmosphericMuons)
-      .def("GetInIce",&GetInIce)
-      .def("GetPrimaries",&GetPrimaries)
-      .def("NCascades",&NCascades)
-      .def("Merge",&Merge)
-      .def("GetDaughters",&GetDaughters)
-      .def("HasParent",&HasParent)
-      .def("AddPrimary",&AddPrimary)
-      .def("AppendChild",&AppendChild)
-      .def("GetPrimary",&GetPrimary)
+      .def("merge",&Merge)
+      .def("get_daughters",&GetDaughters)
+      .def("get_most_energetic",&GetMostEnergetic)
+      .def("get_number_of_stochastics",&GetNumberOfStochastics)
+      .def("has_parent",&HasParent)
+      .def("add_primary",&AddPrimary)
+      .def("get_primary",&GetPrimary)
+      .def("append_child",&AppendChild)
       // end I3MCTreeUtils
       // I3MCTreeTools
-      .def("GetParticleFromHit", &I3MCTreeTools::Get )
-      .def("Dump", &dump_to_cout )
-      .def("Dump", &default_dump )
-      .def("GetNeutrinoEventType", &I3MCTreeTools::GetNeutrinoEventType )
-      .def("IsNeutralCurrent", &I3MCTreeTools::IsNeutralCurrent )
-      .def("IsChargedCurrent", &I3MCTreeTools::IsChargedCurrent )
-      .def("IsGlashowResonance", &I3MCTreeTools::IsGlashowResonance )
-      .def("CheckNeutrino", &I3MCTreeTools::CheckNeutrino )
+      .def("get_particle_from_hit", &I3MCTreeTools::Get )
+      .def("dump", &dump_to_cout )
+      .def("dump", &default_dump )
+      .add_property("neutrino_event_type", &I3MCTreeTools::GetNeutrinoEventType )
+      .add_property("is_neutral_current", &I3MCTreeTools::IsNeutralCurrent )
+      .add_property("is_charged_current", &I3MCTreeTools::IsChargedCurrent )
+      .add_property("is_glashow_resonance", &I3MCTreeTools::IsGlashowResonance )
+      .def("check_neutrino", &I3MCTreeTools::CheckNeutrino )
       // end I3MCTreeTools
       // BaseClassMethods
       .def("depth", &depth)
@@ -96,11 +87,12 @@ void register_I3MCTree()
 	   )
       #define PROPS (MostEnergeticPrimary)(MostEnergeticCascade)	\
 	(MostEnergeticInIce)(MostEnergetic)			\
-	(MostEnergeticTrack)(InIce)				\
-	(Primaries)(Primary)(Daughters)
+	  (MostEnergeticTrack)(InIce)(Primaries) \
+	  (MostEnergeticStochastic)		 \
+	  (NumberOfAtmosphericMuons )
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_FN, ~, PROPS)
       #undef PROPS
-      #define BARE_PROPS (NCascades)
+      #define BARE_PROPS (NCascades) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
       #undef BARE_PROPS
       .def( freeze() )      
