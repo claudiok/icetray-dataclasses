@@ -56,6 +56,7 @@ void register_I3DetectorStatus()
     #define DETECTORSTATUSPROPS (startTime)(endTime)(domStatus)(triggerStatus)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DetectorStatus, DETECTORSTATUSPROPS )
     #undef DETECTORSTATUSPROPS
+    .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3DOMStatus> >("Map_OMKey_I3DOMStatus")
@@ -76,6 +77,7 @@ void register_I3DetectorStatus()
       #define DOMSTATUSPROPERTIES (pmtHV)(lcMode)(txMode)(lcWindowPre)(lcWindowPost)(lcSpan)(statusATWDa)(statusATWDb)(statusFADC)(pmtHV)(speThreshold)(fePedestal)(dacTriggerBias0)(dacTriggerBias1)(dacFADCRef)(deltaCompress)(domGainType)(cableType)(SLCActive)(mpeThreshold)
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DOMStatus, DOMSTATUSPROPERTIES)
       #undef DOMSTATUSPROPERTIES
+      .def( freeze() )
       ;
 
     enum_<I3DOMStatus::TrigMode>("TrigMode")

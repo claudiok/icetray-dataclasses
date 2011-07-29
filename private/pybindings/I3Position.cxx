@@ -88,6 +88,7 @@ void register_I3Position()
     .def("__len__", i3position_len)
     .def("__getitem__", i3position_getitem)
     .def("__setitem__", i3position_setitem)
+    .def( freeze() )
     ;
 
   enum_<I3Position::RefFrame>("RefFrame")
