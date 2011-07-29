@@ -26,12 +26,13 @@ NB:  Another thing you'll see is "Ulps" which stands for "Units in the Last Plac
 
 #include <float.h>
 #include <math.h>
+#include <stdint.h>
 
 namespace CompareFloatingPoint{
 
   // Function to print a number and its representation, in hex and decimal
   std::string ToString(double f, long offset = 0);
-  std::string ToString(float f, int offset = 0);
+  std::string ToString(float f, int32_t offset = 0);
   
 // Support functions and conditional compilation directives for the
 // master AlmostEqual function.
@@ -41,11 +42,11 @@ namespace CompareFloatingPoint{
 
 inline bool IsInfinite(float A)
 {
-  const int INF_AS_INT = 0x7F800000;
+  const int32_t INF_AS_INT = 0x7F800000;
 
     // An infinity has an exponent of 255 (shift left 23 positions) and
     // a zero mantissa. There are two infinities - positive and negative.
-    if ((*(int*)&A & 0x7FFFFFFF) == INF_AS_INT)
+    if ((*(int32_t*)&A & 0x7FFFFFFF) == INF_AS_INT)
         return true;
     return false;
 }
@@ -65,8 +66,8 @@ inline bool IsNan(float A)
 {
     // A NAN has an exponent of 255 (shifted left 23 positions) and
     // a non-zero mantissa.
-    int exp = *(int*)&A & 0x7F800000;
-    int mantissa = *(int*)&A & 0x007FFFFF;
+    int32_t exp = *(int32_t*)&A & 0x7F800000;
+    int32_t mantissa = *(int32_t*)&A & 0x007FFFFF;
     if (exp == 0x7F800000 && mantissa != 0)
         return true;
     return false;
@@ -84,10 +85,10 @@ inline bool IsNan(double A)
   return false;
 }
 
-inline int Sign(float A)
+inline int32_t Sign(float A)
 {
     // The sign bit of a number is the high bit.
-    return (*(int*)&A) & 0x80000000;
+    return (*(int32_t*)&A) & 0x80000000;
 }
 
 inline long Sign(double A)
@@ -99,7 +100,7 @@ inline long Sign(double A)
 // This is the 'final' version of the AlmostEqualUlps function.
 // The optional checks are included for completeness, but in many
 // cases they are not necessary, or even not desirable.
-inline bool Compare(float A, float B, int maxUlps = 10)
+inline bool Compare(float A, float B, int32_t maxUlps = 10)
 {
     // There are several optional checks that you can do, depending
     // on what behavior you want from your floating point comparisons.
@@ -140,27 +141,27 @@ inline bool Compare(float A, float B, int maxUlps = 10)
         return A == B;
 #endif
 
-    int aInt = *(int*)&A;
+    int32_t aInt = *(int32_t*)&A;
     // Make aInt lexicographically ordered as a twos-complement int
     if (aInt < 0)
         aInt = 0x80000000 - aInt;
     // Make bInt lexicographically ordered as a twos-complement int
-    int bInt = *(int*)&B;
+    int32_t bInt = *(int32_t*)&B;
     if (bInt < 0)
         bInt = 0x80000000 - bInt;
 
     // Now we can compare aInt and bInt to find out how far apart A and B
     // are.
-    int intDiff = abs(aInt - bInt);
+    int32_t intDiff = abs(aInt - bInt);
     if (intDiff <= maxUlps)
         return true;
     return false;
 }
-
+ 
 // This is the 'final' version of the AlmostEqualUlps function.
 // The optional checks are included for completeness, but in many
 // cases they are not necessary, or even not desirable.
-inline bool Compare(double A, double B, long maxUlps = 10)
+inline bool Compare(double A, double B, int64_t maxUlps = 10)
 {
     // There are several optional checks that you can do, depending
     // on what behavior you want from your floating point comparisons.
@@ -201,18 +202,18 @@ inline bool Compare(double A, double B, long maxUlps = 10)
         return A == B;
 #endif
 
-    long aLong = *(long*)&A;
+    int64_t aLong = *(int64_t*)&A;
     // Make aLong lexicographically ordered as a twos-complement long
     if (aLong < 0)
         aLong = 0x8000000000000000LL - aLong;
     // Make bLong lexicographically ordered as a twos-complement long
-    long bLong = *(long*)&B;
+    int64_t bLong = *(int64_t*)&B;
     if (bLong < 0)
         bLong = 0x8000000000000000LL - bLong;
 
     // Now we can compare aLong and bLong to find out how far apart A and B
     // are.
-    long longDiff = labs(aLong - bLong);
+    int64_t longDiff = labs(aLong - bLong);
     if (longDiff <= maxUlps)
         return true;
     return false;

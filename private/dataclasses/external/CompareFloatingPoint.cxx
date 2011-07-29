@@ -19,10 +19,10 @@ std::string ToStringImpl(F f, I offset )
   return s.str();
 }
 
-std::string CompareFloatingPoint::ToString(double f, long offset ){
+std::string CompareFloatingPoint::ToString(double f, int64_t offset ){
   return ToStringImpl<double,long>(f,offset);
 }
 
-std::string CompareFloatingPoint::ToString(float f, int offset ){
+std::string CompareFloatingPoint::ToString(float f, int32_t offset ){
   return ToStringImpl<float,int>(f,offset);
 }
