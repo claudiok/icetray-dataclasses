@@ -10,10 +10,11 @@ std::string ToStringImpl(F f, I offset )
   const int PREC(2 *sizeof(I));
   (*((I*)&f)) += offset;
   std::stringstream s;
-  s<< std::showpos << std::setw(PREC) << std::setprecision(PREC) << f << " "
-   << std::right << "0x" << std::hex << std::uppercase << std::setw(PREC) << *(F*)&f << " "
-   << std::dec << std::setw(PREC) << *(F*)&f << " "
-   << offset  << " "
+  s<< " | " << std::showpos << std::setw(PREC) << std::setprecision(PREC) << f << " "
+   << " | " << std::right << "0x" << std::hex << std::uppercase 
+   << std::setw(PREC) << std::setfill('0') << *((I*)&f) << " "
+   << " | " << std::dec << std::setfill(' ') << std::setw(PREC) << *(F*)&f << " "
+   << " | " << offset  << " | "
    << std::endl;
   return s.str();
 }
