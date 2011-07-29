@@ -9,28 +9,26 @@ TEST_GROUP(CompareAsInt);
 using namespace CompareFloatingPoint;
 
 TEST(size){
-  ENSURE( sizeof(float) == 4 );
-  ENSURE( sizeof(double) == 8 );
-  ENSURE( sizeof(int32_t) == 4 );
-  ENSURE( sizeof(int64_t) == 8 );
+  ENSURE( sizeof(float) == sizeof(int32_t) );
+  ENSURE( sizeof(double) == sizeof(int64_t) );
 }
 
 // Function to test the TestCompareFinal function
 bool TestCompareFinal(float A, float B, bool expectedResult, int32_t maxUlps = 10)
 {
-    bool result = Compare(A, B, maxUlps);
-    if (result != expectedResult){
-	return false;
-    }else return true;
+  bool result = Compare(A, B, maxUlps);
+  if (result != expectedResult){
+    return false;
+  }else return true;
 }
 
 // Function to test the TestCompareFinal function
 bool TestCompareFinal(double A, double B, bool expectedResult, int64_t maxUlps = 10)
 {
-    bool result = Compare(A, B, maxUlps);
-    if (result != expectedResult){
-	return false;
-    }else return true;
+  bool result = Compare(A, B, maxUlps);
+  if (result != expectedResult){
+    return false;
+  }else return true;
 }
 
 void PrintNumbers()
@@ -253,7 +251,10 @@ TEST(compare_double_as_int64_t){
   cerr<<ToString(nan3D);
   cerr<<ToString(nan4D);
 
+  ENSURE( IsNan(nan1D) );
   ENSURE( IsNan(nan2D) );
+  ENSURE( IsNan(nan3D) );
+  ENSURE( IsNan(nan4D) );
 
   // Test whether a NAN compares as equal to itself.
   ENSURE( TestCompareFinal( nan2D, nan2D, false ) ) ;

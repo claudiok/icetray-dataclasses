@@ -50,9 +50,8 @@ namespace CompareFloatingPoint{
   bool IsInfinite(double);
   bool IsNan(double);
   int64_t Sign(double);
-
+  
 }//end namespace CompareFloatingPoint
-
 
 // Support functions and conditional compilation directives for the
 // master AlmostEqual function.
@@ -69,10 +68,10 @@ inline bool CompareFloatingPoint::IsInfinite(float A){
 
 inline bool CompareFloatingPoint::IsInfinite(double A){
   
-  const long INF_AS_LONG = 0x7FF0000000000000LL;
+  const int64_t INF_AS_LONG = 0x7FF0000000000000LL;
   // An infinity has an exponent of 2047 (shift left 52 positions) and
   // a zero mantissa. There are two infinities - positive and negative.
-  if ((*(long*)&A & 0x7FFFFFFFFFFFFFFFLL  ) == INF_AS_LONG)
+  if ((*(int64_t*)&A & 0x7FFFFFFFFFFFFFFFLL  ) == INF_AS_LONG)
     return true;
   return false;
 }
@@ -90,9 +89,9 @@ inline bool CompareFloatingPoint::IsNan(float A){
 inline bool CompareFloatingPoint::IsNan(double A){
   // A NAN has an exponent of 2047 (shifted left 52 positions) and
   // a non-zero mantissa.
-  const long INF_AS_LONG = 0x7FF0000000000000LL;
-  long mantissa = *(long*)&A & 0xFFFFFFFFFFFFFLL;
-  if ( ( (*(long*)&A & 0x7FF0000000000000LL) == INF_AS_LONG)  &&
+  const int64_t INF_AS_LONG = 0x7FF0000000000000LL;
+  int64_t mantissa = *(int64_t*)&A & 0xFFFFFFFFFFFFFLL;
+  if ( ( (*(int64_t*)&A & 0x7FF0000000000000LL) == INF_AS_LONG)  &&
        mantissa != 0)
     return true;
   return false;
@@ -222,7 +221,7 @@ inline bool CompareFloatingPoint::Compare(double A, double B, int64_t maxUlps){
   
   // Now we can compare aLong and bLong to find out how far apart A and B
   // are.
-  int64_t longDiff = labs(aLong - bLong);
+  int64_t longDiff = llabs(aLong - bLong);
   if (longDiff <= maxUlps)
     return true;
   return false;
