@@ -46,6 +46,9 @@ void register_I3Waveform()
       #define PROPS (BinWidth)(Source)(SourceIndex)(Digitizer)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
       #undef PROPS
+      #define PROPS (Channel)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Waveform, PROPS)
+      #undef PROPS
       .add_property("time", &I3Waveform::GetStartTime, &I3Waveform::SetStartTime)
       .add_property("waveform", get_waveform_func, &I3Waveform::SetWaveform)
       .add_property("waveform_information", get_waveform_information_func, &I3Waveform::SetWaveformInformation)
