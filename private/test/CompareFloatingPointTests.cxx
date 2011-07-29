@@ -11,6 +11,8 @@ using namespace CompareFloatingPoint;
 TEST(size){
   ENSURE( sizeof(float) == 4 );
   ENSURE( sizeof(double) == 8 );
+  ENSURE( sizeof(int32_t) == 4 );
+  ENSURE( sizeof(int64_t) == 8 );
 }
 
 // Function to test the TestCompareFinal function
