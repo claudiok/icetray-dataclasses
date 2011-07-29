@@ -14,7 +14,7 @@ TEST(size){
 }
 
 // Function to test the TestCompareFinal function
-bool TestCompareFinal(float A, float B, bool expectedResult, int maxUlps = 10)
+bool TestCompareFinal(float A, float B, bool expectedResult, int32_t maxUlps = 10)
 {
     bool result = Compare(A, B, maxUlps);
     if (result != expectedResult){
@@ -23,7 +23,7 @@ bool TestCompareFinal(float A, float B, bool expectedResult, int maxUlps = 10)
 }
 
 // Function to test the TestCompareFinal function
-bool TestCompareFinal(double A, double B, bool expectedResult, long maxUlps = 10)
+bool TestCompareFinal(double A, double B, bool expectedResult, int64_t maxUlps = 10)
 {
     bool result = Compare(A, B, maxUlps);
     if (result != expectedResult){
@@ -38,7 +38,7 @@ void PrintNumbers()
 
   float f = 2.0;
   cerr<<"Offset to "<<f<<" runs from -2 to 2"<<endl;
-  for (int i = -2; i <= 2; ++i)
+  for (int32_t i = -2; i <= 2; ++i)
     cerr << ToString(f, i) <<endl;
 
   cerr<<"Zero plus 0 should still be 0"<<endl
@@ -49,14 +49,14 @@ void PrintNumbers()
       <<ToString((float)0.0, 0x80000000)<<endl;
   
   cerr<<"Offset to 0.0 runs from 3 to -3"<<endl;
-  for (int i = 3; i >= 0; --i)
+  for (int32_t i = 3; i >= 0; --i)
     cerr<<ToString( (float)0.0, i ) <<endl;
-  for (int i = 0; i <= 3; ++i)
+  for (int32_t i = 0; i <= 3; ++i)
     cerr<<ToString( (float)0.0, i + 0x80000000 )<<endl;
  
   double d = 2.0;
   cerr<<"Offset to "<<f<<" runs from -2 to 2"<<endl;
-  for (long i = -2; i <= 2; ++i)
+  for (int64_t i = -2; i <= 2; ++i)
     cerr << ToString(d, i) << endl;
 
   cerr<<"Zero plus 0 should still be 0"<<endl
@@ -66,13 +66,13 @@ void PrintNumbers()
       <<ToString((double)0.0, 0x8000000000000000LL)<<endl;
   
   cerr<<"Offset to 0.0 runs from 3 to -3"<<endl;
-  for (long i = 3; i >= 0; --i)
+  for (int64_t i = 3; i >= 0; --i)
     cerr<<ToString( (double)0.0, i ) <<endl;
-  for (long i = 0; i <= 3; ++i)
+  for (int64_t i = 0; i <= 3; ++i)
     cerr<<ToString( (double)0.0, i + 0x8000000000000000LL )<<endl;
 }
 
-TEST(compare_float_as_int){
+TEST(compare_float_as_int32_t){
 
   PrintNumbers();
 
@@ -82,7 +82,7 @@ TEST(compare_float_as_int){
   // Create various special numbers
   float negativeZero;
   // Initialize negativeZero with its integer representation
-  *(int*)&negativeZero = 0x80000000;
+  *(int32_t*)&negativeZero = 0x80000000;
   // Create a NAN
   float nan1 = sqrt(-1.0f);
   // Create a NAN a different way - should give the same NAN on
@@ -96,12 +96,12 @@ TEST(compare_float_as_int){
   // Copy one of the NANs and modify its representation.
   // This will still give a NAN, just a different one.
   float nan4 = nan3;
-  (*(int*)&nan4) += 1;
+  (*(int32_t*)&nan4) += 1;
   
   // Create a denormal by starting with zero and incrementing
   // the integer representation.
   float smallestDenormal = 0;
-  (*(int*)&smallestDenormal) += 1;
+  (*(int32_t*)&smallestDenormal) += 1;
   
   cerr<<"negativeZero " <<endl;
   cerr<<ToString(negativeZero);
@@ -165,7 +165,7 @@ TEST(compare_float_as_int){
  
 }
 
-TEST(compare_double_as_long){
+TEST(compare_double_as_int64_t){
   
   double zero1(0);
   double zero2(0);
@@ -173,7 +173,7 @@ TEST(compare_double_as_long){
  // Create various special numbers
   double negativeZeroD;
   // Initialize negativeZero with its integer representation
-  *(long*)&negativeZeroD = 0x8000000000000000LL;
+  *(int64_t*)&negativeZeroD = 0x8000000000000000LL;
   // Create a NAN
   double nan1D = sqrt(-1.0f);
   // Create a NAN a different way - should give the same NAN on
@@ -187,12 +187,12 @@ TEST(compare_double_as_long){
   // Copy one of the NANs and modify its representation.
   // This will still give a NAN, just a different one.
   double nan4D = nan3D;
-  (*(long*)&nan4D) += 1;  
+  (*(int64_t*)&nan4D) += 1;  
 
   // Create a denormal by starting with zero and incrementing
   // the integer representation.
   double smallestDenormalD = 0;
-  (*(long*)&smallestDenormalD) += 1;
+  (*(int64_t*)&smallestDenormalD) += 1;
 
 
   cerr<<"negativeZeroD " <<endl;
