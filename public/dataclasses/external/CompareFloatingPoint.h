@@ -31,7 +31,7 @@ NB:  Another thing you'll see is "Ulps" which stands for "Units in the Last Plac
 namespace CompareFloatingPoint{
 
   // Function to print a number and its representation, in hex and decimal
-  std::string ToString(double f, long offset = 0);
+  std::string ToString(double f, int64_t offset = 0);
   std::string ToString(float f, int32_t offset = 0);
   
 // Support functions and conditional compilation directives for the
