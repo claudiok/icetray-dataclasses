@@ -88,7 +88,11 @@ void register_I3Calibration()
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
       .def(copy_suite<I3DOMCalibration>())
-      #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)(FADCBaselineFit)(FrontEndImpedance)(TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)(ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)(MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
+      #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)           \
+                            (FADCBaselineFit)(FADCBeaconBaseline)(FrontEndImpedance)  \
+                            (TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)      \
+                            (ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)      \
+                            (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       #undef I3DOMCALPROPS
       // XXX Note:  These are some ugly interfaces from I3DOMCalibration that 
@@ -96,10 +100,13 @@ void register_I3Calibration()
       //     expert use, but proper pybindings here will have to wait for an
       //     updated I3DOMCalibration class  XXX 
       //      See TRAC ticket #300
-      #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
+      #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT) \
+                         (ATWDFreqFit)(ATWDGain)
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
-      .add_property("atwd_bin_calib_fit", boost::python::make_function(&I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>()), &I3DOMCalibration::SetATWDBinCalibFit)
+      .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit,
+          boost::python::return_internal_reference<1>())
+      .def("SetATWDBinCalibFit", &I3DOMCalibration::SetATWDBinCalibFit)
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
       .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
       .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)
