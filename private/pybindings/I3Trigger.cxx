@@ -44,7 +44,7 @@ object
 get_config_id_optional( const TriggerKey& tk){
   if( tk.GetConfigIDOptional() )
     return object(tk.GetConfigIDOptional().get() );
-  else object();
+  else return object();
 }
 
 TriggerKey get_trigkey(const I3Trigger& self)
