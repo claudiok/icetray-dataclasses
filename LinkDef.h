@@ -26,7 +26,6 @@
 #pragma link C++ class TriggerKey+;
 #pragma link C++ class I3Double+;
 #pragma link C++ class I3Time+;
-#pragma link C++ class I3Bool+;
 
 #endif
 
