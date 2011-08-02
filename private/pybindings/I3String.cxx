@@ -27,13 +27,6 @@
 
 using namespace boost::python;
 
-
-static std::string
-i3string_get_string(const I3String& s)
-{
-  return s.value;
-}
-
 size_t 
 i3string_get_length(const I3String& s)
 {
