@@ -165,6 +165,8 @@ void TriggerKey::load(Archive& ar, unsigned version)
     int configID;
     ar & make_nvp("ConfigID", configID);
     configID_ = configID;
+  }else{
+    configID_ = boost::optional<int>();
   }
 }
 
