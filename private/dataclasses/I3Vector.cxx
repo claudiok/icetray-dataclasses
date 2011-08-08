@@ -20,6 +20,9 @@ I3_SERIALIZABLE(I3VectorDouble);
 
 I3_SERIALIZABLE(I3VectorString);
 I3_SERIALIZABLE(I3VectorOMKey);
+I3_SERIALIZABLE(I3VectorTankKey);
+// This is just a typedef for an int:
+//I3_SERIALIZABLE(I3VectorStationKey);
 
 I3_SERIALIZABLE(I3VectorDoubleDouble);
 

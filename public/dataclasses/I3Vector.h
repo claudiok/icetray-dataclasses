@@ -14,6 +14,9 @@
 #include <vector>
 #include "dataclasses/Utility.h"
 #include "icetray/OMKey.h"
+#include "dataclasses/TankKey.h"
+#include "dataclasses/StationKey.h"
+
 template <typename T>
 struct I3Vector : public std::vector<T>, public I3FrameObject
 { 
@@ -67,6 +70,8 @@ typedef I3Vector<double> I3VectorDouble;
 typedef I3Vector<std::pair<double, double> > I3VectorDoubleDouble;
 
 typedef I3Vector<OMKey> I3VectorOMKey;
+typedef I3Vector<TankKey> I3VectorTankKey;
+typedef I3Vector<StationKey> I3VectorStationKey;
 
 I3_POINTER_TYPEDEFS(I3VectorBool);
 I3_POINTER_TYPEDEFS(I3VectorChar);
@@ -79,6 +84,8 @@ I3_POINTER_TYPEDEFS(I3VectorDouble);
 I3_POINTER_TYPEDEFS(I3VectorString);
 
 I3_POINTER_TYPEDEFS(I3VectorOMKey);
+I3_POINTER_TYPEDEFS(I3VectorTankKey);
+I3_POINTER_TYPEDEFS(I3VectorStationKey);
 I3_POINTER_TYPEDEFS(I3VectorDoubleDouble);
 
 // inconsistent... if you take this out, though, you have to be sure
