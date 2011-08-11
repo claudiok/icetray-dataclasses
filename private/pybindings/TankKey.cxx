@@ -19,7 +19,9 @@
  *  
  */
 #include <dataclasses/TankKey.h>
+#include <dataclasses/I3Vector.h>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/std_vector_indexing_suite.hpp>
 
 using namespace boost::python;
 
@@ -38,6 +40,10 @@ void register_TankKey()
     .value("TankA", TankKey::TankA)
     .value("TankB", TankKey::TankB)
     .export_values()
+    ;
+
+  class_<I3VectorTankKey, bases<I3FrameObject>, boost::shared_ptr<I3VectorTankKey> >("I3VectorTankKey")
+    .def(std_vector_indexing_suite<I3VectorTankKey >())
     ;
 }
     
