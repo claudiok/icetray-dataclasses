@@ -36,14 +36,20 @@
  */
 static const unsigned i3detectorstatus_version_ = 3;
 
+typedef std::map<OMKey, I3DOMStatus> I3DOMStatusMap;
+I3_POINTER_TYPEDEFS(I3DOMStatusMap);
+
+typedef std::map<TriggerKey, I3TriggerStatus> I3TriggerStatusMap;
+I3_POINTER_TYPEDEFS(I3TriggerStatusMap);
+
 struct I3DetectorStatus : public I3FrameObject
 {
   I3Time startTime;
   I3Time endTime;
-  std::map<OMKey, I3DOMStatus> domStatus;
+  I3DOMStatusMap domStatus;
   std::map<OMKey, TWRAOMStatus> aomStatus;
-  std::map<TriggerKey, I3TriggerStatus> triggerStatus;
-  std::map<TriggerKey, I3TriggerStatus> amandaTriggerStatus;
+  I3TriggerStatusMap triggerStatus;
+  I3TriggerStatusMap amandaTriggerStatus;
   std::string daqConfigurationName;
 
   I3DetectorStatus() {}
