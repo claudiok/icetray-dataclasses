@@ -103,6 +103,7 @@ BOOST_CLASS_VERSION(I3RecoPulseMap, 1);
  * in the frame into I3RecoPulseSeriesMaps.
  */
 
+// need to hide this from ROOT
 #ifndef __CINT__
 #include "icetray/I3Frame.h"
 
