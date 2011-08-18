@@ -103,12 +103,14 @@ BOOST_CLASS_VERSION(I3RecoPulseMap, 1);
  * in the frame into I3RecoPulseSeriesMaps.
  */
 
+// need to hide this from ROOT
+#ifndef __CINT__
 #include "icetray/I3Frame.h"
 
 template <>
 I3RecoPulseSeriesMapConstPtr
 I3Frame::Get(const std::string& name, bool quietly, void*, void*) const;
-
+#endif //__CINT__
 
 #endif //I3RECOPULSE_H_INCLUDED
 
