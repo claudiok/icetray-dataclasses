@@ -92,22 +92,26 @@ struct TauParam
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
-  TauParam()
-  {
-    P0 = NAN;
-    P1 = NAN;
-    P2 = NAN;
-    P3 = NAN;
-    P4 = NAN;
-    P5 = NAN;
-    TauFrac = NAN;
-  }
-
+	
+  TauParam():
+  P0(NAN),P1(NAN),
+  P2(NAN),P3(NAN),
+  P4(NAN),P5(NAN),
+  TauFrac(NAN){}
+  
+  TauParam(double p0, double p1, double p2, double p3, double p4, double p5, double tauFrac):
+  P0(p0),P1(p1),
+  P2(p2),P3(p3),
+  P4(p4),P5(p5),
+  TauFrac(tauFrac){}
+	
 };
 
 BOOST_CLASS_VERSION(TauParam, tauparam_version_);
 
-struct SPETemplate;
+struct SPETemplate {
+	double c, x0, b1, b2;
+};
 
 /**
  * @brief Class that stores the calibration information for a DOM
@@ -399,25 +403,93 @@ class I3DOMCalibration {
   {
     noiseRate_ = noiserate;
   }
+	
+	//On the assumption that this will be evaulated many times, we copy all data into it. 
+	//This makes the object larger but hopefully avoids extra pointer derefences
+	class DroopedSPETemplate{
+	public:
+		SPETemplate pulse;
+		struct droopParams{
+			SPETemplate pulse;
+			double tauFrac, time1, time2;
+			
+			droopParams(){}
+			droopParams(const SPETemplate& templ, 
+						double tauFrac, double time1, double time2):
+			pulse(templ),tauFrac(tauFrac),time1(time1),time2(time2){}
+		} droop;
+		bool droopy;
+		double startTime, endTime;
+		
+		DroopedSPETemplate(const SPETemplate& templ, 
+						   double startTime, double endTime):
+		pulse(templ),droopy(false),startTime(startTime),endTime(endTime){}
+		
+		DroopedSPETemplate(const SPETemplate& templ, 
+						   double startTime, double endTime,
+						   const SPETemplate& droopTempl, 
+						   double tauFrac, double time1, double time2):
+		pulse(templ),droop(droopTempl,tauFrac,time1,time2),droopy(true),
+		startTime(startTime),endTime(endTime){}
+		
+		double begin() const{
+			return(startTime);
+		}
+		double end() const{
+			return(endTime);
+		}
+		double operator()(double t){
+			if (!droopy)
+				return SPEPulseShape(t);
+			
+			double norm = (1.0 - droop.tauFrac)*droop.time1 + droop.tauFrac*droop.time2;
+			double c1 = (1.0 - droop.tauFrac)*droop.time1/norm;
+			double c2 = droop.tauFrac*droop.time2/norm;
+			
+			return SPEPulseShape(t) +
+			c1*DroopReactionShape(t, droop.time1) +
+			c2*DroopReactionShape(t, droop.time2);
+		}
+		
+	private:
+		double SPEPulseShape(double t) const {
+			return pulse.c*pow(exp(-(t - pulse.x0)/pulse.b1) + 
+			                   exp((t - pulse.x0)/pulse.b2),-8.0);
+		}
+		
+		double DroopReactionShape(double t, double tau) const{
+			return (pulse.c*droop.pulse.c/tau)*
+			  pow(exp(-(t - pulse.x0*droop.pulse.x0)/(pulse.b1*droop.pulse.b1)) + 
+			      exp((t - pulse.x0*droop.pulse.x0)/(pulse.b2*droop.pulse.b2*tau)),-8);
+		}
+	};
 
-  double DiscriminatorPulseTemplate(double time, bool droopy = false) const;
-  double ATWDPulseTemplate(double time, unsigned int channel = 0, bool droopy = false) const;
-  double FADCPulseTemplate(double time, bool droopy = false) const;
+  DroopedSPETemplate DiscriminatorPulseTemplate(bool droopy = false) const;
+  DroopedSPETemplate ATWDPulseTemplate(unsigned int channel = 0, bool droopy = false) const;
+  DroopedSPETemplate FADCPulseTemplate(bool droopy = false) const;
  
   template <class Archive>
     void serialize(Archive& ar, unsigned version);
     
+  enum ToroidType {
+    OLD_TOROID = 0,
+    NEW_TOROID = 1
+  };
+	
+  ToroidType GetToroidType() const{
+    return(toroidType_);
+  }
+	
+  void SetToroidType(ToroidType type){
+    toroidType_ = type;
+  }
+	
  private:
   static const unsigned int N_ATWD_BINS = 128;
   
   //  Number of ATWD channels is set to 3 (4th ATWD channel doesn't
   //  have DOMCAL now)
   static const unsigned int N_ATWD_CHANNELS = 3;
-  
-  enum ToroidType {
-    OLD_TOROID = 0,
-    NEW_TOROID = 1
-  };
 
   double SPEPulseTemplate(double t, const SPETemplate& templ,
     const SPETemplate& droop, bool droopy) const;

@@ -31,21 +31,6 @@ I3DOMCalibration::I3DOMCalibration()
 }
 
 /**
-   Little convenience function that gets something out of a const map
-   and throws on failure.
-*/
-template <typename K, typename V>
-static 
-const V& 
-at (const std::map<K, V>& a_map, const K& key) 
-{
-  typename std::map<K, V>::const_iterator iter = a_map.find(key);
-  if (iter == a_map.end())
-    log_fatal("Failure to find key in map.  I know this error message is vague.");
-  return iter->second;
-}
-
-/**
  * @todo  should put some checks on the channel, bin.  Make sure they are legit
  */
 const LinearFit& 
@@ -189,7 +174,7 @@ double I3DOMCalibration::GetATWDBaseline(unsigned int id,
   //apply some bounds checks
   if( (id == 0 || id ==1) && 
       ( channel == 0 || channel == 1 || channel == 2) &&
-      ( bin>=0 && bin <128) )
+      ( bin<128) )
     {
       return atwdBaselines_[id][channel][bin];
     }
@@ -206,7 +191,7 @@ void I3DOMCalibration::SetATWDBaseline(unsigned int id,
 {
   if( (id == 0 || id ==1) && 
       ( channel == 0 || channel == 1 || channel == 2) &&
-      ( bin>=0 && bin <128) )
+      ( bin<128) )
     {
       // Don't forget the domcal information is stored in correct time
       //   ordering (reversed in domcal raw data)
@@ -272,31 +257,27 @@ I3DOMCalibration::SetTauParameters(TauParam tauparameters)
  * http://www.icecube.wisc.edu/~jvansanten/docs/atwd_pulse_templates/
  */
 
-#define CAUSALITY_SHIFT -11.5	/* Nanoseconds from peak center to photon */
-
-struct SPETemplate {
-	double c, x0, b1, b2;
-};
+const double causalityShift = -11.5;	/* Nanoseconds from peak center to photon */
 
 const SPETemplate ATWDNewToroidTemplate[3] = {
 	/* Channel 0: fit from SPE pulses */
 	{
 		17.899 / 14.970753076313095,
-		-4.24 - 5 - CAUSALITY_SHIFT,
+		-4.24 - 5 - causalityShift,
 		5.5,
 		42
 	},
 	/* Channel 1: bootstrapped from channel 0 */
 	{
 		1.6581978,
-		-11.70227755 - CAUSALITY_SHIFT,
+		-11.70227755 - causalityShift,
 		5.4664884,
 		36.22319705,
 	},
 	/* Channel 2: bootstrapped from channel 1 */
 	{
 		0.70944364,
-		-10.58782492- CAUSALITY_SHIFT,
+		-10.58782492- causalityShift,
 		3.48330553,
 		42.10873959
 	},
@@ -327,21 +308,21 @@ const SPETemplate ATWDOldToroidTemplate[3] = {
 	/* Channel 0: fit from SPE pulses */
 	{
 		15.47 / 13.292860653948139,
-		-3.929 - 5 - CAUSALITY_SHIFT,
+		-3.929 - 5 - causalityShift,
 		4.7,
 		39.
 	},
 	/* Channel 1: bootstrapped from channel 0 */
 	{
 		2.07399312,
-		-10.95781298 - CAUSALITY_SHIFT,
+		-10.95781298 - causalityShift,
 		4.86019733,
 		30.74826947
 	},
 	/* Channel 2: bootstrapped from channel 1 */
 	{
 		1.35835821,
-		-9.68624195 - CAUSALITY_SHIFT,
+		-9.68624195 - causalityShift,
 		3.5016398,
 		30.96897853
 	},
@@ -370,7 +351,7 @@ const SPETemplate ATWDOldToroidDroopTemplate[3] = {
 
 const SPETemplate FADCTemplate = {
 	25.12 / 71.363940160184669,
-	61.27 - 50 - CAUSALITY_SHIFT,
+	61.27 - 50 - causalityShift,
 	30.,
 	186.
 };
@@ -382,78 +363,97 @@ const SPETemplate FADCDroopTemplate = {
 	0.04299648444652391
 };
 
-#undef CAUSALITY_SHIFT
-
-static double
-SPEPulseShape(double t, const SPETemplate &p)
+I3DOMCalibration::DroopedSPETemplate
+I3DOMCalibration::DiscriminatorPulseTemplate(bool droopy) const
 {
-	return p.c*pow(exp(-(t - p.x0)/p.b1) + exp((t - p.x0)/p.b2),-8);
-}
-
-// Distort the pulse shape to approximate the effect of
-// an exponentially-decaying reaction voltage.
-static double
-DroopReactionShape(double t, const SPETemplate &p, const SPETemplate &d,
-    double tau)
-{
-	return (p.c*d.c/tau)*pow(exp(-(t - p.x0*d.x0)/(p.b1*d.b1)) + 
-	    exp((t - p.x0*d.x0)/(p.b2*d.b2*tau)),-8);
-}
-
-double
-I3DOMCalibration::SPEPulseTemplate(double t, const SPETemplate& templ,
-    const SPETemplate& droop, bool droopy) const
-{
-	if (!droopy)
-		return SPEPulseShape(t, templ);
-	
-	double f = tauparameters_.TauFrac;
-	double t1 = droopTimeConstants_[0];
-	double t2 = droopTimeConstants_[1];
-	double norm = (1.0 - f)*t1 + f*t2;
-	double c1 = (1.0 - f)*t1/norm;
-	double c2 = f*t2/norm;
-	
-	return SPEPulseShape(t, templ) +
-	    c1*DroopReactionShape(t, templ, droop, droopTimeConstants_[0]) +
-	    c2*DroopReactionShape(t, templ, droop, droopTimeConstants_[1]);
-}
-
-// FIXME: Add a real, properly timed pulse template for the discriminator
-// For now, use ATWD0 shifted earlier by 25 ns (a made-up number)
-#define DISC_OFFSET 25.0
-double
-I3DOMCalibration::DiscriminatorPulseTemplate(double t, bool droopy) const
-{
-	switch (toroidType_) {
-		case OLD_TOROID: return SPEPulseTemplate(t + DISC_OFFSET,
-		    ATWDOldToroidTemplate[0],
-		    ATWDOldToroidDroopTemplate[0], droopy);
-		default: return SPEPulseTemplate(t + DISC_OFFSET,
-		    ATWDNewToroidTemplate[0],
-		    ATWDNewToroidDroopTemplate[0], droopy);
+	// FIXME: Add a real, properly timed pulse template for the discriminator
+	// For now, use ATWD0 shifted earlier by 25 ns (a made-up number)
+	const double discTimeOffset = 25.0;
+	SPETemplate shiftedTemplate, shiftedDroopTemplate;
+	switch (toroidType_){
+		case OLD_TOROID: 
+			shiftedTemplate = ATWDOldToroidTemplate[0];
+			shiftedTemplate.x0 -= discTimeOffset;
+			if(!droopy)
+				return(DroopedSPETemplate(shiftedTemplate,
+										  0.0, //FIXME: correct start time
+										  0.0)); //FIXME: correct end time
+			shiftedDroopTemplate = ATWDOldToroidDroopTemplate[0];
+			shiftedDroopTemplate.x0 -= discTimeOffset;
+			return(DroopedSPETemplate(shiftedTemplate,
+									  0.0, //FIXME: correct start time
+									  0.0, //FIXME: correct end time
+									  shiftedDroopTemplate,
+									  tauparameters_.TauFrac,
+									  droopTimeConstants_[0],
+									  droopTimeConstants_[1]));
+		case NEW_TOROID:
+			shiftedTemplate = ATWDNewToroidTemplate[0];
+			shiftedTemplate.x0 -= discTimeOffset;
+			if(!droopy)
+				return(DroopedSPETemplate(shiftedTemplate,
+										  0.0, //FIXME: correct start time
+										  0.0)); //FIXME: correct end time
+			shiftedDroopTemplate = ATWDNewToroidDroopTemplate[0];
+			shiftedDroopTemplate.x0 -= discTimeOffset;
+			return(DroopedSPETemplate(shiftedTemplate,
+									  0.0, //FIXME: correct start time
+									  0.0, //FIXME: correct end time
+									  shiftedDroopTemplate,
+									  tauparameters_.TauFrac,
+									  droopTimeConstants_[0],
+									  droopTimeConstants_[1]));
 	}
 }
 
-double
-I3DOMCalibration::ATWDPulseTemplate(double t, unsigned channel, bool droopy) const
+I3DOMCalibration::DroopedSPETemplate
+I3DOMCalibration::ATWDPulseTemplate(unsigned channel, bool droopy) const
 {
 	if (channel > 2)
 		log_fatal("Unknown ATWD channel %u", channel);
-	switch (toroidType_) {
-		case OLD_TOROID: return SPEPulseTemplate(t,
-		    ATWDOldToroidTemplate[channel],
-		    ATWDOldToroidDroopTemplate[channel], droopy);
-		default: return SPEPulseTemplate(t,
-		    ATWDNewToroidTemplate[channel],
-		    ATWDNewToroidDroopTemplate[channel], droopy);
+	
+	switch (toroidType_){
+		case OLD_TOROID: 
+			if(!droopy)
+				return(DroopedSPETemplate(ATWDOldToroidTemplate[channel],
+										  0.0, //FIXME: correct start time
+										  0.0)); //FIXME: correct end time
+			return(DroopedSPETemplate(ATWDOldToroidTemplate[channel],
+									  0.0, //FIXME: correct start time
+									  0.0, //FIXME: correct end time
+									  ATWDOldToroidDroopTemplate[channel],
+									  tauparameters_.TauFrac,
+									  droopTimeConstants_[0],
+									  droopTimeConstants_[1]));
+		case NEW_TOROID:
+			if(!droopy)
+				return(DroopedSPETemplate(ATWDNewToroidTemplate[channel],
+										  0.0, //FIXME: correct start time
+										  0.0)); //FIXME: correct end time
+			return(DroopedSPETemplate(ATWDNewToroidTemplate[channel],
+									  0.0, //FIXME: correct start time
+									  0.0, //FIXME: correct end time
+									  ATWDNewToroidDroopTemplate[channel],
+									  tauparameters_.TauFrac,
+									  droopTimeConstants_[0],
+									  droopTimeConstants_[1]));
 	}
 }
 
-double
-I3DOMCalibration::FADCPulseTemplate(double t, bool droopy) const
+I3DOMCalibration::DroopedSPETemplate
+I3DOMCalibration::FADCPulseTemplate(bool droopy) const
 {
-	return SPEPulseTemplate(t, FADCTemplate, FADCDroopTemplate, droopy);
+	if(!droopy)
+		return(DroopedSPETemplate(FADCTemplate,
+								  0.0, //FIXME: correct start time
+								  0.0)); //FIXME: correct end time
+	return(DroopedSPETemplate(FADCTemplate,
+							  0.0, //FIXME: correct start time
+							  0.0, //FIXME: correct end time
+							  FADCDroopTemplate,
+							  tauparameters_.TauFrac,
+							  droopTimeConstants_[0],
+							  droopTimeConstants_[1]));
 }
 
 
