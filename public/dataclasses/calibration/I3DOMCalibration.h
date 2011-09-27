@@ -92,7 +92,7 @@ struct TauParam
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
-	
+  
   TauParam():
   P0(NAN),P1(NAN),
   P2(NAN),P3(NAN),
@@ -104,13 +104,13 @@ struct TauParam
   P2(p2),P3(p3),
   P4(p4),P5(p5),
   TauFrac(tauFrac){}
-	
+  
 };
 
 BOOST_CLASS_VERSION(TauParam, tauparam_version_);
 
 struct SPETemplate {
-	double c, x0, b1, b2;
+  double c, x0, b1, b2;
 };
 
 /**
@@ -270,7 +270,6 @@ class I3DOMCalibration {
    * ATWD chip as a function of the trigger_bias DAC setting
    */
   void SetATWDFreqFit(unsigned int chip, QuadraticFit fitParams);
-			       
 
   /**
    * Get the fit paramaters for the bin calibration.
@@ -278,26 +277,26 @@ class I3DOMCalibration {
    * counts to volts.
    */
 
-  const LinearFit& GetATWDBinCalibFit(unsigned int id,	
-				      unsigned int channel,
-				      unsigned int bin) const;
+  const LinearFit& GetATWDBinCalibFit(unsigned int id,
+              unsigned int channel,
+              unsigned int bin) const;
 
   /**
    * Set parameters for conversion of count to voltage 
    * for each ATWD, each ATWD channel, and each ATWD bin.
    */
   void SetATWDBinCalibFit(unsigned int id,
-			  unsigned int channel,
-			  unsigned int bin,
-			  LinearFit fitParams);
+        unsigned int channel,
+        unsigned int bin,
+        LinearFit fitParams);
 
   /**
    *  Get/Set the version of DOMCal.
    */
- std::string GetDOMCalVersion() const
+  std::string GetDOMCalVersion() const
   {
     return domcalVersion_;
-  }	
+  }
   
   void SetDOMCalVersion(std::string version)
   {
@@ -308,17 +307,17 @@ class I3DOMCalibration {
    *  Get the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
    */
   
-  double GetATWDBaseline(unsigned int id,	
-			       unsigned int channel,
-			       unsigned int bin) const;
+  double GetATWDBaseline(unsigned int id,  
+             unsigned int channel,
+             unsigned int bin) const;
   /**
    *  Set the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
    */
   
   void SetATWDBaseline(unsigned int id,
-		       unsigned int channel,
-		       unsigned int bin,
-		       double baseval);
+           unsigned int channel,
+           unsigned int bin,
+           double baseval);
 
   /**
    * Get the average ATWD baseline in data-taking mode, as measured from beacon launches.
@@ -403,66 +402,56 @@ class I3DOMCalibration {
   {
     noiseRate_ = noiserate;
   }
-	
-	//On the assumption that this will be evaulated many times, we copy all data into it. 
-	//This makes the object larger but hopefully avoids extra pointer derefences
-	class DroopedSPETemplate{
-	public:
-		SPETemplate pulse;
-		struct droopParams{
-			SPETemplate pulse;
-			double tauFrac, time1, time2;
-			
-			droopParams(){}
-			droopParams(const SPETemplate& templ, 
-						double tauFrac, double time1, double time2):
-			pulse(templ),tauFrac(tauFrac),time1(time1),time2(time2){}
-		} droop;
-		bool droopy;
-		double startTime, endTime;
-		
-		DroopedSPETemplate(const SPETemplate& templ, 
-						   double startTime, double endTime):
-		pulse(templ),droopy(false),startTime(startTime),endTime(endTime){}
-		
-		DroopedSPETemplate(const SPETemplate& templ, 
-						   double startTime, double endTime,
-						   const SPETemplate& droopTempl, 
-						   double tauFrac, double time1, double time2):
-		pulse(templ),droop(droopTempl,tauFrac,time1,time2),droopy(true),
-		startTime(startTime),endTime(endTime){}
-		
-		double begin() const{
-			return(startTime);
-		}
-		double end() const{
-			return(endTime);
-		}
-		double operator()(double t){
-			if (!droopy)
-				return SPEPulseShape(t);
-			
-			double norm = (1.0 - droop.tauFrac)*droop.time1 + droop.tauFrac*droop.time2;
-			double c1 = (1.0 - droop.tauFrac)*droop.time1/norm;
-			double c2 = droop.tauFrac*droop.time2/norm;
-			
-			return SPEPulseShape(t) +
-			c1*DroopReactionShape(t, droop.time1) +
-			c2*DroopReactionShape(t, droop.time2);
-		}
-		
-	private:
-		double SPEPulseShape(double t) const {
-			return pulse.c*pow(exp(-(t - pulse.x0)/pulse.b1) + 
-			                   exp((t - pulse.x0)/pulse.b2),-8.0);
-		}
-		
-		double DroopReactionShape(double t, double tau) const{
-			return (pulse.c*droop.pulse.c/tau)*
-			  pow(exp(-(t - pulse.x0*droop.pulse.x0)/(pulse.b1*droop.pulse.b1)) + 
-			      exp((t - pulse.x0*droop.pulse.x0)/(pulse.b2*droop.pulse.b2*tau)),-8);
-		}
-	};
+  
+  //On the assumption that this will be evaulated many times, we copy all data into it. 
+  //This makes the object larger but hopefully avoids extra pointer derefences
+  class DroopedSPETemplate{
+  public:
+    SPETemplate pulse;
+    struct droopParams{
+      SPETemplate pulse;
+      double tauFrac, time1, time2;
+      
+      droopParams(){}
+      droopParams(const SPETemplate& templ, 
+            double tauFrac, double time1, double time2):
+      pulse(templ),tauFrac(tauFrac),time1(time1),time2(time2){}
+    } droop;
+    bool droopy;
+    
+    DroopedSPETemplate(const SPETemplate& templ):
+    pulse(templ),droopy(false){}
+    
+    DroopedSPETemplate(const SPETemplate& templ,
+               const SPETemplate& droopTempl, 
+               double tauFrac, double time1, double time2):
+    pulse(templ),droop(droopTempl,tauFrac,time1,time2),droopy(true){}
+    
+    double operator()(double t){
+      if (!droopy)
+        return SPEPulseShape(t);
+      
+      double norm = (1.0 - droop.tauFrac)*droop.time1 + droop.tauFrac*droop.time2;
+      double c1 = (1.0 - droop.tauFrac)*droop.time1/norm;
+      double c2 = droop.tauFrac*droop.time2/norm;
+      
+      return SPEPulseShape(t) +
+      c1*DroopReactionShape(t, droop.time1) +
+      c2*DroopReactionShape(t, droop.time2);
+    }
+    
+  private:
+    double SPEPulseShape(double t) const {
+      return pulse.c*pow(exp(-(t - pulse.x0)/pulse.b1) + 
+                         exp((t - pulse.x0)/pulse.b2),-8.0);
+    }
+    
+    double DroopReactionShape(double t, double tau) const{
+      return (pulse.c*droop.pulse.c/tau)*
+        pow(exp(-(t - pulse.x0*droop.pulse.x0)/(pulse.b1*droop.pulse.b1)) + 
+            exp((t - pulse.x0*droop.pulse.x0)/(pulse.b2*droop.pulse.b2*tau)),-8);
+    }
+  };
 
   DroopedSPETemplate DiscriminatorPulseTemplate(bool droopy = false) const;
   DroopedSPETemplate ATWDPulseTemplate(unsigned int channel = 0, bool droopy = false) const;
@@ -475,15 +464,15 @@ class I3DOMCalibration {
     OLD_TOROID = 0,
     NEW_TOROID = 1
   };
-	
+  
   ToroidType GetToroidType() const{
     return(toroidType_);
   }
-	
+  
   void SetToroidType(ToroidType type){
     toroidType_ = type;
   }
-	
+  
  private:
   static const unsigned int N_ATWD_BINS = 128;
   
@@ -513,11 +502,11 @@ class I3DOMCalibration {
   double fadcBeaconBaseline_;
   
   /**
-   *	FADC inherent time offset (ns)
+   *  FADC inherent time offset (ns)
    */
   double fadcDeltaT_;
   /**
-   *	Front-end impedance (Ohms)
+   *  Front-end impedance (Ohms)
    */
   double frontEndImpedance_;
   
@@ -541,7 +530,7 @@ class I3DOMCalibration {
   //map<unsigned int, QuadraticFit> atwdFreq_;
   QuadraticFit atwdFreq_[2];
   
-/**
+  /**
    * Results of the linear fit for the bin calibration
    * i.e. the values needed to convert from counts to voltage
    * for each bin in the ATWD.
@@ -567,7 +556,7 @@ class I3DOMCalibration {
    * as well. Use a std::string since we may have version numbers like
    * 6.1.2, e.g.
    */
- std::string domcalVersion_;
+  std::string domcalVersion_;
 
   /**
    *  Dumb-ol-array to hold the baseline corrections.

@@ -21,13 +21,13 @@ I3DOMCalibration::I3DOMCalibration()
     relativeDomEff_(NAN),
     noiseRate_(NAN)
 {
-	fadcBeaconBaseline_ = NAN;
-	atwdBeaconBaselines_[0][0] = NAN;
-	atwdBeaconBaselines_[0][1] = NAN;
-	atwdBeaconBaselines_[0][2] = NAN;
-	atwdBeaconBaselines_[1][0] = NAN;
-	atwdBeaconBaselines_[1][1] = NAN;
-	atwdBeaconBaselines_[1][2] = NAN;
+  fadcBeaconBaseline_ = NAN;
+  atwdBeaconBaselines_[0][0] = NAN;
+  atwdBeaconBaselines_[0][1] = NAN;
+  atwdBeaconBaselines_[0][2] = NAN;
+  atwdBeaconBaselines_[1][0] = NAN;
+  atwdBeaconBaselines_[1][1] = NAN;
+  atwdBeaconBaselines_[1][2] = NAN;
 }
 
 /**
@@ -35,40 +35,39 @@ I3DOMCalibration::I3DOMCalibration()
  */
 const LinearFit& 
 I3DOMCalibration::GetATWDBinCalibFit (unsigned int id, 
-				      unsigned int channel, 
-				      unsigned int bin) const 
-
+                                      unsigned int channel, 
+                                      unsigned int bin) const 
 {
   if(channel<N_ATWD_CHANNELS&&bin<N_ATWD_BINS)
     {
       switch(id)
-	{
-	case 0:
-	  {
-	    const LinearFit& fit = atwdBin0_[channel][bin];
-	    return fit;
-	  }
-	case 1:
-	  {
-	    const LinearFit& fit = atwdBin1_[channel][bin];
-	    return fit;
-	  }
-	default:
-	  log_fatal("Invalid ATWD Id in I3DOMCalibration::SetATWDBinCalibFit");
-	}
+      {
+      case 0:
+        {
+          const LinearFit& fit = atwdBin0_[channel][bin];
+          return fit;
+        }
+      case 1:
+        {
+          const LinearFit& fit = atwdBin1_[channel][bin];
+          return fit;
+        }
+      default:
+        log_fatal("Invalid ATWD Id in I3DOMCalibration::SetATWDBinCalibFit");
+      }
     }
   else
     {
       log_fatal("No ATWD bin calibration for requested bin %ui channel %ui",
-		bin,channel);
+    bin,channel);
     }
 }
 
 void 
 I3DOMCalibration::SetATWDBinCalibFit (unsigned int id, 
-				      unsigned int channel, 
-				      unsigned int bin,
-				      LinearFit fitParams)
+                                      unsigned int channel, 
+                                      unsigned int bin,
+                                      LinearFit fitParams)
 {
   switch(id)
     {
@@ -101,7 +100,7 @@ I3DOMCalibration::GetATWDFreqFit (unsigned int chip) const
 
 void 
 I3DOMCalibration::SetATWDFreqFit (unsigned int chip, 
-				  QuadraticFit fitParams)
+          QuadraticFit fitParams)
 {
   if(chip == 0 || chip ==1 )
     {
@@ -115,7 +114,7 @@ I3DOMCalibration::SetATWDFreqFit (unsigned int chip,
 
 void 
 I3DOMCalibration::SetATWDGain (unsigned int channel, 
-			       double gain) 
+             double gain) 
 {
   if(channel == 0 || channel == 1 || channel == 2)
     {
@@ -142,7 +141,7 @@ I3DOMCalibration::GetATWDGain (unsigned int channel) const
 
 void 
 I3DOMCalibration::SetATWDDeltaT (unsigned int chip, 
-			       double deltat) 
+                                 double deltat) 
 {
   if(chip == 0 || chip == 1)
     {
@@ -167,9 +166,9 @@ I3DOMCalibration::GetATWDDeltaT (unsigned int chip) const
     }
 }
 
-double I3DOMCalibration::GetATWDBaseline(unsigned int id,	
-		       unsigned int channel,
-		       unsigned int bin) const
+double I3DOMCalibration::GetATWDBaseline(unsigned int id,  
+                                         unsigned int channel,
+                                         unsigned int bin) const
 {
   //apply some bounds checks
   if( (id == 0 || id ==1) && 
@@ -185,9 +184,9 @@ double I3DOMCalibration::GetATWDBaseline(unsigned int id,
 }
 
 void I3DOMCalibration::SetATWDBaseline(unsigned int id,
-		       unsigned int channel,
-		       unsigned int bin,
-		       double baseval)
+                                       unsigned int channel,
+                                       unsigned int bin,
+                                       double baseval)
 {
   if( (id == 0 || id ==1) && 
       ( channel == 0 || channel == 1 || channel == 2) &&
@@ -206,41 +205,41 @@ void I3DOMCalibration::SetATWDBaseline(unsigned int id,
 double
 I3DOMCalibration::GetATWDBeaconBaseline(unsigned int id, unsigned int channel) const
 {
-	if ((id == 0 || id ==1) && 
-	    ( channel == 0 || channel == 1 || channel == 2)) {
-		return atwdBeaconBaselines_[id][channel];
-	} else {
-		log_fatal("Invalid id, channel specified for GetATWDBeaconBaseline");
-	}
+  if ((id == 0 || id ==1) && 
+      ( channel == 0 || channel == 1 || channel == 2)) {
+    return atwdBeaconBaselines_[id][channel];
+  } else {
+    log_fatal("Invalid id, channel specified for GetATWDBeaconBaseline");
+  }
 }
 
 void
 I3DOMCalibration::SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl)
 {
-	if ((id == 0 || id ==1) && 
-	    ( channel == 0 || channel == 1 || channel == 2)) {
-		atwdBeaconBaselines_[id][channel] = bsl;
-	} else {
-		log_fatal("Invalid id, channel specified for SetATWDBeaconBaseline");
-	}
+  if ((id == 0 || id ==1) && 
+      ( channel == 0 || channel == 1 || channel == 2)) {
+    atwdBeaconBaselines_[id][channel] = bsl;
+  } else {
+    log_fatal("Invalid id, channel specified for SetATWDBeaconBaseline");
+  }
 }
 
 void
 I3DOMCalibration::SetTemperature(double temperature)
 {
-	temperature_ = temperature;
-	SetTauParameters(tauparameters_);
+  temperature_ = temperature;
+  SetTauParameters(tauparameters_);
 }
 
 void
 I3DOMCalibration::SetTauParameters(TauParam tauparameters)
 {
-	tauparameters_ = tauparameters;
-	
-	droopTimeConstants_[0] = tauparameters_.P0 + tauparameters_.P1 /
-	    (1.0 + exp(-((temperature_-273.0)/tauparameters_.P2)));
-	droopTimeConstants_[1] = tauparameters_.P3 + tauparameters_.P4 /
-	    (1.0 + exp(-((temperature_-273.0)/tauparameters_.P5)));
+  tauparameters_ = tauparameters;
+  
+  droopTimeConstants_[0] = tauparameters_.P0 + tauparameters_.P1 /
+      (1.0 + exp(-((temperature_-273.0)/tauparameters_.P2)));
+  droopTimeConstants_[1] = tauparameters_.P3 + tauparameters_.P4 /
+      (1.0 + exp(-((temperature_-273.0)/tauparameters_.P5)));
 }
 
 
@@ -257,203 +256,183 @@ I3DOMCalibration::SetTauParameters(TauParam tauparameters)
  * http://www.icecube.wisc.edu/~jvansanten/docs/atwd_pulse_templates/
  */
 
-const double causalityShift = -11.5;	/* Nanoseconds from peak center to photon */
+const double causalityShift = -11.5;  /* Nanoseconds from peak center to photon */
 
 const SPETemplate ATWDNewToroidTemplate[3] = {
-	/* Channel 0: fit from SPE pulses */
-	{
-		17.899 / 14.970753076313095,
-		-4.24 - 5 - causalityShift,
-		5.5,
-		42
-	},
-	/* Channel 1: bootstrapped from channel 0 */
-	{
-		1.6581978,
-		-11.70227755 - causalityShift,
-		5.4664884,
-		36.22319705,
-	},
-	/* Channel 2: bootstrapped from channel 1 */
-	{
-		0.70944364,
-		-10.58782492- causalityShift,
-		3.48330553,
-		42.10873959
-	},
+  /* Channel 0: fit from SPE pulses */
+  {
+    17.899 / 14.970753076313095,
+    -4.24 - 5 - causalityShift,
+    5.5,
+    42
+  },
+  /* Channel 1: bootstrapped from channel 0 */
+  {
+    1.6581978,
+    -11.70227755 - causalityShift,
+    5.4664884,
+    36.22319705,
+  },
+  /* Channel 2: bootstrapped from channel 1 */
+  {
+    0.70944364,
+    -10.58782492- causalityShift,
+    3.48330553,
+    42.10873959
+  },
 };
 
 const SPETemplate ATWDNewToroidDroopTemplate[3] = {
-	{
-		-0.8644871211757873,
-		-0.39712728498041222,
-		2.2153931795324807e-08,
-		0.18265408524009966
-	},
-	{
-		-0.60714457126191879,
-		1.0708609673531526,
-		0.85478360796100328,
-		0.22084066752348605
-	},
-	{
-		-1.4510165738141465,
-		-0.29659623453192685,
-		7.5567807067886802e-09,
-		0.18209846421412432
-	},
+  {
+    -0.8644871211757873,
+    -0.39712728498041222,
+    2.2153931795324807e-08,
+    0.18265408524009966
+  },
+  {
+    -0.60714457126191879,
+    1.0708609673531526,
+    0.85478360796100328,
+    0.22084066752348605
+  },
+  {
+    -1.4510165738141465,
+    -0.29659623453192685,
+    7.5567807067886802e-09,
+    0.18209846421412432
+  },
 };
 
 const SPETemplate ATWDOldToroidTemplate[3] = {
-	/* Channel 0: fit from SPE pulses */
-	{
-		15.47 / 13.292860653948139,
-		-3.929 - 5 - causalityShift,
-		4.7,
-		39.
-	},
-	/* Channel 1: bootstrapped from channel 0 */
-	{
-		2.07399312,
-		-10.95781298 - causalityShift,
-		4.86019733,
-		30.74826947
-	},
-	/* Channel 2: bootstrapped from channel 1 */
-	{
-		1.35835821,
-		-9.68624195 - causalityShift,
-		3.5016398,
-		30.96897853
-	},
+  /* Channel 0: fit from SPE pulses */
+  {
+    15.47 / 13.292860653948139,
+    -3.929 - 5 - causalityShift,
+    4.7,
+    39.
+  },
+  /* Channel 1: bootstrapped from channel 0 */
+  {
+    2.07399312,
+    -10.95781298 - causalityShift,
+    4.86019733,
+    30.74826947
+  },
+  /* Channel 2: bootstrapped from channel 1 */
+  {
+    1.35835821,
+    -9.68624195 - causalityShift,
+    3.5016398,
+    30.96897853
+  },
 };
 
 const SPETemplate ATWDOldToroidDroopTemplate[3] = {
-	{
-		-0.87271352029389926,
-		-0.37445896923019595,
-		0.05292192451474604,
-		0.2015123032569355
-	},
-	{
-		-0.48448879003182993,
-		0.035060687415361419,
-		0.044493411456291751,
-		0.25894387769482058
-	},
-	{
-		-0.74959447466950724,
-		0.16580945347622786,
-		0.055065176963265461,
-		0.25173422056591982
-	},
+  {
+    -0.87271352029389926,
+    -0.37445896923019595,
+    0.05292192451474604,
+    0.2015123032569355
+  },
+  {
+    -0.48448879003182993,
+    0.035060687415361419,
+    0.044493411456291751,
+    0.25894387769482058
+  },
+  {
+    -0.74959447466950724,
+    0.16580945347622786,
+    0.055065176963265461,
+    0.25173422056591982
+  },
 };
 
 const SPETemplate FADCTemplate = {
-	25.12 / 71.363940160184669,
-	61.27 - 50 - causalityShift,
-	30.,
-	186.
+  25.12 / 71.363940160184669,
+  61.27 - 50 - causalityShift,
+  30.,
+  186.
 };
 
 const SPETemplate FADCDroopTemplate = {
-	-2.8837584956162883,
-	0.57888025049064207,
-	0.81965713180496758,
-	0.04299648444652391
+  -2.8837584956162883,
+  0.57888025049064207,
+  0.81965713180496758,
+  0.04299648444652391
 };
 
 I3DOMCalibration::DroopedSPETemplate
 I3DOMCalibration::DiscriminatorPulseTemplate(bool droopy) const
 {
-	// FIXME: Add a real, properly timed pulse template for the discriminator
-	// For now, use ATWD0 shifted earlier by 25 ns (a made-up number)
-	const double discTimeOffset = 25.0;
-	SPETemplate shiftedTemplate, shiftedDroopTemplate;
-	switch (toroidType_){
-		case OLD_TOROID: 
-			shiftedTemplate = ATWDOldToroidTemplate[0];
-			shiftedTemplate.x0 -= discTimeOffset;
-			if(!droopy)
-				return(DroopedSPETemplate(shiftedTemplate,
-										  0.0, //FIXME: correct start time
-										  0.0)); //FIXME: correct end time
-			shiftedDroopTemplate = ATWDOldToroidDroopTemplate[0];
-			shiftedDroopTemplate.x0 -= discTimeOffset;
-			return(DroopedSPETemplate(shiftedTemplate,
-									  0.0, //FIXME: correct start time
-									  0.0, //FIXME: correct end time
-									  shiftedDroopTemplate,
-									  tauparameters_.TauFrac,
-									  droopTimeConstants_[0],
-									  droopTimeConstants_[1]));
-		case NEW_TOROID:
-			shiftedTemplate = ATWDNewToroidTemplate[0];
-			shiftedTemplate.x0 -= discTimeOffset;
-			if(!droopy)
-				return(DroopedSPETemplate(shiftedTemplate,
-										  0.0, //FIXME: correct start time
-										  0.0)); //FIXME: correct end time
-			shiftedDroopTemplate = ATWDNewToroidDroopTemplate[0];
-			shiftedDroopTemplate.x0 -= discTimeOffset;
-			return(DroopedSPETemplate(shiftedTemplate,
-									  0.0, //FIXME: correct start time
-									  0.0, //FIXME: correct end time
-									  shiftedDroopTemplate,
-									  tauparameters_.TauFrac,
-									  droopTimeConstants_[0],
-									  droopTimeConstants_[1]));
-	}
+  // FIXME: Add a real, properly timed pulse template for the discriminator
+  // For now, use ATWD0 shifted earlier by 25 ns (a made-up number)
+  const double discTimeOffset = 25.0;
+  SPETemplate shiftedTemplate, shiftedDroopTemplate;
+  switch (toroidType_){
+    case OLD_TOROID: 
+      shiftedTemplate = ATWDOldToroidTemplate[0];
+      shiftedTemplate.x0 -= discTimeOffset;
+      if(!droopy)
+        return(DroopedSPETemplate(shiftedTemplate));
+      shiftedDroopTemplate = ATWDOldToroidDroopTemplate[0];
+      shiftedDroopTemplate.x0 -= discTimeOffset;
+      return(DroopedSPETemplate(shiftedTemplate,
+                                shiftedDroopTemplate,
+                                tauparameters_.TauFrac,
+                                droopTimeConstants_[0],
+                                droopTimeConstants_[1]));
+    case NEW_TOROID:
+      shiftedTemplate = ATWDNewToroidTemplate[0];
+      shiftedTemplate.x0 -= discTimeOffset;
+      if(!droopy)
+        return(DroopedSPETemplate(shiftedTemplate));
+      shiftedDroopTemplate = ATWDNewToroidDroopTemplate[0];
+      shiftedDroopTemplate.x0 -= discTimeOffset;
+      return(DroopedSPETemplate(shiftedTemplate,
+                                shiftedDroopTemplate,
+                                tauparameters_.TauFrac,
+                                droopTimeConstants_[0],
+                                droopTimeConstants_[1]));
+  }
 }
 
 I3DOMCalibration::DroopedSPETemplate
 I3DOMCalibration::ATWDPulseTemplate(unsigned channel, bool droopy) const
 {
-	if (channel > 2)
-		log_fatal("Unknown ATWD channel %u", channel);
-	
-	switch (toroidType_){
-		case OLD_TOROID: 
-			if(!droopy)
-				return(DroopedSPETemplate(ATWDOldToroidTemplate[channel],
-										  0.0, //FIXME: correct start time
-										  0.0)); //FIXME: correct end time
-			return(DroopedSPETemplate(ATWDOldToroidTemplate[channel],
-									  0.0, //FIXME: correct start time
-									  0.0, //FIXME: correct end time
-									  ATWDOldToroidDroopTemplate[channel],
-									  tauparameters_.TauFrac,
-									  droopTimeConstants_[0],
-									  droopTimeConstants_[1]));
-		case NEW_TOROID:
-			if(!droopy)
-				return(DroopedSPETemplate(ATWDNewToroidTemplate[channel],
-										  0.0, //FIXME: correct start time
-										  0.0)); //FIXME: correct end time
-			return(DroopedSPETemplate(ATWDNewToroidTemplate[channel],
-									  0.0, //FIXME: correct start time
-									  0.0, //FIXME: correct end time
-									  ATWDNewToroidDroopTemplate[channel],
-									  tauparameters_.TauFrac,
-									  droopTimeConstants_[0],
-									  droopTimeConstants_[1]));
-	}
+  if (channel > 2)
+    log_fatal("Unknown ATWD channel %u", channel);
+  
+  switch (toroidType_){
+    case OLD_TOROID: 
+      if(!droopy)
+        return(DroopedSPETemplate(ATWDOldToroidTemplate[channel]));
+      return(DroopedSPETemplate(ATWDOldToroidTemplate[channel],
+                                ATWDOldToroidDroopTemplate[channel],
+                                tauparameters_.TauFrac,
+                                droopTimeConstants_[0],
+                                droopTimeConstants_[1]));
+    case NEW_TOROID:
+      if(!droopy)
+        return(DroopedSPETemplate(ATWDNewToroidTemplate[channel]));
+      return(DroopedSPETemplate(ATWDNewToroidTemplate[channel],
+                                ATWDNewToroidDroopTemplate[channel],
+                                tauparameters_.TauFrac,
+                                droopTimeConstants_[0],
+                                droopTimeConstants_[1]));
+  }
 }
 
 I3DOMCalibration::DroopedSPETemplate
 I3DOMCalibration::FADCPulseTemplate(bool droopy) const
 {
-	if(!droopy)
-		return(DroopedSPETemplate(FADCTemplate,
-								  0.0, //FIXME: correct start time
-								  0.0)); //FIXME: correct end time
-	return(DroopedSPETemplate(FADCTemplate,
-							  0.0, //FIXME: correct start time
-							  0.0, //FIXME: correct end time
-							  FADCDroopTemplate,
-							  tauparameters_.TauFrac,
-							  droopTimeConstants_[0],
-							  droopTimeConstants_[1]));
+  if(!droopy)
+    return(DroopedSPETemplate(FADCTemplate));
+  return(DroopedSPETemplate(FADCTemplate,
+                            FADCDroopTemplate,
+                            tauparameters_.TauFrac,
+                            droopTimeConstants_[0],
+                            droopTimeConstants_[1]));
 }
 
 
@@ -528,17 +507,17 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("ampGains",ampGains_temp);
       std::map<unsigned int, double>::iterator iter = ampGains_temp.begin();
       while(iter != ampGains_temp.end())
-	{
-	  if(iter->first < 3)
-	    {
-	      ampGains_[iter->first] = iter->second;
-	    }
-	  else
-	    {
-	      log_fatal("Invalid channel for ampGains in I3DOMCalibration::serialize");
-	    }
-          iter++;
-	}
+      {
+        if(iter->first < 3)
+          {
+            ampGains_[iter->first] = iter->second;
+          }
+        else
+          {
+            log_fatal("Invalid channel for ampGains in I3DOMCalibration::serialize");
+          }
+              iter++;
+      }
     }
   else
     {
@@ -551,17 +530,17 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("atwdFreq",atwdFreq_temp);
       std::map<unsigned int, QuadraticFit>::iterator iter = atwdFreq_temp.begin();
       while(iter !=  atwdFreq_temp.end())
-	{
-	  if(iter->first < 2)
-	    {
-	      atwdFreq_[iter->first] = iter->second;
-	    }
-	  else
-	    {
-	      log_fatal("Invalid chip number for atwdFreq in I3DOMCalibration::serialize");
-	    }
-          iter++;
-	}
+      {
+        if(iter->first < 2)
+          {
+            atwdFreq_[iter->first] = iter->second;
+          }
+        else
+          {
+            log_fatal("Invalid chip number for atwdFreq in I3DOMCalibration::serialize");
+          }
+              iter++;
+      }
     }
   else
     {
@@ -578,58 +557,58 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       //first iterate over the outer map, this is over all channels (0-2)
       std::map<unsigned, std::map<unsigned, LinearFit> >::iterator iter_nch = atwdBin0_temp.begin();
       while(iter_nch != atwdBin0_temp.end())
-	{
-	  if(iter_nch->first <3)
-	    {
-	      // now for each channel, iterate over all bins (0-127)
-	      std::map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
-	      while(iter_nbin != iter_nch->second.end() )
-		{
-		  if(iter_nbin->first<128)
-		    {
-		      atwdBin0_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
-		    }
-		  else
-		    {
-		      log_fatal("Invalid bin for atwdBin_ in I3DOMCalibration::serialize");
-		    }
-                  iter_nbin++;
-		}
-	    }
-	  else
-	    {
-	      log_fatal("Invalid channel for atwdBin_ in I3DOMCalibration::serialize");
-	    }
-          iter_nch++;
-	}
+      {
+        if(iter_nch->first <3)
+          {
+            // now for each channel, iterate over all bins (0-127)
+            std::map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
+            while(iter_nbin != iter_nch->second.end() )
+        {
+          if(iter_nbin->first<128)
+            {
+              atwdBin0_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
+            }
+          else
+            {
+              log_fatal("Invalid bin for atwdBin_ in I3DOMCalibration::serialize");
+            }
+                      iter_nbin++;
+        }
+          }
+        else
+          {
+            log_fatal("Invalid channel for atwdBin_ in I3DOMCalibration::serialize");
+          }
+              iter_nch++;
+      }
       //  For atwdBin1:
       //first iterate over the outer map, this is over all channels (0-2)
       iter_nch = atwdBin1_temp.begin();
       while(iter_nch != atwdBin1_temp.end())
-	{
-	  if(iter_nch->first <3)
-	    {
-	      // now for each channel, iterate over all bins (0-127)
-	      std::map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
-	      while(iter_nbin != iter_nch->second.end() )
-		{
-		  if(iter_nbin->first<128)
-		    {
-		      atwdBin1_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
-		    }
-		  else
-		    {
-		      log_fatal("Invalid bin for atwdBin_ in I3DOMCalibration::serialize");
-		    }
-                  iter_nbin++;
-		}
-	    }
-	  else
-	    {
-	      log_fatal("Invalid channel for atwdBin_ in I3DOMCalibration::serialize");
-	    }
-          iter_nch++;
-	}
+      {
+        if(iter_nch->first <3)
+          {
+            // now for each channel, iterate over all bins (0-127)
+            std::map<unsigned, LinearFit>::iterator iter_nbin = iter_nch->second.begin();
+            while(iter_nbin != iter_nch->second.end() )
+        {
+          if(iter_nbin->first<128)
+            {
+              atwdBin1_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
+            }
+          else
+            {
+              log_fatal("Invalid bin for atwdBin_ in I3DOMCalibration::serialize");
+            }
+                      iter_nbin++;
+        }
+          }
+        else
+          {
+            log_fatal("Invalid channel for atwdBin_ in I3DOMCalibration::serialize");
+          }
+              iter_nch++;
+      }
     }
   else
     {
