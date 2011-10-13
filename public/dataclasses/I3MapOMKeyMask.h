@@ -103,7 +103,7 @@ private:
 		
 		inline bool get(const unsigned) const;
 		unsigned sum() const;
-		unsigned capacity() const;
+		size_t size() const;
 		
 		friend class boost::serialization::access;
 		

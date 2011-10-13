@@ -133,6 +133,9 @@ TEST(ApplyAutomagically)
 	
 	masked = frame.Get<I3RecoPulseSeriesMapConstPtr>("nonexistant");
 	ENSURE(!masked, "I3Frame::Get() returns a null pointer");
+
+	/* Now, ensure that nothing funny happens when we get it as a FrameObject */
+	I3FrameObjectConstPtr fop = frame.Get<I3FrameObjectConstPtr>("foomask", true);
 }
 
 TEST(UnsetAllForOM)

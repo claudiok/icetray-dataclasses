@@ -361,6 +361,10 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 	
 	if (!source)
 		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
+	if (source->size() != omkey_mask_.size())
+		log_fatal("This mask was made from a map with %zu keys, but "
+		    "the map named '%s' %zu keys.", omkey_mask_.size(),
+		    key_.c_str(), source->size());
 	
 	masked_ = boost::make_shared<I3RecoPulseSeriesMap>();
 	
@@ -382,6 +386,13 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 		I3RecoPulseSeriesMap::mapped_type target_vec;
 		I3RecoPulseSeriesMap::mapped_type::const_iterator source_vit =
 		    source_it->second.begin();
+
+		if (source_it->second.size() != list_it->size())
+			log_fatal("The mask for OM(%d,%d) has %zu entries, but source "
+			    "pulse vector has %zu entries!", source_it->first.GetString(),
+			    source_it->first.GetOM(), list_it->size(),
+			    source_it->second.size());
+
 		for ( ; source_vit != source_it->second.end(); source_vit++, idx++)
 			if (list_it->get(idx))
 				target_vec.push_back(*source_vit);
@@ -514,6 +525,12 @@ I3RecoPulseSeriesMapMask::bitmask::sum() const
 				sum++;
 	
 	return sum;
+}
+
+size_t
+I3RecoPulseSeriesMapMask::bitmask::size() const
+{
+	return 8*sizeof(mask_t)*size_ - padding_;
 }
 
 template <class Archive>
