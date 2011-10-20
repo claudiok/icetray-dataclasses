@@ -35,14 +35,21 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
 			// distinguishable. The I3Waveform::Source enum changed
 			// in r71620, so we hard-code the former values.
 			flags_ = 0;
-			if (sourceindex == 0) // I3Waveform::ATWD
-				flags_ |= I3RecoPulse::ATWD;
-			else if (sourceindex == 10) // I3Waveform::FADC
-				flags_ |= I3RecoPulse::FADC;
-			if (sourceindex == 50) // I3Waveform::SLC
-				flags_ |= I3RecoPulse::FADC;
-			else
-				flags_ |= I3RecoPulse::LC;
+			switch (sourceindex) {
+				case I3Waveform::ATWD:
+					flags_ |= I3RecoPulse::ATWD | I3RecoPulse::LC;
+					break;
+				case 10:
+				case I3Waveform::FADC:
+					flags_ |= I3RecoPulse::FADC | I3RecoPulse::LC;
+					break;
+				case 50:
+				case I3Waveform::SLC:
+					flags_ |= I3RecoPulse::FADC;
+					break;
+				default:
+					break;
+			}
 		}
 	} else {
 		ar & make_nvp("Time", time_);
