@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3RecoPulse.h>
+#include <icetray/I3Frame.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
@@ -29,6 +30,14 @@
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
+
+static I3RecoPulseSeriesMapPtr
+from_frame(I3Frame &frame, const std::string &name)
+{
+	I3RecoPulseSeriesMapConstPtr rpsm =
+	    frame.Get<I3RecoPulseSeriesMapConstPtr>(name);
+	return boost::const_pointer_cast<I3RecoPulseSeriesMap>(rpsm);
+}
 
 void register_I3RecoPulse()
 {
@@ -41,6 +50,10 @@ void register_I3RecoPulse()
   class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
     .def(std_map_indexing_suite<I3RecoPulseSeriesMap>())
     .def(copy_suite<I3RecoPulseSeriesMap>())
+    .def("from_frame", &from_frame, args("frame", "key"),
+        "Get an I3RecoPulseSeriesMap from the frame, performing any necessary "
+        "format conversions behind the scenes.")
+    .staticmethod("from_frame")
     .def("__str__", &stream_to_string<I3RecoPulseSeriesMap>)
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
