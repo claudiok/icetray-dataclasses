@@ -37,9 +37,11 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
 			flags_ = 0;
 			if (sourceindex == 0) // I3Waveform::ATWD
 				flags_ |= I3RecoPulse::ATWD;
-			else
+			else if (sourceindex == 10) // I3Waveform::FADC
 				flags_ |= I3RecoPulse::FADC;
-			if (sourceindex != 50) // I3Waveform::SLC
+			if (sourceindex == 50) // I3Waveform::SLC
+				flags_ |= I3RecoPulse::FADC;
+			else
 				flags_ |= I3RecoPulse::LC;
 		}
 	} else {
