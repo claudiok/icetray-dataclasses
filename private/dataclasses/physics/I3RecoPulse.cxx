@@ -32,14 +32,24 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
 			// Try to guess what this was supposed to be,
 			// canonicalizing NFE's definition. NFE and FE pulses
 			// used different meanings here, which are not actually
-			// distinguishable.
+			// distinguishable. The I3Waveform::Source enum changed
+			// in r71620, so we hard-code the former values.
 			flags_ = 0;
-			if (sourceindex == I3Waveform::ATWD)
-				flags_ |= I3RecoPulse::ATWD;
-			if (sourceindex == I3Waveform::FADC)
-				flags_ |= I3RecoPulse::FADC;
-			if (sourceindex != I3Waveform::SLC)
-				flags_ |= I3RecoPulse::LC;
+			switch (sourceindex) {
+				case I3Waveform::ATWD:
+					flags_ |= I3RecoPulse::ATWD | I3RecoPulse::LC;
+					break;
+				case 10:
+				case I3Waveform::FADC:
+					flags_ |= I3RecoPulse::FADC | I3RecoPulse::LC;
+					break;
+				case 50:
+				case I3Waveform::SLC:
+					flags_ |= I3RecoPulse::FADC;
+					break;
+				default:
+					break;
+			}
 		}
 	} else {
 		ar & make_nvp("Time", time_);
