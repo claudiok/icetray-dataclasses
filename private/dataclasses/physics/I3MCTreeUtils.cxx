@@ -278,6 +278,75 @@ I3MCTreeUtils::GetMostEnergeticInIceCascade(I3MCTreeConstPtr t)
   return GetMostEnergeticInIceCascade(*t);
 }
 
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticMuon(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return = t.end();
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy &&
+        (iter->GetType()==I3Particle::MuPlus||iter->GetType()==I3Particle::MuMinus))
+      {
+        maxenergy = iter->GetEnergy();
+        iter_return = iter;
+      }
+  }
+  
+  if (maxenergy > 0)                                                                                        
+    return iter_return;
+  else                                                                                                    
+    return NULL;                                                                                            
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticMuon(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticMuon(*t);
+}
+
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNeutrino(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return = t.end();
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && iter->IsNeutrino()){
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  if (maxenergy > 0)
+    return iter_return;
+  else
+    return NULL;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNeutrino(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticNeutrino(*t);
+}
+
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNucleous(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter, iter_return = t.end();
+  for (iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && (iter->GetType()==I3Particle::PPlus || iter->GetType()==I3Particle::PMinus || (iter->GetType()>=I3Particle::He4Nucleus && iter->GetType()<= I3Particle::Fe56Nucleus))){
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  if (maxenergy > 0)
+    return iter_return;
+  else
+    return NULL;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNucleous(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticNucleous(*t);
+}
+
+
 //------------------------------
 
 const std::vector<I3Particle> 
@@ -371,3 +440,4 @@ I3ParticlePtr
 I3MCTreeUtils::GetPrimary(I3MCTreeConstPtr t, const I3Particle& p){
   return GetPrimary(*t,p);
 }
+
