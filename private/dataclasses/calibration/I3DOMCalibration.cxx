@@ -394,6 +394,8 @@ I3DOMCalibration::DiscriminatorPulseTemplate(bool droopy) const
                                 tauparameters_.TauFrac,
                                 droopTimeConstants_[0],
                                 droopTimeConstants_[1]));
+    default:
+      log_fatal("Unknown toroid type %d", toroidType_);
   }
 }
 
@@ -420,6 +422,8 @@ I3DOMCalibration::ATWDPulseTemplate(unsigned channel, bool droopy) const
                                 tauparameters_.TauFrac,
                                 droopTimeConstants_[0],
                                 droopTimeConstants_[1]));
+    default:
+      log_fatal("Unknown toroid type %d", toroidType_);
   }
 }
 

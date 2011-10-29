@@ -590,7 +590,7 @@ I3SuperDST::FindStartTime(const I3RecoPulseSeriesMap &pmap)
 namespace I3SuperDSTSerialization {
 
 struct DOMHeader {
-#ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
+#if BYTE_ORDER == BIG_ENDIAN
 	uint16_t slop      : I3SUPERDST_SLOP_BITS_V0; /* most significant 3 bits of first HLC time */
 	uint16_t dom_id    : I3SUPERDST_DOMID_BITS_V0;
 #else

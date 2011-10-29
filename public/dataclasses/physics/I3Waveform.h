@@ -43,7 +43,7 @@ class I3Waveform
 #ifndef __CINT__
   union SourceCompound {
     struct {
-      #ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
+      #if BYTE_ORDER == BIG_ENDIAN
       uint8_t slop   : 3;
       uint8_t hlc    : 1;
       uint8_t id     : 1;
