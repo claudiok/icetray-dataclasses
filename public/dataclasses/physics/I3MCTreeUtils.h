@@ -129,10 +129,8 @@ namespace I3MCTreeUtils
   I3MCTree::iterator GetMostEnergeticMuon(const I3MCTree&);
   I3MCTree::iterator GetMostEnergeticMuon(I3MCTreeConstPtr);
 
-  I3MCTree::iterator GetMostEnergeticNucleous(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticNucleous(I3MCTreeConstPtr);
-
-
+  I3MCTree::iterator GetMostEnergeticNucleus(const I3MCTree&);
+  I3MCTree::iterator GetMostEnergeticNucleus(I3MCTreeConstPtr);
 
 
   /**

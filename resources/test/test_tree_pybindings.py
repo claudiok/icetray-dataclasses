@@ -27,6 +27,9 @@ def test_tree(tree):
     print tree.is_charged_current 
     print tree.is_glashow_resonance 
     print tree.check_neutrino
+    print tree.most_energetic_muon
+    print tree.most_energetic_nucleus
+    print tree.most_energetic_neutrino
     
     # these have to remain functions since they
     # have multiple solutions for a single tree and

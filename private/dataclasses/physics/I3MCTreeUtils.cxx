@@ -326,7 +326,7 @@ I3MCTreeUtils::GetMostEnergeticNeutrino(I3MCTreeConstPtr t){
 
 
 I3MCTree::iterator
-I3MCTreeUtils::GetMostEnergeticNucleous(const I3MCTree& t){
+I3MCTreeUtils::GetMostEnergeticNucleus(const I3MCTree& t){
   double maxenergy = 0.;
   I3MCTree::iterator iter, iter_return = t.end();
   for (iter=t.begin(); iter!=t.end(); ++iter) {
@@ -342,8 +342,8 @@ I3MCTreeUtils::GetMostEnergeticNucleous(const I3MCTree& t){
 }
 
 I3MCTree::iterator
-I3MCTreeUtils::GetMostEnergeticNucleous(I3MCTreeConstPtr t){
-  return I3MCTreeUtils::GetMostEnergeticNucleous(*t);
+I3MCTreeUtils::GetMostEnergeticNucleus(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticNucleus(*t);
 }
 
 

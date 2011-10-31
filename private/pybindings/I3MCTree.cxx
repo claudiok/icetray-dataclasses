@@ -86,6 +86,7 @@ void register_I3MCTree()
 	    )
 	   )
       #define PROPS (MostEnergeticPrimary)(MostEnergeticCascade)	\
+	  (MostEnergeticNeutrino)(MostEnergeticNucleus)(MostEnergeticMuon) \
 	(MostEnergeticInIce)(MostEnergetic)			\
 	  (MostEnergeticTrack)(InIce)(Primaries) \
 	  (MostEnergeticStochastic)		 \

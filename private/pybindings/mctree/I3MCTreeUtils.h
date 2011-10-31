@@ -75,6 +75,7 @@ inline boost::shared_ptr<I3Particle> GetMostEnergeticTrack(I3MCTree* tree)
       return I3ParticlePtr(new I3Particle(*itr));
     }
 }
+
 inline boost::shared_ptr<I3Particle> GetMostEnergeticCascade(I3MCTree* tree)
 {
   I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticCascade(*tree);
@@ -86,6 +87,33 @@ inline boost::shared_ptr<I3Particle> GetMostEnergeticCascade(I3MCTree* tree)
     {
       return I3ParticlePtr(new I3Particle(*itr));
     }
+}
+
+inline I3ParticlePtr GetMostEnergeticNeutrino(I3MCTreeConstPtr tree){
+  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticNeutrino(tree);
+  if ( itr == tree->end() ){
+      return I3ParticlePtr();
+  }else{
+      return I3ParticlePtr(new I3Particle(*itr));
+  }
+}
+
+inline I3ParticlePtr GetMostEnergeticNucleus(I3MCTreeConstPtr tree){
+  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticNucleus(tree);
+  if ( itr == tree->end() ){
+      return I3ParticlePtr();
+  }else{
+      return I3ParticlePtr(new I3Particle(*itr));
+  }
+}
+
+inline I3ParticlePtr GetMostEnergeticMuon(I3MCTreeConstPtr tree){
+  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticMuon(tree);
+  if ( itr == tree->end() ){
+      return I3ParticlePtr();
+  }else{
+      return I3ParticlePtr(new I3Particle(*itr));
+  }
 }
 
 std::vector<I3Particle> GetInIce(I3MCTreePtr t){
