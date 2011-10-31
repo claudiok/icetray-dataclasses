@@ -82,7 +82,9 @@ TEST(compare_float_as_int32_t){
   // Create various special numbers
   float negativeZero;
   // Initialize negativeZero with its integer representation
-  *(int32_t*)&negativeZero = 0x80000000;
+  int stub;
+  stub = 0x80000000;
+  memcpy(&negativeZero, &stub, sizeof(stub));
   // Create a NAN
   float nan1 = sqrt(-1.0f);
   // Create a NAN a different way - should give the same NAN on
@@ -96,12 +98,16 @@ TEST(compare_float_as_int32_t){
   // Copy one of the NANs and modify its representation.
   // This will still give a NAN, just a different one.
   float nan4 = nan3;
-  (*(int32_t*)&nan4) += 1;
+  memcpy(&stub, &nan4, sizeof(stub));
+  stub += 1;
+  memcpy(&nan4, &stub, sizeof(stub));
   
   // Create a denormal by starting with zero and incrementing
   // the integer representation.
   float smallestDenormal = 0;
-  (*(int32_t*)&smallestDenormal) += 1;
+  memcpy(&stub, &smallestDenormal, sizeof(stub));
+  stub += 1;
+  memcpy(&smallestDenormal, &stub, sizeof(stub));
   
   cerr<<"negativeZero " <<endl;
   cerr<<ToString(negativeZero);
@@ -169,11 +175,13 @@ TEST(compare_double_as_int64_t){
   
   double zero1(0);
   double zero2(0);
+  uint64_t stub;
 
  // Create various special numbers
   double negativeZeroD;
   // Initialize negativeZero with its integer representation
-  *(int64_t*)&negativeZeroD = 0x8000000000000000LL;
+  stub = 0x8000000000000000LL;
+  memcpy(&negativeZeroD, &stub, sizeof(stub));
   // Create a NAN
   double nan1D = sqrt(-1.0f);
   // Create a NAN a different way - should give the same NAN on
@@ -187,12 +195,16 @@ TEST(compare_double_as_int64_t){
   // Copy one of the NANs and modify its representation.
   // This will still give a NAN, just a different one.
   double nan4D = nan3D;
-  (*(int64_t*)&nan4D) += 1;  
+  memcpy(&stub, &nan4D, sizeof(stub));
+  stub += 1;
+  memcpy(&nan4D, &stub, sizeof(stub));
 
   // Create a denormal by starting with zero and incrementing
   // the integer representation.
   double smallestDenormalD = 0;
-  (*(int64_t*)&smallestDenormalD) += 1;
+  memcpy(&stub, &smallestDenormalD, sizeof(stub));
+  stub += 1;
+  memcpy(&smallestDenormalD, &stub, sizeof(stub));
 
 
   cerr<<"negativeZeroD " <<endl;
