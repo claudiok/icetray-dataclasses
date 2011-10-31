@@ -61,7 +61,9 @@ inline bool CompareFloatingPoint::IsInfinite(float A){
   
   // An infinity has an exponent of 255 (shift left 23 positions) and
   // a zero mantissa. There are two infinities - positive and negative.
-  if ((*(int32_t*)&A & 0x7FFFFFFF) == INF_AS_INT)
+  int32_t aInt;
+  memcpy( &aInt, &A, sizeof(int32_t));
+  if ((aInt & 0x7FFFFFFF) == INF_AS_INT)
     return true;
   return false;
 }
@@ -71,7 +73,9 @@ inline bool CompareFloatingPoint::IsInfinite(double A){
   const int64_t INF_AS_LONG = 0x7FF0000000000000LL;
   // An infinity has an exponent of 2047 (shift left 52 positions) and
   // a zero mantissa. There are two infinities - positive and negative.
-  if ((*(int64_t*)&A & 0x7FFFFFFFFFFFFFFFLL  ) == INF_AS_LONG)
+  int64_t aInt;
+  memcpy( &aInt, &A, sizeof(int64_t) );
+  if (( aInt & 0x7FFFFFFFFFFFFFFFLL  ) == INF_AS_LONG)
     return true;
   return false;
 }
@@ -79,8 +83,10 @@ inline bool CompareFloatingPoint::IsInfinite(double A){
 inline bool CompareFloatingPoint::IsNan(float A){
   // A NAN has an exponent of 255 (shifted left 23 positions) and
   // a non-zero mantissa.
-  int32_t exp = *(int32_t*)&A & 0x7F800000;
-  int32_t mantissa = *(int32_t*)&A & 0x007FFFFF;
+  int32_t aInt;
+  memcpy( &aInt, &A, sizeof(int32_t) );
+  int32_t exp = aInt & 0x7F800000;
+  int32_t mantissa = aInt & 0x007FFFFF;
   if (exp == 0x7F800000 && mantissa != 0)
     return true;
   return false;
@@ -90,8 +96,10 @@ inline bool CompareFloatingPoint::IsNan(double A){
   // A NAN has an exponent of 2047 (shifted left 52 positions) and
   // a non-zero mantissa.
   const int64_t INF_AS_LONG = 0x7FF0000000000000LL;
-  int64_t mantissa = *(int64_t*)&A & 0xFFFFFFFFFFFFFLL;
-  if ( ( (*(int64_t*)&A & 0x7FF0000000000000LL) == INF_AS_LONG)  &&
+  int64_t aInt;
+  memcpy( &aInt, &A, sizeof(int64_t) );
+  int64_t mantissa = aInt & 0xFFFFFFFFFFFFFLL;
+  if ( ( ( aInt & 0x7FF0000000000000LL) == INF_AS_LONG)  &&
        mantissa != 0)
     return true;
   return false;
@@ -99,12 +107,16 @@ inline bool CompareFloatingPoint::IsNan(double A){
 
 inline int32_t CompareFloatingPoint::Sign(float A){
   // The sign bit of a number is the high bit.
-  return (*(int32_t*)&A) & 0x80000000;
+  int32_t aInt;
+  memcpy( &aInt, &A, sizeof(int32_t) );  
+  return aInt & 0x80000000;
 }
 
 inline int64_t CompareFloatingPoint::Sign(double A){
   // The sign bit of a number is the high bit.
-  return (*(int64_t*)&A) & 0x8000000000000000LL;
+  int64_t aInt;
+  memcpy( &aInt, &A, sizeof(int64_t) );
+  return aInt & 0x8000000000000000LL;
 }
 
 // This is the 'final' version of the AlmostEqualUlps function.
@@ -150,12 +162,14 @@ inline bool CompareFloatingPoint::Compare(float A, float B, int32_t maxUlps){
     return A == B;
 #endif
   
-  int32_t aInt = *(int32_t*)&A;
+  int32_t aInt;
+  memcpy( &aInt, &A, sizeof(int32_t) );
   // Make aInt lexicographically ordered as a twos-complement int
   if (aInt < 0)
     aInt = 0x80000000 - aInt;
   // Make bInt lexicographically ordered as a twos-complement int
-  int32_t bInt = *(int32_t*)&B;
+  int32_t bInt;
+  memcpy( &bInt, &B, sizeof(int32_t) );
   if (bInt < 0)
     bInt = 0x80000000 - bInt;
   
@@ -210,17 +224,18 @@ inline bool CompareFloatingPoint::Compare(double A, double B, int64_t maxUlps){
     return A == B;
 #endif
   
-  int64_t aLong = *(int64_t*)&A;
+  int64_t aLong;
+  memcpy( &aLong, &A, sizeof(int64_t) );
   // Make aLong lexicographically ordered as a twos-complement long
   if (aLong < 0)
     aLong = 0x8000000000000000LL - aLong;
   // Make bLong lexicographically ordered as a twos-complement long
-  int64_t bLong = *(int64_t*)&B;
+  int64_t bLong;
+  memcpy( &bLong, &B, sizeof(int64_t) );
   if (bLong < 0)
     bLong = 0x8000000000000000LL - bLong;
   
-  // Now we can compare aLong and bLong to find out how far apart A and B
-  // are.
+  // Now we can compare aLong and bLong to find out how far apart A and B are.
   int64_t longDiff = llabs(aLong - bLong);
   if (longDiff <= maxUlps)
     return true;
