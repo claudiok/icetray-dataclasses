@@ -6,6 +6,35 @@ from os.path import expandvars
 from I3Tray import I3Units
 from icecube.icetray.I3Test import *
 
+def is_nucleus(p):
+    return p.type == dataclasses.I3Particle.PPlus or \
+           p.type == dataclasses.I3Particle.PMinus or \
+           p.type == dataclasses.I3Particle.He4Nucleus or \
+           p.type == dataclasses.I3Particle.Li7Nucleus or \
+           p.type == dataclasses.I3Particle.Be9Nucleus or \
+           p.type == dataclasses.I3Particle.B11Nucleus or \
+           p.type == dataclasses.I3Particle.C12Nucleus or \
+           p.type == dataclasses.I3Particle.N14Nucleus or \
+           p.type == dataclasses.I3Particle.O16Nucleus or \
+           p.type == dataclasses.I3Particle.F19Nucleus or \
+           p.type == dataclasses.I3Particle.Ne20Nucleus or \
+           p.type == dataclasses.I3Particle.Na23Nucleus or \
+           p.type == dataclasses.I3Particle.Mg24Nucleus or \
+           p.type == dataclasses.I3Particle.Al27Nucleus or \
+           p.type == dataclasses.I3Particle.Si28Nucleus or \
+           p.type == dataclasses.I3Particle.P31Nucleus or \
+           p.type == dataclasses.I3Particle.S32Nucleus or \
+           p.type == dataclasses.I3Particle.Cl35Nucleus or \
+           p.type == dataclasses.I3Particle.Ar40Nucleus or \
+           p.type == dataclasses.I3Particle.K39Nucleus or \
+           p.type == dataclasses.I3Particle.Ca40Nucleus or \
+           p.type == dataclasses.I3Particle.Sc45Nucleus or \
+           p.type == dataclasses.I3Particle.Ti48Nucleus or \
+           p.type == dataclasses.I3Particle.V51Nucleus or \
+           p.type == dataclasses.I3Particle.Cr52Nucleus or \
+           p.type == dataclasses.I3Particle.Mn55Nucleus or \
+           p.type == dataclasses.I3Particle.Fe56Nucleus 
+
 def test_tree(tree):
     tree.dump()
     tree.dump("+locationType-majorID")
@@ -58,13 +87,34 @@ def test_tree(tree):
             ENSURE( tree.depth(d) == 1 , "depth of children is wrong")
             ENSURE( tree.has_parent(d) , "this child needs a parent")
 
+
+    if len(tree) > 0 :
+        print tree
+        print [pi.energy for pi in tree]
+        if tree.most_energetic_muon :
+            muon_energies = [p.energy for p in tree \
+                             if p.type == dataclasses.I3Particle.MuMinus or \
+                             p.type == dataclasses.I3Particle.MuPlus]
+            if len(muon_energies) > 0 :
+                ENSURE( tree.most_energetic_muon.energy == max(muon_energies) , "most energetic muon")
+
+        neutrino_energies = [p.energy for p in tree if p.is_neutrino]
+        if len( neutrino_energies ) > 0 :
+            if tree.most_energetic_neutrino :
+                ENSURE( tree.most_energetic_neutrino.energy == max(neutrino_energies), "most energetic neutrino" )
+
+        nucleon_energies = [p.energy for p in tree if is_nucleus(p)]
+        if len(nucleon_energies) > 0 :
+            if tree.most_energetic_nucleus :
+                ENSURE( tree.most_energetic_nucleus.energy == max(nucleon_energies), "most energetic nucleus" )
+                                                   
+        
+
 # test an empty tree first
 test_tree(dataclasses.I3MCTree())
 
 f = dataio.I3File(expandvars("$I3_PORTS/test-data/nugen_numu_ic80_dc6.002488.000000.processed.i3.gz") )
+while f.more():
+    fr = f.pop_physics()
+    test_tree( fr.Get("I3MCTree") )
 
-fr = f.pop_physics()
-
-mctree = fr.Get("I3MCTree")
-
-test_tree(mctree)
