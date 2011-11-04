@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from icecube import dataio, dataclasses
+from icecube import icetray, dataio, dataclasses
 from os.path import expandvars
 
 from I3Tray import I3Units
@@ -36,29 +36,36 @@ def is_nucleus(p):
            p.type == dataclasses.I3Particle.Fe56Nucleus 
 
 def test_tree(tree):
-    tree.dump()
     tree.dump("+locationType-majorID")
-    print tree
 
     # these are properties
+    print "*** most energetic primary ***"
     print tree.most_energetic_primary
-    print tree.most_energetic_primary
+    print "***  most energetic cascade ***"
     print tree.most_energetic_cascade
+    print "***  most energetic inice ***"
     print tree.most_energetic_in_ice
+    print "***  most energetic track ***"
     print tree.most_energetic_track
+    print "***  most energetic stochastic ***"
     print tree.most_energetic_stochastic
-    print tree.number_of_atmospheric_muons
-    print tree.in_ice
-    print tree.primaries
-    print tree.n_cascades
-    print tree.neutrino_event_type 
-    print tree.is_neutral_current 
-    print tree.is_charged_current 
-    print tree.is_glashow_resonance 
-    print tree.check_neutrino
+    print "***  most energetic muon ***"
     print tree.most_energetic_muon
+    print "***  most energetic nucleus ***"
     print tree.most_energetic_nucleus
+    print "***  most energetic neutrino ***"
     print tree.most_energetic_neutrino
+    print "*** number of atmospheric muons = ", tree.number_of_atmospheric_muons
+    print "***  InIce particle list ***"
+    print tree.in_ice
+    print "***  primary list ***"
+    print tree.primaries
+    print "*** number of cascades = ", tree.n_cascades
+    print "***  neurtino event type = ", tree.neutrino_event_type 
+    print "*** is neutral current = ",tree.is_neutral_current 
+    print "*** is charged current = ",tree.is_charged_current 
+    print "*** is glashow resonance = ", tree.is_glashow_resonance 
+    print "*** check neutrino = ", tree.check_neutrino
     
     # these have to remain functions since they
     # have multiple solutions for a single tree and
@@ -114,7 +121,22 @@ def test_tree(tree):
 test_tree(dataclasses.I3MCTree())
 
 f = dataio.I3File(expandvars("$I3_PORTS/test-data/nugen_numu_ic80_dc6.002488.000000.processed.i3.gz") )
+
 while f.more():
     fr = f.pop_physics()
-    test_tree( fr.Get("I3MCTree") )
+    
+    mctree = fr.Get("I3MCTree")
 
+    test_tree(mctree)
+
+f = dataio.I3File(expandvars("$I3_PORTS/test-data/sim/corsika.F2K010001_IC59_slim.i3.gz") )
+
+ev_counter = 0
+while f.more()  :
+    ev_counter += 1
+    fr = f.pop_frame()
+    if fr.Stop != icetray.I3Frame.DAQ : continue
+    
+    mctree = fr.Get("I3MCTree")
+
+    test_tree(mctree)
