@@ -123,6 +123,16 @@ namespace I3MCTreeUtils
   I3MCTree::iterator GetMostEnergeticInIceCascade(const I3MCTree&);
   I3MCTree::iterator GetMostEnergeticInIceCascade(I3MCTreeConstPtr);
 
+  I3MCTree::iterator GetMostEnergeticNeutrino(const I3MCTree&);
+  I3MCTree::iterator GetMostEnergeticNeutrino(I3MCTreeConstPtr);
+
+  I3MCTree::iterator GetMostEnergeticMuon(const I3MCTree&);
+  I3MCTree::iterator GetMostEnergeticMuon(I3MCTreeConstPtr);
+
+  I3MCTree::iterator GetMostEnergeticNucleus(const I3MCTree&);
+  I3MCTree::iterator GetMostEnergeticNucleus(I3MCTreeConstPtr);
+
+
   /**
    *Returns a std::vector of particles that are InIce.
    */

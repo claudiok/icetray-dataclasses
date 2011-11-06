@@ -278,6 +278,91 @@ I3MCTreeUtils::GetMostEnergeticInIceCascade(I3MCTreeConstPtr t)
   return GetMostEnergeticInIceCascade(*t);
 }
 
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticMuon(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter_return = t.end();
+  for (I3MCTree::iterator iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy &&
+        (iter->GetType()==I3Particle::MuPlus||iter->GetType()==I3Particle::MuMinus))
+      {
+        maxenergy = iter->GetEnergy();
+        iter_return = iter;
+      }
+  }  
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticMuon(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticMuon(*t);
+}
+
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNeutrino(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter_return = t.end();
+  for (I3MCTree::iterator iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && iter->IsNeutrino()){
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNeutrino(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticNeutrino(*t);
+}
+
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNucleus(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter_return = t.end();
+  for (I3MCTree::iterator iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && 
+	(iter->GetType()==I3Particle::PPlus || iter->GetType()==I3Particle::PMinus || 
+	 (iter->GetType()>=I3Particle::He4Nucleus || 
+	  iter->GetType()>=I3Particle::Li7Nucleus || 
+	  iter->GetType()>=I3Particle::Be9Nucleus || 
+	  iter->GetType()>=I3Particle::B11Nucleus || 
+	  iter->GetType()>=I3Particle::C12Nucleus || 
+	  iter->GetType()>=I3Particle::N14Nucleus || 
+	  iter->GetType()>=I3Particle::O16Nucleus || 
+	  iter->GetType()>=I3Particle::F19Nucleus || 
+	  iter->GetType()>=I3Particle::Ne20Nucleus || 
+	  iter->GetType()>=I3Particle::Na23Nucleus || 
+	  iter->GetType()>=I3Particle::Mg24Nucleus || 
+	  iter->GetType()>=I3Particle::Al27Nucleus || 
+	  iter->GetType()>=I3Particle::Si28Nucleus || 
+	  iter->GetType()>=I3Particle::P31Nucleus || 
+	  iter->GetType()>=I3Particle::S32Nucleus || 
+	  iter->GetType()>=I3Particle::Cl35Nucleus || 
+	  iter->GetType()>=I3Particle::Ar40Nucleus || 
+	  iter->GetType()>=I3Particle::K39Nucleus || 
+	  iter->GetType()>=I3Particle::Ca40Nucleus || 
+	  iter->GetType()>=I3Particle::Sc45Nucleus || 
+	  iter->GetType()>=I3Particle::Ti48Nucleus || 
+	  iter->GetType()>=I3Particle::V51Nucleus || 
+	  iter->GetType()>=I3Particle::Cr52Nucleus || 
+	  iter->GetType()>=I3Particle::Mn55Nucleus || 
+	  iter->GetType()<= I3Particle::Fe56Nucleus))){
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNucleus(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticNucleus(*t);
+}
+
+
 //------------------------------
 
 const std::vector<I3Particle> 
@@ -371,3 +456,4 @@ I3ParticlePtr
 I3MCTreeUtils::GetPrimary(I3MCTreeConstPtr t, const I3Particle& p){
   return GetPrimary(*t,p);
 }
+
