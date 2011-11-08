@@ -57,6 +57,8 @@ public:
 	 */
 	boost::shared_ptr<const I3RecoPulseSeriesMap> Apply(const I3Frame &frame) const;
 	
+	std::string GetSource() const { return key_; }
+	
 	/*
 	 * Get the number of set bits in the mask.
 	 */
