@@ -603,7 +603,7 @@ BOOST_STATIC_ASSERT( sizeof(DOMHeader) == I3SUPERDST_HEADER_BYTESIZE_V0 );
 
 union ChargeStamp {
 	struct {
-#ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
+#if BYTE_ORDER == BIG_ENDIAN
 		uint16_t stop     : 1;
 		uint16_t hlc_bit  : 1;
 		uint16_t charge   : I3SUPERDSTCHARGESTAMP_CHARGE_BITS_V0;
@@ -616,7 +616,7 @@ union ChargeStamp {
 #endif
 	} stamp;
 	struct {
-#ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
+#if BYTE_ORDER == BIG_ENDIAN
 		uint16_t stop : 1; /* The stop bit is always valid. */
 		uint16_t code : 15;
 #else
@@ -664,7 +664,7 @@ template <class T>
 static void
 swap_vector(std::vector<T> &vec)
 {
-#ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
+#if BYTE_ORDER == BIG_ENDIAN
 	BOOST_STATIC_ASSERT(sizeof(T) == 2);
 	typename std::vector<T>::iterator it = vec.begin();
 	for ( ; it != vec.end(); it++) {
