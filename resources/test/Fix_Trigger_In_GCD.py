@@ -28,7 +28,12 @@ while oldgcd.more():
                                         1006)
 
         smt_ts.trigger_name = 'SimpleMajorityTrigger'
-        trigSet = smt_ts.trigger_settings
+
+        try:
+            trigSet = smt_ts.trigger_settings
+        except TypeError as detail :
+            print detail
+            sys.exit( 0 )
         
         trigSet['threshold'] = 8
         trigSet['timeWindow'] = 5000
