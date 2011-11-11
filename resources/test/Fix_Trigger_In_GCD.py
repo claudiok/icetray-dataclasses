@@ -31,10 +31,8 @@ while oldgcd.more():
 
         try:
             trigSet = smt_ts.trigger_settings
-        except TypeError  :
-            print "This is likely the double registration boost::python assert."
-            print "If you're not in a DEBUG build, please alert dataclasses."
-            print "Otherwise this is a known issue."
+        except TypeError,detail  :
+            print detail
             sys.exit( 0 )
         
         trigSet['threshold'] = 8
