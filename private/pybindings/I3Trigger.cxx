@@ -62,7 +62,15 @@ void register_I3Trigger()
       PROPERTY(I3Trigger, fired, TriggerFired)
       // force copy of trigkey via standalone fn
       .add_property("key", get_trigkey, "Get TriggerKey")
+      .def(self < self)
+      .def(self >= self)
+      .def(self > self)
+      .def(self <= self)
+      .def(self == self)
+      .def(self != self)
       .def("__str__", &stream_to_string<I3Trigger>)
+      .def( self == self )
+      .def( self != self )
       .def( freeze() )
       ;
 

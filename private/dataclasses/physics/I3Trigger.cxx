@@ -46,6 +46,39 @@ I3Trigger::operator==(const I3Trigger& rhs) const
     ;
 }
 
+bool 
+I3Trigger::operator!=(const I3Trigger& rhs) const
+{
+  return  !( *this == rhs );
+}
+
+bool 
+I3Trigger::operator<(const I3Trigger& rhs) const
+{
+  return  time_ < rhs.time_;
+}
+
+bool 
+I3Trigger::operator<=(const I3Trigger& rhs) const
+{
+  return  time_ < rhs.time_ ||
+    *this == rhs ;
+}
+
+bool 
+I3Trigger::operator>(const I3Trigger& rhs) const
+{
+  return  time_ > rhs.time_;
+}
+
+bool 
+I3Trigger::operator>=(const I3Trigger& rhs) const
+{
+  return  time_ > rhs.time_ ||
+    *this == rhs ;
+}
+
+
 std::ostream& operator<<(std::ostream& oss, const I3Trigger& t){
     oss<<t.GetTriggerKey().GetSourceString()<<" "
    <<t.GetTriggerKey().GetTypeString()<<" "
