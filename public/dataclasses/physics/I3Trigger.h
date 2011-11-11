@@ -95,10 +95,6 @@ private:
 
   bool operator==(const I3Trigger& rhs) const;
   bool operator!=(const I3Trigger& rhs) const;
-  bool operator<(const I3Trigger& rhs) const;
-  bool operator<=(const I3Trigger& rhs) const;
-  bool operator>(const I3Trigger& rhs) const;
-  bool operator>=(const I3Trigger& rhs) const;
 
  private:
   static const double FROM_TENTH_NS_TO_NS_CORRECTION_FACTOR;
