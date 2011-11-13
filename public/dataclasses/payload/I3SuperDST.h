@@ -30,7 +30,7 @@ class OMKey;
 class I3EventHeader;
 class I3Time;
 
-static const unsigned i3superdst_version_ = 0;
+static const unsigned i3superdst_version_ = 1;
 
 class I3SuperDSTChargeStamp {
 public:
@@ -157,10 +157,12 @@ public:
 	static double DecodeTime(uint32_t dt,
 	    unsigned int version=i3superdst_version_);
 	
+	enum Discretization { LINEAR, FLOATING_POINT };
+	
 	static uint32_t EncodeCharge(double charge, unsigned int maxbits=16,
-	    unsigned int version=i3superdst_version_);
+	    unsigned int version=i3superdst_version_, Discretization mode=LINEAR);
 	static double DecodeCharge(uint32_t logcharge,
-	    unsigned int version=i3superdst_version_);
+	    unsigned int version=i3superdst_version_, Discretization mode=LINEAR);
 	
 	static double FindStartTime(const I3RecoPulseSeriesMap &pmap);
 
