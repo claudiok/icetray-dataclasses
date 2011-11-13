@@ -37,9 +37,10 @@ public:
 	enum LCType {HLC, SLC};
 	
 	I3SuperDSTChargeStamp(double time, double charge, bool hlc);
-	I3SuperDSTChargeStamp(uint32_t timecode, uint32_t chargecode, bool hlc)
-	    : timecode_(timecode), chargecode_(chargecode), charge_overflow_(0),
-	    kind_(hlc ? HLC : SLC) {};
+	I3SuperDSTChargeStamp(uint32_t timecode, uint32_t chargecode, bool hlc,
+	    unsigned version=i3superdst_version_) : timecode_(timecode),
+	    chargecode_(chargecode), charge_overflow_(0),
+	    version_(version), kind_(hlc ? HLC : SLC) {};
 	
 	double GetTime() const;
 	double GetCharge() const;
@@ -60,6 +61,7 @@ private:
 	uint32_t timecode_;
 	uint32_t chargecode_;
 	uint32_t charge_overflow_;
+	unsigned version_;
 	LCType kind_;
 	
 	SET_LOGGER("I3SuperDST");
@@ -95,7 +97,7 @@ struct I3SuperDSTReadout {
 
 class I3SuperDST : public I3FrameObject {
 public:
-	I3SuperDST() { InitDebug(); };
+	I3SuperDST() : version_(i3superdst_version_) { InitDebug(); };
 	
 	/** 
 	 * Create a compressed representation of an event from HLC and SLC pulse maps.
@@ -176,6 +178,8 @@ private:
 	std::list<I3SuperDSTReadout> GetReadouts(bool hlc) const;
 	
 	static const double tmin_;
+	
+	unsigned version_;
 	
 	friend class boost::serialization::access;
 

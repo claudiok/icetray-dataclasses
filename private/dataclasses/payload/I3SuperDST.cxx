@@ -38,14 +38,14 @@ const double I3SuperDST::tmin_ = -512.0;
 
 I3SuperDSTChargeStamp::I3SuperDSTChargeStamp(double time, double charge,
     bool hlc) : timecode_(0), chargecode_(0), charge_overflow_(0),
-    kind_(hlc ? HLC : SLC)
+    version_(i3superdst_version_), kind_(hlc ? HLC : SLC)
 {
 	assert( time >= 0.0 );
 	assert( charge >= 0.0 );
 	
 	/* Don't truncate integer codes, since we need to relativize the times later. */
-	timecode_ = I3SuperDST::EncodeTime(time, 31, i3superdst_version_);
-	chargecode_ = I3SuperDST::EncodeCharge(charge, 31, i3superdst_version_);
+	timecode_ = I3SuperDST::EncodeTime(time, 31, version_);
+	chargecode_ = I3SuperDST::EncodeCharge(charge, 31, version_);
 }
 
 uint32_t
@@ -87,13 +87,13 @@ I3SuperDSTChargeStamp::SetTimeReference(const I3SuperDSTChargeStamp &other)
 double
 I3SuperDSTChargeStamp::GetTime() const
 {
-	return I3SuperDST::DecodeTime(timecode_, i3superdst_version_);
+	return I3SuperDST::DecodeTime(timecode_, version_);
 }
 
 double
 I3SuperDSTChargeStamp::GetCharge() const
 {
-	return I3SuperDST::DecodeCharge(chargecode_ + charge_overflow_, i3superdst_version_);
+	return I3SuperDST::DecodeCharge(chargecode_ + charge_overflow_, version_);
 }
 
 I3SuperDSTReadout::I3SuperDSTReadout(const OMKey &om, bool hlc,
@@ -259,7 +259,7 @@ I3SuperDST::GetReadouts(bool hlc) const
 }
 
 I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &hlc_pulses,
-    const I3RecoPulseSeriesMap &slc_pulses)
+    const I3RecoPulseSeriesMap &slc_pulses) : version_(i3superdst_version_)
 {
 	I3RecoPulseSeriesMap::const_iterator hlc_iter, slc_iter;
 	I3RecoPulseSeries::const_iterator pulse_head, pulse_tail;
@@ -368,7 +368,7 @@ I3SuperDST::Unpack(I3RecoPulseSeriesMapPtr &hlc_pulses,
 		I3RecoPulseSeries &target = target_map->operator[](readout_it->om_);
 		
 		/* Use the discretization step as the pulse width. Hacky. */
-		const double PULSE_WIDTH(DecodeTime(1));
+		const double PULSE_WIDTH(DecodeTime(1, version_));
 		
 		t_ref += readout_it->GetTime();
 		double t_ref_internal = t_ref;
@@ -501,8 +501,10 @@ I3SuperDST::EncodeTime(double time, unsigned int maxbits,
 	assert( time >= 0.0 );
 	switch (version) {
 		case 0:
-		case 1:
 			encoded = truncate(time / (4.0*I3Units::ns), maxbits);
+			break;
+		case 1:
+			encoded = truncate(time / (1.0*I3Units::ns), maxbits);
 			break;
 		default:
 			break;
@@ -518,8 +520,10 @@ I3SuperDST::DecodeTime(uint32_t dt, unsigned int version)
 	
 	switch (version) {
 		case 0:
-		case 1:
 			decoded = dt*4.0*I3Units::ns;
+			break;
+		case 1:
+			decoded = dt*1.0*I3Units::ns;
 			break;
 		default:
 			break;
@@ -921,7 +925,7 @@ void Decode<0>(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 			chargecode += stamp_it->overflow.code;
 		}
 		
-		I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc);
+		I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc, 0);
 		
 		stamp.TruncateChargeCode(I3SUPERDSTCHARGESTAMP_CHARGE_BITS_V0);
 		
@@ -943,7 +947,7 @@ void Decode<0>(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 				chargecode += stamp_it->overflow.code;
 			}
 			
-			I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc);
+			I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc, 0);
 			stamp.TruncateChargeCode(I3SUPERDSTCHARGESTAMP_CHARGE_BITS_V0);
 			
 			readout.stamps_.push_back(stamp);
@@ -1009,7 +1013,7 @@ void Decode<1>(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 			} while (stamp_it->raw == UINT16_MAX);
 		}
 		
-		I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc);
+		I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc, 1);
 		
 		readout.stamps_.push_back(stamp);
 		
@@ -1037,7 +1041,7 @@ void Decode<1>(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 				} while (stamp_it->raw == UINT16_MAX);
 			}
 			
-			I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc);
+			I3SuperDSTChargeStamp stamp(timecode, chargecode, hlc, 1);
 			
 			readout.stamps_.push_back(stamp);
 		}
@@ -1098,6 +1102,8 @@ I3SuperDST::load(Archive& ar, unsigned version)
 		default:
 			log_fatal("Foo!");
 	}
+	
+	version_ = version;
 	
 	return;
 }
