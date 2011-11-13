@@ -93,7 +93,6 @@ struct I3SuperDSTReadout {
 	SET_LOGGER("I3SuperDST");
 };
 
-
 class I3SuperDST : public I3FrameObject {
 public:
 	I3SuperDST() { InitDebug(); };
