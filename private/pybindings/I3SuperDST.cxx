@@ -41,7 +41,7 @@ register_I3SuperDST()
 		.def("Unpack", &Unpack, bp::args("self"), "Unpack the compressed event data "
 		    "into I3RecoPulses. Returns a tuple (HLC pulses, SLC pulses).")
 	        .def( freeze() )
-		#define RO_PROPS (SubEvents)
+		#define RO_PROPS (SubEvents)(EncodedSizes)
 		BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3SuperDST, RO_PROPS)
 		#undef RO_PROPS
 		;

@@ -130,6 +130,8 @@ public:
 	 * a single map.
 	 */
 	I3RecoPulseSeriesMapConstPtr Unpack() const;
+
+	I3MapKeyVectorInt GetEncodedSizes() const;
 	
 	std::list<I3SuperDSTReadout> GetHLCReadouts() const
 	    { return GetReadouts(true); };
@@ -176,7 +178,8 @@ private:
 	
 	friend class boost::serialization::access;
 
-	template <class Archive> void save(Archive & ar, unsigned version) const;
+	template <class Archive> void save(Archive & ar, unsigned version,
+	    std::map<OMKey, std::vector<int > > *sizes=NULL) const;
 	template <class Archive> void load(Archive & ar, unsigned version);
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 	

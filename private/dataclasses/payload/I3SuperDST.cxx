@@ -674,9 +674,24 @@ swap_vector(std::vector<T> &vec)
 #endif
 };
 
+I3MapKeyVectorInt
+I3SuperDST::GetEncodedSizes() const
+{
+	I3MapKeyVectorInt sizes;
+	std::ostringstream oarchive_stream;
+	boost::archive::portable_binary_oarchive oarchive(oarchive_stream);
+
+	/* Piggy-back on the current implementation of save() */
+	this->save(oarchive, boost::serialization::version<I3SuperDST>::value,
+	    &sizes);
+
+	return sizes;
+}
+
 template <class Archive>
 void
-I3SuperDST::save(Archive& ar, unsigned version) const
+I3SuperDST::save(Archive& ar, unsigned version,
+    std::map<OMKey, std::vector<int > > *sizes) const
 {
 #ifndef NDEBUG
 	I3SuperDSTTimer timer(serialization_time_, serialization_counter_);
@@ -697,6 +712,7 @@ I3SuperDST::save(Archive& ar, unsigned version) const
 		I3SuperDSTSerialization::DOMHeader header;
 		
 		header.dom_id = EncodeOMKey(readout_it->om_, 13, version);
+		size_t readout_bytes = sizeof(header);
 		
 		/*
 		 * Special case for the first stamp in the series:
@@ -721,6 +737,7 @@ I3SuperDST::save(Archive& ar, unsigned version) const
 			stampytown.stamp.stop = (stop && (timecode < max_timecode) &&
 			    (chargecode < max_chargecode));
 			stamp_stream.push_back(stampytown);
+			readout_bytes += sizeof(stampytown);
 			
 			/*
 			 * Even specialer case: on rare occasions, readouts
@@ -741,6 +758,7 @@ I3SuperDST::save(Archive& ar, unsigned version) const
 				hammertime.overflow.stop = (stop &&
 				    (chargecode < max_chargecode));
 				stamp_stream.push_back(hammertime);
+				readout_bytes += sizeof(hammertime);
 			}
 
 			/*
@@ -757,6 +775,7 @@ I3SuperDST::save(Archive& ar, unsigned version) const
 				
 				hammertime.overflow.stop = stop;
 				stamp_stream.push_back(hammertime);
+				readout_bytes += sizeof(hammertime);
 			}
 			
 			stamp_it++;
@@ -779,6 +798,7 @@ I3SuperDST::save(Archive& ar, unsigned version) const
 			stampytown.stamp.stop = (stop
 			    && (chargecode < max_chargecode));
 			stamp_stream.push_back(stampytown);
+			readout_bytes += sizeof(stampytown);
 			
 			/* Encode any charge overflow. */
 			if (chargecode == max_chargecode) {
@@ -791,10 +811,14 @@ I3SuperDST::save(Archive& ar, unsigned version) const
 				
 				hammertime.overflow.stop = stop;
 				stamp_stream.push_back(hammertime);
+				readout_bytes += sizeof(hammertime);
 			}
 			
 			stamp_it++;
 		}
+
+		if (sizes != NULL)
+			(*sizes)[readout_it->om_].push_back(readout_bytes);
 	}
 	/* Let's not run over a cliff. */
 	assert((stamp_stream.size() == 0) || stamp_stream.back().stamp.stop );
