@@ -84,6 +84,21 @@ void register_I3Calibration()
       .def_readwrite("tau_frac", &TauParam::TauFrac)
       .def( freeze() )
       ;
+	  
+    class_<SPETemplate>("SPETemplate")
+      .def_readwrite("c", &SPETemplate::c)
+      .def_readwrite("x0", &SPETemplate::x0)
+      .def_readwrite("b1", &SPETemplate::b1)
+      .def_readwrite("b2", &SPETemplate::b2)
+      .def( freeze() )
+      ;
+    
+    class_<I3DOMCalibration::DroopedSPETemplate>("DroopedSPETemplate",no_init)
+      .def(init<const SPETemplate&>())
+      .def(init<const SPETemplate&,const SPETemplate&,double,double,double>())
+      .def("__call__",&I3DOMCalibration::DroopedSPETemplate::operator())
+      .def(freeze())
+      ;
 
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
