@@ -32,15 +32,21 @@ class I3Time;
 
 static const unsigned i3superdst_version_ = 1;
 
+namespace I3SuperDSTUtils {
+	enum Discretization { LINEAR, FLOATING_POINT };
+}
+
 class I3SuperDSTChargeStamp {
 public:
 	enum LCType {HLC, SLC};
 	
-	I3SuperDSTChargeStamp(double time, double charge, bool hlc);
+	I3SuperDSTChargeStamp(double time, double charge, bool hlc,
+	    I3SuperDSTUtils::Discretization format=I3SuperDSTUtils::LINEAR);
 	I3SuperDSTChargeStamp(uint32_t timecode, uint32_t chargecode, bool hlc,
+	    I3SuperDSTUtils::Discretization format=I3SuperDSTUtils::LINEAR, 
 	    unsigned version=i3superdst_version_) : timecode_(timecode),
 	    chargecode_(chargecode), charge_overflow_(0),
-	    version_(version), kind_(hlc ? HLC : SLC) {};
+	    version_(version), kind_(hlc ? HLC : SLC), charge_format_(format) {};
 	
 	double GetTime() const;
 	double GetCharge() const;
@@ -48,6 +54,8 @@ public:
 	uint32_t GetTimeCode() const { return timecode_; };
 	uint32_t GetChargeCode() const { return chargecode_; };
 	uint32_t GetChargeOverflow() const { return charge_overflow_; };
+	I3SuperDSTUtils::Discretization GetChargeFormat() const
+	{ return charge_format_; };
 	
 	uint32_t TruncateTimeCode(unsigned maxbits);
 	void TruncateChargeCode(unsigned maxbits);
@@ -63,6 +71,7 @@ private:
 	uint32_t charge_overflow_;
 	unsigned version_;
 	LCType kind_;
+	I3SuperDSTUtils::Discretization charge_format_;
 	
 	SET_LOGGER("I3SuperDST");
 };
@@ -159,12 +168,13 @@ public:
 	static double DecodeTime(uint32_t dt,
 	    unsigned int version=i3superdst_version_);
 	
-	enum Discretization { LINEAR, FLOATING_POINT };
 	
 	static uint32_t EncodeCharge(double charge, unsigned int maxbits=16,
-	    unsigned int version=i3superdst_version_, Discretization mode=LINEAR);
+	    unsigned int version=i3superdst_version_,
+	    I3SuperDSTUtils::Discretization mode=I3SuperDSTUtils::LINEAR);
 	static double DecodeCharge(uint32_t logcharge,
-	    unsigned int version=i3superdst_version_, Discretization mode=LINEAR);
+	    unsigned int version=i3superdst_version_,
+	    I3SuperDSTUtils::Discretization mode=I3SuperDSTUtils::LINEAR);
 	
 	static double FindStartTime(const I3RecoPulseSeriesMap &pmap);
 
