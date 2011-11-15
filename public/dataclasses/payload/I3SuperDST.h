@@ -40,19 +40,21 @@ class I3SuperDSTChargeStamp {
 public:
 	enum LCType {HLC, SLC};
 	
-	I3SuperDSTChargeStamp(double time, double charge, bool hlc,
+	I3SuperDSTChargeStamp(double time, double charge, double width, bool hlc,
 	    I3SuperDSTUtils::Discretization format=I3SuperDSTUtils::LINEAR);
-	I3SuperDSTChargeStamp(uint32_t timecode, uint32_t chargecode, bool hlc,
-	    I3SuperDSTUtils::Discretization format=I3SuperDSTUtils::LINEAR, 
-	    unsigned version=i3superdst_version_) : timecode_(timecode),
+	I3SuperDSTChargeStamp(uint32_t timecode, uint32_t chargecode, uint32_t widthcode,
+	    bool hlc, I3SuperDSTUtils::Discretization format=I3SuperDSTUtils::LINEAR, 
+	    unsigned version=i3superdst_version_) : timecode_(timecode), widthcode_(widthcode),
 	    chargecode_(chargecode), charge_overflow_(0),
 	    version_(version), kind_(hlc ? HLC : SLC), charge_format_(format) {};
 	
 	double GetTime() const;
+	double GetWidth() const;
 	double GetCharge() const;
 	
 	uint32_t GetTimeCode() const { return timecode_; };
 	uint32_t GetChargeCode() const { return chargecode_; };
+	uint32_t GetWidthCode() const { return widthcode_; };
 	uint32_t GetChargeOverflow() const { return charge_overflow_; };
 	I3SuperDSTUtils::Discretization GetChargeFormat() const
 	{ return charge_format_; };
@@ -67,6 +69,7 @@ public:
 
 private:
 	uint32_t timecode_;
+	uint32_t widthcode_;
 	uint32_t chargecode_;
 	uint32_t charge_overflow_;
 	unsigned version_;
@@ -109,31 +112,14 @@ public:
 	I3SuperDST() : version_(i3superdst_version_) { InitDebug(); };
 	
 	/** 
-	 * Create a compressed representation of an event from HLC and SLC pulse maps.
-	 * NB: since there is no commonly agreed-upon way to distiguish between
-	 * pulses from HLC launches and [coarser, less reliable] pulses from SLC
-	 * launches, the arguments must be in the proper order and the sets must
-	 * be disjoint. If this is not true, the subsequent behavior is undefined.
-	 * 
-	 * @param hlc_pulses	Map containing pulses extracted from HLC launches.
-	 * @param slc_pulses	Map containing pulses extracted from SLC launches.
+	 * Create a compressed representation of an event from a pulse map.
+	 *
+	 * @param pulses	Map containing pulses extracted from all
+	 *                      InIce and IceTop launches.
 	 * 
 	 * @see Unpack()
 	 */
-	I3SuperDST(const I3RecoPulseSeriesMap &hlc_pulses,
-	    const I3RecoPulseSeriesMap &slc_pulses);
-	
-	/**
-	 * Expand charge stamps into fake I3RecoPulses.
-	 *
-	 * @param hlc_pulses	Map to fill with pulses derived from HLC launches.
-	 * @param slc_pulses	Map to fill with pulses derived from SLC launches.
-	 * @param subevent	Which subevent (portion of the event separated from
-	 *                      preceding launches by more than 131 microseconds) to
-	 *                      extract. -1 mean extract the entire event.
-	 */
-	bool Unpack(I3RecoPulseSeriesMapPtr &hlc_pulses,
-	    I3RecoPulseSeriesMapPtr &slc_pulses, int subevent=-1) const;
+	I3SuperDST(const I3RecoPulseSeriesMap &pulses);
 	
 	/**
 	 * Expand charge stamps into fake I3RecoPulses, packing everything into
@@ -156,8 +142,6 @@ public:
 	void InitDebug() {};
 #endif
 		
-	unsigned GetSubEvents() const { return subevent_ranges_.size(); }; 
-	
 	static uint32_t EncodeOMKey(const OMKey &key, unsigned int maxbits=16,
 	    unsigned int version=i3superdst_version_);
 	static OMKey DecodeOMKey(uint32_t number,
@@ -167,7 +151,10 @@ public:
 	    unsigned int version=i3superdst_version_);
 	static double DecodeTime(uint32_t dt,
 	    unsigned int version=i3superdst_version_);
-	
+	static uint32_t EncodeWidth(double width, unsigned int maxbits=16,
+	    unsigned int version=i3superdst_version_);
+	static double DecodeWidth(uint32_t code,
+	    unsigned int version=i3superdst_version_);
 	
 	static uint32_t EncodeCharge(double charge, unsigned int maxbits=16,
 	    unsigned int version=i3superdst_version_,
@@ -180,11 +167,9 @@ public:
 
 private:
 	std::list<I3SuperDSTReadout> readouts_;
-	std::deque<std::pair<std::list<I3SuperDSTReadout>::const_iterator,
-	    std::list<I3SuperDSTReadout>::const_iterator> > subevent_ranges_;
 	mutable I3RecoPulseSeriesMapPtr unpacked_;
 	
-	void AddPulseMap(const I3RecoPulseSeriesMap &pulses, bool hlc, double t0);
+	void AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0);
 	std::list<I3SuperDSTReadout> GetReadouts(bool hlc) const;
 	
 	static const double tmin_;
