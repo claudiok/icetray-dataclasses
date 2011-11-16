@@ -217,16 +217,12 @@ namespace I3SuperDSTRecoPulseUtils {
 	    const I3RecoPulse &previous)
 	{
 		/*
-		 * Find the maximum time difference we can represent
-		 * within a single readout.
+		 * Split if pulses are not from the same launch. 
 		 */
-		#if 0
-		static const double tmax = I3SuperDST::DecodeTime(
-		    (1u << I3SUPERDSTCHARGESTAMP_TIME_BITS_V0) - 1,
-		    i3superdst_version_);
-		#endif
+		static const double tmax = 6.4e3;
 
-		return (key.GetOM() > 60 || HasLC(current) != HasLC(previous));
+		return (key.GetOM() > 60 || HasLC(current) != HasLC(previous)
+		    || current.GetTime() - previous.GetTime() > tmax);
 	}
 };
 
@@ -267,7 +263,8 @@ I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0)
 			 * per launch)
 			 */
 			if (ShouldSplit(map_iter->first, *pulse_tail,
-			    *(boost::prior(pulse_tail)))) {
+			    //*(boost::prior(pulse_tail)))) {
+			    *(pulse_head))) {
 				readouts_.push_back(I3SuperDSTReadout(
 				    map_iter->first, HasLC(*pulse_head),
 				    pulse_head, pulse_tail, t0));
@@ -379,9 +376,18 @@ I3SuperDST::Unpack() const
 		}
 	}
 
-	BOOST_FOREACH(I3RecoPulseSeriesMap::value_type &target, *unpacked_)
+	BOOST_FOREACH(I3RecoPulseSeriesMap::value_type &target, *unpacked_) {
 		std::sort(target.second.begin(), target.second.end(), 
 		    I3SuperDSTRecoPulseUtils::TimeOrdering);
+
+		I3RecoPulseSeries::iterator current, next;
+		current = target.second.begin();
+		next = current+1;
+		/* Ensure that pulses do not overlap. */
+		for ( ; next < target.second.end(); current++, next++)
+			current->SetWidth(std::min(current->GetWidth(),
+			    next->GetTime()-current->GetTime()));
+	}
 	
 	return unpacked_;
 }
@@ -476,9 +482,10 @@ I3SuperDST::DecodeTime(uint32_t dt, unsigned int version)
 inline unsigned
 GetExponent(uint64_t i, unsigned mbits, unsigned ebits)
 {
+	using namespace I3SuperDSTUtils;
 	assert(mbits > 0);
 	assert(ebits > 0);
-	int e = std::max(int(ffs(i))-int(mbits-1), 0);
+	int e = std::max(int(fls(i))-int(mbits-1), 0);
 	return std::min(unsigned(e), (1u << ebits)-1);
 }
 
@@ -676,117 +683,95 @@ I3SuperDST::GetEncodedSizes() const
 	return sizes;
 }
 
-namespace {
-	/*
-	 * Hobo run-length encoding for 4-bit numbers.
-	 *
-	 * Runs of 4-bit codes are encoded in single-byte instructions.
-	 * The lower 4 bits hold the code, and the upper 4 bits hold
-	 * a run length. If successive bytes contain the same code, then
-	 * the run lengths are concatenated to form a wider number. This
-	 * way, a run of 16 fits in 1 byte, a run of 256 in 2 bytes,
-	 * 4096 in 3, etc.
-	 *
-	 * As with any run-length encoding, this does worst when there
-	 * are no runs to encode. In the worst case where the code
-	 * switches at every element, this encoding exactly doubles
-	 * the size of the encoded data.
-	 */ 
-	struct RunCodec {
-		typedef std::vector<uint8_t> vector_t;
-		vector_t values_;
-		RunCodec() : values_() {};
+namespace I3SuperDSTUtils {
+	/* XXX FIXME: this is in no way portable */
 
-		/* XXX FIXME: this is in no way portable */
-
-		void EncodeRun(vector_t &codes, uint8_t val, unsigned len)
-		{
-			unsigned nblocks = (ffs(len)-1)/4 + 1;
-			for (unsigned i=0; i < nblocks; i++) {
-				uint8_t code = (val & 0xf);;
-				code |= ((len >> (i*4u)) << 4) & 0xf0;
-				codes.push_back(code);
-			}
+	void RunCodec::EncodeRun(vector_t &codes, uint8_t val, unsigned len) const
+	{
+		unsigned nblocks = (fls(len)-1)/4 + 1;
+		for (unsigned i=0; i < nblocks; i++) {
+			uint8_t code = (val & 0xf);;
+			code |= ((len >> (i*4u)) << 4) & 0xf0;
+			codes.push_back(code);
 		}
+	}
 
-		void DecodeRun(vector_t &target,
-		    const vector_t::const_iterator &head,
-		    const vector_t::const_iterator &tail)
-		{
-			uint8_t code = *head & 0xf;
-			unsigned runlength = 0;
-			unsigned offset = 0;
-			vector_t::const_iterator it = head;
-			for ( ; it != tail; it++, offset+=4u)
-				runlength |= (((*it >> 4) & 0xf) << offset);
-			target.insert(target.end(), runlength, code);
-		}
+	void RunCodec::DecodeRun(vector_t &target,
+	    const vector_t::const_iterator &head,
+	    const vector_t::const_iterator &tail) const
+	{
+		uint8_t code = *head & 0xf;
+		unsigned runlength = 0;
+		unsigned offset = 0;
+		vector_t::const_iterator it = head;
+		for ( ; it != tail; it++, offset+=4u)
+			runlength |= (((*it >> 4) & 0xf) << offset);
+		target.insert(target.end(), runlength, code);
+	}
 
-		std::vector<uint8_t> Encode()
-		{
-			std::vector<uint8_t> codes;
-			std::vector<uint8_t>::const_iterator head, tail;
-			head = values_.begin();
-			tail = head+1;
-			for ( ; tail < values_.end(); tail++)
-				if (*tail != *head) {
-					/* Start a new run */
-					unsigned runlength = std::distance(head, tail);
-					EncodeRun(codes, *head, runlength);
-					head = tail;
-				}
-
-			/* True by construction, unless the vector has length 0 */
-			if (tail == values_.end()) {
+	std::vector<uint8_t> RunCodec::Encode() const
+	{
+		std::vector<uint8_t> codes;
+		std::vector<uint8_t>::const_iterator head, tail;
+		head = values_.begin();
+		tail = head+1;
+		for ( ; tail < values_.end(); tail++)
+			if (*tail != *head) {
+				/* Start a new run */
 				unsigned runlength = std::distance(head, tail);
 				EncodeRun(codes, *head, runlength);
+				head = tail;
 			}
 
-			return codes;
+		/* True by construction, unless the vector has length 0 */
+		if (tail == values_.end()) {
+			unsigned runlength = std::distance(head, tail);
+			EncodeRun(codes, *head, runlength);
 		}
 
-		void Decode(const std::vector<uint8_t> &codes)
-		{
-			std::vector<uint8_t>::const_iterator head, tail;
-			values_.clear();
-			head = codes.begin();
-			tail = head+1;
-			for ( ; tail < codes.end(); tail++)
-				if ((*tail & 0xf) != (*head & 0xf)) {
-					/* A run has ended. */
-					DecodeRun(values_, head, tail);
-					head = tail;
-				}
+		return codes;
+	}
 
-			/* True by construction, unless the vector has length 0 */
-			if (tail == values_.end()) {
+	void RunCodec::Decode(const std::vector<uint8_t> &codes)
+	{
+		std::vector<uint8_t>::const_iterator head, tail;
+		values_.clear();
+		head = codes.begin();
+		tail = head+1;
+		for ( ; tail < codes.end(); tail++)
+			if ((*tail & 0xf) != (*head & 0xf)) {
+				/* A run has ended. */
 				DecodeRun(values_, head, tail);
+				head = tail;
 			}
-		}
 
-		template <class Archive>
-		void load(Archive &ar, unsigned version)
-		{
-			vector_t codes;
-			uint16_t size;
-			ar & make_nvp("NWidths", size);
-			codes.resize(size);
-			ar & make_nvp("Widths", boost::serialization::make_binary_object(
-			    &codes.front(), codes.size()*sizeof(uint8_t)));
-			Decode(codes);
+		/* True by construction, unless the vector has length 0 */
+		if (tail == codes.end()) {
+			DecodeRun(values_, head, tail);
 		}
+	}
 
-		template <class Archive>
-		void save(Archive &ar, unsigned version)
-		{
-			vector_t codes = Encode();
-			uint16_t size = codes.size();
-			ar & make_nvp("NWidths", size);
-			ar & make_nvp("Widths", boost::serialization::make_binary_object(
-			    &codes.front(), codes.size()*sizeof(uint8_t)));
-		}
-		
-	};
+	template <class Archive>
+	void RunCodec::load(Archive &ar, unsigned version)
+	{
+		vector_t codes;
+		uint16_t size;
+		ar & make_nvp("NWidths", size);
+		codes.resize(size);
+		ar & make_nvp("Widths", boost::serialization::make_binary_object(
+		    &codes.front(), codes.size()*sizeof(uint8_t)));
+		Decode(codes);
+	}
+
+	template <class Archive>
+	void RunCodec::save(Archive &ar, unsigned version) const
+	{
+		vector_t codes = Encode();
+		uint16_t size = codes.size();
+		ar & make_nvp("NWidths", size);
+		ar & make_nvp("Widths", boost::serialization::make_binary_object(
+		    &codes.front(), codes.size()*sizeof(uint8_t)));
+	}
 }
 
 template <class Archive>
@@ -810,7 +795,7 @@ I3SuperDST::save(Archive& ar, unsigned version,
 	const unsigned max_timecode = (1u << I3SUPERDSTCHARGESTAMP_TIME_BITS_V0) - 1;
 	const unsigned max_chargecode = (1u << I3SUPERDSTCHARGESTAMP_CHARGE_BITS_V0) - 1;
 	const unsigned max_overflow = UINT16_MAX;
-	
+
 	for (readout_it = readouts_.begin();
 	    readout_it != readouts_.end(); readout_it++) {
 		
@@ -831,15 +816,17 @@ I3SuperDST::save(Archive& ar, unsigned version,
 			unsigned timecode = stamp_it->GetTimeCode();
 			unsigned chargecode = stamp_it->GetChargeCode();
 			const bool stop = (boost::next(stamp_it) == readout_it->stamps_.end());
-			header.slop = (timecode >> I3SUPERDSTCHARGESTAMP_TIME_BITS_V0)
+			header.slop = (std::min(timecode, max_timecode_header)
+			    >> I3SUPERDSTCHARGESTAMP_TIME_BITS_V0)
 			    & ((1 << I3SUPERDST_SLOP_BITS_V0)-1);
-			width_tracker.values_.push_back(stamp_it->GetWidthCode());
 			
 			I3SuperDSTSerialization::ChargeStamp stampytown; /* Population: 5! */
-			stampytown.stamp.rel_time = timecode
+			stampytown.stamp.rel_time = std::min(timecode, max_timecode_header)
 			    & ((1 << I3SUPERDSTCHARGESTAMP_TIME_BITS_V0)-1);
 			stampytown.stamp.hlc_bit = stamp_it->GetLCBit();
 			stampytown.stamp.stop = stop;
+
+			assert(charge_format == LINEAR); // for now
 
 			if (charge_format == LINEAR) {
 				stampytown.stamp.charge =
@@ -858,39 +845,44 @@ I3SuperDST::save(Archive& ar, unsigned version,
 				readout_bytes += sizeof(ldr);
 			}
 
+			width_tracker.values_.push_back(stamp_it->GetWidthCode());
 			stamp_stream.push_back(stampytown);
 			readout_bytes += sizeof(stampytown);
-			
-			timecode -= std::min(timecode, max_timecode_header);
-			chargecode -= std::min(chargecode, max_chargecode);
 			
 			/*
 			 * If we still have any time overflow, subtract it
 			 * off in 16-bit chunks until it's gone. The saturated
 			 * timecode serves as a sentinel for this case.
 			 */
-			while (timecode > 0) {
-				I3SuperDSTSerialization::ChargeStamp hammertime;
+			if (timecode >= max_timecode_header) {
+				timecode -= max_timecode_header;
+				do {
+					I3SuperDSTSerialization::ChargeStamp hammertime;
 
-				hammertime.raw = std::min(timecode, max_overflow);
-				timecode -= std::min(timecode, max_overflow);
+					hammertime.raw = std::min(timecode, max_overflow);
+					timecode -= std::min(timecode, max_overflow);
 				
-				stamp_stream.push_back(hammertime);
-				readout_bytes += sizeof(hammertime);
+					stamp_stream.push_back(hammertime);
+					readout_bytes += sizeof(hammertime);
+
+				} while (timecode > 0);
 			}
 			
 			/*
 			 * Repeat the same overflow procedure for charge in the
 			 * linear scheme. The floating-point scheme has no overflow.
 			 */
-			while (charge_format == LINEAR && chargecode > 0) {
-				I3SuperDSTSerialization::ChargeStamp hammertime;
-				
-				hammertime.raw = std::min(chargecode, max_overflow);
-				chargecode -= std::min(chargecode, max_overflow);
-				
-				stamp_stream.push_back(hammertime);
-				readout_bytes += sizeof(hammertime);
+			if (charge_format == LINEAR && chargecode >= max_chargecode) {
+				chargecode -= max_chargecode;
+				do {
+					I3SuperDSTSerialization::ChargeStamp hammertime;
+					
+					hammertime.raw = std::min(chargecode, max_overflow);
+					chargecode -= std::min(chargecode, max_overflow);
+					
+					stamp_stream.push_back(hammertime);
+					readout_bytes += sizeof(hammertime);
+				} while (chargecode > 0);
 			}
 			
 			stamp_it++;
@@ -907,39 +899,43 @@ I3SuperDST::save(Archive& ar, unsigned version,
 			    == readout_it->stamps_.end());
 			unsigned chargecode = stamp_it->GetChargeCode();
 			unsigned timecode = stamp_it->GetTimeCode();
-			width_tracker.values_.push_back(stamp_it->GetWidthCode());
 			
 			stampytown.stamp.rel_time = std::min(timecode, max_timecode);
 			stampytown.stamp.charge = std::min(chargecode, max_chargecode);
 			stampytown.stamp.hlc_bit = stamp_it->GetLCBit();
 			
 			stampytown.stamp.stop = stop;
+			width_tracker.values_.push_back(stamp_it->GetWidthCode());
 			stamp_stream.push_back(stampytown);
 			readout_bytes += sizeof(stampytown);
 			
-			timecode -= std::min(timecode, max_timecode);
-			chargecode -= std::min(chargecode, max_chargecode);
-			
 			/* Encode any time overflow. */
-			while (timecode > 0) {
-				I3SuperDSTSerialization::ChargeStamp hammertime;
+			if (timecode >= max_timecode) {
+				timecode -= max_timecode;
+				do {
+					I3SuperDSTSerialization::ChargeStamp hammertime;
+
+					hammertime.raw = std::min(timecode, max_overflow);
+					timecode -= std::min(timecode, max_overflow);
 				
-				hammertime.raw = std::min(timecode, max_overflow);
-				timecode -= std::min(timecode, max_overflow);
-				
-				stamp_stream.push_back(hammertime);
-				readout_bytes += sizeof(hammertime);
+					stamp_stream.push_back(hammertime);
+					readout_bytes += sizeof(hammertime);
+
+				} while (timecode > 0);
 			}
 			
 			/* Encode any charge overflow. */
-			while (chargecode > 0) {
-				I3SuperDSTSerialization::ChargeStamp hammertime;
-				
-				hammertime.raw = std::min(chargecode, max_overflow);
-				chargecode -= std::min(chargecode, max_overflow);
-				
-				stamp_stream.push_back(hammertime);
-				readout_bytes += sizeof(hammertime);
+			if (chargecode >= max_chargecode) {
+				chargecode -= max_chargecode;
+				do {
+					I3SuperDSTSerialization::ChargeStamp hammertime;
+					
+					hammertime.raw = std::min(chargecode, max_overflow);
+					chargecode -= std::min(chargecode, max_overflow);
+					
+					stamp_stream.push_back(hammertime);
+					readout_bytes += sizeof(hammertime);
+				} while (chargecode > 0);
 			}
 			
 			stamp_it++;
@@ -948,27 +944,23 @@ I3SuperDST::save(Archive& ar, unsigned version,
 		if (sizes != NULL)
 			(*sizes)[readout_it->om_].push_back(readout_bytes);
 	}
-	/* Let's not run over a cliff. */
-	//assert((stamp_stream.size() == 0) || stamp_stream.back().stamp.stop );
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-	
+
 	/*
 	 * Serialize the packed bytestream. While doing this "by hand" makes 
 	 * for obfuscated code, we can save 6 bytes over the vector
 	 * serialization by storing the length as a short.
 	 */
-	assert( stamp_stream.size() < UINT16_MAX );	
-	uint16_t stream_size = stamp_stream.size();
-	uint16_t n_headers = header_stream.size();
-	ar & make_nvp("NRecords", stream_size);
-	
 	swap_vector(stamp_stream);
+	uint16_t stream_size = stamp_stream.size();
+	ar & make_nvp("NRecords", stream_size);
 	ar & make_nvp("ChargeStamps",
 	    boost::serialization::make_binary_object(&stamp_stream.front(),
 	    stream_size*sizeof(I3SuperDSTSerialization::ChargeStamp)));
 	
 	assert( header_stream.size() < UINT16_MAX );	
+	uint16_t n_headers = header_stream.size();
 	ar & make_nvp("NHeaders", n_headers);
 	
 	swap_vector(header_stream);
@@ -976,6 +968,9 @@ I3SuperDST::save(Archive& ar, unsigned version,
 	    boost::serialization::make_binary_object(&header_stream.front(),
 	    n_headers*sizeof(I3SuperDSTSerialization::DOMHeader)));
 
+	/* 
+	 * Save the run-length-encoded width codes of the stamps.
+	 */
 	hlc_width.save(ar, version);
 	slc_width.save(ar, version);
 
@@ -1008,7 +1003,6 @@ void Decode_v0(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 		
 		readout.om_ = I3SuperDST::DecodeOMKey(header_it->dom_id, 0);
 		bool hlc = stamp_it->stamp.hlc_bit;
-		bool subevent = false;
 		
 		/* 
 		 * Use the slop bits in the header as the most significant
@@ -1021,7 +1015,6 @@ void Decode_v0(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 		
 		/* If the time is saturated, add the next 15 bits. */
 		if (timecode == max_timecode_header) {
-			subevent = true;
 			stamp_it++;
 			readout.time_overflow_ = stamp_it->overflow.code;
 		}
@@ -1079,6 +1072,7 @@ void Decode_v0(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 
 void Decode_v1(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_stream,
     const std::vector<I3SuperDSTSerialization::ChargeStamp> &stamp_stream,
+    const std::vector<uint8_t> &hlc_width, const std::vector<uint8_t> &slc_width,
     const std::vector<uint8_t> &byte_stream,
     std::list<I3SuperDSTReadout> &readouts)
 {
@@ -1093,15 +1087,22 @@ void Decode_v1(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 	std::vector<I3SuperDSTSerialization::DOMHeader>::const_iterator header_it
 	    = header_stream.begin();
 	std::vector<uint8_t>::const_iterator ldr_it = byte_stream.begin();
+	std::vector<uint8_t>::const_iterator hlc_width_it = hlc_width.begin();
+	std::vector<uint8_t>::const_iterator slc_width_it = slc_width.begin();
 
-	const uint32_t widthcode = 0;
-	
 	for ( ; header_it != header_stream.end(); header_it++) {
 		I3SuperDSTReadout readout;
 		
 		readout.om_ = I3SuperDST::DecodeOMKey(header_it->dom_id, 1);
 		bool hlc = stamp_it->stamp.hlc_bit;
 		bool stop = stamp_it->stamp.stop;
+
+		std::vector<uint8_t>::const_iterator &width_it = hlc ?
+		    hlc_width_it : slc_width_it;
+		#ifndef NDEBUG
+		const std::vector<uint8_t>::const_iterator &width_end = hlc ?
+		    hlc_width.end() : slc_width.end();
+		#endif
 		
 		/* 
 		 * Use the slop bits in the header as the most significant
@@ -1114,6 +1115,7 @@ void Decode_v1(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 
 		Discretization charge_format = (readout.om_.GetOM() > 60)
 		    ? FLOATING_POINT : LINEAR;
+		assert(charge_format == LINEAR); // for now
 		
 		if (timecode == max_timecode_header) {
 			assert(stamp_it != stamp_stream.end());
@@ -1133,7 +1135,8 @@ void Decode_v1(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 			ldr_it++;
 		}
 		
-		I3SuperDSTChargeStamp stamp(timecode, chargecode, widthcode,
+		assert(width_it != width_end);
+		I3SuperDSTChargeStamp stamp(timecode, chargecode, *width_it++,
 		    hlc, charge_format, 1);
 		
 		readout.stamps_.push_back(stamp);
@@ -1163,7 +1166,8 @@ void Decode_v1(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 				} while (stamp_it->raw == UINT16_MAX);
 			}
 			
-			I3SuperDSTChargeStamp stamp(timecode, chargecode, widthcode,
+			assert(width_it != width_end);
+			I3SuperDSTChargeStamp stamp(timecode, chargecode, *width_it++,
 			    hlc, LINEAR, 1);
 			
 			readout.stamps_.push_back(stamp);
@@ -1174,6 +1178,9 @@ void Decode_v1(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 		readout.kind_ = hlc ? I3SuperDSTChargeStamp::HLC : I3SuperDSTChargeStamp::SLC;
 		readouts.push_back(readout);
 	}
+
+	assert(stamp_it == stamp_stream.end());
+
 
 	/* Populate the start_time_ fields of the readouts for consistency. */
 	double t_ref = 0.0;
@@ -1195,12 +1202,13 @@ I3SuperDST::load(Archive& ar, unsigned version)
 	std::vector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
 	std::vector<I3SuperDSTSerialization::ChargeStamp>::const_iterator stamp_it;
 	std::vector<uint8_t> byte_stream;
-	std::list<I3SuperDSTReadout>::const_iterator subevent_begin;
 	std::list<I3SuperDSTReadout>::iterator readout_it;
+	RunCodec hlc_width, slc_width;
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-	
+
 	ar & make_nvp("NRecords", stream_size);
+	
 	
 	/* Resurrect the packed ChargeStamps from the archive */
 	stamp_stream.resize(stream_size);
@@ -1209,7 +1217,7 @@ I3SuperDST::load(Archive& ar, unsigned version)
 	    stream_size*sizeof(I3SuperDSTSerialization::ChargeStamp)));
 	swap_vector(stamp_stream);
 	
-	if (version == 0) {
+	if (version < 1) {
 		/* Count the number of distinct units in the stamp stream */
 		for (stamp_it = stamp_stream.begin(); stamp_it != stamp_stream.end(); stamp_it++)
 			if (stamp_it->stamp.stop)
@@ -1217,6 +1225,7 @@ I3SuperDST::load(Archive& ar, unsigned version)
 	} else {
 		ar & make_nvp("NHeaders", n_headers);
 	}
+
 		
 	/* Now that we know the length of the header stream, resurrect it. */
 	header_stream.resize(n_headers);
@@ -1225,22 +1234,29 @@ I3SuperDST::load(Archive& ar, unsigned version)
 	    n_headers*sizeof(I3SuperDSTSerialization::DOMHeader)));
 	swap_vector(header_stream);
 
-	/* Count the number of IceTop headers. There is one extra byte for each. */
-	size_t n_bytes = 0;
-	BOOST_FOREACH(const I3SuperDSTSerialization::DOMHeader &header, header_stream)
-		if (DecodeOMKey(header.dom_id).GetOM() > 60)
-			n_bytes++;
-	byte_stream.resize(n_bytes);
-	ar & make_nvp("Bytes",
-	    boost::serialization::make_binary_object(&byte_stream.front(),
-	    n_bytes*sizeof(uint8_t)));
+	if (version > 0) {
+		hlc_width.load(ar, version);
+		slc_width.load(ar, version);
+
+		/* Count the number of IceTop headers. There is one extra byte for each. */
+		size_t n_bytes = 0;
+		BOOST_FOREACH(const I3SuperDSTSerialization::DOMHeader &header, header_stream)
+			if (DecodeOMKey(header.dom_id).GetOM() > 60)
+				n_bytes++;
+		byte_stream.resize(n_bytes);
+		ar & make_nvp("Bytes",
+		    boost::serialization::make_binary_object(&byte_stream.front(),
+		    n_bytes*sizeof(uint8_t)));
+	}
 
 	switch (version) {
 		case 0:
 			Decode_v0(header_stream, stamp_stream, readouts_);
 			break;
 		case 1:
-			Decode_v1(header_stream, stamp_stream, byte_stream, readouts_);
+			Decode_v1(header_stream, stamp_stream,
+			    hlc_width.values_, slc_width.values_, byte_stream,
+			    readouts_);
 			break;
 		default:
 			log_fatal("Foo!");
