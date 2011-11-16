@@ -70,6 +70,22 @@ namespace I3SuperDSTUtils {
 		void save(Archive &ar, unsigned version) const;
 		BOOST_SERIALIZATION_SPLIT_MEMBER();
 	};
+	
+	/* UTF-8 style variable-width integer encoding */
+	struct SizeCodec {
+		typedef uint64_t size_type;
+		size_type size_;
+		
+		SizeCodec() : size_(0) {};
+		SizeCodec(size_type size) : size_(size) {};
+		
+		friend class boost::serialization::access;
+		template <class Archive>
+		void load(Archive &ar, unsigned version);
+		template <class Archive>
+		void save(Archive &ar, unsigned version) const;
+		BOOST_SERIALIZATION_SPLIT_MEMBER();
+	};
 
 	/* Stupid GNU libc, not having fls() */
 	inline unsigned fls(unsigned i)
@@ -101,9 +117,6 @@ public:
 	uint32_t GetChargeOverflow() const { return charge_overflow_; };
 	I3SuperDSTUtils::Discretization GetChargeFormat() const
 	{ return charge_format_; };
-	
-	uint32_t TruncateTimeCode(unsigned maxbits);
-	void TruncateChargeCode(unsigned maxbits);
 	
 	LCType GetKind() const { return kind_; };
 	bool GetLCBit() const { return (kind_ == HLC); };
@@ -138,7 +151,6 @@ struct I3SuperDSTReadout {
 	
 	void SetTimeReference(const I3SuperDSTReadout &other);
 	void Relativize();
-	void TruncateCodes();
 	
 	double GetTime() const;
 	
