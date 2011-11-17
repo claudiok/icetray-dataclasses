@@ -196,6 +196,10 @@ I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0)
 		if (pulse_list.size() == 0) continue;
 		pulse_list.sort(TimeOrdering);
 		
+		//BOOST_FOREACH(const I3RecoPulse &p, pulse_list)
+		//	std::cout << ((p.GetFlags() & I3RecoPulse::LC) ? 'H' : 'S') << p.GetWidth() << " ";
+		//std::cout << std::endl;
+		
 		pulse_head = pulse_list.begin();
 		pulse_tail = boost::next(pulse_head);
 		
@@ -762,7 +766,8 @@ I3SuperDST::save(Archive& ar, unsigned version,
 #endif
 	CompactVector<I3SuperDSTSerialization::DOMHeader> header_stream;
 	CompactVector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
-	CompactVector<uint8_t> ldr_stream, hlc_width, slc_width;
+	CompactVector<uint8_t> ldr_stream;
+	std::vector<uint8_t> widths[4];
 	
 	std::list<I3SuperDSTReadout>::const_iterator readout_it;
 	std::vector<I3SuperDSTChargeStamp>::const_iterator stamp_it;
@@ -781,7 +786,9 @@ I3SuperDST::save(Archive& ar, unsigned version,
 		header.dom_id = EncodeOMKey(readout_it->om_, 13, version);
 		size_t readout_bytes = sizeof(header);
 
-		std::vector<uint8_t> &widths = readout_it->GetLCBit() ? hlc_width : slc_width;
+		// Widths: {InIce SLC, InIce HLC, IceTop SLC, IceTop HLC}
+		std::vector<uint8_t> &width =
+		    widths[2*(readout_it->om_.GetOM() > 60) + readout_it->GetLCBit()];
 		
 		/*
 		 * Special case for the first stamp in the series:
@@ -820,7 +827,7 @@ I3SuperDST::save(Archive& ar, unsigned version,
 				readout_bytes += sizeof(ldr);
 			}
 
-			widths.push_back(stamp_it->GetWidthCode());
+			width.push_back(stamp_it->GetWidthCode());
 			stamp_stream.push_back(stampytown);
 			readout_bytes += sizeof(stampytown);
 			
@@ -880,7 +887,7 @@ I3SuperDST::save(Archive& ar, unsigned version,
 			stampytown.stamp.hlc_bit = stamp_it->GetLCBit();
 			
 			stampytown.stamp.stop = stop;
-			widths.push_back(stamp_it->GetWidthCode());
+			width.push_back(stamp_it->GetWidthCode());
 			stamp_stream.push_back(stampytown);
 			readout_bytes += sizeof(stampytown);
 			
@@ -928,11 +935,12 @@ I3SuperDST::save(Archive& ar, unsigned version,
 	swap_vector(header_stream);
 	ar & make_nvp("DOMHeaders", header_stream);
 
-	CompactVector<uint8_t> hlc_width_runs, slc_width_runs;
-	RunCodec::Encode(hlc_width, hlc_width_runs);
-	RunCodec::Encode(slc_width, slc_width_runs);
-	ar & make_nvp("HLCWidth", hlc_width_runs);
-	ar & make_nvp("SLCWidth", slc_width_runs);
+	CompactVector<uint8_t> width_runs;
+	for (int i = 0; i < 4; i++) {
+		width_runs.clear();
+		RunCodec::Encode(widths[i], width_runs);
+		ar & make_nvp("Widths", width_runs);
+	}
 
 	ar & make_nvp("ExtraBytes", ldr_stream);
 
@@ -1059,12 +1067,15 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 	ar & make_nvp("DOMHeaders", header_stream);
 	swap_vector(header_stream);
 
-	CompactVector<uint8_t> hlc_width_runs, slc_width_runs;
-	ar & make_nvp("HLCWidth", hlc_width_runs);
-	ar & make_nvp("SLCWidth", slc_width_runs);
-	std::vector<uint8_t> hlc_width, slc_width;
-	RunCodec::Decode(hlc_width_runs, hlc_width);
-	RunCodec::Decode(slc_width_runs, slc_width);
+	std::vector<uint8_t> widths[4];
+	std::vector<uint8_t>::const_iterator width_its[4];
+	CompactVector<uint8_t> width_runs;
+	for (int i = 0; i < 4; i++) {
+		width_runs.clear();
+		ar & make_nvp("Widths", width_runs);
+		RunCodec::Decode(width_runs, widths[i]);
+		width_its[i] = widths[i].end();
+	}
 
 	CompactVector<uint8_t> byte_stream;
 	ar & make_nvp("ExtraBytes", byte_stream);
@@ -1080,9 +1091,7 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 	std::vector<I3SuperDSTSerialization::DOMHeader>::const_iterator header_it
 	    = header_stream.begin();
 	std::vector<uint8_t>::const_iterator ldr_it = byte_stream.begin();
-	std::vector<uint8_t>::const_iterator hlc_width_it = hlc_width.begin();
-	std::vector<uint8_t>::const_iterator slc_width_it = slc_width.begin();
-
+	
 	for ( ; header_it != header_stream.end(); header_it++) {
 		I3SuperDSTReadout readout;
 		
@@ -1090,11 +1099,12 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		bool hlc = stamp_it->stamp.hlc_bit;
 		bool stop = stamp_it->stamp.stop;
 
-		std::vector<uint8_t>::const_iterator &width_it = hlc ?
-		    hlc_width_it : slc_width_it;
+		// Widths: {InIce SLC, InIce HLC, IceTop SLC, IceTop HLC}
+		std::vector<uint8_t>::const_iterator &width_it =
+		    width_its[2*(readout.om_.GetOM() > 60) + hlc];
 		#ifndef NDEBUG
-		const std::vector<uint8_t>::const_iterator &width_end = hlc ?
-		    hlc_width.end() : slc_width.end();
+		std::vector<uint8_t>::const_iterator width_end =
+		    widths[2*(readout.om_.GetOM() > 60) + hlc].end();
 		#endif
 		
 		/* 
