@@ -437,7 +437,10 @@ uint32_t
 I3SuperDST::EncodeWidth(double width, unsigned int maxbits,
     unsigned int version)
 {
-	return GetExponent(lround(ceil(width/1.0)), 1, 4);
+	assert(width > 0 && width < double(std::numeric_limits<unsigned>::max()));
+	unsigned rounded = ceil(width/1.0);
+	unsigned code = std::min(fls(rounded), (1u << maxbits)-1);
+	return (rounded == 1u << (code-1)) ? code-1 : code;
 }
 
 double
@@ -465,7 +468,7 @@ I3SuperDST::EncodeCharge(double charge, unsigned int maxbits,
 		encoded |= mantissa << 4;
 		encoded |= exponent;
 	} else {
-		encoded = truncate(charge/0.05, maxbits);
+		encoded = truncate(charge/(version == 0 ? 0.15 : 0.05), maxbits);
 	}
 
 	
@@ -484,7 +487,7 @@ I3SuperDST::DecodeCharge(uint32_t chargecode, unsigned int version,
 		unsigned exponent = chargecode & ((1 << 4)-1);
 		decoded = 1.0*(mantissa << exponent);
 	} else {
-		decoded = chargecode*0.05;
+		decoded = chargecode*(version == 0 ? 0.15 : 0.05);
 	}
 	
 	return (decoded);
@@ -629,7 +632,7 @@ I3SuperDST::GetEncodedSizes() const
 
 namespace I3SuperDSTUtils {
 
-	void RunCodec::EncodeRun(vector_t &codes, uint8_t val, unsigned len) const
+	void RunCodec::EncodeRun(vector_t &codes, uint8_t val, unsigned len)
 	{
 		unsigned nblocks = (fls(len)-1)/4 + 1;
 #if BYTE_ORDER == BIG_ENDIAN
@@ -645,7 +648,7 @@ namespace I3SuperDSTUtils {
 
 	void RunCodec::DecodeRun(vector_t &target,
 	    const vector_t::const_iterator &head,
-	    const vector_t::const_iterator &tail) const
+	    const vector_t::const_iterator &tail)
 	{
 		uint8_t code = *head & 0xf;
 		unsigned runlength = 0;
@@ -661,13 +664,12 @@ namespace I3SuperDSTUtils {
 		target.insert(target.end(), runlength, code);
 	}
 
-	std::vector<uint8_t> RunCodec::Encode() const
+	void RunCodec::Encode(const vector_t &runs, vector_t &codes)
 	{
-		std::vector<uint8_t> codes;
-		std::vector<uint8_t>::const_iterator head, tail;
-		head = values_.begin();
+		vector_t::const_iterator head, tail;
+		head = runs.begin();
 		tail = head+1;
-		for ( ; tail < values_.end(); tail++)
+		for ( ; tail < runs.end(); tail++)
 			if (*tail != *head) {
 				/* Start a new run */
 				unsigned runlength = std::distance(head, tail);
@@ -676,117 +678,76 @@ namespace I3SuperDSTUtils {
 			}
 
 		/* True by construction, unless the vector has length 0 */
-		if (tail == values_.end()) {
+		if (tail == runs.end()) {
 			unsigned runlength = std::distance(head, tail);
 			EncodeRun(codes, *head, runlength);
 		}
-
-		return codes;
 	}
 
-	void RunCodec::Decode(const std::vector<uint8_t> &codes)
+	void RunCodec::Decode(const std::vector<uint8_t> &codes, vector_t &runs)
 	{
-		std::vector<uint8_t>::const_iterator head, tail;
-		values_.clear();
+		vector_t::const_iterator head, tail;
+		runs.clear();
 		head = codes.begin();
 		tail = head+1;
 		for ( ; tail < codes.end(); tail++)
 			if ((*tail & 0xf) != (*head & 0xf)) {
 				/* A run has ended. */
-				DecodeRun(values_, head, tail);
+				DecodeRun(runs, head, tail);
 				head = tail;
 			}
 
 		/* True by construction, unless the vector has length 0 */
 		if (tail == codes.end()) {
-			DecodeRun(values_, head, tail);
+			DecodeRun(runs, head, tail);
 		}
 	}
 
 	template <class Archive>
-	void RunCodec::load(Archive &ar, unsigned version)
-	{
-		vector_t codes;
-		SizeCodec size;
-		size.load(ar, version);
-		codes.resize(size.size_);
-		ar & make_nvp("Widths", boost::serialization::make_binary_object(
-		    &codes.front(), codes.size()*sizeof(uint8_t)));
-		Decode(codes);
-	}
-
-	template <class Archive>
-	void RunCodec::save(Archive &ar, unsigned version) const
-	{
-		vector_t codes = Encode();
-		SizeCodec size(codes.size());
-		size.save(ar, version);
-		ar & make_nvp("Widths", boost::serialization::make_binary_object(
-		    &codes.front(), codes.size()*sizeof(uint8_t)));
-	}
-	
-	template <class Archive>
 	void SizeCodec::save(Archive &ar, unsigned version) const
 	{
-		if (size_ <= 127) {
-			uint8_t s = size_;
-			ar & make_nvp("Byte", s);
+		if (size_ < 0xff-sizeof(size_type)) {
+			uint8_t tag = size_;
+			ar & make_nvp("Tag", tag);
 		} else {
-			uint8_t flags = 0;
+			uint8_t n_bytes = (flsl(size_)-1)/8 + 1;
+			uint8_t tag = 0xff - n_bytes;
+			ar & make_nvp("Tag", tag);
+
+			uint8_t bytes[8];
 			uint64_t s = size_;
-			std::vector<uint8_t> bytes;
-			
-			for (unsigned i=7; (s > 0) && (i >= 0); i--) {
-				uint8_t b = s & 0xff;
-				bytes.push_back(b);
-				flags |= (1 << i);
-				s = s >> 8;
-			}
-			
-			ar & make_nvp("Byte", flags);
-			
 #if BYTE_ORDER == BIG_ENDIAN
-			std::vector<uint8_t>::reverse_iterator it;
-			for (it = bytes.rbegin(); it != bytes.rend(); it++) {
+			for (unsigned i=n_bytes-1; i >= 0; i--, s=s>>8)
 #else
-			std::vector<uint8_t>::iterator it;
-			for (it = bytes.begin(); it != bytes.end(); it++) {
+			for (unsigned i=0; i < n_bytes; i++, s=s>>8)
 #endif
-				ar & make_nvp("Byte", *it);
-			}
-			
+				bytes[i] = s & 0xff;
+
+			ar & make_nvp("Bytes", boost::serialization::make_binary_object(
+			    bytes, n_bytes));
 		}
 	}
 	
 	template <class Archive>
 	void SizeCodec::load(Archive &ar, unsigned version)
 	{
-		uint8_t flags = 0;
+		uint8_t tag = 0;
 		size_ = 0;
-		ar & make_nvp("Byte", flags);
-		if (flags & (1 << 7)) {
-			/* Multibyte case */
-			std::vector<uint8_t> bytes;
-			for (unsigned i=7; (flags & (1 << i)) && (i >= 0); i--) {
-				uint8_t b = 0;
-				ar & make_nvp("Byte", b);
-				bytes.push_back(b);
-			}
-			
-			unsigned offset = 0;
-#if BYTE_ORDER == BIG_ENDIAN
-			std::vector<uint8_t>::reverse_iterator it;
-			for (it = bytes.rbegin(); it != bytes.rend(); it++, offset += 8) {
-#else
-			std::vector<uint8_t>::iterator it;
-			for (it = bytes.begin(); it != bytes.end(); it++, offset += 8) {
-#endif
-				size_ |= (size_t(*it) << offset);
-			}
-			
+		ar & make_nvp("Tag", tag);
+		if (tag < 0xff-sizeof(size_type)) {
+			size_ = tag;
 		} else {
-			/* Single-byte case */
-			size_ = flags;
+			unsigned n_bytes = 0xff - tag;
+			uint8_t bytes[8];
+			ar & make_nvp("Bytes", boost::serialization::make_binary_object(
+			    bytes, n_bytes));
+
+#if BYTE_ORDER == BIG_ENDIAN
+			for (unsigned i=n_bytes-1; i >= 0; i--)
+#else
+			for (unsigned i=0; i < n_bytes; i++)
+#endif
+				size_ |= (size_t(bytes[i]) << (i*8));
 		}
 	}
 }
@@ -799,10 +760,9 @@ I3SuperDST::save(Archive& ar, unsigned version,
 #ifndef NDEBUG
 	I3SuperDSTTimer timer(serialization_time_, serialization_counter_);
 #endif
-	std::vector<I3SuperDSTSerialization::DOMHeader> header_stream;
-	std::vector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
-	std::vector<uint8_t> ldr_stream;
-	RunCodec hlc_width, slc_width;
+	CompactVector<I3SuperDSTSerialization::DOMHeader> header_stream;
+	CompactVector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
+	CompactVector<uint8_t> ldr_stream, hlc_width, slc_width;
 	
 	std::list<I3SuperDSTReadout>::const_iterator readout_it;
 	std::vector<I3SuperDSTChargeStamp>::const_iterator stamp_it;
@@ -821,7 +781,7 @@ I3SuperDST::save(Archive& ar, unsigned version,
 		header.dom_id = EncodeOMKey(readout_it->om_, 13, version);
 		size_t readout_bytes = sizeof(header);
 
-		RunCodec &width_tracker = readout_it->GetLCBit() ? hlc_width : slc_width;
+		std::vector<uint8_t> &widths = readout_it->GetLCBit() ? hlc_width : slc_width;
 		
 		/*
 		 * Special case for the first stamp in the series:
@@ -860,7 +820,7 @@ I3SuperDST::save(Archive& ar, unsigned version,
 				readout_bytes += sizeof(ldr);
 			}
 
-			width_tracker.values_.push_back(stamp_it->GetWidthCode());
+			widths.push_back(stamp_it->GetWidthCode());
 			stamp_stream.push_back(stampytown);
 			readout_bytes += sizeof(stampytown);
 			
@@ -920,7 +880,7 @@ I3SuperDST::save(Archive& ar, unsigned version,
 			stampytown.stamp.hlc_bit = stamp_it->GetLCBit();
 			
 			stampytown.stamp.stop = stop;
-			width_tracker.values_.push_back(stamp_it->GetWidthCode());
+			widths.push_back(stamp_it->GetWidthCode());
 			stamp_stream.push_back(stampytown);
 			readout_bytes += sizeof(stampytown);
 			
@@ -962,44 +922,49 @@ I3SuperDST::save(Archive& ar, unsigned version,
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 
-	/*
-	 * Serialize the packed bytestream. While doing this "by hand" makes 
-	 * for obfuscated code, we can save 6 bytes over the vector
-	 * serialization by storing the length as a short.
-	 */
 	swap_vector(stamp_stream);
-	uint16_t stream_size = stamp_stream.size();
-	ar & make_nvp("NRecords", stream_size);
-	ar & make_nvp("ChargeStamps",
-	    boost::serialization::make_binary_object(&stamp_stream.front(),
-	    stream_size*sizeof(I3SuperDSTSerialization::ChargeStamp)));
-	
-	assert( header_stream.size() < UINT16_MAX );	
-	uint16_t n_headers = header_stream.size();
-	ar & make_nvp("NHeaders", n_headers);
-	
+	ar & make_nvp("ChargeStamps", stamp_stream);
+
 	swap_vector(header_stream);
-	ar & make_nvp("DOMHeaders",
-	    boost::serialization::make_binary_object(&header_stream.front(),
-	    n_headers*sizeof(I3SuperDSTSerialization::DOMHeader)));
+	ar & make_nvp("DOMHeaders", header_stream);
 
-	/* 
-	 * Save the run-length-encoded width codes of the stamps.
-	 */
-	hlc_width.save(ar, version);
-	slc_width.save(ar, version);
+	CompactVector<uint8_t> hlc_width_runs, slc_width_runs;
+	RunCodec::Encode(hlc_width, hlc_width_runs);
+	RunCodec::Encode(slc_width, slc_width_runs);
+	ar & make_nvp("HLCWidth", hlc_width_runs);
+	ar & make_nvp("SLCWidth", slc_width_runs);
 
-	ar & make_nvp("Bytes",
-	    boost::serialization::make_binary_object(&ldr_stream.front(),
-	    ldr_stream.size()*sizeof(uint8_t)));
-	
+	ar & make_nvp("ExtraBytes", ldr_stream);
+
 	return;
 }
 
-void Decode_v0(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_stream,
-    const std::vector<I3SuperDSTSerialization::ChargeStamp> &stamp_stream,
-    std::list<I3SuperDSTReadout> &readouts)
+template <typename Archive>
+void load_v0(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 {
+	uint16_t stream_size;
+	ar & make_nvp("NRecords", stream_size);
+	std::vector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
+	stamp_stream.resize(stream_size);
+	ar & make_nvp("ChargeStamps",
+	    boost::serialization::make_binary_object(&stamp_stream.front(),
+	    stream_size*sizeof(I3SuperDSTSerialization::ChargeStamp)));
+	swap_vector(stamp_stream);
+	
+	/* Count the number of distinct units in the stamp stream */
+	unsigned n_headers = 0;
+	BOOST_FOREACH(const I3SuperDSTSerialization::ChargeStamp &stamp, stamp_stream)
+		if (stamp.stamp.stop)
+			n_headers++;
+		
+	/* Now that we know the length of the header stream, resurrect it. */
+	std::vector<I3SuperDSTSerialization::DOMHeader> header_stream;
+	header_stream.resize(n_headers);
+	ar & make_nvp("DOMHeaders",
+	    boost::serialization::make_binary_object(&header_stream.front(),
+	    n_headers*sizeof(I3SuperDSTSerialization::DOMHeader)));
+	swap_vector(header_stream);
+
 	/* Saturation values */
 	const unsigned max_timecode_header = (1 << (I3SUPERDSTCHARGESTAMP_TIME_BITS_V0
 	    + I3SUPERDST_SLOP_BITS_V0)) - 1;
@@ -1031,7 +996,8 @@ void Decode_v0(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 		/* If the time is saturated, add the next 15 bits. */
 		if (timecode == max_timecode_header) {
 			stamp_it++;
-			readout.time_overflow_ = stamp_it->overflow.code;
+			timecode += stamp_it->overflow.code;
+			//readout.time_overflow_ = stamp_it->overflow.code;
 		}
 	
 		/* If the time is saturated, add the next 15 bits. */
@@ -1082,12 +1048,27 @@ void Decode_v0(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_str
 	}
 }
 
-void Decode_v1(const std::vector<I3SuperDSTSerialization::DOMHeader> &header_stream,
-    const std::vector<I3SuperDSTSerialization::ChargeStamp> &stamp_stream,
-    const std::vector<uint8_t> &hlc_width, const std::vector<uint8_t> &slc_width,
-    const std::vector<uint8_t> &byte_stream,
-    std::list<I3SuperDSTReadout> &readouts)
+template <typename Archive>
+void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 {
+	CompactVector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
+	ar & make_nvp("ChargeStamps", stamp_stream);
+	swap_vector(stamp_stream);
+
+	CompactVector<I3SuperDSTSerialization::DOMHeader> header_stream;
+	ar & make_nvp("DOMHeaders", header_stream);
+	swap_vector(header_stream);
+
+	CompactVector<uint8_t> hlc_width_runs, slc_width_runs;
+	ar & make_nvp("HLCWidth", hlc_width_runs);
+	ar & make_nvp("SLCWidth", slc_width_runs);
+	std::vector<uint8_t> hlc_width, slc_width;
+	RunCodec::Decode(hlc_width_runs, hlc_width);
+	RunCodec::Decode(slc_width_runs, slc_width);
+
+	CompactVector<uint8_t> byte_stream;
+	ar & make_nvp("ExtraBytes", byte_stream);
+
 	/* Saturation values */
 	const unsigned max_timecode_header = (1 << (I3SUPERDSTCHARGESTAMP_TIME_BITS_V0
 	    + I3SUPERDST_SLOP_BITS_V0)) - 1;
@@ -1206,68 +1187,14 @@ template <class Archive>
 void
 I3SuperDST::load(Archive& ar, unsigned version)
 {
-	uint16_t stream_size = 0;
-	uint16_t n_headers = 0;
-	std::vector<I3SuperDSTSerialization::DOMHeader> header_stream;
-	std::vector<I3SuperDSTSerialization::DOMHeader>::const_iterator header_it;
-	std::vector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
-	std::vector<I3SuperDSTSerialization::ChargeStamp>::const_iterator stamp_it;
-	std::vector<uint8_t> byte_stream;
-	std::list<I3SuperDSTReadout>::iterator readout_it;
-	RunCodec hlc_width, slc_width;
-	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-
-	ar & make_nvp("NRecords", stream_size);
-	
-	
-	/* Resurrect the packed ChargeStamps from the archive */
-	stamp_stream.resize(stream_size);
-	ar & make_nvp("ChargeStamps",
-	    boost::serialization::make_binary_object(&stamp_stream.front(),
-	    stream_size*sizeof(I3SuperDSTSerialization::ChargeStamp)));
-	swap_vector(stamp_stream);
-	
-	if (version < 1) {
-		/* Count the number of distinct units in the stamp stream */
-		for (stamp_it = stamp_stream.begin(); stamp_it != stamp_stream.end(); stamp_it++)
-			if (stamp_it->stamp.stop)
-				n_headers++;
-	} else {
-		ar & make_nvp("NHeaders", n_headers);
-	}
-
-		
-	/* Now that we know the length of the header stream, resurrect it. */
-	header_stream.resize(n_headers);
-	ar & make_nvp("DOMHeaders",
-	    boost::serialization::make_binary_object(&header_stream.front(),
-	    n_headers*sizeof(I3SuperDSTSerialization::DOMHeader)));
-	swap_vector(header_stream);
-
-	if (version > 0) {
-		hlc_width.load(ar, version);
-		slc_width.load(ar, version);
-
-		/* Count the number of IceTop headers. There is one extra byte for each. */
-		size_t n_bytes = 0;
-		BOOST_FOREACH(const I3SuperDSTSerialization::DOMHeader &header, header_stream)
-			if (DecodeOMKey(header.dom_id).GetOM() > 60)
-				n_bytes++;
-		byte_stream.resize(n_bytes);
-		ar & make_nvp("Bytes",
-		    boost::serialization::make_binary_object(&byte_stream.front(),
-		    n_bytes*sizeof(uint8_t)));
-	}
 
 	switch (version) {
 		case 0:
-			Decode_v0(header_stream, stamp_stream, readouts_);
+			load_v0(ar, readouts_);
 			break;
 		case 1:
-			Decode_v1(header_stream, stamp_stream,
-			    hlc_width.values_, slc_width.values_, byte_stream,
-			    readouts_);
+			load_v1(ar, readouts_);
 			break;
 		default:
 			log_fatal("Foo!");
