@@ -22,7 +22,7 @@
 #include "icetray/I3Units.h"
 
 #include "dataclasses/payload/I3SuperDST.h"
-#include "dataclasses/physics/I3Waveform.h"
+#include "dataclasses/payload/I3SuperDSTUtils.h"
 
 /* Maximum bit widths used in discretization */
 #define I3SUPERDSTCHARGESTAMP_TIME_BITS_V0   8
