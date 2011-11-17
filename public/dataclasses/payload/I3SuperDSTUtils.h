@@ -102,8 +102,8 @@ inline int fls(int i)
 
 inline int flsl(long i)
 {
-	return i > UINT32_MAX ? fls(unsigned(i >> 32))+32
-	    : fls(unsigned(i & 0xffffffff));
+	return (i & 0xffffffff00000000) ? fls(int(i >> 32))+32
+	    : fls(int(i & 0xffffffff));
 }
 #endif
 
