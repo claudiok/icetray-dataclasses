@@ -91,19 +91,21 @@ namespace I3SuperDSTUtils {
 		static void Encode(const vector_t &runs, vector_t &codes);
 		static void Decode(const vector_t &codes, vector_t &runs);
 	};
-
-	/* Stupid GNU libc, not having fls() */
-	inline unsigned fls(unsigned i)
-	{
-		return i == 0 ? 0 : (8*sizeof(i)-__builtin_clz(i));
-	}
-
-	inline unsigned flsl(uint64_t i)
-	{
-		return i > UINT32_MAX ? fls(unsigned(i >> 32))+32
-		    : fls(unsigned(i & 0xffffffff));
-	}
 }
+
+/* Stupid GNU libc, not having fls() */
+#if !(defined(__APPLE__) || defined(__FreeBSD__))
+inline int fls(int i)
+{
+	return i == 0 ? 0 : (8*sizeof(i)-__builtin_clz(i));
+}
+
+inline int flsl(long i)
+{
+	return i > UINT32_MAX ? fls(unsigned(i >> 32))+32
+	    : fls(unsigned(i & 0xffffffff));
+}
+#endif
 
 #endif
 
