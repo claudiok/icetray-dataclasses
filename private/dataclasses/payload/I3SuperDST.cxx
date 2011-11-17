@@ -163,7 +163,7 @@ namespace I3SuperDSTRecoPulseUtils {
 		/*
 		 * Split if pulses are not from the same launch. 
 		 */
-		static const double tmax = 6.4e3;
+		static const double tmax = 6.45e3;
 
 		return (key.GetOM() > 60 || HasLC(current) != HasLC(previous)
 		    || current.GetTime() - previous.GetTime() > tmax);
@@ -196,10 +196,6 @@ I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0)
 		if (pulse_list.size() == 0) continue;
 		pulse_list.sort(TimeOrdering);
 		
-		//BOOST_FOREACH(const I3RecoPulse &p, pulse_list)
-		//	std::cout << ((p.GetFlags() & I3RecoPulse::LC) ? 'H' : 'S') << p.GetWidth() << " ";
-		//std::cout << std::endl;
-		
 		pulse_head = pulse_list.begin();
 		pulse_tail = boost::next(pulse_head);
 		
@@ -211,7 +207,6 @@ I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0)
 			 * per launch)
 			 */
 			if (ShouldSplit(map_iter->first, *pulse_tail,
-			    //*(boost::prior(pulse_tail)))) {
 			    *(pulse_head))) {
 				readouts_.push_back(I3SuperDSTReadout(
 				    map_iter->first, HasLC(*pulse_head),
@@ -1074,7 +1069,7 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		width_runs.clear();
 		ar & make_nvp("Widths", width_runs);
 		RunCodec::Decode(width_runs, widths[i]);
-		width_its[i] = widths[i].end();
+		width_its[i] = widths[i].begin();
 	}
 
 	CompactVector<uint8_t> byte_stream;
@@ -1099,7 +1094,7 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		bool hlc = stamp_it->stamp.hlc_bit;
 		bool stop = stamp_it->stamp.stop;
 
-		// Widths: {InIce SLC, InIce HLC, IceTop SLC, IceTop HLC}
+		/* Widths: {InIce SLC, InIce HLC, IceTop SLC, IceTop HLC} */
 		std::vector<uint8_t>::const_iterator &width_it =
 		    width_its[2*(readout.om_.GetOM() > 60) + hlc];
 		#ifndef NDEBUG
