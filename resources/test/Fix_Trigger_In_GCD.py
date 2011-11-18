@@ -31,7 +31,7 @@ while oldgcd.more():
 
         try:
             trigSet = smt_ts.trigger_settings
-        except TypeError as detail :
+        except TypeError,detail  :
             print detail
             sys.exit( 0 )
         

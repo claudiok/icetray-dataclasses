@@ -8,7 +8,7 @@ from icecube.icetray import test_disabling_of_python_dynamism as test_freeze
 # is here as a reminder that you can skip classes
 # not going to worry about these
 skip_these = ["I3SuperDST","I3RecoPulseSeriesMapMask",\
-              "I3RecoPulseSeriesMapUnion",\
+              "I3RecoPulseSeriesMapUnion","DroopedSPETemplate",\
               "map_indexing_suite_map_Subdetector_I3TriggerReadoutConfig_entry",
               "PairDoubleDouble"]
 ENSURE( test_freeze.test_all_classes(dc, skip_these) , "not cool" )

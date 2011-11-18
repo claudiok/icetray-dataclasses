@@ -9,9 +9,10 @@ class I3FrameSubterfuge(unittest.TestCase):
 		p = dataclasses.I3RecoPulse()
 		p.time = 0
 		p.charge = 1
+		p.width = 1
 		p.flags = p.PulseFlags.LC | p.PulseFlags.ATWD
 		rpsm[icetray.OMKey(1,1)] = dataclasses.I3RecoPulseSeries([p])
-		sdst = dataclasses.I3SuperDST(rpsm, dataclasses.I3RecoPulseSeriesMap())
+		sdst = dataclasses.I3SuperDST(rpsm)
 		frame = icetray.I3Frame()
 		frame['sdst'] = sdst
 		mask = dataclasses.I3RecoPulseSeriesMapMask(frame, 'sdst')
