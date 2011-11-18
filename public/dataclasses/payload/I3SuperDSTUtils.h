@@ -91,21 +91,18 @@ namespace I3SuperDSTUtils {
 		static void Encode(const vector_t &runs, vector_t &codes);
 		static void Decode(const vector_t &codes, vector_t &runs);
 	};
-}
 
-/* Stupid GNU libc, not having fls() */
-#if !(defined(__APPLE__) || defined(__FreeBSD__))
-inline int fls(int i)
-{
-	return i == 0 ? 0 : (8*sizeof(i)-__builtin_clz(i));
+	inline int findlastset(uint32_t i)
+	{
+		return i == 0 ? 0 : (8*sizeof(i)-__builtin_clz(i));
+	}
+	
+	inline int findlastset(uint64_t i)
+	{
+		return (i & 0xffffffff00000000) ? findlastset(uint32_t(i >> 32))+32
+		    : findlastset(uint32_t(i & 0xffffffff));
+	}
 }
-
-inline int flsl(long i)
-{
-	return (i & 0xffffffff00000000) ? fls(int(i >> 32))+32
-	    : fls(int(i & 0xffffffff));
-}
-#endif
 
 #endif
 

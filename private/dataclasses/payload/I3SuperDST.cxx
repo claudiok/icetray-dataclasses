@@ -428,7 +428,7 @@ GetExponent(uint64_t i, unsigned mbits, unsigned ebits)
 	using namespace I3SuperDSTUtils;
 	assert(mbits > 0);
 	assert(ebits > 0);
-	int e = std::max(int(fls(i))-int(mbits-1), 0);
+	int e = std::max(findlastset(i)-int(mbits-1), 0);
 	return std::min(unsigned(e), (1u << ebits)-1);
 }
 
@@ -438,7 +438,7 @@ I3SuperDST::EncodeWidth(double width, unsigned int maxbits,
 {
 	assert(width > 0 && width < double(std::numeric_limits<unsigned>::max()));
 	unsigned rounded = ceil(width/1.0);
-	unsigned code = std::min(unsigned(fls(rounded)), (1u << maxbits)-1);
+	unsigned code = std::min(unsigned(findlastset(rounded)), (1u << maxbits)-1);
 	return (rounded == 1u << (code-1)) ? code-1 : code;
 }
 
@@ -633,7 +633,7 @@ namespace I3SuperDSTUtils {
 
 	void RunCodec::EncodeRun(vector_t &codes, uint8_t val, unsigned len)
 	{
-		unsigned nblocks = (fls(len)-1)/4 + 1;
+		unsigned nblocks = (findlastset(len)-1)/4 + 1;
 #if BYTE_ORDER == BIG_ENDIAN
 		for (unsigned i=nblocks-1; i >= 0; i--) {
 #else 
@@ -709,7 +709,7 @@ namespace I3SuperDSTUtils {
 			uint8_t tag = size_;
 			ar & make_nvp("Tag", tag);
 		} else {
-			uint8_t n_bytes = (flsl(size_)-1)/8 + 1;
+			uint8_t n_bytes = (findlastset(size_)-1)/8 + 1;
 			uint8_t tag = 0xff - n_bytes;
 			ar & make_nvp("Tag", tag);
 
