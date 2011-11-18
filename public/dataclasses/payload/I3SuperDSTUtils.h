@@ -99,7 +99,7 @@ namespace I3SuperDSTUtils {
 	
 	inline int findlastset(uint64_t i)
 	{
-		return (i & 0xffffffff00000000) ? findlastset(uint32_t(i >> 32))+32
+		return (i & 0xffffffff00000000LL) ? findlastset(uint32_t(i >> 32))+32
 		    : findlastset(uint32_t(i & 0xffffffff));
 	}
 }
