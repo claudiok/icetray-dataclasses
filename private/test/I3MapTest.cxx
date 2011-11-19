@@ -12,7 +12,7 @@
 
 #include <I3Test.h>
 
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/I3Map.h"
 
 #include <iostream>

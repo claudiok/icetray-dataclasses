@@ -23,150 +23,13 @@
 #include <icetray/I3Units.h>
 #include <dataclasses/physics/I3Trigger.h>
 #include <dataclasses/physics/I3TriggerHierarchy.h>
+#include <dataclasses/I3Vector.h>
+#include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 namespace bp = boost::python;
-
-I3TriggerPtr FindTrigger1(I3TriggerHierarchyPtr t, 
-			 int srcID, int typeID, int configID){
-  TriggerKey::SourceID s = static_cast<TriggerKey::SourceID>(srcID);
-  TriggerKey::TypeID ty = static_cast<TriggerKey::TypeID>(typeID);
-
-  I3TriggerPtr tptr;
-  I3Tree<I3Trigger>::iterator t_iter = t->begin();
-  for( ; t_iter != t->end(); t_iter++){
-    TriggerKey tkey = t_iter->GetTriggerKey();
-    if(tkey.GetType() == ty &&
-       tkey.GetSource() == s &&
-       tkey.CheckConfigID() &&
-       tkey.GetConfigID() == configID)
-      tptr = I3TriggerPtr(new I3Trigger(*t_iter));
-  }
-  return tptr;
-}
-
-I3TriggerPtr FindTrigger2(I3TriggerHierarchyPtr t, 
-			 int srcID, int typeID){
-  TriggerKey::SourceID s = static_cast<TriggerKey::SourceID>(srcID);
-  TriggerKey::TypeID ty = static_cast<TriggerKey::TypeID>(typeID);
-
-  if(I3TriggerHierarchyUtils::Find(*t,s,ty) != t->end()){
-    I3Trigger tr(*(I3TriggerHierarchyUtils::Find(*t,s,ty)));
-    return I3TriggerPtr(new I3Trigger(tr));
-  }else{
-    return I3TriggerPtr();
-  }
-}
-
-bool IceTop_triggered(I3TriggerHierarchyPtr t){  
-  I3TriggerHierarchy::iterator t_iter = t->begin();
-  for(; t_iter != t->end(); t_iter++){
-    if(t_iter->GetTriggerKey().GetSource() == TriggerKey::ICE_TOP &&
-       t_iter->GetTriggerFired())
-      return true;
-  }
-  return false;
-}
-
-bool InIce_triggered(I3TriggerHierarchyPtr t){  
-  I3TriggerHierarchy::iterator t_iter = t->begin();
-  for(; t_iter != t->end(); t_iter++){
-    if(t_iter->GetTriggerKey().GetSource() == TriggerKey::IN_ICE &&
-       t_iter->GetTriggerFired())
-      return true;
-  }
-  return false;
-}
-
-bool InIce_SMT_ONLY(I3TriggerHierarchyPtr t){  
-  if(t->size() != 2) return false;
-
-  bool foundGlobal(false);
-  bool foundSMT(false);
-
-  I3TriggerHierarchy::iterator t_iter = t->begin();
-  for(; t_iter != t->end(); t_iter++){
-    if(t_iter->GetTriggerKey().GetSource() == TriggerKey::IN_ICE &&
-       t_iter->GetTriggerKey().GetType() == TriggerKey::SIMPLE_MULTIPLICITY &&
-       t_iter->GetTriggerFired())
-      foundSMT = true;
-
-    if(t_iter->GetTriggerKey().GetSource() == TriggerKey::GLOBAL &&
-       t_iter->GetTriggerKey().GetType() == TriggerKey::THROUGHPUT &&
-       t_iter->GetTriggerFired())
-      foundGlobal = true;
-  }
-  return foundGlobal && foundSMT;
-}
-
-bool AMANDA_triggered(I3TriggerHierarchyPtr t){  
-  I3TriggerHierarchy::iterator t_iter = t->begin();
-  for(; t_iter != t->end(); t_iter++){
-    if(t_iter->GetTriggerKey().GetSource() == TriggerKey::AMANDA_TWR_DAQ &&
-       t_iter->GetTriggerFired())
-      return true;
-  }
-  return false;
-}
-
-vector<double> get_trigger_lengths(I3TriggerHierarchyPtr t, 
-				   int srcID, int typeID){
-  vector<double> tlengths;
-  TriggerKey::SourceID s = static_cast<TriggerKey::SourceID>(srcID);
-  TriggerKey::TypeID ty = static_cast<TriggerKey::TypeID>(typeID);
-
-  I3TriggerPtr tptr;
-  I3Tree<I3Trigger>::iterator t_iter = t->begin();
-  for( ; t_iter != t->end(); t_iter++){
-    TriggerKey tkey = t_iter->GetTriggerKey();
-    if(tkey.GetType() == ty &&
-       tkey.GetSource() == s )
-      tlengths.push_back(t_iter->GetTriggerLength());
-  }
-  return tlengths;
-}
-string TriggerPrettyPrint(const I3Trigger& t){
-  stringstream s;
-  s<<t.GetTriggerKey().GetSourceString()<<" "
-   <<t.GetTriggerKey().GetTypeString()<<" "
-   <<t.GetTriggerKey().GetSubtype()<<" ";
-  if(t.GetTriggerKey().CheckConfigID())
-    s<<t.GetTriggerKey().GetConfigID()<<" ";
-  else
-    s<<"configID not set ";
-  t.GetTriggerFired() ? s<<"FIRED":s<<"NOT_FIRED";
-  s<<" ";
-  s<<" length = "<<t.GetTriggerLength()/I3Units::microsecond<<" mus";
-  s<<" time = "<<t.GetTriggerTime()/I3Units::microsecond<<" mus";
-  return s.str();
-}
-
-string DumpChildren(I3TriggerHierarchyPtr t,
-		    I3TriggerHierarchy::iterator i){
-  stringstream s;
-  I3TriggerHierarchy::sibling_iterator si;
-  for(si = t->begin(i); si != t->end(i); si++){
-    for(int j=0; j<2*t->depth(si); j++) s<<" ";
-    s<<TriggerPrettyPrint(*si) << endl;
-    s<<DumpChildren(t,si);
-  }
-  return s.str();
-}
-
-string print(I3TriggerHierarchyPtr t){
-  stringstream s;
-
-  I3TriggerHierarchy::sibling_iterator i;
-  s<<"*** TRIGGER DUMP - BEGIN***"<<endl;
-  for(i = t->begin(); i != t->end(); i++){
-    for(int j=0; j<2*t->depth(i); j++) s<<" ";
-    s<<TriggerPrettyPrint(*i) << endl;
-    s<<DumpChildren(t,i);
-  }
-  s<<"*** TRIGGER DUMP - END***"<<endl;
-
-  return s.str();
-}
 
 
 int length(I3TriggerHierarchyPtr t){
@@ -174,6 +37,14 @@ int length(I3TriggerHierarchyPtr t){
     return  t->size();
   }
   return 0;
+}
+
+using boost::python::object;
+object
+get_config_id_optional( const TriggerKey& tk){
+  if( tk.GetConfigIDOptional() )
+    return object(tk.GetConfigIDOptional().get() );
+  else return object();
 }
 
 TriggerKey get_trigkey(const I3Trigger& self)
@@ -186,12 +57,15 @@ void register_I3Trigger()
   {
     scope trigscope = 
       class_<I3Trigger, I3TriggerPtr>("I3Trigger")
-      PROPERTY(I3Trigger, Time, TriggerTime)
-      PROPERTY(I3Trigger, Length, TriggerLength)
-      PROPERTY(I3Trigger, Fired, TriggerFired)
+      PROPERTY(I3Trigger, time, TriggerTime)
+      PROPERTY(I3Trigger, length, TriggerLength)
+      PROPERTY(I3Trigger, fired, TriggerFired)
       // force copy of trigkey via standalone fn
-      .add_property("Key", get_trigkey, "Get TriggerKey")
-      .def("__str__", TriggerPrettyPrint)
+      .add_property("key", get_trigkey, "Get TriggerKey")
+      .def("__str__", &stream_to_string<I3Trigger>)
+      .def( self == self )
+      .def( self != self )
+      .def( freeze() )
       ;
 
     enum_<TriggerKey::SourceID>("SourceID")
@@ -230,31 +104,34 @@ void register_I3Trigger()
   }
 
   class_<TriggerKey>("TriggerKey")
-    .add_property("Source", &TriggerKey::GetSource, &TriggerKey::SetSource)
-    .add_property("Type", &TriggerKey::GetType, &TriggerKey::SetType)
-    .add_property("Subtype", &TriggerKey::GetSubtype, &TriggerKey::SetSubtype)
-    .add_property("ConfigID", &TriggerKey::GetConfigID, 
+    .def(init<TriggerKey::SourceID, TriggerKey::TypeID>() )
+    .def(init<TriggerKey::SourceID, TriggerKey::TypeID, int>() )
+    #define PROPERTIES (Source)(Type)(Subtype)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, TriggerKey, PROPERTIES)
+    #undef  PROPERTIES
+    .add_property("config_id", get_config_id_optional, 
 		  (void (TriggerKey::*)(int)) &TriggerKey::SetConfigID)
-    .def("CheckConfigID", &TriggerKey::CheckConfigID)
-    .def("ResetConfigID", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
+    .def("check_config_id", &TriggerKey::CheckConfigID)
+    .def("reset_config_id", (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
+    .def("__str__", &stream_to_string<TriggerKey>)
     .def(self < self)
     .def(self >= self)
     .def(self > self)
     .def(self <= self)
+    .def(self == self)
+    .def(self != self)
+    .def( freeze() )
     ;
     
-
   class_<I3TriggerHierarchy, bases<I3FrameObject>, I3TriggerHierarchyPtr>("I3TriggerHierarchy")
-    .def("FindTrigger", &FindTrigger1)
-    .def("FindTrigger", &FindTrigger2)   
-    .def("InIce_triggered", &InIce_triggered)
-    .def("IceTop_triggered", &IceTop_triggered)
-    .def("AMANDA_triggered", &AMANDA_triggered)
-    .def("InIce_SMT_ONLY", &InIce_SMT_ONLY)
-    .def("__str__", &print)
+    .def("__str__", &stream_to_string<I3TriggerHierarchy>)
     .def("__len__", &length)
-    .def("GetTriggerLengths",&get_trigger_lengths)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
+    ;
+
+  class_<I3Vector<I3Trigger>, bases<I3FrameObject>, shared_ptr<I3Vector<I3Trigger> > >("I3VectorI3Trigger")
+    .def(std_vector_indexing_suite<I3Vector<I3Trigger> >())
+    .def("__str__", &stream_to_string< I3Vector<I3Trigger> >)
     ;
 
   register_pointer_conversions<I3TriggerHierarchy>();

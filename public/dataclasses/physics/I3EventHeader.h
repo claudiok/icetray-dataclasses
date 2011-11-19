@@ -113,7 +113,7 @@ class I3EventHeader : public I3FrameObject
   unsigned GetSubEventID() const { return subEventID_; }
 
   /**
-   * @param subeventid the new subevent id for the subevent
+   * @param eventid the new subevent id for the subevent
    */
   void SetSubEventID(unsigned eventid) { subEventID_ = eventid; }
 
@@ -147,6 +147,8 @@ class I3EventHeader : public I3FrameObject
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
+
+std::ostream& operator<<(std::ostream& oss, const I3EventHeader& eh);
 
 BOOST_CLASS_VERSION(I3EventHeader, i3eventheader_version_);
 I3_POINTER_TYPEDEFS(I3EventHeader);

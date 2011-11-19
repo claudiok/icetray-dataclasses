@@ -84,8 +84,8 @@ I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3Particle& child)
 
 
 
-void I3MCTreeUtils::internal::ConvertComposite(I3MCTree& t, I3MCTree::iterator& i, const vector<I3Particle>& cl){
-  vector<I3Particle>::const_iterator j = cl.begin();
+void I3MCTreeUtils::internal::ConvertComposite(I3MCTree& t, I3MCTree::iterator& i, const std::vector<I3Particle>& cl){
+  std::vector<I3Particle>::const_iterator j = cl.begin();
   for( ; j!=cl.end(); j++){
     I3Particle p(*j);
     p.GetComposite().clear();
@@ -114,7 +114,7 @@ I3MCTreePtr I3MCTreeUtils::ListToTree(I3MCListConstPtr list){
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(const I3Frame &frame, const string& key){
+I3MCTreeUtils::Get(const I3Frame &frame, const std::string& key){
   I3MCListConstPtr list = frame.Get<I3MCListConstPtr>(key);
   if (list) {
     return I3MCTreeUtils::ListToTree(*list);
@@ -124,12 +124,12 @@ I3MCTreeUtils::Get(const I3Frame &frame, const string& key){
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(I3FramePtr frame, const string& key){
+I3MCTreeUtils::Get(I3FramePtr frame, const std::string& key){
   return I3MCTreeUtils::Get(*frame,key);
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(const I3Frame &frame, const string& key1, const string& key2){
+I3MCTreeUtils::Get(const I3Frame &frame, const std::string& key1, const std::string& key2){
   I3MCListConstPtr list1 = frame.Get<I3MCListConstPtr>(key1);
   I3MCListConstPtr list2 = frame.Get<I3MCListConstPtr>(key2);
   if (list1 || list2){
@@ -148,7 +148,7 @@ I3MCTreeUtils::Get(const I3Frame &frame, const string& key1, const string& key2)
 }
 
 I3MCTreeConstPtr
-I3MCTreeUtils::Get(I3FramePtr frame, const string& key1, const string& key2){
+I3MCTreeUtils::Get(I3FramePtr frame, const std::string& key1, const std::string& key2){
   return I3MCTreeUtils::Get(*frame,key1,key2);
 }
 
@@ -278,12 +278,97 @@ I3MCTreeUtils::GetMostEnergeticInIceCascade(I3MCTreeConstPtr t)
   return GetMostEnergeticInIceCascade(*t);
 }
 
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticMuon(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter_return = t.end();
+  for (I3MCTree::iterator iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy &&
+        (iter->GetType()==I3Particle::MuPlus||iter->GetType()==I3Particle::MuMinus))
+      {
+        maxenergy = iter->GetEnergy();
+        iter_return = iter;
+      }
+  }  
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticMuon(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticMuon(*t);
+}
+
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNeutrino(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter_return = t.end();
+  for (I3MCTree::iterator iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && iter->IsNeutrino()){
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNeutrino(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticNeutrino(*t);
+}
+
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNucleus(const I3MCTree& t){
+  double maxenergy = 0.;
+  I3MCTree::iterator iter_return = t.end();
+  for (I3MCTree::iterator iter=t.begin(); iter!=t.end(); ++iter) {
+    if (iter->GetEnergy()>maxenergy && 
+	(iter->GetType()==I3Particle::PPlus || iter->GetType()==I3Particle::PMinus || 
+	 (iter->GetType()>=I3Particle::He4Nucleus || 
+	  iter->GetType()>=I3Particle::Li7Nucleus || 
+	  iter->GetType()>=I3Particle::Be9Nucleus || 
+	  iter->GetType()>=I3Particle::B11Nucleus || 
+	  iter->GetType()>=I3Particle::C12Nucleus || 
+	  iter->GetType()>=I3Particle::N14Nucleus || 
+	  iter->GetType()>=I3Particle::O16Nucleus || 
+	  iter->GetType()>=I3Particle::F19Nucleus || 
+	  iter->GetType()>=I3Particle::Ne20Nucleus || 
+	  iter->GetType()>=I3Particle::Na23Nucleus || 
+	  iter->GetType()>=I3Particle::Mg24Nucleus || 
+	  iter->GetType()>=I3Particle::Al27Nucleus || 
+	  iter->GetType()>=I3Particle::Si28Nucleus || 
+	  iter->GetType()>=I3Particle::P31Nucleus || 
+	  iter->GetType()>=I3Particle::S32Nucleus || 
+	  iter->GetType()>=I3Particle::Cl35Nucleus || 
+	  iter->GetType()>=I3Particle::Ar40Nucleus || 
+	  iter->GetType()>=I3Particle::K39Nucleus || 
+	  iter->GetType()>=I3Particle::Ca40Nucleus || 
+	  iter->GetType()>=I3Particle::Sc45Nucleus || 
+	  iter->GetType()>=I3Particle::Ti48Nucleus || 
+	  iter->GetType()>=I3Particle::V51Nucleus || 
+	  iter->GetType()>=I3Particle::Cr52Nucleus || 
+	  iter->GetType()>=I3Particle::Mn55Nucleus || 
+	  iter->GetType()<= I3Particle::Fe56Nucleus))){
+      maxenergy = iter->GetEnergy();
+      iter_return = iter;
+    }
+  }
+  return iter_return;
+}
+
+I3MCTree::iterator
+I3MCTreeUtils::GetMostEnergeticNucleus(I3MCTreeConstPtr t){
+  return I3MCTreeUtils::GetMostEnergeticNucleus(*t);
+}
+
+
 //------------------------------
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::Get(const I3MCTree& t, I3Particle::LocationType l)
 {
-  vector<I3Particle> v;
+  std::vector<I3Particle> v;
   I3MCTree::iterator iter;
   for (iter=t.begin(); iter!=t.end(); ++iter) 
     if (iter->GetLocationType()==l) 
@@ -291,25 +376,25 @@ I3MCTreeUtils::Get(const I3MCTree& t, I3Particle::LocationType l)
   return v;
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetInIce(const I3MCTree& t)
 {
   return Get(t,I3Particle::InIce);
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetInIce(I3MCTreeConstPtr t)
 {
   return Get(*t,I3Particle::InIce);
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetIceTop(const I3MCTree& t)
 {
   return Get(t,I3Particle::IceTop);
 }
 
-const vector<I3Particle> 
+const std::vector<I3Particle> 
 I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
 {
   return Get(*t,I3Particle::IceTop);
@@ -317,12 +402,17 @@ I3MCTreeUtils::GetIceTop(I3MCTreeConstPtr t)
 
 I3MCTree::iterator 
 I3MCTreeUtils::GetIterator(I3MCTreePtr t, const I3Particle& p){
+  return GetIterator(*t, p);
+}
+
+I3MCTree::iterator 
+I3MCTreeUtils::GetIterator(I3MCTree& t, const I3Particle& p){
   I3MCTree::iterator i;
-  for(i=t->begin() ; i!= t->end(); i++)
+  for(i=t.begin() ; i!= t.end(); i++)
     if((i->GetMinorID() == p.GetMinorID()) &&
        (i->GetMajorID() == p.GetMajorID()))
       return i;
-  return t->end();
+  return t.end();
 }
 
 I3Particle
@@ -366,3 +456,4 @@ I3ParticlePtr
 I3MCTreeUtils::GetPrimary(I3MCTreeConstPtr t, const I3Particle& p){
   return GetPrimary(*t,p);
 }
+

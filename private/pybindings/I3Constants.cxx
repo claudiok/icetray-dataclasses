@@ -60,5 +60,6 @@ void register_I3Constants()
     .def_readonly("Coordinate_shift_z", I3Constants::Coordinate_shift_z, "conversion between icecube and amanda")
     .def_readonly("dt_window_l", I3Constants::dt_window_l, "default value for time residuals")
     .def_readonly("dt_window_h", I3Constants::dt_window_h, "default value for time residuals")
+    .def( freeze() )
     ;
 }

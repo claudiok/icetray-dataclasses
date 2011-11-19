@@ -18,7 +18,6 @@
 #include <dataclasses/TriggerKey.h>
 #include <dataclasses/Utility.h>
 
-
 /**
  * @brief The basic trigger class.  
  * 
@@ -94,6 +93,9 @@ private:
   const TriggerKey& GetTriggerKey() const {return key_;}
   TriggerKey& GetTriggerKey() {return key_;}
 
+  bool operator==(const I3Trigger& rhs) const;
+  bool operator!=(const I3Trigger& rhs) const;
+
  private:
   static const double FROM_TENTH_NS_TO_NS_CORRECTION_FACTOR;
   
@@ -105,6 +107,8 @@ private:
   // logging
   SET_LOGGER("I3Trigger");
 };
+
+std::ostream& operator<<(std::ostream& oss, const I3Trigger& t);
 
 BOOST_CLASS_VERSION(I3Trigger, i3trigger_version_);
 /**

@@ -88,7 +88,7 @@ double OldmpeThreshold(const I3DOMStatus&);
  * Given a string which contains the DOMCal version (e.g. "6.1.0"), return a vector<int>
  * which contains the numbers as its elements (i.e. what's between the separating "."s)
  */
-vector<int> DOMCalVersion (const I3DOMCalibration&);
+std::vector<int> DOMCalVersion (const I3DOMCalibration&);
 
 /**
  * Converts a ATWDselect enumeration into ATWD ID.

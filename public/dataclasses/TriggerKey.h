@@ -16,7 +16,9 @@
 
 #include <icetray/I3Logging.h>
 #include <dataclasses/Utility.h>
-
+#ifndef __CINT__
+#include <boost/optional.hpp>
+#endif
 
 /**
  * List the names of enumeration members defined in this file
@@ -144,16 +146,17 @@ class TriggerKey
   SourceID source_;
   TypeID type_;
   SubtypeID subtype_;
-  int configID_;
-  bool configIDSet_;
+#ifndef __CINT__
+  boost::optional<int> configID_;
+#endif
 
  public:
   /**
    * Default constructor.
    */
   TriggerKey()
-    : source_(UNKNOWN_SOURCE), type_(UNKNOWN_TYPE), subtype_(NO_SUBTYPE),
-      configIDSet_(false) {}
+    : source_(UNKNOWN_SOURCE), type_(UNKNOWN_TYPE), subtype_(NO_SUBTYPE)
+      {}
 
   /**
    * Constructor.
@@ -163,8 +166,8 @@ class TriggerKey
    * @param subtype Subtype ID (optional; default is NO_SUBTYPE).
    */
   TriggerKey(SourceID source, TypeID type, SubtypeID subtype = NO_SUBTYPE)
-    : source_(source), type_(type), subtype_(subtype),
-      configIDSet_(false) {}
+    : source_(source), type_(type), subtype_(subtype)
+      {}
 
   /**
    * Constructor.
@@ -176,7 +179,7 @@ class TriggerKey
    */
   TriggerKey(SourceID source, TypeID type, int configID, SubtypeID subtype = NO_SUBTYPE)
     : source_(source), type_(type), subtype_(subtype),
-      configID_(configID), configIDSet_(true) {}
+      configID_(configID) {}
 
   /**
    * Destructor.
@@ -274,7 +277,7 @@ class TriggerKey
    */
   bool CheckConfigID() const
   {
-    return configIDSet_;
+    return configID_ ? true : false;
   }
 
   /**
@@ -284,18 +287,23 @@ class TriggerKey
    */
   int GetConfigID() const
   {
-    if(!configIDSet_)
+    if( ! configID_ )
       log_fatal("No configuration ID set.");
     
-    return configID_;
+    return configID_.get();
   }
 
+  boost::optional<int> GetConfigIDOptional() const
+  {
+    return configID_ ;
+  }
+ 
   /**
    * Resets the configuration ID.
    */
   void SetConfigID()
   {
-    configIDSet_ = false;
+    configID_ = boost::optional<int>();
   }
 
   /**
@@ -305,8 +313,7 @@ class TriggerKey
    */
   void SetConfigID(int configID)
   {
-    configID_ = configID;
-    configIDSet_ = true;
+    configID_ = boost::optional<int>(configID);
   }
 
   /**
@@ -321,8 +328,8 @@ class TriggerKey
     return((rhs.source_ == source_)
            && (rhs.type_ == type_)
            && (rhs.subtype_ == subtype_)
-           && ((!rhs.configIDSet_ && !configIDSet_)
-               || (rhs.configIDSet_ && configIDSet_
+           && ((!rhs.configID_ && !configID_)
+               || (rhs.configID_ && configID_
                    && (rhs.configID_ == configID_))));
   }
 
@@ -340,8 +347,9 @@ class TriggerKey
 
  private:
   friend class boost::serialization::access;
-  template <class Archive> void serialize (Archive& ar, unsigned version);
-
+  template <class Archive> void save(Archive & ar, unsigned version) const;
+  template <class Archive> void load(Archive & ar, unsigned version);
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 
   // logging
   SET_LOGGER("TriggerKey");
@@ -425,5 +433,7 @@ operator<=(const TriggerKey& lhs, const TriggerKey& rhs)
 {
   return !(lhs > rhs);
 }
+
+std::ostream& operator<<(std::ostream& oss, const TriggerKey& k);
 
 #endif

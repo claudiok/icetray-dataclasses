@@ -17,7 +17,6 @@
 #define I3POSITION_H_INCLUDED
 
 #include <math.h>
-using namespace std;
 
 #include "icetray/I3FrameObject.h"
 #include "Utility.h"
@@ -237,6 +236,9 @@ class I3Position : public I3FrameObject
 };
 
 bool operator==(const I3Position& lhs, const I3Position& rhs);
+
+std::ostream& operator<<(std::ostream& oss, const I3Position& p);
+
 
 I3_POINTER_TYPEDEFS(I3Position);
 BOOST_CLASS_VERSION(I3Position, i3position_version_);

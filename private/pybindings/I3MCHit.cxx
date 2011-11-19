@@ -32,21 +32,17 @@ void register_I3MCHit()
   {
     scope mchit_scope = 
       class_<I3MCHit, boost::shared_ptr<I3MCHit> >("I3MCHit")
-      PROPERTY(I3MCHit, Time, Time)
-      PROPERTY(I3MCHit, HitID, HitID)
-      PROPERTY(I3MCHit, Weight, Weight)
-      PROPERTY(I3MCHit, CherenkovDistance, CherenkovDistance)
-      .def("GetParticleMajorID", &I3MCHit::GetParticleMajorID)
-      .def("GetParticleMinorID", &I3MCHit::GetParticleMinorID)
-      .def("GetHitSource", &I3MCHit::GetHitSource)
-      // better pybindings.
-      #define PROPERTIES (Time)(HitID)(HitSource)(Weight)(CherenkovDistance)
+      .def(init<uint64_t,int>() )
+      #define PROPERTIES (Time)(HitID)(Weight)(CherenkovDistance)(HitSource)
       #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3MCHit, PROPERTIES)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
+      #undef PROPERTIES
+      #undef RO_PROPERTIES
+      .def( freeze() )
       ;
 
-    enum_<I3MCHit::HitSource>("HitSource")
+    enum_<I3MCHit::HitSource>("I3MCHitSource")
       .value("UNKNOWN", I3MCHit::UNKNOWN)
       .value("SPE", I3MCHit::SPE)
       .value("RANDOM", I3MCHit::RANDOM)
@@ -62,15 +58,18 @@ void register_I3MCHit()
 
   class_<std::map<OMKey, I3MCHit> >("map_OMKey_I3MCHit")
     .def(std_map_indexing_suite<std::map<OMKey, I3MCHit> >())
+    .def( freeze() )
     ;
 
   class_<std::vector<I3MCHit> >("vector_I3MCHit")
     .def(std_vector_indexing_suite<std::vector<I3MCHit> >())
+    .def( freeze() )
     ;
 
   class_<I3MCHitSeriesMap, bases<I3FrameObject>, I3MCHitSeriesMapPtr>("I3MCHitSeriesMap")
     .def(std_map_indexing_suite<I3MCHitSeriesMap>())
+    .def( freeze() )
     ;
-
+  
   register_pointer_conversions<I3MCHitSeriesMap>();
 }

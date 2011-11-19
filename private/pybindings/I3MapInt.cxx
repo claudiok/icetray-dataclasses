@@ -21,6 +21,8 @@
 
 #include <dataclasses/I3Map.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 
@@ -28,16 +30,19 @@ void register_I3MapInt()
 {
   class_<I3MapUnsignedUnsigned, bases<I3FrameObject>, I3MapUnsignedUnsignedPtr>("I3MapUnsignedUnsigned")
     .def(std_map_indexing_suite<I3MapUnsignedUnsigned >())
+    .def("__str__", &stream_to_string<I3MapUnsignedUnsigned>)
     ;
   register_pointer_conversions<I3MapUnsignedUnsigned>();
   
   class_<I3MapUShortUShort, bases<I3FrameObject>, I3MapUShortUShortPtr>("I3MapUShortUShort")
     .def(std_map_indexing_suite<I3MapUShortUShort >())
+    .def("__str__", &stream_to_string<I3MapUShortUShort>)
     ;
   register_pointer_conversions<I3MapUShortUShort>();
   
   class_<I3MapIntVectorInt, bases<I3FrameObject>, I3MapIntVectorIntPtr>("I3MapIntVectorInt")
     .def(std_map_indexing_suite<I3MapIntVectorInt >())
+    .def("__str__", &stream_to_string<I3MapIntVectorInt>)
     ;
   register_pointer_conversions<I3MapIntVectorInt>();
   

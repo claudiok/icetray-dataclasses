@@ -21,6 +21,8 @@
 #include <vector>
 
 #include <dataclasses/I3Direction.h>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 
@@ -32,24 +34,22 @@ void register_I3Direction()
   void (I3Direction::* threeary)(double, double, double) = &I3Direction::SetDirection;
 
   class_<I3Direction, bases<I3FrameObject>, boost::shared_ptr<I3Direction> >("I3Direction")
-    //.def(init<double,double,double,int>())
     .def(init<double,double>())
-    .def("SetDirection", oneary)
-    .def("SetDirection", twoary)
-    .def("SetDirection", threeary)
-    .def("SetThetaPhi", &I3Direction::SetThetaPhi)
-    .def("ResetDirection", &I3Direction::ResetDirection)
-    .def("NullDirection", &I3Direction::NullDirection)
-    .def("GetZenith", &I3Direction::GetZenith)
-    .def("GetAzimuth", &I3Direction::GetAzimuth)
-    .def("GetX", &I3Direction::GetX)
-    .def("GetY", &I3Direction::GetY)
-    .def("GetZ", &I3Direction::GetZ)
-    .def("CalcTheta", &I3Direction::CalcTheta)
-    .def("CalcPhi", &I3Direction::CalcPhi)
-    .def("RotateX", &I3Direction::RotateX)
-    .def("RotateY", &I3Direction::RotateY)
-    .def("RotateZ", &I3Direction::RotateZ)
+    .def(init<double,double,double>())
+    .def("set_direction", oneary)
+    .def("set_direction", twoary)
+    .def("set_direction", threeary)
+     #define MEMBERS (SetThetaPhi)(ResetDirection)(NullDirection)(RotateX)(RotateY)(RotateZ)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Direction, MEMBERS)
+    #undef  MEMBERS
+    #define RO_PROPERTIES (Zenith)(Azimuth)(X)(Y)(Z)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Direction, RO_PROPERTIES)
+    #undef  RO_PROPERTIES
+    .add_property("theta", &I3Direction::CalcTheta)
+    .add_property("phi", &I3Direction::CalcPhi)
+    .def("__str__", &stream_to_string<I3Direction>)
+    .def(self == self)
+    .def( freeze() )
     ;
   register_pointer_conversions<I3Direction>();
 }

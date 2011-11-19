@@ -22,14 +22,10 @@
 #include <vector>
 
 #include <dataclasses/I3Position.h>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
-
-string dump(const I3Position &p){
-  ostringstream s;
-  s << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
-  return s.str();
-}
 
 tuple i3position_to_tuple(const I3Position& p)
 {
@@ -79,22 +75,20 @@ void register_I3Position()
      "I3Position objects can subscripted like 5-element arrays (x, y, z, theta, phi) and converted to tuples and lists")
     .def(init<double,double,double>())
     .def(init<double,double,double,I3Position::RefFrame>())
-    PROPERTY(I3Position, X, X)
-    PROPERTY(I3Position, Y, Y)
-    PROPERTY(I3Position, Z, Z)
-    .def("GetR", &I3Position::GetR)
-    .def("GetTheta", &I3Position::GetTheta)
-    .def("GetPhi", &I3Position::GetPhi)
-    .def("GetRho", &I3Position::GetRho)
-    .def("ShiftCoordSystem", &I3Position::ShiftCoordSystem)
-    .def("RotateX", &I3Position::RotateX)
-    .def("RotateY", &I3Position::RotateY)
-    .def("RotateZ", &I3Position::RotateZ)
-    .def("CalcDistance", &I3Position::CalcDistance)
-    .def("__str__", dump)
+    PROPERTY(I3Position, x, X)
+    PROPERTY(I3Position, y, Y)
+    PROPERTY(I3Position, z, Z)
+#define RO_PROPERTIES (R)(Theta)(Phi)(Rho)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Position, RO_PROPERTIES)
+#undef  RO_PROPERTIES
+#define DEFS (ShiftCoordSystem)(RotateX)(RotateY)(RotateZ)(CalcDistance)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Position, DEFS)
+#undef  DEFS
+    .def("__str__", &stream_to_string<I3Position>)
     .def("__len__", i3position_len)
     .def("__getitem__", i3position_getitem)
     .def("__setitem__", i3position_setitem)
+    .def( freeze() )
     ;
 
   enum_<I3Position::RefFrame>("RefFrame")

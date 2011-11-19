@@ -5,7 +5,7 @@
 #include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/I3DOMFunctions.h"
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
 
 #include <sstream>
 #include <iostream>

@@ -10,13 +10,16 @@
 
 #include <stdint.h> //int64_t, etc
 #include <dataclasses/copy_if.h>
+
+#ifndef __CINT__
 #include <icetray/serialization.h>
+#endif
+
 #include <icetray/IcetrayFwd.h>
 #include <icetray/I3FrameObject.h>
 
 #include <icetray/I3Logging.h>
 
-using namespace std;
 
 // forward declarations.  
 template <typename T>
@@ -37,7 +40,7 @@ I3MapGet(const typename MapType::key_type& key,
   typename MapType::iterator found = themap.find(key);
   if(found == themap.end())
     {
-      ostringstream error;
+      std::ostringstream error;
       error<<"Couldn't find key "<<key<<" in this map";
       log_fatal("%s",error.str().c_str());
     }
@@ -56,7 +59,7 @@ I3MapGet(const typename MapType::key_type& key,
   if(found == themap.end())
     if(found == themap.end())
       {
-	ostringstream error;
+	std::ostringstream error;
 	error<<"Couldn't find key "<<key<<" in this map";
 	log_fatal("%s", error.str().c_str());
       }

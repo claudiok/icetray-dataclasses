@@ -21,142 +21,27 @@
 
 #include <vector>
 
-#include <dataclasses/physics/I3MCTreeUtils.h>
-#include <dataclasses/physics/I3MCTree.h>
+ #include <dataclasses/physics/I3MCTree.h>
 #include <dataclasses/I3Constants.h>
+#include "mctree/I3MCTreeUtils.h"
+#include "mctree/I3MCTreeTools.h"
+#include "mctree/BaseClassMethods.h"
 
 using namespace boost::python;
 
-inline boost::shared_ptr<I3Particle> GetMostEnergeticPrimary(I3MCTree* tree)
-{
-  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticPrimary(*tree);
-  if (itr==tree->end())
-    {
-      return I3ParticlePtr(new I3Particle());
-    }
-  else
-    {
-      return I3ParticlePtr(new I3Particle(*itr));
-    }
-}
-inline boost::shared_ptr<I3Particle> GetMostEnergeticInIce(I3MCTree* tree)
-{
-  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticInIce(*tree);
-  if (itr==tree->end())
-    {
-      return I3ParticlePtr(new I3Particle());
-    }
-  else
-    {
-      return I3ParticlePtr(new I3Particle(*itr));
-    }
-}
-inline boost::shared_ptr<I3Particle> GetMostEnergetic(I3MCTree* tree,I3Particle::ParticleType type)
-{
-  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergetic(*tree,type);
-  if (itr==tree->end())
-    {
-      return I3ParticlePtr(new I3Particle());
-    }
-  else
-    {
-      return I3ParticlePtr(new I3Particle(*itr));
-    }
-}
-inline boost::shared_ptr<I3Particle> GetMostEnergeticTrack(I3MCTree* tree)
-{
-  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticTrack(*tree);
-  if (itr==tree->end())
-    {
-      return I3ParticlePtr(new I3Particle());
-    }
-  else
-    {
-      return I3ParticlePtr(new I3Particle(*itr));
-    }
-}
-inline boost::shared_ptr<I3Particle> GetMostEnergeticCascade(I3MCTree* tree)
-{
-  I3MCTree::iterator itr=I3MCTreeUtils::GetMostEnergeticCascade(*tree);
-  if (itr==tree->end())
-    {
-      return I3ParticlePtr(new I3Particle());
-    }
-  else
-    {
-      return I3ParticlePtr(new I3Particle(*itr));
-    }
+using std::cout;
+using std::endl;
+
+void default_dump(const I3MCTree& t) { 
+  cout<< I3MCTreeTools::Dump(t) <<endl; 
 }
 
-inline vector<double> MPSpeedProfile(I3MCTree* tree){
-  vector<double> speed_prof;
-  I3MCTree::iterator iter = I3MCTreeUtils::GetMostEnergeticPrimary(*tree);
-  while(iter.number_of_children()){
-    if(iter.number_of_children() > 1) log_fatal("wasn't expecting more than one child.");
-    if(iter->GetType() == I3Particle::Monopole){
-      speed_prof.push_back(iter->GetSpeed()/I3Constants::c);
-      iter = tree->child(iter,0);
-    }
-  }
-  return speed_prof;
+void dump_to_cout(const I3MCTree& t, const std::string& config) { 
+  cout<< I3MCTreeTools::Dump(t,config) <<endl; 
 }
 
-vector<I3Particle> GetInIce(I3MCTreePtr t){
-  return I3MCTreeUtils::GetInIce(t);
-}
-
-void AddPrimary(I3MCTreePtr t, I3ParticlePtr p){
-  return I3MCTreeUtils::AddPrimary(*t,*p);
-}
-
-void AppendChild(I3MCTreePtr t, I3ParticlePtr p, I3ParticlePtr d){
-  return I3MCTreeUtils::AppendChild(*t,*p, *d);
-}
-
-int NCascades(I3MCTreePtr t){
-  int n_cascades(0);
-  I3MCTree::iterator t_iter = t->begin();
-  for( ; t_iter != t->end(); t_iter++){
-    if(t_iter->IsCascade()) n_cascades++;
-  }
-  return n_cascades;
-}
-
-vector<I3Particle> GetPrimaries(I3MCTreePtr t){
-  return I3MCTreeUtils::GetPrimaries(t);
-}
-
-void Merge(I3MCTreePtr t, I3MCTreePtr t2){
-  I3MCTree::sibling_iterator si;
-  for(si = t2->begin(); si != t2->end(); si++){      
-    t->insert_subtree(t->begin(),si);
-  }
-}
-
-void TimeShift(I3MCTreePtr t, double dt){
-  I3MCTree::iterator i;
-  for(i = t->begin(); i != t->end(); i++){
-    i->SetTime( i->GetTime() + dt);
-  }
-}
-
-vector<I3Particle> 
-GetDaughters(I3MCTreePtr t, I3ParticlePtr p){
-  return I3MCTreeUtils::GetDaughters(*t,*p);
-}
-
-bool HasParent(I3MCTreePtr t, I3ParticlePtr c){
-  return I3MCTreeUtils::HasParent(*t,*c);
-}
-
-inline I3ParticlePtr Get(const I3MCTree& tree, const I3MCHit& hit)
-{
-  return I3ParticlePtr(new I3Particle(I3MCTreeUtils::Get(tree,hit)));
-}
-
-inline I3ParticlePtr GetPrimary(const I3MCTree& tree, const I3Particle& particle)
-{
-  return I3ParticlePtr(new I3Particle(*I3MCTreeUtils::GetPrimary(tree,particle)));
+std::string stringize(const I3MCTree& t) { 
+  return I3MCTreeTools::Dump(t); 
 }
 
 #define WRAP_PROP_FN(R, Data, Elem)\
@@ -165,39 +50,65 @@ inline I3ParticlePtr GetPrimary(const I3MCTree& tree, const I3Particle& particle
 	.add_property(snake_case(BOOST_PP_STRINGIZE(Elem)), &Elem)
 void register_I3MCTree()
 {
-  class_<I3MCTree, bases<I3FrameObject>, I3MCTreePtr>("I3MCTree")
-    .def("GetMostEnergeticPrimary",&GetMostEnergeticPrimary)
-    .def("GetMostEnergeticCascade",&GetMostEnergeticCascade)
-    .def("GetMostEnergeticInIce",&GetMostEnergeticInIce)
-    .def("GetMostEnergetic",&GetMostEnergetic)
-    .def("GetMostEnergeticTrack",&GetMostEnergeticTrack)
-    .def("MPSpeedProfile",&MPSpeedProfile)
-    .def("GetInIce",&GetInIce)
-    .def("GetPrimaries",&GetPrimaries)
-    .def("NCascades",&NCascades)
-    .def("Merge",&Merge)
-    .def("TimeShift",&TimeShift)
-    .def("GetDaughters",&GetDaughters)
-	.def("HasParent",&HasParent)
-    .def("AddPrimary",&AddPrimary)
-    .def("AppendChild",&AppendChild)
-    .def("Get",&Get)
-    .def("GetPrimary",&GetPrimary)
-    .def("__len__",&I3MCTree::size)
-    .def("__iter__", range<return_value_policy<copy_non_const_reference> >
-	 (
-	  (I3MCTree::pre_order_iterator(I3MCTree::*)() const) &I3MCTree::begin, 
-	  (I3MCTree::pre_order_iterator(I3MCTree::*)() const) &I3MCTree::end
-	  )
-	 )
-	#define PROPS (MostEnergeticPrimary)(MostEnergeticCascade)\
-		      (MostEnergeticInIce)(MostEnergetic)\
-		      (MostEnergeticTrack)(InIce)\
-		      (Primaries)(Primary)(Daughters)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_FN, ~, PROPS)
-	#define BARE_PROPS (NCascades)(MPSpeedProfile)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
-    ;
 
-  register_pointer_conversions<I3MCTree>();
+  {
+    scope outer = 
+      class_<I3MCTree, bases<I3FrameObject>, I3MCTreePtr>("I3MCTree")
+      // I3MCTreeUtils
+      .def("merge",&Merge)
+      .def("get_daughters",&GetDaughters)
+      .def("get_most_energetic",&GetMostEnergetic)
+      .def("get_number_of_stochastics",&GetNumberOfStochastics)
+      .def("has_parent",&HasParent)
+      .def("add_primary",&AddPrimary)
+      .def("get_primary",&GetPrimary)
+      .def("append_child",&AppendChild)
+      // end I3MCTreeUtils
+      // I3MCTreeTools
+      .def("get_particle_from_hit", &I3MCTreeTools::Get )
+      .def("dump", &dump_to_cout )
+      .def("dump", &default_dump )
+      .add_property("neutrino_event_type", &I3MCTreeTools::GetNeutrinoEventType )
+      .add_property("is_neutral_current", &I3MCTreeTools::IsNeutralCurrent )
+      .add_property("is_charged_current", &I3MCTreeTools::IsChargedCurrent )
+      .add_property("is_glashow_resonance", &I3MCTreeTools::IsGlashowResonance )
+      .def("check_neutrino", &I3MCTreeTools::CheckNeutrino )
+      // end I3MCTreeTools
+      // BaseClassMethods
+      .def("depth", &depth)
+      // end from BaseClassMethods
+      .def("__str__", &stringize )
+      .def("__len__",&I3MCTree::size)
+      .def("__iter__", range<return_value_policy<copy_non_const_reference> >
+	   (
+	    (I3MCTree::pre_order_iterator(I3MCTree::*)() const) &I3MCTree::begin, 
+	    (I3MCTree::pre_order_iterator(I3MCTree::*)() const) &I3MCTree::end
+	    )
+	   )
+      #define PROPS (MostEnergeticPrimary)(MostEnergeticCascade)	\
+	  (MostEnergeticNeutrino)(MostEnergeticNucleus)(MostEnergeticMuon) \
+	(MostEnergeticInIce)(MostEnergetic)			\
+	  (MostEnergeticTrack)(InIce)(Primaries) \
+	  (MostEnergeticStochastic)		 \
+	  (NumberOfAtmosphericMuons )
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_FN, ~, PROPS)
+      #undef PROPS
+      #define BARE_PROPS (NCascades) 
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
+      #undef BARE_PROPS
+      .def( freeze() )      
+      ;
+
+    enum_<NuEventType>("NuEventType")
+      .value("CHARGED_CURRENT",CHARGED_CURRENT)
+      .value("NEUTRAL_CURRENT",NEUTRAL_CURRENT)
+      .value("GLASHOW_RESONANCE",GLASHOW_RESONANCE)
+      .value("NO_INTERACTION",NO_INTERACTION)
+      .export_values()
+      ;
+  }
+
+    register_pointer_conversions<I3MCTree>();
 }
+#undef WRAP_PROP_FN
+#undef WRAP_PROP_BARE

@@ -12,6 +12,7 @@
 #ifndef I3DOMCALIBRATION_H_INCLUDED
 #define I3DOMCALIBRATION_H_INCLUDED
 
+#include <string>
 #include "dataclasses/Utility.h"
 
 #include <map>
@@ -21,7 +22,6 @@
 #include <cmath>
 #include <string>
 
-using namespace std;
 static const unsigned i3domcalibration_version_ = 10;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
@@ -93,17 +93,19 @@ struct TauParam
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
-  TauParam()
-  {
-    P0 = NAN;
-    P1 = NAN;
-    P2 = NAN;
-    P3 = NAN;
-    P4 = NAN;
-    P5 = NAN;
-    TauFrac = NAN;
-  }
-
+  
+  TauParam():
+  P0(NAN),P1(NAN),
+  P2(NAN),P3(NAN),
+  P4(NAN),P5(NAN),
+  TauFrac(NAN){}
+  
+  TauParam(double p0, double p1, double p2, double p3, double p4, double p5, double tauFrac):
+  P0(p0),P1(p1),
+  P2(p2),P3(p3),
+  P4(p4),P5(p5),
+  TauFrac(tauFrac){}
+  
 };
 
 BOOST_CLASS_VERSION(TauParam, tauparam_version_);
@@ -135,7 +137,7 @@ BOOST_CLASS_VERSION(SPETemplate, pulsetemplate_version_);
  * convert values for later storage (at that SHOULD use I3Units)
  *
  * @author Tom McCauley <tpmccauley@lbl.gov>
- * @author Erik Blaufuss <blaufuss at icecube umd edu>
+ * @author Erik Blaufuss \<blaufuss at icecube umd edu\>
  *
  * 
  */
@@ -154,7 +156,7 @@ class I3DOMCalibration {
   /**
    * Set MB Temperature at time of calibration
    */
-  void SetTemperature(double temperature) { temperature_ = temperature; }
+  void SetTemperature(double temperature);
 
   /**
    * Get DOMCAL measured PMT transit time
@@ -232,7 +234,7 @@ class I3DOMCalibration {
   /**
    * Set parameters for droop correction on the baseline
    */
-  void SetTauParameters(TauParam tauparameters) { tauparameters_ = tauparameters; }
+  void SetTauParameters(TauParam tauparameters);
 
 
 
@@ -285,7 +287,7 @@ class I3DOMCalibration {
   void SetATWDDeltaT(unsigned int chip, double deltat);
 
   /**
-   * Get fit parameters from domcal file <atwdfreq> which is 
+   * Get fit parameters from domcal file \<atwdfreq\> which is 
    * the sampling rate calibration for each ATWD chip 0 or 1 
    */
   QuadraticFit GetATWDFreqFit (unsigned int chip) const;
@@ -303,28 +305,28 @@ class I3DOMCalibration {
    * counts to volts.
    */
 
-  const LinearFit& GetATWDBinCalibFit(unsigned int id,	
-				      unsigned int channel,
-				      unsigned int bin) const;
+  const LinearFit& GetATWDBinCalibFit(unsigned int id,
+              unsigned int channel,
+              unsigned int bin) const;
 
   /**
    * Set parameters for conversion of count to voltage 
    * for each ATWD, each ATWD channel, and each ATWD bin.
    */
   void SetATWDBinCalibFit(unsigned int id,
-			  unsigned int channel,
-			  unsigned int bin,
-			  LinearFit fitParams);
+        unsigned int channel,
+        unsigned int bin,
+        LinearFit fitParams);
 
   /**
    *  Get/Set the version of DOMCal.
    */
-  string GetDOMCalVersion() const
+  std::string GetDOMCalVersion() const
   {
     return domcalVersion_;
-  }	
+  }
   
-  void SetDOMCalVersion(string version)
+  void SetDOMCalVersion(std::string version)
   {
     domcalVersion_ = version;
   }
@@ -333,17 +335,17 @@ class I3DOMCalibration {
    *  Get the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
    */
   
-  double GetATWDBaseline(unsigned int id,	
-			       unsigned int channel,
-			       unsigned int bin) const;
+  double GetATWDBaseline(unsigned int id,  
+             unsigned int channel,
+             unsigned int bin) const;
   /**
    *  Set the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
    */
   
   void SetATWDBaseline(unsigned int id,
-		       unsigned int channel,
-		       unsigned int bin,
-		       double baseval);
+           unsigned int channel,
+           unsigned int bin,
+           double baseval);
 
   /**
    * Get the average ATWD baseline in data-taking mode, as measured from beacon launches.
@@ -428,24 +430,86 @@ class I3DOMCalibration {
   {
     noiseRate_ = noiserate;
   }
+  
+  //On the assumption that this will be evaulated many times, we copy all data into it. 
+  //This makes the object larger but hopefully avoids extra pointer derefences
+  class DroopedSPETemplate{
+  public:
+    SPETemplate pulse;
+    struct droopParams{
+      SPETemplate pulse;
+      double tauFrac, time1, time2;
+      
+      droopParams(){}
+      droopParams(const SPETemplate& templ, 
+            double tauFrac, double time1, double time2):
+      pulse(templ),tauFrac(tauFrac),time1(time1),time2(time2){}
+    } droop;
+    bool droopy;
+    
+    DroopedSPETemplate(const SPETemplate& templ):
+    pulse(templ),droopy(false){}
+    
+    DroopedSPETemplate(const SPETemplate& templ,
+               const SPETemplate& droopTempl, 
+               double tauFrac, double time1, double time2):
+    pulse(templ),droop(droopTempl,tauFrac,time1,time2),droopy(true){}
+    
+    double operator()(double t){
+      if (!droopy)
+        return SPEPulseShape(t);
+      
+      double norm = (1.0 - droop.tauFrac)*droop.time1 + droop.tauFrac*droop.time2;
+      double c1 = (1.0 - droop.tauFrac)*droop.time1/norm;
+      double c2 = droop.tauFrac*droop.time2/norm;
+      
+      return SPEPulseShape(t) +
+      c1*DroopReactionShape(t, droop.time1) +
+      c2*DroopReactionShape(t, droop.time2);
+    }
+    
+  private:
+    double SPEPulseShape(double t) const {
+      return pulse.c*pow(exp(-(t - pulse.x0)/pulse.b1) + 
+                         exp((t - pulse.x0)/pulse.b2),-8.0);
+    }
+    
+    double DroopReactionShape(double t, double tau) const{
+      return (pulse.c*droop.pulse.c/tau)*
+        pow(exp(-(t - pulse.x0*droop.pulse.x0)/(pulse.b1*droop.pulse.b1)) + 
+            exp((t - pulse.x0*droop.pulse.x0)/(pulse.b2*droop.pulse.b2*tau)),-8);
+    }
+  };
 
-  double ATWDPulseTemplate(double time, unsigned int channel = 0) const;
-  double FADCPulseTemplate(double time) const;
+  DroopedSPETemplate DiscriminatorPulseTemplate(bool droopy = false) const;
+  DroopedSPETemplate ATWDPulseTemplate(unsigned int channel = 0, bool droopy = false) const;
+  DroopedSPETemplate FADCPulseTemplate(bool droopy = false) const;
  
   template <class Archive>
     void serialize(Archive& ar, unsigned version);
     
+  enum ToroidType {
+    OLD_TOROID = 0,
+    NEW_TOROID = 1
+  };
+  
+  ToroidType GetToroidType() const{
+    return(toroidType_);
+  }
+  
  private:
   static const unsigned int N_ATWD_BINS = 128;
   
   //  Number of ATWD channels is set to 3 (4th ATWD channel doesn't
   //  have DOMCAL now)
   static const unsigned int N_ATWD_CHANNELS = 3;
-  
-  enum ToroidType {
-    OLD_TOROID = 0,
-    NEW_TOROID = 1
-  };
+
+  void InitPulseTemplates();
+
+  double SPEPulseTemplate(double t, const SPETemplate& templ,
+    const SPETemplate& droop, bool droopy) const;
+
+  double droopTimeConstants_[2];
 
   double  temperature_;
  
@@ -464,11 +528,11 @@ class I3DOMCalibration {
   double fadcBeaconBaseline_;
   
   /**
-   *	FADC inherent time offset (ns)
+   *  FADC inherent time offset (ns)
    */
   double fadcDeltaT_;
   /**
-   *	Front-end impedance (Ohms)
+   *  Front-end impedance (Ohms)
    */
   double frontEndImpedance_;
   
@@ -492,7 +556,7 @@ class I3DOMCalibration {
   //map<unsigned int, QuadraticFit> atwdFreq_;
   QuadraticFit atwdFreq_[2];
   
-/**
+  /**
    * Results of the linear fit for the bin calibration
    * i.e. the values needed to convert from counts to voltage
    * for each bin in the ATWD.
@@ -515,10 +579,10 @@ class I3DOMCalibration {
   /**
    * Version of DOMCal used. For now, this only affects the 
    * FE load impedance. It might be useful for FADC calibration
-   * as well. Use a string since we may have version numbers like
+   * as well. Use a std::string since we may have version numbers like
    * 6.1.2, e.g.
    */
-  string domcalVersion_;
+  std::string domcalVersion_;
 
   /**
    *  Dumb-ol-array to hold the baseline corrections.
@@ -542,11 +606,13 @@ class I3DOMCalibration {
    * SPE pulse shape templates for each ATWD channel
    */
   SPETemplate atwdSPETemplate_[3];
+  SPETemplate atwdSPEDroopTemplate_[3];
   
   /**
    * SPE pulse shape template for the FADC
    */
   SPETemplate fadcSPETemplate_;
+  SPETemplate fadcSPEDroopTemplate_;
 
   /**
    *  Stores the toroid type (pre-2006 droopy or post-2006 sligthly-less-droopy) 

@@ -18,30 +18,10 @@
 //   You should have received a copy of the GNU General Public License
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
+#include <dataclasses/physics/I3MCTreeUtils.h>
+#include <dataclasses/physics/I3MCTree.h>
 
-#include <vector>
-
-#include <dataclasses/physics/I3TWRFrag.h>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-
-using namespace boost::python;
-
-void register_I3TWRFrag()
-{
-  std::vector<unsigned int>& (I3TWRFrag::*get_waveform)(void) = &I3TWRFrag::GetWaveform;
-
-  {
-    scope outer = 
-    class_<I3TWRFrag, boost::shared_ptr<I3TWRFrag> >("I3TWRFrag")
-      .def("GetStartBin", &I3TWRFrag::GetStartBin)
-      .def("GetWaveform", get_waveform,
-	   return_internal_reference<1>())
-    ;
-
-  }
-
-  class_<std::vector<I3TWRFrag> >("Vector_I3TWRFrag")
-    .def(std_vector_indexing_suite<std::vector<I3TWRFrag> >())
-    ;
-    
+inline int depth(I3MCTree& tree, const I3Particle& p){
+  I3MCTree::iterator iter = I3MCTreeUtils::GetIterator(tree,p);
+  return tree.depth(iter);
 }

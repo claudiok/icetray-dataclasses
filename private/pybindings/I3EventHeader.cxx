@@ -23,25 +23,28 @@
 
 #include <dataclasses/physics/I3EventHeader.h>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
-
 
 void register_I3EventHeader()
 {
   {
     scope event_header_scope = 
       class_<I3EventHeader, bases<I3FrameObject>, boost::shared_ptr<I3EventHeader> >("I3EventHeader")
-      PROPERTY(I3EventHeader, RunID,     RunID)
-      PROPERTY(I3EventHeader, SubRunID,  SubRunID)
-      PROPERTY(I3EventHeader, EventID,   EventID)
-      PROPERTY(I3EventHeader, SubEventID,SubEventID)
-      PROPERTY(I3EventHeader, SubEventStream,SubEventStream)
-      PROPERTY(I3EventHeader, State,     State)
-      PROPERTY(I3EventHeader, StartTime, StartTime)
-      PROPERTY(I3EventHeader, EndTime,   EndTime)
-      .def("GetDataStream", &I3EventHeader::GetDataStream)
+      PROPERTY(I3EventHeader, run_id,           RunID)
+      PROPERTY(I3EventHeader, sub_run_id,       SubRunID)
+      PROPERTY(I3EventHeader, event_id,         EventID)
+      PROPERTY(I3EventHeader, sub_event_id,     SubEventID)
+      PROPERTY(I3EventHeader, sub_event_stream, SubEventStream)
+      PROPERTY(I3EventHeader, state,            State)
+      PROPERTY(I3EventHeader, start_time,       StartTime)
+      PROPERTY(I3EventHeader, end_time,         EndTime)
+      .add_property("data_stream", &I3EventHeader::GetDataStream)
       .def(copy_suite<I3EventHeader>())
+      .def("__str__", &stream_to_string<I3EventHeader>)
+      .def( freeze() )
       ;
 
     register_pointer_conversions<I3EventHeader>();

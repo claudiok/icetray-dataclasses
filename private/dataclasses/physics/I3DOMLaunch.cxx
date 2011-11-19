@@ -1,7 +1,10 @@
+#include <vector>
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <dataclasses/physics/DeltaCompressor.h>
 #include <stdexcept>
+#include <dataclasses/I3Vector.h>
+#include <boost/foreach.hpp>
 
 I3DOMLaunch::I3DOMLaunch() 
   : startTime_(0.0),
@@ -32,24 +35,21 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
   // since version 3 of the file the raw waveforms are stored in delta
   // compressed form. This is only done, if archived to a non XML archive,
   // to allow to inspect the waveforms with dataio_shovel.
-  if(  ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) )
-  {
-    try
-    {
+  if(  ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) ){
+    try{
       I3DeltaCompression::DeltaCompressor compressor;
-      vector< vector<unsigned int> > compressedATWD;
+      std::vector< std::vector<unsigned int> > compressedATWD;
       
-      I3Vector<I3Vector<int> >::const_iterator it;
-      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ )
-      {
+      std::vector<std::vector<int> >::const_iterator it;
+      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ ){
         // reset the compressor and compresse the waveform
         compressor.reset();
         compressor.compress( *it );
         
-        // copy the compressed ATWD waveform to the compressed vector and 
-        // add the vector to the fector of compressed ATWD waveforms.
-        const vector<unsigned int>& compVals = compressor.getCompressed();
-        vector<unsigned int> compVector( compVals.begin(), compVals.end() );
+        // copy the compressed ATWD waveform to the compressed std::vector and 
+        // add the std::vector to the fector of compressed ATWD waveforms.
+        const std::vector<unsigned int>& compVals = compressor.getCompressed();
+        std::vector<unsigned int> compVector( compVals.begin(), compVals.end() );
         compressedATWD.push_back( compVector );
       }
       // serialize all compressed ATWD waveforms
@@ -58,8 +58,7 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       // also write the number of samples for each ATWD waveform to the archive
       // as the decompressed waveforms need to be truncated from extra values
       // which are appended as the algorithm doesn't allow for a end marker.
-      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ )
-      {
+      for( it = rawATWD_.begin(); it < rawATWD_.end(); it++ ){
         int numSamples = static_cast<int>( (*it).size() );
         ar & make_nvp( "NumSamplesATWD", numSamples );
       }
@@ -68,10 +67,10 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       compressor.reset();
       compressor.compress( rawFADC_ );
       
-      // copy the compressed waveform to the output vector and serialize this 
-      // vector with the compressed FADC waveform.
-      const vector<unsigned int>& compVals = compressor.getCompressed();
-      vector<unsigned int> compressedFADC( compVals.begin(), compVals.end() );
+      // copy the compressed waveform to the output std::vector and serialize this 
+      // std::vector with the compressed FADC waveform.
+      const std::vector<unsigned int>& compVals = compressor.getCompressed();
+      std::vector<unsigned int> compressedFADC( compVals.begin(), compVals.end() );
       ar & make_nvp("CompressedFADC", compressedFADC );
       
       // also write the number of samples for this waveform to the archive
@@ -80,13 +79,12 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
       int numSamples =  rawFADC_.size();
       ar & make_nvp("NumSamplesFADC", numSamples );
     }
-    catch( const std::domain_error& ex )
-    {
+    catch( const std::domain_error& ex ) {
       log_fatal("%s", ex.what());
     }
-  }
-  else
-  {
+  }else{
+    // since the serialization method is split we only need to 
+    // worry about the load method so we can read old I3Vector data
     ar & make_nvp("RawATWD", rawATWD_);
     ar & make_nvp("RawFADC", rawFADC_);
   }
@@ -136,11 +134,11 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       
       // Create the data structure for the compressed version 
       // of the waveforms and deserialize fro the archive
-      vector< vector<unsigned int> > compressedATWD( rawATWD_.size() );
+      std::vector< std::vector<unsigned int> > compressedATWD( rawATWD_.size() );
       ar & make_nvp("CompressedATWD", compressedATWD);
       
-      vector< vector<unsigned int> >::const_iterator it;
-      I3Vector<I3VectorInt >::iterator it2 = rawATWD_.begin();
+      std::vector< std::vector<unsigned int> >::const_iterator it;
+      std::vector<std::vector<int> >::iterator it2 = rawATWD_.begin();
       for( it = compressedATWD.begin(); it < compressedATWD.end(); it++, it2++ )
       {
         // reset compressor and initialize with the compressed data.
@@ -149,10 +147,10 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
         
         // clear the rawATWD_ waveform and fill it with the decompressed values.
         (*it2).clear();
-        compressor.decompress( dynamic_cast< vector<int>& >(*it2) );
+        compressor.decompress( dynamic_cast< std::vector<int>& >(*it2) );
         
         // get the number of real samples of the waveform and truncate any
-        // extra values from the vector.
+        // extra values from the std::vector.
         unsigned int numSamples;
         ar & make_nvp( "NumSamplesATWD", numSamples );
 	if (numSamples > it2->size())
@@ -164,7 +162,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
         (*it2).resize( numSamples );
       }
       
-      vector<unsigned int> compressedFADC;
+      std::vector<unsigned int> compressedFADC;
       ar & make_nvp("CompressedFADC", compressedFADC);
 
       // reset compressor and initialize with the compressed data.
@@ -176,7 +174,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
       compressor.decompress( rawFADC_ );
       
       // get the number of real samples of the waveform and truncate any
-      // extra values from the vector.
+      // extra values from the std::vector.
       unsigned int numFADCSamples;
       ar & make_nvp("NumSamplesFADC", numFADCSamples);
 	if (numFADCSamples > rawFADC_.size())
@@ -193,11 +191,39 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
   }
   else
   {
-    ar & make_nvp("RawATWD", rawATWD_);
-    ar & make_nvp("RawFADC", rawFADC_);
+    if(version > 4){
+      ar & make_nvp("RawATWD", rawATWD_);
+      ar & make_nvp("RawFADC", rawFADC_);
+    }else{
+      // need to deserialize I3Vectors and translate to std::vector
+      I3Vector< I3Vector<int> > tempRawATWD;
+      ar & make_nvp("RawATWD", tempRawATWD);
+      //need to clear the vectors before filling them
+      rawATWD_.clear();
+      BOOST_FOREACH(I3Vector<int>& wf, tempRawATWD){
+	std::vector<int> tempWF;
+	BOOST_FOREACH(int i, wf) tempWF.push_back(i);
+	rawATWD_.push_back(tempWF);
+      }
+
+      //need to clear the vectors before filling them
+      I3Vector<int> tempRawFADC;      
+      ar & make_nvp("RawFADC", tempRawFADC);
+      rawFADC_.clear();
+      BOOST_FOREACH(int i, tempRawFADC) 
+	rawFADC_.push_back(i);
+    }
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
-  ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  if( version > 4){
+    ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  }else{
+    I3Vector<int> tempRawChargeStamp;
+    ar & make_nvp("RawChargeStamp", tempRawChargeStamp);
+    rawChargeStamp_.clear();
+    BOOST_FOREACH(int i, tempRawChargeStamp) 
+      rawChargeStamp_.push_back(i);    
+  }
   if(version > 2)
     {
       ar & make_nvp("Pedestal", pedestal_);
@@ -243,6 +269,17 @@ bool operator==(const I3DOMLaunch& lhs, const I3DOMLaunch& rhs){
 	   lhs.GetRawChargeStamp() == rhs.GetRawChargeStamp() &&	  
 	   lhs.GetChargeStampHighestSample() == rhs.GetChargeStampHighestSample() );
 }
+
+std::ostream& operator<<(std::ostream& oss, const I3DOMLaunch& d)
+{
+  oss << "[ I3DOMLaunch  :: " << std::endl
+      << "          StartTime : " << d.GetStartTime() << std::endl
+      << "              LCBit : " << d.GetLCBit() << std::endl
+      << "]" ;
+  
+  return oss;
+}
+
 
 I3_SERIALIZABLE(I3DOMLaunch);
 

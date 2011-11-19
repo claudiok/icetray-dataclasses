@@ -24,38 +24,43 @@
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 
 void register_I3DOMLaunch()
 {
-  //  I3Vector<int>& (I3DOMLaunch::*)() = &I3DOMLaunch::GetRawFADC;
+
+  std::vector<int>& (I3DOMLaunch::*get_raw_fadc)(void) = &I3DOMLaunch::GetRawFADC;
+  object get_raw_fadc_func = make_function(get_raw_fadc, return_internal_reference<>());
+  
+  std::vector< std::vector<int> >& (I3DOMLaunch::*get_raw_atwds)(void) = &I3DOMLaunch::GetRawATWDs;
+  object get_raw_atwds_func = make_function(get_raw_atwds, return_internal_reference<>());
+
+  std::vector<int>& (I3DOMLaunch::*get_raw_charge_stamp)(void) = &I3DOMLaunch::GetRawChargeStamp;
+  object get_raw_charge_stamp_func = make_function(get_raw_charge_stamp, return_internal_reference<>());
 
   {
     scope outer = 
     class_<I3DOMLaunch, boost::shared_ptr<I3DOMLaunch> >("I3DOMLaunch")
-      .def("GetStartTime", &I3DOMLaunch::GetStartTime)
-      .def("GetLCBit", &I3DOMLaunch::GetLCBit)
-      .def("GetTriggerType", &I3DOMLaunch::GetTriggerType)
-      .def("GetTriggerMode", &I3DOMLaunch::GetTriggerMode)
-      .def("GetWhichATWD", &I3DOMLaunch::GetWhichATWD)
-      .def("GetIsPedestalSub", &I3DOMLaunch::GetIsPedestalSub)
-      .def("GetChargeStampHighestSample", &I3DOMLaunch::GetChargeStampHighestSample)
-      .def("GetRawFADC", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawFADC,
-	   return_internal_reference<1>())
-      .def("GetRawATWD", (I3Vector<int>& (I3DOMLaunch::*)(unsigned)) &I3DOMLaunch::GetRawATWD,
-	   return_internal_reference<1>())
-      .def("GetRawChargeStamp", (I3Vector<int>& (I3DOMLaunch::*)()) &I3DOMLaunch::GetRawChargeStamp,
-	   return_internal_reference<1>())
-      .def("SetStartTime",&I3DOMLaunch::SetStartTime)
-      .def("SetTriggerType", &I3DOMLaunch::SetTriggerType)
-      .def("SetTriggerMode", &I3DOMLaunch::SetTriggerMode)
-      .def("SetWhichATWD", &I3DOMLaunch::SetWhichATWD)
-      .def("SetLCBit", &I3DOMLaunch::SetLCBit)
-      .def("SetIsPedestalSub", &I3DOMLaunch::SetIsPedestalSub)
-      .def("SetChargeStampHighestSample", &I3DOMLaunch::SetChargeStampHighestSample)
-
-    ;
+      .add_property("time", &I3DOMLaunch::GetStartTime, &I3DOMLaunch::SetStartTime)
+      .add_property("lc_bit", &I3DOMLaunch::GetLCBit, &I3DOMLaunch::SetLCBit)
+      .add_property("trigger_type", &I3DOMLaunch::GetTriggerType, &I3DOMLaunch::SetTriggerType)
+      .add_property("trigger_mode", &I3DOMLaunch::GetTriggerMode, &I3DOMLaunch::SetTriggerMode)
+      .add_property("which_atwd", &I3DOMLaunch::GetWhichATWD, &I3DOMLaunch::SetWhichATWD)
+      .add_property("is_pedestal_sub", &I3DOMLaunch::GetIsPedestalSub, &I3DOMLaunch::SetIsPedestalSub)
+      .add_property("charge_stamp_highest_sample", 
+		    &I3DOMLaunch::GetChargeStampHighestSample, &I3DOMLaunch::SetChargeStampHighestSample)
+      .add_property("raw_fadc", get_raw_fadc_func, &I3DOMLaunch::SetRawFADC)
+      .add_property("raw_atwd", get_raw_atwds_func, get_raw_atwds_func)
+      .add_property("raw_charge_stamp", get_raw_charge_stamp_func, get_raw_charge_stamp_func)
+      .add_property("which_atwd_charge_stamp", 
+		    &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
+      .def("__str__", &stream_to_string<I3DOMLaunch>)
+      .def(self == self)
+      .def( freeze() )
+      ;
 
     enum_<I3DOMLaunch::TriggerType>("TriggerType")
       .value("TEST_PATTERN",I3DOMLaunch::TEST_PATTERN)
@@ -76,26 +81,29 @@ void register_I3DOMLaunch()
       .value("LC_UPPER", I3DOMLaunch::LC_UPPER)
       .value("UNKNOWN_MODE", I3DOMLaunch::UNKNOWN_MODE)
       .value("SLC_READOUT", I3DOMLaunch::SLC_READOUT)
+      .value("MIN_BIAS", I3DOMLaunch::MIN_BIAS)
       .value("LAST_TRIGGER_SITUATION", I3DOMLaunch::LAST_TRIGGER_SITUATION)
       .export_values()
       ;
   
-    def("identity", identity_<I3DOMLaunch::TriggerMode>);
+    def("Identity", identity_<I3DOMLaunch::TriggerMode>);
 
     enum_<I3DOMLaunch::ATWDselect>("ATWDselect")
       .value("ATWDa", I3DOMLaunch::ATWDa)
       .value("ATWDb", I3DOMLaunch::ATWDb)
       .export_values()
       ;
-    def("identity", identity_<I3DOMLaunch::ATWDselect>);
+    def("Identity", identity_<I3DOMLaunch::ATWDselect>);
   }
 
   class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSeries")
     .def(std_vector_indexing_suite<std::vector<I3DOMLaunch> >())
+    .def("__str__", &stream_to_string<I3DOMLaunchSeries>)
     ;
     
   class_<I3DOMLaunchSeriesMap, bases<I3FrameObject>, I3DOMLaunchSeriesMapPtr>("I3DOMLaunchSeriesMap")
     .def(std_map_indexing_suite<I3DOMLaunchSeriesMap>())
+    .def("__str__", &stream_to_string<I3DOMLaunchSeriesMap>)
     ;
     
   register_pointer_conversions<I3DOMLaunchSeriesMap>();

@@ -2,13 +2,14 @@
  * copyright  (C) 2006
  * the icecube collaboration
  * @version $Id:  $
- * @file I3DOMFunctions.cxx
+ * @file dataclasses/private/dataclasses/I3DOMFunctions.cxx
  * @date $Date: $
  */
 
 
 #include "dataclasses/I3DOMFunctions.h"
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
+#include <vector>
 #include <string>
 
 double ATWDSamplingRate ( unsigned int chip,
@@ -222,18 +223,18 @@ double SPEPMTThreshold(const I3DOMStatus& status,
   return speThresher;  
 } 
 
-vector<int> DOMCalVersion(const I3DOMCalibration& calib)
+std::vector<int> DOMCalVersion(const I3DOMCalibration& calib)
 {
     // We assume here that the version given is sensible
     // i.e. something like "6.1.0"
-    // Since it's a string I'm not sure how to deal
+    // Since it's a std::string I'm not sure how to deal
     // with whatever madness may be contained in it.
 
-    string version = calib.GetDOMCalVersion();
+    std::string version = calib.GetDOMCalVersion();
     
-    vector<int> nums;
-    string::iterator iter;
-    string num;
+    std::vector<int> nums;
+    std::string::iterator iter;
+    std::string num;
     
     for ( iter  = version.begin();
 	  iter != version.end();
@@ -264,5 +265,5 @@ unsigned int WhichATWD(const I3DOMLaunch& domLaunch)
     else if ( whichATWD == I3DOMLaunch::ATWDb )
         return 1;
     else 
-        log_fatal("invalid ATWD ID in I3DOMcalibrator::WhichATWD");
+        log_fatal("invalid ATWD ID in WhichATWD");
 }

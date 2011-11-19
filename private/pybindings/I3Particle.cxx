@@ -24,106 +24,33 @@
 #include <dataclasses/physics/I3Particle.h>
 #include <boost/preprocessor/seq.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
-
-static double 
-get_theta(const I3Particle& self)
-{
-  return self.GetDir().CalcTheta();
-}
-
-static double 
-get_phi(const I3Particle& self)
-{
-  return self.GetDir().CalcPhi();
-}
-
-static void 
-set_position(I3Particle& self, double x, double y, double z)
-{
-  self.SetPos(x,y,z);
-}
-
-static void 
-set_position_i3pos(I3Particle& self, const I3Position& p)
-{
-  self.SetPos(p);
-}
-
-static void 
-set_theta_phi(I3Particle& self, double theta, double phi)
-{
-  self.SetThetaPhi(theta,phi);
-}
-
-static void 
-set_dir_angles(I3Particle& self, double zen, double azi)
-{
-  self.SetDir(zen,azi);
-}
-
-static void 
-set_dir_unitvect(I3Particle& self, double x, double y, double z)
-{
-  self.SetDir(x,y,z);
-}
-
-inline boost::shared_ptr<I3Position> 
-get_pos(I3Particle * particle)
-{
-  return I3PositionPtr(new I3Position(particle->GetPos()));
-}
-
-static std::string 
-i3particle_prettyprint(const I3Particle& p)
-{
-  ostringstream oss;
-  oss << "[ I3Particle MajorID : " << p.GetMajorID() << endl
-      << "             MinorID : " << p.GetMinorID() << endl
-      << "              Zenith : " << p.GetZenith()  << endl
-      << "             Azimuth : " << p.GetAzimuth()  << endl
-      << "                   X : " << p.GetX() << endl
-      << "                   Y : " << p.GetY() << endl
-      << "                   Z : " << p.GetZ() << endl
-      << "                Time : " << p.GetTime() << endl
-      << "              Energy : " << p.GetEnergy() << endl
-      << "               Speed : " << p.GetSpeed() <<  endl
-      << "              Length : " << p.GetLength() << endl
-      << "                Type : " << p.GetTypeString() << endl
-      << "               Shape : " << p.GetShapeString() << endl
-      << "              Status : " << p.GetFitStatusString() <<  endl
-      << "            Location : " << p.GetLocationTypeString() << endl 
-      << "]" ;
-
-;
-  return oss.str();
-}
-
+ 
 void register_I3Particle()
 {
+
   {
     scope particle_scope = 
       class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> >("I3Particle")
-	#define RO_PROPERTIES (X)(Y)(Z)(Zenith)(Azimuth)(MajorID)(MinorID)
-	#define PROPERTIES (Time)(Energy)(Shape)(Type)(Length)(Speed)(FitStatus)(LocationType)
-	#define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_GET, I3Particle, RO_PROPERTIES)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Particle, RO_PROPERTIES)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3Particle, PROPERTIES)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_DEF, I3Particle, CONVENIENCE_BOOLS)
-      .def("GetPos", &get_pos)	
-      .def("GetTheta", &get_theta)
-      .def("GetPhi", &get_phi)
-      .def("GetDir", &I3Particle::GetDir, return_internal_reference<1>())
-      .def("ShiftAlongTrack", &I3Particle::ShiftAlongTrack)
-      .def("SetPos", &set_position)
-      .def("SetPos", &set_position_i3pos)
-      .def("SetThetaPhi", &set_theta_phi)
-      .def("SetDir", &set_dir_angles)
-      .def("SetDir", &set_dir_unitvect)
-      .def("__str__", i3particle_prettyprint)
+      #define RO_PROPERTIES (MajorID)(MinorID)
+      #define PROPERTIES (Time)(Energy)(Shape)(Type)(Length)(Speed)(FitStatus)(LocationType)
+      #define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Particle, RO_PROPERTIES)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BOOL, I3Particle, CONVENIENCE_BOOLS)
+      #undef RO_PROPERTIES
+      #undef PROPERTIES
+      #undef CONVENIENCE_BOOLS
+      .add_property("pos", make_function( (const I3Position& (I3Particle::*)()) &I3Particle::GetPos, return_internal_reference<1>() ),
+					  (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos ) 
+      .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
+					  (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir ) 
+      .def("shift_along_track", &I3Particle::ShiftAlongTrack)
+      .def( freeze() )
+      .def("__str__", &stream_to_string<I3Particle>)
       ;
 
     enum_<I3Particle::FitStatus>("FitStatus")
@@ -227,8 +154,9 @@ void register_I3Particle()
 
   }
 
-  class_<std::vector<I3Particle> >("Vector_I3Particle")
+  class_<std::vector<I3Particle> >("I3ParticleVect")
     .def(std_vector_indexing_suite<std::vector<I3Particle> >())
+    .def("__str__", &stream_to_string<std::vector<I3Particle> >)
     ;
 
   register_pointer_conversions<I3Particle>();

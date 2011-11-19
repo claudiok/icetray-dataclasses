@@ -10,6 +10,9 @@
 #ifndef DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED
 #define DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED
 
+#include <functional>
+#include <string>
+#include <list>
 #include "icetray/I3FrameObject.h"
 #include "icetray/OMKey.h"
 #include "icetray/I3Frame.h"
@@ -52,7 +55,9 @@ public:
 	/*
 	 * Apply the mask to the target map in the frame.
 	 */
-	boost::shared_ptr<I3RecoPulseSeriesMap> Apply(const I3Frame &frame) const;
+	boost::shared_ptr<const I3RecoPulseSeriesMap> Apply(const I3Frame &frame) const;
+	
+	std::string GetSource() const { return key_; }
 	
 	/*
 	 * Get the number of set bits in the mask.
@@ -87,7 +92,7 @@ private:
 		uint8_t padding_;
 		mask_t *mask_;
 		
-		bitmask() : mask_(NULL) {};
+		bitmask() : size_(0), padding_(0), mask_(NULL) {};
 		bitmask(unsigned length, bool set=true);
 		bitmask(const bitmask& other);
 		bitmask& operator=(const bitmask& other);
@@ -100,7 +105,7 @@ private:
 		
 		inline bool get(const unsigned) const;
 		unsigned sum() const;
-		unsigned capacity() const;
+		size_t size() const;
 		
 		friend class boost::serialization::access;
 		
@@ -113,7 +118,10 @@ private:
 	std::string key_;
 	bitmask omkey_mask_;
 	std::list<bitmask> element_masks_;
-	boost::shared_ptr<const I3RecoPulseSeriesMap> source_;
+	I3RecoPulseSeriesMapConstPtr source_;
+	mutable I3RecoPulseSeriesMapPtr masked_;
+	
+	inline void ResetCache() { masked_.reset(); }
 
 	int FindKey(const OMKey &key, std::list<bitmask>::iterator &list_it,
 	    const I3RecoPulseSeriesMap::mapped_type **vec);
@@ -125,15 +133,15 @@ private:
 	template <typename BinaryOperator>
 	I3RecoPulseSeriesMapMask ApplyBinaryOperator(const I3RecoPulseSeriesMapMask&) const;
 	
-	struct operator_and : public binary_function<mask_t, mask_t, mask_t> {
+	struct operator_and : public std::binary_function<mask_t, mask_t, mask_t> {
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs & rhs; }
 	};
 	
-	struct operator_or : public binary_function<mask_t, mask_t, mask_t> {
+	struct operator_or : public std::binary_function<mask_t, mask_t, mask_t> {
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs | rhs; }
 	};
 	
-	struct operator_xor : public binary_function<mask_t, mask_t, mask_t> {
+	struct operator_xor : public std::binary_function<mask_t, mask_t, mask_t> {
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs ^ rhs; }
 	};
 	

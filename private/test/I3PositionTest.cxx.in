@@ -37,7 +37,7 @@ TEST(constructor)
 /**
  * check branching it to a tree
  */
-TEST(branch)
+T@USE_ROOT@EST(branch)
 {
   I3PositionPtr ptr(new I3Position());
   /** @todo add some setting of data here */
@@ -62,7 +62,7 @@ TEST(branch)
  * check branching object to a tree, writing the tree to disk,
  * and reading the tree back in, and finding the object in the tree.
  */
-TEST(branch_and_write)
+T@USE_ROOT@EST(branch_and_write)
 {
   I3PositionPtr ptr(new I3Position());
   /** @todo add some setting of data here */

@@ -11,7 +11,7 @@
 
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 
 /**
  * @brief Derived I3Hit class with additional 'Weight' and 'Parent

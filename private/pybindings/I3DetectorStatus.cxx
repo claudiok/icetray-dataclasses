@@ -38,13 +38,13 @@ get_trigger_settings(I3TriggerStatusPtr ts){
   return r_map;
 }
 
-map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
+std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
 get_readout_settings(I3TriggerStatusPtr ts){
   return ts->GetReadoutSettings();
 }
 
 
-string get_trigger_name(I3TriggerStatusPtr ts){
+std::string get_trigger_name(I3TriggerStatusPtr ts){
   return ts->GetTriggerName();
 }
 
@@ -53,12 +53,10 @@ void register_I3DetectorStatus()
 {
   class_<I3DetectorStatus, bases<I3FrameObject>, boost::shared_ptr<I3DetectorStatus> >("I3DetectorStatus")
     .def(copy_suite<I3DetectorStatus>())
-    .def_readwrite("startTime", &I3DetectorStatus::startTime)
-    .def_readwrite("endTime", &I3DetectorStatus::endTime)
-    .def_readwrite("domStatus", &I3DetectorStatus::domStatus)
-    .def_readwrite("aomStatus", &I3DetectorStatus::aomStatus)
-    .def_readwrite("triggerStatus", &I3DetectorStatus::triggerStatus)
-    .def_readwrite("amandaTriggerStatus", &I3DetectorStatus::amandaTriggerStatus)
+    #define DETECTORSTATUSPROPS (startTime)(endTime)(domStatus)(triggerStatus)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DetectorStatus, DETECTORSTATUSPROPS )
+    #undef DETECTORSTATUSPROPS
+    .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3DOMStatus> >("Map_OMKey_I3DOMStatus")
@@ -76,35 +74,13 @@ void register_I3DetectorStatus()
     scope outer = 
       class_<I3DOMStatus, boost::shared_ptr<I3DOMStatus> >("I3DOMStatus")
       .def(copy_suite<I3DOMStatus>())
-      .def_readwrite("trigMode", &I3DOMStatus::trigMode)
-      .def_readwrite("lcMode", &I3DOMStatus::lcMode)
-      .def_readwrite("lcWindowPre", &I3DOMStatus::lcWindowPre)
-      .def_readwrite("lcWindowPost", &I3DOMStatus::lcWindowPost)
-      .def_readwrite("lcSpan", &I3DOMStatus::lcSpan)
-      .def_readwrite("statusATWDa", &I3DOMStatus::statusATWDa)
-      .def_readwrite("statusATWDb", &I3DOMStatus::statusATWDb)
-      .def_readwrite("statusFADC", &I3DOMStatus::statusFADC)
-      .def_readwrite("pmtHV", &I3DOMStatus::pmtHV)
-      .def_readwrite("speThreshold", &I3DOMStatus::speThreshold)
-      .def_readwrite("fePedestal", &I3DOMStatus::fePedestal)
-      .def_readwrite("dacTriggerBias0", &I3DOMStatus::dacTriggerBias0)
-      .def_readwrite("dacTriggerBias1", &I3DOMStatus::dacTriggerBias1)
-      .def_readwrite("dacFADCRef", &I3DOMStatus::dacFADCRef)
-      .def_readwrite("nBinsATWD0", &I3DOMStatus::nBinsATWD0)
-      .def_readwrite("nBinsATWD1", &I3DOMStatus::nBinsATWD1)
-      .def_readwrite("nBinsATWD2", &I3DOMStatus::nBinsATWD2)
-      .def_readwrite("nBinsATWD3", &I3DOMStatus::nBinsATWD3)
-      .def_readwrite("nBinsFADC", &I3DOMStatus::nBinsFADC)
-      .def_readwrite("deltaCompress", &I3DOMStatus::deltaCompress)
-      .def_readwrite("fbState", &I3DOMStatus::fbState)
-      .def_readwrite("fbBrightness", &I3DOMStatus::fbBrightness)
-      .def_readwrite("fbLength", &I3DOMStatus::fbLength)
-      .def_readwrite("fbDelay", &I3DOMStatus::fbDelay)
-      .def_readwrite("fbMask", &I3DOMStatus::fbMask)
-      .def_readwrite("fbRate", &I3DOMStatus::fbRate)
-      .def_readwrite("domGainType", &I3DOMStatus::domGainType)
-      .def_readwrite("cableType", &I3DOMStatus::cableType)
-      .def_readwrite("SLCActive", &I3DOMStatus::SLCActive)
+      #define DOMSTATUSPROPERTIES (pmtHV)(lcMode)(txMode)(lcWindowPre)(lcWindowPost)(lcSpan)(statusFADC)(pmtHV)(speThreshold)(fePedestal)(dacTriggerBias0)(dacTriggerBias1)(dacFADCRef)(deltaCompress)(domGainType)(cableType)(SLCActive)(mpeThreshold)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DOMStatus, DOMSTATUSPROPERTIES)
+      #undef DOMSTATUSPROPERTIES
+      // If we used snake_case, these two would end up as status_atw_da
+      .def_readwrite("status_atwd_a", &I3DOMStatus::statusATWDa)
+      .def_readwrite("status_atwd_b", &I3DOMStatus::statusATWDb)
+      .def( freeze() )
       ;
 
     enum_<I3DOMStatus::TrigMode>("TrigMode")
@@ -164,16 +140,18 @@ void register_I3DetectorStatus()
     scope outer = 
       class_<I3TriggerStatus, boost::shared_ptr<I3TriggerStatus> >("I3TriggerStatus")
       .def(copy_suite<I3TriggerStatus>())
-      .def_readwrite("TriggerName", &I3TriggerStatus::name_)
-      .def_readwrite("TriggerSettings",&I3TriggerStatus::settings_)
-      .def_readwrite("ReadoutSettings",&I3TriggerStatus::readoutconfigs_)
+      .def_readwrite("trigger_name", &I3TriggerStatus::name_)
+      .def_readwrite("trigger_settings",&I3TriggerStatus::settings_)
+      .def_readwrite("readout_settings",&I3TriggerStatus::readoutconfigs_)
+      .def( freeze() )
       ;
 
     class_<I3TriggerReadoutConfig, boost::shared_ptr<I3TriggerReadoutConfig> >("I3TriggerReadoutConfig")
       .def(copy_suite<I3TriggerReadoutConfig>())
-      .def_readwrite("readoutTimeMinus", &I3TriggerReadoutConfig::readoutTimeMinus)
-      .def_readwrite("readoutTimePlus", &I3TriggerReadoutConfig::readoutTimePlus)
-      .def_readwrite("readoutTimeOffset", &I3TriggerReadoutConfig::readoutTimeOffset)
+      .def_readwrite("readout_time_minus", &I3TriggerReadoutConfig::readoutTimeMinus)
+      .def_readwrite("readout_time_plus", &I3TriggerReadoutConfig::readoutTimePlus)
+      .def_readwrite("readout_time_offset", &I3TriggerReadoutConfig::readoutTimeOffset)
+      .def( freeze() )
       ;
 
     enum_<I3TriggerStatus::Subdetector>("Subdetector")
@@ -185,10 +163,11 @@ void register_I3DetectorStatus()
       ;
     def("identity", identity_<I3TriggerStatus::Subdetector>);
 
-    class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
-      .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
-      ;
   }
 
+  class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
+    .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
+    ;
+  
   register_pointer_conversions<I3DetectorStatus>();
 }

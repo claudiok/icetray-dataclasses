@@ -13,10 +13,9 @@
 
 #include "dataclasses/I3Position.h"
 #include "dataclasses/Utility.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/I3Vector.h"
 
-using namespace std;
 
 static const unsigned i3tankgeo_version_ = 2;
 

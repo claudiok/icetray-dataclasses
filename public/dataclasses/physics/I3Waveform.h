@@ -13,7 +13,7 @@
 #include <utility>
 #include <vector>
 #include <dataclasses/I3Map.h>
-#include <dataclasses/OMKey.h>
+#include <icetray/OMKey.h>
 
 /**
  * List the names of enumeration members defined in this file
@@ -43,8 +43,8 @@ class I3Waveform
 #ifndef __CINT__
   union SourceCompound {
     struct {
-      #ifdef BOOST_PORTABLE_BINARY_ARCHIVE_BIG_ENDIAN
-      uint8_t slop   : 4;
+      #if BYTE_ORDER == BIG_ENDIAN
+      uint8_t slop   : 3;
       uint8_t hlc    : 1;
       uint8_t id     : 1;
       uint8_t source : 3;
@@ -52,7 +52,7 @@ class I3Waveform
       uint8_t source : 3; /* Source ID */
       uint8_t id     : 1; /* Source index (e.g. ATWDa/ATWDb) */
       uint8_t hlc    : 1; /* Readout type (e.g. SLC/HLC) */
-      uint8_t slop   : 4; /* Unused space */
+      uint8_t slop   : 3; /* Unused space */
       #endif
     } fields;
     uint8_t bits;
@@ -141,6 +141,9 @@ class I3Waveform
    * or VIRGINAL.
    */
   static unsigned GetStatus(const std::vector<StatusCompound>& waveformInfo);
+  
+  unsigned GetStatus() const;
+  int GetChannel() const;
 
  private:
   double startTime_;
@@ -209,9 +212,35 @@ class I3Waveform
   void SetWaveformInformation(const std::vector<StatusCompound>& info)
     {waveformInfo_ = info;}
 
-  Source GetSource() const { return (Source)(unsigned)(source_.fields.source); }
+  /**
+   * Returns the source flag. This is a legacy function to maintain compatibility
+   * with old code. It returns I3Waveform::SLC for SLC waveforms and the
+   * digitizer for HLC waveforms.
+   *
+   * To get more detailed information use IsHLC and GetDigitizer instead.
+   */
+  Source GetSource() const { return IsSLC() ? I3Waveform::SLC : GetDigitizer(); }
 
+  /**
+   * Deprecated. Use SetDigitizer to set the chip information (ATWD or FADC) and
+   * SetHLC to switch HLC flag on or off.
+   */
+#ifndef __CINT__
+  __attribute__ ((deprecated))
+#endif // __CINT__
   void SetSource(Source source) { source_.fields.source = source; }
+
+  bool IsHLC() const { return (bool)(source_.fields.hlc); }
+  bool IsSLC() const { return !(bool)(source_.fields.hlc); }
+
+  void SetHLC(bool hlc) { source_.fields.hlc = hlc; }
+
+  /// Returns the digitizer (ATWD or FADC)
+  Source GetDigitizer() const { return (Source)(unsigned)(source_.fields.source); }
+
+  /// Set the digitizer (ATWD or FADC). Do not set to SLC.
+  void SetDigitizer(Source source) { source_.fields.source = source; }
+
 
   /**
    * Get the source index for this waveform (e.g. the ATWD chip ID)
@@ -228,6 +257,7 @@ class I3Waveform
 };
 
 bool operator==(const I3Waveform& lhs, const I3Waveform& rhs);
+std::ostream& operator<<(std::ostream& oss, const I3Waveform& wf);
 
 typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;

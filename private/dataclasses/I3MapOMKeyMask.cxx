@@ -20,9 +20,17 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame, const s
 		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
 
 	I3RecoPulseSeriesMap::const_iterator it = source_->begin();
+	if (source_->size() == 0)
+		return;
+
 	omkey_mask_ = bitmask(source_->size());
-	for ( ; it != source_->end(); it++)
-		element_masks_.push_back(bitmask(it->second.size()));
+	for ( ; it != source_->end(); it++) {
+		if (it->second.size() > 0)
+			element_masks_.push_back(bitmask(it->second.size()));
+		else
+			omkey_mask_.set(std::distance(source_->begin(), it),
+			    false);
+	}
 }
 
 void
@@ -40,7 +48,7 @@ I3RecoPulseSeriesMapMask::FillSubsetMask(bitmask &mask,
 			midx++;
 		
 		assert(midx < mask.size_);
-		if ((*sub_vit) == (*sup_vit)) {
+		if ((sub_vit != subset.end()) && ((*sub_vit) == (*sup_vit))) {
 			sub_vit++; /* We have a match, do nothing. */
 		} else {
 			/* Unset the corresponding bit. */
@@ -70,7 +78,7 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
 		 * NB: since the subset is ordered, we can wait until the
 		 * superset catches up to increment its iterator.
 		 */
-		if (sub_mit->first == sup_mit->first) {
+		if ((sub_mit->first == sup_mit->first) && (sub_mit->second.size() != 0)) {
 			bitmask mask = bitmask(sup_mit->second.size(), true);			
 			
 			FillSubsetMask(mask, sup_mit->second, sub_mit->second);
@@ -89,6 +97,8 @@ I3RecoPulseSeriesMapMask::SetNone()
 {
 	omkey_mask_.unset_all();
 	element_masks_.clear();
+	
+	ResetCache();
 }
 
 
@@ -147,8 +157,6 @@ I3RecoPulseSeriesMapMask::FindKey(const OMKey &key,
 	for (unsigned i = 0; i < omkey_idx; i++)
 		if (omkey_mask_.get(i))
 			list_it++;
-			
-	assert(list_it != element_masks_.end());
 	
 	return omkey_idx;
 }
@@ -160,6 +168,8 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key,
 	int omkey_idx;
 	std::list<bitmask>::iterator list_it;
 	const I3RecoPulseSeriesMap::mapped_type *vec;
+	
+	ResetCache();
 	
 	if ((omkey_idx = FindKey(key, list_it, &vec)) < 0)
 		return;
@@ -179,7 +189,7 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key,
 		if (*vec_it == target) {
 			list_it->set(idx, set_it);
 			break;
-		}
+		}	
 }
 
 
@@ -189,6 +199,8 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, const unsigned idx, bool set_it)
 	int omkey_idx;
 	std::list<bitmask>::iterator list_it;
 	const I3RecoPulseSeriesMap::mapped_type *vec;
+	
+	ResetCache();
 	
 	if ((omkey_idx = FindKey(key, list_it, &vec)) < 0)
 		return;
@@ -212,12 +224,14 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, bool set_it)
 	std::list<bitmask>::iterator list_it;
 	const I3RecoPulseSeriesMap::mapped_type *vec;
 	
+	ResetCache();
+	
 	if ((omkey_idx = FindKey(key, list_it, &vec)) < 0)
 		return;
 	
 	/* Insert a new bitmask if necessary. */
 	if (!omkey_mask_.get(omkey_idx)) {
-		if (set_it) {
+		if (set_it && vec->size() > 0) {
 			list_it = element_masks_.insert(list_it,
 			     bitmask(vec->size(), true));
 			omkey_mask_.set(omkey_idx, true);
@@ -225,11 +239,13 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, bool set_it)
 		return;
 	}
 	
-	if (set_it) {
+	if (set_it && vec->size() > 0) {
 		list_it->set_all();
 	} else {
 		omkey_mask_.set(omkey_idx, false);
-		element_masks_.erase(list_it);
+
+		if (!set_it)
+			element_masks_.erase(list_it);
 	}
 }
 
@@ -334,43 +350,60 @@ I3RecoPulseSeriesMapMask::ApplyBinaryOperator(const I3RecoPulseSeriesMapMask &ot
 	return newmask;
 }
 
-boost::shared_ptr<I3RecoPulseSeriesMap>
+boost::shared_ptr<const I3RecoPulseSeriesMap>
 I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 {
+	if (masked_)
+		return masked_;
+	
 	boost::shared_ptr<const I3RecoPulseSeriesMap> source =
 	    frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMap> >(key_);
 	
 	if (!source)
 		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
+	if (source->size() != omkey_mask_.size())
+		log_fatal("This mask was made from a map with %zu keys, but "
+		    "the map named '%s' %zu keys.", omkey_mask_.size(),
+		    key_.c_str(), source->size());
 	
-	boost::shared_ptr<I3RecoPulseSeriesMap> target =
-	    boost::make_shared<I3RecoPulseSeriesMap>();
+	masked_ = boost::make_shared<I3RecoPulseSeriesMap>();
 	
 	I3RecoPulseSeriesMap::const_iterator source_it = source->begin();
-	I3RecoPulseSeriesMap::iterator inserter = target->begin();
+	I3RecoPulseSeriesMap::iterator inserter = masked_->begin();
 	std::list<bitmask>::const_iterator list_it = element_masks_.begin();
 	unsigned omkey_idx = 0;
 	
 	for ( ; source_it != source->end(); source_it++, omkey_idx++) {
 		
-		if (!omkey_mask_.get(omkey_idx) || list_it->sum() == 0)
+		if (!omkey_mask_.get(omkey_idx))
 			continue;
+		else if (list_it->sum() == 0) {
+			list_it++;
+			continue;
+		}
 		
 		unsigned idx = 0;
 		I3RecoPulseSeriesMap::mapped_type target_vec;
 		I3RecoPulseSeriesMap::mapped_type::const_iterator source_vit =
 		    source_it->second.begin();
+
+		if (source_it->second.size() != list_it->size())
+			log_fatal("The mask for OM(%d,%d) has %zu entries, but source "
+			    "pulse vector has %zu entries!", source_it->first.GetString(),
+			    source_it->first.GetOM(), list_it->size(),
+			    source_it->second.size());
+
 		for ( ; source_vit != source_it->second.end(); source_vit++, idx++)
 			if (list_it->get(idx))
 				target_vec.push_back(*source_vit);
 				
-		inserter = target->insert(inserter,
+		inserter = masked_->insert(inserter,
 		    std::make_pair(source_it->first, target_vec));
 			
 		list_it++;
 	}
 	
-	return target;
+	return masked_;
 }
 
 
@@ -379,6 +412,8 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)
 {
 	size_ = ROUND_UP(length, 8*sizeof(mask_t));
+	if (size_ == 0)
+		size_ = 8*sizeof(mask_t);
 	assert(size_ > 0);
 	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
 	padding_ = length % (8*sizeof(mask_t));
@@ -393,10 +428,12 @@ I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)
 
 #undef ROUND_UP
 
-I3RecoPulseSeriesMapMask::bitmask::bitmask(const bitmask& other) : size_(other.size_), padding_(other.padding_)
+I3RecoPulseSeriesMapMask::bitmask::bitmask(const bitmask& other) : size_(other.size_), padding_(other.padding_), mask_(NULL)
 {
-	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
-	memcpy(mask_, other.mask_, size_*sizeof(mask_t));
+	if (size_ != 0) {
+		mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
+		memcpy(mask_, other.mask_, size_*sizeof(mask_t));
+	}
 }
 
 I3RecoPulseSeriesMapMask::bitmask&
@@ -490,6 +527,12 @@ I3RecoPulseSeriesMapMask::bitmask::sum() const
 	return sum;
 }
 
+size_t
+I3RecoPulseSeriesMapMask::bitmask::size() const
+{
+	return 8*sizeof(mask_t)*size_ - padding_;
+}
+
 template <class Archive>
 void
 I3RecoPulseSeriesMapMask::bitmask::load(Archive & ar, unsigned version)
@@ -523,6 +566,7 @@ I3RecoPulseSeriesMapMask::load(Archive & ar, unsigned version)
 	std::vector<bitmask> elements;
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("Key", key_);
 	ar & make_nvp("OMKeyMask", omkey_mask_);
 	ar & make_nvp("ElementMasks", elements);
 	
@@ -537,9 +581,9 @@ I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 	std::copy(element_masks_.begin(), element_masks_.end(), std::back_inserter(elements));
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("Key", key_);
 	ar & make_nvp("OMKeyMask", omkey_mask_);
 	ar & make_nvp("ElementMasks", elements);
 }
 
 I3_SERIALIZABLE(I3RecoPulseSeriesMapMask);
-

@@ -31,18 +31,10 @@ void register_I3Calibration()
 {
   class_<I3Calibration, bases<I3FrameObject>, boost::shared_ptr<I3Calibration> >("I3Calibration")
     .def(copy_suite<I3Calibration>())
-    .def_readwrite("startTime", &I3Calibration::startTime)
-    .def_readwrite("endTime", &I3Calibration::endTime)
-    .def_readwrite("domCal", &I3Calibration::domCal)
-    //.def_readwrite("amandaCal", &I3Calibration::amandaCal)
-
-    //=====================================================
-    .def_readwrite("vemCal", &I3Calibration::vemCal)
-    //=====================================================
-
-    //.def_readwrite("twrCal", &I3Calibration::twrCal)
-    .def_readwrite("TWRGlobalT0", &I3Calibration::TWRGlobalT0)
-    .def_readwrite("TWRI3TimeOffset", &I3Calibration::TWRI3TimeOffset)
+    #define I3CALPROPS (startTime)(endTime)(domCal)(vemCal)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Calibration, I3CALPROPS)
+    #undef I3CALPROPS
+    .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
@@ -64,68 +56,76 @@ void register_I3Calibration()
     class_<LinearFit>("LinearFit")
       .def_readwrite("slope", &LinearFit::slope)
       .def_readwrite("intercept", &LinearFit::intercept)
+      .def( freeze() )
       ;
 
     class_<I3VEMCalibration>("I3VEMCalibration")
       .def(copy_suite<I3VEMCalibration>())
-      .def_readwrite("pePerVEM", &I3VEMCalibration::pePerVEM)
-      .def_readwrite("muPeakWidth", &I3VEMCalibration::muPeakWidth)
-      .def_readwrite("hglgCroddOver", &I3VEMCalibration::hglgCrossOver)
-      .def_readwrite("corrFactor", &I3VEMCalibration::corrFactor)
+      #define I3VEMCALPROPS (pePerVEM)(muPeakWidth)(hglgCrossOver)(corrFactor) 
+      BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3VEMCalibration, I3VEMCALPROPS)
+      #undef I3VEMCALPROPS
+      .def( freeze() )
       ;
 
     class_<QuadraticFit>("QuadraticFit")
-      .def_readwrite("quadFitA", &QuadraticFit::quadFitA)
-      .def_readwrite("quadFitB", &QuadraticFit::quadFitB)
-      .def_readwrite("quadFitC", &QuadraticFit::quadFitC)
+      .def_readwrite("quad_fit_a", &QuadraticFit::quadFitA)
+      .def_readwrite("quad_fit_b", &QuadraticFit::quadFitB)
+      .def_readwrite("quad_fit_v", &QuadraticFit::quadFitC)
+      .def( freeze() )
       ;
 
     class_<TauParam>("TauParam")
-      .def_readwrite("P0", &TauParam::P0)
-      .def_readwrite("P1", &TauParam::P1)
-      .def_readwrite("P2", &TauParam::P2)
-      .def_readwrite("P3", &TauParam::P3)
-      .def_readwrite("P4", &TauParam::P4)
-      .def_readwrite("P5", &TauParam::P5)
-      .def_readwrite("TauFrac", &TauParam::TauFrac)
+      .def_readwrite("p0", &TauParam::P0)
+      .def_readwrite("p1", &TauParam::P1)
+      .def_readwrite("p2", &TauParam::P2)
+      .def_readwrite("p3", &TauParam::P3)
+      .def_readwrite("p4", &TauParam::P4)
+      .def_readwrite("p5", &TauParam::P5)
+      .def_readwrite("tau_frac", &TauParam::TauFrac)
+      .def( freeze() )
       ;
-
+	  
     class_<SPETemplate>("SPETemplate")
       .def_readwrite("c", &SPETemplate::c)
       .def_readwrite("x0", &SPETemplate::x0)
       .def_readwrite("b1", &SPETemplate::b1)
       .def_readwrite("b2", &SPETemplate::b2)
+      .def( freeze() )
+      ;
+    
+    class_<I3DOMCalibration::DroopedSPETemplate>("DroopedSPETemplate",no_init)
+      .def(init<const SPETemplate&>())
+      .def(init<const SPETemplate&,const SPETemplate&,double,double,double>())
+      .def("__call__",&I3DOMCalibration::DroopedSPETemplate::operator())
+      .def(freeze())
       ;
 
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
       .def(copy_suite<I3DOMCalibration>())
-      PROPERTY(I3DOMCalibration, Temperature, Temperature)
-      PROPERTY(I3DOMCalibration, TransitTime, TransitTime)
-      PROPERTY(I3DOMCalibration, HVGainFit, HVGainFit)
-      PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
-      PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
-      PROPERTY(I3DOMCalibration, FADCBeaconBaseline, FADCBeaconBaseline)
-      PROPERTY(I3DOMCalibration, FADCPulseShape, FADCPulseShape)
-      PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
-      PROPERTY(I3DOMCalibration, TauParameters, TauParameters)
-      PROPERTY(I3DOMCalibration, FADCGain, FADCGain)
-      PROPERTY(I3DOMCalibration, FADCBaselineFit, FADCBaselineFit)
-      PROPERTY(I3DOMCalibration, FADCDeltaT, FADCDeltaT)
-      PROPERTY(I3DOMCalibration, FrontEndImpedance, FrontEndImpedance)
-      PROPERTY(I3DOMCalibration, DOMCalVersion, DOMCalVersion)
-      PROPERTY(I3DOMCalibration, ATWDResponseWidth, ATWDResponseWidth)
-      PROPERTY(I3DOMCalibration, FADCResponseWidth, FADCResponseWidth)
-      PROPERTY(I3DOMCalibration, SPEDiscCalib, SPEDiscCalib)
-      PROPERTY(I3DOMCalibration, MPEDiscCalib, MPEDiscCalib)
-      PROPERTY(I3DOMCalibration, PMTDiscCalib, PMTDiscCalib)
-      PROPERTY(I3DOMCalibration, DomNoiseRate, DomNoiseRate)
-      PROPERTY(I3DOMCalibration, RelativeDomEff, RelativeDomEff)
-      /* XXX FIXME: find a better way to expose the channel argument. */
-      #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDPulseShape)(ATWDDeltaT)(ATWDFreqFit)(ATWDGain)
+      #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)           \
+                            (FADCBaselineFit)(FADCBeaconBaseline)(FrontEndImpedance)  \
+                            (TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)      \
+                            (ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)      \
+                            (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
+      #undef I3DOMCALPROPS
+      // XXX Note:  These are some ugly interfaces from I3DOMCalibration that 
+      //     proved to be difficult to handle in boost::python.  Left exposed for
+      //     expert use, but proper pybindings here will have to wait for an
+      //     updated I3DOMCalibration class  XXX 
+      //      See TRAC ticket #300
+      #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT) \
+                         (ATWDFreqFit)(ATWDGain)(ATWDPulseShape)(FADCPulseShape)
       BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
-      .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit, boost::python::return_internal_reference<1>())
+      .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit,
+          boost::python::return_internal_reference<1>())
+      .def("SetATWDBinCalibFit", &I3DOMCalibration::SetATWDBinCalibFit)
+      .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
+      .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
+      .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)
+      .def( freeze() )
       ;
 
   }

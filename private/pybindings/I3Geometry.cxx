@@ -38,10 +38,10 @@ void register_I3Geometry()
   //
   class_<I3Geometry, bases<I3FrameObject>, boost::shared_ptr<I3Geometry> >("I3Geometry")
     .def(copy_suite<I3Geometry>())
-    .def_readwrite("omgeo", &I3Geometry::omgeo)
-    .def_readwrite("stationgeo", &I3Geometry::stationgeo)
-    .def_readwrite("startTime", &I3Geometry::startTime)
-    .def_readwrite("endTime", &I3Geometry::endTime)
+    #define GEOMPROPS (omgeo)(stationgeo)(startTime)(endTime)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Geometry, GEOMPROPS )
+    #undef GEOMPROPS
+    .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3OMGeo> >("Map_OMKey_I3OMGeo")
@@ -54,11 +54,10 @@ void register_I3Geometry()
     //
     scope omg = class_<I3OMGeo, boost::shared_ptr<I3OMGeo> >("I3OMGeo")
       .def(copy_suite<I3OMGeo>())
-      .def_readwrite("position", &I3OMGeo::position)
-      .def_readwrite("omtype", &I3OMGeo::omtype)
-      .def_readwrite("orientation", &I3OMGeo::orientation)
-      .def_readwrite("area", &I3OMGeo::area)
-      .def_readwrite("aziangle", &I3OMGeo::aziangle)
+      #define I3OMGEOPROPS (position)(omtype)(orientation)(area)(aziangle) 
+      BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3OMGeo, I3OMGEOPROPS )
+      #undef I3OMGEOPROPS
+      .def( freeze() )
       ;
 
     enum_<I3OMGeo::OMType>("OMType")
@@ -85,14 +84,11 @@ void register_I3Geometry()
   {
     scope tankgeo = class_<I3TankGeo, boost::shared_ptr<I3TankGeo> >("I3TankGeo")
       .def(copy_suite<I3TankGeo>())
-      .def_readwrite("position",&I3TankGeo::position)
-      .def_readwrite("orientation",&I3TankGeo::orientation)
-      .def_readwrite("tankradius",&I3TankGeo::tankradius)
-      .def_readwrite("tankheight",&I3TankGeo::tankheight)
-      .def_readwrite("fillheight",&I3TankGeo::fillheight)
-      .def_readwrite("omKeyList",&I3TankGeo::omKeyList_)
-      .def_readwrite("snowheight",&I3TankGeo::snowheight)
-      .def_readwrite("tanktype",&I3TankGeo::tanktype)
+      #define TANKGEOPROPS (position)(orientation)(tankradius)(tankheight)(fillheight)(snowheight)(tanktype)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3TankGeo, TANKGEOPROPS )
+      .def_readwrite("omkey_list",&I3TankGeo::omKeyList_)
+      #undef TANKGEOPROPS
+      .def( freeze() )
       ;
 
     enum_<I3TankGeo::TankType>("TankType")

@@ -20,18 +20,17 @@
 //
 
 #include <dataclasses/I3Vector.h>
+#include <dataclasses/physics/I3Particle.h>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
+#include <icetray/ostream_pair.hpp>
 #include <vector>
+#include <sstream>
 
 using namespace boost::python;
 
 using std::vector;
-
-static std::string 
-string_I3VectorChar(const I3Vector<char> &vc)
-{
-  return std::string(vc.begin(),vc.end());
-}
 
 template <typename T>
 void 
@@ -40,6 +39,7 @@ register_i3vector_of(const std::string& s)
   typedef I3Vector<T> vec_t;
   class_<vec_t, bases<I3FrameObject>, boost::shared_ptr<vec_t> > ((std::string("I3Vector") + s).c_str())
     .def(std_vector_indexing_suite<vec_t>())
+    .def("__str__", &stream_to_string<I3Vector<T> >)
     ;
   register_pointer_conversions<vec_t>();
 }
@@ -60,16 +60,8 @@ register_std_pair(const char* s)
 
 void register_I3Vectors()
 {
-  // 'char' has a special method that converts to string
-  class_<I3Vector<char>, bases<I3FrameObject>, boost::shared_ptr<I3Vector<char> > >("I3VectorChar")
-    .def(std_vector_indexing_suite<I3Vector<char> >())
-    .def("__str__",string_I3VectorChar)
-    ;
-  register_pointer_conversions<I3Vector<char> >();
 
-  //
-  // others are consistent with each other
-  //
+  register_i3vector_of<char>("Char");
 
   register_i3vector_of<std::string>("String");
   
@@ -89,6 +81,8 @@ void register_I3Vectors()
   register_i3vector_of<double>("Double");
   
   register_i3vector_of<std::pair<double, double> >("DoubleDouble");
+
+  register_i3vector_of<I3Particle>("I3Particle");
   
-  register_std_pair<double, double>("pair_double_double");
+  register_std_pair<double, double>("PairDoubleDouble");
 }

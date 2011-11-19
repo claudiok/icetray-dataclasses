@@ -43,6 +43,9 @@ typedef I3Tree<I3Trigger> I3TriggerHierarchy;
 /**
  * pointer type to insulate users from memory management
  */
+
+std::ostream& operator<<(std::ostream& oss, const I3TriggerHierarchy& t);
+
 I3_POINTER_TYPEDEFS(I3TriggerHierarchy);
 
 /**
@@ -73,7 +76,7 @@ namespace I3TriggerHierarchyUtils
   Count(const I3TriggerHierarchy& triggers,
         TriggerKey::SourceID src)
   {
-    return count_if(triggers.begin(), triggers.end(),
+    return std::count_if(triggers.begin(), triggers.end(),
                     boost::lambda::bind(internal::EqualSrc,
                                         boost::lambda::_1, src));
   }
@@ -82,7 +85,7 @@ namespace I3TriggerHierarchyUtils
   Count(const I3TriggerHierarchy& triggers,
         TriggerKey::TypeID type)
   {
-    return count_if(triggers.begin(), triggers.end(),
+    return std::count_if(triggers.begin(), triggers.end(),
                     boost::lambda::bind(internal::EqualType,
                                         boost::lambda::_1, type));
   }
@@ -91,7 +94,7 @@ namespace I3TriggerHierarchyUtils
   Count(const I3TriggerHierarchy& triggers,
         TriggerKey::SourceID src, TriggerKey::TypeID type)
   {
-    return count_if(triggers.begin(), triggers.end(),
+    return std::count_if(triggers.begin(), triggers.end(),
                     boost::lambda::bind(internal::EqualSrcType,
                                         boost::lambda::_1, src, type));
   }
@@ -100,7 +103,7 @@ namespace I3TriggerHierarchyUtils
   Count(const I3TriggerHierarchy& triggers,
         const TriggerKey& key)
   {
-    return count_if(triggers.begin(), triggers.end(),
+    return std::count_if(triggers.begin(), triggers.end(),
                     boost::lambda::bind(internal::EqualKey,
                                         boost::lambda::_1, key));
   }
@@ -110,7 +113,7 @@ namespace I3TriggerHierarchyUtils
        TriggerKey::SourceID src,
        I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
   {
-    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+    return std::find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
                    boost::lambda::bind(internal::EqualSrc,
                                        boost::lambda::_1, src));
   }
@@ -120,7 +123,7 @@ namespace I3TriggerHierarchyUtils
        TriggerKey::TypeID type,
        I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
   {
-    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+    return std::find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
                    boost::lambda::bind(internal::EqualType,
                                        boost::lambda::_1, type));
   }
@@ -130,7 +133,7 @@ namespace I3TriggerHierarchyUtils
        TriggerKey::SourceID src, TriggerKey::TypeID type,
        I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
   {
-    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+    return std::find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
                    boost::lambda::bind(internal::EqualSrcType,
                                        boost::lambda::_1, src, type));
   }
@@ -140,11 +143,12 @@ namespace I3TriggerHierarchyUtils
        const TriggerKey& key,
        I3TriggerHierarchy::iterator iter = I3TriggerHierarchy::iterator())
   {
-    return find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
+    return std::find_if(!triggers.is_valid(iter) ? triggers.begin() : iter, triggers.end(),
                    boost::lambda::bind(internal::EqualKey,
                                        boost::lambda::_1, key));
   }
 }
+
 
 #endif
 

@@ -28,17 +28,15 @@ using namespace boost::python;
 void register_I3DOMFunctions()
 {
 
-  def("ATWDSamplingRate",&ATWDSamplingRate);
-  def("PMTGain",&PMTGain);
-  def("SPEMean",&SPEMean);
-  def("FADCBaseline",&FADCBaseline);
-  def("TransitTime",&TransitTime);
-  def("SPEDiscriminatorThreshold",&SPEDiscriminatorThreshold);
-  def("SPEPMTThreshold",&SPEPMTThreshold);
-  def("MPEDiscriminatorThreshold",&MPEDiscriminatorThreshold);
-  def("OldspeThreshold",&OldspeThreshold);
-  def("OldmpeThreshold",&OldmpeThreshold);
-  def("DOMCalVersion",&DOMCalVersion);
-  def("WhichATWD",&WhichATWD);
+  def("atwd_sampling_rate",&ATWDSamplingRate);
+  def("pmt_gain",&PMTGain);
+  def("spe_mean",&SPEMean);
+  def("fadc_baseline",&FADCBaseline);
+  def("transit_time",&TransitTime);
+  def("spe_discriminator_threshold",&SPEDiscriminatorThreshold);
+  def("spe_pmt_threshold",&SPEPMTThreshold);
+  def("mpe_discriminator_threshold",&MPEDiscriminatorThreshold);
+  def("domcaal_version",&DOMCalVersion);
+  def("which_atwd",&WhichATWD);
 
 } 

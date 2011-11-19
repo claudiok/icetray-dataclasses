@@ -9,7 +9,7 @@
 #ifndef I3CONSTANTS_H_INCLUDE
 #define I3CONSTANTS_H_INCLUDE
 
-#include "dataclasses/I3Units.h"
+#include "icetray/I3Units.h"
 #include <cmath>
 
 /**

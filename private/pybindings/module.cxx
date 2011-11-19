@@ -37,12 +37,13 @@ namespace bp = boost::python;
 //
 #define REGISTER_THESE_THINGS						\
   (I3Time)(I3Position)(I3Direction)(I3Geometry)(I3MCTree)(I3Trigger)	\
-  (I3Particle)(I3RecoPulse)(I3AMANDAAnalogReadout)			\
+  (I3Particle)(I3RecoPulse)                       			\
   (I3Waveform)(I3DOMLaunch)(I3EventHeader)(I3RecoHit)			\
-  (I3TWRFrag)(I3TWRLaunch)(I3FlasherInfo)                               \
+  (I3FlasherInfo)                                                       \
   (I3MCHit)(I3MCList)(I3Calibration)(I3DetectorStatus)(I3DOMFunctions)	\
   (I3Vectors)(I3MapString)(I3MapInt)(I3MapKey)                          \
-  (I3Double)(I3String)(I3Constants)(I3RecoPulseSeriesMapMask)
+  (I3Double)(I3String)(I3Constants)(I3RecoPulseSeriesMapMask)           \
+  (I3RecoPulseSeriesMapUnion)(I3SuperDST)(TankKey)
 
 #define I3_REGISTRATION_FN_DECL(r, data, t) void BOOST_PP_CAT(register_,t)();
 #define I3_REGISTER(r, data, t) BOOST_PP_CAT(register_,t)();

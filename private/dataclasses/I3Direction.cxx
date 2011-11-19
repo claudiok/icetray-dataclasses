@@ -6,6 +6,7 @@
 #include <dataclasses/I3Direction.h>
 #include <dataclasses/I3Constants.h>
 #include <math.h>
+#include <icetray/I3Units.h>
 
 
 template <class Archive> 
@@ -211,3 +212,9 @@ bool operator==(const I3Direction& lhs, const I3Direction& rhs){
 }
 
 //-----------------------------------------------------------
+
+std::ostream& operator<<(std::ostream& oss, const I3Direction& d){
+  oss << "I3Direction( Zenith (deg):" << d.GetZenith()/I3Units::degree << 
+    " , Azimuth(deg)" <<d.GetAzimuth()/I3Units::degree << ")";
+  return oss;
+}

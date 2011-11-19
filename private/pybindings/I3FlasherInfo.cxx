@@ -55,22 +55,11 @@ void register_I3FlasherInfo()
  {
    scope outer = 
    class_<I3FlasherInfo, bases<I3FrameObject>, I3FlasherInfoPtr>("I3FlasherInfo")
-     .def("GetFlashingOM", &I3FlasherInfo::GetFlashingOM)
-     .def("GetFlashTime", &I3FlasherInfo::GetFlashTime)
-     .def("GetATWDBinSize", &I3FlasherInfo::GetATWDBinSize)
-     .def("GetLEDBrightness", &I3FlasherInfo::GetLEDBrightness)
-     .def("GetMask", &I3FlasherInfo::GetMask)
-     .def("GetWidth", &I3FlasherInfo::GetWidth)
-     .def("GetRate", &I3FlasherInfo::GetRate)
-     .def("GetRawATWD3", get_waveform,return_internal_reference<1>())
-     .def("SetFlashingOM", &I3FlasherInfo::SetFlashingOM)
-     .def("SetFlashTime", &I3FlasherInfo::SetFlashTime)
-     .def("SetATWDBinSize", &I3FlasherInfo::SetATWDBinSize)
-     .def("SetLEDBrightness", &I3FlasherInfo::SetLEDBrightness)
-     .def("SetMask", &I3FlasherInfo::SetMask)
-     .def("SetWidth", &I3FlasherInfo::SetWidth)
-     .def("SetRate", &I3FlasherInfo::SetRate)
-     .def("SetRawATWD3", &I3FlasherInfo::SetRawATWD3)
+     #define PROPS (FlashingOM)(FlashTime)(ATWDBinSize)(LEDBrightness)(Mask)(Width)(Rate)
+     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3FlasherInfo, PROPS)
+     #undef PROPS
+     .add_property("raw_atwd3", make_function(get_waveform,return_internal_reference<1>()), &I3FlasherInfo::SetRawATWD3)
+     .def( freeze() )
    ;
 
  }

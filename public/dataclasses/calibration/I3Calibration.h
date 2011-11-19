@@ -12,18 +12,25 @@
 #ifndef I3CALIBRATION_H_INCLUDED
 #define I3CALIBRATION_H_INCLUDED
 
+#include <map>
+
 #include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
 #include "dataclasses/calibration/I3AMANDAOMCalibration.h"
 #include "dataclasses/calibration/I3VEMCalibration.h"
 #include "dataclasses/calibration/TWRCalibration.h"
 #include "dataclasses/I3Time.h"
-#include "dataclasses/OMKey.h"
-#include "dataclasses/TankKey.h"
+#include "icetray/OMKey.h"
 #include <icetray/I3FrameObject.h>
 #include <icetray/I3DefaultName.h>
 
 static const unsigned i3calibration_version_ = 3;
+
+typedef std::map<OMKey, I3DOMCalibration> I3DOMCalibrationMap;
+I3_POINTER_TYPEDEFS(I3DOMCalibrationMap);
+
+typedef std::map<OMKey, I3VEMCalibration> I3VEMCalibrationMap;
+I3_POINTER_TYPEDEFS(I3VEMCalibrationMap);
 
 struct I3Calibration : public I3FrameObject
 {
@@ -35,10 +42,10 @@ public:
     
   virtual ~I3Calibration();
     
-  map<OMKey, I3DOMCalibration> domCal;
-  map<OMKey, I3AMANDAOMCalibration> amandaCal;
-  map<OMKey, I3VEMCalibration> vemCal;
-  map<OMKey, TWRCalibration> twrCal;
+  I3DOMCalibrationMap domCal;
+  std::map<OMKey, I3AMANDAOMCalibration> amandaCal;
+  I3VEMCalibrationMap vemCal;
+  std::map<OMKey, TWRCalibration> twrCal;
   double TWRGlobalT0;
   double TWRI3TimeOffset;
 

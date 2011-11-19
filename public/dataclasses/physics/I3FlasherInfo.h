@@ -9,10 +9,10 @@
 #ifndef I3FLASHERINFO_H_INCLUDED
 #define I3FLASHERINFO_H_INCLUDED
 
+#include <vector>
 #include "icetray/I3FrameObject.h"
-#include "dataclasses/OMKey.h"
+#include "icetray/OMKey.h"
 #include "dataclasses/I3Vector.h"
-using namespace std; 
 
 static const unsigned i3flasherinfo_version_ = 1;
 
@@ -48,7 +48,7 @@ protected:
      * ATWD time bin size, in nsec 
      */
 
-    vector<int> rawATWD3_;
+    std::vector<int> rawATWD3_;
     double aTWDBinSize_;
     bool pedestalSubtractedATWD3_;
 
@@ -123,7 +123,7 @@ public:
      * return raw ATWD3 waveform as a read-only object
      * ATWD3 holds the digitized LED current pulse; the others channels are empty
      */
-    const vector<int>& GetRawATWD3() const {return rawATWD3_;}
+    const std::vector<int>& GetRawATWD3() const {return rawATWD3_;}
   
 
  //   void SetPedestalIsSubtractedATWD3(bool subtracted) { pedestalSubtractedATWD3_ = subtracted; }
@@ -133,7 +133,7 @@ public:
    // bool PedestalSubtractedATWD3() { return pedestalSubtractedATWD3_; }
 
     /* sets the ATWD3 waveform */
-    void SetRawATWD3(const vector<int>& ATWD3data) {rawATWD3_=ATWD3data;}
+    void SetRawATWD3(const std::vector<int>& ATWD3data) {rawATWD3_=ATWD3data;}
 
 
 private:

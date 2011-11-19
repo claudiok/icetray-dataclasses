@@ -25,6 +25,8 @@
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
+#include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
 
@@ -35,26 +37,31 @@ void register_I3Waveform()
     (I3Waveform::*get_waveform_information)() const = &I3Waveform::GetWaveformInformation;
   object get_waveform_func = make_function(get_waveform, return_internal_reference<1>());
   object get_waveform_information_func = make_function(get_waveform_information, return_internal_reference<1>());
+  unsigned (*get_status_static)(const std::vector<I3Waveform::StatusCompound>&) = &I3Waveform::GetStatus;
+  unsigned (I3Waveform::*get_status_member)() const = &I3Waveform::GetStatus;
 
   {
     scope waveform_scope =
       class_<I3Waveform, bases<I3FrameObject>, boost::shared_ptr<I3Waveform> >("I3Waveform")
       .def(copy_suite<I3Waveform>())
-      .def("GetStartTime", &I3Waveform::GetStartTime)
-      .def("SetStartTime", &I3Waveform::SetStartTime)
-      .def("GetBinWidth", &I3Waveform::GetBinWidth)
-      .def("SetBinWidth", &I3Waveform::SetBinWidth)
-      .def("GetWaveform", get_waveform_func)
-      .def("SetWaveform", &I3Waveform::SetWaveform)
-      .def("GetWaveformInformation", get_waveform_information_func)
-	#define PROPS (StartTime)(BinWidth)(Source)(SourceIndex)
-	BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
-	#undef PROPS
-      .add_property("waveform",get_waveform_func,&I3Waveform::SetWaveform)
-      .add_property("waveform_information",get_waveform_information_func)
+      #define PROPS (BinWidth)(Source)(SourceIndex)(Digitizer)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
+      #undef PROPS
+      #define PROPS (Channel)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Waveform, PROPS)
+      #undef PROPS
+      .add_property("status", get_status_member)
+      .add_property("time", &I3Waveform::GetStartTime, &I3Waveform::SetStartTime)
+      .add_property("waveform", get_waveform_func, &I3Waveform::SetWaveform)
+      .add_property("waveform_information", get_waveform_information_func, &I3Waveform::SetWaveformInformation)
+      .add_property("hlc", &I3Waveform::IsHLC, &I3Waveform::SetHLC)
+
       // for static methods you need the both of these
-      .def("GetStatus", &I3Waveform::GetStatus)
-      .staticmethod("GetStatus")
+      .def("get_status", get_status_static)
+      .staticmethod("get_status")
+      .def("__str__", &stream_to_string<I3Waveform>)
+      .def(self == self)
+      .def( freeze() )
       ;
 
     const std::pair<unsigned long long int, unsigned long long int>&
@@ -62,13 +69,11 @@ void register_I3Waveform()
       = &I3Waveform::StatusCompound::GetInterval;
 
     class_<I3Waveform::StatusCompound>("StatusCompound")
-      .def("GetInterval", get_interval, return_value_policy<copy_const_reference>())
-      .def("GetStatus", &I3Waveform::StatusCompound::GetStatus)
-      .def("SetStatus", &I3Waveform::StatusCompound::SetStatus)
       #define PROPS (Status)(Channel)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform::StatusCompound, PROPS)
       #undef PROPS
-      .add_property("interval", bp::make_function(get_interval, return_value_policy<copy_const_reference>()))
+      .add_property("interval", make_function(get_interval, return_value_policy<copy_const_reference>()))
+      .def( freeze() )
       ;
 
     enum_<I3Waveform::Source>("Source")

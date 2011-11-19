@@ -215,7 +215,7 @@ class I3Time : public I3FrameObject
   /**
    * @brief Gets a string representing the time in UTC
    */
-  string GetUTCString(string format="%Y-%m-%d %H:%M:%S UTC")const;
+  std::string GetUTCString(std::string format="%Y-%m-%d %H:%M:%S UTC")const;
 
   /**
    * equality operator.  
@@ -302,6 +302,9 @@ class I3Time : public I3FrameObject
  * Returns the difference between two I3Times in nanoseconds
  */
 double operator-(const I3Time t1,const I3Time t2);
+
+std::ostream& operator<<(std::ostream& oss, const I3Time& d);
+
 
 I3_POINTER_TYPEDEFS(I3Time);
 BOOST_CLASS_VERSION(I3Time, i3time_version_);

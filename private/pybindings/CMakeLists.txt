@@ -19,7 +19,6 @@
 #  
 
 i3_add_pybindings(dataclasses
-  I3AMANDAAnalogReadout.cxx
   I3Calibration.cxx
   I3Constants.cxx
   I3DOMLaunch.cxx
@@ -39,8 +38,7 @@ i3_add_pybindings(dataclasses
   I3RecoPulse.cxx
   I3String.cxx
   I3MapOMKeyMask.cxx
-  I3TWRFrag.cxx
-  I3TWRLaunch.cxx
+  I3MapOMKeyUnion.cxx
   I3Time.cxx
   I3Trigger.cxx
   I3Waveform.cxx
@@ -48,6 +46,9 @@ i3_add_pybindings(dataclasses
   I3MapString.cxx
   I3MapInt.cxx
   I3MapKey.cxx
+  I3SuperDST.cxx
+  TankKey.cxx
+  mctree/I3MCTreeTools.cxx
   module.cxx
   USE_TOOLS boost python log4cplus
   USE_PROJECTS icetray dataclasses

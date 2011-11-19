@@ -3,7 +3,7 @@
  * the IceCube Collaboration
  * $Id:  $
  *
- * @file I3TWRFrag.cxx
+ * @file dataclasses/private/dataclasses/physics/I3TWRFrag.cxx
  * @brief implementation of the I3TWRFrag class
  * @version $Revision:  $
  * @date $Date:  $
@@ -12,6 +12,7 @@
  
 // class header file
 
+#include <vector>
 #include <icetray/serialization.h>
 #include <dataclasses/physics/I3TWRFrag.h>
 
@@ -52,7 +53,7 @@ I3TWRFrag::serialize(Archive& ar, unsigned version)
     if(fragStartBin < 0) log_fatal("invalid start bin");
     startBin_ = static_cast<unsigned int>(fragStartBin);
     
-    vector<double> waveform;
+    std::vector<double> waveform;
     ar & make_nvp("Waveform", waveform);
     rawFADC_.resize(waveform.size());
     for(unsigned int i = 0; i < waveform.size(); ++i)

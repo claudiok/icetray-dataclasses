@@ -1,8 +1,9 @@
+#include <string>
 #include <dataclasses/jday.h>
 
 #include <icetray/serialization.h>
 #include <dataclasses/I3Time.h>
-#include <dataclasses/I3Units.h>
+#include <icetray/I3Units.h>
 
 /**
  *Returns true if year is a leap year.
@@ -251,7 +252,7 @@ double I3Time::GetUTCNanoSec() const
   return 0.1 * daqtenthsns;
 }
 
-string I3Time::GetUTCString(string format)const
+std::string I3Time::GetUTCString(std::string format)const
 {
   time_t t=GetUnixTime();
   struct tm *tm=gmtime(&t);
@@ -348,6 +349,18 @@ double operator-(const I3Time t1,const I3Time t2)
     ( t1.GetModJulianSec()     - t2.GetModJulianSec()     ) * I3Units::second +
     ( t1.GetModJulianDay()     - t2.GetModJulianDay()     ) * I3Units::day;
 }
+
+std::ostream& operator<<(std::ostream& oss, const I3Time& t){
+  double ns=t.GetModJulianNanoSec();
+  oss << t.GetUTCString("%Y-%m-%d %H:%M:%S.");
+  oss << std::setw(3) << std::setfill('0') << int(ns/1e6) << ',';
+  oss << std::setw(3) << std::setfill('0') << int(ns/1e3)%1000 << ',';
+  oss << std::setw(3) << std::setfill('0') << int(ns)%1000 << ',';
+  oss << uint64_t(ns*10)%10 << " UTC";
+
+  return oss;
+}
+
 
 std::string I3Time::MonthToString(Month m)
 {

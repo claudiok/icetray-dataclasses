@@ -13,10 +13,8 @@
 #define I3DOMLAUNCH_H_INCLUDED
 
 #include <vector>
-
-#include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
-#include <dataclasses/OMKey.h>
+#include <icetray/OMKey.h>
 
 /**
  * @brief The direct (digital) readout of an IceCube DOM
@@ -28,7 +26,7 @@
  * determined by the DOM calibrator. There is also a 'coarse charge stamp'
  * containing the 3 largest samples out of the first 16 fADC samples
  */
-static const unsigned i3domlaunch_version_ = 4;
+static const unsigned i3domlaunch_version_ = 5;
 
 /**
  * List the names of enumeration members defined in this file
@@ -120,12 +118,12 @@ private:
     /** 
      * Raw ATWD channel 0 to 3
      */
-    I3Vector<I3Vector<int> > rawATWD_;
+    std::vector<std::vector<int> > rawATWD_;
 
     /** 
      * This holds the 40 MHz FADC data 
      */
-    I3Vector<int> rawFADC_;
+    std::vector<int> rawFADC_;
 
     /** 
      * This holds the local coincidence bit
@@ -136,7 +134,7 @@ private:
      * Raw course charge stamp
      * These values are already unpacked to full 10-bit numbers
      */
-    I3Vector<int> rawChargeStamp_;
+    std::vector<int> rawChargeStamp_;
 
     /**
      *  chargeStampHighestSample runs from 1-16, and points to the highest fADC
@@ -230,25 +228,32 @@ public:
     /**
      * Return raw ATWD by channel number
      */
-    const I3Vector<int>& GetRawATWD(unsigned int channel) const
+    const std::vector<int>& GetRawATWD(unsigned int channel) const
     {
       if(channel >= rawATWD_.size())
-        log_fatal("Bad ATWD channel in I3DOMLaunch::GetRawATWD(channel)");
+        log_fatal("Accessing channel %u in a launch with %zu channels.", channel, rawATWD_.size());
       return rawATWD_[channel];
     }
 
-    I3Vector<int>& GetRawATWD(unsigned int channel)
+    std::vector<int>& GetRawATWD(unsigned int channel)
     {
       if(channel >= rawATWD_.size())
-        log_fatal("Bad ATWD channel in I3DOMLaunch::GetRawATWD(channel)");
+        log_fatal("Accessing channel %u in a launch with %zu channels.", channel, rawATWD_.size());
       return rawATWD_[channel];
     }
-        
+
+    const std::vector<std::vector<int> >& GetRawATWDs() const{ return rawATWD_; }
+    std::vector<std::vector<int> >& GetRawATWDs() { return rawATWD_; }
+
+    void SetRawATWD( std::vector<std::vector<int> >& v ){ rawATWD_ = v; }
+
     /**
      * Return raw FADC waveform.
      */
-    const I3Vector<int>& GetRawFADC() const { return rawFADC_; }
-    I3Vector<int>& GetRawFADC() { return rawFADC_; }
+    const std::vector<int>& GetRawFADC() const { return rawFADC_; }
+    std::vector<int>& GetRawFADC() { return rawFADC_; }
+
+    void SetRawFADC( std::vector<int>& v){ rawFADC_ = v; }
 
     /**
      * Return local coincidence bit.
@@ -273,8 +278,8 @@ public:
   /** 
      * Return the raw charge stamp.
      */
-    const I3Vector<int>& GetRawChargeStamp() const { return rawChargeStamp_; }
-    I3Vector<int>& GetRawChargeStamp() { return rawChargeStamp_; }
+    const std::vector<int>& GetRawChargeStamp() const { return rawChargeStamp_; }
+    std::vector<int>& GetRawChargeStamp() { return rawChargeStamp_; }
 
     /**
      * Return charge stamp highest sample
@@ -382,5 +387,8 @@ operator~(I3DOMLaunch::TriggerMode a)
 {
   return I3DOMLaunch::TriggerMode(~static_cast<int>(a));
 }
+
+std::ostream& operator<<(std::ostream& oss, const I3DOMLaunch& d);
+
 
 #endif // I3DOMLAUNCH_H_INCLUDED

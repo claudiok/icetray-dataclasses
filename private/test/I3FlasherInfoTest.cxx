@@ -88,7 +88,7 @@ TEST(SetAndGet){
     
     int count=0;
 
-    for(vector<I3FlasherInfo>::iterator iter = flasherInfoVect->begin() ; 
+    for(std::vector<I3FlasherInfo>::iterator iter = flasherInfoVect->begin() ; 
 	iter != flasherInfoVect->end() ; 
 	iter++)
       {

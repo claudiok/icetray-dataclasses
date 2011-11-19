@@ -2,7 +2,7 @@
     copyright  (C) 2004
     the icecube collaboration
     @version $Id: I3Track.h 15192 2006-02-02 01:02:05Z dule $
-    @file I3Track.h
+    @file dataclasses/public/dataclasses/physics/I3MCList.h
     @date $Date: 2006-02-01 20:02:05 -0500 (Wed, 01 Feb 2006) $
 */
 
