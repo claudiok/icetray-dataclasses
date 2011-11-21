@@ -367,7 +367,7 @@ I3_SERIALIZABLE(TauParam);
 
 template <class Archive>
 void 
-SPETemplate::serialize(Archive& ar, unsigned version)
+I3DOMCalibration::SPETemplate::serialize(Archive& ar, unsigned version)
 {
   if (version>pulsetemplate_version_)
     log_fatal("Attempting to read version %u from file but running version %u of PulseTemplate class.",version,tauparam_version_);
@@ -378,7 +378,7 @@ SPETemplate::serialize(Archive& ar, unsigned version)
   ar & make_nvp("b2", b2);
 }
 
-I3_SERIALIZABLE(SPETemplate);
+I3_SERIALIZABLE(I3DOMCalibration::SPETemplate);
 
 template <class Archive>
 void 

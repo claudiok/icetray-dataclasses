@@ -110,18 +110,7 @@ struct TauParam
 
 BOOST_CLASS_VERSION(TauParam, tauparam_version_);
 
-struct SPETemplate {
-	double c;
-	double x0;
-	double b1;
-	double b2;
-	template <class Archive> void serialize(Archive& ar, unsigned version);
-	SPETemplate() : c(NAN), x0(NAN), b1(NAN), b2(NAN) {};
-	SPETemplate(double ci, double x0i, double b1i, double b2i) : c(ci), x0(x0i), b1(b1i), b2(b2i) {}; 
-	bool IsValid() const { return !isnan(c); };
-};
 
-BOOST_CLASS_VERSION(SPETemplate, pulsetemplate_version_);
 
 /**
  * @brief Class that stores the calibration information for a DOM
@@ -143,6 +132,18 @@ BOOST_CLASS_VERSION(SPETemplate, pulsetemplate_version_);
  */
 
 class I3DOMCalibration {
+
+public:
+	struct SPETemplate {
+		double c;
+		double x0;
+		double b1;
+		double b2;
+		template <class Archive> void serialize(Archive& ar, unsigned version);
+		SPETemplate() : c(NAN), x0(NAN), b1(NAN), b2(NAN) {};
+		SPETemplate(double ci, double x0i, double b1i, double b2i) : c(ci), x0(x0i), b1(b1i), b2(b2i) {}; 
+		bool IsValid() const { return !isnan(c); };
+	};
   
  public:
   I3DOMCalibration();
@@ -671,6 +672,7 @@ class I3DOMCalibration {
 
 };
 
+BOOST_CLASS_VERSION(I3DOMCalibration::SPETemplate, pulsetemplate_version_);
 BOOST_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 

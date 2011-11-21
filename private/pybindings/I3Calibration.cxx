@@ -85,17 +85,17 @@ void register_I3Calibration()
       .def( freeze() )
       ;
 	  
-    class_<SPETemplate>("SPETemplate")
-      .def_readwrite("c", &SPETemplate::c)
-      .def_readwrite("x0", &SPETemplate::x0)
-      .def_readwrite("b1", &SPETemplate::b1)
-      .def_readwrite("b2", &SPETemplate::b2)
+    class_<I3DOMCalibration::SPETemplate>("SPETemplate")
+      .def_readwrite("c",  &I3DOMCalibration::SPETemplate::c)
+      .def_readwrite("x0", &I3DOMCalibration::SPETemplate::x0)
+      .def_readwrite("b1", &I3DOMCalibration::SPETemplate::b1)
+      .def_readwrite("b2", &I3DOMCalibration::SPETemplate::b2)
       .def( freeze() )
       ;
     
     class_<I3DOMCalibration::DroopedSPETemplate>("DroopedSPETemplate",no_init)
-      .def(init<const SPETemplate&>())
-      .def(init<const SPETemplate&,const SPETemplate&,double,double,double>())
+      .def(init<const I3DOMCalibration::SPETemplate&>())
+      .def(init<const I3DOMCalibration::SPETemplate&,const I3DOMCalibration::SPETemplate&,double,double,double>())
       .def("__call__",&I3DOMCalibration::DroopedSPETemplate::operator())
       .def(freeze())
       ;
