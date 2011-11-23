@@ -245,7 +245,7 @@ I3DOMCalibration::SetTauParameters(TauParam tauparameters)
 void I3DOMCalibration::InitPulseTemplates()
 {
 	// Fill default pulse templates
-	const double causalityShift = 11.5;
+	const double causalityShift = -11.5;
 	
 	if (toroidType_ == NEW_TOROID) {
 		atwdSPETemplate_[0] = SPETemplate(17.899 / 14.970753076313095, -4.24 - 5 - causalityShift, 5.5, 42);
