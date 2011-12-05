@@ -19,6 +19,7 @@ void register_I3RecoPulseSeriesMapMask()
 	bp::class_<I3RecoPulseSeriesMapMask, bp::bases<I3FrameObject>,
 	    I3RecoPulseSeriesMapMaskPtr>("I3RecoPulseSeriesMapMask",
 	    bp::init<const I3Frame&, const std::string &>(bp::args("frame", "key")))
+		.def(bp::init<const I3Frame&, const std::string &, const I3RecoPulseSeriesMap &>())
 		.add_property("source", &I3RecoPulseSeriesMapMask::GetSource)
 		.def(bp::copy_suite<I3RecoPulseSeriesMapMask>())
 		.def("__and__", &I3RecoPulseSeriesMapMask::operator&)
