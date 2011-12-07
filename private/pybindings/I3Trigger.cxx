@@ -52,6 +52,11 @@ TriggerKey get_trigkey(const I3Trigger& self)
   return self.GetTriggerKey();
 }
 
+void set_trigkey(I3Trigger& self, const TriggerKey& tk)
+{
+  self.GetTriggerKey() = tk;
+}
+
 void register_I3Trigger()
 {
   {
@@ -61,7 +66,7 @@ void register_I3Trigger()
       PROPERTY(I3Trigger, length, TriggerLength)
       PROPERTY(I3Trigger, fired, TriggerFired)
       // force copy of trigkey via standalone fn
-      .add_property("key", get_trigkey, "Get TriggerKey")
+      .add_property("key", get_trigkey, set_trigkey,"Get TriggerKey")
       .def("__str__", &stream_to_string<I3Trigger>)
       .def( self == self )
       .def( self != self )
@@ -134,5 +139,6 @@ void register_I3Trigger()
     .def("__str__", &stream_to_string< I3Vector<I3Trigger> >)
     ;
 
+  register_pointer_conversions<I3Vector<I3Trigger> >();
   register_pointer_conversions<I3TriggerHierarchy>();
 }
