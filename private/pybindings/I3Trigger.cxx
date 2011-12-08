@@ -132,6 +132,8 @@ void register_I3Trigger()
     .def("__str__", &stream_to_string<I3TriggerHierarchy>)
     .def("__len__", &length)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
+    .def("insert", &stream_to_string< I3Vector<I3Trigger> >)
+    .def("insert",&I3TriggerHierarchyUtils::Insert);
     ;
 
   class_<I3Vector<I3Trigger>, bases<I3FrameObject>, shared_ptr<I3Vector<I3Trigger> > >("I3VectorI3Trigger")
