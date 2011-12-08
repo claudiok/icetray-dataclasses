@@ -69,6 +69,7 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
 		log_fatal("The passed map is not an ordered subset of map '%s'!", key_.c_str());
 	
 	omkey_mask_ = bitmask(source_->size());
+	assert(omkey_mask_.size() == source_->size());
 	
 	I3RecoPulseSeriesMap::const_iterator sup_mit = source_->begin();
 	I3RecoPulseSeriesMap::const_iterator sub_mit = subset.begin();
@@ -363,7 +364,7 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
 	if (source->size() != omkey_mask_.size())
 		log_fatal("This mask was made from a map with %zu keys, but "
-		    "the map named '%s' %zu keys.", omkey_mask_.size(),
+		    "the map named '%s' has %zu keys.", omkey_mask_.size(),
 		    key_.c_str(), source->size());
 	
 	masked_ = boost::make_shared<I3RecoPulseSeriesMap>();
@@ -406,27 +407,17 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 	return masked_;
 }
 
-
-#define ROUND_UP(num, denom) (num % denom == 0) ? num/denom : (num/denom) + 1
-
 I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)
 {
-	size_ = ROUND_UP(length, 8*sizeof(mask_t));
-	if (size_ == 0)
-		size_ = 8*sizeof(mask_t);
-	assert(size_ > 0);
+	size_ = (length != 0) ? (length-1u)/(8*sizeof(mask_t)) + 1 : 1;
+	padding_ = size_*8*sizeof(mask_t) - length;
 	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
-	padding_ = length % (8*sizeof(mask_t));
-	if (padding_ != 0)
-		padding_ = 8*sizeof(mask_t) - padding_;
 	
 	if (set)
 		set_all();
 	else
 		unset_all();
 };
-
-#undef ROUND_UP
 
 I3RecoPulseSeriesMapMask::bitmask::bitmask(const bitmask& other) : size_(other.size_), padding_(other.padding_), mask_(NULL)
 {

@@ -36,6 +36,16 @@ manufacture_pulsemap()
 	return pulsemap;
 }
 
+static I3FramePtr
+manufacture_frame(const std::string &name)
+{
+	I3FramePtr frame(new I3Frame(I3Frame::Physics));
+	I3RecoPulseSeriesMapConstPtr pulses = manufacture_pulsemap();
+	frame->Put(name, pulses);
+	
+	return frame;
+}
+
 TEST(Apply)
 {
 	I3RecoPulseSeriesMapPtr pulses;
@@ -227,6 +237,28 @@ TEST(SetSinglePulse)
 	masked = mask.Apply(frame);
 	ENSURE_EQUAL(mask.GetSum(), 18u);
 	ENSURE_EQUAL(masked->begin()->second.size(), 9u);
+}
+
+TEST(NullSubset)
+{
+	/*
+	 * Test a few stupid edge cases.
+	 */
+	I3FramePtr frame = manufacture_frame("foo");
+	I3RecoPulseSeriesMapPtr nully(new I3RecoPulseSeriesMap);
+	I3RecoPulseSeriesMapMaskPtr mask(new I3RecoPulseSeriesMapMask(*frame, "foo", *nully));
+	
+	I3RecoPulseSeriesMapConstPtr masked = mask->Apply(*frame);
+	
+	ENSURE_EQUAL(masked->size(), 0u, "Null subset of non-empty superset == null set");
+	
+	frame->Delete("foo");
+	frame->Put("foo", nully);
+	
+	mask = boost::make_shared<I3RecoPulseSeriesMapMask>(*frame, "foo", *nully);
+	masked = mask->Apply(*frame);
+	
+	ENSURE_EQUAL(masked->size(), 0u, "Null subset of null set == null set");
 }
 
 TEST(SetSinglePulseFromBlankMask)
