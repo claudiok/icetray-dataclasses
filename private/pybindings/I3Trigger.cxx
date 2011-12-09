@@ -136,11 +136,11 @@ void register_I3Trigger()
     .def("insert",&I3TriggerHierarchyUtils::Insert);
     ;
 
-  class_<I3Vector<I3Trigger>, bases<I3FrameObject>, shared_ptr<I3Vector<I3Trigger> > >("I3VectorI3Trigger")
-    .def(std_vector_indexing_suite<I3Vector<I3Trigger> >())
-    .def("__str__", &stream_to_string< I3Vector<I3Trigger> >)
+  class_<I3VectorI3Trigger, bases<I3FrameObject>, shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
+    .def(std_vector_indexing_suite<I3VectorI3Trigger >())
+    .def("__str__", &stream_to_string< I3VectorI3Trigger >)
     ;
 
-  register_pointer_conversions<I3Vector<I3Trigger> >();
+  register_pointer_conversions<I3VectorI3Trigger>();
   register_pointer_conversions<I3TriggerHierarchy>();
 }
