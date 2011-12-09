@@ -17,6 +17,7 @@
 #include <icetray/I3Logging.h>
 #include <dataclasses/TriggerKey.h>
 #include <dataclasses/Utility.h>
+#include <dataclasses/I3Vector.h>
 
 /**
  * @brief The basic trigger class.  
@@ -115,6 +116,10 @@ BOOST_CLASS_VERSION(I3Trigger, i3trigger_version_);
  * pointer type to insulate users from memory management
  */
 I3_POINTER_TYPEDEFS(I3Trigger);
+
+
+typedef I3Vector<I3Trigger> I3VectorI3Trigger;
+I3_POINTER_TYPEDEFS(I3VectorI3Trigger);
 
 #endif
 

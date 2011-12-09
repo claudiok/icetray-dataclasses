@@ -69,3 +69,4 @@ std::ostream& operator<<(std::ostream& oss, const I3Trigger& t){
 }
 
 I3_SERIALIZABLE(I3Trigger);
+I3_SERIALIZABLE(I3VectorI3Trigger);

@@ -147,6 +147,12 @@ namespace I3TriggerHierarchyUtils
                    boost::lambda::bind(internal::EqualKey,
                                        boost::lambda::_1, key));
   }
+
+  inline I3TriggerHierarchy 
+  Insert(I3TriggerHierarchy& triggers, const I3Trigger& trig) {
+    triggers.insert(triggers.begin(), trig);    
+    return triggers;
+  }
 }
 
 
