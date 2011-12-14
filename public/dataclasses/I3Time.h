@@ -55,6 +55,8 @@ namespace I3TimeUtils
 class I3Time : public I3FrameObject
 {
  public:
+  static const char* DRIVING_TIME;
+
   /**
    * @brief enum for the Month
    */
