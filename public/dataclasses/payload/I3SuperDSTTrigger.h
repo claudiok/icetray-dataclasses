@@ -38,7 +38,7 @@ public:
 	void SetTimeReference(const I3SuperDSTTrigger &);
 };
 
-class I3SuperDSTTriggerSeries : public std::list<I3SuperDSTTrigger> {
+class I3SuperDSTTriggerSeries : public std::list<I3SuperDSTTrigger>, public I3FrameObject {
 public:
 	I3SuperDSTTriggerSeries();
 	I3SuperDSTTriggerSeries(const I3TriggerHierarchy &, const I3DetectorStatus&);
@@ -56,3 +56,6 @@ private:
 	template <class Archive> void load(Archive & ar, unsigned version);
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
+
+I3_POINTER_TYPEDEFS(I3SuperDSTTriggerSeries);
+

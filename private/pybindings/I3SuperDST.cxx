@@ -13,6 +13,9 @@
 
 #include "dataclasses/payload/I3SuperDST.h"
 
+#include "dataclasses/payload/I3SuperDSTTrigger.h"
+#include "dataclasses/status/I3DetectorStatus.h"
+
 namespace bp = boost::python;
 
 void
@@ -29,5 +32,14 @@ register_I3SuperDST()
 		#undef RO_PROPS
 		;
 	register_pointer_conversions<I3SuperDST>();
+	
+	bp::class_<I3SuperDSTTriggerSeries, I3SuperDSTTriggerSeriesPtr, bp::bases<I3FrameObject> >(
+	    "I3SuperDSTTriggerSeries", bp::no_init)
+		.def(bp::init<const I3TriggerHierarchy &, const I3DetectorStatus &>(bp::args("pulses"), "status"))
+		.def("unpack", &I3SuperDSTTriggerSeries::Unpack, bp::args("self"), "status", "Unpack the compressed event data "
+		    "into I3Triggers.")
+		.def( freeze() )
+	;
+	register_pointer_conversions<I3SuperDSTTriggerSeries>();
 }
 

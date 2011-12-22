@@ -148,6 +148,7 @@ void
 I3SuperDSTTriggerSeries::save(Archive & ar, unsigned version) const
 {
 	I3SuperDSTUtils::SizeCodec ntriggers(this->size());
+	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("NTriggers", ntriggers);
 	BOOST_FOREACH(const I3SuperDSTTrigger &strigger, *this) {
 		uint8_t tag(0);
@@ -166,6 +167,7 @@ void
 I3SuperDSTTriggerSeries::load(Archive & ar, unsigned version)
 {
 	I3SuperDSTUtils::SizeCodec ntriggers;
+	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("NTriggers", ntriggers);
 	for (unsigned i=0; i < ntriggers.value(); i++) {
 		uint8_t tag(0);
