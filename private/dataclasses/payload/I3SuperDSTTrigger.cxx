@@ -19,6 +19,7 @@
 #include "dataclasses/physics/I3Trigger.h"
 
 #include <boost/foreach.hpp>
+#include <boost/utility.hpp>
 
 inline uint32_t FindIndex(const I3TriggerStatusMap &triggers, const TriggerKey &key)
 {
@@ -109,8 +110,9 @@ I3SuperDSTTriggerSeries::I3SuperDSTTriggerSeries(
 			    trigger->GetTriggerKey().GetTypeString());
 	}
 	this->sort();
-	I3SuperDSTTriggerSeries::iterator prev = this->begin(), current = ++prev;
-	for ( ; current != this->end(); current++, prev++)
+	I3SuperDSTTriggerSeries::reverse_iterator current = this->rbegin(),
+	    prev = boost::next(current);
+	for ( ; prev != this->rend(); current++, prev++)
 		current->SetTimeReference(*prev);
 }
 
@@ -133,11 +135,8 @@ I3SuperDSTTriggerSeries::Unpack(const I3DetectorStatus &status) const
 		trig.SetTriggerFired(true);
 		
 		t_ref += strigger.GetTime();
-		
-		if (unpacked_->is_valid(iter))
-			iter = unpacked_->append_child(iter, trig);
-		else
-			iter = unpacked_->insert(unpacked_->begin(), trig);
+
+		unpacked_->insert(unpacked_->begin(), trig);
 	}
 	
 	return unpacked_;
@@ -151,14 +150,13 @@ I3SuperDSTTriggerSeries::save(Archive & ar, unsigned version) const
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("NTriggers", ntriggers);
 	BOOST_FOREACH(const I3SuperDSTTrigger &strigger, *this) {
-		uint8_t tag(0);
-		tag |= (strigger.key_idx_ & 0xff);
-		tag |= (strigger.lengthcode_ & 0xff) << 4;
+		uint8_t tag = (strigger.key_idx_ & 0xf) |
+		    ((strigger.lengthcode_ & 0xf) << 4);
 		I3SuperDSTUtils::SizeCodec length(strigger.lengthcode_ >> 4);
-		I3SuperDSTUtils::SizeCodec time(strigger.startcode_);
+		I3SuperDSTUtils::SizeCodec start(strigger.startcode_);
 		ar & make_nvp("Tag", tag);
 		ar & make_nvp("Length", length);
-		ar & make_nvp("Time", time);
+		ar & make_nvp("Time", start);
 	}
 }
 
@@ -176,9 +174,9 @@ I3SuperDSTTriggerSeries::load(Archive & ar, unsigned version)
 		ar & make_nvp("Length", length);
 		ar & make_nvp("Time", start);
 		
-		uint32_t key_idx = tag & 0xff;
+		uint32_t key_idx = tag & 0xf;
 		uint32_t lengthcode =
-		    (length.value() << 4) | ((tag >> 4) & 0xff);
+		    (length.value() << 4) | ((tag >> 4) & 0xf);
 		this->push_back(I3SuperDSTTrigger(key_idx, start.value(),
 		    lengthcode));
 	}

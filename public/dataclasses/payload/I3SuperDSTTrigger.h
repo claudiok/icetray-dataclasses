@@ -40,7 +40,7 @@ public:
 
 class I3SuperDSTTriggerSeries : public std::list<I3SuperDSTTrigger>, public I3FrameObject {
 public:
-	I3SuperDSTTriggerSeries();
+	I3SuperDSTTriggerSeries() {};
 	I3SuperDSTTriggerSeries(const I3TriggerHierarchy &, const I3DetectorStatus&);
 	
 	boost::shared_ptr<I3TriggerHierarchy> Unpack(const I3DetectorStatus&) const;
