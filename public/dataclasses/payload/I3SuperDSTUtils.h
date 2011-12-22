@@ -31,6 +31,8 @@ namespace I3SuperDSTUtils {
 		SizeCodec() : size_(0) {};
 		SizeCodec(size_type size) : size_(size) {};
 		
+		size_type value() { return size_; };
+		
 		friend class boost::serialization::access;
 		template <class Archive>
 		void load(Archive &ar, unsigned version);
