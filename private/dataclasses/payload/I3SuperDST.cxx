@@ -702,15 +702,32 @@ namespace I3SuperDSTUtils {
 		}
 	}
 
+	template <int N>
+	struct uints;
+	
+	template<> struct uints<1> { typedef uint8_t value; };
+	template<> struct uints<2> { typedef uint16_t value; };
+	template<> struct uints<4> { typedef uint32_t value; };
+	
+	template <int N>
+	struct tags {
+		typedef typename uints<N>::value type;
+		static size_t max()
+		{
+			return std::numeric_limits<type>::max();
+		}
+	};
+
+	template <int N>
 	template <class Archive>
-	void SizeCodec::save(Archive &ar, unsigned version) const
+	void SizeCodec<N>::save(Archive &ar, unsigned version) const
 	{
-		if (size_ < 0xff-sizeof(size_type)) {
-			uint8_t tag = size_;
+		if (size_ < tags<N>::max()-sizeof(size_type)) {
+			typename tags<N>::type tag = size_;
 			ar & make_nvp("Tag", tag);
 		} else {
 			uint8_t n_bytes = (findlastset(size_)-1)/8 + 1;
-			uint8_t tag = 0xff - n_bytes;
+			typename tags<N>::type tag = tags<N>::max() - n_bytes;
 			ar & make_nvp("Tag", tag);
 
 			uint8_t bytes[8];
@@ -727,16 +744,17 @@ namespace I3SuperDSTUtils {
 		}
 	}
 	
+	template <int N>
 	template <class Archive>
-	void SizeCodec::load(Archive &ar, unsigned version)
+	void SizeCodec<N>::load(Archive &ar, unsigned version)
 	{
-		uint8_t tag = 0;
+		typename tags<N>::type tag = 0;
 		size_ = 0;
 		ar & make_nvp("Tag", tag);
-		if (tag < 0xff-sizeof(size_type)) {
+		if (tag < tags<N>::max()-sizeof(size_type)) {
 			size_ = tag;
 		} else {
-			unsigned n_bytes = 0xff - tag;
+			unsigned n_bytes = tags<N>::max() - tag;
 			uint8_t bytes[8];
 			ar & make_nvp("Bytes", boost::serialization::make_binary_object(
 			    bytes, n_bytes));
@@ -1211,10 +1229,5 @@ I3SuperDST::load(Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3SuperDST);
-
-// explicitly instantiate serialization functions to avoid linker errors
-// when compiling superdst-test
-template void I3SuperDSTUtils::SizeCodec::save(boost::archive::portable_binary_oarchive&, unsigned) const;
-template void I3SuperDSTUtils::SizeCodec::load(boost::archive::portable_binary_iarchive&, unsigned);
-template void I3SuperDSTUtils::SizeCodec::load(boost::archive::xml_iarchive&, unsigned);
-template void I3SuperDSTUtils::SizeCodec::save(boost::archive::xml_oarchive&, unsigned) const;
+I3_SERIALIZABLE(I3SuperDSTUtils::SizeCodec<1>);
+I3_SERIALIZABLE(I3SuperDSTUtils::SizeCodec<2>);

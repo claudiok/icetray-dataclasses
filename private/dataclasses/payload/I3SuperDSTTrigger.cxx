@@ -146,14 +146,14 @@ template <class Archive>
 void
 I3SuperDSTTriggerSeries::save(Archive & ar, unsigned version) const
 {
-	I3SuperDSTUtils::SizeCodec ntriggers(this->size());
+	I3SuperDSTUtils::SizeCodec<1> ntriggers(this->size());
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("NTriggers", ntriggers);
 	BOOST_FOREACH(const I3SuperDSTTrigger &strigger, *this) {
 		uint8_t tag = (strigger.key_idx_ & 0xf) |
 		    ((strigger.lengthcode_ & 0xf) << 4);
-		I3SuperDSTUtils::SizeCodec length(strigger.lengthcode_ >> 4);
-		I3SuperDSTUtils::SizeCodec start(strigger.startcode_);
+		I3SuperDSTUtils::SizeCodec<1> length(strigger.lengthcode_ >> 4);
+		I3SuperDSTUtils::SizeCodec<2> start(strigger.startcode_);
 		ar & make_nvp("Tag", tag);
 		ar & make_nvp("Length", length);
 		ar & make_nvp("Time", start);
@@ -164,12 +164,13 @@ template <class Archive>
 void
 I3SuperDSTTriggerSeries::load(Archive & ar, unsigned version)
 {
-	I3SuperDSTUtils::SizeCodec ntriggers;
+	I3SuperDSTUtils::SizeCodec<1> ntriggers;
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("NTriggers", ntriggers);
 	for (unsigned i=0; i < ntriggers.value(); i++) {
 		uint8_t tag(0);
-		I3SuperDSTUtils::SizeCodec length, start;
+		I3SuperDSTUtils::SizeCodec<1> length;
+		I3SuperDSTUtils::SizeCodec<2> start;
 		ar & make_nvp("Tag", tag);
 		ar & make_nvp("Length", length);
 		ar & make_nvp("Time", start);
