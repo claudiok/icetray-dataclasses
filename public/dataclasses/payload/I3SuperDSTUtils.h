@@ -24,7 +24,6 @@ namespace I3SuperDSTUtils {
 	 * Values up to 246 are encoded in 1 byte; larger values in the
 	 * minimum required to represent the value, plus 1.
 	 */
-	template <int minbytes=1>
 	struct SizeCodec {
 		typedef uint64_t size_type;
 		size_type size_;
@@ -41,7 +40,7 @@ namespace I3SuperDSTUtils {
 		void save(Archive &ar, unsigned version) const;
 		BOOST_SERIALIZATION_SPLIT_MEMBER();
 	};
-	
+
 	/* Optimized serialization for short vectors */
 	template <typename T>
 	class CompactVector : public std::vector<T> {
@@ -49,7 +48,7 @@ namespace I3SuperDSTUtils {
 		friend class boost::serialization::access;
 		template <class Archive>
 		void load(Archive &ar, unsigned version) {
-			SizeCodec<1> c;
+			SizeCodec c;
 			ar >> make_nvp("Size", c);
 			this->resize(c.size_);
 			ar >> make_nvp("Contents",
@@ -59,7 +58,7 @@ namespace I3SuperDSTUtils {
 		template <class Archive>
 		void save(Archive &ar, unsigned version) const
 		{
-			SizeCodec<1> c(this->size());
+			SizeCodec c(this->size());
 			ar << make_nvp("Size", c);
 			ar << make_nvp("Contents",
 			    boost::serialization::make_binary_object((void*)(&this->front()),
