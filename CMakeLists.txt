@@ -5,13 +5,17 @@ i3_project(dataclasses
   PYTHON_DIR python
   DOCS_DIR resources/docs)
 
+if(USE_ROOT)
+  set(OPTIONAL_TOOLS root)
+endif(USE_ROOT)
+
 i3_add_library(dataclasses
   private/dataclasses/*.cxx
   private/dataclasses/*.c
   private/dataclasses/*/*.cxx
   private/dataclasses/stream_overloads.cpp
 
-  USE_TOOLS log4cplus boost python root
+  USE_TOOLS log4cplus boost python ${OPTIONAL_TOOLS}
 
   USE_PROJECTS icetray
 
