@@ -25,6 +25,7 @@
 #include <dataclasses/physics/I3TriggerHierarchy.h>
 #include <dataclasses/I3Vector.h>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/tree_indexing_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
@@ -132,7 +133,8 @@ void register_I3Trigger()
     .def("__str__", &stream_to_string<I3TriggerHierarchy>)
     .def("__len__", &length)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
-    .def("insert",&I3TriggerHierarchyUtils::Insert);
+    .def("insert",&I3TriggerHierarchyUtils::Insert)
+    .def(bp::tree_indexing_suite<I3TriggerHierarchy>())
     ;
 
   class_<I3VectorI3Trigger, bases<I3FrameObject>, shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
