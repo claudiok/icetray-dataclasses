@@ -19,12 +19,12 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#include <icetray/ostream_pair.hpp>
 #include <dataclasses/I3Vector.h>
+#include <dataclasses/ostream_overloads.hpp>
 #include <dataclasses/physics/I3Particle.h>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
-#include <dataclasses/ostream_overloads.hpp>
-#include <icetray/ostream_pair.hpp>
 #include <vector>
 #include <sstream>
 
