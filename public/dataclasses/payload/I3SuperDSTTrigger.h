@@ -11,6 +11,9 @@
  * @author Jakob van Santen <vansanten@wisc.edu>
  *
  */
+	 
+#ifndef DATACLASSES_I3SUPERDSTTRIGGER_H_INCLUDED
+#define DATACLASSES_I3SUPERDSTTRIGGER_H_INCLUDED	 
 
 class I3Trigger;
 class TriggerKey;
@@ -59,3 +62,4 @@ private:
 
 I3_POINTER_TYPEDEFS(I3SuperDSTTriggerSeries);
 
+#endif
