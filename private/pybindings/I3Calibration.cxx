@@ -24,6 +24,7 @@
 #include <dataclasses/calibration/I3Calibration.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/indexed_property.hpp>
 
 using namespace boost::python;
 
@@ -116,12 +117,9 @@ void register_I3Calibration()
       //     updated I3DOMCalibration class  XXX 
       //      See TRAC ticket #300
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT) \
-                         (ATWDFreqFit)(ATWDGain)
-      BOOST_PP_SEQ_FOR_EACH(WRAP_GETSET, I3DOMCalibration, EVIL_PROPS)
+                         (ATWDFreqFit)(ATWDGain)(ATWDFreqFit)
+      BOOST_PP_SEQ_FOR_EACH(WRAP_EVIL_PROP, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
-      .def("GetATWDBinCalibFit", &I3DOMCalibration::GetATWDBinCalibFit,
-          boost::python::return_internal_reference<1>())
-      .def("SetATWDBinCalibFit", &I3DOMCalibration::SetATWDBinCalibFit)
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
       .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
       .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)
