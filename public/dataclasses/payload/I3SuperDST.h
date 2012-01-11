@@ -33,7 +33,7 @@ class I3Time;
 static const unsigned i3superdst_version_ = 1;
 
 namespace I3SuperDSTUtils {
-	enum Discretization { LINEAR, FLOATING_POINT };
+	enum Discretization { LINEAR, LOG };
 }
 
 class I3SuperDSTChargeStamp {
