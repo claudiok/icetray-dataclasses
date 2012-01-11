@@ -26,6 +26,7 @@ register_I3SuperDST()
 		.def(bp::init<const I3RecoPulseSeriesMap &>(bp::args("pulses")))
 		.def("unpack", &I3SuperDST::Unpack, bp::args("self"), "Unpack the compressed event data "
 		    "into I3RecoPulses.")
+		.add_property("triggers", &I3SuperDST::GetTriggers, bp::return_internal_reference<>())
 	        .def( freeze() )
 		#define RO_PROPS (EncodedSizes)
 		BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3SuperDST, RO_PROPS)

@@ -48,6 +48,20 @@ std::ostream& operator<<(std::ostream& oss, const I3TriggerHierarchy& t);
 
 I3_POINTER_TYPEDEFS(I3TriggerHierarchy);
 
+/*
+ * Specialize I3Frame::Get() to turn convert various objects
+ * in the frame into I3TriggerHierarchies.
+ */
+
+// need to hide this from ROOT
+#ifndef __CINT__
+#include "icetray/I3Frame.h"
+
+template <>
+I3TriggerHierarchyConstPtr
+I3Frame::Get(const std::string& name, bool quietly, void*, void*) const;
+#endif //__CINT__
+
 /**
  * define a default name to address hierarchy in a frame
  */

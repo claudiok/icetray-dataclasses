@@ -234,8 +234,9 @@ I3SuperDST::GetReadouts(bool hlc) const
 	return filtered;
 }
 
-I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses)
-    : version_(i3superdst_version_)
+I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses,
+    const I3TriggerHierarchy &triggers, const I3DetectorStatus &status)
+    : triggers_(triggers, status), version_(i3superdst_version_)
 {
 	//I3RecoPulseSeriesMap::const_iterator hlc_iter, slc_iter;
 	I3RecoPulseSeries::const_iterator pulse_head, pulse_tail;
@@ -933,12 +934,14 @@ I3SuperDST::save(Archive& ar, unsigned version,
 	}
 
 	ar & make_nvp("ExtraBytes", ldr_stream);
+	
+	ar & make_nvp("Triggers", triggers_);
 
 	return;
 }
 
 template <typename Archive>
-void load_v0(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
+void I3SuperDST::load_v0(Archive &ar)
 {
 	uint16_t stream_size;
 	ar & make_nvp("NRecords", stream_size);
@@ -1034,12 +1037,12 @@ void load_v0(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		stamp_it++; /* Advance for the next readout */
 		
 		readout.kind_ = hlc ? I3SuperDSTChargeStamp::HLC : I3SuperDSTChargeStamp::SLC;
-		readouts.push_back(readout);
+		readouts_.push_back(readout);
 	}
 	
-	/* Populate the start_time_ fields of the readouts for consistency. */
+	/* Populate the start_time_ fields of the readouts_ for consistency. */
 	double t_ref = 0.0;
-	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts) {
+	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts_) {
 		assert(readout.stamps_.size() > 0);
 		t_ref += readout.GetTime();
 		readout.start_time_ = t_ref;
@@ -1047,7 +1050,7 @@ void load_v0(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 }
 
 template <typename Archive>
-void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
+void I3SuperDST::load_v1(Archive &ar)
 {
 	CompactVector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
 	ar & make_nvp("ChargeStamps", stamp_stream);
@@ -1069,6 +1072,8 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 
 	CompactVector<uint8_t> byte_stream;
 	ar & make_nvp("ExtraBytes", byte_stream);
+	
+	ar & make_nvp("Triggers", triggers_);
 
 	/* Saturation values */
 	const unsigned max_timecode_header = (1 << (I3SUPERDSTCHARGESTAMP_TIME_BITS_V0
@@ -1168,15 +1173,15 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		stamp_it++; /* Advance for the next readout */
 		
 		readout.kind_ = hlc ? I3SuperDSTChargeStamp::HLC : I3SuperDSTChargeStamp::SLC;
-		readouts.push_back(readout);
+		readouts_.push_back(readout);
 	}
 
 	assert(stamp_it == stamp_stream.end());
 
 
-	/* Populate the start_time_ fields of the readouts for consistency. */
+	/* Populate the start_time_ fields of the readouts_ for consistency. */
 	double t_ref = 0.0;
-	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts) {
+	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts_) {
 		assert(readout.stamps_.size() > 0);
 		t_ref += readout.GetTime();
 		readout.start_time_ = t_ref;
@@ -1191,10 +1196,10 @@ I3SuperDST::load(Archive& ar, unsigned version)
 
 	switch (version) {
 		case 0:
-			load_v0(ar, readouts_);
+			load_v0(ar);
 			break;
 		case 1:
-			load_v1(ar, readouts_);
+			load_v1(ar);
 			break;
 		default:
 			log_fatal("Foo!");
