@@ -17,6 +17,8 @@
 #include <dataclasses/physics/I3RecoHit.h>
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <dataclasses/payload/I3SuperDST.h>
+#include <dataclasses/physics/I3Trigger.h>
+#include <dataclasses/status/I3DetectorStatus.h>
 
 static I3RecoPulseSeriesMapPtr HitsAsPulses(I3RecoHitSeriesMapConstPtr hits);
 
@@ -88,3 +90,27 @@ HitsAsPulses(I3RecoHitSeriesMapConstPtr hits)
 	return pulses;
 }
 
+/*
+ * Similar subterfuge for I3TriggerHierarchy
+ */
+template <>
+I3TriggerHierarchyConstPtr
+I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
+{
+	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name, quietly);
+
+	I3TriggerHierarchyConstPtr triggers =
+	    dynamic_pointer_cast<const I3TriggerHierarchy>(focp);
+	if (triggers)
+		return triggers;
+	
+	I3SuperDSTConstPtr sdst = dynamic_pointer_cast<const I3SuperDST>(focp);
+	I3DetectorStatusConstPtr status =
+	    this->Get<I3DetectorStatusConstPtr>();
+	if (sdst && !status)
+		log_fatal("Can't decode SuperDST triggers without an I3DetectorStatus!");
+	else if (sdst && status)
+		return sdst->GetTriggers().Unpack(*status);
+	
+	return triggers;
+}

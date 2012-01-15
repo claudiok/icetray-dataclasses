@@ -24,6 +24,8 @@
 
 #include "dataclasses/physics/I3RecoPulse.h"
 #include "dataclasses/physics/I3TriggerHierarchy.h"
+	 
+#include "dataclasses/payload/I3SuperDSTTrigger.h"
 
 /* Forward declarations of real classes (not typedef'd templates) */
 class OMKey;
@@ -33,7 +35,7 @@ class I3Time;
 static const unsigned i3superdst_version_ = 1;
 
 namespace I3SuperDSTUtils {
-	enum Discretization { LINEAR, FLOATING_POINT };
+	enum Discretization { LINEAR, LOG };
 }
 
 class I3SuperDSTChargeStamp {
@@ -117,12 +119,17 @@ public:
 	 * @see Unpack()
 	 */
 	I3SuperDST(const I3RecoPulseSeriesMap &pulses);
+	 
+ 	I3SuperDST(const I3RecoPulseSeriesMap &pulses,
+ 	    const I3TriggerHierarchy &triggers, const I3DetectorStatus &status);
 	
 	/**
 	 * Expand charge stamps into fake I3RecoPulses, packing everything into
 	 * a single map.
 	 */
 	I3RecoPulseSeriesMapConstPtr Unpack() const;
+	 
+	const I3SuperDSTTriggerSeries& GetTriggers() const { return triggers_; };
 
 	I3MapKeyVectorInt GetEncodedSizes() const;
 	
@@ -166,7 +173,10 @@ private:
 	std::list<I3SuperDSTReadout> readouts_;
 	mutable I3RecoPulseSeriesMapPtr unpacked_;
 	
+	I3SuperDSTTriggerSeries triggers_;
+	
 	void AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0);
+	void AddPulseMap(const I3RecoPulseSeriesMap &pulses);
 	std::list<I3SuperDSTReadout> GetReadouts(bool hlc) const;
 	
 	static const double tmin_;
@@ -178,6 +188,8 @@ private:
 	template <class Archive> void save(Archive & ar, unsigned version,
 	    std::map<OMKey, std::vector<int > > *sizes=NULL) const;
 	template <class Archive> void load(Archive & ar, unsigned version);
+	template <class Archive> void load_v0(Archive & ar);
+	template <class Archive> void load_v1(Archive & ar);    
 	BOOST_SERIALIZATION_SPLIT_MEMBER();
 	
 	SET_LOGGER("I3SuperDST");

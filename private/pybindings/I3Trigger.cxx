@@ -58,6 +58,14 @@ void set_trigkey(I3Trigger& self, const TriggerKey& tk)
   self.GetTriggerKey() = tk;
 }
 
+static I3TriggerHierarchyPtr
+from_frame(I3Frame &frame, const std::string &name)
+{
+	I3TriggerHierarchyConstPtr ptr =
+	    frame.Get<I3TriggerHierarchyConstPtr>(name);
+	return boost::const_pointer_cast<I3TriggerHierarchy>(ptr);
+}
+
 void register_I3Trigger()
 {
   {

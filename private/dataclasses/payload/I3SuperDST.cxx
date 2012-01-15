@@ -84,7 +84,7 @@ I3SuperDSTReadout::I3SuperDSTReadout(const OMKey &om, bool hlc,
 {
 	std::list<I3RecoPulse>::const_iterator pulse_it = start;
 
-	Discretization format = (om.GetOM() > 60) ? FLOATING_POINT : LINEAR;
+	Discretization format = (om.GetOM() > 60) ? LOG : LINEAR;
 	
 	for ( ; pulse_it != end; pulse_it++) {
 		stamps_.push_back(I3SuperDSTChargeStamp(pulse_it->GetTime()-t0,
@@ -221,6 +221,37 @@ I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0)
 	}
 }
 
+void
+I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses)
+{
+	/* 
+	 * Get the earliest leading-edge time present in the input.
+	 * This must be >= -512 ns to be representable.
+	 */
+	const double t0 = FindStartTime(pulses);
+	if (t0 < tmin_)
+		log_fatal("First pulse time %g ns < %3.0f ns is unrepresentable! "
+		    "Is this un-timeshifted simulation?", t0, tmin_);
+	
+	/* 
+	 * Convert the pulse series map to a list of "readouts"
+	 * (pulses spaced closely in time in a single DOM)
+	 */ 
+	AddPulseMap(pulses, tmin_);
+
+	/* Sort the readouts by start time */
+	readouts_.sort();
+	
+	/* Convert the absolute times in each readout to time deltas. */
+	std::list<I3SuperDSTReadout>::reverse_iterator list_rit = readouts_.rbegin();
+	if (list_rit != readouts_.rend()) {
+		for ( ; boost::next(list_rit) != readouts_.rend(); list_rit++)
+			list_rit->SetTimeReference(*boost::next(list_rit));
+		list_rit->Relativize(); /* Relativize the first readout as well. */
+		assert(boost::next(list_rit).base() == readouts_.begin());
+	}
+}
+
 std::list<I3SuperDSTReadout>
 I3SuperDST::GetReadouts(bool hlc) const
 {
@@ -234,38 +265,19 @@ I3SuperDST::GetReadouts(bool hlc) const
 	return filtered;
 }
 
-I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses)
-    : version_(i3superdst_version_)
+I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses,
+    const I3TriggerHierarchy &triggers, const I3DetectorStatus &status)
+    : triggers_(triggers, status), version_(i3superdst_version_)
 {
-	//I3RecoPulseSeriesMap::const_iterator hlc_iter, slc_iter;
-	I3RecoPulseSeries::const_iterator pulse_head, pulse_tail;
-	std::list<I3SuperDSTReadout>::const_iterator list_it;
-	std::list<I3SuperDSTReadout>::reverse_iterator list_rit;
+	AddPulseMap(pulses);
 	
-	/* 
-	 * Get the earliest leading-edge time present in the input.
-	 * This must be >= -512 ns to be representable.
-	 */
-	const double t0 = FindStartTime(pulses);
-	assert(t0 >= tmin_);
-	
-	/* 
-	 * Convert the pulse series map to a list of "readouts"
-	 * (pulses spaced closely in time in a single DOM)
-	 */ 
-	AddPulseMap(pulses, tmin_);
+	InitDebug();
+}
 
-	/* Sort the readouts by start time */
-	readouts_.sort();
-	
-	/* Convert the absolute times in each readout to time deltas. */
-	list_rit = readouts_.rbegin();
-	if (list_rit != readouts_.rend()) {
-		for ( ; boost::next(list_rit) != readouts_.rend(); list_rit++)
-			list_rit->SetTimeReference(*boost::next(list_rit));
-		list_rit->Relativize(); /* Relativize the first readout as well. */
-		assert(boost::next(list_rit).base() == readouts_.begin());
-	}
+I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses)
+    : triggers_(), version_(i3superdst_version_)
+{
+	AddPulseMap(pulses);
 	
 	InitDebug();
 }
@@ -457,17 +469,17 @@ I3SuperDST::EncodeCharge(double charge, unsigned int maxbits,
 	
 	assert( charge >= 0 );
 	
-	if (mode == FLOATING_POINT) {
+	if (mode == LOG) {
 		assert(maxbits >= 14);
-		uint64_t disc = std::min(charge/1.0,
-		    double(std::numeric_limits<uint64_t>::max()));
-		unsigned exponent = GetExponent(disc, 10, 4);
-		unsigned mantissa = std::min(disc >> exponent,
-		    uint64_t(1u << 10)-1);
-		encoded |= mantissa << 4;
-		encoded |= exponent;
+		double logq = std::max(0.0, log10(charge) + 2.0);
+		double step = double((1<<14)-1)/9.0;
+		encoded = truncate(logq/step, maxbits);
 	} else {
-		encoded = truncate(charge/(version == 0 ? 0.15 : 0.05), maxbits);
+		if (version == 0) {
+			encoded = truncate(charge/0.15, maxbits);
+		} else {
+			encoded = floor(std::max(0., charge)/0.05);	
+		}
 	}
 
 	
@@ -481,12 +493,16 @@ I3SuperDST::DecodeCharge(uint32_t chargecode, unsigned int version,
 {
 	double decoded(0);
 	
-	if (mode == FLOATING_POINT) {
-		unsigned mantissa = (chargecode >> 4) & ((1 << 10)-1);
-		unsigned exponent = chargecode & ((1 << 4)-1);
-		decoded = 1.0*(mantissa << exponent);
+	if (mode == LOG) {
+		double step = double((1<<14)-1)/9.0;
+		decoded = pow(10., chargecode*step - 2.0);
 	} else {
-		decoded = chargecode*(version == 0 ? 0.15 : 0.05);
+		if (version == 0)
+			decoded = chargecode*0.15;
+		else {
+			// Decode at bin center 
+			decoded = chargecode*0.05 + 0.025;
+		}
 	}
 	
 	return (decoded);
@@ -868,7 +884,7 @@ I3SuperDST::save(Archive& ar, unsigned version,
 		header_stream.push_back(header);
 		
 		/* Only one stamp in the floating point scheme */
-		assert(charge_format != FLOATING_POINT || stamp_it == readout_it->stamps_.end());
+		assert(charge_format != LOG || stamp_it == readout_it->stamps_.end());
 		
 		for ( ; stamp_it != readout_it->stamps_.end(); ) {
 			I3SuperDSTSerialization::ChargeStamp stampytown;
@@ -938,12 +954,14 @@ I3SuperDST::save(Archive& ar, unsigned version,
 	}
 
 	ar & make_nvp("ExtraBytes", ldr_stream);
+	
+	ar & make_nvp("Triggers", triggers_);
 
 	return;
 }
 
 template <typename Archive>
-void load_v0(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
+void I3SuperDST::load_v0(Archive &ar)
 {
 	uint16_t stream_size;
 	ar & make_nvp("NRecords", stream_size);
@@ -1039,12 +1057,12 @@ void load_v0(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		stamp_it++; /* Advance for the next readout */
 		
 		readout.kind_ = hlc ? I3SuperDSTChargeStamp::HLC : I3SuperDSTChargeStamp::SLC;
-		readouts.push_back(readout);
+		readouts_.push_back(readout);
 	}
 	
-	/* Populate the start_time_ fields of the readouts for consistency. */
+	/* Populate the start_time_ fields of the readouts_ for consistency. */
 	double t_ref = 0.0;
-	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts) {
+	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts_) {
 		assert(readout.stamps_.size() > 0);
 		t_ref += readout.GetTime();
 		readout.start_time_ = t_ref;
@@ -1052,7 +1070,7 @@ void load_v0(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 }
 
 template <typename Archive>
-void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
+void I3SuperDST::load_v1(Archive &ar)
 {
 	CompactVector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
 	ar & make_nvp("ChargeStamps", stamp_stream);
@@ -1074,6 +1092,8 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 
 	CompactVector<uint8_t> byte_stream;
 	ar & make_nvp("ExtraBytes", byte_stream);
+	
+	ar & make_nvp("Triggers", triggers_);
 
 	/* Saturation values */
 	const unsigned max_timecode_header = (1 << (I3SUPERDSTCHARGESTAMP_TIME_BITS_V0
@@ -1112,7 +1132,7 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		    I3SUPERDSTCHARGESTAMP_TIME_BITS_V0);
 
 		Discretization charge_format = (readout.om_.GetOM() > 60)
-		    ? FLOATING_POINT : LINEAR;
+		    ? LOG : LINEAR;
 		
 		if (timecode == max_timecode_header) {
 			assert(stamp_it != stamp_stream.end());
@@ -1125,7 +1145,7 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 			do {
 				chargecode += (++stamp_it)->raw;
 			} while (stamp_it->raw == UINT16_MAX);
-		} else if (charge_format == FLOATING_POINT) {
+		} else if (charge_format == LOG) {
 			assert(ldr_it != byte_stream.end());
 			chargecode |= unsigned(*ldr_it) <<
 			    I3SUPERDSTCHARGESTAMP_CHARGE_BITS_V0;
@@ -1173,15 +1193,15 @@ void load_v1(Archive &ar, std::list<I3SuperDSTReadout> &readouts)
 		stamp_it++; /* Advance for the next readout */
 		
 		readout.kind_ = hlc ? I3SuperDSTChargeStamp::HLC : I3SuperDSTChargeStamp::SLC;
-		readouts.push_back(readout);
+		readouts_.push_back(readout);
 	}
 
 	assert(stamp_it == stamp_stream.end());
 
 
-	/* Populate the start_time_ fields of the readouts for consistency. */
+	/* Populate the start_time_ fields of the readouts_ for consistency. */
 	double t_ref = 0.0;
-	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts) {
+	BOOST_FOREACH(I3SuperDSTReadout &readout, readouts_) {
 		assert(readout.stamps_.size() > 0);
 		t_ref += readout.GetTime();
 		readout.start_time_ = t_ref;
@@ -1196,10 +1216,10 @@ I3SuperDST::load(Archive& ar, unsigned version)
 
 	switch (version) {
 		case 0:
-			load_v0(ar, readouts_);
+			load_v0(ar);
 			break;
 		case 1:
-			load_v1(ar, readouts_);
+			load_v1(ar);
 			break;
 		default:
 			log_fatal("Foo!");
