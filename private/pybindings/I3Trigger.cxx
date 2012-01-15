@@ -58,6 +58,14 @@ void set_trigkey(I3Trigger& self, const TriggerKey& tk)
   self.GetTriggerKey() = tk;
 }
 
+static I3TriggerHierarchyPtr
+from_frame(I3Frame &frame, const std::string &name)
+{
+	I3TriggerHierarchyConstPtr ptr =
+	    frame.Get<I3TriggerHierarchyConstPtr>(name);
+	return boost::const_pointer_cast<I3TriggerHierarchy>(ptr);
+}
+
 void register_I3Trigger()
 {
   {
@@ -134,6 +142,10 @@ void register_I3Trigger()
     .def("__len__", &length)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     .def("insert",&I3TriggerHierarchyUtils::Insert)
+    .def("from_frame", &from_frame, args("frame", "key"),
+        "Get an I3TriggerHierarchy from the frame, performing any necessary "
+        "format conversions behind the scenes.")
+    .staticmethod("from_frame")	    
     .def(bp::tree_indexing_suite<I3TriggerHierarchy>())
     ;
 

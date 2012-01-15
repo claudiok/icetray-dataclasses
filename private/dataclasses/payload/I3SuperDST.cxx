@@ -221,6 +221,37 @@ I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0)
 	}
 }
 
+void
+I3SuperDST::AddPulseMap(const I3RecoPulseSeriesMap &pulses)
+{
+	/* 
+	 * Get the earliest leading-edge time present in the input.
+	 * This must be >= -512 ns to be representable.
+	 */
+	const double t0 = FindStartTime(pulses);
+	if (t0 < tmin_)
+		log_fatal("First pulse time %g ns < %3.0f ns is unrepresentable! "
+		    "Is this un-timeshifted simulation?", t0, tmin_);
+	
+	/* 
+	 * Convert the pulse series map to a list of "readouts"
+	 * (pulses spaced closely in time in a single DOM)
+	 */ 
+	AddPulseMap(pulses, tmin_);
+
+	/* Sort the readouts by start time */
+	readouts_.sort();
+	
+	/* Convert the absolute times in each readout to time deltas. */
+	std::list<I3SuperDSTReadout>::reverse_iterator list_rit = readouts_.rbegin();
+	if (list_rit != readouts_.rend()) {
+		for ( ; boost::next(list_rit) != readouts_.rend(); list_rit++)
+			list_rit->SetTimeReference(*boost::next(list_rit));
+		list_rit->Relativize(); /* Relativize the first readout as well. */
+		assert(boost::next(list_rit).base() == readouts_.begin());
+	}
+}
+
 std::list<I3SuperDSTReadout>
 I3SuperDST::GetReadouts(bool hlc) const
 {
@@ -238,35 +269,15 @@ I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses,
     const I3TriggerHierarchy &triggers, const I3DetectorStatus &status)
     : triggers_(triggers, status), version_(i3superdst_version_)
 {
-	//I3RecoPulseSeriesMap::const_iterator hlc_iter, slc_iter;
-	I3RecoPulseSeries::const_iterator pulse_head, pulse_tail;
-	std::list<I3SuperDSTReadout>::const_iterator list_it;
-	std::list<I3SuperDSTReadout>::reverse_iterator list_rit;
+	AddPulseMap(pulses);
 	
-	/* 
-	 * Get the earliest leading-edge time present in the input.
-	 * This must be >= -512 ns to be representable.
-	 */
-	const double t0 = FindStartTime(pulses);
-	assert(t0 >= tmin_);
-	
-	/* 
-	 * Convert the pulse series map to a list of "readouts"
-	 * (pulses spaced closely in time in a single DOM)
-	 */ 
-	AddPulseMap(pulses, tmin_);
+	InitDebug();
+}
 
-	/* Sort the readouts by start time */
-	readouts_.sort();
-	
-	/* Convert the absolute times in each readout to time deltas. */
-	list_rit = readouts_.rbegin();
-	if (list_rit != readouts_.rend()) {
-		for ( ; boost::next(list_rit) != readouts_.rend(); list_rit++)
-			list_rit->SetTimeReference(*boost::next(list_rit));
-		list_rit->Relativize(); /* Relativize the first readout as well. */
-		assert(boost::next(list_rit).base() == readouts_.begin());
-	}
+I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses)
+    : triggers_(), version_(i3superdst_version_)
+{
+	AddPulseMap(pulses);
 	
 	InitDebug();
 }
@@ -464,7 +475,11 @@ I3SuperDST::EncodeCharge(double charge, unsigned int maxbits,
 		double step = double((1<<14)-1)/9.0;
 		encoded = truncate(logq/step, maxbits);
 	} else {
-		encoded = truncate(charge/(version == 0 ? 0.15 : 0.05), maxbits);
+		if (version == 0) {
+			encoded = truncate(charge/0.15, maxbits);
+		} else {
+			encoded = floor(std::max(0., charge)/0.05);	
+		}
 	}
 
 	
@@ -482,7 +497,12 @@ I3SuperDST::DecodeCharge(uint32_t chargecode, unsigned int version,
 		double step = double((1<<14)-1)/9.0;
 		decoded = pow(10., chargecode*step - 2.0);
 	} else {
-		decoded = chargecode*(version == 0 ? 0.15 : 0.05);
+		if (version == 0)
+			decoded = chargecode*0.15;
+		else {
+			// Decode at bin center 
+			decoded = chargecode*0.05 + 0.025;
+		}
 	}
 	
 	return (decoded);

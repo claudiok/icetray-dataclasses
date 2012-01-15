@@ -107,7 +107,9 @@ I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
 	I3SuperDSTConstPtr sdst = dynamic_pointer_cast<const I3SuperDST>(focp);
 	I3DetectorStatusConstPtr status =
 	    this->Get<I3DetectorStatusConstPtr>();
-	if (sdst && status)
+	if (sdst && !status)
+		log_fatal("Can't decode SuperDST triggers without an I3DetectorStatus!");
+	else if (sdst && status)
 		return sdst->GetTriggers().Unpack(*status);
 	
 	return triggers;
