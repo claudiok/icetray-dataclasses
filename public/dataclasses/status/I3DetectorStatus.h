@@ -42,8 +42,9 @@ I3_POINTER_TYPEDEFS(I3DOMStatusMap);
 typedef std::map<TriggerKey, I3TriggerStatus> I3TriggerStatusMap;
 I3_POINTER_TYPEDEFS(I3TriggerStatusMap);
 
-struct I3DetectorStatus : public I3FrameObject
+class I3DetectorStatus : public I3FrameObject
 {
+public:
   I3Time startTime;
   I3Time endTime;
   I3DOMStatusMap domStatus;

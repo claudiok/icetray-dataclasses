@@ -32,7 +32,7 @@ I3_POINTER_TYPEDEFS(I3DOMCalibrationMap);
 typedef std::map<OMKey, I3VEMCalibration> I3VEMCalibrationMap;
 I3_POINTER_TYPEDEFS(I3VEMCalibrationMap);
 
-struct I3Calibration : public I3FrameObject
+class I3Calibration : public I3FrameObject
 {
 public:
   I3Time startTime;

@@ -6,9 +6,9 @@
 
 static const unsigned i3domstatus_version_ = 6;
 
-struct I3DOMStatus 
+class I3DOMStatus 
 {
-
+public:
   I3DOMStatus():
     trigMode(UnknownTrigMode),
        lcMode(UnknownLCMode),
