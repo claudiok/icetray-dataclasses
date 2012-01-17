@@ -119,18 +119,13 @@ public:
 	 * @see Unpack()
 	 */
 	I3SuperDST(const I3RecoPulseSeriesMap &pulses);
-	 
- 	I3SuperDST(const I3RecoPulseSeriesMap &pulses,
- 	    const I3TriggerHierarchy &triggers, const I3DetectorStatus &status);
 	
 	/**
 	 * Expand charge stamps into fake I3RecoPulses, packing everything into
 	 * a single map.
 	 */
 	I3RecoPulseSeriesMapConstPtr Unpack() const;
-	 
-	const I3SuperDSTTriggerSeries& GetTriggers() const { return triggers_; };
-
+	
 	I3MapKeyVectorInt GetEncodedSizes() const;
 	
 	std::list<I3SuperDSTReadout> GetHLCReadouts() const
@@ -172,9 +167,7 @@ public:
 private:
 	std::list<I3SuperDSTReadout> readouts_;
 	mutable I3RecoPulseSeriesMapPtr unpacked_;
-	
-	I3SuperDSTTriggerSeries triggers_;
-	
+		
 	void AddPulseMap(const I3RecoPulseSeriesMap &pulses, double t0);
 	void AddPulseMap(const I3RecoPulseSeriesMap &pulses);
 	std::list<I3SuperDSTReadout> GetReadouts(bool hlc) const;

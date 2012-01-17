@@ -142,6 +142,8 @@ void register_I3Trigger()
     .def("__len__", &length)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     .def("insert",&I3TriggerHierarchyUtils::Insert)
+    .def("from_frame", &from_frame)
+    .staticmethod("from_frame")
     .def(bp::tree_indexing_suite<I3TriggerHierarchy>())
     ;
 

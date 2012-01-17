@@ -265,17 +265,8 @@ I3SuperDST::GetReadouts(bool hlc) const
 	return filtered;
 }
 
-I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses,
-    const I3TriggerHierarchy &triggers, const I3DetectorStatus &status)
-    : triggers_(triggers, status), version_(i3superdst_version_)
-{
-	AddPulseMap(pulses);
-	
-	InitDebug();
-}
-
 I3SuperDST::I3SuperDST(const I3RecoPulseSeriesMap &pulses)
-    : triggers_(), version_(i3superdst_version_)
+    : version_(i3superdst_version_)
 {
 	AddPulseMap(pulses);
 	
@@ -955,8 +946,6 @@ I3SuperDST::save(Archive& ar, unsigned version,
 
 	ar & make_nvp("ExtraBytes", ldr_stream);
 	
-	ar & make_nvp("Triggers", triggers_);
-
 	return;
 }
 
@@ -1093,8 +1082,6 @@ void I3SuperDST::load_v1(Archive &ar)
 	CompactVector<uint8_t> byte_stream;
 	ar & make_nvp("ExtraBytes", byte_stream);
 	
-	ar & make_nvp("Triggers", triggers_);
-
 	/* Saturation values */
 	const unsigned max_timecode_header = (1 << (I3SUPERDSTCHARGESTAMP_TIME_BITS_V0
 	    + I3SUPERDST_SLOP_BITS_V0)) - 1;

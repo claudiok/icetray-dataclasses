@@ -17,6 +17,7 @@
 #include <dataclasses/physics/I3RecoHit.h>
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <dataclasses/payload/I3SuperDST.h>
+#include <dataclasses/payload/I3SuperDSTTrigger.h>
 #include <dataclasses/physics/I3Trigger.h>
 #include <dataclasses/status/I3DetectorStatus.h>
 
@@ -104,13 +105,14 @@ I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
 	if (triggers)
 		return triggers;
 	
-	I3SuperDSTConstPtr sdst = dynamic_pointer_cast<const I3SuperDST>(focp);
+	I3SuperDSTTriggerSeriesConstPtr sdst =
+	    dynamic_pointer_cast<const I3SuperDSTTriggerSeries>(focp);
 	I3DetectorStatusConstPtr status =
 	    this->Get<I3DetectorStatusConstPtr>();
 	if (sdst && !status)
 		log_fatal("Can't decode SuperDST triggers without an I3DetectorStatus!");
 	else if (sdst && status)
-		return sdst->GetTriggers().Unpack(*status);
+		return sdst->Unpack(*status);
 	
 	return triggers;
 }

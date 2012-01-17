@@ -23,12 +23,9 @@ register_I3SuperDST()
 {
 	bp::class_<I3SuperDST, I3SuperDSTPtr, bp::bases<I3FrameObject> >(
 	    "I3SuperDST", bp::no_init)
-		.def(bp::init<const I3RecoPulseSeriesMap &>(bp::args("pulses")))
-		.def(bp::init<const I3RecoPulseSeriesMap &, const I3TriggerHierarchy &,
-		    const I3DetectorStatus &>(bp::args("pulses", "triggers", "status")))	
+		.def(bp::init<const I3RecoPulseSeriesMap &>(bp::args("pulses")))	
 		.def("unpack", &I3SuperDST::Unpack, bp::args("self"), "Unpack the compressed event data "
 		    "into I3RecoPulses.")
-		.add_property("triggers", bp::make_function(&I3SuperDST::GetTriggers, bp::return_internal_reference<1>()))
 	        .def( freeze() )
 		#define RO_PROPS (EncodedSizes)
 		BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3SuperDST, RO_PROPS)
@@ -38,7 +35,7 @@ register_I3SuperDST()
 	
 	bp::class_<I3SuperDSTTriggerSeries, I3SuperDSTTriggerSeriesPtr, bp::bases<I3FrameObject> >(
 	    "I3SuperDSTTriggerSeries", bp::no_init)
-		.def(bp::init<const I3TriggerHierarchy &, const I3DetectorStatus &>(bp::args("pulses"), "status"))
+		.def(bp::init<const I3TriggerHierarchy &, const I3DetectorStatus &>(bp::args("triggers"), "status"))
 		.def("unpack", &I3SuperDSTTriggerSeries::Unpack, bp::args("self"), "status", "Unpack the compressed event data "
 		    "into I3Triggers.")
 		.def( freeze() )

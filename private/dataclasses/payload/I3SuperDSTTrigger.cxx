@@ -39,7 +39,7 @@ I3SuperDSTTrigger::I3SuperDSTTrigger(const I3Trigger &trigger,
 {
 	key_idx_ = FindIndex(status.triggerStatus, trigger.GetTriggerKey());
 	if (key_idx_ >= status.triggerStatus.size())
-		throw std::range_error("foo");
+		throw std::range_error("Can't find trigger config in DetectorStatus!");
 	
 	startcode_  = I3SuperDST::EncodeTime(trigger.GetTriggerTime());
 	lengthcode_ = I3SuperDST::EncodeTime(trigger.GetTriggerLength());
@@ -79,7 +79,7 @@ const TriggerKey&
 I3SuperDSTTrigger::GetTriggerKey(const I3DetectorStatus &status) const
 {
 	if (key_idx_ >= status.triggerStatus.size())
-		throw std::range_error("foo");
+		throw std::range_error("Can't find trigger config in DetectorStatus!");
 	return FindKey(status.triggerStatus, key_idx_);
 }
 
