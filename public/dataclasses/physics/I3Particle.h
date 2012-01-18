@@ -16,7 +16,15 @@
 #include <map>
 #include <string>
 
-static const unsigned i3particle_version_ = 3;
+#ifndef __CINT__
+#include <boost/bimap/bimap.hpp>
+#include <boost/bimap/multiset_of.hpp>
+#endif
+
+static const unsigned i3particle_version_ = 5;
+
+// let other code know that I3Particle stores PDG encodings internally
+#define I3PARTICLE_SUPPORTS_PDG_ENCODINGS
 
 /**
  * List the names of enumeration members defined in this file
@@ -33,15 +41,18 @@ static const unsigned i3particle_version_ = 3;
     (CRHelium)(CROxygen)(CRSilicon)(CRIron)(Elph)
 
 #define I3PARTICLE_H_I3Particle_ParticleType                                      \
-    (unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0)(PiPlus)(PiMinus)        \
-    (K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)(NuE)(NuEBar)       \
+    (UnknownWithPdgEncoding)(unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0) \
+    (PiPlus)(PiMinus)(K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)   \
+    (NeutronBar)(LambdaBar)(SigmaMinusBar)(Sigma0Bar)(SigmaPlusBar)(Xi0Bar)       \
+    (XiPlusBar)(OmegaPlusBar)(DPlus)(DMinus)(D0)(D0Bar)(DsPlus)(DsMinusBar)       \
+    (LambdacPlus)(WPlus)(WMinus)(Z0)(NuE)(NuEBar)                                 \
     (NuMu)(NuMuBar)(TauPlus)(TauMinus)(NuTau)(NuTauBar)(He4Nucleus)(Li7Nucleus)   \
     (Be9Nucleus)(B11Nucleus)(C12Nucleus)(N14Nucleus)(O16Nucleus)(F19Nucleus)      \
     (Ne20Nucleus)(Na23Nucleus)(Mg24Nucleus)(Al27Nucleus)(Si28Nucleus)(P31Nucleus) \
     (S32Nucleus)(Cl35Nucleus)(Ar40Nucleus)(K39Nucleus)(Ca40Nucleus)(Sc45Nucleus)  \
     (Ti48Nucleus)(V51Nucleus)(Cr52Nucleus)(Mn55Nucleus)(Fe56Nucleus)              \
     (CherenkovPhoton)(Nu)(Monopole)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)     \
-    (Hadrons)(FiberLaser)(N2Laser)(YAGLaser)(STauPlus)(STauMinus)                 \
+    (Hadrons)(FiberLaser)(N2Laser)(YAGLaser)(STauPlus)(STauMinus)
 
 #define I3PARTICLE_H_I3Particle_ParticleShape                                     \
     (Null)(Primary)(TopShower)(Cascade)(InfiniteTrack)(StartingTrack)             \
@@ -111,6 +122,7 @@ class I3Particle : public I3FrameObject
  public:
 
   enum ParticleType {
+    UnknownWithPdgEncoding = -1,  
     unknown = 0,
     Gamma = 1,
     EPlus = 2,
@@ -127,6 +139,32 @@ class I3Particle : public I3FrameObject
     PPlus = 14,
     PMinus = 15,
     K0_Short = 16,
+    Eta = 17,
+    Lambda = 18,
+    SigmaPlus = 19,
+    Sigma0 = 20,
+    SigmaMinus = 21,
+    Xi0 = 22,
+    XiMinus = 23,
+    OmegaMinus = 24,
+    NeutronBar = 25, // as found in "topsimulator"
+    LambdaBar = 26,
+    SigmaMinusBar = 27,
+    Sigma0Bar = 28,
+    SigmaPlusBar = 29,
+    Xi0Bar = 30,
+    XiPlusBar = 31,
+    OmegaPlusBar = 32,
+    DPlus = 35,
+    DMinus = 36,
+    D0 = 37,
+    D0Bar = 38,
+    DsPlus = 39,
+    DsMinusBar = 40,
+    LambdacPlus = 41,
+    WPlus = 42,
+    WMinus = 43,
+    Z0 = 44,
     NuE = 66,
     NuEBar = 67,
     NuMu = 68,
@@ -221,7 +259,7 @@ class I3Particle : public I3FrameObject
   uint64_t major_ID_;
   int parentID_;
   int primaryID_;
-  ParticleType type_;
+  int32_t pdgEncoding_; // this replaces ParticleType
   ParticleShape shape_;
   FitStatus status_;
   I3Position pos_;
@@ -259,9 +297,12 @@ class I3Particle : public I3FrameObject
   int GetParentID() const { return parentID_; }
   int GetPrimaryID() const { return primaryID_; }
 
-  ParticleType GetType() const { return type_; }
-  void SetType(ParticleType type) { type_ = type; }
-  void SetRDMCType(int type) { type_ = convert_rdmc(type); }
+  int32_t GetPdgEncoding() const { return pdgEncoding_; }
+  void SetPdgEncoding(int32_t newid) { pdgEncoding_=newid; }
+    
+  ParticleType GetType() const;
+  void SetType(ParticleType type);
+  void SetRDMCType(int type);
   std::string GetTypeString() const;
 
   ParticleShape GetShape() const { return shape_; }
@@ -330,6 +371,17 @@ class I3Particle : public I3FrameObject
   BOOST_SERIALIZATION_SPLIT_MEMBER();
 
   ParticleType convert_rdmc(int) const ;
+
+#ifndef __CINT__
+  // conversion from ParticleType to pdgEncoding and vice versa
+  typedef boost::bimaps::bimap<boost::bimaps::multiset_of<ParticleType>, boost::bimaps::multiset_of<int32_t> > toPdgEncodingConversionTable_t;
+  static const toPdgEncodingConversionTable_t toPdgEncodingConversionTable_;
+#endif
+    
+ public:
+    
+  static ParticleType ConvertFromPdgEncoding(int32_t);
+  static int32_t ConvertToPdgEncoding(ParticleType);
 
 };
 

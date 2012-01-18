@@ -3,6 +3,9 @@
 #include <boost/functional/hash/hash.hpp>
 #include <dataclasses/I3Constants.h>
 
+#include <limits>
+#include <boost/assign/list_of.hpp>
+
 int I3Particle::global_minor_id_ = 0;
 uint64_t I3Particle::global_major_id_ = 0;
 
@@ -10,7 +13,7 @@ I3Particle::~I3Particle() { }
 I3Particle::I3Particle(ParticleShape shape, ParticleType type) : 
   parentID_(-1),
   primaryID_(-1),
-  type_(type),
+  pdgEncoding_(ConvertToPdgEncoding(type)),
   shape_(shape),
   status_(NotSet),
   pos_(),
@@ -29,11 +32,15 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
     global_major_id_ = string_hash(s.str());
   }
   major_ID_ = global_major_id_;
+  log_trace("Calling I3Particle::I3Particle(ParticleShape %i, ParticleType %i).", static_cast<int>(shape), static_cast<int>(type));
 }
 
 std::string I3Particle::GetTypeString() const
 {
-  switch (type_) {
+  const ParticleType type = ConvertFromPdgEncoding(pdgEncoding_);
+    
+  switch (type) {
+  case UnknownWithPdgEncoding:    return("UnknownWithPdgEncoding");
   case unknown:    return("unknown");
   case Gamma:      return("Gamma");
   case EPlus:      return("EPlus");
@@ -50,15 +57,40 @@ std::string I3Particle::GetTypeString() const
   case PPlus:      return("PPlus");
   case PMinus:     return("PMinus");
   case K0_Short:   return("K0_Short");
-  case TauPlus:    return("TauPlus");
-  case TauMinus:   return("TauMinus");
-  case Monopole:   return("Monopole");
-  case NuE:        return("NuE");
-  case NuMu:       return("NuMu");
-  case NuTau:      return("NuTau");
-  case NuEBar:     return("NuEBar");
-  case NuMuBar:    return("NuMuBar");
-  case NuTauBar:   return("NuTauBar");
+  case Eta:            return("Eta");
+  case Lambda:         return("Lambda");
+  case SigmaPlus:      return("SigmaPlus");
+  case Sigma0:         return("Sigma0");
+  case SigmaMinus:     return("SigmaMinus");
+  case Xi0:            return("Xi0");
+  case XiMinus:        return("XiMinus");
+  case OmegaMinus:     return("OmegaMinus");
+  case NeutronBar:     return("NeutronBar");
+  case LambdaBar:      return("LambdaBar");
+  case SigmaMinusBar:  return("SigmaMinusBar");
+  case Sigma0Bar:      return("Sigma0Bar");
+  case SigmaPlusBar:   return("SigmaPlusBar");
+  case Xi0Bar:         return("Xi0Bar");
+  case XiPlusBar:      return("XiPlusBar");
+  case OmegaPlusBar:   return("OmegaPlusBar");
+  case DPlus:          return("DPlus");
+  case DMinus:         return("DMinus");
+  case D0:             return("D0");
+  case D0Bar:          return("D0Bar");
+  case DsPlus:         return("DsPlus");
+  case DsMinusBar:     return("DsMinusBar");
+  case LambdacPlus:    return("LambdacPlus");
+  case WPlus:          return("WPlus");
+  case WMinus:         return("WMinus");
+  case Z0:             return("Z0");
+  case NuE:            return("NuE");
+  case NuEBar:         return("NuEBar");
+  case NuMu:           return("NuMu");
+  case NuMuBar:        return("NuMuBar");
+  case TauPlus:        return("TauPlus");
+  case TauMinus:       return("TauMinus");
+  case NuTau:          return("NuTau");
+  case NuTauBar:       return("NuTauBar");
   case He4Nucleus:     return("He4Nucleus");
   case Li7Nucleus:     return("Li7Nucleus");
   case Be9Nucleus:     return("Be9Nucleus");
@@ -84,8 +116,9 @@ std::string I3Particle::GetTypeString() const
   case Cr52Nucleus:    return("Cr52Nucleus");
   case Mn55Nucleus:    return("Mn55Nucleus");
   case Fe56Nucleus:    return("Fe56Nucleus");
-  case CherenkovPhoton:    return("CherenkovPhoton");
+  case CherenkovPhoton:return("CherenkovPhoton");
   case Nu:         return("Nu");
+  case Monopole:   return("Monopole");
   case Brems:      return("Brems");
   case DeltaE:     return("DeltaE");
   case PairProd:   return("PairProd");
@@ -144,41 +177,43 @@ std::string I3Particle::GetLocationTypeString() const
 
 bool I3Particle::IsTrack() const 
 {
+  const ParticleType type = ConvertFromPdgEncoding(pdgEncoding_);
+
   if (shape_==InfiniteTrack || shape_==StartingTrack ||
       shape_==StoppingTrack || shape_==ContainedTrack ||
-      type_==MuPlus || type_==MuMinus ||
-      type_==TauPlus || type_==TauMinus ||
-      type_==STauPlus || type_==STauMinus ||
-      type_==Monopole ||
+      type==MuPlus || type==MuMinus ||
+      type==TauPlus || type==TauMinus ||
+      type==STauPlus || type==STauMinus ||
+      type==Monopole ||
       (shape_ == Primary && 
-       ( type_ == PPlus       ||
-	 type_ == PMinus      ||
-	 type_ == He4Nucleus  ||
-	 type_ == Li7Nucleus  ||
-	 type_ == Be9Nucleus  ||
-	 type_ == B11Nucleus  ||
-	 type_ == C12Nucleus  ||
-	 type_ == N14Nucleus  ||
-	 type_ == O16Nucleus  ||
-	 type_ == F19Nucleus  ||
-	 type_ == Ne20Nucleus ||
-	 type_ == Na23Nucleus ||
-	 type_ == Mg24Nucleus ||
-	 type_ == Al27Nucleus ||
-	 type_ == Si28Nucleus ||
-	 type_ == P31Nucleus  ||
-	 type_ == S32Nucleus  ||
-	 type_ == Cl35Nucleus ||
-	 type_ == Ar40Nucleus ||
-	 type_ == K39Nucleus  ||
-	 type_ == Ca40Nucleus ||
-	 type_ == Sc45Nucleus ||
-	 type_ == Ti48Nucleus ||
-	 type_ == V51Nucleus  ||
-	 type_ == Cr52Nucleus ||
-	 type_ == Mn55Nucleus ||
-	 type_ == Fe56Nucleus ||
-	 type_ == Gamma )
+       ( type == PPlus       ||
+	 type == PMinus      ||
+	 type == He4Nucleus  ||
+	 type == Li7Nucleus  ||
+	 type == Be9Nucleus  ||
+	 type == B11Nucleus  ||
+	 type == C12Nucleus  ||
+	 type == N14Nucleus  ||
+	 type == O16Nucleus  ||
+	 type == F19Nucleus  ||
+	 type == Ne20Nucleus ||
+	 type == Na23Nucleus ||
+	 type == Mg24Nucleus ||
+	 type == Al27Nucleus ||
+	 type == Si28Nucleus ||
+	 type == P31Nucleus  ||
+	 type == S32Nucleus  ||
+	 type == Cl35Nucleus ||
+	 type == Ar40Nucleus ||
+	 type == K39Nucleus  ||
+	 type == Ca40Nucleus ||
+	 type == Sc45Nucleus ||
+	 type == Ti48Nucleus ||
+	 type == V51Nucleus  ||
+	 type == Cr52Nucleus ||
+	 type == Mn55Nucleus ||
+	 type == Fe56Nucleus ||
+	 type == Gamma )
        )
       ) return true;    
   else return false;
@@ -186,41 +221,43 @@ bool I3Particle::IsTrack() const
 
 bool I3Particle::IsCascade() const
 {
+  const ParticleType type = ConvertFromPdgEncoding(pdgEncoding_);
+
   if (shape_ == Cascade ||
-      type_ == EPlus    || type_== EMinus   ||
-      type_ == Brems    || type_ == DeltaE  ||
-      type_ == PairProd || type_ == NuclInt ||
-      type_ == Hadrons  || type_ == Pi0     ||
-      type_ == PiPlus   || type_ == PiMinus ||      
+      type == EPlus    || type == EMinus   ||
+      type == Brems    || type == DeltaE  ||
+      type == PairProd || type == NuclInt ||
+      type == Hadrons  || type == Pi0     ||
+      type == PiPlus   || type == PiMinus ||      
       (shape_ != Primary && 
-       ( type_ == PPlus       ||
-	 type_ == PMinus      ||
-	 type_ == He4Nucleus  ||
-	 type_ == Li7Nucleus  ||
-	 type_ == Be9Nucleus  ||
-	 type_ == B11Nucleus  ||
-	 type_ == C12Nucleus  ||
-	 type_ == N14Nucleus  ||
-	 type_ == O16Nucleus  ||
-	 type_ == F19Nucleus  ||
-	 type_ == Ne20Nucleus ||
-	 type_ == Na23Nucleus ||
-	 type_ == Mg24Nucleus ||
-	 type_ == Al27Nucleus ||
-	 type_ == Si28Nucleus ||
-	 type_ == P31Nucleus  ||
-	 type_ == S32Nucleus  ||
-	 type_ == Cl35Nucleus ||
-	 type_ == Ar40Nucleus ||
-	 type_ == K39Nucleus  ||
-	 type_ == Ca40Nucleus ||
-	 type_ == Sc45Nucleus ||
-	 type_ == Ti48Nucleus ||
-	 type_ == V51Nucleus  ||
-	 type_ == Cr52Nucleus ||
-	 type_ == Mn55Nucleus ||
-	 type_ == Fe56Nucleus ||
-	 type_ == Gamma )
+       ( type == PPlus       ||
+	 type == PMinus      ||
+	 type == He4Nucleus  ||
+	 type == Li7Nucleus  ||
+	 type == Be9Nucleus  ||
+	 type == B11Nucleus  ||
+	 type == C12Nucleus  ||
+	 type == N14Nucleus  ||
+	 type == O16Nucleus  ||
+	 type == F19Nucleus  ||
+	 type == Ne20Nucleus ||
+	 type == Na23Nucleus ||
+	 type == Mg24Nucleus ||
+	 type == Al27Nucleus ||
+	 type == Si28Nucleus ||
+	 type == P31Nucleus  ||
+	 type == S32Nucleus  ||
+	 type == Cl35Nucleus ||
+	 type == Ar40Nucleus ||
+	 type == K39Nucleus  ||
+	 type == Ca40Nucleus ||
+	 type == Sc45Nucleus ||
+	 type == Ti48Nucleus ||
+	 type == V51Nucleus  ||
+	 type == Cr52Nucleus ||
+	 type == Mn55Nucleus ||
+	 type == Fe56Nucleus ||
+	 type == Gamma )
        )
       ) return true;    
   else return false;
@@ -228,13 +265,15 @@ bool I3Particle::IsCascade() const
 
 bool I3Particle::IsNeutrino() const
 {
-  if( type_==NuE ||
-      type_==NuEBar ||
-      type_==NuMu ||
-      type_==NuMuBar ||
-      type_==NuTau||
-      type_==NuTauBar||
-      type_==Nu )
+  const ParticleType type = ConvertFromPdgEncoding(pdgEncoding_);
+    
+  if( type==NuE ||
+      type==NuEBar ||
+      type==NuMu ||
+      type==NuMuBar ||
+      type==NuTau||
+      type==NuTauBar||
+      type==Nu )
     return true;
   else
     return false;
@@ -472,22 +511,167 @@ I3Particle::ParticleType I3Particle::convert_rdmc(int t) const{
   return I3Particle::unknown;
 }
 
+I3Particle::ParticleType I3Particle::GetType() const
+{
+    return ConvertFromPdgEncoding(pdgEncoding_);
+}
+
+void I3Particle::SetType(I3Particle::ParticleType type)
+{
+    if (type == I3Particle::UnknownWithPdgEncoding)
+        log_fatal("You cannot set the ParticleType to \"UnknownWithPdgEncoding\" using SetType().");
+    
+    pdgEncoding_ = ConvertToPdgEncoding(type);
+}
+
+void I3Particle::SetRDMCType(int type)
+{
+    pdgEncoding_ = ConvertToPdgEncoding(convert_rdmc(type));
+}
+
+
+// numbering scheme from http://pdg.lbl.gov/2011/reviews/rpp2011-rev-monte-carlo-numbering.pdf
+const I3Particle::toPdgEncodingConversionTable_t
+I3Particle::toPdgEncodingConversionTable_ =
+boost::assign::list_of<I3Particle::toPdgEncodingConversionTable_t::relation>
+(I3Particle::UnknownWithPdgEncoding, std::numeric_limits<int32_t>::max()) // should not have a pdg encoding equivalent..
+(I3Particle::unknown,          0)
+(I3Particle::Gamma,            22)
+(I3Particle::EPlus,           -11)
+(I3Particle::EMinus,           11)
+(I3Particle::MuPlus,          -13)
+(I3Particle::MuMinus,          13)
+(I3Particle::Pi0,              111)
+(I3Particle::PiPlus,           211)
+(I3Particle::PiMinus,         -211)
+(I3Particle::K0_Long,          130)
+(I3Particle::KPlus,            321)
+(I3Particle::KMinus,          -321)
+(I3Particle::Neutron,          2112)
+(I3Particle::PPlus,            2212)
+(I3Particle::PMinus,          -2212)
+(I3Particle::K0_Short,         310)
+(I3Particle::Eta,              221)
+(I3Particle::Lambda,           3122)
+(I3Particle::SigmaPlus,        3222)
+(I3Particle::Sigma0,           3212)
+(I3Particle::SigmaMinus,       3112)
+(I3Particle::Xi0,              3322)
+(I3Particle::XiMinus,          3312)
+(I3Particle::OmegaMinus,       3334)
+(I3Particle::NeutronBar,      -2112)
+(I3Particle::LambdaBar,       -3122)
+(I3Particle::SigmaMinusBar,   -3222)
+(I3Particle::Sigma0Bar,       -3212)
+(I3Particle::SigmaPlusBar,    -3112)
+(I3Particle::Xi0Bar,          -3322)
+(I3Particle::XiPlusBar,       -3312)
+(I3Particle::OmegaPlusBar,    -3334)
+(I3Particle::DPlus,            411)
+(I3Particle::DMinus,          -411)
+(I3Particle::D0,               421)
+(I3Particle::D0Bar,           -421)
+(I3Particle::DsPlus,           431)
+(I3Particle::DsMinusBar,      -431)
+(I3Particle::LambdacPlus,      4122)
+(I3Particle::WPlus,            24)
+(I3Particle::WMinus,          -24)
+(I3Particle::Z0,               23)
+(I3Particle::NuE,              12)
+(I3Particle::NuEBar,          -12)
+(I3Particle::NuMu,             14)
+(I3Particle::NuMuBar,         -14)
+(I3Particle::TauPlus,         -15)
+(I3Particle::TauMinus,         15)
+(I3Particle::NuTau,            16)
+(I3Particle::NuTauBar,        -16)
+// nuclei
+(I3Particle::He4Nucleus,       1000020040)
+(I3Particle::Li7Nucleus,       1000030070)
+(I3Particle::Be9Nucleus,       1000040090)
+(I3Particle::B11Nucleus,       1000050110)
+(I3Particle::C12Nucleus,       1000060120)
+(I3Particle::N14Nucleus,       1000070140)
+(I3Particle::O16Nucleus,       1000080160)
+(I3Particle::F19Nucleus,       1000090190)
+(I3Particle::Ne20Nucleus,      1000100200)
+(I3Particle::Na23Nucleus,      1000110230)
+(I3Particle::Mg24Nucleus,      1000120240)
+(I3Particle::Al27Nucleus,      1000130270)
+(I3Particle::Si28Nucleus,      1000140280)
+(I3Particle::P31Nucleus,       1000150310)
+(I3Particle::S32Nucleus,       1000160320)
+(I3Particle::Cl35Nucleus,      1000170350)
+(I3Particle::Ar40Nucleus,      1000180400)
+(I3Particle::K39Nucleus,       1000190390)
+(I3Particle::Ca40Nucleus,      1000200400)
+(I3Particle::Sc45Nucleus,      1000210450)
+(I3Particle::Ti48Nucleus,      1000220480)
+(I3Particle::V51Nucleus,       1000230510)
+(I3Particle::Cr52Nucleus,      1000240520)
+(I3Particle::Mn55Nucleus,      1000250550)
+(I3Particle::Fe56Nucleus,      1000260560)
+// types without valid pdg encodings, use codes >=2000000000 or <=-2000000000
+(I3Particle::CherenkovPhoton,  2000009900)
+(I3Particle::Nu,              -2000000004)
+(I3Particle::Monopole,        -2000000041)
+(I3Particle::Brems,           -2000001001)
+(I3Particle::DeltaE,          -2000001002)
+(I3Particle::PairProd,        -2000001003)
+(I3Particle::NuclInt,         -2000001004)
+(I3Particle::MuPair,          -2000001005)
+(I3Particle::Hadrons,         -2000001006)
+(I3Particle::FiberLaser,      -2000002100)
+(I3Particle::N2Laser,         -2000002101)
+(I3Particle::YAGLaser,        -2000002201)
+(I3Particle::STauPlus,        -2000009131)
+(I3Particle::STauMinus,       -2000009132);
+
+
+I3Particle::ParticleType I3Particle::ConvertFromPdgEncoding(int32_t pdg_encoding)
+{
+    toPdgEncodingConversionTable_t::right_const_iterator it =
+    toPdgEncodingConversionTable_.right.find(pdg_encoding);
+    
+    if (it != toPdgEncodingConversionTable_.right.end()) {
+        log_trace("PDG code \"%i\", returning I3Particle::ParticleType \"%i\".", static_cast<int>(pdg_encoding),static_cast<int>(it->second));
+        return it->second;
+    }
+    
+    // let the caller know that there is no equivalent ParticleType
+    log_warn("unknown PDG code \"%i\" cannot be converted to a I3Particle::ParticleType. It will appear as \"UnknownWithPdgEncoding\".", static_cast<int>(pdg_encoding));
+    return I3Particle::UnknownWithPdgEncoding;  
+}
+
+int32_t I3Particle::ConvertToPdgEncoding(I3Particle::ParticleType type)
+{
+    if (type==UnknownWithPdgEncoding)
+        log_fatal("ConvertToPdgEncoding must not be called with type \"UnknownWithPdgEncoding\".");
+
+    toPdgEncodingConversionTable_t::left_const_iterator it =
+    toPdgEncodingConversionTable_.left.find(type);
+    
+    if (it != toPdgEncodingConversionTable_.left.end()) {
+        log_trace("I3Particle::ParticleType \"%i\", returning PDG code \"%i\".", static_cast<int>(type),static_cast<int>(it->second));
+        return it->second;
+    }
+
+    // in case this error is shown, especially when reading I3 files, data loss will occur
+    // (i.e. the ParticleType will be reported as "unknown" instead of the number it used
+    // to be). This will only happen for types that have numbers not listed in the
+    // ParticleType enum. So they shouldn't occur anyway. In case they do, the correct solution
+    // is to add them to the enum.
+    log_error("unknown I3Particle::ParticleType \"%i\" cannot be converted to a PDG encoding.", static_cast<int>(type));
+    return 0;
+}
+
 template <class Archive>
   void I3Particle::save(Archive& ar, unsigned version) const
   {
-  if (version>i3particle_version_)
-    log_fatal("Attempting to read version %u from file but running version %u of I3Particle class.",version,i3particle_version_);
-
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("ID",ID_);
-    if(version>1){
-      ar & make_nvp("MajorID",major_ID_);
-    }
-    if(version == 0){
-      ar & make_nvp("parentID",parentID_);
-      ar & make_nvp("primaryID",primaryID_);
-    }
-    ar & make_nvp("type",type_);
+    ar & make_nvp("MajorID",major_ID_);
+    ar & make_nvp("pdgEncoding",pdgEncoding_);
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
     ar & make_nvp("pos",pos_);
@@ -496,11 +680,7 @@ template <class Archive>
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
-    if(version == 0)
-      ar & make_nvp("composite",composite_);
-    if(version>0)
-      ar & make_nvp("LocationType",locationType_);
-
+    ar & make_nvp("LocationType",locationType_);
   }
 
 template <class Archive>
@@ -518,12 +698,16 @@ template <class Archive>
       ar & make_nvp("parentID",parentID_);
       ar & make_nvp("primaryID",primaryID_);
     }
-    if(version > 2){
-      ar & make_nvp("type",type_);
-    }else{
+    if(version <= 2){
       I3Particle::ParticleType t;
       ar & make_nvp("type",t);
-      type_ = convert_rdmc(t);
+      pdgEncoding_ = ConvertToPdgEncoding(convert_rdmc(t));
+    }else if(version <= 4){
+      I3Particle::ParticleType t;
+      ar & make_nvp("type",t);
+      pdgEncoding_ = ConvertToPdgEncoding(t);
+    }else{ // version >= 5
+      ar & make_nvp("pdgEncoding",pdgEncoding_);
     }
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
@@ -537,6 +721,14 @@ template <class Archive>
       ar & make_nvp("composite",composite_);
     if(version>0)
       ar & make_nvp("LocationType",locationType_);
+    if(version == 4){
+        // obscure version in use by Antares, contains bjorken x and y.
+        // Those should never have been in I3Particle. Load them and
+        // forget them.
+        double bjorkenx, bjorkeny;
+        ar & make_nvp("bjorkenx",bjorkenx);
+        ar & make_nvp("bjorkeny",bjorkeny);
+    }
   }
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs){
@@ -544,7 +736,7 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   lhs.GetMajorID() == rhs.GetMajorID() &&
 	   lhs.GetParentID() == rhs.GetParentID() &&
 	   lhs.GetPrimaryID() == rhs.GetPrimaryID() &&
-	   lhs.GetType() == rhs.GetType() &&
+	   lhs.GetPdgEncoding() == rhs.GetPdgEncoding() &&
 	   lhs.GetShape() == rhs.GetShape() &&
 	   lhs.GetFitStatus() == rhs.GetFitStatus() &&
 	   lhs.GetLocationType() == rhs.GetLocationType() &&
@@ -571,6 +763,7 @@ std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
       << "               Speed : " << p.GetSpeed() <<  std::endl
       << "              Length : " << p.GetLength() << std::endl
       << "                Type : " << p.GetTypeString() << std::endl
+      << "        PDG encoding : " << p.GetPdgEncoding() << std::endl
       << "               Shape : " << p.GetShapeString() << std::endl
       << "              Status : " << p.GetFitStatusString() <<  std::endl
       << "            Location : " << p.GetLocationTypeString() << std::endl 
