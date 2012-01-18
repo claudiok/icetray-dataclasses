@@ -463,7 +463,7 @@ I3SuperDST::EncodeCharge(double charge, unsigned int maxbits,
 	if (mode == LOG) {
 		assert(maxbits >= 14);
 		double logq = std::max(0.0, log10(charge) + 2.0);
-		double step = double((1<<14)-1)/9.0;
+		double step = 9.0/double((1<<14)-1);
 		encoded = truncate(logq/step, maxbits);
 	} else {
 		if (version == 0) {
@@ -485,7 +485,7 @@ I3SuperDST::DecodeCharge(uint32_t chargecode, unsigned int version,
 	double decoded(0);
 	
 	if (mode == LOG) {
-		double step = double((1<<14)-1)/9.0;
+		double step = 9.0/double((1<<14)-1);
 		decoded = pow(10., chargecode*step - 2.0);
 	} else {
 		if (version == 0)
