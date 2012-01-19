@@ -30,11 +30,11 @@ void register_I3Direction()
 {
 
   void (I3Direction::* oneary)(const I3Direction&) = &I3Direction::SetDirection;
-  void (I3Direction::* twoary)(double, double) = &I3Direction::SetDirection;
+  void (I3Direction::* twoary)(float, float) = &I3Direction::SetDirection;
   void (I3Direction::* threeary)(double, double, double) = &I3Direction::SetDirection;
 
   class_<I3Direction, bases<I3FrameObject>, boost::shared_ptr<I3Direction> >("I3Direction")
-    .def(init<double,double>())
+    .def(init<float,float>())
     .def(init<double,double,double>())
     .def("set_direction", oneary)
     .def("set_direction", twoary)

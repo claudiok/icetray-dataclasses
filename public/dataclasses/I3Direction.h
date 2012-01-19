@@ -17,10 +17,11 @@
 #define I3DIRECTION_H_INCLUDED
 
 #include <icetray/I3FrameObject.h>
+#include <dataclasses/I3Constants.h>
 #include "Utility.h"
 #include <dataclasses/I3Vector.h>
 
-static const unsigned i3direction_version_ = 0;
+static const unsigned i3direction_version_ = 1;
 
 /**
  * @brief The basic direction class for IceCube. 
@@ -58,44 +59,52 @@ class I3Direction : public I3FrameObject
 {
  public:
 
-  I3Direction();
+  I3Direction():
+  zenith_(NAN),
+  azimuth_(NAN),
+  isCalculated_(false)
+  {;}
 
   /**
    * Additional constructor: 2 arguments mean construct dir. with zen,azi
    */
-  I3Direction(double zen, double azi);
+  I3Direction(float zen, float azi):
+  zenith_(zen),
+  azimuth_(azi),
+  isCalculated_(false)
+  {;}
 
   /**
    * Additional constructor: 3 arguments mean construct dir. with x,y,z
    */
-  I3Direction(double x, double y, double z);
-
-  /**
-   * Copy constructor
-   */
-  I3Direction(const I3Direction& d);
-
-  virtual ~I3Direction();
+  I3Direction(double x, double y, double z) {
+    SetDirection(x,y,z);
+  }
 
   //--------------
 
   /**
    * Store direction from direction d
    */
-  void SetDirection(const I3Direction& d);
-  void SetDir(const I3Direction& d) { SetDirection(d); }
+  inline void SetDirection(const I3Direction& d) { *this=d; }
+  inline void SetDir(const I3Direction& d) { *this=d; }
 
   /**
    * Store direction with zen and azi (2 arguments)
    */
-  void SetDirection(double zen, double azi);
-  void SetDir(double zen, double azi) { SetDirection(zen, azi); }
+  inline void SetDirection(float zen, float azi) {
+    zenith_=zen; azimuth_=azi; isCalculated_=false;
+  }
+  inline void SetDir(double zen, double azi) { SetDirection(zen, azi); }
 
   /**
    * Store direction with x, y, z (3 arguments)
    */
-  void SetDirection(double x, double y, double z);
-  void SetDir(double x, double y, double z) { SetDirection(x, y, z); }
+  inline void SetDirection(double x, double y, double z) {
+    xDir_=x; yDir_=y; zDir_=z;
+    CalcSphFromCar();    
+  }
+  inline void SetDir(double x, double y, double z) { SetDirection(x, y, z); }
 
   /**
    * Store direction with theta, phi
@@ -105,31 +114,34 @@ class I3Direction : public I3FrameObject
   /**
    * Reset all elements of I3Direction to NAN
    */
-  void ResetDirection();
-  void ResetDir() { ResetDirection(); }
+  inline void ResetDirection() {
+    xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+    isCalculated_=true;
+  }
+  inline void ResetDir() { ResetDirection(); }
 
   /**
    * Set null direction for non-existing direction (ResetDirection)
    */
-  void NullDirection() { ResetDirection(); }
-  void NullDir() { ResetDirection(); }
+  inline void NullDirection() { ResetDirection(); }
+  inline void NullDir() { ResetDirection(); }
 
   //--------------
 
   /**
    * Provide Zenith of direction
    */
-  double GetZenith() const {return zenith_;}
+  inline float GetZenith() const {return zenith_;}
 
   /**
    * Provide Azimuth of direction
    */
-  double GetAzimuth() const {return azimuth_;}
+  inline float GetAzimuth() const {return azimuth_;}
 
   /**
    * Provide X of direction in cartesian ref frame
    */
-  double GetX() const {
+  inline double GetX() const {
     if (!isCalculated_) CalcCarFromSph();
     return xDir_;
   }
@@ -137,7 +149,7 @@ class I3Direction : public I3FrameObject
   /**
    * Provide Y of direction in cartesian ref frame
    */
-  double GetY() const {
+  inline double GetY() const {
     if (!isCalculated_) CalcCarFromSph();
     return yDir_;
   }
@@ -145,7 +157,7 @@ class I3Direction : public I3FrameObject
   /**
    * Provide Z of direction in cartesian ref frame
    */
-  double GetZ() const {
+  inline double GetZ() const {
     if (!isCalculated_) CalcCarFromSph();
     return zDir_;
   }
@@ -153,12 +165,19 @@ class I3Direction : public I3FrameObject
   /**
    * Calculate Theta of direction
    */
-  double CalcTheta() const;
+  inline double CalcTheta() const {
+    return I3Constants::pi - static_cast<double>(zenith_);
+  }
 
   /**
    * Calculate Phi of direction
    */
-  double CalcPhi() const;
+  inline double CalcPhi() const {
+    double phi = I3Constants::pi + static_cast<double>(azimuth_);
+    if (phi >= 2.*I3Constants::pi) phi -= 2.*I3Constants::pi;
+    return phi;
+  }
+
 
   //--------------
 
@@ -182,8 +201,8 @@ class I3Direction : public I3FrameObject
   /**
    * direction coordinates -- spherical
    */ 
-  double zenith_;
-  double azimuth_;
+  float zenith_;
+  float azimuth_;
 
   /**
    * direction coordinates -- cartesian (direction cosines)
@@ -220,7 +239,11 @@ class I3Direction : public I3FrameObject
   void serialize(Archive& ar, unsigned version);
 };
 
-bool operator==(const I3Direction& lhs, const I3Direction& rhs);
+inline bool operator==(const I3Direction& lhs, const I3Direction& rhs)
+{
+  return (lhs.GetZenith()  == rhs.GetZenith() &&
+          lhs.GetAzimuth() == rhs.GetAzimuth());
+}
 
 std::ostream& operator<<(std::ostream& oss, const I3Direction& d);
 

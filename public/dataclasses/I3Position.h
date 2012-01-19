@@ -16,7 +16,7 @@
 #ifndef I3POSITION_H_INCLUDED
 #define I3POSITION_H_INCLUDED
 
-#include <math.h>
+#include <cmath>
 
 #include "icetray/I3FrameObject.h"
 #include "Utility.h"
@@ -31,7 +31,7 @@
  * @todo implement "print out" of all information in a uniform way...
  * @todo insure that the temporary data isn't written to disk.
  */
-static const unsigned i3position_version_ = 0;
+static const unsigned i3position_version_ = 1;
 
 class I3Position : public I3FrameObject
 {
@@ -47,72 +47,109 @@ class I3Position : public I3FrameObject
   /**
    * Default constructor
    */
-  I3Position();
+  I3Position():
+  x_(NAN),
+  y_(NAN),
+  z_(NAN),
+  isCalculated_(false)
+  {;}
 
   /**
    * Additional constructor
    */
-  I3Position(double x, double y, double z, RefFrame f=car);
+  I3Position(double x, double y, double z, RefFrame f) {
+    SetPosition(x,y,z,f);
+  }
+
+  /**
+   * Additional constructor
+   */
+  I3Position(float x, float y, float z):
+  x_(x),
+  y_(y),
+  z_(z),
+  isCalculated_(false)
+  {;}
 
   /**
    * Copy constructor
    */
-  I3Position(const I3Position& p);
-
-  /**
-   * Destructor
-   */
-  virtual ~I3Position();
+  I3Position(const I3Position& p):
+  x_(p.x_),
+  y_(p.y_),
+  z_(p.z_),
+  isCalculated_(false)
+  {;}
 
   //--------------
 
   /**
    * Store position from position p
    */
-  void SetPosition(const I3Position& p);
-  void SetPos(const I3Position& p) { SetPosition(p); }
+  inline void SetPosition(const I3Position& p) {
+    x_=p.x_; y_=p.y_; z_=p.z_;
+    isCalculated_=false;
+  }
+  inline void SetPos(const I3Position& p) {
+    SetPosition(p); 
+  }
+
+  /**
+   * Store position r in cartesian ref frame
+   */
+  inline void SetPosition(float x, float y, float z) {
+    x_=x; y_=y; z_=z;
+    isCalculated_=false;
+  }
+  inline void SetPos(float x, float y, float z) {
+    SetPosition(x, y, z);
+  }
 
   /**
    * Store position r in ref frame f
    */
   void SetPosition(double r1, double r2, double r3, RefFrame f=car);
-  void SetPos(double r1, double r2, double r3, RefFrame f=car)
-    { SetPosition(r1, r2, r3, f); }
+  inline void SetPos(double r1, double r2, double r3, RefFrame f=car) {
+    SetPosition(r1, r2, r3, f);
+  }
 
   /**
    * Reset all elements of I3Position to NAN
    */
-  void ResetPosition();
-  void ResetPos() { ResetPosition(); }
+  inline void ResetPosition() {
+    x_=NAN; y_=NAN; z_=NAN;
+    isCalculated_=false;
+  }
+  inline void ResetPos() { ResetPosition(); }
 
   /**
    * Set null position for non-existing position (ResetPosition)
    */
-  void NullPosition() { ResetPosition(); }
-  void NullPos() { ResetPosition(); }
+  inline void NullPosition() { ResetPosition(); }
+  inline void NullPos() { ResetPosition(); }
 
   //--------------
 
   /**
    * Provide X of position in cartesian ref frame
    */
-  double GetX() const {return x_;}
+  inline float GetX() const {return x_;}
 
   /**
    * Provide Y of position in cartesian ref frame
    */
-  double GetY() const {return y_;}
+  inline float GetY() const {return y_;}
 
   /**
    * Provide Z of position in cartesian ref frame
    */
-  double GetZ() const {return z_;}
+  inline float GetZ() const {return z_;}
 
   /**
    * Provide R of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  double GetR() const {
+  inline double GetR() const {
     if (!isCalculated_) CalcSphCylFromCar();
     return r_;
   }
@@ -121,7 +158,7 @@ class I3Position : public I3FrameObject
    * Provide Theta of position in spherical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  double GetTheta() const {
+  inline double GetTheta() const {
     if (!isCalculated_) CalcSphCylFromCar();
     return theta_;
   }
@@ -130,7 +167,7 @@ class I3Position : public I3FrameObject
    * Provide Phi of position in spherical or cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  double GetPhi() const {
+  inline double GetPhi() const {
     if (!isCalculated_) CalcSphCylFromCar();
     return phi_;
   }
@@ -139,7 +176,7 @@ class I3Position : public I3FrameObject
    * Provide Rho of position in cylindrical ref frame
    * If non-cartesian have not been calculated, then calculate them first
    */
-  double GetRho() const {
+  inline double GetRho() const {
     if (!isCalculated_) CalcSphCylFromCar();
     return rho_;
   }
@@ -149,7 +186,7 @@ class I3Position : public I3FrameObject
   /**
    * Set X position while keeping Y,Z constant.  Recalculate SPH and CYL.
    */
-  void SetX(double x) {
+  inline void SetX(float x) {
     x_=x;
     isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
@@ -157,7 +194,7 @@ class I3Position : public I3FrameObject
   /**
    * Set Y position while keeping X,Z constant.  Recalculate SPH and CYL.
    */
-  void SetY(double y) {
+  inline void SetY(float y) {
     y_=y;
     isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
@@ -165,7 +202,7 @@ class I3Position : public I3FrameObject
   /**
    * Set Z position while keeping X,Y constant.  Recalculate SPH and CYL.
    */
-  void SetZ(double z) {
+  inline void SetZ(float z) {
     z_=z;
     isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
@@ -175,7 +212,9 @@ class I3Position : public I3FrameObject
   /**
    * Shift coordinate system by position p (i.e. 'this'='this'-'p')
    */
-  void ShiftCoordSystem(const I3Position& p);
+  inline void ShiftCoordSystem(const I3Position& p) {
+    SetPosition(x_-p.x_, y_-p.y_, z_-p.z_);
+  }
 
   /**
    * Rotate position around X axis by angle
@@ -195,15 +234,20 @@ class I3Position : public I3FrameObject
   /**
    * Provide distance to position p
    */
-  double CalcDistance(const I3Position& p) const;
+  inline double CalcDistance(const I3Position& p) const {
+    const double dx = x_-p.x_;
+    const double dy = y_-p.y_;
+    const double dz = z_-p.z_;
+    return std::sqrt(dx*dx+dy*dy+dz*dz);
+  }
 
  protected:
   /**
    * cartesian (car)
    */ 
-  double x_;
-  double y_;
-  double z_;
+  float x_;
+  float y_;
+  float z_;
 
   /**
    * spherical (sph)
@@ -235,7 +279,11 @@ class I3Position : public I3FrameObject
 
 };
 
-bool operator==(const I3Position& lhs, const I3Position& rhs);
+inline bool operator==(const I3Position& lhs, const I3Position& rhs) {
+  return ((lhs.GetX() == rhs.GetX()) &&
+          (lhs.GetY() == rhs.GetY()) &&
+          (lhs.GetZ() == rhs.GetZ()));
+}
 
 std::ostream& operator<<(std::ostream& oss, const I3Position& p);
 
