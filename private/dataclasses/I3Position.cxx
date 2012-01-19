@@ -80,8 +80,8 @@ void I3Position::RotateX(double angle)
   const double c=std::cos(angle);
   const double y=y_;
   const double z=z_;
-  y_=c*y-s*z_;
-  z_=s*y+c*z_;
+  y_=c*y-s*z;
+  z_=s*y+c*z;
   isCalculated_ = false;
 }
 
