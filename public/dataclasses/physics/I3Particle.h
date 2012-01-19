@@ -46,13 +46,25 @@ static const unsigned i3particle_version_ = 5;
     (NeutronBar)(LambdaBar)(SigmaMinusBar)(Sigma0Bar)(SigmaPlusBar)(Xi0Bar)       \
     (XiPlusBar)(OmegaPlusBar)(DPlus)(DMinus)(D0)(D0Bar)(DsPlus)(DsMinusBar)       \
     (LambdacPlus)(WPlus)(WMinus)(Z0)(NuE)(NuEBar)                                 \
-    (NuMu)(NuMuBar)(TauPlus)(TauMinus)(NuTau)(NuTauBar)(He4Nucleus)(Li7Nucleus)   \
-    (Be9Nucleus)(B11Nucleus)(C12Nucleus)(N14Nucleus)(O16Nucleus)(F19Nucleus)      \
-    (Ne20Nucleus)(Na23Nucleus)(Mg24Nucleus)(Al27Nucleus)(Si28Nucleus)(P31Nucleus) \
-    (S32Nucleus)(Cl35Nucleus)(Ar40Nucleus)(K39Nucleus)(Ca40Nucleus)(Sc45Nucleus)  \
-    (Ti48Nucleus)(V51Nucleus)(Cr52Nucleus)(Mn55Nucleus)(Fe56Nucleus)              \
+    (NuMu)(NuMuBar)(TauPlus)(TauMinus)(NuTau)(NuTauBar)                           \
+    (He3Nucleus)(He4Nucleus)(Li6Nucleus)(Li7Nucleus)(Be9Nucleus)(B10Nucleus)      \
+    (B11Nucleus)(C12Nucleus)(C13Nucleus)(N14Nucleus)(N15Nucleus)(O16Nucleus)      \
+    (O17Nucleus)(O18Nucleus)(F19Nucleus)(Ne20Nucleus)(Ne21Nucleus)(Ne22Nucleus)   \
+    (Na23Nucleus)(Mg24Nucleus)(Mg25Nucleus)(Mg26Nucleus)(Al26Nucleus)(Al27Nucleus)\
+    (Si28Nucleus)(Si29Nucleus)(Si30Nucleus)(Si31Nucleus)(Si32Nucleus)(P31Nucleus) \
+    (P32Nucleus)(P33Nucleus)(S32Nucleus)(S33Nucleus)(S34Nucleus)(S35Nucleus)      \
+    (S36Nucleus)(Cl35Nucleus)(Cl36Nucleus)(Cl37Nucleus)(Ar36Nucleus)(Ar37Nucleus) \
+    (Ar38Nucleus)(Ar39Nucleus)(Ar40Nucleus)(Ar41Nucleus)(Ar42Nucleus)(K39Nucleus) \
+    (K40Nucleus)(K41Nucleus)(Ca40Nucleus)(Ca41Nucleus)(Ca42Nucleus)(Ca43Nucleus)  \
+    (Ca44Nucleus)(Ca45Nucleus)(Ca46Nucleus)(Ca47Nucleus)(Ca48Nucleus)(Sc44Nucleus)\
+    (Sc45Nucleus)(Sc46Nucleus)(Sc47Nucleus)(Sc48Nucleus)(Ti44Nucleus)(Ti45Nucleus)\
+    (Ti46Nucleus)(Ti47Nucleus)(Ti48Nucleus)(Ti49Nucleus)(Ti50Nucleus)(V48Nucleus) \
+    (V49Nucleus)(V50Nucleus)(V51Nucleus)(Cr50Nucleus)(Cr51Nucleus)(Cr52Nucleus)   \
+    (Cr53Nucleus)(Cr54Nucleus)(Mn52Nucleus)(Mn53Nucleus)(Mn54Nucleus)(Mn55Nucleus)\
+    (Fe54Nucleus)(Fe55Nucleus)(Fe56Nucleus)(Fe57Nucleus)(Fe58Nucleus)             \
     (CherenkovPhoton)(Nu)(Monopole)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)     \
-    (Hadrons)(FiberLaser)(N2Laser)(YAGLaser)(STauPlus)(STauMinus)
+    (Hadrons)(ContinuousEnergyLoss)(FiberLaser)(N2Laser)(YAGLaser)                \
+    (STauPlus)(STauMinus)
 
 #define I3PARTICLE_H_I3Particle_ParticleShape                                     \
     (Null)(Primary)(TopShower)(Cascade)(InfiniteTrack)(StartingTrack)             \
@@ -176,32 +188,100 @@ class I3Particle : public I3FrameObject
     /**
      * In CORSIKA nuclei numbers
      * are A x 100 + Z 
+     * (not all of those are actually stable,
+     * they are included here for compatibility
+     * with software that might have generated
+     * them by casting ParticleType to int)
      */
+    He3Nucleus = 302,
     He4Nucleus = 402,
+    Li6Nucleus = 603,
     Li7Nucleus = 703,
     Be9Nucleus = 904,
+    B10Nucleus = 1005,
     B11Nucleus = 1105,
     C12Nucleus = 1206,
+    C13Nucleus = 1306,
     N14Nucleus = 1407,
+    N15Nucleus = 1507,
     O16Nucleus = 1608,
+    O17Nucleus = 1708,
+    O18Nucleus = 1808,
     F19Nucleus = 1909,
     Ne20Nucleus = 2010,
+    Ne21Nucleus = 2110,
+    Ne22Nucleus = 2210,
     Na23Nucleus = 2311,
     Mg24Nucleus = 2412,
+    Mg25Nucleus = 2512,
+    Mg26Nucleus = 2612,
+    Al26Nucleus = 2613,
     Al27Nucleus = 2713,
     Si28Nucleus = 2814,
+    Si29Nucleus = 2914,
+    Si30Nucleus = 3014,
+    Si31Nucleus = 3114,
+    Si32Nucleus = 3214,
     P31Nucleus = 3115,
+    P32Nucleus = 3215,
+    P33Nucleus = 3315,
     S32Nucleus = 3216,
+    S33Nucleus = 3316,
+    S34Nucleus = 3416,
+    S35Nucleus = 3516,
+    S36Nucleus = 3616,
     Cl35Nucleus = 3517,
+    Cl36Nucleus = 3617,
+    Cl37Nucleus = 3717,
+    Ar36Nucleus = 3618,
+    Ar37Nucleus = 3718,
+    Ar38Nucleus = 3818,
+    Ar39Nucleus = 3918,
     Ar40Nucleus = 4018,
+    Ar41Nucleus = 4118,
+    Ar42Nucleus = 4218,
     K39Nucleus = 3919,
+    K40Nucleus = 4019,
+    K41Nucleus = 4119,
     Ca40Nucleus = 4020,
+    Ca41Nucleus = 4120,
+    Ca42Nucleus = 4220,
+    Ca43Nucleus = 4320,
+    Ca44Nucleus = 4420,
+    Ca45Nucleus = 4520,
+    Ca46Nucleus = 4620,
+    Ca47Nucleus = 4720,
+    Ca48Nucleus = 4820,
+    Sc44Nucleus = 4421,
     Sc45Nucleus = 4521,
+    Sc46Nucleus = 4621,
+    Sc47Nucleus = 4721,
+    Sc48Nucleus = 4821,
+    Ti44Nucleus = 4422,
+    Ti45Nucleus = 4522,
+    Ti46Nucleus = 4622,
+    Ti47Nucleus = 4722,
     Ti48Nucleus = 4822,
+    Ti49Nucleus = 4922,
+    Ti50Nucleus = 5022,
+    V48Nucleus = 4823,
+    V49Nucleus = 4923,
+    V50Nucleus = 5023,
     V51Nucleus = 5123,
+    Cr50Nucleus = 5024,
+    Cr51Nucleus = 5124,
     Cr52Nucleus = 5224,
+    Cr53Nucleus = 5324,
+    Cr54Nucleus = 5424,
+    Mn52Nucleus = 5225,
+    Mn53Nucleus = 5325,
+    Mn54Nucleus = 5425,
     Mn55Nucleus = 5525,
+    Fe54Nucleus = 5426,
+    Fe55Nucleus = 5526,
     Fe56Nucleus = 5626,
+    Fe57Nucleus = 5726,
+    Fe58Nucleus = 5826,
     CherenkovPhoton = 9900,
     /**
      *Particle types not in CORSIKA
@@ -214,6 +294,7 @@ class I3Particle : public I3FrameObject
     NuclInt = -1004,
     MuPair = -1005,
     Hadrons = -1006,
+    ContinuousEnergyLoss = -1111, // special type used by MMC with the -recc option
     FiberLaser = -2100,
     N2Laser = -2101,
     YAGLaser = -2201,
@@ -282,6 +363,7 @@ class I3Particle : public I3FrameObject
   bool IsPrimary() const;
   bool IsTopShower() const;
   bool IsNeutrino() const;
+  bool IsNucleus() const;
 
   bool HasPosition() const;
   bool HasDirection() const;

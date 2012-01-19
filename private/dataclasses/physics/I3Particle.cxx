@@ -91,31 +91,95 @@ std::string I3Particle::GetTypeString() const
   case TauMinus:       return("TauMinus");
   case NuTau:          return("NuTau");
   case NuTauBar:       return("NuTauBar");
+  case He3Nucleus:     return("He3Nucleus");
   case He4Nucleus:     return("He4Nucleus");
+  case Li6Nucleus:     return("Li6Nucleus");
   case Li7Nucleus:     return("Li7Nucleus");
   case Be9Nucleus:     return("Be9Nucleus");
+  case B10Nucleus:     return("B10Nucleus");
   case B11Nucleus:     return("B11Nucleus");
   case C12Nucleus:     return("C12Nucleus");
+  case C13Nucleus:     return("C13Nucleus");
   case N14Nucleus:     return("N14Nucleus");
+  case N15Nucleus:     return("N15Nucleus");
   case O16Nucleus:     return("O16Nucleus");
+  case O17Nucleus:     return("O17Nucleus");
+  case O18Nucleus:     return("O18Nucleus");
   case F19Nucleus:     return("F19Nucleus");
   case Ne20Nucleus:    return("Ne20Nucleus");
+  case Ne21Nucleus:    return("Ne21Nucleus");
+  case Ne22Nucleus:    return("Ne22Nucleus");
   case Na23Nucleus:    return("Na23Nucleus");
   case Mg24Nucleus:    return("Mg24Nucleus");
+  case Mg25Nucleus:    return("Mg25Nucleus");
+  case Mg26Nucleus:    return("Mg26Nucleus");
+  case Al26Nucleus:    return("Al26Nucleus");
   case Al27Nucleus:    return("Al27Nucleus");
   case Si28Nucleus:    return("Si28Nucleus");
+  case Si29Nucleus:    return("Si29Nucleus");
+  case Si30Nucleus:    return("Si30Nucleus");
+  case Si31Nucleus:    return("Si31Nucleus");
+  case Si32Nucleus:    return("Si32Nucleus");
   case P31Nucleus:     return("P31Nucleus");
+  case P32Nucleus:     return("P32Nucleus");
+  case P33Nucleus:     return("P33Nucleus");
   case S32Nucleus:     return("S32Nucleus");
+  case S33Nucleus:     return("S33Nucleus");
+  case S34Nucleus:     return("S34Nucleus");
+  case S35Nucleus:     return("S35Nucleus");
+  case S36Nucleus:     return("S36Nucleus");
   case Cl35Nucleus:    return("Cl35Nucleus");
+  case Cl36Nucleus:    return("Cl36Nucleus");
+  case Cl37Nucleus:    return("Cl37Nucleus");
+  case Ar36Nucleus:    return("Ar36Nucleus");
+  case Ar37Nucleus:    return("Ar37Nucleus");
+  case Ar38Nucleus:    return("Ar38Nucleus");
+  case Ar39Nucleus:    return("Ar39Nucleus");
   case Ar40Nucleus:    return("Ar40Nucleus");
+  case Ar41Nucleus:    return("Ar41Nucleus");
+  case Ar42Nucleus:    return("Ar42Nucleus");
   case K39Nucleus:     return("K39Nucleus");
+  case K40Nucleus:     return("K40Nucleus");
+  case K41Nucleus:     return("K41Nucleus");
   case Ca40Nucleus:    return("Ca40Nucleus");
+  case Ca41Nucleus:    return("Ca41Nucleus");
+  case Ca42Nucleus:    return("Ca42Nucleus");
+  case Ca43Nucleus:    return("Ca43Nucleus");
+  case Ca44Nucleus:    return("Ca44Nucleus");
+  case Ca45Nucleus:    return("Ca45Nucleus");
+  case Ca46Nucleus:    return("Ca46Nucleus");
+  case Ca47Nucleus:    return("Ca47Nucleus");
+  case Ca48Nucleus:    return("Ca48Nucleus");
+  case Sc44Nucleus:    return("Sc44Nucleus");
   case Sc45Nucleus:    return("Sc45Nucleus");
+  case Sc46Nucleus:    return("Sc46Nucleus");
+  case Sc47Nucleus:    return("Sc47Nucleus");
+  case Sc48Nucleus:    return("Sc48Nucleus");
+  case Ti44Nucleus:    return("Ti44Nucleus");
+  case Ti45Nucleus:    return("Ti45Nucleus");
+  case Ti46Nucleus:    return("Ti46Nucleus");
+  case Ti47Nucleus:    return("Ti47Nucleus");
   case Ti48Nucleus:    return("Ti48Nucleus");
+  case Ti49Nucleus:    return("Ti49Nucleus");
+  case Ti50Nucleus:    return("Ti50Nucleus");
+  case V48Nucleus:     return("V48Nucleus");
+  case V49Nucleus:     return("V49Nucleus");
+  case V50Nucleus:     return("V50Nucleus");
   case V51Nucleus:     return("V51Nucleus");
+  case Cr50Nucleus:    return("Cr50Nucleus");
+  case Cr51Nucleus:    return("Cr51Nucleus");
   case Cr52Nucleus:    return("Cr52Nucleus");
+  case Cr53Nucleus:    return("Cr53Nucleus");
+  case Cr54Nucleus:    return("Cr54Nucleus");
+  case Mn52Nucleus:    return("Mn52Nucleus");
+  case Mn53Nucleus:    return("Mn53Nucleus");
+  case Mn54Nucleus:    return("Mn54Nucleus");
   case Mn55Nucleus:    return("Mn55Nucleus");
+  case Fe54Nucleus:    return("Fe54Nucleus");
+  case Fe55Nucleus:    return("Fe54Nucleus");
   case Fe56Nucleus:    return("Fe56Nucleus");
+  case Fe57Nucleus:    return("Fe57Nucleus");
+  case Fe58Nucleus:    return("Fe58Nucleus");
   case CherenkovPhoton:return("CherenkovPhoton");
   case Nu:         return("Nu");
   case Monopole:   return("Monopole");
@@ -125,12 +189,13 @@ std::string I3Particle::GetTypeString() const
   case NuclInt:    return("NuclInt");
   case MuPair:     return("MuPair");
   case Hadrons:    return("Hadrons");
+  case ContinuousEnergyLoss: return("ContinuousEnergyLoss");
   case FiberLaser: return("FiberLaser");
   case N2Laser:    return("N2Laser");
   case YAGLaser:   return("YAGLaser");
   case STauPlus:   return("STauPlus");
   case STauMinus:  return("STauMinus");
-  default:         return("undefined_particle_type");
+  default:         return("undefined_particle_type"); // shouldn't be reached
   }
 }
 
@@ -175,6 +240,22 @@ std::string I3Particle::GetLocationTypeString() const
   }
 }
 
+namespace {
+  inline bool isParticleTypeInNucleusRange(I3Particle::ParticleType type)
+  {
+    // nuclei have CORSIKA particle numbers [A x 100 + Z]
+    // starting from He(3) to Fe(58).
+    return ((static_cast<int>(type) >= 300) && (static_cast<int>(type) <= 5899));
+  }
+}
+
+bool I3Particle::IsNucleus() const
+{
+  const ParticleType type = ConvertFromPdgEncoding(pdgEncoding_);
+    
+  return isParticleTypeInNucleusRange(type);
+}
+
 bool I3Particle::IsTrack() const 
 {
   const ParticleType type = ConvertFromPdgEncoding(pdgEncoding_);
@@ -188,31 +269,7 @@ bool I3Particle::IsTrack() const
       (shape_ == Primary && 
        ( type == PPlus       ||
 	 type == PMinus      ||
-	 type == He4Nucleus  ||
-	 type == Li7Nucleus  ||
-	 type == Be9Nucleus  ||
-	 type == B11Nucleus  ||
-	 type == C12Nucleus  ||
-	 type == N14Nucleus  ||
-	 type == O16Nucleus  ||
-	 type == F19Nucleus  ||
-	 type == Ne20Nucleus ||
-	 type == Na23Nucleus ||
-	 type == Mg24Nucleus ||
-	 type == Al27Nucleus ||
-	 type == Si28Nucleus ||
-	 type == P31Nucleus  ||
-	 type == S32Nucleus  ||
-	 type == Cl35Nucleus ||
-	 type == Ar40Nucleus ||
-	 type == K39Nucleus  ||
-	 type == Ca40Nucleus ||
-	 type == Sc45Nucleus ||
-	 type == Ti48Nucleus ||
-	 type == V51Nucleus  ||
-	 type == Cr52Nucleus ||
-	 type == Mn55Nucleus ||
-	 type == Fe56Nucleus ||
+   isParticleTypeInNucleusRange(type) ||
 	 type == Gamma )
        )
       ) return true;    
@@ -232,31 +289,7 @@ bool I3Particle::IsCascade() const
       (shape_ != Primary && 
        ( type == PPlus       ||
 	 type == PMinus      ||
-	 type == He4Nucleus  ||
-	 type == Li7Nucleus  ||
-	 type == Be9Nucleus  ||
-	 type == B11Nucleus  ||
-	 type == C12Nucleus  ||
-	 type == N14Nucleus  ||
-	 type == O16Nucleus  ||
-	 type == F19Nucleus  ||
-	 type == Ne20Nucleus ||
-	 type == Na23Nucleus ||
-	 type == Mg24Nucleus ||
-	 type == Al27Nucleus ||
-	 type == Si28Nucleus ||
-	 type == P31Nucleus  ||
-	 type == S32Nucleus  ||
-	 type == Cl35Nucleus ||
-	 type == Ar40Nucleus ||
-	 type == K39Nucleus  ||
-	 type == Ca40Nucleus ||
-	 type == Sc45Nucleus ||
-	 type == Ti48Nucleus ||
-	 type == V51Nucleus  ||
-	 type == Cr52Nucleus ||
-	 type == Mn55Nucleus ||
-	 type == Fe56Nucleus ||
+   isParticleTypeInNucleusRange(type) ||
 	 type == Gamma )
        )
       ) return true;    
@@ -586,31 +619,95 @@ boost::assign::list_of<I3Particle::toPdgEncodingConversionTable_t::relation>
 (I3Particle::NuTau,            16)
 (I3Particle::NuTauBar,        -16)
 // nuclei
+(I3Particle::He3Nucleus,       1000020030)
 (I3Particle::He4Nucleus,       1000020040)
+(I3Particle::Li6Nucleus,       1000030060)
 (I3Particle::Li7Nucleus,       1000030070)
 (I3Particle::Be9Nucleus,       1000040090)
+(I3Particle::B10Nucleus,       1000050100)
 (I3Particle::B11Nucleus,       1000050110)
 (I3Particle::C12Nucleus,       1000060120)
+(I3Particle::C13Nucleus,       1000060130)
 (I3Particle::N14Nucleus,       1000070140)
+(I3Particle::N15Nucleus,       1000070150)
 (I3Particle::O16Nucleus,       1000080160)
+(I3Particle::O17Nucleus,       1000080170)
+(I3Particle::O18Nucleus,       1000080180)
 (I3Particle::F19Nucleus,       1000090190)
 (I3Particle::Ne20Nucleus,      1000100200)
+(I3Particle::Ne21Nucleus,      1000100210)
+(I3Particle::Ne22Nucleus,      1000100220)
 (I3Particle::Na23Nucleus,      1000110230)
 (I3Particle::Mg24Nucleus,      1000120240)
+(I3Particle::Mg25Nucleus,      1000120250)
+(I3Particle::Mg26Nucleus,      1000120260)
+(I3Particle::Al26Nucleus,      1000130260)
 (I3Particle::Al27Nucleus,      1000130270)
 (I3Particle::Si28Nucleus,      1000140280)
+(I3Particle::Si29Nucleus,      1000140290)
+(I3Particle::Si30Nucleus,      1000140300)
+(I3Particle::Si31Nucleus,      1000140310)
+(I3Particle::Si32Nucleus,      1000140320)
 (I3Particle::P31Nucleus,       1000150310)
+(I3Particle::P32Nucleus,       1000150320)
+(I3Particle::P33Nucleus,       1000150330)
 (I3Particle::S32Nucleus,       1000160320)
+(I3Particle::S33Nucleus,       1000160330)
+(I3Particle::S34Nucleus,       1000160340)
+(I3Particle::S35Nucleus,       1000160350)
+(I3Particle::S36Nucleus,       1000160360)
 (I3Particle::Cl35Nucleus,      1000170350)
+(I3Particle::Cl36Nucleus,      1000170360)
+(I3Particle::Cl37Nucleus,      1000170370)
+(I3Particle::Ar36Nucleus,      1000180360)
+(I3Particle::Ar37Nucleus,      1000180370)
+(I3Particle::Ar38Nucleus,      1000180380)
+(I3Particle::Ar39Nucleus,      1000180390)
 (I3Particle::Ar40Nucleus,      1000180400)
+(I3Particle::Ar41Nucleus,      1000180410)
+(I3Particle::Ar42Nucleus,      1000180420)
 (I3Particle::K39Nucleus,       1000190390)
+(I3Particle::K40Nucleus,       1000190400)
+(I3Particle::K41Nucleus,       1000190410)
 (I3Particle::Ca40Nucleus,      1000200400)
+(I3Particle::Ca41Nucleus,      1000200410)
+(I3Particle::Ca42Nucleus,      1000200420)
+(I3Particle::Ca43Nucleus,      1000200430)
+(I3Particle::Ca44Nucleus,      1000200440)
+(I3Particle::Ca45Nucleus,      1000200450)
+(I3Particle::Ca46Nucleus,      1000200460)
+(I3Particle::Ca47Nucleus,      1000200470)
+(I3Particle::Ca48Nucleus,      1000200480)
+(I3Particle::Sc44Nucleus,      1000210440)
 (I3Particle::Sc45Nucleus,      1000210450)
+(I3Particle::Sc46Nucleus,      1000210460)
+(I3Particle::Sc47Nucleus,      1000210470)
+(I3Particle::Sc48Nucleus,      1000210480)
+(I3Particle::Ti44Nucleus,      1000220440)
+(I3Particle::Ti45Nucleus,      1000220450)
+(I3Particle::Ti46Nucleus,      1000220460)
+(I3Particle::Ti47Nucleus,      1000220470)
 (I3Particle::Ti48Nucleus,      1000220480)
+(I3Particle::Ti49Nucleus,      1000220490)
+(I3Particle::Ti50Nucleus,      1000220500)
+(I3Particle::V48Nucleus,       1000230480)
+(I3Particle::V49Nucleus,       1000230490)
+(I3Particle::V50Nucleus,       1000230500)
 (I3Particle::V51Nucleus,       1000230510)
+(I3Particle::Cr50Nucleus,      1000240500)
+(I3Particle::Cr51Nucleus,      1000240510)
 (I3Particle::Cr52Nucleus,      1000240520)
+(I3Particle::Cr53Nucleus,      1000240530)
+(I3Particle::Cr54Nucleus,      1000240540)
+(I3Particle::Mn52Nucleus,      1000250520)
+(I3Particle::Mn53Nucleus,      1000250530)
+(I3Particle::Mn54Nucleus,      1000250540)
 (I3Particle::Mn55Nucleus,      1000250550)
+(I3Particle::Fe54Nucleus,      1000260540)
+(I3Particle::Fe55Nucleus,      1000260550)
 (I3Particle::Fe56Nucleus,      1000260560)
+(I3Particle::Fe57Nucleus,      1000260570)
+(I3Particle::Fe58Nucleus,      1000260580)
 // types without valid pdg encodings, use codes >=2000000000 or <=-2000000000
 (I3Particle::CherenkovPhoton,  2000009900)
 (I3Particle::Nu,              -2000000004)
@@ -621,6 +718,7 @@ boost::assign::list_of<I3Particle::toPdgEncodingConversionTable_t::relation>
 (I3Particle::NuclInt,         -2000001004)
 (I3Particle::MuPair,          -2000001005)
 (I3Particle::Hadrons,         -2000001006)
+(I3Particle::ContinuousEnergyLoss, -2000001111)
 (I3Particle::FiberLaser,      -2000002100)
 (I3Particle::N2Laser,         -2000002101)
 (I3Particle::YAGLaser,        -2000002201)
