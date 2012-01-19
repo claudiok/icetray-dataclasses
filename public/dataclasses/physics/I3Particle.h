@@ -21,7 +21,7 @@
 #include <boost/bimap/multiset_of.hpp>
 #endif
 
-static const unsigned i3particle_version_ = 5;
+static const unsigned i3particle_version_ = 6;
 
 // let other code know that I3Particle stores PDG encodings internally
 #define I3PARTICLE_SUPPORTS_PDG_ENCODINGS
@@ -345,10 +345,10 @@ class I3Particle : public I3FrameObject
   FitStatus status_;
   I3Position pos_;
   I3Direction dir_;
-  double time_;
-  double energy_;
-  double length_;
-  double speed_;
+  float time_;
+  float energy_;
+  float length_;
+  float speed_;
   std::vector<I3Particle> composite_; //!
   LocationType locationType_;
 
@@ -402,34 +402,36 @@ class I3Particle : public I3FrameObject
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
   void SetPos(double p1, double p2, double p3, 
-	      I3Position::RefFrame frame=I3Position::car)
+	      I3Position::RefFrame frame)
     { pos_.SetPosition(p1,p2,p3,frame); }
+  void SetPos(float x, float y, float z)
+    { pos_.SetPosition(x,y,z); }
 
   const I3Direction& GetDir() const { return dir_; }
   void SetDir(const I3Direction& d) { dir_.SetDirection(d); }
-  void SetDir(double zen, double azi) { dir_.SetDirection(zen,azi); }
+  void SetDir(float zen, float azi) { dir_.SetDirection(zen,azi); }
   void SetDir(double x, double y, double z) 
     { dir_.SetDirection(x,y,z); }
 
   void SetThetaPhi(double theta, double phi) { dir_.SetThetaPhi(theta,phi); }
 
-  double GetZenith() const { return dir_.GetZenith(); }
-  double GetAzimuth() const { return dir_.GetAzimuth(); }
-  double GetX() const { return pos_.GetX(); }
-  double GetY() const { return pos_.GetY(); }
-  double GetZ() const { return pos_.GetZ(); }
+  float GetZenith() const { return dir_.GetZenith(); }
+  float GetAzimuth() const { return dir_.GetAzimuth(); }
+  float GetX() const { return pos_.GetX(); }
+  float GetY() const { return pos_.GetY(); }
+  float GetZ() const { return pos_.GetZ(); }
 
-  double GetTime() const { return time_; }
-  void SetTime(double t) { time_ = t; }
+  float GetTime() const { return time_; }
+  void SetTime(float t) { time_ = t; }
 
-  double GetLength() const { return length_; }
-  void SetLength(double length) { length_ = length; }
+  float GetLength() const { return length_; }
+  void SetLength(float length) { length_ = length; }
 
-  double GetEnergy() const { return energy_; }
-  void SetEnergy(double energy) { energy_ = energy; }
+  float GetEnergy() const { return energy_; }
+  void SetEnergy(float energy) { energy_ = energy; }
 
-  double GetSpeed() const { return speed_; }
-  void SetSpeed(double s) { speed_ = s; }
+  float GetSpeed() const { return speed_; }
+  void SetSpeed(float s) { speed_ = s; }
 
   const std::vector<I3Particle>& GetComposite() const { return composite_; }
   std::vector<I3Particle>& GetComposite() { return composite_; }

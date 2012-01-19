@@ -345,16 +345,18 @@ bool I3Particle::IsTopShower() const
 I3Position I3Particle::ShiftAlongTrack(double dist) const 
 {
   if (IsTrack()) {
-    double x = GetX() - dist * sin(GetZenith()) * cos(GetAzimuth());
-    double y = GetY() - dist * sin(GetZenith()) * sin(GetAzimuth());
-    double z = GetZ() - dist * cos(GetZenith());
-    I3Position p(x,y,z,I3Position::car);
-    return p;
+    const double zenith = static_cast<double>(GetZenith());
+    const double sinzenith = std::sin(zenith);
+    const double azimuth = GetAzimuth();
+
+    const double x = static_cast<double>(GetX()) - dist * sinzenith * std::cos(azimuth);
+    const double y = static_cast<double>(GetY()) - dist * sinzenith * std::sin(azimuth);
+    const double z = static_cast<double>(GetZ()) - dist * std::cos(zenith);
+    return I3Position(x,y,z);
   }
   else {
     log_warn("ShiftAlongTrack undefined for a particle that is not a track.");
-    I3Position nullpos;
-    return nullpos;
+    return I3Position();
   }
 }
 
@@ -366,8 +368,7 @@ I3Position I3Particle::GetStartPos() const
   else {
     log_warn("GetStartPos undefined for a particle that is neither starting "
 	     "nor contained.");
-    I3Position nullpos;
-    return nullpos;
+    return I3Position();
   }
 }
 
@@ -772,8 +773,20 @@ template <class Archive>
     ar & make_nvp("pdgEncoding",pdgEncoding_);
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
-    ar & make_nvp("pos",pos_);
-    ar & make_nvp("dir",dir_);
+
+    const float x=pos_.GetX();
+    const float y=pos_.GetY();
+    const float z=pos_.GetZ();
+    const float zen=dir_.GetZenith();
+    const float azi=dir_.GetAzimuth();
+    ar & make_nvp("x",x);
+    ar & make_nvp("y",y);
+    ar & make_nvp("z",z);
+    ar & make_nvp("zenith",zen);
+    ar & make_nvp("azimuth",azi);
+
+    //ar & make_nvp("pos",pos_);
+    //ar & make_nvp("dir",dir_);
     ar & make_nvp("time",time_);
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
@@ -809,12 +822,36 @@ template <class Archive>
     }
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
-    ar & make_nvp("pos",pos_);
-    ar & make_nvp("dir",dir_);
-    ar & make_nvp("time",time_);
-    ar & make_nvp("energy",energy_);
-    ar & make_nvp("length",length_);
-    ar & make_nvp("speed",speed_);
+    if (version<=5){
+      // these were stored as I3Position/I3Direction
+      ar & make_nvp("pos",pos_);
+      ar & make_nvp("dir",dir_);
+
+      // earlier versions stored these in doubles
+      double t, energy, length, speed;
+      ar & make_nvp("time",t);
+      ar & make_nvp("energy",energy);
+      ar & make_nvp("length",length);
+      ar & make_nvp("speed",speed);
+      time_=t;
+      energy_=energy;
+      length_=length;
+      speed_=speed;
+    }else{
+      float x,y,z,zen,azi;
+      ar & make_nvp("x",x);
+      ar & make_nvp("y",y);
+      ar & make_nvp("z",z);
+      ar & make_nvp("zen",zen);
+      ar & make_nvp("azi",azi);
+      pos_.SetPos(x,y,z);
+      dir_.SetDir(zen,azi);
+
+      ar & make_nvp("time",time_);
+      ar & make_nvp("energy",energy_);
+      ar & make_nvp("length",length_);
+      ar & make_nvp("speed",speed_);
+    }
     if(version == 0)
       ar & make_nvp("composite",composite_);
     if(version>0)
