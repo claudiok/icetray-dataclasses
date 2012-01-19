@@ -108,8 +108,8 @@ class I3Position : public I3FrameObject
   /**
    * Store position r in ref frame f
    */
-  void SetPosition(double r1, double r2, double r3, RefFrame f=car);
-  inline void SetPos(double r1, double r2, double r3, RefFrame f=car) {
+  void SetPosition(double r1, double r2, double r3, RefFrame f);
+  inline void SetPos(double r1, double r2, double r3, RefFrame f) {
     SetPosition(r1, r2, r3, f);
   }
 
