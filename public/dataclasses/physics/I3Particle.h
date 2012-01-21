@@ -43,6 +43,7 @@ static const unsigned i3particle_version_ = 6;
 #define I3PARTICLE_H_I3Particle_ParticleType                                      \
     (UnknownWithPdgEncoding)(unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0) \
     (PiPlus)(PiMinus)(K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)   \
+    (Eta)(Lambda)(SigmaPlus)(Sigma0)(SigmaMinus)(Xi0)(XiMinus)(OmegaMinus)        \
     (NeutronBar)(LambdaBar)(SigmaMinusBar)(Sigma0Bar)(SigmaPlusBar)(Xi0Bar)       \
     (XiPlusBar)(OmegaPlusBar)(DPlus)(DMinus)(D0)(D0Bar)(DsPlus)(DsMinusBar)       \
     (LambdacPlus)(WPlus)(WMinus)(Z0)(NuE)(NuEBar)                                 \
@@ -383,21 +384,26 @@ class I3Particle : public I3FrameObject
   void SetPdgEncoding(int32_t newid) { pdgEncoding_=newid; }
     
   ParticleType GetType() const;
-  void SetType(ParticleType type);
-  void SetRDMCType(int type);
   std::string GetTypeString() const;
 
+  void SetType(ParticleType type);
+  void SetRDMCType(int type);
+  void SetTypeString(const std::string &str);
+
   ParticleShape GetShape() const { return shape_; }
-  void SetShape(ParticleShape shape) { shape_ = shape; }
   std::string GetShapeString() const;
+  void SetShape(ParticleShape shape) { shape_ = shape; }
+  void SetShapeString(const std::string &str);
 
   FitStatus GetFitStatus() const { return status_; }
-  void SetFitStatus(FitStatus status) { status_ = status; }
   std::string GetFitStatusString() const;
+  void SetFitStatus(FitStatus status) { status_ = status; }
+  void SetFitStatusString(const std::string &str);
 
   LocationType GetLocationType() const { return locationType_; }
-  void SetLocationType(LocationType type) { locationType_ = type; }
   std::string GetLocationTypeString() const;
+  void SetLocationType(LocationType type) { locationType_ = type; }
+  void SetLocationTypeString(const std::string &str);
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
