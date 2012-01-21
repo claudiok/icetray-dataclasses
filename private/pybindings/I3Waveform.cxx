@@ -25,6 +25,7 @@
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
@@ -61,6 +62,7 @@ void register_I3Waveform()
       .staticmethod("get_status")
       .def("__str__", &stream_to_string<I3Waveform>)
       .def(self == self)
+      .def_pickle(boost_serializable_pickle_suite<I3Waveform>())
       .def( freeze() )
       ;
 
@@ -98,6 +100,7 @@ void register_I3Waveform()
   class_<std::vector<I3Waveform> >("I3WaveformSeries")
     .def(std_vector_indexing_suite<std::vector<I3Waveform> >())
     .def(copy_suite<std::vector<I3Waveform> >())
+    .def_pickle(boost_serializable_pickle_suite<std::vector<I3Waveform> >())
     ;
 
   class_<std::vector<I3Waveform::StatusCompound> >("VectorI3WaveformStatusCompound")
@@ -108,6 +111,7 @@ void register_I3Waveform()
   class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("I3WaveformSeriesMap")
     .def(std_map_indexing_suite<I3WaveformSeriesMap>())
     .def(copy_suite<I3WaveformSeriesMap>())
+    .def_pickle(boost_serializable_pickle_suite<I3WaveformSeriesMap>())
     ;
 
   register_pointer_conversions<I3WaveformSeriesMap>();

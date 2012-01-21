@@ -1,6 +1,7 @@
 
 #include <dataclasses/I3MapOMKeyMask.h>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 namespace bp = boost::python;
 
@@ -33,6 +34,7 @@ void register_I3RecoPulseSeriesMapMask()
 		.def("set", set_om_by_idx, "Set/unset the bit at this index.")
 		.def("set", set_om_by_value, "Set/unset the bit corresponding to this RecoPulse.")
 		.def("set_none", &I3RecoPulseSeriesMapMask::SetNone, "Unset all bits in the mask.")
+		.def_pickle(bp::boost_serializable_pickle_suite<I3RecoPulseSeriesMapMask>())
 	;
 	
 	register_pointer_conversions<I3RecoPulseSeriesMapMask>();

@@ -23,6 +23,7 @@
 
 #include <dataclasses/I3Position.h>
 #include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -88,6 +89,7 @@ void register_I3Position()
     .def("__len__", i3position_len)
     .def("__getitem__", i3position_getitem)
     .def("__setitem__", i3position_setitem)
+    .def_pickle(boost_serializable_pickle_suite<I3Position>())
     .def( freeze() )
     ;
 

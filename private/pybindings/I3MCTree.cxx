@@ -21,11 +21,12 @@
 
 #include <vector>
 
- #include <dataclasses/physics/I3MCTree.h>
+#include <dataclasses/physics/I3MCTree.h>
 #include <dataclasses/I3Constants.h>
 #include "mctree/I3MCTreeUtils.h"
 #include "mctree/I3MCTreeTools.h"
 #include "mctree/BaseClassMethods.h"
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -96,6 +97,7 @@ void register_I3MCTree()
       #define BARE_PROPS (NCascades) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
       #undef BARE_PROPS
+      .def_pickle(boost_serializable_pickle_suite<I3MCTree>())
       .def( freeze() )      
       ;
 

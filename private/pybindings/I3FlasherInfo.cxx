@@ -25,6 +25,7 @@
 #include "dataclasses/I3Vector.h"
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -59,6 +60,7 @@ void register_I3FlasherInfo()
      BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3FlasherInfo, PROPS)
      #undef PROPS
      .add_property("raw_atwd3", make_function(get_waveform,return_internal_reference<1>()), &I3FlasherInfo::SetRawATWD3)
+     .def_pickle(boost_serializable_pickle_suite<I3FlasherInfo>())
      .def( freeze() )
    ;
 
@@ -67,6 +69,7 @@ void register_I3FlasherInfo()
  class_<I3FlasherInfoVect, bases<I3FrameObject>, I3FlasherInfoVectPtr>("I3FlasherInfoVect")
    .def(std_vector_indexing_suite<I3FlasherInfoVect, 
         false, detail::vector_no_equality<I3FlasherInfoVect> >())
+    .def_pickle(boost_serializable_pickle_suite<I3FlasherInfoVect>())
    ;
 
  register_pointer_conversions<I3FlasherInfo>();

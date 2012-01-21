@@ -27,6 +27,7 @@
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/tree_indexing_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -79,6 +80,7 @@ void register_I3Trigger()
       .def("__str__", &stream_to_string<I3Trigger>)
       .def( self == self )
       .def( self != self )
+      .def_pickle(boost_serializable_pickle_suite<I3Trigger>())
       .def( freeze() )
       ;
 
@@ -134,6 +136,7 @@ void register_I3Trigger()
     .def(self <= self)
     .def(self == self)
     .def(self != self)
+    .def_pickle(boost_serializable_pickle_suite<TriggerKey>())
     .def( freeze() )
     ;
     
@@ -145,11 +148,13 @@ void register_I3Trigger()
     .def("from_frame", &from_frame)
     .staticmethod("from_frame")
     .def(bp::tree_indexing_suite<I3TriggerHierarchy>())
+    .def_pickle(boost_serializable_pickle_suite<I3TriggerHierarchy>())
     ;
 
   class_<I3VectorI3Trigger, bases<I3FrameObject>, shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
     .def(std_vector_indexing_suite<I3VectorI3Trigger >())
     .def("__str__", &stream_to_string< I3VectorI3Trigger >)
+    .def_pickle(boost_serializable_pickle_suite<I3VectorI3Trigger>())
     ;
 
   register_pointer_conversions<I3VectorI3Trigger>();

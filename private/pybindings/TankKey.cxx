@@ -22,6 +22,7 @@
 #include <dataclasses/I3Vector.h>
 #include <icetray/python/copy_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 

@@ -23,6 +23,7 @@
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
 #include <dataclasses/ostream_overloads.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -31,18 +32,21 @@ void register_I3MapKey()
   class_<I3MapKeyVectorDouble, bases<I3FrameObject>, I3MapKeyVectorDoublePtr>("I3MapKeyVectorDouble")
     .def(std_map_indexing_suite<I3MapKeyVectorDouble >())
     .def("__str__", &stream_to_string<I3MapKeyVectorDouble>)
+    .def_pickle(boost_serializable_pickle_suite<I3MapKeyVectorDouble>())
     ;
   register_pointer_conversions<I3MapKeyVectorDouble>();
   
   class_<I3MapKeyVectorInt, bases<I3FrameObject>, I3MapKeyVectorIntPtr>("I3MapKeyVectorInt")
     .def(std_map_indexing_suite<I3MapKeyVectorInt >())
     .def("__str__", &stream_to_string<I3MapKeyVectorInt>)
+    .def_pickle(boost_serializable_pickle_suite<I3MapKeyVectorInt>())
     ;
   register_pointer_conversions<I3MapKeyVectorInt>();
   
   class_<I3MapKeyDouble, bases<I3FrameObject>, I3MapKeyDoublePtr>("I3MapKeyDouble")
     .def(std_map_indexing_suite<I3MapKeyDouble >())
     .def("__str__", &stream_to_string<I3MapKeyDouble>)
+    .def_pickle(boost_serializable_pickle_suite<I3MapKeyDouble>())
     ;
   register_pointer_conversions<I3MapKeyDouble>();
 

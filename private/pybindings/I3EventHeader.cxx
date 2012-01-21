@@ -24,6 +24,7 @@
 #include <dataclasses/physics/I3EventHeader.h>
 #include <icetray/python/copy_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -44,6 +45,7 @@ void register_I3EventHeader()
       .add_property("data_stream", &I3EventHeader::GetDataStream)
       .def(copy_suite<I3EventHeader>())
       .def("__str__", &stream_to_string<I3EventHeader>)
+      .def_pickle(boost_serializable_pickle_suite<I3EventHeader>())
       .def( freeze() )
       ;
 
