@@ -546,6 +546,44 @@ I3RecoPulseSeriesMapMask::bitmask::save(Archive & ar, unsigned version) const
 	    mask_, size_*sizeof(mask_t)));
 }
 
+template<>
+void
+I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsigned version) const
+{
+	ar & make_nvp("Size", size_);
+	ar & make_nvp("Padding", padding_);
+	//generate a convenient ASCII representation of the mask bits
+	std::string s(CHAR_BIT*sizeof(mask_t)*size_-padding_,'0');
+	for(int i=0; i<size_; i++){
+		int firstBit=CHAR_BIT*sizeof(mask_t)-1-(i==(size_-1)?padding_:0);
+		for(int j=firstBit; j>=0; j--){
+			if(mask_[i]&(1u<<j))
+				s[j+CHAR_BIT*sizeof(mask_t)*i]='1';
+		}
+	}
+	ar & make_nvp("Bitmask", s);
+}
+
+template<>
+void
+I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsigned version)
+{
+	ar & make_nvp("Size", size_);
+	ar & make_nvp("Padding", padding_);
+	std::string s;
+	ar & make_nvp("Bitmask", s);
+	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
+	memset(mask_, 0, size_*sizeof(mask_t));
+	//parse the ASCII representation of the mask bits, treating any non-'0' character as true
+	for(int i=0; i<size_; i++){
+		int firstBit=CHAR_BIT*sizeof(mask_t)-1-(i==(size_-1)?padding_:0);
+		for(int j=CHAR_BIT*sizeof(mask_t)-padding_-1; j>=0; j--){
+			if(s[j+CHAR_BIT*sizeof(mask_t)*i]!='0')
+				mask_[i]|=(1u<<j);
+		}
+	}
+}
+
 /*
  * FIXME: the number of the element masks is implicit in the omkey mask.
  * Compactify the serialization.
