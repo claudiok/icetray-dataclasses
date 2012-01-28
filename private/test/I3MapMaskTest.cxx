@@ -1,9 +1,12 @@
 #include <I3Test.h>
+
+
 #include "dataclasses/I3MapOMKeyMask.h"
 #include "dataclasses/physics/I3RecoPulse.h"
 #include "dataclasses/I3Double.h"
 #include "boost/make_shared.hpp"
 #include "boost/foreach.hpp"
+#include "boost/iostreams/filtering_stream.hpp"
 
 TEST_GROUP(I3MapMask);
 
@@ -44,6 +47,41 @@ manufacture_frame(const std::string &name)
 	frame->Put(name, pulses);
 	
 	return frame;
+}
+
+static I3FramePtr
+resurrect(I3FramePtr frame)
+{
+	namespace io = boost::iostreams;
+	std::ostringstream oarchive_stream;
+	io::filtering_stream<io::output> ofs;
+	ofs.push(oarchive_stream);
+	frame->save(ofs);
+	
+	std::istringstream iarchive_stream(oarchive_stream.str());
+	io::filtering_stream<io::input> ifs;
+	ifs.push(iarchive_stream);
+		
+	I3FramePtr newframe(new I3Frame);
+	newframe->load(ifs);
+
+	return newframe;
+}
+
+TEST(Compactify)
+{
+	I3FramePtr frame = manufacture_frame("foo");
+	I3RecoPulseSeriesMapConstPtr pulses =
+	    frame->Get<I3RecoPulseSeriesMapConstPtr>("foo");
+	I3RecoPulseSeriesMapMaskPtr mask(new I3RecoPulseSeriesMapMask(*frame, "foo"));
+	
+	BOOST_FOREACH(const I3RecoPulseSeriesMap::value_type &pair, *pulses)
+		mask->Set(pair.first, false);	
+	frame->Put("mask", mask);
+	
+	I3FramePtr zombieframe = resurrect(frame);
+	pulses = zombieframe->Get<I3RecoPulseSeriesMapConstPtr>("mask");
+	ENSURE_EQUAL(pulses->size(), 0u);
 }
 
 TEST(Apply)
