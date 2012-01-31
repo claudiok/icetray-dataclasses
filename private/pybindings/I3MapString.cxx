@@ -64,15 +64,20 @@ void register_I3MapString()
     .def(std_map_indexing_suite<std::map<std::string,std::string > >())
     ;
 
-  #ifdef I3_OPTIMIZE
   //
   //  TDS: big problems here.  the duplicate registration of pair<string,int>
   //  with the boost.python conversion registry is a warn when compiled 'release',
   //  and triggers an ugly assert in registry.cpp when compiled 'debug',
   //  due to the fact that we link against different versions of libboost_python[-d].so
   //
+  //  AO (1/19/12) : This was "fixed" several years ago (2009-11-20).  When building the
+  //  tools a patch is applied which manually comments out this specific assert.
+  //  This could be a problem again when/if we switch to system build and/or
+  //  giving people the option to build against whatever boost they want.
+  //  In the meantime, people simply need to rebuild their tools.
+  
+
   class_<std::map<std::string,int > >("std_map_string_int",no_init)
     .def(std_map_indexing_suite<std::map<std::string,int > >())
     ;
-  #endif
 }

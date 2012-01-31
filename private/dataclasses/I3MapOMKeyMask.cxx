@@ -546,6 +546,38 @@ I3RecoPulseSeriesMapMask::bitmask::save(Archive & ar, unsigned version) const
 	    mask_, size_*sizeof(mask_t)));
 }
 
+template<>
+void
+I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsigned version) const
+{
+	ar & make_nvp("Size", size_);
+	ar & make_nvp("Padding", padding_);
+	// Generate a convenient ASCII representation of the mask bits
+	std::string s(this->size(),'0');
+	unsigned i = 0;
+	for (std::string::iterator it = s.begin(); it != s.end(); it++, i++)
+		if (this->get(i))
+			*it = '1';
+	ar & make_nvp("Bitmask", s);
+}
+
+template<>
+void
+I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsigned version)
+{
+	ar & make_nvp("Size", size_);
+	ar & make_nvp("Padding", padding_);
+	std::string s;
+	ar & make_nvp("Bitmask", s);
+	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
+	memset(mask_, 0, size_*sizeof(mask_t));
+	// Parse the ASCII representation of the mask bits, treating any non-'0' character as true
+	unsigned i = 0;
+	for (std::string::iterator it = s.begin(); it != s.end(); it++, i++)
+		if (*it != '0')
+			this->set(i, true);
+}
+
 /*
  * FIXME: the number of the element masks is implicit in the omkey mask.
  * Compactify the serialization.
@@ -562,18 +594,31 @@ I3RecoPulseSeriesMapMask::load(Archive & ar, unsigned version)
 	ar & make_nvp("ElementMasks", elements);
 	
 	std::copy(elements.begin(), elements.end(), std::back_inserter(element_masks_));
+	/* Fix up a padding bug in bitmask::bitmask() */
+	if (element_masks_.size() == 0 && omkey_mask_.size() == 64u && omkey_mask_.all())
+		omkey_mask_ = bitmask(0, false);
 }
 
 template <class Archive>
 void
 I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 {
+	/* Remove trivial elements before serializing */
 	std::vector<bitmask> elements;
-	std::copy(element_masks_.begin(), element_masks_.end(), std::back_inserter(elements));
-	
+	bitmask omkey_mask = omkey_mask_;
+	std::list<bitmask>::const_iterator list_it = element_masks_.begin();
+	for (unsigned idx = 0; idx != omkey_mask_.size(); idx++)
+		if (omkey_mask_.get(idx))
+			if (!list_it->any()) {
+				omkey_mask.set(idx, false);
+				list_it++;
+			} else {
+				elements.push_back(*list_it++);
+			}
+			
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("Key", key_);
-	ar & make_nvp("OMKeyMask", omkey_mask_);
+	ar & make_nvp("OMKeyMask", omkey_mask);
 	ar & make_nvp("ElementMasks", elements);
 }
 
