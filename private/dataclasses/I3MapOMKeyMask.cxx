@@ -552,15 +552,12 @@ I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsign
 {
 	ar & make_nvp("Size", size_);
 	ar & make_nvp("Padding", padding_);
-	//generate a convenient ASCII representation of the mask bits
-	std::string s(CHAR_BIT*sizeof(mask_t)*size_-padding_,'0');
-	for(int i=0; i<size_; i++){
-		int firstBit=CHAR_BIT*sizeof(mask_t)-1-(i==(size_-1)?padding_:0);
-		for(int j=firstBit; j>=0; j--){
-			if(mask_[i]&(1u<<j))
-				s[j+CHAR_BIT*sizeof(mask_t)*i]='1';
-		}
-	}
+	// Generate a convenient ASCII representation of the mask bits
+	std::string s(this->size(),'0');
+	unsigned i = 0;
+	for (std::string::iterator it = s.begin(); it != s.end(); it++, i++)
+		if (this->get(i))
+			*it = '1';
 	ar & make_nvp("Bitmask", s);
 }
 
@@ -574,14 +571,11 @@ I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsign
 	ar & make_nvp("Bitmask", s);
 	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
 	memset(mask_, 0, size_*sizeof(mask_t));
-	//parse the ASCII representation of the mask bits, treating any non-'0' character as true
-	for(int i=0; i<size_; i++){
-		int firstBit=CHAR_BIT*sizeof(mask_t)-1-(i==(size_-1)?padding_:0);
-		for(int j=CHAR_BIT*sizeof(mask_t)-padding_-1; j>=0; j--){
-			if(s[j+CHAR_BIT*sizeof(mask_t)*i]!='0')
-				mask_[i]|=(1u<<j);
-		}
-	}
+	// Parse the ASCII representation of the mask bits, treating any non-'0' character as true
+	unsigned i = 0;
+	for (std::string::iterator it = s.begin(); it != s.end(); it++, i++)
+		if (*it != '0')
+			this->set(i, true);
 }
 
 /*
@@ -600,18 +594,31 @@ I3RecoPulseSeriesMapMask::load(Archive & ar, unsigned version)
 	ar & make_nvp("ElementMasks", elements);
 	
 	std::copy(elements.begin(), elements.end(), std::back_inserter(element_masks_));
+	/* Fix up a padding bug in bitmask::bitmask() */
+	if (element_masks_.size() == 0 && omkey_mask_.size() == 64u && omkey_mask_.all())
+		omkey_mask_ = bitmask(0, false);
 }
 
 template <class Archive>
 void
 I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 {
+	/* Remove trivial elements before serializing */
 	std::vector<bitmask> elements;
-	std::copy(element_masks_.begin(), element_masks_.end(), std::back_inserter(elements));
-	
+	bitmask omkey_mask = omkey_mask_;
+	std::list<bitmask>::const_iterator list_it = element_masks_.begin();
+	for (unsigned idx = 0; idx != omkey_mask_.size(); idx++)
+		if (omkey_mask_.get(idx))
+			if (!list_it->any()) {
+				omkey_mask.set(idx, false);
+				list_it++;
+			} else {
+				elements.push_back(*list_it++);
+			}
+			
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("Key", key_);
-	ar & make_nvp("OMKeyMask", omkey_mask_);
+	ar & make_nvp("OMKeyMask", omkey_mask);
 	ar & make_nvp("ElementMasks", elements);
 }
 
