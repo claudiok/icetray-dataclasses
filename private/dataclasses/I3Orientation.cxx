@@ -20,6 +20,47 @@ I3Orientation::serialize(Archive& ar, unsigned version)
 	ar & make_nvp("Rotation", rot_);
 }
 
+// save XML (in a more human-readable format)
+template <> 
+void 
+I3Orientation::serialize(boost::archive::xml_oarchive& ar, unsigned version)
+{
+  if (version!=i3orientation_version_)
+    log_fatal("Cannot load XML data for I3Orientation from an archive with version %u. Only the current version (%u) is supported.",version,i3orientation_version_);
+
+  ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+
+  // HACK:
+  // not using these as pointers will make boost::serialization tracking
+  // assume they are all the same. It will generate object references in XML
+  // instead of serializing the object.
+  I3DirectionConstPtr dir(new I3Direction(GetDir()));
+  I3DirectionConstPtr right(new I3Direction(GetRight()));
+  I3DirectionConstPtr front(new I3Direction(GetFront()));
+  
+  ar & make_nvp("Direction", *dir);
+  ar & make_nvp("Right", *right);
+  ar & make_nvp("Front", *front);
+}
+
+// load XML
+template <> 
+void 
+I3Orientation::serialize(boost::archive::xml_iarchive& ar, unsigned version)
+{
+  if (version!=i3orientation_version_) 
+    log_fatal("Cannot load XML data for I3Orientation from an archive with version %u. Only the current version (%u) is supported.",version,i3orientation_version_);
+
+  ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+  I3Direction dir, right, front;
+  
+  ar & make_nvp("Direction", dir);
+  ar & make_nvp("Right", right);
+  ar & make_nvp("Front", front);
+  
+  SetOrientation(dir, right); // ignore front
+}
+
 I3_SERIALIZABLE(I3Orientation);
 I3_SERIALIZABLE(I3OrientationVect);
 
