@@ -34,7 +34,7 @@ TEST(coord_change)
 {
 	cout <<"Creating I3Orientation..."<<endl;
 	I3Orientation dir;
-	cout <<"Setting dir: dir=(0,0,1), right=(1,0,0)..."<<endl;
+	cout <<"Setting dir: dir=(0,0,1), up=(1,0,0)..."<<endl;
 	dir.SetOrientation(0.,0.,1., 1.,0.,0.);
 	//ENSURE_DISTANCE(dir.GetZenith()/deg,125.264,0.001,"dir.GetZenith failed");
 	//ENSURE_DISTANCE(dir.GetAzimuth()/deg,-135.0,0.001,"dir.GetAzimuth failed");
@@ -42,7 +42,7 @@ TEST(coord_change)
 	ENSURE_DISTANCE(dir.GetY(),0.0,0.0001,"dir.GetY failed");
 	ENSURE_DISTANCE(dir.GetZ(),1.0,0.0001,"dir.GetZ failed");
 
-	cout <<"Setting dir: dir=(0,1,0), right=(1,0,0)..."<<endl;
+	cout <<"Setting dir: dir=(0,1,0), up=(1,0,0)..."<<endl;
 	dir.SetOrientation(0.,1.,0., 1.,0.,0.);
 	//ENSURE_DISTANCE(dir.GetZenith()/deg,125.264,0.001,"dir.GetZenith failed");
 	//ENSURE_DISTANCE(dir.GetAzimuth()/deg,-135.0,0.001,"dir.GetAzimuth failed");
@@ -50,7 +50,7 @@ TEST(coord_change)
 	ENSURE_DISTANCE(dir.GetY(),1.0,0.0001,"dir.GetY failed");
 	ENSURE_DISTANCE(dir.GetZ(),0.0,0.0001,"dir.GetZ failed");
 
-	cout <<"Setting dir: dir=(1,0,0), right=(0,1,0)..."<<endl;
+	cout <<"Setting dir: dir=(1,0,0), up=(0,1,0)..."<<endl;
 	dir.SetOrientation(1.,0.,0., 0.,1.,0.);
 	//ENSURE_DISTANCE(dir.GetZenith()/deg,125.264,0.001,"dir.GetZenith failed");
 	//ENSURE_DISTANCE(dir.GetAzimuth()/deg,-135.0,0.001,"dir.GetAzimuth failed");
@@ -58,7 +58,7 @@ TEST(coord_change)
 	ENSURE_DISTANCE(dir.GetY(),0.0,0.0001,"dir.GetY failed");
 	ENSURE_DISTANCE(dir.GetZ(),0.0,0.0001,"dir.GetZ failed");
 
-	cout <<"Setting dir: dir=(1,1,1), right=(1,-1,0)..."<<endl;
+	cout <<"Setting dir: dir=(1,1,1), up=(1,-1,0)..."<<endl;
 	dir.SetOrientation(1.,1.,1., -1.,1.,0.);
 	//ENSURE_DISTANCE(dir.GetZenith()/deg,125.264,0.001,"dir.GetZenith failed");
 	//ENSURE_DISTANCE(dir.GetAzimuth()/deg,-135.0,0.001,"dir.GetAzimuth failed");
@@ -140,12 +140,12 @@ TEST(setdir)
 	ENSURE_DISTANCE(d.GetX(),0,0.0001);
 	ENSURE_DISTANCE(d.GetY(),1,0.0001);
 	ENSURE_DISTANCE(d.GetZ(),0,0.0001);
-	ENSURE_DISTANCE(d.GetRightX(),1,0.0001);
+	ENSURE_DISTANCE(d.GetUpX(),1,0.0001);
+	ENSURE_DISTANCE(d.GetUpY(),0,0.0001);
+	ENSURE_DISTANCE(d.GetUpZ(),0,0.0001);
+	ENSURE_DISTANCE(d.GetRightX(),0,0.0001);
 	ENSURE_DISTANCE(d.GetRightY(),0,0.0001);
-	ENSURE_DISTANCE(d.GetRightZ(),0,0.0001);
-	ENSURE_DISTANCE(d.GetFrontX(),0,0.0001);
-	ENSURE_DISTANCE(d.GetFrontY(),0,0.0001);
-	ENSURE_DISTANCE(d.GetFrontZ(),-1,0.0001);
+	ENSURE_DISTANCE(d.GetRightZ(),-1,0.0001);
 	ENSURE_DISTANCE(d.GetZenith(),90*deg,0.0001);
 	ENSURE_DISTANCE(d.GetAzimuth(),(360-90)*deg,0.0001);
 	
@@ -153,9 +153,9 @@ TEST(setdir)
 	ENSURE_DISTANCE(d.GetZ(),1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(d.GetY(),1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(d.GetX(),1./sqrt(3.),0.0001);
-	ENSURE_DISTANCE(d.GetRightX(),-1./sqrt(2.),0.0001);
-	ENSURE_DISTANCE(d.GetRightY(), 1./sqrt(2.),0.0001);
-	ENSURE_DISTANCE(d.GetRightZ(), 0./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpX(),-1./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpY(), 1./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpZ(), 0./sqrt(2.),0.0001);
 	ENSURE_DISTANCE(d.GetZenith(),2.18627,0.0001);
 	ENSURE_DISTANCE(d.GetAzimuth(),225*deg,0.0001);
 	
@@ -163,9 +163,9 @@ TEST(setdir)
 	ENSURE_DISTANCE(d.GetX(),1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(d.GetY(),1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(d.GetZ(),1./sqrt(3.),0.0001);
-	ENSURE_DISTANCE(d.GetRightX(),-1./sqrt(2.),0.0001);
-	ENSURE_DISTANCE(d.GetRightY(), 0./sqrt(2.),0.0001);
-	ENSURE_DISTANCE(d.GetRightZ(), 1./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpX(),-1./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpY(), 0./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpZ(), 1./sqrt(2.),0.0001);
 	ENSURE_DISTANCE(d.GetZenith(),2.18627,0.0001);
 	ENSURE_DISTANCE(d.GetAzimuth(),(360-135)*deg,0.0001);
 
@@ -180,9 +180,9 @@ TEST(setdir)
 	ENSURE_DISTANCE(d.GetX(), 1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(d.GetY(),-1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(d.GetZ(),-1./sqrt(3.),0.0001);
-	ENSURE_DISTANCE(d.GetRightX(), 1./sqrt(2.),0.0001);
-	ENSURE_DISTANCE(d.GetRightY(), 0./sqrt(2.),0.0001);
-	ENSURE_DISTANCE(d.GetRightZ(), 1./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpX(), 1./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpY(), 0./sqrt(2.),0.0001);
+	ENSURE_DISTANCE(d.GetUpZ(), 1./sqrt(2.),0.0001);
 	
 	// check the constructor from I3Direction
 	ddir.SetDirection(1,1,1);

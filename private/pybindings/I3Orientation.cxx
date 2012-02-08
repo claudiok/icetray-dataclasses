@@ -55,6 +55,15 @@ void register_I3Orientation()
 	.def("CalcDirPhi", &I3Orientation::CalcDirPhi)
 	.def("GetDir", &I3Orientation::GetDir)
 
+	.def("GetUpZenith", &I3Orientation::GetUpZenith)
+	.def("GetUpAzimuth", &I3Orientation::GetUpAzimuth)
+	.def("GetUpX", &I3Orientation::GetUpX)
+	.def("GetUpY", &I3Orientation::GetUpY)
+	.def("GetUpZ", &I3Orientation::GetUpZ)
+	.def("CalcUpTheta", &I3Orientation::CalcUpTheta)
+	.def("CalcUpPhi", &I3Orientation::CalcUpPhi)
+	.def("GetUp", &I3Orientation::GetUp)
+
 	.def("GetRightZenith", &I3Orientation::GetRightZenith)
 	.def("GetRightAzimuth", &I3Orientation::GetRightAzimuth)
 	.def("GetRightX", &I3Orientation::GetRightX)
@@ -63,15 +72,6 @@ void register_I3Orientation()
 	.def("CalcRightTheta", &I3Orientation::CalcRightTheta)
 	.def("CalcRightPhi", &I3Orientation::CalcRightPhi)
 	.def("GetRight", &I3Orientation::GetRight)
-
-	.def("GetFrontZenith", &I3Orientation::GetFrontZenith)
-	.def("GetFrontAzimuth", &I3Orientation::GetFrontAzimuth)
-	.def("GetFrontX", &I3Orientation::GetFrontX)
-	.def("GetFrontY", &I3Orientation::GetFrontY)
-	.def("GetFrontZ", &I3Orientation::GetFrontZ)
-	.def("CalcFrontTheta", &I3Orientation::CalcFrontTheta)
-	.def("CalcFrontPhi", &I3Orientation::CalcFrontPhi)
-	.def("GetFront", &I3Orientation::GetFront)
 	;
 	register_pointer_conversions<I3Orientation>();
 }

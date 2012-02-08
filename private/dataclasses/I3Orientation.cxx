@@ -35,12 +35,12 @@ I3Orientation::serialize(boost::archive::xml_oarchive& ar, unsigned version)
   // assume they are all the same. It will generate object references in XML
   // instead of serializing the object.
   I3DirectionConstPtr dir(new I3Direction(GetDir()));
+  I3DirectionConstPtr up(new I3Direction(GetUp()));
   I3DirectionConstPtr right(new I3Direction(GetRight()));
-  I3DirectionConstPtr front(new I3Direction(GetFront()));
   
   ar & make_nvp("Direction", *dir);
+  ar & make_nvp("Up", *up);
   ar & make_nvp("Right", *right);
-  ar & make_nvp("Front", *front);
 }
 
 // load XML
@@ -52,13 +52,13 @@ I3Orientation::serialize(boost::archive::xml_iarchive& ar, unsigned version)
     log_fatal("Cannot load XML data for I3Orientation from an archive with version %u. Only the current version (%u) is supported.",version,i3orientation_version_);
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-  I3Direction dir, right, front;
+  I3Direction dir, up, right;
   
   ar & make_nvp("Direction", dir);
+  ar & make_nvp("Up", up);
   ar & make_nvp("Right", right);
-  ar & make_nvp("Front", front);
   
-  SetOrientation(dir, right); // ignore front
+  SetOrientation(dir, up); // ignore "right"
 }
 
 I3_SERIALIZABLE(I3Orientation);
@@ -72,16 +72,16 @@ I3Orientation::I3Orientation()
 }
 
 //-----------------------------------------------------------
-I3Orientation::I3Orientation(double x_dir, double y_dir, double z_dir, double x_right, double y_right, double z_right)
+I3Orientation::I3Orientation(double x_dir, double y_dir, double z_dir, double x_up, double y_up, double z_up)
 {
 	// Creation of an I3Orientation object and initialization of parameters
-	SetOrientation(x_dir, y_dir, z_dir, x_right, y_right, z_right);
+	SetOrientation(x_dir, y_dir, z_dir, x_up, y_up, z_up);
 }
 
 //-----------------------------------------------------------
-I3Orientation::I3Orientation(const I3Direction &dir, const I3Direction &right)
+I3Orientation::I3Orientation(const I3Direction &dir, const I3Direction &up)
 {
-	SetOrientation(dir.GetX(), dir.GetY(), dir.GetZ(), right.GetX(), right.GetY(), right.GetZ());
+	SetOrientation(dir.GetX(), dir.GetY(), dir.GetZ(), up.GetX(), up.GetY(), up.GetZ());
 }
 
 //-----------------------------------------------------------
@@ -90,8 +90,8 @@ I3Orientation::I3Orientation(const I3Orientation& d)
 	// Copy constructor
 	rot_ = d.rot_;
 	isDirCalculated_=false;
+	isUpCalculated_=false;
 	isRightCalculated_=false;
-	isFrontCalculated_=false;
 }
 
 //-----------------------------------------------------------
@@ -134,35 +134,35 @@ void I3Orientation::SetOrientation(const I3Orientation& d)
 {
 	rot_ = d.rot_;
 	isDirCalculated_=false;
+	isUpCalculated_=false;
 	isRightCalculated_=false;
-	isFrontCalculated_=false;
 }
 
 //-----------------------------------------------------------
 void I3Orientation::SetOrientation(double x_dir, double y_dir, double z_dir, 
-								   double x_right, double y_right, double z_right)
+								   double x_up, double y_up, double z_up)
 {
 	const double del = 0.001;
 	
 	// the vectors must not be too short!
 	const double dir_mag2 = x_dir*x_dir + y_dir*y_dir + z_dir*z_dir;
-	const double right_mag2 = x_right*x_right + y_right*y_right + z_right*z_right;
+	const double up_mag2 = x_up*x_up + y_up*y_up + z_up*z_up;
 	
 	if (dir_mag2 < 1e-6) log_fatal("direction vector (\"dir\") too short! (length should be 1)");
-	if (right_mag2 < 1e-6) log_fatal("direction vector (\"right\") too short! (length should be 1)");
+	if (up_mag2 < 1e-6) log_fatal("direction vector (\"up\") too short! (length should be 1)");
 	
 	// normalize the vectors
 	const double dir_mag = std::sqrt(dir_mag2);
-	const double right_mag = std::sqrt(right_mag2);
-	const double newX_x = x_right / right_mag;
-	const double newX_y = y_right / right_mag;
-	const double newX_z = z_right / right_mag;
+	const double up_mag = std::sqrt(up_mag2);
+	const double newX_x = x_up / up_mag;
+	const double newX_y = y_up / up_mag;
+	const double newX_z = z_up / up_mag;
 	const double newZ_x = x_dir / dir_mag;
 	const double newZ_y = y_dir / dir_mag;
 	const double newZ_z = z_dir / dir_mag;
 	
 	// the vectors must be perpendicular
-	if (newZ_x*newX_x + newZ_y*newX_y + newZ_z*newX_z > del) log_fatal("\"dir\" and \"right\" vectors are not perpendicular!");
+	if (newZ_x*newX_x + newZ_y*newX_y + newZ_z*newX_z > del) log_fatal("\"dir\" and \"up\" vectors are not perpendicular!");
 	
 	// newY = newZ x newX
 	const double newY_x = newZ_y*newX_z - newZ_z*newX_y;
@@ -187,14 +187,14 @@ void I3Orientation::SetOrientation(double x_dir, double y_dir, double z_dir,
 	rot_.set(q[0], q[1], q[2], q[3]); // x,y,z,w
 	
 	isDirCalculated_=false;
+	isUpCalculated_=false;
 	isRightCalculated_=false;
-	isFrontCalculated_=false;
 }
 
 //-----------------------------------------------------------
-void I3Orientation::SetOrientation(const I3Direction &dir, const I3Direction &right)
+void I3Orientation::SetOrientation(const I3Direction &dir, const I3Direction &up)
 {
-	SetOrientation(dir.GetX(), dir.GetY(), dir.GetZ(), right.GetX(), right.GetY(), right.GetZ());
+	SetOrientation(dir.GetX(), dir.GetY(), dir.GetZ(), up.GetX(), up.GetY(), up.GetZ());
 }
 
 void I3Orientation::SetOrientationFromQuaternion(const I3Quaternion &q)
@@ -203,8 +203,8 @@ void I3Orientation::SetOrientationFromQuaternion(const I3Quaternion &q)
 	
 	rot_=q;
 	isDirCalculated_=false;
+	isUpCalculated_=false;
 	isRightCalculated_=false;
-	isFrontCalculated_=false;
 }
 
 //-----------------------------------------------------------
@@ -213,15 +213,15 @@ void I3Orientation::ResetOrientation()
 	// Set or Reset the direction to 0.
 	zDir_=NAN;
 	
-	zRight_=NAN;
+	zUp_=NAN;
 	
-	zFront_=NAN;
+	zRight_=NAN;
 	
 	// set this as "calculated", so that all queries will return NAN
 	// until a correct value is set
 	isDirCalculated_=false;
+	isUpCalculated_=false;
 	isRightCalculated_=false;
-	isFrontCalculated_=false;
 }
 
 //-----------------------------------------------------------
@@ -265,21 +265,21 @@ void I3Orientation::DoCalcDir() const
 }
 
 //-----------------------------------------------------------
-void I3Orientation::DoCalcRight() const
+void I3Orientation::DoCalcUp() const
 {
 	// rotated x-axis
-	rot_.rotatedXAxis(xRight_, yRight_, zRight_);
-	CalcSphFromCar(xRight_, yRight_, zRight_,
-				   zenithRight_, azimuthRight_);
-	isRightCalculated_ = true;
+	rot_.rotatedXAxis(xUp_, yUp_, zUp_);
+	CalcSphFromCar(xUp_, yUp_, zUp_,
+				   zenithUp_, azimuthUp_);
+	isUpCalculated_ = true;
 }
 
 //-----------------------------------------------------------
-void I3Orientation::DoCalcFront() const
+void I3Orientation::DoCalcRight() const
 {
 	// rotated y-axis
-	rot_.rotatedYAxis(xFront_, yFront_, zFront_);
-	CalcSphFromCar(xFront_, yFront_, zFront_,
-				   zenithFront_, azimuthFront_);
-	isFrontCalculated_ = true;
+	rot_.rotatedYAxis(xRight_, yRight_, zRight_);
+	CalcSphFromCar(xRight_, yRight_, zRight_,
+				   zenithRight_, azimuthRight_);
+	isRightCalculated_ = true;
 }

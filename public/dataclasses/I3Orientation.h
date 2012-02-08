@@ -24,8 +24,8 @@ static const unsigned i3orientation_version_ = 0;
  * Stores an orientation. This is more than a direction
  * in that you also include the rotation around the direction
  * axis. Picture the three-finger right hand rule.
- * Your thumb points into the "direction", your index finger points
- * to the "right" and your middle finger to "front".
+ * Your thumb points to "front" (the direction), your index finger points
+ * to "up" and your middle finger to "right".
  */
 class I3Orientation : public I3FrameObject
 	{
@@ -34,14 +34,14 @@ class I3Orientation : public I3FrameObject
 		I3Orientation();
 		
 		/**
-		 * Additional constructor: 6 arguments mean construct dir. with dir(x,y,z) and right(x,y,z)
+		 * Additional constructor: 6 arguments mean construct dir. with dir(x,y,z) and up(x,y,z)
 		 */
-		I3Orientation(double x_dir, double y_dir, double z_dir, double x_right, double y_right, double z_right);
+		I3Orientation(double x_dir, double y_dir, double z_dir, double x_up, double y_up, double z_up);
 		
 		/**
-		 * Additional constructor: 6 arguments mean construct dir. with dir(x,y,z) and right(x,y,z)
+		 * Additional constructor: 6 arguments mean construct dir. with dir(x,y,z) and up(x,y,z)
 		 */
-		I3Orientation(const I3Direction &dir, const I3Direction &right);
+		I3Orientation(const I3Direction &dir, const I3Direction &up);
 		
 		/**
 		 * Copy constructor
@@ -87,19 +87,19 @@ class I3Orientation : public I3FrameObject
 
 		/**
 		 * Store direction from a single direction d
-		 * (this will generate an arbitrary "right" direction)
+		 * (this will generate an arbitrary "up" direction)
 		 */
 		void SetOrientation(const I3Direction& d);
 		
 		/**
 		 * Store direction with x, y, z (3 arguments)
 		 */
-		void SetOrientation(double x_dir, double y_dir, double z_dir, double x_right, double y_right, double z_right);
+		void SetOrientation(double x_dir, double y_dir, double z_dir, double x_up, double y_up, double z_up);
 
 		/**
 		 * Store direction with x, y, z (3 arguments)
 		 */
-		void SetOrientation(const I3Direction &dir, const I3Direction &right);
+		void SetOrientation(const I3Direction &dir, const I3Direction &up);
 
 		/**
 		 * Store direction from a unit quaternion rotation the (0,0,1) vector
@@ -115,7 +115,7 @@ class I3Orientation : public I3FrameObject
 
 		/**
 		 * Rotate a vector inside a coordinate system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0)
-		 * to the system where z-axis==dir, x-axis==right, y-axis==front.
+		 * to the system where z-axis==dir, x-axis==up, y-axis==right.
 		 * This is the in-place version with 3 doubles for x,y,z.
 		 */
 		inline void RotVectorInPlace(double &x, double &y, double &z) const {
@@ -212,6 +212,73 @@ class I3Orientation : public I3FrameObject
 		}
 		
 		/**
+		 * Provide Zenith of "up" direction
+		 */
+		inline double GetUpZenith() const {
+			if (!isUpCalculated_) DoCalcUp();
+			return zenithUp_;
+		}
+		
+		/**
+		 * Provide Azimuth of "up" direction
+		 */
+		inline double GetUpAzimuth() const {
+			if (!isUpCalculated_) DoCalcUp();
+			return azimuthUp_;
+		}
+		
+		/**
+		 * Provide X of "up" direction in cartesian ref frame
+		 */
+		inline double GetUpX() const {
+			if (!isUpCalculated_) DoCalcUp();
+			return xUp_;
+		}
+		
+		/**
+		 * Provide Y of "up" direction in cartesian ref frame
+		 */
+		inline double GetUpY() const {
+			if (!isUpCalculated_) DoCalcUp();
+			return yUp_;
+		}
+		
+		/**
+		 * Provide Z of "Up" direction in cartesian ref frame
+		 */
+		inline double GetUpZ() const {
+			if (!isUpCalculated_) DoCalcUp();
+			return zUp_;
+		}
+		
+		/**
+		 * Calculate "up" direction
+		 */
+		inline I3Direction GetUp() const {
+			if (!isUpCalculated_) DoCalcUp();
+			return I3Direction(zenithUp_, azimuthUp_);
+		}
+		
+		/**
+		 * Calculate Theta of "up" direction
+		 */
+		inline double CalcUpTheta() const {
+			if (!isUpCalculated_) DoCalcUp();
+			double theta = I3Constants::pi - zenithUp_;
+			return theta;
+		}
+		
+		/**
+		 * Calculate Phi of "up" direction
+		 */
+		inline double CalcUpPhi() const {
+			if (!isUpCalculated_) DoCalcUp();
+			double phi = I3Constants::pi + azimuthUp_;
+			if (phi >= 2*I3Constants::pi) phi -= 2*I3Constants::pi;
+			return phi;
+		}
+		
+		/**
 		 * Provide Zenith of "right" direction
 		 */
 		inline double GetRightZenith() const {
@@ -278,73 +345,6 @@ class I3Orientation : public I3FrameObject
 			return phi;
 		}
 		
-		/**
-		 * Provide Zenith of "front" direction
-		 */
-		inline double GetFrontZenith() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			return zenithFront_;
-		}
-		
-		/**
-		 * Provide Azimuth of "front" direction
-		 */
-		inline double GetFrontAzimuth() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			return azimuthFront_;
-		}
-		
-		/**
-		 * Provide X of "front" direction in cartesian ref frame
-		 */
-		inline double GetFrontX() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			return xFront_;
-		}
-		
-		/**
-		 * Provide Y of "front" direction in cartesian ref frame
-		 */
-		inline double GetFrontY() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			return yFront_;
-		}
-		
-		/**
-		 * Provide Z of "front" direction in cartesian ref frame
-		 */
-		inline double GetFrontZ() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			return zFront_;
-		}
-		
-		/**
-		 * Calculate "front" direction
-		 */
-		inline I3Direction GetFront() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			return I3Direction(zenithFront_, azimuthFront_);
-		}
-		
-		/**
-		 * Calculate Theta of "front" direction
-		 */
-		inline double CalcFrontTheta() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			double theta = I3Constants::pi - zenithFront_;
-			return theta;
-		}
-		
-		/**
-		 * Calculate Phi of "front" direction
-		 */
-		inline double CalcFrontPhi() const {
-			if (!isFrontCalculated_) DoCalcFront();
-			double phi = I3Constants::pi + azimuthFront_;
-			if (phi >= 2*I3Constants::pi) phi -= 2*I3Constants::pi;
-			return phi;
-		}
-		
 		//--------------
 		
 		/**
@@ -379,6 +379,15 @@ class I3Orientation : public I3FrameObject
 		mutable double azimuthDir_;	//!
 
 		/**
+		 * direction "up" coordinates
+		 */ 
+		mutable double xUp_;	//!
+		mutable double yUp_;	//!
+		mutable double zUp_;	//!
+		mutable double zenithUp_;	//!
+		mutable double azimuthUp_;	//!
+
+		/**
 		 * direction "right" coordinates
 		 */ 
 		mutable double xRight_;	//!
@@ -386,30 +395,21 @@ class I3Orientation : public I3FrameObject
 		mutable double zRight_;	//!
 		mutable double zenithRight_;	//!
 		mutable double azimuthRight_;	//!
-
-		/**
-		 * direction "right" coordinates
-		 */ 
-		mutable double xFront_;	//!
-		mutable double yFront_;	//!
-		mutable double zFront_;	//!
-		mutable double zenithFront_;	//!
-		mutable double azimuthFront_;	//!
 		
 		/**
 		 * Did we calculate the directions before?
 		 */
 		mutable bool isDirCalculated_;	//!
+		mutable bool isUpCalculated_;	//!
 		mutable bool isRightCalculated_;	//!
-		mutable bool isFrontCalculated_;	//!
 		
 	private:
 		/**
 		 * Calculate all coordinates from the internal rotation
 		 */
 		void DoCalcDir() const;
+		void DoCalcUp() const;
 		void DoCalcRight() const;
-		void DoCalcFront() const;
 		
 		friend class boost::serialization::access;
 		
