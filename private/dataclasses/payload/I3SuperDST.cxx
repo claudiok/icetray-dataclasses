@@ -440,7 +440,7 @@ I3SuperDST::EncodeWidth(double width, unsigned int maxbits,
     unsigned int version)
 {
 	assert(width > 0 && width < double(std::numeric_limits<unsigned>::max()));
-	unsigned rounded = ceil(width/1.0);
+	unsigned rounded = unsigned(ceil(width/1.0));
 	unsigned code = std::min(unsigned(findlastset(rounded)), (1u << maxbits)-1);
 	return (rounded == 1u << (code-1)) ? code-1 : code;
 }
@@ -469,7 +469,7 @@ I3SuperDST::EncodeCharge(double charge, unsigned int maxbits,
 		if (version == 0) {
 			encoded = truncate(charge/0.15, maxbits);
 		} else {
-			encoded = floor(std::max(0., charge)/0.05);	
+			encoded = uint32_t(floor(std::max(0., charge)/0.05));	
 		}
 	}
 
