@@ -27,6 +27,7 @@
 #include <dataclasses/I3Map.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -56,15 +57,18 @@ void register_I3DetectorStatus()
     #define DETECTORSTATUSPROPS (startTime)(endTime)(domStatus)(triggerStatus)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DetectorStatus, DETECTORSTATUSPROPS )
     #undef DETECTORSTATUSPROPS
+    .def_pickle(boost_serializable_pickle_suite<I3DetectorStatus>())
     .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3DOMStatus> >("Map_OMKey_I3DOMStatus")
     .def(std_map_indexing_suite<std::map<OMKey, I3DOMStatus> >())
+    .def_pickle(boost_serializable_pickle_suite<std::map<OMKey, I3DOMStatus> >())
     ;
 
   class_<std::map<TriggerKey, I3TriggerStatus> >("Map_TriggerKey_I3TriggerStatus")
     .def(std_map_indexing_suite<std::map<TriggerKey, I3TriggerStatus> >())
+    .def_pickle(boost_serializable_pickle_suite<std::map<TriggerKey, I3TriggerStatus> >())
     ;
     
   //
@@ -80,6 +84,7 @@ void register_I3DetectorStatus()
       // If we used snake_case, these two would end up as status_atw_da
       .def_readwrite("status_atwd_a", &I3DOMStatus::statusATWDa)
       .def_readwrite("status_atwd_b", &I3DOMStatus::statusATWDb)
+      .def_pickle(boost_serializable_pickle_suite<I3DOMStatus>())
       .def( freeze() )
       ;
 
@@ -143,6 +148,7 @@ void register_I3DetectorStatus()
       .def_readwrite("trigger_name", &I3TriggerStatus::name_)
       .def_readwrite("trigger_settings",&I3TriggerStatus::settings_)
       .def_readwrite("readout_settings",&I3TriggerStatus::readoutconfigs_)
+      .def_pickle(boost_serializable_pickle_suite<I3TriggerStatus>())
       .def( freeze() )
       ;
 
@@ -151,6 +157,7 @@ void register_I3DetectorStatus()
       .def_readwrite("readout_time_minus", &I3TriggerReadoutConfig::readoutTimeMinus)
       .def_readwrite("readout_time_plus", &I3TriggerReadoutConfig::readoutTimePlus)
       .def_readwrite("readout_time_offset", &I3TriggerReadoutConfig::readoutTimeOffset)
+      .def_pickle(boost_serializable_pickle_suite<I3TriggerReadoutConfig>())
       .def( freeze() )
       ;
 
@@ -167,6 +174,7 @@ void register_I3DetectorStatus()
 
   class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
     .def(map_indexing_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
+    .def_pickle(boost_serializable_pickle_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
     ;
   
   register_pointer_conversions<I3DetectorStatus>();

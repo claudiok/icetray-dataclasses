@@ -27,6 +27,7 @@
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -41,11 +42,13 @@ void register_I3Geometry()
     #define GEOMPROPS (omgeo)(stationgeo)(startTime)(endTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Geometry, GEOMPROPS )
     #undef GEOMPROPS
+    .def_pickle(boost_serializable_pickle_suite<I3Geometry>())
     .def( freeze() )
     ;
 
   class_<std::map<OMKey, I3OMGeo> >("Map_OMKey_I3OMGeo")
     .def(std_map_indexing_suite<std::map<OMKey, I3OMGeo> >())
+    .def_pickle(boost_serializable_pickle_suite<std::map<OMKey, I3OMGeo> >())
     ;
 
   {
@@ -57,6 +60,7 @@ void register_I3Geometry()
       #define I3OMGEOPROPS (position)(omtype)(orientation)(area)(aziangle) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3OMGeo, I3OMGEOPROPS )
       #undef I3OMGEOPROPS
+      .def_pickle(boost_serializable_pickle_suite<I3OMGeo>())
       .def( freeze() )
       ;
 
@@ -88,6 +92,7 @@ void register_I3Geometry()
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3TankGeo, TANKGEOPROPS )
       .def_readwrite("omkey_list",&I3TankGeo::omKeyList_)
       #undef TANKGEOPROPS
+      .def_pickle(boost_serializable_pickle_suite<I3TankGeo>())
       .def( freeze() )
       ;
 
@@ -102,10 +107,12 @@ void register_I3Geometry()
   class_<std::vector<I3TankGeo> >("I3StationGeo")
     .def(copy_suite<I3StationGeo>())
     .def(std_vector_indexing_suite<std::vector<I3TankGeo> >())
+    .def_pickle(boost_serializable_pickle_suite<std::vector<I3TankGeo> >())
     ;
 
   class_<std::map<int, I3StationGeo> >("I3StationGeoMap")
     .def(std_map_indexing_suite<std::map<int, I3StationGeo> >())
+    .def_pickle(boost_serializable_pickle_suite<std::map<int, I3StationGeo> >())
     ;
 
   register_pointer_conversions<I3Geometry>();

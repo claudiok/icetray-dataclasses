@@ -27,6 +27,7 @@
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -45,6 +46,7 @@ void register_I3RecoPulse()
     .def(std_vector_indexing_suite<std::vector<I3RecoPulse> >())
     .def(copy_suite<std::vector<I3RecoPulse> >())
     .def("__str__", &stream_to_string<std::vector<I3RecoPulse> >)
+    .def_pickle(boost_serializable_pickle_suite<std::vector<I3RecoPulse> >())
     ;
 
   class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
@@ -55,6 +57,7 @@ void register_I3RecoPulse()
         "format conversions behind the scenes.")
     .staticmethod("from_frame")
     .def("__str__", &stream_to_string<I3RecoPulseSeriesMap>)
+    .def_pickle(boost_serializable_pickle_suite<I3RecoPulseSeriesMap>())
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
 
@@ -66,6 +69,7 @@ void register_I3RecoPulse()
     .def(copy_suite<I3RecoPulse>())
     .def( self == self )
     .def("__str__", &stream_to_string<I3RecoPulse>)
+    .def_pickle(boost_serializable_pickle_suite<I3RecoPulse>())
     .def( freeze() )
     ;
   

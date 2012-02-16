@@ -23,6 +23,7 @@
 
 #include <dataclasses/I3String.h>
 #include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -43,6 +44,7 @@ void register_I3String()
     .def("__repr__",&stream_to_string<I3String>)
     .def("__str__",&stream_to_string<I3String>)
     .def("__len__",i3string_get_length)
+    .def_pickle(boost_serializable_pickle_suite<I3String>())
     .def( freeze() )
     ;
 

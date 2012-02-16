@@ -24,6 +24,7 @@
 #include <dataclasses/physics/I3RecoHit.h>
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -34,15 +35,18 @@ void register_I3RecoHit()
     PROPERTY(I3RecoHit, id, ID)
     PROPERTY(I3RecoHit, source_index, SourceIndex)
     .def(self == self)
+    .def_pickle(boost_serializable_pickle_suite<I3RecoHit>())
     .def( freeze() )
     ;
 
   class_<std::vector<I3RecoHit> >("vector_I3RecoHit")
     .def(std_vector_indexing_suite<std::vector<I3RecoHit> >())
+    .def_pickle(boost_serializable_pickle_suite<std::vector<I3RecoHit> >())
     ;
 
   class_<I3RecoHitSeriesMap, bases<I3FrameObject>, I3RecoHitSeriesMapPtr>("I3RecoHitSeriesMap")
     .def(std_map_indexing_suite<I3RecoHitSeriesMap>())
+    .def_pickle(boost_serializable_pickle_suite<I3RecoHitSeriesMap>())
     ;
   register_pointer_conversions<I3RecoHitSeriesMap>();
 }

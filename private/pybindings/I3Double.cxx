@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/I3Double.h>
+#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -41,6 +42,7 @@ void register_I3Double()
     .def(init<const I3Double&>())
     .def_readwrite("value", &I3Double::value)
     .def("__repr__",i3double_prettyprint)
+    .def_pickle(boost_serializable_pickle_suite<I3Double>())
     .def( freeze() )
     ;
 
