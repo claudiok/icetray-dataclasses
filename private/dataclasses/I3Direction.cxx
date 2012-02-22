@@ -18,16 +18,8 @@ I3Direction::serialize(Archive& ar, unsigned version)
     log_fatal("Attempting to read version %u from file but running version %u of I3Direction class.",version,i3direction_version_);
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-  if (version <= 0) {
-    double zenith, azimuth;
-    ar & make_nvp("Zen", zenith);
-    ar & make_nvp("Azi", azimuth);
-    zenith_=zenith;
-    azimuth_=azimuth;
-  } else {
-    ar & make_nvp("Zen", zenith_);
-    ar & make_nvp("Azi", azimuth_);
-  }
+  ar & make_nvp("Zen", zenith_);
+  ar & make_nvp("Azi", azimuth_);
 }
 
 // save XML
@@ -42,14 +34,14 @@ I3Direction::serialize(boost::archive::xml_oarchive& ar, unsigned version)
   ar & make_nvp("zen", zenith_);
   ar & make_nvp("azi", azimuth_);
 
-  float zenDeg = zenith_/I3Units::deg;
-  float aziDeg = azimuth_/I3Units::deg;
+  double zenDeg = zenith_/I3Units::deg;
+  double aziDeg = azimuth_/I3Units::deg;
   ar & make_nvp("zenDeg", zenDeg);
   ar & make_nvp("aziDeg", aziDeg);
 
-  float dx = GetX();
-  float dy = GetY();
-  float dz = GetZ();
+  double dx = GetX();
+  double dy = GetY();
+  double dz = GetZ();
   ar & make_nvp("dx", dx);
   ar & make_nvp("dy", dy);
   ar & make_nvp("dz", dz);
@@ -69,7 +61,7 @@ I3Direction::serialize(boost::archive::xml_iarchive& ar, unsigned version)
   ar & make_nvp("azi", azimuth_);
 
   // ignore all those fields when reading from XML
-  float dummy;
+  double dummy;
   ar & make_nvp("zenDeg", dummy);
   ar & make_nvp("aziDeg", dummy);
 
@@ -138,8 +130,8 @@ void I3Direction::CalcCarFromSph() const
   // Calculate Cartesian coordinates from Spherical
   // Direction is stored on disk in Spherical coordinates only.
   // theta=pi-zenith and phi=azimuth-pi in these IceCube coordinates.
-  const double theta = I3Constants::pi-static_cast<double>(zenith_);
-  const double phi = static_cast<double>(azimuth_)-I3Constants::pi;
+  const double theta = I3Constants::pi-zenith_;
+  const double phi = azimuth_-I3Constants::pi;
   const double rho = std::sin(theta);
   xDir_ = rho*std::cos(phi);
   yDir_ = rho*std::sin(phi);

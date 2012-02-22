@@ -675,20 +675,10 @@ template <class Archive>
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
 
-    const float x=pos_.GetX();
-    const float y=pos_.GetY();
-    const float z=pos_.GetZ();
-    const float zen=dir_.GetZenith();
-    const float azi=dir_.GetAzimuth();
-    ar & make_nvp("x",x);
-    ar & make_nvp("y",y);
-    ar & make_nvp("z",z);
-    ar & make_nvp("zenith",zen);
-    ar & make_nvp("azimuth",azi);
-
-    //ar & make_nvp("pos",pos_);
-    //ar & make_nvp("dir",dir_);
+    ar & make_nvp("pos",pos_);
+    ar & make_nvp("dir",dir_);
     ar & make_nvp("time",time_);
+
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
@@ -723,36 +713,15 @@ template <class Archive>
     }
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
-    if (version<=5){
-      // these were stored as I3Position/I3Direction
-      ar & make_nvp("pos",pos_);
-      ar & make_nvp("dir",dir_);
 
-      // earlier versions stored these in doubles
-      double t, energy, length, speed;
-      ar & make_nvp("time",t);
-      ar & make_nvp("energy",energy);
-      ar & make_nvp("length",length);
-      ar & make_nvp("speed",speed);
-      time_=t;
-      energy_=energy;
-      length_=length;
-      speed_=speed;
-    }else{
-      float x,y,z,zen,azi;
-      ar & make_nvp("x",x);
-      ar & make_nvp("y",y);
-      ar & make_nvp("z",z);
-      ar & make_nvp("zen",zen);
-      ar & make_nvp("azi",azi);
-      pos_.SetPos(x,y,z);
-      dir_.SetDir(zen,azi);
+    ar & make_nvp("pos",pos_);
+    ar & make_nvp("dir",dir_);
+    
+    ar & make_nvp("time",time_);
+    ar & make_nvp("energy",energy_);
+    ar & make_nvp("length",length_);
+    ar & make_nvp("speed",speed_);
 
-      ar & make_nvp("time",time_);
-      ar & make_nvp("energy",energy_);
-      ar & make_nvp("length",length_);
-      ar & make_nvp("speed",speed_);
-    }
     if(version == 0)
       ar & make_nvp("composite",composite_);
     if(version>0)

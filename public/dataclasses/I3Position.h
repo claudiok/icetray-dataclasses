@@ -31,7 +31,7 @@
  * @todo implement "print out" of all information in a uniform way...
  * @todo insure that the temporary data isn't written to disk.
  */
-static const unsigned i3position_version_ = 1;
+static const unsigned i3position_version_ = 0;
 
 class I3Position : public I3FrameObject
 {
@@ -64,7 +64,7 @@ class I3Position : public I3FrameObject
   /**
    * Additional constructor
    */
-  I3Position(float x, float y, float z):
+  I3Position(double x, double y, double z):
   x_(x),
   y_(y),
   z_(z),
@@ -97,11 +97,11 @@ class I3Position : public I3FrameObject
   /**
    * Store position r in cartesian ref frame
    */
-  inline void SetPosition(float x, float y, float z) {
+  inline void SetPosition(double x, double y, double z) {
     x_=x; y_=y; z_=z;
     isCalculated_=false;
   }
-  inline void SetPos(float x, float y, float z) {
+  inline void SetPos(double x, double y, double z) {
     SetPosition(x, y, z);
   }
 
@@ -133,17 +133,17 @@ class I3Position : public I3FrameObject
   /**
    * Provide X of position in cartesian ref frame
    */
-  inline float GetX() const {return x_;}
+  inline double GetX() const {return x_;}
 
   /**
    * Provide Y of position in cartesian ref frame
    */
-  inline float GetY() const {return y_;}
+  inline double GetY() const {return y_;}
 
   /**
    * Provide Z of position in cartesian ref frame
    */
-  inline float GetZ() const {return z_;}
+  inline double GetZ() const {return z_;}
 
   /**
    * Provide R of position in spherical ref frame
@@ -186,7 +186,7 @@ class I3Position : public I3FrameObject
   /**
    * Set X position while keeping Y,Z constant.  Recalculate SPH and CYL.
    */
-  inline void SetX(float x) {
+  inline void SetX(double x) {
     x_=x;
     isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
@@ -194,7 +194,7 @@ class I3Position : public I3FrameObject
   /**
    * Set Y position while keeping X,Z constant.  Recalculate SPH and CYL.
    */
-  inline void SetY(float y) {
+  inline void SetY(double y) {
     y_=y;
     isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
@@ -202,7 +202,7 @@ class I3Position : public I3FrameObject
   /**
    * Set Z position while keeping X,Y constant.  Recalculate SPH and CYL.
    */
-  inline void SetZ(float z) {
+  inline void SetZ(double z) {
     z_=z;
     isCalculated_=false; // when accessing CYL/SPH, they will be recalculated
   }
@@ -245,9 +245,9 @@ class I3Position : public I3FrameObject
   /**
    * cartesian (car)
    */ 
-  float x_;
-  float y_;
-  float z_;
+  double x_;
+  double y_;
+  double z_;
 
   /**
    * spherical (sph)

@@ -21,7 +21,7 @@
 #include "Utility.h"
 #include <dataclasses/I3Vector.h>
 
-static const unsigned i3direction_version_ = 1;
+static const unsigned i3direction_version_ = 0;
 
 /**
  * @brief The basic direction class for IceCube. 
@@ -68,7 +68,7 @@ class I3Direction : public I3FrameObject
   /**
    * Additional constructor: 2 arguments mean construct dir. with zen,azi
    */
-  I3Direction(float zen, float azi):
+  I3Direction(double zen, double azi):
   zenith_(zen),
   azimuth_(azi),
   isCalculated_(false)
@@ -92,7 +92,7 @@ class I3Direction : public I3FrameObject
   /**
    * Store direction with zen and azi (2 arguments)
    */
-  inline void SetDirection(float zen, float azi) {
+  inline void SetDirection(double zen, double azi) {
     zenith_=zen; azimuth_=azi; isCalculated_=false;
   }
   inline void SetDir(double zen, double azi) { SetDirection(zen, azi); }
@@ -131,12 +131,12 @@ class I3Direction : public I3FrameObject
   /**
    * Provide Zenith of direction
    */
-  inline float GetZenith() const {return zenith_;}
+  inline double GetZenith() const {return zenith_;}
 
   /**
    * Provide Azimuth of direction
    */
-  inline float GetAzimuth() const {return azimuth_;}
+  inline double GetAzimuth() const {return azimuth_;}
 
   /**
    * Provide X of direction in cartesian ref frame
@@ -201,8 +201,8 @@ class I3Direction : public I3FrameObject
   /**
    * direction coordinates -- spherical
    */ 
-  float zenith_;
-  float azimuth_;
+  double zenith_;
+  double azimuth_;
 
   /**
    * direction coordinates -- cartesian (direction cosines)

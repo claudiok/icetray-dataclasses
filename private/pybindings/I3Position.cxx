@@ -35,7 +35,7 @@ tuple i3position_to_tuple(const I3Position& p)
 
 unsigned i3position_len(const I3Position&) { return 3; }
 
-float i3position_getitem(const I3Position& self, unsigned index) 
+double i3position_getitem(const I3Position& self, unsigned index) 
 { 
   switch(index)
     {
@@ -50,7 +50,7 @@ float i3position_getitem(const I3Position& self, unsigned index)
     }
 }
 
-void i3position_setitem(I3Position& self, unsigned index, float value) 
+void i3position_setitem(I3Position& self, unsigned index, double value) 
 { 
   switch(index)
     {
@@ -74,7 +74,7 @@ void register_I3Position()
     class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >
     ("I3Position",
      "I3Position objects can subscripted like 5-element arrays (x, y, z, theta, phi) and converted to tuples and lists")
-    .def(init<float,float,float>())
+    .def(init<double,double,double>())
     .def(init<double,double,double,I3Position::RefFrame>())
     PROPERTY(I3Position, x, X)
     PROPERTY(I3Position, y, Y)

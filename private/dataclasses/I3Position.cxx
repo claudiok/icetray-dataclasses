@@ -21,19 +21,9 @@ I3Position::serialize(Archive& ar, unsigned version)
     log_fatal("Attempting to read version %u from file but running version %u of I3Position class.",version,i3position_version_);
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-  if (version <= 0) {
-    double x,y,z;
-    ar & make_nvp("X", x);
-    ar & make_nvp("Y", y);
-    ar & make_nvp("Z", z);
-    x_=x;
-    y_=y;
-    z_=z;
-  } else {
-    ar & make_nvp("X", x_);
-    ar & make_nvp("Y", y_);
-    ar & make_nvp("Z", z_);
-  }
+  ar & make_nvp("X", x_);
+  ar & make_nvp("Y", y_);
+  ar & make_nvp("Z", z_);
 }
 
 I3_SERIALIZABLE(I3Position);
@@ -118,14 +108,14 @@ void I3Position::CalcSphCylFromCar() const
   // Position is stored on disk in Cartesian coordinates only
   r_=std::sqrt(x_*x_+y_*y_+z_*z_);
   theta_=0;
-  if ((r_!=0.) && std::abs(static_cast<double>(z_)/r_)<=1.) {
-    theta_=std::acos(static_cast<double>(z_)/r_);
+  if ((r_!=0.) && std::abs(z_/r_)<=1.) {
+    theta_=std::acos(z_/r_);
   } else {
     if (z_<0.) theta_=pi;
   }
   if (theta_<0.) theta_+=2.*pi;
   phi_=0;
-  if ((x_!=0.f) || (y_!=0.f)) phi_=std::atan2(static_cast<double>(y_),static_cast<double>(x_));
+  if ((x_!=0.f) || (y_!=0.f)) phi_=std::atan2(y_,x_);
   if (phi_<0.) phi_+=2.*pi;
   rho_=r_*std::sin(theta_);
   isCalculated_=true;
@@ -146,11 +136,11 @@ void I3Position::CalcCarCylFromSph()
 void I3Position::CalcCarSphFromCyl()
 {
   // Calculate Cartesian and Spherical coordinates from Cylindrical
-  r_=std::sqrt(rho_*rho_+static_cast<double>(z_)*static_cast<double>(z_));
+  r_=std::sqrt(rho_*rho_+z_*z_);
   if (phi_<0.) phi_+=2.*pi;
   theta_=0;
-  if ((r_!=0.) && std::abs(static_cast<double>(z_)/r_)<=1.) {
-    theta_=std::acos(static_cast<double>(z_)/r_);
+  if ((r_!=0.) && std::abs(z_/r_)<=1.) {
+    theta_=std::acos(z_/r_);
   } else {
     if (z_<0.) theta_=pi;
   }
