@@ -26,6 +26,7 @@
 #include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/preprocessor/cat.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 #include <icetray/python/stream_to_string.hpp>
 #include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
@@ -55,6 +56,7 @@ void register_I3Particle()
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
 					  (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir ) 
       .def("shift_along_track", &I3Particle::ShiftAlongTrack)
+      .def(copy_suite<I3Particle>())													 
       .def_pickle(boost_serializable_pickle_suite<I3Particle>())
       .def( freeze() )
       .def("__str__", &stream_to_string<I3Particle>)
