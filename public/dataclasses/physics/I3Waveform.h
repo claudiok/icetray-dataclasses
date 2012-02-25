@@ -226,7 +226,9 @@ class I3Waveform
    * SetHLC to switch HLC flag on or off.
    */
 #ifndef __CINT__
+#ifndef DISABLE_SETSOURCE_DEPRECIATION_WARNING
   __attribute__ ((deprecated))
+#endif
 #endif // __CINT__
   void SetSource(Source source) { source_.fields.source = source; }
 

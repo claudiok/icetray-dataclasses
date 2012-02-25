@@ -21,7 +21,11 @@
 
 #include <vector>
 
+// temporarily disable depreciation warnings for SetSource when building the python bindings:
+#define DISABLE_SETSOURCE_DEPRECIATION_WARNING
 #include <dataclasses/physics/I3Waveform.h>
+#undef DISABLE_SETSOURCE_DEPRECIATION_WARNING
+
 #include <icetray/python/std_map_indexing_suite.hpp>
 #include <icetray/python/std_vector_indexing_suite.hpp>
 #include <icetray/python/copy_suite.hpp>
