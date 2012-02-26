@@ -7,9 +7,6 @@
 #include <cmath>
 #include <icetray/I3Units.h>
 
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-
 template <class Archive> 
 void 
 I3Direction::serialize(Archive& ar, unsigned version)

@@ -16,6 +16,9 @@
 #include <map>
 #include <string>
 
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+
 #ifndef __CINT__
 #include <boost/bimap/bimap.hpp>
 #include <boost/bimap/multiset_of.hpp>
@@ -474,6 +477,10 @@ class I3Particle : public I3FrameObject
   static int32_t ConvertToPdgEncoding(ParticleType);
 
 };
+
+// template specialization for XML i/o
+template<> void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const;
+template<> void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version);
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs);
 

@@ -21,6 +21,9 @@
 #include "Utility.h"
 #include <dataclasses/I3Vector.h>
 
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+
 static const unsigned i3direction_version_ = 0;
 
 /**
@@ -238,6 +241,10 @@ class I3Direction : public I3FrameObject
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 };
+
+// template specialization for XML i/o
+template<> void I3Direction::serialize(boost::archive::xml_oarchive& ar, unsigned version);
+template<> void I3Direction::serialize(boost::archive::xml_iarchive& ar, unsigned version);
 
 inline bool operator==(const I3Direction& lhs, const I3Direction& rhs)
 {

@@ -10,9 +10,6 @@
 #include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/lexical_cast.hpp>
 
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
-
 int I3Particle::global_minor_id_ = 0;
 uint64_t I3Particle::global_major_id_ = 0;
 
