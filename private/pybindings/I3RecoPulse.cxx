@@ -23,11 +23,7 @@
 
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <icetray/I3Frame.h>
-#include <icetray/python/std_map_indexing_suite.hpp>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/copy_suite.hpp>
-#include <icetray/python/stream_to_string.hpp>
-#include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -43,21 +39,15 @@ from_frame(I3Frame &frame, const std::string &name)
 void register_I3RecoPulse()
 {
   class_<std::vector<I3RecoPulse> >("vector_I3RecoPulse")
-    .def(std_vector_indexing_suite<std::vector<I3RecoPulse> >())
-    .def(copy_suite<std::vector<I3RecoPulse> >())
-    .def("__str__", &stream_to_string<std::vector<I3RecoPulse> >)
-    .def_pickle(boost_serializable_pickle_suite<std::vector<I3RecoPulse> >())
+    .def(dataclass_suite<std::vector<I3RecoPulse> >())
     ;
 
   class_<I3RecoPulseSeriesMap, bases<I3FrameObject>, I3RecoPulseSeriesMapPtr>("I3RecoPulseSeriesMap")
-    .def(std_map_indexing_suite<I3RecoPulseSeriesMap>())
-    .def(copy_suite<I3RecoPulseSeriesMap>())
+    .def(dataclass_suite<I3RecoPulseSeriesMap>())
     .def("from_frame", &from_frame, args("frame", "key"),
         "Get an I3RecoPulseSeriesMap from the frame, performing any necessary "
         "format conversions behind the scenes.")
     .staticmethod("from_frame")
-    .def("__str__", &stream_to_string<I3RecoPulseSeriesMap>)
-    .def_pickle(boost_serializable_pickle_suite<I3RecoPulseSeriesMap>())
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
 
@@ -66,11 +56,8 @@ void register_I3RecoPulse()
     #define PROPS (Time)(Charge)(Width)(Flags)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3RecoPulse, PROPS)
     #undef PROPS
-    .def(copy_suite<I3RecoPulse>())
+    .def(dataclass_suite<I3RecoPulse>())
     .def( self == self )
-    .def("__str__", &stream_to_string<I3RecoPulse>)
-    .def_pickle(boost_serializable_pickle_suite<I3RecoPulse>())
-    .def( freeze() )
     ;
   
   enum_<I3RecoPulse::PulseFlags>("PulseFlags")

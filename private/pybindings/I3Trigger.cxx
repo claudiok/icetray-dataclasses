@@ -24,10 +24,7 @@
 #include <dataclasses/physics/I3Trigger.h>
 #include <dataclasses/physics/I3TriggerHierarchy.h>
 #include <dataclasses/I3Vector.h>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/tree_indexing_suite.hpp>
-#include <icetray/python/stream_to_string.hpp>
-#include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -77,10 +74,9 @@ void register_I3Trigger()
       PROPERTY(I3Trigger, fired, TriggerFired)
       // force copy of trigkey via standalone fn
       .add_property("key", get_trigkey, set_trigkey,"Get TriggerKey")
-      .def("__str__", &stream_to_string<I3Trigger>)
       .def( self == self )
       .def( self != self )
-      .def_pickle(boost_serializable_pickle_suite<I3Trigger>())
+      .def(dataclass_suite<I3Trigger>())
       .def( freeze() )
       ;
 
@@ -136,25 +132,20 @@ void register_I3Trigger()
     .def(self <= self)
     .def(self == self)
     .def(self != self)
-    .def_pickle(boost_serializable_pickle_suite<TriggerKey>())
-    .def( freeze() )
+    .def(dataclass_suite<TriggerKey>())
     ;
     
   class_<I3TriggerHierarchy, bases<I3FrameObject>, I3TriggerHierarchyPtr>("I3TriggerHierarchy")
-    .def("__str__", &stream_to_string<I3TriggerHierarchy>)
     .def("__len__", &length)
     .def("__iter__", bp::iterator<I3TriggerHierarchy>())
     .def("insert",&I3TriggerHierarchyUtils::Insert)
     .def("from_frame", &from_frame)
     .staticmethod("from_frame")
-    .def(bp::tree_indexing_suite<I3TriggerHierarchy>())
-    .def_pickle(boost_serializable_pickle_suite<I3TriggerHierarchy>())
+    .def(dataclass_suite<I3TriggerHierarchy>())
     ;
 
   class_<I3VectorI3Trigger, bases<I3FrameObject>, shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
-    .def(std_vector_indexing_suite<I3VectorI3Trigger >())
-    .def("__str__", &stream_to_string< I3VectorI3Trigger >)
-    .def_pickle(boost_serializable_pickle_suite<I3VectorI3Trigger>())
+    .def(dataclass_suite<I3VectorI3Trigger >())
     ;
 
   register_pointer_conversions<I3VectorI3Trigger>();

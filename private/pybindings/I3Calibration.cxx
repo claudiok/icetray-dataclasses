@@ -22,10 +22,8 @@
 #include <vector>
 
 #include <dataclasses/calibration/I3Calibration.h>
-#include <icetray/python/std_map_indexing_suite.hpp>
-#include <icetray/python/copy_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <icetray/python/indexed_property.hpp>
-#include <icetray/python/boost_serializable_pickle_suite.hpp>
 
 using namespace boost::python;
 
@@ -36,19 +34,16 @@ void register_I3Calibration()
     #define I3CALPROPS (startTime)(endTime)(domCal)(vemCal)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Calibration, I3CALPROPS)
     #undef I3CALPROPS
-    .def_pickle(boost_serializable_pickle_suite<I3Calibration>())
-    .def( freeze() )
+    .def(dataclass_suite<I3Calibration>())
     ;
 
   class_<std::map<OMKey, I3DOMCalibration> >("Map_OMKey_I3DOMCalibration")
-    .def(std_map_indexing_suite<std::map<OMKey, I3DOMCalibration> >())
-    .def_pickle(boost_serializable_pickle_suite<std::map<OMKey, I3DOMCalibration> >())
+    .def(dataclass_suite<std::map<OMKey, I3DOMCalibration> >())
     ;
 
   //=======================================================================
   class_<std::map<OMKey, I3VEMCalibration> >("Map_OMKey_I3VEMCalibration")
-    .def(std_map_indexing_suite<std::map<OMKey, I3VEMCalibration> >())
-    .def_pickle(boost_serializable_pickle_suite<std::map<OMKey, I3VEMCalibration> >())
+    .def(dataclass_suite<std::map<OMKey, I3VEMCalibration> >())
     ;
   //=======================================================================
 
@@ -61,8 +56,7 @@ void register_I3Calibration()
     class_<LinearFit>("LinearFit")
       .def_readwrite("slope", &LinearFit::slope)
       .def_readwrite("intercept", &LinearFit::intercept)
-      .def_pickle(boost_serializable_pickle_suite<LinearFit>())
-      .def( freeze() )
+      .def(dataclass_suite<LinearFit>())
       ;
 
     class_<I3VEMCalibration>("I3VEMCalibration")
@@ -70,16 +64,14 @@ void register_I3Calibration()
       #define I3VEMCALPROPS (pePerVEM)(muPeakWidth)(hglgCrossOver)(corrFactor) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3VEMCalibration, I3VEMCALPROPS)
       #undef I3VEMCALPROPS
-      .def_pickle(boost_serializable_pickle_suite<I3VEMCalibration>())
-      .def( freeze() )
+      .def(dataclass_suite<I3VEMCalibration>())
       ;
 
     class_<QuadraticFit>("QuadraticFit")
       .def_readwrite("quad_fit_a", &QuadraticFit::quadFitA)
       .def_readwrite("quad_fit_b", &QuadraticFit::quadFitB)
       .def_readwrite("quad_fit_v", &QuadraticFit::quadFitC)
-      .def_pickle(boost_serializable_pickle_suite<QuadraticFit>())
-      .def( freeze() )
+      .def(dataclass_suite<QuadraticFit>())
       ;
 
     class_<TauParam>("TauParam")
@@ -90,8 +82,7 @@ void register_I3Calibration()
       .def_readwrite("p4", &TauParam::P4)
       .def_readwrite("p5", &TauParam::P5)
       .def_readwrite("tau_frac", &TauParam::TauFrac)
-      .def_pickle(boost_serializable_pickle_suite<TauParam>())
-      .def( freeze() )
+      .def(dataclass_suite<TauParam>())
       ;
 	  
     class_<SPETemplate>("SPETemplate")

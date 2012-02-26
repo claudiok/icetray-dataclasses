@@ -21,16 +21,14 @@
 
 #include <vector>
 #include <dataclasses/physics/I3MCList.h>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
 void register_I3MCList()
 {
   class_<I3MCList,bases<I3FrameObject>, I3MCListPtr>("I3MCList")
-    .def(std_vector_indexing_suite<I3MCList>())
-    .def_pickle(boost_serializable_pickle_suite<I3MCList>())
+    .def(dataclass_suite<I3MCList>())
     ;
   register_pointer_conversions<I3MCList>();
 }

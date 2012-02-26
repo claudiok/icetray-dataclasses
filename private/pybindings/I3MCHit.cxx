@@ -22,9 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3MCHit.h>
-#include <icetray/python/std_map_indexing_suite.hpp>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
@@ -40,8 +38,7 @@ void register_I3MCHit()
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
       #undef PROPERTIES
       #undef RO_PROPERTIES
-      .def_pickle(boost_serializable_pickle_suite<I3MCHit>())
-      .def( freeze() )
+      .def(dataclass_suite<I3MCHit>())
       ;
 
     enum_<I3MCHit::HitSource>("I3MCHitSource")
@@ -59,21 +56,15 @@ void register_I3MCHit()
   }
 
   class_<std::map<OMKey, I3MCHit> >("map_OMKey_I3MCHit")
-    .def(std_map_indexing_suite<std::map<OMKey, I3MCHit> >())
-    .def_pickle(boost_serializable_pickle_suite<std::map<OMKey, I3MCHit> >())
-    .def( freeze() )
+    .def(dataclass_suite<std::map<OMKey, I3MCHit> >())
     ;
 
   class_<std::vector<I3MCHit> >("vector_I3MCHit")
-    .def(std_vector_indexing_suite<std::vector<I3MCHit> >())
-    .def_pickle(boost_serializable_pickle_suite<std::vector<I3MCHit> >())
-    .def( freeze() )
+    .def(dataclass_suite<std::vector<I3MCHit> >())
     ;
 
   class_<I3MCHitSeriesMap, bases<I3FrameObject>, I3MCHitSeriesMapPtr>("I3MCHitSeriesMap")
-    .def(std_map_indexing_suite<I3MCHitSeriesMap>())
-    .def_pickle(boost_serializable_pickle_suite<I3MCHitSeriesMap>())
-    .def( freeze() )
+    .def(dataclass_suite<I3MCHitSeriesMap>())
     ;
   
   register_pointer_conversions<I3MCHitSeriesMap>();

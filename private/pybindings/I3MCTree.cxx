@@ -26,7 +26,7 @@
 #include "mctree/I3MCTreeUtils.h"
 #include "mctree/I3MCTreeTools.h"
 #include "mctree/BaseClassMethods.h"
-#include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
@@ -97,8 +97,7 @@ void register_I3MCTree()
       #define BARE_PROPS (NCascades) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
       #undef BARE_PROPS
-      .def_pickle(boost_serializable_pickle_suite<I3MCTree>())
-      .def( freeze() )      
+      .def(dataclass_suite<I3MCTree>())
       ;
 
     enum_<NuEventType>("NuEventType")
