@@ -478,9 +478,11 @@ class I3Particle : public I3FrameObject
 
 };
 
+#ifndef __CINT__
 // template specialization for XML i/o
 template<> void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const;
 template<> void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version);
+#endif
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs);
 

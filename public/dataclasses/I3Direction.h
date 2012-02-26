@@ -244,9 +244,11 @@ class I3Direction : public I3FrameObject
   void serialize(Archive& ar, unsigned version);
 };
 
+#ifndef __CINT__
 // template specialization for XML i/o
 template<> void I3Direction::serialize(boost::archive::xml_oarchive& ar, unsigned version);
 template<> void I3Direction::serialize(boost::archive::xml_iarchive& ar, unsigned version);
+#endif
 
 inline bool operator==(const I3Direction& lhs, const I3Direction& rhs)
 {
