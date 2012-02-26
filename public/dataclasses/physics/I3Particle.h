@@ -16,10 +16,10 @@
 #include <map>
 #include <string>
 
+#ifndef __CINT__
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 
-#ifndef __CINT__
 #include <boost/bimap/bimap.hpp>
 #include <boost/bimap/multiset_of.hpp>
 #endif

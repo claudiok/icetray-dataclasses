@@ -21,8 +21,10 @@
 #include "Utility.h"
 #include <dataclasses/I3Vector.h>
 
+#ifndef __CINT__
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#endif
 
 static const unsigned i3direction_version_ = 0;
 
