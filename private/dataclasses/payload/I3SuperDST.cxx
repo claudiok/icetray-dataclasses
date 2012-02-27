@@ -756,6 +756,16 @@ namespace I3SuperDSTUtils {
 				size_ |= (size_t(bytes[i]) << (i*8));
 		}
 	}
+
+}
+
+I3_SPLIT_SERIALIZABLE(I3SuperDSTUtils::SizeCodec);
+
+template <class Archive>
+void
+I3SuperDST::save(Archive& ar, unsigned version) const
+{
+	save(ar, version, NULL);
 }
 
 template <class Archive>
@@ -1217,11 +1227,5 @@ I3SuperDST::load(Archive& ar, unsigned version)
 	return;
 }
 
-I3_SERIALIZABLE(I3SuperDST);
+I3_SPLIT_SERIALIZABLE(I3SuperDST);
 
-// explicitly instantiate serialization functions to avoid linker errors
-// when compiling superdst-test
-template void I3SuperDSTUtils::SizeCodec::save(boost::archive::portable_binary_oarchive&, unsigned) const;
-template void I3SuperDSTUtils::SizeCodec::load(boost::archive::portable_binary_iarchive&, unsigned);
-template void I3SuperDSTUtils::SizeCodec::load(boost::archive::xml_iarchive&, unsigned);
-template void I3SuperDSTUtils::SizeCodec::save(boost::archive::xml_oarchive&, unsigned) const;

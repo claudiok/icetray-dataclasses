@@ -840,6 +840,6 @@ std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
 }
 
 
-I3_SERIALIZABLE(I3Particle);
+I3_SPLIT_SERIALIZABLE(I3Particle);
 
 I3_SERIALIZABLE(I3ParticleVect);

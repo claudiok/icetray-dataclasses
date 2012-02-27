@@ -44,8 +44,7 @@ void I3Waveform::StatusCompound::load(Archive& ar, unsigned version)
   }
 }
 
-I3_SERIALIZABLE(I3Waveform::StatusCompound);
-template void I3Waveform::StatusCompound::save(boost::archive::portable_binary_oarchive&, unsigned) const;
+I3_SPLIT_SERIALIZABLE(I3Waveform::StatusCompound);
 
 unsigned I3Waveform::GetStatus(const vector<StatusCompound>& waveformInfo)
 {
@@ -166,6 +165,6 @@ std::ostream& operator<<(std::ostream& oss, const I3Waveform::StatusCompound& wf
   return oss;
 }
 
-I3_SERIALIZABLE(I3Waveform);
+I3_SPLIT_SERIALIZABLE(I3Waveform);
 
 I3_SERIALIZABLE(I3WaveformSeriesMap);

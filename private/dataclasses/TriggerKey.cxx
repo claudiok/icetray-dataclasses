@@ -198,4 +198,4 @@ std::ostream& operator<<(std::ostream& oss, const TriggerKey& k){
 }
 
   
-I3_SERIALIZABLE(TriggerKey);
+I3_SPLIT_SERIALIZABLE(TriggerKey);

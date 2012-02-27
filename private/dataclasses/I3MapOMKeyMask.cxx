@@ -622,4 +622,4 @@ I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 	ar & make_nvp("ElementMasks", elements);
 }
 
-I3_SERIALIZABLE(I3RecoPulseSeriesMapMask);
+I3_SPLIT_SERIALIZABLE(I3RecoPulseSeriesMapMask);
