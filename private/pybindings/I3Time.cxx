@@ -27,9 +27,8 @@
 #include <dataclasses/I3Time.h>
 #include <Python.h>
 #include <datetime.h>
-#include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
-
 
 using namespace boost::python;
 
@@ -145,7 +144,7 @@ void register_I3Time()
     .def(self>self)
     .def(self<=self)
     .def(self>=self)
-    .def( freeze() )
+    .def(dataclass_suite<I3Time>())
     ;
 
 

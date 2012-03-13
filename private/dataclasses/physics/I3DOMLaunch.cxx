@@ -281,6 +281,6 @@ std::ostream& operator<<(std::ostream& oss, const I3DOMLaunch& d)
 }
 
 
-I3_SERIALIZABLE(I3DOMLaunch);
+I3_SPLIT_SERIALIZABLE(I3DOMLaunch);
 
 I3_SERIALIZABLE(I3DOMLaunchSeriesMap);

@@ -77,7 +77,15 @@ class I3Orientation : public I3FrameObject
 			SetOrientation(d);
 			return (*this);
 		}
-		
+
+        /**
+		 * Test for equality
+		 */
+		inline bool operator==(const I3Orientation& other) const
+		{
+            return (rot_ == other.rot_);
+		}
+
 		//--------------
 		
 		/**
@@ -121,7 +129,35 @@ class I3Orientation : public I3FrameObject
 		inline void RotVectorInPlace(double &x, double &y, double &z) const {
 			rot_.rot3VectorInPlace(x,y,z);
 		}
-		
+
+        /**
+		 * Rotate a vector inside a coordinate system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0)
+		 * to the system where z-axis==dir, x-axis==up, y-axis==right.
+		 */
+		inline I3Position Rotate(const I3Position& pos) const {
+            double x=pos.GetX();
+            double y=pos.GetY();
+            double z=pos.GetZ();
+            
+			RotVectorInPlace(x,y,z);
+            
+            return I3Position(x,y,z);
+		}
+
+        /**
+		 * Rotate a vector inside a coordinate system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0)
+		 * to the system where z-axis==dir, x-axis==up, y-axis==right.
+		 */
+		inline I3Direction Rotate(const I3Direction& dir) const {
+            double x=dir.GetX();
+            double y=dir.GetY();
+            double z=dir.GetZ();
+            
+			RotVectorInPlace(x,y,z);
+            
+            return I3Direction(x,y,z);
+		}
+
 		//--------------
 		
 		/**

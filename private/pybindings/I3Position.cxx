@@ -22,7 +22,7 @@
 #include <vector>
 
 #include <dataclasses/I3Position.h>
-#include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -88,7 +88,7 @@ void register_I3Position()
     .def("__len__", i3position_len)
     .def("__getitem__", i3position_getitem)
     .def("__setitem__", i3position_setitem)
-    .def( freeze() )
+    .def(dataclass_suite<I3Position>())
     ;
 
   enum_<I3Position::RefFrame>("RefFrame")

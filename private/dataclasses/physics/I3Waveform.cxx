@@ -13,7 +13,6 @@ using namespace boost::lambda;
 
 I3Waveform::StatusCompound::~StatusCompound() {}
 
-
 template <class Archive>
 void I3Waveform::StatusCompound::save(Archive& ar, unsigned version) const
 {
@@ -45,9 +44,7 @@ void I3Waveform::StatusCompound::load(Archive& ar, unsigned version)
   }
 }
 
-
-I3_SERIALIZABLE(I3Waveform::StatusCompound);
-
+I3_SPLIT_SERIALIZABLE(I3Waveform::StatusCompound);
 
 unsigned I3Waveform::GetStatus(const vector<StatusCompound>& waveformInfo)
 {
@@ -151,6 +148,23 @@ std::ostream& operator<<(std::ostream& oss, const I3Waveform& wf)
   return oss;
 }
 
-I3_SERIALIZABLE(I3Waveform);
+std::ostream& operator<<(std::ostream& oss, const I3Waveform::StatusCompound& wf)
+{
+  std::string srcstr;
+  if (wf.GetStatus() == I3Waveform::VIRGINAL) srcstr.append("VIRGINAL ");
+  if (wf.GetStatus() == I3Waveform::COMBINED) srcstr.append("COMBINED ");
+  if (wf.GetStatus() == I3Waveform::SATURATED) srcstr.append("SATURATED ");
+  if (wf.GetStatus() == I3Waveform::UNDERSHOT) srcstr.append("UNDERSHOT ");
+
+  oss << "[ I3Waveform::StatusCompound  :: " << std::endl
+      << "                        Range : " << wf.GetInterval().first << "--" << wf.GetInterval().second << std::endl
+      << "                      Channel : " << wf.GetChannel() << std::endl
+      << "                       Status : " << srcstr << std::endl
+      << "]" ;
+  
+  return oss;
+}
+
+I3_SPLIT_SERIALIZABLE(I3Waveform);
 
 I3_SERIALIZABLE(I3WaveformSeriesMap);

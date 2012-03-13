@@ -442,14 +442,14 @@ class I3DOMCalibration {
     
   private:
     double SPEPulseShape(double t) const {
-      return pulse.c*pow(exp(-(t - pulse.x0)/pulse.b1) + 
-                         exp((t - pulse.x0)/pulse.b2),-8.0);
+      return pulse.c/std::pow(exp(-(t - pulse.x0)/pulse.b1) + 
+                         exp((t - pulse.x0)/pulse.b2),8);
     }
     
     double DroopReactionShape(double t, double tau) const{
-      return (pulse.c*droop.pulse.c/tau)*
-        pow(exp(-(t - pulse.x0*droop.pulse.x0)/(pulse.b1*droop.pulse.b1)) + 
-            exp((t - pulse.x0*droop.pulse.x0)/(pulse.b2*droop.pulse.b2*tau)),-8);
+      return (pulse.c*droop.pulse.c/tau)/
+        std::pow(exp(-(t - pulse.x0*droop.pulse.x0)/(pulse.b1*droop.pulse.b1)) + 
+            exp((t - pulse.x0*droop.pulse.x0)/(pulse.b2*droop.pulse.b2*tau)),8);
     }
   };
 

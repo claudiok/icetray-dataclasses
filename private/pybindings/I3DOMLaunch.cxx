@@ -22,9 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3DOMLaunch.h>
-#include <icetray/python/std_map_indexing_suite.hpp>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -57,9 +55,8 @@ void register_I3DOMLaunch()
       .add_property("raw_charge_stamp", get_raw_charge_stamp_func, get_raw_charge_stamp_func)
       .add_property("which_atwd_charge_stamp", 
 		    &I3DOMLaunch::GetWhichATWDChargeStamp, &I3DOMLaunch::SetWhichATWDChargeStamp)
-      .def("__str__", &stream_to_string<I3DOMLaunch>)
       .def(self == self)
-      .def( freeze() )
+      .def(dataclass_suite<I3DOMLaunch>())
       ;
 
     enum_<I3DOMLaunch::TriggerType>("TriggerType")
@@ -97,13 +94,12 @@ void register_I3DOMLaunch()
   }
 
   class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSeries")
-    .def(std_vector_indexing_suite<std::vector<I3DOMLaunch> >())
-    .def("__str__", &stream_to_string<I3DOMLaunchSeries>)
+    .def(dataclass_suite<std::vector<I3DOMLaunch> >())
     ;
     
   class_<I3DOMLaunchSeriesMap, bases<I3FrameObject>, I3DOMLaunchSeriesMapPtr>("I3DOMLaunchSeriesMap")
-    .def(std_map_indexing_suite<I3DOMLaunchSeriesMap>())
-    .def("__str__", &stream_to_string<I3DOMLaunchSeriesMap>)
+    .def(dataclass_suite<I3DOMLaunchSeriesMap>())
+	    
     ;
     
   register_pointer_conversions<I3DOMLaunchSeriesMap>();

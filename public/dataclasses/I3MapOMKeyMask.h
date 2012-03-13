@@ -154,6 +154,9 @@ private:
 	SET_LOGGER("I3RecoPulseSeriesMapMask");
 };
 
+template<> void I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsigned version);
+template<> void I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsigned version) const;
+
 BOOST_CLASS_VERSION(I3RecoPulseSeriesMapMask, i3recopulseseriesmapmask_version_);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMapMask);
 

@@ -182,4 +182,4 @@ I3SuperDSTTriggerSeries::load(Archive & ar, unsigned version)
 	}
 }
 
-I3_SERIALIZABLE(I3SuperDSTTriggerSeries);
+I3_SPLIT_SERIALIZABLE(I3SuperDSTTriggerSeries);

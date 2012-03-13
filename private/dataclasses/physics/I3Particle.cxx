@@ -6,6 +6,10 @@
 #include <limits>
 #include <boost/assign/list_of.hpp>
 
+#include <boost/preprocessor/cat.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
+#include <boost/lexical_cast.hpp>
+
 int I3Particle::global_minor_id_ = 0;
 uint64_t I3Particle::global_major_id_ = 0;
 
@@ -35,210 +39,104 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   log_trace("Calling I3Particle::I3Particle(ParticleShape %i, ParticleType %i).", static_cast<int>(shape), static_cast<int>(type));
 }
 
+// using the magic of the preprocessor, expand
+// the existing list of enum entries into a case
+// line converting from enum to string
+#define MAKE_ENUM_TO_STRING_CASE_LINE(r, data, t) case t : return BOOST_PP_STRINGIZE(t);
+
 std::string I3Particle::GetTypeString() const
 {
   const ParticleType type = ConvertFromPdgEncoding(pdgEncoding_);
-    
+
   switch (type) {
-  case UnknownWithPdgEncoding:    return("UnknownWithPdgEncoding");
-  case unknown:    return("unknown");
-  case Gamma:      return("Gamma");
-  case EPlus:      return("EPlus");
-  case EMinus:     return("EMinus");
-  case MuPlus:     return("MuPlus");
-  case MuMinus:    return("MuMinus");
-  case Pi0:        return("Pi0");
-  case PiPlus:     return("PiPlus");
-  case PiMinus:    return("PiMinus");
-  case K0_Long:    return("K0_Long");
-  case KPlus:      return("KPlus");
-  case KMinus:     return("KMinus");
-  case Neutron:    return("Neutron");
-  case PPlus:      return("PPlus");
-  case PMinus:     return("PMinus");
-  case K0_Short:   return("K0_Short");
-  case Eta:            return("Eta");
-  case Lambda:         return("Lambda");
-  case SigmaPlus:      return("SigmaPlus");
-  case Sigma0:         return("Sigma0");
-  case SigmaMinus:     return("SigmaMinus");
-  case Xi0:            return("Xi0");
-  case XiMinus:        return("XiMinus");
-  case OmegaMinus:     return("OmegaMinus");
-  case NeutronBar:     return("NeutronBar");
-  case LambdaBar:      return("LambdaBar");
-  case SigmaMinusBar:  return("SigmaMinusBar");
-  case Sigma0Bar:      return("Sigma0Bar");
-  case SigmaPlusBar:   return("SigmaPlusBar");
-  case Xi0Bar:         return("Xi0Bar");
-  case XiPlusBar:      return("XiPlusBar");
-  case OmegaPlusBar:   return("OmegaPlusBar");
-  case DPlus:          return("DPlus");
-  case DMinus:         return("DMinus");
-  case D0:             return("D0");
-  case D0Bar:          return("D0Bar");
-  case DsPlus:         return("DsPlus");
-  case DsMinusBar:     return("DsMinusBar");
-  case LambdacPlus:    return("LambdacPlus");
-  case WPlus:          return("WPlus");
-  case WMinus:         return("WMinus");
-  case Z0:             return("Z0");
-  case NuE:            return("NuE");
-  case NuEBar:         return("NuEBar");
-  case NuMu:           return("NuMu");
-  case NuMuBar:        return("NuMuBar");
-  case TauPlus:        return("TauPlus");
-  case TauMinus:       return("TauMinus");
-  case NuTau:          return("NuTau");
-  case NuTauBar:       return("NuTauBar");
-  case He3Nucleus:     return("He3Nucleus");
-  case He4Nucleus:     return("He4Nucleus");
-  case Li6Nucleus:     return("Li6Nucleus");
-  case Li7Nucleus:     return("Li7Nucleus");
-  case Be9Nucleus:     return("Be9Nucleus");
-  case B10Nucleus:     return("B10Nucleus");
-  case B11Nucleus:     return("B11Nucleus");
-  case C12Nucleus:     return("C12Nucleus");
-  case C13Nucleus:     return("C13Nucleus");
-  case N14Nucleus:     return("N14Nucleus");
-  case N15Nucleus:     return("N15Nucleus");
-  case O16Nucleus:     return("O16Nucleus");
-  case O17Nucleus:     return("O17Nucleus");
-  case O18Nucleus:     return("O18Nucleus");
-  case F19Nucleus:     return("F19Nucleus");
-  case Ne20Nucleus:    return("Ne20Nucleus");
-  case Ne21Nucleus:    return("Ne21Nucleus");
-  case Ne22Nucleus:    return("Ne22Nucleus");
-  case Na23Nucleus:    return("Na23Nucleus");
-  case Mg24Nucleus:    return("Mg24Nucleus");
-  case Mg25Nucleus:    return("Mg25Nucleus");
-  case Mg26Nucleus:    return("Mg26Nucleus");
-  case Al26Nucleus:    return("Al26Nucleus");
-  case Al27Nucleus:    return("Al27Nucleus");
-  case Si28Nucleus:    return("Si28Nucleus");
-  case Si29Nucleus:    return("Si29Nucleus");
-  case Si30Nucleus:    return("Si30Nucleus");
-  case Si31Nucleus:    return("Si31Nucleus");
-  case Si32Nucleus:    return("Si32Nucleus");
-  case P31Nucleus:     return("P31Nucleus");
-  case P32Nucleus:     return("P32Nucleus");
-  case P33Nucleus:     return("P33Nucleus");
-  case S32Nucleus:     return("S32Nucleus");
-  case S33Nucleus:     return("S33Nucleus");
-  case S34Nucleus:     return("S34Nucleus");
-  case S35Nucleus:     return("S35Nucleus");
-  case S36Nucleus:     return("S36Nucleus");
-  case Cl35Nucleus:    return("Cl35Nucleus");
-  case Cl36Nucleus:    return("Cl36Nucleus");
-  case Cl37Nucleus:    return("Cl37Nucleus");
-  case Ar36Nucleus:    return("Ar36Nucleus");
-  case Ar37Nucleus:    return("Ar37Nucleus");
-  case Ar38Nucleus:    return("Ar38Nucleus");
-  case Ar39Nucleus:    return("Ar39Nucleus");
-  case Ar40Nucleus:    return("Ar40Nucleus");
-  case Ar41Nucleus:    return("Ar41Nucleus");
-  case Ar42Nucleus:    return("Ar42Nucleus");
-  case K39Nucleus:     return("K39Nucleus");
-  case K40Nucleus:     return("K40Nucleus");
-  case K41Nucleus:     return("K41Nucleus");
-  case Ca40Nucleus:    return("Ca40Nucleus");
-  case Ca41Nucleus:    return("Ca41Nucleus");
-  case Ca42Nucleus:    return("Ca42Nucleus");
-  case Ca43Nucleus:    return("Ca43Nucleus");
-  case Ca44Nucleus:    return("Ca44Nucleus");
-  case Ca45Nucleus:    return("Ca45Nucleus");
-  case Ca46Nucleus:    return("Ca46Nucleus");
-  case Ca47Nucleus:    return("Ca47Nucleus");
-  case Ca48Nucleus:    return("Ca48Nucleus");
-  case Sc44Nucleus:    return("Sc44Nucleus");
-  case Sc45Nucleus:    return("Sc45Nucleus");
-  case Sc46Nucleus:    return("Sc46Nucleus");
-  case Sc47Nucleus:    return("Sc47Nucleus");
-  case Sc48Nucleus:    return("Sc48Nucleus");
-  case Ti44Nucleus:    return("Ti44Nucleus");
-  case Ti45Nucleus:    return("Ti45Nucleus");
-  case Ti46Nucleus:    return("Ti46Nucleus");
-  case Ti47Nucleus:    return("Ti47Nucleus");
-  case Ti48Nucleus:    return("Ti48Nucleus");
-  case Ti49Nucleus:    return("Ti49Nucleus");
-  case Ti50Nucleus:    return("Ti50Nucleus");
-  case V48Nucleus:     return("V48Nucleus");
-  case V49Nucleus:     return("V49Nucleus");
-  case V50Nucleus:     return("V50Nucleus");
-  case V51Nucleus:     return("V51Nucleus");
-  case Cr50Nucleus:    return("Cr50Nucleus");
-  case Cr51Nucleus:    return("Cr51Nucleus");
-  case Cr52Nucleus:    return("Cr52Nucleus");
-  case Cr53Nucleus:    return("Cr53Nucleus");
-  case Cr54Nucleus:    return("Cr54Nucleus");
-  case Mn52Nucleus:    return("Mn52Nucleus");
-  case Mn53Nucleus:    return("Mn53Nucleus");
-  case Mn54Nucleus:    return("Mn54Nucleus");
-  case Mn55Nucleus:    return("Mn55Nucleus");
-  case Fe54Nucleus:    return("Fe54Nucleus");
-  case Fe55Nucleus:    return("Fe54Nucleus");
-  case Fe56Nucleus:    return("Fe56Nucleus");
-  case Fe57Nucleus:    return("Fe57Nucleus");
-  case Fe58Nucleus:    return("Fe58Nucleus");
-  case CherenkovPhoton:return("CherenkovPhoton");
-  case Nu:         return("Nu");
-  case Monopole:   return("Monopole");
-  case Brems:      return("Brems");
-  case DeltaE:     return("DeltaE");
-  case PairProd:   return("PairProd");
-  case NuclInt:    return("NuclInt");
-  case MuPair:     return("MuPair");
-  case Hadrons:    return("Hadrons");
-  case ContinuousEnergyLoss: return("ContinuousEnergyLoss");
-  case FiberLaser: return("FiberLaser");
-  case N2Laser:    return("N2Laser");
-  case YAGLaser:   return("YAGLaser");
-  case STauPlus:   return("STauPlus");
-  case STauMinus:  return("STauMinus");
-  default:         return("undefined_particle_type"); // shouldn't be reached
+    BOOST_PP_SEQ_FOR_EACH(MAKE_ENUM_TO_STRING_CASE_LINE, ~, I3PARTICLE_H_I3Particle_ParticleType)
   }
+  return(boost::lexical_cast<std::string>( static_cast<int>(type) ));
 }
 
 std::string I3Particle::GetShapeString() const
 {
   switch (shape_) {
-  case Null:           return("Null");
-  case Primary:        return("Primary");
-  case TopShower:      return("TopShower");
-  case Cascade:        return("Cascade");
-  case InfiniteTrack:  return("InfiniteTrack");
-  case StartingTrack:  return("StartingTrack");
-  case StoppingTrack:  return("StoppingTrack");
-  case ContainedTrack: return("ContainedTrack");
-  case MCTrack:        return("MCTrack");
-  case Dark:           return("Dark");
-  default:             return("undefined_particle_shape");
+    BOOST_PP_SEQ_FOR_EACH(MAKE_ENUM_TO_STRING_CASE_LINE, ~, I3PARTICLE_H_I3Particle_ParticleShape)
   }
+  return(boost::lexical_cast<std::string>( shape_ ));
 }
 
 std::string I3Particle::GetFitStatusString() const
 {
   switch (status_) {
-  case NotSet:              return("NotSet");
-  case OK:                  return("OK");
-  case GeneralFailure:      return("GeneralFailure");
-  case InsufficientHits:    return("InsufficientHits");
-  case FailedToConverge:    return("FailedToConverge");
-  case MissingSeed:         return("MissingSeed");
-  case InsufficientQuality: return("InsufficientQuality");
-  default:                  return("undefined_fit_status");
+    BOOST_PP_SEQ_FOR_EACH(MAKE_ENUM_TO_STRING_CASE_LINE, ~, I3PARTICLE_H_I3Particle_FitStatus)
   }
+  return(boost::lexical_cast<std::string>( status_ ));
 }
 
 std::string I3Particle::GetLocationTypeString() const
 {
   switch (locationType_) {
-  case Anywhere: return("Anywhere");
-  case IceTop:   return("IceTop");
-  case InIce:    return("InIce");
-  default:       return("undefined_location_type");
+    BOOST_PP_SEQ_FOR_EACH(MAKE_ENUM_TO_STRING_CASE_LINE, ~, I3PARTICLE_H_I3Particle_LocationType)
+  }
+  return(boost::lexical_cast<std::string>( locationType_ ));
+}
+
+
+#define MAKE_STRING_TO_ENUM_IF_LINE(r, data, t) else if ( str == BOOST_PP_STRINGIZE(t) ) { data = t; }
+
+void I3Particle::SetTypeString(const std::string &str)
+{
+  ParticleType type;
+
+  if (false) { }
+  BOOST_PP_SEQ_FOR_EACH(MAKE_STRING_TO_ENUM_IF_LINE, type, I3PARTICLE_H_I3Particle_ParticleType)
+  else {
+    try {
+      type = static_cast<ParticleType>( boost::lexical_cast<int>(str) );
+    } catch(boost::bad_lexical_cast &bad) {
+      log_fatal("\"%s\" is not a valid ParticleType.", str.c_str());
+    }
+  }
+
+  SetType(type);
+}
+
+void I3Particle::SetShapeString(const std::string &str)
+{
+  if (false) { }
+  BOOST_PP_SEQ_FOR_EACH(MAKE_STRING_TO_ENUM_IF_LINE, shape_, I3PARTICLE_H_I3Particle_ParticleShape)
+  else {
+    try {
+      shape_ = static_cast<ParticleShape>( boost::lexical_cast<int>(str) );
+    } catch(boost::bad_lexical_cast &bad) {
+      log_fatal("\"%s\" is not a valid ParticleShape.", str.c_str());
+    }
   }
 }
+
+void I3Particle::SetFitStatusString(const std::string &str)
+{
+  if (false) { }
+  BOOST_PP_SEQ_FOR_EACH(MAKE_STRING_TO_ENUM_IF_LINE, status_, I3PARTICLE_H_I3Particle_FitStatus)
+  else {
+    try {
+      status_ = static_cast<FitStatus>( boost::lexical_cast<int>(str) );
+    } catch(boost::bad_lexical_cast &bad) {
+      log_fatal("\"%s\"is not a valid FitStatus.", str.c_str());
+    }
+  }
+}
+
+void I3Particle::SetLocationTypeString(const std::string &str)
+{
+  if (false) { }
+  BOOST_PP_SEQ_FOR_EACH(MAKE_STRING_TO_ENUM_IF_LINE, locationType_, I3PARTICLE_H_I3Particle_LocationType)
+  else {
+    try {
+      locationType_ = static_cast<LocationType>( boost::lexical_cast<int>(str) );
+    } catch(boost::bad_lexical_cast &bad) {
+      log_fatal("\"%s\" is not a valid LocationType.", str.c_str());
+    }
+  }
+}
+
 
 namespace {
   inline bool isParticleTypeInNucleusRange(I3Particle::ParticleType type)
@@ -345,16 +243,18 @@ bool I3Particle::IsTopShower() const
 I3Position I3Particle::ShiftAlongTrack(double dist) const 
 {
   if (IsTrack()) {
-    double x = GetX() - dist * sin(GetZenith()) * cos(GetAzimuth());
-    double y = GetY() - dist * sin(GetZenith()) * sin(GetAzimuth());
-    double z = GetZ() - dist * cos(GetZenith());
-    I3Position p(x,y,z,I3Position::car);
-    return p;
+    const double zenith = static_cast<double>(GetZenith());
+    const double sinzenith = std::sin(zenith);
+    const double azimuth = GetAzimuth();
+
+    const double x = static_cast<double>(GetX()) - dist * sinzenith * std::cos(azimuth);
+    const double y = static_cast<double>(GetY()) - dist * sinzenith * std::sin(azimuth);
+    const double z = static_cast<double>(GetZ()) - dist * std::cos(zenith);
+    return I3Position(x,y,z);
   }
   else {
     log_warn("ShiftAlongTrack undefined for a particle that is not a track.");
-    I3Position nullpos;
-    return nullpos;
+    return I3Position();
   }
 }
 
@@ -366,8 +266,7 @@ I3Position I3Particle::GetStartPos() const
   else {
     log_warn("GetStartPos undefined for a particle that is neither starting "
 	     "nor contained.");
-    I3Position nullpos;
-    return nullpos;
+    return I3Position();
   }
 }
 
@@ -772,9 +671,11 @@ template <class Archive>
     ar & make_nvp("pdgEncoding",pdgEncoding_);
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
+
     ar & make_nvp("pos",pos_);
     ar & make_nvp("dir",dir_);
     ar & make_nvp("time",time_);
+
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
@@ -809,12 +710,15 @@ template <class Archive>
     }
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
+
     ar & make_nvp("pos",pos_);
     ar & make_nvp("dir",dir_);
+    
     ar & make_nvp("time",time_);
     ar & make_nvp("energy",energy_);
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
+
     if(version == 0)
       ar & make_nvp("composite",composite_);
     if(version>0)
@@ -828,6 +732,72 @@ template <class Archive>
         ar & make_nvp("bjorkeny",bjorkeny);
     }
   }
+
+// specialize save and load for XML archives in order to display
+// enums as strings instead of their numerical value
+// (except for the particleType which is ignored when reading,
+// as it is derived from the pdgEncoding)
+template <>
+void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const
+{
+    std::string tempString;
+
+    ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+    ar & make_nvp("minorID",ID_);
+    ar & make_nvp("majorID",major_ID_);
+
+    ar & make_nvp("pdgEncoding",pdgEncoding_);
+    tempString = GetTypeString();
+    ar & make_nvp("particleType",tempString);
+
+    tempString = GetShapeString();
+    ar & make_nvp("shape",tempString);
+
+    tempString = GetFitStatusString();
+    ar & make_nvp("fitStatus",tempString);
+
+    ar & make_nvp("pos",pos_);
+    ar & make_nvp("dir",dir_);
+    ar & make_nvp("time",time_);
+    ar & make_nvp("energy",energy_);
+    ar & make_nvp("length",length_);
+    ar & make_nvp("speed",speed_);
+
+    tempString = GetLocationTypeString();
+    ar & make_nvp("locationType",tempString);
+}
+
+template <>
+void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version)
+{
+  if (version!=i3particle_version_)
+    log_fatal("Cannot load XML data for I3Particle from an archive with version %u. Only the current version (%u) is supported.",version,i3particle_version_);
+
+    std::string tempString; 
+
+    ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+    ar & make_nvp("minorID",ID_);
+    ar & make_nvp("majorID",major_ID_);
+
+    ar & make_nvp("pdgEncoding",pdgEncoding_);
+    ar & make_nvp("particleType",tempString); // ignored (I3Particle pdgEncoding)
+
+    ar & make_nvp("shape",tempString);
+    SetShapeString(tempString);
+
+    ar & make_nvp("fitStatus",tempString);
+    SetFitStatusString(tempString);
+
+    ar & make_nvp("pos",pos_);
+    ar & make_nvp("dir",dir_);
+    ar & make_nvp("time",time_);
+    ar & make_nvp("energy",energy_);
+    ar & make_nvp("length",length_);
+    ar & make_nvp("speed",speed_);
+
+    ar & make_nvp("locationType",tempString);
+    SetLocationTypeString(tempString);
+}
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs){
   return ( lhs.GetMinorID() == rhs.GetMinorID() &&
@@ -870,6 +840,6 @@ std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
 }
 
 
-I3_SERIALIZABLE(I3Particle);
+I3_SPLIT_SERIALIZABLE(I3Particle);
 
 I3_SERIALIZABLE(I3ParticleVect);

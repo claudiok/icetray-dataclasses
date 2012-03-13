@@ -1,5 +1,6 @@
 
 #include <dataclasses/I3MapOMKeyUnion.h>
+#include <icetray/python/dataclass_suite.hpp>
 
 namespace bp = boost::python;
 
@@ -16,6 +17,7 @@ void register_I3RecoPulseSeriesMapUnion()
 	    bp::init<const I3Frame&, const std::vector<std::string> &>(bp::args("frame", "keys")))
 		.def("apply", &underhanded_apply, "Apply the union to an I3Frame, returning an I3RecoPulseSeries.")
 		.add_property("sources", &I3RecoPulseSeriesMapUnion::GetSources)
+		.def(bp::dataclass_suite<I3RecoPulseSeriesMapUnion>())
 	    ;
 	;
 	

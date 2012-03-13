@@ -22,8 +22,7 @@
 #include <vector>
 
 #include <dataclasses/physics/I3EventHeader.h>
-#include <icetray/python/copy_suite.hpp>
-#include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
 using namespace boost::python;
@@ -42,9 +41,7 @@ void register_I3EventHeader()
       PROPERTY(I3EventHeader, start_time,       StartTime)
       PROPERTY(I3EventHeader, end_time,         EndTime)
       .add_property("data_stream", &I3EventHeader::GetDataStream)
-      .def(copy_suite<I3EventHeader>())
-      .def("__str__", &stream_to_string<I3EventHeader>)
-      .def( freeze() )
+      .def(dataclass_suite<I3EventHeader>())
       ;
 
     register_pointer_conversions<I3EventHeader>();

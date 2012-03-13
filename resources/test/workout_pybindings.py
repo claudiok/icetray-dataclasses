@@ -101,7 +101,9 @@ pos = dataclasses.I3Position(1.1, 2.2, 3.3)
 print pos
 pos2 = dataclasses.I3Position(0, 0, 0)
 distance = pos.calc_distance(pos2)
-ENSURE(pos.r == distance, "Distances don't match")
+print "pos.r =", pos.r
+print "distance =", distance
+ENSURE(abs(pos.r-distance)<1e-5*I3Units.m, "Distances don't match")
 
 #I3Time
 print 'Testing I3Time'

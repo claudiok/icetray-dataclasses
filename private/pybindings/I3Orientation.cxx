@@ -21,57 +21,57 @@
 #include <vector>
 
 #include <dataclasses/I3Orientation.h>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
 void register_I3Orientation()
 {
-	
 	void (I3Orientation::* fromOrientation)(const I3Orientation&) = &I3Orientation::SetOrientation;
 	void (I3Orientation::* fromDirection)(const I3Direction&) = &I3Orientation::SetOrientation;
 	void (I3Orientation::* fromDirections)(const I3Direction&, const I3Direction&) = &I3Orientation::SetOrientation;
 	void (I3Orientation::* fromDoubles)(double, double, double, double, double, double) = &I3Orientation::SetOrientation;
-	
+
+    I3Position  (I3Orientation::* RotatePosition) (const I3Position&) const  = &I3Orientation::Rotate;
+    I3Direction (I3Orientation::* RotateDirection)(const I3Direction&) const = &I3Orientation::Rotate;
+
 	class_<I3Orientation, bases<I3FrameObject>, boost::shared_ptr<I3Orientation> >("I3Orientation")
-	//.def(init<double,double,double,int>())
-	.def("SetDirection", fromOrientation)
-	.def("SetDirection", fromDirection)
-	.def("SetDirection", fromDirections)
-	.def("SetDirection", fromDoubles)
-	.def("ResetOrientation", &I3Orientation::ResetOrientation)
+	.def(init<double,double,double,double,double,double>())
+	.def(init<const I3Direction &,const I3Direction &>())
+	.def(init<const I3Direction &>())
 
-	.def("GetZenith", &I3Orientation::GetZenith)
-	.def("GetAzimuth", &I3Orientation::GetAzimuth)
-	.def("GetX", &I3Orientation::GetX)
-	.def("GetY", &I3Orientation::GetY)
-	.def("GetZ", &I3Orientation::GetZ)
-	
-	.def("GetDirZenith", &I3Orientation::GetDirZenith)
-	.def("GetDirAzimuth", &I3Orientation::GetDirAzimuth)
-	.def("GetDirX", &I3Orientation::GetDirX)
-	.def("GetDirY", &I3Orientation::GetDirY)
-	.def("GetDirZ", &I3Orientation::GetDirZ)
-	.def("CalcDirTheta", &I3Orientation::CalcDirTheta)
-	.def("CalcDirPhi", &I3Orientation::CalcDirPhi)
-	.def("GetDir", &I3Orientation::GetDir)
+	.def("set_orientation", fromOrientation)
+	.def("set_orientation", fromDirection)
+	.def("set_orientation", fromDirections)
+	.def("set_orientation", fromDoubles)
 
-	.def("GetUpZenith", &I3Orientation::GetUpZenith)
-	.def("GetUpAzimuth", &I3Orientation::GetUpAzimuth)
-	.def("GetUpX", &I3Orientation::GetUpX)
-	.def("GetUpY", &I3Orientation::GetUpY)
-	.def("GetUpZ", &I3Orientation::GetUpZ)
-	.def("CalcUpTheta", &I3Orientation::CalcUpTheta)
-	.def("CalcUpPhi", &I3Orientation::CalcUpPhi)
-	.def("GetUp", &I3Orientation::GetUp)
+    .def("rotate", RotatePosition)
+    .def("rotate", RotateDirection)
 
-	.def("GetRightZenith", &I3Orientation::GetRightZenith)
-	.def("GetRightAzimuth", &I3Orientation::GetRightAzimuth)
-	.def("GetRightX", &I3Orientation::GetRightX)
-	.def("GetRightY", &I3Orientation::GetRightY)
-	.def("GetRightZ", &I3Orientation::GetRightZ)
-	.def("CalcRightTheta", &I3Orientation::CalcRightTheta)
-	.def("CalcRightPhi", &I3Orientation::CalcRightPhi)
-	.def("GetRight", &I3Orientation::GetRight)
-	;
+    //.def("rot_vector_in_place", &I3Orientation::RotVectorInPlace)
+
+    #define MEMBERS (ResetOrientation)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Orientation, MEMBERS)
+    #undef  MEMBERS
+
+    #define RO_PROPERTIES \
+        (Zenith)(Azimuth)(X)(Y)(Z)                                  \
+        (Dir)(DirZenith)(DirAzimuth)(DirX)(DirY)(DirZ)              \
+        (Up)(UpZenith)(UpAzimuth)(UpX)(UpY)(UpZ)                    \
+        (Right)(RightZenith)(RightAzimuth)(RightX)(RightY)(RightZ)
+    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Orientation, RO_PROPERTIES)
+    #undef  RO_PROPERTIES
+	.add_property("dir_theta", &I3Orientation::CalcDirTheta)
+	.add_property("dir_phi", &I3Orientation::CalcDirPhi)
+	.add_property("up_theta", &I3Orientation::CalcUpTheta)
+	.add_property("up_phi", &I3Orientation::CalcUpPhi)
+	.add_property("right_theta", &I3Orientation::CalcRightTheta)
+	.add_property("right_phi", &I3Orientation::CalcRightPhi)
+    
+    .def(self == self)
+    .def(dataclass_suite<I3Orientation>())
+    ;
+    
 	register_pointer_conversions<I3Orientation>();
+    
 }

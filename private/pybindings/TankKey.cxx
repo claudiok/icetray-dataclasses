@@ -20,8 +20,7 @@
  */
 #include <dataclasses/TankKey.h>
 #include <dataclasses/I3Vector.h>
-#include <icetray/python/copy_suite.hpp>
-#include <icetray/python/std_vector_indexing_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
@@ -31,10 +30,9 @@ void register_TankKey()
     class_<TankKey, boost::shared_ptr<TankKey> >("TankKey")
     .def(init<int,TankKey::TankID>())
     .def(init<OMKey>())
-    .def(copy_suite<TankKey>())
+    .def(dataclass_suite<TankKey>())
     .def_readwrite("string", &TankKey::string)
     .def_readwrite("tank", &TankKey::tank)
-    .def( freeze() )
     ;
   enum_<TankKey::TankID>("TankID")
     .value("TankA", TankKey::TankA)
@@ -43,7 +41,7 @@ void register_TankKey()
     ;
 
   class_<I3VectorTankKey, bases<I3FrameObject>, boost::shared_ptr<I3VectorTankKey> >("I3VectorTankKey")
-    .def(std_vector_indexing_suite<I3VectorTankKey >())
+    .def(dataclass_suite<I3VectorTankKey >())
     ;
 }
     

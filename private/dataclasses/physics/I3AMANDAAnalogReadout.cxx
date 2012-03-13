@@ -53,7 +53,7 @@ I3AMANDAAnalogReadout::load(Archive& ar, unsigned version)
   processTOTs_ = true;
 }
 
-I3_SERIALIZABLE(I3AMANDAAnalogReadout);
+I3_SPLIT_SERIALIZABLE(I3AMANDAAnalogReadout);
 I3_SERIALIZABLE(I3AMANDAAnalogReadoutMap);
 
 double I3AMANDAAnalogReadout::GetFirstLE() const

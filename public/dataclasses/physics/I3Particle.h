@@ -17,6 +17,9 @@
 #include <string>
 
 #ifndef __CINT__
+#include <boost/archive/xml_iarchive.hpp>
+#include <boost/archive/xml_oarchive.hpp>
+
 #include <boost/bimap/bimap.hpp>
 #include <boost/bimap/multiset_of.hpp>
 #endif
@@ -43,6 +46,7 @@ static const unsigned i3particle_version_ = 5;
 #define I3PARTICLE_H_I3Particle_ParticleType                                      \
     (UnknownWithPdgEncoding)(unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0) \
     (PiPlus)(PiMinus)(K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)   \
+    (Eta)(Lambda)(SigmaPlus)(Sigma0)(SigmaMinus)(Xi0)(XiMinus)(OmegaMinus)        \
     (NeutronBar)(LambdaBar)(SigmaMinusBar)(Sigma0Bar)(SigmaPlusBar)(Xi0Bar)       \
     (XiPlusBar)(OmegaPlusBar)(DPlus)(DMinus)(D0)(D0Bar)(DsPlus)(DsMinusBar)       \
     (LambdacPlus)(WPlus)(WMinus)(Z0)(NuE)(NuEBar)                                 \
@@ -383,27 +387,34 @@ class I3Particle : public I3FrameObject
   void SetPdgEncoding(int32_t newid) { pdgEncoding_=newid; }
     
   ParticleType GetType() const;
-  void SetType(ParticleType type);
-  void SetRDMCType(int type);
   std::string GetTypeString() const;
 
+  void SetType(ParticleType type);
+  void SetRDMCType(int type);
+  void SetTypeString(const std::string &str);
+
   ParticleShape GetShape() const { return shape_; }
-  void SetShape(ParticleShape shape) { shape_ = shape; }
   std::string GetShapeString() const;
+  void SetShape(ParticleShape shape) { shape_ = shape; }
+  void SetShapeString(const std::string &str);
 
   FitStatus GetFitStatus() const { return status_; }
-  void SetFitStatus(FitStatus status) { status_ = status; }
   std::string GetFitStatusString() const;
+  void SetFitStatus(FitStatus status) { status_ = status; }
+  void SetFitStatusString(const std::string &str);
 
   LocationType GetLocationType() const { return locationType_; }
-  void SetLocationType(LocationType type) { locationType_ = type; }
   std::string GetLocationTypeString() const;
+  void SetLocationType(LocationType type) { locationType_ = type; }
+  void SetLocationTypeString(const std::string &str);
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_.SetPosition(p); }
   void SetPos(double p1, double p2, double p3, 
-	      I3Position::RefFrame frame=I3Position::car)
+	      I3Position::RefFrame frame)
     { pos_.SetPosition(p1,p2,p3,frame); }
+  void SetPos(double x, double y, double z)
+    { pos_.SetPosition(x,y,z); }
 
   const I3Direction& GetDir() const { return dir_; }
   void SetDir(const I3Direction& d) { dir_.SetDirection(d); }
@@ -466,6 +477,12 @@ class I3Particle : public I3FrameObject
   static int32_t ConvertToPdgEncoding(ParticleType);
 
 };
+
+#ifndef __CINT__
+// template specialization for XML i/o
+template<> void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const;
+template<> void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version);
+#endif
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs);
 

@@ -23,8 +23,7 @@
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/ostream_overloads.hpp>
 #include <dataclasses/physics/I3Particle.h>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/stream_to_string.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 #include <vector>
 #include <sstream>
 
@@ -38,8 +37,7 @@ register_i3vector_of(const std::string& s)
 {
   typedef I3Vector<T> vec_t;
   class_<vec_t, bases<I3FrameObject>, boost::shared_ptr<vec_t> > ((std::string("I3Vector") + s).c_str())
-    .def(std_vector_indexing_suite<vec_t>())
-    .def("__str__", &stream_to_string<I3Vector<T> >)
+    .def(dataclass_suite<vec_t>())
     ;
   register_pointer_conversions<vec_t>();
 }
@@ -53,6 +51,7 @@ register_std_pair(const char* s)
   class_<type_t>(s)
     .def_readwrite("first", &type_t::first)
     .def_readwrite("second", &type_t::second)
+    .def(dataclass_suite<type_t>())
     ;
 
   def("make_pair", &std::make_pair<T, U>);

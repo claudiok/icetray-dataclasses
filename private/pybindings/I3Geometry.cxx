@@ -24,9 +24,7 @@
 #include <dataclasses/geometry/I3Geometry.h>
 #include <dataclasses/geometry/I3OMGeo.h>
 #include <dataclasses/geometry/I3TankGeo.h>
-#include <icetray/python/std_map_indexing_suite.hpp>
-#include <icetray/python/std_vector_indexing_suite.hpp>
-#include <icetray/python/copy_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
@@ -37,15 +35,14 @@ void register_I3Geometry()
   // I3Geometry
   //
   class_<I3Geometry, bases<I3FrameObject>, boost::shared_ptr<I3Geometry> >("I3Geometry")
-    .def(copy_suite<I3Geometry>())
     #define GEOMPROPS (omgeo)(stationgeo)(startTime)(endTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Geometry, GEOMPROPS )
     #undef GEOMPROPS
-    .def( freeze() )
+    .def(dataclass_suite<I3Geometry>())
     ;
 
   class_<std::map<OMKey, I3OMGeo> >("Map_OMKey_I3OMGeo")
-    .def(std_map_indexing_suite<std::map<OMKey, I3OMGeo> >())
+    .def(dataclass_suite<std::map<OMKey, I3OMGeo> >())
     ;
 
   {
@@ -53,12 +50,11 @@ void register_I3Geometry()
     // I3OMGeo
     //
     scope omg = class_<I3OMGeo, boost::shared_ptr<I3OMGeo> >("I3OMGeo")
-      .def(copy_suite<I3OMGeo>())
       .add_property("direction", &I3OMGeo::GetDirection)
       #define I3OMGEOPROPS (position)(omtype)(orientation)(area) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3OMGeo, I3OMGEOPROPS )
       #undef I3OMGEOPROPS
-      .def( freeze() )
+      .def(dataclass_suite<I3OMGeo>())
       ;
 
     enum_<I3OMGeo::OMType>("OMType")
@@ -78,12 +74,11 @@ void register_I3Geometry()
   //
   {
     scope tankgeo = class_<I3TankGeo, boost::shared_ptr<I3TankGeo> >("I3TankGeo")
-      .def(copy_suite<I3TankGeo>())
       #define TANKGEOPROPS (position)(orientation)(tankradius)(tankheight)(fillheight)(snowheight)(tanktype)
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3TankGeo, TANKGEOPROPS )
       .def_readwrite("omkey_list",&I3TankGeo::omKeyList_)
       #undef TANKGEOPROPS
-      .def( freeze() )
+      .def(dataclass_suite<I3TankGeo>())
       ;
 
     enum_<I3TankGeo::TankType>("TankType")
@@ -95,12 +90,11 @@ void register_I3Geometry()
   }
 
   class_<std::vector<I3TankGeo> >("I3StationGeo")
-    .def(copy_suite<I3StationGeo>())
-    .def(std_vector_indexing_suite<std::vector<I3TankGeo> >())
+    .def(dataclass_suite<I3StationGeo>())
     ;
 
   class_<std::map<int, I3StationGeo> >("I3StationGeoMap")
-    .def(std_map_indexing_suite<std::map<int, I3StationGeo> >())
+    .def(dataclass_suite<std::map<int, I3StationGeo> >())
     ;
 
   register_pointer_conversions<I3Geometry>();

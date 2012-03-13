@@ -7,6 +7,8 @@
 #include "boost/make_shared.hpp"
 #include "boost/foreach.hpp"
 #include "boost/iostreams/filtering_stream.hpp"
+#include "boost/interprocess/streams/bufferstream.hpp"
+#include "boost/interprocess/streams/vectorstream.hpp"
 
 TEST_GROUP(I3MapMask);
 
@@ -52,18 +54,14 @@ manufacture_frame(const std::string &name)
 static I3FramePtr
 resurrect(I3FramePtr frame)
 {
-	namespace io = boost::iostreams;
-	std::ostringstream oarchive_stream;
-	io::filtering_stream<io::output> ofs;
-	ofs.push(oarchive_stream);
-	frame->save(ofs);
+	namespace ip = boost::interprocess;
+	ip::basic_vectorstream<std::vector<char> > archive_stream;
+	frame->save(archive_stream);
+
+	archive_stream.reserve(0);
 	
-	std::istringstream iarchive_stream(oarchive_stream.str());
-	io::filtering_stream<io::input> ifs;
-	ifs.push(iarchive_stream);
-		
 	I3FramePtr newframe(new I3Frame);
-	newframe->load(ifs);
+	newframe->load(archive_stream);
 
 	return newframe;
 }

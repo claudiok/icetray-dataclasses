@@ -21,8 +21,8 @@
 #include <vector>
 
 #include <dataclasses/I3Direction.h>
-#include <icetray/python/stream_to_string.hpp>
 #include <dataclasses/ostream_overloads.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
@@ -47,9 +47,8 @@ void register_I3Direction()
     #undef  RO_PROPERTIES
     .add_property("theta", &I3Direction::CalcTheta)
     .add_property("phi", &I3Direction::CalcPhi)
-    .def("__str__", &stream_to_string<I3Direction>)
     .def(self == self)
-    .def( freeze() )
+    .def(dataclass_suite<I3Direction>())
     ;
   register_pointer_conversions<I3Direction>();
 }

@@ -178,8 +178,9 @@ private:
 	
 	friend class boost::serialization::access;
 
+	template <class Archive> void save(Archive & ar, unsigned version) const;
 	template <class Archive> void save(Archive & ar, unsigned version,
-	    std::map<OMKey, std::vector<int > > *sizes=NULL) const;
+	    std::map<OMKey, std::vector<int > > *sizes) const;
 	template <class Archive> void load(Archive & ar, unsigned version);
 	template <class Archive> void load_v0(Archive & ar);
 	template <class Archive> void load_v1(Archive & ar);    
