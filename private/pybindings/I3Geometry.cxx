@@ -50,7 +50,8 @@ void register_I3Geometry()
     // I3OMGeo
     //
     scope omg = class_<I3OMGeo, boost::shared_ptr<I3OMGeo> >("I3OMGeo")
-      #define I3OMGEOPROPS (position)(omtype)(orientation)(area)(aziangle) 
+      .add_property("direction", &I3OMGeo::GetDirection)
+      #define I3OMGEOPROPS (position)(omtype)(orientation)(area) 
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3OMGeo, I3OMGEOPROPS )
       #undef I3OMGEOPROPS
       .def(dataclass_suite<I3OMGeo>())
@@ -63,12 +64,6 @@ void register_I3Geometry()
       .value("IceTop", I3OMGeo::IceTop)
       .export_values()
       ;
-
-    enum_<I3OMGeo::Orientation>("Orientation")
-    .value("Unspecified", I3OMGeo::Unspecified)
-    .value("Up", I3OMGeo::Up)
-    .value("Down", I3OMGeo::Down)
-    .export_values()
     ;
 
   }

@@ -10,6 +10,8 @@
 #define I3OMGEO_H_INCLUDED
 
 #include "dataclasses/I3Position.h"
+#include "dataclasses/I3Direction.h"
+#include "dataclasses/I3Orientation.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -17,35 +19,47 @@
 #include "dataclasses/Utility.h"
 
 
-static const unsigned i3omgeo_version_ = 0;
+static const unsigned i3omgeo_version_ = 1;
 
 //Simple struct to contain all pertinent OM info.  
 //See I3Geometry.h for more info
 
 struct I3OMGeo 
 {
+    enum OMType {UnknownType = 0, AMANDA = 10, IceCube = 20, IceTop = 30};
 
-  enum Orientation {Unspecified=0, Up=1, Down=-1};
-  enum OMType {UnknownType = 0, AMANDA = 10, IceCube = 20, IceTop = 30};
+    I3OMGeo():omtype(UnknownType){} 
+    
+    virtual ~I3OMGeo();
+    
+    /**
+     * the OM's (or PMT's) x,y,z position
+     */
+    I3Position position;
+    
+    /**
+     * Orientation of the OM (or PMT)
+     */ 
+    I3Orientation orientation;
 
-  I3OMGeo() {Init();}
-  //copy constructor just uses assignment
-  //I3OMGeo(const I3OMGeo& rhs){*this = rhs;}
-  virtual ~I3OMGeo();
+    /**
+     * InIce? IceTop? AMANDA OM? (see enum above)
+     */ 
+    OMType omtype;
 
-  I3Position position; //OM x,y,z position
-  OMType omtype; //InIce? IceTop? AMANDA OM? (see enum above)
-  Orientation orientation; // Up/Down orientation (see enum above)
-  double area; //Effective collection area (use I3Units)
-  double aziangle; //relative rotation angle of DOM in azimuth
+    /**
+     * Effective collection area (use I3Units)
+     */ 
+    double area;
 
-  void Init() {
-    orientation = Unspecified;
-  }
+    /**
+     * Gets the I3Direction from the I3Orientation
+     */
+    inline I3Direction GetDirection() const {return orientation.GetDir();}
 
-  friend class boost::serialization::access;
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version);
+    friend class boost::serialization::access;
+    template <class Archive>
+    void serialize(Archive& ar, unsigned version);
 };
 
 I3_POINTER_TYPEDEFS(I3OMGeo);
