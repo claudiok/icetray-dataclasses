@@ -11,20 +11,8 @@ I3Geometry::serialize(Archive& ar, unsigned version)
     log_fatal("Attempting to read version %u from file but running version %u of I3Geometry class.", version, i3geometry_version_);
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-
-#if I3_USE_FAST_OMKEY_MAP
-  if (version == 0)
-    {
-      map<OMKey, I3OMGeo> slow_map;
-      ar & make_nvp("OMGeo", slow_map);
-      for (map<OMKey, I3OMGeo>::iterator iter = slow_map.begin();
-	   iter != slow_map.end();
-	   iter++)
-	omgeo.insert(*iter);
-    }
-  else
-#endif
-    ar & make_nvp("OMGeo", omgeo);
+  
+  ar & make_nvp("OMGeo", omgeo);
 
   ar & make_nvp("StationGeo", stationgeo);
   ar & make_nvp("StartTime",startTime);

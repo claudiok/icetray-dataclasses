@@ -150,9 +150,6 @@ typedef std::vector<I3MCHit> I3MCHitSeries;
 typedef I3Map<OMKey, I3MCHitSeries> I3MCHitSeriesMap; 
 
 I3_POINTER_TYPEDEFS(I3MCHitSeries);
-#ifdef I3_USE_FAST_OMKEY_MAP
-BOOST_CLASS_VERSION(I3MCHitSeriesMap, 1);
-#endif
 I3_POINTER_TYPEDEFS(I3MCHitSeriesMap);
 
 #endif //I3MCHIT_H_INCLUDED

@@ -90,13 +90,7 @@ std::ostream& operator<<(std::ostream& oss, const I3RecoPulse& p);
 
 I3_POINTER_TYPEDEFS(I3RecoPulseSeries);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
-#ifdef I3_USE_FAST_OMKEY_MAP
-BOOST_CLASS_VERSION(I3RecoPulseSeriesMap, 1);
-#endif
 I3_POINTER_TYPEDEFS(I3RecoPulseMap);
-#ifdef I3_USE_FAST_OMKEY_MAP
-BOOST_CLASS_VERSION(I3RecoPulseMap, 1);
-#endif
 
 /*
  * Specialize I3Frame::Get() to turn convert various objects

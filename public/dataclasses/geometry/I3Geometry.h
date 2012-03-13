@@ -41,21 +41,13 @@
 
   -bchristy
 */
-#if I3_USE_FAST_OMKEY_MAP
-static const unsigned i3geometry_version_ = 1;
-#else
 static const unsigned i3geometry_version_ = 0;
-#endif
 //Typedefs to avoid having to write the same thing over and over again.
 typedef std::vector<I3TankGeo> I3StationGeo;
 I3_POINTER_TYPEDEFS(I3StationGeo)
 
 
-#ifdef I3_USE_FAST_OMKEY_MAP
-typedef __gnu_cxx::hash_map<OMKey, I3OMGeo, OMKey::hash> I3OMGeoMap;
-#else
 typedef std::map<OMKey, I3OMGeo> I3OMGeoMap;
-#endif
 I3_POINTER_TYPEDEFS(I3OMGeoMap)
 
 typedef std::map<int, I3StationGeo> I3StationGeoMap;

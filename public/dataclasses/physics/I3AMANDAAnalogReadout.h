@@ -25,11 +25,7 @@
  * that represents the peak from the entire event.  TOTs are generated
  * on the fly and may be wrong if edges are missing.
  */
-#ifdef I3_USE_FAST_OMKEY_MAP
-static const unsigned i3amandaanalogreadout_version_ = 1;
-#else
 static const unsigned i3amandaanalogreadout_version_ = 0;
-#endif
 
 class I3AMANDAAnalogReadout 
 { 
