@@ -24,6 +24,26 @@
 
 using namespace boost::python;
 
+static unsigned
+hash_tankkey(const TankKey &key)
+{
+  return 10*key.string + key.tank;
+}
+
+static std::string repr(const TankKey &key)
+{
+  std::stringstream s;
+  s << "TankKey(" << key.string << ",TankKey.";
+  switch (key.tank) {
+  case TankKey::TankA: s << "TankA";
+    break;
+  case TankKey::TankB: s << "TankB";
+    break;
+  }
+  s << ")";
+  return s.str();
+}
+
 void register_TankKey()
 {
   scope tankkey_scope = 
@@ -33,6 +53,10 @@ void register_TankKey()
     .def(dataclass_suite<TankKey>())
     .def_readwrite("string", &TankKey::string)
     .def_readwrite("tank", &TankKey::tank)
+    .def("__repr__", &repr)
+    .def("__hash__", &hash_tankkey)
+    .def(self == self)
+    .def(self < self)
     ;
   enum_<TankKey::TankID>("TankID")
     .value("TankA", TankKey::TankA)
