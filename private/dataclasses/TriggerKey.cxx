@@ -95,6 +95,8 @@ TriggerKey::GetTypeString(TypeID type)
       return("VOLUME");
     case SPHERE:
       return("SPHERE");
+    case UNBIASED:
+      return("UNBIASED");
     case SPASE_2:
       return("SPASE_2");
     case UNKNOWN_TYPE:
@@ -132,6 +134,8 @@ TriggerKey::GetTypeFromString(const string& typestr)
     return(VOLUME);
   if (typestr=="SPHERE")
     return(SPHERE);
+  if (typestr=="UNBIASED")
+    return(UNBIASED);
   if (typestr=="SPASE_2")
     return(SPASE_2);
   if (typestr=="UNKNOWN_TYPE")
