@@ -24,7 +24,7 @@
  * CherenkovDistance- direct path distance to the track that generated
  * this hit.
  */
-static const unsigned i3mchit_version_ = 2;
+static const unsigned i3mchit_version_ = 3;
 
 /**
  * List the names of enumeration members defined in this file
@@ -59,7 +59,8 @@ class I3MCHit
   I3MCHit() : 
     time_(NAN), 
     hitID_(-1),
-    weight_(NAN), 
+    npe_(1), 
+    charge_(NAN), 
     particleID_(-1), 
     particleMajorID_(0), 
     cherenkovDistance_(NAN),
@@ -68,7 +69,8 @@ class I3MCHit
  I3MCHit(uint64_t mid, int id) : 
     time_(NAN), 
     hitID_(-1),
-    weight_(NAN), 
+    npe_(1),
+    charge_(NAN), 
     particleID_(id), 
     particleMajorID_(mid), 
     cherenkovDistance_(NAN),
@@ -84,12 +86,27 @@ class I3MCHit
 
   void SetHitID(int hitID){hitID_ = hitID;}
 
-  double GetWeight() const { return weight_; }
+  void SetWeight(double w) { 
+    log_warn("I3MCHit::SetWeight is deprecated.  Please use I3MCHit::SetCharge or I3MCHit::SetNPE."
+	     "  Assuming this is NPE for the time being.");
+    npe_ = static_cast<uint64_t>(w);
+  }
 
-  void SetWeight(double weight) { weight_ = weight; }
+  double GetWeight() const { 
+    log_warn("I3MCHit::GetWeight is deprecated.  Please use I3MCHit::GetCharge or I3MCHit::GetNPE.");
+    return static_cast<uint64_t>(npe_); 
+  }
+
+  uint64_t GetNPE() const { return npe_; }
+
+  void SetNPE(uint64_t npe) { npe_ = npe; }
+
+  double GetCharge() const { return charge_; }
+
+  void SetCharge(double charge) { charge_ = charge; }
 
   int GetParticleID() const { 
-    log_warn("I3MCHit::GetParticleID is deprecated.  Please use I3MCHit::GetParticleMinorID");
+    log_warn("I3MCHit::GetParticleID is deprecated.  Please use I3MCHit::GetParticleMinorID.");
     return particleID_; 
   }
 
@@ -119,7 +136,8 @@ class I3MCHit
   bool operator==(const I3MCHit& rhs) {
     return time_ == rhs.time_
       && hitID_ == rhs.hitID_
-      && weight_ == rhs.weight_
+      && charge_ == rhs.charge_
+      && npe_ == rhs.npe_
       && particleID_ == rhs.particleID_
       && particleMajorID_ == rhs.particleMajorID_
       && cherenkovDistance_ == rhs.cherenkovDistance_
@@ -130,7 +148,8 @@ class I3MCHit
 
   double time_;
   int hitID_;
-  double  weight_;
+  uint64_t  npe_;
+  double  charge_;
   int    particleID_;
   uint64_t    particleMajorID_;
   double  cherenkovDistance_;
@@ -138,7 +157,10 @@ class I3MCHit
 
   friend class boost::serialization::access;
 
-  template <class Archive> void serialize(Archive & ar, unsigned version);
+  template <class Archive> void load(Archive & ar, const unsigned version);
+  template <class Archive> void save(Archive & ar, const unsigned version) const ;
+
+  BOOST_SERIALIZATION_SPLIT_MEMBER()
 
 };
 

@@ -32,8 +32,8 @@ void register_I3MCHit()
     scope mchit_scope = 
       class_<I3MCHit, boost::shared_ptr<I3MCHit> >("I3MCHit")
       .def(init<uint64_t,int>() )
-      #define PROPERTIES (Time)(HitID)(Weight)(CherenkovDistance)(HitSource)
-      #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)
+      #define PROPERTIES (Time)(HitID)(Weight)(CherenkovDistance)(HitSource)(Charge)(NPE)
+      #define RO_PROPERTIES (ParticleMajorID)(ParticleMinorID)(Weight)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3MCHit, PROPERTIES)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3MCHit, RO_PROPERTIES)
       #undef PROPERTIES
