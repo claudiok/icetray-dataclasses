@@ -35,7 +35,7 @@
     (SIMPLE_MULTIPLICITY)(CALIBRATION)(MIN_BIAS)(THROUGHPUT)             \
     (TWO_COINCIDENCE)(THREE_COINCIDENCE)(MERGED)(SLOW_PARTICLE)          \
     (FRAGMENT_MULTIPLICITY)                                              \
-    (STRING)(VOLUME)(SPHERE)(SPASE_2)(UNKNOWN_TYPE)
+    (STRING)(VOLUME)(SPHERE)(UNBIASED)(SPASE_2)(UNKNOWN_TYPE)
 
 #define TRIGGERKEY_H_TriggerKey_SubtypeID                                \
     (NO_SUBTYPE)(M18)(M24)(T0)(LASER)(UNKNOWN_SUBTYPE)
@@ -102,6 +102,7 @@ class TriggerKey
     STRING = 120,              // A trigger based on # hits in a string
     VOLUME = 125,              // A volume/geometry specific trigger
     SPHERE = 127,
+    UNBIASED = 129,              // For things like the DAQ FixedRateTrigger
     SPASE_2 = 170,             // SPASE trigger
                                // ... I still don't understand for what this is needed for,
                                // ... or why this isn't a value of SourceID (SPASE_1/SPASE_2)

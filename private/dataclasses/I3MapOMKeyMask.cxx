@@ -487,16 +487,6 @@ I3RecoPulseSeriesMapMask::bitmask::unset_all()
 	memset(mask_, 0, size_*sizeof(mask_t));
 }
 
-inline void
-I3RecoPulseSeriesMapMask::bitmask::set(const unsigned idx, bool set_it)
-{
-	assert(idx < (8*sizeof(mask_t)*size_ - padding_));
-	if (set_it)
-		mask_[idx/(8*sizeof(mask_t))] |= (1 << (idx % (8*sizeof(mask_t))));
-	else
-		mask_[idx/(8*sizeof(mask_t))] &= ~(1 << (idx % (8*sizeof(mask_t))));
-}
-
 inline bool
 I3RecoPulseSeriesMapMask::bitmask::get(const unsigned idx) const
 {
