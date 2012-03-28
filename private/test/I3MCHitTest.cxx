@@ -27,7 +27,9 @@ TEST_GROUP(I3MCHitTest);
 TEST(assignment_copy)
 {
   I3MCHit h, j;
-  ENSURE(isnan(h.GetWeight()));
+  ENSURE(h.GetWeight() == 1);
+  ENSURE(h.GetNPE() == 1);
+  ENSURE(isnan(h.GetCharge()));
   ENSURE(h.GetParticleMinorID()==-1);
   ENSURE(h.GetParticleMajorID()==0);
 
