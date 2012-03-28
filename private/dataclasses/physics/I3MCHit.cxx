@@ -50,5 +50,5 @@ void I3MCHit::load (Archive &ar, const unsigned version)
 
   
 
-I3_SERIALIZABLE(I3MCHit);
+I3_SPLIT_SERIALIZABLE(I3MCHit);
 I3_SERIALIZABLE(I3MCHitSeriesMap);
