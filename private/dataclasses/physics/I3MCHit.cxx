@@ -37,7 +37,7 @@ void I3MCHit::load (Archive &ar, const unsigned version)
   }else{
     double weight;
     ar & make_nvp("Weight", weight);
-    npe_ = static_cast<unsigned>(weight);
+    npe_ = static_cast<uint64_t>(weight);
   }
   ar & make_nvp("ParticleID", particleID_);
   if(version>0)
