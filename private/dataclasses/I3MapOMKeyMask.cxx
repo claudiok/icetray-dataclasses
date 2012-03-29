@@ -92,6 +92,35 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
 	}
 }
 
+I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
+    const std::string &key, boost::function<bool (const OMKey&, size_t, const I3RecoPulse&)> predicate)
+    : key_(key)
+{
+	source_ = frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMap> >(key_);
+	
+	if (!source_)
+		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
+	
+	omkey_mask_ = bitmask(source_->size(), false);
+	assert(omkey_mask_.size() == source_->size());
+	
+	size_t om_idx(0);
+	BOOST_FOREACH(const I3RecoPulseSeriesMap::value_type &pair, *source_) {
+		bitmask mask = bitmask(pair.second.size(), true);
+		
+		size_t pulse_idx(0);
+		BOOST_FOREACH(const I3RecoPulseSeriesMap::mapped_type::value_type &pulse, pair.second) {
+			mask.set(pulse_idx, predicate(pair.first, pulse_idx, pulse));
+			pulse_idx++;
+		}
+		
+		if (mask.sum() > 0) {
+			omkey_mask_.set(om_idx, true);
+			element_masks_.push_back(mask);
+		}
+		om_idx++;
+	}
+}
 
 void
 I3RecoPulseSeriesMapMask::SetNone()
@@ -485,6 +514,16 @@ void
 I3RecoPulseSeriesMapMask::bitmask::unset_all()
 {
 	memset(mask_, 0, size_*sizeof(mask_t));
+}
+
+inline void
+I3RecoPulseSeriesMapMask::bitmask::set(const unsigned idx, bool set_it)
+{
+	assert(idx < (8*sizeof(mask_t)*size_ - padding_));
+	if (set_it)
+		mask_[idx/(8*sizeof(mask_t))] |= (1 << (idx % (8*sizeof(mask_t))));
+	else
+		mask_[idx/(8*sizeof(mask_t))] &= ~(1 << (idx % (8*sizeof(mask_t))));
 }
 
 inline bool
