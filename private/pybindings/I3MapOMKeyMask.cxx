@@ -1,7 +1,7 @@
 
 #include <boost/foreach.hpp>
 #include <dataclasses/I3MapOMKeyMask.h>
-#include <icetray/python/dataclass_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
 
 namespace bp = boost::python;
 
@@ -36,6 +36,7 @@ void register_I3RecoPulseSeriesMapMask()
 	    bp::init<const I3Frame&, const std::string &>(bp::args("frame", "key")))
 		.def(bp::init<const I3Frame&, const std::string &, const I3RecoPulseSeriesMap &>())
 		.add_property("source", &I3RecoPulseSeriesMapMask::GetSource)
+	        .def(bp::copy_suite<I3RecoPulseSeriesMapMask>()) 
 		.add_property("bits", &getbits)
 		.def("__and__", &I3RecoPulseSeriesMapMask::operator&)
 		.def("__or__", &I3RecoPulseSeriesMapMask::operator|)
@@ -48,7 +49,6 @@ void register_I3RecoPulseSeriesMapMask()
 		.def("set", set_om_by_idx, "Set/unset the bit at this index.")
 		.def("set", set_om_by_value, "Set/unset the bit corresponding to this RecoPulse.")
 		.def("set_none", &I3RecoPulseSeriesMapMask::SetNone, "Unset all bits in the mask.")
-		.def(bp::dataclass_suite<I3RecoPulseSeriesMapMask>())
 	;
 	
 	register_pointer_conversions<I3RecoPulseSeriesMapMask>();
