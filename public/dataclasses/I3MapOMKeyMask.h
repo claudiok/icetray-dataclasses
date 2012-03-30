@@ -14,15 +14,14 @@
 #include <string>
 #include <list>
 #include <boost/foreach.hpp>
-#include <boost/utility.hpp>
-#include <boost/type_traits/is_same.hpp>
+#include <boost/function.hpp>
+#include <boost/dynamic_bitset.hpp> 
 
 #include "icetray/I3FrameObject.h"
 #include "icetray/OMKey.h"
 #include "icetray/I3Frame.h"
 #include "icetray/serialization.h"
 #include "dataclasses/physics/I3RecoPulse.h"
-
 
 static const unsigned i3recopulseseriesmapmask_version_ = 0;
 
@@ -39,15 +38,13 @@ public:
 	 */
 	I3RecoPulseSeriesMapMask(const I3Frame&, const std::string &key,
 	    const I3RecoPulseSeriesMap &subset);
-	
 	/*
-	 * Construct a mask by predicate that defines
-	 * bool operator()(const OMKey&, size_t, const I3RecoPulse&)
+	 * Construct a mask by predicate. This may be either a free function
+	 * or an instance of a class that implements
+	 * bool operator()(const OMKey&, size_t, const I3RecoPulse&).
 	 */
-	template <typename Predicate>
-	I3RecoPulseSeriesMapMask(const I3Frame&, const std::string &key,
-	    Predicate &predicate,
-	    typename boost::disable_if<boost::is_same<Predicate, I3RecoPulseSeriesMap> >::type* = 0);
+ 	I3RecoPulseSeriesMapMask(const I3Frame&, const std::string &key,
+ 	    boost::function<bool (const OMKey&, size_t, const I3RecoPulse&)> predicate);
 	
 	/*
 	 * Set/unset all elements for an OMKey.
@@ -87,6 +84,9 @@ public:
 	 * Are all bits set?
 	 */
 	bool GetAllSet() const;
+	 
+	 
+	std::vector<boost::dynamic_bitset<uint8_t> > GetBits() const;
 	
 	/*
 	 * Logical operators, applied elementwise.
@@ -168,51 +168,11 @@ private:
 	SET_LOGGER("I3RecoPulseSeriesMapMask");
 };
 
+template<> void I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsigned version);
+template<> void I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsigned version) const;
 
 BOOST_CLASS_VERSION(I3RecoPulseSeriesMapMask, i3recopulseseriesmapmask_version_);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMapMask);
-
-inline void
-I3RecoPulseSeriesMapMask::bitmask::set(const unsigned idx, bool set_it)
-{
-	assert(idx < (8*sizeof(mask_t)*size_ - padding_));
-	if (set_it)
-		mask_[idx/(8*sizeof(mask_t))] |= (1 << (idx % (8*sizeof(mask_t))));
-	else
-		mask_[idx/(8*sizeof(mask_t))] &= ~(1 << (idx % (8*sizeof(mask_t))));
-}
-
-template <typename Predicate>
-I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
-    const std::string &key, Predicate &predicate,
-    typename boost::disable_if<boost::is_same<Predicate, I3RecoPulseSeriesMap> >::type*)
-    : key_(key)
-{
-	source_ = frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMap> >(key_);
-	
-	if (!source_)
-		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
-	
-	omkey_mask_ = bitmask(source_->size(), false);
-	assert(omkey_mask_.size() == source_->size());
-	
-	size_t om_idx(0);
-	BOOST_FOREACH(const I3RecoPulseSeriesMap::value_type &pair, *source_) {
-		bitmask mask = bitmask(pair.second.size(), true);
-		
-		size_t pulse_idx(0);
-		BOOST_FOREACH(const I3RecoPulseSeriesMap::mapped_type::value_type &pulse, pair.second) {
-			mask.set(pulse_idx, predicate(pair.first, pulse_idx, pulse));
-			pulse_idx++;
-		}
-		
-		if (mask.sum() > 0) {
-			omkey_mask_.set(om_idx, true);
-			element_masks_.push_back(mask);
-		}
-		om_idx++;
-	}
-}
 
 #endif /* DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED */
 

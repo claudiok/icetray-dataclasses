@@ -1,6 +1,7 @@
 
+#include <boost/foreach.hpp>
 #include <dataclasses/I3MapOMKeyMask.h>
-#include <icetray/python/copy_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 namespace bp = boost::python;
 
@@ -8,6 +9,20 @@ I3RecoPulseSeriesMapPtr
 underhanded_apply(const I3RecoPulseSeriesMapMask& mask, const I3Frame &frame)
 {
 	return boost::const_pointer_cast<I3RecoPulseSeriesMap>(mask.Apply(frame));
+}
+
+bp::list
+getbits(const I3RecoPulseSeriesMapMask &mask)
+{
+	bp::list usermask;
+	BOOST_FOREACH(const boost::dynamic_bitset<uint8_t> &bits, mask.GetBits()) {
+		bp::list elements;
+		for (size_t i = 0; i < bits.size(); i++)
+			elements.append(bits.test(i));
+		usermask.append(elements);
+	}
+	
+	return usermask;
 }
 
 void register_I3RecoPulseSeriesMapMask()
@@ -21,7 +36,7 @@ void register_I3RecoPulseSeriesMapMask()
 	    bp::init<const I3Frame&, const std::string &>(bp::args("frame", "key")))
 		.def(bp::init<const I3Frame&, const std::string &, const I3RecoPulseSeriesMap &>())
 		.add_property("source", &I3RecoPulseSeriesMapMask::GetSource)
-		.def(bp::copy_suite<I3RecoPulseSeriesMapMask>())
+		.add_property("bits", &getbits)
 		.def("__and__", &I3RecoPulseSeriesMapMask::operator&)
 		.def("__or__", &I3RecoPulseSeriesMapMask::operator|)
 		.def("__xor__", &I3RecoPulseSeriesMapMask::operator^)
@@ -33,6 +48,7 @@ void register_I3RecoPulseSeriesMapMask()
 		.def("set", set_om_by_idx, "Set/unset the bit at this index.")
 		.def("set", set_om_by_value, "Set/unset the bit corresponding to this RecoPulse.")
 		.def("set_none", &I3RecoPulseSeriesMapMask::SetNone, "Unset all bits in the mask.")
+		.def(bp::dataclass_suite<I3RecoPulseSeriesMapMask>())
 	;
 	
 	register_pointer_conversions<I3RecoPulseSeriesMapMask>();
