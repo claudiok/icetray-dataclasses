@@ -165,6 +165,27 @@ I3RecoPulseSeriesMapMask::GetAllSet() const
 	}
 }
 
+std::vector<boost::dynamic_bitset<uint8_t> >
+I3RecoPulseSeriesMapMask::GetBits() const
+{
+	typedef boost::dynamic_bitset<uint8_t> bitset;
+	std::vector<bitset> bits;
+	
+	std::list<bitmask>::const_iterator list_it = element_masks_.begin();	
+	for (unsigned i = 0; i < omkey_mask_.size(); i++)
+		if (omkey_mask_.get(i)) {
+			const bitmask &privmask = *(list_it++);
+			bitset pubmask(privmask.size());
+			for (unsigned j = 0; j < privmask.size(); j++)
+				pubmask.set(j, privmask.get(j));
+			bits.push_back(pubmask);
+		} else {
+			bits.push_back(bitset(0));
+		}
+	
+	return bits;
+}
+
 int
 I3RecoPulseSeriesMapMask::FindKey(const OMKey &key,
     std::list<bitmask>::iterator &list_it, const I3RecoPulseSeriesMap::mapped_type **vec)

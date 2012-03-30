@@ -14,7 +14,8 @@
 #include <string>
 #include <list>
 #include <boost/foreach.hpp>
-#include <boost/function.hpp>	 
+#include <boost/function.hpp>
+#include <boost/dynamic_bitset.hpp> 
 
 #include "icetray/I3FrameObject.h"
 #include "icetray/OMKey.h"
@@ -83,6 +84,9 @@ public:
 	 * Are all bits set?
 	 */
 	bool GetAllSet() const;
+	 
+	 
+	std::vector<boost::dynamic_bitset<uint8_t> > GetBits() const;
 	
 	/*
 	 * Logical operators, applied elementwise.
