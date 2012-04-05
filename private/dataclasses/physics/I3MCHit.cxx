@@ -15,12 +15,12 @@ void I3MCHit::save (Archive &ar, const unsigned version) const
   //always write the latest version
   ar & make_nvp("time",time_);
   ar & make_nvp("hitID",hitID_);
+  ar & make_nvp("NPE", npe_);
+  ar & make_nvp("Charge", charge_);
   ar & make_nvp("ParticleID", particleID_);
   ar & make_nvp("ParticleMajorID", particleMajorID_);
   ar & make_nvp("CherenkovDistance", cherenkovDistance_);
   ar & make_nvp("HitSource", source_);
-  ar & make_nvp("NPE", npe_);
-  ar & make_nvp("Charge", charge_);
 }
 
 template <class Archive>
