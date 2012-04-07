@@ -27,6 +27,13 @@
 static const unsigned i3mchit_version_ = 3;
 
 /**
+ * Allow projects to conditionally compile code that
+ * uses either SetWeight() or SetNPE()/SetCharge(),
+ * depending on the MCHit version.
+ */
+#define I3MCHIT_WEIGHT_IS_DEPRECATED 1
+
+/**
  * List the names of enumeration members defined in this file
  * here. These can be used for e.g. pybindings, which require
  * the names of the enumeration members to be known. This list
