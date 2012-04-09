@@ -93,14 +93,11 @@ class I3MCHit
 
   void SetHitID(int hitID){hitID_ = hitID;}
 
-  void SetWeight(double w) { 
-    log_warn("I3MCHit::SetWeight is deprecated.  Please use I3MCHit::SetCharge or I3MCHit::SetNPE."
-	     "  Assuming this is NPE for the time being.");
+  // Below are deprecated! Assumes weight == NPE
+  void SetWeight(double w) __attribute__((__deprecated__)) { 
     npe_ = static_cast<uint64_t>(w);
   }
-
-  double GetWeight() const { 
-    log_warn("I3MCHit::GetWeight is deprecated.  Please use I3MCHit::GetCharge or I3MCHit::GetNPE.");
+  double GetWeight() const __attribute__((__deprecated__)) { 
     return static_cast<uint64_t>(npe_); 
   }
 
