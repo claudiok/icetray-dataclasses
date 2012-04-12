@@ -12,6 +12,7 @@
 
 #include "dataclasses/physics/I3LinearizedMCTree.h"
 #include "dataclasses/I3Constants.h"
+#include "icetray/I3Units.h"
 
 #include <boost/foreach.hpp>
 #include <queue>
@@ -27,18 +28,7 @@ I3LinearizedMCTree::I3Stochastic::serialize(Archive &ar, unsigned version)
 	ar & make_nvp("Type", type_);
 }
 
-template <class Archive>
-void
-I3LinearizedMCTree::serialize(Archive &ar, unsigned version)
-{
-	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-	ar & make_nvp("I3MCTree", tree_);
-	ar & make_nvp("Ranges", ranges_);
-	ar & make_nvp("Stochastics", stochastics_);
-}
-
 I3_SERIALIZABLE(I3LinearizedMCTree::I3Stochastic);
-I3_SERIALIZABLE(I3LinearizedMCTree);
 
 I3LinearizedMCTree::I3Stochastic::I3Stochastic(const I3Particle &parent, const I3Particle &p)
 {
@@ -58,19 +48,19 @@ bool
 I3LinearizedMCTree::I3Stochastic::IsCompressible(const I3Particle &parent, const I3Particle &p)
 {
 	if ((p.IsCascade() && p.GetLocationType() == I3Particle::InIce)
-	    && (p.GetFitStatus() == I3Particle::NotSet) && (p.GetLength() == 0.)
+	    && (p.GetFitStatus() == I3Particle::NotSet) && (p.GetLength() == 0.*I3Units::m)
 	    && (p.GetSpeed() == I3Constants::c) && (p.GetDir() == parent.GetDir())) {
 		    I3Particle newp(p);
 		    Propagate(newp, parent.GetTime() - p.GetTime());
 		    double position_err = newp.GetPos().CalcDistance(parent.GetPos());
-		    return (position_err < 0.5);
+		    return (position_err < 0.5*I3Units::m);
 	} else {
 		return false;
 	}
 }
 
 I3Particle
-I3LinearizedMCTree::I3Stochastic::Rehydrate(const I3Particle &parent) const
+I3LinearizedMCTree::I3Stochastic::Reconstruct(const I3Particle &parent) const
 {
 	I3Particle p;
 	
@@ -78,7 +68,7 @@ I3LinearizedMCTree::I3Stochastic::Rehydrate(const I3Particle &parent) const
 	p.SetFitStatus(I3Particle::NotSet);
 	p.SetLocationType(I3Particle::InIce);
 	p.SetSpeed(I3Constants::c);
-	p.SetLength(0.);
+	p.SetLength(0.*I3Units::m);
 	
 	p.SetEnergy(energy_);
 	p.SetType(type_);
@@ -97,7 +87,9 @@ I3LinearizedMCTree::I3Stochastic::Rehydrate(const I3Particle &parent) const
 	return p;
 }
 
-// I3Particle::ShiftAlongTrack() without stupid assert()s.
+/**
+ * I3Particle::ShiftAlongTrack() without stupid assert()s.
+ */
 void
 I3LinearizedMCTree::I3Stochastic::Propagate(I3Particle &p, double tick)
 {
@@ -113,7 +105,7 @@ I3LinearizedMCTree::I3Stochastic::Propagate(I3Particle &p, double tick)
 }
 
 namespace {
-
+	
 class pid {
 private:
 	uint64_t major_;
@@ -139,105 +131,113 @@ public:
 
 }
 
-I3LinearizedMCTree::I3LinearizedMCTree(const I3MCTree &source) : tree_(source)
+template <class Archive>
+void
+I3LinearizedMCTree::save(Archive &ar, unsigned version) const
 {
-	typedef I3MCTree::pre_order_iterator pre_iterator;
-	typedef I3MCTree::post_order_iterator post_iterator;
-	
-	typedef std::map<pid, std::list<stochastic_t> > pid_map_t;
-	typedef std::map<unsigned, std::list<stochastic_t> > idx_map_t;
+	typedef std::map<pid, std::list<I3Stochastic> > pid_map_t;
+	typedef std::map<unsigned, std::list<I3Stochastic> > idx_map_t;
 	pid_map_t stripped;
 	
-	for (post_iterator it = tree_.begin_post(); it != tree_.end_post(); ) {
-		pre_iterator parent = tree_.parent(it);
+	I3MCTree tree(*this);
+	for (post_iterator it = tree.begin_post(); it != tree.end_post(); ) {
+		pre_iterator parent = tree.parent(it);
 		// Strip out nodes that
 		//    a) have a parent, and
 		//    b) are leaf nodes, and
 		//    c) are stochastic energy losses, and
 		//    d) are not the parents of already-stripped nodes
-		if (tree_.is_valid(parent) && (it.number_of_children() == 0) 
+		if (tree.is_valid(parent) && (it.number_of_children() == 0) 
 		    && I3Stochastic::IsCompressible(*parent, *it) && (stripped.find(*it) == stripped.end())) {
-			stripped[*parent].push_back(stochastic_t(*parent, *it));
-			it = tree_.erase(it);
+			stripped[*parent].push_back(I3Stochastic(*parent, *it));
+			it = tree.erase(it);
 		} else {
 			it++;
 		}
 	}
 	
-	// Record the distance from the beginning of the tree and number of 
-	// stripped nodes for each parent, and append the stripped nodes to
-	// a flat vector.
+	// Re-sort the list of stripped nodes by the distance of the parent
+	// from the beginning of the tree.
 	idx_map_t stripped_idx;
 	BOOST_FOREACH(pid_map_t::value_type &pair, stripped) {
-		pre_iterator pos = tree_.begin();
+		pre_iterator pos = tree.begin();
 		unsigned idx = 0;
-		for ( ; pos != tree_.end() && (pair.first != *pos); pos++, idx++) {}
+		for ( ; pos != tree.end() && (pair.first != *pos); pos++, idx++) {}
 		pair.second.sort();
 		stripped_idx[idx].swap(pair.second);
 	}
 	
-	size_t n_stochastics = 0;
+	// Now, flatten the list of stripped nodes, noting the index and
+	// number of children for each parent.
+	std::vector<I3Stochastic> stochastics;
+	std::vector<range_t> ranges;
 	BOOST_FOREACH(const idx_map_t::value_type &pair, stripped_idx) {
-		ranges_.push_back(std::make_pair(pair.first, pair.second.size()));
+		ranges.push_back(std::make_pair(pair.first, pair.second.size()));
 		std::copy(pair.second.begin(), pair.second.end(),
-		    std::back_inserter(stochastics_));
-		n_stochastics += pair.second.size();
+		    std::back_inserter(stochastics));
 	}
+	
+	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("I3MCTree", tree);
+	ar & make_nvp("Ranges", ranges);
+	ar & make_nvp("Stochastics", stochastics);
 }
 
-I3LinearizedMCTree::operator I3MCTree()
+template <class Archive>
+void
+I3LinearizedMCTree::load(Archive &ar, unsigned version)
 {
-	typedef I3MCTree::pre_order_iterator pre_iterator;
-	typedef I3MCTree::sibling_iterator sibling_iterator;
-	
-	I3MCTree retree(tree_);
-	
+	std::vector<I3Stochastic> stochastics;
+	std::vector<range_t> ranges;
+	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("I3MCTree", base_object<I3MCTree>(*this));
+	ar & make_nvp("Ranges", ranges);
+	ar & make_nvp("Stochastics", stochastics);
+		
 	// Find the points in the *stripped* tree where
 	// we should attach the stripped leaves.
 	std::queue<pid> parents;
-	BOOST_FOREACH(const range_t &span, ranges_) {
-		pre_iterator it = retree.begin();
+	BOOST_FOREACH(const range_t &span, ranges) {
+		pre_iterator it = this->begin();
 		std::advance(it, span.first);
 		parents.push(*it);
 	}
 	
-	std::vector<stochastic_t>::const_iterator leaf = stochastics_.begin();
-	BOOST_FOREACH(const range_t &span, ranges_) {
-		pre_iterator parent = retree.begin();
+	std::vector<I3Stochastic>::const_iterator leaf = stochastics.begin();
+	BOOST_FOREACH(const range_t &span, ranges) {
+		pre_iterator parent = this->begin();
 		unsigned idx = 0;
-		for ( ; parent != retree.end() && (parents.front() != *parent); parent++, idx++) {}
+		for ( ; parent != this->end() && (parents.front() != *parent); parent++, idx++) {}
 
 		// Insert new leaves in time order relative to existing siblings
 		sibling_iterator splice = parent.begin();
 		for (unsigned i = 0; i < span.second; i++, leaf++) {
-			I3Particle rehydrated = leaf->Rehydrate(*parent);
-			while (splice != parent.end() && rehydrated.GetTime() >= splice->GetTime())
+			I3Particle reco = leaf->Reconstruct(*parent);
+			while (splice != parent.end() && reco.GetTime() >= splice->GetTime())
 				splice++;
 			if (splice == parent.end())
-				splice = retree.append_child(parent, rehydrated);
+				splice = this->append_child(parent, reco);
 			else
-				splice = retree.insert(splice, rehydrated);
+				splice = this->insert(splice, reco);
 		}
 		
 		parents.pop();
 	}
-	
-	return retree;
 }
 
-size_t
-I3LinearizedMCTree::GetNumberOfStrippedParents() const
+// Don't bother with compact serialization for XML archives
+template<>
+void I3LinearizedMCTree::save(boost::archive::xml_oarchive& ar, unsigned version) const
 {
-	return ranges_.size();
+	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("I3MCTree", base_object<I3MCTree>(*this));
 }
 
-size_t
-I3LinearizedMCTree::GetNumberOfStrippedStochastics() const
+template<>
+void I3LinearizedMCTree::load(boost::archive::xml_iarchive& ar, unsigned version)
 {
-	size_t n_stochastics = 0;
-	BOOST_FOREACH(const range_t &span, ranges_)
-		n_stochastics += span.second;
-	
-	return n_stochastics;
+	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+	ar & make_nvp("I3MCTree", base_object<I3MCTree>(*this));
 }
 
+I3_SERIALIZABLE(I3LinearizedMCTree);

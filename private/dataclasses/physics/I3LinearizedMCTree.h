@@ -16,6 +16,8 @@
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/physics/I3MCTree.h"
 
+static const unsigned i3linearizedmctree_version_ = 0;
+
 /**
  * @brief A compact I3MCTree
  * 
@@ -32,15 +34,10 @@
  * - Times and energies will only be identical to within single precision
  * - The positions of daughter particles may deviate by up to 50 cm.
  */
-class I3LinearizedMCTree : public I3FrameObject {
+class I3LinearizedMCTree : public I3MCTree {
 public:
 	I3LinearizedMCTree() {};
-	explicit I3LinearizedMCTree(const I3MCTree &);
-	
-	operator I3MCTree();
-	
-	size_t GetNumberOfStrippedParents() const;
-	size_t GetNumberOfStrippedStochastics() const;
+	explicit I3LinearizedMCTree(const I3MCTree &tree) : I3MCTree(tree) {};
 	
 	class I3Stochastic {
 	public:
@@ -50,13 +47,12 @@ public:
 		static bool IsCompressible(const I3Particle &parent, const I3Particle &stochastic);
 		bool operator<(const I3Stochastic &other) const;
 	
-		I3Particle Rehydrate(const I3Particle &parent) const;
+		I3Particle Reconstruct(const I3Particle &parent) const;
 		
 	private:
 		static void Propagate(I3Particle &p, double time);
 	
 		friend class boost::serialization::access;
-	
 		template <class Archive>
 		void serialize(Archive &ar, unsigned version);
 	
@@ -68,18 +64,21 @@ public:
 	
 	
 private:
-	I3MCTree tree_;
 	typedef std::pair<unsigned, unsigned> range_t;
-	typedef I3Stochastic stochastic_t;
-	std::vector<stochastic_t> stochastics_;
-	std::vector<range_t> ranges_;
+	typedef I3MCTree::pre_order_iterator pre_iterator;
+	typedef I3MCTree::post_order_iterator post_iterator;
+	typedef I3MCTree::sibling_iterator sibling_iterator;
 		
 	friend class boost::serialization::access;
-	
 	template <class Archive>
-	void serialize(Archive &ar, unsigned version);
+	void load(Archive &ar, unsigned version);
+	template <class Archive>
+	void save(Archive &ar, unsigned version) const;
+	BOOST_SERIALIZATION_SPLIT_MEMBER();
+	
 };
 
 I3_POINTER_TYPEDEFS(I3LinearizedMCTree);
+BOOST_CLASS_VERSION(I3LinearizedMCTree,i3linearizedmctree_version_);
 
 #endif /* DATACLASSES_I3LINEARIZEDMCTREE_H_INCLUDED */
