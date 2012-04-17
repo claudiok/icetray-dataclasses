@@ -38,5 +38,7 @@ void register_I3DOMFunctions()
   def("mpe_discriminator_threshold",&MPEDiscriminatorThreshold);
   def("domcaal_version",&DOMCalVersion);
   def("which_atwd",&WhichATWD);
+  def("old_mpe_threshold",&OldmpeThreshold);
+  def("old_spe_threshold",&OldspeThreshold);
 
 } 
