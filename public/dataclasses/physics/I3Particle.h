@@ -324,6 +324,7 @@ class I3Particle : public I3FrameObject
 
  private:
 
+  friend class I3LinearizedMCTree;
   friend class boost::serialization::access;
   template <class Archive> void save(Archive & ar, unsigned version) const;
   template <class Archive> void load(Archive & ar, unsigned version);
