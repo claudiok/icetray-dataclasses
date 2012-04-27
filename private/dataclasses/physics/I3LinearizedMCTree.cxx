@@ -17,9 +17,32 @@
 #include <boost/foreach.hpp>
 #include <queue>
 
+class I3Stochastic {
+public:
+  I3Stochastic() : time_(0), energy_(0) {};
+  I3Stochastic(const I3Particle &parent, const I3Particle &stochastic);
+  
+  static bool IsCompressible(const I3Particle &parent, const I3Particle &stochastic);
+  bool operator<(const I3Stochastic &other) const;
+  
+  I3Particle Reconstruct(const I3Particle &parent) const;
+  
+private:
+  static void Propagate(I3Particle &p, double time);
+  
+  friend class boost::serialization::access;
+  template <class Archive>
+  void serialize(Archive &ar, unsigned version);
+  
+  float time_, energy_;
+  uint64_t major_id_;
+  int minor_id_;
+  I3Particle::ParticleType type_;
+};
+
 template <class Archive>
 void
-I3LinearizedMCTree::I3Stochastic::serialize(Archive &ar, unsigned version)
+I3Stochastic::serialize(Archive &ar, unsigned version)
 {
 	ar & make_nvp("Time", time_);
 	ar & make_nvp("Energy", energy_);
@@ -28,9 +51,9 @@ I3LinearizedMCTree::I3Stochastic::serialize(Archive &ar, unsigned version)
 	ar & make_nvp("Type", type_);
 }
 
-I3_SERIALIZABLE(I3LinearizedMCTree::I3Stochastic);
+I3_SERIALIZABLE(I3Stochastic);
 
-I3LinearizedMCTree::I3Stochastic::I3Stochastic(const I3Particle &parent, const I3Particle &p)
+I3Stochastic::I3Stochastic(const I3Particle &parent, const I3Particle &p)
 {
 	time_ = p.GetTime()-parent.GetTime();
 	energy_ = p.GetEnergy();
@@ -39,13 +62,13 @@ I3LinearizedMCTree::I3Stochastic::I3Stochastic(const I3Particle &parent, const I
 	type_ = p.GetType();
 }
 
-bool I3LinearizedMCTree::I3Stochastic::operator<(const I3LinearizedMCTree::I3Stochastic &other) const
+bool I3Stochastic::operator<(const I3Stochastic &other) const
 {
 	return time_ < other.time_;
 }
 
 bool
-I3LinearizedMCTree::I3Stochastic::IsCompressible(const I3Particle &parent, const I3Particle &p)
+I3Stochastic::IsCompressible(const I3Particle &parent, const I3Particle &p)
 {
 	if ((p.IsCascade() && p.GetLocationType() == I3Particle::InIce)
 	    && (p.GetFitStatus() == I3Particle::NotSet) && (p.GetLength() == 0.*I3Units::m)
@@ -60,7 +83,7 @@ I3LinearizedMCTree::I3Stochastic::IsCompressible(const I3Particle &parent, const
 }
 
 I3Particle
-I3LinearizedMCTree::I3Stochastic::Reconstruct(const I3Particle &parent) const
+I3Stochastic::Reconstruct(const I3Particle &parent) const
 {
 	I3Particle p;
 	
@@ -91,7 +114,7 @@ I3LinearizedMCTree::I3Stochastic::Reconstruct(const I3Particle &parent) const
  * I3Particle::ShiftAlongTrack() without stupid assert()s.
  */
 void
-I3LinearizedMCTree::I3Stochastic::Propagate(I3Particle &p, double tick)
+I3Stochastic::Propagate(I3Particle &p, double tick)
 {
 	I3Position pos = p.GetPos();
 	const I3Direction &dir = p.GetDir();
