@@ -85,7 +85,7 @@ I3Stochastic::IsCompressible(const I3Particle &parent, const I3Particle &p)
 I3Particle
 I3Stochastic::Reconstruct(const I3Particle &parent) const
 {
-	I3Particle p;
+	I3Particle p = I3Particle::CreateWithID(major_id_, minor_id_);
 	
 	p.SetShape(I3Particle::Null);
 	p.SetFitStatus(I3Particle::NotSet);
@@ -95,12 +95,6 @@ I3Stochastic::Reconstruct(const I3Particle &parent) const
 	
 	p.SetEnergy(energy_);
 	p.SetType(type_);
-	
-	// The uniqueness of I3Particle IDs is guaranteed by the constructor
-	// and expected by client code (e.g. all of I3MCTreeUtils).
-	// Handle with care.
-	p.major_ID_ = major_id_;
-	p.ID_ = minor_id_;
 	
 	p.SetDir(parent.GetDir());
 	p.SetPos(parent.GetPos());

@@ -39,6 +39,15 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   log_trace("Calling I3Particle::I3Particle(ParticleShape %i, ParticleType %i).", static_cast<int>(shape), static_cast<int>(type));
 }
 
+I3Particle I3Particle::CreateWithID(uint64_t major, int minor)
+{
+	I3Particle particle;
+	particle.major_ID_ = major;
+	particle.ID_ = minor;
+	
+	return particle;
+}
+
 // using the magic of the preprocessor, expand
 // the existing list of enum entries into a case
 // line converting from enum to string
