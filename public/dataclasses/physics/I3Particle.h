@@ -236,7 +236,9 @@ class I3Particle : public I3FrameObject
  public:
 
   I3Particle(ParticleShape shape = Null, ParticleType type = unknown);
-  
+
+  static I3Particle CreateWithID(uint64_t major, int minor);
+
   virtual ~I3Particle();
 
   bool IsTrack() const;
@@ -324,7 +326,6 @@ class I3Particle : public I3FrameObject
 
  private:
 
-  friend class I3LinearizedMCTree;
   friend class boost::serialization::access;
   template <class Archive> void save(Archive & ar, unsigned version) const;
   template <class Archive> void load(Archive & ar, unsigned version);

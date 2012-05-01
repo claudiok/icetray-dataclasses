@@ -31,6 +31,15 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   major_ID_ = global_major_id_;
 }
 
+I3Particle I3Particle::CreateWithID(uint64_t major, int minor)
+{
+  I3Particle particle;
+  particle.major_ID_ = major;
+  particle.ID_ = minor;
+
+  return particle;
+}
+
 std::string I3Particle::GetTypeString() const
 {
   switch (type_) {
