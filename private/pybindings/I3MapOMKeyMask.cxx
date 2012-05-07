@@ -2,6 +2,7 @@
 #include <boost/foreach.hpp>
 #include <dataclasses/I3MapOMKeyMask.h>
 #include <icetray/python/dataclass_suite.hpp>
+#include <icetray/python/function.hpp>
 
 namespace bp = boost::python;
 
@@ -25,16 +26,29 @@ getbits(const I3RecoPulseSeriesMapMask &mask)
 	return usermask;
 }
 
+I3RecoPulseSeriesMapMaskPtr
+from_callable(const I3Frame &frame, const std::string &key, bp::object callable)
+{
+	typedef boost::function<bool (const OMKey&, size_t, const I3RecoPulse&)> callback_t;
+	boost::shared_ptr<callback_t> predicate = bp::detail::function_from_object<callback_t>(callable);
+	return I3RecoPulseSeriesMapMaskPtr(new I3RecoPulseSeriesMapMask(frame, key, *predicate));
+}
+
 void register_I3RecoPulseSeriesMapMask()
 {
 	void (I3RecoPulseSeriesMapMask::*set_om_all)(const OMKey&, bool) = &I3RecoPulseSeriesMapMask::Set;
 	void (I3RecoPulseSeriesMapMask::*set_om_by_idx)(const OMKey&, const unsigned, bool) = &I3RecoPulseSeriesMapMask::Set;
 	void (I3RecoPulseSeriesMapMask::*set_om_by_value)(const OMKey&, const I3RecoPulse&, bool) = &I3RecoPulseSeriesMapMask::Set;
 	
+	typedef boost::function<bool (const OMKey&, size_t, const I3RecoPulse&)> callback_t;
+	
+	bp::scope mask_scope =
 	bp::class_<I3RecoPulseSeriesMapMask, bp::bases<I3FrameObject>,
 	    I3RecoPulseSeriesMapMaskPtr>("I3RecoPulseSeriesMapMask",
 	    bp::init<const I3Frame&, const std::string &>(bp::args("frame", "key")))
+		.def("__init__", bp::make_constructor(&from_callable))
 		.def(bp::init<const I3Frame&, const std::string &, const I3RecoPulseSeriesMap &>())
+		.def(bp::init<const I3Frame&, const std::string &, callback_t>())
 		.add_property("source", &I3RecoPulseSeriesMapMask::GetSource)
 		.add_property("bits", &getbits)
 		.def("__and__", &I3RecoPulseSeriesMapMask::operator&)
@@ -50,6 +64,8 @@ void register_I3RecoPulseSeriesMapMask()
 		.def("set_none", &I3RecoPulseSeriesMapMask::SetNone, "Unset all bits in the mask.")
 		.def(bp::dataclass_suite<I3RecoPulseSeriesMapMask>())
 	;
+	
+	bp::def_function<callback_t>("Predicate");
 	
 	register_pointer_conversions<I3RecoPulseSeriesMapMask>();
 }
