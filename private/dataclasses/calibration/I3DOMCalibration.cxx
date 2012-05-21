@@ -365,38 +365,10 @@ const SPETemplate FADCDroopTemplate = {
 I3DOMCalibration::DroopedSPETemplate
 I3DOMCalibration::DiscriminatorPulseTemplate(bool droopy) const
 {
-  // FIXME: Add a real, properly timed pulse template for the discriminator
-  // For now, use ATWD0 shifted earlier by 25 ns (a made-up number)
-  const double discTimeOffset = 25.0;
-  SPETemplate shiftedTemplate, shiftedDroopTemplate;
-  switch (toroidType_){
-    case OLD_TOROID: 
-      shiftedTemplate = ATWDOldToroidTemplate[0];
-      shiftedTemplate.x0 -= discTimeOffset;
-      if(!droopy)
-        return(DroopedSPETemplate(shiftedTemplate));
-      shiftedDroopTemplate = ATWDOldToroidDroopTemplate[0];
-      shiftedDroopTemplate.x0 -= discTimeOffset;
-      return(DroopedSPETemplate(shiftedTemplate,
-                                shiftedDroopTemplate,
-                                tauparameters_.TauFrac,
-                                droopTimeConstants_[0],
-                                droopTimeConstants_[1]));
-    case NEW_TOROID:
-      shiftedTemplate = ATWDNewToroidTemplate[0];
-      shiftedTemplate.x0 -= discTimeOffset;
-      if(!droopy)
-        return(DroopedSPETemplate(shiftedTemplate));
-      shiftedDroopTemplate = ATWDNewToroidDroopTemplate[0];
-      shiftedDroopTemplate.x0 -= discTimeOffset;
-      return(DroopedSPETemplate(shiftedTemplate,
-                                shiftedDroopTemplate,
-                                tauparameters_.TauFrac,
-                                droopTimeConstants_[0],
-                                droopTimeConstants_[1]));
-    default:
-      log_fatal("Unknown toroid type %d", toroidType_);
-  }
+  // Just give the ATWD0 template for now. Better values should be measured
+  // later.
+
+  return ATWDPulseTemplate(0, droopy);
 }
 
 I3DOMCalibration::DroopedSPETemplate
