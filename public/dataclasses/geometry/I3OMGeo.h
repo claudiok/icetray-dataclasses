@@ -12,6 +12,7 @@
 #include "dataclasses/I3Position.h"
 #include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Orientation.h"
+#include "dataclasses/I3Map.h"
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -64,5 +65,8 @@ struct I3OMGeo
 
 I3_POINTER_TYPEDEFS(I3OMGeo);
 BOOST_CLASS_VERSION(I3OMGeo, i3omgeo_version_);
+
+typedef I3Map<OMKey, I3OMGeo> I3OMGeoMap;
+I3_POINTER_TYPEDEFS(I3OMGeoMap)
 
 #endif //I3OMGEO_H_INCLUDED

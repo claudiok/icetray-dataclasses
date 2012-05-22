@@ -42,3 +42,4 @@ I3OMGeo::serialize(Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3OMGeo);
+I3_SERIALIZABLE(I3OMGeoMap);

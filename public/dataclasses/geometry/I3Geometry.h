@@ -41,20 +41,9 @@
 
   -bchristy
 */
-static const unsigned i3geometry_version_ = 0;
-//Typedefs to avoid having to write the same thing over and over again.
-typedef std::vector<I3TankGeo> I3StationGeo;
-I3_POINTER_TYPEDEFS(I3StationGeo)
+static const unsigned i3geometry_version_ = 1;
 
-
-typedef std::map<OMKey, I3OMGeo> I3OMGeoMap;
-I3_POINTER_TYPEDEFS(I3OMGeoMap)
-
-typedef std::map<int, I3StationGeo> I3StationGeoMap;
-I3_POINTER_TYPEDEFS(I3StationGeoMap)
-
-class I3Geometry 
-  : public I3FrameObject
+class I3Geometry : public I3FrameObject
 {
 public:
   I3Geometry(){};

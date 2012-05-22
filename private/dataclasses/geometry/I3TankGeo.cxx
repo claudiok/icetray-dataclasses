@@ -35,3 +35,5 @@ bool operator==(const I3TankGeo& lhs, const I3TankGeo& rhs){
 }
 
 I3_SERIALIZABLE(I3TankGeo);
+I3_SERIALIZABLE(I3StationGeo);
+I3_SERIALIZABLE(I3StationGeoMap);

@@ -21,23 +21,41 @@
 
 #include <vector>
 
-#include <dataclasses/geometry/I3Geometry.h>
+#include <dataclasses/geometry/I3OMGeo.h>
 #include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
-void register_I3Geometry()
+void register_I3OMGeo()
 {
-    
-    //
-    // I3Geometry
-    //
-    class_<I3Geometry, bases<I3FrameObject>, boost::shared_ptr<I3Geometry> >("I3Geometry")
-    #define GEOMPROPS (omgeo)(stationgeo)(startTime)(endTime)
-    BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3Geometry, GEOMPROPS )
-    #undef GEOMPROPS
-    .def(dataclass_suite<I3Geometry>())
+
+  //
+  // I3OMGeo
+  //
+  {
+    scope omg = class_<I3OMGeo, boost::shared_ptr<I3OMGeo> >("I3OMGeo")
+      .add_property("direction", &I3OMGeo::GetDirection)
+      #define I3OMGEOPROPS (position)(omtype)(orientation)(area) 
+      BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3OMGeo, I3OMGEOPROPS )
+      #undef I3OMGEOPROPS
+      .def(dataclass_suite<I3OMGeo>())
+      ;
+
+    enum_<I3OMGeo::OMType>("OMType")
+      .value("UnknownType", I3OMGeo::UnknownType)
+      .value("AMANDA", I3OMGeo::AMANDA)
+      .value("IceCube", I3OMGeo::IceCube)
+      .value("IceTop", I3OMGeo::IceTop)
+      .export_values()
+      ;
     ;
-    
-    register_pointer_conversions<I3Geometry>();
+
+  }
+  def("identity", identity_<I3OMGeo::OMType>);
+
+  class_<I3OMGeoMap, bases<I3FrameObject>, I3OMGeoMapPtr>("I3OMGeoMap")
+    .def(dataclass_suite<I3OMGeoMap>())
+    ;
+
+  register_pointer_conversions<I3OMGeoMap>();
 }
