@@ -49,11 +49,11 @@ void register_I3Particle()
       #undef PROPERTIES
       #undef CONVENIENCE_BOOLS
       .add_property("pos", make_function( (const I3Position& (I3Particle::*)()) &I3Particle::GetPos, return_internal_reference<1>() ),
-					  (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos ) 
+                                          (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos )
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
-					  (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir ) 
+                                          (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir )
       .def("shift_along_track", &I3Particle::ShiftAlongTrack)
-      .def(dataclass_suite<I3Particle>())													 											 
+      .def(dataclass_suite<I3Particle>())
       ;
 
     enum_<I3Particle::FitStatus>("FitStatus")
@@ -77,6 +77,10 @@ void register_I3Particle()
       ;
 
   }
+  bp::def("identity", identity_<I3Particle::FitStatus>);
+  bp::def("identity", identity_<I3Particle::LocationType>);
+  bp::def("identity", identity_<I3Particle::ParticleType>);
+  bp::def("identity", identity_<I3Particle::ParticleShape>);
 
   class_<std::vector<I3Particle> >("I3ParticleVect")
     .def(dataclass_suite<std::vector<I3Particle> >())

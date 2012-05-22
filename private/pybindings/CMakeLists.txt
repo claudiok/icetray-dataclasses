@@ -51,6 +51,8 @@ i3_add_pybindings(dataclasses
   I3MapKey.cxx
   I3Orientation.cxx
   I3SuperDST.cxx
+  ModuleKey.cxx
+  I3ModuleGeo.cxx
   TankKey.cxx
   mctree/I3MCTreeTools.cxx
   module.cxx
