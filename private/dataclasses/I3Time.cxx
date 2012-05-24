@@ -44,6 +44,13 @@ I3Time::~I3Time() {}
 
 I3Time::I3Time(int32_t year, int64_t daqTime) : year_(year),daqTime_(daqTime) {}
 
+I3Time::I3Time(double mjd) {
+  int32_t modJulianDay = (int32_t)mjd;
+  int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
+  double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
+  SetModJulianTime(modJulianDay, sec, ns);
+}
+
 void I3Time::SetDaqTime(int year, 
                         int64_t daqTime)
 {
@@ -64,6 +71,13 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
   daqTime_ =
     ((int64_t)secsafteryear * ((int64_t)(1e10)))
     + ((int64_t)(ns * 10.));
+}
+
+void I3Time::SetModJulianTimeDouble(double mjd) {
+  int32_t modJulianDay = (int32_t)mjd;
+  int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
+  double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
+  SetModJulianTime(modJulianDay, sec, ns);
 }
 
 void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, int sec, double ns)

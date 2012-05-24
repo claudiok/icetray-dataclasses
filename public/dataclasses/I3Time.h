@@ -102,6 +102,11 @@ class I3Time : public I3FrameObject
    * @brief creates the object with the given times as the DAQ time
    */
   I3Time(int32_t year, int64_t daqTime);
+  
+  /**
+   * @brief creates the object with the given double as ModJulianDay
+   */
+  I3Time(double mjd);
 
   virtual ~I3Time();
 	     
@@ -121,6 +126,11 @@ class I3Time : public I3FrameObject
   void SetModJulianTime(int32_t modJulianDay,
 			int32_t sec,
 			double ns);
+  /**
+   * @brief Sets the time in the Modified julian convention as a direct double
+   * @param mjd the modified julian day as double to set
+   */
+  void SetModJulianTimeDouble(double mjd);
   
   /**
    * @brief Sets the time in the UTC calendar date convention
