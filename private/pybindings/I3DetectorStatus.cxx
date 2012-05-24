@@ -71,7 +71,7 @@ void register_I3DetectorStatus()
   {
     scope outer = 
       class_<I3DOMStatus, boost::shared_ptr<I3DOMStatus> >("I3DOMStatus")
-      #define DOMSTATUSPROPERTIES (pmtHV)(lcMode)(txMode)(lcWindowPre)(lcWindowPost)(lcSpan)(statusFADC)(pmtHV)(speThreshold)(fePedestal)(dacTriggerBias0)(dacTriggerBias1)(dacFADCRef)(deltaCompress)(domGainType)(cableType)(SLCActive)(mpeThreshold)
+      #define DOMSTATUSPROPERTIES (trigMode)(lcMode)(txMode)(lcWindowPre)(lcWindowPost)(lcSpan)(statusFADC)(pmtHV)(speThreshold)(fePedestal)(dacTriggerBias0)(dacTriggerBias1)(dacFADCRef)(deltaCompress)(domGainType)(cableType)(SLCActive)(mpeThreshold)
       BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DOMStatus, DOMSTATUSPROPERTIES)
       #undef DOMSTATUSPROPERTIES
       // If we used snake_case, these two would end up as status_atw_da
