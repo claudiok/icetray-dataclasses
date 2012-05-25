@@ -190,7 +190,7 @@ class I3Position : public I3FrameObject
   /**
    * Rotate position around X axis by angle
    */
-  void RotateZ(double amgle);
+  void RotateZ(double angle);
 
   /**
    * Provide distance to position p
