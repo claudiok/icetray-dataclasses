@@ -23,9 +23,13 @@
 #define MODULEKEY_H_INCLUDED
 
 #include <iostream>
+#include <string>
+
 #include <icetray/IcetrayFwd.h>
 #include <icetray/I3FrameObject.h>
 #include <icetray/serialization.h>
+
+#include "dataclasses/I3Map.h"
 
 static const unsigned modulekey_version_ = 0;
 
@@ -146,5 +150,8 @@ std::ostream& operator<<(std::ostream&, const ModuleKey& key);
 std::istream& operator>>(std::istream&,  ModuleKey&);
 
 I3_POINTER_TYPEDEFS(ModuleKey);
+
+typedef I3Map<ModuleKey, std::string> I3MapModuleKeyString;
+I3_POINTER_TYPEDEFS(I3MapModuleKeyString);
 
 #endif //MODULEKEY_H_INCLUDED

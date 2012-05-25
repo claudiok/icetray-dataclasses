@@ -20,6 +20,7 @@
  */
 #include <dataclasses/ModuleKey.h>
 #include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
@@ -69,4 +70,11 @@ register_ModuleKey()
     ;
 
   from_python_sequence<std::vector<ModuleKey>, variable_capacity_policy>();
+
+    
+  class_<I3MapModuleKeyString, bases<I3FrameObject>, I3MapModuleKeyStringPtr>("I3MapModuleKeyString")
+    .def(dataclass_suite<I3MapModuleKeyString>())
+    ;
+  register_pointer_conversions<I3MapModuleKeyString>();
+
 }

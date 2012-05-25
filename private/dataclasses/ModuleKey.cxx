@@ -37,6 +37,7 @@ ModuleKey::serialize (Archive & ar, unsigned version)
 }
 
 I3_SERIALIZABLE(ModuleKey);
+I3_SERIALIZABLE(I3MapModuleKeyString);
 
 #include <sstream>
 #include <boost/regex.hpp>
