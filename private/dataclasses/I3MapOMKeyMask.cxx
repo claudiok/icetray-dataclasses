@@ -79,7 +79,8 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
 		 * NB: since the subset is ordered, we can wait until the
 		 * superset catches up to increment its iterator.
 		 */
-		if ((sub_mit->first == sup_mit->first) && (sub_mit->second.size() != 0)) {
+	  if ((sub_mit != subset.end()) && (sub_mit->first == sup_mit->first)
+	      && (sub_mit->second.size() != 0)) {
 			bitmask mask = bitmask(sup_mit->second.size(), true);			
 			
 			FillSubsetMask(mask, sup_mit->second, sub_mit->second);
