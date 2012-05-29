@@ -45,6 +45,11 @@ I3Time::~I3Time() {}
 I3Time::I3Time(int32_t year, int64_t daqTime) : year_(year),daqTime_(daqTime) {}
 
 I3Time::I3Time(double mjd) {
+  if (isnan(mjd)) {
+    log_error("Constructing with NAN not possible; will use std constructor");
+    year_=0;
+    daqTime_=0;
+  }
   int32_t modJulianDay = (int32_t)mjd;
   int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
   double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
@@ -74,6 +79,10 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
 }
 
 void I3Time::SetModJulianTimeDouble(double mjd) {
+  if (isnan(mjd)) {
+    log_error("Calling with NAN not possible; will do nothing");
+    return;
+  }
   int32_t modJulianDay = (int32_t)mjd;
   int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
   double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
