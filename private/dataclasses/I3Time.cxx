@@ -4,6 +4,7 @@
 #include <icetray/serialization.h>
 #include <dataclasses/I3Time.h>
 #include <icetray/I3Units.h>
+#include <math.h>
 
 /**
  *Returns true if year is a leap year.
@@ -45,10 +46,17 @@ I3Time::~I3Time() {}
 I3Time::I3Time(int32_t year, int64_t daqTime) : year_(year),daqTime_(daqTime) {}
 
 I3Time::I3Time(double mjd) {
-  int32_t modJulianDay = (int32_t)mjd;
-  int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
-  double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
-  SetModJulianTime(modJulianDay, sec, ns);
+  if (isnan(mjd)) {
+    log_error("constructing with NAN not possible; will use std constructor");
+    year_=0;
+    daqTime_=0;
+  }
+  else {
+    int32_t modJulianDay = (int32_t)mjd;
+    int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
+    double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
+    SetModJulianTime(modJulianDay, sec, ns);
+  }
 }
 
 void I3Time::SetDaqTime(int year, 
@@ -74,6 +82,10 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
 }
 
 void I3Time::SetModJulianTimeDouble(double mjd) {
+  if (isnan(mjd)) {
+    log_error("argument NAN not possible; will do nothing");
+    return;
+  }
   int32_t modJulianDay = (int32_t)mjd;
   int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
   double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
