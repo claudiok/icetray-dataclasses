@@ -63,7 +63,7 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
 bool 
 I3RecoPulse::operator==(const I3RecoPulse& rhs) const
 {
-  return flags_ == flags_ 
+  return flags_ == rhs.flags_ 
     && (time_ == rhs.time_ || (isnan(time_) && isnan(rhs.time_)))
     && (charge_ == rhs.charge_ || (isnan(charge_) && isnan(rhs.charge_)))
     && (width_ == rhs.width_ || (isnan(width_) && isnan(rhs.width_)));
