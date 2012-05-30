@@ -3,6 +3,7 @@
 #include <dataclasses/physics/I3Waveform.h>
 #include <dataclasses/external/CompareFloatingPoint.h>
 #include <string>
+#include <stdio.h>
 
 using CompareFloatingPoint::Compare;
 
@@ -88,3 +89,116 @@ I3_SERIALIZABLE(I3RecoPulse);
 
 I3_SERIALIZABLE(I3RecoPulseSeriesMap);
 I3_SERIALIZABLE(I3RecoPulseMap);
+
+int I3BaseMap<OMKey,std::vector<I3RecoPulse> >::CalcNChannel(std::vector<int> strings){
+	I3BaseMap<OMKey,std::vector<I3RecoPulse> >::iterator it=this->begin();
+	unsigned int n =0;
+	if(strings.empty()){
+		while(it!=this->end()){
+			if(!(*it).second.empty())
+				n++;
+			it++;
+		}
+	}
+	else{
+		while(it!=this->end()){
+				bool found = false;
+				for(unsigned int i = 0; i < strings.size(); i++)
+					if(strings[i] == (*it).first.GetString()){ 
+						found = true;
+						break; 			
+					}				
+				if(!(*it).second.empty() && found)
+					n++;
+				it++;
+		}
+	}
+	return n;
+}
+
+int I3BaseMap<OMKey,std::vector<I3RecoPulse> >::CalcNString(std::vector<int> strings){
+	I3BaseMap<OMKey,std::vector<I3RecoPulse> >::iterator it=this->begin();
+	std::map<int,int> stringMap;
+	if(strings.empty()){
+		while(it!=this->end()){
+			if(!(*it).second.empty())
+				stringMap[(*it).first.GetString()];
+			it++;
+		}
+	}
+	else{
+		
+		while(it!=this->end()){
+				bool found = false;
+				for(unsigned int i = 0; i < strings.size(); i++)
+					if(strings[i] == (*it).first.GetString()) {
+						found = true;
+						break;
+					} 			
+				
+				if(!(*it).second.empty() && found)
+					stringMap[(*it).first.GetString()];
+				it++;
+		}
+	}
+	return stringMap.size();
+}
+
+double I3BaseMap<OMKey,std::vector<I3RecoPulse> >::CalcQTot(std::vector<int> strings){
+	I3BaseMap<OMKey,std::vector<I3RecoPulse> >::iterator it=this->begin();
+	double q =0;
+	if(strings.empty()){
+		while(it!=this->end()){
+			for(unsigned int j = 0; j<(*it).second.size();j++){
+				q+=(*it).second[j].GetCharge();
+			}
+			it++;
+		}
+	}
+	else{
+		while(it!=this->end()){
+				for(unsigned int i = 0; i < strings.size(); i++)
+					if(strings[i] == (*it).first.GetString()){ 						
+							for(unsigned int j =0; j<(*it).second.size();j++){
+								q+=(*it).second[j].GetCharge();
+							}
+							break;
+					}
+
+				it++;
+		}
+	}
+	return q;
+}
+
+I3RecoPulseSeriesMapPtr I3BaseMap<OMKey,std::vector<I3RecoPulse> >::GetPulsesInStrings(std::vector<int> strings){
+	I3RecoPulseSeriesMapPtr newMap(new I3RecoPulseSeriesMap);
+	I3BaseMap<OMKey,std::vector<I3RecoPulse> >::iterator it=this->begin();
+	while(it!=this->end()){
+		for(unsigned int i = 0; i < strings.size(); i++)
+			if(strings[i] == (*it).first.GetString()){ 						
+					newMap->operator[]( (*it).first ) = (*it).second; 
+					break;
+			}
+		it++;
+	}
+	return newMap;
+}
+	
+I3RecoPulseSeriesMapPtr I3BaseMap<OMKey,std::vector<I3RecoPulse> >::GetPulsesNotInStrings(std::vector<int> strings){
+	I3RecoPulseSeriesMapPtr newMap(new I3RecoPulseSeriesMap);
+	I3BaseMap<OMKey,std::vector<I3RecoPulse> >::iterator it=this->begin();
+	while(it!=this->end()){
+		bool found = false;
+		for(unsigned int i = 0; i < strings.size(); i++)
+			if(strings[i] == (*it).first.GetString())
+				found = true;
+		
+		if(!found)
+			newMap->operator[]( (*it).first ) = (*it).second;  
+	
+		it++;
+	}
+	return newMap;
+}
+

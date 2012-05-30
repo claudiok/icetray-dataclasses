@@ -48,6 +48,11 @@ void register_I3RecoPulse()
         "Get an I3RecoPulseSeriesMap from the frame, performing any necessary "
         "format conversions behind the scenes.")
     .staticmethod("from_frame")
+    .def("calc_nchannel", &I3RecoPulseSeriesMap::CalcNChannel,args("string_list")=std::vector<int>())
+		.def("calc_nstring",	&I3RecoPulseSeriesMap::CalcNString,args("string_list")=std::vector<int>())
+		//.def("calc_qtot", &I3RecoPulseSeriesMap::CalcQTot,args("string_list")=std::vector<int>())
+		.def("get_pulses_in_strings",&I3RecoPulseSeriesMap::GetPulsesInStrings)
+		.def("get_pulses_notin_strings",&I3RecoPulseSeriesMap::GetPulsesNotInStrings)
     ;
   register_pointer_conversions<I3RecoPulseSeriesMap>();
 
@@ -66,3 +71,6 @@ void register_I3RecoPulse()
     .value("FADC", I3RecoPulse::FADC)
     ;
 }
+
+
+

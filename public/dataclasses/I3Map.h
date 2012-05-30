@@ -26,6 +26,8 @@
 template <typename Key, typename Value>
 struct I3Map : public I3FrameObject, public std::map<Key, Value>
 { 
+	I3Map():std::map<Key, Value>(){};
+	I3Map(const I3Map<Key,Value> &base):std::map<Key, Value>(base){}
   template <class Archive>
   void serialize(Archive & ar, unsigned version)
   {
@@ -56,6 +58,8 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
   }
 
 };
+
+
 
 template <typename Key, typename Value>
 I3Map<Key, Value> :: ~I3Map() { }

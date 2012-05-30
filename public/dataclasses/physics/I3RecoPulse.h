@@ -13,7 +13,7 @@
 #include "dataclasses/I3Vector.h"
 #include "icetray/OMKey.h"
 #include "dataclasses/I3Map.h"
-
+#include "dataclasses/I3BaseMap.h"
 /**
  * @brief Base class for recopulse.
  *
@@ -82,16 +82,46 @@ I3_POINTER_TYPEDEFS(I3RecoPulse);
 BOOST_CLASS_VERSION(I3RecoPulse, i3recopulse_version_);
 
 typedef std::vector<I3RecoPulse> I3RecoPulseSeries;
-typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;
+
 typedef I3Map<OMKey, I3RecoPulse> I3RecoPulseMap;
 
 std::ostream& operator<<(std::ostream& oss, const I3RecoPulse& p);
 
 
 I3_POINTER_TYPEDEFS(I3RecoPulseSeries);
-I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
+
 I3_POINTER_TYPEDEFS(I3RecoPulseMap);
 
+template <>
+struct I3BaseMap<OMKey,std::vector<I3RecoPulse> >;
+
+typedef I3BaseMap<OMKey,std::vector<I3RecoPulse> > I3RecoPulseSeriesMap;
+I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMap);
+
+template <>
+struct I3BaseMap<OMKey,std::vector<I3RecoPulse> > : public I3Map<OMKey, std::vector<I3RecoPulse> >{ 
+	public:		
+		I3BaseMap():I3Map<OMKey, std::vector<I3RecoPulse> >(){}
+	I3BaseMap(const I3Map<OMKey, std::vector<I3RecoPulse> >& base):I3Map<OMKey, std::vector<I3RecoPulse> >(base){}
+	
+	template <class Archive>
+  void serialize(Archive & ar, unsigned version)	
+	{
+    ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+    ar & make_nvp("map", base_object< std::map<OMKey, std::vector<I3RecoPulse> > >(*this));
+  }
+
+	int CalcNChannel(std::vector<int> strings = std::vector<int>());
+	int CalcNString(std::vector<int> strings = std::vector<int>());
+	double CalcQTot(std::vector<int> strings = std::vector<int>());
+	I3RecoPulseSeriesMapPtr GetPulsesInStrings(std::vector<int> strings);
+	I3RecoPulseSeriesMapPtr GetPulsesNotInStrings(std::vector<int> strings);
+};
+
+
+
+
+//I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMapEnhanced);
 /*
  * Specialize I3Frame::Get() to turn convert various objects
  * in the frame into I3RecoPulseSeriesMaps.
