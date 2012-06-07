@@ -440,6 +440,9 @@ class I3DOMCalibration {
       c2*DroopReactionShape(t, droop.time2);
     }
     
+    bool operator==(const DroopedSPETemplate& templ) const;
+    bool operator<(const DroopedSPETemplate& templ) const;
+    
   private:
     double SPEPulseShape(double t) const {
       return pulse.c/std::pow(exp(-(t - pulse.x0)/pulse.b1) + 
