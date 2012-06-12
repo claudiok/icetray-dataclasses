@@ -417,3 +417,20 @@ TEST(most_energetic)
   p = I3MCTreeUtils::GetMostEnergetic(t2,I3Particle::MuPlus);
   ENSURE(p==t2.end());
 }
+
+TEST(add_subtree_to_empty_tree)
+{
+  I3Particle p;
+
+  I3MCTreePtr st( new I3MCTree ); //subtree
+  I3MCTreeUtils::AddPrimary(st,p);
+  
+  I3MCTreePtr cst( new I3MCTree(*st)); // making a copy
+  I3MCTreePtr t( new I3MCTree ); //adding a subtree to an empty tree
+
+  // this should silently fail
+  // http://code.icecube.wisc.edu/projects/icecube/ticket/352
+  // ...but I can't seem to reproduce it
+  I3MCTreeUtils::AddPrimary(*dynamic_pointer_cast<I3MCTree>(t),*cst);
+  ENSURE(t->size() == 1);
+}
