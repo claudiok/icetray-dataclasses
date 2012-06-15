@@ -31,8 +31,16 @@ using namespace boost::python;
 static I3RecoPulseSeriesMapPtr
 from_frame(I3Frame &frame, const std::string &name)
 {
+	if (!frame.Has(name)) {
+		PyErr_SetString(PyExc_KeyError, name.c_str());
+		throw_error_already_set();
+	}
 	I3RecoPulseSeriesMapConstPtr rpsm =
 	    frame.Get<I3RecoPulseSeriesMapConstPtr>(name);
+	if (!rpsm) {
+		PyErr_SetString(PyExc_TypeError, name.c_str());
+		throw_error_already_set();
+	}
 	return boost::const_pointer_cast<I3RecoPulseSeriesMap>(rpsm);
 }
 
