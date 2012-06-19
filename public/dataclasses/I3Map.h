@@ -27,7 +27,7 @@ template <typename Key, typename Value>
 struct I3Map : public I3FrameObject, public std::map<Key, Value>
 { 
   template <class Archive>
-  void serialize(Archive & ar, unsigned version)
+  void serialize(Archive & ar, unsigned /* version */)
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
     ar & make_nvp("map", base_object< std::map<Key, Value> >(*this));
