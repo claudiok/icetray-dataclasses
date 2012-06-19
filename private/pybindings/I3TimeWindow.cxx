@@ -6,6 +6,8 @@ void
 register_I3TimeWindow()
 {
 	bp::class_<I3TimeWindow>("I3TimeWindow", bp::init<double, double>())
+	    .def(bp::init<>())
+	    .def(bp::dataclass_suite<I3TimeWindow>())
 	    #define RO_PROPS (Start)(Stop)(Length)
 	    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3TimeWindow, RO_PROPS)
 	    #undef RO_PROPS
