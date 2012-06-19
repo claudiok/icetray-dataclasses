@@ -65,7 +65,7 @@ void register_I3FlasherInfo()
  }
 
  class_<I3FlasherInfoVect, bases<I3FrameObject>, I3FlasherInfoVectPtr>("I3FlasherInfoVect")
-   .def(std_vector_indexing_suite<I3FlasherInfoVect, 
+   .def(list_indexing_suite<I3FlasherInfoVect, 
         false, detail::vector_no_equality<I3FlasherInfoVect> >())
     .def_pickle(boost_serializable_pickle_suite<I3FlasherInfoVect>())
    ;

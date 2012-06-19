@@ -56,6 +56,14 @@ I3SuperDSTTrigger::operator<(const I3SuperDSTTrigger &other) const
 	return (startcode_ < other.startcode_);
 }
 
+bool
+I3SuperDSTTrigger::operator==(const I3SuperDSTTrigger &rhs) const
+{
+	return (key_idx_ == rhs.key_idx_) &&
+	       (startcode_ == rhs.startcode_) &&
+	       (lengthcode_ == rhs.lengthcode_);
+}
+
 void
 I3SuperDSTTrigger::SetTimeReference(const I3SuperDSTTrigger &other)
 {

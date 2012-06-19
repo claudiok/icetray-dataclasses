@@ -40,6 +40,8 @@ public:
 	double GetLength() const;
 	
 	bool operator<(const I3SuperDSTTrigger &) const;
+	bool operator==(const I3SuperDSTTrigger &) const;
+	
 	void SetTimeReference(const I3SuperDSTTrigger &);
 };
 
@@ -47,6 +49,9 @@ class I3SuperDSTTriggerSeries : public std::list<I3SuperDSTTrigger>, public I3Fr
 public:
 	I3SuperDSTTriggerSeries() {};
 	I3SuperDSTTriggerSeries(const I3TriggerHierarchy &, const I3DetectorStatus&);
+	
+	template <typename Iterator>
+	I3SuperDSTTriggerSeries(Iterator first, Iterator last) : std::list<I3SuperDSTTrigger>(first, last) {}
 	
 	boost::shared_ptr<I3TriggerHierarchy> Unpack(const I3DetectorStatus&) const;
 
