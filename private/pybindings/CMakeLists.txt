@@ -28,6 +28,7 @@ i3_add_pybindings(dataclasses
   I3Double.cxx
   I3EventHeader.cxx
   I3FlasherInfo.cxx
+  I3FilterResult.cxx
   I3Geometry.cxx
   I3OMGeo.cxx
   I3TankGeo.cxx
