@@ -3,14 +3,14 @@
 #include <fstream>
 #include <boost/archive/xml_oarchive.hpp>
 
-#include <jebclasses/I3FilterResult.h>
+#include <dataclasses/physics/I3FilterResult.h>
 
 TEST_GROUP(I3FilterResultTest);
 
 TEST(out_and_in)
 {
   {
-    std::ofstream fout("test-jebclasses-out.xml");
+    std::ofstream fout("test-filtermask-out.xml");
     boost::archive::xml_oarchive ar(fout);
     I3FilterResult result;
     ENSURE(!result.conditionPassed,"Initialized correctly");
@@ -21,7 +21,7 @@ TEST(out_and_in)
   }
 
   {
-    std::ifstream fin("test-jebclasses-out.xml");
+    std::ifstream fin("test-filtermask-out.xml");
     boost::archive::xml_iarchive ar(fin);
     I3FilterResult result;
     ar >> make_nvp("result",result);
