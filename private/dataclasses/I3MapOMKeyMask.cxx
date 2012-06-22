@@ -227,13 +227,15 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key,
 		return;
 	
 	/* Insert a new bitmask if necessary. */
-	if (!omkey_mask_.get(omkey_idx))
+	if (!omkey_mask_.get(omkey_idx)) {
 		if (set_it) {
 			list_it = element_masks_.insert(list_it,
 			     bitmask(vec->size(), false));
 			omkey_mask_.set(omkey_idx, true);
-		} else
+		} else {
 			return;
+		}
+	}
 		
 	I3RecoPulseSeriesMap::mapped_type::const_iterator vec_it = vec->begin();
 	unsigned idx = 0;
@@ -258,13 +260,15 @@ I3RecoPulseSeriesMapMask::Set(const OMKey &key, const unsigned idx, bool set_it)
 		return;
 	
 	/* Insert a new bitmask if necessary. */
-	if (!omkey_mask_.get(omkey_idx))
+	if (!omkey_mask_.get(omkey_idx)) {
 		if (set_it) {
 			list_it = element_masks_.insert(list_it,
 			     bitmask(vec->size(), false));
 			omkey_mask_.set(omkey_idx, true);
-		} else
+		} else {
 			return;
+		}
+	}
 			
 	list_it->set(idx, set_it);
 }
@@ -658,15 +662,17 @@ I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 	std::vector<bitmask> elements;
 	bitmask omkey_mask = omkey_mask_;
 	std::list<bitmask>::const_iterator list_it = element_masks_.begin();
-	for (unsigned idx = 0; idx != omkey_mask_.size(); idx++)
-		if (omkey_mask_.get(idx))
+	for (unsigned idx = 0; idx != omkey_mask_.size(); idx++) {
+		if (omkey_mask_.get(idx)) {
 			if (!list_it->any()) {
 				omkey_mask.set(idx, false);
 				list_it++;
 			} else {
 				elements.push_back(*list_it++);
 			}
-			
+		}
+	}
+
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("Key", key_);
 	ar & make_nvp("OMKeyMask", omkey_mask);
