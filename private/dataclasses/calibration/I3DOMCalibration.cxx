@@ -411,6 +411,49 @@ I3DOMCalibration::FADCPulseTemplate(bool droopy) const
                             droopTimeConstants_[1]));
 }
 
+bool I3DOMCalibration::DroopedSPETemplate::operator==(const DroopedSPETemplate& templ) const 
+{ 
+  return(pulse.c==templ.pulse.c &&  
+    pulse.x0==templ.pulse.x0 &&  
+    pulse.b1==templ.pulse.b1 &&  
+    pulse.b2==templ.pulse.b2 &&  
+    droopy==templ.droopy && 
+    droop.pulse.c==templ.droop.pulse.c &&  
+    droop.pulse.x0==templ.droop.pulse.x0 &&  
+    droop.pulse.b1==templ.droop.pulse.b1 &&  
+    droop.pulse.b2==templ.droop.pulse.b2 && 
+    droop.tauFrac==templ.droop.tauFrac && 
+    droop.time1==templ.droop.time1 && 
+    droop.time2==templ.droop.time2); 
+} 
+	 
+bool I3DOMCalibration::DroopedSPETemplate::operator<(const DroopedSPETemplate& templ) const 
+{ 
+  #define DSPET_compare_member(member) \ 
+  if(member<templ.member) return(true); \ 
+  if(member>templ.member) return(false); 
+
+  DSPET_compare_member(pulse.c); 
+  DSPET_compare_member(pulse.x0); 
+  DSPET_compare_member(pulse.b1); 
+  DSPET_compare_member(pulse.b2); 
+  //we'll say that non-droopy templates are smaller than droopy templates 
+  if(droopy!=templ.droopy) 
+    return(!droopy); 
+  if(!droopy) 
+    return(false); //neither is droopy, so the templates are equal 
+  //both are droopy, so we go on comparing the components of the droop 
+  DSPET_compare_member(droop.pulse.c); 
+  DSPET_compare_member(droop.pulse.x0); 
+  DSPET_compare_member(droop.pulse.b1); 
+  DSPET_compare_member(droop.pulse.b2); 
+  DSPET_compare_member(droop.tauFrac); 
+  DSPET_compare_member(droop.time1); 
+  DSPET_compare_member(droop.time2); 
+  return(false); //templates are equal 
+
+  #undef DSPET_compare_member 
+} 
 
 //
 // these are some beeeeautiful serialization functions.

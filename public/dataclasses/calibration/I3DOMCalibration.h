@@ -420,14 +420,16 @@ class I3DOMCalibration {
     bool droopy;
     
     DroopedSPETemplate(const SPETemplate& templ):
-    pulse(templ),droopy(false){}
+    pulse(templ), droopy(false){}
     
     DroopedSPETemplate(const SPETemplate& templ,
                const SPETemplate& droopTempl, 
                double tauFrac, double time1, double time2):
-    pulse(templ),droop(droopTempl,tauFrac,time1,time2),droopy(true){}
+    pulse(templ), droop(droopTempl,tauFrac,time1,time2), droopy(true){}
     
-    double operator()(double t){
+		//DroopedSPETemplate(){}
+    
+			double operator()(double t){
       if (!droopy)
         return SPEPulseShape(t);
       
@@ -439,7 +441,10 @@ class I3DOMCalibration {
       c1*DroopReactionShape(t, droop.time1) +
       c2*DroopReactionShape(t, droop.time2);
     }
-    
+
+    bool operator==(const DroopedSPETemplate& templ) const;
+    bool operator<(const DroopedSPETemplate& templ) const;
+
   private:
     double SPEPulseShape(double t) const {
       return pulse.c/std::pow(exp(-(t - pulse.x0)/pulse.b1) + 
