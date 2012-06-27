@@ -165,6 +165,14 @@ void I3Direction::CalcSphFromCar()
 }
 
 //-----------------------------------------------------------
+I3Direction I3Direction::Cross(const I3Direction& d) {
+  if (!isCalculated_) CalcCarFromSph();
+  return I3Direction (yDir_*d.GetZ() - zDir_*d.GetY(),
+                      zDir_*d.GetX() - xDir_*d.GetZ(),
+                      xDir_*d.GetY() - yDir_*d.GetX());
+}
+
+//-----------------------------------------------------------
 double I3Direction::Dot(const I3Direction& d) {
   if (!isCalculated_) CalcCarFromSph();
   return (xDir_*d.GetX() + yDir_*d.GetY() + zDir_*d.GetZ());
