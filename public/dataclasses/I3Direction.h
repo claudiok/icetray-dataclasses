@@ -201,6 +201,15 @@ class I3Direction : public I3FrameObject
    */
   void RotateZ(double angle);
 
+  /**
+   * Cross product of this x d
+   */
+  I3Direction Cross(const I3Direction& d);
+
+  /**
+   * Dot product of this . d
+   */
+  double Dot(const I3Direction& d);
 
  protected:
   /**

@@ -165,6 +165,12 @@ void I3Direction::CalcSphFromCar()
 }
 
 //-----------------------------------------------------------
+double I3Direction::Dot(const I3Direction& d) {
+  if (!isCalculated_) CalcCarFromSph();
+  return (xDir_*d.GetX() + yDir_*d.GetY() + zDir_*d.GetZ());
+}
+
+//-----------------------------------------------------------
 std::ostream& operator<<(std::ostream& oss, const I3Direction& d){
   oss << "I3Direction(Zenith (deg): " << d.GetZenith()/I3Units::degree << 
     ", Azimuth(deg): " <<d.GetAzimuth()/I3Units::degree << ")";

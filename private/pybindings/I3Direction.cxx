@@ -39,7 +39,7 @@ void register_I3Direction()
     .def("set_direction", oneary)
     .def("set_direction", twoary)
     .def("set_direction", threeary)
-     #define MEMBERS (SetThetaPhi)(ResetDirection)(NullDirection)(RotateX)(RotateY)(RotateZ)
+    #define MEMBERS (SetThetaPhi)(ResetDirection)(NullDirection)(RotateX)(RotateY)(RotateZ)(Cross)(Dot)
     BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Direction, MEMBERS)
     #undef  MEMBERS
     #define RO_PROPERTIES (Zenith)(Azimuth)(X)(Y)(Z)
