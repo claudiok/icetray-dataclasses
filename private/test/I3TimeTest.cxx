@@ -334,7 +334,7 @@ TEST(add_subtract_double)
 //  boost::uniform_smallint<double> delta(0,10e7);
 
   int year(2006);
-  double t(3.1);
+  double t(3.14);
   int64_t daqTime = 1209820980;
 
   I3Time t0(year,daqTime);

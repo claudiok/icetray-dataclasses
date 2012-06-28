@@ -418,7 +418,7 @@ I3Time I3Time::operator+(const double second_term) const
       daqTime += I3TimeUtils::max_DAQ_time(year);
     }
 
-  return I3Time(year,daqTime);
+  return I3Time(year,daqTime+0.5);
 }
 
 
