@@ -26,7 +26,7 @@ const int32_t leap_sec_list_[] = {41316, 41498, 41682, 42047, 42412, 42777, 4314
  * 
  * Cannot declare array literal for std::vector yet.
  */
-std::vector<int32_t> leap_sec_list(leap_sec_list_,leap_sec_list_+sizeof(leap_sec_list_));
+std::vector<int32_t> leap_sec_list(leap_sec_list_,leap_sec_list_+sizeof(leap_sec_list_)/sizeof(int32_t));
 
 /** 
  * @brief number of seconds in a standard day add 1 for days with a leap second
