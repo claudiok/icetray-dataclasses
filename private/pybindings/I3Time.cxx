@@ -38,21 +38,38 @@ using namespace boost::python;
 
 std::string repr(I3Time t){
   std::stringstream out;
-  out <<  "I3Time(" << t.GetUTCYear() << "," << t.GetUTCDaqTime() << ")";
+  out <<  "I3Time("<< std::setw(4) << t.GetUTCYear() << "," <<  std::setw(18) <<t.GetUTCDaqTime() << ")";
   return out.str();
 }
 
 #ifdef HAVE_PYDATETIME_API
 boost::python::object GetDateTime(const I3Time& t)
 {
-  PyObject* obj = PyDateTime_FromDateAndTime(t.GetUTCYear(), 
-					     t.GetUTCMonth(), 
-					     t.GetUTCDayOfMonth(),
-					     t.GetModJulianSec()/3600,
-					     t.GetModJulianSec()%3600/60,
-					     t.GetModJulianSec()%60,
-					     int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
-					     );
+
+  PyObject* obj;
+  if (t.IsLeapSecond()){
+    //python's datetime won't allow a leap second to be input from python
+    //but it doesn't do bound checking in this function
+    //so the leap second will be 23:59:60 but if you do any arithmatic it will act
+    //like 00:00:00 of the nex day
+    obj = PyDateTime_FromDateAndTime(t.GetUTCYear(), 
+				     t.GetUTCMonth(), 
+				     t.GetUTCDayOfMonth(),
+				     23,
+				     59,
+				     60,// No bounds checking
+				     int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
+				     );
+  }else{
+    obj = PyDateTime_FromDateAndTime(t.GetUTCYear(), 
+				     t.GetUTCMonth(), 
+				     t.GetUTCDayOfMonth(),
+				     t.GetModJulianSec()/3600,
+				     t.GetModJulianSec()%3600/60,
+				     t.GetModJulianSec()%60,
+				     int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
+				     );
+  }
   handle<> h(obj);
   boost::python::object o(h);
   return o;
@@ -119,6 +136,8 @@ void register_I3Time()
   def("julianday", fx5,"I3Time::julianday(int year)");
   def("julianday", fx6,"I3Time::julianday(int year, int64_t daqTime)");
   def("year_of",&I3Time::yearOf,"I3Time::yearOf(double modjulianday)");
+  def("max_daq_time",I3TimeUtils::max_DAQ_time);
+  def("leap_second_on_mjd",I3TimeUtils::leap_sec_on_mjd);
 
   scope i3time_scope = class_<I3Time, bases<I3FrameObject>, 
     boost::shared_ptr<I3Time> >("I3Time")
@@ -128,15 +147,17 @@ void register_I3Time()
     #define DEFS (SetModJulianTime)(SetModJulianTimeDouble)(SetUTCCalDate)(SetUnixTime)(SetDaqTime)
     BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Time, DEFS)
     #undef  DEFS
-    .add_property("unix_time", &I3Time::GetUnixTime, set_unix_time_default)
+    .add_property("is_leap_second",&I3Time::IsLeapSecond)
 #ifdef HAVE_PYDATETIME_API
     .add_property("date_time", &GetDateTime)
 #endif
-#define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UTCYear)(UTCMonth)(UTCDaqTime)(UTCSec)(UTCNanoSec)
+#define RO_PROPS (ModJulianDay)(ModJulianSec)(ModJulianNanoSec)(ModJulianDayDouble)(UnixTime)\
+      (UTCYear)(UTCDaqTime)(UTCMonth)(UTCWeekday)(UTCDayOfMonth)(UTCSec)(UTCNanoSec)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Time, RO_PROPS)
     #undef  RO_PROPS
     .def("__str__",&stream_to_string<I3Time>)
     .def("__repr__",&repr)
+    .def("get_utc_string",&I3Time::GetUTCString)
     .def(self == self)
     .def(self-self)
     .def(self-double())

@@ -4,35 +4,88 @@
 #include <icetray/serialization.h>
 #include <dataclasses/I3Time.h>
 #include <icetray/I3Units.h>
+#include <boost/algorithm/string.hpp>
+
 
 /**
- *Returns true if year is a leap year.
- *Meaning if is divisible by 4 and is NOT a century
- *year and in that case must be divisible by 400
+ * @brief This literal contians a list of Modified Julian Date  of days that @a end on a 
+ * leap second. Used by I3Time to determine whe leap seconds occur.
+ * 
+ * @note This contains the mjd of days which @a end on a leap year. 
+ * Most communications describing leap seconds give the day which @a starts with 
+ * the leap second. Be very careful addind items to this list.
  */
+const int32_t leap_sec_list_[] = {41316, 41498, 41682, 42047, 42412, 42777, 43143,
+				  43508, 43873, 44238, 44785, 45150, 45515, 46246, 
+				  47160, 47891, 48256, 48803, 49168, 49533, 50082, 
+				  50629, 51178, 53735, 54831, 56108};
+
+/**
+ * @brief This vector contians the same information as leap_sec_list but in a std::vector 
+ * for easier access. Used by I3Time to determine whe leap seconds occur. 
+ * 
+ * Cannot declare array literal for std::vector yet.
+ */
+std::vector<int32_t> leap_sec_list(leap_sec_list_,leap_sec_list_+sizeof(leap_sec_list_));
+
+/** 
+ * @brief number of seconds in a standard day add 1 for days with a leap second
+ */
+const int32_t SECONDS_IN_DAY = 86400;
+
+int32_t I3TimeUtils::mod_julian_day_start_of_year(int year)
+{
+  UTinstant i;
+  i.year = year;
+  i.month = 1;
+  i.day = 1;
+  i.i_hour = 0;
+  i.i_minute = 0;
+  i.second = 0;
+  return int32_t(JulDate(&i) - 2400000);
+}
+
+bool I3TimeUtils::leap_sec_on_mjd(const int32_t mjd){
+  return find(leap_sec_list.begin(),leap_sec_list.end(),mjd)!=leap_sec_list.end();
+}
+
+int32_t I3TimeUtils::seconds_in_day(const int32_t mjd){
+  return SECONDS_IN_DAY+leap_sec_on_mjd(mjd);
+}
+
+int32_t I3TimeUtils::leap_seconds_range(const int32_t mjd1,const int32_t mjd2){
+  std::vector<int32_t>::iterator low,up;
+  low=lower_bound (leap_sec_list.begin(), leap_sec_list.end(), mjd1);
+  up= lower_bound (leap_sec_list.begin(), leap_sec_list.end(), mjd2);
+  return int32_t(up-low);
+}
+
+int32_t I3TimeUtils::year_to_date_leap_seconds(int32_t mjd)
+{
+  double julianDay = mjd + 2400000.5;
+  UTinstant j;
+  j.j_date = julianDay;
+  CalDate(&j);
+  return I3TimeUtils::leap_seconds_range(mod_julian_day_start_of_year(j.year),mjd);
+}
+
 bool I3TimeUtils::leap_year(const int year){
   return ((!(year%4)&&(year%100)) || //divisible by four and not a century year
 	   (!(year%400)&&!(year%100))); //a century year and divisible by four hundred
 }
 
-//Figure out the right length of a year.  Is it a leap year?
-//  MAX_DAQTIME pair has run lengths:
-//    first: normal year
-//    second:  leap year
 int64_t I3TimeUtils::max_DAQ_time(const int year){
-  if(I3TimeUtils::leap_year(year)){
-    return MAX_DAQTIME.second; 
-  }else{  //NOT leap year
-    return MAX_DAQTIME.first;
-  }
+
+  int32_t leap_seconds_in_year = leap_seconds_range(mod_julian_day_start_of_year(year),
+						    mod_julian_day_start_of_year(year+1));
+
+  return ((365+I3TimeUtils::leap_year(year))*86400 + leap_seconds_in_year)*10000000000LL;
 }
 
 int64_t I3TimeUtils::ns_to_daqtime( const double time){
   //the addition of 0.5 effectively rounds
   return static_cast<int64_t>((10.*time/I3Units::ns)+ 0.5); 
 }
-
-const char* I3Time::DRIVING_TIME = "DrivingTime";
 
 I3Time::I3Time()
 {
@@ -45,15 +98,7 @@ I3Time::~I3Time() {}
 I3Time::I3Time(int32_t year, int64_t daqTime) : year_(year),daqTime_(daqTime) {}
 
 I3Time::I3Time(double mjd) {
-  if (isnan(mjd)) {
-    log_error("Constructing with NAN not possible; will use std constructor");
-    year_=0;
-    daqTime_=0;
-  }
-  int32_t modJulianDay = (int32_t)mjd;
-  int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
-  double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
-  SetModJulianTime(modJulianDay, sec, ns);
+  SetModJulianTimeDouble(mjd);
 }
 
 void I3Time::SetDaqTime(int year, 
@@ -67,14 +112,23 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
                               int32_t sec,
                               double ns)
 {
-  // Add a check, and log_warn about secs more than year length...
-  //double modjulian = ((double)modJulianDay) + (((double)sec)/(3600. * 24.));
+  if (sec <0 ||  sec >= I3TimeUtils::seconds_in_day(modJulianDay))
+    {
+      log_error("Invalid second!");
+      return;
+    }
+  if (ns <0 ||  sec >= I3Units::second )
+    {
+      log_error("Invalid nano second!");
+      return;
+    }
+
   year_ = yearOf(modJulianDay);
-  //int32_t daysafteryear = (int32_t)(modjulian - modjulianday(year_));
   int32_t daysafteryear = modJulianDay - (int32_t)modjulianday(year_);
   int32_t secsafteryear = daysafteryear * 3600 * 24 + sec;
+
   daqTime_ =
-    ((int64_t)secsafteryear * ((int64_t)(1e10)))
+    (((int64_t)secsafteryear +  I3TimeUtils::year_to_date_leap_seconds(modJulianDay) ) * ((int64_t)(1e10)))
     + ((int64_t)(ns * 10.));
 }
 
@@ -84,8 +138,8 @@ void I3Time::SetModJulianTimeDouble(double mjd) {
     return;
   }
   int32_t modJulianDay = (int32_t)mjd;
-  int32_t sec = (int32_t)((mjd-modJulianDay)*86400);
-  double ns = (double)((((mjd-modJulianDay)*86400)-sec)*1e9);
+  int32_t sec = (int32_t)((mjd-modJulianDay)*I3TimeUtils::seconds_in_day(mjd));
+  double ns = (double)(((mjd-modJulianDay)*I3TimeUtils::seconds_in_day(mjd)-sec)*1e9);
   SetModJulianTime(modJulianDay, sec, ns);
 }
 
@@ -106,6 +160,16 @@ void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, i
         return;
     }
     
+    UTinstant i;
+    i.year     = year;
+    i.month    = month;
+    i.day      = day;
+    i.i_hour   = 0;
+    i.i_minute = 0;
+    i.second   = 0;
+    
+    int32_t modJulDay = (int32_t)(JulDate(&i) - 2400000.5);
+
     if(hour<0 || hour>23)
     {
         log_error("Invalid hour!");
@@ -118,7 +182,7 @@ void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, i
         return;
     }
 
-    if(sec<0 || sec>59)
+    if(sec<0 || sec > ((I3TimeUtils::leap_sec_on_mjd(modJulDay) && hour==23 && minute == 59)?60:59))
     {
         log_error("Invalid second!");
         return;
@@ -130,15 +194,6 @@ void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, i
         return;
     }
     
-    UTinstant i;
-    i.year     = year;
-    i.month    = month;
-    i.day      = day;
-    i.i_hour   = 0;
-    i.i_minute = 0;
-    i.second   = 0;
-    
-    int32_t modJulDay = (int32_t)(JulDate(&i) - 2400000.5);
     int32_t second = (int32_t)(hour*3600 + minute*60 + sec);
     
     SetModJulianTime(modJulDay, second, ns);
@@ -147,12 +202,15 @@ void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, i
 void I3Time::SetUnixTime(time_t unixTime,double ns)
 {
   if(unixTime < 0) log_fatal("invalid Unix time");
-  SetModJulianTime(unixTime / 86400 + 40587, unixTime % 86400, ns);
+  int32_t mjd = unixTime / 86400 + 40587;
+  unixTime -= I3TimeUtils::year_to_date_leap_seconds(mjd);
+  SetModJulianTime(mjd, unixTime % 86400, ns);
 }
 
 time_t I3Time::GetUnixTime() const
 {
-  return (GetModJulianDay()-40587)*86400+GetModJulianSec();
+  int32_t mjd = GetModJulianDay();
+  return (mjd-40587)*86400+GetModJulianSec();
 }
 
 int I3Time::GetUTCYear() const
@@ -172,10 +230,13 @@ int32_t I3Time::GetModJulianDay() const
 
 int32_t I3Time::GetModJulianSec() const
 {
+
+  int32_t mjd = modjulianday(year_,daqTime_);
   int32_t daysafteryear = 
-    (int32_t)(modjulianday(year_,daqTime_) - modjulianday(year_));
+    (int32_t)(mjd - modjulianday(year_));
   int32_t secsafteryear = 
     (daqTime_ - daqTime_%((int64_t)(1e10)))/((int64_t)1e10);
+  secsafteryear -= I3TimeUtils::year_to_date_leap_seconds(mjd);
   return secsafteryear - daysafteryear * 3600 * 24 ;
 }
 
@@ -187,12 +248,13 @@ double I3Time::GetModJulianNanoSec() const
 
 double I3Time::GetModJulianDayDouble() const
 {
-  return GetModJulianDay() + GetModJulianSec()/86400. + GetModJulianNanoSec()/8.64e13;
+  int32_t mjd = GetModJulianDay();
+  return mjd + (GetModJulianSec()+GetModJulianNanoSec()/1e10)/I3TimeUtils::seconds_in_day(mjd);
 }
 
 I3Time::Month I3Time::GetUTCMonth() const
 {
-  double julday = julianday(year_,daqTime_);
+  double julday = julianday(year_,daqTime_); 
   UTinstant i;
   i.j_date = julday;
   CalDate(&i);
@@ -280,10 +342,20 @@ double I3Time::GetUTCNanoSec() const
 std::string I3Time::GetUTCString(std::string format)const
 {
   time_t t=GetUnixTime();
+  if( IsLeapSecond())
+    {
+      t-=1;
+      boost::replace_all(format, "%S", "60");
+    }
   struct tm *tm=gmtime(&t);
   char datestring[256];
   strftime (datestring, sizeof(datestring), format.c_str(), tm);
   return datestring;
+}
+
+bool I3Time::IsLeapSecond() const
+{
+  return GetModJulianSec()==86400;
 }
 
 bool I3Time::operator<(const I3Time& rhs) const
@@ -331,18 +403,20 @@ bool I3Time::operator>=(const I3Time& rhs) const
 
 I3Time I3Time::operator+(const double second_term) const
 {
+  long double daqTime = daqTime_ + (long double)(second_term)*10;
+  int32_t year = year_ ;
+   
+  while (daqTime >= I3TimeUtils::max_DAQ_time(year))
+    {
+      daqTime -= I3TimeUtils::max_DAQ_time(year);
+      year++;
+    }
 
-  int64_t daqTime;
-  int32_t year;
-  if((I3TimeUtils::ns_to_daqtime(second_term) + daqTime_) > I3TimeUtils::max_DAQ_time(year_) ){
-    year = year_ + 1;
-    //just the remainder
-    daqTime = daqTime_ + I3TimeUtils::ns_to_daqtime(second_term) - I3TimeUtils::max_DAQ_time(year_);
-  }
-  else{
-    year = year_;
-    daqTime = daqTime_ + I3TimeUtils::ns_to_daqtime(second_term);
-  }
+  while (daqTime < 0 )
+    {
+      year--;      
+      daqTime += I3TimeUtils::max_DAQ_time(year);
+    }
 
   return I3Time(year,daqTime);
 }
@@ -350,38 +424,28 @@ I3Time I3Time::operator+(const double second_term) const
 
 I3Time I3Time::operator-(const double second_term) const
 {
-  int64_t daqTime;
-  int32_t year;
-  if(I3TimeUtils::ns_to_daqtime(second_term) > daqTime_){
-    year = year_ - 1;
-    //just the remainder
-    //What I care about in subtraction is whether *last* year was a leap year
-    daqTime = daqTime_ - I3TimeUtils::ns_to_daqtime(second_term) + I3TimeUtils::max_DAQ_time(year);
-  }
-  else{
-    year = year_;
-    //just subtract 'em
-    daqTime = daqTime_ - I3TimeUtils::ns_to_daqtime(second_term);
-  }
-
-  return I3Time(year,daqTime);
+  return *this+(-second_term);
 }
 
 double operator-(const I3Time t1,const I3Time t2) 
 {
+
+  int32_t mjd1=t1.GetModJulianDay();
+  int32_t mjd2=t2.GetModJulianDay();
+  int32_t leapseconds =  I3TimeUtils::leap_seconds_range(mjd1,mjd2);
   return 
     ( t1.GetModJulianNanoSec() - t2.GetModJulianNanoSec() ) * I3Units::nanosecond +
-    ( t1.GetModJulianSec()     - t2.GetModJulianSec()     ) * I3Units::second +
-    ( t1.GetModJulianDay()     - t2.GetModJulianDay()     ) * I3Units::day;
+    ( t1.GetModJulianSec()     - t2.GetModJulianSec() -leapseconds ) * I3Units::second +
+    ( mjd1 - mjd2 ) * I3Units::day;
 }
 
 std::ostream& operator<<(std::ostream& oss, const I3Time& t){
-  double ns=t.GetModJulianNanoSec();
+  int64_t daqt=t.GetUTCDaqTime();
   oss << t.GetUTCString("%Y-%m-%d %H:%M:%S.");
-  oss << std::setw(3) << std::setfill('0') << int(ns/1e6) << ',';
-  oss << std::setw(3) << std::setfill('0') << int(ns/1e3)%1000 << ',';
-  oss << std::setw(3) << std::setfill('0') << int(ns)%1000 << ',';
-  oss << uint64_t(ns*10)%10 << " UTC";
+  oss << std::setw(3) << std::setfill('0') << (daqt/10000000)%1000  << ',';
+  oss << std::setw(3) << std::setfill('0') << (daqt/1000)%1000 << ',';
+  oss << std::setw(3) << std::setfill('0') << (daqt/10)%1000 << ',';
+  oss << daqt%10 << " UTC";
 
   return oss;
 }
@@ -457,17 +521,28 @@ double I3Time::modjulianday(int year)
 
 double I3Time::modjulianday(int year, int64_t daqTime)
 {
+
+  //first calculate mjd without worrying about leap seconds
+  //there is probabally a better way to do this but this works just fine
   int64_t tenthsOfNs = daqTime %((int64_t)1e10);
   int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
   double daqDaysSinceYear = ((double)(daqSecs))/(3600. * 24.);
   double modjulian_of_year = modjulianday(year);
-  return modjulian_of_year + daqDaysSinceYear;
-  
+  double mjd = modjulian_of_year + daqDaysSinceYear;
+
+  //now that we know mjd redo with correct seconds
+  //don't use year to date leapseconds because we might have gone over the year boundry 
+  daqSecs -= I3TimeUtils::leap_seconds_range(I3TimeUtils::mod_julian_day_start_of_year(year),
+					     mjd);
+  daqDaysSinceYear = ((double)(daqSecs))/(3600. * 24.);
+  modjulian_of_year = modjulianday(year);
+
+  return modjulian_of_year + daqDaysSinceYear;   
 }
 
 double I3Time::julianday(int year)
 {
- UTinstant i;
+  UTinstant i;
   i.year = year;
   i.month = 1;
   i.day = 1;
@@ -476,15 +551,10 @@ double I3Time::julianday(int year)
   i.second = 0;
   return JulDate(&i);
 }
-
+  
 double I3Time::julianday(int year, int64_t daqTime)
 {
-  int64_t tenthsOfNs = daqTime %((int64_t)1e10);
-  int64_t daqSecs = (daqTime - tenthsOfNs)/((int64_t)1e10);
-  double daqDaysSinceYear = ((double)(daqSecs))/(3600. * 24.);
-  double julian_of_year = julianday(year);
-  return julian_of_year + daqDaysSinceYear;
-  
+  return modjulianday(year, daqTime) + 2400000.5;
 }
 
 int32_t I3Time::yearOf(double modjulianday)

@@ -309,18 +309,20 @@ TEST(plus_double_leap_year)
 
 TEST(minus_double)
 {
-  int year(2006);
-  int64_t delta(10);
-  double t(1.);
-  int64_t daqTime = delta/2;
-  I3Time t0(year,daqTime);
-  I3Time t1(year-1,I3TimeUtils::max_DAQ_time(year) - delta/2); //should go over by half a delta
-  I3Time t1_prime = t0 - t;
-
-  cout<<"Year: "<<t1_prime.GetUTCYear()<<endl;
-  cout<<"DAQTime: "<<t1_prime.GetUTCDaqTime()<<endl;
-
-  ENSURE(t1_prime == t1,"Someone doesn't know how to subtract");
+  for (int year=2000; year <=2020 ; year++)
+    {
+      int64_t delta(10);
+      double t(1.);
+      int64_t daqTime = delta/2;
+      I3Time t0(year,daqTime);
+      I3Time t1(year-1,I3TimeUtils::max_DAQ_time(year-1) - delta/2); //should go over by half a delta
+      I3Time t1_prime = t0 - t;
+      
+      cout<<"Year: "<<t1_prime.GetUTCYear()<<endl;
+      cout<<"DAQTime: "<<t1_prime.GetUTCDaqTime()<<endl;
+      
+      ENSURE(t1_prime == t1,"Someone doesn't know how to subtract");
+    }
 }
 
 TEST(add_subtract_double)
@@ -474,20 +476,5 @@ TEST(test_utc_caldate)
 	ENSURE_EQUAL(hour,                        test_dates[i].hour);
 	ENSURE_EQUAL(minute,                      test_dates[i].minute);
 	ENSURE_EQUAL(second,                      test_dates[i].sec);
-    }
-}
-
-TEST( year_transitions )
-{
-  /*
-    This test assumes no leap seconds, it will have to be changed if leapsecond support is added to I3Time
-   */
-  I3Time t1,t2;
-  for ( int year=1989; year<=2030; year++)
-    {
-      t1.SetUTCCalDate(year,12,31,23,59,59);
-      t2.SetUTCCalDate(year+1,1,1,0,0,1);
-      ENSURE ( t1+2*I3Units::s == t2 , "Adding Two Seconds to year-12-31 23:59:59 must equal (year+1)-1-1 00:00:01");
-      ENSURE ( t1 == t2-2*I3Units::s , "Subtracting Two Seconds from (year+1)-1-1 00:00:01 must equal year-12-31 23:59:59");      
     }
 }

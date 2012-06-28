@@ -22,14 +22,6 @@
  */
 
 static const unsigned i3time_version_ = 0;
-//Number of tenths of ns in a year and leap year respectively        
-//                         Number of tenths of seconds in a leap year 864000000000000
-//    **Updated May 26, 2010**:  This somehow takes into account a 365.24 days/yr schedule
-//      which is just wrong for leap/non leap year lengths.
-//  Old and busted:
-//const std::pair<int64_t,int64_t> MAX_DAQTIME(315569260000000000LL, 316433260000000000LL);
-// New and shiny (and correct), 365|366d * 24h * 60m * 60 s * 10^10 
-const std::pair<int64_t,int64_t> MAX_DAQTIME(315360000000000000LL, 316224000000000000LL);
 
 namespace I3TimeUtils
 {
@@ -37,10 +29,43 @@ namespace I3TimeUtils
    *Returns true if the year is a leap year
    */
   bool leap_year(const int year);
+
+  
+  /** 
+   *@brief returns the Modified Julian Date of Jan 1 of the specified year
+   */
+  int32_t mod_julian_day_start_of_year(int year);
+
+  /**
+   * @brief return true if a leap second occurs on the last second of the day 
+   * Modified Julian Date of mjd
+   */
+  bool leap_sec_on_mjd(const int32_t mjd);
+
+  /**
+   * @brief returns the number of leapseconds between the specified Modified Julian Dates.
+   *
+   * Including the leap second at the end of mjd1 but not the one at the end of mjd2.
+   * returns negitive value if mjd2 > mjd1
+   */
+  int32_t leap_seconds_range(const int32_t mjd1,const int32_t mjd2);
+
+  /**
+   * @brief Returns the number of leapseconds since the start of the year for 
+   * specified Modified Julian Date
+   */
+  int32_t year_to_date_leap_seconds(const int32_t mjd);
   
   /**
-   *Returns the number of tenths of nanoseconds it the year, depending
-   *on whether it's a leap year or not.
+   * @brief return return the number of seconds on Modified Julian Date mjd:
+   * 86400 for normal days, 86401 for days with leap second
+   */
+  int32_t seconds_in_day(const int32_t mjd);
+
+  /**
+   * @brief Returns the number of tenths of nanoseconds it the specified year.
+   *
+   * Takes into account both leap years and leap seconds
    */
   int64_t max_DAQ_time(const int year);
   
@@ -153,7 +178,7 @@ class I3Time : public I3FrameObject
   /**
    * @brief Sets the time in the Unix convention
    * @param unixTime time since the Epoch (00:00:00 UTC, January 1, 1970),
-   * measured in seconds
+   * measured in seconds ignoring leap seconds
    * @param ns the number of ns after this second began.
    */
   void SetUnixTime(time_t unixTime,double ns=0);
@@ -223,12 +248,16 @@ class I3Time : public I3FrameObject
    */
   double GetUTCNanoSec() const;  
 
-
   /**
    * @brief Gets a string representing the time in UTC
    */
   std::string GetUTCString(std::string format="%Y-%m-%d %H:%M:%S UTC")const;
 
+  /** 
+   * @brief returns weather this current second is is a leap second
+   */
+  bool IsLeapSecond() const;
+  
   /**
    * equality operator.  
    * @return true if the times are the same
