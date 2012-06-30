@@ -12,7 +12,10 @@
 #include "boost/make_shared.hpp"
 #include <boost/serialization/binary_object.hpp>
 
-I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame, const std::string &key) : key_(key)
+I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask() : time_reference_(0.) {}
+
+I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame, const std::string &key)
+    : key_(key), time_reference_(0.)
 {
 	source_ = frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMap> >(key_);
 
@@ -58,7 +61,8 @@ I3RecoPulseSeriesMapMask::FillSubsetMask(bitmask &mask,
 }
 
 I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
-    const std::string &key, const I3RecoPulseSeriesMap &subset) : key_(key)
+    const std::string &key, const I3RecoPulseSeriesMap &subset)
+    : key_(key), time_reference_(0.)
 {
 	source_ = frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMap> >(key_);
 	
@@ -95,7 +99,7 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
 
 I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
     const std::string &key, boost::function<bool (const OMKey&, size_t, const I3RecoPulse&)> predicate)
-    : key_(key)
+    : key_(key), time_reference_(0.)
 {
 	source_ = frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMap> >(key_);
 	
@@ -122,6 +126,20 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
 		om_idx++;
 	}
 }
+
+void
+I3RecoPulseSeriesMapMask::SetTimeReference(float t)
+{
+	if (!std::isfinite(t)) {
+		log_warn("Attempted to set the time reference for this mask to %f; "
+		    "setting to 0 instead.");
+		t = 0.;
+	}
+	time_reference_ = t;
+	
+	ResetCache();
+}
+
 
 void
 I3RecoPulseSeriesMapMask::SetNone()
@@ -452,6 +470,9 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 		for ( ; source_vit != source_it->second.end(); source_vit++, idx++)
 			if (list_it->get(idx))
 				target_vec.push_back(*source_vit);
+		
+		BOOST_FOREACH(I3RecoPulse &p, target_vec)
+			p.SetTime(p.GetTime() - time_reference_);
 				
 		inserter = masked_->insert(inserter,
 		    std::make_pair(source_it->first, target_vec));
@@ -645,12 +666,14 @@ I3RecoPulseSeriesMapMask::load(Archive & ar, unsigned version)
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("Key", key_);
+	if (version > 0)
+		ar & make_nvp("TimeReference", time_reference_);
 	ar & make_nvp("OMKeyMask", omkey_mask_);
 	ar & make_nvp("ElementMasks", elements);
 	
 	std::copy(elements.begin(), elements.end(), std::back_inserter(element_masks_));
 	/* Fix up a padding bug in bitmask::bitmask() */
-	if (element_masks_.size() == 0 && omkey_mask_.size() == 64u && omkey_mask_.all())
+	if (version == 0 && element_masks_.size() == 0 && omkey_mask_.size() == 64u && omkey_mask_.all())
 		omkey_mask_ = bitmask(0, false);
 }
 
@@ -675,6 +698,7 @@ I3RecoPulseSeriesMapMask::save(Archive & ar, unsigned version) const
 
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("Key", key_);
+	ar & make_nvp("TimeReference", time_reference_);
 	ar & make_nvp("OMKeyMask", omkey_mask);
 	ar & make_nvp("ElementMasks", elements);
 }
