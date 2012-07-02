@@ -114,6 +114,40 @@ TEST(Apply)
 	}
 }
 
+TEST(ApplyWithTimeReference)
+{
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
+	pulses = manufacture_pulsemap();
+	double tref = 1100101.;
+		
+	I3Frame frame;
+	frame.Put("foo", pulses);
+	I3RecoPulseSeriesMapMask mask(frame, "foo");
+	mask.SetTimeReference(tref);
+	
+	ENSURE_EQUAL(mask.GetSum(), 18u);
+	
+	masked = mask.Apply(frame);
+	
+	ENSURE_EQUAL(pulses->size(), masked->size());
+	ENSURE_EQUAL(masked->begin()->second.size(), 9u);
+	
+	/* Ensure that original and masked pulse series maps are identical. */
+	I3RecoPulseSeriesMap::const_iterator mit1, mit2;
+	mit1 = pulses->begin();
+	mit2 = masked->begin();
+	for ( ; mit1 != pulses->end(); mit1++, mit2++) {
+		ENSURE_EQUAL(mit1->first, mit2->first);
+		ENSURE_EQUAL(mit1->second.size(), mit2->second.size());
+		I3RecoPulseSeries::const_iterator vit1, vit2;
+		vit1 = mit1->second.begin();
+		vit2 = mit2->second.begin();
+		for ( ; vit1 != mit1->second.end(); vit1++, vit2++)
+			ENSURE_EQUAL(vit1->GetTime()-tref, vit2->GetTime());
+	}
+}
+
 TEST(ApplyAutomagically)
 {
 	I3RecoPulseSeriesMapPtr pulses = manufacture_pulsemap();
@@ -182,6 +216,48 @@ TEST(ApplyAutomagically)
 
 	/* Now, ensure that nothing funny happens when we get it as a FrameObject */
 	I3FrameObjectConstPtr fop = frame.Get<I3FrameObjectConstPtr>("foomask", true);
+}
+
+static bool
+Is42(const OMKey &key, unsigned idx, const I3RecoPulse &p)
+{
+	return key.GetString() == 42;
+}
+
+TEST(Constructors)
+{
+	I3RecoPulseSeriesMapPtr pulses = manufacture_pulsemap();
+	I3Frame frame;
+	frame.Put("foo", pulses);
+	
+	// Default constructor
+	{
+		I3RecoPulseSeriesMapMask mask;
+		ENSURE_EQUAL(mask.GetSource(), "");
+		ENSURE_EQUAL(mask.GetTimeReference(), 0.);
+	}
+	
+	// Simple constructor
+	{
+		I3RecoPulseSeriesMapMask mask(frame, "foo");
+		ENSURE_EQUAL(mask.GetSource(), "foo");
+		ENSURE_EQUAL(mask.GetTimeReference(), 0.);
+	}
+	
+	// Subset constructor
+	{
+		I3RecoPulseSeriesMap subset(*pulses);
+		I3RecoPulseSeriesMapMask mask(frame, "foo", subset);
+		ENSURE_EQUAL(mask.GetSource(), "foo");
+		ENSURE_EQUAL(mask.GetTimeReference(), 0.);
+	}
+	
+	// Functional constructor
+	{
+		I3RecoPulseSeriesMapMask mask(frame, "foo", Is42);
+		ENSURE_EQUAL(mask.GetSource(), "foo");
+		ENSURE_EQUAL(mask.GetTimeReference(), 0.);
+	}
 }
 
 TEST(UnsetAllForOM)
