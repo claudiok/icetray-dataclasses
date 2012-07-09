@@ -38,7 +38,7 @@ using namespace boost::python;
 
 std::string repr(I3Time t){
   std::stringstream out;
-  out <<  "I3Time("<< std::setw(4) << t.GetUTCYear() << "," <<  std::setw(18) <<t.GetUTCDaqTime() << ")";
+  out <<  "I3Time("<< std::setw(4) << t.GetUTCYear() << "," <<  std::setw(18) <<t.GetUTCDaqTime() << "L)";
   return out.str();
 }
 

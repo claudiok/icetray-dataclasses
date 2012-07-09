@@ -17,9 +17,10 @@ def approx_Equal(x, y, tolerance=0.001):
 
 now = datetime.datetime.now()
 
-#retreive list of leap seconds from navy 
-filename,handle =  urllib.urlretrieve("http://maia.usno.navy.mil/ser7/tai-utc.dat",
-                                      os.getenv("I3_SRC")+'/dataclasses/resources/testdata/tai-utc.dat')
+filename = os.getenv("I3_SRC")+'/dataclasses/resources/testdata/tai-utc.dat'
+
+if now-datetime.datetime.fromtimestamp(os.path.getmtime(filename)) > datetime.timedelta(180,0):
+    raise "tai-utc.dat older than six month old re-download from http://maia.usno.navy.mil/ser7/tai-utc.dat"
 
 #store Modified julian date of days with leap seconds here
 leap_sec_mjd = []
