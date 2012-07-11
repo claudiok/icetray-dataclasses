@@ -39,7 +39,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/private/test/I3DirectionTest.cxx.in
 i3_test_executable(test 
   private/test/*.cxx
   ${CMAKE_CURRENT_BINARY_DIR}/private/test/I3DirectionTest.cxx
-  USE_PROJECTS dataclasses
+  USE_PROJECTS dataclasses dataio
   USE_TOOLS ${USE_TOOL_ROOT}
   )
 
