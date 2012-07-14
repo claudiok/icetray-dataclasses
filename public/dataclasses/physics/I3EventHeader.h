@@ -19,7 +19,7 @@
 #include <icetray/I3PointerTypedefs.h>
 #include <icetray/serialization.h>
 
-static const unsigned i3eventheader_version_ = 2;
+static const unsigned i3eventheader_version_ = 3;
 
 /**
  * @brief The header for data on the Event stream.
@@ -43,6 +43,9 @@ class I3EventHeader : public I3FrameObject
   unsigned runID_;
   unsigned subRunID_;
   unsigned eventID_;
+  unsigned subEventID_;
+
+  std::string subEventStream_;
   
   State state_;
 
@@ -103,6 +106,26 @@ class I3EventHeader : public I3FrameObject
    * @param eventid the new event id for the event
    */
   void SetEventID(unsigned eventid) { eventID_ = eventid; }
+
+  /**
+   * @return the subevent id for this subevent
+   */
+  unsigned GetSubEventID() const { return subEventID_; }
+
+  /**
+   * @param subeventid the new subevent id for the subevent
+   */
+  void SetSubEventID(unsigned eventid) { subEventID_ = eventid; }
+
+  /**
+   * @return the subevent stream description
+   */
+  std::string GetSubEventStream() const { return subEventStream_; }
+
+  /**
+   * @param desc the new subevent stream description
+   */
+  void SetSubEventStream(const std::string &desc) { subEventStream_ = desc; }
 
   /**
    * @return the state for the event

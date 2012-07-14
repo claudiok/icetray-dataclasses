@@ -2,6 +2,7 @@
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <dataclasses/physics/DeltaCompressor.h>
 #include <stdexcept>
+#include <boost/foreach.hpp>
 
 I3DOMLaunch::I3DOMLaunch() 
   : startTime_(0.0),
@@ -193,11 +194,38 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
   }
   else
   {
-    ar & make_nvp("RawATWD", rawATWD_);
-    ar & make_nvp("RawFADC", rawFADC_);
+    if (version > 4) {
+      std::vector< std::vector<int> > tempRawATWD;
+      ar & make_nvp("RawATWD", tempRawATWD);
+      //need to clear the vectors before filling them
+      rawATWD_.clear();
+      BOOST_FOREACH(std::vector<int>& wf, tempRawATWD){
+        I3Vector<int> tempWF;
+        BOOST_FOREACH(int i, wf) tempWF.push_back(i);
+        rawATWD_.push_back(tempWF);
+      }
+
+      //need to clear the vectors before filling them
+      std::vector<int> tempRawFADC;
+      ar & make_nvp("RawFADC", tempRawFADC);
+      rawFADC_.clear();
+      BOOST_FOREACH(int i, tempRawFADC)
+        rawFADC_.push_back(i);
+    } else {
+      ar & make_nvp("RawATWD", rawATWD_);
+      ar & make_nvp("RawFADC", rawFADC_);
+    }
   }
   ar & make_nvp("LocalCoincidence", localCoincidence_);
-  ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  if (version > 4) {
+    std::vector<int> tempRawChargeStamp;
+    ar & make_nvp("RawChargeStamp", tempRawChargeStamp);
+    rawChargeStamp_.clear();
+    BOOST_FOREACH(int i, tempRawChargeStamp)
+      rawChargeStamp_.push_back(i);
+  } else {
+    ar & make_nvp("RawChargeStamp", rawChargeStamp_);
+  }
   if(version > 2)
     {
       ar & make_nvp("Pedestal", pedestal_);

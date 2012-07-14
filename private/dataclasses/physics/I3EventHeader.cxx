@@ -48,8 +48,15 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
       // ... using OK as a default value
       state_ = OK;
     }
-  ar & make_nvp("StartTime", startTime_);
-  ar & make_nvp("EndTime", endTime_);
+   if (version > 2) {
+     ar & make_nvp("SubEventID", subEventID_);
+     ar & make_nvp("SubEventStream", subEventStream_);
+   } else {
+     subEventID_ = 0;
+     subEventStream_ = "";
+   }
+   ar & make_nvp("StartTime", startTime_);
+   ar & make_nvp("EndTime", endTime_);
 }
   
 I3_SERIALIZABLE(I3EventHeader);
