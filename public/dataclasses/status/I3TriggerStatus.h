@@ -59,7 +59,7 @@
  *  readoutTimePlus  : time after the trigger time to set the readout window
  *  readoutTimeOffset : time shift relatve to the trigger time to set the readout windoow
  */
-static const unsigned i3triggerstatus_version_ = 3;
+static const unsigned i3triggerstatus_version_ = 2;
 static const unsigned i3triggerreadoutconfig_version_ = 0;
 
 /**
@@ -81,16 +81,6 @@ struct I3TriggerReadoutConfig
   }
 
 };
-
-/**
- * Checks that the float is well-formed.  Eventually it uses
- * atof to do the conversion, but atof doesn't check for many
- * things and worst of all returns 0.0 if it fails.
- * Numbers in the DB can then be of any form that atof can 
- * convert.  So as simple as 0.5 and as complicated as -0.5E+10.2 .
- */
-bool WellFormedFloat(std::string& str_value);
-bool WellFormedFloat(const char* str_value);
 
 BOOST_CLASS_VERSION(I3TriggerReadoutConfig, i3triggerreadoutconfig_version_);
 
@@ -124,13 +114,13 @@ class I3TriggerStatus
    * @param settings Trigger settings: string, integer values.
    */
   I3TriggerStatus(const std::string& name,
-                  const std::map<std::string, std::string>& settings)
+                  const std::map<std::string, int>& settings)
     : name_(name), settings_(settings) {}
   
   /**
    * Destructor.
    */
-  virtual ~I3TriggerStatus(){};
+  virtual ~I3TriggerStatus();
   
   /**
    * Get trigger name.
@@ -143,36 +133,12 @@ class I3TriggerStatus
   /**
    * Get trigger settings.
    * 
-   * @return Trigger settings: string, string values
+   * @return Trigger settings: string, integer values
    * (contents vary by trigger type).
-   *
    */
-  const std::map<std::string, std::string>& 
-    GetTriggerSettings() const { return settings_; }
+  const std::map<std::string, int>& GetTriggerSettings() const { return settings_; }
+  std::map<std::string, int>& GetTriggerSettings() { return settings_; }  
 
-  std::map<std::string, std::string>& 
-    GetTriggerSettings() { return settings_; }
-
-  /**
-   * 'Get's the trigger value for the given key.  The underlying
-   * value is stored as a string ( just like in the DB ) and is
-   * converted on-the-fly to whichever type you want.  Currently
-   * only int and float are supported.
-   */
-  void GetTriggerConfigValue(const std::string& key, int& value) const;
-  void GetTriggerConfigValue(const std::string& key, float& value) const;
-
-  /**
-   * Sets the trigger config value.  The underlying code simply
-   * streams into a stringstream, so this will accept any type
-   * that is streamable.
-   */
-  template <typename T>
-    void SetTriggerConfigValue(const std::string& key, T value);
-  
-  template <typename T>
-    void SetTriggerConfigValue(const char* key, T value);
-  
   const std::map<Subdetector, I3TriggerReadoutConfig>& 
     GetReadoutSettings() const { return readoutconfigs_; }
   std::map<Subdetector, I3TriggerReadoutConfig>& 
@@ -180,14 +146,12 @@ class I3TriggerStatus
 
  private:
   std::string name_;
-  std::map<std::string, std::string> settings_;
+  std::map<std::string, int> settings_;
   std::map<Subdetector, I3TriggerReadoutConfig> readoutconfigs_;
 
   friend class boost::serialization::access;
-  template <class Archive> void load(Archive & ar, unsigned version);
-  template <class Archive> void save(Archive & ar, unsigned version) const;
+  template <class Archive> void serialize(Archive & ar, unsigned version);
 
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
 
   // logging
   SET_LOGGER("I3TriggerStatus");
