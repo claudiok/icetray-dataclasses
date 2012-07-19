@@ -87,19 +87,20 @@ I3TimeWindowSeries::push_back(const I3TimeWindow &other)
 void
 I3TimeWindowSeries::coalesce()
 {
-	if (this->size() == 0)
+	if (this->size() < 2u)
 		return;
 	I3TimeWindowSeries::iterator current(this->begin()), next(current);
 	next++;
-	for ( ; next != this->end(); next++)
+	for ( ; next != this->end(); ) {
+		assert(current != next);
 		if (current->GetOverlapType(*next) != I3TimeWindow::NONE) {
 			current->start_ = std::min(current->start_, next->start_);
 			current->stop_ = std::max(current->stop_, next->stop_);
-			current = this->erase(next);
-			next = current;
+			next = this->erase(next);
 		} else {
-			current++;
+			current++; next++;
 		}
+	}
 }
 
 I3TimeWindowSeries
