@@ -41,6 +41,7 @@ class I3TimeWindowSeries : public std::list<I3TimeWindow> {
 public:
 	
 	I3TimeWindowSeries operator|(const I3TimeWindowSeries &other) const;
+	I3TimeWindowSeries operator~() const;
 	
 	I3TimeWindowSeries() {}
 	template <typename Iterator>

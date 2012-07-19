@@ -103,6 +103,7 @@ I3TimeWindowSeries::coalesce()
 	}
 }
 
+// Construct the union of two sets
 I3TimeWindowSeries
 I3TimeWindowSeries::operator|(const I3TimeWindowSeries &other) const
 {
@@ -111,6 +112,38 @@ I3TimeWindowSeries::operator|(const I3TimeWindowSeries &other) const
 		ored.push_back(w);
 	
 	return ored;
+}
+
+// Construct the complement
+I3TimeWindowSeries
+I3TimeWindowSeries::operator~() const
+{
+	I3TimeWindowSeries comp;
+	
+	const double tstart = -std::numeric_limits<double>::infinity();
+	const double tstop = std::numeric_limits<double>::infinity();
+	
+	I3TimeWindowSeries::const_iterator current(this->begin());
+	I3TimeWindowSeries::const_iterator next(boost::next(current));
+	
+	// Add gap before the first window
+	if (current != this->end()) {
+		if (current->start_ > tstart)
+			comp.push_back(I3TimeWindow(tstart, current->start_));
+	} else
+		comp.push_back(I3TimeWindow(tstart, tstop));	
+	
+	// Fill in interior gaps
+	for ( ; current != this->end() && next != this->end(); current++, next++) {
+		comp.push_back(I3TimeWindow(current->stop_, next->start_));
+	}
+	
+	// Add a gap after the last window
+	if (current != this->end() && current->stop_ < tstop)
+		comp.push_back(I3TimeWindow(current->stop_, tstop));
+		
+
+	return comp;
 }
 
 I3TimeWindowSeriesMap
