@@ -2,9 +2,13 @@
 """
 Leap Second Unit Test Suite 
 
-This file tests I3Time for leap second awareneness
-It downloads a file of days with leap seconds from the Navy and tests to make sure 
-I3Time works well with leap seconds
+This file tests I3Time for leap second awareneness.
+It uses a file of days with leap seconds from the Navy and tests to
+make sure I3Time works well with leap seconds.
+
+It depends on http://maia.usno.navy.mil/ser7/tai-utc.dat, which is
+kept in ${I3_PORTS}/test-data. The USNO updates this file every six
+months, hence the age test.
 
 """
 
@@ -17,7 +21,7 @@ def approx_Equal(x, y, tolerance=0.001):
 
 now = datetime.datetime.now()
 
-filename = os.getenv("I3_SRC")+'/dataclasses/resources/testdata/tai-utc.dat'
+filename = os.getenv("I3_PORTS")+'/test-data/tai-utc.dat'
 
 if now-datetime.datetime.fromtimestamp(os.path.getmtime(filename)) > datetime.timedelta(180,0):
     raise "tai-utc.dat older than six month old re-download from http://maia.usno.navy.mil/ser7/tai-utc.dat"
@@ -31,7 +35,7 @@ for line in open(filename).readlines()[13:]:
     #subract 2400000 to obtian the modified julian date
     leap_sec_mjd.append(int(line[17:24])-2400000)
 
-#firts make sure first leap second is JAN 1, 1972
+#first make sure first leap second is JAN 1, 1972
 assert(leap_sec_mjd[0]==41317)
 
 #test every day from 1970 to 
