@@ -18,6 +18,9 @@ template <typename Archive>
 void
 I3TimeWindow::serialize(Archive &ar, unsigned version)
 {
+	if (version > 0)
+		ar & make_nvp("I3FrameObject",
+		    base_object<I3FrameObject>(*this));
 	ar & make_nvp("Start", start_);
 	ar & make_nvp("Stop", stop_);
 }
@@ -26,6 +29,9 @@ template <typename Archive>
 void
 I3TimeWindowSeries::serialize(Archive &ar, unsigned version)
 {
+	if (version > 0)
+		ar & make_nvp("I3FrameObject",
+		    base_object<I3FrameObject>(*this));
 	ar & make_nvp("TimeWindows",
 	    base_object<std::list<I3TimeWindow> >(*this));
 }

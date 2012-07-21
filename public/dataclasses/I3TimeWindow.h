@@ -15,7 +15,7 @@
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
 
-class I3TimeWindow {
+class I3TimeWindow : public I3FrameObject {
 public:
 	I3TimeWindow() : start_(-std::numeric_limits<double>::infinity()),
 	    stop_(std::numeric_limits<double>::infinity()) {};
@@ -37,7 +37,7 @@ private:
 	template <typename Archive> void serialize(Archive &ar, unsigned);
 };
 
-class I3TimeWindowSeries : public std::list<I3TimeWindow> {
+class I3TimeWindowSeries : public std::list<I3TimeWindow>, public I3FrameObject {
 public:
 	
 	I3TimeWindowSeries operator|(const I3TimeWindowSeries &other) const;
@@ -59,10 +59,12 @@ typedef I3Map<OMKey, I3TimeWindowSeries> I3TimeWindowSeriesMap;
 
 I3TimeWindowSeriesMap operator|(const I3TimeWindowSeriesMap &, const I3TimeWindowSeriesMap &);
 
+I3_POINTER_TYPEDEFS(I3TimeWindow);
+I3_POINTER_TYPEDEFS(I3TimeWindowSeries);
 I3_POINTER_TYPEDEFS(I3TimeWindowSeriesMap);
 
-static const unsigned i3timewindow_version_ = 0;
-static const unsigned i3timewindowseries_version_ = 0;
+static const unsigned i3timewindow_version_ = 1;
+static const unsigned i3timewindowseries_version_ = 1;
 static const unsigned i3timewindowseriesmap_version_ = 0;
 BOOST_CLASS_VERSION(I3TimeWindow, i3timewindow_version_);
 BOOST_CLASS_VERSION(I3TimeWindowSeries, i3timewindowseries_version_);
