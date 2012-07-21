@@ -14,6 +14,7 @@
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/find.hpp>
 
 template <typename T>
 void I3TriggerStatus::SetTriggerConfigValue(const std::string& key, T value){
@@ -95,6 +96,10 @@ bool WellFormedFloat(std::string& str_value){
     // well formed ( i.e. of the form "sd.d" )
     for( std::vector<std::string>::iterator iter = float_vector.begin();
 	 iter != float_vector.end(); ++iter){
+
+      // can't allow things like 'e-1.0' or '-1.0e'
+      if(iter->size() == 0 ) return false;
+
       // trim off the leading sign
       // first make sure it starts with a "+" or "-"
       // then check that the next character is a digit (0-9) or a decimal point
