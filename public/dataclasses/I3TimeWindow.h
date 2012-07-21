@@ -2,15 +2,14 @@
 // I3TimeWindow.h
 //
 // A class to represent disjoint time spans within an event
-// separately for each DOM, with rudimentary methods for
-// logically combining such spans.
+// with rudimentary methods for logically combining such spans.
 //
 // Copyright (c) 2012 Jakob van Santen <vansanten@wisc.edu>
 // and the IceCube Collaboration <http://www.icecube.wisc.edu>
 //
 
-#ifndef MILLIPEDE_I3TIMEWINDOW_H_INCLUDED
-#define MILLIPEDE_I3TIMEWINDOW_H_INCLUDED
+#ifndef I3TIMEWINDOW_H_INCLUDED
+#define I3TIMEWINDOW_H_INCLUDED
 
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/I3Map.h>
@@ -70,4 +69,4 @@ BOOST_CLASS_VERSION(I3TimeWindow, i3timewindow_version_);
 BOOST_CLASS_VERSION(I3TimeWindowSeries, i3timewindowseries_version_);
 BOOST_CLASS_VERSION(I3TimeWindowSeriesMap, i3timewindowseriesmap_version_);
 
-#endif /* MILLIPEDE_I3TIMEWINDOW_H_INCLUDED */
+#endif // I3TIMEWINDOW_H_INCLUDED
