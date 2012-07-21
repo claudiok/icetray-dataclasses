@@ -63,6 +63,7 @@ I3Map<Key, Value> :: ~I3Map() { }
 typedef I3Map<std::string, double> I3MapStringDouble;
 typedef I3Map<std::string, int> I3MapStringInt;
 typedef I3Map<std::string, bool> I3MapStringBool;
+typedef I3Map<std::string, std::string> I3MapStringString;
 
 typedef I3Map<std::string, std::vector<double> > I3MapStringVectorDouble;
 
@@ -80,6 +81,7 @@ typedef I3Map<OMKey, double > I3MapKeyDouble;
 I3_POINTER_TYPEDEFS(I3MapStringDouble);
 I3_POINTER_TYPEDEFS(I3MapStringInt);
 I3_POINTER_TYPEDEFS(I3MapStringBool);
+I3_POINTER_TYPEDEFS(I3MapStringString);
 I3_POINTER_TYPEDEFS(I3MapStringVectorDouble);
 I3_POINTER_TYPEDEFS(I3MapStringStringDouble);
 I3_POINTER_TYPEDEFS(I3MapUnsignedUnsigned);

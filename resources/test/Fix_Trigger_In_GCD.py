@@ -35,8 +35,8 @@ while oldgcd.more():
             print detail
             sys.exit( 0 )
         
-        trigSet['threshold'] = 8
-        trigSet['timeWindow'] = 5000
+        trigSet['threshold'] = "8"
+        trigSet['timeWindow'] = "5000"
         
         inice_trc = dataclasses.I3TriggerStatus.I3TriggerReadoutConfig()
         inice_trc.readout_time_minus = 4000
@@ -64,10 +64,10 @@ while oldgcd.more():
         str_ts.trigger_name = 'ClusterTrigger'
         trigSet2 = str_ts.trigger_settings
         
-        trigSet2['coherenceLength'] = 7
-        trigSet2['domSet'] = 2
-        trigSet2['multiplicity'] = 5 
-        trigSet2['timeWindow'] = 1500
+        trigSet2['coherenceLength'] = "7"
+        trigSet2['domSet'] = "2"
+        trigSet2['multiplicity'] = "5" 
+        trigSet2['timeWindow'] = "1500"
         
         strinice_trc = dataclasses.I3TriggerStatus.I3TriggerReadoutConfig()
         strinice_trc.readout_time_minus = 4000
