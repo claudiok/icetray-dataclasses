@@ -117,7 +117,7 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
       log_error("Invalid second!");
       return;
     }
-  if (ns <0 ||  sec >= I3Units::second )
+  if (ns <0 ||  ns >= I3Units::second )
     {
       log_error("Invalid nano second!");
       return;

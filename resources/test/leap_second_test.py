@@ -518,9 +518,11 @@ for i in range(10000):
     d1 = random.randint(d_start,d_stop)
     d2 = random.randint(d_start,d_stop)
 
+    ns = random.randint(0,1e9)
+
     #make I3Times noon of that day
-    t1.set_mod_julian_time(d1,43200,0)
-    t2.set_mod_julian_time(d2,43200,0)
+    t1.set_mod_julian_time(d1,43200,ns)
+    t2.set_mod_julian_time(d2,43200,ns)
     
     #calculate how many leap seconds between those days
     if d1> d2:
