@@ -22,6 +22,7 @@
 #include "icetray/I3Frame.h"
 #include "icetray/serialization.h"
 #include "dataclasses/physics/I3RecoPulse.h"
+#include "dataclasses/I3TimeWindow.h"
 
 static const unsigned i3recopulseseriesmapmask_version_ = 1;
 
@@ -68,6 +69,18 @@ public:
 	 * Apply the mask to the target map in the frame.
 	 */
 	boost::shared_ptr<const I3RecoPulseSeriesMap> Apply(const I3Frame &frame) const;
+
+	/*
+	 * Get the set of times during which pulses were excluded
+	 * from the mask. When the bit corresponding to a pulse is un-set
+	 * in the mask, the exclusion window will extend from the point
+	 * halfway between the time+width of the preceding pulse (or
+	 * -inf if the excluded pulse is the first one) to the point
+	 * halfway between the time+width of the excluded pulse to
+	 * the time of the following pulse (or +inf if the excluded
+	 * pulse is the last one).
+	 */	
+	I3TimeWindowSeriesMapPtr GetComplement(const I3Frame &frame) const;
 	
 	/*
 	 * Get the name of the frame object the mask was made from.
@@ -83,7 +96,7 @@ public:
 	 */
 	void SetTimeReference(float);
 	float GetTimeReference() const { return time_reference_; };
-	 
+		 
 	/*
 	 * Get the number of set bits in the mask.
 	 */

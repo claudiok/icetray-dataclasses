@@ -18,6 +18,7 @@
 #include "icetray/I3Frame.h"
 #include "icetray/serialization.h"
 #include "dataclasses/physics/I3RecoPulse.h"
+#include "dataclasses/I3TimeWindow.h"
 
 static const unsigned i3recopulseseriesmapunion_version_ = 0;
 
@@ -30,6 +31,7 @@ public:
 	I3RecoPulseSeriesMapUnion();
 	
 	I3RecoPulseSeriesMapConstPtr Apply(const I3Frame&) const;
+	I3TimeWindowSeriesMapPtr GetComplement(const I3Frame &frame) const;
 	std::vector<std::string> GetSources() const { return keys_; }
 private:
 	std::vector<std::string> keys_;

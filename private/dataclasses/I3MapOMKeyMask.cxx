@@ -8,6 +8,7 @@
  */
 
 #include "dataclasses/I3MapOMKeyMask.h"
+#include "dataclasses/I3MapOMKeyUnion.h"
 #include "dataclasses/physics/I3RecoPulse.h"
 #include "boost/make_shared.hpp"
 #include <boost/serialization/binary_object.hpp>
@@ -481,6 +482,113 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 	}
 	
 	return masked_;
+}
+
+I3TimeWindowSeriesMapPtr
+I3RecoPulseSeriesMapMask::GetComplement(const I3Frame &frame) const
+{	
+	boost::shared_ptr<const I3RecoPulseSeriesMap> source =
+	    frame.Get<I3RecoPulseSeriesMapConstPtr>(key_);
+	if (!source)
+		log_fatal("The map named '%s' doesn't exist in the frame!\n", key_.c_str());
+	
+	// Recurse if necessary
+	I3TimeWindowSeriesMapPtr exclusions;
+	I3FrameObjectConstPtr focp = frame.Get<I3FrameObjectConstPtr>(key_);
+	if (I3RecoPulseSeriesMapMaskConstPtr submask =
+	    boost::dynamic_pointer_cast<const I3RecoPulseSeriesMapMask>(focp)) {
+		exclusions = submask->GetComplement(frame);
+	} else if (I3RecoPulseSeriesMapUnionConstPtr uni = 
+	    boost::dynamic_pointer_cast<const I3RecoPulseSeriesMapUnion>(focp)) {
+		exclusions = uni->GetComplement(frame);
+	} else {
+		exclusions = boost::make_shared<I3TimeWindowSeriesMap>();
+	}
+	
+	assert(exclusions);	
+	
+	const double tstart = -std::numeric_limits<double>::infinity();
+	const double tend = std::numeric_limits<double>::infinity();
+	
+	// Add new exclusions from this mask
+	I3RecoPulseSeriesMap::const_iterator source_it = source->begin();
+	std::list<bitmask>::const_iterator list_it = element_masks_.begin();
+	unsigned omkey_idx = 0;
+	
+	I3TimeWindowSeriesMap::iterator tw_it = exclusions->begin();	
+	for ( ; source_it != source->end(); source_it++, omkey_idx++) {
+		
+		// Were any bits unset for this DOM? If so, prepare to insert
+		// exclusion windows.
+		if (!omkey_mask_.get(omkey_idx) || !list_it->all()) {
+			I3TimeWindowSeriesMap::iterator pos =
+			    exclusions->find(source_it->first);
+			if (pos == exclusions->end()) {
+				tw_it = exclusions->insert(tw_it, std::make_pair(
+				    source_it->first, I3TimeWindowSeries()));
+			} else {
+				tw_it = pos;
+			}
+		} else {
+			if (omkey_mask_.get(omkey_idx))
+				list_it++;
+			continue;
+		}
+		
+		// This key was cut out entirely. Insert an exclusion window
+		// covering all times.		
+		if (!omkey_mask_.get(omkey_idx)) {
+			tw_it->second.push_back(I3TimeWindow(tstart, tend));
+			continue;
+		} else if (!list_it->any()) {
+			tw_it->second.push_back(I3TimeWindow(tstart, tend));
+			list_it++;
+			continue;
+		}
+		
+		// An exclusion window for a de-selected pulse starts:
+		// * halfway between the start of this pulse and the
+		//   end of the previous one, or
+		// * at -inf if this is the first pulse
+		// and ends:
+		// * halfway between the end of this pulse and start
+		//   of the next one, or
+		// * at +inf if this is the last pulse
+		//
+		// This construction ensures that the exclusion windows
+		// constructed from multi-level masks always overlap, so
+		// that the union of exclusion windows is the same as
+		// regardless of how many levels of masks were used.
+		//
+		//               -inf  1    2    3    4  +inf
+		// Pulses              *    *    *    *
+		// Mask 1              1    0    1    0
+		// -> exclusion 1         |---|     |-------|
+		// Mask 2              0         1
+		// -> exclusion 2 |---------|
+		// -> union       |-----------|     |-------|
+		//
+		unsigned idx = 0;
+		typedef I3RecoPulseSeriesMap::mapped_type::const_iterator vec_iterator;
+		vec_iterator ibegin = source_it->second.begin();
+		vec_iterator iend = source_it->second.end();
+		for (vec_iterator current = ibegin ; current != iend; current++, idx++) {
+			if (!list_it->get(idx)) {
+				vec_iterator prev = (current-1);
+				vec_iterator next = (current+1);
+				tw_it->second.push_back(I3TimeWindow(
+				    prev >= ibegin ?
+				    (current->GetTime()+prev->GetTime()+prev->GetWidth())/2. : tstart,
+				    next < iend ?
+				    (next->GetTime()+current->GetTime()+current->GetWidth())/2. : tend
+				    ));
+			}
+		}
+			
+		list_it++;	
+	}
+	
+	return exclusions;
 }
 
 I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)

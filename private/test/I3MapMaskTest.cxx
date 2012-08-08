@@ -82,6 +82,63 @@ TEST(Compactify)
 	ENSURE_EQUAL(pulses->size(), 0u);
 }
 
+TEST(GetComplement)
+{
+	I3FramePtr frame = manufacture_frame("foo");
+	I3RecoPulseSeriesMapMaskPtr mask(new I3RecoPulseSeriesMapMask(*frame, "foo"));
+	I3RecoPulseSeriesMapConstPtr pulsemap = mask->Apply(*frame);
+	
+	// The interval covering everything
+	const double tstart = -std::numeric_limits<double>::infinity();
+	const double tstop = std::numeric_limits<double>::infinity();
+	
+	I3TimeWindowSeriesMapPtr exclusions;
+	OMKey key(pulsemap->begin()->first);
+	const I3RecoPulseSeries &pulses = pulsemap->begin()->second;
+	
+	exclusions = mask->GetComplement(*frame);
+	ENSURE_EQUAL(exclusions->size(), 0u, "All-set mask means nothing excluded");
+
+	// Unset an entire DOM. The resulting window covers all times.
+	mask->Set(key, false);
+	exclusions = mask->GetComplement(*frame);
+	ENSURE_EQUAL(exclusions->size(), 1u, "One DOM excluded");
+	ENSURE_EQUAL(exclusions->begin()->second.size(), 1u, "One exclusion in one DOM");
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStart(), tstart);
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStop(), tstop);
+	
+	// Unset a single pulse.
+	mask->Set(key, true);
+	mask->Set(key, 1, false);
+	exclusions = mask->GetComplement(*frame);
+	ENSURE_EQUAL(exclusions->size(), 1u, "One DOM excluded");
+	ENSURE_EQUAL(exclusions->begin()->second.size(), 1u, "One exclusion in one DOM");
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStart(),
+	    (pulses[0].GetTime()+pulses[0].GetWidth()+pulses[1].GetTime())/2.);
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStop(),
+	    (pulses[2].GetTime()+pulses[1].GetWidth()+pulses[1].GetTime())/2.);
+	
+	// Unset the first pulse.
+	mask->Set(key, 0, false);
+	exclusions = mask->GetComplement(*frame);
+	ENSURE_EQUAL(exclusions->size(), 1u, "One DOM excluded");
+	ENSURE_EQUAL(exclusions->begin()->second.size(), 1u, "One exclusion in one DOM");
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStart(), tstart);
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStop(),
+	    (pulses[2].GetTime()+pulses[1].GetWidth()+pulses[1].GetTime())/2.);
+
+	// Now, do the same thing in two levels. The result will be the same.
+	mask->Set(key, 0, true);
+	frame->Put("mask", mask);
+	I3RecoPulseSeriesMapMaskPtr submask(new I3RecoPulseSeriesMapMask(*frame, "mask"));
+	submask->Set(key, 0, false);
+	ENSURE_EQUAL(exclusions->size(), 1u, "One DOM excluded");
+	ENSURE_EQUAL(exclusions->begin()->second.size(), 1u, "One exclusion in one DOM");
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStart(), tstart);
+	ENSURE_EQUAL(exclusions->begin()->second.front().GetStop(),
+	    (pulses[2].GetTime()+pulses[1].GetWidth()+pulses[1].GetTime())/2.);
+}
+
 TEST(Apply)
 {
 	I3RecoPulseSeriesMapPtr pulses;
