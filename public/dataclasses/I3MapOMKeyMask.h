@@ -23,7 +23,7 @@
 #include "icetray/serialization.h"
 #include "dataclasses/physics/I3RecoPulse.h"
 
-static const unsigned i3recopulseseriesmapmask_version_ = 1;
+static const unsigned i3recopulseseriesmapmask_version_ = 2;
 
 class I3RecoPulseSeriesMapMask : public I3FrameObject {
 public:
@@ -73,16 +73,6 @@ public:
 	 * Get the name of the frame object the mask was made from.
 	 */
 	std::string GetSource() const { return key_; }
-	
-	/*
-	 * Set the reference time that will be subtracted from the times
-	 * of all pulses when applying the mask. This is intended for use
-	 * in modules that re-define the readout window for the event and
-	 * need to adjust the masked pulses to make their times
-	 * consistent with the new definition.
-	 */
-	void SetTimeReference(float);
-	float GetTimeReference() const { return time_reference_; };
 	 
 	/*
 	 * Get the number of set bits in the mask.
@@ -141,7 +131,6 @@ private:
 	};
 		
 	std::string key_;
-	float time_reference_;
 	bitmask omkey_mask_;
 	std::list<bitmask> element_masks_;
 	I3RecoPulseSeriesMapConstPtr source_;

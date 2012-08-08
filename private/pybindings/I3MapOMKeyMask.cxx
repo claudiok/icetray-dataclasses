@@ -50,8 +50,6 @@ void register_I3RecoPulseSeriesMapMask()
 		.def(bp::init<const I3Frame&, const std::string &, const I3RecoPulseSeriesMap &>())
 		.def(bp::init<const I3Frame&, const std::string &, callback_t>())
 		.add_property("source", &I3RecoPulseSeriesMapMask::GetSource)
-		.add_property("time_reference", &I3RecoPulseSeriesMapMask::GetTimeReference,
-		    &I3RecoPulseSeriesMapMask::SetTimeReference)	
 		.add_property("bits", &getbits)
 		.def("__and__", &I3RecoPulseSeriesMapMask::operator&)
 		.def("__or__", &I3RecoPulseSeriesMapMask::operator|)
