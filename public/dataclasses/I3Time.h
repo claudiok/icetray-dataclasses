@@ -40,7 +40,7 @@ namespace I3TimeUtils
    * @brief return true if a leap second occurs on the last second of the day 
    * Modified Julian Date of mjd
    */
-  bool leap_sec_on_mjd(const int32_t mjd);
+  bool leap_sec_on_mjd(const double mjd);
 
   /**
    * @brief returns the number of leapseconds between the specified Modified Julian Dates.
@@ -60,7 +60,7 @@ namespace I3TimeUtils
    * @brief return return the number of seconds on Modified Julian Date mjd:
    * 86400 for normal days, 86401 for days with leap second
    */
-  int32_t seconds_in_day(const int32_t mjd);
+  int32_t seconds_in_day(const double mjd);
 
   /**
    * @brief Returns the number of tenths of nanoseconds it the specified year.

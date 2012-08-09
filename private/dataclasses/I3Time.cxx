@@ -45,11 +45,11 @@ int32_t I3TimeUtils::mod_julian_day_start_of_year(int year)
   return int32_t(JulDate(&i) - 2400000);
 }
 
-bool I3TimeUtils::leap_sec_on_mjd(const int32_t mjd){
-  return find(leap_sec_list.begin(),leap_sec_list.end(),mjd)!=leap_sec_list.end();
+bool I3TimeUtils::leap_sec_on_mjd(const double mjd){
+  return find(leap_sec_list.begin(),leap_sec_list.end(), (const int32_t) mjd)!=leap_sec_list.end();
 }
 
-int32_t I3TimeUtils::seconds_in_day(const int32_t mjd){
+int32_t I3TimeUtils::seconds_in_day(const double mjd){
   return SECONDS_IN_DAY+leap_sec_on_mjd(mjd);
 }
 
@@ -114,12 +114,12 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
 {
   if (sec <0 ||  sec >= I3TimeUtils::seconds_in_day(modJulianDay))
     {
-      log_error("Invalid second!");
+      log_error("Invalid second: %i!", sec);
       return;
     }
   if (ns <0 ||  ns >= I3Units::second )
     {
-      log_error("Invalid nano second!");
+      log_error("Invalid nano second: %g!", ns);
       return;
     }
 
@@ -150,13 +150,13 @@ void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, i
     
     if(month<1 || month>12)
     {
-        log_error("Invalid month!");
+        log_error("Invalid month: %i!", month);
         return;
     }
 
     if(day<1 || day>daysOfMonth[month-1])
     {
-        log_error("Invalid day!");
+        log_error("Invalid day: %i!", day);
         return;
     }
     
@@ -172,25 +172,25 @@ void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, i
 
     if(hour<0 || hour>23)
     {
-        log_error("Invalid hour!");
+        log_error("Invalid hour: %i!", hour);
         return;
     }
 
     if(minute<0 || minute>59)
     {
-        log_error("Invalid minute!");
+        log_error("Invalid minute: %i!", minute);
         return;
     }
 
     if(sec<0 || sec > ((I3TimeUtils::leap_sec_on_mjd(modJulDay) && hour==23 && minute == 59)?60:59))
     {
-        log_error("Invalid second!");
+        log_error("Invalid second: %i!", sec);
         return;
     }
     
     if(ns<0 || ns>=1e9)
     {
-        log_error("Invalid nanosecond!");
+        log_error("Invalid nanosecond: %g!", ns);
         return;
     }
     
@@ -231,8 +231,8 @@ int32_t I3Time::GetModJulianDay() const
 int32_t I3Time::GetModJulianSec() const
 {
 
-  int32_t mjd = modjulianday(year_,daqTime_);
-  int32_t daysafteryear = 
+  const int32_t mjd = (const int32_t) modjulianday(year_,daqTime_);
+  const int32_t daysafteryear = 
     (int32_t)(mjd - modjulianday(year_));
   int32_t secsafteryear = 
     (daqTime_ - daqTime_%((int64_t)(1e10)))/((int64_t)1e10);
