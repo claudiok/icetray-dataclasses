@@ -9,18 +9,73 @@
  */
 #include <icetray/serialization.h>
 #include <dataclasses/status/I3TriggerStatus.h>
-#include <boost/algorithm/string/classification.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/case_conv.hpp>
-#include <boost/algorithm/string/split.hpp>
-#include <boost/algorithm/string/trim.hpp>
-#include <boost/algorithm/string/find.hpp>
+#include <sstream>
+#include <iostream>
+
+#include <boost/foreach.hpp>
+#include <boost/preprocessor.hpp>
+#include <boost/function.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/optional.hpp>
+#include <boost/algorithm/string.hpp>
+
+/**
+ * Uses boost::lexical_cast to ensure the conversion can be made.  
+ * http://www.boost.org/doc/libs/1_38_0/libs/conversion/lexical_cast.htm
+ * This catches things that will silently trip up atoi and atof.
+ */
+template <typename F,typename T>
+void Convert(const F& from, boost::optional<T>& to){
+  try{
+    T value = boost::lexical_cast<T>(from);
+    to = boost::optional<T>(value);
+  }catch(boost::bad_lexical_cast &){
+    to = boost::optional<T>();
+  } 
+};
+
+// specialization for const char*
+template <typename T>
+void Convert(const char* from, boost::optional<T>& to){
+  Convert(std::string(from),to);
+};
+
+// specialization for bools
+// checks for strings 'true','false','T', and 'F'
+// case-insensitive
+template <>
+void Convert(const std::string& from, boost::optional<bool>& to){
+  try{
+    bool value = boost::lexical_cast<bool>(from);
+    to = boost::optional<bool>(value);
+  }catch(boost::bad_lexical_cast &){    
+    to = boost::optional<bool>();
+    // the default is unset
+    // if the string is "true","false","t", or "f"
+    // then set the bool accordingly.
+    std::string tmp(from);
+    boost::algorithm::to_lower(tmp);
+    if( tmp == "true" || tmp == "t")
+      to = boost::optional<bool>(true);
+    if( tmp == "false" || tmp == "f")
+      to = boost::optional<bool>(false);
+  }
+};
+
+// specialization for const char*
+template <>
+void Convert(const char* from, boost::optional<bool>& to){
+  Convert(std::string(from),to);
+};
 
 template <typename T>
 void I3TriggerStatus::SetTriggerConfigValue(const std::string& key, T value){
-  std::stringstream sstr;
-  sstr<<value;
-  settings_[key] = sstr.str();
+  boost::optional<std::string> str_value;
+  Convert(value,str_value);
+  if(str_value)
+    settings_[key] = str_value.get();
+  else
+    log_error("Conversion failed.");
 }
 
 template <typename T>
@@ -29,115 +84,29 @@ void I3TriggerStatus::SetTriggerConfigValue(const char* key, T value){
   SetTriggerConfigValue(key_str,value);
 }
 
-// want explicit instantiations for int, float, and string and const char*
-template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,int);
-template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,float);
-template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,std::string);
-template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,const char*);
-
-template void I3TriggerStatus::SetTriggerConfigValue(const char*,int);
-template void I3TriggerStatus::SetTriggerConfigValue(const char*,float);
-template void I3TriggerStatus::SetTriggerConfigValue(const char*,std::string);
-template void I3TriggerStatus::SetTriggerConfigValue(const char*,const char*);
-
-// gets the value by string and converts to an integer
-// sets 'value' to INT_MIN on failure
-void I3TriggerStatus::GetTriggerConfigValue(const std::string& key, int& value) const {
-  value = INT_MIN;
-  if( settings_.find(key) != settings_.end() ){
-    std::string str_value( settings_.find(key)->second );
-    if( boost::algorithm::all( str_value, boost::algorithm::is_digit()
-			       || boost::algorithm::is_any_of("+-") )){
-      // it's an integer
-      value = atoi( str_value.c_str() );
-    }else{
-      log_error("not clear how to convert '%s' to an int.", str_value.c_str());	     
-    }
+template <typename T>
+void I3TriggerStatus::GetTriggerConfigValue(const std::string& key, 
+					    boost::optional<T>& value) const{
+  typedef std::map<std::string,std::string> map_t;
+  map_t::const_iterator iter = settings_.find(key);
+  if(iter == settings_.end()){
+    log_error("Couldn't find '%s' in settings");
+    // stream the possible key values to give the user
+    // an idea of how to fix what's broken.
+    std::stringstream keys;
+    BOOST_FOREACH(const map_t::value_type& vt, settings_)
+      keys<<" "<<vt.first;
+    log_error("  Possible keys :",keys.str().c_str());
+  }else{
+    Convert(iter->second,value);
   }
 }
 
-bool WellFormedFloat(const char* str_value){
-  std::string s(str_value);
-  return WellFormedFloat(s);
-}
-
-bool WellFormedFloat(std::string& str_value){
-  // just convert to lower case right off the bat
-  boost::algorithm::to_lower( str_value );
-
-  // make some very basic checks first that there aren't
-  // more than two decimal points, only one exponent ('e')
-  // and not more than two signs.
-  if( boost::algorithm::all( str_value, boost::algorithm::is_digit() 
-			     || boost::algorithm::is_any_of(".+-e"))
-      && std::count(str_value.begin(), str_value.end(), '.') <= 2 
-      && std::count(str_value.begin(), str_value.end(), 'e') <= 1 
-      && std::count(str_value.begin(), str_value.end(), '+') <= 2
-      && std::count(str_value.begin(), str_value.end(), '-') <= 2 ){
-    // let's add some more checks
-    // s = sign
-    // d = is an integer
-    // . is literally a period ('.')
-    // so we're looking for numbers of the two following forms:
-    //   sd.d (e.g. "+10.4") 
-    //   sd.desd.d (e.g. "-10.4e-9.1")
-
-    // split the number between the mantissa and the exponent
-    // the same exact checks can be applied to both
-    std::vector<std::string> float_vector;
-    boost::algorithm::split( float_vector, str_value, boost::algorithm::is_any_of("e") );
-    //  at this point this vector size should be either 1 or 2
-    //    [sd.d]
-    //    [sd.d,sd.d]
-    if( float_vector.size() != 1 && float_vector.size() != 2 )
-      return false;
-
-    // test the mantissa and exponent and make sure they're
-    // well formed ( i.e. of the form "sd.d" )
-    for( std::vector<std::string>::iterator iter = float_vector.begin();
-	 iter != float_vector.end(); ++iter){
-
-      // can't allow things like 'e-1.0' or '-1.0e'
-      if(iter->size() == 0 ) return false;
-
-      // trim off the leading sign
-      // first make sure it starts with a "+" or "-"
-      // then check that the next character is a digit (0-9) or a decimal point
-      // if it's a sign just trim it off.  we don't need it.
-      if( (boost::algorithm::starts_with(*iter,"+") && 
-	   (iter->size() > 1 && std::isdigit( (*iter)[1] ) || (*iter)[1] == '.' ))
-	  || (boost::algorithm::starts_with(*iter,"-") && 
-	      (iter->size() > 1 && std::isdigit( (*iter)[1] ) || (*iter)[1] == '.' )))
-	boost::algorithm::trim_left_if( *iter, boost::algorithm::is_any_of("+-") );
-      
-      // should be d.d now
-      // split and check that each character sequence on either side of
-      // the decimal point is an integer
-      std::vector<std::string> num_vector;
-      boost::algorithm::split( num_vector, *iter, boost::algorithm::is_any_of(".") );
-      for( std::vector<std::string>::iterator num_v_iter = num_vector.begin();
-	   num_v_iter != num_vector.end(); ++num_v_iter){
-	// if there's anything other than a digit (0-9) this is not well formed
-	if( !boost::algorithm::all( *num_v_iter, boost::algorithm::is_digit() ) )
-	  return false;
-      }
-    }
-  }else{
-    return false;
-  }
-  return true;
-}
-
-// gets the value by string and converts to an float
-// sets 'value' to NAN on failure
-void I3TriggerStatus::GetTriggerConfigValue(const std::string& key, float& value) const {
-  value = NAN;
-  std::string str_value( settings_.find(key)->second );
-  if( WellFormedFloat( str_value ) ){
-      value = atof( str_value.c_str() );
-  }else{
-    log_error("not clear how to convert '%s' to a float.", str_value.c_str());
-  }  
+template <typename T>
+void I3TriggerStatus::GetTriggerConfigValue(const char* key, 
+					    boost::optional<T>& value) const {
+  std::string key_str(key);
+  GetTriggerConfigValue(key_str,value);
 }
 
 template <class Archive>
@@ -199,3 +168,23 @@ void I3TriggerStatus::load(Archive& ar, unsigned version)
 }
 
 I3_SPLIT_SERIALIZABLE(I3TriggerStatus);
+
+
+#define TRIGGER_CONFIG_TYPES(TYPE)				                    \
+template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,TYPE);      \
+template void I3TriggerStatus::SetTriggerConfigValue(const char*,TYPE);             \
+template void I3TriggerStatus::GetTriggerConfigValue(const std::string&,            \
+						     boost::optional<TYPE>&) const; \
+template void I3TriggerStatus::GetTriggerConfigValue(const char*,                   \
+						     boost::optional<TYPE>&) const; \
+template void Convert(const std::string&, boost::optional<TYPE>&);                  \
+template void Convert(const char*, boost::optional<TYPE>&);  
+
+TRIGGER_CONFIG_TYPES(bool);
+TRIGGER_CONFIG_TYPES(int);
+TRIGGER_CONFIG_TYPES(float);
+TRIGGER_CONFIG_TYPES(double);
+TRIGGER_CONFIG_TYPES(std::string);
+
+template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,const char*);
+template void I3TriggerStatus::SetTriggerConfigValue(const char*,const char*);

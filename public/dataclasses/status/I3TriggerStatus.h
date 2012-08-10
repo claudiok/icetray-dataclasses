@@ -16,7 +16,7 @@
 
 #include <dataclasses/Utility.h>
 #include <map>
-
+#include <boost/optional.hpp>
 
 /**
  * @brief A trigger status/configuration object.
@@ -63,6 +63,17 @@ static const unsigned i3triggerstatus_version_ = 3;
 static const unsigned i3triggerreadoutconfig_version_ = 0;
 
 /**
+ * Uses boost::lexical_cast to ensure the conversion can be made.  
+ * http://www.boost.org/doc/libs/1_38_0/libs/conversion/lexical_cast.htm
+ * This catches things that will silently trip up atoi and atof.
+ */
+template <typename F,typename T>
+void Convert(const F& from, boost::optional<T>& to);
+
+template <typename T>
+void Convert(const char* from, boost::optional<T>& to);
+
+/**
  *  A simple struct to hold the per-subdetector readout configurations.
  */
 struct I3TriggerReadoutConfig
@@ -81,16 +92,6 @@ struct I3TriggerReadoutConfig
   }
 
 };
-
-/**
- * Checks that the float is well-formed.  Eventually it uses
- * atof to do the conversion, but atof doesn't check for many
- * things and worst of all returns 0.0 if it fails.
- * Numbers in the DB can then be of any form that atof can 
- * convert.  So as simple as 0.5 and as complicated as -0.5E+10.2 .
- */
-bool WellFormedFloat(std::string& str_value);
-bool WellFormedFloat(const char* str_value);
 
 BOOST_CLASS_VERSION(I3TriggerReadoutConfig, i3triggerreadoutconfig_version_);
 
@@ -157,15 +158,22 @@ class I3TriggerStatus
    * 'Get's the trigger value for the given key.  The underlying
    * value is stored as a string ( just like in the DB ) and is
    * converted on-the-fly to whichever type you want.  Currently
-   * only int and float are supported.
+   * only bool, int, float, double, and string are supported.
    */
-  void GetTriggerConfigValue(const std::string& key, int& value) const;
-  void GetTriggerConfigValue(const std::string& key, float& value) const;
+  template<typename T>
+    void GetTriggerConfigValue(const std::string& key, 
+			       boost::optional<T>& value) const;
+			       
+  template<typename T>
+    void GetTriggerConfigValue(const char* key, 
+			       boost::optional<T>& value) const;
 
   /**
-   * Sets the trigger config value.  The underlying code simply
-   * streams into a stringstream, so this will accept any type
-   * that is streamable.
+   * Sets the trigger config value.  Currently the only supported
+   * types are bool, int, float, double, string, and const char*, but
+   * since the underlying code uses boost::lexical cast ( which
+   * uses stringstream, it's trivial to add support for any
+   * streamable type.
    */
   template <typename T>
     void SetTriggerConfigValue(const std::string& key, T value);
