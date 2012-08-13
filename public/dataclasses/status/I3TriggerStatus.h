@@ -16,7 +16,7 @@
 
 #include <dataclasses/Utility.h>
 #include <map>
-
+#include <boost/optional.hpp>
 
 /**
  * @brief A trigger status/configuration object.
@@ -59,8 +59,19 @@
  *  readoutTimePlus  : time after the trigger time to set the readout window
  *  readoutTimeOffset : time shift relatve to the trigger time to set the readout windoow
  */
-static const unsigned i3triggerstatus_version_ = 2;
+static const unsigned i3triggerstatus_version_ = 3;
 static const unsigned i3triggerreadoutconfig_version_ = 0;
+
+/**
+ * Uses boost::lexical_cast to ensure the conversion can be made.  
+ * http://www.boost.org/doc/libs/1_38_0/libs/conversion/lexical_cast.htm
+ * This catches things that will silently trip up atoi and atof.
+ */
+template <typename F,typename T>
+void Convert(const F& from, boost::optional<T>& to);
+
+template <typename T>
+void Convert(const char* from, boost::optional<T>& to);
 
 /**
  *  A simple struct to hold the per-subdetector readout configurations.
@@ -114,13 +125,13 @@ class I3TriggerStatus
    * @param settings Trigger settings: string, integer values.
    */
   I3TriggerStatus(const std::string& name,
-                  const std::map<std::string, int>& settings)
+                  const std::map<std::string, std::string>& settings)
     : name_(name), settings_(settings) {}
   
   /**
    * Destructor.
    */
-  virtual ~I3TriggerStatus();
+  virtual ~I3TriggerStatus(){};
   
   /**
    * Get trigger name.
@@ -133,12 +144,46 @@ class I3TriggerStatus
   /**
    * Get trigger settings.
    * 
-   * @return Trigger settings: string, integer values
+   * @return Trigger settings: string, string values
    * (contents vary by trigger type).
+   *
    */
-  const std::map<std::string, int>& GetTriggerSettings() const { return settings_; }
-  std::map<std::string, int>& GetTriggerSettings() { return settings_; }  
+  const std::map<std::string, std::string>& 
+    GetTriggerSettings() const { return settings_; }
 
+  std::map<std::string, std::string>& 
+    GetTriggerSettings() { return settings_; }
+
+  /**
+   * 'Get's the trigger value for the given key.  The underlying
+   * value is stored as a string ( just like in the DB ) and is
+   * converted on-the-fly to whichever type you want.  Currently
+   * only bool, int, float, double, and string are supported.
+   */
+  template<typename T>
+    void GetTriggerConfigValue(const std::string& key, boost::optional<T>& value) const;
+			       			       
+  template<typename T>
+    void GetTriggerConfigValue(const char* key, boost::optional<T>& value) const;
+
+  template<typename T>
+    void GetTriggerConfigValue(const std::string& key, T& value) const;			       
+  template<typename T>
+    void GetTriggerConfigValue(const char* key, T& value) const;
+			       
+  /**
+   * Sets the trigger config value.  Currently the only supported
+   * types are bool, int, float, double, string, and const char*, but
+   * since the underlying code uses boost::lexical cast ( which
+   * uses stringstream, it's trivial to add support for any
+   * streamable type.
+   */
+  template <typename T>
+    void SetTriggerConfigValue(const std::string& key, T value);
+  
+  template <typename T>
+    void SetTriggerConfigValue(const char* key, T value);
+  
   const std::map<Subdetector, I3TriggerReadoutConfig>& 
     GetReadoutSettings() const { return readoutconfigs_; }
   std::map<Subdetector, I3TriggerReadoutConfig>& 
@@ -146,12 +191,14 @@ class I3TriggerStatus
 
  private:
   std::string name_;
-  std::map<std::string, int> settings_;
+  std::map<std::string, std::string> settings_;
   std::map<Subdetector, I3TriggerReadoutConfig> readoutconfigs_;
 
   friend class boost::serialization::access;
-  template <class Archive> void serialize(Archive & ar, unsigned version);
+  template <class Archive> void load(Archive & ar, unsigned version);
+  template <class Archive> void save(Archive & ar, unsigned version) const;
 
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 
   // logging
   SET_LOGGER("I3TriggerStatus");

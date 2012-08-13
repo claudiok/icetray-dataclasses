@@ -29,10 +29,10 @@
 
 using namespace boost::python;
 
-I3MapStringIntPtr
+I3MapStringStringPtr
 get_trigger_settings(I3TriggerStatusPtr ts){
-  I3MapStringIntPtr r_map(new I3MapStringInt); 
-  BOOST_FOREACH(I3MapStringInt::value_type p, ts->GetTriggerSettings())
+  I3MapStringStringPtr r_map(new I3MapStringString);
+  BOOST_FOREACH(I3MapStringString::value_type p, ts->GetTriggerSettings())
     r_map->insert(p);
   return r_map;
 }
