@@ -282,8 +282,6 @@ TEST(SettingsFromStringRequired)
   myts.GetTriggerConfigValue("good_Exp_float", float_value);  
   ENSURE_DISTANCE( float_value, 3.14e-3, 1e-9 );
 
-  myts.GetTriggerConfigValue("bad_float", float_value);
-
   int int_value;
   myts.GetTriggerConfigValue("good_int", int_value);
   ENSURE( int_value == 10 );
@@ -291,8 +289,26 @@ TEST(SettingsFromStringRequired)
   myts.GetTriggerConfigValue("good_negative_int", int_value);
   ENSURE( int_value == -10 );
 
-  myts.GetTriggerConfigValue("bad_int", int_value);
-  myts.GetTriggerConfigValue("good_float", int_value);
-  myts.GetTriggerConfigValue("bad_float", int_value);
+  // the following are required but the conversion will
+  // fail, so they should throw.
+  try{
+    myts.GetTriggerConfigValue("bad_int", int_value); 
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
+
+  try{
+    myts.GetTriggerConfigValue("good_float", int_value);
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
+
+  try{
+    myts.GetTriggerConfigValue("bad_float", float_value);
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
+
+  try{
+    myts.GetTriggerConfigValue("bad_float", int_value);
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
   
 }
