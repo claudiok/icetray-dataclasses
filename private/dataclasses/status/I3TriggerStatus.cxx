@@ -131,7 +131,8 @@ template <class Archive>
 void I3TriggerReadoutConfig::serialize(Archive& ar, unsigned version)
 {
   if (version>i3triggerreadoutconfig_version_)
-    log_fatal("Attempting to read version %u from file but running version %u of I3TriggerReadoutConfig class.",version,i3triggerreadoutconfig_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of "
+	      "I3TriggerReadoutConfig class.",version,i3triggerreadoutconfig_version_);
   ar & make_nvp("ReadoutTimeMinus",readoutTimeMinus);
   ar & make_nvp("ReadoutTimePlus",readoutTimePlus);
   ar & make_nvp("ReadoutTimeOffset",readoutTimeOffset);
@@ -150,7 +151,8 @@ template <class Archive>
 void I3TriggerStatus::load(Archive& ar, unsigned version) 
 {
   if (version>i3triggerstatus_version_)
-    log_fatal("Attempting to read version %u from file but running version %u of I3TriggerStatus class.",
+    log_fatal("Attempting to read version %u from file but running version %u of "
+	      "I3TriggerStatus class.",
 	      version,i3triggerstatus_version_);
 
   ar & make_nvp("Name", name_);
@@ -185,8 +187,7 @@ void I3TriggerStatus::load(Archive& ar, unsigned version)
     }
 }
 
-I3_SERIALIZABLE(I3TriggerStatus);
-
+I3_SPLIT_SERIALIZABLE(I3TriggerStatus);
 
 #define TRIGGER_CONFIG_TYPES(TYPE)				                      \
 template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,TYPE);        \
