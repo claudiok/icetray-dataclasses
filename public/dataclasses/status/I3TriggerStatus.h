@@ -161,13 +161,16 @@ class I3TriggerStatus
    * only bool, int, float, double, and string are supported.
    */
   template<typename T>
-    void GetTriggerConfigValue(const std::string& key, 
-			       boost::optional<T>& value) const;
-			       
+    void GetTriggerConfigValue(const std::string& key, boost::optional<T>& value) const;
+			       			       
   template<typename T>
-    void GetTriggerConfigValue(const char* key, 
-			       boost::optional<T>& value) const;
+    void GetTriggerConfigValue(const char* key, boost::optional<T>& value) const;
 
+  template<typename T>
+    void GetTriggerConfigValue(const std::string& key, T& value) const;			       
+  template<typename T>
+    void GetTriggerConfigValue(const char* key, T& value) const;
+			       
   /**
    * Sets the trigger config value.  Currently the only supported
    * types are bool, int, float, double, string, and const char*, but

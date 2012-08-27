@@ -90,13 +90,14 @@ void I3TriggerStatus::GetTriggerConfigValue(const std::string& key,
   typedef std::map<std::string,std::string> map_t;
   map_t::const_iterator iter = settings_.find(key);
   if(iter == settings_.end()){
-    log_error("Couldn't find '%s' in settings");
+    log_debug("Couldn't find '%s' in settings",key.c_str());
     // stream the possible key values to give the user
     // an idea of how to fix what's broken.
     std::stringstream keys;
-    BOOST_FOREACH(const map_t::value_type& vt, settings_)
-      keys<<" "<<vt.first;
-    log_error("  Possible keys :",keys.str().c_str());
+    BOOST_FOREACH(const map_t::value_type& vt, settings_){
+      keys<<" '"<<vt.first<<"'";
+    }
+    log_debug("  Possible keys : %s",keys.str().c_str());
   }else{
     Convert(iter->second,value);
   }
@@ -109,11 +110,29 @@ void I3TriggerStatus::GetTriggerConfigValue(const char* key,
   GetTriggerConfigValue(key_str,value);
 }
 
+template <typename T>
+void I3TriggerStatus::GetTriggerConfigValue(const std::string& key, T& value) const {
+  boost::optional<T> opt_value;
+  GetTriggerConfigValue(key,opt_value);
+  if(!opt_value) log_fatal("Couldn't find '%s' in the I3TriggerStatus.", key.c_str());
+  else value = opt_value.get();
+}
+
+template <typename T>
+void I3TriggerStatus::GetTriggerConfigValue(const char* key, T& value) const {
+  std::string key_str(key);
+  boost::optional<T> opt_value;
+  GetTriggerConfigValue(key_str,opt_value);
+  if(!opt_value) log_fatal("Couldn't find '%s' in the I3TriggerStatus.", key);
+  else value = opt_value.get();
+}
+
 template <class Archive>
 void I3TriggerReadoutConfig::serialize(Archive& ar, unsigned version)
 {
   if (version>i3triggerreadoutconfig_version_)
-    log_fatal("Attempting to read version %u from file but running version %u of I3TriggerReadoutConfig class.",version,i3triggerreadoutconfig_version_);
+    log_fatal("Attempting to read version %u from file but running version %u of "
+	      "I3TriggerReadoutConfig class.",version,i3triggerreadoutconfig_version_);
   ar & make_nvp("ReadoutTimeMinus",readoutTimeMinus);
   ar & make_nvp("ReadoutTimePlus",readoutTimePlus);
   ar & make_nvp("ReadoutTimeOffset",readoutTimeOffset);
@@ -132,7 +151,8 @@ template <class Archive>
 void I3TriggerStatus::load(Archive& ar, unsigned version) 
 {
   if (version>i3triggerstatus_version_)
-    log_fatal("Attempting to read version %u from file but running version %u of I3TriggerStatus class.",
+    log_fatal("Attempting to read version %u from file but running version %u of "
+	      "I3TriggerStatus class.",
 	      version,i3triggerstatus_version_);
 
   ar & make_nvp("Name", name_);
@@ -169,21 +189,24 @@ void I3TriggerStatus::load(Archive& ar, unsigned version)
 
 I3_SPLIT_SERIALIZABLE(I3TriggerStatus);
 
-
-#define TRIGGER_CONFIG_TYPES(TYPE)				                    \
-template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,TYPE);      \
-template void I3TriggerStatus::SetTriggerConfigValue(const char*,TYPE);             \
-template void I3TriggerStatus::GetTriggerConfigValue(const std::string&,            \
-						     boost::optional<TYPE>&) const; \
-template void I3TriggerStatus::GetTriggerConfigValue(const char*,                   \
-						     boost::optional<TYPE>&) const; \
-template void Convert(const std::string&, boost::optional<TYPE>&);                  \
+#define TRIGGER_CONFIG_TYPES(TYPE)				                      \
+template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,TYPE);        \
+template void I3TriggerStatus::SetTriggerConfigValue(const char*,TYPE);               \
+template void I3TriggerStatus::GetTriggerConfigValue(const std::string&,              \
+						     boost::optional<TYPE>&) const;   \
+template void I3TriggerStatus::GetTriggerConfigValue(const char*,                     \
+						     boost::optional<TYPE>&) const;   \
+template void I3TriggerStatus::GetTriggerConfigValue(const std::string&,TYPE&) const; \
+template void I3TriggerStatus::GetTriggerConfigValue(const char*,TYPE&) const;        \
+template void Convert(const std::string&, boost::optional<TYPE>&);                    \
 template void Convert(const char*, boost::optional<TYPE>&);  
 
 TRIGGER_CONFIG_TYPES(bool);
 TRIGGER_CONFIG_TYPES(int);
 TRIGGER_CONFIG_TYPES(float);
 TRIGGER_CONFIG_TYPES(double);
+TRIGGER_CONFIG_TYPES(unsigned);
+TRIGGER_CONFIG_TYPES(long);
 TRIGGER_CONFIG_TYPES(std::string);
 
 template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,const char*);

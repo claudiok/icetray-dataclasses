@@ -253,3 +253,62 @@ TEST(SettingsFromString)
   ENSURE(!int_value);
   
 }
+
+TEST(SettingsFromStringRequired)
+{
+
+  I3TriggerStatus myts; 
+
+  myts.SetTriggerConfigValue("good_float","0.5");
+  myts.SetTriggerConfigValue("good_exp_float","3.14e-3");
+  myts.SetTriggerConfigValue("good_Exp_float","3.14E-3");
+  myts.SetTriggerConfigValue("good_int","10");
+  myts.SetTriggerConfigValue("good_negative_int","-10");
+
+  myts.SetTriggerConfigValue("bad_float","e-1.0");
+  myts.SetTriggerConfigValue("bad_int","0.5");
+
+  std::string str_value;
+  myts.GetTriggerConfigValue("good_float",str_value);
+  ENSURE(str_value == std::string("0.5"));
+
+  float float_value(NAN);
+  myts.GetTriggerConfigValue("good_float", float_value);  
+  ENSURE_DISTANCE( float_value, 0.5, 1e-9 );
+
+  myts.GetTriggerConfigValue("good_exp_float", float_value);  
+  ENSURE_DISTANCE( float_value, 3.14e-3, 1e-9 );
+
+  myts.GetTriggerConfigValue("good_Exp_float", float_value);  
+  ENSURE_DISTANCE( float_value, 3.14e-3, 1e-9 );
+
+  int int_value;
+  myts.GetTriggerConfigValue("good_int", int_value);
+  ENSURE( int_value == 10 );
+
+  myts.GetTriggerConfigValue("good_negative_int", int_value);
+  ENSURE( int_value == -10 );
+
+  // the following are required but the conversion will
+  // fail, so they should throw.
+  try{
+    myts.GetTriggerConfigValue("bad_int", int_value); 
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
+
+  try{
+    myts.GetTriggerConfigValue("good_float", int_value);
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
+
+  try{
+    myts.GetTriggerConfigValue("bad_float", float_value);
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
+
+  try{
+    myts.GetTriggerConfigValue("bad_float", int_value);
+    ENSURE(false,"This should have thrown.");
+  }catch(...){};
+  
+}
