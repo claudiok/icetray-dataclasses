@@ -132,6 +132,7 @@ namespace RDMCParticleTypes{
 class I3Particle : public I3FrameObject
 {
 
+  static int global_last_pid_;
   static int global_minor_id_;
   static uint64_t global_major_id_;
     

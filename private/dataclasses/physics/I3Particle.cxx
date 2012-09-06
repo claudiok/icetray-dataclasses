@@ -10,6 +10,7 @@
 #include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/lexical_cast.hpp>
 
+int I3Particle::global_last_pid_ = 0;
 int I3Particle::global_minor_id_ = 0;
 uint64_t I3Particle::global_major_id_ = 0;
 
@@ -28,14 +29,24 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   speed_(I3Constants::c),
   locationType_(Anywhere)
 {
-  ID_ = global_minor_id_++;
+  const int this_pid = getpid();
+  if (this_pid != global_last_pid_) {
+    log_debug("PID has changed from %i to %i. regenerating I3Particle::majorID.", global_last_pid_, this_pid);
+    global_last_pid_ = this_pid;
+    global_major_id_ = 0; // this will cause a new major ID to be generated
+    global_minor_id_ = 0; // reset the minor ID, too
+  }
+  
   if(global_major_id_ ==0){
     boost::hash<std::string> string_hash;
     std::stringstream s;
-    s<<time(0)<<getpid()<<getenv("HOST");
+    s<<time(0)<<this_pid<<getenv("HOST");
     global_major_id_ = string_hash(s.str());
   }
   major_ID_ = global_major_id_;
+  
+  ID_ = global_minor_id_++;
+  
   log_trace("Calling I3Particle::I3Particle(ParticleShape %i, ParticleType %i).", static_cast<int>(shape), static_cast<int>(type));
 }
 
