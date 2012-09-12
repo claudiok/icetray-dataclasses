@@ -245,9 +245,11 @@ int GetNumberOfAtmosphericMuons(const I3MCTree& t)
   int numberOfAtmosphericMuons = 0;
 
   //--check for primary particle type
-  BOOST_FOREACH(const I3Particle& primary, I3MCTreeUtils::GetPrimaries(t)){
+  std::vector<I3Particle> primaries = I3MCTreeUtils::GetPrimaries(t);
+  BOOST_FOREACH(const I3Particle& primary, primaries){
     if (IsCosmicRayParticle(primary)){ 
-      BOOST_FOREACH(const I3Particle& particle, I3MCTreeUtils::GetDaughters(t, primary)){
+      std::vector<I3Particle> daughters = I3MCTreeUtils::GetDaughters(t, primary);
+      BOOST_FOREACH(const I3Particle& particle, daughters){
 	if(particle.GetType()==I3Particle::MuPlus ||
 	   particle.GetType()==I3Particle::MuMinus){
 	  numberOfAtmosphericMuons++;

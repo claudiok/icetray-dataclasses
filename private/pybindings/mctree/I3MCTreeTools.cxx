@@ -16,9 +16,11 @@ int I3MCTreeTools::GetNumberOfAtmosphericMuons(const I3MCTree& t)
   int numberOfAtmosphericMuons = 0;
 
   //--check for primary particle type
-  BOOST_FOREACH(const I3Particle& primary, I3MCTreeUtils::GetPrimaries(t)){
+  std::vector<I3Particle> primaries = I3MCTreeUtils::GetPrimaries(t);
+  BOOST_FOREACH(const I3Particle& primary, primaries){
     if (IsCosmicRayParticle(primary)){ 
-      BOOST_FOREACH(const I3Particle& particle, I3MCTreeUtils::GetDaughters(t, primary)){
+      std::vector<I3Particle> daughters = I3MCTreeUtils::GetDaughters(t,primary);
+      BOOST_FOREACH(const I3Particle& particle, daughters){
 	if(particle.GetType()==I3Particle::MuPlus ||
 	   particle.GetType()==I3Particle::MuMinus){
 	  numberOfAtmosphericMuons++;
@@ -192,7 +194,8 @@ I3MCTreeTools::GetNeutrinoEventType(const I3MCTree& t){
   I3MCTreePtr inice_vtx_tree(new I3MCTree);
   I3ParticlePtr nu_cand;
   int max_depth(INT_MIN);
-  BOOST_FOREACH(const I3Particle& p, I3MCTreeUtils::GetInIce(t)){
+  std::vector<I3Particle> inice = I3MCTreeUtils::GetInIce(t);
+  BOOST_FOREACH(const I3Particle& p, inice){
     if(IsNeutrino(p)){
  
       I3MCTree::iterator iter = t.begin();
@@ -202,8 +205,9 @@ I3MCTreeTools::GetNeutrinoEventType(const I3MCTree& t){
       }
       if(iter == t.end()) return NO_INTERACTION;
 
-      bool inice_daughters(I3MCTreeUtils::GetDaughters(t,p).size());
-      BOOST_FOREACH(const I3Particle& d, I3MCTreeUtils::GetDaughters(t,p))
+      std::vector<I3Particle> daughters = I3MCTreeUtils::GetDaughters(t,p);
+      bool inice_daughters(daughters.size());
+      BOOST_FOREACH(const I3Particle& d, daughters)
 	if(d.GetLocationType() != I3Particle::InIce){
 	  inice_daughters = false;
 	}
@@ -216,7 +220,8 @@ I3MCTreeTools::GetNeutrinoEventType(const I3MCTree& t){
   }
   if(nu_cand){
     I3MCTreeUtils::AddPrimary(inice_vtx_tree,*nu_cand);
-    BOOST_FOREACH(const I3Particle& d, I3MCTreeUtils::GetDaughters(t,*nu_cand)){
+    std::vector<I3Particle> daughters = I3MCTreeUtils::GetDaughters(t,*nu_cand);
+    BOOST_FOREACH(const I3Particle& d, daughters){
       I3MCTreeUtils::AppendChild(inice_vtx_tree,*nu_cand,d);
     }
   }
@@ -296,16 +301,17 @@ I3MCTreeTools::LeptonNumber(const I3Particle& p){
 
 bool 
 I3MCTreeTools::CheckNeutrino(const I3MCTree& t){
-  if(I3MCTreeUtils::GetPrimaries(t).size() > 1){
+  std::vector<I3Particle> primaries = I3MCTreeUtils::GetPrimaries(t);
+  if(primaries.size() > 1){
     log_error("Ambiguous event.  Can't handle multiple primaries");
     return false;
   }
-  if(I3MCTreeUtils::GetPrimaries(t).size() == 0){
+  if(primaries.size() == 0){
     log_error("This tree is empty.  You don't need me to determine the type");
     return false;
   }
 
-  const I3Particle& primary = I3MCTreeUtils::GetPrimaries(t).front();
+  I3Particle& primary = primaries.front();
   if(!IsNeutrino(primary)){
     log_error("This (%s) is not the neutrino you're looking for.",
 	      primary.GetTypeString().c_str());
