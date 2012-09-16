@@ -12,6 +12,9 @@
 #include <I3Test.h>
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <icetray/serialization.h>
+#include <boost/iostreams/stream.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/device/array.hpp>
 
 #include <sstream>
 #include <algorithm>
@@ -104,18 +107,24 @@ TEST(serializeMaxIntegerWave)
   try
   {
     // Build a binary stringtream and serialize the I3DOMLaunch
-    std::ostringstream oss(std::ostringstream::binary);
+    namespace io = boost::iostreams;
+    typedef std::vector<char> buffer_t;
+    typedef io::stream<io::back_insert_device<buffer_t > > sink_t;
+    typedef io::stream<io::array_source> source_t;
+
+    buffer_t buffer;
     {
-      boost::archive::portable_binary_oarchive outAr( oss );
-      outAr & make_nvp("Test", wave);;
+      sink_t sink(buffer);
+      boost::archive::portable_binary_oarchive outAr(sink);
+      outAr & make_nvp("wave", wave);
     }
     
     // Deserialize a second I3DOMLaunch from the serialized stream for comparison
     I3DOMLaunch wave2;
-    std::istringstream iss( oss.str(), std::istringstream::binary );
+    source_t source(&*buffer.begin(), &*buffer.end());
     {
-      boost::archive::portable_binary_iarchive inAr( iss );
-      inAr & make_nvp("Test", wave2);
+      boost::archive::portable_binary_iarchive inAr(source);
+      inAr >> wave2;
     }
   }
   catch( const std::runtime_error& error )
