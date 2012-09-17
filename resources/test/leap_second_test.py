@@ -533,7 +533,7 @@ for i in range(10000):
         leap_seconds = -sum([ x>d1 and x<=d2 for x in leap_sec_mjd])
 
     #check that the delta is correct
-    assert  (t1-t2)/I3Units.second == (d1-d2)*86400 + leap_seconds
+    assert  int((t1-t2)/I3Units.second) == (d1-d2)*86400 + leap_seconds
 
     #check I3time + double is correct
     time_delta = ((d2-d1)*86400L- leap_seconds)*I3Units.second
