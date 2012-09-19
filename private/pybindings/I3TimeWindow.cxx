@@ -23,5 +23,7 @@ register_I3TimeWindow()
 	    .def(bp::self | bp::self) // odd syntax for resolving operators, no matter how they're defined 
 	;
 	
+	register_pointer_conversions<I3TimeWindow>();
+	register_pointer_conversions<I3TimeWindowSeries>();
 	register_pointer_conversions<I3TimeWindowSeriesMap>();
 }
