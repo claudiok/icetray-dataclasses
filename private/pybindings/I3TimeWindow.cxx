@@ -5,7 +5,8 @@
 void
 register_I3TimeWindow()
 {
-	bp::class_<I3TimeWindow>("I3TimeWindow", bp::init<double, double>())
+	bp::class_<I3TimeWindow, I3TimeWindowPtr,
+	    bp::bases<I3FrameObject> >("I3TimeWindow", bp::init<double, double>())
 	    .def(bp::init<>())
 	    .def(bp::dataclass_suite<I3TimeWindow>())
 	    #define RO_PROPS (Start)(Stop)(Length)
@@ -13,8 +14,9 @@ register_I3TimeWindow()
 	    #undef RO_PROPS
 	;
 	
-	bp::class_<I3TimeWindowSeries>("I3TimeWindowSeries")
-    	    .def(bp::dataclass_suite<I3TimeWindowSeries>())
+	bp::class_<I3TimeWindowSeries, I3TimeWindowSeriesPtr,
+	    bp::bases<I3FrameObject> >("I3TimeWindowSeries")
+	    .def(bp::dataclass_suite<I3TimeWindowSeries>())
 	;
 	
 	bp::class_<I3TimeWindowSeriesMap, I3TimeWindowSeriesMapPtr,
