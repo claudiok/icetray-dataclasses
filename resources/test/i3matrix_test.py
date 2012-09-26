@@ -59,7 +59,7 @@ class I3MatrixTest(unittest.TestCase):
 		
 		# strided arrays are not handled
 		strider = numpy.eye(3)[::2]
-		self.assertIsNotNone(strider.__array_interface__['strides'])
+		self.assertNotEqual(strider.__array_interface__['strides'], None)
 		self.assertRaises(ValueError, I3Matrix, strider)
 		
 		# I3Matrix is a copy, not a view
