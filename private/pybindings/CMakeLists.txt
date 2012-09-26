@@ -43,6 +43,7 @@ i3_add_pybindings(dataclasses
   I3String.cxx
   I3MapOMKeyMask.cxx
   I3MapOMKeyUnion.cxx
+  I3Matrix.cxx
   I3Time.cxx
   I3TimeWindow.cxx
   I3Trigger.cxx
