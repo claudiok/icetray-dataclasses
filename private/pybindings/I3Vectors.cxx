@@ -82,6 +82,7 @@ void register_I3Vectors()
   register_i3vector_of<std::pair<double, double> >("DoubleDouble");
 
   register_i3vector_of<I3Particle>("I3Particle");
+  register_i3vector_of<I3Particle::ParticleType>("ParticleType");
   
   register_std_pair<double, double>("PairDoubleDouble");
 }
