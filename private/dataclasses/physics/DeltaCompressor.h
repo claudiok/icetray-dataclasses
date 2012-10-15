@@ -102,7 +102,7 @@ namespace I3DeltaCompression
 	   * combine all waveforms to on compressed stream.
 	   *
 	   * @param values The vector with the waveform to be compressed.
-	   * @exception A std::domain_error is thrown in case of internal conpression error.
+	   * @exception A std::domain_error is thrown in case of internal compression error.
 	   */
 	  void compress( const std::vector<int>& values);
 	  
