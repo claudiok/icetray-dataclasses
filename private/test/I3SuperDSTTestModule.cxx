@@ -25,8 +25,9 @@
 #include <boost/utility.hpp>
 #include <boost/foreach.hpp>
 #include <boost/make_shared.hpp>
-#include <boost/archive/portable_binary_iarchive.hpp>
-#include <boost/archive/portable_binary_oarchive.hpp>
+//#include <boost/archive/portable_binary_iarchive.hpp>
+//#include <boost/archive/portable_binary_oarchive.hpp>
+#include <icetray/portable_binary_archive.hpp>
 #include <limits>
 
 #include "dataclasses/physics/I3RecoPulse.h"
