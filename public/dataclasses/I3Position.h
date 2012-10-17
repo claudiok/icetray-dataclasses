@@ -222,14 +222,14 @@ class I3Position : public I3FrameObject
   void RotateX(double angle);
 
   /**
-   * Rotate position around X axis by angle
+   * Rotate position around Y axis by angle
    */
   void RotateY(double angle);
 
   /**
-   * Rotate position around X axis by angle
+   * Rotate position around Z axis by angle
    */
-  void RotateZ(double amgle);
+  void RotateZ(double angle);
 
   /**
    * Provide distance to position p
