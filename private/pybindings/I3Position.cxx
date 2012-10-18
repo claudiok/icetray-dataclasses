@@ -55,10 +55,13 @@ void i3position_setitem(I3Position& self, unsigned index, double value)
     {
     case 0:
       self.SetX(value);
+      break;
     case 1:
       self.SetY(value);
+      break;
     case 2:
       self.SetZ(value);
+      break;
     default:
       throw std::out_of_range("index out of range");
     }

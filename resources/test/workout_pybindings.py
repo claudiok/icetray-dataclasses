@@ -104,6 +104,15 @@ distance = pos.calc_distance(pos2)
 print "pos.r =", pos.r
 print "distance =", distance
 ENSURE(abs(pos.r-distance)<1e-5*I3Units.m, "Distances don't match")
+pos3 = dataclasses.I3Position(1,2,3)
+pos3[2] = 4
+ENSURE(pos3[2] == 4, 'Index lookup failed')
+ENSURE(pos3.z == 4, 'Member lookup failed')
+try:
+    pos3[3] = 5
+    raise RuntimeException('I3Position did not correctly throw an exception!')
+except IndexError:
+    print 'Position correctly sent index error for index 3'
 
 #I3Time
 print 'Testing I3Time'
