@@ -12,6 +12,9 @@
 #include <I3Test.h>
 #include <dataclasses/physics/I3DOMLaunch.h>
 #include <icetray/serialization.h>
+#include <boost/iostreams/stream.hpp>
+#include <boost/iostreams/device/back_inserter.hpp>
+#include <boost/iostreams/device/array.hpp>
 
 #include <sstream>
 #include <algorithm>
@@ -90,7 +93,7 @@ TEST(serializeStandardWave)
 
 TEST(serializeMaxIntegerWave)
 {
-	I3DOMLaunch wave;
+  I3DOMLaunch wave;
   std::vector<int>& atwd0 = wave.GetRawATWD(0);
   
   for( int i=0; i< 128; i++) 
@@ -98,30 +101,31 @@ TEST(serializeMaxIntegerWave)
     if( i%2 == 0 )
       atwd0.push_back( 0 );       
     else
-      atwd0.push_back( std::numeric_limits<int>::max() );       
+      atwd0.push_back( std::numeric_limits<int>::max()/2 );
    }
   
-  try
+
+  // Build a binary stringtream and serialize the I3DOMLaunch
+  namespace io = boost::iostreams;
+  typedef std::vector<char> buffer_t;
+  typedef io::stream<io::back_insert_device<buffer_t > > sink_t;
+  typedef io::stream<io::array_source> source_t;
+  
+  buffer_t buffer;
   {
-    // Build a binary stringtream and serialize the I3DOMLaunch
-    std::ostringstream oss(std::ostringstream::binary);
-    {
-      boost::archive::portable_binary_oarchive outAr( oss );
-      outAr & make_nvp("Test", wave);;
-    }
-    
-    // Deserialize a second I3DOMLaunch from the serialized stream for comparison
-    I3DOMLaunch wave2;
-    std::istringstream iss( oss.str(), std::istringstream::binary );
-    {
-      boost::archive::portable_binary_iarchive inAr( iss );
-      inAr & make_nvp("Test", wave2);
-    }
+    sink_t sink(buffer);
+    boost::archive::portable_binary_oarchive outAr(sink);
+    outAr & make_nvp("wave", wave);
   }
-  catch( const std::runtime_error& error )
+    
+  // Deserialize a second I3DOMLaunch from the serialized stream for comparison
+  I3DOMLaunch wave2;
+  source_t source(&*buffer.begin(), &*buffer.end());
   {
-    
+    boost::archive::portable_binary_iarchive inAr(source);
+    inAr >> wave2;
   }
+
 }
 
 // This testcase tests a bugfix for the condition where the
