@@ -46,7 +46,7 @@ struct I3Map<OMKey, Value> : public I3FrameObject, public __gnu_cxx::hash_map<OM
   typedef __gnu_cxx::hash_map<OMKey, Value, OMKey::hash> hashmap_t;
 
   //
-  // DANGER MAGIC NUMBERS
+  // NOTE MAGIC NUMBERS
   //
   // For optimum performance these maps of OMKey->whatever should be preallocated so that
   // OMKeys don't collide in the map and so that it is not necessary to resize the map.
