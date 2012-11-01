@@ -47,7 +47,7 @@ void resurrect(const Archiveable &in, Archiveable &out, size_t stream_size=0)
 	boost::archive::portable_binary_oarchive oarchive(sink);
 
 	/* Find the size of an empty archive */
-	size_t base_size;
+	size_t base_size = 0;
 	if (stream_size > 0) {
 		Empty probe;
 		oarchive << probe;
