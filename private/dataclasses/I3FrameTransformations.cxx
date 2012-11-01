@@ -83,7 +83,7 @@ HitsAsPulses(I3RecoHitSeriesMapConstPtr hits)
 			I3RecoPulse pulse;
 			pulse.SetTime(j->GetTime());
 			pulse.SetCharge(1.0 /* PE */);
-			pulse.SetWidth(3.3 * I3Units::ns /* XXX: ATWD bin */);
+			pulse.SetWidth(3.3 * I3Units::ns /* Avg. ATWD bin */);
 			ps.push_back(pulse);
 		}
 	}
