@@ -60,7 +60,7 @@ namespace I3Constants
   /**
    * pi.
    */
-  static const double pi = 3.14159265358979312;
+  static const double pi = M_PI;
   
   /**
    * Euler's constant
