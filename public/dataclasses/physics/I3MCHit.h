@@ -93,11 +93,11 @@ class I3MCHit
 
   void SetHitID(int hitID){hitID_ = hitID;}
 
-  // Below are deprecated! Assumes weight == NPE
-  void SetWeight(double w) __attribute__((__deprecated__)) { 
+  // Below will be deprecated! Assumes weight == NPE
+  void SetWeight(double w) { 
     npe_ = static_cast<uint64_t>(w);
   }
-  double GetWeight() const __attribute__((__deprecated__)) { 
+  double GetWeight() const { 
     return static_cast<uint64_t>(npe_); 
   }
 
