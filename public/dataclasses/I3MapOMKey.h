@@ -105,8 +105,8 @@ struct I3Map<OMKey, Value> : public I3FrameObject, public __gnu_cxx::hash_map<OM
 template <typename Value>
 I3Map<OMKey, Value>::~I3Map(){ }
 
-typedef I3Map<OMKey, vector<double> > I3MapKeyVectorDouble;
-typedef I3Map<OMKey, vector<int> > I3MapKeyVectorInt;
+typedef I3Map<OMKey, std::vector<double> > I3MapKeyVectorDouble;
+typedef I3Map<OMKey, std::vector<int> > I3MapKeyVectorInt;
 
 I3_POINTER_TYPEDEFS(I3MapKeyVectorDouble);
 I3_POINTER_TYPEDEFS(I3MapKeyVectorInt);
