@@ -30,7 +30,6 @@ I3Orientation::serialize(boost::archive::xml_oarchive& ar, unsigned version)
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 
-  // HACK:
   // not using these as pointers will make boost::serialization tracking
   // assume they are all the same. It will generate object references in XML
   // instead of serializing the object.
