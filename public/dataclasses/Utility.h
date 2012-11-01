@@ -59,9 +59,9 @@ I3MapGet(const typename MapType::key_type& key,
   if(found == themap.end())
     if(found == themap.end())
       {
-	std::ostringstream error;
-	error<<"Couldn't find key "<<key<<" in this map";
-	log_fatal("%s", error.str().c_str());
+        std::ostringstream error;
+        error<<"Couldn't find key "<<key<<" in this map";
+        log_fatal("%s", error.str().c_str());
       }
   return found->second;
 }
