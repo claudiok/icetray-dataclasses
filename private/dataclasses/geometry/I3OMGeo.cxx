@@ -16,7 +16,7 @@ I3OMGeo::serialize(Archive& ar, unsigned version)
     
     ar & make_nvp("Position", position);
     if (version==0) {
-        __OldOrientation _orientation;
+        __OldOrientation _orientation=Unspecified;
         ar & make_nvp("Orientation", _orientation);
         
         // convert orientation enum to direction
@@ -32,7 +32,7 @@ I3OMGeo::serialize(Archive& ar, unsigned version)
     ar & make_nvp("OMType", omtype);
     ar & make_nvp("Area", area);
     if (version==0) {
-        double aziangle;
+        double aziangle=NAN;
         // this has never been used for anything
         // we could have used this to fill the orientation class,
         // but the value ended up to mostly be un-initialized.
