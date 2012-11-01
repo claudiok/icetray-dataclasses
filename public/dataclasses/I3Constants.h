@@ -63,9 +63,9 @@ namespace I3Constants
   static const double pi = M_PI;
   
   /**
-   * Euler's constant
+   * Euler's number
    */
-  static const double e = 2.71828182845904509;
+  static const double e = M_E;
 
   /**
    *  Avaogadro's Number
