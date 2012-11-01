@@ -110,11 +110,6 @@ void register_I3Calibration()
                             (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       #undef I3DOMCALPROPS
-      // XXX Note:  These are some ugly interfaces from I3DOMCalibration that 
-      //     proved to be difficult to handle in boost::python.  Left exposed for
-      //     expert use, but proper pybindings here will have to wait for an
-      //     updated I3DOMCalibration class  XXX 
-      //      See TRAC ticket #300
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT) \
                          (ATWDFreqFit)(ATWDGain)(ATWDBinCalibFit)
       BOOST_PP_SEQ_FOR_EACH(WRAP_EVIL_PROP, I3DOMCalibration, EVIL_PROPS)

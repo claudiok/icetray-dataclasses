@@ -177,7 +177,7 @@ class I3DOMCalibration {
   /**
    * Get the FADC baseline in data-taking mode, as measured from beacon launches.
    *
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note: The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
@@ -322,7 +322,7 @@ class I3DOMCalibration {
   /**
    * Get the average ATWD baseline in data-taking mode, as measured from beacon launches.
    *
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note: The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
@@ -498,7 +498,7 @@ class I3DOMCalibration {
 
   /**
    * Pedestal in data-taking mode, as measured from beacon launches.
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note : The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
@@ -572,7 +572,7 @@ class I3DOMCalibration {
    *  Dumb-ol-array to hold the average baseline corrections measured from beacon launches.
    *  [atwd chip id (0-1)] [ gain channel(0-2) ]
    *
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note : The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
