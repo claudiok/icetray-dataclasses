@@ -637,10 +637,6 @@ I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsign
 			this->set(i, true);
 }
 
-/*
- * FIXME: the number of the element masks is implicit in the omkey mask.
- * Compactify the serialization.
- */
 template <class Archive>
 void
 I3RecoPulseSeriesMapMask::load(Archive & ar, unsigned version)
