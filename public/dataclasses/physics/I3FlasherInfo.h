@@ -1,7 +1,7 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * @version $Id: I3Flasherinfo srklein$
+ * @version $Id$
  * @file I3FlasherInfo.h
  * @date $Date$
  */

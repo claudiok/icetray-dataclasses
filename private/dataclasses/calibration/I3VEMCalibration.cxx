@@ -1,6 +1,6 @@
 /**
  *
- * @version $Id: I3VEMCalibration.cxx$
+ * @version $Id$
  * @file I3VEMCalibration.cxx
  * @date $Date$
  */
