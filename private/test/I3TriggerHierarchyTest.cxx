@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3TreeTest.cxx 10872 2005-08-31 16:19:29Z tschmidt $
+    $Id$
 
-    @version $Revision: 1.8 $
-    @date $Date: 2005-08-31 12:19:29 -0400 (Wed, 31 Aug 2005) $
+    @version $Revision$
+    @date $Date$
     @author tschmidt
 */
 #include <I3Test.h>

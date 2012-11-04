@@ -1,12 +1,12 @@
 /**
  * (c) 2005
  * the IceCube Collaboration
- * $Id:  $
+ * $Id$
  *
  * @file dataclasses/private/dataclasses/physics/I3TWRLaunch.cxx
  * @brief implementation of the I3TWRLaunch class
- * @version $Revision:  $
- * @date $Date:  $
+ * @version $Revision$
+ * @date $Date$
  * @author tschmidt
  */
  

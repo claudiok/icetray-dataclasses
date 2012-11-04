@@ -2,7 +2,7 @@
  *
  * @version $Id: I3VEMCalibration.h$
  * @file I3VEMCalibration.h
- * @date $Date: 2007-04-11 15:35:43 -0400 (Mi, 11 Apr 2007) $
+ * @date $Date$
  */
 
 #ifndef I3VEMCALIBRATION_H_INCLUDED

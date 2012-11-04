@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id:  $
+    $Id$
 
-    @version $Revision:  $
+    @version $Revision$
     @author blaufuss
 
 */

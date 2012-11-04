@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Trigger.h 12685 2005-11-17 15:04:25Z blaufuss $
+ * $Id$
  *
  * @file I3Trigger.h
- * @version $Revision: 1.5 $
- * @date $Date: 2005-11-17 16:04:25 +0100 (Thu, 17 Nov 2005) $
+ * @version $Revision$
+ * @date $Date$
  * @author blaufuss
  * @author deyoung
  * @author ehrlich

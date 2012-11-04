@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3Tree.h 14347 2006-01-15 15:15:08Z  $
+ * $Id$
  *
  * @file I3Tree.h
- * @version $Revision:  $
- * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
+ * @version $Revision$
+ * @date $Date$
  * @author tschmidt
  */
 

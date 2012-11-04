@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerStatus.h 13154 2005-12-01 21:45:55Z  $
+ * $Id$
  *
  * @file I3TriggerStatus.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
+ * @version $Revision$
+ * @date $Date$
  * @author blaufuss
  */
 #ifndef I3_TRIGGER_STATUS_H_INCLUDED

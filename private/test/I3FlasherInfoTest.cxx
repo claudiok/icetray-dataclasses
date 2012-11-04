@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: I3FlasherInfoTest.cxx 9329 2005-06-20 22:36:05Z pretz $
+    $Id$
 
-    @version $Revision: 1.3 $
-    @date $Date: 2005-06-20 18:36:05 -0400 (Mon, 20 Jun 2005) $
+    @version $Revision$
+    @date $Date$
     @author olivas
 
     @todo

@@ -1,7 +1,7 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: ToStringTest.cxx 9329 2005-06-20 22:36:05Z dule $
+    $Id$
 */
 
 #include <I3Test.h>

@@ -4,9 +4,9 @@
  *
  * copyright  (C) 2004
  * the IceCube collaboration
- * @version $Id: I3AMANDAOMCalibration.h 7421 2005-05-09 03:41:09Z aya $
+ * @version $Id$
  * @file I3AMANDAOMCalibration.h
- * @date $Date: 2005-05-08 23:41:09 -0400 (Sun, 08 May 2005) $
+ * @date $Date$
  */
 
 #ifndef I3AMANDAOMCALIBRATION_XTALK_H_INCLUDED

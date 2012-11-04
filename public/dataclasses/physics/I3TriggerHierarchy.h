@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerHierarchy.h 13215 2005-12-06 15:10:33Z blaufuss $
+ * $Id$
  *
  * @file I3TriggerHierarchy.h
- * @version $Revision: 1.4 $
- * @date $Date: 2005-12-06 16:10:33 +0100 (Tue, 06 Dec 2005) $
+ * @version $Revision$
+ * @date $Date$
  * @author tschmidt
  */
 #ifndef I3_TRIGGER_HIERARCHY_H_INCLUDED

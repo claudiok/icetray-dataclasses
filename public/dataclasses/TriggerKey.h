@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: TriggerKey.h 13154 2005-12-01 21:45:55Z tschmidt $
+ * $Id$
  *
  * @file TriggerKey.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
+ * @version $Revision$
+ * @date $Date$
  * @author blaufuss
  */
 #ifndef TRIGGER_KEY_H_INCLUDED

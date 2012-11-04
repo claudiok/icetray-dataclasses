@@ -1,7 +1,7 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: TriggerStatusTest.cxx 9281 2005-06-19 17:06:10Z blaufuss $
+    $Id$
 
 */
 

@@ -1,9 +1,9 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    @version $Id: I3MCTree.h 15192 2006-02-02 01:02:05Z dule $
+    @version $Id$
     @file I3MCTree.h
-    @date $Date: 2006-02-01 20:02:05 -0500 (Wed, 01 Feb 2006) $
+    @date $Date$
 */
 
 #ifndef I3MCTREE_H_INCLUDED

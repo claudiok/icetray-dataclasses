@@ -1,8 +1,8 @@
 /**
     copyright  (C) 2006
     the icecube collaboration
-    @version $Id: Utility.h 14347 2006-01-15 15:15:08Z pretz $
-    @date    $Date: 2006-01-15 10:15:08 -0500 (Sun, 15 Jan 2006) $
+    @version $Id$
+    @date    $Date$
 */
 
 #ifndef DATACLASSES_I3VECTOR_H_INCLUDED

@@ -1,10 +1,10 @@
 /**
     copyright  (C) 2004
     the icecube collaboration
-    $Id: ModuleKeyTest.cxx 77426 2011-06-30 00:51:32Z olivas $
+    $Id$
 
-    @version $Revision: 1.3 $
-    @date $Date: 2011-06-29 19:51:32 -0500 (Wed, 29 Jun 2011) $
+    @version $Revision$
+    @date $Date$
     @author pretz
 
     @todo

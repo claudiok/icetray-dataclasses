@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3TriggerStatus.cxx 13154 2005-12-01 21:45:55Z  $
+ * $Id$
  *
  * @file I3TriggerStatus.cxx
- * @version $Revision: 1.10 $
- * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
+ * @version $Revision$
+ * @date $Date$
  */
 #include <icetray/serialization.h>
 #include <dataclasses/status/I3TriggerStatus.h>

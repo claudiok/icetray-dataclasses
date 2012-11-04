@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * @version $Id: I3TWRFrag.h,v 1.2 2005/02/21 06:47:54 ehrlich Exp $
+ * @version $Id$
  * 
  * @file I3TWRFrag.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005/02/21 06:47:54 $
+ * @version $Revision$
+ * @date $Date$
  */
 #ifndef I3TWRFRAG_H_INCLUDED
 #define I3TWRFRAG_H_INCLUDED

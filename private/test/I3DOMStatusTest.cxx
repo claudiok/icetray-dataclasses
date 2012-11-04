@@ -2,8 +2,8 @@
     copyright  (C) 2004
     the icecube collaboration
 
-    @version $Revision: 1.3 $
-    @date $Date: 2005-06-19 19:06:10 +0200 (Sun, 19 Jun 2005) $
+    @version $Revision$
+    @date $Date$
     @author blaufuss
 
     @todo

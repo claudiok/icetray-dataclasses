@@ -3,7 +3,7 @@
  * the icecube collaboration
  * @version $Id: I3Flasherinfo srklein$
  * @file I3FlasherInfo.h
- * @date $Date: 2005-06-16 14:39:52 -0700 (Thu, 16 Jun 2005) $
+ * @date $Date$
  */
 
 #ifndef I3FLASHERINFO_H_INCLUDED

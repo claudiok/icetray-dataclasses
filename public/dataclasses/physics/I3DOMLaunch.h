@@ -5,7 +5,7 @@
  * @version $Id$
  *
  * @file I3DOMLaunch.h
- * @version $Revision: 1.11 $
+ * @version $Revision$
  * @date $Date$
  */
 

@@ -1,7 +1,7 @@
 //
 //   Copyright (c) 2004, 2005, 2006, 2007, 2008   Troy D. Straszheim  
 //   
-//   $Id: pybindings/I3DOMLaunch.cxx 46254 2008-06-14 02:50:30Z troy $
+//   $Id$
 //
 //   This file is part of IceTray.
 //

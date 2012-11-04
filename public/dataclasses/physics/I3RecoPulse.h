@@ -1,9 +1,9 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * @version $Id: $
+ * @version $Id$
  * @file I3RecoPulse.h
- * @date $Date: $
+ * @date $Date$
  */
 
 #ifndef I3RECOPULSE_H_INCLUDED

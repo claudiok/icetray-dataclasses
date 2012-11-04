@@ -1,9 +1,9 @@
 /**
  * copyright  (C) 2006
  * the icecube collaboration
- * @version $Id:  $
+ * @version $Id$
  * @file dataclasses/private/dataclasses/I3DOMFunctions.cxx
- * @date $Date: $
+ * @date $Date$
  */
 
 

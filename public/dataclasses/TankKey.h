@@ -1,9 +1,9 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * @version $Id: TankKey.h 15516 2006-02-09 23:39:21Z tschmidt $
+ * @version $Id$
  * @file TankKey.h
- * @date $Date: 2006-02-10 00:39:21 +0100 (Fri, 10 Feb 2006) $
+ * @date $Date$
  */
 
 #ifndef TANKKEY_H_INCLUDED

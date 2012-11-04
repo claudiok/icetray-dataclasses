@@ -4,11 +4,11 @@
  * copyright  (C) 2010
  * The Icecube Collaboration
  *
- * $Id: I3TableWriter.cxx 64296 2010-05-25 16:13:48Z jvansanten $
+ * $Id$
  *
  * @version $Revision$
  * @date $LastChangedDate$
- * @author Jakob van Santen <vansanten@wisc.edu> Last changed by: $LastChangedBy: jvansanten $
+ * @author Jakob van Santen <vansanten@wisc.edu> Last changed by: $LastChangedBy$
  */
 
 #include "dataclasses/payload/I3SuperDST.h"

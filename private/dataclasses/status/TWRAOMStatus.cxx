@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: TWRAOMStatus.cxx 12685 2005-11-17 15:04:25Z blaufuss $
+ * $Id$
  *
  * @file TWRAOMStatus.cxx
- * @version $Revision: 1.5 $
- * @date $Date: 2005-11-17 16:04:25 +0100 (Thu, 17 Nov 2005) $
+ * @version $Revision$
+ * @date $Date$
  */
 #include <icetray/serialization.h>
 #include <dataclasses/status/TWRAOMStatus.h>

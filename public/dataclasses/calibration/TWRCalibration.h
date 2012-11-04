@@ -1,7 +1,7 @@
 /**
  *
  * @version $Id: TWRCalibration.h$
- * @date $Date: 2007-04-11 15:35:43 -0400 (Mi, 11 Apr 2007) $
+ * @date $Date$
  */
 
 #ifndef TWRCALIBRATION_H_INCLUDED

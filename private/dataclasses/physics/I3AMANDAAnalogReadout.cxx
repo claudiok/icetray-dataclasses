@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2005
  * the IceCube Collaboration
- * $Id: $
+ * $Id$
  *
  * @file dataclasses/private/dataclasses/physics/I3AMANDAAnalogReadout.cxx
- * @version $Revision: $
- * @date $Date: $
+ * @version $Revision$
+ * @date $Date$
  * @author deyoung
  */
 

@@ -1,11 +1,11 @@
 /**
  * copyright  (C) 2004
  * the icecube collaboration
- * $Id: I3FilterResult.h 12673 2005-11-17 10:36:58Z pretz $
+ * $Id$
  *
  * @file I3FilterResult.h
- * @version $Revision: 1.10 $
- * @date $Date: 2005-12-01 16:45:55 -0500 (Thu, 01 Dec 2005) $
+ * @version $Revision$
+ * @date $Date$
  */
 #ifndef I3FILTERRESULT_H_INCLUDED
 #define I3FILTERRESULT_H_INCLUDED

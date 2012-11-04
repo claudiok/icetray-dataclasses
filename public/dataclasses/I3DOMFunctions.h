@@ -1,9 +1,9 @@
 /**
  * copyright  (C) 2006
  * the icecube collaboration
- * @version $Id:  $
+ * @version $Id$
  * @file I3DOMFunctions.h
- * @date $Date: $
+ * @date $Date$
  */
 #ifndef I3DOMFUNCTIONS_H_INCLUDED
 #define I3DOMFUNCTIONS_H_INCLUDED
