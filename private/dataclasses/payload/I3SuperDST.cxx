@@ -101,7 +101,6 @@ I3SuperDSTReadout::I3SuperDSTReadout(const OMKey &om, bool hlc,
 void
 I3SuperDSTReadout::SetTimeReference(const I3SuperDSTReadout &other)
 {
-	std::vector<I3SuperDSTChargeStamp>::reverse_iterator stamp_rit = stamps_.rbegin();
 	const I3SuperDSTChargeStamp &other_stamp = other.stamps_.front();
 	
 	assert(start_time_ >= other.start_time_);
