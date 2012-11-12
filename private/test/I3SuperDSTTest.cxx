@@ -460,7 +460,7 @@ GetDataDir()
 	fs::path data_dir(I3_BUILD + "/test-data/superdst");
 	
 	ENSURE(fs::exists(data_dir), "Directory "
-	    "'$I3_PORTS/test-data/superdst' exists.");
+	    "'$I3_PORTS/test-data/superdst' doesn't exist.");
 	
 	return (data_dir);
 }
