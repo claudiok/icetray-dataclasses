@@ -15,7 +15,7 @@ i3_add_library(dataclasses
   private/dataclasses/*/*.cxx
   private/dataclasses/stream_overloads.cpp
 
-  USE_TOOLS log4cplus boost python ${OPTIONAL_TOOLS}
+  USE_TOOLS boost python ${OPTIONAL_TOOLS}
 
   USE_PROJECTS icetray
 
