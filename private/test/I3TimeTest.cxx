@@ -478,7 +478,7 @@ TEST(test_utc_caldate)
 	ENSURE_EQUAL(second,                      test_dates[i].sec);
     }
 }
-
+/*
 TEST(mjd_set_get_iterative) {
   // test if a hundred times conversion forth an d back yields the same as teh original
   I3Time tm;
@@ -487,4 +487,4 @@ TEST(mjd_set_get_iterative) {
   for (unsigned int i= 0; i<100; i++)
     mt.SetModJulianTimeDouble(mt.GetModJulianDayDouble());
   ENSURE_DISTANCE(mt.GetModJulianDayDouble()-tm.GetModJulianDayDouble(),0., (double)(1./24./3600./(int64_t)(1E10)));
-}
+}*/
