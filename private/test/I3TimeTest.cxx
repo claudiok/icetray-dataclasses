@@ -486,5 +486,5 @@ TEST(mjd_set_get_iterative) {
   I3Time mt = tm;
   for (unsigned int i= 0; i<100; i++)
     mt.SetModJulianTimeDouble(mt.GetModJulianDayDouble());
-  ENSURE_DISTANCE(mt.GetModJulianDayDouble()-tm.GetModJulianDayDouble(),0., 0.0000001);
+  ENSURE_DISTANCE(mt.GetModJulianDayDouble()-tm.GetModJulianDayDouble(),0., (double)(1./24./3600./(int64_t)(1E10)));
 }
