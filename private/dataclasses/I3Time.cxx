@@ -141,8 +141,8 @@ void I3Time::SetModJulianTimeDouble(double mjd) {
   year_ = yearOf(modJulianDay); // this is the year
   int32_t daysafteryear = modJulianDay - (int32_t)modjulianday(year_); // the full MJDs since Jan 1st that year
   int64_t nsafteryear = (int64_t)(daysafteryear*3600 * 24 * ((int64_t)(1e10))); // corresponding to that many ns
-  int64_t nsleap = I3TimeUtils::year_to_date_leap_seconds(modJulianDay)* ((int64_t)(1e10)); //leap-seconds since Jan 1st taht year
-  int64_t nssurplus = (int64_t)(mjd-modJulianDay)*3600*24*(int64_t)(1e10); // plus what we have in the decimal tail of the double
+  int64_t nsleap = I3TimeUtils::year_to_date_leap_seconds(modJulianDay)* ((int64_t)(1e10)); //leap-seconds since Jan 1st that year
+  int64_t nssurplus = (int64_t)((mjd-modJulianDay)*3600*24*((int64_t)(1e10))); // plus what we have in the decimal tail of the double
   daqTime_ = (int64_t)(nsafteryear + nssurplus + nsleap); // is in sum what we want
 }
 
