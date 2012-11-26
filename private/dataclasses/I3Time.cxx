@@ -140,10 +140,10 @@ void I3Time::SetModJulianTimeDouble(double mjd) {
   int32_t modJulianDay = (int32_t)mjd; //number of full days
   year_ = yearOf(modJulianDay); // this is the year
   int32_t daysafteryear = modJulianDay - (int32_t)modjulianday(year_); // the full MJDs since Jan 1st that year
-  int64_t nsafteryear = (int64_t)(daysafteryear*3600 * 24 * ((int64_t)(1e10))); // corresponding to that many ns
-  int64_t nsleap = I3TimeUtils::year_to_date_leap_seconds(modJulianDay)* ((int64_t)(1e10)); //leap-seconds since Jan 1st that year
-  int64_t nssurplus = (int64_t)((mjd-modJulianDay)*3600*24*((int64_t)(1e10))); // plus what we have in the decimal tail of the double
-  daqTime_ = (int64_t)(nsafteryear + nssurplus + nsleap); // is in sum what we want
+  int64_t ticksafteryear = (int64_t)(daysafteryear*3600 * 24 * ((int64_t)(1e10))); // corresponding to that many daq_ticks
+  int64_t ticksleap = I3TimeUtils::year_to_date_leap_seconds(modJulianDay)* ((int64_t)(1e10)); // leap-seconds since Jan 1st that year in daq_ticks
+  int64_t tickssurplus = (int64_t)((mjd-modJulianDay)*3600*24*((int64_t)(1e10))); // plus daq_ticks held in the decimal tail of the double
+  daqTime_ = (int64_t)(ticksafteryear + tickssurplus + ticksleap); // is in sum the daq_ticks
 }
 
 void I3Time::SetUTCCalDate(int year, int month, int day, int hour, int minute, int sec, double ns)
