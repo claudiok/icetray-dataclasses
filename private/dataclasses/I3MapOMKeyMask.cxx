@@ -84,7 +84,7 @@ I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask(const I3Frame &frame,
 		 * superset catches up to increment its iterator.
 		 */
 		if ((sub_mit != subset.end()) && (sub_mit->first == sup_mit->first)) {
-			bitmask mask = bitmask(sup_mit->second.size(), sub_mit->size() != 0);
+			bitmask mask = bitmask(sup_mit->second.size(), sub_mit->second.size() != 0);
 			
 			FillSubsetMask(mask, sup_mit->second, sub_mit->second);
 			element_masks_.push_back(mask);
