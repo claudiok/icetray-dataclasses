@@ -31,6 +31,7 @@ void register_I3DOMFunctions()
   def("atwd_sampling_rate",&ATWDSamplingRate);
   def("pmt_gain",&PMTGain);
   def("spe_mean",&SPEMean);
+  def("mean_spe_charge",&MeanSPECharge);
   def("fadc_baseline",&FADCBaseline);
   def("transit_time",&TransitTime);
   def("spe_discriminator_threshold",&SPEDiscriminatorThreshold);

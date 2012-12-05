@@ -100,6 +100,13 @@ double SPEMean (const I3DOMStatus& status ,
   return spemean;
 }
 
+double MeanSPECharge (const I3DOMStatus& status, const I3DOMCalibration& calib)
+{
+  return 0.86; // Hardcoded for all DOMs until measured. Derived from simulation
+               // fit by Claudio Kopper. See Diplomarbeit from Eike Middell for
+               // details.
+}
+
 double FADCBaseline (const I3DOMStatus& status , 
 		     const I3DOMCalibration& calib)
 {

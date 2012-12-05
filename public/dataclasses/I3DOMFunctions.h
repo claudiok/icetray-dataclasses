@@ -34,9 +34,20 @@ double ATWDSamplingRate (unsigned int chip, const I3DOMStatus& , const I3DOMCali
 double PMTGain (const I3DOMStatus& , const I3DOMCalibration&);
 
 /**
- * Return the calculated SPEMean
+ * Return the calculated SPEMean (the ADC "charge", in GV ns, corresponding to
+ * the calibrated value of 1 PE). This converts ADC amplitudes into units of
+ * photoelectrons.
  */
 double SPEMean (const I3DOMStatus& , const I3DOMCalibration&);
+
+/**
+ * Return the expectation value of the SPE distribution, in PE, for this DOM.
+ * Whereas 1 PE (see above) is the most likely value for one PE of charge,
+ * the usual mean charge per PE is usually somewhat less. This can be used to
+ * estimate the number of photons responsible for a given number of
+ * photoelectrons.
+ */
+double MeanSPECharge (const I3DOMStatus& , const I3DOMCalibration&);
 
 /**
  * Get the FADC baseline (in counts)
