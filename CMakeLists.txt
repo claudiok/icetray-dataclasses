@@ -1,5 +1,5 @@
 #
-# C   
+# Co
 #
 i3_project(dataclasses
   PYTHON_DIR python
