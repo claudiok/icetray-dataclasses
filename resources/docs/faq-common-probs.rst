@@ -25,7 +25,6 @@ If you forget to import project icetray first::
 
   >>> from icecube import dataio
   >>> f = dataio.I3File("event693.i3")
-  Logging configured from file log4cplus.conf
   >>> frame = f.pop_physics()
   Traceback (most recent call last):
     File "<stdin>", line 1, in <module>

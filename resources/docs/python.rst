@@ -15,7 +15,6 @@ With a frame like this:
 
   >>> from icecube import icetray, dataclasses, dataio
   >>> i3f = dataio.I3File("/v/icecube/data/level3.nugen_numu.000768.000111.i3.gz")
-  Logging configured from file log4cplus.conf
   >>> frame = i3f.pop_physics()
   >>> print frame
   [ I3Frame  (Physics):
@@ -188,7 +187,6 @@ Getting the energy of the most energetic primary
   In [1]: from icecube import icetray, dataclasses, dataio
 
   In [2]: f = dataio.I3File("/v/icecube/data/combinedMC600.i3")
-  Logging configured from file log4cplus.conf
   
   In [3]: frame = f.pop_physics()
   
