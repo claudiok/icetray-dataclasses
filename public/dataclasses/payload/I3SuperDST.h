@@ -99,7 +99,7 @@ struct I3SuperDSTReadout {
 	
 	bool GetLCBit() const { return (kind_ == I3SuperDSTChargeStamp::HLC); };
 	
-	bool operator<(const I3SuperDSTReadout &other)
+	bool operator<(const I3SuperDSTReadout &other) const
 	    { return start_time_ < other.start_time_; };
 	
 	SET_LOGGER("I3SuperDST");
