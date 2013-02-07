@@ -41,6 +41,8 @@ public:
     SetOMKey(omKey);
   }
 
+  virtual ~TankKey() {}
+
   
   /**
    * Sets the stringNumber and tankID of this tank according to the OMKey

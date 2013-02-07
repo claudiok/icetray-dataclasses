@@ -50,7 +50,7 @@ class TWRAOMStatus
   TWRAOMStatus() {}
   /** Destructor
    */
-  ~TWRAOMStatus();
+  virtual ~TWRAOMStatus();
   /** Get/Set for the TWR bin size.
    */
   double GetBinSize() const { return(binSize_); }
