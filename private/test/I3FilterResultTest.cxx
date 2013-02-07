@@ -1,9 +1,9 @@
 #include <I3Test.h>
 
+#include <dataclasses/physics/I3FilterResult.h>
+
 #include <fstream>
 #include <boost/archive/xml_oarchive.hpp>
-
-#include <dataclasses/physics/I3FilterResult.h>
 
 TEST_GROUP(I3FilterResultTest);
 

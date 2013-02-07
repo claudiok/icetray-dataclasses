@@ -7,13 +7,13 @@
     @date $Date$
     @author dule
 */
+#include <dataclasses/I3TreeUtils.h>
 #include <vector>
 #include <algorithm>
 #include <sstream>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <I3Test.h>
-#include <dataclasses/I3TreeUtils.h>
 
 using namespace std;
 
