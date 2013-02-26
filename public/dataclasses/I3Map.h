@@ -18,6 +18,7 @@
 #include <icetray/I3Logging.h>
 #include <icetray/I3FrameObject.h>
 #include "icetray/OMKey.h"
+#include "dataclasses/TriggerKey.h"
 
 #ifndef __CINT__  // it puts the lotion in the basket
 #include <boost/lexical_cast.hpp>
@@ -77,6 +78,7 @@ typedef I3Map<int, std::vector<int> > I3MapIntVectorInt;
 typedef I3Map<OMKey, std::vector<double> > I3MapKeyVectorDouble;
 typedef I3Map<OMKey, std::vector<int> > I3MapKeyVectorInt;
 typedef I3Map<OMKey, double > I3MapKeyDouble;
+typedef I3Map<TriggerKey, std::vector<unsigned int> > I3MapTriggerVectorUInt;
 
 I3_POINTER_TYPEDEFS(I3MapStringDouble);
 I3_POINTER_TYPEDEFS(I3MapStringInt);
@@ -90,6 +92,7 @@ I3_POINTER_TYPEDEFS(I3MapIntVectorInt);
 I3_POINTER_TYPEDEFS(I3MapKeyVectorDouble);
 I3_POINTER_TYPEDEFS(I3MapKeyVectorInt);
 I3_POINTER_TYPEDEFS(I3MapKeyDouble);
+I3_POINTER_TYPEDEFS(I3MapTriggerVectorUInt);
 
 #endif // I3MAP_H_INCLUDED
 

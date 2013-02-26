@@ -42,5 +42,11 @@ void register_I3MapKey()
     ;
   register_pointer_conversions<I3MapKeyDouble>();
 
+  class_<I3MapTriggerVectorUInt, bases<I3FrameObject>, I3MapTriggerVectorUIntPtr>("I3MapTriggerVectorUInt")
+    .def(dataclass_suite<I3MapTriggerVectorUInt >())
+    ;
+  register_pointer_conversions<I3MapTriggerVectorUInt>();
+
+
 }
 
