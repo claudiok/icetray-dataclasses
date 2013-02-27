@@ -32,12 +32,12 @@ double ATWDSamplingRate ( unsigned int chip,
        log_trace("calculated rate corrected %f MHz, for chip %d", rateCorrected, chip);
 
        if (rateCorrected <= 0){
-         log_error("ATWDSamplingRate < 0 = %f GHz for chip %d", rateCorrected, chip);
-         log_error("Using Linear fit from DOMCAL");
-         log_error("rate = 20*(slope * dacTrigBias + intercept)");
-         log_error("  slope = %f", atwdQFit.quadFitB);
-         log_error("  intercept = %f", atwdQFit.quadFitA);
-         log_error("  dacTrigBias = %f", dacTrigBias);
+         log_debug("ATWDSamplingRate < 0 = %f GHz for chip %d", rateCorrected, chip);
+         log_debug("Using Linear fit from DOMCAL");
+         log_debug("rate = 20*(slope * dacTrigBias + intercept)");
+         log_debug("  slope = %f", atwdQFit.quadFitB);
+         log_debug("  intercept = %f", atwdQFit.quadFitA);
+         log_debug("  dacTrigBias = %f", dacTrigBias);
        }
      }
    else // if not linear fit
@@ -61,13 +61,13 @@ double ATWDSamplingRate ( unsigned int chip,
 	 log_trace("I3DOMFunctions: rate corrected %f MHz, for chip %d", rateCorrected, chip);
 
          if (rateCorrected <= 0){
-           log_error("ATWDSamplingRate < 0 = %f GHz for chip %d", rateCorrected, chip);
-           log_error("Using Quadratic fit from DOMCAL");
-           log_error("rate = c2 * dacTrigBias * dacTrigBias + c1 * dacTrigBias + c0");
-           log_error("  c2 = %f", c2);
-           log_error("  c1 = %f", c1);
-           log_error("  c0 = %f", c0);
-           log_error("  dacTrigBias = %f", dacTrigBias);
+           log_debug("ATWDSamplingRate < 0 = %f GHz for chip %d", rateCorrected, chip);
+           log_debug("Using Quadratic fit from DOMCAL");
+           log_debug("rate = c2 * dacTrigBias * dacTrigBias + c1 * dacTrigBias + c0");
+           log_debug("  c2 = %f", c2);
+           log_debug("  c1 = %f", c1);
+           log_debug("  c0 = %f", c0);
+           log_debug("  dacTrigBias = %f", dacTrigBias);
          }
        }                         
      }
