@@ -49,6 +49,7 @@ class I3DOMLaunch
 public:  
     enum ATWDselect
     {
+      UNKNOWN_CHIP = 0,
       ATWDa = 1,
       ATWDb = 2
     };

@@ -10,7 +10,7 @@ I3DOMLaunch::I3DOMLaunch()
   : startTime_(0.0),
     trigger_(TEST_PATTERN),
     mode_(UNDEFINED),
-    whichATWD_(ATWDa),
+    whichATWD_(UNKNOWN_CHIP),
     localCoincidence_(false),
     rawATWDChargeStamp_(0),
     whichATWDChargeStamp_(0),
