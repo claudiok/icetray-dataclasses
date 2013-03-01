@@ -42,10 +42,21 @@ void register_I3MapKey()
     ;
   register_pointer_conversions<I3MapKeyDouble>();
 
+  class_<I3MapKeyUInt, bases<I3FrameObject>, I3MapKeyUIntPtr>("I3MapKeyUInt")
+    .def(std_map_indexing_suite<I3MapKeyUInt >())
+    .def("__str__", &stream_to_string<I3MapKeyUInt>)
+    ;
+  register_pointer_conversions<I3MapKeyUInt>();
+
   class_<I3MapTriggerVectorUInt, bases<I3FrameObject>, I3MapTriggerVectorUIntPtr>("I3MapTriggerVectorUInt")
     .def(dataclass_suite<I3MapTriggerVectorUInt >())
     ;
   register_pointer_conversions<I3MapTriggerVectorUInt>();
+
+  class_<I3MapTriggerDouble, bases<I3FrameObject>, I3MapTriggerDoublePtr>("I3MapTriggerDouble")
+    .def(dataclass_suite<I3MapTriggerDouble >())
+    ;
+  register_pointer_conversions<I3MapTriggerDouble>();
 
 
 }
