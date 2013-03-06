@@ -19,7 +19,12 @@ I3DOMCalibration::I3DOMCalibration()
     atwdResponseWidth_(NAN),
     fadcResponseWidth_(NAN),
     relativeDomEff_(NAN),
-    noiseRate_(NAN)
+    noiseRate_(NAN),
+    noiseThermalRate_(NAN),
+    noiseDecayRate_(NAN),
+    noiseScintillationMean_(NAN),
+    noiseScintillationSigma_(NAN),
+    noiseScintillationHits_(NAN)
 {
   fadcBeaconBaseline_ = NAN;
   atwdBeaconBaselines_[0][0] = NAN;
@@ -679,6 +684,14 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("FADCBeaconBaselines", fadcBeaconBaseline_);
     }
 
+  if (version > 9)
+    {
+      ar & make_nvp("noiseThermalRate", noiseThermalRate_);
+      ar & make_nvp("noiseDecayRate", noiseDecayRate_);
+      ar & make_nvp("noiseScintillationMean", noiseScintillationMean_);
+      ar & make_nvp("noiseScintillationSigma", noiseScintillationSigma_);
+      ar & make_nvp("noiseScintillationHits", noiseScintillationHits_);
+    }
   toroidType_ = (atwdResponseWidth_ > 0.4) ? NEW_TOROID : OLD_TOROID;
 
 }
