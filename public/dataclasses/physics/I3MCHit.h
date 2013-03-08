@@ -89,7 +89,7 @@ class I3MCHit
 
   void SetTime(double time){time_ = time;}
 
-  int GetHitID() const { return hitID_;}
+  int32_t GetHitID() const { return hitID_;}
 
   void SetHitID(int hitID){hitID_ = hitID;}
 
@@ -109,12 +109,12 @@ class I3MCHit
 
   void SetCharge(double charge) { charge_ = charge; }
 
-  int GetParticleID() const { 
+  int32_t GetParticleID() const { 
     log_warn("I3MCHit::GetParticleID is deprecated.  Please use I3MCHit::GetParticleMinorID.");
     return particleID_; 
   }
 
-  int GetParticleMinorID() const { return particleID_; }
+  int32_t GetParticleMinorID() const { return particleID_; }
 
   uint64_t GetParticleMajorID() const { return particleMajorID_; }
 
@@ -151,10 +151,10 @@ class I3MCHit
  private:
 
   double time_;
-  int hitID_;
+  int32_t hitID_;
   uint64_t  npe_;
   double  charge_;
-  int    particleID_;
+  int32_t    particleID_;
   uint64_t    particleMajorID_;
   double  cherenkovDistance_;
   HitSource source_;

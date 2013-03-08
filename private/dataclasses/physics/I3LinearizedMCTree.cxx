@@ -37,7 +37,7 @@ private:
   
   float time_, energy_;
   uint64_t major_id_;
-  int minor_id_;
+  int32_t minor_id_;
   I3Particle::ParticleType type_;
 };
 
@@ -127,7 +127,7 @@ namespace {
 class pid {
 private:
 	uint64_t major_;
-	int minor_;
+	int32_t minor_;
 public:
 	pid(const I3Particle &p) : major_(p.GetMajorID()), minor_(p.GetMinorID()) {};
 	bool operator<(const pid &other) const
