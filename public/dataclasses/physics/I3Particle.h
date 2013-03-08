@@ -79,7 +79,7 @@ static const unsigned i3particle_version_ = 5;
     (MissingSeed)(InsufficientQuality)
 
 #define I3PARTICLE_H_I3Particle_LocationType                                      \
-    (Anywhere)(IceTop)(InIce)
+    (Anywhere)(IceTop)(InIce)(InActiveVolume)
 
 namespace RDMCParticleTypes{
   enum ParticleType {
@@ -336,7 +336,8 @@ class I3Particle : public I3FrameObject
   enum LocationType {
     Anywhere = 0,
     IceTop = 10,
-    InIce = 20
+    InIce = 20,
+    InActiveVolume = 30
   };
 
  private:
