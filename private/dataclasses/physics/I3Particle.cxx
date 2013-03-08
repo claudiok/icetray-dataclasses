@@ -10,8 +10,8 @@
 #include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/lexical_cast.hpp>
 
-int I3Particle::global_last_pid_ = 0;
-int I3Particle::global_minor_id_ = 0;
+int32_t I3Particle::global_last_pid_ = 0;
+int32_t I3Particle::global_minor_id_ = 0;
 uint64_t I3Particle::global_major_id_ = 0;
 
 I3Particle::~I3Particle() { }
@@ -50,7 +50,7 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   log_trace("Calling I3Particle::I3Particle(ParticleShape %i, ParticleType %i).", static_cast<int>(shape), static_cast<int>(type));
 }
 
-I3Particle I3Particle::CreateWithID(uint64_t major, int minor)
+I3Particle I3Particle::CreateWithID(uint64_t major, int32_t minor)
 {
 	I3Particle particle;
 	particle.major_ID_ = major;

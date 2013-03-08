@@ -132,8 +132,8 @@ namespace RDMCParticleTypes{
 class I3Particle : public I3FrameObject
 {
 
-  static int global_last_pid_;
-  static int global_minor_id_;
+  static int32_t global_last_pid_;
+  static int32_t global_minor_id_;
   static uint64_t global_major_id_;
     
  public:
@@ -341,10 +341,10 @@ class I3Particle : public I3FrameObject
 
  private:
 
-  int ID_;
+  int32_t ID_;
   uint64_t major_ID_;
-  int parentID_;
-  int primaryID_;
+  int32_t parentID_;
+  int32_t primaryID_;
   int32_t pdgEncoding_; // this replaces ParticleType
   ParticleShape shape_;
   FitStatus status_;
@@ -361,7 +361,7 @@ class I3Particle : public I3FrameObject
 
   I3Particle(ParticleShape shape = Null, ParticleType type = unknown);
   
-  static I3Particle CreateWithID(uint64_t major, int minor);
+  static I3Particle CreateWithID(uint64_t major, int32_t minor);
   
   virtual ~I3Particle();
 
@@ -376,15 +376,15 @@ class I3Particle : public I3FrameObject
   bool HasDirection() const;
   bool HasEnergy() const;
 
-  int GetID() const { 
+  int32_t GetID() const { 
     log_warn("I3Particle::GetID is deprecated.  Please use I3Particle::GetMinorID.");
     return ID_; 
   }
-  int GetMinorID() const { return ID_; }
+  int32_t GetMinorID() const { return ID_; }
   uint64_t GetMajorID() const { return major_ID_; }
 
-  int GetParentID() const { return parentID_; }
-  int GetPrimaryID() const { return primaryID_; }
+  int32_t GetParentID() const { return parentID_; }
+  int32_t GetPrimaryID() const { return primaryID_; }
 
   int32_t GetPdgEncoding() const { return pdgEncoding_; }
   void SetPdgEncoding(int32_t newid) { pdgEncoding_=newid; }
