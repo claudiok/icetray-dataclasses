@@ -67,5 +67,6 @@ void register_TankKey()
   class_<I3VectorTankKey, bases<I3FrameObject>, boost::shared_ptr<I3VectorTankKey> >("I3VectorTankKey")
     .def(dataclass_suite<I3VectorTankKey >())
     ;
+  register_pointer_conversions<I3VectorTankKey>();
 }
     
