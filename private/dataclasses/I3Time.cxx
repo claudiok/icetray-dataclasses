@@ -87,6 +87,9 @@ int64_t I3TimeUtils::ns_to_daqtime( const double time){
   return static_cast<int64_t>((10.*time/I3Units::ns)+ 0.5); 
 }
 
+// Used by old Muxer technology (PFMuxer in PnF for example)
+const char* I3Time::DRIVING_TIME = "DrivingTime";
+
 I3Time::I3Time()
 {
   year_ = 0;
