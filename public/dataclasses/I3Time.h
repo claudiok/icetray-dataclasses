@@ -80,6 +80,8 @@ namespace I3TimeUtils
 class I3Time : public I3FrameObject
 {
  public:
+  // Used by old Muxer technology (PFMuxer in PnF for example)
+  static const char* DRIVING_TIME;
   /**
    * @brief enum for the Month
    */
@@ -129,7 +131,7 @@ class I3Time : public I3FrameObject
   /**
    * @brief creates the object with the given double as ModJulianDay
    */
-  I3Time(double mjd);
+  explicit I3Time(double mjd);
 
   virtual ~I3Time();
 	     
