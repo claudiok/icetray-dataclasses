@@ -120,6 +120,8 @@ class I3MCHit
 
   void SetParticleID(const I3Particle& );
 
+  void SetParticleID(int32_t minorID, uint64_t majorID) { particleID_=minorID; particleMajorID_=majorID; }
+
   /**
    * @return the direct path distance to the track which caused this hit
    */
