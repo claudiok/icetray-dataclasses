@@ -107,7 +107,8 @@ void register_I3Calibration()
                             (FADCBaselineFit)(FADCBeaconBaseline)(FrontEndImpedance)  \
                             (TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)      \
                             (ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)      \
-                            (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)
+                            (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)\
+                            (ToroidType)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       #undef I3DOMCALPROPS
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT) \
@@ -121,6 +122,13 @@ void register_I3Calibration()
       .def( freeze() )
       ;
 
+    enum_<I3DOMCalibration::ToroidType>("ToroidType")
+      .value("OLD_TOROID", I3DOMCalibration::OLD_TOROID)
+      .value("NEW_TOROID", I3DOMCalibration::NEW_TOROID)
+      .export_values()
+      ;
+
+      
   }
 
   register_pointer_conversions<I3Calibration>();
