@@ -25,6 +25,8 @@
 #include <boost/iostreams/device/back_inserter.hpp>
 #include <boost/iostreams/device/array.hpp>
 
+#include <boost/python/import.hpp>
+
 TEST_GROUP(I3SuperDST)
 
 struct Empty {
@@ -411,6 +413,10 @@ static void
 TestRoundTrip(std::string filename, std::string hlc_name, std::string slc_name, unsigned nframes)
 {
 	using namespace boost::assign;
+
+	boost::python::import("icecube.icetray");
+	boost::python::import("icecube.dataio");
+
 	I3Tray tray;
 
 	std::vector<std::string> qkeys, pulsekeys;
@@ -432,6 +438,10 @@ CheckDeserialization(std::string filename, std::string hlc_name,
     std::string slc_name, std::string superdst_name, unsigned nframes)
 {
 	using namespace boost::assign;
+
+	boost::python::import("icecube.icetray");
+	boost::python::import("icecube.dataio");
+
 	I3Tray tray;
 
 	std::vector<std::string> qkeys, pulsekeys;
