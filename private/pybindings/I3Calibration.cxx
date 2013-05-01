@@ -108,7 +108,9 @@ void register_I3Calibration()
                             (TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)      \
                             (ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)      \
                             (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)\
-                            (ToroidType)
+                            (ToroidType)(DomNoiseThermalRate)(DomNoiseDecayRate)      \
+                            (DomNoiseScintillationMean)(DomNoiseScintillationSigma)   \
+                            (DomNoiseScintillationHits)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       #undef I3DOMCALPROPS
       #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT) \
