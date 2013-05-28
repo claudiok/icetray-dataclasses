@@ -359,9 +359,30 @@ class I3Particle : public I3FrameObject
   LocationType locationType_;
 
  public:
-
+  /** @brief Constructor for a simple particle with generated ID
+   * useful in applications where the exact nature of an particle are in focus
+   * @param shape Shape of the track
+   * @param type Particle type
+  */
   I3Particle(ParticleShape shape = Null, ParticleType type = unknown);
-  
+  /** @brief Constructor for particle as a unique identifier by majorID and minorID
+   * useful in iteration processes (in I3MCTree) where unique tagging is required
+   * @param major MajorID of that particle
+   * @param minor MinorID of that particle
+   */
+  I3Particle(const uint64_t major, const int32_t minor);
+  /** @brief Constructor for a track or ray
+   * useful in reconstruction representations, where rather the position and directionality of the particle are in focus
+   * @param pos Position of the vertex
+   * @param dir Direction of the track
+   * @param vertextime time that the vertex is happening
+   * @param shape Shape of the track
+   * @param type Particle type
+   */
+  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, ParticleShape shape = Null, double length=NAN) ;
+  /** @brief Create a particle with given ID 
+   * @deprecated go through the propper constructor I3Particle(major, minor);
+   */
   static I3Particle CreateWithID(uint64_t major, int32_t minor);
   
   virtual ~I3Particle();

@@ -34,9 +34,7 @@ using namespace boost::python;
 
 void register_I3Particle()
 {
-
-  {
-    scope particle_scope = 
+    class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> > particle =
       class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> >("I3Particle")
       #define RO_PROPERTIES (MajorID)(MinorID)
       #define PROPERTIES (Time)(Energy)(Shape)(Type)(PdgEncoding)(Length)(Speed)(FitStatus)(LocationType) \
@@ -48,6 +46,9 @@ void register_I3Particle()
       #undef RO_PROPERTIES
       #undef PROPERTIES
       #undef CONVENIENCE_BOOLS
+      
+      .def(init<const uint64_t,const int32_t>((arg("major"), arg("minor")), "Constructor for particle as a unique identifier by majorID and minorID"))
+      
       .add_property("pos", make_function( (const I3Position& (I3Particle::*)()) &I3Particle::GetPos, return_internal_reference<1>() ),
                                           (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos )
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
@@ -55,6 +56,8 @@ void register_I3Particle()
       .def("shift_along_track", &I3Particle::ShiftAlongTrack)
       .def(dataclass_suite<I3Particle>())
       ;
+    {
+    scope particle_scope(particle);
 
     enum_<I3Particle::FitStatus>("FitStatus")
       BOOST_PP_SEQ_FOR_EACH(ENUM_DEF,I3Particle,I3PARTICLE_H_I3Particle_FitStatus)
@@ -77,8 +80,10 @@ void register_I3Particle()
       BOOST_PP_SEQ_FOR_EACH(ENUM_DEF,I3Particle,I3PARTICLE_H_I3Particle_ParticleShape)
       .export_values()
       ;
-
   }
+  particle.def(init<I3Particle::ParticleShape, I3Particle::ParticleType>((arg("shape")=I3Particle::Null, arg("type")=I3Particle::unknown), "Constructor for a simple particle with generated ID"));
+  particle.def(init<const I3Position, const I3Direction, const double, I3Particle::ParticleShape, double>((arg("pos"), arg("dir"), arg("vertextime"), arg("shape")=I3Particle::Null, arg("length")=NAN), "Constructor for a track or ray"));
+  
   bp::def("identity", identity_<I3Particle::FitStatus>);
   bp::def("identity", identity_<I3Particle::LocationType>);
   bp::def("identity", identity_<I3Particle::ParticleType>);

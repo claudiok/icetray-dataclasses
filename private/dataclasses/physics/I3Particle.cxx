@@ -50,6 +50,57 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   log_trace("Calling I3Particle::I3Particle(ParticleShape %i, ParticleType %i).", static_cast<int>(shape), static_cast<int>(type));
 }
 
+I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, ParticleShape shape, double length) : 
+  parentID_(-1),
+  primaryID_(-1),
+  pdgEncoding_(ConvertToPdgEncoding(unknown)),
+  shape_(shape),
+  status_(NotSet),
+  pos_(pos),
+  dir_(dir),
+  time_(vertextime),
+  energy_(NAN),
+  length_(NAN),
+  speed_(I3Constants::c),
+  locationType_(Anywhere)
+{
+  const int this_pid = getpid();
+  if (this_pid != global_last_pid_) {
+    log_debug("PID has changed from %i to %i. regenerating I3Particle::majorID.", global_last_pid_, this_pid);
+    global_last_pid_ = this_pid;
+    global_major_id_ = 0; // this will cause a new major ID to be generated
+    global_minor_id_ = 0; // reset the minor ID, too
+  }
+  
+  if(global_major_id_ ==0){
+    boost::hash<std::string> string_hash;
+    std::stringstream s;
+    s<<time(0)<<this_pid<<getenv("HOST");
+    global_major_id_ = string_hash(s.str());
+  }
+  major_ID_ = global_major_id_;
+  
+  ID_ = global_minor_id_++;
+}
+
+I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
+  ID_(minor),
+  major_ID_(major),
+  parentID_(-1),
+  primaryID_(-1),
+  pdgEncoding_(ConvertToPdgEncoding(unknown)),
+  shape_(Null),
+  status_(NotSet),
+  pos_(),
+  dir_(),
+  time_(NAN),
+  energy_(NAN),
+  length_(NAN),
+  speed_(I3Constants::c),
+  locationType_(Anywhere)
+{}
+
+
 I3Particle I3Particle::CreateWithID(uint64_t major, int32_t minor)
 {
 	I3Particle particle;
