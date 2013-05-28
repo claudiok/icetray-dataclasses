@@ -370,20 +370,7 @@ class I3Particle : public I3FrameObject
    * @param major MajorID of that particle
    * @param minor MinorID of that particle
    */
-  I3Particle(const uint64_t major, const int32_t minor);
-  /** @brief Constructor for a track or ray
-   * useful in reconstruction representations, where rather the position and directionality of the particle are in focus
-   * @param pos Position of the vertex
-   * @param dir Direction of the track
-   * @param vertextime time that the vertex is happening
-   * @param shape Shape of the track
-   * @param type Particle type
-   */
   I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, ParticleShape shape = Null, double length=NAN) ;
-  /** @brief Create a particle with given ID 
-   * @deprecated go through the propper constructor I3Particle(major, minor);
-   */
-  static I3Particle CreateWithID(uint64_t major, int32_t minor);
   
   virtual ~I3Particle();
 
@@ -482,6 +469,17 @@ class I3Particle : public I3FrameObject
 
 
  private:
+
+  I3Particle(const uint64_t major, const int32_t minor);
+  /** @brief Constructor for a track or ray
+   * useful in reconstruction representations, where rather the position and directionality of the particle are in focus
+   * @param pos Position of the vertex
+   * @param dir Direction of the track
+   * @param vertextime time that the vertex is happening
+   * @param shape Shape of the track
+   * @param type Particle type
+   */
+  friend class I3Stochastic;
 	 
   friend class boost::serialization::access;
   template <class Archive> void save(Archive & ar, unsigned version) const;

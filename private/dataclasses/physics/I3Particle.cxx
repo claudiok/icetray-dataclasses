@@ -100,16 +100,6 @@ I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
   locationType_(Anywhere)
 {}
 
-
-I3Particle I3Particle::CreateWithID(uint64_t major, int32_t minor)
-{
-	I3Particle particle;
-	particle.major_ID_ = major;
-	particle.ID_ = minor;
-	
-	return particle;
-}
-
 // using the magic of the preprocessor, expand
 // the existing list of enum entries into a case
 // line converting from enum to string

@@ -46,9 +46,7 @@ void register_I3Particle()
       #undef RO_PROPERTIES
       #undef PROPERTIES
       #undef CONVENIENCE_BOOLS
-      
-      .def(init<const uint64_t,const int32_t>((arg("major"), arg("minor")), "Constructor for particle as a unique identifier by majorID and minorID"))
-      
+            
       .add_property("pos", make_function( (const I3Position& (I3Particle::*)()) &I3Particle::GetPos, return_internal_reference<1>() ),
                                           (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos )
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),

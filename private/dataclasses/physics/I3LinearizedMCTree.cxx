@@ -86,7 +86,7 @@ I3Stochastic::IsCompressible(const I3Particle &parent, const I3Particle &p)
 I3Particle
 I3Stochastic::Reconstruct(const I3Particle &parent) const
 {
-	I3Particle p = I3Particle::CreateWithID(major_id_, minor_id_);
+	I3Particle p(major_id_, minor_id_);
 	
 	p.SetShape(I3Particle::Null);
 	p.SetFitStatus(I3Particle::NotSet);
