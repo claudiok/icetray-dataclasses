@@ -330,7 +330,6 @@ TEST(m_serialization_of_a_full_tree_using_an_xml_archive)
     boost::archive::xml_iarchive ia(is);
     ia >> boost::serialization::make_nvp("mytree", t2);
   }
-  t2.swap(t2.begin());
   
   ENSURE_EQUAL(t1.size(), t2.size());
   ENSURE(equal(t1.begin(), t1.end(), t2.begin()));    

@@ -82,9 +82,15 @@ struct I3Tree : public I3FrameObject , public tree<T>
       {
         ar & boost::serialization::make_nvp("item", item);
         ar & boost::serialization::make_nvp("count", count);
-        if(iters.empty())
-          iter = this->insert(this->begin(), item);
-        else
+        if(iters.empty()) {
+          iter = this->begin();
+          if (!this->empty()) {
+            unsigned siblings = this->number_of_siblings(iter);
+            for (unsigned i=0; i <= siblings; i++)
+              iter = this->next_sibling(iter);
+          }
+          iter = this->insert(iter, item);
+        } else
           iter = this->append_child(iters.top(), item);
         counts.top()--;
 
