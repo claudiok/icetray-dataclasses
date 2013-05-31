@@ -370,8 +370,14 @@ class I3Particle : public I3FrameObject
    * @param major MajorID of that particle
    * @param minor MinorID of that particle
    */
-  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, ParticleShape shape = Null, double length=NAN) ;
-  
+#ifndef __CINT__
+  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
+             ParticleShape shape = Null, double length=NAN);
+#else
+  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
+             ParticleShape shape, double length);
+#endif
+
   virtual ~I3Particle();
 
   bool IsTrack() const;
