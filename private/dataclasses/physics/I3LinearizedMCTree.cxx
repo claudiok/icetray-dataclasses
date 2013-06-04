@@ -76,7 +76,7 @@ I3Stochastic::IsCompressible(const I3Particle &parent, const I3Particle &p)
 	    && (p.GetSpeed() == I3Constants::c) && (p.GetDir() == parent.GetDir())) {
 		    I3Particle newp(p);
 		    Propagate(newp, parent.GetTime() - p.GetTime());
-		    double position_err = newp.GetPos().CalcDistance(parent.GetPos());
+		    double position_err = (newp.GetPos()-parent.GetPos()).Magnitude();
 		    return (position_err < 0.5*I3Units::m);
 	} else {
 		return false;

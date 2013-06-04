@@ -72,8 +72,12 @@ I3_SERIALIZABLE(I3Direction);
 I3_SERIALIZABLE(I3DirectionVect);
 
 //-----------------------------------------------------------
-I3Direction::I3Direction(const I3Position& p){
-  SetDirection(p.GetX(),p.GetY(),p.GetZ());
+I3Direction::I3Direction(const I3Position& p):
+xDir_(p.GetX()),
+yDir_(p.GetY()),
+zDir_(p.GetZ())
+{
+  CalcSphFromCar();
 }
 
 //-----------------------------------------------------------

@@ -70,7 +70,7 @@ void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
     break;
     
   default: // Unsupported reference frame
-    ResetPosition();
+    log_fatal("Unsupported reference frame passed to I3Position::SetPosition: %i",frame);
     break;
   }
 }
