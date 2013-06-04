@@ -4,6 +4,7 @@
 #include <iostream>
 #include <icetray/serialization.h>
 #include <dataclasses/I3Direction.h>
+#include <dataclasses/I3Position.h>
 #include <cmath>
 #include <icetray/I3Units.h>
 
@@ -69,6 +70,11 @@ I3Direction::serialize(boost::archive::xml_iarchive& ar, unsigned version)
 
 I3_SERIALIZABLE(I3Direction);
 I3_SERIALIZABLE(I3DirectionVect);
+
+//-----------------------------------------------------------
+I3Direction::I3Direction(const I3Position& p){
+  SetDirection(p.GetX(),p.GetY(),p.GetZ());
+}
 
 //-----------------------------------------------------------
 void I3Direction::SetThetaPhi(double theta, double phi)
@@ -165,7 +171,7 @@ void I3Direction::CalcSphFromCar()
 }
 
 //-----------------------------------------------------------
-I3Direction I3Direction::Cross(const I3Direction& d) {
+I3Direction I3Direction::Cross(const I3Direction& d) const{
   if (!isCalculated_) CalcCarFromSph();
   return I3Direction (yDir_*d.GetZ() - zDir_*d.GetY(),
                       zDir_*d.GetX() - xDir_*d.GetZ(),
@@ -173,9 +179,50 @@ I3Direction I3Direction::Cross(const I3Direction& d) {
 }
 
 //-----------------------------------------------------------
+I3Position I3Direction::Cross(const I3Position& d) const{
+  if (!isCalculated_) CalcCarFromSph();
+  return I3Position (yDir_*d.GetZ() - zDir_*d.GetY(),
+                     zDir_*d.GetX() - xDir_*d.GetZ(),
+                     xDir_*d.GetY() - yDir_*d.GetX());
+}
+
+//-----------------------------------------------------------
 double I3Direction::Dot(const I3Direction& d) {
   if (!isCalculated_) CalcCarFromSph();
   return (xDir_*d.GetX() + yDir_*d.GetY() + zDir_*d.GetZ());
+}
+
+//-----------------------------------------------------------
+double I3Direction::operator*(const I3Direction& other) const{
+  if(isCalculated_ && other.isCalculated_)
+    return xDir_*other.xDir_ + yDir_*other.yDir_ + zDir_*other.zDir_;
+  //if one of the directions doesn't already have cartesian
+  //coordinates calculated, calculating them would be less efficient
+  double cad=cos(azimuth_ - other.azimuth_);
+  double czd=cos(zenith_ - other.zenith_);
+  double czs=cos(zenith_ + other.zenith_);
+  return 0.5*(cad*(czd-czs)+czd+czs);
+}
+
+//-----------------------------------------------------------
+double I3Direction::operator*(const I3Position& other) const{
+  if (!isCalculated_) CalcCarFromSph();
+  return xDir_*other.GetX() + yDir_*other.GetY() + zDir_*other.GetZ();
+}
+
+//-----------------------------------------------------------
+I3Position I3Direction::operator*(double a) const{
+  return I3Position(a,I3Constants::pi-zenith_,azimuth_-I3Constants::pi,I3Position::sph);
+}
+
+//-----------------------------------------------------------
+I3Position I3Direction::operator/(double a) const{
+  return I3Position(1/a,I3Constants::pi-zenith_,azimuth_-I3Constants::pi,I3Position::sph);
+}
+
+//-----------------------------------------------------------
+I3Position operator*(double a, const I3Direction& d){
+  return(d*a);
 }
 
 //-----------------------------------------------------------

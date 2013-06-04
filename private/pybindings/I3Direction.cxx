@@ -21,6 +21,7 @@
 #include <vector>
 
 #include <dataclasses/I3Direction.h>
+#include <dataclasses/I3Position.h>
 #include <dataclasses/ostream_overloads.hpp>
 #include <icetray/python/dataclass_suite.hpp>
 
@@ -39,9 +40,20 @@ void register_I3Direction()
     .def("set_direction", oneary)
     .def("set_direction", twoary)
     .def("set_direction", threeary)
-    #define MEMBERS (SetThetaPhi)(ResetDirection)(NullDirection)(RotateX)(RotateY)(RotateZ)(Cross)(Dot)
-    BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Direction, MEMBERS)
-    #undef  MEMBERS
+    .def("set_theta_phi", &I3Direction::SetThetaPhi)
+    .def("reset_direction", &I3Direction::ResetDirection)
+    .def("null_direction", &I3Direction::NullDirection)
+    .def("rotate_x", &I3Direction::RotateX)
+    .def("rotate_y", &I3Direction::RotateY)
+    .def("rotate_z", &I3Direction::RotateZ)
+    .def("cross", (I3Direction(I3Direction::*)(const I3Direction&)const)&I3Direction::Cross)
+    .def("cross", (I3Position(I3Direction::*)(const I3Position&)const)&I3Direction::Cross)
+    .def("dot", &I3Direction::Dot)
+    .def(self * self)
+    .def(self * I3Position())
+    .def(self * double())
+    .def(double() * self)
+    .def(self / double())
     #define RO_PROPERTIES (Zenith)(Azimuth)(X)(Y)(Z)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Direction, RO_PROPERTIES)
     #undef  RO_PROPERTIES

@@ -5,6 +5,7 @@
 #include <iostream>
 #include <icetray/serialization.h>
 #include "dataclasses/I3Position.h"
+#include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Constants.h"
 #include "icetray/I3Units.h"
 
@@ -27,6 +28,18 @@ I3Position::serialize(Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3Position);
+
+//-----------------------------------------------------------
+I3Position::I3Position(const I3Direction& d):
+x_(d.GetX()),
+y_(d.GetY()),
+z_(d.GetY()),
+r_(1),
+theta_(d.CalcTheta()),
+phi_(d.CalcPhi()),
+rho_(sin(theta_)),
+isCalculated_(true)
+{}
 
 //-----------------------------------------------------------
 void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
@@ -102,6 +115,102 @@ void I3Position::RotateZ(double angle)
 }
 
 //-----------------------------------------------------------
+double I3Position::Magnitude() const{
+  if(isCalculated_)
+    return r_;
+  //otherwise use self dot-product
+  return sqrt(*this * *this);
+}
+
+//-----------------------------------------------------------
+double I3Position::Mag2() const{
+  if(isCalculated_)
+    return r_*r_;
+  //otherwise use self dot-product
+  return *this * *this;
+}
+
+//-----------------------------------------------------------
+I3Position& I3Position::operator+=(const I3Position& rhs){
+  x_+=rhs.x_;
+  y_+=rhs.y_;
+  z_+=rhs.z_;
+  isCalculated_=false;
+  return *this;
+}
+
+//-----------------------------------------------------------
+I3Position& I3Position::operator-=(const I3Position& rhs){
+  x_-=rhs.x_;
+  y_-=rhs.y_;
+  z_-=rhs.z_;
+  isCalculated_=false;
+  return *this;
+}
+
+//-----------------------------------------------------------
+I3Position I3Position::operator+(const I3Position& rhs) const{
+  return I3Position(*this)+=rhs;
+}
+
+//-----------------------------------------------------------
+I3Position I3Position::operator-(const I3Position& rhs) const{
+  return I3Position(*this)-=rhs;
+}
+
+//-----------------------------------------------------------
+double I3Position::operator*(const I3Position& rhs) const{
+  return x_*rhs.x_ + y_*rhs.y_ + z_*rhs.z_;
+}
+
+//-----------------------------------------------------------
+double I3Position::operator*(const I3Direction& rhs) const{
+  return x_*rhs.GetX() + y_*rhs.GetY() + z_*rhs.GetZ();
+}
+
+//-----------------------------------------------------------
+I3Position& I3Position::operator*=(double a){
+  x_*=a;
+  y_*=a;
+  z_*=a;
+  isCalculated_=false;
+  return *this;
+}
+
+//-----------------------------------------------------------
+I3Position& I3Position::operator/=(double a){
+  x_/=a;
+  y_/=a;
+  z_/=a;
+  isCalculated_=false;
+  return *this;
+}
+
+//-----------------------------------------------------------
+I3Position I3Position::operator*(double a) const{
+  return I3Position(*this)*=a;
+}
+
+//-----------------------------------------------------------
+I3Position I3Position::operator/(double a) const{
+  return I3Position(*this)/=a;
+}
+
+//-----------------------------------------------------------
+I3Position I3Position::Cross(const I3Position& d) const{
+  return I3Position (y_*d.z_ - z_*d.y_,
+                     z_*d.x_ - x_*d.z_,
+                     x_*d.y_ - y_*d.x_);
+}
+
+//-----------------------------------------------------------
+I3Position I3Position::Cross(const I3Direction& d) const{
+  return I3Position (y_*d.GetZ() - z_*d.GetY(),
+                     z_*d.GetX() - x_*d.GetZ(),
+                     x_*d.GetY() - y_*d.GetX());
+}
+
+//-----------------------------------------------------------
 void I3Position::CalcSphCylFromCar() const
 {
   // Calculate Spherical and Cylindrical coordinates from Cartesian
@@ -148,6 +257,11 @@ void I3Position::CalcCarSphFromCyl()
   x_=rho_*std::cos(phi_);
   y_=rho_*std::sin(phi_);
   isCalculated_=true;
+}
+
+//-----------------------------------------------------------
+I3Position operator*(double a, const I3Position& p){
+  return(p*a);
 }
 
 //-----------------------------------------------------------

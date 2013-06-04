@@ -33,6 +33,9 @@
  */
 static const unsigned i3position_version_ = 0;
 
+//Forward declaration
+class I3Direction;
+
 class I3Position : public I3FrameObject
 {
  public:
@@ -52,24 +55,32 @@ class I3Position : public I3FrameObject
   y_(NAN),
   z_(NAN),
   isCalculated_(false)
-  {;}
+  {}
 
   /**
-   * Additional constructor
+   * Constructor for different coordinate systems
+   *
+   * The meaning of this constructor depends on the value of RefFrame.
+   * If it is I3Position::car the three coordinates are treated as
+   *   cartesian x, y, and z
+   * If it is I3Position::sph the three coordinates are treated as 
+   *   spherical r, theta, and phi
+   * If it is I3Position::cyl the three coordinates are treated as 
+   *   cylindrical rho, phi, and z
    */
   I3Position(double x, double y, double z, RefFrame f) {
     SetPosition(x,y,z,f);
   }
 
   /**
-   * Additional constructor
+   * Constructor from cartesian coordinates
    */
   I3Position(double x, double y, double z):
   x_(x),
   y_(y),
   z_(z),
   isCalculated_(false)
-  {;}
+  {}
 
   /**
    * Copy constructor
@@ -79,29 +90,31 @@ class I3Position : public I3FrameObject
   y_(p.y_),
   z_(p.z_),
   isCalculated_(false)
-  {;}
+  {}
+  
+  explicit I3Position(const I3Direction& d);
 
   //--------------
 
   /**
    * Store position from position p
    */
-  inline void SetPosition(const I3Position& p) {
+  inline void SetPosition(const I3Position& p) __attribute__((deprecated)) {
     x_=p.x_; y_=p.y_; z_=p.z_;
     isCalculated_=false;
   }
-  inline void SetPos(const I3Position& p) {
+  inline void SetPos(const I3Position& p) __attribute__((deprecated)) {
     SetPosition(p); 
   }
 
   /**
    * Store position r in cartesian ref frame
    */
-  inline void SetPosition(double x, double y, double z) {
+  inline void SetPosition(double x, double y, double z) __attribute__((deprecated)) {
     x_=x; y_=y; z_=z;
     isCalculated_=false;
   }
-  inline void SetPos(double x, double y, double z) {
+  inline void SetPos(double x, double y, double z) __attribute__((deprecated)) {
     SetPosition(x, y, z);
   }
 
@@ -116,17 +129,17 @@ class I3Position : public I3FrameObject
   /**
    * Reset all elements of I3Position to NAN
    */
-  inline void ResetPosition() {
+  inline void ResetPosition() __attribute__ ((deprecated)) {
     x_=NAN; y_=NAN; z_=NAN;
     isCalculated_=false;
   }
-  inline void ResetPos() { ResetPosition(); }
+  inline void ResetPos() __attribute__ ((deprecated)) { ResetPosition(); }
 
   /**
    * Set null position for non-existing position (ResetPosition)
    */
-  inline void NullPosition() { ResetPosition(); }
-  inline void NullPos() { ResetPosition(); }
+  inline void NullPosition() __attribute__ ((deprecated)) { ResetPosition(); }
+  inline void NullPos() __attribute__ ((deprecated)) { ResetPosition(); }
 
   //--------------
 
@@ -212,7 +225,7 @@ class I3Position : public I3FrameObject
   /**
    * Shift coordinate system by position p (i.e. 'this'='this'-'p')
    */
-  inline void ShiftCoordSystem(const I3Position& p) {
+  inline void ShiftCoordSystem(const I3Position& p) __attribute__ ((deprecated)) {
     SetPosition(x_-p.x_, y_-p.y_, z_-p.z_);
   }
 
@@ -234,12 +247,83 @@ class I3Position : public I3FrameObject
   /**
    * Provide distance to position p
    */
-  inline double CalcDistance(const I3Position& p) const {
+  inline double CalcDistance(const I3Position& p) const __attribute__ ((deprecated)) {
     const double dx = x_-p.x_;
     const double dy = y_-p.y_;
     const double dz = z_-p.z_;
     return std::sqrt(dx*dx+dy*dy+dz*dz);
   }
+  
+  /**
+   * Computes the distance from this position to the origin of the 
+   * coordinate system (it's magnitude as a vector)
+   */
+  double Magnitude() const;
+  
+  /**
+   * Computes the square of the vector magnitude of the position
+   */
+  double Mag2() const;
+  
+  /**
+   * Vector addition
+   */
+  I3Position& operator+=(const I3Position&);
+  
+  /**
+   * Vector subtraction
+   */
+  I3Position& operator-=(const I3Position&);
+  
+  /**
+   * Vector addition
+   */
+  I3Position operator+(const I3Position&) const;
+  
+  /**
+   * Vector subtraction
+   */
+  I3Position operator-(const I3Position&) const;
+  
+  /**
+   * Scalar (dot) product
+   */
+  double operator*(const I3Position&) const;
+  
+  /**
+   * Scalar (dot) product
+   */
+  double operator*(const I3Direction&) const;
+  
+  /**
+   * Multiplication by a scalar
+   */
+  I3Position& operator*=(double);
+  
+  /**
+   * Divison by a scalar
+   */
+  I3Position& operator/=(double);
+  
+  /**
+   * Multiplication by a scalar
+   */
+  I3Position operator*(double) const;
+  
+  /**
+   * Division by a scalar
+   */
+  I3Position operator/(double) const;
+  
+  /**
+   * Vector (cross) product
+   */
+  I3Position Cross(const I3Position&) const;
+  
+  /**
+   * Vector (cross) product
+   */
+  I3Position Cross(const I3Direction&) const;
 
  protected:
   /**
@@ -252,19 +336,20 @@ class I3Position : public I3FrameObject
   /**
    * spherical (sph)
    */
-  mutable double r_; //!
-  mutable double theta_; //!
-  mutable double phi_; //!
+  mutable double r_;
+  mutable double theta_;
+  mutable double phi_;
 
   /**
    * cylindrical (cyl) - Z and Phi are same.
    */
-  mutable double rho_; //!
+  mutable double rho_;
 
   /**
-   * Did we calculate the positions before?
+   * Whether the coordinates in secondary coordinates systems 
+   * (sph and cyl) are already computed
    */
-  mutable bool isCalculated_; //!
+  mutable bool isCalculated_;
 
  private:
 
@@ -284,6 +369,8 @@ inline bool operator==(const I3Position& lhs, const I3Position& rhs) {
           (lhs.GetY() == rhs.GetY()) &&
           (lhs.GetZ() == rhs.GetZ()));
 }
+
+I3Position operator*(double, const I3Position&);
 
 std::ostream& operator<<(std::ostream& oss, const I3Position& p);
 

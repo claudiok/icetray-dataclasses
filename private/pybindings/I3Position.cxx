@@ -22,6 +22,7 @@
 #include <vector>
 
 #include <dataclasses/I3Position.h>
+#include <dataclasses/I3Direction.h>
 #include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
 
@@ -75,7 +76,7 @@ void register_I3Position()
   scope position_scope = 
     class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >
     ("I3Position",
-     "I3Position objects can subscripted like 5-element arrays (x, y, z, theta, phi) and converted to tuples and lists")
+     "I3Position objects can subscripted like 3-element arrays (x, y, z) and converted to tuples and lists")
     .def(init<double,double,double>())
     .def(init<double,double,double,I3Position::RefFrame>())
     PROPERTY(I3Position, x, X)
@@ -84,9 +85,26 @@ void register_I3Position()
 #define RO_PROPERTIES (R)(Theta)(Phi)(Rho)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Position, RO_PROPERTIES)
 #undef  RO_PROPERTIES
-#define DEFS (ShiftCoordSystem)(RotateX)(RotateY)(RotateZ)(CalcDistance)
-    BOOST_PP_SEQ_FOR_EACH(WRAP_DEF_RECASE, I3Position, DEFS)
-#undef  DEFS
+    .def("shift_coord_system",&I3Position::ShiftCoordSystem)
+    .def("rotate_x",&I3Position::RotateX)
+    .def("rotate_y",&I3Position::RotateY)
+    .def("rotate_z",&I3Position::RotateZ)
+    .def("calc_distance",&I3Position::CalcDistance)
+    .def("magnitude",&I3Position::Magnitude)
+    .def("mag2",&I3Position::Mag2)
+    .def(self += self)
+    .def(self -= self)
+    .def(self + self)
+    .def(self - self)
+    .def(self * self)
+    .def(self * I3Direction())
+    .def(self *= double())
+    .def(self /= double())
+    .def(self * double())
+    .def(double() * self)
+    .def(self / double())
+    .def("cross", (I3Position(I3Position::*)(const I3Direction&)const)&I3Position::Cross)
+    .def("cross", (I3Position(I3Position::*)(const I3Position&)const)&I3Position::Cross)
     .def("__str__", &stream_to_string<I3Position>)
     .def("__len__", i3position_len)
     .def("__getitem__", i3position_getitem)
