@@ -43,24 +43,22 @@ isCalculated_(true)
 
 //-----------------------------------------------------------
 void I3Position::SetPosition(const I3Position& p) {
-  x_=p.x_; y_=p.y_; z_=p.z_;
-  isCalculated_=false;
+  *this=p;
 }
 
 //-----------------------------------------------------------
 void I3Position::SetPos(const I3Position& p) {
-  SetPosition(p);
+  *this=p;
 }
 
 //-----------------------------------------------------------
 void I3Position::SetPosition(double x, double y, double z) {
-  x_=x; y_=y; z_=z;
-  isCalculated_=false;
+  *this=I3Position(x,y,z);
 }
 
 //-----------------------------------------------------------
 void I3Position::SetPos(double x, double y, double z) {
-  SetPosition(x, y, z);
+  *this=I3Position(x,y,z);
 }
 
 //-----------------------------------------------------------
@@ -104,13 +102,22 @@ void I3Position::ResetPosition() {
 }
 
 //-----------------------------------------------------------
-void I3Position::ResetPos() { ResetPosition(); }
+void I3Position::ResetPos() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
 
 //-----------------------------------------------------------
-void I3Position::NullPosition() { ResetPosition(); }
+void I3Position::NullPosition() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
 
 //-----------------------------------------------------------
-void I3Position::NullPos() { ResetPosition(); }
+void I3Position::NullPos() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
 
 //-----------------------------------------------------------
 void I3Position::ShiftCoordSystem(const I3Position& p) {

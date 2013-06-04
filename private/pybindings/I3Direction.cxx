@@ -30,25 +30,15 @@ using namespace boost::python;
 void register_I3Direction()
 {
 
-  void (I3Direction::* oneary)(const I3Direction&) = &I3Direction::SetDirection;
-  void (I3Direction::* twoary)(double, double) = &I3Direction::SetDirection;
-  void (I3Direction::* threeary)(double, double, double) = &I3Direction::SetDirection;
-
   class_<I3Direction, bases<I3FrameObject>, boost::shared_ptr<I3Direction> >("I3Direction")
     .def(init<double,double>())
     .def(init<double,double,double>())
-    .def("set_direction", oneary)
-    .def("set_direction", twoary)
-    .def("set_direction", threeary)
     .def("set_theta_phi", &I3Direction::SetThetaPhi)
-    .def("reset_direction", &I3Direction::ResetDirection)
-    .def("null_direction", &I3Direction::NullDirection)
     .def("rotate_x", &I3Direction::RotateX)
     .def("rotate_y", &I3Direction::RotateY)
     .def("rotate_z", &I3Direction::RotateZ)
     .def("cross", (I3Direction(I3Direction::*)(const I3Direction&)const)&I3Direction::Cross)
     .def("cross", (I3Position(I3Direction::*)(const I3Position&)const)&I3Direction::Cross)
-    .def("dot", &I3Direction::Dot)
     .def(self * self)
     .def(self * I3Position())
     .def(self * double())

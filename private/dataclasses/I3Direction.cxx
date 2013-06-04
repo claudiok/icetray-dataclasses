@@ -103,7 +103,9 @@ void I3Direction::SetDirection(double zen, double azi)
 //-----------------------------------------------------------
 void I3Direction::SetDir(double zen, double azi)
 {
-  SetDirection(zen, azi);
+  zenith_=zen;
+  azimuth_=azi;
+  isCalculated_=false;
 }
 
 //-----------------------------------------------------------
@@ -127,7 +129,8 @@ void I3Direction::SetDirection(double x, double y, double z)
 //-----------------------------------------------------------
 void I3Direction::SetDir(double x, double y, double z)
 {
-  SetDirection(x, y, z);
+  xDir_=x; yDir_=y; zDir_=z;
+  CalcSphFromCar();
 }
 
 //-----------------------------------------------------------
@@ -138,13 +141,22 @@ void I3Direction::ResetDirection()
 }
 
 //-----------------------------------------------------------
-inline void I3Direction::ResetDir() { ResetDirection(); }
+inline void I3Direction::ResetDir() {
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
+}
 
 //-----------------------------------------------------------
-void I3Direction::NullDirection() { ResetDirection(); }
+void I3Direction::NullDirection() {
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
+}
 
 //-----------------------------------------------------------
-void I3Direction::NullDir() { ResetDirection(); }
+void I3Direction::NullDir() {
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
+}
 
 //-----------------------------------------------------------
 void I3Direction::RotateX(double angle)
