@@ -238,37 +238,65 @@ class I3Position : public I3FrameObject
    * Computes the distance from this position to the origin of the 
    * coordinate system (it's magnitude as a vector)
    */
-  double Magnitude() const;
+  double Magnitude() const{
+    if(isCalculated_)
+      return r_;
+    //otherwise use self dot-product
+    return sqrt(*this * *this);
+  }
   
   /**
    * Computes the square of the vector magnitude of the position
    */
-  double Mag2() const;
+  double Mag2() const{
+    if(isCalculated_)
+      return r_*r_;
+    //otherwise use self dot-product
+    return *this * *this;
+  }
   
   /**
    * Vector addition
    */
-  I3Position& operator+=(const I3Position&);
+  I3Position& operator+=(const I3Position& rhs){
+    x_+=rhs.x_;
+    y_+=rhs.y_;
+    z_+=rhs.z_;
+    isCalculated_=false;
+    return *this;
+  }
   
   /**
    * Vector subtraction
    */
-  I3Position& operator-=(const I3Position&);
+  I3Position& operator-=(const I3Position& rhs){
+    x_-=rhs.x_;
+    y_-=rhs.y_;
+    z_-=rhs.z_;
+    isCalculated_=false;
+    return *this;
+  }
   
   /**
    * Vector addition
    */
-  I3Position operator+(const I3Position&) const;
+  I3Position operator+(const I3Position& rhs) const{
+    return I3Position(*this)+=rhs;
+  }
   
   /**
    * Vector subtraction
    */
-  I3Position operator-(const I3Position&) const;
+  I3Position operator-(const I3Position& rhs) const{
+    return I3Position(*this)-=rhs;
+  }
   
   /**
    * Scalar (dot) product
    */
-  double operator*(const I3Position&) const;
+  double operator*(const I3Position& rhs) const{
+    return x_*rhs.x_ + y_*rhs.y_ + z_*rhs.z_;
+  }
   
   /**
    * Scalar (dot) product
@@ -278,27 +306,47 @@ class I3Position : public I3FrameObject
   /**
    * Multiplication by a scalar
    */
-  I3Position& operator*=(double);
+  I3Position& operator*=(double a){
+    x_*=a;
+    y_*=a;
+    z_*=a;
+    isCalculated_=false;
+    return *this;
+  }
   
   /**
    * Divison by a scalar
    */
-  I3Position& operator/=(double);
+  I3Position& operator/=(double a){
+    x_/=a;
+    y_/=a;
+    z_/=a;
+    isCalculated_=false;
+    return *this;
+  }
   
   /**
    * Multiplication by a scalar
    */
-  I3Position operator*(double) const;
+  I3Position operator*(double a) const{
+    return I3Position(*this)*=a;
+  }
   
   /**
    * Division by a scalar
    */
-  I3Position operator/(double) const;
+  I3Position operator/(double a) const{
+    return I3Position(*this)/=a;
+  }
   
   /**
    * Vector (cross) product
    */
-  I3Position Cross(const I3Position&) const;
+  I3Position Cross(const I3Position& d) const{
+    return I3Position (y_*d.z_ - z_*d.y_,
+                       z_*d.x_ - x_*d.z_,
+                       x_*d.y_ - y_*d.x_);
+  }
   
   /**
    * Vector (cross) product

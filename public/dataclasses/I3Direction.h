@@ -210,7 +210,12 @@ class I3Direction : public I3FrameObject
   /**
    * Cross product of this x d
    */
-  I3Direction Cross(const I3Direction&) const;
+  I3Direction Cross(const I3Direction& d) const{
+    if (!isCalculated_) CalcCarFromSph();
+    return I3Direction (yDir_*d.GetZ() - zDir_*d.GetY(),
+                        zDir_*d.GetX() - xDir_*d.GetZ(),
+                        xDir_*d.GetY() - yDir_*d.GetX());
+  }
   
   /**
    * Vector (cross) product
@@ -226,12 +231,21 @@ class I3Direction : public I3FrameObject
   /**
    * Scalar (dot) product
    */
-  double operator*(const I3Direction&) const;
+  double operator*(const I3Direction& other) const{
+    if(isCalculated_ && other.isCalculated_)
+      return xDir_*other.xDir_ + yDir_*other.yDir_ + zDir_*other.zDir_;
+    //if one of the directions doesn't already have cartesian
+    //coordinates calculated, calculating them would be less efficient
+    double cad=cos(azimuth_ - other.azimuth_);
+    double czd=cos(zenith_ - other.zenith_);
+    double czs=cos(zenith_ + other.zenith_);
+    return 0.5*(cad*(czd-czs)+czd+czs);
+  }
   
   /**
    * Scalar (dot) product
    */
-  double operator*(const I3Position&) const;
+  double operator*(const I3Position& other) const;
   
   /**
    * Multiplication by a scalar

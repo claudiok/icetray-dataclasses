@@ -242,14 +242,6 @@ void I3Direction::CalcSphFromCar()
 }
 
 //-----------------------------------------------------------
-I3Direction I3Direction::Cross(const I3Direction& d) const{
-  if (!isCalculated_) CalcCarFromSph();
-  return I3Direction (yDir_*d.GetZ() - zDir_*d.GetY(),
-                      zDir_*d.GetX() - xDir_*d.GetZ(),
-                      xDir_*d.GetY() - yDir_*d.GetX());
-}
-
-//-----------------------------------------------------------
 I3Position I3Direction::Cross(const I3Position& d) const{
   if (!isCalculated_) CalcCarFromSph();
   return I3Position (yDir_*d.GetZ() - zDir_*d.GetY(),
@@ -261,18 +253,6 @@ I3Position I3Direction::Cross(const I3Position& d) const{
 double I3Direction::Dot(const I3Direction& d) {
   if (!isCalculated_) CalcCarFromSph();
   return (xDir_*d.GetX() + yDir_*d.GetY() + zDir_*d.GetZ());
-}
-
-//-----------------------------------------------------------
-double I3Direction::operator*(const I3Direction& other) const{
-  if(isCalculated_ && other.isCalculated_)
-    return xDir_*other.xDir_ + yDir_*other.yDir_ + zDir_*other.zDir_;
-  //if one of the directions doesn't already have cartesian
-  //coordinates calculated, calculating them would be less efficient
-  double cad=cos(azimuth_ - other.azimuth_);
-  double czd=cos(zenith_ - other.zenith_);
-  double czs=cos(zenith_ + other.zenith_);
-  return 0.5*(cad*(czd-czs)+czd+czs);
 }
 
 //-----------------------------------------------------------
