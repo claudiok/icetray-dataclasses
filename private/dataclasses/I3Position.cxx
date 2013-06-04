@@ -42,6 +42,28 @@ isCalculated_(true)
 {}
 
 //-----------------------------------------------------------
+void I3Position::SetPosition(const I3Position& p) {
+  x_=p.x_; y_=p.y_; z_=p.z_;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Position::SetPos(const I3Position& p) {
+  SetPosition(p);
+}
+
+//-----------------------------------------------------------
+void I3Position::SetPosition(double x, double y, double z) {
+  x_=x; y_=y; z_=z;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Position::SetPos(double x, double y, double z) {
+  SetPosition(x, y, z);
+}
+
+//-----------------------------------------------------------
 void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
 {
 // Store position according to reference frame f
@@ -73,6 +95,26 @@ void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
     log_fatal("Unsupported reference frame passed to I3Position::SetPosition: %i",frame);
     break;
   }
+}
+
+//-----------------------------------------------------------
+void I3Position::ResetPosition() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Position::ResetPos() { ResetPosition(); }
+
+//-----------------------------------------------------------
+void I3Position::NullPosition() { ResetPosition(); }
+
+//-----------------------------------------------------------
+void I3Position::NullPos() { ResetPosition(); }
+
+//-----------------------------------------------------------
+void I3Position::ShiftCoordSystem(const I3Position& p) {
+  SetPosition(x_-p.x_, y_-p.y_, z_-p.z_);
 }
 
 //-----------------------------------------------------------
@@ -112,6 +154,14 @@ void I3Position::RotateZ(double angle)
   x_=c*x-s*y;
   y_=s*x+c*y;
   isCalculated_ = false;
+}
+
+//-----------------------------------------------------------
+double I3Position::CalcDistance(const I3Position& p) const {
+  const double dx = x_-p.x_;
+  const double dy = y_-p.y_;
+  const double dz = z_-p.z_;
+  return std::sqrt(dx*dx+dy*dy+dz*dz);
 }
 
 //-----------------------------------------------------------

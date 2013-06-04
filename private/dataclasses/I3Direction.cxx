@@ -81,6 +81,32 @@ zDir_(p.GetZ())
 }
 
 //-----------------------------------------------------------
+void I3Direction::SetDirection(const I3Direction& d)
+{
+  *this=d;
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDir(const I3Direction& d)
+{
+  *this=d;
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDirection(double zen, double azi)
+{
+  zenith_=zen;
+  azimuth_=azi;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDir(double zen, double azi)
+{
+  SetDirection(zen, azi);
+}
+
+//-----------------------------------------------------------
 void I3Direction::SetThetaPhi(double theta, double phi)
 {
   if (theta>I3Constants::pi) theta = 2.*I3Constants::pi-theta;
@@ -90,6 +116,35 @@ void I3Direction::SetThetaPhi(double theta, double phi)
   azimuth_=azimuth;
   isCalculated_=false;
 }
+
+//-----------------------------------------------------------
+void I3Direction::SetDirection(double x, double y, double z)
+{
+  xDir_=x; yDir_=y; zDir_=z;
+  CalcSphFromCar();
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDir(double x, double y, double z)
+{
+  SetDirection(x, y, z);
+}
+
+//-----------------------------------------------------------
+void I3Direction::ResetDirection()
+{
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
+}
+
+//-----------------------------------------------------------
+inline void I3Direction::ResetDir() { ResetDirection(); }
+
+//-----------------------------------------------------------
+void I3Direction::NullDirection() { ResetDirection(); }
+
+//-----------------------------------------------------------
+void I3Direction::NullDir() { ResetDirection(); }
 
 //-----------------------------------------------------------
 void I3Direction::RotateX(double angle)

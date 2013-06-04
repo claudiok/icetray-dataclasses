@@ -101,27 +101,22 @@ class I3Direction : public I3FrameObject
    * Store direction from direction d
    * \deprecated Use the assignment operator instead
    */
-  inline void SetDirection(const I3Direction& d) __attribute__ ((deprecated)) { *this=d; }
-  inline void SetDir(const I3Direction& d) __attribute__ ((deprecated)) { *this=d; }
+  void SetDirection(const I3Direction& d) __attribute__ ((deprecated));
+  void SetDir(const I3Direction& d) __attribute__ ((deprecated));
 
   /**
    * Store direction with zen and azi (2 arguments)
    * \deprecated Use the spherical constructor and assignment operator instead
    */
-  inline void SetDirection(double zen, double azi) __attribute__ ((deprecated)) {
-    zenith_=zen; azimuth_=azi; isCalculated_=false;
-  }
-  inline void SetDir(double zen, double azi) __attribute__ ((deprecated)) { SetDirection(zen, azi); }
+  void SetDirection(double zen, double azi) __attribute__ ((deprecated));
+  void SetDir(double zen, double azi) __attribute__ ((deprecated));
 
   /**
    * Store direction with x, y, z (3 arguments)
    * \deprecated Use the cartesian constructor and assignment operator instead
    */
-  inline void SetDirection(double x, double y, double z) __attribute__ ((deprecated)) {
-    xDir_=x; yDir_=y; zDir_=z;
-    CalcSphFromCar();
-  }
-  inline void SetDir(double x, double y, double z) __attribute__ ((deprecated)) { SetDirection(x, y, z); }
+  void SetDirection(double x, double y, double z) __attribute__ ((deprecated));
+  void SetDir(double x, double y, double z) __attribute__ ((deprecated));
 
   /**
    * Store direction with theta, phi
@@ -130,18 +125,17 @@ class I3Direction : public I3FrameObject
 
   /**
    * Reset all elements of I3Direction to NAN
+   * \deprecated Use the default constructor and assignment operator instead
    */
-  inline void ResetDirection() {
-    xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
-    isCalculated_=true;
-  }
-  inline void ResetDir() { ResetDirection(); }
+  void ResetDirection() __attribute__ ((deprecated));
+  void ResetDir() __attribute__ ((deprecated));
 
   /**
    * Set null direction for non-existing direction (ResetDirection)
+   * \deprecated Use the default constructor and assignment operator instead
    */
-  inline void NullDirection() { ResetDirection(); }
-  inline void NullDir() { ResetDirection(); }
+  void NullDirection() __attribute__ ((deprecated));
+  void NullDir() __attribute__ ((deprecated));
 
   //--------------
 
