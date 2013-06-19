@@ -25,11 +25,23 @@ void I3TriggerReadoutConfig::serialize(Archive& ar, unsigned version)
 template <class Archive>
 void I3TriggerStatus::serialize(Archive& ar, unsigned version)
 {
-  if (version>i3triggerstatus_version_)
+  if (version>3)
     log_fatal("Attempting to read version %u from file but running version %u of I3TriggerStatus class.",version,i3triggerstatus_version_);
 
   ar & make_nvp("Name", name_);
-  ar & make_nvp("Settings", settings_);
+  if(version<3)
+    {
+      ar & make_nvp("Settings", settings_);
+    }
+  else
+    {
+      std::map<std::string, std::string> settings;
+      ar & make_nvp("Settings", settings);
+      for(std::map<std::string,std::string>::iterator iter = settings.begin();
+          iter != settings.end(); ++iter){
+        settings_[iter->first] = atoi(iter->second.c_str());
+      }
+    }
   //in version 1, only a single readout window was saved -> map to global subdetector (0)
   // only provided for backward compatibility reading...
   if(version==1)

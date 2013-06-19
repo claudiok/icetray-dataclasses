@@ -263,7 +263,7 @@ template <class Archive>
 void 
 I3DOMCalibration::serialize(Archive& ar, unsigned version)
 {
-  if (version>i3domcalibration_version_)
+  if (version>10)
     log_fatal("Attempting to read version %u from file but running version %u of I3DOMCalibration class.",version,i3domcalibration_version_);
   ar & make_nvp("temperature",temperature_);
   ar & make_nvp("fadcGain",fadcGain_);
@@ -424,6 +424,15 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("relativeDomEff", relativeDomEff_);
       ar & make_nvp("noiseRate", noiseRate_);
+    }
+  if (version > 9)
+    {
+      double junk = 0;
+      ar & make_nvp("noiseThermalRate", junk);
+      ar & make_nvp("noiseDecayRate", junk);
+      ar & make_nvp("noiseScintillationMean", junk);
+      ar & make_nvp("noiseScintillationSigma", junk);
+      ar & make_nvp("noiseScintillationHits", junk);
     }
 
 }
