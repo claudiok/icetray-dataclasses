@@ -58,10 +58,6 @@ print dir2
 dir2.rotate_z(90*icetray.I3Units.deg)
 print dir2
 
-dir3 = dataclasses.I3Direction()
-dir3.set_direction(dir2)
-print dir3
-
 # Testing DOMFunctions
 print 'Testing I3DOMFunctions'
 ds = dataclasses.I3DOMStatus()
@@ -100,7 +96,7 @@ print 'Testing I3Position'
 pos = dataclasses.I3Position(1.1, 2.2, 3.3)
 print pos
 pos2 = dataclasses.I3Position(0, 0, 0)
-distance = pos.calc_distance(pos2)
+distance = abs(pos-pos2)
 print "pos.r =", pos.r
 print "distance =", distance
 ENSURE(abs(pos.r-distance)<1e-5*I3Units.m, "Distances don't match")

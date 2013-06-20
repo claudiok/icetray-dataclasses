@@ -28,6 +28,9 @@
 
 static const unsigned i3direction_version_ = 0;
 
+//Forward declaration
+class I3Position;
+
 /**
  * @brief The basic direction class for IceCube. 
  *
@@ -68,7 +71,7 @@ class I3Direction : public I3FrameObject
   zenith_(NAN),
   azimuth_(NAN),
   isCalculated_(false)
-  {;}
+  {}
 
   /**
    * Additional constructor: 2 arguments mean construct dir. with zen,azi
@@ -77,39 +80,43 @@ class I3Direction : public I3FrameObject
   zenith_(zen),
   azimuth_(azi),
   isCalculated_(false)
-  {;}
+  {}
 
   /**
    * Additional constructor: 3 arguments mean construct dir. with x,y,z
    */
-  I3Direction(double x, double y, double z) {
-    SetDirection(x,y,z);
+  I3Direction(double x, double y, double z):
+  xDir_(x),
+  yDir_(y),
+  zDir_(z)
+  {
+    CalcSphFromCar();
   }
+  
+  explicit I3Direction(const I3Position&);
 
   //--------------
 
   /**
    * Store direction from direction d
+   * \deprecated Use the assignment operator instead
    */
-  inline void SetDirection(const I3Direction& d) { *this=d; }
-  inline void SetDir(const I3Direction& d) { *this=d; }
+  void SetDirection(const I3Direction& d) __attribute__ ((deprecated));
+  void SetDir(const I3Direction& d) __attribute__ ((deprecated));
 
   /**
    * Store direction with zen and azi (2 arguments)
+   * \deprecated Use the spherical constructor and assignment operator instead
    */
-  inline void SetDirection(double zen, double azi) {
-    zenith_=zen; azimuth_=azi; isCalculated_=false;
-  }
-  inline void SetDir(double zen, double azi) { SetDirection(zen, azi); }
+  void SetDirection(double zen, double azi) __attribute__ ((deprecated));
+  void SetDir(double zen, double azi) __attribute__ ((deprecated));
 
   /**
    * Store direction with x, y, z (3 arguments)
+   * \deprecated Use the cartesian constructor and assignment operator instead
    */
-  inline void SetDirection(double x, double y, double z) {
-    xDir_=x; yDir_=y; zDir_=z;
-    CalcSphFromCar();    
-  }
-  inline void SetDir(double x, double y, double z) { SetDirection(x, y, z); }
+  void SetDirection(double x, double y, double z) __attribute__ ((deprecated));
+  void SetDir(double x, double y, double z) __attribute__ ((deprecated));
 
   /**
    * Store direction with theta, phi
@@ -118,18 +125,17 @@ class I3Direction : public I3FrameObject
 
   /**
    * Reset all elements of I3Direction to NAN
+   * \deprecated Use the default constructor and assignment operator instead
    */
-  inline void ResetDirection() {
-    xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
-    isCalculated_=true;
-  }
-  inline void ResetDir() { ResetDirection(); }
+  void ResetDirection() __attribute__ ((deprecated));
+  void ResetDir() __attribute__ ((deprecated));
 
   /**
    * Set null direction for non-existing direction (ResetDirection)
+   * \deprecated Use the default constructor and assignment operator instead
    */
-  inline void NullDirection() { ResetDirection(); }
-  inline void NullDir() { ResetDirection(); }
+  void NullDirection() __attribute__ ((deprecated));
+  void NullDir() __attribute__ ((deprecated));
 
   //--------------
 
@@ -204,12 +210,52 @@ class I3Direction : public I3FrameObject
   /**
    * Cross product of this x d
    */
-  I3Direction Cross(const I3Direction& d);
+  I3Direction Cross(const I3Direction& d) const{
+    if (!isCalculated_) CalcCarFromSph();
+    return I3Direction (yDir_*d.GetZ() - zDir_*d.GetY(),
+                        zDir_*d.GetX() - xDir_*d.GetZ(),
+                        xDir_*d.GetY() - yDir_*d.GetX());
+  }
+  
+  /**
+   * Vector (cross) product
+   */
+  I3Position Cross(const I3Position&) const;
 
   /**
    * Dot product of this . d
+   * \deprecated Use the overloaded operator* instead
    */
-  double Dot(const I3Direction& d);
+  double Dot(const I3Direction& d) __attribute__ ((deprecated));
+  
+  /**
+   * Scalar (dot) product
+   */
+  double operator*(const I3Direction& other) const{
+    if(isCalculated_ && other.isCalculated_)
+      return xDir_*other.xDir_ + yDir_*other.yDir_ + zDir_*other.zDir_;
+    //if one of the directions doesn't already have cartesian
+    //coordinates calculated, calculating them would be less efficient
+    double cad=cos(azimuth_ - other.azimuth_);
+    double czd=cos(zenith_ - other.zenith_);
+    double czs=cos(zenith_ + other.zenith_);
+    return 0.5*(cad*(czd-czs)+czd+czs);
+  }
+  
+  /**
+   * Scalar (dot) product
+   */
+  double operator*(const I3Position& other) const;
+  
+  /**
+   * Multiplication by a scalar
+   */
+  I3Position operator*(double) const;
+  
+  /**
+   * Division by a scalar
+   */
+  I3Position operator/(double) const;
 
  protected:
   /**
@@ -264,6 +310,8 @@ inline bool operator==(const I3Direction& lhs, const I3Direction& rhs)
   return (lhs.GetZenith()  == rhs.GetZenith() &&
           lhs.GetAzimuth() == rhs.GetAzimuth());
 }
+
+I3Position operator*(double, const I3Direction&);
 
 std::ostream& operator<<(std::ostream& oss, const I3Direction& d);
 

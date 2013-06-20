@@ -427,18 +427,18 @@ class I3Particle : public I3FrameObject
   void SetLocationTypeString(const std::string &str);
 
   const I3Position& GetPos() const { return pos_; }
-  void SetPos(const I3Position& p) { pos_.SetPosition(p); }
+  void SetPos(const I3Position& p) { pos_=p; }
   void SetPos(double p1, double p2, double p3, 
 	      I3Position::RefFrame frame)
     { pos_.SetPosition(p1,p2,p3,frame); }
   void SetPos(double x, double y, double z)
-    { pos_.SetPosition(x,y,z); }
+    { pos_=I3Position(x,y,z); }
 
   const I3Direction& GetDir() const { return dir_; }
-  void SetDir(const I3Direction& d) { dir_.SetDirection(d); }
-  void SetDir(double zen, double azi) { dir_.SetDirection(zen,azi); }
+  void SetDir(const I3Direction& d) { dir_=d; }
+  void SetDir(double zen, double azi) { dir_=I3Direction(zen,azi); }
   void SetDir(double x, double y, double z) 
-    { dir_.SetDirection(x,y,z); }
+    { dir_=I3Direction(x,y,z); }
 
   void SetThetaPhi(double theta, double phi) { dir_.SetThetaPhi(theta,phi); }
 

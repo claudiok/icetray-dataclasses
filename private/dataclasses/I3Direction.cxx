@@ -4,6 +4,7 @@
 #include <iostream>
 #include <icetray/serialization.h>
 #include <dataclasses/I3Direction.h>
+#include <dataclasses/I3Position.h>
 #include <cmath>
 #include <icetray/I3Units.h>
 
@@ -71,6 +72,43 @@ I3_SERIALIZABLE(I3Direction);
 I3_SERIALIZABLE(I3DirectionVect);
 
 //-----------------------------------------------------------
+I3Direction::I3Direction(const I3Position& p):
+xDir_(p.GetX()),
+yDir_(p.GetY()),
+zDir_(p.GetZ())
+{
+  CalcSphFromCar();
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDirection(const I3Direction& d)
+{
+  *this=d;
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDir(const I3Direction& d)
+{
+  *this=d;
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDirection(double zen, double azi)
+{
+  zenith_=zen;
+  azimuth_=azi;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDir(double zen, double azi)
+{
+  zenith_=zen;
+  azimuth_=azi;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
 void I3Direction::SetThetaPhi(double theta, double phi)
 {
   if (theta>I3Constants::pi) theta = 2.*I3Constants::pi-theta;
@@ -79,6 +117,45 @@ void I3Direction::SetThetaPhi(double theta, double phi)
   if (azimuth>=2.*I3Constants::pi) azimuth -= 2*I3Constants::pi;
   azimuth_=azimuth;
   isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDirection(double x, double y, double z)
+{
+  xDir_=x; yDir_=y; zDir_=z;
+  CalcSphFromCar();
+}
+
+//-----------------------------------------------------------
+void I3Direction::SetDir(double x, double y, double z)
+{
+  xDir_=x; yDir_=y; zDir_=z;
+  CalcSphFromCar();
+}
+
+//-----------------------------------------------------------
+void I3Direction::ResetDirection()
+{
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
+}
+
+//-----------------------------------------------------------
+inline void I3Direction::ResetDir() {
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
+}
+
+//-----------------------------------------------------------
+void I3Direction::NullDirection() {
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
+}
+
+//-----------------------------------------------------------
+void I3Direction::NullDir() {
+  xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
+  isCalculated_=true;
 }
 
 //-----------------------------------------------------------
@@ -165,17 +242,38 @@ void I3Direction::CalcSphFromCar()
 }
 
 //-----------------------------------------------------------
-I3Direction I3Direction::Cross(const I3Direction& d) {
+I3Position I3Direction::Cross(const I3Position& d) const{
   if (!isCalculated_) CalcCarFromSph();
-  return I3Direction (yDir_*d.GetZ() - zDir_*d.GetY(),
-                      zDir_*d.GetX() - xDir_*d.GetZ(),
-                      xDir_*d.GetY() - yDir_*d.GetX());
+  return I3Position (yDir_*d.GetZ() - zDir_*d.GetY(),
+                     zDir_*d.GetX() - xDir_*d.GetZ(),
+                     xDir_*d.GetY() - yDir_*d.GetX());
 }
 
 //-----------------------------------------------------------
 double I3Direction::Dot(const I3Direction& d) {
   if (!isCalculated_) CalcCarFromSph();
   return (xDir_*d.GetX() + yDir_*d.GetY() + zDir_*d.GetZ());
+}
+
+//-----------------------------------------------------------
+double I3Direction::operator*(const I3Position& other) const{
+  if (!isCalculated_) CalcCarFromSph();
+  return xDir_*other.GetX() + yDir_*other.GetY() + zDir_*other.GetZ();
+}
+
+//-----------------------------------------------------------
+I3Position I3Direction::operator*(double a) const{
+  return I3Position(a,I3Constants::pi-zenith_,azimuth_-I3Constants::pi,I3Position::sph);
+}
+
+//-----------------------------------------------------------
+I3Position I3Direction::operator/(double a) const{
+  return I3Position(1/a,I3Constants::pi-zenith_,azimuth_-I3Constants::pi,I3Position::sph);
+}
+
+//-----------------------------------------------------------
+I3Position operator*(double a, const I3Direction& d){
+  return(d*a);
 }
 
 //-----------------------------------------------------------

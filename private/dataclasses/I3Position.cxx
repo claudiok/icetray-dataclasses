@@ -5,6 +5,7 @@
 #include <iostream>
 #include <icetray/serialization.h>
 #include "dataclasses/I3Position.h"
+#include "dataclasses/I3Direction.h"
 #include "dataclasses/I3Constants.h"
 #include "icetray/I3Units.h"
 
@@ -27,6 +28,38 @@ I3Position::serialize(Archive& ar, unsigned version)
 }
 
 I3_SERIALIZABLE(I3Position);
+
+//-----------------------------------------------------------
+I3Position::I3Position(const I3Direction& d):
+x_(d.GetX()),
+y_(d.GetY()),
+z_(d.GetY()),
+r_(1),
+theta_(d.CalcTheta()),
+phi_(d.CalcPhi()),
+rho_(sin(theta_)),
+isCalculated_(true)
+{}
+
+//-----------------------------------------------------------
+void I3Position::SetPosition(const I3Position& p) {
+  *this=p;
+}
+
+//-----------------------------------------------------------
+void I3Position::SetPos(const I3Position& p) {
+  *this=p;
+}
+
+//-----------------------------------------------------------
+void I3Position::SetPosition(double x, double y, double z) {
+  *this=I3Position(x,y,z);
+}
+
+//-----------------------------------------------------------
+void I3Position::SetPos(double x, double y, double z) {
+  *this=I3Position(x,y,z);
+}
 
 //-----------------------------------------------------------
 void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
@@ -57,9 +90,38 @@ void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
     break;
     
   default: // Unsupported reference frame
-    ResetPosition();
+    log_fatal("Unsupported reference frame passed to I3Position::SetPosition: %i",frame);
     break;
   }
+}
+
+//-----------------------------------------------------------
+void I3Position::ResetPosition() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Position::ResetPos() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Position::NullPosition() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Position::NullPos() {
+  x_=NAN; y_=NAN; z_=NAN;
+  isCalculated_=false;
+}
+
+//-----------------------------------------------------------
+void I3Position::ShiftCoordSystem(const I3Position& p) {
+  SetPosition(x_-p.x_, y_-p.y_, z_-p.z_);
 }
 
 //-----------------------------------------------------------
@@ -99,6 +161,26 @@ void I3Position::RotateZ(double angle)
   x_=c*x-s*y;
   y_=s*x+c*y;
   isCalculated_ = false;
+}
+
+//-----------------------------------------------------------
+double I3Position::CalcDistance(const I3Position& p) const {
+  const double dx = x_-p.x_;
+  const double dy = y_-p.y_;
+  const double dz = z_-p.z_;
+  return std::sqrt(dx*dx+dy*dy+dz*dz);
+}
+
+//-----------------------------------------------------------
+double I3Position::operator*(const I3Direction& rhs) const{
+  return x_*rhs.GetX() + y_*rhs.GetY() + z_*rhs.GetZ();
+}
+
+//-----------------------------------------------------------
+I3Position I3Position::Cross(const I3Direction& d) const{
+  return I3Position (y_*d.GetZ() - z_*d.GetY(),
+                     z_*d.GetX() - x_*d.GetZ(),
+                     x_*d.GetY() - y_*d.GetX());
 }
 
 //-----------------------------------------------------------
@@ -151,7 +233,17 @@ void I3Position::CalcCarSphFromCyl()
 }
 
 //-----------------------------------------------------------
+I3Position operator*(double a, const I3Position& p){
+  return(p*a);
+}
+
+//-----------------------------------------------------------
 std::ostream& operator<<(std::ostream& oss, const I3Position& p){
   oss << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
   return oss;
+}
+
+//-----------------------------------------------------------
+double abs(const I3Position& p){
+	return(p.Magnitude());
 }

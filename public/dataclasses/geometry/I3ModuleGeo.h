@@ -73,7 +73,7 @@ public:
     
     const I3Position &GetPos() const {return pos_;}
     void SetPos(const I3Position& p) {pos_=p;}
-    void SetPos(double x, double y, double z) {pos_.SetPosition(x,y,z);}
+    void SetPos(double x, double y, double z) {pos_=I3Position(x,y,z);}
 
     const I3Orientation &GetOrientation() const {return orientation_;}
     void SetOrientation(const I3Orientation& o) {orientation_=o;}
