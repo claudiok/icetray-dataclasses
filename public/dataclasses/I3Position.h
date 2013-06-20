@@ -402,6 +402,7 @@ I3Position operator*(double, const I3Position&);
 
 std::ostream& operator<<(std::ostream& oss, const I3Position& p);
 
+double abs(const I3Position& p);
 
 I3_POINTER_TYPEDEFS(I3Position);
 BOOST_CLASS_VERSION(I3Position, i3position_version_);

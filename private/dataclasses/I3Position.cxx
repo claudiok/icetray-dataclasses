@@ -242,3 +242,8 @@ std::ostream& operator<<(std::ostream& oss, const I3Position& p){
   oss << "I3Position(" << p.GetX() << "," <<p.GetY() << "," << p.GetZ() << ")";
   return oss;
 }
+
+//-----------------------------------------------------------
+double abs(const I3Position& p){
+	return(p.Magnitude());
+}
