@@ -141,7 +141,7 @@ void I3Direction::ResetDirection()
 }
 
 //-----------------------------------------------------------
-inline void I3Direction::ResetDir() {
+void I3Direction::ResetDir() {
   xDir_=yDir_=zDir_=zenith_=azimuth_=NAN;
   isCalculated_=true;
 }
