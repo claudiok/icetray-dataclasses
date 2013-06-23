@@ -10,6 +10,8 @@
 #include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/lexical_cast.hpp>
 
+#include <unistd.h>
+
 int32_t I3Particle::global_last_pid_ = 0;
 int32_t I3Particle::global_minor_id_ = 0;
 uint64_t I3Particle::global_major_id_ = 0;
@@ -38,9 +40,14 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   }
   
   if(global_major_id_ ==0){
+    char hostname[128];
+    gethostname(hostname, 127);
+    // make sure the string is terminated when too long (POSIX.1-2001)
+    hostname[127]='\0';
+      
     boost::hash<std::string> string_hash;
     std::stringstream s;
-    s<<time(0)<<this_pid<<getenv("HOST");
+    s<<time(0)<<this_pid<<hostname;
     global_major_id_ = string_hash(s.str());
   }
   major_ID_ = global_major_id_;
