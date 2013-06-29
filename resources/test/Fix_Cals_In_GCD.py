@@ -62,7 +62,7 @@ for e,p in dom_geo:
 			print("Bad DOMCal")
 			print('  %s  DOMCalVersion = %s' % (str(e), cal_this_om.dom_cal_version))
 			calibration.dom_cal[e].dom_cal_version = '7.5.0'
-			print('  correcting to %s' % calibration.dom_cal[e].dom_cal_version)		
+			print('  correcting to %s' % calibration.dom_cal[e].dom_cal_version)
 		
 		threshold = dataclasses.spe_pmt_threshold(status_this_om,
 							cal_this_om) / I3Units.mV
@@ -88,10 +88,10 @@ for e,p in dom_geo:
 			dom_geo[k] = dom_geo[e]
 			del dom_geo[e]
 			# move the I3DOMCalibration
- 			dom_cal[k] = dom_cal[e]
+			dom_cal[k] = dom_cal[e]
 			del dom_cal[e]
 			# move the I3DOMStatus
- 			dom_status[k] = dom_status[e]
+			dom_status[k] = dom_status[e]
 			del dom_status[e]			
 
 		# check for unusually low noise DOMs that were incorrectly translated into the DB
