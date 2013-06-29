@@ -9,7 +9,7 @@ from icecube.dataclasses import I3Matrix
 try:
 	import numpy
 except ImportError:
-	print 'This test requires numpy to function'
+	print('This test requires numpy to function')
 	sys.exit(0)
 
 class I3MatrixTest(unittest.TestCase):

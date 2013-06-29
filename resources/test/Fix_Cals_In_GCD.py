@@ -9,7 +9,7 @@ from icecube import icetray, dataclasses, dataio
 ## Fake bad doms list, you can get real ones from BadDomList prject
 badOMs = [OMKey(5,5),OMKey(5,6),OMKey(6,11),OMKey(18,45),OMKey(18,46),OMKey(19,59),
 	  OMKey(40,52),OMKey(44,25),OMKey(44,26),OMKey(44,47),OMKey(44,48)]
-print badOMs
+print(badOMs)
 
 INFILE = expandvars("$I3_PORTS/test-data/sim/GeoCalibDetectorStatus_IC80_DC6.54655.i3.gz")
 
@@ -56,34 +56,34 @@ for e,p in dom_geo:
 		if e.om == 39 and e.string == 72 :
 			if status_this_om.lc_mode != dataclasses.I3DOMStatus.LCMode.UpOrDown :
 				status.dom_status[e].lc_mode = dataclasses.I3DOMStatus.LCMode.UpOrDown
-				print " %s correcting LCMode to %d" % ( str(e), int(dom_status[e].lc_mode) )
+				print(" %s correcting LCMode to %d" % ( str(e), int(dom_status[e].lc_mode) ))
 				
 		if float(cal_this_om.dom_cal_version[:3]) < 7.5 :
-			print "Bad DOMCal"
-			print '  %s  DOMCalVersion = %s' % (str(e), cal_this_om.dom_cal_version)
+			print("Bad DOMCal")
+			print('  %s  DOMCalVersion = %s' % (str(e), cal_this_om.dom_cal_version))
 			calibration.dom_cal[e].dom_cal_version = '7.5.0'
-			print '  correcting to ',calibration.dom_cal[e].dom_cal_version		
+			print('  correcting to %s' % calibration.dom_cal[e].dom_cal_version)		
 		
 		threshold = dataclasses.spe_pmt_threshold(status_this_om,
 							cal_this_om) / I3Units.mV
 
 		if threshold < 0 :
-			print 'Pathological PMT discriminator threshold'
-			print '  %s  threshold = %2.2f mV' % (str(e), threshold)
+			print('Pathological PMT discriminator threshold')
+			print('  %s  threshold = %2.2f mV' % (str(e), threshold))
 			fit = dataclasses.LinearFit()
 			fit.slope = NaN
 			fit.intercept = NaN
 			calibration.domCal[e].pmt_disc_calib = fit
-			print '  correcting to %2.2f mV' % \
-			      (dataclasses.spe_pmt_threshold(status_this_om,calibration.dom_cal[e])/I3Units.mV)
+			print('  correcting to %2.2f mV' % \
+			      (dataclasses.spe_pmt_threshold(status_this_om,calibration.dom_cal[e])/I3Units.mV))
 
 		if e.string == 87 or e.string == 88 :
-			print "There should be no string 87 or 88"
+			print("There should be no string 87 or 88")
 			# make a new omkey
 			k = icetray.OMKey(e.string - 8,e.om)
 			if k in dom_geo :
-				print "Ooops!  It already exists!"
-			print "   moving %s to %s" % (str(e),str(k))
+				print("Ooops!  It already exists!")
+			print("   moving %s to %s" % (str(e),str(k)))
 			# move the I3OMGeo
 			dom_geo[k] = dom_geo[e]
 			del dom_geo[e]
@@ -99,7 +99,7 @@ for e,p in dom_geo:
 			noiseRate = calibration.dom_cal[e].dom_noise_rate
 			if noiseRate < 400 * I3Units.hertz :
 				calibration.dom_cal[e].dom_noise_rate = noiseRate + 1*I3Units.kilohertz
-				print "  correcting noise from %fHz to %fHz in %s" % (noiseRate/I3Units.hertz, calibration.dom_cal[e].dom_noise_rate/I3Units.hertz,e)
+				print("  correcting noise from %fHz to %fHz in %s" % (noiseRate/I3Units.hertz, calibration.dom_cal[e].dom_noise_rate/I3Units.hertz,e))
 				
 			
 del geo_frame['I3Geometry']

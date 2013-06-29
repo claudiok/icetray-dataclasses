@@ -8,7 +8,7 @@ from I3Tray import I3Units
 ## Some examples/simple tests for FilterMasks
 ##
 
-print "Testing I3FilterResults"
+print("Testing I3FilterResults")
 filter1 = dataclasses.I3FilterResult()
 filter1.prescale_passed = True
 filter1.condition_passed = True
@@ -27,7 +27,7 @@ results["Filter1"] = filter1
 results["Filter2"] = filter2
 results["Filter3"] = filter3
 
-print results
+print(results)
 
 ## Check if things passed Filter1
 
@@ -35,17 +35,17 @@ if "Filter1" in results:
     myfilter = results["Filter1"]
     # you need to check condition_passed and prescale_passed
     if myfilter.condition_passed and myfilter.prescale_passed:
-        print "I passed Filter1"
+        print("I passed Filter1")
     else:
-        print "Error.  I should have passed Filter1"
+        print("Error.  I should have passed Filter1")
         exit(99)
 
-print "Testing python attr lock"
+print("Testing python attr lock")
 newfilter = dataclasses.I3FilterResult()
 
 try:
     newfilter.PrescalePassed = True
-    print "Aye, that should have failed partner"
+    print("Aye, that should have failed partner")
     exit(99)
 except:
-    print "Failed as expected.  Carry on"
+    print("Failed as expected.  Carry on")

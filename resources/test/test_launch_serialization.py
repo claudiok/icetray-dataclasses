@@ -14,24 +14,24 @@ while f.more():
     # this makes it easier to use this same script in old and new
     # releases and make sure all is well
     for k,v in launchmap :
-        print k
+        print(k)
         for l in v :
             try :
                 # these are the new pybindings
-                print 4*" " + "RawFADC"
-                print 8*" " + str(l.raw_fadc)
-                print 4*" " + "RawChargeStamp"
-                print 8*" " + str(l.raw_charge_stamp)
-                print 4*" " + "RawATWDs"
+                print(4*" " + "RawFADC")
+                print(8*" " + str(l.raw_fadc))
+                print(4*" " + "RawChargeStamp")
+                print(8*" " + str(l.raw_charge_stamp))
+                print(4*" " + "RawATWDs")
                 for n,a in enumerate(l.raw_atwd):
-                    print 8*" "  + "[%d]" % n + str(a)
+                    print(8*" "  + "[%d]" % n + str(a))
             except AttributeError :
                 # these are the old ones
-                print 4*" " + "RawFADC"
-                print 8*" " + str([ i for i in l.GetRawFADC() ])
-                print 4*" " + "RawChargeStamp"
-                print 8*" " + str([ i for i in l.GetRawChargeStamp()])
-                print 4*" " + "RawATWDs"
+                print(4*" " + "RawFADC")
+                print(8*" " + str([ i for i in l.GetRawFADC() ]))
+                print(4*" " + "RawChargeStamp")
+                print(8*" " + str([ i for i in l.GetRawChargeStamp()]))
+                print(4*" " + "RawATWDs")
                 for i in range(4):
-                    print 8*" " + str([ j for j in l.GetRawATWD(i)] )
+                    print(8*" " + str([ j for j in l.GetRawATWD(i)] ))
                         

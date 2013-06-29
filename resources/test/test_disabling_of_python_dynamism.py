@@ -11,4 +11,4 @@ skip_these = ["I3SuperDST","I3SuperDSTTriggerSeries","I3RecoPulseSeriesMapMask",
               "PairDoubleDouble", "I3Matrix"]
 ENSURE( test_freeze.test_all_classes(dc, skip_these) , "not cool" )
 
-print "PASS"
+print("PASS")
