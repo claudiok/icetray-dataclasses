@@ -12,7 +12,7 @@ months, hence the age test.
 
 """
 
-import os,urllib,datetime,random
+import os,datetime,random
 from icecube import dataclasses
 from icecube.icetray import I3Units
 
@@ -26,7 +26,7 @@ now = datetime.datetime.now()
 filename = os.getenv("I3_PORTS")+'/test-data/tai-utc.dat'
 
 if now-datetime.datetime.fromtimestamp(os.path.getmtime(filename)) > datetime.timedelta(180,0):
-    raise "tai-utc.dat older than six month old re-download from http://maia.usno.navy.mil/ser7/tai-utc.dat"
+    raise RuntimeError("tai-utc.dat older than six month old re-download from http://maia.usno.navy.mil/ser7/tai-utc.dat")
 
 #store Modified julian date of days with leap seconds here
 leap_sec_mjd = []
@@ -156,9 +156,9 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         assert t3.utc_daq_time - t2.utc_daq_time == 1e10
         assert t2.utc_daq_time - t1.utc_daq_time == 1e10
         assert t3.utc_daq_time - t1.utc_daq_time == 2e10
-        assert t1.utc_daq_time == ( 181 + int(year%4==0) )*long(8.64e14) + nanosec*10 - long(1e10)
-        assert t2.utc_daq_time == ( 181 + int(year%4==0) )*long(8.64e14) + nanosec*10 
-        assert t3.utc_daq_time == ( 181 + int(year%4==0) )*long(8.64e14) + nanosec*10 + long(1e10)
+        assert t1.utc_daq_time == ( 181 + int(year%4==0) )*int(8.64e14) + nanosec*10 - int(1e10)
+        assert t2.utc_daq_time == ( 181 + int(year%4==0) )*int(8.64e14) + nanosec*10 
+        assert t3.utc_daq_time == ( 181 + int(year%4==0) )*int(8.64e14) + nanosec*10 + int(1e10)
  
         assert t1.utc_day_of_month == 30
         assert t2.utc_day_of_month == 30
@@ -254,8 +254,8 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
 
 
         assert t3.utc_daq_time - t1.utc_daq_time == 1e10
-        assert t1.utc_daq_time == ( 181 + int(year%4==0) )*long(8.64e14) + nanosec*10 - long(1e10)
-        assert t3.utc_daq_time == ( 181 + int(year%4==0) )*long(8.64e14) + nanosec*10 
+        assert t1.utc_daq_time == ( 181 + int(year%4==0) )*int(8.64e14) + nanosec*10 - int(1e10)
+        assert t3.utc_daq_time == ( 181 + int(year%4==0) )*int(8.64e14) + nanosec*10 
  
         assert t1.utc_day_of_month == 30
         assert t3.utc_day_of_month ==  1
@@ -377,8 +377,8 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         assert t3.utc_daq_time ==  nanosec*10 
         assert (t1 + 2e9).utc_daq_time ==  nanosec*10 
         assert (t2 + 1e9).utc_daq_time ==  nanosec*10 
-        assert t1.utc_daq_time == ( sec_in_year -1 )*long(1e10) + nanosec*10 
-        assert t2.utc_daq_time == ( sec_in_year    )*long(1e10) + nanosec*10 
+        assert t1.utc_daq_time == ( sec_in_year -1 )*int(1e10) + nanosec*10 
+        assert t2.utc_daq_time == ( sec_in_year    )*int(1e10) + nanosec*10 
 
         assert t1.utc_day_of_month == 31
         assert t2.utc_day_of_month == 31
@@ -475,7 +475,7 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         sec_in_year = ( 365 + int(year%4==0) ) * 86400  + int( t1.mod_julian_day-183 in leap_sec_mjd)        
         assert t3.utc_daq_time ==  nanosec*10 
         assert (t1 + 1e9).utc_daq_time ==  nanosec*10 
-        assert t1.utc_daq_time == ( sec_in_year -1 )*long(1e10) + nanosec*10 
+        assert t1.utc_daq_time == ( sec_in_year -1 )*int(1e10) + nanosec*10 
 
         assert t1.utc_day_of_month == 31
         assert t3.utc_day_of_month ==  1
@@ -536,7 +536,7 @@ for i in range(10000):
     assert  int((t1-t2)/I3Units.second) == (d1-d2)*86400 + leap_seconds
 
     #check I3time + double is correct
-    time_delta = ((d2-d1)*86400L- leap_seconds)*I3Units.second
+    time_delta = ((d2-d1)*86400- leap_seconds)*I3Units.second
     assert(t1 + time_delta == t2)
     assert(t2 - time_delta == t1)
 
