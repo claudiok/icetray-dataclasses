@@ -14,7 +14,7 @@ is_fail = False
 
 
 def do_one(Type, name, gen, checksum):
-    print("Writing", Type, end=' ')
+    print("Writing %s" % Type)
     global is_fail
     name += '.i3'
     i3f = dataio.I3File(name, dataio.I3File.Mode.Writing)
@@ -24,7 +24,7 @@ def do_one(Type, name, gen, checksum):
     for value in gen:
         tinst.append(value)
         i += 1
-    print(i, "entries.") 
+    print("%d entries" % i) 
     frame = icetray.I3Frame()
     frame[name] = tinst
 
@@ -42,7 +42,7 @@ def do_one(Type, name, gen, checksum):
         is_fail = True
 
 def check_on(Type, name, gen):
-    print("Reading", Type, end=' ')
+    print("Reading %s" % Type)
     global is_fail
     name += '.i3'
     i3f = dataio.I3File(name, dataio.I3File.Mode.Reading)
@@ -53,10 +53,10 @@ def check_on(Type, name, gen):
     for value in gen:
         if not (thing[i] == value):
             print("********************* FAIL ***********************")
-            print("at ", i, ", ", thing[i], " != ", value)
+            print("at %d, %s != %s" % (i, thing[i], value))
             is_fail = True
         i += 1
-    print("checked", i, "entries.")
+    print("checked %d entries." % i)
 
     
 def gen(n):
