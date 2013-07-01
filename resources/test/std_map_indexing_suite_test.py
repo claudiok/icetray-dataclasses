@@ -14,13 +14,13 @@ try:
 	dataclasses.I3MapStringDouble.keys
 	dataclasses.I3MapUnsignedUnsigned.keys
 except AttributeError:
-	print 'You appear to be using the default map_indexing_suite. Not running tests for std_map_indexing_suite.'
+	print('You appear to be using the default map_indexing_suite. Not running tests for std_map_indexing_suite.')
 	sys.exit(0)
 
 try:
 	sorted([3,2,1])
 except NameError:
-	print 'sorted() is not defined, providing a work-around for python < 2.3'
+	print('sorted() is not defined, providing a work-around for python < 2.3')
 	import copy
 	def sorted(lst):
 		cpy = list(copy.copy(lst)) 
@@ -46,26 +46,26 @@ class I3MapStringDoubleTest(unittest.TestCase):
 			self.assertEquals(k in self.sourceDict.keys(),True)
 	def testKeyIterables(self):
 		"""Various equivalent ways of getting the keys"""
-		self.assertEquals(self.map.keys(), [ key           for key       in self.map.iterkeys() ])
-		self.assertEquals(self.map.keys(), [ key           for key,value in self.map            ])
-		self.assertEquals(self.map.keys(), [ entry.key()   for entry     in self.map            ])
-		self.assertEquals(self.map.keys(), [ entry.first() for entry     in self.map            ])
+		self.assertEquals(list(self.map.keys()), [ key           for key       in self.map.keys() ])
+		self.assertEquals(list(self.map.keys()), [ key           for key,value in self.map            ])
+		self.assertEquals(list(self.map.keys()), [ entry.key()   for entry     in self.map            ])
+		self.assertEquals(list(self.map.keys()), [ entry.first() for entry     in self.map            ])
 	def testValueIterables(self):
 		"""Various equivalent ways of getting the values"""
-		self.assertEquals(self.map.values(), [ value          for value     in self.map.itervalues() ])
-		self.assertEquals(self.map.values(), [ value          for key,value in self.map              ])
-		self.assertEquals(self.map.values(), [ entry.data()   for entry     in self.map              ])
-		self.assertEquals(self.map.values(), [ entry.second() for entry     in self.map              ])
+		self.assertEquals(list(self.map.values()), [ value          for value     in self.map.values() ])
+		self.assertEquals(list(self.map.values()), [ value          for key,value in self.map              ])
+		self.assertEquals(list(self.map.values()), [ entry.data()   for entry     in self.map              ])
+		self.assertEquals(list(self.map.values()), [ entry.second() for entry     in self.map              ])
 	def testIterators(self):
 		"""Iterators work for keys, values, and (k,v) tuples"""
-		self.assertEquals( type( self.map.iteritems().next()  ),tuple)
-		self.assertEquals( type( self.map.iterkeys().next()   ), type( self.sourceDict.keys()[0]   ))
-		self.assertEquals( type( self.map.itervalues().next() ), type( self.sourceDict.values()[0] ))
+		self.assertEquals( type( next(iter(self.map.items()))  ),tuple)
+		self.assertEquals( type( next(iter(self.map.keys()))   ), type( list(self.sourceDict.keys())[0]   ))
+		self.assertEquals( type( next(iter(self.map.values())) ), type( list(self.sourceDict.values())[0] ))
 	def testHasKey(self):
 		"""map.has_key() is equivalent to 'key in map'"""
-		key = self.sourceDict.keys()[0]
+		key = list(self.sourceDict.keys())[0]
 		self.assertEquals(key in self.map,True)
-		self.assertEquals(key in self.map, self.map.has_key(key))
+		self.assertEquals(key in self.map, key in self.map)
 	def testCopyKeys(self):
 		"""can produce a new, equivalent dict from sourceDict via dict.update(map)"""
 		d = dict(); d.update(self.map)
@@ -94,7 +94,7 @@ class IterRunner(object):
 	def setUp(self):
 		from icecube import icetray,dataclasses
 		self.map = dataclasses.I3MapStringDouble()
-		for i in xrange(10000):
+		for i in range(10000):
 			v = i/1.0e4
 			k = str(hash(v))
 			self.map[k] = v 
@@ -103,20 +103,20 @@ class IterRunner(object):
 	def iterClassicUnpack(self):
 		return [(key,value) for key,value in self.map] 
 	def getItems(self):
-		return self.map.items()
+		return list(self.map.items())
 	def getItemsUnpack(self):
 		return [(key,value) for key,value in self.map.items()]
 	def iterItems(self):
-		return [item for item in self.map.iteritems()]
+		return [item for item in self.map.items()]
 	def iterItemsUnpack(self):
-		return [(key,value) for key,value in self.map.iteritems()]
+		return [(key,value) for key,value in self.map.items()]
 
 class I3MapStringDoublePerformanceTest(unittest.TestCase):
 	"""Run some quick benchmarks"""
 	def setUp(self):
 		from icecube import icetray,dataclasses
 		self.map = dataclasses.I3MapStringDouble()
-		for i in xrange(5000):
+		for i in range(5000):
 			v = i/5.0e3
 			k = str(hash(v))
 			self.map[k] = v 
@@ -125,11 +125,11 @@ class I3MapStringDoublePerformanceTest(unittest.TestCase):
 		this_script = os.path.basename(os.path.splitext(__file__)[0])
 		setup = 'from %s import IterRunner; case = IterRunner(); case.setUp()' % this_script
 		def runCase(meth,desc,num=100):
-			print '%3.dx %s:' % (num,desc)
+			print('%3.dx %s:' % (num,desc))
 			results = timeit.Timer(stmt='case.%s()'%meth,setup=setup).timeit(num)
-			print '===> %.3f s' % results
-		print ''
-		print 'Performance improvements (and some regressions) with the new map interfaces:'
+			print('===> %.3f s' % results)
+		print('')
+		print('Performance improvements (and some regressions) with the new map interfaces:')
 		runCase('iterClassic','[(pair.key(),pair.data()) for pair in i3map]\t(the old way)')
 		runCase('iterClassicUnpack','[(key,value) for key,value in i3map]\t\t(with implicit unpacking)')
 		runCase('iterItemsUnpack','[(key,value) for key,value in i3map.iteritems()]\t(item iterator with implicit unpacking)')

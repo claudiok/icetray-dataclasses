@@ -39,47 +39,47 @@ def test_tree(tree):
     tree.dump("+locationType-majorID")
 
     # these are properties
-    print "*** most energetic primary ***"
-    print tree.most_energetic_primary
-    print "***  most energetic cascade ***"
-    print tree.most_energetic_cascade
-    print "***  most energetic inice ***"
-    print tree.most_energetic_in_ice
-    print "***  most energetic track ***"
-    print tree.most_energetic_track
-    print "***  most energetic stochastic ***"
-    print tree.most_energetic_stochastic
-    print "***  most energetic muon ***"
-    print tree.most_energetic_muon
-    print "***  most energetic nucleus ***"
-    print tree.most_energetic_nucleus
-    print "***  most energetic neutrino ***"
-    print tree.most_energetic_neutrino
-    print "*** number of atmospheric muons = ", tree.number_of_atmospheric_muons
-    print "***  InIce particle list ***"
-    print tree.in_ice
-    print "***  primary list ***"
-    print tree.primaries
-    print "*** number of cascades = ", tree.n_cascades
-    print "***  neurtino event type = ", tree.neutrino_event_type 
-    print "*** is neutral current = ",tree.is_neutral_current 
-    print "*** is charged current = ",tree.is_charged_current 
-    print "*** is glashow resonance = ", tree.is_glashow_resonance 
-    print "*** check neutrino = ", tree.check_neutrino
+    print("*** most energetic primary ***")
+    print(tree.most_energetic_primary)
+    print("***  most energetic cascade ***")
+    print(tree.most_energetic_cascade)
+    print("***  most energetic inice ***")
+    print(tree.most_energetic_in_ice)
+    print("***  most energetic track ***")
+    print(tree.most_energetic_track)
+    print("***  most energetic stochastic ***")
+    print(tree.most_energetic_stochastic)
+    print("***  most energetic muon ***")
+    print(tree.most_energetic_muon)
+    print("***  most energetic nucleus ***")
+    print(tree.most_energetic_nucleus)
+    print("***  most energetic neutrino ***")
+    print(tree.most_energetic_neutrino)
+    print("*** number of atmospheric muons = ", tree.number_of_atmospheric_muons)
+    print("***  InIce particle list ***")
+    print(tree.in_ice)
+    print("***  primary list ***")
+    print(tree.primaries)
+    print("*** number of cascades = ", tree.n_cascades)
+    print("***  neurtino event type = ", tree.neutrino_event_type) 
+    print("*** is neutral current = ",tree.is_neutral_current) 
+    print("*** is charged current = ",tree.is_charged_current) 
+    print("*** is glashow resonance = ", tree.is_glashow_resonance) 
+    print("*** check neutrino = ", tree.check_neutrino)
     
     # these have to remain functions since they
     # have multiple solutions for a single tree and
     # require input
-    print tree.get_most_energetic(dataclasses.I3Particle.ParticleType.MuMinus)
-    print tree.get_number_of_stochastics(10*I3Units.GeV)
+    print(tree.get_most_energetic(dataclasses.I3Particle.ParticleType.MuMinus))
+    print(tree.get_number_of_stochastics(10*I3Units.GeV))
 
     p = dataclasses.I3Particle()
     tree.add_primary(p)
     d = dataclasses.I3Particle()
     tree.append_child(p,d)
 
-    print d.major_id
-    print d.minor_id
+    print(d.major_id)
+    print(d.minor_id)
     hit = dataclasses.I3MCHit(d.major_id,d.minor_id)
 
     light_generator = tree.get_particle_from_hit(hit)
@@ -96,8 +96,8 @@ def test_tree(tree):
 
 
     if len(tree) > 0 :
-        print tree
-        print [pi.energy for pi in tree]
+        print(tree)
+        print([pi.energy for pi in tree])
         if tree.most_energetic_muon :
             muon_energies = [p.energy for p in tree \
                              if p.type == dataclasses.I3Particle.MuMinus or \
