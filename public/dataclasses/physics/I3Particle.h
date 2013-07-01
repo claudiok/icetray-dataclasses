@@ -13,6 +13,7 @@
 #include "dataclasses/I3Direction.h"
 #include "icetray/I3Units.h"
 #include "dataclasses/I3Vector.h"
+#include "dataclasses/physics/I3ParticleID.h"
 #include <map>
 #include <string>
 
@@ -391,6 +392,8 @@ class I3Particle : public I3FrameObject
   bool HasDirection() const;
   bool HasEnergy() const;
 
+  operator I3ParticleID() const{ I3ParticleID id={major_ID_, ID_}; return id; }
+	
   int32_t GetID() const { 
     log_warn("I3Particle::GetID is deprecated.  Please use I3Particle::GetMinorID.");
     return ID_; 

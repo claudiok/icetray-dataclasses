@@ -36,6 +36,7 @@ i3_add_pybindings(dataclasses
   I3MCList.cxx
   I3MCTree.cxx
   I3LinearizedMCTree.cxx
+  I3ParticleID.cxx
   I3Particle.cxx
   I3Position.cxx
   I3RecoHit.cxx
