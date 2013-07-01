@@ -184,7 +184,7 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		
 		
 		pass
-	if sys.version_info.major < 3:
+	if sys.version_info[0] < 3:
 		def test_has_key(self):
 			"""dict.has_key() is equivalent to map.has_key()"""
 			key = list(self.dict.keys())[0]
@@ -200,7 +200,7 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		mapItems = sorted(self.map.items())
 		self.assertEquals(dictItems,mapItems)
 		pass
-	if sys.version_info.major < 3:
+	if sys.version_info[0] < 3:
 		def test_iteritems(self):
 			"""dict.iteritems() is equivalent to map.iteritems()"""
 			dictItems = sorted(list(self.dict.iteritems()))
