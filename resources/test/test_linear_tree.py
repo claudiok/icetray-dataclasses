@@ -4,7 +4,7 @@ import sys
 infiles = sys.argv[1:]
 
 if len(infiles) == 0:
-	print "This test requires an MC data file with Q frames containing an I3MCTree."
+	print("This test requires an MC data file with Q frames containing an I3MCTree.")
 	sys.exit(0)
 
 import unittest, math
@@ -49,13 +49,13 @@ class LinearTreeTest(unittest.TestCase):
 		
 		
 	def testEquivalence(self):
-		from itertools import izip
-		for raw, reco in izip(self.mctree, self.re_mctree):
+		
+		for raw, reco in zip(self.mctree, self.re_mctree):
 			try:
 				self.assertEqualParticle(raw, reco)
-			except AssertionError, e:
-				print raw
-				print reco
+			except AssertionError as e:
+				print(raw)
+				print(reco)
 				raise e
 			
 			
