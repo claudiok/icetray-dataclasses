@@ -1,8 +1,9 @@
 #ifndef I3ParticleID_H_INCLUDED
 #define I3ParticleID_H_INCLUDED
 
+#ifndef __CINT__
 #include <icetray/serialization.h>
-#include <dataclasses/I3Map.h>
+#endif
 
 /**
  * @brief A single object for holding the ID numbers of an I3Particle
@@ -21,6 +22,7 @@ struct I3ParticleID{
 	}
 	
 private:
+#ifndef __CINT__
 	friend class boost::serialization::access;
 		
 	template <class Archive> void serialize(Archive & ar, const unsigned version)
@@ -28,8 +30,10 @@ private:
 		ar & make_nvp("majorID",majorID);
 		ar & make_nvp("minorID",minorID);
 	}
+#endif
 };
 
+#ifndef __CINT__
 #include <I3/hash_map.h>
 
 #ifdef USING_GCC_EXT_HASH_MAP
@@ -52,6 +56,7 @@ struct i3hash<I3ParticleID>{
 	}
 };
 
+#endif
 #endif
 
 #endif
