@@ -6,12 +6,12 @@
 # with std_map_indexing_suite.
 # JvS 2009-03-27
 
-import unittest
+import unittest, sys
 
 try:
 	sorted([3,2,1])
 except NameError:
-	print 'sorted() is not defined, providing a work-around for python < 2.3'
+	print('sorted() is not defined, providing a work-around for python < 2.3')
 	import copy
 	def sorted(lst):
 		cpy = list(copy.copy(lst)) 
@@ -55,7 +55,7 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		pass
 	def test___delitem__(self):
 		"""dict.__delitem__() is equivalent to map.__delitem__()"""
-		k = self.dict.keys()[0]
+		k = list(self.dict.keys())[0]
 		self.assertEquals(self.dict.__delitem__(k),self.map.__delitem__(k))
 		self.assertEquals(k in self.map,k in self.dict)
 		pass
@@ -87,8 +87,8 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		newMap = self.mapClass()
 		self.assertEquals(newMap.items(),[])
 		newMap = self.mapClass(self.dict)
-		self.assertEquals(sorted(newMap.items()),sorted(self.dict.items()))
-		newMap = self.mapClass(self.dict.items())
+		self.assertEquals(sorted(list(newMap.items())),sorted(list(self.dict.items())))
+		newMap = self.mapClass(list(self.dict.items()))
 		self.assertEquals(sorted(newMap.items()),sorted(self.dict.items()))
 		
 		pass
@@ -164,7 +164,7 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		pass
 	def test_fromkeys(self):
 		"""dict.fromkeys() is equivalent to map.fromkeys()"""
-		v = self.dict.values()[0]
+		v = list(self.dict.values())[0]
 		newDict = self.dict.fromkeys(self.dict.keys(),v)
 		newMap = self.map.fromkeys(self.map.keys(),v)
 		self.assertEquals(sorted(self.dict.keys()),sorted(newDict.keys()))
@@ -176,7 +176,7 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 	def test_get(self):
 		"""dict.get() is equivalent to map.get()"""
 		default = 42
-		key = self.dict.keys()[0]
+		key = list(self.dict.keys())[0]
 		nokey = 'i am not a key'
 		self.assertEquals(self.map[key],self.map.get(key,default))
 		self.assertEquals(default,self.map.get(nokey,default))
@@ -184,39 +184,41 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		
 		
 		pass
-	def test_has_key(self):
-		"""dict.has_key() is equivalent to map.has_key()"""
-		key = self.dict.keys()[0]
-		nokey = 'i am not a key'
-		self.assertEquals(self.map.has_key(key),self.dict.has_key(key))
-		self.assertEquals(self.map.has_key(nokey),self.dict.has_key(nokey))
-		self.assertEquals(self.map.has_key(key),True)
-		self.assertEquals(self.map.has_key(nokey),False)
-		pass
+	if sys.version_info.major < 3:
+		def test_has_key(self):
+			"""dict.has_key() is equivalent to map.has_key()"""
+			key = list(self.dict.keys())[0]
+			nokey = 'i am not a key'
+			self.assertEquals(self.map.has_key(key),self.dict.has_key(key))
+			self.assertEquals(self.map.has_key(nokey),self.dict.has_key(nokey))
+			self.assertEquals(self.map.has_key(key),True)
+			self.assertEquals(self.map.has_key(nokey),False)
+			pass
 	def test_items(self):
 		"""dict.items() is equivalent to map.items()"""
 		dictItems = sorted(self.dict.items())
 		mapItems = sorted(self.map.items())
 		self.assertEquals(dictItems,mapItems)
 		pass
-	def test_iteritems(self):
-		"""dict.iteritems() is equivalent to map.iteritems()"""
-		dictItems = sorted(list(self.dict.iteritems()))
-		mapItems = sorted(list(self.dict.iteritems()))
-		self.assertEquals(dictItems,mapItems)
-		pass
-	def test_iterkeys(self):
-		"""dict.iterkeys() is equivalent to map.iterkeys()"""
-		dictItems = sorted(list(self.dict.iterkeys()))
-		mapItems = sorted(list(self.dict.iterkeys()))
-		self.assertEquals(dictItems,mapItems)
-		pass
-	def test_itervalues(self):
-		"""dict.itervalues() is equivalent to map.itervalues()"""
-		dictItems = sorted(list(self.dict.itervalues()))
-		mapItems = sorted(list(self.dict.itervalues()))
-		self.assertEquals(dictItems,mapItems)
-		pass
+	if sys.version_info.major < 3:
+		def test_iteritems(self):
+			"""dict.iteritems() is equivalent to map.iteritems()"""
+			dictItems = sorted(list(self.dict.iteritems()))
+			mapItems = sorted(list(self.dict.iteritems()))
+			self.assertEquals(dictItems,mapItems)
+			pass
+		def test_iterkeys(self):
+			"""dict.iterkeys() is equivalent to map.iterkeys()"""
+			dictItems = sorted(list(self.dict.iterkeys()))
+			mapItems = sorted(list(self.dict.iterkeys()))
+			self.assertEquals(dictItems,mapItems)
+			pass
+		def test_itervalues(self):
+			"""dict.itervalues() is equivalent to map.itervalues()"""
+			dictItems = sorted(list(self.dict.itervalues()))
+			mapItems = sorted(list(self.dict.itervalues()))
+			self.assertEquals(dictItems,mapItems)
+			pass
 	def test_keys(self):
 		"""dict.keys() is equivalent to map.keys()"""
 		dictItems = sorted(self.dict.keys())
@@ -226,7 +228,7 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 	def test_pop(self):
 		"""dict.pop() is equivalent to map.pop()"""
 		default = 42
-		key = self.dict.keys()[0]
+		key = list(self.dict.keys())[0]
 		value = self.dict[key]
 		nokey = 'i am not a key'
 		self.assertEquals(self.map.pop(key,default),value)
@@ -237,7 +239,7 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		pass
 	def test_popitem(self):
 		"""dict.popitem() is equivalent to map.popitem()"""
-		items = [self.map.popitem() for i in xrange(len(self.map))]
+		items = [self.map.popitem() for i in range(len(self.map))]
 		self.assertEquals(sorted(items),sorted(self.dict.items()))
 		self.assertEquals(len(self.map),0)
 		self.assertRaises(KeyError,self.map.popitem)
@@ -249,9 +251,9 @@ class I3MapDictInterfaceTest(unittest.TestCase):
 		"""dict.update() is equivalent to map.update()"""
 		# only half-support update(self, dict, **kwargs):
 		# can't add kwargs to map because of typing issues
-		modpair = (self.dict.keys()[0],'a new value!')
+		modpair = (list(self.dict.keys())[0],'a new value!')
 		newpair = ('nogat','stuebl')
-		oldkeys = self.dict.keys()[1:]
+		oldkeys = list(self.dict.keys())[1:]
 		newdict = {modpair[0]:modpair[1], newpair[0]:newpair[1]}
 		self.map.update(newdict)
 		for key in oldkeys:
