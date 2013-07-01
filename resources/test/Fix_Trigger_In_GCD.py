@@ -31,8 +31,8 @@ while oldgcd.more():
 
         try:
             trigSet = smt_ts.trigger_settings
-        except TypeError,detail  :
-            print detail
+        except TypeError:
+            print('Boost has borked itself')
             sys.exit( 0 )
         
         trigSet['threshold'] = "8"
@@ -90,19 +90,19 @@ while oldgcd.more():
         ## print what we've got
         for trigKey,trigStat in i3ds.trigger_status:
             if trigKey.check_config_id():
-                print 'Key',trigKey.source, trigKey.type, trigKey.config_id
+                print('Key',trigKey.source, trigKey.type, trigKey.config_id)
             else:
-                print 'Key',trigKey.source, trigKey.type
-            print 'TriggerStatus for:',trigStat.trigger_name
-            print 'ReadoutConfig:'
+                print('Key',trigKey.source, trigKey.type)
+            print('TriggerStatus for:',trigStat.trigger_name)
+            print('ReadoutConfig:')
             readoutset = trigStat.readout_settings
             for e in readoutset:
-                print e.key()
+                print(e.key())
                 trc = e.data()
-                print 'tminu:',trc.readout_time_minus,' tplus:', trc.readout_time_plus, ' toffset:', trc.readout_time_offset
-            print 'TriggerConfigs:'
+                print('tminu:',trc.readout_time_minus,' tplus:', trc.readout_time_plus, ' toffset:', trc.readout_time_offset)
+            print('TriggerConfigs:')
             for foo,bar in trigStat.trigger_settings:
-                print foo, '->', bar
+                print(foo, '->', bar)
 
 
 
