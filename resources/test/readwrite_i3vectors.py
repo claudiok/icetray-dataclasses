@@ -84,11 +84,20 @@ checks = [(dataclasses.I3VectorBool, "vector_bool",
 	  (dataclasses.I3VectorFloat, "vector_float",
 	   (gen, [5000]), '1ea638013cffe539c55cd18dfc215490'),
 	  (dataclasses.I3VectorDouble, "vector_double",
-	   (gen, [5000]), '51189332e38ecaac9dd4dd195ed9f611'),
-	  (dataclasses.I3VectorInt64, "vector_int64",
+	   (gen, [5000]), '51189332e38ecaac9dd4dd195ed9f611')]
+
+# Correct for change in typedef name: long vs. long long
+import ctypes
+if ctypes.sizeof(ctypes.c_long) == 8:
+	  checks += [(dataclasses.I3VectorInt64, "vector_int64",
 	   (gen, [5000]), '2b69f7a70cbbede826914ff1ce7b5ef0'),
 	  (dataclasses.I3VectorUInt64, "vector_uint64",
 	   (gen, [5000]), '922c834496e99174536ca9fedacb5c1f')]
+else:
+	  checks += [(dataclasses.I3VectorInt64, "vector_int64",
+	   (gen, [5000]), '5e8f791ae556d410d551e475d48a2fca'),
+	  (dataclasses.I3VectorUInt64, "vector_uint64",
+	   (gen, [5000]), '5b7248d0fa3f607d3b14409d5dfafe0a')]
 
 for (T, N, (GEN,ARGS), CHECKSUM) in checks:
     do_one(T, N, GEN(*ARGS), CHECKSUM)
