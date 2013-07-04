@@ -6,6 +6,7 @@
 # of the std_map_indexing_suite wrapper for std::map
 # JvS 2009-03-26
 
+from icecube.icetray.pycompat import *
 import unittest
 import sys
 
