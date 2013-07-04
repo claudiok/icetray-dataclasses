@@ -87,8 +87,8 @@ checks = [(dataclasses.I3VectorBool, "vector_bool",
 	   (gen, [5000]), '51189332e38ecaac9dd4dd195ed9f611')]
 
 # Correct for change in typedef name: long vs. long long
-import ctypes
-if ctypes.sizeof(ctypes.c_long) == 8:
+import struct
+if struct.calcsize("L") == 8:
 	  checks += [(dataclasses.I3VectorInt64, "vector_int64",
 	   (gen, [5000]), '2b69f7a70cbbede826914ff1ce7b5ef0'),
 	  (dataclasses.I3VectorUInt64, "vector_uint64",
