@@ -53,8 +53,11 @@ register_std_pair(const char* s)
     .def_readwrite("second", &type_t::second)
     .def(dataclass_suite<type_t>())
     ;
-
+#if __cplusplus < 201103L
+  //In newer c++ the signature of make_pair has become intractable
+  //for existing versions of boost::python
   def("make_pair", &std::make_pair<T, U>);
+#endif
 }
 
 void register_I3Vectors()
