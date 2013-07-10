@@ -129,7 +129,7 @@ TEST(ApplyAutomagically)
 	I3RecoPulseSeriesMapConstPtr masked =
 	    frame.Get<I3RecoPulseSeriesMapConstPtr>("foomask");
 	
-	ENSURE(masked, "Mask was applied by I3Frame");
+	ENSURE((bool)masked, "Mask was applied by I3Frame");
 	ENSURE_EQUAL(pulses->size(), masked->size());
 	ENSURE_EQUAL(masked->begin()->second.size(), 9u);
 	

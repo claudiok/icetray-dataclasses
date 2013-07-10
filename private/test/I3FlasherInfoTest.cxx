@@ -30,8 +30,8 @@ TEST(const_dest)
 {
   I3FlasherInfoPtr ptr(new I3FlasherInfo());
   I3FlasherInfoVectPtr vct(new I3FlasherInfoVect());
-  ENSURE(ptr,"NULL pointer.");
-  ENSURE(vct,"NULL vector.");
+  ENSURE((bool)ptr,"NULL pointer.");
+  ENSURE((bool)vct,"NULL vector.");
 }
 
 TEST(SetAndGet){

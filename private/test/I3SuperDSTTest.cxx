@@ -331,7 +331,7 @@ TEST(UnpackingAutomagically)
 	
 	I3RecoPulseSeriesMapConstPtr unpacked = frame.Get<I3RecoPulseSeriesMapConstPtr>("I3SuperDST");
 	
-	ENSURE(unpacked, "I3Frame::Get() returned a valid pointer");
+	ENSURE((bool)unpacked, "I3Frame::Get() returned a valid pointer");
 	
 	ENSURE_EQUAL(unpacked->size(), 2u, "There's something in the unpacked map");
 
@@ -387,7 +387,7 @@ TEST(Unpacking)
 	I3SuperDST supi(pulsemap);
 	fake_hlc = supi.Unpack();
 	
-	ENSURE( fake_hlc, "We got something to unpack");
+	ENSURE( (bool)fake_hlc, "We got something to unpack");
 	ENSURE_EQUAL( fake_hlc->size(), unsigned(2), "There's something in the map");
 	
 	map_it = pulsemap.find(key1);
