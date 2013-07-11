@@ -21,10 +21,7 @@
 
 #include <vector>
 
-// temporarily disable depreciation warnings for SetSource when building the python bindings:
-#define DISABLE_SETSOURCE_DEPRECIATION_WARNING
 #include <dataclasses/physics/I3Waveform.h>
-#undef DISABLE_SETSOURCE_DEPRECIATION_WARNING
 
 #include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
@@ -45,12 +42,13 @@ void register_I3Waveform()
     scope waveform_scope =
       class_<I3Waveform, bases<I3FrameObject>, boost::shared_ptr<I3Waveform> >("I3Waveform")
       .def(copy_suite<I3Waveform>())
-      #define PROPS (BinWidth)(Source)(SourceIndex)(Digitizer)
+      #define PROPS (BinWidth)(SourceIndex)(Digitizer)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Waveform, PROPS)
       #undef PROPS
       #define PROPS (Channel)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Waveform, PROPS)
       #undef PROPS
+      .add_property(snake_case("Source"), &I3Waveform::GetSource)
       .add_property("status", get_status_member)
       .add_property("time", &I3Waveform::GetStartTime, &I3Waveform::SetStartTime)
       .add_property("waveform", get_waveform_func, &I3Waveform::SetWaveform)

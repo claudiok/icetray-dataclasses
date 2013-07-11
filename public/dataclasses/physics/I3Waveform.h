@@ -221,17 +221,6 @@ class I3Waveform
    */
   Source GetSource() const { return IsSLC() ? I3Waveform::SLC : GetDigitizer(); }
 
-  /**
-   * Deprecated. Use SetDigitizer to set the chip information (ATWD or FADC) and
-   * SetHLC to switch HLC flag on or off.
-   */
-#ifndef __CINT__
-#ifndef DISABLE_SETSOURCE_DEPRECIATION_WARNING
-  __attribute__ ((deprecated))
-#endif
-#endif // __CINT__
-  void SetSource(Source source) { source_.fields.source = source; }
-
   bool IsHLC() const { return (bool)(source_.fields.hlc); }
   bool IsSLC() const { return !(bool)(source_.fields.hlc); }
 
