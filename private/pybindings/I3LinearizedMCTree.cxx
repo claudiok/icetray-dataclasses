@@ -1,4 +1,4 @@
-
+/*
 #include <dataclasses/physics/I3LinearizedMCTree.h>
 
 namespace bp = boost::python;
@@ -10,4 +10,4 @@ void register_I3LinearizedMCTree()
 	;
 	
 	register_pointer_conversions<I3LinearizedMCTree>();
-}
+}*/

@@ -23,6 +23,7 @@
 
 #include <boost/bimap/bimap.hpp>
 #include <boost/bimap/multiset_of.hpp>
+#include <boost/optional.hpp>
 #endif
 
 static const unsigned i3particle_version_ = 5;
@@ -377,6 +378,13 @@ class I3Particle : public I3FrameObject
 #else
   I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
              ParticleShape shape, double length);
+#endif
+
+#ifndef __CINT__
+  /** @brief Constructor for particle from boost::optional<I3Particle>
+   * @param p A particle
+   */
+  I3Particle(const boost::optional<I3Particle>& p);
 #endif
 
   virtual ~I3Particle();

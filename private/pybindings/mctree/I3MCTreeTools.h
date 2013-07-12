@@ -3,7 +3,7 @@
     the icecube collaboration
     @file I3MCTreeTools.h
 */
-
+/*
 #ifndef I3MCTREETOOLS_H_INCLUDED
 #define I3MCTREETOOLS_H_INCLUDED
 
@@ -68,7 +68,7 @@ namespace I3MCTreeTools
    * 4) Pass to ConvertComposite the tree, the iterator (return value from insert call),
         and the composite list of the original particle.
    *  Again probably not for general consumption.
-   */
+   */ /*
   namespace internal{
     std::string DumpChildren(const I3MCTree&,I3MCTree::iterator, const PPPConfig&);
     std::string ParticlePrettyPrint(const I3Particle&, const PPPConfig&);
@@ -80,12 +80,12 @@ namespace I3MCTreeTools
 
   /**
    * This gets the particle that created the hit;
-   */
+   */ /*
   I3Particle Get(const I3MCTree&, const I3MCHit&);
 
   /**
    * This gets the primary that created the particle;
-   */
+   */ /*
   I3ParticlePtr GetPrimary(const I3MCTree&, const I3Particle&);
   
   std::string Dump(const I3MCTree&, const std::string& config = "");
@@ -106,5 +106,5 @@ namespace I3MCTreeTools
 }
 
 #endif 
-
+*/
 

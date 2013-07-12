@@ -42,7 +42,7 @@ namespace __gnu_cxx{
 	template<>
 	struct hash<I3ParticleID>{
 		size_t operator()(const I3ParticleID& id) const{
-			return(id.majorID + id.minorID);
+			return hash<int>()(id.majorID + id.minorID);
 		}
 	};
 }
@@ -52,7 +52,7 @@ namespace __gnu_cxx{
 template<>
 struct i3hash<I3ParticleID>{
 	size_t operator()(const I3ParticleID& id) const{
-		return(id.majorID + id.minorID);
+		return hash<int>()(id.majorID + id.minorID);
 	}
 };
 

@@ -107,6 +107,26 @@ I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
   locationType_(Anywhere)
 {}
 
+#ifndef __CINT__
+I3Particle::I3Particle(const boost::optional<I3Particle>& p) :
+  ID_(p->ID_),
+  major_ID_(p->major_ID_),
+  parentID_(p->parentID_),
+  primaryID_(p->primaryID_),
+  pdgEncoding_(p->pdgEncoding_),
+  shape_(p->shape_),
+  status_(p->status_),
+  pos_(p->pos_),
+  dir_(p->dir_),
+  time_(p->time_),
+  energy_(p->energy_),
+  length_(p->length_),
+  speed_(p->speed_),
+  locationType_(p->locationType_)
+{}
+#endif
+
+
 // using the magic of the preprocessor, expand
 // the existing list of enum entries into a case
 // line converting from enum to string

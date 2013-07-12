@@ -18,7 +18,7 @@
 //   You should have received a copy of the GNU General Public License
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-
+/*
 #include <vector>
 
 #include <dataclasses/physics/I3MCTree.h>
@@ -112,4 +112,4 @@ void register_I3MCTree()
     register_pointer_conversions<I3MCTree>();
 }
 #undef WRAP_PROP_FN
-#undef WRAP_PROP_BARE
+#undef WRAP_PROP_BARE*/

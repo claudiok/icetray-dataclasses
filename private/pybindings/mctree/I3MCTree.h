@@ -18,7 +18,7 @@
 //   You should have received a copy of the GNU General Public License
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
-
+/*
 #include <vector>
 
 #include <dataclasses/physics/I3MCTreeUtils.h>
@@ -135,4 +135,4 @@ inline I3ParticlePtr Get(const I3MCTree& tree, const I3MCHit& hit)
 inline I3ParticlePtr GetPrimary(const I3MCTree& tree, const I3Particle& particle)
 {
   return I3ParticlePtr(new I3Particle(*I3MCTreeUtils::GetPrimary(tree,particle)));
-}
+} */

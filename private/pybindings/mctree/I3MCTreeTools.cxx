@@ -1,3 +1,4 @@
+/*
 #include "I3MCTreeTools.h"
 #include <dataclasses/physics/I3MCTreeUtils.h>
 #include <boost/foreach.hpp>
@@ -332,7 +333,7 @@ I3MCTreeTools::IsChargedCurrent(const I3MCTree& t){
 
   /**
    * We're looking for hadron + lepton
-   */
+   */ /*
   if(daughters.size() != 2){
     return false;
   }
@@ -378,7 +379,7 @@ I3MCTreeTools::IsNeutralCurrent(const I3MCTree& t){
 
   /**
    * We're looking for hadron + neutrino
-   */
+   */ /*
   if(daughters.size() != 2){
     return false;
   }
@@ -406,7 +407,7 @@ I3MCTreeTools::IsGlashowResonance(const I3MCTree& t){
   /**
    * First we look for a single hadron
    * v + e -> W -> h
-   */
+   */ /*
   if(daughters.size() == 1){
     if(daughters.front().GetType() == I3Particle::Hadrons)
       return true;
@@ -415,7 +416,7 @@ I3MCTreeTools::IsGlashowResonance(const I3MCTree& t){
   /**
    * Next we look for hadron + neutrino
    * v + e -> W -> v + l
-   */
+   */ /*
   if(daughters.size() != 2) return false;
   I3ParticlePtr l; //lepton
   I3ParticlePtr v; //neutrino
@@ -437,4 +438,4 @@ I3MCTreeTools::IsGlashowResonance(const I3MCTree& t){
     get<2>(l_lep) + get<2>(l_v);
 
   return !delta_l;
-}
+} */

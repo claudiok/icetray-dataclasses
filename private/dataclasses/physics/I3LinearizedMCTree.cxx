@@ -10,7 +10,7 @@
  *
  */
 
-#include "dataclasses/physics/I3LinearizedMCTree.h"
+/*#include "dataclasses/physics/I3LinearizedMCTree.h"
 #include "dataclasses/I3Constants.h"
 #include "icetray/I3Units.h"
 
@@ -104,10 +104,10 @@ I3Stochastic::Reconstruct(const I3Particle &parent) const
 	
 	return p;
 }
-
+*/
 /**
  * I3Particle::ShiftAlongTrack() without stupid assert()s.
- */
+ */ /*
 void
 I3Stochastic::Propagate(I3Particle &p, double tick)
 {
@@ -259,3 +259,4 @@ void I3LinearizedMCTree::load(boost::archive::xml_iarchive& ar, unsigned version
 }
 
 I3_SERIALIZABLE(I3LinearizedMCTree);
+*/

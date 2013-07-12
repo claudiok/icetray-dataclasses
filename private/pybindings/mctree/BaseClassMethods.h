@@ -18,6 +18,7 @@
 //   You should have received a copy of the GNU General Public License
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
+/*
 #include <dataclasses/physics/I3MCTreeUtils.h>
 #include <dataclasses/physics/I3MCTree.h>
 
@@ -25,3 +26,4 @@ inline int depth(I3MCTree& tree, const I3Particle& p){
   I3MCTree::iterator iter = I3MCTreeUtils::GetIterator(tree,p);
   return tree.depth(iter);
 }
+*/

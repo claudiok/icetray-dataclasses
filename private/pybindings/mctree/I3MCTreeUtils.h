@@ -19,6 +19,7 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+/*
 #include <vector>
 
 #include <dataclasses/physics/I3MCTreeUtils.h>
@@ -261,4 +262,4 @@ int GetNumberOfAtmosphericMuons(const I3MCTree& t)
   return numberOfAtmosphericMuons;
 }
 
-
+*/
