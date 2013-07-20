@@ -18,6 +18,7 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 
+
 using namespace std;
 
 // This string identifies the test suite in the list of test suites.
@@ -39,37 +40,45 @@ I3Particle makeParticle()
 
 TEST(constructors)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1;
-  I3Particle p1 = makeParticle();
-  t1.set_head(p1);
+  I3MCTree t;
+  I3MCTree tt;
+  ENSURE( t == tt , "empty trees are not equal");
   
-  ENSURE( t1.begin() != t1.end() , "Tree is empty");
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  t1.insert(p1);
+  
+  ENSURE( t1.begin() != t1.end() , "Tree t1 is empty");
   ENSURE( t1.get_head() , "Tree is empty");
   
   ENSURE( t1.get_head() == p1 , "Particle does not match");
   
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(p1);
+  I3MCTree t2(p1);
+  ENSURE( t2.get_head() == p1 , "Particle2 does not match");
+  ENSURE( t2.begin() != t2.end() , "Tree t2 is empty");
   ENSURE( t1 == t2 , "Particle constructor failed");
   
-  TreeBase::Tree<I3Particle,I3ParticleID> t3 = t1;
+  I3MCTree t3 = t1;
+  ENSURE( t3.begin() != t3.end() , "Tree t3 is empty");
   ENSURE( t1 == t3 , "assignment operator failed");
   
-  TreeBase::Tree<I3Particle,I3ParticleID> t4(makeParticle());
+  I3MCTree t4(makeParticle());
+  ENSURE( t4.begin() != t4.end() , "Tree t4 is empty");
   ENSURE( t1 != t4 , "!= operator failed");
 }
 
 TEST(pre_order_iterator)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1;
+  I3MCTree t1;
   ENSURE( t1.begin() == t1.end() );
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(makeParticle());
-  TreeBase::Tree<I3Particle,I3ParticleID>::iterator iter(t2);
+  I3MCTree t2(makeParticle());
+  I3MCTree::iterator iter(t2);
   ENSURE( iter != t2.end() , "begin() == end()");
   ENSURE( t2.get_head() == *iter , "begin() != head");
   iter++;
   ENSURE( iter == t2.end() , "iter does not reach end()");
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t3(head);
+  I3MCTree t3(head);
   I3Particle p1 = makeParticle();
   t3.append_child(head,p1);
   I3Particle p2 = makeParticle();
@@ -99,16 +108,16 @@ TEST(pre_order_iterator)
 
 TEST(post_order_iterator)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1;
+  I3MCTree t1;
   ENSURE( t1.begin_post() == t1.end_post() );
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(makeParticle());
-  TreeBase::Tree<I3Particle,I3ParticleID>::post_order_iterator iter(t2);
+  I3MCTree t2(makeParticle());
+  I3MCTree::post_order_iterator iter(t2);
   ENSURE( iter != t2.end_post() , "begin() == end()");
   ENSURE( t2.get_head() == *iter , "begin() != head");
   iter++;
   ENSURE( iter == t2.end_post() , "iter does not reach end()");
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t3(head);
+  I3MCTree t3(head);
   I3Particle p1 = makeParticle();
   t3.append_child(head,p1);
   I3Particle p2 = makeParticle();
@@ -138,16 +147,16 @@ TEST(post_order_iterator)
 
 TEST(sibling_iterator)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1;
+  I3MCTree t1;
   ENSURE( t1.begin_post() == t1.end_post() );
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(makeParticle());
-  TreeBase::Tree<I3Particle,I3ParticleID>::sibling_iterator iter(t2);
+  I3MCTree t2(makeParticle());
+  I3MCTree::sibling_iterator iter(t2);
   ENSURE( iter != t2.end_sibling() , "begin() == end()");
   ENSURE( t2.get_head() == *iter , "begin() != head");
   iter++;
   ENSURE( iter == t2.end_sibling() , "iter does not reach end()");
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t3(head);
+  I3MCTree t3(head);
   I3Particle p1 = makeParticle();
   t3.append_child(head,p1);
   I3Particle p2 = makeParticle();
@@ -188,16 +197,16 @@ TEST(sibling_iterator)
 
 TEST(fast_iterator)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1;
+  I3MCTree t1;
   ENSURE( t1.begin_fast() == t1.end_fast() );
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(makeParticle());
-  TreeBase::Tree<I3Particle,I3ParticleID>::fast_iterator iter(t2);
+  I3MCTree t2(makeParticle());
+  I3MCTree::fast_iterator iter(t2);
   ENSURE( iter != t2.end_fast() , "begin() == end()");
   ENSURE( t2.get_head() == *iter , "begin() != head");
   iter++;
   ENSURE( iter == t2.end_fast() , "iter does not reach end()");
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t3(head);
+  I3MCTree t3(head);
   I3Particle p1 = makeParticle();
   t3.append_child(head,p1);
   I3Particle p2 = makeParticle();
@@ -221,16 +230,16 @@ TEST(fast_iterator)
 
 TEST(leaf_iterator)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1;
+  I3MCTree t1;
   ENSURE( t1.begin_leaf() == t1.end_leaf() );
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(makeParticle());
-  TreeBase::Tree<I3Particle,I3ParticleID>::leaf_iterator iter(t2);
+  I3MCTree t2(makeParticle());
+  I3MCTree::leaf_iterator iter(t2);
   ENSURE( iter != t2.end_leaf() , "begin() == end()");
   ENSURE( t2.get_head() == *iter , "begin() != head");
   iter++;
   ENSURE( iter == t2.end_leaf() , "iter does not reach end()");
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t3(head);
+  I3MCTree t3(head);
   I3Particle p1 = makeParticle();
   t3.append_child(head,p1);
   I3Particle p2 = makeParticle();
@@ -254,16 +263,16 @@ TEST(leaf_iterator)
 
 TEST(empty)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1;
+  I3MCTree t1;
   ENSURE( t1.empty() , "tree is not empty");
   
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(makeParticle());
+  I3MCTree t2(makeParticle());
   ENSURE( !t2.empty() , "tree is empty");
 }
 
 TEST(clear)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(makeParticle());
+  I3MCTree t1(makeParticle());
   ENSURE( !t1.empty() , "tree is empty");
   
   t1.clear();
@@ -273,7 +282,7 @@ TEST(clear)
 TEST(append_child)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   
   ENSURE( t1.get_head() , "can't get head node");
   
@@ -292,7 +301,7 @@ TEST(append_child)
   ENSURE( children2.front() == p2 , "p2 is not first child");
   ENSURE( children2.at(1) == p3 , "p3 is not second child");
   
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(makeParticle());
+  I3MCTree t2(makeParticle());
   t2.append_child(*t2.get_head(),t1,p1);
   
   std::vector<I3Particle> children3 = t2.children(*t2.get_head());
@@ -304,11 +313,22 @@ TEST(append_child)
   ENSURE( !children4.empty() , "no children4");
   ENSURE( children4.front() == p2 , "p2 is not first child of t2.p1");
   ENSURE( children4.at(1) == p3 , "p3 is not second child of t2.p1");
+  
+  I3MCTree t3(makeParticle());
+  I3Particle p4 = *t3.get_head();
+  std::vector<I3Particle> newchildren;
+  for (int i=0;i<50;i++) {
+    newchildren.push_back(makeParticle());
+  }
+  t3.append_children(p4,newchildren);
+  std::vector<I3Particle> children5 = t3.children(p4);
+  ENSURE( !children5.empty() , "no children5");
+  ENSURE( children5 == newchildren , "added children incorrect");
 }
 
 TEST(erase)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(makeParticle());
+  I3MCTree t1(makeParticle());
   I3Particle head = t1.get_head();
   I3Particle p1 = makeParticle();
   t1.append_child(head,p1);
@@ -331,7 +351,7 @@ TEST(erase)
 
 TEST(erase_children)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(makeParticle());
+  I3MCTree t1(makeParticle());
   t1.append_child(*t1.get_head(),makeParticle());
   t1.append_child(*t1.get_head(),makeParticle());
   t1.append_child(*t1.get_head(),makeParticle());
@@ -346,7 +366,7 @@ TEST(erase_children)
 
 TEST(manual_traversal)
 {
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(makeParticle());
+  I3MCTree t1(makeParticle());
   t1.append_child(*t1.get_head(),makeParticle());
   t1.append_child(*t1.get_head(),makeParticle());
   t1.append_child(*t1.get_head(),makeParticle());
@@ -388,7 +408,7 @@ TEST(manual_traversal)
 TEST(insert)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   
   ENSURE( t1.get_head() , "can't get head node");
   
@@ -420,7 +440,7 @@ TEST(insert)
 TEST(insert_after)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   
   ENSURE( t1.get_head() , "can't get head node");
   
@@ -452,14 +472,14 @@ TEST(insert_after)
 TEST(insert_subtree)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   t1.append_child(p1,makeParticle());
   I3Particle p3 = makeParticle();
   t1.append_child(p1,p3);
   t1.append_child(p1,makeParticle());
   
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(head);
+  I3MCTree t2(head);
   I3Particle firstChild = makeParticle();
   t2.append_child(head,firstChild);
   
@@ -471,7 +491,7 @@ TEST(insert_subtree)
   ENSURE( children.back() == firstChild , "firstChild not there");
   
   I3Particle head2 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t3(head2);
+  I3MCTree t3(head2);
   t3.append_child(head2,makeParticle());
   t3.append_child(head2,makeParticle());
   t3.append_child(head2,makeParticle());
@@ -492,14 +512,14 @@ TEST(insert_subtree)
 TEST(insert_subtree_after)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   t1.append_child(p1,makeParticle());
   I3Particle p3 = makeParticle();
   t1.append_child(p1,p3);
   t1.append_child(p1,makeParticle());
   
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(head);
+  I3MCTree t2(head);
   I3Particle firstChild = makeParticle();
   t2.append_child(head,firstChild);
   
@@ -511,7 +531,7 @@ TEST(insert_subtree_after)
   ENSURE( children.front() == firstChild , "p3 not there");
   
   I3Particle head2 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t3(head2);
+  I3MCTree t3(head2);
   t3.append_child(head2,makeParticle());
   t3.append_child(head2,makeParticle());
   t3.append_child(head2,makeParticle());
@@ -532,7 +552,7 @@ TEST(insert_subtree_after)
 TEST(replace)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   t1.append_child(p1,makeParticle());
   I3Particle p3 = makeParticle();
   t1.append_child(p1,p3);
@@ -548,7 +568,7 @@ TEST(replace)
   ENSURE( children.at(1) == p2 , "p2 not second child");
   
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(head);
+  I3MCTree t2(head);
   t2.append_child(head,makeParticle());
   t2.append_child(head,makeParticle());
   t2.append_child(head,makeParticle());
@@ -568,7 +588,7 @@ TEST(replace)
 TEST(flatten)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   I3Particle p2 = makeParticle();
   t1.append_child(p1,p2);
   I3Particle p3 = makeParticle();
@@ -596,7 +616,7 @@ TEST(flatten)
 TEST(reparent)
 {
   I3Particle p1 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(p1);
+  I3MCTree t1(p1);
   I3Particle p2 = makeParticle();
   t1.append_child(p1,p2);
   I3Particle p3 = makeParticle();
@@ -620,7 +640,7 @@ TEST(reparent)
 TEST(size)
 {
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(head);
+  I3MCTree t1(head);
   ENSURE( t1.size() == 1 );
   t1.append_child(head,makeParticle());
   t1.append_child(head,makeParticle());
@@ -642,7 +662,7 @@ TEST(size)
 TEST(depth)
 {
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(head);
+  I3MCTree t1(head);
   ENSURE( t1.depth(head) == 0 );
   t1.append_child(head,makeParticle());
   t1.append_child(head,makeParticle());
@@ -665,7 +685,7 @@ TEST(depth)
 TEST(number_of_children)
 {
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(head);
+  I3MCTree t1(head);
   ENSURE( t1.number_of_children(head) == 0 );
   t1.append_child(head,makeParticle());
   t1.append_child(head,makeParticle());
@@ -689,7 +709,7 @@ TEST(number_of_children)
 TEST(number_of_siblings)
 {
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(head);
+  I3MCTree t1(head);
   ENSURE( t1.number_of_siblings(head) == 0 );
   t1.append_child(head,makeParticle());
   t1.append_child(head,makeParticle());
@@ -713,7 +733,7 @@ TEST(number_of_siblings)
 TEST(is_in_subtree)
 {
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(head);
+  I3MCTree t1(head);
   t1.append_child(head,makeParticle());
   t1.append_child(head,makeParticle());
   I3Particle p1 = makeParticle();
@@ -742,13 +762,13 @@ TEST(is_in_subtree)
 TEST(subtree_in_tree)
 {
   I3Particle head = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t1(head);
+  I3MCTree t1(head);
   t1.append_child(head,makeParticle());
   t1.append_child(head,makeParticle());
   t1.append_child(head,makeParticle());
   
   I3Particle head2 = makeParticle();
-  TreeBase::Tree<I3Particle,I3ParticleID> t2(head2);
+  I3MCTree t2(head2);
   t2.append_child(head2,makeParticle());
   I3Particle p1 = makeParticle();
   t2.append_child(head2,p1);
@@ -765,15 +785,13 @@ TEST(subtree_in_tree)
 TEST(xml_serialization)
 {
   I3MCTree t1;
-  //t1.AddPrimary(makeParticle());
-  //t1.AddPrimary(makeParticle());
-  //t1.AddPrimary(makeParticle());
   
   ostringstream os;
   {
     boost::archive::xml_oarchive oa(os);
     oa << boost::serialization::make_nvp("mytree", t1);
   }
+  std::cout<<os.str()<<std::endl;
   
   istringstream is;
   I3MCTree t2;
@@ -783,9 +801,129 @@ TEST(xml_serialization)
     ia >> boost::serialization::make_nvp("mytree", t2);
   }
   
+  I3MCTree::iterator iter(t1);
+  I3MCTree::iterator iter2(t2);
+  while(iter != t1.end() && iter2 != t2.end()) {
+    ENSURE(*iter == *iter2);
+    iter++;
+    iter2++;
+  }
   ENSURE(t1 == t2);
+  
+  t2.AddPrimary(makeParticle());
+  t2.AddPrimary(makeParticle());
+  t2.AddPrimary(makeParticle());
+  ostringstream os2;
+  {
+    boost::archive::xml_oarchive oa2(os2);
+    oa2 << boost::serialization::make_nvp("mytree", t2);
+  }
+  std::cout<<os2.str()<<std::endl;
+  
+  istringstream is2;
+  I3MCTree t3;
+  is2.str(os2.str());
+  {
+    boost::archive::xml_iarchive ia2(is2);
+    ia2 >> boost::serialization::make_nvp("mytree", t3);
+  }
+  iter = t2.begin();
+  iter2 = t3.begin();
+  while(iter != t1.end() && iter2 != t2.end()) {
+    ENSURE(*iter == *iter2);
+    iter++;
+    iter2++;
+  }
+  ENSURE(t2 == t3);
+  
+  ostringstream os3;
+  {
+    boost::archive::xml_oarchive oa3(os3);
+    oa3 << boost::serialization::make_nvp("mytree", t3);
+  }
+  std::cout<<os3.str()<<std::endl;
+  
+  istringstream is3;
+  I3MCTree t4;
+  is3.str(os3.str());
+  {
+    boost::archive::xml_iarchive ia3(is3);
+    ia3 >> boost::serialization::make_nvp("mytree", t4);
+  }
+  iter = t2.begin();
+  iter2 = t4.begin();
+  while(iter != t1.end() && iter2 != t2.end()) {
+    ENSURE(*iter == *iter2);
+    iter++;
+    iter2++;
+  }
+  ENSURE(t2 == t4);
 }
 
+
+TEST(xml_serialization_massive)
+{
+  I3MCTree t1;
+  I3Particle p1;
+  int nchildren = 0;
+  for(int i=0;i<10;i++) {
+    vector<I3Particle> children;
+    p1 = makeParticle();
+    t1.AddPrimary(p1);
+    nchildren = 3;//10000+5000*(i%4);
+    for(int j=0;j<nchildren;j++) {
+      children.push_back(makeParticle());
+    }
+    t1.append_children(p1,children);
+  }
+  
+  ostringstream os;
+  {
+    boost::archive::xml_oarchive oa(os);
+    oa << boost::serialization::make_nvp("mytree", t1);
+  }
+  std::cout<<os.str()<<std::endl;
+  
+  istringstream is;
+  I3MCTree t2;
+  is.str(os.str());
+  {
+    boost::archive::xml_iarchive ia(is);
+    ia >> boost::serialization::make_nvp("mytree", t2);
+  }
+  
+  I3MCTree::iterator iter(t1);
+  I3MCTree::iterator iter2(t2);
+  while(iter != t1.end() && iter2 != t2.end()) {
+    ENSURE(*iter == *iter2);
+    iter++;
+    iter2++;
+  }
+  ENSURE(t1 == t2);
+  
+  ostringstream os2;
+  {
+    boost::archive::xml_oarchive oa2(os2);
+    oa2 << boost::serialization::make_nvp("mytree", t2);
+  }
+  std::cout<<os2.str()<<std::endl;
+  
+  istringstream is2;
+  I3MCTree t3;
+  is2.str(os2.str());
+  {
+    boost::archive::xml_iarchive ia2(is2);
+    ia2 >> boost::serialization::make_nvp("mytree", t3);
+  }
+  iter = t1.begin();
+  iter2 = t3.begin();
+  while(iter != t1.end() && iter2 != t2.end()) {
+    ENSURE(*iter == *iter2);
+    iter++;
+    iter2++;
+  }
+  ENSURE(t1 == t3);
+}
 
 // Now run the I3MCTree tests
 

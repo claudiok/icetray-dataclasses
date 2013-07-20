@@ -39,7 +39,6 @@
 namespace TreeBase {
   static const unsigned tree_version_ = 1;
   
-  typedef boost::optional<uint64_t> TreeHashKey;
   
   /**
    * A generic tree node
@@ -47,38 +46,59 @@ namespace TreeBase {
   template<typename T>
   class TreeNode {
     public:
-      TreeHashKey parent;
-      TreeHashKey firstChild;
-      TreeHashKey nextSibling;
+      TreeNode<T>* parent;
+      TreeNode<T>* firstChild;
+      TreeNode<T>* nextSibling;
       T data;
       
-      TreeNode() { };
-      TreeNode(const T& d) : data(d) { };
+      TreeNode() : parent(NULL),firstChild(NULL),nextSibling(NULL) { }
+      TreeNode(const T& d) : parent(NULL),firstChild(NULL),nextSibling(NULL),data(d) { }
       T operator*() { return data; }
       T operator=(const TreeNode<T>& other) { return data = other.data; }
       T operator=(const T& otherData) { return data = otherData; }
       bool operator==(const TreeNode<T>& other) const
-      { 
-        return (data == other.data &&
-                parent == other.parent &&
-                firstChild == other.firstChild &&
-                nextSibling == other.nextSibling);
+      {
+        if (data != other.data)
+          return false;
+        if (parent == NULL) {
+          if (other.parent != NULL)
+            return false;
+        } else {
+          if (other.parent == NULL)
+            return false;
+          else if (parent->data != other.parent->data)
+            return false;
+        }
+        if (firstChild == NULL) {
+          if (other.firstChild != NULL)
+            return false;
+        } else {
+          if (other.firstChild == NULL)
+            return false;
+          else if (firstChild->data != other.firstChild->data)
+            return false;
+        }
+        if (nextSibling == NULL) {
+          if (other.nextSibling != NULL)
+            return false;
+        } else {
+          if (other.nextSibling == NULL)
+            return false;
+          else if (nextSibling->data != other.nextSibling->data)
+            return false;
+        }
+        return true;
       }
       bool operator==(const T& otherData) const { return data == otherData; }
       bool operator!=(const TreeNode<T>& other) const { return !(*this == other); }
       bool operator!=(const T& otherData) const { return !(*this == otherData); }
-    private:
-      friend class boost::serialization::access;
-      template <class Archive> void load(Archive & ar, unsigned version);
-      template <class Archive> void save(Archive & ar, unsigned version) const;
-      BOOST_SERIALIZATION_SPLIT_MEMBER();
   };
   
   /**
    * A generic tree class for hashable, unique data types
    * T is the data type
    * Key is the lookup type (T must be able to be implicitly converted to Key)
-   * Hash is the hash function to convert from Key to uint64_t
+   * Hash is the hash function to convert from Key to size_t
    */
   template<typename T, typename Key=T, typename Hash=hash<Key> >
   class Tree : public I3FrameObject {
@@ -94,25 +114,15 @@ namespace TreeBase {
       */
       typedef boost::optional<T>  nonPtrType;
     protected:
-      typedef TreeNode<value_type > treeNode;
-      typedef hash_map<uint64_t,treeNode > tree_hash_map;
+      typedef boost::optional<Key> TreeHashKey;
+      typedef TreeNode<value_type> treeNode;
+      typedef hash_map<Key,treeNode > tree_hash_map;
       
       tree_hash_map internalMap;
       TreeHashKey head_;
       TreeHashKey end_; // a special end node that doesn't really exist
       
-      Hash hash_functor_;
-      inline uint64_t valueToHash_(const Key& value) const
-      { return (uint64_t)hash_functor_(value); }
-      
-      void headInitialize_();
-      void erase_(const uint64_t&);
-      void eraseRightSiblings_(const uint64_t&);
-      void eraseChildren_(const uint64_t&);
-      typename tree_hash_map::const_iterator getLeftSibling_(const uint64_t&) const;
-      typename tree_hash_map::iterator getLeftSibling_(const uint64_t&);
-      bool subtree_in_tree_(const Tree<T,Key,Hash>& other, const uint64_t&) const;
-      void append_child_(const uint64_t& node, const T&);
+      void eraseRightSiblings_(const Key&);
       
     public:
       // note: required to use underscores on std methods
@@ -136,22 +146,20 @@ namespace TreeBase {
           explicit iterator_base(Tree<T,Key,Hash>& ext, const Value* v) :
             ext_(&ext)
           {
-            uint64_t h = ext_.valueToHash_((Key)(*v));
-            typename tree_hash_map::iterator iter = internalMap.find(h);
+            typename tree_hash_map::iterator iter = internalMap.find(*v);
             if (iter == internalMap.end())
               node_ = ext.end_;
             else
-              node_ = h;
+              node_ = *v;
           }
           explicit iterator_base(Tree<T,Key,Hash>& ext, const Key& k) :
             ext_(&ext)
           {
-            uint64_t h = ext.valueToHash_(k);
-            typename tree_hash_map::iterator iter = ext.internalMap.find(h);
+            typename tree_hash_map::iterator iter = ext.internalMap.find(k);
             if (iter == ext.internalMap.end())
               node_ = ext.end_;
             else
-              node_ = h;
+              node_ = k;
           }
         protected:
           TreeHashKey first_() { return ext_->head_; };
@@ -210,20 +218,20 @@ namespace TreeBase {
               this->node_ = this->ext_->end_;
               return;
             }
-            if (iter->second.firstChild)
-              iter = this->ext_->internalMap.find(*(iter->second.firstChild));
-            else if (iter->second.nextSibling)
-              iter = this->ext_->internalMap.find(*(iter->second.nextSibling));
-            else if (iter->second.parent) {
+            treeNode* n = &(iter->second);
+            if (n->firstChild != NULL)
+              n = n->firstChild;
+            else if (n->nextSibling != NULL)
+              n = n->nextSibling;
+            else if (n->parent != NULL) {
               // go to a parent's next sibling
               do {
-                iter = this->ext_->internalMap.find(*(iter->second.parent));
-                assert( iter != this->ext_->internalMap.end() );
-                if (iter->second.nextSibling)
+                n = n->parent;
+                if (n->nextSibling != NULL)
                   break;
-              } while (iter->second.parent);
-              if (iter->second.nextSibling)
-                iter = this->ext_->internalMap.find(*(iter->second.nextSibling));
+              } while (n->parent != NULL);
+              if (n->nextSibling != NULL)
+                n = n->nextSibling;
               else {
                 this->node_ = this->ext_->end_;
                 return;
@@ -232,8 +240,8 @@ namespace TreeBase {
               this->node_ = this->ext_->end_;
               return;
             }
-            assert( iter != this->ext_->internalMap.end() );
-            this->node_ = iter->first;
+            assert( n != NULL );
+            this->node_ = n->data;
           }
       };
       typedef pre_order<T> pre_order_iterator;
@@ -262,11 +270,13 @@ namespace TreeBase {
             if (this->ext_->head_) {
               // go to leftmost child
               typename tree_hash_map::iterator iter = this->ext_->internalMap.find(*(this->ext_->head_));
-              while (iter->second.firstChild) {
-                iter = this->ext_->internalMap.find(*(iter->second.firstChild));
-                assert( iter != this->ext_->internalMap.end() );
+              if (iter == this->ext_->internalMap.end())
+                return this->ext_->end_;
+              treeNode* n = &(iter->second);
+              while (n->firstChild != NULL) {
+                n = n->firstChild;
               }
-              return iter->first;
+              return TreeHashKey(n->data);
             } else
               return this->ext_->end_;
           }
@@ -277,23 +287,21 @@ namespace TreeBase {
               this->node_ = this->ext_->end_;
               return;
             }
-            if (iter->second.nextSibling) {
+            treeNode* n = &(iter->second);
+            if (n->nextSibling != NULL) {
               // go to leftmost child of next sibling
-              iter = this->ext_->internalMap.find(*(iter->second.nextSibling));
-              assert( iter != this->ext_->internalMap.end() );
-              while (iter->second.firstChild) {
-                iter = this->ext_->internalMap.find(*(iter->second.firstChild));
-                assert( iter != this->ext_->internalMap.end() );
+              n = n->nextSibling;
+              while (n->firstChild != NULL) {
+                n = n->firstChild;
               }
-            } else if (iter->second.parent) {
+            } else if (n->parent != NULL) {
               // go to parent
-              iter = this->ext_->internalMap.find(*(iter->second.parent));
-              assert( iter != this->ext_->internalMap.end() );
+              n = n->parent;
             } else {
               this->node_ = this->ext_->end_;
               return;
             }
-            this->node_ = iter->first;
+            this->node_ = n->data;
           }
       };
       typedef post_order<T> post_order_iterator;
@@ -320,12 +328,10 @@ namespace TreeBase {
           void next_()
           {
             typename tree_hash_map::iterator iter = this->ext_->internalMap.find(*(this->node_));
-            if (iter == this->ext_->internalMap.end() || !(iter->second.nextSibling)) {
+            if (iter == this->ext_->internalMap.end() || iter->second.nextSibling == NULL) {
               this->node_ = this->ext_->end_;
             } else {
-              iter = this->ext_->internalMap.find(*(iter->second.nextSibling));
-              assert( iter != this->ext_->internalMap.end() );
-              this->node_ = iter->first;
+              this->node_ = iter->second.nextSibling->data;
             }
           }
       };
@@ -433,7 +439,7 @@ namespace TreeBase {
             typename tree_hash_map::iterator iter = this->ext_->internalMap.begin(),
                                     iterEnd = this->ext_->internalMap.end();
             for(;iter != iterEnd; iter++) {
-              if (iter->second.firstChild)
+              if (iter->second.firstChild != NULL)
                 continue;
               else
                 break;
@@ -445,7 +451,7 @@ namespace TreeBase {
             this->internalIter_++;
             typename tree_hash_map::iterator iterEnd = this->ext_->internalMap.end();
             for(;this->internalIter_ != iterEnd; this->internalIter_++) {
-              if (this->internalIter_->second.firstChild)
+              if (this->internalIter_->second.firstChild != NULL)
                 continue;
               else
                 break;
@@ -562,11 +568,6 @@ namespace TreeBase {
 //      void erase_children(const iterator_base&);
       
       /**
-       * Short-hand to insert topmost node in otherwise empty tree
-       */
-      pre_order_iterator set_head(const T&);
-      
-      /**
        * Add a child to a node
        */
       void append_child(const Key& node, const T&);
@@ -580,6 +581,21 @@ namespace TreeBase {
        * Add subtree as a child to a node
        */
       void append_child(const Key& node, const Tree<T,Key,Hash>&, const Key&);
+      
+      /**
+       * Add several children to a node
+       */
+      void append_children(const Key& node, const std::vector<T>&);
+      
+      /**
+       * Insert at root level before other nodes
+       */
+      void insert(const T&);
+      
+      /**
+       * Insert at root level after other nodes
+       */
+      void insert_after(const T&);
       
       /**
        * Insert as sibling before node
@@ -677,8 +693,6 @@ namespace TreeBase {
       bool subtree_in_tree(const Tree<T,Key,Hash>& other, const Key& node) const;
       
     protected:
-      Tree(const uint64_t& value);
-      
       friend class boost::serialization::access;
       template <class Archive> void load(Archive & ar, unsigned version);
       template <class Archive> void save(Archive & ar, unsigned version) const;
@@ -699,13 +713,6 @@ namespace TreeBase {
  */
 class I3MCTree : public TreeBase::Tree<I3Particle,I3ParticleID>
 {
-  private:
-    // really hope that no I3ParticleID ever hashes to this
-    static const uint64_t HIDDEN_ROOT_;
-    
-    friend class boost::serialization::access;
-    BOOST_SERIALIZATION_SPLIT_MEMBER();
-    
   public:
     // constructors
     I3MCTree();
@@ -713,16 +720,14 @@ class I3MCTree : public TreeBase::Tree<I3Particle,I3ParticleID>
     template<class D,class V> I3MCTree(const iterator_base<D,V>& other);
     I3MCTree(const I3MCTree& m);
     
-    // disable set_head so we don't overwrite the root
-    void set_head(const I3Particle&);
-    
-    // modify empty to always keey HIDDEN_ROOT
-    
-    
     /**
      * Add a primary particle
      */
     void AddPrimary(const I3Particle&);
+    
+  private:
+    friend class boost::serialization::access;
+    BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
 
 BOOST_CLASS_VERSION(I3MCTree,TreeBase::tree_version_);

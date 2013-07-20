@@ -905,6 +905,8 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   lhs.GetComposite()==rhs.GetComposite()
 	   );
 }
+bool operator!=(const I3Particle& lhs, const I3Particle& rhs)
+{ return !(lhs == rhs); }
 
 std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
   oss << "[ I3Particle MajorID : " << p.GetMajorID() << std::endl

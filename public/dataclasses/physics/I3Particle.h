@@ -401,6 +401,24 @@ class I3Particle : public I3FrameObject
   bool HasEnergy() const;
 
   operator I3ParticleID() const{ I3ParticleID id={major_ID_, ID_}; return id; }
+  I3Particle operator=(const I3Particle& rhs) {
+    ID_ = rhs.ID_;
+    major_ID_ = rhs.major_ID_;
+    parentID_ = rhs.parentID_;
+    primaryID_ = rhs.primaryID_;
+    pdgEncoding_ = rhs.pdgEncoding_;
+    shape_ = rhs.shape_;
+    status_ = rhs.status_;
+    pos_ = rhs.pos_;
+    dir_ = rhs.dir_;
+    time_ = rhs.time_;
+    energy_ = rhs.energy_;
+    length_ = rhs.length_;
+    speed_ = rhs.speed_;
+    composite_ = rhs.composite_;
+    locationType_ = rhs.locationType_;
+    return *this;
+  }
 	
   int32_t GetID() const { 
     log_warn("I3Particle::GetID is deprecated.  Please use I3Particle::GetMinorID.");
@@ -525,6 +543,7 @@ template<> void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned vers
 #endif
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs);
+bool operator!=(const I3Particle& lhs, const I3Particle& rhs);
 
 std::ostream& operator<<(std::ostream& oss, const I3Particle& d);
 
