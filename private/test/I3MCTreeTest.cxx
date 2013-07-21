@@ -791,7 +791,6 @@ TEST(xml_serialization)
     boost::archive::xml_oarchive oa(os);
     oa << boost::serialization::make_nvp("mytree", t1);
   }
-  std::cout<<os.str()<<std::endl;
   
   istringstream is;
   I3MCTree t2;
@@ -818,7 +817,6 @@ TEST(xml_serialization)
     boost::archive::xml_oarchive oa2(os2);
     oa2 << boost::serialization::make_nvp("mytree", t2);
   }
-  std::cout<<os2.str()<<std::endl;
   
   istringstream is2;
   I3MCTree t3;
@@ -841,7 +839,6 @@ TEST(xml_serialization)
     boost::archive::xml_oarchive oa3(os3);
     oa3 << boost::serialization::make_nvp("mytree", t3);
   }
-  std::cout<<os3.str()<<std::endl;
   
   istringstream is3;
   I3MCTree t4;
@@ -870,7 +867,7 @@ TEST(xml_serialization_massive)
     vector<I3Particle> children;
     p1 = makeParticle();
     t1.AddPrimary(p1);
-    nchildren = 3;//10000+5000*(i%4);
+    nchildren = 2000+1000*(i%4);
     for(int j=0;j<nchildren;j++) {
       children.push_back(makeParticle());
     }
@@ -882,7 +879,6 @@ TEST(xml_serialization_massive)
     boost::archive::xml_oarchive oa(os);
     oa << boost::serialization::make_nvp("mytree", t1);
   }
-  std::cout<<os.str()<<std::endl;
   
   istringstream is;
   I3MCTree t2;
@@ -906,7 +902,6 @@ TEST(xml_serialization_massive)
     boost::archive::xml_oarchive oa2(os2);
     oa2 << boost::serialization::make_nvp("mytree", t2);
   }
-  std::cout<<os2.str()<<std::endl;
   
   istringstream is2;
   I3MCTree t3;

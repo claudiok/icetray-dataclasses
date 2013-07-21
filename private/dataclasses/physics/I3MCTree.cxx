@@ -31,4 +31,3 @@ I3MCTree::AddPrimary(const I3Particle& p)
 
 I3_SERIALIZABLE(I3MCTree);
 
-
