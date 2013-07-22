@@ -88,6 +88,16 @@ TEST(cartesian_construction)
   ENSURE_DISTANCE(d4.GetAzimuth(),3*I3Constants::pi/2,0.0001);
 }
 
+TEST(i3position_construction)
+{
+  I3Position p(1.1,2.2,3.3);
+  double norm=p.Magnitude();
+  I3Direction d(p);
+  ENSURE_DISTANCE(d.GetX(),p.GetX()/norm,.0001);
+  ENSURE_DISTANCE(d.GetY(),p.GetY()/norm,.0001);
+  ENSURE_DISTANCE(d.GetZ(),p.GetZ()/norm,.0001);
+}
+
 /**
  * Make sure that the changing of coordinate systems works well
  */

@@ -107,6 +107,15 @@ TEST(cylindrical_construction)
   ENSURE_DISTANCE(p1.GetTheta(),atan(3./4),0.0001);
 }
 
+TEST(i3direction_construction)
+{
+  I3Direction d(1.1,2.2,3.3);
+  I3Position p(d);
+  ENSURE(p.GetX()==d.GetX());
+  ENSURE(p.GetY()==d.GetY());
+  ENSURE(p.GetZ()==d.GetZ());
+}
+
 /**
  * Make sure that the changing of coordinate systems works well
  */

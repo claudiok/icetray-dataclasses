@@ -33,7 +33,7 @@ I3_SERIALIZABLE(I3Position);
 I3Position::I3Position(const I3Direction& d):
 x_(d.GetX()),
 y_(d.GetY()),
-z_(d.GetY()),
+z_(d.GetZ()),
 r_(1),
 theta_(d.CalcTheta()),
 phi_(d.CalcPhi()),
