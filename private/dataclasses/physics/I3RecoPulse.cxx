@@ -11,9 +11,9 @@ I3RecoPulse::~I3RecoPulse() {}
 template <class Archive> 
 void 
 I3RecoPulse::serialize(Archive& ar, unsigned version)
-  {
-    if (version>i3recopulse_version_)
-    log_fatal("Attempting to read version %u from file but running version %u of I3RecoPulse class.",version,i3recopulse_version_);
+{
+	if (version>i3recopulse_version_)
+		log_fatal("Attempting to read version %u from file but running version %u of I3RecoPulse class.",version,i3recopulse_version_);
 
 	if (version < 2) {
 		double t(time_), c(charge_), w(width_);
@@ -52,7 +52,13 @@ I3RecoPulse::serialize(Archive& ar, unsigned version)
 			}
 		}
 	} else {
-		ar & make_nvp("Time", time_);
+		if (version < 3) {
+			float old_time_(time_);
+			ar & make_nvp("Time", old_time_);
+			time_ = old_time_;
+		} else {
+			ar & make_nvp("Time", time_);
+		}
 		ar & make_nvp("PulseCharge", charge_);
 		ar & make_nvp("Width", width_);
 		ar & make_nvp("Flags", flags_);

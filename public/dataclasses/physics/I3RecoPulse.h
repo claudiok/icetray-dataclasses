@@ -21,11 +21,11 @@
  * A readout independent representation of a waveform feature or Analog
  *  readout.
  */
-static const unsigned i3recopulse_version_ = 2;
+static const unsigned i3recopulse_version_ = 3;
 
 class I3RecoPulse 
 {
-  float time_;
+  double time_;
   float charge_;
   float width_;
   typedef uint8_t flags_t;
@@ -47,9 +47,9 @@ class I3RecoPulse
 
   void SetFlags(flags_t flags) { flags_ = flags; } 
 
-  float GetTime() const {return time_;}
+  double GetTime() const {return time_;}
 
-  void SetTime(float time) {time_ = time;}
+  void SetTime(double time) {time_ = time;}
 
     /**
      * GetCharge() - Returns the number of PE's seen in this pulse
