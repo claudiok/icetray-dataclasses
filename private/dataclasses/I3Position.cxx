@@ -121,7 +121,7 @@ void I3Position::NullPos() {
 
 //-----------------------------------------------------------
 void I3Position::ShiftCoordSystem(const I3Position& p) {
-  SetPosition(x_-p.x_, y_-p.y_, z_-p.z_);
+  SetPosition(x_-p.x_, y_-p.y_, z_-p.z_,car);
 }
 
 //-----------------------------------------------------------
