@@ -433,7 +433,7 @@ class I3Particle : public I3FrameObject
   void SetPos(const I3Position& p) { pos_=p; }
   void SetPos(double p1, double p2, double p3, 
 	      I3Position::RefFrame frame)
-    { pos_.SetPosition(p1,p2,p3,frame); }
+    { pos_=I3Position(p1,p2,p3,frame); }
   void SetPos(double x, double y, double z)
     { pos_=I3Position(x,y,z); }
 
