@@ -92,7 +92,7 @@ TEST(pos_C)
   
   // p.SetPosition(1,1,1,I3Position::car);
   cout <<"Setting position q to: 2,2,2 in car..."<<endl;
-  q.SetPosition(2,2,2,I3Position::car);
+  q=I3Position(2,2,2,I3Position::car);
   
   cout <<"Position p.X (4): "<<p.GetX()<<endl;
   cout <<"Position p.Y (3): "<<p.GetY()<<endl;
@@ -135,7 +135,7 @@ TEST(pos_C)
   
   cout <<"Creating a new position (s) and setting coordinates in sph..."<<endl;
   I3Position s;
-  s.SetPosition(1.732050808,0.955316618,3.141592/4,I3Position::sph);
+  s=I3Position(1.732050808,0.955316618,3.141592/4,I3Position::sph);
   cout <<"Position s.X (1): "<<s.GetX()<<endl;
   cout <<"Position s.Y (1): "<<s.GetY()<<endl;
   cout <<"Position s.Z (1): "<<s.GetZ()<<endl;

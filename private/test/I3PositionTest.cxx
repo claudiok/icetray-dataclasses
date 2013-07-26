@@ -126,7 +126,7 @@ TEST(coord_transforms)
   //I3PositionPtr q_ptr(new I3Position(1,2,3));
   I3Position q(1,2,3);
   cout <<"Setting position q to: 2,2,2 in car..."<<endl;
-  q.SetPosition(2,2,2,I3Position::car);
+  q=I3Position(2,2,2,I3Position::car);
   
   ENSURE_DISTANCE(p.GetX(),4.0,0.0001,"p.GetX failed");
   ENSURE_DISTANCE(p.GetY(),3.0,0.0001,"p.GetY failed");
@@ -163,7 +163,7 @@ TEST(coord_transforms)
   
   cout <<"Creating position s and setting coordinates in sph..."<<endl;
   I3Position s;
-  s.SetPosition(1.732050808,0.955316618,3.141592/4,I3Position::sph);
+  s=I3Position(1.732050808,0.955316618,3.141592/4,I3Position::sph);
   ENSURE_DISTANCE(s.GetX(),1.0,0.0001,"s.GetX failed");
   ENSURE_DISTANCE(s.GetY(),1.0,0.0001,"s.GetY failed");
   ENSURE_DISTANCE(s.GetZ(),1.0,0.0001,"s.GetZ failed");
