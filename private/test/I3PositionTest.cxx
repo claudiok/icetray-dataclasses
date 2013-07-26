@@ -140,8 +140,8 @@ TEST(coord_transforms)
   ENSURE_DISTANCE(q.GetY(),2.0,0.0001,"q.GetY failed");
   ENSURE_DISTANCE(q.GetZ(),2.0,0.0001,"q.GetZ failed");
   
-  ENSURE_DISTANCE(p.CalcDistance(q),3.0,0.0001,"p.CalcDistance(q) failed");
-  ENSURE_DISTANCE(q.CalcDistance(p),3.0,0.0001,"q.CalcDistance(p) failed");
+  ENSURE_DISTANCE((p-q).Magnitude(),3.0,0.0001,"(p-q).Magnitude() failed");
+  ENSURE_DISTANCE((q-p).Magnitude(),3.0,0.0001,"(q-p).Magnitude() failed");
   
   cout <<"Rotating p by Pi/4 around z-axis..."<<endl;
   p.RotateZ(3.141592/4);
@@ -187,13 +187,13 @@ TEST(coord_transforms)
   ENSURE_DISTANCE(f.GetZ(),1.0,0.0001,"f.GetZ failed");
   
   cout <<"Shifting coordinate system of f by s..."<<endl;
-  f.ShiftCoordSystem(s);
+  f -= s;
   ENSURE_DISTANCE(f.GetX(),0.0,0.0001,"shifted f.GetX failed");
   ENSURE_DISTANCE(f.GetY(),0.0,0.0001,"shifted f.GetY failed");
   ENSURE_DISTANCE(f.GetZ(),0.0,0.0001,"shifted f.GetZ failed");
   
   cout <<"Shifting coordinate system of f by p..."<<endl;
-  f.ShiftCoordSystem(p);
+  f -= p;
   ENSURE_DISTANCE(f.GetX(),0.0,0.0001,"shifted f.GetX failed");
   ENSURE_DISTANCE(f.GetY(),-0.707108,0.0001,"shifted f.GetY failed");
   ENSURE_DISTANCE(f.GetZ(),-4.94975,0.0001,"shifted f.GetZ failed");

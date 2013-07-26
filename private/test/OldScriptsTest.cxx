@@ -33,7 +33,7 @@ TEST(dir_C)
   cout <<"--------------------------------"<<endl;
   
   cout <<"Setting dir: zen=(180-54.74)I3Units::deg, azi=-135I3Units::deg (i.e. 1,1,1)..."<<endl;
-  dir.SetDirection((180-54.73561)*I3Units::deg, -135*I3Units::deg);
+  dir = I3Direction((180-54.73561)*I3Units::deg, -135*I3Units::deg);
   cout <<"dir's zen,azi: "<<dir.GetZenith()/I3Units::deg<<" "<<dir.GetAzimuth()/I3Units::deg<<"\n";
   cout <<"==> dir's x,y,z: "<<dir.GetX()<<" "<<dir.GetY()<<" "<<dir.GetZ()<<"\n";
   cout <<endl;
@@ -41,14 +41,14 @@ TEST(dir_C)
   cout 
     <<"Setting dir: x=1,y=1,z=0..."
     <<endl;
-  dir.SetDirection(1,1,0);
+  dir = I3Direction(1,1,0);
   cout <<"dir's x,y,z: "<<dir.GetX()<<" "<<dir.GetY()<<" "<<dir.GetZ()<<"\n";
   cout <<"==> dir's zen,azi: "<<dir.GetZenith()/I3Units::deg
        <<" "<<dir.GetAzimuth()/I3Units::deg<<"\n";
   cout <<endl;
   
   cout <<"Setting values for dir in zen=0,azi=0 (i.e. down)..."<<endl;
-  dir.SetDirection(0,0);
+  dir = I3Direction(0,0);
   cout <<"dir's zen,azi: "<<dir.GetZenith()/I3Units::deg<<" "
        <<dir.GetAzimuth()/I3Units::deg<<"\n";
   cout <<"==> dir's x,y,z: "<<dir.GetX()<<" "<<dir.GetY()<<" "
@@ -108,8 +108,8 @@ TEST(pos_C)
   cout <<"Position q.Z (2): "<<q.GetZ()<<endl;
   cout <<endl;
     
-  cout << "p-q Distance (3): "<<p.CalcDistance(q)<<endl;
-  cout << "q-p Distance (3): "<<q.CalcDistance(p)<<endl;
+  cout << "p-q Distance (3): "<<(p-q).Magnitude()<<endl;
+  cout << "q-p Distance (3): "<<(q-p).Magnitude()<<endl;
   cout <<endl;
   
   cout <<"Rotating P by Pi/4 around z-axis..."<<endl;
@@ -163,14 +163,14 @@ TEST(pos_C)
   cout <<endl;
   
   cout <<"Shifting coordinate system of f by s..."<<endl;
-  f.ShiftCoordSystem(s);
+  f -= s;
   cout <<"Position f.X (0): "<<f.GetX()<<endl;
   cout <<"Position f.Y (0): "<<f.GetY()<<endl;
   cout <<"Position f.Z (0): "<<f.GetZ()<<endl;
   cout <<endl;
   
   cout <<"Shifting coordinate system of f by p..."<<endl;
-  f.ShiftCoordSystem(p);
+  f -= p;
   cout <<"Position f.X (0): "<<f.GetX()<<endl;
   cout <<"Position f.Y (-0.707108): "<<f.GetY()<<endl;
   cout <<"Position f.Z (-4.94975): "<<f.GetZ()<<endl;

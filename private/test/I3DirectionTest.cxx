@@ -106,7 +106,7 @@ TEST(coord_change)
   cout <<"Creating I3Direction..."<<endl;
   I3Direction dir;
   cout <<"Setting dir: zen=(180-54.74)deg, azi=-135deg (i.e.1,1,1)..."<<endl;
-  dir.SetDirection((180-54.73561)*deg, -135*deg);
+  dir = I3Direction((180-54.73561)*deg, -135*deg);
   ENSURE_DISTANCE(dir.GetZenith()/deg,125.264,0.001,"dir.GetZenith failed");
   ENSURE_DISTANCE(dir.GetAzimuth()/deg,-135.0,0.001,"dir.GetAzimuth failed");
   ENSURE_DISTANCE(dir.GetX(),0.57735,0.0001,"dir.GetX failed");
@@ -115,7 +115,7 @@ TEST(coord_change)
   
   cout <<"Creating another I3Direction..."<<endl;
   I3Direction dir2;
-  dir2.SetDirection(1.0,0.0,1.0);  // Not properly normalized
+  dir2 = I3Direction(1.0,0.0,1.0);  // Not properly normalized
   //Recall Azimuth/Zenith are the direction back to sourcethat originates a particle
   //  with this direction.
   ENSURE_DISTANCE(dir2.GetZenith()/deg,(180.0-45.0),0.001,"dir.GetZenith failed");
@@ -127,7 +127,7 @@ TEST(coord_change)
   ENSURE_DISTANCE(dir2.GetY(),0.,0.0001,"dir.GetY failed");
   ENSURE_DISTANCE(dir2.GetZ(),0.7071,0.0001,"dir.GetZ failed");
   //Now change the direction, make sure everthing is updated properly
-  dir2.SetDirection(1.0,1.0,1.0);  // Not properly normalized
+  dir2 = I3Direction(1.0,1.0,1.0);  // Not properly normalized
   ENSURE_DISTANCE(dir2.GetZenith()/deg,(180.0-54.736),0.001,"dir.GetZenith failed");
   ENSURE_DISTANCE(dir2.GetAzimuth()/deg,(225.0),0.001,"dir.GetAzimuth failed");
   ENSURE_DISTANCE(dir2.CalcTheta()/deg,(54.736),0.001,"dir.CalcTheta failed");
@@ -138,7 +138,7 @@ TEST(coord_change)
   ENSURE_DISTANCE(dir2.GetZ(),0.57735,0.0001,"dir.GetZ failed");
 
   cout <<"Setting dir: x=1,y=1,z=0..."<<endl;
-  dir.SetDirection(1,1,0);
+  dir = I3Direction(1,1,0);
   ENSURE_DISTANCE(dir.GetZenith()/deg,90.0,0.001,"dir.GetZenith failed");
   ENSURE_DISTANCE(dir.GetAzimuth()/deg,225.0,0.001,"dir.GetAzimuth failed");
   ENSURE_DISTANCE(dir.GetX(),0.7071,0.001,"dir.X failed");
@@ -146,7 +146,7 @@ TEST(coord_change)
   ENSURE_DISTANCE(dir.GetZ(),0.0,0.001,"dir.Z failed");
 
   cout <<"Setting values for dir in zen=0,azi=0 (i.e. down)..."<<endl;
-  dir.SetDirection(0,0);
+  dir = I3Direction(0,0);
   ENSURE_DISTANCE(dir.GetX(),0.0,0.0001,"dir.GetX failed");
   ENSURE_DISTANCE(dir.GetY(),0.0,0.0001,"dir.GetY failed");
   ENSURE_DISTANCE(dir.GetZ(),-1.0,0.0001,"dir.GetZ failed");
@@ -186,14 +186,14 @@ TEST(setdir)
   ENSURE_DISTANCE(d.GetZenith(),90*deg,0.0001);
   ENSURE_DISTANCE(d.GetAzimuth(),-90*deg,0.0001);
 
-  d.SetDir(1,1,1);
+  d = I3Direction(1,1,1);
   ENSURE_DISTANCE(d.GetX(),1./sqrt(3.),0.0001);
   ENSURE_DISTANCE(d.GetY(),1./sqrt(3.),0.0001);
   ENSURE_DISTANCE(d.GetZ(),1./sqrt(3.),0.0001);
   ENSURE_DISTANCE(d.GetZenith(),2.18627,0.0001);
   ENSURE_DISTANCE(d.GetAzimuth(),225*deg,0.0001);
 
-  d.SetDir(2.18627,-135*deg);
+  d = I3Direction(2.18627,-135*deg);
   ENSURE_DISTANCE(d.GetX(),1./sqrt(3.),0.0001);
   ENSURE_DISTANCE(d.GetY(),1./sqrt(3.),0.0001);
   ENSURE_DISTANCE(d.GetZ(),1./sqrt(3.),0.0001);
@@ -278,7 +278,7 @@ TEST(dot_product)
 {
   I3Direction d(1,2,3);
   I3Direction f(0,1,2);
-  double z = d.Dot(f);
+  double z = d*f;
 
   ENSURE((z < 0.956183) && (z > 0.9561828));
   
