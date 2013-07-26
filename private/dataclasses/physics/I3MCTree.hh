@@ -1,9 +1,18 @@
+/**
+ * @file I3MCTree.hh
+ * @brief Implementation for TreeBase
+ * 
+ * copyright (C) 2013 the icecube collaboration
+ * 
+ * $Id$
+ * @version $Revision$
+ * @date $Date$
+ */
 #include <cassert>
 #include <boost/dynamic_bitset.hpp>
 #include <boost/foreach.hpp>
 
 #include <icetray/serialization.h>
-#include <I3/dynamic_bitset.hpp>
 
 namespace TreeBase {
   /*
@@ -24,8 +33,8 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<typename IterD,typename IterType>
-  Tree<T,Key,Hash>::Tree(const iterator_base<IterD,IterType>& other)
+  template<typename IterD,typename IterType,typename TreeValue,typename TreeHashMapIter>
+  Tree<T,Key,Hash>::Tree(const iterator_base<IterD,IterType,TreeValue,TreeHashMapIter>& other)
   { 
     // TODO: do something
   }
@@ -180,7 +189,7 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  std::vector<T>
+  const std::vector<T>
   Tree<T,Key,Hash>::children(const Key& key) const
   {
     std::vector<T> result;
@@ -266,6 +275,25 @@ namespace TreeBase {
       typename tree_hash_map::const_iterator iter = internalMap.find(*head_);
       if (iter != internalMap.end())
         ret = iter->second.data;
+    }
+    return ret;
+  }
+  
+  template<typename T, typename Key, typename Hash>
+  const std::vector<T>
+  Tree<T,Key,Hash>::get_heads() const
+  {
+    std::vector<T> ret;
+    if (head_) {
+      typename tree_hash_map::const_iterator iter = internalMap.find(*head_);
+      const treeNode* n;
+      if (iter != internalMap.end()) {
+        n = &(iter->second);
+        do {
+          ret.push_back(n->data);
+          n = n->nextSibling;
+        } while (n != NULL);
+      }
     }
     return ret;
   }
@@ -688,7 +716,7 @@ namespace TreeBase {
     } else {
       // load new Tree
       ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-      boost::dynamic_bitset<> nullMask(CHUNK_SIZE_);
+      boost::dynamic_bitset<unsigned long> nullMask(CHUNK_SIZE_);
       std::vector<I3Particle> dataChunk;
       // TODO: think about implementing our own hash_map<allocator>
       // and swapping hash_maps to make L2 caching better
@@ -706,7 +734,9 @@ namespace TreeBase {
         if (chunkSize <= 0)
           break;
         nullMask.resize(chunkSize);
-        ar & make_nvp("chunkMask",nullMask);
+        std::vector<unsigned long> vec;
+        ar & make_nvp("chunkMask",vec);
+        from_block_range(vec.begin(), vec.end(), nullMask);
         numElements = nullMask.count();
         newNodes = new std::pair<Key,treeNode >[numElements];
         if (!head_ && numElements > 0) {
@@ -767,7 +797,7 @@ namespace TreeBase {
       ar & make_nvp("numBits",nelements);
       return;
     }
-    boost::dynamic_bitset<> nullMask(CHUNK_SIZE_);
+    boost::dynamic_bitset<unsigned long> nullMask(CHUNK_SIZE_);
     std::vector<const I3Particle*> dataChunk;
     typename tree_hash_map::const_iterator iter = internalMap.find(*head_);
     const treeNode* n = &(iter->second);
@@ -798,7 +828,10 @@ namespace TreeBase {
       }
       ar & make_nvp("numBits",nelements);
       nullMask.resize(nelements);
-      ar & make_nvp("chunkMask",nullMask);
+      // Convert bitset into a vector
+      std::vector<unsigned long> vec(nullMask.num_blocks());
+      to_block_range(nullMask, vec.begin());
+      ar & make_nvp("chunkMask",vec);
       BOOST_FOREACH(const I3Particle* part, dataChunk)
         ar & make_nvp("particle",*part);
       nullMask.reset();

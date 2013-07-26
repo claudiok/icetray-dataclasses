@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <I3Test.h>
 #include <dataclasses/physics/I3MCTree.h>
-//#include <dataclasses/physics/I3MCTreeUtils.h>
+#include <dataclasses/physics/I3MCTreeUtils.h>
 #include <icetray/I3Frame.h>
 #include <sstream>
 #include <boost/archive/xml_iarchive.hpp>
@@ -36,7 +36,7 @@ I3Particle makeParticle()
 }
 
 
-// Run all the TreeBase::Tree tests
+// Run all the TreeBase::Tree tests (the I3MCTree methods)
 
 TEST(constructors)
 {
@@ -277,6 +277,26 @@ TEST(clear)
   
   t1.clear();
   ENSURE( t1.empty() , "tree did not clear");
+}
+
+TEST(get_heads)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  t1.insert_after(p1);
+  t1.insert_after(p2);
+  t1.insert_after(p3);
+  t1.insert_after(p4);
+  
+  std::vector<I3Particle> heads = t1.get_heads();
+  ENSURE( heads.size() == 4 );
+  ENSURE( heads.at(0) == p1 );
+  ENSURE( heads.at(1) == p2 );
+  ENSURE( heads.at(2) == p3 );
+  ENSURE( heads.at(3) == p4 );
 }
 
 TEST(append_child)
@@ -809,9 +829,9 @@ TEST(xml_serialization)
   }
   ENSURE(t1 == t2);
   
-  t2.AddPrimary(makeParticle());
-  t2.AddPrimary(makeParticle());
-  t2.AddPrimary(makeParticle());
+  t2.insert_after(makeParticle());
+  t2.insert_after(makeParticle());
+  t2.insert_after(makeParticle());
   ostringstream os2;
   {
     boost::archive::xml_oarchive oa2(os2);
@@ -866,7 +886,7 @@ TEST(xml_serialization_massive)
   for(int i=0;i<10;i++) {
     vector<I3Particle> children;
     p1 = makeParticle();
-    t1.AddPrimary(p1);
+    t1.insert_after(p1);
     nchildren = 2000+1000*(i%4);
     for(int j=0;j<nchildren;j++) {
       children.push_back(makeParticle());
@@ -920,6 +940,341 @@ TEST(xml_serialization_massive)
   ENSURE(t1 == t3);
 }
 
-// Now run the I3MCTree tests
+// Now run the I3MCTreeUtils tests
+
+TEST(utils_AddPrimary)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  
+  ENSURE( t1.get_head() , "primary is missing");
+  ENSURE( p1.GetShape() != I3Particle::Primary , "AddPrimary had side effect");
+  ENSURE( t1.get_head()->GetShape() == I3Particle::Primary , "particle is not primary");
+  ENSURE( I3ParticleID(*t1.get_head()) == I3ParticleID(p1) , "primary is incorrect");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p2 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p2);
+  
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  ENSURE( p2.GetShape() != I3Particle::Primary , "I3MCTreePtr: AddPrimary had side effect");
+  ENSURE( t2->get_head()->GetShape() == I3Particle::Primary , "I3MCTreePtr: particle is not primary");
+  ENSURE( I3ParticleID(*t2->get_head()) == I3ParticleID(p2) , "I3MCTreePtr: primary is incorrect");
+}
+
+TEST(utils_AppendChild)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  
+  std::vector<I3Particle> children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(0) == p2 , "child not found");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p3);
+  
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p3,p4);
+  
+  std::vector<I3Particle> children2 = t2->children(p3);
+  ENSURE( !children2.empty() , "I3MCTreePtr: no children");
+  ENSURE( children2.at(0) == p4 , "I3MCTreePtr: child not found");
+}
+
+TEST(utils_GetPrimaries)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  I3MCTreeUtils::AddPrimary(t1,p2);
+  
+  std::vector<I3Particle> primaries = I3MCTreeUtils::GetPrimaries(t1);
+  ENSURE( primaries.size() == 2 , "not 2 primaries");
+  ENSURE( I3ParticleID(primaries.at(0)) == I3ParticleID(p1) , "p1 not found");
+  ENSURE( I3ParticleID(primaries.at(1)) == I3ParticleID(p2) , "p2 not found");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  I3Particle p5 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p3);
+  I3MCTreeUtils::AddPrimary(t2,p4);
+  I3MCTreeUtils::AddPrimary(t2,p5);
+  
+  std::vector<I3Particle> primaries2 = I3MCTreeUtils::GetPrimaries(t2);
+  ENSURE( primaries2.size() == 3 , "I3MCTreePtr: not 3 primaries");
+  ENSURE( I3ParticleID(primaries2.at(0)) == I3ParticleID(p3) , "I3MCTreePtr: p3 not found");
+  ENSURE( I3ParticleID(primaries2.at(1)) == I3ParticleID(p4) , "I3MCTreePtr: p4 not found");
+  ENSURE( I3ParticleID(primaries2.at(2)) == I3ParticleID(p5) , "I3MCTreePtr: p5 not found");
+}
+
+TEST(utils_GetDaughters)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  I3MCTreeUtils::AppendChild(t1,p1,p3);
+  
+  std::vector<I3Particle> children = I3MCTreeUtils::GetDaughters(t1,p1);
+  ENSURE( children.size() == 2 , "not 2 children");
+  ENSURE( children.at(0) == p2 , "child p2 not found");
+  ENSURE( children.at(1) == p3 , "child p3 not found");
+  
+
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p4 = makeParticle();
+  I3Particle p5 = makeParticle();
+  I3Particle p6 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p4);
+  
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p4,p5);
+  I3MCTreeUtils::AppendChild(t2,p4,p6);
+  
+  std::vector<I3Particle> children2 = I3MCTreeUtils::GetDaughters(t2,p4);
+  ENSURE( children2.size() == 2 , "I3MCTreePtr: not 2 children");
+  ENSURE( children2.at(0) == p5 , "I3MCTreePtr: child p5 not found");
+  ENSURE( children2.at(1) == p6 , "I3MCTreePtr: child p6 not found");
+}
+
+TEST(utils_GetParent)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  
+  const I3Particle& ret = I3MCTreeUtils::GetParent(t1,p2);
+  ENSURE( I3ParticleID(ret) == I3ParticleID(p1) , "parent(p2) != p1");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p3);
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p3,p4);
+  
+  const I3Particle& ret2 = I3MCTreeUtils::GetParent(t2,p4);
+  ENSURE( I3ParticleID(ret2) == I3ParticleID(p3) , "I3MCTreePtr: parent(p4) != p3");
+}
+
+TEST(utils_HasParent)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  
+  ENSURE( I3MCTreeUtils::HasParent(t1,p2) , "hasparent(p2) != true");
+  ENSURE( !I3MCTreeUtils::HasParent(t1,p1) , "hasparent(p1) == true");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p3);
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p3,p4);
+  
+  ENSURE( I3MCTreeUtils::HasParent(t2,p4) , "I3MCTreePtr: hasparent(p4) != true");
+  ENSURE( !I3MCTreeUtils::HasParent(t2,p3) , "I3MCTreePtr: hasparent(p3) == true");
+}
+
+TEST(utils_GetParticle)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  
+  const I3Particle& ret = I3MCTreeUtils::GetParticle(t1,p2);
+  ENSURE( I3ParticleID(ret) == I3ParticleID(p2) , "get(p2) != p2");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p3);
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p3,p4);
+  
+  const I3Particle& ret2 = I3MCTreeUtils::GetParticle(t2,p4);
+  ENSURE( I3ParticleID(ret2) == I3ParticleID(p4) , "I3MCTreePtr: get(p4) != p4");
+}
+
+TEST(utils_GetPrimary)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  I3MCTreeUtils::AppendChild(t1,p2,p3);
+  
+  const I3Particle& ret = I3MCTreeUtils::GetPrimary(t1,p3);
+  ENSURE( I3ParticleID(ret) == I3ParticleID(p1) , "primary(p3) != p1");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p4 = makeParticle();
+  I3Particle p5 = makeParticle();
+  I3Particle p6 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p4);
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p4,p5);
+  I3MCTreeUtils::AppendChild(t2,p5,p6);
+  
+  const I3Particle& ret2 = I3MCTreeUtils::GetPrimary(t2,p6);
+  ENSURE( I3ParticleID(ret2) == I3ParticleID(p4) , "I3MCTreePtr: primary(p6) != p4");
+}
+
+TEST(utils_Get)
+{
+  I3MCTreePtr t1(new I3MCTree);
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1->get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  I3MCTreeUtils::AppendChild(t1,p2,p3);
+  
+  I3Frame f1;
+  f1.Put("I3MCTree",t1,I3Frame::Physics);
+  ENSURE( f1.Has("I3MCTree") , "error adding tree to frame");
+  I3MCTreeConstPtr ret = I3MCTreeUtils::Get(f1,"I3MCTree");
+  ENSURE( ret == t1 , "tree not retrieved correctly");
+  
+  I3FramePtr f2(new I3Frame);
+  f2->Put("I3MCTree",t1,I3Frame::Physics);
+  ENSURE( f2->Has("I3MCTree") , "I3FramePtr: error adding tree to frame");
+  I3MCTreeConstPtr ret2 = I3MCTreeUtils::Get(f2,"I3MCTree");
+  ENSURE( ret2 == t1 , "I3FramePtr: tree not retrieved correctly");
+}
+
+int best_cmp(const I3Particle& p1, const I3Particle& p2)
+{
+  I3ParticleID pid1(p1), pid2(p2);
+  if (pid1 < pid2)
+    return 1;
+  else if (pid2 < pid1)
+    return -1;
+  else
+    return 0;
+}
+
+TEST(utils_GetBest)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  I3MCTreeUtils::AppendChild(t1,p2,p3);
+  
+  const I3Particle ret = I3MCTreeUtils::GetBest(t1,best_cmp);
+  ENSURE( I3ParticleID(ret) == I3ParticleID(p1) , "p1 is not best");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p4 = makeParticle();
+  I3Particle p5 = makeParticle();
+  I3Particle p6 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p4);
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p4,p5);
+  I3MCTreeUtils::AppendChild(t2,p5,p6);
+  
+  const I3Particle ret2 = I3MCTreeUtils::GetBest(t2,best_cmp);
+  ENSURE( I3ParticleID(ret2) == I3ParticleID(p4) , "I3MCTreePtr: p4 is not best");
+}
+
+bool filter_cmp(const I3Particle& p)
+{ return p.GetShape() == I3Particle::Primary; }
+
+TEST(utils_GetFilter)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  I3MCTreeUtils::AppendChild(t1,p2,p3);
+  
+  std::vector<I3Particle> ret = I3MCTreeUtils::GetFilter(t1,filter_cmp);
+  ENSURE( ret.size() == 1 );
+  ENSURE( I3ParticleID(ret.at(0)) == I3ParticleID(p1) , "p1 not in filter");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p4 = makeParticle();
+  I3Particle p5 = makeParticle();
+  I3Particle p6 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p4);
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p4,p5);
+  I3MCTreeUtils::AddPrimary(t2,p6);
+  
+  std::vector<I3Particle> ret2 = I3MCTreeUtils::GetFilter(t2,filter_cmp);
+  ENSURE( ret2.size() == 2 );
+  ENSURE( I3ParticleID(ret2.at(0)) == I3ParticleID(p4) , "I3MCTreePtr: p4 not in filter");
+  ENSURE( I3ParticleID(ret2.at(1)) == I3ParticleID(p6) , "I3MCTreePtr: p6 not in filter");
+}
+
+bool filter_cmp2(const I3Particle& p)
+{ return p.GetShape() != I3Particle::Primary; }
+
+TEST(utils_GetBestFilter)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  ENSURE( t1.get_head() , "primary is missing");
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  I3MCTreeUtils::AppendChild(t1,p2,p3);
+  
+  const typename I3MCTree::nonPtrType ret = I3MCTreeUtils::GetBestFilter(t1,filter_cmp2,best_cmp);
+  ENSURE( ret ,"nothing passed filter" );
+  ENSURE( I3ParticleID(*ret) == I3ParticleID(p2) , "p2 not best filtered");
+  
+  I3MCTreePtr t2(new I3MCTree);
+  I3Particle p4 = makeParticle();
+  I3Particle p5 = makeParticle();
+  I3Particle p6 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t2,p4);
+  ENSURE( t2->get_head() , "I3MCTreePtr: primary is missing");
+  I3MCTreeUtils::AppendChild(t2,p4,p5);
+  I3MCTreeUtils::AddPrimary(t2,p6);
+  
+  const typename I3MCTree::nonPtrType ret2 = I3MCTreeUtils::GetBestFilter(t2,filter_cmp2,best_cmp);
+  ENSURE( ret2 , "I3MCTreePtr: nothing passed filter");
+  ENSURE( *ret2 == p5 , "I3MCTreePtr: p5 not best filtered");
+}
+
+
 
 

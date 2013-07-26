@@ -8,9 +8,8 @@
 #define I3MCTREEUTILS_H_INCLUDED
 
 #include "dataclasses/physics/I3Particle.h"
+#include "dataclasses/physics/I3ParticleID.h"
 #include "dataclasses/physics/I3MCTree.h"
-#include "dataclasses/physics/I3MCList.h"
-#include "dataclasses/physics/I3MCHit.h"
 
 namespace I3MCTreeUtils
 {
@@ -20,147 +19,194 @@ namespace I3MCTreeUtils
    * A tree can have multiple primaries.
    * Sets the shape to Primary
    */
-  void AddPrimary(I3MCTree&, I3Particle&);
-  void AddPrimary(I3MCTreePtr, I3Particle&);
-
-  void AddPrimary(I3MCTree&,  const I3MCTree&);
-
+  void AddPrimary(I3MCTree&, const I3Particle&);
+  void AddPrimary(I3MCTreePtr, const I3Particle&);
+  
   /**
    *Appends a child to the parent particle
    */
-  void AppendChild(I3MCTree&,  const I3Particle&,  const I3Particle&);
-  void AppendChild(I3MCTreePtr,  const I3Particle&,  const I3Particle&);
-
+  void AppendChild(I3MCTree&, const I3ParticleID&, const I3Particle&);
+  void AppendChild(I3MCTreePtr, const I3ParticleID&, const I3Particle&);
+  
   /**
    *Gets a list of primaries from the tree
    */
   const std::vector<I3Particle> GetPrimaries(const I3MCTree&);
   const std::vector<I3Particle> GetPrimaries(I3MCTreeConstPtr);
-
+  
   /**
    *Gets a list of daughters of the parent particle.
    */
-  const std::vector<I3Particle> GetDaughters(const I3MCTree&, const I3Particle&);
-  const std::vector<I3Particle> GetDaughters(I3MCTreeConstPtr, const I3Particle&);
-
+  const std::vector<I3Particle> GetDaughters(const I3MCTree&, const I3ParticleID&);
+  const std::vector<I3Particle> GetDaughters(I3MCTreeConstPtr, const I3ParticleID&);
+  
   /**
-   *Gets the parent of a particle.  log_fatals if parent does not exist.
+   *Gets the parent of a particleID.  log_fatals if parent does not exist.
    */
-  const I3Particle& GetParent(const I3MCTree&, const I3Particle&);
-  const I3Particle& GetParent(I3MCTreeConstPtr, const I3Particle&);
-
+  const I3Particle& GetParent(const I3MCTree&, const I3ParticleID&);
+  const I3Particle& GetParent(I3MCTreeConstPtr, const I3ParticleID&);
+  
   /**
    *Returns true if the particle has a parent
    */
-  bool HasParent(const I3MCTree&, const I3Particle&);
-  bool HasParent(I3MCTreeConstPtr, const I3Particle&);
-
+  bool HasParent(const I3MCTree&, const I3ParticleID&);
+  bool HasParent(I3MCTreeConstPtr, const I3ParticleID&);
+  
   /**
-   * Function that converts am I3MCList to an I3MCTree.
-   * NOTE: No attempt has been made to construct trees
-   * from flat lists.  All particles in the I3MCList
-   * go into the top level of the tree, so will be
-   * considered a primary.  Particles in composite
-   * lists become daughters in the tree.  The parentID
-   * and primaryID remain unchanged in the conversion.
+   * This gets the particle with a particleID.
+   * log_fatals if particle does not exist.
    */
-  I3MCTreePtr ListToTree(const I3MCList&);
-  I3MCTreePtr ListToTree(I3MCListConstPtr);
-
+  const I3Particle& GetParticle(const I3MCTree&, const I3ParticleID&);
+  const I3Particle& GetParticle(I3MCTreeConstPtr, const I3ParticleID&);
+  
   /**
-   * Gets either an I3MCList or an I3MCTree from the frame
-   * with the specificed key.  If the object is an I3MCList
-   * it is converted to an I3MCTree with ListToTree.
+   * This gets the primary that created the particleID.
+   * log_fatals if particle does not exist.
    */
-  I3MCTreeConstPtr Get(I3FramePtr, const std::string&);
+  const I3Particle& GetPrimary(const I3MCTree&, const I3ParticleID&);
+  const I3Particle& GetPrimary(I3MCTreeConstPtr, const I3ParticleID&);
+  
+  /**
+   * Gets an I3MCTree from the frame with the specificed key.
+   */
   I3MCTreeConstPtr Get(const I3Frame & , const std::string&);
-
+  I3MCTreeConstPtr Get(I3FramePtr, const std::string&);
+  
   /**
-   * Will search for I3MCList and I3MCTree by either of two keys.
-   * It's common for the key to change from someting like...
-   * "MyList" to "MyTree"  Now you can give both to Get and it'll
-   * look for both.
+   * Get the "best match" particle in the tree using a comparison Function.
+   * 
+   * \param t I3MCTree
+   * \param f Callable which takes two I3Particles, compares them, and returns
+   *          an integer (positive = first particle is better)
    */
-  I3MCTreeConstPtr Get(I3FramePtr, const std::string&, const std::string&);
-  I3MCTreeConstPtr Get(const I3Frame &, const std::string&, const std::string&);
-
-  /**
-   * Used internally by ListToTree and called recursively.
-   * The general population probably won't find this useful.
-   * To use it properly, you need to...
-   * 1) Copy the particle you want to add
-   * 2) Clear the composite list of the copy
-   * 3) Append the copy (with the empty composite list) to the tree with insert.
-   * 4) Pass to ConvertComposite the tree, the iterator (return value from insert call),
-        and the composite list of the original particle.
-   *  Again probably not for general consumption.
-   */
-  namespace internal{
-    void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const std::vector<I3Particle>&);
-    void DumpChildren(const I3MCTree&,I3MCTree::iterator);
+  //template<typename Function>
+  //typename I3MCTree::nonPtrType GetBest(const I3MCTree&, Function);
+  template<typename Function>
+  const I3Particle GetBest(const I3MCTree& t, Function func)
+  {
+    typename I3MCTree::fast_const_iterator iter(t), end=t.cend_fast();
+    if (iter == end)
+      log_fatal("no particles in tree");
+    I3Particle ret(*iter++);
+    for(;iter != end;iter++) {
+      if (func(ret,*iter) < 0)
+        ret = *iter;
+    }
+    return ret;
   }
+  template<typename Function>
+  typename I3MCTree::nonPtrType GetBest(I3MCTreeConstPtr t, Function func)
+  { return I3MCTreeUtils::GetBest(*t,func); }
+  
+  /**
+   * Get all matching particles in the tree using a filter Function.
+   * 
+   * \param t I3MCTree
+   * \param f Callable which takes an I3Particle and returns true/false
+   */
+  template<typename Function>
+  std::vector<I3Particle> GetFilter(const I3MCTree& t, Function func)
+  {
+    std::vector<I3Particle> ret;
+    typename I3MCTree::fast_const_iterator iter(t), end=t.cend_fast();
+    for(;iter != end;iter++) {
+      if (func(*iter))
+        ret.push_back(*iter);
+    }
+    return ret;
+  }
+  template<typename Function>
+  std::vector<I3Particle> GetFilter(I3MCTreeConstPtr t, Function func)
+  { return I3MCTreeUtils::GetFilter(*t,func); }
+  
+  /**
+   * Get best matching particle in the tree using a filter Function
+   * and a comparison Function.
+   * 
+   * \param t I3MCTree
+   * \param f Callable which takes an I3Particle and returns true/false
+   * \param c Callable which takes two I3Particles, compares them, and returns
+   *          an integer (positive = first particle is better)
+   */
+  template<typename FilterFunction,typename CmpFunction>
+  const typename I3MCTree::nonPtrType
+  GetBestFilter(const I3MCTree& t, FilterFunction f, CmpFunction c)
+  {
+    typename I3MCTree::nonPtrType ret;
+    typename I3MCTree::fast_const_iterator iter(t), end=t.cend_fast();
+    for(;iter != end;iter++) {
+      if (f(*iter) && (!ret || c(ret,*iter) < 0))
+        ret = *iter;
+    }
+    return *ret;
+  }
+  template<typename FilterFunction,typename CmpFunction>
+  const typename I3MCTree::nonPtrType
+  GetBestFilter(I3MCTreeConstPtr t, FilterFunction f, CmpFunction c)
+  { return I3MCTreeUtils::GetBestFilter(*t,f,c); }
+  
+  
+  // --------------------- everything below is deprecated --------------------
+  
+  /**
+   * Returns the InIce particle with highest energy.
+   * This is useful for example in extracting "the muon" from the 
+   * atmospheric neutrino data.
+   *
+   * /deprecated Use GetBestFilter instead
+   */
+  I3MCTree::const_iterator GetMostEnergeticPrimary(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticPrimary(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergeticInIce(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticInIce(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergetic(const I3MCTree&, I3Particle::ParticleType) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergetic(I3MCTreeConstPtr, I3Particle::ParticleType) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergeticTrack(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticTrack(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergeticCascade(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticCascade(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergeticInIceCascade(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticInIceCascade(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergeticNeutrino(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticNeutrino(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergeticMuon(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticMuon(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
+  I3MCTree::const_iterator GetMostEnergeticNucleus(const I3MCTree&) __attribute__ ((deprecated));
+  I3MCTree::const_iterator GetMostEnergeticNucleus(I3MCTreeConstPtr) __attribute__ ((deprecated));
+
 
   /**
-   *Returns the InIce particle with highest energy.
-   *This is useful for example in extracting "the muon" from the 
-   *atmospheric neutrino data.
+   * Returns a std::vector of particles that are InIce.
+   *
+   * /deprecated Use GetFilter instead
    */
-  I3MCTree::iterator GetMostEnergeticPrimary(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticPrimary(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetMostEnergeticInIce(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticInIce(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetMostEnergetic(const I3MCTree&, I3Particle::ParticleType);
-  I3MCTree::iterator GetMostEnergetic(I3MCTreeConstPtr, I3Particle::ParticleType);
-
-  I3MCTree::iterator GetMostEnergeticTrack(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticTrack(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetMostEnergeticCascade(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticCascade(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetMostEnergeticInIceCascade(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticInIceCascade(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetMostEnergeticNeutrino(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticNeutrino(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetMostEnergeticMuon(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticMuon(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetMostEnergeticNucleus(const I3MCTree&);
-  I3MCTree::iterator GetMostEnergeticNucleus(I3MCTreeConstPtr);
-
+  const std::vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType) __attribute__ ((deprecated));
+  const std::vector<I3Particle> GetInIce(const I3MCTree&) __attribute__ ((deprecated));
+  const std::vector<I3Particle> GetInIce(I3MCTreeConstPtr) __attribute__ ((deprecated));
 
   /**
-   *Returns a std::vector of particles that are InIce.
+   * Returns a std::vector of particles that are IceTop.
+   *
+   * /deprecated Use GetFilter instead
    */
-  const std::vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType);
-
-  const std::vector<I3Particle> GetInIce(const I3MCTree&);
-  const std::vector<I3Particle> GetInIce(I3MCTreeConstPtr);
+  const std::vector<I3Particle> GetIceTop(const I3MCTree&) __attribute__ ((deprecated));
+  const std::vector<I3Particle> GetIceTop(I3MCTreeConstPtr) __attribute__ ((deprecated));
 
   /**
-   * This gets the particle that created the hit;
+   * Returns an iterator
+   *
+   * /deprecated Use I3MCTree::iterator iter(tree,particleID);
    */
-  I3Particle Get(const I3MCTree&, const I3MCHit&);
-
-  /**
-   *Returns a std::vector of particles that are IceTop.
-   */
-  const std::vector<I3Particle> GetIceTop(const I3MCTree&);
-  const std::vector<I3Particle> GetIceTop(I3MCTreeConstPtr);
-
-  I3MCTree::iterator GetIterator(I3MCTreePtr, const I3Particle&);
-  I3MCTree::iterator GetIterator(I3MCTree&, const I3Particle&);
-
-  /**
-   * This gets the primary that created the particle;
-   */
-  I3ParticlePtr GetPrimary(const I3MCTree&, const I3Particle&);
-  I3ParticlePtr GetPrimary(I3MCTreePtr, const I3Particle&);
-  I3ParticlePtr GetPrimary(I3MCTreeConstPtr, const I3Particle&);
+  I3MCTree::iterator GetIterator(I3MCTreePtr, const I3ParticleID&) __attribute__ ((deprecated));
+  I3MCTree::iterator GetIterator(I3MCTree&, const I3ParticleID&) __attribute__ ((deprecated));
 
 }
 

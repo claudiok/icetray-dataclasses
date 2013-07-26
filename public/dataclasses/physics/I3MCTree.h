@@ -1,6 +1,6 @@
 /**
  * @file I3MCTree.h
- * @brief
+ * @brief Tree of I3Particles
  * 
  * copyright (C) 2013 the icecube collaboration
  * 
@@ -131,31 +131,32 @@ namespace TreeBase {
       /**
        * Iterator base (for tree-based iterators)
        */
-      template<class Derived, class Value>
+      template<class Derived, class Value, class TreeValue,
+               class TreeHashMapIter>
       class iterator_base
         : public boost::iterator_facade<
-            iterator_base<Derived,Value>,
+            iterator_base<Derived,Value,TreeValue,TreeHashMapIter>,
             Value,
             boost::forward_traversal_tag
           >
       {
         public:
           iterator_base() : node_(derived_().first_()) { }
-          explicit iterator_base(Tree<T,Key,Hash>& ext) :
+          explicit iterator_base(TreeValue& ext) :
             ext_(&ext), node_(derived_().first_()) { }
-          explicit iterator_base(Tree<T,Key,Hash>& ext, const Value* v) :
+          explicit iterator_base(TreeValue& ext, const Value* v) :
             ext_(&ext)
           {
-            typename tree_hash_map::iterator iter = internalMap.find(*v);
+            TreeHashMapIter iter = internalMap.find(*v);
             if (iter == internalMap.end())
               node_ = ext.end_;
             else
               node_ = *v;
           }
-          explicit iterator_base(Tree<T,Key,Hash>& ext, const Key& k) :
+          explicit iterator_base(TreeValue& ext, const Key& k) :
             ext_(&ext)
           {
-            typename tree_hash_map::iterator iter = ext.internalMap.find(k);
+            TreeHashMapIter iter = ext.internalMap.find(k);
             if (iter == ext.internalMap.end())
               node_ = ext.end_;
             else
@@ -164,11 +165,11 @@ namespace TreeBase {
         protected:
           TreeHashKey first_() { return ext_->head_; };
           void next_() { };
-          mutable Tree<T,Key,Hash>* ext_;
-          mutable TreeHashKey node_;
+          TreeValue* ext_;
+          TreeHashKey node_;
         private:
           friend class Tree<T,Key,Hash>;
-          explicit iterator_base(Tree<T,Key,Hash>& ext, const TreeHashKey& h) :
+          explicit iterator_base(TreeValue& ext, const TreeHashKey& h) :
             ext_(&ext), node_(h) { }
           Derived& derived_()
           {
@@ -179,11 +180,11 @@ namespace TreeBase {
           {
             assert( node_ != ext_->end_ );
             assert( node_ );
-            typename tree_hash_map::iterator iter = ext_->internalMap.find(*node_);
+            TreeHashMapIter iter = ext_->internalMap.find(*node_);
             assert( iter != ext_->internalMap.end() );
             return iter->second.data;
           }
-          bool equal(iterator_base<Derived,Value> const & other) const
+          bool equal(iterator_base<Derived,Value,TreeValue,TreeHashMapIter> const & other) const
           {
             return (node_ == other.node_);
           }
@@ -196,29 +197,30 @@ namespace TreeBase {
       /**
        * Pre order iterator: O(n)
        */
-      template <class Value>
-      class pre_order : public iterator_base<pre_order<Value>,Value>
+      template <class Value, class TreeValue=Tree<T,Key,Hash>,
+               class TreeHashMapIter=typename tree_hash_map::iterator>
+      class pre_order : public iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>
       {
         public:
-          pre_order(Tree<T,Key,Hash>& ext) :
-            iterator_base<pre_order<Value>,Value>(ext) { }
-          explicit pre_order(Tree<T,Key,Hash>& ext, const Value* value) :
-            iterator_base<pre_order<Value>,Value>(ext,value) { }
-          explicit pre_order(Tree<T,Key,Hash>& ext, const Key& k) :
-            iterator_base<pre_order<Value>,Value>(ext,k) { }
-          explicit pre_order(Tree<T,Key,Hash>& ext, const TreeHashKey& k) :
-            iterator_base<pre_order<Value>,Value>(ext,k) { }
+          pre_order(TreeValue& ext) :
+            iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext) { }
+          explicit pre_order(TreeValue& ext, const Value* value) :
+            iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,value) { }
+          explicit pre_order(TreeValue& ext, const Key& k) :
+            iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+          explicit pre_order(TreeValue& ext, const TreeHashKey& k) :
+            iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
         private:
-          friend class iterator_base<pre_order<Value>,Value>;
+          friend class iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
           void next_()
           {
-            typename tree_hash_map::iterator iter = this->ext_->internalMap.find(*(this->node_));
+            TreeHashMapIter iter = this->ext_->internalMap.find(*(this->node_));
             if (iter == this->ext_->internalMap.end()) {
               this->node_ = this->ext_->end_;
               return;
             }
-            treeNode* n = &(iter->second);
+            const treeNode* n = &(iter->second); // TODO: templatize const TreeNode
             if (n->firstChild != NULL)
               n = n->firstChild;
             else if (n->nextSibling != NULL)
@@ -245,31 +247,33 @@ namespace TreeBase {
           }
       };
       typedef pre_order<T> pre_order_iterator;
-      typedef pre_order<T const> pre_order_const_iterator;
+      typedef pre_order<const T, const Tree<T,Key,Hash>,
+              typename tree_hash_map::const_iterator> pre_order_const_iterator;
       
       /**
        * Post order iterator: O(n log n)
        */
-      template <class Value>
-      class post_order : public iterator_base<post_order<Value>,Value>
+      template <class Value, class TreeValue=Tree<T,Key,Hash>,
+               class TreeHashMapIter=typename tree_hash_map::iterator>
+      class post_order : public iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>
       {
         public:
-          post_order(Tree<T,Key,Hash>& ext) :
-            iterator_base<post_order<Value>,Value>(ext) { }
-          explicit post_order(Tree<T,Key,Hash>& ext, const Value* value) :
-            iterator_base<post_order<Value>,Value>(ext,value) { }
-          explicit post_order(Tree<T,Key,Hash>& ext, const Key& k) :
-            iterator_base<post_order<Value>,Value>(ext,k) { }
-          explicit post_order(Tree<T,Key,Hash>& ext, const TreeHashKey& k) :
-            iterator_base<post_order<Value>,Value>(ext,k) { }
+          post_order(TreeValue& ext) :
+            iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext) { }
+          explicit post_order(TreeValue& ext, const Value* value) :
+            iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,value) { }
+          explicit post_order(TreeValue& ext, const Key& k) :
+            iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+          explicit post_order(TreeValue& ext, const TreeHashKey& k) :
+            iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
         private:
-          friend class iterator_base<post_order<Value>,Value>;
+          friend class iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
           TreeHashKey first_()
           {
             if (this->ext_->head_) {
               // go to leftmost child
-              typename tree_hash_map::iterator iter = this->ext_->internalMap.find(*(this->ext_->head_));
+              TreeHashMapIter iter = this->ext_->internalMap.find(*(this->ext_->head_));
               if (iter == this->ext_->internalMap.end())
                 return this->ext_->end_;
               treeNode* n = &(iter->second);
@@ -282,7 +286,7 @@ namespace TreeBase {
           }
           void next_()
           {
-            typename tree_hash_map::iterator iter = this->ext_->internalMap.find(*(this->node_));
+            TreeHashMapIter iter = this->ext_->internalMap.find(*(this->node_));
             if (iter == this->ext_->internalMap.end()) {
               this->node_ = this->ext_->end_;
               return;
@@ -305,29 +309,31 @@ namespace TreeBase {
           }
       };
       typedef post_order<T> post_order_iterator;
-      typedef post_order<T const> post_order_const_iterator;
+      typedef post_order<const T, const Tree<T,Key,Hash>,
+              typename tree_hash_map::const_iterator> post_order_const_iterator;
       
       /**
        * Sibling iterator: O(n)
        */
-      template<class Value>
-      class sibling_iter : public iterator_base<sibling_iter<Value>,Value>
+      template<class Value, class TreeValue=Tree<T,Key,Hash>,
+               class TreeHashMapIter=typename tree_hash_map::iterator>
+      class sibling_iter : public iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>
       {
         public:
-          sibling_iter(Tree<T,Key,Hash>& ext) :
-            iterator_base<sibling_iter<Value>,Value>(ext) { }
-          explicit sibling_iter(Tree<T,Key,Hash>& ext, const Value* value) :
-            iterator_base<sibling_iter<Value>,Value>(ext,value) { }
-          explicit sibling_iter(Tree<T,Key,Hash>& ext, const Key& k) :
-            iterator_base<sibling_iter<Value>,Value>(ext,k) { }
-          explicit sibling_iter(Tree<T,Key,Hash>& ext, const TreeHashKey& k) :
-            iterator_base<sibling_iter<Value>,Value>(ext,k) { }
+          sibling_iter(TreeValue& ext) :
+            iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext) { }
+          explicit sibling_iter(TreeValue& ext, const Value* value) :
+            iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,value) { }
+          explicit sibling_iter(TreeValue& ext, const Key& k) :
+            iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+          explicit sibling_iter(TreeValue& ext, const TreeHashKey& k) :
+            iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
         private:
-          friend class iterator_base<sibling_iter<Value>,Value>;
+          friend class iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
           void next_()
           {
-            typename tree_hash_map::iterator iter = this->ext_->internalMap.find(*(this->node_));
+            TreeHashMapIter iter = this->ext_->internalMap.find(*(this->node_));
             if (iter == this->ext_->internalMap.end() || iter->second.nextSibling == NULL) {
               this->node_ = this->ext_->end_;
             } else {
@@ -336,38 +342,40 @@ namespace TreeBase {
           }
       };
       typedef sibling_iter<T> sibling_iterator;
-      typedef sibling_iter<T const> sibling_const_iterator;
+      typedef sibling_iter<const T, const Tree<T,Key,Hash>,
+              typename tree_hash_map::const_iterator> sibling_const_iterator;
       
       /**
        * Iterator map base (for unordered iterators)
        * Gives greater speed by using the hash_map's iterators
        */
-      template<class Derived,class Value>
+      template<class Derived,class Value, class TreeValue=Tree<T,Key,Hash>,
+               class TreeHashMapIter=typename tree_hash_map::iterator>
       class iterator_map_base
         : public boost::iterator_facade<
-            iterator_map_base<Derived,Value>,
+            iterator_map_base<Derived,Value,TreeValue,TreeHashMapIter>,
             Value,
             boost::forward_traversal_tag
           >
       {
         public:
-          iterator_map_base(Tree<T,Key,Hash>& ext) :
+          iterator_map_base(TreeValue& ext) :
             ext_(&ext), internalIter_(derived_().first_()) { }
-          explicit iterator_map_base(Tree<T,Key,Hash>& ext, Value* v) :
+          explicit iterator_map_base(TreeValue& ext, Value* v) :
             ext_(&ext),
             internalIter_(ext.internalMap.find(valueToHash_(*v))) { }
-          explicit iterator_map_base(Tree<T,Key,Hash>& ext, Key& k) :
+          explicit iterator_map_base(TreeValue& ext, const Key& k) :
             ext_(&ext), 
-            internalIter_(ext.internalMap.valueToHash_(k)) { }
+            internalIter_(ext.internalMap.find(k)) { }
         protected:
-          typename tree_hash_map::iterator first_()
+          TreeHashMapIter first_()
           { return this->ext_->internalMap.begin(); }
           void next_() { this->internalIter_++; };
-          mutable Tree<T,Key,Hash>* ext_;
-          mutable typename tree_hash_map::iterator internalIter_;
+          TreeValue* ext_;
+          TreeHashMapIter internalIter_;
         private:
           friend class Tree<T,Key,Hash>;
-          explicit iterator_map_base(Tree<T,Key,Hash>& ext, const TreeHashKey& k) :
+          explicit iterator_map_base(TreeValue& ext, const TreeHashKey& k) :
             ext_(&ext), internalIter_(ext.internalMap.end())
           { if (k) this->internalIter_ = ext.internalMap.find(*k); }
           Derived& derived_()
@@ -375,17 +383,14 @@ namespace TreeBase {
             return *static_cast<Derived*>(this);
           }
           friend class boost::iterator_core_access;
-          T& dereference() const
+          Value& dereference() const
           {
             assert( internalIter_ != ext_->internalMap.end() );
             return internalIter_->second.data;
           }
-          bool equal(iterator_map_base<Derived,Value> const & other) const
+          bool equal(iterator_map_base<Derived,Value,TreeValue,TreeHashMapIter> const & other) const
           {
             return ( internalIter_ == other.internalIter_ );
-            //typename tree_hash_map::iterator i1 = internalIter_;
-            //typename tree_hash_map::iterator i2 = other.internalIter_;
-            //return (i1 == i2);
           }
           void increment()
           {
@@ -397,47 +402,50 @@ namespace TreeBase {
        * Fast iterator: O(n)
        * Note that there is no ordering, but this gives the fastest results
        */
-      template <class Value>
-      class fast_iter : public iterator_map_base<fast_iter<Value>,Value>
+      template <class Value, class TreeValue=Tree<T,Key,Hash>,
+               class TreeHashMapIter=typename tree_hash_map::iterator>
+      class fast_iter : public iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>
       {
         public:
-          fast_iter(Tree<T,Key,Hash>& ext) :
-            iterator_map_base<fast_iter<Value>,Value>(ext) { }
-          explicit fast_iter(Tree<T,Key,Hash>& ext, Value* v) :
-            iterator_map_base<fast_iter<Value>,Value>(ext,v) { }
-          explicit fast_iter(Tree<T,Key,Hash>& ext, Key& k) :
-            iterator_map_base<fast_iter<Value>,Value>(ext,k) { }
-          explicit fast_iter(Tree<T,Key,Hash>& ext, const TreeHashKey& k) :
-            iterator_map_base<fast_iter<Value>,Value>(ext,k) { }
+          fast_iter(TreeValue& ext) :
+            iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext) { }
+          explicit fast_iter(TreeValue& ext, Value* v) :
+            iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,v) { }
+          explicit fast_iter(TreeValue& ext, const Key& k) :
+            iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+          explicit fast_iter(TreeValue& ext, const TreeHashKey& k) :
+            iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
         private:
-          friend class iterator_map_base<fast_iter<Value>,Value>;
+          friend class iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
       };
       typedef fast_iter<T> fast_iterator;
-      typedef fast_iter<T const> fast_const_iterator;
+      typedef fast_iter<const T, const Tree<T,Key,Hash>,
+              typename tree_hash_map::const_iterator > fast_const_iterator;
       
       /**
        * Leaf iterator: O(n)
        * Note that there is no ordering of leaves
        */
-      template <class Value>
-      class leaf_iter : public iterator_map_base<leaf_iter<Value>,Value>
+      template <class Value, class TreeValue=Tree<T,Key,Hash>,
+               class TreeHashMapIter=typename tree_hash_map::iterator>
+      class leaf_iter : public iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>
       {
         public:
-          leaf_iter(Tree<T,Key,Hash>& ext) :
-            iterator_map_base<leaf_iter<Value>,Value>(ext) { }
-          explicit leaf_iter(Tree<T,Key,Hash>& ext, Value* v) :
-            iterator_map_base<leaf_iter<Value>,Value>(ext,v) { }
-          explicit leaf_iter(Tree<T,Key,Hash>& ext, Key& k) :
-            iterator_map_base<leaf_iter<Value>,Value>(ext,k) { }
-          explicit leaf_iter(Tree<T,Key,Hash>& ext, const TreeHashKey& k) :
-            iterator_map_base<leaf_iter<Value>,Value>(ext,k) { }
+          leaf_iter(TreeValue& ext) :
+            iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext) { }
+          explicit leaf_iter(TreeValue& ext, Value* v) :
+            iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,v) { }
+          explicit leaf_iter(TreeValue& ext, const Key& k) :
+            iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+          explicit leaf_iter(TreeValue& ext, const TreeHashKey& k) :
+            iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
         private:
-          friend class iterator_map_base<leaf_iter<Value>,Value>;
+          friend class iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
-          typename tree_hash_map::iterator first_()
+          TreeHashMapIter first_()
           {
-            typename tree_hash_map::iterator iter = this->ext_->internalMap.begin(),
-                                    iterEnd = this->ext_->internalMap.end();
+            TreeHashMapIter iter = this->ext_->internalMap.begin(),
+                            iterEnd = this->ext_->internalMap.end();
             for(;iter != iterEnd; iter++) {
               if (iter->second.firstChild != NULL)
                 continue;
@@ -449,7 +457,7 @@ namespace TreeBase {
           void next_()
           {
             this->internalIter_++;
-            typename tree_hash_map::iterator iterEnd = this->ext_->internalMap.end();
+            TreeHashMapIter iterEnd = this->ext_->internalMap.end();
             for(;this->internalIter_ != iterEnd; this->internalIter_++) {
               if (this->internalIter_->second.firstChild != NULL)
                 continue;
@@ -459,19 +467,22 @@ namespace TreeBase {
           }
       };
       typedef leaf_iter<T> leaf_iterator;
-      typedef leaf_iter<T const> leaf_const_iterator;
+      typedef leaf_iter<const T, const Tree<T,Key,Hash>,
+              typename tree_hash_map::const_iterator> leaf_const_iterator;
       
       /**
        * Define the default iterator
        */
       typedef pre_order_iterator iterator;
+      typedef pre_order_const_iterator const_iterator;
       
       /**
        * Constructors and destructor
        */
       Tree();
       Tree(const T& value);
-      template<class D,class V> Tree(const iterator_base<D,V>& other);
+      template<class D,class V,class TreeValue,class TreeHashMapIter>
+      Tree(const iterator_base<D,V,TreeValue,TreeHashMapIter>& other);
       Tree(const Tree<T,Key,Hash>&);
       ~Tree();
       
@@ -486,40 +497,83 @@ namespace TreeBase {
       bool operator==(const Tree<T,Key,Hash>& other) const;
       bool operator!=(const Tree<T,Key,Hash>& other) const;
       
-      
+      // pre_order iterator helpers
       inline pre_order_iterator begin()
       { return pre_order_iterator(*this); }
+      inline pre_order_const_iterator cbegin() const
+      { return pre_order_const_iterator(*this); }
       inline pre_order_iterator end()
       { return pre_order_iterator(*this,end_); };
+      inline pre_order_const_iterator cend() const
+      { return pre_order_const_iterator(*this,end_); };
+      
+      // post_order iterator helpers
       inline post_order_iterator begin_post()
       { return post_order_iterator(*this); }
+      inline post_order_const_iterator cbegin_post() const
+      { return post_order_const_iterator(*this); }
       inline post_order_iterator end_post()
       { return post_order_iterator(*this,end_); }
-//      fixed_depth_iterator begin_fixed(const iterator_base&, unsigned int) const;
-//      fixed_depth_iterator end_fixed(const iterator_base&, unsigned int) const;
-      template<class D,class V>
-      inline sibling_iterator begin(const iterator_base<D,V>& i)
-      { return sibling_iterator(*this,i); }
+      inline post_order_const_iterator cend_post() const
+      { return post_order_const_iterator(*this,end_); }
+      
+      // sibling iterator helpers
+      template<class D,class V,class TreeValue,class TreeHashMapIter>
+      sibling_iterator begin(const iterator_base<D,V,TreeValue,TreeHashMapIter>& i)
+      {
+        if (i != iterator_base<D,V,TreeValue,TreeHashMapIter>(end_))
+          return sibling_iterator(*this,*i);
+        else
+          return sibling_iterator(*this,end_);
+      }
+      template<class D,class V,class TreeValue,class TreeHashMapIter>
+      sibling_const_iterator cbegin(const iterator_base<D,V,TreeValue,TreeHashMapIter>& i) const
+      {
+        if (i != iterator_base<D,V,TreeValue,TreeHashMapIter>(end_))
+          return sibling_const_iterator(*this,*i);
+        else
+          return sibling_const_iterator(*this,end_);
+      }
       inline sibling_iterator begin_sibling(const Key& k)
       { return sibling_iterator(*this,k); }
-      template<class D,class V>
-      inline sibling_iterator end(const iterator_base<D,V>& i)
+      inline sibling_const_iterator cbegin_sibling(const Key& k) const
+      { return sibling_const_iterator(*this,k); }
+      template<class D,class V,class TreeValue,class TreeHashMapIter>
+      inline sibling_iterator end(const iterator_base<D,V,TreeValue,TreeHashMapIter>& i)
       { return sibling_iterator(*this,end_); }
+      template<class D,class V,class TreeValue,class TreeHashMapIter>
+      inline sibling_const_iterator cend(const iterator_base<D,V,TreeValue,TreeHashMapIter>& i) const
+      { return sibling_const_iterator(*this,end_); }
       inline sibling_iterator end_sibling()
       { return sibling_iterator(*this,end_); }
+      inline sibling_const_iterator cend_sibling() const
+      { return sibling_const_iterator(*this,end_); }
+      
+      // fast iterator helpers
       inline fast_iterator begin_fast()
       { return fast_iterator(*this); }
+      inline fast_const_iterator cbegin_fast() const
+      { return fast_const_iterator(*this); }
       inline fast_iterator end_fast()
       { return fast_iterator(*this,end_); };
+      inline fast_const_iterator cend_fast() const
+      { return fast_const_iterator(*this,end_); };
+      
+      // leaf iterator helpers
       inline leaf_iterator begin_leaf()
       { return leaf_iterator(*this); }
+      inline leaf_const_iterator cbegin_leaf() const
+      { return leaf_const_iterator(*this); }
       inline leaf_iterator end_leaf()
       { return leaf_iterator(*this,end_); };
+      inline leaf_const_iterator cend_leaf() const
+      { return leaf_const_iterator(*this,end_); };
       
       /**
        * Get head value
        */
       const nonPtrType get_head() const;
+      const std::vector<T> get_heads() const;
       
       /**
        * Get value at key
@@ -548,7 +602,7 @@ namespace TreeBase {
       /**
        * Get immediate children
        */
-      std::vector<T> children(const Key&) const;
+      const std::vector<T> children(const Key&) const;
       
       /**
        * Clear all nodes from tree
@@ -702,16 +756,14 @@ namespace TreeBase {
       SET_LOGGER("Tree");
   };
   
-  //BOOST_CLASS_VERSION(Tree<>,tree_version_);
-  //I3_POINTER_TYPEDEFS(Tree<>);
 };
 
 
 
 /**
- *I3MCTree - This goes into the frame and everyone can see it
+ * I3MCTree - This goes into the frame and everyone can see it
  */
-class I3MCTree : public TreeBase::Tree<I3Particle,I3ParticleID>
+/*class I3MCTree : public TreeBase::Tree<I3Particle,I3ParticleID>
 {
   public:
     // constructors
@@ -720,15 +772,11 @@ class I3MCTree : public TreeBase::Tree<I3Particle,I3ParticleID>
     template<class D,class V> I3MCTree(const iterator_base<D,V>& other);
     I3MCTree(const I3MCTree& m);
     
-    /**
-     * Add a primary particle
-     */
-    void AddPrimary(const I3Particle&);
-    
   private:
     friend class boost::serialization::access;
     BOOST_SERIALIZATION_SPLIT_MEMBER();
-};
+};*/
+typedef TreeBase::Tree<I3Particle,I3ParticleID> I3MCTree;
 
 BOOST_CLASS_VERSION(I3MCTree,TreeBase::tree_version_);
 I3_POINTER_TYPEDEFS(I3MCTree);
