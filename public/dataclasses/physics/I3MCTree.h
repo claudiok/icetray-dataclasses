@@ -220,7 +220,7 @@ namespace TreeBase {
               this->node_ = this->ext_->end_;
               return;
             }
-            const treeNode* n = &(iter->second); // TODO: templatize const TreeNode
+            const treeNode* n = &(iter->second);
             if (n->firstChild != NULL)
               n = n->firstChild;
             else if (n->nextSibling != NULL)
@@ -276,7 +276,7 @@ namespace TreeBase {
               TreeHashMapIter iter = this->ext_->internalMap.find(*(this->ext_->head_));
               if (iter == this->ext_->internalMap.end())
                 return this->ext_->end_;
-              treeNode* n = &(iter->second);
+              const treeNode* n = &(iter->second);
               while (n->firstChild != NULL) {
                 n = n->firstChild;
               }
@@ -291,7 +291,7 @@ namespace TreeBase {
               this->node_ = this->ext_->end_;
               return;
             }
-            treeNode* n = &(iter->second);
+            const treeNode* n = &(iter->second);
             if (n->nextSibling != NULL) {
               // go to leftmost child of next sibling
               n = n->nextSibling;

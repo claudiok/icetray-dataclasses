@@ -104,6 +104,42 @@ TEST(pre_order_iterator)
   ENSURE( *iter == p4);
   iter++;
   ENSURE( iter == t3.end() );
+  
+  I3MCTree t4;
+  ENSURE( t4.cbegin() == t4.cend() , "const_iterator end broken" );
+  I3MCTree t5(makeParticle());
+  I3MCTree::const_iterator iter2(t5);
+  ENSURE( iter2 != t5.cend() , "const_iterator begin() == end()");
+  ENSURE( t5.get_head() == *iter2 , "const_iterator begin() != head");
+  iter2++;
+  ENSURE( iter2 == t5.cend() , "const_iterator iter does not reach end()");
+  I3Particle head2 = makeParticle();
+  I3MCTree t6(head2);
+  I3Particle p5 = makeParticle();
+  t6.append_child(head2,p5);
+  I3Particle p6 = makeParticle();
+  t6.append_child(head2,p6);
+  I3Particle p7 = makeParticle();
+  t6.append_child(p5,p7);
+  I3Particle p8 = makeParticle();
+  t6.append_child(p6,p8);
+  iter2 = t6.cbegin();
+  ENSURE( iter2 != t6.cend() , "const_iterator hit end instead of head" );
+  ENSURE( *iter2 == head2 );
+  iter2++;
+  ENSURE( iter2 != t6.cend() , "const_iterator hit end instead of p1" );
+  ENSURE( *iter2 == p5);
+  iter2++;
+  ENSURE( iter2 != t6.cend() , "const_iterator hit end instead of p3" );
+  ENSURE( *iter2 == p7);
+  iter2++;
+  ENSURE( iter2 != t6.cend() , "const_iterator hit end instead of p2" );
+  ENSURE( *iter2 == p6);
+  iter2++;
+  ENSURE( iter2 != t6.cend() , "const_iterator hit end instead of p4" );
+  ENSURE( *iter2 == p8);
+  iter2++;
+  ENSURE( iter2 == t6.cend() );
 }
 
 TEST(post_order_iterator)
@@ -143,56 +179,135 @@ TEST(post_order_iterator)
   ENSURE( *iter == head );
   iter++;
   ENSURE( iter == t3.end_post() );
+  
+  I3MCTree t4;
+  ENSURE( t4.cbegin_post() == t4.cend_post() , "const_iterator end broken" );
+  I3MCTree t5(makeParticle());
+  I3MCTree::post_order_const_iterator iter2(t5);
+  ENSURE( iter2 != t5.cend_post() , "const_iterator begin() == end()");
+  ENSURE( t5.get_head() == *iter2 , "const_iterator begin() != head");
+  iter2++;
+  ENSURE( iter2 == t5.cend_post() , "const_iterator iter does not reach end()");
+  I3Particle head2 = makeParticle();
+  I3MCTree t6(head2);
+  I3Particle p5 = makeParticle();
+  t6.append_child(head2,p5);
+  I3Particle p6 = makeParticle();
+  t6.append_child(head2,p6);
+  I3Particle p7 = makeParticle();
+  t6.append_child(p5,p7);
+  I3Particle p8 = makeParticle();
+  t6.append_child(p6,p8);
+  iter2 = t6.cbegin_post();
+  ENSURE( iter2 != t6.cend_post() , "const_iterator hit end instead of p3" );
+  ENSURE( *iter2 == p7);
+  iter2++;
+  ENSURE( iter2 != t6.cend_post() , "const_iterator hit end instead of p1" );
+  ENSURE( *iter2 == p5);
+  iter2++;
+  ENSURE( iter2 != t6.cend_post() , "const_iterator hit end instead of p4" );
+  ENSURE( *iter2 == p8);
+  iter2++;
+  ENSURE( iter2 != t6.cend_post() , "const_iterator hit end instead of p2" );
+  ENSURE( *iter2 == p6);
+  iter2++;
+  ENSURE( iter2 != t6.cend_post() , "const_iterator hit end instead of head" );
+  ENSURE( *iter2 == head2 );
+  iter2++;
+  ENSURE( iter2 == t6.cend_post() );
 }
 
 TEST(sibling_iterator)
 {
-  I3MCTree t1;
-  ENSURE( t1.begin_post() == t1.end_post() );
-  I3MCTree t2(makeParticle());
-  I3MCTree::sibling_iterator iter(t2);
-  ENSURE( iter != t2.end_sibling() , "begin() == end()");
-  ENSURE( t2.get_head() == *iter , "begin() != head");
+  I3MCTree t1(makeParticle());
+  I3MCTree::sibling_iterator iter(t1);
+  ENSURE( iter != t1.end_sibling() , "begin() == end()");
+  ENSURE( t1.get_head() == *iter , "begin() != head");
   iter++;
-  ENSURE( iter == t2.end_sibling() , "iter does not reach end()");
+  ENSURE( iter == t1.end_sibling() , "iter does not reach end()");
   I3Particle head = makeParticle();
-  I3MCTree t3(head);
+  I3MCTree t2(head);
   I3Particle p1 = makeParticle();
-  t3.append_child(head,p1);
+  t2.append_child(head,p1);
   I3Particle p2 = makeParticle();
-  t3.append_child(head,p2);
+  t2.append_child(head,p2);
   I3Particle p3 = makeParticle();
-  t3.append_child(p1,p3);
+  t2.append_child(p1,p3);
   I3Particle p4 = makeParticle();
-  t3.append_child(p2,p4);
-  iter = t3.begin_sibling(head);
-  ENSURE( iter != t3.end_sibling() , "hit end instead of head" );
+  t2.append_child(p2,p4);
+  iter = t2.begin_sibling(head);
+  ENSURE( iter != t2.end_sibling() , "hit end instead of head" );
   ENSURE( *iter == head );
   iter++;
-  ENSURE( iter == t3.end_sibling() );
-  iter = t3.begin_sibling(p1);
-  ENSURE( iter != t3.end_sibling() , "hit end instead of p1" );
+  ENSURE( iter == t2.end_sibling() );
+  iter = t2.begin_sibling(p1);
+  ENSURE( iter != t2.end_sibling() , "hit end instead of p1" );
   ENSURE( *iter == p1);
   iter++;
-  ENSURE( iter != t3.end_sibling() , "hit end instead of p2" );
+  ENSURE( iter != t2.end_sibling() , "hit end instead of p2" );
   ENSURE( *iter == p2);
   iter++;
-  ENSURE( iter == t3.end_sibling() );
-  iter = t3.begin_sibling(p2);
-  ENSURE( iter != t3.end_sibling() , "hit end instead of p2" );
+  ENSURE( iter == t2.end_sibling() );
+  iter = t2.begin_sibling(p2);
+  ENSURE( iter != t2.end_sibling() , "hit end instead of p2" );
   ENSURE( *iter == p2);
   iter++;
-  ENSURE( iter == t3.end_sibling() );
-  iter = t3.begin_sibling(p3);
-  ENSURE( iter != t3.end_sibling() , "hit end instead of p3" );
+  ENSURE( iter == t2.end_sibling() );
+  iter = t2.begin_sibling(p3);
+  ENSURE( iter != t2.end_sibling() , "hit end instead of p3" );
   ENSURE( *iter == p3);
   iter++;
-  ENSURE( iter == t3.end_sibling() );
-  iter = t3.begin_sibling(p4);
-  ENSURE( iter != t3.end_sibling() , "hit end instead of p4" );
+  ENSURE( iter == t2.end_sibling() );
+  iter = t2.begin_sibling(p4);
+  ENSURE( iter != t2.end_sibling() , "hit end instead of p4" );
   ENSURE( *iter == p4);
   iter++;
-  ENSURE( iter == t3.end_sibling() );
+  ENSURE( iter == t2.end_sibling() );
+  
+  I3MCTree t3(makeParticle());
+  I3MCTree::sibling_const_iterator iter2(t3);
+  ENSURE( iter2 != t3.cend_sibling() , "const_iterator begin() == end()");
+  ENSURE( t3.get_head() == *iter2 , "const_iterator begin() != head");
+  iter2++;
+  ENSURE( iter2 == t3.cend_sibling() , "const_iterator iter does not reach end()");
+  I3Particle head2 = makeParticle();
+  I3MCTree t4(head2);
+  I3Particle p5 = makeParticle();
+  t4.append_child(head2,p5);
+  I3Particle p6 = makeParticle();
+  t4.append_child(head2,p6);
+  I3Particle p7 = makeParticle();
+  t4.append_child(p5,p7);
+  I3Particle p8 = makeParticle();
+  t4.append_child(p6,p8);
+  iter2 = t4.cbegin_sibling(head2);
+  ENSURE( iter2 != t4.cend_sibling() , "const_iterator hit end instead of head" );
+  ENSURE( *iter2 == head2 , "const_iterator failure");
+  iter2++;
+  ENSURE( iter2 == t4.cend_sibling() );
+  iter2 = t4.cbegin_sibling(p5);
+  ENSURE( iter2 != t4.cend_sibling() , "const_iterator hit end instead of p5" );
+  ENSURE( *iter2 == p5 , "const_iterator failure");
+  iter2++;
+  ENSURE( iter2 != t4.cend_sibling() , "const_iterator hit end instead of p6" );
+  ENSURE( *iter2 == p6 , "const_iterator failure");
+  iter2++;
+  ENSURE( iter2 == t4.cend_sibling() );
+  iter2 = t4.cbegin_sibling(p6);
+  ENSURE( iter2 != t4.cend_sibling() , "const_iterator hit end instead of p6" );
+  ENSURE( *iter2 == p6 , "const_iterator failure");
+  iter2++;
+  ENSURE( iter2 == t4.cend_sibling() );
+  iter2 = t4.cbegin_sibling(p7);
+  ENSURE( iter2 != t4.cend_sibling() , "const_iterator hit end instead of p7" );
+  ENSURE( *iter2 == p7 , "const_iterator failure");
+  iter2++;
+  ENSURE( iter2 == t4.cend_sibling() );
+  iter2 = t4.cbegin_sibling(p8);
+  ENSURE( iter2 != t4.cend_sibling() , "const_iterator hit end instead of p8" );
+  ENSURE( *iter2 == p8 , "const_iterator failure");
+  iter2++;
+  ENSURE( iter2 == t4.cend_sibling() , "const_iterator failed to end");
 }
 
 TEST(fast_iterator)
@@ -220,12 +335,53 @@ TEST(fast_iterator)
   for (;iter != t3.end_fast();iter++)
     nodes.push_back(*iter);
   ENSURE( !nodes.empty() , "nodes is empty" );
-  ENSURE( std::find(nodes.begin(),nodes.end(),head) != nodes.end() , "head not found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p1) != nodes.end() , "p1 not found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p2) != nodes.end() , "p2 not found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p3) != nodes.end() , "p3 not found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p4) != nodes.end() , "p4 not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),head) != nodes.end() ,
+         "head not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p1) != nodes.end() ,
+         "p1 not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p2) != nodes.end() ,
+         "p2 not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p3) != nodes.end() ,
+         "p3 not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p4) != nodes.end() ,
+         "p4 not found");
   ENSURE( nodes.size() == t3.size() , "nodes.size() incorrect" );
+  
+  I3MCTree t4;
+  ENSURE( t4.cbegin_fast() == t4.cend_fast() , "const_iterator end failure" );
+  I3MCTree t5(makeParticle());
+  I3MCTree::fast_const_iterator iter2(t5);
+  ENSURE( iter2 != t5.cend_fast() , "const_iterator begin() == end()");
+  ENSURE( t5.get_head() == *iter2 , "const_iterator begin() != head");
+  iter2++;
+  ENSURE( iter2 == t5.cend_fast() , "const_iterator iter does not reach end()");
+  I3Particle head2 = makeParticle();
+  I3MCTree t6(head2);
+  I3Particle p5 = makeParticle();
+  t6.append_child(head2,p5);
+  I3Particle p6 = makeParticle();
+  t6.append_child(head2,p6);
+  I3Particle p7 = makeParticle();
+  t6.append_child(p5,p7);
+  I3Particle p8 = makeParticle();
+  t6.append_child(p6,p8);
+  iter2 = t6.cbegin_fast();
+  std::vector<I3Particle> nodes2;
+  for (;iter2 != t6.cend_fast();iter2++)
+    nodes2.push_back(*iter2);
+  ENSURE( !nodes2.empty() , "const_iterator nodes is empty" );
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),head2) != nodes2.end() ,
+         "const_iterator head2 not found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p5) != nodes2.end() ,
+         "const_iterator p5 not found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p6) != nodes2.end() ,
+         "const_iterator p6 not found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p7) != nodes2.end() ,
+         "const_iterator p7 not found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p8) != nodes2.end() ,
+         "const_iterator p8 not found");
+  ENSURE( nodes2.size() == t6.size() ,
+         "const_iterator nodes2.size() incorrect" );
 }
 
 TEST(leaf_iterator)
@@ -253,12 +409,53 @@ TEST(leaf_iterator)
   for (;iter != t3.end_leaf();iter++)
     nodes.push_back(*iter);
   ENSURE( !nodes.empty() , "nodes is empty" );
-  ENSURE( std::find(nodes.begin(),nodes.end(),head) == nodes.end() , "head found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p1) == nodes.end() , "p1 found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p2) != nodes.end() , "p2 not found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p3) != nodes.end() , "p3 not found");
-  ENSURE( std::find(nodes.begin(),nodes.end(),p4) != nodes.end() , "p4 not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),head) == nodes.end() ,
+         "head found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p1) == nodes.end() ,
+         "p1 found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p2) != nodes.end() ,
+         "p2 not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p3) != nodes.end() ,
+         "p3 not found");
+  ENSURE( std::find(nodes.begin(),nodes.end(),p4) != nodes.end() ,
+         "p4 not found");
   ENSURE( nodes.size() == 3 , "nodes.size() incorrect" );
+  
+  I3MCTree t4;
+  ENSURE( t4.cbegin_leaf() == t4.cend_leaf() , "const_iterator end failure" );
+  I3MCTree t5(makeParticle());
+  I3MCTree::leaf_const_iterator iter2(t5);
+  ENSURE( iter2 != t5.cend_leaf() , "const_iterator begin() == end()");
+  ENSURE( t5.get_head() == *iter2 , "const_iterator begin() != head");
+  iter2++;
+  ENSURE( iter2 == t5.cend_leaf() , "const_iterator iter does not reach end()");
+  I3Particle head2 = makeParticle();
+  I3MCTree t6(head2);
+  I3Particle p5 = makeParticle();
+  t6.append_child(head2,p5);
+  I3Particle p6 = makeParticle();
+  t6.append_child(head2,p6);
+  I3Particle p7 = makeParticle();
+  t6.append_child(p5,p7);
+  I3Particle p8 = makeParticle();
+  t6.append_child(p5,p8);
+  iter2 = t6.cbegin_leaf();
+  std::vector<I3Particle> nodes2;
+  for (;iter2 != t6.cend_leaf();iter2++)
+    nodes2.push_back(*iter2);
+  ENSURE( !nodes2.empty() , "const_iterator nodes is empty" );
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),head2) == nodes2.end() ,
+         "const_iterator head2 found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p5) == nodes2.end() ,
+         "const_iterator p5 found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p6) != nodes2.end() ,
+         "const_iterator p6 not found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p7) != nodes2.end() ,
+         "const_iterator p7 not found");
+  ENSURE( std::find(nodes2.begin(),nodes2.end(),p8) != nodes2.end() ,
+         "const_iterator p8 not found");
+  ENSURE( nodes2.size() == 3 ,
+         "const_iterator nodes2.size() incorrect" );
 }
 
 TEST(empty)
