@@ -223,6 +223,8 @@ TEST(sibling_iterator)
   I3MCTree::sibling_iterator iter(t1);
   ENSURE( iter != t1.end_sibling() , "begin() == end()");
   ENSURE( t1.get_head() == *iter , "begin() != head");
+  ENSURE( *t1.begin() == *t1.begin(t1.begin()) ,
+         "init with another iterator failed");
   iter++;
   ENSURE( iter == t1.end_sibling() , "iter does not reach end()");
   I3Particle head = makeParticle();
@@ -268,6 +270,8 @@ TEST(sibling_iterator)
   I3MCTree::sibling_const_iterator iter2(t3);
   ENSURE( iter2 != t3.cend_sibling() , "const_iterator begin() == end()");
   ENSURE( t3.get_head() == *iter2 , "const_iterator begin() != head");
+  ENSURE( *t3.begin() == *t3.begin(t3.begin()) ,
+         "const_iterator init with another iterator failed");
   iter2++;
   ENSURE( iter2 == t3.cend_sibling() , "const_iterator iter does not reach end()");
   I3Particle head2 = makeParticle();

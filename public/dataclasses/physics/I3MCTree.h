@@ -208,10 +208,11 @@ namespace TreeBase {
             iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,value) { }
           explicit pre_order(TreeValue& ext, const Key& k) :
             iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+        private:
+          friend class Tree<T,Key,Hash>;
+          friend class iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
           explicit pre_order(TreeValue& ext, const TreeHashKey& k) :
             iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
-        private:
-          friend class iterator_base<pre_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
           void next_()
           {
@@ -264,10 +265,11 @@ namespace TreeBase {
             iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,value) { }
           explicit post_order(TreeValue& ext, const Key& k) :
             iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+        private:
+          friend class Tree<T,Key,Hash>;
+          friend class iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
           explicit post_order(TreeValue& ext, const TreeHashKey& k) :
             iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
-        private:
-          friend class iterator_base<post_order<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
           TreeHashKey first_()
           {
@@ -326,10 +328,11 @@ namespace TreeBase {
             iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,value) { }
           explicit sibling_iter(TreeValue& ext, const Key& k) :
             iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+        private:
+          friend class Tree<T,Key,Hash>;
+          friend class iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
           explicit sibling_iter(TreeValue& ext, const TreeHashKey& k) :
             iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
-        private:
-          friend class iterator_base<sibling_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
           void next_()
           {
@@ -413,10 +416,11 @@ namespace TreeBase {
             iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,v) { }
           explicit fast_iter(TreeValue& ext, const Key& k) :
             iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+        private:
+          friend class Tree<T,Key,Hash>;
+          friend class iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
           explicit fast_iter(TreeValue& ext, const TreeHashKey& k) :
             iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
-        private:
-          friend class iterator_map_base<fast_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
       };
       typedef fast_iter<T> fast_iterator;
       typedef fast_iter<const T, const Tree<T,Key,Hash>,
@@ -437,10 +441,11 @@ namespace TreeBase {
             iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,v) { }
           explicit leaf_iter(TreeValue& ext, const Key& k) :
             iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
+        private:
+          friend class Tree<T,Key,Hash>;
+          friend class iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
           explicit leaf_iter(TreeValue& ext, const TreeHashKey& k) :
             iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>(ext,k) { }
-        private:
-          friend class iterator_map_base<leaf_iter<Value,TreeValue,TreeHashMapIter>,Value,TreeValue,TreeHashMapIter>;
         protected:
           TreeHashMapIter first_()
           {
@@ -521,7 +526,7 @@ namespace TreeBase {
       template<class D,class V,class TreeValue,class TreeHashMapIter>
       sibling_iterator begin(const iterator_base<D,V,TreeValue,TreeHashMapIter>& i)
       {
-        if (i != iterator_base<D,V,TreeValue,TreeHashMapIter>(end_))
+        if (i != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
           return sibling_iterator(*this,*i);
         else
           return sibling_iterator(*this,end_);

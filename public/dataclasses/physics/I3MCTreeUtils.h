@@ -79,8 +79,6 @@ namespace I3MCTreeUtils
    * \param f Callable which takes two I3Particles, compares them, and returns
    *          an integer (positive = first particle is better)
    */
-  //template<typename Function>
-  //typename I3MCTree::nonPtrType GetBest(const I3MCTree&, Function);
   template<typename Function>
   const I3Particle GetBest(const I3MCTree& t, Function func)
   {
