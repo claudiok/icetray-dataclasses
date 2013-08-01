@@ -221,7 +221,8 @@ TEST(sibling_iterator)
 {
   I3MCTree t1(makeParticle());
   I3MCTree::sibling_iterator iter(t1);
-  ENSURE( iter != t1.end_sibling() , "begin() == end()");
+  ENSURE( iter == t1.end_sibling() , "empty != end()");
+  iter = t1.begin_sibling(*t1.get_head());
   ENSURE( t1.get_head() == *iter , "begin() != head");
   ENSURE( *t1.begin() == *t1.begin(t1.begin()) ,
          "init with another iterator failed");
@@ -268,9 +269,10 @@ TEST(sibling_iterator)
   
   I3MCTree t3(makeParticle());
   I3MCTree::sibling_const_iterator iter2(t3);
-  ENSURE( iter2 != t3.cend_sibling() , "const_iterator begin() == end()");
+  ENSURE( iter2 == t3.cend_sibling() , "const_iterator empty != end()");
+  iter2 = t3.cbegin_sibling(*t3.get_head());
   ENSURE( t3.get_head() == *iter2 , "const_iterator begin() != head");
-  ENSURE( *t3.begin() == *t3.begin(t3.begin()) ,
+  ENSURE( *t3.begin() == *t3.cbegin(t3.cbegin()) ,
          "const_iterator init with another iterator failed");
   iter2++;
   ENSURE( iter2 == t3.cend_sibling() , "const_iterator iter does not reach end()");
@@ -462,6 +464,401 @@ TEST(leaf_iterator)
          "const_iterator nodes2.size() incorrect" );
 }
 
+TEST(iterator_conversion)
+{
+  // note that this is more a compile test than a runtime test
+  I3Particle head = makeParticle();
+  I3MCTree t1(head);
+  
+  // default iterator
+  I3MCTree::iterator iter(t1,head);
+  ENSURE(iter == t1.begin());
+  ENSURE(iter != t1.end());
+  iter = t1.begin();
+  I3MCTree::iterator iter_end = t1.end();
+  ENSURE(iter_end == t1.end());
+  ENSURE(I3MCTree::iterator(t1) == t1.begin());
+  
+  I3MCTree::const_iterator iter_const(t1,head);
+  ENSURE(iter_const == t1.cbegin());
+  ENSURE(iter_const != t1.cend());
+  iter_const = t1.cbegin();
+  I3MCTree::const_iterator iter_cend = t1.cend();
+  ENSURE(iter_cend == t1.cend());
+  ENSURE(I3MCTree::const_iterator(t1) == t1.cbegin());
+  
+  // pre_order
+  I3MCTree::pre_order_iterator pre_order_iter(t1,head);
+  ENSURE(pre_order_iter == t1.begin());
+  ENSURE(pre_order_iter != t1.end());
+  pre_order_iter = t1.begin();
+  I3MCTree::pre_order_iterator pre_order_iter_end = t1.end();
+  ENSURE(pre_order_iter_end == t1.end());
+  ENSURE(I3MCTree::pre_order_iterator(t1) == t1.begin());
+  
+  I3MCTree::pre_order_const_iterator pre_order_iter_const(t1,head);
+  ENSURE(pre_order_iter_const == t1.cbegin());
+  ENSURE(pre_order_iter_const != t1.cend());
+  pre_order_iter_const = t1.cbegin();
+  I3MCTree::pre_order_const_iterator pre_order_iter_cend = t1.cend();
+  ENSURE(pre_order_iter_cend == t1.cend());
+  ENSURE(I3MCTree::pre_order_const_iterator(t1) == t1.cbegin());
+  
+  // post_order
+  I3MCTree::post_order_iterator post_order_iter(t1,head);
+  ENSURE(post_order_iter == t1.begin_post());
+  ENSURE(post_order_iter != t1.end_post());
+  post_order_iter = t1.begin_post();
+  I3MCTree::post_order_iterator post_order_iter_end = t1.end_post();
+  ENSURE(post_order_iter_end == t1.end_post());
+  ENSURE(I3MCTree::post_order_iterator(t1) == t1.begin_post());
+  
+  I3MCTree::post_order_const_iterator post_order_iter_const(t1,head);
+  ENSURE(post_order_iter_const == t1.cbegin_post());
+  ENSURE(post_order_iter_const != t1.cend_post());
+  post_order_iter_const = t1.cbegin_post();
+  I3MCTree::post_order_const_iterator post_order_iter_cend = t1.cend_post();
+  ENSURE(post_order_iter_cend == t1.cend_post());
+  ENSURE(I3MCTree::post_order_const_iterator(t1) == t1.cbegin_post());
+  
+  // sibling
+  I3MCTree::sibling_iterator sibling_iter(t1,head);
+  ENSURE(sibling_iter == t1.begin_sibling(head));
+  ENSURE(sibling_iter != t1.end_sibling());
+  sibling_iter = t1.begin_sibling(head);
+  I3MCTree::sibling_iterator sibling_iter_end = t1.end_sibling();
+  ENSURE(sibling_iter_end == t1.end_sibling());
+  ENSURE(I3MCTree::sibling_iterator(t1) == t1.end_sibling());
+  
+  I3MCTree::sibling_const_iterator sibling_iter_const(t1,head);
+  ENSURE(sibling_iter_const == t1.cbegin_sibling(head));
+  ENSURE(sibling_iter_const != t1.cend_sibling());
+  sibling_iter_const = t1.cbegin_sibling(head);
+  I3MCTree::sibling_const_iterator sibling_iter_cend = t1.cend_sibling();
+  ENSURE(sibling_iter_cend == t1.cend_sibling());
+  ENSURE(I3MCTree::sibling_const_iterator(t1) == t1.cend_sibling());
+  
+  // fast
+  I3MCTree::fast_iterator fast_iter(t1,head);
+  ENSURE(fast_iter == t1.begin_fast());
+  ENSURE(fast_iter != t1.end_fast());
+  fast_iter = t1.begin_fast();
+  I3MCTree::fast_iterator fast_iter_end = t1.end_fast();
+  ENSURE(fast_iter_end == t1.end_fast());
+  ENSURE(I3MCTree::fast_iterator(t1) == t1.begin_fast());
+  
+  I3MCTree::fast_const_iterator fast_iter_const(t1,head);
+  ENSURE(fast_iter_const == t1.cbegin_fast());
+  ENSURE(fast_iter_const != t1.cend_fast());
+  fast_iter_const = t1.cbegin_fast();
+  I3MCTree::fast_const_iterator fast_iter_cend = t1.cend_fast();
+  ENSURE(fast_iter_cend == t1.cend_fast());
+  ENSURE(I3MCTree::fast_const_iterator(t1) == t1.cbegin_fast());
+  
+  // leaf
+  I3MCTree::leaf_iterator leaf_iter(t1,head);
+  ENSURE(leaf_iter == t1.begin_leaf());
+  ENSURE(leaf_iter != t1.end_leaf());
+  leaf_iter = t1.begin_leaf();
+  I3MCTree::leaf_iterator leaf_iter_end = t1.end_leaf();
+  ENSURE(leaf_iter_end == t1.end_leaf());
+  ENSURE(I3MCTree::leaf_iterator(t1) == t1.begin_leaf());
+  
+  I3MCTree::leaf_const_iterator leaf_iter_const(t1,head);
+  ENSURE(leaf_iter_const == t1.cbegin_leaf());
+  ENSURE(leaf_iter_const != t1.cend_leaf());
+  leaf_iter_const = t1.cbegin_leaf();
+  I3MCTree::leaf_const_iterator leaf_iter_cend = t1.cend_leaf();
+  ENSURE(leaf_iter_cend == t1.cend_leaf());
+  ENSURE(I3MCTree::leaf_const_iterator(t1) == t1.cbegin_leaf());
+  
+  // mixing iterators
+  iter = pre_order_iter;
+  iter = post_order_iter;
+  iter = sibling_iter;
+  iter = fast_iter;
+  iter = leaf_iter;
+  
+  pre_order_iter = iter;
+  pre_order_iter = post_order_iter;
+  pre_order_iter = sibling_iter;
+  pre_order_iter = fast_iter;
+  pre_order_iter = leaf_iter;
+  
+  post_order_iter = iter;
+  post_order_iter = pre_order_iter;
+  post_order_iter = sibling_iter;
+  post_order_iter = fast_iter;
+  post_order_iter = leaf_iter;
+  
+  sibling_iter = iter;
+  sibling_iter = pre_order_iter;
+  sibling_iter = post_order_iter;
+  sibling_iter = fast_iter;
+  sibling_iter = leaf_iter;
+  
+  fast_iter = iter;
+  fast_iter = pre_order_iter;
+  fast_iter = post_order_iter;
+  fast_iter = sibling_iter;
+  fast_iter = leaf_iter;
+  
+  leaf_iter = iter;
+  leaf_iter = pre_order_iter;
+  leaf_iter = post_order_iter;
+  leaf_iter = sibling_iter;
+  leaf_iter = fast_iter;
+  
+  iter_const = pre_order_iter_const;
+  iter_const = post_order_iter_const;
+  iter_const = sibling_iter_const;
+  iter_const = fast_iter_const;
+  iter_const = leaf_iter_const;
+  
+  pre_order_iter_const = iter_const;
+  pre_order_iter_const = post_order_iter_const;
+  pre_order_iter_const = sibling_iter_const;
+  pre_order_iter_const = fast_iter_const;
+  pre_order_iter_const = leaf_iter_const;
+  
+  post_order_iter_const = iter_const;
+  post_order_iter_const = pre_order_iter_const;
+  post_order_iter_const = sibling_iter_const;
+  post_order_iter_const = fast_iter_const;
+  post_order_iter_const = leaf_iter_const;
+  
+  sibling_iter_const = iter_const;
+  sibling_iter_const = pre_order_iter_const;
+  sibling_iter_const = post_order_iter_const;
+  sibling_iter_const = fast_iter_const;
+  sibling_iter_const = leaf_iter_const;
+  
+  fast_iter_const = iter_const;
+  fast_iter_const = pre_order_iter_const;
+  fast_iter_const = post_order_iter_const;
+  fast_iter_const = sibling_iter_const;
+  fast_iter_const = leaf_iter_const;
+  
+  leaf_iter_const = iter_const;
+  leaf_iter_const = pre_order_iter_const;
+  leaf_iter_const = post_order_iter_const;
+  leaf_iter_const = sibling_iter_const;
+  leaf_iter_const = fast_iter_const;
+  
+  // mixing constructors
+  I3MCTree::iterator iter1(iter);
+  I3MCTree::iterator iter2(pre_order_iter);
+  I3MCTree::iterator iter3(post_order_iter);
+  I3MCTree::iterator iter4(sibling_iter);
+  I3MCTree::iterator iter5(fast_iter);
+  I3MCTree::iterator iter6(leaf_iter);
+
+  I3MCTree::pre_order_iterator pre_order_iter1(iter);
+  I3MCTree::pre_order_iterator pre_order_iter2(pre_order_iter);
+  I3MCTree::pre_order_iterator pre_order_iter3(post_order_iter);
+  I3MCTree::pre_order_iterator pre_order_iter4(sibling_iter);
+  I3MCTree::pre_order_iterator pre_order_iter5(fast_iter);
+  I3MCTree::pre_order_iterator pre_order_iter6(leaf_iter);
+  
+  I3MCTree::post_order_iterator post_order_iter1(iter);
+  I3MCTree::post_order_iterator post_order_iter2(pre_order_iter);
+  I3MCTree::post_order_iterator post_order_iter3(post_order_iter);
+  I3MCTree::post_order_iterator post_order_iter4(sibling_iter);
+  I3MCTree::post_order_iterator post_order_iter5(fast_iter);
+  I3MCTree::post_order_iterator post_order_iter6(leaf_iter);
+  
+  I3MCTree::sibling_iterator sibling_iter1(iter);
+  I3MCTree::sibling_iterator sibling_iter2(pre_order_iter);
+  I3MCTree::sibling_iterator sibling_iter3(post_order_iter);
+  I3MCTree::sibling_iterator sibling_iter4(sibling_iter);
+  I3MCTree::sibling_iterator sibling_iter5(fast_iter);
+  I3MCTree::sibling_iterator sibling_iter6(leaf_iter);
+  
+  I3MCTree::fast_iterator fast_iter1(iter);
+  I3MCTree::fast_iterator fast_iter2(pre_order_iter);
+  I3MCTree::fast_iterator fast_iter3(post_order_iter);
+  I3MCTree::fast_iterator fast_iter4(sibling_iter);
+  I3MCTree::fast_iterator fast_iter5(fast_iter);
+  I3MCTree::fast_iterator fast_iter6(leaf_iter);
+  
+  I3MCTree::leaf_iterator leaf_iter1(iter);
+  I3MCTree::leaf_iterator leaf_iter2(pre_order_iter);
+  I3MCTree::leaf_iterator leaf_iter3(post_order_iter);
+  I3MCTree::leaf_iterator leaf_iter4(sibling_iter);
+  I3MCTree::leaf_iterator leaf_iter5(fast_iter);
+  I3MCTree::leaf_iterator leaf_iter6(leaf_iter);
+  
+  I3MCTree::const_iterator iter_const1(iter_const);
+  I3MCTree::const_iterator iter_const2(pre_order_iter_const);
+  I3MCTree::const_iterator iter_const3(post_order_iter_const);
+  I3MCTree::const_iterator iter_const4(sibling_iter_const);
+  I3MCTree::const_iterator iter_const5(fast_iter_const);
+  I3MCTree::const_iterator iter_const6(leaf_iter_const);
+
+  I3MCTree::pre_order_const_iterator pre_order_iter_const1(iter_const);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const2(pre_order_iter_const);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const3(post_order_iter_const);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const4(sibling_iter_const);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const5(fast_iter_const);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const6(leaf_iter_const);
+  
+  I3MCTree::post_order_const_iterator post_order_iter_const1(iter_const);
+  I3MCTree::post_order_const_iterator post_order_iter_const2(pre_order_iter_const);
+  I3MCTree::post_order_const_iterator post_order_iter_const3(post_order_iter_const);
+  I3MCTree::post_order_const_iterator post_order_iter_const4(sibling_iter_const);
+  I3MCTree::post_order_const_iterator post_order_iter_const5(fast_iter_const);
+  I3MCTree::post_order_const_iterator post_order_iter_const6(leaf_iter_const);
+  
+  I3MCTree::sibling_const_iterator sibling_iter_const1(iter_const);
+  I3MCTree::sibling_const_iterator sibling_iter_const2(pre_order_iter_const);
+  I3MCTree::sibling_const_iterator sibling_iter_const3(post_order_iter_const);
+  I3MCTree::sibling_const_iterator sibling_iter_const4(sibling_iter_const);
+  I3MCTree::sibling_const_iterator sibling_iter_const5(fast_iter_const);
+  I3MCTree::sibling_const_iterator sibling_iter_const6(leaf_iter_const);
+  
+  I3MCTree::fast_const_iterator fast_iter_const1(iter_const);
+  I3MCTree::fast_const_iterator fast_iter_const2(pre_order_iter_const);
+  I3MCTree::fast_const_iterator fast_iter_const3(post_order_iter_const);
+  I3MCTree::fast_const_iterator fast_iter_const4(sibling_iter_const);
+  I3MCTree::fast_const_iterator fast_iter_const5(fast_iter_const);
+  I3MCTree::fast_const_iterator fast_iter_const6(leaf_iter_const);
+  
+  I3MCTree::leaf_const_iterator leaf_iter_const1(iter_const);
+  I3MCTree::leaf_const_iterator leaf_iter_const2(pre_order_iter_const);
+  I3MCTree::leaf_const_iterator leaf_iter_const3(post_order_iter_const);
+  I3MCTree::leaf_const_iterator leaf_iter_const4(sibling_iter_const);
+  I3MCTree::leaf_const_iterator leaf_iter_const5(fast_iter_const);
+  I3MCTree::leaf_const_iterator leaf_iter_const6(leaf_iter_const);
+  
+  // now switch between const and non-const
+  I3MCTree::const_iterator iter_const11(iter);
+  I3MCTree::const_iterator iter_const21(pre_order_iter);
+  I3MCTree::const_iterator iter_const31(post_order_iter);
+  I3MCTree::const_iterator iter_const41(sibling_iter);
+  //I3MCTree::const_iterator iter_const51(fast_iter);
+  //I3MCTree::const_iterator iter_const61(leaf_iter);
+  
+  I3MCTree::pre_order_const_iterator pre_order_iter_const11(iter);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const21(pre_order_iter);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const31(post_order_iter);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const41(sibling_iter);
+  //I3MCTree::pre_order_const_iterator pre_order_iter_const51(fast_iter);
+  //I3MCTree::pre_order_const_iterator pre_order_iter_const61(leaf_iter);
+  
+  I3MCTree::post_order_const_iterator post_order_iter_const11(iter);
+  I3MCTree::post_order_const_iterator post_order_iter_const21(pre_order_iter);
+  I3MCTree::post_order_const_iterator post_order_iter_const31(post_order_iter);
+  I3MCTree::post_order_const_iterator post_order_iter_const41(sibling_iter);
+  //I3MCTree::post_order_const_iterator post_order_iter_const51(fast_iter);
+  //I3MCTree::post_order_const_iterator post_order_iter_const61(leaf_iter);
+  
+  I3MCTree::sibling_const_iterator sibling_iter_const11(iter);
+  I3MCTree::sibling_const_iterator sibling_iter_const21(pre_order_iter);
+  I3MCTree::sibling_const_iterator sibling_iter_const31(post_order_iter);
+  I3MCTree::sibling_const_iterator sibling_iter_const41(sibling_iter);
+  //I3MCTree::sibling_const_iterator sibling_iter_const51(fast_iter);
+  //I3MCTree::sibling_const_iterator sibling_iter_const61(leaf_iter);
+  
+  I3MCTree::fast_const_iterator fast_iter_const11(iter);
+  I3MCTree::fast_const_iterator fast_iter_const21(pre_order_iter);
+  I3MCTree::fast_const_iterator fast_iter_const31(post_order_iter);
+  I3MCTree::fast_const_iterator fast_iter_const41(sibling_iter);
+  //I3MCTree::fast_const_iterator fast_iter_const51(fast_iter);
+  //I3MCTree::fast_const_iterator fast_iter_const61(leaf_iter);
+  
+  I3MCTree::leaf_const_iterator leaf_iter_const11(iter);
+  I3MCTree::leaf_const_iterator leaf_iter_const21(pre_order_iter);
+  I3MCTree::leaf_const_iterator leaf_iter_const31(post_order_iter);
+  I3MCTree::leaf_const_iterator leaf_iter_const41(sibling_iter);
+  //I3MCTree::leaf_const_iterator leaf_iter_const51(fast_iter);
+  //I3MCTree::leaf_const_iterator leaf_iter_const61(leaf_iter);
+  
+  // now do initializing assignment
+  I3MCTree::iterator iter12 = iter;
+  I3MCTree::iterator iter22 = pre_order_iter;
+  I3MCTree::iterator iter32 = post_order_iter;
+  I3MCTree::iterator iter42 = sibling_iter;
+  I3MCTree::iterator iter52 = fast_iter;
+  I3MCTree::iterator iter62 = leaf_iter;
+
+  I3MCTree::pre_order_iterator pre_order_iter12 = iter;
+  I3MCTree::pre_order_iterator pre_order_iter22 = pre_order_iter;
+  I3MCTree::pre_order_iterator pre_order_iter32 = post_order_iter;
+  I3MCTree::pre_order_iterator pre_order_iter42 = sibling_iter;
+  I3MCTree::pre_order_iterator pre_order_iter52 = fast_iter;
+  I3MCTree::pre_order_iterator pre_order_iter62 = leaf_iter;
+  
+  I3MCTree::post_order_iterator post_order_iter12 = iter;
+  I3MCTree::post_order_iterator post_order_iter22 = pre_order_iter;
+  I3MCTree::post_order_iterator post_order_iter32 = post_order_iter;
+  I3MCTree::post_order_iterator post_order_iter42 = sibling_iter;
+  I3MCTree::post_order_iterator post_order_iter52 = fast_iter;
+  I3MCTree::post_order_iterator post_order_iter62 = leaf_iter;
+  
+  I3MCTree::sibling_iterator sibling_iter12 = iter;
+  I3MCTree::sibling_iterator sibling_iter22 = pre_order_iter;
+  I3MCTree::sibling_iterator sibling_iter32 = post_order_iter;
+  I3MCTree::sibling_iterator sibling_iter42 = sibling_iter;
+  I3MCTree::sibling_iterator sibling_iter52 = fast_iter;
+  I3MCTree::sibling_iterator sibling_iter62 = leaf_iter;
+  
+  I3MCTree::fast_iterator fast_iter12 = iter;
+  I3MCTree::fast_iterator fast_iter22 = pre_order_iter;
+  I3MCTree::fast_iterator fast_iter32 = post_order_iter;
+  I3MCTree::fast_iterator fast_iter42 = sibling_iter;
+  I3MCTree::fast_iterator fast_iter52 = fast_iter;
+  I3MCTree::fast_iterator fast_iter62 = leaf_iter;
+  
+  I3MCTree::leaf_iterator leaf_iter12 = iter;
+  I3MCTree::leaf_iterator leaf_iter22 = pre_order_iter;
+  I3MCTree::leaf_iterator leaf_iter32 = post_order_iter;
+  I3MCTree::leaf_iterator leaf_iter42 = sibling_iter;
+  I3MCTree::leaf_iterator leaf_iter52 = fast_iter;
+  I3MCTree::leaf_iterator leaf_iter62 = leaf_iter;
+  
+  I3MCTree::const_iterator iter_const12 = iter_const;
+  I3MCTree::const_iterator iter_const22 = pre_order_iter_const;
+  I3MCTree::const_iterator iter_const32 = post_order_iter_const;
+  I3MCTree::const_iterator iter_const42 = sibling_iter_const;
+  I3MCTree::const_iterator iter_const52 = fast_iter_const;
+  I3MCTree::const_iterator iter_const62 = leaf_iter_const;
+  
+  I3MCTree::pre_order_const_iterator pre_order_iter_const12 = iter_const;
+  I3MCTree::pre_order_const_iterator pre_order_iter_const22 = pre_order_iter_const;
+  I3MCTree::pre_order_const_iterator pre_order_iter_const32 = post_order_iter_const;
+  I3MCTree::pre_order_const_iterator pre_order_iter_const42 = sibling_iter_const;
+  I3MCTree::pre_order_const_iterator pre_order_iter_const52 = fast_iter_const;
+  I3MCTree::pre_order_const_iterator pre_order_iter_const62 = leaf_iter_const;
+  
+  I3MCTree::post_order_const_iterator post_order_iter_const12 = iter_const;
+  I3MCTree::post_order_const_iterator post_order_iter_const22 = pre_order_iter_const;
+  I3MCTree::post_order_const_iterator post_order_iter_const32 = post_order_iter_const;
+  I3MCTree::post_order_const_iterator post_order_iter_const42 = sibling_iter_const;
+  I3MCTree::post_order_const_iterator post_order_iter_const52 = fast_iter_const;
+  I3MCTree::post_order_const_iterator post_order_iter_const62 = leaf_iter_const;
+  
+  I3MCTree::sibling_const_iterator sibling_iter_const12 = iter_const;
+  I3MCTree::sibling_const_iterator sibling_iter_const22 = pre_order_iter_const;
+  I3MCTree::sibling_const_iterator sibling_iter_const32 = post_order_iter_const;
+  I3MCTree::sibling_const_iterator sibling_iter_const42 = sibling_iter_const;
+  I3MCTree::sibling_const_iterator sibling_iter_const52 = fast_iter_const;
+  I3MCTree::sibling_const_iterator sibling_iter_const62 = leaf_iter_const;
+  
+  I3MCTree::fast_const_iterator fast_iter_const12 = iter_const;
+  I3MCTree::fast_const_iterator fast_iter_const22 = pre_order_iter_const;
+  I3MCTree::fast_const_iterator fast_iter_const32 = post_order_iter_const;
+  I3MCTree::fast_const_iterator fast_iter_const42 = sibling_iter_const;
+  I3MCTree::fast_const_iterator fast_iter_const52 = fast_iter_const;
+  I3MCTree::fast_const_iterator fast_iter_const62 = leaf_iter_const;
+  
+  I3MCTree::leaf_const_iterator leaf_iter_const12 = iter_const;
+  I3MCTree::leaf_const_iterator leaf_iter_const22 = pre_order_iter_const;
+  I3MCTree::leaf_const_iterator leaf_iter_const32 = post_order_iter_const;
+  I3MCTree::leaf_const_iterator leaf_iter_const42 = sibling_iter_const;
+  I3MCTree::leaf_const_iterator leaf_iter_const52 = fast_iter_const;
+  I3MCTree::leaf_const_iterator leaf_iter_const62 = leaf_iter_const;
+}
+
 TEST(empty)
 {
   I3MCTree t1;
@@ -547,6 +944,124 @@ TEST(append_child)
   ENSURE( children5 == newchildren , "added children incorrect");
 }
 
+TEST(append_child_iter)
+{
+  I3Particle p1 = makeParticle();
+  I3MCTree t1(p1);
+  
+  ENSURE( t1.get_head() , "can't get head node");
+  
+  I3Particle p2 = makeParticle();
+  ENSURE( t1.append_child(t1.begin(),p2) != t1.end() ,
+         "failed to append child");
+  
+  std::vector<I3Particle> children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.front() == p2 , "child not there");
+  
+  I3Particle p3 = makeParticle();
+  I3MCTree::fast_const_iterator iter(t1.cbegin());
+  ENSURE( t1.append_child(iter,p3) != t1.cend_fast() ,
+         "failed to append child");
+  
+  std::vector<I3Particle> children2 = t1.children(p1);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p2 , "p2 is not first child");
+  ENSURE( children2.at(1) == p3 , "p3 is not second child");
+  
+  I3MCTree t2(makeParticle());
+  ENSURE( t2.append_child(t2.begin(),t1,p1) != t2.end() ,
+         "failed to append subtree");
+  std::vector<I3Particle> children3 = t2.children(*t2.get_head());
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p1 , "p1 is not first child of t2");
+  ENSURE( children3.size() == 1 , "children3.size != 1");
+  std::vector<I3Particle> children4 = t2.children(p1);
+  ENSURE( !children4.empty() , "no children4");
+  ENSURE( children4.front() == p2 , "p2 is not first child of t2.p1");
+  ENSURE( children4.at(1) == p3 , "p3 is not second child of t2.p1");
+  t2.clear();
+  t2.insert(makeParticle());
+  ENSURE( t2.append_child(t2.cbegin_fast(),t1,p1) != t2.cend_fast() ,
+         "failed to append subtree");
+  children3 = t2.children(*t2.get_head());
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p1 , "p1 is not first child of t2");
+  ENSURE( children3.size() == 1 , "children3.size != 1");
+  children4 = t2.children(p1);
+  ENSURE( !children4.empty() , "no children4");
+  ENSURE( children4.front() == p2 , "p2 is not first child of t2.p1");
+  ENSURE( children4.at(1) == p3 , "p3 is not second child of t2.p1");
+  t2.clear();
+  t2.insert(makeParticle());
+  ENSURE( t2.append_child(t2.begin(),t1.begin()) != t2.end() ,
+         "failed to append subtree");
+  children3 = t2.children(*t2.get_head());
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p1 , "p1 is not first child of t2");
+  ENSURE( children3.size() == 1 , "children3.size != 1");
+  children4 = t2.children(p1);
+  ENSURE( !children4.empty() , "no children4");
+  ENSURE( children4.front() == p2 , "p2 is not first child of t2.p1");
+  ENSURE( children4.at(1) == p3 , "p3 is not second child of t2.p1");
+  t2.clear();
+  t2.insert(makeParticle());
+  ENSURE( t2.append_child(t2.cbegin_fast(),t1.begin()) != t2.cend_fast() ,
+         "failed to append subtree");
+  children3 = t2.children(*t2.get_head());
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p1 , "p1 is not first child of t2");
+  ENSURE( children3.size() == 1 , "children3.size != 1");
+  children4 = t2.children(p1);
+  ENSURE( !children4.empty() , "no children4");
+  ENSURE( children4.front() == p2 , "p2 is not first child of t2.p1");
+  ENSURE( children4.at(1) == p3 , "p3 is not second child of t2.p1");
+  t2.clear();
+  t2.insert(makeParticle());
+  ENSURE( t2.append_child(t2.begin(),iter) != t2.end() ,
+         "failed to append subtree");
+  children3 = t2.children(*t2.get_head());
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p1 , "p1 is not first child of t2");
+  ENSURE( children3.size() == 1 , "children3.size != 1");
+  children4 = t2.children(p1);
+  ENSURE( !children4.empty() , "no children4");
+  ENSURE( children4.front() == p2 , "p2 is not first child of t2.p1");
+  ENSURE( children4.at(1) == p3 , "p3 is not second child of t2.p1");
+  t2.clear();
+  t2.insert(makeParticle());
+  ENSURE( t2.append_child(t2.cbegin_fast(),iter) != t2.cend_fast() ,
+         "failed to append subtree");
+  children3 = t2.children(*t2.get_head());
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p1 , "p1 is not first child of t2");
+  ENSURE( children3.size() == 1 , "children3.size != 1");
+  children4 = t2.children(p1);
+  ENSURE( !children4.empty() , "no children4");
+  ENSURE( children4.front() == p2 , "p2 is not first child of t2.p1");
+  ENSURE( children4.at(1) == p3 , "p3 is not second child of t2.p1");
+  
+  I3MCTree t3(makeParticle());
+  I3Particle p4 = *t3.get_head();
+  std::vector<I3Particle> newchildren;
+  for (int i=0;i<50;i++) {
+    newchildren.push_back(makeParticle());
+  }
+  ENSURE( t3.append_children(t3.begin(),newchildren) != t3.end(),
+         "failed to append multiple children");
+  std::vector<I3Particle> children5 = t3.children(p4);
+  ENSURE( !children5.empty() , "no children5");
+  ENSURE( children5 == newchildren , "added children incorrect");
+  t3.clear();
+  t3.insert(makeParticle());
+  p4 = *t3.get_head();
+  ENSURE( t3.append_children(t3.cbegin_fast(),newchildren) != t3.cend_fast(),
+         "failed to append multiple children");
+  children5 = t3.children(p4);
+  ENSURE( !children5.empty() , "no children5");
+  ENSURE( children5 == newchildren , "added children incorrect");
+}
+
 TEST(erase)
 {
   I3MCTree t1(makeParticle());
@@ -568,6 +1083,49 @@ TEST(erase)
   ENSURE( !t1.at(p1) , "p1 was not erased");
   ENSURE( !t1.at(p2) , "p2 was not erased");
   ENSURE( t1.empty() , "tree did not clear");
+  
+  I3MCTree t2(makeParticle());
+  I3Particle head2 = t2.get_head();
+  I3Particle p4 = makeParticle();
+  t2.append_child(head2,p4);
+  I3Particle p5 = makeParticle();
+  t2.append_child(head2,p5);
+  I3Particle p6 = makeParticle();
+  t2.append_child(head2,p6);
+  ENSURE( !t2.empty() , "tree is empty");
+  
+  I3MCTree::iterator iter(t2,p6);
+  ENSURE( t2.erase(iter) == t2.end() , "erase() did not return end()");
+  ENSURE( !t2.at(p6) , "child was not erased");
+  ENSURE( !t2.empty() , "tree is empty after erasing child");
+  
+  ENSURE( t2.erase(t2.begin()) == t2.end() , "erase() did not return end()");
+  ENSURE( !t2.at(head2) , "head was not erased");
+  ENSURE( !t2.at(p4) , "p4 was not erased");
+  ENSURE( !t2.at(p5) , "p5 was not erased");
+  ENSURE( t2.empty() , "tree did not clear");
+  
+  I3MCTree t3(makeParticle());
+  I3Particle head3 = t3.get_head();
+  I3Particle p7 = makeParticle();
+  t3.append_child(head3,p7);
+  I3Particle p8 = makeParticle();
+  t3.append_child(head3,p8);
+  I3Particle p9 = makeParticle();
+  t3.append_child(head3,p9);
+  ENSURE( !t3.empty() , "tree is empty");
+  
+  I3MCTree::fast_const_iterator iter2(t3,p9);
+  ENSURE( t3.erase(iter2) == t3.cend_fast() , "erase() did not return end()");
+  ENSURE( !t3.at(p9) , "child was not erased");
+  ENSURE( !t3.empty() , "tree is empty after erasing child");
+  
+  I3MCTree::fast_const_iterator iter3(t3,head3);
+  ENSURE( t3.erase(iter3) == t3.cend_fast() , "erase() did not return end()");
+  ENSURE( !t3.at(head3) , "head was not erased");
+  ENSURE( !t3.at(p7) , "p7 was not erased");
+  ENSURE( !t3.at(p8) , "p8 was not erased");
+  ENSURE( t3.empty() , "tree did not clear");
 }
 
 TEST(erase_children)
@@ -583,6 +1141,33 @@ TEST(erase_children)
   
   std::vector<I3Particle> children = t1.children(*t1.get_head());
   ENSURE( children.empty() , "did not delete all children");
+  
+  I3MCTree t2(makeParticle());
+  t2.append_child(*t2.get_head(),makeParticle());
+  t2.append_child(*t2.get_head(),makeParticle());
+  t2.append_child(*t2.get_head(),makeParticle());
+  ENSURE( !t2.empty() , "tree is empty");
+  
+  ENSURE( t2.erase_children(t2.begin()) == t2.begin() ,
+         "erase_children() did not return same iterator");
+  ENSURE( !t2.empty() , "tree is empty after erase_children");
+  
+  I3MCTree::sibling_iterator children2 = t2.children(t2.begin());
+  ENSURE( children2 == t2.end_sibling() , "did not delete all children");
+  
+  I3MCTree t3(makeParticle());
+  t3.append_child(*t3.get_head(),makeParticle());
+  t3.append_child(*t3.get_head(),makeParticle());
+  t3.append_child(*t3.get_head(),makeParticle());
+  ENSURE( !t3.empty() , "tree is empty");
+  
+  I3MCTree::fast_const_iterator iter(t3.begin());
+  ENSURE( t3.erase_children(iter) == iter ,
+         "erase_children() did not return same iterator");
+  ENSURE( !t3.empty() , "tree is empty after erase_children");
+  
+  I3MCTree::sibling_const_iterator children3 = t3.children(iter);
+  ENSURE( children3 == t2.cend_sibling() , "did not delete all children");
 }
 
 TEST(manual_traversal)
@@ -601,6 +1186,8 @@ TEST(manual_traversal)
   std::vector<I3Particle> children = t1.children(head);
   ENSURE( !children.empty() , "no children of head");
   ENSURE( children.size() == 3 , "there are not three children");
+  ENSURE( t1.first_child(head) , "can't find first child");
+  ENSURE( *t1.first_child(head) == children.at(0) , "children.at(0) != first_child");
   ENSURE( head == *t1.parent(children.at(0)) , "children.at(0) parent != head");
   ENSURE( head == *t1.parent(children.at(1)) , "children.at(1) parent != head");
   ENSURE( head == *t1.parent(children.at(2)) , "children.at(2) parent != head");
@@ -624,6 +1211,61 @@ TEST(manual_traversal)
   
   ENSURE( t1.parent(child2) , "child2 does not have a parent");
   ENSURE( head == *t1.parent(child2) , "child2 parent != head");
+}
+
+TEST(manual_traversal_iter)
+{
+  I3MCTree t1(makeParticle());
+  t1.append_child(*t1.get_head(),makeParticle());
+  t1.append_child(*t1.get_head(),makeParticle());
+  t1.append_child(*t1.get_head(),makeParticle());
+  ENSURE( !t1.empty() , "tree is empty");
+  
+  ENSURE( t1.get_head() , "tree does not have a head");
+  I3Particle head = t1.get_head();
+  ENSURE( t1.at(head) , "at(head) failed");
+  ENSURE( *t1.at(head) == head , "at(head) != head");
+  
+  I3MCTree::sibling_iterator children = t1.begin(++t1.begin());
+  ENSURE( children != t1.end_sibling() , "no children of head");
+  ENSURE( *t1.first_child(t1.begin()) == *children ,
+         "children(0) != first_child");
+  ENSURE( head == *t1.parent(children) , "children(0) parent != head");
+  I3MCTree::iterator child1 = (I3MCTree::sibling_iterator)children++;
+  I3MCTree::iterator child2 = t1.next_sibling(child1);
+  ENSURE( t1.next_sibling(child1) == (I3MCTree::iterator)children ,
+         "child1 does not have a next_sibling");
+  ENSURE( head == *t1.parent(children++) , "children(1) parent != head");
+  ENSURE( head == *t1.parent(children++) , "children(2) parent != head");
+  ENSURE( children == t1.end_sibling() , "children.size != 3");
+  
+  I3MCTree::iterator prev_sib = t1.previous_sibling(child2);
+  ENSURE( prev_sib == child1 , "child2 does not have a previous_sibling");
+  ENSURE( child1 == prev_sib , "siblings do not match");
+  
+  ENSURE( t1.parent(child2) == t1.begin() , "child2 parent != head");
+}
+
+TEST(first_child)
+{
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3MCTree t1(p1);
+  t1.append_child(p1,p2);
+  t1.append_child(p1,makeParticle());
+  t1.append_child(p1,makeParticle());
+  ENSURE( !t1.empty() , "tree is empty");
+  ENSURE( t1.first_child(p1) == p2 , "first_child incorrect");
+  ENSURE( t1.first_child(t1.begin()) == ++t1.begin() ,
+         "iter first_child incorrect");
+  I3MCTree::sibling_const_iterator iter(t1,p1), iter2(t1,p2);
+  ENSURE( t1.first_child(iter) == iter2 ,
+         "sibling_const_iter first_child incorrect");
+  I3MCTree::fast_iterator iter3(t1,p1), iter4(t1,p2);
+  ENSURE( t1.first_child(iter3) == iter4 ,
+         "fast_iter first_child incorrect");
+  ENSURE( iter4 == t1.first_child(iter3) ,
+         "fast_iter2 first_child incorrect");
 }
 
 TEST(insert)
@@ -656,6 +1298,39 @@ TEST(insert)
   ENSURE( children3.front() == p3 , "p3 is not first child");
   ENSURE( children3.at(1) == p4 , "p4 is not second child");
   ENSURE( children3.at(2) == p2 , "p2 is not third child");
+  
+  p1 = makeParticle();
+  t1 = I3MCTree(p1);
+  
+  ENSURE( t1.get_head() , "can't get head node");
+  
+  p2 = makeParticle();
+  t1.append_child(p1,p2);
+  
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.front() == p2 , "child not there");
+  
+  p3 = makeParticle();
+  I3MCTree::iterator iter(t1,p2);
+  ENSURE( t1.insert(iter,p3) != t1.end() ,
+         "insert() returned end()");
+  
+  children2 = t1.children(p1);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p3 , "p3 is not first child");
+  ENSURE( children2.at(1) == p2 , "p2 is not second child");
+  
+  p4 = makeParticle();
+  I3MCTree::fast_const_iterator iter2(t1,p2);
+  ENSURE( t1.insert(iter2,p4) != t1.cend_fast() ,
+         "insert() returned end()");
+  
+  children3 = t1.children(p1);
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p3 , "p3 is not first child");
+  ENSURE( children3.at(1) == p4 , "p4 is not second child");
+  ENSURE( children3.at(2) == p2 , "p2 is not third child");
 }
 
 TEST(insert_after)
@@ -684,6 +1359,39 @@ TEST(insert_after)
   t1.insert_after(p2,p4);
   
   std::vector<I3Particle> children3 = t1.children(p1);
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.front() == p2 , "p2 is not first child");
+  ENSURE( children3.at(1) == p4 , "p4 is not second child");
+  ENSURE( children3.at(2) == p3 , "p3 is not third child");
+  
+  p1 = makeParticle();
+  t1 = I3MCTree(p1);
+  
+  ENSURE( t1.get_head() , "can't get head node");
+  
+  p2 = makeParticle();
+  t1.append_child(p1,p2);
+  
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.front() == p2 , "child not there");
+  
+  p3 = makeParticle();
+  I3MCTree::iterator iter(t1,p2);
+  ENSURE( t1.insert_after(iter,p3) != t1.end() ,
+         "insert() returned end()");
+  
+  children2 = t1.children(p1);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p2 , "p2 is not first child");
+  ENSURE( children2.at(1) == p3 , "p3 is not second child");
+  
+  p4 = makeParticle();
+  I3MCTree::fast_const_iterator iter2(t1,p2);
+  ENSURE( t1.insert_after(iter2,p4) != t1.cend_fast() ,
+         "insert_after() returned end()");
+  
+  children3 = t1.children(p1);
   ENSURE( !children3.empty() , "no children3");
   ENSURE( children3.front() == p2 , "p2 is not first child");
   ENSURE( children3.at(1) == p4 , "p4 is not second child");
@@ -730,6 +1438,132 @@ TEST(insert_subtree)
   ENSURE( children3.size() == 3 , "children3.size != 3");
 }
 
+TEST(insert_subtree_iter)
+{
+  I3Particle p1 = makeParticle();
+  I3MCTree t1(p1);
+  t1.append_child(p1,makeParticle());
+  I3Particle p3 = makeParticle();
+  t1.append_child(p1,p3);
+  t1.append_child(p1,makeParticle());
+  
+  I3Particle head = makeParticle();
+  I3MCTree t2(head);
+  I3Particle firstChild = makeParticle();
+  t2.append_child(head,firstChild);
+  
+  I3MCTree::iterator iter(t2,firstChild);
+  t2.insert_subtree(iter,t1,p3);
+  
+  std::vector<I3Particle> children = t2.children(head);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.front() == p3 , "p3 not there");
+  ENSURE( children.back() == firstChild , "firstChild not there");
+  
+  I3Particle head2 = makeParticle();
+  I3MCTree t3(head2);
+  t3.append_child(head2,makeParticle());
+  t3.append_child(head2,makeParticle());
+  t3.append_child(head2,makeParticle());
+  
+  I3MCTree::fast_const_iterator iter2(t2,firstChild);
+  t2.insert_subtree(iter2,t3,head2);
+  
+  std::vector<I3Particle> children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p3 , "p3 is not first child");
+  ENSURE( children2.at(1) == head2 , "head2 is not second child");
+  ENSURE( children2.at(2) == firstChild , "firstChild is not third child");
+  
+  std::vector<I3Particle> children3 = t2.children(children2.at(1));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head3 = makeParticle();
+  I3MCTree t4(head3);
+  t4.append_child(head3,makeParticle());
+  t4.append_child(head3,makeParticle());
+  t4.append_child(head3,makeParticle());
+  
+  t2.insert_subtree(iter2,t4.begin());
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p3 , "p3 is not first child");
+  ENSURE( children2.at(1) == head2 , "head2 is not second child");
+  ENSURE( children2.at(2) == head3 , "head3 is not third child");
+  ENSURE( children2.at(3) == firstChild , "firstChild is not fourth child");
+  
+  children3 = t2.children(children2.at(2));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head4 = makeParticle();
+  I3MCTree t5(head4);
+  t5.append_child(head4,makeParticle());
+  t5.append_child(head4,makeParticle());
+  t5.append_child(head4,makeParticle());
+  
+  t2.insert_subtree(iter,t5.cbegin());
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p3 , "p3 is not first child");
+  ENSURE( children2.at(1) == head2 , "head2 is not second child");
+  ENSURE( children2.at(2) == head3 , "head3 is not third child");
+  ENSURE( children2.at(3) == head4 , "head4 is not fourth child");
+  ENSURE( children2.at(4) == firstChild , "firstChild is not fifth child");
+  
+  children3 = t2.children(children2.at(3));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head5 = makeParticle();
+  I3MCTree t6(head5);
+  t6.append_child(head5,makeParticle());
+  t6.append_child(head5,makeParticle());
+  t6.append_child(head5,makeParticle());
+  
+  I3MCTree::fast_iterator iter3(t6.begin());
+  t2.insert_subtree(iter,iter3);
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p3 , "p3 is not first child");
+  ENSURE( children2.at(1) == head2 , "head2 is not second child");
+  ENSURE( children2.at(2) == head3 , "head3 is not third child");
+  ENSURE( children2.at(3) == head4 , "head4 is not fourth child");
+  ENSURE( children2.at(4) == head5 , "head5 is not fifth child");
+  ENSURE( children2.at(5) == firstChild , "firstChild is not sixth child");
+  
+  children3 = t2.children(children2.at(4));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head6 = makeParticle();
+  I3MCTree t7(head6);
+  t7.append_child(head6,makeParticle());
+  t7.append_child(head6,makeParticle());
+  t7.append_child(head6,makeParticle());
+  
+  I3MCTree::fast_iterator iter4(t7.begin());
+  t2.insert_subtree(iter2,iter4);
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == p3 , "p3 is not first child");
+  ENSURE( children2.at(1) == head2 , "head2 is not second child");
+  ENSURE( children2.at(2) == head3 , "head3 is not third child");
+  ENSURE( children2.at(3) == head4 , "head4 is not fourth child");
+  ENSURE( children2.at(4) == head5 , "head5 is not fifth child");
+  ENSURE( children2.at(5) == head6 , "head6 is not sixth child");
+  ENSURE( children2.at(6) == firstChild , "firstChild is not seventh child");
+  
+  children3 = t2.children(children2.at(5));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+}
+
 TEST(insert_subtree_after)
 {
   I3Particle p1 = makeParticle();
@@ -770,6 +1604,132 @@ TEST(insert_subtree_after)
   ENSURE( children3.size() == 3 , "children3.size != 3");
 }
 
+TEST(insert_subtree_after_iter)
+{
+  I3Particle p1 = makeParticle();
+  I3MCTree t1(p1);
+  t1.append_child(p1,makeParticle());
+  I3Particle p3 = makeParticle();
+  t1.append_child(p1,p3);
+  t1.append_child(p1,makeParticle());
+  
+  I3Particle head = makeParticle();
+  I3MCTree t2(head);
+  I3Particle firstChild = makeParticle();
+  t2.append_child(head,firstChild);
+  
+  I3MCTree::iterator iter(t2,firstChild);
+  t2.insert_subtree_after(iter,t1,p3);
+  
+  std::vector<I3Particle> children = t2.children(head);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.front() == firstChild , "firstChild not there");
+  ENSURE( children.back() == p3 , "p3 not there");
+  
+  I3Particle head2 = makeParticle();
+  I3MCTree t3(head2);
+  t3.append_child(head2,makeParticle());
+  t3.append_child(head2,makeParticle());
+  t3.append_child(head2,makeParticle());
+  
+  I3MCTree::fast_const_iterator iter2(t2,firstChild);
+  t2.insert_subtree_after(iter2,t3,head2);
+  
+  std::vector<I3Particle> children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == firstChild , "firstChild is not first child");
+  ENSURE( children2.at(1) == head2 , "head2 is not second child");
+  ENSURE( children2.at(2) == p3 , "p3 is not third child");
+  
+  std::vector<I3Particle> children3 = t2.children(children2.at(1));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head3 = makeParticle();
+  I3MCTree t4(head3);
+  t4.append_child(head3,makeParticle());
+  t4.append_child(head3,makeParticle());
+  t4.append_child(head3,makeParticle());
+  
+  t2.insert_subtree_after(iter2,t4.begin());
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == firstChild , "firstChild is not first child");
+  ENSURE( children2.at(1) == head3 , "head3 is not second child");
+  ENSURE( children2.at(2) == head2 , "head2 is not third child");
+  ENSURE( children2.at(3) == p3 , "p3 is not fourth child");
+  
+  children3 = t2.children(children2.at(1));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head4 = makeParticle();
+  I3MCTree t5(head4);
+  t5.append_child(head4,makeParticle());
+  t5.append_child(head4,makeParticle());
+  t5.append_child(head4,makeParticle());
+  
+  t2.insert_subtree_after(iter,t5.cbegin());
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == firstChild , "firstChild is not first child");
+  ENSURE( children2.at(1) == head4 , "head4 is not second child");
+  ENSURE( children2.at(2) == head3 , "head3 is not third child");
+  ENSURE( children2.at(3) == head2 , "head2 is not fourth child");
+  ENSURE( children2.at(4) == p3 , "p3 is not fifth child");
+  
+  children3 = t2.children(children2.at(1));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head5 = makeParticle();
+  I3MCTree t6(head5);
+  t6.append_child(head5,makeParticle());
+  t6.append_child(head5,makeParticle());
+  t6.append_child(head5,makeParticle());
+  
+  I3MCTree::fast_iterator iter3(t6.begin());
+  t2.insert_subtree_after(iter,iter3);
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == firstChild , "firstChild is not first child");
+  ENSURE( children2.at(1) == head5 , "head5 is not second child");
+  ENSURE( children2.at(2) == head4 , "head4 is not third child");
+  ENSURE( children2.at(3) == head3 , "head3 is not fourth child");
+  ENSURE( children2.at(4) == head2 , "head2 is not fifth child");
+  ENSURE( children2.at(5) == p3 , "p3 is not sixth child");
+  
+  children3 = t2.children(children2.at(1));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+  
+  I3Particle head6 = makeParticle();
+  I3MCTree t7(head6);
+  t7.append_child(head6,makeParticle());
+  t7.append_child(head6,makeParticle());
+  t7.append_child(head6,makeParticle());
+  
+  I3MCTree::fast_iterator iter4(t7.begin());
+  t2.insert_subtree_after(iter2,iter4);
+  
+  children2 = t2.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.front() == firstChild , "firstChild is not first child");
+  ENSURE( children2.at(1) == head6 , "head6 is not second child");
+  ENSURE( children2.at(2) == head5 , "head5 is not third child");
+  ENSURE( children2.at(3) == head4 , "head4 is not fourth child");
+  ENSURE( children2.at(4) == head3 , "head3 is not fifth child");
+  ENSURE( children2.at(5) == head2 , "head2 is not sixth child");
+  ENSURE( children2.at(6) == p3 , "p3 is not seventh child");
+  
+  children3 = t2.children(children2.at(1));
+  ENSURE( !children3.empty() , "no children3");
+  ENSURE( children3.size() == 3 , "children3.size != 3");
+}
+
 TEST(replace)
 {
   I3Particle p1 = makeParticle();
@@ -806,6 +1766,146 @@ TEST(replace)
   ENSURE( children2.size() == 3 , "3 children of t2 not in t1");
 }
 
+TEST(replace_iter)
+{
+  I3Particle p1 = makeParticle();
+  I3MCTree t1(p1);
+  t1.append_child(p1,makeParticle());
+  I3Particle p3 = makeParticle();
+  t1.append_child(p1,p3);
+  t1.append_child(p1,makeParticle());
+
+  I3Particle p2 = makeParticle();
+  I3MCTree::iterator iter(t1,p3);
+  t1.replace(iter,p2);
+  
+  ENSURE( !t1.at(p3) , "p3 is still in tree");
+  ENSURE( t1.at(p2) , "p2 is not in tree");
+  std::vector<I3Particle> children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == p2 , "p2 not second child");
+
+  I3Particle p4 = makeParticle();
+  I3MCTree::fast_const_iterator iter2(t1,p2);
+  t1.replace(iter2,p4);
+  
+  ENSURE( !t1.at(p2) , "p2 is still in tree");
+  ENSURE( t1.at(p4) , "p4 is not in tree");
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == p4 , "p4 not second child");
+  
+  I3Particle head = makeParticle();
+  I3MCTree t2(head);
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,makeParticle());
+  
+  I3MCTree::iterator iter3(t1,p4);
+  t1.replace(iter3,t2,head);
+  
+  ENSURE( !t1.at(p4) , "p4 is still in tree");
+  ENSURE( t1.at(head) , "head is not in tree");
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == head , "head not second child");
+  std::vector<I3Particle> children2 = t1.children(head);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.size() == 3 , "3 children of t2 not in t1");
+  
+  I3Particle head2 = makeParticle();
+  I3MCTree t3(head2);
+  t3.append_child(head2,makeParticle());
+  t3.append_child(head2,makeParticle());
+  t3.append_child(head2,makeParticle());
+  
+  I3MCTree::fast_const_iterator iter4(t1,head);
+  t1.replace(iter4,t3,head2);
+  
+  ENSURE( !t1.at(head) , "head is still in tree");
+  ENSURE( t1.at(head2) , "head2 is not in tree");
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == head2 , "head2 not second child");
+  children2 = t1.children(head2);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.size() == 3 , "3 children of t3 not in t1");
+  
+  I3Particle head3 = makeParticle();
+  I3MCTree t4(head3);
+  t4.append_child(head3,makeParticle());
+  t4.append_child(head3,makeParticle());
+  t4.append_child(head3,makeParticle());
+  
+  I3MCTree::iterator iter5(t1,head2);
+  t1.replace(iter5,t4.begin());
+  
+  ENSURE( !t1.at(head2) , "head2 is still in tree");
+  ENSURE( t1.at(head3) , "head3 is not in tree");
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == head3 , "head3 not second child");
+  children2 = t1.children(head3);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.size() == 3 , "3 children of t4 not in t1");
+  
+  I3Particle head4 = makeParticle();
+  I3MCTree t5(head4);
+  t5.append_child(head4,makeParticle());
+  t5.append_child(head4,makeParticle());
+  t5.append_child(head4,makeParticle());
+  
+  I3MCTree::iterator iter6(t1,head3);
+  I3MCTree::fast_const_iterator iter7(t5,head4);
+  t1.replace(iter6,iter7);
+  
+  ENSURE( !t1.at(head3) , "head3 is still in tree");
+  ENSURE( t1.at(head4) , "head4 is not in tree");
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == head4 , "head4 not second child");
+  children2 = t1.children(head4);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.size() == 3 , "3 children of t5 not in t1");
+  
+  I3Particle head5 = makeParticle();
+  I3MCTree t6(head5);
+  t6.append_child(head5,makeParticle());
+  t6.append_child(head5,makeParticle());
+  t6.append_child(head5,makeParticle());
+  
+  I3MCTree::fast_const_iterator iter8(t1,head4);
+  t1.replace(iter8,t6.begin());
+  
+  ENSURE( !t1.at(head4) , "head4 is still in tree");
+  ENSURE( t1.at(head5) , "head5 is not in tree");
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == head5 , "head5 not second child");
+  children2 = t1.children(head5);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.size() == 3 , "3 children of t6 not in t1");
+  
+  I3Particle head6 = makeParticle();
+  I3MCTree t7(head6);
+  t7.append_child(head6,makeParticle());
+  t7.append_child(head6,makeParticle());
+  t7.append_child(head6,makeParticle());
+  
+  I3MCTree::fast_const_iterator iter9(t1,head5);
+  I3MCTree::fast_const_iterator iter10(t7,head6);
+  t1.replace(iter9,iter10);
+  
+  ENSURE( !t1.at(head5) , "head5 is still in tree");
+  ENSURE( t1.at(head6) , "head6 is not in tree");
+  children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.at(1) == head6 , "head6 not second child");
+  children2 = t1.children(head6);
+  ENSURE( !children2.empty() , "no children2");
+  ENSURE( children2.size() == 3 , "3 children of t7 not in t1");
+}
+
 TEST(flatten)
 {
   I3Particle p1 = makeParticle();
@@ -834,6 +1934,56 @@ TEST(flatten)
   ENSURE( children.at(0) == p5 , "p5 not first child of children2");
 }
 
+TEST(flatten_iter)
+{
+  I3Particle p1 = makeParticle();
+  I3MCTree t1(p1);
+  I3Particle p2 = makeParticle();
+  t1.append_child(p1,p2);
+  I3Particle p3 = makeParticle();
+  t1.append_child(p2,p3);
+  I3Particle p4 = makeParticle();
+  t1.append_child(p2,p4);
+  I3Particle p5 = makeParticle();
+  t1.append_child(p3,p5);
+  
+  I3MCTree::iterator iter(t1,p2);
+  t1.flatten(iter);
+  
+  std::vector<I3Particle> children = t1.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.size() == 3 , "children.size != 3");
+  ENSURE( children.at(0) == p2 , "p2 not first child");
+  ENSURE( children.at(1) == p3 , "p3 not second child");
+  ENSURE( children.at(2) == p4 , "p4 not third child");
+  
+  children = t1.children(p3);
+  ENSURE( !children.empty() , "no children2");
+  ENSURE( children.size() == 1 , "children2.size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children2");
+  
+  I3MCTree t2(p1);
+  t2.append_child(p1,p2);
+  t2.append_child(p2,p3);
+  t2.append_child(p2,p4);
+  t2.append_child(p3,p5);
+  
+  I3MCTree::fast_const_iterator iter2(t2,p2);
+  t2.flatten(iter);
+  
+  children = t2.children(p1);
+  ENSURE( !children.empty() , "no children");
+  ENSURE( children.size() == 3 , "children.size != 3");
+  ENSURE( children.at(0) == p2 , "p2 not first child");
+  ENSURE( children.at(1) == p3 , "p3 not second child");
+  ENSURE( children.at(2) == p4 , "p4 not third child");
+  
+  children = t2.children(p3);
+  ENSURE( !children.empty() , "no children2");
+  ENSURE( children.size() == 1 , "children2.size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children2");
+}
+
 TEST(reparent)
 {
   I3Particle p1 = makeParticle();
@@ -853,6 +2003,120 @@ TEST(reparent)
   ENSURE( children.empty() , "p3 still has children");
   
   children = t1.children(p4);
+  ENSURE( !children.empty() , "no children of p4");
+  ENSURE( children.size() == 1 , "children(p4).size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
+}
+
+TEST(reparent_iter)
+{
+  I3Particle p1 = makeParticle();
+  I3MCTree t1(p1);
+  I3Particle p2 = makeParticle();
+  t1.append_child(p1,p2);
+  I3Particle p3 = makeParticle();
+  t1.append_child(p2,p3);
+  I3Particle p4 = makeParticle();
+  t1.append_child(p2,p4);
+  I3Particle p5 = makeParticle();
+  t1.append_child(p3,p5);
+  
+  I3MCTree::iterator iter(t1,p4);
+  t1.reparent(iter,p3);
+  
+  std::vector<I3Particle> children = t1.children(p3);
+  ENSURE( children.empty() , "p3 still has children");
+  
+  children = t1.children(p4);
+  ENSURE( !children.empty() , "no children of p4");
+  ENSURE( children.size() == 1 , "children(p4).size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
+  
+  I3MCTree t2(p1);
+  t2.append_child(p1,p2);
+  t2.append_child(p2,p3);
+  t2.append_child(p2,p4);
+  t2.append_child(p3,p5);
+  
+  I3MCTree::fast_const_iterator iter2(t2,p4);
+  t2.reparent(iter2,p3);
+  
+  children = t2.children(p3);
+  ENSURE( children.empty() , "p3 still has children");
+  
+  children = t2.children(p4);
+  ENSURE( !children.empty() , "no children of p4");
+  ENSURE( children.size() == 1 , "children(p4).size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
+  
+  I3MCTree t3(p1);
+  t3.append_child(p1,p2);
+  t3.append_child(p2,p3);
+  t3.append_child(p2,p4);
+  t3.append_child(p3,p5);
+  
+  I3MCTree::iterator iter3(t3,p4);
+  I3MCTree::iterator iter4(t3,p3);
+  t3.reparent(iter3,iter4);
+  
+  children = t3.children(p3);
+  ENSURE( children.empty() , "p3 still has children");
+  
+  children = t3.children(p4);
+  ENSURE( !children.empty() , "no children of p4");
+  ENSURE( children.size() == 1 , "children(p4).size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
+  
+  I3MCTree t4(p1);
+  t4.append_child(p1,p2);
+  t4.append_child(p2,p3);
+  t4.append_child(p2,p4);
+  t4.append_child(p3,p5);
+  
+  I3MCTree::fast_const_iterator iter5(t4,p4);
+  I3MCTree::iterator iter6(t4,p3);
+  t4.reparent(iter5,iter6);
+  
+  children = t4.children(p3);
+  ENSURE( children.empty() , "p3 still has children");
+  
+  children = t4.children(p4);
+  ENSURE( !children.empty() , "no children of p4");
+  ENSURE( children.size() == 1 , "children(p4).size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
+  
+  I3MCTree t5(p1);
+  t5.append_child(p1,p2);
+  t5.append_child(p2,p3);
+  t5.append_child(p2,p4);
+  t5.append_child(p3,p5);
+  
+  I3MCTree::iterator iter7(t5,p4);
+  I3MCTree::fast_const_iterator iter8(t5,p3);
+  t5.reparent(iter7,iter8);
+  
+  children = t5.children(p3);
+  ENSURE( children.empty() , "p3 still has children");
+  
+  children = t5.children(p4);
+  ENSURE( !children.empty() , "no children of p4");
+  ENSURE( children.size() == 1 , "children(p4).size != 1");
+  ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
+  
+  I3MCTree t6(p1);
+  t6.append_child(p1,p2);
+  t6.append_child(p2,p3);
+  t6.append_child(p2,p4);
+  t6.append_child(p3,p5);
+  
+  I3MCTree::fast_const_iterator iter9(t6,p4);
+  I3MCTree::fast_const_iterator iter10(t6,p3);
+  t6.reparent(iter9,iter10);
+  
+  children = t6.children(p3);
+  ENSURE( children.empty() , "p3 still has children");
+  
+  children = t6.children(p4);
   ENSURE( !children.empty() , "no children of p4");
   ENSURE( children.size() == 1 , "children(p4).size != 1");
   ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
@@ -901,6 +2165,25 @@ TEST(depth)
   t1.append_child(p2,p3);
   t1.append_child(p3,makeParticle());
   ENSURE( t1.depth(p3) == 3 );
+  
+  I3MCTree t2(head);
+  ENSURE( t2.depth(t2.begin()) == 0 );
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,p1);
+  I3MCTree::fast_const_iterator iter(t2,p1);
+  ENSURE( t2.depth(iter) == 1 );
+  t2.append_child(head,makeParticle());
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,p2);
+  I3MCTree::leaf_iterator iter2(t2,p2);
+  ENSURE( t2.depth(iter2) == 2 );
+  t2.append_child(p2,makeParticle());
+  t2.append_child(p2,p3);
+  t2.append_child(p3,makeParticle());
+  I3MCTree::sibling_iterator iter3(t2,p3);
+  ENSURE( t2.depth(iter3) == 3 );
 }
 
 TEST(number_of_children)
@@ -925,6 +2208,26 @@ TEST(number_of_children)
   t1.append_child(p3,makeParticle());
   ENSURE( t1.number_of_children(p2) == 2 );
   ENSURE( t1.number_of_children(p3) == 1 );
+  
+  I3MCTree t2(head);
+  ENSURE( t2.number_of_children(t2.begin()) == 0 );
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,makeParticle());
+  ENSURE( t2.number_of_children(head) == 2 );
+  t2.append_child(head,p1);
+  t2.append_child(head,makeParticle());
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,p2);
+  I3MCTree::post_order_const_iterator iter(t2,p1);
+  ENSURE( t2.number_of_children(iter) == 3 );
+  t2.append_child(p2,makeParticle());
+  t2.append_child(p2,p3);
+  t2.append_child(p3,makeParticle());
+  I3MCTree::fast_const_iterator iter2(t2,p2);
+  ENSURE( t2.number_of_children(iter2) == 2 );
+  I3MCTree::sibling_iterator iter3(t2,p3);
+  ENSURE( t2.number_of_children(iter3) == 1 );
 }
 
 TEST(number_of_siblings)
@@ -949,6 +2252,26 @@ TEST(number_of_siblings)
   t1.append_child(p2,p3);
   t1.append_child(p3,makeParticle());
   ENSURE( t1.number_of_siblings(p3) == 1 );
+  
+  I3MCTree t2(head);
+  ENSURE( t2.number_of_siblings(t2.begin()) == 0 );
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,p1);
+  I3MCTree::post_order_const_iterator iter(t2,p1);
+  ENSURE( t2.number_of_siblings(iter) == 2 );
+  t2.append_child(head,makeParticle());
+  ENSURE( t2.number_of_siblings(iter) == 3 );
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,p2);
+  I3MCTree::fast_const_iterator iter2(t2,p2);
+  ENSURE( t2.number_of_siblings(iter2) == 2 );
+  t2.append_child(p2,makeParticle());
+  t2.append_child(p2,p3);
+  t2.append_child(p3,makeParticle());
+  I3MCTree::sibling_iterator iter3(t2,p3);
+  ENSURE( t2.number_of_siblings(iter3) == 1 );
 }
 
 TEST(is_in_subtree)
@@ -978,6 +2301,32 @@ TEST(is_in_subtree)
   ENSURE( t1.is_in_subtree(head,p4) ,"cannot find p4 under head");
   ENSURE( t1.is_in_subtree(p1,p4) ,"cannot find p4 under p1");
   ENSURE( !t1.is_in_subtree(p2,p4) ,"found p4 under p2, when not there");
+  
+  I3MCTree t2(head);
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,makeParticle());
+  t2.append_child(head,p1);
+  I3MCTree::iterator iter(t2,p1);
+  ENSURE( t2.is_in_subtree(t2.begin(),p1) ,"cannot find p1");
+  ENSURE( t2.is_in_subtree(t2.begin(),iter) ,"cannot find p1");
+  t2.append_child(head,makeParticle());
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,makeParticle());
+  t2.append_child(p1,p2);
+  I3MCTree::fast_const_iterator iter2(t2,p2);
+  ENSURE( t2.is_in_subtree(t2.begin(),iter2) ,"cannot find p2 under head");
+  ENSURE( t2.is_in_subtree(iter,iter2) ,"cannot find p2 under p1");
+  t2.append_child(p2,makeParticle());
+  t2.append_child(p2,p3);
+  I3MCTree::sibling_iterator iter3(t2,p3);
+  ENSURE( t2.is_in_subtree(t2.begin(),iter3) ,"cannot find p3 under head");
+  ENSURE( t2.is_in_subtree(iter,iter3) ,"cannot find p3 under p1");
+  ENSURE( t2.is_in_subtree(iter2,iter3) ,"cannot find p3 under p2");
+  t2.append_child(p1,p4);
+  I3MCTree::post_order_const_iterator iter4(t2,p4);
+  ENSURE( t2.is_in_subtree(t2.cbegin(),iter4) ,"cannot find p4 under head");
+  ENSURE( t2.is_in_subtree(iter,iter4) ,"cannot find p4 under p1");
+  ENSURE( !t2.is_in_subtree(iter2,iter4) ,"found p4 under p2, when not there");
 }
 
 TEST(subtree_in_tree)
@@ -1000,6 +2349,23 @@ TEST(subtree_in_tree)
   t1.append_child(head,p1);
   ENSURE( t1.subtree_in_tree(t2,head2) , "a particle from t2 is not in t1");
   ENSURE( t1.at(p1) , "p1 is not in t1");
+  
+  I3MCTree t3(head);
+  t3.append_child(head,makeParticle());
+  t3.append_child(head,makeParticle());
+  t3.append_child(head,makeParticle());
+  
+  I3MCTree t4(head2);
+  t4.append_child(head2,makeParticle());
+  t4.append_child(head2,p1);
+  t4.append_child(head2,makeParticle());
+  
+  ENSURE( !t3.subtree_in_tree(t4.begin()) , "a particle from t4 is in t3");
+  
+  t3.append_child(head,p1);
+  I3MCTree::fast_const_iterator iter(t4,head2);
+  ENSURE( t3.subtree_in_tree(iter) , "a particle from t4 is not in t3");
+  ENSURE( t3.at(p1) , "p1 is not in t3");
 }
 
 
@@ -1458,7 +2824,7 @@ TEST(utils_GetBestFilter)
   I3MCTreeUtils::AppendChild(t1,p1,p2);
   I3MCTreeUtils::AppendChild(t1,p2,p3);
   
-  const typename I3MCTree::nonPtrType ret = I3MCTreeUtils::GetBestFilter(t1,filter_cmp2,best_cmp);
+  const I3MCTree::nonPtrType ret = I3MCTreeUtils::GetBestFilter(t1,filter_cmp2,best_cmp);
   ENSURE( ret ,"nothing passed filter" );
   ENSURE( I3ParticleID(*ret) == I3ParticleID(p2) , "p2 not best filtered");
   
@@ -1471,7 +2837,7 @@ TEST(utils_GetBestFilter)
   I3MCTreeUtils::AppendChild(t2,p4,p5);
   I3MCTreeUtils::AddPrimary(t2,p6);
   
-  const typename I3MCTree::nonPtrType ret2 = I3MCTreeUtils::GetBestFilter(t2,filter_cmp2,best_cmp);
+  const I3MCTree::nonPtrType ret2 = I3MCTreeUtils::GetBestFilter(t2,filter_cmp2,best_cmp);
   ENSURE( ret2 , "I3MCTreePtr: nothing passed filter");
   ENSURE( *ret2 == p5 , "I3MCTreePtr: p5 not best filtered");
 }

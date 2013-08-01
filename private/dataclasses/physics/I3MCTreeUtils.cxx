@@ -6,7 +6,7 @@ void
 I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 {
   t.insert_after(p);
-  typename I3MCTree::iterator iter(t,p);
+  I3MCTree::iterator iter(t,p);
   i3_assert( iter != t.end() );
   iter->SetShape(I3Particle::Primary);
 }
@@ -56,7 +56,7 @@ I3MCTreeUtils::GetDaughters(I3MCTreeConstPtr t, const I3ParticleID& parent)
 const I3Particle&
 I3MCTreeUtils::GetParent(const I3MCTree& t, const I3ParticleID& child)
 {
-  typename I3MCTree::nonPtrType parent = t.parent(child);
+  I3MCTree::nonPtrType parent = t.parent(child);
   if (parent)
     return *parent;
   else
@@ -72,7 +72,7 @@ I3MCTreeUtils::GetParent(I3MCTreeConstPtr t, const I3ParticleID& child)
 bool
 I3MCTreeUtils::HasParent(const I3MCTree& t, const I3ParticleID& child)
 {
-  typename I3MCTree::nonPtrType parent = t.parent(child);
+  I3MCTree::nonPtrType parent = t.parent(child);
   if (parent)
     return true;
   else
@@ -88,7 +88,7 @@ I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3ParticleID& child)
 const I3Particle&
 I3MCTreeUtils::GetParticle(const I3MCTree& t, const I3ParticleID& p)
 {
-  typename I3MCTree::nonPtrType ret = t.at(p);
+  I3MCTree::nonPtrType ret = t.at(p);
   if (ret)
     return *ret;
   else
@@ -104,7 +104,7 @@ I3MCTreeUtils::GetParticle(I3MCTreeConstPtr t, const I3ParticleID& p)
 const I3Particle&
 I3MCTreeUtils::GetPrimary(const I3MCTree& t, const I3ParticleID& p)
 {
-  typename I3MCTree::nonPtrType child,parent = t.at(p);
+  I3MCTree::nonPtrType child,parent = t.at(p);
   if (!parent)
     log_fatal("particle not found");
   while(parent) {
