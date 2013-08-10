@@ -1,6 +1,8 @@
 #ifndef I3ParticleID_H_INCLUDED
 #define I3ParticleID_H_INCLUDED
 
+#include <icetray/I3PointerTypedefs.h>
+
 #ifndef __CINT__
 #include <icetray/serialization.h>
 #endif
@@ -35,6 +37,8 @@ private:
 	}
 #endif
 };
+
+I3_POINTER_TYPEDEFS(I3ParticleID);
 
 #ifndef __CINT__
 #include <I3/hash_map.h>

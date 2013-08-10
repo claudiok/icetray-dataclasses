@@ -12,22 +12,11 @@ I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 }
 
 void
-I3MCTreeUtils::AddPrimary(I3MCTreePtr t, const I3Particle& p)
-{
-  I3MCTreeUtils::AddPrimary(*t,p);
-}
-
-void
 I3MCTreeUtils::AppendChild(I3MCTree& t, const I3ParticleID& parent, const I3Particle& child)
 {
   t.append_child(parent, child);
 }
 
-void
-I3MCTreeUtils::AppendChild(I3MCTreePtr t, const I3ParticleID& parent, const I3Particle& child)
-{
-  t->append_child(parent, child);
-}
 
 const std::vector<I3Particle>
 I3MCTreeUtils::GetPrimaries(const I3MCTree& t)
@@ -35,10 +24,24 @@ I3MCTreeUtils::GetPrimaries(const I3MCTree& t)
   return t.get_heads();
 }
 
-const std::vector<I3Particle>
-I3MCTreeUtils::GetPrimaries(I3MCTreeConstPtr t)
+const std::vector<const I3Particle*>
+I3MCTreeUtils::GetPrimariesPtr(const I3MCTreeConstPtr t)
 {
-  return t->get_heads();
+  std::vector<const I3Particle*> ret;
+  I3MCTree::sibling_const_iterator iter(t->cbegin());
+  for(;iter != t->cend_sibling();iter++)
+    ret.push_back(&(*iter));
+  return ret;
+}
+
+const std::vector<I3Particle*>
+I3MCTreeUtils::GetPrimariesPtr(I3MCTreePtr t)
+{
+  std::vector<I3Particle*> ret;
+  I3MCTree::sibling_iterator iter(t->begin());
+  for(;iter != t->end_sibling();iter++)
+    ret.push_back(&(*iter));
+  return ret;
 }
 
 const std::vector<I3Particle>
@@ -47,45 +50,78 @@ I3MCTreeUtils::GetDaughters(const I3MCTree& t, const I3ParticleID& parent)
   return t.children(parent);
 }
 
-const std::vector<I3Particle>
-I3MCTreeUtils::GetDaughters(I3MCTreeConstPtr t, const I3ParticleID& parent)
+const std::vector<const I3Particle*>
+I3MCTreeUtils::GetDaughtersPtr(const I3MCTreeConstPtr t, const I3ParticleID& parent)
 {
-  return t->children(parent);
+  std::vector<const I3Particle*> ret;
+  I3MCTree::const_iterator parent_iter(*t,parent);
+  if (parent_iter == t->cend())
+    return ret;
+  parent_iter = t->first_child(parent_iter);
+  if (parent_iter == t->cend())
+    return ret;
+  I3MCTree::sibling_const_iterator iter(parent_iter);
+  for(;iter != t->cend_sibling();iter++)
+    ret.push_back(&(*iter));
+  return ret;
 }
 
-const I3Particle&
+const std::vector<I3Particle*>
+I3MCTreeUtils::GetDaughtersPtr(I3MCTreePtr t, const I3ParticleID& parent)
+{
+  std::vector<I3Particle*> ret;
+  I3MCTree::iterator parent_iter(*t,parent);
+  if (parent_iter == t->end())
+    return ret;
+  parent_iter = t->first_child(parent_iter);
+  if (parent_iter == t->end())
+    return ret;
+  I3MCTree::sibling_iterator iter(parent_iter);
+  for(;iter != t->end_sibling();iter++)
+    ret.push_back(&(*iter));
+  return ret;
+}
+
+const I3Particle
 I3MCTreeUtils::GetParent(const I3MCTree& t, const I3ParticleID& child)
 {
   I3MCTree::nonPtrType parent = t.parent(child);
   if (parent)
-    return *parent;
+    return parent;
   else
     log_fatal("no parent found");
 }
 
-const I3Particle&
-I3MCTreeUtils::GetParent(I3MCTreeConstPtr t, const I3ParticleID& child)
+const I3Particle*
+I3MCTreeUtils::GetParentPtr(const I3MCTreeConstPtr t, const I3ParticleID& child)
 {
-  return I3MCTreeUtils::GetParent(*t,child);
+  const I3Particle* ret;
+  I3MCTree::nonPtrType parent = t->parent(child);
+  if (parent)
+    ret = &(*I3MCTree::const_iterator(*t,*parent));
+  return ret;
+}
+
+I3Particle*
+I3MCTreeUtils::GetParentPtr(I3MCTreePtr t, const I3ParticleID& child)
+{
+  I3Particle* ret;
+  I3MCTree::nonPtrType parent = t->parent(child);
+  if (parent)
+    ret = &(*I3MCTree::iterator(*t,*parent));
+  return ret;
 }
 
 bool
 I3MCTreeUtils::HasParent(const I3MCTree& t, const I3ParticleID& child)
 {
-  I3MCTree::nonPtrType parent = t.parent(child);
-  if (parent)
+  if (t.parent(child))
     return true;
   else
     return false;
 }
 
-bool
-I3MCTreeUtils::HasParent(I3MCTreeConstPtr t, const I3ParticleID& child)
-{
-  return I3MCTreeUtils::HasParent(*t, child);
-}
-
-const I3Particle&
+const I3Particle
 I3MCTreeUtils::GetParticle(const I3MCTree& t, const I3ParticleID& p)
 {
   I3MCTree::nonPtrType ret = t.at(p);
@@ -95,13 +131,27 @@ I3MCTreeUtils::GetParticle(const I3MCTree& t, const I3ParticleID& p)
     log_fatal("particleID not found");
 }
 
-const I3Particle&
-I3MCTreeUtils::GetParticle(I3MCTreeConstPtr t, const I3ParticleID& p)
+const I3Particle*
+I3MCTreeUtils::GetParticlePtr(const I3MCTreeConstPtr t, const I3ParticleID& p)
 {
-  return I3MCTreeUtils::GetParticle(*t,p);
+  const I3Particle* ret = NULL;
+  I3MCTree::const_iterator iter(*t,p);
+  if (iter != t->cend())
+    ret = &(*iter);
+  return ret;
 }
 
-const I3Particle&
+I3Particle*
+I3MCTreeUtils::GetParticlePtr(I3MCTreePtr t, const I3ParticleID& p)
+{
+  I3Particle* ret = NULL;
+  I3MCTree::iterator iter(*t,p);
+  if (iter != t->end())
+    ret = &(*iter);
+  return ret;
+}
+
+const I3Particle
 I3MCTreeUtils::GetPrimary(const I3MCTree& t, const I3ParticleID& p)
 {
   I3MCTree::nonPtrType child,parent = t.at(p);
@@ -114,22 +164,40 @@ I3MCTreeUtils::GetPrimary(const I3MCTree& t, const I3ParticleID& p)
   return *child;
 }
 
-const I3Particle&
-I3MCTreeUtils::GetPrimary(I3MCTreeConstPtr t, const I3ParticleID& p)
+const I3Particle*
+I3MCTreeUtils::GetPrimaryPtr(const I3MCTreeConstPtr t, const I3ParticleID& p)
 {
-  return I3MCTreeUtils::GetPrimary(*t,p);
+  const I3Particle* ret = NULL;
+  I3MCTree::const_iterator child = t->cend(),parent(*t,p),end=t->cend();
+  if (parent == end)
+    return ret;
+  while (parent != end) {
+    child = parent;
+    parent = t->parent(parent);
+  }
+  ret = &(*child);
+  return ret;
 }
 
-I3MCTreeConstPtr
+I3Particle*
+I3MCTreeUtils::GetPrimaryPtr(I3MCTreePtr t, const I3ParticleID& p)
+{
+  I3Particle* ret = NULL;
+  I3MCTree::iterator child = t->end(),parent(*t,p),end=t->end();
+  if (parent == end)
+    return ret;
+  while (parent != end) {
+    child = parent;
+    parent = t->parent(parent);
+  }
+  ret = &(*child);
+  return ret;
+}
+
+const I3MCTreeConstPtr
 I3MCTreeUtils::Get(const I3Frame &frame, const std::string& key)
 {
   return frame.Get<I3MCTreeConstPtr>(key);
-}
-
-I3MCTreeConstPtr
-I3MCTreeUtils::Get(I3FramePtr frame, const std::string& key)
-{
-  return I3MCTreeUtils::Get(*frame,key);
 }
 
 

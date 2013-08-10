@@ -17,7 +17,7 @@
 namespace TreeBase {
   /*
    * A note about the tree_hash_map::iterator
-   * The iterator is a *pair<uint64_t,treeNode>
+   * The iterator is a *pair<Key,treeNode>
    * So to get the hash_map key, use iter->first
    * and to get the treeNode, use iter->second
    */
@@ -33,10 +33,11 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<typename IterD,typename IterType,typename TreeValue,typename TreeHashMapIter>
-  Tree<T,Key,Hash>::Tree(const iterator_base<IterD,IterType,TreeValue,TreeHashMapIter>& other)
+  template<typename Derived,typename Storage>
+  Tree<T,Key,Hash>::Tree(const iterator_base<Derived,const T,Storage>& other)
   { 
     // TODO: do something
+    i3_assert(0);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -143,31 +144,31 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::parent(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,T,Storage>
+  Tree<T,Key,Hash>::parent(const iterator_base<Derived,T,Storage>& iter)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
+      return iterator_base<Derived,T,Storage>(*this,end_);
     const nonPtrType ret = parent(*iter);
     if (ret)
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,T,Storage>(*this,*ret);
     else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::parent(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,const T,Storage>
+  Tree<T,Key,Hash>::parent(const iterator_base<Derived,const T,Storage>& iter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
+      return iterator_base<Derived,const T,Storage>(*this,end_);
     const nonPtrType ret = parent(*iter);
     if (ret)
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,const T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -206,31 +207,33 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::previous_sibling(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,T,Storage>
+  Tree<T,Key,Hash>::previous_sibling(
+      const iterator_base<Derived,T,Storage>& iter)
   {
-    if (iter ==iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter ==iterator_base<Derived,T,Storage>(*this,end_))
+      return iterator_base<Derived,T,Storage>(*this,end_);
     const nonPtrType ret = previous_sibling(*iter);
     if (ret)
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,T,Storage>(*this,*ret);
     else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::previous_sibling(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,const T,Storage>
+  Tree<T,Key,Hash>::previous_sibling(
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter ==iterator_base<Derived,const T,Storage>(*this,end_))
+      return iterator_base<Derived,const T,Storage>(*this,end_);
     const nonPtrType ret = previous_sibling(*iter);
     if (ret)
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,const T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -245,31 +248,32 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::next_sibling(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,T,Storage>
+  Tree<T,Key,Hash>::next_sibling(const iterator_base<Derived,T,Storage>& iter)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
+      return iterator_base<Derived,T,Storage>(*this,end_);
     const nonPtrType ret = next_sibling(*iter);
     if (ret)
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,T,Storage>(*this,*ret);
     else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::next_sibling(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,const T,Storage>
+  Tree<T,Key,Hash>::next_sibling(
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
+      return iterator_base<Derived,const T,Storage>(*this,end_);
     const nonPtrType ret = next_sibling(*iter);
     if (ret)
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,const T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -291,20 +295,21 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template sibling_iter<V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::children(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<class Derived,class Storage>
+  typename Tree<T,Key,Hash>::template sibling_iter<T>
+  Tree<T,Key,Hash>::children(const iterator_base<Derived,T,Storage>& iter)
   {
-    sibling_iter<V,TreeValue,TreeHashMapIter> ret(iter);
+    sibling_iter<T> ret(iter);
     return first_child(ret);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template sibling_iter<V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::children(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<class Derived,class Storage>
+  typename Tree<T,Key,Hash>::template sibling_iter<const T>
+  Tree<T,Key,Hash>::children(
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    sibling_iter<V,TreeValue,TreeHashMapIter> ret(iter);
+    sibling_iter<const T> ret(iter);
     return first_child(ret);
   }
   
@@ -320,31 +325,32 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::first_child(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,T,Storage>
+  Tree<T,Key,Hash>::first_child(const iterator_base<Derived,T,Storage>& iter)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
+      return iterator_base<Derived,T,Storage>(*this,end_);
     const nonPtrType ret = first_child(*iter);
     if (ret)
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,T,Storage>(*this,*ret);
     else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::first_child(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,const T,Storage>
+  Tree<T,Key,Hash>::first_child(
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
+      return iterator_base<Derived,const T,Storage>(*this,end_);
     const nonPtrType ret = first_child(*iter);
     if (ret)
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*ret);
+      return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,const T,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -396,23 +402,13 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::erase(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::erase(const iterator_base<Derived,Value,Storage>& iter)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_))
       erase(*iter);
-    return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::erase(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      erase(*iter);
-    return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -428,27 +424,15 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::erase_children(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::erase_children(const iterator_base<Derived,Value,Storage>& iter)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       erase_children(*iter);
       return iter;
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::erase_children(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      erase_children(*iter);
-      return iter;
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -511,27 +495,16 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter, const T& child)
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::append_child(const iterator_base<Derived,Value,Storage>& iter,
+      const T& child)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       append_child(*iter,child);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,child);
+      return iterator_base<Derived,Value,Storage>(*this,child);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter, const T& child)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      append_child(*iter,child);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,child);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -555,101 +528,33 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::append_child(const iterator_base<Derived,Value,Storage>& iter,
       const Tree<T,Key,Hash>& otherTree, const Key& node2)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    i3_assert( iter.node_.treePtr_ != &otherTree );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       append_child(*iter,otherTree,node2);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+      return iterator_base<Derived,Value,Storage>(*this,node2);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const Tree<T,Key,Hash>& otherTree, const Key& node2)
+  template<typename Derived,typename Value,typename Storage,
+           typename Derived2,typename Value2,typename Storage2>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::append_child(const iterator_base<Derived,Value,Storage>& iter,
+      const iterator_base<Derived2,Value2,Storage2>& otherIter)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      append_child(*iter,otherTree,node2);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+    i3_assert( iter.node_.treePtr_ != otherIter.node_.treePtr_ );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_) &&
+        otherIter != iterator_base<Derived2,Value2,Storage2>(*(otherIter.node_.treePtr_),end_)) {
+      append_child(*iter,*(otherIter.node_.treePtr_),*otherIter);
+      return iterator_base<Derived,Value,Storage>(*this,*otherIter);
     } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      append_child(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      append_child(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      append_child(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_child(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      append_child(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -668,31 +573,17 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
   Tree<T,Key,Hash>::append_children(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+      const iterator_base<Derived,Value,Storage>& iter,
       const std::vector<T>& children)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       append_children(*iter,children);
       return first_child(iter);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::append_children(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const std::vector<T>& children)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      append_children(*iter,children);
-      return first_child(iter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -759,31 +650,16 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::insert(const iterator_base<Derived,Value,Storage>& iter,
       const T& node2)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       insert(*iter,node2);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+      return iterator_base<Derived,Value,Storage>(*this,node2);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const T& node2)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      insert(*iter,node2);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -804,31 +680,16 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_after(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::insert_after(const iterator_base<Derived,Value,Storage>& iter,
       const T& node2)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       insert_after(*iter,node2);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+      return iterator_base<Derived,Value,Storage>(*this,node2);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_after(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const T& node2)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      insert_after(*iter,node2);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -852,106 +713,41 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
   Tree<T,Key,Hash>::insert_subtree(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+      const iterator_base<Derived,Value,Storage>& iter,
       const Tree<T,Key,Hash>& otherTree, const Key& node2)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    i3_assert( iter.node_.treePtr_ != &otherTree );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       insert_subtree(*iter,otherTree,node2);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+      return iterator_base<Derived,Value,Storage>(*this,node2);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
+  template<typename Derived,typename Value,typename Storage,
+           typename Derived2,typename Value2,typename Storage2>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
   Tree<T,Key,Hash>::insert_subtree(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const Tree<T,Key,Hash>& otherTree, const Key& node2)
+      const iterator_base<Derived,Value,Storage>& iter,
+      const iterator_base<Derived2,Value2,Storage2>& otherIter)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      insert_subtree(*iter,otherTree,node2);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+    i3_assert( iter.node_.treePtr_ != otherIter.node_.treePtr_ );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_) &&
+        otherIter != iterator_base<Derived2,Value2,Storage2>(*(otherIter.node_.treePtr_),end_)) {
+      insert_subtree(*iter,*(otherIter.node_.treePtr_),*otherIter);
+      return iterator_base<Derived,Value,Storage>(*this,*otherIter);
     } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
   void
-  Tree<T,Key,Hash>::insert_subtree_after(const Key& node, const Tree<T,Key,Hash>& otherTree, const Key& node2)
+  Tree<T,Key,Hash>::insert_subtree_after(const Key& node,
+      const Tree<T,Key,Hash>& otherTree, const Key& node2)
   {
     assert( !subtree_in_tree(otherTree,node2) );
     typename tree_hash_map::const_iterator iter = otherTree.internalMap.find(node2);
@@ -970,101 +766,35 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
   Tree<T,Key,Hash>::insert_subtree_after(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+      const iterator_base<Derived,Value,Storage>& iter,
       const Tree<T,Key,Hash>& otherTree, const Key& node2)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    i3_assert( iter.node_.treePtr_ != &otherTree );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       insert_subtree_after(*iter,otherTree,node2);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+      return iterator_base<Derived,Value,Storage>(*this,node2);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
+  template<typename Derived,typename Value,typename Storage,
+           typename Derived2,typename Value2,typename Storage2>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
   Tree<T,Key,Hash>::insert_subtree_after(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const Tree<T,Key,Hash>& otherTree, const Key& node2)
+      const iterator_base<Derived,Value,Storage>& iter,
+      const iterator_base<Derived2,Value2,Storage2>& otherIter)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      insert_subtree_after(*iter,otherTree,node2);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+    i3_assert( iter.node_.treePtr_ != otherIter.node_.treePtr_ );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_) &&
+        otherIter != iterator_base<Derived2,Value2,Storage2>(*(otherIter.node_.treePtr_),end_)) {
+      insert_subtree_after(*iter,*(otherIter.node_.treePtr_),*otherIter);
+      return iterator_base<Derived,Value,Storage>(*this,*otherIter);
     } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree_after(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree_after(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree_after(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree_after(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree_after(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree_after(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::insert_subtree_after(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      insert_subtree_after(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -1095,31 +825,16 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::replace(const iterator_base<Derived,Value,Storage>& iter,
       const T& node2)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       replace(*iter,node2);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+      return iterator_base<Derived,Value,Storage>(*this,node2);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const T& node2)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      replace(*iter,node2);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -1144,101 +859,33 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::replace(const iterator_base<Derived,Value,Storage>& iter,
       const Tree<T,Key,Hash>& otherTree, const Key& node2)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    i3_assert( iter.node_.treePtr_ != &otherTree );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       replace(*iter,otherTree,node2);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+      return iterator_base<Derived,Value,Storage>(*this,node2);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const Tree<T,Key,Hash>& otherTree, const Key& node2)
+  template<typename Derived,typename Value,typename Storage,
+           typename Derived2,typename Value2,typename Storage2>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::replace(const iterator_base<Derived,Value,Storage>& iter,
+      const iterator_base<Derived2,Value2,Storage2>& otherIter)
   {
-    i3_assert( iter.ext_ != &otherTree );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      replace(*iter,otherTree,node2);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,node2);
+    i3_assert( iter.node_.treePtr_ != otherIter.node_.treePtr_ );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_) &&
+        otherIter != iterator_base<Derived2,Value2,Storage2>(*(otherIter.node_.treePtr_),end_)) {
+      replace(*iter,*(otherIter.node_.treePtr_),*otherIter);
+      return iterator_base<Derived,Value,Storage>(*this,*otherIter);
     } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      replace(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      replace(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      replace(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::replace(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ != otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      replace(*iter,*(otherIter.ext_),*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -1263,23 +910,11 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::flatten(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::flatten(const iterator_base<Derived,Value,Storage>& iter)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
-      flatten(*iter);
-    return iter;
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::flatten(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
-  {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_))
       flatten(*iter);
     return iter;
   }
@@ -1317,99 +952,40 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::reparent(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+  template<typename Derived,typename Value,typename Storage>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::reparent(const iterator_base<Derived,Value,Storage>& iter,
       const Key& from)
   {
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
       reparent(*iter,from);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,from);
+      return iterator_base<Derived,Value,Storage>(*this,from);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::reparent(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const Key& from)
+  template<typename Derived,typename Value,typename Storage,
+           typename Derived2,typename Value2,typename Storage2>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::reparent(const iterator_base<Derived,Value,Storage>& iter,
+      const iterator_base<Derived2,Value2,Storage2>& otherIter)
   {
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_)) {
-      reparent(*iter,from);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,from);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::reparent(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ == otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
+    i3_assert( iter.node_.treePtr_ == otherIter.node_.treePtr_ );
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_) &&
+        otherIter != iterator_base<Derived2,Value2,Storage2>(*(otherIter.node_.treePtr_),end_)) {
       reparent(*iter,*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
+      return iterator_base<Derived,Value,Storage>(*this,*otherIter);
     } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+      return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::reparent(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
+  void
+  Tree<T,Key,Hash>::merge(const Tree<T,Hash>& otherTree)
   {
-    i3_assert( iter.ext_ == otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      reparent(*iter,*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::reparent(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ == otherIter.ext_ );
-    if (iter != iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      reparent(*iter,*otherIter);
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  typename Tree<T,Key,Hash>::template iterator_map_base<D,V,TreeValue,TreeHashMapIter>
-  Tree<T,Key,Hash>::reparent(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    i3_assert( iter.ext_ == otherIter.ext_ );
-    if (iter != iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) &&
-        otherIter != iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_)) {
-      reparent(*iter,*otherIter);
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,*otherIter);
-    } else
-      return iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_);
+    // step through primaries, copying subtrees as necessary
+    // TODO
   }
   
   template<typename T, typename Key, typename Hash>
@@ -1443,24 +1019,24 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   typename Tree<T,Key,Hash>::size_type
   Tree<T,Key,Hash>::depth(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,T,Storage>& iter)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return 0;
     else
       return depth(*iter);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   typename Tree<T,Key,Hash>::size_type
   Tree<T,Key,Hash>::depth(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return 0;
     else
       return depth(*iter);
@@ -1486,24 +1062,24 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   typename Tree<T,Key,Hash>::size_type
   Tree<T,Key,Hash>::number_of_children(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,T,Storage>& iter)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return 0;
     else
       return number_of_children(*iter);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   typename Tree<T,Key,Hash>::size_type
   Tree<T,Key,Hash>::number_of_children(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return 0;
     else
       return number_of_children(*iter);
@@ -1534,24 +1110,24 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   typename Tree<T,Key,Hash>::size_type
   Tree<T,Key,Hash>::number_of_siblings(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,T,Storage>& iter)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return 0;
     else
       return number_of_siblings(*iter);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   typename Tree<T,Key,Hash>::size_type
   Tree<T,Key,Hash>::number_of_siblings(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return 0;
     else
       return number_of_siblings(*iter);
@@ -1581,86 +1157,56 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   bool
   Tree<T,Key,Hash>::is_in_subtree(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
+      const iterator_base<Derived,T,Storage>& iter,
       const Key& node2)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return false;
     else
       return is_in_subtree(*iter,node2);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
+  template<typename Derived,typename Storage>
   bool
   Tree<T,Key,Hash>::is_in_subtree(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const Key& node2)
+      const iterator_base<Derived,const T,Storage>& iter,
+      const Key& node2) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return false;
     else
       return is_in_subtree(*iter,node2);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
+  template<typename Derived,typename Storage,
+           typename Derived2,typename Value2,typename Storage2>
   bool
   Tree<T,Key,Hash>::is_in_subtree(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
+      const iterator_base<Derived,T,Storage>& iter,
+      const iterator_base<Derived2,Value2,Storage2>& otherIter)
   {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) ||
-        otherIter == iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_))
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_) ||
+        otherIter == iterator_base<Derived2,Value2,Storage2>(*(otherIter.node_.treePtr_),end_))
       return false;
     else
       return is_in_subtree(*iter,*otherIter);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
+  template<typename Derived,typename Storage,
+           typename Derived2,typename Value2,typename Storage2>
   bool
   Tree<T,Key,Hash>::is_in_subtree(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
+      const iterator_base<Derived,const T,Storage>& iter,
+      const iterator_base<Derived2,Value2,Storage2>& otherIter) const
   {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) ||
-        otherIter == iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_))
-      return false;
-    else
-      return is_in_subtree(*iter,*otherIter);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  bool
-  Tree<T,Key,Hash>::is_in_subtree(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) ||
-        otherIter == iterator_map_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_))
-      return false;
-    else
-      return is_in_subtree(*iter,*otherIter);
-  }
-  
-  template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter,
-           class D2,class V2,class TreeValue2,class TreeHashMapIter2>
-  bool
-  Tree<T,Key,Hash>::is_in_subtree(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter,
-      const iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>& otherIter)
-  {
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_) ||
-        otherIter == iterator_base<D2,V2,TreeValue2,TreeHashMapIter2>(*(otherIter.ext_),end_))
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_) ||
+        otherIter == iterator_base<Derived2,Value2,Storage2>(*(otherIter.node_.treePtr_),end_))
       return false;
     else
       return is_in_subtree(*iter,*otherIter);
@@ -1690,29 +1236,29 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  bool
+  template<typename Derived,typename Storage>
+  bool 
   Tree<T,Key,Hash>::subtree_in_tree(
-      const iterator_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,T,Storage>& iter)
   {
-    i3_assert( iter.ext_ != this );
-    if (iter == iterator_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    i3_assert( iter.node_.treePtr_ != this );
+    if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return false;
     else
-      return subtree_in_tree(*(iter.ext_),*iter);
+      return subtree_in_tree(*(iter.node_.treePtr_),*iter);
   }
   
   template<typename T, typename Key, typename Hash>
-  template<class D,class V,class TreeValue,class TreeHashMapIter>
-  bool
+  template<typename Derived,typename Storage>
+  bool 
   Tree<T,Key,Hash>::subtree_in_tree(
-      const iterator_map_base<D,V,TreeValue,TreeHashMapIter>& iter)
+      const iterator_base<Derived,const T,Storage>& iter) const
   {
-    i3_assert( iter.ext_ != this );
-    if (iter == iterator_map_base<D,V,TreeValue,TreeHashMapIter>(*this,end_))
+    i3_assert( iter.node_.treePtr_ != this );
+    if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return false;
     else
-      return subtree_in_tree(*(iter.ext_),*iter);
+      return subtree_in_tree(*(iter.node_.treePtr_),*iter);
   }
   
   
