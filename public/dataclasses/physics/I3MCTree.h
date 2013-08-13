@@ -103,10 +103,12 @@ namespace TreeBase {
   template<typename T, typename Key=T, typename Hash=hash<Key> >
   class Tree : public I3FrameObject {
     public:
-      typedef T      value_type;
-      typedef T*     pointer;
-      typedef T&     reference;
-      typedef size_t size_type;
+      typedef T                         value_type;
+      typedef T*                        pointer;
+      typedef T&                        reference;
+      typedef size_t                    size_type;
+      typedef ptrdiff_t                 difference_type;
+      typedef std::forward_iterator_tag iterator_category;
       
       /**
        * The nonPtrType is used when returning by value
