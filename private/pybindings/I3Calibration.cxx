@@ -98,6 +98,7 @@ void register_I3Calibration()
       .def(init<const SPETemplate&,const SPETemplate&,double,double,double>())
       .def("__call__",&I3DOMCalibration::DroopedSPETemplate::operator())
       .def(freeze())
+      .def(operator_suite<I3DOMCalibration::DroopedSPETemplate>())
       ;
 
     scope outer = 

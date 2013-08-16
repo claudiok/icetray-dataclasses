@@ -62,11 +62,10 @@ register_ModuleKey()
     .def("__hash__", hash_modulekey)
     .def("__getitem__", modulekey_getitem)
     .def("__len__", modulekey_len)
-    .def(self == self)
-    .def(self != self)
-    .def(self < self)
     .def_pickle(boost_serializable_pickle_suite<ModuleKey>())
     .def(freeze())
+    .def(copy_suite<ModuleKey>())
+    .def(operator_suite<ModuleKey>())
     ;
 
   from_python_sequence<std::vector<ModuleKey>, variable_capacity_policy>();

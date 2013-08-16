@@ -25,7 +25,8 @@
 #include <dataclasses/physics/I3MCTree.h>
 #include <dataclasses/physics/I3MCTreeUtils.h>
 #include <dataclasses/I3Constants.h>
-#include <icetray/python/dataclass_suite.hpp>
+#include <icetray/python/copy_suite.hpp>
+#include <icetray/python/operator_suite.hpp>
 #include <boost/python/exception_translator.hpp>
 
 using namespace boost::python;
@@ -127,7 +128,8 @@ void register_I3MCTree()
         #define BARE_PROPS (NCascades) 
         BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_BARE, ~, BARE_PROPS)
         #undef BARE_PROPS*/
-        //.def(dataclass_suite<I3MCTree>())
+        .def(copy_suite<I3MCTree>())
+        .def(operator_suite<I3MCTree>())
       ;
     
 /*

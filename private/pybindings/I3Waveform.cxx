@@ -72,6 +72,7 @@ void register_I3Waveform()
       #undef PROPS
       .add_property("interval", make_function(get_interval, return_value_policy<copy_const_reference>()))
       .def( freeze() )
+      .def(operator_suite<I3Waveform::StatusCompound>())
       ;
 
     enum_<I3Waveform::Source>("Source")
