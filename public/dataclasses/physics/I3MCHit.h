@@ -11,6 +11,7 @@
 
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
+#include "dataclasses/physics/I3ParticleID.h"
 #include "icetray/OMKey.h"
 
 /**
@@ -149,6 +150,8 @@ class I3MCHit
       && cherenkovDistance_ == rhs.cherenkovDistance_
       && source_ == rhs.source_;
   }
+  
+  operator I3ParticleID() const{ I3ParticleID id={particleMajorID_, particleID_}; return id; }
 
  private:
 

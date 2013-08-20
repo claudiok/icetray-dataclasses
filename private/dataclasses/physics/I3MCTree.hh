@@ -982,10 +982,28 @@ namespace TreeBase {
   
   template<typename T, typename Key, typename Hash>
   void
-  Tree<T,Key,Hash>::merge(const Tree<T,Hash>& otherTree)
+  Tree<T,Key,Hash>::merge(const Tree<T,Key,Hash>& otherTree)
   {
     // step through primaries, copying subtrees as necessary
-    // TODO
+    i3_assert(*this != otherTree);
+    if (!otherTree.head_)
+      return;
+    typename tree_hash_map::const_iterator iter = otherTree.internalMap.find(*(otherTree.head_));
+    if (iter == internalMap.end())
+      return;
+    const treeNode* n = &(iter->second);
+    const treeNode* n2 = NULL;
+    while (n != NULL) {
+      if (!subtree_in_tree(otherTree,n->data)) {
+        insert_after(n->data);
+        n2 = n->firstChild;
+        while (n2 != NULL) {
+          append_child(n->data,otherTree,n2->data);
+          n2 = n2->nextSibling;
+        }
+      }
+      n = n->nextSibling;
+    }
   }
   
   template<typename T, typename Key, typename Hash>

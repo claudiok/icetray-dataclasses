@@ -1027,7 +1027,7 @@ namespace TreeBase {
       /**
        * Merge other tree into this tree
        */
-      void merge(const Tree<T,Hash>&);
+      void merge(const Tree<T,Key,Hash>&);
       
 //      void sort_siblings(const T&);
 //      void sort_siblings(sibling_iterator from, sibling_iterator to);

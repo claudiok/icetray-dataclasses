@@ -1,3 +1,4 @@
+#include <sstream>
 #include "dataclasses/physics/I3MCTreeUtils.h"
 #include "icetray/I3Frame.h"
 
@@ -95,7 +96,7 @@ I3MCTreeUtils::GetParent(const I3MCTree& t, const I3ParticleID& child)
 const I3Particle*
 I3MCTreeUtils::GetParentPtr(const I3MCTreeConstPtr t, const I3ParticleID& child)
 {
-  const I3Particle* ret;
+  const I3Particle* ret = NULL;
   I3MCTree::nonPtrType parent = t->parent(child);
   if (parent)
     ret = &(*I3MCTree::const_iterator(*t,*parent));
@@ -105,7 +106,7 @@ I3MCTreeUtils::GetParentPtr(const I3MCTreeConstPtr t, const I3ParticleID& child)
 I3Particle*
 I3MCTreeUtils::GetParentPtr(I3MCTreePtr t, const I3ParticleID& child)
 {
-  I3Particle* ret;
+  I3Particle* ret = NULL;
   I3MCTree::nonPtrType parent = t->parent(child);
   if (parent)
     ret = &(*I3MCTree::iterator(*t,*parent));
@@ -198,6 +199,28 @@ const I3MCTreeConstPtr
 I3MCTreeUtils::Get(const I3Frame &frame, const std::string& key)
 {
   return frame.Get<I3MCTreeConstPtr>(key);
+}
+
+std::string
+I3MCTreeUtils::Dump(const I3MCTree& t)
+{
+  std::stringstream s;
+  I3Position pos;
+  I3MCTree::const_iterator iter = t.cbegin(),end = t.cend();
+  for (;iter != end;iter++) {
+    for (int d=0;d<t.depth(*iter);d++) { s << "  "; }
+    s << iter->GetMinorID() << " " << iter->GetTypeString() << " ";
+    pos = iter->GetPos();
+    s << "(" << pos.GetX()/I3Units::m << "m ,";
+    s << pos.GetY()/I3Units::m << "m ,";
+    s << pos.GetZ()/I3Units::m << "m) ";
+    s << "(" << iter->GetZenith()/I3Units::degree << "deg ,";
+    s << iter->GetAzimuth()/I3Units::degree << "deg) ";
+    s << iter->GetTime()/I3Units::ns << "ns ";
+    s << iter->GetEnergy()/I3Units::GeV << "GeV ";
+    s << iter->GetLength()/I3Units::m << "m " << std::endl;
+  }
+  return s.str();
 }
 
 

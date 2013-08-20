@@ -2125,6 +2125,33 @@ TEST(reparent_iter)
   ENSURE( children.at(0) == p5 , "p5 not first child of children(p4)");
 }
 
+TEST(merge)
+{
+  I3Particle p1 = makeParticle();
+  I3MCTree t1(p1);
+  t1.append_child(p1,makeParticle());
+  t1.append_child(p1,makeParticle());
+  t1.append_child(p1,makeParticle());
+  
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  I3Particle p5 = makeParticle();
+  I3MCTree t2(p2);
+  t2.append_child(p2,p3);
+  t2.append_child(p2,p4);
+  t2.append_child(p2,p5);
+  
+  ENSURE( !t1.at(p2) , "p2 is already in t1");
+  t1.merge(t2);
+  ENSURE( t1.at(p2) , "p2 is not in t1");
+  ENSURE( t1.at(p3) , "p3 is not in t1");
+  ENSURE( t1.at(p4) , "p4 is not in t1");
+  ENSURE( t1.at(p5) , "p5 is not in t1");
+  ENSURE( t1.number_of_children(p2) == 3 );
+}
+
+
 TEST(size)
 {
   I3Particle head = makeParticle();
@@ -2726,6 +2753,34 @@ TEST(utils_GetPrimary)
   const I3Particle* ret3 = I3MCTreeUtils::GetPrimaryPtr(t3,p6);
   I3MCTree::const_iterator iter2(*t2,p4);
   ENSURE( ret3 == &(*iter2) , "I3MCTreeConstPtr: primary(p6) != p4");
+}
+
+TEST(utils_dump)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  I3Particle p3 = makeParticle();
+  I3Particle p4 = makeParticle();
+  I3MCTreeUtils::AddPrimary(t1,p1);
+  I3MCTreeUtils::AppendChild(t1,p1,p2);
+  I3MCTreeUtils::AppendChild(t1,p1,p3);
+  I3MCTreeUtils::AppendChild(t1,p2,p4);
+  std::string s = I3MCTreeUtils::Dump(t1);
+  //std::cout << std::endl << s << std::endl;
+  
+  std::vector<std::string> output;
+  std::stringstream stream(s);
+  std::string line;
+  while(std::getline(stream,line)) {
+    if (line.length() > 1)
+      output.push_back(line);
+  }
+  ENSURE( output.size() == 4 );
+  ENSURE( output.at(0).find_first_not_of(" ") == 0 );
+  ENSURE( output.at(1).find_first_not_of(" ") == 2 );
+  ENSURE( output.at(2).find_first_not_of(" ") == 4 );
+  ENSURE( output.at(3).find_first_not_of(" ") == 2 );
 }
 
 TEST(utils_Get)

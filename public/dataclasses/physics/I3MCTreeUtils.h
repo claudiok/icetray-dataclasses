@@ -73,6 +73,12 @@ namespace I3MCTreeUtils
    */
   const I3MCTreeConstPtr Get(const I3Frame& , const std::string&);
   
+  
+  /**
+   * Dumps an I3MCTree to a std::string
+   */
+  std::string Dump(const I3MCTree&);
+  
   /**
    * Get the "best match" particle in the tree using a comparison Function.
    * 

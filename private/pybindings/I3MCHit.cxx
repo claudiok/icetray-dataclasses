@@ -68,4 +68,5 @@ void register_I3MCHit()
     ;
   
   register_pointer_conversions<I3MCHitSeriesMap>();
+  implicitly_convertible<I3MCHit,I3ParticleID>();
 }
