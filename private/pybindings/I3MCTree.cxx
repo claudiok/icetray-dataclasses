@@ -20,6 +20,7 @@
 //
 
 #include <vector>
+#include <algorithm>
 #include <exception>
 
 #include <dataclasses/physics/I3MCTree.h>
@@ -29,6 +30,8 @@
 #include <icetray/python/operator_suite.hpp>
 #include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <boost/python/exception_translator.hpp>
+#include <boost/python/object.hpp>
+#include <boost/python/slice.hpp>
 
 using namespace boost::python;
 
@@ -62,8 +65,62 @@ I3Particle next_sibling(const I3MCTree& t,const I3ParticleID& p)
 { return getParticle(t.next_sibling(p),"particle not found or no sibling"); }
 I3Particle first_child(const I3MCTree& t,const I3ParticleID& p)
 { return getParticle(t.first_child(p),"particle not found or no chilren"); }
-I3Particle at(const I3MCTree& t,const I3ParticleID& p)
-{ return getParticle(t.at(p),"particle not found in tree"); }
+I3Particle* at(I3MCTree& t,const I3ParticleID& p)
+//{ return getParticle(t.at(p),"particle not found in tree"); }
+{
+  I3MCTree::iterator iter(t,p);
+  if (iter == t.end())
+    throw not_found_exception("particle not found in tree");
+  else
+    return &(*iter);
+}
+I3Particle* at2(I3MCTree& t,int num)
+{
+  I3Particle* ptr = NULL;
+  if (num < 0) {
+    if (num*(-1) > t.size())
+      throw not_found_exception("particle index not found in tree");
+    num = num+t.size();
+  } else {
+    if (num >= t.size())
+      throw not_found_exception("particle index not found in tree");
+  }
+  I3MCTree::iterator iter = t.begin();
+  for(int cnt=0;iter != t.end();cnt++) {
+    if (cnt == num) {
+      ptr = &(*iter);
+      break;
+    }
+    iter++;
+  }
+  if (ptr != NULL)
+    return ptr;
+  else
+    throw not_found_exception("particle index not found in tree");
+}
+std::vector<I3Particle> at3(I3MCTree& t,slice sl)
+{
+  std::vector<I3Particle> ret;
+  int start = 0,stop=t.size(),step=1;
+  if (!sl.start().is_none())
+    start = extract<int>(sl.start());
+  if (!sl.stop().is_none())
+    stop = extract<int>(sl.stop());
+  if (!sl.step().is_none())
+    step = extract<int>(sl.step());
+  // TODO: handle negatives better
+  I3MCTree::iterator iter = t.begin();
+  for(int cnt=0;iter != t.end();cnt++) {
+    if (cnt >= start && cnt < stop && cnt % step == 0)
+      ret.push_back(*iter);
+    if (cnt >= stop)
+      break;
+    iter++;
+  }
+  if (ret.size() > 0 && step < 1)
+    std::reverse(ret.begin(),ret.end());
+  return ret;
+}
 
 bool contains(const I3MCTree& t,const I3ParticleID& p)
 { return bool(t.at(p)); }
@@ -109,7 +166,7 @@ void register_I3MCTree()
         
         // Base Class Methods
         .def("get_head", &get_head, "Get the left-most primary (the root or head of the tree)")
-        .def("at", &at, "Get the I3Particle represented by the I3ParticleID")
+        .def("at", &at, return_internal_reference<>(), "Get the I3Particle represented by the I3ParticleID")
         .def("parent", &parent, "Get the parent of the I3ParticleID")
         .def("previous_sibling", &previous_sibling, "Get the previous sibling of the I3ParticleID")
         .def("next_sibling", &next_sibling, "Get the next sibling of the I3ParticleID")
@@ -139,19 +196,49 @@ void register_I3MCTree()
         .def("is_in_subtree", is_in_subtree, "Is an I3ParticleID in a subtree?")
         .def("subtree_in_tree", subtree_in_tree, "Is any part of a subtree in the tree?")
         
-         // Python Special Methods
+        // Iterators
+        .def("pre_order_iter", range<return_value_policy<copy_const_reference> >
+          (
+            (I3MCTree::pre_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin, 
+            (I3MCTree::pre_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cend
+          )
+        )
+        .def("post_order_iter", range<return_value_policy<copy_const_reference> >
+          (
+            (I3MCTree::post_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_post, 
+            (I3MCTree::post_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_post
+          )
+        )
+        .def("fast_iter", range<return_value_policy<copy_const_reference> >
+          (
+            (I3MCTree::fast_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_fast, 
+            (I3MCTree::fast_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_fast
+          )
+        )
+        .def("leaf_iter", range<return_value_policy<copy_const_reference> >
+          (
+            (I3MCTree::leaf_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_leaf, 
+            (I3MCTree::leaf_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_leaf
+          )
+        )
+        
+        // Python Special Methods
         .def("__str__", &I3MCTreeUtils::Dump)
         .def("__nonzero__", &I3MCTree::empty)
         .def("__len__", &I3MCTree::size)
-        .def("__iter__", range<return_value_policy<copy_non_const_reference> >
+        .def("__iter__", range<return_value_policy<copy_const_reference> >
           (
-            (I3MCTree::pre_order_iterator(I3MCTree::*)()) &I3MCTree::begin, 
-            (I3MCTree::pre_order_iterator(I3MCTree::*)()) &I3MCTree::end
+            (I3MCTree::const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin, 
+            (I3MCTree::const_iterator(I3MCTree::*)() const) &I3MCTree::cend
           )
         )
         .def("__contains__", &contains)
-        .def("__getitem__", &at)
+        .def("__getitem__", &at, return_internal_reference<>())
+        .def("__getitem__", &at2, return_internal_reference<>())
+        .def("__getitem__", &at3)
         .def("__delitem__", erase)
+        
+        // dataclass suites
         .def(copy_suite<I3MCTree>())
         .def(operator_suite<I3MCTree>())
         .def_pickle(boost_serializable_pickle_suite<I3MCTree>())

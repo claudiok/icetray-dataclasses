@@ -9,6 +9,7 @@
  * @date $Date$
  */
 #include <cassert>
+#include <stack>
 #include <boost/dynamic_bitset.hpp>
 #include <boost/foreach.hpp>
 
@@ -629,7 +630,8 @@ namespace TreeBase {
     typename tree_hash_map::iterator iter = internalMap.find(node2);
     assert( iter == internalMap.end() );
     iter = internalMap.find(node);
-    assert( iter != internalMap.end() );
+    if (iter == internalMap.end())
+      return insert(node2);
     treeNode newNode = treeNode(node2);
     newNode.parent = iter->second.parent;
     newNode.nextSibling = &(iter->second);
@@ -655,11 +657,11 @@ namespace TreeBase {
   Tree<T,Key,Hash>::insert(const iterator_base<Derived,Value,Storage>& iter,
       const T& node2)
   {
-    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_))
       insert(*iter,node2);
-      return iterator_base<Derived,Value,Storage>(*this,node2);
-    } else
-      return iterator_base<Derived,Value,Storage>(*this,end_);
+    else
+      insert(node2);
+    return iterator_base<Derived,Value,Storage>(*this,node2);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -669,7 +671,8 @@ namespace TreeBase {
     typename tree_hash_map::iterator iter = internalMap.find(node2);
     assert( iter == internalMap.end() );
     iter = internalMap.find(node);
-    assert( iter != internalMap.end() );
+    if (iter == internalMap.end())
+      return insert_after(node2);
     treeNode newNode = treeNode(node2);
     newNode.parent = iter->second.parent;
     newNode.nextSibling = iter->second.nextSibling;
@@ -685,11 +688,11 @@ namespace TreeBase {
   Tree<T,Key,Hash>::insert_after(const iterator_base<Derived,Value,Storage>& iter,
       const T& node2)
   {
-    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_))
       insert_after(*iter,node2);
-      return iterator_base<Derived,Value,Storage>(*this,node2);
-    } else
-      return iterator_base<Derived,Value,Storage>(*this,end_);
+    else
+      insert_after(node2);
+    return iterator_base<Derived,Value,Storage>(*this,node2);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -1290,8 +1293,66 @@ namespace TreeBase {
     clear();
     if (version == 0) {
       // load old-style Tree
-      // TODO: implement this
-      assert( false );
+      pre_order_iterator iter(*this);
+      std::stack<pre_order_iterator> iters;
+      unsigned int count=0;
+      std::stack<unsigned int> counts;
+      T item;
+
+      ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
+
+      ar & boost::serialization::make_nvp("count", count);
+      if(count)
+        counts.push(count);
+      std::cout << "have some counts " << count << std::endl;
+
+      while(!counts.empty()) {
+        ar & boost::serialization::make_nvp("item", item);
+        std::cout << "have an item" << std::endl;
+        ar & boost::serialization::make_nvp("count", count);
+        std::cout << "have some counts " << count << std::endl;
+        if(iters.empty()) {
+          iter = this->begin();
+          if (!this->empty()) {
+            unsigned siblings = this->number_of_siblings(iter);
+            for (unsigned i=0; i <= siblings; i++)
+              iter = this->next_sibling(iter);
+          }
+          std::cout << "insert item ";
+          if (iter == this->end())
+            std::cout << "iter is NULL" << std::endl;
+          else
+            std::cout << "iter is " << std::endl << *iter << std::endl;
+          iter = this->insert(iter, item);
+          if (iter == this->end())
+            std::cout << "after iter is NULL" << std::endl;
+          else
+            std::cout << "after iter is " << std::endl << *iter << std::endl;
+        } else {
+          std::cout << "append child ";
+          if (iters.top() == this->end())
+            std::cout << "iter is NULL" << std::endl;
+          else
+            std::cout << "iter is " << std::endl << *(iters.top()) << std::endl;
+          iter = this->append_child(iters.top(), item);
+          if (iter == this->end())
+            std::cout << "after iter is NULL" << std::endl;
+          else
+            std::cout << "after iter is " << std::endl << *iter << std::endl;
+        }
+        counts.top()--;
+
+        if(!counts.top()) {
+          counts.pop();
+          if(!iters.empty())
+            iters.pop();
+        }
+
+        if(count) {
+          counts.push(count);
+          iters.push(iter);
+        }
+      }
     } else {
       // load new Tree
       ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
