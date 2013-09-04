@@ -122,6 +122,26 @@ std::vector<I3Particle> at3(I3MCTree& t,slice sl)
   return ret;
 }
 
+namespace outer {
+  inline object pass_through(object const& o) { return o; }
+  class sib_iter {
+    public:
+      sib_iter(const I3MCTree& t, const I3ParticleID& p)
+        : i_(t,p), end_(t) { end_ = t.cend_sibling(); }
+      I3Particle next()
+      {
+        if (i_ == end_) {
+          PyErr_SetString(PyExc_StopIteration, "No more data.");
+          boost::python::throw_error_already_set();
+        }
+        return *i_++;
+      }
+    private:
+      I3MCTree::sibling_const_iterator i_;
+      I3MCTree::sibling_const_iterator end_;
+  };
+}
+
 bool contains(const I3MCTree& t,const I3ParticleID& p)
 { return bool(t.at(p)); }
 const std::vector<I3Particle> (I3MCTree::*children)(const I3ParticleID&) const  = &I3MCTree::children;
@@ -242,6 +262,11 @@ void register_I3MCTree()
         .def(copy_suite<I3MCTree>())
         .def(operator_suite<I3MCTree>())
         .def_pickle(boost_serializable_pickle_suite<I3MCTree>())
+      ;
+      class_<outer::sib_iter>("sibling_iter",init<const I3MCTree&, const I3ParticleID&>())
+        .def("next",&outer::sib_iter::next)
+        .def("__next__",&outer::sib_iter::next)
+        .def("__iter__",&outer::pass_through)
       ;
   }
   
