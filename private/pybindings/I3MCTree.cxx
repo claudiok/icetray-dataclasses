@@ -141,6 +141,8 @@ namespace outer {
       I3MCTree::sibling_const_iterator end_;
   };
 }
+outer::sib_iter sibling_iter(const I3MCTree& t, const I3ParticleID& p)
+{ return outer::sib_iter(t,p); }
 
 bool contains(const I3MCTree& t,const I3ParticleID& p)
 { return bool(t.at(p)); }
@@ -221,25 +223,30 @@ void register_I3MCTree()
           (
             (I3MCTree::pre_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin, 
             (I3MCTree::pre_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cend
-          )
+          ),
+          "Pre order iterator for I3MCTree. This is the default iterator."
         )
         .def("post_order_iter", range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::post_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_post, 
             (I3MCTree::post_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_post
-          )
+          ),
+          "Post order iterator for I3MCTree"
         )
+        .def("sibling_iter",sibling_iter, "Sibling iterator for I3MCTree. Takes an I3ParticleID, provides all next_siblings of it.")
         .def("fast_iter", range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::fast_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_fast, 
             (I3MCTree::fast_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_fast
-          )
+          ),
+          "Fast iterator for I3MCTree. Fast but unordered traversal."
         )
         .def("leaf_iter", range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::leaf_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_leaf, 
             (I3MCTree::leaf_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_leaf
-          )
+          ),
+          "Leaf iterator for I3MCTree. Fast but unordered leaf traversal."
         )
         
         // Python Special Methods
@@ -263,7 +270,9 @@ void register_I3MCTree()
         .def(operator_suite<I3MCTree>())
         .def_pickle(boost_serializable_pickle_suite<I3MCTree>())
       ;
-      class_<outer::sib_iter>("sibling_iter",init<const I3MCTree&, const I3ParticleID&>())
+      class_<outer::sib_iter>("_Sibling_Iter_",
+        "Sibling iterator object for I3MCTree. DO NOT CALL DIRECTLY. Instead use the I3MCTree.sibling_iter method",
+        no_init)
         .def("next",&outer::sib_iter::next)
         .def("__next__",&outer::sib_iter::next)
         .def("__iter__",&outer::pass_through)
