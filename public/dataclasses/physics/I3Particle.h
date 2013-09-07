@@ -132,11 +132,6 @@ namespace RDMCParticleTypes{
  */
 class I3Particle : public I3FrameObject
 {
-
-  static int32_t global_last_pid_;
-  static int32_t global_minor_id_;
-  static uint64_t global_major_id_;
-    
  public:
 
   enum ParticleType {
@@ -343,10 +338,7 @@ class I3Particle : public I3FrameObject
 
  private:
 
-  int32_t ID_;
-  uint64_t major_ID_;
-  int32_t parentID_;
-  int32_t primaryID_;
+  I3ParticleID ID_;
   int32_t pdgEncoding_; // this replaces ParticleType
   ParticleShape shape_;
   FitStatus status_;
@@ -356,7 +348,6 @@ class I3Particle : public I3FrameObject
   double energy_;
   double length_;
   double speed_;
-  std::vector<I3Particle> composite_; //!
   LocationType locationType_;
 
  public:
@@ -392,17 +383,11 @@ class I3Particle : public I3FrameObject
   bool HasDirection() const;
   bool HasEnergy() const;
 
-  operator I3ParticleID() const{ I3ParticleID id={major_ID_, ID_}; return id; }
+  operator I3ParticleID() const{ return ID_; }
 	
-  int32_t GetID() const { 
-    log_warn("I3Particle::GetID is deprecated.  Please use I3Particle::GetMinorID.");
-    return ID_; 
-  }
-  int32_t GetMinorID() const { return ID_; }
-  uint64_t GetMajorID() const { return major_ID_; }
-
-  int32_t GetParentID() const { return parentID_; }
-  int32_t GetPrimaryID() const { return primaryID_; }
+  I3ParticleID GetID() const { return ID_; }
+  int32_t GetMinorID() const { return ID_.minorID; }
+  uint64_t GetMajorID() const { return ID_.majorID; }
 
   int32_t GetPdgEncoding() const { return pdgEncoding_; }
   void SetPdgEncoding(int32_t newid) { pdgEncoding_=newid; }
@@ -463,9 +448,6 @@ class I3Particle : public I3FrameObject
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
 
-  const std::vector<I3Particle>& GetComposite() const { return composite_; }
-  std::vector<I3Particle>& GetComposite() { return composite_; }
-
   I3Position ShiftAlongTrack(double dist) const;
 
   I3Position GetStartPos() const;
@@ -475,7 +457,6 @@ class I3Particle : public I3FrameObject
   I3Position GetStopPos() const;
 
   double GetStopTime() const;
-
 
  private:
 

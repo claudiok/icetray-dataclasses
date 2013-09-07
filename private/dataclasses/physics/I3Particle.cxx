@@ -12,14 +12,13 @@
 
 #include <unistd.h>
 
-int32_t I3Particle::global_last_pid_ = 0;
-int32_t I3Particle::global_minor_id_ = 0;
-uint64_t I3Particle::global_major_id_ = 0;
+// Should these (and ID generation) be moved to I3ParticleID?
+static int32_t global_last_pid_ = 0;
+static int32_t global_minor_id_ = 0;
+static uint64_t global_major_id_ = 0;
 
 I3Particle::~I3Particle() { }
 I3Particle::I3Particle(ParticleShape shape, ParticleType type) : 
-  parentID_(-1),
-  primaryID_(-1),
   pdgEncoding_(ConvertToPdgEncoding(type)),
   shape_(shape),
   status_(NotSet),
@@ -50,16 +49,13 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
     s<<time(0)<<this_pid<<hostname;
     global_major_id_ = string_hash(s.str());
   }
-  major_ID_ = global_major_id_;
-  
-  ID_ = global_minor_id_++;
+  ID_.majorID = global_major_id_;
+  ID_.minorID = global_minor_id_++;
   
   log_trace("Calling I3Particle::I3Particle(ParticleShape %i, ParticleType %i).", static_cast<int>(shape), static_cast<int>(type));
 }
 
 I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, ParticleShape shape, double length) : 
-  parentID_(-1),
-  primaryID_(-1),
   pdgEncoding_(ConvertToPdgEncoding(unknown)),
   shape_(shape),
   status_(NotSet),
@@ -85,16 +81,11 @@ I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double
     s<<time(0)<<this_pid<<getenv("HOST");
     global_major_id_ = string_hash(s.str());
   }
-  major_ID_ = global_major_id_;
-  
-  ID_ = global_minor_id_++;
+  ID_.majorID = global_major_id_;
+  ID_.minorID = global_minor_id_++;
 }
 
 I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
-  ID_(minor),
-  major_ID_(major),
-  parentID_(-1),
-  primaryID_(-1),
   pdgEncoding_(ConvertToPdgEncoding(unknown)),
   shape_(Null),
   status_(NotSet),
@@ -105,7 +96,10 @@ I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
   length_(NAN),
   speed_(I3Constants::c),
   locationType_(Anywhere)
-{}
+{
+  ID_.majorID = major;
+  ID_.minorID = minor;
+}
 
 // using the magic of the preprocessor, expand
 // the existing list of enum entries into a case
@@ -734,8 +728,8 @@ template <class Archive>
   void I3Particle::save(Archive& ar, unsigned version) const
   {
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-    ar & make_nvp("ID",ID_);
-    ar & make_nvp("MajorID",major_ID_);
+    ar & make_nvp("ID",ID_.minorID);
+    ar & make_nvp("MajorID",ID_.majorID);
     ar & make_nvp("pdgEncoding",pdgEncoding_);
     ar & make_nvp("shape",shape_);
     ar & make_nvp("fitStatus",status_);
@@ -757,13 +751,14 @@ template <class Archive>
     log_fatal("Attempting to read version %u from file but running version %u of I3Particle class.",version,i3particle_version_);
 
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-    ar & make_nvp("ID",ID_);
+    ar & make_nvp("ID",ID_.minorID);
     if(version>1){
-      ar & make_nvp("MajorID",major_ID_);
+      ar & make_nvp("MajorID",ID_.majorID);
     }
     if(version == 0){
-      ar & make_nvp("parentID",parentID_);
-      ar & make_nvp("primaryID",primaryID_);
+      int32_t junk;
+      ar & make_nvp("parentID",junk);
+      ar & make_nvp("primaryID",junk);
     }
     if(version <= 2){
       I3Particle::ParticleType t;
@@ -787,8 +782,10 @@ template <class Archive>
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
 
-    if(version == 0)
-      ar & make_nvp("composite",composite_);
+    if(version == 0) {
+      std::vector<I3Particle> junk;
+      ar & make_nvp("composite",junk);
+    }
     if(version>0)
       ar & make_nvp("LocationType",locationType_);
     if(version == 4){
@@ -811,8 +808,8 @@ void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const
     std::string tempString;
 
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-    ar & make_nvp("minorID",ID_);
-    ar & make_nvp("majorID",major_ID_);
+    ar & make_nvp("minorID",ID_.minorID);
+    ar & make_nvp("majorID",ID_.majorID);
 
     ar & make_nvp("pdgEncoding",pdgEncoding_);
     tempString = GetTypeString();
@@ -844,8 +841,8 @@ void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version)
     std::string tempString; 
 
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-    ar & make_nvp("minorID",ID_);
-    ar & make_nvp("majorID",major_ID_);
+    ar & make_nvp("minorID",ID_.minorID);
+    ar & make_nvp("majorID",ID_.majorID);
 
     ar & make_nvp("pdgEncoding",pdgEncoding_);
     ar & make_nvp("particleType",tempString); // ignored (I3Particle pdgEncoding)
@@ -870,8 +867,6 @@ void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version)
 bool operator==(const I3Particle& lhs, const I3Particle& rhs){
   return ( lhs.GetMinorID() == rhs.GetMinorID() &&
 	   lhs.GetMajorID() == rhs.GetMajorID() &&
-	   lhs.GetParentID() == rhs.GetParentID() &&
-	   lhs.GetPrimaryID() == rhs.GetPrimaryID() &&
 	   lhs.GetPdgEncoding() == rhs.GetPdgEncoding() &&
 	   lhs.GetShape() == rhs.GetShape() &&
 	   lhs.GetFitStatus() == rhs.GetFitStatus() &&
@@ -881,8 +876,7 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   lhs.GetTime() == rhs.GetTime() &&
 	   lhs.GetLength() == rhs.GetLength() &&
 	   lhs.GetEnergy() == rhs.GetEnergy() &&
-	   lhs.GetSpeed() == rhs.GetSpeed() &&
-	   lhs.GetComposite()==rhs.GetComposite()
+	   lhs.GetSpeed() == rhs.GetSpeed()
 	   );
 }
 

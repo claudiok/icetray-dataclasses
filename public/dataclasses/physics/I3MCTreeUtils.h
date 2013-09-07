@@ -85,22 +85,6 @@ namespace I3MCTreeUtils
   I3MCTreeConstPtr Get(const I3Frame &, const std::string&, const std::string&);
 
   /**
-   * Used internally by ListToTree and called recursively.
-   * The general population probably won't find this useful.
-   * To use it properly, you need to...
-   * 1) Copy the particle you want to add
-   * 2) Clear the composite list of the copy
-   * 3) Append the copy (with the empty composite list) to the tree with insert.
-   * 4) Pass to ConvertComposite the tree, the iterator (return value from insert call),
-        and the composite list of the original particle.
-   *  Again probably not for general consumption.
-   */
-  namespace internal{
-    void ConvertComposite(I3MCTree&, I3MCTree::iterator&, const std::vector<I3Particle>&);
-    void DumpChildren(const I3MCTree&,I3MCTree::iterator);
-  }
-
-  /**
    *Returns the InIce particle with highest energy.
    *This is useful for example in extracting "the muon" from the 
    *atmospheric neutrino data.
