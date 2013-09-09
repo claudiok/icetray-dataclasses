@@ -710,10 +710,14 @@ namespace TreeBase {
       // pre_order iterator helpers
       inline pre_order_iterator begin()
       { return pre_order_iterator(*this); }
+      inline pre_order_const_iterator begin() const
+      { return pre_order_const_iterator(*this); }
       inline pre_order_const_iterator cbegin() const
       { return pre_order_const_iterator(*this); }
       inline pre_order_iterator end()
       { return pre_order_iterator(*this,end_); };
+      inline pre_order_const_iterator end() const
+      { return pre_order_const_iterator(*this,end_); };
       inline pre_order_const_iterator cend() const
       { return pre_order_const_iterator(*this,end_); };
       
@@ -1139,19 +1143,6 @@ namespace TreeBase {
 /**
  * I3MCTree - This goes into the frame and everyone can see it
  */
-/*class I3MCTree : public TreeBase::Tree<I3Particle,I3ParticleID>
-{
-  public:
-    // constructors
-    I3MCTree();
-    I3MCTree(const I3Particle&);
-    template<class D,class V> I3MCTree(const iterator_base<D,V>& other);
-    I3MCTree(const I3MCTree& m);
-    
-  private:
-    friend class boost::serialization::access;
-    BOOST_SERIALIZATION_SPLIT_MEMBER();
-};*/
 typedef TreeBase::Tree<I3Particle,I3ParticleID> I3MCTree;
 
 BOOST_CLASS_VERSION(I3MCTree,TreeBase::tree_version_);

@@ -149,23 +149,23 @@ bool contains(const I3MCTree& t,const I3ParticleID& p)
 const std::vector<I3Particle> (I3MCTree::*children)(const I3ParticleID&) const  = &I3MCTree::children;
 void (I3MCTree::*erase)(const I3ParticleID&) = &I3MCTree::erase;
 void (I3MCTree::*erase_children)(const I3ParticleID&) = &I3MCTree::erase_children;
-void (I3MCTree::*append_child_subtree)(const I3ParticleID&,const I3MCTree&,const I3ParticleID&) = &I3MCTree::append_child;
+void (I3MCTree::*append_child_subtree)(const I3ParticleID&,const TreeBase::Tree<I3Particle,I3ParticleID>&,const I3ParticleID&) = &I3MCTree::append_child;
 void (I3MCTree::*append_children)(const I3ParticleID&,const std::vector<I3Particle>&) = &I3MCTree::append_children;
 void (I3MCTree::*insert_head)(const I3Particle&) = &I3MCTree::insert;
 void (I3MCTree::*insert_after_head)(const I3Particle&) = &I3MCTree::insert_after;
 void (I3MCTree::*insert)(const I3ParticleID&,const I3Particle&) = &I3MCTree::insert;
 void (I3MCTree::*insert_after)(const I3ParticleID&,const I3Particle&) = &I3MCTree::insert_after;
-void (I3MCTree::*insert_subtree)(const I3ParticleID&,const I3MCTree&,const I3ParticleID&) = &I3MCTree::insert_subtree;
-void (I3MCTree::*insert_subtree_after)(const I3ParticleID&,const I3MCTree&,const I3ParticleID&) = &I3MCTree::insert_subtree_after;
+void (I3MCTree::*insert_subtree)(const I3ParticleID&,const TreeBase::Tree<I3Particle,I3ParticleID>&,const I3ParticleID&) = &I3MCTree::insert_subtree;
+void (I3MCTree::*insert_subtree_after)(const I3ParticleID&,const TreeBase::Tree<I3Particle,I3ParticleID>&,const I3ParticleID&) = &I3MCTree::insert_subtree_after;
 void (I3MCTree::*replace)(const I3ParticleID&,const I3Particle&) = &I3MCTree::replace;
-void (I3MCTree::*replace_subtree)(const I3ParticleID&,const I3MCTree&,const I3ParticleID&) = &I3MCTree::replace;
+void (I3MCTree::*replace_subtree)(const I3ParticleID&,const TreeBase::Tree<I3Particle,I3ParticleID>&,const I3ParticleID&) = &I3MCTree::replace;
 void (I3MCTree::*flatten)(const I3ParticleID&) = &I3MCTree::flatten;
 void (I3MCTree::*reparent)(const I3ParticleID&,const I3ParticleID&) = &I3MCTree::reparent;
 I3MCTree::size_type (I3MCTree::*depth)(const I3ParticleID&) const = &I3MCTree::depth;
 I3MCTree::size_type (I3MCTree::*number_of_children)(const I3ParticleID&) const = &I3MCTree::number_of_children;
 I3MCTree::size_type (I3MCTree::*number_of_siblings)(const I3ParticleID&) const = &I3MCTree::number_of_siblings;
 bool (I3MCTree::*is_in_subtree)(const I3ParticleID&,const I3ParticleID&) const = &I3MCTree::is_in_subtree;
-bool (I3MCTree::*subtree_in_tree)(const I3MCTree&,const I3ParticleID&) const = &I3MCTree::subtree_in_tree;
+bool (I3MCTree::*subtree_in_tree)(const TreeBase::Tree<I3Particle,I3ParticleID>&,const I3ParticleID&) const = &I3MCTree::subtree_in_tree;
 
 void register_I3MCTree()
 {

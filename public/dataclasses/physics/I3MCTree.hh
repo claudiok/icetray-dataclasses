@@ -1285,6 +1285,38 @@ namespace TreeBase {
   
   static const uint32_t CHUNK_SIZE_ = 65535;
   
+  // make a filter to apply to old trees to fix up problems
+  template<typename T, typename Key, typename Hash>
+  struct load_old_filter
+  {
+    static T call(Tree<T,Key,Hash>* tree_ptr,const T& item)
+    {
+      return item;
+    }
+  };
+  template<typename Key, typename Hash>
+  struct load_old_filter<I3Particle,Key,Hash>
+  {
+    static I3Particle call(Tree<I3Particle,Key,Hash>* tree_ptr,const I3Particle& item)
+    {
+      if (item.GetShape() == I3Particle::Dark) {
+        // make new Dark particle
+        I3Particle ret = I3Particle();
+        ret.SetLocationType(item.GetLocationType());
+        ret.SetDir(item.GetDir());
+        ret.SetPos(item.GetPos());
+        ret.SetShape(item.GetShape());
+        ret.SetFitStatus(item.GetFitStatus());
+        ret.SetEnergy(item.GetEnergy());
+        ret.SetLength(item.GetLength());
+        ret.SetTime(item.GetTime());
+        ret.SetSpeed(item.GetSpeed());
+        return ret;
+      } else
+        return item;
+    }
+  };
+  
   template<typename T, typename Key, typename Hash>
   template<class Archive>
   void
@@ -1300,17 +1332,14 @@ namespace TreeBase {
       T item;
 
       ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-
       ar & boost::serialization::make_nvp("count", count);
       if(count)
         counts.push(count);
-      std::cout << "have some counts " << count << std::endl;
 
       while(!counts.empty()) {
         ar & boost::serialization::make_nvp("item", item);
-        std::cout << "have an item" << std::endl;
         ar & boost::serialization::make_nvp("count", count);
-        std::cout << "have some counts " << count << std::endl;
+        item = load_old_filter<T,Key,Hash>::call(this,item);
         if(iters.empty()) {
           iter = this->begin();
           if (!this->empty()) {
@@ -1318,27 +1347,9 @@ namespace TreeBase {
             for (unsigned i=0; i <= siblings; i++)
               iter = this->next_sibling(iter);
           }
-          std::cout << "insert item ";
-          if (iter == this->end())
-            std::cout << "iter is NULL" << std::endl;
-          else
-            std::cout << "iter is " << std::endl << *iter << std::endl;
           iter = this->insert(iter, item);
-          if (iter == this->end())
-            std::cout << "after iter is NULL" << std::endl;
-          else
-            std::cout << "after iter is " << std::endl << *iter << std::endl;
         } else {
-          std::cout << "append child ";
-          if (iters.top() == this->end())
-            std::cout << "iter is NULL" << std::endl;
-          else
-            std::cout << "iter is " << std::endl << *(iters.top()) << std::endl;
           iter = this->append_child(iters.top(), item);
-          if (iter == this->end())
-            std::cout << "after iter is NULL" << std::endl;
-          else
-            std::cout << "after iter is " << std::endl << *iter << std::endl;
         }
         counts.top()--;
 
