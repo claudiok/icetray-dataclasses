@@ -25,7 +25,7 @@
 #include <boost/bimap/multiset_of.hpp>
 #endif
 
-static const unsigned i3particle_version_ = 6;
+static const unsigned i3particle_version_ = 5;
 
 // let other code know that I3Particle stores PDG encodings internally
 #define I3PARTICLE_SUPPORTS_PDG_ENCODINGS
