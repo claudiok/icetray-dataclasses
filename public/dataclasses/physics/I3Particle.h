@@ -20,60 +20,7 @@
 #ifndef __CINT__
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-
-#include <boost/bimap/bimap.hpp>
-#include <boost/bimap/multiset_of.hpp>
 #endif
-
-static const unsigned i3particle_version_ = 5;
-
-// let other code know that I3Particle stores PDG encodings internally
-#define I3PARTICLE_SUPPORTS_PDG_ENCODINGS
-
-/**
- * List the names of enumeration members defined in this file
- * here. These can be used for e.g. pybindings, which require
- * the names of the enumeration members to be known. This list
- * should be updated whenver members or new enums are added to
- * the class.
- */
-#define I3PARTICLE_H_I3Particle_ParticleType                                      \
-    (unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0) \
-    (PiPlus)(PiMinus)(K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)   \
-    (Eta)(Lambda)(SigmaPlus)(Sigma0)(SigmaMinus)(Xi0)(XiMinus)(OmegaMinus)        \
-    (NeutronBar)(LambdaBar)(SigmaMinusBar)(Sigma0Bar)(SigmaPlusBar)(Xi0Bar)       \
-    (XiPlusBar)(OmegaPlusBar)(DPlus)(DMinus)(D0)(D0Bar)(DsPlus)(DsMinusBar)       \
-    (LambdacPlus)(WPlus)(WMinus)(Z0)(NuE)(NuEBar)                                 \
-    (NuMu)(NuMuBar)(TauPlus)(TauMinus)(NuTau)(NuTauBar)                           \
-    (He3Nucleus)(He4Nucleus)(Li6Nucleus)(Li7Nucleus)(Be9Nucleus)(B10Nucleus)      \
-    (B11Nucleus)(C12Nucleus)(C13Nucleus)(N14Nucleus)(N15Nucleus)(O16Nucleus)      \
-    (O17Nucleus)(O18Nucleus)(F19Nucleus)(Ne20Nucleus)(Ne21Nucleus)(Ne22Nucleus)   \
-    (Na23Nucleus)(Mg24Nucleus)(Mg25Nucleus)(Mg26Nucleus)(Al26Nucleus)(Al27Nucleus)\
-    (Si28Nucleus)(Si29Nucleus)(Si30Nucleus)(Si31Nucleus)(Si32Nucleus)(P31Nucleus) \
-    (P32Nucleus)(P33Nucleus)(S32Nucleus)(S33Nucleus)(S34Nucleus)(S35Nucleus)      \
-    (S36Nucleus)(Cl35Nucleus)(Cl36Nucleus)(Cl37Nucleus)(Ar36Nucleus)(Ar37Nucleus) \
-    (Ar38Nucleus)(Ar39Nucleus)(Ar40Nucleus)(Ar41Nucleus)(Ar42Nucleus)(K39Nucleus) \
-    (K40Nucleus)(K41Nucleus)(Ca40Nucleus)(Ca41Nucleus)(Ca42Nucleus)(Ca43Nucleus)  \
-    (Ca44Nucleus)(Ca45Nucleus)(Ca46Nucleus)(Ca47Nucleus)(Ca48Nucleus)(Sc44Nucleus)\
-    (Sc45Nucleus)(Sc46Nucleus)(Sc47Nucleus)(Sc48Nucleus)(Ti44Nucleus)(Ti45Nucleus)\
-    (Ti46Nucleus)(Ti47Nucleus)(Ti48Nucleus)(Ti49Nucleus)(Ti50Nucleus)(V48Nucleus) \
-    (V49Nucleus)(V50Nucleus)(V51Nucleus)(Cr50Nucleus)(Cr51Nucleus)(Cr52Nucleus)   \
-    (Cr53Nucleus)(Cr54Nucleus)(Mn52Nucleus)(Mn53Nucleus)(Mn54Nucleus)(Mn55Nucleus)\
-    (Fe54Nucleus)(Fe55Nucleus)(Fe56Nucleus)(Fe57Nucleus)(Fe58Nucleus)             \
-    (CherenkovPhoton)(Nu)(Monopole)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)     \
-    (Hadrons)(ContinuousEnergyLoss)(FiberLaser)(N2Laser)(YAGLaser)                \
-    (STauPlus)(STauMinus)
-
-#define I3PARTICLE_H_I3Particle_ParticleShape                                     \
-    (Null)(Primary)(TopShower)(Cascade)(InfiniteTrack)(StartingTrack)             \
-    (StoppingTrack)(ContainedTrack)(MCTrack)(Dark)
-    
-#define I3PARTICLE_H_I3Particle_FitStatus                                         \
-    (NotSet)(OK)(GeneralFailure)(InsufficientHits)(FailedToConverge)              \
-    (MissingSeed)(InsufficientQuality)
-
-#define I3PARTICLE_H_I3Particle_LocationType                                      \
-    (Anywhere)(IceTop)(InIce)(InActiveVolume)
 
 /**
  * @brief 
@@ -274,23 +221,9 @@ class I3Particle : public I3FrameObject
     InActiveVolume = 30
   };
 
- private:
-
-  I3ParticleID ID_;
-  int32_t pdgEncoding_;
-  ParticleShape shape_;
-  FitStatus status_;
-  I3Position pos_;
-  I3Direction dir_;
-  double time_;
-  double energy_;
-  double length_;
-  double speed_;
-  LocationType locationType_;
-
  public:
   /** @brief Constructor for a simple particle with generated ID
-   * useful in applications where the exact nature of an particle are in focus
+   * useful in applications where the shape and type of an particle are in focus
    * @param shape Shape of the track
    * @param type Particle type
   */
@@ -399,6 +332,19 @@ class I3Particle : public I3FrameObject
   double GetStopTime() const;
 
  private:
+
+  I3ParticleID ID_;
+  int32_t pdgEncoding_;
+  ParticleShape shape_;
+  FitStatus status_;
+  I3Position pos_;
+  I3Direction dir_;
+  double time_;
+  double energy_;
+  double length_;
+  double speed_;
+  LocationType locationType_;
+
   /** @brief Constructor for particle as a unique identifier by majorID and minorID
    * useful in iteration processes (in I3MCTree) where unique tagging is required
    * @param major MajorID of that particle
@@ -413,6 +359,56 @@ class I3Particle : public I3FrameObject
   template <class Archive> void load(Archive & ar, unsigned version);
   BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
+
+static const unsigned i3particle_version_ = 5;
+
+// let other code know that I3Particle stores PDG encodings internally
+#define I3PARTICLE_SUPPORTS_PDG_ENCODINGS
+
+/**
+ * List the names of enumeration members defined in this file
+ * here. These can be used for e.g. pybindings, which require
+ * the names of the enumeration members to be known. This list
+ * should be updated whenver members or new enums are added to
+ * the class.
+ */
+#define I3PARTICLE_H_I3Particle_ParticleType                                      \
+    (unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0) \
+    (PiPlus)(PiMinus)(K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)   \
+    (Eta)(Lambda)(SigmaPlus)(Sigma0)(SigmaMinus)(Xi0)(XiMinus)(OmegaMinus)        \
+    (NeutronBar)(LambdaBar)(SigmaMinusBar)(Sigma0Bar)(SigmaPlusBar)(Xi0Bar)       \
+    (XiPlusBar)(OmegaPlusBar)(DPlus)(DMinus)(D0)(D0Bar)(DsPlus)(DsMinusBar)       \
+    (LambdacPlus)(WPlus)(WMinus)(Z0)(NuE)(NuEBar)                                 \
+    (NuMu)(NuMuBar)(TauPlus)(TauMinus)(NuTau)(NuTauBar)                           \
+    (He3Nucleus)(He4Nucleus)(Li6Nucleus)(Li7Nucleus)(Be9Nucleus)(B10Nucleus)      \
+    (B11Nucleus)(C12Nucleus)(C13Nucleus)(N14Nucleus)(N15Nucleus)(O16Nucleus)      \
+    (O17Nucleus)(O18Nucleus)(F19Nucleus)(Ne20Nucleus)(Ne21Nucleus)(Ne22Nucleus)   \
+    (Na23Nucleus)(Mg24Nucleus)(Mg25Nucleus)(Mg26Nucleus)(Al26Nucleus)(Al27Nucleus)\
+    (Si28Nucleus)(Si29Nucleus)(Si30Nucleus)(Si31Nucleus)(Si32Nucleus)(P31Nucleus) \
+    (P32Nucleus)(P33Nucleus)(S32Nucleus)(S33Nucleus)(S34Nucleus)(S35Nucleus)      \
+    (S36Nucleus)(Cl35Nucleus)(Cl36Nucleus)(Cl37Nucleus)(Ar36Nucleus)(Ar37Nucleus) \
+    (Ar38Nucleus)(Ar39Nucleus)(Ar40Nucleus)(Ar41Nucleus)(Ar42Nucleus)(K39Nucleus) \
+    (K40Nucleus)(K41Nucleus)(Ca40Nucleus)(Ca41Nucleus)(Ca42Nucleus)(Ca43Nucleus)  \
+    (Ca44Nucleus)(Ca45Nucleus)(Ca46Nucleus)(Ca47Nucleus)(Ca48Nucleus)(Sc44Nucleus)\
+    (Sc45Nucleus)(Sc46Nucleus)(Sc47Nucleus)(Sc48Nucleus)(Ti44Nucleus)(Ti45Nucleus)\
+    (Ti46Nucleus)(Ti47Nucleus)(Ti48Nucleus)(Ti49Nucleus)(Ti50Nucleus)(V48Nucleus) \
+    (V49Nucleus)(V50Nucleus)(V51Nucleus)(Cr50Nucleus)(Cr51Nucleus)(Cr52Nucleus)   \
+    (Cr53Nucleus)(Cr54Nucleus)(Mn52Nucleus)(Mn53Nucleus)(Mn54Nucleus)(Mn55Nucleus)\
+    (Fe54Nucleus)(Fe55Nucleus)(Fe56Nucleus)(Fe57Nucleus)(Fe58Nucleus)             \
+    (CherenkovPhoton)(Nu)(Monopole)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)     \
+    (Hadrons)(ContinuousEnergyLoss)(FiberLaser)(N2Laser)(YAGLaser)                \
+    (STauPlus)(STauMinus)
+
+#define I3PARTICLE_H_I3Particle_ParticleShape                                     \
+    (Null)(Primary)(TopShower)(Cascade)(InfiniteTrack)(StartingTrack)             \
+    (StoppingTrack)(ContainedTrack)(MCTrack)(Dark)
+    
+#define I3PARTICLE_H_I3Particle_FitStatus                                         \
+    (NotSet)(OK)(GeneralFailure)(InsufficientHits)(FailedToConverge)              \
+    (MissingSeed)(InsufficientQuality)
+
+#define I3PARTICLE_H_I3Particle_LocationType                                      \
+    (Anywhere)(IceTop)(InIce)(InActiveVolume)
 
 #ifndef __CINT__
 // template specialization for XML i/o

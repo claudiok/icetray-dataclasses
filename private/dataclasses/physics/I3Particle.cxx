@@ -5,6 +5,8 @@
 
 #include <limits>
 #include <boost/assign/list_of.hpp>
+#include <boost/bimap/bimap.hpp>
+#include <boost/bimap/multiset_of.hpp>
 
 #include <boost/preprocessor/cat.hpp>
 #include <boost/preprocessor/seq/for_each.hpp>
@@ -353,6 +355,9 @@ double I3Particle::GetStopTime() const
     return NAN;
   }
 }
+
+// XXX: These don't need to be bimaps. The look is only one way and they could
+// be regular maps easily enough.
 
 // Old IceCube numbering conventions
 typedef boost::bimaps::bimap<boost::bimaps::multiset_of<I3Particle::ParticleType>, boost::bimaps::multiset_of<int> > particle_type_conversion_t;
