@@ -18,7 +18,9 @@ struct I3ParticleID{
 	}
 	
 	bool operator<(const I3ParticleID& other) const {
-		return(majorID<other.majorID);
+		if (majorID!=other.majorID)
+			return(majorID<other.majorID);
+		return(minorID<other.minorID);
 	}
 	
 private:
