@@ -225,3 +225,52 @@ Getting the energy of the most energetic primary
   In [8]: prim.GetEnergy()
   Out[8]: 497.685
 
+
+
+
+Getting an I3RecoPulseSeriesMap from an I3RecoPulseSeriesMapMask
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+.. code-block:: pycon
+
+  In [1]: frame.keys()
+  Out[1]: 
+  ['CleanTriggerHierarchy_IT',
+   'SPEFitSingleFitParams',
+   'FilterMask',
+   'TWOfflinePulsesFR',
+   'SPEFitSingle',
+   'SPEFit2CramerRaoParams',
+   'MaskedOfflinePulses',
+   'I3EventHeader',
+   'SPEFit2MuE',
+   'OfflinePulsesHLC',
+   'I3DST11',
+   'I3SuperDST',
+   'TWOfflinePulsesHLC',
+   'SRTOfflinePulses',
+   'TWOfflinePulsesDC',
+   'RTTWOfflinePulsesFR',
+   'I3TriggerHierarchy',
+   'LineFit',
+   'OfflinePulses',
+   'TWSRTOfflinePulses',
+   'SPEFit2',
+   'LineFitParams',
+   'SPEFit2FitParams']
+  
+  In [2]: pulse_map = dataclasses.I3RecoPulseSeriesMap.from_frame(frame,'TWSRTOfflinePulses') 
+  
+  In [3]: pulse_map.keys()
+  Out[3]: 
+  [OMKey(4,8,0),
+   OMKey(4,10,0),
+   OMKey(10,10,0),
+   OMKey(11,14,0),
+   OMKey(11,19,0),
+   OMKey(11,20,0),
+   OMKey(11,21,0),
+   OMKey(11,22,0),
+   OMKey(11,23,0),
+   OMKey(18,11,0)]
+
