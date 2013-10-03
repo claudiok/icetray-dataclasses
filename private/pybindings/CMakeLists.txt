@@ -53,6 +53,7 @@ i3_add_pybindings(dataclasses
   I3MapString.cxx
   I3MapInt.cxx
   I3MapKey.cxx
+  I3MapI3ParticleID.cxx
   I3Orientation.cxx
   I3SuperDST.cxx
   ModuleKey.cxx

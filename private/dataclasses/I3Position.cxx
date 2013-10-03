@@ -33,13 +33,45 @@ I3_SERIALIZABLE(I3Position);
 I3Position::I3Position(const I3Direction& d):
 x_(d.GetX()),
 y_(d.GetY()),
-z_(d.GetY()),
+z_(d.GetZ()),
 r_(1),
 theta_(d.CalcTheta()),
 phi_(d.CalcPhi()),
 rho_(sin(theta_)),
 isCalculated_(true)
 {}
+
+//-----------------------------------------------------------
+I3Position::I3Position(double r1, double r2, double r3, RefFrame frame){
+  // Store position according to reference frame f
+  isCalculated_=false;
+  
+  switch (frame) {
+    case car: // Input given in Cartesian coordinates
+      x_=r1;
+      y_=r2;
+      z_=r3;
+      break;
+      
+    case sph: // Input given in Spherical coordinates
+      r_=r1;
+      theta_=r2;
+      phi_=r3;
+      CalcCarCylFromSph();
+      break;
+      
+    case cyl: // Input given in Cylindrical coordinates
+      rho_=r1;
+      phi_=r2;
+      z_=r3;
+      CalcCarSphFromCyl();
+      break;
+      
+    default: // Unsupported reference frame
+      log_fatal("Unsupported reference frame passed to I3Position::SetPosition: %i",frame);
+      break;
+  }
+}
 
 //-----------------------------------------------------------
 void I3Position::SetPosition(const I3Position& p) {
@@ -64,35 +96,13 @@ void I3Position::SetPos(double x, double y, double z) {
 //-----------------------------------------------------------
 void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
 {
-// Store position according to reference frame f
-  isCalculated_=false;
+  *this=I3Position(r1,r2,r3,frame);
+}
 
-  switch (frame) {
-  case car: // Input given in Cartesian coordinates
-    x_=r1;
-    y_=r2;
-    z_=r3;
-    //CalcSphCylFromCar();
-    break;
-      
-  case sph: // Input given in Spherical coordinates
-    r_=r1;
-    theta_=r2;
-    phi_=r3;
-    CalcCarCylFromSph();
-    break;
-
-  case cyl: // Input given in Cylindrical coordinates
-    rho_=r1;
-    phi_=r2;
-    z_=r3;
-    CalcCarSphFromCyl();
-    break;
-    
-  default: // Unsupported reference frame
-    log_fatal("Unsupported reference frame passed to I3Position::SetPosition: %i",frame);
-    break;
-  }
+//-----------------------------------------------------------
+void I3Position::SetPos(double r1, double r2, double r3, RefFrame frame)
+{
+  *this=I3Position(r1,r2,r3,frame);
 }
 
 //-----------------------------------------------------------
@@ -121,7 +131,7 @@ void I3Position::NullPos() {
 
 //-----------------------------------------------------------
 void I3Position::ShiftCoordSystem(const I3Position& p) {
-  SetPosition(x_-p.x_, y_-p.y_, z_-p.z_);
+  SetPosition(x_-p.x_, y_-p.y_, z_-p.z_,car);
 }
 
 //-----------------------------------------------------------

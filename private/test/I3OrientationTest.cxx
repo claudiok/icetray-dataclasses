@@ -100,7 +100,7 @@ TEST(coord_change)
 	
 	cout <<"Setting values for dir in zen=0,azi=0 (i.e. down)..."<<endl;
 	I3Direction ddir;
-	ddir.SetDirection(0,0);
+	ddir = I3Direction(0,0);
 	dir.SetOrientation(ddir);
 	ENSURE_DISTANCE(dir.GetX(),0.0,0.0001,"dir.GetX failed");
 	ENSURE_DISTANCE(dir.GetY(),0.0,0.0001,"dir.GetY failed");
@@ -185,7 +185,7 @@ TEST(setdir)
 	ENSURE_DISTANCE(d.GetUpZ(), 1./sqrt(2.),0.0001);
 	
 	// check the constructor from I3Direction
-	ddir.SetDirection(1,1,1);
+	ddir = I3Direction(1,1,1);
 	I3Orientation o(ddir);
 	ENSURE_DISTANCE(o.GetX(),1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(o.GetY(),1./sqrt(3.),0.0001);
@@ -194,7 +194,7 @@ TEST(setdir)
 	ENSURE_DISTANCE(o.GetAzimuth(),(360-135)*deg,0.0001);
 
 	// check the assignment operator from I3Direction
-	ddir.SetDirection(1,1,1);
+	ddir = I3Direction(1,1,1);
 	d = ddir;
 	ENSURE_DISTANCE(d.GetX(),1./sqrt(3.),0.0001);
 	ENSURE_DISTANCE(d.GetY(),1./sqrt(3.),0.0001);

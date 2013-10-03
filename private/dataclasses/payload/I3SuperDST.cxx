@@ -4,7 +4,7 @@
  *
  * (c) 2010 the IceCube Collaboration
  *
- * $Id:$
+ * $Id$
  * @version $Revision$
  * @date $Date$
  * @author Jakob van Santen <vansanten@wisc.edu>
@@ -331,7 +331,7 @@ I3SuperDST::Unpack() const
 		/* Ensure that pulses do not overlap. */
 		for ( ; next < target.second.end(); current++, next++)
 			current->SetWidth(std::min(current->GetWidth(),
-			    next->GetTime()-current->GetTime()));
+			    float(next->GetTime()-current->GetTime())));
 	}
 	
 	return unpacked_;

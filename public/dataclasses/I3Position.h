@@ -68,9 +68,7 @@ class I3Position : public I3FrameObject
    * If it is I3Position::cyl the three coordinates are treated as 
    *   cylindrical rho, phi, and z
    */
-  I3Position(double x, double y, double z, RefFrame f) {
-    SetPosition(x,y,z,f);
-  }
+	I3Position(double x, double y, double z, RefFrame f);
 
   /**
    * Constructor from cartesian coordinates
@@ -111,10 +109,8 @@ class I3Position : public I3FrameObject
   /**
    * Store position r in ref frame f
    */
-  void SetPosition(double r1, double r2, double r3, RefFrame f);
-  inline void SetPos(double r1, double r2, double r3, RefFrame f) {
-    SetPosition(r1, r2, r3, f);
-  }
+  void SetPosition(double r1, double r2, double r3, RefFrame f) __attribute__((deprecated));
+  void SetPos(double r1, double r2, double r3, RefFrame f)  __attribute__((deprecated));
 
   /**
    * Reset all elements of I3Position to NAN

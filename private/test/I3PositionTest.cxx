@@ -107,6 +107,15 @@ TEST(cylindrical_construction)
   ENSURE_DISTANCE(p1.GetTheta(),atan(3./4),0.0001);
 }
 
+TEST(i3direction_construction)
+{
+  I3Direction d(1.1,2.2,3.3);
+  I3Position p(d);
+  ENSURE(p.GetX()==d.GetX());
+  ENSURE(p.GetY()==d.GetY());
+  ENSURE(p.GetZ()==d.GetZ());
+}
+
 /**
  * Make sure that the changing of coordinate systems works well
  */
@@ -117,7 +126,7 @@ TEST(coord_transforms)
   //I3PositionPtr q_ptr(new I3Position(1,2,3));
   I3Position q(1,2,3);
   cout <<"Setting position q to: 2,2,2 in car..."<<endl;
-  q.SetPosition(2,2,2,I3Position::car);
+  q=I3Position(2,2,2,I3Position::car);
   
   ENSURE_DISTANCE(p.GetX(),4.0,0.0001,"p.GetX failed");
   ENSURE_DISTANCE(p.GetY(),3.0,0.0001,"p.GetY failed");
@@ -131,8 +140,8 @@ TEST(coord_transforms)
   ENSURE_DISTANCE(q.GetY(),2.0,0.0001,"q.GetY failed");
   ENSURE_DISTANCE(q.GetZ(),2.0,0.0001,"q.GetZ failed");
   
-  ENSURE_DISTANCE(p.CalcDistance(q),3.0,0.0001,"p.CalcDistance(q) failed");
-  ENSURE_DISTANCE(q.CalcDistance(p),3.0,0.0001,"q.CalcDistance(p) failed");
+  ENSURE_DISTANCE((p-q).Magnitude(),3.0,0.0001,"(p-q).Magnitude() failed");
+  ENSURE_DISTANCE((q-p).Magnitude(),3.0,0.0001,"(q-p).Magnitude() failed");
   
   cout <<"Rotating p by Pi/4 around z-axis..."<<endl;
   p.RotateZ(3.141592/4);
@@ -154,7 +163,7 @@ TEST(coord_transforms)
   
   cout <<"Creating position s and setting coordinates in sph..."<<endl;
   I3Position s;
-  s.SetPosition(1.732050808,0.955316618,3.141592/4,I3Position::sph);
+  s=I3Position(1.732050808,0.955316618,3.141592/4,I3Position::sph);
   ENSURE_DISTANCE(s.GetX(),1.0,0.0001,"s.GetX failed");
   ENSURE_DISTANCE(s.GetY(),1.0,0.0001,"s.GetY failed");
   ENSURE_DISTANCE(s.GetZ(),1.0,0.0001,"s.GetZ failed");
@@ -178,13 +187,13 @@ TEST(coord_transforms)
   ENSURE_DISTANCE(f.GetZ(),1.0,0.0001,"f.GetZ failed");
   
   cout <<"Shifting coordinate system of f by s..."<<endl;
-  f.ShiftCoordSystem(s);
+  f -= s;
   ENSURE_DISTANCE(f.GetX(),0.0,0.0001,"shifted f.GetX failed");
   ENSURE_DISTANCE(f.GetY(),0.0,0.0001,"shifted f.GetY failed");
   ENSURE_DISTANCE(f.GetZ(),0.0,0.0001,"shifted f.GetZ failed");
   
   cout <<"Shifting coordinate system of f by p..."<<endl;
-  f.ShiftCoordSystem(p);
+  f -= p;
   ENSURE_DISTANCE(f.GetX(),0.0,0.0001,"shifted f.GetX failed");
   ENSURE_DISTANCE(f.GetY(),-0.707108,0.0001,"shifted f.GetY failed");
   ENSURE_DISTANCE(f.GetZ(),-4.94975,0.0001,"shifted f.GetZ failed");

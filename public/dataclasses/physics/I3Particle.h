@@ -20,11 +20,367 @@
 #ifndef __CINT__
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-
-#include <boost/bimap/bimap.hpp>
-#include <boost/bimap/multiset_of.hpp>
 #include <boost/optional.hpp>
 #endif
+
+/**
+ * @brief 
+ */
+class I3Particle : public I3FrameObject
+{
+ public:
+
+  enum ParticleType { // NB: These match the PDG codes. Keep it that way!
+    unknown = 0,
+    Gamma = 22,
+    EPlus = -11,
+    EMinus = 11,
+    MuPlus = -13,
+    MuMinus = 13,
+    Pi0 = 111,
+    PiPlus = 211,
+    PiMinus = -211,
+    K0_Long = 130,
+    KPlus = 321,
+    KMinus = -321,
+    Neutron = 2112,
+    PPlus = 2212,
+    PMinus = -2212,
+    K0_Short = 310,
+    Eta = 221,
+    Lambda = 3122,
+    SigmaPlus = 3222,
+    Sigma0 = 3212,
+    SigmaMinus = 3112,
+    Xi0 = 3322,
+    XiMinus = 3312,
+    OmegaMinus = 3334,
+    NeutronBar = -2112,
+    LambdaBar = -3122,
+    SigmaMinusBar = -3222,
+    Sigma0Bar = -3212,
+    SigmaPlusBar = -3112,
+    Xi0Bar = -3322,
+    XiPlusBar = -3312,
+    OmegaPlusBar = -3334,
+    DPlus = 411,
+    DMinus = -411,
+    D0 = 421,
+    D0Bar = -421,
+    DsPlus = 431,
+    DsMinusBar = -431,
+    LambdacPlus = 4122,
+    WPlus = 24,
+    WMinus = -24,
+    Z0 = 23,
+    NuE = 12,
+    NuEBar = -12,
+    NuMu = 14,
+    NuMuBar = -14,
+    TauPlus = -15,
+    TauMinus = 15,
+    NuTau = 16,
+    NuTauBar = -16,
+    
+    /* Nuclei */
+    He3Nucleus = 1000020030,
+    He4Nucleus = 1000020040,
+    Li6Nucleus = 1000030060,
+    Li7Nucleus = 1000030070,
+    Be9Nucleus = 1000040090,
+    B10Nucleus = 1000050100,
+    B11Nucleus = 1000050110,
+    C12Nucleus = 1000060120,
+    C13Nucleus = 1000060130,
+    N14Nucleus = 1000070140,
+    N15Nucleus = 1000070150,
+    O16Nucleus = 1000080160,
+    O17Nucleus = 1000080170,
+    O18Nucleus = 1000080180,
+    F19Nucleus = 1000090190,
+    Ne20Nucleus = 1000100200,
+    Ne21Nucleus = 1000100210,
+    Ne22Nucleus = 1000100220,
+    Na23Nucleus = 1000110230,
+    Mg24Nucleus = 1000120240,
+    Mg25Nucleus = 1000120250,
+    Mg26Nucleus = 1000120260,
+    Al26Nucleus = 1000130260,
+    Al27Nucleus = 1000130270,
+    Si28Nucleus = 1000140280,
+    Si29Nucleus = 1000140290,
+    Si30Nucleus = 1000140300,
+    Si31Nucleus = 1000140310,
+    Si32Nucleus = 1000140320,
+    P31Nucleus = 1000150310,
+    P32Nucleus = 1000150320,
+    P33Nucleus = 1000150330,
+    S32Nucleus = 1000160320,
+    S33Nucleus = 1000160330,
+    S34Nucleus = 1000160340,
+    S35Nucleus = 1000160350,
+    S36Nucleus = 1000160360,
+    Cl35Nucleus = 1000170350,
+    Cl36Nucleus = 1000170360,
+    Cl37Nucleus = 1000170370,
+    Ar36Nucleus = 1000180360,
+    Ar37Nucleus = 1000180370,
+    Ar38Nucleus = 1000180380,
+    Ar39Nucleus = 1000180390,
+    Ar40Nucleus = 1000180400,
+    Ar41Nucleus = 1000180410,
+    Ar42Nucleus = 1000180420,
+    K39Nucleus = 1000190390,
+    K40Nucleus = 1000190400,
+    K41Nucleus = 1000190410,
+    Ca40Nucleus = 1000200400,
+    Ca41Nucleus = 1000200410,
+    Ca42Nucleus = 1000200420,
+    Ca43Nucleus = 1000200430,
+    Ca44Nucleus = 1000200440,
+    Ca45Nucleus = 1000200450,
+    Ca46Nucleus = 1000200460,
+    Ca47Nucleus = 1000200470,
+    Ca48Nucleus = 1000200480,
+    Sc44Nucleus = 1000210440,
+    Sc45Nucleus = 1000210450,
+    Sc46Nucleus = 1000210460,
+    Sc47Nucleus = 1000210470,
+    Sc48Nucleus = 1000210480,
+    Ti44Nucleus = 1000220440,
+    Ti45Nucleus = 1000220450,
+    Ti46Nucleus = 1000220460,
+    Ti47Nucleus = 1000220470,
+    Ti48Nucleus = 1000220480,
+    Ti49Nucleus = 1000220490,
+    Ti50Nucleus = 1000220500,
+    V48Nucleus = 1000230480,
+    V49Nucleus = 1000230490,
+    V50Nucleus = 1000230500,
+    V51Nucleus = 1000230510,
+    Cr50Nucleus = 1000240500,
+    Cr51Nucleus = 1000240510,
+    Cr52Nucleus = 1000240520,
+    Cr53Nucleus = 1000240530,
+    Cr54Nucleus = 1000240540,
+    Mn52Nucleus = 1000250520,
+    Mn53Nucleus = 1000250530,
+    Mn54Nucleus = 1000250540,
+    Mn55Nucleus = 1000250550,
+    Fe54Nucleus = 1000260540,
+    Fe55Nucleus = 1000260550,
+    Fe56Nucleus = 1000260560,
+    Fe57Nucleus = 1000260570,
+    Fe58Nucleus = 1000260580,
+
+    /* The following are fake particles used in Icetray and have no official codes */
+    /* The section abs(code) > 2000000000 is reserved for this kind of use */
+    CherenkovPhoton = 2000009900,
+    Nu = -2000000004,
+    Monopole = -2000000041,
+    Brems = -2000001001,
+    DeltaE = -2000001002,
+    PairProd = -2000001003,
+    NuclInt = -2000001004,
+    MuPair = -2000001005,
+    Hadrons = -2000001006,
+    ContinuousEnergyLoss = -2000001111,
+    FiberLaser = -2000002100,
+    N2Laser = -2000002101,
+    YAGLaser = -2000002201,
+    STauPlus = -2000009131,
+    STauMinus = -2000009132,
+  };
+
+  enum ParticleShape { 
+    Null = 0, 
+    Primary = 10, 
+    TopShower = 20, 
+    Cascade = 30, 
+    InfiniteTrack = 40, 
+    StartingTrack = 50, 
+    StoppingTrack = 60, 
+    ContainedTrack = 70,
+    MCTrack = 80,
+    Dark = 90
+  };
+
+  enum FitStatus {
+    NotSet = -1,
+    OK = 0,
+    GeneralFailure = 10,
+    InsufficientHits = 20,
+    FailedToConverge = 30,
+    MissingSeed = 40,
+    InsufficientQuality = 50
+  };
+
+  enum LocationType {
+    Anywhere = 0,
+    IceTop = 10,
+    InIce = 20,
+    InActiveVolume = 30
+  };
+
+ public:
+  /** @brief Constructor for a simple particle with generated ID
+   * useful in applications where the shape and type of an particle are in focus
+   * @param shape Shape of the track
+   * @param type Particle type
+  */
+  I3Particle(ParticleShape shape = Null, ParticleType type = unknown);
+
+  /** @brief Constructor for I3Particle, focusing on directional properties
+   * @param pos Position of the vertex
+   * @param dir Direction of the track
+   * @param vertextime time that the vertex is happening
+   * @param shape Shape of the track
+   * @param type Particle type
+   */
+#ifndef __CINT__
+  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
+             ParticleShape shape = Null, double length=NAN);
+#else
+  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
+             ParticleShape shape, double length);
+#endif
+
+#ifndef __CINT__
+  /** @brief Constructor for particle from boost::optional<I3Particle>
+   * @param p A particle
+   */
+  I3Particle(const boost::optional<I3Particle>& p);
+#endif
+
+  virtual ~I3Particle();
+
+  bool IsTrack() const;
+  bool IsCascade() const;
+  bool IsPrimary() const;
+  bool IsTopShower() const;
+  bool IsNeutrino() const;
+  bool IsNucleus() const;
+
+  bool HasPosition() const;
+  bool HasDirection() const;
+  bool HasEnergy() const;
+
+  operator I3ParticleID() const{ return ID_; }
+  I3Particle operator=(const I3Particle& rhs) {
+    ID_ = rhs.ID_;
+    pdgEncoding_ = rhs.pdgEncoding_;
+    shape_ = rhs.shape_;
+    status_ = rhs.status_;
+    pos_ = rhs.pos_;
+    dir_ = rhs.dir_;
+    time_ = rhs.time_;
+    energy_ = rhs.energy_;
+    length_ = rhs.length_;
+    speed_ = rhs.speed_;
+    locationType_ = rhs.locationType_;
+    return *this;
+  }
+	
+  I3ParticleID GetID() const { return ID_; }
+  int32_t GetMinorID() const { return ID_.minorID; }
+  uint64_t GetMajorID() const { return ID_.majorID; }
+
+  int32_t GetPdgEncoding() const { return pdgEncoding_; }
+  void SetPdgEncoding(int32_t newid) { pdgEncoding_=newid; }
+    
+  ParticleType GetType() const { return ParticleType(pdgEncoding_); };
+  std::string GetTypeString() const;
+
+  void SetType(ParticleType type) { pdgEncoding_ = type; };
+  void SetTypeString(const std::string &str);
+
+  ParticleShape GetShape() const { return shape_; }
+  std::string GetShapeString() const;
+  void SetShape(ParticleShape shape) { shape_ = shape; }
+  void SetShapeString(const std::string &str);
+
+  FitStatus GetFitStatus() const { return status_; }
+  std::string GetFitStatusString() const;
+  void SetFitStatus(FitStatus status) { status_ = status; }
+  void SetFitStatusString(const std::string &str);
+
+  LocationType GetLocationType() const { return locationType_; }
+  std::string GetLocationTypeString() const;
+  void SetLocationType(LocationType type) { locationType_ = type; }
+  void SetLocationTypeString(const std::string &str);
+
+  const I3Position& GetPos() const { return pos_; }
+  void SetPos(const I3Position& p) { pos_=p; }
+  void SetPos(double p1, double p2, double p3, 
+	      I3Position::RefFrame frame)
+    { pos_=I3Position(p1,p2,p3,frame); }
+  void SetPos(double x, double y, double z)
+    { pos_=I3Position(x,y,z); }
+
+  const I3Direction& GetDir() const { return dir_; }
+  void SetDir(const I3Direction& d) { dir_=d; }
+  void SetDir(double zen, double azi) { dir_=I3Direction(zen,azi); }
+  void SetDir(double x, double y, double z) 
+    { dir_=I3Direction(x,y,z); }
+
+  void SetThetaPhi(double theta, double phi) { dir_.SetThetaPhi(theta,phi); }
+
+  double GetZenith() const { return dir_.GetZenith(); }
+  double GetAzimuth() const { return dir_.GetAzimuth(); }
+  double GetX() const { return pos_.GetX(); }
+  double GetY() const { return pos_.GetY(); }
+  double GetZ() const { return pos_.GetZ(); }
+
+  double GetTime() const { return time_; }
+  void SetTime(double t) { time_ = t; }
+
+  double GetLength() const { return length_; }
+  void SetLength(double length) { length_ = length; }
+
+  double GetEnergy() const { return energy_; }
+  void SetEnergy(double energy) { energy_ = energy; }
+
+  double GetSpeed() const { return speed_; }
+  void SetSpeed(double s) { speed_ = s; }
+
+  I3Position ShiftAlongTrack(double dist) const;
+
+  I3Position GetStartPos() const;
+
+  double GetStartTime() const;
+
+  I3Position GetStopPos() const;
+
+  double GetStopTime() const;
+
+ private:
+
+  I3ParticleID ID_;
+  int32_t pdgEncoding_;
+  ParticleShape shape_;
+  FitStatus status_;
+  I3Position pos_;
+  I3Direction dir_;
+  double time_;
+  double energy_;
+  double length_;
+  double speed_;
+  LocationType locationType_;
+
+  /** @brief Constructor for particle as a unique identifier by majorID and minorID
+   * useful in iteration processes (in I3MCTree) where unique tagging is required
+   * @param major MajorID of that particle
+   * @param minor MinorID of that particle
+   */
+  I3Particle(const uint64_t major, const int32_t minor);
+
+  friend class I3Stochastic;
+	 
+  friend class boost::serialization::access;
+  template <class Archive> void save(Archive & ar, unsigned version) const;
+  template <class Archive> void load(Archive & ar, unsigned version);
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
+};
 
 static const unsigned i3particle_version_ = 5;
 
@@ -38,15 +394,8 @@ static const unsigned i3particle_version_ = 5;
  * should be updated whenver members or new enums are added to
  * the class.
  */
-#define I3PARTICLE_H_RDMCParticleTypes_ParticleType                               \
-    (unknown)(Gamma)(EPlus)(EMinus)(Nu)(MuPlus)(MuMinus)(Pi0)(PiPlus)(PiMinus)    \
-    (KPlus)(KMinus)(PPlus)(PMinus)(TauPlus)(TauMinus)(Monopole)(NuE)(NuMu)        \
-    (NuTau)(NuEBar)(NuMuBar)(NuTauBar)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)  \
-    (Hadrons)(FiberLaser)(N2Laser)(YAGLaser)(ZPrimary)(APrimary)(CRProton)        \
-    (CRHelium)(CROxygen)(CRSilicon)(CRIron)(Elph)
-
 #define I3PARTICLE_H_I3Particle_ParticleType                                      \
-    (UnknownWithPdgEncoding)(unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0) \
+    (unknown)(Gamma)(EPlus)(EMinus)(MuPlus)(MuMinus)(Pi0) \
     (PiPlus)(PiMinus)(K0_Long)(KPlus)(KMinus)(Neutron)(PPlus)(PMinus)(K0_Short)   \
     (Eta)(Lambda)(SigmaPlus)(Sigma0)(SigmaMinus)(Xi0)(XiMinus)(OmegaMinus)        \
     (NeutronBar)(LambdaBar)(SigmaMinusBar)(Sigma0Bar)(SigmaPlusBar)(Xi0Bar)       \
@@ -82,459 +431,6 @@ static const unsigned i3particle_version_ = 5;
 
 #define I3PARTICLE_H_I3Particle_LocationType                                      \
     (Anywhere)(IceTop)(InIce)(InActiveVolume)
-
-namespace RDMCParticleTypes{
-  enum ParticleType {
-    unknown = -100,
-    Gamma = 1,
-    EPlus = 2,
-    EMinus = 3,
-    Nu = 4,
-    MuPlus = 5,
-    MuMinus = 6,
-    Pi0 = 7,
-    PiPlus = 8,
-    PiMinus = 9,
-    KPlus = 11,
-    KMinus = 12,
-    PPlus = 14,
-    PMinus = 15,
-    TauPlus = 33,
-    TauMinus = 34,
-    Monopole = 41,
-    NuE = 201,
-    NuMu = 202,
-    NuTau = 203,
-    NuEBar = 204,
-    NuMuBar = 205,
-    NuTauBar = 206,
-    Brems = 1001,
-    DeltaE = 1002,
-    PairProd = 1003,
-    NuclInt = 1004,
-    MuPair = 1005,
-    Hadrons = 1006,
-    FiberLaser = 2100,
-    N2Laser = 2101,
-    YAGLaser = 2201,
-    ZPrimary = 3000,
-    APrimary = 3500,
-    CRProton = 4001,
-    CRHelium = 4004,
-    CROxygen = 4016,
-    CRSilicon = 4028,
-    CRIron = 4056,
-    Elph = 9999
-  };
-};
-
-/**
- * @brief 
- */
-class I3Particle : public I3FrameObject
-{
-
-  static int32_t global_last_pid_;
-  static int32_t global_minor_id_;
-  static uint64_t global_major_id_;
-    
- public:
-
-  enum ParticleType {
-    UnknownWithPdgEncoding = -1,  
-    unknown = 0,
-    Gamma = 1,
-    EPlus = 2,
-    EMinus = 3,
-    MuPlus = 5,
-    MuMinus = 6,
-    Pi0 = 7,
-    PiPlus = 8,
-    PiMinus = 9,
-    K0_Long = 10,
-    KPlus = 11,
-    KMinus = 12,
-    Neutron = 13,
-    PPlus = 14,
-    PMinus = 15,
-    K0_Short = 16,
-    Eta = 17,
-    Lambda = 18,
-    SigmaPlus = 19,
-    Sigma0 = 20,
-    SigmaMinus = 21,
-    Xi0 = 22,
-    XiMinus = 23,
-    OmegaMinus = 24,
-    NeutronBar = 25, // as found in "topsimulator"
-    LambdaBar = 26,
-    SigmaMinusBar = 27,
-    Sigma0Bar = 28,
-    SigmaPlusBar = 29,
-    Xi0Bar = 30,
-    XiPlusBar = 31,
-    OmegaPlusBar = 32,
-    DPlus = 35,
-    DMinus = 36,
-    D0 = 37,
-    D0Bar = 38,
-    DsPlus = 39,
-    DsMinusBar = 40,
-    LambdacPlus = 41,
-    WPlus = 42,
-    WMinus = 43,
-    Z0 = 44,
-    NuE = 66,
-    NuEBar = 67,
-    NuMu = 68,
-    NuMuBar = 69,
-    TauPlus = 131,
-    TauMinus = 132,
-    NuTau = 133,
-    NuTauBar = 134,
-    /**
-     * In CORSIKA nuclei numbers
-     * are A x 100 + Z 
-     * (not all of those are actually stable,
-     * they are included here for compatibility
-     * with software that might have generated
-     * them by casting ParticleType to int)
-     */
-    He3Nucleus = 302,
-    He4Nucleus = 402,
-    Li6Nucleus = 603,
-    Li7Nucleus = 703,
-    Be9Nucleus = 904,
-    B10Nucleus = 1005,
-    B11Nucleus = 1105,
-    C12Nucleus = 1206,
-    C13Nucleus = 1306,
-    N14Nucleus = 1407,
-    N15Nucleus = 1507,
-    O16Nucleus = 1608,
-    O17Nucleus = 1708,
-    O18Nucleus = 1808,
-    F19Nucleus = 1909,
-    Ne20Nucleus = 2010,
-    Ne21Nucleus = 2110,
-    Ne22Nucleus = 2210,
-    Na23Nucleus = 2311,
-    Mg24Nucleus = 2412,
-    Mg25Nucleus = 2512,
-    Mg26Nucleus = 2612,
-    Al26Nucleus = 2613,
-    Al27Nucleus = 2713,
-    Si28Nucleus = 2814,
-    Si29Nucleus = 2914,
-    Si30Nucleus = 3014,
-    Si31Nucleus = 3114,
-    Si32Nucleus = 3214,
-    P31Nucleus = 3115,
-    P32Nucleus = 3215,
-    P33Nucleus = 3315,
-    S32Nucleus = 3216,
-    S33Nucleus = 3316,
-    S34Nucleus = 3416,
-    S35Nucleus = 3516,
-    S36Nucleus = 3616,
-    Cl35Nucleus = 3517,
-    Cl36Nucleus = 3617,
-    Cl37Nucleus = 3717,
-    Ar36Nucleus = 3618,
-    Ar37Nucleus = 3718,
-    Ar38Nucleus = 3818,
-    Ar39Nucleus = 3918,
-    Ar40Nucleus = 4018,
-    Ar41Nucleus = 4118,
-    Ar42Nucleus = 4218,
-    K39Nucleus = 3919,
-    K40Nucleus = 4019,
-    K41Nucleus = 4119,
-    Ca40Nucleus = 4020,
-    Ca41Nucleus = 4120,
-    Ca42Nucleus = 4220,
-    Ca43Nucleus = 4320,
-    Ca44Nucleus = 4420,
-    Ca45Nucleus = 4520,
-    Ca46Nucleus = 4620,
-    Ca47Nucleus = 4720,
-    Ca48Nucleus = 4820,
-    Sc44Nucleus = 4421,
-    Sc45Nucleus = 4521,
-    Sc46Nucleus = 4621,
-    Sc47Nucleus = 4721,
-    Sc48Nucleus = 4821,
-    Ti44Nucleus = 4422,
-    Ti45Nucleus = 4522,
-    Ti46Nucleus = 4622,
-    Ti47Nucleus = 4722,
-    Ti48Nucleus = 4822,
-    Ti49Nucleus = 4922,
-    Ti50Nucleus = 5022,
-    V48Nucleus = 4823,
-    V49Nucleus = 4923,
-    V50Nucleus = 5023,
-    V51Nucleus = 5123,
-    Cr50Nucleus = 5024,
-    Cr51Nucleus = 5124,
-    Cr52Nucleus = 5224,
-    Cr53Nucleus = 5324,
-    Cr54Nucleus = 5424,
-    Mn52Nucleus = 5225,
-    Mn53Nucleus = 5325,
-    Mn54Nucleus = 5425,
-    Mn55Nucleus = 5525,
-    Fe54Nucleus = 5426,
-    Fe55Nucleus = 5526,
-    Fe56Nucleus = 5626,
-    Fe57Nucleus = 5726,
-    Fe58Nucleus = 5826,
-    CherenkovPhoton = 9900,
-    /**
-     *Particle types not in CORSIKA
-     */
-    Nu = -4,
-    Monopole = -41,
-    Brems = -1001,
-    DeltaE = -1002,
-    PairProd = -1003,
-    NuclInt = -1004,
-    MuPair = -1005,
-    Hadrons = -1006,
-    ContinuousEnergyLoss = -1111, // special type used by MMC with the -recc option
-    FiberLaser = -2100,
-    N2Laser = -2101,
-    YAGLaser = -2201,
-    /**
-     * Make SUSY partners -(9000 + SM_number)
-     */
-    STauPlus = -9131,
-    STauMinus = -9132
-  };
-
-  enum ParticleShape { 
-    Null = 0, 
-    Primary = 10, 
-    TopShower = 20, 
-    Cascade = 30, 
-    InfiniteTrack = 40, 
-    StartingTrack = 50, 
-    StoppingTrack = 60, 
-    ContainedTrack = 70,
-    MCTrack = 80,
-    Dark = 90
-  };
-
-  enum FitStatus {
-    NotSet = -1,
-    OK = 0,
-    GeneralFailure = 10,
-    InsufficientHits = 20,
-    FailedToConverge = 30,
-    MissingSeed = 40,
-    InsufficientQuality = 50
-  };
-
-  enum LocationType {
-    Anywhere = 0,
-    IceTop = 10,
-    InIce = 20,
-    InActiveVolume = 30
-  };
-
- private:
-
-  int32_t ID_;
-  uint64_t major_ID_;
-  int32_t parentID_;
-  int32_t primaryID_;
-  int32_t pdgEncoding_; // this replaces ParticleType
-  ParticleShape shape_;
-  FitStatus status_;
-  I3Position pos_;
-  I3Direction dir_;
-  double time_;
-  double energy_;
-  double length_;
-  double speed_;
-  std::vector<I3Particle> composite_; //!
-  LocationType locationType_;
-
- public:
-  /** @brief Constructor for a simple particle with generated ID
-   * useful in applications where the exact nature of an particle are in focus
-   * @param shape Shape of the track
-   * @param type Particle type
-  */
-  I3Particle(ParticleShape shape = Null, ParticleType type = unknown);
-  /** @brief Constructor for particle as a unique identifier by majorID and minorID
-   * useful in iteration processes (in I3MCTree) where unique tagging is required
-   * @param major MajorID of that particle
-   * @param minor MinorID of that particle
-   */
-#ifndef __CINT__
-  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
-             ParticleShape shape = Null, double length=NAN);
-#else
-  I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
-             ParticleShape shape, double length);
-#endif
-
-#ifndef __CINT__
-  /** @brief Constructor for particle from boost::optional<I3Particle>
-   * @param p A particle
-   */
-  I3Particle(const boost::optional<I3Particle>& p);
-#endif
-
-  virtual ~I3Particle();
-
-  bool IsTrack() const;
-  bool IsCascade() const;
-  bool IsPrimary() const;
-  bool IsTopShower() const;
-  bool IsNeutrino() const;
-  bool IsNucleus() const;
-
-  bool HasPosition() const;
-  bool HasDirection() const;
-  bool HasEnergy() const;
-
-  operator I3ParticleID() const{ I3ParticleID id={major_ID_, ID_}; return id; }
-  I3Particle operator=(const I3Particle& rhs) {
-    ID_ = rhs.ID_;
-    major_ID_ = rhs.major_ID_;
-    parentID_ = rhs.parentID_;
-    primaryID_ = rhs.primaryID_;
-    pdgEncoding_ = rhs.pdgEncoding_;
-    shape_ = rhs.shape_;
-    status_ = rhs.status_;
-    pos_ = rhs.pos_;
-    dir_ = rhs.dir_;
-    time_ = rhs.time_;
-    energy_ = rhs.energy_;
-    length_ = rhs.length_;
-    speed_ = rhs.speed_;
-    composite_ = rhs.composite_;
-    locationType_ = rhs.locationType_;
-    return *this;
-  }
-	
-  int32_t GetID() const { 
-    log_warn("I3Particle::GetID is deprecated.  Please use I3Particle::GetMinorID.");
-    return ID_; 
-  }
-  int32_t GetMinorID() const { return ID_; }
-  uint64_t GetMajorID() const { return major_ID_; }
-
-  int32_t GetParentID() const { return parentID_; }
-  int32_t GetPrimaryID() const { return primaryID_; }
-
-  int32_t GetPdgEncoding() const { return pdgEncoding_; }
-  void SetPdgEncoding(int32_t newid) { pdgEncoding_=newid; }
-    
-  ParticleType GetType() const;
-  std::string GetTypeString() const;
-
-  void SetType(ParticleType type);
-  void SetRDMCType(int type);
-  void SetTypeString(const std::string &str);
-
-  ParticleShape GetShape() const { return shape_; }
-  std::string GetShapeString() const;
-  void SetShape(ParticleShape shape) { shape_ = shape; }
-  void SetShapeString(const std::string &str);
-
-  FitStatus GetFitStatus() const { return status_; }
-  std::string GetFitStatusString() const;
-  void SetFitStatus(FitStatus status) { status_ = status; }
-  void SetFitStatusString(const std::string &str);
-
-  LocationType GetLocationType() const { return locationType_; }
-  std::string GetLocationTypeString() const;
-  void SetLocationType(LocationType type) { locationType_ = type; }
-  void SetLocationTypeString(const std::string &str);
-
-  const I3Position& GetPos() const { return pos_; }
-  void SetPos(const I3Position& p) { pos_=p; }
-  void SetPos(double p1, double p2, double p3, 
-	      I3Position::RefFrame frame)
-    { pos_.SetPosition(p1,p2,p3,frame); }
-  void SetPos(double x, double y, double z)
-    { pos_=I3Position(x,y,z); }
-
-  const I3Direction& GetDir() const { return dir_; }
-  void SetDir(const I3Direction& d) { dir_=d; }
-  void SetDir(double zen, double azi) { dir_=I3Direction(zen,azi); }
-  void SetDir(double x, double y, double z) 
-    { dir_=I3Direction(x,y,z); }
-
-  void SetThetaPhi(double theta, double phi) { dir_.SetThetaPhi(theta,phi); }
-
-  double GetZenith() const { return dir_.GetZenith(); }
-  double GetAzimuth() const { return dir_.GetAzimuth(); }
-  double GetX() const { return pos_.GetX(); }
-  double GetY() const { return pos_.GetY(); }
-  double GetZ() const { return pos_.GetZ(); }
-
-  double GetTime() const { return time_; }
-  void SetTime(double t) { time_ = t; }
-
-  double GetLength() const { return length_; }
-  void SetLength(double length) { length_ = length; }
-
-  double GetEnergy() const { return energy_; }
-  void SetEnergy(double energy) { energy_ = energy; }
-
-  double GetSpeed() const { return speed_; }
-  void SetSpeed(double s) { speed_ = s; }
-
-  const std::vector<I3Particle>& GetComposite() const { return composite_; }
-  std::vector<I3Particle>& GetComposite() { return composite_; }
-
-  I3Position ShiftAlongTrack(double dist) const;
-
-  I3Position GetStartPos() const;
-
-  double GetStartTime() const;
-
-  I3Position GetStopPos() const;
-
-  double GetStopTime() const;
-
-
- private:
-
-  I3Particle(const uint64_t major, const int32_t minor);
-  /** @brief Constructor for a track or ray
-   * useful in reconstruction representations, where rather the position and directionality of the particle are in focus
-   * @param pos Position of the vertex
-   * @param dir Direction of the track
-   * @param vertextime time that the vertex is happening
-   * @param shape Shape of the track
-   * @param type Particle type
-   */
-  friend class I3Stochastic;
-	 
-  friend class boost::serialization::access;
-  template <class Archive> void save(Archive & ar, unsigned version) const;
-  template <class Archive> void load(Archive & ar, unsigned version);
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
-
-  ParticleType convert_rdmc(int) const ;
-
-#ifndef __CINT__
-  // conversion from ParticleType to pdgEncoding and vice versa
-  typedef boost::bimaps::bimap<boost::bimaps::multiset_of<ParticleType>, boost::bimaps::multiset_of<int32_t> > toPdgEncodingConversionTable_t;
-  static const toPdgEncodingConversionTable_t toPdgEncodingConversionTable_;
-#endif
-    
- public:
-    
-  static ParticleType ConvertFromPdgEncoding(int32_t);
-  static int32_t ConvertToPdgEncoding(ParticleType);
-
-};
 
 #ifndef __CINT__
 // template specialization for XML i/o

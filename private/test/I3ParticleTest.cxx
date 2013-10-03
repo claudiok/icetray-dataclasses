@@ -167,19 +167,3 @@ TEST(iscascade){
   ENSURE(piminus.IsCascade()); 
 }
 
-TEST(ParticleTypesDoStillWork)
-{
-    // ParticleTypes get converted to PDG encodings
-    // internally. Are they still consistent?
-    // (do not test I3Particle::UnknownWithPdgEncoding,
-    // which is not supposed to be used with SetType)
-
-#define THE_TEST(r, data, type)                         \
-    if (I3Particle::type != I3Particle::UnknownWithPdgEncoding) {   \
-        I3Particle test;                                \
-        test.SetType(I3Particle::type);                             \
-        ENSURE(test.GetType()==I3Particle::type);                   \
-    }
-
-    BOOST_PP_SEQ_FOR_EACH(THE_TEST, ~, I3PARTICLE_H_I3Particle_ParticleType)
-}
