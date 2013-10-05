@@ -64,7 +64,7 @@ I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double
   dir_(dir),
   time_(vertextime),
   energy_(NAN),
-  length_(NAN),
+  length_(length),
   speed_(I3Constants::c),
   locationType_(Anywhere)
 {

@@ -234,7 +234,7 @@ class I3Particle : public I3FrameObject
    * @param dir Direction of the track
    * @param vertextime time that the vertex is happening
    * @param shape Shape of the track
-   * @param type Particle type
+   * @param length length of the track, if applies
    */
 #ifndef __CINT__
   I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
