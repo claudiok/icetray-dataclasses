@@ -61,11 +61,18 @@ TEST(constructors)
   
   I3MCTree t3 = t1;
   ENSURE( t3.begin() != t3.end() , "Tree t3 is empty");
-  ENSURE( t1 == t3 , "assignment operator failed");
+  ENSURE( t1 == t3 , "t3 assignment operator failed");
   
-  I3MCTree t4(makeParticle());
+  t1.append_child(p1,makeParticle());
+  t1.append_child(p1,makeParticle());
+  t1.append_child(p1,makeParticle());
+  I3MCTree t4(t1);
   ENSURE( t4.begin() != t4.end() , "Tree t4 is empty");
-  ENSURE( t1 != t4 , "!= operator failed");
+  ENSURE( t1 == t4 , "t4 assignment operator failed");
+  
+  I3MCTree t5(makeParticle());
+  ENSURE( t5.begin() != t5.end() , "Tree t5 is empty");
+  ENSURE( t1 != t5 , "!= operator failed");
 }
 
 TEST(pre_order_iterator)

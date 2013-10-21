@@ -19,8 +19,8 @@ def test_tree(tree):
     d = dataclasses.I3Particle()
     tree.append_child(p,d)
 
-    print(d.major_id)
-    print(d.minor_id)
+    #print(d.major_id)
+    #print(d.minor_id)
     hit = dataclasses.I3MCHit(d.major_id,d.minor_id)
 
     light_generator = tree[hit]
@@ -39,6 +39,9 @@ def test_tree(tree):
     if len(tree) > 0:
         print(tree)
         print([pi.energy for pi in tree])
+        
+        t2 = dataclasses.I3MCTree(tree)
+        print(t2)
         
 
 # test an empty tree first

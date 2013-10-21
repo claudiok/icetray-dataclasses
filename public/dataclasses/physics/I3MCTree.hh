@@ -45,40 +45,10 @@ namespace TreeBase {
   Tree<T,Key,Hash>::Tree(const Tree<T,Key,Hash>& copy)
   {
     if (copy.head_) {
-      uint32_t newsize = copy.size(),elements=1;
-      typename tree_hash_map::const_iterator iter = copy.internalMap.find(*(copy.head_));
-      assert( iter != copy.internalMap.end() );
-      treeNode* newNodes = new treeNode[newsize];
-      std::pair<typename tree_hash_map::iterator,bool> insertResult;
-      treeNode* n = NULL;
-      const treeNode* nOther = &(iter->second);
-      const T* data = NULL;
-      newNodes[0].data = nOther->data;
-      insertResult = internalMap.insert(std::make_pair<Key,treeNode>(nOther->data,newNodes[0]));
-      i3_assert( insertResult.second );
-      n = &(insertResult.first->second);
-      head_ = nOther->data;
-      while(elements<newsize) {
-        if (nOther->firstChild != NULL) {
-          n->firstChild = &(newNodes[elements]);
-          data = &(nOther->data);
-          nOther = nOther->firstChild;
-        } else if (nOther->nextSibling != NULL) {
-          n->nextSibling = &(newNodes[elements]);
-          data = &(nOther->data);
-          nOther = nOther->nextSibling;
-        } else if (n->parent != NULL && nOther->parent != NULL) {
-          n = n->parent;
-          nOther = nOther->parent;
-          continue;
-        } else
-          break;
-        newNodes[elements].parent = n;
-        newNodes[elements].data = *data;
-        insertResult = internalMap.insert(std::make_pair<Key,treeNode>(*data,newNodes[elements]));
-        i3_assert( insertResult.second );
-        n = &(insertResult.first->second);
-        elements++;
+      BOOST_FOREACH(const T p,copy.get_heads()) {
+        insert_after(p);
+        BOOST_FOREACH(const T c,copy.children(p))
+          append_child(p,copy,c);
       }
     }
   }

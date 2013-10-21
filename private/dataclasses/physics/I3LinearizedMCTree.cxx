@@ -10,7 +10,7 @@
  *
  */
 
-/*#include "dataclasses/physics/I3LinearizedMCTree.h"
+#include "dataclasses/physics/I3LinearizedMCTree.h"
 #include "dataclasses/I3Constants.h"
 #include "icetray/I3Units.h"
 
@@ -104,10 +104,10 @@ I3Stochastic::Reconstruct(const I3Particle &parent) const
 	
 	return p;
 }
-*/
+
 /**
  * I3Particle::ShiftAlongTrack() without stupid assert()s.
- */ /*
+ */ 
 void
 I3Stochastic::Propagate(I3Particle &p, double tick)
 {
@@ -157,7 +157,9 @@ I3LinearizedMCTree::save(Archive &ar, unsigned version) const
 	typedef std::map<unsigned, std::list<I3Stochastic> > idx_map_t;
 	pid_map_t stripped;
 	
+	std::cout << "before copy ";
 	I3MCTree tree(*this);
+	std::cout << "| after copy ";
 	for (post_iterator it = tree.begin_post(); it != tree.end_post(); ) {
 		pre_iterator parent = tree.parent(it);
 		// Strip out nodes that
@@ -165,7 +167,7 @@ I3LinearizedMCTree::save(Archive &ar, unsigned version) const
 		//    b) are leaf nodes, and
 		//    c) are stochastic energy losses, and
 		//    d) are not the parents of already-stripped nodes
-		if (tree.is_valid(parent) && (it.number_of_children() == 0) 
+		if (parent != tree.end() && (tree.number_of_children(it) == 0) 
 		    && I3Stochastic::IsCompressible(*parent, *it) && (stripped.find(*it) == stripped.end())) {
 			stripped[*parent].push_back(I3Stochastic(*parent, *it));
 			it = tree.erase(it);
@@ -228,12 +230,12 @@ I3LinearizedMCTree::load(Archive &ar, unsigned version)
 		for ( ; parent != this->end() && (parents.front() != *parent); parent++, idx++) {}
 
 		// Insert new leaves in time order relative to existing siblings
-		sibling_iterator splice = parent.begin();
+		sibling_iterator splice = this->begin(parent);
 		for (unsigned i = 0; i < span.second; i++, leaf++) {
 			I3Particle reco = leaf->Reconstruct(*parent);
-			while (splice != parent.end() && reco.GetTime() >= splice->GetTime())
+			while (splice != this->end(parent) && reco.GetTime() >= splice->GetTime())
 				splice++;
-			if (splice == parent.end())
+			if (splice == this->end(parent))
 				splice = this->append_child(parent, reco);
 			else
 				splice = this->insert(splice, reco);
@@ -259,4 +261,4 @@ void I3LinearizedMCTree::load(boost::archive::xml_iarchive& ar, unsigned version
 }
 
 I3_SERIALIZABLE(I3LinearizedMCTree);
-*/
+

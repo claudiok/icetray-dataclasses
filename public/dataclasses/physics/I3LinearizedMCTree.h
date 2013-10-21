@@ -9,14 +9,14 @@
  * $Id$
  *
  */
-/*
+
 #ifndef DATACLASSES_I3LINEARIZEDMCTREE_H_INCLUDED
 #define DATACLASSES_I3LINEARIZEDMCTREE_H_INCLUDED
 
 #include "dataclasses/physics/I3MCTree.h"
 
 static const unsigned i3linearizedmctree_version_ = 0;
-*/
+
 /**
  * @brief A compact I3MCTree
  * 
@@ -32,7 +32,7 @@ static const unsigned i3linearizedmctree_version_ = 0;
  * the following exceptions:
  * - Times and energies will only be identical to within single precision
  * - The positions of daughter particles may deviate by up to 50 cm.
- */ /*
+ */
 class I3LinearizedMCTree : public I3MCTree {
 public:
 	I3LinearizedMCTree() {};
