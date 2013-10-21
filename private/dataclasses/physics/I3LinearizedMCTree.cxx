@@ -157,9 +157,7 @@ I3LinearizedMCTree::save(Archive &ar, unsigned version) const
 	typedef std::map<unsigned, std::list<I3Stochastic> > idx_map_t;
 	pid_map_t stripped;
 	
-	std::cout << "before copy ";
 	I3MCTree tree(*this);
-	std::cout << "| after copy ";
 	for (post_iterator it = tree.begin_post(); it != tree.end_post(); ) {
 		pre_iterator parent = tree.parent(it);
 		// Strip out nodes that
