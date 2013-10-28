@@ -1103,11 +1103,14 @@ TEST(erase)
   ENSURE( !t2.empty() , "tree is empty");
   
   I3MCTree::iterator iter(t2,p6);
-  ENSURE( t2.erase(iter) == t2.end() , "erase() did not return end()");
+  I3MCTree::iterator iter_ret(t2,p6);
+  iter_ret++;
+  ENSURE( t2.erase(iter) == iter_ret , "erase() did not return next iter");
   ENSURE( !t2.at(p6) , "child was not erased");
   ENSURE( !t2.empty() , "tree is empty after erasing child");
   
-  ENSURE( t2.erase(t2.begin()) == t2.end() , "erase() did not return end()");
+  iter_ret = t2.end();
+  ENSURE( t2.erase(t2.begin()) == iter_ret , "erase() did not return next iter");
   ENSURE( !t2.at(head2) , "head was not erased");
   ENSURE( !t2.at(p4) , "p4 was not erased");
   ENSURE( !t2.at(p5) , "p5 was not erased");
@@ -1124,16 +1127,44 @@ TEST(erase)
   ENSURE( !t3.empty() , "tree is empty");
   
   I3MCTree::fast_const_iterator iter2(t3,p9);
-  ENSURE( t3.erase(iter2) == t3.cend_fast() , "erase() did not return end()");
+  I3MCTree::fast_const_iterator iter2_ret(t3,p9);
+  iter2_ret++;
+  ENSURE( t3.erase(iter2) == iter2_ret , "erase() did not return next iter");
   ENSURE( !t3.at(p9) , "child was not erased");
   ENSURE( !t3.empty() , "tree is empty after erasing child");
   
   I3MCTree::fast_const_iterator iter3(t3,head3);
-  ENSURE( t3.erase(iter3) == t3.cend_fast() , "erase() did not return end()");
+  iter2_ret = t3.cend_fast();
+  ENSURE( t3.erase(iter3) == iter2_ret , "erase() did not return next iter");
   ENSURE( !t3.at(head3) , "head was not erased");
   ENSURE( !t3.at(p7) , "p7 was not erased");
   ENSURE( !t3.at(p8) , "p8 was not erased");
   ENSURE( t3.empty() , "tree did not clear");
+  
+  I3MCTree t4(makeParticle());
+  I3Particle head4 = t4.get_head();
+  I3Particle p10 = makeParticle();
+  t4.append_child(head4,p10);
+  I3Particle p11 = makeParticle();
+  t4.append_child(head4,p11);
+  I3Particle p12 = makeParticle();
+  t4.append_child(head4,p12);
+  ENSURE( !t4.empty() , "tree is empty");
+  
+  I3MCTree::post_order_iterator iter4(t4,p11);
+  I3MCTree::post_order_iterator iter4_ret(t4,p11);
+  iter4_ret++;
+  ENSURE( t4.erase(iter4) == iter4_ret , "erase() did not return next iter");
+  ENSURE( !t4.at(p11) , "child was not erased");
+  ENSURE( !t4.empty() , "tree is empty after erasing child");
+  
+  iter4 = I3MCTree::post_order_iterator(t4,head4);
+  iter4_ret = t4.end_post();
+  ENSURE( t4.erase(iter4) == iter4_ret , "erase() did not return next iter");
+  ENSURE( !t4.at(head4) , "head was not erased");
+  ENSURE( !t4.at(p10) , "p4 was not erased");
+  ENSURE( !t4.at(p12) , "p5 was not erased");
+  ENSURE( t4.empty() , "tree did not clear");
 }
 
 TEST(erase_children)

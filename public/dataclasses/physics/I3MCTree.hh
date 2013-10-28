@@ -377,8 +377,15 @@ namespace TreeBase {
   typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
   Tree<T,Key,Hash>::erase(const iterator_base<Derived,Value,Storage>& iter)
   {
-    if (iter != iterator_base<Derived,Value,Storage>(*this,end_))
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
+      iterator_base<Derived,Value,Storage> ret_iter(*this,*iter);
+      do {
+        ret_iter++;
+      } while(ret_iter != iterator_base<Derived,Value,Storage>(*this,end_)
+              && is_in_subtree(*iter,*ret_iter));
       erase(*iter);
+      return ret_iter;
+    }
     return iterator_base<Derived,Value,Storage>(*this,end_);
   }
   
