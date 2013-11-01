@@ -12,4 +12,6 @@ void register_I3MapI3ParticleID()
 	    boost::shared_ptr<I3MapI3ParticleIDDouble> >("I3MapI3ParticleIDDouble")
 	    .def(dataclass_suite<I3MapI3ParticleIDDouble >())
 	;
+	    
+	register_pointer_conversions<I3MapI3ParticleIDDouble>();
 }
