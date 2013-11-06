@@ -32,6 +32,8 @@
 #include <boost/python/exception_translator.hpp>
 #include <boost/python/object.hpp>
 #include <boost/python/slice.hpp>
+#include <boost/python/extract.hpp>
+#include <boost/function.hpp>
 
 using namespace boost::python;
 
@@ -167,6 +169,17 @@ I3MCTree::size_type (I3MCTree::*number_of_siblings)(const I3ParticleID&) const =
 bool (I3MCTree::*is_in_subtree)(const I3ParticleID&,const I3ParticleID&) const = &I3MCTree::is_in_subtree;
 bool (I3MCTree::*subtree_in_tree)(const TreeBase::Tree<I3Particle,I3ParticleID>&,const I3ParticleID&) const = &I3MCTree::subtree_in_tree;
 
+I3Particle get_best(const I3MCTree& tree, object func) {
+  return getParticle(I3MCTreeUtils::GetBest(tree, func),"no particles in tree");
+}
+const std::vector<I3Particle> get_filter(const I3MCTree& tree, object func) {
+  return I3MCTreeUtils::GetFilter(tree, func);
+}
+I3Particle get_best_filter(const I3MCTree& tree, object func1,object func2) {
+  return getParticle(I3MCTreeUtils::GetBestFilter(tree, func1, func2),"no particles found");
+}
+
+
 void register_I3MCTree()
 {
   {
@@ -185,6 +198,9 @@ void register_I3MCTree()
         .def("append_child", &I3MCTreeUtils::AppendChild, "Add a child to an I3ParticleID")
         .def("get_particle", &I3MCTreeUtils::GetParticle, "Get the I3Particle represented by the I3ParticleID")
         .def("dump", &I3MCTreeUtils::Dump, "Return tree as a string")
+        .def("get_best", get_best, "Get the best matching I3Particle")
+        .def("get_filter", &get_filter, "Get the I3Particles passing the filter")
+        .def("get_best_filter", &get_best_filter, "Get the best matching I3Particle passing the filter")
         
         // Base Class Methods
         .def("get_head", &get_head, "Get the left-most primary (the root or head of the tree)")

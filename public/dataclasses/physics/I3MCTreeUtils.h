@@ -84,7 +84,7 @@ namespace I3MCTreeUtils
    * 
    * \param t I3MCTree
    * \param f Callable which takes two I3Particles, compares them, and returns
-   *          an integer (positive = first particle is better)
+   *          an integer (negative = first particle is better)
    */
   template<typename Function>
   const typename I3MCTree::nonPtrType GetBest(const I3MCTree& t, Function func)
@@ -95,7 +95,7 @@ namespace I3MCTreeUtils
       return ret;
     ret = *iter++;
     for(;iter != end;iter++) {
-      if (func(*ret,*iter) < 0)
+      if (func(*ret,*iter) > 0)
         ret = *iter;
     }
     return ret;
@@ -109,7 +109,7 @@ namespace I3MCTreeUtils
       return ret;
     ret = &(*iter++);
     for(;iter != end;iter++) {
-      if (func(*ret,*iter) < 0)
+      if (func(*ret,*iter) > 0)
         ret = &(*iter++);
     }
     return ret;
@@ -151,7 +151,7 @@ namespace I3MCTreeUtils
    * \param t I3MCTree
    * \param f Callable which takes an I3Particle and returns true/false
    * \param c Callable which takes two I3Particles, compares them, and returns
-   *          an integer (positive = first particle is better)
+   *          an integer (negative = first particle is better)
    */
   template<typename FilterFunction,typename CmpFunction>
   const typename I3MCTree::nonPtrType
@@ -160,7 +160,7 @@ namespace I3MCTreeUtils
     typename I3MCTree::nonPtrType ret;
     typename I3MCTree::fast_const_iterator iter(t), end=t.cend_fast();
     for(;iter != end;iter++) {
-      if (f(*iter) && (!ret || c(ret,*iter) < 0))
+      if (f(*iter) && (!ret || c(*ret,*iter) > 0))
         ret = *iter;
     }
     return ret;
@@ -172,7 +172,7 @@ namespace I3MCTreeUtils
     const I3Particle* ret = NULL;
     typename I3MCTree::fast_const_iterator iter(*t), end=t->cend_fast();
     for(;iter != end;iter++) {
-      if (f(*iter) && (ret == NULL || c(*ret,*iter) < 0))
+      if (f(*iter) && (ret == NULL || c(*ret,*iter) > 0))
         ret = &(*iter);
     }
     return ret;
