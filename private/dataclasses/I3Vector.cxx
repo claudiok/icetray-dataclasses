@@ -26,4 +26,5 @@ I3_SERIALIZABLE(I3VectorModuleKey);
 //I3_SERIALIZABLE(I3VectorStationKey);
 
 I3_SERIALIZABLE(I3VectorDoubleDouble);
+I3_SERIALIZABLE(I3VectorI3Position);
 
