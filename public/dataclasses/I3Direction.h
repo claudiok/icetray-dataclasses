@@ -206,6 +206,19 @@ class I3Direction : public I3FrameObject
    * Rotate direction around Z axis by angle
    */
   void RotateZ(double angle);
+  
+  /**
+   * Vector inversion (makes the vector point in the opposite direction)
+   */
+  I3Direction operator-() const{
+    I3Direction d;
+    d.zenith_=I3Constants::pi-zenith_;
+    d.azimuth_=azimuth_+I3Constants::pi;
+    if(d.azimuth_>=2*I3Constants::pi)
+      d.azimuth_-=2*I3Constants::pi;
+    d.isCalculated_=false;
+    return d;
+  }
 
   /**
    * Cross product of this x d

@@ -201,6 +201,15 @@ TEST(setdir)
   ENSURE_DISTANCE(d.GetAzimuth(),-135*deg,0.0001);
 }
 
+TEST(inversion)
+{
+  I3Direction d1(1,2,3);
+  I3Direction d2=-d1;
+  ENSURE_DISTANCE(-d1.GetX(),d2.GetX(),1e-4);
+  ENSURE_DISTANCE(-d1.GetY(),d2.GetY(),1e-4);
+  ENSURE_DISTANCE(-d1.GetZ(),d2.GetZ(),1e-4);
+}
+
 TEST(cross_product)
 {
   //cross products between directions

@@ -252,6 +252,18 @@ class I3Position : public I3FrameObject
   }
   
   /**
+   * Vector inversion (makes the vector point in the opposite direction)
+   */
+  I3Position operator-() const{
+    I3Position p;
+    p.x_=-x_;
+    p.y_=-y_;
+    p.z_=-z_;
+    p.isCalculated_=false;
+    return p;
+  }
+  
+  /**
    * Vector addition
    */
   I3Position& operator+=(const I3Position& rhs){

@@ -215,6 +215,15 @@ TEST(magnitude)
   ENSURE_DISTANCE(p.Mag2(),144,0.0001);
 }
 
+TEST(inversion)
+{
+  I3Position p(1,-2,3);
+  I3Position q = -p;
+  ENSURE(q.GetX()==-p.GetX());
+  ENSURE(q.GetY()==-p.GetY());
+  ENSURE(q.GetZ()==-p.GetZ());
+}
+
 TEST(addition)
 {
   double x1=1,y1=2,z1=3;
