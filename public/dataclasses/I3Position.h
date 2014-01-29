@@ -406,6 +406,12 @@ inline bool operator==(const I3Position& lhs, const I3Position& rhs) {
           (lhs.GetZ() == rhs.GetZ()));
 }
 
+inline bool operator!=(const I3Position& lhs, const I3Position& rhs) {
+  return ((lhs.GetX() != rhs.GetX()) ||
+          (lhs.GetY() != rhs.GetY()) ||
+          (lhs.GetZ() != rhs.GetZ()));
+}
+
 I3Position operator*(double, const I3Position&);
 
 std::ostream& operator<<(std::ostream& oss, const I3Position& p);

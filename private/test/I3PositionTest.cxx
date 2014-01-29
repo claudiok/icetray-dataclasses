@@ -373,6 +373,19 @@ TEST(cross_product)
   ENSURE_DISTANCE(p3.GetZ(),0.0,0.00001);
 }
 
+TEST(comparison)
+{
+  I3Position p(1.1,2.2,3.3);
+  I3Position q(2.3,3.4,5.6);
+  
+  I3Position p2(p);
+  
+  ENSURE(p2==p);
+  ENSURE(!(p2==q));
+  ENSURE(!(p2!=p));
+  ENSURE(p2!=q);
+}
+
 TEST(scalar_multiplication)
 {
   I3Position p1(1,-1,1);

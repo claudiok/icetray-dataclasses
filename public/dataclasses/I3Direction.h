@@ -324,6 +324,12 @@ inline bool operator==(const I3Direction& lhs, const I3Direction& rhs)
           lhs.GetAzimuth() == rhs.GetAzimuth());
 }
 
+inline bool operator!=(const I3Direction& lhs, const I3Direction& rhs)
+{
+  return (lhs.GetZenith()  != rhs.GetZenith() ||
+          lhs.GetAzimuth() != rhs.GetAzimuth());
+}
+
 I3Position operator*(double, const I3Direction&);
 
 std::ostream& operator<<(std::ostream& oss, const I3Direction& d);

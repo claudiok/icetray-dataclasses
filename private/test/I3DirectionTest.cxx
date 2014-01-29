@@ -325,6 +325,19 @@ TEST(dot_product)
   ENSURE_DISTANCE(z,2,0.00001);
 }
 
+TEST(comparison)
+{
+  I3Direction d1(0.5,1.5);
+  I3Direction d2(1.5,2.5);
+  
+  I3Direction d3(d1);
+  
+  ENSURE(d3==d1);
+  ENSURE(!(d3==d2));
+  ENSURE(!(d3!=d1));
+  ENSURE(d3!=d2);
+}
+
 TEST(scalar_multiplication)
 {
   I3Direction d(1,-1,1);
