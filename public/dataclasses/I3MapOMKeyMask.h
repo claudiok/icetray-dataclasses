@@ -69,6 +69,17 @@ public:
 	 */
 	boost::shared_ptr<const I3RecoPulseSeriesMap> Apply(const I3Frame &frame) const;
 	
+	/**
+	 * Return true if this mask is derived from key
+	 */
+	bool HasAncestor(const I3Frame &frame, const std::string &key) const;
+	
+	/**
+	 * Convert this mask into a form that can be applied directly to key
+	 * without resort to intermediate masks.
+	 */
+	boost::shared_ptr<I3RecoPulseSeriesMapMask> Repoint(const I3Frame &frame, const std::string &key) const;
+	
 	/*
 	 * Get the name of the frame object the mask was made from.
 	 */
@@ -98,6 +109,12 @@ public:
 	I3RecoPulseSeriesMapMask operator&(const I3RecoPulseSeriesMapMask&) const;
 	I3RecoPulseSeriesMapMask operator|(const I3RecoPulseSeriesMapMask&) const;
 	I3RecoPulseSeriesMapMask operator^(const I3RecoPulseSeriesMapMask&) const;
+	/** Equivalent to this & ~other */
+	I3RecoPulseSeriesMapMask Remove(const I3RecoPulseSeriesMapMask&) const;
+	
+	I3RecoPulseSeriesMapMask& operator&=(const I3RecoPulseSeriesMapMask&);
+	I3RecoPulseSeriesMapMask& operator|=(const I3RecoPulseSeriesMapMask&);
+	I3RecoPulseSeriesMapMask& operator^=(const I3RecoPulseSeriesMapMask&);
 		
 private:
 	typedef uint8_t mask_t;
@@ -145,11 +162,20 @@ private:
 	static void FillSubsetMask(bitmask&, const I3RecoPulseSeriesMap::mapped_type&,
 	    const I3RecoPulseSeriesMap::mapped_type&);
 	
+	/**
+	 * Collapse this mask with its source, making it depend only on its grandparent.
+	 */
+	boost::shared_ptr<I3RecoPulseSeriesMapMask> CollapseLevel(const I3Frame &frame) const;
+	
 	template <typename BinaryOperator>
 	I3RecoPulseSeriesMapMask ApplyBinaryOperator(const I3RecoPulseSeriesMapMask&) const;
 	
 	struct operator_and : public std::binary_function<mask_t, mask_t, mask_t> {
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs & rhs; }
+	};
+	
+	struct operator_andnot : public std::binary_function<mask_t, mask_t, mask_t> {
+		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs & ~rhs; }
 	};
 	
 	struct operator_or : public std::binary_function<mask_t, mask_t, mask_t> {

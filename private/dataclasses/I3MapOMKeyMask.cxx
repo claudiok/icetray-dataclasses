@@ -355,6 +355,33 @@ I3RecoPulseSeriesMapMask::operator^(const I3RecoPulseSeriesMapMask &other) const
 	return ApplyBinaryOperator<operator_xor>(other);
 }
 
+I3RecoPulseSeriesMapMask
+I3RecoPulseSeriesMapMask::Remove(const I3RecoPulseSeriesMapMask &other) const
+{
+	return ApplyBinaryOperator<operator_andnot>(other);
+}
+
+I3RecoPulseSeriesMapMask&
+I3RecoPulseSeriesMapMask::operator&=(const I3RecoPulseSeriesMapMask &other)
+{
+	(*this) = ApplyBinaryOperator<operator_and>(other);
+	return *this;
+}
+
+I3RecoPulseSeriesMapMask&
+I3RecoPulseSeriesMapMask::operator|=(const I3RecoPulseSeriesMapMask &other)
+{
+	(*this) = ApplyBinaryOperator<operator_or>(other);
+	return *this;
+}
+
+I3RecoPulseSeriesMapMask&
+I3RecoPulseSeriesMapMask::operator^=(const I3RecoPulseSeriesMapMask &other)
+{
+	(*this) = ApplyBinaryOperator<operator_xor>(other);
+	return *this;
+}
+
 template <typename BinaryOperator>
 I3RecoPulseSeriesMapMask
 I3RecoPulseSeriesMapMask::ApplyBinaryOperator(const I3RecoPulseSeriesMapMask &other) const
@@ -463,6 +490,91 @@ I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 	}
 	
 	return masked_;
+}
+
+struct null_deleter
+{
+	void operator()(void const *) const {}
+};
+
+bool 
+I3RecoPulseSeriesMapMask::HasAncestor(const I3Frame &frame, const std::string &key) const
+{
+	if (key == GetSource())
+		return true;
+	I3RecoPulseSeriesMapMaskConstPtr source(this, null_deleter());
+	while (source = frame.Get<I3RecoPulseSeriesMapMaskConstPtr>(source->GetSource())) {
+		if (source->GetSource() == key)
+			return true;
+	}
+	return false;
+}
+
+boost::shared_ptr<I3RecoPulseSeriesMapMask>
+I3RecoPulseSeriesMapMask::Repoint(const I3Frame &frame, const std::string &key) const
+{
+	if (!HasAncestor(frame, key))
+		log_fatal_stream(key << " is not an ancestor of this mask");
+	if (key == GetSource())
+		return boost::make_shared<I3RecoPulseSeriesMapMask>(*this);
+	
+	I3RecoPulseSeriesMapMaskConstPtr source(this, null_deleter());
+	while (source->GetSource() != key)
+		source = source->CollapseLevel(frame);
+	return boost::const_pointer_cast<I3RecoPulseSeriesMapMask>(source);
+}
+
+boost::shared_ptr<I3RecoPulseSeriesMapMask>
+I3RecoPulseSeriesMapMask::CollapseLevel(const I3Frame &frame) const
+{
+	boost::shared_ptr<const I3RecoPulseSeriesMapMask> source =
+	    frame.Get<boost::shared_ptr<const I3RecoPulseSeriesMapMask> >(key_);
+	if (!source)
+		log_fatal_stream(key_ << " is not a mask in the frame");
+	
+	boost::shared_ptr<I3RecoPulseSeriesMapMask> collapsed
+	    = boost::make_shared<I3RecoPulseSeriesMapMask>(*source);
+	collapsed->ResetCache();
+	
+	std::list<bitmask>::const_iterator source_element = source->element_masks_.begin();
+	std::list<bitmask>::const_iterator element = element_masks_.begin();
+	std::list<bitmask>::iterator dest_element = collapsed->element_masks_.begin();
+	
+	// Perform an unaligned logical AND between the parent and daughter masks
+	unsigned idx = 0;
+	for (unsigned source_idx = 0; source_idx < source->omkey_mask_.size();
+	    source_idx++) {
+		if (source->omkey_mask_.get(source_idx)) {
+			if (source_element->any()) {
+				if (omkey_mask_.get(idx)) {
+					unsigned pidx = 0;
+					for (unsigned source_pidx = 0; source_pidx < source_element->size(); source_pidx++) {
+						if (source_element->get(source_pidx)) {
+							if (!element->get(pidx))
+								dest_element->set(source_pidx, false);
+							pidx++;
+						}
+					}
+					element++;
+					dest_element++;
+				} else {
+					collapsed->omkey_mask_.set(source_idx, false);
+					dest_element = collapsed->element_masks_.erase(dest_element);
+				}
+				
+				idx++;
+			// If no bits are set in the parent mask, the daughter 
+			// mask may not event exist. Compactify the output.
+			} else {
+				collapsed->omkey_mask_.set(source_idx, false);
+				dest_element = collapsed->element_masks_.erase(dest_element);
+			}
+			
+			source_element++;
+		}
+	}
+	
+	return collapsed;
 }
 
 I3RecoPulseSeriesMapMask::bitmask::bitmask(unsigned length, bool set)

@@ -114,6 +114,41 @@ TEST(Apply)
 	}
 }
 
+TEST(Repoint)
+{
+	I3RecoPulseSeriesMapPtr pulses;
+	I3RecoPulseSeriesMapConstPtr masked;
+	pulses = manufacture_pulsemap();
+		
+	I3Frame frame;
+	frame.Put("foo", pulses);
+	I3RecoPulseSeriesMapMaskPtr mask =
+	    boost::make_shared<I3RecoPulseSeriesMapMask>(frame, "foo");
+	mask->Set(pulses->begin()->first, false);
+	frame.Put("foomask", mask);
+	
+	// Make a derived mask
+	I3RecoPulseSeriesMapMaskPtr submask = boost::make_shared<I3RecoPulseSeriesMapMask>(frame, "foomask");
+	submask->Set(boost::next(pulses->begin())->first, 3, false);
+	frame.Put("submask", submask);
+	ENSURE(submask->HasAncestor(frame, "foomask"), "Intermediate mask is in the chain");
+	ENSURE(submask->HasAncestor(frame, "foo"), "Original pulsemap is in the chain");
+	
+	// Collapse the derived mask back on to the original source
+	I3RecoPulseSeriesMapMaskPtr collapsed = submask->Repoint(frame, mask->GetSource());
+	frame.Put("collapsed", collapsed);
+	ENSURE(!collapsed->HasAncestor(frame, "foomask"), "Intermediate mask is no longer in the chain");
+	ENSURE(collapsed->HasAncestor(frame, "foo"), "Original pulsemap is still in the chain");
+	
+	ENSURE_EQUAL(mask->GetSource(), collapsed->GetSource());
+	ENSURE_EQUAL(submask->GetSum(), collapsed->GetSum());
+	ENSURE(submask->GetSum() < mask->GetSum());
+	
+	// Now, use the collapsed mask to remove an element from the source mask
+	I3RecoPulseSeriesMapMask stripped = mask->Remove(*collapsed);
+	ENSURE_EQUAL(stripped.GetSum(), 1u);
+}
+
 TEST(ApplyAutomagically)
 {
 	I3RecoPulseSeriesMapPtr pulses = manufacture_pulsemap();
