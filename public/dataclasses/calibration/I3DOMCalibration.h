@@ -22,7 +22,7 @@
 #include <cmath>
 #include <string>
 
-static const unsigned i3domcalibration_version_ = 9;
+static const unsigned i3domcalibration_version_ = 10;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
@@ -177,7 +177,7 @@ class I3DOMCalibration {
   /**
    * Get the FADC baseline in data-taking mode, as measured from beacon launches.
    *
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note: The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
@@ -322,7 +322,7 @@ class I3DOMCalibration {
   /**
    * Get the average ATWD baseline in data-taking mode, as measured from beacon launches.
    *
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note: The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
@@ -402,7 +402,53 @@ class I3DOMCalibration {
   {
     noiseRate_ = noiserate;
   }
-  
+
+  /**
+   *  Noise: Thermal DOM noise rate, in Hz, 
+   */
+  double GetDomNoiseThermalRate() const { return noiseThermalRate_ ; }
+  void SetDomNoiseThermalRate(double thermalrate)
+  {
+    noiseThermalRate_ = thermalrate;
+  }
+
+  /**
+   *  Noise: Correlated decay rate for DOM in Hz, 
+   */
+  double GetDomNoiseDecayRate() const { return noiseDecayRate_ ; }
+  void SetDomNoiseDecayRate(double decayrate)
+  {
+    noiseDecayRate_ = decayrate;
+  }
+
+  /**
+   *  Noise: mean of the lognormal describing scintillation in Log10(dt/ns) for DOM
+   */
+  double GetDomNoiseScintillationMean() const { return noiseScintillationMean_ ; }
+  void SetDomNoiseScintillationMean(double scintillationmean)
+  {
+    noiseScintillationMean_ = scintillationmean;
+  }
+
+  /**
+   *  Noise: sigma of the lognormal describing scintillation in Log10(dt/ns) for DOM
+   */
+  double GetDomNoiseScintillationSigma() const { return noiseScintillationSigma_ ; }
+  void SetDomNoiseScintillationSigma(double scintillationsigma)
+  {
+    noiseScintillationSigma_ = scintillationsigma;
+  }
+
+
+  /**
+   *  Noise: mean number of hits from the scintillation lognormal component for DOM
+   */
+  double GetDomNoiseScintillationHits() const { return noiseScintillationHits_ ; }
+  void SetDomNoiseScintillationHits(double scintillationhits)
+  {
+    noiseScintillationHits_ = scintillationhits;
+  }
+
   //On the assumption that this will be evaulated many times, we copy all data into it. 
   //This makes the object larger but hopefully avoids extra pointer derefences
   class DroopedSPETemplate{
@@ -498,7 +544,7 @@ class I3DOMCalibration {
 
   /**
    * Pedestal in data-taking mode, as measured from beacon launches.
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note : The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
@@ -572,7 +618,7 @@ class I3DOMCalibration {
    *  Dumb-ol-array to hold the average baseline corrections measured from beacon launches.
    *  [atwd chip id (0-1)] [ gain channel(0-2) ]
    *
-   * XXX WARNING DANGER DANGER DANGER: The beacon baseline depends implicitly
+   * Note : The beacon baseline depends implicitly
    * on the front-end bias voltage. If the bias voltage is ever changed, new
    * baselines will have to be collected.
    */
@@ -630,9 +676,34 @@ class I3DOMCalibration {
 
   /**
    *  Measure DOM noise rate, in Hz, 
+   *  Deprecated: used in old noise-generator
    */
   double noiseRate_;
 
+  /**
+   *  Thermal DOM noise rate, in Hz, 
+   */
+  double noiseThermalRate_;
+
+  /**
+   *  Correlated noise decay rate for DOM in Hz, 
+   */
+  double noiseDecayRate_;
+
+  /**
+   *  Noise: mean of the lognormal describing scintillation in Log10(dt/ns) for DOM
+   */
+  double noiseScintillationMean_;
+
+  /**
+   *  Noise: sigma of the lognormal describing scintillation in Log10(dt/ns) for DOM
+   */
+  double noiseScintillationSigma_;
+
+  /**
+   *  Noise: mean number of hits from the scintillation lognormal component for DOM
+   */
+  double noiseScintillationHits_;
 
 };
 

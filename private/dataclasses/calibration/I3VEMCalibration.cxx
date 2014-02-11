@@ -1,8 +1,8 @@
 /**
  *
- * @version $Id: I3VEMCalibration.cxx$
+ * @version $Id$
  * @file I3VEMCalibration.cxx
- * @date $Date: 2007-04-11 15:35:43 -0400 (Mi, 11 Apr 2007) $
+ * @date $Date$
  */
 
 
