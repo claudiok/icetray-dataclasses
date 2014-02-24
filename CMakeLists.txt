@@ -24,6 +24,8 @@ i3_add_library(dataclasses
   public/dataclasses/I3Double.h 
   public/dataclasses/I3Time.h 
   public/dataclasses/physics/I3Particle.h
+  public/dataclasses/physics/I3TopRecoPlaneFitParams.h
+  public/dataclasses/physics/I3TopLateralFitParams.h
   )
 
 

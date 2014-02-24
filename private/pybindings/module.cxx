@@ -45,7 +45,7 @@ namespace bp = boost::python;
   (I3Double)(I3String)(I3Constants)(I3RecoPulseSeriesMapMask)           \
   (I3RecoPulseSeriesMapUnion)(I3SuperDST)(TankKey)(I3Orientation)       \
   (ModuleKey)(I3ModuleGeo)(I3OMGeo)(I3TankGeo)(I3FilterResult)          \
-  (I3MapI3ParticleID)
+  (I3MapI3ParticleID)(I3TopLateralFitParams)(I3TopRecoPlaneFitParams)
 
 #define I3_REGISTRATION_FN_DECL(r, data, t) void BOOST_PP_CAT(register_,t)();
 #define I3_REGISTER(r, data, t) BOOST_PP_CAT(register_,t)();

@@ -59,6 +59,8 @@ i3_add_pybindings(dataclasses
   ModuleKey.cxx
   I3ModuleGeo.cxx
   TankKey.cxx
+  I3TopLateralFitParams.cxx
+  I3TopRecoPlaneFitParams.cxx
   mctree/I3MCTreeTools.cxx
   module.cxx
   USE_TOOLS boost python

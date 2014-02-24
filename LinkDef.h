@@ -27,6 +27,9 @@
 #pragma link C++ class I3Double+;
 #pragma link C++ class I3Time+;
 
+#pragma link C++ class I3TopRecoPlaneFitParams+;
+#pragma link C++ class I3TopLateralFitParams+;
+
 #endif
 
 
