@@ -33,7 +33,8 @@ void register_I3TopRecoPlaneFitParams()
     .def_readwrite("x0", &I3TopRecoPlaneFitParams::X0)
     .def_readwrite("y0", &I3TopRecoPlaneFitParams::Y0)
     .def_readwrite("chi2", &I3TopRecoPlaneFitParams::Chi2)
-    .def_readwrite("nPulses", &I3TopRecoPlaneFitParams::NPulses);
+    .def_readwrite("nPulses", &I3TopRecoPlaneFitParams::NPulses)
+    .def( freeze() );
 
   register_pointer_conversions<I3TopRecoPlaneFitParams>();
 }

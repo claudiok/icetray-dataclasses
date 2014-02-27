@@ -69,7 +69,8 @@ void register_I3TopLateralFitParams()
     .def_readwrite("corr_xc_beta", &I3TopLateralFitParams::Corr_Xc_Beta)
     .def_readwrite("corr_yc_log10_s125", &I3TopLateralFitParams::Corr_Yc_Log10_S125)
     .def_readwrite("corr_yc_beta", &I3TopLateralFitParams::Corr_Yc_Beta)
-    .def_readwrite("corr_log10_s125_beta", &I3TopLateralFitParams::Corr_Log10_S125_Beta);
+    .def_readwrite("corr_log10_s125_beta", &I3TopLateralFitParams::Corr_Log10_S125_Beta)
+    .def( freeze() );
 
   register_pointer_conversions<I3TopLateralFitParams>();
 
