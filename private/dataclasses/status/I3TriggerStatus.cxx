@@ -188,6 +188,7 @@ void I3TriggerStatus::load(Archive& ar, unsigned version)
 }
 
 I3_SPLIT_SERIALIZABLE(I3TriggerStatus);
+I3_SERIALIZABLE(I3TriggerReadoutConfig);
 
 #define TRIGGER_CONFIG_TYPES(TYPE)				                      \
 template void I3TriggerStatus::SetTriggerConfigValue(const std::string&,TYPE);        \
