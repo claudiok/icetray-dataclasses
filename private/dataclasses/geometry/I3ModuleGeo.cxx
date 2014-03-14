@@ -25,7 +25,8 @@
 I3ModuleGeo::I3ModuleGeo()
 :
 moduleType_(UnknownType),
-radius_(NAN)
+radius_(NAN),
+cylinder_height_(0.) // spherical DOMs have a cylinder extension of 0
 {
 }
 
@@ -37,6 +38,7 @@ bool I3ModuleGeo::operator==(const I3ModuleGeo& rhs) const
 {
     if (rhs.moduleType_ != moduleType_) return false;
     if (rhs.radius_ != radius_) return false;
+    if (rhs.cylinder_height_ != cylinder_height_) return false;
     if (!(rhs.pos_ == pos_)) return false;
     if (!(rhs.orientation_ == orientation_)) return false;
     return true;
@@ -56,6 +58,10 @@ I3ModuleGeo::serialize(Archive& ar, unsigned version)
     ar & make_nvp("pos", pos_);
     ar & make_nvp("orientation", orientation_);
     ar & make_nvp("radius", radius_);
+
+    if (version>=1) {
+        ar & make_nvp("cylinder_height", cylinder_height_);
+    }
 }
 
 I3_SERIALIZABLE(I3ModuleGeo);

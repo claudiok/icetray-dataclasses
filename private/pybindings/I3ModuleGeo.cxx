@@ -34,7 +34,7 @@ void register_I3ModuleGeo()
         bp::scope mchit_scope = 
         bp::class_<I3ModuleGeo, boost::shared_ptr<I3ModuleGeo> >("I3ModuleGeo")
         .def(bp::init<>() )
-#define PROPERTIES (ModuleType)(Radius)
+#define PROPERTIES (ModuleType)(Radius)(CylinderHeight)
 #define RO_PROPERTIES (Dir)
         BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3ModuleGeo, PROPERTIES)
         BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3ModuleGeo, RO_PROPERTIES)

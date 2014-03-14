@@ -30,7 +30,7 @@
 #include "dataclasses/I3Orientation.h"
 #include "dataclasses/I3Map.h"
 
-static const unsigned i3modulegeo_version_ = 0;
+static const unsigned i3modulegeo_version_ = 1;
 
 /**
  * List the names of enumeration members defined in this file
@@ -81,12 +81,16 @@ public:
 
     double GetRadius() const {return radius_;}
     void SetRadius(double radius) {radius_=radius;}
+
+    double GetCylinderHeight() const {return cylinder_height_;}
+    void SetCylinderHeight(double cylinder_height) {cylinder_height_=cylinder_height;}
      
 private:
     ModuleType moduleType_;
     I3Position pos_;
     I3Orientation orientation_;
     double radius_;
+    double cylinder_height_; // for pill-capsule-like DOMs: vertical extension of the DOM
     
     friend class boost::serialization::access;
     template <class Archive> void serialize(Archive & ar, unsigned version);
