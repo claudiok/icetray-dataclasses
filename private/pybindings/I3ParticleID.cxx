@@ -9,5 +9,7 @@ void register_I3ParticleID()
 	.def_readwrite("majorID",&I3ParticleID::majorID)
 	.def_readwrite("minorID",&I3ParticleID::minorID)
 	.def(dataclass_suite<I3ParticleID>())
+	.def(self == self)
+	.def(self < self)
 	;
 }

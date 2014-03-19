@@ -35,6 +35,8 @@ private:
 #endif
 };
 
+std::ostream& operator<<(std::ostream &, const I3ParticleID &);
+
 #ifndef __CINT__
 #include <I3/hash_map.h>
 

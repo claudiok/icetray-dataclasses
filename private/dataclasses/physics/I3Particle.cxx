@@ -769,6 +769,10 @@ std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
   return oss;
 }
 
+std::ostream& operator<<(std::ostream& oss, const I3ParticleID& pid){
+  oss << "I3ParticleID("<<pid.majorID<<", "<<pid.minorID<<")";
+  return oss;
+}
 
 I3_SPLIT_SERIALIZABLE(I3Particle);
 
