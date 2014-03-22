@@ -139,7 +139,7 @@ class I3MCHit
   void SetHitSource(HitSource s){ source_= s; }
   HitSource GetHitSource() const { return source_; }
 
-  bool operator==(const I3MCHit& rhs) {
+  bool operator==(const I3MCHit& rhs) const {
     return time_ == rhs.time_
       && hitID_ == rhs.hitID_
       && charge_ == rhs.charge_
