@@ -50,7 +50,7 @@ void translate(const not_found_exception& e)
     PyErr_SetString(PyExc_IndexError, e.what());
 }
 
-I3Particle getParticle(const I3MCTree::nonPtrType& ptr, std::string err="")
+I3Particle getParticle(const I3MCTree::optional_value& ptr, std::string err="")
 {
   if (ptr)
     return *ptr;
@@ -228,6 +228,7 @@ void register_I3MCTree()
         .def("merge",&I3MCTree::merge, "Merge two trees, modifying the first tree")
         .def("size", &I3MCTree::size, "Get the number of I3Particles in the tree")
         .def("empty", &I3MCTree::empty, "Is the tree empty?")
+        .def("swap", &I3MCTree::swap, "Swap the contents of another I3MCTree with this one.")
         .def("depth", depth, "Get the depth from the I3ParticleID to the primary")
         .def("number_of_children", number_of_children, "Get the number of children an I3ParticleID has")
         .def("number_of_siblings", number_of_siblings, "Get the number of siblings an I3ParticleID has")

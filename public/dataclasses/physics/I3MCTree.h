@@ -58,7 +58,7 @@ namespace TreeBase {
       T operator=(const T& otherData) { return data = otherData; }
       bool operator==(const TreeNode<T>& other) const
       {
-        if (data != other.data)
+        if (!(data == other.data))
           return false;
         if (parent == NULL) {
           if (other.parent != NULL)
@@ -66,7 +66,7 @@ namespace TreeBase {
         } else {
           if (other.parent == NULL)
             return false;
-          else if (parent->data != other.parent->data)
+          else if (!(parent->data == other.parent->data))
             return false;
         }
         if (firstChild == NULL) {
@@ -75,7 +75,7 @@ namespace TreeBase {
         } else {
           if (other.firstChild == NULL)
             return false;
-          else if (firstChild->data != other.firstChild->data)
+          else if (!(firstChild->data == other.firstChild->data))
             return false;
         }
         if (nextSibling == NULL) {
@@ -84,7 +84,7 @@ namespace TreeBase {
         } else {
           if (other.nextSibling == NULL)
             return false;
-          else if (nextSibling->data != other.nextSibling->data)
+          else if (!(nextSibling->data == other.nextSibling->data))
             return false;
         }
         return true;
@@ -95,10 +95,13 @@ namespace TreeBase {
   };
   
   /**
-   * A generic tree class for hashable, unique data types
+   * A generic tree class for hashable, unique data types.
+   *
    * T is the data type
    * Key is the lookup type (T must be able to be implicitly converted to Key)
    * Hash is the hash function to convert from Key to size_t
+   *
+   * Note that Key must be unique and equality comparable.
    */
   template<typename T, typename Key=T, typename Hash=hash<Key> >
   class Tree : public I3FrameObject {
@@ -111,10 +114,10 @@ namespace TreeBase {
       typedef std::forward_iterator_tag iterator_category;
       
       /**
-       * The nonPtrType is used when returning by value
+       * The optional_value is used when returning by value
        * when there might not be anything to return.
-      */
-      typedef boost::optional<T>  nonPtrType;
+       */
+      typedef boost::optional<T>  optional_value;
     protected:
       typedef boost::optional<Key> TreeHashKey;
       typedef TreeNode<value_type> treeNode;
@@ -127,7 +130,11 @@ namespace TreeBase {
       void eraseRightSiblings_(const Key&);
     
     private:
-      // define iterator const traits
+      /**
+       * Iterator Const Traits
+       * 
+       * Define TreeValue and TreeHashMapIter types.
+       */
       template <typename ValueType, int dummy>
       struct iterator_const_traits;
       template <int dummy>
@@ -142,47 +149,53 @@ namespace TreeBase {
         typedef const Tree<T,Key,Hash> TreeValue;
         typedef typename tree_hash_map::const_iterator TreeHashMapIter;
       };
-      // define iterator storage traits
+      
+      /**
+       * Iterator Storage Class
+       *
+       * Keep track of the actual data type storage of the tree,
+       * as well as a pointer to the tree itself.
+       */
       template <typename StorageType,typename ValueType,
                 typename TreeType,typename TreeHashMapIter>
-      struct iterator_storage_traits;
+      struct iterator_storage_impl;
       template <typename ValueType,typename TreeType,typename TreeHashMapIter>
-      struct iterator_storage_traits <TreeHashKey,ValueType,TreeType,TreeHashMapIter>
+      struct iterator_storage_impl <TreeHashKey,ValueType,TreeType,TreeHashMapIter>
       {
         // types
         TreeType* treePtr_;
         TreeHashKey storage_;
         // constructors
-        explicit iterator_storage_traits(TreeType& t)
+        explicit iterator_storage_impl(TreeType& t)
           : treePtr_(&t), storage_(t.end_) { }
-        explicit iterator_storage_traits(TreeType& t, ValueType v)
+        explicit iterator_storage_impl(TreeType& t, ValueType v)
           : treePtr_(&t), storage_(t.end_)
         {
           TreeHashMapIter iter = treePtr_->internalMap.find(v);
           if (iter != treePtr_->internalMap.end())
             storage_ = *iter;
         }
-        explicit iterator_storage_traits(TreeType& t, const Key& k)
+        explicit iterator_storage_impl(TreeType& t, const Key& k)
           : treePtr_(&t), storage_(t.end_)
         {
           TreeHashMapIter iter = treePtr_->internalMap.find(k);
           if (iter != treePtr_->internalMap.end())
             storage_ = iter->second.data;
         }
-        explicit iterator_storage_traits(TreeType& t, TreeHashKey hk)
+        explicit iterator_storage_impl(TreeType& t, TreeHashKey hk)
           : treePtr_(&t), storage_(hk) { }
-        explicit iterator_storage_traits(TreeType& t, TreeHashMapIter iter)
+        explicit iterator_storage_impl(TreeType& t, TreeHashMapIter iter)
           : treePtr_(&t), storage_(t.end_)
         {
           if (iter != treePtr_->internalMap.end())
             storage_ = iter->second.data;
         }
         template<typename V,typename TT,typename THMI>
-        iterator_storage_traits(const iterator_storage_traits<TreeHashKey,
+        iterator_storage_impl(const iterator_storage_impl<TreeHashKey,
             V,TT,THMI>& rhs)
           : treePtr_(rhs.treePtr_), storage_(rhs.storage_) { }
         template<typename V,typename TT,typename THMI>
-        iterator_storage_traits(const iterator_storage_traits<THMI,
+        iterator_storage_impl(const iterator_storage_impl<THMI,
             V,TT,THMI>& rhs)
           : treePtr_(rhs.treePtr_)
         {
@@ -199,11 +212,11 @@ namespace TreeBase {
           return iter->second.data;
         }
         template<typename Storage,typename V,typename TT,typename THMI>
-        iterator_storage_traits<TreeHashKey,ValueType,TreeType,TreeHashMapIter>&
-        operator=(const iterator_storage_traits<Storage,V,TT,THMI>& rhs)
+        iterator_storage_impl<TreeHashKey,ValueType,TreeType,TreeHashMapIter>&
+        operator=(const iterator_storage_impl<Storage,V,TT,THMI>& rhs)
         {
-          iterator_storage_traits<TreeHashKey,ValueType,TreeType,TreeHashMapIter> other =
-              iterator_storage_traits<TreeHashKey,ValueType,TreeType,TreeHashMapIter>(rhs);
+          iterator_storage_impl<TreeHashKey,ValueType,TreeType,TreeHashMapIter> other =
+              iterator_storage_impl<TreeHashKey,ValueType,TreeType,TreeHashMapIter>(rhs);
           treePtr_ = other.treePtr_;
           storage_ = other.storage_;
           return *this;
@@ -218,40 +231,40 @@ namespace TreeBase {
           storage_ = rhs;
           return rhs;
         }
-        bool operator==(const iterator_storage_traits<TreeHashKey,ValueType,
+        bool operator==(const iterator_storage_impl<TreeHashKey,ValueType,
             TreeType,TreeHashMapIter>& rhs) const
         {
           return (treePtr_ == rhs.treePtr_ && storage_ == rhs.storage_);
         }
-        bool operator!=(const iterator_storage_traits<TreeHashKey,ValueType,
+        bool operator!=(const iterator_storage_impl<TreeHashKey,ValueType,
             TreeType,TreeHashMapIter>& rhs) const
         {
           return (treePtr_ != rhs.treePtr_ || storage_ != rhs.storage_);
         }
       };
       template <typename ValueType,typename TreeType,typename TreeHashMapIter>
-      struct iterator_storage_traits <TreeHashMapIter,ValueType,TreeType,TreeHashMapIter>
+      struct iterator_storage_impl <TreeHashMapIter,ValueType,TreeType,TreeHashMapIter>
       {
         // types
         TreeType* treePtr_;
         TreeHashMapIter storage_;
         // constructors
-        explicit iterator_storage_traits(TreeType& t) : treePtr_(&t),
+        explicit iterator_storage_impl(TreeType& t) : treePtr_(&t),
           storage_(t.internalMap.end()) { }
-        explicit iterator_storage_traits(TreeType& t, ValueType v)
+        explicit iterator_storage_impl(TreeType& t, ValueType v)
           : treePtr_(&t), storage_(t.internalMap.find(v)) { }
-        explicit iterator_storage_traits(TreeType& t, const Key& k)
+        explicit iterator_storage_impl(TreeType& t, const Key& k)
           : treePtr_(&t), storage_(t.internalMap.find(k)) { }
-        explicit iterator_storage_traits(TreeType& t, TreeHashKey hk)
+        explicit iterator_storage_impl(TreeType& t, TreeHashKey hk)
           : treePtr_(&t), storage_(t.internalMap.end())
         {
           if (hk)
             storage_ = treePtr_->internalMap.find(*hk);
         }
-        explicit iterator_storage_traits(TreeType& t, TreeHashMapIter iter)
+        explicit iterator_storage_impl(TreeType& t, TreeHashMapIter iter)
           : treePtr_(&t), storage_(iter) { }
         template<typename V,typename TT,typename THMI>
-        iterator_storage_traits(const iterator_storage_traits<TreeHashKey,
+        iterator_storage_impl(const iterator_storage_impl<TreeHashKey,
             V,TT,THMI>& rhs)
           : treePtr_(rhs.treePtr_), storage_(rhs.treePtr_->internalMap.end())
         {
@@ -259,7 +272,7 @@ namespace TreeBase {
             storage_ = treePtr_->internalMap.find(*(rhs.storage_));
         }
         template<typename V,typename TT,typename THMI>
-        iterator_storage_traits(const iterator_storage_traits<THMI,
+        iterator_storage_impl(const iterator_storage_impl<THMI,
             V,TT,THMI>& rhs)
           : treePtr_(rhs.treePtr_), storage_(rhs.storage_) { }
         // operators
@@ -269,11 +282,11 @@ namespace TreeBase {
           return storage_->second.data;
         }
         template<typename Storage,typename V,typename TT,typename THMI>
-        iterator_storage_traits<TreeHashMapIter,ValueType,TreeType,TreeHashMapIter>&
-        operator=(const iterator_storage_traits<Storage,V,TT,THMI>& rhs)
+        iterator_storage_impl<TreeHashMapIter,ValueType,TreeType,TreeHashMapIter>&
+        operator=(const iterator_storage_impl<Storage,V,TT,THMI>& rhs)
         {
-          iterator_storage_traits<TreeHashMapIter,ValueType,TreeType,TreeHashMapIter> other =
-              iterator_storage_traits<TreeHashMapIter,ValueType,TreeType,TreeHashMapIter>(rhs);
+          iterator_storage_impl<TreeHashMapIter,ValueType,TreeType,TreeHashMapIter> other =
+              iterator_storage_impl<TreeHashMapIter,ValueType,TreeType,TreeHashMapIter>(rhs);
           treePtr_ = other.treePtr_;
           storage_ = other.storage_;
           return *this;
@@ -283,12 +296,12 @@ namespace TreeBase {
           storage_ = rhs;
           return storage_;
         }
-        bool operator==(const iterator_storage_traits<TreeHashMapIter,
+        bool operator==(const iterator_storage_impl<TreeHashMapIter,
             ValueType,TreeType,TreeHashMapIter>& rhs) const
         {
           return (treePtr_ == rhs.treePtr_ && storage_ == rhs.storage_);
         }
-        bool operator!=(const iterator_storage_traits<TreeHashMapIter,
+        bool operator!=(const iterator_storage_impl<TreeHashMapIter,
             ValueType,TreeType,TreeHashMapIter>& rhs) const
         {
           return (treePtr_ != rhs.treePtr_ || storage_ != rhs.storage_);
@@ -313,7 +326,7 @@ namespace TreeBase {
           typedef iterator_const_traits<Value,0> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
-          typedef iterator_storage_traits<StorageType, Value,TreeValue,
+          typedef iterator_storage_impl<StorageType, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
           explicit iterator_base(TreeValue& ext) : node_(ext)
@@ -369,7 +382,7 @@ namespace TreeBase {
           typedef iterator_const_traits<Value,0> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
-          typedef iterator_storage_traits<TreeHashKey, Value,TreeValue,
+          typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
           pre_order(TreeValue& ext)
@@ -389,6 +402,10 @@ namespace TreeBase {
           {
             iterator_base<pre_order<Value>,Value,TreeHashKey>::operator=(iter);
             return *this;
+          }
+          operator pre_order<const Value>() const
+          {
+            return(pre_order<const Value>(this->dereference()));
           }
         private:
           friend class Tree<T,Key,Hash>;
@@ -444,7 +461,7 @@ namespace TreeBase {
           typedef iterator_const_traits<Value,0> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
-          typedef iterator_storage_traits<TreeHashKey, Value,TreeValue,
+          typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
           post_order(TreeValue& ext) :
@@ -464,6 +481,10 @@ namespace TreeBase {
           {
             iterator_base<post_order<Value>,Value,TreeHashKey>::operator=(iter);
             return *this;
+          }
+          operator post_order<const Value>() const
+          {
+            return(post_order<const Value>(this->dereference()));
           }
         private:
           friend class Tree<T,Key,Hash>;
@@ -523,7 +544,7 @@ namespace TreeBase {
           typedef iterator_const_traits<Value,0> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
-          typedef iterator_storage_traits<TreeHashKey, Value,TreeValue,
+          typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
           sibling_iter(TreeValue& ext) :
@@ -545,6 +566,10 @@ namespace TreeBase {
           {
             iterator_base<sibling_iter<Value>,Value,TreeHashKey>::operator=(iter);
             return *this;
+          }
+          operator sibling_iter<const Value>() const
+          {
+            return(sibling_iter<const Value>(this->dereference()));
           }
         private:
           friend class Tree<T,Key,Hash>;
@@ -579,7 +604,7 @@ namespace TreeBase {
           typedef iterator_const_traits<Value,0> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
-          typedef iterator_storage_traits<TreeHashMapIter, Value,TreeValue,
+          typedef iterator_storage_impl<TreeHashMapIter, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
           fast_iter(TreeValue& ext) :
@@ -599,6 +624,10 @@ namespace TreeBase {
           {
             iterator_base<fast_iter<Value>,Value,TreeHashMapIter>::operator=(iter);
             return *this;
+          }
+          operator fast_iter<const Value>() const
+          {
+            return(fast_iter<const Value>(this->dereference()));
           }
         protected:
           TreeHashMapIter first_()
@@ -625,7 +654,7 @@ namespace TreeBase {
           typedef iterator_const_traits<Value,0> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
-          typedef iterator_storage_traits<TreeHashMapIter, Value,TreeValue,
+          typedef iterator_storage_impl<TreeHashMapIter, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
           leaf_iter(TreeValue& ext) :
@@ -646,6 +675,10 @@ namespace TreeBase {
           {
             iterator_base<leaf_iter<Value>,Value,TreeHashMapIter>::operator=(iter);
             return *this;
+          }
+          operator leaf_iter<const Value>() const
+          {
+            return(leaf_iter<const Value>(this->dereference()));
           }
         private:
           friend class Tree<T,Key,Hash>;
@@ -786,18 +819,28 @@ namespace TreeBase {
       /**
        * Get head value
        */
-      const nonPtrType get_head() const;
+      const optional_value get_head() const;
       const std::vector<T> get_heads() const;
       
       /**
        * Get value at key
+       *
+       * Note that non-const versions are not provided because some
+       * modifications could change the key as well and cannot be allowed.
        */
-      const nonPtrType at(const Key&) const;
+      const optional_value at(const Key&) const;
+      const optional_value operator[](const Key&) const;
+      
+      /**
+       * Get iterator at key
+       */
+      iterator find(const Key&);
+      const_iterator find(const Key&) const;
       
       /**
        * Get parent
        */
-      const nonPtrType parent(const Key&) const;
+      const optional_value parent(const Key&) const;
       
       template<typename Derived,typename Storage>
       iterator_base<Derived,T,Storage>
@@ -810,7 +853,7 @@ namespace TreeBase {
       /**
        * Get previous sibling
        */
-      const nonPtrType previous_sibling(const Key&) const;
+      const optional_value previous_sibling(const Key&) const;
       
       template<typename Derived,typename Storage>
       iterator_base<Derived,T,Storage>
@@ -823,7 +866,7 @@ namespace TreeBase {
       /**
        * Get next sibling
        */
-      const nonPtrType next_sibling(const Key&) const;
+      const optional_value next_sibling(const Key&) const;
       
       template<typename Derived,typename Storage>
       iterator_base<Derived,T,Storage>
@@ -849,7 +892,7 @@ namespace TreeBase {
       /**
        * Get first child
        */
-      const nonPtrType first_child(const Key&) const;
+      const optional_value first_child(const Key&) const;
       
       template<typename Derived,typename Storage>
       iterator_base<Derived,T,Storage>
@@ -916,6 +959,21 @@ namespace TreeBase {
       iterator_base<Derived,Value,Storage>
       append_children(const iterator_base<Derived,Value,Storage>&,
                       const std::vector<T>&);
+      
+      /**
+       * Add multiple children from the iterator range to the node
+       *
+       * first arg: parent node
+       * second arg: begin range
+       * third arg: end range
+       */
+      template<typename Iterator>
+      void append_children(const Key& node, const Iterator&, const Iterator&);
+      template<typename Derived,typename Value,typename Storage,
+               typename Iterator>
+      iterator_base<Derived,Value,Storage>
+      append_children(const iterator_base<Derived,Value,Storage>&,
+                      const Iterator&, const Iterator&);
       
       /**
        * Insert at root level before other nodes
@@ -1033,21 +1091,19 @@ namespace TreeBase {
        */
       void merge(const Tree<T,Key,Hash>&);
       
-//      void sort_siblings(const T&);
-//      void sort_siblings(sibling_iterator from, sibling_iterator to);
+      /**
+       * Swap with another tree
+       */
+      void swap(Tree<T,Key,Hash>&);
       
-      // Compare two subtrees
-//      bool equal_subtree(const T&, const T&);
-//      template<typename iter> bool equal_subtree(const iter&, const iter&);
-      
-      // Extract subtree formed by node and children
-//      Tree<T,Hash> subtree(const T& node);
-      
-      // swap subtrees (node+children)
-//      void swap(const T&,const T&)
-//      void swap(sibling_iterator);
-      
+      /**
+       * Size of the tree
+       */
       size_type size() const;
+      
+      /**
+       * If the tree is size=0, or empty
+       */
       bool empty() const;
       
       /**
@@ -1149,7 +1205,7 @@ BOOST_CLASS_VERSION(I3MCTree,TreeBase::tree_version_);
 I3_POINTER_TYPEDEFS(I3MCTree);
 I3_DEFAULT_NAME(I3MCTree);
 
-#include "dataclasses/physics/I3MCTree.hh"
+#include "dataclasses/physics/detail/I3MCTree_impl.h"
 
 #endif // DATACLASSES_I3MCTREE_H_INCLUDED
 

@@ -297,12 +297,26 @@ Each particle is stored in a node which has the following structure:
 This allows a compact storage of the binary tree representation above.
 
 Nodes are themselves stored in a hash_map with the hash being the
-I3ParticleID of each I3Particle.  This allows constant time access
-to each I3Particle in the tree.
+I3ParticleID of each I3Particle. This allows constant time access
+to each I3Particle in the tree. One major constraint is that the I3ParticleID
+must be unique, so inserting a second particle with the same ID does not work
+(you'll just write over the first copy).
 
-Note that the implementation of hash_map only stores pointers to each
-node so changing the shape of the hash_map does not invalidate those pointers
-(meaning we don't need to worry about internal hash_map operations).
+Iterator Invalidation
+^^^^^^^^^^^^^^^^^^^^^
+
+The implementation of hash_map only stores pointers to each node, so changing
+the shape of the hash_map does not invalidate those pointers, leaving all
+references to nodes as valid (though note that the child/sibling/parent
+node pointer is not valid if that node is deleted). Moreover, inserting an
+element in the hash_map invalidates no hash_map iterators, and removing an
+element invalidates only those iterators which point at the removed element.
+
+Thus, operations which add nodes to the tree structure do not invalidate
+any iterators. Operators which modify or remove nodes from the tree structure
+invalidate all `fast_iterator`s and `leaf_iterator`s, but only invalidate
+`pre_order_iterator`s, `post_order_iterator`s and `sibling_iterator`s where
+the iterator is a child/sibling/parent of the modified or removed nodes.
 
 Iterator Internals
 ------------------
@@ -327,6 +341,9 @@ of each:
 
 Additionally, each iterator can be constant as well. To present a unified
 iterator class to functions, iterator traits were used.
+
+When modifying the tree, iterators are not invalidated unless that node or
+a neighboring node is deleted, or the tree structure changes around the node.
 
 Iterator Traits
 ^^^^^^^^^^^^^^^

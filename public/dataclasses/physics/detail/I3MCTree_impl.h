@@ -4,9 +4,9 @@
  * 
  * copyright (C) 2013 the icecube collaboration
  * 
- * $Id$
- * @version $Revision$
- * @date $Date$
+ * $Id: I3MCTree.hh 112306 2013-10-28 22:43:59Z david.schultz $
+ * @version $Revision: 112306 $
+ * @date $Date: 2013-10-28 17:43:59 -0500 (Mon, 28 Oct 2013) $
  */
 #include <cassert>
 #include <stack>
@@ -37,8 +37,7 @@ namespace TreeBase {
   template<typename Derived,typename Storage>
   Tree<T,Key,Hash>::Tree(const iterator_base<Derived,const T,Storage>& other)
   { 
-    // TODO: do something
-    i3_assert(0);
+    Tree(*(other.node_.treePtr_));
   }
   
   template<typename T, typename Key, typename Hash>
@@ -64,8 +63,7 @@ namespace TreeBase {
   Tree<T,Key,Hash>::operator=(const Tree<T,Key,Hash>& other)
   {
     Tree<T,Key,Hash> tmp(other);
-    internalMap = tmp.internalMap;
-    head_ = tmp.head_;
+    swap(tmp);
     return *this;
   }
   
@@ -92,25 +90,46 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  const typename Tree<T,Key,Hash>::nonPtrType
+  const typename Tree<T,Key,Hash>::optional_value
   Tree<T,Key,Hash>::at(const Key& key) const
   {
     typename tree_hash_map::const_iterator iter = internalMap.find(key);
     if (iter == internalMap.end())
-      return nonPtrType();
+      return optional_value();
     else
-      return nonPtrType(iter->second.data);
+      return optional_value(iter->second.data);
   }
   
   template<typename T, typename Key, typename Hash>
-  const typename Tree<T,Key,Hash>::nonPtrType
+  const typename Tree<T,Key,Hash>::optional_value
+  Tree<T,Key,Hash>::operator[](const Key& key) const
+  {
+    return at(key);
+  }
+  
+  template<typename T, typename Key, typename Hash>
+  typename Tree<T,Key,Hash>::iterator
+  Tree<T,Key,Hash>::find(const Key& key)
+  {
+    return iterator(*this,key);
+  }
+  
+  template<typename T, typename Key, typename Hash>
+  typename Tree<T,Key,Hash>::const_iterator
+  Tree<T,Key,Hash>::find(const Key& key) const
+  {
+    return const_iterator(*this,key);
+  }
+  
+  template<typename T, typename Key, typename Hash>
+  const typename Tree<T,Key,Hash>::optional_value
   Tree<T,Key,Hash>::parent(const Key& key) const
   {
     typename tree_hash_map::const_iterator iter = internalMap.find(key);
     if (iter == internalMap.end() || iter->second.parent == NULL)
-      return nonPtrType();
+      return optional_value();
     else {
-      return nonPtrType(iter->second.parent->data);
+      return optional_value(iter->second.parent->data);
     }
   }
   
@@ -121,7 +140,7 @@ namespace TreeBase {
   {
     if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return iterator_base<Derived,T,Storage>(*this,end_);
-    const nonPtrType ret = parent(*iter);
+    const optional_value ret = parent(*iter);
     if (ret)
       return iterator_base<Derived,T,Storage>(*this,*ret);
     else
@@ -135,7 +154,7 @@ namespace TreeBase {
   {
     if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return iterator_base<Derived,const T,Storage>(*this,end_);
-    const nonPtrType ret = parent(*iter);
+    const optional_value ret = parent(*iter);
     if (ret)
       return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
@@ -143,12 +162,12 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  const typename Tree<T,Key,Hash>::nonPtrType
+  const typename Tree<T,Key,Hash>::optional_value
   Tree<T,Key,Hash>::previous_sibling(const Key& key) const
   {
     typename tree_hash_map::const_iterator iter = internalMap.find(key);
     if (iter == internalMap.end())
-      return nonPtrType();
+      return optional_value();
     const treeNode* n = &(iter->second);
     const treeNode* keynode = &(iter->second);
     if (n->parent == NULL) {
@@ -159,22 +178,22 @@ namespace TreeBase {
           n = &(iter->second);
           while (n->nextSibling != NULL) {
             if (n->nextSibling == keynode)
-              return nonPtrType(n->data);
+              return optional_value(n->data);
             n = n->nextSibling;
           }
         }
       }
-      return nonPtrType();
+      return optional_value();
     }
     n = n->parent;
     assert( n->firstChild != NULL );
     n = n->firstChild;
     while (n->nextSibling != NULL) {
       if (n->nextSibling == keynode)
-        return nonPtrType(n->data);
+        return optional_value(n->data);
       n = n->nextSibling;
     }
-    return nonPtrType();
+    return optional_value();
   }
   
   template<typename T, typename Key, typename Hash>
@@ -185,7 +204,7 @@ namespace TreeBase {
   {
     if (iter ==iterator_base<Derived,T,Storage>(*this,end_))
       return iterator_base<Derived,T,Storage>(*this,end_);
-    const nonPtrType ret = previous_sibling(*iter);
+    const optional_value ret = previous_sibling(*iter);
     if (ret)
       return iterator_base<Derived,T,Storage>(*this,*ret);
     else
@@ -200,7 +219,7 @@ namespace TreeBase {
   {
     if (iter ==iterator_base<Derived,const T,Storage>(*this,end_))
       return iterator_base<Derived,const T,Storage>(*this,end_);
-    const nonPtrType ret = previous_sibling(*iter);
+    const optional_value ret = previous_sibling(*iter);
     if (ret)
       return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
@@ -208,14 +227,14 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  const typename Tree<T,Key,Hash>::nonPtrType
+  const typename Tree<T,Key,Hash>::optional_value
   Tree<T,Key,Hash>::next_sibling(const Key& key) const
   {
     typename tree_hash_map::const_iterator iter = internalMap.find(key);
     if (iter == internalMap.end() || iter->second.nextSibling == NULL)
-      return nonPtrType();
+      return optional_value();
     else
-      return nonPtrType(iter->second.nextSibling->data);
+      return optional_value(iter->second.nextSibling->data);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -225,7 +244,7 @@ namespace TreeBase {
   {
     if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return iterator_base<Derived,T,Storage>(*this,end_);
-    const nonPtrType ret = next_sibling(*iter);
+    const optional_value ret = next_sibling(*iter);
     if (ret)
       return iterator_base<Derived,T,Storage>(*this,*ret);
     else
@@ -240,7 +259,7 @@ namespace TreeBase {
   {
     if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return iterator_base<Derived,const T,Storage>(*this,end_);
-    const nonPtrType ret = next_sibling(*iter);
+    const optional_value ret = next_sibling(*iter);
     if (ret)
       return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
@@ -285,14 +304,14 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  const typename Tree<T,Key,Hash>::nonPtrType
+  const typename Tree<T,Key,Hash>::optional_value
   Tree<T,Key,Hash>::first_child(const Key& key) const
   {
     typename tree_hash_map::const_iterator iter = internalMap.find(key);
     if (iter == internalMap.end() || iter->second.firstChild == NULL)
-      return nonPtrType();
+      return optional_value();
     else
-      return nonPtrType(iter->second.firstChild->data);
+      return optional_value(iter->second.firstChild->data);
   }
   
   template<typename T, typename Key, typename Hash>
@@ -302,7 +321,7 @@ namespace TreeBase {
   {
     if (iter == iterator_base<Derived,T,Storage>(*this,end_))
       return iterator_base<Derived,T,Storage>(*this,end_);
-    const nonPtrType ret = first_child(*iter);
+    const optional_value ret = first_child(*iter);
     if (ret)
       return iterator_base<Derived,T,Storage>(*this,*ret);
     else
@@ -317,7 +336,7 @@ namespace TreeBase {
   {
     if (iter == iterator_base<Derived,const T,Storage>(*this,end_))
       return iterator_base<Derived,const T,Storage>(*this,end_);
-    const nonPtrType ret = first_child(*iter);
+    const optional_value ret = first_child(*iter);
     if (ret)
       return iterator_base<Derived,const T,Storage>(*this,*ret);
     else
@@ -358,7 +377,7 @@ namespace TreeBase {
       return;
     if (iter->second.firstChild != NULL)
       erase_children(key);
-    const nonPtrType prev = previous_sibling(key);
+    const optional_value prev = previous_sibling(key);
     if (prev) {
       // attach next sibling to previous sibling
       typename tree_hash_map::iterator iter2 = internalMap.find(*prev);
@@ -414,10 +433,10 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
-  const typename Tree<T,Key,Hash>::nonPtrType
+  const typename Tree<T,Key,Hash>::optional_value
   Tree<T,Key,Hash>::get_head() const
   {
-    nonPtrType ret;
+    optional_value ret;
     if (head_) {
       typename tree_hash_map::const_iterator iter = internalMap.find(*head_);
       if (iter != internalMap.end())
@@ -456,7 +475,7 @@ namespace TreeBase {
     treeNode newNode = treeNode(child);
     newNode.parent = &(iter->second);
     std::pair<typename tree_hash_map::iterator,bool> insertResult;
-    insertResult = internalMap.insert(std::make_pair<Key,treeNode>(child,newNode));
+    insertResult = internalMap.insert(std::make_pair(child,newNode));
     i3_assert( insertResult.second );
     treeNode* n = &(iter->second);
     if (n->firstChild != NULL) {
@@ -565,6 +584,36 @@ namespace TreeBase {
   }
   
   template<typename T, typename Key, typename Hash>
+  template<typename Iterator>
+  void
+  Tree<T,Key,Hash>::append_children(const Key& node, const Iterator& iter,
+      const Iterator& iter_end)
+  {
+    if (iter != iter_end) {
+      append_child(node,*iter);
+      const T* lastChild = &(*iter);
+      for(iter++;iter!=iter_end;iter++) {
+        insert_after(*lastChild,*iter);
+        lastChild = &(*iter);
+      }
+    }
+  }
+  
+  template<typename T, typename Key, typename Hash>
+  template<typename Derived,typename Value,typename Storage,
+           typename Iterator>
+  typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
+  Tree<T,Key,Hash>::append_children(const iterator_base<Derived,Value,Storage>&,
+      const Iterator& iter, const Iterator& iter_end)
+  {
+    if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
+      append_children(*iter,iter,iter_end);
+      return first_child(iter);
+    } else
+      return iterator_base<Derived,Value,Storage>(*this,end_);
+  }
+  
+  template<typename T, typename Key, typename Hash>
   void
   Tree<T,Key,Hash>::insert(const T& node2)
   {
@@ -575,7 +624,7 @@ namespace TreeBase {
       newNode.nextSibling = &(iter->second);
     }
     std::pair<typename tree_hash_map::iterator,bool> insertResult;
-    insertResult = internalMap.insert(std::make_pair<Key,treeNode>(node2,newNode));
+    insertResult = internalMap.insert(std::make_pair(node2,newNode));
     i3_assert( insertResult.second );
     head_ = node2;
   }
@@ -586,7 +635,7 @@ namespace TreeBase {
   {
     treeNode newNode = treeNode(node2);
     std::pair<typename tree_hash_map::iterator,bool> insertResult;
-    insertResult = internalMap.insert(std::make_pair<Key,treeNode>(node2,newNode));
+    insertResult = internalMap.insert(std::make_pair(node2,newNode));
     i3_assert( insertResult.second );
     if (head_) {
       typename tree_hash_map::iterator iter = internalMap.find(*head_);
@@ -613,9 +662,9 @@ namespace TreeBase {
     newNode.parent = iter->second.parent;
     newNode.nextSibling = &(iter->second);
     std::pair<typename tree_hash_map::iterator,bool> insertResult;
-    insertResult = internalMap.insert(std::make_pair<Key,treeNode>(node2,newNode));
+    insertResult = internalMap.insert(std::make_pair(node2,newNode));
     i3_assert( insertResult.second );
-    const nonPtrType prev = previous_sibling(node);
+    const optional_value prev = previous_sibling(node);
     if (prev) {
       iter = internalMap.find(*prev);
       assert( iter != internalMap.end() );
@@ -654,7 +703,7 @@ namespace TreeBase {
     newNode.parent = iter->second.parent;
     newNode.nextSibling = iter->second.nextSibling;
     std::pair<typename tree_hash_map::iterator,bool> insertResult;
-    insertResult = internalMap.insert(std::make_pair<Key,treeNode>(node2,newNode));
+    insertResult = internalMap.insert(std::make_pair(node2,newNode));
     i3_assert( insertResult.second );
     iter->second.nextSibling = &(insertResult.first->second);
   }
@@ -790,9 +839,9 @@ namespace TreeBase {
     newNode.nextSibling = iter->second.nextSibling;
     newNode.firstChild = iter->second.firstChild;
     std::pair<typename tree_hash_map::iterator,bool> insertResult;
-    insertResult = internalMap.insert(std::make_pair<Key,treeNode>(node2,newNode));
+    insertResult = internalMap.insert(std::make_pair(node2,newNode));
     i3_assert( insertResult.second );
-    const nonPtrType prev = previous_sibling(node);
+    const optional_value prev = previous_sibling(node);
     if (prev) {
       typename tree_hash_map::iterator iter2 = internalMap.find(*prev);
       assert( iter2 != internalMap.end() );
@@ -984,6 +1033,14 @@ namespace TreeBase {
       }
       n = n->nextSibling;
     }
+  }
+  
+  template<typename T, typename Key, typename Hash>
+  void
+  Tree<T,Key,Hash>::swap(Tree<T,Key,Hash>& other)
+  {
+    std::swap(head_,other.head_);
+    internalMap.swap(other.internalMap);
   }
   
   template<typename T, typename Key, typename Hash>
