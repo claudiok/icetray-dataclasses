@@ -16,6 +16,7 @@
 #include "icetray/OMKey.h"
 #include "dataclasses/ModuleKey.h"
 #include "dataclasses/TankKey.h"
+#include "dataclasses/I3Position.h"
 #include "dataclasses/StationKey.h"
 
 template <typename T>
@@ -69,6 +70,7 @@ typedef I3Vector<std::string> I3VectorString;
 typedef I3Vector<float> I3VectorFloat;
 typedef I3Vector<double> I3VectorDouble;
 typedef I3Vector<std::pair<double, double> > I3VectorDoubleDouble;
+typedef I3Vector<I3Position> I3VectorI3Position;
 
 typedef I3Vector<OMKey> I3VectorOMKey;
 typedef I3Vector<TankKey> I3VectorTankKey;
@@ -90,6 +92,7 @@ I3_POINTER_TYPEDEFS(I3VectorTankKey);
 I3_POINTER_TYPEDEFS(I3VectorStationKey);
 I3_POINTER_TYPEDEFS(I3VectorModuleKey);
 I3_POINTER_TYPEDEFS(I3VectorDoubleDouble);
+I3_POINTER_TYPEDEFS(I3VectorI3Position);
 
 // inconsistent... if you take this out, though, you have to be sure
 // that you add it to I3Vector.cxx so that I3VectorUnsignedInt is

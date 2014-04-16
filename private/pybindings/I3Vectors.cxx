@@ -23,6 +23,7 @@
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/ostream_overloads.hpp>
 #include <dataclasses/physics/I3Particle.h>
+#include <dataclasses/I3Position.h>
 #include <icetray/python/dataclass_suite.hpp>
 #include <vector>
 #include <sstream>
@@ -87,6 +88,7 @@ void register_I3Vectors()
 
   register_i3vector_of<I3Particle>("I3Particle");
   register_i3vector_of<I3Particle::ParticleType>("ParticleType");
-  
+  register_i3vector_of<I3Position>("I3Position");
+
   register_std_pair<double, double>("PairDoubleDouble");
 }

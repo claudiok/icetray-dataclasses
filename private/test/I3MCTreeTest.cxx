@@ -2873,9 +2873,9 @@ TEST(utils_GetBest)
   I3MCTreeUtils::AppendChild(*t2,p4,p5);
   I3MCTreeUtils::AppendChild(*t2,p5,p6);
   
-  const I3Particle* ret2 = I3MCTreeUtils::GetBestPtr(t2,best_cmp);
+  const I3MCTree::const_iterator ret2 = I3MCTreeUtils::GetBestPtr(t2,best_cmp);
   I3MCTree::const_iterator iter(*t2,p4);
-  ENSURE( ret2 == &(*iter) , "I3MCTreePtr: p4 is not best");
+  ENSURE( ret2 == iter , "I3MCTreePtr: p4 is not best");
 }
 
 bool filter_cmp(const I3Particle& p)
@@ -2905,12 +2905,12 @@ TEST(utils_GetFilter)
   I3MCTreeUtils::AppendChild(*t2,p4,p5);
   I3MCTreeUtils::AddPrimary(*t2,p6);
   
-  std::vector<const I3Particle*> ret2 = I3MCTreeUtils::GetFilterPtr(t2,filter_cmp);
+  const std::vector<I3MCTree::fast_const_iterator> ret2 = I3MCTreeUtils::GetFilterPtr(t2,filter_cmp);
   ENSURE( ret2.size() == 2 );
-  I3MCTree::const_iterator iter(*t2,p4);
-  ENSURE( ret2.at(0) == &(*iter) , "I3MCTreePtr: p4 not in filter");
+  I3MCTree::fast_const_iterator iter(*t2,p4);
+  ENSURE( ret2.at(0) == iter , "I3MCTreePtr: p4 not in filter");
   iter = I3MCTree::const_iterator(*t2,p6);
-  ENSURE( ret2.at(1) == &(*iter) , "I3MCTreePtr: p6 not in filter");
+  ENSURE( ret2.at(1) == iter , "I3MCTreePtr: p6 not in filter");
 }
 
 bool filter_cmp2(const I3Particle& p)
@@ -2927,7 +2927,7 @@ TEST(utils_GetBestFilter)
   I3MCTreeUtils::AppendChild(t1,p1,p2);
   I3MCTreeUtils::AppendChild(t1,p2,p3);
   
-  const I3MCTree::nonPtrType ret = I3MCTreeUtils::GetBestFilter(t1,filter_cmp2,best_cmp);
+  const I3MCTree::optional_value ret = I3MCTreeUtils::GetBestFilter(t1,filter_cmp2,best_cmp);
   ENSURE( ret ,"nothing passed filter" );
   ENSURE( I3ParticleID(*ret) == I3ParticleID(p2) , "p2 not best filtered");
   
@@ -2940,10 +2940,10 @@ TEST(utils_GetBestFilter)
   I3MCTreeUtils::AppendChild(*t2,p4,p5);
   I3MCTreeUtils::AddPrimary(*t2,p6);
   
-  const I3Particle* ret2 = I3MCTreeUtils::GetBestFilterPtr(t2,filter_cmp2,best_cmp);
-  ENSURE( ret2 != NULL , "I3MCTreePtr: nothing passed filter");
+  const I3MCTree::const_iterator ret2 = I3MCTreeUtils::GetBestFilterPtr(t2,filter_cmp2,best_cmp);
+  ENSURE( ret2 != t2->cend() , "I3MCTreePtr: nothing passed filter");
   I3MCTree::const_iterator iter(*t2,p5);
-  ENSURE( ret2 == &(*iter) , "I3MCTreePtr: p5 not best filtered");
+  ENSURE( ret2 == iter , "I3MCTreePtr: p5 not best filtered");
 }
 
 

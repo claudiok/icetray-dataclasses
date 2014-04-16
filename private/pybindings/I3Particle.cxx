@@ -36,7 +36,7 @@ void register_I3Particle()
 {
     class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> > particle =
       class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> >("I3Particle")
-      #define RO_PROPERTIES (MajorID)(MinorID)
+      #define RO_PROPERTIES (MajorID)(MinorID)(ID)
       #define PROPERTIES (Time)(Energy)(Shape)(Type)(PdgEncoding)(Length)(Speed)(FitStatus)(LocationType) \
                          (ShapeString)(TypeString)(FitStatusString)(LocationTypeString)
       #define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)
