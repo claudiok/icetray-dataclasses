@@ -14,8 +14,8 @@ using namespace I3Units;
 
 //Serialize method
 //-----------------------------------------------
-template <class Archive> 
-void 
+template <class Archive>
+void
 I3Position::serialize(Archive& ar, unsigned version)
 {
   if (version>i3position_version_)
@@ -45,28 +45,28 @@ isCalculated_(true)
 I3Position::I3Position(double r1, double r2, double r3, RefFrame frame){
   // Store position according to reference frame f
   isCalculated_=false;
-  
+
   switch (frame) {
     case car: // Input given in Cartesian coordinates
       x_=r1;
       y_=r2;
       z_=r3;
       break;
-      
+
     case sph: // Input given in Spherical coordinates
       r_=r1;
       theta_=r2;
       phi_=r3;
       CalcCarCylFromSph();
       break;
-      
+
     case cyl: // Input given in Cylindrical coordinates
       rho_=r1;
       phi_=r2;
       z_=r3;
       CalcCarSphFromCyl();
       break;
-      
+
     default: // Unsupported reference frame
       log_fatal("Unsupported reference frame passed to I3Position::SetPosition: %i",frame);
       break;
