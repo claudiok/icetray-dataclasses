@@ -135,7 +135,7 @@ namespace TreeBase {
        * 
        * Define TreeValue and TreeHashMapIter types.
        */
-      template <typename ValueType, int dummy>
+      template <typename ValueType, int dummy=0>
       struct iterator_const_traits;
       template <int dummy>
       struct iterator_const_traits <T,dummy>
@@ -323,7 +323,7 @@ namespace TreeBase {
           >
       {
         protected:
-          typedef iterator_const_traits<Value,0> const_traits;
+          typedef iterator_const_traits<Value> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
           typedef iterator_storage_impl<StorageType, Value,TreeValue,
@@ -379,7 +379,7 @@ namespace TreeBase {
       class pre_order : public iterator_base<pre_order<Value>,Value,TreeHashKey>
       {
         protected:
-          typedef iterator_const_traits<Value,0> const_traits;
+          typedef iterator_const_traits<Value> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
           typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
@@ -458,7 +458,7 @@ namespace TreeBase {
       class post_order : public iterator_base<post_order<Value>,Value,TreeHashKey>
       {
         protected:
-          typedef iterator_const_traits<Value,0> const_traits;
+          typedef iterator_const_traits<Value> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
           typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
@@ -541,7 +541,7 @@ namespace TreeBase {
       class sibling_iter : public iterator_base<sibling_iter<Value>,Value,TreeHashKey>
       {
         protected:
-          typedef iterator_const_traits<Value,0> const_traits;
+          typedef iterator_const_traits<Value> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
           typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
@@ -598,10 +598,10 @@ namespace TreeBase {
        */
       template <typename Value>
       class fast_iter : public iterator_base<fast_iter<Value>,Value,
-          typename iterator_const_traits<Value,0>::TreeHashMapIter>
+          typename iterator_const_traits<Value>::TreeHashMapIter>
       {
         protected:
-          typedef iterator_const_traits<Value,0> const_traits;
+          typedef iterator_const_traits<Value> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
           typedef iterator_storage_impl<TreeHashMapIter, Value,TreeValue,
@@ -648,10 +648,10 @@ namespace TreeBase {
        */
       template <class Value>
       class leaf_iter : public iterator_base<leaf_iter<Value>,Value,
-          typename iterator_const_traits<Value,0>::TreeHashMapIter>
+          typename iterator_const_traits<Value>::TreeHashMapIter>
       {
         protected:
-          typedef iterator_const_traits<Value,0> const_traits;
+          typedef iterator_const_traits<Value> const_traits;
           typedef typename const_traits::TreeValue TreeValue;
           typedef typename const_traits::TreeHashMapIter TreeHashMapIter;
           typedef iterator_storage_impl<TreeHashMapIter, Value,TreeValue,
