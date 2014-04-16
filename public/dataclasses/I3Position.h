@@ -95,38 +95,6 @@ class I3Position : public I3FrameObject
   //--------------
 
   /**
-   * Store position from position p
-   */
-  void SetPosition(const I3Position& p) __attribute__((deprecated));
-  void SetPos(const I3Position& p) __attribute__((deprecated));
-
-  /**
-   * Store position r in cartesian ref frame
-   */
-  void SetPosition(double x, double y, double z) __attribute__((deprecated));
-  void SetPos(double x, double y, double z) __attribute__((deprecated));
-
-  /**
-   * Store position r in ref frame f
-   */
-  void SetPosition(double r1, double r2, double r3, RefFrame f) __attribute__((deprecated));
-  void SetPos(double r1, double r2, double r3, RefFrame f)  __attribute__((deprecated));
-
-  /**
-   * Reset all elements of I3Position to NAN
-   */
-  void ResetPosition() __attribute__ ((deprecated));
-  void ResetPos() __attribute__ ((deprecated));
-
-  /**
-   * Set null position for non-existing position (ResetPosition)
-   */
-  void NullPosition() __attribute__ ((deprecated));
-  void NullPos() __attribute__ ((deprecated));
-
-  //--------------
-
-  /**
    * Provide X of position in cartesian ref frame
    */
   inline double GetX() const {return x_;}
@@ -206,11 +174,6 @@ class I3Position : public I3FrameObject
   //--------------
 
   /**
-   * Shift coordinate system by position p (i.e. 'this'='this'-'p')
-   */
-  void ShiftCoordSystem(const I3Position& p) __attribute__ ((deprecated));
-
-  /**
    * Rotate position around X axis by angle
    */
   void RotateX(double angle);
@@ -224,11 +187,6 @@ class I3Position : public I3FrameObject
    * Rotate position around Z axis by angle
    */
   void RotateZ(double angle);
-
-  /**
-   * Provide distance to position p
-   */
-  double CalcDistance(const I3Position& p) const __attribute__ ((deprecated));
 
   /**
    * Computes the distance from this position to the origin of the
