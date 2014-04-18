@@ -94,12 +94,12 @@ namespace TreeBase {
       bool operator!=(const T& otherData) const { return !(*this == otherData); }
   };
   
-  /**
-   * A generic tree class for hashable, unique data types.
+  /** \class Tree
+   * \brief A generic tree class for hashable, unique data types.
    *
-   * T is the data type
-   * Key is the lookup type (T must be able to be implicitly converted to Key)
-   * Hash is the hash function to convert from Key to size_t
+   * \tparam T is the data type
+   * \tparam Key is the lookup type (T must be able to be implicitly converted to Key)
+   * \tparam Hash is the hash function to convert from Key to size_t
    *
    * Note that Key must be unique and equality comparable.
    */
@@ -113,20 +113,32 @@ namespace TreeBase {
       typedef ptrdiff_t                 difference_type;
       typedef std::forward_iterator_tag iterator_category;
       
-      /**
+      /** \typedef optional_value
        * The optional_value is used when returning by value
        * when there might not be anything to return.
        */
       typedef boost::optional<T>  optional_value;
     protected:
+      /** \typedef TreeHashKey
+       * A boost::optional version of Key
+       */
       typedef boost::optional<Key> TreeHashKey;
+      /** \typedef treeNode
+       * A TreeNode capable of holding the value_type (T)
+       */
       typedef TreeNode<value_type> treeNode;
+      /** \typedef tree_hash_map
+       * a hash_map of Key : treeNode
+       */
       typedef hash_map<Key,treeNode > tree_hash_map;
       
-      tree_hash_map internalMap;
-      TreeHashKey head_;
-      TreeHashKey end_; // a special end node that doesn't really exist
+      tree_hash_map internalMap; /**< the actual hash_map storage **/
+      TreeHashKey head_; /**< the first top-level node **/
+      TreeHashKey end_; /**< a special end node that doesn't really exist **/
       
+      /**
+       * Erase any siblings (and their children) to the right of the node
+       */
       void eraseRightSiblings_(const Key&);
     
     private:
@@ -1185,7 +1197,9 @@ namespace TreeBase {
       
     protected:
       friend class boost::serialization::access;
+      
       template <class Archive> void load(Archive & ar, unsigned version);
+      
       template <class Archive> void save(Archive & ar, unsigned version) const;
       
       BOOST_SERIALIZATION_SPLIT_MEMBER();

@@ -15,46 +15,65 @@ Everything is const-correct, so be sure to follow the rules.
 If something isn't compiling, this may be why.
 
 Iterators
-"""""""""
+^^^^^^^^^
+
+.. _pre_order_iterator:
 
   **pre_order_iterator (default)**
   
     Iterates through a tree in pre-order.
     
-    .. image:: http://upload.wikimedia.org/wikipedia/commons/d/d4/Sorted_binary_tree_preorder.svg
-       :target: http://en.wikipedia.org/wiki/Tree_traversal#Pre-order
+    .. only:: html
+      
+      .. raw:: html
+          
+        <a href="http://en.wikipedia.org/wiki/Tree_traversal#Pre-order" title="Pre-order">
+          <img src="http://upload.wikimedia.org/wikipedia/commons/d/d4/Sorted_binary_tree_preorder.svg" alt="Pre-order traversal image" />
+        </a>
 
     #. Visit the root
     #. Traverse the left subtree
     #. Traverse the right subtree
-  
+
+.. _post_order_iterator:
 
   **post_order_iterator**
 
     Iterates through a tree in post-order.
     
-    .. image:: http://upload.wikimedia.org/wikipedia/commons/9/9d/Sorted_binary_tree_postorder.svg
-       :target: http://en.wikipedia.org/wiki/Tree_traversal#Post-order
+    .. only:: html
+      
+      .. raw:: html
+          
+        <a href="http://en.wikipedia.org/wiki/Tree_traversal#Post-order" title="Post-order">
+          <img src="http://upload.wikimedia.org/wikipedia/commons/9/9d/Sorted_binary_tree_postorder.svg" alt="Post-order traversal image" />
+        </a>
 
     #. Traverse the left subtree
     #. Visit the root
     #. Traverse the right subtree
 
+.. _sibling_iterator:
+
   **sibling_iterator**
 
     Iterates through all siblings to the right of the given node.
+
+.. _fast_iterator:
 
   **fast_iterator**
 
     No guarantees on order of node. Uses underlying datastructures to
     give fastest iterator possible.
 
+.. _leaf_iterator:
+
   **leaf_iterator**
 
     Uses a fast_iterator, but only stops at leaf nodes.
 
 Functions
-"""""""""
+^^^^^^^^^
 
   Functions that are built-in to the tree. Most functions support
   either I3ParticleID / I3Particle or Iterator arguments.
@@ -105,7 +124,7 @@ Functions
 
 
 I3MCTreeUtils
-"""""""""""""
+^^^^^^^^^^^^^
 
   Functions that do not need to know about tree internals to work.
 
@@ -130,7 +149,7 @@ I3MCTreeUtils
     
     Returns the single particle that best matches a comparison function.
     Function is a callable which takes two I3Particles, compares them,
-    and returns an integer (positive = first particle is better).
+    and returns true/false (true = first is less than second).
     
   * GetFilter(Tree, Function)
     
@@ -144,10 +163,10 @@ I3MCTreeUtils
     FilterFunction is a callable which takes an I3Particle and returns
     true/false.
     CmpFunction is a callable which takes two I3Particles, compares them,
-    and returns an integer (positive = first particle is better).
+    and returns true/false (true = first is less than second).
 
 For more C++ details, see the 
-`doxygen docs <../../doxygen/dataclasses/I3MCTree_8h.html>`_.
+`doxygen docs <../../doxygen/dataclasses/classTreeBase_1_1Tree.html>`_.
 
 
 Python
@@ -190,9 +209,7 @@ Several special functions are included:
 
 * __contains__
 
-  Does the tree contain an I3ParticleID?
-  
-  .. code::
+  Does the tree contain an I3ParticleID? ::
   
     if particle in tree:
       print 'found particle'
@@ -248,14 +265,13 @@ N-ary Tree:
 
 .. only:: not html
 
-          P
-       ---^---
-      P       P
-     / \      /\
-    P   P    P  P
-   /\   |   /\   \
-  P  P  P  P  P   P
-
+  |         P
+  |      ---^---
+  |     P       P
+  |    / \      /\
+  |   P   P    P  P
+  |  /\   |   /\   \
+  | P  P  P  P  P   P
 
 Binary Representation:
 
@@ -276,13 +292,13 @@ Binary Representation:
 
 .. only:: not html
 
-          P
-        /
-      P-------P
-     /       /
-    P---P    P--P
-   /    |   /    \
-  P--P  P  P--P   P
+  |         P
+  |       /
+  |     P-------P
+  |    /       /
+  |   P---P    P--P
+  |  /    |   /    \
+  | P--P  P  P--P   P
 
 Storage of I3Particles
 ----------------------
@@ -314,8 +330,8 @@ element invalidates only those iterators which point at the removed element.
 
 Thus, operations which add nodes to the tree structure do not invalidate
 any iterators. Operators which modify or remove nodes from the tree structure
-invalidate all `fast_iterator`s and `leaf_iterator`s, but only invalidate
-`pre_order_iterator`s, `post_order_iterator`s and `sibling_iterator`s where
+invalidate all fast_iterator_ and leaf_iterator_, but only invalidate
+pre_order_iterator_, post_order_iterator_ and sibling_iterator_ where
 the iterator is a child/sibling/parent of the modified or removed nodes.
 
 Iterator Internals
@@ -377,6 +393,18 @@ The secret code::
 
 This requires the parent class template to contain the Derived type, but
 this was required by boost::iterator_facade anyway.
+
+Compilers
+---------
+
+Or, why this doesn't compile with older versions of GCC.
+
+The main reason is `bug 14032 <http://gcc.gnu.org/bugzilla/show_bug.cgi?id=14032>`_.
+This has to do with template specialization within a templated class (basing
+the inner template off of the outer template). It's important to the Tree
+class, and difficult to make everything work without it.
+
+So, GCC 4.3+ is supported. No support for anything lower. Clang is also good.
 
 .. _mctree-python-bindings:
 
