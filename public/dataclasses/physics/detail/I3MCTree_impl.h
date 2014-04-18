@@ -586,7 +586,7 @@ namespace TreeBase {
   template<typename T, typename Key, typename Hash>
   template<typename Iterator>
   void
-  Tree<T,Key,Hash>::append_children(const Key& node, const Iterator& iter,
+  Tree<T,Key,Hash>::append_children(const Key& node, Iterator iter,
       const Iterator& iter_end)
   {
     if (iter != iter_end) {
@@ -603,11 +603,11 @@ namespace TreeBase {
   template<typename Derived,typename Value,typename Storage,
            typename Iterator>
   typename Tree<T,Key,Hash>::template iterator_base<Derived,Value,Storage>
-  Tree<T,Key,Hash>::append_children(const iterator_base<Derived,Value,Storage>&,
-      const Iterator& iter, const Iterator& iter_end)
+  Tree<T,Key,Hash>::append_children(const iterator_base<Derived,Value,Storage>& iter,
+      Iterator iter_begin, const Iterator& iter_end)
   {
     if (iter != iterator_base<Derived,Value,Storage>(*this,end_)) {
-      append_children(*iter,iter,iter_end);
+      append_children(*iter,iter_begin,iter_end);
       return first_child(iter);
     } else
       return iterator_base<Derived,Value,Storage>(*this,end_);

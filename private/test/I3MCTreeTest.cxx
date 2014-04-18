@@ -743,43 +743,43 @@ TEST(iterator_conversion)
   I3MCTree::const_iterator iter_const21(pre_order_iter);
   I3MCTree::const_iterator iter_const31(post_order_iter);
   I3MCTree::const_iterator iter_const41(sibling_iter);
-  //I3MCTree::const_iterator iter_const51(fast_iter);
-  //I3MCTree::const_iterator iter_const61(leaf_iter);
+  I3MCTree::const_iterator iter_const51(fast_iter);
+  I3MCTree::const_iterator iter_const61(leaf_iter);
   
   I3MCTree::pre_order_const_iterator pre_order_iter_const11(iter);
   I3MCTree::pre_order_const_iterator pre_order_iter_const21(pre_order_iter);
   I3MCTree::pre_order_const_iterator pre_order_iter_const31(post_order_iter);
   I3MCTree::pre_order_const_iterator pre_order_iter_const41(sibling_iter);
-  //I3MCTree::pre_order_const_iterator pre_order_iter_const51(fast_iter);
-  //I3MCTree::pre_order_const_iterator pre_order_iter_const61(leaf_iter);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const51(fast_iter);
+  I3MCTree::pre_order_const_iterator pre_order_iter_const61(leaf_iter);
   
   I3MCTree::post_order_const_iterator post_order_iter_const11(iter);
   I3MCTree::post_order_const_iterator post_order_iter_const21(pre_order_iter);
   I3MCTree::post_order_const_iterator post_order_iter_const31(post_order_iter);
   I3MCTree::post_order_const_iterator post_order_iter_const41(sibling_iter);
-  //I3MCTree::post_order_const_iterator post_order_iter_const51(fast_iter);
-  //I3MCTree::post_order_const_iterator post_order_iter_const61(leaf_iter);
+  I3MCTree::post_order_const_iterator post_order_iter_const51(fast_iter);
+  I3MCTree::post_order_const_iterator post_order_iter_const61(leaf_iter);
   
   I3MCTree::sibling_const_iterator sibling_iter_const11(iter);
   I3MCTree::sibling_const_iterator sibling_iter_const21(pre_order_iter);
   I3MCTree::sibling_const_iterator sibling_iter_const31(post_order_iter);
   I3MCTree::sibling_const_iterator sibling_iter_const41(sibling_iter);
-  //I3MCTree::sibling_const_iterator sibling_iter_const51(fast_iter);
-  //I3MCTree::sibling_const_iterator sibling_iter_const61(leaf_iter);
+  I3MCTree::sibling_const_iterator sibling_iter_const51(fast_iter);
+  I3MCTree::sibling_const_iterator sibling_iter_const61(leaf_iter);
   
   I3MCTree::fast_const_iterator fast_iter_const11(iter);
   I3MCTree::fast_const_iterator fast_iter_const21(pre_order_iter);
   I3MCTree::fast_const_iterator fast_iter_const31(post_order_iter);
   I3MCTree::fast_const_iterator fast_iter_const41(sibling_iter);
-  //I3MCTree::fast_const_iterator fast_iter_const51(fast_iter);
-  //I3MCTree::fast_const_iterator fast_iter_const61(leaf_iter);
+  I3MCTree::fast_const_iterator fast_iter_const51(fast_iter);
+  I3MCTree::fast_const_iterator fast_iter_const61(leaf_iter);
   
   I3MCTree::leaf_const_iterator leaf_iter_const11(iter);
   I3MCTree::leaf_const_iterator leaf_iter_const21(pre_order_iter);
   I3MCTree::leaf_const_iterator leaf_iter_const31(post_order_iter);
   I3MCTree::leaf_const_iterator leaf_iter_const41(sibling_iter);
-  //I3MCTree::leaf_const_iterator leaf_iter_const51(fast_iter);
-  //I3MCTree::leaf_const_iterator leaf_iter_const61(leaf_iter);
+  I3MCTree::leaf_const_iterator leaf_iter_const51(fast_iter);
+  I3MCTree::leaf_const_iterator leaf_iter_const61(leaf_iter);
   
   // now do initializing assignment
   I3MCTree::iterator iter12 = iter;
@@ -903,6 +903,34 @@ TEST(get_heads)
   ENSURE( heads.at(1) == p2 );
   ENSURE( heads.at(2) == p3 );
   ENSURE( heads.at(3) == p4 );
+}
+
+TEST(at)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  t1.insert_after(p1);
+  t1.insert_after(p2);
+  
+  ENSURE( t1.at(p1) == p1 );
+  ENSURE( t1.at(p2) == p2 );
+  ENSURE( t1[p1] == p1 );
+  ENSURE( t1[p2] == p2 );
+}
+
+TEST(find)
+{
+  I3MCTree t1;
+  I3Particle p1 = makeParticle();
+  I3Particle p2 = makeParticle();
+  t1.insert_after(p1);
+  t1.insert_after(p2);
+  
+  ENSURE( *(t1.find(p1)) == p1 );
+  
+  const I3MCTree t2(t1);
+  ENSURE( *(t2.find(p2)) == p2 );
 }
 
 TEST(append_child)
@@ -1068,6 +1096,15 @@ TEST(append_child_iter)
   children5 = t3.children(p4);
   ENSURE( !children5.empty() , "no children5");
   ENSURE( children5 == newchildren , "added children incorrect");
+  
+  t3.clear();
+  t3.insert(makeParticle());
+  p4 = *t3.get_head();
+  ENSURE( t3.append_children(t3.begin(),newchildren.begin(),newchildren.end()) != t3.end(),
+         "failed to append multiple children");
+  std::vector<I3Particle> children6 = t3.children(p4);
+  ENSURE( !children6.empty() , "no children5");
+  ENSURE( children6 == newchildren , "added children incorrect");
 }
 
 TEST(erase)
@@ -2842,12 +2879,7 @@ TEST(utils_Get)
 int best_cmp(const I3Particle& p1, const I3Particle& p2)
 {
   I3ParticleID pid1(p1), pid2(p2);
-  if (pid1 < pid2)
-    return 1;
-  else if (pid2 < pid1)
-    return -1;
-  else
-    return 0;
+  return pid1 < pid2;
 }
 
 TEST(utils_GetBest)

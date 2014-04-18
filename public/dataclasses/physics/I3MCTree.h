@@ -968,12 +968,12 @@ namespace TreeBase {
        * third arg: end range
        */
       template<typename Iterator>
-      void append_children(const Key& node, const Iterator&, const Iterator&);
+      void append_children(const Key& node, Iterator, const Iterator&);
       template<typename Derived,typename Value,typename Storage,
                typename Iterator>
       iterator_base<Derived,Value,Storage>
       append_children(const iterator_base<Derived,Value,Storage>&,
-                      const Iterator&, const Iterator&);
+                      Iterator, const Iterator&);
       
       /**
        * Insert at root level before other nodes
