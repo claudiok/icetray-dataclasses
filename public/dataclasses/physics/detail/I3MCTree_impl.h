@@ -474,10 +474,12 @@ namespace TreeBase {
     assert( iter != internalMap.end() );
     treeNode newNode = treeNode(child);
     newNode.parent = &(iter->second);
+    assert( newNode.parent != NULL );
     std::pair<typename tree_hash_map::iterator,bool> insertResult;
     insertResult = internalMap.insert(std::make_pair(child,newNode));
     i3_assert( insertResult.second );
     treeNode* n = &(iter->second);
+    assert( n != NULL );
     if (n->firstChild != NULL) {
       // add as last child
       n = n->firstChild;

@@ -90,6 +90,8 @@ TEST(CopyObjConstructor)
                   "Copied type do not match");
   ENSURE( p1.GetShape() == p2.GetShape(),
                   "Copied shape do not match");
+  ENSURE( p1.GetID() == p2.GetID(),
+                  "Particle IDs do not match");
 
 }
 
