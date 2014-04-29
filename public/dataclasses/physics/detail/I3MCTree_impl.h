@@ -43,13 +43,8 @@ namespace TreeBase {
   template<typename T, typename Key, typename Hash>
   Tree<T,Key,Hash>::Tree(const Tree<T,Key,Hash>& copy)
   {
-    if (copy.head_) {
-      BOOST_FOREACH(const T p,copy.get_heads()) {
-        insert_after(p);
-        BOOST_FOREACH(const T c,copy.children(p))
-          append_child(p,copy,c);
-      }
-    }
+    if (copy.head_)
+      merge(copy);
   }
   
   template<typename T, typename Key, typename Hash>
