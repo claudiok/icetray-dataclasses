@@ -40,4 +40,48 @@ i3_test_executable(test
 
 i3_test_scripts(resources/test/*.py)
 
-add_subdirectory(private/pybindings)
+i3_add_pybindings(dataclasses
+  private/pybindings/I3Calibration.cxx
+  private/pybindings/I3Constants.cxx
+  private/pybindings/I3DOMLaunch.cxx
+  private/pybindings/I3DetectorStatus.cxx
+  private/pybindings/I3DOMFunctions.cxx
+  private/pybindings/I3Direction.cxx
+  private/pybindings/I3Double.cxx
+  private/pybindings/I3EventHeader.cxx
+  private/pybindings/I3FlasherInfo.cxx
+  private/pybindings/I3FilterResult.cxx
+  private/pybindings/I3Geometry.cxx
+  private/pybindings/I3OMGeo.cxx
+  private/pybindings/I3TankGeo.cxx
+  private/pybindings/I3MCHit.cxx
+  private/pybindings/I3MCList.cxx
+  private/pybindings/I3MCTree.cxx
+  private/pybindings/I3LinearizedMCTree.cxx
+  private/pybindings/I3ParticleID.cxx
+  private/pybindings/I3Particle.cxx
+  private/pybindings/I3Position.cxx
+  private/pybindings/I3RecoHit.cxx
+  private/pybindings/I3RecoPulse.cxx
+  private/pybindings/I3String.cxx
+  private/pybindings/I3MapOMKeyMask.cxx
+  private/pybindings/I3MapOMKeyUnion.cxx
+  private/pybindings/I3Matrix.cxx
+  private/pybindings/I3Time.cxx
+  private/pybindings/I3TimeWindow.cxx
+  private/pybindings/I3Trigger.cxx
+  private/pybindings/I3Waveform.cxx
+  private/pybindings/I3Vectors.cxx
+  private/pybindings/I3MapString.cxx
+  private/pybindings/I3MapInt.cxx
+  private/pybindings/I3MapKey.cxx
+  private/pybindings/I3MapI3ParticleID.cxx
+  private/pybindings/I3Orientation.cxx
+  private/pybindings/I3SuperDST.cxx
+  private/pybindings/ModuleKey.cxx
+  private/pybindings/I3ModuleGeo.cxx
+  private/pybindings/TankKey.cxx
+  private/pybindings/module.cxx
+  USE_TOOLS boost python
+  USE_PROJECTS icetray dataclasses
+  )

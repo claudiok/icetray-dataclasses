@@ -98,44 +98,9 @@ class I3Direction : public I3FrameObject
   //--------------
 
   /**
-   * Store direction from direction d
-   * \deprecated Use the assignment operator instead
-   */
-  void SetDirection(const I3Direction& d) __attribute__ ((deprecated));
-  void SetDir(const I3Direction& d) __attribute__ ((deprecated));
-
-  /**
-   * Store direction with zen and azi (2 arguments)
-   * \deprecated Use the spherical constructor and assignment operator instead
-   */
-  void SetDirection(double zen, double azi) __attribute__ ((deprecated));
-  void SetDir(double zen, double azi) __attribute__ ((deprecated));
-
-  /**
-   * Store direction with x, y, z (3 arguments)
-   * \deprecated Use the cartesian constructor and assignment operator instead
-   */
-  void SetDirection(double x, double y, double z) __attribute__ ((deprecated));
-  void SetDir(double x, double y, double z) __attribute__ ((deprecated));
-
-  /**
    * Store direction with theta, phi
    */
   void SetThetaPhi(double theta, double phi);
-
-  /**
-   * Reset all elements of I3Direction to NAN
-   * \deprecated Use the default constructor and assignment operator instead
-   */
-  void ResetDirection() __attribute__ ((deprecated));
-  void ResetDir() __attribute__ ((deprecated));
-
-  /**
-   * Set null direction for non-existing direction (ResetDirection)
-   * \deprecated Use the default constructor and assignment operator instead
-   */
-  void NullDirection() __attribute__ ((deprecated));
-  void NullDir() __attribute__ ((deprecated));
 
   //--------------
 
@@ -235,12 +200,6 @@ class I3Direction : public I3FrameObject
    */
   I3Position Cross(const I3Position&) const;
 
-  /**
-   * Dot product of this . d
-   * \deprecated Use the overloaded operator* instead
-   */
-  double Dot(const I3Direction& d) __attribute__ ((deprecated));
-  
   /**
    * Scalar (dot) product
    */

@@ -187,6 +187,7 @@ void I3TriggerStatus::load(Archive& ar, unsigned version)
     }
 }
 
+I3_SERIALIZABLE(I3TriggerReadoutConfig);
 I3_SPLIT_SERIALIZABLE(I3TriggerStatus);
 
 #define TRIGGER_CONFIG_TYPES(TYPE)				                      \

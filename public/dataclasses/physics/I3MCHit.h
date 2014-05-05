@@ -95,10 +95,10 @@ class I3MCHit
   void SetHitID(int hitID){hitID_ = hitID;}
 
   // Below will be deprecated! Assumes weight == NPE
-  void SetWeight(double w) { 
+  void SetWeight(double w) __attribute__ ((deprecated)) { 
     npe_ = static_cast<uint64_t>(w);
   }
-  double GetWeight() const { 
+  double GetWeight() const __attribute__ ((deprecated)) {
     return static_cast<uint64_t>(npe_); 
   }
 
@@ -109,11 +109,6 @@ class I3MCHit
   double GetCharge() const { return charge_; }
 
   void SetCharge(double charge) { charge_ = charge; }
-
-  int32_t GetParticleID() const { 
-    log_warn("I3MCHit::GetParticleID is deprecated.  Please use I3MCHit::GetParticleMinorID.");
-    return particleID_; 
-  }
 
   int32_t GetParticleMinorID() const { return particleID_; }
 

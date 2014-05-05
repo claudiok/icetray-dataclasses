@@ -14,8 +14,8 @@ using namespace I3Units;
 
 //Serialize method
 //-----------------------------------------------
-template <class Archive> 
-void 
+template <class Archive>
+void
 I3Position::serialize(Archive& ar, unsigned version)
 {
   if (version>i3position_version_)
@@ -45,93 +45,32 @@ isCalculated_(true)
 I3Position::I3Position(double r1, double r2, double r3, RefFrame frame){
   // Store position according to reference frame f
   isCalculated_=false;
-  
+
   switch (frame) {
     case car: // Input given in Cartesian coordinates
       x_=r1;
       y_=r2;
       z_=r3;
       break;
-      
+
     case sph: // Input given in Spherical coordinates
       r_=r1;
       theta_=r2;
       phi_=r3;
       CalcCarCylFromSph();
       break;
-      
+
     case cyl: // Input given in Cylindrical coordinates
       rho_=r1;
       phi_=r2;
       z_=r3;
       CalcCarSphFromCyl();
       break;
-      
+
     default: // Unsupported reference frame
       log_fatal("Unsupported reference frame passed to I3Position::SetPosition: %i",frame);
       break;
   }
-}
-
-//-----------------------------------------------------------
-void I3Position::SetPosition(const I3Position& p) {
-  *this=p;
-}
-
-//-----------------------------------------------------------
-void I3Position::SetPos(const I3Position& p) {
-  *this=p;
-}
-
-//-----------------------------------------------------------
-void I3Position::SetPosition(double x, double y, double z) {
-  *this=I3Position(x,y,z);
-}
-
-//-----------------------------------------------------------
-void I3Position::SetPos(double x, double y, double z) {
-  *this=I3Position(x,y,z);
-}
-
-//-----------------------------------------------------------
-void I3Position::SetPosition(double r1, double r2, double r3, RefFrame frame)
-{
-  *this=I3Position(r1,r2,r3,frame);
-}
-
-//-----------------------------------------------------------
-void I3Position::SetPos(double r1, double r2, double r3, RefFrame frame)
-{
-  *this=I3Position(r1,r2,r3,frame);
-}
-
-//-----------------------------------------------------------
-void I3Position::ResetPosition() {
-  x_=NAN; y_=NAN; z_=NAN;
-  isCalculated_=false;
-}
-
-//-----------------------------------------------------------
-void I3Position::ResetPos() {
-  x_=NAN; y_=NAN; z_=NAN;
-  isCalculated_=false;
-}
-
-//-----------------------------------------------------------
-void I3Position::NullPosition() {
-  x_=NAN; y_=NAN; z_=NAN;
-  isCalculated_=false;
-}
-
-//-----------------------------------------------------------
-void I3Position::NullPos() {
-  x_=NAN; y_=NAN; z_=NAN;
-  isCalculated_=false;
-}
-
-//-----------------------------------------------------------
-void I3Position::ShiftCoordSystem(const I3Position& p) {
-  SetPosition(x_-p.x_, y_-p.y_, z_-p.z_,car);
 }
 
 //-----------------------------------------------------------
@@ -171,14 +110,6 @@ void I3Position::RotateZ(double angle)
   x_=c*x-s*y;
   y_=s*x+c*y;
   isCalculated_ = false;
-}
-
-//-----------------------------------------------------------
-double I3Position::CalcDistance(const I3Position& p) const {
-  const double dx = x_-p.x_;
-  const double dy = y_-p.y_;
-  const double dz = z_-p.z_;
-  return std::sqrt(dx*dx+dy*dy+dz*dz);
 }
 
 //-----------------------------------------------------------
