@@ -769,10 +769,14 @@ namespace TreeBase {
       // post_order iterator helpers
       inline post_order_iterator begin_post()
       { return post_order_iterator(*this); }
+      inline post_order_const_iterator begin_post() const
+      { return post_order_const_iterator(*this); }
       inline post_order_const_iterator cbegin_post() const
       { return post_order_const_iterator(*this); }
       inline post_order_iterator end_post()
       { return post_order_iterator(*this,end_); }
+      inline post_order_const_iterator end_post() const
+      { return post_order_const_iterator(*this,end_); }
       inline post_order_const_iterator cend_post() const
       { return post_order_const_iterator(*this,end_); }
       
@@ -786,6 +790,14 @@ namespace TreeBase {
           return sibling_iterator(*this,end_);
       }
       template<typename D,typename V,typename S>
+      sibling_const_iterator begin(const iterator_base<D,V,S>& i) const
+      {
+        if (i != iterator_base<D,V,S>(*this,end_))
+          return sibling_const_iterator(*this,*i);
+        else
+          return sibling_const_iterator(*this,end_);
+      }
+      template<typename D,typename V,typename S>
       sibling_const_iterator cbegin(const iterator_base<D,V,S>& i) const
       {
         if (i != iterator_base<D,V,S>(*this,end_))
@@ -795,36 +807,51 @@ namespace TreeBase {
       }
       inline sibling_iterator begin_sibling(const Key& k)
       { return sibling_iterator(*this,k); }
+      inline sibling_const_iterator begin_sibling(const Key& k) const
+      { return sibling_const_iterator(*this,k); }
       inline sibling_const_iterator cbegin_sibling(const Key& k) const
       { return sibling_const_iterator(*this,k); }
       template<typename D,typename V,typename S>
       inline sibling_iterator end(const iterator_base<D,V,S>& i)
       { return sibling_iterator(*this,end_); }
       template<typename D,typename V,typename S>
+      inline sibling_const_iterator end(const iterator_base<D,V,S>& i) const
+      { return sibling_const_iterator(*this,end_); }
+      template<typename D,typename V,typename S>
       inline sibling_const_iterator cend(const iterator_base<D,V,S>& i) const
       { return sibling_const_iterator(*this,end_); }
       inline sibling_iterator end_sibling()
       { return sibling_iterator(*this,end_); }
+      inline sibling_const_iterator end_sibling() const
+      { return sibling_const_iterator(*this,end_); }
       inline sibling_const_iterator cend_sibling() const
       { return sibling_const_iterator(*this,end_); }
       
       // fast iterator helpers
       inline fast_iterator begin_fast()
       { return fast_iterator(*this); }
+      inline fast_const_iterator begin_fast() const
+      { return fast_const_iterator(*this); }
       inline fast_const_iterator cbegin_fast() const
       { return fast_const_iterator(*this); }
       inline fast_iterator end_fast()
       { return fast_iterator(*this,end_); };
+      inline fast_const_iterator end_fast() const
+      { return fast_const_iterator(*this,end_); };
       inline fast_const_iterator cend_fast() const
       { return fast_const_iterator(*this,end_); };
       
       // leaf iterator helpers
       inline leaf_iterator begin_leaf()
       { return leaf_iterator(*this); }
+      inline leaf_const_iterator begin_leaf() const
+      { return leaf_const_iterator(*this); }
       inline leaf_const_iterator cbegin_leaf() const
       { return leaf_const_iterator(*this); }
       inline leaf_iterator end_leaf()
       { return leaf_iterator(*this,end_); };
+      inline leaf_const_iterator end_leaf() const
+      { return leaf_const_iterator(*this,end_); };
       inline leaf_const_iterator cend_leaf() const
       { return leaf_const_iterator(*this,end_); };
       
