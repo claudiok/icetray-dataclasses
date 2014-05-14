@@ -315,7 +315,10 @@ class I3Particle : public I3FrameObject
   double GetLength() const { return length_; }
   void SetLength(double length) { length_ = length; }
 
+  /** @brief Returns the kinetic energy of the particle. */
   double GetEnergy() const { return energy_; }
+
+  /** @brief Sets the kinetic energy of the particle. */
   void SetEnergy(double energy) { energy_ = energy; }
 
   double GetSpeed() const { return speed_; }
