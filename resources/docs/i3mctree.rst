@@ -98,10 +98,10 @@ Functions
   * insert_after(Particle)
   * insert(ID, Particle)
   * insert_after(ID, Particle)
-  * insert_subtree(ID, Tree, ID)
-  * insert_subtree_after(ID, Tree, ID)
+  * insert_subtree(ID, Tree, newID)
+  * insert_subtree_after(ID, Tree, newID)
   * append_child(ID, Particle)
-  * append_child(ID, Tree, ID)
+  * append_child(ID, Tree, newID)
   * append_children(ID, Vector)
 
   **Modifying the Tree**
@@ -110,9 +110,9 @@ Functions
   * erase(ID)
   * erase_children(ID)
   * flatten(ID)
-  * reparent(ID, ID)
+  * reparent(toID, fromID)
   * replace(ID, Particle)
-  * replace(ID, Tree, ID)
+  * replace(ID, Tree, newID)
   * merge(Tree)
 
   **General Tree Actions**

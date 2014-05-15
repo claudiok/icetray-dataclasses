@@ -188,6 +188,9 @@ void register_I3MCTree()
     scope outer = 
       class_<I3MCTree, bases<I3FrameObject>, I3MCTreePtr>("I3MCTree",
         "A tree of I3Particles used for simulation.")
+        // Extra Constructors
+        .def(init<const I3Particle&>())
+        
         // I3MCTreeUtils
         .def("get_daughters", &I3MCTreeUtils::GetDaughters, "Get all daughters/children of an I3ParticleID")
         .def("has_parent", &I3MCTreeUtils::HasParent, "Does the I3ParticleID have a parent?")
@@ -224,7 +227,7 @@ void register_I3MCTree()
         .def("replace", replace, "Replace an I3ParticleID with another I3Particle")
         .def("replace", replace_subtree, "Replace an I3ParticleID and all children with another subtree of I3Particles")
         .def("flatten", flatten, "Move the children of the I3Particle to be siblings after it")
-        .def("reparent", reparent, "Move all children of an I3ParticleID to be children under another I3ParticleID in the tree")
+        .def("reparent", reparent, "Move all children to an I3ParticleID, from another I3ParticleID in the tree")
         .def("merge",&I3MCTree::merge, "Merge two trees, modifying the first tree")
         .def("size", &I3MCTree::size, "Get the number of I3Particles in the tree")
         .def("empty", &I3MCTree::empty, "Is the tree empty?")
