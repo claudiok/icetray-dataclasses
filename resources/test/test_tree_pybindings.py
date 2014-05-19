@@ -202,7 +202,49 @@ class TreeTest:
     ENSURE( t2.get_head() == head, "head missing" )
     ENSURE( t.children(head2) == [p2], "p2 missing" )
     ENSURE( t2.children(head) == [p1], "p1 missing" )
-
+  
+  def iterator(self):
+    head = makeParticle()
+    t = I3MCTree(head)
+    p1 = makeParticle()
+    t.append_child(head,p1)
+    p1_children = [makeParticle() for x in range(3)]
+    t.append_children(p1,p1_children)
+    p2_children = [makeParticle() for x in range(3)]
+    t.append_children(p1_children[1],p2_children)
+    
+    # tree should look like:
+    #       head
+    #         |
+    #         V
+    #         p1
+    #       / | \
+    #      /  V  \
+    #  p1c1 p1c2  p1c3
+    #         |
+    #         V
+    #       / | \
+    #      /  V  \
+    #  p2c1 p2c2  p2c3
+    
+    pre_order = [head,p1,p1_children[0],p1_children[1],p2_children[0],
+                 p2_children[1],p2_children[2],p1_children[2]]
+    post_order = [p1_children[0],p2_children[0],p2_children[1],
+                  p2_children[2],p1_children[1],p1_children[2],p1,head]
+    leaf_iter = [p1_children[0],p2_children[0],p2_children[1],
+                 p2_children[2],p1_children[2]]
+    
+    ENSURE( list(t) == pre_order, "default iter failed")
+    ENSURE( list(t.pre_order_iter()) == pre_order, "pre_order failed" )
+    ENSURE( list(t.post_order_iter()) == post_order, "post_order failed" )
+    ENSURE( list(t.sibling_iter(p1_children[0])) == p1_children,
+           "sibling_iter failed" )
+    fast_iter_ret = set([x.minor_id for x in t.fast_iter()])
+    fast_iter_ret ^= set([x.minor_id for x in pre_order])
+    ENSURE( not fast_iter_ret , "fast_iter failed" )
+    leaf_iter_ret = set([x.minor_id for x in t.leaf_iter()])
+    leaf_iter_ret ^= set([x.minor_id for x in leaf_iter])
+    ENSURE( not leaf_iter_ret , "leaf_iter failed" )
 
 def printer(fn,value):
   s = fn+':'
