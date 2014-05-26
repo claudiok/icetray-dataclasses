@@ -255,7 +255,7 @@ double I3Time::GetModJulianNanoSec() const
 double I3Time::GetModJulianDayDouble() const
 {
   int32_t mjd = GetModJulianDay();
-  return mjd + (GetModJulianSec()+GetModJulianNanoSec()/1e10)/I3TimeUtils::seconds_in_day(mjd);
+  return mjd + (GetModJulianSec()+GetModJulianNanoSec()/1e9)/I3TimeUtils::seconds_in_day(mjd);
 }
 
 I3Time::Month I3Time::GetUTCMonth() const

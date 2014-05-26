@@ -483,7 +483,7 @@ TEST(test_utc_caldate)
 TEST(mjd_set_get_iterative) {
   // test if a hundred times conversion forth and back yields the same as the original
   I3Time tm;
-  tm.SetUnixTime(1192228335);
+  tm.SetUnixTime(1192228335,12345678);
   I3Time mt = tm;
   for (unsigned int i= 0; i<100; i++)
     mt.SetModJulianTimeDouble(mt.GetModJulianDayDouble());
