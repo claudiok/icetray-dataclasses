@@ -79,3 +79,43 @@ TEST(Complement)
 	ENSURE_EQUAL(boost::next(complement.begin())->GetStart(), 10);
 	ENSURE_EQUAL(boost::next(complement.begin())->GetStop(), tstop);
 }
+
+TEST(OverlapType)
+{
+	I3TimeWindow t1, t2;
+	
+	// Completely disjoint
+	t1 = I3TimeWindow(1, 5);
+	t2 = I3TimeWindow(6, 10);
+	ENSURE_EQUAL(t1.GetOverlapType(t2), I3TimeWindow::NONE);
+	ENSURE_EQUAL(t2.GetOverlapType(t1), I3TimeWindow::NONE);
+	
+	// Completely identical
+	t1 = I3TimeWindow(1, 5);
+	t2 = I3TimeWindow(1, 5);
+	ENSURE_EQUAL(t1.GetOverlapType(t2), I3TimeWindow::WITHIN);
+	
+	// Nested
+	t1 = I3TimeWindow(1, 5);
+	t2 = I3TimeWindow(2, 4);
+	ENSURE_EQUAL(t1.GetOverlapType(t2), I3TimeWindow::WITHIN);
+	ENSURE_EQUAL(t2.GetOverlapType(t1), I3TimeWindow::WITHIN);
+	
+	// Identical left edges
+	t1 = I3TimeWindow(1, 5);
+	t2 = I3TimeWindow(1, 10);
+	ENSURE_EQUAL(t1.GetOverlapType(t2), I3TimeWindow::AFTER);
+	ENSURE_EQUAL(t2.GetOverlapType(t1), I3TimeWindow::WITHIN);
+	
+	// Identical right edges
+	t1 = I3TimeWindow(1, 10);
+	t2 = I3TimeWindow(5, 10);
+	ENSURE_EQUAL(t1.GetOverlapType(t2), I3TimeWindow::WITHIN);
+	ENSURE_EQUAL(t2.GetOverlapType(t1), I3TimeWindow::BEFORE);
+	
+	// Partial overlap
+	t1 = I3TimeWindow(1, 5);
+	t2 = I3TimeWindow(4, 10);
+	ENSURE_EQUAL(t1.GetOverlapType(t2), I3TimeWindow::AFTER);
+	ENSURE_EQUAL(t2.GetOverlapType(t1), I3TimeWindow::BEFORE);
+}

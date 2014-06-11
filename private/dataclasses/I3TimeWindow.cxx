@@ -46,14 +46,14 @@ I3TimeWindow::GetOverlapType(const I3TimeWindow &other) const
 	if (start_ > other.start_) {
 		if (start_ > other.stop_)
 			return NONE;
-		 else if (stop_ <= other.stop_)
+		 else if (stop_ < other.stop_)
 			return WITHIN;
 		 else
 			return BEFORE;
 	} else {
 		if (stop_ < other.start_)
 			return NONE;
-		else if (stop_ <= other.stop_)
+		else if (stop_ >= other.stop_)
 			return WITHIN;
 		else
 			return AFTER;
