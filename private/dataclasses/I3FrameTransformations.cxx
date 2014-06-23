@@ -2,10 +2,11 @@
  *  $Id$
  *
  *  Specializations of I3Frame::Get() that perform format
- *  conversions behind the scenes.
+ *  conversions behind the scenes for MapOMKeyMasks and Unions
  *  
  *  Copyright (C) 2011
  *  Jakob van Santen <vansanten@wisc.edu>
+ *  Marcel Zoll <marcel.zoll@fysik.su.se>
  *  and the IceCube Collaboration <http://www.icecube.wisc.edu>
  *  
  */
@@ -91,8 +92,47 @@ HitsAsPulses(I3RecoHitSeriesMapConstPtr hits)
 	return pulses;
 }
 
+
+///Cheat by pretemplating this
+template<class Response>
+boost::shared_ptr <const I3Map<OMKey, std::vector<Response> > >
+GetMaskable(const I3Frame *frame, const std::string& name, bool quietly)
+{
+  I3FrameObjectConstPtr focp = frame->Get<I3FrameObjectConstPtr>(name, quietly);
+  
+  boost::shared_ptr <const I3Map<OMKey, std::vector<Response> > > pulses =
+      dynamic_pointer_cast<const I3Map<OMKey, std::vector<Response> > >(focp);
+  
+  if (!focp || pulses)
+    return pulses;
+  
+  boost::shared_ptr <const I3MapOMKeyMask<Response> > mask = 
+      dynamic_pointer_cast<const I3MapOMKeyMask<Response> >(focp);
+  
+  if (mask)
+    return mask->Apply(*frame); 
+  
+  boost::shared_ptr <const I3MapOMKeyUnion<Response> > uni = 
+      dynamic_pointer_cast<const I3MapOMKeyUnion<Response> >(focp);
+
+  if (uni)
+    return uni->Apply(*frame);
+  
+  return pulses;
+}
+
+
+template <> 
+I3MCHitSeriesMapConstPtr
+I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
+{
+  return GetMaskable<I3MCHit>(this, name, quietly);
+}
+
+//======================= specialize I3TriggerHierachy =========
 /*
- * Similar subterfuge for I3TriggerHierarchy
+ * specialize I3TriggerHierachy:
+ * resolve duality of SuperDST and conventional TriggerHieracachy
  */
 template <>
 I3TriggerHierarchyConstPtr
@@ -116,3 +156,7 @@ I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
 	
 	return triggers;
 }
+
+
+
+
