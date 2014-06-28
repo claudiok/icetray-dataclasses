@@ -167,6 +167,8 @@ class I3MCHit
 
 BOOST_CLASS_VERSION(I3MCHit,i3mchit_version_);
 
+std::ostream& operator<<(std::ostream& oss, const I3MCHit& h);
+
 I3_POINTER_TYPEDEFS(I3MCHit);
 
 typedef std::vector<I3MCHit> I3MCHitSeries;

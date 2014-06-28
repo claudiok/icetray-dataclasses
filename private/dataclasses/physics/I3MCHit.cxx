@@ -48,7 +48,17 @@ void I3MCHit::load (Archive &ar, const unsigned version)
 
 }
 
-  
+std::ostream& operator<<(std::ostream& oss, const I3MCHit& h){
+  oss << "[ I3MCHit::" << std::endl
+      << "  Time          :" << h.GetTime() << std::endl
+      << "  HitID         :" << h.GetHitID() << std::endl
+      << "  NPE           :" << h.GetNPE()<< std::endl
+      << "  Charge        :" << h.GetCharge() << std::endl
+      << "  ParticleID    :" << h.GetParticleMajorID()<<"/"<< h.GetParticleMinorID()<<std::endl
+      << "  CherenkovDist :" << h.GetCherenkovDistance() << std::endl
+      << "  HitSource     :" << h.GetHitSource()<<" ]" << std::endl;
+  return oss;
+}
 
 I3_SPLIT_SERIALIZABLE(I3MCHit);
 I3_SERIALIZABLE(I3MCHitSeriesMap);
