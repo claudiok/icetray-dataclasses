@@ -31,6 +31,7 @@ void register_I3Direction()
 {
 
   class_<I3Direction, bases<I3FrameObject>, boost::shared_ptr<I3Direction> >("I3Direction")
+    .def(init<I3Position>())
     .def(init<double,double>())
     .def(init<double,double,double>())
     .def("set_theta_phi", &I3Direction::SetThetaPhi)

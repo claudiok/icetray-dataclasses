@@ -77,6 +77,7 @@ void register_I3Position()
     class_<I3Position, bases<I3FrameObject>, boost::shared_ptr<I3Position> >
     ("I3Position",
      "I3Position objects can subscripted like 3-element arrays (x, y, z) and converted to tuples and lists")
+    .def(init<I3Direction>())
     .def(init<double,double,double>())
     .def(init<double,double,double,I3Position::RefFrame>())
     PROPERTY(I3Position, x, X)
