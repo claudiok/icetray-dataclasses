@@ -19,6 +19,9 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#ifndef I3VECTORS_H_PYBINDINGS
+#define I3VECTORS_H_PYBINDINGS 
+
 #include <icetray/ostream_pair.hpp>
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/ostream_overloads.hpp>
@@ -61,34 +64,4 @@ register_std_pair(const char* s)
 #endif
 }
 
-void register_I3Vectors()
-{
-
-  register_i3vector_of<char>("Char");
-
-  register_i3vector_of<std::string>("String");
-  
-  register_i3vector_of<bool>("Bool");
-  register_i3vector_of<OMKey>("OMKey");
-  register_i3vector_of<ModuleKey>("ModuleKey");
-  
-  register_i3vector_of<int16_t>("Short");
-  register_i3vector_of<uint16_t>("UShort");
-  
-  register_i3vector_of<int32_t>("Int");
-  register_i3vector_of<uint32_t>("UInt");
-  
-  register_i3vector_of<I3VectorInt64::value_type>("Int64");
-  register_i3vector_of<I3VectorUInt64::value_type>("UInt64");
-  
-  register_i3vector_of<float>("Float");
-  register_i3vector_of<double>("Double");
-  
-  register_i3vector_of<std::pair<double, double> >("DoubleDouble");
-
-  register_i3vector_of<I3Particle>("I3Particle");
-  register_i3vector_of<I3Particle::ParticleType>("ParticleType");
-  register_i3vector_of<I3Position>("I3Position");
-
-  register_std_pair<double, double>("PairDoubleDouble");
-}
+#endif //I3VECTORS_H_PYBINDINGS
