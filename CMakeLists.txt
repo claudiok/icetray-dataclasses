@@ -72,7 +72,7 @@ i3_add_pybindings(dataclasses
   private/pybindings/I3Trigger.cxx
   private/pybindings/I3Waveform.cxx
   private/pybindings/I3Vectors/*.cxx
-  private/pybindings/I3MapString.cxx
+  private/pybindings/I3MapString/*.cxx
   private/pybindings/I3MapInt.cxx
   private/pybindings/I3MapKey.cxx
   private/pybindings/I3MapI3ParticleID.cxx

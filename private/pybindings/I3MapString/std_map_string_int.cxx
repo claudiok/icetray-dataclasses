@@ -25,37 +25,8 @@
 
 using namespace boost::python;
 
-void register_I3MapString()
+void register_I3MapStringStdMapStringInt()
 {
-  class_<I3MapStringDouble, bases<I3FrameObject>, I3MapStringDoublePtr>("I3MapStringDouble")
-    .def(dataclass_suite<I3MapStringDouble >())
-    ;
-  register_pointer_conversions<I3MapStringDouble>();
-
-  class_<I3MapStringInt, bases<I3FrameObject>, I3MapStringIntPtr>("I3MapStringInt")
-    .def(dataclass_suite<I3MapStringInt >())
-    ;
-  register_pointer_conversions<I3MapStringInt>();
-  
-  class_<I3MapStringBool, bases<I3FrameObject>, I3MapStringBoolPtr>("I3MapStringBool")
-    .def(dataclass_suite<I3MapStringBool >())
-    ;
-  register_pointer_conversions<I3MapStringBool>();
-  
-  class_<I3MapStringVectorDouble, bases<I3FrameObject>, I3MapStringVectorDoublePtr>("I3MapStringVectorDouble")
-    .def(dataclass_suite<I3MapStringVectorDouble >())
-    ;
-  register_pointer_conversions<I3MapStringVectorDouble>();
-
-  class_<I3MapStringStringDouble, bases<I3FrameObject>, I3MapStringStringDoublePtr>("I3MapStringStringDouble")
-    .def(dataclass_suite<I3MapStringStringDouble >())
-    ;
-  register_pointer_conversions<I3MapStringStringDouble>();
-
-  class_<std::map<std::string,std::string > >("TestMapStringString",no_init)
-    .def(dataclass_suite<std::map<std::string,std::string > >())
-    ;
-
   //
   //  TDS: big problems here.  the duplicate registration of pair<string,int>
   //  with the boost.python conversion registry is a warn when compiled 'release',
