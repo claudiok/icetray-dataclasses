@@ -1,5 +1,5 @@
 /**
- *  $Id: I3TopRecoPlaneFitParams.cxx 85782 2012-02-29 17:12:56Z tfeusels $
+ *  $Id$
  *  
  *  Copyright (C) 2008
  *  Fabian Kislat  <fabian.kislat@desy.de>

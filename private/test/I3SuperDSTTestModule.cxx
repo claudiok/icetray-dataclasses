@@ -4,7 +4,7 @@
  *
  * (c) 2010 the IceCube Collaboration
  *
- * $Id:$
+ * $Id$
  * @version $Revision$
  * @date $Date$
  * @author Jakob van Santen <vansanten@wisc.edu>

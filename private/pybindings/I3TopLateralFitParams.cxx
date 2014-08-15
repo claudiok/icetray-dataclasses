@@ -1,5 +1,5 @@
 /**
- *  $Id: I3TopLateralFitParams.cxx 87413 2012-04-20 13:54:35Z jacobi $
+ *  $Id$
  *  
  *  Copyright (C) 2008
  *  Fabian Kislat  <fabian.kislat@desy.de>
