@@ -1,10 +1,312 @@
-----------
+==========
 I3Particle
-----------
+==========
 
-Tracks, cascades, MCTracks and particles are all in one class.  The
-I3Particle class has several available components (Position,
-Direction, Energy, etc.).  The general policy is to use NAN for any
-unkown or not-computed value.
+Purpose and properties
+======================
 
-**TODO** Update I3Paricle usage policy
+The :class:`I3Particle` class is a very generic class that we use to describe
+both simulated particles (primaries, secondaries) and reconstructed muon tracks
+(through-going, starting, stopping, contained) and cascades.  The class has
+nine floating point data members that describe the kinematical properties of
+a given particle:
+
+* position (3 degrees of freedom)
+* time
+* direction (2 d.o.f.)
+* energy
+* length
+* speed
+
+The actual meaning of those properties depends on the type, shape, location and
+fit status of the particle, which are specified with integer data members
+(``enum`` types, actually) and described in more detail below.
+
+Simulated particles are usually collected in an :class:`I3MCTree` object which
+is stored in the ``Q`` frame with the name ``"I3MCTree"``. This tree can
+contain any number of particles, from just a few to millions.
+
+Reconstructed particles are usually stored directly in the :class:`I3Frame`.
+Some reconstructions produce some extra (algorithm specific) information that
+is stored in one or more separate :class:`I3FrameObject` objects.  Usually this
+extra information specifies diagnostics of the reconstruction process and/or
+reconstructed properties of the particle.  Often the name (frame key) of the
+additional object is the name of the particle object with "Params" or
+"FitParams" appended.
+
+Data members
+============
+
+Floating point data members
+---------------------------
+
+Position and time
+~~~~~~~~~~~~~~~~~
+
+The time data member of an :class:`I3Particle` object is given with respect to
+the event time window.  The position data member (stored as an
+:class:`I3Position` object) then gives the location where the particle was at
+that time.  What the particle was doing at that position
+and what happened before/after that time depends on the type, shape and location information.
+
+Note that the time is not necessarily *within* the event window and the
+position can also be far out of the detector array.
+
+The coordinate system for the position should always be the local coordinate
+system of the detector you are working with,
+e.g. `IceCube <https://wiki.icecube.wisc.edu/index.php/Coordinate_system>`_
+or KM3NET (TODO: Claudio, Alexander?).
+
+Direction
+~~~~~~~~~
+
+The direction of an :class:`I3Particle` object is stored in an object of type
+:class:`I3Direction`.  The direction can be represented in several ways, most
+commonly we use astronomy-oriented zenith and azimuth angles, which specify
+where the particle is **coming from**. The zenith angle is a polar angle, equal
+to zero for particles coming in vertically from above. The
+reconstruction-oriented theta and phi angle point in the opposite direction, so
+they indicate where the particle is **going to**. This propagation direction can
+also be represented as a normalized Cartesian 3-vector, using the IceCube
+coordinate system.
+
+
+Length
+~~~~~~
+
+If the length has a positive value then this usually means what you think it means:
+the (simulated or reconstructed) particle
+traveled over the specified length
+into the specified direction (see below)
+from a location specified by the position data member.
+
+A zero length usually indicates a shower that short enough to be considered
+pointlike.
+
+Negative length can be used for track-like stopping particles (simulated or reconstructed).
+
+For reconstructed through-going tracks (shape ``InfiniteTracks``) the length is set to NAN.
+
+Energy
+~~~~~~
+
+For *simulated* particles the energy represents the energy that the particle had at the given position (primary at interaction, or secondary at creation).
+
+For *reconstructed* the meaning of the energy value depends on the algorithm. It may be an energy proxy, e.g. a number that correlates with the
+mean energy loss (averaged dE/dX, number of emitted photons per meter) along the part of the track that intersects the array. I may also be an
+estimate of the muon energy at some point (the point where it entered the array, or where it was closest to the center of the detector or the COG of the pulses).
+It might even be an estimate of the neutrino energy, assuming the event was caused by a neutrino energy. For reconstructed showers the energy usually 
+represents the electron equivalent energy, i.e. the energy that an electron should have to cause (a shower that causes) the observed amount of
+light in the array.
+
+In order to understand the issues surrounding the reconstructed energy it is highly recommended to read the `energy reconstruction paper <http://arxiv.org/abs/1311.4767>`_.
+
+Speed
+~~~~~
+
+For most use cases, the speed should be zero or ``c=299792458 m/s``.
+
+However, some reconstruction methods actually try to reconstruct the
+speed of the particle, for instance the "line fit" provides a speed.
+For a vanilla muon track this should not be too different from ``c``, for shower-like
+events it is probably more compatible with zero. There are also more
+elaborate reconstruction methods that are used in
+for analyses searching for events triggered by magnetic monopoles, which
+may (or may not) travel at speeds less than ``c``.
+
+Integer data members
+--------------------
+
+Type
+~~~~
+
+In simulation we know exactly which *type* a particle has: a neutrino, a muon,
+a calcium nucleus, etcetera. The Particle Data Group made a list of all known
+particles and gave them a number. For particles in that list we use their PDG
+number (note: in the past we used a different convention, but if you always use
+an ``enum`` to specify a type and not a literal integer then you should be able
+to stay happily oblivious of that detail). There are some "particle" types that
+we use in our simulation that do *not* exist in the PDG list. Frequently used
+types include ``PPlus`` (proton), ``Fe56Nucleus`` (iron), ``MuPlus`` and
+``MuMinus`` (muons), and ``NuE`` and ``NuEBar`` (electron neutrinos).  Some of
+these are particle types that have not yet been observed in experiments, such
+as monopoles and staus.  Others have to do with shortcuts in our simulation,
+such as ``Hadrons`` for a hadronic showers and  ``Pair``, ``Brems`` and
+``NuclInt`` for the various kinds of stochastic interactions.  And finally
+there are particle type values that do not describe an actual particle but a
+calibration device, such as a laser or a flasher in calibration-related simulations.
+
+Our current reconstruction algorithms do not identify any type, so the type
+data member is usually left "UnSet". Even for infinite tracks the type is left
+as 'unknown'. If the fit is good then it might be a muon (MuMinus), but it
+could also be an anti-muon (MuPlus) or a bundle of several muons (we don't have
+a type for that).
+
+
+Shape
+~~~~~
+
+(TODO: Alex, could you have a look at this section?)
+
+For reconstructions it is more meaningful to assign a "shape" than a "type".
+The shape data member is also used for simulated particles, but not very
+consistently.  The shape can take the following values:
+
+* Null: not set, not defined, not relevant
+* Primary: could be used for MC primaries, but e.g. in Corsika this is not done
+* TopShower: cosmic ray air shower reconstructed from IceTop data
+* Cascade: a shower in the ice, reconstructed with in-ice data
+* InfiniteTrack: a through-going track (usually a muon)
+* StartingTrack: a starting track (supposedly due to a CC numu/nutau interaction)
+* StoppingTrack:  a stopping track (supposedly due to ranged out muon)
+* ContainedTrack: a track starting and stopping within the in-ice array
+* MCTrack: simulated tracks [#mctrack]_
+* Dark: tracks that do not emit any light [#dark]_
+
+.. [#mcdark] Strangely, the ``MCTrack`` shape is *not* used for simulated muon tracks. It might not be used at all anymore in current simulation.
+
+.. [#dark] At some point in the past, the ``Dark`` shape was invented for neutrinos (because they do not emit any light).  In recent simulation data it seems that this shape is actually used for stochastics of non-PDG type, that is ``NuclInt``, ``Brems`` and ``Hadron``. Which is strange, because such showers do in fact produce light.
+
+
+Location
+~~~~~~~~
+
+For fast selection of particles in an :class:`I3MCTree` it is useful to have a
+rough indicator of "where the particle is", because the position alone leaves
+that sometimes ambiguous.  Values are ``Anywhere``, ``IceTop``, ``InIce`` and
+``InActiveVolume``.  If KM3NET gets built on multiple sites, we could consider
+to add ``enum`` values to specify those sites.
+
+Also this data member is not used very consistently. For instance, simulated neutrinos may have their interaction vertex somewhere in the atmosphere above Arizona and still be classified as ``InIce``.
+
+Fit status
+~~~~~~~~~~
+
+The fit status is an integer type data member. The possible values are defined by the
+:enum:`FitStatus` ``enum`` type:
+* NotSet: particle object is not the result of a fit (e.g. if it is a MC "true" particle)
+* OK: according to the fit algorithm the fit was successful
+* InsufficientHits: there was not enough data to do a fit
+* FailedToConverge: indicates that a likelihood maximization fit failed to find a maximum
+* MissingSeed: the fit algorithm requires a seed which was not available for the current event
+* InsufficientQuality: the fit succeeded but according to the algorithm it is not good enough to use
+* GeneralFailure: something else went wrong in the fit
+
+You can in principle often use the integer values for these status values, but that
+makes your code harder to read. If you use the actual ``enum`` constants (e.g.
+``p.fit_status == dataclasses.I3Particle.OK`` in python) then you and your
+colleages do not need to memorize the meanings of those numbers.
+
+Major and minor ID
+~~~~~~~~~~~~~~~~~~
+
+TODO (Alex?): could you have a look at this section?
+
+TODO: explain briefly why we have major and minor, instead of just one number.
+
+In icetray, the "ID" of a particle object is a pair of (integer) numbers that
+serve as its unique identifier.  No two particles, even two particles in
+different data sets, can have the same identifier.
+
+This numerical particle ID should *not* be confused with term "PID" that is
+commonly used in other HEP experiments to denote the (process of determining
+the) type of a detected particle.
+
+For instance, in simulation data this ID can be used to store maps that give
+for each simulated particle a list of PMT pulses (:class:`I3MCPulse`) that were
+caused by photoelectrons due to Cherenkov photons emitted that particle.  These
+maps only store the particle ID numbers, which can then be used (by an
+inquisitive student) to find the corresponding particle back in the
+:class:`I3MCTree`, if desired.
+
+In simulated data, a primary and its associated secondaries have the same
+major ID but different minor ID.
+
+In experimental data, (TODO).
+
+Use case overview
+=================
+
+(Note: this table does not contain *all* use cases.)
+
+================================ ================= ======================= ======= ==============================================================
+Use case                         Shape             Location                Length  Meaning of position
+================================ ================= ======================= ======= ==============================================================
+CR primary                       ``Primary``       ``Anywhere``            NAN     interaction vertex (cosmic ray gets destroyed) [#CRprimaries]_
+Neutrino primary                 ``Null``          ``Anywhere``?           >0      interaction vertex (neutrino gets destroyed) [#NUprimaries]_
+Secondary muon                   ``Null``          ``InIce``               >0      interaction vertex (muon gets created)
+Secondary (other)                ``Null``          ``InIce`` or ``IceTop`` 0       shower location (secondary gets created)
+Reconstructed cascade            ``Cascade``       ``InIce``               0       shower location (possibly: neutrino interaction vertex)
+Reconstructed stopping track     ``Stopping``      ``InIce``               NAN     end point (possibly: muon/tau decay vertex)
+Reconstructed starting track     ``Starting``      ``InIce``               NAN     starting point (possibly: neutrino interaction vertex)
+Reconstructed contained track    ``Contained``     ``InIce``               >0      starting point (possibly: neutrino interaction vertex)
+Reconstructed through-going muon ``InfiniteTrack`` ``InIce``               NAN     random point on the track [#InfTracks]_
+================================ ================= ======================= ======= ==============================================================
+
+.. [#CRprimaries] TODO: why always z=1950m (approx) for CR primaries?
+
+.. [#NUprimaries] TODO: say something about length of neutrino primaries.
+
+.. [#InfTracks] For ``InfiniteTrack`` the position is in principle degenerate with the particle time. One can use any other position on the track, with a correspondingly adjusted time. For numerical reasons it can be good to choose a position (and corresponding time) close to the COG of the pulses of the event.
+
+
+Conventions and recommendations
+===============================
+
+* Like most things in icetray, if you want to specify the :class:`I3Particle` data members
+  in specific units, you should use :class:`I3Units`, e.g. (in python):
+
+  p=dataclasses.I3Particle()
+  p.dir.zenith = 42.0 * I3Units.degree
+  print("The zenith angle is %.1f degrees" % (p.dir.zenith/I3Units.zenith))
+
+* Most data members (all, except the major and minor ID) have a default initialization value that 
+  indicates that it is not yet set. For floating point data members this is NAN
+  (Not a Number, TODO: add link), for the ``enum`` data members it is
+  ``unknown`` (type), ``Null`` (shape), ``NotSet`` (fit status) and ``Anywhere`` (location).
+
+* Never use the explicit numerical values of the ``enum`` types. First, the ``enum`` constants
+  have descriptive names, so they are much more informative. Secondly, it may
+  occasionally happen that the definition of the ``enum`` changes (e.g. the
+  type ``enum`` changed from the AMANDA/rdmc convention to the PDG convention).
+  The icetray versioning system guarantees that old data is converted correctly
+  when you read it in with new software but it will not update the literal
+  integer constants in your code.
+
+History
+=======
+
+The current documentation attempts to provide a correct and more or less
+complete description of the **current** state (summer 2014) of
+:class:`I3Particle`.  In older data (many years older) you may discover that
+e.g. some conventions were different or some data members or ``enum`` values
+were not yet in use, but the basics have been relatively stable.
+
+The first version of the :class:`I3Particle` class was added to icetray in
+2005.  It was at least partly inspired by the :class:`mtrack` struct in the
+``rdmc`` library that was the foundation of the early AMANDA data processing
+and analysis software. In the early stages of icetray development (2004) we
+first tried to give literally every kind of simulated particle and
+reconstructed phenomenon (track, shower, double bang, monopole, elephantino)
+its own special dedicated class, but things that were common (like position or
+direction) would always have to represented in the same way. The result was
+very template-heavy and impressive but hard to work with. That's why we went
+back to the single simplistic 8-dimensional (x, y, z, zenith, azimuth, length,
+energy) AMANDA solution (well, adding a 9th: speed),  with the type and shape
+given by ``enum`` data members. It's not very elegant, but it works well enough.
+
+Some elements of :class:`I3Particle` were added only a few years ago. The versioning
+system of icetray classes helps to make this backwards compatible, in the sense
+that if you read older data with newer software, the software tries to deal with
+the version mismatches and in many cases you will not even notice that there was
+a version mismatch. Still, if you ever need to process older data and you run
+into strange problems, it may be useful to know which items are new and why they
+were added/changed:
+
+* Particle ID: this used to be a single number, but in 20XY this was replaced
+  by a "major" and "minor" ID. (Why?)
+* Particle types: we have been using a set of ``enum`` values that were invented in the AMANDA
+  days. This reinvented wheel was eliminated by changing to an ``enum`` system mostly based
+  on the PDG (Particle Data Group) list of elementary particles and nuclei.
+* The ``LocationType`` is relatively new.
+  (TODO: why was this added, are there any use cases where this could cause problems with older data?)
