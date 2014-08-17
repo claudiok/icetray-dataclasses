@@ -163,7 +163,7 @@ consistently.  The shape can take the following values:
 * MCTrack: simulated tracks [#mctrack]_
 * Dark: tracks that do not emit any light [#dark]_
 
-.. [#mcdark] Strangely, the ``MCTrack`` shape is *not* used for simulated muon tracks. It might not be used at all anymore in current simulation.
+.. [#mctrack] Strangely, the ``MCTrack`` shape is *not* used for simulated muon tracks. It might not be used at all anymore in current simulation.
 
 .. [#dark] At some point in the past, the ``Dark`` shape was invented for neutrinos (because they do not emit any light).  In recent simulation data it seems that this shape is actually used for stochastics of non-PDG type, that is ``NuclInt``, ``Brems`` and ``Hadron``. Which is strange, because such showers do in fact produce light.
 
