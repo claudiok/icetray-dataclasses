@@ -41,7 +41,7 @@ i3_test_executable(test
 i3_test_scripts(resources/test/*.py)
 
 i3_add_pybindings(dataclasses
-  private/pybindings/I3Calibration.cxx
+  private/pybindings/I3Calibration/*.cxx
   private/pybindings/I3Constants.cxx
   private/pybindings/I3DOMLaunch.cxx
   private/pybindings/I3DetectorStatus.cxx
