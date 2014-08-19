@@ -19,14 +19,13 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#define private public
+#include <dataclasses/I3Map.h>
 #include <dataclasses/status/I3DetectorStatus.h>
-#undef private
 #include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
-/*I3MapStringStringPtr
+I3MapStringStringPtr
 get_trigger_settings(I3TriggerStatusPtr ts){
   I3MapStringStringPtr r_map(new I3MapStringString);
   BOOST_FOREACH(I3MapStringString::value_type p, ts->GetTriggerSettings())
@@ -39,10 +38,9 @@ get_readout_settings(I3TriggerStatusPtr ts){
   return ts->GetReadoutSettings();
 }
 
-
 std::string get_trigger_name(I3TriggerStatusPtr ts){
   return ts->GetTriggerName();
-}*/
+}
 
 
 void register_I3TriggerStatus()
@@ -50,9 +48,9 @@ void register_I3TriggerStatus()
   {
     scope outer = 
       class_<I3TriggerStatus, boost::shared_ptr<I3TriggerStatus> >("I3TriggerStatus")
-      .def_readwrite("trigger_name", &I3TriggerStatus::name_)
-      .def_readwrite("trigger_settings",&I3TriggerStatus::settings_)
-      .def_readwrite("readout_settings",&I3TriggerStatus::readoutconfigs_)
+      .add_property("trigger_name", &get_trigger_name)
+      .add_property("trigger_settings", &get_trigger_settings)
+      .add_property("readout_settings", &get_readout_settings)
       .def(dataclass_suite<I3TriggerStatus>())
       ;
 
