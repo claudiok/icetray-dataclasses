@@ -24,7 +24,7 @@
 
 using namespace boost::python;
 
-void register_I3Calibration()
+void register_LinearFit()
 {
   class_<LinearFit>("LinearFit")
     .def_readwrite("slope", &LinearFit::slope)

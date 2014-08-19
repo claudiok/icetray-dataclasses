@@ -24,7 +24,7 @@
 
 using namespace boost::python;
 
-void register_I3Calibration()
+void register_SPETemplate()
 {
   class_<SPETemplate>("SPETemplate")
     .def_readwrite("c", &SPETemplate::c)

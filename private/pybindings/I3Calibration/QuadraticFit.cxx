@@ -24,7 +24,7 @@
 
 using namespace boost::python;
 
-void register_I3Calibration()
+void register_QuadraticFit()
 {
   class_<QuadraticFit>("QuadraticFit")
     .def_readwrite("quad_fit_a", &QuadraticFit::quadFitA)

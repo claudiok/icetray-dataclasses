@@ -24,7 +24,7 @@
 
 using namespace boost::python;
 
-void register_I3Calibration()
+void register_TauParam()
 {
   class_<TauParam>("TauParam")
     .def_readwrite("p0", &TauParam::P0)
