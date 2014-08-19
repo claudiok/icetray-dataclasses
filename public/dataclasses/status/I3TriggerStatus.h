@@ -189,11 +189,11 @@ class I3TriggerStatus
   std::map<Subdetector, I3TriggerReadoutConfig>& 
     GetReadoutSettings() { return readoutconfigs_; }  
 
- private:
   std::string name_;
   std::map<std::string, std::string> settings_;
   std::map<Subdetector, I3TriggerReadoutConfig> readoutconfigs_;
 
+ private:
   friend class boost::serialization::access;
   template <class Archive> void load(Archive & ar, unsigned version);
   template <class Archive> void save(Archive & ar, unsigned version) const;
