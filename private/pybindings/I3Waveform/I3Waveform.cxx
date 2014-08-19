@@ -93,17 +93,4 @@ void register_I3Waveform()
       ;
   }
 
-  class_<std::vector<I3Waveform> >("I3WaveformSeries")
-    .def(dataclass_suite<std::vector<I3Waveform> >())
-    ;
-
-  class_<std::vector<I3Waveform::StatusCompound> >("VectorI3WaveformStatusCompound")
-    .def(dataclass_suite<std::vector<I3Waveform::StatusCompound> >())
-    ;
-
-  class_<I3WaveformSeriesMap, bases<I3FrameObject>, I3WaveformSeriesMapPtr>("I3WaveformSeriesMap")
-    .def(dataclass_suite<I3WaveformSeriesMap>())
-    ;
-
-  register_pointer_conversions<I3WaveformSeriesMap>();
 }

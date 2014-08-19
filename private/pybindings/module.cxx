@@ -38,8 +38,9 @@ namespace bp = boost::python;
 #define REGISTER_THESE_THINGS                                           \
   (I3Time)(I3Position)(I3Direction)(I3Geometry)(I3MCTree)(I3Trigger)    \
   (I3Particle)(I3RecoPulse)(I3LinearizedMCTree)(I3TimeWindow)           \
-  (I3Waveform)(I3DOMLaunch)(I3EventHeader)(I3RecoHit)                   \
-  (I3FlasherInfo)(I3Matrix)(I3ParticleID)                               \
+  (I3Waveform)(I3WaveformSeries)(I3WaveformSeriesMap)                   \
+  (VectorI3WaveformStatusCompound)(I3DOMLaunch)(I3EventHeader)          \
+  (I3RecoHit)(I3FlasherInfo)(I3Matrix)(I3ParticleID)                    \
   (I3MCHit)(I3MCList)(I3Calibration)(DroopedSPETemplate)(SPETemplate)   \
   (I3DOMCalibration)(I3VEMCalibration)(LinearFit)(QuadraticFit)         \
   (TauParam)(MapOMKeyI3DOMCalibration)(MapOMKeyI3VEMCalibration)        \
