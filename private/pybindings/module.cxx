@@ -41,7 +41,8 @@ namespace bp = boost::python;
   (I3Waveform)(I3WaveformSeries)(I3WaveformSeriesMap)                   \
   (VectorI3WaveformStatusCompound)(I3DOMLaunch)(I3EventHeader)          \
   (I3RecoHit)(I3FlasherInfo)(I3Matrix)(I3ParticleID)                    \
-  (I3MCHit)(I3MCList)(I3Calibration)(DroopedSPETemplate)(SPETemplate)   \
+  (I3MCHit)(vectorI3MCHit)(mapOMKeyI3MCHit)(I3MCHitSeriesMap)           \
+  (I3MCList)(I3Calibration)(DroopedSPETemplate)(SPETemplate)            \
   (I3DOMCalibration)(I3VEMCalibration)(LinearFit)(QuadraticFit)         \
   (TauParam)(MapOMKeyI3DOMCalibration)(MapOMKeyI3VEMCalibration)        \
   (I3DetectorStatus)(I3DOMStatus)(I3TriggerStatus)(MapOMKeyI3DOMStatus) \

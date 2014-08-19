@@ -19,8 +19,6 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include <vector>
-
 #include <dataclasses/physics/I3MCHit.h>
 #include <icetray/python/dataclass_suite.hpp>
 
@@ -52,20 +50,6 @@ void register_I3MCHit()
       .value("EARLY_AFTER_PULSE", I3MCHit::EARLY_AFTER_PULSE)
       .export_values()
       ;
-    def("identity", identity_<I3MCHit::HitSource>);  
+    def("identity", identity_<I3MCHit::HitSource>);
   }
-
-  class_<std::map<OMKey, I3MCHit> >("map_OMKey_I3MCHit")
-    .def(dataclass_suite<std::map<OMKey, I3MCHit> >())
-    ;
-
-  class_<std::vector<I3MCHit> >("vector_I3MCHit")
-    .def(dataclass_suite<std::vector<I3MCHit> >())
-    ;
-
-  class_<I3MCHitSeriesMap, bases<I3FrameObject>, I3MCHitSeriesMapPtr>("I3MCHitSeriesMap")
-    .def(dataclass_suite<I3MCHitSeriesMap>())
-    ;
-  
-  register_pointer_conversions<I3MCHitSeriesMap>();
 }
