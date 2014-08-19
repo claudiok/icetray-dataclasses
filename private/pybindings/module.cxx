@@ -45,7 +45,12 @@ namespace bp = boost::python;
   (TauParam)(MapOMKeyI3DOMCalibration)(MapOMKeyI3VEMCalibration)        \
   (I3DetectorStatus)(I3DOMStatus)(I3TriggerStatus)(MapOMKeyI3DOMStatus) \
   (MapSubdetectorI3TriggerReadoutConfig)(MapTriggerKeyI3TriggerStatus)  \
-  (I3DOMFunctions)(I3MapInt)(I3MapKey)                                  \
+  (I3DOMFunctions)(I3MapUnsignedUnsigned)(I3MapUShortUShort)            \
+  (I3MapIntVectorInt)(I3MapKeyVectorDouble)(I3MapKeyDouble)             \
+  (I3MapKeyUInt)(I3MapKeyVectorInt)(I3MapTriggerDouble)                 \
+  (I3MapTriggerVectorUInt)(I3MapStringDouble)(I3MapStringInt)           \
+  (I3MapStringBool)(I3MapStringVectorDouble)(I3MapStringStringDouble)   \
+  (I3MapStringTestMapStringString)                                      \
   (I3Double)(I3String)(I3Constants)(I3RecoPulseSeriesMapMask)           \
   (I3RecoPulseSeriesMapUnion)(I3SuperDST)(TankKey)(I3Orientation)       \
   (ModuleKey)(I3ModuleGeo)(I3OMGeo)(I3TankGeo)(I3FilterResult)          \
@@ -54,9 +59,7 @@ namespace bp = boost::python;
   (I3VectorInt)(I3VectorUInt)(I3VectorInt64)(I3VectorUInt64)            \
   (I3VectorFloat)(I3VectorDouble)(I3VectorDoubleDouble)                 \
   (I3VectorI3Particle)(I3VectorParticleType)(I3VectorI3Position)        \
-  (I3VectorPairDoubleDouble)(I3MapStringDouble)(I3MapStringInt)         \
-  (I3MapStringBool)(I3MapStringVectorDouble)(I3MapStringStringDouble)   \
-  (I3MapStringTestMapStringString)
+  (I3VectorPairDoubleDouble)
 
 
 #define I3_REGISTRATION_FN_DECL(r, data, t) void BOOST_PP_CAT(register_,t)();

@@ -25,39 +25,12 @@
 
 using namespace boost::python;
 
-void register_I3MapKey()
+void register_I3MapKeyUInt()
 {
-  class_<I3MapKeyVectorDouble, bases<I3FrameObject>, I3MapKeyVectorDoublePtr>("I3MapKeyVectorDouble")
-    .def(dataclass_suite<I3MapKeyVectorDouble >())
-    ;
-  register_pointer_conversions<I3MapKeyVectorDouble>();
-  
-  class_<I3MapKeyVectorInt, bases<I3FrameObject>, I3MapKeyVectorIntPtr>("I3MapKeyVectorInt")
-    .def(dataclass_suite<I3MapKeyVectorInt >())
-    ;
-  register_pointer_conversions<I3MapKeyVectorInt>();
-  
-  class_<I3MapKeyDouble, bases<I3FrameObject>, I3MapKeyDoublePtr>("I3MapKeyDouble")
-    .def(dataclass_suite<I3MapKeyDouble >())
-    ;
-  register_pointer_conversions<I3MapKeyDouble>();
-
   class_<I3MapKeyUInt, bases<I3FrameObject>, I3MapKeyUIntPtr>("I3MapKeyUInt")
     .def(std_map_indexing_suite<I3MapKeyUInt >())
     .def("__str__", &stream_to_string<I3MapKeyUInt>)
     ;
   register_pointer_conversions<I3MapKeyUInt>();
-
-  class_<I3MapTriggerVectorUInt, bases<I3FrameObject>, I3MapTriggerVectorUIntPtr>("I3MapTriggerVectorUInt")
-    .def(dataclass_suite<I3MapTriggerVectorUInt >())
-    ;
-  register_pointer_conversions<I3MapTriggerVectorUInt>();
-
-  class_<I3MapTriggerDouble, bases<I3FrameObject>, I3MapTriggerDoublePtr>("I3MapTriggerDouble")
-    .def(dataclass_suite<I3MapTriggerDouble >())
-    ;
-  register_pointer_conversions<I3MapTriggerDouble>();
-
-
 }
 

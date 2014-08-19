@@ -64,18 +64,13 @@ i3_add_pybindings(dataclasses
   private/pybindings/I3RecoHit.cxx
   private/pybindings/I3RecoPulse.cxx
   private/pybindings/I3String.cxx
-  private/pybindings/I3MapOMKeyMask.cxx
-  private/pybindings/I3MapOMKeyUnion.cxx
   private/pybindings/I3Matrix.cxx
   private/pybindings/I3Time.cxx
   private/pybindings/I3TimeWindow.cxx
   private/pybindings/I3Trigger.cxx
   private/pybindings/I3Waveform.cxx
   private/pybindings/I3Vectors/*.cxx
-  private/pybindings/I3MapString/*.cxx
-  private/pybindings/I3MapInt.cxx
-  private/pybindings/I3MapKey.cxx
-  private/pybindings/I3MapI3ParticleID.cxx
+  private/pybindings/I3Maps/*.cxx
   private/pybindings/I3Orientation.cxx
   private/pybindings/I3SuperDST.cxx
   private/pybindings/ModuleKey.cxx
