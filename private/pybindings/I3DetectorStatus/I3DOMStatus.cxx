@@ -19,55 +19,13 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include <vector>
-
-#define private public
-#include <dataclasses/status/I3DetectorStatus.h>
-#undef private
-#include <dataclasses/I3Map.h>
+#include <dataclasses/status/I3DOMStatus.h>
 #include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
-I3MapStringStringPtr
-get_trigger_settings(I3TriggerStatusPtr ts){
-  I3MapStringStringPtr r_map(new I3MapStringString);
-  BOOST_FOREACH(I3MapStringString::value_type p, ts->GetTriggerSettings())
-    r_map->insert(p);
-  return r_map;
-}
-
-std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig>
-get_readout_settings(I3TriggerStatusPtr ts){
-  return ts->GetReadoutSettings();
-}
-
-
-std::string get_trigger_name(I3TriggerStatusPtr ts){
-  return ts->GetTriggerName();
-}
-
-
-void register_I3DetectorStatus()
+void register_I3DOMStatus()
 {
-  class_<I3DetectorStatus, bases<I3FrameObject>, boost::shared_ptr<I3DetectorStatus> >("I3DetectorStatus")
-    #define DETECTORSTATUSPROPS (startTime)(endTime)(domStatus)(triggerStatus)
-    BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DetectorStatus, DETECTORSTATUSPROPS )
-    #undef DETECTORSTATUSPROPS
-    .def(dataclass_suite<I3DetectorStatus>())
-    ;
-
-  class_<std::map<OMKey, I3DOMStatus> >("Map_OMKey_I3DOMStatus")
-    .def(dataclass_suite<std::map<OMKey, I3DOMStatus> >())
-    ;
-
-  class_<std::map<TriggerKey, I3TriggerStatus> >("Map_TriggerKey_I3TriggerStatus")
-    .def(dataclass_suite<std::map<TriggerKey, I3TriggerStatus> >())
-    ;
-    
-  //
-  // I3DOMStatus
-  //
   {
     scope outer = 
       class_<I3DOMStatus, boost::shared_ptr<I3DOMStatus> >("I3DOMStatus")
@@ -130,39 +88,4 @@ void register_I3DetectorStatus()
 
   }
 
-  //
-  // I3TriggerStatus
-  //
-  {
-    scope outer = 
-      class_<I3TriggerStatus, boost::shared_ptr<I3TriggerStatus> >("I3TriggerStatus")
-      .def_readwrite("trigger_name", &I3TriggerStatus::name_)
-      .def_readwrite("trigger_settings",&I3TriggerStatus::settings_)
-      .def_readwrite("readout_settings",&I3TriggerStatus::readoutconfigs_)
-      .def(dataclass_suite<I3TriggerStatus>())
-      ;
-
-    class_<I3TriggerReadoutConfig, boost::shared_ptr<I3TriggerReadoutConfig> >("I3TriggerReadoutConfig")
-      .def_readwrite("readout_time_minus", &I3TriggerReadoutConfig::readoutTimeMinus)
-      .def_readwrite("readout_time_plus", &I3TriggerReadoutConfig::readoutTimePlus)
-      .def_readwrite("readout_time_offset", &I3TriggerReadoutConfig::readoutTimeOffset)
-      .def(dataclass_suite<I3TriggerReadoutConfig>())
-      ;
-
-    enum_<I3TriggerStatus::Subdetector>("Subdetector")
-      .value("NOT_SPECIFIED",I3TriggerStatus::NOT_SPECIFIED)
-      .value("ALL",I3TriggerStatus::ALL)
-      .value("ICETOP",I3TriggerStatus::ICETOP)
-      .value("INICE",I3TriggerStatus::INICE)
-      .export_values()
-      ;
-    def("identity", identity_<I3TriggerStatus::Subdetector>);
-
-  }
-
-  class_<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >("map_Subdetector_I3TriggerReadoutConfig")
-    .def(dataclass_suite<std::map<I3TriggerStatus::Subdetector, I3TriggerReadoutConfig > >())
-    ;
-  
-  register_pointer_conversions<I3DetectorStatus>();
 }

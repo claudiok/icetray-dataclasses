@@ -44,7 +44,7 @@ i3_add_pybindings(dataclasses
   private/pybindings/I3Calibration/*.cxx
   private/pybindings/I3Constants.cxx
   private/pybindings/I3DOMLaunch.cxx
-  private/pybindings/I3DetectorStatus.cxx
+  private/pybindings/I3DetectorStatus/*.cxx
   private/pybindings/I3DOMFunctions.cxx
   private/pybindings/I3Direction.cxx
   private/pybindings/I3Double.cxx

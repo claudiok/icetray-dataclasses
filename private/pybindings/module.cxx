@@ -43,7 +43,9 @@ namespace bp = boost::python;
   (I3MCHit)(I3MCList)(I3Calibration)(DroopedSPETemplate)(SPETemplate)   \
   (I3DOMCalibration)(I3VEMCalibration)(LinearFit)(QuadraticFit)         \
   (TauParam)(MapOMKeyI3DOMCalibration)(MapOMKeyI3VEMCalibration)        \
-  (I3DetectorStatus)(I3DOMFunctions)(I3MapInt)(I3MapKey)                \
+  (I3DetectorStatus)(I3DOMStatus)(I3TriggerStatus)(MapOMKeyI3DOMStatus) \
+  (MapSubdetectorI3TriggerReadoutConfig)(MapTriggerKeyI3TriggerStatus)  \
+  (I3DOMFunctions)(I3MapInt)(I3MapKey)                                  \
   (I3Double)(I3String)(I3Constants)(I3RecoPulseSeriesMapMask)           \
   (I3RecoPulseSeriesMapUnion)(I3SuperDST)(TankKey)(I3Orientation)       \
   (ModuleKey)(I3ModuleGeo)(I3OMGeo)(I3TankGeo)(I3FilterResult)          \
