@@ -93,14 +93,4 @@ void register_I3DOMLaunch()
     def("Identity", identity_<I3DOMLaunch::ATWDselect>);
   }
 
-  class_<std::vector<I3DOMLaunch> >("I3DOMLaunchSeries")
-    .def(dataclass_suite<std::vector<I3DOMLaunch> >())
-    ;
-    
-  class_<I3DOMLaunchSeriesMap, bases<I3FrameObject>, I3DOMLaunchSeriesMapPtr>("I3DOMLaunchSeriesMap")
-    .def(dataclass_suite<I3DOMLaunchSeriesMap>())
-	    
-    ;
-    
-  register_pointer_conversions<I3DOMLaunchSeriesMap>();
 }
