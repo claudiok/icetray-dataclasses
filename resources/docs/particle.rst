@@ -183,7 +183,8 @@ Fit status
 ~~~~~~~~~~
 
 The fit status is an integer type data member. The possible values are defined by the
-:enum:`FitStatus` ``enum`` type:
+``FitStatus`` enum type:
+
 * NotSet: particle object is not the result of a fit (e.g. if it is a MC "true" particle)
 * OK: according to the fit algorithm the fit was successful
 * InsufficientHits: there was not enough data to do a fit
