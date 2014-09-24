@@ -23,6 +23,7 @@
 
 #include <dataclasses/I3Double.h>
 #include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/operator_suite.hpp>
 
 using namespace boost::python;
 
@@ -36,13 +37,18 @@ i3double_prettyprint(const I3Double& d)
 
 void register_I3Double()
 {
-  class_<I3Double, bases<I3FrameObject>, boost::shared_ptr<I3Double> >("I3Double")
+  class_<I3Double, bases<I3FrameObject>, boost::shared_ptr<I3Double> >("I3Double",
+    "A serializable float/double. Can compare directly with numeric types.\n\  
+Note that python assignment is by reference, creating two links to one object.")
     .def(init<>())
     .def(init<double>())
     .def(init<const I3Double&>())
     .def_readwrite("value", &I3Double::value)
     .def("__repr__",i3double_prettyprint)
     .def_pickle(boost_serializable_pickle_suite<I3Double>())
+    .def(operator_suite<I3Double>())
+    .def(operator_int_suite<I3Double>())
+    .def(operator_float_suite<I3Double>())
     .def( freeze() )
     ;
 

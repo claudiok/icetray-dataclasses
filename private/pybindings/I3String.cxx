@@ -32,16 +32,30 @@ i3string_get_length(const I3String& s)
 {
   return s.value.size();
 }
+bool
+eq_string(const I3String& lhs, const std::string rhs)
+{
+  return lhs == rhs;
+}
+bool
+ne_string(const I3String& lhs, const std::string rhs)
+{
+  return lhs != rhs;
+}
 
 void register_I3String()
 {
-  class_<I3String, bases<I3FrameObject>, boost::shared_ptr<I3String> >("I3String")
+  class_<I3String, bases<I3FrameObject>, boost::shared_ptr<I3String> >("I3String",
+    "A serializable string. Can compare directly with strings.\n\
+Note that python assignment is by reference, creating two links to one object.") 
     .def(init<>())
     .def(init<const std::string&>())
     .def(init<const I3String&>())
     .def_readwrite("value", &I3String::value)
     .def("__repr__",&stream_to_string<I3String>)
     .def("__len__",i3string_get_length)
+    .def("__eq__",eq_string)
+    .def("__ne__",ne_string)
     .def(dataclass_suite<I3String>())
     ;
 
