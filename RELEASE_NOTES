@@ -1,0 +1,13 @@
+# $Id: $
+# $Author: $
+# $Date: $
+#
+
+September 30, 2014, Alex Olivas  (olivas@icecube.umd.edu)
+--------------------------------------------------------------------
+ V14-10-00 - Bugfix release
+  o I3PODHolder added.  This cleans up the frame-level POD classes and, with the 
+    new operator suite, fixes object comparison, e.g. I3Double comparisons to double
+    work as expected.
+
+
