@@ -316,10 +316,10 @@ class I3Particle : public I3FrameObject
   void SetLength(double length) { length_ = length; }
 
   /** @brief Returns the kinetic energy of the particle. */
-  double GetEnergy() const {std::cout << "Calling GetEnergy..." << std::endl;  return energy_; }
+  double GetEnergy() const { return energy_; }
 
   /** @brief Returns the kinetic energy of the particle. */
-  double GetKineticEnergy() const { std::cout << "Calling GetKineticEnergy..." << std::endl; return GetEnergy(); }
+  double GetKineticEnergy() const { return GetEnergy(); }
 
   /** @brief Returns the total energy of the particle. */
   double GetTotalEnergy() const;
@@ -331,10 +331,10 @@ class I3Particle : public I3FrameObject
   bool HasMass() const;
 
   /** @brief Sets the kinetic energy of the particle. */
-  void SetEnergy(double energy) { energy_ = energy; std::cout << "Calling SetEnergy..." << std::endl;}
+  void SetEnergy(double energy) { energy_ = energy; }
 
   /** @brief Sets the kinetic energy of the particle. */
-  void SetKineticEnergy(double energy) { SetEnergy(energy); std::cout << "Calling SetKineticEnergy..." << std::endl;}
+  void SetKineticEnergy(double energy) { SetEnergy(energy); }
 
   /** @brief Sets the total energy of the particle. */
   void SetTotalEnergy(double total_energy);

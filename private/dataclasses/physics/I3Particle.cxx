@@ -262,33 +262,31 @@ bool I3Particle::HasMass() const
 double I3Particle::GetMass() const
 {
   ParticleType type = ParticleType(pdgEncoding_);
-  try {
+  if (this->HasMass()) {
     return fromParticleTypeMassTable.at(type);
-  } catch(const std::out_of_range& oor) {
+  } else {
     log_fatal("\"%s\" has no mass implemented.", (this->GetTypeString()).c_str());
   }
 }
 
 double I3Particle::GetTotalEnergy() const
 {
-  std::cout << "Calling GetTotalEnergy..." << std::endl;
   ParticleType type = ParticleType(pdgEncoding_);
-  try {
+  if (this->HasMass()) {
     double mass = fromParticleTypeMassTable.at(type);
     return energy_ + mass;
-  } catch(const std::out_of_range& oor) {
+  } else {
     log_fatal("\"%s\" has no mass implemented. Cannot get total energy.", (this->GetTypeString()).c_str());
   }
 }
 
 void I3Particle::SetTotalEnergy(double total_energy)
 {
-  std::cout << "Calling SetTotalEnergy..." << std::endl;
   ParticleType type = ParticleType(pdgEncoding_);
   double energy;
-  try {
+  if (this->HasMass()) {
     energy = total_energy - fromParticleTypeMassTable.at(type);
-  } catch(const std::out_of_range& oor) {
+  } else {
     log_fatal("\"%s\" has no mass implemented. Cannot set total energy.", (this->GetTypeString()).c_str());
   }
   if(energy<0.)
