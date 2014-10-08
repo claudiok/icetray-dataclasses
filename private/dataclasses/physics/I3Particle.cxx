@@ -103,6 +103,8 @@ I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
   ID_.minorID = minor;
 }
 
+// the masses are taken from geant4.9.6.p03 except for WPlus, WMinus and Z0,
+// which were taken from PDG Booklet July 2012
 typedef std::map<I3Particle::ParticleType, double> particle_type_mass_conversion_t;
 static const particle_type_mass_conversion_t fromParticleTypeMassTable =
 boost::assign::list_of<std::pair<I3Particle::ParticleType, double> >
