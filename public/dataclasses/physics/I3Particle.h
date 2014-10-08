@@ -327,6 +327,9 @@ class I3Particle : public I3FrameObject
   /** @brief Returns the mass of the particle. */
   double GetMass() const;
 
+  /** @brief Returns the mass of a particle of given type. */
+  static double GetMassForType(ParticleType type);
+
   /** @brief Check if particle has mass. */
   bool HasMass() const;
 

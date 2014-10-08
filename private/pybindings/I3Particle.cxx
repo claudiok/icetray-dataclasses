@@ -52,6 +52,7 @@ void register_I3Particle()
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
                                           (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir )
       .def("shift_along_track", &I3Particle::ShiftAlongTrack)
+      .def("mass_for_type", &I3Particle::GetMassForType).staticmethod("mass_for_type")
       .def(dataclass_suite<I3Particle>())
       ;
     {

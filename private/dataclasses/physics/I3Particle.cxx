@@ -269,6 +269,16 @@ double I3Particle::GetMass() const
   }
 }
 
+double I3Particle::GetMassForType(ParticleType type)
+{
+  particle_type_mass_conversion_t::const_iterator it = fromParticleTypeMassTable.find(type);
+  if (it == fromParticleTypeMassTable.end()) {
+    log_fatal("\"%d\" has no mass implemented.", type);
+  } else {
+    return it->second;
+  }
+}
+
 double I3Particle::GetTotalEnergy() const
 {
   ParticleType type = ParticleType(pdgEncoding_);
