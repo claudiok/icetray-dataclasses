@@ -2,7 +2,7 @@
 
 from icecube import icetray, dataio, dataclasses
 from os.path import expandvars
-f = dataio.I3File(expandvars("$I3_PORTS/test-data/nugen_numu_ic80_dc6.002488.000000.processed.i3.gz"))
+f = dataio.I3File(expandvars("$I3_TESTDATA/nugen_numu_ic80_dc6.002488.000000.processed.i3.gz"))
 
 while f.more():
     fr = f.pop_physics()

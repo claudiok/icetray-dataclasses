@@ -120,7 +120,7 @@ def test_tree(tree):
 # test an empty tree first
 test_tree(dataclasses.I3MCTree())
 
-f = dataio.I3File(expandvars("$I3_PORTS/test-data/nugen_numu_ic80_dc6.002488.000000.processed.i3.gz") )
+f = dataio.I3File(expandvars("$I3_TESTDATA/nugen_numu_ic80_dc6.002488.000000.processed.i3.gz") )
 
 while f.more():
     fr = f.pop_physics()
@@ -129,7 +129,7 @@ while f.more():
 
     test_tree(mctree)
 
-f = dataio.I3File(expandvars("$I3_PORTS/test-data/sim/corsika.F2K010001_IC59_slim.i3.gz") )
+f = dataio.I3File(expandvars("$I3_TESTDATA/sim/corsika.F2K010001_IC59_slim.i3.gz") )
 
 ev_counter = 0
 while f.more()  :

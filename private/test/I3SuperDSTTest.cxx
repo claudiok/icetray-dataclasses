@@ -466,11 +466,11 @@ GetDataDir()
 	ENSURE(getenv("I3_PORTS") != NULL,
 	    "I3_PORTS must be defined in the parent shell.");
 
-	const std::string I3_BUILD(getenv("I3_PORTS"));
-	fs::path data_dir(I3_BUILD + "/test-data/superdst");
+	const std::string I3_TESTDATA(getenv("I3_TESTDATA"));
+	fs::path data_dir(I3_TESTDATA + "/superdst");
 	
 	ENSURE(fs::exists(data_dir), "Directory "
-	    "'$I3_PORTS/test-data/superdst' doesn't exist.");
+	    "'$I3_TESTDATA/superdst' doesn't exist.");
 	
 	return (data_dir);
 }

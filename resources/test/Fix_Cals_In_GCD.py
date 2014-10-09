@@ -11,7 +11,7 @@ badOMs = [OMKey(5,5),OMKey(5,6),OMKey(6,11),OMKey(18,45),OMKey(18,46),OMKey(19,5
 	  OMKey(40,52),OMKey(44,25),OMKey(44,26),OMKey(44,47),OMKey(44,48)]
 print(badOMs)
 
-INFILE = expandvars("$I3_PORTS/test-data/sim/GeoCalibDetectorStatus_IC80_DC6.54655.i3.gz")
+INFILE = expandvars("$I3_TESTDATA/sim/GeoCalibDetectorStatus_IC80_DC6.54655.i3.gz")
 
 OUTFILE="./GeoCalibDetectorStatus_IC86_corrected.i3.gz"
 

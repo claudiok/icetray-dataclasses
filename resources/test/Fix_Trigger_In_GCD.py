@@ -4,7 +4,7 @@ from I3Tray import *
 from icecube import icetray, dataclasses, dataio
 from os.path import expandvars
 ### open the GCD file you want to change 
-filein = expandvars("$I3_PORTS/test-data/sim/GeoCalibDetectorStatus_IC80_DC6.54655.i3.gz")
+filein = expandvars("$I3_TESTDATA/sim/GeoCalibDetectorStatus_IC80_DC6.54655.i3.gz")
 oldgcd = dataio.I3File(filein)
 
 ### make a new I3File to write you new G,C, and/or D frames to

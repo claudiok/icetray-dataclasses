@@ -7,7 +7,7 @@ It uses a file of days with leap seconds from the Navy and tests to
 make sure I3Time works well with leap seconds.
 
 It depends on http://maia.usno.navy.mil/ser7/tai-utc.dat, which is
-kept in ${I3_PORTS}/test-data. The USNO updates this file every six
+kept in ${I3_TESTDATA}. The USNO updates this file every six
 months, hence the age test.
 
 """
@@ -23,7 +23,7 @@ def approx_Equal(x, y, tolerance=0.001):
 
 now = datetime.datetime.now()
 
-filename = os.getenv("I3_PORTS")+'/test-data/tai-utc.dat'
+filename = os.path.join(os.getenv("I3_TESTDATA"),'tai-utc.dat')
 
 if now-datetime.datetime.fromtimestamp(os.path.getmtime(filename)) > datetime.timedelta(180,0):
     raise RuntimeError("tai-utc.dat older than six month old re-download from http://maia.usno.navy.mil/ser7/tai-utc.dat")
