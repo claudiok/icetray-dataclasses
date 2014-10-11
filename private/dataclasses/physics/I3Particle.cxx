@@ -1,4 +1,5 @@
 #include <icetray/serialization.h>
+#include <icetray/I3Units.h>
 #include <dataclasses/physics/I3Particle.h>
 #include <boost/functional/hash/hash.hpp>
 #include <dataclasses/I3Constants.h>
@@ -100,6 +101,211 @@ I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
 {
   ID_.majorID = major;
   ID_.minorID = minor;
+}
+
+// the masses are taken from geant4.9.6.p03 except for WPlus, WMinus and Z0,
+// which were taken from PDG Booklet July 2012
+typedef std::map<I3Particle::ParticleType, double> particle_type_mass_conversion_t;
+static const particle_type_mass_conversion_t fromParticleTypeMassTable =
+boost::assign::list_of<std::pair<I3Particle::ParticleType, double> >
+(I3Particle::Gamma, 0.0*I3Units::GeV)
+(I3Particle::EPlus, 0.00051099891*I3Units::GeV)
+(I3Particle::EMinus, 0.00051099891*I3Units::GeV)
+(I3Particle::MuPlus, 0.105658367*I3Units::GeV)
+(I3Particle::MuMinus, 0.105658367*I3Units::GeV)
+(I3Particle::Pi0, 0.1349766*I3Units::GeV)
+(I3Particle::PiPlus, 0.1395701*I3Units::GeV)
+(I3Particle::PiMinus, 0.1395701*I3Units::GeV)
+(I3Particle::K0_Long, 0.497614*I3Units::GeV)
+(I3Particle::KPlus, 0.493677*I3Units::GeV)
+(I3Particle::KMinus, 0.493677*I3Units::GeV)
+(I3Particle::Neutron, 0.93956536*I3Units::GeV)
+(I3Particle::PPlus, 0.938272013*I3Units::GeV)
+(I3Particle::PMinus, 0.938272013*I3Units::GeV)
+(I3Particle::K0_Short, 0.497614*I3Units::GeV)
+(I3Particle::Eta, 0.547853*I3Units::GeV)
+(I3Particle::Lambda, 1.115683*I3Units::GeV)
+(I3Particle::SigmaPlus, 1.18937*I3Units::GeV)
+(I3Particle::Sigma0, 1.192642*I3Units::GeV)
+(I3Particle::SigmaMinus, 1.18937*I3Units::GeV)
+(I3Particle::Xi0, 1.31486*I3Units::GeV)
+(I3Particle::XiMinus, 1.32171*I3Units::GeV)
+(I3Particle::OmegaMinus, 1.67245*I3Units::GeV)
+(I3Particle::NeutronBar, 0.93956536*I3Units::GeV)
+(I3Particle::LambdaBar, 1.115683*I3Units::GeV)
+(I3Particle::SigmaMinusBar, 1.18937*I3Units::GeV)
+(I3Particle::Sigma0Bar, 1.192642*I3Units::GeV)
+(I3Particle::SigmaPlusBar, 1.18937*I3Units::GeV)
+(I3Particle::Xi0Bar, 1.31486*I3Units::GeV)
+(I3Particle::XiPlusBar, 1.32171*I3Units::GeV)
+(I3Particle::OmegaPlusBar, 1.67245*I3Units::GeV)
+(I3Particle::DPlus, 1.86957*I3Units::GeV)
+(I3Particle::DMinus, 1.86957*I3Units::GeV)
+(I3Particle::D0, 1.8648*I3Units::GeV)
+(I3Particle::D0Bar, 1.8648*I3Units::GeV)
+(I3Particle::DsPlus, 1.96845*I3Units::GeV)
+(I3Particle::DsMinusBar, 1.96845*I3Units::GeV)
+(I3Particle::LambdacPlus, 2.28646*I3Units::GeV)
+(I3Particle::WPlus, 80.385*I3Units::GeV)
+(I3Particle::WMinus, 80.385*I3Units::GeV)
+(I3Particle::Z0, 91.1876*I3Units::GeV)
+(I3Particle::NuE, 0.0*I3Units::GeV)
+(I3Particle::NuEBar, 0.0*I3Units::GeV)
+(I3Particle::NuMu, 0.0*I3Units::GeV)
+(I3Particle::NuMuBar, 0.0*I3Units::GeV)
+(I3Particle::TauPlus, 1.77682*I3Units::GeV)
+(I3Particle::TauMinus, 1.77682*I3Units::GeV)
+(I3Particle::NuTau, 0.0*I3Units::GeV)
+(I3Particle::NuTauBar, 0.0*I3Units::GeV)
+
+//Nuclei
+(I3Particle::He3Nucleus, 2.808391*I3Units::GeV)
+(I3Particle::He4Nucleus, 3.727379*I3Units::GeV)
+(I3Particle::Li6Nucleus, 5.60151816372*I3Units::GeV)
+(I3Particle::Li7Nucleus, 6.53383353972*I3Units::GeV)
+(I3Particle::Be9Nucleus, 8.39275030104*I3Units::GeV)
+(I3Particle::B10Nucleus, 9.32443669262*I3Units::GeV)
+(I3Particle::B11Nucleus, 10.2525479206*I3Units::GeV)
+(I3Particle::C12Nucleus, 11.174863388*I3Units::GeV)
+(I3Particle::C13Nucleus, 12.1094824273*I3Units::GeV)
+(I3Particle::N14Nucleus, 13.0402043278*I3Units::GeV)
+(I3Particle::N15Nucleus, 13.9689363768*I3Units::GeV)
+(I3Particle::O16Nucleus, 14.8950815346*I3Units::GeV)
+(I3Particle::O17Nucleus, 15.830503751*I3Units::GeV)
+(I3Particle::O18Nucleus, 16.76202507*I3Units::GeV)
+(I3Particle::F19Nucleus, 17.6923029112*I3Units::GeV)
+(I3Particle::Ne20Nucleus, 18.6177321841*I3Units::GeV)
+(I3Particle::Ne21Nucleus, 19.5505363674*I3Units::GeV)
+(I3Particle::Ne22Nucleus, 20.4797374564*I3Units::GeV)
+(I3Particle::Na23Nucleus, 21.4092162538*I3Units::GeV)
+(I3Particle::Mg24Nucleus, 22.3357965987*I3Units::GeV)
+(I3Particle::Mg25Nucleus, 23.2680313677*I3Units::GeV)
+(I3Particle::Mg26Nucleus, 24.1965036397*I3Units::GeV)
+(I3Particle::Al26Nucleus, 24.1999980695*I3Units::GeV)
+(I3Particle::Al27Nucleus, 25.1265057485*I3Units::GeV)
+(I3Particle::Si28Nucleus, 26.0531939251*I3Units::GeV)
+(I3Particle::Si29Nucleus, 26.9842857039*I3Units::GeV)
+(I3Particle::Si30Nucleus, 27.9132418499*I3Units::GeV)
+(I3Particle::Si31Nucleus, 28.8462197999*I3Units::GeV)
+(I3Particle::Si32Nucleus, 29.7765819269*I3Units::GeV)
+(I3Particle::P31Nucleus, 28.8442183429*I3Units::GeV)
+(I3Particle::P32Nucleus, 29.7758480379*I3Units::GeV)
+(I3Particle::P33Nucleus, 30.7053097979*I3Units::GeV)
+(I3Particle::S32Nucleus, 29.773628119*I3Units::GeV)
+(I3Particle::S33Nucleus, 30.70455185*I3Units::GeV)
+(I3Particle::S34Nucleus, 31.632700084*I3Units::GeV)
+(I3Particle::S35Nucleus, 32.565279544*I3Units::GeV)
+(I3Particle::S36Nucleus, 33.494955853*I3Units::GeV)
+(I3Particle::Cl35Nucleus, 32.5646030619*I3Units::GeV)
+(I3Particle::Cl36Nucleus, 33.4955887729*I3Units::GeV)
+(I3Particle::Cl37Nucleus, 34.4248431259*I3Units::GeV)
+(I3Particle::Ar36Nucleus, 33.4943699372*I3Units::GeV)
+(I3Particle::Ar37Nucleus, 34.4251478462*I3Units::GeV)
+(I3Particle::Ar38Nucleus, 35.3528749822*I3Units::GeV)
+(I3Particle::Ar39Nucleus, 36.2858415502*I3Units::GeV)
+(I3Particle::Ar40Nucleus, 37.2155376931*I3Units::GeV)
+(I3Particle::Ar41Nucleus, 38.1490041502*I3Units::GeV)
+(I3Particle::Ar42Nucleus, 39.0791429702*I3Units::GeV)
+(I3Particle::K39Nucleus, 36.284767546*I3Units::GeV)
+(I3Particle::K40Nucleus, 37.21653338*I3Units::GeV)
+(I3Particle::K41Nucleus, 38.146003539*I3Units::GeV)
+(I3Particle::Ca40Nucleus, 37.2147134578*I3Units::GeV)
+(I3Particle::Ca41Nucleus, 38.1459160018*I3Units::GeV)
+(I3Particle::Ca42Nucleus, 39.0740007168*I3Units::GeV)
+(I3Particle::Ca43Nucleus, 40.0056331778*I3Units::GeV)
+(I3Particle::Ca44Nucleus, 40.9340673658*I3Units::GeV)
+(I3Particle::Ca45Nucleus, 41.8662179228*I3Units::GeV)
+(I3Particle::Ca46Nucleus, 42.7953888238*I3Units::GeV)
+(I3Particle::Ca47Nucleus, 43.7276778058*I3Units::GeV)
+(I3Particle::Ca48Nucleus, 44.6572978278*I3Units::GeV)
+(I3Particle::Sc44Nucleus, 40.9372110547*I3Units::GeV)
+(I3Particle::Sc45Nucleus, 41.8654533837*I3Units::GeV)
+(I3Particle::Sc46Nucleus, 42.7962580887*I3Units::GeV)
+(I3Particle::Sc47Nucleus, 43.7251771107*I3Units::GeV)
+(I3Particle::Sc48Nucleus, 44.6565071587*I3Units::GeV)
+(I3Particle::Ti44Nucleus, 40.9369701498*I3Units::GeV)
+(I3Particle::Ti45Nucleus, 41.8670068998*I3Units::GeV)
+(I3Particle::Ti46Nucleus, 42.7933832428*I3Units::GeV)
+(I3Particle::Ti47Nucleus, 43.7240682988*I3Units::GeV)
+(I3Particle::Ti48Nucleus, 44.6520069938*I3Units::GeV)
+(I3Particle::Ti49Nucleus, 45.5834299498*I3Units::GeV)
+(I3Particle::Ti50Nucleus, 46.5120561048*I3Units::GeV)
+(I3Particle::V48Nucleus, 44.6555109582*I3Units::GeV)
+(I3Particle::V49Nucleus, 45.5835234282*I3Units::GeV)
+(I3Particle::V50Nucleus, 46.5137528452*I3Units::GeV)
+(I3Particle::V51Nucleus, 47.4422670442*I3Units::GeV)
+(I3Particle::Cr50Nucleus, 46.5122066868*I3Units::GeV)
+(I3Particle::Cr51Nucleus, 47.4425114068*I3Units::GeV)
+(I3Particle::Cr52Nucleus, 48.3700373088*I3Units::GeV)
+(I3Particle::Cr53Nucleus, 49.3016635288*I3Units::GeV)
+(I3Particle::Cr54Nucleus, 50.2315097528*I3Units::GeV)
+(I3Particle::Mn52Nucleus, 48.3742407516*I3Units::GeV)
+(I3Particle::Mn53Nucleus, 49.3017523196*I3Units::GeV)
+(I3Particle::Mn54Nucleus, 50.2323788816*I3Units::GeV)
+(I3Particle::Mn55Nucleus, 51.1617176996*I3Units::GeV)
+(I3Particle::Fe54Nucleus, 50.2311739195*I3Units::GeV)
+(I3Particle::Fe55Nucleus, 51.1614410355*I3Units::GeV)
+(I3Particle::Fe56Nucleus, 52.0898090795*I3Units::GeV)
+(I3Particle::Fe57Nucleus, 53.0217283295*I3Units::GeV)
+(I3Particle::Fe58Nucleus, 53.9512490695*I3Units::GeV);
+
+bool I3Particle::HasMass() const
+{
+  ParticleType type = ParticleType(pdgEncoding_);
+  particle_type_mass_conversion_t::const_iterator it = fromParticleTypeMassTable.find(type);
+  if (it == fromParticleTypeMassTable.end()) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+double I3Particle::GetMass() const
+{
+  ParticleType type = ParticleType(pdgEncoding_);
+  if (this->HasMass()) {
+    return fromParticleTypeMassTable.at(type);
+  } else {
+    log_fatal("\"%s\" has no mass implemented.", (this->GetTypeString()).c_str());
+  }
+}
+
+double I3Particle::GetMassForType(ParticleType type)
+{
+  particle_type_mass_conversion_t::const_iterator it = fromParticleTypeMassTable.find(type);
+  if (it == fromParticleTypeMassTable.end()) {
+    log_fatal("\"%d\" has no mass implemented.", type);
+  } else {
+    return it->second;
+  }
+}
+
+double I3Particle::GetTotalEnergy() const
+{
+  ParticleType type = ParticleType(pdgEncoding_);
+  if (this->HasMass()) {
+    double mass = fromParticleTypeMassTable.at(type);
+    return energy_ + mass;
+  } else {
+    log_fatal("\"%s\" has no mass implemented. Cannot get total energy.", (this->GetTypeString()).c_str());
+  }
+}
+
+void I3Particle::SetTotalEnergy(double total_energy)
+{
+  ParticleType type = ParticleType(pdgEncoding_);
+  double energy;
+  if (this->HasMass()) {
+    energy = total_energy - fromParticleTypeMassTable.at(type);
+  } else {
+    log_fatal("\"%s\" has no mass implemented. Cannot set total energy.", (this->GetTypeString()).c_str());
+  }
+  if(energy<0.)
+  {
+    log_fatal("Particle must not have negative energy.");
+  }
+  this->SetEnergy(energy);
 }
 
 // using the magic of the preprocessor, expand

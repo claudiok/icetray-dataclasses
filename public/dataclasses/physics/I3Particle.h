@@ -318,8 +318,29 @@ class I3Particle : public I3FrameObject
   /** @brief Returns the kinetic energy of the particle. */
   double GetEnergy() const { return energy_; }
 
+  /** @brief Returns the kinetic energy of the particle. */
+  double GetKineticEnergy() const { return GetEnergy(); }
+
+  /** @brief Returns the total energy of the particle. */
+  double GetTotalEnergy() const;
+
+  /** @brief Returns the mass of the particle. */
+  double GetMass() const;
+
+  /** @brief Returns the mass of a particle of given type. */
+  static double GetMassForType(ParticleType type);
+
+  /** @brief Check if particle has mass. */
+  bool HasMass() const;
+
   /** @brief Sets the kinetic energy of the particle. */
   void SetEnergy(double energy) { energy_ = energy; }
+
+  /** @brief Sets the kinetic energy of the particle. */
+  void SetKineticEnergy(double energy) { SetEnergy(energy); }
+
+  /** @brief Sets the total energy of the particle. */
+  void SetTotalEnergy(double total_energy);
 
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
