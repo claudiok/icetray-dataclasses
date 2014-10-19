@@ -157,6 +157,15 @@ bool HasParent(I3MCTreePtr t, I3ParticlePtr c){
   return I3MCTreeUtils::HasParent(*t,*c);
 }
 
+I3Particle GetParent(I3MCTreePtr t, I3ParticlePtr c){
+  if ( !HasParent(t,c) ){
+    log_error("The particle you are passing me has no parent");
+    return I3Particle();
+  }
+  
+  return I3MCTreeUtils::GetParent(*t,*c);
+}
+
 inline I3ParticlePtr Get(const I3MCTree& tree, const I3MCHit& hit)
 {
   return I3ParticlePtr(new I3Particle(I3MCTreeUtils::Get(tree,hit)));
