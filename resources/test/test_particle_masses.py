@@ -80,7 +80,7 @@ try:
 except AttributeError, err:
     # This should not happen when the c++ exception is handled correctly with the pybindings
     failed_test_counter += 1
-except RuntimeError as err:
+except RuntimeError, err:
     pass
 except:
     failed_test_counter += 1
