@@ -77,7 +77,7 @@ particle = I3Particle()
 particle.type = particle_types[-2000000041] # monopole
 try:
     particle.total_energy = 100.
-except AttributeError  as err:
+except AttributeError, err:
     # This should not happen when the c++ exception is handled correctly with the pybindings
     failed_test_counter += 1
 except RuntimeError as err:
