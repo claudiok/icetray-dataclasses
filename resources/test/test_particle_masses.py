@@ -27,7 +27,7 @@ try:
             antiparticle = I3Particle()
             antiparticle.type = particle_types[-pdg]
             I3Test.ENSURE_EQUAL(particle.mass, antiparticle.mass, 
-                "The masses for particle and anti-particle are different for {0}/{1}.".format(particle.type_string, antiparticle.type_string))
+                "The masses for particle and anti-particle are different for %s/%s." % (particle.type_string, antiparticle.type_string))
 except:
     failed_test_counter += 1
 
@@ -85,7 +85,7 @@ except RuntimeError, err:
 except:
     failed_test_counter += 1
 
-print "I3Particle masses: {0} of {1} test failed!".format(failed_test_counter, total_test)
+print("I3Particle masses: %s of %s test failed!" % (failed_test_counter, total_test))
 if failed_test_counter > 0:
     sys.exit(1)
 else:
