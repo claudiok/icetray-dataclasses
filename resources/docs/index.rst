@@ -10,6 +10,7 @@ Table of Contents:
    :maxdepth: 3
 
    particle
+   masks
    python
    faq-common-probs
    i3double
