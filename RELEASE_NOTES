@@ -3,6 +3,13 @@
 # $Date: $
 #
 
+November 20, 2014, Alex Olivas  (olivas@icecube.umd.edu)
+--------------------------------------------------------------------
+ V14-11-00 - Minor release
+  o I3Particles now have mass.  Welcome to the Standard Model.
+  o Added support for I3_TESTDATA
+  o I3MCTree::GetParent is exposed.
+
 September 30, 2014, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
  V14-10-00 - Bugfix release
