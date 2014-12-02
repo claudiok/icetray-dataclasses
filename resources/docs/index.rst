@@ -11,6 +11,7 @@ Table of Contents:
 
    particle
    masks
+   i3mctree
    python
    faq-common-probs
    i3double

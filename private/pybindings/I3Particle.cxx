@@ -87,6 +87,8 @@ void register_I3Particle()
   bp::def("identity", identity_<I3Particle::LocationType>);
   bp::def("identity", identity_<I3Particle::ParticleType>);
   bp::def("identity", identity_<I3Particle::ParticleShape>);
+  
+  bp::implicitly_convertible<I3Particle,I3ParticleID>();
 
   class_<std::vector<I3Particle> >("I3ParticleVect")
     .def(dataclass_suite<std::vector<I3Particle> >())

@@ -20,6 +20,7 @@
 #ifndef __CINT__
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/optional.hpp>
 #endif
 
 /**
@@ -234,7 +235,7 @@ class I3Particle : public I3FrameObject
    * @param dir Direction of the track
    * @param vertextime time that the vertex is happening
    * @param shape Shape of the track
-   * @param length length of the track, if applies
+   * @param type Particle type
    */
 #ifndef __CINT__
   I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
@@ -242,6 +243,13 @@ class I3Particle : public I3FrameObject
 #else
   I3Particle(const I3Position pos, const I3Direction dir, const double vertextime, 
              ParticleShape shape, double length);
+#endif
+
+#ifndef __CINT__
+  /** @brief Constructor for particle from boost::optional<I3Particle>
+   * @param p A particle
+   */
+  I3Particle(const boost::optional<I3Particle>& p);
 #endif
 
   virtual ~I3Particle();
@@ -258,6 +266,20 @@ class I3Particle : public I3FrameObject
   bool HasEnergy() const;
 
   operator I3ParticleID() const{ return ID_; }
+  I3Particle operator=(const I3Particle& rhs) {
+    ID_ = rhs.ID_;
+    pdgEncoding_ = rhs.pdgEncoding_;
+    shape_ = rhs.shape_;
+    status_ = rhs.status_;
+    pos_ = rhs.pos_;
+    dir_ = rhs.dir_;
+    time_ = rhs.time_;
+    energy_ = rhs.energy_;
+    length_ = rhs.length_;
+    speed_ = rhs.speed_;
+    locationType_ = rhs.locationType_;
+    return *this;
+  }
 	
   I3ParticleID GetID() const { return ID_; }
   int32_t GetMinorID() const { return ID_.minorID; }
@@ -441,6 +463,7 @@ template<> void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned vers
 #endif
 
 bool operator==(const I3Particle& lhs, const I3Particle& rhs);
+bool operator!=(const I3Particle& lhs, const I3Particle& rhs);
 
 std::ostream& operator<<(std::ostream& oss, const I3Particle& d);
 

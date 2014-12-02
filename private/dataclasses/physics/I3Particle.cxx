@@ -783,6 +783,24 @@ boost::assign::list_of<std::pair<int, I3Particle::ParticleType> >
 (3025, I3Particle::Mn55Nucleus)
 (3026, I3Particle::Fe56Nucleus);
 
+
+#ifndef __CINT__
+I3Particle::I3Particle(const boost::optional<I3Particle>& p) :
+  ID_(p->ID_),
+  pdgEncoding_(p->pdgEncoding_),
+  shape_(p->shape_),
+  status_(p->status_),
+  pos_(p->pos_),
+  dir_(p->dir_),
+  time_(p->time_),
+  energy_(p->energy_),
+  length_(p->length_),
+  speed_(p->speed_),
+  locationType_(p->locationType_)
+{}
+#endif
+
+
 template <class Archive>
   void I3Particle::save(Archive& ar, unsigned version) const
   {
@@ -953,6 +971,9 @@ bool operator==(const I3Particle& lhs, const I3Particle& rhs){
 	   lhs.GetSpeed() == rhs.GetSpeed()
 	   );
 }
+
+bool operator!=(const I3Particle& lhs, const I3Particle& rhs)
+{ return !(lhs == rhs); }
 
 std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
   oss << "[ I3Particle MajorID : " << p.GetMajorID() << std::endl

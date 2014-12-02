@@ -1,6 +1,8 @@
 #ifndef I3ParticleID_H_INCLUDED
 #define I3ParticleID_H_INCLUDED
 
+#include <icetray/I3PointerTypedefs.h>
+
 #ifndef __CINT__
 #include <icetray/serialization.h>
 #endif
@@ -15,6 +17,9 @@ struct I3ParticleID{
 	
 	bool operator==(const I3ParticleID& other) const {
 		return(majorID==other.majorID && minorID==other.minorID);
+	}
+	bool operator!=(const I3ParticleID& other) const {
+		return(majorID!=other.majorID || minorID!=other.minorID);
 	}
 	
 	bool operator<(const I3ParticleID& other) const {
@@ -35,6 +40,8 @@ private:
 #endif
 };
 
+I3_POINTER_TYPEDEFS(I3ParticleID);
+
 std::ostream& operator<<(std::ostream &, const I3ParticleID &);
 
 #ifndef __CINT__
@@ -46,7 +53,7 @@ namespace __gnu_cxx{
 	template<>
 	struct hash<I3ParticleID>{
 		size_t operator()(const I3ParticleID& id) const{
-			return(id.majorID + id.minorID);
+			return hash<int>()(id.majorID + id.minorID);
 		}
 	};
 }
@@ -56,7 +63,7 @@ namespace __gnu_cxx{
 template<>
 struct i3hash<I3ParticleID>{
 	size_t operator()(const I3ParticleID& id) const{
-		return(id.majorID + id.minorID);
+		return hash<int>()(id.majorID + id.minorID);
 	}
 };
 
