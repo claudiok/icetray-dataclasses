@@ -116,7 +116,7 @@ TEST(TriggerStatusSettingsTest)
 
   boost::optional<float> float_test_value;
   myts.GetTriggerConfigValue(good_float_key, float_test_value);
-  ENSURE( float_test_value );
+  ENSURE( (bool)float_test_value );
   ENSURE_DISTANCE( float_value, float_test_value.get(), 1e-9,
 		   "Get/Set not working properly for floats." );
 
@@ -134,7 +134,7 @@ TEST(ConvertFloats)
   BOOST_FOREACH(const char* from, convertible_floats){
     boost::optional<float> to;
     Convert(std::string(from),to);
-    ENSURE( to , "'%s' should convert to a float");
+    ENSURE( (bool)to , "'%s' should convert to a float");
   }
 
   std::vector<const char*> unconvertible_floats = list_of
@@ -159,7 +159,7 @@ TEST(ConvertInts)
   // the  most common forms
   boost::optional<int> to;
   Convert("1", to);
-  ENSURE( to );
+  ENSURE( (bool)to );
 
   // Test that pathological inputs correctly
   Convert("0.5", to);
@@ -175,7 +175,7 @@ TEST(ConvertBools)
   BOOST_FOREACH(const char* from, convertible_bools){
     boost::optional<bool> to;
     Convert(std::string(from),to);
-    ENSURE( to , "'%s' should convert to a bool");
+    ENSURE( (bool)to , "'%s' should convert to a bool");
   }
 
   std::vector<const char*> unconvertible_bools = list_of
@@ -193,11 +193,11 @@ TEST(ConvertStrings)
 {
   boost::optional<std::string> to;
   Convert("this is a string", to);
-  ENSURE( to );
+  ENSURE( (bool)to );
   Convert("there are many like them", to);
-  ENSURE( to );
+  ENSURE( (bool)to );
   Convert("but this one is mine", to);
-  ENSURE( to );
+  ENSURE( (bool)to );
 }
 
 TEST(SettingsFromString)
@@ -220,18 +220,18 @@ TEST(SettingsFromString)
 
   boost::optional<float> float_value;
   myts.GetTriggerConfigValue("good_float", float_value);  
-  ENSURE(float_value);
+  ENSURE((bool)float_value);
   ENSURE_DISTANCE( float_value.get(), 0.5, 1e-9 );
 
-  ENSURE(float_value);
+  ENSURE((bool)float_value);
   myts.GetTriggerConfigValue("good_exp_float", float_value);  
   ENSURE_DISTANCE( float_value.get(), 3.14e-3, 1e-9 );
 
-  ENSURE(float_value);
+  ENSURE((bool)float_value);
   myts.GetTriggerConfigValue("good_Exp_float", float_value);  
   ENSURE_DISTANCE( float_value.get(), 3.14e-3, 1e-9 );
 
-  ENSURE(float_value);
+  ENSURE((bool)float_value);
   myts.GetTriggerConfigValue("bad_float", float_value);
   ENSURE( !float_value );
 
@@ -240,7 +240,7 @@ TEST(SettingsFromString)
   ENSURE( int_value && int_value == 10 );
 
   myts.GetTriggerConfigValue("good_negative_int", int_value);
-  ENSURE(int_value);
+  ENSURE((bool)int_value);
   ENSURE( int_value && int_value == -10 );
 
   myts.GetTriggerConfigValue("bad_int", int_value);
