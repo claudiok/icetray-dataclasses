@@ -105,14 +105,14 @@ namespace I3MCTreeUtils
   const typename I3MCTree::fast_const_iterator
   GetBestPtr(const I3MCTreeConstPtr t, Function func)
   {
+    assert((bool)t);
     typename I3MCTree::fast_const_iterator iter(*t), end=t->cend_fast();
-    typename I3MCTree::fast_const_iterator ret = end;
+    typename I3MCTree::fast_const_iterator ret = iter;
     if (iter == end)
       return ret;
-    ret = iter++;
-    for(;iter != end;iter++) {
-      if (!func(*ret,*iter))
-        ret = iter++;
+    for(iter++;iter != end;iter++) {
+      if (func(*iter,*ret))
+        ret = iter;
     }
     return ret;
   }
