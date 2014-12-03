@@ -280,6 +280,23 @@ class I3Particle : public I3FrameObject
     locationType_ = rhs.locationType_;
     return *this;
   }
+  bool operator==(const I3Particle& rhs) const {
+    return ( ID_ == rhs.ID_ &&
+        pdgEncoding_ == rhs.pdgEncoding_ &&
+        shape_ == rhs.shape_ &&
+        status_ == rhs.status_ &&
+        pos_ == rhs.pos_ &&
+        dir_ == rhs.dir_ &&
+        time_ == rhs.time_ &&
+        energy_ == rhs.energy_ &&
+        length_ == rhs.length_ &&
+        speed_ == rhs.speed_ &&
+        locationType_ == rhs.locationType_
+    );
+  }
+  bool operator!=(const I3Particle& rhs) const {
+    return !(*this == rhs);
+  }
 	
   I3ParticleID GetID() const { return ID_; }
   int32_t GetMinorID() const { return ID_.minorID; }
@@ -461,9 +478,6 @@ static const unsigned i3particle_version_ = 5;
 template<> void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const;
 template<> void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version);
 #endif
-
-bool operator==(const I3Particle& lhs, const I3Particle& rhs);
-bool operator!=(const I3Particle& lhs, const I3Particle& rhs);
 
 std::ostream& operator<<(std::ostream& oss, const I3Particle& d);
 

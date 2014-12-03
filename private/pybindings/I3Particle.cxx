@@ -29,7 +29,29 @@
 #include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
- 
+
+bool I3ParticleVect_eq(const std::vector<I3Particle> &lhs,bp::list &rhs)
+{
+    unsigned long n = bp::len(rhs);
+    if (lhs.size() != n)
+        return false;
+    for(unsigned long i=0;i<n;i++)
+    {
+        try
+        {
+            if (lhs[i] != extract<I3Particle>(rhs[i])())
+                return false;
+        }
+        catch (int e)
+        {
+            std::cout << "cannot convert to I3Particle at position " << i << std::endl;
+            return false;
+        }
+    }
+    return true;
+}
+
+
 #define ENUM_DEF(r,data,T) .value(BOOST_PP_STRINGIZE(T), data::T)
 
 void register_I3Particle()
@@ -92,6 +114,7 @@ void register_I3Particle()
 
   class_<std::vector<I3Particle> >("I3ParticleVect")
     .def(dataclass_suite<std::vector<I3Particle> >())
+    .def("__eq__",I3ParticleVect_eq)
     ;
 
   register_pointer_conversions<I3Particle>();

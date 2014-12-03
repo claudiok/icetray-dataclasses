@@ -956,25 +956,6 @@ void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version)
     SetLocationTypeString(tempString);
 }
 
-bool operator==(const I3Particle& lhs, const I3Particle& rhs){
-  return ( lhs.GetMinorID() == rhs.GetMinorID() &&
-	   lhs.GetMajorID() == rhs.GetMajorID() &&
-	   lhs.GetPdgEncoding() == rhs.GetPdgEncoding() &&
-	   lhs.GetShape() == rhs.GetShape() &&
-	   lhs.GetFitStatus() == rhs.GetFitStatus() &&
-	   lhs.GetLocationType() == rhs.GetLocationType() &&
-	   lhs.GetPos() == rhs.GetPos() &&
-	   lhs.GetDir() == rhs.GetDir() &&
-	   lhs.GetTime() == rhs.GetTime() &&
-	   lhs.GetLength() == rhs.GetLength() &&
-	   lhs.GetEnergy() == rhs.GetEnergy() &&
-	   lhs.GetSpeed() == rhs.GetSpeed()
-	   );
-}
-
-bool operator!=(const I3Particle& lhs, const I3Particle& rhs)
-{ return !(lhs == rhs); }
-
 std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
   oss << "[ I3Particle MajorID : " << p.GetMajorID() << std::endl
       << "             MinorID : " << p.GetMinorID() << std::endl

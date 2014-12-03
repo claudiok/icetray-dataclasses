@@ -178,6 +178,7 @@ namespace TreeBase {
         TreeType* treePtr_;
         TreeHashKey storage_;
         // constructors
+        explicit iterator_storage_impl() { }
         explicit iterator_storage_impl(TreeType& t)
           : treePtr_(&t), storage_(t.end_) { }
         explicit iterator_storage_impl(TreeType& t, ValueType v)
@@ -261,6 +262,7 @@ namespace TreeBase {
         TreeType* treePtr_;
         TreeHashMapIter storage_;
         // constructors
+        explicit iterator_storage_impl() { }
         explicit iterator_storage_impl(TreeType& t) : treePtr_(&t),
           storage_(t.internalMap.end()) { }
         explicit iterator_storage_impl(TreeType& t, ValueType v)
@@ -341,6 +343,7 @@ namespace TreeBase {
           typedef iterator_storage_impl<StorageType, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
+          explicit iterator_base() { }
           explicit iterator_base(TreeValue& ext) : node_(ext)
           { node_ = derived_().first_(); }
           explicit iterator_base(TreeValue& ext, const T* v)
@@ -397,6 +400,7 @@ namespace TreeBase {
           typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
+          explicit pre_order() { }
           pre_order(TreeValue& ext)
             : iterator_base<pre_order<Value>,Value,TreeHashKey>(ext) { }
           explicit pre_order(const pre_order<T>& iter)
@@ -476,6 +480,7 @@ namespace TreeBase {
           typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
+          explicit post_order() { }
           post_order(TreeValue& ext) :
             iterator_base<post_order<Value>,Value,TreeHashKey>(ext) { }
           explicit post_order(const post_order<T>& iter)
@@ -559,6 +564,7 @@ namespace TreeBase {
           typedef iterator_storage_impl<TreeHashKey, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
+          explicit sibling_iter() { }
           sibling_iter(TreeValue& ext) :
             iterator_base<sibling_iter<Value>,Value,TreeHashKey>(ext) { }
           explicit sibling_iter(const sibling_iter<T>& iter)
@@ -619,6 +625,7 @@ namespace TreeBase {
           typedef iterator_storage_impl<TreeHashMapIter, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
+          explicit fast_iter() { }
           fast_iter(TreeValue& ext) :
             iterator_base<fast_iter<Value>,Value,TreeHashMapIter>(ext) { }
           explicit fast_iter(const fast_iter<T>& iter)
@@ -669,6 +676,7 @@ namespace TreeBase {
           typedef iterator_storage_impl<TreeHashMapIter, Value,TreeValue,
               TreeHashMapIter> storage_traits;
         public:
+          explicit leaf_iter() { }
           leaf_iter(TreeValue& ext) :
             iterator_base<leaf_iter<Value>,Value,TreeHashMapIter>(ext) { }
           explicit leaf_iter(const leaf_iter<T>& iter)
