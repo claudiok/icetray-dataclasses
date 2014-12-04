@@ -181,69 +181,6 @@ namespace I3MCTreeUtils
     }
     return ret;
   }
-  
-  
-  // --------------------- everything below is deprecated --------------------
-  
-  /**
-   * Returns the InIce particle with highest energy.
-   * This is useful for example in extracting "the muon" from the 
-   * atmospheric neutrino data.
-   *
-   * /deprecated Use GetBestFilter instead
-   */
-  I3MCTree::const_iterator GetMostEnergeticPrimary(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticPrimary(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergeticInIce(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticInIce(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergetic(const I3MCTree&, I3Particle::ParticleType) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergetic(I3MCTreeConstPtr, I3Particle::ParticleType) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergeticTrack(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticTrack(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergeticCascade(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticCascade(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergeticInIceCascade(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticInIceCascade(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergeticNeutrino(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticNeutrino(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergeticMuon(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticMuon(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  I3MCTree::const_iterator GetMostEnergeticNucleus(const I3MCTree&) __attribute__ ((deprecated));
-  I3MCTree::const_iterator GetMostEnergeticNucleus(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-
-  /**
-   * Returns a std::vector of particles that are InIce.
-   *
-   * /deprecated Use GetFilter instead
-   */
-  const std::vector<I3Particle> Get(const I3MCTree&, I3Particle::LocationType) __attribute__ ((deprecated));
-  const std::vector<I3Particle> GetInIce(const I3MCTree&) __attribute__ ((deprecated));
-  const std::vector<I3Particle> GetInIce(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  /**
-   * Returns a std::vector of particles that are IceTop.
-   *
-   * /deprecated Use GetFilter instead
-   */
-  const std::vector<I3Particle> GetIceTop(const I3MCTree&) __attribute__ ((deprecated));
-  const std::vector<I3Particle> GetIceTop(I3MCTreeConstPtr) __attribute__ ((deprecated));
-
-  /**
-   * Returns an iterator
-   *
-   * /deprecated Use I3MCTree::iterator iter(tree,particleID);
-   */
-  I3MCTree::iterator GetIterator(I3MCTreePtr, const I3ParticleID&) __attribute__ ((deprecated));
-  I3MCTree::iterator GetIterator(I3MCTree&, const I3ParticleID&) __attribute__ ((deprecated));
 
 }
 
