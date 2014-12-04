@@ -22,8 +22,7 @@ from icecube import examples
 
 tray = I3Tray()
 
-workspace = expandvars("$I3_SRC")
-infile = workspace + "/dataclasses/resources/testdata/vsn99_detectorstatus.i3"
+infile = expandvars("I3_TESTDATA") + "/dataclasses/vsn99_detectorstatus.i3"
 
 tray.AddModule("I3Reader","reader", Filename=infile)
 def getstat(fr):
