@@ -76,6 +76,7 @@ i3_add_pybindings(dataclasses
   private/pybindings/ModuleKey.cxx
   private/pybindings/I3ModuleGeo.cxx
   private/pybindings/TankKey.cxx
+  private/pybindings/I3MCTreePhysicsLibrary.cxx
   private/pybindings/module.cxx
   USE_TOOLS boost python
   USE_PROJECTS icetray dataclasses

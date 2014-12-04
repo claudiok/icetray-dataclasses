@@ -62,34 +62,34 @@ namespace I3MCTreePhysicsLibrary
    * This is useful for example in extracting "the muon" from the 
    * atmospheric neutrino data.
    */
-  I3MCTree::fast_const_iterator GetMostEnergeticPrimary(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t, IsPrimary, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticPrimary(const I3MCTree& t){
+    return GetBestFilter(t, IsPrimary, MoreEnergetic);}
 
-  I3MCTree::fast_const_iterator GetMostEnergeticInIce(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t,  IsInIce, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticInIce(const I3MCTree& t){
+    return GetBestFilter(t,  IsInIce, MoreEnergetic);}
 
-  I3MCTree::fast_const_iterator GetMostEnergetic(const I3MCTreeConstPtr t, I3Particle::ParticleType pt){
+  I3MCTree::optional_value GetMostEnergetic(const I3MCTree& t, I3Particle::ParticleType pt){
     IsParticle is_particle(pt);
-    return GetBestFilterPtr(t, is_particle, MoreEnergetic);
+    return GetBestFilter(t, is_particle, MoreEnergetic);
   }
     
-  I3MCTree::fast_const_iterator GetMostEnergeticTrack(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t, IsTrack, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticTrack(const I3MCTree& t){
+    return GetBestFilter(t, IsTrack, MoreEnergetic);}
 
-  I3MCTree::fast_const_iterator GetMostEnergeticCascade(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t, IsCascade, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticCascade(const I3MCTree& t){
+    return GetBestFilter(t, IsCascade, MoreEnergetic);}
 
-  I3MCTree::fast_const_iterator GetMostEnergeticInIceCascade(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t, IsInIceCascade, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticInIceCascade(const I3MCTree& t){
+    return GetBestFilter(t, IsInIceCascade, MoreEnergetic);}
 
-  I3MCTree::fast_const_iterator GetMostEnergeticNeutrino(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t, IsNeutrino, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticNeutrino(const I3MCTree& t){
+    return GetBestFilter(t, IsNeutrino, MoreEnergetic);}
 
-  I3MCTree::fast_const_iterator GetMostEnergeticMuon(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t, IsMuon, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticMuon(const I3MCTree& t){
+    return GetBestFilter(t, IsMuon, MoreEnergetic);}
 
-  I3MCTree::fast_const_iterator GetMostEnergeticNucleus(const I3MCTreeConstPtr t){
-    return GetBestFilterPtr(t, IsNucleus, MoreEnergetic);}
+  I3MCTree::optional_value GetMostEnergeticNucleus(const I3MCTree& t){
+    return GetBestFilter(t, IsNucleus, MoreEnergetic);}
 
   /**
    * Returns a std::vector of particles that are InIce.
