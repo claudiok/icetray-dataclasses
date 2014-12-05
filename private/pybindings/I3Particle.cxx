@@ -114,7 +114,6 @@ void register_I3Particle()
 
   class_<std::vector<I3Particle> >("I3ParticleVect")
     .def(dataclass_suite<std::vector<I3Particle> >())
-    .def("__eq__",I3ParticleVect_eq)
     ;
 
   register_pointer_conversions<I3Particle>();
