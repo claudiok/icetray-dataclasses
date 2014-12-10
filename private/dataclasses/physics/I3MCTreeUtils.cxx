@@ -15,6 +15,9 @@ I3MCTreeUtils::AddPrimary(I3MCTree& t, const I3Particle& p)
 void
 I3MCTreeUtils::AppendChild(I3MCTree& t, const I3ParticleID& parent, const I3Particle& child)
 {
+  if(child.GetID() == parent){
+    log_fatal("Parent and child have the same ID.");
+  }
   t.append_child(parent, child);
 }
 
