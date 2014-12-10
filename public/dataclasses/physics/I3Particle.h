@@ -297,6 +297,11 @@ class I3Particle : public I3FrameObject
   bool operator!=(const I3Particle& rhs) const {
     return !(*this == rhs);
   }
+
+  /**
+   * Returns a particle with a new I3ParticleID, but will all other properties unchanged.
+   */
+  I3Particle Clone() const;
 	
   I3ParticleID GetID() const { return ID_; }
   int32_t GetMinorID() const { return ID_.minorID; }

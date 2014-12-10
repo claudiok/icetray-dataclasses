@@ -103,6 +103,21 @@ I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
   ID_.minorID = minor;
 }
 
+I3Particle I3Particle::Clone() const {
+  I3Particle p;
+  p.SetPdgEncoding(pdgEncoding_);
+  p.SetShape(shape_);
+  p.SetFitStatus(status_);
+  p.SetPos(pos_);
+  p.SetDir(dir_);
+  p.SetTime(time_);
+  p.SetEnergy(energy_);
+  p.SetLength(length_);
+  p.SetSpeed(speed_);
+  p.SetLocationType(locationType_);
+  return p;
+}
+
 // the masses are taken from geant4.9.6.p03 except for WPlus, WMinus and Z0,
 // which were taken from PDG Booklet July 2012
 typedef std::map<I3Particle::ParticleType, double> particle_type_mass_conversion_t;
