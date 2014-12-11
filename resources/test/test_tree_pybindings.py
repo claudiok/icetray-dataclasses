@@ -32,7 +32,8 @@ class TreeTest:
     t2 = I3MCTree(p1)
     ENSURE( not t2.empty(), "tree is empty" )
     ENSURE( t2.get_head() == p1, "head != p1" )
-    
+    ENSURE( t2.has(p1), "p1 is not in the tree")
+        
     t3 = I3MCTree(t2)
     ENSURE( not t3.empty(), "t3 is empty" )
     ENSURE( t3.get_head() == p1, "copy constructor missing p1" )

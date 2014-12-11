@@ -194,6 +194,7 @@ void register_I3MCTree()
         // I3MCTreeUtils
         .def("get_daughters", &I3MCTreeUtils::GetDaughters, "Get all daughters/children of an I3ParticleID")
         .def("has_parent", &I3MCTreeUtils::HasParent, "Does the I3ParticleID have a parent?")
+        .def("has", &I3MCTreeUtils::Has, "Does the I3ParticleID exist in the tree?")
         .def("add_primary", &I3MCTreeUtils::AddPrimary, "Add an I3Particle as a primary (at root-level)")
         .def("get_primary", &I3MCTreeUtils::GetPrimary, "Get the primary that created the I3ParticleID")
         .def("get_primaries", &I3MCTreeUtils::GetPrimaries, "Get a list of all primaries")

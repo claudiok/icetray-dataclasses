@@ -48,6 +48,11 @@ namespace I3MCTreeUtils
   I3Particle* GetParentPtr(I3MCTreePtr, const I3ParticleID&);
   
   /**
+   * Returns true if the particle is in the tree
+   */
+  bool Has(const I3MCTree&, const I3ParticleID&);
+
+  /**
    * Returns true if the particle has a parent
    */
   bool HasParent(const I3MCTree&, const I3ParticleID&);

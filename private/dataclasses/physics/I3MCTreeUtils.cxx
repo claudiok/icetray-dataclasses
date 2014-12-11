@@ -125,6 +125,15 @@ I3MCTreeUtils::HasParent(const I3MCTree& t, const I3ParticleID& child)
     return false;
 }
 
+bool
+I3MCTreeUtils::Has(const I3MCTree& t, const I3ParticleID& particle)
+{
+  if (t.at(particle))
+    return true;
+  else
+    return false;
+}
+
 const I3Particle
 I3MCTreeUtils::GetParticle(const I3MCTree& t, const I3ParticleID& p)
 {
