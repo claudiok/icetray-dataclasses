@@ -80,47 +80,118 @@ Functions
 
   **Navigating the Tree**
 
-  * get_head()
-  * get_heads()
-  * at(ID)
-  * parent(ID)
-  * previous_sibling(ID)
-  * next_sibling(ID)
-  * number_of_siblings(ID)
-  * first_child(ID)
-  * children(ID)
-  * number_of_children(ID)
-  * depth(ID)
+  .. only:: html
+    
+    .. raw:: html
+    
+      <style>span.var{color:blue} span.func{color:green}</style>
+      <div class="highlight"><pre>
+      <span class="var">Particle</span> <span class="func">get_head</span>()
+      <span class="var">vector&lt;Particle&gt;</span> <span class="func">get_heads</span>()
+      <span class="var">Particle</span> <span class="func">at</span>(<span class="var">ID</span>)
+      <span class="var">Particle</span> <span class="func">parent</span>(<span class="var">ID</span>)
+      <span class="var">Particle</span> <span class="func">previous_sibling</span>(<span class="var">ID</span>)
+      <span class="var">Particle</span> <span class="func">next_sibling</span>(<span class="var">ID</span>)
+      <span class="var">int</span> <span class="func">number_of_siblings</span>(<span class="var">ID</span>)
+      <span class="var">Particle</span> <span class="func">first_child</span>(<span class="var">ID</span>)
+      <span class="var">vector&lt;Particle&gt;</span> <span class="func">children</span>(<span class="var">ID</span>)
+      <span class="var">int</span> <span class="func">number_of_children</span>(<span class="var">ID</span>)
+      <span class="var">int</span> <span class="func">depth</span>(<span class="var">ID</span>)
+      </pre></div>
+  
+  .. only:: text
+    
+    * Particle get_head()
+    * vector<Particle> get_heads()
+    * Particle at(ID)
+    * Particle parent(ID)
+    * Particle previous_sibling(ID)
+    * Particle next_sibling(ID)
+    * int number_of_siblings(ID)
+    * Particle first_child(ID)
+    * vector<Particle> children(ID)
+    * int number_of_children(ID)
+    * int depth(ID)
 
   **Adding to the Tree**
 
-  * insert(Particle)
-  * insert_after(Particle)
-  * insert(ID, Particle)
-  * insert_after(ID, Particle)
-  * insert_subtree(ID, Tree, newID)
-  * insert_subtree_after(ID, Tree, newID)
-  * append_child(ID, Particle)
-  * append_child(ID, Tree, newID)
-  * append_children(ID, Vector)
+  .. only:: html
+    
+    .. raw:: html
+
+      <div class="highlight"><pre>
+      <span class="var">void</span> <span class="func">insert</span>(<span class="var">Particle</span>)
+      <span class="var">void</span> <span class="func">insert_after</span>(<span class="var">Particle</span>)
+      <span class="var">void</span> <span class="func">insert</span>(<span class="var">ID</span>, <span class="var">Particle</span>)
+      <span class="var">void</span> <span class="func">insert_after</span>(<span class="var">ID</span>, <span class="var">Particle</span>)
+      <span class="var">void</span> <span class="func">insert_subtree</span>(<span class="var">ID</span>, <span class="var">Tree</span>, <span class="var">newID</span>)
+      <span class="var">void</span> <span class="func">insert_subtree_after</span>(<span class="var">ID</span>, <span class="var">Tree</span>, <span class="var">newID</span>)
+      <span class="var">void</span> <span class="func">append_child</span>(<span class="var">ID</span>, <span class="var">Particle</span>)
+      <span class="var">void</span> <span class="func">append_child</span>(<span class="var">ID</span>, <span class="var">Tree</span>, <span class="var">newID</span>)
+      <span class="var">void</span> <span class="func">append_children</span>(<span class="var">ID</span>, <span class="var">vector&lt;Particle&gt;</span>)
+      </pre></div>
+
+  .. only:: text
+  
+    * void insert(Particle)
+    * void insert_after(Particle)
+    * void insert(ID, Particle)
+    * void insert_after(ID, Particle)
+    * void insert_subtree(ID, Tree, newID)
+    * void insert_subtree_after(ID, Tree, newID)
+    * void append_child(ID, Particle)
+    * void append_child(ID, Tree, newID)
+    * void append_children(ID, Vector)
 
   **Modifying the Tree**
 
-  * clear()
-  * erase(ID)
-  * erase_children(ID)
-  * flatten(ID)
-  * reparent(toID, fromID)
-  * replace(ID, Particle)
-  * replace(ID, Tree, newID)
-  * merge(Tree)
+  .. only:: html
+    
+    .. raw:: html
+    
+      <div class="highlight"><pre>
+      <span class="var">void</span> <span class="func">clear</span>()
+      <span class="var">void</span> <span class="func">erase</span>(<span class="var">ID</span>)
+      <span class="var">void</span> <span class="func">erase_children</span>(<span class="var">ID</span>)
+      <span class="var">void</span> <span class="func">flatten</span>(<span class="var">ID</span>)
+      <span class="var">void</span> <span class="func">reparent</span>(<span class="var">toID</span>, <span class="var">fromID</span>)
+      <span class="var">void</span> <span class="func">replace</span>(<span class="var">ID</span>, <span class="var">Particle</span>)
+      <span class="var">void</span> <span class="func">replace</span>(<span class="var">ID</span>, <span class="var">Tree</span>, <span class="var">newID</span>)
+      <span class="var">void</span> <span class="func">merge</span>(<span class="var">Tree</span>)
+      <span class="var">void</span> <span class="func">swap</span>(<span class="var">Tree</span>)
+      </div></span>
+
+  .. only:: text
+  
+    * void clear()
+    * void erase(ID)
+    * void erase_children(ID)
+    * void flatten(ID)
+    * void reparent(toID, fromID)
+    * void replace(ID, Particle)
+    * void replace(ID, Tree, newID)
+    * void merge(Tree)
+    * void swap(Tree)
 
   **General Tree Actions**
 
-  * size()
-  * empty()
-  * is_in_subtree(ID, ID)
-  * subtree_in_tree(Tree, ID)
+  .. only:: html
+    
+    .. raw:: html
+
+      <div class="highlight"><pre>
+      <span class="var">int</span> <span class="func">size</span>()
+      <span class="var">bool</span> <span class="func">empty</span>()
+      <span class="var">bool</span> <span class="func">is_in_subtree</span>(<span class="var">ID</span>, <span class="var">ID</span>)
+      <span class="var">bool</span> <span class="func">subtree_in_tree</span>(<span class="var">Tree</span>, <span class="var">ID</span>)
+      </pre></div>
+
+  .. only:: text
+
+    * int size()
+    * bool empty()
+    * bool is_in_subtree(ID, ID)
+    * bool subtree_in_tree(Tree, ID)
 
 
 I3MCTreeUtils
