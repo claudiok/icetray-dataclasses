@@ -38,8 +38,6 @@ i3_test_executable(test
   USE_TOOLS ${USE_TOOL_ROOT}
   )
 
-i3_test_scripts(resources/test/*.py)
-
 i3_add_pybindings(dataclasses
   private/pybindings/I3Calibration/*.cxx
   private/pybindings/I3Constants.cxx
@@ -81,3 +79,43 @@ i3_add_pybindings(dataclasses
   USE_TOOLS boost python
   USE_PROJECTS icetray dataclasses
   )
+
+set(TEST_SCRIPTS
+  resources/test/filtermasks_pybindings.py         
+  resources/test/i3eventheader_version_test.py  
+  resources/test/loads.py                                       
+  resources/test/test_launch_serialization.py
+  resources/test/Fix_Cals_In_GCD.py                
+  resources/test/i3frame_subterfuge.py          
+  resources/test/readwrite_i3vectors.py                         
+  resources/test/test_linear_tree.py
+  resources/test/Fix_Trigger_In_GCD.py             
+  resources/test/i3geometry_version_test.py     
+  resources/test/std_map_indexing_suite_dict_interface_test.py  
+  resources/test/test_particle_masses.py
+  resources/test/i3calibration_version_test.py     
+  resources/test/i3matrix_test.py               
+  resources/test/std_map_indexing_suite_test.py                 
+  resources/test/i3detectorstatus_version_test.py  
+  resources/test/i3string_compare.py            
+  resources/test/test_disabling_of_python_dynamism.py          
+  resources/test/workout_pybindings.py
+  resources/test/i3double_compare.py               
+  resources/test/leap_second_test.py            
+  resources/test/test_I3RecoPulseSeriesMapMask_pybindings.py
+)
+
+# For whatever reason this test doesn't play well with old versions
+# of ROOT on Ubuntu 10.04 even though it doesn't use ROOT at all.  
+# It seg faults when using i3-tools-v4, which uses ROOT 5.34.18.  
+# Works just fine with i3-tools-v5.
+# 
+# I'm not *necessarily* saying this is ROOT's fault...I'm just sayin'.  
+# Using the same toolset but building w/o ROOT this test passes.  
+# When we retire 10.04 for good (soon, likely) we can re-enable this 
+# test and see what happens.
+if(NOT USE_ROOT)
+  LIST(APPEND TEST_SCRIPTS resources/test/test_tree_pybindings.py)
+endif()
+
+i3_test_scripts("${TEST_SCRIPTS}")
