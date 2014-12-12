@@ -8,6 +8,40 @@ a mapping of I3ParticleID -> I3Particle for fast lookups.
 Users Guide
 ===========
 
+.. caution::
+
+   Double insertion of I3Particles is not allowed. Because of the mapping
+   relying on I3ParticleID, no two things with the same I3ParticleID can
+   be in the tree at the same time.
+
+boost::optional
+---------------
+
+Boost provides an optional template type which can optionally store a value,
+or not store anything. This is similar to pointers being NULL. The I3MCTree
+uses boost::optional for many function return values, so it can return a
+particle or the absense of one.
+
+Example Usage
+^^^^^^^^^^^^^
+
+An optional can be converted directly to an I3Particle if you're sure it
+should exist:
+
+.. code-block:: c++
+
+    I3Particle p = tree.get_head();
+
+If you are unsure about existance in the tree, it is best to check:
+
+.. code-block:: c++
+
+    boost::optional<I3Particle> ret = tree.next_sibling(p);
+    if (ret) {
+        I3Particle sibling(ret);
+    }
+
+
 C++
 ---
 
@@ -201,16 +235,37 @@ I3MCTreeUtils
 
   **General Functions**
   
-  * AddPrimary(Tree, Particle)
-  * GetPrimary(Tree, ID)
-  * GetPrimaries(Tree)
-  * GetParticle(Tree, ID)
-  * GetParent(Tree, ID)
-  * HasParent(Tree, ID)
-  * GetDaughters(Tree, ID)
-  * AppendChild(Tree, ID, Particle)
-  * Dump(Tree)
-  * Get(Frame, Key)
+  .. only:: html
+    
+    .. raw:: html
+
+      <div class="highlight"><pre>
+      <span class="var">void</span> <span class="func">AddPrimary</span>(<span class="var">Tree</span>, <span class="var">Particle</span>)
+      <span class="var">void</span> <span class="func">AppendChild</span>(<span class="var">Tree</span>, <span class="var">ID</span>, <span class="var">Particle</span>)
+      <span class="var">Particle</span> <span class="func">GetParticle</span>(<span class="var">Tree</span>, <span class="var">ID</span>)
+      <span class="var">Particle</span> <span class="func">GetPrimary</span>(<span class="var">Tree</span>, <span class="var">ID</span>)
+      <span class="var">vector&lt;Particle&gt;</span> <span class="func">GetPrimaries</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetParent</span>(<span class="var">Tree</span>, <span class="var">ID</span>)
+      <span class="var">vector&lt;Particle&gt;</span> <span class="func">GetDaughters</span>(<span class="var">Tree</span>, <span class="var">ID</span>)
+      <span class="var">bool</span> <span class="func">Has</span>(<span class="var">Tree</span>, <span class="var">ID</span>)
+      <span class="var">bool</span> <span class="func">HasParent</span>(<span class="var">Tree</span>, <span class="var">ID</span>)
+      <span class="var">string</span> <span class="func">Dump</span>(<span class="var">Tree</span>)
+      <span class="var">Tree</span> <span class="func">Get</span>(<span class="var">Frame</span>, <span class="var">Key</span>)
+      </pre></div>
+
+  .. only:: text
+
+    * void AddPrimary(Tree, Particle)
+    * void AppendChild(Tree, ID, Particle)
+    * Particle GetParticle(Tree, ID)
+    * Particle GetPrimary(Tree, ID)
+    * vector<Particle> GetPrimaries(Tree)
+    * Particle GetParent(Tree, ID)
+    * vector<Particle> GetDaughters(Tree, ID)
+    * bool Has(Tree, ID)
+    * bool HasParent(Tree, ID)
+    * string Dump(Tree)
+    * Tree Get(Frame, Key)
 
   **Filtering / Selection Functions**
   
