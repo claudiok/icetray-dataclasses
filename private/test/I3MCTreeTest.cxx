@@ -232,7 +232,7 @@ TEST(sibling_iterator)
   ENSURE( iter == t1.end_sibling() , "empty != end()");
   iter = t1.begin_sibling(*t1.get_head());
   ENSURE( t1.get_head() == *iter , "begin() != head");
-  ENSURE( *t1.begin() == *t1.begin(t1.begin()) ,
+  ENSURE( *t1.begin() == *t1.begin_sibling(t1.begin()) ,
          "init with another iterator failed");
   iter++;
   ENSURE( iter == t1.end_sibling() , "iter does not reach end()");
@@ -280,7 +280,7 @@ TEST(sibling_iterator)
   ENSURE( iter2 == t3.cend_sibling() , "const_iterator empty != end()");
   iter2 = t3.cbegin_sibling(*t3.get_head());
   ENSURE( t3.get_head() == *iter2 , "const_iterator begin() != head");
-  ENSURE( *t3.begin() == *t3.cbegin(t3.cbegin()) ,
+  ENSURE( *t3.begin() == *t3.cbegin_sibling(t3.cbegin()) ,
          "const_iterator init with another iterator failed");
   iter2++;
   ENSURE( iter2 == t3.cend_sibling() , "const_iterator iter does not reach end()");
@@ -1304,7 +1304,7 @@ TEST(manual_traversal_iter)
   ENSURE( (bool)t1.at(head) , "at(head) failed");
   ENSURE( *t1.at(head) == head , "at(head) != head");
   
-  I3MCTree::sibling_iterator children = t1.begin(++t1.begin());
+  I3MCTree::sibling_iterator children = t1.begin_sibling(++t1.begin());
   ENSURE( children != t1.end_sibling() , "no children of head");
   ENSURE( *t1.first_child(t1.begin()) == *children ,
          "children(0) != first_child");

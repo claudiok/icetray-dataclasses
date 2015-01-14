@@ -790,7 +790,7 @@ namespace TreeBase {
       
       // sibling iterator helpers
       template<typename D,typename V,typename S>
-      sibling_iterator begin(const iterator_base<D,V,S>& i)
+      sibling_iterator begin_sibling(const iterator_base<D,V,S>& i)
       {
         if (i != iterator_base<D,V,S>(*this,end_))
           return sibling_iterator(*this,*i);
@@ -798,7 +798,7 @@ namespace TreeBase {
           return sibling_iterator(*this,end_);
       }
       template<typename D,typename V,typename S>
-      sibling_const_iterator begin(const iterator_base<D,V,S>& i) const
+      sibling_const_iterator begin_sibling(const iterator_base<D,V,S>& i) const
       {
         if (i != iterator_base<D,V,S>(*this,end_))
           return sibling_const_iterator(*this,*i);
@@ -806,7 +806,7 @@ namespace TreeBase {
           return sibling_const_iterator(*this,end_);
       }
       template<typename D,typename V,typename S>
-      sibling_const_iterator cbegin(const iterator_base<D,V,S>& i) const
+      sibling_const_iterator cbegin_sibling(const iterator_base<D,V,S>& i) const
       {
         if (i != iterator_base<D,V,S>(*this,end_))
           return sibling_const_iterator(*this,*i);

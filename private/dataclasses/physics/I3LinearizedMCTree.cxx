@@ -228,12 +228,12 @@ I3LinearizedMCTree::load(Archive &ar, unsigned version)
 		for ( ; parent != this->end() && (parents.front() != *parent); parent++, idx++) {}
 
 		// Insert new leaves in time order relative to existing siblings
-		sibling_iterator splice = this->begin(parent);
+		sibling_iterator splice = this->children(parent);
 		for (unsigned i = 0; i < span.second; i++, leaf++) {
 			I3Particle reco = leaf->Reconstruct(*parent);
-			while (splice != this->end(parent) && reco.GetTime() >= splice->GetTime())
+			while (splice != this->end_sibling() && reco.GetTime() >= splice->GetTime())
 				splice++;
-			if (splice == this->end(parent))
+			if (splice == this->end_sibling())
 				splice = this->append_child(parent, reco);
 			else
 				splice = this->insert(splice, reco);
