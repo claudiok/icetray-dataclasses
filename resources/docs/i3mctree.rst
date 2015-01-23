@@ -294,6 +294,52 @@ I3MCTreeUtils
 For more C++ details, see the 
 `doxygen docs <../../doxygen/dataclasses/classTreeBase_1_1Tree.html>`_.
 
+I3MCTreePhysicsLibrary
+^^^^^^^^^^^^^^^^^^^^^^
+
+The following functions comprise a set of very thin convenience wrappers 
+around GetBest, GetFilter, and GetBestFilter in I3MCTreeUtils specialized 
+to extract analysis-level quantities.  Again, this is a convenience.  Feel 
+free to use the I3MCTreeUtils::Get* functions yourself instead.  Currently 
+these are limited to pulling the "MostEnergetic" particles of particular 
+types out of tree, but there's no reason this library needs to be limited 
+to that.  Anything that pulls information out of the tree of general physics 
+interest can potentially be added to this library.
+
+The function names were chosen to be self-documenting, for example, 
+GetMostEnergeticPrimary, well...it gets the most energetic primary.  
+GetMostEnergetic gets the most energetic particle of the type 
+(i.e. I3Particle::ParticleType) passed.
+
+  **General Functions**
+  
+  .. only:: html
+    
+    .. raw:: html
+
+      <div class="highlight"><pre>
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticPrimary</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticInIce</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergetic</span>(<span class="var">Tree</span>, <span class="var">ParticleType</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticTrack</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticCascade</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticInIceCascade</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticNeutrino</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticMuon</span>(<span class="var">Tree</span>)
+      <span class="var">Particle</span> <span class="func">GetMostEnergeticNucleus</span>(<span class="var">Tree</span>)
+      </pre></div>
+
+  .. only:: text
+
+    * Particle MostEnergeticPrimary(Tree)
+    * Particle MostEnergeticInIce(Tree)
+    * Particle MostEnergetic(Tree, ParticleType)
+    * Particle MostEnergeticTrack(Tree)
+    * Particle MostEnergeticCascade(Tree)
+    * Particle MostEnergeticInIceCascade(Tree)
+    * Particle MostEnergeticNeutrino(Tree)
+    * Particle MostEnergeticMuon(Tree)
+    * Particle MostEnergeticNucleus(Tree)
 
 Python
 ------
