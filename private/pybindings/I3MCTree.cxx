@@ -240,14 +240,14 @@ void register_I3MCTree()
         .def("subtree_in_tree", subtree_in_tree, "Is any part of a subtree in the tree?")
         
         // Iterators
-        .def("pre_order_iter", range<return_value_policy<copy_const_reference> >
+        .def("pre_order_iter", boost::python::range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::pre_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin, 
             (I3MCTree::pre_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cend
           ),
           "Pre order iterator for I3MCTree. This is the default iterator."
         )
-        .def("post_order_iter", range<return_value_policy<copy_const_reference> >
+        .def("post_order_iter", boost::python::range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::post_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_post, 
             (I3MCTree::post_order_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_post
@@ -255,14 +255,14 @@ void register_I3MCTree()
           "Post order iterator for I3MCTree"
         )
         .def("sibling_iter",sibling_iter, "Sibling iterator for I3MCTree. Takes an I3ParticleID, provides all next_siblings of it.")
-        .def("fast_iter", range<return_value_policy<copy_const_reference> >
+        .def("fast_iter", boost::python::range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::fast_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_fast, 
             (I3MCTree::fast_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_fast
           ),
           "Fast iterator for I3MCTree. Fast but unordered traversal."
         )
-        .def("leaf_iter", range<return_value_policy<copy_const_reference> >
+        .def("leaf_iter", boost::python::range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::leaf_const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin_leaf, 
             (I3MCTree::leaf_const_iterator(I3MCTree::*)() const) &I3MCTree::cend_leaf
@@ -274,7 +274,7 @@ void register_I3MCTree()
         .def("__str__", &I3MCTreeUtils::Dump)
         .def("__nonzero__", &I3MCTree::empty)
         .def("__len__", &I3MCTree::size)
-        .def("__iter__", range<return_value_policy<copy_const_reference> >
+        .def("__iter__", boost::python::range<return_value_policy<copy_const_reference> >
           (
             (I3MCTree::const_iterator(I3MCTree::*)() const) &I3MCTree::cbegin, 
             (I3MCTree::const_iterator(I3MCTree::*)() const) &I3MCTree::cend
