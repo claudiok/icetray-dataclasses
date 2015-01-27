@@ -10,6 +10,7 @@ Table of Contents:
    :maxdepth: 3
 
    particle
+   superdst
    masks
    i3mctree
    python
