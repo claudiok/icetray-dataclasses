@@ -90,16 +90,21 @@ For reconstructed through-going tracks (shape ``InfiniteTracks``) the length is 
 Energy
 ~~~~~~
 
-For *simulated* particles the energy represents the energy that the particle had at the given position (primary at interaction, or secondary at creation).
+For *simulated* particles the energy represents the energy that the particle had at the 
+given position (primary at interaction, or secondary at creation).
 
-For *reconstructed* the meaning of the energy value depends on the algorithm. It may be an energy proxy, e.g. a number that correlates with the
-mean energy loss (averaged dE/dX, number of emitted photons per meter) along the part of the track that intersects the array. I may also be an
-estimate of the muon energy at some point (the point where it entered the array, or where it was closest to the center of the detector or the COG of the pulses).
-It might even be an estimate of the neutrino energy, assuming the event was caused by a neutrino energy. For reconstructed showers the energy usually 
-represents the electron equivalent energy, i.e. the energy that an electron should have to cause (a shower that causes) the observed amount of
-light in the array.
+For *reconstructed* the meaning of the energy value depends on the algorithm. It may be 
+an energy proxy, e.g. a number that correlates with the mean energy loss (averaged dE/dX, 
+number of emitted photons per meter) along the part of the track that intersects the array. 
+I may also be an estimate of the muon energy at some point (the point where it entered the 
+array, or where it was closest to the center of the detector or the COG of the pulses).  It 
+might even be an estimate of the neutrino energy, assuming the event was caused by a neutrino 
+energy. For reconstructed showers the energy usually represents the electron equivalent energy, 
+i.e. the energy that an electron should have to cause (a shower that causes) the observed amount
+of light in the array.
 
-In order to understand the issues surrounding the reconstructed energy it is highly recommended to read the `energy reconstruction paper <http://arxiv.org/abs/1311.4767>`_.
+In order to understand the issues surrounding the reconstructed energy it is highly 
+recommended to read the `energy reconstruction paper <http://arxiv.org/abs/1311.4767>`_.
 
 Speed
 ~~~~~
@@ -146,27 +151,24 @@ a type for that).
 Shape
 ~~~~~
 
-(TODO: Alex, could you have a look at this section?)
-
 For reconstructions it is more meaningful to assign a "shape" than a "type".
 The shape data member is also used for simulated particles, but not very
 consistently.  The shape can take the following values:
 
-* Null: not set, not defined, not relevant
-* Primary: could be used for MC primaries, but e.g. in Corsika this is not done
-* TopShower: cosmic ray air shower reconstructed from IceTop data
-* Cascade: a shower in the ice, reconstructed with in-ice data
-* InfiniteTrack: a through-going track (usually a muon)
-* StartingTrack: a starting track (supposedly due to a CC numu/nutau interaction)
-* StoppingTrack:  a stopping track (supposedly due to ranged out muon)
-* ContainedTrack: a track starting and stopping within the in-ice array
+* Null: Not set, not defined, not relevant.
+* Primary: Could be used for MC primaries, but e.g. in CORSIKA this needs to be fixed.
+* TopShower: Cosmic ray air shower reconstructed from IceTop data.
+* Cascade: A shower in the ice, reconstructed with in-ice data
+* InfiniteTrack: A through-going track (usually a muon).
+* StartingTrack: A starting track (supposedly due to a CC numu/nutau interaction).
+* StoppingTrack:  A stopping track (supposedly due to ranged out muon or tau).
+* ContainedTrack: A track starting and stopping within the in-ice array.
 * MCTrack: simulated tracks [#mctrack]_
 * Dark: tracks that do not emit any light [#dark]_
 
-.. [#mctrack] Strangely, the ``MCTrack`` shape is *not* used for simulated muon tracks. It might not be used at all anymore in current simulation.
+.. [#mctrack] Strangely, the ``MCTrack`` shape is *not* used for simulated muon tracks. It was never used in simulation and will likely go away in the future, since it's not needed.
 
-.. [#dark] At some point in the past, the ``Dark`` shape was invented for neutrinos (because they do not emit any light).  In recent simulation data it seems that this shape is actually used for stochastics of non-PDG type, that is ``NuclInt``, ``Brems`` and ``Hadron``. Which is strange, because such showers do in fact produce light.
-
+.. [#dark] The ``Dark`` shape was invented for the Tau Working Group because they didn't like what cmc (Cascade Monte Carlo) did to the original cascades, where it would split the cascade into several smaller cascades for a more accurate simulation.  This made it difficult for tau reconstructions (e.g. double-bang), which attempt to reconstruct the interaction vertex, for example, as one single cascade to Monte Carlo truth.  Thus, the original unadultered (by cmc) cascade remained in the tree and labeled as ``Dark`` where the daughters of this cascade are responsible for generating light.
 
 Location
 ~~~~~~~~
@@ -177,7 +179,11 @@ that sometimes ambiguous.  Values are ``Anywhere``, ``IceTop``, ``InIce`` and
 ``InActiveVolume``.  If KM3NET gets built on multiple sites, we could consider
 to add ``enum`` values to specify those sites.
 
-Also this data member is not used very consistently. For instance, simulated neutrinos may have their interaction vertex somewhere in the atmosphere above Arizona and still be classified as ``InIce``.
+Also this data member is not used very consistently. For instance, simulated neutrinos may 
+have their interaction vertex somewhere in the atmosphere above Arizona and still be 
+classified as ``InIce``.
+
+NB: This will be deprecated in future releases and no longer used.
 
 Fit status
 ~~~~~~~~~~
@@ -198,16 +204,20 @@ makes your code harder to read. If you use the actual ``enum`` constants (e.g.
 ``p.fit_status == dataclasses.I3Particle.OK`` in python) then you and your
 colleages do not need to memorize the meanings of those numbers.
 
-Major and minor ID
+Major and Minor ID
 ~~~~~~~~~~~~~~~~~~
-
-TODO (Alex?): could you have a look at this section?
-
-TODO: explain briefly why we have major and minor, instead of just one number.
 
 In icetray, the "ID" of a particle object is a pair of (integer) numbers that
 serve as its unique identifier.  No two particles, even two particles in
-different data sets, can have the same identifier.
+different data sets, can have the same identifier.  This is important because
+simulation is not done in one single process, but instead in stages, where
+particle generation and propagation can happen on different machines.  So if
+we simply assigned '0' to the first particle created in a generator process,
+its ID would clash with the first particle created by the propagator, both of
+which will be added to the same I3MCTree.
+
+* Major ID - This is a hash of the time (of I3Particle object creation), process ID, and hostname.  So two particles created at the same time on the same machine, but in different processes will have different major IDs.
+* Minor ID - This is meant to provide the bone-headed (and commonly used) method of particle ID creation.  The first particle created is '0' and the next '1', and so on.
 
 This numerical particle ID should *not* be confused with term "PID" that is
 commonly used in other HEP experiments to denote the (process of determining
@@ -220,10 +230,18 @@ maps only store the particle ID numbers, which can then be used (by an
 inquisitive student) to find the corresponding particle back in the
 :class:`I3MCTree`, if desired.
 
-In simulated data, a primary and its associated secondaries have the same
-major ID but different minor ID.
+In simulated data, a primary and its associated secondaries can have the same
+major ID but different minor ID.  This is used mainly for storage in the I3MCTree.
 
-In experimental data, (TODO).
+This is likely not widely (if at all) used in experimental data.
+
+*NB : Copying particles* - When I3Particles are copied they *preserve* their
+particle IDs.  This is intentional.  I3Particles are copied when added to STL
+containers.  It would defeat the purpose of having a particle ID if it changed
+each time the particle was added to a container.  If you want to create a new
+particle with all the same properties of another particle, the method you're
+looking for is I3Particle::Clone.
+
 
 Use case overview
 =================
@@ -278,7 +296,7 @@ History
 =======
 
 The current documentation attempts to provide a correct and more or less
-complete description of the **current** state (summer 2014) of
+complete description of the **current** state (winter 2015) of
 :class:`I3Particle`.  In older data (many years older) you may discover that
 e.g. some conventions were different or some data members or ``enum`` values
 were not yet in use, but the basics have been relatively stable.
@@ -294,20 +312,24 @@ direction) would always have to represented in the same way. The result was
 very template-heavy and impressive but hard to work with. That's why we went
 back to the single simplistic 8-dimensional (x, y, z, zenith, azimuth, length,
 energy) AMANDA solution (well, adding a 9th: speed),  with the type and shape
-given by ``enum`` data members. It's not very elegant, but it works well enough.
+given by ``enum`` data members. 
 
 Some elements of :class:`I3Particle` were added only a few years ago. The versioning
 system of icetray classes helps to make this backwards compatible, in the sense
-that if you read older data with newer software, the software tries to deal with
-the version mismatches and in many cases you will not even notice that there was
-a version mismatch. Still, if you ever need to process older data and you run
-into strange problems, it may be useful to know which items are new and why they
+that if you read older data with newer software, the software deals with
+the version mismatches and you should not even notice that there was a version mismatch. 
+Still, if you ever need to process older data and you run into strange problems, 
+it may be useful to know which items are new and why they
 were added/changed:
 
 * Particle ID: this used to be a single number, but in 20XY this was replaced
-  by a "major" and "minor" ID. (Why?)
+  by a "major" and "minor" ID, to guarantee unique IDs between all particles
+  created in mass production.
 * Particle types: we have been using a set of ``enum`` values that were invented in the AMANDA
   days. This reinvented wheel was eliminated by changing to an ``enum`` system mostly based
   on the PDG (Particle Data Group) list of elementary particles and nuclei.
-* The ``LocationType`` is relatively new.
-  (TODO: why was this added, are there any use cases where this could cause problems with older data?)
+* The ``LocationType`` is relatively new and will be going away soon.  This
+  was meant to make it easier for analysts to pull *the* muon, for example, 
+  out of the I3MCTree.  It's proved to cause more problems than it solves and
+  a more sophisticated method is in the works.
+
