@@ -44,10 +44,12 @@ assert(leap_sec_mjd[0]==41317)
 for mjd in range(40587,max(dataclasses.make_I3Time(now).mod_julian_day,leap_sec_mjd[-1])+3*365):
     if mjd+1 in leap_sec_mjd:
         if not dataclasses.leap_second_on_mjd(mjd):
-            raise "MJD "+str(mjd)+" not in I3Time list of leap seconds, "\
+            err_str = "MJD "+str(mjd)+" not in I3Time list of leap seconds, "\
                 "possibly a leap second was added and I3Time.cxx needs to be updated"
+            raise Exception(err_str)
     elif dataclasses.leap_second_on_mjd(mjd):
-        raise str(mjd)+" incorrecley registers as a leap seconds"
+        err_str = str(mjd)+" incorrectly registers as a leap seconds"
+        raise Exception(err_str)
 
 #instantiate I3Time for leapsecond testing
 t1=dataclasses.I3Time()
