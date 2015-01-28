@@ -30,52 +30,52 @@ I3MCTree make_tree(){
   I3Particle he3_nucleus;
   he3_nucleus.SetType(I3Particle::He3Nucleus);
   he3_nucleus.SetShape(I3Particle::Primary);
-  he3_nucleus.SetEnergy(10.);
+  he3_nucleus.SetEnergy(2.);
   t.insert(he3_nucleus);
 
   I3Particle proton;
   proton.SetType(I3Particle::PPlus);
   proton.SetShape(I3Particle::Primary);
-  proton.SetEnergy(11.);
+  proton.SetEnergy(3.);
   t.insert(proton);
 
   I3Particle nu_mu;
   nu_mu.SetType(I3Particle::NuMu);
   nu_mu.SetShape(I3Particle::Primary);
-  nu_mu.SetEnergy(2.);
+  nu_mu.SetEnergy(4.);
   t.insert(nu_mu);
 
   I3Particle nu_e;
   nu_e.SetType(I3Particle::NuE);
   nu_e.SetShape(I3Particle::Primary);
-  nu_e.SetEnergy(1.);
+  nu_e.SetEnergy(5.);
   t.insert(nu_e);
 
   I3Particle in_ice_muon;
   in_ice_muon.SetType(I3Particle::MuMinus);
   in_ice_muon.SetLocationType(I3Particle::InIce);
-  in_ice_muon.SetEnergy(1.);
+  in_ice_muon.SetEnergy(6.);
   t.append_child(nu_mu, in_ice_muon);
 
   I3Particle mu_plus;
   mu_plus.SetType(I3Particle::MuPlus);
-  mu_plus.SetEnergy(11.);
+  mu_plus.SetEnergy(7.);
   t.append_child(nu_mu, mu_plus);
 
   I3Particle in_ice_hadron;
   in_ice_hadron.SetType(I3Particle::Hadrons);
   in_ice_hadron.SetLocationType(I3Particle::InIce);
-  in_ice_hadron.SetEnergy(2.);
+  in_ice_hadron.SetEnergy(8.);
   t.append_child(nu_mu, in_ice_hadron);
 
   I3Particle low_e_electron;
   low_e_electron.SetType(I3Particle::EMinus);
-  low_e_electron.SetEnergy(2.);
+  low_e_electron.SetEnergy(9.);
   t.append_child(nu_mu, low_e_electron);
 
   I3Particle high_e_electron;
   high_e_electron.SetType(I3Particle::EMinus);
-  high_e_electron.SetEnergy(11.);
+  high_e_electron.SetEnergy(10.);
   t.append_child(nu_mu, high_e_electron);
 
   return t;  
@@ -96,7 +96,7 @@ void
 test_get_most_energetic(T t){
   boost::optional<I3Particle> me_primary = GetMostEnergeticPrimary(t);
   ENSURE( me_primary, "GetMostEnergeticPrimary did not return a particle.");
-  ENSURE( me_primary->GetType() == I3Particle::PPlus , "this is not a nu_mu");
+  ENSURE( me_primary->GetType() == I3Particle::NuE , "this is not a nu_e");
 
   boost::optional<I3Particle> me_inice = GetMostEnergeticInIce(t);
   ENSURE( me_inice, "GetMostEnergeticInIce did not return a particle.");
@@ -104,7 +104,7 @@ test_get_most_energetic(T t){
 
   boost::optional<I3Particle> me_e = GetMostEnergetic(t, I3Particle::EMinus);
   ENSURE( me_e, "GetMostEnergetic did not return a particle.");
-  ENSURE( me_e->GetEnergy() > 10. , "this is not the right electron");
+  ENSURE( me_e->GetEnergy() > 9. , "this is not the right electron");
 
   boost::optional<I3Particle> me_track = GetMostEnergeticTrack(t);
   ENSURE( me_track, "GetMostEnergetic did not return a particle.");
@@ -120,7 +120,7 @@ test_get_most_energetic(T t){
 
   boost::optional<I3Particle> me_neutrino = GetMostEnergeticNeutrino(t);
   ENSURE( me_neutrino, "GetMostEnergeticNeutrino did not return a particle.");
-  ENSURE( me_neutrino->GetType() == I3Particle::NuMu , "this is not the nu_mu");
+  ENSURE( me_neutrino->GetType() == I3Particle::NuE , "this is not the nu_e");
 
   boost::optional<I3Particle> me_muon = GetMostEnergeticMuon(t);
   ENSURE( me_muon, "GetMostEnergeticMuon did not return a particle.");
