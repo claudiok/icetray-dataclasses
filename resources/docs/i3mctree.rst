@@ -341,6 +341,11 @@ GetMostEnergetic gets the most energetic particle of the type
     * Particle MostEnergeticMuon(Tree)
     * Particle MostEnergeticNucleus(Tree)
 
+All of the functions above have an extra bool in their signature, whose value is **true** by default.  The parameter name is *safe_mode*.
+When set to true these functions will return boost::none if there are more than one "best" matches, leaving it up to the caller to decide
+how to handle this situation.  This check requires an extra pass over the tree (to collect any matching candidates) and an iteration over
+those candidates, so will be slower than having no check.  If you need the extra speed set *safe_mode* to false and pray for the best.
+
 Python
 ------
 

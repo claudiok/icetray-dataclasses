@@ -141,3 +141,14 @@ TEST(get_most_energetic_from_tree_ptr){
   I3MCTreePtr t(new I3MCTree(make_tree()));
   test_get_most_energetic<I3MCTreePtr>(t);
 }
+
+TEST(multiple_most_energetic){
+  I3MCTree t(make_tree());
+  boost::optional<I3Particle> mep = GetMostEnergeticPrimary(t);
+  ENSURE(mep != boost::none);
+
+  I3Particle other_mep = mep->Clone();
+  t.insert(other_mep);
+
+  ENSURE(GetMostEnergeticPrimary(t) == boost::none);
+}
