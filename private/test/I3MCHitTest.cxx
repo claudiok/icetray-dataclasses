@@ -27,7 +27,6 @@ TEST_GROUP(I3MCHitTest);
 TEST(assignment_copy)
 {
   I3MCHit h, j;
-  ENSURE(h.GetWeight() == 1);
   ENSURE(h.GetNPE() == 1);
   ENSURE(isnan(h.GetCharge()));
   ENSURE(h.GetParticleMinorID()==-1);
@@ -36,11 +35,11 @@ TEST(assignment_copy)
   I3Particle p;
 
   j.SetParticleID(p);
-  j.SetWeight(M_PI);
+  j.SetNPE(M_PI);
   j.SetCherenkovDistance(123.45);
   h = j;
   ENSURE_DISTANCE(0.1, 0.1, 0.0001,"ensure test");
-  ENSURE_DISTANCE(j.GetWeight(), h.GetWeight(), (float)0.0001,"simple assignment");
+  ENSURE_DISTANCE(j.GetNPE(), h.GetNPE(), (float)0.0001,"simple assignment");
   ENSURE_DISTANCE(j.GetCherenkovDistance(),h.GetCherenkovDistance(), 0.01, 
 		  "CherenkovDistance test");
   ENSURE(h.GetParticleMajorID() == j.GetParticleMajorID());
