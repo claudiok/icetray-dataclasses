@@ -17,32 +17,15 @@ namespace{
 
   bool IsPrimary(const I3Particle& p){ return p.IsPrimary(); }
   bool IsCascade(const I3Particle& p){ return p.IsCascade(); }
-  bool IsTopShower(const I3Particle& p){ return p.IsTopShower(); }
   bool IsNeutrino(const I3Particle& p){ return p.IsNeutrino(); }
   bool IsNucleus(const I3Particle& p){ return p.IsNucleus(); }
   bool IsTrack(const I3Particle& p){ return p.IsTrack(); }
-
   bool IsInIceCascade(const I3Particle& p){
       return p.GetLocationType() == I3Particle::InIce && p.IsCascade(); }
   bool IsInIce(const I3Particle& p){return p.GetLocationType() == I3Particle::InIce; }
-  bool IsIceTop(const I3Particle& p){return p.GetLocationType() == I3Particle::IceTop; }
-  bool IsActiveVolume(const I3Particle& p){
-    return p.GetLocationType() == I3Particle::InActiveVolume;
-  }
-
-  bool IsElectron(const I3Particle& p){
-    return p.GetType() == I3Particle::EPlus 
-      || p.GetType() == I3Particle::EMinus; 
-  }
-
   bool IsMuon(const I3Particle& p){
     return p.GetType() == I3Particle::MuPlus 
       || p.GetType() == I3Particle::MuMinus; 
-  }
-
-  bool IsTau(const I3Particle& p){
-    return p.GetType() == I3Particle::TauPlus 
-      || p.GetType() == I3Particle::TauMinus; 
   }
 
   struct IsParticle{
