@@ -59,9 +59,9 @@ BOOST_CLASS_VERSION(I3TankGeo, i3tankgeo_version_);
 I3_POINTER_TYPEDEFS(I3TankGeo);
 
 typedef I3Vector<I3TankGeo> I3StationGeo;
-I3_POINTER_TYPEDEFS(I3StationGeo)
+I3_POINTER_TYPEDEFS(I3StationGeo);
 
 typedef I3Map<int, I3StationGeo> I3StationGeoMap;
-I3_POINTER_TYPEDEFS(I3StationGeoMap)
+I3_POINTER_TYPEDEFS(I3StationGeoMap);
 
 #endif //I3TANKGEO_H_INCLUDED
