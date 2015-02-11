@@ -95,39 +95,39 @@ template <class T>
 void
 test_get_most_energetic(T t){
   boost::optional<I3Particle> me_primary = GetMostEnergeticPrimary(t);
-  ENSURE( me_primary, "GetMostEnergeticPrimary did not return a particle.");
+  ENSURE( (bool)me_primary, "GetMostEnergeticPrimary did not return a particle.");
   ENSURE( me_primary->GetType() == I3Particle::NuE , "this is not a nu_e");
 
   boost::optional<I3Particle> me_inice = GetMostEnergeticInIce(t);
-  ENSURE( me_inice, "GetMostEnergeticInIce did not return a particle.");
+  ENSURE( (bool)me_inice, "GetMostEnergeticInIce did not return a particle.");
   ENSURE( me_inice->GetType() == I3Particle::Hadrons , "this is not a hadron");
 
   boost::optional<I3Particle> me_e = GetMostEnergetic(t, I3Particle::EMinus);
-  ENSURE( me_e, "GetMostEnergetic did not return a particle.");
+  ENSURE( (bool)me_e, "GetMostEnergetic did not return a particle.");
   ENSURE( me_e->GetEnergy() > 9. , "this is not the right electron");
 
   boost::optional<I3Particle> me_track = GetMostEnergeticTrack(t);
-  ENSURE( me_track, "GetMostEnergetic did not return a particle.");
+  ENSURE( (bool)me_track, "GetMostEnergetic did not return a particle.");
   ENSURE( me_track->GetType() == I3Particle::MuPlus , "this is not the mu+");
 
   boost::optional<I3Particle> me_cascade = GetMostEnergeticCascade(t);
-  ENSURE( me_cascade, "GetMostEnergeticCascade did not return a particle.");
+  ENSURE( (bool)me_cascade, "GetMostEnergeticCascade did not return a particle.");
   ENSURE( me_cascade->GetType() == I3Particle::EMinus , "this is not the electron");
 
   boost::optional<I3Particle> me_inice_cascade = GetMostEnergeticInIceCascade(t);
-  ENSURE( me_inice_cascade, "GetMostEnergeticInIceCascade did not return a particle.");
+  ENSURE( (bool)me_inice_cascade, "GetMostEnergeticInIceCascade did not return a particle.");
   ENSURE( me_inice_cascade->GetType() == I3Particle::Hadrons , "this is not the hadron");
 
   boost::optional<I3Particle> me_neutrino = GetMostEnergeticNeutrino(t);
-  ENSURE( me_neutrino, "GetMostEnergeticNeutrino did not return a particle.");
+  ENSURE( (bool)me_neutrino, "GetMostEnergeticNeutrino did not return a particle.");
   ENSURE( me_neutrino->GetType() == I3Particle::NuE , "this is not the nu_e");
 
   boost::optional<I3Particle> me_muon = GetMostEnergeticMuon(t);
-  ENSURE( me_muon, "GetMostEnergeticMuon did not return a particle.");
+  ENSURE( (bool)me_muon, "GetMostEnergeticMuon did not return a particle.");
   ENSURE( me_muon->GetType() == I3Particle::MuPlus , "this is not the mu+");
 
   boost::optional<I3Particle> me_nucleus = GetMostEnergeticNucleus(t);
-  ENSURE( me_nucleus, "GetMostEnergeticNucleus did not return a particle.");
+  ENSURE( (bool)me_nucleus, "GetMostEnergeticNucleus did not return a particle.");
   ENSURE( me_nucleus->GetType() == I3Particle::He3Nucleus , "this is not the He3");
 
 }
