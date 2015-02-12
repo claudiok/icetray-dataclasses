@@ -102,8 +102,13 @@ void register_I3Particle()
       .export_values()
       ;
   }
-  particle.def(init<I3Particle::ParticleShape, I3Particle::ParticleType>((arg("shape")=I3Particle::Null, arg("type")=I3Particle::unknown), "Constructor for a simple particle with generated ID"));
-  particle.def(init<const I3Position, const I3Direction, const double, I3Particle::ParticleShape, double>((arg("pos"), arg("dir"), arg("vertextime"), arg("shape")=I3Particle::Null, arg("length")=NAN), "Constructor for a track or ray"));
+  particle.def(init<I3Particle::ParticleShape, 
+                    I3Particle::ParticleType>((arg("shape")=I3Particle::Null, arg("type")=I3Particle::unknown), 
+    "Constructor for a simple particle with generated ID"));
+
+  particle.def(init<const I3Position, const I3Direction, const double, I3Particle::ParticleShape, double>((arg("pos"), 
+    arg("dir"), arg("vertextime"), arg("shape")=I3Particle::Null, arg("length")=NAN), 
+    "Constructor for a track or ray"));
   
   bp::def("identity", identity_<I3Particle::FitStatus>);
   bp::def("identity", identity_<I3Particle::LocationType>);
@@ -112,9 +117,19 @@ void register_I3Particle()
   
   bp::implicitly_convertible<I3Particle,I3ParticleID>();
 
-  class_<std::vector<I3Particle> >("I3ParticleVect")
+  // This may seem redundant, but this is needed to convert
+  // lists in python to std::vector in C++.  It doesn't need
+  // a proper name because you're just creating lists and not
+  // I3ParticleList or whatever else we might call it, hence
+  // the empty string.
+  class_<std::vector<I3Particle> >("")
     .def(dataclass_suite<std::vector<I3Particle> >())
     ;
 
+  class_<I3ParticleVect, bases<I3FrameObject>, boost::shared_ptr<I3ParticleVect> >("I3ParticleVect")
+    .def(dataclass_suite<I3ParticleVect>())
+    ;
+ 
   register_pointer_conversions<I3Particle>();
+  register_pointer_conversions<I3ParticleVect>();
 }

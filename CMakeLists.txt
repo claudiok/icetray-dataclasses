@@ -103,6 +103,7 @@ set(TEST_SCRIPTS
   resources/test/i3double_compare.py               
   resources/test/leap_second_test.py            
   resources/test/test_I3RecoPulseSeriesMapMask_pybindings.py
+  resources/test/test_i3particlevect.py
 )
 
 # For whatever reason this test doesn't play well with old versions
