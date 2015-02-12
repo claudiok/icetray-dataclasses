@@ -35,7 +35,7 @@ TEST(assignment_copy)
   I3Particle p;
 
   j.SetParticleID(p);
-  j.SetNPE(M_PI);
+  j.SetNPE(3);
   j.SetCherenkovDistance(123.45);
   h = j;
   ENSURE_DISTANCE(0.1, 0.1, 0.0001,"ensure test");

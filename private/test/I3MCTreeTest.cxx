@@ -17,7 +17,8 @@
 #include <sstream>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-
+#include <boost/preprocessor/seq.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
 
 using namespace std;
 
@@ -865,6 +866,23 @@ TEST(iterator_conversion)
   I3MCTree::leaf_const_iterator leaf_iter_const42 = sibling_iter_const;
   I3MCTree::leaf_const_iterator leaf_iter_const52 = fast_iter_const;
   I3MCTree::leaf_const_iterator leaf_iter_const62 = leaf_iter_const;
+  
+  //Tell the compiler that variables are 'used', suppressing unhelpful warnings
+  #define MARK_USED(r, data, elem) while(0){ elem++; }
+  #define TEST_ITERATORS \
+  (fast_iter12)(fast_iter22)(fast_iter32)(fast_iter42)(fast_iter52)(fast_iter62)\
+  (fast_iter_const1)(fast_iter_const2)(fast_iter_const3)\
+  (fast_iter_const4)(fast_iter_const5)(fast_iter_const6)\
+  (fast_iter_const12)(fast_iter_const22)(fast_iter_const32)\
+  (fast_iter_const42)(fast_iter_const52)(fast_iter_const62)\
+  (leaf_iter12)(leaf_iter22)(leaf_iter32)(leaf_iter42)(leaf_iter52)(leaf_iter62)\
+  (leaf_iter_const6)(leaf_iter_const12)(leaf_iter_const22)(leaf_iter_const32)\
+  (leaf_iter_const42)(leaf_iter_const52)(leaf_iter_const62)\
+  (sibling_iter_const12)(sibling_iter_const22)(sibling_iter_const32)\
+  (sibling_iter_const42)(sibling_iter_const52)(sibling_iter_const62)
+  BOOST_PP_SEQ_FOR_EACH(MARK_USED, _, TEST_ITERATORS)
+  #undef MARK_USED
+  #undef TEST_ITERATORS
 }
 
 TEST(empty)
