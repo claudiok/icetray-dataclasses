@@ -7,7 +7,6 @@ using namespace boost::python;
 
 void register_I3MapI3ParticleID()
 {
-	typedef I3Map<I3ParticleID, double> I3MapI3ParticleIDDouble;
 	class_<I3MapI3ParticleIDDouble, bases<I3FrameObject>,
 	    boost::shared_ptr<I3MapI3ParticleIDDouble> >("I3MapI3ParticleIDDouble")
 	    .def(dataclass_suite<I3MapI3ParticleIDDouble >())

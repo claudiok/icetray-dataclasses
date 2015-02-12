@@ -2,6 +2,7 @@
 #define I3ParticleID_H_INCLUDED
 
 #include <icetray/I3PointerTypedefs.h>
+#include <dataclasses/I3Map.h>
 
 #ifndef __CINT__
 #include <icetray/serialization.h>
@@ -41,6 +42,8 @@ private:
 };
 
 I3_POINTER_TYPEDEFS(I3ParticleID);
+typedef I3Map<I3ParticleID, double> I3MapI3ParticleIDDouble;
+I3_POINTER_TYPEDEFS(I3MapI3ParticleIDDouble);
 
 std::ostream& operator<<(std::ostream &, const I3ParticleID &);
 
