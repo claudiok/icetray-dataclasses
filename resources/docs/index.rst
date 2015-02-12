@@ -12,6 +12,7 @@ Table of Contents:
    particle
    superdst
    masks
+   vector_math
    i3mctree
    python
    faq-common-probs
