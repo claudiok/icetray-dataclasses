@@ -80,11 +80,11 @@ I3Particle* at2(I3MCTree& t,int num)
 {
   I3Particle* ptr = NULL;
   if (num < 0) {
-    if (num*(-1) > t.size())
+    if (unsigned(-num) > t.size())
       throw not_found_exception("particle index not found in tree");
     num = num+t.size();
   } else {
-    if (num >= t.size())
+    if (unsigned(num) >= t.size())
       throw not_found_exception("particle index not found in tree");
   }
   I3MCTree::iterator iter = t.begin();
