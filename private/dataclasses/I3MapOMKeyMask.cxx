@@ -503,7 +503,7 @@ I3RecoPulseSeriesMapMask::HasAncestor(const I3Frame &frame, const std::string &k
 	if (key == GetSource())
 		return true;
 	I3RecoPulseSeriesMapMaskConstPtr source(this, null_deleter());
-	while (source = frame.Get<I3RecoPulseSeriesMapMaskConstPtr>(source->GetSource())) {
+	while ((source = frame.Get<I3RecoPulseSeriesMapMaskConstPtr>(source->GetSource()))) {
 		if (source->GetSource() == key)
 			return true;
 	}
