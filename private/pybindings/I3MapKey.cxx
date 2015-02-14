@@ -58,6 +58,10 @@ void register_I3MapKey()
     ;
   register_pointer_conversions<I3MapTriggerDouble>();
 
+  class_<I3MapTriggerUInt, bases<I3FrameObject>, I3MapTriggerUIntPtr>("I3MapTriggerUInt")
+    .def(dataclass_suite<I3MapTriggerUInt >())
+    ;
+  register_pointer_conversions<I3MapTriggerUInt>();
 
 }
 

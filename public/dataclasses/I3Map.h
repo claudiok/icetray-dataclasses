@@ -81,6 +81,7 @@ typedef I3Map<OMKey, double > I3MapKeyDouble;
 typedef I3Map<OMKey, unsigned int > I3MapKeyUInt;
 typedef I3Map<TriggerKey, std::vector<unsigned int> > I3MapTriggerVectorUInt;
 typedef I3Map<TriggerKey, double > I3MapTriggerDouble;
+typedef I3Map<TriggerKey, unsigned int> I3MapTriggerUInt;
 
 I3_POINTER_TYPEDEFS(I3MapStringDouble);
 I3_POINTER_TYPEDEFS(I3MapStringInt);
@@ -97,6 +98,7 @@ I3_POINTER_TYPEDEFS(I3MapKeyDouble);
 I3_POINTER_TYPEDEFS(I3MapKeyUInt);
 I3_POINTER_TYPEDEFS(I3MapTriggerVectorUInt);
 I3_POINTER_TYPEDEFS(I3MapTriggerDouble);
+I3_POINTER_TYPEDEFS(I3MapTriggerUInt);
 
 #endif // I3MAP_H_INCLUDED
 
