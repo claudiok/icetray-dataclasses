@@ -126,7 +126,7 @@ void register_I3Particle()
     .def(dataclass_suite<std::vector<I3Particle> >())
     ;
 
-  class_<I3ParticleVect, bases<I3FrameObject>, boost::shared_ptr<I3ParticleVect> >("I3ParticleVect")
+  class_<I3ParticleVect, bases<I3FrameObject, std::vector<I3Particle> >, boost::shared_ptr<I3ParticleVect> >("I3ParticleVect")
     .def(dataclass_suite<I3ParticleVect>())
     ;
  
