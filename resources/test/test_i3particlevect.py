@@ -8,7 +8,7 @@
 from icecube import icetray
 from icecube import dataclasses
 
-particle_vect = dataclasses.I3ParticleVect()
+particle_vect = dataclasses.I3VectorI3Particle()
 
 particle_vect.append(dataclasses.I3Particle())
 

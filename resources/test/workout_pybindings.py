@@ -214,7 +214,7 @@ mypart.fit_status = dataclasses.I3Particle.OK
 
 print(mypart)
 
-mypartvec = dataclasses.I3ParticleVect()
+mypartvec = dataclasses.I3VectorI3Particle()
 mypartvec.append(mypart)
 
 for party in mypartvec:

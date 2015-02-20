@@ -117,19 +117,13 @@ void register_I3Particle()
   
   bp::implicitly_convertible<I3Particle,I3ParticleID>();
 
-  // This may seem redundant, but this is needed to convert
-  // lists in python to std::vector in C++.  It doesn't need
-  // a proper name because you're just creating lists and not
-  // I3ParticleList or whatever else we might call it, hence
-  // the empty string.
+  // We only want the conversion from a list of I3Particles
+  // in python to a vector of I3Particles in C++.  So this
+  // doesn't need a name, since creating a dataclasses.I3ParticleVect, 
+  // for example, is clunky and unnecessary.
   class_<std::vector<I3Particle> >("")
     .def(dataclass_suite<std::vector<I3Particle> >())
     ;
 
-  class_<I3ParticleVect, bases<I3FrameObject, std::vector<I3Particle> >, boost::shared_ptr<I3ParticleVect> >("I3ParticleVect")
-    .def(dataclass_suite<I3ParticleVect>())
-    ;
- 
   register_pointer_conversions<I3Particle>();
-  register_pointer_conversions<I3ParticleVect>();
 }
