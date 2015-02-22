@@ -117,11 +117,7 @@ void register_I3Particle()
   
   bp::implicitly_convertible<I3Particle,I3ParticleID>();
 
-  // We only want the conversion from a list of I3Particles
-  // in python to a vector of I3Particles in C++.  So this
-  // doesn't need a name, since creating a dataclasses.I3ParticleVect, 
-  // for example, is clunky and unnecessary.
-  class_<std::vector<I3Particle> >("")
+  class_<std::vector<I3Particle> >("ListI3Particle")
     .def(dataclass_suite<std::vector<I3Particle> >())
     ;
 
