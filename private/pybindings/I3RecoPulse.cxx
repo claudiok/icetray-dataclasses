@@ -65,7 +65,6 @@ void register_I3RecoPulse()
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3RecoPulse, PROPS)
     #undef PROPS
     .def(dataclass_suite<I3RecoPulse>())
-    .def( self == self )
     ;
   
   enum_<I3RecoPulse::PulseFlags>("PulseFlags")

@@ -72,6 +72,7 @@ class I3RecoPulse
   virtual ~I3RecoPulse();
 
   bool operator==(const I3RecoPulse& rhs) const;
+  bool operator!=(const I3RecoPulse& rhs) const { return !operator==(rhs); }
 
   private:
   friend class boost::serialization::access;

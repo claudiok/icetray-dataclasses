@@ -56,6 +56,22 @@ class I3EventHeader : public I3FrameObject
   I3EventHeader();
 
   virtual ~I3EventHeader();
+  
+  bool operator==(const I3EventHeader& other) const
+    {
+      return (runID_ == other.runID_ &&
+              subRunID_ == other.subRunID_ &&
+              eventID_ == other.eventID_ &&
+              subEventID_ == other.subEventID_ &&
+              subEventStream_ == other.subEventStream_ &&
+              state_ == other.state_ &&
+              startTime_ == other.startTime_ &&
+              endTime_ == other.endTime_);
+    }
+  bool operator!=(const I3EventHeader& other) const
+    {
+      return !operator==(other);
+    }
 
   I3Time GetStartTime() const
     {
