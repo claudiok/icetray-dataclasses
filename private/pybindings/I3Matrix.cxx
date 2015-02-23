@@ -18,7 +18,7 @@ public:
 	}
 	
 private:
-	PyObject *err_;
+	PyObject *err_ __attribute__((unused));
 };
 
 std::string
