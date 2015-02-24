@@ -18,7 +18,14 @@ public:
 	}
 	
 private:
-	PyObject *err_ __attribute__((unused));
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-private-field"
+#endif
+	PyObject *err_;
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 };
 
 std::string
