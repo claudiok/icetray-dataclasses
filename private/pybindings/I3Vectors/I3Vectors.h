@@ -25,8 +25,6 @@
 #include <icetray/ostream_pair.hpp>
 #include <dataclasses/I3Vector.h>
 #include <dataclasses/ostream_overloads.hpp>
-#include <dataclasses/physics/I3Particle.h>
-#include <dataclasses/I3Position.h>
 #include <icetray/python/dataclass_suite.hpp>
 #include <vector>
 #include <sstream>
@@ -39,8 +37,14 @@ template <typename T>
 void 
 register_i3vector_of(const std::string& s)
 {
+
+  class_<std::vector<T> >((std::string("List") + s).c_str())
+    .def(dataclass_suite<std::vector<T> >())
+    ;
+
   typedef I3Vector<T> vec_t;
-  class_<vec_t, bases<I3FrameObject>, boost::shared_ptr<vec_t> > ((std::string("I3Vector") + s).c_str())
+  class_<vec_t, bases<I3FrameObject, std::vector<T> >, boost::shared_ptr<vec_t> > 
+    ((std::string("I3Vector") + s).c_str())
     .def(dataclass_suite<vec_t>())
     ;
   register_pointer_conversions<vec_t>();
