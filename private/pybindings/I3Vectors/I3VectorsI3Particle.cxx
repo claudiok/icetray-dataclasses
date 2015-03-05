@@ -20,6 +20,7 @@
 //
 
 #include "I3Vectors.h"
+#include "dataclasses/physics/I3Particle.h"
 
 void register_I3VectorI3Particle()
 {
