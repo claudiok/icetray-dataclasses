@@ -36,18 +36,18 @@
 
 #include "I3MCTreePhysicsLibraryWrappers.hh"
 
-using namespace boost::python;
+namespace bp = boost::python;
 
 void register_I3MCTreePhysicsLibrary()
 {
-  def("get_most_energetic_primary", get_most_energetic_primary, "");
-  def("get_most_energetic_inice", &get_most_energetic_inice, "");
-  def("get_most_energetic", &get_most_energetic, "");
-  def("get_most_energetic_track", &get_most_energetic_track, "");
-  def("get_most_energetic_cascade", &get_most_energetic_cascade, "");
-  def("get_most_energetic_inice_cascade", &get_most_energetic_inice_cascade, "");
-  def("get_most_energetic_neutrino", &get_most_energetic_neutrino, "");
-  def("get_most_energetic_muon", &get_most_energetic_muon, "");
-  def("get_most_energetic_nucleus", &get_most_energetic_nucleus, "");
+  bp::def("get_most_energetic_primary", get_most_energetic_primary, "");
+  bp::def("get_most_energetic_inice", &get_most_energetic_inice, "");
+  bp::def("get_most_energetic", &get_most_energetic, "");
+  bp::def("get_most_energetic_track", &get_most_energetic_track, "");
+  bp::def("get_most_energetic_cascade", &get_most_energetic_cascade, "");
+  bp::def("get_most_energetic_inice_cascade", &get_most_energetic_inice_cascade, "");
+  bp::def("get_most_energetic_neutrino", &get_most_energetic_neutrino, "");
+  bp::def("get_most_energetic_muon", &get_most_energetic_muon, "");
+  bp::def("get_most_energetic_nucleus", &get_most_energetic_nucleus, "");
 }
 
