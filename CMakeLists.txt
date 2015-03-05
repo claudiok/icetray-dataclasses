@@ -76,6 +76,7 @@ i3_add_pybindings(dataclasses
   private/pybindings/TankKey.cxx
   private/pybindings/I3MCTreePhysicsLibrary.cxx
   private/pybindings/module.cxx
+  private/pybindings/test_utils/I3VectorUtils.cxx
   USE_TOOLS boost python
   USE_PROJECTS icetray dataclasses
   )
@@ -104,6 +105,8 @@ set(TEST_SCRIPTS
   resources/test/leap_second_test.py            
   resources/test/test_I3RecoPulseSeriesMapMask_pybindings.py
   resources/test/test_i3particlevect.py
+  resources/test/test_mctree_physics_library.py
+  resources/test/test_I3Vectors.py  
 )
 
 # For whatever reason this test doesn't play well with old versions

@@ -121,5 +121,11 @@ void register_I3Particle()
     .def(dataclass_suite<std::vector<I3Particle> >())
     ;
 
+  class_<I3Vector<I3Particle>, bases<I3FrameObject, std::vector<I3Particle> > >
+    ("I3VectorI3Particle")
+    .def(dataclass_suite<I3Vector<I3Particle> >())
+    ;
+  register_pointer_conversions<I3Vector<I3Particle> >();
+
   register_pointer_conversions<I3Particle>();
 }

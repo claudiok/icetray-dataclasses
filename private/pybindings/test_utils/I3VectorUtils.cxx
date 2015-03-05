@@ -1,7 +1,7 @@
 //
 //   Copyright (c) 2004, 2005, 2006, 2007, 2008   Troy D. Straszheim  
 //   
-//   $Id$
+//   $Id: I3VectorsInt64.cxx 122541 2014-08-15 16:34:33Z nega $
 //
 //   This file is part of IceTray.
 //
@@ -19,9 +19,17 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include "I3Vectors.h"
+#include <dataclasses/physics/I3Particle.h>
 
-void register_I3VectorI3Particle()
+// this is client code that takes a std::vector<T>
+// this will be used to test the conversion from 
+// dataclasses.I3VectorT to std::vector<T>.
+template <class T>
+void takes_vector(std::vector<T>& v){};
+
+namespace bp = boost::python;
+
+void register_I3VectorUtils()
 {
-  //register_i3vector_of<I3Particle>("I3Particle");
+  bp::def("takes_vector_I3Particle", takes_vector<I3Particle>);
 }
