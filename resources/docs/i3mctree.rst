@@ -331,20 +331,37 @@ GetMostEnergetic gets the most energetic particle of the type
 
   .. only:: text
 
-    * Particle MostEnergeticPrimary(Tree)
-    * Particle MostEnergeticInIce(Tree)
-    * Particle MostEnergetic(Tree, ParticleType)
-    * Particle MostEnergeticTrack(Tree)
-    * Particle MostEnergeticCascade(Tree)
-    * Particle MostEnergeticInIceCascade(Tree)
-    * Particle MostEnergeticNeutrino(Tree)
-    * Particle MostEnergeticMuon(Tree)
-    * Particle MostEnergeticNucleus(Tree)
+    * Particle GetMostEnergeticPrimary(Tree)
+    * Particle GetMostEnergeticInIce(Tree)
+    * Particle GetMostEnergetic(Tree, ParticleType)
+    * Particle GetMostEnergeticTrack(Tree)
+    * Particle GetMostEnergeticCascade(Tree)
+    * Particle GetMostEnergeticInIceCascade(Tree)
+    * Particle GetMostEnergeticNeutrino(Tree)
+    * Particle GetMostEnergeticMuon(Tree)
+    * Particle GetMostEnergeticNucleus(Tree)
 
 All of the functions above have an extra bool in their signature, whose value is **true** by default.  The parameter name is *safe_mode*.
 When set to true these functions will return boost::none if there are more than one "best" matches, leaving it up to the caller to decide
 how to handle this situation.  This check requires an extra pass over the tree (to collect any matching candidates) and an iteration over
 those candidates, so will be slower than having no check.  If you need the extra speed set *safe_mode* to false and pray for the best.
+
+**NB**: On the python side the above functions have the corresponding python-style names, e.g. "get_most_energetic_primary" and live in the dataclasses module.  So the usage is as follows :
+
+::
+ Python 2.7.6 (default, Mar 22 2014, 22:59:56) 
+ Type "copyright", "credits" or "license" for more information.
+ 
+ IPython 1.2.1 -- An enhanced Interactive Python.
+ ?         -> Introduction and overview of IPython's features.
+ %quickref -> Quick reference.
+ help      -> Python's own help system.
+ object?   -> Details about 'object', use 'object??' for extra details.
+ 
+ In [1]: from icecube import dataclasses
+ In [2]: t = dataclasses.I3MCTree()
+ In [3]: p = dataclasses.get_most_energetic_cascade(t)
+
 
 Python
 ------
