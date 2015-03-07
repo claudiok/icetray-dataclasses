@@ -14,18 +14,22 @@
 
 #include <string>
 #include "dataclasses/Utility.h"
+#include <icetray/I3Units.h>
+
+#include <boost/math/constants/constants.hpp>
 
 #include <map>
 #include <vector>
 #include <stdint.h>
 #include <sstream>
 #include <cmath>
-#include <string>
 
-static const unsigned i3domcalibration_version_ = 10;
+
+static const unsigned i3domcalibration_version_ = 11;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
+static const unsigned SPEChargeDistribution_version_ = 0;
 
 /**
  * @brief A struct to hold a linear fit 
@@ -68,6 +72,51 @@ struct QuadraticFit
 
 };
 BOOST_CLASS_VERSION(QuadraticFit, quadraticfit_version_);
+
+/**
+ *  @brief: A struct to hold the parameters of an exponential + Gaussian
+ *  fit to the SPE charge distribution:
+ *  dF/dQ = exp_amp * exp(-Q / exp_width) +
+ *              gaus_amp * exp(-0.5 * ((Q - gaus_mean) / gaus_width)^2) /
+ *                                                   (sqrt(2*pi) * gaus_width)
+ *  where amp_ratio is the ratio of the Gaussian amplitude to the
+ *  exponential amplitude.
+ */
+struct SPEChargeDistribution
+{
+  template <class Archive>
+  void serialize(Archive& ar, unsigned version);
+
+  SPEChargeDistribution() : exp_amp_(NAN),
+                            exp_width_(NAN),
+                            gaus_amp_(NAN),
+                            gaus_mean_(NAN),
+                            gaus_width_(NAN),
+                            isValid_(false) { }
+
+  SPEChargeDistribution(double exp_amp,
+                        double exp_width,
+                        double gaus_amp,
+                        double gaus_mean,
+                        double gaus_width,
+                        bool isValid) :
+    exp_amp_(exp_amp),
+    exp_width_(exp_width),
+    gaus_amp_(gaus_amp),
+    gaus_mean_(gaus_mean),
+    gaus_width_(gaus_width),
+    isValid_(isValid) { }
+
+  double exp_amp_;
+  double exp_width_;
+  double gaus_amp_;
+  double gaus_mean_;
+  double gaus_width_;
+  bool isValid_;
+};
+
+BOOST_CLASS_VERSION(SPEChargeDistribution, SPEChargeDistribution_version_);
+
 
 /**
  *  @brief A struct to hold the parameters of the toroid time constants parameters
@@ -238,6 +287,8 @@ class I3DOMCalibration {
   void SetFrontEndImpedance(double feImped)
     {
       frontEndImpedance_ = feImped;
+      //New toroids should be 50 ohm, while old are 43 ohm.
+      toroidType_ = (frontEndImpedance_ > 48*I3Units::ohm) ? NEW_TOROID : OLD_TOROID;
     }
     
   /**
@@ -272,23 +323,22 @@ class I3DOMCalibration {
   void SetATWDFreqFit(unsigned int chip, QuadraticFit fitParams);
 
   /**
-   * Get the fit paramaters for the bin calibration.
+   * Get the fit paramater for the bin calibration.
    * This is really the conversion factor from
    * counts to volts.
    */
-
-  const LinearFit& GetATWDBinCalibFit(unsigned int id,
-              unsigned int channel,
-              unsigned int bin) const;
+  double GetATWDBinCalibSlope(unsigned int id,
+                              unsigned int channel,
+                              unsigned int bin) const;
 
   /**
-   * Set parameters for conversion of count to voltage 
+   * Sets the parameter for conversion of count to voltage
    * for each ATWD, each ATWD channel, and each ATWD bin.
    */
-  void SetATWDBinCalibFit(unsigned int id,
-        unsigned int channel,
-        unsigned int bin,
-        LinearFit fitParams);
+  void SetATWDBinCalibSlope(unsigned int id,
+                            unsigned int channel,
+                            unsigned int bin,
+                            double slope);
 
   /**
    *  Get/Set the version of DOMCal.
@@ -304,22 +354,6 @@ class I3DOMCalibration {
   }
 
   /**
-   *  Get the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
-   */
-  
-  double GetATWDBaseline(unsigned int id,  
-             unsigned int channel,
-             unsigned int bin) const;
-  /**
-   *  Set the basline value for a particular atwd chip(id)[0-1], gain channel[0-2] and bin[0-127]
-   */
-  
-  void SetATWDBaseline(unsigned int id,
-           unsigned int channel,
-           unsigned int bin,
-           double baseval);
-
-  /**
    * Get the average ATWD baseline in data-taking mode, as measured from beacon launches.
    *
    * Note: The beacon baseline depends implicitly
@@ -328,32 +362,7 @@ class I3DOMCalibration {
    */
   double GetATWDBeaconBaseline(unsigned int id, unsigned int channel) const;
  
-  void SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl);  
-
-  /**
-   * Get electronics response width for ATWD 
-   */
-  double GetATWDResponseWidth() const { return atwdResponseWidth_; }
-  
-  /**
-   * Set electronics response width for ATWD 
-   */
-  void SetATWDResponseWidth(double atwdResponseWidth)
-  {
-    atwdResponseWidth_ = atwdResponseWidth;
-    toroidType_ = (atwdResponseWidth_ > 0.4) ? NEW_TOROID : OLD_TOROID;
-  }
-
-  /**
-   * Get electronics response width for FADC 
-   */
-  double GetFADCResponseWidth() const { return fadcResponseWidth_; }
-  
-  /**
-   * Set electronics response width for FADC 
-   */
-  void SetFADCResponseWidth(double fadcResponseWidth) { fadcResponseWidth_ = fadcResponseWidth; }
-
+  void SetATWDBeaconBaseline(unsigned int id, unsigned int channel, double bsl);
 
   /**
    *  Get/Set functions for speDiscrimCalib
@@ -522,6 +531,32 @@ class I3DOMCalibration {
     toroidType_ = type;
   }
   
+  /**
+   *  ATWD and FADC-specific corrections to the SPE charge distribution
+   */
+  double GetMeanATWDCharge() const {return meanATWDCharge_;}
+  double GetMeanFADCCharge() const {return meanFADCCharge_;}
+  bool IsMeanATWDChargeValid() const {return meanATWDChargeValid_;}
+  bool IsMeanFADCChargeValid() const {return meanFADCChargeValid_;}
+
+  void SetMeanATWDCharge(double charge, bool valid=true) {
+    meanATWDCharge_ = charge;
+    meanATWDChargeValid_ = valid;
+  }
+
+  void SetMeanFADCCharge(double charge, bool valid=true) {
+    meanFADCCharge_ = charge;
+    meanFADCChargeValid_ = valid;
+  }
+
+  SPEChargeDistribution GetCombinedSPEChargeDistribution() const {
+    return combinedSPEFit_;
+  }
+
+  void SetCombinedSPEChargeDistribution(const SPEChargeDistribution& fit) {
+    combinedSPEFit_ = fit;
+  }
+
  private:
   static const unsigned int N_ATWD_BINS = 128;
   
@@ -580,17 +615,11 @@ class I3DOMCalibration {
   QuadraticFit atwdFreq_[2];
   
   /**
-   * Results of the linear fit for the bin calibration
+   * Slope of the linear fit for the bin calibration
    * i.e. the values needed to convert from counts to voltage
    * for each bin in the ATWD.
-   * First key corresponds to channel.
-   * Key in internal map corresponds to bin.
    */
-  //typedef map<unsigned, map<unsigned, LinearFit> > ATWDBinParam_t;
-  //ATWDBinParam_t atwdBin0_, atwdBin1_;
- 
-  LinearFit atwdBin0_[N_ATWD_CHANNELS][N_ATWD_BINS];
-  LinearFit atwdBin1_[N_ATWD_CHANNELS][N_ATWD_BINS];
+  double atwdBins_[2][N_ATWD_CHANNELS][N_ATWD_BINS];
   
   /** 
    *  DOMCAL calculated pmt transit time fit function.
@@ -608,13 +637,6 @@ class I3DOMCalibration {
   std::string domcalVersion_;
 
   /**
-   *  Dumb-ol-array to hold the baseline corrections.
-   *  [atwd chip id (0-1)] [ gain channel(0-2) ] [ atwd bin (0-127) ]
-   */
-
-  double atwdBaselines_[2][N_ATWD_CHANNELS][N_ATWD_BINS];
-
-  /**
    *  Dumb-ol-array to hold the average baseline corrections measured from beacon launches.
    *  [atwd chip id (0-1)] [ gain channel(0-2) ]
    *
@@ -629,20 +651,6 @@ class I3DOMCalibration {
    *  Stores the toroid type (pre-2006 droopy or post-2006 sligthly-less-droopy) 
    */
   ToroidType toroidType_;
-  
-  /**
-   *  Stores the response witdth of the electronics to a pulse (ATWD). To be used with  
-   *  the simulation. It changed with 2006 toroid change.  
-   */
-
-  double atwdResponseWidth_;
-
-  /**
-   *  Stores the response witdth of the electronics to a pulse (FADC). To be used with  
-   *  the simulation. It changed with 2006 toroid change.  
-   */
-
-  double fadcResponseWidth_;
 
   /**
    *  Store the ATWD time offset from domcal calibration.  the ATWD used in transit time
@@ -704,6 +712,19 @@ class I3DOMCalibration {
    *  Noise: mean number of hits from the scintillation lognormal component for DOM
    */
   double noiseScintillationHits_;
+
+  /**
+   *  Combined-fit SPE distribution function (exponential + Gaussian)
+   */
+  SPEChargeDistribution combinedSPEFit_;
+
+  /**
+   *  ATWD and FADC-specific corrections to the SPE charge distribution
+   */
+  double meanATWDCharge_;
+  double meanFADCCharge_;
+  bool meanATWDChargeValid_;
+  bool meanFADCChargeValid_;
 
 };
 

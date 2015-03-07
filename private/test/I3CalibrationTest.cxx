@@ -25,18 +25,14 @@ TEST(bin_parameters)
     int id = 0;
     int channel = 0;
     int bin = 127;  //Set() method expects time reversed order.this is earliest bin
-    
-    LinearFit fit;  
-    fit.slope = -0.002*I3Units::V;  // volt/count
-    fit.intercept = 2.9*I3Units::V; 
+  
+    double slope = -0.002*I3Units::V;  // volt/count
     
     const double temp = 900.00*I3Units::kelvin;
     
     double feImpedance = 45.2*I3Units::ohm;
     
     double gain = -17.0;
-    
-    double baseline = 0.00125*I3Units::V;
 
     dom_calib.SetTemperature(temp);
 
@@ -44,14 +40,10 @@ TEST(bin_parameters)
     
     dom_calib.SetATWDGain(channel,gain);
     
-    dom_calib.SetATWDBinCalibFit(id,
+    dom_calib.SetATWDBinCalibSlope(id,
 				  channel,
 				  bin,
-				  fit);
-    dom_calib.SetATWDBaseline(id,
-				channel,
-				bin,
-				baseline);
+				  slope);
 
     LinearFit specal;
     // Taken from actual domcal file
@@ -95,19 +87,9 @@ TEST(bin_parameters)
 		    "Temperature came back from storage with wrong value");
 
     ENSURE_DISTANCE(-0.002,
-		    calib->domCal[omkey].GetATWDBinCalibFit(id,channel,bin).slope/I3Units::V,
+		    calib->domCal[omkey].GetATWDBinCalibSlope(id,channel,bin)/I3Units::V,
 		    0.0001,
 		    "Failed to properly return fit slope (test1)");
-
-    ENSURE_DISTANCE(2.9,
-		    calib->domCal[omkey].GetATWDBinCalibFit(id,channel,bin).intercept/I3Units::V,
-		    0.0001,
-		    "Failed to properly return count (test2)");
-
-    ENSURE_DISTANCE(0.00125,
-		    calib->domCal[omkey].GetATWDBaseline(id,channel,bin)/I3Units::V,
-		    0.00001,
-		    "Failed to proper Baseline value (test2)");
     
     ENSURE_DISTANCE(45.3,
 		    calib->vemCal[omkey].pePerVEM,
@@ -148,18 +130,14 @@ TEST(to_stream)
     int channel = 0;
     int bin = 1;
 
-    LinearFit fit;      
-    fit.slope = -0.002*I3Units::V;
-    fit.intercept = 2.9*I3Units::V; 
+    double slope = -0.002*I3Units::V;
     double gain = -17.0;
 	
     
     dom_calib->SetATWDGain(channel,gain);
-    dom_calib->SetATWDBinCalibFit(id,channel,bin,fit);
-    
-    //dom_calib->ToStream(cout);
+    dom_calib->SetATWDBinCalibSlope(id,channel,bin,slope);
+  
     log_info("Calibration %s",AsXML(*dom_calib).c_str());
-    //log_info("Calibration %s",AsXML(dom_calib).c_str());
 }
 
 TEST(simple_DomCalibration)

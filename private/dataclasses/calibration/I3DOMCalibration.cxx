@@ -15,16 +15,18 @@ I3DOMCalibration::I3DOMCalibration()
     fadcGain_(NAN),
     fadcDeltaT_(NAN),
     frontEndImpedance_(NAN),
-    domcalVersion_("unknown"), 
-    atwdResponseWidth_(NAN),
-    fadcResponseWidth_(NAN),
+    domcalVersion_("unknown"),
     relativeDomEff_(NAN),
     noiseRate_(NAN),
     noiseThermalRate_(NAN),
     noiseDecayRate_(NAN),
     noiseScintillationMean_(NAN),
     noiseScintillationSigma_(NAN),
-    noiseScintillationHits_(NAN)
+    noiseScintillationHits_(NAN),
+    meanATWDCharge_(NAN),
+    meanFADCCharge_(NAN),
+    meanATWDChargeValid_(false),
+    meanFADCChargeValid_(false)
 {
   fadcBeaconBaseline_ = NAN;
   atwdBeaconBaselines_[0][0] = NAN;
@@ -35,60 +37,28 @@ I3DOMCalibration::I3DOMCalibration()
   atwdBeaconBaselines_[1][2] = NAN;
 }
 
-/**
- * @todo  should put some checks on the channel, bin.  Make sure they are legit
- */
-const LinearFit& 
-I3DOMCalibration::GetATWDBinCalibFit (unsigned int id, 
-                                      unsigned int channel, 
-                                      unsigned int bin) const 
-{
-  if(channel<N_ATWD_CHANNELS&&bin<N_ATWD_BINS)
-    {
-      switch(id)
-      {
-      case 0:
-        {
-          const LinearFit& fit = atwdBin0_[channel][bin];
-          return fit;
-        }
-      case 1:
-        {
-          const LinearFit& fit = atwdBin1_[channel][bin];
-          return fit;
-        }
-      default:
-        log_fatal("Invalid ATWD Id in I3DOMCalibration::SetATWDBinCalibFit");
-      }
-    }
-  else
-    {
-      log_fatal("No ATWD bin calibration for requested bin %ui channel %ui",
-    bin,channel);
-    }
+double
+I3DOMCalibration::GetATWDBinCalibSlope(unsigned int id,
+                                       unsigned int channel,
+                                       unsigned int bin) const{
+  assert(id<2);
+  assert(channel<N_ATWD_CHANNELS);
+  assert(bin<N_ATWD_BINS);
+  return(atwdBins_[id][channel][bin]);
 }
 
-void 
-I3DOMCalibration::SetATWDBinCalibFit (unsigned int id, 
-                                      unsigned int channel, 
-                                      unsigned int bin,
-                                      LinearFit fitParams)
-{
-  switch(id)
-    {
-    case 0:
-      atwdBin0_[channel][(N_ATWD_BINS-1)-bin] = fitParams;
-      return;
-    case 1:
-      atwdBin1_[channel][(N_ATWD_BINS-1)-bin] = fitParams;
-      return;
-    default:
-      log_fatal("Invalid ATWD Id in I3DOMCalibration::SetATWDBinCalibFit");
-    }
+void
+I3DOMCalibration::SetATWDBinCalibSlope(unsigned int id,
+                                       unsigned int channel,
+                                       unsigned int bin,
+                                       double slope){
+  assert(id<2);
+  assert(channel<N_ATWD_CHANNELS);
+  assert(bin<N_ATWD_BINS);
+  atwdBins_[id][channel][(N_ATWD_BINS-1)-bin]=slope;
 }
 
-
-QuadraticFit 
+QuadraticFit
 I3DOMCalibration::GetATWDFreqFit (unsigned int chip) const
 {
   //map<unsigned int, QuadraticFit>::const_iterator iter = atwdFreq_.find(chip);
@@ -168,42 +138,6 @@ I3DOMCalibration::GetATWDDeltaT (unsigned int chip) const
   else
     {
       log_fatal("Invalid chip id requested I3DOMCalibration::GetATWDDeltaT");
-    }
-}
-
-double I3DOMCalibration::GetATWDBaseline(unsigned int id,  
-                                         unsigned int channel,
-                                         unsigned int bin) const
-{
-  //apply some bounds checks
-  if( (id == 0 || id ==1) && 
-      ( channel == 0 || channel == 1 || channel == 2) &&
-      ( bin<128) )
-    {
-      return atwdBaselines_[id][channel][bin];
-    }
-  else
-    {
-      log_fatal("Invalid id, channel, bin specified for GetATWDBaseline");
-    }
-}
-
-void I3DOMCalibration::SetATWDBaseline(unsigned int id,
-                                       unsigned int channel,
-                                       unsigned int bin,
-                                       double baseval)
-{
-  if( (id == 0 || id ==1) && 
-      ( channel == 0 || channel == 1 || channel == 2) &&
-      ( bin<128) )
-    {
-      // Don't forget the domcal information is stored in correct time
-      //   ordering (reversed in domcal raw data)
-      atwdBaselines_[id][channel][(N_ATWD_BINS-1)-bin] = baseval;
-    }
-  else
-    {
-      log_fatal("Invalid id, channel, bin specified for SetATWDBaseline");
     }
 }
 
@@ -491,6 +425,23 @@ QuadraticFit::serialize(Archive& ar, unsigned version)
 I3_SERIALIZABLE(QuadraticFit);
 
 template <class Archive>
+void
+SPEChargeDistribution::serialize(Archive& ar, unsigned version)
+{
+  if (version>SPEChargeDistribution_version_)
+    log_fatal("Attempting to read version %u from file but running version %u of SPEChargeDistribution class.",version,SPEChargeDistribution_version_);
+
+  ar & make_nvp("ExpAmp", exp_amp_);
+  ar & make_nvp("ExpWidth", exp_width_);
+  ar & make_nvp("GausAmp", gaus_amp_);
+  ar & make_nvp("GausMean", gaus_mean_);
+  ar & make_nvp("GausWidth", gaus_width_);
+  ar & make_nvp("IsValid", isValid_);
+}
+
+I3_SERIALIZABLE(SPEChargeDistribution);
+
+template <class Archive>
 void 
 TauParam::serialize(Archive& ar, unsigned version)
 {
@@ -590,7 +541,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
         {
           if(iter_nbin->first<128)
             {
-              atwdBin0_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
+              atwdBins_[0][iter_nch->first][iter_nbin->first] = iter_nbin->second.slope;
             }
           else
             {
@@ -618,7 +569,7 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
         {
           if(iter_nbin->first<128)
             {
-              atwdBin1_[iter_nch->first][iter_nbin->first] = iter_nbin->second;
+              atwdBins_[1][iter_nch->first][iter_nbin->first] = iter_nbin->second.slope;
             }
           else
             {
@@ -634,10 +585,41 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
               iter_nch++;
       }
     }
+  else if(version<11)
+    {
+      //interleave the per-bin slope information with space
+      //for the old intercept entries
+      LinearFit oldATWDBins[N_ATWD_CHANNELS][N_ATWD_BINS];
+      
+      for(unsigned int i=0; i<N_ATWD_CHANNELS; i++){
+        for(unsigned int j=0; j<N_ATWD_BINS; j++){
+          oldATWDBins[i][j].slope=atwdBins_[0][i][j];
+          oldATWDBins[i][j].intercept=0;
+        }
+      }
+      ar & make_nvp("atwd0BinParameters",oldATWDBins);
+      for(unsigned int i=0; i<N_ATWD_CHANNELS; i++){
+        for(unsigned int j=0; j<N_ATWD_BINS; j++){
+          atwdBins_[0][i][j]=oldATWDBins[i][j].slope;
+        }
+      }
+      
+      for(unsigned int i=0; i<N_ATWD_CHANNELS; i++){
+        for(unsigned int j=0; j<N_ATWD_BINS; j++){
+          oldATWDBins[i][j].slope=atwdBins_[1][i][j];
+          oldATWDBins[i][j].intercept=0;
+        }
+      }
+      ar & make_nvp("atwd1BinParameters",oldATWDBins);
+      for(unsigned int i=0; i<N_ATWD_CHANNELS; i++){
+        for(unsigned int j=0; j<N_ATWD_BINS; j++){
+          atwdBins_[1][i][j]=oldATWDBins[i][j].slope;
+        }
+      }
+    }
   else
     {
-      ar & make_nvp("atwd0BinParameters",atwdBin0_);
-      ar & make_nvp("atwd1BinParameters",atwdBin1_);
+      ar & make_nvp("atwdBinParameters",atwdBins_);
     }
   ar & make_nvp("pmtTransitTime",pmtTransitTime_);
   ar & make_nvp("hvGainRelation",hvGainRelation_);
@@ -654,10 +636,14 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       ar & make_nvp("tauparameters", tauparameters_);
       SetTauParameters(tauparameters_);
-      ar & make_nvp("ATWDBaselines", atwdBaselines_);
-      ar & make_nvp("ATWDResponseWidth", atwdResponseWidth_);
-      ar & make_nvp("FADCResponseWidth", fadcResponseWidth_);
-      
+      if (version < 11)
+        {
+          double atwdBaselines[2][N_ATWD_CHANNELS][N_ATWD_BINS];
+          double atwdResponseWidth, fadcResponseWidth;
+          ar & make_nvp("ATWDBaselines", atwdBaselines);
+          ar & make_nvp("ATWDResponseWidth", atwdResponseWidth);
+          ar & make_nvp("FADCResponseWidth", fadcResponseWidth);
+        }
     }
 
   if (version > 4)
@@ -692,8 +678,16 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("noiseScintillationSigma", noiseScintillationSigma_);
       ar & make_nvp("noiseScintillationHits", noiseScintillationHits_);
     }
-  toroidType_ = (atwdResponseWidth_ > 0.4) ? NEW_TOROID : OLD_TOROID;
-
+  if (version > 10)
+    {
+      ar & make_nvp("combinedSPEFit", combinedSPEFit_);
+      ar & make_nvp("meanATWDCharge", meanATWDCharge_);
+      ar & make_nvp("meanFADCCharge", meanFADCCharge_);
+      ar & make_nvp("meanATWDChargeValid", meanATWDChargeValid_);
+      ar & make_nvp("meanFADCChargeValid", meanFADCChargeValid_);
+    }
+  //New toroids should be 50 ohm, while old are 43 ohm.
+  toroidType_ = (frontEndImpedance_ > 48*I3Units::ohm) ? NEW_TOROID : OLD_TOROID;
 }
 
 I3_SERIALIZABLE(I3DOMCalibration);

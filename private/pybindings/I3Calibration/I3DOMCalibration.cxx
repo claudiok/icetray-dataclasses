@@ -37,15 +37,15 @@ void register_I3DOMCalibration()
       #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)           \
                             (FADCBaselineFit)(FADCBeaconBaseline)(FrontEndImpedance)  \
                             (TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)      \
-                            (ATWDResponseWidth)(FADCResponseWidth)(SPEDiscCalib)      \
+                            (SPEDiscCalib)      \
                             (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)\
                             (ToroidType)(DomNoiseThermalRate)(DomNoiseDecayRate)      \
                             (DomNoiseScintillationMean)(DomNoiseScintillationSigma)   \
                             (DomNoiseScintillationHits)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       #undef I3DOMCALPROPS
-      #define EVIL_PROPS (ATWDBaseline)(ATWDBeaconBaseline)(ATWDDeltaT) \
-                         (ATWDFreqFit)(ATWDGain)(ATWDBinCalibFit)
+      #define EVIL_PROPS (ATWDBeaconBaseline)(ATWDDeltaT) \
+                         (ATWDFreqFit)(ATWDGain)(ATWDBinCalibSlope)
       BOOST_PP_SEQ_FOR_EACH(WRAP_EVIL_PROP, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
