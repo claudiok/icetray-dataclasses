@@ -53,8 +53,6 @@ struct TWRXTCal
    */
   double invAmplitudeCut;
 
-
-
   TWRXTCal()
   {
     speNetChargeCut  = NAN;
@@ -64,6 +62,20 @@ struct TWRXTCal
     invAmplitudeCut = NAN;
   }
   virtual ~TWRXTCal();
+  
+  bool operator==(const TWRXTCal rhs) const
+  {
+    return (speNetChargeCut == rhs.speNetChargeCut &&
+        chargeVsAmplCut == rhs.chargeVsAmplCut &&
+        startBinCut == rhs.startBinCut &&
+        endBinCut == rhs.endBinCut &&
+        amplitudeCut == rhs.amplitudeCut &&
+        invAmplitudeCut == rhs.invAmplitudeCut);
+  }
+  bool operator!=(const TWRXTCal rhs) const 
+  {
+    return !operator==(rhs);
+  }
   
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
@@ -102,6 +114,17 @@ struct TWRCalibration
  
   }
   virtual ~TWRCalibration();
+  
+  bool operator==(const TWRCalibration rhs) const
+  {
+    return (peArea == rhs.peArea &&
+        twrT0 == rhs.twrT0 &&
+        xtcal == rhs.xtcal);
+  }
+  bool operator!=(const TWRCalibration rhs) const
+  {
+    return !operator==(rhs);
+  }
   
   template <class Archive> void serialize(Archive & ar, unsigned version);
 

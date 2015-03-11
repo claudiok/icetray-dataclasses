@@ -57,6 +57,18 @@ struct I3OMGeo
      * Gets the I3Direction from the I3Orientation
      */
     inline I3Direction GetDirection() const {return orientation.GetDir();}
+    
+    bool operator==(const I3OMGeo rhs) const
+    {
+      return (position == rhs.position &&
+              orientation == rhs.orientation &&
+              omtype == rhs.omtype &&
+              area == rhs.area);
+    }
+    bool operator!=(const I3OMGeo rhs) const
+    {
+      return !operator==(rhs);
+    }
 
     friend class boost::serialization::access;
     template <class Archive>

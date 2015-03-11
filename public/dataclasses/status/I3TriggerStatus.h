@@ -90,7 +90,17 @@ struct I3TriggerReadoutConfig
     readoutTimePlus = NAN;
     readoutTimeOffset = NAN;
   }
-
+  
+  bool operator==(const I3TriggerReadoutConfig rhs) const
+  {
+    return (readoutTimeMinus == rhs.readoutTimeMinus &&
+        readoutTimePlus == rhs.readoutTimePlus &&
+        readoutTimeOffset == rhs.readoutTimeOffset);
+  }
+  bool operator!=(const I3TriggerReadoutConfig rhs) const
+  {
+    return !operator==(rhs);
+  }
 };
 
 BOOST_CLASS_VERSION(I3TriggerReadoutConfig, i3triggerreadoutconfig_version_);
@@ -188,6 +198,17 @@ class I3TriggerStatus
     GetReadoutSettings() const { return readoutconfigs_; }
   std::map<Subdetector, I3TriggerReadoutConfig>& 
     GetReadoutSettings() { return readoutconfigs_; }  
+  
+  bool operator==(const I3TriggerStatus& rhs) const
+  {
+    return (name_ == rhs.name_ &&
+        settings_ == rhs.settings_ &&
+        readoutconfigs_ == rhs.readoutconfigs_);
+  }
+  bool operator!=(const I3TriggerStatus& rhs) const
+  {
+    return !operator==(rhs);
+  }
 
   std::string name_;
   std::map<std::string, std::string> settings_;

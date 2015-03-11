@@ -82,6 +82,32 @@ struct I3AMANDAOMCalibration
   };
 
   virtual ~I3AMANDAOMCalibration();
+  
+  bool operator==(const I3AMANDAOMCalibration rhs) const
+  {
+    return (adc_a0 == rhs.adc_a0 &&
+        adc_beta == rhs.adc_beta &&
+        tdc_alpha == rhs.tdc_alpha &&
+        tdc_beta == rhs.tdc_beta &&
+        tdc_t0 == rhs.tdc_t0 &&
+        tdc_pol == rhs.tdc_pol &&
+        tot_beta == rhs.tot_beta &&
+        tot_tot0 == rhs.tot_tot0 &&
+        tot_pol == rhs.tot_pol &&
+        omo_a == rhs.omo_a &&
+        omo_b == rhs.omo_b &&
+        omo_c == rhs.omo_c &&
+        omo_d == rhs.omo_d &&
+        omo_e == rhs.omo_e &&
+        omo_lowlim == rhs.omo_lowlim &&
+        omo_highlim == rhs.omo_highlim &&
+        pe_area == rhs.pe_area &&
+        xtalk_receivers == rhs.xtalk_receivers);
+  }
+  bool operator!=(const I3AMANDAOMCalibration rhs) const
+  {
+    return !operator==(rhs);
+  }
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };

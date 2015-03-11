@@ -55,6 +55,18 @@ struct I3VEMCalibration
   }
   virtual ~I3VEMCalibration();
   
+  bool operator==(const I3VEMCalibration rhs) const
+  {
+    return (pePerVEM == rhs.pePerVEM &&
+        muPeakWidth == rhs.muPeakWidth &&
+        hglgCrossOver == rhs.hglgCrossOver &&
+        corrFactor == rhs.corrFactor);
+  }
+  bool operator!=(const I3VEMCalibration rhs) const
+  {
+    return !operator==(rhs);
+  }
+  
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };

@@ -43,6 +43,45 @@ public:
   {};
 
   virtual ~I3DOMStatus();
+  
+  bool operator==(const I3DOMStatus& rhs) const
+  {
+    return (trigMode == rhs.trigMode &&
+        lcMode == rhs.lcMode &&
+        txMode == rhs.txMode &&
+        lcWindowPre == rhs.lcWindowPre &&
+        lcWindowPost == rhs.lcWindowPost &&
+        lcSpan == rhs.lcSpan &&
+        statusATWDa == rhs.statusATWDa &&
+        statusATWDb == rhs.statusATWDb &&
+        statusFADC == rhs.statusFADC &&
+        pmtHV == rhs.pmtHV &&
+        speThreshold == rhs.speThreshold &&
+        dacTriggerBias0 == rhs.dacTriggerBias0 &&
+        dacTriggerBias1 == rhs.dacTriggerBias1 &&
+        dacFADCRef == rhs.dacFADCRef &&
+        nBinsATWD0 == rhs.nBinsATWD0 &&
+        nBinsATWD1 == rhs.nBinsATWD1 &&
+        nBinsATWD2 == rhs.nBinsATWD2 &&
+        nBinsATWD3 == rhs.nBinsATWD3 &&
+        nBinsFADC == rhs.nBinsFADC &&
+        deltaCompress == rhs.deltaCompress &&
+        fbState == rhs.fbState &&
+        fbBrightness == rhs.fbBrightness &&
+        fbLength == rhs.fbLength &&
+        fbDelay == rhs.fbDelay &&
+        fbMask == rhs.fbMask &&
+        fbRate == rhs.fbRate &&
+        domGainType == rhs.domGainType &&
+        cableType == rhs.cableType &&
+        SLCActive == rhs.SLCActive &&
+        mpeThreshold == rhs.mpeThreshold);
+  }
+  bool operator!=(const I3DOMStatus& rhs) const
+  {
+    return !operator==(rhs);
+  }
+  
   /**
    * The different kinds of triggers that can be used for the dom
    * The standard data-taking operation is SPE

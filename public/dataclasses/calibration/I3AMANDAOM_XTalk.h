@@ -28,6 +28,19 @@ struct I3AMANDAOM_XTalk
 
   I3AMANDAOM_XTalk() {timehigh=NAN; timelow=NAN; width=NAN;}
   virtual ~I3AMANDAOM_XTalk();
+  
+  bool operator==(const I3AMANDAOM_XTalk rhs) const
+  {
+    return (receiver == rhs.receiver &&
+        timehigh == rhs.timehigh &&
+        timelow == rhs.timelow &&
+        width == rhs.width &&
+        threshold == rhs.threshold);
+  }
+  bool operator!=(const I3AMANDAOM_XTalk rhs) const 
+  {
+    return !operator==(rhs);
+  }
 
   template <class Archive> 
   void serialize(Archive & ar, unsigned version);

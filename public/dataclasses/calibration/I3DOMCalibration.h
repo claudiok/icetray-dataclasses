@@ -39,6 +39,15 @@ struct LinearFit
 {
   double slope;
   double intercept;
+  
+  bool operator==(const LinearFit rhs) const
+  {
+    return slope == rhs.slope && intercept == rhs.intercept;
+  }
+  bool operator!=(const LinearFit rhs) const
+  {
+    return !operator==(rhs);
+  }  
     
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -61,6 +70,17 @@ struct QuadraticFit
   double quadFitB;
   double quadFitC;
     
+  bool operator==(const QuadraticFit rhs) const
+  {
+    return (quadFitA == rhs.quadFitA &&
+        quadFitB == rhs.quadFitB &&
+        quadFitC == rhs.quadFitC);
+  }
+  bool operator!=(const QuadraticFit rhs) const
+  {
+    return !operator==(rhs);
+  }  
+
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
   QuadraticFit()
@@ -113,6 +133,20 @@ struct SPEChargeDistribution
   double gaus_mean_;
   double gaus_width_;
   bool isValid_;
+  
+  bool operator==(const SPEChargeDistribution rhs) const
+  {
+    return (exp_amp_ == rhs.exp_amp_ &&
+        exp_width_ == rhs.exp_width_ &&
+        gaus_amp_ == rhs.gaus_amp_ &&
+        gaus_mean_ == rhs.gaus_mean_ &&
+        gaus_width_ == rhs.gaus_width_ &&
+        isValid_ == rhs.isValid_);
+  }
+  bool operator!=(const SPEChargeDistribution rhs) const
+  {
+    return !operator==(rhs);
+  }  
 };
 
 BOOST_CLASS_VERSION(SPEChargeDistribution, SPEChargeDistribution_version_);
@@ -154,6 +188,20 @@ struct TauParam
   P4(p4),P5(p5),
   TauFrac(tauFrac){}
   
+  bool operator==(const TauParam rhs) const
+  {
+    return (P0 == rhs.P0 &&
+        P1 == rhs.P1 &&
+        P2 == rhs.P2 &&
+        P3 == rhs.P3 &&
+        P4 == rhs.P4 &&
+        P5 == rhs.P5 &&
+        TauFrac == rhs.TauFrac);
+  }
+  bool operator!=(const TauParam rhs) const
+  {
+    return !operator==(rhs);
+  }  
 };
 
 BOOST_CLASS_VERSION(TauParam, tauparam_version_);
@@ -555,6 +603,46 @@ class I3DOMCalibration {
 
   void SetCombinedSPEChargeDistribution(const SPEChargeDistribution& fit) {
     combinedSPEFit_ = fit;
+  }
+  
+  bool operator==(const I3DOMCalibration& rhs) const
+  {
+    return (droopTimeConstants_ == rhs.droopTimeConstants_ &&
+        temperature_ == rhs.temperature_ &&
+        fadcGain_ == rhs.fadcGain_ &&
+        fadcBaselineFit_ == rhs.fadcBaselineFit_ &&
+        fadcBeaconBaseline_ == rhs.fadcBeaconBaseline_ &&
+        fadcDeltaT_ == rhs.fadcDeltaT_ &&
+        frontEndImpedance_ == rhs.frontEndImpedance_ &&
+        tauparameters_ == rhs.tauparameters_ &&
+        ampGains_ == rhs.ampGains_ &&
+        atwdFreq_ == rhs.atwdFreq_ &&
+        atwdBins_ == rhs.atwdBins_ &&
+        pmtTransitTime_ == rhs.pmtTransitTime_ &&
+        hvGainRelation_ == rhs.hvGainRelation_ &&
+        domcalVersion_ == rhs.domcalVersion_ &&
+        atwdBeaconBaselines_ == rhs.atwdBeaconBaselines_ &&
+        toroidType_ == rhs.toroidType_ &&
+        atwdDeltaT_ == rhs.atwdDeltaT_ &&
+        speDiscrimCalib_ == rhs.speDiscrimCalib_ &&
+        mpeDiscrimCalib_ == rhs.mpeDiscrimCalib_ &&
+        pmtDiscrimCalib_ == rhs.pmtDiscrimCalib_ &&
+        relativeDomEff_ == rhs.relativeDomEff_ &&
+        noiseRate_ == rhs.noiseRate_ &&
+        noiseThermalRate_ == rhs.noiseThermalRate_ &&
+        noiseDecayRate_ == rhs.noiseDecayRate_ &&
+        noiseScintillationMean_ == rhs.noiseScintillationMean_ &&
+        noiseScintillationSigma_ == rhs.noiseScintillationSigma_ &&
+        noiseScintillationHits_ == rhs.noiseScintillationHits_ &&
+        combinedSPEFit_ == rhs.combinedSPEFit_ &&
+        meanATWDCharge_ == rhs.meanATWDCharge_ &&
+        meanFADCCharge_ == rhs.meanFADCCharge_ &&
+        meanATWDChargeValid_ == rhs.meanATWDChargeValid_ &&
+        meanFADCChargeValid_ == rhs.meanFADCChargeValid_);
+  }
+  bool operator!=(const I3DOMCalibration& rhs) const
+  {
+    return !operator==(rhs);
   }
 
  private:

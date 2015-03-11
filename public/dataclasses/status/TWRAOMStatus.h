@@ -51,6 +51,20 @@ class TWRAOMStatus
   /** Destructor
    */
   virtual ~TWRAOMStatus();
+  
+  bool operator==(const TWRAOMStatus rhs) const
+  {
+    return (binSize_ == rhs.binSize_ &&
+        stopDelay_ == rhs.stopDelay_ &&
+        baseline_ == rhs.baseline_ &&
+        threshold_ == rhs.threshold_ &&
+        cableType_ == rhs.cableType_);
+  }
+  bool operator!=(const TWRAOMStatus rhs) const
+  {
+    return !operator==(rhs);
+  }
+  
   /** Get/Set for the TWR bin size.
    */
   double GetBinSize() const { return(binSize_); }
