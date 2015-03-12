@@ -8,6 +8,7 @@
 #ifndef I3VEMCALIBRATION_H_INCLUDED
 #define I3VEMCALIBRATION_H_INCLUDED
 
+#include <icetray/OMKey.h>
 #include "dataclasses/Utility.h"
 
 
@@ -71,6 +72,9 @@ struct I3VEMCalibration
 
 };
 
+
+typedef std::map<OMKey, I3VEMCalibration> I3VEMCalibrationMap;
+I3_POINTER_TYPEDEFS(I3VEMCalibrationMap);
 
 BOOST_CLASS_VERSION(I3VEMCalibration, i3vemcalibration_version_);
 I3_POINTER_TYPEDEFS(I3VEMCalibration);

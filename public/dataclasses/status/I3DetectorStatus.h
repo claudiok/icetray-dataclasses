@@ -19,7 +19,6 @@
 #include <dataclasses/Utility.h>
 #include <dataclasses/status/I3DOMStatus.h>
 #include <dataclasses/status/I3TriggerStatus.h>
-#include <dataclasses/status/TWRAOMStatus.h>
 
 /**
  * @brief This is the state of the aspects of the detector that people have 
@@ -34,35 +33,25 @@
  * - map of active amanda triggers (and their configurations) and
  * - map of active domhubs (and their settings) ... eventually.
  */
-static const unsigned i3detectorstatus_version_ = 3;
-
-typedef std::map<OMKey, I3DOMStatus> I3DOMStatusMap;
-I3_POINTER_TYPEDEFS(I3DOMStatusMap);
-
-typedef std::map<TriggerKey, I3TriggerStatus> I3TriggerStatusMap;
-I3_POINTER_TYPEDEFS(I3TriggerStatusMap);
+static const unsigned i3detectorstatus_version_ = 4;
 
 class I3DetectorStatus : public I3FrameObject
 {
 public:
   I3Time startTime;
   I3Time endTime;
+
   I3DOMStatusMap domStatus;
-  std::map<OMKey, TWRAOMStatus> aomStatus;
   I3TriggerStatusMap triggerStatus;
-  I3TriggerStatusMap amandaTriggerStatus;
-  std::string daqConfigurationName;
+  std::string daqConfigurationName; // is this used?
 
   I3DetectorStatus() {}
   
   virtual ~I3DetectorStatus();
   
-  //These might be good someday.  Impl when needed
-  //DaqMode daqMode;
-  //FilterMode filterMode;
-  
-
-  template <class Archive> void serialize(Archive & ar, unsigned version);
+  template <class Archive> void load(Archive & ar, unsigned version);
+  template <class Archive> void save(Archive & ar, unsigned version) const;
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
 
 BOOST_CLASS_VERSION(I3DetectorStatus, i3detectorstatus_version_);

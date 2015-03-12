@@ -13,16 +13,17 @@
 #define I3DOMCALIBRATION_H_INCLUDED
 
 #include <string>
-#include "dataclasses/Utility.h"
-#include <icetray/I3Units.h>
-
-#include <boost/math/constants/constants.hpp>
-
 #include <map>
 #include <vector>
 #include <stdint.h>
 #include <sstream>
 #include <cmath>
+
+#include <boost/math/constants/constants.hpp>
+
+#include <icetray/I3Units.h>
+#include <dataclasses/Utility.h>
+#include <icetray/OMKey.h>
 
 
 static const unsigned i3domcalibration_version_ = 11;
@@ -815,6 +816,9 @@ class I3DOMCalibration {
   bool meanFADCChargeValid_;
 
 };
+
+typedef std::map<OMKey, I3DOMCalibration> I3DOMCalibrationMap;
+I3_POINTER_TYPEDEFS(I3DOMCalibrationMap);
 
 BOOST_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);

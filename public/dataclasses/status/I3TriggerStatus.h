@@ -13,10 +13,12 @@
 
 
 #include <string>
+#include <map>
+
+#include <boost/optional.hpp>
 
 #include <dataclasses/Utility.h>
-#include <map>
-#include <boost/optional.hpp>
+#include <dataclasses/TriggerKey.h>
 
 /**
  * @brief A trigger status/configuration object.
@@ -228,6 +230,9 @@ class I3TriggerStatus
 /**
  * pointer type to insulate users from memory management
  */
+typedef std::map<TriggerKey, I3TriggerStatus> I3TriggerStatusMap;
+I3_POINTER_TYPEDEFS(I3TriggerStatusMap);
+
 I3_POINTER_TYPEDEFS(I3TriggerStatus);
 BOOST_CLASS_VERSION(I3TriggerStatus, i3triggerstatus_version_);
 

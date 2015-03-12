@@ -60,16 +60,6 @@ TEST(bin_parameters)
 
     calib->vemCal[omkey] = tank_calib;
 
-    OMKey omkeya(-5,15);
-    TWRCalibration twr_calib;
-    twr_calib.peArea = 2.749593;
-    twr_calib.twrT0 = 1559.88;
-    twr_calib.xtcal.speNetChargeCut = 12690.732408;
-    twr_calib.xtcal.chargeVsAmplCut.slope = 0.026519;
-    twr_calib.xtcal.chargeVsAmplCut.intercept = 9.611726;
-
-    calib->twrCal[omkeya] = twr_calib;
-
     ENSURE_DISTANCE(gain, 
 		    calib->domCal[omkey].GetATWDGain(channel), 
 		    0.0001,
@@ -101,15 +91,6 @@ TEST(bin_parameters)
 		    0.0001,
 	            "Failed to return proper IVEMCalibration MuonWidth");
 
-    ENSURE_DISTANCE(2.749593,
-		    calib->twrCal[omkeya].peArea,
-		    0.0001,
-	            "Failed to return proper TWRCalibration peArea");
-
-    ENSURE_DISTANCE(9.611726,
-		    calib->twrCal[omkeya].xtcal.chargeVsAmplCut.intercept,
-		    0.0001,
-	            "Failed to return proper TWRCalibration xtcal.chargeVsAmplCut.intercept");
     ENSURE_DISTANCE(0.0137063,
 		    calib->domCal[omkey].GetSPEDiscCalib().slope,
 		    0.00001,

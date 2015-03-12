@@ -2,6 +2,7 @@
 #define I3DOMSTATUS_H_INCLUDED
 
 #include "dataclasses/Utility.h"
+#include <icetray/OMKey.h>
 #include <boost/serialization/version.hpp>
 
 static const unsigned i3domstatus_version_ = 6;
@@ -234,6 +235,9 @@ public:
 
   template <class Archive> void serialize(Archive & ar, const unsigned version);
 };
+
+typedef std::map<OMKey, I3DOMStatus> I3DOMStatusMap;
+I3_POINTER_TYPEDEFS(I3DOMStatusMap);
 
 I3_POINTER_TYPEDEFS(I3DOMStatus);
 BOOST_CLASS_VERSION(I3DOMStatus, i3domstatus_version_);

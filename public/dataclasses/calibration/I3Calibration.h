@@ -16,21 +16,13 @@
 
 #include "dataclasses/Utility.h"
 #include "dataclasses/calibration/I3DOMCalibration.h"
-#include "dataclasses/calibration/I3AMANDAOMCalibration.h"
 #include "dataclasses/calibration/I3VEMCalibration.h"
-#include "dataclasses/calibration/TWRCalibration.h"
 #include "dataclasses/I3Time.h"
 #include "icetray/OMKey.h"
 #include <icetray/I3FrameObject.h>
 #include <icetray/I3DefaultName.h>
 
-static const unsigned i3calibration_version_ = 3;
-
-typedef std::map<OMKey, I3DOMCalibration> I3DOMCalibrationMap;
-I3_POINTER_TYPEDEFS(I3DOMCalibrationMap);
-
-typedef std::map<OMKey, I3VEMCalibration> I3VEMCalibrationMap;
-I3_POINTER_TYPEDEFS(I3VEMCalibrationMap);
+static const unsigned i3calibration_version_ = 4;
 
 class I3Calibration : public I3FrameObject
 {
@@ -43,13 +35,11 @@ public:
   virtual ~I3Calibration();
     
   I3DOMCalibrationMap domCal;
-  std::map<OMKey, I3AMANDAOMCalibration> amandaCal;
   I3VEMCalibrationMap vemCal;
-  std::map<OMKey, TWRCalibration> twrCal;
-  double TWRGlobalT0;
-  double TWRI3TimeOffset;
 
-  template <class Archive> void serialize(Archive & ar, unsigned version);
+  template <class Archive> void load(Archive & ar, unsigned version);
+  template <class Archive> void save(Archive & ar, unsigned version) const;
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
 
 BOOST_CLASS_VERSION(I3Calibration, i3calibration_version_);
