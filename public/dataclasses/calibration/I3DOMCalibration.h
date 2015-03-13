@@ -21,6 +21,8 @@
 
 #include <boost/math/constants/constants.hpp>
 
+#include <dataclasses/external/CompareFloatingPoint.h>
+
 #include <icetray/I3Units.h>
 #include <dataclasses/Utility.h>
 #include <icetray/OMKey.h>
@@ -43,7 +45,8 @@ struct LinearFit
   
   bool operator==(const LinearFit rhs) const
   {
-    return slope == rhs.slope && intercept == rhs.intercept;
+    return (CompareFloatingPoint::Compare_NanEqual(slope,rhs.slope) && 
+        CompareFloatingPoint::Compare_NanEqual(intercept,rhs.intercept));
   }
   bool operator!=(const LinearFit rhs) const
   {
@@ -73,9 +76,9 @@ struct QuadraticFit
     
   bool operator==(const QuadraticFit rhs) const
   {
-    return (quadFitA == rhs.quadFitA &&
-        quadFitB == rhs.quadFitB &&
-        quadFitC == rhs.quadFitC);
+    return (CompareFloatingPoint::Compare_NanEqual(quadFitA,rhs.quadFitA) &&
+        CompareFloatingPoint::Compare_NanEqual(quadFitB,rhs.quadFitB) &&
+        CompareFloatingPoint::Compare_NanEqual(quadFitC,rhs.quadFitC));
   }
   bool operator!=(const QuadraticFit rhs) const
   {
@@ -137,12 +140,14 @@ struct SPEChargeDistribution
   
   bool operator==(const SPEChargeDistribution rhs) const
   {
-    return (exp_amp_ == rhs.exp_amp_ &&
-        exp_width_ == rhs.exp_width_ &&
-        gaus_amp_ == rhs.gaus_amp_ &&
-        gaus_mean_ == rhs.gaus_mean_ &&
-        gaus_width_ == rhs.gaus_width_ &&
-        isValid_ == rhs.isValid_);
+    if (isValid_ && rhs.isValid_)
+      return (CompareFloatingPoint::Compare_NanEqual(exp_amp_,rhs.exp_amp_) &&
+          CompareFloatingPoint::Compare_NanEqual(exp_width_,rhs.exp_width_) &&
+          CompareFloatingPoint::Compare_NanEqual(gaus_amp_,rhs.gaus_amp_) &&
+          CompareFloatingPoint::Compare_NanEqual(gaus_mean_,rhs.gaus_mean_) &&
+          CompareFloatingPoint::Compare_NanEqual(gaus_width_,rhs.gaus_width_));
+    else
+      return isValid_ == rhs.isValid_;
   }
   bool operator!=(const SPEChargeDistribution rhs) const
   {
@@ -191,13 +196,13 @@ struct TauParam
   
   bool operator==(const TauParam rhs) const
   {
-    return (P0 == rhs.P0 &&
-        P1 == rhs.P1 &&
-        P2 == rhs.P2 &&
-        P3 == rhs.P3 &&
-        P4 == rhs.P4 &&
-        P5 == rhs.P5 &&
-        TauFrac == rhs.TauFrac);
+    return (CompareFloatingPoint::Compare_NanEqual(P0,rhs.P0) &&
+        CompareFloatingPoint::Compare_NanEqual(P1,rhs.P1) &&
+        CompareFloatingPoint::Compare_NanEqual(P2,rhs.P2) &&
+        CompareFloatingPoint::Compare_NanEqual(P3,rhs.P3) &&
+        CompareFloatingPoint::Compare_NanEqual(P4,rhs.P4) &&
+        CompareFloatingPoint::Compare_NanEqual(P5,rhs.P5) &&
+        CompareFloatingPoint::Compare_NanEqual(TauFrac,rhs.TauFrac));
   }
   bool operator!=(const TauParam rhs) const
   {
@@ -608,38 +613,49 @@ class I3DOMCalibration {
   
   bool operator==(const I3DOMCalibration& rhs) const
   {
-    return (droopTimeConstants_ == rhs.droopTimeConstants_ &&
-        temperature_ == rhs.temperature_ &&
-        fadcGain_ == rhs.fadcGain_ &&
+    return (CompareFloatingPoint::Compare_NanEqual(droopTimeConstants_[0],rhs.droopTimeConstants_[0]) &&
+        CompareFloatingPoint::Compare_NanEqual(droopTimeConstants_[1],rhs.droopTimeConstants_[1]) &&
+        CompareFloatingPoint::Compare_NanEqual(temperature_,rhs.temperature_) &&
+        CompareFloatingPoint::Compare_NanEqual(fadcGain_,rhs.fadcGain_) &&
         fadcBaselineFit_ == rhs.fadcBaselineFit_ &&
-        fadcBeaconBaseline_ == rhs.fadcBeaconBaseline_ &&
-        fadcDeltaT_ == rhs.fadcDeltaT_ &&
-        frontEndImpedance_ == rhs.frontEndImpedance_ &&
+        CompareFloatingPoint::Compare_NanEqual(fadcBeaconBaseline_,rhs.fadcBeaconBaseline_) &&
+        CompareFloatingPoint::Compare_NanEqual(fadcDeltaT_,rhs.fadcDeltaT_) &&
+        CompareFloatingPoint::Compare_NanEqual(frontEndImpedance_,rhs.frontEndImpedance_) &&
         tauparameters_ == rhs.tauparameters_ &&
-        ampGains_ == rhs.ampGains_ &&
-        atwdFreq_ == rhs.atwdFreq_ &&
-        atwdBins_ == rhs.atwdBins_ &&
+        CompareFloatingPoint::Compare_NanEqual(ampGains_[0],rhs.ampGains_[0]) &&
+        CompareFloatingPoint::Compare_NanEqual(ampGains_[1],rhs.ampGains_[1]) &&
+        CompareFloatingPoint::Compare_NanEqual(ampGains_[2],rhs.ampGains_[2]) &&
+        atwdFreq_[0] == rhs.atwdFreq_[0] &&
+        atwdFreq_[1] == rhs.atwdFreq_[1] &&
+        std::equal(&atwdBins_[0][0][0],&atwdBins_[0][0][0] + 
+            2*N_ATWD_CHANNELS*N_ATWD_BINS, &rhs.atwdBins_[0][0][0],
+            CompareFloatingPoint::Compare_NanEqual) &&
         pmtTransitTime_ == rhs.pmtTransitTime_ &&
         hvGainRelation_ == rhs.hvGainRelation_ &&
         domcalVersion_ == rhs.domcalVersion_ &&
-        atwdBeaconBaselines_ == rhs.atwdBeaconBaselines_ &&
+        std::equal(&atwdBeaconBaselines_[0][0],&atwdBeaconBaselines_[0][0] +
+            2*N_ATWD_CHANNELS, &rhs.atwdBeaconBaselines_[0][0],
+            CompareFloatingPoint::Compare_NanEqual) &&
         toroidType_ == rhs.toroidType_ &&
-        atwdDeltaT_ == rhs.atwdDeltaT_ &&
+        CompareFloatingPoint::Compare_NanEqual(atwdDeltaT_[0],rhs.atwdDeltaT_[0]) &&
+        CompareFloatingPoint::Compare_NanEqual(atwdDeltaT_[1],rhs.atwdDeltaT_[1]) &&
         speDiscrimCalib_ == rhs.speDiscrimCalib_ &&
         mpeDiscrimCalib_ == rhs.mpeDiscrimCalib_ &&
         pmtDiscrimCalib_ == rhs.pmtDiscrimCalib_ &&
-        relativeDomEff_ == rhs.relativeDomEff_ &&
-        noiseRate_ == rhs.noiseRate_ &&
-        noiseThermalRate_ == rhs.noiseThermalRate_ &&
-        noiseDecayRate_ == rhs.noiseDecayRate_ &&
-        noiseScintillationMean_ == rhs.noiseScintillationMean_ &&
-        noiseScintillationSigma_ == rhs.noiseScintillationSigma_ &&
-        noiseScintillationHits_ == rhs.noiseScintillationHits_ &&
+        CompareFloatingPoint::Compare_NanEqual(relativeDomEff_,rhs.relativeDomEff_) &&
+        CompareFloatingPoint::Compare_NanEqual(noiseRate_,rhs.noiseRate_) &&
+        CompareFloatingPoint::Compare_NanEqual(noiseThermalRate_,rhs.noiseThermalRate_) &&
+        CompareFloatingPoint::Compare_NanEqual(noiseDecayRate_,rhs.noiseDecayRate_) &&
+        CompareFloatingPoint::Compare_NanEqual(noiseScintillationMean_,rhs.noiseScintillationMean_) &&
+        CompareFloatingPoint::Compare_NanEqual(noiseScintillationSigma_,rhs.noiseScintillationSigma_) &&
+        CompareFloatingPoint::Compare_NanEqual(noiseScintillationHits_,rhs.noiseScintillationHits_) &&
         combinedSPEFit_ == rhs.combinedSPEFit_ &&
-        meanATWDCharge_ == rhs.meanATWDCharge_ &&
-        meanFADCCharge_ == rhs.meanFADCCharge_ &&
-        meanATWDChargeValid_ == rhs.meanATWDChargeValid_ &&
-        meanFADCChargeValid_ == rhs.meanFADCChargeValid_);
+        ((meanATWDChargeValid_ && rhs.meanATWDChargeValid_ &&
+        CompareFloatingPoint::Compare_NanEqual(meanATWDCharge_,rhs.meanATWDCharge_)) ||
+        meanATWDChargeValid_ == rhs.meanATWDChargeValid_) &&
+        ((meanFADCChargeValid_ && rhs.meanFADCChargeValid_ &&
+        CompareFloatingPoint::Compare_NanEqual(meanFADCCharge_,rhs.meanFADCCharge_)) ||
+        meanFADCChargeValid_ == rhs.meanFADCChargeValid_));
   }
   bool operator!=(const I3DOMCalibration& rhs) const
   {
@@ -815,6 +831,10 @@ class I3DOMCalibration {
   bool meanATWDChargeValid_;
   bool meanFADCChargeValid_;
 
+  /**
+   *  Allow the Diff compression class to directly use private data
+   */
+  friend class I3DOMCalibrationDiff;
 };
 
 typedef std::map<OMKey, I3DOMCalibration> I3DOMCalibrationMap;

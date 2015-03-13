@@ -43,6 +43,8 @@ namespace CompareFloatingPoint{
   bool Compare(float A, float B, int32_t maxUlps = 10);
   bool Compare(double A, double B, int64_t maxUlps = 10);
   
+  bool Compare_NanEqual(double A, double B);
+  
   bool IsInfinite(float);
   bool IsNan(float);
   int32_t Sign(float);
@@ -242,4 +244,10 @@ inline bool CompareFloatingPoint::Compare(double A, double B, int64_t maxUlps){
   return false;
 }
 
+inline bool CompareFloatingPoint::Compare_NanEqual(double A, double B)
+{
+  return ((CompareFloatingPoint::IsNan(A) && CompareFloatingPoint::IsNan(B))
+        || A == B);
+}
+  
 #endif
