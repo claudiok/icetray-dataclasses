@@ -24,9 +24,7 @@ I3DOMCalibration::I3DOMCalibration()
     noiseScintillationSigma_(NAN),
     noiseScintillationHits_(NAN),
     meanATWDCharge_(NAN),
-    meanFADCCharge_(NAN),
-    meanATWDChargeValid_(false),
-    meanFADCChargeValid_(false)
+    meanFADCCharge_(NAN)
 {
   fadcBeaconBaseline_ = NAN;
   atwdBeaconBaselines_[0][0] = NAN;
@@ -437,7 +435,23 @@ SPEChargeDistribution::serialize(Archive& ar, unsigned version)
   ar & make_nvp("GausAmp", gaus_amp_);
   ar & make_nvp("GausMean", gaus_mean_);
   ar & make_nvp("GausWidth", gaus_width_);
-  ar & make_nvp("IsValid", isValid_);
+  if (version==0)
+  {
+    // the isValid flag existed in version 0. replaced by setting member
+    // variables to NAN. The struct is considered invalid if any memeber
+    // variable is NAN.
+    bool isValid;
+    ar & make_nvp("IsValid", isValid);
+    if (!isValid)
+    {
+      // make sure the structure is invalid if marked as such
+      exp_amp_=NAN;
+      exp_width_=NAN;
+      gaus_amp_=NAN;
+      gaus_mean_=NAN;
+      gaus_width_=NAN;
+    }
+  }
 }
 
 I3_SERIALIZABLE(SPEChargeDistribution);
@@ -684,8 +698,18 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("combinedSPEFit", combinedSPEFit_);
       ar & make_nvp("meanATWDCharge", meanATWDCharge_);
       ar & make_nvp("meanFADCCharge", meanFADCCharge_);
-      ar & make_nvp("meanATWDChargeValid", meanATWDChargeValid_);
-      ar & make_nvp("meanFADCChargeValid", meanFADCChargeValid_);
+    }
+  if (version == 11)
+    {
+      // these only existed in version 11, replaced with
+      // meanATWDCharge_/meanFADCCharge_ == NaN in v12
+      bool meanATWDChargeValid;
+      bool meanFADCChargeValid;
+      ar & make_nvp("meanATWDChargeValid", meanATWDChargeValid);
+      ar & make_nvp("meanFADCChargeValid", meanFADCChargeValid);
+      
+      if (!meanATWDChargeValid) meanATWDCharge_=NAN;
+      if (!meanFADCChargeValid) meanFADCCharge_=NAN;
     }
 }
 

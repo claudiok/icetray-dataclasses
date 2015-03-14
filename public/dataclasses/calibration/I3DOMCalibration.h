@@ -28,11 +28,11 @@
 #include <icetray/OMKey.h>
 
 
-static const unsigned i3domcalibration_version_ = 11;
+static const unsigned i3domcalibration_version_ = 12;
 static const unsigned linearfit_version_ = 0;
 static const unsigned quadraticfit_version_ = 0;
 static const unsigned tauparam_version_ = 0;
-static const unsigned SPEChargeDistribution_version_ = 0;
+static const unsigned SPEChargeDistribution_version_ = 1;
 
 /**
  * @brief A struct to hold a linear fit 
@@ -115,39 +115,42 @@ struct SPEChargeDistribution
                             exp_width_(NAN),
                             gaus_amp_(NAN),
                             gaus_mean_(NAN),
-                            gaus_width_(NAN),
-                            isValid_(false) { }
+                            gaus_width_(NAN) { }
 
   SPEChargeDistribution(double exp_amp,
                         double exp_width,
                         double gaus_amp,
                         double gaus_mean,
-                        double gaus_width,
-                        bool isValid) :
+                        double gaus_width) :
     exp_amp_(exp_amp),
     exp_width_(exp_width),
     gaus_amp_(gaus_amp),
     gaus_mean_(gaus_mean),
-    gaus_width_(gaus_width),
-    isValid_(isValid) { }
+    gaus_width_(gaus_width) { }
 
   double exp_amp_;
   double exp_width_;
   double gaus_amp_;
   double gaus_mean_;
   double gaus_width_;
-  bool isValid_;
+  
+  bool IsValid() const
+  {
+    // consider valid only if no value is NaN
+    return (std::isnan(exp_amp_) ||
+        std::isnan(exp_width_) ||
+        std::isnan(gaus_amp_) ||
+        std::isnan(gaus_mean_) ||
+        std::isnan(gaus_width_));
+  }
   
   bool operator==(const SPEChargeDistribution rhs) const
   {
-    if (isValid_ && rhs.isValid_)
-      return (CompareFloatingPoint::Compare_NanEqual(exp_amp_,rhs.exp_amp_) &&
-          CompareFloatingPoint::Compare_NanEqual(exp_width_,rhs.exp_width_) &&
-          CompareFloatingPoint::Compare_NanEqual(gaus_amp_,rhs.gaus_amp_) &&
-          CompareFloatingPoint::Compare_NanEqual(gaus_mean_,rhs.gaus_mean_) &&
-          CompareFloatingPoint::Compare_NanEqual(gaus_width_,rhs.gaus_width_));
-    else
-      return isValid_ == rhs.isValid_;
+    return (CompareFloatingPoint::Compare_NanEqual(exp_amp_,rhs.exp_amp_) &&
+        CompareFloatingPoint::Compare_NanEqual(exp_width_,rhs.exp_width_) &&
+        CompareFloatingPoint::Compare_NanEqual(gaus_amp_,rhs.gaus_amp_) &&
+        CompareFloatingPoint::Compare_NanEqual(gaus_mean_,rhs.gaus_mean_) &&
+        CompareFloatingPoint::Compare_NanEqual(gaus_width_,rhs.gaus_width_));
   }
   bool operator!=(const SPEChargeDistribution rhs) const
   {
@@ -585,17 +588,15 @@ class I3DOMCalibration {
    */
   double GetMeanATWDCharge() const {return meanATWDCharge_;}
   double GetMeanFADCCharge() const {return meanFADCCharge_;}
-  bool IsMeanATWDChargeValid() const {return meanATWDChargeValid_;}
-  bool IsMeanFADCChargeValid() const {return meanFADCChargeValid_;}
+  bool IsMeanATWDChargeValid() const {return std::isnan(meanATWDCharge_);}
+  bool IsMeanFADCChargeValid() const {return std::isnan(meanFADCCharge_);}
 
-  void SetMeanATWDCharge(double charge, bool valid=true) {
+  void SetMeanATWDCharge(double charge) {
     meanATWDCharge_ = charge;
-    meanATWDChargeValid_ = valid;
   }
 
-  void SetMeanFADCCharge(double charge, bool valid=true) {
+  void SetMeanFADCCharge(double charge) {
     meanFADCCharge_ = charge;
-    meanFADCChargeValid_ = valid;
   }
 
   SPEChargeDistribution GetCombinedSPEChargeDistribution() const {
@@ -644,12 +645,8 @@ class I3DOMCalibration {
         CompareFloatingPoint::Compare_NanEqual(noiseScintillationSigma_,rhs.noiseScintillationSigma_) &&
         CompareFloatingPoint::Compare_NanEqual(noiseScintillationHits_,rhs.noiseScintillationHits_) &&
         combinedSPEFit_ == rhs.combinedSPEFit_ &&
-        ((meanATWDChargeValid_ && rhs.meanATWDChargeValid_ &&
-        CompareFloatingPoint::Compare_NanEqual(meanATWDCharge_,rhs.meanATWDCharge_)) ||
-        meanATWDChargeValid_ == rhs.meanATWDChargeValid_) &&
-        ((meanFADCChargeValid_ && rhs.meanFADCChargeValid_ &&
-        CompareFloatingPoint::Compare_NanEqual(meanFADCCharge_,rhs.meanFADCCharge_)) ||
-        meanFADCChargeValid_ == rhs.meanFADCChargeValid_));
+        CompareFloatingPoint::Compare_NanEqual(meanATWDCharge_,rhs.meanATWDCharge_) &&
+        CompareFloatingPoint::Compare_NanEqual(meanFADCCharge_,rhs.meanFADCCharge_));
   }
   bool operator!=(const I3DOMCalibration& rhs) const
   {
@@ -817,8 +814,6 @@ class I3DOMCalibration {
    */
   double meanATWDCharge_;
   double meanFADCCharge_;
-  bool meanATWDChargeValid_;
-  bool meanFADCChargeValid_;
 
   /**
    *  Allow the Diff compression class to directly use private data
