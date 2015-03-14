@@ -341,8 +341,6 @@ class I3DOMCalibration {
   void SetFrontEndImpedance(double feImped)
     {
       frontEndImpedance_ = feImped;
-      //New toroids should be 50 ohm, while old are 43 ohm.
-      toroidType_ = (frontEndImpedance_ > 48*I3Units::ohm) ? NEW_TOROID : OLD_TOROID;
     }
     
   /**
@@ -578,11 +576,8 @@ class I3DOMCalibration {
   };
   
   ToroidType GetToroidType() const{
-    return(toroidType_);
-  }
-  
-  void SetToroidType(ToroidType type){
-    toroidType_ = type;
+    //New toroids should be 50 ohm, while old are 43 ohm.
+    return((frontEndImpedance_ > 48*I3Units::ohm) ? NEW_TOROID : OLD_TOROID);
   }
   
   /**
@@ -636,7 +631,6 @@ class I3DOMCalibration {
         std::equal(&atwdBeaconBaselines_[0][0],&atwdBeaconBaselines_[0][0] +
             2*N_ATWD_CHANNELS, &rhs.atwdBeaconBaselines_[0][0],
             CompareFloatingPoint::Compare_NanEqual) &&
-        toroidType_ == rhs.toroidType_ &&
         CompareFloatingPoint::Compare_NanEqual(atwdDeltaT_[0],rhs.atwdDeltaT_[0]) &&
         CompareFloatingPoint::Compare_NanEqual(atwdDeltaT_[1],rhs.atwdDeltaT_[1]) &&
         speDiscrimCalib_ == rhs.speDiscrimCalib_ &&
@@ -751,11 +745,6 @@ class I3DOMCalibration {
    */
 
   double atwdBeaconBaselines_[2][N_ATWD_CHANNELS];
-
-  /**
-   *  Stores the toroid type (pre-2006 droopy or post-2006 sligthly-less-droopy) 
-   */
-  ToroidType toroidType_;
 
   /**
    *  Store the ATWD time offset from domcal calibration.  the ATWD used in transit time

@@ -316,7 +316,8 @@ I3DOMCalibration::ATWDPulseTemplate(unsigned channel, bool droopy) const
   if (channel > 2)
     log_fatal("Unknown ATWD channel %u", channel);
   
-  switch (toroidType_){
+  const ToroidType toroidType = GetToroidType();
+  switch (toroidType){
     case OLD_TOROID: 
       if(!droopy)
         return(DroopedSPETemplate(ATWDOldToroidTemplate[channel]));
@@ -334,7 +335,7 @@ I3DOMCalibration::ATWDPulseTemplate(unsigned channel, bool droopy) const
                                 droopTimeConstants_[0],
                                 droopTimeConstants_[1]));
     default:
-      log_fatal("Unknown toroid type %d", toroidType_);
+      log_fatal("Unknown toroid type %d", toroidType);
   }
 }
 
@@ -686,9 +687,6 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
       ar & make_nvp("meanATWDChargeValid", meanATWDChargeValid_);
       ar & make_nvp("meanFADCChargeValid", meanFADCChargeValid_);
     }
-  //New toroids should be 50 ohm, while old are 43 ohm.
-  toroidType_ = (frontEndImpedance_ > 48*I3Units::ohm) ? NEW_TOROID : OLD_TOROID;
 }
 
 I3_SERIALIZABLE(I3DOMCalibration);
-

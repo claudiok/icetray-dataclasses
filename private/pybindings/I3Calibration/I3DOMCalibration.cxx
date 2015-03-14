@@ -39,7 +39,7 @@ void register_I3DOMCalibration()
                             (TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)      \
                             (SPEDiscCalib)      \
                             (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)\
-                            (ToroidType)(DomNoiseThermalRate)(DomNoiseDecayRate)      \
+                            (DomNoiseThermalRate)(DomNoiseDecayRate)      \
                             (DomNoiseScintillationMean)(DomNoiseScintillationSigma)   \
                             (DomNoiseScintillationHits)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
@@ -48,6 +48,7 @@ void register_I3DOMCalibration()
                          (ATWDFreqFit)(ATWDGain)(ATWDBinCalibSlope)
       BOOST_PP_SEQ_FOR_EACH(WRAP_EVIL_PROP, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
+      .add_property("toroid_type", &I3DOMCalibration::GetToroidType)
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
       .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
       .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)
