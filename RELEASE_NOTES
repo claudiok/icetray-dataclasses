@@ -3,6 +3,24 @@
 # $Date: $
 #
 
+Interface Changes : 
+
+New Features :
+
+Bug Fixes :
+
+March 15, 2015, Alex Olivas  (olivas@icecube.umd.edu)
+--------------------------------------------------------------------
+ V15-03-00 
+  o AMANDA classes are no longer visible.
+  o Give wavedeform the ability to apply per digitizer s.p.e. corrections. 
+    Add necessary calibration constants to I3DOMCalibration. 
+    Remove unused old constants from I3DOMCalibration.
+  o I3MCHit.weight is no longer accessible from python
+  o New MJD for the leap second test.  Go Navy!
+  o I3Particle::Clone returns a copy of the particle, but with a new ID.
+  o new I3MCTree, I3MCTreePhysicsLibrary, and revamped I3MCTreeUtils
+
 November 20, 2014, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
  V14-11-00 - Minor release
