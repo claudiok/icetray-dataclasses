@@ -440,7 +440,7 @@ SPEChargeDistribution::serialize(Archive& ar, unsigned version)
     // the isValid flag existed in version 0. replaced by setting member
     // variables to NAN. The struct is considered invalid if any memeber
     // variable is NAN.
-    bool isValid;
+    bool isValid(false);
     ar & make_nvp("IsValid", isValid);
     if (!isValid)
     {
@@ -703,8 +703,8 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     {
       // these only existed in version 11, replaced with
       // meanATWDCharge_/meanFADCCharge_ == NaN in v12
-      bool meanATWDChargeValid;
-      bool meanFADCChargeValid;
+      bool meanATWDChargeValid(false);
+      bool meanFADCChargeValid(false);
       ar & make_nvp("meanATWDChargeValid", meanATWDChargeValid);
       ar & make_nvp("meanFADCChargeValid", meanFADCChargeValid);
       

@@ -23,17 +23,6 @@ template <class Archive>
   }
 
 
-bool operator==(const I3TankGeo& lhs, const I3TankGeo& rhs){
-  return ( lhs.position == rhs.position &&
-	   lhs.orientation == rhs.orientation &&
-	   lhs.tankradius == rhs.tankradius &&
-	   lhs.tankheight == rhs.tankheight &&
-	   lhs.fillheight == rhs.fillheight &&
-	   lhs.snowheight == rhs.snowheight &&
-	   lhs.tanktype == rhs.tanktype &&
-	   lhs.omKeyList_ == rhs.omKeyList_ );
-}
-
 I3_SERIALIZABLE(I3TankGeo);
 I3_SERIALIZABLE(I3StationGeo);
 I3_SERIALIZABLE(I3StationGeoMap);

@@ -46,14 +46,28 @@ struct I3TankGeo
   I3Vector<OMKey> omKeyList_;
   double snowheight; // snow "overburden" (use I3Units)
   TankType tanktype; // Type of tank.
+  
+  bool operator==(const I3TankGeo& rhs) const
+  {
+    return (position == rhs.position &&
+            orientation == rhs.orientation &&
+            tankradius == rhs.tankradius &&
+            tankheight == rhs.tankheight &&
+            fillheight == rhs.fillheight &&
+            snowheight == rhs.snowheight &&
+            tanktype == rhs.tanktype &&
+            omKeyList_ == rhs.omKeyList_);
+  }
+  bool operator!=(const I3TankGeo& rhs)
+  {
+    return !operator==(rhs);
+  }
 
   friend class boost::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };
-
-bool operator==(const I3TankGeo& lhs, const I3TankGeo& rhs);
 
 BOOST_CLASS_VERSION(I3TankGeo, i3tankgeo_version_);
 I3_POINTER_TYPEDEFS(I3TankGeo);
