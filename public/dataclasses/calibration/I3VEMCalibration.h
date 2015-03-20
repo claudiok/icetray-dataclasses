@@ -21,8 +21,9 @@
 static const unsigned i3vemcalibration_version_ = 0;
 
 
-struct I3VEMCalibration
-{    
+class I3VEMCalibration
+{
+public:
   /**
    * Average number of PE per VEM  
    */
@@ -67,7 +68,9 @@ struct I3VEMCalibration
   {
     return !operator==(rhs);
   }
-  
+
+private:
+  friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };

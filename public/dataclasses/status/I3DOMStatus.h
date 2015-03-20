@@ -233,6 +233,8 @@ public:
    */
   double mpeThreshold;
 
+private:
+  friend class boost::serialization::access;
   template <class Archive> void serialize(Archive & ar, const unsigned version);
 };
 

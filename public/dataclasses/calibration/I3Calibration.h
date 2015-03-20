@@ -36,7 +36,21 @@ public:
     
   I3DOMCalibrationMap domCal;
   I3VEMCalibrationMap vemCal;
-
+  
+  bool operator==(const I3Calibration& rhs)
+  {
+    return (startTime == rhs.startTime &&
+            endTime == rhs.endTime &&
+            domCal == rhs.domCal &&
+            vemCal == rhs.vemCal);
+  }
+  bool operator!=(const I3Calibration& rhs)
+  {
+    return !operator==(rhs);
+  }
+  
+private:
+  friend class boost::serialization::access;
   template <class Archive> void load(Archive & ar, unsigned version);
   template <class Archive> void save(Archive & ar, unsigned version) const;
   BOOST_SERIALIZATION_SPLIT_MEMBER();

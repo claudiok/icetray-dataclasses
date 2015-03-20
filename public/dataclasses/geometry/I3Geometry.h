@@ -60,6 +60,18 @@ public:
   I3Time endTime;
 
   const I3Geometry& operator=(const I3Geometry& geometry);
+  
+  bool operator==(const I3Geometry& rhs)
+  {
+    return (omgeo == rhs.omgeo &&
+            stationgeo == rhs.stationgeo &&
+            startTime == rhs.startTime &&
+            endTime == rhs.endTime);
+  }
+  bool operator!=(const I3Geometry& rhs)
+  {
+    return !operator==(rhs);
+  }
 
   friend class boost::serialization::access;
 

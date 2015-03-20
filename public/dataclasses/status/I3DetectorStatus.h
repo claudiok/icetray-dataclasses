@@ -48,7 +48,22 @@ public:
   I3DetectorStatus() {}
   
   virtual ~I3DetectorStatus();
-  
+
+  bool operator==(const I3DetectorStatus& rhs)
+  {
+    return (startTime == rhs.startTime &&
+            endTime == rhs.endTime &&
+            domStatus == rhs.domStatus &&
+            triggerStatus == rhs.triggerStatus &&
+            daqConfigurationName == rhs.daqConfigurationName);
+  }
+  bool operator!=(const I3DetectorStatus& rhs)
+  {
+    return !operator==(rhs);
+  }
+
+private:
+  friend class boost::serialization::access;  
   template <class Archive> void load(Archive & ar, unsigned version);
   template <class Archive> void save(Archive & ar, unsigned version) const;
   BOOST_SERIALIZATION_SPLIT_MEMBER();

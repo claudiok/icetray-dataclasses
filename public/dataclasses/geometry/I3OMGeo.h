@@ -25,8 +25,9 @@ static const unsigned i3omgeo_version_ = 1;
 //Simple struct to contain all pertinent OM info.  
 //See I3Geometry.h for more info
 
-struct I3OMGeo 
+class I3OMGeo 
 {
+public:
     enum OMType {UnknownType = 0, AMANDA = 10, IceCube = 20, IceTop = 30};
 
     I3OMGeo():omtype(UnknownType){} 
@@ -58,18 +59,19 @@ struct I3OMGeo
      */
     inline I3Direction GetDirection() const {return orientation.GetDir();}
     
-    bool operator==(const I3OMGeo rhs) const
+    bool operator==(const I3OMGeo& rhs) const
     {
       return (position == rhs.position &&
               orientation == rhs.orientation &&
               omtype == rhs.omtype &&
               area == rhs.area);
     }
-    bool operator!=(const I3OMGeo rhs) const
+    bool operator!=(const I3OMGeo& rhs) const
     {
       return !operator==(rhs);
     }
-
+    
+private:
     friend class boost::serialization::access;
     template <class Archive>
     void serialize(Archive& ar, unsigned version);
