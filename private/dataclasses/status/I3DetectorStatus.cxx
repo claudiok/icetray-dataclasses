@@ -20,7 +20,6 @@ template <class Archive>
 void
 I3DetectorStatus::load(Archive& ar, unsigned version)
 {
-  std::cout<<"I3DetectorStatus::load version = "<<version<<std::endl;
   if (version>i3detectorstatus_version_)
     log_fatal("Attempting to read version %u from file but running version %u of I3DetectorStatus class.",
               version,i3detectorstatus_version_);

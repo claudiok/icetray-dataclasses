@@ -23,7 +23,6 @@ I3Calibration::save(Archive& ar, unsigned version) const
 template <class Archive>
 void 
 I3Calibration::load(Archive& ar, unsigned version) {
-  std::cout<<"I3Calibration::load version = "<<version<<std::endl;
   if (version>i3calibration_version_)
     log_fatal("Attempting to read version %u from file but running version %u of I3Calibration class.",
               version,i3calibration_version_);
