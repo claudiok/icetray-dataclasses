@@ -56,6 +56,18 @@ I3RecoPulseSeriesMapUnion::Apply(const I3Frame &frame) const
 	return unified_;
 }
 
+bool
+I3RecoPulseSeriesMapUnion::operator==(const I3RecoPulseSeriesMapUnion& other) const
+{
+	return keys_ == other.keys_;
+}
+
+bool
+I3RecoPulseSeriesMapUnion::operator!=(const I3RecoPulseSeriesMapUnion& other) const
+{
+	return keys_ != other.keys_;
+}
+
 template <class Archive>
 void
 I3RecoPulseSeriesMapUnion::serialize(Archive& ar, unsigned version)

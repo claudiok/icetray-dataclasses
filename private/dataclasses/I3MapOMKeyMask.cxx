@@ -7,6 +7,7 @@
  *  
  */
 
+#include <algorithm>
 #include "dataclasses/I3MapOMKeyMask.h"
 #include "dataclasses/physics/I3RecoPulse.h"
 #include "boost/make_shared.hpp"
@@ -436,6 +437,20 @@ I3RecoPulseSeriesMapMask::ApplyBinaryOperator(const I3RecoPulseSeriesMapMask &ot
 	return newmask;
 }
 
+bool
+I3RecoPulseSeriesMapMask::operator==(const I3RecoPulseSeriesMapMask &other) const
+{
+	return (key_ == other.key_ &&
+			omkey_mask_ == other.omkey_mask_ &&
+			element_masks_ == other.element_masks_);
+}
+
+bool
+I3RecoPulseSeriesMapMask::operator!=(const I3RecoPulseSeriesMapMask &other) const
+{
+	return !operator==(other);
+}
+
 boost::shared_ptr<const I3RecoPulseSeriesMap>
 I3RecoPulseSeriesMapMask::Apply(const I3Frame &frame) const
 {
@@ -692,6 +707,14 @@ size_t
 I3RecoPulseSeriesMapMask::bitmask::size() const
 {
 	return 8*sizeof(mask_t)*size_ - padding_;
+}
+
+bool
+I3RecoPulseSeriesMapMask::bitmask::operator==(const bitmask& other) const
+{
+	return (size_ == other.size_ &&
+			padding_ == other.padding_ &&
+			std::equal(mask_,mask_+sizeof(mask_t)*size_,other.mask_));
 }
 
 template <class Archive>

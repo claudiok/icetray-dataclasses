@@ -31,6 +31,9 @@ public:
 	
 	I3RecoPulseSeriesMapConstPtr Apply(const I3Frame&) const;
 	std::vector<std::string> GetSources() const { return keys_; }
+    
+	bool operator==(const I3RecoPulseSeriesMapUnion&) const;
+	bool operator!=(const I3RecoPulseSeriesMapUnion&) const;
 private:
 	std::vector<std::string> keys_;
 	mutable I3RecoPulseSeriesMapPtr unified_;

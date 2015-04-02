@@ -81,6 +81,18 @@ class I3RecoPulseSeriesMapMaskTest(unittest.TestCase):
 		
 		self.assertEquals(mask1.any(), False)
 		self.assertEquals(mask1.sum(), 0)
+	
+	def testEqual(self):
+		mask1 = self.frame['Mask1']
+		mask2 = self.frame['Mask2']
+		mask3 = dataclasses.I3RecoPulseSeriesMapMask(mask1)
+		
+		self.assertNotEquals(mask1,mask2)
+		
+		self.assertEquals(mask1.source,mask3.source)
+		self.assertEquals(mask1.bits,mask3.bits)
+		self.assertEquals(mask1,mask3)
+		self.assertEquals(mask1 != mask3,False)
 		
 if __name__ == '__main__':
 	unittest.main()

@@ -116,6 +116,9 @@ public:
 	I3RecoPulseSeriesMapMask& operator|=(const I3RecoPulseSeriesMapMask&);
 	I3RecoPulseSeriesMapMask& operator^=(const I3RecoPulseSeriesMapMask&);
 		
+	bool operator==(const I3RecoPulseSeriesMapMask&) const;
+	bool operator!=(const I3RecoPulseSeriesMapMask&) const;
+	
 private:
 	typedef uint8_t mask_t;
 	
@@ -138,6 +141,8 @@ private:
 		inline bool get(const unsigned) const;
 		unsigned sum() const;
 		size_t size() const;
+		
+		bool operator==(const bitmask&) const;
 		
 		friend class boost::serialization::access;
 		
