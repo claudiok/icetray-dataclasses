@@ -9,6 +9,12 @@ New Features :
 
 Bug Fixes :
 
+April 2, 2015, don la dieu  (nega@icecube.umd.edu)
+--------------------------------------------------------------------
+ V15-03-00 
+  o better operator support
+  o add equality for I3RecoPulseSeriesMap masks/unions
+
 March 15, 2015, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
  V15-03-00 
