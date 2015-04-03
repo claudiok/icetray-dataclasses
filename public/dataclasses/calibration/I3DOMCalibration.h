@@ -108,49 +108,50 @@ BOOST_CLASS_VERSION(QuadraticFit, quadraticfit_version_);
  */
 struct SPEChargeDistribution
 {
-  template <class Archive>
-  void serialize(Archive& ar, unsigned version);
+  template <class Archive> void load(Archive& ar, unsigned version);
+  template <class Archive> void save(Archive& ar, unsigned version) const;
+  BOOST_SERIALIZATION_SPLIT_MEMBER();
 
-  SPEChargeDistribution() : exp_amp_(NAN),
-                            exp_width_(NAN),
-                            gaus_amp_(NAN),
-                            gaus_mean_(NAN),
-                            gaus_width_(NAN) { }
+  SPEChargeDistribution() : exp_amp(NAN),
+                            exp_width(NAN),
+                            gaus_amp(NAN),
+                            gaus_mean(NAN),
+                            gaus_width(NAN) { }
 
-  SPEChargeDistribution(double exp_amp,
-                        double exp_width,
-                        double gaus_amp,
-                        double gaus_mean,
-                        double gaus_width) :
-    exp_amp_(exp_amp),
-    exp_width_(exp_width),
-    gaus_amp_(gaus_amp),
-    gaus_mean_(gaus_mean),
-    gaus_width_(gaus_width) { }
+  SPEChargeDistribution(double amp_exp,
+                        double width_exp,
+                        double amp_gaus,
+                        double mean_gaus,
+                        double width_gaus) :
+    exp_amp(amp_exp),
+    exp_width(width_exp),
+    gaus_amp(amp_gaus),
+    gaus_mean(mean_gaus),
+    gaus_width(width_gaus) { }
 
-  double exp_amp_;
-  double exp_width_;
-  double gaus_amp_;
-  double gaus_mean_;
-  double gaus_width_;
+  double exp_amp;
+  double exp_width;
+  double gaus_amp;
+  double gaus_mean;
+  double gaus_width;
   
   bool IsValid() const
   {
     // consider valid only if no value is NaN
-    return (std::isnan(exp_amp_) ||
-        std::isnan(exp_width_) ||
-        std::isnan(gaus_amp_) ||
-        std::isnan(gaus_mean_) ||
-        std::isnan(gaus_width_));
+    return (!std::isnan(exp_amp) &&
+        !std::isnan(exp_width) &&
+        !std::isnan(gaus_amp) &&
+        !std::isnan(gaus_mean) &&
+        !std::isnan(gaus_width));
   }
   
   bool operator==(const SPEChargeDistribution rhs) const
   {
-    return (CompareFloatingPoint::Compare_NanEqual(exp_amp_,rhs.exp_amp_) &&
-        CompareFloatingPoint::Compare_NanEqual(exp_width_,rhs.exp_width_) &&
-        CompareFloatingPoint::Compare_NanEqual(gaus_amp_,rhs.gaus_amp_) &&
-        CompareFloatingPoint::Compare_NanEqual(gaus_mean_,rhs.gaus_mean_) &&
-        CompareFloatingPoint::Compare_NanEqual(gaus_width_,rhs.gaus_width_));
+    return (CompareFloatingPoint::Compare_NanEqual(exp_amp, rhs.exp_amp) &&
+        CompareFloatingPoint::Compare_NanEqual(exp_width, rhs.exp_width) &&
+        CompareFloatingPoint::Compare_NanEqual(gaus_amp, rhs.gaus_amp) &&
+        CompareFloatingPoint::Compare_NanEqual(gaus_mean, rhs.gaus_mean) &&
+        CompareFloatingPoint::Compare_NanEqual(gaus_width, rhs.gaus_width));
   }
   bool operator!=(const SPEChargeDistribution rhs) const
   {

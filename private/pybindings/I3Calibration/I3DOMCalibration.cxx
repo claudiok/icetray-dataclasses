@@ -41,7 +41,8 @@ void register_I3DOMCalibration()
                             (MPEDiscCalib)(PMTDiscCalib)(DomNoiseRate)(RelativeDomEff)\
                             (DomNoiseThermalRate)(DomNoiseDecayRate)      \
                             (DomNoiseScintillationMean)(DomNoiseScintillationSigma)   \
-                            (DomNoiseScintillationHits)
+                            (DomNoiseScintillationHits)(MeanATWDCharge)(MeanFADCCharge)\
+                            (CombinedSPEChargeDistribution)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3DOMCalibration, I3DOMCALPROPS)
       #undef I3DOMCALPROPS
       #define EVIL_PROPS (ATWDBeaconBaseline)(ATWDDeltaT) \

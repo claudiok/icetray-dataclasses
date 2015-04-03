@@ -4,10 +4,21 @@
 #
 
 Interface Changes : 
-
+  o SPEChargeDistribution : public members of data aggregates don't get the
+    trailing underscore.  Those denote private members of classes.
+  o SPEChargeDistribution gets python bindings
+  o I3DOMCalibration the following methods are exposed to python :
+    - Get/SetMeanFADCCharge
+    - Get/SetMeanATWDCharge
+    - Get/SetCombinedSPEChargeDistribution
 New Features :
 
 Bug Fixes :
+  o SPEChargeDistribution::IsValid - This has the correct logic now.
+    (isnan(x) || isnan(y)) == (false || false) == false when x and y 
+    are non-NaN.  IsValid should return true in this case.  The method 
+    has been changed to the equivalent of (!isnan(x) && !isnan(y)).
+    Tests have been added as well.
 
 April 2, 2015, don la dieu  (nega@icecube.umd.edu)
 --------------------------------------------------------------------

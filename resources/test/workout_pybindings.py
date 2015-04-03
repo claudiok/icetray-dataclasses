@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-
-from icecube import icetray, dataclasses
-from icecube.icetray.I3Test import *
+import numpy
 
 from I3Tray import I3Units
+from icecube import icetray, dataclasses
+from icecube.icetray.I3Test import ENSURE
 
 #
 #  This file is not a hard test per-say, but just exercises some of the 
@@ -64,6 +64,24 @@ ds = dataclasses.I3DOMStatus()
 dc = dataclasses.I3DOMCalibration()
 
 transittime = dataclasses.transit_time(ds, dc)
+
+dc.mean_fadc_charge = 0.6
+dc.mean_atwd_charge = 0.7
+
+spe_charge_dist = dataclasses.SPEChargeDistribution()
+
+spe_charge_dist.exp_amp = 0.1
+spe_charge_dist.exp_width = 0.2
+spe_charge_dist.gaus_amp = 0.3
+spe_charge_dist.gaus_mean = 0.4
+spe_charge_dist.gaus_width = 0.5
+
+dc.combined_spe_charge_distribution = spe_charge_dist
+ENSURE(dc.combined_spe_charge_distribution.is_valid == True, "This should be true.")
+
+spe_charge_dist.gaus_width = numpy.nan
+dc.combined_spe_charge_distribution = spe_charge_dist
+ENSURE(dc.combined_spe_charge_distribution.is_valid == False, "This should be false.")
 
 #I3Double
 print('Testing I3Double')

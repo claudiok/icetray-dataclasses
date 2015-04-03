@@ -425,36 +425,47 @@ I3_SERIALIZABLE(QuadraticFit);
 
 template <class Archive>
 void
-SPEChargeDistribution::serialize(Archive& ar, unsigned version)
+SPEChargeDistribution::save(Archive& ar, unsigned version) const
+{
+  ar & make_nvp("ExpAmp", exp_amp);
+  ar & make_nvp("ExpWidth", exp_width);
+  ar & make_nvp("GausAmp", gaus_amp);
+  ar & make_nvp("GausMean", gaus_mean);
+  ar & make_nvp("GausWidth", gaus_width);
+}
+
+template <class Archive>
+void
+SPEChargeDistribution::load(Archive& ar, unsigned version)
 {
   if (version>SPEChargeDistribution_version_)
     log_fatal("Attempting to read version %u from file but running version %u of SPEChargeDistribution class.",version,SPEChargeDistribution_version_);
 
-  ar & make_nvp("ExpAmp", exp_amp_);
-  ar & make_nvp("ExpWidth", exp_width_);
-  ar & make_nvp("GausAmp", gaus_amp_);
-  ar & make_nvp("GausMean", gaus_mean_);
-  ar & make_nvp("GausWidth", gaus_width_);
+  ar & make_nvp("ExpAmp", exp_amp);
+  ar & make_nvp("ExpWidth", exp_width);
+  ar & make_nvp("GausAmp", gaus_amp);
+  ar & make_nvp("GausMean", gaus_mean);
+  ar & make_nvp("GausWidth", gaus_width);
   if (version==0)
   {
     // the isValid flag existed in version 0. replaced by setting member
-    // variables to NAN. The struct is considered invalid if any memeber
+    // variables to NAN. The struct is considered invalid if any member
     // variable is NAN.
     bool isValid(false);
     ar & make_nvp("IsValid", isValid);
     if (!isValid)
     {
       // make sure the structure is invalid if marked as such
-      exp_amp_=NAN;
-      exp_width_=NAN;
-      gaus_amp_=NAN;
-      gaus_mean_=NAN;
-      gaus_width_=NAN;
+      exp_amp=NAN;
+      exp_width=NAN;
+      gaus_amp=NAN;
+      gaus_mean=NAN;
+      gaus_width=NAN;
     }
   }
 }
 
-I3_SERIALIZABLE(SPEChargeDistribution);
+I3_SPLIT_SERIALIZABLE(SPEChargeDistribution);
 
 template <class Archive>
 void 
