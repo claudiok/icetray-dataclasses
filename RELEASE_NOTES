@@ -11,6 +11,7 @@ Interface Changes :
     - Get/SetMeanFADCCharge
     - Get/SetMeanATWDCharge
     - Get/SetCombinedSPEChargeDistribution
+    - IsMeanATWD/FADCChargeValid
 New Features :
 
 Bug Fixes :
@@ -20,6 +21,9 @@ Bug Fixes :
     has been changed to the equivalent of (!isnan(x) && !isnan(y)).
     Tests have been added as well.
 
+  o IsMeanATWD/FADCChargeValid - Logic was reversed.  It's correct now
+    (with tests) and returns true if std::isfinite(charge) and charge > 0.
+   
 April 2, 2015, don la dieu  (nega@icecube.umd.edu)
 --------------------------------------------------------------------
  V15-03-00 

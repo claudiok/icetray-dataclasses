@@ -589,8 +589,18 @@ class I3DOMCalibration {
    */
   double GetMeanATWDCharge() const {return meanATWDCharge_;}
   double GetMeanFADCCharge() const {return meanFADCCharge_;}
-  bool IsMeanATWDChargeValid() const {return std::isnan(meanATWDCharge_);}
-  bool IsMeanFADCChargeValid() const {return std::isnan(meanFADCCharge_);}
+
+  /**
+   * In dataclasses we use NaN to denote "invalid" however in the JSON
+   * file invalid entries are set to 0.  To cover both cases we check 
+   * that it's finite and greater than 0.
+   */ 
+  bool IsMeanATWDChargeValid() const {
+    return ((std::isfinite(meanATWDCharge_)) && (meanATWDCharge_ > 0.));
+  }
+  bool IsMeanFADCChargeValid() const {
+    return ((std::isfinite(meanFADCCharge_)) && (meanFADCCharge_ > 0.));
+  }
 
   void SetMeanATWDCharge(double charge) {
     meanATWDCharge_ = charge;

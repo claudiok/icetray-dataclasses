@@ -50,6 +50,8 @@ void register_I3DOMCalibration()
       BOOST_PP_SEQ_FOR_EACH(WRAP_EVIL_PROP, I3DOMCalibration, EVIL_PROPS)
       #undef EVIL_PROPS
       .add_property("toroid_type", &I3DOMCalibration::GetToroidType)
+      .add_property("is_mean_atwd_charge_valid", &I3DOMCalibration::IsMeanATWDChargeValid)
+      .add_property("is_mean_fadc_charge_valid", &I3DOMCalibration::IsMeanFADCChargeValid)
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
       .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
       .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)

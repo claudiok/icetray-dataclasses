@@ -83,6 +83,18 @@ spe_charge_dist.gaus_width = numpy.nan
 dc.combined_spe_charge_distribution = spe_charge_dist
 ENSURE(dc.combined_spe_charge_distribution.is_valid == False, "This should be false.")
 
+dc.mean_fadc_charge = numpy.nan
+ENSURE(dc.is_mean_fadc_charge_valid == False, "This should be false.")
+dc.mean_fadc_charge = 0.
+ENSURE(dc.is_mean_fadc_charge_valid == False, "This should be false.")
+
+dc.mean_atwd_charge = numpy.nan
+ENSURE(dc.is_mean_atwd_charge_valid == False, "This should be false.")
+dc.mean_atwd_charge = 0.
+ENSURE(dc.is_mean_atwd_charge_valid == False, "This should be false.")
+
+
+
 #I3Double
 print('Testing I3Double')
 doub = dataclasses.I3Double(99.9)
