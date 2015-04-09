@@ -999,5 +999,10 @@ std::ostream& operator<<(std::ostream& oss, const I3ParticleID& pid){
 
 I3_SPLIT_SERIALIZABLE(I3Particle);
 
-I3_SERIALIZABLE(I3VectorI3Particle);
+// The name passed to this macro is set for 
+// all eternity.  Since all past I3Vector<I3Particle>
+// containers were serialized as I3ParticleVect,
+// this is the way it has to always be.
+typedef I3Vector<I3Particle> I3ParticleVect;
+I3_SERIALIZABLE(I3ParticleVect);
 I3_SERIALIZABLE(I3ParticleID);
