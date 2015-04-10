@@ -1330,22 +1330,11 @@ namespace TreeBase {
   {
     static I3Particle call(Tree<I3Particle,Key,Hash>* tree_ptr,const I3Particle& item)
     {
-      if (item.GetShape() == I3Particle::Dark) {
-        // make new Dark particle
-        I3Particle ret = I3Particle();
-        ret.SetType(item.GetType());
-        ret.SetLocationType(item.GetLocationType());
-        ret.SetDir(item.GetDir());
-        ret.SetPos(item.GetPos());
-        ret.SetShape(item.GetShape());
-        ret.SetFitStatus(item.GetFitStatus());
-        ret.SetEnergy(item.GetEnergy());
-        ret.SetLength(item.GetLength());
-        ret.SetTime(item.GetTime());
-        ret.SetSpeed(item.GetSpeed());
-        return ret;
-      } else
-        return item;
+      // In old simulation 'Dark' particles had a copy as a child and therefore
+      // the same ParticleID.  This was always forbidden, but not easy to enforce
+      // in the old tree.  It's enforced in the new tree.  We want a clone here
+      // for the sole purpose of generating a new unique ID.
+      return (item.GetShape() == I3Particle::Dark) ? item.Clone() : item;
     }
   };
   
