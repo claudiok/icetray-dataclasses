@@ -1333,6 +1333,7 @@ namespace TreeBase {
       if (item.GetShape() == I3Particle::Dark) {
         // make new Dark particle
         I3Particle ret = I3Particle();
+        ret.SetType(item.GetType());
         ret.SetLocationType(item.GetLocationType());
         ret.SetDir(item.GetDir());
         ret.SetPos(item.GetPos());
