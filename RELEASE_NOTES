@@ -15,6 +15,7 @@ Interface Changes :
 New Features :
 
 Bug Fixes :
+  o The new I3MCTree sets the type of old 'Dark' particles correctly now.
   o SPEChargeDistribution::IsValid - This has the correct logic now.
     (isnan(x) || isnan(y)) == (false || false) == false when x and y 
     are non-NaN.  IsValid should return true in this case.  The method 
