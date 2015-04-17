@@ -3,7 +3,11 @@
 # $Date: $
 #
 
+April 17, 2015, don la dieu  (nega@icecube.umd.edu)
+--------------------------------------------------------------------
+ V15-04-00 
 Interface Changes : 
+  o Updated python bindings
   o SPEChargeDistribution : public members of data aggregates don't get the
     trailing underscore.  Those denote private members of classes.
   o SPEChargeDistribution gets python bindings
