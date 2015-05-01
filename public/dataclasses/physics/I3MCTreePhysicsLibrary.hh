@@ -14,7 +14,7 @@ namespace I3MCTreePhysicsLibrary
 {
   /**
    * Returns the InIce particle with highest energy.
-   * This is useful for example in extracting "the muon" from the 
+   * This is useful for example in extracting "the muon" from the
    * atmospheric neutrino data.  The names below are fairly descriptive
    * and should accurately describe what the function does.
    */
@@ -26,7 +26,7 @@ namespace I3MCTreePhysicsLibrary
 
   I3MCTree::optional_value GetMostEnergetic(const I3MCTree& t, I3Particle::ParticleType pt, bool safe_mode = true );
   I3MCTree::optional_value GetMostEnergetic(I3MCTreeConstPtr t, I3Particle::ParticleType pt, bool safe_mode = true );
-    
+
   I3MCTree::optional_value GetMostEnergeticTrack(const I3MCTree& t, bool safe_mode = true );
   I3MCTree::optional_value GetMostEnergeticTrack(I3MCTreeConstPtr t, bool safe_mode = true );
 
@@ -46,6 +46,6 @@ namespace I3MCTreePhysicsLibrary
   I3MCTree::optional_value GetMostEnergeticNucleus(I3MCTreeConstPtr t, bool safe_mode = true );
 }
 
-#endif 
+#endif
 
 
