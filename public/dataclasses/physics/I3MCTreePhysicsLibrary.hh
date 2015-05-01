@@ -9,6 +9,7 @@
 
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/physics/I3MCTree.h"
+#include <boost/tuple/tuple.hpp>
 
 namespace I3MCTreePhysicsLibrary
 {
@@ -17,6 +18,9 @@ namespace I3MCTreePhysicsLibrary
    * This is useful for example in extracting "the muon" from the
    * atmospheric neutrino data.  The names below are fairly descriptive
    * and should accurately describe what the function does.
+   *
+   * If safe_mode is true, return boost::none if there are two or more particles
+   * with the same highest energy. This incurs a second O(N) search over the tree.
    */
   I3MCTree::optional_value GetMostEnergeticPrimary(const I3MCTree& t, bool safe_mode = true );
   I3MCTree::optional_value GetMostEnergeticPrimary(I3MCTreeConstPtr t, bool safe_mode = true );
@@ -44,6 +48,18 @@ namespace I3MCTreePhysicsLibrary
 
   I3MCTree::optional_value GetMostEnergeticNucleus(const I3MCTree& t, bool safe_mode = true );
   I3MCTree::optional_value GetMostEnergeticNucleus(I3MCTreeConstPtr t, bool safe_mode = true );
+
+  /// Returns true if most energetic primary is a nucleon.
+  bool IsCosmicRayEvent(const I3MCTree&);
+  bool IsCosmicRayEvent(const I3MCTreeConstPtr t){ return IsCosmicRayEvent(*t); }
+
+  /// Returns true if most energetic primary is a neutrino.
+  bool IsNeutrinoEvent(const I3MCTree&);
+  bool IsNeutrinoEvent(const I3MCTreeConstPtr t){ return IsNeutrinoEvent(*t); }
+
+  /// Returns true if most energetic primary is a gamma.
+  bool IsGammaEvent(const I3MCTree&);
+  bool IsGammaEvent(const I3MCTreeConstPtr t){ return IsGammaEvent(*t); }
 }
 
 #endif
