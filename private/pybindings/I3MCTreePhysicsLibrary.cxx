@@ -19,21 +19,7 @@
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#include <vector>
-#include <algorithm>
-#include <exception>
-
-#include <dataclasses/physics/I3MCTreePhysicsLibrary.hh>
-#include <dataclasses/I3Constants.h>
-#include <icetray/python/copy_suite.hpp>
-#include <icetray/python/operator_suite.hpp>
-#include <icetray/python/boost_serializable_pickle_suite.hpp>
-#include <boost/python/exception_translator.hpp>
-#include <boost/python/object.hpp>
-#include <boost/python/slice.hpp>
-#include <boost/python/extract.hpp>
-#include <boost/function.hpp>
-
+#include <boost/python.hpp>
 #include "I3MCTreePhysicsLibraryWrappers.hh"
 
 namespace bp = boost::python;
