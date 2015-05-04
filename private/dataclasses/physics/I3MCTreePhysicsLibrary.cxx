@@ -34,6 +34,8 @@ namespace{
     bool operator()(const I3Particle& p){ return p.GetType() == type;}
   };
 
+  // check whether there is another distinct candidate particle
+  // with the same energy as test_value, so that test_value is ambiguous
   I3MCTree::optional_value
     checked_value(const std::vector<I3Particle>& candidates,
                   boost::optional<I3Particle> test_value){
@@ -41,7 +43,6 @@ namespace{
         i != candidates.end(); ++i){
       if( (i->GetID() != test_value->GetID())
           && (Compare(test_value->GetEnergy(), i->GetEnergy(), (int64_t) 1))){
-        // found another primary with the same energy
         return boost::none;
       }
     }
@@ -52,7 +53,7 @@ namespace{
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticPrimary(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsPrimary, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsPrimary), rval);
   return rval;
 }
@@ -64,7 +65,7 @@ I3MCTreePhysicsLibrary::GetMostEnergeticPrimary(I3MCTreeConstPtr t, bool safe_mo
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticInIce(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsInIce, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsInIce), rval);
   return rval;
 }
@@ -77,7 +78,7 @@ I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergetic(const I3MCTree& t, I3Particle::ParticleType pt, bool safe_mode){
   IsParticle is_particle(pt);
   I3MCTree::optional_value rval = GetBestFilter(t, is_particle, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, is_particle), rval);
   return rval;
 }
@@ -89,7 +90,7 @@ I3MCTreePhysicsLibrary::GetMostEnergetic(I3MCTreeConstPtr t, I3Particle::Particl
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticTrack(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsTrack, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsTrack), rval);
   return rval;
 }
@@ -102,7 +103,7 @@ I3MCTreePhysicsLibrary::GetMostEnergeticTrack(I3MCTreeConstPtr t, bool safe_mode
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticCascade(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsCascade, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsCascade), rval);
   return rval;
 }
@@ -114,7 +115,7 @@ I3MCTreePhysicsLibrary::GetMostEnergeticCascade(I3MCTreeConstPtr t, bool safe_mo
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticInIceCascade(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsInIceCascade, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsInIceCascade), rval);
   return rval;
 }
@@ -127,7 +128,7 @@ I3MCTreePhysicsLibrary::GetMostEnergeticInIceCascade(I3MCTreeConstPtr t, bool sa
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticNeutrino(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsNeutrino, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsNeutrino), rval);
   return rval;
 }
@@ -140,7 +141,7 @@ I3MCTreePhysicsLibrary::GetMostEnergeticNeutrino(I3MCTreeConstPtr t, bool safe_m
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticMuon(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsMuon, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsMuon), rval);
   return rval;
 }
@@ -152,7 +153,7 @@ I3MCTreePhysicsLibrary::GetMostEnergeticMuon(I3MCTreeConstPtr t, bool safe_mode)
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticNucleus(const I3MCTree& t, bool safe_mode){
   I3MCTree::optional_value rval = GetBestFilter(t, IsNucleus, MoreEnergetic);
-  if(safe_mode)
+  if(rval && safe_mode)
     return checked_value(GetFilter(t, IsNucleus), rval);
   return rval;
 }
