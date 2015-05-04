@@ -40,8 +40,6 @@ namespace bp = boost::python;
 
 void register_I3MCTreePhysicsLibrary()
 {
-  using namespace I3MCTreePhysicsLibrary;
-
   bp::def("get_most_energetic_primary", get_most_energetic_primary, "");
   bp::def("get_most_energetic_inice", &get_most_energetic_inice, "");
   bp::def("get_most_energetic", &get_most_energetic, "");
@@ -51,12 +49,5 @@ void register_I3MCTreePhysicsLibrary()
   bp::def("get_most_energetic_neutrino", &get_most_energetic_neutrino, "");
   bp::def("get_most_energetic_muon", &get_most_energetic_muon, "");
   bp::def("get_most_energetic_nucleus", &get_most_energetic_nucleus, "");
-
-  bp::def("is_cosmic_ray_event", is_cosmic_ray_event,
-          "Returns true if most energetic primary particle is a nucleon or nucleus.");
-  bp::def("is_neutrino_event", is_neutrino_event,
-          "Returns true if most energetic primary particle is a neutrino.");
-  bp::def("is_gamma_event", is_gamma_event,
-          "Returns true if most energetic primary particle is a gamma.");
 }
 

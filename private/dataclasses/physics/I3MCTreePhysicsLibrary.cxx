@@ -156,36 +156,8 @@ I3MCTreePhysicsLibrary::GetMostEnergeticNucleus(const I3MCTree& t, bool safe_mod
     return checked_value(GetFilter(t, IsNucleus), rval);
   return rval;
 }
-
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticNucleus(I3MCTreeConstPtr t, bool safe_mode){
   return GetMostEnergeticNucleus(*t);
 }
 
-bool
-I3MCTreePhysicsLibrary::IsCosmicRayEvent(const I3MCTree& t){
-  if(I3MCTree::optional_value primary = GetMostEnergeticPrimary(t)){
-    const I3Particle::ParticleType ptype = primary->GetType();
-    return ptype == I3Particle::PPlus ||
-           ptype == I3Particle::PMinus ||
-           ptype == I3Particle::Neutron ||
-           primary->IsNucleus();
-  }
-  return false;
-}
-
-bool
-I3MCTreePhysicsLibrary::IsNeutrinoEvent(const I3MCTree& t){
-  if(I3MCTree::optional_value primary = GetMostEnergeticPrimary(t)){
-    return primary->IsNeutrino();
-  }
-  return false;
-}
-
-bool
-I3MCTreePhysicsLibrary::IsGammaEvent(const I3MCTree& t){
-  if(I3MCTree::optional_value primary = GetMostEnergeticPrimary(t)){
-    return primary->GetType() == I3Particle::Gamma;
-  }
-  return false;
-}

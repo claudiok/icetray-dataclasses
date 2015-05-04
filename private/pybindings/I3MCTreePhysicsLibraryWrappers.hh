@@ -75,7 +75,4 @@ I3ParticlePtr get_most_energetic_nucleus(const I3MCTree& t){
   else return I3ParticlePtr();
 }
 
-// selecting the right function overload for boost::python
-bool (*is_cosmic_ray_event)(const I3MCTree& t) = I3MCTreePhysicsLibrary::IsCosmicRayEvent;
-bool (*is_neutrino_event)(const I3MCTree& t) = I3MCTreePhysicsLibrary::IsNeutrinoEvent;
-bool (*is_gamma_event)(const I3MCTree& t) = I3MCTreePhysicsLibrary::IsGammaEvent;
+
