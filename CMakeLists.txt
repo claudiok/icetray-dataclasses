@@ -9,6 +9,15 @@ if(USE_ROOT)
   set(OPTIONAL_TOOLS root)
 endif(USE_ROOT)
 
+if(USE_CINT)
+  colormsg(HIYELLOW "*** CINT dictionaries are deprecated and will disappear November 1, 2015")
+  set(ROOTCINT "ROOTCINT public/dataclasses/I3Position.h 
+      public/dataclasses/I3Direction.h 
+      public/dataclasses/I3Double.h 
+      public/dataclasses/I3Time.h 
+      public/dataclasses/physics/I3Particle.h")
+endif(USE_CINT)
+
 i3_add_library(dataclasses
   private/dataclasses/*.cxx
   private/dataclasses/*.c
@@ -20,11 +29,7 @@ i3_add_library(dataclasses
 
   USE_PROJECTS icetray
 
-  ROOTCINT public/dataclasses/I3Position.h 
-  public/dataclasses/I3Direction.h 
-  public/dataclasses/I3Double.h 
-  public/dataclasses/I3Time.h 
-  public/dataclasses/physics/I3Particle.h
+  ${ROOTCINT}
   )
 
 
