@@ -157,7 +157,7 @@ class I3Quaternion : public I3FrameObject
 		
 		bool operator==(const I3Quaternion& q) const
 		{
-			return ((x_==q.x_) || (y_==q.y_) || (z_==q.z_) || (w_==q.w_));
+			return ((x_==q.x_) && (y_==q.y_) && (z_==q.z_) && (w_==q.w_));
 		}
 		
 		/**
