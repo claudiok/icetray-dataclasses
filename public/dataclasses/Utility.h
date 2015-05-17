@@ -8,7 +8,7 @@
 #ifndef UTILITY_H_INCLUDED
 #define UTILITY_H_INCLUDED
 
-#if defined(__APPLE__) && defined(__CINT__)
+#if defined(__APPLE__) && defined(__CINT__) && (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ > 1085)
 // Workaround for CINT problems with stdint.h. Affects OS X >= 10.9; see
 // https://root.cern.ch/phpBB3/viewtopic.php?f=5&t=17360
 typedef char __signed;
