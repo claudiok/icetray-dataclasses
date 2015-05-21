@@ -12,6 +12,7 @@ register_I3TimeWindow()
 	    #define RO_PROPS (Start)(Stop)(Length)
 	    BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3TimeWindow, RO_PROPS)
 	    #undef RO_PROPS
+	    .def("__contains__", &I3TimeWindow::Contains)
 	;
 	
 	bp::class_<I3TimeWindowSeries, I3TimeWindowSeriesPtr,

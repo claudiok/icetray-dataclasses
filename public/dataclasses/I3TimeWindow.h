@@ -23,6 +23,9 @@ public:
 	double GetStart() const { return start_; };
 	double GetStop() const { return stop_; };
 	double GetLength() const { return stop_ - start_; };
+	/// Return true if the given time is inside this time window
+	/// @param t a time
+	bool Contains(double t) const { return (t >= start_) && (t < stop_); }
 	bool operator<(const I3TimeWindow &other) const;
 	bool operator==(const I3TimeWindow &other) const;
 	enum OverlapType { BEFORE, WITHIN, AFTER, NONE };

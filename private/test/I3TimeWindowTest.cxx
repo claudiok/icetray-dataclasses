@@ -42,6 +42,15 @@ TEST(Coalesce)
 	ENSURE_EQUAL(windows.front().GetStop(), 12);
 }
 
+TEST(Contains)
+{
+	I3TimeWindow window(0., 10.);
+	// I3TimeWindows are half-open intervals
+	ENSURE(window.Contains(0.));
+	ENSURE(!window.Contains(10.));
+	ENSURE(window.Contains(5.));
+}
+
 TEST(Complement)
 {
 	I3TimeWindowSeries windows, complement;
