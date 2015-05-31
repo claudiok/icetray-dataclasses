@@ -122,6 +122,10 @@ class I3Quaternion : public I3FrameObject
 			return (*this);
 		}
 		
+                /**
+                 * @note This infix operator implements a *right* multiplication.
+                 * There is NO infix operator for *left* multiplication.
+                 */
 		I3Quaternion operator*=(const I3Quaternion& q)
 		{
 			double newX =   x_*q.w_ + y_*q.z_ - z_*q.y_ + w_*q.x_;
@@ -132,6 +136,10 @@ class I3Quaternion : public I3FrameObject
 			return (*this);
 		}
 		
+                /**
+                 * @note This infix operator implements a *right* division.
+                 * There is NO infix operator for *left* division (q.inverse()*(*this)).
+                 */
 		I3Quaternion operator/=(const I3Quaternion& q)
 		{
 			(*this) = (*this) * q.inverse();
@@ -306,6 +314,8 @@ class I3Quaternion : public I3FrameObject
 		void serialize(Archive& ar, unsigned version);
 		
 	};
+
+I3Quaternion operator*(double, const I3Quaternion&);
 
 I3_POINTER_TYPEDEFS(I3Quaternion);
 BOOST_CLASS_VERSION(I3Quaternion, i3quaternion_version_);

@@ -15,4 +15,9 @@ void I3Quaternion::serialize(Archive& ar, unsigned version)
 	ar & make_nvp("w", w_);
 }
 
+I3Quaternion operator*(double a, const I3Quaternion& q)
+{
+	return(q*a);
+}
+
 I3_SERIALIZABLE(I3Quaternion);
