@@ -26,14 +26,20 @@ using std::cos;
 using std::sqrt;
 using I3Units::degree;
 
-// helper function for quaternion tests
+// helper functions for quaternion tests
 static void ENSURE_QUATERNION_DISTANCE(const I3Quaternion &q,
                                        double x, double y, double z, double w,
-                                       double eps){
-    ENSURE_DISTANCE(q.getX(),x,eps);
-    ENSURE_DISTANCE(q.getY(),y,eps);
-    ENSURE_DISTANCE(q.getZ(),z,eps);
-    ENSURE_DISTANCE(q.getW(),w,eps);
+                                       double eps, string mesg){
+    ENSURE_DISTANCE(q.getX(),x,eps,mesg+": X");
+    ENSURE_DISTANCE(q.getY(),y,eps,mesg+": Y");
+    ENSURE_DISTANCE(q.getZ(),z,eps,mesg+": Z");
+    ENSURE_DISTANCE(q.getW(),w,eps,mesg+": W");
+}
+static void ENSURE_QUATERNION_DISTANCE(const I3Quaternion &q1,
+                                       const I3Quaternion &q2,
+                                       double eps, string mesg){
+    ENSURE_QUATERNION_DISTANCE(
+            q1, q2.getX(), q2.getY(), q2.getZ(), q2.getW(), eps, mesg);
 }
 
 // helper function for quaternion tests
@@ -79,7 +85,7 @@ TEST(construction_assignment_set)
 
     cout << "testing copy constructor" << endl;
     I3Quaternion qq(q);
-    ENSURE(qq == q);
+    ENSURE_QUATERNION_EQUAL(qq,9,10,11,12);
 }
 
 TEST(boolean_expressions)
@@ -118,23 +124,27 @@ TEST(unary_operations)
 
     cout << "testing conjugate()" << endl;
     I3Quaternion qc = q.conjugate();
-    ENSURE_QUATERNION_DISTANCE(qc,-2,-3,+5,7,1e-12);
+    ENSURE_QUATERNION_DISTANCE(qc,-2,-3,+5,7,1e-12,"conjugate()");
 
     cout << "testing scale()" << endl;
     double s = -3.3;
     I3Quaternion qs = q.scale(s);
-    ENSURE_QUATERNION_DISTANCE(qs,+2*s,3*s,-5*s,7*s,1e-12);
+    ENSURE_QUATERNION_DISTANCE(qs,+2*s,3*s,-5*s,7*s,1e-12,"scale()");
+    qs = s*q;
+    ENSURE_QUATERNION_DISTANCE(qs,+2*s,3*s,-5*s,7*s,1e-12,"left multiply with scale factor");
+    qs = q*s;
+    ENSURE_QUATERNION_DISTANCE(qs,+2*s,3*s,-5*s,7*s,1e-12,"right multiply with scale factor");
 
     cout << "testing unit(): norm" << endl;
     I3Quaternion qu = q.unit();
-    ENSURE_DISTANCE(qu.norm(),1.0,1e-8);
+    ENSURE_DISTANCE(qu.norm(),1.0,1e-8,"unit() norm");
     cout << "testing unit(): direction" << endl;
     qs = qu.scale(sqrt(norm));
-    ENSURE_DISTANCE((q-qs).norm(),0.0,1e-8);
+    ENSURE_DISTANCE((q-qs).norm(),0.0,1e-8,"unit() direction");
 
     cout << "testing inverse()" << endl;
     I3Quaternion qinv = q.inverse();
-    ENSURE_QUATERNION_DISTANCE(qinv,-2/norm,-3/norm,+5/norm,7/norm,1e-12);
+    ENSURE_QUATERNION_DISTANCE(qinv,-2/norm,-3/norm,+5/norm,7/norm,1e-12,"inverse()");
 }
 
 TEST(binary_operations)
@@ -145,31 +155,88 @@ TEST(binary_operations)
 
     cout << "testing q1+q2" << endl;
     q = q1+q2;
-    ENSURE_QUATERNION_DISTANCE(q, 13, 16, 22, 26, 1e-12);
+    ENSURE_QUATERNION_DISTANCE(q, 13, 16, 22, 26, 1e-12,"q1+q2");
 
     cout << "testing q1-q2" << endl;
     q = q1-q2;
-    ENSURE_QUATERNION_DISTANCE(q, -9, -10, -12, -12, 1e-12);
+    ENSURE_QUATERNION_DISTANCE(q, -9, -10, -12, -12, 1e-12,"q1-q2");
 
     cout << "testing q1*q2" << endl;
     q = q1*q2;
-    ENSURE_QUATERNION_DISTANCE(q, 101, 169, 207, -13, 1e-8);
+    ENSURE_QUATERNION_DISTANCE(q, 101, 169, 207, -13, 1e-8,"q1*q2");
 
     cout << "testing q2*q1" << endl;
     q = q2*q1;
-    ENSURE_QUATERNION_DISTANCE(q, 129, 127, 221, -13, 1e-8);
+    ENSURE_QUATERNION_DISTANCE(q, 129, 127, 221, -13, 1e-8,"q2*q1");
 
     cout << "testing q1/q2" << endl;
     q = q1/q2;
-    ENSURE_QUATERNION_DISTANCE(q, -25./940., -55./940., -17./940., 279./940., 1e-8);
+    ENSURE_QUATERNION_DISTANCE(q, -25./940., -55./940., -17./940., 279./940., 1e-8,"q1/q2");
 
     cout << "testing q2/q1" << endl;
     q = q2/q1;
-    ENSURE_QUATERNION_DISTANCE(q, 25./87., 55./87., 17./87., 279./87., 1e-8);
+    ENSURE_QUATERNION_DISTANCE(q, 25./87., 55./87., 17./87., 279./87., 1e-8,"q2/q1");
+}
+
+TEST(infix_operations)
+{
+    // Since quaternion multiplication is not commutative,
+    // it is not a priori clear whether the infix operator *=
+    // multiplies from the left or from the right.
+    I3Quaternion q1(2,3,5,7);
+    I3Quaternion q2(11,13,17,19);
+    I3Quaternion qbin, qinfix;
+
+    cout << "testing infix operators: multiplication" << endl;
+    qinfix = q1;
+    qinfix *= q2; // what do we get: qinfix=q1*q2 or qinfix=q2*q1?
+    qbin = q1*q2;
+    // qbin = q2*q1; // this way it will fail
+    ENSURE_QUATERNION_DISTANCE(qinfix,qbin,1e-10,"infix multiplication");
+
+    cout << "testing infix operators: division" << endl;
+    qinfix = q1;
+    qinfix /= q2; // qinfix=q1/q2=q1*(1./q2) or qinfix=(1./q2)*q1?
+    qbin = q1/q2;
+    // qbin = (1./q2)*q1; // this way it will fail
+    ENSURE_QUATERNION_DISTANCE(qinfix,qbin,1e-10,"infix division");
+
+    cout << "testing infix operators: addition" << endl;
+    qinfix = q1;
+    qinfix += q2;
+    qbin = q1+q2;
+    ENSURE_QUATERNION_DISTANCE(qinfix,qbin,1e-10,"infix addition");
+
+    cout << "testing infix operators: subtraction" << endl;
+    qinfix = q1;
+    qinfix -= q2;
+    qbin = q1-q2;
+    ENSURE_QUATERNION_DISTANCE(qinfix,qbin,1e-10,"infix subtraction");
+
+    cout << "testing infix operators: scale multiply" << endl;
+    double s = -4.44;
+    qinfix = q1;
+    qinfix *= s;
+    qbin = s*q1;
+    ENSURE_QUATERNION_DISTANCE(qinfix,qbin,1e-10,"infix scale left multiply");
+    qbin = q1*s;
+    ENSURE_QUATERNION_DISTANCE(qinfix,qbin,1e-10,"infix scale right multiply");
+
+    cout << "testing infix operators: scale division" << endl;
+    qinfix = q1;
+    qinfix /= s;
+    qbin = q1/s;
+    ENSURE_QUATERNION_DISTANCE(qinfix,qbin,1e-10,"infix scale division");
 }
 
 TEST(rotate_I3Direction)
 {
+    // This tests that quaternion rotations are equivalent
+    // to the around-axis-rotations built into I3Direction.
+    // It is assumed that I3Directions are always correctly normalized,
+    // so the dot product of two directions is only equal to 1 if
+    // those directions are equal.
+
     double angle = 333.*degree; // arbitrary angle
     I3Quaternion qx(sin(angle/2),0,0,cos(angle/2));
     I3Quaternion qy(0,sin(angle/2),0,cos(angle/2));
@@ -179,21 +246,29 @@ TEST(rotate_I3Direction)
     cout << "testing rotation around X axis" << endl;
     I3Direction output = qx.rotate(input);
     input.RotateX(angle); // rotates in place
-    ENSURE_DISTANCE(input*output,1.0,1e-12);
+    ENSURE_DISTANCE(input*output,1.0,1e-12,"dir rotation around X");
 
     cout << "testing rotation around Y axis" << endl;
     output = qy.rotate(input);
     input.RotateY(angle); // rotates in place
-    ENSURE_DISTANCE(input*output,1.0,1e-12);
+    ENSURE_DISTANCE(input*output,1.0,1e-12,"dir rotation around Y");
 
     cout << "testing rotation around Z axis" << endl;
     output = qz.rotate(input);
     input.RotateZ(angle); // rotates in place
-    ENSURE_DISTANCE(input*output,1.0,1e-12);
+    ENSURE_DISTANCE(input*output,1.0,1e-12,"dir rotation around Z");
 }
 
 TEST(rotate_I3Position)
 {
+    // This tests that quaternion rotations are equivalent
+    // to the around-axis-rotations built into I3Direction.
+    // The test is a bit lazy, because we only check that
+    // the dot product of two object is equal to the magnitude
+    // squared of one of them. But if anything is wrongly
+    // implemented (wrong direction and scale) then it would
+    // be very unlikely that the dot product would *not* be wrong.
+
     double angle = 111.*degree; // arbitrary angle
     I3Quaternion qx(sin(angle/2),0,0,cos(angle/2));
     I3Quaternion qy(0,sin(angle/2),0,cos(angle/2));
@@ -204,17 +279,17 @@ TEST(rotate_I3Position)
     cout << "testing rotation around X axis" << endl;
     I3Position output = qx.rotate(input);
     input.RotateX(angle); // rotates in place
-    ENSURE_DISTANCE(input*output,m2,m2*1e-8);
+    ENSURE_DISTANCE(input*output,m2,m2*1e-8,"pos rotation around X");
 
     cout << "testing rotation around Y axis" << endl;
     output = qy.rotate(input);
     input.RotateY(angle); // rotates in place
-    ENSURE_DISTANCE(input*output,m2,m2*1e-8);
+    ENSURE_DISTANCE(input*output,m2,m2*1e-8,"pos rotation around Y");
 
     cout << "testing rotation around Z axis" << endl;
     output = qz.rotate(input);
     input.RotateZ(angle); // rotates in place
-    ENSURE_DISTANCE(input*output,m2,m2*1e-8);
+    ENSURE_DISTANCE(input*output,m2,m2*1e-8,"pos rotation around Z");
 }
 
 TEST(rotate_axes)
