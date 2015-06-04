@@ -3,6 +3,11 @@
 # $Date: $
 #
 
+dev
+---
+  o Added Angle function for I3Direction for convenience
+    --- Marcel (marcel.zoll@fysik.su.se)
+
 April 17, 2015, don la dieu  (nega@icecube.umd.edu)
 --------------------------------------------------------------------
  V15-04-01 

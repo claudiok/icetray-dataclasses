@@ -14,6 +14,7 @@
 #include "dataclasses/I3Position.h"
 #include "icetray/I3Units.h"
 #include <string>
+#include <cmath>
 using std::string;
 using std::cout;
 using std::endl;
@@ -358,4 +359,11 @@ TEST(scalar_multiplication)
   ENSURE_DISTANCE(p.GetX(),.5/sqrt(3),.0001);
   ENSURE_DISTANCE(p.GetY(),-.5/sqrt(3),.0001);
   ENSURE_DISTANCE(p.GetZ(),.5/sqrt(3),.0001);
+}
+
+TEST(angle_computation)
+{
+  I3Direction a(1,-1,0);
+  ENSURE_DISTANCE(a.Angle(a), 0., .0001);
+  ENSURE_DISTANCE(a.Angle(I3Direction(-1,1,0)), M_PI, .0001);
 }

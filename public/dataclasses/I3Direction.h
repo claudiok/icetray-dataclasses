@@ -228,6 +228,16 @@ class I3Direction : public I3FrameObject
    * Division by a scalar
    */
   I3Position operator/(double) const;
+  
+  //---
+  
+  /** returns the angle between in two I3Directions
+   * @return the angle in rad (I3native units)
+   */
+  inline double Angle(const I3Direction& rhs) const
+  {
+    return acos(*this*rhs);
+  }
 
  protected:
   /**

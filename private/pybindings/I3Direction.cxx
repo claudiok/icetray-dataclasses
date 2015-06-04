@@ -48,6 +48,7 @@ void register_I3Direction()
     .def(self / double())
     .def(self == self)
     .def(self != self)
+    .def("angle", &I3Direction::Angle)
     #define RO_PROPERTIES (Zenith)(Azimuth)(X)(Y)(Z)
     BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Direction, RO_PROPERTIES)
     #undef  RO_PROPERTIES
