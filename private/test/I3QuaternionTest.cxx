@@ -368,8 +368,8 @@ TEST(rotate_axes)
 
 TEST(rotate_inplace)
 {
-    double v[3];
-    double a,b,c;
+    double v[3] = {40.,50.,60.};
+    double a=40.,b=50.,c=60.;
     double xx,xy,xz;
     double yx,yy,yz;
     double zx,zy,zz;
