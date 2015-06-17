@@ -387,7 +387,10 @@ TEST(rotate_inplace)
     qrot.rotatedXAxis(xx,xy,xz);
     qrot.rotatedYAxis(yx,yy,yz);
     qrot.rotatedZAxis(zx,zy,zz);
-    ENSURE_DISTANCE(a,a*xx+b*yx+c*zx,1e-10);
-    ENSURE_DISTANCE(b,a*xy+b*yy+c*zy,1e-10);
-    ENSURE_DISTANCE(c,a*xz+b*yz+c*zz,1e-10);
+    a=40.;
+    b=50.;
+    c=60.;
+    ENSURE_DISTANCE(v[0],a*xx+b*yx+c*zx,1e-10);
+    ENSURE_DISTANCE(v[1],a*xy+b*yy+c*zy,1e-10);
+    ENSURE_DISTANCE(v[2],a*xz+b*yz+c*zz,1e-10);
 }
