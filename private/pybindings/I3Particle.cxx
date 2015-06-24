@@ -60,7 +60,7 @@ void register_I3Particle()
       class_<I3Particle, bases<I3FrameObject>, boost::shared_ptr<I3Particle> >("I3Particle")
       #define RO_PROPERTIES (MajorID)(MinorID)(ID)(Mass)
       #define PROPERTIES (Time)(Energy)(TotalEnergy)(KineticEnergy)(Shape)(Type)(PdgEncoding)(Length)(Speed)(FitStatus)(LocationType) \
-                         (ShapeString)(TypeString)(FitStatusString)(LocationTypeString)
+                         (ShapeString)(TypeString)(FitStatusString)(LocationTypeString)(AirShowerComponent)(AirShowerComponentString)
       #define CONVENIENCE_BOOLS (IsTrack)(IsCascade)(IsPrimary)(IsTopShower)(IsNeutrino)(HasMass)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP_RO, I3Particle, RO_PROPERTIES)
       BOOST_PP_SEQ_FOR_EACH(WRAP_PROP, I3Particle, PROPERTIES)
@@ -90,6 +90,11 @@ void register_I3Particle()
       .export_values()
       ;
 
+    enum_<I3Particle::AirShowerComponent>("AirShowerComponent")
+      BOOST_PP_SEQ_FOR_EACH(ENUM_DEF,I3Particle,I3PARTICLE_H_I3Particle_AirShowerComponent)
+      .export_values()
+      ;
+
     enum_<I3Particle::ParticleType>("ParticleType")
       BOOST_PP_SEQ_FOR_EACH(ENUM_DEF,I3Particle,I3PARTICLE_H_I3Particle_ParticleType)
       .export_values()
@@ -113,6 +118,7 @@ void register_I3Particle()
   
   bp::def("identity", identity_<I3Particle::FitStatus>);
   bp::def("identity", identity_<I3Particle::LocationType>);
+  bp::def("identity", identity_<I3Particle::AirShowerComponent>);
   bp::def("identity", identity_<I3Particle::ParticleType>);
   bp::def("identity", identity_<I3Particle::ParticleShape>);
   
