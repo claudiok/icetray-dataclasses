@@ -39,14 +39,32 @@ namespace TreeBase {
   { 
     Tree(*(other.node_.treePtr_));
   }
-  
+
   template<typename T, typename Key, typename Hash>
   Tree<T,Key,Hash>::Tree(const Tree<T,Key,Hash>& copy)
+    : internalMap(copy.internalMap), head_(copy.head_) 
   {
-    if (copy.head_)
-      merge(copy);
+    // Repoint all relationships from copy.internalMap to entries in internalMap
+    for (typename tree_hash_map::iterator node = internalMap.begin(); node != internalMap.end(); node++) {
+      typename tree_hash_map::iterator source_node;
+      if (node->second.parent != NULL) {
+        source_node = internalMap.find(node->second.parent->data);
+        assert(source_node != internalMap.end());
+        node->second.parent = &(source_node->second);
+      }
+      if (node->second.firstChild != NULL) {
+        source_node = internalMap.find(node->second.firstChild->data);
+        assert(source_node != internalMap.end());
+        node->second.firstChild = &(source_node->second);
+      }
+      if (node->second.nextSibling != NULL) {
+        source_node = internalMap.find(node->second.nextSibling->data);
+        assert(source_node != internalMap.end());
+        node->second.nextSibling = &(source_node->second);
+      }
+    }
   }
-  
+
   template<typename T, typename Key, typename Hash>
   Tree<T,Key,Hash>::~Tree()
   {
