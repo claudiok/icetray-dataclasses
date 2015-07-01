@@ -5,6 +5,10 @@
 
 dev
 ---
+  o Added a data member in I3Particle that identifies the air shower component it belongs to. This includes:
+    - AirShowerComponent enumeration type in I3particle,
+    - Get/SetAirShowerComponent[String] methods to I3Particle (default value is 'Undefined'),
+    - All these have their corresponding python bindings.
   o Added Angle function for I3Direction for convenience
     --- Marcel (marcel.zoll@fysik.su.se)
 
