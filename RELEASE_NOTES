@@ -5,6 +5,8 @@
 
 dev
 ---
+  o Reimplemented I3MCTree's copy ctor to avoid O(n^2) performance on large trees
+   --- Jakob van Santen (jakob.van.santen@desy.de)
   o Added a data member in I3Particle that identifies the air shower component it belongs to. This includes:
     - AirShowerComponent enumeration type in I3particle,
     - Get/SetAirShowerComponent[String] methods to I3Particle (default value is 'Undefined'),
