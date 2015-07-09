@@ -1128,6 +1128,23 @@ TEST(append_child_iter)
 TEST(erase)
 {
   I3MCTree t1(makeParticle());
+  
+  I3MCTreeUtils::AddPrimary(t1, makeParticle());
+  // Erase *first* primary, 
+  t1.erase(*t1.get_head());
+  ENSURE( !t1.empty() );
+  // Ensure that head_ is still valid
+  for (I3MCTree::iterator it=t1.begin(); it!=t1.end(); it++) {
+      ENSURE(it->GetID() != I3ParticleID());
+  }
+  t1.erase(*t1.get_head());
+  ENSURE( t1.empty() );
+  // Ensure that head_ is still valid
+  for (I3MCTree::iterator it=t1.begin(); it!=t1.end(); it++) {
+      ENSURE(it->GetID() != I3ParticleID());
+  }
+  
+  t1 = I3MCTree(makeParticle());
   I3Particle head = t1.get_head();
   I3Particle p1 = makeParticle();
   t1.append_child(head,p1);

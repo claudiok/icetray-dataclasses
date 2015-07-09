@@ -400,6 +400,12 @@ namespace TreeBase {
       // attach next sibling as first child of parent
       iter->second.parent->firstChild = iter->second.nextSibling;
     }
+    if (key == head_) {
+      if (iter->second.nextSibling != NULL)
+        head_ = iter->second.nextSibling->data;
+      else
+        head_ = end_;
+    }
     // erase node from map
     internalMap.erase(iter);
   }
