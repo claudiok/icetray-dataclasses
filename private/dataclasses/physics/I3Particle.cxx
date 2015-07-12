@@ -534,20 +534,27 @@ bool I3Particle::IsTopShower() const
   else return false;
 }
 
-I3Position I3Particle::ShiftAlongTrack(double dist) const 
+I3Position I3Particle::ShiftAlongTrack(const double dist) const 
 {
   if (IsTrack()) {
-    const double zenith = static_cast<double>(GetZenith());
-    const double sinzenith = std::sin(zenith);
-    const double azimuth = GetAzimuth();
-
-    const double x = static_cast<double>(GetX()) - dist * sinzenith * std::cos(azimuth);
-    const double y = static_cast<double>(GetY()) - dist * sinzenith * std::sin(azimuth);
-    const double z = static_cast<double>(GetZ()) - dist * std::cos(zenith);
+    const double x = pos_.GetX() + dist*dir_.GetX();
+    const double y = pos_.GetY() + dist*dir_.GetY();
+    const double z = pos_.GetZ() + dist*dir_.GetZ();
     return I3Position(x,y,z);
   }
   else {
-    log_warn("ShiftAlongTrack undefined for a particle that is not a track.");
+    log_error("ShiftAlongTrack undefined for a particle that is not a track."); //FIXME this should escalate to log_fatal
+    return I3Position();
+  }
+}
+
+I3Position I3Particle::ShiftTimeTrack(const double time) const
+{
+  if (std::isfinite(speed_) && speed_>0.){
+    return ShiftAlongTrack(speed_*time);
+  }
+  else {
+    log_error("ShiftTimeTrack needs the particle to have a valid speed"); //FIXME this should escalate to log_fatal
     return I3Position();
   }
 }
