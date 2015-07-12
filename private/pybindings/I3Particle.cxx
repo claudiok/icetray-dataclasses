@@ -73,7 +73,14 @@ void register_I3Particle()
                                           (void (I3Particle::*)(const I3Position&)) &I3Particle::SetPos )
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
                                           (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir )
-      .def("shift_along_track", &I3Particle::ShiftAlongTrack)
+      .def("shift_along_track", 
+           &I3Particle::ShiftAlongTrack,
+           (arg("dist")),
+           "get the position of the point at that distance of the vertex along the track in forward direction")
+      .def("shift_time_track", 
+           &I3Particle::ShiftTimeTrack,
+           (arg("time")),
+           "get the position of the particle at this time")
       .def("mass_for_type", &I3Particle::GetMassForType).staticmethod("mass_for_type")
       .def(dataclass_suite<I3Particle>())
       ;

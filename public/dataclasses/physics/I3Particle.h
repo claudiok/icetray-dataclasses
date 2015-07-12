@@ -364,6 +364,7 @@ class I3Particle : public I3FrameObject
 
   void SetThetaPhi(double theta, double phi) { dir_.SetThetaPhi(theta,phi); }
 
+  //handy shortcuts for components
   double GetZenith() const { return dir_.GetZenith(); }
   double GetAzimuth() const { return dir_.GetAzimuth(); }
   double GetX() const { return pos_.GetX(); }
@@ -406,8 +407,18 @@ class I3Particle : public I3FrameObject
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
 
-  I3Position ShiftAlongTrack(double dist) const;
+  /** @brief get the position of the point at that distance of the vertex along the track in forward direction
+      @note ignores the shape of the track (start/stopping point), so the particle might not be definded at that very position
+      @param dist the distance in meters
+  */
+  I3Position ShiftAlongTrack(const double dist) const;
 
+  /** @brief get the position of the particle at this time
+   *  @note ignores the shape of the track (start/stopping point), so the particle might not be definded at that very position
+   *  @param time the time in ns 
+  */
+  I3Position ShiftTimeTrack(const double time) const;
+  
   I3Position GetStartPos() const;
 
   double GetStartTime() const;

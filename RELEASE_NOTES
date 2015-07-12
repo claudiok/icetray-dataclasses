@@ -5,6 +5,13 @@
 
 dev
 ---
+  o Speed up ShiftXXXTrack functions and added functionality:
+    - Added ShiftTimeTrack function returning the position of a track at a given time relative to vertex time
+    - scraped cascading function calls in ShiftAlongTrack and just go through properties with less conversions
+    - made arguments const as they are
+    - added documentation to both functions in C and python
+    - added unit tests for both functions
+    --- Marcel Zoll (marcel.zoll@fysik.su.se)
   o Reimplemented I3MCTree's copy ctor to avoid O(n^2) performance on large trees
    --- Jakob van Santen (jakob.van.santen@desy.de)
   o Added a data member in I3Particle that identifies the air shower component it belongs to. This includes:
