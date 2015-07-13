@@ -13,6 +13,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include <unistd.h>
+#include <cstdlib>
 
 // Should these (and ID generation) be moved to I3ParticleID?
 static int32_t global_last_pid_ = 0;
@@ -82,7 +83,8 @@ I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double
   if(global_major_id_ ==0){
     boost::hash<std::string> string_hash;
     std::stringstream s;
-    s<<time(0)<<this_pid<<getenv("HOST");
+    std::string h(getenv("I3_BUILD") ? getenv("I3_BUILD") : "");
+    s<<time(0)<<this_pid<<h;
     global_major_id_ = string_hash(s.str());
   }
   ID_.majorID = global_major_id_;
