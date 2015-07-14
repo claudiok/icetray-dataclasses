@@ -15,7 +15,7 @@
 #include <unistd.h>
 #include <cstdlib>
 
-// Should these (and ID generation) be moved to I3ParticleID?
+// TODO: Should these (and ID generation) be moved to I3ParticleID?
 static int32_t global_last_pid_ = 0;
 static int32_t global_minor_id_ = 0;
 static uint64_t global_major_id_ = 0;
@@ -43,14 +43,9 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   }
   
   if(global_major_id_ ==0){
-    char hostname[128];
-    gethostname(hostname, 127);
-    // make sure the string is terminated when too long (POSIX.1-2001)
-    hostname[127]='\0';
-      
     boost::hash<std::string> string_hash;
     std::stringstream s;
-    s<<time(0)<<this_pid<<hostname;
+    s<<time(0)<<this_pid<<gethostid();
     global_major_id_ = string_hash(s.str());
   }
   ID_.majorID = global_major_id_;
@@ -83,8 +78,7 @@ I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double
   if(global_major_id_ ==0){
     boost::hash<std::string> string_hash;
     std::stringstream s;
-    std::string h(getenv("I3_BUILD") ? getenv("I3_BUILD") : "");
-    s<<time(0)<<this_pid<<h;
+    s<<time(0)<<this_pid<<gethostid();
     global_major_id_ = string_hash(s.str());
   }
   ID_.majorID = global_major_id_;
