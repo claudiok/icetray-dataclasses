@@ -32,7 +32,7 @@ public:
 
   I3Calibration();
     
-  virtual ~I3Calibration();
+  ~I3Calibration();
     
   I3DOMCalibrationMap domCal;
   I3VEMCalibrationMap vemCal;

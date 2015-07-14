@@ -32,7 +32,7 @@ public:
 
     I3OMGeo():omtype(UnknownType){} 
     
-    virtual ~I3OMGeo();
+    ~I3OMGeo();
     
     /**
      * the OM's (or PMT's) x,y,z position

@@ -69,7 +69,7 @@ class I3RecoPulse
 
   void SetWidth(float width) {width_ = width;}
 
-  virtual ~I3RecoPulse();
+  ~I3RecoPulse();
 
   bool operator==(const I3RecoPulse& rhs) const;
   bool operator!=(const I3RecoPulse& rhs) const { return !operator==(rhs); }

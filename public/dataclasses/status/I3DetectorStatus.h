@@ -47,7 +47,7 @@ public:
 
   I3DetectorStatus() {}
   
-  virtual ~I3DetectorStatus();
+  ~I3DetectorStatus();
 
   bool operator==(const I3DetectorStatus& rhs)
   {

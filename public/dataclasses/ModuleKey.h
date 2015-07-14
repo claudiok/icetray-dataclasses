@@ -54,7 +54,7 @@ class ModuleKey : public I3FrameObject
   ModuleKey(int str,unsigned int om) 
     : stringNumber_(str), omNumber_(om) {}
 
-  virtual ~ModuleKey();
+  ~ModuleKey();
 
   /**
    * retrieves the string number for this ModuleKey

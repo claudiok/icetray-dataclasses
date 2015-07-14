@@ -43,7 +43,7 @@ struct I3FilterResult : public I3FrameObject
   I3FilterResult() : conditionPassed(false), prescalePassed(false) {}
   /** Destructor.
    */
-  virtual ~I3FilterResult();
+  ~I3FilterResult();
   
   template <class Archive>
   void serialize(Archive& ar,unsigned version);

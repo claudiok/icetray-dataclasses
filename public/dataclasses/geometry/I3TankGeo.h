@@ -34,7 +34,7 @@ static const unsigned i3tankgeo_version_ = 2;
 struct I3TankGeo 
 {
   I3TankGeo() {}
-  virtual ~I3TankGeo();
+  ~I3TankGeo();
 
   enum TankType {NotSet = 0, Tyvek_Lined = 1, Zirconium_Lined = 2};
 

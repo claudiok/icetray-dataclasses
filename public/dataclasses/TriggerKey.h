@@ -185,7 +185,7 @@ class TriggerKey
   /**
    * Destructor.
    */
-  virtual ~TriggerKey();
+  ~TriggerKey();
   
   /**
    * Retrieves the source ID.

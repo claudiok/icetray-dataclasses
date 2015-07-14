@@ -41,7 +41,7 @@ public:
     SetOMKey(omKey);
   }
 
-  virtual ~TankKey() {}
+  ~TankKey() {}
 
   
   /**

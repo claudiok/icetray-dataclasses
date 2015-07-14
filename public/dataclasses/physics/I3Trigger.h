@@ -44,7 +44,7 @@ private:
   /**
    * Destructor.
    */
-  virtual ~I3Trigger();
+  ~I3Trigger();
 
   /**
    * Retrieves time at which the trigger was issued.

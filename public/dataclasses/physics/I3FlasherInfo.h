@@ -76,7 +76,7 @@ public:
       rate_(0)
   { }
 
-    virtual ~I3FlasherInfo(){;}
+    ~I3FlasherInfo(){;}
 
 
     /* return and set OMKey */

@@ -133,7 +133,7 @@ class I3Time : public I3FrameObject
    */
   explicit I3Time(double mjd);
 
-  virtual ~I3Time();
+  ~I3Time();
 	     
   /**
    * @brief Sets the time in the 'daq' style where

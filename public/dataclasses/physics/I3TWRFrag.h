@@ -41,7 +41,7 @@ class I3TWRFrag
   I3TWRFrag() : startBin_(0u){}
   /** Destructor.
    */
-  virtual ~I3TWRFrag();
+  ~I3TWRFrag();
 
   /** Returns the position of the fragment within the waveform.
    * 

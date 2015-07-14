@@ -106,7 +106,7 @@ class I3Waveform
    public:
     StatusCompound() : interval_(std::make_pair(0, 0)), status_(SATURATED), channel_(-1) {}
     
-    virtual ~StatusCompound();
+    ~StatusCompound();
     
     const std::pair<unsigned long long int, unsigned long long int>&
     GetInterval() const { return interval_; }
@@ -158,7 +158,7 @@ class I3Waveform
  public:
   I3Waveform() :  startTime_(0), binWidth_(0), source_(ATWD) {}
   
-  virtual ~I3Waveform();
+  ~I3Waveform();
   
   double GetStartTime() const {return startTime_;}
 

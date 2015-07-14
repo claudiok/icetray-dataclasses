@@ -47,7 +47,7 @@ class I3Geometry : public I3FrameObject
 {
 public:
   I3Geometry(){};
-  virtual ~I3Geometry();
+  ~I3Geometry();
 
   //Map of all OMs based on their OMKey
   I3OMGeoMap omgeo;

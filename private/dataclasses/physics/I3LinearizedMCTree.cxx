@@ -21,7 +21,7 @@ class I3Stochastic {
 public:
   I3Stochastic() : time_(0), energy_(0) {};
   I3Stochastic(const I3Particle &parent, const I3Particle &stochastic);
-  virtual ~I3Stochastic() {}
+  ~I3Stochastic() {}
   
   static bool IsCompressible(const I3Particle &parent, const I3Particle &stochastic);
   bool operator<(const I3Stochastic &other) const;

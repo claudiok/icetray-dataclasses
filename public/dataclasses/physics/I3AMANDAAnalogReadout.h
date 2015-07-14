@@ -45,7 +45,7 @@ public:
 
   I3AMANDAAnalogReadout() : processFirstLE_(true), processTOTs_(true) {}
   
-  virtual ~I3AMANDAAnalogReadout();
+  ~I3AMANDAAnalogReadout();
 
   /**
    * Returns the earliest leading edge recorded by the DAQ

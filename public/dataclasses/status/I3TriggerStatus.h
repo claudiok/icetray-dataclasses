@@ -143,7 +143,7 @@ class I3TriggerStatus
   /**
    * Destructor.
    */
-  virtual ~I3TriggerStatus(){};
+  ~I3TriggerStatus(){};
   
   /**
    * Get trigger name.

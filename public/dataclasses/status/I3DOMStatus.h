@@ -43,7 +43,7 @@ public:
        mpeThreshold(NAN)
   {};
 
-  virtual ~I3DOMStatus();
+  ~I3DOMStatus();
   
   bool operator==(const I3DOMStatus& rhs) const
   {

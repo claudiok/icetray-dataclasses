@@ -176,7 +176,7 @@ public:
     /**
      * Destructor.
      */
-    virtual ~I3DOMLaunch();
+    ~I3DOMLaunch();
   
     /**
      * Return ATWD/FADC launch time.

@@ -34,7 +34,7 @@ struct I3Map : public I3FrameObject, public std::map<Key, Value>
     ar & make_nvp("map", base_object< std::map<Key, Value> >(*this));
   }
 
-  virtual ~I3Map();
+  ~I3Map();
 
   const Value& 
   at(const Key& where) const

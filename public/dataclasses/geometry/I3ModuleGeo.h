@@ -64,7 +64,7 @@ public:
     };
     
     I3ModuleGeo();
-    virtual ~I3ModuleGeo();
+    ~I3ModuleGeo();
     
     bool operator==(const I3ModuleGeo& rhs) const;
     

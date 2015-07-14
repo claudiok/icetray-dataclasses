@@ -38,7 +38,7 @@ class I3TWRLaunch
   I3TWRLaunch() : baseline_(0u){}
   /** Destructor.
    */
-  virtual ~I3TWRLaunch();
+  ~I3TWRLaunch();
   /** Returns the baseline/mean value of the waveform (as determined by the TWR DAQ).
    * 
    * @return The baseline/mean value.

@@ -262,7 +262,7 @@ class I3Particle : public I3FrameObject
   I3Particle(const boost::optional<I3Particle>& p);
 #endif
 
-  virtual ~I3Particle();
+  ~I3Particle();
 
   bool IsTrack() const;
   bool IsCascade() const;

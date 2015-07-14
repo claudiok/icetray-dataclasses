@@ -55,7 +55,7 @@ public:
     hglgCrossOver = NAN;
     corrFactor = 1.0;
   }
-  virtual ~I3VEMCalibration();
+  ~I3VEMCalibration();
   
   bool operator==(const I3VEMCalibration rhs) const
   {

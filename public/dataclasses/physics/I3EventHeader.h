@@ -55,7 +55,7 @@ class I3EventHeader : public I3FrameObject
  public:
   I3EventHeader();
 
-  virtual ~I3EventHeader();
+  ~I3EventHeader();
   
   bool operator==(const I3EventHeader& other) const
     {

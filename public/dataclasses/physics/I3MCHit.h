@@ -77,7 +77,7 @@ class I3MCHit
     cherenkovDistance_(NAN),
     source_(UNKNOWN) { }
 
-  virtual ~I3MCHit();
+  ~I3MCHit();
 
   double GetTime() const { return time_;}
 

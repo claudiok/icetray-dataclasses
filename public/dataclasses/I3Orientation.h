@@ -58,7 +58,7 @@ class I3Orientation : public I3FrameObject
 			SetOrientation(d);
 		}
 		
-		virtual ~I3Orientation();
+		~I3Orientation();
 		
 		//--------------
 
