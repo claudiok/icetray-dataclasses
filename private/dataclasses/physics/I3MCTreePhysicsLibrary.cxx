@@ -6,13 +6,23 @@
 #include <boost/function.hpp>
 
 using CompareFloatingPoint::Compare;
+using CompareFloatingPoint::IsNan;
 using I3MCTreeUtils::GetBestFilter;
 using I3MCTreeUtils::GetFilter;
 using I3MCTreeUtils::GetBestFilterPtr;
 
 namespace{
   bool MoreEnergetic(const I3Particle& a, const I3Particle& b){
-    return a.GetEnergy() > b.GetEnergy();
+    float a_energy = a.GetEnergy();
+    float b_energy = b.GetEnergy();
+    if (IsNan(a_energy) && IsNan(b_energy))
+        return 0;
+    else if (IsNan(a_energy))
+        return -1;
+    else if (IsNan(b_energy))
+        return 1;
+    else
+        return a_energy > b_energy;
   }
 
   bool IsPrimary(const I3Particle& p){ return p.IsPrimary(); }
