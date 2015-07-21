@@ -189,7 +189,7 @@ class I3Particle : public I3FrameObject
     N2Laser = -2000002101,
     YAGLaser = -2000002201,
     STauPlus = -2000009131,
-    STauMinus = -2000009132
+    STauMinus = -2000009132,
   };
 
   enum ParticleShape { 
@@ -220,16 +220,6 @@ class I3Particle : public I3FrameObject
     IceTop = 10,
     InIce = 20,
     InActiveVolume = 30
-  };
-
-  enum AirShowerComponent {
-    Undefined,
-    EM,
-    Muon,
-    Hadron,
-    Background,
-    EMFromChargedMesons,
-    EMFromLocalChargedMesons
   };
 
  public:
@@ -288,7 +278,6 @@ class I3Particle : public I3FrameObject
     length_ = rhs.length_;
     speed_ = rhs.speed_;
     locationType_ = rhs.locationType_;
-    component_ = rhs.component_;
     return *this;
   }
   bool operator==(const I3Particle& rhs) const {
@@ -302,8 +291,7 @@ class I3Particle : public I3FrameObject
         energy_ == rhs.energy_ &&
         length_ == rhs.length_ &&
         speed_ == rhs.speed_ &&
-        locationType_ == rhs.locationType_ &&
-        component_ == rhs.component_
+        locationType_ == rhs.locationType_
     );
   }
   bool operator!=(const I3Particle& rhs) const {
@@ -342,11 +330,6 @@ class I3Particle : public I3FrameObject
   std::string GetLocationTypeString() const;
   void SetLocationType(LocationType type) { locationType_ = type; }
   void SetLocationTypeString(const std::string &str);
-
-  AirShowerComponent GetAirShowerComponent() const { return component_; }
-  std::string GetAirShowerComponentString() const;
-  void SetAirShowerComponent(AirShowerComponent c) { component_ = c; }
-  void SetAirShowerComponentString(const std::string &str);
 
   const I3Position& GetPos() const { return pos_; }
   void SetPos(const I3Position& p) { pos_=p; }
@@ -440,7 +423,6 @@ class I3Particle : public I3FrameObject
   double length_;
   double speed_;
   LocationType locationType_;
-  AirShowerComponent component_;
 
   /** @brief Constructor for particle as a unique identifier by majorID and minorID
    * useful in iteration processes (in I3MCTree) where unique tagging is required
@@ -457,7 +439,7 @@ class I3Particle : public I3FrameObject
   BOOST_SERIALIZATION_SPLIT_MEMBER();
 };
 
-static const unsigned i3particle_version_ = 6;
+static const unsigned i3particle_version_ = 5;
 
 // let other code know that I3Particle stores PDG encodings internally
 #define I3PARTICLE_SUPPORTS_PDG_ENCODINGS
@@ -506,11 +488,6 @@ static const unsigned i3particle_version_ = 6;
 
 #define I3PARTICLE_H_I3Particle_LocationType                                      \
     (Anywhere)(IceTop)(InIce)(InActiveVolume)
-
-#define I3PARTICLE_H_I3Particle_AirShowerComponent                                \
-    (Undefined)(EM)(Muon)(Hadron)(Background)(EMFromChargedMesons)                \
-    (EMFromLocalChargedMesons)
-
 
 #ifndef __CINT__
 // template specialization for XML i/o

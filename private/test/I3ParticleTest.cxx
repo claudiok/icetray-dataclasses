@@ -31,7 +31,6 @@ TEST(CopyPtrConstructor)
   p1->SetShape(I3Particle::Cascade);
   p1->SetEnergy(100*I3Units::GeV);
   p1->SetSpeed(I3Constants::c);
-  p1->SetAirShowerComponent(I3Particle::EM);
   cout<<AsXML(p1);
 
   I3ParticlePtr p2(p1);
@@ -55,8 +54,6 @@ TEST(CopyPtrConstructor)
                   "Copied type do not match");
   ENSURE( p1->GetShape() == p2->GetShape(),
                   "Copied shape do not match");
-  ENSURE( p1->GetAirShowerComponent() == p2->GetAirShowerComponent(),
-                  "Copied component does not match");
 
 }
 
@@ -70,7 +67,6 @@ TEST(CopyObjConstructor)
   p1.SetShape(I3Particle::Cascade);
   p1.SetEnergy(100*I3Units::GeV);
   p1.SetSpeed(I3Constants::c);
-  p1.SetAirShowerComponent(I3Particle::EM);
   cout<<AsXML(p1);
 
   I3Particle p2(p1);
@@ -96,8 +92,6 @@ TEST(CopyObjConstructor)
                   "Copied shape do not match");
   ENSURE( p1.GetID() == p2.GetID(),
                   "Particle IDs do not match");
-  ENSURE( p1.GetAirShowerComponent() == p2.GetAirShowerComponent(),
-                  "Copied component does not match");
 
 }
 

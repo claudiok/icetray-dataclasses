@@ -31,8 +31,7 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   energy_(NAN),
   length_(NAN),
   speed_(I3Constants::c),
-  locationType_(Anywhere),
-  component_(Undefined)
+  locationType_(Anywhere)
 {
   const int this_pid = getpid();
   if (this_pid != global_last_pid_) {
@@ -64,8 +63,7 @@ I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double
   energy_(NAN),
   length_(length),
   speed_(I3Constants::c),
-  locationType_(Anywhere),
-  component_(Undefined)
+  locationType_(Anywhere)
 {
   const int this_pid = getpid();
   if (this_pid != global_last_pid_) {
@@ -95,8 +93,7 @@ I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
   energy_(NAN),
   length_(NAN),
   speed_(I3Constants::c),
-  locationType_(Anywhere),
-  component_(Undefined)
+  locationType_(Anywhere)
 {
   ID_.majorID = major;
   ID_.minorID = minor;
@@ -114,7 +111,6 @@ I3Particle I3Particle::Clone() const {
   p.SetLength(length_);
   p.SetSpeed(speed_);
   p.SetLocationType(locationType_);
-  p.SetAirShowerComponent(component_);
   return p;
 }
 
@@ -361,15 +357,6 @@ std::string I3Particle::GetLocationTypeString() const
 }
 
 
-std::string I3Particle::GetAirShowerComponentString() const
-{
-  switch (component_) {
-    BOOST_PP_SEQ_FOR_EACH(MAKE_ENUM_TO_STRING_CASE_LINE, ~, I3PARTICLE_H_I3Particle_AirShowerComponent)
-  }
-  return(boost::lexical_cast<std::string>( component_ ));
-}
-
-
 #define MAKE_STRING_TO_ENUM_IF_LINE(r, data, t) else if ( str == BOOST_PP_STRINGIZE(t) ) { data = t; }
 
 void I3Particle::SetTypeString(const std::string &str)
@@ -424,19 +411,6 @@ void I3Particle::SetLocationTypeString(const std::string &str)
       locationType_ = static_cast<LocationType>( boost::lexical_cast<int>(str) );
     } catch(boost::bad_lexical_cast &bad) {
       log_fatal("\"%s\" is not a valid LocationType.", str.c_str());
-    }
-  }
-}
-
-void I3Particle::SetAirShowerComponentString(const std::string &str)
-{
-  if (false) { }
-  BOOST_PP_SEQ_FOR_EACH(MAKE_STRING_TO_ENUM_IF_LINE, component_, I3PARTICLE_H_I3Particle_AirShowerComponent)
-  else {
-    try {
-      component_ = static_cast<AirShowerComponent>( boost::lexical_cast<int>(str) );
-    } catch(boost::bad_lexical_cast &bad) {
-      log_fatal("\"%s\" is not a valid AirShowerComponent.", str.c_str());
     }
   }
 }
@@ -840,8 +814,7 @@ I3Particle::I3Particle(const boost::optional<I3Particle>& p) :
   energy_(p->energy_),
   length_(p->length_),
   speed_(p->speed_),
-  locationType_(p->locationType_),
-  component_(p->component_)
+  locationType_(p->locationType_)
 {}
 #endif
 
@@ -864,7 +837,6 @@ template <class Archive>
     ar & make_nvp("length",length_);
     ar & make_nvp("speed",speed_);
     ar & make_nvp("LocationType",locationType_);
-    ar & make_nvp("AirShowerComponent",component_);
   }
 
 template <class Archive>
@@ -934,9 +906,6 @@ template <class Archive>
         ar & make_nvp("bjorkenx",bjorkenx);
         ar & make_nvp("bjorkeny",bjorkeny);
     }
-    if(version>=6){
-      ar & make_nvp("AirShowerComponent",component_);
-    }
   }
 
 // specialize save and load for XML archives in order to display
@@ -971,9 +940,6 @@ void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const
 
     tempString = GetLocationTypeString();
     ar & make_nvp("locationType",tempString);
-
-    tempString = GetAirShowerComponentString();
-    ar & make_nvp("AirShowerComponent",tempString);
 }
 
 template <>
@@ -1006,9 +972,6 @@ void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version)
 
     ar & make_nvp("locationType",tempString);
     SetLocationTypeString(tempString);
-
-    ar & make_nvp("AirShowerComponent",tempString);
-    SetAirShowerComponentString(tempString);
 }
 
 std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
@@ -1028,7 +991,6 @@ std::ostream& operator<<(std::ostream& oss, const I3Particle& p){
       << "               Shape : " << p.GetShapeString() << std::endl
       << "              Status : " << p.GetFitStatusString() <<  std::endl
       << "            Location : " << p.GetLocationTypeString() << std::endl 
-      << "           Component : " << p.GetAirShowerComponentString() << std::endl
       << "]" ;
   return oss;
 }
