@@ -1,78 +1,97 @@
-# $Id: $
-# $Author: $
-# $Date: $
-#
+
+Release Notes
+=============
 
 dev
 ---
-  o Speed up ShiftXXXTrack functions and added functionality:
-    - Added ShiftTimeTrack function returning the position of a track at a given time relative to vertex time
-    - scraped cascading function calls in ShiftAlongTrack and just go through properties with less conversions
-    - made arguments const as they are
-    - added documentation to both functions in C and python
-    - added unit tests for both functions
-    --- Marcel Zoll (marcel.zoll@fysik.su.se)
-  o Reimplemented I3MCTree's copy ctor to avoid O(n^2) performance on large trees
-   --- Jakob van Santen (jakob.van.santen@desy.de)
-  o Added Angle function for I3Direction for convenience
-    --- Marcel (marcel.zoll@fysik.su.se)
+
+* Speed up ShiftXXXTrack functions and added functionality:
+
+  * Added ShiftTimeTrack function returning the position of a track at a given time relative to vertex time
+  * scraped cascading function calls in ShiftAlongTrack and just go through properties with less conversions
+  * made arguments const as they are
+  * added documentation to both functions in C and python
+  * added unit tests for both functions
+
+  --- Marcel Zoll (marcel.zoll@fysik.su.se)
+
+* Reimplemented I3MCTree's copy ctor to avoid O(n^2) performance on large trees
+  --- Jakob van Santen (jakob.van.santen@desy.de)
+
+* Added Angle function for I3Direction for convenience
+  --- Marcel (marcel.zoll@fysik.su.se)
 
 April 17, 2015, don la dieu  (nega@icecube.umd.edu)
 --------------------------------------------------------------------
- V15-04-01 
+
+V15-04-01 
+
 Interface Changes : 
-  o Updated python bindings
-  o SPEChargeDistribution : public members of data aggregates don't get the
-    trailing underscore.  Those denote private members of classes.
-  o SPEChargeDistribution gets python bindings
-  o I3DOMCalibration the following methods are exposed to python :
-    - Get/SetMeanFADCCharge
-    - Get/SetMeanATWDCharge
-    - Get/SetCombinedSPEChargeDistribution
-    - IsMeanATWD/FADCChargeValid
+
+* Updated python bindings
+* SPEChargeDistribution : public members of data aggregates don't get the
+  trailing underscore.  Those denote private members of classes.
+* SPEChargeDistribution gets python bindings
+* I3DOMCalibration the following methods are exposed to python :
+
+  * Get/SetMeanFADCCharge
+  * Get/SetMeanATWDCharge
+  * Get/SetCombinedSPEChargeDistribution
+  * IsMeanATWD/FADCChargeValid
+
 New Features :
 
 Bug Fixes :
-  o The new I3MCTree sets the type of old 'Dark' particles correctly now.
-  o SPEChargeDistribution::IsValid - This has the correct logic now.
-    (isnan(x) || isnan(y)) == (false || false) == false when x and y 
-    are non-NaN.  IsValid should return true in this case.  The method 
-    has been changed to the equivalent of (!isnan(x) && !isnan(y)).
-    Tests have been added as well.
 
-  o IsMeanATWD/FADCChargeValid - Logic was reversed.  It's correct now
-    (with tests) and returns true if std::isfinite(charge) and charge > 0.
+* The new I3MCTree sets the type of old 'Dark' particles correctly now.
+
+* SPEChargeDistribution::IsValid - This has the correct logic now.
+  (isnan(x) || isnan(y)) == (false || false) == false when x and y 
+  are non-NaN.  IsValid should return true in this case.  The method 
+  has been changed to the equivalent of (!isnan(x) && !isnan(y)).
+  Tests have been added as well.
+
+* IsMeanATWD/FADCChargeValid - Logic was reversed.  It's correct now
+  (with tests) and returns true if std::isfinite(charge) and charge > 0.
    
 April 2, 2015, don la dieu  (nega@icecube.umd.edu)
 --------------------------------------------------------------------
- V15-03-00 
-  o better operator support
-  o add equality for I3RecoPulseSeriesMap masks/unions
+
+V15-03-00 
+
+* better operator support
+* add equality for I3RecoPulseSeriesMap masks/unions
 
 March 15, 2015, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
- V15-03-00 
-  o AMANDA classes are no longer visible.
-  o Give wavedeform the ability to apply per digitizer s.p.e. corrections. 
-    Add necessary calibration constants to I3DOMCalibration. 
-    Remove unused old constants from I3DOMCalibration.
-  o I3MCHit.weight is no longer accessible from python
-  o New MJD for the leap second test.  Go Navy!
-  o I3Particle::Clone returns a copy of the particle, but with a new ID.
-  o new I3MCTree, I3MCTreePhysicsLibrary, and revamped I3MCTreeUtils
+
+V15-03-00 
+
+* AMANDA classes are no longer visible.
+* Give wavedeform the ability to apply per digitizer s.p.e. corrections. 
+  Add necessary calibration constants to I3DOMCalibration. 
+  Remove unused old constants from I3DOMCalibration.
+* I3MCHit.weight is no longer accessible from python
+* New MJD for the leap second test.  Go Navy!
+* I3Particle::Clone returns a copy of the particle, but with a new ID.
+* new I3MCTree, I3MCTreePhysicsLibrary, and revamped I3MCTreeUtils
 
 November 20, 2014, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
- V14-11-00 - Minor release
-  o I3Particles now have mass.  Welcome to the Standard Model.
-  o Added support for I3_TESTDATA
-  o I3MCTree::GetParent is exposed.
+
+V14-11-00 - Minor release
+
+* I3Particles now have mass.  Welcome to the Standard Model.
+* Added support for I3_TESTDATA
+* I3MCTree::GetParent is exposed.
 
 September 30, 2014, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
- V14-10-00 - Bugfix release
-  o I3PODHolder added.  This cleans up the frame-level POD classes and, with the 
-    new operator suite, fixes object comparison, e.g. I3Double comparisons to double
-    work as expected.
+
+V14-10-00 - Bugfix release
+
+* I3PODHolder added.  This cleans up the frame-level POD classes and, with the 
+  new operator suite, fixes object comparison, e.g. I3Double comparisons to double
+  work as expected.
 
 
