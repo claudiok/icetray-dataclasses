@@ -29,6 +29,7 @@ NB:  Another thing you'll see is "Ulps" which stands for "Units in the Last Plac
 #include <float.h>
 #include <math.h>
 #include <stdint.h>
+#include <cstring>
 
 #define INFINITYCHECK
 #define NANCHECK
