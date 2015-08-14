@@ -283,6 +283,51 @@ TEST(Serialization)
 	}
 }
 
+void
+ensure_superdst_equal(const I3SuperDST &sa, const I3SuperDST &b)
+{
+	I3RecoPulseSeriesMapConstPtr pa = sa.Unpack();
+	I3RecoPulseSeriesMapConstPtr pb = sa.Unpack();
+	typedef I3RecoPulseSeriesMap::const_iterator map_iter;
+	typedef I3RecoPulseSeries::const_iterator series_iter;
+	
+	ENSURE_EQUAL(pa->size(), pb->size());
+	for (map_iter pair_a=pa->begin(), pair_b=pb->begin(); pair_a!=pa->end(); pair_a++,pair_b++) {
+		ENSURE_EQUAL(pair_a->first, pair_b->first);
+		ENSURE_EQUAL(pair_a->second.size(), pair_b->second.size());
+		for (series_iter pulse_a=pair_a->second.begin(), pulse_b=pair_b->second.begin(); pulse_a != pair_a->second.end(); pulse_a++,pulse_b++) {
+			ENSURE_EQUAL(*pulse_a, *pulse_b);
+		}
+	}
+}
+
+TEST(TimeOverflow)
+{
+	OMKey key1(55,47);
+	OMKey key2(23,17);
+	
+	// a time difference of exactly max_timecode_header
+	// + max_overflow should be representable
+	int dt = 65535 + 2047;
+	for (int offset=-1; offset < 2; offset++) {
+	
+		I3RecoPulseSeriesMap pmap;
+		I3RecoPulse pulse;
+		pulse.SetTime(0);
+		pulse.SetCharge(0);
+		pulse.SetWidth(4);
+		pulse.SetFlags(I3RecoPulse::LC);
+		pmap[key1].push_back(pulse);
+
+		pulse.SetTime(dt + offset);
+		pmap[key2].push_back(pulse);
+			
+		I3SuperDST supi(pmap), supa;
+		resurrect(supi, supa);
+		ensure_superdst_equal(supi, supa);
+	}
+}
+
 TEST(UnpackingAutomagically)
 {
 	I3RecoPulseSeriesMap pulsemap;
