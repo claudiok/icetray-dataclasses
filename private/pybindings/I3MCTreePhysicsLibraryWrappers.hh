@@ -1,3 +1,5 @@
+#ifndef I3MCTREE_PHYSICS_LIBRARY_WRAPPERS_H
+#define I3MCTREE_PHYSICS_LIBRARY_WRAPPERS_H
 //
 //   Copyright (c) 2004, 2005, 2006, 2007   Troy D. Straszheim  
 //   
@@ -76,3 +78,4 @@ I3ParticlePtr get_most_energetic_nucleus(const I3MCTree& t){
 }
 
 
+#endif
