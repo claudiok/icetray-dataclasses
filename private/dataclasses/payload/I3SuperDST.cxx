@@ -1110,10 +1110,8 @@ void I3SuperDST::load_v1(Archive &ar)
 		/* Widths: {InIce SLC, InIce HLC, IceTop SLC, IceTop HLC} */
 		std::vector<uint8_t>::const_iterator &width_it =
 		    width_its[2*(readout.om_.GetOM() > 60) + hlc];
-		#ifndef NDEBUG
 		std::vector<uint8_t>::const_iterator width_end =
 		    widths[2*(readout.om_.GetOM() > 60) + hlc].end();
-		#endif
 		
 		/* 
 		 * Use the slop bits in the header as the most significant
