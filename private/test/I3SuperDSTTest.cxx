@@ -328,6 +328,29 @@ TEST(TimeOverflow)
 	}
 }
 
+TEST(ChargeOverflow)
+{
+	OMKey key1(55,47);
+	
+	// a charged of exactly max_chargecode
+	// + max_overflow should be representable
+	int q = (1u<<6)-1 + UINT16_MAX;
+	for (int offset=-1; offset < 2; offset++) {
+		I3RecoPulseSeriesMap pmap;
+		I3RecoPulse pulse;
+		pulse.SetTime(0);
+		// NB: we add one because the encoding floor()s the charge
+		pulse.SetCharge((q+offset+1)*0.05);
+		pulse.SetWidth(4);
+		pulse.SetFlags(I3RecoPulse::LC);
+		pmap[key1].push_back(pulse);
+			
+		I3SuperDST supi(pmap), supa;
+		resurrect(supi, supa);
+		ensure_superdst_equal(supi, supa);
+	}
+}
+
 TEST(UnpackingAutomagically)
 {
 	I3RecoPulseSeriesMap pulsemap;
