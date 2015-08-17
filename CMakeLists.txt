@@ -5,9 +5,9 @@ i3_project(dataclasses
   PYTHON_DIR python
   DOCS_DIR resources/docs)
 
-if(USE_ROOT)
+if(ROOT_FOUND)
   set(OPTIONAL_TOOLS root)
-endif(USE_ROOT)
+endif(ROOT_FOUND)
 
 i3_add_library(dataclasses
   private/dataclasses/*.cxx
@@ -120,7 +120,7 @@ set(TEST_SCRIPTS
 # Using the same toolset but building w/o ROOT this test passes.  
 # When we retire 10.04 for good (soon, likely) we can re-enable this 
 # test and see what happens.
-if(NOT USE_ROOT)
+if(NOT ROOT_FOUND)
   LIST(APPEND TEST_SCRIPTS resources/test/test_tree_pybindings.py)
 endif()
 
