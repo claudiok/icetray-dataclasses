@@ -13,12 +13,6 @@
  * Has methods for setting the time in either the Daq UTC convention or
  * in the Modified Julian convention 
  * 
- * @todo The library I have is using Barycentric Dynamical Time (TDB),
- * which differs from UTC by a number that is a function of year.  UTC has 
- * a leap second every now and then and TDB doesn't Right
- * now they're ~68 seconds different.  May need to account for this.
- * http://jday.sourceforge.net/index.php for reference
- *
  */
 
 static const unsigned i3time_version_ = 0;
