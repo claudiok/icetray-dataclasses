@@ -182,6 +182,16 @@ TEST(shifting_tracks) {
   ENSURE( (p.ShiftTimeTrack(10)-I3Position(1.73085,1.73085,1.73085)).Magnitude() <0.001 ); //precision better than a mm
 }
 
+<<<<<<< .mine
+TEST(hasenergy){
+
+  I3Particle particle;
+ 
+  particle.SetEnergy(105.0*I3Units::MeV);
+
+  ENSURE(particle.HasEnergy());
+}
+=======
 TEST(stop_time) {
   I3Particle particle;
   ENSURE(isnan(particle.GetStopTime()));
@@ -201,3 +211,4 @@ TEST(stop_time) {
   ENSURE(fabs(particle.GetStopTime() - stop_time) < 0.001*I3Units::ns);
 }
 
+>>>>>>> .r136632
