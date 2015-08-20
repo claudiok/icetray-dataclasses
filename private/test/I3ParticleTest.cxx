@@ -337,6 +337,17 @@ TEST(get_mass_for_type){
   ENSURE_DISTANCE(I3Particle::GetMassForType(I3Particle::Fe58Nucleus), 53.9512490695*I3Units::GeV, 1*I3Units::eV, "The mass changed!");;
 }
 
+
+TEST( settypestring )
+{
+    I3Particle numu;
+
+    numu.SetTypeString("NuMu");
+    
+    ENSURE( numu.GetTypeString() == "NuMu" );
+}
+
+
 TEST(hasenergy){
 
   I3Particle particle;
