@@ -432,6 +432,9 @@ class I3Particle : public I3FrameObject
   I3Particle(const uint64_t major, const int32_t minor);
 
   friend class I3Stochastic;
+  // since that ctor is private we need to give this
+  // class friend access to test it
+  friend class test_particle_id_private_ctor;
 	 
   friend class boost::serialization::access;
   template <class Archive> void save(Archive & ar, unsigned version) const;
