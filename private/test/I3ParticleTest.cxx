@@ -10,7 +10,6 @@
 */
 
 #include <I3Test.h>
-#include <cmath>
 #include <iostream>
 #include <string>
 #include <boost/preprocessor.hpp>
@@ -364,17 +363,17 @@ TEST(stop_time) {
 
   particle.SetShape(I3Particle::StoppingTrack);
   double time = 10.*I3Units::ns;
-  particle.SetTime(10.*I3Units::ns);
-  ENSURE(fabs(particle.GetStopTime() - time) < 0.001*I3Units::ns);
+  particle.SetTime(time);
+  ENSURE_EQUAL(particle.GetStopTime(), time);
 
   particle.SetShape(I3Particle::ContainedTrack);
   double length = 500.*I3Units::m;
   particle.SetLength(length);
-  double stop_time = time + length/I3Constants::c;
-  ENSURE(fabs(particle.GetStopTime() - stop_time) < 0.001*I3Units::ns);
+  time += length/I3Constants::c;
+  ENSURE_EQUAL(particle.GetStopTime(), time);
 
   particle.SetShape(I3Particle::MCTrack);
-  ENSURE(fabs(particle.GetStopTime() - stop_time) < 0.001*I3Units::ns);
+  ENSURE_EQUAL(particle.GetStopTime(), time);
 }
 
 TEST(istopshower){
