@@ -10,12 +10,14 @@
 */
 
 #include <I3Test.h>
+#include <cmath>
 #include <iostream>
 #include <string>
 #include <boost/preprocessor.hpp>
 
 #include "dataclasses/physics/I3Particle.h"
 #include "dataclasses/I3Constants.h"
+#include "icetray/I3Units.h"
 
 using namespace std;
 
@@ -178,5 +180,24 @@ TEST(shifting_tracks) {
   ENSURE(p.ShiftTimeTrack(0)== I3Position(0.,0.,0.) );
   // 1/sqrt(3)*10*I3Constants::c == 1.73085
   ENSURE( (p.ShiftTimeTrack(10)-I3Position(1.73085,1.73085,1.73085)).Magnitude() <0.001 ); //precision better than a mm
+}
+
+TEST(stop_time) {
+  I3Particle particle;
+  ENSURE(isnan(particle.GetStopTime()));
+
+  particle.SetShape(I3Particle::StoppingTrack);
+  double time = 10.*I3Units::ns;
+  particle.SetTime(10.*I3Units::ns);
+  ENSURE(fabs(particle.GetStopTime() - time) < 0.001*I3Units::ns);
+
+  particle.SetShape(I3Particle::ContainedTrack);
+  double length = 500.*I3Units::m;
+  particle.SetLength(length);
+  double stop_time = time + length/I3Constants::c;
+  ENSURE(fabs(particle.GetStopTime() - stop_time) < 0.001*I3Units::ns);
+
+  particle.SetShape(I3Particle::MCTrack);
+  ENSURE(fabs(particle.GetStopTime() - stop_time) < 0.001*I3Units::ns);
 }
 
