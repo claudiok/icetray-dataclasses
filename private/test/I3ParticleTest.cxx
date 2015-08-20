@@ -196,15 +196,7 @@ TEST(shifting_tracks) {
   ENSURE( (p.ShiftTimeTrack(10)-I3Position(1.73085,1.73085,1.73085)).Magnitude() <0.001 ); //precision better than a mm
 }
 
-<<<<<<< .mine
-TEST(istopshower){
 
-  I3Particle istopshower; 
-  istopshower.SetShape(I3Particle::TopShower);
-  ENSURE(istopshower.IsTopShower()); 
-
-}
-=======
 TEST(get_mass_for_type){
   ENSURE_DISTANCE(I3Particle::GetMassForType(I3Particle::Gamma), 0., 1*I3Units::eV, "The mass changed!");
   ENSURE_DISTANCE(I3Particle::GetMassForType(I3Particle::EPlus), 0.00051099891*I3Units::GeV, 1*I3Units::eV, "The mass changed!");
