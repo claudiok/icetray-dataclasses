@@ -30,6 +30,8 @@ NB:  Another thing you'll see is "Ulps" which stands for "Units in the Last Plac
 #include <math.h>
 #include <stdint.h>
 #include <cstring>
+#include <string>
+#include <cstdlib>
 
 #define INFINITYCHECK
 #define NANCHECK
