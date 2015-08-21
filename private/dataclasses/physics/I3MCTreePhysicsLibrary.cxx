@@ -1,3 +1,4 @@
+#include <string>
 #include <dataclasses/external/CompareFloatingPoint.h>
 #include <dataclasses/physics/I3MCTreePhysicsLibrary.hh>
 #include "dataclasses/physics/I3ParticleID.h"

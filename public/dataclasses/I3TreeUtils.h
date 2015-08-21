@@ -37,7 +37,7 @@ namespace I3TreeUtils
    * Alternative way to add top level object
    */
   template<class Type>
-    void AddTopLevel(shared_ptr<I3Tree<Type> > t, const Type& p)
+    void AddTopLevel(boost::shared_ptr<I3Tree<Type> > t, const Type& p)
     {
       AddTopLevel<Type>(*t, p);
     }
@@ -70,7 +70,7 @@ namespace I3TreeUtils
    * Alternative to append a child
    */
   template<class Type>
-    void AppendChild(shared_ptr<I3Tree<Type> > t, 
+    void AppendChild(boost::shared_ptr<I3Tree<Type> > t, 
 		     const Type& parent, const Type& child)
     {
       AppendChild<Type>(*t, parent, child);
@@ -99,7 +99,7 @@ namespace I3TreeUtils
    * Alternative way to get object from tree
    */
   template<class Type>
-    Type& GetObject(shared_ptr<const I3Tree<Type> > t, uint64_t major_id, int minor_id)
+    Type& GetObject(boost::shared_ptr<const I3Tree<Type> > t, uint64_t major_id, int minor_id)
     {
       return GetObject<Type>(*t, major_id, minor_id);
     }
@@ -122,7 +122,7 @@ namespace I3TreeUtils
    * Alternative way to get top level objects
    */
   template<class Type>
-    const std::vector<Type> GetTopLevelList(shared_ptr<const I3Tree<Type> > t)
+    const std::vector<Type> GetTopLevelList(boost::shared_ptr<const I3Tree<Type> > t)
     {
       return GetTopLevelList<Type>(*t);
     }
@@ -152,7 +152,7 @@ namespace I3TreeUtils
    * Alternative way to get list of daugters
    */
   template<class Type>
-    const std::vector<Type> GetDaughters(shared_ptr<const I3Tree<Type> > t, 
+    const std::vector<Type> GetDaughters(boost::shared_ptr<const I3Tree<Type> > t, 
 					 const Type& p)
     {
       return GetDaughters<Type>(*t, p);
@@ -176,7 +176,7 @@ namespace I3TreeUtils
    * Alternate way to check if object is a top level object
    */
   template<class Type>
-    bool IsTopLevel(shared_ptr<const I3Tree<Type> > t, const Type& p)
+    bool IsTopLevel(boost::shared_ptr<const I3Tree<Type> > t, const Type& p)
     {
       return IsTopLevel<Type>(*t, p);
     }
@@ -201,7 +201,7 @@ namespace I3TreeUtils
    * Alternative way to check if object has a parent
    */
   template<class Type>
-    bool HasParent(shared_ptr<const I3Tree<Type> > t, const Type& child)
+    bool HasParent(boost::shared_ptr<const I3Tree<Type> > t, const Type& child)
     {
       return HasParent<Type>(*t, child);
     }
@@ -226,7 +226,7 @@ namespace I3TreeUtils
    * Alternative way to get parent
    */
   template<class Type>
-    const Type& GetParent(shared_ptr<const I3Tree<Type> > t,
+    const Type& GetParent(boost::shared_ptr<const I3Tree<Type> > t,
 				const Type& child)
     {
       return GetParent<Type>(*t, child);

@@ -145,7 +145,7 @@ void register_I3Trigger()
     .def(dataclass_suite<I3TriggerHierarchy>())
     ;
 
-  class_<I3VectorI3Trigger, bases<I3FrameObject>, shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
+  class_<I3VectorI3Trigger, bases<I3FrameObject>, boost::shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
     .def(dataclass_suite<I3VectorI3Trigger >())
     ;
 

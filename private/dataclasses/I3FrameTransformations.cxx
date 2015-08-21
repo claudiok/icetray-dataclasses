@@ -10,6 +10,7 @@
  *  
  */
 
+#include <boost/shared_ptr.hpp>
 #include <icetray/I3Frame.h>
 #include <icetray/I3Units.h>
 #include <dataclasses/I3MapOMKeyMask.h>
@@ -20,6 +21,8 @@
 #include <dataclasses/payload/I3SuperDSTTrigger.h>
 #include <dataclasses/physics/I3Trigger.h>
 #include <dataclasses/status/I3DetectorStatus.h>
+
+using boost::dynamic_pointer_cast;
 
 static I3RecoPulseSeriesMapPtr HitsAsPulses(I3RecoHitSeriesMapConstPtr hits);
 
@@ -36,32 +39,32 @@ I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
 	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name, quietly);
 	
 	I3RecoPulseSeriesMapConstPtr pulses =
-	    dynamic_pointer_cast<const I3RecoPulseSeriesMap>(focp);
+	    boost::dynamic_pointer_cast<const I3RecoPulseSeriesMap>(focp);
 	
 	if (!focp || pulses)
 		return pulses;
 	
 	I3RecoPulseSeriesMapMaskConstPtr mask = 
-	    dynamic_pointer_cast<const I3RecoPulseSeriesMapMask>(focp);
+	    boost::dynamic_pointer_cast<const I3RecoPulseSeriesMapMask>(focp);
 	
 	if (mask)
 		return mask->Apply(*this); 
 		
 	I3RecoPulseSeriesMapUnionConstPtr uni = 
-	    dynamic_pointer_cast<const I3RecoPulseSeriesMapUnion>(focp);
+	    boost::dynamic_pointer_cast<const I3RecoPulseSeriesMapUnion>(focp);
 
 	if (uni)
 		return uni->Apply(*this);
 	
 	I3SuperDSTConstPtr superdst = 
-	    dynamic_pointer_cast<const I3SuperDST>(focp);
+	    boost::dynamic_pointer_cast<const I3SuperDST>(focp);
 	
 	if (superdst)
 		return superdst->Unpack();
 
 	// Compatibility with old data
 	I3RecoHitSeriesMapConstPtr hits = 
-	    dynamic_pointer_cast<const I3RecoHitSeriesMap>(focp);
+	    boost::dynamic_pointer_cast<const I3RecoHitSeriesMap>(focp);
 
 	if (hits)
 		return HitsAsPulses(hits);
@@ -101,12 +104,12 @@ I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
 	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name, quietly);
 
 	I3TriggerHierarchyConstPtr triggers =
-	    dynamic_pointer_cast<const I3TriggerHierarchy>(focp);
+	    boost::dynamic_pointer_cast<const I3TriggerHierarchy>(focp);
 	if (triggers)
 		return triggers;
 	
 	I3SuperDSTTriggerSeriesConstPtr sdst =
-	    dynamic_pointer_cast<const I3SuperDSTTriggerSeries>(focp);
+	    boost::dynamic_pointer_cast<const I3SuperDSTTriggerSeries>(focp);
 	I3DetectorStatusConstPtr status =
 	    this->Get<I3DetectorStatusConstPtr>();
 	if (sdst && !status)
