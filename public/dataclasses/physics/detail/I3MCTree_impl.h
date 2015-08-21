@@ -1,3 +1,6 @@
+#ifndef I3MCTREE_IMPL_H
+#define I3MCTREE_IMPL_H
+
 /**
  * @file I3MCTree.hh
  * @brief Implementation for TreeBase
@@ -1544,3 +1547,4 @@ namespace TreeBase {
 };
 
 
+#endif
