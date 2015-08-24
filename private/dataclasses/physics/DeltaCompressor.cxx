@@ -12,6 +12,7 @@
 #include "dataclasses/physics/DeltaCompressor.h"
 #include <iostream>
 #include <stdexcept>
+#include <cstdlib>
 
 using namespace std;
 
