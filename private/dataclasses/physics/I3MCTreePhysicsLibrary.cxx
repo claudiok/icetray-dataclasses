@@ -63,9 +63,19 @@ namespace{
 
 I3MCTree::optional_value
 I3MCTreePhysicsLibrary::GetMostEnergeticPrimary(const I3MCTree& t, bool safe_mode){
-  I3MCTree::optional_value rval = GetBestFilter(t, IsPrimary, MoreEnergetic);
+  if(t.size() == 0) 
+    return I3MCTree::optional_value();
+
+  std::vector<I3Particle> primaries = t.get_heads();
+  I3MCTree::optional_value rval(primaries.front());
+  BOOST_FOREACH(const I3Particle& p, primaries){
+    if(p.GetEnergy() > rval->GetEnergy()){
+      rval = p;
+    }
+  }
+
   if(rval && safe_mode)
-    return checked_value(GetFilter(t, IsPrimary), rval);
+    return checked_value(primaries, rval);
   return rval;
 }
 I3MCTree::optional_value

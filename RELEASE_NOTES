@@ -5,6 +5,11 @@ Release Notes
 dev
 ---
 
+* I3MCTreePhysicsLibrary::GetMostEnergeticPrimary now returns the correct primary
+  even if the shape is not set to Primary.  If now depends only on the position
+  in the tree.  Closes ticket #958.
+  --- Alex Olivas (olivas@icecube.umd.edu)
+
 * Speed up ShiftXXXTrack functions and added functionality:
 
   * Added ShiftTimeTrack function returning the position of a track at a given time relative to vertex time
