@@ -266,7 +266,7 @@ class I3Particle : public I3FrameObject
   bool HasEnergy() const;
 
   operator I3ParticleID() const{ return ID_; }
-  I3Particle operator=(const I3Particle& rhs) {
+  I3Particle& operator=(const I3Particle& rhs) {
     ID_ = rhs.ID_;
     pdgEncoding_ = rhs.pdgEncoding_;
     shape_ = rhs.shape_;
