@@ -54,4 +54,9 @@ void register_I3TriggerStatus()
 
   }
 
+  class_<I3TriggerStatusMap, 
+         I3TriggerStatusMapPtr>("I3TriggerStatusMap")
+    .def(dataclass_suite<I3TriggerStatusMap>())
+    ;
+
 }
