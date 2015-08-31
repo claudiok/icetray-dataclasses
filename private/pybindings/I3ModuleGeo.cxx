@@ -31,7 +31,7 @@ namespace bp = boost::python;
 void register_I3ModuleGeo()
 {
     {
-        bp::scope mchit_scope = 
+        bp::scope i3modulegeo_scope = 
         bp::class_<I3ModuleGeo, boost::shared_ptr<I3ModuleGeo> >("I3ModuleGeo")
         .def(bp::init<>() )
 #define PROPERTIES (ModuleType)(Radius)
