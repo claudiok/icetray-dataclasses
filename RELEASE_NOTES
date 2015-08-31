@@ -5,6 +5,8 @@ Release Notes
 dev
 ---
 
+* (r137069) - Added pybindings for I3DOMCalibrationMap and I3VEMCalibrationMap.
+
 * I3MCTreePhysicsLibrary::GetMostEnergeticPrimary now returns the correct primary
   even if the shape is not set to Primary.  If now depends only on the position
   in the tree.  Closes ticket #958.
