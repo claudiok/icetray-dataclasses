@@ -1,6 +1,4 @@
-#
-# Co
-#
+
 i3_project(dataclasses
   PYTHON_DIR python
   DOCS_DIR resources/docs)
@@ -109,6 +107,14 @@ set(TEST_SCRIPTS
   resources/test/test_i3particlevect.py
   resources/test/test_mctree_physics_library.py
   resources/test/test_I3Vectors.py  
+  resources/test/test_I3Calibration.py
+  resources/test/test_I3DOMStatus.py
+  resources/test/test_I3DetectorStatus.py
+  resources/test/test_I3Geometry.py
+  resources/test/test_I3ModuleGeo.py
+  resources/test/test_I3OMGeo.py
+  resources/test/test_I3TankGeo.py
+  resources/test/test_I3VEMCalibration.py
 )
 
 # For whatever reason this test doesn't play well with old versions
