@@ -23,6 +23,7 @@
 #include <icetray/python/copy_suite.hpp>
 #include <icetray/python/indexed_property.hpp>
 #include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/dataclass_suite.hpp>
 
 using namespace boost::python;
 
@@ -67,4 +68,8 @@ void register_I3DOMCalibration()
 
   }
 
+  class_<I3DOMCalibrationMap, 
+         I3DOMCalibrationMapPtr>("I3DOMCalibrationMap")
+    .def(dataclass_suite<I3DOMCalibrationMap>())
+    ;
 }

@@ -33,4 +33,10 @@ void register_I3VEMCalibration()
     #undef I3VEMCALPROPS
     .def(dataclass_suite<I3VEMCalibration>())
     ;
+
+  class_<I3VEMCalibrationMap, 
+         I3VEMCalibrationMapPtr>("I3VEMCalibrationMap")
+    .def(dataclass_suite<I3VEMCalibrationMap>())
+    ;
+
 }
