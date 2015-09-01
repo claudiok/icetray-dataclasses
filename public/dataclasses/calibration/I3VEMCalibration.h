@@ -9,8 +9,8 @@
 #define I3VEMCALIBRATION_H_INCLUDED
 
 #include <icetray/OMKey.h>
-#include "dataclasses/Utility.h"
-
+#include <dataclasses/Utility.h>
+#include <dataclasses/external/CompareFloatingPoint.h>
 
 /**
  * @brief This struct stores the VEM (Vertical Equivalent Muon) calibration
@@ -59,10 +59,11 @@ public:
   
   bool operator==(const I3VEMCalibration rhs) const
   {
-    return (pePerVEM == rhs.pePerVEM &&
-        muPeakWidth == rhs.muPeakWidth &&
-        hglgCrossOver == rhs.hglgCrossOver &&
-        corrFactor == rhs.corrFactor);
+    using CompareFloatingPoint::Compare;
+    return (Compare(pePerVEM, rhs.pePerVEM) &&            
+            Compare(muPeakWidth, rhs.muPeakWidth) &&
+            Compare(hglgCrossOver, rhs.hglgCrossOver) &&
+            Compare(corrFactor, rhs.corrFactor));
   }
   bool operator!=(const I3VEMCalibration rhs) const
   {
