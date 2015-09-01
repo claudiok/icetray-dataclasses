@@ -43,12 +43,12 @@ struct LinearFit
   double slope;
   double intercept;
   
-  bool operator==(const LinearFit rhs) const
+  bool operator==(const LinearFit& rhs) const
   {
     return (CompareFloatingPoint::Compare_NanEqual(slope,rhs.slope) && 
         CompareFloatingPoint::Compare_NanEqual(intercept,rhs.intercept));
   }
-  bool operator!=(const LinearFit rhs) const
+  bool operator!=(const LinearFit& rhs) const
   {
     return !operator==(rhs);
   }  
@@ -74,13 +74,13 @@ struct QuadraticFit
   double quadFitB;
   double quadFitC;
     
-  bool operator==(const QuadraticFit rhs) const
+  bool operator==(const QuadraticFit& rhs) const
   {
     return (CompareFloatingPoint::Compare_NanEqual(quadFitA,rhs.quadFitA) &&
         CompareFloatingPoint::Compare_NanEqual(quadFitB,rhs.quadFitB) &&
         CompareFloatingPoint::Compare_NanEqual(quadFitC,rhs.quadFitC));
   }
-  bool operator!=(const QuadraticFit rhs) const
+  bool operator!=(const QuadraticFit& rhs) const
   {
     return !operator==(rhs);
   }  
@@ -145,7 +145,7 @@ struct SPEChargeDistribution
         !std::isnan(gaus_width));
   }
   
-  bool operator==(const SPEChargeDistribution rhs) const
+  bool operator==(const SPEChargeDistribution& rhs) const
   {
     return (CompareFloatingPoint::Compare_NanEqual(exp_amp, rhs.exp_amp) &&
         CompareFloatingPoint::Compare_NanEqual(exp_width, rhs.exp_width) &&
@@ -153,7 +153,7 @@ struct SPEChargeDistribution
         CompareFloatingPoint::Compare_NanEqual(gaus_mean, rhs.gaus_mean) &&
         CompareFloatingPoint::Compare_NanEqual(gaus_width, rhs.gaus_width));
   }
-  bool operator!=(const SPEChargeDistribution rhs) const
+  bool operator!=(const SPEChargeDistribution& rhs) const
   {
     return !operator==(rhs);
   }  
@@ -198,7 +198,7 @@ struct TauParam
   P4(p4),P5(p5),
   TauFrac(tauFrac){}
   
-  bool operator==(const TauParam rhs) const
+  bool operator==(const TauParam& rhs) const
   {
     return (CompareFloatingPoint::Compare_NanEqual(P0,rhs.P0) &&
         CompareFloatingPoint::Compare_NanEqual(P1,rhs.P1) &&
@@ -208,7 +208,7 @@ struct TauParam
         CompareFloatingPoint::Compare_NanEqual(P5,rhs.P5) &&
         CompareFloatingPoint::Compare_NanEqual(TauFrac,rhs.TauFrac));
   }
-  bool operator!=(const TauParam rhs) const
+  bool operator!=(const TauParam& rhs) const
   {
     return !operator==(rhs);
   }  

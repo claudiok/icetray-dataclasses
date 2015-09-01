@@ -93,13 +93,13 @@ struct I3TriggerReadoutConfig
     readoutTimeOffset = NAN;
   }
   
-  bool operator==(const I3TriggerReadoutConfig rhs) const
+  bool operator==(const I3TriggerReadoutConfig& rhs) const
   {
     return (readoutTimeMinus == rhs.readoutTimeMinus &&
         readoutTimePlus == rhs.readoutTimePlus &&
         readoutTimeOffset == rhs.readoutTimeOffset);
   }
-  bool operator!=(const I3TriggerReadoutConfig rhs) const
+  bool operator!=(const I3TriggerReadoutConfig& rhs) const
   {
     return !operator==(rhs);
   }
