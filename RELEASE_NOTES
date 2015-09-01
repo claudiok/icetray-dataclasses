@@ -5,6 +5,9 @@ Release Notes
 dev
 ---
 
+August 31, 2015, Alex Olivas  (olivas@icecube.umd.edu)
+--------------------------------------------------------------------
+
 * (r137088, r137087) - The equality operator was broken for the following classes in python on boost1.38 systems.  This is fixed now.
 
   - I3VEMCalibration
