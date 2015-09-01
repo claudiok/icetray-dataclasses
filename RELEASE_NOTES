@@ -5,6 +5,15 @@ Release Notes
 dev
 ---
 
+* (r137088, r137087) - The equality operator was broken for the following classes in python on boost1.38 systems.  This is fixed now.
+
+  - I3VEMCalibration
+  - I3TriggerReadoutConfig
+  - LinearFit
+  - QuadraticFit
+  - SPEChargeDistribution
+  - TauParam
+
 * (r137069) - Added pybindings for I3DOMCalibrationMap and I3VEMCalibrationMap.
 
 * I3MCTreePhysicsLibrary::GetMostEnergeticPrimary now returns the correct primary
