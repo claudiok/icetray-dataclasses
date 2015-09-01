@@ -57,7 +57,7 @@ public:
   }
   ~I3VEMCalibration();
   
-  bool operator==(const I3VEMCalibration rhs) const
+  bool operator==(const I3VEMCalibration& rhs) const
   {
     using CompareFloatingPoint::Compare;
     return (Compare(pePerVEM, rhs.pePerVEM) &&            
@@ -65,7 +65,7 @@ public:
             Compare(hglgCrossOver, rhs.hglgCrossOver) &&
             Compare(corrFactor, rhs.corrFactor));
   }
-  bool operator!=(const I3VEMCalibration rhs) const
+  bool operator!=(const I3VEMCalibration& rhs) const
   {
     return !operator==(rhs);
   }
