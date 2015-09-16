@@ -34,6 +34,8 @@ TEST(CopyPtrConstructor)
   I3ParticlePtr p1(new I3Particle());
   p1->SetPos(1.0, 2.0, 3.0);
   p1->SetDir(2.5,3.5);
+  p1->SetTime(0.0);
+  p1->SetLength(10.0);
   p1->SetType(I3Particle::PMinus);
   p1->SetShape(I3Particle::Cascade);
   p1->SetEnergy(100*I3Units::GeV);
@@ -61,6 +63,8 @@ TEST(CopyPtrConstructor)
                   "Copied type do not match");
   ENSURE( p1->GetShape() == p2->GetShape(),
                   "Copied shape do not match");
+  ENSURE( p1 == p2, 
+	  "Copied particles overall do not match");
 
 }
 
@@ -70,6 +74,8 @@ TEST(CopyObjConstructor)
   I3Particle p1;
   p1.SetPos(1.0, 2.0, 3.0);
   p1.SetDir(2.5,3.5);
+  p1.SetTime(0.0);
+  p1.SetLength(10.0);
   p1.SetType(I3Particle::PMinus);
   p1.SetShape(I3Particle::Cascade);
   p1.SetEnergy(100*I3Units::GeV);
@@ -99,6 +105,8 @@ TEST(CopyObjConstructor)
                   "Copied shape do not match");
   ENSURE( p1.GetID() == p2.GetID(),
                   "Particle IDs do not match");
+  ENSURE( p1 == p2,
+	          "Particles overall do not match");
 
 }
 
