@@ -26,11 +26,11 @@ i3_add_library(dataclasses
   )
 
 
-if(USE_CINT)
+if(ROOT_FOUND AND USE_CINT)
   colormsg(HIYELLOW "*** CINT dictionaries are deprecated and will disappear November 1, 2015")
   set(CINT_ENABLED_TEST "TEST")
   set(USE_TOOL_ROOT root)
-endif(USE_CINT)
+endif(ROOT_FOUND AND USE_CINT)
 
 i3_test_executable(test 
   private/test/*.cxx
@@ -131,3 +131,4 @@ if(NOT ROOT_FOUND)
 endif()
 
 i3_test_scripts("${TEST_SCRIPTS}")
+set_tests_properties(dataclasses::test PROPERTIES LABELS RUN_LONG)
