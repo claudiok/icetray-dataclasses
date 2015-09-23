@@ -35,6 +35,7 @@ endif(ROOT_FOUND AND USE_CINT)
 i3_test_executable(test 
   private/test/*.cxx
   USE_PROJECTS dataclasses dataio
+  USE_PYBINDINGS interfaces dataio
   USE_TOOLS ${USE_TOOL_ROOT}
   )
 
