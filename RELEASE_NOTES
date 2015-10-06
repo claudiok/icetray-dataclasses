@@ -5,7 +5,7 @@ Release Notes
 dev
 ---
 
-* (r128288) - Make loading old trees with lots of primaries faster.
+* (r138288) - Make loading old trees with lots of primaries faster.
 
 August 31, 2015, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
