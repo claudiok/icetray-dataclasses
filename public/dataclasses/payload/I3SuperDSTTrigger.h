@@ -16,6 +16,8 @@
 #define DATACLASSES_I3SUPERDSTTRIGGER_H_INCLUDED	 
 
 #include "icetray/I3FrameObject.h"
+#include "icetray/I3Logging.h"
+#include "dataclasses/physics/I3TriggerHierarchy.h"
 
 class I3Trigger;
 class TriggerKey;
