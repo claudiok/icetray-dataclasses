@@ -46,3 +46,11 @@ TEST(not_equal_operator) {
   bar = std::string("test");
   ENSURE(!(foo != bar), "I3String ! operator!= failed");
 }
+
+TEST(stream_operator) {
+  I3String foo("test");
+  std::ostringstream bar;
+  bar << foo;
+  ENSURE(("I3String(\"test\")" == bar.str()), "I3String operator<< failed");
+  
+}
