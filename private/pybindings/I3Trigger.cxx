@@ -114,6 +114,17 @@ void register_I3Trigger()
       ;
     def("identity", identity_<TriggerKey::TypeID>);
 
+    enum_<TriggerKey::SubtypeID>("SubtypeID")
+      .value("NO_SUBTYPE",TriggerKey::NO_SUBTYPE)
+      .value("M18",TriggerKey::M18)
+      .value("M24",TriggerKey::M24)
+      .value("T0",TriggerKey::T0)
+      .value("LASER",TriggerKey::LASER)
+      .value("UNKNOWN_SUBTYPE",TriggerKey::UNKNOWN_SUBTYPE)
+      .export_values()
+      ;
+    def("identity", identity_<TriggerKey::SubtypeID>);
+
   }
 
   class_<TriggerKey>("TriggerKey")
