@@ -116,6 +116,7 @@ set(TEST_SCRIPTS
   resources/test/test_I3OMGeo.py
   resources/test/test_I3TankGeo.py
   resources/test/test_I3VEMCalibration.py
+  resources/test/test_I3WaveformIsEqualOperator.py
 )
 
 # For whatever reason this test doesn't play well with old versions
