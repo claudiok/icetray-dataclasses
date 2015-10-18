@@ -567,8 +567,7 @@ class I3DOMCalibration {
     }
   };
 
-  DroopedSPETemplate DiscriminatorPulseTemplate(bool droopy = false) const;
-  DroopedSPETemplate ATWDPulseTemplate(unsigned int channel = 0, bool droopy = false) const;
+  DroopedSPETemplate DiscriminatorPulseTemplate(bool droopy = false) const; DroopedSPETemplate ATWDPulseTemplate(unsigned int channel = 0, bool droopy = false) const;
   DroopedSPETemplate FADCPulseTemplate(bool droopy = false) const;
  
   template <class Archive>

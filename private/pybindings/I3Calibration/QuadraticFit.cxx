@@ -29,7 +29,7 @@ void register_QuadraticFit()
   class_<QuadraticFit>("QuadraticFit")
     .def_readwrite("quad_fit_a", &QuadraticFit::quadFitA)
     .def_readwrite("quad_fit_b", &QuadraticFit::quadFitB)
-    .def_readwrite("quad_fit_v", &QuadraticFit::quadFitC)
+    .def_readwrite("quad_fit_c", &QuadraticFit::quadFitC)
     .def(dataclass_suite<QuadraticFit>())
     ;
 }
