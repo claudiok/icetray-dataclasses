@@ -31,4 +31,7 @@ class TestI3Trigger(unittest.TestCase):
 
         self.assertEqual(trig1, trig2, "these should be the same.")
 
+        trig3 = dataclasses.I3Trigger()
+        self.assertNotEqual(trig1, trig3, "these should not be the same.")
+
 unittest.main()
