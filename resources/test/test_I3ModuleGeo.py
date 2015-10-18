@@ -8,7 +8,6 @@ class TestI3ModuleGeo(unittest.TestCase):
 
     def test_I3ModuleGeo(self):
         module = dataclasses.I3ModuleGeo()
-
         module.pos = dataclasses.I3Position(0,0,0)
         module.orientation = dataclasses.I3Orientation(1,0,0,0,1,0)
         module.radius = 99.
@@ -24,5 +23,16 @@ class TestI3ModuleGeo(unittest.TestCase):
                          "set/get isn't working.")
         self.assertEqual(module.module_type, dataclasses.I3ModuleGeo.IceCube,
                          "set/get isn't working.")
+
+
+        module2 = dataclasses.I3ModuleGeo()
+        module2.pos = dataclasses.I3Position(0,0,0)
+        module2.orientation = dataclasses.I3Orientation(1,0,0,0,1,0)
+        module2.radius = 99.
+        module2.module_type = dataclasses.I3ModuleGeo.IceCube
+        self.assertEqual(module,module2,
+                         "testing the equal operator.")
+
+
 
 unittest.main()        
