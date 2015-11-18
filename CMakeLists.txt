@@ -18,19 +18,12 @@ i3_add_library(dataclasses
 
   USE_PROJECTS icetray
 
-  ROOTCINT public/dataclasses/I3Position.h 
   public/dataclasses/I3Direction.h 
   public/dataclasses/I3Double.h 
   public/dataclasses/I3Time.h 
   public/dataclasses/physics/I3Particle.h
   )
 
-
-if(ROOT_FOUND AND USE_CINT)
-  colormsg(HIYELLOW "*** CINT dictionaries are deprecated and will disappear November 1, 2015")
-  set(CINT_ENABLED_TEST "TEST")
-  set(USE_TOOL_ROOT root)
-endif(ROOT_FOUND AND USE_CINT)
 
 i3_test_executable(test 
   private/test/*.cxx
