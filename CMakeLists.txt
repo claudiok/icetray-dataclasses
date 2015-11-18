@@ -17,11 +17,6 @@ i3_add_library(dataclasses
   USE_TOOLS boost python ${OPTIONAL_TOOLS}
 
   USE_PROJECTS icetray
-
-  public/dataclasses/I3Direction.h 
-  public/dataclasses/I3Double.h 
-  public/dataclasses/I3Time.h 
-  public/dataclasses/physics/I3Particle.h
   )
 
 
