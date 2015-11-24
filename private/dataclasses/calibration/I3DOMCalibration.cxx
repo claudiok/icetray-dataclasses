@@ -724,4 +724,96 @@ I3DOMCalibration::serialize(Archive& ar, unsigned version)
     }
 }
 
+// now define some printing operators so we get better output
+// than the address of the object
+
+std::ostream& operator<<(std::ostream& oss, const LinearFit& f)
+{
+  oss << "[LinearFit slope(" << f.slope << ") intercept(" << f.intercept
+      << ")]" ;
+  return oss;
+}
+
+std::ostream& operator<<(std::ostream& oss, const QuadraticFit& f)
+{
+  oss << "[QuadraticFit a(" << f.quadFitA << ") b(" << f.quadFitB
+      << ") c(" << f.quadFitC << ")]" ;
+  return oss;
+}
+
+std::ostream& operator<<(std::ostream& oss, const SPEChargeDistribution& spe)
+{
+  oss << "[ SPEChargeDistribution :: " << std::endl
+      << "                 exp_amp : " << spe.exp_amp << std::endl
+      << "               exp_width : " << spe.exp_width << std::endl
+      << "                gaus_amp : " << spe.gaus_amp << std::endl
+      << "               gaus_mean : " << spe.gaus_mean << std::endl
+      << "              gaus_width : " << spe.gaus_width << std::endl
+      << "]" ;
+  return oss;
+}
+
+std::ostream& operator<<(std::ostream& oss, const TauParam& p)
+{
+  oss << "[ TauParam :: " << std::endl
+      << "         P0 : " << p.P0 << std::endl
+      << "         P1 : " << p.P1 << std::endl
+      << "         P2 : " << p.P2 << std::endl
+      << "         P3 : " << p.P3 << std::endl
+      << "         P4 : " << p.P4 << std::endl
+      << "         P5 : " << p.P5 << std::endl
+      << "    TauFrac : " << p.TauFrac << std::endl
+      << "]" ;
+  return oss;
+}
+
+std::ostream& operator<<(std::ostream& oss, const I3DOMCalibration& c)
+{
+  oss << "[ I3DOMCalibration  :: " << std::endl
+      << "       TauParameters : " << c.GetTauParameters() << std::endl
+      << "         Temperature : " << c.GetTemperature() << std::endl
+      << "            FADCGain : " << c.GetFADCGain() << std::endl
+      << "     FADCBaselineFit : " << c.GetFADCBaselineFit() << std::endl
+      << "  FADCBeaconBaseline : " << c.GetFADCBeaconBaseline() << std::endl
+      << "          FADCDeltaT : " << c.GetFADCDeltaT() << std::endl
+      << "   FrontEndImpedance : " << c.GetFrontEndImpedance() << std::endl
+      << "         ATWDGain[0] : " << c.GetATWDGain(0) << std::endl
+      << "         ATWDGain[1] : " << c.GetATWDGain(1) << std::endl
+      << "         ATWDGain[2] : " << c.GetATWDGain(2) << std::endl
+      << "      ATWDFreqFit[0] : " << c.GetATWDFreqFit(0) << std::endl
+      << "      ATWDFreqFit[1] : " << c.GetATWDFreqFit(1) << std::endl
+      << "         TransitTime : " << c.GetTransitTime() << std::endl
+      << "           HVGainFit : " << c.GetHVGainFit() << std::endl
+      << "       DOMCalVersion : " << c.GetDOMCalVersion() << std::endl
+      << "       ATWDDeltaT[0] : " << c.GetATWDDeltaT(0) << std::endl
+      << "       ATWDDeltaT[1] : " << c.GetATWDDeltaT(1) << std::endl
+      << "        SPEDiscCalib : " << c.GetSPEDiscCalib() << std::endl
+      << "        MPEDiscCalib : " << c.GetMPEDiscCalib() << std::endl
+      << "        PMTDiscCalib : " << c.GetPMTDiscCalib() << std::endl
+      << "      RelativeDomEff : " << c.GetRelativeDomEff() << std::endl
+      << "        DomNoiseRate : " << c.GetDomNoiseRate() << std::endl
+      << " DomNoiseThermalRate : " << c.GetDomNoiseThermalRate() << std::endl
+      << "   DomNoiseDecayRate : " << c.GetDomNoiseDecayRate() << std::endl
+      << "DomNoiseScintillationMean : " << c.GetDomNoiseScintillationMean() << std::endl
+      << "DomNoiseScintillationSigma : " << c.GetDomNoiseScintillationSigma() << std::endl
+      << "DomNoiseScintillationHits : " << c.GetDomNoiseScintillationHits() << std::endl
+      << "CombinedSPEChargeDistribution : " << c.GetCombinedSPEChargeDistribution() << std::endl
+      << "      MeanATWDCharge : " << c.GetMeanATWDCharge() << std::endl
+      << "      MeanFADCCharge : " << c.GetMeanFADCCharge() << std::endl
+      << "]" ;
+  return oss;
+}
+
+std::ostream& operator<<(std::ostream& oss, const I3DOMCalibrationMap& m)
+{
+  oss << "[ I3DOMCalibrationMap :: " << std::endl;
+  I3DOMCalibrationMap::const_iterator iter = m.begin();
+  for (;iter != m.end();iter++)
+  {
+    oss << "  " << iter->first << " : " << iter->second << std::endl;
+  }
+  oss << "]" ;
+  return oss;
+}
+
 I3_SERIALIZABLE(I3DOMCalibration);

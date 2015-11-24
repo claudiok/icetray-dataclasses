@@ -24,6 +24,7 @@
 #include <icetray/python/indexed_property.hpp>
 #include <icetray/python/boost_serializable_pickle_suite.hpp>
 #include <icetray/python/dataclass_suite.hpp>
+#include <icetray/python/stream_to_string.hpp>
 
 using namespace boost::python;
 
@@ -34,7 +35,6 @@ void register_I3DOMCalibration()
 
     scope outer = 
       class_<I3DOMCalibration, boost::shared_ptr<I3DOMCalibration> >("I3DOMCalibration")
-      .def(copy_suite<I3DOMCalibration>())
       #define I3DOMCALPROPS (Temperature)(TransitTime)(HVGainFit)(FADCGain)           \
                             (FADCBaselineFit)(FADCBeaconBaseline)(FrontEndImpedance)  \
                             (TauParameters)(FADCGain)(FADCDeltaT)(DOMCalVersion)      \
@@ -56,8 +56,7 @@ void register_I3DOMCalibration()
       .def("atwd_pulse_template", &I3DOMCalibration::ATWDPulseTemplate)
       .def("fadc_pulse_template", &I3DOMCalibration::FADCPulseTemplate)
       .def("discriminator_pulse_template", &I3DOMCalibration::DiscriminatorPulseTemplate)
-      .def_pickle(boost_serializable_pickle_suite<I3DOMCalibration>())
-      .def( freeze() )
+      .def(dataclass_suite<I3DOMCalibration>())
       ;
 
     enum_<I3DOMCalibration::ToroidType>("ToroidType")

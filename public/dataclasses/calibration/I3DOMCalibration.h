@@ -837,4 +837,11 @@ I3_POINTER_TYPEDEFS(I3DOMCalibrationMap);
 BOOST_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
+std::ostream& operator<<(std::ostream& oss, const LinearFit& f);
+std::ostream& operator<<(std::ostream& oss, const QuadraticFit& f);
+std::ostream& operator<<(std::ostream& oss, const SPEChargeDistribution& spe);
+std::ostream& operator<<(std::ostream& oss, const TauParam& p);
+std::ostream& operator<<(std::ostream& oss, const I3DOMCalibration& c);
+std::ostream& operator<<(std::ostream& oss, const I3DOMCalibrationMap& m);
+
 #endif //I3DOMCALIBRATION_H_INCLUDED
