@@ -513,7 +513,7 @@ I3Position I3Particle::ShiftAlongTrack(const double dist) const
     return I3Position(x,y,z);
   }
   else {
-    log_error("ShiftAlongTrack undefined for a particle that is not a track."); //FIXME this should escalate to log_fatal
+    log_error("ShiftAlongTrack undefined for a particle that is not a track.");
     return I3Position();
   }
 }
@@ -524,7 +524,7 @@ I3Position I3Particle::ShiftTimeTrack(const double time) const
     return ShiftAlongTrack(speed_*time);
   }
   else {
-    log_error("ShiftTimeTrack needs the particle to have a valid speed"); //FIXME this should escalate to log_fatal
+    log_error("ShiftTimeTrack needs the particle to have a valid speed");
     return I3Position();
   }
 }
