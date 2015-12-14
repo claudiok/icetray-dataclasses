@@ -2,10 +2,25 @@
 Release Notes
 =============
 
-dev
----
-
+* pybindings and debugging support for frame_object_diff
+* remove deprecated cint dictionary generation
+* increase test coverage for I3SuperDSTTrigger
+* added tests for I3RecoHit
+* added tests for I3SuperDSTTrigger constructors
+* add test to I3Orientation
+* update I3MCTreeUtils tests
+* increase test coverage of I3String to 100%
+* update QuadraticFit pybindings
+* update I3DOMCalibration tests
+* update I3Trigger tests
+* add TriggerKey test
+* updated test for I3ModuleGeo, I3Waveform equal operators
+* pretty repr for I3Position
+* dependency updates
 * (r138288) - Make loading old trees with lots of primaries faster.
+* pybinding updates
+* (r137642) - add tests for I3Particle == operator
+* (r137375) - remove test dependence on the examples project
 
 August 31, 2015, Alex Olivas  (olivas@icecube.umd.edu)
 --------------------------------------------------------------------
