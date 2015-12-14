@@ -2,6 +2,10 @@
 Release Notes
 =============
 
+December 14, 2015, don la dieu  (nega@icecube.umd.edu)
+------------------------------------------------------
+Release V15-12-00
+
 * pybindings and debugging support for frame_object_diff
 * remove deprecated cint dictionary generation
 * increase test coverage for I3SuperDSTTrigger
