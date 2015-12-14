@@ -60,42 +60,43 @@ i3_add_pybindings(dataclasses
   private/pybindings/I3Maps/*.cxx
   private/pybindings/I3Orientation.cxx
   private/pybindings/I3SuperDST.cxx
-  private/pybindings/ModuleKey.cxx
   private/pybindings/I3ModuleGeo.cxx
-  private/pybindings/TankKey.cxx
   private/pybindings/I3MCTreePhysicsLibrary.cxx
+  private/pybindings/ModuleKey.cxx
   private/pybindings/module.cxx
+  private/pybindings/TankKey.cxx
+  private/pybindings/TriggerKey.cxx
   private/pybindings/test_utils/I3VectorUtils.cxx
   USE_TOOLS boost python
   USE_PROJECTS icetray dataclasses
   )
 
 set(TEST_SCRIPTS
-  resources/test/filtermasks_pybindings.py         
-  resources/test/i3eventheader_version_test.py  
-  resources/test/loads.py                                       
+  resources/test/filtermasks_pybindings.py
+  resources/test/i3eventheader_version_test.py
+  resources/test/loads.py
   resources/test/test_launch_serialization.py
-  resources/test/Fix_Cals_In_GCD.py                
-  resources/test/i3frame_subterfuge.py          
-  resources/test/readwrite_i3vectors.py                         
+  resources/test/Fix_Cals_In_GCD.py
+  resources/test/i3frame_subterfuge.py
+  resources/test/readwrite_i3vectors.py
   resources/test/test_linear_tree.py
-  resources/test/Fix_Trigger_In_GCD.py             
-  resources/test/i3geometry_version_test.py     
-  resources/test/std_map_indexing_suite_dict_interface_test.py  
+  resources/test/Fix_Trigger_In_GCD.py
+  resources/test/i3geometry_version_test.py
+  resources/test/std_map_indexing_suite_dict_interface_test.py
   resources/test/test_particle_masses.py
-  resources/test/i3calibration_version_test.py     
-  resources/test/i3matrix_test.py               
-  resources/test/std_map_indexing_suite_test.py                 
-  resources/test/i3detectorstatus_version_test.py  
-  resources/test/i3string_compare.py            
-  resources/test/test_disabling_of_python_dynamism.py          
+  resources/test/i3calibration_version_test.py
+  resources/test/i3matrix_test.py
+  resources/test/std_map_indexing_suite_test.py
+  resources/test/i3detectorstatus_version_test.py
+  resources/test/i3string_compare.py
+  resources/test/test_disabling_of_python_dynamism.py
   resources/test/workout_pybindings.py
-  resources/test/i3double_compare.py               
-  resources/test/leap_second_test.py            
+  resources/test/i3double_compare.py
+  resources/test/leap_second_test.py
   resources/test/test_I3RecoPulseSeriesMapMask_pybindings.py
   resources/test/test_i3particlevect.py
   resources/test/test_mctree_physics_library.py
-  resources/test/test_I3Vectors.py  
+  resources/test/test_I3Vectors.py
   resources/test/test_I3Calibration.py
   resources/test/test_I3DOMStatus.py
   resources/test/test_I3DetectorStatus.py
@@ -105,6 +106,8 @@ set(TEST_SCRIPTS
   resources/test/test_I3TankGeo.py
   resources/test/test_I3VEMCalibration.py
   resources/test/test_I3WaveformIsEqualOperator.py
+  resources/test/test_I3Trigger.py
+  resources/test/test_TriggerKey.py
 )
 
 # For whatever reason this test doesn't play well with old versions
