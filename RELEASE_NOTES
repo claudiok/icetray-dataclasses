@@ -5,6 +5,8 @@ Release Notes
 dev
 ---
 
+* Pybindings for TriggerHierarchy moved out of I3Trigger.cxx to a separate file
+  (tickets 1476/1478)
 * Pybindings for TriggerKey moved out of I3Trigger.cxx to a separate file
   (ticket 1405).
     Still to do: change scope for TriggerKey's enumerates (ticket 1491)
