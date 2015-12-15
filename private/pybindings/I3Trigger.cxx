@@ -22,7 +22,6 @@
 #include <vector>
 #include <icetray/I3Units.h>
 #include <dataclasses/physics/I3Trigger.h>
-#include <dataclasses/physics/I3TriggerHierarchy.h>
 #include <dataclasses/I3Vector.h>
 #include <icetray/python/dataclass_suite.hpp>
 #include <dataclasses/ostream_overloads.hpp>
@@ -30,13 +29,6 @@
 using namespace boost::python;
 namespace bp = boost::python;
 
-
-int length(I3TriggerHierarchyPtr t) {
-    if(t){
-        return  t->size();
-    }
-    return 0;
-}
 
 TriggerKey get_trigkey(const I3Trigger& self)
 {
@@ -48,13 +40,7 @@ void set_trigkey(I3Trigger& self, const TriggerKey& tk)
     self.GetTriggerKey() = tk;
 }
 
-static I3TriggerHierarchyPtr
-from_frame(I3Frame &frame, const std::string &name)
-{
-    I3TriggerHierarchyConstPtr ptr =
-        frame.Get<I3TriggerHierarchyConstPtr>(name);
-    return boost::const_pointer_cast<I3TriggerHierarchy>(ptr);
-}
+
 
 // change return type from object to void
 // after TriggerKey is out of I3Trigger scope
@@ -77,23 +63,12 @@ register_I3Trigger()
         .def( freeze() )
         ;
 
-    class_<I3TriggerHierarchy, bases<I3FrameObject>,
-        I3TriggerHierarchyPtr>("I3TriggerHierarchy")
-        .def("__len__", &length)
-        .def("__iter__", bp::iterator<I3TriggerHierarchy>())
-        .def("insert",&I3TriggerHierarchyUtils::Insert)
-        .def("from_frame", &from_frame)
-        .staticmethod("from_frame")
-        .def(dataclass_suite<I3TriggerHierarchy>())
-        ;
-
     class_<I3VectorI3Trigger, bases<I3FrameObject>,
         boost::shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
         .def(dataclass_suite<I3VectorI3Trigger >())
         ;
 
     register_pointer_conversions<I3VectorI3Trigger>();
-    register_pointer_conversions<I3TriggerHierarchy>();
 
     // remove next line after
     // TriggerKey is out of I3Trigger scope

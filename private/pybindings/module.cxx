@@ -68,7 +68,7 @@ extern object register_I3Trigger();
   (I3VectorFloat)(I3VectorDouble)(I3VectorDoubleDouble)                 \
   (I3VectorI3Particle)(I3VectorParticleType)(I3VectorI3Position)        \
   (I3VectorPairDoubleDouble)(I3MCTreePhysicsLibrary)(I3VectorUtils)     \
-  (SPEChargeDistribution)
+  (SPEChargeDistribution)(I3TriggerHierarchy)
 
 // Add to REGISTER_THESE_THINGS after
 // TriggerKey is out of I3Trigger scope
