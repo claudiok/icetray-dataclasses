@@ -16,12 +16,10 @@ namespace{
   bool MoreEnergetic(const I3Particle& a, const I3Particle& b){
     float a_energy = a.GetEnergy();
     float b_energy = b.GetEnergy();
-    if (IsNan(a_energy) && IsNan(b_energy))
-        return 0;
-    else if (IsNan(a_energy))
-        return -1;
+    if (IsNan(a_energy))
+        return false;
     else if (IsNan(b_energy))
-        return 1;
+        return true;
     else
         return a_energy > b_energy;
   }
