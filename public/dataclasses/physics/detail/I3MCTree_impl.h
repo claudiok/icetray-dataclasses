@@ -1416,7 +1416,7 @@ namespace TreeBase {
     } else {
       // load new Tree
       ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-      boost::dynamic_bitset<unsigned long> nullMask(CHUNK_SIZE_);
+      boost::dynamic_bitset<uint64_t> nullMask(CHUNK_SIZE_);
       std::vector<I3Particle> dataChunk;
       // TODO: think about implementing our own hash_map<allocator>
       // and swapping hash_maps to make L2 caching better
@@ -1497,7 +1497,7 @@ namespace TreeBase {
       ar & make_nvp("numBits",nelements);
       return;
     }
-    boost::dynamic_bitset<unsigned long> nullMask(CHUNK_SIZE_);
+    boost::dynamic_bitset<uint64_t> nullMask(CHUNK_SIZE_);
     std::vector<const I3Particle*> dataChunk;
     typename tree_hash_map::const_iterator iter = internalMap.find(*head_);
     const treeNode* n = &(iter->second);
