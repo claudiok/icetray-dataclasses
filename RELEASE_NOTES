@@ -9,7 +9,8 @@ dev
   (tickets 1476/1478)
 * Pybindings for TriggerKey moved out of I3Trigger.cxx to a separate file
   (ticket 1405).
-    Still to do: change scope for TriggerKey's enumerates (ticket 1491)
+
+  Still to do: change scope for TriggerKey's enumerates (ticket 1491)
 
 December 14, 2015, don la dieu  (nega@icecube.umd.edu)
 ------------------------------------------------------
