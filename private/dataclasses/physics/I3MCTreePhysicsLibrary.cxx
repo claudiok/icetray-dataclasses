@@ -24,7 +24,6 @@ namespace{
         return a_energy > b_energy;
   }
 
-  bool IsPrimary(const I3Particle& p){ return p.IsPrimary(); }
   bool IsCascade(const I3Particle& p){ return p.IsCascade(); }
   bool IsNeutrino(const I3Particle& p){ return p.IsNeutrino(); }
   bool IsNucleus(const I3Particle& p){ return p.IsNucleus(); }
