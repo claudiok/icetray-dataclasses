@@ -14,6 +14,7 @@
 #include "icetray/I3Units.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/physics/I3ParticleID.h"
+#include "dataclasses/external/CompareFloatingPoint.h"
 #include <map>
 #include <string>
 
@@ -287,10 +288,10 @@ class I3Particle : public I3FrameObject
         status_ == rhs.status_ &&
         pos_ == rhs.pos_ &&
         dir_ == rhs.dir_ &&
-        time_ == rhs.time_ &&
-        energy_ == rhs.energy_ &&
-        length_ == rhs.length_ &&
-        speed_ == rhs.speed_ &&
+        CompareFloatingPoint::Compare_NanEqual(time_, rhs.time_) &&
+        CompareFloatingPoint::Compare_NanEqual(energy_, rhs.energy_) &&
+        CompareFloatingPoint::Compare_NanEqual(length_, rhs.length_) &&
+        CompareFloatingPoint::Compare_NanEqual(speed_, rhs.speed_) &&
         locationType_ == rhs.locationType_
     );
   }

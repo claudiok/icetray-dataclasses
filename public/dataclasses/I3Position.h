@@ -21,6 +21,7 @@
 #include "icetray/I3FrameObject.h"
 #include "Utility.h"
 #include <sstream>
+#include "dataclasses/external/CompareFloatingPoint.h"
 
 /**
  * @brief The basic position class for IceCube.
@@ -319,6 +320,16 @@ class I3Position : public I3FrameObject
    */
   I3Position Cross(const I3Direction&) const;
 
+  bool operator==(const I3Position& rhs) const {
+    return (CompareFloatingPoint::Compare_NanEqual(x_, rhs.x_) &&
+            CompareFloatingPoint::Compare_NanEqual(y_, rhs.y_) &&
+            CompareFloatingPoint::Compare_NanEqual(z_, rhs.z_)
+    );
+  }
+  bool operator!=(const I3Position& rhs) const {
+    return !(*this == rhs);
+  }
+
  protected:
   /**
    * cartesian (car)
@@ -357,18 +368,6 @@ class I3Position : public I3FrameObject
   void CalcCarSphFromCyl();
 
 };
-
-inline bool operator==(const I3Position& lhs, const I3Position& rhs) {
-  return ((lhs.GetX() == rhs.GetX()) &&
-          (lhs.GetY() == rhs.GetY()) &&
-          (lhs.GetZ() == rhs.GetZ()));
-}
-
-inline bool operator!=(const I3Position& lhs, const I3Position& rhs) {
-  return ((lhs.GetX() != rhs.GetX()) ||
-          (lhs.GetY() != rhs.GetY()) ||
-          (lhs.GetZ() != rhs.GetZ()));
-}
 
 I3Position operator*(double, const I3Position&);
 

@@ -20,6 +20,7 @@
 #include <dataclasses/I3Constants.h>
 #include "Utility.h"
 #include <dataclasses/I3Vector.h>
+#include <dataclasses/external/CompareFloatingPoint.h>
 
 #ifndef __CINT__
 #include <boost/archive/xml_iarchive.hpp>
@@ -228,7 +229,16 @@ class I3Direction : public I3FrameObject
    * Division by a scalar
    */
   I3Position operator/(double) const;
-  
+
+  bool operator==(const I3Direction& rhs) const {
+    return (CompareFloatingPoint::Compare_NanEqual(zenith_, rhs.zenith_) &&
+            CompareFloatingPoint::Compare_NanEqual(azimuth_, rhs.azimuth_)
+    );
+  }
+  bool operator!=(const I3Direction& rhs) const {
+    return !(*this == rhs);
+  }
+
   //---
   
   /** returns the angle between in two I3Directions
@@ -286,18 +296,6 @@ class I3Direction : public I3FrameObject
 template<> void I3Direction::serialize(boost::archive::xml_oarchive& ar, unsigned version);
 template<> void I3Direction::serialize(boost::archive::xml_iarchive& ar, unsigned version);
 #endif
-
-inline bool operator==(const I3Direction& lhs, const I3Direction& rhs)
-{
-  return (lhs.GetZenith()  == rhs.GetZenith() &&
-          lhs.GetAzimuth() == rhs.GetAzimuth());
-}
-
-inline bool operator!=(const I3Direction& lhs, const I3Direction& rhs)
-{
-  return (lhs.GetZenith()  != rhs.GetZenith() ||
-          lhs.GetAzimuth() != rhs.GetAzimuth());
-}
 
 I3Position operator*(double, const I3Direction&);
 
