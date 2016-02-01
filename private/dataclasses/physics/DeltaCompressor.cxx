@@ -13,6 +13,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <cstdlib>
+#include <cassert>
 
 using namespace std;
 
@@ -172,7 +173,8 @@ namespace I3DeltaCompression
 	// Intrenal helper to output a number of compressed bits 
 	//
 	void DeltaCompressor::outputBits( int word, int len )
-	{		
+	{
+                assert( len < 32 );
 		// get a bitmask of the relevant bits
 		int mask = ( 1 << len ) - 1;
 		
