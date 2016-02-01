@@ -136,7 +136,7 @@ void I3Time::SetModJulianTime(int32_t modJulianDay,
 }
 
 void I3Time::SetModJulianTimeDouble(double mjd) {
-  if (isnan(mjd)) {
+  if (std::isnan(mjd)) {
     log_error("Calling with NAN not possible; will do nothing");
     return;
   }

@@ -28,7 +28,7 @@ TEST(assignment_copy)
 {
   I3MCHit h, j;
   ENSURE(h.GetNPE() == 1);
-  ENSURE(isnan(h.GetCharge()));
+  ENSURE(std::isnan(h.GetCharge()));
   ENSURE(h.GetParticleMinorID()==-1);
   ENSURE(h.GetParticleMajorID()==0);
 

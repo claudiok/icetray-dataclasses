@@ -367,7 +367,7 @@ TEST(hasenergy){
 
 TEST(stop_time) {
   I3Particle particle;
-  ENSURE(isnan(particle.GetStopTime()));
+  ENSURE(std::isnan(particle.GetStopTime()));
 
   particle.SetShape(I3Particle::StoppingTrack);
   double time = 10.*I3Units::ns;

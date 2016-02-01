@@ -19,7 +19,7 @@ double ATWDSamplingRate ( unsigned int chip,
    double rateCorrected=0; //sampling rate in MHz
    const QuadraticFit atwdQFit  = calib.GetATWDFreqFit(chip);
    double dacTrigBias;
-   if(isnan(atwdQFit.quadFitC)) // Old style linear fit
+   if(std::isnan(atwdQFit.quadFitC)) // Old style linear fit
      {
        log_trace("Linear fit from DOMCAL");
        double slope = atwdQFit.quadFitB;
@@ -219,7 +219,7 @@ double SPEPMTThreshold(const I3DOMStatus& status,
   const double speDAC = status.speThreshold;
   double speThresher;
 
-  if (isnan(pmtCalibFit.slope) || isnan(pmtCalibFit.intercept))
+  if (std::isnan(pmtCalibFit.slope) || std::isnan(pmtCalibFit.intercept))
     {  // Use OldseThreshold
       //Value returned is already stored with proper units.
       speThresher = OldspeThreshold(status);

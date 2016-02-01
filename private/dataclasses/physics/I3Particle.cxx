@@ -476,19 +476,19 @@ bool I3Particle::IsNeutrino() const
 
 bool I3Particle::HasPosition() const
 {
-  if ( isnan(GetX()) || isnan(GetY()) || isnan(GetZ()) ) return false;
+  if ( std::isnan(GetX()) || std::isnan(GetY()) || std::isnan(GetZ()) ) return false;
   else return true;
 }
 
 bool I3Particle::HasDirection() const
 {
-  if (isnan(GetZenith()) || isnan(GetAzimuth()) ) return false;
+  if (std::isnan(GetZenith()) || std::isnan(GetAzimuth()) ) return false;
   else return true;
 }
 
 bool I3Particle::HasEnergy() const
 { 
-  if (isnan(energy_)) return false; 
+  if (std::isnan(energy_)) return false; 
   else return true; 
 }
 

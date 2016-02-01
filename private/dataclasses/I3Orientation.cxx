@@ -228,7 +228,7 @@ namespace {
 	inline void CalcSphFromCar(double xDir, double yDir, double zDir,
 							   double &zenith, double &azimuth)
 	{
-		if (isnan(zDir)) {zenith=NAN; azimuth=NAN; return;}
+		if (std::isnan(zDir)) {zenith=NAN; azimuth=NAN; return;}
 		
 		// Stolen from I3Direction:
 		// Calculate Spherical coordinates from Cartesian
