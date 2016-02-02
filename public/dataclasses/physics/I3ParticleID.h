@@ -86,7 +86,7 @@ namespace __gnu_cxx{
 template<>
 struct i3hash<I3ParticleID>{
   size_t operator()(const I3ParticleID& id) const{
-    return hash<int>()(id.majorID + id.minorID);
+    return ::hash<int>()(id.majorID + id.minorID);
   }
 };
 
