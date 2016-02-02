@@ -51,6 +51,13 @@ register_i3vector_of(const std::string& s)
 }
 
 template <typename T, typename U>
+std::pair< T, U >
+py_make_pair( T t, U u)
+{
+    return std::make_pair(t,u);
+}
+
+template <typename T, typename U>
 void
 register_std_pair(const char* s)
 {
@@ -61,11 +68,7 @@ register_std_pair(const char* s)
     .def_readwrite("second", &type_t::second)
     .def(dataclass_suite<type_t>())
     ;
-#if __cplusplus < 201103L
-  //In newer c++ the signature of make_pair has become intractable
-  //for existing versions of boost::python
-  def("make_pair", &std::make_pair<T, U>);
-#endif
+  def("make_pair", &py_make_pair<T, U>);
 }
 
 #endif //I3VECTORS_H_PYBINDINGS
