@@ -13,6 +13,7 @@ i3_add_library(dataclasses
   private/dataclasses/*/*.cxx
   private/dataclasses/*/*/*.cxx
   private/dataclasses/stream_overloads.cpp
+  private/test_module/TestConstCache.cxx
 
   USE_TOOLS boost python ${OPTIONAL_TOOLS}
 
