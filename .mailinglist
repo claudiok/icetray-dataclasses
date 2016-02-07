@@ -1,12 +1,14 @@
 #
 # put your email address here if you would like notification emails
-# about commits to this project.
+# about commits to this project. The "Maintainer" section is used
+# for internal bookkeeping.
 # $Id$
 #
-blaufuss@icecube.umd.edu
-boersma@icecube.wisc.edu
+# Maintainers
 olivas@icecube.umd.edu
-aya.ishihara@icecube.wisc.edu
+blaufuss@icecube.umd.edu
 hightech-consulting@gmx.de
 kjmeagher@icecube.umd.edu
 dschultz@icecube.wisc.edu
+# Observers
+aya.ishihara@icecube.wisc.edu
