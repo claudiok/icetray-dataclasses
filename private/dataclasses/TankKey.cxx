@@ -31,6 +31,11 @@ void TankKey::SetOMKey(const OMKey& omKey)
     }
 }
 
+OMKey TankKey::GetDefaultOMKey() const
+{
+    return OMKey(string, tank == TankA ? 61 : 63);
+}
+
 std::ostream& operator<<(std::ostream& os, const TankKey& key)
 {
     os << key.string;

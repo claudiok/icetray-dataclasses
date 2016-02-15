@@ -53,7 +53,27 @@ public:
    * Returns a tank label
    */
   std::string str() const;
-    
+
+  /**
+   * Get one of the DOMs inside the tank.
+   * By convention, this returns the OMKey with the lower omNumber.
+   *
+   * Use this as an adapter to use TankKeys with I3MapOMKey* frame
+   * objects. This is an effective work-around for the fact that we
+   * don't have I3MapTankKey* frame objects.
+   *
+   * Example use-case: You want to count muons that hit tanks, the
+   * tanks are defined by a collection of TankKeys. Make a
+   * I3MapOMKeyUInt called "mymap". If a tank is hit, do
+   * mymap[tankKey.GetDefaultOMKey()] += 1, to increase the count
+   * for that tank.
+   *
+   * Later in the analysis, you can recover the TankKeys from mymap
+   * using the special constructor TankKey(const OMkey& omKey) or
+   * TankKey::SetOMKey(const OMKey& omKey).
+   */
+  OMKey GetDefaultOMKey() const;
+
   /**
    * equality operator.  
    * @return true if the string and tank numbers of the two TankKey's match
