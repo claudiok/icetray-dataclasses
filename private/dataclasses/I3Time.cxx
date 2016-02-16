@@ -449,7 +449,7 @@ std::ostream& operator<<(std::ostream& oss, const I3Time& t){
   int64_t daqt=t.GetUTCDaqTime();
   oss << t.GetUTCString("%Y-%m-%d %H:%M:%S.");
   oss << std::setw(3) << std::setfill('0') << (daqt/10000000)%1000  << ',';
-  oss << std::setw(3) << std::setfill('0') << (daqt/1000)%1000 << ',';
+  oss << std::setw(3) << std::setfill('0') << (daqt/10000)%1000 << ',';
   oss << std::setw(3) << std::setfill('0') << (daqt/10)%1000 << ',';
   oss << daqt%10 << " UTC";
 
