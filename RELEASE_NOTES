@@ -2,8 +2,8 @@
 Release Notes
 =============
 
-dev
----
+trunk
+-----
 
 * Pybindings for TriggerHierarchy moved out of I3Trigger.cxx to a separate file
   (tickets 1476/1478)
