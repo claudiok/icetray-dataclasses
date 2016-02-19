@@ -1,8 +1,13 @@
 Dataclasses documentation
 =========================
-Dataclasses are the common classes used to describe objects in IceCube/Icetray.  These classes are the objects exchanged by I3Modules.
 
-This project is maintained by Alex Olivas <olivas@icecube.wisc.edu> and Don La Dieu <dladieu@icecube.wisc.edu>.
+Dataclasses are the common classes used to describe objects in
+IceCube/Icetray.  These classes are the objects exchanged by I3Modules.
+
+This project is maintained by:
+* Alex Olivas <olivas@icecube.wisc.edu>
+* Don La Dieu <dladieu@icecube.wisc.edu>
+* David Schultz <david.schultz@icecube.wisc.edu>
 
 Dataclasses still needs more docs.  
 
