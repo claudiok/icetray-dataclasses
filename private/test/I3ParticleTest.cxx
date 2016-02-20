@@ -20,7 +20,8 @@
 
 using namespace std;
 
-struct test_particle_id_private_ctor{
+class test_particle_id_private_ctor{
+public:
   I3Particle particle;
   test_particle_id_private_ctor(const uint64_t major, const int32_t minor) :
     particle(major, minor){};
