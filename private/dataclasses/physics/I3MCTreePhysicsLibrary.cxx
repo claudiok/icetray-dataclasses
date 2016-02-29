@@ -7,7 +7,6 @@
 #include <boost/function.hpp>
 
 using CompareFloatingPoint::Compare;
-using CompareFloatingPoint::IsNan;
 using I3MCTreeUtils::GetBestFilter;
 using I3MCTreeUtils::GetFilter;
 using I3MCTreeUtils::GetBestFilterPtr;
@@ -16,9 +15,9 @@ namespace{
   bool MoreEnergetic(const I3Particle& a, const I3Particle& b){
     float a_energy = a.GetEnergy();
     float b_energy = b.GetEnergy();
-    if (IsNan(a_energy))
+    if (std::isnan(a_energy))
         return false;
-    else if (IsNan(b_energy))
+    else if (std::isnan(b_energy))
         return true;
     else
         return a_energy > b_energy;

@@ -27,7 +27,7 @@ NB:  Another thing you'll see is "Ulps" which stands for "Units in the Last Plac
 #define COMPARE_FLOATING_POINT
 
 #include <float.h>
-#include <math.h>
+#include <cmath>
 #include <stdint.h>
 #include <cstring>
 #include <string>
@@ -48,67 +48,10 @@ namespace CompareFloatingPoint{
   
   bool Compare_NanEqual(double A, double B);
   
-  bool IsInfinite(float);
-  bool IsNan(float);
   int32_t Sign(float);
-
-  bool IsInfinite(double);
-  bool IsNan(double);
   int64_t Sign(double);
   
 }//end namespace CompareFloatingPoint
-
-// Support functions and conditional compilation directives for the
-// master AlmostEqual function.
-  
-inline bool CompareFloatingPoint::IsInfinite(float A){
-  const int32_t INF_AS_INT = 0x7F800000;
-  
-  // An infinity has an exponent of 255 (shift left 23 positions) and
-  // a zero mantissa. There are two infinities - positive and negative.
-  int32_t aInt;
-  memcpy( &aInt, &A, sizeof(int32_t));
-  if ((aInt & 0x7FFFFFFF) == INF_AS_INT)
-    return true;
-  return false;
-}
-
-inline bool CompareFloatingPoint::IsInfinite(double A){
-  
-  const int64_t INF_AS_LONG = 0x7FF0000000000000LL;
-  // An infinity has an exponent of 2047 (shift left 52 positions) and
-  // a zero mantissa. There are two infinities - positive and negative.
-  int64_t aInt;
-  memcpy( &aInt, &A, sizeof(int64_t) );
-  if (( aInt & 0x7FFFFFFFFFFFFFFFLL  ) == INF_AS_LONG)
-    return true;
-  return false;
-}
-
-inline bool CompareFloatingPoint::IsNan(float A){
-  // A NAN has an exponent of 255 (shifted left 23 positions) and
-  // a non-zero mantissa.
-  int32_t aInt;
-  memcpy( &aInt, &A, sizeof(int32_t) );
-  int32_t exp = aInt & 0x7F800000;
-  int32_t mantissa = aInt & 0x007FFFFF;
-  if (exp == 0x7F800000 && mantissa != 0)
-    return true;
-  return false;
-}
-
-inline bool CompareFloatingPoint::IsNan(double A){
-  // A NAN has an exponent of 2047 (shifted left 52 positions) and
-  // a non-zero mantissa.
-  const int64_t INF_AS_LONG = 0x7FF0000000000000LL;
-  int64_t aInt;
-  memcpy( &aInt, &A, sizeof(int64_t) );
-  int64_t mantissa = aInt & 0xFFFFFFFFFFFFFLL;
-  if ( ( ( aInt & 0x7FF0000000000000LL) == INF_AS_LONG)  &&
-       mantissa != 0)
-    return true;
-  return false;
-}
 
 inline int32_t CompareFloatingPoint::Sign(float A){
   // The sign bit of a number is the high bit.
@@ -140,7 +83,7 @@ inline bool CompareFloatingPoint::Compare(float A, float B, int32_t maxUlps){
   // This check is only needed if you will be generating
   // infinities and you don't want them 'close' to numbers
   // near FLT_MAX.
-  if (IsInfinite(A) || IsInfinite(B))
+  if (std::isinf(A) || std::isinf(B))
     return A == B;
 #endif
   
@@ -150,7 +93,7 @@ inline bool CompareFloatingPoint::Compare(float A, float B, int32_t maxUlps){
   // This check is only needed if you will be generating NANs
   // and you use a maxUlps greater than 4 million or you want to
   // ensure that a NAN does not equal itself.
-  if (IsNan(A) || IsNan(B))
+  if (std::isnan(A) || std::isnan(B))
     return false;
 #endif
   
@@ -202,7 +145,7 @@ inline bool CompareFloatingPoint::Compare(double A, double B, int64_t maxUlps){
   // This check is only needed if you will be generating
   // infinities and you don't want them 'close' to numbers
   // near FLT_MAX.
-  if (IsInfinite(A) || IsInfinite(B))
+  if (std::isinf(A) || std::isinf(B))
     return A == B;
 #endif
   
@@ -212,7 +155,7 @@ inline bool CompareFloatingPoint::Compare(double A, double B, int64_t maxUlps){
   // This check is only needed if you will be generating NANs
   // and you use a maxUlps greater than 4 million or you want to
   // ensure that a NAN does not equal itself.
-  if (IsNan(A) || IsNan(B))
+  if (std::isnan(A) || std::isnan(B))
     return false;
 #endif
   
@@ -249,8 +192,7 @@ inline bool CompareFloatingPoint::Compare(double A, double B, int64_t maxUlps){
 
 inline bool CompareFloatingPoint::Compare_NanEqual(double A, double B)
 {
-  return ((CompareFloatingPoint::IsNan(A) && CompareFloatingPoint::IsNan(B))
-        || A == B);
+  return ((std::isnan(A) && std::isnan(B)) || A == B);        
 }
   
 #endif

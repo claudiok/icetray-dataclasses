@@ -256,17 +256,17 @@ TEST(compare_double_as_int64_t){
   // compare as equal.
   ENSURE( TestCompareFinal( DBL_MAX, infD, false ) ) ;
   
-  ENSURE( IsInfinite(infD) );
+  ENSURE( std::isinf(infD) );
 
   cerr<<ToString(nan1D);
   cerr<<ToString(nan2D);
   cerr<<ToString(nan3D);
   cerr<<ToString(nan4D);
 
-  ENSURE( IsNan(nan1D) );
-  ENSURE( IsNan(nan2D) );
-  ENSURE( IsNan(nan3D) );
-  ENSURE( IsNan(nan4D) );
+  ENSURE( std::isnan(nan1D) );
+  ENSURE( std::isnan(nan2D) );
+  ENSURE( std::isnan(nan3D) );
+  ENSURE( std::isnan(nan4D) );
 
   // Test whether a NAN compares as equal to itself.
   ENSURE( TestCompareFinal( nan2D, nan2D, false ) ) ;
