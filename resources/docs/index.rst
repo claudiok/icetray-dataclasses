@@ -1,3 +1,5 @@
+.. _dataclasses:
+
 Dataclasses documentation
 =========================
 
