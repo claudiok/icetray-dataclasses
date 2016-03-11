@@ -87,9 +87,9 @@ namespace I3MCTreeUtils
   /**
    * Get the "best match" particle in the tree using a comparison Function.
    * 
-   * \param t I3MCTree
-   * \param f Callable which takes two I3Particles, compares them, and returns
-   *          true if the first is better, false if the second is better
+   * \param t    I3MCTree
+   * \param func Callable which takes two I3Particles, compares them, and returns
+   *             true if the first is better, false if the second is better
    */
   template<typename Function>
   const typename I3MCTree::optional_value
@@ -125,8 +125,8 @@ namespace I3MCTreeUtils
   /**
    * Get all matching particles in the tree using a filter Function.
    * 
-   * \param t I3MCTree
-   * \param f Callable which takes an I3Particle and returns true/false
+   * \param t    I3MCTree
+   * \param func Callable which takes an I3Particle and returns true/false
    */
   template<typename Function>
   const std::vector<I3Particle>
