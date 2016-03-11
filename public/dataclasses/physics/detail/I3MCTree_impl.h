@@ -2,7 +2,7 @@
 #define I3MCTREE_IMPL_H
 
 /**
- * @file I3MCTree.hh
+ * @file I3MCTree_impl.h
  * @brief Implementation for TreeBase
  *
  * copyright (C) 2013 the icecube collaboration

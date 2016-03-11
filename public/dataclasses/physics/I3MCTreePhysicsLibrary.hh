@@ -1,7 +1,7 @@
 /**
  * copyright  (C) 2013
  * the icecube collaboration
- * @file I3MCTreePhysicsLibrary.h
+ * @file I3MCTreePhysicsLibrary.hh
  */
 
 #ifndef I3MCTREEPHYSLIB_H_INCLUDED
