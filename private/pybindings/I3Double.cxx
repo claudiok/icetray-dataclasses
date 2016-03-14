@@ -35,6 +35,11 @@ i3double_prettyprint(const I3Double& d)
   return oss.str();
 }
 
+bool i3double_bool(const I3Double& d)
+{
+    return d.value != 0.0;
+}
+
 void register_I3Double()
 {
   class_<I3Double, bases<I3FrameObject>, boost::shared_ptr<I3Double> >("I3Double",
@@ -49,6 +54,7 @@ Note that python assignment is by reference, creating two links to one object.")
     .def(operator_suite<I3Double>())
     .def(operator_int_suite<I3Double>())
     .def(operator_float_suite<I3Double>())
+    .def("__nonzero__", i3double_bool)
     .def( freeze() )
     ;
 

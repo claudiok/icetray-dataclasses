@@ -22,3 +22,8 @@ ENSURE( dataclasses.I3Double(12.0) < 13. , "I3Double < float failed" )
 ENSURE( dataclasses.I3Double(12.0) <= 13. , "I3Double <= float failed" )
 ENSURE( dataclasses.I3Double(14.0) > 13. , "I3Double > float failed" )
 ENSURE( dataclasses.I3Double(14.0) >= 13. , "I3Double >= float failed" )
+
+ENSURE( dataclasses.I3Double(0.0) == False , "I3Double == False failed" )
+ENSURE( dataclasses.I3Double(0.0) != True , "I3Double != True failed" )
+ENSURE( dataclasses.I3Double(1.0) == True , "I3Double == True failed" )
+ENSURE( dataclasses.I3Double(1.0) != False , "I3Double != False failed" )
