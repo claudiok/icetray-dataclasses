@@ -3,10 +3,6 @@ i3_project(dataclasses
   PYTHON_DIR python
   DOCS_DIR resources/docs)
 
-if(ROOT_FOUND)
-  set(OPTIONAL_TOOLS root)
-endif(ROOT_FOUND)
-
 i3_add_library(dataclasses
   private/dataclasses/*.cxx
   private/dataclasses/*.c
@@ -15,7 +11,7 @@ i3_add_library(dataclasses
   private/dataclasses/stream_overloads.cpp
   private/test_module/TestConstCache.cxx
 
-  USE_TOOLS boost python ${OPTIONAL_TOOLS}
+  USE_TOOLS boost python
 
   USE_PROJECTS icetray
   )
@@ -25,7 +21,6 @@ i3_test_executable(test
   private/test/*.cxx
   USE_PROJECTS dataclasses dataio
   USE_PYBINDINGS dataio
-  USE_TOOLS ${USE_TOOL_ROOT}
   )
 
 i3_add_pybindings(dataclasses
