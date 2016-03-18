@@ -5,6 +5,14 @@ Release Notes
 trunk
 -----
 
+March 18, 2016, don la dieu  (nega@icecube.umd.edu)
+---------------------------------------------------
+Release V16-03-00
+
+* documentation updates
+* TankKey updates
+* implement ``__nonzero__`` for I3Double
+* use ``std::isnan`` and ``std::isinf``
 * Pybindings for TriggerHierarchy moved out of I3Trigger.cxx to a separate file
   (tickets 1476/1478)
 * Pybindings for TriggerKey moved out of I3Trigger.cxx to a separate file
