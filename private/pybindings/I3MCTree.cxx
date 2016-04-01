@@ -29,6 +29,7 @@
 #include <icetray/python/copy_suite.hpp>
 #include <icetray/python/operator_suite.hpp>
 #include <icetray/python/boost_serializable_pickle_suite.hpp>
+#include <icetray/python/get_class.hpp>
 #include <boost/python/exception_translator.hpp>
 #include <boost/python/object.hpp>
 #include <boost/python/slice.hpp>
@@ -290,6 +291,8 @@ void register_I3MCTree()
         .def(copy_suite<I3MCTree>())
         .def(operator_suite<I3MCTree>())
         .def_pickle(boost_serializable_pickle_suite<I3MCTree>())
+        .def("__value_type__", get_class<I3MCTree::value_type>)
+        .staticmethod("__value_type__")
       ;
       class_<outer::sib_iter>("_Sibling_Iter_",
         "Sibling iterator object for I3MCTree. DO NOT CALL DIRECTLY. Instead use the I3MCTree.sibling_iter method",

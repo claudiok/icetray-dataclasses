@@ -28,26 +28,37 @@
 
 using namespace boost::python;
 
-// Provide DerivedPolicies to override contains(), 
-// which would otherwise use std::find, which in turn
-// requires operator()==, which we don't have
-namespace boost { namespace python { namespace detail {
-   template <class Container, bool NoProxy = false>
-   class vector_no_equality : public vector_indexing_suite<Container, NoProxy, vector_no_equality<Container, NoProxy > > {
-      public:
+namespace {
 
-         typedef typename Container::value_type key_type;
+bool equivalent(double a, double b)
+{
+  return a == b || (std::isnan(a) && std::isnan(b));
+}
 
-         static bool
-         contains(Container& container, key_type const& key)
-         {
-            PyErr_SetString(PyExc_TypeError,"This vector does not support __contains__().");
-            throw_error_already_set();
+bool operator==(const std::vector<int>&a, const std::vector<int>&b)
+{
+  if (a.size() != b.size())
+    return false;
+  typedef std::vector<int>::const_iterator iter;
+  for(iter ia=a.begin(), ib=b.begin(); ia!=a.end(); ia++,ib++)
+    if (*ia != *ib)
+      return false;
+  return true;
+}
 
-            return false; 
-         }
-    };
-} } }
+}
+
+bool operator==(const I3FlasherInfo &a, const I3FlasherInfo &b)
+{
+  return a.GetFlashingOM() == b.GetFlashingOM()
+    && equivalent(a.GetFlashTime(), b.GetFlashTime())
+    && equivalent(a.GetATWDBinSize(), b.GetATWDBinSize())
+    && a.GetLEDBrightness() == b.GetLEDBrightness()
+    && a.GetMask() == b.GetMask()
+    && a.GetWidth() == b.GetWidth()
+    && a.GetRate() == b.GetRate()
+    && a.GetRawATWD3() == b.GetRawATWD3();
+}
 
 void register_I3FlasherInfo()
 {
@@ -65,9 +76,7 @@ void register_I3FlasherInfo()
  }
 
  class_<I3FlasherInfoVect, bases<I3FrameObject>, I3FlasherInfoVectPtr>("I3FlasherInfoVect")
-   .def(list_indexing_suite<I3FlasherInfoVect, 
-        false, detail::vector_no_equality<I3FlasherInfoVect> >())
-    .def_pickle(boost_serializable_pickle_suite<I3FlasherInfoVect>())
+   .def(dataclass_suite<I3FlasherInfoVect>())
    ;
 
  register_pointer_conversions<I3FlasherInfo>();
