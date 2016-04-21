@@ -122,6 +122,34 @@ double   (*fx6)(int, int64_t) = &I3Time::modjulianday;
 
 // MonthToString, WeekdayToString are better done in pythonia
 
+
+I3Time I3CalendarDate(int year,
+		      int month,
+		      int day,
+		      int hour,
+		      int minute,
+		      int sec,
+		      double ns)
+{
+  I3Time t;
+  t.SetUTCCalDate(year,month,day,hour,minute,sec,ns);
+  return t;
+}
+
+char I3DalendarDate_docstring [] =
+  "Alternate constructor for I3Time. "
+  "Generates an I3Time object with a specified calendar date.\n"
+  "\n"
+  "Equivelent to:\n"
+  "\n"
+  "    t = I3Time()\n"
+  "    t.SetUTCCalDate(year,month,day,hour,minute,sec,nanosecond)\n"
+  "\n"
+  "Example\n"
+  "-------\n"
+  "    print dataclasses.I3CalendarDate(2012,6,30,23,59,60,0.5e9)\n"
+  "    2012-06-30 23:59:60.500,000,000,0 UTC\n";
+
 void register_I3Time()
 {
 #ifdef HAVE_PYDATETIME_API
@@ -138,6 +166,9 @@ void register_I3Time()
   def("year_of",&I3Time::yearOf,"I3Time::yearOf(double modjulianday)");
   def("max_daq_time",I3TimeUtils::max_DAQ_time);
   def("leap_second_on_mjd",I3TimeUtils::leap_sec_on_mjd);
+  def("I3CalendarDate",I3CalendarDate,
+      args("year","month","day","hour","minute","sec","nanosecond"),
+      I3DalendarDate_docstring);
 
   scope i3time_scope = class_<I3Time, bases<I3FrameObject>, 
     boost::shared_ptr<I3Time> >("I3Time")
