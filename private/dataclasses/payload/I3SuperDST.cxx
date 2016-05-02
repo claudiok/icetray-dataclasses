@@ -88,7 +88,8 @@ I3SuperDSTReadout::I3SuperDSTReadout(const OMKey &om, bool hlc,
 	
 	for ( ; pulse_it != end; pulse_it++) {
 		stamps_.push_back(I3SuperDSTChargeStamp(pulse_it->GetTime()-t0,
-		    std::max(pulse_it->GetCharge(), 0.0f), pulse_it->GetWidth(), hlc, format));
+		    std::max(pulse_it->GetCharge(), 0.0f),
+		    std::max(pulse_it->GetWidth(), 1.0f), hlc, format));
 	}
 	
 	time_overflow_ = 0;
