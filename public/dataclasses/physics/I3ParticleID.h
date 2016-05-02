@@ -36,11 +36,16 @@ struct I3ParticleID{
    */
   int32_t minorID;
 
+  // assume noise
+  I3ParticleID() : majorID(0), minorID(0){};
+  I3ParticleID(uint64_t major, int32_t minor) : 
+    majorID(major), minorID(minor){};
+
   bool operator==(const I3ParticleID& other) const {
-    return(majorID==other.majorID && minorID==other.minorID);
+    return(majorID == other.majorID && minorID == other.minorID);
   }
   bool operator!=(const I3ParticleID& other) const {
-    return(majorID!=other.majorID || minorID!=other.minorID);
+    return(majorID != other.majorID || minorID != other.minorID);
   }
 
   bool operator<(const I3ParticleID& other) const {

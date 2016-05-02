@@ -101,7 +101,10 @@ class I3MCHit
 
   void SetParticleID(const I3Particle& );
 
-  void SetParticleID(int32_t minorID, uint64_t majorID) { particleID_=minorID; particleMajorID_=majorID; }
+  void SetParticleID(int32_t minorID, uint64_t majorID) { 
+    particleID_ = minorID; 
+    particleMajorID_ = majorID; 
+  }
 
   /**
    * @return the direct path distance to the track which caused this hit
@@ -112,7 +115,9 @@ class I3MCHit
    * @param CherenkovDistance set the direct path distance to track which 
    * caused this hit
    */
-  void SetCherenkovDistance(double CherenkovDistance) { cherenkovDistance_ = CherenkovDistance; }
+  void SetCherenkovDistance(double CherenkovDistance) { 
+    cherenkovDistance_ = CherenkovDistance; 
+  }
 
   /**
    * Sets/Gets the source of the MCHit
@@ -131,7 +136,12 @@ class I3MCHit
       && source_ == rhs.source_;
   }
   
-  operator I3ParticleID() const{ I3ParticleID id={particleMajorID_, particleID_}; return id; }
+  operator I3ParticleID() const { 
+    I3ParticleID id; 
+    id.majorID = particleMajorID_;
+    id.minorID = particleID_;
+    return id; 
+  }
 
  private:
 
