@@ -63,9 +63,9 @@ extern object register_I3Trigger();
   (I3RecoPulseSeriesMapUnion)(I3SuperDST)(TankKey)(I3Orientation)       \
   (ModuleKey)(I3ModuleGeo)(I3OMGeo)(I3TankGeo)(I3FilterResult)          \
   (I3MapI3ParticleID)(I3VectorChar)(I3VectorString)(I3VectorBool)       \
-  (I3VectorOMKey)(I3VectorModuleKey)(I3VectorShort)(I3VectorUShort)     \
-  (I3VectorInt)(I3VectorUInt)(I3VectorInt64)(I3VectorUInt64)            \
-  (I3VectorFloat)(I3VectorDouble)(I3VectorDoubleDouble)                 \
+  (I3VectorOMKey)(I3VectorModuleKey)(I3VectorShort)(I3VectorTankKey)    \
+  (I3VectorUShort)(I3VectorInt)(I3VectorUInt)(I3VectorInt64)            \
+  (I3VectorUInt64)(I3VectorFloat)(I3VectorDouble)(I3VectorDoubleDouble) \
   (I3VectorI3Particle)(I3VectorParticleType)(I3VectorI3Position)        \
   (I3VectorPairDoubleDouble)(I3MCTreePhysicsLibrary)(I3VectorUtils)     \
   (SPEChargeDistribution)(I3TriggerHierarchy)
