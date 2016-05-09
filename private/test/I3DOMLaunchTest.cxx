@@ -49,7 +49,7 @@ TEST(serializeStandardWave)
   // Build a binary stringtream and serialize the I3DOMLaunch
 	std::ostringstream oss(std::ostringstream::binary);
 	{
-		boost::archive::portable_binary_oarchive outAr( oss );
+		eos::portable_oarchive outAr( oss );
 		outAr & make_nvp("Test", wave);;
 	}
   
@@ -57,7 +57,7 @@ TEST(serializeStandardWave)
 	I3DOMLaunch wave2;
 	std::istringstream iss( oss.str(), std::istringstream::binary );
 	{
-		boost::archive::portable_binary_iarchive inAr( iss );
+		eos::portable_iarchive inAr( iss );
 		inAr & make_nvp("Test", wave2);
 	}
 
@@ -114,7 +114,7 @@ TEST(serializeMaxIntegerWave)
   buffer_t buffer;
   {
     sink_t sink(buffer);
-    boost::archive::portable_binary_oarchive outAr(sink);
+    eos::portable_oarchive outAr(sink);
     outAr & make_nvp("wave", wave);
   }
     
@@ -122,7 +122,7 @@ TEST(serializeMaxIntegerWave)
   I3DOMLaunch wave2;
   source_t source(&*buffer.begin(), &*buffer.end());
   {
-    boost::archive::portable_binary_iarchive inAr(source);
+    eos::portable_iarchive inAr(source);
     inAr >> wave2;
   }
 
@@ -162,7 +162,7 @@ TEST(serializeFullCompressed)
   // Build a binary stringtream and serialize the I3DOMLaunch
   std::ostringstream oss(std::ostringstream::binary);
   {
-    boost::archive::portable_binary_oarchive outAr( oss );
+    eos::portable_oarchive outAr( oss );
     outAr & make_nvp("Test", wave);;
   }
     
@@ -170,7 +170,7 @@ TEST(serializeFullCompressed)
   I3DOMLaunch wave2;
   std::istringstream iss( oss.str(), std::istringstream::binary );
   {
-    boost::archive::portable_binary_iarchive inAr( iss );
+    eos::portable_iarchive inAr( iss );
     inAr & make_nvp("Test", wave2);
   }
 
@@ -214,7 +214,7 @@ TEST(SerializeRandomWave)
       // Build a binary stringtream and serialize the I3DOMLaunch
       std::ostringstream oss(std::ostringstream::binary);
       {
-	boost::archive::portable_binary_oarchive outAr( oss );
+	eos::portable_oarchive outAr( oss );
 	outAr & make_nvp("Test", launch1);;
       }
   
@@ -222,7 +222,7 @@ TEST(SerializeRandomWave)
       I3DOMLaunch launch2;
       std::istringstream iss( oss.str(), std::istringstream::binary );
       {
-	boost::archive::portable_binary_iarchive inAr( iss );
+	eos::portable_iarchive inAr( iss );
 	inAr & make_nvp("Test", launch2);
       }
       

@@ -627,7 +627,7 @@ I3SuperDST::GetEncodedSizes() const
 {
 	I3MapKeyVectorInt sizes;
 	std::ostringstream oarchive_stream;
-	boost::archive::portable_binary_oarchive oarchive(oarchive_stream);
+	eos::portable_oarchive oarchive(oarchive_stream);
 
 	/* Piggy-back on the current implementation of save() */
 	this->save(oarchive, boost::serialization::version<I3SuperDST>::value,
@@ -1228,6 +1228,8 @@ I3_SPLIT_SERIALIZABLE(I3SuperDST);
 // when compiling superdst-test
 template void I3SuperDSTUtils::SizeCodec::save(boost::archive::portable_binary_oarchive&, unsigned) const;
 template void I3SuperDSTUtils::SizeCodec::load(boost::archive::portable_binary_iarchive&, unsigned);
+template void I3SuperDSTUtils::SizeCodec::save(eos::portable_oarchive&, unsigned) const;
+template void I3SuperDSTUtils::SizeCodec::load(eos::portable_iarchive&, unsigned);
 template void I3SuperDSTUtils::SizeCodec::load(boost::archive::xml_iarchive&, unsigned);
 template void I3SuperDSTUtils::SizeCodec::save(boost::archive::xml_oarchive&, unsigned) const;
 

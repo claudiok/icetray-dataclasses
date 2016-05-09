@@ -12,7 +12,8 @@
 #include "dataclasses/payload/I3SuperDST.h"
 #include "dataclasses/payload/I3SuperDSTUtils.h"
 
-#include <icetray/portable_binary_archive.hpp>
+#include <icetray/eos_portable_archive/portable_iarchive.hpp>
+#include <icetray/eos_portable_archive/portable_oarchive.hpp>
 #include <boost/filesystem.hpp>
 
 #include <boost/lambda/lambda.hpp>
@@ -46,7 +47,7 @@ void resurrect(const Archiveable &in, Archiveable &out, size_t stream_size=0)
 	buffer_t buffer;
 	sink_t sink(buffer);
 	/* This is the archive type instantiated by I3_SERIALIZABLE */
-	boost::archive::portable_binary_oarchive oarchive(sink);
+	eos::portable_oarchive oarchive(sink);
 
 	/* Find the size of an empty archive */
 	size_t base_size = 0;
@@ -65,7 +66,7 @@ void resurrect(const Archiveable &in, Archiveable &out, size_t stream_size=0)
 		ENSURE_EQUAL(buffer.size()-base_size, stream_size);
 
 	source_t source(&*buffer.begin(), &*buffer.end());
-	boost::archive::portable_binary_iarchive iarchive(source);
+	eos::portable_iarchive iarchive(source);
 	iarchive >> out;
 }
 
