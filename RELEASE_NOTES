@@ -4,6 +4,7 @@ Release Notes
 
 trunk
 -----
+* Added I3OMGeo OMType for Scintillators and IceACT. Resolved #1698 (jan.oertlin@icecube.wisc.edu)
 
 May 2, 2016, Alex Olivas  (olivas@icecube.umd.edu)
 ---------------------------------------------------
