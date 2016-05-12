@@ -46,6 +46,8 @@ void register_I3OMGeo()
       .value("AMANDA", I3OMGeo::AMANDA)
       .value("IceCube", I3OMGeo::IceCube)
       .value("IceTop", I3OMGeo::IceTop)
+      .value("Scintillator", I3OMGeo::Scintillator)
+      .value("IceAct", I3OMGeo::IceAct)
       .export_values()
       ;
     ;
