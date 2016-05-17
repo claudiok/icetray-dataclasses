@@ -59,7 +59,7 @@ class I3Position;
  *
  * See the graphic of the definitions of Zenith/Azimuth and theta/Phi 
  * direction angles:
- * http://icecube.umd.edu/dule/icecube/axes.html
+ * https://wiki.icecube.wisc.edu/index.php/I3Direction
  *
  * @todo implement "print out" of all information in a uniform way...
  * @todo ensure that the temporary data isn't written to disk.
