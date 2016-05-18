@@ -7,6 +7,7 @@
    :synopsis: python bindings to dataclasses
 
 .. class:: I3Double
+   :noindex:
 
    Wrapper of the simple C++ class which holds a ``double`` called "value" 
 
@@ -19,6 +20,7 @@
       Create an I3Double with value initialized to v
 
    .. attribute:: value
+      :noindex:
 
       The 'double' that it holds
 

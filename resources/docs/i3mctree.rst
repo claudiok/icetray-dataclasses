@@ -607,6 +607,6 @@ Python Bindings
 
 .. autoclass:: icecube.dataclasses.I3MCTree
     :members:
-
+    :noindex:
 
 

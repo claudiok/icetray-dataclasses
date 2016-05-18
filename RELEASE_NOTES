@@ -12,7 +12,7 @@ Release V16-04-01
 * Protect against zero width pulses in sDST for tpx.
 
 April 29, 2016, Alex Olivas  (olivas@icecube.umd.edu)
----------------------------------------------------
+-----------------------------------------------------
 Release V16-04-00
 * Add contained-type introspection (r144128)  
 
