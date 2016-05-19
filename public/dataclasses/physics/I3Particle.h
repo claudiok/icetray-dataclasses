@@ -431,6 +431,10 @@ class I3Particle : public I3FrameObject
    * @param minor MinorID of that particle
    */
   I3Particle(const uint64_t major, const int32_t minor);
+  
+  /** @brief generate a new, unique ID combination
+   */
+  void generateID();
 
   friend class I3Stochastic;
   // since that ctor is private we need to give this

@@ -12,13 +12,20 @@
 #include <boost/preprocessor/seq/for_each.hpp>
 #include <boost/lexical_cast.hpp>
 
+#if BOOST_VERSION >= 105300
+#define USE_ATOMICS
+#endif
+
+#ifdef USE_ATOMICS
 #include <boost/thread/lock_guard.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/atomic.hpp>
+#endif
 
 #include <unistd.h>
 #include <cstdlib>
 
+#ifdef USE_ATOMICS
 namespace{
 	boost::mutex global_id_lock;
 	
@@ -26,21 +33,16 @@ namespace{
 	boost::atomic<int32_t> global_minor_id_(0);
 	boost::atomic<uint64_t> global_major_id_(0);
 }
+#else
+static int32_t global_last_pid_ = 0;
+static int32_t global_minor_id_ = 0;
+static uint64_t global_major_id_ = 0;
+#endif
 
-I3Particle::~I3Particle() { }
-I3Particle::I3Particle(ParticleShape shape, ParticleType type) : 
-  pdgEncoding_(type),
-  shape_(shape),
-  status_(NotSet),
-  pos_(),
-  dir_(),
-  time_(NAN),
-  energy_(NAN),
-  length_(NAN),
-  speed_(I3Constants::c),
-  locationType_(Anywhere)
-{
+void I3Particle::generateID(){
   int this_pid = getpid();
+  
+#ifdef USE_ATOMICS //thread-safe version
   int32_t last_pid=global_last_pid_.load(boost::memory_order_relaxed);
   boost::atomic_thread_fence(boost::memory_order_acquire); //keep memory ops from wandering
   if (this_pid != last_pid) {
@@ -48,7 +50,7 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
     //check whether another thread already updated this
     last_pid=global_last_pid_.load(boost::memory_order_relaxed);
     if(this_pid != last_pid){
-      log_debug("PID has changed from %i to %i. regenerating I3Particle::majorID.", global_last_pid_, this_pid);
+      log_debug("PID has changed from %i to %i. regenerating I3Particle::majorID.", last_pid, this_pid);
       boost::atomic_thread_fence(boost::memory_order_release);
       global_last_pid_.store(this_pid, boost::memory_order_relaxed);
       global_major_id_.store(0, boost::memory_order_relaxed); // this will cause a new major ID to be generated
@@ -72,6 +74,38 @@ I3Particle::I3Particle(ParticleShape shape, ParticleType type) :
   }
   ID_.majorID = global_major_id_.load();
   ID_.minorID = global_minor_id_.fetch_add(1);
+#else //unsafe version if atomics aren't available
+  if (this_pid != global_last_pid_) {
+    log_debug("PID has changed from %i to %i. regenerating I3Particle::majorID.", global_last_pid_, this_pid);
+    global_last_pid_ = this_pid;
+    global_major_id_ = 0; // this will cause a new major ID to be generated
+    global_minor_id_ = 0; // reset the minor ID, too
+  }
+  if(global_major_id_ ==0){
+    boost::hash<std::string> string_hash;
+    std::stringstream s;
+    s<<time(0)<<this_pid<<gethostid();
+    global_major_id_ = string_hash(s.str());
+  }
+  ID_.majorID = global_major_id_;
+  ID_.minorID = global_minor_id_++;
+#endif
+}
+
+I3Particle::~I3Particle() { }
+I3Particle::I3Particle(ParticleShape shape, ParticleType type) : 
+  pdgEncoding_(type),
+  shape_(shape),
+  status_(NotSet),
+  pos_(),
+  dir_(),
+  time_(NAN),
+  energy_(NAN),
+  length_(NAN),
+  speed_(I3Constants::c),
+  locationType_(Anywhere)
+{
+  generateID();
   
   log_trace_stream("Calling I3Particle::I3Particle(ParticleShape " << shape << ", ParticleType " << type << ").");
 }
@@ -88,22 +122,7 @@ I3Particle::I3Particle(const I3Position pos, const I3Direction dir, const double
   speed_(I3Constants::c),
   locationType_(Anywhere)
 {
-  const int this_pid = getpid();
-  if (this_pid != global_last_pid_) {
-    log_debug("PID has changed from %i to %i. regenerating I3Particle::majorID.", global_last_pid_, this_pid);
-    global_last_pid_ = this_pid;
-    global_major_id_ = 0; // this will cause a new major ID to be generated
-    global_minor_id_ = 0; // reset the minor ID, too
-  }
-  
-  if(global_major_id_ ==0){
-    boost::hash<std::string> string_hash;
-    std::stringstream s;
-    s<<time(0)<<this_pid<<gethostid();
-    global_major_id_ = string_hash(s.str());
-  }
-  ID_.majorID = global_major_id_;
-  ID_.minorID = global_minor_id_++;
+  generateID();
 }
 
 I3Particle::I3Particle(const uint64_t major, const int32_t minor) :
