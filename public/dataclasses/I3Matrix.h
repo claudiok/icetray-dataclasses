@@ -11,7 +11,7 @@ public:
 	typedef base::size_type size_type;
 	typedef base::difference_type difference_type;
 	typedef base::value_type value_type;
-	typedef base::const_reference const_referece;
+	typedef base::const_reference const_reference;
 	typedef base::reference reference;
 	typedef base::array_type array_type;
 	typedef base::const_closure_type const_closure_type;
