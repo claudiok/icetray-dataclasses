@@ -1396,7 +1396,12 @@ namespace TreeBase {
         ar & boost::serialization::make_nvp("count", count);
         item = load_old_filter<T,Key,Hash>::call(this,item);
         if(iters.empty()) {
-          iter = this->insert_after(this->begin(),item);
+          iter2 = this->begin();
+          do {
+            iter = iter2;
+            iter2 = this->next_sibling(iter);
+          } while (iter2 != this->end());
+          iter = this->insert_after(iter,item);
         } else {
           iter = this->append_child(iters.top(), item);
         }
