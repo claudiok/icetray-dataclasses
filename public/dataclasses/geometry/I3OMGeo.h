@@ -28,7 +28,7 @@ static const unsigned i3omgeo_version_ = 1;
 class I3OMGeo 
 {
 public:
-    enum OMType {UnknownType = 0, AMANDA = 10, IceCube = 20, IceTop = 30};
+    enum OMType {UnknownType = 0, AMANDA = 10, IceCube = 20, IceTop = 30, Scintillator = 40, IceAct = 50};
 
     I3OMGeo():omtype(UnknownType){} 
     
