@@ -56,7 +56,7 @@ struct I3ParticleID{
 
 private:
 #ifndef __CINT__
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, const unsigned version)
   {

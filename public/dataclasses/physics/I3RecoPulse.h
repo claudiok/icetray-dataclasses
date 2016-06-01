@@ -75,12 +75,12 @@ class I3RecoPulse
   bool operator!=(const I3RecoPulse& rhs) const { return !operator==(rhs); }
 
   private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 I3_POINTER_TYPEDEFS(I3RecoPulse);
-BOOST_CLASS_VERSION(I3RecoPulse, i3recopulse_version_);
+I3_CLASS_VERSION(I3RecoPulse, i3recopulse_version_);
 
 typedef std::vector<I3RecoPulse> I3RecoPulseSeries;
 typedef I3Map<OMKey, I3RecoPulseSeries> I3RecoPulseSeriesMap;

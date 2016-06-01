@@ -101,7 +101,7 @@ private:
   static const double FROM_TENTH_NS_TO_NS_CORRECTION_FACTOR;
   
   
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 
@@ -111,7 +111,7 @@ private:
 
 std::ostream& operator<<(std::ostream& oss, const I3Trigger& t);
 
-BOOST_CLASS_VERSION(I3Trigger, i3trigger_version_);
+I3_CLASS_VERSION(I3Trigger, i3trigger_version_);
 /**
  * pointer type to insulate users from memory management
  */

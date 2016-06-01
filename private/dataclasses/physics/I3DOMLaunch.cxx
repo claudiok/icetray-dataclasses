@@ -35,7 +35,7 @@ void I3DOMLaunch::save(Archive& ar, unsigned version) const
   // since version 3 of the file the raw waveforms are stored in delta
   // compressed form. This is only done, if archived to a non XML archive,
   // to allow to inspect the waveforms with dataio_shovel.
-  if(  ( typeid(ar) != typeid(boost::archive::xml_oarchive) ) ){
+  if(  ( typeid(ar) != typeid(icecube::archive::xml_oarchive) ) ){
     try{
       I3DeltaCompression::DeltaCompressor compressor;
       std::vector< std::vector<unsigned int> > compressedATWD;
@@ -126,7 +126,7 @@ void I3DOMLaunch::load(Archive& ar, unsigned version)
   // to allow to inspect the waveforms with dataio_shovel.
   if( ( version > 2 )
       && 
-      ( typeid(ar) != typeid(boost::archive::xml_iarchive) ) )
+      ( typeid(ar) != typeid(icecube::archive::xml_iarchive) ) )
   {
     try
     {

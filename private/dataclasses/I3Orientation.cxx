@@ -23,14 +23,14 @@ I3Orientation::serialize(Archive& ar, unsigned version)
 // save XML (in a more human-readable format)
 template <> 
 void 
-I3Orientation::serialize(boost::archive::xml_oarchive& ar, unsigned version)
+I3Orientation::serialize(icecube::archive::xml_oarchive& ar, unsigned version)
 {
   if (version!=i3orientation_version_)
     log_fatal("Cannot load XML data for I3Orientation from an archive with version %u. Only the current version (%u) is supported.",version,i3orientation_version_);
 
   ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 
-  // not using these as pointers will make boost::serialization tracking
+  // not using these as pointers will make icecube::serialization tracking
   // assume they are all the same. It will generate object references in XML
   // instead of serializing the object.
   I3DirectionConstPtr dir(new I3Direction(GetDir()));
@@ -45,7 +45,7 @@ I3Orientation::serialize(boost::archive::xml_oarchive& ar, unsigned version)
 // load XML
 template <> 
 void 
-I3Orientation::serialize(boost::archive::xml_iarchive& ar, unsigned version)
+I3Orientation::serialize(icecube::archive::xml_iarchive& ar, unsigned version)
 {
   if (version!=i3orientation_version_) 
     log_fatal("Cannot load XML data for I3Orientation from an archive with version %u. Only the current version (%u) is supported.",version,i3orientation_version_);

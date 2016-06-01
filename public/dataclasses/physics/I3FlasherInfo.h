@@ -138,14 +138,14 @@ public:
 
 private:
 
-    friend class boost::serialization::access;
+    friend class icecube::serialization::access;
 
     template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };
 
 I3_POINTER_TYPEDEFS(I3FlasherInfo);
-BOOST_CLASS_VERSION(I3FlasherInfo, i3flasherinfo_version_);
+I3_CLASS_VERSION(I3FlasherInfo, i3flasherinfo_version_);
 
 typedef I3Vector<I3FlasherInfo> I3FlasherInfoVect;
 I3_POINTER_TYPEDEFS(I3FlasherInfoVect);

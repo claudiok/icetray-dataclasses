@@ -309,7 +309,7 @@ class I3Quaternion : public I3FrameObject
 	private:
 		double x_,y_,z_,w_;
 		
-		friend class boost::serialization::access;
+		friend class icecube::serialization::access;
 		template <class Archive>
 		void serialize(Archive& ar, unsigned version);
 		
@@ -318,6 +318,6 @@ class I3Quaternion : public I3FrameObject
 I3Quaternion operator*(double, const I3Quaternion&);
 
 I3_POINTER_TYPEDEFS(I3Quaternion);
-BOOST_CLASS_VERSION(I3Quaternion, i3quaternion_version_);
+I3_CLASS_VERSION(I3Quaternion, i3quaternion_version_);
 
 #endif

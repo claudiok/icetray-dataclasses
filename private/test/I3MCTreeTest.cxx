@@ -15,8 +15,8 @@
 #include <dataclasses/physics/I3MCTreeUtils.h>
 #include <icetray/I3Frame.h>
 #include <sstream>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+#include <archive/xml_iarchive.hpp>
+#include <archive/xml_oarchive.hpp>
 #include <boost/preprocessor/seq.hpp>
 #include <boost/preprocessor/seq/for_each.hpp>
 
@@ -2515,16 +2515,16 @@ TEST(xml_serialization)
   
   ostringstream os;
   {
-    boost::archive::xml_oarchive oa(os);
-    oa << boost::serialization::make_nvp("mytree", t1);
+    icecube::archive::xml_oarchive oa(os);
+    oa << icecube::serialization::make_nvp("mytree", t1);
   }
   
   istringstream is;
   I3MCTree t2;
   is.str(os.str());
   {
-    boost::archive::xml_iarchive ia(is);
-    ia >> boost::serialization::make_nvp("mytree", t2);
+    icecube::archive::xml_iarchive ia(is);
+    ia >> icecube::serialization::make_nvp("mytree", t2);
   }
   
   I3MCTree::iterator iter(t1);
@@ -2541,16 +2541,16 @@ TEST(xml_serialization)
   t2.insert_after(makeParticle());
   ostringstream os2;
   {
-    boost::archive::xml_oarchive oa2(os2);
-    oa2 << boost::serialization::make_nvp("mytree", t2);
+    icecube::archive::xml_oarchive oa2(os2);
+    oa2 << icecube::serialization::make_nvp("mytree", t2);
   }
   
   istringstream is2;
   I3MCTree t3;
   is2.str(os2.str());
   {
-    boost::archive::xml_iarchive ia2(is2);
-    ia2 >> boost::serialization::make_nvp("mytree", t3);
+    icecube::archive::xml_iarchive ia2(is2);
+    ia2 >> icecube::serialization::make_nvp("mytree", t3);
   }
   iter = t2.begin();
   iter2 = t3.begin();
@@ -2563,16 +2563,16 @@ TEST(xml_serialization)
   
   ostringstream os3;
   {
-    boost::archive::xml_oarchive oa3(os3);
-    oa3 << boost::serialization::make_nvp("mytree", t3);
+    icecube::archive::xml_oarchive oa3(os3);
+    oa3 << icecube::serialization::make_nvp("mytree", t3);
   }
   
   istringstream is3;
   I3MCTree t4;
   is3.str(os3.str());
   {
-    boost::archive::xml_iarchive ia3(is3);
-    ia3 >> boost::serialization::make_nvp("mytree", t4);
+    icecube::archive::xml_iarchive ia3(is3);
+    ia3 >> icecube::serialization::make_nvp("mytree", t4);
   }
   iter = t2.begin();
   iter2 = t4.begin();
@@ -2603,16 +2603,16 @@ TEST(xml_serialization_massive)
   
   ostringstream os;
   {
-    boost::archive::xml_oarchive oa(os);
-    oa << boost::serialization::make_nvp("mytree", t1);
+    icecube::archive::xml_oarchive oa(os);
+    oa << icecube::serialization::make_nvp("mytree", t1);
   }
   
   istringstream is;
   I3MCTree t2;
   is.str(os.str());
   {
-    boost::archive::xml_iarchive ia(is);
-    ia >> boost::serialization::make_nvp("mytree", t2);
+    icecube::archive::xml_iarchive ia(is);
+    ia >> icecube::serialization::make_nvp("mytree", t2);
   }
   
   I3MCTree::iterator iter(t1);
@@ -2626,16 +2626,16 @@ TEST(xml_serialization_massive)
   
   ostringstream os2;
   {
-    boost::archive::xml_oarchive oa2(os2);
-    oa2 << boost::serialization::make_nvp("mytree", t2);
+    icecube::archive::xml_oarchive oa2(os2);
+    oa2 << icecube::serialization::make_nvp("mytree", t2);
   }
   
   istringstream is2;
   I3MCTree t3;
   is2.str(os2.str());
   {
-    boost::archive::xml_iarchive ia2(is2);
-    ia2 >> boost::serialization::make_nvp("mytree", t3);
+    icecube::archive::xml_iarchive ia2(is2);
+    ia2 >> icecube::serialization::make_nvp("mytree", t3);
   }
   iter = t1.begin();
   iter2 = t3.begin();

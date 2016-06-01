@@ -23,8 +23,8 @@
 #include <dataclasses/external/CompareFloatingPoint.h>
 
 #ifndef __CINT__
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+#include <archive/xml_iarchive.hpp>
+#include <archive/xml_oarchive.hpp>
 #endif
 
 static const unsigned i3direction_version_ = 0;
@@ -285,7 +285,7 @@ class I3Direction : public I3FrameObject
    */
   void CalcSphFromCar();
 
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -293,8 +293,8 @@ class I3Direction : public I3FrameObject
 
 #ifndef __CINT__
 // template specialization for XML i/o
-template<> void I3Direction::serialize(boost::archive::xml_oarchive& ar, unsigned version);
-template<> void I3Direction::serialize(boost::archive::xml_iarchive& ar, unsigned version);
+template<> void I3Direction::serialize(icecube::archive::xml_oarchive& ar, unsigned version);
+template<> void I3Direction::serialize(icecube::archive::xml_iarchive& ar, unsigned version);
 #endif
 
 I3Position operator*(double, const I3Direction&);
@@ -302,7 +302,7 @@ I3Position operator*(double, const I3Direction&);
 std::ostream& operator<<(std::ostream& oss, const I3Direction& d);
 
 I3_POINTER_TYPEDEFS(I3Direction);
-BOOST_CLASS_VERSION(I3Direction, i3direction_version_);
+I3_CLASS_VERSION(I3Direction, i3direction_version_);
 
 typedef I3Vector<I3Direction> I3DirectionVect;
 I3_POINTER_TYPEDEFS(I3DirectionVect);

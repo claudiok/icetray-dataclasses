@@ -358,7 +358,7 @@ class I3Position : public I3FrameObject
 
  private:
 
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -376,6 +376,6 @@ std::ostream& operator<<(std::ostream& oss, const I3Position& p);
 double abs(const I3Position& p);
 
 I3_POINTER_TYPEDEFS(I3Position);
-BOOST_CLASS_VERSION(I3Position, i3position_version_);
+I3_CLASS_VERSION(I3Position, i3position_version_);
 
 #endif //I3POSITION_H_INCLUDED

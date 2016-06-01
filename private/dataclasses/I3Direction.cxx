@@ -23,7 +23,7 @@ I3Direction::serialize(Archive& ar, unsigned version)
 // save XML
 template <> 
 void 
-I3Direction::serialize(boost::archive::xml_oarchive& ar, unsigned version)
+I3Direction::serialize(icecube::archive::xml_oarchive& ar, unsigned version)
 {
   if (version!=i3direction_version_)
     log_fatal("Cannot load XML data for I3Direction from an archive with version %u. Only the current version (%u) is supported.",version,i3direction_version_);
@@ -49,7 +49,7 @@ I3Direction::serialize(boost::archive::xml_oarchive& ar, unsigned version)
 // load XML
 template <> 
 void 
-I3Direction::serialize(boost::archive::xml_iarchive& ar, unsigned version)
+I3Direction::serialize(icecube::archive::xml_iarchive& ar, unsigned version)
 {
   if (version!=i3direction_version_) 
     log_fatal("Cannot load XML data for I3Direction from an archive with version %u. Only the current version (%u) is supported.",version,i3direction_version_);

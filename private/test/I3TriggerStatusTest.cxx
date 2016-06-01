@@ -69,7 +69,7 @@ TEST(TriggerStatusSerialize)
  // Build a binary stringtream and serialize the I3TriggerStatus
         std::ostringstream oss(std::ostringstream::binary);
         {
-                boost::archive::portable_binary_oarchive outAr( oss );
+                icecube::archive::portable_binary_oarchive outAr( oss );
                 outAr & make_nvp("Test", myts);;
         }
   
@@ -77,7 +77,7 @@ TEST(TriggerStatusSerialize)
         I3TriggerStatus mydecode;
         std::istringstream iss( oss.str(), std::istringstream::binary );
         {
-                boost::archive::portable_binary_iarchive inAr( iss );
+                icecube::archive::portable_binary_iarchive inAr( iss );
                 inAr & make_nvp("Test", mydecode);
         }
 

@@ -13,13 +13,13 @@ i3_add_library(dataclasses
 
   USE_TOOLS boost python
 
-  USE_PROJECTS icetray
+  USE_PROJECTS serialization icetray
   )
 
 
 i3_test_executable(test 
   private/test/*.cxx
-  USE_PROJECTS dataclasses dataio
+  USE_PROJECTS serialization dataclasses dataio
   USE_PYBINDINGS dataio
   )
 
@@ -65,7 +65,7 @@ i3_add_pybindings(dataclasses
   private/pybindings/TriggerKey.cxx
   private/pybindings/test_utils/I3VectorUtils.cxx
   USE_TOOLS boost python
-  USE_PROJECTS icetray dataclasses
+  USE_PROJECTS serialization icetray dataclasses
   )
 
 i3_test_scripts(resources/test/*.py)

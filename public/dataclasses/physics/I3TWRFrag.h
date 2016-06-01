@@ -65,14 +65,14 @@ class I3TWRFrag
   std::vector<unsigned int>& GetWaveform() { return(rawFADC_); }
 
   private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
 bool operator==(const I3TWRFrag& lhs, const I3TWRFrag& rhs);
 
 static const unsigned i3twrfrag_version_ = 1;
-BOOST_CLASS_VERSION(I3TWRFrag, i3twrfrag_version_);
+I3_CLASS_VERSION(I3TWRFrag, i3twrfrag_version_);
 
 I3_POINTER_TYPEDEFS(I3TWRFrag);
 

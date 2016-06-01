@@ -128,10 +128,10 @@ class I3Waveform
 	&& interval_ == rhs.interval_;
     }
    private:
-    friend class boost::serialization::access;
+    friend class icecube::serialization::access;
     template<class Archive> void save(Archive& ar, unsigned version) const;
     template<class Archive> void load(Archive& ar, unsigned version);
-    BOOST_SERIALIZATION_SPLIT_MEMBER();
+    I3_SERIALIZATION_SPLIT_MEMBER();
   };
 
   /**
@@ -241,10 +241,10 @@ class I3Waveform
   void SetSourceIndex(unsigned num) { source_.fields.id = (num > 0); }
 
  private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template<class Archive> void save(Archive& ar, unsigned version) const;
   template<class Archive> void load(Archive& ar, unsigned version);
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
+  I3_SERIALIZATION_SPLIT_MEMBER();
 };
 
 bool operator==(const I3Waveform& lhs, const I3Waveform& rhs);
@@ -254,8 +254,8 @@ std::ostream& operator<<(std::ostream& oss, const I3Waveform::StatusCompound& wf
 typedef std::vector<I3Waveform> I3WaveformSeries;
 typedef I3Map<OMKey, I3WaveformSeries> I3WaveformSeriesMap;
 
-BOOST_CLASS_VERSION(I3Waveform, i3waveform_version_);
-BOOST_CLASS_VERSION(I3Waveform::StatusCompound, i3waveform_version_);
+I3_CLASS_VERSION(I3Waveform, i3waveform_version_);
+I3_CLASS_VERSION(I3Waveform::StatusCompound, i3waveform_version_);
 I3_POINTER_TYPEDEFS(I3Waveform);
 I3_POINTER_TYPEDEFS(I3WaveformSeries);
 I3_POINTER_TYPEDEFS(I3WaveformSeriesMap);

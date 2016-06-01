@@ -114,13 +114,13 @@ class ModuleKey : public I3FrameObject
   };
 
  private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(ModuleKey,modulekey_version_);
+I3_CLASS_VERSION(ModuleKey,modulekey_version_);
 
 /**
  * comparison operator.  First compares the string numbers, then compares

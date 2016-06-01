@@ -13,7 +13,7 @@
 
 #include <cassert>
 
-#include <boost/serialization/binary_object.hpp>
+#include <serialization/binary_object.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/utility.hpp>
 #include <boost/foreach.hpp>
@@ -627,10 +627,10 @@ I3SuperDST::GetEncodedSizes() const
 {
 	I3MapKeyVectorInt sizes;
 	std::ostringstream oarchive_stream;
-	boost::archive::portable_binary_oarchive oarchive(oarchive_stream);
+	icecube::archive::portable_binary_oarchive oarchive(oarchive_stream);
 
 	/* Piggy-back on the current implementation of save() */
-	this->save(oarchive, boost::serialization::version<I3SuperDST>::value,
+	this->save(oarchive, icecube::serialization::version<I3SuperDST>::value,
 	    &sizes);
 
 	return sizes;
@@ -729,7 +729,7 @@ namespace I3SuperDSTUtils {
 #endif
 				bytes[i] = s & 0xff;
 
-			ar & make_nvp("Bytes", boost::serialization::make_binary_object(
+			ar & make_nvp("Bytes", icecube::serialization::make_binary_object(
 			    bytes, n_bytes));
 		}
 	}
@@ -745,7 +745,7 @@ namespace I3SuperDSTUtils {
 		} else {
 			unsigned n_bytes = 0xff - tag;
 			uint8_t bytes[8];
-			ar & make_nvp("Bytes", boost::serialization::make_binary_object(
+			ar & make_nvp("Bytes", icecube::serialization::make_binary_object(
 			    bytes, n_bytes));
 
 #if BYTE_ORDER == BIG_ENDIAN
@@ -963,7 +963,7 @@ void I3SuperDST::load_v0(Archive &ar)
 	std::vector<I3SuperDSTSerialization::ChargeStamp> stamp_stream;
 	stamp_stream.resize(stream_size);
 	ar & make_nvp("ChargeStamps",
-	    boost::serialization::make_binary_object(&stamp_stream.front(),
+	    icecube::serialization::make_binary_object(&stamp_stream.front(),
 	    stream_size*sizeof(I3SuperDSTSerialization::ChargeStamp)));
 	swap_vector(stamp_stream);
 	
@@ -977,7 +977,7 @@ void I3SuperDST::load_v0(Archive &ar)
 	std::vector<I3SuperDSTSerialization::DOMHeader> header_stream;
 	header_stream.resize(n_headers);
 	ar & make_nvp("DOMHeaders",
-	    boost::serialization::make_binary_object(&header_stream.front(),
+	    icecube::serialization::make_binary_object(&header_stream.front(),
 	    n_headers*sizeof(I3SuperDSTSerialization::DOMHeader)));
 	swap_vector(header_stream);
 
@@ -1226,9 +1226,9 @@ I3_SPLIT_SERIALIZABLE(I3SuperDST);
 
 // explicitly instantiate serialization functions to avoid linker errors
 // when compiling superdst-test
-template void I3SuperDSTUtils::SizeCodec::save(boost::archive::portable_binary_oarchive&, unsigned) const;
-template void I3SuperDSTUtils::SizeCodec::load(boost::archive::portable_binary_iarchive&, unsigned);
-template void I3SuperDSTUtils::SizeCodec::load(boost::archive::xml_iarchive&, unsigned);
-template void I3SuperDSTUtils::SizeCodec::save(boost::archive::xml_oarchive&, unsigned) const;
+template void I3SuperDSTUtils::SizeCodec::save(icecube::archive::portable_binary_oarchive&, unsigned) const;
+template void I3SuperDSTUtils::SizeCodec::load(icecube::archive::portable_binary_iarchive&, unsigned);
+template void I3SuperDSTUtils::SizeCodec::load(icecube::archive::xml_iarchive&, unsigned);
+template void I3SuperDSTUtils::SizeCodec::save(icecube::archive::xml_oarchive&, unsigned) const;
 
 

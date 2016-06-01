@@ -35,7 +35,7 @@ private:
 	double start_, stop_;
 	
 	friend class I3TimeWindowSeries;
-	friend class boost::serialization::access;
+	friend class icecube::serialization::access;
 	template <typename Archive> void serialize(Archive &ar, unsigned);
 };
 
@@ -53,7 +53,7 @@ public:
 private:
 	void coalesce();
 	
-	friend class boost::serialization::access;
+	friend class icecube::serialization::access;
 	template <typename Archive> void serialize(Archive &ar, unsigned);
 };
 
@@ -68,8 +68,8 @@ I3_POINTER_TYPEDEFS(I3TimeWindowSeriesMap);
 static const unsigned i3timewindow_version_ = 1;
 static const unsigned i3timewindowseries_version_ = 1;
 static const unsigned i3timewindowseriesmap_version_ = 0;
-BOOST_CLASS_VERSION(I3TimeWindow, i3timewindow_version_);
-BOOST_CLASS_VERSION(I3TimeWindowSeries, i3timewindowseries_version_);
-BOOST_CLASS_VERSION(I3TimeWindowSeriesMap, i3timewindowseriesmap_version_);
+I3_CLASS_VERSION(I3TimeWindow, i3timewindow_version_);
+I3_CLASS_VERSION(I3TimeWindowSeries, i3timewindowseries_version_);
+I3_CLASS_VERSION(I3TimeWindowSeriesMap, i3timewindowseriesmap_version_);
 
 #endif // I3TIMEWINDOW_H_INCLUDED

@@ -72,13 +72,13 @@ public:
     }
     
 private:
-    friend class boost::serialization::access;
+    friend class icecube::serialization::access;
     template <class Archive>
     void serialize(Archive& ar, unsigned version);
 };
 
 I3_POINTER_TYPEDEFS(I3OMGeo);
-BOOST_CLASS_VERSION(I3OMGeo, i3omgeo_version_);
+I3_CLASS_VERSION(I3OMGeo, i3omgeo_version_);
 
 typedef I3Map<OMKey, I3OMGeo> I3OMGeoMap;
 I3_POINTER_TYPEDEFS(I3OMGeoMap);

@@ -12,7 +12,7 @@
 #include "dataclasses/I3TimeWindow.h"
 
 #include <boost/foreach.hpp>
-#include <boost/serialization/list.hpp>
+#include <serialization/list.hpp>
 
 template <typename Archive>
 void

@@ -16,8 +16,8 @@
 #include "dataclasses/I3Direction.h"
 
 #ifndef __CINT__
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+#include <archive/xml_iarchive.hpp>
+#include <archive/xml_oarchive.hpp>
 #endif
 
 static const unsigned i3orientation_version_ = 0;
@@ -449,7 +449,7 @@ class I3Orientation : public I3FrameObject
 		void DoCalcUp() const;
 		void DoCalcRight() const;
 		
-		friend class boost::serialization::access;
+		friend class icecube::serialization::access;
 		
 		template <class Archive>
 		void serialize(Archive& ar, unsigned version);
@@ -458,12 +458,12 @@ class I3Orientation : public I3FrameObject
 //bool operator==(const I3Orientation& lhs, const I3Orientation& rhs);
 
 #ifndef __CINT__
-template<> void I3Orientation::serialize(boost::archive::xml_iarchive& ar, unsigned version);
-template<> void I3Orientation::serialize(boost::archive::xml_oarchive& ar, unsigned version);
+template<> void I3Orientation::serialize(icecube::archive::xml_iarchive& ar, unsigned version);
+template<> void I3Orientation::serialize(icecube::archive::xml_oarchive& ar, unsigned version);
 #endif
 
 I3_POINTER_TYPEDEFS(I3Orientation);
-BOOST_CLASS_VERSION(I3Orientation, i3orientation_version_);
+I3_CLASS_VERSION(I3Orientation, i3orientation_version_);
 
 typedef I3Vector<I3Orientation> I3OrientationVect;
 I3_POINTER_TYPEDEFS(I3OrientationVect);

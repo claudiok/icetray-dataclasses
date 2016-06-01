@@ -144,12 +144,12 @@ private:
 		
 		bool operator==(const bitmask&) const;
 		
-		friend class boost::serialization::access;
+		friend class icecube::serialization::access;
 		
 		template <class Archive> void load(Archive & ar, unsigned version);
 		template <class Archive> void save(Archive & ar, unsigned version) const;
 		
-		BOOST_SERIALIZATION_SPLIT_MEMBER();
+		I3_SERIALIZATION_SPLIT_MEMBER();
 	};
 		
 	std::string key_;
@@ -191,19 +191,19 @@ private:
 		inline mask_t operator()(mask_t lhs, mask_t rhs) { return lhs ^ rhs; }
 	};
 	
-	friend class boost::serialization::access;
+	friend class icecube::serialization::access;
 	template <class Archive> void load(Archive & ar, unsigned version);
 	template <class Archive> void save(Archive & ar, unsigned version) const;
 	
-	BOOST_SERIALIZATION_SPLIT_MEMBER();
+	I3_SERIALIZATION_SPLIT_MEMBER();
 	
 	SET_LOGGER("I3RecoPulseSeriesMapMask");
 };
 
-template<> void I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsigned version);
-template<> void I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsigned version) const;
+template<> void I3RecoPulseSeriesMapMask::bitmask::load(icecube::archive::xml_iarchive& ar, unsigned version);
+template<> void I3RecoPulseSeriesMapMask::bitmask::save(icecube::archive::xml_oarchive& ar, unsigned version) const;
 
-BOOST_CLASS_VERSION(I3RecoPulseSeriesMapMask, i3recopulseseriesmapmask_version_);
+I3_CLASS_VERSION(I3RecoPulseSeriesMapMask, i3recopulseseriesmapmask_version_);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMapMask);
 
 #endif /* DATACLASSES_I3MAPOMKEYMASK_H_INCLUDED */

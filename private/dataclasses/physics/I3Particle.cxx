@@ -955,7 +955,7 @@ template <class Archive>
 // (except for the particleType which is ignored when reading,
 // as it is derived from the pdgEncoding)
 template <>
-void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const
+void I3Particle::save(icecube::archive::xml_oarchive& ar, unsigned version) const
 {
     std::string tempString;
 
@@ -985,7 +985,7 @@ void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const
 }
 
 template <>
-void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version)
+void I3Particle::load(icecube::archive::xml_iarchive& ar, unsigned version)
 {
   if (version!=i3particle_version_)
     log_fatal("Cannot load XML data for I3Particle from an archive with version %u. Only the current version (%u) is supported.",version,i3particle_version_);

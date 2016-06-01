@@ -168,12 +168,12 @@ I3SuperDSTTestModule::DAQ(I3FramePtr frame)
 		/* Send the whole shebang on a round-trip through serialzation */
 		superdst = I3SuperDSTPtr(new I3SuperDST(*pulses));
 		std::ostringstream oarchive_stream;
-		boost::archive::portable_binary_oarchive oarchive(oarchive_stream);
+		icecube::archive::portable_binary_oarchive oarchive(oarchive_stream);
 		oarchive << (*superdst);
 		superdst.reset();
 
 		std::istringstream iarchive_stream(oarchive_stream.str());
-		boost::archive::portable_binary_iarchive iarchive(iarchive_stream);
+		icecube::archive::portable_binary_iarchive iarchive(iarchive_stream);
 		/* NB: I know this is dangerous. */
 		I3SuperDST *sdst = new I3SuperDST;
 		superdst = I3SuperDSTPtr(sdst);

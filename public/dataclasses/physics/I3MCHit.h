@@ -154,16 +154,16 @@ class I3MCHit
   double  cherenkovDistance_;
   HitSource source_;
 
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive> void load(Archive & ar, const unsigned version);
   template <class Archive> void save(Archive & ar, const unsigned version) const ;
 
-  BOOST_SERIALIZATION_SPLIT_MEMBER()
+  I3_SERIALIZATION_SPLIT_MEMBER()
 
 };
 
-BOOST_CLASS_VERSION(I3MCHit,i3mchit_version_);
+I3_CLASS_VERSION(I3MCHit,i3mchit_version_);
 
 std::ostream& operator<<(std::ostream& oss, const I3MCHit& h);
 

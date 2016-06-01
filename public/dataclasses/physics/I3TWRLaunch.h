@@ -61,7 +61,7 @@ class I3TWRLaunch
   std::vector<I3TWRFrag>& GetFragments(){ return(fragments_); }
 
   private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template<class Archive> void serialize(Archive& ar, unsigned version);
 };
 
@@ -71,7 +71,7 @@ typedef std::vector<I3TWRLaunch> I3TWRLaunchSeries;
 typedef I3Map<OMKey, I3TWRLaunchSeries> I3TWRLaunchSeriesMap;
 
 static const unsigned i3twrlaunch_version_ = 1;
-BOOST_CLASS_VERSION(I3TWRLaunch, i3twrlaunch_version_);
+I3_CLASS_VERSION(I3TWRLaunch, i3twrlaunch_version_);
 
 I3_POINTER_TYPEDEFS(I3TWRLaunch);
 I3_POINTER_TYPEDEFS(I3TWRLaunchSeries);

@@ -113,11 +113,11 @@ public:
     
 
 private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive> void save(Archive& ar, unsigned version) const;
   template <class Archive> void load(Archive& ar, unsigned version);
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
+  I3_SERIALIZATION_SPLIT_MEMBER();
 
 };
 
@@ -126,7 +126,7 @@ I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadout);
 typedef I3Map<OMKey, I3AMANDAAnalogReadout> I3AMANDAAnalogReadoutMap;
 
 I3_POINTER_TYPEDEFS(I3AMANDAAnalogReadoutMap);
-BOOST_CLASS_VERSION(I3AMANDAAnalogReadoutMap, i3amandaanalogreadout_version_);
+I3_CLASS_VERSION(I3AMANDAAnalogReadoutMap, i3amandaanalogreadout_version_);
 
 #endif //I3AMANDAANALOGREADOUT_H_INCLUDED
 

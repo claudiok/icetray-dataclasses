@@ -63,13 +63,13 @@ struct I3TankGeo
     return !operator==(rhs);
   }
 
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };
 
-BOOST_CLASS_VERSION(I3TankGeo, i3tankgeo_version_);
+I3_CLASS_VERSION(I3TankGeo, i3tankgeo_version_);
 I3_POINTER_TYPEDEFS(I3TankGeo);
 
 typedef I3Vector<I3TankGeo> I3StationGeo;

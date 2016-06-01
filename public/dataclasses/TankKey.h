@@ -95,7 +95,7 @@ public:
 
 
 private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -127,6 +127,6 @@ std::ostream& operator<<(std::ostream&, const TankKey& key);
 
 
 I3_POINTER_TYPEDEFS(TankKey);
-BOOST_CLASS_VERSION(TankKey, tankkey_version_);
+I3_CLASS_VERSION(TankKey, tankkey_version_);
 
 #endif //TANKKEY_H_INCLUDED

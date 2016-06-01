@@ -88,11 +88,11 @@ private:
     I3Orientation orientation_;
     double radius_;
     
-    friend class boost::serialization::access;
+    friend class icecube::serialization::access;
     template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
-BOOST_CLASS_VERSION(I3ModuleGeo, i3modulegeo_version_);
+I3_CLASS_VERSION(I3ModuleGeo, i3modulegeo_version_);
 
 typedef I3Map<ModuleKey, I3ModuleGeo> I3ModuleGeoMap; 
 

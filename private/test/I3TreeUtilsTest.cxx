@@ -11,8 +11,8 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+#include <archive/xml_iarchive.hpp>
+#include <archive/xml_oarchive.hpp>
 #include <I3Test.h>
 
 using namespace std;

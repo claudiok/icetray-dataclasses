@@ -327,7 +327,7 @@ class I3Time : public I3FrameObject
   int32_t year_;
   int64_t daqTime_;
 
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive>
   void serialize(Archive& ar, unsigned version);
@@ -342,6 +342,6 @@ std::ostream& operator<<(std::ostream& oss, const I3Time& d);
 
 
 I3_POINTER_TYPEDEFS(I3Time);
-BOOST_CLASS_VERSION(I3Time, i3time_version_);
+I3_CLASS_VERSION(I3Time, i3time_version_);
 
 #endif //I3TIME_H_INCLUDED

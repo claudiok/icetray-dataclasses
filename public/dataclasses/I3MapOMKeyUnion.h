@@ -38,13 +38,13 @@ private:
 	std::vector<std::string> keys_;
 	mutable I3RecoPulseSeriesMapPtr unified_;
 	
-	friend class boost::serialization::access;
+	friend class icecube::serialization::access;
 	template <class Archive> void serialize(Archive& ar, unsigned version);
 	
 	SET_LOGGER("I3RecoPulseSeriesMapUnion");
 };
 
-BOOST_CLASS_VERSION(I3RecoPulseSeriesMapUnion, i3recopulseseriesmapunion_version_);
+I3_CLASS_VERSION(I3RecoPulseSeriesMapUnion, i3recopulseseriesmapunion_version_);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMapUnion);
 
 #endif

@@ -11,8 +11,8 @@
 #include <vector>
 #include <algorithm>
 #include <sstream>
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+#include <archive/xml_iarchive.hpp>
+#include <archive/xml_oarchive.hpp>
 #include <I3Test.h>
 
 using namespace std;
@@ -320,15 +320,15 @@ TEST(m_serialization_of_a_full_tree_using_an_xml_archive)
   
   ostringstream os;
   {
-    boost::archive::xml_oarchive oa(os);
-    oa << boost::serialization::make_nvp("mytree", t1);
+    icecube::archive::xml_oarchive oa(os);
+    oa << icecube::serialization::make_nvp("mytree", t1);
   }
   
   istringstream is;
   is.str(os.str());
   {
-    boost::archive::xml_iarchive ia(is);
-    ia >> boost::serialization::make_nvp("mytree", t2);
+    icecube::archive::xml_iarchive ia(is);
+    ia >> icecube::serialization::make_nvp("mytree", t2);
   }
   
   ENSURE_EQUAL(t1.size(), t2.size());

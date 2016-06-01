@@ -19,8 +19,8 @@
 #include <string>
 
 #ifndef __CINT__
-#include <boost/archive/xml_iarchive.hpp>
-#include <boost/archive/xml_oarchive.hpp>
+#include <archive/xml_iarchive.hpp>
+#include <archive/xml_oarchive.hpp>
 #include <boost/optional.hpp>
 #endif
 
@@ -441,10 +441,10 @@ class I3Particle : public I3FrameObject
   // class friend access to test it
   friend class test_particle_id_private_ctor;
 	 
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template <class Archive> void save(Archive & ar, unsigned version) const;
   template <class Archive> void load(Archive & ar, unsigned version);
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
+  I3_SERIALIZATION_SPLIT_MEMBER();
 };
 
 static const unsigned i3particle_version_ = 5;
@@ -499,14 +499,14 @@ static const unsigned i3particle_version_ = 5;
 
 #ifndef __CINT__
 // template specialization for XML i/o
-template<> void I3Particle::save(boost::archive::xml_oarchive& ar, unsigned version) const;
-template<> void I3Particle::load(boost::archive::xml_iarchive& ar, unsigned version);
+template<> void I3Particle::save(icecube::archive::xml_oarchive& ar, unsigned version) const;
+template<> void I3Particle::load(icecube::archive::xml_iarchive& ar, unsigned version);
 #endif
 
 std::ostream& operator<<(std::ostream& oss, const I3Particle& d);
 
 I3_POINTER_TYPEDEFS(I3Particle);
-BOOST_CLASS_VERSION(I3Particle,i3particle_version_);
+I3_CLASS_VERSION(I3Particle,i3particle_version_);
 
 typedef I3Vector<I3Particle> I3VectorI3Particle;
 I3_POINTER_TYPEDEFS(I3VectorI3Particle);

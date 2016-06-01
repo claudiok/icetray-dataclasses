@@ -73,13 +73,13 @@ public:
     return !operator==(rhs);
   }
 
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
 
   template <class Archive> void serialize(Archive & ar, unsigned version);
 };
 
 I3_DEFAULT_NAME(I3Geometry);
 I3_POINTER_TYPEDEFS(I3Geometry);
-BOOST_CLASS_VERSION(I3Geometry, i3geometry_version_);
+I3_CLASS_VERSION(I3Geometry, i3geometry_version_);
 
 #endif // I3GEOMETRY_H_INCLUDED

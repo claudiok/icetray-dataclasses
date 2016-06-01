@@ -655,7 +655,7 @@ TEST(XOr)
 	
 	std::ostringstream oarchive_stream;
 	/* This is the archive type instantiated by I3_SERIALIZABLE */
-	boost::archive::portable_binary_oarchive oarchive(oarchive_stream);
+	icecube::archive::portable_binary_oarchive oarchive(oarchive_stream);
 	oarchive << mask;
 	
 	ENSURE_EQUAL( oarchive_stream.str().size(),
@@ -665,7 +665,7 @@ TEST(XOr)
 	    "+ 1*(npulses/dom/8)");
 
 	std::istringstream iarchive_stream(oarchive_stream.str());
-	boost::archive::portable_binary_iarchive iarchive(iarchive_stream);
+	icecube::archive::portable_binary_iarchive iarchive(iarchive_stream);
 	I3RecoPulseSeriesMapMask maska;
 	iarchive >> maska;
 }

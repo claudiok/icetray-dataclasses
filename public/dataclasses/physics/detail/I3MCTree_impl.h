@@ -1387,13 +1387,13 @@ namespace TreeBase {
       T item;
 
       ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
-      ar & boost::serialization::make_nvp("count", count);
+      ar & icecube::serialization::make_nvp("count", count);
       if(count)
         counts.push(count);
 
       while(!counts.empty()) {
-        ar & boost::serialization::make_nvp("item", item);
-        ar & boost::serialization::make_nvp("count", count);
+        ar & icecube::serialization::make_nvp("item", item);
+        ar & icecube::serialization::make_nvp("count", count);
         item = load_old_filter<T,Key,Hash>::call(this,item);
         if(iters.empty()) {
           iter2 = this->begin();

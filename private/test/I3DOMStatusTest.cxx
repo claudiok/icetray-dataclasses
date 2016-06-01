@@ -14,7 +14,7 @@
 #include <fstream>
 #include <string>
 #include <icetray/serialization.h>
-#include "boost/archive/xml_oarchive.hpp"
+#include "archive/xml_oarchive.hpp"
 #include "dataclasses/status/I3DOMStatus.h"
 #include "dataclasses/physics/I3DOMLaunch.h"
 
@@ -26,7 +26,7 @@ TEST(class_versioning)
 {
 
   ofstream ofs("/tmp/I3DOMStatus.xml");
-  boost::archive::xml_oarchive oa(ofs);
+  icecube::archive::xml_oarchive oa(ofs);
 
   I3DOMLaunch l;
   oa << make_nvp("launch",l);

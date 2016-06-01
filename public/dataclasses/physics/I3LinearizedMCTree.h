@@ -44,16 +44,16 @@ private:
 	typedef I3MCTree::post_order_iterator post_iterator;
 	typedef I3MCTree::sibling_iterator sibling_iterator;
 		
-	friend class boost::serialization::access;
+	friend class icecube::serialization::access;
 	template <class Archive>
 	void load(Archive &ar, unsigned version);
 	template <class Archive>
 	void save(Archive &ar, unsigned version) const;
-	BOOST_SERIALIZATION_SPLIT_MEMBER();
+	I3_SERIALIZATION_SPLIT_MEMBER();
 	
 };
 
 I3_POINTER_TYPEDEFS(I3LinearizedMCTree);
-BOOST_CLASS_VERSION(I3LinearizedMCTree,i3linearizedmctree_version_);
+I3_CLASS_VERSION(I3LinearizedMCTree,i3linearizedmctree_version_);
 
 #endif /* DATACLASSES_I3LINEARIZEDMCTREE_H_INCLUDED */

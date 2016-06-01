@@ -176,7 +176,7 @@ private:
 	
 	unsigned version_;
 	
-	friend class boost::serialization::access;
+	friend class icecube::serialization::access;
 
 	template <class Archive> void save(Archive & ar, unsigned version) const;
 	template <class Archive> void save(Archive & ar, unsigned version,
@@ -184,13 +184,13 @@ private:
 	template <class Archive> void load(Archive & ar, unsigned version);
 	template <class Archive> void load_v0(Archive & ar);
 	template <class Archive> void load_v1(Archive & ar);    
-	BOOST_SERIALIZATION_SPLIT_MEMBER();
+	I3_SERIALIZATION_SPLIT_MEMBER();
 	
 	SET_LOGGER("I3SuperDST");
 };
 
 
-BOOST_CLASS_VERSION(I3SuperDST, i3superdst_version_);
+I3_CLASS_VERSION(I3SuperDST, i3superdst_version_);
 
 I3_POINTER_TYPEDEFS(I3SuperDST);
 

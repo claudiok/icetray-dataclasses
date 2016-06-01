@@ -52,12 +52,12 @@ struct I3Tree : public I3FrameObject , public tree<T>
     
     iter = this->begin();
     count = this->empty() ? 0 : this->number_of_siblings(iter) + 1;
-    ar & boost::serialization::make_nvp("count", count);
+    ar & icecube::serialization::make_nvp("count", count);
     while(iter != this->end())
       {
         count = this->number_of_children(iter);
-        ar & boost::serialization::make_nvp("item", *iter);
-        ar & boost::serialization::make_nvp("count", count);
+        ar & icecube::serialization::make_nvp("item", *iter);
+        ar & icecube::serialization::make_nvp("count", count);
         ++iter;
       }
   }
@@ -74,14 +74,14 @@ struct I3Tree : public I3FrameObject , public tree<T>
 
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 
-    ar & boost::serialization::make_nvp("count", count);
+    ar & icecube::serialization::make_nvp("count", count);
     if(count)
       counts.push(count);
 
     while(!counts.empty())
       {
-        ar & boost::serialization::make_nvp("item", item);
-        ar & boost::serialization::make_nvp("count", count);
+        ar & icecube::serialization::make_nvp("item", item);
+        ar & icecube::serialization::make_nvp("count", count);
         if(iters.empty()) {
           iter = this->begin();
           if (!this->empty()) {
@@ -108,7 +108,7 @@ struct I3Tree : public I3FrameObject , public tree<T>
           }
       }
   }
-  BOOST_SERIALIZATION_SPLIT_MEMBER()
+  I3_SERIALIZATION_SPLIT_MEMBER()
 };
 
 

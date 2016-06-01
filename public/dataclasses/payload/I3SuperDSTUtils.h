@@ -15,7 +15,7 @@
 #ifndef I3SUPERDST_I3SUPERDSTUTILS_H_INCLUDED
 #define I3SUPERDST_I3SUPERDSTUTILS_H_INCLUDED
 
-#include <boost/serialization/binary_object.hpp>
+#include <serialization/binary_object.hpp>
 
 namespace I3SuperDSTUtils {
 	/*
@@ -33,26 +33,26 @@ namespace I3SuperDSTUtils {
 		
 		size_type value() { return size_; };
 		
-		friend class boost::serialization::access;
+		friend class icecube::serialization::access;
 		template <class Archive>
 		void load(Archive &ar, unsigned version);
 		template <class Archive>
 		void save(Archive &ar, unsigned version) const;
-		BOOST_SERIALIZATION_SPLIT_MEMBER();
+		I3_SERIALIZATION_SPLIT_MEMBER();
 	};
 
 	/* Optimized serialization for short vectors */
 	template <typename T>
 	class CompactVector : public std::vector<T> {
 	private:
-		friend class boost::serialization::access;
+		friend class icecube::serialization::access;
 		template <class Archive>
 		void load(Archive &ar, unsigned version) {
 			SizeCodec c;
 			ar >> make_nvp("Size", c);
 			this->resize(c.size_);
 			ar >> make_nvp("Contents",
-			    boost::serialization::make_binary_object(&this->front(),
+			    icecube::serialization::make_binary_object(&this->front(),
 			    this->size()*sizeof(T)));
 		}
 		template <class Archive>
@@ -61,10 +61,10 @@ namespace I3SuperDSTUtils {
 			SizeCodec c(this->size());
 			ar << make_nvp("Size", c);
 			ar << make_nvp("Contents",
-			    boost::serialization::make_binary_object((void*)(&this->front()),
+			    icecube::serialization::make_binary_object((void*)(&this->front()),
 			    this->size()*sizeof(T)));
 		}
-		BOOST_SERIALIZATION_SPLIT_MEMBER();
+		I3_SERIALIZATION_SPLIT_MEMBER();
 	};
 
 	/*

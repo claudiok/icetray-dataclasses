@@ -1231,13 +1231,13 @@ namespace TreeBase {
           const iterator_base<Derived,const T,Storage>&) const;
       
     protected:
-      friend class boost::serialization::access;
+      friend class icecube::serialization::access;
       
       template <class Archive> void load(Archive & ar, unsigned version);
       
       template <class Archive> void save(Archive & ar, unsigned version) const;
       
-      BOOST_SERIALIZATION_SPLIT_MEMBER();
+      I3_SERIALIZATION_SPLIT_MEMBER();
       
       SET_LOGGER("Tree");
   };
@@ -1250,7 +1250,7 @@ namespace TreeBase {
  */
 typedef TreeBase::Tree<I3Particle,I3ParticleID> I3MCTree;
 
-BOOST_CLASS_VERSION(I3MCTree,TreeBase::tree_version_);
+I3_CLASS_VERSION(I3MCTree,TreeBase::tree_version_);
 I3_POINTER_TYPEDEFS(I3MCTree);
 I3_DEFAULT_NAME(I3MCTree);
 

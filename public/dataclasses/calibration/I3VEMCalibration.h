@@ -71,7 +71,7 @@ public:
   }
 
 private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template <class Archive> void serialize(Archive & ar, unsigned version);
 
 };
@@ -80,7 +80,7 @@ private:
 typedef std::map<OMKey, I3VEMCalibration> I3VEMCalibrationMap;
 I3_POINTER_TYPEDEFS(I3VEMCalibrationMap);
 
-BOOST_CLASS_VERSION(I3VEMCalibration, i3vemcalibration_version_);
+I3_CLASS_VERSION(I3VEMCalibration, i3vemcalibration_version_);
 I3_POINTER_TYPEDEFS(I3VEMCalibration);
 
 #endif //I3VEMCALIBRATION_H_INCLUDED

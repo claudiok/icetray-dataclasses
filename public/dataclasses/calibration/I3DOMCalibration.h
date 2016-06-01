@@ -62,7 +62,7 @@ struct LinearFit
   }
 
 };
-BOOST_CLASS_VERSION(LinearFit, linearfit_version_);
+I3_CLASS_VERSION(LinearFit, linearfit_version_);
 
 /**
  *  @brief A struct to hold the parameters of a Quadratic fit
@@ -95,7 +95,7 @@ struct QuadraticFit
   }
 
 };
-BOOST_CLASS_VERSION(QuadraticFit, quadraticfit_version_);
+I3_CLASS_VERSION(QuadraticFit, quadraticfit_version_);
 
 /**
  *  @brief: A struct to hold the parameters of an exponential + Gaussian
@@ -110,7 +110,7 @@ struct SPEChargeDistribution
 {
   template <class Archive> void load(Archive& ar, unsigned version);
   template <class Archive> void save(Archive& ar, unsigned version) const;
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
+  I3_SERIALIZATION_SPLIT_MEMBER();
 
   SPEChargeDistribution() : exp_amp(NAN),
                             exp_width(NAN),
@@ -159,7 +159,7 @@ struct SPEChargeDistribution
   }  
 };
 
-BOOST_CLASS_VERSION(SPEChargeDistribution, SPEChargeDistribution_version_);
+I3_CLASS_VERSION(SPEChargeDistribution, SPEChargeDistribution_version_);
 
 
 /**
@@ -214,7 +214,7 @@ struct TauParam
   }  
 };
 
-BOOST_CLASS_VERSION(TauParam, tauparam_version_);
+I3_CLASS_VERSION(TauParam, tauparam_version_);
 
 struct SPETemplate {
   double c, x0, b1, b2;
@@ -834,7 +834,7 @@ class I3DOMCalibration {
 typedef std::map<OMKey, I3DOMCalibration> I3DOMCalibrationMap;
 I3_POINTER_TYPEDEFS(I3DOMCalibrationMap);
 
-BOOST_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
+I3_CLASS_VERSION(I3DOMCalibration, i3domcalibration_version_);
 I3_POINTER_TYPEDEFS(I3DOMCalibration);
 
 std::ostream& operator<<(std::ostream& oss, const LinearFit& f);

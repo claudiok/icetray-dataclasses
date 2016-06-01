@@ -11,7 +11,7 @@
 #include "dataclasses/I3MapOMKeyMask.h"
 #include "dataclasses/physics/I3RecoPulse.h"
 #include "boost/make_shared.hpp"
-#include <boost/serialization/binary_object.hpp>
+#include <serialization/binary_object.hpp>
 
 I3RecoPulseSeriesMapMask::I3RecoPulseSeriesMapMask() {}
 
@@ -725,7 +725,7 @@ I3RecoPulseSeriesMapMask::bitmask::load(Archive & ar, unsigned version)
 	ar & make_nvp("Padding", padding_);
 	
 	mask_ = (mask_t*)malloc(size_*sizeof(mask_t));
-	ar & make_nvp("Bitmask", boost::serialization::make_binary_object(
+	ar & make_nvp("Bitmask", icecube::serialization::make_binary_object(
 	    mask_, size_*sizeof(mask_t)));
 }
 
@@ -735,13 +735,13 @@ I3RecoPulseSeriesMapMask::bitmask::save(Archive & ar, unsigned version) const
 {
 	ar & make_nvp("Size", size_);
 	ar & make_nvp("Padding", padding_);
-	ar & make_nvp("Bitmask", boost::serialization::make_binary_object(
+	ar & make_nvp("Bitmask", icecube::serialization::make_binary_object(
 	    mask_, size_*sizeof(mask_t)));
 }
 
 template<>
 void
-I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsigned version) const
+I3RecoPulseSeriesMapMask::bitmask::save(icecube::archive::xml_oarchive& ar, unsigned version) const
 {
 	ar & make_nvp("Size", size_);
 	ar & make_nvp("Padding", padding_);
@@ -756,7 +756,7 @@ I3RecoPulseSeriesMapMask::bitmask::save(boost::archive::xml_oarchive& ar, unsign
 
 template<>
 void
-I3RecoPulseSeriesMapMask::bitmask::load(boost::archive::xml_iarchive& ar, unsigned version)
+I3RecoPulseSeriesMapMask::bitmask::load(icecube::archive::xml_iarchive& ar, unsigned version)
 {
 	ar & make_nvp("Size", size_);
 	ar & make_nvp("Padding", padding_);

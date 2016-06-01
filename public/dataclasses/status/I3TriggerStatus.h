@@ -105,7 +105,7 @@ struct I3TriggerReadoutConfig
   }
 };
 
-BOOST_CLASS_VERSION(I3TriggerReadoutConfig, i3triggerreadoutconfig_version_);
+I3_CLASS_VERSION(I3TriggerReadoutConfig, i3triggerreadoutconfig_version_);
 
 class I3TriggerStatus 
 {
@@ -217,11 +217,11 @@ class I3TriggerStatus
   std::map<Subdetector, I3TriggerReadoutConfig> readoutconfigs_;
 
  private:
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template <class Archive> void load(Archive & ar, unsigned version);
   template <class Archive> void save(Archive & ar, unsigned version) const;
 
-  BOOST_SERIALIZATION_SPLIT_MEMBER();
+  I3_SERIALIZATION_SPLIT_MEMBER();
 
   // logging
   SET_LOGGER("I3TriggerStatus");
@@ -234,7 +234,7 @@ typedef std::map<TriggerKey, I3TriggerStatus> I3TriggerStatusMap;
 I3_POINTER_TYPEDEFS(I3TriggerStatusMap);
 
 I3_POINTER_TYPEDEFS(I3TriggerStatus);
-BOOST_CLASS_VERSION(I3TriggerStatus, i3triggerstatus_version_);
+I3_CLASS_VERSION(I3TriggerStatus, i3triggerstatus_version_);
 
 #endif
 

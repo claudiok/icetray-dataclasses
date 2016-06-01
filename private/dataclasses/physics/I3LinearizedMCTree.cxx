@@ -31,7 +31,7 @@ public:
 private:
   static void Propagate(I3Particle &p, double time);
   
-  friend class boost::serialization::access;
+  friend class icecube::serialization::access;
   template <class Archive>
   void serialize(Archive &ar, unsigned version);
   
@@ -245,14 +245,14 @@ I3LinearizedMCTree::load(Archive &ar, unsigned version)
 
 // Don't bother with compact serialization for XML archives
 template<>
-void I3LinearizedMCTree::save(boost::archive::xml_oarchive& ar, unsigned version) const
+void I3LinearizedMCTree::save(icecube::archive::xml_oarchive& ar, unsigned version) const
 {
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("I3MCTree", base_object<I3MCTree>(*this));
 }
 
 template<>
-void I3LinearizedMCTree::load(boost::archive::xml_iarchive& ar, unsigned version)
+void I3LinearizedMCTree::load(icecube::archive::xml_iarchive& ar, unsigned version)
 {
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("I3MCTree", base_object<I3MCTree>(*this));
