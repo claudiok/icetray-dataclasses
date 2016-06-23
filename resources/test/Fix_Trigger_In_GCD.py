@@ -8,7 +8,8 @@ filein = expandvars("$I3_TESTDATA/sim/GeoCalibDetectorStatus_IC80_DC6.54655.i3.g
 oldgcd = dataio.I3File(filein)
 
 ### make a new I3File to write you new G,C, and/or D frames to
-newgcd = dataio.I3File("./NEW_GeoCalibDetectorStatus_IC80_DC6.54655.i3",dataio.I3File.Mode.Writing)
+outfile = "./NEW_GeoCalibDetectorStatus_IC80_DC6.54655.i3"
+newgcd = dataio.I3File(outfile,dataio.I3File.Mode.Writing)
 
 ### loop over the frames until you find the one with the geometry in it
 while oldgcd.more():
@@ -114,3 +115,7 @@ while oldgcd.more():
     newgcd.push(frame)   ### push the frame to our empty I3File
 
 newgcd.close()   ##close it
+
+import os
+os.unlink(outfile)
+

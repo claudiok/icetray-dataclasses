@@ -2,6 +2,7 @@
 
 from icecube import icetray, dataclasses, dataio
 from os.path import expandvars
+from os import unlink
 from pprint import pprint
 
 import sys
@@ -57,6 +58,7 @@ def check_on(Type, name, gen):
             is_fail = True
         i += 1
     print("checked %d entries." % i)
+    unlink(name)
 
     
 def gen(n):

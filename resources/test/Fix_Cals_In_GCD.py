@@ -117,3 +117,7 @@ outfile.push(geo_frame)
 outfile.push(cal_frame)
 outfile.push(status_frame)
 outfile.close()
+
+import os
+os.unlink(OUTFILE)
+
