@@ -7,7 +7,8 @@
 #include <boost/algorithm/string.hpp>
 
 
-/**
+namespace {
+/** 
  * @brief This literal contians a list of Modified Julian Date  of days that @a end on a 
  * leap second. Used by I3Time to determine whe leap seconds occur.
  * 
@@ -18,7 +19,7 @@
 const int32_t leap_sec_list_[] = {41316, 41498, 41682, 42047, 42412, 42777, 43143,
 				  43508, 43873, 44238, 44785, 45150, 45515, 46246, 
 				  47160, 47891, 48256, 48803, 49168, 49533, 50082, 
-				  50629, 51178, 53735, 54831, 56108, 57203};
+				  50629, 51178, 53735, 54831, 56108, 57203, 57753};
 
 /**
  * @brief This vector contians the same information as leap_sec_list but in a std::vector 
@@ -32,6 +33,7 @@ std::vector<int32_t> leap_sec_list(leap_sec_list_,leap_sec_list_+sizeof(leap_sec
  * @brief number of seconds in a standard day add 1 for days with a leap second
  */
 const int32_t SECONDS_IN_DAY = 86400;
+}
 
 int32_t I3TimeUtils::mod_julian_day_start_of_year(int year)
 {
