@@ -198,6 +198,7 @@ class I3Particle : public I3FrameObject
     Primary = 10, 
     TopShower = 20, 
     Cascade = 30, 
+    CascadeSegment = 31, 
     InfiniteTrack = 40, 
     StartingTrack = 50, 
     StoppingTrack = 60, 
@@ -487,7 +488,7 @@ static const unsigned i3particle_version_ = 5;
     (STauPlus)(STauMinus)
 
 #define I3PARTICLE_H_I3Particle_ParticleShape                                     \
-    (Null)(Primary)(TopShower)(Cascade)(InfiniteTrack)(StartingTrack)             \
+    (Null)(Primary)(TopShower)(Cascade)(CascadeSegment)(InfiniteTrack)(StartingTrack)             \
     (StoppingTrack)(ContainedTrack)(MCTrack)(Dark)
     
 #define I3PARTICLE_H_I3Particle_FitStatus                                         \

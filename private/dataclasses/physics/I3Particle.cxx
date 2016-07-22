@@ -484,7 +484,7 @@ bool I3Particle::IsCascade() const
 {
   const int32_t type = pdgEncoding_;
 
-  if (shape_ == Cascade ||
+  if (shape_ == Cascade || shape_ == CascadeSegment ||
       type == EPlus    || type == EMinus   ||
       type == Brems    || type == DeltaE  ||
       type == PairProd || type == NuclInt ||
