@@ -48,20 +48,17 @@ object
 register_I3Trigger()
 {
 
-    // change the scope
-    // after TriggerKey is out of I3Trigger scope
-    object trig_class_obj =
-        class_<I3Trigger, I3TriggerPtr>("I3Trigger")
-        PROPERTY(I3Trigger, time, TriggerTime)
-        PROPERTY(I3Trigger, length, TriggerLength)
-        PROPERTY(I3Trigger, fired, TriggerFired)
-        // force copy of trigkey via standalone fn
-        .add_property("key", get_trigkey, set_trigkey,"Get TriggerKey")
-        .def( self == self )
-        .def( self != self )
-        .def(dataclass_suite<I3Trigger>())
-        .def( freeze() )
-        ;
+    class_<I3Trigger, I3TriggerPtr>("I3Trigger")
+    PROPERTY(I3Trigger, time, TriggerTime)
+    PROPERTY(I3Trigger, length, TriggerLength)
+    PROPERTY(I3Trigger, fired, TriggerFired)
+    // force copy of trigkey via standalone fn
+    .add_property("key", get_trigkey, set_trigkey,"Get TriggerKey")
+    .def( self == self )
+    .def( self != self )
+    .def(dataclass_suite<I3Trigger>())
+    .def( freeze() )
+    ;
 
     class_<I3VectorI3Trigger, bases<I3FrameObject>,
         boost::shared_ptr<I3VectorI3Trigger > >("I3VectorI3Trigger")
@@ -70,7 +67,4 @@ register_I3Trigger()
 
     register_pointer_conversions<I3VectorI3Trigger>();
 
-    // remove next line after
-    // TriggerKey is out of I3Trigger scope
-    return trig_class_obj;
 }

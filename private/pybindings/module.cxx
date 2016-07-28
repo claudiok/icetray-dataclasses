@@ -26,11 +26,6 @@ using namespace boost::python;
 namespace bp = boost::python;
 #include <boost/preprocessor.hpp>
 
-// remove the 2 lines below after
-// TriggerKey is out of I3Trigger scope
-extern void register_TriggerKey(object);
-extern object register_I3Trigger();
-
 //
 //  Add the class you are registering to this list of parenthesized typenames.
 //  Don't forget to watch that the newlines are backslashed.
@@ -68,11 +63,7 @@ extern object register_I3Trigger();
   (I3VectorUInt64)(I3VectorFloat)(I3VectorDouble)(I3VectorDoubleDouble) \
   (I3VectorI3Particle)(I3VectorParticleType)(I3VectorI3Position)        \
   (I3VectorPairDoubleDouble)(I3MCTreePhysicsLibrary)(I3VectorUtils)     \
-  (SPEChargeDistribution)(I3TriggerHierarchy)
-
-// Add to REGISTER_THESE_THINGS after
-// TriggerKey is out of I3Trigger scope
-// (I3Trigger)(TriggerKey)
+  (SPEChargeDistribution)(I3TriggerHierarchy)(I3Trigger)(TriggerKey)
 
 
 #define I3_REGISTRATION_FN_DECL(r, data, t) void BOOST_PP_CAT(register_,t)();
@@ -83,9 +74,5 @@ I3_PYTHON_MODULE(dataclasses)
 {
   load_project("dataclasses", false);
   BOOST_PP_SEQ_FOR_EACH(I3_REGISTER, ~, REGISTER_THESE_THINGS);
-  // remove the 2 lines below after
-  // TriggerKey is out of I3Trigger scope
-  object trig_class_obj = register_I3Trigger();
-  register_TriggerKey(trig_class_obj);
 }
 

@@ -66,7 +66,7 @@ namespace pyTriggerKey {
 #define ENUM_DEF(r,data,T) .value(BOOST_PP_STRINGIZE(T), data::T)
 
 void
-register_TriggerKey(object trig_class_obj)
+register_TriggerKey()
 {
 
     class_<TriggerKey>("TriggerKey")
@@ -97,24 +97,23 @@ register_TriggerKey(object trig_class_obj)
 
     // remove scope
     {
-        scope trigclass_scope = trig_class_obj;
-            enum_<TriggerKey::SourceID>("SourceID")
-                BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
-                        TRIGGERKEY_H_TriggerKey_SourceID)
-                .export_values()
-                ;
+        enum_<TriggerKey::SourceID>("SourceID")
+            BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
+                    TRIGGERKEY_H_TriggerKey_SourceID)
+            .export_values()
+            ;
 
-            enum_<TriggerKey::TypeID>("TypeID")
-                BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
-                        TRIGGERKEY_H_TriggerKey_TypeID)
-                .export_values()
-                ;
+        enum_<TriggerKey::TypeID>("TypeID")
+            BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
+                    TRIGGERKEY_H_TriggerKey_TypeID)
+            .export_values()
+            ;
 
-            enum_<TriggerKey::SubtypeID>("SubtypeID")
-                BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
-                        TRIGGERKEY_H_TriggerKey_SubtypeID)
-                .export_values()
-                ;
+        enum_<TriggerKey::SubtypeID>("SubtypeID")
+            BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
+                    TRIGGERKEY_H_TriggerKey_SubtypeID)
+            .export_values()
+            ;
     }
 
     def("identity", identity_<TriggerKey::SourceID>);

@@ -15,15 +15,15 @@ from icecube.icetray.I3Test import ENSURE
 
 
 print('Testing TriggerKey pybindings')
-tk = dataclasses.TriggerKey(dataclasses.I3Trigger.IN_ICE,
-                            dataclasses.I3Trigger.SIMPLE_MULTIPLICITY,
+tk = dataclasses.TriggerKey(dataclasses.IN_ICE,
+                            dataclasses.SIMPLE_MULTIPLICITY,
                             1002)
 ENSURE(tk.check_config_id() == True, "CheckConfigID fail")
 ENSURE(tk.config_id == 1002, "Wrong ConfigID")
 
-ENSURE(tk.source == dataclasses.I3Trigger.IN_ICE, "Wrong Trigger Source")
+ENSURE(tk.source == dataclasses.IN_ICE, "Wrong Trigger Source")
 
-ENSURE(tk.type == dataclasses.I3Trigger.SIMPLE_MULTIPLICITY, "Wrong Trigger Type")
+ENSURE(tk.type == dataclasses.SIMPLE_MULTIPLICITY, "Wrong Trigger Type")
 print(tk)
 tk.reset_config_id() 
 ENSURE(tk.check_config_id() == False, "CheckConfigID fail")

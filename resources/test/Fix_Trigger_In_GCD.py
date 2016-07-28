@@ -24,8 +24,8 @@ while oldgcd.more():
 
         ## Setup the SMT 8 trigger
         smt_ts = dataclasses.I3TriggerStatus()
-        smt_tk = dataclasses.TriggerKey(dataclasses.I3Trigger.IN_ICE,
-                                        dataclasses.I3Trigger.SIMPLE_MULTIPLICITY,
+        smt_tk = dataclasses.TriggerKey(dataclasses.IN_ICE,
+                                        dataclasses.SIMPLE_MULTIPLICITY,
                                         1006)
 
         smt_ts.trigger_name = 'SimpleMajorityTrigger'
@@ -58,8 +58,8 @@ while oldgcd.more():
         
         ## String Trigger (5/7)
         str_ts = dataclasses.I3TriggerStatus()
-        str_tk = dataclasses.TriggerKey(dataclasses.I3Trigger.IN_ICE,
-                                        dataclasses.I3Trigger.STRING,
+        str_tk = dataclasses.TriggerKey(dataclasses.IN_ICE,
+                                        dataclasses.STRING,
                                         1007)
         
         str_ts.trigger_name = 'ClusterTrigger'
