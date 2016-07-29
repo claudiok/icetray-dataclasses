@@ -23,6 +23,7 @@ Table of Contents:
    superdst
    masks
    vector_math
+   i3direction
    i3mctree
    python
    faq-common-probs
