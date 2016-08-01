@@ -4,6 +4,9 @@ Release Notes
 
 trunk
 -----
+* I3Time::GetModJulianDateDouble now always divides the date by 86400 seconds even
+  on days with leapseconds 
+
 * Added I3OMGeo OMType for Scintillators and IceACT. Resolved #1698 (jan.oertlin@icecube.wisc.edu)
 
 * Issue #1491 resolved: moved TriggerKey python scope from
