@@ -136,8 +136,8 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         assert int(t2.mod_julian_day_double) == t2.mod_julian_day
         assert int(t3.mod_julian_day_double) == t3.mod_julian_day
 
-        assert approx_Equal(t1. mod_julian_day_double + 1/86401. ,t2.mod_julian_day_double, 1e-10)
-        assert approx_Equal(t1. mod_julian_day_double + 2/86401. , t3.mod_julian_day_double,1e-10)
+        assert approx_Equal(t1.mod_julian_day_double           , t2.mod_julian_day_double,1e-10)
+        assert approx_Equal(t1.mod_julian_day_double + 1/86400., t3.mod_julian_day_double,1e-10)
 
         assert t1.mod_julian_nano_sec == nanosec
         assert t2.mod_julian_nano_sec == nanosec
@@ -356,8 +356,8 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         assert int(t2.mod_julian_day_double) == t2.mod_julian_day
         assert int(t3.mod_julian_day_double) == t3.mod_julian_day
 
-        assert approx_Equal(t1. mod_julian_day_double + 1/86401., t2.mod_julian_day_double, 1e-10)
-        assert approx_Equal(t1. mod_julian_day_double + 2/86401., t3.mod_julian_day_double,1e-10)
+        assert approx_Equal(t1.mod_julian_day_double           , t2.mod_julian_day_double, 1e-10)
+        assert approx_Equal(t1.mod_julian_day_double + 1/86400., t3.mod_julian_day_double, 1e-10)
 
         assert t1.mod_julian_nano_sec == nanosec
         assert t2.mod_julian_nano_sec == nanosec
