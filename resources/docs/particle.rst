@@ -119,6 +119,39 @@ elaborate reconstruction methods that are used in
 for analyses searching for events triggered by magnetic monopoles, which
 may (or may not) travel at speeds less than ``c``.
 
+IsCascade
+~~~~~~~~~
+A Cascade interaction in the detector would look like a blob instead of a track. An example of an interaction 
+that produces a blob is a neutrino neutral current Deep Inelastic Scattering in the ice. This will produce a shower of hadrons 
+(many of those are Cascades) in the final state of the interaction.  
+
+An :class:`I3Particle` can be set as a cascade via :class:`ParticleShape` or :class:`ParticleType` 
+in the constructor of :class:`I3Particle` class. A description of :class:`ParticleShape` and :class:`ParticleType`
+is given below of this documentation.
+  
+* The :class:`ParticleShape` options to set an :class:`I3Particle` as a Cascade are: ``Cascade`` or ``CascadeSegment``.
+* Regarding to the type: ``EPlus``, ``EMinus``, ``Brems``, ``DeltaE``, ``PairProd``, 
+``NuclInt``, ``Hadrons``, ``PiPlus`` or ``PiMinus``. All these type of particles are cascades.
+* Furthermore, a :class:`ParticleShape` set as ``Primary`` and with a type of :class:`ParticleType`
+as ``PPlus``, ``PMinus``, ``IsNucleus`` or ``Gamma`` will be a Cascade.  
+
+Below an example of how to set the type and other properties of an :class:`I3Particle` in python::
+
+       from icecube import dataclasses
+       
+       particle= dataclasses.I3Particle()
+       particle.pos= dataclasses.I3Position(2.5e6,4.8e6,-1.7e6)
+       particle.dir= dataclasses.I3Direction(0.8,1.1)
+       particle.type= dataclasses.I3Particle.PiPlus
+       particle.energy= 8.6e2
+
+If the user makes: ``print particle`` all the information of the particle will be displayed. Furthermore, 
+the user will obtain a ``True`` value by executing ``particle.is_cascade``. This value is ``True`` since 
+a ``PiPlus`` is defined as a Cascade.  
+
+The user can also set the shape of an :class:`I3Particle` through ``particle.shape= dataclasses.I3Particle.Cascade``.
+
+
 Integer data members
 --------------------
 
@@ -169,6 +202,7 @@ consistently.  The shape can take the following values:
 .. [#mctrack] Strangely, the ``MCTrack`` shape is *not* used for simulated muon tracks. It was never used in simulation and will likely go away in the future, since it's not needed.
 
 .. [#dark] The ``Dark`` shape was invented for the Tau Working Group because they didn't like what cmc (Cascade Monte Carlo) did to the original cascades, where it would split the cascade into several smaller cascades for a more accurate simulation.  This made it difficult for tau reconstructions (e.g. double-bang), which attempt to reconstruct the interaction vertex, for example, as one single cascade to Monte Carlo truth.  Thus, the original unadultered (by cmc) cascade remained in the tree and labeled as ``Dark`` where the daughters of this cascade are responsible for generating light.
+
 
 Location
 ~~~~~~~~
