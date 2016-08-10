@@ -42,10 +42,7 @@ void set_trigkey(I3Trigger& self, const TriggerKey& tk)
 
 
 
-// change return type from object to void
-// after TriggerKey is out of I3Trigger scope
-object
-register_I3Trigger()
+void register_I3Trigger()
 {
 
     class_<I3Trigger, I3TriggerPtr>("I3Trigger")

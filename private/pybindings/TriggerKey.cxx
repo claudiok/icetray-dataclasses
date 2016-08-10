@@ -95,26 +95,23 @@ register_TriggerKey()
         .def(dataclass_suite<TriggerKey>())
         ;
 
-    // remove scope
-    {
-        enum_<TriggerKey::SourceID>("SourceID")
-            BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
-                    TRIGGERKEY_H_TriggerKey_SourceID)
-            .export_values()
-            ;
+    enum_<TriggerKey::SourceID>("SourceID")
+        BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
+                TRIGGERKEY_H_TriggerKey_SourceID)
+        .export_values()
+        ;
 
-        enum_<TriggerKey::TypeID>("TypeID")
-            BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
-                    TRIGGERKEY_H_TriggerKey_TypeID)
-            .export_values()
-            ;
+    enum_<TriggerKey::TypeID>("TypeID")
+        BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
+                TRIGGERKEY_H_TriggerKey_TypeID)
+        .export_values()
+        ;
 
-        enum_<TriggerKey::SubtypeID>("SubtypeID")
-            BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
-                    TRIGGERKEY_H_TriggerKey_SubtypeID)
-            .export_values()
-            ;
-    }
+    enum_<TriggerKey::SubtypeID>("SubtypeID")
+        BOOST_PP_SEQ_FOR_EACH(ENUM_DEF, TriggerKey,
+                TRIGGERKEY_H_TriggerKey_SubtypeID)
+        .export_values()
+        ;
 
     def("identity", identity_<TriggerKey::SourceID>);
     def("identity", identity_<TriggerKey::TypeID>);
