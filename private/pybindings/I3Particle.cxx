@@ -51,6 +51,10 @@ bool I3ParticleVect_eq(const std::vector<I3Particle> &lhs,bp::list &rhs)
     return true;
 }
 
+I3Position shift_along_track(const I3Particle& p, double distance){
+  std::cout<<"I3Particle.shift_along_track is DEPRECATED: It's trivial to shift yourself."<<std::endl;
+  return p.GetPos() + distance * p.GetDir();
+}
 
 #define ENUM_DEF(r,data,T) .value(BOOST_PP_STRINGIZE(T), data::T)
 
@@ -74,7 +78,7 @@ void register_I3Particle()
       .add_property("dir", make_function( (const I3Direction& (I3Particle::*)()) &I3Particle::GetDir, return_internal_reference<1>() ),
                                           (void (I3Particle::*)(const I3Direction&)) &I3Particle::SetDir )
       .def("shift_along_track", 
-           &I3Particle::ShiftAlongTrack,
+           shift_along_track,
            (arg("dist")),
            "get the position of the point at that distance of the vertex along the track in forward direction")
       .def("shift_time_track", 

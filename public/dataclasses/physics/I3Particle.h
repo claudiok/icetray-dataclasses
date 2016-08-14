@@ -392,12 +392,6 @@ class I3Particle : public I3FrameObject
   double GetSpeed() const { return speed_; }
   void SetSpeed(double s) { speed_ = s; }
 
-  /** @brief get the position of the point at that distance of the vertex along the track in forward direction
-      @note ignores the shape of the track (start/stopping point), so the particle might not be definded at that very position
-      @param dist the distance in meters
-  */
-  I3Position ShiftAlongTrack(const double dist) const;
-
   /** @brief get the position of the particle at this time
    *  @note ignores the shape of the track (start/stopping point), so the particle might not be definded at that very position
    *  @param time the time in ns 

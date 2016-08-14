@@ -195,10 +195,6 @@ TEST(iscascade){
 
 TEST(shifting_tracks) {
   I3Particle p(I3Position(0.,0.,0.), I3Direction(1.,1.,1.), 0., I3Particle::ContainedTrack, 20.);
-  //p.SetSpeed(I3Constants::c); //implicit
-  ENSURE(p.ShiftAlongTrack(0)== I3Position(0.,0.,0.) );
-  // 1/sqrt(3)*10 == 5.7735
-  ENSURE( (p.ShiftAlongTrack(10)-I3Position(5.7735,5.7735,5.7735)).Magnitude() <0.001 ); //precision better than a mm
   ENSURE(p.ShiftTimeTrack(0)== I3Position(0.,0.,0.) );
   // 1/sqrt(3)*10*I3Constants::c == 1.73085
   ENSURE( (p.ShiftTimeTrack(10)-I3Position(1.73085,1.73085,1.73085)).Magnitude() <0.001 ); //precision better than a mm

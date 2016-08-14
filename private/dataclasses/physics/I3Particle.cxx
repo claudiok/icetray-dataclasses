@@ -551,24 +551,10 @@ bool I3Particle::IsTopShower() const
   else return false;
 }
 
-I3Position I3Particle::ShiftAlongTrack(const double dist) const 
-{
-  if (IsTrack()) {
-    const double x = pos_.GetX() + dist*dir_.GetX();
-    const double y = pos_.GetY() + dist*dir_.GetY();
-    const double z = pos_.GetZ() + dist*dir_.GetZ();
-    return I3Position(x,y,z);
-  }
-  else {
-    log_error("ShiftAlongTrack undefined for a particle that is not a track.");
-    return I3Position();
-  }
-}
-
 I3Position I3Particle::ShiftTimeTrack(const double time) const
 {
   if (std::isfinite(speed_) && speed_>0.){
-    return ShiftAlongTrack(speed_*time);
+    return pos_ + (speed_*time)*dir_;
   }
   else {
     log_error("ShiftTimeTrack needs the particle to have a valid speed");
@@ -604,7 +590,7 @@ I3Position I3Particle::GetStopPos() const
 {
   if (shape_==StoppingTrack) return pos_;
   else if (shape_ == ContainedTrack || shape_ == MCTrack){
-    return ShiftAlongTrack(length_);
+    return pos_ + length_*dir_;
   }
   else {
     log_warn("GetStopPos undefined for a particle that is neither stopping "
