@@ -41,13 +41,23 @@ struct I3ParticleID{
   I3ParticleID(uint64_t major, int32_t minor) : 
     majorID(major), minorID(minor){};
 
+  /**
+   * Need to tell gcc to ignore the "maybe unitialized warning"
+   * in this case.  A default constructor was added that initializes
+   * these values and none of these methods are static, so this
+   * is a false positive.
+   */  
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized" 
   bool operator==(const I3ParticleID& other) const {
     return(majorID == other.majorID && minorID == other.minorID);
   }
+
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized" 
   bool operator!=(const I3ParticleID& other) const {
     return(majorID != other.majorID || minorID != other.minorID);
   }
 
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized" 
   bool operator<(const I3ParticleID& other) const {
     if (majorID!=other.majorID)
       return(majorID<other.majorID);
