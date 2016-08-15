@@ -107,11 +107,13 @@ std::vector<I3Particle> at3(I3MCTree& t,slice sl)
   int start = 0,stop=t.size(),step=1;
   if (sl.start() != object())
     start = extract<int>(sl.start());
-  if (sl.stop() != object())
+  if (sl.stop() != object()) {
     stop = extract<int>(sl.stop());
+    if (stop < 0)
+        stop += t.size();
+  }
   if (sl.step() != object())
     step = extract<int>(sl.step());
-  // TODO: handle negatives better
   I3MCTree::iterator iter = t.begin();
   for(int cnt=0;iter != t.end();cnt++) {
     if (cnt >= start && cnt < stop && cnt % step == 0)
