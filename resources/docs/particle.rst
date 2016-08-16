@@ -131,9 +131,9 @@ is given below of this documentation.
   
 * The :class:`ParticleShape` options to set an :class:`I3Particle` as a Cascade are: ``Cascade`` or ``CascadeSegment``.
 * Regarding to the type: ``EPlus``, ``EMinus``, ``Brems``, ``DeltaE``, ``PairProd``, 
-``NuclInt``, ``Hadrons``, ``PiPlus`` or ``PiMinus``. All these type of particles are cascades.
+  ``NuclInt``, ``Hadrons``, ``PiPlus`` or ``PiMinus``. All these type of particles are cascades.
 * Furthermore, a :class:`ParticleShape` set as ``Primary`` and with a type of :class:`ParticleType`
-as ``PPlus``, ``PMinus``, ``IsNucleus`` or ``Gamma`` will be a Cascade.  
+  as ``PPlus``, ``PMinus``, ``IsNucleus`` or ``Gamma`` will be a Cascade.  
 
 Below an example of how to set the type and other properties of an :class:`I3Particle` in python::
 
