@@ -4,6 +4,8 @@ Release Notes
 
 trunk
 -----
+* Added I3Particle::CascadeSegment shape to address ticket #1763.
+
 * I3Time::GetModJulianDateDouble now always divides the date by 86400 seconds even
   on days with leapseconds 
 
