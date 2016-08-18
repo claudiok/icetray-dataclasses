@@ -46,23 +46,35 @@ struct I3ParticleID{
    * in this case.  A default constructor was added that initializes
    * these values and none of these methods are static, so this
    * is a false positive.
-   */  
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized" 
+   *
+   * clang seems to be smart enough to know these aren't used 
+   * uninitialized, so we only turn them off for gcc, since
+   * this just causes more clang warnings.
+   *
+   * These directives we need were added in gcc 4.6
+   * https://gcc.gnu.org/gcc-4.6/changes.html
+   */
+#if defined(__GNUC__) && GCC_VERSION > 40600
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
   bool operator==(const I3ParticleID& other) const {
     return(majorID == other.majorID && minorID == other.minorID);
   }
 
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized" 
   bool operator!=(const I3ParticleID& other) const {
     return(majorID != other.majorID || minorID != other.minorID);
   }
 
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized" 
   bool operator<(const I3ParticleID& other) const {
     if (majorID!=other.majorID)
       return(majorID<other.majorID);
     return(minorID<other.minorID);
   }
+  // a pop without a push restores the command line options.
+  // https://gcc.gnu.org/onlinedocs/gcc/Diagnostic-Pragmas.html
+#if defined(__GNUC__) && GCC_VERSION > 40600
+#pragma GCC diagnostic pop
+#endif
 
 private:
 #ifndef __CINT__
