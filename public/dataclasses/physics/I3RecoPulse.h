@@ -15,9 +15,7 @@
 #include "dataclasses/I3Map.h"
 
 /**
- * @brief Base class for recopulse.
- *
- * A storage base class for extracted pulses from a feature extractor
+ * @brief A storage class for extracted pulses from a feature extractor
  * A readout independent representation of a waveform feature or Analog
  *  readout.
  */
@@ -38,35 +36,61 @@ class I3RecoPulse
 	FADC = (1 << 2),
   };
 
+  /**
+   * Construct a pulse with all properties initialized to Not-a-Number.
+   */
   I3RecoPulse() : time_(NAN), charge_(NAN), width_(NAN), flags_(0) {}
 
-  /*
-   * @brief A bitwise combination of I3RecoPulse::Flags
+  /**
+   * @brief Get the flag values pertaining to this pulse, as a bitwise 
+   *        combination.
    */
   flags_t GetFlags() const { return flags_; } 
 
+  /**
+   * @brief Set the flag values pertaining to this pulse, as a bitwise
+   *        combination.
+   */
   void SetFlags(flags_t flags) { flags_ = flags; } 
 
+  /**
+   * @brief Get the start time of the pulse.
+   */
   double GetTime() const {return time_;}
 
+  /**
+   * @brief Set the start time of the pulse.
+   */
   void SetTime(double time) {time_ = time;}
 
-    /**
-     * GetCharge() - Returns the number of PE's seen in this pulse
-     *       PEs are used since they are independent of HW, gain, etc.
-     */
-
+  /**
+   * @brief Get the amplitude of the pulse in units of ideally amplified
+   *        photoelectrons.
+   */
   float GetCharge() const {return charge_;}
 
-    /**
-     * SetCharge() - Sets the number of PE's seen in this pulse
-     *       PEs are used since they are independent of HW, gain, etc.
-     */
-
+  /**
+   * @brief Set the amplitude of the pulse in units of ideally amplified
+   *        photoelectrons.
+   */
   void SetCharge(float charge) {charge_ = charge;}
 
+  /**
+   * @brief The time between this pulse and the subsequent basis function
+   *        used in the pulse unfolding.
+   *
+   * This quantity can be used to approximate the time interval within which the
+   * pulse charged was observed as [ GetTime() , GetTime() + GetWidth() ]. This
+   * approximation becomes dubious, however, when the charge density is high
+   * (such that several adjacent basis functions in the unfolding were assigned
+   * nonzero amplitudes).
+   */
   float GetWidth() const {return width_;}
 
+  /**
+   * @brief Store the time between this pulse and the subsequent basis function
+   *        used in the pulse unfolding.
+   */
   void SetWidth(float width) {width_ = width;}
 
   ~I3RecoPulse();
