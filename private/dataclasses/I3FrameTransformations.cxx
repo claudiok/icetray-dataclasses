@@ -15,6 +15,7 @@
 #include <icetray/I3Units.h>
 #include <dataclasses/I3MapOMKeyMask.h>
 #include <dataclasses/I3MapOMKeyUnion.h>
+#include <dataclasses/I3RecoPulseSeriesMapApplySPECorrection.h>
 #include <dataclasses/physics/I3RecoHit.h>
 #include <dataclasses/physics/I3RecoPulse.h>
 #include <dataclasses/payload/I3SuperDST.h>
@@ -55,6 +56,12 @@ I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
 
 	if (uni)
 		return uni->Apply(*this);
+
+	I3RecoPulseSeriesMapApplySPECorrectionConstPtr spe_shift = 
+	    boost::dynamic_pointer_cast<const I3RecoPulseSeriesMapApplySPECorrection>(focp);
+
+	if (spe_shift)
+		return spe_shift->Apply(*this);
 	
 	I3SuperDSTConstPtr superdst = 
 	    boost::dynamic_pointer_cast<const I3SuperDST>(focp);

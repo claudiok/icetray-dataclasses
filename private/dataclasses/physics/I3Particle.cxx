@@ -875,7 +875,7 @@ template <class Archive>
 template <class Archive>
   void I3Particle::load(Archive& ar, unsigned version)
   {
-  if (version>i3particle_version_)
+  if ((version>i3particle_version_) && (version != 6)) // version 6 is the same as 5 and only existed for a very short time. yet, of course, there is data out there with it...
     log_fatal("Attempting to read version %u from file but running version %u of I3Particle class.",version,i3particle_version_);
 
     ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
