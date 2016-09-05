@@ -22,34 +22,34 @@ static const unsigned i3recopulseseriesmapapplyspecorrection_version_ = 0;
 
 class I3RecoPulseSeriesMapApplySPECorrection : public I3FrameObject {
 public:
-	/* 
-	 * Use the SPE correction from I3Calibration to shift the pulse amplitudes.
-	 * Assumes the input pulses are not shifted yet.
-	 */
-	I3RecoPulseSeriesMapApplySPECorrection(
-		const std::string &pulses_key, 
-		const std::string &calibration_key);
-	I3RecoPulseSeriesMapApplySPECorrection();
-	
-	I3RecoPulseSeriesMapConstPtr Apply(const I3Frame&) const;
-	std::string GetPulsesSource() const { return pulses_key_; }
-	std::string GetCalibrationSource() const { return calibration_key_; }
-  
-	bool operator==(const I3RecoPulseSeriesMapApplySPECorrection&) const;
-	bool operator!=(const I3RecoPulseSeriesMapApplySPECorrection&) const;
+  /*
+   * Use the SPE correction from I3Calibration to shift the pulse amplitudes.
+   * Assumes the input pulses are not shifted yet.
+   */
+  I3RecoPulseSeriesMapApplySPECorrection(
+    const std::string &pulses_key, 
+    const std::string &calibration_key);
+  I3RecoPulseSeriesMapApplySPECorrection();
+
+  I3RecoPulseSeriesMapConstPtr Apply(const I3Frame&) const;
+  std::string GetPulsesSource() const { return pulses_key_; }
+  std::string GetCalibrationSource() const { return calibration_key_; }
+
+  bool operator==(const I3RecoPulseSeriesMapApplySPECorrection&) const;
+  bool operator!=(const I3RecoPulseSeriesMapApplySPECorrection&) const;
 private:
-	std::string pulses_key_;
-	std::string calibration_key_;
-	mutable I3RecoPulseSeriesMapPtr shifted_;
-	
-	friend class icecube::serialization::access;
-	template <class Archive> void serialize(Archive& ar, unsigned version);
-	
-	SET_LOGGER("I3RecoPulseSeriesMapApplySPECorrection");
+  std::string pulses_key_;
+  std::string calibration_key_;
+  mutable I3RecoPulseSeriesMapPtr shifted_;
+
+  friend class icecube::serialization::access;
+  template <class Archive> void serialize(Archive& ar, unsigned version);
+
+  SET_LOGGER("I3RecoPulseSeriesMapApplySPECorrection");
 };
 
 I3_CLASS_VERSION(I3RecoPulseSeriesMapApplySPECorrection,
-	i3recopulseseriesmapapplyspecorrection_version_);
+  i3recopulseseriesmapapplyspecorrection_version_);
 I3_POINTER_TYPEDEFS(I3RecoPulseSeriesMapApplySPECorrection);
 
 #endif // DATACLASSES_I3RECOPULSESERIESMAPAPPLYSPECORRECTION_H_INCLUDED
