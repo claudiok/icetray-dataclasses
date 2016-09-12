@@ -125,40 +125,46 @@ class I3Orientation : public I3FrameObject
 
 		/**
 		 * Rotate a vector inside a coordinate system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0)
-		 * to the system where z-axis==dir, x-axis==up, y-axis==right.
+		 * to the system where z-axis==dir, x-axis==up, y-axis==right. If inverse
 		 * This is the in-place version with 3 doubles for x,y,z.
 		 */
-		inline void RotVectorInPlace(double &x, double &y, double &z) const {
-			rot_.rot3VectorInPlace(x,y,z);
+		inline void RotVectorInPlace(double &x, double &y, double &z, bool inverse=false) const {
+			if (!inverse)
+				rot_.conjugate().rot3VectorInPlace(x,y,z);
+			else
+				rot_.rot3VectorInPlace(x,y,z);
 		}
 
-        /**
-		 * Rotate a vector inside a coordinate system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0)
+		/**
+		 * Rotate a vector from a coordinate system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0)
 		 * to the system where z-axis==dir, x-axis==up, y-axis==right.
 		 */
-		inline I3Position Rotate(const I3Position& pos) const {
-            double x=pos.GetX();
-            double y=pos.GetY();
-            double z=pos.GetZ();
-            
-			RotVectorInPlace(x,y,z);
-            
-            return I3Position(x,y,z);
-		}
+		template <typename T>
+		T RotateIn(const T& vec) const {
+			double x=vec.GetX();
+			double y=vec.GetY();
+			double z=vec.GetZ();
 
-        /**
-		 * Rotate a vector inside a coordinate system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0)
-		 * to the system where z-axis==dir, x-axis==up, y-axis==right.
-		 */
-		inline I3Direction Rotate(const I3Direction& dir) const {
-            double x=dir.GetX();
-            double y=dir.GetY();
-            double z=dir.GetZ();
-            
-			RotVectorInPlace(x,y,z);
-            
-            return I3Direction(x,y,z);
+			RotVectorInPlace(x,y,z,false);
+
+			return T(x,y,z);
 		}
+		
+		/**
+		 * Rotate a vector from a coordinate system where z-axis==dir, x-axis==up, y-axis==right
+		 * to the system where z-axis==(0,0,1), x-axis==(1,0,0), y-axis=(0,1,0).
+		 */
+		template <typename T>
+		T RotateOut(const T& vec) const {
+			double x=vec.GetX();
+			double y=vec.GetY();
+			double z=vec.GetZ();
+
+			RotVectorInPlace(x,y,z,true);
+
+			return T(x,y,z);
+		}
+		
 
 		//--------------
 		

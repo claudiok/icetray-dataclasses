@@ -203,3 +203,26 @@ TEST(setdir)
 	ENSURE_DISTANCE(d.GetAzimuth(),(360-135)*deg,0.0001);
 	
 }
+
+TEST(rotate)
+{
+	I3Direction dir(74*I3Units::degree, 22.5*I3Units::degree);
+	I3Direction up(90*I3Units::degree, 292.5*I3Units::degree);
+	I3Orientation orie(dir, up);
+	ENSURE_DISTANCE(dir*orie.GetDir(), 1., 1e-12);
+	ENSURE_DISTANCE(up*orie.GetUp(), 1., 1e-12);
+	
+	// make a vector from scalings of the I3Orientation's principal axes
+	I3Position displacement = 1*orie.GetUp() + 1*orie.GetRight() + 1*orie.GetDir();
+	// rotate into the orientation's coordinate system
+	I3Position unit = orie.RotateIn(displacement);
+	// in the orientation's coordinate system, the x,y,z coordinates should be the principal axis scalings
+	ENSURE_DISTANCE(unit.GetX(), 1., 1e-12);
+	ENSURE_DISTANCE(unit.GetY(), 1., 1e-12);
+	ENSURE_DISTANCE(unit.GetZ(), 1., 1e-12);
+	// rotate back and check
+	I3Position back = orie.RotateOut(unit);
+	ENSURE_DISTANCE(back.GetX(), displacement.GetX(), 1e-12);
+	ENSURE_DISTANCE(back.GetY(), displacement.GetY(), 1e-12);
+	ENSURE_DISTANCE(back.GetZ(), displacement.GetZ(), 1e-12);
+}

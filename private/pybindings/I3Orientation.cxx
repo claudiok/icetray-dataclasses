@@ -32,8 +32,13 @@ void register_I3Orientation()
 	void (I3Orientation::* fromDirections)(const I3Direction&, const I3Direction&) = &I3Orientation::SetOrientation;
 	void (I3Orientation::* fromDoubles)(double, double, double, double, double, double) = &I3Orientation::SetOrientation;
 
-    I3Position  (I3Orientation::* RotatePosition) (const I3Position&) const  = &I3Orientation::Rotate;
-    I3Direction (I3Orientation::* RotateDirection)(const I3Direction&) const = &I3Orientation::Rotate;
+	I3Position  (I3Orientation::* RotatePositionIn) (const I3Position&) const  = &I3Orientation::RotateIn;
+	I3Direction (I3Orientation::* RotateDirectionIn)(const I3Direction&) const = &I3Orientation::RotateIn;
+	I3Position  (I3Orientation::* RotatePositionOut) (const I3Position&) const  = &I3Orientation::RotateOut;
+	I3Direction (I3Orientation::* RotateDirectionOut)(const I3Direction&) const = &I3Orientation::RotateOut;
+	
+	const char *rotate_in_doc = "Rotate from a coordinate system where x=(1,0,0),y=(0,1,0),z=(0,0,1) to one where x=up,y=right,z=dir";
+	const char *rotate_out_doc = "Rotate from a coordinate system where x=up,y=right,z=dir to one where x=(1,0,0),y=(0,1,0),z=(0,0,1)";
 
 	class_<I3Orientation, bases<I3FrameObject>, boost::shared_ptr<I3Orientation> >("I3Orientation")
 	.def(init<double,double,double,double,double,double>())
@@ -45,8 +50,10 @@ void register_I3Orientation()
 	.def("set_orientation", fromDirections)
 	.def("set_orientation", fromDoubles)
 
-    .def("rotate", RotatePosition)
-    .def("rotate", RotateDirection)
+	.def("rotate_in", RotatePositionIn, rotate_in_doc)
+	.def("rotate_in", RotateDirectionIn, rotate_in_doc)
+	.def("rotate_out", RotatePositionOut, rotate_out_doc)
+	.def("rotate_out", RotateDirectionOut, rotate_out_doc)
 
     //.def("rot_vector_in_place", &I3Orientation::RotVectorInPlace)
 
