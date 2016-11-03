@@ -33,7 +33,7 @@ I3RecoPulseSeriesMapApplySPECorrection::Apply(const I3Frame &frame) const
   if (shifted_)
     return shifted_;
 
-    shifted_ = boost::make_shared<Map>();
+  shifted_ = boost::make_shared<Map>();
 
   I3CalibrationConstPtr calibration = frame.Get<I3CalibrationConstPtr>(calibration_key_);
   if (!calibration)
