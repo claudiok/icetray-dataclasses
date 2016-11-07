@@ -8,16 +8,16 @@ class Mytest(unittest.TestCase):
 
     def test_example(self):
         t = dataclasses.TriggerKey()
-        print t
+        print(t)
         t2 = dataclasses.TriggerKey(dataclasses.EXTERNAL,
                 dataclasses.STRING)
-        print t2
+        print(t2)
         t3 =  dataclasses.TriggerKey(dataclasses.AMANDA_MUON_DAQ,
                 dataclasses.STRING)
-        print t3
+        print(t3)
         t4 =  dataclasses.TriggerKey(dataclasses.AMANDA_TWR_DAQ,
                 dataclasses.STRING)
-        print t4
+        print(t4)
 
     def test_get_source_string(self):
         tk = dataclasses.TriggerKey()

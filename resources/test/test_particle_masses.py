@@ -17,7 +17,7 @@ particle_types = I3Particle.ParticleType.values
 pdg_codes = particle_types.keys()
 ptypes = particle_types.items()
 try:
-    for pdg, ptype in particle_types.iteritems():
+    for pdg, ptype in particle_types.items():
         if pdg == 0:
             # ParticleType.unkown has no mass implemented and is its own anti-particle
             continue
@@ -77,10 +77,10 @@ particle = I3Particle()
 particle.type = particle_types[-2000000041] # monopole
 try:
     particle.total_energy = 100.
-except AttributeError, err:
+except AttributeError:
     # This should not happen when the c++ exception is handled correctly with the pybindings
     failed_test_counter += 1
-except RuntimeError, err:
+except RuntimeError:
     pass
 except:
     failed_test_counter += 1
