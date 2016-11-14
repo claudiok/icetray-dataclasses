@@ -18,7 +18,8 @@ I3_SERIALIZABLE(TankKey);
 
 void TankKey::SetOMKey(const OMKey& omKey)
 {
-    if(omKey.IsIceTop())
+  if((omKey.GetString()>=1) && (omKey.GetString()<=86) &&
+     (omKey.GetOM()>=61 && omKey.GetOM()<=64))
     {
 	string = omKey.GetString();
 	tank = ((omKey.GetOM()<63) ? TankA : TankB);	
