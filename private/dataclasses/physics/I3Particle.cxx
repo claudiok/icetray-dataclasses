@@ -534,17 +534,6 @@ bool I3Particle::HasEnergy() const
   else return true; 
 }
 
-bool I3Particle::IsPrimary() const 
-{
-  // remove this method and close this ticket
-  // http://code.icecube.wisc.edu/projects/icecube/ticket/1810
-  log_warn("Don't trust this answer.");
-  log_warn("I can't be sure if I'm a primary or not.");
-  log_warn("This method is deprecated.");
-  if (shape_==Primary) return true;
-  else return false;
-}
-
 bool I3Particle::IsTopShower() const
 {
   if (shape_==TopShower) return true;

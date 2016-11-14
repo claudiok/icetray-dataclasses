@@ -258,7 +258,6 @@ class I3Particle : public I3FrameObject
 
   bool IsTrack() const;
   bool IsCascade() const;
-  bool IsPrimary() const;
   bool IsTopShower() const;
   bool IsNeutrino() const;
   bool IsNucleus() const;
