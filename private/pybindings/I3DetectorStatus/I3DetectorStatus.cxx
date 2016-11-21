@@ -27,7 +27,7 @@ using namespace boost::python;
 void register_I3DetectorStatus()
 {
   class_<I3DetectorStatus, bases<I3FrameObject>, boost::shared_ptr<I3DetectorStatus> >("I3DetectorStatus")
-    #define DETECTORSTATUSPROPS (startTime)(endTime)(domStatus)(triggerStatus)
+    #define DETECTORSTATUSPROPS (startTime)(endTime)(domStatus)(triggerStatus)(daqConfigurationName)
     BOOST_PP_SEQ_FOR_EACH(WRAP_RW_RECASE, I3DetectorStatus, DETECTORSTATUSPROPS )
     #undef DETECTORSTATUSPROPS
     .def(dataclass_suite<I3DetectorStatus>())
