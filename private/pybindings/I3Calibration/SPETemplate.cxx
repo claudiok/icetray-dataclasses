@@ -31,6 +31,8 @@ void register_SPETemplate()
     .def_readwrite("x0", &SPETemplate::x0)
     .def_readwrite("b1", &SPETemplate::b1)
     .def_readwrite("b2", &SPETemplate::b2)
+    .def(self == self)
+    .def(self != self)
     .def( freeze() )
     ;
 }

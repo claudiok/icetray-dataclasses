@@ -31,5 +31,7 @@ void register_DroopedSPETemplate()
     .def(init<const SPETemplate&,const SPETemplate&,double,double,double>())
     .def("__call__",&I3DOMCalibration::DroopedSPETemplate::operator())
     .def(freeze())
+    .def(self == self)
+    .def(self != self)
     ;
 }

@@ -17,6 +17,9 @@ class TestI3DOMCalibration(unittest.TestCase):
         
         self.assertEqual(fit1, fit2, "these should be the same.")
 
+        fit2.slope = 0.
+        self.assertNotEqual(fit1, fit2, "these should be the same.")
+
     def test_QuadraticFit_equality(self):
         fit1 = dataclasses.QuadraticFit()
         fit1.quad_fit_a = 1.618
@@ -29,6 +32,9 @@ class TestI3DOMCalibration(unittest.TestCase):
         fit2.quad_fit_c = 1.20205
         
         self.assertEqual(fit1, fit2, "these should be the same.")
+
+        fit2.quad_fit_a = 0.
+        self.assertNotEqual(fit1, fit2, "these should be the same.")
 
     def test_SPEChargeDistribution_equality(self):
         d1 = dataclasses.SPEChargeDistribution()
@@ -46,6 +52,9 @@ class TestI3DOMCalibration(unittest.TestCase):
         d2.gaus_width = 2.612
         
         self.assertEqual(d1, d2, "these should be the same.")
+
+        d2.exp_amp = 0.
+        self.assertNotEqual(d1, d2, "these should be the same.")
 
     def test_TauParam_equality(self):
         d1 = dataclasses.TauParam()
@@ -68,6 +77,8 @@ class TestI3DOMCalibration(unittest.TestCase):
        
         self.assertEqual(d1, d2, "these should be the same.")
 
+        d2.p0 = 0.
+        self.assertNotEqual(d1, d2, "these should be the same.")
 
     def test_DroopedSPETemplate_equality(self):
         temp1 = dataclasses.SPETemplate()
@@ -75,6 +86,7 @@ class TestI3DOMCalibration(unittest.TestCase):
         temp1.x0= 1.2
         temp1.b1= 1.2
         temp1.b2= 1.1
+
         temp2 = dataclasses.SPETemplate()
         temp2.c = 1.89
         temp2.x0= 1.2
@@ -84,8 +96,42 @@ class TestI3DOMCalibration(unittest.TestCase):
         droop1 = dataclasses.DroopedSPETemplate(temp1,temp2,1.1,1.1,1.1)
         droop2 = dataclasses.DroopedSPETemplate(temp1,temp2,1.1,1.1,1.1)
          
-        self.assertEqual(droop1, droop1, "these should be the same.")
+        self.assertEqual(droop1, droop2, "these should be the same.")
 
+        droop3 = dataclasses.DroopedSPETemplate(temp1,temp2,1.1,1.1,0.)
+        self.assertNotEqual(droop1, droop3, "these should be the same.")
+
+
+    def test_I3DOMCalibration_equality_default_ctor(self):
+        dc1 = dataclasses.I3DOMCalibration()
+        dc2 = dataclasses.I3DOMCalibration()
+        self.assertEqual(dc1, dc2, "these should be the same.")
+
+    def test_SPETemplate_equality_default_ctor(self):
+        o1 = dataclasses.SPETemplate()
+        o2 = dataclasses.SPETemplate()
+        self.assertEqual(o1, o2, "these should be the same.")
+
+    def test_LinearFit_equality_default_ctor(self):
+        o1 = dataclasses.LinearFit()
+        o2 = dataclasses.LinearFit()
+        self.assertEqual(o1, o2, "these should be the same.")
+
+    def test_QuadraticFit_equality_default_ctor(self):
+        o1 = dataclasses.QuadraticFit()
+        o2 = dataclasses.QuadraticFit()
+        self.assertEqual(o1, o2, "these should be the same.")
+
+    def test_TauParam_equality_default_ctor(self):
+        o1 = dataclasses.TauParam()
+        o2 = dataclasses.TauParam()
+        self.assertEqual(o1, o2, "these should be the same.")
+
+    def test_SPEChargeDistribution_equality_default_ctor(self):
+        o1 = dataclasses.SPEChargeDistribution()
+        o2 = dataclasses.SPEChargeDistribution()
+        self.assertEqual(o1, o2, "these should be the same.")
 
 unittest.main()        
+
 

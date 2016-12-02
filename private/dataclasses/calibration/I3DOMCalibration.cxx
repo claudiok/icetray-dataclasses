@@ -33,6 +33,17 @@ I3DOMCalibration::I3DOMCalibration()
   atwdBeaconBaselines_[1][0] = NAN;
   atwdBeaconBaselines_[1][1] = NAN;
   atwdBeaconBaselines_[1][2] = NAN;
+  ampGains_[0] = NAN;
+  ampGains_[1] = NAN;
+  ampGains_[2] = NAN;
+  atwdDeltaT_[0] = NAN;
+  atwdDeltaT_[1] = NAN;
+  droopTimeConstants_[0] = NAN;
+  droopTimeConstants_[1] = NAN;
+  for(unsigned i = 0; i < 2; ++i)
+    for(unsigned j = 0; j < N_ATWD_CHANNELS; ++j)
+      for(unsigned k = 0; k < N_ATWD_BINS; ++k)
+	atwdBins_[i][j][k] = NAN;
 }
 
 double
@@ -197,107 +208,79 @@ const double causalityShift = -11.5;  /* Nanoseconds from peak center to photon 
 
 const SPETemplate ATWDNewToroidTemplate[3] = {
   /* Channel 0: fit from SPE pulses */
-  {
-    17.899 / 14.970753076313095,
-    -4.24 - 5 - causalityShift,
-    5.5,
-    42
-  },
+  SPETemplate(17.899 / 14.970753076313095,	      
+	      -4.24 - 5 - causalityShift,
+	      5.5,
+	      42),
   /* Channel 1: bootstrapped from channel 0 */
-  {
-    1.6581978,
-    -11.70227755 - causalityShift,
-    5.4664884,
-    36.22319705,
-  },
+  SPETemplate(1.6581978,	      
+	      -11.70227755 - causalityShift,
+	      5.4664884,
+	      36.22319705),
   /* Channel 2: bootstrapped from channel 1 */
-  {
-    0.70944364,
-    -10.58782492- causalityShift,
-    3.48330553,
-    42.10873959
-  },
+  SPETemplate(0.70944364,    
+	      -10.58782492- causalityShift,
+	      3.48330553,
+	      42.10873959)
 };
 
 const SPETemplate ATWDNewToroidDroopTemplate[3] = {
-  {
-    -0.8644871211757873,
-    -0.39712728498041222,
-    2.2153931795324807e-08,
-    0.18265408524009966
-  },
-  {
-    -0.60714457126191879,
-    1.0708609673531526,
-    0.85478360796100328,
-    0.22084066752348605
-  },
-  {
-    -1.4510165738141465,
-    -0.29659623453192685,
-    7.5567807067886802e-09,
-    0.18209846421412432
-  },
+  SPETemplate(-0.8644871211757873,    
+	      -0.39712728498041222,
+	      2.2153931795324807e-08,
+	      0.18265408524009966),
+  SPETemplate(-0.60714457126191879,    
+	      1.0708609673531526,
+	      0.85478360796100328,
+	      0.22084066752348605),
+  SPETemplate(-1.4510165738141465,    
+	      -0.29659623453192685,
+	      7.5567807067886802e-09,
+	      0.18209846421412432),
 };
 
 const SPETemplate ATWDOldToroidTemplate[3] = {
   /* Channel 0: fit from SPE pulses */
-  {
-    15.47 / 13.292860653948139,
-    -3.929 - 5 - causalityShift,
-    4.7,
-    39.
-  },
+  SPETemplate(15.47 / 13.292860653948139,    
+	      -3.929 - 5 - causalityShift,
+	      4.7,
+	      39.),
   /* Channel 1: bootstrapped from channel 0 */
-  {
-    2.07399312,
-    -10.95781298 - causalityShift,
-    4.86019733,
-    30.74826947
-  },
+  SPETemplate(2.07399312,    
+	      -10.95781298 - causalityShift,
+	      4.86019733,
+	      30.74826947),
   /* Channel 2: bootstrapped from channel 1 */
-  {
-    1.35835821,
-    -9.68624195 - causalityShift,
-    3.5016398,
-    30.96897853
-  },
+  SPETemplate(1.35835821,    
+	      -9.68624195 - causalityShift,
+	      3.5016398,
+	      30.96897853),
 };
 
 const SPETemplate ATWDOldToroidDroopTemplate[3] = {
-  {
-    -0.87271352029389926,
-    -0.37445896923019595,
-    0.05292192451474604,
-    0.2015123032569355
-  },
-  {
-    -0.48448879003182993,
-    0.035060687415361419,
-    0.044493411456291751,
-    0.25894387769482058
-  },
-  {
-    -0.74959447466950724,
-    0.16580945347622786,
-    0.055065176963265461,
-    0.25173422056591982
-  },
+  SPETemplate(-0.87271352029389926,	      
+	      -0.37445896923019595,
+	      0.05292192451474604,
+	      0.2015123032569355),	      
+  SPETemplate(-0.48448879003182993,	      
+	      0.035060687415361419,
+	      0.044493411456291751,
+	      0.25894387769482058),	      
+  SPETemplate(-0.74959447466950724,	      
+	      0.16580945347622786,
+	      0.055065176963265461,
+	      0.25173422056591982),	      
 };
 
-const SPETemplate FADCTemplate = {
-  25.12 / 71.363940160184669,
-  61.27 - 50 - causalityShift,
-  30.,
-  186.
-};
+const SPETemplate FADCTemplate(25.12 / 71.363940160184669,			       
+			       61.27 - 50 - causalityShift,
+			       30.,
+			       186.);
 
-const SPETemplate FADCDroopTemplate = {
-  -2.8837584956162883,
-  0.57888025049064207,
-  0.81965713180496758,
-  0.04299648444652391
-};
+const SPETemplate FADCDroopTemplate(-2.8837584956162883,  
+				    0.57888025049064207,
+				    0.81965713180496758,
+				    0.04299648444652391);
 
 I3DOMCalibration::DroopedSPETemplate
 I3DOMCalibration::DiscriminatorPulseTemplate(bool droopy) const
@@ -363,6 +346,10 @@ bool I3DOMCalibration::DroopedSPETemplate::operator==(const DroopedSPETemplate& 
          droop.tauFrac==templ.droop.tauFrac &&
          droop.time1==templ.droop.time1 &&
          droop.time2==templ.droop.time2);
+}
+
+bool I3DOMCalibration::DroopedSPETemplate::operator!=(const DroopedSPETemplate& templ) const{
+  return !operator==(templ);
 }
 
 bool I3DOMCalibration::DroopedSPETemplate::operator<(const DroopedSPETemplate& templ) const

@@ -218,6 +218,22 @@ I3_CLASS_VERSION(TauParam, tauparam_version_);
 
 struct SPETemplate {
   double c, x0, b1, b2;
+  SPETemplate():c(NAN), x0(NAN), b1(NAN), b2(NAN){};
+    
+  SPETemplate(double c, double x0, double b1, double b2):
+  c(c), x0(x0), b1(b1), b2(b2){};
+
+  bool operator==(const SPETemplate& rhs) const {
+    return (CompareFloatingPoint::Compare_NanEqual(c, rhs.c) &&
+	    CompareFloatingPoint::Compare_NanEqual(x0, rhs.x0) &&
+	    CompareFloatingPoint::Compare_NanEqual(b1, rhs.b1) && 
+	    CompareFloatingPoint::Compare_NanEqual(b2, rhs.b2));
+  }
+  bool operator!=(const SPETemplate& rhs) const
+  {
+    return !operator==(rhs);
+  }  
+
 };
 
 /**
@@ -552,6 +568,7 @@ class I3DOMCalibration {
     }
     
     bool operator==(const DroopedSPETemplate& templ) const;
+    bool operator!=(const DroopedSPETemplate& templ) const;
     bool operator<(const DroopedSPETemplate& templ) const;
     
   private:
@@ -567,7 +584,8 @@ class I3DOMCalibration {
     }
   };
 
-  DroopedSPETemplate DiscriminatorPulseTemplate(bool droopy = false) const; DroopedSPETemplate ATWDPulseTemplate(unsigned int channel = 0, bool droopy = false) const;
+  DroopedSPETemplate DiscriminatorPulseTemplate(bool droopy = false) const;
+  DroopedSPETemplate ATWDPulseTemplate(unsigned int channel = 0, bool droopy = false) const;
   DroopedSPETemplate FADCPulseTemplate(bool droopy = false) const;
  
   template <class Archive>
@@ -618,7 +636,7 @@ class I3DOMCalibration {
   }
   
   bool operator==(const I3DOMCalibration& rhs) const
-  {
+  {    
     return (CompareFloatingPoint::Compare_NanEqual(droopTimeConstants_[0],rhs.droopTimeConstants_[0]) &&
         CompareFloatingPoint::Compare_NanEqual(droopTimeConstants_[1],rhs.droopTimeConstants_[1]) &&
         CompareFloatingPoint::Compare_NanEqual(temperature_,rhs.temperature_) &&
@@ -633,9 +651,10 @@ class I3DOMCalibration {
         CompareFloatingPoint::Compare_NanEqual(ampGains_[2],rhs.ampGains_[2]) &&
         atwdFreq_[0] == rhs.atwdFreq_[0] &&
         atwdFreq_[1] == rhs.atwdFreq_[1] &&
-        std::equal(&atwdBins_[0][0][0],&atwdBins_[0][0][0] + 
-            2*N_ATWD_CHANNELS*N_ATWD_BINS, &rhs.atwdBins_[0][0][0],
-            CompareFloatingPoint::Compare_NanEqual) &&
+        std::equal(&atwdBins_[0][0][0], &atwdBins_[0][0][0] + 
+		   2*N_ATWD_CHANNELS*N_ATWD_BINS,
+		   &rhs.atwdBins_[0][0][0],
+		   CompareFloatingPoint::Compare_NanEqual) &&
         pmtTransitTime_ == rhs.pmtTransitTime_ &&
         hvGainRelation_ == rhs.hvGainRelation_ &&
         domcalVersion_ == rhs.domcalVersion_ &&
