@@ -16,6 +16,7 @@
 #include "icetray/OMKey.h"
 #include "dataclasses/I3Vector.h"
 #include "dataclasses/I3Map.h"
+#include "dataclasses/external/CompareFloatingPoint.h"
 
 
 static const unsigned i3tankgeo_version_ = 2;
@@ -33,10 +34,18 @@ static const unsigned i3tankgeo_version_ = 2;
 
 struct I3TankGeo 
 {
-  I3TankGeo() {}
-  ~I3TankGeo();
-
   enum TankType {NotSet = 0, Tyvek_Lined = 1, Zirconium_Lined = 2};
+
+  I3TankGeo():
+    orientation(NAN),
+    tankradius(NAN),
+    tankheight(NAN),
+    fillheight(NAN),
+    snowheight(NAN),
+    tanktype(NotSet)
+  {};
+  
+  ~I3TankGeo();
 
   I3Position position; //tank x,y,z position
   double orientation; //relative angular rotation of tank
@@ -50,11 +59,11 @@ struct I3TankGeo
   bool operator==(const I3TankGeo& rhs) const
   {
     return (position == rhs.position &&
-            orientation == rhs.orientation &&
-            tankradius == rhs.tankradius &&
-            tankheight == rhs.tankheight &&
-            fillheight == rhs.fillheight &&
-            snowheight == rhs.snowheight &&
+            CompareFloatingPoint::Compare_NanEqual(orientation, rhs.orientation) &&
+            CompareFloatingPoint::Compare_NanEqual(tankradius, rhs.tankradius) &&
+            CompareFloatingPoint::Compare_NanEqual(tankheight, rhs.tankheight) &&
+            CompareFloatingPoint::Compare_NanEqual(fillheight, rhs.fillheight) &&
+            CompareFloatingPoint::Compare_NanEqual(snowheight, rhs.snowheight) &&
             tanktype == rhs.tanktype &&
             omKeyList_ == rhs.omKeyList_);
   }
