@@ -83,5 +83,7 @@ I3_POINTER_TYPEDEFS(I3VEMCalibrationMap);
 I3_CLASS_VERSION(I3VEMCalibration, i3vemcalibration_version_);
 I3_POINTER_TYPEDEFS(I3VEMCalibration);
 
+std::ostream& operator<<(std::ostream& oss, const I3VEMCalibration& c);
+
 #endif //I3VEMCALIBRATION_H_INCLUDED
 

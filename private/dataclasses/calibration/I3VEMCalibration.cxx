@@ -23,5 +23,17 @@ void I3VEMCalibration::serialize(Archive& ar, unsigned version)
     ar & make_nvp("corrFactor",    corrFactor);
 }
 
+std::ostream& operator<<(std::ostream& oss, const I3VEMCalibration& vc)
+{
+  oss << "[ I3VEMCalibration :: " << std::endl
+      << "                pePerVEM  : " << vc.pePerVEM << std::endl
+      << "                muPeakWidth  : " << vc.muPeakWidth << std::endl
+      << "                hglgCrossOver  : " << vc.hglgCrossOver << std::endl
+      << "                corrFactor  : " << vc.corrFactor << std::endl
+      << "]" ;
+  return oss;
+}
+
+
 I3_SERIALIZABLE(I3VEMCalibration);
 
