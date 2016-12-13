@@ -12,7 +12,7 @@
 #include "dataclasses/payload/I3SuperDST.h"
 #include "dataclasses/payload/I3SuperDSTUtils.h"
 
-#include <icetray/portable_binary_archive.hpp>
+#include <archive/portable_binary_archive.hpp>
 #include <boost/filesystem.hpp>
 
 #include <boost/lambda/lambda.hpp>
