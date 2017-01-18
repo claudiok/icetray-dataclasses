@@ -8,6 +8,7 @@ I3EventHeader::I3EventHeader()
   : runID_(std::numeric_limits<unsigned int>::max()),
     subRunID_(std::numeric_limits<unsigned int>::max()),
     eventID_(std::numeric_limits<unsigned int>::max()),
+    subEventID_(0),
     state_(OK)
 {
 }

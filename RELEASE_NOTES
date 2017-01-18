@@ -6,6 +6,12 @@ trunk
 -----
 * Added I3OMGeo OMType for Scintillators and IceACT. Resolved #1698 (jan.oertlin@icecube.wisc.edu)
 
+January 18, 2017, Alex Olivas  (olivas@icecube.umd.edu)
+---------------------------------------------------
+Release V16-05-01
+* Trivial bugfix - Initialize SubEventID to 0 in I3EventHeader.
+
+* Protect against zero width pulses in sDST for tpx.
 May 2, 2016, Alex Olivas  (olivas@icecube.umd.edu)
 ---------------------------------------------------
 Release V16-04-01
