@@ -24,10 +24,17 @@
 
 using namespace boost::python;
 
+std::string to_str(const I3MCHit theHit){ // BY ABURGMAN
+    std::ostringstream oss;
+    oss << theHit << std::flush;
+    return oss.str();
+}
+
 void register_I3MCHit()
 {
   {
-    scope mchit_scope = 
+    scope mchit_scope =       .def("__str__", to_str) // BY ABURGMAN
+
       class_<I3MCHit, boost::shared_ptr<I3MCHit> >("I3MCHit")
       .def(init<uint64_t,int>() )
       #define PROPERTIES (Time)(HitID)(CherenkovDistance)(HitSource)(Charge)(NPE)
@@ -37,6 +44,7 @@ void register_I3MCHit()
       #undef PROPERTIES
       #undef RO_PROPERTIES
       .def(dataclass_suite<I3MCHit>())
+      .def("__str__", to_str) // BY ABURGMAN
       ;
 
     enum_<I3MCHit::HitSource>("I3MCHitSource")
