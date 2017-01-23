@@ -28,7 +28,7 @@
 
 using namespace boost::python;
 
-std::string to_str(const I3Waveform theWaveform){ // BY ABURGMAN
+std::string to_str(const I3Waveform theWaveform){
     std::ostringstream oss;
     oss << theWaveform << std::flush;
     return oss.str();
@@ -66,7 +66,7 @@ void register_I3Waveform()
       .staticmethod("get_status")
       .def(self == self)
       .def(dataclass_suite<I3Waveform>())
-      .def("__str__", to_str) // BY ABURGMAN
+      .def("__str__", to_str)
      ;
 
     const std::pair<unsigned long long int, unsigned long long int>&
