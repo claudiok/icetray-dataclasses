@@ -35,9 +35,9 @@ static I3RecoPulseSeriesMapPtr HitsAsPulses(I3RecoHitSeriesMapConstPtr hits);
  */ 
 template <>
 I3RecoPulseSeriesMapConstPtr
-I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
+I3Frame::Get(const std::string& name, void*, void*) const
 {
-	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name, quietly);
+	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name);
 	
 	I3RecoPulseSeriesMapConstPtr pulses =
 	    boost::dynamic_pointer_cast<const I3RecoPulseSeriesMap>(focp);
@@ -106,9 +106,9 @@ HitsAsPulses(I3RecoHitSeriesMapConstPtr hits)
  */
 template <>
 I3TriggerHierarchyConstPtr
-I3Frame::Get(const std::string& name, bool quietly, void*, void*) const
+I3Frame::Get(const std::string& name, void*, void*) const
 {
-	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name, quietly);
+	I3FrameObjectConstPtr focp = this->Get<I3FrameObjectConstPtr>(name);
 
 	I3TriggerHierarchyConstPtr triggers =
 	    boost::dynamic_pointer_cast<const I3TriggerHierarchy>(focp);

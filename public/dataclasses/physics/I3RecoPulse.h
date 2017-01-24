@@ -128,7 +128,7 @@ I3_POINTER_TYPEDEFS(I3RecoPulseMap);
 
 template <>
 I3RecoPulseSeriesMapConstPtr
-I3Frame::Get(const std::string& name, bool quietly, void*, void*) const;
+I3Frame::Get(const std::string& name, void*, void*) const;
 #endif //__CINT__
 
 #endif //I3RECOPULSE_H_INCLUDED
