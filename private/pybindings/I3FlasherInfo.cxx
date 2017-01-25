@@ -60,6 +60,11 @@ bool operator==(const I3FlasherInfo &a, const I3FlasherInfo &b)
     && a.GetRawATWD3() == b.GetRawATWD3();
 }
 
+bool equal_flasherinfo(const I3FlasherInfo fi1, const I3FlasherInfo fi2){
+  return fi1==fi2;
+}
+
+
 void register_I3FlasherInfo()
 {
  const std::vector<int>& (I3FlasherInfo::*get_waveform)() const = &I3FlasherInfo::GetRawATWD3;
@@ -71,6 +76,7 @@ void register_I3FlasherInfo()
      #undef PROPS
      .add_property("raw_atwd3", make_function(get_waveform,return_internal_reference<1>()), &I3FlasherInfo::SetRawATWD3)
      .def(dataclass_suite<I3FlasherInfo>())
+     .def("__eq__", equal_flasherinfo)
    ;
 
  }
