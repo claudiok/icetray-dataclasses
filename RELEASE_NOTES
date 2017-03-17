@@ -4,6 +4,10 @@ Release Notes
 
 trunk
 -----
+
+* Don't populate the cache until we have a good map. Allows the errors to keep
+  appearing in dataio-pyshovel.
+
 * Added I3Particle::CascadeSegment shape to address ticket #1763.
 
 * I3Time::GetModJulianDateDouble now always divides the date by 86400 seconds even
