@@ -33,8 +33,6 @@ I3RecoPulseSeriesMapApplySPECorrection::Apply(const I3Frame &frame) const
   if (shifted_)
     return shifted_;
 
-  shifted_ = boost::make_shared<Map>();
-
   I3CalibrationConstPtr calibration = frame.Get<I3CalibrationConstPtr>(calibration_key_);
   if (!calibration)
     log_fatal("Couldn't find '%s' in the frame!",
@@ -44,6 +42,8 @@ I3RecoPulseSeriesMapApplySPECorrection::Apply(const I3Frame &frame) const
   if (!in_pulses)
     log_fatal("Couldn't find '%s' in the frame!",
         pulses_key_.c_str());
+
+  I3RecoPulseSeriesMapPtr shifted = boost::make_shared<Map>();
 
   BOOST_FOREACH(const Pair &pair, *in_pulses) {
     // retrieve the calibration for this DOM
@@ -67,7 +67,7 @@ I3RecoPulseSeriesMapApplySPECorrection::Apply(const I3Frame &frame) const
 
     // insert an entry for this DOM into the output map
     // and retrieve a reference
-    Series &shiftedvec = (*shifted_)[pair.first];
+    Series &shiftedvec = (*shifted)[pair.first];
 
     BOOST_FOREACH(const Element &element, pair.second) {
       // plain copy of the pulse first
@@ -84,6 +84,9 @@ I3RecoPulseSeriesMapApplySPECorrection::Apply(const I3Frame &frame) const
       shifted_element.SetCharge(element.GetCharge() * speCorrection);
     }
   }
+  
+  // save in cache
+  shifted_ = shifted;
 
   return shifted_;
 }
