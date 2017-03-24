@@ -53,7 +53,7 @@ struct I3ParticleID{
    *
    * These directives we need were added in gcc 4.6
    * https://gcc.gnu.org/gcc-4.6/changes.html
-   */
+   */  
 #if defined(__GNUC__) && GCC_VERSION > 40600
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
 #endif
@@ -102,9 +102,15 @@ std::ostream& operator<<(std::ostream &, const I3ParticleID &);
 namespace __gnu_cxx{
   template<>
     struct hash<I3ParticleID>{
+#if defined(__GNUC__) && GCC_VERSION > 40600
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
     size_t operator()(const I3ParticleID& id) const{
       return hash<int>()(id.majorID + id.minorID);
     }
+#if defined(__GNUC__) && GCC_VERSION > 40600
+#pragma GCC diagnostic pop
+#endif
   };
 }
 
