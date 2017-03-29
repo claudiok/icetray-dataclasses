@@ -65,6 +65,12 @@ namespace pyTriggerKey {
 
 #define ENUM_DEF(r,data,T) .value(BOOST_PP_STRINGIZE(T), data::T)
 
+std::string repr(const TriggerKey& key){
+  std::stringstream s;
+  s << "TriggerKey" << key;
+  return s.str();
+}
+
 void
 register_TriggerKey()
 {
@@ -81,6 +87,7 @@ register_TriggerKey()
         .def("reset_config_id",
                 (void (TriggerKey::*)()) &TriggerKey::SetConfigID)
         .def("__str__", &stream_to_string<TriggerKey>)
+        .def("__repr__", repr)
         .def("get_source_from_string",
                 &pyTriggerKey::GetSourceFromString)
         .def("get_source_string", &pyTriggerKey::GetSourceString)
