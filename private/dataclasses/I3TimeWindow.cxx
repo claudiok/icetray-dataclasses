@@ -165,3 +165,8 @@ operator|(const I3TimeWindowSeriesMap &left, const I3TimeWindowSeriesMap &right)
 	
 	return ored;
 }
+
+std::ostream& operator<<(std::ostream& oss, const I3TimeWindow& w){
+  oss << "I3TimeWindow: Start: " << w.GetStart() << " Stop: " << w.GetStop();
+  return oss;
+}

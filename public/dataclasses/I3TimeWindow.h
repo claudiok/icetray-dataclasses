@@ -61,6 +61,8 @@ typedef I3Map<OMKey, I3TimeWindowSeries> I3TimeWindowSeriesMap;
 
 I3TimeWindowSeriesMap operator|(const I3TimeWindowSeriesMap &, const I3TimeWindowSeriesMap &);
 
+std::ostream& operator<<(std::ostream& oss, const I3TimeWindow& w);
+
 I3_POINTER_TYPEDEFS(I3TimeWindow);
 I3_POINTER_TYPEDEFS(I3TimeWindowSeries);
 I3_POINTER_TYPEDEFS(I3TimeWindowSeriesMap);

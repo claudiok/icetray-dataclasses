@@ -62,8 +62,8 @@ I3EventHeader::serialize(Archive& ar, unsigned version)
 
 std::ostream& operator<<(std::ostream& oss, const I3EventHeader& eh){
   oss << "[ I3EventHeader  :: " << std::endl
-      << "           StartTime: " << eh.GetStartTime().GetUTCString() << std::endl
-      << "            EndTime : " << eh.GetEndTime().GetUTCString() << std::endl
+      << "           StartTime: " << eh.GetStartTime() << std::endl
+      << "            EndTime : " << eh.GetEndTime() << std::endl
       << "              RunID : " << eh.GetRunID() << std::endl
       << "           SubrunID : " << eh.GetSubRunID() << std::endl
       << "            EventID : " << eh.GetEventID() << std::endl
