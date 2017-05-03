@@ -58,7 +58,7 @@ boost::python::object GetDateTime(const I3Time& t)
 				     23,
 				     59,
 				     60,// No bounds checking
-				     int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
+				     int(t.GetModJulianNanoSec()/1000)//round down to nearest microsecond
 				     );
   }else{
     obj = PyDateTime_FromDateAndTime(t.GetUTCYear(), 
@@ -67,7 +67,7 @@ boost::python::object GetDateTime(const I3Time& t)
 				     t.GetModJulianSec()/3600,
 				     t.GetModJulianSec()%3600/60,
 				     t.GetModJulianSec()%60,
-				     int(t.GetModJulianNanoSec()/1000+0.5)//round to nearest microsecond
+				     int(t.GetModJulianNanoSec()/1000)//round down to nearest microsecond
 				     );
   }
   handle<> h(obj);
