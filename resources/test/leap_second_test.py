@@ -108,14 +108,14 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         dt2=t2.date_time
         dt3=t3.date_time
         
-        assert dt1                          == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.+.5))
-        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt2                          != datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.+.5))
-        assert dt2                          != datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt2+datetime.timedelta(0, 1) == datetime.datetime(year,7, 1, 0, 0, 1,int(nanosec/1000.+.5))
-        assert dt2+datetime.timedelta(0,-1) == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.+.5))
-        assert dt3                          == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.+.5))
+        assert dt1                          == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.))
+        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt2                          != datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.))
+        assert dt2                          != datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt2+datetime.timedelta(0, 1) == datetime.datetime(year,7, 1, 0, 0, 1,int(nanosec/1000.))
+        assert dt2+datetime.timedelta(0,-1) == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.))
+        assert dt3                          == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.))
 
         #although the invalid python leap second object return true when compared to eachother
         assert (t1+1*I3Units.second).date_time == dt2
@@ -223,10 +223,10 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         dt1=t1.date_time
         dt3=t3.date_time
         
-        assert dt1                          == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.+.5))
-        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt3                          == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.+.5))
+        assert dt1                          == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.))
+        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt3                          == datetime.datetime(year,7, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year,6,30,23,59,59,int(nanosec/1000.))
 
         #although the invalid python leap second object return true when compared to eachother
         assert (t1+1*I3Units.second).date_time == dt3
@@ -330,14 +330,14 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         dt2=t2.date_time
         dt3=t3.date_time
         
-        assert dt1                          == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.+.5))
-        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt2                          != datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.+.5))
-        assert dt2                          != datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt2+datetime.timedelta(0, 1) == datetime.datetime(year+1, 1, 1, 0, 0, 1,int(nanosec/1000.+.5))
-        assert dt2+datetime.timedelta(0,-1) == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.+.5))
-        assert dt3                          == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.+.5))
+        assert dt1                          == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.))
+        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt2                          != datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.))
+        assert dt2                          != datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt2+datetime.timedelta(0, 1) == datetime.datetime(year+1, 1, 1, 0, 0, 1,int(nanosec/1000.))
+        assert dt2+datetime.timedelta(0,-1) == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.))
+        assert dt3                          == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.))
 
         #although the invalid python leap second object return true when compared to eachother
         assert (t1+1*I3Units.second).date_time == dt2
@@ -445,10 +445,10 @@ for year in range (1970,max(dataclasses.year_of(leap_sec_mjd[-1]),now.year)+3):
         dt1=t1.date_time
         dt3=t3.date_time
         
-        assert dt1                          == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.+.5))
-        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt3                          == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.+.5))
-        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.+.5))
+        assert dt1                          == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.))
+        assert dt1+datetime.timedelta(0, 1) == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt3                          == datetime.datetime(year+1, 1, 1, 0, 0, 0,int(nanosec/1000.))
+        assert dt3+datetime.timedelta(0,-1) == datetime.datetime(year  ,12,31,23,59,59,int(nanosec/1000.))
 
         #although the invalid python leap second object return true when compared to eachother
         assert (t1+1*I3Units.second).date_time == dt3
