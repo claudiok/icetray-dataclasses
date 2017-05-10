@@ -64,7 +64,8 @@ namespace bp = boost::python;
   (I3VectorI3Particle)(I3VectorParticleType)(I3VectorI3Position)        \
   (I3VectorPairDoubleDouble)(I3MCTreePhysicsLibrary)(I3VectorUtils)     \
   (SPEChargeDistribution)(I3TriggerHierarchy)(I3Trigger)(TriggerKey)    \
-  (I3RecoPulseSeriesMapApplySPECorrection)
+  (I3RecoPulseSeriesMapApplySPECorrection)(I3FlasherStatus)             \
+  (I3FlasherStatusMap)(I3FlasherSubrunMap)
 
 
 #define I3_REGISTRATION_FN_DECL(r, data, t) void BOOST_PP_CAT(register_,t)();
