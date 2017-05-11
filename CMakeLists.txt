@@ -38,7 +38,6 @@ i3_add_pybindings(dataclasses
   private/pybindings/I3OMGeo.cxx
   private/pybindings/I3TankGeo.cxx
   private/pybindings/I3MCHit/*.cxx
-  private/pybindings/I3MCList.cxx
   private/pybindings/I3MCTree.cxx
   private/pybindings/I3LinearizedMCTree.cxx
   private/pybindings/I3ParticleID.cxx
