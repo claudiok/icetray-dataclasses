@@ -518,10 +518,8 @@ TestRoundTrip(std::string filename, std::string hlc_name, std::string slc_name, 
 	tray.AddModule("QConverter", "qify")("WritePFrame", false)("QKeys", qkeys);
 	tray.AddModule("UnionMan", "EventPulses")("Keys", pulsekeys);
 	tray.AddModule("I3SuperDSTTestModule", "pruefer")("Pulses", "EventPulses");
-	tray.AddModule("TrashCan", "moelleman");
 	
 	tray.Execute(nframes);
-	tray.Finish();	
 }
 
 static void
@@ -543,10 +541,8 @@ CheckDeserialization(std::string filename, std::string hlc_name,
 	tray.AddModule("QConverter", "qify")("WritePFrame", false)("QKeys", qkeys);
 	tray.AddModule("UnionMan", "EventPulses")("Keys", pulsekeys);
 	tray.AddModule("I3SuperDSTTestModule", "pruefer")("Pulses", "EventPulses")("SuperDST", superdst_name)("Version", 0);
-	tray.AddModule("TrashCan", "moelleman");
 	
 	tray.Execute(nframes);
-	tray.Finish();	
 }
 
 static fs::path
