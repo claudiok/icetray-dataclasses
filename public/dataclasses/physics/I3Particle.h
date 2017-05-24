@@ -191,6 +191,8 @@ class I3Particle : public I3FrameObject
     YAGLaser = -2000002201,
     STauPlus = -2000009131,
     STauMinus = -2000009132,
+    SMPPlus = -2000009500,
+    SMPMinus = -2000009501,
   };
 
   enum ParticleShape { 
@@ -478,7 +480,7 @@ static const unsigned i3particle_version_ = 5;
     (Fe54Nucleus)(Fe55Nucleus)(Fe56Nucleus)(Fe57Nucleus)(Fe58Nucleus)             \
     (CherenkovPhoton)(Nu)(Monopole)(Brems)(DeltaE)(PairProd)(NuclInt)(MuPair)     \
     (Hadrons)(ContinuousEnergyLoss)(FiberLaser)(N2Laser)(YAGLaser)                \
-    (STauPlus)(STauMinus)
+    (STauPlus)(STauMinus)(SMPPlus)(SMPMinus)
 
 #define I3PARTICLE_H_I3Particle_ParticleShape                                     \
     (Null)(Primary)(TopShower)(Cascade)(CascadeSegment)(InfiniteTrack)(StartingTrack)             \
