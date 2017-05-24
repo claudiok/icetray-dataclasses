@@ -469,6 +469,7 @@ bool I3Particle::IsTrack() const
       pdgEncoding_==MuPlus || pdgEncoding_==MuMinus ||
       pdgEncoding_==TauPlus || pdgEncoding_==TauMinus ||
       pdgEncoding_==STauPlus || pdgEncoding_==STauMinus ||
+      pdgEncoding_==SMPPlus || pdgEncoding_==SMPMinus ||
       pdgEncoding_==Monopole ||
       (shape_ == Primary && 
        ( pdgEncoding_ == PPlus       ||
@@ -761,7 +762,9 @@ boost::assign::list_of<std::pair<int, I3Particle::ParticleType> >
 (-2101, I3Particle::N2Laser)
 (-2201, I3Particle::YAGLaser)
 (-9131, I3Particle::STauPlus)
-(-9132, I3Particle::STauMinus);
+(-9132, I3Particle::STauMinus)
+(-9500, I3Particle::SMPPlus)
+(-9501, I3Particle::SMPMinus);
 
 static const particle_type_conversion_t fromRDMCTable =
 boost::assign::list_of<std::pair<int, I3Particle::ParticleType> >
