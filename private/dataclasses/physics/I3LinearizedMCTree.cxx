@@ -145,6 +145,8 @@ public:
 	{
 		return (major_ != p.GetMajorID()) || (minor_ != p.GetMinorID());
 	}
+	
+	operator I3ParticleID() const { return I3ParticleID(major_, minor_); }
 };
 
 }
@@ -211,21 +213,25 @@ I3LinearizedMCTree::load(Archive &ar, unsigned version)
 	ar & make_nvp("I3MCTree", base_object<I3MCTree>(*this));
 	ar & make_nvp("Ranges", ranges);
 	ar & make_nvp("Stochastics", stochastics);
-		
+	
 	// Find the points in the *stripped* tree where
 	// we should attach the stripped leaves.
 	std::queue<pid> parents;
-	BOOST_FOREACH(const range_t &span, ranges) {
+	{
 		pre_iterator it = this->begin();
-		std::advance(it, span.first);
-		parents.push(*it);
+		unsigned offset = 0;
+		BOOST_FOREACH(const range_t &span, ranges) {
+			i3_assert(span.first > offset);
+			std::advance(it, span.first-offset);
+			offset = span.first;
+			parents.push(*it);
+		}
 	}
 	
 	std::vector<I3Stochastic>::const_iterator leaf = stochastics.begin();
 	BOOST_FOREACH(const range_t &span, ranges) {
-		pre_iterator parent = this->begin();
-		unsigned idx = 0;
-		for ( ; parent != this->end() && (parents.front() != *parent); parent++, idx++) {}
+		pre_iterator parent = this->find(parents.front());
+		i3_assert(parent != this->end());
 
 		// Insert new leaves in time order relative to existing siblings
 		sibling_iterator splice = this->children(parent);

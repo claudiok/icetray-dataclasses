@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 
-import sys
+import sys, os
 infiles = sys.argv[1:]
 
 if len(infiles) == 0:
-	print("This test requires an MC data file with Q frames containing an I3MCTree.")
-	sys.exit(0)
+	infiles = [os.path.expandvars('$I3_TESTDATA/9036_coinc.i3.bz2')]
 
 import unittest, math
 from icecube import icetray, dataio, dataclasses
-from icecube.dataclasses import I3LinearizedMCTree
+from icecube.dataclasses import I3LinearizedMCTree, I3MCTree
 
 class LinearTreeTest(unittest.TestCase):
 	def setUp(self):
@@ -50,12 +49,15 @@ class LinearTreeTest(unittest.TestCase):
 		
 	def testEquivalence(self):
 		
-		for raw, reco in zip(self.mctree, self.re_mctree):
+		for i, (raw, reco) in enumerate(zip(self.mctree, self.re_mctree)):
 			try:
 				self.assertEqualParticle(raw, reco)
 			except AssertionError:
+				print(i)
 				print(raw)
 				print(reco)
+				print(self.mctree)
+				print(self.re_mctree)
 				raise
 			
 			
@@ -66,7 +68,14 @@ tray = I3Tray()
 outfile = 'i3linearizedmctree_tmp.i3.bz2'
 tray.AddModule('I3Reader', 'reader', filenamelist=infiles)
 tray.AddModule('Keep', 'keeper', Keys=['I3MCTree'])
-tray.AddModule(lambda frame: frame.Put('I3LinearizedMCTree', I3LinearizedMCTree(frame['I3MCTree'])), 'putter', Streams=[icetray.I3Frame.DAQ])
+# force re-serialization of original I3MCTree to ensure that particle IDs
+# in the tree are unique
+def clone(frame):
+	mctree = frame['I3MCTree']
+	del frame['I3MCTree']
+	frame['I3MCTree'] = mctree
+	frame['I3LinearizedMCTree'] = I3LinearizedMCTree(mctree)
+tray.Add(clone, Streams=[icetray.I3Frame.DAQ])
 
 tray.AddModule('I3Writer', 'writer',
     Streams=[icetray.I3Frame.DAQ, icetray.I3Frame.Physics],
@@ -92,7 +101,5 @@ tray.AddModule('I3Writer', 'writer',
     # DropOrphanStreams=[icetray.I3Frame.DAQ],
     filename=outfile)    
 
-tray.AddModule('TrashCan', 'YesWeCan')
 tray.Execute(100)
-tray.Finish()
 
