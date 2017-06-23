@@ -15,7 +15,7 @@
 
 #include "dataclasses/physics/I3MCTree.h"
 
-static const unsigned i3linearizedmctree_version_ = 0;
+static const unsigned i3linearizedmctree_version_ = 1;
 
 /**
  * @brief A compact I3MCTree
@@ -39,7 +39,6 @@ public:
 	explicit I3LinearizedMCTree(const I3MCTree &tree) : I3MCTree(tree) {};
 			
 private:
-	typedef std::pair<unsigned, unsigned> range_t;
 	typedef I3MCTree::pre_order_iterator pre_iterator;
 	typedef I3MCTree::post_order_iterator post_iterator;
 	typedef I3MCTree::sibling_iterator sibling_iterator;

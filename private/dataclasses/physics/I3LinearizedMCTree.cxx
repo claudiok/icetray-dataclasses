@@ -122,84 +122,44 @@ I3Stochastic::Propagate(I3Particle &p, double tick)
 	p.SetTime(p.GetTime() + tick);
 }
 
-namespace {
-	
-class pid {
-private:
-	uint64_t major_;
-	int32_t minor_;
-public:
-	pid(const I3Particle &p) : major_(p.GetMajorID()), minor_(p.GetMinorID()) {};
-	bool operator<(const pid &other) const
-	{
-		if (major_ < other.major_)
-			return true;
-		else if (major_ > other.major_)
-			return false;
-		else if (minor_ < other.minor_)
-			return true;
-		else 
-			return false;
-	}
-	bool operator!=(const I3Particle &p) const
-	{
-		return (major_ != p.GetMajorID()) || (minor_ != p.GetMinorID());
-	}
-	
-	operator I3ParticleID() const { return I3ParticleID(major_, minor_); }
-};
-
-}
-
 template <class Archive>
 void
 I3LinearizedMCTree::save(Archive &ar, unsigned version) const
 {
-	typedef std::map<pid, std::list<I3Stochastic> > pid_map_t;
-	typedef std::map<unsigned, std::list<I3Stochastic> > idx_map_t;
-	pid_map_t stripped;
+	typedef std::pair<I3ParticleID, unsigned> leaf_t;
+	std::map<I3ParticleID, std::vector<I3Stochastic> > stripped;
 	
 	I3MCTree tree(*this);
-	for (post_iterator it = tree.begin_post(); it != tree.end_post(); ) {
-		pre_iterator parent = tree.parent(it);
+	for ( auto it = tree.cbegin_post(); it != tree.cend_post(); ) {
+		I3MCTree::const_iterator parent = tree.parent(it);
 		// Strip out nodes that
 		//    a) have a parent, and
 		//    b) are leaf nodes, and
 		//    c) are stochastic energy losses, and
 		//    d) are not the parents of already-stripped nodes
-		if (parent != tree.end() && (tree.number_of_children(it) == 0) 
-		    && I3Stochastic::IsCompressible(*parent, *it) && (stripped.find(*it) == stripped.end())) {
-			stripped[*parent].push_back(I3Stochastic(*parent, *it));
+		if (parent != tree.cend() && tree.first_child(it) == tree.cend_post() &&
+		    I3Stochastic::IsCompressible(*parent, *it)
+		    && (stripped.find(*it) == stripped.end())) {
+			stripped[parent->GetID()].emplace_back(*parent, *it);
 			it = tree.erase(it);
 		} else {
 			it++;
 		}
 	}
-	
-	// Re-sort the list of stripped nodes by the distance of the parent
-	// from the beginning of the tree.
-	idx_map_t stripped_idx;
-	BOOST_FOREACH(pid_map_t::value_type &pair, stripped) {
-		pre_iterator pos = tree.begin();
-		unsigned idx = 0;
-		for ( ; pos != tree.end() && (pair.first != *pos); pos++, idx++) {}
-		pair.second.sort();
-		stripped_idx[idx].swap(pair.second);
-	}
-	
-	// Now, flatten the list of stripped nodes, noting the index and
-	// number of children for each parent.
+
+	// Now, flatten the list of stripped nodes, noting the number of children
+	// to attach to each parent
 	std::vector<I3Stochastic> stochastics;
-	std::vector<range_t> ranges;
-	BOOST_FOREACH(const idx_map_t::value_type &pair, stripped_idx) {
-		ranges.push_back(std::make_pair(pair.first, pair.second.size()));
+	std::vector<leaf_t> leaves;
+	for(auto &pair : stripped) {
+		leaves.emplace_back(pair.first, pair.second.size());
 		std::copy(pair.second.begin(), pair.second.end(),
 		    std::back_inserter(stochastics));
 	}
 	
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("I3MCTree", tree);
-	ar & make_nvp("Ranges", ranges);
+	ar & make_nvp("Leaves", leaves);
 	ar & make_nvp("Stochastics", stochastics);
 }
 
@@ -207,45 +167,76 @@ template <class Archive>
 void
 I3LinearizedMCTree::load(Archive &ar, unsigned version)
 {
-	std::vector<I3Stochastic> stochastics;
-	std::vector<range_t> ranges;
 	ar & make_nvp("I3FrameObject", base_object<I3FrameObject>(*this));
 	ar & make_nvp("I3MCTree", base_object<I3MCTree>(*this));
-	ar & make_nvp("Ranges", ranges);
-	ar & make_nvp("Stochastics", stochastics);
+	if (version == 0) {
+		typedef std::pair<unsigned, unsigned> range_t;
+		std::vector<I3Stochastic> stochastics;
+		std::vector<range_t> ranges;
+		ar & make_nvp("Ranges", ranges);
+		ar & make_nvp("Stochastics", stochastics);
 	
-	// Find the points in the *stripped* tree where
-	// we should attach the stripped leaves.
-	std::queue<pid> parents;
-	{
-		pre_iterator it = this->begin();
-		unsigned offset = 0;
+		// Find the points in the *stripped* tree where
+		// we should attach the stripped leaves.
+		std::queue<I3ParticleID> parents;
+		{
+			pre_iterator it = this->begin();
+			unsigned offset = 0;
+			BOOST_FOREACH(const range_t &span, ranges) {
+				i3_assert(span.first > offset);
+				std::advance(it, span.first-offset);
+				offset = span.first;
+				parents.push(it->GetID());
+			}
+		}
+	
+		std::vector<I3Stochastic>::const_iterator leaf = stochastics.begin();
 		BOOST_FOREACH(const range_t &span, ranges) {
-			i3_assert(span.first > offset);
-			std::advance(it, span.first-offset);
-			offset = span.first;
-			parents.push(*it);
-		}
-	}
-	
-	std::vector<I3Stochastic>::const_iterator leaf = stochastics.begin();
-	BOOST_FOREACH(const range_t &span, ranges) {
-		pre_iterator parent = this->find(parents.front());
-		i3_assert(parent != this->end());
+			pre_iterator parent = this->find(parents.front());
+			i3_assert(parent != this->end());
 
-		// Insert new leaves in time order relative to existing siblings
-		sibling_iterator splice = this->children(parent);
-		for (unsigned i = 0; i < span.second; i++, leaf++) {
-			I3Particle reco = leaf->Reconstruct(*parent);
-			while (splice != this->end_sibling() && reco.GetTime() >= splice->GetTime())
-				splice++;
-			if (splice == this->end_sibling())
-				splice = this->append_child(parent, reco);
-			else
-				splice = this->insert(splice, reco);
-		}
+			// Insert new leaves in time order relative to existing siblings
+			sibling_iterator splice = this->children(parent);
+			for (unsigned i = 0; i < span.second; i++, leaf++) {
+				I3Particle reco = leaf->Reconstruct(*parent);
+				while (splice != this->end_sibling() && reco.GetTime() >= splice->GetTime())
+					splice++;
+				if (splice == this->end_sibling())
+					splice = this->append_child(parent, reco);
+				else
+					splice = this->insert(splice, reco);
+			}
 		
-		parents.pop();
+			parents.pop();
+		}
+	} else if (version == 1) {
+		typedef std::pair<I3ParticleID, unsigned> leaf_t;
+		
+		std::vector<I3Stochastic> stochastics;
+		std::vector<leaf_t> leaves;
+		ar & make_nvp("Leaves", leaves);
+		ar & make_nvp("Stochastics", stochastics);
+		
+		std::vector<I3Stochastic>::const_iterator leaf = stochastics.begin();
+		for (const auto &span : leaves) {
+			pre_iterator parent = this->find(span.first);
+			
+			// Insert new leaves in time order relative to existing siblings
+			sibling_iterator splice = this->children(parent);
+			for (unsigned i = 0; i < span.second; i++, leaf++) {
+				I3Particle reco = leaf->Reconstruct(*parent);
+				while (splice != this->end_sibling() && reco.GetTime() >= splice->GetTime())
+					splice++;
+				if (splice == this->end_sibling())
+					splice = this->append_child(parent, reco);
+				else
+					splice = this->insert(splice, reco);
+			}
+		}
+		i3_assert(leaf == stochastics.end());
+		
+	} else {
+		log_fatal_stream("version " << version << " is from the future!");
 	}
 }
 
