@@ -543,4 +543,4 @@ for i in range(10000):
     assert(t2 - time_delta == t1)
 
 
-print "Leap second test successful, (you can ignore the errors about 'Invalid second: 60!')"
+print("Leap second test successful, (you can ignore the errors about 'Invalid second: 60!')")
